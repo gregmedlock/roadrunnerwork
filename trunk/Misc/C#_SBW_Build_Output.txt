@@ -1,0 +1,79 @@
+ -  Checkout:  libsbml
+ -  Checkout:  RR cvode 
+ -  Checkout:  SBW core
+ -  Checkout:  CLAPACK
+ -  Checkout:  Metatool
+ -  Checkout:  NOM
+ -  Checkout:  Translators
+ -  Checkout:  libsbml
+ -  Checkout:  ModifySBWRegistry
+ -  Checkout:  ConvertSBML
+ -  Checkout:  ShutdownBroker
+ -  Checkout:  CLAPACK library
+ -  Checkout:  SBW C# bindings
+ -  Checkout:  SBML2TikZ
+ -  Checkout:  SBML support module
+ -  Checkout:  roadrunner
+ -  Checkout:  libSedML
+ -  Checkout:   lib SBRML
+ -  Checkout:  csharp modules
+ -  Checkout:  JarnacLite
+ -  Checkout:  Inspector
+ -  Checkout:  sbml layout
+ -  Checkout:  layout tool
+ -  Checkout:  Jacobian viewer
+ -  Checkout:  SBML Translator
+ -  Checkout:  SimDriver
+ -  Checkout:  BioModels Importer
+ -  Checkout:  StructAnalysisGUI
+ -  Checkout:  Gillespie simulator
+ -  Checkout:  Gillespie plugin
+ -  Checkout:  GenerateNSIS
+ -  Checkout:  BenZaiTen
+-  Build: ShutdownBroker
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: CLAPACK library
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: SBW C# bindings
+========== Build: 0 succeeded or up-to-date, 1 failed, 0 skipped ==========
+========== Build: 0 succeeded or up-to-date, 1 failed, 0 skipped ==========
+-  Build: ModifySBWRegistry
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: ConvertSBML
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: SBML support module
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: sbml layout reader
+========== Build: 9 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: layout tool
+========== Build: 4 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: Gillespie simulator
+========== Build: 1 succeeded or up-to-date, 3 failed, 0 skipped ==========
+-  Build: RoadRunner
+========== Build: 4 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: LibSedML
+========== Build: 9 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: SBRML 
+========== Build: 2 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: JarnacLite
+========== Build: 1 succeeded or up-to-date, 3 failed, 0 skipped ==========
+-  Build: SimDriver
+========== Build: 9 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: Inspector
+========== Build: 0 succeeded or up-to-date, 1 failed, 0 skipped ==========
+-  Build: sbml2tikz
+========== Build: 3 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: Jacobian viewer
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: SBML Translator
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: BioModels Importer
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: StructAnalysisGUI
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: Gillespie Plugin
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: GenerateNSIS 
+========== Build: 1 succeeded or up-to-date, 0 failed, 0 skipped ==========
+-  Build: BenZaiTen
+========== Build: 1 succeeded or up-to-date, 17 failed, 0 skipped ==========
