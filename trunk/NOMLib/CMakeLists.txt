@@ -9,7 +9,7 @@ SET(NL_BUILD_VERSION 11)
 SET(NL_VERSION
     "${NL_MAJOR_VERSION}.${NL_MINOR_VERSION}.${NL_BUILD_VERSION}")
 
-#OPTION (BUILD_EXAMPLES			"Build Examples"			OFF)
+OPTION (BUILD_EXAMPLES			"Build Examples"			ON)
 OPTION (BUILD_LIBS				"Build Libs"				ON)
 OPTION (BUILD_SHARED_LIBS 		"Build Shared Libraries" 	ON)
 
@@ -72,14 +72,14 @@ FILE (GLOB dlls ${bin_path}/*.dll)
 install (FILES ${dlls}	DESTINATION bin COMPONENT library_files)
 endif()
 
-#if(${BUILD_EXAMPLES})
-#add_subdirectory(Examples)
-#endif()
+if(${BUILD_EXAMPLES})
+add_subdirectory(Examples)
+endif()
 #
 #install (FILES Readme.txt 		DESTINATION . 	COMPONENT info)
 #install (FILES License.txt 		DESTINATION . 	COMPONENT info)
 #install (FILES CMakeLists.txt 	DESTINATION . 	COMPONENT build_files)
-#
+
 ##==== INSTALL SYSTEM FILES (COMPILER SPECIFICS) =================================================
 #if(${BORLAND})
 #set(SYSTEM_FILES 		${THIRD_PARTY_ROOT}/CodeGear/XE/cc32110MT.dll)
