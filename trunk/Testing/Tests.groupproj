@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{8FC33672-CD3D-4B85-844F-3B755C2666C5}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="..\src\RRPackage.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="MathTest1.cbproj">
+				<Dependencies>..\src\RRPackage.cbproj</Dependencies>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="RRPackage">
+			<MSBuild Projects="..\src\RRPackage.cbproj"/>
+		</Target>
+		<Target Name="RRPackage:Clean">
+			<MSBuild Projects="..\src\RRPackage.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="RRPackage:Make">
+			<MSBuild Projects="..\src\RRPackage.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="MathTest1" DependsOnTargets="RRPackage">
+			<MSBuild Projects="MathTest1.cbproj"/>
+		</Target>
+		<Target Name="MathTest1:Clean" DependsOnTargets="RRPackage:Clean">
+			<MSBuild Projects="MathTest1.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="MathTest1:Make" DependsOnTargets="RRPackage:Make">
+			<MSBuild Projects="MathTest1.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="RRPackage;MathTest1"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="RRPackage:Clean;MathTest1:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="RRPackage:Make;MathTest1:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>
