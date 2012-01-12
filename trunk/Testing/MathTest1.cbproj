@@ -33,8 +33,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>math\;C:\RRW\Testing\math\;P:\mtk\Components\vtk\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\build\link\;math\;C:\RRW\Testing\math\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\src\cxx\;math\;C:\RRW\Testing\math\;P:\mtk\Components\vtk\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\src\cxx\;..\build\link\;math\;C:\RRW\Testing\math\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>

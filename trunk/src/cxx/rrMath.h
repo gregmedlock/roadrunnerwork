@@ -1,9 +1,13 @@
-//---------------------------------------------------------------------------
 #ifndef rrMathH
 #define rrMathH
 #include "rrExporter.h"
+
+//C++ unit(rrMath.h/rrMat.cpp) translated from C# file:
+//http://roadrunner.svn.sourceforge.net/svnroot/roadrunner/trunk/LibRoadRunner/MathKGI.cs rev 75
+
+
 //---------------------------------------------------------------------------
-namespace rr
+namespace rr //This namespace corresponds to C#'s namespace LibRoadRunner
 {
 // See: http://en.wikipedia.org/wiki/Mathematical_constant
 const double EULER_CONSTANT_GAMMA 	= 0.57721566490153286060651209008;
@@ -104,6 +108,8 @@ RR_DECLSPEC double Not(double a);
 RR_DECLSPEC bool Not(bool a);
 //RR_DECLSPEC double Xor(params double[] a);
 //RR_DECLSPEC bool Xor(params bool[] a);
+
+//No references to 'double' Factorial
 RR_DECLSPEC double Factorial(double a);
 RR_DECLSPEC double Log(double a);
 RR_DECLSPEC double Log(double a, double b);

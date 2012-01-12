@@ -16,7 +16,7 @@ OUTPUT_PATH=`cygpath $arg2`
 [[ $OUTPUT_PATH =~ 'Debug' ]] && MODE="DEBUG" || MODE="NO_DEBUG"
 echo "Compilation mode is: "$MODE
 
-APP_INFO_FILE="AppBuildInfo"
+APP_BUILD_INFO_FILE="AppBuildInfo"
 APP_ROOT=`pwd`
 RR_BUILD_FOLDER="/cygdrive/c/RRW/build"
 RR_BIN_FOLDER=$RR_BUILD_FOLDER"/bin"
@@ -24,8 +24,8 @@ RR_LINK_FOLDER=$RR_BUILD_FOLDER"/link"
 THIRD_PARTY="/cygdrive/p/ThirdParty"
 
 #Document SVN revisions
-RRW_SVN_REVISION=`svn info | grep Revision`
-echo "RR library svn revision: "$MTK_SVN_REVISION > $APP_INFO_FILE
+RRW_SVN_REVISION=`svn info $APP_ROOT | grep Revision | cut -d ":" -f2`
+echo "RR library svn revision: "$RRW_SVN_REVISION > $APP_BUILD_INFO_FILE
 
 #RELEASE_FOLDER=$OUTPUT_PATH
 RELEASE_FOLDER=$RR_BIN_FOLDER
@@ -41,7 +41,7 @@ $RR_LINK_FOLDER/RoadRunnerLib.tds
 
 #Copy needed misc files needed for releases
 MISC_FILES=" \
-$APP_INFO_FILE \
+$APP_BUILD_INFO_FILE \
 "
 
 #Binaries

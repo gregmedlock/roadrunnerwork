@@ -1,4 +1,3 @@
-//---------------------------------------------------------------------------
 
 #pragma hdrstop
 #include <string>
@@ -7,6 +6,7 @@
 #include <conio.h>
 #include <iomanip>
 #include "rrMath.h"
+
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace rr;
@@ -40,6 +40,7 @@ int main()
 
 
     cout<<And(1,1,1,-1);
+
     cout<<"Hit any key to exit...";
 	cin.ignore(0,'\n');
     getch();
