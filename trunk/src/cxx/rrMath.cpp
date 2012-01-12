@@ -1,8 +1,8 @@
 //---------------------------------------------------------------------------
 
-
 #pragma hdrstop
 #include <math.h>
+#include <stdarg.h>
 #include "rrMath.h"
 //---------------------------------------------------------------------------
 namespace rr
@@ -138,7 +138,6 @@ namespace rr
             return 0.5*sgn*(Log(1.0 + a) - Log(a - 1.0));
         }
 
-
         // Inverse hyperbolic functions
         // --------------------------------------------------------------
         // Inverse hyperbolic sine of a double number
@@ -208,12 +207,28 @@ namespace rr
             return (a != b ? 1.0 : 0.0);
         }
 
-//        double And(params double[] a)
-//        {
+        double And(double first, ...)
+        {
+
+        	int count = 0;
+			double i = first;
+           	va_list marker;
+
+           	va_start( marker, first );     /* Initialize variable arguments. */
+            while( i != -1 )
+            {
+           		if( i != 1.0 )
+           		{
+            		return 0,0;
+                }
+              	i = va_arg( marker, double);
+           	}
+           	va_end( marker );              /* Reset variable arguments.      */
+           	return 1.0;
 //            foreach (double b in a)
 //                if (b != 1.0) return 0.0;
 //            return 1.0;
-//        }
+        }
 
 //        bool And(params bool[] a)
 //        {

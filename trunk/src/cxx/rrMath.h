@@ -96,7 +96,7 @@ RR_DECLSPEC double Geq(double a, double b);
 RR_DECLSPEC double Leq(double a, double b);
 RR_DECLSPEC double Eq(double a, double b);
 RR_DECLSPEC double Neq(double a, double b);
-//RR_DECLSPEC double And(params double[] a);
+RR_DECLSPEC double And(double first, ...);	//double args...
 //RR_DECLSPEC bool And(params bool[] a);
 //RR_DECLSPEC double Or(params double[] a);
 //RR_DECLSPEC bool Or(params bool[] a);

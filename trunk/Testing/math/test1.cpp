@@ -39,6 +39,7 @@ int main()
 	cout<<outPut.str()<<endl;
 
 
+    cout<<And(1,1,1,-1);
     cout<<"Hit any key to exit...";
 	cin.ignore(0,'\n');
     getch();

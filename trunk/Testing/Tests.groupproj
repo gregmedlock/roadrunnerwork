@@ -3,11 +3,11 @@
 			<ProjectGuid>{8FC33672-CD3D-4B85-844F-3B755C2666C5}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
-			<Projects Include="..\src\RRPackage.cbproj">
+			<Projects Include="..\src\RoadRunnerLib.cbproj">
 				<Dependencies/>
 			</Projects>
 			<Projects Include="MathTest1.cbproj">
-				<Dependencies>..\src\RRPackage.cbproj</Dependencies>
+				<Dependencies/>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -17,32 +17,32 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
-		<Target Name="RRPackage">
-			<MSBuild Projects="..\src\RRPackage.cbproj"/>
+		<Target Name="RoadRunnerLib">
+			<MSBuild Projects="..\src\RoadRunnerLib.cbproj"/>
 		</Target>
-		<Target Name="RRPackage:Clean">
-			<MSBuild Projects="..\src\RRPackage.cbproj" Targets="Clean"/>
+		<Target Name="RoadRunnerLib:Clean">
+			<MSBuild Projects="..\src\RoadRunnerLib.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="RRPackage:Make">
-			<MSBuild Projects="..\src\RRPackage.cbproj" Targets="Make"/>
+		<Target Name="RoadRunnerLib:Make">
+			<MSBuild Projects="..\src\RoadRunnerLib.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="MathTest1" DependsOnTargets="RRPackage">
+		<Target Name="MathTest1">
 			<MSBuild Projects="MathTest1.cbproj"/>
 		</Target>
-		<Target Name="MathTest1:Clean" DependsOnTargets="RRPackage:Clean">
+		<Target Name="MathTest1:Clean">
 			<MSBuild Projects="MathTest1.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="MathTest1:Make" DependsOnTargets="RRPackage:Make">
+		<Target Name="MathTest1:Make">
 			<MSBuild Projects="MathTest1.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="RRPackage;MathTest1"/>
+			<CallTarget Targets="RoadRunnerLib;MathTest1"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="RRPackage:Clean;MathTest1:Clean"/>
+			<CallTarget Targets="RoadRunnerLib:Clean;MathTest1:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="RRPackage:Make;MathTest1:Make"/>
+			<CallTarget Targets="RoadRunnerLib:Make;MathTest1:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>
