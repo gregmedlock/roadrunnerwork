@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 
 #pragma hdrstop
-#include "rrTPerformEventAssignmentDelegate.h"
+
+#include "rrTEventDelayDelegate.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

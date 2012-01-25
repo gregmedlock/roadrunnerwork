@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 
 #pragma hdrstop
-#include "rrTPerformEventAssignmentDelegate.h"
+
+#include "rrModelState.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
