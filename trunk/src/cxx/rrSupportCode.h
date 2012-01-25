@@ -3,178 +3,31 @@
 //---------------------------------------------------------------------------
 #include <math.h>
 #include "rrMath.h"
-
+#include "rrExporter.h"
 namespace rr
 {
-        // Boolean functions for event handling" + NL());
-        static double _gt(double a, double b)
-        {
-            return (a > b ? 1.0 : 0.0);
-        }
-
-        static double _lt(double a, double b)
-        {
-            return (a < b ? 1.0 : 0.0);
-        }
-
-        static double _geq(double a, double b)
-        {
-            return (a >= b ? 1.0 : 0.0);
-        }
-
-        static double _leq(double a, double b)
-        {
-            return (a <= b ? 1.0 : 0.0);
-        }
-
-        static double _eq(double a, double b)
-        {
-            return (a == b ? 1.0 : 0.0);
-        }
-
-        static double _neq(double a, double b)
-        {
-            return (a != b ? 1.0 : 0.0);
-        }
-
-//        static double _and(params double[] a)
-//        {
-//            foreach (double b in a)
-//                if (b != 1.0) return 0.0;
-//            return 1.0;
-//        }
-
-//        static bool _and(params bool[] a)
-//        {
-//            bool result = true;
-//            foreach (bool b in a)
-//                result &= b;
-//            return result;
-//        }
-
-//        static double _or(params double[] a)
-//        {
-//            foreach (double b in a)
-//                if (b == 1.0) return 1.0;
-//            return 0.0;
-//        }
-//
-//        static bool _or(params bool[] a)
-//        {
-//            bool result = false;
-//            foreach (bool b in a)
-//                result |= b;
-//            return result;
-//        }
-
-        static double _not(double a)
-        {
-            return (a == 1.0 ? 0.0 : 1.0);
-        }
-
-        static bool _not(bool a)
-        {
-            return ! a;
-        }
-
-//        static double _xor(params double[] a)
-//        {
-//            bool result = false;
-//            for (int i = 0; i < a.Length; i++)
-//            {
-//                if (i == 0)
-//                {
-//                    result = (a[i] == 1.0);
-//                }
-//                else
-//                {
-//                    result ^= (a[i] == 1.0);
-//                }
-//            }
-//            return (result ? 1.0 : 0.0);
-//        }
-//
-//        static bool _xor(params bool[] a)
-//        {
-//            bool result = false;
-//            for (int i = 0; i < a.Length; i++)
-//            {
-//                if (i == 0)
-//                {
-//                    result = a[i];
-//                }
-//                else
-//                {
-//                    result ^= a[i];
-//                }
-//            }
-//            return result;
-//        }
-//
-        static int _factorial(const int& a)
-        {
-            static int b = (int) a;
-            if (b < 2)
-                return 1.0;
-            return b*_factorial(b - 1);
-        }
-
-        static double _log(double a)
-        {
-            return rr::Log(a);
-        }
-
-        static double _log(double a, double b)
-        {
-            return rr::Log(b, a);
-        }
-
-        static double _delay(double a, double b)
-        {
-            return a;
-        }
-
-        static double _root(double a, double b)
-        {
-            try
-            {
-                return pow(b, 1.0/a);
-            }
-            catch(...)
-            {
-                return 1.0;
-            }
-        }
-
-//        static double _piecewise(params object[] args)
-//        {
-//            try
-//            {
-//                for (int i = 0; i < args.Length - 1; i = i + 2)
-//                {
-//                    //bool bTest = (bool) args[i+1];
-//                    try
-//                    {
-//                        var bTest = (double) args[i + 1];
-//                        if (bTest == 1.0)
-//                            return (double) args[i];
-//                    }
-//                    catch
-//                    {
-//                        var bTest = (bool) args[i + 1];
-//                        if (bTest) return (double) args[i];
-//                    }
-//                }
-//                return (double) args[args.Length - 1];
-//            }
-//            catch (Exception)
-//            {
-//                throw new ArgumentException("Invalid arguments for piecewise.");
-//            }
-//        }
-//    }
-}
-
+// Boolean functions for event handling" + NL());
+RR_DECLSPEC double 	_gt(double a, double b);
+RR_DECLSPEC double 	_lt(double a, double b);
+RR_DECLSPEC double 	_geq(double a, double b);
+RR_DECLSPEC double 	_leq(double a, double b);
+RR_DECLSPEC double 	_eq(double a, double b);
+RR_DECLSPEC double 	_neq(double a, double b);
+//RR_DECLSPEC double 	_and(params double[] a);
+//RR_DECLSPEC bool 	_and(params bool[] a);
+//RR_DECLSPEC double 	_or(params double[] a);
+//RR_DECLSPEC bool 	_or(params bool[] a);
+RR_DECLSPEC double 	_not(double a);
+RR_DECLSPEC bool 	_not(bool a);
+//RR_DECLSPEC double 	_xor(params double[] a);
+//RR_DECLSPEC bool 	_xor(params bool[] a);
+RR_DECLSPEC int 	_factorial(const int& a);
+RR_DECLSPEC double 	_log(double a);
+RR_DECLSPEC double 	_log(double a, double b);
+RR_DECLSPEC double 	_delay(double a, double b);
+RR_DECLSPEC double 	_root(double a, double b);
+//RR_DECLSPEC double 	_piecewise(params object[] args);
+}	//namespace rr
 
 #endif
 

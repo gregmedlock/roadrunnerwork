@@ -17,7 +17,7 @@ using std::string;
 namespace rr
 {
 
-class RR_DECLSPEC IModel
+class RR_DECLSPEC IModel	//Abstract class for Models
 {
     private:
     protected:
@@ -120,7 +120,7 @@ class RR_DECLSPEC IModel
         // Level 2 support
         virtual int 							getNumLocalParameters(int reactionId);
 };
-}
+} //namespace rr
 
 //C#
 //    public interface IModel

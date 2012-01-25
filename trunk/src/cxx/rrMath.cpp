@@ -10,228 +10,228 @@
 
 namespace rr
 {
-        // Square
-        double sqr(double a)
-        {
-            return a*a;
-        }
+// Square
+double sqr(double a)
+{
+    return a*a;
+}
 
-        double Logbase(double value, double baseValue)
-        {
-            return rr::Log(value, baseValue);
-        }
+double Logbase(double value, double baseValue)
+{
+    return rr::Log(value, baseValue);
+}
 
-        // -----------------------------------------------------------------------
-        // Start of trig functions
-        // -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
+// Start of trig functions
+// -----------------------------------------------------------------------
 
-        // Convert degrees to Radians
-        double degToRad(double degrees)
-        {
-            return degrees*(rr::PI/180);
-        }
+// Convert degrees to Radians
+double degToRad(double degrees)
+{
+    return degrees*(rr::PI/180);
+}
 
-        // Convert radians to degrees
-        double radToDeg(double radians)
-        {
-            return radians*(180/rr::PI);
-        }
+// Convert radians to degrees
+double radToDeg(double radians)
+{
+    return radians*(180/rr::PI);
+}
 
 
-        // Cotangent
-        double Cot(double a)
-        {
-            return 1.0/tan(a);
-        }
+// Cotangent
+double Cot(double a)
+{
+    return 1.0/tan(a);
+}
 
-        // Inverse cotangent
-        double Acot(double a)
-        {
-            return atan(1.0/a);
-        }
+// Inverse cotangent
+double Acot(double a)
+{
+    return atan(1.0/a);
+}
 
-        // Inverse cotangent - ratio numerator and denominator provided
-        double Acot2(double a, double b)
-        {
-            return atan2(b, a);
-        }
+// Inverse cotangent - ratio numerator and denominator provided
+double Acot2(double a, double b)
+{
+    return atan2(b, a);
+}
 
-        // Secant
-        double Sec(double a)
-        {
-            return cos(a);
-        }
+// Secant
+double Sec(double a)
+{
+    return cos(a);
+}
 
-        // Inverse secant
-        double Asec(double a)
-        {
-            //if (a < 1.0 && a > -1.0)
-                //throw new ArgumentException("asec argument (" + a + ") must be >= 1 or <= -1");
-			//    return NaN;
-            return acos(1.0/a);
-        }
+// Inverse secant
+double Asec(double a)
+{
+    //if (a < 1.0 && a > -1.0)
+        //throw new ArgumentException("asec argument (" + a + ") must be >= 1 or <= -1");
+    //    return NaN;
+    return acos(1.0/a);
+}
 
-        // Cosecant
-        double Csc(double a)
-        {
-            return 1.0/sin(a);
-        }
+// Cosecant
+double Csc(double a)
+{
+    return 1.0/sin(a);
+}
 
-        // Inverse cosecant
-        double Acsc(double a)
-        {
-            //if (a < 1.0 && a > - 1.0)
-                //throw new ArgumentException("acsc argument (" + a + ") must be >= 1 or <= -1");
-            //    return double.NaN;
-            return asin(1.0/a);
-        }
+// Inverse cosecant
+double Acsc(double a)
+{
+    //if (a < 1.0 && a > - 1.0)
+        //throw new ArgumentException("acsc argument (" + a + ") must be >= 1 or <= -1");
+    //    return double.NaN;
+    return asin(1.0/a);
+}
 
-        // Hyperbolic secant of a double number
-        double Sech(double a)
-        {
-            return 1.0/cosh(a);
-        }
+// Hyperbolic secant of a double number
+double Sech(double a)
+{
+    return 1.0/cosh(a);
+}
 
-        // Inverse hyperbolic secant of a double number
-        double Asech(double a)
-        {
+// Inverse hyperbolic secant of a double number
+double Asech(double a)
+{
 //            if (a > 1.0 || a < 0.0)
 //                //throw new ArgumentException("asech real number argument (" + a + ") must be >= 0 and <= 1");
 //                return double.NaN;
-            return (Log(1.0/a + sqrt(1.0/(a*a) - 1.0)));
-        }
+    return (Log(1.0/a + sqrt(1.0/(a*a) - 1.0)));
+}
 
-        // Hyperbolic cosecant of a double number
-        double Csch(double a)
-        {
-            return 1.0/sinh(a);
-        }
+// Hyperbolic cosecant of a double number
+double Csch(double a)
+{
+    return 1.0/sinh(a);
+}
 
-        // Inverse hyperbolic cosecant of a double number
-        double Acsch(double a)
-        {
-            double sgn = 1.0;
-            if (a < 0.0)
-            {
-                sgn = -1.0;
-                a = -a;
-            }
-            return sgn*(Log(1.0/a + sqrt(1.0/(a*a) + 1.0)));
-        }
+// Inverse hyperbolic cosecant of a double number
+double Acsch(double a)
+{
+    double sgn = 1.0;
+    if (a < 0.0)
+    {
+        sgn = -1.0;
+        a = -a;
+    }
+    return sgn*(Log(1.0/a + sqrt(1.0/(a*a) + 1.0)));
+}
 
 
-        // Hyperbolic cotangent of a double number
-        double Coth(double a)
-        {
-            return 1.0/tanh(a);
-        }
+// Hyperbolic cotangent of a double number
+double Coth(double a)
+{
+    return 1.0/tanh(a);
+}
 
-        // Inverse hyperbolic cotangent of a double number
-        double Acoth(double a)
-        {
-            double sgn = 1.0;
-            if (a < 0.0)
-            {
-                sgn = -1.0;
-                a = -a;
-            }
+// Inverse hyperbolic cotangent of a double number
+double Acoth(double a)
+{
+    double sgn = 1.0;
+    if (a < 0.0)
+    {
+        sgn = -1.0;
+        a = -a;
+    }
 //            if (a < 1.0)
 //                //throw new ArgumentException("acoth real number argument (" + sgn*a + ") must be <= -1 or >= 1");
 //                return double.NaN;
-            return 0.5*sgn*(Log(1.0 + a) - Log(a - 1.0));
-        }
+    return 0.5*sgn*(Log(1.0 + a) - Log(a - 1.0));
+}
 
-        // Inverse hyperbolic functions
-        // --------------------------------------------------------------
-        // Inverse hyperbolic sine of a double number
-        double Asinh(double a)
-        {
-            double sgn = 1.0;
-            if (a < 0.0)
-            {
-                sgn = -1.0;
-                a = -a;
-            }
-            return sgn*Log(a + sqrt(a*a + 1.0));
-        }
+// Inverse hyperbolic functions
+// --------------------------------------------------------------
+// Inverse hyperbolic sine of a double number
+double Asinh(double a)
+{
+    double sgn = 1.0;
+    if (a < 0.0)
+    {
+        sgn = -1.0;
+        a = -a;
+    }
+    return sgn*Log(a + sqrt(a*a + 1.0));
+}
 
-        // Inverse hyperbolic cosine of a double number
-        double Acosh(double a)
-        {
+// Inverse hyperbolic cosine of a double number
+double Acosh(double a)
+{
 //            if (a < 1.0)
 //                //throw new ArgumentException("acosh real number argument (" + a + ") must be >= 1");
 //                return double.NaN;
-            return Log(a + sqrt(a*a - 1.0));
-        }
+    return Log(a + sqrt(a*a - 1.0));
+}
 
-        // Inverse hyperbolic tangent of a double number
-        double Atanh(double a)
-        {
-            double sgn = 1.0;
-            if (a < 0.0)
-            {
-                sgn = -1.0;
-                a = -a;
-            }
+// Inverse hyperbolic tangent of a double number
+double Atanh(double a)
+{
+    double sgn = 1.0;
+    if (a < 0.0)
+    {
+        sgn = -1.0;
+        a = -a;
+    }
 //            if (a > 1.0)
 //                //throw new ArgumentException("atanh real number argument (" + sgn*a + ") must be >= -1 and <= 1");
 //                return double.NaN;
-            return 0.5*sgn*(Log(1.0 + a) - Log(1.0 - a));
-        }
+    return 0.5*sgn*(Log(1.0 + a) - Log(1.0 - a));
+}
 
-        // Boolean functions for event handling" + NL());
-        double Gt(double a, double b)
+// Boolean functions for event handling" + NL());
+double Gt(double a, double b)
+{
+    return (a > b ? 1.0 : 0.0);
+}
+
+double Lt(double a, double b)
+{
+    return (a < b ? 1.0 : 0.0);
+}
+
+double Geq(double a, double b)
+{
+    return (a >= b ? 1.0 : 0.0);
+}
+
+double Leq(double a, double b)
+{
+    return (a <= b ? 1.0 : 0.0);
+}
+
+double Eq(double a, double b)
+{
+    return (a == b ? 1.0 : 0.0);
+}
+
+double Neq(double a, double b)
+{
+    return (a != b ? 1.0 : 0.0);
+}
+
+double And(double first, ...)
+{
+
+    int count = 0;
+    double i = first;
+    va_list marker;
+
+    va_start( marker, first );     /* Initialize variable arguments. */
+    while( i != -1 )
+    {
+        if( i != 1.0 )
         {
-            return (a > b ? 1.0 : 0.0);
+            return 0,0;
         }
-
-        double Lt(double a, double b)
-        {
-            return (a < b ? 1.0 : 0.0);
-        }
-
-        double Geq(double a, double b)
-        {
-            return (a >= b ? 1.0 : 0.0);
-        }
-
-        double Leq(double a, double b)
-        {
-            return (a <= b ? 1.0 : 0.0);
-        }
-
-        double Eq(double a, double b)
-        {
-            return (a == b ? 1.0 : 0.0);
-        }
-
-        double Neq(double a, double b)
-        {
-            return (a != b ? 1.0 : 0.0);
-        }
-
-        double And(double first, ...)
-        {
-
-        	int count = 0;
-			double i = first;
-           	va_list marker;
-
-           	va_start( marker, first );     /* Initialize variable arguments. */
-            while( i != -1 )
-            {
-           		if( i != 1.0 )
-           		{
-            		return 0,0;
-                }
-              	i = va_arg( marker, double);
-           	}
-           	va_end( marker );              /* Reset variable arguments.      */
-           	return 1.0;
+        i = va_arg( marker, double);
+    }
+    va_end( marker );              /* Reset variable arguments.      */
+    return 1.0;
 //            foreach (double b in a)
 //                if (b != 1.0) return 0.0;
 //            return 1.0;
-        }
+}
 
 //        bool And(params bool[] a)
 //        {
@@ -256,15 +256,15 @@ namespace rr
 //            return result;
 //        }
 
-        double Not(double a)
-        {
-            return (a == 1.0 ? 0.0 : 1.0);
-        }
+double Not(double a)
+{
+    return (a == 1.0 ? 0.0 : 1.0);
+}
 
-        bool Not(bool a)
-        {
-            return ! a;
-        }
+bool Not(bool a)
+{
+    return ! a;
+}
 
 //        double Xor(params double[] a)
 //        {
@@ -308,33 +308,33 @@ namespace rr
 //            return b*Factorial(b - 1);
 //        }
 
-        double Log(double a)
-        {
-            return log(a);
-        }
+double Log(double a)
+{
+    return log(a);
+}
 
-        double Log(double a, double b)
-        {
+double Log(double a, double b)
+{
 //            return Math.Log(b, a);
-			return log(a) / log(b);
-        }
+    return log(a) / log(b);
+}
 
-        double Delay(double a, double b)
-        {
-            return a;
-        }
+double Delay(double a, double b)
+{
+    return a;
+}
 
-        double Root(double a, double b)
-        {
-            try
-            {
-                return pow(b, 1.0/a);
-            }
-            catch(...)
-            {
-                return 1.0;
-            };
-        }
+double Root(double a, double b)
+{
+    try
+    {
+        return pow(b, 1.0/a);
+    }
+    catch(...)
+    {
+        return 1.0;
+    };
+}
 
 //        double Piecewise(params object[] args)
 //        {
