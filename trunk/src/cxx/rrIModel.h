@@ -75,6 +75,22 @@ class RR_DECLSPEC IModel
 
     public:
 												IModel();
+
+		//get,set
+        vector<double>&							Get_y(){return y;}
+        vector<double>&							Get_bc(){return bc;}
+		vector<double>&							Get_c(){return  c;}
+		vector<double>&							Get_gp(){return  gp;}
+		vector<double>&							Get_ct(){return  ct;}
+		vector<double>&							Get_dydt(){return  dydt;}
+		vector<double>&							Get_rates(){return  rates;}
+		vector<double>&							Get_rateRules(){return  rateRules;}
+		vector<double>&							Get_sr(){return  sr;}
+		double									Get_time(){return  time;}
+		vector<bool>&							Get_eventStatusArray(){return eventStatusArray;}
+		vector<double>&							Get_eventTests(){return eventTests;}
+		vector<bool>&							Get_previousEventStatusArray(){return previousEventStatusArray;}
+
         virtual void                            setCompartmentVolumes() = 0;
         virtual void                            initializeInitialConditions();
         virtual void                            setInitialConditions();
