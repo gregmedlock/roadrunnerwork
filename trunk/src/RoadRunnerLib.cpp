@@ -1,5 +1,6 @@
-//---------------------------------------------------------------------------
-
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
 #include <windows.h>
 //---------------------------------------------------------------------------
 //   Important note about DLL memory management when your DLL uses the

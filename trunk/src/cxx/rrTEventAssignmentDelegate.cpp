@@ -2,7 +2,7 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
-#include "rrTEventDelayDelegate.h"
+#include "rrTEventAssignmentDelegate.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 

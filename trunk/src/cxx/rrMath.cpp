@@ -1,4 +1,3 @@
-//---------------------------------------------------------------------------
 #ifdef USE_PCH
 #include "rrPCH.h"
 #endif
@@ -7,6 +6,8 @@
 #include <stdarg.h>
 #include "rrMath.h"
 //---------------------------------------------------------------------------
+#pragma package(smart_init)
+
 namespace rr
 {
         // Square
@@ -373,7 +374,4 @@ namespace rr
 //            }
 //        }
 
-
-
-}
-#pragma package(smart_init)
+}//namespace rr

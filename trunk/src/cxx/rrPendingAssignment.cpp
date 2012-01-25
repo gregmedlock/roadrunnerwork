@@ -1,7 +1,7 @@
-//---------------------------------------------------------------------------
-
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
 #pragma hdrstop
-
 #include "rrPendingAssignment.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

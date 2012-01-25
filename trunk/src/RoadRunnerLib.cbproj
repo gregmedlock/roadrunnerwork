@@ -76,6 +76,10 @@
 				<DependentOn>cxx\rrMath.h</DependentOn>
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="cxx\rrModelGenerator.cpp">
+				<DependentOn>cxx\rrModelGenerator.h</DependentOn>
+				<BuildOrder>14</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\rrModelState.cpp">
 				<DependentOn>cxx\rrModelState.h</DependentOn>
 				<BuildOrder>7</BuildOrder>
@@ -83,6 +87,10 @@
 			<CppCompile Include="cxx\rrPendingAssignment.cpp">
 				<DependentOn>cxx\rrPendingAssignment.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\rrRoadRunner.cpp">
+				<DependentOn>cxx\rrRoadRunner.h</DependentOn>
+				<BuildOrder>15</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="cxx\rrSupportCode.cpp">
 				<DependentOn>cxx\rrSupportCode.h</DependentOn>
@@ -100,9 +108,21 @@
 				<DependentOn>cxx\rrTEventDelayDelegate.h</DependentOn>
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="cxx\rrTEventDelegate.cpp">
+				<DependentOn>cxx\rrTEventDelegate.h</DependentOn>
+				<BuildOrder>11</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\rrTParameterType.cpp">
+				<DependentOn>cxx\rrTParameterType.h</DependentOn>
+				<BuildOrder>13</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\rrTPerformEventAssignmentDelegate.cpp">
 				<DependentOn>cxx\rrTPerformEventAssignmentDelegate.h</DependentOn>
 				<BuildOrder>5</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\rrTVariableType.cpp">
+				<DependentOn>cxx\rrTVariableType.h</DependentOn>
+				<BuildOrder>12</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="RoadRunnerLib.cpp">
 				<BuildOrder>0</BuildOrder>

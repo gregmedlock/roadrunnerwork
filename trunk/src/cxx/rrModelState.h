@@ -27,12 +27,12 @@ class RR_DECLSPEC ModelState
         vector<double>                      _ModifiableSpeciesReferences;
         double 								_Time;
 
+        void InitializeFromModel(IModel& model);
+
     public:
 
-        ModelState(IModel& model)
-        {
-            InitializeFromModel(model);
-        }
+        ModelState(IModel& model);
+
 //
 //        public bool[] EventStatusArray
 //        {
@@ -155,41 +155,8 @@ class RR_DECLSPEC ModelState
 //            model.sr = _ModifiableSpeciesReferences;
 //        }
 //
-        private:
-        void InitializeFromModel(IModel& model)
-        {
-            model.convertToConcentrations();
-            _FloatingSpeciesConcentrations = GetCopy(model.Get_y());
-            _BoundarySpeciesConcentrations = GetCopy(model.Get_bc());
-            _CompartmentVolumes = GetCopy(model.Get_c());
-            _GlobalParameters = GetCopy(model.Get_gp());
-            _ConservedTotals = GetCopy(model.Get_ct());
-            _DyDt = GetCopy(model.Get_dydt());
-            _Rates = GetCopy(model.Get_rates());
-            _RateRules = GetCopy(model.Get_rateRules());
-            _ModifiableSpeciesReferences = GetCopy(model.Get_sr());
-            _Time = model.Get_time();
-
-            _EventStatusArray 		   = GetCopy(model.Get_eventStatusArray());
-            _EventTests 			   = GetCopy(model.Get_eventTests());
-            _PreviousEventStatusArray  = GetCopy(model.Get_previousEventStatusArray());
-        }
-
-        public:
-        vector<double> GetCopy(const vector<double>& oVector)
-        {
-            vector<double> oResult(oVector);// = new double[oVector.size()];
-            //oVector.CopyTo(oResult, 0);
-            return oResult;
-        }
-
-        vector<bool> GetCopy(const vector<bool>& oVector)
-        {
-            vector<bool> oResult(oVector);
-//            oVector.CopyTo(oResult, 0);
-            return oResult;
-        }
-
+        vector<double> 			GetCopy(const vector<double>& oVector);
+        vector<bool> 			GetCopy(const vector<bool>& oVector);
 };
 
 }

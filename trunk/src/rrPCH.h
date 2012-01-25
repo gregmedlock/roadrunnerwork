@@ -1,6 +1,8 @@
 #ifndef rrPCHH
 #define rrPCHH
 
+#include <windows.h>
+
 #include <string>
 #include <vector>
 #include <list>

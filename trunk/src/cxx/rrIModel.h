@@ -77,19 +77,19 @@ class RR_DECLSPEC IModel
 												IModel();
 
 		//get,set
-        vector<double>&							Get_y(){return y;}
-        vector<double>&							Get_bc(){return bc;}
-		vector<double>&							Get_c(){return  c;}
-		vector<double>&							Get_gp(){return  gp;}
-		vector<double>&							Get_ct(){return  ct;}
-		vector<double>&							Get_dydt(){return  dydt;}
-		vector<double>&							Get_rates(){return  rates;}
-		vector<double>&							Get_rateRules(){return  rateRules;}
-		vector<double>&							Get_sr(){return  sr;}
-		double									Get_time(){return  time;}
-		vector<bool>&							Get_eventStatusArray(){return eventStatusArray;}
-		vector<double>&							Get_eventTests(){return eventTests;}
-		vector<bool>&							Get_previousEventStatusArray(){return previousEventStatusArray;}
+        vector<double>&							Get_y();
+        vector<double>&							Get_bc();
+		vector<double>&							Get_c();
+		vector<double>&							Get_gp();
+		vector<double>&							Get_ct();
+		vector<double>&							Get_dydt();
+		vector<double>&							Get_rates();
+		vector<double>&							Get_rateRules();
+		vector<double>&							Get_sr();
+		double									Get_time();
+		vector<bool>&							Get_eventStatusArray();
+		vector<double>&							Get_eventTests();
+		vector<bool>&							Get_previousEventStatusArray();
 
         virtual void                            setCompartmentVolumes() = 0;
         virtual void                            initializeInitialConditions();
