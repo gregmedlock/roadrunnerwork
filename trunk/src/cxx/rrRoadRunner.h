@@ -4,9 +4,9 @@
 
 namespace rr
 {
-///// <summary>
-///// Summary description for RoadRunner.
-///// </summary>
+// <summary>
+// Summary description for RoadRunner.
+// </summary>
 //    public partial class RoadRunner
 //    {
 //        #region TSelectionType enum
@@ -316,312 +316,71 @@ namespace rr
 
 //        [Help("sets the selection list as returned by computeSteadyStateValues().")]
 //        public void setSteadyStateSelectionList(ArrayList newSelectionList)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            TSelectionRecord[] steadyStateSelection = GetSteadyStateSelection(newSelectionList);
-//
-//            _oSteadyStateSelection = steadyStateSelection;
-//
-//        }
 //
 //        [Help("performs steady state analysis, returning values as given by setSteadyStateSelectionList().")]
 //        public double[] computeSteadyStateValues()
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            return computeSteadyStateValues(_oSteadyStateSelection, true);
-//        }
 //
 //        private double[] computeSteadyStateValues(TSelectionRecord[] oSelection, bool computeSteadyState)
-//        {
-//            if (computeSteadyState) steadyState();
-//
-//            var oResult = new double[oSelection.Length];
-//            for (int i = 0; i < oResult.Length; i++)
-//            {
-//                oResult[i] = computeSteadyStateValue(oSelection[i]);
-//            }
-//            return oResult;
-//
-//        }
 //
 //        [Help("performs steady state analysis, returning values as specified by the given selection list.")]
 //        public double[] computeSteadyStateValues(ArrayList oSelection)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            var selection = GetSteadyStateSelection(oSelection);
-//            return computeSteadyStateValues(selection, true);
-//        }
 //
 //        private double computeSteadyStateValue(TSelectionRecord record)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            if (record.selectionType == TSelectionType.clUnknown)
-//                return computeSteadyStateValue(record.p1);
-//            return GetValueForRecord(record);
-//        }
 //
 //        [Help("Returns the value of the given steady state identifier.")]
 //        public double computeSteadyStateValue(string sId)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            if (sId.StartsWith("CC:"))
-//            {
-//                string sList = sId.Substring("CC:".Length);
-//                string sVariable = sList.Substring(0, sList.IndexOf(","));
-//                string sParameter = sList.Substring(sVariable.Length + 1);
-//                return getCC(sVariable, sParameter);
-//            }
-//            if (sId.StartsWith("uCC:"))
-//            {
-//                string sList = sId.Substring("uCC:".Length);
-//                string sVariable = sList.Substring(0, sList.IndexOf(","));
-//                string sParameter = sList.Substring(sVariable.Length + 1);
-//                return getuCC(sVariable, sParameter);
-//            }
-//            if (sId.StartsWith("EE:"))
-//            {
-//                string sList = sId.Substring("EE:".Length);
-//                string sReaction = sList.Substring(0, sList.IndexOf(","));
-//                string sVariable = sList.Substring(sReaction.Length + 1);
-//                return getEE(sReaction, sVariable);
-//            }
-//            else if (sId.StartsWith("uEE:"))
-//            {
-//                string sList = sId.Substring("uEE:".Length);
-//                string sReaction = sList.Substring(0, sList.IndexOf(","));
-//                string sVariable = sList.Substring(sReaction.Length + 1);
-//                return getuEE(sReaction, sVariable);
-//            }
-//            else
-//            {
-//                if (sId.StartsWith("eigen_"))
-//                {
-//                    string sSpecies = sId.Substring("eigen_".Length);
-//                    int nIndex;
-//                    if (ModelGenerator.Instance.floatingSpeciesConcentrationList.find(sSpecies, out nIndex))
-//                    {
-//                        //SBWComplex[] oComplex = SBW_CLAPACK.getEigenValues(getReducedJacobian());
-//                        Complex[] oComplex = LA.GetEigenValues(getReducedJacobian());
-//                        if (oComplex.Length > nIndex)
-//                        {
-//                            return oComplex[nIndex].Real;
-//                        }
-//                        return Double.NaN;
-//                    }
-//                    throw new SBWApplicationException(String.Format("Found unknown floating species '{0}' in computeSteadyStateValue()", sSpecies));
-//                }
-//                try
-//                {
-//                    return getValue(sId);
-//                }
-//                catch (Exception )
-//                {
-//                    throw new SBWApplicationException(String.Format("Found unknown symbol '{0}' in computeSteadyStateValue()", sId));
-//                }
-//
-//            }
-//        }
 //
 //        [Help("Returns the values selected with setSelectionList() for the current model time / timestep")]
 //        public double[] getSelectedValues()
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            var result = new double[selectionList.Length];
-//
-//            for (int j = 0; j < selectionList.Length; j++)
-//            {
-//                result[j] = GetNthSelectedOutput(j, model.time);
-//            }
-//            return result;
-//        }
-//
+
 //        [Help("Returns any warnings that occured during the loading of the SBML")]
 //        public string[] getWarnings()
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            return model.Warnings.ToArray();
-//        }
-//
+
 //        [Help("When turned on, this method will cause rates, event assignments, rules and such to be multiplied " +
 //              "with the compartment volume, if species are defined as initialAmounts. By default this behavior is off.")
 //        ]
 //        public static void ReMultiplyCompartments(bool bValue)
-//        {
-//            _ReMultiplyCompartments = bValue;
-//        }
-//
+
 //        [Help("This method turns on / off the computation and adherence to conservation laws."
 //              + "By default roadRunner will discover conservation cycles and reduce the model accordingly.")]
 //        public static void ComputeAndAssignConservationLaws(bool bValue)
-//        {
-//            _bComputeAndAssignConservationLaws = bValue;
-//        }
-//
+
 //        [Help("Returns the current generated source code")]
 //        public string getCSharpCode()
-//        {
-//            if (modelLoaded)
-//            {
-//                return _sModelCode;
-//            }
-//
-//            throw new SBWApplicationException("Model has to be loaded first");
-//        }
-//
+
 //        [Help(
 //            "Performs a steady state parameter scan with the given parameters returning all elments from the selectionList: (Format: symnbol, startValue, endValue, stepSize)"
 //            )]
 //        public double[][] steadyStateParameterScan(string symbol, double startValue, double endValue, double stepSize)
-//        {
-//            var results = new List<double[]>();
-//
-//            double initialValue = getValue(symbol);
-//            double current = startValue;
-//
-//            while (current < endValue)
-//            {
-//                setValue(symbol, current);
-//                try
-//                {
-//                    steadyState();
-//                }
-//                catch (Exception)
-//                {
-//                    //
-//                }
-//
-//                var currentRow = new List<double> {current};
-//                currentRow.AddRange(getSelectedValues());
-//
-//                results.Add(currentRow.ToArray());
-//                current += stepSize;
-//            }
-//            setValue(symbol, initialValue);
-//
-//            return results.ToArray();
-//        }
-//
-//
+
 //        [Help("Returns the SBML with the current parameterset")]
 //        public string writeSBML()
-//        {
-//            NOM.loadSBML(NOM.getParamPromotedSBML(sbmlStr));
-//            var state = new ModelState(model);
-//
-//            ArrayList array = getFloatingSpeciesNames();
-//            for (int i = 0; i < array.Count; i++)
-//                NOM.setValue((string)array[i], state.FloatingSpeciesConcentrations[i]);
-//
-//            array = getBoundarySpeciesNames();
-//            for (int i = 0; i < array.Count; i++)
-//                NOM.setValue((string)array[i], state.BoundarySpeciesConcentrations[i]);
-//
-//            array = getCompartmentNames();
-//            for (int i = 0; i < array.Count; i++)
-//                NOM.setValue((string)array[i], state.CompartmentVolumes[i]);
-//
-//            array = getGlobalParameterNames();
-//            for (int i = 0; i < Math.Min(array.Count, state.GlobalParameters.Length); i++)
-//                NOM.setValue((string)array[i], state.GlobalParameters[i]);
-//
-//            return NOM.getSBML();
-//        }
-//
+
 //        #region Get Local Parameter Names / Values
 //
 //        // -----------------------------------------------------------------
 //
 //        [Help("Get the number of local parameters for a given reaction")]
 //        public int getNumberOfLocalParameters(int reactionId)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            return getNumberOfLocalParameters(reactionId);
-//        }
-//
+
 //        [Help("Sets the value of a global parameter by its index")]
 //        public void setLocalParameterByIndex(int reactionId, int index, double value)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            if ((reactionId >= 0) && (reactionId < model.getNumReactions) &&
-//                (index >= 0) && (index < model.getNumLocalParameters(reactionId)))
-//                model.lp[reactionId][index] = value;
-//            else
-//                throw new SBWApplicationException(string.Format("Index in setLocalParameterByIndex out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Returns the value of a global parameter by its index")]
 //        public double getLocalParameterByIndex(int reactionId, int index)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            if ((reactionId >= 0) && (reactionId < model.getNumReactions) &&
-//                (index >= 0) && (index < model.getNumLocalParameters(reactionId)))
-//                return model.lp[reactionId][index];
-//
-//            throw new SBWApplicationException(String.Format("Index in getLocalParameterByIndex out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Set the values for all global parameters in the model")]
 //        public void setLocalParameterValues(int reactionId, double[] values)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//
-//            if ((reactionId >= 0) && (reactionId < model.getNumReactions))
-//                model.lp[reactionId] = values;
-//            else
-//                throw new SBWApplicationException(String.Format("Index in setLocalParameterValues out of range: [{0}]", reactionId));
-//        }
-//
+
 //        [Help("Get the values for all global parameters in the model")]
 //        public double[] getLocalParameterValues(int reactionId)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            if ((reactionId >= 0) && (reactionId < model.getNumReactions))
-//                return model.lp[reactionId];
-//            throw new SBWApplicationException(String.Format("Index in getLocalParameterValues out of range: [{0}]", reactionId));
-//        }
-//
+
 //        [Help("Gets the list of parameter names")]
 //        public ArrayList getLocalParameterNames(int reactionId)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            if ((reactionId >= 0) && (reactionId < model.getNumReactions))
-//                return ModelGenerator.Instance.getLocalParameterList(reactionId);
-//            throw (new SBWApplicationException("reaction Id out of range in call to getLocalParameterNames"));
-//        }
-//
+
 //        [Help("Returns a list of global parameter tuples: { {parameter Name, value},...")]
 //        public ArrayList getAllLocalParameterTupleList()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            var tupleList = new ArrayList();
-//            for (int i = 0; i < ModelGenerator.Instance.getNumberOfReactions(); i++)
-//            {
-//                var tuple = new ArrayList();
-//                ArrayList lpList = ModelGenerator.Instance.getLocalParameterList(i);
-//                tuple.Add(i);
-//                for (int j = 0; j < lpList.Count; j++)
-//                {
-//                    tuple.Add(lpList[j]);
-//                    tuple.Add(model.lp[i][j]);
-//                }
-//                tupleList.Add(tuple);
-//            }
-//            return tupleList;
-//        }
-//
+
 //        #endregion
 //
 //        #region Get Reaction Rate / Names ...
@@ -630,133 +389,44 @@ namespace rr
 //
 //        [Help("Get the number of reactions")]
 //        public int getNumberOfReactions()
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            return model.getNumReactions;
-//        }
-//
+
 //        [Help("Returns the rate of a reaction by its index")]
 //        public double getReactionRate(int index)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            if ((index >= 0) && (index < model.getNumReactions))
-//            {
-//                model.convertToConcentrations();
-//                model.computeReactionRates(0.0, model.y);
-//                return model.rates[index];
-//            }
-//            throw new SBWApplicationException(String.Format("Index in getReactionRate out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Returns the rate of changes of a species by its index")]
 //        public double getRateOfChange(int index)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            if ((index >= 0) && (index < model.getNumTotalVariables))
-//            {
-//                model.computeAllRatesOfChange();
-//                return model.dydt[index];
-//            }
-//            throw new SBWApplicationException(String.Format("Index in getRateOfChange out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Returns the names given to the rate of change of the floating species")]
 //        public ArrayList getRateOfChangeNames()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            ArrayList sp = ModelGenerator.Instance.getFloatingSpeciesConcentrationList(); // Reordered list
-//            for (int i = 0; i < sp.Count; i++)
-//                sp[i] = sp[i] + "'";
-//            return sp;
-//        }
-//
+
 //        [Help("Returns the rates of changes given an array of new floating species concentrations")]
 //        public double[] getRatesOfChangeEx(double[] values)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            model.y = values;
-//            model.evalModel(0.0, BuildModelEvalArgument());
-//            return model.dydt;
-//        }
-//
+
 //        [Help("Returns the rates of changes given an array of new floating species concentrations")]
 //        public double[] getReactionRatesEx(double[] values)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            model.computeReactionRates(0.0, values);
-//            return model.rates;
-//        }
-//
-//
+
 //        public string[] GetFloatingSpeciesNamesArray()
-//        {
-//            return (string[])getFloatingSpeciesNames().ToArray(typeof(string));
-//        }
-//
+
 //        public string[] GetGlobalParameterNamesArray()
-//        {
-//            return (string[])getGlobalParameterNames().ToArray(typeof(string));
-//        }
-//
 //        #endregion
 //
 //        #region Get Compartment Names / Values
 //
 //        [Help("Get the number of compartments")]
 //        public int getNumberOfCompartments()
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            return model.getNumCompartments;
-//        }
-//
+
 //        [Help("Sets the value of a compartment by its index")]
 //        public void setCompartmentByIndex(int index, double value)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            if ((index >= 0) && (index < model.getNumCompartments))
-//                model.c[index] = value;
-//            else
-//                throw new SBWApplicationException(String.Format("Index in getCompartmentByIndex out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Returns the value of a compartment by its index")]
 //        public double getCompartmentByIndex(int index)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            if ((index >= 0) && (index < model.getNumCompartments))
-//                return model.c[index];
-//            throw (new SBWApplicationException(String.Format("Index in getCompartmentByIndex out of range: [{0}]", index)));
-//        }
-//
+
 //        [Help("Returns the value of a compartment by its index")]
 //        public void setCompartmentVolumes(double[] values)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            if (values.Length < model.getNumCompartments)
-//                model.c = values;
-//            else
-//                throw (new SBWApplicationException(String.Format("Size of vector out not in range in setCompartmentValues: [{0}]", values.Length)));
-//        }
-//
+
 //        [Help("Gets the list of compartment names")]
 //        public ArrayList getCompartmentNames()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            return ModelGenerator.Instance.getCompartmentList();
-//        }
-//
+
 //        #endregion
 //
 //        #region Get Boundary Species Names / Values
@@ -765,64 +435,25 @@ namespace rr
 //
 //        [Help("Get the number of boundary species")]
 //        public int getNumberOfBoundarySpecies()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            return model.getNumBoundarySpecies;
-//        }
-//
+
 //        [Help("Sets the value of a boundary species by its index")]
 //        public void setBoundarySpeciesByIndex(int index, double value)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            if ((index >= 0) && (index < model.getNumBoundarySpecies))
-//                model.bc[index] = value;
-//            else
-//                throw new SBWApplicationException(String.Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Returns the value of a boundary species by its index")]
 //        public double getBoundarySpeciesByIndex(int index)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            if ((index >= 0) && (index < model.getNumBoundarySpecies))
-//                return model.bc[index];
-//            throw new SBWApplicationException(String.Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Returns an array of boundary species concentrations")]
 //        public double[] getBoundarySpeciesConcentrations()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            return model.bc;
-//        }
-//
+
 //        [Help("Set the concentrations for all boundary species in the model")]
 //        public void setBoundarySpeciesConcentrations(double[] values)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            model.bc = values;
-//        }
-//
+
 //        [Help("Gets the list of boundary species names")]
 //        public ArrayList getBoundarySpeciesNames()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            return ModelGenerator.Instance.getBoundarySpeciesList();
-//        }
-//
+
 //        [Help("Gets the list of boundary species amount names")]
 //        public ArrayList getBoundarySpeciesAmountNames()
-//        {
-//            var oResult = new ArrayList();
-//            foreach (string s in getBoundarySpeciesNames()) oResult.Add("[" + s + "]");
-//            return oResult;
-//        }
-//
+
 //        #endregion
 //
 //        #region Get Floating Species Names / Values
@@ -831,124 +462,39 @@ namespace rr
 //
 //        [Help("Get the number of floating species")]
 //        public int getNumberOfFloatingSpecies()
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            return model.getNumTotalVariables;
-//        }
-//
+
 //        [Help("Sets the value of a floating species by its index")]
 //        public void setFloatingSpeciesByIndex(int index, double value)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            if ((index >= 0) && (index < model.getNumTotalVariables))
-//            {
-//                model.setConcentration(index, value); // This updates the amount vector aswell
-//                if (!_bConservedTotalChanged) model.computeConservedTotals();
-//            }
-//            else
-//                throw new SBWApplicationException(String.Format("Index in setFloatingSpeciesByIndex out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Returns the value of a floating species by its index")]
 //        public double getFloatingSpeciesByIndex(int index)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            if ((index >= 0) && (index < model.getNumTotalVariables))
-//                return model.getConcentration(index);
-//            throw new SBWApplicationException(String.Format("Index in getFloatingSpeciesByIndex out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Returns an array of floating species concentrations")]
 //        public double[] getFloatingSpeciesConcentrations()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            model.convertToConcentrations();
-//            return model.y;
-//        }
-//
+
 //        [Help("returns an array of floating species initial conditions")]
 //        public double[] getFloatingSpeciesInitialConcentrations()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            return model.init_y;
-//        }
-//
-//
+
 //        // This is a level 1 Method 1
 //        [Help("Set the concentrations for all floating species in the model")]
 //        public void setFloatingSpeciesConcentrations(double[] values)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            model.y = values;
-//            // Update the amounts vector at the same time
-//            model.convertToAmounts();
-//            if (!_bConservedTotalChanged) model.computeConservedTotals();
-//        }
-//
+
 //        [Help("Sets the value of a floating species by its index")]
 //        public void setFloatingSpeciesInitialConcentrationByIndex(int index, double value)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            if ((index >= 0) && (index < model.init_y.Length))
-//            {
-//                model.init_y[index] = value;
-//                reset();
-//            }
-//            else
-//                throw new SBWApplicationException(String.Format("Index in setFloatingSpeciesInitialConcentrationByIndex out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Sets the initial conditions for all floating species in the model")]
 //        public void setFloatingSpeciesInitialConcentrations(double[] values)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            model.init_y = values;
-//            reset();
-//        }
-//
-//
+
 //        // This is a Level 1 method !
 //        [Help("Returns a list of floating species names")]
 //        public ArrayList getFloatingSpeciesNames()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            return ModelGenerator.Instance.getFloatingSpeciesConcentrationList(); // Reordered list
-//        }
-//
+
 //        [Help("Returns a list of floating species initial condition names")]
 //        public ArrayList getFloatingSpeciesInitialConditionNames()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            ArrayList floatingSpeciesNames = ModelGenerator.Instance.getFloatingSpeciesConcentrationList();
-//            var result = new ArrayList();
-//            foreach (object item in floatingSpeciesNames)
-//            {
-//                result.Add(String.Format("init({0})", item));
-//            }
-//            return result;
-//        }
-//
-//
+
 //        [Help("Returns the list of floating species amount names")]
 //        public ArrayList getFloatingSpeciesAmountNames()
-//        {
-//            var oResult = new ArrayList();
-//            foreach (string s in getFloatingSpeciesNames()) oResult.Add(String.Format("[{0}]", s));
-//            return oResult;
-//        }
-//
+
 //        #endregion
 //
 //        #region Get Global Parameter  Names / Values
@@ -957,205 +503,67 @@ namespace rr
 //
 //        [Help("Get the number of global parameters")]
 //        public int getNumberOfGlobalParameters()
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            return ModelGenerator.Instance.getGlobalParameterList().Count;
-//        }
-//
+
 //        [Help("Sets the value of a global parameter by its index")]
 //        public void setGlobalParameterByIndex(int index, double value)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            if ((index >= 0) && (index < model.getNumGlobalParameters + model.ct.Length))
-//            {
-//                if (index >= model.getNumGlobalParameters)
-//                {
-//                    model.ct[index - model.getNumGlobalParameters] = value;
-//                    model.updateDependentSpeciesValues(model.y);
-//                    _bConservedTotalChanged = true;
-//                }
-//                else
-//                    model.gp[index] = value;
-//            }
-//            else
-//                throw new SBWApplicationException(String.Format("Index in getNumGlobalParameters out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Returns the value of a global parameter by its index")]
 //        public double getGlobalParameterByIndex(int index)
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            if ((index >= 0) && (index < (model.getNumGlobalParameters + model.ct.Length)))
-//            {
-//                var result = new double[model.gp.Length + model.ct.Length];
-//                model.gp.CopyTo(result, 0);
-//                model.ct.CopyTo(result, model.gp.Length);
-//                return result[index];
-//                //return model.gp[index];
-//            }
-//            throw new SBWApplicationException(String.Format("Index in getNumGlobalParameters out of range: [{0}]", index));
-//        }
-//
+
 //        [Help("Set the values for all global parameters in the model")]
 //        public void setGlobalParameterValues(double[] values)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            if (values.Length == model.gp.Length)
-//                model.gp = values;
-//            else
-//            {
-//                for (int i = 0; i < model.gp.Length; i++)
-//                {
-//                    model.gp[i] = values[i];
-//                }
-//                for (int i = 0; i < model.ct.Length; i++)
-//                {
-//                    model.gp[i] = values[i + model.gp.Length];
-//                    _bConservedTotalChanged = true;
-//                }
-//                model.updateDependentSpeciesValues(model.y);
-//            }
-//        }
-//
+
 //        [Help("Get the values for all global parameters in the model")]
 //        public double[] getGlobalParameterValues()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            if (model.ct.Length > 0)
-//            {
-//                var result = new double[model.gp.Length + model.ct.Length];
-//                model.gp.CopyTo(result, 0);
-//                model.ct.CopyTo(result, model.gp.Length);
-//                return result;
-//            }
-//            return model.gp;
-//        }
-//
+
 //        [Help("Gets the list of parameter names")]
 //        public ArrayList getGlobalParameterNames()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            return ModelGenerator.Instance.getGlobalParameterList();
-//        }
-//
+
 //        [Help("Returns a list of global parameter tuples: { {parameter Name, value},...")]
 //        public ArrayList getAllGlobalParameterTupleList()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            var tupleList = new ArrayList();
-//            ArrayList gp = ModelGenerator.Instance.getGlobalParameterList();
-//            for (int i = 0; i < gp.Count; i++)
-//            {
-//                var tuple = new ArrayList {gp[i], model.gp[i]};
-//                tupleList.Add(tuple);
-//            }
-//            return tupleList;
-//        }
-//
+
 //        private ArrayList getParameterNames()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            ArrayList sp = ModelGenerator.Instance.getGlobalParameterList(); // Reordered list
-//            return sp;
-//        }
-//
+
 //        [Help("Updates the model based on all recent changes")]
 //        public void EvalModel()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            model.convertToAmounts();
-//            model.evalModel(model.time, cvode.BuildEvalArgument());
-//        }
-//
+
 //        #endregion
 //
 //        #region Information about Roadrunner: getName
 //
 //        [Help("Returns the name of module")]
 //        public string getName()
-//        {
-//            return "roadRunner";
-//        }
-//
+
 //        [Help("Returns the version number of the module")]
 //        public static string getVersion()
-//        {
-//            return "2.0.1";
-//        }
-//
+
 //        [Help("Returns the name of the module author")]
 //        public static string getAuthor()
-//        {
-//            return "H. M. Sauro and F. T. Bergmann";
-//        }
-//
+
 //        [Help("Returns a description of the module")]
 //        public static string getDescription()
-//        {
-//            return "Simulator API based on CVODE/NLEQ/CSharp implementation";
-//        }
-//
+
 //        [Help("Returns the display name of the module")]
 //        public static string getDisplayName()
-//        {
-//            return "RoadRunner";
-//        }
-//
+
 //        [Help("Returns the copyright string for the module")]
 //        public static string getCopyright()
-//        {
-//            return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";
-//        }
-//
+
 //        [Help("Returns the URL string associated with the module (if any)")]
 //        public static string getURL()
-//        {
-//            return "http://sys-bio.org";
-//        }
-//
+
 //        #endregion
 //
 //        #region Nested type: TSelectionRecord
 //
 //        public struct TSelectionRecord
-//        {
-//            public int index;
-//            public string p1;
-//            public string p2;
-//
-//            public TSelectionType selectionType;
-//        }
-//
+
 //        #endregion
 //
 //
-// #if DEBUG
+#if DEBUG
 //       public static void TestChange()
-//        {
-//            var sbml = File.ReadAllText(@"C:\Users\fbergmann\Desktop\testModel.xml");
-//            var sim = new RoadRunner();
-//            sim.loadSBML(sbml);
-//            sim.setTimeStart(0);
-//            sim.setTimeEnd(10);
-//            sim.setNumPoints(10);
-//            var data = sim.simulate();
-//            var writer = new StringWriter();
-//            DumpResults(writer, data, sim.getSelectionList());
-//            sim.changeInitialConditions(new double[] { 20, 0 });
-//            sim.reset();
-//            data = sim.simulate();
-//            writer = new StringWriter();
-//            DumpResults(writer, data, sim.getSelectionList());
-//        }
-//#endif
+#endif
 //    }
 
 

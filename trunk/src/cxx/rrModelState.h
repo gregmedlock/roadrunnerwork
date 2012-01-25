@@ -26,11 +26,9 @@ class RR_DECLSPEC ModelState
         vector<double>                      _Rates;
         vector<double>                      _ModifiableSpeciesReferences;
         double 								_Time;
-
-        void InitializeFromModel(IModel& model);
+        void 								InitializeFromModel(IModel& model);
 
     public:
-
         ModelState(IModel& model);
 
 //
