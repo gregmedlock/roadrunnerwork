@@ -68,6 +68,10 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="cxx\rrDoubleMatrix.cpp">
+				<DependentOn>cxx\rrDoubleMatrix.h</DependentOn>
+				<BuildOrder>16</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\rrIModel.cpp">
 				<DependentOn>cxx\rrIModel.h</DependentOn>
 				<BuildOrder>8</BuildOrder>
