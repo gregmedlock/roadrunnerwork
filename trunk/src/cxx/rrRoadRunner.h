@@ -3,6 +3,9 @@
 //---------------------------------------------------------------------------
 #include <string>
 #include "rrDoubleMatrix.h"
+#include "rrIModel.h"
+#include "Solvers/rrCvodeInterface.h"
+#include "Solvers/rrNLEQInterface.h"
 using std::string;
 
 namespace rr
@@ -53,502 +56,503 @@ class RoadRunner
      	vector<TSelectionRecord> _oSteadyStateSelection;
 		string _sModelCode;
 
-		CvodeInterface cvode;
+		CvodeInterface cvode;	//Declared in Solvers/CvodeInterface.cs...
+
 		//kinSolverInterface kinSolver;  // Use NLEQ1 instead
 
-public IModel model = null;
-public bool modelLoaded = false;
-private ISteadyStateSolver steadyStateSolver;
-public int numPoints;
-public string sbmlStr;
-private TSelectionRecord[] selectionList;
-public double timeEnd;
-public double timeStart;
+//	public: IModel model = null;
+    public: bool modelLoaded;// = false;
+    private ISteadyStateSolver steadyStateSolver;
+    public: int numPoints;
+    public: string sbmlStr;
+    private TSelectionRecord[] selectionList;
+    public: double timeEnd;
+    public: double timeStart;
 
-public RoadRunner()
-private bool IsNleqAvailable()
-#if DEBUG
-public static void Test()
-#endif
+    public: RoadRunner()
+    private bool IsNleqAvailable()
+    #if DEBUG
+    public: static void Test()
+    #endif
 
-[Ignore]
-public string NL
-[Ignore]
-private string _NL()
-[Ignore]
-private void emptyModel()
-private double GetValueForRecord(TSelectionRecord record)
-private double GetNthSelectedOutput(int index, double dCurrentTime)
-private void AddNthOutputToResult(double[,] results, int nRow, double dCurrentTime)
-private double[] BuildModelEvalArgument()
-[Ignore]
-public double[,] runSimulation()
-#if DEBUG
-public static void PrintTout(double start, double end, int numPoints)
-#endif
+    [Ignore]
+    public: string NL
+    [Ignore]
+    private string _NL()
+    [Ignore]
+    private void emptyModel()
+    private double GetValueForRecord(TSelectionRecord record)
+    private double GetNthSelectedOutput(int index, double dCurrentTime)
+    private void AddNthOutputToResult(double[,] results, int nRow, double dCurrentTime)
+    private double[] BuildModelEvalArgument()
+    [Ignore]
+    public: double[,] runSimulation()
+    #if DEBUG
+    public: static void PrintTout(double start, double end, int numPoints)
+    #endif
 
-private void InitializeModel(object o)
+    private void InitializeModel(object o)
 
-private static void DumpResults(TextWriter writer, double[,] data, ArrayList colLabels)
-//public static void TestDirectory(string directory, bool testSubDirs)
-//    public static void TestDirectory(string directory, bool testSubDirs, string pattern)
+    private static void DumpResults(TextWriter writer, double[,] data, ArrayList colLabels)
+    //public: static void TestDirectory(string directory, bool testSubDirs)
+    //    public: static void TestDirectory(string directory, bool testSubDirs, string pattern)
 
 
-[Ignore]
-public static void SimulateSBMLFile(string fileName, bool useConservationLaws)
+    [Ignore]
+    public: static void SimulateSBMLFile(string fileName, bool useConservationLaws)
 
-[Ignore]
-public static void SimulateSBMLFile(string fileName, bool useConservationLaws, double startTime, double endTime,
-                                    int numPoints)
+    [Ignore]
+    public: static void SimulateSBMLFile(string fileName, bool useConservationLaws, double startTime, double endTime,
+                                        int numPoints)
 
-[Help("Load SBML into simulator")]
-public void loadSBMLFromFile(string fileName)
+    [Help("Load SBML into simulator")]
+    public: void loadSBMLFromFile(string fileName)
 
-[Help("Load SBML into simulator")]
-public void loadSBML(string sbml)
+    [Help("Load SBML into simulator")]
+    public: void loadSBML(string sbml)
 
 
-[Help("Returns the initially loaded model as SBML")]
-public string getSBML()
+    [Help("Returns the initially loaded model as SBML")]
+    public: string getSBML()
 
-[Help("get the currently set time start")]
-public double getTimeStart()
+    [Help("get the currently set time start")]
+    public: double getTimeStart()
 
-[Help("get the currently set time end")]
-public double getTimeEnd()
+    [Help("get the currently set time end")]
+    public: double getTimeEnd()
 
-[Help("get the currently set number of points")]
-public int getNumPoints()
+    [Help("get the currently set number of points")]
+    public: int getNumPoints()
 
-[Help("Set the time start for the simulation")]
-public void setTimeStart(double startTime)
+    [Help("Set the time start for the simulation")]
+    public: void setTimeStart(double startTime)
 
-[Help("Set the time end for the simulation")]
-public void setTimeEnd(double endTime)
+    [Help("Set the time end for the simulation")]
+    public: void setTimeEnd(double endTime)
 
-[Help("Set the number of points to generate during the simulation")]
-public void setNumPoints(int nummberOfPoints)
+    [Help("Set the number of points to generate during the simulation")]
+    public: void setNumPoints(int nummberOfPoints)
 
-[Help("reset the simulator back to the initial conditions specified in the SBML model")]
-public void reset()
+    [Help("reset the simulator back to the initial conditions specified in the SBML model")]
+    public: void reset()
 
-[Help(
-    "Change the initial conditions to another concentration vector (changes only initial conditions for floating Species)"
-    )]
-public void changeInitialConditions(double[] ic)
+    [Help(
+        "Change the initial conditions to another concentration vector (changes only initial conditions for floating Species)"
+        )]
+    public: void changeInitialConditions(double[] ic)
 
 
-[Help("Carry out a time course simulation")]
-public double[,] simulate()
+    [Help("Carry out a time course simulation")]
+    public: double[,] simulate()
 
-[Help(
-    "Extension method to simulate (time start, time end, number of points). This routine resets the model to its initial condition before running the simulation (unlike simulate())"
-    )]
-public double[,] simulateEx(double startTime, double endTime, int numberOfPoints)
+    [Help(
+        "Extension method to simulate (time start, time end, number of points). This routine resets the model to its initial condition before running the simulation (unlike simulate())"
+        )]
+    public: double[,] simulateEx(double startTime, double endTime, int numberOfPoints)
 
-[Help("Returns the current vector of reactions rates")]
-public double[] getReactionRates()
+    [Help("Returns the current vector of reactions rates")]
+    public: double[] getReactionRates()
 
-[Help("Returns the current vector of rates of change")]
-public double[] getRatesOfChange()
+    [Help("Returns the current vector of rates of change")]
+    public: double[] getRatesOfChange()
 
-[Help(
-    "Returns a list of floating species names: This method is deprecated, please use getFloatingSpeciesNames()")
-]
-public ArrayList getSpeciesNames()
+    [Help(
+        "Returns a list of floating species names: This method is deprecated, please use getFloatingSpeciesNames()")
+    ]
+    public: ArrayList getSpeciesNames()
 
-[Help("Returns a list of reaction names")]
-public ArrayList getReactionNames()
+    [Help("Returns a list of reaction names")]
+    public: ArrayList getReactionNames()
 
-// ---------------------------------------------------------------------
-// Start of Level 2 API Methods
-// ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // Start of Level 2 API Methods
+    // ---------------------------------------------------------------------
 
-public int UseKinsol { get; set; }
+    public: int UseKinsol { get; set; }
 
-[Help("Get Simulator Capabilities")]
-public string getCapabilities()
+    [Help("Get Simulator Capabilities")]
+    public: string getCapabilities()
 
-[Ignore]
-public void setTolerances(double aTol, double rTol)
+    [Ignore]
+    public: void setTolerances(double aTol, double rTol)
 
-[Ignore]
-public void setTolerances(double aTol, double rTol, int maxSteps)
+    [Ignore]
+    public: void setTolerances(double aTol, double rTol, int maxSteps)
 
-public void CorrectMaxStep()
+    public: void CorrectMaxStep()
 
-[Help("Set Simulator Capabilites")]
-public void setCapabilities(string capsStr)
+    [Help("Set Simulator Capabilites")]
+    public: void setCapabilities(string capsStr)
 
-[Help("Sets the value of the given species or global parameter to the given value (not of local parameters)")]
-public void setValue(string sId, double dValue)
+    [Help("Sets the value of the given species or global parameter to the given value (not of local parameters)")]
+    public: void setValue(string sId, double dValue)
 
 
-[Help("Gets the Value of the given species or global parameter (not of local parameters)")]
-public double getValue(string sId)
+    [Help("Gets the Value of the given species or global parameter (not of local parameters)")]
+    public: double getValue(string sId)
 
-[Help(
-    "Returns symbols of the currently loaded model, that can be used for the selectionlist format array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }."
-    )]
-public ArrayList getAvailableSymbols()
+    [Help(
+        "Returns symbols of the currently loaded model, that can be used for the selectionlist format array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }."
+        )]
+    public: ArrayList getAvailableSymbols()
 
 
-[Help("Returns the currently selected columns that will be returned by calls to simulate() or simulateEx(,,).")]
-public ArrayList getSelectionList()
+    [Help("Returns the currently selected columns that will be returned by calls to simulate() or simulateEx(,,).")]
+    public: ArrayList getSelectionList()
 
 
-[Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
-      " time, species names, , volume, reaction rates and rates of change (speciesName')")]
-public void setSelectionList(ArrayList newSelectionList)
+    [Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
+          " time, species names, , volume, reaction rates and rates of change (speciesName')")]
+    public: void setSelectionList(ArrayList newSelectionList)
 
 
-[Help(
-    "Carry out a single integration step using a stepsize as indicated in the method call (the intergrator is reset to take into account all variable changes). Arguments: double CurrentTime, double StepSize, Return Value: new CurrentTime."
-    )]
-public double oneStep(double currentTime, double stepSize)
+    [Help(
+        "Carry out a single integration step using a stepsize as indicated in the method call (the intergrator is reset to take into account all variable changes). Arguments: double CurrentTime, double StepSize, Return Value: new CurrentTime."
+        )]
+    public: double oneStep(double currentTime, double stepSize)
 
-[Help(
-   "Carry out a single integration step using a stepsize as indicated in the method call. Arguments: double CurrentTime, double StepSize, bool: reset integrator if true, Return Value: new CurrentTime."
-   )]
-public double oneStep(double currentTime, double stepSize, bool reset)
+    [Help(
+       "Carry out a single integration step using a stepsize as indicated in the method call. Arguments: double CurrentTime, double StepSize, bool: reset integrator if true, Return Value: new CurrentTime."
+       )]
+    public: double oneStep(double currentTime, double stepSize, bool reset)
 
 
-// ---------------------------------------------------------------------
-// Start of Level 3 API Methods
-// ---------------------------------------------------------------------
+    // ---------------------------------------------------------------------
+    // Start of Level 3 API Methods
+    // ---------------------------------------------------------------------
 
-/*[Help("Compute the steady state of the model, returns the sum of squares of the solution")]
-public double steadyState () {
-    try {
-        if (modelLoaded) {
-            kinSolver = new kinSolverInterface(model);
-            return kinSolver.solve(model.y);
-        } else throw new SBWApplicationException (emptyModelStr);
-    } catch (SBWApplicationException) {
-        throw;
-    } catch (Exception e) {
-        throw new SBWApplicationException ("Unexpected error from steadyState()", e.Message);
-    }
-}*/
+    /*[Help("Compute the steady state of the model, returns the sum of squares of the solution")]
+    public: double steadyState () {
+        try {
+            if (modelLoaded) {
+                kinSolver = new kinSolverInterface(model);
+                return kinSolver.solve(model.y);
+            } else throw new SBWApplicationException (emptyModelStr);
+        } catch (SBWApplicationException) {
+            throw;
+        } catch (Exception e) {
+            throw new SBWApplicationException ("Unexpected error from steadyState()", e.Message);
+        }
+    }*/
 
 
-//public static void TestSettings()
-[Help("Compute the steady state of the model, returns the sum of squares of the solution")]
-public double steadyState()
-// ******************************************************************** }
-// Multiply matrix 'm1' by 'm2' to give result in Self                  }
-//                                                                      }
-// Usage:  A.mult (A1, A2); multiply A1 by A2 giving A                  }
-//                                                                      }
-// ******************************************************************** }
-[Ignore()]
-public double[][] mult(double[][] m1, double[][] m2)
-[Help("Compute the reduced Jacobian at the current operating point")]
-public double[][] getReducedJacobian()
-[Help("Compute the full Jacobian at the current operating point")]
-public double[][] getFullJacobian()
-// ---------------------------------------------------------------------
-// Start of Level 4 API Methods
-// ---------------------------------------------------------------------
+    //public: static void TestSettings()
+    [Help("Compute the steady state of the model, returns the sum of squares of the solution")]
+    public: double steadyState()
+    // ******************************************************************** }
+    // Multiply matrix 'm1' by 'm2' to give result in Self                  }
+    //                                                                      }
+    // Usage:  A.mult (A1, A2); multiply A1 by A2 giving A                  }
+    //                                                                      }
+    // ******************************************************************** }
+    [Ignore()]
+    public: double[][] mult(double[][] m1, double[][] m2)
+    [Help("Compute the reduced Jacobian at the current operating point")]
+    public: double[][] getReducedJacobian()
+    [Help("Compute the full Jacobian at the current operating point")]
+    public: double[][] getFullJacobian()
+    // ---------------------------------------------------------------------
+    // Start of Level 4 API Methods
+    // ---------------------------------------------------------------------
 
-[Help("Returns the Link Matrix for the currently loaded model")]
-public double[][] getLinkMatrix()
+    [Help("Returns the Link Matrix for the currently loaded model")]
+    public: double[][] getLinkMatrix()
 
-[Help("Returns the reduced stoichiometry matrix (Nr) for the currently loaded model")]
-public double[][] getNrMatrix()
+    [Help("Returns the reduced stoichiometry matrix (Nr) for the currently loaded model")]
+    public: double[][] getNrMatrix()
 
-[Help("Returns the L0 matrix for the currently loaded model")]
-public double[][] getL0Matrix()
+    [Help("Returns the L0 matrix for the currently loaded model")]
+    public: double[][] getL0Matrix()
 
-[Help("Returns the stoichiometry matrix for the currently loaded model")]
-public double[][] getStoichiometryMatrix()
+    [Help("Returns the stoichiometry matrix for the currently loaded model")]
+    public: double[][] getStoichiometryMatrix()
 
-[Help("Returns the conservation matrix (gamma) for the currently loaded model")]
-public double[][] getConservationMatrix()
+    [Help("Returns the conservation matrix (gamma) for the currently loaded model")]
+    public: double[][] getConservationMatrix()
 
-[Help("Returns the number of dependent species in the model")]
-public int getNumberOfDependentSpecies()
+    [Help("Returns the number of dependent species in the model")]
+    public: int getNumberOfDependentSpecies()
 
-[Help("Returns the number of independent species in the model")]
-public int getNumberOfIndependentSpecies()
+    [Help("Returns the number of independent species in the model")]
+    public: int getNumberOfIndependentSpecies()
 
-[Ignore]
-private double getVariableValue(TVariableType variableType, int variableIndex)
+    [Ignore]
+    private double getVariableValue(TVariableType variableType, int variableIndex)
 
-[Ignore]
-private void setParameterValue(TParameterType parameterType, int parameterIndex, double value)
+    [Ignore]
+    private void setParameterValue(TParameterType parameterType, int parameterIndex, double value)
 
-[Ignore]
-private double getParameterValue(TParameterType parameterType, int parameterIndex)
+    [Ignore]
+    private double getParameterValue(TParameterType parameterType, int parameterIndex)
 
-/// <summary>
-/// Fills the second argument with the Inverse of the first argument
-/// </summary>
-/// <param name="T2">The Matrix to calculate the Inverse for</param>
-/// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
-private static void GetInverse(Matrix T2, Matrix Inv)
+    /// <summary>
+    /// Fills the second argument with the Inverse of the first argument
+    /// </summary>
+    /// <param name="T2">The Matrix to calculate the Inverse for</param>
+    /// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
+    private static void GetInverse(Matrix T2, Matrix Inv)
 
-[Help(
-    "Derpar Continuation, stepSize = stepsize; independentVariable = index to parameter; parameterType = {'globalParameter', 'boundarySpecies'"
-    )]
-public void computeContinuation(double stepSize, int independentVariable, string parameterTypeStr)
+    [Help(
+        "Derpar Continuation, stepSize = stepsize; independentVariable = index to parameter; parameterType = {'globalParameter', 'boundarySpecies'"
+        )]
+    public: void computeContinuation(double stepSize, int independentVariable, string parameterTypeStr)
 
-[Help("Returns the Symbols of all Flux Control Coefficients.")]
-public ArrayList getFluxControlCoefficientNames()
+    [Help("Returns the Symbols of all Flux Control Coefficients.")]
+    public: ArrayList getFluxControlCoefficientNames()
 
-[Help("Returns the Symbols of all Concentration Control Coefficients.")]
-public ArrayList getConcentrationControlCoefficientNames()
+    [Help("Returns the Symbols of all Concentration Control Coefficients.")]
+    public: ArrayList getConcentrationControlCoefficientNames()
 
-[Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")]
-public ArrayList getUnscaledConcentrationControlCoefficientNames()
+    [Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")]
+    public: ArrayList getUnscaledConcentrationControlCoefficientNames()
 
-[Help("Returns the Symbols of all Elasticity Coefficients.")]
-public ArrayList getElasticityCoefficientNames()
+    [Help("Returns the Symbols of all Elasticity Coefficients.")]
+    public: ArrayList getElasticityCoefficientNames()
 
-[Help("Returns the Symbols of all Unscaled Elasticity Coefficients.")]
-public ArrayList getUnscaledElasticityCoefficientNames()
+    [Help("Returns the Symbols of all Unscaled Elasticity Coefficients.")]
+    public: ArrayList getUnscaledElasticityCoefficientNames()
 
-[Help("Returns the Symbols of all Floating Species Eigenvalues.")]
-public ArrayList getEigenValueNames()
+    [Help("Returns the Symbols of all Floating Species Eigenvalues.")]
+    public: ArrayList getEigenValueNames()
 
-[Help(
-    "Returns symbols of the currently loaded model, that can be used for steady state analysis. Format: array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }  or { { \"groupname\", { \"subgroup\", { \"item1\" ... } } } }."
-    )]
-public ArrayList getAvailableSteadyStateSymbols()
+    [Help(
+        "Returns symbols of the currently loaded model, that can be used for steady state analysis. Format: array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }  or { { \"groupname\", { \"subgroup\", { \"item1\" ... } } } }."
+        )]
+    public: ArrayList getAvailableSteadyStateSymbols()
 
-[Help("Returns the selection list as returned by computeSteadyStateValues().")]
-public ArrayList getSteadyStateSelectionList()
+    [Help("Returns the selection list as returned by computeSteadyStateValues().")]
+    public: ArrayList getSteadyStateSelectionList()
 
-private TSelectionRecord[] GetSteadyStateSelection(ArrayList newSelectionList)
+    private TSelectionRecord[] GetSteadyStateSelection(ArrayList newSelectionList)
 
-[Help("sets the selection list as returned by computeSteadyStateValues().")]
-public void setSteadyStateSelectionList(ArrayList newSelectionList)
+    [Help("sets the selection list as returned by computeSteadyStateValues().")]
+    public: void setSteadyStateSelectionList(ArrayList newSelectionList)
 
-[Help("performs steady state analysis, returning values as given by setSteadyStateSelectionList().")]
-public double[] computeSteadyStateValues()
+    [Help("performs steady state analysis, returning values as given by setSteadyStateSelectionList().")]
+    public: double[] computeSteadyStateValues()
 
-private double[] computeSteadyStateValues(TSelectionRecord[] oSelection, bool computeSteadyState)
+    private double[] computeSteadyStateValues(TSelectionRecord[] oSelection, bool computeSteadyState)
 
-[Help("performs steady state analysis, returning values as specified by the given selection list.")]
-public double[] computeSteadyStateValues(ArrayList oSelection)
+    [Help("performs steady state analysis, returning values as specified by the given selection list.")]
+    public: double[] computeSteadyStateValues(ArrayList oSelection)
 
-private double computeSteadyStateValue(TSelectionRecord record)
+    private double computeSteadyStateValue(TSelectionRecord record)
 
-[Help("Returns the value of the given steady state identifier.")]
-public double computeSteadyStateValue(string sId)
+    [Help("Returns the value of the given steady state identifier.")]
+    public: double computeSteadyStateValue(string sId)
 
-[Help("Returns the values selected with setSelectionList() for the current model time / timestep")]
-public double[] getSelectedValues()
+    [Help("Returns the values selected with setSelectionList() for the current model time / timestep")]
+    public: double[] getSelectedValues()
 
-[Help("Returns any warnings that occured during the loading of the SBML")]
-public string[] getWarnings()
+    [Help("Returns any warnings that occured during the loading of the SBML")]
+    public: string[] getWarnings()
 
-[Help("When turned on, this method will cause rates, event assignments, rules and such to be multiplied " +
-      "with the compartment volume, if species are defined as initialAmounts. By default this behavior is off.")
-]
-public static void ReMultiplyCompartments(bool bValue)
+    [Help("When turned on, this method will cause rates, event assignments, rules and such to be multiplied " +
+          "with the compartment volume, if species are defined as initialAmounts. By default this behavior is off.")
+    ]
+    public: static void ReMultiplyCompartments(bool bValue)
 
-[Help("This method turns on / off the computation and adherence to conservation laws."
-      + "By default roadRunner will discover conservation cycles and reduce the model accordingly.")]
-public static void ComputeAndAssignConservationLaws(bool bValue)
+    [Help("This method turns on / off the computation and adherence to conservation laws."
+          + "By default roadRunner will discover conservation cycles and reduce the model accordingly.")]
+    public: static void ComputeAndAssignConservationLaws(bool bValue)
 
-[Help("Returns the current generated source code")]
-public string getCSharpCode()
+    [Help("Returns the current generated source code")]
+    public: string getCSharpCode()
 
-[Help(
-    "Performs a steady state parameter scan with the given parameters returning all elments from the selectionList: (Format: symnbol, startValue, endValue, stepSize)"
-    )]
-public double[][] steadyStateParameterScan(string symbol, double startValue, double endValue, double stepSize)
+    [Help(
+        "Performs a steady state parameter scan with the given parameters returning all elments from the selectionList: (Format: symnbol, startValue, endValue, stepSize)"
+        )]
+    public: double[][] steadyStateParameterScan(string symbol, double startValue, double endValue, double stepSize)
 
-[Help("Returns the SBML with the current parameterset")]
-public string writeSBML()
+    [Help("Returns the SBML with the current parameterset")]
+    public: string writeSBML()
 
-// -----------------------------------------------------------------
+    // -----------------------------------------------------------------
 
-[Help("Get the number of local parameters for a given reaction")]
-public int getNumberOfLocalParameters(int reactionId)
+    [Help("Get the number of local parameters for a given reaction")]
+    public: int getNumberOfLocalParameters(int reactionId)
 
-[Help("Sets the value of a global parameter by its index")]
-public void setLocalParameterByIndex(int reactionId, int index, double value)
+    [Help("Sets the value of a global parameter by its index")]
+    public: void setLocalParameterByIndex(int reactionId, int index, double value)
 
-[Help("Returns the value of a global parameter by its index")]
-public double getLocalParameterByIndex(int reactionId, int index)
+    [Help("Returns the value of a global parameter by its index")]
+    public: double getLocalParameterByIndex(int reactionId, int index)
 
-[Help("Set the values for all global parameters in the model")]
-public void setLocalParameterValues(int reactionId, double[] values)
+    [Help("Set the values for all global parameters in the model")]
+    public: void setLocalParameterValues(int reactionId, double[] values)
 
-[Help("Get the values for all global parameters in the model")]
-public double[] getLocalParameterValues(int reactionId)
+    [Help("Get the values for all global parameters in the model")]
+    public: double[] getLocalParameterValues(int reactionId)
 
-[Help("Gets the list of parameter names")]
-public ArrayList getLocalParameterNames(int reactionId)
+    [Help("Gets the list of parameter names")]
+    public: ArrayList getLocalParameterNames(int reactionId)
 
-[Help("Returns a list of global parameter tuples: { {parameter Name, value},...")]
-public ArrayList getAllLocalParameterTupleList()
+    [Help("Returns a list of global parameter tuples: { {parameter Name, value},...")]
+    public: ArrayList getAllLocalParameterTupleList()
 
 
 
-// -----------------------------------------------------------------
+    // -----------------------------------------------------------------
 
-[Help("Get the number of reactions")]
-public int getNumberOfReactions()
+    [Help("Get the number of reactions")]
+    public: int getNumberOfReactions()
 
-[Help("Returns the rate of a reaction by its index")]
-public double getReactionRate(int index)
+    [Help("Returns the rate of a reaction by its index")]
+    public: double getReactionRate(int index)
 
-[Help("Returns the rate of changes of a species by its index")]
-public double getRateOfChange(int index)
+    [Help("Returns the rate of changes of a species by its index")]
+    public: double getRateOfChange(int index)
 
-[Help("Returns the names given to the rate of change of the floating species")]
-public ArrayList getRateOfChangeNames()
+    [Help("Returns the names given to the rate of change of the floating species")]
+    public: ArrayList getRateOfChangeNames()
 
-[Help("Returns the rates of changes given an array of new floating species concentrations")]
-public double[] getRatesOfChangeEx(double[] values)
+    [Help("Returns the rates of changes given an array of new floating species concentrations")]
+    public: double[] getRatesOfChangeEx(double[] values)
 
-[Help("Returns the rates of changes given an array of new floating species concentrations")]
-public double[] getReactionRatesEx(double[] values)
+    [Help("Returns the rates of changes given an array of new floating species concentrations")]
+    public: double[] getReactionRatesEx(double[] values)
 
-public string[] GetFloatingSpeciesNamesArray()
+    public: string[] GetFloatingSpeciesNamesArray()
 
-public string[] GetGlobalParameterNamesArray()
+    public: string[] GetGlobalParameterNamesArray()
 
 
-[Help("Get the number of compartments")]
-public int getNumberOfCompartments()
+    [Help("Get the number of compartments")]
+    public: int getNumberOfCompartments()
 
-[Help("Sets the value of a compartment by its index")]
-public void setCompartmentByIndex(int index, double value)
+    [Help("Sets the value of a compartment by its index")]
+    public: void setCompartmentByIndex(int index, double value)
 
-[Help("Returns the value of a compartment by its index")]
-public double getCompartmentByIndex(int index)
+    [Help("Returns the value of a compartment by its index")]
+    public: double getCompartmentByIndex(int index)
 
-[Help("Returns the value of a compartment by its index")]
-public void setCompartmentVolumes(double[] values)
+    [Help("Returns the value of a compartment by its index")]
+    public: void setCompartmentVolumes(double[] values)
 
-[Help("Gets the list of compartment names")]
-public ArrayList getCompartmentNames()
+    [Help("Gets the list of compartment names")]
+    public: ArrayList getCompartmentNames()
 
 
 
-// -----------------------------------------------------------------
+    // -----------------------------------------------------------------
 
-[Help("Get the number of boundary species")]
-public int getNumberOfBoundarySpecies()
+    [Help("Get the number of boundary species")]
+    public: int getNumberOfBoundarySpecies()
 
-[Help("Sets the value of a boundary species by its index")]
-public void setBoundarySpeciesByIndex(int index, double value)
+    [Help("Sets the value of a boundary species by its index")]
+    public: void setBoundarySpeciesByIndex(int index, double value)
 
-[Help("Returns the value of a boundary species by its index")]
-public double getBoundarySpeciesByIndex(int index)
+    [Help("Returns the value of a boundary species by its index")]
+    public: double getBoundarySpeciesByIndex(int index)
 
-[Help("Returns an array of boundary species concentrations")]
-public double[] getBoundarySpeciesConcentrations()
+    [Help("Returns an array of boundary species concentrations")]
+    public: double[] getBoundarySpeciesConcentrations()
 
-[Help("Set the concentrations for all boundary species in the model")]
-public void setBoundarySpeciesConcentrations(double[] values)
+    [Help("Set the concentrations for all boundary species in the model")]
+    public: void setBoundarySpeciesConcentrations(double[] values)
 
-[Help("Gets the list of boundary species names")]
-public ArrayList getBoundarySpeciesNames()
+    [Help("Gets the list of boundary species names")]
+    public: ArrayList getBoundarySpeciesNames()
 
-[Help("Gets the list of boundary species amount names")]
-public ArrayList getBoundarySpeciesAmountNames()
+    [Help("Gets the list of boundary species amount names")]
+    public: ArrayList getBoundarySpeciesAmountNames()
 
 
 
-// -----------------------------------------------------------------
+    // -----------------------------------------------------------------
 
-[Help("Get the number of floating species")]
-public int getNumberOfFloatingSpecies()
+    [Help("Get the number of floating species")]
+    public: int getNumberOfFloatingSpecies()
 
-[Help("Sets the value of a floating species by its index")]
-public void setFloatingSpeciesByIndex(int index, double value)
+    [Help("Sets the value of a floating species by its index")]
+    public: void setFloatingSpeciesByIndex(int index, double value)
 
-[Help("Returns the value of a floating species by its index")]
-public double getFloatingSpeciesByIndex(int index)
+    [Help("Returns the value of a floating species by its index")]
+    public: double getFloatingSpeciesByIndex(int index)
 
-[Help("Returns an array of floating species concentrations")]
-public double[] getFloatingSpeciesConcentrations()
+    [Help("Returns an array of floating species concentrations")]
+    public: double[] getFloatingSpeciesConcentrations()
 
-[Help("returns an array of floating species initial conditions")]
-public double[] getFloatingSpeciesInitialConcentrations()
+    [Help("returns an array of floating species initial conditions")]
+    public: double[] getFloatingSpeciesInitialConcentrations()
 
-// This is a level 1 Method 1
-[Help("Set the concentrations for all floating species in the model")]
-public void setFloatingSpeciesConcentrations(double[] values)
+    // This is a level 1 Method 1
+    [Help("Set the concentrations for all floating species in the model")]
+    public: void setFloatingSpeciesConcentrations(double[] values)
 
-[Help("Sets the value of a floating species by its index")]
-public void setFloatingSpeciesInitialConcentrationByIndex(int index, double value)
+    [Help("Sets the value of a floating species by its index")]
+    public: void setFloatingSpeciesInitialConcentrationByIndex(int index, double value)
 
-[Help("Sets the initial conditions for all floating species in the model")]
-public void setFloatingSpeciesInitialConcentrations(double[] values)
+    [Help("Sets the initial conditions for all floating species in the model")]
+    public: void setFloatingSpeciesInitialConcentrations(double[] values)
 
-// This is a Level 1 method !
-[Help("Returns a list of floating species names")]
-public ArrayList getFloatingSpeciesNames()
+    // This is a Level 1 method !
+    [Help("Returns a list of floating species names")]
+    public: ArrayList getFloatingSpeciesNames()
 
-[Help("Returns a list of floating species initial condition names")]
-public ArrayList getFloatingSpeciesInitialConditionNames()
+    [Help("Returns a list of floating species initial condition names")]
+    public: ArrayList getFloatingSpeciesInitialConditionNames()
 
-[Help("Returns the list of floating species amount names")]
-public ArrayList getFloatingSpeciesAmountNames()
+    [Help("Returns the list of floating species amount names")]
+    public: ArrayList getFloatingSpeciesAmountNames()
 
 
 
-// -----------------------------------------------------------------
+    // -----------------------------------------------------------------
 
-[Help("Get the number of global parameters")]
-public int getNumberOfGlobalParameters()
+    [Help("Get the number of global parameters")]
+    public: int getNumberOfGlobalParameters()
 
-[Help("Sets the value of a global parameter by its index")]
-public void setGlobalParameterByIndex(int index, double value)
+    [Help("Sets the value of a global parameter by its index")]
+    public: void setGlobalParameterByIndex(int index, double value)
 
-[Help("Returns the value of a global parameter by its index")]
-public double getGlobalParameterByIndex(int index)
+    [Help("Returns the value of a global parameter by its index")]
+    public: double getGlobalParameterByIndex(int index)
 
-[Help("Set the values for all global parameters in the model")]
-public void setGlobalParameterValues(double[] values)
+    [Help("Set the values for all global parameters in the model")]
+    public: void setGlobalParameterValues(double[] values)
 
-[Help("Get the values for all global parameters in the model")]
-public double[] getGlobalParameterValues()
+    [Help("Get the values for all global parameters in the model")]
+    public: double[] getGlobalParameterValues()
 
-[Help("Gets the list of parameter names")]
-public ArrayList getGlobalParameterNames()
+    [Help("Gets the list of parameter names")]
+    public: ArrayList getGlobalParameterNames()
 
-[Help("Returns a list of global parameter tuples: { {parameter Name, value},...")]
-public ArrayList getAllGlobalParameterTupleList()
+    [Help("Returns a list of global parameter tuples: { {parameter Name, value},...")]
+    public: ArrayList getAllGlobalParameterTupleList()
 
-private ArrayList getParameterNames()
+    private ArrayList getParameterNames()
 
-[Help("Updates the model based on all recent changes")]
-public void EvalModel()
+    [Help("Updates the model based on all recent changes")]
+    public: void EvalModel()
 
 
 
-[Help("Returns the name of module")]
-public string getName()
+    [Help("Returns the name of module")]
+    public: string getName()
 
-[Help("Returns the version number of the module")]
-public static string getVersion()
+    [Help("Returns the version number of the module")]
+    public: static string getVersion()
 
-[Help("Returns the name of the module author")]
-public static string getAuthor()
+    [Help("Returns the name of the module author")]
+    public: static string getAuthor()
 
-[Help("Returns a description of the module")]
-public static string getDescription()
+    [Help("Returns a description of the module")]
+    public: static string getDescription()
 
-[Help("Returns the display name of the module")]
-public static string getDisplayName()
+    [Help("Returns the display name of the module")]
+    public: static string getDisplayName()
 
-[Help("Returns the copyright string for the module")]
-public static string getCopyright()
+    [Help("Returns the copyright string for the module")]
+    public: static string getCopyright()
 
-[Help("Returns the URL string associated with the module (if any)")]
-public static string getURL()
-public struct TSelectionRecord
+    [Help("Returns the URL string associated with the module (if any)")]
+    public: static string getURL()
+    public: struct TSelectionRecord
 
-#if DEBUG
-public static void TestChange()
-#endif
+    #if DEBUG
+    public: static void TestChange()
+    #endif
 }; //class RoadRunner
 
 
