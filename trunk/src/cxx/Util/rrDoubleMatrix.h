@@ -12,12 +12,12 @@ class RR_DECLSPEC rrDoubleMatrix
     	double* data_;
 
     public:
-    	rrDoubleMatrix(unsigned rows, unsigned cols);
+    	rrDoubleMatrix(unsigned rows = 1, unsigned cols = 1);
     	double& operator() (unsigned row, unsigned col);
     	double  operator() (unsigned row, unsigned col) const;
 
     	~rrDoubleMatrix();                              // Destructor
-    	rrDoubleMatrix(rrDoubleMatrix const& m);               // Copy constructor
+//    	rrDoubleMatrix(rrDoubleMatrix const& m);               // Copy constructor
     	rrDoubleMatrix& operator = (rrDoubleMatrix const& m);   // Assignment operator
 };
 
