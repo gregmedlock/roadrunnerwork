@@ -8,8 +8,8 @@ using std::vector;
 class RR_DECLSPEC rrDoubleMatrix
 {
     private:
-    	unsigned rows_, cols_;
-    	double* data_;
+    	unsigned mRowCount, mColCount;
+    	double* mMatrix;
 
     public:
     	rrDoubleMatrix(unsigned rows = 1, unsigned cols = 1);
@@ -22,39 +22,39 @@ class RR_DECLSPEC rrDoubleMatrix
 };
 
 rrDoubleMatrix::rrDoubleMatrix(unsigned rows, unsigned cols)
-: rows_ (rows)
-, cols_ (cols)
-//data_ <--initialized below (after the 'if/throw' statement)
+: mRowCount (rows)
+, mColCount (cols)
+//mMatrix <--initialized below (after the 'if/throw' statement)
 {
 if (rows == 0 || cols == 0)
 {
  //throw BadIndex("Matrix constructor has 0 size");
 }
-data_ = new double[rows * cols];
+mMatrix = new double[rows * cols];
 }
 
 
 rrDoubleMatrix::~rrDoubleMatrix()
 {
-delete[] data_;
+delete[] mMatrix;
 }
 
 double& rrDoubleMatrix::operator() (unsigned row, unsigned col)
 {
-if (row >= rows_ || col >= cols_)
+if (row >= mRowCount || col >= mColCount)
 {
 // throw BadIndex("Matrix subscript out of bounds");
 }
-return data_[cols_*row + col];
+return mMatrix[mColCount*row + col];
 }
 
 double rrDoubleMatrix::operator() (unsigned row, unsigned col) const
 {
-if (row >= rows_ || col >= cols_)
+if (row >= mRowCount || col >= mColCount)
 {
 //    throw BadIndex("const Matrix subscript out of bounds");
 }
-return data_[cols_*row + col];
+return mMatrix[mColCount*row + col];
 }
 
 #endif

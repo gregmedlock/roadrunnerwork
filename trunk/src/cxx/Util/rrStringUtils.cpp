@@ -551,68 +551,6 @@ int CompareNoCase(const string& str1, const string& str2)
 	return res;
 }
 
-string GetFormattedParStr(const string& varS, const double var, const int width)
-{
-	char sBuf[512];
-	string fStr = "%" + ToString(width) + "s = %-"  + "f";
-	sprintf(sBuf, fStr.c_str(), varS.c_str(), var);
-	return string(sBuf);
-}
-
-string GetFormattedParStr(const string& varS, const unsigned int var, const int width)
-{
-	char sBuf[512];
-	//sprintf(sBuf, "%30s = %-30d\n", varS.c_str(), var);
-	string fStr = "%" + ToString(width) + "s = %-" + "d";
-	sprintf(sBuf, fStr.c_str(), varS.c_str(), var);
-	return string(sBuf);
-}
-
-string GetFormattedParStr(const string& varS, const int var, const int width)
-{
-	char sBuf[512];
-	//sprintf(sBuf, "%30s = %-30d\n", varS.c_str(), var);
-	string fStr = "%" + ToString(width) + "s = %-"  + "d";
-	sprintf(sBuf, fStr.c_str(), varS.c_str(), var);
-	return string(sBuf);
-}
-
-string GetFormattedParStr(const string& varS, const bool val, const int width)
-{
-	char sBuf[512];
-	string valStr = val ? "true" : "false";
-	//sprintf(sBuf, "%30s = %-30s\n", varS.c_str(), valStr.c_str());
-	string fStr = "%" + ToString(width) + "s = %-"  + "s";
-	sprintf(sBuf, fStr.c_str(), varS.c_str(), valStr.c_str());
-	return string(sBuf);
-}
-
-string GetFormattedParStr(const string& varS, const vector<int>& vec, const int width)
-{
-	char sBuf[64];
-	string rStr = "";
-
-	for(unsigned int i = 0; i < vec.size(); i++)
-	{
-		sprintf(sBuf, "%d ", vec[i]);
-		rStr += string(sBuf);
-	}
-
-	//sprintf(sBuf, "%30s = %-30s\n", varS.c_str(), rStr.c_str());
-	string fStr = "%" + ToString(width) + "s = %-"  + "s";
-	sprintf(sBuf, fStr.c_str(), varS.c_str(), rStr.c_str());
-
-	return string(sBuf);
-}
-
-string GetFormattedParStr(const string& varS, const string& var, const int width)
-{
-	char sBuf[1024];
-	//sprintf(sBuf, "%30s = %-30s\n", varS.c_str(), var.c_str());
-	string fStr = "%" + ToString(width) + "s = %-"  + "s";
-	sprintf(sBuf, fStr.c_str(), varS.c_str(), var.c_str());
-	return string(sBuf);
-}
 
 //double ConvertstringToDouble(const string& dbl);
 //double ConvertstringToDouble(const string& s)

@@ -1,7 +1,7 @@
-#ifdef MTK_PCH
-#include "mtk_pch.h"
+#ifdef USE_PCH
+#include "rrPCH.h"
 #endif
 #pragma hdrstop
-#include "rrSymbolList.h"
+#include "rrException.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
