@@ -1,5 +1,3 @@
-//---------------------------------------------------------------------------
-
 #ifndef rrModelStateH
 #define rrModelStateH
 //---------------------------------------------------------------------------
@@ -13,155 +11,36 @@ namespace rr
 class RR_DECLSPEC ModelState
 {
     private:
-        vector<double>                      _BoundarySpeciesConcentrations;
-        vector<double>                      _CompartmentVolumes;
-        vector<double>                      _ConservedTotals;
-        vector<double>                      _DyDt;
-        vector<bool>                      	_EventStatusArray;
-        vector<double>                      _EventTests;
-        vector<double>                      _FloatingSpeciesConcentrations;
-        vector<double>                      _GlobalParameters;
-        vector<bool>                      	_PreviousEventStatusArray;
-        vector<double>                      _RateRules;
-        vector<double>                      _Rates;
-        vector<double>                      _ModifiableSpeciesReferences;
-        double 								_Time;
-        void 								InitializeFromModel(IModel& model);
+        vector<double>                  _BoundarySpeciesConcentrations;
+        vector<double>                  _CompartmentVolumes;
+        vector<double>                  _ConservedTotals;
+        vector<double>                  _DyDt;
+        vector<bool>                    _EventStatusArray;
+        vector<double>                  _EventTests;
+        vector<double>                  _FloatingSpeciesConcentrations;
+        vector<double>                  _GlobalParameters;
+        vector<bool>                    _PreviousEventStatusArray;
+        vector<double>                  _RateRules;
+        vector<double>                  _Rates;
+        vector<double>                  _ModifiableSpeciesReferences;
+        double 							_Time;
+        void 							InitializeFromModel(IModel& model);
 
     public:
-        ModelState(IModel& model);
-
-//
-//        public bool[] EventStatusArray
-//        {
-//            get
-//            {
-//                return _EventStatusArray;
-//            }
-//            set
-//            {
-//                _EventStatusArray = value;
-//            }
-//        }
-//
-//        public double[] ModifiableSpeciesReferences
-//        {
-//            get { return _ModifiableSpeciesReferences; }
-//            set { _ModifiableSpeciesReferences = value; }
-//        }
-//
-//        public double[] FloatingSpeciesConcentrations
-//        {
-//            get { return _FloatingSpeciesConcentrations; }
-//            set { _FloatingSpeciesConcentrations = value; }
-//        }
-//
-//        public double[] BoundarySpeciesConcentrations
-//        {
-//            get { return _BoundarySpeciesConcentrations; }
-//            set { _BoundarySpeciesConcentrations = value; }
-//        }
-//
-//        public double[] CompartmentVolumes
-//        {
-//            get { return _CompartmentVolumes; }
-//            set { _CompartmentVolumes = value; }
-//        }
-//
-//        public double[] GlobalParameters
-//        {
-//            get { return _GlobalParameters; }
-//            set { _GlobalParameters = value; }
-//        }
-//
-//        public double[] ConservedTotals
-//        {
-//            get { return _ConservedTotals; }
-//            set { _ConservedTotals = value; }
-//        }
-//
-//        public double[] DyDt
-//        {
-//            get { return _DyDt; }
-//            set { _DyDt = value; }
-//        }
-//
-//        public double[] Rates
-//        {
-//            get { return _Rates; }
-//            set { _Rates = value; }
-//        }
-//
-//        public double[] RateRules
-//        {
-//            get { return _RateRules; }
-//            set { _RateRules = value; }
-//        }
-//
-//        public double Time
-//        {
-//            get { return _Time; }
-//            set { _Time = value; }
-//        }
-//
-//        public void WriteTo(string fileName)
-//        {
-//            var stream = new FileStream(fileName, FileMode.Create);
-//            WriteTo(stream);
-//        }
-//
-//        public static ModelState ReadFrom(Stream stream)
-//        {
-//            var formatter = new BinaryFormatter();
-//            var state = (ModelState) formatter.Deserialize(stream);
-//            stream.Close();
-//            return state;
-//        }
-//
-//        public static ModelState ReadFrom(string fileName)
-//        {
-//            var stream = new FileStream(fileName, FileMode.Open);
-//            return ReadFrom(stream);
-//        }
-//
-//        public void WriteTo(Stream stream)
-//        {
-//            var formatter = new BinaryFormatter();
-//            formatter.Serialize(stream, this);
-//            stream.Flush();
-//            stream.Close();
-//        }
-//
-//        public void AssignToModel(IModel model)
-//        {
-//            model.y = _FloatingSpeciesConcentrations;
-//            model.bc = _BoundarySpeciesConcentrations;
-//            model.c = _CompartmentVolumes;
-//            model.gp = _GlobalParameters;
-//            model.ct = _ConservedTotals;
-//
-//            model.dydt = _DyDt;
-//            model.rates = _Rates;
-//            model.rateRules = _RateRules;
-//
-//            model.eventTests = _EventTests;
-//            model.eventStatusArray = _EventStatusArray;
-//            model.previousEventStatusArray = _PreviousEventStatusArray;
-//            model.time = _Time;
-//            model.convertToAmounts();
-//
-//            model.sr = _ModifiableSpeciesReferences;
-//        }
-//
-        vector<double> 			GetCopy(const vector<double>& oVector);
-        vector<bool> 			GetCopy(const vector<bool>& oVector);
+        								ModelState(IModel& model);
+        void 							WriteTo(string fileName);
+        static ModelState 				ReadFrom(istream stream);
+        static ModelState 				ReadFrom(string fileName);
+        void 							WriteTo(ostream stream);
+        void 							AssignToModel(IModel& model);
+        vector<double> 					GetCopy(const vector<double>& oVector);
+        vector<bool> 					GetCopy(const vector<bool>& oVector);
 };
 
 }
 #endif
 
-
-
+//////////////////////////////////////////////////////////////////
 //c#
 //using System;
 //using System.IO;

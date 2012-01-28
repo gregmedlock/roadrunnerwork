@@ -20,7 +20,7 @@ namespace rr
 class RR_DECLSPEC IModel	//Abstract class for Models
 {
     private:
-    protected:
+    public://==== this makes the following attributes public.. for now. No great design..
         // Property signatures:
         vector<double> 					        y;// { get; set; }
         list<string> 					        Warnings;// { get; set; }

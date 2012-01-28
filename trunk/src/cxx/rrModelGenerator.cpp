@@ -68,7 +68,7 @@ namespace rr
 //            return reactionList.size();
 //        }
 //
-//        private: string convertSpeciesToY(string speciesName)
+//        private: string convertSpeciesToY(const string& speciesName)
 //        {
 //            int index;
 //            if (floatingSpeciesConcentrationList.find(speciesName, index))
@@ -78,7 +78,7 @@ namespace rr
 //            throw new SBWApplicationException("Internal Error: Unable to locate species: " + speciesName);
 //        }
 //
-//        private: string convertSpeciesToBc(string speciesName)
+//        private: string convertSpeciesToBc(const string& speciesName)
 //        {
 //            int index;
 //            if (boundarySpeciesList.find(speciesName, index))
@@ -86,7 +86,7 @@ namespace rr
 ////            throw new SBWApplicationException("Internal Error: Unable to locate species: " + speciesName);
 //        }
 //
-//        private: string convertCompartmentToC(string compartmentName)
+//        private: string convertCompartmentToC(const string& compartmentName)
 //        {
 //            int index;
 //            if (compartmentList.find(compartmentName, index))
@@ -94,7 +94,7 @@ namespace rr
 ////            throw new SBWApplicationException("Internal Error: Unable to locate compartment: " + compartmentName);
 //        }
 //
-//        private: string convertSymbolToGP(string parameterName)
+//        private: string convertSymbolToGP(const string& parameterName)
 //        {
 //            int index;
 //            if (globalParameterList.find(parameterName, index))
@@ -104,7 +104,7 @@ namespace rr
 ////            throw new SBWApplicationException("Internal Error: Unable to locate parameter: " + parameterName);
 //        }
 //
-//        private: string convertSymbolToC(string compartmentName)
+//        private: string convertSymbolToC(const string& compartmentName)
 //        {
 //            int index;
 //            if (compartmentList.find(compartmentName, index))
@@ -175,7 +175,7 @@ namespace rr
 //            return tmp;
 //        }
 //
-//        private: string convertUserFunctionExpression(string equation)
+//        private: string convertUserFunctionExpression(const string& equation)
 //        {
 ////            var s = new Scanner.Scanner();
 ////            Stream ss = new MemoryStream(Encoding.Default.GetBytes(equation));
@@ -448,7 +448,7 @@ namespace rr
 //            return substituteTerms(reactionName, equation, false);
 //        }
 //
-////        private: void SubstituteEquation(string reactionName, LibRoadRunner.Scanner.Scanner s, StringBuilder sb)
+////        private: void SubstituteEquation(const string& reactionName, LibRoadRunner.Scanner.Scanner s, (StringBuilder& sb)
 ////        {
 ////            switch (s.tokenString)
 ////            {
@@ -642,7 +642,7 @@ namespace rr
 ////                    break;
 ////            }
 ////        }
-////        private: void SubstituteWords(string reactionName, bool bFixAmounts, LibRoadRunner.Scanner.Scanner s, StringBuilder sb)
+////        private: void SubstituteWords(const string& reactionName, bool bFixAmounts, LibRoadRunner.Scanner.Scanner s, (StringBuilder& sb)
 ////        {
 ////            // Global parameters have priority
 ////            int index;
@@ -725,7 +725,7 @@ namespace rr
 ////                SubstituteEquation(reactionName, s, sb);
 ////            }
 ////        }
-////        private: void SubstituteToken(string reactionName, bool bFixAmounts, Scanner.Scanner s, StringBuilder sb)
+////        private: void SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner.Scanner s, (StringBuilder& sb)
 ////        {
 ////            switch (s.token)
 ////            {
@@ -839,7 +839,7 @@ namespace rr
 ////            return ast;
 ////
 ////        }
-//        private: static string CleanEquation(string equation)
+//        private: static string CleanEquation(const string& equation)
 //        {
 //            if (equation.size() < 1)
 //            {
@@ -869,7 +869,7 @@ namespace rr
 ////            return libsbml.formulaToString(ast);
 //        }
 //
-//        private: string substituteTerms(string reactionName, string inputEquation, bool bFixAmounts)
+//        private: string substituteTerms(const string& reactionName, string inputEquation, bool bFixAmounts)
 //        {
 //            string equation = CleanEquation(inputEquation);
 //            if (equation.size() < 1)
@@ -923,7 +923,7 @@ namespace rr
 //            return L0;
 //        }
 //
-//        private: void WriteOutSymbolTables(StringBuilder sb)
+//        private: void WriteOutSymbolTables(StringBuilder& sb)
 //        {
 ////            sb.Append("\tvoid loadSymbolTables() {" + NL());
 ////
@@ -959,7 +959,7 @@ namespace rr
 ////                for (int j = 0; j < oFloatingSpecies.size(); j++)
 ////                {
 ////                    oTempList = (list<string>)oFloatingSpecies[j];
-////                    if (reOrderedList[i] != (string)oTempList[0]) continue;
+////                    if (reOrderedList[i] != (const string&)oTempList[0]) continue;
 ////
 ////                    string compartmentName = NOM.getNthFloatingSpeciesCompartmentName(j);
 ////                    var bIsConcentration = (bool)oTempList[2];
@@ -1063,7 +1063,7 @@ namespace rr
 ////            }
 //        }
 //
-//        private: void WriteComputeAllRatesOfChange(StringBuilder sb, int numIndependentSpecies, int numDependentSpecies,
+//        private: void WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies,
 //                                                  rrDoubleMatrix L0)
 //        {
 ////            // ------------------------------------------------------------------------------
@@ -1120,7 +1120,7 @@ namespace rr
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteComputeConservedTotals(StringBuilder sb, int numFloatingSpecies, int numDependentSpecies)
+//        private: void WriteComputeConservedTotals(StringBuilder& sb, int numFloatingSpecies, int numDependentSpecies)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\t// Uses the equation: C = Sd - L0*Si" + NL());
@@ -1171,7 +1171,7 @@ namespace rr
 ////            sb.Append("	}" + NL() + NL());
 //        }
 //
-//        private: void WriteUpdateDependentSpecies(StringBuilder sb, int numIndependentSpecies, int numDependentSpecies,
+//        private: void WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies,
 //                                                 rrDoubleMatrix L0)
 //        {
 ////            // ------------------------------------------------------------------------------
@@ -1246,7 +1246,7 @@ namespace rr
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteUserDefinedFunctions(StringBuilder sb)
+//        private: void WriteUserDefinedFunctions(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            for (int i = 0; i < NOM.getNumFunctionDefinitions(); i++)
@@ -1287,7 +1287,7 @@ namespace rr
 ////            }
 //        }
 //
-//        private: void WriteResetEvents(StringBuilder sb, int numEvents)
+//        private: void WriteResetEvents(StringBuilder& sb, int numEvents)
 //        {
 ////            sb.AppendFormat("{0}\tpublic: void resetEvents() {{{0}", NL());
 ////            for (int i = 0; i < numEvents; i++)
@@ -1298,7 +1298,7 @@ namespace rr
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteSetConcentration(StringBuilder sb)
+//        private: void WriteSetConcentration(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.AppendFormat("\tpublic: void setConcentration(int index, double value) {{{0}", NL());
@@ -1318,7 +1318,7 @@ namespace rr
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteGetConcentration(StringBuilder sb)
+//        private: void WriteGetConcentration(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.AppendFormat("\tpublic: double getConcentration(int index) {{{0}", NL());
@@ -1326,7 +1326,7 @@ namespace rr
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteConvertToAmounts(StringBuilder sb)
+//        private: void WriteConvertToAmounts(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.AppendFormat("\tpublic: void convertToAmounts() {{{0}", NL());
@@ -1340,7 +1340,7 @@ namespace rr
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteConvertToConcentrations(StringBuilder sb)
+//        private: void WriteConvertToConcentrations(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: void convertToConcentrations() {" + NL());
@@ -1352,7 +1352,7 @@ namespace rr
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteProperties(StringBuilder sb)
+//        private: void WriteProperties(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: double[] y {" + NL());
@@ -1487,7 +1487,7 @@ namespace rr
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteAccessors(StringBuilder sb)
+//        private: void WriteAccessors(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: int getNumIndependentVariables {" + NL());
@@ -1548,7 +1548,7 @@ namespace rr
 ////
 //        }
 //
-//        private: void WriteOutVariables(StringBuilder sb)
+//        private: void WriteOutVariables(StringBuilder& sb)
 //        {
 ////            sb.Append("\tprivate: List<string> _Warnings = new List<string>();" + NL());
 ////            sb.Append("\tprivate: double[] _gp = new double[" + (_NumGlobalParameters + _TotalLocalParmeters) +
@@ -1656,7 +1656,7 @@ namespace rr
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteClassHeader(StringBuilder sb)
+//        private: void WriteClassHeader(StringBuilder& sb)
 //        {
 ////            sb.Append("using System;" + NL());
 ////            sb.Append("using System.IO;" + NL());
@@ -1674,7 +1674,7 @@ namespace rr
 ////            sb.Append(NL());
 //        }
 //
-//        private: string FindSymbol(string varName)
+//        private: string FindSymbol(const string& varName)
 //        {
 ////            int index = 0;
 ////            if (floatingSpeciesConcentrationList.find(varName, out index))
@@ -1700,7 +1700,7 @@ namespace rr
 ////                throw new SBWApplicationException(string.Format("Unable to locate lefthand side symbol in assignment[{0}]", varName));
 //        }
 //
-//        private: void WriteTestConstraints(StringBuilder sb)
+//        private: void WriteTestConstraints(StringBuilder& sb)
 //        {
 ////            sb.Append("\tpublic: void testConstraints()" + NL());
 ////            sb.Append("\t{" + NL());
@@ -1734,14 +1734,14 @@ namespace rr
 ////            return false;
 ////
 ////        }
-//        private: static bool ExpressionContainsSymbol(string expression, string symbol)
+//        private: static bool ExpressionContainsSymbol(const string& expression, string symbol)
 //        {
 ////            if (string.IsNullOrEmpty(expression) || string.IsNullOrEmpty(symbol)) return false;
 ////            var ast = libsbml.parseFormula(expression);
 ////            return ExpressionContainsSymbol(ast, symbol);
 //        }
 //
-//        private: void WriteEvalInitialAssignments(StringBuilder sb, int numReactions)
+//        private: void WriteEvalInitialAssignments(StringBuilder& sb, int numReactions)
 //        {
 ////            sb.Append("\tpublic: void evalInitialAssignments()" + NL());
 ////            sb.Append("\t{" + NL());
@@ -1808,7 +1808,7 @@ namespace rr
 //        }
 //
 //
-//        private: int WriteComputeRules(StringBuilder sb, int numReactions)
+//        private: int WriteComputeRules(StringBuilder& sb, int numReactions)
 //        {
 ////            int numOfRules = NOM.getNumRules();
 ////            _oMapRateRule = new Hashtable();
@@ -1966,7 +1966,7 @@ namespace rr
 ////            return numOfRules;
 //        }
 //
-//        private: void WriteComputeReactionRates(StringBuilder sb, int numReactions)
+//        private: void WriteComputeReactionRates(StringBuilder& sb, int numReactions)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\t// Compute the reaction rates" + NL());
@@ -2003,7 +2003,7 @@ namespace rr
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteEvalEvents(StringBuilder sb, int numEvents, int numFloatingSpecies)
+//        private: void WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies)
 //        {
 ////            sb.Append("\t// Event handling function" + NL());
 ////            sb.Append("\tpublic: void evalEvents (double timeIn, double[] oAmounts)" + NL());
@@ -2046,7 +2046,7 @@ namespace rr
 //        }
 //
 //
-//        private: void WriteEvalModel(StringBuilder sb, int numReactions, int numIndependentSpecies,
+//        private: void WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies,
 //                                    int numFloatingSpecies, int numOfRules)
 //        {
 ////            sb.Append("\t// Model Function" + NL());
@@ -2238,7 +2238,7 @@ namespace rr
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: Symbol GetSpecies(string id)
+//        private: Symbol GetSpecies(const string& id)
 //        {
 ////            int index;
 ////            if (floatingSpeciesConcentrationList.find(id, out index))
@@ -2247,7 +2247,7 @@ namespace rr
 ////                return boundarySpeciesList[index];
 ////            return null;
 //        }
-//        private: void WriteEventAssignments(StringBuilder sb, int numReactions, int numEvents)
+//        private: void WriteEventAssignments(StringBuilder& sb, int numReactions, int numEvents)
 //        {
 ////            var delays = new list<string>();
 ////            var eventType = new List<bool>();
@@ -2356,7 +2356,7 @@ namespace rr
 ////            return value.ToString(STR_DoubleFormat, oInfo);
 //        }
 //
-//        private: void WriteSetParameterValues(StringBuilder sb, int numReactions)
+//        private: void WriteSetParameterValues(StringBuilder& sb, int numReactions)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: void setParameterValues ()" + NL());
@@ -2381,7 +2381,7 @@ namespace rr
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteSetCompartmentVolumes(StringBuilder sb)
+//        private: void WriteSetCompartmentVolumes(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: void setCompartmentVolumes ()" + NL());
@@ -2405,7 +2405,7 @@ namespace rr
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteSetBoundaryConditions(StringBuilder sb)
+//        private: void WriteSetBoundaryConditions(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: void setBoundaryConditions ()" + NL());
@@ -2422,7 +2422,7 @@ namespace rr
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteSetInitialConditions(StringBuilder sb, int numFloatingSpecies)
+//        private: void WriteSetInitialConditions(StringBuilder& sb, int numFloatingSpecies)
 //        {
 ////            sb.Append("\tpublic: void initializeInitialConditions ()" + NL());
 ////            sb.Append("\t{" + NL());
