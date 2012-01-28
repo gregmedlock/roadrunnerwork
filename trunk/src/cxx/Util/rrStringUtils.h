@@ -18,7 +18,6 @@ int				RR_DECLSPEC StrToInt(const string& nt);
 string			RR_DECLSPEC DblToStr(const double& nt);
 double			RR_DECLSPEC StrToDbl(const string& nt);
 
-
 vector<string>  RR_DECLSPEC SplitString(const string &text, const string &separators);
 vector<string> 	RR_DECLSPEC SplitString(const string& input, const char& delimiters);
 

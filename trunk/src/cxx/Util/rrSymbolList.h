@@ -70,7 +70,7 @@ namespace rr
         bool find(string name, int index)
         {
             index = -1;
-            for (int i = 0; i < size(); i++)
+            for (unsigned int i = 0; i < size(); i++)
             {
             	Symbol sym = at(i);
                 if (name == sym.name)
@@ -90,7 +90,7 @@ namespace rr
         bool find(string keyName, string name, int index)
         {
             index = -1;
-            for (int i = 0; i < size(); i++)
+            for(unsigned int i = 0; i < size(); i++)
             {
                 Symbol sym = at(i);
                 if ((sym.name == name) && (sym.keyName == keyName))
