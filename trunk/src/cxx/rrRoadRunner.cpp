@@ -9,44 +9,25 @@
 namespace rr
 {
 
-///// <summary>
-///// Summary description for RoadRunner.
-///// </summary>
-//    public partial class RoadRunner
-//    {
-//        #region TSelectionType enum
-//
-//        public enum TSelectionType
-//        {
-//            clTime,
-//            clBoundarySpecies,
-//            clFloatingSpecies,
-//            clFlux,
-//            clRateOfChange,
-//            clVolume,
-//            clParameter,
-//            clFloatingAmount,
-//            clBoundaryAmount,
-//            clElasticity,
-//            clUnscaledElasticity,
-//            clEigenValue,
-//            clUnknown,
-//            clStoichiometry
-//        } ;
-//
-//        #endregion
-//
-//        private const double DiffStepSize = 0.05;
-//        private const string emptyModelStr = "A model needs to be loaded before one can use this method";
-//        private const double STEADYSTATE_THRESHOLD = 1E-2;
-//
-//        public static bool _bComputeAndAssignConservationLaws = true;
-//        public static bool _bConservedTotalChanged;
-//        public static bool _ReMultiplyCompartments;
-//        public double[][] _L;
-//        public double[][] _L0;
-//        public double[][] _N;
-//        public double[][] _Nr;
+//Initialize statics..
+bool RoadRunner::_bComputeAndAssignConservationLaws = true;
+bool RoadRunner::_bConservedTotalChanged 			= false;
+bool RoadRunner::_ReMultiplyCompartments 			= false;
+
+RoadRunner::RoadRunner()
+:
+DiffStepSize(0.05),
+emptyModelStr("A model needs to be loaded before one can use this method"),
+STEADYSTATE_THRESHOLD(1.E-2),
+_L(0,0),
+_L0(0,0),
+_N(0,0),
+_Nr(0,0)
+{
+
+}
+
+
 //        //private ArrayList _oSteadyStateSelection;
 //        private TSelectionRecord[] _oSteadyStateSelection;
 //        private string _sModelCode;
