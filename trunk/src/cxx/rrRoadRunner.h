@@ -17,532 +17,221 @@ namespace rr
 //Forward declarations
 struct TSelectionRecord;
 
-
 // <summary>
 // Summary description for RoadRunner.
 // </summary>
 class RR_DECLSPEC RoadRunner
 {
-    enum TSelectionType
-    {
-        clTime,
-        clBoundarySpecies,
-        clFloatingSpecies,
-        clFlux,
-        clRateOfChange,
-        clVolume,
-        clParameter,
-        clFloatingAmount,
-        clBoundaryAmount,
-        clElasticity,
-        clUnscaledElasticity,
-        clEigenValue,
-        clUnknown,
-        clStoichiometry
-    };
-
 	private:
-    	const double DiffStepSize;// = 0.05;
-		const string emptyModelStr;// = "A model needs to be loaded before one can use this method";
-		const double STEADYSTATE_THRESHOLD;// = 1E-2;
+    	const double 					DiffStepSize;// = 0.05;
+		const string 					emptyModelStr;// = "A model needs to be loaded before one can use this method";
+		const double 					STEADYSTATE_THRESHOLD;// = 1E-2;
+     	vector<TSelectionRecord> 		_oSteadyStateSelection;
+		string 							_sModelCode;
+		CvodeInterface 					cvode;	//Declared in Solvers/CvodeInterface.cs...
+		//ISteadyStateSolver 		steadyStateSolver;
+        vector<TSelectionRecord> 		selectionList;
+        bool 							IsNleqAvailable();
+        string 							_NL();
+        void 							emptyModel();
+        double 							GetValueForRecord(TSelectionRecord record);
+        double 							GetNthSelectedOutput(int index, double dCurrentTime);
+		// void 					AddNthOutputToResult(double[,] results, int nRow, double dCurrentTime);
+        vector<double> 					BuildModelEvalArgument();
+        double 							getVariableValue(TVariableType variableType, int variableIndex);
+        void 							setParameterValue(TParameterType parameterType, int parameterIndex, double value);
+        double 							getParameterValue(TParameterType parameterType, int parameterIndex);
+        vector<TSelectionRecord> 		GetSteadyStateSelection(list<string> newSelectionList);
+        vector<double> 					computeSteadyStateValues(vector<TSelectionRecord> oSelection, bool computeSteadyState);
+        double 							computeSteadyStateValue(TSelectionRecord record);
+        list<string> 					getParameterNames();
+		//ArrayList _oSteadyStateSelection;
 
 	public:
-     	static bool _bComputeAndAssignConservationLaws;// = true;
-        static bool _bConservedTotalChanged;
-        static bool _ReMultiplyCompartments;
-        rrDoubleMatrix _L;//double[][] _L;
-        rrDoubleMatrix _L0;//double[][] _L0;
-        rrDoubleMatrix _N;//double[][] _N;
-        rrDoubleMatrix _Nr;//double[][] _Nr;
-		//private ArrayList _oSteadyStateSelection;
-
-	private:
-     	vector<TSelectionRecord> _oSteadyStateSelection;
-		string _sModelCode;
-
-		CvodeInterface cvode;	//Declared in Solvers/CvodeInterface.cs...
-
-//	public: IModel model = null;
-    public: bool modelLoaded;// = false;
-//    private: ISteadyStateSolver steadyStateSolver;
-    public: int numPoints;
-    public: string sbmlStr;
-    private: vector<TSelectionRecord> selectionList;
-    public: double timeEnd;
-    public: double timeStart;
-
-    public: RoadRunner();
-    private: bool IsNleqAvailable();
-    #if DEBUG
-    public: static void Test();
-    #endif
-
-    //[Ignore]
-    public: string NL;
-    //[Ignore]
-    private: string _NL();
-    //[Ignore]
-    private: void emptyModel();
-    private: double GetValueForRecord(TSelectionRecord record);
-    private: double GetNthSelectedOutput(int index, double dCurrentTime);
-//    private: void AddNthOutputToResult(double[,] results, int nRow, double dCurrentTime);
-    private: vector<double> BuildModelEvalArgument();
-    //[Ignore]
-    //public: double[,] runSimulation();
-    #if DEBUG
-    public: static void PrintTout(double start, double end, int numPoints);
-    #endif
-
-//    private: void InitializeModel(object o);
-
-//    private: static void DumpResults(TextWriter writer, double[,] data, ArrayList colLabels);
-    //public: static void TestDirectory(string directory, bool testSubDirs);
-    //    public: static void TestDirectory(string directory, bool testSubDirs, string pattern);
-
-
-    //[Ignore]
-    public: static void SimulateSBMLFile(string fileName, bool useConservationLaws);
-
-    //[Ignore]
-    public: static void SimulateSBMLFile(string fileName, bool useConservationLaws, double startTime, double endTime,
-                                        int numPoints);
-
-    //[Help("Load SBML into simulator")]
-    public: void loadSBMLFromFile(string fileName);
-
-    //[Help("Load SBML into simulator")]
-    public: void loadSBML(string sbml);
-
-
-    //[Help("Returns the initially loaded model as SBML")]
-    public: string getSBML();
-
-    //[Help("get the currently set time start")]
-    public: double getTimeStart();
-
-    //[Help("get the currently set time end")]
-    public: double getTimeEnd();
-
-    //[Help("get the currently set number of points")]
-    public: int getNumPoints();
-
-    //[Help("Set the time start for the simulation")]
-    public: void setTimeStart(double startTime);
-
-    //[Help("Set the time end for the simulation")]
-    public: void setTimeEnd(double endTime);
-
-    //[Help("Set the number of points to generate during the simulation")]
-    public: void setNumPoints(int nummberOfPoints);
-
-    //[Help("reset the simulator back to the initial conditions specified in the SBML model")]
-    public: void reset();
-
-    //[Help(
-//        "Change the initial conditions to another concentration vector (changes only initial conditions for floating Species)"
-//        )]
-    public: void changeInitialConditions(vector<double> ic);
-
-    //[Help("Carry out a time course simulation")]
-//    public: double[,] simulate();
-
-    //[Help(
-//        "Extension method to simulate (time start, time end, number of points). This routine resets the model to its initial condition before running the simulation (unlike simulate())"
-//        )]
-//    public: double[,] simulateEx(double startTime, double endTime, int numberOfPoints);
-
-    //[Help("Returns the current vector of reactions rates")]
-    public: vector<double> getReactionRates();
-
-    //[Help("Returns the current vector of rates of change")]
-    public: vector<double> getRatesOfChange();
-
-    //[Help(
-//        "Returns a list of floating species names: This method is deprecated, please use getFloatingSpeciesNames()")
-//    ]
-    public: list<string> getSpeciesNames();
-
-    //[Help("Returns a list of reaction names")]
-    public: list<string> getReactionNames();
-
-    // ---------------------------------------------------------------------
-    // Start of Level 2 API Methods
-    // ---------------------------------------------------------------------
-
-    public: int UseKinsol;// { get; set; }
-
-    //[Help("Get Simulator Capabilities")]
-    public: string getCapabilities();
-
-    //[Ignore]
-    public: void setTolerances(double aTol, double rTol);
-
-    //[Ignore]
-    public: void setTolerances(double aTol, double rTol, int maxSteps);
-
-    public: void CorrectMaxStep();
-
-    //[Help("Set Simulator Capabilites")]
-    public: void setCapabilities(string capsStr);
-
-    //[Help("Sets the value of the given species or global parameter to the given value (not of local parameters)")]
-    public: void setValue(string sId, double dValue);
-
-
-    //[Help("Gets the Value of the given species or global parameter (not of local parameters)")]
-    public: double getValue(string sId);
-
-    //[Help(
-//        "Returns symbols of the currently loaded model, that can be used for the selectionlist format array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }."
-//        )]
-    public: list<string> getAvailableSymbols();
-
-    //[Help("Returns the currently selected columns that will be returned by calls to simulate() or simulateEx(,,).")]
-    public: list<string> getSelectionList();
-
-
-    //[Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
-//          " time, species names, , volume, reaction rates and rates of change (speciesName')")]
-    public: void setSelectionList(list<string>& newSelectionList);
-
-
-    //[Help(
-//        "Carry out a single integration step using a stepsize as indicated in the method call (the intergrator is reset to take into account all variable changes). Arguments: double CurrentTime, double StepSize, Return Value: new CurrentTime."
-//        )]
-    public: double oneStep(double currentTime, double stepSize);
-
-    //[Help(
-//       "Carry out a single integration step using a stepsize as indicated in the method call. Arguments: double CurrentTime, double StepSize, bool: reset integrator if true, Return Value: new CurrentTime."
-//       )]
-    public: double oneStep(double currentTime, double stepSize, bool reset);
-
-
-    // ---------------------------------------------------------------------
-    // Start of Level 3 API Methods
-    // ---------------------------------------------------------------------
-
-    /*//[Help("Compute the steady state of the model, returns the sum of squares of the solution")]
-    public: double steadyState () {
-        try {
-            if (modelLoaded) {
-                kinSolver = new kinSolverInterface(model);
-                return kinSolver.solve(model.y);
-            } else throw new SBWApplicationException (emptyModelStr);
-        } catch (SBWApplicationException) {
-            throw;
-        } catch (Exception e) {
-            throw new SBWApplicationException ("Unexpected error from steadyState()", e.Message);
-        }
-    }*/
-
-
-    //public: static void TestSettings();
-    //[Help("Compute the steady state of the model, returns the sum of squares of the solution")]
-    public: double steadyState();
-    // ******************************************************************** }
-    // Multiply matrix 'm1' by 'm2' to give result in Self                  }
-    //                                                                      }
-    // Usage:  A.mult (A1, A2); multiply A1 by A2 giving A                  }
-    //                                                                      }
-    // ******************************************************************** }
-//    [Ignore()]
-    public: rrDoubleMatrix mult(rrDoubleMatrix m1, rrDoubleMatrix m2);
-    //[Help("Compute the reduced Jacobian at the current operating point")]
-    public: rrDoubleMatrix getReducedJacobian();
-    //[Help("Compute the full Jacobian at the current operating point")]
-    public: rrDoubleMatrix getFullJacobian();
-    // ---------------------------------------------------------------------
-    // Start of Level 4 API Methods
-    // ---------------------------------------------------------------------
-
-    //[Help("Returns the Link Matrix for the currently loaded model")]
-    public: rrDoubleMatrix getLinkMatrix();
-
-    //[Help("Returns the reduced stoichiometry matrix (Nr) for the currently loaded model")]
-    public: rrDoubleMatrix getNrMatrix();
-
-    //[Help("Returns the L0 matrix for the currently loaded model")]
-    public: rrDoubleMatrix getL0Matrix();
-
-    //[Help("Returns the stoichiometry matrix for the currently loaded model")]
-    public: rrDoubleMatrix getStoichiometryMatrix();
-
-    //[Help("Returns the conservation matrix (gamma) for the currently loaded model")]
-    public: rrDoubleMatrix getConservationMatrix();
-
-    //[Help("Returns the number of dependent species in the model")]
-    public: int getNumberOfDependentSpecies();
-
-    //[Help("Returns the number of independent species in the model")]
-    public: int getNumberOfIndependentSpecies();
-
-    //[Ignore]
-    private: double getVariableValue(TVariableType variableType, int variableIndex);
-
-    //[Ignore]
-    private: void setParameterValue(TParameterType parameterType, int parameterIndex, double value);
-
-    //[Ignore]
-    private: double getParameterValue(TParameterType parameterType, int parameterIndex);
-
-    /// <summary>
-    /// Fills the second argument with the Inverse of the first argument
-    /// </summary>
-    /// <param name="T2">The Matrix to calculate the Inverse for</param>
-    /// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
-//    private: static void GetInverse(Matrix T2, Matrix Inv);
-
-    //[Help(
-//        "Derpar Continuation, stepSize = stepsize; independentVariable = index to parameter; parameterType = {'globalParameter', 'boundarySpecies'"
-//        )]
-    public: void computeContinuation(double stepSize, int independentVariable, string parameterTypeStr);
-
-    //[Help("Returns the Symbols of all Flux Control Coefficients.")]
-    public: list<string> getFluxControlCoefficientNames();
-
-    //[Help("Returns the Symbols of all Concentration Control Coefficients.")]
-    public: list<string> getConcentrationControlCoefficientNames();
-
-    //[Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")]
-    public: list<string> getUnscaledConcentrationControlCoefficientNames();
-
-    //[Help("Returns the Symbols of all Elasticity Coefficients.")]
-    public: list<string> getElasticityCoefficientNames();
-
-    //[Help("Returns the Symbols of all Unscaled Elasticity Coefficients.")]
-    public: list<string> getUnscaledElasticityCoefficientNames();
-
-    //[Help("Returns the Symbols of all Floating Species Eigenvalues.")]
-    public: list<string> getEigenValueNames();
-
-    //[Help(
-//        "Returns symbols of the currently loaded model, that can be used for steady state analysis. Format: array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }  or { { \"groupname\", { \"subgroup\", { \"item1\" ... } } } }."
-//        )]
-    public: list<string> getAvailableSteadyStateSymbols();
-
-    //[Help("Returns the selection list as returned by computeSteadyStateValues().")]
-    public: list<string> getSteadyStateSelectionList();
-
-    private: vector<TSelectionRecord> GetSteadyStateSelection(list<string> newSelectionList);
-
-    //[Help("sets the selection list as returned by computeSteadyStateValues().")]
-    public: void setSteadyStateSelectionList(list<string> newSelectionList);
-
-    //[Help("performs steady state analysis, returning values as given by setSteadyStateSelectionList().")]
-    public: vector<double> computeSteadyStateValues();
-
-    private: vector<double> computeSteadyStateValues(vector<TSelectionRecord> oSelection, bool computeSteadyState);
-
-    //[Help("performs steady state analysis, returning values as specified by the given selection list.")]
-    public: vector<double> computeSteadyStateValues(list<string> oSelection);
-
-    private: double computeSteadyStateValue(TSelectionRecord record);
-
-    //[Help("Returns the value of the given steady state identifier.")]
-    public: double computeSteadyStateValue(string sId);
-
-    //[Help("Returns the values selected with setSelectionList() for the current model time / timestep")]
-    public: vector<double> getSelectedValues();
-
-    //[Help("Returns any warnings that occured during the loading of the SBML")]
-    public: vector<string> getWarnings();
-
-    //[Help("When turned on, this method will cause rates, event assignments, rules and such to be multiplied " +
-//          "with the compartment volume, if species are defined as initialAmounts. By default this behavior is off.")
-//    ]
-    public: static void ReMultiplyCompartments(bool bValue);
-
-    //[Help("This method turns on / off the computation and adherence to conservation laws."
-//          + "By default roadRunner will discover conservation cycles and reduce the model accordingly.")]
-    public: static void ComputeAndAssignConservationLaws(bool bValue);
-
-    //[Help("Returns the current generated source code")]
-    public: string getCSharpCode();
-
-    //[Help(
-//        "Performs a steady state parameter scan with the given parameters returning all elments from the selectionList: (Format: symnbol, startValue, endValue, stepSize)"
-//        )]
-    public: rrDoubleMatrix steadyStateParameterScan(string symbol, double startValue, double endValue, double stepSize);
-
-    //[Help("Returns the SBML with the current parameterset")]
-    public: string writeSBML();
-
-    // -----------------------------------------------------------------
-
-    //[Help("Get the number of local parameters for a given reaction")]
-    public: int getNumberOfLocalParameters(int reactionId);
-
-    //[Help("Sets the value of a global parameter by its index")]
-    public: void setLocalParameterByIndex(int reactionId, int index, double value);
-
-    //[Help("Returns the value of a global parameter by its index")]
-    public: double getLocalParameterByIndex(int reactionId, int index);
-
-    //[Help("Set the values for all global parameters in the model")]
-    public: void setLocalParameterValues(int reactionId, vector<double> values);
-
-    //[Help("Get the values for all global parameters in the model")]
-    public: vector<double> getLocalParameterValues(int reactionId);
-
-    //[Help("Gets the list of parameter names")]
-    public: list<string> getLocalParameterNames(int reactionId);
-
-    //[Help("Returns a list of global parameter tuples: { {parameter Name, value},...")]
-    public: list<string> getAllLocalParameterTupleList();
-
-    // -----------------------------------------------------------------
-    //[Help("Get the number of reactions")]
-    public: int getNumberOfReactions();
-
-    //[Help("Returns the rate of a reaction by its index")]
-    public: double getReactionRate(int index);
-
-    //[Help("Returns the rate of changes of a species by its index")]
-    public: double getRateOfChange(int index);
-
-    //[Help("Returns the names given to the rate of change of the floating species")]
-    public: list<string> getRateOfChangeNames();
-
-    //[Help("Returns the rates of changes given an array of new floating species concentrations")]
-    public: vector<double> getRatesOfChangeEx(vector<double> values);
-
-    //[Help("Returns the rates of changes given an array of new floating species concentrations")]
-    public: vector<double> getReactionRatesEx(vector<double> values);
-
-    public: vector<string> GetFloatingSpeciesNamesArray();
-
-    public: vector<string> GetGlobalParameterNamesArray();
-
-    //[Help("Get the number of compartments")]
-    public: int getNumberOfCompartments();
-
-    //[Help("Sets the value of a compartment by its index")]
-    public: void setCompartmentByIndex(int index, double value);
-
-    //[Help("Returns the value of a compartment by its index")]
-    public: double getCompartmentByIndex(int index);
-
-    //[Help("Returns the value of a compartment by its index")]
-    public: void setCompartmentVolumes(vector<double> values);
-
-    //[Help("Gets the list of compartment names")]
-    public: list<string> getCompartmentNames();
-
-    // -----------------------------------------------------------------
-    //[Help("Get the number of boundary species")]
-    public: int getNumberOfBoundarySpecies();
-
-    //[Help("Sets the value of a boundary species by its index")]
-    public: void setBoundarySpeciesByIndex(int index, double value);
-
-    //[Help("Returns the value of a boundary species by its index")]
-    public: double getBoundarySpeciesByIndex(int index);
-
-    //[Help("Returns an array of boundary species concentrations")]
-    public: vector<double> getBoundarySpeciesConcentrations();
-
-    //[Help("Set the concentrations for all boundary species in the model")]
-    public: void setBoundarySpeciesConcentrations(vector<double> values);
-
-    //[Help("Gets the list of boundary species names")]
-    public: list<string> getBoundarySpeciesNames();
-
-    //[Help("Gets the list of boundary species amount names")]
-    public: list<string> getBoundarySpeciesAmountNames();
-
-    // -----------------------------------------------------------------
-    //[Help("Get the number of floating species")]
-    public: int getNumberOfFloatingSpecies();
-
-    //[Help("Sets the value of a floating species by its index")]
-    public: void setFloatingSpeciesByIndex(int index, double value);
-
-    //[Help("Returns the value of a floating species by its index")]
-    public: double getFloatingSpeciesByIndex(int index);
-
-    //[Help("Returns an array of floating species concentrations")]
-    public: vector<double> getFloatingSpeciesConcentrations();
-
-    //[Help("returns an array of floating species initial conditions")]
-    public: vector<double> getFloatingSpeciesInitialConcentrations();
-
-    // This is a level 1 Method 1
-    //[Help("Set the concentrations for all floating species in the model")]
-    public: void setFloatingSpeciesConcentrations(vector<double> values);
-
-    //[Help("Sets the value of a floating species by its index")]
-    public: void setFloatingSpeciesInitialConcentrationByIndex(int index, double value);
-
-    //[Help("Sets the initial conditions for all floating species in the model")]
-    public: void setFloatingSpeciesInitialConcentrations(vector<double> values);
-
-    // This is a Level 1 method !
-    //[Help("Returns a list of floating species names")]
-    public: list<string> getFloatingSpeciesNames();
-
-    //[Help("Returns a list of floating species initial condition names")]
-    public: list<string> getFloatingSpeciesInitialConditionNames();
-
-    //[Help("Returns the list of floating species amount names")]
-    public: list<string> getFloatingSpeciesAmountNames();
-
-    // -----------------------------------------------------------------
-    //[Help("Get the number of global parameters")]
-    public: int getNumberOfGlobalParameters();
-
-    //[Help("Sets the value of a global parameter by its index")]
-    public: void setGlobalParameterByIndex(int index, double value);
-
-    //[Help("Returns the value of a global parameter by its index")]
-    public: double getGlobalParameterByIndex(int index);
-
-    //[Help("Set the values for all global parameters in the model")]
-    public: void setGlobalParameterValues(vector<double> values);
-
-    //[Help("Get the values for all global parameters in the model")]
-    public: vector<double> getGlobalParameterValues();
-
-    //[Help("Gets the list of parameter names")]
-    public: list<string> getGlobalParameterNames();
-
-    //[Help("Returns a list of global parameter tuples: { {parameter Name, value},...")]
-    public: list<string> getAllGlobalParameterTupleList();
-
-    private: list<string> getParameterNames();
-
-    //[Help("Updates the model based on all recent changes")]
-    public: void EvalModel();
-
-
-
-    //[Help("Returns the name of module")]
-    public: string getName();
-
-    //[Help("Returns the version number of the module")]
-    public: static string getVersion();
-
-    //[Help("Returns the name of the module author")]
-    public: static string getAuthor();
-
-    //[Help("Returns a description of the module")]
-    public: static string getDescription();
-
-    //[Help("Returns the display name of the module")]
-    public: static string getDisplayName();
-
-    //[Help("Returns the copyright string for the module")]
-    public: static string getCopyright();
-
-    //[Help("Returns the URL string associated with the module (if any)")]
-    public: static string getURL();
-    public: struct TSelectionRecord;
-
-    #if DEBUG
-    public: static void TestChange();
-    #endif
+     	static bool                     _bComputeAndAssignConservationLaws;// = true;
+        static bool                     _bConservedTotalChanged;
+        static bool                     _ReMultiplyCompartments;
+        rrDoubleMatrix                  _L;//double[][] _L;
+        rrDoubleMatrix                  _L0;//double[][] _L0;
+        rrDoubleMatrix                  _N;//double[][] _N;
+        rrDoubleMatrix                  _Nr;//double[][] _Nr;
+        bool 							modelLoaded;// = false;
+        int 							numPoints;
+        string 							sbmlStr;
+        struct TSelectionRecord;
+        enum TSelectionType
+        {
+            clTime,
+            clBoundarySpecies,
+            clFloatingSpecies,
+            clFlux,
+            clRateOfChange,
+            clVolume,
+            clParameter,
+            clFloatingAmount,
+            clBoundaryAmount,
+            clElasticity,
+            clUnscaledElasticity,
+            clEigenValue,
+            clUnknown,
+            clStoichiometry
+        };
+
+	    //IModel model = null;
+        double                         	timeEnd;
+        double                         	timeStart;
+        								RoadRunner();
+        #if DEBUG
+        static void                     Test();
+        static void                     PrintTout(double start, double end, int numPoints);
+        static void                     TestChange();
+        #endif
+
+    	string 							NL;
+    	//double[,] 					runSimulation();
+		//void 							InitializeModel(object o);
+		//static void                   DumpResults(TextWriter writer, double[,] data, ArrayList colLabels);
+    	//static void                   TestDirectory(string directory, bool testSubDirs);
+    	//static void                   TestDirectory(string directory, bool testSubDirs, string pattern);
+        static void                     SimulateSBMLFile(string fileName, bool useConservationLaws);
+        static void                     SimulateSBMLFile(string fileName, bool useConservationLaws, double startTime, double endTime, int numPoints);
+        void                            loadSBMLFromFile(string fileName);
+        void                            loadSBML(string sbml);
+        string                          getSBML();
+        double                          getTimeStart();
+        double                          getTimeEnd();
+        int 							getNumPoints();
+        void                            setTimeStart(double startTime);
+        void                            setTimeEnd(double endTime);
+        void                            setNumPoints(int nummberOfPoints);
+        void                            reset();
+        void                            changeInitialConditions(vector<double> ic);
+        //double[,]                     simulate();
+        //double[,]                     simulateEx(double startTime, double endTime, int numberOfPoints);
+        vector<double>                  getReactionRates();
+        vector<double>                  getRatesOfChange();
+        list<string> 					getSpeciesNames();
+        list<string> 					getReactionNames();
+
+        // ---------------------------------------------------------------------
+        // Start of Level 2 API Methods
+        // ---------------------------------------------------------------------
+        int 							UseKinsol;// { get; set; }
+        string 							getCapabilities();
+        void                            setTolerances(double aTol, double rTol);
+        void                            setTolerances(double aTol, double rTol, int maxSteps);
+        void                            CorrectMaxStep();
+        void                            setCapabilities(string capsStr);
+        void                            setValue(string sId, double dValue);
+        double 							getValue(string sId);
+        list<string>                    getAvailableSymbols();
+        list<string>                    getSelectionList();
+        void 							setSelectionList(list<string>& newSelectionList);
+        double                          oneStep(double currentTime, double stepSize);
+        double                          oneStep(double currentTime, double stepSize, bool reset);
+
+        // ---------------------------------------------------------------------
+        // Start of Level 3 API Methods
+        // ---------------------------------------------------------------------
+        double 							steadyState();
+        static void 					TestSettings();
+        rrDoubleMatrix                  mult(rrDoubleMatrix m1, rrDoubleMatrix m2);
+        rrDoubleMatrix                  getReducedJacobian();
+        rrDoubleMatrix                  getFullJacobian();
+
+        // ---------------------------------------------------------------------
+        // Start of Level 4 API Methods
+        // ---------------------------------------------------------------------
+        rrDoubleMatrix                  getLinkMatrix();
+        rrDoubleMatrix                  getNrMatrix();
+        rrDoubleMatrix                  getL0Matrix();
+        rrDoubleMatrix                  getStoichiometryMatrix();
+        rrDoubleMatrix                  getConservationMatrix();
+        int                             getNumberOfDependentSpecies();
+        int                             getNumberOfIndependentSpecies();
+
+        /// <summary>
+        /// Fills the second argument with the Inverse of the first argument
+        /// </summary>
+        /// <param name="T2">The Matrix to calculate the Inverse for</param>
+        /// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
+//        static void 					GetInverse(Matrix T2, Matrix Inv);
+
+        void 							computeContinuation(double stepSize, int independentVariable, string parameterTypeStr);
+        list<string>                    getFluxControlCoefficientNames();
+        list<string>                    getConcentrationControlCoefficientNames();
+        list<string>                    getUnscaledConcentrationControlCoefficientNames();
+        list<string>                    getElasticityCoefficientNames();
+        list<string>                    getUnscaledElasticityCoefficientNames();
+        list<string>                    getEigenValueNames();
+        list<string>                    getAvailableSteadyStateSymbols();
+        list<string>                    getSteadyStateSelectionList();
+        void 							setSteadyStateSelectionList(list<string> newSelectionList);
+        vector<double>                  computeSteadyStateValues();
+        vector<double>                  computeSteadyStateValues(list<string> oSelection);
+        double 							computeSteadyStateValue(string sId);
+        vector<double> 					getSelectedValues();
+        vector<string> 					getWarnings();
+        static void                     ReMultiplyCompartments(bool bValue);
+        static void                     ComputeAndAssignConservationLaws(bool bValue);
+        string 							getCSharpCode();
+        rrDoubleMatrix 					steadyStateParameterScan(string symbol, double startValue, double endValue, double stepSize);
+        string 							writeSBML();
+        int 							getNumberOfLocalParameters(int reactionId);
+        void 							setLocalParameterByIndex(int reactionId, int index, double value);
+        double 							getLocalParameterByIndex(int reactionId, int index);
+        void 							setLocalParameterValues(int reactionId, vector<double> values);
+        vector<double> 					getLocalParameterValues(int reactionId);
+        list<string>                    getLocalParameterNames(int reactionId);
+        list<string>                    getAllLocalParameterTupleList();
+        int 							getNumberOfReactions();
+        double                          getReactionRate(int index);
+        double                          getRateOfChange(int index);
+        list<string> 					getRateOfChangeNames();
+        vector<double>                  getRatesOfChangeEx(vector<double> values);
+        vector<double>                  getReactionRatesEx(vector<double> values);
+        vector<string>                  GetFloatingSpeciesNamesArray();
+        vector<string>                  GetGlobalParameterNamesArray();
+        int 							getNumberOfCompartments();
+        void 							setCompartmentByIndex(int index, double value);
+        double 							getCompartmentByIndex(int index);
+        void 							setCompartmentVolumes(vector<double> values);
+        list<string> 					getCompartmentNames();
+        int 							getNumberOfBoundarySpecies();
+        void 							setBoundarySpeciesByIndex(int index, double value);
+        double 							getBoundarySpeciesByIndex(int index);
+        vector<double> 					getBoundarySpeciesConcentrations();
+        void 							setBoundarySpeciesConcentrations(vector<double> values);
+        list<string>                    getBoundarySpeciesNames();
+        list<string>                    getBoundarySpeciesAmountNames();
+        int 							getNumberOfFloatingSpecies();
+        void 							setFloatingSpeciesByIndex(int index, double value);
+        double 							getFloatingSpeciesByIndex(int index);
+        vector<double>                  getFloatingSpeciesConcentrations();
+        vector<double>                  getFloatingSpeciesInitialConcentrations();
+        void                            setFloatingSpeciesConcentrations(vector<double> values);
+        void                            setFloatingSpeciesInitialConcentrationByIndex(int index, double value);
+        void                            setFloatingSpeciesInitialConcentrations(vector<double> values);
+        list<string>                    getFloatingSpeciesNames();
+        list<string>                    getFloatingSpeciesInitialConditionNames();
+        list<string>                    getFloatingSpeciesAmountNames();
+        int 							getNumberOfGlobalParameters();
+        void 							setGlobalParameterByIndex(int index, double value);
+        double 							getGlobalParameterByIndex(int index);
+        void 							setGlobalParameterValues(vector<double> values);
+        vector<double> 					getGlobalParameterValues();
+        list<string>                    getGlobalParameterNames();
+        list<string>                    getAllGlobalParameterTupleList();
+        void 							EvalModel();
+        string 							getName();
+        static string                   getVersion();
+        static string                   getAuthor();
+        static string                   getDescription();
+        static string                   getDisplayName();
+        static string                   getCopyright();
+        static string                   getURL();
 
 }; //class RoadRunner
-
 
 }//namespace rr
 #endif
