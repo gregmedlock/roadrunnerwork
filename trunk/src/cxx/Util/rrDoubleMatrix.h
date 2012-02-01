@@ -1,11 +1,13 @@
-﻿#ifndef rrDoubleMatrixH
+#ifndef rrDoubleMatrixH
 #define rrDoubleMatrixH
-//---------------------------------------------------------------------------
 #include <vector>
-#include "rrExporter.h"
+#include "rrObject.h"
+
 using std::vector;
 
-class RR_DECLSPEC rrDoubleMatrix
+namespace rr
+{
+class RR_DECLSPEC rrDoubleMatrix : public rrObject
 {
     private:
     	unsigned 		mRowCount;
@@ -23,4 +25,6 @@ class RR_DECLSPEC rrDoubleMatrix
     					rrDoubleMatrix& operator = (rrDoubleMatrix const& m);   // Assignment operator
 };
 
+
+}
 #endif

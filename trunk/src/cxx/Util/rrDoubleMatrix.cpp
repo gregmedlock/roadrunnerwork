@@ -6,6 +6,9 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
+namespace rr
+{
+
 rrDoubleMatrix::rrDoubleMatrix(unsigned rows, unsigned cols)
 :
 mRowCount (rows),
@@ -52,3 +55,4 @@ double rrDoubleMatrix::operator() (unsigned row, unsigned col) const
     return mMatrix[mColCount*row + col];
 }
 
+} //namespace rr

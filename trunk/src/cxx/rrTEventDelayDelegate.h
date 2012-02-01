@@ -1,6 +1,5 @@
 #ifndef rrTEventDelayDelegateH
 #define rrTEventDelayDelegateH
-//---------------------------------------------------------------------------
 
 namespace rr
 {

@@ -2,6 +2,7 @@
 #define rrTComputeEventAssignmentDelegateH
 #include <vector>
 #include "rrExporter.h"
+
 using std::vector;
 
 namespace rr

@@ -1,8 +1,6 @@
 #ifndef rrRoadRunnerH
 #define rrRoadRunnerH
-//---------------------------------------------------------------------------
 #include <string>
-#include "rrExporter.h"
 #include "rrObject.h"
 #include "rrDoubleMatrix.h"
 #include "rrIModel.h"

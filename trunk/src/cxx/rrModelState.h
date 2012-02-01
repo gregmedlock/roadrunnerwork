@@ -1,14 +1,14 @@
 #ifndef rrModelStateH
 #define rrModelStateH
-//---------------------------------------------------------------------------
-#include "rrExporter.h"
 #include <vector>
+#include "rrObject.h"
 #include "rrIModel.h"
+
 using std::vector;
 
 namespace rr
 {
-class RR_DECLSPEC ModelState
+class RR_DECLSPEC ModelState : public rrObject
 {
     private:
         vector<double>                  _BoundarySpeciesConcentrations;

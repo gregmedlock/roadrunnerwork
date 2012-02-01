@@ -1,9 +1,9 @@
 #ifndef rrSupportCodeH
 #define rrSupportCodeH
-//---------------------------------------------------------------------------
 #include <math.h>
 #include "rrMath.h"
 #include "rrExporter.h"
+
 namespace rr
 {
 // Boolean functions for event handling" + NL());

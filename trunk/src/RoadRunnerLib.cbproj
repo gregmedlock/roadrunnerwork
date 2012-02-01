@@ -136,9 +136,8 @@
 				<DependentOn>cxx\Solvers\rrNLEQInterface.h</DependentOn>
 				<BuildOrder>18</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\ccCompiler.cpp">
-				<DependentOn>cxx\Util\ccCompiler.h</DependentOn>
-				<BuildOrder>24</BuildOrder>
+			<CppCompile Include="cxx\Util\rrCompiler.cpp">
+				<BuildOrder>27</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="cxx\Util\rrDoubleMatrix.cpp">
 				<DependentOn>cxx\Util\rrDoubleMatrix.h</DependentOn>

@@ -1,6 +1,5 @@
 #ifndef rrTPerformEventAssignmentDelegateH
 #define rrTPerformEventAssignmentDelegateH
-//---------------------------------------------------------------------------
 #include <vector>
 
 using std::vector;

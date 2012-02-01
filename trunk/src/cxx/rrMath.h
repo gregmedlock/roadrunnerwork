@@ -2,7 +2,6 @@
 #define rrMathH
 #include "rrExporter.h"
 
-//---------------------------------------------------------------------------
 namespace rr //This namespace corresponds to C#'s namespace LibRoadRunner
 {
 // See: http://en.wikipedia.org/wiki/Mathematical_constant

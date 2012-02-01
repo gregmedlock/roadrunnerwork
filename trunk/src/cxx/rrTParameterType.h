@@ -1,5 +1,6 @@
 #ifndef rrTParameterTypeH
 #define rrTParameterTypeH
+
 namespace rr
 {
     enum TParameterType

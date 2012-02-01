@@ -2,17 +2,22 @@
 #define rrStringCollectionH
 #include <vector>
 #include <string>
-#include "rrExporter.h"
+#include "rrObject.h"
+
 using std::vector;
 using std::string;
+
+namespace rr
+{
 
 class RR_DECLSPEC StringCollection : public rrObject
 {
 	protected:
-		vector<string> mCollection;
+
+		vector<string> mCollection;
 
 	private:
 
 };
-
+}
 #endif

@@ -1,21 +1,23 @@
 #ifndef rrExceptionH
 #define rrExceptionH
-//---------------------------------------------------------------------------
 #include <exception>
 #include <string>
-#include "rrExporter.h"
+#include "rrObject.h"
 
 using std::string;
+using std::exception;
+
 namespace rr
 {
 
-class RR_DECLSPEC RRException : public std::exception
+class RR_DECLSPEC RRException : public rrObject , public std::exception
 {
 	protected:
     	string mMessage;
 
 	public:
 		RRException(const string& desc) : mMessage(desc){}
+       	virtual ~RRException() throw() {}
 
 		virtual const char* what() const throw()
   		{

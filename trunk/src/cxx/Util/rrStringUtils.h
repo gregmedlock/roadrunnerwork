@@ -1,10 +1,10 @@
 #ifndef rrStringUtilsH
 #define rrStringUtilsH
-//---------------------------------------------------------------------------
 #include <string>
 #include <list>
 #include <vector>
 #include "rrExporter.h"
+
 using std::string;
 using std::list;
 using std::vector;

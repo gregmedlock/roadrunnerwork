@@ -1,8 +1,9 @@
-//---------------------------------------------------------------------------
-
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
 #pragma hdrstop
 
-#include "ccCompiler.h"
+#include "rrCompiler.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 

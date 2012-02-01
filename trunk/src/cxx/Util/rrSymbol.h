@@ -1,13 +1,13 @@
 #ifndef rrSymbolH
 #define rrSymbolH
 #include <string>
-#include "rrExporter.h"
+#include "rrObject.h"
+
 using std::string;
 
-//---------------------------------------------------------------------------
 namespace rr
 {
-    class RR_DECLSPEC Symbol
+    class RR_DECLSPEC Symbol : public rrObject
     {
     	public:
         	string compartmentName; 	// Used when symbol is a species

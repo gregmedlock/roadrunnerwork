@@ -2,10 +2,9 @@
 #define ccCompilerH
 #include <vector>
 #include <string>
-#include "rrExporter.h"
 #include "rrObject.h"
 #include "rrStringCollection.h"
-//---------------------------------------------------------------------------
+
 using std::vector;
 using std::string;
 

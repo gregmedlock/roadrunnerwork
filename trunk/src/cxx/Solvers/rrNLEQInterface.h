@@ -1,13 +1,13 @@
 #ifndef rrNLEQInterfaceH
 #define rrNLEQInterfaceH
-//---------------------------------------------------------------------------
 #include <vector>
-#include "rrExporter.h"
+#include "rrObject.h"
+
 using std::vector;
 
 namespace rr
 {
-    class RR_DECLSPEC ISteadyStateSolver
+    class RR_DECLSPEC ISteadyStateSolver : public rrObject
     {
         /// <summary>
         /// Thea actual solver rourine making the call to NLEQ1

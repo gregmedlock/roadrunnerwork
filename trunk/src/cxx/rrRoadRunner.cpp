@@ -445,12 +445,11 @@ void RoadRunner::loadSBML(const string& sbml)
 {
     if (!sbml.size())
     {
-        throw new SBWApplicationException("Invalid SBML");
+        throw new SBWApplicationException("No SBML  content..!");
     }
 
     // If the user loads the same model again, don't both loading into NOM,
     // just reset the initial conditions
-
     if (modelLoaded && model != NULL && (sbml == sbmlStr) && (sbml != ""))
     {
         InitializeModel(model);
@@ -458,14 +457,13 @@ void RoadRunner::loadSBML(const string& sbml)
     }
     else
     {
-        if (model != NULL)
+        if(model != NULL)
         {
             delete cvode;
             cvode = NULL;
             delete model;
             model = NULL;
             modelLoaded = false;
-//            GC.Collect();
         }
 
         sbmlStr = sbml;
@@ -475,6 +473,7 @@ void RoadRunner::loadSBML(const string& sbml)
         {
 			mModelGenerator = new ModelGenerator();
         }
+
         _sModelCode = mModelGenerator->generateModelCode(sbmlStr);
 
 //        string sLocation = GetType().Assembly.Location;
@@ -493,7 +492,7 @@ void RoadRunner::loadSBML(const string& sbml)
         }
         else
         {
-            model = NULL;
+            model 		= NULL;
             modelLoaded = false;
           	string filePath = "SBW_ErrorLog.txt";
             try
@@ -503,7 +502,7 @@ void RoadRunner::loadSBML(const string& sbml)
                 try
                 {
                     sw.WriteLine("ErrorMessage: ");
-                    sw.WriteLine(mCompiler->getLastErrors());
+                    //sw.WriteLine(mCompiler->getLastErrors());
                     sw.WriteLine("C# Model Code: ");
                     sw.Write(_sModelCode);
                     sw.Close();
@@ -516,17 +515,15 @@ void RoadRunner::loadSBML(const string& sbml)
             catch (RRException)
             {
             }
-           throw new SBWApplicationException("Internal Error: The model has failed to compile." + NL
+           	throw new SBWApplicationException("Internal Error: The model has failed to compile." + NL
                                           + "The model file has been deposited at " +
-                                          filePath +
-                                          mCompiler->getLastErrors());
-
+                                          filePath);
         }
 
-        _L = StructAnalysis.GetLinkMatrix();
-        _L0 = StructAnalysis.GetL0Matrix();
-        _N = StructAnalysis.GetReorderedStoichiometryMatrix();
-        _Nr = StructAnalysis.GetNrMatrix();
+//        _L = StructAnalysis.GetLinkMatrix();
+//        _L0 = StructAnalysis.GetL0Matrix();
+//        _N = StructAnalysis.GetReorderedStoichiometryMatrix();
+//        _Nr = StructAnalysis.GetNrMatrix();
     }
 }
 

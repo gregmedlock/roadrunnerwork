@@ -1,14 +1,12 @@
 #ifndef rrPendingAssignmentH
 #define rrPendingAssignmentH
 #include <vector>
-#include "rrExporter.h"
+#include "rrObject.h"
 #include "rrTComputeEventAssignmentDelegate.h"
 #include "rrTPerformEventAssignmentDelegate.h"
-//C++ unit(.h/.cpp) translated from C# file:
-//http://roadrunner.svn.sourceforge.net/svnroot/roadrunner/trunk/LibRoadRunner/PendingAssignment.cs rev 75
-
 
 using std::vector;
+
 //---------------------------------------------------------------------------
 // <summary>
 // Initializes a new instance of the PendingAssignment class.
@@ -17,7 +15,7 @@ using std::vector;
 namespace rr
 {
 
-class RR_DECLSPEC PendingAssignment
+class RR_DECLSPEC PendingAssignment : public rrObject
 {
 	protected:
         double 							Time;

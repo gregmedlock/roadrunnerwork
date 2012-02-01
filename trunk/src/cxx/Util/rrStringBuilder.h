@@ -1,15 +1,16 @@
 #ifndef rrStringBuilderH
 #define rrStringBuilderH
-//---------------------------------------------------------------------------
 #include <sstream>
 #include <string>
-#include "rrExporter.h"
+#include "rrObject.h"
+
 using std::stringstream;
 using std::string;
+
 namespace rr
 {
 
-class RR_DECLSPEC StringBuilder
+class RR_DECLSPEC StringBuilder : public rrObject
 {
 	protected:
     	stringstream mStringing;

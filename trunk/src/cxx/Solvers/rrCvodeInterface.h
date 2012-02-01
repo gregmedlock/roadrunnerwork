@@ -1,10 +1,10 @@
 #ifndef rrCvodeInterfaceH
 #define rrCvodeInterfaceH
-//---------------------------------------------------------------------------
-#include "rrExporter.h"
+#include "rrObject.h"
+
 namespace rr
 {
-    class RR_DECLSPEC CvodeInterface //: IDisposable
+    class RR_DECLSPEC CvodeInterface : public rrObject//: IDisposable
     {
         /// <summary>
         /// Point to the CVODE DLL to use

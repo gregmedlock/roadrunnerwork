@@ -1,13 +1,14 @@
 #ifndef rrSymbolListH
 #define rrSymbolList
 #include <vector>
-#include "rrExporter.h"
+#include "rrObject.h"
 #include "rrSymbol.h"
+
 using std::vector;
 
 namespace rr
 {
-    class RR_DECLSPEC SymbolList : public vector<Symbol> //Using vector instead of list since accessing element by []
+    class RR_DECLSPEC SymbolList : public rrObject, public vector<Symbol> //Using vector instead of list since accessing element by []
     {
         /// <summary>
         /// Returns the Symbol by the given index

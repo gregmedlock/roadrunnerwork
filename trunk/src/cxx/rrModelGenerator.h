@@ -3,13 +3,14 @@
 #include <string>
 #include <vector>
 #include <list>
-#include "rrExporter.h"
+#include "rrObject.h"
 #include "rrSymbolList.h"
 #include "rrDoubleMatrix.h"
 #include "rrStringBuilder.h"
 #include "rrStringUtils.h"
 #include "rrRoadRunner.h"
 #include "rrException.h"
+
 using std::string;
 using std::vector;
 using std::list;
@@ -17,7 +18,7 @@ using std::list;
 namespace rr
 {
 
-class RR_DECLSPEC ModelGenerator
+class RR_DECLSPEC ModelGenerator : public rrObject
 {
     private:
         const string                        STR_DoubleFormat;// = "G"; //"G17";

@@ -1,8 +1,6 @@
-//---------------------------------------------------------------------------
-
 #ifndef rrTEventAssignmentDelegateH
 #define rrTEventAssignmentDelegateH
-//---------------------------------------------------------------------------
+
 namespace rr
 {
 	typedef void (*TEventAssignmentDelegate)();

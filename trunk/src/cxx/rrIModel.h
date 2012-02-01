@@ -1,10 +1,8 @@
 #ifndef rrIModelH
 #define rrIModelH
-//---------------------------------------------------------------------------
 #include <string>
 #include <vector>
 #include <list>
-#include "rrExporter.h"
 #include "rrObject.h"
 #include "rrTEventDelayDelegate.h"
 #include "rrTEventAssignmentDelegate.h"
