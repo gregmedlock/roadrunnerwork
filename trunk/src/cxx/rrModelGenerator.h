@@ -16,110 +16,109 @@ using std::list;
 
 namespace rr
 {
+
 class RR_DECLSPEC ModelGenerator
 {
     private:
-        ModelGenerator();
-        const string        STR_DoubleFormat;// = "G"; //"G17";
-        const string        STR_FixAmountCompartments;// = "*";
-        static ModelGenerator _instance;
+        const string                        STR_DoubleFormat;// = "G"; //"G17";
+        const string                        STR_FixAmountCompartments;// = "*";
+//        static ModelGenerator 				_instance;
         //        static NumberFormatInfo oInfo = new CultureInfo("en-US").NumberFormat;
-        vector<int> 		_LocalParameterDimensions;
-        string 				_ModelName;
-        int                 _NumBoundarySpecies;
-        int                 _NumCompartments;
-        int                 _NumDependentSpecies;
-        int                 _NumEvents;
-        int                 _NumFloatingSpecies;
-        int                 _NumGlobalParameters;
-        int                 _NumIndependentSpecies;
-        int                 _NumReactions;
-        int                 _TotalLocalParmeters;
-        list<string>        _functionNames;
-        list<string>        _functionParameters;
-        vector<string>      dependentSpeciesList;
-        vector<string>      independentSpeciesList;
-        int 				_NumModifiableSpeciesReferences;
+        vector<int> 		                _LocalParameterDimensions;
+        string 				                _ModelName;
+        int                                 _NumBoundarySpecies;
+        int                                 _NumCompartments;
+        int                                 _NumDependentSpecies;
+        int                                 _NumEvents;
+        int                                 _NumFloatingSpecies;
+        int                                 _NumGlobalParameters;
+        int                                 _NumIndependentSpecies;
+        int                                 _NumReactions;
+        int                                 _TotalLocalParmeters;
+        list<string>                        _functionNames;
+        list<string>                        _functionParameters;
+        vector<string>                      dependentSpeciesList;
+        vector<string>                      independentSpeciesList;
+        int 				                _NumModifiableSpeciesReferences;
 
         //        Hashtable _oMapRateRule = new Hashtable();
 
-        string              convertCompartmentToC(const string& compartmentName);
-        string              convertSpeciesToBc(const string& speciesName);
-        string              convertSpeciesToY(const string& speciesName);
-        string              convertSymbolToC(const string& compartmentName);
-        string              convertSymbolToGP(const string& parameterName);
-        string              convertUserFunctionExpression(const string& equation);
-        string              substituteTerms(int numReactions, string reactionName, string equation);
+        string                              convertCompartmentToC(const string& compartmentName);
+        string                              convertSpeciesToBc(const string& speciesName);
+        string                              convertSpeciesToY(const string& speciesName);
+        string                              convertSymbolToC(const string& compartmentName);
+        string                              convertSymbolToGP(const string& parameterName);
+        string                              convertUserFunctionExpression(const string& equation);
+        string                              substituteTerms(int numReactions, string reactionName, string equation);
         //        void SubstituteEquation(const string& reactionName, LibRoadRunner.Scanner.Scanner s, StringBuilder sb);
         //        void SubstituteWords(const string& reactionName, bool bFixAmounts, LibRoadRunner.Scanner.Scanner s, StringBuilder sb);
         //        void SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner.Scanner s, StringBuilder sb);
         //        static ASTNode CleanEquation(ASTNode ast);
-        static string 		CleanEquation(const string& equation);
-        string 				substituteTerms(const string& reactionName, string inputEquation, bool bFixAmounts);
-        string 				NL();
-        rrDoubleMatrix 		InitializeL0();
-
-        static bool 		ExpressionContainsSymbol(const string& expression, string symbol);
-        Symbol 				GetSpecies(const string& id);
-        string 				FindSymbol(const string& varName);
-
-        void                WriteOutSymbolTables(StringBuilder sb);
-        void                WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, rrDoubleMatrix L0);
-        void                WriteComputeConservedTotals(StringBuilder& sb, int numFloatingSpecies, int numDependentSpecies);
-        void                WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, rrDoubleMatrix L0);
-        void                WriteUserDefinedFunctions(StringBuilder& sb);
-        void                WriteResetEvents(StringBuilder& sb, int numEvents);
-        void                WriteSetConcentration(StringBuilder& sb);
-        void                WriteGetConcentration(StringBuilder& sb);
-        void                WriteConvertToAmounts(StringBuilder& sb);
-        void                WriteConvertToConcentrations(StringBuilder& sb);
-        void                WriteProperties(StringBuilder& sb);
-        void                WriteAccessors(StringBuilder& sb);
-        void                WriteOutVariables(StringBuilder& sb);
-        void                WriteClassHeader(StringBuilder& sb);
-        void                WriteTestConstraints(StringBuilder& sb);
-        void                WriteEvalInitialAssignments(StringBuilder& sb, int numReactions);
-        int 		 		WriteComputeRules(StringBuilder& sb, int numReactions);
-        void                WriteComputeReactionRates(StringBuilder& sb, int numReactions);
-        void                WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies);
-        void                WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies, int numFloatingSpecies, int numOfRules);
-        void                WriteEventAssignments(StringBuilder& sb, int numReactions, int numEvents);
-        void                WriteSetParameterValues(StringBuilder& sb, int numReactions);
-        void                WriteSetCompartmentVolumes(StringBuilder& sb);
-        void                WriteSetBoundaryConditions(StringBuilder& sb);
-        void                WriteSetInitialConditions(StringBuilder& sb, int numFloatingSpecies);
-
-        int                 ReadFloatingSpecies();
-        int                 ReadBoundarySpecies();
-        int                 ReadGlobalParameters();
-        void 				ReadLocalParameters(const int& numReactions,  vector<int>& localParameterDimensions, int& totalLocalParmeters);
-        int 				ReadCompartments();
-        int 				ReadModifiableSpeciesReferences();
+        static string 		                CleanEquation(const string& equation);
+        string 				                substituteTerms(const string& reactionName, string inputEquation, bool bFixAmounts);
+        string 				                NL();
+        rrDoubleMatrix 		                InitializeL0();
+        static bool 		                ExpressionContainsSymbol(const string& expression, string symbol);
+        Symbol 				                GetSpecies(const string& id);
+        string 				                FindSymbol(const string& varName);
+        void                                WriteOutSymbolTables(StringBuilder sb);
+        void                                WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, rrDoubleMatrix L0);
+        void                                WriteComputeConservedTotals(StringBuilder& sb, int numFloatingSpecies, int numDependentSpecies);
+        void                                WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, rrDoubleMatrix L0);
+        void                                WriteUserDefinedFunctions(StringBuilder& sb);
+        void                                WriteResetEvents(StringBuilder& sb, int numEvents);
+        void                                WriteSetConcentration(StringBuilder& sb);
+        void                                WriteGetConcentration(StringBuilder& sb);
+        void                                WriteConvertToAmounts(StringBuilder& sb);
+        void                                WriteConvertToConcentrations(StringBuilder& sb);
+        void                                WriteProperties(StringBuilder& sb);
+        void                                WriteAccessors(StringBuilder& sb);
+        void                                WriteOutVariables(StringBuilder& sb);
+        void                                WriteClassHeader(StringBuilder& sb);
+        void                                WriteTestConstraints(StringBuilder& sb);
+        void                                WriteEvalInitialAssignments(StringBuilder& sb, int numReactions);
+        int 		 		                WriteComputeRules(StringBuilder& sb, int numReactions);
+        void                                WriteComputeReactionRates(StringBuilder& sb, int numReactions);
+        void                                WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies);
+        void                                WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies, int numFloatingSpecies, int numOfRules);
+        void                                WriteEventAssignments(StringBuilder& sb, int numReactions, int numEvents);
+        void                                WriteSetParameterValues(StringBuilder& sb, int numReactions);
+        void                                WriteSetCompartmentVolumes(StringBuilder& sb);
+        void                                WriteSetBoundaryConditions(StringBuilder& sb);
+        void                                WriteSetInitialConditions(StringBuilder& sb, int numFloatingSpecies);
+        int                                 ReadFloatingSpecies();
+        int                                 ReadBoundarySpecies();
+        int                                 ReadGlobalParameters();
+        void 				                ReadLocalParameters(const int& numReactions,  vector<int>& localParameterDimensions, int& totalLocalParmeters);
+        int 				                ReadCompartments();
+        int 				                ReadModifiableSpeciesReferences();
 
     public:
+									        ModelGenerator();
         //        public: static ModelGenerator Instance
-        SymbolList boundarySpeciesList;
-        SymbolList compartmentList;
-        SymbolList conservationList;
-        SymbolList floatingSpeciesAmountsList;
-        SymbolList floatingSpeciesConcentrationList;
-        SymbolList globalParameterList;
-        vector<SymbolList> localParameterList;
-        SymbolList reactionList;
-        int getNumberOfReactions();
-        int NumAdditionalRates;
-        list<string> getBoundarySpeciesList();
-        list<string> getCompartmentList();
-        list<string> getConservationList();
-        list<string> getFloatingSpeciesConcentrationList();
-        list<string> getGlobalParameterList();
-        list<string> getLocalParameterList(int reactionId);
-        list<string> getReactionNames();
-        list<string> Warnings;// { get; set; }
-        SymbolList ModifiableSpeciesReferenceList;// { get; set; }
-    	static string WriteDouble(double value);
-    	/// Generates the Model Code from the SBML string
-    	string generateModelCode(const string& sbmlStr);
+        SymbolList                         	boundarySpeciesList;
+        SymbolList                         	compartmentList;
+        SymbolList                         	conservationList;
+        SymbolList                         	floatingSpeciesAmountsList;
+        SymbolList                         	floatingSpeciesConcentrationList;
+        SymbolList                         	globalParameterList;
+        vector<SymbolList> 					localParameterList;
+        SymbolList 							reactionList;
+        int                                 getNumberOfReactions();
+        int                                 NumAdditionalRates;
+        list<string>                        getBoundarySpeciesList();
+        list<string>                        getCompartmentList();
+        list<string>                        getConservationList();
+        list<string>                        getFloatingSpeciesConcentrationList();
+        list<string>                        getGlobalParameterList();
+        list<string>                        getLocalParameterList(int reactionId);
+        list<string>                        getReactionNames();
+        list<string>                        Warnings;// { get; set; }
+        SymbolList 							ModifiableSpeciesReferenceList;// { get; set; }
+    	static string 						WriteDouble(double value);
+
+    	// Generates the Model Code from the SBML string
+    	string 								generateModelCode(const string& sbmlStr);
 
 }; //class modelGenerator
 

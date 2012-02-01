@@ -84,6 +84,10 @@
 				<DependentOn>cxx\rrModelState.h</DependentOn>
 				<BuildOrder>7</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="cxx\rrObject.cpp">
+				<DependentOn>cxx\rrObject.h</DependentOn>
+				<BuildOrder>25</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\rrPendingAssignment.cpp">
 				<DependentOn>cxx\rrPendingAssignment.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
@@ -132,13 +136,29 @@
 				<DependentOn>cxx\Solvers\rrNLEQInterface.h</DependentOn>
 				<BuildOrder>18</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="cxx\Util\ccCompiler.cpp">
+				<DependentOn>cxx\Util\ccCompiler.h</DependentOn>
+				<BuildOrder>24</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Util\rrDoubleMatrix.cpp">
+				<DependentOn>cxx\Util\rrDoubleMatrix.h</DependentOn>
+				<BuildOrder>23</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\Util\rrException.cpp">
 				<DependentOn>cxx\Util\rrException.h</DependentOn>
 				<BuildOrder>22</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="cxx\Util\rrStreamWriter.cpp">
+				<DependentOn>cxx\Util\rrStreamWriter.h</DependentOn>
+				<BuildOrder>27</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\Util\rrStringBuilder.cpp">
 				<DependentOn>cxx\Util\rrStringBuilder.h</DependentOn>
 				<BuildOrder>21</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Util\rrStringCollection.cpp">
+				<DependentOn>cxx\Util\rrStringCollection.h</DependentOn>
+				<BuildOrder>26</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="cxx\Util\rrStringUtils.cpp">
 				<DependentOn>cxx\Util\rrStringUtils.h</DependentOn>

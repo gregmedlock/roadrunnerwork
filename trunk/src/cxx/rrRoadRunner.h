@@ -3,6 +3,7 @@
 //---------------------------------------------------------------------------
 #include <string>
 #include "rrExporter.h"
+#include "rrObject.h"
 #include "rrDoubleMatrix.h"
 #include "rrIModel.h"
 #include "rrTVariableType.h"
@@ -13,6 +14,10 @@ using std::string;
 
 namespace rr
 {
+
+class ModelGenerator;
+class Compiler;
+
 enum TSelectionType
 {
     clTime,
@@ -39,7 +44,7 @@ struct TSelectionRecord
     TSelectionType selectionType;
 };
 
-class RR_DECLSPEC RoadRunner
+class RR_DECLSPEC RoadRunner : public rrObject
 {
 	private:
     	const double 					DiffStepSize;
@@ -47,9 +52,11 @@ class RR_DECLSPEC RoadRunner
 		const double 					STEADYSTATE_THRESHOLD;
      	vector<TSelectionRecord> 		_oSteadyStateSelection;
 		string 							_sModelCode;
-		CvodeInterface 					cvode;
+		CvodeInterface 				   *cvode;
 		ISteadyStateSolver			   *steadyStateSolver;
         vector<TSelectionRecord> 		selectionList;
+        ModelGenerator				   *mModelGenerator;
+        Compiler					   *mCompiler;
 
 		// void 						AddNthOutputToResult(double[,] results, int nRow, double dCurrentTime);
         bool 							IsNleqAvailable();
@@ -66,6 +73,7 @@ class RR_DECLSPEC RoadRunner
         double 							computeSteadyStateValue(const TSelectionRecord& record);
         list<string> 					getParameterNames();
 
+
 	public:
     	// Properties -----------------------------------------------------------------------------
      	static bool                     _bComputeAndAssignConservationLaws;
@@ -80,7 +88,7 @@ class RR_DECLSPEC RoadRunner
         string 							sbmlStr;
 
 
-	    //IModel model = null;
+	    IModel*							model;
         double                         	timeEnd;
         double                         	timeStart;
     	string 							NL;
@@ -88,7 +96,7 @@ class RR_DECLSPEC RoadRunner
 		//Functions --------------------------------------------------------------------
         								RoadRunner();
     	rrDoubleMatrix 					runSimulation();
-		//void 							InitializeModel(object o);
+		void 							InitializeModel(IModel* o);
 		//static void                   DumpResults(TextWriter writer, double[,] data, ArrayList colLabels);
     	//static void                   TestDirectory(string directory, bool testSubDirs);
     	//static void                   TestDirectory(string directory, bool testSubDirs, string pattern);

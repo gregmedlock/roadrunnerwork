@@ -5,6 +5,7 @@
 #include <vector>
 #include <list>
 #include "rrExporter.h"
+#include "rrObject.h"
 #include "rrTEventDelayDelegate.h"
 #include "rrTEventAssignmentDelegate.h"
 #include "rrTComputeEventAssignmentDelegate.h"
@@ -17,9 +18,10 @@ using std::string;
 namespace rr
 {
 
-class RR_DECLSPEC IModel	//Abstract class for Models
+class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
 {
     private:
+
     public://==== this makes the following attributes public.. for now. No great design..
 
         // Property signatures:

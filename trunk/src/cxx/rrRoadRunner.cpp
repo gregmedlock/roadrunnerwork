@@ -3,6 +3,10 @@
 #endif
 #pragma hdrstop
 #include "rrRoadRunner.h"
+#include "rrException.h"
+#include "rrModelGenerator.h"
+#include "rrCompiler.h"
+#include "rrStreamWriter.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -22,7 +26,10 @@ STEADYSTATE_THRESHOLD(1.E-2),
 _L(0,0),
 _L0(0,0),
 _N(0,0),
-_Nr(0,0)
+_Nr(0,0),
+model(NULL),
+cvode(NULL),
+mModelGenerator(NULL)
 {
 
 }
@@ -434,81 +441,95 @@ _Nr(0,0)
 //        }
 //
 //        [Help("Load SBML into simulator")]
-//        public void loadSBML(string sbml)
-//        {
-//            if (string.IsNullOrEmpty(sbml))
-//                throw new SBWApplicationException("Invalid SBML");
-//
-//
-//            // If the user loads the same model again, don't both loading into NOM,
-//            // just reset the initial conditions
-//
-//            if (modelLoaded && model != null && (sbml == sbmlStr) && (sbml != ""))
-//            {
-//                InitializeModel(model);
-//                //reset();
-//            }
-//            else
-//            {
-//                if (model != null)
-//                {
-//                    cvode = null;
-//                    model = null;
-//                    modelLoaded = false;
-//                    GC.Collect();
-//                }
-//
-//                sbmlStr = sbml;
-//
-//
-//                _sModelCode = ModelGenerator.Instance.generateModelCode(sbmlStr);
-//
-//                string sLocation = GetType().Assembly.Location;
-//                Compiler.addAssembly(typeof(MathKGI).Assembly.Location);
-//                Compiler.addAssembly(typeof(System.Collections.Generic.List<string>).Assembly.Location);
-//
-//                object o = Compiler.getInstance(_sModelCode, "TModel", sLocation);
-//
-//                if (o != null)
-//                {
-//                    InitializeModel(o);
-//                }
-//                else
-//                {
-//                    model = null;
-//                    modelLoaded = false;
-//                    try
-//                    {
-//                        var sw = new StreamWriter(Environment.GetEnvironmentVariable("TEMP") + "/SBW_ErrorLog.txt");
-//                        try
-//                        {
-//                            sw.WriteLine("ErrorMessage: ");
-//                            sw.WriteLine(Compiler.getLastErrors());
-//                            sw.WriteLine("C# Model Code: ");
-//                            sw.Write(_sModelCode);
-//                        }
-//                        finally
-//                        {
-//                            sw.Close();
-//                        }
-//                    }
-//                    catch (Exception)
-//                    {
-//                    }
-//                    throw new SBWApplicationException("Internal Error: The model has failed to compile." + NL
-//                                                      + "The model file has been deposited at " +
-//                                                      Environment.GetEnvironmentVariable("TEMP") + "/SBW_ErrorLog.txt",
-//                                                      Compiler.getLastErrors());
-//                }
-//
-//                _L = StructAnalysis.GetLinkMatrix();
-//                _L0 = StructAnalysis.GetL0Matrix();
-//                _N = StructAnalysis.GetReorderedStoichiometryMatrix();
-//                _Nr = StructAnalysis.GetNrMatrix();
-//            }
-//        }
-//
-//
+void RoadRunner::loadSBML(const string& sbml)
+{
+    if (!sbml.size())
+    {
+        throw new SBWApplicationException("Invalid SBML");
+    }
+
+    // If the user loads the same model again, don't both loading into NOM,
+    // just reset the initial conditions
+
+    if (modelLoaded && model != NULL && (sbml == sbmlStr) && (sbml != ""))
+    {
+        InitializeModel(model);
+        //reset();
+    }
+    else
+    {
+        if (model != NULL)
+        {
+            delete cvode;
+            cvode = NULL;
+            delete model;
+            model = NULL;
+            modelLoaded = false;
+//            GC.Collect();
+        }
+
+        sbmlStr = sbml;
+
+
+		if(!mModelGenerator)
+        {
+			mModelGenerator = new ModelGenerator();
+        }
+        _sModelCode = mModelGenerator->generateModelCode(sbmlStr);
+
+//        string sLocation = GetType().Assembly.Location;
+//        Compiler.addAssembly(typeof(MathKGI).Assembly.Location);
+//        Compiler.addAssembly(typeof(System.Collections.Generic.List<string>).Assembly.Location);
+
+		if(!mCompiler)
+        {
+        	mCompiler  = new Compiler;
+        }
+        rrObject* o = mCompiler;//.getInstance(_sModelCode, "TModel", sLocation);
+
+        if (o != NULL)
+        {
+            InitializeModel(dynamic_cast<IModel*>(o));
+        }
+        else
+        {
+            model = NULL;
+            modelLoaded = false;
+          	string filePath = "SBW_ErrorLog.txt";
+            try
+            {
+
+                StreamWriter sw(filePath);// Environment.GetEnvironmentVariable("TEMP") + "/SBW_ErrorLog.txt");
+                try
+                {
+                    sw.WriteLine("ErrorMessage: ");
+                    sw.WriteLine(mCompiler->getLastErrors());
+                    sw.WriteLine("C# Model Code: ");
+                    sw.Write(_sModelCode);
+                    sw.Close();
+                }
+                catch(...)
+                {
+					throw new SBWApplicationException("Failed to write to file");
+                }
+            }
+            catch (RRException)
+            {
+            }
+           throw new SBWApplicationException("Internal Error: The model has failed to compile." + NL
+                                          + "The model file has been deposited at " +
+                                          filePath +
+                                          mCompiler->getLastErrors());
+
+        }
+
+        _L = StructAnalysis.GetLinkMatrix();
+        _L0 = StructAnalysis.GetL0Matrix();
+        _N = StructAnalysis.GetReorderedStoichiometryMatrix();
+        _Nr = StructAnalysis.GetNrMatrix();
+    }
+}
+
 //        [Help("Returns the initially loaded model as SBML")]
 //        public string getSBML()
 //        {
