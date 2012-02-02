@@ -17,8 +17,10 @@ namespace rr
 // ev is the model function
 // -------------------------------------------------------------------------
 CvodeInterface::CvodeInterface(IModel *aModel)
+:
+mRandom()
 {
-    mRandom.Init();
+
     InitializeCVODEInterface(aModel);
 }
 ////

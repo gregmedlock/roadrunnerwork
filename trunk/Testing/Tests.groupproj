@@ -13,7 +13,7 @@
 				<Dependencies/>
 			</Projects>
 			<Projects Include="loadSBML\loadSBML.cbproj">
-				<Dependencies/>
+				<Dependencies>..\src\RoadRunnerLib.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="Random\Random.cbproj">
 				<Dependencies/>
@@ -53,13 +53,13 @@
 		<Target Name="Exceptions:Make">
 			<MSBuild Projects="Exceptions\Exceptions.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="loadSBML">
+		<Target Name="loadSBML" DependsOnTargets="RoadRunnerLib">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj"/>
 		</Target>
-		<Target Name="loadSBML:Clean">
+		<Target Name="loadSBML:Clean" DependsOnTargets="RoadRunnerLib:Clean">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="loadSBML:Make">
+		<Target Name="loadSBML:Make" DependsOnTargets="RoadRunnerLib:Make">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Random">

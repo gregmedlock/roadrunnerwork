@@ -31,7 +31,7 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>C:\RRW\Testing\loadSBML\;C:\RRW\src\cxx;$(IncludePath)</IncludePath>
+			<IncludePath>C:\RRW\Testing\loadSBML\;C:\RRW\src\cxx;C:\RRW\src\cxx\Util;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
