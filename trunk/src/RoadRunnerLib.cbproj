@@ -33,8 +33,8 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\NOMLib\src\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;C:\RRW\NOMLib\src;C:\RRW\Externals\libsbml\src\sbml;C:\RRW\Externals\libsbml\src;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>cxx\Util\mtrand\;..\NOMLib\src\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;C:\RRW\NOMLib\src;C:\RRW\Externals\libsbml\src\sbml;C:\RRW\Externals\libsbml\src;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>cxx\Util\mtrand\;..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -138,6 +138,9 @@
 			<CppCompile Include="cxx\Solvers\rrNLEQInterface.cpp">
 				<DependentOn>cxx\Solvers\rrNLEQInterface.h</DependentOn>
 				<BuildOrder>18</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Util\mtrand\mtrand.cpp">
+				<BuildOrder>31</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="cxx\Util\rrCompiler.cpp">
 				<BuildOrder>27</BuildOrder>

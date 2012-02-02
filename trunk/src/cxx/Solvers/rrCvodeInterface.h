@@ -1,203 +1,65 @@
 #ifndef rrCvodeInterfaceH
 #define rrCvodeInterfaceH
+#include <string>
 #include "rrObject.h"
 #include "rrRandom.h"
+
+using std::string;
 
 class IModel;
 namespace rr
 {
-
+typedef int* IntPtr;
 class RR_DECLSPEC CvodeInterface : public rrObject
 {
     /// <summary>
     /// Point to the CVODE DLL to use
     /// </summary>
     private:
-//        	const string CVODE = "cvodedll";
-//        private static int nOneStepCount;
-//        private const double defaultReltol = 1E-6;
-//        private const double defaultAbsTol = 1E-12;
-//        private const int defaultMaxNumSteps = 10000;
+		const string CVODE;
+        static int nOneStepCount;
+        const double defaultReltol;
+        const double defaultAbsTol;
+        const int defaultMaxNumSteps;
 
-//        // Error codes
-//        private const int CV_ROOT_RETURN = 2;
-//        private const int CV_TSTOP_RETURN = 1;
-//        private const int CV_SUCCESS = 0;
-//        private const int CV_MEM_NULL = -1;
-//        private const int CV_ILL_INPUT = -2;
-//        private const int CV_NO_MALLOC = -3;
-//        private const int CV_TOO_MUCH_WORK = -4;
-//        private const int CV_TOO_MUCH_ACC = -5;
-//        private const int CV_ERR_FAILURE = -6;
-//        private const int CV_CONV_FAILURE = -7;
-//        private const int CV_LINIT_FAIL = -8;
-//        private const int CV_LSETUP_FAIL = -9;
-//        private const int CV_LSOLVE_FAIL = -10;
-//        private const int CV_MEM_FAIL = -11;
-//        private const int CV_RTFUNC_NULL = -12;
-//        private const int CV_NO_SLDET = -13;
-//        private const int CV_BAD_K = -14;
-//        private const int CV_BAD_T = -15;
-//        private const int CV_BAD_DKY = -16;
-//        private const int CV_PDATA_NULL = -17;
-//        private static readonly string tempPathstring = Path.GetTempPath();
-//        private static int errorFileCounter;
-//        private IntPtr fileHandle;
-//        private IModel model;
-//        private int numIndependentVariables;
-//        private readonly IntPtr gdata = IntPtr.Zero;
-//        private IntPtr _amounts;
-//        private IntPtr _rootsFound;
-//        private IntPtr abstolArray;
-//        private string cvodeLogFile = "cvodeLogFile";
-//        private IntPtr cvodeMem;
-	public:
-    	Random mRandom;// { get; set; }
-    //        public static int defaultMaxAdamsOrder = 12;
-//        public static int defaultMaxBDFOrder = 5;
-//        public static int MaxAdamsOrder = defaultMaxAdamsOrder;
-//        public static int MaxBDFOrder = defaultMaxBDFOrder;
-//        public static double InitStep = 0.0;
-//        public static double MinStep = 0.0;
-//        public static double MaxStep = 0.0;
-//        //static public double defaultReltol = 1E-15;
-//        //static public double defaultAbsTol = 1E-20;
-//        public static int MaxNumSteps = defaultMaxNumSteps;
-//        public static double relTol = defaultReltol;
-//        public static double absTol = defaultAbsTol;
-//        public int errCode;
-//        public static double lastTimeValue;
+        // Error codes
+        const int CV_ROOT_RETURN;
+        const int CV_TSTOP_RETURN;
+        const int CV_SUCCESS;
+        const int CV_MEM_NULL;
+        const int CV_ILL_INPUT;
+        const int CV_NO_MALLOC;
+        const int CV_TOO_MUCH_WORK;
+        const int CV_TOO_MUCH_ACC;
+        const int CV_ERR_FAILURE;
+        const int CV_CONV_FAILURE;
+        const int CV_LINIT_FAIL;
+        const int CV_LSETUP_FAIL;
+        const int CV_LSOLVE_FAIL;
+        const int CV_MEM_FAIL;
+        const int CV_RTFUNC_NULL;
+        const int CV_NO_SLDET;
+        const int CV_BAD_K;
+        const int CV_BAD_T;
+        const int CV_BAD_DKY;
+        const int CV_PDATA_NULL;
+        static string tempPathstring;// = Path.GetTempPath();
+        static int errorFileCounter;
+        IntPtr fileHandle;
+		IModel *model;
+        int numIndependentVariables;
+        IntPtr gdata;
+        IntPtr _amounts;
+        IntPtr _rootsFound;
+        IntPtr abstolArray;
+        string cvodeLogFile;// = "cvodeLogFile";
+        IntPtr cvodeMem;
+       	int numAdditionalRules;
 
-//        [DllImport(CVODE, EntryPoint = "fileOpen", ExactSpelling = false,
-//            CharSet = CharSet.Ansi, SetLastError = true)]
-//        public static extern IntPtr fileOpen(string fileName);
-//
-//        [DllImport(CVODE, EntryPoint = "fileClose", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern void fileClose(IntPtr fp);
-//
-//        [DllImport(CVODE, EntryPoint = "NewCvode_Vector", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern IntPtr NewCvode_Vector(int n);
-//
-//        [DllImport(CVODE, EntryPoint = "FreeCvode_Vector", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern void FreeCvode_Vector(IntPtr vect);
-//
-//        [DllImport(CVODE, EntryPoint = "FreeCvode_Mem", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern void FreeCvode_Mem(IntPtr p);
-//
-//        [DllImport(CVODE, EntryPoint = "Cvode_SetVector", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern void Cvode_SetVector(IntPtr v, int Index, double Value);
-//
-//        [DllImport(CVODE, EntryPoint = "Cvode_GetVector", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern double Cvode_GetVector(IntPtr v, int Index);
-//
-//        [DllImport(CVODE, EntryPoint = "Create_BDF_NEWTON_CVode", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern IntPtr Create_BDF_NEWTON_CVode();
-//
-//        [DllImport(CVODE, EntryPoint = "Create_ADAMS_FUNCTIONAL_CVode", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern IntPtr Create_ADAMS_FUNCTIONAL_CVode();
-//
-//        [DllImport(CVODE, EntryPoint = "AllocateCvodeMem", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int AllocateCvodeMem(IntPtr cvode_mem, int n, TCallBackModelFcn fcn, double t0, IntPtr y,
-//                                                  double reltol, IntPtr abstol);
-//
-//        [DllImport(CVODE, EntryPoint = "CvDense", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int CvDense(IntPtr cvode_mem, int n);
-//
-//        // int = size of systems
-//
-//        [DllImport(CVODE, EntryPoint = "CVReInit", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int CVReInit(IntPtr cvode_mem, double t0, IntPtr y0, double reltol, IntPtr abstol);
-//
-//        [DllImport(CVODE, EntryPoint = "Run_Cvode")]
-//        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr  y, ref double t, string ErrMsg);
-//        public static extern int RunCvode(IntPtr cvode_mem, double tout, IntPtr y, ref double t);
-//
-//        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr y, ref double t);  // t = double *
-//
-//        [DllImport(CVODE, EntryPoint = "CVGetRootInfo", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int CVGetRootInfo(IntPtr cvode_mem, IntPtr rootsFound);
-//
-//        [DllImport(CVODE, EntryPoint = "CVRootInit", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int CVRootInit(IntPtr cvode_mem, int numRoots, TCallBackRootFcn rootfcn, IntPtr gdata);
-//
-//        [DllImport(CVODE, EntryPoint = "SetMaxNumSteps", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int SetMaxNumSteps(IntPtr cvode_mem, int mxsteps);
-//
-//        [DllImport(CVODE, EntryPoint = "SetMinStep", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int SetMinStep(IntPtr cvode_mem, double minStep);
-//        [DllImport(CVODE, EntryPoint = "SetMaxStep", ExactSpelling = false,
-//                    CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int SetMaxStep(IntPtr cvode_mem, double maxStep);
-//        [DllImport(CVODE, EntryPoint = "SetInitStep", ExactSpelling = false,
-//                    CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int SetInitStep(IntPtr cvode_mem, double initStep);
-//
-//        [DllImport(CVODE, EntryPoint = "SetMaxOrder", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int SetMaxOrder(IntPtr cvode_mem, int mxorder);
-//
-//        [DllImport(CVODE, EntryPoint = "SetMaxErrTestFails", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int SetMaxErrTestFails(IntPtr cvode_mem, int maxnef);
-//
-//        [DllImport(CVODE, EntryPoint = "SetMaxConvFails", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int SetMaxConvFails(IntPtr cvode_mem, int maxncf);
-//
-//        [DllImport(CVODE, EntryPoint = "SetMaxNonLinIters", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int SetMaxNonLinIters(IntPtr cvode_mem, int maxcor);
-//
-//        [DllImport(CVODE, EntryPoint = "SetErrFile", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-//        public static extern int SetErrFile(IntPtr cvode_mem, IntPtr errfp);
-//        public delegate void TCallBackModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
-//        public delegate void TCallBackRootFcn(double t, IntPtr y, IntPtr gdot, IntPtr gdata);
-//        public static TCallBackModelFcn modelDelegate;
-//        public static TCallBackRootFcn eventDelegate;
-//        private static int nCount;
-//        private static int nRootCount;
-//        public void ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
-//        public double[] GetCopy(double[] oVector)
-//        public bool[] GetCopy(bool[] oVector)
-//        public void EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata)
-//        // -------------------------------------------------------------------------
-//        // Constructor
-//        // Model contains all the symbol tables associated with the model
-//        // ev is the model function
-//        // -------------------------------------------------------------------------
-//        private int numAdditionalRules;
-		CvodeInterface(IModel* oModel);
-//
-//        public bool HaveVariables
-		void InitializeCVODEInterface(IModel oModel)
-//        internal static CvodeErrorCodes[] errorCodes = InitilizeErrorCodes();
-//
-//        internal static CvodeErrorCodes[] InitilizeErrorCodes()
-//        [DebuggerHidden, DebuggerStepThrough]
-//        private void HandleCVODEError(int errCode)
+		void HandleCVODEError(int errCode);
 //        internal List<double> assignmentTimes = new List<double>();
 //        internal List<PendingAssignment> assignments = new List<PendingAssignment>();
 //        private bool followEvents = true;
-//        internal double lastEvent;
-//        //internal List<double> eventOccurance = new List<double>();
-//        public void Dispose()
-//        public double OneStep(double timeStart, double hstep)
 //        private void AssignPendingEvents(double timeEnd, double tout)
 //        private List<int> RetestEvents(double timeEnd, List<int> handledEvents)
 //        private List<int> RetestEvents(double timeEnd, List<int> handledEvents, out List<int> removeEvents)
@@ -209,9 +71,161 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //        private void SortEventsByPriority(List<int> firedEvents)
 //        private void HandleRootsForTime(double timeEnd, int[] rootsFound)
 //        private void AssignResultsToModel()
+
+
+	public:
+    	Random mRandom;// { get; set; }
+        int defaultMaxAdamsOrder;// = 12;
+        int defaultMaxBDFOrder;// = 5;
+        int MaxAdamsOrder;// = defaultMaxAdamsOrder;
+        int MaxBDFOrder;// = defaultMaxBDFOrder;
+        double InitStep;// = 0.0;
+        double MinStep;// = 0.0;
+        double MaxStep;// = 0.0;
+        int MaxNumSteps;// = defaultMaxNumSteps;
+        double relTol;// = defaultReltol;
+        double absTol;// = defaultAbsTol;
+        int errCode;
+        static double lastTimeValue;
+
+//        public delegate void TCallBackModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
+		typedef void (CvodeInterface::*TCallBackModelFcn)(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
+
+//        public delegate void TCallBackRootFcn(double t, IntPtr y, IntPtr gdot, IntPtr gdata);
+		typedef void (CvodeInterface::*TCallBackRootFcn)(double t, IntPtr y, IntPtr gdot, IntPtr gdata);
+
+		TCallBackModelFcn modelDelegate;
+        TCallBackRootFcn eventDelegate;
+
+//        [DllImport(CVODE, EntryPoint = "fileOpen", ExactSpelling = false,
+//            CharSet = CharSet.Ansi, SetLastError = true)]
+		IntPtr fileOpen(string fileName){};
+//
+//        [DllImport(CVODE, EntryPoint = "fileClose", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		void fileClose(IntPtr fp){};
+//
+//        [DllImport(CVODE, EntryPoint = "NewCvode_Vector", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+       	static IntPtr NewCvode_Vector(int n){};
+//
+//        [DllImport(CVODE, EntryPoint = "FreeCvode_Vector", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		void FreeCvode_Vector(IntPtr vect){};
+//
+//        [DllImport(CVODE, EntryPoint = "FreeCvode_Mem", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		void FreeCvode_Mem(IntPtr p){};
+//
+//        [DllImport(CVODE, EntryPoint = "Cvode_SetVector", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		void Cvode_SetVector(IntPtr v, int Index, double Value){};
+//
+//        [DllImport(CVODE, EntryPoint = "Cvode_GetVector", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+//        public static extern double Cvode_GetVector(IntPtr v, int Index){};
+//
+//        [DllImport(CVODE, EntryPoint = "Create_BDF_NEWTON_CVode", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		IntPtr Create_BDF_NEWTON_CVode(){};
+//
+//        [DllImport(CVODE, EntryPoint = "Create_ADAMS_FUNCTIONAL_CVode", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		IntPtr Create_ADAMS_FUNCTIONAL_CVode(){};
+//
+//        [DllImport(CVODE, EntryPoint = "AllocateCvodeMem", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int AllocateCvodeMem(IntPtr cvode_mem, int n, TCallBackModelFcn fcn, double t0, IntPtr y, double reltol, IntPtr abstol){};
+//
+//        [DllImport(CVODE, EntryPoint = "CvDense", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int CvDense(IntPtr cvode_mem, int n){};
+//
+//        // int = size of systems
+//
+//        [DllImport(CVODE, EntryPoint = "CVReInit", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int CVReInit(IntPtr cvode_mem, double t0, IntPtr y0, double reltol, IntPtr abstol){};
+//
+//        [DllImport(CVODE, EntryPoint = "Run_Cvode")]
+//        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr  y, ref double t, string ErrMsg){};
+		int RunCvode(IntPtr cvode_mem, double tout, IntPtr y, double t){};
+//
+//        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr y, ref double t);  // t = double *
+//
+//        [DllImport(CVODE, EntryPoint = "CVGetRootInfo", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int CVGetRootInfo(IntPtr cvode_mem, IntPtr rootsFound){};
+//
+//        [DllImport(CVODE, EntryPoint = "CVRootInit", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int CVRootInit(IntPtr cvode_mem, int numRoots, TCallBackRootFcn rootfcn, IntPtr gdata){};
+//
+//        [DllImport(CVODE, EntryPoint = "SetMaxNumSteps", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int SetMaxNumSteps(IntPtr cvode_mem, int mxsteps){};
+//
+//        [DllImport(CVODE, EntryPoint = "SetMinStep", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int SetMinStep(IntPtr cvode_mem, double minStep){};
+
+//        [DllImport(CVODE, EntryPoint = "SetMaxStep", ExactSpelling = false,
+//                    CharSet = CharSet.Unicode, SetLastError = true)]
+		int SetMaxStep(IntPtr cvode_mem, double maxStep){};
+
+//        [DllImport(CVODE, EntryPoint = "SetInitStep", ExactSpelling = false,
+//                    CharSet = CharSet.Unicode, SetLastError = true)]
+		int SetInitStep(IntPtr cvode_mem, double initStep){};
+//
+//        [DllImport(CVODE, EntryPoint = "SetMaxOrder", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int SetMaxOrder(IntPtr cvode_mem, int mxorder){};
+//
+//        [DllImport(CVODE, EntryPoint = "SetMaxErrTestFails", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int SetMaxErrTestFails(IntPtr cvode_mem, int maxnef);
+//
+//        [DllImport(CVODE, EntryPoint = "SetMaxConvFails", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int SetMaxConvFails(IntPtr cvode_mem, int maxncf){};
+//
+//        [DllImport(CVODE, EntryPoint = "SetMaxNonLinIters", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int SetMaxNonLinIters(IntPtr cvode_mem, int maxcor){};
+//
+//        [DllImport(CVODE, EntryPoint = "SetErrFile", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+		int SetErrFile(IntPtr cvode_mem, IntPtr errfp){};
+
+
+//        private static int nCount;
+//        private static int nRootCount;
+		void ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
+//        public double[] GetCopy(double[] oVector)
+//        public bool[] GetCopy(bool[] oVector)
+//        public void EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata)
+//        // -------------------------------------------------------------------------
+//        // Constructor
+//        // Model contains all the symbol tables associated with the model
+//        // ev is the model function
+//        // -------------------------------------------------------------------------
+		CvodeInterface(IModel* oModel);
+//
+//        public bool HaveVariables
+		void InitializeCVODEInterface(IModel *oModel);
+//        internal static CvodeErrorCodes[] errorCodes = InitilizeErrorCodes();
+//
+//        internal static CvodeErrorCodes[] InitilizeErrorCodes()
+//        [DebuggerHidden, DebuggerStepThrough]
+
+//        internal double lastEvent;
+//        //internal List<double> eventOccurance = new List<double>();
+//        public void Dispose()
+//        public double OneStep(double timeStart, double hstep)
+
 //        // Restart the simulation using a different initial condition
-//        public void AssignNewVector(IModel oModel, bool bAssignNewTolerances)
-//        private void AssignNewVector(IModel model)
+		void AssignNewVector(IModel *oModel, bool bAssignNewTolerances);
+        void AssignNewVector(IModel *model);
 //        public void setAbsTolerance(int index, double dValue)
 //        public int reStart(double timeStart, IModel model)
 //        public double getValue(int index)
@@ -223,7 +237,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //        /// <remarks>ReInitialize with specific seed in order to produce
 //        /// repeatable runs.</remarks>
 //        /// </summary>
-};
+};	//class
 }//namespace rr
 
 #endif

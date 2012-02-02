@@ -587,8 +587,8 @@ void RoadRunner::loadSBML(const string& sbml)
 //        }
 //
 //        [Help("reset the simulator back to the initial conditions specified in the SBML model")]
-//        public void reset()
-//        {
+void RoadRunner::reset()
+{
 //            if (!modelLoaded)
 //            {
 //                // rather make sure that the simulator is!!!! in a stable state
@@ -649,7 +649,7 @@ void RoadRunner::loadSBML(const string& sbml)
 //                    model.Warnings.Add("Constraint Violated at time = 0\n" + e.Message);
 //                }
 //            }
-//        }
+}
 //
 //        [Help(
 //            "Change the initial conditions to another concentration vector (changes only initial conditions for floating Species)"

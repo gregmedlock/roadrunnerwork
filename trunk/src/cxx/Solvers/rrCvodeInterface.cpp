@@ -2,15 +2,18 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include "rrIModel.h"
 #include "rrCvodeInterface.h"
+#include "rrException.h"
+#include "rrModelState.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-//////C#
 //////#define PRINT_EVENT_DEBUG
 ////
 namespace rr
 {
+
 // -------------------------------------------------------------------------
 // Constructor
 // Model contains all the symbol tables associated with the model
@@ -18,7 +21,51 @@ namespace rr
 // -------------------------------------------------------------------------
 CvodeInterface::CvodeInterface(IModel *aModel)
 :
-mRandom()
+mRandom(),
+modelDelegate(&CvodeInterface::ModelFcn),
+defaultReltol(1E-6),
+defaultAbsTol(1E-12),
+defaultMaxNumSteps(10000),
+defaultMaxAdamsOrder(12),
+defaultMaxBDFOrder(5),
+MaxAdamsOrder(defaultMaxAdamsOrder),
+MaxBDFOrder(defaultMaxBDFOrder),
+InitStep(0.0),
+MinStep(0.0),
+MaxStep(0.0),
+MaxNumSteps(defaultMaxNumSteps),
+relTol(defaultReltol),
+absTol(defaultAbsTol),
+CV_ROOT_RETURN(2),
+CV_TSTOP_RETURN(1),
+CV_SUCCESS(0),
+CV_MEM_NULL(-1),
+CV_ILL_INPUT(-2),
+CV_NO_MALLOC(-3),
+CV_TOO_MUCH_WORK(-4),
+CV_TOO_MUCH_ACC(-5),
+CV_ERR_FAILURE(-6),
+CV_CONV_FAILURE(-7),
+CV_LINIT_FAIL(-8),
+CV_LSETUP_FAIL(-9),
+CV_LSOLVE_FAIL(-10),
+CV_MEM_FAIL(-11),
+CV_RTFUNC_NULL(-12),
+CV_NO_SLDET(-13),
+CV_BAD_K(-14),
+CV_BAD_T(-15),
+CV_BAD_DKY(-16),
+CV_PDATA_NULL(-17),
+//errorFileCounter,
+//lastTimeValue),
+gdata(NULL),
+//_amounts),
+//_rootsFound),
+//abstolArray),
+cvodeLogFile("cvodeLogFile")
+
+
+
 {
 
     InitializeCVODEInterface(aModel);
@@ -29,83 +76,86 @@ mRandom()
 ////            get { return (numAdditionalRules + numIndependentVariables > 0); }
 ////        }
 ////
-////        private void InitializeCVODEInterface(IModel oModel)
-////        {
-////            try
-////            {
-////                model = oModel;
-////                numIndependentVariables = oModel.getNumIndependentVariables;
-////                numAdditionalRules = oModel.rateRules.Length;
-////                modelDelegate = new TCallBackModelFcn(ModelFcn);
-////                eventDelegate = new TCallBackRootFcn(EventFcn);
-////
-////                if (numAdditionalRules + numIndependentVariables > 0)
-////                {
-////                    int allocatedMemory = numIndependentVariables + numAdditionalRules;
-////                    _amounts = NewCvode_Vector(allocatedMemory);
-////                    abstolArray = NewCvode_Vector(allocatedMemory);
-////                    for (int i = 0; i < allocatedMemory; i++)
-////                    {
-////                        Cvode_SetVector(abstolArray, i, defaultAbsTol);
-////                    }
-////
-////                    AssignNewVector(oModel, true);
-////
-////                    cvodeMem = Create_BDF_NEWTON_CVode();
-////                    SetMaxOrder(cvodeMem, MaxBDFOrder);
-////                    //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
-////                    //SetMaxOrder(cvodeMem, MaxAdamsOrder);
-////                    SetInitStep(cvodeMem, InitStep);
-////                    SetMinStep(cvodeMem, MinStep);
-////                    SetMaxStep(cvodeMem, MaxStep);
-////
-////                    SetMaxNumSteps(cvodeMem, MaxNumSteps);
-////                    fileHandle = fileOpen(tempPathstring + cvodeLogFile + errorFileCounter + ".txt");
-////                    SetErrFile(cvodeMem, fileHandle);
-////                    errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, modelDelegate, 0.0, _amounts, relTol,
-////                                               abstolArray);
-////                    if (errCode < 0) HandleCVODEError(errCode);
-////                    if (oModel.getNumEvents > 0)
-////                        errCode = CVRootInit(cvodeMem, oModel.getNumEvents, eventDelegate, gdata);
-////                    errCode = CvDense(cvodeMem, allocatedMemory); // int = size of systems
-////                    if (errCode < 0) HandleCVODEError(errCode);
-////
-////                    oModel.resetEvents();
-////                }
-////                else if (model.getNumEvents > 0)
-////                {
-////                    int allocated = 1;
-////                    _amounts = NewCvode_Vector(allocated);
-////                    abstolArray = NewCvode_Vector(allocated);
-////                    Cvode_SetVector(_amounts, 0, 10f);
-////                    Cvode_SetVector(abstolArray, 0, defaultAbsTol);
-////
-////                    cvodeMem = Create_BDF_NEWTON_CVode();
-////                    SetMaxOrder(cvodeMem, MaxBDFOrder);
-////                    //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
-////                    //SetMaxOrder(cvodeMem, MaxAdamsOrder);
-////                    SetMaxNumSteps(cvodeMem, MaxNumSteps);
-////                    fileHandle = fileOpen(tempPathstring + cvodeLogFile + errorFileCounter + ".txt");
-////                    SetErrFile(cvodeMem, fileHandle);
-////                    errCode = AllocateCvodeMem(cvodeMem, allocated, modelDelegate, 0.0, _amounts, relTol, abstolArray);
-////                    if (errCode < 0) HandleCVODEError(errCode);
-////                    if (oModel.getNumEvents > 0)
-////                        errCode = CVRootInit(cvodeMem, oModel.getNumEvents, eventDelegate, gdata);
-////                    errCode = CvDense(cvodeMem, allocated); // int = size of systems
-////                    if (errCode < 0) HandleCVODEError(errCode);
-////
-////                    oModel.resetEvents();
-////                }
-////            }
-////            catch (Exception ex)
-////            {
-////                throw new SBWApplicationException("Fatal Error while initializing CVODE", ex.Message);
-////            }
-////        }
+void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
+{
 
+	if(!oModel)
+    {
+	    throw new SBWApplicationException("Fatal Error while initializing CVODE");
+    }
 
+    try
+    {
+        model = oModel;
+        numIndependentVariables = oModel->getNumIndependentVariables;
+        numAdditionalRules = oModel->rateRules.size();
+//        modelDelegate = &ModelFcn;
+//        eventDelegate = new TCallBackRootFcn(EventFcn);
 
+        if (numAdditionalRules + numIndependentVariables > 0)
+        {
+            int allocatedMemory = numIndependentVariables + numAdditionalRules;
+            _amounts = NewCvode_Vector(allocatedMemory);
+            abstolArray = NewCvode_Vector(allocatedMemory);
+            for (int i = 0; i < allocatedMemory; i++)
+            {
+                Cvode_SetVector(abstolArray, i, defaultAbsTol);
+            }
 
+            AssignNewVector(oModel, true);
+
+            cvodeMem = Create_BDF_NEWTON_CVode();
+            SetMaxOrder(cvodeMem, MaxBDFOrder);
+            //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
+            //SetMaxOrder(cvodeMem, MaxAdamsOrder);
+            SetInitStep(cvodeMem, InitStep);
+            SetMinStep(cvodeMem, MinStep);
+            SetMaxStep(cvodeMem, MaxStep);
+
+            SetMaxNumSteps(cvodeMem, MaxNumSteps);
+//            fileHandle = fileOpen(tempPathstring + cvodeLogFile + errorFileCounter + ".txt");
+//            SetErrFile(cvodeMem, fileHandle);
+            errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, modelDelegate, 0.0, _amounts, relTol,
+                                       abstolArray);
+            if (errCode < 0) HandleCVODEError(errCode);
+            if (oModel->getNumEvents > 0)
+                errCode = CVRootInit(cvodeMem, oModel->getNumEvents, eventDelegate, gdata);
+            errCode = CvDense(cvodeMem, allocatedMemory); // int = size of systems
+            if (errCode < 0) HandleCVODEError(errCode);
+
+            oModel->resetEvents();
+        }
+        else if (model->getNumEvents > 0)
+        {
+            int allocated = 1;
+            _amounts = NewCvode_Vector(allocated);
+            abstolArray = NewCvode_Vector(allocated);
+            Cvode_SetVector(_amounts, 0, 10);
+            Cvode_SetVector(abstolArray, 0, defaultAbsTol);
+
+            cvodeMem = Create_BDF_NEWTON_CVode();
+            SetMaxOrder(cvodeMem, MaxBDFOrder);
+            //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
+            //SetMaxOrder(cvodeMem, MaxAdamsOrder);
+            SetMaxNumSteps(cvodeMem, MaxNumSteps);
+
+            //fileHandle = fileOpen(tempPathstring + cvodeLogFile + errorFileCounter + ".txt");
+            //SetErrFile(cvodeMem, fileHandle);
+            errCode = AllocateCvodeMem(cvodeMem, allocated, modelDelegate, 0.0, _amounts, relTol, abstolArray);
+            if (errCode < 0) HandleCVODEError(errCode);
+            if (oModel->getNumEvents > 0)
+                errCode = CVRootInit(cvodeMem, oModel->getNumEvents, eventDelegate, gdata);
+            errCode = CvDense(cvodeMem, allocated); // int = size of systems
+            if (errCode < 0) HandleCVODEError(errCode);
+
+            oModel->resetEvents();
+        }
+    }
+    catch (RRException ex)
+    {
+        throw new SBWApplicationException("Fatal Error while initializing CVODE");//, ex.mMessage);
+    }
+}
 
 ////    public class CvodeInterface : IDisposable
 ////    {
@@ -310,43 +360,41 @@ mRandom()
 ////        private static int nCount;
 ////        private static int nRootCount;
 ////
-////        public void ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
-////        {
-////            var oldState = new ModelState(model);
-////
-////            var dCVodeArgument = new double[model.amounts.Length + model.rateRules.Length];
-////            Marshal.Copy(y, dCVodeArgument, 0, Math.Min(n, dCVodeArgument.Length));
-////
-////#if (PRINT_STEP_DEBUG)
-////		            System.Diagnostics.Debug.Write("CVode In: (" + nCount + ")" );
-////		            for (int i = 0; i < dCVodeArgument.Length; i++)
-////		            {
-////		                System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
-////		            }
-////		            System.Diagnostics.Debug.WriteLine("");
-////#endif
-////
-////            model.evalModel(time, dCVodeArgument);
-////
-////            model.rateRules.CopyTo(dCVodeArgument, 0);
-////            model.dydt.CopyTo(dCVodeArgument, model.rateRules.Length);
-////
-////#if (PRINT_STEP_DEBUG)
-////		            System.Diagnostics.Debug.Write("CVode Out: (" + nCount + ")");
-////		            for (int i = 0; i < dCVodeArgument.Length; i++)
-////		            {
-////		                System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
-////		            }
-////		            System.Diagnostics.Debug.WriteLine("");
-////#endif
-////
-////            Marshal.Copy(dCVodeArgument, 0, ydot, Math.Min(dCVodeArgument.Length, n));
-////
-////            nCount++;
-////
-////            oldState.AssignToModel(model);
-////        }
-////
+void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
+{
+    ModelState *oldState = new ModelState(*model);
+
+//    var dCVodeArgument = new double[model.amounts.Length + model.rateRules.Length];
+//    Marshal.Copy(y, dCVodeArgument, 0, Math.Min(n, dCVodeArgument.Length));
+//
+//	#if (PRINT_STEP_DEBUG)
+//	    System.Diagnostics.Debug.Write("CVode In: (" + nCount + ")" );
+//	    for (int i = 0; i < dCVodeArgument.Length; i++)
+//	    {
+//	        System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
+//	    }
+//	    System.Diagnostics.Debug.WriteLine("");
+//	#endif
+//	model.evalModel(time, dCVodeArgument);
+//	model.rateRules.CopyTo(dCVodeArgument, 0);
+//	model.dydt.CopyTo(dCVodeArgument, model.rateRules.Length);
+//
+//	#if (PRINT_STEP_DEBUG)
+//	    System.Diagnostics.Debug.Write("CVode Out: (" + nCount + ")");
+//	    for (int i = 0; i < dCVodeArgument.Length; i++)
+//	    {
+//	        System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
+//	    }
+//	    System.Diagnostics.Debug.WriteLine("");
+//	#endif
+//
+//    Marshal.Copy(dCVodeArgument, 0, ydot, Math.Min(dCVodeArgument.Length, n));
+//
+//    nCount++;
+//
+//    oldState.AssignToModel(model);
+}
+
 ////        public double[] GetCopy(double[] oVector)
 ////        {
 ////            var oResult = new double[oVector.Length];
@@ -435,8 +483,8 @@ mRandom()
 ////        }
 ////
 ////        [DebuggerHidden, DebuggerStepThrough]
-////        private void HandleCVODEError(int errCode)
-////        {
+void CvodeInterface::HandleCVODEError(int errCode)
+{
 ////            if (errCode < 0)
 ////            {
 ////                string msg = "";
@@ -465,7 +513,7 @@ mRandom()
 ////
 ////                throw new CvodeException("Error in RunCVode: " + errorCodes[-errCode].msg + msg);
 ////            }
-////        }
+}
 ////
 ////        #endregion
 ////
@@ -857,8 +905,8 @@ mRandom()
 ////
 ////
 ////        // Restart the simulation using a different initial condition
-////        public void AssignNewVector(IModel oModel, bool bAssignNewTolerances)
-////        {
+void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
+{
 ////            double[] dTemp = model.GetCurrentValues();
 ////            double dMin = absTol;
 ////
@@ -893,13 +941,13 @@ mRandom()
 ////            //{
 ////            //    System.Diagnostics.Debug.WriteLine(string.Format("Set tolerance to: {0:G}", dMin));
 ////            //}
-////        }
+}
 ////
 ////
-////        private void AssignNewVector(IModel model)
-////        {
+void CvodeInterface::AssignNewVector(IModel *model)
+{
 ////            AssignNewVector(model, false);
-////        }
+}
 ////
 ////        public void setAbsTolerance(int index, double dValue)
 ////        {
