@@ -9,7 +9,10 @@
 			<Projects Include="MathTest1.cbproj">
 				<Dependencies/>
 			</Projects>
-			<Projects Include="Exceptions\Project1.cbproj">
+			<Projects Include="Exceptions\Exceptions.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="loadSBML\loadSBML.cbproj">
 				<Dependencies/>
 			</Projects>
 		</ItemGroup>
@@ -38,23 +41,32 @@
 		<Target Name="MathTest1:Make">
 			<MSBuild Projects="MathTest1.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="Project1">
-			<MSBuild Projects="Exceptions\Project1.cbproj"/>
+		<Target Name="Exceptions">
+			<MSBuild Projects="Exceptions\Exceptions.cbproj"/>
 		</Target>
-		<Target Name="Project1:Clean">
-			<MSBuild Projects="Exceptions\Project1.cbproj" Targets="Clean"/>
+		<Target Name="Exceptions:Clean">
+			<MSBuild Projects="Exceptions\Exceptions.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="Project1:Make">
-			<MSBuild Projects="Exceptions\Project1.cbproj" Targets="Make"/>
+		<Target Name="Exceptions:Make">
+			<MSBuild Projects="Exceptions\Exceptions.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="loadSBML">
+			<MSBuild Projects="loadSBML\loadSBML.cbproj"/>
+		</Target>
+		<Target Name="loadSBML:Clean">
+			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="loadSBML:Make">
+			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="RoadRunnerLib;MathTest1;Project1"/>
+			<CallTarget Targets="RoadRunnerLib;MathTest1;Exceptions;loadSBML"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="RoadRunnerLib:Clean;MathTest1:Clean;Project1:Clean"/>
+			<CallTarget Targets="RoadRunnerLib:Clean;MathTest1:Clean;Exceptions:Clean;loadSBML:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="RoadRunnerLib:Make;MathTest1:Make;Project1:Make"/>
+			<CallTarget Targets="RoadRunnerLib:Make;MathTest1:Make;Exceptions:Make;loadSBML:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

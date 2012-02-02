@@ -7,6 +7,7 @@ int main()
 {
 	cout<<"Hello NOMLib. \nTesting a function from the library\n";
 
+
 	int returnVal = loadSBML("NONSENSE");
 
 	cout<<"The return value was: "<<returnVal<<endl;

@@ -9,9 +9,9 @@ NOMLib.cpp
 )
 
 
-#if(${BUILD_SHARED_LIBS})
-#	add_definitions(-DEXPORT_COMMON)
-#endif()
+if(${BUILD_SHARED_LIBS})
+	add_definitions(-DEXPORT_NOM)
+endif()
 
 
 if($BUILD_LIBS)

@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include "rrModelGenerator.h"
+#include "NOMLib.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 namespace rr
@@ -2510,125 +2511,100 @@ ModelGenerator::ModelGenerator()
 ////            return ModifiableSpeciesReferenceList.size();
 //        }
 //
+
 /// Generates the Model Code from the SBML string
 string ModelGenerator::generateModelCode(const string& sbmlStr)
 {
-    string sASCII = Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(sbmlStr));
-    Warnings = new List<string>();
-    var sb = new StringBuilder();
-    sASCII = NOM.convertTime(sASCII, "time");
-    NOM.loadSBML(sASCII, "time");
+    string sASCII = sbmlStr; //Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(sbmlStr));
+    list<string> Warnings;// = new List<string>();
+    StringBuilder sb;// = new StringBuilder();
 
-    _ModelName = NOM.getModelName();
-    _NumReactions = NOM.getNumReactions();
+//    sASCII = NOM.convertTime(sASCII, "time");
 
-    globalParameterList = new SymbolList();
-    ModifiableSpeciesReferenceList = new SymbolList();
+//    loadSBML(sASCII.c_str(), "time");
+	char* sbml = new char[sASCII.size()];
+    strcpy(sbml, sASCII.c_str());
+    loadSBML(sbml);
 
-    localParameterList = new SymbolList[_NumReactions];
-    reactionList = new SymbolList();
-    boundarySpeciesList = new SymbolList();
-    floatingSpeciesConcentrationList = new SymbolList();
-    floatingSpeciesAmountsList = new SymbolList();
-    compartmentList = new SymbolList();
-    conservationList = new SymbolList();
-    _functionNames = new list<string>();
-    _functionParameters = new StringCollection();
-
-    StructAnalysis.LoadSBML(sASCII);
-
-    if (RoadRunner._bComputeAndAssignConservationLaws)
-    {
-        _NumIndependentSpecies = StructAnalysis.GetNumIndependentSpecies();
-        independentSpeciesList = StructAnalysis.GetIndependentSpeciesIds();
-        dependentSpeciesList = StructAnalysis.GetDependentSpeciesIds();
-    }
-    else
-    {
-        _NumIndependentSpecies = StructAnalysis.GetNumSpecies();
-        independentSpeciesList = StructAnalysis.GetSpeciesIds();
-        dependentSpeciesList = new string[0];
-    }
-
-    sb.Append("//************************************************************************** " + NL());
-
-    // Load the compartment array (name and value)
-    _NumCompartments = ReadCompartments();
-
-    // Read FloatingSpecies
-    _NumFloatingSpecies = ReadFloatingSpecies();
-
-    _NumDependentSpecies = _NumFloatingSpecies - _NumIndependentSpecies;
-
-    // Load the boundary species array (name and value)
-    _NumBoundarySpecies = ReadBoundarySpecies();
-
-    // Get all the parameters into a list, global and local
-    _NumGlobalParameters = ReadGlobalParameters();
-
-    _NumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
-
-    // Load up local parameters next
-    ReadLocalParameters(_NumReactions, out _LocalParameterDimensions, out _TotalLocalParmeters);
-
-    _NumEvents = NOM.getNumEvents();
-
-    // Get the L0 matrix
-    rrDoubleMatrix L0 = InitializeL0();
-
-
-    WriteClassHeader(sb);
-
-    WriteOutVariables(sb);
-
-    WriteOutSymbolTables(sb);
-
-    WriteResetEvents(sb, _NumEvents);
-
-    WriteSetConcentration(sb);
-
-    WriteGetConcentration(sb);
-
-    WriteConvertToAmounts(sb);
-
-    WriteConvertToConcentrations(sb);
-
-    WriteProperties(sb);
-
-    WriteAccessors(sb);
-
-    WriteUserDefinedFunctions(sb);
-
-    WriteSetInitialConditions(sb, _NumFloatingSpecies);
-
-    WriteSetBoundaryConditions(sb);
-
-    WriteSetCompartmentVolumes(sb);
-
-    WriteSetParameterValues(sb, _NumReactions);
-
-    WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
-
-    WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
-
-    int numOfRules = WriteComputeRules(sb, _NumReactions);
-
-    WriteComputeAllRatesOfChange(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
-
-    WriteComputeReactionRates(sb, _NumReactions);
-
-    WriteEvalModel(sb, _NumReactions, _NumIndependentSpecies, _NumFloatingSpecies, numOfRules);
-
-    WriteEvalEvents(sb, _NumEvents, _NumFloatingSpecies);
-
-    WriteEventAssignments(sb, _NumReactions, _NumEvents);
-
-    WriteEvalInitialAssignments(sb, _NumReactions);
-
-    WriteTestConstraints(sb);
-
-    sb.AppendFormat("}}{0}{0}", NL());
-
-	return sb.ToString();
+//    _ModelName = NOM.getModelName();
+//    _NumReactions = NOM.getNumReactions();
+//
+//    globalParameterList = new SymbolList();
+//    ModifiableSpeciesReferenceList = new SymbolList();
+//
+//    localParameterList = new SymbolList[_NumReactions];
+//    reactionList = new SymbolList();
+//    boundarySpeciesList = new SymbolList();
+//    floatingSpeciesConcentrationList = new SymbolList();
+//    floatingSpeciesAmountsList = new SymbolList();
+//    compartmentList = new SymbolList();
+//    conservationList = new SymbolList();
+//    _functionNames = new list<string>();
+//    _functionParameters = new StringCollection();
+//
+//    StructAnalysis.LoadSBML(sASCII);
+//
+//    if (RoadRunner._bComputeAndAssignConservationLaws)
+//    {
+//        _NumIndependentSpecies = StructAnalysis.GetNumIndependentSpecies();
+//        independentSpeciesList = StructAnalysis.GetIndependentSpeciesIds();
+//        dependentSpeciesList = StructAnalysis.GetDependentSpeciesIds();
+//    }
+//    else
+//    {
+//        _NumIndependentSpecies = StructAnalysis.GetNumSpecies();
+//        independentSpeciesList = StructAnalysis.GetSpeciesIds();
+//        dependentSpeciesList = new string[0];
+//    }
+//
+//    sb.Append("//************************************************************************** " + NL());
+//
+//    // Load the compartment array (name and value)
+//    _NumCompartments = ReadCompartments();
+//
+//    // Read FloatingSpecies
+//    _NumFloatingSpecies = ReadFloatingSpecies();
+//    _NumDependentSpecies = _NumFloatingSpecies - _NumIndependentSpecies;
+//
+//    // Load the boundary species array (name and value)
+//    _NumBoundarySpecies = ReadBoundarySpecies();
+//
+//    // Get all the parameters into a list, global and local
+//    _NumGlobalParameters = ReadGlobalParameters();
+//    _NumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
+//
+//    // Load up local parameters next
+//    ReadLocalParameters(_NumReactions, out _LocalParameterDimensions, out _TotalLocalParmeters);
+//    _NumEvents = NOM.getNumEvents();
+//
+//    // Get the L0 matrix
+//    rrDoubleMatrix L0 = InitializeL0();
+//    WriteClassHeader(sb);
+//    WriteOutVariables(sb);
+//    WriteOutSymbolTables(sb);
+//    WriteResetEvents(sb, _NumEvents);
+//    WriteSetConcentration(sb);
+//    WriteGetConcentration(sb);
+//    WriteConvertToAmounts(sb);
+//    WriteConvertToConcentrations(sb);
+//    WriteProperties(sb);
+//    WriteAccessors(sb);
+//    WriteUserDefinedFunctions(sb);
+//    WriteSetInitialConditions(sb, _NumFloatingSpecies);
+//    WriteSetBoundaryConditions(sb);
+//    WriteSetCompartmentVolumes(sb);
+//    WriteSetParameterValues(sb, _NumReactions);
+//    WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
+//    WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
+//    int numOfRules = WriteComputeRules(sb, _NumReactions);
+//    WriteComputeAllRatesOfChange(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
+//    WriteComputeReactionRates(sb, _NumReactions);
+//    WriteEvalModel(sb, _NumReactions, _NumIndependentSpecies, _NumFloatingSpecies, numOfRules);
+//    WriteEvalEvents(sb, _NumEvents, _NumFloatingSpecies);
+//    WriteEventAssignments(sb, _NumReactions, _NumEvents);
+//    WriteEvalInitialAssignments(sb, _NumReactions);
+//    WriteTestConstraints(sb);
+//    sb.AppendFormat("}}{0}{0}", NL());
+//	return sb.ToString();
 }
 }

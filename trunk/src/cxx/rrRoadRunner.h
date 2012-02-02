@@ -2,7 +2,7 @@
 #define rrRoadRunnerH
 #include <string>
 #include "rrObject.h"
-#include "rrDoubleMatrix.h"
+#include "Util/rrDoubleMatrix.h"
 #include "rrIModel.h"
 #include "rrTVariableType.h"
 #include "rrTParameterType.h"

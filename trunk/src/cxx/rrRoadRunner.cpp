@@ -452,7 +452,7 @@ void RoadRunner::loadSBML(const string& sbml)
     // just reset the initial conditions
     if (modelLoaded && model != NULL && (sbml == sbmlStr) && (sbml != ""))
     {
-        InitializeModel(model);
+//        InitializeModel(model);
         //reset();
     }
     else
@@ -488,7 +488,7 @@ void RoadRunner::loadSBML(const string& sbml)
 
         if (o != NULL)
         {
-            InitializeModel(dynamic_cast<IModel*>(o));
+//            InitializeModel(dynamic_cast<IModel*>(o));
         }
         else
         {

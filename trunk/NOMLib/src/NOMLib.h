@@ -35,7 +35,13 @@
 #ifndef SBML_SUPPORT_H
 #define SBML_SUPPORT_H
 
+#if defined(EXPORT_NOM)
 #define DLL_EXPORT __declspec(dllexport)
+#elif defined(IMPORT_NOM)
+#define DLL_EXPORT __declspec(dllimport)
+#else
+#define DLL_EXPORT
+#endif
 
 #define WIN32_LEAN_AND_MEAN
 #undef SEVERITY_ERROR
