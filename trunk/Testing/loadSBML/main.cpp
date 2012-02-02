@@ -1,5 +1,3 @@
-//---------------------------------------------------------------------------
-
 #pragma hdrstop
 #include <iostream>
 #include <fstream>
@@ -23,7 +21,9 @@ int _tmain(int argc, _TCHAR* argv[])
     std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
     rr->loadSBML(sbml);
+
+
     delete rr;
 	return 0;
 }
-//---------------------------------------------------------------------------
+

@@ -1,6 +1,6 @@
 ﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
-			<ProjectGuid>{298010D1-293E-4D86-9938-0D102E54DF95}</ProjectGuid>
+			<ProjectGuid>{CC80C752-5416-4F2C-A53C-BA03FD07D889}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
 			<Base>True</Base>
 			<Config Condition="'$(Config)'==''">Debug</Config>
@@ -23,19 +23,16 @@
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<NoVCL>true</NoVCL>
-			<BCC_Defines>IMPORT_RR_PKG;$(BCC_Defines)</BCC_Defines>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
-			<BCC_IncludePath>C:\RRW\src\cxx;$(BCC_IncludePath)</BCC_IncludePath>
 			<ProjectType>CppConsoleApplication</ProjectType>
-			<PackageImports>rtl.bpi;vclimg.bpi;vcl.bpi;vclx.bpi;vcldb.bpi;dbrtl.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;vcltouch.bpi;xmlrtl.bpi;vclactnband.bpi;dsnap.bpi;dbxcds.bpi;dbexpress.bpi;DbxCommonDriver.bpi;vclribbon.bpi;DataSnapIndy10ServerTransport.bpi;DbxClientDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;bcbsmp.bpi;IndyProtocols.bpi;inet.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vcldbx.bpi;bdertl.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;DataSnapProviderClient.bpi;vclie.bpi;inetdbbde.bpi;inetdbxpress.bpi;DataSnapClient.bpi;inetdb.bpi;DataSnapServer.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi;DuneComponents.bpi;mtkCommonRTL.bpi;VCLCommonRTL.bpi;vtkComponents.bpi;mtkGraphicsRTL.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;VCLData.bpi;VCLMolecule.bpi;mtkMoleculeRTL.bpi;mtkSpinRTL.bpi;GenesisVisualComponents.bpi</PackageImports>
+			<PackageImports>rtl.bpi;vclimg.bpi;vcl.bpi;vclx.bpi;vcldb.bpi;dbrtl.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;vcltouch.bpi;xmlrtl.bpi;vclactnband.bpi;dsnap.bpi;dbxcds.bpi;dbexpress.bpi;DbxCommonDriver.bpi;vclribbon.bpi;DataSnapIndy10ServerTransport.bpi;DbxClientDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;bcbsmp.bpi;IndyProtocols.bpi;inet.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vcldbx.bpi;bdertl.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;DataSnapProviderClient.bpi;vclie.bpi;inetdbbde.bpi;inetdbxpress.bpi;DataSnapClient.bpi;inetdb.bpi;DataSnapServer.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi;DuneComponents.bpi;mtkCommonRTL.bpi;VCLCommonRTL.bpi;VCLData.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;GenesisVisualComponents.bpi</PackageImports>
 			<OutputExt>exe</OutputExt>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
-			<_TCHARMapping>char</_TCHARMapping>
+			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\src\cxx\;math\;C:\RRW\Testing\math\;P:\mtk\Components\vtk\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\src\cxx\;..\build\link\;math\;C:\RRW\Testing\math\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-			<Multithreaded>true</Multithreaded>
+			<IncludePath>..\..\src\cxx\Util\;..\..\src\cxx\Util\mtrand\;C:\RRW\Testing\Random\;C:\RRW\src\cxx\Util;C:\RRW\src\cxx;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\src\cxx\Util\;..\..\src\cxx\Util\mtrand\;C:\RRW\Testing\Random\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -46,7 +43,6 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<FinalOutputDir>C:\RRW\build\bin\</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -68,11 +64,14 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="..\build\link\RoadRunnerLib.lib">
-				<IgnorePath>true</IgnorePath>
+			<CppCompile Include="..\..\src\cxx\Util\mtrand\mtrand.cpp">
 				<BuildOrder>1</BuildOrder>
-			</LibFiles>
-			<CppCompile Include="math\test1.cpp">
+			</CppCompile>
+			<CppCompile Include="..\..\src\cxx\Util\rrRandom.cpp">
+				<DependentOn>..\..\src\cxx\Util\rrRandom.h</DependentOn>
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">
@@ -89,9 +88,6 @@
 		</ItemGroup>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
-		<PropertyGroup Condition="'$(FileToCompile)'==''">
-			<PostBuildEvent><![CDATA[cygwin_here.bat -p PostBuild.sh MathTest1 Debug]]></PostBuildEvent>
-		</PropertyGroup>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
 			<Borland.ProjectType>CppConsoleApplication</Borland.ProjectType>

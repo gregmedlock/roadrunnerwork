@@ -27,7 +27,7 @@ _L(0,0),
 _L0(0,0),
 _N(0,0),
 _Nr(0,0),
-model(NULL),
+mModel(NULL),
 cvode(NULL),
 mModelGenerator(NULL)
 {
@@ -304,44 +304,50 @@ mModelGenerator(NULL)
 //        }
 //#endif
 //
-//        private void InitializeModel(object o)
-//        {
-//            model = ((IModel)o);
-//            model.Warnings.AddRange(ModelGenerator.Instance.Warnings);
-//            modelLoaded = true;
-//            _bConservedTotalChanged = false;
-//
-//            model.setCompartmentVolumes();
-//            model.initializeInitialConditions();
-//            model.setParameterValues();
-//            model.setCompartmentVolumes();
-//            model.setBoundaryConditions();
-//
-//            model.setInitialConditions();
-//            model.convertToAmounts();
-//
-//            model.evalInitialAssignments();
-//            model.computeRules(model.y);
-//            model.convertToAmounts();
-//
-//            if (_bComputeAndAssignConservationLaws) model.computeConservedTotals();
-//
-//            cvode = new CvodeInterface(model);
-//
-//            reset();
-//
-//            // Construct default selection list
-//            selectionList = new TSelectionRecord[model.getNumTotalVariables + 1]; // + 1 to include time
-//            selectionList[0].selectionType = TSelectionType.clTime;
-//            for (int i = 0; i < model.getNumTotalVariables; i++)
-//            {
-//                selectionList[i + 1].index = i;
-//                selectionList[i + 1].selectionType = TSelectionType.clFloatingSpecies;
-//            }
-//
-//            _oSteadyStateSelection = null;
-//        }
-//
+void RoadRunner::InitializeModel(IModel* aModel)
+{
+    mModel = aModel;//((IModel)o);
+
+    if(!mModel)
+    {
+    	return;
+    }
+    IModel& model = *mModel;
+    //model.Warnings.AddRange(ModelGenerator.Instance.Warnings);
+    modelLoaded = true;
+    _bConservedTotalChanged = false;
+
+    model.setCompartmentVolumes();
+    model.initializeInitialConditions();
+    model.setParameterValues();
+    model.setCompartmentVolumes();
+    model.setBoundaryConditions();
+
+    model.setInitialConditions();
+    model.convertToAmounts();
+
+    model.evalInitialAssignments();
+    model.computeRules(model.y);
+    model.convertToAmounts();
+
+    if (_bComputeAndAssignConservationLaws) model.computeConservedTotals();
+
+    cvode = new CvodeInterface(mModel);
+
+    reset();
+
+    // Construct default selection list
+    selectionList.resize(model.getNumTotalVariables + 1); // + 1 to include time
+    selectionList[0].selectionType = TSelectionType::clTime;
+    for (int i = 0; i < model.getNumTotalVariables; i++)
+    {
+        selectionList[i + 1].index = i;
+        selectionList[i + 1].selectionType = TSelectionType::clFloatingSpecies;
+    }
+
+//    _oSteadyStateSelection = NULL;
+}
+
 //        private static void DumpResults(TextWriter writer, double[,] data, ArrayList colLabels)
 //        {
 //            for (int i = 0; i < colLabels.Count; i++)
@@ -450,24 +456,23 @@ void RoadRunner::loadSBML(const string& sbml)
 
     // If the user loads the same model again, don't both loading into NOM,
     // just reset the initial conditions
-    if (modelLoaded && model != NULL && (sbml == sbmlStr) && (sbml != ""))
+    if (modelLoaded && mModel != NULL && (sbml == sbmlStr) && (sbml != ""))
     {
-//        InitializeModel(model);
+        InitializeModel(mModel);
         //reset();
     }
     else
     {
-        if(model != NULL)
+        if(mModel != NULL)
         {
             delete cvode;
             cvode = NULL;
-            delete model;
-            model = NULL;
+            delete mModel;
+            mModel = NULL;
             modelLoaded = false;
         }
 
         sbmlStr = sbml;
-
 
 		if(!mModelGenerator)
         {
@@ -492,7 +497,7 @@ void RoadRunner::loadSBML(const string& sbml)
         }
         else
         {
-            model 		= NULL;
+            mModel 		= NULL;
             modelLoaded = false;
           	string filePath = "SBW_ErrorLog.txt";
             try

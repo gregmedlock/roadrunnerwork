@@ -86,7 +86,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         string 							sbmlStr;
 
 
-	    IModel*							model;
+	    IModel*							mModel;
         double                         	timeEnd;
         double                         	timeStart;
     	string 							NL;
@@ -94,7 +94,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		//Functions --------------------------------------------------------------------
         								RoadRunner();
     	rrDoubleMatrix 					runSimulation();
-		void 							InitializeModel(IModel* o);
+		void 							InitializeModel(IModel* model);
 		//static void                   DumpResults(TextWriter writer, double[,] data, ArrayList colLabels);
     	//static void                   TestDirectory(string directory, bool testSubDirs);
     	//static void                   TestDirectory(string directory, bool testSubDirs, string pattern);

@@ -1,44 +1,24 @@
 #ifndef rrCvodeInterfaceH
 #define rrCvodeInterfaceH
 #include "rrObject.h"
+#include "rrRandom.h"
 
+class IModel;
 namespace rr
 {
-    class RR_DECLSPEC CvodeInterface : public rrObject//: IDisposable
-    {
-        /// <summary>
-        /// Point to the CVODE DLL to use
-        /// </summary>
-        private:
+
+class RR_DECLSPEC CvodeInterface : public rrObject//: IDisposable
+{
+    /// <summary>
+    /// Point to the CVODE DLL to use
+    /// </summary>
+    private:
 //        	const string CVODE = "cvodedll";
-//
 //        private static int nOneStepCount;
-//
-//        #region Default CVODE Settings
-//
 //        private const double defaultReltol = 1E-6;
 //        private const double defaultAbsTol = 1E-12;
 //        private const int defaultMaxNumSteps = 10000;
-//        public static int defaultMaxAdamsOrder = 12;
-//        public static int defaultMaxBDFOrder = 5;
-//
-//        public static int MaxAdamsOrder = defaultMaxAdamsOrder;
-//        public static int MaxBDFOrder = defaultMaxBDFOrder;
-//
-//        public static double InitStep = 0.0;
-//        public static double MinStep = 0.0;
-//        public static double MaxStep = 0.0;
-//
-//
-//        //static public double defaultReltol = 1E-15;
-//        //static public double defaultAbsTol = 1E-20;
-//
-//        public static int MaxNumSteps = defaultMaxNumSteps;
-//        public static double relTol = defaultReltol;
-//        public static double absTol = defaultAbsTol;
-//
-//        #endregion
-//
+
 //        #region Class Variables
 //
 //        // Error codes
@@ -55,37 +35,50 @@ namespace rr
 //        private const int CV_LINIT_FAIL = -8;
 //        private const int CV_LSETUP_FAIL = -9;
 //        private const int CV_LSOLVE_FAIL = -10;
-//
 //        private const int CV_MEM_FAIL = -11;
-//
 //        private const int CV_RTFUNC_NULL = -12;
 //        private const int CV_NO_SLDET = -13;
 //        private const int CV_BAD_K = -14;
 //        private const int CV_BAD_T = -15;
 //        private const int CV_BAD_DKY = -16;
-//
 //        private const int CV_PDATA_NULL = -17;
 //        private static readonly string tempPathstring = Path.GetTempPath();
-//
-//
 //        private static int errorFileCounter;
-//        public static double lastTimeValue;
+//        private IntPtr fileHandle;
+//        private IModel model;
+//        private int numIndependentVariables;
 //        private readonly IntPtr gdata = IntPtr.Zero;
 //        private IntPtr _amounts;
 //        private IntPtr _rootsFound;
 //        private IntPtr abstolArray;
 //        private string cvodeLogFile = "cvodeLogFile";
 //        private IntPtr cvodeMem;
-//        public int errCode;
-//
-//        private IntPtr fileHandle;
-//        private IModel model;
-//        private int numIndependentVariables;
+
 //
 //        #endregion
 //
 //        #region Library Imports
 //
+	public:
+    	Random mRandom;// { get; set; }
+    //        public static int defaultMaxAdamsOrder = 12;
+//        public static int defaultMaxBDFOrder = 5;
+//        public static int MaxAdamsOrder = defaultMaxAdamsOrder;
+//        public static int MaxBDFOrder = defaultMaxBDFOrder;
+//        public static double InitStep = 0.0;
+//        public static double MinStep = 0.0;
+//        public static double MaxStep = 0.0;
+//        //static public double defaultReltol = 1E-15;
+//        //static public double defaultAbsTol = 1E-20;
+//
+//        public static int MaxNumSteps = defaultMaxNumSteps;
+//        public static double relTol = defaultReltol;
+//        public static double absTol = defaultAbsTol;
+
+//        public int errCode;
+//        public static double lastTimeValue;
+//
+
 //        [DllImport(CVODE, EntryPoint = "fileOpen", ExactSpelling = false,
 //            CharSet = CharSet.Ansi, SetLastError = true)]
 //        public static extern IntPtr fileOpen(string fileName);
@@ -189,25 +182,12 @@ namespace rr
 //        [DllImport(CVODE, EntryPoint = "SetErrFile", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
 //        public static extern int SetErrFile(IntPtr cvode_mem, IntPtr errfp);
-//
-//        #endregion
-//
-//        #region CVODE Callback functions
-//
-//        #region Delegates
-//
 //        public delegate void TCallBackModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
-//
 //        public delegate void TCallBackRootFcn(double t, IntPtr y, IntPtr gdot, IntPtr gdata);
-//
-//        #endregion
-//
 //        public static TCallBackModelFcn modelDelegate;
 //        public static TCallBackRootFcn eventDelegate;
-//
 //        private static int nCount;
 //        private static int nRootCount;
-//
 //        public void ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
 //        {
 //            var oldState = new ModelState(model);
@@ -283,25 +263,14 @@ namespace rr
 //
 //            oldState.AssignToModel(model);
 //        }
-//
-//        #endregion
-//
-//        #region Constructor & Initialization
-//
 //        // -------------------------------------------------------------------------
 //        // Constructor
 //        // Model contains all the symbol tables associated with the model
 //        // ev is the model function
 //        // -------------------------------------------------------------------------
-//
-//
 //        private int numAdditionalRules;
 //
-//        public CvodeInterface(IModel oModel)
-//        {
-//            Random = new Random();
-//            InitializeCVODEInterface(oModel);
-//        }
+		CvodeInterface(IModel* oModel);
 //
 //        public bool HaveVariables
 //        {
@@ -945,8 +914,8 @@ namespace rr
 //        /// <remarks>ReInitialize with specific seed in order to produce
 //        /// repeatable runs.</remarks>
 //        /// </summary>
-//        public Random Random { get; set; }
-    };
+
+};
 }//namespace rr
 
 #endif
