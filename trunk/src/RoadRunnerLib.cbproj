@@ -34,7 +34,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>cxx\Util\mtrand\;..\NOMLib\src\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;C:\RRW\NOMLib\src;C:\RRW\Externals\libsbml\src\sbml;C:\RRW\Externals\libsbml\src;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>cxx\Util\mtrand\;..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>C:\rr_install\lib\;cxx\Util\mtrand\;..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -46,6 +46,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<IncludePath>C:\rr_install\include;$(IncludePath)</IncludePath>
 			<FinalOutputDir>C:\RRW\build\link</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
@@ -190,6 +191,10 @@
 			<LibFiles Include="..\xe_builds\Debug\Win32\libSBML_XE.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>29</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rr_install\lib\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>32</BuildOrder>
 			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>

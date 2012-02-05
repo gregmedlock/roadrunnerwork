@@ -36,26 +36,26 @@ MaxStep(0.0),
 MaxNumSteps(defaultMaxNumSteps),
 relTol(defaultReltol),
 absTol(defaultAbsTol),
-CV_ROOT_RETURN(2),
-CV_TSTOP_RETURN(1),
-CV_SUCCESS(0),
-CV_MEM_NULL(-1),
-CV_ILL_INPUT(-2),
-CV_NO_MALLOC(-3),
-CV_TOO_MUCH_WORK(-4),
-CV_TOO_MUCH_ACC(-5),
-CV_ERR_FAILURE(-6),
-CV_CONV_FAILURE(-7),
-CV_LINIT_FAIL(-8),
-CV_LSETUP_FAIL(-9),
-CV_LSOLVE_FAIL(-10),
-CV_MEM_FAIL(-11),
-CV_RTFUNC_NULL(-12),
-CV_NO_SLDET(-13),
-CV_BAD_K(-14),
-CV_BAD_T(-15),
-CV_BAD_DKY(-16),
-CV_PDATA_NULL(-17),
+//CV_ROOT_RETURN(2),
+//CV_TSTOP_RETURN(1),
+//CV_SUCCESS(0),
+//CV_MEM_NULL(-1),
+//CV_ILL_INPUT(-2),
+//CV_NO_MALLOC(-3),
+//CV_TOO_MUCH_WORK(-4),
+//CV_TOO_MUCH_ACC(-5),
+//CV_ERR_FAILURE(-6),
+//CV_CONV_FAILURE(-7),
+//CV_LINIT_FAIL(-8),
+//CV_LSETUP_FAIL(-9),
+//CV_LSOLVE_FAIL(-10),
+//CV_MEM_FAIL(-11),
+//CV_RTFUNC_NULL(-12),
+//CV_NO_SLDET(-13),
+//CV_BAD_K(-14),
+//CV_BAD_T(-15),
+//CV_BAD_DKY(-16),
+//CV_PDATA_NULL(-17),
 //errorFileCounter,
 //lastTimeValue),
 gdata(NULL),
@@ -104,11 +104,11 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 
             AssignNewVector(oModel, true);
 
-            cvodeMem = Create_BDF_NEWTON_CVode();
-            SetMaxOrder(cvodeMem, MaxBDFOrder);
+            cvodeMem = CVodeCreate(CV_BDF, CV_NEWTON); //Create_BDF_NEWTON_CVode();
+            CVodeSetMaxOrder(cvodeMem, MaxBDFOrder);
             //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
             //SetMaxOrder(cvodeMem, MaxAdamsOrder);
-            SetInitStep(cvodeMem, InitStep);
+            CVodeSetInitStep(cvodeMem, InitStep);
             SetMinStep(cvodeMem, MinStep);
             SetMaxStep(cvodeMem, MaxStep);
 
