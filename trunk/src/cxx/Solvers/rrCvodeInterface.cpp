@@ -6,6 +6,7 @@
 #include "rrCvodeInterface.h"
 #include "rrException.h"
 #include "rrModelState.h"
+#include "rrCvodedll.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -104,8 +105,8 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 
             AssignNewVector(oModel, true);
 
-            cvodeMem = CVodeCreate(CV_BDF, CV_NEWTON); //Create_BDF_NEWTON_CVode();
-            CVodeSetMaxOrder(cvodeMem, MaxBDFOrder);
+            cvodeMem = (int*) Create_BDF_NEWTON_CVode();
+            SetMaxOrder(cvodeMem, MaxBDFOrder);
             //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
             //SetMaxOrder(cvodeMem, MaxAdamsOrder);
             CVodeSetInitStep(cvodeMem, InitStep);
@@ -133,7 +134,7 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
             Cvode_SetVector(_amounts, 0, 10);
             Cvode_SetVector(abstolArray, 0, defaultAbsTol);
 
-            cvodeMem = Create_BDF_NEWTON_CVode();
+            cvodeMem = (int*) Create_BDF_NEWTON_CVode();
             SetMaxOrder(cvodeMem, MaxBDFOrder);
             //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
             //SetMaxOrder(cvodeMem, MaxAdamsOrder);

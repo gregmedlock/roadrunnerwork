@@ -9,14 +9,14 @@
 			<Projects Include="math\MathTest1.cbproj">
 				<Dependencies/>
 			</Projects>
+			<Projects Include="Random\Random.cbproj">
+				<Dependencies/>
+			</Projects>
 			<Projects Include="Exceptions\Exceptions.cbproj">
 				<Dependencies/>
 			</Projects>
 			<Projects Include="loadSBML\loadSBML.cbproj">
 				<Dependencies>..\src\RoadRunnerLib.cbproj</Dependencies>
-			</Projects>
-			<Projects Include="Random\Random.cbproj">
-				<Dependencies/>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -44,6 +44,15 @@
 		<Target Name="MathTest1:Make">
 			<MSBuild Projects="math\MathTest1.cbproj" Targets="Make"/>
 		</Target>
+		<Target Name="Random">
+			<MSBuild Projects="Random\Random.cbproj"/>
+		</Target>
+		<Target Name="Random:Clean">
+			<MSBuild Projects="Random\Random.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="Random:Make">
+			<MSBuild Projects="Random\Random.cbproj" Targets="Make"/>
+		</Target>
 		<Target Name="Exceptions">
 			<MSBuild Projects="Exceptions\Exceptions.cbproj"/>
 		</Target>
@@ -62,23 +71,14 @@
 		<Target Name="loadSBML:Make" DependsOnTargets="RoadRunnerLib:Make">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="Random">
-			<MSBuild Projects="Random\Random.cbproj"/>
-		</Target>
-		<Target Name="Random:Clean">
-			<MSBuild Projects="Random\Random.cbproj" Targets="Clean"/>
-		</Target>
-		<Target Name="Random:Make">
-			<MSBuild Projects="Random\Random.cbproj" Targets="Make"/>
-		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="RoadRunnerLib;MathTest1;Exceptions;loadSBML;Random"/>
+			<CallTarget Targets="RoadRunnerLib;MathTest1;Random;Exceptions;loadSBML"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="RoadRunnerLib:Clean;MathTest1:Clean;Exceptions:Clean;loadSBML:Clean;Random:Clean"/>
+			<CallTarget Targets="RoadRunnerLib:Clean;MathTest1:Clean;Random:Clean;Exceptions:Clean;loadSBML:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="RoadRunnerLib:Make;MathTest1:Make;Exceptions:Make;loadSBML:Make;Random:Make"/>
+			<CallTarget Targets="RoadRunnerLib:Make;MathTest1:Make;Random:Make;Exceptions:Make;loadSBML:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

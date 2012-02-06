@@ -2,6 +2,7 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include <iostream>
 #include "rrRoadRunner.h"
 #include "rrException.h"
 #include "rrModelGenerator.h"
@@ -9,7 +10,7 @@
 #include "rrStreamWriter.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-
+using namespace std;
 namespace rr
 {
 
@@ -441,10 +442,18 @@ void RoadRunner::InitializeModel(IModel* aModel)
 //        }
 //
 //        [Help("Load SBML into simulator")]
-//        public void loadSBMLFromFile(string fileName)
-//        {
-//            loadSBML(File.ReadAllText(fileName));
-//        }
+void RoadRunner::loadSBMLFromFile(const string& fileName)
+{
+    ifstream ifs(fileName.c_str());
+    if(!ifs)
+    {
+    	cout<<"Failed opening file";
+    }
+
+    std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+    cout<<sbml<<endl;
+    loadSBML(sbml);
+}
 //
 //        [Help("Load SBML into simulator")]
 void RoadRunner::loadSBML(const string& sbml)

@@ -11,16 +11,10 @@ using namespace rr;
 #pragma argsused
 int _tmain(int argc, _TCHAR* argv[])
 {
+	string fName = "feedback.xml";
 	RoadRunner *rr = new RoadRunner;
-    ifstream ifs("feedback.xml");
 
-    if(!ifs)
-    {
-    	cout<<"Failed opening file";
-    }
-    std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
-
-    rr->loadSBML(sbml);
+    rr->loadSBMLFromFile(fName);
 
 
     delete rr;

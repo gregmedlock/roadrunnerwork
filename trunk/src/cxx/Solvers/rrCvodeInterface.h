@@ -12,6 +12,7 @@ namespace rr
 {
 typedef int* IntPtr;
 typedef void* CVodeMemPtr;
+
 class RR_DECLSPEC CvodeInterface : public rrObject
 {
     /// <summary>
@@ -55,8 +56,8 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         IntPtr _rootsFound;
         IntPtr abstolArray;
         string cvodeLogFile;// = "cvodeLogFile";
-        //IntPtr cvodeMem;
-        CVodeMemPtr cvodeMem;
+        IntPtr cvodeMem;
+        //CVodeMemPtr cvodeMem;
        	int numAdditionalRules;
 
 		void HandleCVODEError(int errCode);

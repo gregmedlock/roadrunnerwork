@@ -10,7 +10,7 @@
 #include "rrStringUtils.h"
 #include "rrRoadRunner.h"
 #include "rrException.h"
-
+#include "libstructural.h"
 using std::string;
 using std::vector;
 using std::list;

@@ -1,6 +1,7 @@
 // CVODE22.cpp : Defines the entry point for the DLL application.
 //
-
+#ifndef rrCvodedllH
+#define rrCvodedllH
 #include <stdlib.h>
 #ifdef WIN32
 #include <windows.h>
@@ -138,13 +139,13 @@ static int InternalRootCall (realtype t, N_Vector y, realtype *gout, void *g_dat
 
 
 // Set for stiff systems
-void *Create_BDF_NEWTON_CVode() {
+void* Create_BDF_NEWTON_CVode() {
 	return CVodeCreate(CV_BDF, CV_NEWTON);
 }
 
 
 // Set for non-stiff systems
-void *Create_ADAMS_FUNCTIONAL_CVode () {
+void* Create_ADAMS_FUNCTIONAL_CVode () {
 	return CVodeCreate(CV_ADAMS, CV_FUNCTIONAL);
 }
 
@@ -265,3 +266,4 @@ int SetInitStep(void *cvode_mem, double initStep)
 	if (cvode_mem == NULL) return CV_SUCCESS;
 	return CVodeSetInitStep(cvode_mem, initStep);
 }
+#endif

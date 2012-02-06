@@ -2,10 +2,14 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include <iostream>
 #include "rrModelGenerator.h"
 #include "NOMLib.h"
+#include "libstructural.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+
+using namespace std;
 namespace rr
 {
 ModelGenerator::ModelGenerator()
@@ -2520,13 +2524,25 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     StringBuilder sb;// = new StringBuilder();
 
 //    sASCII = NOM.convertTime(sASCII, "time");
-
 //    loadSBML(sASCII.c_str(), "time");
-	char* sbml = new char[sASCII.size()];
-    strcpy(sbml, sASCII.c_str());
-    loadSBML(sbml);
 
-//    _ModelName = NOM.getModelName();
+	char* sbml = new char[sASCII.size() + 1];
+    strcpy(sbml, sASCII.c_str());
+    int result = loadSBML(sbml);
+
+	if(result)
+    {
+    	cerr<<"Bad stuff.";
+        return "Bad..";
+    }
+
+
+    char** name;
+//    _ModelName = getModelName();
+	if(getModelName(name))
+    {
+    	return "bad";
+    }
 //    _NumReactions = NOM.getNumReactions();
 //
 //    globalParameterList = new SymbolList();

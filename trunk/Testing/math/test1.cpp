@@ -35,15 +35,14 @@ int main()
 	outPut<<setw(30)<<"LN2"						<<setw(30)<<LN2						<<endl; /* ln(2) */
 	outPut<<setw(30)<<"LNPI"					<<setw(30)<<LNPI					<<endl; /* ln(pi) */
 
-
 	cout<<outPut.str()<<endl;
-
 
     cout<<And(1,1,1,-1);
 
     cout<<"Hit any key to exit...";
 	cin.ignore(0,'\n');
     getch();
+
 	return 0;
 }
 
