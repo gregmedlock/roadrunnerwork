@@ -32,8 +32,8 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\Externals\libsbml\src\sbml\compress\;..\Externals\libsbml\src\sbml\validator\;..\Externals\libsbml\src\sbml\extension\;..\Externals\libsbml\src\sbml\math\;..\Externals\libsbml\src\sbml\util\;..\Externals\libsbml\src\sbml\annotation\;..\Externals\libsbml\src\sbml\conversion\;..\Externals\libsbml\src\sbml\xml\;..\Externals\libsbml\src\sbml\validator\constraints\;..\Externals\libsbml\src\sbml\;..\Externals\libsbml\src\sbml\common\;..\Externals\libsbml\src\sbml\units\;C:\RRW\xe_builds\;C:\RRW\Externals\libsbml\src;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\Externals\libsbml\src\sbml\compress\;..\Externals\libsbml\src\sbml\validator\;..\Externals\libsbml\src\sbml\extension\;..\Externals\libsbml\src\sbml\math\;..\Externals\libsbml\src\sbml\util\;..\Externals\libsbml\src\sbml\conversion\;..\Externals\libsbml\src\sbml\xml\;..\Externals\libsbml\src\sbml\validator\constraints\;..\Externals\libsbml\src\sbml\;..\Externals\libsbml\src\sbml\common\;..\Externals\libsbml\src\sbml\units\;..\Externals\libsbml\src\sbml\annotation\;C:\RRW\xe_builds\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\libsbml\src\sbml\compress\;..\libsbml\src\sbml\validator\;..\libsbml\src\sbml\extension\;..\libsbml\src\sbml\math\;..\libsbml\src\sbml\util\;..\libsbml\src\sbml\annotation\;..\libsbml\src\sbml\conversion\;..\libsbml\src\sbml\xml\;..\libsbml\src\sbml\validator\constraints\;..\libsbml\src\sbml\;..\libsbml\src\sbml\common\;..\libsbml\src\sbml\units\;C:\RRW\xe_builds\;C:\RRW\libsbml\src;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\libsbml\src\sbml\compress\;..\libsbml\src\sbml\validator\;..\libsbml\src\sbml\extension\;..\libsbml\src\sbml\math\;..\libsbml\src\sbml\util\;..\libsbml\src\sbml\conversion\;..\libsbml\src\sbml\xml\;..\libsbml\src\sbml\validator\constraints\;..\libsbml\src\sbml\;..\libsbml\src\sbml\common\;..\libsbml\src\sbml\units\;..\libsbml\src\sbml\annotation\;C:\RRW\xe_builds\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -45,6 +45,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<FinalOutputDir>C:\rrThirdPartyInstalls\bins\</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -66,505 +67,505 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\annotation\CVTerm.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\annotation\CVTerm.cpp">
 				<BuildOrder>27</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\annotation\ModelHistory.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\annotation\ModelHistory.cpp">
 				<BuildOrder>25</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\annotation\RDFAnnotation.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\annotation\RDFAnnotation.cpp">
 				<BuildOrder>18</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\common\libsbml-version.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\common\libsbml-version.cpp">
 				<BuildOrder>164</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Compartment.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Compartment.cpp">
 				<BuildOrder>52</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\CompartmentType.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\CompartmentType.cpp">
 				<BuildOrder>53</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\compress\CompressCommon.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\compress\CompressCommon.cpp">
 				<BuildOrder>167</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\compress\OutputCompressor.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\compress\OutputCompressor.cpp">
 				<BuildOrder>166</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Constraint.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Constraint.cpp">
 				<BuildOrder>54</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\ConversionOption.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\ConversionOption.cpp">
 				<BuildOrder>148</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\ConversionProperties.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\ConversionProperties.cpp">
 				<BuildOrder>147</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\RegisterConverters.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\RegisterConverters.cpp">
 				<BuildOrder>149</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\SBMLConverter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\SBMLConverter.cpp">
 				<BuildOrder>145</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\SBMLConverterRegistry.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\SBMLConverterRegistry.cpp">
 				<BuildOrder>146</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\SBMLFunctionDefinitionConverter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\SBMLFunctionDefinitionConverter.cpp">
 				<BuildOrder>150</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\SBMLInitialAssignmentConverter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\SBMLInitialAssignmentConverter.cpp">
 				<BuildOrder>151</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\SBMLLevelVersionConverter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\SBMLLevelVersionConverter.cpp">
 				<BuildOrder>152</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\SBMLRuleConverter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\SBMLRuleConverter.cpp">
 				<BuildOrder>153</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\SBMLStripPackageConverter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\SBMLStripPackageConverter.cpp">
 				<BuildOrder>154</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\conversion\SBMLUnitsConverter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\conversion\SBMLUnitsConverter.cpp">
 				<BuildOrder>155</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Delay.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Delay.cpp">
 				<BuildOrder>55</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Event.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Event.cpp">
 				<BuildOrder>42</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\EventAssignment.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\EventAssignment.cpp">
 				<BuildOrder>56</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\ExpectedAttributes.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\ExpectedAttributes.cpp">
 				<BuildOrder>57</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\extension\SBaseExtensionPoint.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\extension\SBaseExtensionPoint.cpp">
 				<BuildOrder>37</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\extension\SBasePlugin.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\extension\SBasePlugin.cpp">
 				<BuildOrder>32</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\extension\SBasePluginCreatorBase.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\extension\SBasePluginCreatorBase.cpp">
 				<BuildOrder>38</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\extension\SBMLExtension.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\extension\SBMLExtension.cpp">
 				<BuildOrder>36</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\extension\SBMLExtensionException.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\extension\SBMLExtensionException.cpp">
 				<BuildOrder>165</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\extension\SBMLExtensionRegistry.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\extension\SBMLExtensionRegistry.cpp">
 				<BuildOrder>31</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\FunctionDefinition.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\FunctionDefinition.cpp">
 				<BuildOrder>58</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\InitialAssignment.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\InitialAssignment.cpp">
 				<BuildOrder>59</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\KineticLaw.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\KineticLaw.cpp">
 				<BuildOrder>44</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\ListOf.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\ListOf.cpp">
 				<BuildOrder>35</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\LocalParameter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\LocalParameter.cpp">
 				<BuildOrder>60</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\math\ASTNode.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\math\ASTNode.cpp">
 				<BuildOrder>87</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\math\FormulaFormatter.c">
+			<CppCompile Include="..\libsbml\src\sbml\math\FormulaFormatter.c">
 				<BuildOrder>157</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\math\FormulaParser.c">
+			<CppCompile Include="..\libsbml\src\sbml\math\FormulaParser.c">
 				<BuildOrder>156</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\math\FormulaTokenizer.c">
+			<CppCompile Include="..\libsbml\src\sbml\math\FormulaTokenizer.c">
 				<BuildOrder>158</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\math\MathML.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\math\MathML.cpp">
 				<BuildOrder>159</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Model.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Model.cpp">
 				<BuildOrder>15</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Parameter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Parameter.cpp">
 				<BuildOrder>61</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Priority.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Priority.cpp">
 				<BuildOrder>62</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Reaction.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Reaction.cpp">
 				<BuildOrder>63</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Rule.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Rule.cpp">
 				<BuildOrder>45</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBase.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBase.cpp">
 				<BuildOrder>12</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLConstructorException.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLConstructorException.cpp">
 				<BuildOrder>10</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLConvert.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLConvert.cpp">
 				<BuildOrder>64</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLDocument.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLDocument.cpp">
 				<BuildOrder>3</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLError.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLError.cpp">
 				<BuildOrder>30</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLErrorLog.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLErrorLog.cpp">
 				<BuildOrder>21</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLNamespaces.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLNamespaces.cpp">
 				<BuildOrder>19</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLReader.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLReader.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLTransforms.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLTransforms.cpp">
 				<BuildOrder>65</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLTypeCodes.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLTypeCodes.cpp">
 				<BuildOrder>66</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLVisitor.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLVisitor.cpp">
 				<BuildOrder>43</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBMLWriter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBMLWriter.cpp">
 				<BuildOrder>67</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SBO.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SBO.cpp">
 				<BuildOrder>23</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Species.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Species.cpp">
 				<BuildOrder>46</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SpeciesReference.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SpeciesReference.cpp">
 				<BuildOrder>47</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SpeciesType.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SpeciesType.cpp">
 				<BuildOrder>48</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\StoichiometryMath.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\StoichiometryMath.cpp">
 				<BuildOrder>49</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\SyntaxChecker.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\SyntaxChecker.cpp">
 				<BuildOrder>28</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Trigger.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Trigger.cpp">
 				<BuildOrder>50</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\Unit.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\Unit.cpp">
 				<BuildOrder>51</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\UnitDefinition.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\UnitDefinition.cpp">
 				<BuildOrder>34</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\UnitKind.c">
+			<CppCompile Include="..\libsbml\src\sbml\UnitKind.c">
 				<BuildOrder>165</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\units\FormulaUnitsData.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\units\FormulaUnitsData.cpp">
 				<BuildOrder>29</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\units\UnitFormulaFormatter.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\units\UnitFormulaFormatter.cpp">
 				<BuildOrder>41</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\units\UnitKindList.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\units\UnitKindList.cpp">
 				<BuildOrder>99</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\util\List.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\util\List.cpp">
 				<BuildOrder>17</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\util\memory.c">
+			<CppCompile Include="..\libsbml\src\sbml\util\memory.c">
 				<BuildOrder>163</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\util\Stack.c">
+			<CppCompile Include="..\libsbml\src\sbml\util\Stack.c">
 				<BuildOrder>161</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\util\StringBuffer.c">
+			<CppCompile Include="..\libsbml\src\sbml\util\StringBuffer.c">
 				<BuildOrder>162</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\util\util.c">
+			<CppCompile Include="..\libsbml\src\sbml\util\util.c">
 				<BuildOrder>162</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\ConsistencyValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\ConsistencyValidator.cpp">
 				<BuildOrder>85</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheck.cpp">
 				<BuildOrder>88</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp">
 				<BuildOrder>89</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\AssignmentCycles.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\AssignmentCycles.cpp">
 				<BuildOrder>91</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\AssignmentRuleOrdering.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\AssignmentRuleOrdering.cpp">
 				<BuildOrder>92</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\CiElementMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\CiElementMathCheck.cpp">
 				<BuildOrder>93</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\CompartmentOutsideCycles.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\CompartmentOutsideCycles.cpp">
 				<BuildOrder>94</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\ConsistencyConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\ConsistencyConstraints.cpp">
 				<BuildOrder>95</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp">
 				<BuildOrder>96</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\EqualityArgsMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\EqualityArgsMathCheck.cpp">
 				<BuildOrder>97</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\ExponentUnitsCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\ExponentUnitsCheck.cpp">
 				<BuildOrder>98</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\FunctionApplyMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\FunctionApplyMathCheck.cpp">
 				<BuildOrder>99</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\FunctionDefinitionVars.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\FunctionDefinitionVars.cpp">
 				<BuildOrder>100</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp">
 				<BuildOrder>101</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\FunctionReferredToExists.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\FunctionReferredToExists.cpp">
 				<BuildOrder>102</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\IdBase.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\IdBase.cpp">
 				<BuildOrder>103</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\IdentifierConsistencyConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\IdentifierConsistencyConstraints.cpp">
 				<BuildOrder>104</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\IdList.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\IdList.cpp">
 				<BuildOrder>105</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\InternalConsistencyConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\InternalConsistencyConstraints.cpp">
 				<BuildOrder>106</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\KineticLawUnitsCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\KineticLawUnitsCheck.cpp">
 				<BuildOrder>107</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\KineticLawVars.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\KineticLawVars.cpp">
 				<BuildOrder>108</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\L1CompatibilityConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\L1CompatibilityConstraints.cpp">
 				<BuildOrder>109</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\L2v1CompatibilityConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\L2v1CompatibilityConstraints.cpp">
 				<BuildOrder>110</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\L2v2CompatibilityConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\L2v2CompatibilityConstraints.cpp">
 				<BuildOrder>111</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\L2v3CompatibilityConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\L2v3CompatibilityConstraints.cpp">
 				<BuildOrder>112</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\L2v4CompatibilityConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\L2v4CompatibilityConstraints.cpp">
 				<BuildOrder>113</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\L3v1CompatibilityConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\L3v1CompatibilityConstraints.cpp">
 				<BuildOrder>114</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\LambdaMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\LambdaMathCheck.cpp">
 				<BuildOrder>115</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\LocalParameterMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\LocalParameterMathCheck.cpp">
 				<BuildOrder>116</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp">
 				<BuildOrder>117</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\LogicalArgsMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\LogicalArgsMathCheck.cpp">
 				<BuildOrder>118</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\MathMLBase.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\MathMLBase.cpp">
 				<BuildOrder>119</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\MathMLConsistencyConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\MathMLConsistencyConstraints.cpp">
 				<BuildOrder>120</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\ModelingPracticeConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\ModelingPracticeConstraints.cpp">
 				<BuildOrder>121</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\NumberArgsMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\NumberArgsMathCheck.cpp">
 				<BuildOrder>122</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\NumericArgsMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\NumericArgsMathCheck.cpp">
 				<BuildOrder>123</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\NumericReturnMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\NumericReturnMathCheck.cpp">
 				<BuildOrder>124</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\OverDeterminedCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\OverDeterminedCheck.cpp">
 				<BuildOrder>125</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\OverdeterminedConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\OverdeterminedConstraints.cpp">
 				<BuildOrder>126</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\PieceBooleanMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\PieceBooleanMathCheck.cpp">
 				<BuildOrder>127</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\PiecewiseValueMathCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\PiecewiseValueMathCheck.cpp">
 				<BuildOrder>128</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\PowerUnitsCheck.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\PowerUnitsCheck.cpp">
 				<BuildOrder>129</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\SBOConsistencyConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\SBOConsistencyConstraints.cpp">
 				<BuildOrder>39</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\SpeciesReactionOrRule.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\SpeciesReactionOrRule.cpp">
 				<BuildOrder>130</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\StoichiometryMathVars.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\StoichiometryMathVars.cpp">
 				<BuildOrder>131</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueIdBase.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueIdBase.cpp">
 				<BuildOrder>132</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp">
 				<BuildOrder>133</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp">
 				<BuildOrder>134</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueIdsInModel.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueIdsInModel.cpp">
 				<BuildOrder>135</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueMetaId.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueMetaId.cpp">
 				<BuildOrder>136</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp">
 				<BuildOrder>137</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp">
 				<BuildOrder>138</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp">
 				<BuildOrder>139</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp">
 				<BuildOrder>140</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp">
 				<BuildOrder>141</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UniqueVarsInRules.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UniqueVarsInRules.cpp">
 				<BuildOrder>142</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UnitConsistencyConstraints.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UnitConsistencyConstraints.cpp">
 				<BuildOrder>143</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\UnitsBase.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\UnitsBase.cpp">
 				<BuildOrder>144</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\constraints\ValidCnUnitsValue.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\constraints\ValidCnUnitsValue.cpp">
 				<BuildOrder>90</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\IdentifierConsistencyValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\IdentifierConsistencyValidator.cpp">
 				<BuildOrder>86</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\InternalConsistencyValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\InternalConsistencyValidator.cpp">
 				<BuildOrder>87</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\L1CompatibilityValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\L1CompatibilityValidator.cpp">
 				<BuildOrder>88</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\L2v1CompatibilityValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\L2v1CompatibilityValidator.cpp">
 				<BuildOrder>89</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\L2v2CompatibilityValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\L2v2CompatibilityValidator.cpp">
 				<BuildOrder>90</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\L2v3CompatibilityValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\L2v3CompatibilityValidator.cpp">
 				<BuildOrder>91</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\L2v4CompatibilityValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\L2v4CompatibilityValidator.cpp">
 				<BuildOrder>92</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\L3v1CompatibilityValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\L3v1CompatibilityValidator.cpp">
 				<BuildOrder>93</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\MathMLConsistencyValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\MathMLConsistencyValidator.cpp">
 				<BuildOrder>94</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\ModelingPracticeValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\ModelingPracticeValidator.cpp">
 				<BuildOrder>95</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\OverdeterminedValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\OverdeterminedValidator.cpp">
 				<BuildOrder>96</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\SBMLExternalValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\SBMLExternalValidator.cpp">
 				<BuildOrder>97</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\SBMLInternalValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\SBMLInternalValidator.cpp">
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\SBMLValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\SBMLValidator.cpp">
 				<BuildOrder>13</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\SBOConsistencyValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\SBOConsistencyValidator.cpp">
 				<BuildOrder>40</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\UnitConsistencyValidator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\UnitConsistencyValidator.cpp">
 				<BuildOrder>98</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\Validator.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\Validator.cpp">
 				<BuildOrder>6</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\validator\VConstraint.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\validator\VConstraint.cpp">
 				<BuildOrder>84</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLAttributes.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLAttributes.cpp">
 				<BuildOrder>143</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLBuffer.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLBuffer.cpp">
 				<BuildOrder>142</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLError.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLError.cpp">
 				<BuildOrder>141</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLErrorLog.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLErrorLog.cpp">
 				<BuildOrder>160</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLFileBuffer.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLFileBuffer.cpp">
 				<BuildOrder>159</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLHandler.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLHandler.cpp">
 				<BuildOrder>158</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLInputStream.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLInputStream.cpp">
 				<BuildOrder>157</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLMemoryBuffer.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLMemoryBuffer.cpp">
 				<BuildOrder>156</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLNamespaces.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLNamespaces.cpp">
 				<BuildOrder>155</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLNode.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLNode.cpp">
 				<BuildOrder>154</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLOutputStream.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLOutputStream.cpp">
 				<BuildOrder>153</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLParser.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLParser.cpp">
 				<BuildOrder>152</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLToken.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLToken.cpp">
 				<BuildOrder>151</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLTokenizer.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLTokenizer.cpp">
 				<BuildOrder>150</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\Externals\libsbml\src\sbml\xml\XMLTriple.cpp">
+			<CppCompile Include="..\libsbml\src\sbml\xml\XMLTriple.cpp">
 				<BuildOrder>149</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="libSBML_XE.cpp">
