@@ -1,11 +1,11 @@
 ﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
-			<ProjectGuid>{23073EBD-AA7B-4D4A-9045-8ED283DFC75A}</ProjectGuid>
+			<ProjectGuid>{7AD51E39-3D45-48BC-8D0B-7280DAB8E664}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
 			<Base>True</Base>
 			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Platform>Win32</Platform>
-			<AppType>Console</AppType>
+			<AppType>StaticLibrary</AppType>
 			<FrameworkType>None</FrameworkType>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
@@ -22,18 +22,19 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<Defines>WIN32;NO_LIB;$(Defines)</Defines>
-			<NoVCL>true</NoVCL>
-			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
-			<ProjectType>CppConsoleApplication</ProjectType>
+			<Defines>EXPORT_NOM;$(Defines)</Defines>
+			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
+			<ProjectType>CppStaticLibrary</ProjectType>
 			<PackageImports>rtl.bpi;vclimg.bpi;vcl.bpi;vclx.bpi;vcldb.bpi;dbrtl.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;vcltouch.bpi;xmlrtl.bpi;vclactnband.bpi;dsnap.bpi;dbxcds.bpi;dbexpress.bpi;DbxCommonDriver.bpi;vclribbon.bpi;DataSnapIndy10ServerTransport.bpi;DbxClientDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;bcbsmp.bpi;IndyProtocols.bpi;inet.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vcldbx.bpi;bdertl.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;DataSnapProviderClient.bpi;vclie.bpi;inetdbbde.bpi;inetdbxpress.bpi;DataSnapClient.bpi;inetdb.bpi;DataSnapServer.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi;DuneComponents.bpi;mtkCommonRTL.bpi;VCLCommonRTL.bpi;VCLData.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;GenesisVisualComponents.bpi</PackageImports>
-			<OutputExt>exe</OutputExt>
+			<OutputExt>lib</OutputExt>
+			<FinalOutputDir>C:\rrThirdPartyInstalls\bins\</FinalOutputDir>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
-			<_TCHARMapping>char</_TCHARMapping>
+			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\;C:\RRW\ThirdParty\libsbml\src;C:\RRW\ThirdParty\libsbml\src\sbml;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>C:\rrThirdPartyInstalls\bins\;..\..\..\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\;..\..\..\xe_builds\Debug\Win32\;..\..\..\Externals\libsbml\src\sbml\common\;..\..\..\Externals\libsbml\src\sbml\conversion\;..\..\..\Externals\libsbml\src\sbml\math\;..\..\..\Externals\libsbml\src\sbml\validator\constraints\;..\..\..\Externals\libsbml\src\sbml\extension\;..\..\..\Externals\libsbml\src\sbml\units\;..\..\..\Externals\libsbml\src\sbml\annotation\;..\..\..\Externals\libsbml\src\sbml\util\;..\..\..\Externals\libsbml\src\sbml\validator\;..\..\..\Externals\libsbml\src\sbml\xml\;..\..\..\Externals\libsbml\src\sbml\;..\..\src\;C:\sbw_libs\libsbml\bin\;C:\RRW\NOMLib\Examples\Example_1\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\NOMLib\src\;C:\RRW\ThirdParty\libsbml\src\sbml;C:\RRW\ThirdParty\libsbml\src;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -65,19 +66,7 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="C:\rrThirdPartyInstalls\bins\NOMLib-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>3</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrThirdPartyInstalls\libsbml-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>2</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\..\..\libsbml\dependencies\lib\libxml2.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>3</BuildOrder>
-			</LibFiles>
-			<CppCompile Include="main.cpp">
+			<CppCompile Include="..\NOMLib\src\NOMLib.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">
@@ -96,7 +85,7 @@
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
-			<Borland.ProjectType>CppConsoleApplication</Borland.ProjectType>
+			<Borland.ProjectType>CppStaticLibrary</Borland.ProjectType>
 			<BorlandProject>
 				<CPlusPlusBuilder.Personality>
 					<VersionInfo>
@@ -134,9 +123,6 @@
 						<ProjectProperties Name="ManagePaths">True</ProjectProperties>
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
-					<Parameters>
-						<Parameters Name="DebugSourceDirs">C:\RRW\ThirdParty\NOMLib\src</Parameters>
-					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>
 					<Platform value="Win32">True</Platform>

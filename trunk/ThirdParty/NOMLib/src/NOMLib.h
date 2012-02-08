@@ -74,7 +74,7 @@ extern "C" {
 	* @param[in] sbmlStr sbmlStr is a char pointer to the SBML model
 	* @return -1 if there has been an error, otherwise returns 0
 	*/
-	DLL_EXPORT int loadSBML(char* sbmlStr);
+	DLL_EXPORT int loadSBML(const char* sbmlStr);
 
 
 	/** @brief Returns number of errors in SBML model

@@ -379,7 +379,7 @@ char* addMissingModifiersInternal(const string& sModel)
 
 
 // Load SBML file into the NOM
-DLL_EXPORT int loadSBML(char* sbmlStr)
+DLL_EXPORT int loadSBML(const char* sbmlStr)
 {	
 	string arg = sbmlStr;
 
@@ -411,6 +411,7 @@ DLL_EXPORT int loadSBML(char* sbmlStr)
 		}
 		return validateInternal(arg);
 	}
+    return 0;
 }
 
 

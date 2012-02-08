@@ -32,7 +32,7 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\libsbml\src\sbml\compress\;..\libsbml\src\sbml\validator\;..\libsbml\src\sbml\extension\;..\libsbml\src\sbml\math\;..\libsbml\src\sbml\util\;..\libsbml\src\sbml\annotation\;..\libsbml\src\sbml\conversion\;..\libsbml\src\sbml\xml\;..\libsbml\src\sbml\validator\constraints\;..\libsbml\src\sbml\;..\libsbml\src\sbml\common\;..\libsbml\src\sbml\units\;C:\RRW\xe_builds\;C:\RRW\libsbml\src;$(IncludePath)</IncludePath>
+			<IncludePath>..\libsbml\src\sbml\common\;..\libsbml\src\sbml\xml\;..\libsbml\src\sbml\validator\constraints\;..\libsbml\src\sbml\conversion\;..\libsbml\src\sbml\annotation\;..\libsbml\src\sbml\math\;..\libsbml\src\sbml\util\;..\libsbml\src\sbml\validator\;..\libsbml\src\sbml\extension\;..\libsbml\src\sbml\compress\;..\libsbml\src\sbml\;..\libsbml\src\sbml\units\;C:\RRW\ThirdParty\libsbml\src;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\libsbml\src\sbml\compress\;..\libsbml\src\sbml\validator\;..\libsbml\src\sbml\extension\;..\libsbml\src\sbml\math\;..\libsbml\src\sbml\util\;..\libsbml\src\sbml\conversion\;..\libsbml\src\sbml\xml\;..\libsbml\src\sbml\validator\constraints\;..\libsbml\src\sbml\;..\libsbml\src\sbml\common\;..\libsbml\src\sbml\units\;..\libsbml\src\sbml\annotation\;C:\RRW\xe_builds\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>

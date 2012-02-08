@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{E6D6408C-6F5F-4AC4-9D82-4E5E29E022B6}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="libSBML_XE.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="NOMLib-static.cbproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="libSBML_XE">
+			<MSBuild Projects="libSBML_XE.cbproj"/>
+		</Target>
+		<Target Name="libSBML_XE:Clean">
+			<MSBuild Projects="libSBML_XE.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="libSBML_XE:Make">
+			<MSBuild Projects="libSBML_XE.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="NOMLib-static">
+			<MSBuild Projects="NOMLib-static.cbproj"/>
+		</Target>
+		<Target Name="NOMLib-static:Clean">
+			<MSBuild Projects="NOMLib-static.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="NOMLib-static:Make">
+			<MSBuild Projects="NOMLib-static.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="libSBML_XE;NOMLib-static"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="libSBML_XE:Clean;NOMLib-static:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="libSBML_XE:Make;NOMLib-static:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>
