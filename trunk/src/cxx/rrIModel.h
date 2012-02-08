@@ -76,6 +76,7 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
 
     public:
 												IModel();
+		virtual									~IModel();
 
 		//get,set
         vector<double>&							Get_y();
@@ -93,33 +94,33 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
 		vector<bool>&							Get_previousEventStatusArray();
 
         virtual void                            setCompartmentVolumes() = 0;
-        virtual void                            initializeInitialConditions();
-        virtual void                            setInitialConditions();
-        virtual void                            setParameterValues();
-        virtual void                            setBoundaryConditions();
-        virtual void                            InitializeRates();
-        virtual void                            AssignRates();
-        virtual void                            AssignRates(vector<double>& rates);
-        virtual vector<double> 					GetCurrentValues();
-        virtual void                            computeConservedTotals();
-        virtual void                            computeEventPriorites();
-        virtual void                            setConcentration(int index, double value);
-        virtual double 							getConcentration(int index);
-        virtual void                            convertToAmounts();
-        virtual void                            convertToConcentrations();
-        virtual void                            updateDependentSpeciesValues(vector<double>& _y);
-        virtual void                            computeRules(vector<double>& _y);
-        virtual void                            computeReactionRates(double time, vector<double>& y);
-        virtual void                            computeAllRatesOfChange();
-        virtual void                            evalModel(double time, vector<double>& y);
-        virtual void                            evalEvents(double time, vector<double>& y);
-        virtual void                            resetEvents();
-        virtual void                            evalInitialAssignments();
-        virtual void                            testConstraints();
-        virtual void                            InitializeRateRuleSymbols();
+        virtual void                            initializeInitialConditions(){}
+        virtual void                            setInitialConditions(){}
+        virtual void                            setParameterValues(){}
+        virtual void                            setBoundaryConditions(){}
+        virtual void                            InitializeRates(){}
+        virtual void                            AssignRates(){}
+        virtual void                            AssignRates(vector<double>& rates){}
+        virtual vector<double> 					GetCurrentValues(){}
+        virtual void                            computeConservedTotals(){}
+        virtual void                            computeEventPriorites(){}
+        virtual void                            setConcentration(int index, double value){}
+        virtual double 							getConcentration(int index){}
+        virtual void                            convertToAmounts(){}
+        virtual void                            convertToConcentrations(){}
+        virtual void                            updateDependentSpeciesValues(vector<double>& _y){}
+        virtual void                            computeRules(vector<double>& _y){}
+        virtual void                            computeReactionRates(double time, vector<double>& y){}
+        virtual void                            computeAllRatesOfChange(){}
+        virtual void                            evalModel(double time, vector<double>& y){}
+        virtual void                            evalEvents(double time, vector<double>& y){}
+        virtual void                            resetEvents(){}
+        virtual void                            evalInitialAssignments(){}
+        virtual void                            testConstraints(){}
+        virtual void                            InitializeRateRuleSymbols(){}
 
         // Level 2 support
-        virtual int 							getNumLocalParameters(int reactionId);
+        virtual int 							getNumLocalParameters(int reactionId){}
 };
 } //namespace rr
 

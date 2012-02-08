@@ -15,6 +15,9 @@
 			<Projects Include="Exceptions\Exceptions.cbproj">
 				<Dependencies/>
 			</Projects>
+			<Projects Include="..\ThirdParty\NOMLib\Examples\Example_1\example_1.cbproj">
+				<Dependencies/>
+			</Projects>
 			<Projects Include="loadSBML\loadSBML.cbproj">
 				<Dependencies>..\src\RoadRunnerLib.cbproj</Dependencies>
 			</Projects>
@@ -62,6 +65,15 @@
 		<Target Name="Exceptions:Make">
 			<MSBuild Projects="Exceptions\Exceptions.cbproj" Targets="Make"/>
 		</Target>
+		<Target Name="example_1">
+			<MSBuild Projects="..\ThirdParty\NOMLib\Examples\Example_1\example_1.cbproj"/>
+		</Target>
+		<Target Name="example_1:Clean">
+			<MSBuild Projects="..\ThirdParty\NOMLib\Examples\Example_1\example_1.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="example_1:Make">
+			<MSBuild Projects="..\ThirdParty\NOMLib\Examples\Example_1\example_1.cbproj" Targets="Make"/>
+		</Target>
 		<Target Name="loadSBML" DependsOnTargets="RoadRunnerLib">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj"/>
 		</Target>
@@ -72,13 +84,13 @@
 			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="RoadRunnerLib;MathTest1;Random;Exceptions;loadSBML"/>
+			<CallTarget Targets="RoadRunnerLib;MathTest1;Random;Exceptions;example_1;loadSBML"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="RoadRunnerLib:Clean;MathTest1:Clean;Random:Clean;Exceptions:Clean;loadSBML:Clean"/>
+			<CallTarget Targets="RoadRunnerLib:Clean;MathTest1:Clean;Random:Clean;Exceptions:Clean;example_1:Clean;loadSBML:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="RoadRunnerLib:Make;MathTest1:Make;Random:Make;Exceptions:Make;loadSBML:Make"/>
+			<CallTarget Targets="RoadRunnerLib:Make;MathTest1:Make;Random:Make;Exceptions:Make;example_1:Make;loadSBML:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

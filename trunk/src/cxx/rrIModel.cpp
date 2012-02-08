@@ -24,4 +24,6 @@ vector<bool>&	IModel::Get_eventStatusArray(){return eventStatusArray;}
 vector<double>&	IModel::Get_eventTests(){return eventTests;}
 vector<bool>&	IModel::Get_previousEventStatusArray(){return previousEventStatusArray;}
 
+IModel::~IModel(){}
+
 } //namespace rr

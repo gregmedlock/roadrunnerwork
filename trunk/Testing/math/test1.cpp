@@ -29,7 +29,7 @@ int main()
 	outPut<<setw(30)<<"PI_BY_4"					<<setw(30)<<PI_BY_4					<<endl; /* pi/4 */
 	outPut<<setw(30)<<"SQRTPI"					<<setw(30)<<SQRTPI 					<<endl; /* sqrt(pi) */
 	outPut<<setw(30)<<"TWO_BY_SQRTPI"			<<setw(30)<<TWO_BY_SQRTPI			<<endl; /* 2/sqrt(pi) */
-	outPut<<setw(30)<<"ONE_BU_PI"				<<setw(30)<<ONE_BU_PI				<<endl; /* 1/pi */
+	outPut<<setw(30)<<"ONE_By_PI"				<<setw(30)<<ONE_BY_PI				<<endl; /* 1/pi */
 	outPut<<setw(30)<<"TWO_BY_PI"				<<setw(30)<<TWO_BY_PI				<<endl; /* 2/pi */
 	outPut<<setw(30)<<"LN10"					<<setw(30)<<LN10					<<endl; /* ln(10) */
 	outPut<<setw(30)<<"LN2"						<<setw(30)<<LN2						<<endl; /* ln(2) */

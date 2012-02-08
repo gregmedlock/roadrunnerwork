@@ -30,12 +30,19 @@ _N(0,0),
 _Nr(0,0),
 mModel(NULL),
 cvode(NULL),
-mModelGenerator(NULL)
+mModelGenerator(NULL),
+mCompiler(NULL)
 {
 
 }
 
-
+RoadRunner::~RoadRunner()
+{
+	delete mModelGenerator;
+    delete mModel;
+    delete cvode;
+    delete mCompiler;
+}
 //        //private ArrayList _oSteadyStateSelection;
 //        private TSelectionRecord[] _oSteadyStateSelection;
 //        private string _sModelCode;
@@ -447,7 +454,9 @@ void RoadRunner::loadSBMLFromFile(const string& fileName)
     ifstream ifs(fileName.c_str());
     if(!ifs)
     {
-    	cout<<"Failed opening file";
+		stringstream msg;
+        msg<<"Failed opening file: "<<fileName;
+		throw SBWApplicationException(msg.str());
     }
 
     std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
@@ -2538,12 +2547,14 @@ void RoadRunner::reset()
 //        }
 //
 //        [Help("Gets the list of compartment names")]
-//        public ArrayList getCompartmentNames()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            return ModelGenerator.Instance.getCompartmentList();
-//        }
+list<string> RoadRunner::getCompartmentNames()
+{
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+    return mModelGenerator->getCompartmentList();
+}
 //
 //        #endregion
 //
@@ -2898,10 +2909,10 @@ void RoadRunner::reset()
 //        }
 //
 //        [Help("Returns the copyright string for the module")]
-//        public static string getCopyright()
-//        {
-//            return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";
-//        }
+        string RoadRunner::getCopyright()
+        {
+            return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";
+        }
 //
 //        [Help("Returns the URL string associated with the module (if any)")]
 //        public static string getURL()

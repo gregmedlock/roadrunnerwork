@@ -214,6 +214,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //        // ev is the model function
 //        // -------------------------------------------------------------------------
 		CvodeInterface(IModel* oModel);
+		~CvodeInterface();
 //
 //        public bool HaveVariables
 		void InitializeCVODEInterface(IModel *oModel);

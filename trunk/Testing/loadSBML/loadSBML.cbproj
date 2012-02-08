@@ -31,7 +31,7 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\Externals\libsbml\src\sbml\;C:\RRW\Testing\loadSBML\;C:\RRW\src\cxx;C:\RRW\src\cxx\Util;C:\rr_install\include;C:\RRW\Externals\libstruct\include;$(IncludePath)</IncludePath>
+			<IncludePath>C:\RRW\Testing\loadSBML\;C:\RRW\src\cxx;C:\RRW\src\cxx\Util;C:\rrThirdPartyInstalls\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\Externals\libsbml\src\sbml\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -43,6 +43,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<FinalOutputDir>C:\RRW\build\bin\</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -64,10 +65,6 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="..\..\build\link\libsbml_XE.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>1</BuildOrder>
-			</LibFiles>
 			<LibFiles Include="..\..\build\link\RoadRunnerLib.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>

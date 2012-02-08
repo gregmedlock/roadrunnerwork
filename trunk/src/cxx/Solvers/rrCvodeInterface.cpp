@@ -64,12 +64,15 @@ gdata(NULL),
 //_rootsFound),
 //abstolArray),
 cvodeLogFile("cvodeLogFile")
-
-
-
 {
 
     InitializeCVODEInterface(aModel);
+}
+
+CvodeInterface::~CvodeInterface()
+{
+
+
 }
 ////
 ////        public bool HaveVariables

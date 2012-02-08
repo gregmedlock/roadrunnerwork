@@ -7,6 +7,22 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
+namespace rr
+{
+
+
+vector<string> Compiler::m_oAssemblies;
+vector<string> Compiler::m_sCompileErrors;
+
+Compiler::Compiler()
+{
+
+}
+
+Compiler::~Compiler()
+{
+
+}
 //
 //	private:
 //        static readonly StringCollection m_oAssemblies = new StringCollection();
@@ -183,4 +199,6 @@
 //        }
 //        return null;
 //    }
+
+} //namespace rr
 

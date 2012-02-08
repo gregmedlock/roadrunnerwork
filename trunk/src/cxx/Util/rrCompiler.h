@@ -20,12 +20,12 @@ class CodeDomProvider;
 class RR_DECLSPEC Compiler : public rrObject
 {
 	private:
-        static vector<string> m_oAssemblies;
-        static vector<string> m_sCompileErrors;
+        static vector<string> 	m_oAssemblies;
+        static vector<string> 	m_sCompileErrors;
 
-        vector<string> m_oProxies;
-     	void Compile(CodeDomProvider& provider, const string& source);
-     	rrObject* Compile2(CodeDomProvider provider, const string& source, const string& sClassName);
+        vector<string> 			m_oProxies;
+     	void 					Compile(CodeDomProvider& provider, const string& source);
+     	rrObject* 				Compile2(CodeDomProvider provider, const string& source, const string& sClassName);
 
     public:
         /// <summary>
@@ -33,8 +33,10 @@ class RR_DECLSPEC Compiler : public rrObject
         /// compiles them and executes methods on the classes
         /// </summary>
         /// <param name="source"></param>
-		void Execute(const string& source);
+		void 					Execute(const string& source);
 
+        						Compiler();
+        					   ~Compiler();
         /// <summary>
         /// the execute method takes a stringcollection of wrapper classes,
         /// compiles them and executes methods on the classes
@@ -69,7 +71,6 @@ class RR_DECLSPEC Compiler : public rrObject
         /// </summary>
         /// <param name="oProxies"></param>
         void addProxy(StringCollection oProxies);
-
     	static string getLastErrors();
 
 }; //class compiler

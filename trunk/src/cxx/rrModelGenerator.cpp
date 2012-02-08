@@ -16,6 +16,12 @@ ModelGenerator::ModelGenerator()
 {
 
 }
+
+ModelGenerator::~ModelGenerator()
+{
+
+}
+
 //        	const string STR_DoubleFormat;// = "G"; //"G17";
 //			const string STR_FixAmountCompartments;// = "*";
 //			static ModelGenerator _instance;
@@ -123,13 +129,13 @@ ModelGenerator::ModelGenerator()
 ////            throw new SBWApplicationException("Internal Error: Unable to locate compartment: " + compartmentName);
 //        }
 //
-//        public: list<string> getCompartmentList()
-//        {
-//            list<string> tmp;// = new list<string>();
-//            for (int i = 0; i < compartmentList.size(); i++)
-//                tmp.push_back(compartmentList[i].name);
-//            return tmp;
-//        }
+        list<string> ModelGenerator::getCompartmentList()
+        {
+            list<string> tmp;// = new list<string>();
+            for (int i = 0; i < compartmentList.size(); i++)
+                tmp.push_back(compartmentList[i].name);
+            return tmp;
+        }
 //
 //        public: list<string> getFloatingSpeciesConcentrationList()
 //        {

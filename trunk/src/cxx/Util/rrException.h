@@ -13,7 +13,7 @@ namespace rr
 class RR_DECLSPEC RRException : public rrObject , public std::exception
 {
 	protected:
-    	string mMessage;
+    	string mMessage;   //Exception message
 
 	public:
 		RRException(const string& desc) : mMessage(desc){}

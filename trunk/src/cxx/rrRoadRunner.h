@@ -84,8 +84,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
         bool 							modelLoaded;// = false;
         int 							numPoints;
         string 							sbmlStr;
-
-
 	    IModel*							mModel;
         double                         	timeEnd;
         double                         	timeStart;
@@ -93,6 +91,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 		//Functions --------------------------------------------------------------------
         								RoadRunner();
+        virtual 						~RoadRunner();
     	rrDoubleMatrix 					runSimulation();
 		void 							InitializeModel(IModel* model);
 		//static void                   DumpResults(TextWriter writer, double[,] data, ArrayList colLabels);
