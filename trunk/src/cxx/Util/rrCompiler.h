@@ -16,6 +16,7 @@ namespace rr
     /// </summary>
 
 class CodeDomProvider;
+class CSharpCodeProvider;
 
 class RR_DECLSPEC Compiler : public rrObject
 {
@@ -25,7 +26,7 @@ class RR_DECLSPEC Compiler : public rrObject
 
         vector<string> 			m_oProxies;
      	void 					Compile(CodeDomProvider& provider, const string& source);
-     	rrObject* 				Compile2(CodeDomProvider provider, const string& source, const string& sClassName);
+     	rrObject* 				Compile2(CodeDomProvider* provider, const string& source, const string& sClassName);
 
     public:
         /// <summary>
@@ -37,33 +38,23 @@ class RR_DECLSPEC Compiler : public rrObject
 
         						Compiler();
         					   ~Compiler();
-        /// <summary>
-        /// the execute method takes a stringcollection of wrapper classes,
-        /// compiles them and executes methods on the classes
-        /// </summary>
-        /// <param name="oProxyCode"></param>
-        void Execute(StringCollection& oProxyCode);
-        /// <summary>
-        /// the execute method takes a stringcollection of wrapper classes,
-        /// compiles them and executes methods on the classes
-        /// </summary>
-        /// <param name="oProxyCode"></param>
 
-        static rrObject getInstance(const string& source, const string& sClassName);
         /// <summary>
         /// the execute method takes a stringcollection of wrapper classes,
         /// compiles them and executes methods on the classes
         /// </summary>
         /// <param name="oProxyCode"></param>
+        void 					Execute(StringCollection& oProxyCode);
+        static rrObject 		getInstance(const string& source, const string& sClassName);
+        static rrObject* 		getInstance(const string& source, const string& sClassName, const string& sLocation);
 
-        static rrObject getInstance(const string& source, const string& sClassName, const string& sLocation);
         /// <summary>
         /// adds an assembly to the assembly list ... this list will be needed
         /// to add references to that assemblies for the newly compiled class
         /// </summary>
         /// <param name="sAssembly"></param>
-
         static void addAssembly(const string& sAssembly);
+
         /// <summary>
         /// sets the list of proxies. This is a list of strings representing Namespace
         /// and classname of the newly generated classes ... this will be used to create
@@ -71,6 +62,7 @@ class RR_DECLSPEC Compiler : public rrObject
         /// </summary>
         /// <param name="oProxies"></param>
         void addProxy(StringCollection oProxies);
+
     	static string getLastErrors();
 
 }; //class compiler

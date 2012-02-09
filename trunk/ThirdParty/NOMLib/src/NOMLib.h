@@ -157,6 +157,7 @@ extern "C" {
 	*/
 	DLL_EXPORT int getModelName (char **name);
 
+	DLL_EXPORT const char* GetModelName();
 
     /** @brief Return the model Id for the current model
 	*

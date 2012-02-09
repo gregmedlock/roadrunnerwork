@@ -4,6 +4,7 @@
 #include <string>
 #include <conio.h>
 #include <tchar.h>
+
 #include "rrException.h"
 #include "rrRoadRunner.h"
 
@@ -14,6 +15,7 @@ using namespace rr;
 #pragma argsused
 int _tmain(int argc, _TCHAR* argv[])
 {
+
 	string modelsPath("C:\\RRW\\Testing\\models");
     string model(modelsPath + "\\feedback.xml");
     ifstream ifs(model.c_str());
@@ -42,7 +44,7 @@ int _tmain(int argc, _TCHAR* argv[])
         delete rr;
 
     }
-    catch(const SBWApplicationException& ex)
+    catch(const RRException& ex)
     {
 		cout<<"RoadRunner exception occured: "<<ex.what()<<endl;
     }

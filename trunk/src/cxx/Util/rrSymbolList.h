@@ -21,6 +21,11 @@ namespace rr
 //            get { return ((Symbol) base[index]); }
 //        }
 
+        void Clear()
+        {
+            clear();
+        }
+
         /// <summary>
         /// Returns the Symbol with the given Name
         /// </summary>
@@ -63,10 +68,6 @@ namespace rr
             return at(index).keyName;
         }
 
-        void Clear()
-        {
-            Clear();
-        }
 
         bool find(string name, int index)
         {

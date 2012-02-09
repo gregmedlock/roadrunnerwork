@@ -24,16 +24,16 @@ RoadRunner::RoadRunner()
 DiffStepSize(0.05),
 emptyModelStr("A model needs to be loaded before one can use this method"),
 STEADYSTATE_THRESHOLD(1.E-2),
+cvode(NULL),
+mModelGenerator(NULL),
+mCompiler(NULL),
 _L(0,0),
 _L0(0,0),
 _N(0,0),
 _Nr(0,0),
-mModel(NULL),
-cvode(NULL),
-mModelGenerator(NULL),
-mCompiler(NULL)
+mModel(NULL)
 {
-
+	mModelGenerator = new ModelGenerator();
 }
 
 RoadRunner::~RoadRunner()
@@ -43,6 +43,53 @@ RoadRunner::~RoadRunner()
     delete cvode;
     delete mCompiler;
 }
+
+
+void RoadRunner::InitializeModel(IModel* aModel)
+{
+    mModel = aModel;//((IModel)o);
+
+    if(!mModel)
+    {
+    	return;
+    }
+    IModel& model = *mModel;
+    //model.Warnings.AddRange(ModelGenerator.Instance.Warnings);
+    modelLoaded = true;
+    _bConservedTotalChanged = false;
+
+    model.setCompartmentVolumes();
+    model.initializeInitialConditions();
+    model.setParameterValues();
+    model.setCompartmentVolumes();
+    model.setBoundaryConditions();
+
+    model.setInitialConditions();
+    model.convertToAmounts();
+
+    model.evalInitialAssignments();
+    model.computeRules(model.y);
+    model.convertToAmounts();
+
+    if (_bComputeAndAssignConservationLaws) model.computeConservedTotals();
+
+    cvode = new CvodeInterface(mModel);
+
+    reset();
+
+    // Construct default selection list
+    selectionList.resize(model.getNumTotalVariables + 1); // + 1 to include time
+    selectionList[0].selectionType = TSelectionType::clTime;
+    for (int i = 0; i < model.getNumTotalVariables; i++)
+    {
+        selectionList[i + 1].index = i;
+        selectionList[i + 1].selectionType = TSelectionType::clFloatingSpecies;
+    }
+
+//    _oSteadyStateSelection = NULL;
+}
+
+
 //        //private ArrayList _oSteadyStateSelection;
 //        private TSelectionRecord[] _oSteadyStateSelection;
 //        private string _sModelCode;
@@ -312,49 +359,6 @@ RoadRunner::~RoadRunner()
 //        }
 //#endif
 //
-void RoadRunner::InitializeModel(IModel* aModel)
-{
-    mModel = aModel;//((IModel)o);
-
-    if(!mModel)
-    {
-    	return;
-    }
-    IModel& model = *mModel;
-    //model.Warnings.AddRange(ModelGenerator.Instance.Warnings);
-    modelLoaded = true;
-    _bConservedTotalChanged = false;
-
-    model.setCompartmentVolumes();
-    model.initializeInitialConditions();
-    model.setParameterValues();
-    model.setCompartmentVolumes();
-    model.setBoundaryConditions();
-
-    model.setInitialConditions();
-    model.convertToAmounts();
-
-    model.evalInitialAssignments();
-    model.computeRules(model.y);
-    model.convertToAmounts();
-
-    if (_bComputeAndAssignConservationLaws) model.computeConservedTotals();
-
-    cvode = new CvodeInterface(mModel);
-
-    reset();
-
-    // Construct default selection list
-    selectionList.resize(model.getNumTotalVariables + 1); // + 1 to include time
-    selectionList[0].selectionType = TSelectionType::clTime;
-    for (int i = 0; i < model.getNumTotalVariables; i++)
-    {
-        selectionList[i + 1].index = i;
-        selectionList[i + 1].selectionType = TSelectionType::clFloatingSpecies;
-    }
-
-//    _oSteadyStateSelection = NULL;
-}
 
 //        private static void DumpResults(TextWriter writer, double[,] data, ArrayList colLabels)
 //        {
@@ -463,13 +467,13 @@ void RoadRunner::loadSBMLFromFile(const string& fileName)
     cout<<sbml<<endl;
     loadSBML(sbml);
 }
-//
+
 //        [Help("Load SBML into simulator")]
 void RoadRunner::loadSBML(const string& sbml)
 {
     if (!sbml.size())
     {
-        throw new SBWApplicationException("No SBML  content..!");
+        throw RRException("No SBML  content..!");
     }
 
     // If the user loads the same model again, don't both loading into NOM,
@@ -492,12 +496,18 @@ void RoadRunner::loadSBML(const string& sbml)
 
         sbmlStr = sbml;
 
-		if(!mModelGenerator)
+//		if(!mModelGenerator)
+//        {
+//			mModelGenerator = new ModelGenerator();
+//        }
+
+		_sModelCode = mModelGenerator->generateModelCode(sbmlStr);
+
+        if(!_sModelCode.size())
         {
-			mModelGenerator = new ModelGenerator();
+            throw RRException("Failed to generate Model Code");
         }
 
-        _sModelCode = mModelGenerator->generateModelCode(sbmlStr);
 
 //        string sLocation = GetType().Assembly.Location;
 //        Compiler.addAssembly(typeof(MathKGI).Assembly.Location);
@@ -511,7 +521,7 @@ void RoadRunner::loadSBML(const string& sbml)
 
         if (o != NULL)
         {
-//            InitializeModel(dynamic_cast<IModel*>(o));
+            InitializeModel(dynamic_cast<IModel*>(o));
         }
         else
         {
@@ -532,13 +542,13 @@ void RoadRunner::loadSBML(const string& sbml)
                 }
                 catch(...)
                 {
-					throw new SBWApplicationException("Failed to write to file");
+					throw SBWApplicationException("Failed to write to file");
                 }
             }
             catch (RRException)
             {
             }
-           	throw new SBWApplicationException("Internal Error: The model has failed to compile." + NL
+           	throw SBWApplicationException("Internal Error: The model has failed to compile." + NL
                                           + "The model file has been deposited at " +
                                           filePath);
         }

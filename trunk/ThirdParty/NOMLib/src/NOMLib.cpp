@@ -1142,6 +1142,17 @@ DLL_EXPORT int getModelName (char **name)
 	return 0;
 }
 
+DLL_EXPORT const char* GetModelName ()
+{
+	if (_oModelCPP == NULL)
+	{
+		errorCode = 1;
+		return NULL;
+	}
+	//libSBML returns a string, cast c_str to non const char*
+	return GET_NAME_IF_POSSIBLE(_oModelCPP).c_str();
+}
+
 
 DLL_EXPORT int getModelId (char **Id)
 {

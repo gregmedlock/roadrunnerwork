@@ -3,6 +3,9 @@
 			<ProjectGuid>{8FC33672-CD3D-4B85-844F-3B755C2666C5}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
+			<Projects Include="..\ThirdParty\xe_ide_builds\NOMLib-static.cbproj">
+				<Dependencies/>
+			</Projects>
 			<Projects Include="..\src\RoadRunnerLib.cbproj">
 				<Dependencies/>
 			</Projects>
@@ -29,6 +32,15 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
+		<Target Name="NOMLib-static">
+			<MSBuild Projects="..\ThirdParty\xe_ide_builds\NOMLib-static.cbproj"/>
+		</Target>
+		<Target Name="NOMLib-static:Clean">
+			<MSBuild Projects="..\ThirdParty\xe_ide_builds\NOMLib-static.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="NOMLib-static:Make">
+			<MSBuild Projects="..\ThirdParty\xe_ide_builds\NOMLib-static.cbproj" Targets="Make"/>
+		</Target>
 		<Target Name="RoadRunnerLib">
 			<MSBuild Projects="..\src\RoadRunnerLib.cbproj"/>
 		</Target>
@@ -84,13 +96,13 @@
 			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="RoadRunnerLib;MathTest1;Random;Exceptions;example_1;loadSBML"/>
+			<CallTarget Targets="NOMLib-static;RoadRunnerLib;MathTest1;Random;Exceptions;example_1;loadSBML"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="RoadRunnerLib:Clean;MathTest1:Clean;Random:Clean;Exceptions:Clean;example_1:Clean;loadSBML:Clean"/>
+			<CallTarget Targets="NOMLib-static:Clean;RoadRunnerLib:Clean;MathTest1:Clean;Random:Clean;Exceptions:Clean;example_1:Clean;loadSBML:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="RoadRunnerLib:Make;MathTest1:Make;Random:Make;Exceptions:Make;example_1:Make;loadSBML:Make"/>
+			<CallTarget Targets="NOMLib-static:Make;RoadRunnerLib:Make;MathTest1:Make;Random:Make;Exceptions:Make;example_1:Make;loadSBML:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

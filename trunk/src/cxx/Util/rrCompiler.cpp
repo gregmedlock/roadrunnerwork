@@ -6,10 +6,8 @@
 #include "rrCompiler.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-
 namespace rr
 {
-
 
 vector<string> Compiler::m_oAssemblies;
 vector<string> Compiler::m_sCompileErrors;
@@ -23,7 +21,8 @@ Compiler::~Compiler()
 {
 
 }
-//
+
+
 //	private:
 //        static readonly StringCollection m_oAssemblies = new StringCollection();
 //        static readonly StringCollection m_sCompileErrors = new StringCollection();
@@ -67,18 +66,18 @@ Compiler::~Compiler()
 //            return oCompler.Compile2(cscp, source, sClassName);
 //        }
 //
-//        /// <summary>
-//        /// the execute method takes a stringcollection of wrapper classes,
-//        /// compiles them and executes methods on the classes
-//        /// </summary>
-//        /// <param name="oProxyCode"></param>
-//        public static object getInstance(string source, string sClassName, string sLocation)
-//        {
-//            var oCompler = new Compiler();
-//            addAssembly(sLocation);
-//            var cscp = new CSharpCodeProvider();
-//            return oCompler.Compile2(cscp, source, sClassName);
-//        }
+/// <summary>
+/// the execute method takes a stringcollection of wrapper classes,
+/// compiles them and executes methods on the classes
+/// </summary>
+/// <param name="oProxyCode"></param>
+rrObject* Compiler::getInstance(const string& source, const string& sClassName, const string& sLocation)
+{
+    //var oCompler = new Compiler();
+    //addAssembly(sLocation);
+//    CSharpCodeProvider *cscp = new CSharpCodeProvider();
+//    return Compile2(cscp, source, sClassName);
+}
 //
 //
 //        /// <summary>
