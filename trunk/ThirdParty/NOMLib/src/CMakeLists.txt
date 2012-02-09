@@ -1,8 +1,8 @@
 set(target NOMLib)
 
 #Link with libsbml dynamic library
-link_directories("C:/sbw_libs/libsbml/lib")
-link_libraries(${target} libsbml)
+link_libraries(${target} libsbml-static)
+link_libraries(${target} libxml2_xe)
 
 add_library(${target} ${LIB_TYPE}
 NOMLib.cpp

@@ -1147,9 +1147,9 @@ DLL_EXPORT const char* GetModelName ()
 	if (_oModelCPP == NULL)
 	{
 		errorCode = 1;
-		return NULL;
+		return NULL; //Null pointer on failure
 	}
-	//libSBML returns a string, cast c_str to non const char*
+	//libSBML returns a string, return const char by c_str()
 	return GET_NAME_IF_POSSIBLE(_oModelCPP).c_str();
 }
 

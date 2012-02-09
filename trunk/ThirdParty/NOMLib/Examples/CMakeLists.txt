@@ -1,10 +1,8 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
 PROJECT(NOMLibExamples)
-set(NL_INCLUDE_ROOT "../src")
 
-#Link with libsbml dynamic library
-link_directories("C:/sbw_libs/libsbml/lib")
-link_libraries(${target} libsbml)
+#Link with libsbml library
+link_libraries(${target} libsbml-static)
 
 
 set(examples 	

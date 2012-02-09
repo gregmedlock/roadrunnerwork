@@ -13,36 +13,37 @@ OPTION (BUILD_EXAMPLES			"Build Examples"			ON)
 OPTION (BUILD_LIBS				"Build Libs"				ON)
 OPTION (BUILD_SHARED_LIBS 		"Build Shared Libraries" 	ON)
 
-set(NL_ROOT 						${CMAKE_CURRENT_SOURCE_DIR}/src)
-set(THIRD_PARTY_ROOT 				"C:/sbw_libs/")
+set(NOM_SOURCE_ROOT 				${CMAKE_CURRENT_SOURCE_DIR}/src)
+set(THIRD_PARTY_ROOT 				"C:/rrThirdPartyInstalls")
 set(LIBSBML_SOURCE_ROOT 			${THIRD_PARTY_ROOT}/libsbml)
 
 #Where to put the resulting binaries of a build
 set(lib_path		 				${PROJECT_BINARY_DIR}/link)
 set(bin_path		 				${PROJECT_BINARY_DIR}/bin)
 
-IF(WIN32)
-  IF(${MSVC})
-  IF(CMAKE_BUILD_TYPE MATCHES "Debug")
-   set(lib_path ${lib_path}/Debug)
-   set(bin_path ${bin_path}/Debug)
-  ELSE(CMAKE_BUILD_TYPE MATCHES "Debug")
-   set(lib_path ${lib_path}/Release)
-   set(bin_path ${bin_path}/Release)
-  ENDIF(CMAKE_BUILD_TYPE MATCHES "Debug")
- ELSE(WIN32)
-   # Linux ----------
- ENDIF(${MSVC})
-ENDIF(WIN32)
+#IF(WIN32)
+#  IF(${MSVC})
+#  IF(CMAKE_BUILD_TYPE MATCHES "Debug")
+#   set(lib_path ${lib_path}/Debug)
+#   set(bin_path ${bin_path}/Debug)
+#  ELSE(CMAKE_BUILD_TYPE MATCHES "Debug")
+#   set(lib_path ${lib_path}/Release)
+#   set(bin_path ${bin_path}/Release)
+#  ENDIF(CMAKE_BUILD_TYPE MATCHES "Debug")
+# ELSE(WIN32)
+#   # Linux ----------
+# ENDIF(${MSVC})
+#ENDIF(WIN32)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/link)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/link)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 
-include_directories(				${NL_ROOT})
+include_directories(				${NOM_SOURCE_ROOT})
 include_directories(				${LIBSBML_SOURCE_ROOT})
 include_directories(				${LIBSBML_SOURCE_ROOT}/include)
 include_directories(				${LIBSBML_SOURCE_ROOT}/include/sbml)
+link_directories(${THIRD_PARTY_ROOT})
 
 if(${MSVC})
 add_definitions(-D_CRT_NONSTDC_NO_DEPRECATE)
@@ -75,6 +76,8 @@ endif()
 if(${BUILD_EXAMPLES})
 add_subdirectory(Examples)
 endif()
+
+
 #
 #install (FILES Readme.txt 		DESTINATION . 	COMPONENT info)
 #install (FILES License.txt 		DESTINATION . 	COMPONENT info)
