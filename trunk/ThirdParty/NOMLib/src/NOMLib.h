@@ -46,8 +46,8 @@
 #define WIN32_LEAN_AND_MEAN
 #undef SEVERITY_ERROR
 
-#include "SBMLTypes.h"
-#include "math/ASTNode.h"
+#include "sbml/SBMLTypes.h"
+#include "sbml/math/ASTNode.h"
 
 #define BUFFER_SIZE 1024
 #define FUNCDATAROWS 44
@@ -130,7 +130,7 @@ extern "C" {
 	* @param[out] value The value of the symbol is returned in this argument
 	* @return -1 if there has been an error, otherwise returns 0
 	*/
-	DLL_EXPORT int getValue (char *sId, double *value);
+	DLL_EXPORT int getValue (const char *sId, double *value);
 
 
    /** @brief Set the value for a given symbol in the SBML

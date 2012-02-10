@@ -60,8 +60,8 @@
 
 using namespace std;
 
-SBMLDocument* _oSBMLDocCPP = NULL;
-Model* _oModelCPP = NULL;
+SBMLDocument* 	_oSBMLDocCPP = NULL;
+Model* 			_oModelCPP = NULL;
 
 int errorCode = 0;
 char *extendedErrorMessage;
@@ -380,7 +380,7 @@ char* addMissingModifiersInternal(const string& sModel)
 
 // Load SBML file into the NOM
 DLL_EXPORT int loadSBML(const char* sbmlStr)
-{	
+{
 	string arg = sbmlStr;
 
 	if (sbmlStr == "")

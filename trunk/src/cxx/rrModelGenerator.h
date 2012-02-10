@@ -10,7 +10,8 @@
 #include "rrStringUtils.h"
 #include "rrRoadRunner.h"
 #include "rrException.h"
-#include "libstructural.h"
+#include "rrLibStructWrapper.h"
+#include "rrNOMWrapper.h"
 using std::string;
 using std::vector;
 using std::list;
@@ -94,9 +95,15 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         int 				                ReadCompartments();
         int 				                ReadModifiableSpeciesReferences();
 
+        LibStructWrapper					mLibStructWrapper;		//!Object to facilitate calls to libStruct library
+        LibStructural&						mLibStructRef;			//!T his class is not exported so, not sure if this will work..
+        NOMWrapper							mNOM;					//Object that provide some wrappers and new "NOM" functions
+
     public:
 									        ModelGenerator();
 		virtual						       ~ModelGenerator();
+
+
         //        public: static ModelGenerator Instance
         SymbolList                         	boundarySpeciesList;
         SymbolList                         	compartmentList;

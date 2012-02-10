@@ -44,7 +44,7 @@ namespace rr
 //            }
 //        }
 
-        int Add(Symbol item)
+        int Add(const Symbol& item)
         {
 	        push_back(item);
             return size();

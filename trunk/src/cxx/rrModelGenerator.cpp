@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include <iostream>
+#include <cmath>
 #include "rrModelGenerator.h"
 #include "NOMLib.h"
 #include "libstructural.h"
@@ -14,6 +15,9 @@ using namespace LIB_STRUCTURAL;
 namespace rr
 {
 ModelGenerator::ModelGenerator()
+:
+mLibStructWrapper(),
+mLibStructRef(mLibStructWrapper.GetInstance())
 {
 
 }
@@ -72,29 +76,46 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     _functionParameters.empty();// = new StringCollection();
 
    	LibStructural* instance = LibStructural::getInstance();
-    instance->LibStructural::loadSBML(sASCII);
-//
-//    if (RoadRunner._bComputeAndAssignConservationLaws)
-//    {
-//        _NumIndependentSpecies = StructAnalysis.GetNumIndependentSpecies();
-//        independentSpeciesList = StructAnalysis.GetIndependentSpeciesIds();
-//        dependentSpeciesList = StructAnalysis.GetDependentSpeciesIds();
-//    }
-//    else
-//    {
-//        _NumIndependentSpecies = StructAnalysis.GetNumSpecies();
-//        independentSpeciesList = StructAnalysis.GetSpeciesIds();
-//        dependentSpeciesList = new string[0];
-//    }
-//
-//    sb.Append("//************************************************************************** " + NL());
-//
-//    // Load the compartment array (name and value)
-//    _NumCompartments = ReadCompartments();
-//
-//    // Read FloatingSpecies
-//    _NumFloatingSpecies = ReadFloatingSpecies();
-//    _NumDependentSpecies = _NumFloatingSpecies - _NumIndependentSpecies;
+
+    string msg = mLibStructRef.loadSBML(sASCII);
+    if(!msg.size())
+    {
+
+    }
+
+    if (RoadRunner::_bComputeAndAssignConservationLaws)
+    {
+		//_NumIndependentSpecies = StructAnalysis.GetNumIndependentSpecies();
+	    _NumIndependentSpecies 	= mLibStructRef.getNumIndSpecies();
+
+        //independentSpeciesList 	= StructAnalysis::GetIndependentSpeciesIds();
+		independentSpeciesList 	= mLibStructRef.getIndependentSpecies();
+
+		//dependentSpeciesList 	= StructAnalysis::GetDependentSpeciesIds();
+        dependentSpeciesList 	= mLibStructRef.getDependentSpecies();
+    }
+    else
+    {
+		//        _NumIndependentSpecies = StructAnalysis.GetNumSpecies();
+        _NumIndependentSpecies = mLibStructRef.getNumSpecies();
+		//        independentSpeciesList = StructAnalysis.GetSpeciesIds();
+        independentSpeciesList = mLibStructRef.getSpecies();
+
+		//        dependentSpeciesList = new string[0];
+//		dependentSpeciesList = new string[0];
+
+    }
+
+
+    sb.Append("//************************************************************************** " + NL());
+
+    // Load the compartment array (name and value)
+	//    _NumCompartments = ReadCompartments();
+	_NumCompartments = ReadCompartments();
+
+    // Read FloatingSpecies
+    _NumFloatingSpecies = ReadFloatingSpecies();
+    _NumDependentSpecies = _NumFloatingSpecies - _NumIndependentSpecies;
 //
 //    // Load the boundary species array (name and value)
 //    _NumBoundarySpecies = ReadBoundarySpecies();
@@ -175,7 +196,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //            //oInfo.NumberDecimalSeparator = ".";
 //        }
 //
-////        public: static ModelGenerator Instance
+////         static ModelGenerator Instance
 ////        {
 ////            get
 ////            {
@@ -185,7 +206,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            }
 ////        }
 //
-//        public: SymbolList ModifiableSpeciesReferenceList;// { get; set; }
+//         SymbolList ModifiableSpeciesReferenceList;// { get; set; }
 //        public: list<string> Warnings;// { get; set; }
 //        public: int NumAdditionalRates;
 ////        {
@@ -198,7 +219,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //            return reactionList.size();
 //        }
 //
-//        private: string convertSpeciesToY(const string& speciesName)
+//        private: string ModelGenerator::convertSpeciesToY(const string& speciesName)
 //        {
 //            int index;
 //            if (floatingSpeciesConcentrationList.find(speciesName, index))
@@ -208,7 +229,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //            throw new SBWApplicationException("Internal Error: Unable to locate species: " + speciesName);
 //        }
 //
-//        private: string convertSpeciesToBc(const string& speciesName)
+//        private: string ModelGenerator::convertSpeciesToBc(const string& speciesName)
 //        {
 //            int index;
 //            if (boundarySpeciesList.find(speciesName, index))
@@ -216,7 +237,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            throw new SBWApplicationException("Internal Error: Unable to locate species: " + speciesName);
 //        }
 //
-//        private: string convertCompartmentToC(const string& compartmentName)
+//         string ModelGenerator::convertCompartmentToC(const string& compartmentName)
 //        {
 //            int index;
 //            if (compartmentList.find(compartmentName, index))
@@ -224,7 +245,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            throw new SBWApplicationException("Internal Error: Unable to locate compartment: " + compartmentName);
 //        }
 //
-//        private: string convertSymbolToGP(const string& parameterName)
+//         string ModelGenerator::convertSymbolToGP(const string& parameterName)
 //        {
 //            int index;
 //            if (globalParameterList.find(parameterName, index))
@@ -234,7 +255,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            throw new SBWApplicationException("Internal Error: Unable to locate parameter: " + parameterName);
 //        }
 //
-//        private: string convertSymbolToC(const string& compartmentName)
+//         string ModelGenerator::convertSymbolToC(const string& compartmentName)
 //        {
 //            int index;
 //            if (compartmentList.find(compartmentName, index))
@@ -252,7 +273,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
             return tmp;
         }
 //
-//        public: list<string> getFloatingSpeciesConcentrationList()
+//         list<string> ModelGenerator::getFloatingSpeciesConcentrationList()
 //        {
 //            list<string> tmp;// = new list<string>();
 //            for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
@@ -260,7 +281,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //            return tmp;
 //        }
 //
-//        public: list<string> getConservationList()
+//         list<string> ModelGenerator::getConservationList()
 //        {
 //            list<string> tmp;// = new list<string>();
 //            for (int i = 0; i < conservationList.size(); i++)
@@ -269,7 +290,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //        }
 //
 //
-//        public: list<string> getBoundarySpeciesList()
+//         list<string> ModelGenerator::getBoundarySpeciesList()
 //        {
 //            list<string> tmp;// = new list<string>();
 //            for (int i = 0; i < boundarySpeciesList.size(); i++)
@@ -277,7 +298,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //            return tmp;
 //        }
 //
-//        public: list<string> getGlobalParameterList()
+//         list<string> ModelGenerator::getGlobalParameterList()
 //        {
 //            list<string> tmp;// = new list<string>();
 //            for (int i = 0; i < globalParameterList.size(); i++)
@@ -289,7 +310,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //            return tmp;
 //        }
 //
-//        public: list<string> getLocalParameterList(int reactionId)
+//         list<string> ModelGenerator::getLocalParameterList(int reactionId)
 //        {
 //            list<string> tmp;// = new list<string>();
 //            for (int i = 0; i < localParameterList[reactionId].size(); i++)
@@ -297,7 +318,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //            return tmp;
 //        }
 //
-//        public: list<string> getReactionNames()
+//         list<string> ModelGenerator::getReactionNames()
 //        {
 //            list<string> tmp;// = new list<string>();
 //            for (int i = 0; i < reactionList.size(); i++)
@@ -305,7 +326,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //            return tmp;
 //        }
 //
-//        private: string convertUserFunctionExpression(const string& equation)
+//         string ModelGenerator::convertUserFunctionExpression(const string& equation)
 //        {
 ////            var s = new Scanner.Scanner();
 ////            Stream ss = new MemoryStream(Encoding.Default.GetBytes(equation));
@@ -573,12 +594,12 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //        }
 //
 //
-//        private: string substituteTerms(int numReactions, string reactionName, string equation)
+//         string ModelGenerator::substituteTerms(int numReactions, string reactionName, string equation)
 //        {
 //            return substituteTerms(reactionName, equation, false);
 //        }
 //
-////        private: void SubstituteEquation(const string& reactionName, LibRoadRunner.Scanner.Scanner s, (StringBuilder& sb)
+////         void ModelGenerator::SubstituteEquation(const string& reactionName, LibRoadRunner.Scanner.Scanner s, (StringBuilder& sb)
 ////        {
 ////            switch (s.tokenString)
 ////            {
@@ -772,7 +793,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////                    break;
 ////            }
 ////        }
-////        private: void SubstituteWords(const string& reactionName, bool bFixAmounts, LibRoadRunner.Scanner.Scanner s, (StringBuilder& sb)
+////         void ModelGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, LibRoadRunner.Scanner.Scanner s, (StringBuilder& sb)
 ////        {
 ////            // Global parameters have priority
 ////            int index;
@@ -855,7 +876,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////                SubstituteEquation(reactionName, s, sb);
 ////            }
 ////        }
-////        private: void SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner.Scanner s, (StringBuilder& sb)
+////         void ModelGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner.Scanner s, (StringBuilder& sb)
 ////        {
 ////            switch (s.token)
 ////            {
@@ -940,7 +961,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////                    throw ae;
 ////            }
 ////        }
-////        private: static ASTNode CleanEquation(ASTNode ast)
+////         static ASTNode ModelGenerator::CleanEquation(ASTNode ast)
 ////        {
 ////            if (ast.getType() == libsbml.AST_PLUS && ast.getNumChildren() == 0)
 ////            {
@@ -969,7 +990,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            return ast;
 ////
 ////        }
-//        private: static string CleanEquation(const string& equation)
+//         static string ModelGenerator::CleanEquation(const string& equation)
 //        {
 //            if (equation.size() < 1)
 //            {
@@ -999,7 +1020,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            return libsbml.formulaToString(ast);
 //        }
 //
-//        private: string substituteTerms(const string& reactionName, string inputEquation, bool bFixAmounts)
+//         string ModelGenerator::substituteTerms(const string& reactionName, string inputEquation, bool bFixAmounts)
 //        {
 //            string equation = CleanEquation(inputEquation);
 //            if (equation.size() < 1)
@@ -1031,13 +1052,15 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            return sb.ToString();
 //        }
 //
-//        private: string NL()
-//        {
-//            return "\n";//Environment.NewLine;
-//        }
+string ModelGenerator::NL()
+{
+	stringstream newLine;
+    newLine << endl;
+    return newLine.str();//Environment.NewLine;
+}
 //
 //
-//        private: rrDoubleMatrix InitializeL0()
+//         rrDoubleMatrix ModelGenerator::InitializeL0()
 //        {
 //            rrDoubleMatrix L0;
 ////            try
@@ -1053,7 +1076,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //            return L0;
 //        }
 //
-//        private: void WriteOutSymbolTables(StringBuilder& sb)
+//         void ModelGenerator::WriteOutSymbolTables(StringBuilder& sb)
 //        {
 ////            sb.Append("\tvoid loadSymbolTables() {" + NL());
 ////
@@ -1071,57 +1094,57 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //        }
 //
 //
-//        private: int ReadFloatingSpecies()
-//        {
-////            // Load a reordered list into the variable list.
-////            vector<string> reOrderedList;
-////            if ((RoadRunner._bComputeAndAssignConservationLaws))
-////                reOrderedList = StructAnalysis.GetReorderedSpeciesIds();
-////            else
-////                reOrderedList = StructAnalysis.GetSpeciesIds();
-////
-////            list<string> oFloatingSpecies = NOM.getListOfFloatingSpecies();
-////
-////
-////            list<string> oTempList;
-////            for (int i = 0; i < reOrderedList.Length; i++)
-////            {
-////                for (int j = 0; j < oFloatingSpecies.size(); j++)
-////                {
-////                    oTempList = (list<string>)oFloatingSpecies[j];
-////                    if (reOrderedList[i] != (const string&)oTempList[0]) continue;
-////
-////                    string compartmentName = NOM.getNthFloatingSpeciesCompartmentName(j);
-////                    var bIsConcentration = (bool)oTempList[2];
-////                    var dValue = (double)oTempList[1];
-////                    if (double.IsNaN(dValue))
-////                        dValue = 0;
-////                    Symbol symbol = null;
-////                    if (bIsConcentration)
-////                    {
-////                        symbol = new Symbol(reOrderedList[i], dValue, compartmentName);
-////                    }
-////                    else
-////                    {
-////                        int nCompartmentIndex;
-////                        compartmentList.find(compartmentName, out nCompartmentIndex);
-////                        double dVolume = compartmentList[nCompartmentIndex].value;
-////                        if (double.IsNaN(dVolume)) dVolume = 1;
-////                        symbol = new Symbol(reOrderedList[i],
-////                            dValue / dVolume,
-////                            compartmentName,
-////                            string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
-////                    }
-////                    symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(reOrderedList[i]).getHasOnlySubstanceUnits();
-////                    floatingSpeciesConcentrationList.Add(symbol);
-////                    break;
-////                }
-////                //throw new SBWApplicationException("Reordered Species " + reOrderedList[i] + " not found.");
-////            }
-////            return oFloatingSpecies.size();
-//        }
+int ModelGenerator::ReadFloatingSpecies()
+{
+//      // Load a reordered list into the variable list.
+//      vector<string> reOrderedList;
+//      if ((RoadRunner._bComputeAndAssignConservationLaws))
+//          reOrderedList = StructAnalysis.GetReorderedSpeciesIds();
+//      else
+//          reOrderedList = StructAnalysis.GetSpeciesIds();
 //
-//        private: int ReadBoundarySpecies()
+//      list<string> oFloatingSpecies = NOM.getListOfFloatingSpecies();
+//
+//
+//      list<string> oTempList;
+//      for (int i = 0; i < reOrderedList.Length; i++)
+//      {
+//          for (int j = 0; j < oFloatingSpecies.size(); j++)
+//          {
+//              oTempList = (list<string>)oFloatingSpecies[j];
+//              if (reOrderedList[i] != (const string&)oTempList[0]) continue;
+//
+//              string compartmentName = NOM.getNthFloatingSpeciesCompartmentName(j);
+//              var bIsConcentration = (bool)oTempList[2];
+//              var dValue = (double)oTempList[1];
+//              if (double.IsNaN(dValue))
+//                  dValue = 0;
+//              Symbol symbol = null;
+//              if (bIsConcentration)
+//              {
+//                  symbol = new Symbol(reOrderedList[i], dValue, compartmentName);
+//              }
+//              else
+//              {
+//                  int nCompartmentIndex;
+//                  compartmentList.find(compartmentName, out nCompartmentIndex);
+//                  double dVolume = compartmentList[nCompartmentIndex].value;
+//                  if (double.IsNaN(dVolume)) dVolume = 1;
+//                  symbol = new Symbol(reOrderedList[i],
+//                      dValue / dVolume,
+//                      compartmentName,
+//                      string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
+//              }
+//              symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(reOrderedList[i]).getHasOnlySubstanceUnits();
+//              floatingSpeciesConcentrationList.Add(symbol);
+//              break;
+//          }
+//          //throw new SBWApplicationException("Reordered Species " + reOrderedList[i] + " not found.");
+//      }
+//      return oFloatingSpecies.size();
+}
+//
+//         int ModelGenerator::ReadBoundarySpecies()
 //        {
 ////            int numBoundarySpecies;
 ////            list<string> oBoundarySpecies = NOM.getListOfBoundarySpecies();
@@ -1152,7 +1175,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            return numBoundarySpecies;
 //        }
 //
-//        private: int ReadGlobalParameters()
+//         int ModelGenerator::ReadGlobalParameters()
 //        {
 ////            string name;
 ////            double value;
@@ -1168,7 +1191,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            return numGlobalParameters;
 //        }
 //
-//        private: void ReadLocalParameters(const int& numReactions,  vector<int>& localParameterDimensions,
+//         void ModelGenerator::ReadLocalParameters(const int& numReactions,  vector<int>& localParameterDimensions,
 //                                          int& totalLocalParmeters)
 //        {
 ////            string name;
@@ -1193,7 +1216,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            }
 //        }
 //
-//        private: void WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies,
+//         void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies,
 //                                                  rrDoubleMatrix L0)
 //        {
 ////            // ------------------------------------------------------------------------------
@@ -1250,7 +1273,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteComputeConservedTotals(StringBuilder& sb, int numFloatingSpecies, int numDependentSpecies)
+//         void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, int numFloatingSpecies, int numDependentSpecies)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\t// Uses the equation: C = Sd - L0*Si" + NL());
@@ -1301,7 +1324,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append("	}" + NL() + NL());
 //        }
 //
-//        private: void WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies,
+//         void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies,
 //                                                 rrDoubleMatrix L0)
 //        {
 ////            // ------------------------------------------------------------------------------
@@ -1376,7 +1399,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteUserDefinedFunctions(StringBuilder& sb)
+//         void ModelGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            for (int i = 0; i < NOM.getNumFunctionDefinitions(); i++)
@@ -1417,7 +1440,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            }
 //        }
 //
-//        private: void WriteResetEvents(StringBuilder& sb, int numEvents)
+//         void ModelGenerator::WriteResetEvents(StringBuilder& sb, int numEvents)
 //        {
 ////            sb.AppendFormat("{0}\tpublic: void resetEvents() {{{0}", NL());
 ////            for (int i = 0; i < numEvents; i++)
@@ -1428,7 +1451,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteSetConcentration(StringBuilder& sb)
+//         void ModelGenerator::WriteSetConcentration(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.AppendFormat("\tpublic: void setConcentration(int index, double value) {{{0}", NL());
@@ -1448,7 +1471,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteGetConcentration(StringBuilder& sb)
+//         void ModelGenerator::WriteGetConcentration(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.AppendFormat("\tpublic: double getConcentration(int index) {{{0}", NL());
@@ -1456,7 +1479,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteConvertToAmounts(StringBuilder& sb)
+//         void ModelGenerator::WriteConvertToAmounts(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.AppendFormat("\tpublic: void convertToAmounts() {{{0}", NL());
@@ -1470,7 +1493,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteConvertToConcentrations(StringBuilder& sb)
+//         void ModelGenerator::WriteConvertToConcentrations(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: void convertToConcentrations() {" + NL());
@@ -1482,7 +1505,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteProperties(StringBuilder& sb)
+//         void ModelGenerator::WriteProperties(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: double[] y {" + NL());
@@ -1617,7 +1640,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteAccessors(StringBuilder& sb)
+//         void ModelGenerator::WriteAccessors(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: int getNumIndependentVariables {" + NL());
@@ -1678,7 +1701,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////
 //        }
 //
-//        private: void WriteOutVariables(StringBuilder& sb)
+//         void ModelGenerator::WriteOutVariables(StringBuilder& sb)
 //        {
 ////            sb.Append("\tprivate: List<string> _Warnings = new List<string>();" + NL());
 ////            sb.Append("\tprivate: double[] _gp = new double[" + (_NumGlobalParameters + _TotalLocalParmeters) +
@@ -1786,7 +1809,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteClassHeader(StringBuilder& sb)
+//         void ModelGenerator::WriteClassHeader(StringBuilder& sb)
 //        {
 ////            sb.Append("using System;" + NL());
 ////            sb.Append("using System.IO;" + NL());
@@ -1804,7 +1827,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append(NL());
 //        }
 //
-//        private: string FindSymbol(const string& varName)
+//         string ModelGenerator::FindSymbol(const string& varName)
 //        {
 ////            int index = 0;
 ////            if (floatingSpeciesConcentrationList.find(varName, out index))
@@ -1830,7 +1853,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////                throw new SBWApplicationException(string.Format("Unable to locate lefthand side symbol in assignment[{0}]", varName));
 //        }
 //
-//        private: void WriteTestConstraints(StringBuilder& sb)
+//         void ModelGenerator::WriteTestConstraints(StringBuilder& sb)
 //        {
 ////            sb.Append("\tpublic: void testConstraints()" + NL());
 ////            sb.Append("\t{" + NL());
@@ -1848,7 +1871,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-////        private: static bool ExpressionContainsSymbol(ASTNode ast, string symbol)
+////         static bool ModelGenerator::ExpressionContainsSymbol(ASTNode ast, string symbol)
 ////        {
 ////            if (ast == null || string.IsNullOrEmpty(symbol)) return false;
 ////
@@ -1864,14 +1887,14 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            return false;
 ////
 ////        }
-//        private: static bool ExpressionContainsSymbol(const string& expression, string symbol)
+//         static bool ModelGenerator::ExpressionContainsSymbol(const string& expression, string symbol)
 //        {
 ////            if (string.IsNullOrEmpty(expression) || string.IsNullOrEmpty(symbol)) return false;
 ////            var ast = libsbml.parseFormula(expression);
 ////            return ExpressionContainsSymbol(ast, symbol);
 //        }
 //
-//        private: void WriteEvalInitialAssignments(StringBuilder& sb, int numReactions)
+//         void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, int numReactions)
 //        {
 ////            sb.Append("\tpublic: void evalInitialAssignments()" + NL());
 ////            sb.Append("\t{" + NL());
@@ -1938,7 +1961,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //        }
 //
 //
-//        private: int WriteComputeRules(StringBuilder& sb, int numReactions)
+//         int ModelGenerator::WriteComputeRules(StringBuilder& sb, int numReactions)
 //        {
 ////            int numOfRules = NOM.getNumRules();
 ////            _oMapRateRule = new Hashtable();
@@ -2096,7 +2119,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            return numOfRules;
 //        }
 //
-//        private: void WriteComputeReactionRates(StringBuilder& sb, int numReactions)
+//         void ModelGenerator::WriteComputeReactionRates(StringBuilder& sb, int numReactions)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\t// Compute the reaction rates" + NL());
@@ -2133,7 +2156,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
 //
-//        private: void WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies)
+//         void ModelGenerator::WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies)
 //        {
 ////            sb.Append("\t// Event handling function" + NL());
 ////            sb.Append("\tpublic: void evalEvents (double timeIn, double[] oAmounts)" + NL());
@@ -2176,7 +2199,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //        }
 //
 //
-//        private: void WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies,
+//         void ModelGenerator::WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies,
 //                                    int numFloatingSpecies, int numOfRules)
 //        {
 ////            sb.Append("\t// Model Function" + NL());
@@ -2368,7 +2391,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: Symbol GetSpecies(const string& id)
+//         Symbol ModelGenerator::GetSpecies(const string& id)
 //        {
 ////            int index;
 ////            if (floatingSpeciesConcentrationList.find(id, out index))
@@ -2377,7 +2400,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////                return boundarySpeciesList[index];
 ////            return null;
 //        }
-//        private: void WriteEventAssignments(StringBuilder& sb, int numReactions, int numEvents)
+//         void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, int numEvents)
 //        {
 ////            var delays = new list<string>();
 ////            var eventType = new List<bool>();
@@ -2475,7 +2498,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //        }
 //
 //
-//        public: static string WriteDouble(double value)
+//         static string ModelGenerator::WriteDouble(double value)
 //        {
 ////            if (double.IsNegativeInfinity(value))
 ////                return "double.NegativeInfinity";
@@ -2486,7 +2509,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            return value.ToString(STR_DoubleFormat, oInfo);
 //        }
 //
-//        private: void WriteSetParameterValues(StringBuilder& sb, int numReactions)
+//         void ModelGenerator::WriteSetParameterValues(StringBuilder& sb, int numReactions)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: void setParameterValues ()" + NL());
@@ -2511,7 +2534,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteSetCompartmentVolumes(StringBuilder& sb)
+//         void ModelGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: void setCompartmentVolumes ()" + NL());
@@ -2535,7 +2558,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteSetBoundaryConditions(StringBuilder& sb)
+//         void ModelGenerator::WriteSetBoundaryConditions(StringBuilder& sb)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic: void setBoundaryConditions ()" + NL());
@@ -2552,7 +2575,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: void WriteSetInitialConditions(StringBuilder& sb, int numFloatingSpecies)
+//         void ModelGenerator::WriteSetInitialConditions(StringBuilder& sb, int numFloatingSpecies)
 //        {
 ////            sb.Append("\tpublic: void initializeInitialConditions ()" + NL());
 ////            sb.Append("\t{" + NL());
@@ -2584,20 +2607,22 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            sb.Append("\t}" + NL() + NL());
 //        }
 //
-//        private: int ReadCompartments()
-//        {
-////            int numCompartments = NOM.getNumCompartments();
-////            for (int i = 0; i < numCompartments; i++)
-////            {
-////                string sCompartmentId = NOM.getNthCompartmentId(i);
-////                double value = NOM.getValue(sCompartmentId);
-////                if (double.IsNaN(value)) value = 1;
-////                compartmentList.Add(new Symbol(sCompartmentId, value));
-////            }
-////            return numCompartments;
-//        }
-//
-//        private: int ReadModifiableSpeciesReferences()
+int ModelGenerator::ReadCompartments()
+{
+      int numCompartments = getNumCompartments();
+      for (int i = 0; i < numCompartments; i++)
+      {
+          string sCompartmentId = mNOM.getNthCompartmentId(i);
+
+          double value = mNOM.getValue(sCompartmentId);
+          if (_isnan(value))//double.IsNaN(value))
+			 value = 1;
+          compartmentList.Add(Symbol(sCompartmentId, value));
+      }
+      return numCompartments;
+}
+
+//        int ModelGenerator::ReadModifiableSpeciesReferences()
 //        {
 ////            if (NOM.SbmlDocument.getLevel() < 3) return 0;
 ////            string id;
