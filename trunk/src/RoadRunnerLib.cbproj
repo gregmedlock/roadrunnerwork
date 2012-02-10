@@ -34,7 +34,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>cxx\Util\mtrand\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;C:\rrThirdPartyInstalls\include;C:\RRW\ThirdParty\libstruct\include;C:\RRW\ThirdParty\NOMLib\src;C:\rrThirdPartyInstalls\libsbml\include;C:\rrThirdPartyInstalls\libsbml;C:\rrThirdPartyInstalls\libsbml\include\sbml;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>C:\rrThirdPartyInstalls\sundials\;..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\bins\;C:\rrThirdPartyInstalls\;..\Externals\libsbml\src\sbml\xml\;..\Externals\libsbml\src\sbml\;C:\rr_install\lib\;cxx\Util\mtrand\;..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>C:\rrBuilds\clapack_xe\BLAS\SRC\;C:\rrBuilds\clapack_xe\F2CLIBS\libf2c\;C:\rrBuilds\clapack_xe\SRC\;C:\rrThirdPartyInstalls\libstruct\lib\;C:\rrThirdPartyInstalls\sundials\;..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\bins\;C:\rrThirdPartyInstalls\;..\Externals\libsbml\src\sbml\xml\;..\Externals\libsbml\src\sbml\;C:\rr_install\lib\;cxx\Util\mtrand\;..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -46,7 +46,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<IncludePath>C:\rr_install\include;C:\sbw_libs\libstruct\include;$(IncludePath)</IncludePath>
+			<IncludePath>C:\rrThirdPartyInstalls\sundials\include;$(IncludePath)</IncludePath>
 			<FinalOutputDir>C:\RRW\build\link</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
@@ -69,6 +69,18 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="C:\rrBuilds\clapack_xe\BLAS\SRC\blas.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>40</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\clapack_xe\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>39</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\clapack_xe\SRC\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>38</BuildOrder>
+			</LibFiles>
 			<LibFiles Include="C:\rrThirdPartyInstalls\bins\NOMLib-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>31</BuildOrder>
@@ -76,6 +88,18 @@
 			<LibFiles Include="C:\rrThirdPartyInstalls\libsbml-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>30</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrThirdPartyInstalls\libstruct\lib\LibLA-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>36</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrThirdPartyInstalls\libstruct\lib\LibStructural-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>35</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrThirdPartyInstalls\libstruct\lib\lpsolve-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>37</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="C:\rrThirdPartyInstalls\sundials\sundials_cvode.lib">
 				<IgnorePath>true</IgnorePath>
@@ -201,9 +225,9 @@
 			<None Include="rrPCH.h">
 				<BuildOrder>6</BuildOrder>
 			</None>
-			<LibFiles Include="..\ThirdParty\libsbml\dependencies\lib\libxml2.lib">
+			<LibFiles Include="..\ThirdParty\libsbml\dependencies\lib\libxml2_xe.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>32</BuildOrder>
+				<BuildOrder>34</BuildOrder>
 			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>

@@ -34,14 +34,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
         cout<<"Copyright: "<<rr->getCopyright()<<endl;
 
-        list<string> compartments  = rr->getCompartmentNames();
-
-        list<string>::iterator iter;
-        for(iter = compartments.begin(); iter != compartments.end(); iter++)
-        {
-            cout<<"Compartment: "<<*(iter)<<endl;
-        }
-        delete rr;
+//        list<string> compartments  = rr->getCompartmentNames();
+//
+//        list<string>::iterator iter;
+//        for(iter = compartments.begin(); iter != compartments.end(); iter++)
+//        {
+//            cout<<"Compartment: "<<*(iter)<<endl;
+//        }
+//        delete rr;
 
     }
     catch(const RRException& ex)

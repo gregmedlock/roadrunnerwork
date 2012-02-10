@@ -23,22 +23,19 @@ int main()
 		cout<<"The loadSBML function failed!"<<endl;
     }
 
-    char *charPtr[1];
-    charPtr[0] = new char[512];
-
 	cout<<"GetModelName"<<endl;
-
     //if loadSBML was succesful, a model is allocated in the loadSBML call, that can
     //be queried, as below.
-	if(!getModelName(charPtr))
+    string modelName = GetModelName();
+	if(modelName.size())
     {
-		cout<<"Model name is: "<<charPtr[0]<<endl;
+		cout<<"Model name is: "<<modelName<<endl;
     }
 
     cout<<"Validating sbml:\n";
 	if(!validateSBML((char*) sbml.c_str()))
     {
-		cout<<"Good sbml!"<<endl;
+		cout<<"sbml model \""<<modelName<<"\" was validated succesfully!"<<endl;
     }
 
 	cout<<"Last error was: "<<getError()<<endl;

@@ -31,8 +31,8 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>C:\RRW\Testing\loadSBML\;C:\RRW\src\cxx;C:\RRW\src\cxx\Util;C:\rrThirdPartyInstalls\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\Externals\libsbml\src\sbml\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\ThirdParty\libstruct\LibStructural\;C:\RRW\Testing\loadSBML\;C:\RRW\src\cxx;C:\RRW\src\cxx\Util;C:\rrThirdPartyInstalls\sundials\include;C:\rrThirdPartyInstalls\libstruct\include;C:\rrThirdPartyInstalls\libsbml\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\Externals\libsbml\src\sbml\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -48,7 +48,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;$(Defines)</Defines>
+			<Defines>_DEBUG;WIN32;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -65,6 +65,14 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="C:\rrThirdPartyInstalls\libstruct\lib\LibStructural.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>2</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\RRTHIR~1\LIBSTR~2\lib\LibLA.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>3</BuildOrder>
+			</LibFiles>
 			<LibFiles Include="..\..\build\link\RoadRunnerLib.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>

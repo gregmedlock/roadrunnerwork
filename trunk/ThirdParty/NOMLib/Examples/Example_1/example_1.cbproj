@@ -73,7 +73,7 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="..\..\..\libsbml\dependencies\lib\libxml2.lib">
+			<LibFiles Include="..\..\..\libsbml\dependencies\lib\libxml2_xe.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
 			</LibFiles>

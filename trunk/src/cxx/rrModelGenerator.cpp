@@ -10,6 +10,7 @@
 #pragma package(smart_init)
 
 using namespace std;
+using namespace LIB_STRUCTURAL;
 namespace rr
 {
 ModelGenerator::ModelGenerator()
@@ -70,7 +71,8 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     _functionNames.empty();// = new list<string>();
     _functionParameters.empty();// = new StringCollection();
 
-//    StructAnalysis.LoadSBML(sASCII);
+   	LibStructural* instance = LibStructural::getInstance();
+    instance->LibStructural::loadSBML(sASCII);
 //
 //    if (RoadRunner._bComputeAndAssignConservationLaws)
 //    {
