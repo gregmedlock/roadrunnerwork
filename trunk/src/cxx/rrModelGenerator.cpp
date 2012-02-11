@@ -1168,7 +1168,7 @@ int ModelGenerator::ReadFloatingSpecies()
       {
           StringList oTempList = oBoundarySpecies[i];
           string sName = oTempList[0];
-          string compartmentName = NOM.getNthBoundarySpeciesCompartmentName(i);
+          string compartmentName = mNOM.getNthBoundarySpeciesCompartmentName(i);
           var bIsConcentration = (bool)oTempList[2];
           var dValue = (double)oTempList[1];
           if (double.IsNaN(dValue)) dValue = 0;

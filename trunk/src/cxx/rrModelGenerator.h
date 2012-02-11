@@ -97,7 +97,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 
         LibStructWrapper					mLibStructWrapper;		//!Object to facilitate calls to libStruct library
         LibStructural&						mLibStructRef;			//!T his class is not exported so, not sure if this will work..
-        NOMWrapper							mNOM;					//Object that provide some wrappers and new "NOM" functions
+        NOMSupport							mNOM;					//Object that provide some wrappers and new "NOM" functions
 
     public:
 									        ModelGenerator();
