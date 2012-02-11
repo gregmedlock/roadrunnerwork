@@ -178,6 +178,11 @@ string ToString(const char* str)
     return (string(str));
 }
 
+string ToString(const bool& val)
+{
+    return val ? "true" : "false";
+}
+
 string ToString(const double& d)
 {
     char sBuffer[256];

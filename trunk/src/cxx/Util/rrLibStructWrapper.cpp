@@ -19,6 +19,13 @@ LibStructWrapper::~LibStructWrapper()
 {
 }
 
+
+vector<string> LibStructWrapper::GetReorderedSpeciesIds()
+{
+	return (mInstance) ? mInstance->getReorderedSpecies() : vector<string>(0);
+
+}
+
 //bool LibStructWrapper::LoadSBML(const string& sbml)
 //{
 //    string msg = mInstance->LibStructural::loadSBML(sbml);

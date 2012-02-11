@@ -1,4 +1,4 @@
-///** 
+///**
 //* Filename    : NOMLib.cpp
 //* Description : NOM version of libSBML
 //* Original by :
@@ -95,6 +95,7 @@ static char *errorMessages[] = {
 
 
 extern "C" {
+
 
 // -------------------------------------------------------------------------------------------
 // Support functions used by the library
@@ -377,6 +378,10 @@ char* addMissingModifiersInternal(const string& sModel)
 // START OF EXPORTED FUNCTIONS
 // -------------------------------------------------------------------------------------------
 
+DLL_EXPORT Model*  GetSBMLModel()
+{
+	return _oModelCPP;
+}
 
 // Load SBML file into the NOM
 DLL_EXPORT int loadSBML(const char* sbmlStr)
@@ -871,7 +876,7 @@ DLL_EXPORT int hasInitialConcentration (char *cId, int *hasInitial)
 //}
 
 
-DLL_EXPORT int getValue (char *sId, double *value)
+DLL_EXPORT int getValue (const char *sId, double *value)
 {
 	if (_oModelCPP == NULL)
 	{
@@ -1573,6 +1578,7 @@ DLL_EXPORT int getCompartmentIdBySpeciesId (char *cId, char **compId)
 		return -1;
 	}
 	*compId = (char *) oSpecies->getCompartment().c_str();
+    return 0;
 }
 
 //DataBlockWriter SBMLSupportModule::getNthFloatingSpeciesCompartmentNameImpl(Module/*from*/, DataBlockReader arguments)
@@ -3090,6 +3096,7 @@ DLL_EXPORT int convertMathMLToString (char *mathMLStr, char **infix)
 		return -1;
 	}
 	*infix = result;
+    return 0;
 }
 
 DLL_EXPORT int convertStringToMathML (char* infixStr, char **mathMLStr)

@@ -26,7 +26,7 @@
  * 
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT 
  * NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
- * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
@@ -37,10 +37,10 @@
 
 #if defined(EXPORT_NOM)
 #define DLL_EXPORT __declspec(dllexport)
-#elif defined(IMPORT_NOM)
-#define DLL_EXPORT __declspec(dllimport)
-#else
+#elif defined(NO_NOM_DLL)	//Compile source..
 #define DLL_EXPORT
+#else
+#define DLL_EXPORT __declspec(dllimport)
 #endif
 
 #define WIN32_LEAN_AND_MEAN
@@ -61,6 +61,8 @@
 #include <vector>
 
 extern "C" {
+//	static SBMLDocument* 	_oSBMLDocCPP;
+	DLL_EXPORT	Model* 	  	GetSBMLModel();
 
    /** @brief Returns the error message given the last error code generated
 	*
@@ -438,7 +440,7 @@ extern "C" {
 
  /** @brief Returns the number of local parameters
 	*
-	* @param[in] reactionIndex is the ith reaction 
+	* @param[in] reactionIndex is the ith reaction
 	* @return -1 if there has been an error or the number of local parameters
 	*/
    DLL_EXPORT int getNumLocalParameters (int reactionIndex);

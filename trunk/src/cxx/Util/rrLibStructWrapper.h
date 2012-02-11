@@ -29,7 +29,7 @@ class RR_DECLSPEC LibStructWrapper : public rrObject
 //		int        				GetNumSpecies();
 //		vector<string>			GetSpecies();
 
-
+		vector<string>			GetReorderedSpeciesIds();
 
 };
 

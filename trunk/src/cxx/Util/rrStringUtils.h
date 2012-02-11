@@ -24,7 +24,7 @@ double			RR_DECLSPEC ToDouble(const string& str);
 string			RR_DECLSPEC ToUpperOrLowerCase(const string& inStr, int (*func)(int) = std::toupper);
 string			RR_DECLSPEC ToUpper(const string& inStr);
 string			RR_DECLSPEC ToLower(const string& inStr);
-string			RR_DECLSPEC ToString(const bool b);
+string			RR_DECLSPEC ToString(const bool& b);
 string			RR_DECLSPEC ToString(const double& d);
 string			RR_DECLSPEC ToString(const unsigned int n, const int nBase=10);
 string			RR_DECLSPEC ToString(const int n, const int nBase=10);

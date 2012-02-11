@@ -43,12 +43,17 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 
 	char* sbml = new char[sASCII.size() + 1];
     strcpy(sbml, sASCII.c_str());
-    int result = loadSBML(sbml);
+
+	int result = mNOM.LoadSBML(sbml);
+
+//    int result = loadSBML(sbml);
 
 	if(result)
     {
         return "";
     }
+
+
 
 //    char** name;
 	//if(getModelName(name))
@@ -118,7 +123,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     _NumDependentSpecies = _NumFloatingSpecies - _NumIndependentSpecies;
 //
 //    // Load the boundary species array (name and value)
-//    _NumBoundarySpecies = ReadBoundarySpecies();
+    _NumBoundarySpecies = ReadBoundarySpecies();
 //
 //    // Get all the parameters into a list, global and local
 //    _NumGlobalParameters = ReadGlobalParameters();
@@ -1096,25 +1101,34 @@ string ModelGenerator::NL()
 //
 int ModelGenerator::ReadFloatingSpecies()
 {
-//      // Load a reordered list into the variable list.
-//      vector<string> reOrderedList;
-//      if ((RoadRunner._bComputeAndAssignConservationLaws))
-//          reOrderedList = StructAnalysis.GetReorderedSpeciesIds();
-//      else
-//          reOrderedList = StructAnalysis.GetSpeciesIds();
-//
-//      list<string> oFloatingSpecies = NOM.getListOfFloatingSpecies();
-//
-//
-//      list<string> oTempList;
-//      for (int i = 0; i < reOrderedList.Length; i++)
-//      {
-//          for (int j = 0; j < oFloatingSpecies.size(); j++)
-//          {
-//              oTempList = (list<string>)oFloatingSpecies[j];
-//              if (reOrderedList[i] != (const string&)oTempList[0]) continue;
-//
-//              string compartmentName = NOM.getNthFloatingSpeciesCompartmentName(j);
+    // Load a reordered list into the variable list.
+    vector<string> reOrderedList;
+    if ((RoadRunner::_bComputeAndAssignConservationLaws))
+	{
+       //   reOrderedList = StructAnalysis.GetReorderedSpeciesIds();
+       reOrderedList = mLibStructRef.getReorderedSpecies();//mLibStructWrapper.GetReorderedSpeciesIds();
+	}
+	else
+	{
+		//reOrderedList = StructAnalysis.GetSpeciesIds();
+    	reOrderedList = mLibStructRef.getSpecies();
+    }
+
+	//list<string> oFloatingSpecies = NOM.getListOfFloatingSpecies();
+    StringCollections oFloatingSpecies = mNOM.GetFloatingSpecies();
+
+    StringCollection TempList;
+	for (int i = 0; i < reOrderedList.size(); i++)
+    {
+    	for (int j = 0; j < oFloatingSpecies.size(); j++)
+        {
+        	TempList = oFloatingSpecies[j];
+//          	if(reOrderedList[i] != (const string&) TempList[0])
+//          	{
+//          		continue;
+//          	}
+
+			string compartmentName = mNOM.getNthFloatingSpeciesCompartmentName(j);
 //              var bIsConcentration = (bool)oTempList[2];
 //              var dValue = (double)oTempList[1];
 //              if (double.IsNaN(dValue))
@@ -1138,10 +1152,10 @@ int ModelGenerator::ReadFloatingSpecies()
 //              symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(reOrderedList[i]).getHasOnlySubstanceUnits();
 //              floatingSpeciesConcentrationList.Add(symbol);
 //              break;
-//          }
+          }
 //          //throw new SBWApplicationException("Reordered Species " + reOrderedList[i] + " not found.");
-//      }
-//      return oFloatingSpecies.size();
+      }
+      return oFloatingSpecies.size();
 }
 //
 //         int ModelGenerator::ReadBoundarySpecies()
