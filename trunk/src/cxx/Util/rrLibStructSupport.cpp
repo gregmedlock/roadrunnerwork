@@ -2,7 +2,7 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
-#include "rrLibStructWrapper.h"
+#include "rrLibStructSupport.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 

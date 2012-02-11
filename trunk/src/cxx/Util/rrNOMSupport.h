@@ -1,11 +1,11 @@
-#ifndef rrNOMWrapperH
-#define rrNOMWrapperH
+#ifndef rrNOMSupportH
+#define rrNOMSupportH
 //---------------------------------------------------------------------------
 #include <vector>
 #include <string>
 #include "NOMLib.h"
 #include "rrObject.h"
-#include "rrStringCollection.h"
+#include "rrStringListContainer.h"
 using std::vector;
 using std::string;
 
@@ -26,7 +26,7 @@ class RR_DECLSPEC NOMWrapper : public rrObject
 
 		string					getNthCompartmentId(const int& i);
         double					getValue(const string& id);
-        StringCollections		GetFloatingSpecies();
+        StringListContainer		GetFloatingSpecies();
         int						LoadSBML(const string& sbml);
 
 //        static SBMLDocument _oDoc;
@@ -73,7 +73,7 @@ class RR_DECLSPEC NOMWrapper : public rrObject
 //        public static ArrayList getDerivedUnitDefinition(string sId)
 //        private static ArrayList returnUnitDefinition(UnitDefinition oDefinition)
 //        public static string getKineticLaw(int index)
-//        public static ArrayList getListOfBoundarySpecies()
+		StringListContainer 		getListOfBoundarySpecies();
 //        public static ArrayList getListOfBoundarySpeciesIds()
 //        public static ArrayList getListOfErrors()
 //        public static ArrayList getListOfFloatingSpecies()

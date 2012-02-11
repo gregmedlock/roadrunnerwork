@@ -187,12 +187,12 @@
 				<DependentOn>cxx\Util\rrException.h</DependentOn>
 				<BuildOrder>22</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrLibStructWrapper.cpp">
-				<DependentOn>cxx\Util\rrLibStructWrapper.h</DependentOn>
+			<CppCompile Include="cxx\Util\rrLibStructSupport.cpp">
+				<DependentOn>cxx\Util\rrLibStructSupport.h</DependentOn>
 				<BuildOrder>42</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrNOMWrapper.cpp">
-				<DependentOn>cxx\Util\rrNOMWrapper.h</DependentOn>
+			<CppCompile Include="cxx\Util\rrNOMSupport.cpp">
+				<DependentOn>cxx\Util\rrNOMSupport.h</DependentOn>
 				<BuildOrder>43</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="cxx\Util\rrRandom.cpp">
@@ -207,8 +207,8 @@
 				<DependentOn>cxx\Util\rrStringBuilder.h</DependentOn>
 				<BuildOrder>21</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrStringCollection.cpp">
-				<DependentOn>cxx\Util\rrStringCollection.h</DependentOn>
+			<CppCompile Include="cxx\Util\rrStringListContainer.cpp">
+				<DependentOn>cxx\Util\rrStringListContainer.h</DependentOn>
 				<BuildOrder>26</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="cxx\Util\rrStringUtils.cpp">

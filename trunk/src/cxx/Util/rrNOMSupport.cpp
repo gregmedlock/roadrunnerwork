@@ -3,7 +3,7 @@
 #endif
 #pragma hdrstop
 #include <math.h>
-#include "rrNOMWrapper.h"
+#include "rrNOMSupport.h"
 #include "rrStringUtils.h"
 #include "rrException.h"
 //---------------------------------------------------------------------------
@@ -56,7 +56,6 @@ double NOMWrapper::getValue(const string& id)
 	return val;
 }
 
-
 StringCollections NOMWrapper::GetFloatingSpecies()
 {
 	StringCollections floatingSpeciesList;
@@ -79,33 +78,34 @@ StringCollections NOMWrapper::GetFloatingSpecies()
     }
 
     return floatingSpeciesList;
-
-//C#...
-//	ArrayList floatingSpeciesList = new ArrayList();
-//
-//    if (mModel == null)
-//    {
-//        throw new Exception("You need to load the model first");
-//    }
-//
-//    for (int i = 0; i < _oModel.getNumSpecies(); i++)
-//    {
-//        libsbmlcs.Species oSpecies = _oModel.getSpecies(i);
-//        if (!oSpecies.getBoundaryCondition())
-//        {
-//            ArrayList oSpeciesValues = new ArrayList();
-//            oSpeciesValues.Add(GetId(oSpecies));
-//            oSpeciesValues.Add(oSpecies.isSetInitialConcentration() ? oSpecies.getInitialConcentration() : oSpecies.getInitialAmount());
-//            oSpeciesValues.Add(oSpecies.isSetInitialConcentration());
-//
-//            floatingSpeciesList.Add(oSpeciesValues);
-//        }
-//    }
-//
-//    return floatingSpeciesList;
-
-
 }
+
+StringCollections NOMWrapper::getListOfBoundarySpecies()
+{
+    ArrayList boundarySpeciesList = new ArrayList();
+
+    if (_oModel == null)
+    {
+        throw new Exception("You need to load the model first");
+    }
+
+    for (int i = 0; i < _oModel.getNumSpecies(); i++)
+    {
+        libsbmlcs.Species oSpecies = _oModel.getSpecies(i);
+        if (oSpecies.getBoundaryCondition())
+        {
+            ArrayList oSpeciesValues = new ArrayList();
+            oSpeciesValues.Add(GetId(oSpecies));
+            oSpeciesValues.Add(oSpecies.isSetInitialConcentration() ? oSpecies.getInitialConcentration() : oSpecies.getInitialAmount());
+            oSpeciesValues.Add(oSpecies.isSetInitialConcentration());
+
+            boundarySpeciesList.Add(oSpeciesValues);
+        }
+    }
+
+    return boundarySpeciesList;
+}
+
 
 // ============ From NOM.cs in SBMLSupport
 ///// <summary>
@@ -1111,32 +1111,7 @@ StringCollections NOMWrapper::GetFloatingSpecies()
 //            return k.getFormula();
 //        }
 //
-//        public static ArrayList getListOfBoundarySpecies()
-//        {
-//            ArrayList boundarySpeciesList = new ArrayList();
-//
-//            if (_oModel == null)
-//            {
-//                throw new Exception("You need to load the model first");
-//            }
-//
-//            for (int i = 0; i < _oModel.getNumSpecies(); i++)
-//            {
-//                libsbmlcs.Species oSpecies = _oModel.getSpecies(i);
-//                if (oSpecies.getBoundaryCondition())
-//                {
-//                    ArrayList oSpeciesValues = new ArrayList();
-//                    oSpeciesValues.Add(GetId(oSpecies));
-//                    oSpeciesValues.Add(oSpecies.isSetInitialConcentration() ? oSpecies.getInitialConcentration() : oSpecies.getInitialAmount());
-//                    oSpeciesValues.Add(oSpecies.isSetInitialConcentration());
-//
-//                    boundarySpeciesList.Add(oSpeciesValues);
-//                }
-//            }
-//
-//            return boundarySpeciesList;
-//        }
-//
+
 //        public static ArrayList getListOfBoundarySpeciesIds()
 //        {
 //            ArrayList boundarySpeciesIdList = new ArrayList();

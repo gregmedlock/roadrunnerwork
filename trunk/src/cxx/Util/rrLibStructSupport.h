@@ -1,5 +1,5 @@
-#ifndef rrLibStructWrapperH
-#define rrLibStructWrapperH
+#ifndef rrLibStructSupportH
+#define rrLibStructSupportH
 #include <vector>
 #include <string>
 #include "rrObject.h"

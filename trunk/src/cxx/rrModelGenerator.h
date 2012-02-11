@@ -10,8 +10,8 @@
 #include "rrStringUtils.h"
 #include "rrRoadRunner.h"
 #include "rrException.h"
-#include "rrLibStructWrapper.h"
-#include "rrNOMWrapper.h"
+#include "rrLibStructSupport.h"
+#include "rrNOMSupport.h"
 using std::string;
 using std::vector;
 using std::list;

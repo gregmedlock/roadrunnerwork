@@ -7,6 +7,7 @@
 #include "rrModelGenerator.h"
 #include "NOMLib.h"
 #include "libstructural.h"
+#include "rrStringListContainer.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -1115,9 +1116,9 @@ int ModelGenerator::ReadFloatingSpecies()
     }
 
 	//list<string> oFloatingSpecies = NOM.getListOfFloatingSpecies();
-    StringCollections oFloatingSpecies = mNOM.GetFloatingSpecies();
+    StringListContainer oFloatingSpecies = mNOM.getListOfBoundarySpecies();
 
-    StringCollection TempList;
+    StringList	TempList;
 	for (int i = 0; i < reOrderedList.size(); i++)
     {
     	for (int j = 0; j < oFloatingSpecies.size(); j++)
@@ -1158,36 +1159,36 @@ int ModelGenerator::ReadFloatingSpecies()
       return oFloatingSpecies.size();
 }
 //
-//         int ModelGenerator::ReadBoundarySpecies()
-//        {
-////            int numBoundarySpecies;
-////            list<string> oBoundarySpecies = NOM.getListOfBoundarySpecies();
-////            numBoundarySpecies = oBoundarySpecies.size(); // sp1.size();
-////            for (int i = 0; i < numBoundarySpecies; i++)
-////            {
-////                var oTempList = (list<string>)oBoundarySpecies[i];
-////                var sName = (string)oTempList[0];
-////                string compartmentName = NOM.getNthBoundarySpeciesCompartmentName(i);
-////                var bIsConcentration = (bool)oTempList[2];
-////                var dValue = (double)oTempList[1];
-////                if (double.IsNaN(dValue)) dValue = 0;
-////                Symbol symbol = null;
-////                if (bIsConcentration)
-////                    symbol = new Symbol(sName, dValue, compartmentName);
-////                else
-////                {
-////                    int nCompartmentIndex;
-////                    compartmentList.find(compartmentName, out nCompartmentIndex);
-////                    double dVolume = compartmentList[nCompartmentIndex].value;
-////                    if (double.IsNaN(dVolume)) dVolume = 1;
-////                    symbol = new Symbol(sName, dValue / dVolume, compartmentName,
-////                                                       string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
-////                }
-////                symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(sName).getHasOnlySubstanceUnits();
-////                boundarySpeciesList.Add(symbol);
-////            }
-////            return numBoundarySpecies;
-//        }
+ int ModelGenerator::ReadBoundarySpecies()
+{
+      int numBoundarySpecies;
+      StringListContainer oBoundarySpecies = mNOM.getListOfBoundarySpecies();
+      numBoundarySpecies = oBoundarySpecies.size(); // sp1.size();
+      for (int i = 0; i < numBoundarySpecies; i++)
+      {
+          StringList oTempList = oBoundarySpecies[i];
+          string sName = oTempList[0];
+          string compartmentName = NOM.getNthBoundarySpeciesCompartmentName(i);
+          var bIsConcentration = (bool)oTempList[2];
+          var dValue = (double)oTempList[1];
+          if (double.IsNaN(dValue)) dValue = 0;
+          Symbol symbol = null;
+          if (bIsConcentration)
+              symbol = new Symbol(sName, dValue, compartmentName);
+          else
+          {
+              int nCompartmentIndex;
+              compartmentList.find(compartmentName, out nCompartmentIndex);
+              double dVolume = compartmentList[nCompartmentIndex].value;
+              if (double.IsNaN(dVolume)) dVolume = 1;
+              symbol = new Symbol(sName, dValue / dVolume, compartmentName,
+                                                 string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
+          }
+          symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(sName).getHasOnlySubstanceUnits();
+          boundarySpeciesList.Add(symbol);
+      }
+      return numBoundarySpecies;
+}
 //
 //         int ModelGenerator::ReadGlobalParameters()
 //        {
