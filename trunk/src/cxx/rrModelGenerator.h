@@ -115,14 +115,14 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         SymbolList 							reactionList;
         int                                 getNumberOfReactions();
         int                                 NumAdditionalRates;
-        list<string>                        getBoundarySpeciesList();
-        list<string>                        getCompartmentList();
-        list<string>                        getConservationList();
-        list<string>                        getFloatingSpeciesConcentrationList();
-        list<string>                        getGlobalParameterList();
-        list<string>                        getLocalParameterList(int reactionId);
-        list<string>                        getReactionNames();
-        list<string>                        Warnings;// { get; set; }
+        StringList                          getBoundarySpeciesList();
+        StringList                          getCompartmentList();
+        StringList                          getConservationList();
+        StringList                          getFloatingSpeciesConcentrationList();
+        StringList                          getGlobalParameterList();
+        StringList                          getLocalParameterList(int reactionId);
+        StringList  	                   	getReactionNames();
+        StringList	                        Warnings;// { get; set; }
         SymbolList 							ModifiableSpeciesReferenceList;// { get; set; }
     	static string 						WriteDouble(double value);
 

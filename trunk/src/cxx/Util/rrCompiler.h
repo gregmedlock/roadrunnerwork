@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include "rrObject.h"
-#include "rrStringCollection.h"
+#include "rrStringList.h"
 
 using std::vector;
 using std::string;
@@ -44,7 +44,7 @@ class RR_DECLSPEC Compiler : public rrObject
         /// compiles them and executes methods on the classes
         /// </summary>
         /// <param name="oProxyCode"></param>
-        void 					Execute(StringCollection& oProxyCode);
+        void 					Execute(StringList& oProxyCode);
         static rrObject 		getInstance(const string& source, const string& sClassName);
         static rrObject* 		getInstance(const string& source, const string& sClassName, const string& sLocation);
 
@@ -61,7 +61,7 @@ class RR_DECLSPEC Compiler : public rrObject
         /// instances later on
         /// </summary>
         /// <param name="oProxies"></param>
-        void addProxy(StringCollection oProxies);
+        void addProxy(StringList oProxies);
 
     	static string getLastErrors();
 

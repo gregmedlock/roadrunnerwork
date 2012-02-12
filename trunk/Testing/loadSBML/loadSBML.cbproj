@@ -69,9 +69,17 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\..\src\cxx\Util\rrNOMWrapper.cpp">
-				<DependentOn>..\..\src\cxx\Util\rrNOMWrapper.h</DependentOn>
+			<CppCompile Include="..\..\src\cxx\Util\rrNOMSupport.cpp">
+				<DependentOn>..\..\src\cxx\Util\rrNOMSupport.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\cxx\Util\rrStringList.cpp">
+				<DependentOn>..\..\src\cxx\Util\rrStringList.h</DependentOn>
+				<BuildOrder>4</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\cxx\Util\rrUtils.cpp">
+				<DependentOn>..\..\src\cxx\Util\rrUtils.h</DependentOn>
+				<BuildOrder>5</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>

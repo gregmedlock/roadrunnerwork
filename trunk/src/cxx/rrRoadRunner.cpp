@@ -2557,7 +2557,7 @@ void RoadRunner::reset()
 //        }
 //
 //        [Help("Gets the list of compartment names")]
-list<string> RoadRunner::getCompartmentNames()
+StringList RoadRunner::getCompartmentNames()
 {
     if (!modelLoaded)
     {

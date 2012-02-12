@@ -8,134 +8,20 @@ using std::vector;
 
 namespace rr
 {
-    class RR_DECLSPEC SymbolList : public rrObject, public vector<Symbol> //Using vector instead of list since accessing element by []
-    {
-        /// <summary>
-        /// Returns the Symbol by the given index
-        /// </summary>
-        /// <param name="index">the index of the element to return</param>
-        /// <returns>Returns the Symbol by the given index</returns>
-        public:
-//        public new Symbol this[int index]
-//        {
-//            get { return ((Symbol) base[index]); }
-//        }
 
-        void Clear()
-        {
-            clear();
-        }
-
-        /// <summary>
-        /// Returns the Symbol with the given Name
-        /// </summary>
-        /// <param name="sName">the name of the symbol to return</param>
-        /// <returns>Returns the Symbol with the given Name or null if not found</returns>
-//        Symbol this[string sName]
-//        {
-//            get
-//            {
-//                int nIndex = -1;
-//                if (find(sName, out nIndex))
-//                {
-//                    return this[nIndex];
-//                }
-//                return null;
-//            }
-//        }
-
-        int Add(const Symbol& item)
-        {
-	        push_back(item);
-            return size();
-        }
-
-        double getValue(int index)
-        {
-//            ((Symbol) this[index]).value;
-            return at(index).value;
-        }
-
-        string getName(int index)
-        {
-//            return ((Symbol) base[index]).name;
-            return at(index).name;
-        }
-
-        string getKeyName(int index)
-        {
-//            return ((Symbol) base[index]).keyName;
-            return at(index).keyName;
-        }
-
-
-        bool find(string name, int index)
-        {
-            index = -1;
-            for (unsigned int i = 0; i < size(); i++)
-            {
-            	Symbol sym = at(i);
-                if (name == sym.name)
-                {
-                    index = i;
-                    return true;
-                }
-                if (sym.name == name)
-                {
-                    index = i;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        bool find(string keyName, string name, int index)
-        {
-            index = -1;
-            for(unsigned int i = 0; i < size(); i++)
-            {
-                Symbol sym = at(i);
-                if ((sym.name == name) && (sym.keyName == keyName))
-                {
-                    index = i;
-                    return true;
-                }
-            }
-            return false;
-        }
-
-//        public bool find (string name, out int index) {
-//            index = -1;
-//            TSymbol sym;
-//            for (int i=0; i<this.Count; i++) {
-//                sym = (TSymbol) base[i];
-//                if (name.ToUpper() == sym.name.ToUpper()) {
-//                   index = i;
-//                   return true;
-//                }
-//                if (sym.name.ToUpper() == name.ToUpper()) {
-//                    index = i;
-//                    return true;
-//                }
-//            }
-//            return false;
-//        }
-//
-//        public bool find (string keyName, string name, out int index) {
-//            index = -1;
-//            for (int i=0; i<this.Count; i++) {
-//                TSymbol sym = (TSymbol) base[i];
-//                if ((sym.name.ToUpper() == name.ToUpper()) && (sym.keyName.ToUpper() == keyName.ToUpper())) {
-//                    index = i;
-//                    return true;
-//                }
-//            }
-//            return false;
-//        }
-    }; //SymbolList class
+class RR_DECLSPEC SymbolList : public rrObject, public vector<Symbol> //Using vector instead of list since accessing element by []
+{
+	public:
+    	void 			        Clear();
+        int 			        Add(const Symbol& item);
+        double 			        getValue(const int& index);
+        string 			        getName(const int& index);
+        string 			        getKeyName(const int& index);
+        bool 			        find(const string& name, int& index);
+        bool 		  			find(const string& keyName, const string& name, int& index);
+}; //class
 
 }//namespace rr
-
 
 #endif
 

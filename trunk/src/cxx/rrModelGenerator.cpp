@@ -8,6 +8,7 @@
 #include "NOMLib.h"
 #include "libstructural.h"
 #include "rrStringListContainer.h"
+#include "rrUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -271,42 +272,42 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            throw new SBWApplicationException("Internal Error: Unable to locate compartment: " + compartmentName);
 //        }
 //
-        list<string> ModelGenerator::getCompartmentList()
+        StringList ModelGenerator::getCompartmentList()
         {
-            list<string> tmp;// = new list<string>();
+            StringList tmp;// = new StringList();
             for (int i = 0; i < compartmentList.size(); i++)
-                tmp.push_back(compartmentList[i].name);
+                tmp.Add(compartmentList[i].name);
             return tmp;
         }
 //
-//         list<string> ModelGenerator::getFloatingSpeciesConcentrationList()
+//         StringList ModelGenerator::getFloatingSpeciesConcentrationList()
 //        {
-//            list<string> tmp;// = new list<string>();
+//            StringList tmp;// = new StringList();
 //            for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
 //                tmp.push_back(floatingSpeciesConcentrationList[i].name);
 //            return tmp;
 //        }
 //
-//         list<string> ModelGenerator::getConservationList()
+//         StringList ModelGenerator::getConservationList()
 //        {
-//            list<string> tmp;// = new list<string>();
+//            StringList tmp;// = new StringList();
 //            for (int i = 0; i < conservationList.size(); i++)
 //                tmp.push_back(conservationList[i].name);
 //            return tmp;
 //        }
 //
 //
-//         list<string> ModelGenerator::getBoundarySpeciesList()
+//         StringList ModelGenerator::getBoundarySpeciesList()
 //        {
-//            list<string> tmp;// = new list<string>();
+//            StringList tmp;// = new StringList();
 //            for (int i = 0; i < boundarySpeciesList.size(); i++)
 //                tmp.push_back(boundarySpeciesList[i].name);
 //            return tmp;
 //        }
 //
-//         list<string> ModelGenerator::getGlobalParameterList()
+//         StringList ModelGenerator::getGlobalParameterList()
 //        {
-//            list<string> tmp;// = new list<string>();
+//            StringList tmp;// = new StringList();
 //            for (int i = 0; i < globalParameterList.size(); i++)
 //                tmp.push_back(globalParameterList[i].name);
 //
@@ -316,17 +317,17 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //            return tmp;
 //        }
 //
-//         list<string> ModelGenerator::getLocalParameterList(int reactionId)
+//         StringList ModelGenerator::getLocalParameterList(int reactionId)
 //        {
-//            list<string> tmp;// = new list<string>();
+//            StringList tmp;// = new StringList();
 //            for (int i = 0; i < localParameterList[reactionId].size(); i++)
 //                tmp.push_back(localParameterList[reactionId][i].name);
 //            return tmp;
 //        }
 //
-//         list<string> ModelGenerator::getReactionNames()
+//         StringList ModelGenerator::getReactionNames()
 //        {
-//            list<string> tmp;// = new list<string>();
+//            StringList tmp;// = new StringList();
 //            for (int i = 0; i < reactionList.size(); i++)
 //                tmp.push_back(reactionList[i].name);
 //            return tmp;
@@ -1115,7 +1116,7 @@ int ModelGenerator::ReadFloatingSpecies()
     	reOrderedList = mLibStructRef.getSpecies();
     }
 
-	//list<string> oFloatingSpecies = NOM.getListOfFloatingSpecies();
+	//StringList oFloatingSpecies = NOM.getListOfFloatingSpecies();
     StringListContainer oFloatingSpecies = mNOM.getListOfBoundarySpecies();
 
     StringList	TempList;
@@ -1159,48 +1160,80 @@ int ModelGenerator::ReadFloatingSpecies()
       return oFloatingSpecies.size();
 }
 //
- int ModelGenerator::ReadBoundarySpecies()
+int ModelGenerator::ReadBoundarySpecies()
 {
-      int numBoundarySpecies;
-      StringListContainer oBoundarySpecies = mNOM.getListOfBoundarySpecies();
-      numBoundarySpecies = oBoundarySpecies.size(); // sp1.size();
-      for (int i = 0; i < numBoundarySpecies; i++)
-      {
-          StringList oTempList = oBoundarySpecies[i];
-          string sName = oTempList[0];
-          string compartmentName = mNOM.getNthBoundarySpeciesCompartmentName(i);
-          var bIsConcentration = (bool)oTempList[2];
-          var dValue = (double)oTempList[1];
-          if (double.IsNaN(dValue)) dValue = 0;
-          Symbol symbol = null;
-          if (bIsConcentration)
-              symbol = new Symbol(sName, dValue, compartmentName);
-          else
-          {
-              int nCompartmentIndex;
-              compartmentList.find(compartmentName, out nCompartmentIndex);
-              double dVolume = compartmentList[nCompartmentIndex].value;
-              if (double.IsNaN(dVolume)) dVolume = 1;
-              symbol = new Symbol(sName, dValue / dVolume, compartmentName,
-                                                 string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
-          }
-          symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(sName).getHasOnlySubstanceUnits();
-          boundarySpeciesList.Add(symbol);
-      }
-      return numBoundarySpecies;
+	int numBoundarySpecies;
+    StringListContainer oBoundarySpecies = mNOM.getListOfBoundarySpecies();
+    numBoundarySpecies = oBoundarySpecies.size(); // sp1.size();
+    for (int i = 0; i < numBoundarySpecies; i++)
+    {
+        StringList oTempList 		= oBoundarySpecies[i];
+        string sName 				= oTempList[0];
+        string compartmentName 	= mNOM.getNthBoundarySpeciesCompartmentName(i);
+        bool bIsConcentration 	= ToBool(oTempList[2]);
+        double dValue 			= ToDouble(oTempList[1]);
+        if (IsNaN(dValue))
+        {
+        	dValue = 0;
+        }
+
+        Symbol *symbol = NULL;
+        if (bIsConcentration)
+        {
+            symbol = new Symbol(sName, dValue, compartmentName);
+        }
+        else
+        {
+        	int nCompartmentIndex;
+            double dVolume;
+            if(compartmentList.find(compartmentName, nCompartmentIndex))
+            {
+            	dVolume = compartmentList[nCompartmentIndex].value;
+            }
+            else
+            {
+//            if (double.IsNaN(dVolume)) dVolume = 1;
+				dVolume = 1;
+            }
+            stringstream formula;
+            formula<<dValue<<"/ _c["<<nCompartmentIndex<<"]";
+            symbol = new Symbol(sName,
+            					dValue / dVolume,
+                                compartmentName,
+                                formula.str());
+//                                string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
+        }
+        if(mNOM.GetModel())
+        {
+			Species* species = mNOM.GetModel()->getSpecies(sName);
+        	if(species)
+            {
+		        symbol->hasOnlySubstance = species->getHasOnlySubstanceUnits();
+            }
+        }
+        else
+        {
+        	//TODO: How to report error...?
+			//Log an error...
+            symbol->hasOnlySubstance = false;
+
+        }
+        boundarySpeciesList.Add(*symbol);
+    }
+    return numBoundarySpecies;
 }
-//
+
 //         int ModelGenerator::ReadGlobalParameters()
 //        {
 ////            string name;
 ////            double value;
 ////            int numGlobalParameters;
-////            list<string> oParameters = NOM.getListOfParameters();
+////            StringList oParameters = NOM.getListOfParameters();
 ////            numGlobalParameters = oParameters.size();
 ////            for (int i = 0; i < numGlobalParameters; i++)
 ////            {
-////                name = (string)((list<string>)oParameters[i])[0];
-////                value = (double)((list<string>)oParameters[i])[1];
+////                name = (string)((StringList)oParameters[i])[0];
+////                value = (double)((StringList)oParameters[i])[1];
 ////                globalParameterList.Add(new Symbol(name, value));
 ////            }
 ////            return numGlobalParameters;
@@ -1421,11 +1454,11 @@ int ModelGenerator::ReadFloatingSpecies()
 ////            {
 ////                try
 ////                {
-////                    list<string> oList = NOM.getNthFunctionDefinition(i);
+////                    StringList oList = NOM.getNthFunctionDefinition(i);
 ////                    var sName = (string)oList[0];
 ////                    sName.Trim();
 ////                    _functionNames.Add(sName);
-////                    var oArguments = (list<string>)oList[1];
+////                    var oArguments = (StringList)oList[1];
 ////                    var sBody = (string)oList[2];
 ////
 ////
@@ -1888,7 +1921,7 @@ int ModelGenerator::ReadFloatingSpecies()
 //
 ////         static bool ModelGenerator::ExpressionContainsSymbol(ASTNode ast, string symbol)
 ////        {
-////            if (ast == null || string.IsNullOrEmpty(symbol)) return false;
+////            if (ast == NULL || string.IsNullOrEmpty(symbol)) return false;
 ////
 ////            if (ast.getType() == libsbml.AST_NAME && ast.getName().Trim() == symbol.Trim())
 ////                return true;
@@ -1956,7 +1989,7 @@ int ModelGenerator::ReadFloatingSpecies()
 ////                {
 ////                    string leftSideRule = FindSymbol(pair.First);
 ////                    string rightSideRule = pair.Second;
-////                    if (leftSideRule != null)
+////                    if (leftSideRule != NULL)
 ////                    {
 ////                        sb.Append(leftSideRule + " = ");
 ////                        sb.Append(substituteTerms(numReactions, "", rightSideRule) + ";" + NL());
@@ -2004,7 +2037,7 @@ int ModelGenerator::ReadFloatingSpecies()
 ////                    {
 ////                        case "Algebraic_Rule":
 ////                            Warnings.Add("RoadRunner does not yet support algebraic rules in SBML, they will be ignored.");
-////                            leftSideRule = null;
+////                            leftSideRule = NULL;
 ////                            break;
 ////
 ////
@@ -2033,14 +2066,14 @@ int ModelGenerator::ReadFloatingSpecies()
 ////                    // Run the equation through MathML to carry out any conversions (eg ^ to Pow)
 ////                    string rightSideMathml = NOM.convertStringToMathML(rightSide);
 ////                    rightSideRule = NOM.convertMathMLToString(rightSideMathml);
-////                    if (leftSideRule != null)
+////                    if (leftSideRule != NULL)
 ////                    {
 ////                        sb.Append(leftSideRule + " = ");
 ////
 ////                        int speciesIndex;
 ////                        var isSpecies = floatingSpeciesConcentrationList.find(varName, out speciesIndex);
 ////
-////                        var symbol = speciesIndex != -1 ? floatingSpeciesConcentrationList[speciesIndex] : null;
+////                        var symbol = speciesIndex != -1 ? floatingSpeciesConcentrationList[speciesIndex] : NULL;
 ////
 ////                        //
 ////
@@ -2056,7 +2089,7 @@ int ModelGenerator::ReadFloatingSpecies()
 ////                        }
 ////                        else
 ////                        {
-////                            if (isSpecies && !isRateRule && symbol != null && symbol.hasOnlySubstance && symbol.compartmentName != null)
+////                            if (isSpecies && !isRateRule && symbol != NULL && symbol.hasOnlySubstance && symbol.compartmentName != NULL)
 ////                                sb.Append(String.Format("({0}) / {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(symbol.compartmentName), NL()));
 ////                            else
 ////                                sb.Append(String.Format("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL()));
@@ -2197,7 +2230,7 @@ int ModelGenerator::ReadFloatingSpecies()
 ////
 ////            for (int i = 0; i < numEvents; i++)
 ////            {
-////                list<string> ev = NOM.getNthEvent(i);
+////                StringList ev = NOM.getNthEvent(i);
 ////                string eventString = (string)ev[0];
 ////                eventString = substituteTerms(0, "", eventString);
 ////                sb.Append("\t\tpreviousEventStatusArray[" + i + "] = eventStatusArray[" + i + "];" + NL());
@@ -2378,7 +2411,7 @@ int ModelGenerator::ReadFloatingSpecies()
 ////                    // remember to take the conversion factor into account
 ////                    string factor = "";
 ////                    var species = NOM.SbmlModel.getSpecies(floatingSpeciesName);
-////                    if (species != null)
+////                    if (species != NULL)
 ////                    {
 ////                        if (species.isSetConversionFactor())
 ////                            factor = species.getConversionFactor();
@@ -2413,11 +2446,11 @@ int ModelGenerator::ReadFloatingSpecies()
 ////                return floatingSpeciesConcentrationList[index];
 ////            if (boundarySpeciesList.find(id, out index))
 ////                return boundarySpeciesList[index];
-////            return null;
+////            return NULL;
 //        }
 //         void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, int numEvents)
 //        {
-////            var delays = new list<string>();
+////            var delays = new StringList();
 ////            var eventType = new List<bool>();
 ////            var eventPersistentType = new List<bool>();
 ////            if (numEvents > 0)
@@ -2433,21 +2466,21 @@ int ModelGenerator::ReadFloatingSpecies()
 ////                    sb.AppendFormat("\t\tperformEventAssignment_{0}( computeEventAssignment_{0}() );{1}", i, NL());
 ////                    sb.Append("\t}" + NL());
 ////                    sb.AppendFormat("\tpublic: double[] computeEventAssignment_{0} () {{{1}", i, NL());
-////                    var oTemp = new list<string>();
-////                    var oValue = new list<string>();
+////                    var oTemp = new StringList();
+////                    var oValue = new StringList();
 ////                    int nCount = 0;
 ////                    int numAssignments = ev.size() - 2;
 ////                    sb.Append(String.Format("\t\tdouble[] values = new double[ {0}];{1}", numAssignments, NL()));
 ////                    for (int j = 2; j < ev.size(); j++)
 ////                    {
-////                        var asgn = (list<string>)ev[j];
+////                        var asgn = (StringList)ev[j];
 ////                        //string assignmentVar = substituteTerms(numReactions, "", (string)asgn[0]);
 ////                        string assignmentVar = FindSymbol((string)asgn[0]);
 ////                        string str;
 ////                        var species = GetSpecies(assignmentVar);
 ////
 ////
-////                        if (species != null && species.hasOnlySubstance)
+////                        if (species != NULL && species.hasOnlySubstance)
 ////                        {
 ////                            str = string.Format("{0} = ({1}) / {2}", assignmentVar, substituteTerms(numReactions, "", (string)asgn[1]), FindSymbol(species.compartmentName));
 ////                        }

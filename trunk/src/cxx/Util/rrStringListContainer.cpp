@@ -12,7 +12,7 @@ namespace rr
 
 void StringListContainer::Add(const StringList& list)
 {
-	mCollection.push_back(list);
+	mContainer.push_back(list);
 }
 
 

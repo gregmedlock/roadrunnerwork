@@ -207,6 +207,10 @@
 				<DependentOn>cxx\Util\rrStringBuilder.h</DependentOn>
 				<BuildOrder>21</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="cxx\Util\rrStringList.cpp">
+				<DependentOn>cxx\Util\rrStringList.h</DependentOn>
+				<BuildOrder>44</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\Util\rrStringListContainer.cpp">
 				<DependentOn>cxx\Util\rrStringListContainer.h</DependentOn>
 				<BuildOrder>26</BuildOrder>
@@ -222,6 +226,10 @@
 			<CppCompile Include="cxx\Util\rrSymbolList.cpp">
 				<DependentOn>cxx\Util\rrSymbolList.h</DependentOn>
 				<BuildOrder>19</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Util\rrUtils.cpp">
+				<DependentOn>cxx\Util\rrUtils.h</DependentOn>
+				<BuildOrder>45</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="RoadRunnerLib.cpp">
 				<BuildOrder>0</BuildOrder>

@@ -8,6 +8,7 @@
 #include "rrTParameterType.h"
 #include "Solvers/rrCvodeInterface.h"
 #include "Solvers/rrNLEQInterface.h"
+#include "rrStringList.h"
 using std::string;
 
 namespace rr
@@ -114,8 +115,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
         rrDoubleMatrix                  simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
         vector<double>                  getReactionRates();
         vector<double>                  getRatesOfChange();
-        list<string> 					getSpeciesNames();
-        list<string> 					getReactionNames();
+        StringList 					getSpeciesNames();
+        StringList 					getReactionNames();
 
         // ---------------------------------------------------------------------
         // Start of Level 2 API Methods
@@ -128,9 +129,9 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void                            setCapabilities(const string& capsStr);
         void                            setValue(const string& sId, const double& dValue);
         double 							getValue(const string& sId);
-        list<string>                    getAvailableSymbols();
-        list<string>                    getSelectionList();
-        void 							setSelectionList(const list<string>& newSelectionList);
+        StringList                    getAvailableSymbols();
+        StringList                    getSelectionList();
+        void 							setSelectionList(const StringList& newSelectionList);
         double                          oneStep(const double& currentTime, const double& stepSize);
         double                          oneStep(const double& currentTime, const double& stepSize, const bool& reset);
 
@@ -162,17 +163,17 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		//static void 					GetInverse(Matrix T2, Matrix Inv);
 
         void 							computeContinuation(const double& stepSize, const int& independentVariable, const string& parameterTypeStr);
-        list<string>                    getFluxControlCoefficientNames();
-        list<string>                    getConcentrationControlCoefficientNames();
-        list<string>                    getUnscaledConcentrationControlCoefficientNames();
-        list<string>                    getElasticityCoefficientNames();
-        list<string>                    getUnscaledElasticityCoefficientNames();
-        list<string>                    getEigenValueNames();
-        list<string>                    getAvailableSteadyStateSymbols();
-        list<string>                    getSteadyStateSelectionList();
-        void 							setSteadyStateSelectionList(const list<string>& newSelectionList);
+        StringList                    getFluxControlCoefficientNames();
+        StringList                    getConcentrationControlCoefficientNames();
+        StringList                    getUnscaledConcentrationControlCoefficientNames();
+        StringList                    getElasticityCoefficientNames();
+        StringList                    getUnscaledElasticityCoefficientNames();
+        StringList                    getEigenValueNames();
+        StringList                    getAvailableSteadyStateSymbols();
+        StringList                    getSteadyStateSelectionList();
+        void 							setSteadyStateSelectionList(const StringList& newSelectionList);
         vector<double>                  computeSteadyStateValues();
-        vector<double>                  computeSteadyStateValues(const list<string>& oSelection);
+        vector<double>                  computeSteadyStateValues(const StringList& oSelection);
         double 							computeSteadyStateValue(const string& sId);
         vector<double> 					getSelectedValues();
         vector<string> 					getWarnings();
@@ -186,12 +187,12 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double 							getLocalParameterByIndex(const int& reactionId, const int& index);
         void 							setLocalParameterValues(const int& reactionId, const vector<double>& values);
         vector<double> 					getLocalParameterValues(const int& reactionId);
-        list<string>                    getLocalParameterNames(const int& reactionId);
-        list<string>                    getAllLocalParameterTupleList();
+        StringList                    getLocalParameterNames(const int& reactionId);
+        StringList                    getAllLocalParameterTupleList();
         int 							getNumberOfReactions();
         double                          getReactionRate(const int& index);
         double                          getRateOfChange(const int& index);
-        list<string> 					getRateOfChangeNames();
+        StringList 					getRateOfChangeNames();
         vector<double>                  getRatesOfChangeEx(const vector<double>& values);
         vector<double>                  getReactionRatesEx(const vector<double>& values);
         vector<string>                  GetFloatingSpeciesNamesArray();
@@ -200,14 +201,14 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void 							setCompartmentByIndex(const int& index, const double& value);
         double 							getCompartmentByIndex(const int& index);
         void 							setCompartmentVolumes(const vector<double>& values);
-        list<string> 					getCompartmentNames();
+        StringList 					getCompartmentNames();
         int 							getNumberOfBoundarySpecies();
         void 							setBoundarySpeciesByIndex(const int& index, const double& value);
         double 							getBoundarySpeciesByIndex(const int& index);
         vector<double> 					getBoundarySpeciesConcentrations();
         void 							setBoundarySpeciesConcentrations(const vector<double>& values);
-        list<string>                    getBoundarySpeciesNames();
-        list<string>                    getBoundarySpeciesAmountNames();
+        StringList                    getBoundarySpeciesNames();
+        StringList                    getBoundarySpeciesAmountNames();
         int 							getNumberOfFloatingSpecies();
         void 							setFloatingSpeciesByIndex(const int& index, const double& value);
         double 							getFloatingSpeciesByIndex(const int& index);
@@ -216,16 +217,16 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void                            setFloatingSpeciesConcentrations(const vector<double>& values);
         void                            setFloatingSpeciesInitialConcentrationByIndex(const int& index, const double& value);
         void                            setFloatingSpeciesInitialConcentrations(const vector<double>& values);
-        list<string>                    getFloatingSpeciesNames();
-        list<string>                    getFloatingSpeciesInitialConditionNames();
-        list<string>                    getFloatingSpeciesAmountNames();
+        StringList                    getFloatingSpeciesNames();
+        StringList                    getFloatingSpeciesInitialConditionNames();
+        StringList                    getFloatingSpeciesAmountNames();
         int 							getNumberOfGlobalParameters();
         void 							setGlobalParameterByIndex(const int& index, const double& value);
         double 							getGlobalParameterByIndex(const int& index);
         void 							setGlobalParameterValues(const vector<double>& values);
         vector<double> 					getGlobalParameterValues();
-        list<string>                    getGlobalParameterNames();
-        list<string>                    getAllGlobalParameterTupleList();
+        StringList                    getGlobalParameterNames();
+        StringList                    getAllGlobalParameterTupleList();
         void 							EvalModel();
         string 							getName();
         static string                   getVersion();
