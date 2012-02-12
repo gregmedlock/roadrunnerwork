@@ -56,30 +56,6 @@ double NOMSupport::getValue(const string& id)
 	return val;
 }
 
-//StringListContainer NOMSupport::GetFloatingSpecies()
-//{
-//	StringContainer floatingSpeciesList;
-//	int nrOfSpecies = ::getNumFloatingSpecies();
-//
-//    for (int i = 0; i < nrOfSpecies; i++)
-//    {
-//        Species* aSpecies = mModel->getSpecies(i);
-//        if( aSpecies != NULL && !aSpecies->getBoundaryCondition())
-//        {
-//        	StringCollection oSpeciesValues;// = new ArrayList();
-//            //oSpeciesValues.Add(GetId(aSpecies));
-//            oSpeciesValues.Add(aSpecies->getId());
-//            double concentration = aSpecies->isSetInitialConcentration() ? aSpecies->getInitialConcentration() : aSpecies->getInitialAmount();
-//
-//            oSpeciesValues.Add(ToString(concentration));
-//            oSpeciesValues.Add(ToString(aSpecies->isSetInitialConcentration()));
-//            floatingSpeciesList.Add(oSpeciesValues);
-//        }
-//    }
-//
-//    return floatingSpeciesList;
-//}
-
 StringListContainer NOMSupport::getListOfBoundarySpecies()
 {
     StringListContainer boundarySpeciesList;// = new StringListContainer();
@@ -98,9 +74,8 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 //            oSpeciesValues.Add(GetId(oSpecies));
             oSpeciesValues.Add(oSpecies->getId());
             double concentration = oSpecies->isSetInitialConcentration() ? oSpecies->getInitialConcentration() : oSpecies->getInitialAmount();
-            oSpeciesValues.Add(ToString(concentration));
-            oSpeciesValues.Add(ToString(oSpecies->isSetInitialConcentration())
-            );
+            oSpeciesValues.Add( ToString(concentration) );
+            oSpeciesValues.Add( ToString(oSpecies->isSetInitialConcentration()) );
 
             boundarySpeciesList.Add(oSpeciesValues);
         }
@@ -1152,32 +1127,60 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 //            return oErrorList;
 //        }
 //
-//        public static ArrayList getListOfFloatingSpecies()
+
+
+//StringListContainer NOMSupport::GetFloatingSpecies()
+//{
+//	StringContainer floatingSpeciesList;
+//	int nrOfSpecies = ::getNumFloatingSpecies();
+//
+//    for (int i = 0; i < nrOfSpecies; i++)
+//    {
+//        Species* aSpecies = mModel->getSpecies(i);
+//        if( aSpecies != NULL && !aSpecies->getBoundaryCondition())
 //        {
-//            ArrayList floatingSpeciesList = new ArrayList();
+//        	StringCollection oSpeciesValues;// = new ArrayList();
+//            //oSpeciesValues.Add(GetId(aSpecies));
+//            oSpeciesValues.Add(aSpecies->getId());
+//            double concentration = aSpecies->isSetInitialConcentration() ? aSpecies->getInitialConcentration() : aSpecies->getInitialAmount();
 //
-//            if (mModel == NULL)
-//            {
-//                throw new Exception("You need to load the model first");
-//            }
-//
-//            for (int i = 0; i < mModel.getNumSpecies(); i++)
-//            {
-//                libsbmlcs.Species oSpecies = mModel.getSpecies(i);
-//                if (!oSpecies.getBoundaryCondition())
-//                {
-//                    ArrayList oSpeciesValues = new ArrayList();
-//                    oSpeciesValues.Add(GetId(oSpecies));
-//                    oSpeciesValues.Add(oSpecies.isSetInitialConcentration() ? oSpecies.getInitialConcentration() : oSpecies.getInitialAmount());
-//                    oSpeciesValues.Add(oSpecies.isSetInitialConcentration());
-//
-//                    floatingSpeciesList.Add(oSpeciesValues);
-//                }
-//            }
-//
-//            return floatingSpeciesList;
+//            oSpeciesValues.Add(ToString(concentration));
+//            oSpeciesValues.Add(ToString(aSpecies->isSetInitialConcentration()));
+//            floatingSpeciesList.Add(oSpeciesValues);
 //        }
+//    }
 //
+//    return floatingSpeciesList;
+//}
+
+
+StringListContainer NOMSupport::getListOfFloatingSpecies()
+{
+    StringListContainer floatingSpeciesList;
+
+    if (mModel == NULL)
+    {
+        throw RRException("You need to load the model first");
+    }
+
+    for (int i = 0; i < mModel->getNumSpecies(); i++)
+    {
+        Species *oSpecies = mModel->getSpecies(i);
+        if (oSpecies && !oSpecies->getBoundaryCondition())
+        {
+            StringList oSpeciesValues;
+            oSpeciesValues.Add( oSpecies->getId() );
+	        double concentration = oSpecies->isSetInitialConcentration() ? oSpecies->getInitialConcentration() : oSpecies->getInitialAmount();
+            oSpeciesValues.Add( ToString(concentration) );
+            oSpeciesValues.Add( ToString(oSpecies->isSetInitialConcentration()));
+
+            floatingSpeciesList.Add(oSpeciesValues);
+        }
+    }
+
+    return floatingSpeciesList;
+}
+
 //        public static ArrayList getListOfFloatingSpeciesIds()
 //        {
 //            ArrayList floatingSpeciesIdList = new ArrayList();

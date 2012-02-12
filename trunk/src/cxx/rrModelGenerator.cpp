@@ -18,8 +18,8 @@ namespace rr
 {
 ModelGenerator::ModelGenerator()
 :
-mLibStructWrapper(),
-mLibStructRef(mLibStructWrapper.GetInstance())
+mStructAnalysis()//,
+//mLibStructRef(mStructAnalysis.GetInstance())
 {
 
 }
@@ -55,8 +55,6 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
         return "";
     }
 
-
-
 //    char** name;
 	//if(getModelName(name))
 
@@ -70,8 +68,6 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 
 	globalParameterList.Clear();// = new SymbolList();
     ModifiableSpeciesReferenceList.Clear();// = new SymbolList();
-
-//    localParameterList = new SymbolList[_NumReactions];
     localParameterList.reserve(_NumReactions);// = new SymbolList[_NumReactions];
     reactionList.Clear();// = new SymbolList();
     boundarySpeciesList.Clear();// = new SymbolList();
@@ -92,10 +88,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 
     if (RoadRunner::_bComputeAndAssignConservationLaws)
     {
-		//_NumIndependentSpecies = StructAnalysis.GetNumIndependentSpecies();
 	    _NumIndependentSpecies 	= mLibStructRef.getNumIndSpecies();
-
-        //independentSpeciesList 	= StructAnalysis::GetIndependentSpeciesIds();
 		independentSpeciesList 	= mLibStructRef.getIndependentSpecies();
 
 		//dependentSpeciesList 	= StructAnalysis::GetDependentSpeciesIds();
@@ -1099,67 +1092,141 @@ string ModelGenerator::NL()
 ////            }
 ////            sb.AppendFormat("\t}}{0}{0}", NL());
 //        }
-//
-//
+
+
 int ModelGenerator::ReadFloatingSpecies()
 {
     // Load a reordered list into the variable list.
     vector<string> reOrderedList;
     if ((RoadRunner::_bComputeAndAssignConservationLaws))
 	{
-       //   reOrderedList = StructAnalysis.GetReorderedSpeciesIds();
-       reOrderedList = mLibStructRef.getReorderedSpecies();//mLibStructWrapper.GetReorderedSpeciesIds();
+       reOrderedList = mLibStructRef.getReorderedSpecies();
 	}
 	else
 	{
-		//reOrderedList = StructAnalysis.GetSpeciesIds();
     	reOrderedList = mLibStructRef.getSpecies();
     }
+    StringListContainer oFloatingSpecies = mNOM.getListOfFloatingSpecies();
 
-	//StringList oFloatingSpecies = NOM.getListOfFloatingSpecies();
-    StringListContainer oFloatingSpecies = mNOM.getListOfBoundarySpecies();
 
-    StringList	TempList;
 	for (int i = 0; i < reOrderedList.size(); i++)
     {
     	for (int j = 0; j < oFloatingSpecies.size(); j++)
         {
-        	TempList = oFloatingSpecies[j];
-//          	if(reOrderedList[i] != (const string&) TempList[0])
-//          	{
-//          		continue;
-//          	}
+        	StringList oTempList = oFloatingSpecies[j];
+          	if(reOrderedList[i] != (const string&) oTempList[0])
+          	{
+          		continue;
+          	}
 
 			string compartmentName = mNOM.getNthFloatingSpeciesCompartmentName(j);
-//              var bIsConcentration = (bool)oTempList[2];
-//              var dValue = (double)oTempList[1];
-//              if (double.IsNaN(dValue))
-//                  dValue = 0;
-//              Symbol symbol = null;
-//              if (bIsConcentration)
-//              {
-//                  symbol = new Symbol(reOrderedList[i], dValue, compartmentName);
-//              }
-//              else
-//              {
-//                  int nCompartmentIndex;
-//                  compartmentList.find(compartmentName, out nCompartmentIndex);
-//                  double dVolume = compartmentList[nCompartmentIndex].value;
-//                  if (double.IsNaN(dVolume)) dVolume = 1;
-//                  symbol = new Symbol(reOrderedList[i],
-//                      dValue / dVolume,
-//                      compartmentName,
-//                      string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
-//              }
-//              symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(reOrderedList[i]).getHasOnlySubstanceUnits();
-//              floatingSpeciesConcentrationList.Add(symbol);
-//              break;
+            bool bIsConcentration  = ToBool(oTempList[2]);
+            double dValue = ToDouble(oTempList[1]);
+            if (IsNaN(dValue))
+            {
+                  dValue = 0;
+            }
+
+            Symbol *symbol = NULL;
+            if (bIsConcentration)
+            {
+              symbol = new Symbol(reOrderedList[i], dValue, compartmentName);
+            }
+            else
+            {
+              int nCompartmentIndex;
+              compartmentList.find(compartmentName, nCompartmentIndex);
+
+              double dVolume = compartmentList[nCompartmentIndex].value;
+              if (IsNaN(dVolume))
+              {
+              	dVolume = 1;
+              }
+
+              stringstream formula;
+              formula<<dValue<<"/ _c["<<nCompartmentIndex<<"]";
+
+              symbol = new Symbol(reOrderedList[i],
+                  dValue / dVolume,
+                  compartmentName,
+                  formula.str());
+            }
+
+            if(mNOM.GetModel())
+            {
+	            Species *aSpecies = mNOM.GetModel()->getSpecies(reOrderedList[i]);
+                if(aSpecies)
+                {
+                    symbol->hasOnlySubstance = aSpecies->getHasOnlySubstanceUnits();
+                }
+            }
+            else
+            {
+                //TODO: How to report error...?
+                //Log an error...
+                symbol->hasOnlySubstance = false;
+
+            }
+            floatingSpeciesConcentrationList.Add(*(symbol));
+            break;
           }
-//          //throw new SBWApplicationException("Reordered Species " + reOrderedList[i] + " not found.");
+          //throw RRException("Reordered Species " + reOrderedList[i] + " not found.");
       }
       return oFloatingSpecies.size();
 }
-//
+
+////        private int ReadFloatingSpecies()
+////        {
+////            // Load a reordered list into the variable list.
+////            string[] reOrderedList;
+////            if ((RoadRunner._bComputeAndAssignConservationLaws))
+////                reOrderedList = StructAnalysis.GetReorderedSpeciesIds();
+////            else
+////                reOrderedList = StructAnalysis.GetSpeciesIds();
+////
+////            ArrayList oFloatingSpecies = NOM.getListOfFloatingSpecies();
+////
+////
+////            ArrayList oTempList;
+////            for (int i = 0; i < reOrderedList.Length; i++)
+////            {
+////                for (int j = 0; j < oFloatingSpecies.Count; j++)
+////                {
+////                    oTempList = (ArrayList)oFloatingSpecies[j];
+////                    if (reOrderedList[i] != (string)oTempList[0]) continue;
+////
+////                    string compartmentName = NOM.getNthFloatingSpeciesCompartmentName(j);
+////                    var bIsConcentration = (bool)oTempList[2];
+////                    var dValue = (double)oTempList[1];
+////                    if (double.IsNaN(dValue))
+////                        dValue = 0;
+////                    Symbol symbol = null;
+////                    if (bIsConcentration)
+////                    {
+////                        symbol = new Symbol(reOrderedList[i], dValue, compartmentName);
+////                    }
+////                    else
+////                    {
+////                        int nCompartmentIndex;
+////                        compartmentList.find(compartmentName, out nCompartmentIndex);
+////                        double dVolume = compartmentList[nCompartmentIndex].value;
+////                        if (double.IsNaN(dVolume)) dVolume = 1;
+////                        symbol = new Symbol(reOrderedList[i],
+////                            dValue / dVolume,
+////                            compartmentName,
+////                            string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
+////                    }
+////                    symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(reOrderedList[i]).getHasOnlySubstanceUnits();
+////                    floatingSpeciesConcentrationList.Add(symbol);
+////                    break;
+////                }
+////                //throw new SBWApplicationException("Reordered Species " + reOrderedList[i] + " not found.");
+////            }
+////            return oFloatingSpecies.Count;
+////        }
+
+
+
 int ModelGenerator::ReadBoundarySpecies()
 {
 	int numBoundarySpecies;
@@ -1167,8 +1234,8 @@ int ModelGenerator::ReadBoundarySpecies()
     numBoundarySpecies = oBoundarySpecies.size(); // sp1.size();
     for (int i = 0; i < numBoundarySpecies; i++)
     {
-        StringList oTempList 		= oBoundarySpecies[i];
-        string sName 				= oTempList[0];
+        StringList oTempList 	= oBoundarySpecies[i];
+        string sName 			= oTempList[0];
         string compartmentName 	= mNOM.getNthBoundarySpeciesCompartmentName(i);
         bool bIsConcentration 	= ToBool(oTempList[2]);
         double dValue 			= ToDouble(oTempList[1]);
@@ -1203,6 +1270,7 @@ int ModelGenerator::ReadBoundarySpecies()
                                 formula.str());
 //                                string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
         }
+
         if(mNOM.GetModel())
         {
 			Species* species = mNOM.GetModel()->getSpecies(sName);

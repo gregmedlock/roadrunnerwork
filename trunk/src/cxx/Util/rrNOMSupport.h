@@ -57,7 +57,6 @@ class RR_DECLSPEC NOMSupport : public rrObject
     	virtual 			   ~NOMSupport();
 		string					getNthCompartmentId(const int& i);
         double					getValue(const string& id);
-//        StringListContainer		GetFloatingSpecies();
         int						LoadSBML(const string& sbml);
         Model*					GetModel(){return mModel;}
         SBMLDocument*			GetSBMLDocument(){return mSBMLDoc;}
@@ -65,7 +64,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
 //        ArrayList getDerivedUnitDefinition(const string& sId)
 //        ArrayList getListOfBoundarySpeciesIds()
 //        ArrayList getListOfErrors()
-//        ArrayList getListOfFloatingSpecies()
+        StringListContainer getListOfFloatingSpecies();
 //        ArrayList getListOfFloatingSpeciesIds()
 //        ArrayList getListOfParameters()
 //        ArrayList getNthError(const int& nIndex)

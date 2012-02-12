@@ -8,52 +8,52 @@
 
 namespace rr
 {
-LibStructWrapper::LibStructWrapper()
+StructAnalysis::StructAnalysis()
 :
 mInstance(LibStructural::getInstance())
 {
 
 }
 
-LibStructWrapper::~LibStructWrapper()
+StructAnalysis::~StructAnalysis()
 {
 }
 
 
-vector<string> LibStructWrapper::GetReorderedSpeciesIds()
-{
-	return (mInstance) ? mInstance->getReorderedSpecies() : vector<string>(0);
+//vector<string> StructAnalysis::GetReorderedSpeciesIds()
+//{
+////	return (mInstance) ? mInstance->getReorderedSpecies() : vector<string>(0);
+//
+//}
 
-}
-
-//bool LibStructWrapper::LoadSBML(const string& sbml)
+//bool StructAnalysis::LoadSBML(const string& sbml)
 //{
 //    string msg = mInstance->LibStructural::loadSBML(sbml);
 ////    cout << msg;
 //    return true;
 //}
 //
-//int	LibStructWrapper::GetNumberOfIndependentSpecies()
+//int	StructAnalysis::GetNumberOfIndependentSpecies()
 //{
 //	return LibStructural_getNumIndSpecies();
 //}
 //
-//vector<string> LibStructWrapper::GetIndependentSpecies()
+//vector<string> StructAnalysis::GetIndependentSpecies()
 //{
 //	return LibStructural::getInstance()->getIndependentSpecies();	//Static metod of class LibStructural
 //}
 //
-//vector<string> LibStructWrapper::GetDependentSpecies()
+//vector<string> StructAnalysis::GetDependentSpecies()
 //{
 //	return LibStructural::getInstance()->getDependentSpecies();
 //}
 //
-//int LibStructWrapper::GetNumSpecies()
+//int StructAnalysis::GetNumSpecies()
 //{
 //	return LibStructural::getInstance()->getNumSpecies();
 //}
 //
-//vector<string> LibStructWrapper::GetSpecies()
+//vector<string> StructAnalysis::GetSpecies()
 //{
 //	return LibStructural::getInstance()->getSpecies();
 //}

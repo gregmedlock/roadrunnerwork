@@ -95,8 +95,8 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         int 				                ReadCompartments();
         int 				                ReadModifiableSpeciesReferences();
 
-        LibStructWrapper					mLibStructWrapper;		//!Object to facilitate calls to libStruct library
-        LibStructural&						mLibStructRef;			//!T his class is not exported so, not sure if this will work..
+        StructAnalysis						mStructAnalysis;		//!Object to facilitate calls to libStruct library
+//        LibStructural&						mLibStructRef;			//!This class is not exported so, not sure if this will work..
         NOMSupport							mNOM;					//Object that provide some wrappers and new "NOM" functions
 
     public:
