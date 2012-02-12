@@ -19,1079 +19,335 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 {
     protected:
        	LibStructural		   *mInstance;
+//        void WriteMatlabForm(System.IO.TextWriter oWriter, double[][] oMatrix)
+
+//        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getGammaMatrixGJ")]
+//        int LibStructural_getGammaMatrixGJ(System.IntPtr inMatrix, int numRows, int numCols,
+//            out System.IntPtr outMatrix, out int outRows, out int outCols);
+
+//        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_findPositiveGammaMatrix")]
+//        int LibStructural_findPositiveGammaMatrix(
+//            System.IntPtr inMatrix, int numRows, int numCols,
+//            IntPtr inRowLabels,
+//            out System.IntPtr outMatrix, out int outRows, out int outCols,
+//            out System.IntPtr outRowLabels, out int outRowCount);
+
 
    	public:
 						    	StructAnalysis();
     	virtual 			   ~StructAnalysis();
 		LibStructural&			GetInstance(){return *mInstance;}
 
-//        /// <summary>
-//        /// The library file to where the members will be found. This will be
-//        /// libstructural.dll on windows, and libLibStructural.so on linux and
-//        /// OSX under mono.
-//        /// </summary>
 //        internal const string LIBRARY_FILE = "LibStructural";
+//        string AnalyzeWithFullyPivotedLU()
+//        string AnalyzeWithFullyPivotedLUAndRunTests()
+//        string AnalyzeWithLU()
+//        string AnalyzeWithLUAndRunTests()
+//        string AnalyzeWithQR()
+//        double[][] GetColumnReorderedNrMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetColumnReorderedNrMatrix()
+//        void GetColumnReorderedNrMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        string[] getConservedLaws()
+//        double[] GetConservedSums()
+//        string[] GetDependentReactionIds()
+//        string[] GetDependentSpeciesIds()
+//        double[][] GetFullyReorderedStoichiometryMatrix()
+//        double[][] GetFullyReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        void GetFullyReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetGammaMatrix()
+//        double[][] GetGammaMatrixGJ(double[][] oMatrix)
+//        bool FindPositiveGammaMatrix(double[][] oMatrix,  out double[][] gammaMatrix, ref string[] rowNames, out string[] colNames)
+//        bool FindPositiveGammaMatrix(double[][] oMatrix, out double[][] gammaMatrix)
+//        double[][] GetGammaMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        void GetGammaMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        string[] GetIndependentReactionIds()
+//        string[] GetIndependentSpeciesIds()
+//        void GetInitialConditions(out string[] variableNames, out double[] initialValues)
+//        double[][] GetK0Matrix()
+//        double[][] GetK0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        void GetK0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetKMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetKMatrix()
+//        void GetKMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetL0Matrix()
+//        double[][] GetL0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        void GetL0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetLinkMatrix()
+//        double[][] GetLinkMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        void GetLinkMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetLMatrix()
+//        double[][] GetLMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        void GetLMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        string GetModelName()
+//        double[][] GetN0Matrix()
+//        double[][] GetN0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        void GetN0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetNDCMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetNDCMatrix()
+//        void GetNDCMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetNICMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetNICMatrix()
+//        void GetNICMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
 
-//        /// <summary>
-//        /// Analyze the prior loaded model with fully pivoted LU factorization.
-//        /// <remarks>
-//        /// This will only work if the stoichiometry matrix represents a N-by-N
-//        /// matrix.</remarks>
-//        /// </summary>
-//        /// <returns>Any warnings that occurred while analyzing the Stoichiometry
-//        /// matrix, such as 'No floating species', 'No Reactions' or an empty
-//        /// stoichiometry matrix.</returns>
-//        public static string AnalyzeWithFullyPivotedLU()
-
-//        /// <summary>
-//        /// Analyze the prior loaded model with fully pivoted LU factorization.
-//        /// After analyzing all the computed matrices will be tested for their
-//        /// validity. (See also <see cref="GetTestDetails"/>.)
-//        /// <remarks>
-//        /// This will only work if the stoichiometry matrix represents a N-by-N
-//        /// matrix.</remarks>
-//        /// </summary>
-//        /// <returns>Any warnings that occurred while analyzing the Stoichiometry
-//        /// matrix, such as 'No floating species', 'No Reactions' or an empty
-//        /// stoichiometry matrix.</returns>
-//        public static string AnalyzeWithFullyPivotedLUAndRunTests()
-//
-//        /// <summary>
-//        /// Analyze the prior loaded model with partial pivoted LU factorization.
-//        /// </summary>
-//        /// <returns>Any warnings that occurred while analyzing the Stoichiometry
-//        /// matrix, such as 'No floating species', 'No Reactions' or an empty
-//        /// stoichiometry matrix.</returns>
-//        public static string AnalyzeWithLU()
-//
-//        /// <summary>
-//        /// Analyze the prior loaded model with partial pivoted LU factorization.
-//        /// After analyzing all the computed matrices will be tested for their
-//        /// validity. (See also <see cref="GetTestDetails"/>.)
-//        /// </summary>
-//        /// <returns>Any warnings that occurred while analyzing the Stoichiometry
-//        /// matrix, such as 'No floating species', 'No Reactions' or an empty
-//        /// stoichiometry matrix.</returns>
-//        public static string AnalyzeWithLUAndRunTests()
-//
-//        /// <summary>
-//        /// Analyze the prior loaded model with QR factorization (employing pivoting
-//        /// through householder reflections).
-//        /// </summary>
-//        /// <returns>Any warnings that occurred while analyzing the Stoichiometry
-//        /// matrix, such as 'No floating species', 'No Reactions' or an empty
-//        /// stoichiometry matrix.</returns>
-//        public static string AnalyzeWithQR()
-//
-//        /// <summary>
-//        /// Get column reordered Nr matrix
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetColumnReorderedNrMatrix(out string[] sRowLabels, out string[] sColumnLabels)
-//
-//        /// <summary>
-//        /// Get column reordered Nr matrix
-//        /// </summary>
-//        public static double[][] GetColumnReorderedNrMatrix()
-//
-//        /// <summary>
-//        /// Get column reordered Nr matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetColumnReorderedNrMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-//
-//        /// <summary>
-//        /// Get conserved entities
-//        /// </summary>
-//        public static string[] getConservedLaws()
-//
-//        /// <summary>
-//        /// Get conserved sums
-//        /// </summary>
-//        public static double[] GetConservedSums()
-//
-//        /// <summary>
-//        /// Get dependent reaction ids
-//        /// </summary>
-//        public static string[] GetDependentReactionIds()
-//
-//        /// <summary>
-//        /// Get dependent species ids
-//        /// </summary>
-//        public static string[] GetDependentSpeciesIds()
-//
-//        /// <summary>
-//        /// Get fully reordered stoichiometry matrix
-//        /// </summary>
-//        public static double[][] GetFullyReorderedStoichiometryMatrix()
-//
-//        /// <summary>
-//        /// Get fully reordered stoichiometry matrix
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetFullyReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
-//
-//        /// <summary>
-//        /// Get fully reordered stoichiometry matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetFullyReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-//
-//        /// <summary>
-//        /// Get Gamma matrix
-//        /// </summary>
-//        public static double[][] GetGammaMatrix()
-//        public static double[][] GetGammaMatrixGJ(double[][] oMatrix)
-//        public static bool FindPositiveGammaMatrix(double[][] oMatrix,  out double[][] gammaMatrix, ref string[] rowNames, out string[] colNames)
-//        public static bool FindPositiveGammaMatrix(double[][] oMatrix, out double[][] gammaMatrix)
-//        /// <summary>
-//        /// Get Gamma matrix
-//        /// </summary>
-//        public static double[][] GetGammaMatrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get Gamma matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetGammaMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get independent reaction ids
-//        /// </summary>
-//        public static string[] GetIndependentReactionIds()
-
-//        /// <summary>
-//        /// Get independent species ids
-//        /// </summary>
-//        public static string[] GetIndependentSpeciesIds()
-
-//        /// <summary>
-//        /// Get initial conditions
-//        /// </summary>
-//        public static void GetInitialConditions(out string[] variableNames, out double[] initialValues)
-
-//        /// <summary>
-//        /// Get K0 matrix
-//        /// </summary>
-//        public static double[][] GetK0Matrix()
-
-//        /// <summary>
-//        /// Get K0 matrix
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetK0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get K0 matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetK0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get K matrix
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetKMatrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get K matrix
-//        /// </summary>
-//        public static double[][] GetKMatrix()
-
-//        /// <summary>
-//        /// Get K matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetKMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get L0 matrix
-//        /// </summary>
-//        public static double[][] GetL0Matrix()
-
-//        /// <summary>
-//        /// Get L0 matrix
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetL0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get L0 matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetL0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get L matrix (link matrix)
-//        /// </summary>
-//        public static double[][] GetLinkMatrix()
-
-//        /// <summary>
-//        /// Get L matrix (link matrix)
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetLinkMatrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get L matrix (link matrix) labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetLinkMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get L matrix
-//        /// </summary>
-//        public static double[][] GetLMatrix()
-
-//        /// <summary>
-//        /// Get L matrix
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetLMatrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get L matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetLMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get model name
-//        /// </summary>
-//        public static string GetModelName()
-
-//        /// <summary>
-//        /// Get N0 matrix
-//        /// </summary>
-//        public static double[][] GetN0Matrix()
-
-//        /// <summary>
-//        /// Get N0 matrix
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetN0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get N0 matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetN0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get dependent reaction  matrix
-//        /// </summary>
-//        public static double[][] GetNDCMatrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get dependent reaction  matrix
-//        /// </summary>
-//        public static double[][] GetNDCMatrix()
-
-//        /// <summary>
-//        /// Get dependent reaction  matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetNDCMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-
-//        /// <summary>
-//        /// Get independent reaction  matrix
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetNICMatrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get independent reaction  matrix
-//        /// </summary>
-//        public static double[][] GetNICMatrix()
-
-//        /// <summary>
-//        /// Get independent reaction  matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetNICMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Returns the sparsity of the stoichiometry matrix. (i.e: the percentage
-//        /// of non-zero elements in the stoichiometry matrix).
-//        /// </summary>
-//        /// <returns>the sparsity of the stoichiometry matrix</returns>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNmatrixSparsity")]
-//        public static extern double GetNmatrixSparsity();
-//
-//        /// <summary>
-//        /// Get Nr matrix
-//        /// </summary>
-//        public static double[][] GetNrMatrix()
+//        extern double GetNmatrixSparsity();
 
-//        /// <summary>
-//        /// Get Nr matrix
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetNrMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetNrMatrix()
+//        double[][] GetNrMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        void GetNrMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
 
-//        /// <summary>
-//        /// Get number matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetNrMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        ///// Return Type: char*
-//        /////n: int
 //        //[DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNthConservedEntity")]
 //        //internal static extern int LibStructural_getNthConservedEntity(int n, out IntPtr result, out int nLength);
 //        //public static string GetNthConservedEntity(int n)
-
-//        /// <summary>
-//        /// Returns the number of conserved sums.
-//        /// </summary>
-//        /// <returns>the number of conserved sums</returns>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumConservedSums")]
-//        public static extern int GetNumConservedSums();
+//        int GetNumConservedSums();
 
-//        /// <summary>
-//        /// Returns the number of dependent species.
-//        /// </summary>
-//        /// <returns>the number of dependent species</returns>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumDepSpecies")]
-//        public static extern int GetNumDependentSpecies();
+//        int GetNumDependentSpecies();
 //
-//        /// <summary>
-//        /// Returns the number of independent species.
-//        /// </summary>
-//        /// <returns>the number of independent species</returns>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumIndSpecies")]
-//        public static extern int GetNumIndependentSpecies();
+//        int GetNumIndependentSpecies();
 //
 //
-//        /// <summary>
-//        /// Returns the number of reactions.
-//        /// </summary>
-//        /// <returns>the number of reactions</returns>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumReactions")]
-//        public static extern int GetNumReactions();
+//        int GetNumReactions();
 //
-//        /// <summary>
-//        /// Returns the number of dependent reactions.
-//        /// </summary>
-//        /// <returns>the number of dependent reactions</returns>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumDepReactions")]
-//        public static extern int GetNumDependentReactions();
+//        int GetNumDependentReactions();
 
-//        /// <summary>
-//        /// Returns the number of independent reactions.
-//        /// </summary>
-//        /// <returns>the number of independent reactions</returns>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumIndReactions")]
-//        public static extern int GetNumIndependentReactions();
+//        int GetNumIndependentReactions();
 //
-//        /// <summary>
-//        /// Returns the number of species.
-//        /// </summary>
-//        /// <returns>the number of species</returns>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumSpecies")]
-//        public static extern int GetNumSpecies();
+//        int GetNumSpecies();
 //
-//
-//        /// <summary>
-//        /// Returns the rank of the stoichiometry matrix
-//        /// </summary>
-//        /// <returns>the rank of the stoichiometry matrix</returns>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getRank")]
-//        public static extern int GetRank();
-//
-//        /// <summary>
-//        /// Get reaction ids
-//        /// </summary>
-//        public static string[] GetReactionIds()
+//        int GetRank();
+//        string[] GetReactionIds()
+//        string[] GetReorderedReactionIds()
+//        string[] GetReorderedSpeciesIds()
+//        double[][] GetReorderedStoichiometryMatrix()
+//        double[][] GetReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        void GetReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        string[] GetSpeciesIds()
+//        double[][] GetStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+//        double[][] GetStoichiometryMatrix()
+//        void GetStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+//        string GetTestDetails(  )
+//        void LoadReactionNames(string[] reactionNames)
+//	      string LoadSBML(string sbml)
+//        string LoadSBMLFromFile(string sFileName)
+//        string LoadSBMLWithTests(string sbml)
+//        void LoadSpeciesNames(string[] speciesNames, double[] speciesValues)
+//        void LoadSpeciesNames(string[] speciesNames)
+//        void LoadStoichiometryMatrix(double[][] oMatrix)
+//        void LoadStoichiometryMatrix(double[][] oMatrix, string[] speciesNames, string[] reactionNames)
+//        void LoadStoichiometryMatrix(double[][] oMatrix, string[] speciesNames, double[] initialValues, string[] reactionNames)
+//        void PrintDoubleMatrix(double[][] oMatrix)
+//        void PrintIntMatrix(int[][] oMatrix)
+//        void PrintComplexMatrix(Complex[][] oMatrix)
+//        void PrintDoubleMatrix(System.IO.TextWriter oWriter, double[][] oMatrix)
 
-//        /// <summary>
-//        /// Get reordered reaction ids
-//        /// </summary>
-//        public static string[] GetReorderedReactionIds()
+//        void PrintIntMatrix(System.IO.TextWriter oWriter, int[][] oMatrix)
+//        void PrintComplexMatrix(System.IO.TextWriter oWriter, Complex[][] oMatrix)
+//        void PrintLabledDoubleMatrix(double[][] oMatrix, IEnumerable<string> sRowLables, IEnumerable<string> sColumnLables)
+//        void PrintLabledDoubleMatrix(System.IO.TextWriter oWriter, double[][] oMatrix, IEnumerable<string> sRowLablesIn, IEnumerable<string> sColumnLablesIn)
+//        void PrintSortedLabledDoubleMatrix(System.IO.TextWriter oWriter, double[][] oMatrix, IEnumerable<string> sRowLablesIn, IEnumerable<string> sColumnLablesIn)
+//        void PrintStringArray(System.IO.TextWriter oWriter, string[] oArray)
+//        void PrintStringArray(string[] oArray)
 
-//        /// <summary>
-//        /// Get reordered species ids
-//        /// </summary>
-//        public static string[] GetReorderedSpeciesIds()
-
-//        /// <summary>
-//        /// Get reordered stoichiometry matrix
-//        /// </summary>
-//        public static double[][] GetReorderedStoichiometryMatrix()
-
-//        /// <summary>
-//        /// Get reordered stoichiometry matrix
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static double[][] GetReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get reordered stoichiometry matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get species ids
-//        /// </summary>
-//        public static string[] GetSpeciesIds()
-
-//        /// <summary>
-//        /// Get stoichiometry matrix
-//        /// </summary>
-//        public static double[][] GetStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get stoichiometry matrix
-//        /// </summary>
-//        public static double[][] GetStoichiometryMatrix()
-
-//        /// <summary>
-//        /// Get stoichiometry matrix labels
-//        /// </summary>
-//        /// <param name="sColumnLabels">after calling the method, this string array
-//        /// will hold the column lables for the matrix.</param>
-//        /// <param name="sRowLabels">after calling the method, this string array
-//        /// will hold the row lables for the matrix.</param>
-//        public static void GetStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-
-//        /// <summary>
-//        /// Get test details
-//        /// </summary>
-//        public static string GetTestDetails(  )
-
-//        /// <summary>
-//        /// Load reaction names
-//        /// </summary>
-//        public static void LoadReactionNames(string[] reactionNames)
-
-//        /// <summary>
-//        /// Load SBML from a string into the library.
-//        /// <example>This shows how to load and analyze an SBML file
-//        /// <code>
-//        ///    using libstructural;
-//        ///
-//        ///    class Program
-//        ///    {
-//        ///        static void Main(string[] args)
-//        ///        {
-//        ///            // read the SBML from a file
-//        ///            StreamReader oReader = new StreamReader("c:/Users/fbergman/Documents/SBML Models/BorisEJB.xml");
-//        ///            string sSBML = oReader.ReadToEnd(); oReader.Close();
-//        ///
-//        ///            // load it into the Structural Library
-//        ///            StructAnalysis.LoadSBML(sSBML);
-//        ///
-//        ///            // Print Test Details
-//        ///            Console.WriteLine(StructAnalysis.GetTestDetails());
-//        ///
-//        ///            // get reordered stoichiometry matrix for further analysis
-//        ///            double[][] reorderedStoichiometry = StructAnalysis.GetReorderedStoichiometryMatrix();
-//        ///
-//        ///            // ...
-//        ///        }
-//        ///
-//        ///    }
-//        /// </code>
-//        /// </example>
-//        /// </summary>
-//        /// <param name="sbml">the SBML string</param>
-		public: string LoadSBML(string sbml)
-
-//        /// <summary>
-//        /// Load SBML from a string into the library.
-//        /// <example>This shows how to load and analyze an SBML file
-//        /// <code>
-//        ///    using libstructural;
-//        ///
-//        ///    class Program
-//        ///    {
-//        ///        static void Main(string[] args)
-//        ///        {
-//        ///
-//        ///            // load SBML model into the Structural Library
-//        ///            StructAnalysis.LoadSBMLFromFile("c:/Users/fbergman/Documents/SBML Models/BorisEJB.xml");
-//        ///
-//        ///            // Print Test Details
-//        ///            Console.WriteLine(StructAnalysis.GetTestDetails());
-//        ///
-//        ///            // get reordered stoichiometry matrix for further analysis
-//        ///            double[][] reorderedStoichiometry = StructAnalysis.GetReorderedStoichiometryMatrix();
-//        ///
-//        ///            // ...
-//        ///        }
-//        ///
-//        ///    }
-//        /// </code>
-//        /// </example>
-//        /// </summary>
-//        /// <param name="sFileName">the full path to a SBML file</param>
-//        public static string LoadSBMLFromFile(string sFileName)
-
-//        /// <summary>
-//        /// Load the SBML and perform validity tests. For an example <see cref="LoadSBML"/>.
-//        /// </summary>
-//        /// <param name="sbml">The SBML to be loaded</param>
-//        public static string LoadSBMLWithTests(string sbml)
-
-//        /// <summary>
-//        /// Load species names and initial conditions. This should be done after <see cref="LoadStoichiometryMatrix(double[][])"/>.
-//        /// </summary>
-//        public static void LoadSpeciesNames(string[] speciesNames, double[] speciesValues)
-
-//        /// <summary>
-//        /// Load species names. This should be done after <see cref="LoadStoichiometryMatrix(double[][])"/>.
-//        /// </summary>
-//        public static void LoadSpeciesNames(string[] speciesNames)
-
-//        /// <summary>
-//        /// Load stoichiometry matrix into the library.
-//        /// <example>This example shows how to use the library with a stoichiometry matrix
-//        /// <code>
-//        ///    using libstructural;
-//        ///
-//        ///    class Program
-//        ///    {
-//        ///        static void Main(string[] args)
-//        ///        {
-//        ///
-//        ///            // load a Stoichiometry Matrix
-//        ///            StructAnalysis.LoadStoichiometryMatrix(
-//        ///                new double[][]
-//        ///                {
-//        ///                     new double[] {1.0,  -1.0, -1.0,  0.0, 0.0,  0.0,  0.0,  0.0,  0.0},
-//        ///                     new double[] {0.0,   1.0,  0.0, -1.0, 0.0, -1.0,  0.0,  0.0,  0.0},
-//        ///                     new double[] {0.0,   0.0,  1.0,  0.0, 0.0,  1.0, -1.0,  0.0,  0.0},
-//        ///                     new double[] {0.0,   0.0,  0.0,  2.0, 0.0,  0.0,  1.0, -1.0,  0.0},
-//        ///                     new double[] {0.0,   0.0,  0.0, -1.0, 1.0,  0.0,  0.0,  0.0,  0.0},
-//        ///                     new double[] {0.0,   0.0,  0.0,  0.0, 0.0,  1.0,  0.0,  0.0, -1.0}
-//        ///                }
-//        ///                );
-//        ///            // load species and reaction names
-//        ///            StructAnalysis.LoadSpeciesNames(new string[] { "A", "B", "C", "D", "E", "F" });
-//        ///            StructAnalysis.LoadReactionNames(new string[] { "J1", "J2", "J3", "J4", "J5", "J6", "J7", "J8", "J9" });
-//        ///
-//        ///            // analyze with QR factorization and print test results
-//        ///            Console.WriteLine(StructAnalysis.AnalyzeWithQR());
-//        ///            Console.WriteLine(StructAnalysis.GetTestDetails());
-//        ///            // ...
-//        ///        }
-//        ///
-//        ///    }
-//        /// </code>
-//        /// </example>
-//        /// </summary>
-//        public static void LoadStoichiometryMatrix(double[][] oMatrix)
-
-//        /// <summary>
-//        /// Load stoichiometry matrix with the given species names and reaction names. For an example see: <see cref="LoadStoichiometryMatrix(double[][])"/>.
-//        /// </summary>
-//        public static void LoadStoichiometryMatrix(double[][] oMatrix, string[] speciesNames, string[] reactionNames)
-
-//        /// <summary>
-//        /// Load stoichiometry matrix with the given species names, initial conditions and reaction names. For an example see: <see cref="LoadStoichiometryMatrix(double[][])"/>.
-//        /// </summary>
-//        public static void LoadStoichiometryMatrix(double[][] oMatrix, string[] speciesNames, double[] initialValues, string[] reactionNames)
-
-//        /// <summary>
-//        /// Print double matrix
-//        /// </summary>
-//        public static void PrintDoubleMatrix(double[][] oMatrix)
-
-//        /// <summary>
-//        /// Print int matrix
-//        /// </summary>
-//        public static void PrintIntMatrix(int[][] oMatrix)
-
-//        /// <summary>
-//        /// Print complex matrix
-//        /// </summary>
-//        public static void PrintComplexMatrix(Complex[][] oMatrix)
-
-//        /// <summary>
-//        /// Print double matrix
-//        /// </summary>
-//        public static void PrintDoubleMatrix(System.IO.TextWriter oWriter, double[][] oMatrix)
-//        private static void WriteMatlabForm(System.IO.TextWriter oWriter, double[][] oMatrix)
-
-//        /// <summary>
-//        /// Print int matrix
-//        /// </summary>
-//        public static void PrintIntMatrix(System.IO.TextWriter oWriter, int[][] oMatrix)
-
-//        /// <summary>
-//        /// Print complex matrix
-//        /// </summary>
-//        public static void PrintComplexMatrix(System.IO.TextWriter oWriter, Complex[][] oMatrix)
-
-//        /// <summary>
-//        /// Print labeled double matrix
-//        /// </summary>
-//        public static void PrintLabledDoubleMatrix(double[][] oMatrix, IEnumerable<string> sRowLables, IEnumerable<string> sColumnLables)
-
-//        /// <summary>
-//        /// Print labeled double matrix
-//        /// </summary>
-//        public static void PrintLabledDoubleMatrix(System.IO.TextWriter oWriter, double[][] oMatrix, IEnumerable<string> sRowLablesIn, IEnumerable<string> sColumnLablesIn)
-
-//        /// <summary>
-//        /// Print sorted labeled double matrix
-//        /// </summary>
-//        public static void PrintSortedLabledDoubleMatrix(System.IO.TextWriter oWriter, double[][] oMatrix, IEnumerable<string> sRowLablesIn, IEnumerable<string> sColumnLablesIn)
-
-//        /// <summary>
-//        /// Print string array
-//        /// </summary>
-//        public static void PrintStringArray(System.IO.TextWriter oWriter, string[] oArray)
-
-//        /// <summary>
-//        /// Print string array
-//        /// </summary>
-//        public static void PrintStringArray(string[] oArray)
-//
-//        /// <summary>
-//        /// Set tolerance
-//        /// </summary>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_setTolerance")]
-//        public static extern void SetTolerance(double dTolerance);
-//        /// <summary>
-//        /// Validate structural matrices
-//        /// </summary>
-//        public static bool[] ValidateStructuralMatrices(  )
+//        void SetTolerance(double dTolerance);
+//        bool[] ValidateStructuralMatrices(  )
 
-//        /// <summary>
-//        /// Free matrix
-//        /// </summary>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_freeMatrix")]
-//        internal static extern void FreeMatrix(IntPtr matrix, int numRows);
-//
-//        /// <summary>
-//        /// Free vector
-//        /// </summary>
+//        void FreeMatrix(IntPtr matrix, int numRows);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_freeVector")]
-//        internal static extern void FreeVector(IntPtr vector);
-//
-//        /// Return Type: char*
+//        void FreeVector(IntPtr vector);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_analyzeWithFullyPivotedLU")]
-//        internal static extern int LibStructural_analyzeWithFullyPivotedLU(out IntPtr result, out int nLength);
-//
-//        /// Return Type: char*
+//        int LibStructural_analyzeWithFullyPivotedLU(out IntPtr result, out int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_analyzeWithFullyPivotedLUwithTests")]
-//        internal static extern int LibStructural_analyzeWithFullyPivotedLUwithTests(out IntPtr result, out int nLength);
-//
-//        /// Return Type: char*
+//        int LibStructural_analyzeWithFullyPivotedLUwithTests(out IntPtr result, out int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_analyzeWithLU")]
-//        internal static extern int LibStructural_analyzeWithLU(out IntPtr result, out int nLength);
-//
-//        /// Return Type: char*
+//        int LibStructural_analyzeWithLU(out IntPtr result, out int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_analyzeWithLUandRunTests")]
-//        internal static extern int LibStructural_analyzeWithLUandRunTests(out IntPtr result, out int nLength);
-//
-//
-//        /// Return Type: char*
+//        int LibStructural_analyzeWithLUandRunTests(out IntPtr result, out int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_analyzeWithQR")]
-//        internal static extern int LibStructural_analyzeWithQR(out IntPtr result, out int nLength);
-//
-//        /// <summary>
-//        /// get column reordered number matrix
-//        /// </summary>
+//        int LibStructural_analyzeWithQR(out IntPtr result, out int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getColumnReorderedNrMatrix")]
-//        internal static extern int LibStructural_getColumnReorderedNrMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get column reordered number matrix labels
-//        /// </summary>
+//        int LibStructural_getColumnReorderedNrMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getColumnReorderedNrMatrixLabels")]
-//        internal static extern int LibStructural_getColumnReorderedNrMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
-//
-//        //Returns algebraic expressions for conserved cycles
-//        //LIB_EXTERN  int LibStructural_getConservedLaws(char** &outArray, int &outLength);
-//        /// <summary>
-//        /// get conserved entities
-//        /// </summary>
+//        int LibStructural_getColumnReorderedNrMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getConservedLaws")]
-//        internal static extern int LibStructural_getConservedLaws(out IntPtr outArray, out int outLength);
-//
-//        //Returns values for conserved cycles using Initial conditions
-//        //LIB_EXTERN int LibStructural_getConservedSums(double* &outArray, int &outLength);
-//        /// <summary>
-//        /// get conserved sums
-//        /// </summary>
+//        int LibStructural_getConservedLaws(out IntPtr outArray, out int outLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getConservedSums")]
-//        internal static extern int LibStructural_getConservedSums(out IntPtr outArray, out int outLength);
-//
-//        /// <summary>
-//        /// get dependent reaction ids
-//        /// </summary>
+//        int LibStructural_getConservedSums(out IntPtr outArray, out int outLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getDependentReactionIds")]
-//        internal static extern int LibStructural_getDependentReactionIds(out IntPtr outArray, out int outLength);
-//
-//        /// <summary>
-//        /// get dependent species ids
-//        /// </summary>
+//        int LibStructural_getDependentReactionIds(out IntPtr outArray, out int outLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getDependentSpeciesIds")]
-//        internal static extern int LibStructural_getDependentSpeciesIds(out IntPtr outArray, out int outLength);
-//
+//        LibStructural_getDependentSpeciesIds(out IntPtr outArray, out int outLength);
+
 //        //[DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNthReorderedSpeciesId")]
 //        //internal static extern int LibStructural_getNthReorderedSpeciesId(int n, out IntPtr result, out int nLength);
 //        //public static string GetNthReorderedSpeciesId(int n)
 
-//        ///// Return Type: char*
-//        /////n: int
 //        //[DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNthIndependentSpeciesId")]
 //        //internal static extern int LibStructural_getNthIndependentSpeciesId(int n, out IntPtr result, out int nLength);
 //        //public static string GetNthIndependentSpeciesId(int n)
 
-//        ///// Return Type: char*
-//        /////n: int
 //        //[DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNthDependentSpeciesId")]
 //        //internal static extern int LibStructural_getNthDependentSpeciesId(int n, out IntPtr result, out int nLength);
 //        //public static string GetNthDependentSpeciesId(int n)
 
-//        ///// Return Type: char*
-//        /////n: int
 //        //[DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNthReactionId")]
 //        //internal static extern int LibStructural_getNthReactionId(int n, out IntPtr result, out int nLength);
 //        //public static string GetNthReactionId(int n)
 
-//        /// <summary>
-//        /// get Gamma matrix
-//        /// </summary>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getGammaMatrix")]
-//        internal static extern int LibStructural_getGammaMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get Gamma matrix labels
-//        /// </summary>
+//        int LibStructural_getGammaMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getGammaMatrixLabels")]
-//        internal static extern int LibStructural_getGammaMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+//        int LibStructural_getGammaMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
 //
-//        /// <summary>
-//        /// get independent reaction ids
-//        /// </summary>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getIndependentReactionIds")]
-//        internal static extern int LibStructural_getIndependentReactionIds(out IntPtr outArray, out int outLength);
-//
-//        /// <summary>
-//        /// get independent species ids
-//        /// </summary>
+//        int LibStructural_getIndependentReactionIds(out IntPtr outArray, out int outLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getIndependentSpeciesIds")]
-//        internal static extern int LibStructural_getIndependentSpeciesIds(out IntPtr outArray, out int outLength);
-//
-//
-//        /// Return Type: void
-//        ///dTolerance: double
+//        int LibStructural_getIndependentSpeciesIds(out IntPtr outArray, out int outLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getInitialConditions")]
-//        internal static extern int LibStructural_getInitialConditions(out IntPtr outVariableNames, out IntPtr outValues, out int outLength);
-//
-//        /// <summary>
-//        /// get K0 matrix
-//        /// </summary>
+//        int LibStructural_getInitialConditions(out IntPtr outVariableNames, out IntPtr outValues, out int outLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getK0Matrix")]
-//        internal static extern int LibStructural_getK0Matrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get K0 matrix labels
-//        /// </summary>
+//        int LibStructural_getK0Matrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getK0MatrixLabels")]
-//        internal static extern int LibStructural_getK0MatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
-//
-//        /// <summary>
-//        /// get K matrix
-//        /// </summary>
+//        int LibStructural_getK0MatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getKMatrix")]
-//        internal static extern int LibStructural_getKMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get K matrix labels
-//        /// </summary>
+//        int LibStructural_getKMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getKMatrixLabels")]
-//        internal static extern int LibStructural_getKMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
-//
-//        /// Return Type: int
-//        ///outMatrix: double**
-//        ///outRows: int*
-//        ///outCols: int*
+//        int LibStructural_getKMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getL0Matrix")]
-//        internal static extern int LibStructural_getL0Matrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get L0 matrix labels
-//        /// </summary>
+//        int LibStructural_getL0Matrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getL0MatrixLabels")]
-//        internal static extern int LibStructural_getL0MatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
-//
-//        /// <summary>
-//        /// get L matrix (link matrix)
-//        /// </summary>
+//        int LibStructural_getL0MatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getLinkMatrix")]
-//        internal static extern int LibStructural_getLinkMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get L matrix labels
-//        /// </summary>
+//        int LibStructural_getLinkMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getLinkMatrixLabels")]
-//        internal extern static int LibStructural_getLMatrixLabels(out System.IntPtr outRowLabels,
+//        int LibStructural_getLMatrixLabels(out System.IntPtr outRowLabels,
 //            out int outRowCount,
 //            out IntPtr outColLabels,
 //            out int outColCount);
 //
-//        /// <summary>
-//        /// get model name
-//        /// </summary>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getModelName")]
-//        internal static extern int LibStructural_getModelName(out IntPtr result, out int nLength);
+//        int LibStructural_getModelName(out IntPtr result, out int nLength);
 //
-//        /// Return Type: int
-//        ///outMatrix: double**
-//        ///outRows: int*
-//        ///outCols: int*
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getN0Matrix")]
-//        internal static extern int LibStructural_getN0Matrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get N0 matrix labels
-//        /// </summary>
+//        int LibStructural_getN0Matrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getN0MatrixLabels")]
-//        internal static extern int LibStructural_getN0MatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
-//
+//        int LibStructural_getN0MatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNDCMatrix")]
-//        internal static extern int LibStructural_getNDCMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get NDC matrix labels
-//        /// </summary>
+//        int LibStructural_getNDCMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNDCMatrixLabels")]
-//        internal static extern int LibStructural_getNDCMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+//        int LibStructural_getNDCMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
 //
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNICMatrix")]
-//        internal static extern int LibStructural_getNICMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+//        int LibStructural_getNICMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
 //
-//        /// <summary>
-//        /// get N0 matrix labels
-//        /// </summary>
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNICMatrixLabels")]
-//        internal static extern int LibStructural_getNICMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
-//
-//        /// <summary>
-//        /// get number matrix
-//        /// </summary>
+//        int LibStructural_getNICMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNrMatrix")]
-//        internal static extern int LibStructural_getNrMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get number matrix labels
-//        /// </summary>
+//        int LibStructural_getNrMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNrMatrixLabels")]
-//        internal static extern int LibStructural_getNrMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
-//
-//        //Returns the list of Reactions
-//        //LIB_EXTERN  int LibStructural_getReactionIds(char** &outArray, int &outLength);
-//        /// <summary>
-//        /// get reaction ids
-//        /// </summary>
+//        int LibStructural_getNrMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getReactionIds")]
-//        internal static extern int LibStructural_getReactionIds(out IntPtr outArray, out int outLength);
-//
-//        /// <summary>
-//        /// get reordered reaction ids
-//        /// </summary>
+//        int LibStructural_getReactionIds(out IntPtr outArray, out int outLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getReorderedReactionIds")]
-//        internal static extern int LibStructural_getReorderedReactionIds(out IntPtr outArray, out int outLength);
-//
-//        //Returns the reordered list of species
-//        //LIB_EXTERN  int LibStructural_getReorderedSpeciesIds(char** &outArray, int &outLength);
-//        /// <summary>
-//        /// get reordered species ids
-//        /// </summary>
+//        int LibStructural_getReorderedReactionIds(out IntPtr outArray, out int outLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getReorderedSpeciesIds")]
-//        internal static extern int LibStructural_getReorderedSpeciesIds(out IntPtr outArray, out int outLength);
-//
-//        /// <summary>
-//        /// get reordered stoichiometry matrix
-//        /// </summary>
+//        int LibStructural_getReorderedSpeciesIds(out IntPtr outArray, out int outLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getReorderedStoichiometryMatrix")]
-//        internal static extern int LibStructural_getReorderedStoichiometryMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get reordered stoichiometry matrix labels
-//        /// </summary>
+//        int LibStructural_getReorderedStoichiometryMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getReorderedStoichiometryMatrixLabels")]
-//        internal static extern int LibStructural_getReorderedStoichiometryMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
-//
-//        /// <summary>
-//        /// get fully reordered stoichiometry matrix
-//        /// </summary>
+//        int LibStructural_getReorderedStoichiometryMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getFullyReorderedStoichiometryMatrix", CallingConvention=CallingConvention.Cdecl)]
-//        internal static extern int LibStructural_getFullyReorderedStoichiometryMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get fully reordered stoichiometry matrix labels
-//        /// </summary>
+//        int LibStructural_getFullyReorderedStoichiometryMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getFullyReorderedStoichiometryMatrixLabels")]
-//        internal static extern int LibStructural_getFullyReorderedStoichiometryMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
-//
-//        /// <summary>
-//        /// get species ids
-//        /// </summary>
+//        int LibStructural_getFullyReorderedStoichiometryMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getSpeciesIds")]
-//        internal static extern int LibStructural_getSpeciesIds(out IntPtr outArray, out int outLength);
-//
-//        ///// Return Type: double
-//        /////n: int
+//        int LibStructural_getSpeciesIds(out IntPtr outArray, out int outLength);
+
 //        //[DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNthConservedSum")]
 //        //public static extern double GetNthConservedSum(int n);
-//
-//        /// Return Type: int
-//        ///outMatrix: double**
-//        ///outRows: int*
-//        ///outCols: int*
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getStoichiometryMatrix")]
-//        internal static extern int LibStructural_getStoichiometryMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// get stoichiometry matrix labels
-//        /// </summary>
+//        int LibStructural_getStoichiometryMatrix(out System.IntPtr outMatrix, out int outRows, out int outCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getStoichiometryMatrixLabels")]
-//        internal static extern int LibStructural_getStoichiometryMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
-//
-//        /// <summary>
-//        /// get test details
-//        /// </summary>
+//        int LibStructural_getStoichiometryMatrixLabels(out System.IntPtr outRowLabels, out int outRowCount, out IntPtr outColLabels, out int outColCount);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getTestDetails")]
-//        internal static extern int LibStructural_getTestDetails(out IntPtr result, out int nLength);
-//
-//        /// <summary>
-//        /// load reaction names
-//        /// </summary>
+//        int LibStructural_getTestDetails(out IntPtr result, out int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_loadReactionNames", CharSet=CharSet.Ansi)]
-//        internal static extern void LibStructural_loadReactionNames(IntPtr reactionNames, int nLength);
-//
-//        /// Return Type: char*
-//        ///sSBML: char*
+//        void LibStructural_loadReactionNames(IntPtr reactionNames, int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_loadSBML", CharSet=CharSet.Ansi)]
-//        internal static extern int LibStructural_loadSBML(string sSBML, out IntPtr result, out int nLength);
-//
+//        int LibStructural_loadSBML(string sSBML, out IntPtr result, out int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_loadSBMLFromFile", CharSet = CharSet.Ansi)]
-//        internal static extern int LibStructural_loadSBMLFromFile(string sFileName, out IntPtr result, out int nLength);
-//
-//        /// Return Type: char*
-//        ///sSBML: char*
+//        int LibStructural_loadSBMLFromFile(string sFileName, out IntPtr result, out int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_loadSBMLwithTests", CharSet = CharSet.Ansi)]
-//        internal static extern int LibStructural_loadSBMLwithTests(string sSbml, out IntPtr result, out int nLength);
-//
-//        /// <summary>
-//        /// load species names and initial values
-//        /// </summary>
+//        int LibStructural_loadSBMLwithTests(string sSbml, out IntPtr result, out int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_loadSpecies",CharSet=CharSet.Ansi)]
-//        internal static extern void LibStructural_loadSpecies(IntPtr speciesNames, IntPtr speciesValues, int nLength);
-//
-//        /// <summary>
-//        /// load a new stoichiometry matrix and reset current loaded model
-//        /// </summary>
+//        void LibStructural_loadSpecies(IntPtr speciesNames, IntPtr speciesValues, int nLength);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_loadStoichiometryMatrix")]
-//        internal static extern int LibStructural_loadStoichiometryMatrix (IntPtr oMatrix, int nRows, int nCols);
-//
-//        /// <summary>
-//        /// validate structural matrices
-//        /// </summary>
+//        int LibStructural_loadStoichiometryMatrix (IntPtr oMatrix, int nRows, int nCols);
+
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_validateStructuralMatrices")]
-//        internal static extern int LibStructural_validateStructuralMatrices(out System.IntPtr outResults, out int outLength);
-//
-//        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getGammaMatrixGJ")]
-//        private static extern int LibStructural_getGammaMatrixGJ(System.IntPtr inMatrix, int numRows, int numCols,
-//            out System.IntPtr outMatrix, out int outRows, out int outCols);
-//
-//        /// <summary>
-//        /// double** inMatrix, int numRows, int numCols,
-//        /// const char** inRowLabels,  const char** inColLabels,
-//        /// double** *outMatrix, int *outRows, int *outCols,
-//        /// char** *outRowLabels, int *outRowCount, char** *outColLabels, int *outColCount
-//        /// </summary>
-//        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_findPositiveGammaMatrix")]
-//        private static extern int LibStructural_findPositiveGammaMatrix(
-//            System.IntPtr inMatrix, int numRows, int numCols,
-//            IntPtr inRowLabels,
-//            out System.IntPtr outMatrix, out int outRows, out int outCols,
-//            out System.IntPtr outRowLabels, out int outRowCount);
+//        int LibStructural_validateStructuralMatrices(out System.IntPtr outResults, out int outLength);
 };
 
 }
-
 #endif
+
+
+//////////////////////////////////////////////
+//////////////////////////////////////////////
 ////C# originals...
 ////namespace libstructural
 ////{
