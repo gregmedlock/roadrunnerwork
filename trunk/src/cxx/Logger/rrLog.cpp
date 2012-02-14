@@ -1,9 +1,9 @@
 #ifdef MTK_PCH
-#include "mtk_pch.h"
+#include "rr_pch.h"
 #endif
 #pragma hdrstop
 #include <string>
-#include "mtkLog.h"
+#include "rrLog.h"
 #ifdef __CODEGEARC__
 #pragma package(smart_init)
 #endif
@@ -11,42 +11,42 @@
 namespace rr
 {
 
-template class mtkLog<mtkLogOutput>;
+template class rrLog<rrLogOutput>;
 
 template <>
-mtkLog<mtkLogOutput>::mtkLog()
+rrLog<rrLogOutput>::rrLog()
 {}
 
 template <>
-mtkLog<mtkLogOutput>::~mtkLog()
+rrLog<rrLogOutput>::~rrLog()
 {
     mOutputStream << std::endl;
-    mtkLogOutput::Output(mOutputStream.str(), mCurrentLogLevel);
+    rrLogOutput::Output(mOutputStream.str(), mCurrentLogLevel);
 }
 
 template <>
-std::ostringstream& mtkLog<mtkLogOutput>::Get(const mtkLogLevel& level)
+std::ostringstream& rrLog<rrLogOutput>::Get(const rrLogLevel& level)
 {
     mCurrentLogLevel = level;
 
-    if(mtkLogOutput::mShowLogPrefix)
+    if(rrLogOutput::mShowLogPrefix)
     {
 		mOutputStream << gLogging.GetLogPrefix() <<" ";
     }
 
-    if(mtkLogOutput::mShowLogTime)
+    if(rrLogOutput::mShowLogTime)
     {
         mOutputStream << GetLogTime(true);
     }
 
-    if(mtkLogOutput::mUseLogTabs)
+    if(rrLogOutput::mUseLogTabs)
     {
 		//Output tabs
 		mOutputStream << string(level > lInfo ? level - lInfo : 0, '\t');
 		mOutputStream << "\t";
     }
 
-    if(mtkLogOutput::mShowLogLevel)
+    if(rrLogOutput::mShowLogLevel)
     {
          mOutputStream << LogLevelToString(level) << ": "; //Next comes the log message
     }

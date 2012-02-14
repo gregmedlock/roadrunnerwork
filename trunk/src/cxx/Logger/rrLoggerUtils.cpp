@@ -1,10 +1,10 @@
 #ifdef MTK_PCH
-#include "mtk_pch.h"
+#include "rr_pch.h"
 #endif
 #pragma hdrstop
 #include <algorithm>
 #include <windows.h>
-#include "mtkLoggerUtils.h"
+#include "rrLoggerUtils.h"
 #ifdef __CODEGEARC__
 #pragma package(smart_init)
 #endif
@@ -16,7 +16,7 @@ string GetLogTime(bool show_milli_sec)
     char buffer[MAX_LEN];
     if (GetTimeFormatA(LOCALE_USER_DEFAULT, 0, 0, "HH':'mm':'ss", buffer, MAX_LEN) == 0)
 	{
-        return "Error in mtk::GetTime()";
+        return "Error in rr::GetTime()";
     }
 
     char result[100] = {0};

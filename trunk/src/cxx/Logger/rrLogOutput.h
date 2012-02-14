@@ -1,17 +1,17 @@
-#ifndef mtkLogOutputH
-#define mtkLogOutputH
+#ifndef rrLogOutputH
+#define rrLogOutputH
 #include <sstream>
 #include <string>
 #include <stdio.h>
 #include "rrObject.h"
-#include "mtkLogLevel.h"
+#include "rrLogLevel.h"
 using std::string;
 using std::ostringstream;
 
 namespace rr
 {
 
-class RR_DECLSPEC mtkLogOutput : public rrObject
+class RR_DECLSPEC rrLogOutput : public rrObject
 {
 	public:
         static bool             mShowLogTime;
@@ -21,8 +21,8 @@ class RR_DECLSPEC mtkLogOutput : public rrObject
         static bool             mLogToMemo;
         static bool             mLogToConsole;
         static bool             mDoLogging;
-        						mtkLogOutput();
-	    static void             Output(const string& msg, const mtkLogLevel& lvl);
+        						rrLogOutput();
+	    static void             Output(const string& msg, const rrLogLevel& lvl);
         static void				StopLogging();
         static void				StartLogging();
 };

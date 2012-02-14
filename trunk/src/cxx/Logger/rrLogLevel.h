@@ -1,5 +1,5 @@
-#ifndef mtkLogLevelH
-#define mtkLogLevelH
+#ifndef rrLogLevelH
+#define rrLogLevelH
 //---------------------------------------------------------------------------
 #include <string>
 #include "rrExporter.h"
@@ -8,7 +8,7 @@ using std::string;
 namespace rr
 {
 
-RR_DECLSPEC enum  mtkLogLevel
+RR_DECLSPEC enum  rrLogLevel
     {
     	lUndef      = -1,
         lError      = 0,
@@ -26,9 +26,9 @@ RR_DECLSPEC enum  mtkLogLevel
 
 string 			RR_DECLSPEC ToUpperCase(const string& inStr);
 int 		    RR_DECLSPEC GetHighestLogLevel();
-mtkLogLevel     RR_DECLSPEC StringToLogLevel(const string& level);
-string          RR_DECLSPEC LogLevelToString(const mtkLogLevel& level);
-mtkLogLevel     RR_DECLSPEC IntToLogLevel(const int& lvl);
+rrLogLevel     RR_DECLSPEC StringToLogLevel(const string& level);
+string          RR_DECLSPEC LogLevelToString(const rrLogLevel& level);
+rrLogLevel     RR_DECLSPEC IntToLogLevel(const int& lvl);
 
 }
 #endif

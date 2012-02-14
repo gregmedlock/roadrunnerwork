@@ -1,16 +1,16 @@
 #ifdef MTK_PCH
-#include "mtk_pch.h"
+#include "rr_pch.h"
 #endif
 #pragma hdrstop
 //#include <fstream>
 #include <stdio.h>
-#include "mtkLogFile.h"
+#include "rrLogFile.h"
 #ifdef __CODEGEARC__
 #pragma package(smart_init)
 #endif
 
 using std::fstream;
-mtkLogFile::mtkLogFile(const char* name)
+rrLogFile::rrLogFile(const char* name)
 :
 mFileName(name),
 mFILEHandle(fopen(name, "w"))
@@ -22,7 +22,7 @@ mFILEHandle(fopen(name, "w"))
 
 }
 
-mtkLogFile::~mtkLogFile()
+rrLogFile::~rrLogFile()
 {
     fclose(mFILEHandle);
 }

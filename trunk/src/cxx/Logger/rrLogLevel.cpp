@@ -1,10 +1,10 @@
 #ifdef MTK_PCH
-#include "mtk_pch.h"
+#include "rr_pch.h"
 #endif
 #pragma hdrstop
 #include <algorithm>
 using namespace std;
-#include "mtkLogLevel.h"
+#include "rrLogLevel.h"
 #ifdef __CODEGEARC__
 #pragma package(smart_init)
 #endif
@@ -17,7 +17,7 @@ namespace rr
 using namespace std;
 int GetHighestLogLevel(){return lAny;}
 
-mtkLogLevel StringToLogLevel(const string& lvl)
+rrLogLevel StringToLogLevel(const string& lvl)
 {
 	string level = ToUpperCase(lvl);
 	if (level == "ANY") 	        return lAny;
@@ -34,7 +34,7 @@ mtkLogLevel StringToLogLevel(const string& lvl)
 	return lAny;
 }
 
-string LogLevelToString(const mtkLogLevel& level)
+string LogLevelToString(const rrLogLevel& level)
 {
     switch (level)
 	{
@@ -53,7 +53,7 @@ string LogLevelToString(const mtkLogLevel& level)
     }
 }
 
-mtkLogLevel IntToLogLevel(const int& level)
+rrLogLevel IntToLogLevel(const int& level)
 {
     switch (level) {
 

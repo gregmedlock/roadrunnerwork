@@ -4,7 +4,8 @@
 #include <string>
 #include <conio.h>
 #include <tchar.h>
-
+#include <dir.h>
+#include "Logger/mtkLogger.h"
 #include "rrException.h"
 #include "rrRoadRunner.h"
 
@@ -15,7 +16,13 @@ using namespace rr;
 #pragma argsused
 int _tmain(int argc, _TCHAR* argv[])
 {
+ 	char exePath[MAXPATH];
+   	getcwd(exePath, MAXPATH);
 
+	gLogging.Init("loadSBML", lDebug5,unique_ptr<mtkLogFile>(new mtkLogFile("LoadSBML.log")));
+	mtkLogOutput::mLogToConsole = true;
+    gLogging.SetCutOffLogLevel(lDebug3);
+	Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLogging.GetLogFileName()<< " (and cout)";
 	string modelsPath("C:\\RRW\\Testing\\models");
     string model(modelsPath + "\\feedback.xml");
     ifstream ifs(model.c_str());

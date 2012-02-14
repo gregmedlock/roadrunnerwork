@@ -1,17 +1,17 @@
 #ifdef MTK_PCH
-#include "mtk_pch.h"
+#include "rr_pch.h"
 #endif
 #pragma hdrstop
-#include "mtkLogging.h"
+#include "rrLogging.h"
 #ifdef __CODEGEARC__
 #pragma package(smart_init)
 #endif
 
-mtkLogging gLogging;
+rrLogging gLogging;
 
-int mtkLogging::mNrOfInstances = 0;
+int rrLogging::mNrOfInstances = 0;
 
-mtkLogging::mtkLogging()
+rrLogging::rrLogging()
 :
 //mLogFile(),
 mLogPrefix("none"),
@@ -21,7 +21,7 @@ mLogToServer(false)
 	mNrOfInstances++;
 }
 
-bool mtkLogging::Init(const string& logPrefix, const mtkLogLevel& level, unique_ptr<mtkLogFile> logFile)
+bool rrLogging::Init(const string& logPrefix, const rrLogLevel& level, unique_ptr<rrLogFile> logFile)
 {
     mLogPrefix = logPrefix;
     mLogLevel = level;
@@ -29,7 +29,7 @@ bool mtkLogging::Init(const string& logPrefix, const mtkLogLevel& level, unique_
  	return mLogFile.get() ? true : false;
 }
 
-string mtkLogging::GetLogFileName()
+string rrLogging::GetLogFileName()
 {
 	if(mLogFile)
     {
@@ -38,32 +38,32 @@ string mtkLogging::GetLogFileName()
     return string("<none>");
 }
 
-mtkLogging::~mtkLogging()
+rrLogging::~rrLogging()
 {
 	mNrOfInstances--;
 }
 
-mtkLogLevel mtkLogging::GetLogLevel()
+rrLogLevel rrLogging::GetLogLevel()
 {
 	return mLogLevel;
 }
 
-void mtkLogging::SetCutOffLogLevel(const mtkLogLevel& lvl)
+void rrLogging::SetCutOffLogLevel(const rrLogLevel& lvl)
 {
 	mLogLevel = lvl;
 }
 
-void mtkLogging::SetLogPrefix(const string& prefix)
+void rrLogging::SetLogPrefix(const string& prefix)
 {
 	mLogPrefix = prefix;
 }
 
-string mtkLogging::GetLogPrefix()
+string rrLogging::GetLogPrefix()
 {
 	return mLogPrefix;
 }
 
-void mtkLogging::write(const char* str)
+void rrLogging::write(const char* str)
 {
 	if(!mLogFile.get())
     {

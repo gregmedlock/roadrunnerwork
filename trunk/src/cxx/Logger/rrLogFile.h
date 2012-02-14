@@ -1,11 +1,9 @@
-#ifndef mtkLogFileH
-#define mtkLogFileH
+#ifndef rrLogFileH
+#define rrLogFileH
 #include <memory>
-//#include <fstream>
 #include <string>
-#include "rrExporter.h"
-#include "mtkLogLevel.h"
-//#include "rrObject.h"
+#include "rrLogLevel.h"
+#include "rrObject.h"
 
 using std::unique_ptr;
 using std::FILE;
@@ -13,17 +11,17 @@ using std::string;
 //Global class holding logfile and other settings. Persist trougout the life of the application that is using it. Based on RAII
 
 using namespace rr;
-class RR_DECLSPEC mtkLogFile //: public rrObject
+class RR_DECLSPEC rrLogFile : public rrObject
 {
 	private:
                     			// prevent copying and assignment
-                				mtkLogFile(const mtkLogFile& logFile);
-                				mtkLogFile& operator=(const mtkLogFile&);
+                				rrLogFile(const rrLogFile& logFile);
+                				rrLogFile& operator=(const rrLogFile&);
 		string					mFileName;
 
 	public:
-	  							mtkLogFile(const char* fName);
-			   				   ~mtkLogFile();
+	  							rrLogFile(const char* fName);
+			   				   ~rrLogFile();
 		FILE* 					mFILEHandle;
         string					GetFileName(){return mFileName;}
 };

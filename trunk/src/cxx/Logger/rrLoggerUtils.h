@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
-#ifndef mtkLoggerUtilsH
-#define mtkLoggerUtilsH
+#ifndef rrLoggerUtilsH
+#define rrLoggerUtilsH
 //---------------------------------------------------------------------------
 #include <string>
 #include "rrExporter.h"

@@ -1,37 +1,37 @@
 //---------------------------------------------------------------------------
-#ifndef mtkLoggingH
-#define mtkLoggingH
+#ifndef rrLoggingH
+#define rrLoggingH
 //---------------------------------------------------------------------------
 #include <memory>
 #include "stdio.h"
 #include "rrObject.h"
-#include "mtkLogLevel.h"
-#include "mtkLogFile.h"
+#include "rrLogLevel.h"
+#include "rrLogFile.h"
 using std::unique_ptr;
-//class mtkLogFile;
+//class rrLogFile;
 
 //Global class holding logfile and other settings. Persist trougout the life of the application that is using it. Based on RAII
 using namespace rr;
-class RR_DECLSPEC mtkLogging : public rrObject
+class RR_DECLSPEC rrLogging : public rrObject
 {
     private:
-        unique_ptr<mtkLogFile>  mLogFile;
+        unique_ptr<rrLogFile>  mLogFile;
         string		           	mLogPrefix;
-     	mtkLogLevel	           	mLogLevel;
+     	rrLogLevel	           	mLogLevel;
 		static int				mNrOfInstances;
 
 		        	           	// prevent copying and assignment
-        			           	mtkLogging(const mtkLogging& logFile);
-        			           	mtkLogging& operator=(const mtkLogging &);
+        			           	rrLogging(const rrLogging& logFile);
+        			           	rrLogging& operator=(const rrLogging &);
 
     public:
-        		   		       	mtkLogging();
-       		   		   		   ~mtkLogging();
+        		   		       	rrLogging();
+       		   		   		   ~rrLogging();
         string			        GetLogPrefix();
         void			        SetLogPrefix(const string& prefix);
-        mtkLogLevel		        GetLogLevel();
-        void			        SetCutOffLogLevel(const mtkLogLevel& lvl);
-        bool			        Init(const string& logPrefix = "none", const mtkLogLevel& level = lDebug5, unique_ptr<mtkLogFile> logFile = unique_ptr<mtkLogFile>());
+        rrLogLevel		        GetLogLevel();
+        void			        SetCutOffLogLevel(const rrLogLevel& lvl);
+        bool			        Init(const string& logPrefix = "none", const rrLogLevel& level = lDebug5, unique_ptr<rrLogFile> logFile = unique_ptr<rrLogFile>());
         void 	   				write(const char* str);
         bool					mLogToServer;
         string					GetLogFileName();
@@ -39,5 +39,5 @@ class RR_DECLSPEC mtkLogging : public rrObject
 
 
 
-extern RR_DECLSPEC mtkLogging  gLogging;
+extern RR_DECLSPEC rrLogging  gLogging;
 #endif
