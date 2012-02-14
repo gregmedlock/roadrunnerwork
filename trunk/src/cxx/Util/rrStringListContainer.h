@@ -24,5 +24,6 @@ class RR_DECLSPEC StringListContainer : public rrObject
 };
 
 typedef StringListContainer ArrayList; //ArrayList is C# name..
+typedef StringListContainer StringCollection;
 }
 #endif

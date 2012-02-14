@@ -8,6 +8,7 @@
 #include "NOMLib.h"
 #include "rrObject.h"
 #include "rrStringListContainer.h"
+#include "rrHashTable.h"
 using std::vector;
 using std::string;
 using std::pair;
@@ -27,7 +28,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
 		Model				   *mModel;
 //        static SBMLDocument _oDoc;
 //        static Model _oModel;
-//        Hashtable _symbolTable = new Hashtable();
+        Hashtable _symbolTable;// = new Hashtable();
         ArrayList returnUnitDefinition(UnitDefinition oDefinition);
         const ASTNode* changeSymbol(ASTNode* node, const string& time, const int& targetType);
         ASTNode changeTimeToCSymbol(ASTNode* node, const string& name, const int& type);
@@ -42,7 +43,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         void AddMissingParameter(const string& parameterId, SBMLDocument *doc);
         void BuildSymbolTable();
         void ChangeNameToCSymbol(Model* model, const string& name, const int& type);
-        void ChangeParameterName(ASTNode* node, const string& sParameterName, const string& sPrefix);
+        void ChangeParameterName(ASTNode& node, const string& sParameterName, const string& sPrefix);
         void changePow(ASTNode* node);
         void changeSymbol(Model& oModel, const string& sTimeSymbol, const int& targetType);
         void changeTimeSymbol(Model& model, const string& timeSymbol);

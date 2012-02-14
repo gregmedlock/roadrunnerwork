@@ -187,6 +187,10 @@
 				<DependentOn>cxx\Util\rrException.h</DependentOn>
 				<BuildOrder>22</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="cxx\Util\rrHashTable.cpp">
+				<DependentOn>cxx\Util\rrHashTable.h</DependentOn>
+				<BuildOrder>46</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\Util\rrLibStructSupport.cpp">
 				<DependentOn>cxx\Util\rrLibStructSupport.h</DependentOn>
 				<BuildOrder>42</BuildOrder>

@@ -2441,52 +2441,52 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            }
 //        }
 //
-//        private static void modifyKineticLawsForLocalParameters(KineticLaw oLaw, string reactionId, Model oModel)
-//        {
-//            int numLocalParameters = (int)oLaw.getNumLocalParameters();
-//            if (numLocalParameters > 0)
-//            {
-//                var oList = new StringCollection();
-//                for (int j = numLocalParameters; j > 0; j--)
-//                {
-//                    var localParameter = (LocalParameter)oLaw.getLocalParameter(j - 1).clone();
-//                    string parameterId = localParameter.getId();// GetId(localParameter);
-//                    string sPrefix = reactionId + "_";
-//                    if (!oLaw.isSetMath())
-//                    {
-//                        if (oLaw.isSetFormula())
-//                        {
-//                            ASTNode node = libsbml.readMathMLFromString(oLaw.getFormula());
-//                            ChangeParameterName(node, parameterId, sPrefix);
-//                            string sNode = libsbml.formulaToString(node);
-//                            oLaw.setFormula(sNode);
-//                        }
-//                    }
-//                    else
-//                    {
-//                        ChangeParameterName(oLaw.getMath(), parameterId, sPrefix);
-//                    }
-//
-//                    Parameter p = oModel.createParameter();
-//                    p.setId(sPrefix + parameterId);
-//                    p.setNotes(localParameter.getNotesString());
-//                    p.setAnnotation(localParameter.getAnnotationString());
-//                    p.setConstant(true);
-//                    if (localParameter.isSetSBOTerm()) p.setSBOTerm(localParameter.getSBOTerm());
-//                    if (localParameter.isSetName()) p.setName(localParameter.getName());
-//                    if (localParameter.isSetMetaId()) p.setMetaId(localParameter.getMetaId());
-//                    if (localParameter.isSetValue()) p.setValue(localParameter.getValue());
-//                    if (localParameter.isSetUnits()) p.setUnits(localParameter.getUnits());
-//
-//                    var oTemp = (LocalParameter)oLaw.getListOfLocalParameters().remove(j - 1);
-//                    if (oTemp != NULL) oTemp.Dispose();
-//
-//                    oModel.addParameter(p);
-//                    if (localParameter != NULL) localParameter.Dispose();
-//                }
-//            }
-//        }
-//
+void NOMSupport::modifyKineticLawsForLocalParameters(KineticLaw& oLaw, const string& reactionId, Model& oModel)
+{
+    int numLocalParameters = (int)oLaw.getNumLocalParameters();
+    if (numLocalParameters > 0)
+    {
+        StringCollection oList;// = new StringCollection();
+        for (int j = numLocalParameters; j > 0; j--)
+        {
+            LocalParameter* localParameter = (LocalParameter*)oLaw.getLocalParameter(j - 1)->clone();
+            string parameterId = localParameter->getId();// GetId(localParameter);
+            string sPrefix = reactionId + "_";
+            if (!oLaw.isSetMath())
+            {
+                if (oLaw.isSetFormula())
+                {
+                    ASTNode *node = readMathMLFromString(oLaw.getFormula().c_str());
+                    ChangeParameterName(*node, parameterId, sPrefix);
+                    string sNode = SBML_formulaToString(node);
+                    oLaw.setFormula(sNode);
+                }
+            }
+            else
+            {
+                ChangeParameterName(*((ASTNode*) oLaw.getMath()), parameterId, sPrefix);
+            }
+
+            Parameter *p = oModel.createParameter();
+            p->setId(sPrefix + parameterId);
+            p->setNotes(localParameter->getNotesString());
+            p->setAnnotation(localParameter->getAnnotationString());
+            p->setConstant(true);
+            if (localParameter->isSetSBOTerm()) p->setSBOTerm(localParameter->getSBOTerm());
+            if (localParameter->isSetName()) p->setName(localParameter->getName());
+            if (localParameter->isSetMetaId()) p->setMetaId(localParameter->getMetaId());
+            if (localParameter->isSetValue()) p->setValue(localParameter->getValue());
+            if (localParameter->isSetUnits()) p->setUnits(localParameter->getUnits());
+
+            LocalParameter* oTemp = (LocalParameter*) oLaw.getListOfLocalParameters()->remove(j - 1);
+            //if (oTemp != NULL) oTemp.Dispose();
+
+            oModel.addParameter(p);
+            //if (localParameter != NULL) localParameter.Dispose();
+        }
+    }
+}
+
 
 void NOMSupport::modifyKineticLawsForReaction(KineticLaw& oLaw, const string& reactionId, Model& oModel)
 {
@@ -2504,7 +2504,7 @@ void NOMSupport::modifyKineticLawsForReaction(KineticLaw& oLaw, const string& re
                 if (oLaw.isSetFormula())
                 {
                     ASTNode *node = readMathMLFromString(oLaw.getFormula().c_str());
-                    ChangeParameterName(node, parameterId, sPrefix);
+                    ChangeParameterName(*node, parameterId, sPrefix);
 //                    string sNode = formulaToString(node);
 					string sNode = SBML_formulaToString(node);
                     oLaw.setFormula(sNode);
@@ -2512,7 +2512,7 @@ void NOMSupport::modifyKineticLawsForReaction(KineticLaw& oLaw, const string& re
             }
             else
             {
-                ChangeParameterName((ASTNode*)oLaw.getMath(), parameterId, sPrefix);
+                ChangeParameterName( *(ASTNode*)oLaw.getMath(), parameterId, sPrefix);
             }
             Parameter *oTemp = (Parameter*)oLaw.getListOfParameters()->remove(j - 1);
             if (oTemp != NULL)
@@ -2564,34 +2564,34 @@ void NOMSupport::modifyKineticLaws(SBMLDocument& oSBMLDoc, Model& oModel)
     }
 }
 
-//        private static void ChangeParameterName(ASTNode node, string sParameterName, string sPrefix)
-//        {
-//            int c;
+void NOMSupport::ChangeParameterName(ASTNode& node, const string& sParameterName, const string& sPrefix)
+{
+    int c;
+
+    if (node.isName() && node.getName() == sParameterName)
+    {
+        node.setName( string(sPrefix + sParameterName).c_str());
+    }
+
+    for (c = 0; c < node.getNumChildren(); c++)
+    {
+        ChangeParameterName( *node.getChild(c), sParameterName, sPrefix);
+    }
+}
+
+string NOMSupport::getSBML()
+{
+//    if (mModel == NULL)
+//    {
+//        throw Exception("You need to load the model first");
+//    }
 //
-//            if (node.isName() && node.getName() == sParameterName)
-//            {
-//                node.setName(sPrefix + sParameterName);
-//            }
+//    if (_ParameterSets != NULL && mModel != NULL)
+//        _ParameterSets.AddToModel(mModel);
 //
-//            for (c = 0; c < node.getNumChildren(); c++)
-//            {
-//                ChangeParameterName(node.getChild(c), sParameterName, sPrefix);
-//            }
-//        }
-//
-//        public static string getSBML()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            if (_ParameterSets != NULL && mModel != NULL)
-//                _ParameterSets.AddToModel(mModel);
-//
-//            return libsbml.writeSBMLToString(_oDoc);
-//        }
-//
+//    return libsbml.writeSBMLToString(_oDoc);
+}
+
 //        public static int getSBOTerm(string sId)
 //        {
 //            if (mModel == NULL)
@@ -2876,143 +2876,143 @@ void NOMSupport::modifyKineticLaws(SBMLDocument& oSBMLDoc, Model& oModel)
 //            return result;
 //        }
 //
-//        /// <summary>
-//        /// Reorders assignment rules. In SBML assignment rules does not have to appear in the correct order.
-//        /// That is you could have an assignment rule A = B, and a rule B = C. Now the result would differ,
-//        /// if the first rule is evaluated before the second. Thus the rules will be reordered such that
-//        /// this will be taken care of.
-//        /// </summary>
-//        /// <param name="assignmentRules">assignment rules in original ordering</param>
-//        /// <returns>assignment rules in independent order</returns>
-//        public static List<Rule> ReorderAssignmentRules(List<Rule> assignmentRules)
+/// <summary>
+/// Reorders assignment rules. In SBML assignment rules does not have to appear in the correct order.
+/// That is you could have an assignment rule A = B, and a rule B = C. Now the result would differ,
+/// if the first rule is evaluated before the second. Thus the rules will be reordered such that
+/// this will be taken care of.
+/// </summary>
+/// <param name="assignmentRules">assignment rules in original ordering</param>
+/// <returns>assignment rules in independent order</returns>
+list<Rule> NOMSupport::ReorderAssignmentRules(list<Rule>& assignmentRules)
+{
+//    if (assignmentRules == NULL || assignmentRules.Count < 2)
+//        return assignmentRules;
+//
+    list<Rule> result;// = new List<Rule>();
+//    var allSymbols = new Dictionary<int, List<string>>();
+//    var map = new Dictionary<string, List<string>>();
+//    var idList = new List<string>();
+//
+//    // read id list, initialize all symbols
+//    for (int index = 0; index < assignmentRules.Count; index++)
+//    {
+//        var rule = (AssignmentRule)assignmentRules[index];
+//        var variable = rule.getVariable();
+//        if (!rule.isSetMath())
+//            allSymbols[index] = new List<string>();
+//        else
+//            allSymbols[index] = GetSymbols(rule.getMath());
+//        idList.Add(variable);
+//        map[variable] = new List<string>();
+//    }
+//
+//    // initialize order array
+//    var order = new int[assignmentRules.Count];
+//    for (int i = 0; i < assignmentRules.Count; i++)
+//    {
+//        order[i] = i;
+//    }
+//
+//    // build dependency graph
+//    foreach (var id in idList)
+//    {
+//        for (int index = 0; index < assignmentRules.Count; index++)
+//            if (allSymbols[index].Contains(id))
+//                map[(assignmentRules[index]).getVariable()].Add(id);
+//    }
+//
+//    // print dependency graph
+//    //foreach (var id in idList)
+//    //{
+//    //    System.Diagnostics.Debug.Write(id + " depends on: ");
+//    //    foreach (var symbol in map[id])
+//    //    {
+//    //        System.Diagnostics.Debug.Write(symbol + ", ");
+//    //    }
+//    //    System.Diagnostics.Debug.WriteLine("");
+//    //}
+//
+//
+//    // sort
+//    bool changed = true;
+//    while (changed)
+//    {
+//        changed = false;
+//        for (int i = 0; i < order.Length; i++)
 //        {
-//            if (assignmentRules == NULL || assignmentRules.Count < 2)
-//                return assignmentRules;
 //
-//            var result = new List<Rule>();
-//            var allSymbols = new Dictionary<int, List<string>>();
-//            var map = new Dictionary<string, List<string>>();
-//            var idList = new List<string>();
-//
-//            // read id list, initialize all symbols
-//            for (int index = 0; index < assignmentRules.Count; index++)
+//            var first = order[i];
+//            for (int j = i + 1; j < order.Length; j++)
 //            {
-//                var rule = (AssignmentRule)assignmentRules[index];
-//                var variable = rule.getVariable();
-//                if (!rule.isSetMath())
-//                    allSymbols[index] = new List<string>();
-//                else
-//                    allSymbols[index] = GetSymbols(rule.getMath());
-//                idList.Add(variable);
-//                map[variable] = new List<string>();
-//            }
+//                var second = order[j];
 //
-//            // initialize order array
-//            var order = new int[assignmentRules.Count];
-//            for (int i = 0; i < assignmentRules.Count; i++)
-//            {
-//                order[i] = i;
-//            }
+//                var secondVar = assignmentRules[second].getVariable();
+//                var firstVar = assignmentRules[first].getVariable();
 //
-//            // build dependency graph
-//            foreach (var id in idList)
-//            {
-//                for (int index = 0; index < assignmentRules.Count; index++)
-//                    if (allSymbols[index].Contains(id))
-//                        map[(assignmentRules[index]).getVariable()].Add(id);
-//            }
-//
-//            // print dependency graph
-//            //foreach (var id in idList)
-//            //{
-//            //    System.Diagnostics.Debug.Write(id + " depends on: ");
-//            //    foreach (var symbol in map[id])
-//            //    {
-//            //        System.Diagnostics.Debug.Write(symbol + ", ");
-//            //    }
-//            //    System.Diagnostics.Debug.WriteLine("");
-//            //}
-//
-//
-//            // sort
-//            bool changed = true;
-//            while (changed)
-//            {
-//                changed = false;
-//                for (int i = 0; i < order.Length; i++)
+//                if (map[firstVar].Contains(secondVar))
 //                {
+//                    // found dependency, swap and start over
+//                    order[i] = second;
+//                    order[j] = first;
 //
-//                    var first = order[i];
-//                    for (int j = i + 1; j < order.Length; j++)
-//                    {
-//                        var second = order[j];
-//
-//                        var secondVar = assignmentRules[second].getVariable();
-//                        var firstVar = assignmentRules[first].getVariable();
-//
-//                        if (map[firstVar].Contains(secondVar))
-//                        {
-//                            // found dependency, swap and start over
-//                            order[i] = second;
-//                            order[j] = first;
-//
-//                            changed = true;
-//                            break;
-//                        }
-//                    }
-//
-//                    // if swapped start over
-//                    if (changed)
-//                        break;
+//                    changed = true;
+//                    break;
 //                }
 //            }
 //
-//            // create new order
-//            for (int i = 0; i < order.Length; i++)
-//                result.Add(assignmentRules[order[i]]);
-//
-//
-//            return result;
-//
+//            // if swapped start over
+//            if (changed)
+//                break;
 //        }
+//    }
 //
-//        /// <summary>
-//        /// Reorders the Rules of the model in such a way, that AssignmentRules are calculated first, followed by Rate Rules and Algebraic Rules.
-//        /// </summary>
-//        /// <param name="doc">the document to use</param>
-//        /// <param name="model">the model to use</param>
-//        public static void ReorderRules(SBMLDocument doc, Model model)
-//        {
-//            var numRules = (int)model.getNumRules();
+//    // create new order
+//    for (int i = 0; i < order.Length; i++)
+//        result.Add(assignmentRules[order[i]]);
 //
-//            var assignmentRules = new List<Rule>();
-//            var rateRules = new List<Rule>();
-//            var algebraicRules = new List<Rule>();
-//
-//            for (int i = numRules - 1; i >= 0; i--)
-//            {
-//                var current = model.removeRule(i);
-//                switch (current.getTypeCode())
-//                {
-//                    case libsbml.SBML_ALGEBRAIC_RULE:
-//                        algebraicRules.Insert(0, current);
-//                        break;
-//                    case libsbml.SBML_RATE_RULE:
-//                        rateRules.Insert(0, current);
-//                        break;
-//                    default:
-//                    case libsbml.SBML_ASSIGNMENT_RULE:
-//                        assignmentRules.Insert(0, current);
-//                        break;
-//                }
-//            }
-//            assignmentRules = ReorderAssignmentRules(assignmentRules);
-//            assignmentRules.ForEach(item => model.addRule(item));
-//            rateRules.ForEach(item => model.addRule(item));
-//            algebraicRules.ForEach(item => model.addRule(item));
-//
-//        }
-//
+    return result;
+}
+
+/// <summary>
+/// Reorders the Rules of the model in such a way, that AssignmentRules are calculated first, followed by Rate Rules and Algebraic Rules.
+/// </summary>
+/// <param name="doc">the document to use</param>
+/// <param name="model">the model to use</param>
+void NOMSupport::ReorderRules(SBMLDocument& doc, Model& model)
+{
+    int numRules = (int) model.getNumRules();
+
+    list<Rule> assignmentRules;// = new List<Rule>();
+    list<Rule> rateRules;// = new List<Rule>();
+    list<Rule> algebraicRules;// = new List<Rule>();
+
+    for (int i = numRules - 1; i >= 0; i--)
+    {
+        Rule* current = model.removeRule(i);
+        switch (current->getTypeCode())
+        {
+            case SBML_ALGEBRAIC_RULE:
+                algebraicRules.push_front(*current);
+                break;
+            case SBML_RATE_RULE:
+                rateRules.push_front(*current);
+                break;
+            default:
+            case SBML_ASSIGNMENT_RULE:
+                assignmentRules.push_front(*current);
+                break;
+        }
+    }
+
+
+    assignmentRules = ReorderAssignmentRules(assignmentRules);
+    //TODO: Figure out what the following is doing!!..
+//    assignmentRules.ForEach(item => model.addRule(item));
+//    rateRules.ForEach(item => model.addRule(item));
+//    algebraicRules.ForEach(item => model.addRule(item));
+}
+
 void NOMSupport::loadSBML(const string& var0, const string& sTimeSymbol)
 {
     loadSBML(var0);
@@ -3046,59 +3046,59 @@ void NOMSupport::changeTimeSymbol(Model& model, const string& timeSymbol)
 //
 //        static Hashtable _symbolTable = new Hashtable();
 //
-//        static private void BuildSymbolTable()
-//        {
-//            _symbolTable = new Hashtable();
-//
-//            // Read CompartmentSymbols
-//            for (int i = 0; i < mModel.getNumCompartments(); i++)
-//            {
-//                Compartment temp = mModel.getCompartment(i);
-//
-//                SBMLSymbol symbol = new SBMLSymbol();
-//                symbol.Id = temp.getId();
-//                if (temp.isSetSize()) symbol.Value = temp.getSize();
-//                symbol.InitialAssignment = GetInitialAssignmentFor(symbol.Id);
-//                symbol.Rule = GetRuleFor(symbol.Id);
-//                symbol.Type = SBMLType.Compartment;
-//
-//                _symbolTable[symbol.Id] = symbol;
-//            }
-//
-//            // Read Parameter Symbols
-//            for (int i = 0; i < mModel.getNumParameters(); i++)
-//            {
-//                Parameter temp = mModel.getParameter(i);
-//
-//                SBMLSymbol symbol = new SBMLSymbol();
-//                symbol.Id = temp.getId();
-//                if (temp.isSetValue()) symbol.Value = temp.getValue();
-//                symbol.InitialAssignment = GetInitialAssignmentFor(symbol.Id);
-//                symbol.Rule = GetRuleFor(symbol.Id);
-//                symbol.Type = SBMLType.Parameter;
-//
-//                _symbolTable[symbol.Id] = symbol;
-//            }
-//
-//            // Read Species Symbols
-//            for (int i = 0; i < mModel.getNumSpecies(); i++)
-//            {
-//                libsbmlcs.Species temp = mModel.getSpecies(i);
-//
-//                SBMLSymbol symbol = new SBMLSymbol();
-//                symbol.Id = temp.getId();
-//                if (temp.isSetInitialConcentration()) symbol.Concentration = temp.getInitialConcentration();
-//                if (temp.isSetInitialAmount()) symbol.Amount = temp.getInitialAmount();
-//                symbol.InitialAssignment = GetInitialAssignmentFor(symbol.Id);
-//                symbol.Rule = GetRuleFor(symbol.Id);
-//                symbol.Type = SBMLType.Species;
-//
-//                _symbolTable[symbol.Id] = symbol;
-//            }
-//
-//            LookForDependencies();
-//        }
-//
+void NOMSupport::BuildSymbolTable()
+{
+//    _symbolTable;// = new Hashtable();
+
+    // Read CompartmentSymbols
+    for (int i = 0; i < mModel->getNumCompartments(); i++)
+    {
+        Compartment *temp = mModel->getCompartment(i);
+
+        SBMLSymbol symbol;// = new SBMLSymbol();
+        symbol.Id = temp->getId();
+        if (temp->isSetSize()) symbol->Value = temp->getSize();
+        symbol->InitialAssignment = GetInitialAssignmentFor(symbol->Id);
+        symbol->Rule = GetRuleFor(symbol->Id);
+        symbol->Type = SBMLType->Compartment;
+
+        _symbolTable[symbol->Id] = symbol;
+    }
+
+    // Read Parameter Symbols
+    for (int i = 0; i < mModel->getNumParameters(); i++)
+    {
+        Parameter temp = mModel->getParameter(i);
+
+        SBMLSymbol symbol = new SBMLSymbol();
+        symbol->Id = temp->getId();
+        if (temp->isSetValue()) symbol->Value = temp->getValue();
+        symbol->InitialAssignment = GetInitialAssignmentFor(symbol->Id);
+        symbol->Rule = GetRuleFor(symbol->Id);
+        symbol->Type = SBMLType->Parameter;
+
+        _symbolTable[symbol->Id] = symbol;
+    }
+
+    // Read Species Symbols
+    for (int i = 0; i < mModel->getNumSpecies(); i++)
+    {
+        libsbmlcs->Species temp = mModel->getSpecies(i);
+
+        SBMLSymbol symbol = new SBMLSymbol();
+        symbol->Id = temp->getId();
+        if (temp->isSetInitialConcentration()) symbol->Concentration = temp->getInitialConcentration();
+        if (temp->isSetInitialAmount()) symbol->Amount = temp->getInitialAmount();
+        symbol->InitialAssignment = GetInitialAssignmentFor(symbol->Id);
+        symbol->Rule = GetRuleFor(symbol->Id);
+        symbol->Type = SBMLType->Species;
+
+        _symbolTable[symbol->Id] = symbol;
+    }
+
+    LookForDependencies();
+}
+
 //        private static void LookForDependencies()
 //        {
 //            // Go through each found Id, and test for dependencies
