@@ -9,8 +9,10 @@
 #pragma package(smart_init)
 #endif
 
+namespace rr
+{
 using std::fstream;
-rrLogFile::rrLogFile(const char* name)
+LogFile::LogFile(const char* name)
 :
 mFileName(name),
 mFILEHandle(fopen(name, "w"))
@@ -19,11 +21,11 @@ mFILEHandle(fopen(name, "w"))
     {
         throw std::runtime_error("File Open failure");
     }
-
 }
 
-rrLogFile::~rrLogFile()
+LogFile::~LogFile()
 {
     fclose(mFILEHandle);
 }
 
+}

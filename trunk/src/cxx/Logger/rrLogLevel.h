@@ -8,7 +8,7 @@ using std::string;
 namespace rr
 {
 
-RR_DECLSPEC enum  rrLogLevel
+RR_DECLSPEC enum  LogLevel
     {
     	lUndef      = -1,
         lError      = 0,
@@ -24,11 +24,11 @@ RR_DECLSPEC enum  rrLogLevel
         lUser
     };
 
-string 			RR_DECLSPEC ToUpperCase(const string& inStr);
-int 		    RR_DECLSPEC GetHighestLogLevel();
-rrLogLevel     RR_DECLSPEC StringToLogLevel(const string& level);
-string          RR_DECLSPEC LogLevelToString(const rrLogLevel& level);
-rrLogLevel     RR_DECLSPEC IntToLogLevel(const int& lvl);
+string 	  		RR_DECLSPEC ToUpperCase(const string& inStr);
+int 		   	RR_DECLSPEC GetHighestLogLevel();
+LogLevel     	RR_DECLSPEC StringToLogLevel(const string& level);
+string          RR_DECLSPEC LogLevelToString(const LogLevel& level);
+LogLevel     	RR_DECLSPEC IntToLogLevel(const int& lvl);
 
 }
 #endif

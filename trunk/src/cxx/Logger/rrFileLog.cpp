@@ -2,16 +2,19 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
-#include "rrLogging.h"
+#include "rrFileLog.h"
 #ifdef __CODEGEARC__
 #pragma package(smart_init)
 #endif
 
-rrLogging gLogging;
+namespace rr
+{
 
-int rrLogging::mNrOfInstances = 0;
+FileLog gLog;
 
-rrLogging::rrLogging()
+int FileLog::mNrOfInstances = 0;
+
+FileLog::FileLog()
 :
 //mLogFile(),
 mLogPrefix("none"),
@@ -21,7 +24,7 @@ mLogToServer(false)
 	mNrOfInstances++;
 }
 
-bool rrLogging::Init(const string& logPrefix, const rrLogLevel& level, unique_ptr<rrLogFile> logFile)
+bool FileLog::Init(const string& logPrefix, const LogLevel& level, unique_ptr<LogFile> logFile)
 {
     mLogPrefix = logPrefix;
     mLogLevel = level;
@@ -29,7 +32,7 @@ bool rrLogging::Init(const string& logPrefix, const rrLogLevel& level, unique_pt
  	return mLogFile.get() ? true : false;
 }
 
-string rrLogging::GetLogFileName()
+string FileLog::GetLogFileName()
 {
 	if(mLogFile)
     {
@@ -38,32 +41,32 @@ string rrLogging::GetLogFileName()
     return string("<none>");
 }
 
-rrLogging::~rrLogging()
+FileLog::~FileLog()
 {
 	mNrOfInstances--;
 }
 
-rrLogLevel rrLogging::GetLogLevel()
+LogLevel FileLog::GetLogLevel()
 {
 	return mLogLevel;
 }
 
-void rrLogging::SetCutOffLogLevel(const rrLogLevel& lvl)
+void FileLog::SetCutOffLogLevel(const LogLevel& lvl)
 {
 	mLogLevel = lvl;
 }
 
-void rrLogging::SetLogPrefix(const string& prefix)
+void FileLog::SetLogPrefix(const string& prefix)
 {
 	mLogPrefix = prefix;
 }
 
-string rrLogging::GetLogPrefix()
+string FileLog::GetLogPrefix()
 {
 	return mLogPrefix;
 }
 
-void rrLogging::write(const char* str)
+void FileLog::write(const char* str)
 {
 	if(!mLogFile.get())
     {
@@ -77,3 +80,4 @@ void rrLogging::write(const char* str)
     }
 }
 
+}

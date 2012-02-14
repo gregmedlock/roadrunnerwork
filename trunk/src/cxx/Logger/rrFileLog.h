@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
-#ifndef rrLoggingH
-#define rrLoggingH
+#ifndef rrFileLogH
+#define rrFileLogH
 //---------------------------------------------------------------------------
 #include <memory>
 #include "stdio.h"
@@ -11,33 +11,35 @@ using std::unique_ptr;
 //class rrLogFile;
 
 //Global class holding logfile and other settings. Persist trougout the life of the application that is using it. Based on RAII
-using namespace rr;
-class RR_DECLSPEC rrLogging : public rrObject
+namespace rr
+{
+
+class RR_DECLSPEC FileLog : public rrObject
 {
     private:
-        unique_ptr<rrLogFile>  mLogFile;
+        unique_ptr<LogFile>  	mLogFile;
         string		           	mLogPrefix;
-     	rrLogLevel	           	mLogLevel;
+     	LogLevel	           	mLogLevel;
 		static int				mNrOfInstances;
 
 		        	           	// prevent copying and assignment
-        			           	rrLogging(const rrLogging& logFile);
-        			           	rrLogging& operator=(const rrLogging &);
+        			           	FileLog(const FileLog& logFile);
+        FileLog& 				operator=(const FileLog &);
 
     public:
-        		   		       	rrLogging();
-       		   		   		   ~rrLogging();
+        		   		       	FileLog();
+       		   		   		   ~FileLog();
         string			        GetLogPrefix();
         void			        SetLogPrefix(const string& prefix);
-        rrLogLevel		        GetLogLevel();
-        void			        SetCutOffLogLevel(const rrLogLevel& lvl);
-        bool			        Init(const string& logPrefix = "none", const rrLogLevel& level = lDebug5, unique_ptr<rrLogFile> logFile = unique_ptr<rrLogFile>());
+        LogLevel		        GetLogLevel();
+        void			        SetCutOffLogLevel(const LogLevel& lvl);
+        bool			        Init(const string& logPrefix = "none", const LogLevel& level = lDebug5, unique_ptr<LogFile> logFile = unique_ptr<LogFile>());
         void 	   				write(const char* str);
         bool					mLogToServer;
         string					GetLogFileName();
 };
 
+extern RR_DECLSPEC FileLog  gLog;
+}
 
-
-extern RR_DECLSPEC rrLogging  gLogging;
 #endif

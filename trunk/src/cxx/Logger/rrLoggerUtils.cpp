@@ -9,6 +9,8 @@
 #pragma package(smart_init)
 #endif
 
+namespace rr
+{
 //---------------------------------------------------------------------------
 string GetLogTime(bool show_milli_sec)
 {
@@ -31,3 +33,6 @@ string GetLogTime(bool show_milli_sec)
     	return string(buffer);
     }
 }
+
+}
+

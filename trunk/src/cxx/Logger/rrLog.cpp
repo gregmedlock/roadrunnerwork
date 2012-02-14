@@ -11,47 +11,46 @@
 namespace rr
 {
 
-template class rrLog<rrLogOutput>;
+template class LogContainer<LogOutput>;
 
 template <>
-rrLog<rrLogOutput>::rrLog()
+LogContainer<LogOutput>::LogContainer()
 {}
 
 template <>
-rrLog<rrLogOutput>::~rrLog()
+LogContainer<LogOutput>::~LogContainer()
 {
     mOutputStream << std::endl;
-    rrLogOutput::Output(mOutputStream.str(), mCurrentLogLevel);
+    LogOutput::Output(mOutputStream.str(), mCurrentLogLevel);
 }
 
 template <>
-std::ostringstream& rrLog<rrLogOutput>::Get(const rrLogLevel& level)
+std::ostringstream& LogContainer<LogOutput>::Get(const LogLevel& level)
 {
     mCurrentLogLevel = level;
 
-    if(rrLogOutput::mShowLogPrefix)
+    if(LogOutput::mShowLogPrefix)
     {
-		mOutputStream << gLogging.GetLogPrefix() <<" ";
+		mOutputStream << gLog.GetLogPrefix() <<" ";
     }
 
-    if(rrLogOutput::mShowLogTime)
+    if(LogOutput::mShowLogTime)
     {
         mOutputStream << GetLogTime(true);
     }
 
-    if(rrLogOutput::mUseLogTabs)
+    if(LogOutput::mUseLogTabs)
     {
 		//Output tabs
 		mOutputStream << string(level > lInfo ? level - lInfo : 0, '\t');
 		mOutputStream << "\t";
     }
 
-    if(rrLogOutput::mShowLogLevel)
+    if(LogOutput::mShowLogLevel)
     {
          mOutputStream << LogLevelToString(level) << ": "; //Next comes the log message
     }
 	return mOutputStream;
 }
 
-
-}//namespace rr
+}//namespace

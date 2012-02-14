@@ -3,7 +3,7 @@
 #endif
 #pragma hdrstop
 #include <string>
-#include "rrLogging.h"
+#include "rrFileLog.h"
 #include "rrLogOutput.h"
 #ifdef __CODEGEARC__
 #pragma package(smart_init)
@@ -12,27 +12,26 @@
 namespace rr
 {
 
-bool          		rrLogOutput::mLogToConsole 	= false;
-bool          		rrLogOutput::mShowLogTime 	= false;
-bool          		rrLogOutput::mShowLogPrefix	= false;
-bool          		rrLogOutput::mShowLogLevel	= false;
-bool          		rrLogOutput::mUseLogTabs		= false;
-bool          		rrLogOutput::mDoLogging		= true;
+bool          		LogOutput::mDoLogging		= true;
+bool          		LogOutput::mLogToConsole 	= false;
+bool          		LogOutput::mShowLogTime 	= false;
+bool          		LogOutput::mShowLogPrefix	= false;
+bool          		LogOutput::mShowLogLevel	= false;
+bool          		LogOutput::mUseLogTabs		= false;
 
+LogOutput::LogOutput(){}
 
-rrLogOutput::rrLogOutput(){}
-
-void rrLogOutput::StopLogging()
+void LogOutput::StopLogging()
 {
 	mDoLogging = false;
 }
 
-void rrLogOutput::StartLogging()
+void LogOutput::StartLogging()
 {
 	mDoLogging = true;
 }
 
-void rrLogOutput::Output(const string& msg, const rrLogLevel& /*lvl*/)
+void LogOutput::Output(const string& msg, const LogLevel& /*lvl*/)
 {
     if(!mDoLogging)
     {
@@ -40,7 +39,7 @@ void rrLogOutput::Output(const string& msg, const rrLogLevel& /*lvl*/)
     }
 
     //Log to file, always..
-	gLogging.write(msg.c_str());
+	gLog.write(msg.c_str());
 
     if(mLogToConsole == true) 	//Default is standard error
     {
@@ -49,4 +48,4 @@ void rrLogOutput::Output(const string& msg, const rrLogLevel& /*lvl*/)
     }
 }
 
-}//namespace rr
+}//namespace

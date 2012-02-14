@@ -10,20 +10,22 @@ using std::FILE;
 using std::string;
 //Global class holding logfile and other settings. Persist trougout the life of the application that is using it. Based on RAII
 
-using namespace rr;
-class RR_DECLSPEC rrLogFile : public rrObject
+namespace rr
+{
+class RR_DECLSPEC LogFile : public rrObject
 {
 	private:
                     			// prevent copying and assignment
-                				rrLogFile(const rrLogFile& logFile);
-                				rrLogFile& operator=(const rrLogFile&);
+                				LogFile(const LogFile& logFile);
+                				LogFile& operator=(const LogFile&);
 		string					mFileName;
 
 	public:
-	  							rrLogFile(const char* fName);
-			   				   ~rrLogFile();
+	  							LogFile(const char* fName);
+			   				   ~LogFile();
 		FILE* 					mFILEHandle;
         string					GetFileName(){return mFileName;}
 };
 
+}
 #endif

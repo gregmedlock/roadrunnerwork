@@ -11,9 +11,10 @@ using std::ostringstream;
 namespace rr
 {
 
-class RR_DECLSPEC rrLogOutput : public rrObject
+class RR_DECLSPEC LogOutput : public rrObject
 {
 	public:
+        						LogOutput();
         static bool             mShowLogTime;
         static bool             mShowLogPrefix;
 		static bool             mShowLogLevel;
@@ -21,8 +22,7 @@ class RR_DECLSPEC rrLogOutput : public rrObject
         static bool             mLogToMemo;
         static bool             mLogToConsole;
         static bool             mDoLogging;
-        						rrLogOutput();
-	    static void             Output(const string& msg, const rrLogLevel& lvl);
+	    static void             Output(const string& msg, const LogLevel& lvl);
         static void				StopLogging();
         static void				StartLogging();
 };
