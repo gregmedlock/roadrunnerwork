@@ -2,12 +2,13 @@
 #define mtkLogLevelH
 //---------------------------------------------------------------------------
 #include <string>
-//#include "CommonExporter.h"
+#include "rrExporter.h"
 
 using std::string;
-namespace mtk
+namespace rr
 {
-MTK_COMMON enum  mtkLogLevel
+
+RR_DECLSPEC enum  mtkLogLevel
     {
     	lUndef      = -1,
         lError      = 0,
@@ -23,12 +24,11 @@ MTK_COMMON enum  mtkLogLevel
         lUser
     };
 
-
-string 			MTK_COMMON ToUpperCase(const string& inStr);
-int 		    MTK_COMMON GetHighestLogLevel();
-mtkLogLevel     MTK_COMMON StringToLogLevel(const string& level);
-string          MTK_COMMON LogLevelToString(const mtkLogLevel& level);
-mtkLogLevel     MTK_COMMON IntToLogLevel(const int& lvl);
+string 			RR_DECLSPEC ToUpperCase(const string& inStr);
+int 		    RR_DECLSPEC GetHighestLogLevel();
+mtkLogLevel     RR_DECLSPEC StringToLogLevel(const string& level);
+string          RR_DECLSPEC LogLevelToString(const mtkLogLevel& level);
+mtkLogLevel     RR_DECLSPEC IntToLogLevel(const int& lvl);
 
 }
 #endif

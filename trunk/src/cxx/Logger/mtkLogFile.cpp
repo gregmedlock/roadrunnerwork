@@ -12,12 +12,14 @@
 using std::fstream;
 mtkLogFile::mtkLogFile(const char* name)
 :
+mFileName(name),
 mFILEHandle(fopen(name, "w"))
 {
     if (!mFILEHandle)
     {
         throw std::runtime_error("File Open failure");
     }
+
 }
 
 mtkLogFile::~mtkLogFile()

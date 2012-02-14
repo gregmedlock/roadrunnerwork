@@ -3,7 +3,7 @@
 #define mtkLoggerUtilsH
 //---------------------------------------------------------------------------
 #include <string>
-#include "CommonExporter.h"
+#include "rrExporter.h"
 using std::string;
-string MTK_COMMON GetLogTime(bool show_milli_sec);
+string RR_DECLSPEC GetLogTime(bool show_milli_sec);
 #endif

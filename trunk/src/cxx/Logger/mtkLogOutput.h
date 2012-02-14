@@ -3,15 +3,15 @@
 #include <sstream>
 #include <string>
 #include <stdio.h>
-#include "CommonExporter.h"
+#include "rrObject.h"
 #include "mtkLogLevel.h"
 using std::string;
 using std::ostringstream;
 
-namespace mtk
+namespace rr
 {
 
-class MTK_COMMON mtkLogOutput : public mtkObject
+class RR_DECLSPEC mtkLogOutput : public rrObject
 {
 	public:
         static bool             mShowLogTime;

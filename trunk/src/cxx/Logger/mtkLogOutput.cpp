@@ -9,7 +9,7 @@
 #pragma package(smart_init)
 #endif
 
-namespace mtk
+namespace rr
 {
 
 bool          		mtkLogOutput::mLogToConsole 	= false;
@@ -49,4 +49,4 @@ void mtkLogOutput::Output(const string& msg, const mtkLogLevel& /*lvl*/)
     }
 }
 
-}//namespace mtk
+}//namespace rr

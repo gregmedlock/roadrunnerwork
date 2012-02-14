@@ -4,16 +4,15 @@
 //---------------------------------------------------------------------------
 #include <memory>
 #include "stdio.h"
-#include "CommonExporter.h"
+#include "rrObject.h"
 #include "mtkLogLevel.h"
-//#include "mtkObject.h"
 #include "mtkLogFile.h"
 using std::unique_ptr;
 //class mtkLogFile;
 
 //Global class holding logfile and other settings. Persist trougout the life of the application that is using it. Based on RAII
-using namespace mtk;
-class MTK_COMMON mtkLogging //: public mtkObject
+using namespace rr;
+class RR_DECLSPEC mtkLogging : public rrObject
 {
     private:
         unique_ptr<mtkLogFile>  mLogFile;
@@ -31,13 +30,14 @@ class MTK_COMMON mtkLogging //: public mtkObject
         string			        GetLogPrefix();
         void			        SetLogPrefix(const string& prefix);
         mtkLogLevel		        GetLogLevel();
-        void			        SetLogLevel(const mtkLogLevel& lvl);
+        void			        SetCutOffLogLevel(const mtkLogLevel& lvl);
         bool			        Init(const string& logPrefix = "none", const mtkLogLevel& level = lDebug5, unique_ptr<mtkLogFile> logFile = unique_ptr<mtkLogFile>());
         void 	   				write(const char* str);
         bool					mLogToServer;
+        string					GetLogFileName();
 };
 
 
 
-extern MTK_COMMON mtkLogging  gLogging;
+extern RR_DECLSPEC mtkLogging  gLogging;
 #endif

@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <stdio.h>
-#include "CommonExporter.h"
+#include "rrExporter.h"
 #include "mtkLoggerUtils.h"
 #include "mtkLogLevel.h"
 #include "mtkLogging.h"
@@ -12,11 +12,11 @@
 using std::string;
 using std::ostringstream;
 
-namespace mtk
+namespace rr
 {
 
 template <class T>
-class MTK_COMMON mtkLog : public mtkObject
+class RR_DECLSPEC mtkLog : public rrObject
 {
 	private:
         mtkLogLevel            	mCurrentLogLevel;
@@ -30,7 +30,7 @@ class MTK_COMMON mtkLog : public mtkObject
         std::ostringstream&    	Get(const mtkLogLevel& level);
 };
 
-class MTK_COMMON Logger : public mtkLog<mtkLogOutput>
+class RR_DECLSPEC Logger : public mtkLog<mtkLogOutput>
 {
 };
 

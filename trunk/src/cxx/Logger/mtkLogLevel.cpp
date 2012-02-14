@@ -11,7 +11,7 @@ using namespace std;
 
 //---------------------------------------------------------------------------
 
-namespace mtk
+namespace rr
 {
 
 using namespace std;
@@ -77,7 +77,7 @@ mtkLogLevel IntToLogLevel(const int& level)
 string ToUpperCase(const string& inStr)
 {
 	string rString(inStr);
-	std::transform(rString.begin(), rString.end(), rString.begin(), (int(*)(int)) toupper);
+	std::transform(rString.begin(), rString.end(), rString.begin(), ::toupper);
 	return rString;
 }
 

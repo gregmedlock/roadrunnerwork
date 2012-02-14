@@ -29,6 +29,15 @@ bool mtkLogging::Init(const string& logPrefix, const mtkLogLevel& level, unique_
  	return mLogFile.get() ? true : false;
 }
 
+string mtkLogging::GetLogFileName()
+{
+	if(mLogFile)
+    {
+    	return mLogFile->GetFileName();
+    }
+    return string("<none>");
+}
+
 mtkLogging::~mtkLogging()
 {
 	mNrOfInstances--;
@@ -39,7 +48,7 @@ mtkLogLevel mtkLogging::GetLogLevel()
 	return mLogLevel;
 }
 
-void mtkLogging::SetLogLevel(const mtkLogLevel& lvl)
+void mtkLogging::SetCutOffLogLevel(const mtkLogLevel& lvl)
 {
 	mLogLevel = lvl;
 }

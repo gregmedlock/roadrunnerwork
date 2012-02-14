@@ -8,7 +8,7 @@
 #pragma package(smart_init)
 #endif
 
-namespace mtk
+namespace rr
 {
 
 template class mtkLog<mtkLogOutput>;
@@ -18,7 +18,7 @@ mtkLog<mtkLogOutput>::mtkLog()
 {}
 
 template <>
-mtkLog<mtk::mtkLogOutput>::~mtkLog()
+mtkLog<mtkLogOutput>::~mtkLog()
 {
     mOutputStream << std::endl;
     mtkLogOutput::Output(mOutputStream.str(), mCurrentLogLevel);
@@ -54,4 +54,4 @@ std::ostringstream& mtkLog<mtkLogOutput>::Get(const mtkLogLevel& level)
 }
 
 
-}//namespace mtk
+}//namespace rr
