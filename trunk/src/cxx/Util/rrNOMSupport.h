@@ -21,6 +21,7 @@ namespace rr
 
 class RR_DECLSPEC NOMSupport : public rrObject
 {
+
     protected:
 		//The C# SBMLSupport.cs have two static objects, SBMLDocument and Model, created when NOM reads SBML..
     	SBMLDocument		   *mSBMLDoc;
@@ -28,7 +29,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
 		Model				   *mModel;
 //        static SBMLDocument _oDoc;
 //        static Model _oModel;
-        Hashtable _symbolTable;// = new Hashtable();
+        HashTable 				mSymbolTable;// = new Hashtable();
         ArrayList returnUnitDefinition(UnitDefinition oDefinition);
         const ASTNode* changeSymbol(ASTNode* node, const string& time, const int& targetType);
         ASTNode changeTimeToCSymbol(ASTNode* node, const string& name, const int& type);

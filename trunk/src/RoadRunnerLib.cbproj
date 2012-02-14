@@ -199,9 +199,21 @@
 				<DependentOn>cxx\Util\rrNOMSupport.h</DependentOn>
 				<BuildOrder>43</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="cxx\Util\rrParameterSet.cpp">
+				<DependentOn>cxx\Util\rrParameterSet.h</DependentOn>
+				<BuildOrder>48</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Util\rrParameterSets.cpp">
+				<DependentOn>cxx\Util\rrParameterSets.h</DependentOn>
+				<BuildOrder>49</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\Util\rrRandom.cpp">
 				<DependentOn>cxx\Util\rrRandom.h</DependentOn>
 				<BuildOrder>30</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Util\rrSBMLSymbol.cpp">
+				<DependentOn>cxx\Util\rrSBMLSymbol.h</DependentOn>
+				<BuildOrder>47</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="cxx\Util\rrStreamWriter.cpp">
 				<DependentOn>cxx\Util\rrStreamWriter.h</DependentOn>
