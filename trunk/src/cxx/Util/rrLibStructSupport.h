@@ -2,6 +2,7 @@
 #define rrLibStructSupportH
 #include <vector>
 #include <string>
+#include "rrStringList.h"
 #include "rrObject.h"
 #include "libstructural.h"
 
@@ -50,7 +51,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        string[] getConservedLaws()
 //        double[] GetConservedSums()
 //        string[] GetDependentReactionIds()
-//        string[] GetDependentSpeciesIds()
+		StringList GetDependentSpeciesIds();
 //        double[][] GetFullyReorderedStoichiometryMatrix()
 //        double[][] GetFullyReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetFullyReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
@@ -61,7 +62,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        double[][] GetGammaMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetGammaMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
 //        string[] GetIndependentReactionIds()
-//        string[] GetIndependentSpeciesIds()
+		StringList GetIndependentSpeciesIds();
 //        void GetInitialConditions(out string[] variableNames, out double[] initialValues)
 //        double[][] GetK0Matrix()
 //        double[][] GetK0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
@@ -106,7 +107,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        int GetNumDependentSpecies();
 //
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumIndSpecies")]
-//        int GetNumIndependentSpecies();
+		int GetNumIndependentSpecies();
 //
 //
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumReactions")]
@@ -119,23 +120,23 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        int GetNumIndependentReactions();
 //
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumSpecies")]
-//        int GetNumSpecies();
+        int GetNumSpecies();
 //
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getRank")]
 //        int GetRank();
 //        string[] GetReactionIds()
 //        string[] GetReorderedReactionIds()
-//        string[] GetReorderedSpeciesIds()
+        StringList GetReorderedSpeciesIds();
 //        double[][] GetReorderedStoichiometryMatrix()
 //        double[][] GetReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-//        string[] GetSpeciesIds()
+        StringList GetSpeciesIds();
 //        double[][] GetStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        double[][] GetStoichiometryMatrix()
 //        void GetStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
 //        string GetTestDetails(  )
 //        void LoadReactionNames(string[] reactionNames)
-//	      string LoadSBML(string sbml)
+	      string LoadSBML(const string& sbml);
 //        string LoadSBMLFromFile(string sFileName)
 //        string LoadSBMLWithTests(string sbml)
 //        void LoadSpeciesNames(string[] speciesNames, double[] speciesValues)

@@ -37,10 +37,10 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         int                                 _NumIndependentSpecies;
         int                                 _NumReactions;
         int                                 _TotalLocalParmeters;
-        list<string>                        _functionNames;
-        list<string>                        _functionParameters;
-        vector<string>                      dependentSpeciesList;
-        vector<string>                      independentSpeciesList;
+        StringList       	                _functionNames;
+        StringList          	            _functionParameters;
+        StringList                     		dependentSpeciesList;
+        StringList		                    independentSpeciesList;
         int 				                _NumModifiableSpeciesReferences;
 
         //        Hashtable _oMapRateRule = new Hashtable();

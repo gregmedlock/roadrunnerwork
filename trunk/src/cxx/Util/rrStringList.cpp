@@ -11,6 +11,29 @@
 namespace rr
 {
 
+StringList::StringList()
+{
+
+}
+
+StringList::StringList(const vector<string>& strings)
+:
+mStrings(strings)
+{
+
+}
+
+StringList::~StringList()
+{
+
+}
+
+StringList::StringList(const StringList& cp)
+{
+	mStrings = cp.mStrings;
+}
+
+
 void StringList::Add(const string& str)
 {
 	mStrings.push_back(str);

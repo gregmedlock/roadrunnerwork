@@ -25,7 +25,9 @@ class RR_DECLSPEC StringBuilder : public rrObject
         {
         	mStringing<<str;
         }
+
         void AppendFormat(){}
+        string ToString(){return mStringing.str();}
 };
 
 }

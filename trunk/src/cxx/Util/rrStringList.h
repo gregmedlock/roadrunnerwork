@@ -17,10 +17,16 @@ class RR_DECLSPEC StringList : public rrObject
         vector<string>::iterator    mListIterator;
 
 	public:
+    								StringList();
+	   								StringList(const vector<string>& strings);
+    							   ~StringList();
+	   								StringList(const StringList& cp);
+
     	void 				        Add(const string& str);
         int  				        size(){return mStrings.size();}
 	    string&  			        operator[](const int& index){return mStrings[index];}
         int					        find(const string& item);
+        void						empty(){mStrings.clear();}
 };
 
 }

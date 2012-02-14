@@ -14,6 +14,7 @@
 
 using namespace std;
 using namespace LIB_STRUCTURAL;
+
 namespace rr
 {
 ModelGenerator::ModelGenerator()
@@ -29,36 +30,26 @@ ModelGenerator::~ModelGenerator()
 
 }
 
-
-/// Generates the Model Code from the SBML string
+// Generates the Model Code from the SBML string
 string ModelGenerator::generateModelCode(const string& sbmlStr)
 {
     string sASCII = sbmlStr; //Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(sbmlStr));
     list<string> Warnings;// = new List<string>();
     StringBuilder sb;// = new StringBuilder();
 
+////            sASCII = NOM.convertTime(sASCII, "time");
+////            NOM.loadSBML(sASCII, "time");
+
 
     //-- The Following will need some more work. Look at NOM.cs in SBW/source/SBMLSupport folder
+    sASCII = mNOM.convertTime(sASCII, "time");
 
-    //    sASCII = NOM.convertTime(sASCII, "time");
-	//    loadSBML(sASCII.c_str(), "time");
+	mNOM.loadSBML(sASCII.c_str(), "time");
 
-	char* sbml = new char[sASCII.size() + 1];
-    strcpy(sbml, sASCII.c_str());
-
-	int result = mNOM.LoadSBML(sbml);
-
-//    int result = loadSBML(sbml);
-
-	if(result)
-    {
-        return "";
-    }
-
-//    char** name;
+	//    char** name;
 	//if(getModelName(name))
 
-    _ModelName = string(GetModelName());
+    _ModelName = mNOM.getModelName();
     if(!_ModelName.size())
     {
     	return "";
@@ -80,32 +71,44 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 
    	LibStructural* instance = LibStructural::getInstance();
 
-    string msg = mLibStructRef.loadSBML(sASCII);
+    string msg = mStructAnalysis.LoadSBML(sASCII);
     if(!msg.size())
     {
 
     }
 
-    if (RoadRunner::_bComputeAndAssignConservationLaws)
-    {
-	    _NumIndependentSpecies 	= mLibStructRef.getNumIndSpecies();
-		independentSpeciesList 	= mLibStructRef.getIndependentSpecies();
+//    if (RoadRunner::_bComputeAndAssignConservationLaws)
+//    {
+//	    _NumIndependentSpecies 	= mStructAnalysis.getNumIndSpecies();
+//		independentSpeciesList 	= mStructAnalysis.getIndependentSpecies();
+//
+//		//dependentSpeciesList 	= StructAnalysis::GetDependentSpeciesIds();
+//        dependentSpeciesList 	= mStructAnalysis.getDependentSpecies();
+//    }
+//    else
+//    {
+//		//        _NumIndependentSpecies = StructAnalysis.GetNumSpecies();
+//        _NumIndependentSpecies = mStructAnalysis.getNumSpecies();
+//		//        independentSpeciesList = StructAnalysis.GetSpeciesIds();
+//        independentSpeciesList = mStructAnalysis.getSpecies();
+//
+//		//        dependentSpeciesList = new string[0];
+//	//		dependentSpeciesList = new string[0];
+//
+//    }
 
-		//dependentSpeciesList 	= StructAnalysis::GetDependentSpeciesIds();
-        dependentSpeciesList 	= mLibStructRef.getDependentSpecies();
+	if (RoadRunner::_bComputeAndAssignConservationLaws)
+    {
+        _NumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
+        independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
+        dependentSpeciesList   = mStructAnalysis.GetDependentSpeciesIds();
     }
     else
     {
-		//        _NumIndependentSpecies = StructAnalysis.GetNumSpecies();
-        _NumIndependentSpecies = mLibStructRef.getNumSpecies();
-		//        independentSpeciesList = StructAnalysis.GetSpeciesIds();
-        independentSpeciesList = mLibStructRef.getSpecies();
-
-		//        dependentSpeciesList = new string[0];
-//		dependentSpeciesList = new string[0];
-
+        _NumIndependentSpecies = mStructAnalysis.GetNumSpecies();
+        independentSpeciesList = mStructAnalysis.GetSpeciesIds();
+//        dependentSpeciesList = new string[0];
     }
-
 
     sb.Append("//************************************************************************** " + NL());
 
@@ -1097,15 +1100,16 @@ string ModelGenerator::NL()
 int ModelGenerator::ReadFloatingSpecies()
 {
     // Load a reordered list into the variable list.
-    vector<string> reOrderedList;
+    StringList reOrderedList;
     if ((RoadRunner::_bComputeAndAssignConservationLaws))
 	{
-       reOrderedList = mLibStructRef.getReorderedSpecies();
+       reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
 	}
 	else
 	{
-    	reOrderedList = mLibStructRef.getSpecies();
+    	reOrderedList = mStructAnalysis.GetSpeciesIds();
     }
+
     StringListContainer oFloatingSpecies = mNOM.getListOfFloatingSpecies();
 
 

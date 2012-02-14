@@ -1,205 +1,207 @@
 #ifndef rrNOMSupportH
 #define rrNOMSupportH
 //---------------------------------------------------------------------------
+#include <list>
 #include <vector>
 #include <string>
+#include "math/ASTNode.h"
 #include "NOMLib.h"
 #include "rrObject.h"
 #include "rrStringListContainer.h"
 using std::vector;
 using std::string;
+using std::pair;
+using std::list;
 
 //---------------------------------------------------------------------------
 namespace rr
 {
+//class ASTNode;
 
 class RR_DECLSPEC NOMSupport : public rrObject
 {
     protected:
 		//The C# SBMLSupport.cs have two static objects, SBMLDocument and Model, created when NOM reads SBML..
     	SBMLDocument		   *mSBMLDoc;
+		SBMLDocument			*_oDoc;
 		Model				   *mModel;
 //        static SBMLDocument _oDoc;
 //        static Model _oModel;
 //        Hashtable _symbolTable = new Hashtable();
-//        ArrayList returnUnitDefinition(UnitDefinition oDefinition)
-//        ASTNode changeSymbol(ASTNode node, const string& time, const int& targetType)
-//        ASTNode changeTimeToCSymbol(ASTNode node, const string& name, const int& type)
-//        bool addMissingModifiers(Model oModel)
-//        List<string> _Namespaces;
-//        List<string> GetSymbols(const string& formula)
+        ArrayList returnUnitDefinition(UnitDefinition oDefinition);
+        const ASTNode* changeSymbol(ASTNode* node, const string& time, const int& targetType);
+        ASTNode changeTimeToCSymbol(ASTNode* node, const string& name, const int& type);
+        bool addMissingModifiers(Model *oModel);
+        StringList _Namespaces;
+        StringList GetSymbols(const string& formula);
 //        ParameterSets _ParameterSets;
-//        string GetInitialAssignmentFor(const string& sbmlId)
-//        string GetName(SBase element)
-//        string GetRuleFor(const string& sbmlId)
-//        void addDependenciesToList(ASTNode node, List<string> sResult)
-//        void AddMissingParameter(const string& parameterId, SBMLDocument doc)
-//        void BuildSymbolTable()
-//        void ChangeNameToCSymbol(Model model, const string& name, const int& type)
-//        void ChangeParameterName(ASTNode node, const string& sParameterName, const string& sPrefix)
-//        void changePow(ASTNode node)
-//        void changeSymbol(Model oModel, const string& sTimeSymbol, const int& targetType)
-//        void changeTimeSymbol(Model model, const string& timeSymbol)
-//        void checkForMissingNames(ASTNode node, StringCollection results, StringCollection symbols)
-//        void GetSymbols(ASTNode node, List<System.String> list)
-//        void LookForDependencies()
-//        void modifyKineticLaws(SBMLDocument oSBMLDoc, Model oModel)
-//        void modifyKineticLawsForLocalParameters(KineticLaw oLaw, const string& reactionId, Model oModel)
-//        void modifyKineticLawsForReaction(KineticLaw oLaw, const string& reactionId, Model oModel)
-//        void RemoveSpatialSizeUnitsFromSpecies(SBMLDocument doc)
-//        void RemoveSubstanceUnitsFromKineticLaws(SBMLDocument doc)
-//        void RemoveTimeUnitsFromKineticLaws(SBMLDocument doc)
-//        void UpdateDependencies(const string& sbmlId)
-//        void UpgradeToL2V4IfNecessary(SBMLDocument doc)
+        string GetInitialAssignmentFor(const string& sbmlId);
+        string GetName(SBase* element);
+        string GetRuleFor(const string& sbmlId);
+        void addDependenciesToList(ASTNode* node, StringList sResult);
+        void AddMissingParameter(const string& parameterId, SBMLDocument *doc);
+        void BuildSymbolTable();
+        void ChangeNameToCSymbol(Model* model, const string& name, const int& type);
+        void ChangeParameterName(ASTNode* node, const string& sParameterName, const string& sPrefix);
+        void changePow(ASTNode* node);
+        void changeSymbol(Model& oModel, const string& sTimeSymbol, const int& targetType);
+        void changeTimeSymbol(Model& model, const string& timeSymbol);
+        void checkForMissingNames(ASTNode *node, StringListContainer results, StringListContainer symbols);
+        void GetSymbols(ASTNode* node, StringList& list);
+        void LookForDependencies();
+        void modifyKineticLaws(SBMLDocument& oSBMLDoc, Model &oModel);
+        void modifyKineticLawsForLocalParameters(KineticLaw& oLaw, const string& reactionId, Model &oModel);
+        void modifyKineticLawsForReaction(KineticLaw& oLaw, const string& reactionId, Model &oModel);
+        void RemoveSpatialSizeUnitsFromSpecies(SBMLDocument* doc);
+        void RemoveSubstanceUnitsFromKineticLaws(SBMLDocument* doc);
+        void RemoveTimeUnitsFromKineticLaws(SBMLDocument* doc);
+        void UpdateDependencies(const string& sbmlId);
+        void UpgradeToL2V4IfNecessary(SBMLDocument* doc);
 
    	public:
 						    	NOMSupport();
     	virtual 			   ~NOMSupport();
-		string					getNthCompartmentId(const int& i);
-        double					getValue(const string& id);
-        int						LoadSBML(const string& sbml);
         Model*					GetModel(){return mModel;}
         SBMLDocument*			GetSBMLDocument(){return mSBMLDoc;}
 
-//        ArrayList getDerivedUnitDefinition(const string& sId)
-//        ArrayList getListOfBoundarySpeciesIds()
-//        ArrayList getListOfErrors()
+        ArrayList getDerivedUnitDefinition(const string& sId);
+        ArrayList getListOfBoundarySpeciesIds();
+        ArrayList getListOfErrors();
         StringListContainer getListOfFloatingSpecies();
-//        ArrayList getListOfFloatingSpeciesIds()
-//        ArrayList getListOfParameters()
-//        ArrayList getNthError(const int& nIndex)
-//        ArrayList getNthEvent(const int& arg)
-//        ArrayList getNthFunctionDefinition(const int& arg)
-//        ArrayList getNthListOfModifiers(const int& nIndex)
-//        ArrayList getNthListOfProducts(const int& nIndex)
-//        ArrayList getNthListOfReactants(const int& nIndex)
-//        ASTNode ReplaceSymbol(ASTNode node, const string& oldId, const string& newId)
-//        bool exists(const string& sId)
-//        bool getNthParameterHasValue(const int& nReactionIndex, const int& nParameterIndex)
-//        bool getNthUseValuesFromTriggerTime(const int& arg)
-//        bool hasInitialAmount(const string& sId)
-//        bool hasInitialConcentration(const string& sId)
-//        bool hasSBOTerm(const string& sId)
-//        bool hasValue(const string& sId)
-//        bool IsBoundary(const string& sId)
-//        bool IsCompartment(const string& sId)
-//        bool isConstantImpl(const string& sId)
-//        bool IsFloating(const string& sId)
-//        bool isReactionReversible(const int& nIndex)
-//        bool IsSpecies (const string& sId)
-//        bool MultiplyCompartment(const string& sbmlId, out const string& compartmentId)
-//        bool NeedEmptySetNode(Model model)
-//        bool NeedSinkNode(Model model)
-//        bool NeedSourceNode(Model model)
-//        double getNthParameterValue(const int& nReactionIndex, const int& nParameterIndex)
-//        double getNthProductStoichiometryDouble(const int& nIndex, const int& nProduct)
-//        double getNthReactantStoichiometryDouble(const int& nIndex, const int& nReactant)
-//        double getValue(const string& sId)
-//        int checkConsistency()
-//        int getNthProductStoichiometry(const int& nIndex, const int& nProduct)
-//        int getNthReactantStoichiometry(const int& nIndex, const int& nReactant)
-//        int getNumBoundarySpecies()
-//        int getNumCompartments()
-//        int getNumConstraints()
-//        int getNumErrors()
-//        int getNumEvents()
-//        int getNumFloatingSpecies()
-//        int getNumFunctionDefinitions()
-//        int getNumGlobalParameters()
-//        int getNumInitialAssignments()
-//        int getNumParameters(int var0)
-//        int getNumProducts(const int& var0)
-//        int getNumReactants(const int& var0)
-//        int getNumReactions()
-//        int getNumRules()
-//        int getSBOTerm(const string& sId)
-//        List<Rule> ReorderAssignmentRules(List<Rule> assignmentRules)
-//        List<string> GetSymbols(ASTNode math)
-//        List<string> Namespaces
+        ArrayList getListOfFloatingSpeciesIds();
+        ArrayList getListOfParameters();
+        ArrayList getNthError(const int& nIndex);
+        ArrayList getNthEvent(const int& arg);
+        ArrayList getNthFunctionDefinition(const int& arg);
+        ArrayList getNthListOfModifiers(const int& nIndex);
+        ArrayList getNthListOfProducts(const int& nIndex);
+        ArrayList getNthListOfReactants(const int& nIndex);
+        ASTNode ReplaceSymbol(ASTNode* node, const string& oldId, const string& newId);
+        bool exists(const string& sId);
+        bool getNthParameterHasValue(const int& nReactionIndex, const int& nParameterIndex);
+        bool getNthUseValuesFromTriggerTime(const int& arg);
+        bool hasInitialAmount(const string& sId);
+        bool hasInitialConcentration(const string& sId);
+        bool hasSBOTerm(const string& sId);
+        bool hasValue(const string& sId);
+        bool IsBoundary(const string& sId);
+        bool IsCompartment(const string& sId);
+        bool isConstantImpl(const string& sId);
+        bool IsFloating(const string& sId);
+        bool isReactionReversible(const int& nIndex);
+        bool IsSpecies (const string& sId);
+        bool MultiplyCompartment(const string& sbmlId, string& compartmentId);
+        bool NeedEmptySetNode(Model model);
+        bool NeedSinkNode(Model model);
+        bool NeedSourceNode(Model model);
+        double getNthParameterValue(const int& nReactionIndex, const int& nParameterIndex);
+        double getNthProductStoichiometryDouble(const int& nIndex, const int& nProduct);
+        double getNthReactantStoichiometryDouble(const int& nIndex, const int& nReactant);
+        double getValue(const string& sId);
+        int checkConsistency();
+        int getNthProductStoichiometry(const int& nIndex, const int& nProduct);
+        int getNthReactantStoichiometry(const int& nIndex, const int& nReactant);
+        int getNumBoundarySpecies();
+        int getNumCompartments();
+        int getNumConstraints();
+        int getNumErrors();
+        int getNumEvents();
+        int getNumFloatingSpecies();
+        int getNumFunctionDefinitions();
+        int getNumGlobalParameters();
+        int getNumInitialAssignments();
+        int getNumParameters(int var0);
+        int getNumProducts(const int& var0);
+        int getNumReactants(const int& var0);
+        int getNumReactions();
+        int getNumRules();
+        int getSBOTerm(const string& sId);
+        list<Rule> ReorderAssignmentRules(list<Rule>& assignmentRules);
+        StringList GetSymbols(ASTNode* math);
+
+//        StringList Namespaces
 //        Model Model
 //        Model SbmlModel
-//        Pair<string, string> getNthInitialAssignmentPair(const int& nIndex)
-//        ParameterSets ParameterSets
-//        SBase GetElement(const string& sId)
+        pair<string, string> getNthInitialAssignmentPair(const int& nIndex);
+//        ParameterSets ParameterSets;
+        SBase* GetElement(const string& sId);
 //        SBMLDocument SbmlDocument
-//        Stack<string> GetMatchForSymbol(const string& sbmlId)
+//        Stack<string> GetMatchForSymbol(const string& sbmlId);
 //        static SBMLDocument Document
-//        string addEmptySetNode(const string& sbml)
-//        string addEmptySetNodes(const string& sbml)
-//        string addMissingModifiers(const string& sModel)
-//        string addSourceSinkNodes(const string& sbml)
-//        string convertLevel1ToLevel2Impl(const string& sSBML)
-//        string convertLevel2ToLevel1Impl(const string& sSBML)
-//        string convertMathMLToString(const string& sMathML)
-//        string convertPowImpl(const string& sSBML)
-//        string convertSBML(const string& sModel, const int& nLevel, const int& nVersion)
-//        string convertSBML(const string& sModel, const int& nLevel, const int& nVersion, bool throwError)
-//        string convertStringToMathML(const string& var0)
-//        string convertTime(const string& sArg, const string& sTimeSymbol)
-//        string convertTimeToCSymbol(const string& sArg, const string& sTimeSymbol)
-//        string FixCommonIssues(const string& sbml)
-//        string FixCommonIssues(const string& sbml, const string& programName, const string& programVersion)
-//        string GetAnnotatedModel(const string& targetSBML, const string& sourceSBML, bool checkModelId)
-//        string getAnnotation(const string& sId)
-//        string getCompartmentIdBySpeciesId(const string& sId)
-//        string GetId(SBase element)
-//        string getKineticLaw(const int& index)
-//        string getMetaId(const string& sId)
-//        string getModelId()
-//        string getModelName()
-//        string getNotes(const string& sId)
-//        string getNthBoundarySpeciesId(const int& nIndex)
-//        string getNthBoundarySpeciesName(const int& nIndex)
-//        string getNthCompartmentId(const int& nIndex)
-//        string getNthCompartmentName(const int& nIndex)
-//        string getNthConstraint(const int& nIndex, out const string& sMessage)
-//        string getNthFloatingSpeciesId(const int& nIndex)
-//        string getNthFloatingSpeciesName(const int& nIndex)
-//        string getNthGlobalParameterId(const int& nIndex)
-//        string getNthGlobalParameterName(const int& nIndex)
-//        string getNthInitialAssignment(const int& nIndex)
-//        string getNthParameterId(const int& nReactionIndex, const int& nParameterIndex)
-//        string getNthParameterName(const int& nReactionIndex, const int& nParameterIndex)
-//        string getNthProductName(const int& nIndex, const int& nProduct)
-//        string getNthReactantName(const int& nIndex, const int& nReactant)
-//        string getNthReactionId(const int& nIndex)
-//        string getNthReactionName(const int& nIndex)
-//        string getNthRule(const int& nIndex)
-//        string getNthRuleType(const int& arg)
-//        string getOutsideCompartment(const string& var0)
-//        string getParamPromotedSBML(const string& sArg)
-//        string getSBML()
-//        string getSBOCapableSBML(const string& sModel)
-//        string RemoveJD1Layout(const string& sSBML)
-//        string RemoveJD2Layout(const string& sSBML)
-//        string RemoveLayoutInformation(const string& sSBML)
-//        string validateSBML(const string& sModel)
-//        string validateWithConsistency(const string& sModel)
-//        string[] getBuiltinFunctionInfo(const string& var0)
-//        string[] getBuiltinFunctions()
-//        void ChangeConstantForRules(Model model)
-//        void FillStack(Stack<string> stack, SBMLSymbol symbol)
-//        void loadFromFile(const string& fileName)
-//        void loadParameterPromotedSBML(const string& var0, const string& sTimeSymbol)
-//        void loadSBML(const string& var0)
-//        void loadSBML(const string& var0, const string& sTimeSymbol)
-//        void ReorderRules(SBMLDocument doc, Model model)
-//        void setAnnotation(const string& sId, const string& sAnnotation)
-//        void setModelId(const string& sId)
-//        void setNotes(const string& sId, const string& sNotes)
-//        void setSBOTerm(const string& sId, const int& nSBOTerm)
-//        void setValue(const string& sId, double dValue)
-//        void setValue(Model model, const string& id, double value, bool throwIfNotFound)
-//        void TestASTTime()
+        string addEmptySetNode(const string& sbml);
+        string addEmptySetNodes(const string& sbml);
+        string addMissingModifiers(const string& sModel);
+        string addSourceSinkNodes(const string& sbml);
+        string convertLevel1ToLevel2Impl(const string& sSBML);
+        string convertLevel2ToLevel1Impl(const string& sSBML);
+        string convertMathMLToString(const string& sMathML);
+        string convertPowImpl(const string& sSBML);
+        string convertSBML(const string& sModel, const int& nLevel, const int& nVersion);
+        string convertSBML(const string& sModel, const int& nLevel, const int& nVersion, bool throwError);
+        string convertStringToMathML(const string& var0);
+      	string convertTime(const string& sArg, const string& sTimeSymbol);
+        string convertTimeToCSymbol(const string& sArg, const string& sTimeSymbol);
+        string FixCommonIssues(const string& sbml);
+        string FixCommonIssues(const string& sbml, const string& programName, const string& programVersion);
+        string GetAnnotatedModel(const string& targetSBML, const string& sourceSBML, bool checkModelId);
+        string getAnnotation(const string& sId);
+        string getCompartmentIdBySpeciesId(const string& sId);
+        string GetId(SBase& element);
+        string getKineticLaw(const int& index);
+        string getMetaId(const string& sId);
+        string getModelId();
+      	string getModelName();
+        string getNotes(const string& sId);
+        string getNthBoundarySpeciesId(const int& nIndex);
+        string getNthBoundarySpeciesName(const int& nIndex);
+        string getNthCompartmentId(const int& nIndex);
+        string getNthCompartmentName(const int& nIndex);
+        string getNthConstraint(const int& nIndex, string& sMessage);
+        string getNthFloatingSpeciesId(const int& nIndex);
+        string getNthFloatingSpeciesName(const int& nIndex);
+        string getNthGlobalParameterId(const int& nIndex);
+        string getNthGlobalParameterName(const int& nIndex);
+        string getNthInitialAssignment(const int& nIndex);
+        string getNthParameterId(const int& nReactionIndex, const int& nParameterIndex);
+        string getNthParameterName(const int& nReactionIndex, const int& nParameterIndex);
+        string getNthProductName(const int& nIndex, const int& nProduct);
+        string getNthReactantName(const int& nIndex, const int& nReactant);
+        string getNthReactionId(const int& nIndex);
+        string getNthReactionName(const int& nIndex);
+        string getNthRule(const int& nIndex);
+        string getNthRuleType(const int& arg);
+        string getOutsideCompartment(const string& var0);
+        string getParamPromotedSBML(const string& sArg);
+        string getSBML();
+        string getSBOCapableSBML(const string& sModel);
+        string RemoveJD1Layout(const string& sSBML);
+        string RemoveJD2Layout(const string& sSBML);
+        string RemoveLayoutInformation(const string& sSBML);
+        string validateSBML(const string& sModel);
+        string validateWithConsistency(const string& sModel);
+        vector<string> getBuiltinFunctionInfo(const string& var0);
+        vector<string> getBuiltinFunctions();
+        void ChangeConstantForRules(Model* model);
+//        void FillStack(Stack<string> stack, SBMLSymbol symbol);
+        void loadFromFile(const string& fileName);
+        void loadParameterPromotedSBML(const string& var0, const string& sTimeSymbol);
+      	void loadSBML(const string& var0);
+      	void loadSBML(const string& var0, const string& sTimeSymbol);
+        void ReorderRules(SBMLDocument& oc, Model& model);
+        void setAnnotation(const string& sId, const string& sAnnotation);
+        void setModelId(const string& sId);
+        void setNotes(const string& sId, const string& sNotes);
+        void setSBOTerm(const string& sId, const int& nSBOTerm);
+        void setValue(const string& sId, double dValue);
+        void setValue(Model model, const string& id, double value, bool throwIfNotFound);
+        void TestASTTime();
 
 		string 						getNthBoundarySpeciesCompartmentName(const int& nIndex);
 		string 						getNthFloatingSpeciesCompartmentName(const int& nIndex);
 		StringListContainer 		getListOfBoundarySpecies();
 };
 
-}
-
-
+}//namespace rr
 #endif
 
 // C# Original..........

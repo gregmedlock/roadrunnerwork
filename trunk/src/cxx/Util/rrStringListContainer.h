@@ -17,9 +17,12 @@ class RR_DECLSPEC StringListContainer : public rrObject
 
 	public:
 		void 						Add(const StringList& coll);
+		void 						Add(const string& coll);
+		void 						Add(const int& coll);
         int  						size(){return mContainer.size();}
         StringList& 				operator[](const int& index){return mContainer[index];}
 };
 
+typedef StringListContainer ArrayList; //ArrayList is C# name..
 }
 #endif

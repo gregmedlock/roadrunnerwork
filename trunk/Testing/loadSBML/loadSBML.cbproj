@@ -69,6 +69,9 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>
+			<CppCompile Include="..\..\src\cxx\Util\rrLibStructSupport.cpp">
+				<BuildOrder>6</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\cxx\Util\rrNOMSupport.cpp">
 				<DependentOn>..\..\src\cxx\Util\rrNOMSupport.h</DependentOn>
 				<BuildOrder>2</BuildOrder>

@@ -6,29 +6,36 @@
 #include "rrNOMSupport.h"
 #include "rrStringUtils.h"
 #include "rrException.h"
+#include "rrStringBuilder.h"
+#include "math/FormulaFormatter.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
 namespace rr
 {
 
+//using namespace ;
+
 NOMSupport::NOMSupport()
 :
 mModel(NULL),
 mSBMLDoc(NULL)
-{}
+
+{
+	*_oDoc = (*mSBMLDoc);
+}
 
 NOMSupport::~NOMSupport()
 {
 }
 
-int	NOMSupport::LoadSBML(const string& sbml)
-{
-
-	int res = loadSBML(sbml.c_str());
-	mModel = GetSBMLModel();
-    return res;
-}
+//int	NOMSupport::LoadSBML(const string& sbml)
+//{
+//
+//	int res = loadSBML(sbml.c_str());
+//	mModel = GetSBMLModel();
+//    return res;
+//}
 
 string NOMSupport::getNthCompartmentId(const int& i)
 {
@@ -117,13 +124,14 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 //            return AnnotationUtil.GetAnnotatedModel(targetSBML, sourceSBML, checkModelId);
 //        }
 //
-//        public static string GetId(SBase element)
-//        {
-//            if (element.isSetId())
-//                return element.getId();
-//            return element.getName();
-//        }
-//
+
+string NOMSupport::GetId(SBase& element)
+{
+    if (element.isSetId())
+        return element.getId();
+    return element.getName();
+}
+
 //        public static string getMetaId(string sId)
 //        {
 //            if (mModel == NULL)
@@ -167,14 +175,19 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 //
 //            return "";
 //        }
-//
-//        private static string GetName(SBase element)
-//        {
-//            if (element.isSetName())
-//                return element.getName();
-//            return element.getId();
-//        }
-//
+
+string NOMSupport::GetName(SBase* element)
+{
+	if(!element)
+    {
+    	return string("");
+    }
+
+    if (element->isSetName())
+        return element->getName();
+    return element->getId();
+}
+
 //        private static bool addMissingModifiers(Model oModel)
 //        {
 //            StringCollection _species = new StringCollection();
@@ -656,33 +669,41 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 //            }
 //        }
 //
-//        public static string convertTime(string sArg, string sTimeSymbol)
-//        {
-//            SBMLDocument oSBMLDoc = NULL;
-//            Model oModel = NULL;
-//
-//            try
-//            {
-//                oSBMLDoc = libsbml.readSBMLFromString(sArg);
-//                oModel = oSBMLDoc.getModel();
-//
-//                if (oModel == NULL)
-//                {
-//                    throw new Exception("SBML Validation failed");
-//                }
-//                else
-//                {
-//                    changeTimeSymbol(oModel, sTimeSymbol);
-//                    return libsbml.writeSBMLToString(oSBMLDoc);
-//                }
-//            }
-//            finally
-//            {
-//                if (oSBMLDoc != NULL)
-//                    oSBMLDoc.Dispose();
-//            }
-//        }
-//
+string NOMSupport::convertTime(const string& sArg, const string& sTimeSymbol)
+{
+    SBMLDocument* oSBMLDoc = NULL;
+    Model* oModel = NULL;
+
+    try
+    {
+        oSBMLDoc = readSBMLFromString(sArg.c_str());
+        if(oSBMLDoc)
+        {
+        	oModel = oSBMLDoc->getModel();
+        }
+
+        if (oModel == NULL)
+        {
+            throw RRException("SBML Validation failed");
+        }
+        else
+        {
+            changeTimeSymbol(*oModel, sTimeSymbol);
+            return writeSBMLToString(oSBMLDoc);
+        }
+    }
+    catch(...)
+    {
+
+    }
+//    finally
+//    {
+//        if (oSBMLDoc != NULL)
+//            oSBMLDoc.Dispose();
+//    }
+	return string("");
+}
+
 //        public static void ChangeConstantForRules(Model model)
 //        {
 //            var ruleTargets = new List<string>();
@@ -789,42 +810,66 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 //            }
 //        }
 //
-//        private static void changeSymbol(Model oModel, string sTimeSymbol, int targetType)
-//        {
-//            for (int i = 0; i < oModel.getNumReactions(); i++)
-//            {
-//                libsbmlcs.Reaction r = oModel.getReaction(i);
-//                if (r.getKineticLaw() != NULL && r.getKineticLaw().isSetMath())
-//                    r.getKineticLaw().setMath(changeSymbol(r.getKineticLaw().getMath(), sTimeSymbol, targetType));
-//            }
-//            for (int i = 0; i < oModel.getNumRules(); i++)
-//            {
-//                Rule r = oModel.getRule(i);
-//                if (r.isSetMath())
-//                    r.setMath(changeSymbol(r.getMath(), sTimeSymbol, targetType));
-//            }
-//            for (int i = 0; i < oModel.getNumInitialAssignments(); i++)
-//            {
-//                InitialAssignment initialAssignment = oModel.getInitialAssignment(i);
-//                if (initialAssignment.isSetMath())
-//                    initialAssignment.setMath(changeSymbol(initialAssignment.getMath(), sTimeSymbol, targetType));
-//            }
-//            for (int i = 0; i < oModel.getNumEvents(); i++)
-//            {
-//                Event oEvent = oModel.getEvent(i);
-//                if (oEvent.getTrigger().isSetMath())
-//                    oEvent.getTrigger().setMath(changeSymbol(oEvent.getTrigger().getMath(), sTimeSymbol, targetType));
-//                if (oEvent.isSetDelay() && oEvent.getDelay().isSetMath())
-//                    oEvent.getDelay().setMath(changeSymbol(oEvent.getDelay().getMath(), sTimeSymbol, targetType));
-//                for (int j = 0; j < oEvent.getNumEventAssignments(); j++)
-//                {
-//                    EventAssignment assignment = oEvent.getEventAssignment(j);
-//                    if (assignment.isSetMath())
-//                        assignment.setMath(changeSymbol(assignment.getMath(), sTimeSymbol, targetType));
-//                }
-//            }
-//        }
-//
+void NOMSupport::changeSymbol(Model& oModel, const string& sTimeSymbol, const int& targetType)
+{
+    for (int i = 0; i < oModel.getNumReactions(); i++)
+    {
+        Reaction *r = oModel.getReaction(i);
+        if(!r)
+        {
+        	continue;
+        }
+
+        if (r->getKineticLaw() != NULL && r->getKineticLaw()->isSetMath())
+        {
+			const ASTNode* node = (ASTNode*) r->getKineticLaw()->getMath();
+	        const ASTNode* math = changeSymbol((ASTNode*) node, sTimeSymbol, targetType);
+//            r->getKineticLaw()->setMath(math); //TODO: fix
+        }
+    }
+
+    for (int i = 0; i < oModel.getNumRules(); i++)
+    {
+        Rule* r = oModel.getRule(i);
+        if (r->isSetMath())
+        {
+            //r->setMath(changeSymbol((ASTNode*) r->getMath(), sTimeSymbol, targetType)); //Todo: Fix
+        }
+    }
+
+    for (int i = 0; i < oModel.getNumInitialAssignments(); i++)
+    {
+        InitialAssignment *initialAssignment = oModel.getInitialAssignment(i);
+        if (initialAssignment->isSetMath())
+        {
+//            initialAssignment->setMath(changeSymbol((ASTNode*) initialAssignment->getMath(), sTimeSymbol, targetType));
+        }
+    }
+
+    for (int i = 0; i < oModel.getNumEvents(); i++)
+    {
+        Event *oEvent = oModel.getEvent(i);
+        if (oEvent->getTrigger()->isSetMath())
+        {
+//            oEvent->getTrigger()->setMath((const ASTNode*) changeSymbol((ASTNode*) oEvent->getTrigger()->getMath(), sTimeSymbol, targetType)); /Todo: Fix
+        }
+
+        if (oEvent->isSetDelay() && oEvent->getDelay()->isSetMath())
+        {
+//            oEvent->getDelay()->setMath((ASTNode*) changeSymbol((ASTNode*) oEvent->getDelay()->getMath(), sTimeSymbol, targetType));
+        }
+
+        for (int j = 0; j < oEvent->getNumEventAssignments(); j++)
+        {
+            EventAssignment *assignment = oEvent->getEventAssignment(j);
+            if (assignment->isSetMath())
+            {
+//                assignment->setMath(changeSymbol((ASTNode*) assignment->getMath(), sTimeSymbol, targetType));
+            }
+        }
+    }
+}
+
 //        private static void ChangeNameToCSymbol(Model model, string name, int type)
 //        {
 //            for (int i = 0; i < model.getNumReactions(); i++)
@@ -847,17 +892,17 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 //            }
 //        }
 //
-//        private static ASTNode changeSymbol(ASTNode node, string time, int targetType)
-//        {
-//            int c;
-//            if (node.getType() == targetType)
-//                node.setName(time);
-//
-//            for (c = 0; c < node.getNumChildren(); c++)
-//                changeSymbol(node.getChild(c), time, targetType);
-//            return node;
-//        }
-//
+const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const int& targetType)
+{
+    int c;
+    if (node->getType() == targetType)
+        node->setName(time.c_str());
+
+    for (c = 0; c < node->getNumChildren(); c++)
+        changeSymbol(node->getChild(c), time, targetType);
+    return node;
+}
+
 //        public static ASTNode ReplaceSymbol(ASTNode node, string oldId, string newId)
 //        {
 //            int c;
@@ -1277,15 +1322,15 @@ StringListContainer NOMSupport::getListOfFloatingSpecies()
 //            return GetId(mModel);
 //        }
 //
-//        public static string getModelName()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw new Exception("You need to load the model first");
-//            }
-//            return GetName(mModel);
-//        }
-//
+string NOMSupport::getModelName()
+{
+    if (mModel == NULL)
+    {
+        throw RRException("You need to load the model first");
+    }
+    return GetName((SBase*) mModel);
+}
+
 //        public static string getNotes(string sId)
 //        {
 //            if (mModel == NULL)
@@ -1470,48 +1515,48 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //            return GetName(oCompartment);
 //        }
 //
-//        public static ArrayList getNthError(int nIndex)
-//        {
-//            if (_oDoc == NULL)
-//            {
-//                throw new Exception("You need to load the model first");
-//            }
-//
-//            if (nIndex >= _oDoc.getNumErrors())
-//                throw new Exception("Index out of Bounds.");
-//
-//            SBMLError error = _oDoc.getError((int)nIndex);
-//            ArrayList oResult = new ArrayList();
-//
-//            switch (error.getSeverity())
-//            {
-//                default:
-//                case (int)libsbml.LIBSBML_SEV_INFO: oResult.Add("Advisory"); break;
-//                case (int)libsbml.LIBSBML_SEV_WARNING: oResult.Add("Warning"); break;
-//                case (int)libsbml.LIBSBML_SEV_FATAL: oResult.Add("Fatal"); break;
-//                case (int)libsbml.LIBSBML_SEV_ERROR: oResult.Add("Error"); break;
-//                case (int)libsbml.LIBSBML_SEV_SCHEMA_ERROR: oResult.Add("Error"); break;
-//                case (int)libsbml.LIBSBML_SEV_GENERAL_WARNING: oResult.Add("Warning"); break;
-//            }
-//            oResult.Add((int)error.getLine());
-//            oResult.Add((int)error.getColumn());
-//            oResult.Add((int)error.getErrorId());
-//            oResult.Add(error.getMessage());
-//            return oResult;
-//        }
-//
+ArrayList NOMSupport::getNthError(const int& nIndex)
+{
+    if (_oDoc == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    if (nIndex >= _oDoc->getNumErrors())
+        throw Exception("Index out of Bounds.");
+
+    SBMLError *error = (SBMLError*) _oDoc->getError(nIndex);
+    ArrayList oResult;// = new ArrayList();
+
+    switch (error->getSeverity())
+    {
+        default:
+        case (int)LIBSBML_SEV_INFO: oResult.Add("Advisory"); break;
+        case (int)LIBSBML_SEV_WARNING: oResult.Add("Warning"); break;
+        case (int)LIBSBML_SEV_FATAL: oResult.Add("Fatal"); break;
+        case (int)LIBSBML_SEV_ERROR: oResult.Add("Error"); break;
+        case (int)LIBSBML_SEV_SCHEMA_ERROR: oResult.Add("Error"); break;
+        case (int)LIBSBML_SEV_GENERAL_WARNING: oResult.Add("Warning"); break;
+    }
+    oResult.Add((int) error->getLine());
+    oResult.Add((int) error->getColumn());
+    oResult.Add((int) error->getErrorId());
+    oResult.Add(error->getMessage());
+    return oResult;
+}
+
 //        public static bool getNthUseValuesFromTriggerTime(int arg)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            Event oEvent = mModel.getEvent((int)arg);
 //
 //            if (oEvent == NULL)
 //            {
-//                throw new Exception("The model does not have a Event corresponding to the index provided");
+//                throw Exception("The model does not have a Event corresponding to the index provided");
 //            }
 //            return oEvent.getUseValuesFromTriggerTime();
 //        }
@@ -1520,7 +1565,7 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            ArrayList triggerAssignmentsList = new ArrayList();
@@ -1528,7 +1573,7 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //
 //            if (oEvent == NULL)
 //            {
-//                throw new Exception("The model does not have a Event corresponding to the index provided");
+//                throw Exception("The model does not have a Event corresponding to the index provided");
 //            }
 //
 //            string trigger = libsbml.formulaToString(oEvent.getTrigger().getMath());
@@ -1604,7 +1649,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            int nCount = 0;
@@ -1623,14 +1668,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //                    }
 //                }
 //            }
-//            throw new Exception("The model does not have a floating species corresponding to the index provided");
+//            throw Exception("The model does not have a floating species corresponding to the index provided");
 //        }
 //
 //        public static string getNthFloatingSpeciesName(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            int nCount = 0;
@@ -1649,26 +1694,26 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //                    }
 //                }
 //            }
-//            throw new Exception("The model does not have a floating species corresponding to the index provided");
+//            throw Exception("The model does not have a floating species corresponding to the index provided");
 //        }
 //
 //        public static ArrayList getNthFunctionDefinition(int arg)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (arg < 0 || arg >= (int)mModel.getNumFunctionDefinitions())
 //            {
-//                throw new Exception("Invalid input - Argument should be >= 0 and should be less than total number of Function Definitions in the model");
+//                throw Exception("Invalid input - Argument should be >= 0 and should be less than total number of Function Definitions in the model");
 //            }
 //
 //            FunctionDefinition fnDefn = mModel.getFunctionDefinition((int)arg);
 //
 //            if (fnDefn == NULL)
 //            {
-//                throw new Exception("The model does not have a Function Definition corresponding to the index provided");
+//                throw Exception("The model does not have a Function Definition corresponding to the index provided");
 //            }
 //
 //            string fnId = fnDefn.getId();
@@ -1695,20 +1740,20 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //
 //            }
 //
 //            if (nIndex >= (int)mModel.getNumParameters())
 //            {
-//                throw new Exception("There is no parameter corresponding to the index you provided");
+//                throw Exception("There is no parameter corresponding to the index you provided");
 //
 //            }
 //
 //            Parameter oParameter = mModel.getParameter((int)nIndex);
 //            if (oParameter == NULL)
 //            {
-//                throw new Exception("There is no parameter corresponding to the index you provided");
+//                throw Exception("There is no parameter corresponding to the index you provided");
 //            }
 //            return GetId(oParameter);
 //        }
@@ -1717,20 +1762,20 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //
 //            }
 //
 //            if (nIndex >= (int)mModel.getNumParameters())
 //            {
-//                throw new Exception("There is no parameter corresponding to the index you provided");
+//                throw Exception("There is no parameter corresponding to the index you provided");
 //
 //            }
 //
 //            Parameter oParameter = mModel.getParameter((int)nIndex);
 //            if (oParameter == NULL)
 //            {
-//                throw new Exception("There is no parameter corresponding to the index you provided");
+//                throw Exception("There is no parameter corresponding to the index you provided");
 //            }
 //            return GetName(oParameter);
 //        }
@@ -1739,14 +1784,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            ArrayList modifierList = new ArrayList();
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
@@ -1762,14 +1807,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            ArrayList productList = new ArrayList();
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
@@ -1791,14 +1836,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            ArrayList reactantList = new ArrayList();
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
@@ -1820,12 +1865,12 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nReactionIndex < 0 || nReactionIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction oReaction = mModel.getReaction((int)nReactionIndex);
@@ -1833,7 +1878,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //            if (nParameterIndex < 0 || nParameterIndex >= (int)kl.getNumParameters())
 //            {
-//                throw new Exception("Index exceeds the number of Parameters in the list");
+//                throw Exception("Index exceeds the number of Parameters in the list");
 //            }
 //
 //            return kl.getParameter((int)nParameterIndex).isSetValue();
@@ -1844,12 +1889,12 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nReactionIndex < 0 || nReactionIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction oReaction = mModel.getReaction((int)nReactionIndex);
@@ -1857,7 +1902,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //            if (nParameterIndex < 0 || nParameterIndex >= (int)kl.getNumParameters())
 //            {
-//                throw new Exception("Index exceeds the number of Parameters in the list");
+//                throw Exception("Index exceeds the number of Parameters in the list");
 //            }
 //
 //            return kl.getParameter((int)nParameterIndex).getId();
@@ -1868,12 +1913,12 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nReactionIndex < 0 || nReactionIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction oReaction = mModel.getReaction((int)nReactionIndex);
@@ -1881,7 +1926,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //            if (nParameterIndex < 0 || nParameterIndex >= (int)kl.getNumParameters())
 //            {
-//                throw new Exception("Index exceeds the number of Parameters in the list");
+//                throw Exception("Index exceeds the number of Parameters in the list");
 //            }
 //
 //            return kl.getParameter((int)nParameterIndex).getName();
@@ -1891,12 +1936,12 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nReactionIndex < 0 || nReactionIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction oReaction = mModel.getReaction((int)nReactionIndex);
@@ -1904,7 +1949,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //            if (nParameterIndex < 0 || nParameterIndex >= (int)kl.getNumParameters())
 //            {
-//                throw new Exception("Index exceeds the number of Parameters in the list");
+//                throw Exception("Index exceeds the number of Parameters in the list");
 //            }
 //
 //            return kl.getParameter((int)nParameterIndex).getValue();
@@ -1915,18 +1960,18 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getProduct((int)nProduct);
 //            if (oRef == NULL)
-//                throw new Exception("No product for the provided index.");
+//                throw Exception("No product for the provided index.");
 //            return oRef.getSpecies();
 //        }
 //
@@ -1934,18 +1979,18 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getProduct((int)nProduct);
 //            if (oRef == NULL)
-//                throw new Exception("No product for the provided index.");
+//                throw Exception("No product for the provided index.");
 //            return (int)oRef.getStoichiometry();
 //        }
 //
@@ -1953,19 +1998,19 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getProduct((int)nProduct);
 //            if (oRef == NULL)
-//                throw new Exception("No product for the provided index.");
+//                throw Exception("No product for the provided index.");
 //            return oRef.getStoichiometry();
 //        }
 //
@@ -1973,18 +2018,18 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getReactant((int)nReactant);
 //            if (oRef == NULL)
-//                throw new Exception("No reactant for the provided index.");
+//                throw Exception("No reactant for the provided index.");
 //            return oRef.getSpecies();
 //        }
 //
@@ -1992,18 +2037,18 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getReactant((int)nReactant);
 //            if (oRef == NULL)
-//                throw new Exception("No reactant for the provided index.");
+//                throw Exception("No reactant for the provided index.");
 //            return (int)oRef.getStoichiometry();
 //        }
 //
@@ -2011,18 +2056,18 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getReactant((int)nReactant);
 //            if (oRef == NULL)
-//                throw new Exception("No reactant for the provided index.");
+//                throw Exception("No reactant for the provided index.");
 //            return oRef.getStoichiometry();
 //        }
 //
@@ -2030,12 +2075,12 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
@@ -2046,12 +2091,12 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
@@ -2062,14 +2107,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            InitialAssignment oAssignment = mModel.getInitialAssignment((int)nIndex);
 //            if (oAssignment == NULL)
-//                throw new Exception("The model does not have an InitialAssignment corresponding to the index provided");
+//                throw Exception("The model does not have an InitialAssignment corresponding to the index provided");
 //
 //            if (!oAssignment.isSetMath())
-//                throw new Exception("The InitialAssignment contains no math.");
+//                throw Exception("The InitialAssignment contains no math.");
 //
 //            return new Pair<string, string>(oAssignment.getSymbol(), libsbml.formulaToString(oAssignment.getMath()));
 //        }
@@ -2078,14 +2123,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            InitialAssignment oAssignment = mModel.getInitialAssignment((int)nIndex);
 //            if (oAssignment == NULL)
-//                throw new Exception("The model does not have an InitialAssignment corresponding to the index provided");
+//                throw Exception("The model does not have an InitialAssignment corresponding to the index provided");
 //
 //            if (!oAssignment.isSetMath())
-//                throw new Exception("The InitialAssignment contains no math.");
+//                throw Exception("The InitialAssignment contains no math.");
 //
 //            return oAssignment.getSymbol() + " = " + libsbml.formulaToString(oAssignment.getMath());
 //
@@ -2095,15 +2140,15 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            Constraint oConstraint = mModel.getConstraint((int)nIndex);
 //            if (oConstraint == NULL)
-//                throw new Exception("The model does not have a constraint corresponding to the index provided");
+//                throw Exception("The model does not have a constraint corresponding to the index provided");
 //
 //            if (!oConstraint.isSetMath())
-//                throw new Exception("The constraint does not provide math.");
+//                throw Exception("The constraint does not provide math.");
 //
 //            if (!oConstraint.isSetMessage())
 //                sMessage = "Constraint: " + nIndex.ToString() + " was violated.";
@@ -2117,13 +2162,13 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            Rule oRule = mModel.getRule((int)nIndex);
 //            if (oRule == NULL)
 //            {
-//                throw new Exception("The model does not have a Rule corresponding to the index provided");
+//                throw Exception("The model does not have a Rule corresponding to the index provided");
 //            }
 //
 //            int type = oRule.getTypeCode();
@@ -2162,14 +2207,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            rule = mModel.getRule((int)arg);
 //
 //            if (rule == NULL)
 //            {
-//                throw new Exception("The model does not have a Rule corresponding to the index provided");
+//                throw Exception("The model does not have a Rule corresponding to the index provided");
 //            }
 //
 //            int type = rule.getTypeCode();
@@ -2209,7 +2254,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)mModel.getNumSpeciesWithBoundaryCondition();
 //        }
@@ -2218,7 +2263,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)mModel.getNumCompartments();
 //        }
@@ -2227,7 +2272,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (_oDoc == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)_oDoc.getNumErrors();
 //        }
@@ -2236,7 +2281,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)mModel.getNumEvents();
 //        }
@@ -2245,7 +2290,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)mModel.getNumSpecies() - (int)mModel.getNumSpeciesWithBoundaryCondition();
 //
@@ -2255,7 +2300,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)mModel.getNumInitialAssignments();
 //        }
@@ -2264,7 +2309,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)mModel.getNumConstraints();
 //        }
@@ -2273,7 +2318,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)mModel.getNumFunctionDefinitions();
 //
@@ -2283,7 +2328,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)mModel.getNumParameters();
 //
@@ -2293,10 +2338,10 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            if (var0 > mModel.getNumReactions())
-//                throw new Exception("Reaction does not exist");
+//                throw Exception("Reaction does not exist");
 //            libsbmlcs.Reaction r = mModel.getReaction((int)var0);
 //            if (!r.isSetKineticLaw()) return 0;
 //            return (int)r.getKineticLaw().getNumParameters();
@@ -2307,10 +2352,10 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            if (var0 > mModel.getNumReactions())
-//                throw new Exception("Reaction does not exist");
+//                throw Exception("Reaction does not exist");
 //            libsbmlcs.Reaction r = mModel.getReaction((int)var0);
 //            return (int)r.getNumProducts();
 //        }
@@ -2319,10 +2364,10 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            if (var0 > mModel.getNumReactions())
-//                throw new Exception("Reaction does not exist");
+//                throw Exception("Reaction does not exist");
 //            libsbmlcs.Reaction r = mModel.getReaction((int)var0);
 //            return (int)r.getNumReactants();
 //        }
@@ -2331,7 +2376,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)mModel.getNumReactions();
 //        }
@@ -2340,7 +2385,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            return (int)mModel.getNumRules();
 //        }
@@ -2349,14 +2394,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //
 //            }
 //
 //            Compartment oCompartment = mModel.getCompartment(var0);
 //            if (oCompartment == NULL)
 //            {
-//                throw new Exception("There is no compartment corresponding to the input argument.");
+//                throw Exception("There is no compartment corresponding to the input argument.");
 //            }
 //            return oCompartment.getOutside();
 //
@@ -2377,7 +2422,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //                if (oModel == NULL)
 //                {
-//                    throw new Exception("SBML Validation failed");
+//                    throw Exception("SBML Validation failed");
 //                }
 //                else
 //                {
@@ -2442,58 +2487,83 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            }
 //        }
 //
-//        private static void modifyKineticLawsForReaction(KineticLaw oLaw, string reactionId, Model oModel)
-//        {
-//            int numLocalParameters = (int)oLaw.getNumParameters();
-//            if (numLocalParameters > 0)
-//            {
-//                StringCollection oList = new StringCollection();
-//                for (int j = numLocalParameters; j > 0; j--)
-//                {
-//                    Parameter parameter = (Parameter)oLaw.getParameter(j - 1).clone();
-//                    string parameterId = GetId(parameter);
-//                    string sPrefix = reactionId + "_";
-//                    if (!oLaw.isSetMath())
-//                    {
-//                        if (oLaw.isSetFormula())
-//                        {
-//                            ASTNode node = libsbml.readMathMLFromString(oLaw.getFormula());
-//                            ChangeParameterName(node, parameterId, sPrefix);
-//                            string sNode = libsbml.formulaToString(node);
-//                            oLaw.setFormula(sNode);
-//                        }
-//                    }
-//                    else
-//                    {
-//                        ChangeParameterName(oLaw.getMath(), parameterId, sPrefix);
-//                    }
-//                    Parameter oTemp = (Parameter)oLaw.getListOfParameters().remove(j - 1);
-//                    if (oTemp != NULL) oTemp.Dispose();
-//                    parameter.setId(sPrefix + parameterId);
-//                    //oModel.getListOfParameters().append(parameter);
-//                    //oModel.getListOfParameters().appendAndOwn(parameter);
-//                    oModel.addParameter(parameter);
-//                    if (parameter != NULL) parameter.Dispose();
-//                }
-//            }
-//        }
-//
-//        private static void modifyKineticLaws(SBMLDocument oSBMLDoc, Model oModel)
-//        {
-//            int numOfReactions = (int)oModel.getNumReactions();
-//            for (int i = 0; i < numOfReactions; i++)
-//            {
-//                libsbmlcs.Reaction oReaction = oModel.getReaction(i);
-//                string sId = GetId(oReaction);
-//                KineticLaw oLaw = oReaction.getKineticLaw();
-//                if (oLaw == NULL) { if (oReaction != NULL)oReaction.Dispose(); continue; }
-//                modifyKineticLawsForLocalParameters(oLaw, sId, oModel);
-//                modifyKineticLawsForReaction(oLaw, sId, oModel);
-//                if (oLaw != NULL) oLaw.Dispose(); if (oReaction != NULL) oReaction.Dispose();
-//            }
-//
-//        }
-//
+
+void NOMSupport::modifyKineticLawsForReaction(KineticLaw& oLaw, const string& reactionId, Model& oModel)
+{
+    int numLocalParameters = (int)oLaw.getNumParameters();
+    if (numLocalParameters > 0)
+    {
+//        StringCollection oList = new StringCollection();
+        for (int j = numLocalParameters; j > 0; j--)
+        {
+            Parameter *parameter = (Parameter*) oLaw.getParameter(j - 1)->clone();
+            string parameterId = GetId( *parameter);
+            string sPrefix = reactionId + "_";
+            if (!oLaw.isSetMath())
+            {
+                if (oLaw.isSetFormula())
+                {
+                    ASTNode *node = readMathMLFromString(oLaw.getFormula().c_str());
+                    ChangeParameterName(node, parameterId, sPrefix);
+//                    string sNode = formulaToString(node);
+					string sNode = SBML_formulaToString(node);
+                    oLaw.setFormula(sNode);
+                }
+            }
+            else
+            {
+                ChangeParameterName((ASTNode*)oLaw.getMath(), parameterId, sPrefix);
+            }
+            Parameter *oTemp = (Parameter*)oLaw.getListOfParameters()->remove(j - 1);
+            if (oTemp != NULL)
+            {
+            	//	oTemp.Dispose();
+            }
+            parameter->setId(sPrefix + parameterId);
+            //oModel.getListOfParameters().append(parameter);
+            //oModel.getListOfParameters().appendAndOwn(parameter);
+            oModel.addParameter(parameter);
+            if (parameter != NULL)
+            {
+            	//parameter.Dispose();
+            }
+        }
+    }
+}
+
+void NOMSupport::modifyKineticLaws(SBMLDocument& oSBMLDoc, Model& oModel)
+{
+    int numOfReactions = (int)oModel.getNumReactions();
+    for (int i = 0; i < numOfReactions; i++)
+    {
+        Reaction *oReaction = oModel.getReaction(i);
+        string sId = GetId(*oReaction);
+        KineticLaw *oLaw = oReaction->getKineticLaw();
+        if (oLaw == NULL)
+        {
+        	if (oReaction != NULL)
+            {
+            	//oReaction->Dispose();
+            }
+            continue;
+        }
+
+        modifyKineticLawsForLocalParameters(*oLaw, sId, oModel);
+
+        modifyKineticLawsForReaction(*oLaw, sId, oModel);
+
+        if (oLaw != NULL)
+        {
+//        	oLaw.Dispose();
+        }
+
+        if (oReaction != NULL)
+        {
+//        	oReaction.Dispose();
+        }
+    }
+}
+
 //        private static void ChangeParameterName(ASTNode node, string sParameterName, string sPrefix)
 //        {
 //            int c;
@@ -2513,7 +2583,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (_ParameterSets != NULL && mModel != NULL)
@@ -2527,7 +2597,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            if (mModel == NULL)
 //            {
 //                return 0;
-//                //throw new Exception("You need to load the model first");
+//                //throw Exception("You need to load the model first");
 //            }
 //
 //            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
@@ -2564,7 +2634,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //                return mModel.getSBOTerm();
 //
 //            return 0;
-//            //throw new Exception("Invalid id. No element with the given id exists in the model.");
+//            //throw Exception("Invalid id. No element with the given id exists in the model.");
 //
 //        }
 //
@@ -2588,7 +2658,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
@@ -2642,21 +2712,21 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            }
 //
 //
-//            throw new Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
+//            throw Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
 //        }
 //
 //        public static bool hasInitialAmount(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
 //            if (oSpecies != NULL)
 //                return oSpecies.isSetInitialAmount();
 //
-//            throw new Exception("Invalid string name. The name is not a valid id/name of a floating / boundary species.");
+//            throw Exception("Invalid string name. The name is not a valid id/name of a floating / boundary species.");
 //
 //        }
 //
@@ -2664,21 +2734,21 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
 //            if (oSpecies != NULL)
 //                return oSpecies.isSetInitialConcentration();
 //
-//            throw new Exception("Invalid string name. The name is not a valid id/name of a floating / boundary species.");
+//            throw Exception("Invalid string name. The name is not a valid id/name of a floating / boundary species.");
 //        }
 //
 //        public static bool hasSBOTerm(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
@@ -2711,7 +2781,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //                return oRule.isSetSBOTerm();
 //            }
 //
-//            throw new Exception("Invalid id. No element with the given id exists in the model.");
+//            throw Exception("Invalid id. No element with the given id exists in the model.");
 //
 //        }
 //
@@ -2719,7 +2789,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
@@ -2741,35 +2811,35 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //                return oParameter.isSetValue();
 //            }
 //
-//            throw new Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
+//            throw Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
 //        }
 //
 //        public static bool isConstantImpl(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
 //            if (oSpecies != NULL)
 //                return oSpecies.getConstant();
 //
-//            throw new Exception("Invalid string name. The name is not a valid id/name of a floating / boundary species.");
+//            throw Exception("Invalid string name. The name is not a valid id/name of a floating / boundary species.");
 //        }
 //
 //        public static bool isReactionReversible(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            ArrayList productList = new ArrayList();
 //
 //            if (nIndex >= (int)mModel.getNumReactions())
 //            {
-//                throw new Exception("There is no reaction corresponding to the index you provided");
+//                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
 //            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
@@ -2943,23 +3013,21 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //        }
 //
-//        public static void loadSBML(string var0, string sTimeSymbol)
-//        {
-//            loadSBML(var0);
-//            changeTimeSymbol(mModel, sTimeSymbol);
-//            changeSymbol(mModel, "avogadro", libsbml.AST_NAME_AVOGADRO);
-//            modifyKineticLaws(_oDoc, mModel);
-//            ReorderRules(_oDoc, mModel);
-//
-//            BuildSymbolTable();
-//
-//        }
-//
-//        private static void changeTimeSymbol(Model model, string timeSymbol)
-//        {
-//            changeSymbol(model, timeSymbol, libsbml.AST_NAME_TIME);
-//        }
-//
+void NOMSupport::loadSBML(const string& var0, const string& sTimeSymbol)
+{
+    loadSBML(var0);
+    changeTimeSymbol(*mModel, sTimeSymbol);
+    changeSymbol(*mModel, "avogadro", AST_NAME_AVOGADRO);
+    modifyKineticLaws(*mSBMLDoc, *mModel);
+    ReorderRules(*mSBMLDoc, *mModel);
+    BuildSymbolTable();
+}
+
+void NOMSupport::changeTimeSymbol(Model& model, const string& timeSymbol)
+{
+    changeSymbol(model, timeSymbol, AST_NAME_TIME);
+}
+
 //        public static void loadParameterPromotedSBML(string var0, string sTimeSymbol)
 //        {
 //            loadSBML(var0);
@@ -3139,67 +3207,67 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            }
 //        }
 //
-//        public static void loadSBML(string var0)
+void NOMSupport::loadSBML(const string& var0)
+{
+    //byte[] oBuffer = ASCIIEncoding.ASCII.GetBytes(var0.ToCharArray());
+    //System.IO.MemoryStream oStream = new System.IO.MemoryStream(oBuffer);
+//    string sTemp = new System.IO.StreamReader(oStream).ReadToEnd();
+	string sTemp = var0;
+    if (mSBMLDoc != NULL)
+    {
+        try
+        {
+            if (mModel != NULL)
+            {
+                delete mModel;//.Dispose();
+                mModel = NULL;
+            }
+            delete mSBMLDoc;//_oDoc.Dispose();
+            mSBMLDoc = NULL;
+        }
+        catch(...)
+        {
+            // never mind ....
+        }
+
+    }
+
+    // we also need to collect all namespaces from the file, or rather
+    // all registered prefixes:
+
+//    //string regex=@"^.*?xmlns:(?<prefix>\w+?)^.*= "(?<namespace>.+?).*?$";
+//    string regex = "xmlns:(?<prefix>\\w+?)\\s*=\\s*(?:\"(?<namespace>[^\"]*)\"|(?<namespace>\\S+))";
+//    RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace | RegexOptions.CultureInvariant;
+//    string input = var0;
+//
+//    Namespaces = new List<string>();
+//    List<string> prefixes = new List<string>();
+//    MatchCollection matches = Regex.Matches(input, regex, options);
+//    foreach (Match match in matches)
+//    {
+//        //Console.WriteLine(match.Value);
+//        string prefix = match.Value.Substring(0, match.Value.IndexOf('='));
+//        if (!prefixes.Contains(prefix) && !Namespaces.Contains(match.Value))
 //        {
-//            byte[] oBuffer = ASCIIEncoding.ASCII.GetBytes(var0.ToCharArray());
-//            System.IO.MemoryStream oStream = new System.IO.MemoryStream(oBuffer);
-//            string sTemp = new System.IO.StreamReader(oStream).ReadToEnd();
-//            if (_oDoc != NULL)
-//            {
-//                try
-//                {
-//                    if (mModel != NULL)
-//                    {
-//                        mModel.Dispose();
-//                        mModel = NULL;
-//                    }
-//                    _oDoc.Dispose();
-//                    _oDoc = NULL;
-//                }
-//                catch
-//                {
-//                    // never mind ....
-//                }
-//
-//            }
-//
-//            // we also need to collect all namespaces from the file, or rather
-//            // all registered prefixes:
-//
-//            //string regex=@"^.*?xmlns:(?<prefix>\w+?)^.*= "(?<namespace>.+?).*?$";
-//            string regex = "xmlns:(?<prefix>\\w+?)\\s*=\\s*(?:\"(?<namespace>[^\"]*)\"|(?<namespace>\\S+))";
-//            RegexOptions options = RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace | RegexOptions.CultureInvariant;
-//            string input = var0;
-//
-//            Namespaces = new List<string>();
-//            List<string> prefixes = new List<string>();
-//            MatchCollection matches = Regex.Matches(input, regex, options);
-//            foreach (Match match in matches)
-//            {
-//                //Console.WriteLine(match.Value);
-//                string prefix = match.Value.Substring(0, match.Value.IndexOf('='));
-//                if (!prefixes.Contains(prefix) && !Namespaces.Contains(match.Value))
-//                {
-//                    Namespaces.Add(match.Value);
-//                    prefixes.Add(prefix);
-//                }
-//
-//                //Console.WriteLine("prefix:" + match.Groups["prefix"].Value);
-//
-//                //Console.WriteLine("namespace:" + match.Groups["namespace"].Value);
-//
-//            }
-//
-//            _ParameterSets = new ParameterSets(sTemp);
-//
-//            _oDoc = libsbml.readSBMLFromString(sTemp);
-//            mModel = _oDoc.getModel();
-//            if (mModel == NULL)
-//            {
-//                throw new Exception(validateSBML(sTemp));
-//            }
+//            Namespaces.Add(match.Value);
+//            prefixes.Add(prefix);
 //        }
 //
+//        //Console.WriteLine("prefix:" + match.Groups["prefix"].Value);
+//        //Console.WriteLine("namespace:" + match.Groups["namespace"].Value);
+//
+//    }
+
+//    _ParameterSets = new ParameterSets(sTemp);
+
+    mSBMLDoc = readSBMLFromString(sTemp.c_str());
+    mModel = mSBMLDoc->getModel();
+    if (mModel == NULL)
+    {
+        throw RRException(validateSBML(sTemp));
+    }
+}
+
 //        private static ParameterSets _ParameterSets;
 //
 //        public static ParameterSets ParameterSets
@@ -3212,7 +3280,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (mModel.getId() == sId || mModel.getName() == sId)
@@ -3256,14 +3324,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //                return;
 //            }
 //
-//            throw new Exception("Invalid id. No element with the given id exists in the model.");
+//            throw Exception("Invalid id. No element with the given id exists in the model.");
 //        }
 //
 //        public static void setModelId(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //            mModel.setId(sId);
 //        }
@@ -3272,7 +3340,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            if (mModel.getId() == sId || mModel.getName() == sId)
@@ -3316,14 +3384,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //                return;
 //            }
 //
-//            throw new Exception("Invalid id. No element with the given id exists in the model.");
+//            throw Exception("Invalid id. No element with the given id exists in the model.");
 //        }
 //
 //        public static void setSBOTerm(string sId, int nSBOTerm)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
@@ -3361,7 +3429,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //                return;
 //            }
 //
-//            throw new Exception("Invalid id. No element with the given id exists in the model.");
+//            throw Exception("Invalid id. No element with the given id exists in the model.");
 //
 //        }
 //
@@ -3369,7 +3437,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (model == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            libsbmlcs.Species oSpecies = model.getSpecies(id);
@@ -3419,7 +3487,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            }
 //
 //            if (throwIfNotFound)
-//                throw new Exception(string.Format("Invalid string name. The id '{0}' does not exist in the model", id));
+//                throw Exception(string.Format("Invalid string name. The id '{0}' does not exist in the model", id));
 //        }
 //
 //        public static void setValue(string sId, double dValue)
@@ -3427,22 +3495,23 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            setValue(mModel, sId, dValue, true);
 //        }
 //
-//        public static string validateSBML(string sModel)
-//        {
-//            SBMLDocument oDoc = libsbml.readSBMLFromString(sModel);
-//            if (oDoc.getNumErrors() > 0)
-//            {
-//                StringBuilder oBuilder = new StringBuilder();
-//                for (int i = 0; i < oDoc.getNumErrors(); i++)
-//                {
-//                    ArrayList oList = getNthError(i);
-//                    oBuilder.Append(oList[0] + ": (" + oList[1] + ":" + oList[2] + "[" + oList[3] + "]) " + oList[4] + Environment.NewLine);
-//                }
-//                throw new Exception("Validation failed: " + Environment.NewLine + oBuilder.ToString());
-//            }
-//            return "Validation Successfull";
-//        }
-//
+string NOMSupport::validateSBML(const string& sModel)
+{
+    SBMLDocument *oDoc = readSBMLFromString(sModel.c_str());
+    if (oDoc->getNumErrors() > 0)
+    {
+        StringBuilder oBuilder;// = new StringBuilder();
+        for (int i = 0; i < oDoc->getNumErrors(); i++)
+        {
+            ArrayList oList = getNthError(i);
+
+            //oBuilder.Append(oList[0] + ": (" + oList[1] + ":" + oList[2] + "[" + oList[3] + "]) " + oList[4] + Environment.NewLine);
+        }
+        throw Exception("SBML Validation failed: " + oBuilder.ToString());
+    }
+    return "Validation Successfull";
+}
+
 //        public static string validateWithConsistency(string sModel)
 //        {
 //            SBMLDocument oDoc = libsbml.readSBMLFromString(sModel);
@@ -3454,7 +3523,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //                    ArrayList oList = getNthError(i);
 //                    oBuilder.Append(oList[0] + ": (" + oList[1] + ":" + oList[2] + "[" + oList[3] + "]) " + oList[4] + Environment.NewLine);
 //                }
-//                throw new Exception("Validation failed: " + Environment.NewLine + oBuilder.ToString());
+//                throw Exception("Validation failed: " + Environment.NewLine + oBuilder.ToString());
 //            }
 //            return "Validation Successfull";
 //        }
@@ -3638,7 +3707,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
-//                throw new Exception("You need to load the model first");
+//                throw Exception("You need to load the model first");
 //            }
 //
 //            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
@@ -3687,7 +3756,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //
 //
-//            throw new Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
+//            throw Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
 //        }
 //
 //        /// <summary>
