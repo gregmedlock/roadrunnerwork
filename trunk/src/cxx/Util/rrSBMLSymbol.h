@@ -114,7 +114,7 @@ class RR_DECLSPEC SBMLSymbol : public rrObject
     public:
     	SBMLSymbol() : mConcentration(mValue), mAmount(mValue){}
         SBMLSymbol(const SBMLSymbol& cp) : mConcentration(mValue), mAmount(mValue){}
-        SBMLSymbol& operator =(const SBMLSymbol& rhs){ return *this;}
+        SBMLSymbol& operator =(const SBMLSymbol& rhs);
 };
 
 }

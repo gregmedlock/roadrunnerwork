@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include <math.h>
+#include "rrLogger.h"
 #include "rrNOMSupport.h"
 #include "rrStringUtils.h"
 #include "rrException.h"
@@ -674,7 +675,7 @@ string NOMSupport::convertTime(const string& sArg, const string& sTimeSymbol)
 {
     SBMLDocument* oSBMLDoc = NULL;
     Model* oModel = NULL;
-
+   	Log(lDebug4)<<"Entering function "<<__FUNC__<<" in file "<<__FILE__;
     try
     {
         oSBMLDoc = readSBMLFromString(sArg.c_str());
@@ -826,7 +827,7 @@ void NOMSupport::changeSymbol(Model& oModel, const string& sTimeSymbol, const in
         {
 			const ASTNode* node = (ASTNode*) r->getKineticLaw()->getMath();
 	        const ASTNode* math = changeSymbol((ASTNode*) node, sTimeSymbol, targetType);
-            r->getKineticLaw()->setMath(math); //TODO: fix
+            r->getKineticLaw()->setMath(math);
         }
     }
 
@@ -835,7 +836,7 @@ void NOMSupport::changeSymbol(Model& oModel, const string& sTimeSymbol, const in
         Rule* r = oModel.getRule(i);
         if (r->isSetMath())
         {
-            r->setMath(changeSymbol((ASTNode*) r->getMath(), sTimeSymbol, targetType)); //Todo: Fix
+            r->setMath(changeSymbol((ASTNode*) r->getMath(), sTimeSymbol, targetType));
         }
     }
 
@@ -858,7 +859,7 @@ void NOMSupport::changeSymbol(Model& oModel, const string& sTimeSymbol, const in
 
         if (oEvent->isSetDelay() && oEvent->getDelay()->isSetMath())
         {
-//            oEvent->getDelay()->setMath((ASTNode*) changeSymbol((ASTNode*) oEvent->getDelay()->getMath(), sTimeSymbol, targetType));
+            oEvent->getDelay()->setMath((ASTNode*) changeSymbol((ASTNode*) oEvent->getDelay()->getMath(), sTimeSymbol, targetType));
         }
 
         for (int j = 0; j < oEvent->getNumEventAssignments(); j++)
@@ -866,7 +867,7 @@ void NOMSupport::changeSymbol(Model& oModel, const string& sTimeSymbol, const in
             EventAssignment *assignment = oEvent->getEventAssignment(j);
             if (assignment->isSetMath())
             {
-//                assignment->setMath(changeSymbol((ASTNode*) assignment->getMath(), sTimeSymbol, targetType));
+                assignment->setMath(changeSymbol((ASTNode*) assignment->getMath(), sTimeSymbol, targetType));
             }
         }
     }
@@ -1411,26 +1412,26 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 {
     if (mModel == NULL)
     {
-        throw new RRException("You need to load the model first");
+        throw Exception("You need to load the model first");
     }
 
-//    int nCount = 0;
-//    for (int i = 0; i < mModel->getNumSpecies(); i++)
-//    {
-//        libsbmlcs.Species oSpecies = mModel.getSpecies(i);
-//        if (oSpecies.getBoundaryCondition())
-//        {
-//            if (nCount == nIndex)
-//            {
-//                return oSpecies.getCompartment();
-//            }
-//            else
-//            {
-//                nCount++;
-//            }
-//        }
-//    }
-//    throw new Exception("The model does not have a boundary species corresponding to the index provided");
+    int nCount = 0;
+    for (int i = 0; i < mModel->getNumSpecies(); i++)
+    {
+        Species *oSpecies = mModel->getSpecies(i);
+        if (oSpecies->getBoundaryCondition())
+        {
+            if (nCount == nIndex)
+            {
+                return oSpecies->getCompartment();
+            }
+            else
+            {
+                nCount++;
+            }
+        }
+    }
+    throw Exception("The model does not have a boundary species corresponding to the index provided");
 }
 
 //        public static string getNthBoundarySpeciesId(int nIndex)
@@ -2374,14 +2375,14 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            return (int)r.getNumReactants();
 //        }
 //
-//        public static int getNumReactions()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            return (int)mModel.getNumReactions();
-//        }
+int NOMSupport::getNumReactions()
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+    return (int)mModel->getNumReactions();
+}
 //
 //        public static int getNumRules()
 //        {
@@ -3018,10 +3019,19 @@ void NOMSupport::ReorderRules(SBMLDocument& doc, Model& model)
 void NOMSupport::loadSBML(const string& var0, const string& sTimeSymbol)
 {
     loadSBML(var0);
-    changeTimeSymbol(*mModel, sTimeSymbol);
-    changeSymbol(*mModel, "avogadro", AST_NAME_AVOGADRO);
-    modifyKineticLaws(*mSBMLDoc, *mModel);
-    ReorderRules(*mSBMLDoc, *mModel);
+    if(!mModel)
+    {
+    	Log(lError)<<"No model is allocated in function "<<__FUNC__<<" file "<<__FILE__;
+		return;
+    }
+
+    Model &aModel = *mModel;
+
+    changeTimeSymbol(aModel, sTimeSymbol);
+    changeSymbol(aModel, "avogadro", AST_NAME_AVOGADRO);
+
+    modifyKineticLaws(*mSBMLDoc, aModel);
+    ReorderRules(*mSBMLDoc, aModel);
     BuildSymbolTable();
 }
 
@@ -3050,14 +3060,14 @@ void NOMSupport::changeTimeSymbol(Model& model, const string& timeSymbol)
 //
 void NOMSupport::BuildSymbolTable()
 {
-//    _symbolTable;// = new Hashtable();
-
     // Read CompartmentSymbols
+    Log(lDebug5)<<"Building Symbol Table";
     for (int i = 0; i < mModel->getNumCompartments(); i++)
     {
         Compartment *temp = mModel->getCompartment(i);
 
-        SBMLSymbol symbol;// = new SBMLSymbol();
+        Log(lDebug)<<"Processing compartment: "<<i<<" "<<temp->getId();
+        SBMLSymbol symbol;
         symbol.mId = temp->getId();
 
         if (temp->isSetSize())
@@ -3076,8 +3086,8 @@ void NOMSupport::BuildSymbolTable()
     for (int i = 0; i < mModel->getNumParameters(); i++)
     {
         Parameter *temp = mModel->getParameter(i);
-
-        SBMLSymbol symbol;// = new SBMLSymbol();
+        Log(lDebug)<<"Processing parameters: "<<i<<" "<<temp->getId();
+        SBMLSymbol symbol;
         symbol.mId = temp->getId();
         if (temp->isSetValue())
         {
@@ -3094,8 +3104,8 @@ void NOMSupport::BuildSymbolTable()
     for (int i = 0; i < mModel->getNumSpecies(); i++)
     {
         Species *temp = mModel->getSpecies(i);
-
-        SBMLSymbol symbol;// = new SBMLSymbol();
+        Log(lDebug)<<"Processing species: "<<i<<" "<<temp->getId();
+        SBMLSymbol symbol;
         symbol.mId = temp->getId();
         if (temp->isSetInitialConcentration())
         {
@@ -3119,6 +3129,7 @@ void NOMSupport::BuildSymbolTable()
 
 void NOMSupport::LookForDependencies()
 {
+	Log(lDebug)<<"In function "<<__FUNCTION__;
     // Go through each found Id, and test for dependencies
 //    foreach (string sbmlId in _symbolTable.Keys)
 //    {
@@ -3172,46 +3183,48 @@ void NOMSupport::LookForDependencies()
 //
 string NOMSupport::GetRuleFor(const string& sbmlId)
 {
-//    for (int i = 0; i < mModel.getNumRules(); i++)
-//    {
-//        Rule oRule = mModel.getRule(i);
-//        switch (oRule.getTypeCode())
-//        {
-//            case libsbml.SBML_PARAMETER_RULE:
-//            case libsbml.SBML_SPECIES_CONCENTRATION_RULE:
-//            case libsbml.SBML_COMPARTMENT_VOLUME_RULE:
-//            case libsbml.SBML_ASSIGNMENT_RULE:
-//                //case libsbml.SBML_RATE_RULE:
-//                {
-//                    if (sbmlId == oRule.getVariable())
-//                        return oRule.getFormula();
-//                    break;
-//                }
-//            //case libsbml.SBML_ALGEBRAIC_RULE:
-//            //    {
-//            //        string rValue = oRule.getFormula();
-//            //        return rValue + " = 0";
-//            //    }
-//
-//
-//            default:
-//                break;
-//        }
-//
-//    }
-//
-    return NULL;
+    for (int i = 0; i < mModel->getNumRules(); i++)
+    {
+        Rule* oRule = mModel->getRule(i);
+        switch (oRule->getTypeCode())
+        {
+            case SBML_PARAMETER_RULE:
+            case SBML_SPECIES_CONCENTRATION_RULE:
+            case SBML_COMPARTMENT_VOLUME_RULE:
+            case SBML_ASSIGNMENT_RULE:
+                //case libsbml.SBML_RATE_RULE:
+                {
+                    if (sbmlId == oRule->getVariable())
+                        return oRule->getFormula();
+                }
+            //case libsbml.SBML_ALGEBRAIC_RULE:
+            //    {
+            //        string rValue = oRule->getFormula();
+            //        return rValue + " = 0";
+            //    }
+
+            default:
+                break;
+        }
+    }
+
+	return string("");
 }
 
 string NOMSupport::GetInitialAssignmentFor(const string& sbmlId)
 {
-//    for (int i = 0; i < mModel.getNumInitialAssignments(); i++)
-//    {
-//        InitialAssignment oAssignment = mModel.getInitialAssignment(i);
-//        if (oAssignment.getSymbol() == sbmlId && oAssignment.isSetMath())
-//            return libsbml.formulaToString(oAssignment.getMath());
-//    }
-    return NULL;
+	if(mModel)
+    {
+        for (int i = 0; i < mModel->getNumInitialAssignments(); i++)
+        {
+            InitialAssignment *oAssignment = mModel->getInitialAssignment(i);
+            if (oAssignment->getSymbol() == sbmlId && oAssignment->isSetMath())
+            {
+                return SBML_formulaToString(oAssignment->getMath());
+            }
+        }
+    }
+    return string("");
 }
 
 //        private static List<string> _Namespaces;

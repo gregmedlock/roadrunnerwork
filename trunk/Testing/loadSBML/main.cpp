@@ -36,7 +36,7 @@ int _tmain(int argc, _TCHAR* argv[])
     try
     {
 		RoadRunner *rr = new RoadRunner;
-		//Log(lDebug5)<<"Loading SBML";
+		Log(lDebug5)<<"Before loading SBML";
     	rr->loadSBML(sbml);
 
         cout<<"Copyright: "<<rr->getCopyright()<<endl;

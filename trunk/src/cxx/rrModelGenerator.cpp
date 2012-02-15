@@ -33,29 +33,27 @@ ModelGenerator::~ModelGenerator()
 // Generates the Model Code from the SBML string
 string ModelGenerator::generateModelCode(const string& sbmlStr)
 {
+	Log(lDebug4)<<"Entering ModelGenerators generateModelCode(string) function";
     string sASCII = sbmlStr; //Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(sbmlStr));
-    list<string> Warnings;// = new List<string>();
-    StringBuilder sb;// = new StringBuilder();
-
-////            sASCII = NOM.convertTime(sASCII, "time");
-////            NOM.loadSBML(sASCII, "time");
-
-
-    //-- The Following will need some more work. Look at NOM.cs in SBW/source/SBMLSupport folder
+    StringList  Warnings;
+    StringBuilder sb;
     sASCII = mNOM.convertTime(sASCII, "time");
 
+	Log(lDebug4)<<"Loading SBML into NOM";
 	mNOM.loadSBML(sASCII.c_str(), "time");
 
-	//    char** name;
-	//if(getModelName(name))
 
     _ModelName = mNOM.getModelName();
     if(!_ModelName.size())
     {
+        Log(lError)<<"Model name is empty! Exiting...";
     	return "";
     }
 
-    _NumReactions = getNumReactions();
+    Log(lDebug3)<<"Model name is "<<_ModelName;
+    _NumReactions = mNOM.getNumReactions();
+
+    Log(lDebug3)<<"Number of reactions:"<<_NumReactions;
 
 	globalParameterList.Clear();// = new SymbolList();
     ModifiableSpeciesReferenceList.Clear();// = new SymbolList();
@@ -71,11 +69,13 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 
    	LibStructural* instance = LibStructural::getInstance();
 
+    Log(lDebug)<<"Loading sbml into StructAnalysis";
     string msg = mStructAnalysis.LoadSBML(sASCII);
     if(!msg.size())
     {
-
+		Log(lError)<<"Failed loading sbml into StructAnalysis";
     }
+    Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
 //    if (RoadRunner::_bComputeAndAssignConservationLaws)
 //    {

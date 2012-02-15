@@ -40,6 +40,7 @@ mModel(NULL)
 
 RoadRunner::~RoadRunner()
 {
+	Log(lDebug4)<<"In RoadRunner DTOR";
 	delete mModelGenerator;
     delete mModel;
     delete cvode;
@@ -473,6 +474,7 @@ void RoadRunner::loadSBMLFromFile(const string& fileName)
 //        [Help("Load SBML into simulator")]
 void RoadRunner::loadSBML(const string& sbml)
 {
+	Log(lDebug4)<<"Loading SBML into simulator";
     if (!sbml.size())
     {
         throw RRException("No SBML  content..!");

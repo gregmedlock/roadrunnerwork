@@ -14,7 +14,7 @@ vector<string> Compiler::m_sCompileErrors;
 
 Compiler::Compiler()
 {
-
+	Log(lDebug5)<<"In Compiler CTOR";
 }
 
 Compiler::~Compiler()
