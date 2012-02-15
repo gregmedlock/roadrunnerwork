@@ -106,8 +106,8 @@ RR_DECLSPEC bool Not(bool a);
 
 //No references to 'double' Factorial
 RR_DECLSPEC double Factorial(double a);
-RR_DECLSPEC double Log(double a);
-RR_DECLSPEC double Log(double a, double b);
+RR_DECLSPEC double log(double a);
+RR_DECLSPEC double log(double a, double b);
 RR_DECLSPEC double Delay(double a, double b);
 RR_DECLSPEC double Root(double a, double b);
 //RR_DECLSPEC double Piecewise(params object[] args);

@@ -5,7 +5,7 @@
 #include <conio.h>
 #include <tchar.h>
 #include <dir.h>
-#include "Logger/mtkLogger.h"
+#include "Logger/rrLog.h"
 #include "rrException.h"
 #include "rrRoadRunner.h"
 
@@ -18,11 +18,11 @@ int _tmain(int argc, _TCHAR* argv[])
 {
  	char exePath[MAXPATH];
    	getcwd(exePath, MAXPATH);
-
-	gLogging.Init("loadSBML", lDebug5,unique_ptr<mtkLogFile>(new mtkLogFile("LoadSBML.log")));
-	mtkLogOutput::mLogToConsole = true;
-    gLogging.SetCutOffLogLevel(lDebug3);
-	Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLogging.GetLogFileName()<< " (and cout)";
+//
+    gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
+	LogOutput::mLogToConsole = true;
+    gLog.SetCutOffLogLevel(lDebug5);
+	Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
 	string modelsPath("C:\\RRW\\Testing\\models");
     string model(modelsPath + "\\feedback.xml");
     ifstream ifs(model.c_str());
@@ -36,8 +36,8 @@ int _tmain(int argc, _TCHAR* argv[])
     try
     {
 		RoadRunner *rr = new RoadRunner;
+		//Log(lDebug5)<<"Loading SBML";
     	rr->loadSBML(sbml);
-
 
         cout<<"Copyright: "<<rr->getCopyright()<<endl;
 
@@ -60,6 +60,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<"Hit any key to exit...";
 	cin.ignore(0,'\n');
     getch();
+
 
 	return 0;
 }

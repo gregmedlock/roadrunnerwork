@@ -124,12 +124,12 @@ int _factorial(const int& a)
 
 double _log(double a)
 {
-    return rr::Log(a);
+    return rr::log(a);
 }
 
 double _log(double a, double b)
 {
-    return rr::Log(b, a);
+    return rr::log(b, a);
 }
 
 double _delay(double a, double b)

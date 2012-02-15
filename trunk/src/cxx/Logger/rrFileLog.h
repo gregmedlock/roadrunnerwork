@@ -8,9 +8,7 @@
 #include "rrLogLevel.h"
 #include "rrLogFile.h"
 using std::unique_ptr;
-//class rrLogFile;
-
-//Global class holding logfile and other settings. Persist trougout the life of the application that is using it. Based on RAII
+//Global class holding logfile and other settings. Should Persist trougout the life of the application that is using it. Based on RAII
 namespace rr
 {
 
@@ -37,9 +35,10 @@ class RR_DECLSPEC FileLog : public rrObject
         void 	   				write(const char* str);
         bool					mLogToServer;
         string					GetLogFileName();
+        int						GetNrOfInstances(){return mNrOfInstances;}
 };
 
-extern RR_DECLSPEC FileLog  gLog;
+extern RR_DECLSPEC FileLog gLog;
 }
 
 #endif

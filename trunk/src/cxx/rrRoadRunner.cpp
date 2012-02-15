@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include <iostream>
+
 #include "rrRoadRunner.h"
 #include "rrException.h"
 #include "rrModelGenerator.h"
@@ -33,6 +34,7 @@ _N(0,0),
 _Nr(0,0),
 mModel(NULL)
 {
+	Log(lDebug4)<<"In RoadRunner CTOR";
 	mModelGenerator = new ModelGenerator();
 }
 

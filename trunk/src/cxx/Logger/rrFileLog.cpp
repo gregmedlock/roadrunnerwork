@@ -24,6 +24,12 @@ mLogToServer(false)
 	mNrOfInstances++;
 }
 
+FileLog::~FileLog()
+{
+	mNrOfInstances--;
+}
+
+
 bool FileLog::Init(const string& logPrefix, const LogLevel& level, unique_ptr<LogFile> logFile)
 {
     mLogPrefix = logPrefix;
@@ -39,11 +45,6 @@ string FileLog::GetLogFileName()
     	return mLogFile->GetFileName();
     }
     return string("<none>");
-}
-
-FileLog::~FileLog()
-{
-	mNrOfInstances--;
 }
 
 LogLevel FileLog::GetLogLevel()

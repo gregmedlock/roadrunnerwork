@@ -2,7 +2,6 @@
 #define rrPCHH
 
 #include <windows.h>
-
 #include <string>
 #include <vector>
 #include <list>
@@ -12,6 +11,7 @@
 #include <math.h>
 #include <stdarg.h>
 
+#include "Logger/rrLog.h"
 #endif
 
 

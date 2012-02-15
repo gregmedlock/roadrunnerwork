@@ -18,7 +18,7 @@ double sqr(double a)
 
 double Logbase(double value, double baseValue)
 {
-    return rr::Log(value, baseValue);
+    return rr::log(value, baseValue);
 }
 
 // -----------------------------------------------------------------------
@@ -98,7 +98,7 @@ double Asech(double a)
 //            if (a > 1.0 || a < 0.0)
 //                //throw new ArgumentException("asech real number argument (" + a + ") must be >= 0 and <= 1");
 //                return double.NaN;
-    return (Log(1.0/a + sqrt(1.0/(a*a) - 1.0)));
+    return (log(1.0/a + sqrt(1.0/(a*a) - 1.0)));
 }
 
 // Hyperbolic cosecant of a double number
@@ -116,7 +116,7 @@ double Acsch(double a)
         sgn = -1.0;
         a = -a;
     }
-    return sgn*(Log(1.0/a + sqrt(1.0/(a*a) + 1.0)));
+    return sgn*(log(1.0/a + sqrt(1.0/(a*a) + 1.0)));
 }
 
 
@@ -138,7 +138,7 @@ double Acoth(double a)
 //            if (a < 1.0)
 //                //throw new ArgumentException("acoth real number argument (" + sgn*a + ") must be <= -1 or >= 1");
 //                return double.NaN;
-    return 0.5*sgn*(Log(1.0 + a) - Log(a - 1.0));
+    return 0.5*sgn*(log(1.0 + a) - log(a - 1.0));
 }
 
 // Inverse hyperbolic functions
@@ -152,7 +152,7 @@ double Asinh(double a)
         sgn = -1.0;
         a = -a;
     }
-    return sgn*Log(a + sqrt(a*a + 1.0));
+    return sgn*log(a + sqrt(a*a + 1.0));
 }
 
 // Inverse hyperbolic cosine of a double number
@@ -161,7 +161,7 @@ double Acosh(double a)
 //            if (a < 1.0)
 //                //throw new ArgumentException("acosh real number argument (" + a + ") must be >= 1");
 //                return double.NaN;
-    return Log(a + sqrt(a*a - 1.0));
+    return log(a + sqrt(a*a - 1.0));
 }
 
 // Inverse hyperbolic tangent of a double number
@@ -176,7 +176,7 @@ double Atanh(double a)
 //            if (a > 1.0)
 //                //throw new ArgumentException("atanh real number argument (" + sgn*a + ") must be >= -1 and <= 1");
 //                return double.NaN;
-    return 0.5*sgn*(Log(1.0 + a) - Log(1.0 - a));
+    return 0.5*sgn*(log(1.0 + a) - log(1.0 - a));
 }
 
 // Boolean functions for event handling" + NL());
@@ -308,14 +308,14 @@ bool Not(bool a)
 //            return b*Factorial(b - 1);
 //        }
 
-double Log(double a)
+double log(double a)
 {
-    return log(a);
+    return ::log(a);
 }
 
-double Log(double a, double b)
+double log(double a, double b)
 {
-//            return Math.Log(b, a);
+//            return Math.log(b, a);
     return log(a) / log(b);
 }
 

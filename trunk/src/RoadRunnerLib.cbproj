@@ -33,8 +33,8 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\ThirdParty\NOMLib\src\;..\ThirdParty\libstruct\LibStructural\;cxx\Util\mtrand\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;C:\rrThirdPartyInstalls\include;C:\RRW\ThirdParty\libstruct\include;C:\RRW\ThirdParty\NOMLib\src;C:\rrThirdPartyInstalls\libsbml\include;C:\rrThirdPartyInstalls\libsbml;C:\rrThirdPartyInstalls\libsbml\include\sbml;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\ThirdParty\NOMLib\src\;..\ThirdParty\libstruct\LibStructural\;C:\rrBuilds\clapack_xe\BLAS\SRC\;C:\rrBuilds\clapack_xe\F2CLIBS\libf2c\;C:\rrBuilds\clapack_xe\SRC\;C:\rrThirdPartyInstalls\libstruct\lib\;C:\rrThirdPartyInstalls\sundials\;..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\bins\;C:\rrThirdPartyInstalls\;..\Externals\libsbml\src\sbml\xml\;..\Externals\libsbml\src\sbml\;C:\rr_install\lib\;cxx\Util\mtrand\;..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>cxx\Logger\;..\ThirdParty\NOMLib\src\;..\ThirdParty\libstruct\LibStructural\;cxx\Util\mtrand\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;C:\RRW\ThirdParty\libstruct\include;C:\RRW\ThirdParty\NOMLib\src;C:\rrThirdPartyInstalls\libsbml\include;C:\rrThirdPartyInstalls\libsbml;C:\rrThirdPartyInstalls\libsbml\include\sbml;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>cxx\Logger\;..\ThirdParty\NOMLib\src\;..\ThirdParty\libstruct\LibStructural\;C:\rrBuilds\clapack_xe\BLAS\SRC\;C:\rrBuilds\clapack_xe\F2CLIBS\libf2c\;C:\rrBuilds\clapack_xe\SRC\;C:\rrThirdPartyInstalls\libstruct\lib\;C:\rrThirdPartyInstalls\sundials\;..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\bins\;C:\rrThirdPartyInstalls\;..\Externals\libsbml\src\sbml\xml\;..\Externals\libsbml\src\sbml\;C:\rr_install\lib\;cxx\Util\mtrand\;..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -105,6 +105,29 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>34</BuildOrder>
 			</LibFiles>
+			<CppCompile Include="cxx\Logger\rrFileLog.cpp">
+				<DependentOn>cxx\Logger\rrFileLog.h</DependentOn>
+				<BuildOrder>50</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Logger\rrLog.cpp">
+				<BuildOrder>51</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Logger\rrLogFile.cpp">
+				<DependentOn>cxx\Logger\rrLogFile.h</DependentOn>
+				<BuildOrder>52</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Logger\rrLoggerUtils.cpp">
+				<DependentOn>cxx\Logger\rrLoggerUtils.h</DependentOn>
+				<BuildOrder>53</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Logger\rrLogLevel.cpp">
+				<DependentOn>cxx\Logger\rrLogLevel.h</DependentOn>
+				<BuildOrder>54</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Logger\rrLogOutput.cpp">
+				<DependentOn>cxx\Logger\rrLogOutput.h</DependentOn>
+				<BuildOrder>55</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\rrIModel.cpp">
 				<DependentOn>cxx\rrIModel.h</DependentOn>
 				<BuildOrder>8</BuildOrder>
