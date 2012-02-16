@@ -38,31 +38,107 @@ NOMSupport::~NOMSupport()
 //    return res;
 //}
 
-string NOMSupport::getNthCompartmentId(const int& i)
+
+string NOMSupport::getNthCompartmentId(const int& nIndex)
 {
-    //NOM
-	//DLL_EXPORT int getNthCompartmentId (int nIndex, char **Id)
-
-
-	char *ID[1];
-    if( ::getNthCompartmentId(i, ID) )
+    if (mModel == NULL)
     {
-		return "";
+        throw new Exception("You need to load the model first");
     }
 
-	return string(ID[0]);
+    if (nIndex < 0 || nIndex >= (int) mModel->getNumCompartments())
+    {
+        throw new Exception("Invalid input - Argument should be >= 0 and should be less than total number of compartments in the model");
+
+    }
+    Compartment *oCompartment = mModel->getCompartment((int)nIndex);
+    return GetId(*oCompartment);
 }
 
-double NOMSupport::getValue(const string& id)
+
+double NOMSupport::getValue(const string& sId)
 {
-	double val;
-	if(::getValue(id.c_str(), &val))
+    if (mModel == NULL)
     {
-    	//How to signal error..?
-    	return -1;
+        throw Exception("You need to load the model first");
     }
-	return val;
+
+    Species *oSpecies = mModel->getSpecies(sId);
+    if (oSpecies != NULL)
+    {
+        if (oSpecies->isSetInitialAmount())
+        {
+            return oSpecies->getInitialAmount();
+        }
+        else
+        {
+            return oSpecies->getInitialConcentration();
+        }
+    }
+
+    Compartment *oCompartment = mModel->getCompartment(sId);
+    if (oCompartment != NULL)
+    {
+        return oCompartment->getVolume();
+    }
+
+    Parameter *oParameter = mModel->getParameter(sId);
+    if (oParameter != NULL)
+    {
+        return oParameter->getValue();
+    }
+
+    for (int i = 0; i < mModel->getNumReactions(); i++)
+    {
+        Reaction* reaction = mModel->getReaction(i);
+        for (int j = 0; j < reaction->getNumReactants(); j++)
+        {
+            SpeciesReference *reference = reaction->getReactant(j);
+            if (reference->isSetId() && reference->getId() == sId)
+            {
+                if (reference->isSetStoichiometry())
+                {
+                    return reference->getStoichiometry();
+                }
+                else
+                {
+                	return 1;
+                }
+            }
+        }
+
+        for (int j = 0; j < reaction->getNumProducts(); j++)
+        {
+            SpeciesReference *reference = reaction->getProduct(j);
+            if (reference->isSetId() && reference->getId() == sId)
+            {
+                if (reference->isSetStoichiometry())
+                {
+                    return reference->getStoichiometry();
+                }
+                else
+                {
+                	return 1;
+                }
+            }
+        }
+    }
+
+
+    throw new Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
 }
+
+
+//double NOMSupport::getValue(const string& id)
+//{
+//	double val;
+//	if(::getValue(id.c_str(), &val))
+//    {
+//    	//How to signal error..?
+//    	return -1;
+//    }
+//	return val;
+//}
 
 StringListContainer NOMSupport::getListOfBoundarySpecies()
 {
@@ -2265,14 +2341,14 @@ string NOMSupport::getNthReactionId(const int& nIndex)
 //            return (int)mModel.getNumSpeciesWithBoundaryCondition();
 //        }
 //
-//        public static int getNumCompartments()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            return (int)mModel.getNumCompartments();
-//        }
+int NOMSupport::getNumCompartments()
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+    return (int) mModel->getNumCompartments();
+}
 //
 //        public static int getNumErrors()
 //        {
@@ -3075,7 +3151,7 @@ void NOMSupport::BuildSymbolTable()
     {
         Compartment *temp = mModel->getCompartment(i);
 
-        Log(lDebug)<<"Processing compartment: "<<i<<" "<<temp->getId();
+        Log(lDebug)<<"Processing compartment with ID: "<<temp->getId();
         SBMLSymbol symbol;
         symbol.mId = temp->getId();
 
@@ -3095,7 +3171,7 @@ void NOMSupport::BuildSymbolTable()
     for (int i = 0; i < mModel->getNumParameters(); i++)
     {
         Parameter *temp = mModel->getParameter(i);
-        Log(lDebug)<<"Processing parameters: "<<i<<" "<<temp->getId();
+        Log(lDebug)<<"Processing parameter with ID:"<<temp->getId();
         SBMLSymbol symbol;
         symbol.mId = temp->getId();
         if (temp->isSetValue())
@@ -3113,7 +3189,7 @@ void NOMSupport::BuildSymbolTable()
     for (int i = 0; i < mModel->getNumSpecies(); i++)
     {
         Species *temp = mModel->getSpecies(i);
-        Log(lDebug)<<"Processing species: "<<i<<" "<<temp->getId();
+        Log(lDebug)<<"Processing species with ID: "<<temp->getId();
         SBMLSymbol symbol;
         symbol.mId = temp->getId();
         if (temp->isSetInitialConcentration())

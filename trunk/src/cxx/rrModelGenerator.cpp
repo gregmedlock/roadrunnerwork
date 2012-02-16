@@ -113,29 +113,29 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     WriteClassHeader(sb);
     WriteOutVariables(sb);
     WriteOutSymbolTables(sb);
-//    WriteResetEvents(sb, _NumEvents);
-//    WriteSetConcentration(sb);
-//    WriteGetConcentration(sb);
-//    WriteConvertToAmounts(sb);
-//    WriteConvertToConcentrations(sb);
-//    WriteProperties(sb);
-//    WriteAccessors(sb);
-//    WriteUserDefinedFunctions(sb);
-//    WriteSetInitialConditions(sb, _NumFloatingSpecies);
-//    WriteSetBoundaryConditions(sb);
-//    WriteSetCompartmentVolumes(sb);
-//    WriteSetParameterValues(sb, _NumReactions);
-//    WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
-//    WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
-//    int numOfRules = WriteComputeRules(sb, _NumReactions);
-//    WriteComputeAllRatesOfChange(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
-//    WriteComputeReactionRates(sb, _NumReactions);
-//    WriteEvalModel(sb, _NumReactions, _NumIndependentSpecies, _NumFloatingSpecies, numOfRules);
-//    WriteEvalEvents(sb, _NumEvents, _NumFloatingSpecies);
-//    WriteEventAssignments(sb, _NumReactions, _NumEvents);
-//    WriteEvalInitialAssignments(sb, _NumReactions);
-//    WriteTestConstraints(sb);
-//    sb.AppendFormat("}}{0}{0}", NL());
+    WriteResetEvents(sb, _NumEvents);
+    WriteSetConcentration(sb);
+    WriteGetConcentration(sb);
+    WriteConvertToAmounts(sb);
+    WriteConvertToConcentrations(sb);
+    WriteProperties(sb);
+    WriteAccessors(sb);
+    WriteUserDefinedFunctions(sb);
+    WriteSetInitialConditions(sb, _NumFloatingSpecies);
+    WriteSetBoundaryConditions(sb);
+    WriteSetCompartmentVolumes(sb);
+    WriteSetParameterValues(sb, _NumReactions);
+    WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
+    WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
+    int numOfRules = WriteComputeRules(sb, _NumReactions);
+    WriteComputeAllRatesOfChange(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
+    WriteComputeReactionRates(sb, _NumReactions);
+    WriteEvalModel(sb, _NumReactions, _NumIndependentSpecies, _NumFloatingSpecies, numOfRules);
+    WriteEvalEvents(sb, _NumEvents, _NumFloatingSpecies);
+    WriteEventAssignments(sb, _NumReactions, _NumEvents);
+    WriteEvalInitialAssignments(sb, _NumReactions);
+    WriteTestConstraints(sb);
+	sb.AppendFormat("}}{0}{0}", NL());
 	return sb.ToString();
 }
 
@@ -218,14 +218,18 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            throw new SBWApplicationException("Internal Error: Unable to locate species: " + speciesName);
 //        }
 //
-//         string ModelGenerator::convertCompartmentToC(const string& compartmentName)
-//        {
-//            int index;
-//            if (compartmentList.find(compartmentName, index))
-//                return "_c[" + ToString(index) + "]";
-////            throw new SBWApplicationException("Internal Error: Unable to locate compartment: " + compartmentName);
-//        }
-//
+
+string ModelGenerator::convertCompartmentToC(const string& compartmentName)
+{
+    int index;
+    if (compartmentList.find(compartmentName, index))
+    {
+        return "_c[" + ToString(index) + "]";
+    }
+
+    throw RRException("Internal Error: Unable to locate compartment: " + compartmentName);
+}
+
 //         string ModelGenerator::convertSymbolToGP(const string& parameterName)
 //        {
 //            int index;
@@ -236,23 +240,24 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 ////            throw new SBWApplicationException("Internal Error: Unable to locate parameter: " + parameterName);
 //        }
 //
-//         string ModelGenerator::convertSymbolToC(const string& compartmentName)
-//        {
-//            int index;
-//            if (compartmentList.find(compartmentName, index))
-//            {
-//                return "_c[" + ToString(index) + "]";
-//            }
-////            throw new SBWApplicationException("Internal Error: Unable to locate compartment: " + compartmentName);
-//        }
-//
-        StringList ModelGenerator::getCompartmentList()
-        {
-            StringList tmp;// = new StringList();
-            for (int i = 0; i < compartmentList.size(); i++)
-                tmp.Add(compartmentList[i].name);
-            return tmp;
-        }
+
+string ModelGenerator::convertSymbolToC(const string& compartmentName)
+{
+	int index;
+    if (compartmentList.find(compartmentName, index))
+    {
+        return "_c[" + ToString(index) + "]";
+    }
+      throw SBWApplicationException("Internal Error: Unable to locate compartment: " + compartmentName);
+}
+
+StringList ModelGenerator::getCompartmentList()
+{
+    StringList tmp;// = new StringList();
+    for (int i = 0; i < compartmentList.size(); i++)
+        tmp.Add(compartmentList[i].name);
+    return tmp;
+}
 //
 //         StringList ModelGenerator::getFloatingSpeciesConcentrationList()
 //        {
@@ -1349,490 +1354,487 @@ void ModelGenerator::ReadLocalParameters(const int& numReactions,  vector<int>& 
 ////        }
 
 
-//         void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies,
-//                                                  DoubleMatrix L0)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\t// Uses the equation: dSd/dt = L0 dSi/dt" + NL());
-////            sb.Append("\tpublic: void computeAllRatesOfChange ()" + NL());
-////            sb.Append("\t{" + NL());
-////            sb.Append("\t\tdouble[] dTemp = new double[amounts.Length + rateRules.Length];" + NL());
-////            for (int i = 0; i < NumAdditionalRates; i++)
-////            {
-////                sb.AppendFormat("\t\tdTemp[{0}] = {1};{2}", i, _oMapRateRule[i], NL());
-////            }
-////            //sb.Append("\t\trateRules.CopyTo(dTemp, 0);" + NL());
-////            sb.Append("\t\tamounts.CopyTo(dTemp, rateRules.Length);" + NL());
-////            sb.Append("\t\tevalModel (time, dTemp);" + NL());
-////            bool isThereAnEntry = false;
-////            for (int i = 0; i < numDependentSpecies; i++)
-////            {
-////                sb.AppendFormat("\t\t_dydt[{0}] = ", (numIndependentSpecies + i));
-////                isThereAnEntry = false;
-////                for (int j = 0; j < numIndependentSpecies; j++)
-////                {
-////                    string dyName = string.Format("_dydt[{0}]", j);
-////
-////                    if (L0[i][j] > 0)
-////                    {
-////                        isThereAnEntry = true;
-////                        if (L0[i][j] == 1)
-////                        {
-////                            sb.AppendFormat(" + {0}{1}", dyName, NL());
-////                        }
-////                        else
-////                        {
-////                            sb.AppendFormat(" + (double){0}{1}{2}{3}", WriteDouble(L0[i][j]), STR_FixAmountCompartments, dyName, NL());
-////                        }
-////                    }
-////                    else if (L0[i][j] < 0)
-////                    {
-////                        isThereAnEntry = true;
-////                        if (L0[i][j] == -1)
-////                        {
-////                            sb.AppendFormat(" - {0}{1}", dyName, NL());
-////                        }
-////                        else
-////                        {
-////                            sb.AppendFormat(" - (double){0}{1}{2}{3}", WriteDouble(Math.Abs(L0[i][j])), STR_FixAmountCompartments, dyName, NL());
-////                        }
-////                    }
-////                }
-////                if (!isThereAnEntry)
-////                    sb.Append("0");
-////                sb.AppendFormat(";{0}", NL());
-////            }
-////
-////            sb.AppendFormat("\t}}{0}{0}", NL());
-//        }
+void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, DoubleMatrix L0)
+{
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\t// Uses the equation: dSd/dt = L0 dSi/dt" + NL());
+//      sb.Append("\tpublic: void computeAllRatesOfChange ()" + NL());
+//      sb.Append("\t{" + NL());
+//      sb.Append("\t\tdouble[] dTemp = new double[amounts.Length + rateRules.Length];" + NL());
+//      for (int i = 0; i < NumAdditionalRates; i++)
+//      {
+//          sb.AppendFormat("\t\tdTemp[{0}] = {1};{2}", i, _oMapRateRule[i], NL());
+//      }
+//      //sb.Append("\t\trateRules.CopyTo(dTemp, 0);" + NL());
+//      sb.Append("\t\tamounts.CopyTo(dTemp, rateRules.Length);" + NL());
+//      sb.Append("\t\tevalModel (time, dTemp);" + NL());
+//      bool isThereAnEntry = false;
+//      for (int i = 0; i < numDependentSpecies; i++)
+//      {
+//          sb.AppendFormat("\t\t_dydt[{0}] = ", (numIndependentSpecies + i));
+//          isThereAnEntry = false;
+//          for (int j = 0; j < numIndependentSpecies; j++)
+//          {
+//              string dyName = string.Format("_dydt[{0}]", j);
 //
-//         void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, int numFloatingSpecies, int numDependentSpecies)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\t// Uses the equation: C = Sd - L0*Si" + NL());
-////            sb.Append("\tpublic: void computeConservedTotals ()" + NL());
-////            sb.Append("\t{" + NL());
-////            if (numDependentSpecies > 0)
-////            {
-////                string factor;
-////                DoubleMatrix gamma = StructAnalysis.GetGammaMatrix();
-////                for (int i = 0; i < numDependentSpecies; i++)
-////                {
-////                    sb.AppendFormat("\t\t_ct[{0}] = ", i);
-////                    for (int j = 0; j < numFloatingSpecies; j++)
-////                    {
-////                        double current = gamma[i][j];
-////
-////
-////                        if (current != 0.0)
-////                        {
-////                            if (double.IsNaN(current))
-////                            {
-////                                // TODO: fix this
-////                                factor = "";
-////                            }
-////                            else if (Math.Abs(current) == 1.0)
-////                                factor = "";
-////                            else
-////                                factor = WriteDouble(Math.Abs(current)) +
-////                                         STR_FixAmountCompartments;
-////
-////                            if (current > 0)
-////                                sb.Append(" + " + factor + convertSpeciesToY(floatingSpeciesConcentrationList[j].name) +
-////                                          STR_FixAmountCompartments +
-////                                          convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName) +
-////                                          NL());
-////                            else
-////                                sb.Append(" - " + factor + convertSpeciesToY(floatingSpeciesConcentrationList[j].name) +
-////                                          STR_FixAmountCompartments +
-////                                          convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName) +
-////                                          NL());
-////                        }
-////                    }
-////                    sb.Append(";" + NL());
-////
-////                    conservationList.Add(new Symbol("CSUM" + i, double.NaN));
-////                }
-////            }
-////            sb.Append("	}" + NL() + NL());
-//        }
+//              if (L0[i][j] > 0)
+//              {
+//                  isThereAnEntry = true;
+//                  if (L0[i][j] == 1)
+//                  {
+//                      sb.AppendFormat(" + {0}{1}", dyName, NL());
+//                  }
+//                  else
+//                  {
+//                      sb.AppendFormat(" + (double){0}{1}{2}{3}", WriteDouble(L0[i][j]), STR_FixAmountCompartments, dyName, NL());
+//                  }
+//              }
+//              else if (L0[i][j] < 0)
+//              {
+//                  isThereAnEntry = true;
+//                  if (L0[i][j] == -1)
+//                  {
+//                      sb.AppendFormat(" - {0}{1}", dyName, NL());
+//                  }
+//                  else
+//                  {
+//                      sb.AppendFormat(" - (double){0}{1}{2}{3}", WriteDouble(Math.Abs(L0[i][j])), STR_FixAmountCompartments, dyName, NL());
+//                  }
+//              }
+//          }
+//          if (!isThereAnEntry)
+//              sb.Append("0");
+//          sb.AppendFormat(";{0}", NL());
+//      }
 //
-//         void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies,
-//                                                 DoubleMatrix L0)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\t// Compute values of dependent species " + NL());
-////            sb.Append("\t// Uses the equation: Sd = C + L0*Si" + NL());
-////            sb.Append("\tpublic: void updateDependentSpeciesValues (double[] y)" + NL());
-////            sb.Append("\t{" + NL());
-////
-////            if (numDependentSpecies > 0)
-////            {
-////                // Use the equation: Sd = C + L0*Si to compute dependent concentrations
-////                if (numDependentSpecies > 0)
-////                {
-////                    for (int i = 0; i < numDependentSpecies; i++)
-////                    {
-////                        sb.AppendFormat("\t\t_y[{0}] = {1}\t", (i + numIndependentSpecies), NL());
-////                        sb.AppendFormat("(_ct[{0}]", i);
-////                        string cLeftName =
-////                            convertCompartmentToC(
-////                                floatingSpeciesConcentrationList[i + numIndependentSpecies].compartmentName);
-////
-////                        for (int j = 0; j < numIndependentSpecies; j++)
-////                        {
-////                            string yName = string.Format("y[{0}]", j);
-////                            string cName = convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName);
-////
-////                            if (L0[i][j] > 0)
-////                            {
-////                                if (L0[i][j] == 1)
-////                                {
-////                                    sb.AppendFormat(" + {0}\t{1}{2}{3}{0}\t",
-////                                        NL(),
-////                                        yName,
-////                                        STR_FixAmountCompartments,
-////                                        cName);
-////                                }
-////                                else
-////                                {
-////                                    sb.AppendFormat("{0}\t" + " + (double){1}{2}{3}{2}{4}",
-////                                        NL(),
-////                                        WriteDouble(L0[i][j]),
-////                                        STR_FixAmountCompartments,
-////                                        yName,
-////                                        cName);
-////                                }
-////                            }
-////                            else if (L0[i][j] < 0)
-////                            {
-////                                if (L0[i][j] == -1)
-////                                {
-////                                    sb.AppendFormat("{0}\t" + " - {1}{2}{3}",
-////                                        NL(),
-////                                        yName,
-////                                        STR_FixAmountCompartments,
-////                                        cName);
-////                                }
-////                                else
-////                                {
-////                                    sb.AppendFormat("{0}\t" + " - (double){1}{2}{3}{2}{4}",
-////                                        NL(),
-////                                        WriteDouble(Math.Abs(L0[i][j])),
-////                                        STR_FixAmountCompartments,
-////                                        yName,
-////                                        cName);
-////                                }
-////                            }
-////                        }
-////                        sb.AppendFormat(")/{0};{1}", cLeftName, NL());
-////                    }
-////                }
-////            }
-////            sb.AppendFormat("\t}}{0}{0}", NL());
-//        }
+//      sb.AppendFormat("\t}}{0}{0}", NL());
+}
+
+void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, int numFloatingSpecies, int numDependentSpecies)
+{
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\t// Uses the equation: C = Sd - L0*Si" + NL());
+//      sb.Append("\tpublic: void computeConservedTotals ()" + NL());
+//      sb.Append("\t{" + NL());
+//      if (numDependentSpecies > 0)
+//      {
+//          string factor;
+//          DoubleMatrix gamma = StructAnalysis.GetGammaMatrix();
+//          for (int i = 0; i < numDependentSpecies; i++)
+//          {
+//              sb.AppendFormat("\t\t_ct[{0}] = ", i);
+//              for (int j = 0; j < numFloatingSpecies; j++)
+//              {
+//                  double current = gamma[i][j];
 //
-//         void ModelGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
-//        {
-////            // ------------------------------------------------------------------------------
-////            for (int i = 0; i < NOM.getNumFunctionDefinitions(); i++)
-////            {
-////                try
-////                {
-////                    StringList oList = NOM.getNthFunctionDefinition(i);
-////                    var sName = (string)oList[0];
-////                    sName.Trim();
-////                    _functionNames.Add(sName);
-////                    var oArguments = (StringList)oList[1];
-////                    var sBody = (string)oList[2];
-////
-////
-////                    sb.AppendFormat("\t// User defined function:  {0}{1}", sName, NL());
-////
-////                    sb.AppendFormat("\tpublic: double {0} (", sName);
-////                    for (int j = 0; j < oArguments.size(); j++)
-////                    {
-////                        sb.Append("double " + (string)oArguments[j]);
-////                        _functionParameters.Add((string)oArguments[j]);
-////                        if (j < oArguments.size() - 1)
-////                            sb.Append(", ");
-////                    }
-////                    sb.Append(")" + NL() + "\t{" + NL() + "\t\t return " +
-////                              convertUserFunctionExpression(sBody)
-////                              + ";" + NL() + "\t}" + NL() + NL());
-////                }
-////                catch (SBWException ex)
-////                {
-////                    throw new SBWApplicationException("Error while trying to get Function Definition #" + i,
-////                                                      ex.Message + "\r\n\r\n" + ex.DetailedMessage);
-////                }
-////                catch (Exception ex)
-////                {
-////                    throw new SBWApplicationException("Error while trying to get Function Definition #" + i, ex.Message);
-////                }
-////            }
-//        }
 //
-//         void ModelGenerator::WriteResetEvents(StringBuilder& sb, int numEvents)
-//        {
-////            sb.AppendFormat("{0}\tpublic: void resetEvents() {{{0}", NL());
-////            for (int i = 0; i < numEvents; i++)
-////            {
-////                sb.AppendFormat("\t\t_eventStatusArray[{0}] = false;{1}", i, NL());
-////                sb.AppendFormat("\t\t_previousEventStatusArray[{0}] = false;{1}", i, NL());
-////            }
-////            sb.AppendFormat("\t}}{0}{0}", NL());
-//        }
+//                  if (current != 0.0)
+//                  {
+//                      if (double.IsNaN(current))
+//                      {
+//                          // TODO: fix this
+//                          factor = "";
+//                      }
+//                      else if (Math.Abs(current) == 1.0)
+//                          factor = "";
+//                      else
+//                          factor = WriteDouble(Math.Abs(current)) +
+//                                   STR_FixAmountCompartments;
 //
-//         void ModelGenerator::WriteSetConcentration(StringBuilder& sb)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.AppendFormat("\tpublic: void setConcentration(int index, double value) {{{0}", NL());
-////            sb.AppendFormat("\t\tdouble volume = 0.0;{0}", NL());
-////            sb.AppendFormat("\t\t_y[index] = value;{0}", NL());
-////            sb.AppendFormat("\t\tswitch (index) {{{0}", NL());
-////            for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
-////            {
-////                sb.AppendFormat("\t\t\tcase {0}: volume = {1};{2}",
-////                    i,
-////                    convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName),
-////                    NL());
-////                sb.AppendFormat("\t\t\t\tbreak;{0}", NL());
-////            }
-////            sb.AppendFormat("\t\t}}{0}", NL());
-////            sb.AppendFormat("\t\t_amounts[index] = _y[index]*volume;{0}", NL());
-////            sb.AppendFormat("\t}}{0}{0}", NL());
-//        }
+//                      if (current > 0)
+//                          sb.Append(" + " + factor + convertSpeciesToY(floatingSpeciesConcentrationList[j].name) +
+//                                    STR_FixAmountCompartments +
+//                                    convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName) +
+//                                    NL());
+//                      else
+//                          sb.Append(" - " + factor + convertSpeciesToY(floatingSpeciesConcentrationList[j].name) +
+//                                    STR_FixAmountCompartments +
+//                                    convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName) +
+//                                    NL());
+//                  }
+//              }
+//              sb.Append(";" + NL());
 //
-//         void ModelGenerator::WriteGetConcentration(StringBuilder& sb)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.AppendFormat("\tpublic: double getConcentration(int index) {{{0}", NL());
-////            sb.AppendFormat("\t\treturn _y[index];{0}", NL());
-////            sb.AppendFormat("\t}}{0}{0}", NL());
-//        }
+//              conservationList.Add(new Symbol("CSUM" + i, double.NaN));
+//          }
+//      }
+//      sb.Append("	}" + NL() + NL());
+}
+
+void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, DoubleMatrix L0)
+{
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\t// Compute values of dependent species " + NL());
+//      sb.Append("\t// Uses the equation: Sd = C + L0*Si" + NL());
+//      sb.Append("\tpublic: void updateDependentSpeciesValues (double[] y)" + NL());
+//      sb.Append("\t{" + NL());
 //
-//         void ModelGenerator::WriteConvertToAmounts(StringBuilder& sb)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.AppendFormat("\tpublic: void convertToAmounts() {{{0}", NL());
-////            for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
-////            {
-////                sb.AppendFormat("\t\t_amounts[{0}] = _y[{0}]*{1};{2}",
-////                    i,
-////                    convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName),
-////                    NL());
-////            }
-////            sb.AppendFormat("\t}}{0}{0}", NL());
-//        }
+//      if (numDependentSpecies > 0)
+//      {
+//          // Use the equation: Sd = C + L0*Si to compute dependent concentrations
+//          if (numDependentSpecies > 0)
+//          {
+//              for (int i = 0; i < numDependentSpecies; i++)
+//              {
+//                  sb.AppendFormat("\t\t_y[{0}] = {1}\t", (i + numIndependentSpecies), NL());
+//                  sb.AppendFormat("(_ct[{0}]", i);
+//                  string cLeftName =
+//                      convertCompartmentToC(
+//                          floatingSpeciesConcentrationList[i + numIndependentSpecies].compartmentName);
 //
-//         void ModelGenerator::WriteConvertToConcentrations(StringBuilder& sb)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: void convertToConcentrations() {" + NL());
-////            for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
-////            {
-////                sb.Append("\t\t_y[" + i + "] = _amounts[" + i + "]/" +
-////                          convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
-////            }
-////            sb.Append("\t}" + NL() + NL());
-//        }
+//                  for (int j = 0; j < numIndependentSpecies; j++)
+//                  {
+//                      string yName = string.Format("y[{0}]", j);
+//                      string cName = convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName);
 //
-//         void ModelGenerator::WriteProperties(StringBuilder& sb)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] y {" + NL());
-////            sb.Append("\t\tget { return _y; } " + NL());
-////            sb.Append("\t\tset { _y = value; } " + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] init_y {" + NL());
-////            sb.Append("\t\tget { return _init_y; } " + NL());
-////            sb.Append("\t\tset { _init_y = value; } " + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] amounts {" + NL());
-////            sb.Append("\t\tget { return _amounts; } " + NL());
-////            sb.Append("\t\tset { _amounts = value; } " + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] bc {" + NL());
-////            sb.Append("\t\tget { return _bc; } " + NL());
-////            sb.Append("\t\tset { _bc = value; } " + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] gp {" + NL());
-////            sb.Append("\t\tget { return _gp; } " + NL());
-////            sb.Append("\t\tset { _gp = value; } " + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] sr {" + NL());
-////            sb.Append("\t\tget { return _sr; } " + NL());
-////            sb.Append("\t\tset { _sr = value; } " + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: DoubleMatrix lp {" + NL());
-////            sb.Append("\t\tget { return _lp; } " + NL());
-////            sb.Append("\t\tset { _lp = value; } " + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] c {" + NL());
-////            sb.Append("\t\tget { return _c; } " + NL());
-////            sb.Append("\t\tset { _c = value; } " + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] dydt {" + NL());
-////            sb.Append("\t\tget { return _dydt; }" + NL());
-////            sb.Append("\t\tset { _dydt = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] rateRules {" + NL());
-////            sb.Append("\t\tget { return _rateRules; }" + NL());
-////            sb.Append("\t\tset { _rateRules = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] rates {" + NL());
-////            sb.Append("\t\tget { return _rates; }" + NL());
-////            sb.Append("\t\tset { _rates = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] ct {" + NL());
-////            sb.Append("\t\tget { return _ct; }" + NL());
-////            sb.Append("\t\tset { _ct = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] eventTests {" + NL());
-////            sb.Append("\t\tget { return _eventTests; }" + NL());
-////            sb.Append("\t\tset { _eventTests = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: TEventDelayDelegate[] eventDelay {" + NL());
-////            sb.Append("\t\tget { return _eventDelay; }" + NL());
-////            sb.Append("\t\tset { _eventDelay = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: bool[] eventType {" + NL());
-////            sb.Append("\t\tget { return _eventType; }" + NL());
-////            sb.Append("\t\tset { _eventType = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: bool[] eventPersistentType {" + NL());
-////            sb.Append("\t\tget { return _eventPersistentType; }" + NL());
-////            sb.Append("\t\tset { _eventPersistentType = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: bool[] eventStatusArray {" + NL());
-////            sb.Append("\t\tget { return _eventStatusArray; }" + NL());
-////            sb.Append("\t\tset { _eventStatusArray = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: bool[] previousEventStatusArray {" + NL());
-////            sb.Append("\t\tget { return _previousEventStatusArray; }" + NL());
-////            sb.Append("\t\tset { _previousEventStatusArray = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double[] eventPriorities {" + NL());
-////            sb.Append("\t\tget { return _eventPriorities; }" + NL());
-////            sb.Append("\t\tset { _eventPriorities = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: TEventAssignmentDelegate[] eventAssignments {" + NL());
-////            sb.Append("\t\tget { return _eventAssignments; }" + NL());
-////            sb.Append("\t\tset { _eventAssignments = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: TComputeEventAssignmentDelegate[] computeEventAssignments {" + NL());
-////            sb.Append("\t\tget { return _computeEventAssignments; }" + NL());
-////            sb.Append("\t\tset { _computeEventAssignments = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: TPerformEventAssignmentDelegate[] performEventAssignments {" + NL());
-////            sb.Append("\t\tget { return _performEventAssignments; }" + NL());
-////            sb.Append("\t\tset { _performEventAssignments = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: double time {" + NL());
-////            sb.Append("\t\tget { return _time; }" + NL());
-////            sb.Append("\t\tset { _time = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-//        }
+//                      if (L0[i][j] > 0)
+//                      {
+//                          if (L0[i][j] == 1)
+//                          {
+//                              sb.AppendFormat(" + {0}\t{1}{2}{3}{0}\t",
+//                                  NL(),
+//                                  yName,
+//                                  STR_FixAmountCompartments,
+//                                  cName);
+//                          }
+//                          else
+//                          {
+//                              sb.AppendFormat("{0}\t" + " + (double){1}{2}{3}{2}{4}",
+//                                  NL(),
+//                                  WriteDouble(L0[i][j]),
+//                                  STR_FixAmountCompartments,
+//                                  yName,
+//                                  cName);
+//                          }
+//                      }
+//                      else if (L0[i][j] < 0)
+//                      {
+//                          if (L0[i][j] == -1)
+//                          {
+//                              sb.AppendFormat("{0}\t" + " - {1}{2}{3}",
+//                                  NL(),
+//                                  yName,
+//                                  STR_FixAmountCompartments,
+//                                  cName);
+//                          }
+//                          else
+//                          {
+//                              sb.AppendFormat("{0}\t" + " - (double){1}{2}{3}{2}{4}",
+//                                  NL(),
+//                                  WriteDouble(Math.Abs(L0[i][j])),
+//                                  STR_FixAmountCompartments,
+//                                  yName,
+//                                  cName);
+//                          }
+//                      }
+//                  }
+//                  sb.AppendFormat(")/{0};{1}", cLeftName, NL());
+//              }
+//          }
+//      }
+//      sb.AppendFormat("\t}}{0}{0}", NL());
+}
+
+void ModelGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
+{
+//      // ------------------------------------------------------------------------------
+//      for (int i = 0; i < NOM.getNumFunctionDefinitions(); i++)
+//      {
+//          try
+//          {
+//              StringList oList = NOM.getNthFunctionDefinition(i);
+//              var sName = (string)oList[0];
+//              sName.Trim();
+//              _functionNames.Add(sName);
+//              var oArguments = (StringList)oList[1];
+//              var sBody = (string)oList[2];
 //
-//         void ModelGenerator::WriteAccessors(StringBuilder& sb)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: int getNumIndependentVariables {" + NL());
-////            sb.Append("\t\tget { return numIndependentVariables; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: int getNumDependentVariables {" + NL());
-////            sb.Append("\t\tget { return numDependentVariables; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: int getNumTotalVariables {" + NL());
-////            sb.Append("\t\tget { return numTotalVariables; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: int getNumBoundarySpecies {" + NL());
-////            sb.Append("\t\tget { return numBoundaryVariables; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: int getNumGlobalParameters {" + NL());
-////            sb.Append("\t\tget { return numGlobalParameters; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: int getNumLocalParameters(int reactionId)" + NL());
-////            sb.Append("\t{" + NL());
-////            sb.Append("\t\treturn localParameterDimensions[reactionId];" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: int getNumCompartments {" + NL());
-////            sb.Append("\t\tget { return numCompartments; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: int getNumReactions {" + NL());
-////            sb.Append("\t\tget { return numReactions; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: int getNumEvents {" + NL());
-////            sb.Append("\t\tget { return numEvents; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: int getNumRules {" + NL());
-////            sb.Append("\t\tget { return numRules; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: List<string> Warnings {" + NL());
-////            sb.Append("\t\tget { return _Warnings; }" + NL());
-////            sb.Append("\t\tset { _Warnings = value; }" + NL());
-////            sb.Append("\t}" + NL() + NL());
-////
-//        }
+//
+//              sb.AppendFormat("\t// User defined function:  {0}{1}", sName, NL());
+//
+//              sb.AppendFormat("\tpublic: double {0} (", sName);
+//              for (int j = 0; j < oArguments.size(); j++)
+//              {
+//                  sb.Append("double " + (string)oArguments[j]);
+//                  _functionParameters.Add((string)oArguments[j]);
+//                  if (j < oArguments.size() - 1)
+//                      sb.Append(", ");
+//              }
+//              sb.Append(")" + NL() + "\t{" + NL() + "\t\t return " +
+//                        convertUserFunctionExpression(sBody)
+//                        + ";" + NL() + "\t}" + NL() + NL());
+//          }
+//          catch (SBWException ex)
+//          {
+//              throw new SBWApplicationException("Error while trying to get Function Definition #" + i,
+//                                                ex.Message + "\r\n\r\n" + ex.DetailedMessage);
+//          }
+//          catch (Exception ex)
+//          {
+//              throw new SBWApplicationException("Error while trying to get Function Definition #" + i, ex.Message);
+//          }
+//      }
+}
+
+void ModelGenerator::WriteResetEvents(StringBuilder& sb, int numEvents)
+{
+      sb.AppendFormat("{0}\tpublic: void resetEvents() {{{0}", NL());
+      for (int i = 0; i < numEvents; i++)
+      {
+          sb.AppendFormat("\t\t_eventStatusArray[{0}] = false;{1}", i, NL());
+          sb.AppendFormat("\t\t_previousEventStatusArray[{0}] = false;{1}", i, NL());
+      }
+      sb.AppendFormat("\t}}{0}{0}", NL());
+}
+
+void ModelGenerator::WriteSetConcentration(StringBuilder& sb)
+{
+	// ------------------------------------------------------------------------------
+    sb.AppendFormat("\tpublic: void setConcentration(int index, double value) {{{0}", NL());
+    sb.AppendFormat("\t\tdouble volume = 0.0;{0}", NL());
+    sb.AppendFormat("\t\t_y[index] = value;{0}", NL());
+    sb.AppendFormat("\t\tswitch (index) {{{0}", NL());
+    for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
+    {
+    	sb.AppendFormat("\t\t\tcase {0}: volume = {1};{2}",
+          i,
+          convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName),
+          NL());
+      sb.AppendFormat("\t\t\t\tbreak;{0}", NL());
+    }
+    sb.AppendFormat("\t\t}}{0}", NL());
+    sb.AppendFormat("\t\t_amounts[index] = _y[index]*volume;{0}", NL());
+    sb.AppendFormat("\t}}{0}{0}", NL());
+}
+
+void ModelGenerator::WriteGetConcentration(StringBuilder& sb)
+{
+//      // ------------------------------------------------------------------------------
+//      sb.AppendFormat("\tpublic: double getConcentration(int index) {{{0}", NL());
+//      sb.AppendFormat("\t\treturn _y[index];{0}", NL());
+//      sb.AppendFormat("\t}}{0}{0}", NL());
+}
+
+void ModelGenerator::WriteConvertToAmounts(StringBuilder& sb)
+{
+//      // ------------------------------------------------------------------------------
+//      sb.AppendFormat("\tpublic: void convertToAmounts() {{{0}", NL());
+//      for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
+//      {
+//          sb.AppendFormat("\t\t_amounts[{0}] = _y[{0}]*{1};{2}",
+//              i,
+//              convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName),
+//              NL());
+//      }
+//      sb.AppendFormat("\t}}{0}{0}", NL());
+}
+
+void ModelGenerator::WriteConvertToConcentrations(StringBuilder& sb)
+{
+//          // ------------------------------------------------------------------------------
+//          sb.Append("\tpublic: void convertToConcentrations() {" + NL());
+//          for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
+//          {
+//              sb.Append("\t\t_y[" + i + "] = _amounts[" + i + "]/" +
+//                        convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
+//          }
+//          sb.Append("\t}" + NL() + NL());
+}
+
+void ModelGenerator::WriteProperties(StringBuilder& sb)
+{
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] y {" + NL());
+//      sb.Append("\t\tget { return _y; } " + NL());
+//      sb.Append("\t\tset { _y = value; } " + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] init_y {" + NL());
+//      sb.Append("\t\tget { return _init_y; } " + NL());
+//      sb.Append("\t\tset { _init_y = value; } " + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] amounts {" + NL());
+//      sb.Append("\t\tget { return _amounts; } " + NL());
+//      sb.Append("\t\tset { _amounts = value; } " + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] bc {" + NL());
+//      sb.Append("\t\tget { return _bc; } " + NL());
+//      sb.Append("\t\tset { _bc = value; } " + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] gp {" + NL());
+//      sb.Append("\t\tget { return _gp; } " + NL());
+//      sb.Append("\t\tset { _gp = value; } " + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] sr {" + NL());
+//      sb.Append("\t\tget { return _sr; } " + NL());
+//      sb.Append("\t\tset { _sr = value; } " + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: DoubleMatrix lp {" + NL());
+//      sb.Append("\t\tget { return _lp; } " + NL());
+//      sb.Append("\t\tset { _lp = value; } " + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] c {" + NL());
+//      sb.Append("\t\tget { return _c; } " + NL());
+//      sb.Append("\t\tset { _c = value; } " + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] dydt {" + NL());
+//      sb.Append("\t\tget { return _dydt; }" + NL());
+//      sb.Append("\t\tset { _dydt = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] rateRules {" + NL());
+//      sb.Append("\t\tget { return _rateRules; }" + NL());
+//      sb.Append("\t\tset { _rateRules = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] rates {" + NL());
+//      sb.Append("\t\tget { return _rates; }" + NL());
+//      sb.Append("\t\tset { _rates = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] ct {" + NL());
+//      sb.Append("\t\tget { return _ct; }" + NL());
+//      sb.Append("\t\tset { _ct = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] eventTests {" + NL());
+//      sb.Append("\t\tget { return _eventTests; }" + NL());
+//      sb.Append("\t\tset { _eventTests = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: TEventDelayDelegate[] eventDelay {" + NL());
+//      sb.Append("\t\tget { return _eventDelay; }" + NL());
+//      sb.Append("\t\tset { _eventDelay = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: bool[] eventType {" + NL());
+//      sb.Append("\t\tget { return _eventType; }" + NL());
+//      sb.Append("\t\tset { _eventType = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: bool[] eventPersistentType {" + NL());
+//      sb.Append("\t\tget { return _eventPersistentType; }" + NL());
+//      sb.Append("\t\tset { _eventPersistentType = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: bool[] eventStatusArray {" + NL());
+//      sb.Append("\t\tget { return _eventStatusArray; }" + NL());
+//      sb.Append("\t\tset { _eventStatusArray = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: bool[] previousEventStatusArray {" + NL());
+//      sb.Append("\t\tget { return _previousEventStatusArray; }" + NL());
+//      sb.Append("\t\tset { _previousEventStatusArray = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double[] eventPriorities {" + NL());
+//      sb.Append("\t\tget { return _eventPriorities; }" + NL());
+//      sb.Append("\t\tset { _eventPriorities = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: TEventAssignmentDelegate[] eventAssignments {" + NL());
+//      sb.Append("\t\tget { return _eventAssignments; }" + NL());
+//      sb.Append("\t\tset { _eventAssignments = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: TComputeEventAssignmentDelegate[] computeEventAssignments {" + NL());
+//      sb.Append("\t\tget { return _computeEventAssignments; }" + NL());
+//      sb.Append("\t\tset { _computeEventAssignments = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: TPerformEventAssignmentDelegate[] performEventAssignments {" + NL());
+//      sb.Append("\t\tget { return _performEventAssignments; }" + NL());
+//      sb.Append("\t\tset { _performEventAssignments = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: double time {" + NL());
+//      sb.Append("\t\tget { return _time; }" + NL());
+//      sb.Append("\t\tset { _time = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+}
+
+void ModelGenerator::WriteAccessors(StringBuilder& sb)
+{
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: int getNumIndependentVariables {" + NL());
+//      sb.Append("\t\tget { return numIndependentVariables; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: int getNumDependentVariables {" + NL());
+//      sb.Append("\t\tget { return numDependentVariables; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: int getNumTotalVariables {" + NL());
+//      sb.Append("\t\tget { return numTotalVariables; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: int getNumBoundarySpecies {" + NL());
+//      sb.Append("\t\tget { return numBoundaryVariables; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: int getNumGlobalParameters {" + NL());
+//      sb.Append("\t\tget { return numGlobalParameters; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: int getNumLocalParameters(int reactionId)" + NL());
+//      sb.Append("\t{" + NL());
+//      sb.Append("\t\treturn localParameterDimensions[reactionId];" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: int getNumCompartments {" + NL());
+//      sb.Append("\t\tget { return numCompartments; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: int getNumReactions {" + NL());
+//      sb.Append("\t\tget { return numReactions; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: int getNumEvents {" + NL());
+//      sb.Append("\t\tget { return numEvents; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: int getNumRules {" + NL());
+//      sb.Append("\t\tget { return numRules; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+//
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: List<string> Warnings {" + NL());
+//      sb.Append("\t\tget { return _Warnings; }" + NL());
+//      sb.Append("\t\tset { _Warnings = value; }" + NL());
+//      sb.Append("\t}" + NL() + NL());
+}
 //
  void ModelGenerator::WriteOutVariables(StringBuilder& sb)
 {
@@ -2009,24 +2011,24 @@ void ModelGenerator::WriteClassHeader(StringBuilder& sb)
 ////                throw new SBWApplicationException(string.Format("Unable to locate lefthand side symbol in assignment[{0}]", varName));
 //        }
 //
-//         void ModelGenerator::WriteTestConstraints(StringBuilder& sb)
-//        {
-////            sb.Append("\tpublic: void testConstraints()" + NL());
-////            sb.Append("\t{" + NL());
-////
-////            for (int i = 0; i < NOM.getNumConstraints(); i++)
-////            {
-////                string sMessage;
-////                string sCheck = NOM.getNthConstraint(i, out sMessage);
-////
-////                sb.Append("\t\tif (" + substituteTerms(NOM.getNumReactions(), "", sCheck) + " == 0.0 )" + NL());
-////                sb.Append("\t\t\tthrow new Exception(\"" + sMessage + "\");" + NL());
-////            }
-////
-////
-////            sb.Append("\t}" + NL() + NL());
-//        }
+void ModelGenerator::WriteTestConstraints(StringBuilder& sb)
+{
+//      sb.Append("\tpublic: void testConstraints()" + NL());
+//      sb.Append("\t{" + NL());
 //
+//      for (int i = 0; i < NOM.getNumConstraints(); i++)
+//      {
+//          string sMessage;
+//          string sCheck = NOM.getNthConstraint(i, out sMessage);
+//
+//          sb.Append("\t\tif (" + substituteTerms(NOM.getNumReactions(), "", sCheck) + " == 0.0 )" + NL());
+//          sb.Append("\t\t\tthrow new Exception(\"" + sMessage + "\");" + NL());
+//      }
+//
+//
+//      sb.Append("\t}" + NL() + NL());
+}
+
 ////         static bool ModelGenerator::ExpressionContainsSymbol(ASTNode ast, string symbol)
 ////        {
 ////            if (ast == NULL || string.IsNullOrEmpty(symbol)) return false;
@@ -2050,502 +2052,499 @@ void ModelGenerator::WriteClassHeader(StringBuilder& sb)
 ////            return ExpressionContainsSymbol(ast, symbol);
 //        }
 //
-//         void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, int numReactions)
-//        {
-////            sb.Append("\tpublic: void evalInitialAssignments()" + NL());
-////            sb.Append("\t{" + NL());
-////
-////            int numInitialAssignments = NOM.getNumInitialAssignments();
-////
-////            if (numInitialAssignments > 0)
-////            {
-////                var oList = new List<Pair<string, string>>();
-////                for (int i = 0; i < numInitialAssignments; i++)
-////                    oList.Add(NOM.getNthInitialAssignmentPair(i));
-////
-////                // sort them ...
-////                bool bChange = true;
-////                int nIndex = -1;
-////                while (bChange)
-////                {
-////                    bChange = false;
-////
-////                    for (int i = 0; i < oList.size(); i++)
-////                    {
-////                        Pair<string, string> current = oList[i];
-////                        for (int j = i + 1; j < oList.size(); j++)
-////                        {
-////                            if (ExpressionContainsSymbol(current.Second, oList[j].First))
-////                            {
-////                                bChange = true;
-////                                nIndex = j;
-////                                break;
-////                            }
-////                        }
-////                        if (bChange) break;
-////                    }
-////
-////                    if (bChange)
-////                    {
-////                        Pair<string, string> pairToMove = oList[nIndex];
-////                        oList.RemoveAt(nIndex);
-////                        oList.Insert(0, pairToMove);
-////                    }
-////                }
-////
-////                foreach (var pair in oList)
-////                {
-////                    string leftSideRule = FindSymbol(pair.First);
-////                    string rightSideRule = pair.Second;
-////                    if (leftSideRule != NULL)
-////                    {
-////                        sb.Append(leftSideRule + " = ");
-////                        sb.Append(substituteTerms(numReactions, "", rightSideRule) + ";" + NL());
-////                    }
-////                }
-////
-////
-////            }
-////            for (int i = 0; i < NOM.SbmlModel.getNumEvents(); i++)
-////            {
-////                var current = NOM.SbmlModel.getEvent(i);
-////                string initialTriggerValue = current.getTrigger().getInitialValue().ToString().ToLowerInvariant();
-////                sb.Append("\t\t_eventStatusArray[" + i + "] = " + initialTriggerValue + ";" + NL());
-////                sb.Append("\t\t_previousEventStatusArray[" + i + "] = " + initialTriggerValue + ";" + NL());
-////            }
-////            sb.Append("\t}" + NL() + NL());
-//        }
+
+void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, int numReactions)
+{
+//      sb.Append("\tpublic: void evalInitialAssignments()" + NL());
+//      sb.Append("\t{" + NL());
+//
+//      int numInitialAssignments = NOM.getNumInitialAssignments();
+//
+//      if (numInitialAssignments > 0)
+//      {
+//          var oList = new List<Pair<string, string>>();
+//          for (int i = 0; i < numInitialAssignments; i++)
+//              oList.Add(NOM.getNthInitialAssignmentPair(i));
+//
+//          // sort them ...
+//          bool bChange = true;
+//          int nIndex = -1;
+//          while (bChange)
+//          {
+//              bChange = false;
+//
+//              for (int i = 0; i < oList.size(); i++)
+//              {
+//                  Pair<string, string> current = oList[i];
+//                  for (int j = i + 1; j < oList.size(); j++)
+//                  {
+//                      if (ExpressionContainsSymbol(current.Second, oList[j].First))
+//                      {
+//                          bChange = true;
+//                          nIndex = j;
+//                          break;
+//                      }
+//                  }
+//                  if (bChange) break;
+//              }
+//
+//              if (bChange)
+//              {
+//                  Pair<string, string> pairToMove = oList[nIndex];
+//                  oList.RemoveAt(nIndex);
+//                  oList.Insert(0, pairToMove);
+//              }
+//          }
+//
+//          foreach (var pair in oList)
+//          {
+//              string leftSideRule = FindSymbol(pair.First);
+//              string rightSideRule = pair.Second;
+//              if (leftSideRule != NULL)
+//              {
+//                  sb.Append(leftSideRule + " = ");
+//                  sb.Append(substituteTerms(numReactions, "", rightSideRule) + ";" + NL());
+//              }
+//          }
 //
 //
-//         int ModelGenerator::WriteComputeRules(StringBuilder& sb, int numReactions)
-//        {
-////            int numOfRules = NOM.getNumRules();
-////            _oMapRateRule = new Hashtable();
-////            var mapVariables = new Hashtable();
-////            int numRateRules = 0;
-////
-////
-////            sb.Append("\tpublic: void computeRules(double[] y) {" + NL());
-////            // ------------------------------------------------------------------------------
-////            for (int i = 0; i < numOfRules; i++)
-////            {
-////                try
-////                {
-////                    string leftSideRule = "";
-////                    string rightSideRule = "";
-////                    string ruleType = NOM.getNthRuleType(i);
-////                    // We only support assignment and ode rules at the moment
-////                    string eqnRule = NOM.getNthRule(i);
-////                    int index = eqnRule.IndexOf("=");
-////                    string varName = eqnRule.Substring(0, index).Trim();
-////                    string rightSide = eqnRule.Substring(index + 1).Trim();
-////                    bool isRateRule = false;
-////
-////                    switch (ruleType)
-////                    {
-////                        case "Algebraic_Rule":
-////                            Warnings.Add("RoadRunner does not yet support algebraic rules in SBML, they will be ignored.");
-////                            leftSideRule = NULL;
-////                            break;
-////
-////
-////                        case "Assignment_Rule":
-////                            leftSideRule = FindSymbol(varName);
-////                            break;
-////
-////                        case "Rate_Rule":
-////                            if (floatingSpeciesConcentrationList.find(varName, out index))
-////                            {
-////                                leftSideRule = string.Format("\t\t_dydt[{0}]", index);
-////                                floatingSpeciesConcentrationList[index].rateRule = true;
-////                            }
-////                            else
-////                            {
-////                                leftSideRule = "\t\t_rateRules[" + numRateRules + "]";
-////                                _oMapRateRule[numRateRules] = FindSymbol(varName);
-////                                mapVariables[numRateRules] = varName;
-////                                numRateRules++;
-////                            }
-////                            isRateRule = true;
-////
-////                            break;
-////                    }
-////
-////                    // Run the equation through MathML to carry out any conversions (eg ^ to Pow)
-////                    string rightSideMathml = NOM.convertStringToMathML(rightSide);
-////                    rightSideRule = NOM.convertMathMLToString(rightSideMathml);
-////                    if (leftSideRule != NULL)
-////                    {
-////                        sb.Append(leftSideRule + " = ");
-////
-////                        int speciesIndex;
-////                        var isSpecies = floatingSpeciesConcentrationList.find(varName, out speciesIndex);
-////
-////                        var symbol = speciesIndex != -1 ? floatingSpeciesConcentrationList[speciesIndex] : NULL;
-////
-////                        //
-////
-////                        string sCompartment;
-////
-////                        if (
-////                            isRateRule &&
-////                            NOM.MultiplyCompartment(varName, out sCompartment) &&
-////                            !rightSide.Contains(sCompartment)
-////                            )
-////                        {
-////                            sb.Append(String.Format("({0}) * {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(sCompartment), NL()));
-////                        }
-////                        else
-////                        {
-////                            if (isSpecies && !isRateRule && symbol != NULL && symbol.hasOnlySubstance && symbol.compartmentName != NULL)
-////                                sb.Append(String.Format("({0}) / {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(symbol.compartmentName), NL()));
-////                            else
-////                                sb.Append(String.Format("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL()));
-////                        }
-////
-////
-////
-////                        // RateRules and species ! again
-////                        //
-////                        // sb.Append(String.Format("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL()));
-////
-////                        if (NOM.IsCompartment(varName))
-////                        {
-////                            sb.Append("\t\tconvertToConcentrations();");
-////                        }
-////                    }
-////                }
-////                catch (SBWException)
-////                {
-////                    throw;
-////                }
-////                catch (Exception ex)
-////                {
-////                    throw new SBWApplicationException("Error while trying to get Rule #" + i, ex.Message);
-////                }
-////            }
-////            sb.Append("\t}" + NL() + NL());
-////
-////            sb.Append("\tprivate: double[] _rateRules = new double[" + numRateRules +
-////                      "];           // Vector containing values of additional rate rules      " + NL());
-////            sb.Append("\tpublic: void InitializeRates()" + NL() + "\t{" + NL());
-////            for (int i = 0; i < numRateRules; i++)
-////            {
-////
-////                sb.Append("\t\t_rateRules[" + i + "] = " + _oMapRateRule[i] + ";" + NL());
-////            }
-////            sb.Append("\t}" + NL() + NL());
-////
-////
-////            sb.Append("\tpublic: void AssignRates()" + NL() + "\t{" + NL());
-////            for (int i = 0; i < _oMapRateRule.size(); i++)
-////            {
-////                sb.Append((string)_oMapRateRule[i] + " = _rateRules[" + i + "];" + NL());
-////            }
-////            sb.Append("\t}" + NL() + NL());
-////
-////
-////            sb.Append("\tpublic: void InitializeRateRuleSymbols()" + NL() + "\t{" + NL());
-////            for (int i = 0; i < _oMapRateRule.size(); i++)
-////            {
-////                var varName = (string)mapVariables[i];
-////                double value = NOM.getValue(varName);
-////                if (!double.IsNaN(value))
-////                    sb.Append((string)_oMapRateRule[i] + " = " + value + ";" + NL());
-////            }
-////            sb.Append("\t}" + NL() + NL());
-////
-////
-////            sb.Append("\tpublic: void AssignRates(double[] oRates)" + NL() + "\t{" + NL());
-////            for (int i = 0; i < _oMapRateRule.size(); i++)
-////            {
-////                sb.Append((string)_oMapRateRule[i] + " = oRates[" + i + "];" + NL());
-////            }
-////            sb.Append("\t}" + NL() + NL());
-////
-////            sb.Append("\tpublic: double[] GetCurrentValues()" + NL() + "\t{" + NL());
-////            sb.Append("\t\tdouble[] dResult = new double[" + NumAdditionalRates + "];" + NL());
-////            for (int i = 0; i < _oMapRateRule.size(); i++)
-////            {
-////                sb.Append("\t\tdResult[" + i + "] = " + (string)_oMapRateRule[i] + ";" + NL());
-////            }
-////            sb.Append("\t\treturn dResult;" + NL());
-////
-////            sb.Append("\t}" + NL() + NL());
-////            return numOfRules;
-//        }
-//
-//         void ModelGenerator::WriteComputeReactionRates(StringBuilder& sb, int numReactions)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\t// Compute the reaction rates" + NL());
-////            sb.Append("\tpublic: void computeReactionRates (double time, double[] y)" + NL());
-////            sb.Append("\t{" + NL());
-////
-////
-////            for (int i = 0; i < numReactions; i++)
-////            {
-////                string kineticLaw = NOM.getKineticLaw(i);
-////
-////                // The following code is for the case when the kineticLaw contains a ^ in place
-////                // of pow for exponent handling. It would not be needed in the case when there is
-////                // no ^ in the kineticLaw.
-////                string subKineticLaw;
-////                if (kineticLaw.IndexOf("^", System.StringComparison.Ordinal) > 0)
-////                {
-////                    string kineticLaw_mathml = NOM.convertStringToMathML(kineticLaw);
-////                    subKineticLaw = NOM.convertMathMLToString(kineticLaw_mathml);
-////                }
-////                else
-////                {
-////                    subKineticLaw = kineticLaw;
-////                }
-////
-////                string modKineticLaw = substituteTerms(reactionList[i].name, subKineticLaw, true) + ";";
-////
-////                // modify to use current y ...
-////                modKineticLaw = modKineticLaw.Replace("_y[", "y[");
-////
-////
-////                sb.AppendFormat("\t\t_rates[{0}] = {1}{2}", i, modKineticLaw, NL());
-////            }
-////            sb.AppendFormat("\t}}{0}{0}", NL());
-//        }
-//
-//         void ModelGenerator::WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies)
-//        {
-////            sb.Append("\t// Event handling function" + NL());
-////            sb.Append("\tpublic: void evalEvents (double timeIn, double[] oAmounts)" + NL());
-////            sb.Append("\t{" + NL());
-////
-////            if (numEvents > 0)
-////            {
-////                for (int i = 0; i < NumAdditionalRates; i++)
-////                {
-////                    sb.Append((string)_oMapRateRule[i] + " = oAmounts[" + i + "];" + NL());
-////                }
-////                for (int i = 0; i < numFloatingSpecies; i++)
-////                {
-////                    sb.Append("\t\t_y[" + i + "] = oAmounts[" + (i + NumAdditionalRates) + "]/" +
-////                              convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
-////                }
-////            }
-////
-////
-////            sb.Append("\t\t_time = timeIn;  // Don't remove" + NL());
-////            sb.Append("\t\tupdateDependentSpeciesValues(_y);" + NL());
-////            sb.Append("\t\tcomputeRules (_y);" + NL());
-////
-////            for (int i = 0; i < numEvents; i++)
-////            {
-////                StringList ev = NOM.getNthEvent(i);
-////                string eventString = (string)ev[0];
-////                eventString = substituteTerms(0, "", eventString);
-////                sb.Append("\t\tpreviousEventStatusArray[" + i + "] = eventStatusArray[" + i + "];" + NL());
-////                sb.Append("\t\tif (" + eventString + " == 1.0) {" + NL());
-////                sb.Append("\t\t     eventStatusArray[" + i + "] = true;" + NL());
-////                sb.Append("\t\t     eventTests[" + i + "] = 1;" + NL());
-////                sb.Append("\t\t} else {" + NL());
-////                sb.Append("\t\t     eventStatusArray[" + i + "] = false;" + NL());
-////                sb.Append("\t\t     eventTests[" + i + "] = -1;" + NL());
-////                sb.Append("\t\t}" + NL());
-////            }
-////            sb.Append("\t}" + NL() + NL());
-////
-//        }
+//      }
+//      for (int i = 0; i < NOM.SbmlModel.getNumEvents(); i++)
+//      {
+//          var current = NOM.SbmlModel.getEvent(i);
+//          string initialTriggerValue = current.getTrigger().getInitialValue().ToString().ToLowerInvariant();
+//          sb.Append("\t\t_eventStatusArray[" + i + "] = " + initialTriggerValue + ";" + NL());
+//          sb.Append("\t\t_previousEventStatusArray[" + i + "] = " + initialTriggerValue + ";" + NL());
+//      }
+//      sb.Append("\t}" + NL() + NL());
+}
+
+int ModelGenerator::WriteComputeRules(StringBuilder& sb, int numReactions)
+{
+//      int numOfRules = NOM.getNumRules();
+//      _oMapRateRule = new Hashtable();
+//      var mapVariables = new Hashtable();
+//      int numRateRules = 0;
 //
 //
-//         void ModelGenerator::WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies,
-//                                    int numFloatingSpecies, int numOfRules)
-//        {
-////            sb.Append("\t// Model Function" + NL());
-////            sb.Append("\tpublic: void evalModel (double timein, double[] oAmounts)" + NL());
-////            sb.Append("\t{" + NL());
-////
-////            //sb.Append("\t\tconvertToConcentrations (); " + NL());
-////
-////
-////            for (int i = 0; i < NumAdditionalRates; i++)
-////            {
-////                sb.Append((string)_oMapRateRule[i] + " = oAmounts[" + i + "];" + NL());
-////            }
-////            for (int i = 0; i < numFloatingSpecies; i++)
-////            {
-////                //if (floatingSpeciesConcentrationList[i].rateRule)
-////                //    sb.Append("\t\t_y[" + i.ToString() + "] = oAmounts[" + (i + NumAdditionalRates).ToString() + "];");
-////                ////sb.Append("\t\t_y[" + i.ToString() + "] = oAmounts[" + (i+NumAdditionalRates).ToString() + "]/" + convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
-////                //else
-////                sb.Append("\t\t_y[" + i + "] = oAmounts[" + (i + NumAdditionalRates) + "]/" +
-////                          convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
-////            }
-////            sb.Append(NL());
-////
-////
-////            sb.Append("\t\tconvertToAmounts();" + NL());
-////
-////            sb.Append("\t\t_time = timein;  // Don't remove" + NL());
-////
-////            sb.Append("\t\tupdateDependentSpeciesValues (_y);" + NL());
-////            if (numOfRules > 0)
-////                sb.Append("\t\tcomputeRules (_y);" + NL());
-////
-////            sb.Append("\t\tcomputeReactionRates (time, _y);" + NL());
-////            //sb.Append("\t\tcomputeReactionRates (time, _y);" + NL());
-////
-////
-////            // Write out the ODE equations
-////            string stoich;
-////
-////            for (int i = 0; i < numIndependentSpecies; i++)
-////            {
-////                var eqnBuilder = new StringBuilder(" ");
-////                string floatingSpeciesName = independentSpeciesList[i];
-////                for (int j = 0; j < numReactions; j++)
-////                {
-////                    libsbmlcs.Reaction oReaction = NOM.SbmlModel.getReaction(j);
-////                    int numProducts = (int)oReaction.getNumProducts();
-////                    double productStoichiometry;
-////                    for (int k1 = 0; k1 < numProducts; k1++)
-////                    {
-////                        var product = oReaction.getProduct(k1);
-////                        string productName = product.getSpecies();
-////                        if (floatingSpeciesName == productName)
-////                        {
-////                            productStoichiometry = product.getStoichiometry();
-////
-////                            if (product.isSetId() && product.getLevel() > 2)
-////                            {
-////                                stoich = "(" +
-////                                     substituteTerms(numReactions, "",
-////                                        product.getId()) +
-////                                     ") * ";
-////                            }
-////                            else if (product.isSetStoichiometry())
-////                            {
-////                                if (productStoichiometry != 1)
-////                                {
-////                                    var denom = product.getDenominator();
-////                                    if (denom != 1)
-////                                        stoich = String.Format("((double){0}/(double){1})*", WriteDouble(productStoichiometry), denom);
-////                                    else
-////                                        stoich = WriteDouble(productStoichiometry) + '*';
-////                                }
-////                                else
-////                                {
-////                                    stoich = "";
-////                                }
-////                            }
-////                            else
-////                            {
-////                                if (product.isSetStoichiometryMath() && product.getStoichiometryMath().isSetMath())
-////                                {
-////                                    stoich = "(" +
-////                                             substituteTerms(numReactions, "",
-////                                                libsbml.formulaToString(product.getStoichiometryMath().getMath())) +
-////                                             ") * ";
-////                                }
-////                                else
-////                                {
-////                                    stoich = "";
-////                                }
-////                            }
-////                            eqnBuilder.Append(String.Format(" + {0}_rates[{1}]", stoich, j));
-////                        }
-////                    }
-////
-////                    int numReactants = (int)oReaction.getNumReactants();
-////                    double reactantStoichiometry;
-////                    for (int k1 = 0; k1 < numReactants; k1++)
-////                    {
-////                        var reactant = oReaction.getReactant(k1);
-////                        string reactantName = reactant.getSpecies();
-////                        if (floatingSpeciesName == reactantName)
-////                        {
-////                            reactantStoichiometry = reactant.getStoichiometry();
-////
-////                            if (reactant.isSetId() && reactant.getLevel() > 2)
-////                            {
-////                                stoich = String.Format("({0}) * ",
-////                                    substituteTerms(numReactions, "",
-////                                                                                         reactant.getId()));
-////                            }
-////                            else if (reactant.isSetStoichiometry())
-////                            {
-////                                if (reactantStoichiometry != 1)
-////                                {
-////                                    var denom = reactant.getDenominator();
-////                                    if (denom != 1)
-////                                        stoich = String.Format("((double){0}/(double){1})*", WriteDouble(reactantStoichiometry), denom);
-////                                    else
-////                                        stoich = WriteDouble(reactantStoichiometry) +
-////                                             "*";
-////                                }
-////                                else
-////                                {
-////                                    stoich = "";
-////                                }
-////                            }
-////
-////                            else
-////                            {
-////                                if (reactant.isSetStoichiometryMath() && reactant.getStoichiometryMath().isSetMath())
-////                                {
-////                                    stoich = "(" +
-////                                             substituteTerms(numReactions, "",
-////                                                libsbml.formulaToString(reactant.getStoichiometryMath().getMath())) +
-////                                             ") * ";
-////                                }
-////                                else
-////                                {
-////                                    stoich = "";
-////                                }
-////
-////                            }
-////
-////                            eqnBuilder.Append(String.Format(" - {0}_rates[{1}]", stoich, j));
-////                        }
-////                    }
-////                }
-////
-////                var final = eqnBuilder.ToString().Trim();
-////
-////                if (string.IsNullOrEmpty(final))
-////                {
-////                    final = "    0.0";
-////                }
-////
-////                if (NOM.SbmlDocument.getLevel() > 2)
-////                {
-////                    // remember to take the conversion factor into account
-////                    string factor = "";
-////                    var species = NOM.SbmlModel.getSpecies(floatingSpeciesName);
-////                    if (species != NULL)
-////                    {
-////                        if (species.isSetConversionFactor())
-////                            factor = species.getConversionFactor();
-////                        else if (NOM.SbmlModel.isSetConversionFactor())
-////                            factor = NOM.SbmlModel.getConversionFactor();
-////                    }
-////
-////                    if (!string.IsNullOrEmpty(factor))
-////                    {
-////                        final = FindSymbol(factor) + " * (" + final + ")";
-////                    }
-////                }
-////
-////
-////
-////
-////
-////                // If the floating species has a raterule then prevent the dydt
-////                // in the model function from overriding it. I think this is expected behavior.
-////                if (!floatingSpeciesConcentrationList[i].rateRule)
-////                    sb.Append("\t\t_dydt[" + i + "] = " + final + ";" + NL());
-////            }
-////
-////            sb.Append("\t\tconvertToAmounts ();" + NL());
-////            sb.Append("\t}" + NL() + NL());
-//        }
+//      sb.Append("\tpublic: void computeRules(double[] y) {" + NL());
+//      // ------------------------------------------------------------------------------
+//      for (int i = 0; i < numOfRules; i++)
+//      {
+//          try
+//          {
+//              string leftSideRule = "";
+//              string rightSideRule = "";
+//              string ruleType = NOM.getNthRuleType(i);
+//              // We only support assignment and ode rules at the moment
+//              string eqnRule = NOM.getNthRule(i);
+//              int index = eqnRule.IndexOf("=");
+//              string varName = eqnRule.Substring(0, index).Trim();
+//              string rightSide = eqnRule.Substring(index + 1).Trim();
+//              bool isRateRule = false;
+//
+//              switch (ruleType)
+//              {
+//                  case "Algebraic_Rule":
+//                      Warnings.Add("RoadRunner does not yet support algebraic rules in SBML, they will be ignored.");
+//                      leftSideRule = NULL;
+//                      break;
+//
+//
+//                  case "Assignment_Rule":
+//                      leftSideRule = FindSymbol(varName);
+//                      break;
+//
+//                  case "Rate_Rule":
+//                      if (floatingSpeciesConcentrationList.find(varName, out index))
+//                      {
+//                          leftSideRule = string.Format("\t\t_dydt[{0}]", index);
+//                          floatingSpeciesConcentrationList[index].rateRule = true;
+//                      }
+//                      else
+//                      {
+//                          leftSideRule = "\t\t_rateRules[" + numRateRules + "]";
+//                          _oMapRateRule[numRateRules] = FindSymbol(varName);
+//                          mapVariables[numRateRules] = varName;
+//                          numRateRules++;
+//                      }
+//                      isRateRule = true;
+//
+//                      break;
+//              }
+//
+//              // Run the equation through MathML to carry out any conversions (eg ^ to Pow)
+//              string rightSideMathml = NOM.convertStringToMathML(rightSide);
+//              rightSideRule = NOM.convertMathMLToString(rightSideMathml);
+//              if (leftSideRule != NULL)
+//              {
+//                  sb.Append(leftSideRule + " = ");
+//
+//                  int speciesIndex;
+//                  var isSpecies = floatingSpeciesConcentrationList.find(varName, out speciesIndex);
+//
+//                  var symbol = speciesIndex != -1 ? floatingSpeciesConcentrationList[speciesIndex] : NULL;
+//
+//                  //
+//
+//                  string sCompartment;
+//
+//                  if (
+//                      isRateRule &&
+//                      NOM.MultiplyCompartment(varName, out sCompartment) &&
+//                      !rightSide.Contains(sCompartment)
+//                      )
+//                  {
+//                      sb.Append(String.Format("({0}) * {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(sCompartment), NL()));
+//                  }
+//                  else
+//                  {
+//                      if (isSpecies && !isRateRule && symbol != NULL && symbol.hasOnlySubstance && symbol.compartmentName != NULL)
+//                          sb.Append(String.Format("({0}) / {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(symbol.compartmentName), NL()));
+//                      else
+//                          sb.Append(String.Format("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL()));
+//                  }
+//
+//
+//
+//                  // RateRules and species ! again
+//                  //
+//                  // sb.Append(String.Format("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL()));
+//
+//                  if (NOM.IsCompartment(varName))
+//                  {
+//                      sb.Append("\t\tconvertToConcentrations();");
+//                  }
+//              }
+//          }
+//          catch (SBWException)
+//          {
+//              throw;
+//          }
+//          catch (Exception ex)
+//          {
+//              throw new SBWApplicationException("Error while trying to get Rule #" + i, ex.Message);
+//          }
+//      }
+//      sb.Append("\t}" + NL() + NL());
+//
+//      sb.Append("\tprivate: double[] _rateRules = new double[" + numRateRules +
+//                "];           // Vector containing values of additional rate rules      " + NL());
+//      sb.Append("\tpublic: void InitializeRates()" + NL() + "\t{" + NL());
+//      for (int i = 0; i < numRateRules; i++)
+//      {
+//
+//          sb.Append("\t\t_rateRules[" + i + "] = " + _oMapRateRule[i] + ";" + NL());
+//      }
+//      sb.Append("\t}" + NL() + NL());
+//
+//
+//      sb.Append("\tpublic: void AssignRates()" + NL() + "\t{" + NL());
+//      for (int i = 0; i < _oMapRateRule.size(); i++)
+//      {
+//          sb.Append((string)_oMapRateRule[i] + " = _rateRules[" + i + "];" + NL());
+//      }
+//      sb.Append("\t}" + NL() + NL());
+//
+//
+//      sb.Append("\tpublic: void InitializeRateRuleSymbols()" + NL() + "\t{" + NL());
+//      for (int i = 0; i < _oMapRateRule.size(); i++)
+//      {
+//          var varName = (string)mapVariables[i];
+//          double value = NOM.getValue(varName);
+//          if (!double.IsNaN(value))
+//              sb.Append((string)_oMapRateRule[i] + " = " + value + ";" + NL());
+//      }
+//      sb.Append("\t}" + NL() + NL());
+//
+//
+//      sb.Append("\tpublic: void AssignRates(double[] oRates)" + NL() + "\t{" + NL());
+//      for (int i = 0; i < _oMapRateRule.size(); i++)
+//      {
+//          sb.Append((string)_oMapRateRule[i] + " = oRates[" + i + "];" + NL());
+//      }
+//      sb.Append("\t}" + NL() + NL());
+//
+//      sb.Append("\tpublic: double[] GetCurrentValues()" + NL() + "\t{" + NL());
+//      sb.Append("\t\tdouble[] dResult = new double[" + NumAdditionalRates + "];" + NL());
+//      for (int i = 0; i < _oMapRateRule.size(); i++)
+//      {
+//          sb.Append("\t\tdResult[" + i + "] = " + (string)_oMapRateRule[i] + ";" + NL());
+//      }
+//      sb.Append("\t\treturn dResult;" + NL());
+//
+//      sb.Append("\t}" + NL() + NL());
+//      return numOfRules;
+}
+
+void ModelGenerator::WriteComputeReactionRates(StringBuilder& sb, int numReactions)
+{
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\t// Compute the reaction rates" + NL());
+//      sb.Append("\tpublic: void computeReactionRates (double time, double[] y)" + NL());
+//      sb.Append("\t{" + NL());
+//
+//
+//      for (int i = 0; i < numReactions; i++)
+//      {
+//          string kineticLaw = NOM.getKineticLaw(i);
+//
+//          // The following code is for the case when the kineticLaw contains a ^ in place
+//          // of pow for exponent handling. It would not be needed in the case when there is
+//          // no ^ in the kineticLaw.
+//          string subKineticLaw;
+//          if (kineticLaw.IndexOf("^", System.StringComparison.Ordinal) > 0)
+//          {
+//              string kineticLaw_mathml = NOM.convertStringToMathML(kineticLaw);
+//              subKineticLaw = NOM.convertMathMLToString(kineticLaw_mathml);
+//          }
+//          else
+//          {
+//              subKineticLaw = kineticLaw;
+//          }
+//
+//          string modKineticLaw = substituteTerms(reactionList[i].name, subKineticLaw, true) + ";";
+//
+//          // modify to use current y ...
+//          modKineticLaw = modKineticLaw.Replace("_y[", "y[");
+//
+//
+//          sb.AppendFormat("\t\t_rates[{0}] = {1}{2}", i, modKineticLaw, NL());
+//      }
+//      sb.AppendFormat("\t}}{0}{0}", NL());
+}
+
+void ModelGenerator::WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies)
+{
+//      sb.Append("\t// Event handling function" + NL());
+//      sb.Append("\tpublic: void evalEvents (double timeIn, double[] oAmounts)" + NL());
+//      sb.Append("\t{" + NL());
+//
+//      if (numEvents > 0)
+//      {
+//          for (int i = 0; i < NumAdditionalRates; i++)
+//          {
+//              sb.Append((string)_oMapRateRule[i] + " = oAmounts[" + i + "];" + NL());
+//          }
+//          for (int i = 0; i < numFloatingSpecies; i++)
+//          {
+//              sb.Append("\t\t_y[" + i + "] = oAmounts[" + (i + NumAdditionalRates) + "]/" +
+//                        convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
+//          }
+//      }
+//
+//
+//      sb.Append("\t\t_time = timeIn;  // Don't remove" + NL());
+//      sb.Append("\t\tupdateDependentSpeciesValues(_y);" + NL());
+//      sb.Append("\t\tcomputeRules (_y);" + NL());
+//
+//      for (int i = 0; i < numEvents; i++)
+//      {
+//          StringList ev = NOM.getNthEvent(i);
+//          string eventString = (string)ev[0];
+//          eventString = substituteTerms(0, "", eventString);
+//          sb.Append("\t\tpreviousEventStatusArray[" + i + "] = eventStatusArray[" + i + "];" + NL());
+//          sb.Append("\t\tif (" + eventString + " == 1.0) {" + NL());
+//          sb.Append("\t\t     eventStatusArray[" + i + "] = true;" + NL());
+//          sb.Append("\t\t     eventTests[" + i + "] = 1;" + NL());
+//          sb.Append("\t\t} else {" + NL());
+//          sb.Append("\t\t     eventStatusArray[" + i + "] = false;" + NL());
+//          sb.Append("\t\t     eventTests[" + i + "] = -1;" + NL());
+//          sb.Append("\t\t}" + NL());
+//      }
+//      sb.Append("\t}" + NL() + NL());
+}
+
+void ModelGenerator::WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies, int numFloatingSpecies, int numOfRules)
+{
+//      sb.Append("\t// Model Function" + NL());
+//      sb.Append("\tpublic: void evalModel (double timein, double[] oAmounts)" + NL());
+//      sb.Append("\t{" + NL());
+//
+//      //sb.Append("\t\tconvertToConcentrations (); " + NL());
+//
+//
+//      for (int i = 0; i < NumAdditionalRates; i++)
+//      {
+//          sb.Append((string)_oMapRateRule[i] + " = oAmounts[" + i + "];" + NL());
+//      }
+//      for (int i = 0; i < numFloatingSpecies; i++)
+//      {
+//          //if (floatingSpeciesConcentrationList[i].rateRule)
+//          //    sb.Append("\t\t_y[" + i.ToString() + "] = oAmounts[" + (i + NumAdditionalRates).ToString() + "];");
+//          ////sb.Append("\t\t_y[" + i.ToString() + "] = oAmounts[" + (i+NumAdditionalRates).ToString() + "]/" + convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
+//          //else
+//          sb.Append("\t\t_y[" + i + "] = oAmounts[" + (i + NumAdditionalRates) + "]/" +
+//                    convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
+//      }
+//      sb.Append(NL());
+//
+//
+//      sb.Append("\t\tconvertToAmounts();" + NL());
+//
+//      sb.Append("\t\t_time = timein;  // Don't remove" + NL());
+//
+//      sb.Append("\t\tupdateDependentSpeciesValues (_y);" + NL());
+//      if (numOfRules > 0)
+//          sb.Append("\t\tcomputeRules (_y);" + NL());
+//
+//      sb.Append("\t\tcomputeReactionRates (time, _y);" + NL());
+//      //sb.Append("\t\tcomputeReactionRates (time, _y);" + NL());
+//
+//
+//      // Write out the ODE equations
+//      string stoich;
+//
+//      for (int i = 0; i < numIndependentSpecies; i++)
+//      {
+//          var eqnBuilder = new StringBuilder(" ");
+//          string floatingSpeciesName = independentSpeciesList[i];
+//          for (int j = 0; j < numReactions; j++)
+//          {
+//              libsbmlcs.Reaction oReaction = NOM.SbmlModel.getReaction(j);
+//              int numProducts = (int)oReaction.getNumProducts();
+//              double productStoichiometry;
+//              for (int k1 = 0; k1 < numProducts; k1++)
+//              {
+//                  var product = oReaction.getProduct(k1);
+//                  string productName = product.getSpecies();
+//                  if (floatingSpeciesName == productName)
+//                  {
+//                      productStoichiometry = product.getStoichiometry();
+//
+//                      if (product.isSetId() && product.getLevel() > 2)
+//                      {
+//                          stoich = "(" +
+//                               substituteTerms(numReactions, "",
+//                                  product.getId()) +
+//                               ") * ";
+//                      }
+//                      else if (product.isSetStoichiometry())
+//                      {
+//                          if (productStoichiometry != 1)
+//                          {
+//                              var denom = product.getDenominator();
+//                              if (denom != 1)
+//                                  stoich = String.Format("((double){0}/(double){1})*", WriteDouble(productStoichiometry), denom);
+//                              else
+//                                  stoich = WriteDouble(productStoichiometry) + '*';
+//                          }
+//                          else
+//                          {
+//                              stoich = "";
+//                          }
+//                      }
+//                      else
+//                      {
+//                          if (product.isSetStoichiometryMath() && product.getStoichiometryMath().isSetMath())
+//                          {
+//                              stoich = "(" +
+//                                       substituteTerms(numReactions, "",
+//                                          libsbml.formulaToString(product.getStoichiometryMath().getMath())) +
+//                                       ") * ";
+//                          }
+//                          else
+//                          {
+//                              stoich = "";
+//                          }
+//                      }
+//                      eqnBuilder.Append(String.Format(" + {0}_rates[{1}]", stoich, j));
+//                  }
+//              }
+//
+//              int numReactants = (int)oReaction.getNumReactants();
+//              double reactantStoichiometry;
+//              for (int k1 = 0; k1 < numReactants; k1++)
+//              {
+//                  var reactant = oReaction.getReactant(k1);
+//                  string reactantName = reactant.getSpecies();
+//                  if (floatingSpeciesName == reactantName)
+//                  {
+//                      reactantStoichiometry = reactant.getStoichiometry();
+//
+//                      if (reactant.isSetId() && reactant.getLevel() > 2)
+//                      {
+//                          stoich = String.Format("({0}) * ",
+//                              substituteTerms(numReactions, "",
+//                                                                                   reactant.getId()));
+//                      }
+//                      else if (reactant.isSetStoichiometry())
+//                      {
+//                          if (reactantStoichiometry != 1)
+//                          {
+//                              var denom = reactant.getDenominator();
+//                              if (denom != 1)
+//                                  stoich = String.Format("((double){0}/(double){1})*", WriteDouble(reactantStoichiometry), denom);
+//                              else
+//                                  stoich = WriteDouble(reactantStoichiometry) +
+//                                       "*";
+//                          }
+//                          else
+//                          {
+//                              stoich = "";
+//                          }
+//                      }
+//
+//                      else
+//                      {
+//                          if (reactant.isSetStoichiometryMath() && reactant.getStoichiometryMath().isSetMath())
+//                          {
+//                              stoich = "(" +
+//                                       substituteTerms(numReactions, "",
+//                                          libsbml.formulaToString(reactant.getStoichiometryMath().getMath())) +
+//                                       ") * ";
+//                          }
+//                          else
+//                          {
+//                              stoich = "";
+//                          }
+//
+//                      }
+//
+//                      eqnBuilder.Append(String.Format(" - {0}_rates[{1}]", stoich, j));
+//                  }
+//              }
+//          }
+//
+//          var final = eqnBuilder.ToString().Trim();
+//
+//          if (string.IsNullOrEmpty(final))
+//          {
+//              final = "    0.0";
+//          }
+//
+//          if (NOM.SbmlDocument.getLevel() > 2)
+//          {
+//              // remember to take the conversion factor into account
+//              string factor = "";
+//              var species = NOM.SbmlModel.getSpecies(floatingSpeciesName);
+//              if (species != NULL)
+//              {
+//                  if (species.isSetConversionFactor())
+//                      factor = species.getConversionFactor();
+//                  else if (NOM.SbmlModel.isSetConversionFactor())
+//                      factor = NOM.SbmlModel.getConversionFactor();
+//              }
+//
+//              if (!string.IsNullOrEmpty(factor))
+//              {
+//                  final = FindSymbol(factor) + " * (" + final + ")";
+//              }
+//          }
+//
+//
+//
+//
+//
+//          // If the floating species has a raterule then prevent the dydt
+//          // in the model function from overriding it. I think this is expected behavior.
+//          if (!floatingSpeciesConcentrationList[i].rateRule)
+//              sb.Append("\t\t_dydt[" + i + "] = " + final + ";" + NL());
+//      }
+//
+//      sb.Append("\t\tconvertToAmounts ();" + NL());
+//      sb.Append("\t}" + NL() + NL());
+}
 //
 //         Symbol ModelGenerator::GetSpecies(const string& id)
 //        {
@@ -2556,104 +2555,105 @@ void ModelGenerator::WriteClassHeader(StringBuilder& sb)
 ////                return boundarySpeciesList[index];
 ////            return NULL;
 //        }
-//         void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, int numEvents)
-//        {
-////            var delays = new StringList();
-////            var eventType = new List<bool>();
-////            var eventPersistentType = new List<bool>();
-////            if (numEvents > 0)
-////            {
-////                sb.Append("\t// Event assignments" + NL());
-////                for (int i = 0; i < numEvents; i++)
-////                {
-////                    var ev = NOM.getNthEvent(i);
-////                    eventType.Add(NOM.getNthUseValuesFromTriggerTime(i));
-////                    eventPersistentType.Add(NOM.SbmlModel.getEvent(i).getTrigger().getPersistent());
-////                    delays.Add(substituteTerms(numReactions, "", (string)ev[1]));
-////                    sb.AppendFormat("\tpublic: void eventAssignment_{0} () {{{1}", i, NL());
-////                    sb.AppendFormat("\t\tperformEventAssignment_{0}( computeEventAssignment_{0}() );{1}", i, NL());
-////                    sb.Append("\t}" + NL());
-////                    sb.AppendFormat("\tpublic: double[] computeEventAssignment_{0} () {{{1}", i, NL());
-////                    var oTemp = new StringList();
-////                    var oValue = new StringList();
-////                    int nCount = 0;
-////                    int numAssignments = ev.size() - 2;
-////                    sb.Append(String.Format("\t\tdouble[] values = new double[ {0}];{1}", numAssignments, NL()));
-////                    for (int j = 2; j < ev.size(); j++)
-////                    {
-////                        var asgn = (StringList)ev[j];
-////                        //string assignmentVar = substituteTerms(numReactions, "", (string)asgn[0]);
-////                        string assignmentVar = FindSymbol((string)asgn[0]);
-////                        string str;
-////                        var species = GetSpecies(assignmentVar);
-////
-////
-////                        if (species != NULL && species.hasOnlySubstance)
-////                        {
-////                            str = string.Format("{0} = ({1}) / {2}", assignmentVar, substituteTerms(numReactions, "", (string)asgn[1]), FindSymbol(species.compartmentName));
-////                        }
-////                        else
-////                        {
-////                            str = string.Format("{0} = {1}", assignmentVar, substituteTerms(numReactions, "", (string)asgn[1]));
-////                        }
-////
-////                        string sTempVar = string.Format("values[{0}]", nCount);
-////
-////                        oTemp.Add(assignmentVar);
-////                        oValue.Add(sTempVar);
-////
-////                        str = sTempVar + str.Substring(str.IndexOf(" = ", System.StringComparison.Ordinal));
-////
-////                        nCount++;
-////
-////                        sb.AppendFormat("\t\t{0};{1}", str, NL());
-////                    }
-////                    sb.Append("\t\treturn values;" + NL());
-////                    sb.Append("\t}" + NL());
-////                    sb.AppendFormat("\tpublic: void performEventAssignment_{0} (double[] values) {{{1}", i, NL());
-////
-////                    for (int j = 0; j < oTemp.size(); j++)
-////                    {
-////                        sb.AppendFormat("\t\t{0} = values[{1}];{2}", oTemp[j], j, NL());
-////                        if (((string)oTemp[j]).Trim().StartsWith("_c["))
-////                        {
-////                            sb.Append("\t\tconvertToConcentrations();" + NL());
-////                        }
-////                    }
-////
-////                    sb.Append("\t}" + NL());
-////                }
-////                sb.Append("\t" + NL());
-////            }
-////
-////            sb.AppendFormat("{0}{0}\tprivate: void InitializeDelays() {{ {0}", NL());
-////            for (int i = 0; i < delays.size(); i++)
-////            {
-////                sb.AppendFormat("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate {{ return {1}; }} );{2}", i, delays[i], NL());
-////                sb.AppendFormat("\t\t_eventType[{0}] = {1};{2}", i, (eventType[i] ? "true" : "false"), NL());
-////                sb.AppendFormat("\t\t_eventPersistentType[{0}] = {1};{2}", i, (eventPersistentType[i] ? "true" : "false"), NL());
-////            }
-////            sb.AppendFormat("\t}}{0}{0}", NL());
-////
-////            sb.AppendFormat("{0}{0}\tpublic: void computeEventPriorites() {{ {0}", NL());
-////            for (int i = 0; i < numEvents; i++)
-////            {
-////                var current = NOM.SbmlModel.getEvent(i);
-////
-////                if (current.isSetPriority() && current.getPriority().isSetMath())
-////                {
-////                    var priority = libsbml.formulaToString(current.getPriority().getMath());
-////                    sb.AppendFormat("\t\t_eventPriorities[{0}] = {1};{2}", i, substituteTerms(numReactions, "", priority), NL());
-////                }
-////                else
-////                {
-////                    sb.AppendFormat("\t\t_eventPriorities[{0}] = 0f;{1}", i, NL());
-////                }
-////            }
-////            sb.AppendFormat("\t}}{0}{0}", NL());
-//        }
+
+void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, int numEvents)
+{
+//      var delays = new StringList();
+//      var eventType = new List<bool>();
+//      var eventPersistentType = new List<bool>();
+//      if (numEvents > 0)
+//      {
+//          sb.Append("\t// Event assignments" + NL());
+//          for (int i = 0; i < numEvents; i++)
+//          {
+//              var ev = NOM.getNthEvent(i);
+//              eventType.Add(NOM.getNthUseValuesFromTriggerTime(i));
+//              eventPersistentType.Add(NOM.SbmlModel.getEvent(i).getTrigger().getPersistent());
+//              delays.Add(substituteTerms(numReactions, "", (string)ev[1]));
+//              sb.AppendFormat("\tpublic: void eventAssignment_{0} () {{{1}", i, NL());
+//              sb.AppendFormat("\t\tperformEventAssignment_{0}( computeEventAssignment_{0}() );{1}", i, NL());
+//              sb.Append("\t}" + NL());
+//              sb.AppendFormat("\tpublic: double[] computeEventAssignment_{0} () {{{1}", i, NL());
+//              var oTemp = new StringList();
+//              var oValue = new StringList();
+//              int nCount = 0;
+//              int numAssignments = ev.size() - 2;
+//              sb.Append(String.Format("\t\tdouble[] values = new double[ {0}];{1}", numAssignments, NL()));
+//              for (int j = 2; j < ev.size(); j++)
+//              {
+//                  var asgn = (StringList)ev[j];
+//                  //string assignmentVar = substituteTerms(numReactions, "", (string)asgn[0]);
+//                  string assignmentVar = FindSymbol((string)asgn[0]);
+//                  string str;
+//                  var species = GetSpecies(assignmentVar);
 //
 //
+//                  if (species != NULL && species.hasOnlySubstance)
+//                  {
+//                      str = string.Format("{0} = ({1}) / {2}", assignmentVar, substituteTerms(numReactions, "", (string)asgn[1]), FindSymbol(species.compartmentName));
+//                  }
+//                  else
+//                  {
+//                      str = string.Format("{0} = {1}", assignmentVar, substituteTerms(numReactions, "", (string)asgn[1]));
+//                  }
+//
+//                  string sTempVar = string.Format("values[{0}]", nCount);
+//
+//                  oTemp.Add(assignmentVar);
+//                  oValue.Add(sTempVar);
+//
+//                  str = sTempVar + str.Substring(str.IndexOf(" = ", System.StringComparison.Ordinal));
+//
+//                  nCount++;
+//
+//                  sb.AppendFormat("\t\t{0};{1}", str, NL());
+//              }
+//              sb.Append("\t\treturn values;" + NL());
+//              sb.Append("\t}" + NL());
+//              sb.AppendFormat("\tpublic: void performEventAssignment_{0} (double[] values) {{{1}", i, NL());
+//
+//              for (int j = 0; j < oTemp.size(); j++)
+//              {
+//                  sb.AppendFormat("\t\t{0} = values[{1}];{2}", oTemp[j], j, NL());
+//                  if (((string)oTemp[j]).Trim().StartsWith("_c["))
+//                  {
+//                      sb.Append("\t\tconvertToConcentrations();" + NL());
+//                  }
+//              }
+//
+//              sb.Append("\t}" + NL());
+//          }
+//          sb.Append("\t" + NL());
+//      }
+//
+//      sb.AppendFormat("{0}{0}\tprivate: void InitializeDelays() {{ {0}", NL());
+//      for (int i = 0; i < delays.size(); i++)
+//      {
+//          sb.AppendFormat("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate {{ return {1}; }} );{2}", i, delays[i], NL());
+//          sb.AppendFormat("\t\t_eventType[{0}] = {1};{2}", i, (eventType[i] ? "true" : "false"), NL());
+//          sb.AppendFormat("\t\t_eventPersistentType[{0}] = {1};{2}", i, (eventPersistentType[i] ? "true" : "false"), NL());
+//      }
+//      sb.AppendFormat("\t}}{0}{0}", NL());
+//
+//      sb.AppendFormat("{0}{0}\tpublic: void computeEventPriorites() {{ {0}", NL());
+//      for (int i = 0; i < numEvents; i++)
+//      {
+//          var current = NOM.SbmlModel.getEvent(i);
+//
+//          if (current.isSetPriority() && current.getPriority().isSetMath())
+//          {
+//              var priority = libsbml.formulaToString(current.getPriority().getMath());
+//              sb.AppendFormat("\t\t_eventPriorities[{0}] = {1};{2}", i, substituteTerms(numReactions, "", priority), NL());
+//          }
+//          else
+//          {
+//              sb.AppendFormat("\t\t_eventPriorities[{0}] = 0f;{1}", i, NL());
+//          }
+//      }
+//      sb.AppendFormat("\t}}{0}{0}", NL());
+}
+
+
 //         static string ModelGenerator::WriteDouble(double value)
 //        {
 ////            if (double.IsNegativeInfinity(value))
@@ -2665,114 +2665,119 @@ void ModelGenerator::WriteClassHeader(StringBuilder& sb)
 ////            return value.ToString(STR_DoubleFormat, oInfo);
 //        }
 //
-//         void ModelGenerator::WriteSetParameterValues(StringBuilder& sb, int numReactions)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: void setParameterValues ()" + NL());
-////            sb.Append("\t{" + NL());
-////
-////            for (int i = 0; i < globalParameterList.size(); i++)
-////                sb.Append(String.Format("\t\t{0} = (double){1};{2}",
-////                              convertSymbolToGP(globalParameterList[i].name),
-////                              WriteDouble(globalParameterList[i].value),
-////                              NL()));
-////            // Initialize local parameter values
-////            for (int i = 0; i < numReactions; i++)
-////            {
-////                for (int j = 0; j < localParameterList[i].size(); j++)
-////                    sb.Append(String.Format("\t\t_lp[{0}][{1}] = (double){2};{3}",
-////                                  i,
-////                                  j,
-////                                  WriteDouble(localParameterList[i][j].value),
-////                                  NL()));
-////            }
-////
-////            sb.Append("\t}" + NL() + NL());
-//        }
+
+void ModelGenerator::WriteSetParameterValues(StringBuilder& sb, int numReactions)
+{
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: void setParameterValues ()" + NL());
+//      sb.Append("\t{" + NL());
 //
-//         void ModelGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: void setCompartmentVolumes ()" + NL());
-////            sb.Append("\t{" + NL());
-////            for (int i = 0; i < compartmentList.size(); i++)
-////            {
-////                sb.Append("\t\t" + convertSymbolToC(compartmentList[i].name) + " = (double)" +
-////                          WriteDouble(compartmentList[i].value) + ";" + NL());
-////
-////                // at this point we also have to take care of all initial assignments for compartments as well as
-////                // the assignment rules on compartments ... otherwise we are in trouble :)
-////
-////                Stack<string> initializations = NOM.GetMatchForSymbol(compartmentList[i].name);
-////                while (initializations.size() > 0)
-////                {
-////                    sb.Append("\t\t" + substituteTerms(_NumReactions, "", initializations.Pop()) + ";" + NL());
-////                }
-////            }
-////
-////
-////            sb.Append("\t}" + NL() + NL());
-//        }
+//      for (int i = 0; i < globalParameterList.size(); i++)
+//          sb.Append(String.Format("\t\t{0} = (double){1};{2}",
+//                        convertSymbolToGP(globalParameterList[i].name),
+//                        WriteDouble(globalParameterList[i].value),
+//                        NL()));
+//      // Initialize local parameter values
+//      for (int i = 0; i < numReactions; i++)
+//      {
+//          for (int j = 0; j < localParameterList[i].size(); j++)
+//              sb.Append(String.Format("\t\t_lp[{0}][{1}] = (double){2};{3}",
+//                            i,
+//                            j,
+//                            WriteDouble(localParameterList[i][j].value),
+//                            NL()));
+//      }
 //
-//         void ModelGenerator::WriteSetBoundaryConditions(StringBuilder& sb)
-//        {
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: void setBoundaryConditions ()" + NL());
-////            sb.Append("\t{" + NL());
-////            for (int i = 0; i < boundarySpeciesList.size(); i++)
-////            {
-////                if (string.IsNullOrEmpty(boundarySpeciesList[i].formula))
-////                    sb.Append("\t\t" + convertSpeciesToBc(boundarySpeciesList[i].name) + " = (double)" +
-////                              WriteDouble(boundarySpeciesList[i].value) + ";" + NL());
-////                else
-////                    sb.Append("\t\t" + convertSpeciesToBc(boundarySpeciesList[i].name) + " = (double)" +
-////                              boundarySpeciesList[i].formula + ";" + NL());
-////            }
-////            sb.Append("\t}" + NL() + NL());
-//        }
+//      sb.Append("\t}" + NL() + NL());
+}
+
+
+void ModelGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
+{
+      // ------------------------------------------------------------------------------
+      sb.Append("\tpublic: void setCompartmentVolumes ()" + NL());
+      sb.Append("\t{" + NL());
+      for (int i = 0; i < compartmentList.size(); i++)
+      {
+          sb.Append("\t\t" + convertSymbolToC(compartmentList[i].name) + " = (double)" +
+                    WriteDouble(compartmentList[i].value) + ";" + NL());
+
+          // at this point we also have to take care of all initial assignments for compartments as well as
+          // the assignment rules on compartments ... otherwise we are in trouble :)
+
+//          Stack<string> initializations = NOM.GetMatchForSymbol(compartmentList[i].name);
+//          while (initializations.size() > 0)
+//          {
+//              sb.Append("\t\t" + substituteTerms(_NumReactions, "", initializations.Pop()) + ";" + NL());
+//          }
+      }
+
+      sb.Append("\t}" + NL() + NL());
+}
+
+void ModelGenerator::WriteSetBoundaryConditions(StringBuilder& sb)
+{
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: void setBoundaryConditions ()" + NL());
+//      sb.Append("\t{" + NL());
+//      for (int i = 0; i < boundarySpeciesList.size(); i++)
+//      {
+//          if (string.IsNullOrEmpty(boundarySpeciesList[i].formula))
+//              sb.Append("\t\t" + convertSpeciesToBc(boundarySpeciesList[i].name) + " = (double)" +
+//                        WriteDouble(boundarySpeciesList[i].value) + ";" + NL());
+//          else
+//              sb.Append("\t\t" + convertSpeciesToBc(boundarySpeciesList[i].name) + " = (double)" +
+//                        boundarySpeciesList[i].formula + ";" + NL());
+//      }
+//      sb.Append("\t}" + NL() + NL());
+}
+
+
+void ModelGenerator::WriteSetInitialConditions(StringBuilder& sb, int numFloatingSpecies)
+{
+//      sb.Append("\tpublic: void initializeInitialConditions ()" + NL());
+//      sb.Append("\t{" + NL());
+//      for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
+//      {
+//          if (string.IsNullOrEmpty(floatingSpeciesConcentrationList[i].formula))
+//              sb.Append("\t\t_init" + convertSpeciesToY(floatingSpeciesConcentrationList[i].name) + " = (double)" +
+//                        WriteDouble(floatingSpeciesConcentrationList[i].value) + ";" + NL());
+//          else
+//              sb.Append("\t\t_init" + convertSpeciesToY(floatingSpeciesConcentrationList[i].name) + " = (double)" +
+//                        floatingSpeciesConcentrationList[i].formula + ";" + NL());
+//      }
+//      sb.Append(NL());
 //
-//         void ModelGenerator::WriteSetInitialConditions(StringBuilder& sb, int numFloatingSpecies)
-//        {
-////            sb.Append("\tpublic: void initializeInitialConditions ()" + NL());
-////            sb.Append("\t{" + NL());
-////            for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
-////            {
-////                if (string.IsNullOrEmpty(floatingSpeciesConcentrationList[i].formula))
-////                    sb.Append("\t\t_init" + convertSpeciesToY(floatingSpeciesConcentrationList[i].name) + " = (double)" +
-////                              WriteDouble(floatingSpeciesConcentrationList[i].value) + ";" + NL());
-////                else
-////                    sb.Append("\t\t_init" + convertSpeciesToY(floatingSpeciesConcentrationList[i].name) + " = (double)" +
-////                              floatingSpeciesConcentrationList[i].formula + ";" + NL());
-////            }
-////            sb.Append(NL());
-////
-////            sb.Append("\t}" + NL() + NL());
-////
-////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: void setInitialConditions ()" + NL());
-////            sb.Append("\t{" + NL());
-////
-////            for (int i = 0; i < numFloatingSpecies; i++)
-////            {
-////                sb.Append("\t\t_y[" + i + "] =  _init_y[" + i + "];" + NL());
-////                sb.Append("\t\t_amounts[" + i + "] = _y[" + i + "]*" +
-////                          convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
-////            }
-////            sb.Append(NL());
-////
-////            sb.Append("\t}" + NL() + NL());
-//        }
+//      sb.Append("\t}" + NL() + NL());
 //
+//      // ------------------------------------------------------------------------------
+//      sb.Append("\tpublic: void setInitialConditions ()" + NL());
+//      sb.Append("\t{" + NL());
+//
+//      for (int i = 0; i < numFloatingSpecies; i++)
+//      {
+//          sb.Append("\t\t_y[" + i + "] =  _init_y[" + i + "];" + NL());
+//          sb.Append("\t\t_amounts[" + i + "] = _y[" + i + "]*" +
+//                    convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
+//      }
+//      sb.Append(NL());
+//
+//      sb.Append("\t}" + NL() + NL());
+}
+
 int ModelGenerator::ReadCompartments()
 {
-      int numCompartments = getNumCompartments();
+      int numCompartments = mNOM.getNumCompartments();
       for (int i = 0; i < numCompartments; i++)
       {
           string sCompartmentId = mNOM.getNthCompartmentId(i);
 
           double value = mNOM.getValue(sCompartmentId);
-          if (_isnan(value))//double.IsNaN(value))
+
+          if(IsNaN(value))
+          {
 			 value = 1;
+          }
           compartmentList.Add(Symbol(sCompartmentId, value));
       }
       return numCompartments;
