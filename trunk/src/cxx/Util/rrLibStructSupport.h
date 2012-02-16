@@ -5,6 +5,7 @@
 #include "rrStringList.h"
 #include "rrObject.h"
 #include "libstructural.h"
+#include "rrDoubleMatrix.h"
 
 using std::vector;
 using std::string;
@@ -70,7 +71,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        double[][] GetKMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        double[][] GetKMatrix()
 //        void GetKMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-//        double[][] GetL0Matrix()
+        DoubleMatrix GetL0Matrix();
 //        double[][] GetL0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetL0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
 //        double[][] GetLinkMatrix()

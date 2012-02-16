@@ -17,4 +17,15 @@ std::size_t IndexOf(std::vector<std::string>& vec, const std::string& elem )
 	return index;
 }
 
+bool IsNaN(const double& aNum)
+{
+	return _isnan(aNum);
+}
+
+bool IsNullOrEmpty(const string& str)
+{
+	return !str.size();
+}
+
+
 }

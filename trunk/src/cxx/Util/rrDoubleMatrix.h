@@ -7,24 +7,29 @@ using std::vector;
 
 namespace rr
 {
-class RR_DECLSPEC rrDoubleMatrix : public rrObject
+class RR_DECLSPEC DoubleMatrix : public rrObject
 {
-    private:
+    protected:
     	unsigned 		mRowCount;
         unsigned 		mColCount;
     	double* 		mMatrix;
 
     public:
-    					rrDoubleMatrix(unsigned rows = 0, unsigned cols = 0);
+    					DoubleMatrix(unsigned rows = 0, unsigned cols = 0);
+		int				RSize() const {return mRowCount;}
+        int 			CSize() const {return mColCount;}
     	double& 		operator() (unsigned row, unsigned col);
     	double  		operator() (unsigned row, unsigned col) const;
+
         bool			Allocate(unsigned rows, unsigned cols);
 
-    					~rrDoubleMatrix();                              // Destructor
-        //    			rrDoubleMatrix(rrDoubleMatrix const& m);               // Copy constructor
-    					rrDoubleMatrix& operator = (rrDoubleMatrix const& m);   // Assignment operator
+    					~DoubleMatrix();                            // Destructor
+        //    			DoubleMatrix(DoubleMatrix const& m);        // Copy constructor
+        DoubleMatrix& 	operator = (DoubleMatrix const& rhs);   	// Assignment operator
+
 };
 
-
+DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const int& nRows, const int& nCols);
+ostream& RR_DECLSPEC operator<<(ostream&, const DoubleMatrix& mat);
 }
 #endif

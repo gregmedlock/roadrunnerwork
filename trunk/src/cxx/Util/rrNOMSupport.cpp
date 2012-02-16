@@ -22,9 +22,8 @@ NOMSupport::NOMSupport()
 :
 mModel(NULL),
 mSBMLDoc(NULL)
-
 {
-	_oDoc = (mSBMLDoc);
+
 }
 
 NOMSupport::~NOMSupport()
@@ -134,7 +133,7 @@ string NOMSupport::GetId(SBase& element)
     return element.getName();
 }
 
-//        public static string getMetaId(string sId)
+//        public static string NOMSupport::getMetaId(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1250,72 +1249,77 @@ StringListContainer NOMSupport::getListOfFloatingSpecies()
 //            return floatingSpeciesIdList;
 //        }
 //
-//        public static ArrayList getListOfParameters()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw new Exception("You need to load the model first");
-//            }
-//
-//            ArrayList paramStrValueList = new ArrayList();
-//            int numOfGlobalParameters = (int)mModel.getNumParameters();
-//            string paramStr; Parameter parameter; ArrayList tempStrValueList; double paramValue;
-//            for (int i = 0; i < numOfGlobalParameters; i++)
-//            {
-//                parameter = mModel.getParameter(i);
-//                paramStr = parameter.getId();
-//                tempStrValueList = new ArrayList();
-//                tempStrValueList.Add(paramStr);
-//
-//                if ((parameter.isSetValue()))
-//                {
-//                    paramValue = parameter.getValue();
-//                }
-//                else
-//                {
-//                    paramValue = 0.0;
-//                }
-//                tempStrValueList.Add(paramValue);
-//
-//                paramStrValueList.Add(tempStrValueList);
-//            }
-//
-//            int numOfReactions = (int)mModel.getNumReactions();
-//            libsbmlcs.Reaction r; KineticLaw kl;
-//            for (int i = 0; i < numOfReactions; i++)
-//            {
-//                r = mModel.getReaction(i);
-//                kl = r.getKineticLaw();
-//                if (kl == NULL)
-//                {
-//                    continue;
-//                }
-//                else
-//                {
-//                    int numOfLocalParameters = (int)kl.getNumParameters();
-//                    for (int j = 0; j < numOfLocalParameters; j++)
-//                    {
-//                        parameter = kl.getParameter(j);
-//                        paramStr = parameter.getId();
-//                        tempStrValueList = new ArrayList();
-//
-//                        tempStrValueList.Add(paramStr);
-//                        if (parameter.isSetValue())
-//                        {
-//                            paramValue = parameter.getValue();
-//                        }
-//                        else
-//                        {
-//                            paramValue = 0.0;
-//                        }
-//                        tempStrValueList.Add(paramValue);
-//                        paramStrValueList.Add(tempStrValueList);
-//                    }
-//                }
-//            }
-//            return paramStrValueList;
-//        }
-//
+ArrayList NOMSupport::getListOfParameters()
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    ArrayList paramStrValueList;// = new ArrayList();
+
+    int numOfGlobalParameters = mModel->getNumParameters();
+    string paramStr;
+//    Parameter parameter;
+    StringList tempStrValueList;
+    double paramValue;
+    for (int i = 0; i < numOfGlobalParameters; i++)
+    {
+        Parameter *parameter = mModel->getParameter(i);
+        paramStr = parameter->getId();
+		//        tempStrValueList = new ArrayList();
+        tempStrValueList.Add(paramStr);
+
+        if ((parameter->isSetValue()))
+        {
+            paramValue = parameter->getValue();
+        }
+        else
+        {
+            paramValue = 0.0;
+        }
+        tempStrValueList.Add(ToString(paramValue));
+
+        paramStrValueList.Add(tempStrValueList);
+    }
+
+    int numOfReactions = mModel->getNumReactions();
+    Reaction *r;
+    KineticLaw *kl;
+    for (int i = 0; i < numOfReactions; i++)
+    {
+        r = mModel->getReaction(i);
+        kl = r->getKineticLaw();
+        if (kl == NULL)
+        {
+            continue;
+        }
+        else
+        {
+            int numOfLocalParameters = kl->getNumParameters();
+            for (int j = 0; j < numOfLocalParameters; j++)
+            {
+                Parameter *parameter = kl->getParameter(j);
+                paramStr = parameter->getId();
+                tempStrValueList;// = new ArrayList();
+
+                tempStrValueList.Add(paramStr);
+                if (parameter->isSetValue())
+                {
+                    paramValue = parameter->getValue();
+                }
+                else
+                {
+                    paramValue = 0.0;
+                }
+                tempStrValueList.Add(ToString(paramValue));
+                paramStrValueList.Add(tempStrValueList);
+            }
+        }
+    }
+    return paramStrValueList;
+}
+
 //        public static string getModelId()
 //        {
 //            if (mModel == NULL)
@@ -1520,15 +1524,15 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //
 ArrayList NOMSupport::getNthError(const int& nIndex)
 {
-    if (_oDoc == NULL)
+    if (mSBMLDoc == NULL)
     {
         throw Exception("You need to load the model first");
     }
 
-    if (nIndex >= _oDoc->getNumErrors())
+    if (nIndex >= mSBMLDoc->getNumErrors())
         throw Exception("Index out of Bounds.");
 
-    SBMLError *error = (SBMLError*) _oDoc->getError(nIndex);
+    SBMLError *error = (SBMLError*) mSBMLDoc->getError(nIndex);
     ArrayList oResult;// = new ArrayList();
 
     switch (error->getSeverity())
@@ -1888,30 +1892,29 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //        }
 //
-//        public static string getNthParameterId(int nReactionIndex, int nParameterIndex)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            if (nReactionIndex < 0 || nReactionIndex >= (int)mModel.getNumReactions())
-//            {
-//                throw Exception("There is no reaction corresponding to the index you provided");
-//            }
-//
-//            libsbmlcs.Reaction oReaction = mModel.getReaction((int)nReactionIndex);
-//            KineticLaw kl = oReaction.getKineticLaw();
-//
-//            if (nParameterIndex < 0 || nParameterIndex >= (int)kl.getNumParameters())
-//            {
-//                throw Exception("Index exceeds the number of Parameters in the list");
-//            }
-//
-//            return kl.getParameter((int)nParameterIndex).getId();
-//
-//        }
-//
+string NOMSupport::getNthParameterId(const int& nReactionIndex, const int& nParameterIndex)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    if (nReactionIndex < 0 || nReactionIndex >= (int)mModel->getNumReactions())
+    {
+        throw Exception("There is no reaction corresponding to the index you provided");
+    }
+
+    Reaction *oReaction = mModel->getReaction((int)nReactionIndex);
+    KineticLaw *kl = oReaction->getKineticLaw();
+
+    if (nParameterIndex < 0 || nParameterIndex >= (int)kl->getNumParameters())
+    {
+        throw Exception("Index exceeds the number of Parameters in the list");
+    }
+
+    return kl->getParameter((int)nParameterIndex)->getId();
+}
+
 //        public static string getNthParameterName(int nReactionIndex, int nParameterIndex)
 //        {
 //            if (mModel == NULL)
@@ -1935,30 +1938,30 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            return kl.getParameter((int)nParameterIndex).getName();
 //        }
 //
-//        public static double getNthParameterValue(int nReactionIndex, int nParameterIndex)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            if (nReactionIndex < 0 || nReactionIndex >= (int)mModel.getNumReactions())
-//            {
-//                throw Exception("There is no reaction corresponding to the index you provided");
-//            }
-//
-//            libsbmlcs.Reaction oReaction = mModel.getReaction((int)nReactionIndex);
-//            KineticLaw kl = oReaction.getKineticLaw();
-//
-//            if (nParameterIndex < 0 || nParameterIndex >= (int)kl.getNumParameters())
-//            {
-//                throw Exception("Index exceeds the number of Parameters in the list");
-//            }
-//
-//            return kl.getParameter((int)nParameterIndex).getValue();
-//
-//        }
-//
+double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nParameterIndex)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    if (nReactionIndex < 0 || nReactionIndex >= (int)mModel->getNumReactions())
+    {
+        throw Exception("There is no reaction corresponding to the index you provided");
+    }
+
+    Reaction *oReaction = mModel->getReaction((int)nReactionIndex);
+    KineticLaw *kl = oReaction->getKineticLaw();
+
+    if (nParameterIndex < 0 || nParameterIndex >= (int)kl->getNumParameters())
+    {
+        throw Exception("Index exceeds the number of Parameters in the list");
+    }
+
+    return kl->getParameter((int)nParameterIndex)->getValue();
+
+}
+
 //        public static string getNthProductName(int nIndex, int nProduct)
 //        {
 //            if (mModel == NULL)
@@ -2074,22 +2077,22 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            return oRef.getStoichiometry();
 //        }
 //
-//        public static string getNthReactionId(int nIndex)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            if (nIndex >= (int)mModel.getNumReactions())
-//            {
-//                throw Exception("There is no reaction corresponding to the index you provided");
-//            }
-//
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
-//            return GetId(r);
-//        }
-//
+string NOMSupport::getNthReactionId(const int& nIndex)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    if (nIndex >= (int)mModel->getNumReactions())
+    {
+        throw Exception("There is no reaction corresponding to the index you provided");
+    }
+
+    Reaction &r = *(mModel->getReaction((int)nIndex));
+    return GetId(r);
+}
+
 //        public static string getNthReactionName(int nIndex)
 //        {
 //            if (mModel == NULL)
@@ -2273,22 +2276,22 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //        public static int getNumErrors()
 //        {
-//            if (_oDoc == NULL)
+//            if (mSBMLDoc == NULL)
 //            {
 //                throw Exception("You need to load the model first");
 //            }
-//            return (int)_oDoc.getNumErrors();
+//            return (int)mSBMLDoc.getNumErrors();
 //        }
 //
-//        public static int getNumEvents()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            return (int)mModel.getNumEvents();
-//        }
-//
+int NOMSupport::getNumEvents()
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+    return (int)mModel->getNumEvents();
+}
+
 //        public static int getNumFloatingSpecies()
 //        {
 //            if (mModel == NULL)
@@ -2337,20 +2340,26 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //
 //        }
 //
-//        public static int getNumParameters(int var0)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            if (var0 > mModel.getNumReactions())
-//                throw Exception("Reaction does not exist");
-//            libsbmlcs.Reaction r = mModel.getReaction((int)var0);
-//            if (!r.isSetKineticLaw()) return 0;
-//            return (int)r.getKineticLaw().getNumParameters();
-//
-//        }
-//
+int NOMSupport::getNumParameters(const int& var0)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    if (var0 > mModel->getNumReactions())
+    {
+        throw Exception("Reaction does not exist");
+    }
+    Reaction &r = *(mModel->getReaction(var0));
+    if (!r.isSetKineticLaw())
+    {
+    	return 0;
+    }
+    return (int)r.getKineticLaw()->getNumParameters();
+
+}
+
 //        public static int getNumProducts(int var0)
 //        {
 //            if (mModel == NULL)
@@ -2592,7 +2601,7 @@ string NOMSupport::getSBML()
 //    if (_ParameterSets != NULL && mModel != NULL)
 //        _ParameterSets.AddToModel(mModel);
 //
-//    return libsbml.writeSBMLToString(_oDoc);
+//    return libsbml.writeSBMLToString(mSBMLDoc);
 }
 
 //        public static int getSBOTerm(string sId)
@@ -3045,7 +3054,7 @@ void NOMSupport::changeTimeSymbol(Model& model, const string& timeSymbol)
 //            loadSBML(var0);
 //            changeTimeSymbol(mModel, sTimeSymbol);
 //            changeSymbol(mModel, "avogadro", libsbml.AST_NAME_AVOGADRO);
-//            modifyKineticLaws(_oDoc, mModel);
+//            modifyKineticLaws(mSBMLDoc, mModel);
 //
 //            BuildSymbolTable();
 //
@@ -3253,7 +3262,7 @@ void NOMSupport::loadSBML(const string& var0)
                 delete mModel;//.Dispose();
                 mModel = NULL;
             }
-            delete mSBMLDoc;//_oDoc.Dispose();
+            delete mSBMLDoc;//mSBMLDoc.Dispose();
             mSBMLDoc = NULL;
         }
         catch(...)
@@ -3679,7 +3688,7 @@ string NOMSupport::validateSBML(const string& sModel)
 //        {
 //            get
 //            {
-//                return _oDoc;
+//                return mSBMLDoc;
 //            }
 //        }
 //

@@ -25,10 +25,7 @@ mStructAnalysis()//,
 
 }
 
-ModelGenerator::~ModelGenerator()
-{
-
-}
+ModelGenerator::~ModelGenerator(){}
 
 // Generates the Model Code from the SBML string
 string ModelGenerator::generateModelCode(const string& sbmlStr)
@@ -77,26 +74,6 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     }
     Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
-//    if (RoadRunner::_bComputeAndAssignConservationLaws)
-//    {
-//	    _NumIndependentSpecies 	= mStructAnalysis.getNumIndSpecies();
-//		independentSpeciesList 	= mStructAnalysis.getIndependentSpecies();
-//
-//		//dependentSpeciesList 	= StructAnalysis::GetDependentSpeciesIds();
-//        dependentSpeciesList 	= mStructAnalysis.getDependentSpecies();
-//    }
-//    else
-//    {
-//		//        _NumIndependentSpecies = StructAnalysis.GetNumSpecies();
-//        _NumIndependentSpecies = mStructAnalysis.getNumSpecies();
-//		//        independentSpeciesList = StructAnalysis.GetSpeciesIds();
-//        independentSpeciesList = mStructAnalysis.getSpecies();
-//
-//		//        dependentSpeciesList = new string[0];
-//	//		dependentSpeciesList = new string[0];
-//
-//    }
-
 	if (RoadRunner::_bComputeAndAssignConservationLaws)
     {
         _NumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
@@ -114,28 +91,28 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 
     // Load the compartment array (name and value)
 	//    _NumCompartments = ReadCompartments();
-	_NumCompartments = ReadCompartments();
+	_NumCompartments 		= ReadCompartments();
 
     // Read FloatingSpecies
-    _NumFloatingSpecies = ReadFloatingSpecies();
-    _NumDependentSpecies = _NumFloatingSpecies - _NumIndependentSpecies;
-//
-//    // Load the boundary species array (name and value)
-    _NumBoundarySpecies = ReadBoundarySpecies();
-//
-//    // Get all the parameters into a list, global and local
-//    _NumGlobalParameters = ReadGlobalParameters();
-//    _NumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
-//
-//    // Load up local parameters next
-//    ReadLocalParameters(_NumReactions, out _LocalParameterDimensions, out _TotalLocalParmeters);
-//    _NumEvents = NOM.getNumEvents();
-//
-//    // Get the L0 matrix
-//    rrDoubleMatrix L0 = InitializeL0();
-//    WriteClassHeader(sb);
-//    WriteOutVariables(sb);
-//    WriteOutSymbolTables(sb);
+    _NumFloatingSpecies 	= ReadFloatingSpecies();
+    _NumDependentSpecies 	= _NumFloatingSpecies - _NumIndependentSpecies;
+
+    // Load the boundary species array (name and value)
+	_NumBoundarySpecies 	= ReadBoundarySpecies();
+
+    // Get all the parameters into a list, global and local
+    _NumGlobalParameters 	= ReadGlobalParameters();
+	_NumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
+
+    // Load up local parameters next
+	ReadLocalParameters(_NumReactions, _LocalParameterDimensions, _TotalLocalParmeters);
+    _NumEvents 				= mNOM.getNumEvents();
+
+    // Get the L0 matrix
+    DoubleMatrix L0 = InitializeL0();
+    WriteClassHeader(sb);
+    WriteOutVariables(sb);
+    WriteOutSymbolTables(sb);
 //    WriteResetEvents(sb, _NumEvents);
 //    WriteSetConcentration(sb);
 //    WriteGetConcentration(sb);
@@ -159,8 +136,9 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 //    WriteEvalInitialAssignments(sb, _NumReactions);
 //    WriteTestConstraints(sb);
 //    sb.AppendFormat("}}{0}{0}", NL());
-//	return sb.ToString();
+	return sb.ToString();
 }
+
 //        	const string STR_DoubleFormat;// = "G"; //"G17";
 //			const string STR_FixAmountCompartments;// = "*";
 //			static ModelGenerator _instance;
@@ -1061,41 +1039,46 @@ string ModelGenerator::NL()
     newLine << endl;
     return newLine.str();//Environment.NewLine;
 }
-//
-//
-//         rrDoubleMatrix ModelGenerator::InitializeL0()
-//        {
-//            rrDoubleMatrix L0;
-////            try
-////            {
-////                if (_NumDependentSpecies > 0)
-////                    L0 = StructAnalysis.GetL0Matrix();
-////                else L0 = new double[0][];
-////            }
-////            catch (Exception)
-////            {
-////                L0 = new double[0][];
-////            }
-//            return L0;
-//        }
-//
-//         void ModelGenerator::WriteOutSymbolTables(StringBuilder& sb)
-//        {
-////            sb.Append("\tvoid loadSymbolTables() {" + NL());
-////
-////            for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
-////                sb.AppendFormat("\t\tvariableTable[{0}] = \"{1}\";{2}", i, floatingSpeciesConcentrationList[i].name, NL());
-////
-////            for (int i = 0; i < boundarySpeciesList.size(); i++)
-////                sb.AppendFormat("\t\tboundaryTable[{0}] = \"{1}\";{2}", i, boundarySpeciesList[i].name, NL());
-////
-////            for (int i = 0; i < globalParameterList.size(); i++)
-////            {
-////                sb.AppendFormat("\t\tglobalParameterTable[{0}] = \"{1}\";{2}", i, globalParameterList[i].name, NL());
-////            }
-////            sb.AppendFormat("\t}}{0}{0}", NL());
-//        }
 
+
+DoubleMatrix ModelGenerator::InitializeL0()
+{
+	DoubleMatrix L0;
+    try
+    {
+        if (_NumDependentSpecies > 0)
+//        if (_NumDependentSpecies == 0)
+        {
+            L0 = mStructAnalysis.GetL0Matrix();
+        }
+        else
+        {
+        	L0.Allocate(1,1);// = new double[0][];
+        }
+    }
+    catch (Exception)
+    {
+        //L0 = new double[0][];
+    }
+    return L0;
+}
+
+void ModelGenerator::WriteOutSymbolTables(StringBuilder& sb)
+{
+      sb.Append("\tvoid loadSymbolTables() {" + NL());
+
+      for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
+          sb.AppendFormat("\t\tvariableTable[{0}] = \"{1}\";{2}", i, floatingSpeciesConcentrationList[i].name, NL());
+
+      for (int i = 0; i < boundarySpeciesList.size(); i++)
+          sb.AppendFormat("\t\tboundaryTable[{0}] = \"{1}\";{2}", i, boundarySpeciesList[i].name, NL());
+
+      for (int i = 0; i < globalParameterList.size(); i++)
+      {
+          sb.AppendFormat("\t\tglobalParameterTable[{0}] = \"{1}\";{2}", i, globalParameterList[i].name, NL());
+      }
+      sb.AppendFormat("\t}}{0}{0}", NL());
+}
 
 int ModelGenerator::ReadFloatingSpecies()
 {
@@ -1295,25 +1278,54 @@ int ModelGenerator::ReadBoundarySpecies()
     return numBoundarySpecies;
 }
 
-//         int ModelGenerator::ReadGlobalParameters()
-//        {
-////            string name;
-////            double value;
-////            int numGlobalParameters;
-////            StringList oParameters = NOM.getListOfParameters();
-////            numGlobalParameters = oParameters.size();
-////            for (int i = 0; i < numGlobalParameters; i++)
-////            {
-////                name = (string)((StringList)oParameters[i])[0];
-////                value = (double)((StringList)oParameters[i])[1];
-////                globalParameterList.Add(new Symbol(name, value));
-////            }
-////            return numGlobalParameters;
-//        }
-//
-//         void ModelGenerator::ReadLocalParameters(const int& numReactions,  vector<int>& localParameterDimensions,
-//                                          int& totalLocalParmeters)
-//        {
+int ModelGenerator::ReadGlobalParameters()
+{
+    int numGlobalParameters;
+    ArrayList oParameters = mNOM.getListOfParameters();
+    numGlobalParameters = oParameters.Count();
+    for (int i = 0; i < numGlobalParameters; i++)
+    {
+    	StringList parameter = oParameters[i];
+
+        string name 	= parameter[0];
+        double value 	= ToDouble(parameter[1]);
+        globalParameterList.Add(Symbol(name, value));
+    }
+    return numGlobalParameters;
+}
+
+void ModelGenerator::ReadLocalParameters(const int& numReactions,  vector<int>& localParameterDimensions, int& totalLocalParmeters)
+{
+    string name;
+    double value;
+    int numLocalParameters;
+    totalLocalParmeters = 0;
+    string reactionName;
+//    localParameterDimensions = new int[numReactions];
+	localParameterDimensions.resize(numReactions);
+    for (int i = 0; i < numReactions; i++)
+    {
+        numLocalParameters = mNOM.getNumParameters(i);
+        reactionName = mNOM.getNthReactionId(i);
+        reactionList.Add(Symbol(reactionName, 0.0));
+        SymbolList newList;
+        //localParameterList[i] = new SymbolList();
+        for (int j = 0; j < numLocalParameters; j++)
+        {
+            localParameterDimensions[i] = numLocalParameters;
+            name = mNOM.getNthParameterId(i, j);
+            value = mNOM.getNthParameterValue(i, j);
+            //localParameterList[i].Add(new Symbol(reactionName, name, value));
+            newList.Add(Symbol(reactionName, name, value));
+        }
+        localParameterList.push_back(newList);
+    }
+}
+
+
+////        private void ReadLocalParameters(int numReactions, out int[] localParameterDimensions,
+////                                         out int totalLocalParmeters)
+////        {
 ////            string name;
 ////            double value;
 ////            int numLocalParameters;
@@ -1334,10 +1346,11 @@ int ModelGenerator::ReadBoundarySpecies()
 ////                    localParameterList[i].Add(new Symbol(reactionName, name, value));
 ////                }
 ////            }
-//        }
-//
+////        }
+
+
 //         void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies,
-//                                                  rrDoubleMatrix L0)
+//                                                  DoubleMatrix L0)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\t// Uses the equation: dSd/dt = L0 dSi/dt" + NL());
@@ -1402,7 +1415,7 @@ int ModelGenerator::ReadBoundarySpecies()
 ////            if (numDependentSpecies > 0)
 ////            {
 ////                string factor;
-////                rrDoubleMatrix gamma = StructAnalysis.GetGammaMatrix();
+////                DoubleMatrix gamma = StructAnalysis.GetGammaMatrix();
 ////                for (int i = 0; i < numDependentSpecies; i++)
 ////                {
 ////                    sb.AppendFormat("\t\t_ct[{0}] = ", i);
@@ -1445,7 +1458,7 @@ int ModelGenerator::ReadBoundarySpecies()
 //        }
 //
 //         void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies,
-//                                                 rrDoubleMatrix L0)
+//                                                 DoubleMatrix L0)
 //        {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\t// Compute values of dependent species " + NL());
@@ -1664,7 +1677,7 @@ int ModelGenerator::ReadBoundarySpecies()
 ////            sb.Append("\t}" + NL() + NL());
 ////
 ////            // ------------------------------------------------------------------------------
-////            sb.Append("\tpublic: rrDoubleMatrix lp {" + NL());
+////            sb.Append("\tpublic: DoubleMatrix lp {" + NL());
 ////            sb.Append("\t\tget { return _lp; } " + NL());
 ////            sb.Append("\t\tset { _lp = value; } " + NL());
 ////            sb.Append("\t}" + NL() + NL());
@@ -1821,131 +1834,154 @@ int ModelGenerator::ReadBoundarySpecies()
 ////
 //        }
 //
-//         void ModelGenerator::WriteOutVariables(StringBuilder& sb)
-//        {
-////            sb.Append("\tprivate: List<string> _Warnings = new List<string>();" + NL());
-////            sb.Append("\tprivate: double[] _gp = new double[" + (_NumGlobalParameters + _TotalLocalParmeters) +
-////                      "];           // Vector containing all the global parameters in the System  " + NL());
-////            sb.Append("\tprivate: double[] _sr = new double[" + (_NumModifiableSpeciesReferences) +
-////                      "];           // Vector containing all the modifiable species references  " + NL());
-////            sb.Append("\tprivate: rrDoubleMatrix _lp = new double[" + _NumReactions +
-////                      "][];       // Vector containing all the local parameters in the System  " + NL());
-////            sb.Append("\tprivate: double[] _y = new double[" + floatingSpeciesConcentrationList.size() +
-////                      "];            // Vector containing the concentrations of all floating species " + NL());
-////            sb.Append(String.Format("\tprivate: double[] _init_y = new double[{0}];            // Vector containing the initial concentrations of all floating species {1}", floatingSpeciesConcentrationList.size(), NL()));
-////            sb.Append("\tprivate: double[] _amounts = new double[" + floatingSpeciesConcentrationList.size() +
-////                      "];      // Vector containing the amounts of all floating species " + NL());
-////            sb.Append("\tprivate: double[] _bc = new double[" + _NumBoundarySpecies +
-////                      "];           // Vector containing all the boundary species concentration values   " + NL());
-////            sb.Append("\tprivate: double[] _c = new double[" + _NumCompartments +
-////                      "];            // Vector containing all the compartment values   " + NL());
-////            sb.Append("\tprivate: double[] _dydt = new double[" + floatingSpeciesConcentrationList.size() +
-////                      "];         // Vector containing rates of changes of all species   " + NL());
-////            sb.Append("\tprivate: double[] _rates = new double[" + _NumReactions +
-////                      "];        // Vector containing the rate laws of all reactions    " + NL());
-////            sb.Append("\tprivate: double[] _ct = new double[" + _NumDependentSpecies +
-////                      "];           // Vector containing values of all conserved sums      " + NL());
-////
-////            sb.Append("\tprivate: double[] _eventTests = new double[" + _NumEvents +
-////                      "];   // Vector containing results of any event tests        " + NL());
-////            sb.Append("\tprivate: TEventDelayDelegate[] _eventDelay = new TEventDelayDelegate[" + _NumEvents +
-////                      "]; // array of trigger function pointers" + NL());
-////            sb.Append("\tprivate: bool[] _eventType = new bool[" + _NumEvents +
-////                      "]; // array holding the status whether events are useValuesFromTriggerTime or not" + NL());
-////            sb.Append("\tprivate: bool[] _eventPersistentType = new bool[" + _NumEvents +
-////                      "]; // array holding the status whether events are persitstent or not" + NL());
-////            sb.Append("\tprivate: double _time;" + NL());
-////            sb.Append("\tprivate: int numIndependentVariables;" + NL());
-////            sb.Append("\tprivate: int numDependentVariables;" + NL());
-////            sb.Append("\tprivate: int numTotalVariables;" + NL());
-////            sb.Append("\tprivate: int numBoundaryVariables;" + NL());
-////            sb.Append("\tprivate: int numGlobalParameters;" + NL());
-////            sb.Append("\tprivate: int numCompartments;" + NL());
-////            sb.Append("\tprivate: int numReactions;" + NL());
-////            sb.Append("\tprivate: int numRules;" + NL());
-////            sb.Append("\tprivate: int numEvents;" + NL());
-////            sb.Append("\tvector<string> variableTable = new string[" + floatingSpeciesConcentrationList.size() + "];" + NL());
-////            sb.Append("\tvector<string> boundaryTable = new string[" + boundarySpeciesList.size() + "];" + NL());
-////            sb.Append("\tvector<string> globalParameterTable = new string[" + globalParameterList.size() + "];" + NL());
-////            sb.Append("\tvector<int> localParameterDimensions = new int[" + _NumReactions + "];" + NL());
-////            sb.Append("\tprivate: TEventAssignmentDelegate[] _eventAssignments;" + NL());
-////            sb.Append("\tprivate: double[] _eventPriorities;" + NL());
-////            sb.Append("\tprivate: TComputeEventAssignmentDelegate[] _computeEventAssignments;" + NL());
-////            sb.Append("\tprivate: TPerformEventAssignmentDelegate[] _performEventAssignments;" + NL());
-////            sb.Append("\tprivate: bool[] _eventStatusArray = new bool[" + _NumEvents + "];" + NL());
-////            sb.Append("\tprivate: bool[] _previousEventStatusArray = new bool[" + _NumEvents + "];" + NL());
-////            sb.Append(NL());
-////            sb.Append("\tpublic: TModel ()  " + NL());
-////            sb.Append("\t{" + NL());
-////
-////            sb.Append("\t\tnumIndependentVariables = " + _NumIndependentSpecies + ";" + NL());
-////            sb.Append("\t\tnumDependentVariables = " + _NumDependentSpecies + ";" + NL());
-////            sb.Append("\t\tnumTotalVariables = " + _NumFloatingSpecies + ";" + NL());
-////            sb.Append("\t\tnumBoundaryVariables = " + _NumBoundarySpecies + ";" + NL());
-////            sb.Append("\t\tnumGlobalParameters = " + globalParameterList.size() + ";" + NL());
-////            sb.Append("\t\tnumCompartments = " + compartmentList.size() + ";" + NL());
-////            sb.Append("\t\tnumReactions = " + reactionList.size() + ";" + NL());
-////            sb.Append("\t\tnumEvents = " + _NumEvents + ";" + NL());
-////            sb.Append("\t\tInitializeDelays();" + NL());
-////
-////            // Declare any eventAssignment delegates
-////            if (_NumEvents > 0)
-////            {
-////                sb.Append("\t\t_eventAssignments = new TEventAssignmentDelegate[numEvents];" + NL());
-////                sb.Append("\t\t_eventPriorities = new double[numEvents];" + NL());
-////                sb.Append("\t\t_computeEventAssignments= new TComputeEventAssignmentDelegate[numEvents];" + NL());
-////                sb.Append("\t\t_performEventAssignments= new TPerformEventAssignmentDelegate[numEvents];" + NL());
-////
-////                for (int i = 0; i < _NumEvents; i++)
-////                {
-////                    sb.Append("\t\t_eventAssignments[" + i + "] = new TEventAssignmentDelegate (eventAssignment_" + i +
-////                              ");" + NL());
-////                    sb.Append("\t\t_computeEventAssignments[" + i +
-////                              "] = new TComputeEventAssignmentDelegate (computeEventAssignment_" + i + ");" + NL());
-////                    sb.Append("\t\t_performEventAssignments[" + i +
-////                              "] = new TPerformEventAssignmentDelegate (performEventAssignment_" + i + ");" + NL());
-////                }
-////
-////                sb.Append("\t\tresetEvents();" + NL());
-////                sb.Append(NL());
-////            }
-////
-////            if (_NumModifiableSpeciesReferences > 0)
-////            {
-////                for (int i = 0; i < ModifiableSpeciesReferenceList.size(); i++)
-////                {
-////                    sb.Append("\t\t_sr[" + i + "]  = " + WriteDouble(ModifiableSpeciesReferenceList[i].value) + ";" + NL());
-////                }
-////                sb.Append(NL());
-////            }
-////
-////            // Declare space for local parameters
-////            for (int i = 0; i < _NumReactions; i++)
-////            {
-////                sb.Append("\t\tlocalParameterDimensions[" + i + "] = " + _LocalParameterDimensions[i] + ";" + NL());
-////                sb.Append("\t\t_lp[" + i + "] = new double[" + _LocalParameterDimensions[i] + "];" + NL());
-////            }
-////
-////            sb.Append("\t}" + NL() + NL());
-//        }
-//
-//         void ModelGenerator::WriteClassHeader(StringBuilder& sb)
-//        {
-////            sb.Append("using System;" + NL());
-////            sb.Append("using System.IO;" + NL());
-////            sb.Append("using System.Collections;" + NL());
-////            sb.Append("using System.Collections.Generic;" + NL());
-////            sb.Append("using LibRoadRunner;" + NL());
-////
-////            sb.Append(" " + NL() + NL());
-////            sb.Append(NL());
-////            sb.AppendFormat("class TModel : IModel{0}", NL());
-////            sb.Append("{" + NL());
-////            sb.AppendFormat("\t// Symbol Mappings{0}{0}", NL());
-////            for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
-////                sb.AppendFormat("\t// y[{0}] = {1}{2}", i, floatingSpeciesConcentrationList[i].name, NL());
-////            sb.Append(NL());
-//        }
+ void ModelGenerator::WriteOutVariables(StringBuilder& sb)
+{
+      sb.Append("\tprivate: List<string> _Warnings = new List<string>();" + NL());
+      sb.Append("\tprivate: double[] _gp = new double[" + ToString(_NumGlobalParameters + _TotalLocalParmeters) +
+                "];           // Vector containing all the global parameters in the System  " + NL());
+      sb.Append("\tprivate: double[] _sr = new double[" + ToString(_NumModifiableSpeciesReferences) +
+                "];           // Vector containing all the modifiable species references  " + NL());
+      sb.Append("\tprivate: DoubleMatrix _lp = new double[" + ToString(_NumReactions) +
+                "][];       // Vector containing all the local parameters in the System  " + NL());
+
+      sb.Append("\tprivate: double[] _y = new double[", floatingSpeciesConcentrationList.size(),
+                "];            // Vector containing the concentrations of all floating species ",  NL());
+
+      //sb.Append(String.Format("\tprivate double[] _init_y = new double[{0}];            // Vector containing the initial concentrations of all floating species {1}", floatingSpeciesConcentrationList.Count, NL()));
+      sb.AppendFormat("\tprivate: double[] _init_y = new double[{0}];            // Vector containing the initial concentrations of all floating species {1}", floatingSpeciesConcentrationList.Count(), NL());
+
+      sb.Append("\tprivate: double[] _amounts = new double[", floatingSpeciesConcentrationList.size(),
+                "];      // Vector containing the amounts of all floating species ", NL());
+
+      sb.Append("\tprivate: double[] _bc = new double[", _NumBoundarySpecies,
+                "];           // Vector containing all the boundary species concentration values   " , NL());
+
+      sb.Append("\tprivate: double[] _c = new double[" , _NumCompartments ,
+                "];            // Vector containing all the compartment values   " + NL());
+
+      sb.Append("\tprivate: double[] _dydt = new double[" , floatingSpeciesConcentrationList.size() ,
+                "];         // Vector containing rates of changes of all species   " , NL());
+
+      sb.Append("\tprivate: double[] _rates = new double[" , _NumReactions ,
+                "];        // Vector containing the rate laws of all reactions    " , NL());
+
+      sb.Append("\tprivate: double[] _ct = new double[" , _NumDependentSpecies ,
+                "];           // Vector containing values of all conserved sums      " , NL());
+
+      sb.Append("\tprivate: double[] _eventTests = new double[" , _NumEvents ,
+                "];   // Vector containing results of any event tests        " , NL());
+
+      sb.Append("\tprivate: TEventDelayDelegate[] _eventDelay = new TEventDelayDelegate[" , _NumEvents ,
+                "]; // array of trigger function pointers" , NL());
+
+      sb.Append("\tprivate: bool[] _eventType = new bool[" , _NumEvents ,
+                "]; // array holding the status whether events are useValuesFromTriggerTime or not" , NL());
+
+      sb.Append("\tprivate: bool[] _eventPersistentType = new bool[" , _NumEvents ,
+                "]; // array holding the status whether events are persitstent or not" , NL());
+
+      sb.Append("\tprivate: double _time;" , NL());
+      sb.Append("\tprivate: int numIndependentVariables;" , NL());
+      sb.Append("\tprivate: int numDependentVariables;" , NL());
+      sb.Append("\tprivate: int numTotalVariables;" , NL());
+      sb.Append("\tprivate: int numBoundaryVariables;" , NL());
+      sb.Append("\tprivate: int numGlobalParameters;" , NL());
+      sb.Append("\tprivate: int numCompartments;" , NL());
+      sb.Append("\tprivate: int numReactions;" , NL());
+      sb.Append("\tprivate: int numRules;" , NL());
+      sb.Append("\tprivate: int numEvents;" , NL());
+      sb.Append("\tvector<string> variableTable = new string[" , floatingSpeciesConcentrationList.size() , "];" , NL());
+      sb.Append("\tvector<string> boundaryTable = new string[" , boundarySpeciesList.size() , "];" , NL());
+      sb.Append("\tvector<string> globalParameterTable = new string[" , globalParameterList.size() , "];" , NL());
+      sb.Append("\tvector<int> localParameterDimensions = new int[" , _NumReactions , "];" , NL());
+      sb.Append("\tprivate: TEventAssignmentDelegate[] _eventAssignments;" , NL());
+      sb.Append("\tprivate: double[] _eventPriorities;" , NL());
+      sb.Append("\tprivate: TComputeEventAssignmentDelegate[] _computeEventAssignments;" , NL());
+      sb.Append("\tprivate: TPerformEventAssignmentDelegate[] _performEventAssignments;" , NL());
+      sb.Append("\tprivate: bool[] _eventStatusArray = new bool[" , _NumEvents , "];" , NL());
+      sb.Append("\tprivate: bool[] _previousEventStatusArray = new bool[" , _NumEvents , "];" , NL());
+      sb.Append(NL());
+      sb.Append("\tpublic: TModel ()  " , NL());
+      sb.Append("\t{" , NL());
+
+      sb.Append("\t\tnumIndependentVariables = " , _NumIndependentSpecies , ";" , NL());
+      sb.Append("\t\tnumDependentVariables = " , _NumDependentSpecies , ";" , NL());
+      sb.Append("\t\tnumTotalVariables = " , _NumFloatingSpecies , ";" , NL());
+      sb.Append("\t\tnumBoundaryVariables = " , _NumBoundarySpecies , ";" , NL());
+      sb.Append("\t\tnumGlobalParameters = " , globalParameterList.size() , ";" , NL());
+      sb.Append("\t\tnumCompartments = " , compartmentList.size() , ";" , NL());
+      sb.Append("\t\tnumReactions = " , reactionList.size() , ";" , NL());
+      sb.Append("\t\tnumEvents = " , _NumEvents , ";" , NL());
+      sb.Append("\t\tInitializeDelays();" , NL());
+
+      // Declare any eventAssignment delegates
+      if (_NumEvents > 0)
+      {
+          sb.Append("\t\t_eventAssignments = new TEventAssignmentDelegate[numEvents];" , NL());
+          sb.Append("\t\t_eventPriorities = new double[numEvents];" , NL());
+          sb.Append("\t\t_computeEventAssignments= new TComputeEventAssignmentDelegate[numEvents];" , NL());
+          sb.Append("\t\t_performEventAssignments= new TPerformEventAssignmentDelegate[numEvents];" , NL());
+
+          for (int i = 0; i < _NumEvents; i++)
+          {
+          	string iStr = ToString(i);
+              sb.Append("\t\t_eventAssignments[" + iStr + "] = new TEventAssignmentDelegate (eventAssignment_" + iStr +
+                        ");" + NL());
+              sb.Append("\t\t_computeEventAssignments[" + iStr +
+                        "] = new TComputeEventAssignmentDelegate (computeEventAssignment_" + iStr + ");" + NL());
+              sb.Append("\t\t_performEventAssignments[" + iStr +
+                        "] = new TPerformEventAssignmentDelegate (performEventAssignment_" + iStr + ");" + NL());
+          }
+
+          sb.Append("\t\tresetEvents();" + NL());
+          sb.Append(NL());
+      }
+
+      if (_NumModifiableSpeciesReferences > 0)
+      {
+          for (int i = 0; i < ModifiableSpeciesReferenceList.size(); i++)
+          {
+              sb.Append("\t\t_sr[" + ToString(i) + "]  = " + WriteDouble(ModifiableSpeciesReferenceList[i].value) + ";" + NL());
+          }
+          sb.Append(NL());
+      }
+
+      // Declare space for local parameters
+      for (int i = 0; i < _NumReactions; i++)
+      {
+          sb.Append("\t\tlocalParameterDimensions[" + ToString(i) + "] = " , _LocalParameterDimensions[i] , ";" + NL());
+          sb.Append("\t\t_lp[" + ToString(i) + "] = new double[" , _LocalParameterDimensions[i] , "];" , NL());
+      }
+
+      sb.Append("\t}" + NL() + NL());
+}
+
+string ModelGenerator::WriteDouble(const double& value)
+{
+	return ToString(value);
+}
+
+void ModelGenerator::WriteClassHeader(StringBuilder& sb)
+{
+    sb.Append("using System;" + NL());
+    sb.Append("using System.IO;" + NL());
+    sb.Append("using System.Collections;" + NL());
+    sb.Append("using System.Collections.Generic;" + NL());
+    sb.Append("using LibRoadRunner;" + NL());
+
+    sb.Append(" " + NL() + NL());
+    sb.Append(NL());
+    sb.AppendFormat("class TModel : IModel{0}", NL());
+    sb.Append("{" + NL());
+    sb.AppendFormat("\t// Symbol Mappings{0}{0}", NL());
+	for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
+    {
+
+    	sb<<"\t// y["<<i<<"] = "<<floatingSpeciesConcentrationList[i].name<<endl;//{2}", NL());
+		//sb.AppendFormat("\t// y[{0}] = {1}{2}", i, floatingSpeciesConcentrationList[i].name, NL());
+    }
+    sb.Append(NL());
+}
 //
 //         string ModelGenerator::FindSymbol(const string& varName)
 //        {
@@ -2742,45 +2778,64 @@ int ModelGenerator::ReadCompartments()
       return numCompartments;
 }
 
-//        int ModelGenerator::ReadModifiableSpeciesReferences()
-//        {
-////            if (NOM.SbmlDocument.getLevel() < 3) return 0;
-////            string id;
-////            double value;
-////            int numReactions = (int)NOM.SbmlModel.getNumReactions();
-////            for (int i = 0; i < numReactions; i++)
-////            {
-////                var reaction = NOM.SbmlModel.getReaction(i);
-////                for (int j = 0; j < reaction.getNumReactants(); j++)
-////                {
-////                    var reference = reaction.getReactant(j);
-////                    id = reference.getId();
-////                    if (string.IsNullOrEmpty(id)) continue;
-////                    value = reference.getStoichiometry();
-////                    if (double.IsNaN(value))
-////                        value = 1;
-////                    if (reference.isSetId())
-////                    {
-////                        ModifiableSpeciesReferenceList.Add(new Symbol(id, value));
-////                    }
-////                }
-////                for (int j = 0; j < reaction.getNumProducts(); j++)
-////                {
-////                    var reference = reaction.getProduct(j);
-////                    id = reference.getId();
-////                    if (string.IsNullOrEmpty(id)) continue;
-////                    value = reference.getStoichiometry();
-////                    if (double.IsNaN(value))
-////                        value = 1;
-////                    if (reference.isSetId())
-////                    {
-////                        ModifiableSpeciesReferenceList.Add(new Symbol(id, value));
-////                    }
-////                }
-////            }
-////            return ModifiableSpeciesReferenceList.size();
-//        }
-//
+int ModelGenerator::ReadModifiableSpeciesReferences()
+{
+	if(!mNOM.GetSBMLDocument())
+    {
+    	return -1;
+    }
+    SBMLDocument &SBMLDoc = *mNOM.GetSBMLDocument();
+    Model &SbmlModel  = *mNOM.GetModel();
 
+	if(mNOM.GetSBMLDocument()->getLevel() < 3)
+    {
+    	return 0;
+    }
 
+    string id;
+    double value;
+    int numReactions = SbmlModel.getNumReactions();
+    for (int i = 0; i < numReactions; i++)
+    {
+        Reaction &reaction = *(SbmlModel.getReaction(i));
+        for (int j = 0; j < reaction.getNumReactants(); j++)
+        {
+            SpeciesReference &reference = *(reaction.getReactant(j));
+            id = reference.getId();
+            if (!(id.size()))
+            {
+            	continue;
+            }
+            value = reference.getStoichiometry();
+            if (IsNaN(value))
+                value = 1;
+
+            if (reference.isSetId())
+            {
+                ModifiableSpeciesReferenceList.Add(Symbol(id, value));
+            }
+        }
+        for (int j = 0; j < reaction.getNumProducts(); j++)
+        {
+            SpeciesReference &reference = *(reaction.getProduct(j));
+            id = reference.getId();
+            if (IsNullOrEmpty(id))
+            {
+            	continue;
+            }
+            value = reference.getStoichiometry();
+            if (IsNaN(value))
+            {
+                value = 1;
+            }
+
+            if (reference.isSetId())
+            {
+                ModifiableSpeciesReferenceList.Add(Symbol(id, value));
+            }
+        }
+    }
+    return ModifiableSpeciesReferenceList.size();
 }
+
+}//namespace

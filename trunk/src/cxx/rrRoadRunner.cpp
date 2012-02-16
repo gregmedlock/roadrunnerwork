@@ -511,6 +511,9 @@ void RoadRunner::loadSBML(const string& sbml)
         {
             throw RRException("Failed to generate Model Code");
         }
+        Log(lDebug)<<" ------ Model Code --------\n"
+        			<<_sModelCode
+                    <<" ----- End of Model Code -----\n";
 
 
 //        string sLocation = GetType().Assembly.Location;
@@ -557,7 +560,7 @@ void RoadRunner::loadSBML(const string& sbml)
                                           filePath);
         }
 
-//        _L = StructAnalysis.GetLinkMatrix();
+//        _L = mStructAnalysis.GetLinkMatrix();
 //        _L0 = StructAnalysis.GetL0Matrix();
 //        _N = StructAnalysis.GetReorderedStoichiometryMatrix();
 //        _Nr = StructAnalysis.GetNrMatrix();

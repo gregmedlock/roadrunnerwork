@@ -24,18 +24,18 @@ class RR_DECLSPEC NOMSupport : public rrObject
 
     protected:
 		//The C# SBMLSupport.cs have two static objects, SBMLDocument and Model, created when NOM reads SBML..
-    	SBMLDocument		   *mSBMLDoc;
-		SBMLDocument			*_oDoc;
-		Model				   *mModel;
+    	SBMLDocument		   *mSBMLDoc; 	//Correspond to C# _oDoc
+		Model				   *mModel;		//Correspond to C# _oModel
+
 //        static SBMLDocument _oDoc;
 //        static Model _oModel;
         HashTable 				mSymbolTable;// = new Hashtable();
-        ArrayList returnUnitDefinition(UnitDefinition oDefinition);
-        const ASTNode* changeSymbol(ASTNode* node, const string& time, const int& targetType);
-        ASTNode changeTimeToCSymbol(ASTNode* node, const string& name, const int& type);
-        bool addMissingModifiers(Model *oModel);
-        StringList _Namespaces;
-        StringList GetSymbols(const string& formula);
+        ArrayList 				returnUnitDefinition(UnitDefinition oDefinition);
+        const ASTNode* 			changeSymbol(ASTNode* node, const string& time, const int& targetType);
+        ASTNode 				changeTimeToCSymbol(ASTNode* node, const string& name, const int& type);
+        bool 					addMissingModifiers(Model *oModel);
+        StringList 				_Namespaces;
+        StringList 				GetSymbols(const string& formula);
 //        ParameterSets _ParameterSets;
         string GetInitialAssignmentFor(const string& sbmlId);
         string GetName(SBase* element);
@@ -112,7 +112,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         int getNumFunctionDefinitions();
         int getNumGlobalParameters();
         int getNumInitialAssignments();
-        int getNumParameters(int var0);
+        int getNumParameters(const int& var0);
         int getNumProducts(const int& var0);
         int getNumReactants(const int& var0);
         int getNumReactions();

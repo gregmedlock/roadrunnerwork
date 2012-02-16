@@ -59,14 +59,14 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         static string 		                CleanEquation(const string& equation);
         string 				                substituteTerms(const string& reactionName, string inputEquation, bool bFixAmounts);
         string 				                NL();
-        rrDoubleMatrix 		                InitializeL0();
+        DoubleMatrix 		                InitializeL0();
         static bool 		                ExpressionContainsSymbol(const string& expression, string symbol);
         Symbol 				                GetSpecies(const string& id);
         string 				                FindSymbol(const string& varName);
-        void                                WriteOutSymbolTables(StringBuilder sb);
-        void                                WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, rrDoubleMatrix L0);
+        void                                WriteOutSymbolTables(StringBuilder& sb);
+        void                                WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, DoubleMatrix L0);
         void                                WriteComputeConservedTotals(StringBuilder& sb, int numFloatingSpecies, int numDependentSpecies);
-        void                                WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, rrDoubleMatrix L0);
+        void                                WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, DoubleMatrix L0);
         void                                WriteUserDefinedFunctions(StringBuilder& sb);
         void                                WriteResetEvents(StringBuilder& sb, int numEvents);
         void                                WriteSetConcentration(StringBuilder& sb);
@@ -124,7 +124,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         StringList  	                   	getReactionNames();
         StringList	                        Warnings;// { get; set; }
         SymbolList 							ModifiableSpeciesReferenceList;// { get; set; }
-    	static string 						WriteDouble(double value);
+    	string 								WriteDouble(const double& value);
 
     	// Generates the Model Code from the SBML string
     	string 								generateModelCode(const string& sbmlStr);

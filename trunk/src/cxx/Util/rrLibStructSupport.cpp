@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include "rrLibStructSupport.h"
+#include "rrException.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -72,7 +73,7 @@ int StructAnalysis::GetNumSpecies()
 ////    /// <a href="http://bioinformatics.oxfordjournals.org/cgi/content/abstract/bti800v1">
 ////    ///        Vallabhajosyula RR, Chickarmane V, Sauro HM.<em>Conservation analysis of large biochemical
 ////    ///        networks</em>. <b>Bioinformatics</b> 2005 Nov 29</a></para>
-////    /// <para>For examples on how to use the library see <see cref="LoadSBML"/> and <see cref="LoadStoichiometryMatrix(double[][])"/></para>
+////    /// <para>For examples on how to use the library see <see cref="LoadSBML"/> and <see cref="LoadStoichiometryMatrix(DoubleMatrix)"/></para>
 ////    /// </summary>
 ////    public static class StructAnalysis
 ////    {
@@ -167,7 +168,7 @@ int StructAnalysis::GetNumSpecies()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetColumnReorderedNrMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetColumnReorderedNrMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            IntPtr outRowLabels; IntPtr outColLabels; int outRowCount; int outColCount;
 ////            LibStructural_getColumnReorderedNrMatrixLabels(out outRowLabels, out outRowCount, out outColLabels, out outColCount);
@@ -180,7 +181,7 @@ int StructAnalysis::GetNumSpecies()
 ////        /// <summary>
 ////        /// Get column reordered Nr matrix
 ////        /// </summary>
-////        public static double[][] GetColumnReorderedNrMatrix()
+////        public static DoubleMatrix GetColumnReorderedNrMatrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getColumnReorderedNrMatrix(out pointer, out nRows, out nCols) < 0)
@@ -252,7 +253,7 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get fully reordered stoichiometry matrix
 ////        /// </summary>
-////        public static double[][] GetFullyReorderedStoichiometryMatrix()
+////        public static DoubleMatrix GetFullyReorderedStoichiometryMatrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getFullyReorderedStoichiometryMatrix(out pointer, out nRows, out nCols) < 0)
@@ -268,7 +269,7 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetFullyReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetFullyReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            IntPtr outRowLabels; IntPtr outColLabels; int outRowCount; int outColCount;
 ////            LibStructural_getFullyReorderedStoichiometryMatrixLabels(out outRowLabels, out outRowCount, out outColLabels, out outColCount);
@@ -295,7 +296,7 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get Gamma matrix
 ////        /// </summary>
-////        public static double[][] GetGammaMatrix()
+////        public static DoubleMatrix GetGammaMatrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getGammaMatrix(out pointer, out nRows, out nCols) < 0 )
@@ -304,7 +305,7 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 ////        } // GetGammaMatrix()
 ////
 ////
-////        public static double[][] GetGammaMatrixGJ(double[][] oMatrix)
+////        public static DoubleMatrix GetGammaMatrixGJ(DoubleMatrix oMatrix)
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
@@ -318,7 +319,7 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 ////
 ////        } // GetGammaMatrixGJ(oMatrix)
 ////
-////        public static bool FindPositiveGammaMatrix(double[][] oMatrix,  out double[][] gammaMatrix, ref string[] rowNames, out string[] colNames)
+////        public static bool FindPositiveGammaMatrix(DoubleMatrix oMatrix,  out DoubleMatrix gammaMatrix, ref string[] rowNames, out string[] colNames)
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
@@ -354,7 +355,7 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 ////        }
 ////
 ////
-////        public static bool FindPositiveGammaMatrix(double[][] oMatrix, out double[][] gammaMatrix)
+////        public static bool FindPositiveGammaMatrix(DoubleMatrix oMatrix, out DoubleMatrix gammaMatrix)
 ////        {
 ////            string[] rowNames = new string[oMatrix.Length];
 ////            for (int i = 0; i < rowNames.Length; i++)
@@ -371,7 +372,7 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get Gamma matrix
 ////        /// </summary>
-////        public static double[][] GetGammaMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetGammaMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetGammaMatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetGammaMatrix();
@@ -434,7 +435,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get K0 matrix
 ////        /// </summary>
-////        public static double[][] GetK0Matrix()
+////        public static DoubleMatrix GetK0Matrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getK0Matrix(out pointer, out nRows, out nCols) < 0)
@@ -450,7 +451,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetK0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetK0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetK0MatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetK0Matrix();
@@ -479,7 +480,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetKMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetKMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetKMatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetKMatrix();
@@ -488,7 +489,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get K matrix
 ////        /// </summary>
-////        public static double[][] GetKMatrix()
+////        public static DoubleMatrix GetKMatrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getKMatrix(out pointer, out nRows, out nCols) < 0)
@@ -512,17 +513,28 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////            sColumnLabels = InteropUtil.GetStringArrayFromPtr(outColLabels, outColCount);
 ////        } // GetKMatrixLabels(sRowLabels, sColumnLabels)
 ////
-////        /// <summary>
-////        /// Get L0 matrix
-////        /// </summary>
-////        public static double[][] GetL0Matrix()
-////        {
-////            IntPtr pointer; int nRows; int nCols;
-////            if (LibStructural_getL0Matrix(out pointer, out nRows, out nCols) < 0)
-////                throw new Exception("The L0 Matrix has not yet been calculated, please call one of the analyze methods first.");
-////
-////            return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
-////        } // GetL0Matrix()
+/// <summary>
+/// Get L0 matrix
+/// </summary>
+DoubleMatrix StructAnalysis::GetL0Matrix()
+{
+    double** *pointer;
+    int nRows = 0;
+    int nCols = 0;
+    try
+    {
+        if (LibStructural_getL0Matrix(pointer, &nRows, &nCols) < 0)
+        {
+            throw Exception("The L0 Matrix has not yet been calculated, please call one of the analyze methods first.");
+        }
+    }
+    catch(...)
+    {
+
+    }
+
+    return GetDoubleMatrixFromPtr(pointer, nRows, nCols);
+}
 ////
 ////        /// <summary>
 ////        /// Get L0 matrix
@@ -531,7 +543,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetL0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetL0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetL0MatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetL0Matrix();
@@ -555,7 +567,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get L matrix (link matrix)
 ////        /// </summary>
-////        public static double[][] GetLinkMatrix()
+////        public static DoubleMatrix GetLinkMatrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getLinkMatrix(out pointer, out nRows, out nCols) < 0)
@@ -570,7 +582,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetLinkMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetLinkMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetLMatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetLinkMatrix();
@@ -591,7 +603,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get L matrix
 ////        /// </summary>
-////        public static double[][] GetLMatrix()
+////        public static DoubleMatrix GetLMatrix()
 ////        {
 ////            return GetLinkMatrix();
 ////        } // GetLMatrix()
@@ -603,7 +615,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetLMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetLMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            return GetLinkMatrix(out sRowLabels, out sColumnLabels);
 ////        } // GetLMatrix(sRowLabels, sColumnLabels)
@@ -636,7 +648,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get N0 matrix
 ////        /// </summary>
-////        public static double[][] GetN0Matrix()
+////        public static DoubleMatrix GetN0Matrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getN0Matrix(out pointer, out nRows, out nCols) < 0)
@@ -652,7 +664,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetN0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetN0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetN0MatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetN0Matrix();
@@ -676,7 +688,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get dependent reaction  matrix
 ////        /// </summary>
-////        public static double[][] GetNDCMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetNDCMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetNDCMatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetNDCMatrix();
@@ -685,7 +697,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get dependent reaction  matrix
 ////        /// </summary>
-////        public static double[][] GetNDCMatrix()
+////        public static DoubleMatrix GetNDCMatrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getNDCMatrix(out pointer, out nRows, out nCols) < 0)
@@ -717,7 +729,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetNICMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetNICMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetNICMatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetNICMatrix();
@@ -726,7 +738,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get independent reaction  matrix
 ////        /// </summary>
-////        public static double[][] GetNICMatrix()
+////        public static DoubleMatrix GetNICMatrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getNICMatrix(out pointer, out nRows, out nCols) < 0)
@@ -761,7 +773,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// <summary>
 ////        /// Get Nr matrix
 ////        /// </summary>
-////        public static double[][] GetNrMatrix()
+////        public static DoubleMatrix GetNrMatrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getNrMatrix(out pointer, out nRows, out nCols) < 0)
@@ -777,7 +789,7 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetNrMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetNrMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetNrMatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetNrMatrix();
@@ -898,7 +910,7 @@ StringList StructAnalysis::GetReorderedSpeciesIds()
 ////        /// <summary>
 ////        /// Get reordered stoichiometry matrix
 ////        /// </summary>
-////        public static double[][] GetReorderedStoichiometryMatrix()
+////        public static DoubleMatrix GetReorderedStoichiometryMatrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getReorderedStoichiometryMatrix(out pointer, out nRows, out nCols) < 0)
@@ -914,7 +926,7 @@ StringList StructAnalysis::GetReorderedSpeciesIds()
 ////        /// will hold the column lables for the matrix.</param>
 ////        /// <param name="sRowLabels">after calling the method, this string array
 ////        /// will hold the row lables for the matrix.</param>
-////        public static double[][] GetReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetReorderedStoichiometryMatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetReorderedStoichiometryMatrix();
@@ -953,7 +965,7 @@ StringList StructAnalysis::GetSpeciesIds()
 ////        /// <summary>
 ////        /// Get stoichiometry matrix
 ////        /// </summary>
-////        public static double[][] GetStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
+////        public static DoubleMatrix GetStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 ////        {
 ////            GetStoichiometryMatrixLabels(out sRowLabels, out sColumnLabels);
 ////            return GetStoichiometryMatrix();
@@ -962,7 +974,7 @@ StringList StructAnalysis::GetSpeciesIds()
 ////        /// <summary>
 ////        /// Get stoichiometry matrix
 ////        /// </summary>
-////        public static double[][] GetStoichiometryMatrix()
+////        public static DoubleMatrix GetStoichiometryMatrix()
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getStoichiometryMatrix(out pointer, out nRows, out nCols) < 0)
@@ -1028,7 +1040,7 @@ StringList StructAnalysis::GetSpeciesIds()
 ////        ///            Console.WriteLine(StructAnalysis.GetTestDetails());
 ////        ///
 ////        ///            // get reordered stoichiometry matrix for further analysis
-////        ///            double[][] reorderedStoichiometry = StructAnalysis.GetReorderedStoichiometryMatrix();
+////        ///            DoubleMatrix reorderedStoichiometry = StructAnalysis.GetReorderedStoichiometryMatrix();
 ////        ///
 ////        ///            // ...
 ////        ///        }
@@ -1068,7 +1080,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        ///            Console.WriteLine(StructAnalysis.GetTestDetails());
 ////        ///
 ////        ///            // get reordered stoichiometry matrix for further analysis
-////        ///            double[][] reorderedStoichiometry = StructAnalysis.GetReorderedStoichiometryMatrix();
+////        ///            DoubleMatrix reorderedStoichiometry = StructAnalysis.GetReorderedStoichiometryMatrix();
 ////        ///
 ////        ///            // ...
 ////        ///        }
@@ -1100,7 +1112,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        } // LoadSBMLWithTests(sbml)
 ////
 ////        /// <summary>
-////        /// Load species names and initial conditions. This should be done after <see cref="LoadStoichiometryMatrix(double[][])"/>.
+////        /// Load species names and initial conditions. This should be done after <see cref="LoadStoichiometryMatrix(DoubleMatrix)"/>.
 ////        /// </summary>
 ////        public static void LoadSpeciesNames(string[] speciesNames, double[] speciesValues)
 ////        {
@@ -1114,7 +1126,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        } // LoadSpeciesNames(speciesNames, speciesValues)
 ////
 ////        /// <summary>
-////        /// Load species names. This should be done after <see cref="LoadStoichiometryMatrix(double[][])"/>.
+////        /// Load species names. This should be done after <see cref="LoadStoichiometryMatrix(DoubleMatrix)"/>.
 ////        /// </summary>
 ////        public static void LoadSpeciesNames(string[] speciesNames)
 ////        {
@@ -1134,7 +1146,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        ///
 ////        ///            // load a Stoichiometry Matrix
 ////        ///            StructAnalysis.LoadStoichiometryMatrix(
-////        ///                new double[][]
+////        ///                new DoubleMatrix
 ////        ///                {
 ////        ///                     new double[] {1.0,  -1.0, -1.0,  0.0, 0.0,  0.0,  0.0,  0.0,  0.0},
 ////        ///                     new double[] {0.0,   1.0,  0.0, -1.0, 0.0, -1.0,  0.0,  0.0,  0.0},
@@ -1158,7 +1170,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        /// </code>
 ////        /// </example>
 ////        /// </summary>
-////        public static void LoadStoichiometryMatrix(double[][] oMatrix)
+////        public static void LoadStoichiometryMatrix(DoubleMatrix oMatrix)
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;
 ////            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
@@ -1167,17 +1179,17 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        } // LoadStoichiometryMatrix(oMatrix)
 ////
 ////        /// <summary>
-////        /// Load stoichiometry matrix with the given species names and reaction names. For an example see: <see cref="LoadStoichiometryMatrix(double[][])"/>.
+////        /// Load stoichiometry matrix with the given species names and reaction names. For an example see: <see cref="LoadStoichiometryMatrix(DoubleMatrix)"/>.
 ////        /// </summary>
-////        public static void LoadStoichiometryMatrix(double[][] oMatrix, string[] speciesNames, string[] reactionNames)
+////        public static void LoadStoichiometryMatrix(DoubleMatrix oMatrix, string[] speciesNames, string[] reactionNames)
 ////        {
 ////            LoadStoichiometryMatrix(oMatrix, speciesNames, new double[speciesNames.Length], reactionNames);
 ////        } // LoadStoichiometryMatrix(oMatrix, speciesNames, reactionNames)
 ////
 ////        /// <summary>
-////        /// Load stoichiometry matrix with the given species names, initial conditions and reaction names. For an example see: <see cref="LoadStoichiometryMatrix(double[][])"/>.
+////        /// Load stoichiometry matrix with the given species names, initial conditions and reaction names. For an example see: <see cref="LoadStoichiometryMatrix(DoubleMatrix)"/>.
 ////        /// </summary>
-////        public static void LoadStoichiometryMatrix(double[][] oMatrix, string[] speciesNames, double[] initialValues, string[] reactionNames)
+////        public static void LoadStoichiometryMatrix(DoubleMatrix oMatrix, string[] speciesNames, double[] initialValues, string[] reactionNames)
 ////        {
 ////            LoadStoichiometryMatrix(oMatrix);
 ////            LoadSpeciesNames(speciesNames, initialValues);
@@ -1189,7 +1201,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        /// <summary>
 ////        /// Print double matrix
 ////        /// </summary>
-////        public static void PrintDoubleMatrix(double[][] oMatrix)
+////        public static void PrintDoubleMatrix(DoubleMatrix oMatrix)
 ////        {
 ////            PrintDoubleMatrix(Console.Out, oMatrix);
 ////        } // PrintDoubleMatrix(oMatrix)
@@ -1213,7 +1225,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        /// <summary>
 ////        /// Print double matrix
 ////        /// </summary>
-////        public static void PrintDoubleMatrix(System.IO.TextWriter oWriter, double[][] oMatrix)
+////        public static void PrintDoubleMatrix(System.IO.TextWriter oWriter, DoubleMatrix oMatrix)
 ////        {
 ////            if (oMatrix.Length == 0 || oMatrix[0].Length == 0)
 ////            {
@@ -1234,7 +1246,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////
 ////        } // PrintDoubleMatrix(oWriter, oMatrix)
 ////
-////        private static void WriteMatlabForm(System.IO.TextWriter oWriter, double[][] oMatrix)
+////        private static void WriteMatlabForm(System.IO.TextWriter oWriter, DoubleMatrix oMatrix)
 ////        {
 ////            if (oMatrix.Length == 0 || oMatrix[0].Length == 0)
 ////            {
@@ -1300,7 +1312,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        /// <summary>
 ////        /// Print labeled double matrix
 ////        /// </summary>
-////        public static void PrintLabledDoubleMatrix(double[][] oMatrix, IEnumerable<string> sRowLables, IEnumerable<string> sColumnLables)
+////        public static void PrintLabledDoubleMatrix(DoubleMatrix oMatrix, IEnumerable<string> sRowLables, IEnumerable<string> sColumnLables)
 ////        {
 ////            PrintLabledDoubleMatrix(Console.Out, oMatrix, sRowLables, sColumnLables);
 ////        } // PrintLabledDoubleMatrix(oMatrix, sRowLables, sColumnLables)
@@ -1308,7 +1320,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        /// <summary>
 ////        /// Print labeled double matrix
 ////        /// </summary>
-////        public static void PrintLabledDoubleMatrix(System.IO.TextWriter oWriter, double[][] oMatrix, IEnumerable<string> sRowLablesIn, IEnumerable<string> sColumnLablesIn)
+////        public static void PrintLabledDoubleMatrix(System.IO.TextWriter oWriter, DoubleMatrix oMatrix, IEnumerable<string> sRowLablesIn, IEnumerable<string> sColumnLablesIn)
 ////        {
 ////
 ////            List<string> sRowLables = new List<string>(sRowLablesIn);
@@ -1343,7 +1355,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////        /// <summary>
 ////        /// Print sorted labeled double matrix
 ////        /// </summary>
-////        public static void PrintSortedLabledDoubleMatrix(System.IO.TextWriter oWriter, double[][] oMatrix, IEnumerable<string> sRowLablesIn, IEnumerable<string> sColumnLablesIn)
+////        public static void PrintSortedLabledDoubleMatrix(System.IO.TextWriter oWriter, DoubleMatrix oMatrix, IEnumerable<string> sRowLablesIn, IEnumerable<string> sColumnLablesIn)
 ////        {
 ////
 ////            List<string> sRowLables = new List<string>(sRowLablesIn);

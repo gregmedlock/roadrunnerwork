@@ -16,7 +16,6 @@ int FileLog::mNrOfInstances = 0;
 
 FileLog::FileLog()
 :
-//mLogFile(),
 mLogPrefix("none"),
 mLogLevel(lDebug5),
 mLogToServer(false)

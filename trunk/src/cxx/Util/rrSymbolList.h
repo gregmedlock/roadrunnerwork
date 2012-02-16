@@ -19,6 +19,7 @@ class RR_DECLSPEC SymbolList : public rrObject, public vector<Symbol> //Using ve
         string 			        getKeyName(const int& index);
         bool 			        find(const string& name, int& index);
         bool 		  			find(const string& keyName, const string& name, int& index);
+        unsigned int			Count(){return size();}
 }; //class
 
 }//namespace rr
