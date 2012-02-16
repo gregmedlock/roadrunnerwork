@@ -2,7 +2,7 @@
 #define rrSBMLSymbolH
 //---------------------------------------------------------------------------
 #include "rrObject.h"
-
+#include "rrUtils.h"
 namespace rr
 {
 
@@ -32,84 +32,23 @@ class RR_DECLSPEC SBMLSymbol : public rrObject
 ////            set { _Dependencies = value; }
 ////        }
 ////
-////        public bool HasValue
+	bool HasValue(){return IsNaN(mValue) ? true : false;}
 ////        {
 ////            get { return !Double.IsNaN(_Value); }
 ////        }
 ////
 ////        private double _Value = Double.NaN;
-		double mValue;
-////        public double Value
-////        {
-////            get { return _Value; }
-////            set { _Value = value; }
-////        }
-////
-////
-		double& mConcentration; //Assing ref to mValue..
-////        public double Concentration
-////        {
-////            set
-////            {
-////                _Value = value;
-////                _IsSetConcentration = true;
-////            }
-////        }
-////
-		double& mAmount; //Assing ref to mValue..
-////        public double Amount
-////        {
-////            set
-////            {
-////                _Value = value;
-////                _IsSetAmount = true;
-////            }
-////        }
-////
+	double mValue;
+	double& mConcentration; //Assing ref to mValue..
+	double& mAmount; //Assing ref to mValue..
 	bool IsSetAmount;
-////        private bool _IsSetAmount = false;
-////        public bool IsSetAmount
-////        {
-////            get { return _IsSetAmount; }
-////            set { _IsSetAmount = value; }
-////        }
-////
 	bool IsSetConcentration;
-////        private bool _IsSetConcentration = false;
-////        public bool IsSetConcentration
-////        {
-////            get { return _IsSetConcentration; }
-////            set { _IsSetConcentration = value; }
-////        }
-////
-////        public bool HasInitialAssignment
-////        {
-////            get { return !string.IsNullOrEmpty(_InitialAssignment); }
-////        }
-////
-////        private string _InitialAssignment;
+	bool HasInitialAssignment(){return mInitialAssignment.size() ? true : false;}
 	string	mInitialAssignment;
-////        public string InitialAssignment
-////        {
-////            get { return _InitialAssignment; }
-////            set { _InitialAssignment = value; }
-////        }
-////
-////
+
 	bool mHasRule;
-////        public bool HasRule
-////        {
-////            get { return !string.IsNullOrEmpty(_Rule); }
-////        }
-////
-////        private string _Rule;
+	bool HasRule(){return mRule.size() ? true : false;}
 	string mRule;
-////        public string Rule
-////        {
-////            get { return _Rule; }
-////            set { _Rule = value; }
-////        }
-////
 
     public:
     	SBMLSymbol() : mConcentration(mValue), mAmount(mValue){}

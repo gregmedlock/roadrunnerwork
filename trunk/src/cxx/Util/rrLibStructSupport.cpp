@@ -293,18 +293,23 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 ////            sColumnLabels = InteropUtil.GetStringArrayFromPtr(outColLabels, outColCount);
 ////        } // GetFullyReorderedStoichiometryMatrixLabels(sRowLabels, sColumnLabels)
 ////
-////        /// <summary>
-////        /// Get Gamma matrix
-////        /// </summary>
-////        public static DoubleMatrix GetGammaMatrix()
-////        {
-////            IntPtr pointer; int nRows; int nCols;
-////            if (LibStructural_getGammaMatrix(out pointer, out nRows, out nCols) < 0 )
-////                throw new Exception("The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.");
-////            return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
-////        } // GetGammaMatrix()
-////
-////
+/// <summary>
+/// Get Gamma matrix
+/// </summary>
+DoubleMatrix StructAnalysis::GetGammaMatrix()
+{
+    IntPtr pointer;
+    int nRows;
+    int nCols;
+
+    if (LibStructural_getGammaMatrix(out pointer, nRows, nCols) < 0 )
+    {
+        throw Exception("The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.");
+    }
+    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
+}
+
+
 ////        public static DoubleMatrix GetGammaMatrixGJ(DoubleMatrix oMatrix)
 ////        {
 ////            IntPtr pointer; int nRows; int nCols;

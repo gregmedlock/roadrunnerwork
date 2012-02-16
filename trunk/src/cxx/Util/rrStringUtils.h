@@ -37,5 +37,10 @@ string			RR_DECLSPEC ToString(const unsigned char n);
 string			RR_DECLSPEC ToString(const string & s);
 string			RR_DECLSPEC ToString(const char* str);
 //bool 			RR_DECLSPEC InStringList(const string& fldr, list<string>& theList);
+
+string 			RR_DECLSPEC Format(const string& src, const int& arg);
+string 			RR_DECLSPEC Substitute(const string& src, const string& thisOne, const string& withThisOne, const int& howMany = -1);
+string 			RR_DECLSPEC Substitute(const string& src, const string& thisOne, const int& withThisOne, const int& howMany = -1);
+string      	RR_DECLSPEC RemoveNewLines(const string& str, const int& howMany = -1);
 }
 #endif

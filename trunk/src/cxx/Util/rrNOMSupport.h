@@ -4,6 +4,7 @@
 #include <list>
 #include <vector>
 #include <string>
+#include <stack>
 #include "math/ASTNode.h"
 #include "NOMLib.h"
 #include "rrObject.h"
@@ -13,7 +14,7 @@ using std::vector;
 using std::string;
 using std::pair;
 using std::list;
-
+using std::stack;
 //---------------------------------------------------------------------------
 namespace rr
 {
@@ -128,7 +129,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
 //        ParameterSets ParameterSets;
         SBase* GetElement(const string& sId);
 //        SBMLDocument SbmlDocument
-//        Stack<string> GetMatchForSymbol(const string& sbmlId);
+        stack<string> GetMatchForSymbol(const string& sbmlId);
 //        static SBMLDocument Document
         string addEmptySetNode(const string& sbml);
         string addEmptySetNodes(const string& sbml);
@@ -184,7 +185,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         vector<string> getBuiltinFunctionInfo(const string& var0);
         vector<string> getBuiltinFunctions();
         void ChangeConstantForRules(Model* model);
-//        void FillStack(Stack<string> stack, SBMLSymbol symbol);
+        void FillStack(stack<string>& stack, SBMLSymbol& symbol);
         void loadFromFile(const string& fileName);
         void loadParameterPromotedSBML(const string& var0, const string& sTimeSymbol);
       	void loadSBML(const string& var0);

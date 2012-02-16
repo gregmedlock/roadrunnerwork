@@ -84,6 +84,10 @@
 				<DependentOn>..\..\src\cxx\Util\rrStringList.h</DependentOn>
 				<BuildOrder>4</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\src\cxx\Util\rrStringUtils.cpp">
+				<DependentOn>..\..\src\cxx\Util\rrStringUtils.h</DependentOn>
+				<BuildOrder>8</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\cxx\Util\rrUtils.cpp">
 				<DependentOn>..\..\src\cxx\Util\rrUtils.h</DependentOn>
 				<BuildOrder>5</BuildOrder>

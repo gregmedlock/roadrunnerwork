@@ -56,7 +56,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        double[][] GetFullyReorderedStoichiometryMatrix()
 //        double[][] GetFullyReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetFullyReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-//        double[][] GetGammaMatrix()
+        DoubleMatrix	GetGammaMatrix();
 //        double[][] GetGammaMatrixGJ(double[][] oMatrix)
 //        bool FindPositiveGammaMatrix(double[][] oMatrix,  out double[][] gammaMatrix, ref string[] rowNames, out string[] colNames)
 //        bool FindPositiveGammaMatrix(double[][] oMatrix, out double[][] gammaMatrix)

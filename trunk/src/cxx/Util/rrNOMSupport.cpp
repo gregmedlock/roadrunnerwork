@@ -1780,45 +1780,45 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            throw Exception("The model does not have a floating species corresponding to the index provided");
 //        }
 //
-//        public static ArrayList getNthFunctionDefinition(int arg)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            if (arg < 0 || arg >= (int)mModel.getNumFunctionDefinitions())
-//            {
-//                throw Exception("Invalid input - Argument should be >= 0 and should be less than total number of Function Definitions in the model");
-//            }
-//
-//            FunctionDefinition fnDefn = mModel.getFunctionDefinition((int)arg);
-//
-//            if (fnDefn == NULL)
-//            {
-//                throw Exception("The model does not have a Function Definition corresponding to the index provided");
-//            }
-//
-//            string fnId = fnDefn.getId();
-//            string fnMath = libsbml.formulaToString(fnDefn.getBody());
-//
-//            ArrayList fnDefnList = new ArrayList();
-//
-//            fnDefnList.Add(fnId);
-//
-//            int numArgs = (int)fnDefn.getNumArguments();
-//            ArrayList argList = new ArrayList();
-//            for (int n = 0; n < numArgs; n++)
-//            {
-//                argList.Add(fnDefn.getArgument(n).getName());
-//            }
-//
-//            fnDefnList.Add(argList);
-//            fnDefnList.Add(fnMath);
-//
-//            return fnDefnList;
-//        }
-//
+ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    if (arg < 0 || arg >= (int) mModel->getNumFunctionDefinitions())
+    {
+        throw Exception("Invalid input - Argument should be >= 0 and should be less than total number of Function Definitions in the model");
+    }
+
+    FunctionDefinition* fnDefn = mModel->getFunctionDefinition((int)arg);
+
+    if (fnDefn == NULL)
+    {
+        throw Exception("The model does not have a Function Definition corresponding to the index provided");
+    }
+
+    string fnId = fnDefn->getId();
+    string fnMath = SBML_formulaToString(fnDefn->getBody());
+
+    ArrayList fnDefnList;// = new ArrayList();
+
+    fnDefnList.Add(fnId);
+
+    int numArgs = (int) fnDefn->getNumArguments();
+    StringList argList;// = new ArrayList();
+    for(int n = 0; n < numArgs; n++)
+    {
+        argList.Add(fnDefn->getArgument(n)->getName());
+    }
+
+    fnDefnList.Add(argList);
+    fnDefnList.Add(fnMath);
+
+    return fnDefnList;
+}
+
 //        public static string getNthGlobalParameterId(int nIndex)
 //        {
 //            if (mModel == NULL)
@@ -2395,17 +2395,17 @@ int NOMSupport::getNumEvents()
 //            }
 //            return (int)mModel.getNumConstraints();
 //        }
-//
-//        public static int getNumFunctionDefinitions()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            return (int)mModel.getNumFunctionDefinitions();
-//
-//        }
-//
+
+int NOMSupport::getNumFunctionDefinitions()
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+    return (int)mModel->getNumFunctionDefinitions();
+
+}
+
 //        public static int getNumGlobalParameters()
 //        {
 //            if (mModel == NULL)
@@ -3911,39 +3911,46 @@ string NOMSupport::validateSBML(const string& sModel)
 //
 //        }
 //
-//        /// <summary>
-//        /// This should return an initialization for the given sbmlId that is sideeffect free
-//        /// </summary>
-//        /// <param name="sbmlId"></param>
-//        /// <returns></returns>
-//        public static Stack<string> GetMatchForSymbol(string sbmlId)
-//        {
-//            Stack<string> result = new Stack<string>();
-//
-//            FillStack(result, _symbolTable[sbmlId] as SBMLSymbol);
-//
-//            return result;
-//        }
-//
-//        public static void FillStack(Stack<string> stack, SBMLSymbol symbol)
-//        {
-//
-//            if (symbol == NULL) return;
-//
-//            if (symbol.HasRule)
-//                stack.Push(symbol.Id + " = " + symbol.Rule);
-//            if (symbol.HasInitialAssignment)
-//                stack.Push(symbol.Id + " = " + symbol.InitialAssignment);
-//            if (symbol.HasValue)
-//                stack.Push(symbol.Id + " = " + symbol.Value);
-//
-//            foreach (SBMLSymbol dependency in symbol.Dependencies)
-//            {
-//                FillStack(stack, dependency);
-//            }
-//
-//        }
-//
+/// <summary>
+/// This should return an initialization for the given sbmlId that is sideeffect free
+/// </summary>
+/// <param name="sbmlId"></param>
+/// <returns></returns>
+stack<string> NOMSupport::GetMatchForSymbol(const string& sbmlId)
+{
+    stack<string> result;// = new Stack<string>();
+
+//    FillStack(result, mSymbolTable[sbmlId] as SBMLSymbol);
+    FillStack(result, mSymbolTable[sbmlId]);
+    return result;
+}
+
+void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
+{
+    if (!symbol.mId.size())
+    {
+    	return;
+    }
+
+    if (symbol.HasRule())
+    {
+        stack.push(symbol.mId + " = " + symbol.mRule);
+    }
+    if (symbol.HasInitialAssignment())
+    {
+        stack.push(symbol.mId + " = " + symbol.mInitialAssignment);
+    }
+    if (symbol.HasValue())
+    {
+        stack.push(symbol.mId + " = " + ToString(symbol.mValue));
+    }
+
+//    foreach (SBMLSymbol dependency in symbol.Dependencies)
+//    {
+//        FillStack(stack, dependency);
+//    }
+}
+
 //        public static string addSourceSinkNodes(string sbml)
 //        {
 //            SBMLDocument doc = libsbml.readSBMLFromString(sbml);

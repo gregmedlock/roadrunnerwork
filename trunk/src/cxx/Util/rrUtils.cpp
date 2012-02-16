@@ -27,5 +27,4 @@ bool IsNullOrEmpty(const string& str)
 	return !str.size();
 }
 
-
 }

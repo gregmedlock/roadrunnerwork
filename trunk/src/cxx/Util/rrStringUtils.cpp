@@ -18,6 +18,42 @@
 namespace rr
 {
 
+string RemoveNewLines(const string& str, const int& howMany)
+{
+	return Substitute(str, "\n" , "", howMany);
+}
+
+string Format(const string& src, const int& arg)
+{
+	return Substitute(src, "{0}", ToString(arg));
+}
+
+string Substitute(const string& src, const string& thisOne, const int& withThisOne, const int& howMany)
+{
+	return Substitute(src, thisOne, ToString(withThisOne), howMany);
+}
+
+string Substitute(const string& src, const string& thisOne, const string& withThisOne, const int& howMany)
+{
+	string newString(src);
+    int count = 0;
+
+    while(newString.find(thisOne) != string::npos)
+    {
+        if(count == howMany)
+        {
+            break;
+        }
+        else
+        {
+    		newString.replace(newString.find(thisOne), thisOne.size(), withThisOne);
+            count++;
+        }
+    }
+	return newString;
+}
+
+
 //bool InStringList(const string& fldr, list<string>& theList)
 //{
 //	list<string>::iterator index = std::find_if(theList.begin(), theList.end(),  mtkCompareStrings(fldr));
