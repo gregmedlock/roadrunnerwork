@@ -43,7 +43,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         StringList		                    independentSpeciesList;
         int 				                _NumModifiableSpeciesReferences;
 
-        Hashtable 							_oMapRateRule;// = new Hashtable();
+        IntStringHashTable   						_oMapRateRule;// = new Hashtable();
 
         string                              convertCompartmentToC(const string& compartmentName);
         string                              convertSpeciesToBc(const string& speciesName);

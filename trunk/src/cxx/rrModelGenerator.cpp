@@ -10,6 +10,7 @@
 #include "libstructural.h"
 #include "rrStringListContainer.h"
 #include "rrUtils.h"
+#include "rrRule.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -2106,7 +2107,7 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
     int numOfRules = mNOM.getNumRules();
 	//    _oMapRateRule = new Hashtable();
 
-    Hashtable mapVariables;// = new Hashtable();
+    IntStringHashTable mapVariables;// = new Hashtable();
     int numRateRules = 0;
 
 
@@ -2122,138 +2123,139 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
 
             // We only support assignment and ode rules at the moment
             string eqnRule = mNOM.getNthRule(i);
-            int index = eqnRule.IndexOf("=");
-            string varName = eqnRule.Substring(0, index).Trim();
-            string rightSide = eqnRule.Substring(index + 1).Trim();
+
+            Rule aRule(eqnRule, ruleType);
+
+//            int index = eqnRule.IndexOf("=");
+            string varName =  aRule.GetLHS();	//eqnRule.Substring(0, index).Trim();
+            string rightSide = aRule.GetRHS();	//eqnRule.Substring(index + 1).Trim();
+
             bool isRateRule = false;
 
-            switch (ruleType)
+            switch (aRule.GetType())
             {
-                case "Algebraic_Rule":
+                case rtAlgebraic:
                     Warnings.Add("RoadRunner does not yet support algebraic rules in SBML, they will be ignored.");
-                    leftSideRule = NULL;
-                    break;
+                    leftSideRule = "";//NULL;
+                break;
 
-
-                case "Assignment_Rule":
+                case rtAssignment:
                     leftSideRule = FindSymbol(varName);
-                    break;
+                break;
 
-                case "Rate_Rule":
-                    if (floatingSpeciesConcentrationList.find(varName, out index))
+                case rtRate:
+                    isRateRule = true;
+                    int index;
+                    if (floatingSpeciesConcentrationList.find(varName,  index))
                     {
-                        leftSideRule = string.Format("\t\t_dydt[{0}]", index);
+                        leftSideRule = Format("\t\t_dydt[{0}]", index);
                         floatingSpeciesConcentrationList[index].rateRule = true;
                     }
                     else
                     {
-                        leftSideRule = "\t\t_rateRules[" + numRateRules + "]";
+                        leftSideRule = "\t\t_rateRules[" + ToString(numRateRules) + "]";
                         _oMapRateRule[numRateRules] = FindSymbol(varName);
                         mapVariables[numRateRules] = varName;
                         numRateRules++;
                     }
-                    isRateRule = true;
 
-                    break;
+                break;
             }
 
             // Run the equation through MathML to carry out any conversions (eg ^ to Pow)
-            string rightSideMathml = NOM.convertStringToMathML(rightSide);
-            rightSideRule = NOM.convertMathMLToString(rightSideMathml);
-            if (leftSideRule != NULL)
+            string rightSideMathml = mNOM.convertStringToMathML(rightSide);
+            rightSideRule = mNOM.convertMathMLToString(rightSideMathml);
+            if (leftSideRule.size())// != NULL)
             {
                 sb.Append(leftSideRule + " = ");
-
                 int speciesIndex;
-                var isSpecies = floatingSpeciesConcentrationList.find(varName, out speciesIndex);
+                bool isSpecies = floatingSpeciesConcentrationList.find(varName, speciesIndex);
 
-                var symbol = speciesIndex != -1 ? floatingSpeciesConcentrationList[speciesIndex] : NULL;
-
-                //
+                Symbol* symbol = (speciesIndex != -1) ? &(floatingSpeciesConcentrationList[speciesIndex]) : NULL;
 
                 string sCompartment;
 
-                if (
-                    isRateRule &&
-                    NOM.MultiplyCompartment(varName, out sCompartment) &&
-                    !rightSide.Contains(sCompartment)
-                    )
+////                            !rightSide.Contains(sCompartment)
+
+                if(isRateRule && mNOM.MultiplyCompartment(varName, sCompartment) && (rightSide.find(sCompartment) == string::npos))
                 {
-                    sb.Append(String.Format("({0}) * {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(sCompartment), NL()));
+                    sb.AppendFormat("({0}) * {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(sCompartment), NL());
                 }
                 else
                 {
-                    if (isSpecies && !isRateRule && symbol != NULL && symbol.hasOnlySubstance && symbol.compartmentName != NULL)
-                        sb.Append(String.Format("({0}) / {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(symbol.compartmentName), NL()));
+                    if (isSpecies && !isRateRule && symbol != NULL && symbol->hasOnlySubstance && symbol->compartmentName.size() != 0)
+                    {
+                        sb.AppendFormat("({0}) / {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(symbol->compartmentName), NL());
+                    }
                     else
-                        sb.Append(String.Format("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL()));
+                    {
+                        sb.AppendFormat("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL());
+                    }
                 }
-
-
 
                 // RateRules and species ! again
                 //
                 // sb.Append(String.Format("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL()));
 
-                if (NOM.IsCompartment(varName))
+                if (mNOM.IsCompartment(varName))
                 {
                     sb.Append("\t\tconvertToConcentrations();");
                 }
             }
         }
-        catch (SBWException)
+        catch (const Exception& ex)
         {
-            throw;
-        }
-        catch (Exception ex)
-        {
-            throw new SBWApplicationException("Error while trying to get Rule #" + i, ex.Message);
+            throw new SBWApplicationException("Error while trying to get Rule #" + ToString(i) + ex.Message);
         }
     }
-    sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tprivate: double[] _rateRules = new double[" + numRateRules +
+    sb.Append("\t}" + NL() + NL());
+    sb.Append("\tprivate: double[] _rateRules = new double[" + ToString(numRateRules) +
               "];           // Vector containing values of additional rate rules      " + NL());
+
     sb.Append("\tpublic: void InitializeRates()" + NL() + "\t{" + NL());
+
     for (int i = 0; i < numRateRules; i++)
     {
-
-        sb.Append("\t\t_rateRules[" + i + "] = " + _oMapRateRule[i] + ";" + NL());
+        sb<<"\t\t_rateRules[" << i << "] = " << _oMapRateRule[i] << ";" << NL();
     }
+
     sb.Append("\t}" + NL() + NL());
-
-
     sb.Append("\tpublic: void AssignRates()" + NL() + "\t{" + NL());
+
     for (int i = 0; i < _oMapRateRule.size(); i++)
     {
-        sb.Append((string)_oMapRateRule[i] + " = _rateRules[" + i + "];" + NL());
+        sb<<(string)_oMapRateRule[i] << " = _rateRules[" << i << "];" << NL();
     }
-    sb.Append("\t}" + NL() + NL());
 
+    sb.Append("\t}" + NL() + NL());
 
     sb.Append("\tpublic: void InitializeRateRuleSymbols()" + NL() + "\t{" + NL());
     for (int i = 0; i < _oMapRateRule.size(); i++)
     {
-        var varName = (string)mapVariables[i];
-        double value = NOM.getValue(varName);
-        if (!double.IsNaN(value))
-            sb.Append((string)_oMapRateRule[i] + " = " + value + ";" + NL());
+        string varName = (string)mapVariables[i];
+        double value = mNOM.getValue(varName);
+        if (!IsNaN(value))
+        {
+            sb<< _oMapRateRule[i] << " = " << value << ";" << NL();
+        }
     }
+
     sb.Append("\t}" + NL() + NL());
-
-
     sb.Append("\tpublic: void AssignRates(double[] oRates)" + NL() + "\t{" + NL());
-    for (int i = 0; i < _oMapRateRule.size(); i++)
-    {
-        sb.Append((string)_oMapRateRule[i] + " = oRates[" + i + "];" + NL());
-    }
-    sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] GetCurrentValues()" + NL() + "\t{" + NL());
-    sb.Append("\t\tdouble[] dResult = new double[" + NumAdditionalRates + "];" + NL());
     for (int i = 0; i < _oMapRateRule.size(); i++)
     {
-        sb.Append("\t\tdResult[" + i + "] = " + (string)_oMapRateRule[i] + ";" + NL());
+        sb<< _oMapRateRule[i] << " = oRates[" << i << "];" << NL();
+    }
+
+    sb.Append("\t}" + NL() + NL());
+    sb.Append("\tpublic: double[] GetCurrentValues()" + NL() + "\t{" + NL());
+    sb.Append("\t\tdouble[] dResult = new double[" + ToString(NumAdditionalRates) + "];" + NL());
+
+    for (int i = 0; i < _oMapRateRule.size(); i++)
+    {
+        sb<<"\t\tdResult[" << i << "] = " << _oMapRateRule[i] << ";" << NL();
     }
     sb.Append("\t\treturn dResult;" + NL());
 

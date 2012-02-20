@@ -32,8 +32,8 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRW\Testing\loadSBML\;C:\RRW\src\cxx;C:\RRW\src\cxx\Util;C:\rrThirdPartyInstalls\sundials\include;C:\rrThirdPartyInstalls\libstruct\include;C:\rrThirdPartyInstalls\libsbml\include;C:\RRW\ThirdParty\NOMLib\src;C:\rrThirdPartyInstalls\libsbml\include\sbml;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRW\Testing\loadSBML\;C:\RRW\src\cxx;C:\RRW\src\cxx\Util;C:\rrThirdPartyInstalls\sundials\include;C:\rrThirdPartyInstalls\libstruct\include;C:\rrThirdPartyInstalls\libsbml\include;C:\RRW\ThirdParty\NOMLib\src;C:\rrThirdPartyInstalls\libsbml\include\sbml;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -73,12 +73,20 @@
 			<None Include="..\..\src\cxx\rrLogger.h">
 				<BuildOrder>7</BuildOrder>
 			</None>
+			<CppCompile Include="..\..\src\cxx\Scanner\rrScanner.cpp">
+				<DependentOn>..\..\src\cxx\Scanner\rrScanner.h</DependentOn>
+				<BuildOrder>9</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\cxx\Util\rrLibStructSupport.cpp">
 				<BuildOrder>6</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\cxx\Util\rrNOMSupport.cpp">
 				<DependentOn>..\..\src\cxx\Util\rrNOMSupport.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\cxx\Util\rrRule.cpp">
+				<DependentOn>..\..\src\cxx\Util\rrRule.h</DependentOn>
+				<BuildOrder>10</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\cxx\Util\rrStringList.cpp">
 				<DependentOn>..\..\src\cxx\Util\rrStringList.h</DependentOn>

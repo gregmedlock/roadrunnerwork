@@ -10,16 +10,25 @@ using std::hash_map;
 namespace rr
 {
 
-class RR_DECLSPEC HashTable : public rrObject, public hash_map<string, SBMLSymbol>
+class RR_DECLSPEC StringSymbolHashTable : public rrObject, public hash_map<string, SBMLSymbol>
 {
 	protected:
-//		hash_map<string, SBMLSymbol> mHash;
 
     public:
-		HashTable(){}
+		StringSymbolHashTable(){}
 
 };
 
-typedef HashTable Hashtable;
+
+class RR_DECLSPEC IntStringHashTable : public rrObject, public hash_map<int, string>
+{
+	protected:
+
+    public:
+		IntStringHashTable(){}
+
+};
+
+
 } //namespace rr
 #endif

@@ -178,7 +178,7 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 //
 //        static SBMLDocument _oDoc;
 //
-//        public static SBMLDocument Document
+//        SBMLDocument Document
 //        {
 //            get
 //            {
@@ -188,7 +188,7 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 //
 //        static Model mModel;
 //
-//        public static Model Model
+//        Model Model
 //        {
 //            get
 //            {
@@ -196,7 +196,7 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 //            }
 //        }
 //
-//        public static string GetAnnotatedModel(string targetSBML, string sourceSBML, bool checkModelId)
+//        string GetAnnotatedModel(string targetSBML, string sourceSBML, bool checkModelId)
 //        {
 //            return AnnotationUtil.GetAnnotatedModel(targetSBML, sourceSBML, checkModelId);
 //        }
@@ -209,7 +209,7 @@ string NOMSupport::GetId(SBase& element)
     return element.getName();
 }
 
-//        public static string NOMSupport::getMetaId(string sId)
+//        string NOMSupport::getMetaId(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -265,7 +265,7 @@ string NOMSupport::GetName(SBase* element)
     return element->getId();
 }
 
-//        private static bool addMissingModifiers(Model oModel)
+//        bool addMissingModifiers(Model oModel)
 //        {
 //            StringCollection _species = new StringCollection();
 //            for (int i = 0; i < oModel.getNumSpecies(); i++)
@@ -339,7 +339,7 @@ string NOMSupport::GetName(SBase* element)
 //            return bReplaced;
 //        }
 //
-//        public static string addMissingModifiers(string sModel)
+//        string NOMSupport::addMissingModifiers(string sModel)
 //        {
 //
 //            SBMLDocument d = libsbml.readSBMLFromString(sModel);
@@ -373,7 +373,7 @@ string NOMSupport::GetName(SBase* element)
 //            return sResult;
 //        }
 //
-//        private static void checkForMissingNames(ASTNode node, StringCollection results, StringCollection symbols)
+//        void NOMSupport::checkForMissingNames(ASTNode node, StringCollection results, StringCollection symbols)
 //        {
 //            for (int i = 0; i < node.getNumChildren(); i++)
 //            {
@@ -387,7 +387,7 @@ string NOMSupport::GetName(SBase* element)
 //            }
 //        }
 //
-//        public static int checkConsistency()
+//        int NOMSupport::checkConsistency()
 //        {
 //            if (_oDoc == NULL)
 //            {
@@ -397,7 +397,7 @@ string NOMSupport::GetName(SBase* element)
 //
 //        }
 //
-//        public static string convertLevel1ToLevel2Impl(string sSBML)
+//        string NOMSupport::convertLevel1ToLevel2Impl(string sSBML)
 //        {
 //            SBMLReader oReader = new SBMLReader();
 //            SBMLDocument oDoc = oReader.readSBMLFromString(sSBML);
@@ -417,7 +417,7 @@ string NOMSupport::GetName(SBase* element)
 //            return sResult;
 //        }
 //
-//        public static string convertLevel2ToLevel1Impl(string sSBML)
+//        string NOMSupport::convertLevel2ToLevel1Impl(string sSBML)
 //        {
 //            SBMLReader oReader = new SBMLReader();
 //            SBMLDocument oDoc = oReader.readSBMLFromString(sSBML);
@@ -437,14 +437,14 @@ string NOMSupport::GetName(SBase* element)
 //            return sResult;
 //        }
 //
-//        public static string convertMathMLToString(string sMathML)
+//        string NOMSupport::convertMathMLToString(string sMathML)
 //        {
 //            ASTNode node = libsbml.readMathMLFromString(sMathML);
 //            string sResult = libsbml.formulaToString(node);
 //            return sResult;
 //        }
 //
-//        public static string convertPowImpl(string sSBML)
+//        string NOMSupport::convertPowImpl(string sSBML)
 //        {
 //
 //            SBMLDocument doc = libsbml.readSBMLFromString(sSBML);
@@ -489,7 +489,7 @@ string NOMSupport::GetName(SBase* element)
 //            }
 //        }
 //
-//        private static void changePow(ASTNode node)
+//        void NOMSupport::changePow(ASTNode node)
 //        {
 //            int c;
 //
@@ -504,12 +504,12 @@ string NOMSupport::GetName(SBase* element)
 //            }
 //        }
 //
-//        public static string convertSBML(string sModel, int nLevel, int nVersion)
+//        string NOMSupport::convertSBML(string sModel, int nLevel, int nVersion)
 //        {
 //            return convertSBML(sModel, nLevel, nVersion, true);
 //        }
 //
-//        private static void RemoveSpatialSizeUnitsFromSpecies(SBMLDocument doc)
+//        void NOMSupport::RemoveSpatialSizeUnitsFromSpecies(SBMLDocument doc)
 //        {
 //            if (doc == NULL) return;
 //            if (doc.getModel() == NULL) return;
@@ -522,7 +522,7 @@ string NOMSupport::GetName(SBase* element)
 //            }
 //        }
 //
-//        private static void RemoveTimeUnitsFromKineticLaws(SBMLDocument doc)
+//        void NOMSupport::RemoveTimeUnitsFromKineticLaws(SBMLDocument doc)
 //        {
 //            if (doc == NULL) return;
 //            if (doc.getModel() == NULL) return;
@@ -539,7 +539,7 @@ string NOMSupport::GetName(SBase* element)
 //            }
 //        }
 //
-//        private static void RemoveSubstanceUnitsFromKineticLaws(SBMLDocument doc)
+//        void NOMSupport::RemoveSubstanceUnitsFromKineticLaws(SBMLDocument doc)
 //        {
 //            if (doc == NULL) return;
 //            if (doc.getModel() == NULL) return;
@@ -556,7 +556,7 @@ string NOMSupport::GetName(SBase* element)
 //            }
 //        }
 //
-//        private static void AddMissingParameter(string parameterId, SBMLDocument doc)
+//        void NOMSupport::AddMissingParameter(string parameterId, SBMLDocument doc)
 //        {
 //            if (doc == NULL) return;
 //            var model = doc.getModel();
@@ -567,7 +567,7 @@ string NOMSupport::GetName(SBase* element)
 //            return;
 //        }
 //
-//        private static void UpgradeToL2V4IfNecessary(SBMLDocument doc)
+//        void NOMSupport::UpgradeToL2V4IfNecessary(SBMLDocument doc)
 //        {
 //            if (doc.getLevel() == 1 || (doc.getLevel() == 2 && doc.getVersion() < 2))
 //            {
@@ -650,7 +650,7 @@ string NOMSupport::GetName(SBase* element)
 //            }
 //        }
 //
-//        public static string getSBOCapableSBML(string sModel)
+//        string NOMSupport::getSBOCapableSBML(string sModel)
 //        {
 //            if (sModel == "")
 //            {
@@ -675,7 +675,7 @@ string NOMSupport::GetName(SBase* element)
 //            }
 //        }
 //
-//        public static string convertSBML(string sModel, int nLevel, int nVersion, bool throwError)
+//        string NOMSupport::convertSBML(string sModel, int nLevel, int nVersion, bool throwError)
 //        {
 //            if (sModel == "")
 //            {
@@ -730,22 +730,26 @@ string NOMSupport::GetName(SBase* element)
 //            }
 //        }
 //
-//        public static string convertStringToMathML(string var0)
-//        {
-//            ASTNode node = libsbml.parseFormula(var0);
-//            try
-//            {
-//
-//                string sResult = libsbml.writeMathMLToString(node);
-//                return sResult;
-//            }
-//            finally
-//            {
-//                if (node != NULL)
-//                    node.Dispose();
-//            }
-//        }
-//
+string NOMSupport::convertStringToMathML(const string& var0)
+{
+    ASTNode *node = SBML_parseFormula(var0.c_str());
+    try
+    {
+
+        string sResult = writeMathMLToString(node);
+        return sResult;
+    }
+    catch(const Exception& msg)
+    {
+    	throw(msg);
+    }
+//    finally
+//    {
+//        if (node != NULL)
+//            node.Dispose();
+//    }
+}
+
 string NOMSupport::convertTime(const string& sArg, const string& sTimeSymbol)
 {
     SBMLDocument* oSBMLDoc = NULL;
@@ -782,7 +786,7 @@ string NOMSupport::convertTime(const string& sArg, const string& sTimeSymbol)
 	return string("");
 }
 
-//        public static void ChangeConstantForRules(Model model)
+//        void NOMSupport::ChangeConstantForRules(Model model)
 //        {
 //            var ruleTargets = new List<string>();
 //            for (int i = 0; i < model.getNumRules(); i++)
@@ -815,7 +819,7 @@ string NOMSupport::convertTime(const string& sArg, const string& sTimeSymbol)
 //        /// </summary>
 //        /// <param name="sbml">the sbml string to fix</param>
 //        /// <returns></returns>
-//        public static string FixCommonIssues(string sbml)
+//        string NOMSupport::FixCommonIssues(string sbml)
 //        {
 //            return FixCommonIssues(sbml, NULL, NULL);
 //        }
@@ -832,7 +836,7 @@ string NOMSupport::convertTime(const string& sArg, const string& sTimeSymbol)
 //        /// <param name="programName">program name (or NULL in case of none)</param>
 //        /// <param name="programVersion">program version</param>
 //        /// <returns></returns>
-//        public static string FixCommonIssues(string sbml, string programName, string programVersion)
+//        string NOMSupport::FixCommonIssues(string sbml, string programName, string programVersion)
 //        {
 //            var doc = libsbml.readSBMLFromString(sbml);
 //            var model = doc.getModel();
@@ -861,7 +865,7 @@ string NOMSupport::convertTime(const string& sArg, const string& sTimeSymbol)
 //            }
 //        }
 //
-//        public static string convertTimeToCSymbol(string sArg, string sTimeSymbol)
+//        string NOMSupport::convertTimeToCSymbol(string sArg, string sTimeSymbol)
 //        {
 //            SBMLDocument oSBMLDoc = NULL;
 //            Model oModel = NULL;
@@ -948,7 +952,7 @@ void NOMSupport::changeSymbol(Model& oModel, const string& sTimeSymbol, const in
     }
 }
 
-//        private static void ChangeNameToCSymbol(Model model, string name, int type)
+//        void NOMSupport::ChangeNameToCSymbol(Model model, string name, int type)
 //        {
 //            for (int i = 0; i < model.getNumReactions(); i++)
 //            {
@@ -981,7 +985,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
     return node;
 }
 
-//        public static ASTNode ReplaceSymbol(ASTNode node, string oldId, string newId)
+//        ASTNode NOMSupport::ReplaceSymbol(ASTNode node, string oldId, string newId)
 //        {
 //            int c;
 //            if (node.getType() == libsbml.AST_NAME && node.getName() == oldId)
@@ -993,7 +997,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //        }
 //
 //
-//        private static ASTNode changeTimeToCSymbol(ASTNode node, string name, int type)
+//        ASTNode NOMSupport::changeTimeToCSymbol(ASTNode node, string name, int type)
 //        {
 //            int c;
 //            if (node.getName() == name && node.getType() != type)
@@ -1003,7 +1007,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            return node;
 //        }
 //
-//        public static bool exists(string sId)
+//        bool NOMSupport::exists(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1029,7 +1033,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            return false;
 //        }
 //
-//        public static string getAnnotation(string sId)
+//        string NOMSupport::getAnnotation(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1103,7 +1107,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            //throw new Exception("Invalid id. No element with the given id exists in the model.");
 //        }
 //
-//        public static string[] getBuiltinFunctionInfo(string var0)
+//        string[] NOMSupport::getBuiltinFunctionInfo(string var0)
 //        {
 //            for (int i = 0; i < _oPredefinedFunctions.Length; i++)
 //            {
@@ -1114,7 +1118,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            throw new Exception("Invalid string name. There is no inbuilt function with that name: " + var0);
 //        }
 //
-//        public static string[] getBuiltinFunctions()
+//        string[] NOMSupport::getBuiltinFunctions()
 //        {
 //            string[] sResult = new string[_oPredefinedFunctions.Length];
 //
@@ -1129,7 +1133,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //
 //        }
 //
-//        public static string getCompartmentIdBySpeciesId(string sId)
+//        string NOMSupport::getCompartmentIdBySpeciesId(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1144,7 +1148,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            return oSpecies.getCompartment();
 //        }
 //
-//        public static ArrayList getDerivedUnitDefinition(string sId)
+//        ArrayList NOMSupport::getDerivedUnitDefinition(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1175,7 +1179,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            return new ArrayList();
 //        }
 //
-//        private static ArrayList returnUnitDefinition(UnitDefinition oDefinition)
+//        ArrayList returnUnitDefinition(UnitDefinition oDefinition)
 //        {
 //            ArrayList oResultDef = new ArrayList();
 //            for (int i = 0; i < oDefinition.getNumUnits(); i++)
@@ -1195,7 +1199,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            return oResultDef;
 //        }
 //
-//        public static string getKineticLaw(int index)
+//        string NOMSupport::getKineticLaw(int index)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1213,7 +1217,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //        }
 //
 
-//        public static ArrayList getListOfBoundarySpeciesIds()
+//        ArrayList NOMSupport::getListOfBoundarySpeciesIds()
 //        {
 //            ArrayList boundarySpeciesIdList = new ArrayList();
 //
@@ -1234,7 +1238,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            return boundarySpeciesIdList;
 //        }
 //
-//        public static ArrayList getListOfErrors()
+//        ArrayList NOMSupport::getListOfErrors()
 //        {
 //            if (_oDoc == NULL)
 //            {
@@ -1304,7 +1308,7 @@ StringListContainer NOMSupport::getListOfFloatingSpecies()
     return floatingSpeciesList;
 }
 
-//        public static ArrayList getListOfFloatingSpeciesIds()
+//        ArrayList NOMSupport::getListOfFloatingSpeciesIds()
 //        {
 //            ArrayList floatingSpeciesIdList = new ArrayList();
 //
@@ -1396,7 +1400,7 @@ ArrayList NOMSupport::getListOfParameters()
     return paramStrValueList;
 }
 
-//        public static string getModelId()
+//        string NOMSupport::getModelId()
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1414,7 +1418,7 @@ string NOMSupport::getModelName()
     return GetName((SBase*) mModel);
 }
 
-//        public static string getNotes(string sId)
+//        string NOMSupport::getNotes(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1514,7 +1518,7 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
     throw Exception("The model does not have a boundary species corresponding to the index provided");
 }
 
-//        public static string getNthBoundarySpeciesId(int nIndex)
+//        string NOMSupport::getNthBoundarySpeciesId(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1540,7 +1544,7 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //            throw new Exception("The model does not have a boundary species corresponding to the index provided");
 //        }
 //
-//        public static string getNthBoundarySpeciesName(int nIndex)
+//        string NOMSupport::getNthBoundarySpeciesName(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1566,7 +1570,7 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //            throw new Exception("The model does not have a boundary species corresponding to the index provided");
 //        }
 //
-//        public static string getNthCompartmentId(int nIndex)
+//        string NOMSupport::getNthCompartmentId(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1582,7 +1586,7 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //            return GetId(oCompartment);
 //        }
 //
-//        public static string getNthCompartmentName(int nIndex)
+//        string NOMSupport::getNthCompartmentName(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1628,7 +1632,7 @@ ArrayList NOMSupport::getNthError(const int& nIndex)
     return oResult;
 }
 
-//        public static bool getNthUseValuesFromTriggerTime(int arg)
+//        bool NOMSupport::getNthUseValuesFromTriggerTime(int arg)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1644,7 +1648,7 @@ ArrayList NOMSupport::getNthError(const int& nIndex)
 //            return oEvent.getUseValuesFromTriggerTime();
 //        }
 //
-//        public static ArrayList getNthEvent(int arg)
+//        ArrayList getNthEvent(int arg)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1728,7 +1732,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
     throw RRException("The model does not have a floating species corresponding to the index provided");
 }
 
-//        public static string getNthFloatingSpeciesId(int nIndex)
+//        string NOMSupport::getNthFloatingSpeciesId(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1754,7 +1758,7 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            throw Exception("The model does not have a floating species corresponding to the index provided");
 //        }
 //
-//        public static string getNthFloatingSpeciesName(int nIndex)
+//        string NOMSupport::getNthFloatingSpeciesName(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1819,7 +1823,7 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
     return fnDefnList;
 }
 
-//        public static string getNthGlobalParameterId(int nIndex)
+//        string NOMSupport::getNthGlobalParameterId(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1841,7 +1845,7 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //            return GetId(oParameter);
 //        }
 //
-//        public static string getNthGlobalParameterName(int nIndex)
+//        string NOMSupport::getNthGlobalParameterName(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1863,7 +1867,7 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //            return GetName(oParameter);
 //        }
 //
-//        public static ArrayList getNthListOfModifiers(int nIndex)
+//        ArrayList NOMSupport::getNthListOfModifiers(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1886,7 +1890,7 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //            return modifierList;
 //        }
 //
-//        public static ArrayList getNthListOfProducts(int nIndex)
+//        ArrayList NOMSupport::getNthListOfProducts(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1915,7 +1919,7 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //            return productList;
 //        }
 //
-//        public static ArrayList getNthListOfReactants(int nIndex)
+//        ArrayList NOMSupport::getNthListOfReactants(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1944,7 +1948,7 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //            return reactantList;
 //        }
 //
-//        public static bool getNthParameterHasValue(int nReactionIndex, int nParameterIndex)
+//        bool NOMSupport::getNthParameterHasValue(int nReactionIndex, int nParameterIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -1991,7 +1995,7 @@ string NOMSupport::getNthParameterId(const int& nReactionIndex, const int& nPara
     return kl->getParameter((int)nParameterIndex)->getId();
 }
 
-//        public static string getNthParameterName(int nReactionIndex, int nParameterIndex)
+//        string NOMSupport::getNthParameterName(int nReactionIndex, int nParameterIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2038,7 +2042,7 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 
 }
 
-//        public static string getNthProductName(int nIndex, int nProduct)
+//        string NOMSupport::getNthProductName(int nIndex, int nProduct)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2057,7 +2061,7 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //            return oRef.getSpecies();
 //        }
 //
-//        public static int getNthProductStoichiometry(int nIndex, int nProduct)
+//        int NOMSupport::getNthProductStoichiometry(int nIndex, int nProduct)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2076,7 +2080,7 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //            return (int)oRef.getStoichiometry();
 //        }
 //
-//        public static double getNthProductStoichiometryDouble(int nIndex, int nProduct)
+//        double NOMSupport::getNthProductStoichiometryDouble(int nIndex, int nProduct)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2096,7 +2100,7 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //            return oRef.getStoichiometry();
 //        }
 //
-//        public static string getNthReactantName(int nIndex, int nReactant)
+//        string NOMSupport::getNthReactantName(int nIndex, int nReactant)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2115,7 +2119,7 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //            return oRef.getSpecies();
 //        }
 //
-//        public static int getNthReactantStoichiometry(int nIndex, int nReactant)
+//        int NOMSupport::getNthReactantStoichiometry(int nIndex, int nReactant)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2134,7 +2138,7 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //            return (int)oRef.getStoichiometry();
 //        }
 //
-//        public static double getNthReactantStoichiometryDouble(int nIndex, int nReactant)
+//        double NOMSupport::getNthReactantStoichiometryDouble(int nIndex, int nReactant)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2169,7 +2173,7 @@ string NOMSupport::getNthReactionId(const int& nIndex)
     return GetId(r);
 }
 
-//        public static string getNthReactionName(int nIndex)
+//        string NOMSupport::getNthReactionName(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2185,7 +2189,7 @@ string NOMSupport::getNthReactionId(const int& nIndex)
 //            return GetName(r);
 //        }
 //
-//        public static Pair<string, string> getNthInitialAssignmentPair(int nIndex)
+//        Pair<string, string> NOMSupport::getNthInitialAssignmentPair(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2201,7 +2205,7 @@ string NOMSupport::getNthReactionId(const int& nIndex)
 //            return new Pair<string, string>(oAssignment.getSymbol(), libsbml.formulaToString(oAssignment.getMath()));
 //        }
 //
-//        public static string getNthInitialAssignment(int nIndex)
+//        string NOMSupport::getNthInitialAssignment(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2218,7 +2222,7 @@ string NOMSupport::getNthReactionId(const int& nIndex)
 //
 //        }
 //
-//        public static string getNthConstraint(int nIndex, out string sMessage)
+//        string NOMSupport::getNthConstraint(int nIndex, out string sMessage)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2240,7 +2244,7 @@ string NOMSupport::getNthReactionId(const int& nIndex)
 //
 //        }
 //
-//        public static string getNthRule(int nIndex)
+//        string NOMSupport::getNthRule(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2282,7 +2286,7 @@ string NOMSupport::getNthReactionId(const int& nIndex)
 //            return "";
 //        }
 //
-//        public static string getNthRuleType(int arg)
+//        string NOMSupport::getNthRuleType(int arg)
 //        {
 //            string result = "";
 //            Rule rule;
@@ -2332,7 +2336,7 @@ string NOMSupport::getNthReactionId(const int& nIndex)
 //            return result;
 //        }
 //
-//        public static int getNumBoundarySpecies()
+//        int NOMSupport::getNumBoundarySpecies()
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2350,7 +2354,7 @@ int NOMSupport::getNumCompartments()
     return (int) mModel->getNumCompartments();
 }
 //
-//        public static int getNumErrors()
+//        int NOMSupport::getNumErrors()
 //        {
 //            if (mSBMLDoc == NULL)
 //            {
@@ -2368,7 +2372,7 @@ int NOMSupport::getNumEvents()
     return (int)mModel->getNumEvents();
 }
 
-//        public static int getNumFloatingSpecies()
+//        int NOMSupport::getNumFloatingSpecies()
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2378,7 +2382,7 @@ int NOMSupport::getNumEvents()
 //
 //        }
 //
-//        public static int getNumInitialAssignments()
+//        int NOMSupport::getNumInitialAssignments()
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2387,7 +2391,7 @@ int NOMSupport::getNumEvents()
 //            return (int)mModel.getNumInitialAssignments();
 //        }
 //
-//        public static int getNumConstraints()
+//        int NOMSupport::getNumConstraints()
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2406,7 +2410,7 @@ int NOMSupport::getNumFunctionDefinitions()
 
 }
 
-//        public static int getNumGlobalParameters()
+//        int NOMSupport::getNumGlobalParameters()
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2436,7 +2440,7 @@ int NOMSupport::getNumParameters(const int& var0)
 
 }
 
-//        public static int getNumProducts(int var0)
+//        int NOMSupport::getNumProducts(int var0)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2448,7 +2452,7 @@ int NOMSupport::getNumParameters(const int& var0)
 //            return (int)r.getNumProducts();
 //        }
 //
-//        public static int getNumReactants(int var0)
+//        int NOMSupport::getNumReactants(int var0)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2468,17 +2472,17 @@ int NOMSupport::getNumReactions()
     }
     return (int)mModel->getNumReactions();
 }
-//
-//        public static int getNumRules()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            return (int)mModel.getNumRules();
-//        }
-//
-//        public static string getOutsideCompartment(string var0)
+
+int NOMSupport::getNumRules()
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+    return (int)mModel.getNumRules();
+}
+
+//        string NOMSupport::getOutsideCompartment(string var0)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2495,7 +2499,7 @@ int NOMSupport::getNumReactions()
 //
 //        }
 //
-//        public static string getParamPromotedSBML(string sArg)
+//        string NOMSupport::getParamPromotedSBML(string sArg)
 //        {
 //            SBMLDocument oSBMLDoc = NULL;
 //            Model oModel = NULL;
@@ -2680,7 +2684,7 @@ string NOMSupport::getSBML()
 //    return libsbml.writeSBMLToString(mSBMLDoc);
 }
 
-//        public static int getSBOTerm(string sId)
+//        int getSBOTerm(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2726,7 +2730,7 @@ string NOMSupport::getSBML()
 //
 //        }
 //
-//        public static void TestASTTime()
+//        void NOMSupport::TestASTTime()
 //        {
 //            var mathML = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n            <csymbol encoding=\"text\" definitionURL=\"http://www.sbml.org/sbml/symbols/time\"> time </csymbol>\n            </math>\n";
 //            var node = libsbml.readMathMLFromString(mathML);
@@ -2742,7 +2746,7 @@ string NOMSupport::getSBML()
 //        }
 //
 //
-//        public static double getValue(string sId)
+//        double NOMSupport::getValue(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2803,7 +2807,7 @@ string NOMSupport::getSBML()
 //            throw Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
 //        }
 //
-//        public static bool hasInitialAmount(string sId)
+//        bool NOMSupport::hasInitialAmount(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2818,7 +2822,7 @@ string NOMSupport::getSBML()
 //
 //        }
 //
-//        public static bool hasInitialConcentration(string sId)
+//        bool NOMSupport::hasInitialConcentration(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2832,7 +2836,7 @@ string NOMSupport::getSBML()
 //            throw Exception("Invalid string name. The name is not a valid id/name of a floating / boundary species.");
 //        }
 //
-//        public static bool hasSBOTerm(string sId)
+//        bool NOMSupport::hasSBOTerm(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2873,7 +2877,7 @@ string NOMSupport::getSBML()
 //
 //        }
 //
-//        public static bool hasValue(string sId)
+//        bool NOMSupport::hasValue(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2902,7 +2906,7 @@ string NOMSupport::getSBML()
 //            throw Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
 //        }
 //
-//        public static bool isConstantImpl(string sId)
+//        bool NOMSupport::isConstantImpl(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2916,7 +2920,7 @@ string NOMSupport::getSBML()
 //            throw Exception("Invalid string name. The name is not a valid id/name of a floating / boundary species.");
 //        }
 //
-//        public static bool isReactionReversible(int nIndex)
+//        bool NOMSupport::isReactionReversible(int nIndex)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -2934,7 +2938,7 @@ string NOMSupport::getSBML()
 //            return r.getReversible();
 //        }
 //
-//        private static void GetSymbols(ASTNode node, List<System.String> list)
+//        void NOMSupport::GetSymbols(ASTNode node, List<System.String> list)
 //        {
 //            if (node.isName())
 //            {
@@ -2954,7 +2958,7 @@ string NOMSupport::getSBML()
 //        /// </summary>
 //        /// <param name="math">ASTnode</param>
 //        /// <returns>List of all symbols</returns>
-//        public static List<string> GetSymbols(ASTNode math)
+//        List<string> NOMSupport::GetSymbols(ASTNode math)
 //        {
 //            var result = new List<string>();
 //            if (math == NULL) return result;
@@ -3125,7 +3129,7 @@ void NOMSupport::changeTimeSymbol(Model& model, const string& timeSymbol)
     changeSymbol(model, timeSymbol, AST_NAME_TIME);
 }
 
-//        public static void loadParameterPromotedSBML(string var0, string sTimeSymbol)
+//        void NOMSupport::loadParameterPromotedSBML(string var0, string sTimeSymbol)
 //        {
 //            loadSBML(var0);
 //            changeTimeSymbol(mModel, sTimeSymbol);
@@ -3136,7 +3140,7 @@ void NOMSupport::changeTimeSymbol(Model& model, const string& timeSymbol)
 //
 //        }
 //
-//        public static void loadFromFile(string fileName)
+//        void loadFromFile(string fileName)
 //        {
 //            loadSBML(File.ReadAllText(fileName));
 //        }
@@ -3222,7 +3226,7 @@ void NOMSupport::LookForDependencies()
 //    }
 }
 
-//        private static void UpdateDependencies(string sbmlId)
+//        void NOMSupport::UpdateDependencies(string sbmlId)
 //        {
 //            SBMLSymbol current = (SBMLSymbol)_symbolTable[sbmlId];
 //            if (current == NULL) return;
@@ -3244,7 +3248,7 @@ void NOMSupport::LookForDependencies()
 //            }
 //        }
 //
-//        private static List<string> GetSymbols(string formula)
+//        List<string> NOMSupport::GetSymbols(string formula)
 //        {
 //            List<string> sResult = new List<string>();
 //            if (string.IsNullOrEmpty(formula)) return sResult;
@@ -3255,7 +3259,7 @@ void NOMSupport::LookForDependencies()
 //            return sResult;
 //        }
 //
-//        private static void addDependenciesToList(ASTNode node, List<string> sResult)
+//        void NOMSupport::addDependenciesToList(ASTNode node, List<string> sResult)
 //        {
 //            for (int i = 0; i < node.getNumChildren(); i++)
 //            {
@@ -3312,9 +3316,9 @@ string NOMSupport::GetInitialAssignmentFor(const string& sbmlId)
     return string("");
 }
 
-//        private static List<string> _Namespaces;
+//        List<string> _Namespaces;
 //
-//        public static List<string> Namespaces
+//        List<string> Namespaces
 //        {
 //            get { return _Namespaces; }
 //            set
@@ -3384,15 +3388,15 @@ void NOMSupport::loadSBML(const string& var0)
     }
 }
 
-//        private static ParameterSets _ParameterSets;
+//        ParameterSets _ParameterSets;
 //
-//        public static ParameterSets ParameterSets
+//        ParameterSets ParameterSets
 //        {
 //            get { return _ParameterSets; }
 //            set { _ParameterSets = value; }
 //        }
 //
-//        public static void setAnnotation(string sId, string sAnnotation)
+//        void setAnnotation(string sId, string sAnnotation)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -3443,7 +3447,7 @@ void NOMSupport::loadSBML(const string& var0)
 //            throw Exception("Invalid id. No element with the given id exists in the model.");
 //        }
 //
-//        public static void setModelId(string sId)
+//        void NOMSupport::setModelId(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -3452,7 +3456,7 @@ void NOMSupport::loadSBML(const string& var0)
 //            mModel.setId(sId);
 //        }
 //
-//        public static void setNotes(string sId, string sNotes)
+//        void NOMSupport::setNotes(string sId, string sNotes)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -3503,7 +3507,7 @@ void NOMSupport::loadSBML(const string& var0)
 //            throw Exception("Invalid id. No element with the given id exists in the model.");
 //        }
 //
-//        public static void setSBOTerm(string sId, int nSBOTerm)
+//        void NOMSupport::setSBOTerm(string sId, int nSBOTerm)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -3549,7 +3553,7 @@ void NOMSupport::loadSBML(const string& var0)
 //
 //        }
 //
-//        public static void setValue(Model model, string id, double value, bool throwIfNotFound)
+//        void NOMSupport::setValue(Model model, string id, double value, bool throwIfNotFound)
 //        {
 //            if (model == NULL)
 //            {
@@ -3606,7 +3610,7 @@ void NOMSupport::loadSBML(const string& var0)
 //                throw Exception(string.Format("Invalid string name. The id '{0}' does not exist in the model", id));
 //        }
 //
-//        public static void setValue(string sId, double dValue)
+//        void NOMSupport::setValue(string sId, double dValue)
 //        {
 //            setValue(mModel, sId, dValue, true);
 //        }
@@ -3628,7 +3632,7 @@ string NOMSupport::validateSBML(const string& sModel)
     return "Validation Successfull";
 }
 
-//        public static string validateWithConsistency(string sModel)
+//        string NOMSupport::validateWithConsistency(string sModel)
 //        {
 //            SBMLDocument oDoc = libsbml.readSBMLFromString(sModel);
 //            if (oDoc.getNumErrors() + oDoc.checkConsistency() > 0)
@@ -3760,7 +3764,7 @@ string NOMSupport::validateSBML(const string& sModel)
 //
 //
 //
-//        public static SBMLDocument SbmlDocument
+//        SBMLDocument SbmlDocument
 //        {
 //            get
 //            {
@@ -3769,7 +3773,7 @@ string NOMSupport::validateSBML(const string& sModel)
 //        }
 //
 //
-//        public static Model SbmlModel
+//        Model SbmlModel
 //        {
 //            get
 //            {
@@ -3783,7 +3787,7 @@ string NOMSupport::validateSBML(const string& sModel)
 //        /// </summary>
 //        /// <param name="sId">the id to check</param>
 //        /// <returns>true if element is a compartment, false otherwise</returns>
-//        public static bool IsCompartment(string sId)
+//        bool NOMSupport::IsCompartment(string sId)
 //        {
 //            libsbmlcs.Compartment temp = mModel.getCompartment(sId);
 //            if (temp != NULL) return true;
@@ -3795,7 +3799,7 @@ string NOMSupport::validateSBML(const string& sModel)
 //        /// </summary>
 //        /// <param name="sId">the id to check</param>
 //        /// <returns>true if element is a species, false otherwise</returns>
-//        public static bool IsSpecies (string sId)
+//        bool NOMSupport::IsSpecies (string sId)
 //        {
 //            var temp = mModel.getSpecies(sId);
 //            if (temp != NULL) return true;
@@ -3807,7 +3811,7 @@ string NOMSupport::validateSBML(const string& sModel)
 //        /// </summary>
 //        /// <param name="sId">the id to check</param>
 //        /// <returns>true if element is a floating species, false otherwise</returns>
-//        public static bool IsFloating(string sId)
+//        bool NOMSupport::IsFloating(string sId)
 //        {
 //            var temp = mModel.getSpecies(sId);
 //            if (temp != NULL && temp.getBoundaryCondition() == false) return true;
@@ -3819,7 +3823,7 @@ string NOMSupport::validateSBML(const string& sModel)
 //        /// </summary>
 //        /// <param name="sId">the sbml id for the element to find</param>
 //        /// <returns>the element with the given sbml id</returns>
-//        public static SBase GetElement(string sId)
+//        SBase NOMSupport::GetElement(string sId)
 //        {
 //            if (mModel == NULL)
 //            {
@@ -3880,14 +3884,14 @@ string NOMSupport::validateSBML(const string& sModel)
 //        /// </summary>
 //        /// <param name="sId">the id to check</param>
 //        /// <returns>true if element is a boundary species, false otherwise</returns>
-//        public static bool IsBoundary(string sId)
+//        bool NOMSupport::IsBoundary(string sId)
 //        {
 //            var temp = mModel.getSpecies(sId);
 //            if (temp != NULL && temp.getBoundaryCondition() == true) return true;
 //            return false;
 //        }
 //
-//        public static bool MultiplyCompartment(string sbmlId, out string compartmentId)
+//        bool NOMSupport::MultiplyCompartment(string sbmlId, out string compartmentId)
 //        {
 //
 //            compartmentId = NULL;
@@ -3951,7 +3955,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //    }
 }
 
-//        public static string addSourceSinkNodes(string sbml)
+//        string NOMSupport::addSourceSinkNodes(string sbml)
 //        {
 //            SBMLDocument doc = libsbml.readSBMLFromString(sbml);
 //
@@ -4015,7 +4019,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //            return libsbml.writeSBMLToString(doc);
 //        }
 //
-//        public static bool NeedSourceNode(Model model)
+//        bool NOMSupport::NeedSourceNode(Model model)
 //        {
 //            for (int i = 0; i < model.getNumReactions(); i++)
 //            {
@@ -4026,7 +4030,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //            return false;
 //        }
 //
-//        public static bool NeedSinkNode(Model model)
+//        bool NOMSupport::NeedSinkNode(Model model)
 //        {
 //            for (int i = 0; i < model.getNumReactions(); i++)
 //            {
@@ -4037,7 +4041,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //            return false;
 //        }
 //
-//        public static bool NeedEmptySetNode(Model model)
+//        bool NOMSupport::NeedEmptySetNode(Model model)
 //        {
 //            for (int i = 0; i < model.getNumReactions(); i++)
 //            {
@@ -4048,7 +4052,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //            return false;
 //        }
 //
-//        public static string addEmptySetNodes(string sbml)
+//        string NOMSupport::addEmptySetNodes(string sbml)
 //        {
 //            SBMLDocument doc = libsbml.readSBMLFromString(sbml);
 //
@@ -4106,7 +4110,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //            return libsbml.writeSBMLToString(doc);
 //        }
 //
-//        public static string addEmptySetNode(string sbml)
+//        string NOMSupport::addEmptySetNode(string sbml)
 //        {
 //            SBMLDocument doc = libsbml.readSBMLFromString(sbml);
 //
@@ -4150,7 +4154,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //            return libsbml.writeSBMLToString(doc);
 //        }
 //
-//        public static string RemoveJD2Layout(string sSBML)
+//        string NOMSupport::RemoveJD2Layout(string sSBML)
 //        {
 //            int jdStart = sSBML.IndexOf("<jd2:JDesignerLayout");
 //            string endTag = "</jd2:JDesignerLayout>";
@@ -4161,7 +4165,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //            return sSBML;
 //        }
 //
-//        public static string RemoveJD1Layout(string sSBML)
+//        string NOMSupport::RemoveJD1Layout(string sSBML)
 //        {
 //            XmlDocument doc = new XmlDocument();
 //            doc.LoadXml(sSBML);
@@ -4197,7 +4201,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //            return result.Replace("UTF-16", "utf-8");
 //        }
 //
-//        public static string RemoveLayoutInformation(string sSBML)
+//        string NOMSupport::RemoveLayoutInformation(string sSBML)
 //        {
 //            sSBML = RemoveJD2Layout(sSBML);
 //            sSBML = RemoveJD1Layout(sSBML);

@@ -30,7 +30,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
 
 //        static SBMLDocument _oDoc;
 //        static Model _oModel;
-        HashTable 				mSymbolTable;// = new Hashtable();
+        StringSymbolHashTable 	mSymbolTable;// = new Hashtable();
         ArrayList 				returnUnitDefinition(UnitDefinition oDefinition);
         const ASTNode* 			changeSymbol(ASTNode* node, const string& time, const int& targetType);
         ASTNode 				changeTimeToCSymbol(ASTNode* node, const string& name, const int& type);
