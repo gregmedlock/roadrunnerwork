@@ -7,31 +7,34 @@
 #pragma package(smart_init)
 
 
-Rule::Rule(const string& rule, const string& ruleTypeStr)
+namespace rr
+{
+
+RRRule::RRRule(const string& rule, const string& ruleTypeStr)
 :
 mTheRule(rule),
-mRuleTypeStr(ruleTYpeStr),
-mRuleType(rtUnknown),
+mRuleTypeStr(ruleTypeStr),
+mRuleType(rtUnknown)
 {
 	AssignType();
 }
 
-string Rule::GetLHS()
+string RRRule::GetLHS()
 {
 
 }
 
-string Rule::GetRHS()
+string RRRule::GetRHS()
 {
 
 }
 
-RuleType GetType()
+RuleType RRRule::GetType()
 {
 
 }
 
-void RuleType::AssignType()
+void RRRule::AssignType()
 {
 
 	mRuleType = GetRuleTypeFromString(mRuleTypeStr);
@@ -58,4 +61,4 @@ RuleType GetRuleTypeFromString(const string& str)
     }
 }
 
-
+}

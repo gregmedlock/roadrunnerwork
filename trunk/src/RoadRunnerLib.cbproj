@@ -52,7 +52,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;WIN32;$(Defines)</Defines>
+			<Defines>_DEBUG;WIN32;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -233,6 +233,9 @@
 			<CppCompile Include="cxx\Util\rrRandom.cpp">
 				<DependentOn>cxx\Util\rrRandom.h</DependentOn>
 				<BuildOrder>30</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="cxx\Util\rrRule.cpp">
+				<BuildOrder>56</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="cxx\Util\rrSBMLSymbol.cpp">
 				<DependentOn>cxx\Util\rrSBMLSymbol.h</DependentOn>

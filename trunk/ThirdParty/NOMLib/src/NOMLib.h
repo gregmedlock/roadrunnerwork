@@ -62,7 +62,7 @@
 
 extern "C" {
 //	static SBMLDocument* 	_oSBMLDocCPP;
-	DLL_EXPORT	Model* 	  	GetSBMLModel();
+	DLL_EXPORT	libsbml::Model* 	  	GetSBMLModel();
 
    /** @brief Returns the error message given the last error code generated
 	*

@@ -11,7 +11,7 @@ enum RuleType {rtAlgebraic = 0, rtAssignment, rtRate, rtUnknown};
 
 RuleType GetRuleTypeFromString(const string& str);
 
-class RR_DECLSPEC Rule : rrObject
+class RR_DECLSPEC RRRule : rrObject
 {
 	protected:
 		string 			mTheRule;
@@ -20,7 +20,7 @@ class RR_DECLSPEC Rule : rrObject
         void			AssignType();
 
     public:
-						Rule(const string& rule, const string& ruleType);
+						RRRule(const string& rule, const string& ruleType);
 
     	string			GetLHS();
     	string			GetRHS();

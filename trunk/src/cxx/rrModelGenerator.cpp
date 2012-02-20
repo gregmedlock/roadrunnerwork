@@ -2124,7 +2124,7 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
             // We only support assignment and ode rules at the moment
             string eqnRule = mNOM.getNthRule(i);
 
-            Rule aRule(eqnRule, ruleType);
+            RRRule aRule(eqnRule, ruleType);
 
 //            int index = eqnRule.IndexOf("=");
             string varName =  aRule.GetLHS();	//eqnRule.Substring(0, index).Trim();

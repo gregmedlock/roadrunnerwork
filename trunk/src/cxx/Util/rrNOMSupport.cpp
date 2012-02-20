@@ -13,6 +13,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
+//using namespace libsbml;
 namespace rr
 {
 
@@ -21,7 +22,8 @@ namespace rr
 NOMSupport::NOMSupport()
 :
 mModel(NULL),
-mSBMLDoc(NULL)
+mSBMLDoc(NULL),
+model(*mModel)
 {
 
 }
@@ -2244,98 +2246,99 @@ string NOMSupport::getNthReactionId(const int& nIndex)
 //
 //        }
 //
-//        string NOMSupport::getNthRule(int nIndex)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            Rule oRule = mModel.getRule((int)nIndex);
-//            if (oRule == NULL)
-//            {
-//                throw Exception("The model does not have a Rule corresponding to the index provided");
-//            }
-//
-//            int type = oRule.getTypeCode();
-//
-//            switch (type)
-//            {
-//                case libsbml.SBML_PARAMETER_RULE:
-//                case libsbml.SBML_SPECIES_CONCENTRATION_RULE:
-//                case libsbml.SBML_COMPARTMENT_VOLUME_RULE:
-//                case libsbml.SBML_ASSIGNMENT_RULE:
-//                case libsbml.SBML_RATE_RULE:
-//                    {
-//                        string lValue = oRule.getVariable();
-//                        string rValue = oRule.getFormula();
-//
-//                        return lValue + " = " + rValue;
-//                    }
-//                case libsbml.SBML_ALGEBRAIC_RULE:
-//                    {
-//                        string rValue = oRule.getFormula();
-//                        return rValue + " = 0";
-//                    }
-//
-//
-//                default:
-//                    break;
-//            }
-//
-//            return "";
-//        }
-//
-//        string NOMSupport::getNthRuleType(int arg)
-//        {
-//            string result = "";
-//            Rule rule;
-//
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            rule = mModel.getRule((int)arg);
-//
-//            if (rule == NULL)
-//            {
-//                throw Exception("The model does not have a Rule corresponding to the index provided");
-//            }
-//
-//            int type = rule.getTypeCode();
-//            if (type == libsbml.SBML_PARAMETER_RULE)
-//            {
-//                result = "Parameter_Rule";
-//            }
-//
-//            if (type == libsbml.SBML_SPECIES_CONCENTRATION_RULE)
-//            {
-//                result = "Species_Concentration_Rule";
-//            }
-//
-//            if (type == libsbml.SBML_COMPARTMENT_VOLUME_RULE)
-//            {
-//                result = "Compartment_Volume_Rule";
-//            }
-//
-//            if (type == libsbml.SBML_ASSIGNMENT_RULE)
-//            {
-//                result = "Assignment_Rule";
-//            }
-//
-//            if (type == libsbml.SBML_ALGEBRAIC_RULE)
-//            {
-//                result = "Algebraic_Rule";
-//            }
-//
-//            if (type == libsbml.SBML_RATE_RULE)
-//            {
-//                result = "Rate_Rule";
-//            }
-//            return result;
-//        }
-//
+string NOMSupport::getNthRule(const int& nIndex)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    Rule *aRule = model.getRule((int)nIndex);
+    if (aRule == NULL)
+    {
+        throw Exception("The model does not have a Rule corresponding to the index provided");
+    }
+    Rule &oRule = *aRule;
+
+    int type = oRule.getTypeCode();
+
+    switch (type)
+    {
+        case SBML_PARAMETER_RULE:
+        case SBML_SPECIES_CONCENTRATION_RULE:
+        case SBML_COMPARTMENT_VOLUME_RULE:
+        case SBML_ASSIGNMENT_RULE:
+        case SBML_RATE_RULE:
+            {
+                string lValue = oRule.getVariable();
+                string rValue = oRule.getFormula();
+
+                return lValue + " = " + rValue;
+            }
+        case SBML_ALGEBRAIC_RULE:
+            {
+                string rValue = oRule.getFormula();
+                return rValue + " = 0";
+            }
+
+
+        default:
+            break;
+    }
+
+    return "";
+}
+
+string NOMSupport::getNthRuleType(const int& arg)
+{
+    string result = "";
+
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    Rule *aRule = model.getRule((int)arg);
+
+    if (aRule == NULL)
+    {
+        throw Exception("The model does not have a Rule corresponding to the index provided");
+    }
+
+    Rule& rule = *aRule;
+    int type = rule.getTypeCode();
+    if (type == SBML_PARAMETER_RULE)
+    {
+        result = "Parameter_Rule";
+    }
+
+    if (type == SBML_SPECIES_CONCENTRATION_RULE)
+    {
+        result = "Species_Concentration_Rule";
+    }
+
+    if (type == SBML_COMPARTMENT_VOLUME_RULE)
+    {
+        result = "Compartment_Volume_Rule";
+    }
+
+    if (type == libsbml::SBML_ASSIGNMENT_RULE)
+    {
+        result = "Assignment_Rule";
+    }
+
+    if (type == libsbml::SBML_ALGEBRAIC_RULE)
+    {
+        result = "Algebraic_Rule";
+    }
+
+    if (type == libsbml::SBML_RATE_RULE)
+    {
+        result = "Rate_Rule";
+    }
+    return result;
+}
+
 //        int NOMSupport::getNumBoundarySpecies()
 //        {
 //            if (mModel == NULL)
@@ -2479,7 +2482,7 @@ int NOMSupport::getNumRules()
     {
         throw Exception("You need to load the model first");
     }
-    return (int)mModel.getNumRules();
+    return (int) mModel->getNumRules();
 }
 
 //        string NOMSupport::getOutsideCompartment(string var0)
@@ -2504,7 +2507,7 @@ int NOMSupport::getNumRules()
 //            SBMLDocument oSBMLDoc = NULL;
 //            Model oModel = NULL;
 //
-//            oSBMLDoc = libsbml.readSBMLFromString(sArg);
+//            oSBMLDoc = libsbml::readSBMLFromString(sArg);
 //            try
 //            {
 //                if (oSBMLDoc.getLevel() == 1)
@@ -2522,7 +2525,7 @@ int NOMSupport::getNumRules()
 //
 //                    changeTimeSymbol(oModel, "time");
 //
-//                    return libsbml.writeSBMLToString(oSBMLDoc);
+//                    return libsbml::writeSBMLToString(oSBMLDoc);
 //                }
 //            }
 //            finally
@@ -2681,7 +2684,7 @@ string NOMSupport::getSBML()
 //    if (_ParameterSets != NULL && mModel != NULL)
 //        _ParameterSets.AddToModel(mModel);
 //
-//    return libsbml.writeSBMLToString(mSBMLDoc);
+//    return libsbml::writeSBMLToString(mSBMLDoc);
 }
 
 //        int getSBOTerm(string sId)
@@ -2733,14 +2736,14 @@ string NOMSupport::getSBML()
 //        void NOMSupport::TestASTTime()
 //        {
 //            var mathML = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\">\n            <csymbol encoding=\"text\" definitionURL=\"http://www.sbml.org/sbml/symbols/time\"> time </csymbol>\n            </math>\n";
-//            var node = libsbml.readMathMLFromString(mathML);
+//            var node = libsbml::readMathMLFromString(mathML);
 //
 //            System.Diagnostics.Debug.WriteLine(
 //                string.Format("Node Type: {0}, AST_NAME_TIME: {1}, AST_NAME: {2}, AST_NAME_AVOGADRO: {3}",
 //                node.getType(),
-//                libsbml.AST_NAME_TIME,
-//                libsbml.AST_NAME,
-//                libsbml.AST_NAME_AVOGADRO));
+//                libsbml::AST_NAME_TIME,
+//                libsbml::AST_NAME,
+//                libsbml::AST_NAME_AVOGADRO));
 //
 //
 //        }
@@ -3133,7 +3136,7 @@ void NOMSupport::changeTimeSymbol(Model& model, const string& timeSymbol)
 //        {
 //            loadSBML(var0);
 //            changeTimeSymbol(mModel, sTimeSymbol);
-//            changeSymbol(mModel, "avogadro", libsbml.AST_NAME_AVOGADRO);
+//            changeSymbol(mModel, "avogadro", libsbml::AST_NAME_AVOGADRO);
 //            modifyKineticLaws(mSBMLDoc, mModel);
 //
 //            BuildSymbolTable();
@@ -3252,7 +3255,7 @@ void NOMSupport::LookForDependencies()
 //        {
 //            List<string> sResult = new List<string>();
 //            if (string.IsNullOrEmpty(formula)) return sResult;
-//            ASTNode node = libsbml.parseFormula(formula);
+//            ASTNode node = libsbml::parseFormula(formula);
 //
 //            addDependenciesToList(node, sResult);
 //
@@ -3281,12 +3284,12 @@ string NOMSupport::GetRuleFor(const string& sbmlId)
             case SBML_SPECIES_CONCENTRATION_RULE:
             case SBML_COMPARTMENT_VOLUME_RULE:
             case SBML_ASSIGNMENT_RULE:
-                //case libsbml.SBML_RATE_RULE:
+                //case libsbml::SBML_RATE_RULE:
                 {
                     if (sbmlId == oRule->getVariable())
                         return oRule->getFormula();
                 }
-            //case libsbml.SBML_ALGEBRAIC_RULE:
+            //case libsbml::SBML_ALGEBRAIC_RULE:
             //    {
             //        string rValue = oRule->getFormula();
             //        return rValue + " = 0";
@@ -3634,7 +3637,7 @@ string NOMSupport::validateSBML(const string& sModel)
 
 //        string NOMSupport::validateWithConsistency(string sModel)
 //        {
-//            SBMLDocument oDoc = libsbml.readSBMLFromString(sModel);
+//            SBMLDocument oDoc = libsbml::readSBMLFromString(sModel);
 //            if (oDoc.getNumErrors() + oDoc.checkConsistency() > 0)
 //            {
 //                StringBuilder oBuilder = new StringBuilder();
@@ -3957,7 +3960,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 
 //        string NOMSupport::addSourceSinkNodes(string sbml)
 //        {
-//            SBMLDocument doc = libsbml.readSBMLFromString(sbml);
+//            SBMLDocument doc = libsbml::readSBMLFromString(sbml);
 //
 //            UpgradeToL2V4IfNecessary(doc);
 //
@@ -4016,7 +4019,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //
 //            }
 //
-//            return libsbml.writeSBMLToString(doc);
+//            return libsbml::writeSBMLToString(doc);
 //        }
 //
 //        bool NOMSupport::NeedSourceNode(Model model)
@@ -4054,7 +4057,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //
 //        string NOMSupport::addEmptySetNodes(string sbml)
 //        {
-//            SBMLDocument doc = libsbml.readSBMLFromString(sbml);
+//            SBMLDocument doc = libsbml::readSBMLFromString(sbml);
 //
 //            UpgradeToL2V4IfNecessary(doc);
 //
@@ -4107,12 +4110,12 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //            }
 //
 //
-//            return libsbml.writeSBMLToString(doc);
+//            return libsbml::writeSBMLToString(doc);
 //        }
 //
 //        string NOMSupport::addEmptySetNode(string sbml)
 //        {
-//            SBMLDocument doc = libsbml.readSBMLFromString(sbml);
+//            SBMLDocument doc = libsbml::readSBMLFromString(sbml);
 //
 //            UpgradeToL2V4IfNecessary(doc);
 //
@@ -4151,7 +4154,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 //            }
 //
 //
-//            return libsbml.writeSBMLToString(doc);
+//            return libsbml::writeSBMLToString(doc);
 //        }
 //
 //        string NOMSupport::RemoveJD2Layout(string sSBML)
