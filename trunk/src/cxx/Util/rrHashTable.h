@@ -20,6 +20,6 @@ class RR_DECLSPEC HashTable : public rrObject, public hash_map<string, SBMLSymbo
 
 };
 
-//typedef HashTable Hashtable;
+typedef HashTable Hashtable;
 } //namespace rr
 #endif

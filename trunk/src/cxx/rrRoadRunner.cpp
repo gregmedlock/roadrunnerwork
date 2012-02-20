@@ -500,11 +500,6 @@ void RoadRunner::loadSBML(const string& sbml)
 
         sbmlStr = sbml;
 
-//		if(!mModelGenerator)
-//        {
-//			mModelGenerator = new ModelGenerator();
-//        }
-
 		_sModelCode = mModelGenerator->generateModelCode(sbmlStr);
 
         if(!_sModelCode.size())

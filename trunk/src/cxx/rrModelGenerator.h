@@ -43,7 +43,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         StringList		                    independentSpeciesList;
         int 				                _NumModifiableSpeciesReferences;
 
-        //        Hashtable _oMapRateRule = new Hashtable();
+        Hashtable 							_oMapRateRule;// = new Hashtable();
 
         string                              convertCompartmentToC(const string& compartmentName);
         string                              convertSpeciesToBc(const string& speciesName);
@@ -79,7 +79,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         void                                WriteClassHeader(StringBuilder& sb);
         void                                WriteTestConstraints(StringBuilder& sb);
         void                                WriteEvalInitialAssignments(StringBuilder& sb, int numReactions);
-        int 		 		                WriteComputeRules(StringBuilder& sb, int numReactions);
+        int 		 		                WriteComputeRules(StringBuilder& sb, const int& numReactions);
         void                                WriteComputeReactionRates(StringBuilder& sb, int numReactions);
         void                                WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies);
         void                                WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies, int numFloatingSpecies, int numOfRules);

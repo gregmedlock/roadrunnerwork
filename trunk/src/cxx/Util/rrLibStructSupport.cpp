@@ -298,15 +298,16 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 /// </summary>
 DoubleMatrix StructAnalysis::GetGammaMatrix()
 {
-    IntPtr pointer;
-    int nRows;
-    int nCols;
+//    IntPtr pointer;
+	double ***pointer;
+    int *nRows;
+    int *nCols;
 
-    if (LibStructural_getGammaMatrix(out pointer, nRows, nCols) < 0 )
+    if (LibStructural_getGammaMatrix(pointer, nRows, nCols) < 0 )
     {
         throw Exception("The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.");
     }
-    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
+    return GetDoubleMatrixFromPtr(pointer, *nRows, *nCols);
 }
 
 
