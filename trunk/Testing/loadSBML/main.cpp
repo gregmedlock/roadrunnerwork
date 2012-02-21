@@ -22,6 +22,7 @@ int _tmain(int argc, _TCHAR* argv[])
     gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
 	LogOutput::mLogToConsole = true;
     gLog.SetCutOffLogLevel(lDebug5);
+
 	Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
 	string modelsPath("C:\\RRW\\Testing\\models");
     string model(modelsPath + "\\feedback.xml");

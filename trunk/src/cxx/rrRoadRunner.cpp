@@ -519,6 +519,8 @@ void RoadRunner::loadSBML(const string& sbml)
         {
         	mCompiler  = new Compiler;
         }
+
+        //The get instance function actually compiles the supplied code..
         rrObject* o = mCompiler;//.getInstance(_sModelCode, "TModel", sLocation);
 
         if (o != NULL)

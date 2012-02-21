@@ -3356,7 +3356,7 @@ string NOMSupport::GetInitialAssignmentFor(const string& sbmlId)
 //
 void NOMSupport::loadSBML(const string& var0)
 {
-    //byte[] oBuffer = ASCIIEncoding.ASCII.GetBytes(var0.ToCharArray());
+    //byte[] oBuffer = ASCIIEncoding.ASCII.GetBytes(var0.ToCharArray());  	//Todo: Check what we can do in C++
     //System.IO.MemoryStream oStream = new System.IO.MemoryStream(oBuffer);
 //    string sTemp = new System.IO.StreamReader(oStream).ReadToEnd();
 	string sTemp = var0;
