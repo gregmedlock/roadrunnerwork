@@ -5,11 +5,13 @@
 #include <vector>
 #include <string>
 #include <stack>
+#include <memory>
 #include "math/ASTNode.h"
 #include "NOMLib.h"
 #include "rrObject.h"
 #include "rrStringListContainer.h"
 #include "rrHashTable.h"
+
 using std::vector;
 using std::string;
 using std::pair;
@@ -26,8 +28,8 @@ class RR_DECLSPEC NOMSupport : public rrObject
     protected:
 		//The C# SBMLSupport.cs have two static objects, SBMLDocument and Model, created when NOM reads SBML..
     	SBMLDocument		   *mSBMLDoc; 	//Correspond to C# _oDoc
-		Model				   *mModel;		//Correspond to C# _oModel
-        Model&					model;		//Tie to mModel in constructor
+		Model 				   *mModel;		//Correspond to C# _oModel
+//        Model*				   *model;		//Tie to mModel in constructor
 
 //        static SBMLDocument _oDoc;
 //        static Model _oModel;

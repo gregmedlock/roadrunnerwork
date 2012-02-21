@@ -31,11 +31,13 @@ class RR_DECLSPEC StringBuilder : public rrObject
         void AppendFormat(const string& str1, const string& str2);
         void AppendFormat(const string& str1, const string& str2, const string& str3);
         void AppendFormat(const string& str1, const string& arg1, const string& arg2, const string& arg3);
+        void AppendFormat(const string& str1, const string& arg1, const int& arg2);
 
         void AppendFormat(const string& str1, const int& arg);
-        void AppendFormat(const string& str1, const unsigned int& sub1, const string& sub2);
-        void AppendFormat(const string& str1, const unsigned int& sub1, const unsigned int& sub2, const string& sub3, const string& sub4);
-        void AppendFormat(const string& str1, const unsigned int& sub1, const string& sub2, const string& sub3);
+        void AppendFormat(const string& str1, const unsigned int& arg1, const string& arg2);
+        void AppendFormat(const string& str1, const string& arg1, const int& arg2, const string& arg3);
+        void AppendFormat(const string& str1, const unsigned int& arg1, const unsigned int& arg2, const string& arg3, const string& arg4);
+        void AppendFormat(const string& str1, const unsigned int& arg1, const string& arg2, const string& arg3);
         string ToString(){return mStringing.str();}
 };
 

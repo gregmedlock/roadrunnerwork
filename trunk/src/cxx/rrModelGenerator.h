@@ -43,7 +43,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         StringList		                    independentSpeciesList;
         int 				                _NumModifiableSpeciesReferences;
 
-        IntStringHashTable   						_oMapRateRule;// = new Hashtable();
+        IntStringHashTable   			    _oMapRateRule;// = new Hashtable();
 
         string                              convertCompartmentToC(const string& compartmentName);
         string                              convertSpeciesToBc(const string& speciesName);
@@ -60,8 +60,9 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         string 				                substituteTerms(const string& reactionName, string inputEquation, bool bFixAmounts);
         string 				                NL();
         DoubleMatrix 		                InitializeL0();
-        bool 		                		ExpressionContainsSymbol(const string& expression, string symbol);
-        Symbol 				                GetSpecies(const string& id);
+	    bool 								ExpressionContainsSymbol(ASTNode* ast, const string& symbol);
+        bool 		                		ExpressionContainsSymbol(const string& expression, const string& symbol);
+        Symbol*				                GetSpecies(const string& id);
         string 				                FindSymbol(const string& varName);
         void                                WriteOutSymbolTables(StringBuilder& sb);
         void                                WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, DoubleMatrix L0);
@@ -80,7 +81,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         void                                WriteTestConstraints(StringBuilder& sb);
         void                                WriteEvalInitialAssignments(StringBuilder& sb, int numReactions);
         int 		 		                WriteComputeRules(StringBuilder& sb, const int& numReactions);
-        void                                WriteComputeReactionRates(StringBuilder& sb, int numReactions);
+        void                                WriteComputeReactionRates(StringBuilder& sb, const int& numReactions);
         void                                WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies);
         void                                WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies, int numFloatingSpecies, int numOfRules);
         void                                WriteEventAssignments(StringBuilder& sb, int numReactions, int numEvents);
@@ -114,7 +115,8 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         vector<SymbolList> 					localParameterList;
         SymbolList 							reactionList;
         int                                 getNumberOfReactions();
-        int                                 NumAdditionalRates;
+//        int                                 NumAdditionalRates;	//this variable is the size of _oMapRateRule
+        int                                 NumAdditionalRates();	//this variable is the size of _oMapRateRule
         StringList                          getBoundarySpeciesList();
         StringList                          getCompartmentList();
         StringList                          getConservationList();

@@ -11,6 +11,8 @@ using std::vector;
 
 namespace rr
 {
+string			RR_DECLSPEC Trim(const string& str);
+bool			RR_DECLSPEC StartsWith(const string& src, const string& sub);
 //conversions
 string			RR_DECLSPEC IntToStr(const int& nt);
 int				RR_DECLSPEC StrToInt(const string& nt);
@@ -39,6 +41,14 @@ string			RR_DECLSPEC ToString(const char* str);
 //bool 			RR_DECLSPEC InStringList(const string& fldr, list<string>& theList);
 
 string 			RR_DECLSPEC Format(const string& src, const int& arg);
+string 			RR_DECLSPEC Format(const string& src, const string& arg);
+string 			RR_DECLSPEC Format(const string& src, const string& arg1, const string& arg2, const string& arg3);
+string 			RR_DECLSPEC Format(const string& src, const string& arg1, const string& arg2);
+
+string 			RR_DECLSPEC Format(const string& src, const string& arg1, const int& arg2);
+string 			RR_DECLSPEC Format(const string& src, const string& arg1, const int& arg2, const string& arg3);
+
+
 string 			RR_DECLSPEC Substitute(const string& src, const string& thisOne, const string& withThisOne, const int& howMany = -1);
 string 			RR_DECLSPEC Substitute(const string& src, const string& thisOne, const int& withThisOne, const int& howMany = -1);
 string      	RR_DECLSPEC RemoveNewLines(const string& str, const int& howMany = -1);

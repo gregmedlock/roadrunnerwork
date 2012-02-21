@@ -22,8 +22,8 @@ namespace rr
 NOMSupport::NOMSupport()
 :
 mModel(NULL),
-mSBMLDoc(NULL),
-model(*mModel)
+mSBMLDoc(NULL)//,
+//model(&mModel)
 {
 
 }
@@ -219,38 +219,38 @@ string NOMSupport::GetId(SBase& element)
 //                //throw new Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                return oSpecies.getMetaId();
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                return oParameter.getMetaId();
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                return oCompartment.getMetaId();
 //            }
 //
-//            libsbmlcs.Reaction oReaction = mModel.getReaction(sId);
+//            libsbmlcs.Reaction oReaction = mModel->getReaction(sId);
 //            if (oReaction != NULL)
 //            {
 //                return oReaction.getMetaId();
 //            }
 //
-//            Rule oRule = mModel.getRule(sId);
+//            Rule oRule = mModel->getRule(sId);
 //            if (oRule != NULL)
 //            {
 //                return oRule.getMetaId();
 //            }
 //
-//            if (mModel.getId() == sId)
-//                return mModel.getMetaId();
+//            if (mModel->getId() == sId)
+//                return mModel->getMetaId();
 //
 //            return "";
 //        }
@@ -439,12 +439,12 @@ string NOMSupport::GetName(SBase* element)
 //            return sResult;
 //        }
 //
-//        string NOMSupport::convertMathMLToString(string sMathML)
-//        {
-//            ASTNode node = libsbml.readMathMLFromString(sMathML);
-//            string sResult = libsbml.formulaToString(node);
-//            return sResult;
-//        }
+string NOMSupport::convertMathMLToString(const string& sMathML)
+{
+    ASTNode* node = libsbml::readMathMLFromString(sMathML.c_str());
+    string sResult = SBML_formulaToString(node);
+    return sResult;
+}
 //
 //        string NOMSupport::convertPowImpl(string sSBML)
 //        {
@@ -1015,19 +1015,19 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            {
 //                throw new Exception("You need to load the model first");
 //            }
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                return true;
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                return true;
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                return true;
@@ -1045,17 +1045,17 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //
 //            string sResult = "";
 //
-//            if (mModel.getId() == sId || mModel.getName() == sId)
+//            if (mModel->getId() == sId || mModel->getName() == sId)
 //            {
-//                if (mModel.isSetAnnotation())
+//                if (mModel->isSetAnnotation())
 //                {
-//                    sResult = mModel.getAnnotationString();
+//                    sResult = mModel->getAnnotationString();
 //                }
 //                return sResult;
 //
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                if (oSpecies.isSetAnnotation())
@@ -1065,7 +1065,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //                return sResult;
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                if (oParameter.isSetAnnotation())
@@ -1075,7 +1075,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //                return sResult;
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                if (oCompartment.isSetAnnotation())
@@ -1085,7 +1085,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //                return sResult;
 //            }
 //
-//            libsbmlcs.Reaction oReaction = mModel.getReaction(sId);
+//            libsbmlcs.Reaction oReaction = mModel->getReaction(sId);
 //            if (oReaction != NULL)
 //            {
 //                if (oReaction.isSetAnnotation())
@@ -1095,7 +1095,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //                return sResult;
 //            }
 //
-//            Rule oRule = mModel.getRule(sId);
+//            Rule oRule = mModel->getRule(sId);
 //            if (oRule != NULL)
 //            {
 //                if (oRule.isSetAnnotation())
@@ -1142,7 +1142,7 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //                throw new Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies == NULL)
 //            {
 //                throw new Exception("The model does not have a species corresponding to the Id provided");
@@ -1158,21 +1158,21 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            }
 //
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                UnitDefinition oUnitDef = oSpecies.getDerivedUnitDefinition();
 //                return returnUnitDefinition(oUnitDef);
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                UnitDefinition oUnitDef = oCompartment.getDerivedUnitDefinition();
 //                return returnUnitDefinition(oUnitDef);
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                UnitDefinition oUnitDef = oParameter.getDerivedUnitDefinition();
@@ -1201,23 +1201,34 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //            return oResultDef;
 //        }
 //
-//        string NOMSupport::getKineticLaw(int index)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw new Exception("You need to load the model first");
-//            }
-//            if (mModel.getNumReactions() <= (int)index)
-//                throw new Exception("No Reaction for the provided index");
-//            libsbmlcs.Reaction r = mModel.getReaction((int)index);
-//            if (!r.isSetKineticLaw())
-//                throw new Exception("No Kinetic Law present");
-//            KineticLaw k = r.getKineticLaw();
-//            if (!k.isSetFormula())
-//                throw new Exception("No Formula present");
-//            return k.getFormula();
-//        }
-//
+string NOMSupport::getKineticLaw(const int& index)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    if (mModel->getNumReactions() <= (int)index)
+    {
+        throw Exception("No Reaction for the provided index");
+    }
+
+    Reaction *r = mModel->getReaction((int)index);
+
+    if (!r->isSetKineticLaw())
+    {
+        throw Exception("No Kinetic Law present");
+    }
+
+    KineticLaw *k = r->getKineticLaw();
+
+    if (!k->isSetFormula())
+    {
+        throw Exception("No Formula present");
+    }
+    return k->getFormula();
+}
+
 
 //        ArrayList NOMSupport::getListOfBoundarySpeciesIds()
 //        {
@@ -1228,9 +1239,9 @@ const ASTNode* NOMSupport::changeSymbol(ASTNode* node, const string& time, const
 //                throw new Exception("You need to load the model first");
 //            }
 //
-//            for (int i = 0; i < mModel.getNumSpecies(); i++)
+//            for (int i = 0; i < mModel->getNumSpecies(); i++)
 //            {
-//                libsbmlcs.Species oSpecies = mModel.getSpecies(i);
+//                libsbmlcs.Species oSpecies = mModel->getSpecies(i);
 //                if (oSpecies.getBoundaryCondition())
 //                {
 //                    boundarySpeciesIdList.Add(GetId(oSpecies));
@@ -1319,9 +1330,9 @@ StringListContainer NOMSupport::getListOfFloatingSpecies()
 //                throw new Exception("You need to load the model first");
 //            }
 //
-//            for (int i = 0; i < mModel.getNumSpecies(); i++)
+//            for (int i = 0; i < mModel->getNumSpecies(); i++)
 //            {
-//                libsbmlcs.Species oSpecies = mModel.getSpecies(i);
+//                libsbmlcs.Species oSpecies = mModel->getSpecies(i);
 //                if (!oSpecies.getBoundaryCondition())
 //                {
 //                    floatingSpeciesIdList.Add(GetId(oSpecies));
@@ -1430,17 +1441,17 @@ string NOMSupport::getModelName()
 //
 //            string sResult = "";
 //
-//            if (mModel.getId() == sId || mModel.getName() == sId)
+//            if (mModel->getId() == sId || mModel->getName() == sId)
 //            {
-//                if (mModel.isSetNotes())
+//                if (mModel->isSetNotes())
 //                {
-//                    sResult = mModel.getNotesString();
+//                    sResult = mModel->getNotesString();
 //                }
 //                return sResult;
 //
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                if (oSpecies.isSetNotes())
@@ -1450,7 +1461,7 @@ string NOMSupport::getModelName()
 //                return sResult;
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                if (oParameter.isSetNotes())
@@ -1460,7 +1471,7 @@ string NOMSupport::getModelName()
 //                return sResult;
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                if (oCompartment.isSetNotes())
@@ -1470,7 +1481,7 @@ string NOMSupport::getModelName()
 //                return sResult;
 //            }
 //
-//            libsbmlcs.Reaction oReaction = mModel.getReaction(sId);
+//            libsbmlcs.Reaction oReaction = mModel->getReaction(sId);
 //            if (oReaction != NULL)
 //            {
 //                if (oReaction.isSetNotes())
@@ -1480,7 +1491,7 @@ string NOMSupport::getModelName()
 //                return sResult;
 //            }
 //
-//            Rule oRule = mModel.getRule(sId);
+//            Rule oRule = mModel->getRule(sId);
 //            if (oRule != NULL)
 //            {
 //                if (oRule.isSetNotes())
@@ -1528,9 +1539,9 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //            }
 //
 //            int nCount = 0;
-//            for (int i = 0; i < mModel.getNumSpecies(); i++)
+//            for (int i = 0; i < mModel->getNumSpecies(); i++)
 //            {
-//                libsbmlcs.Species oSpecies = mModel.getSpecies(i);
+//                libsbmlcs.Species oSpecies = mModel->getSpecies(i);
 //                if (oSpecies.getBoundaryCondition())
 //                {
 //                    if (nCount == nIndex)
@@ -1554,9 +1565,9 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //            }
 //
 //            int nCount = 0;
-//            for (int i = 0; i < mModel.getNumSpecies(); i++)
+//            for (int i = 0; i < mModel->getNumSpecies(); i++)
 //            {
-//                libsbmlcs.Species oSpecies = mModel.getSpecies(i);
+//                libsbmlcs.Species oSpecies = mModel->getSpecies(i);
 //                if (oSpecies.getBoundaryCondition())
 //                {
 //                    if (nCount == nIndex)
@@ -1579,12 +1590,12 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //                throw new Exception("You need to load the model first");
 //            }
 //
-//            if (nIndex < 0 || nIndex >= (int)mModel.getNumCompartments())
+//            if (nIndex < 0 || nIndex >= (int)mModel->getNumCompartments())
 //            {
 //                throw new Exception("Invalid input - Argument should be >= 0 and should be less than total number of compartments in the model");
 //
 //            }
-//            Compartment oCompartment = mModel.getCompartment((int)nIndex);
+//            Compartment oCompartment = mModel->getCompartment((int)nIndex);
 //            return GetId(oCompartment);
 //        }
 //
@@ -1595,12 +1606,12 @@ string NOMSupport::getNthBoundarySpeciesCompartmentName(const int& nIndex)
 //                throw new Exception("You need to load the model first");
 //            }
 //
-//            if (nIndex < 0 || nIndex >= (int)mModel.getNumCompartments())
+//            if (nIndex < 0 || nIndex >= (int)mModel->getNumCompartments())
 //            {
 //                throw new Exception("Invalid input - Argument should be >= 0 and should be less than total number of compartments in the model");
 //
 //            }
-//            Compartment oCompartment = mModel.getCompartment((int)nIndex);
+//            Compartment oCompartment = mModel->getCompartment((int)nIndex);
 //            return GetName(oCompartment);
 //        }
 //
@@ -1634,80 +1645,76 @@ ArrayList NOMSupport::getNthError(const int& nIndex)
     return oResult;
 }
 
-//        bool NOMSupport::getNthUseValuesFromTriggerTime(int arg)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            Event oEvent = mModel.getEvent((int)arg);
-//
-//            if (oEvent == NULL)
-//            {
-//                throw Exception("The model does not have a Event corresponding to the index provided");
-//            }
-//            return oEvent.getUseValuesFromTriggerTime();
-//        }
-//
-//        ArrayList getNthEvent(int arg)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            ArrayList triggerAssignmentsList = new ArrayList();
-//            Event oEvent = mModel.getEvent((int)arg);
-//
-//            if (oEvent == NULL)
-//            {
-//                throw Exception("The model does not have a Event corresponding to the index provided");
-//            }
-//
-//            string trigger = libsbml.formulaToString(oEvent.getTrigger().getMath());
-//            string delay;
-//            triggerAssignmentsList.Add(trigger);
-//
-//            if (!oEvent.isSetDelay())
-//            {
-//                delay = "0";
-//            }
-//            else
-//            {
-//                Delay oDelay = oEvent.getDelay();
-//                if (oDelay.isSetMath())
-//                {
-//                    delay = libsbml.formulaToString(oDelay.getMath());
-//                }
-//                else
-//                {
-//                    delay = "0";
-//                }
-//            }
-//
-//            triggerAssignmentsList.Add(delay);
-//
-//            int numEventAssignments = (int)oEvent.getNumEventAssignments();
-//
-//            for (int i = 0; i < numEventAssignments; i++)
-//            {
-//                ArrayList assignmentList = new ArrayList();
-//
-//                EventAssignment ea = oEvent.getEventAssignment(i);
-//                string lValue = ea.getVariable();
-//                string rValue = libsbml.formulaToString(ea.getMath());
-//
-//                assignmentList.Add(lValue);
-//                assignmentList.Add(rValue);
-//
-//                triggerAssignmentsList.Add(assignmentList);
-//
-//            }
-//
-//            return triggerAssignmentsList;
-//        }
-//
+bool NOMSupport::getNthUseValuesFromTriggerTime(const int& arg)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    Event *oEvent = mModel->getEvent((int)arg);
+
+    if (oEvent == NULL)
+    {
+        throw Exception("The model does not have a Event corresponding to the index provided");
+    }
+    return oEvent->getUseValuesFromTriggerTime();
+}
+
+ArrayList NOMSupport::getNthEvent(const int& arg)
+{
+	if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    ArrayList triggerAssignmentsList;// = new ArrayList();
+    Event *oEvent = mModel->getEvent((int)arg);
+
+    if (oEvent == NULL)
+    {
+        throw Exception("The model does not have a Event corresponding to the index provided");
+    }
+
+    string trigger = SBML_formulaToString(oEvent->getTrigger()->getMath());
+    string delay;
+    triggerAssignmentsList.Add(trigger);
+
+    if (!oEvent->isSetDelay())
+    {
+        delay = "0";
+    }
+    else
+    {
+        Delay *oDelay = oEvent->getDelay();
+        if (oDelay->isSetMath())
+        {
+            delay = SBML_formulaToString(oDelay->getMath());
+        }
+        else
+        {
+            delay = "0";
+        }
+    }
+
+    triggerAssignmentsList.Add(delay);
+    int numEventAssignments = (int)oEvent->getNumEventAssignments();
+
+    for (int i = 0; i < numEventAssignments; i++)
+    {
+        StringList assignmentList;// = new ArrayList();
+
+        EventAssignment *ea = oEvent->getEventAssignment(i);
+        string lValue = ea->getVariable();
+        string rValue = SBML_formulaToString(ea->getMath());
+
+        assignmentList.Add(lValue);
+        assignmentList.Add(rValue);
+        triggerAssignmentsList.Add(assignmentList);
+    }
+    return triggerAssignmentsList;
+}
+
 string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 {
     if (mModel == NULL)
@@ -1742,9 +1749,9 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            }
 //
 //            int nCount = 0;
-//            for (int i = 0; i < mModel.getNumSpecies(); i++)
+//            for (int i = 0; i < mModel->getNumSpecies(); i++)
 //            {
-//                libsbmlcs.Species oSpecies = mModel.getSpecies(i);
+//                libsbmlcs.Species oSpecies = mModel->getSpecies(i);
 //                if (!oSpecies.getBoundaryCondition())
 //                {
 //                    if (nCount == nIndex)
@@ -1768,9 +1775,9 @@ string NOMSupport::getNthFloatingSpeciesCompartmentName(const int& nIndex)
 //            }
 //
 //            int nCount = 0;
-//            for (int i = 0; i < mModel.getNumSpecies(); i++)
+//            for (int i = 0; i < mModel->getNumSpecies(); i++)
 //            {
-//                libsbmlcs.Species oSpecies = mModel.getSpecies(i);
+//                libsbmlcs.Species oSpecies = mModel->getSpecies(i);
 //                if (!oSpecies.getBoundaryCondition())
 //                {
 //                    if (nCount == nIndex)
@@ -1833,13 +1840,13 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //
 //            }
 //
-//            if (nIndex >= (int)mModel.getNumParameters())
+//            if (nIndex >= (int)mModel->getNumParameters())
 //            {
 //                throw Exception("There is no parameter corresponding to the index you provided");
 //
 //            }
 //
-//            Parameter oParameter = mModel.getParameter((int)nIndex);
+//            Parameter oParameter = mModel->getParameter((int)nIndex);
 //            if (oParameter == NULL)
 //            {
 //                throw Exception("There is no parameter corresponding to the index you provided");
@@ -1855,13 +1862,13 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //
 //            }
 //
-//            if (nIndex >= (int)mModel.getNumParameters())
+//            if (nIndex >= (int)mModel->getNumParameters())
 //            {
 //                throw Exception("There is no parameter corresponding to the index you provided");
 //
 //            }
 //
-//            Parameter oParameter = mModel.getParameter((int)nIndex);
+//            Parameter oParameter = mModel->getParameter((int)nIndex);
 //            if (oParameter == NULL)
 //            {
 //                throw Exception("There is no parameter corresponding to the index you provided");
@@ -1878,12 +1885,12 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //
 //            ArrayList modifierList = new ArrayList();
 //
-//            if (nIndex >= (int)mModel.getNumReactions())
+//            if (nIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            int numModifiers = (int)r.getNumModifiers();
 //            for (int i = 0; i < numModifiers; i++)
 //            {
@@ -1901,12 +1908,12 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //
 //            ArrayList productList = new ArrayList();
 //
-//            if (nIndex >= (int)mModel.getNumReactions())
+//            if (nIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            int numProducts = (int)r.getNumProducts();
 //            for (int i = 0; i < numProducts; i++)
 //            {
@@ -1930,12 +1937,12 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //
 //            ArrayList reactantList = new ArrayList();
 //
-//            if (nIndex >= (int)mModel.getNumReactions())
+//            if (nIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            int numReactants = (int)r.getNumReactants();
 //            for (int i = 0; i < numReactants; i++)
 //            {
@@ -1957,12 +1964,12 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            if (nReactionIndex < 0 || nReactionIndex >= (int)mModel.getNumReactions())
+//            if (nReactionIndex < 0 || nReactionIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction oReaction = mModel.getReaction((int)nReactionIndex);
+//            libsbmlcs.Reaction oReaction = mModel->getReaction((int)nReactionIndex);
 //            KineticLaw kl = oReaction.getKineticLaw();
 //
 //            if (nParameterIndex < 0 || nParameterIndex >= (int)kl.getNumParameters())
@@ -2004,12 +2011,12 @@ string NOMSupport::getNthParameterId(const int& nReactionIndex, const int& nPara
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            if (nReactionIndex < 0 || nReactionIndex >= (int)mModel.getNumReactions())
+//            if (nReactionIndex < 0 || nReactionIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction oReaction = mModel.getReaction((int)nReactionIndex);
+//            libsbmlcs.Reaction oReaction = mModel->getReaction((int)nReactionIndex);
 //            KineticLaw kl = oReaction.getKineticLaw();
 //
 //            if (nParameterIndex < 0 || nParameterIndex >= (int)kl.getNumParameters())
@@ -2051,12 +2058,12 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            if (nIndex >= (int)mModel.getNumReactions())
+//            if (nIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getProduct((int)nProduct);
 //            if (oRef == NULL)
 //                throw Exception("No product for the provided index.");
@@ -2070,12 +2077,12 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            if (nIndex >= (int)mModel.getNumReactions())
+//            if (nIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getProduct((int)nProduct);
 //            if (oRef == NULL)
 //                throw Exception("No product for the provided index.");
@@ -2090,12 +2097,12 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //            }
 //
 //
-//            if (nIndex >= (int)mModel.getNumReactions())
+//            if (nIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getProduct((int)nProduct);
 //            if (oRef == NULL)
 //                throw Exception("No product for the provided index.");
@@ -2109,12 +2116,12 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            if (nIndex >= (int)mModel.getNumReactions())
+//            if (nIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getReactant((int)nReactant);
 //            if (oRef == NULL)
 //                throw Exception("No reactant for the provided index.");
@@ -2128,12 +2135,12 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            if (nIndex >= (int)mModel.getNumReactions())
+//            if (nIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getReactant((int)nReactant);
 //            if (oRef == NULL)
 //                throw Exception("No reactant for the provided index.");
@@ -2147,12 +2154,12 @@ double NOMSupport::getNthParameterValue(const int& nReactionIndex, const int& nP
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            if (nIndex >= (int)mModel.getNumReactions())
+//            if (nIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            libsbmlcs.SpeciesReference oRef = r.getReactant((int)nReactant);
 //            if (oRef == NULL)
 //                throw Exception("No reactant for the provided index.");
@@ -2175,77 +2182,94 @@ string NOMSupport::getNthReactionId(const int& nIndex)
     return GetId(r);
 }
 
-//        string NOMSupport::getNthReactionName(int nIndex)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            if (nIndex >= (int)mModel.getNumReactions())
-//            {
-//                throw Exception("There is no reaction corresponding to the index you provided");
-//            }
-//
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
-//            return GetName(r);
-//        }
-//
-//        Pair<string, string> NOMSupport::getNthInitialAssignmentPair(int nIndex)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            InitialAssignment oAssignment = mModel.getInitialAssignment((int)nIndex);
-//            if (oAssignment == NULL)
-//                throw Exception("The model does not have an InitialAssignment corresponding to the index provided");
-//
-//            if (!oAssignment.isSetMath())
-//                throw Exception("The InitialAssignment contains no math.");
-//
-//            return new Pair<string, string>(oAssignment.getSymbol(), libsbml.formulaToString(oAssignment.getMath()));
-//        }
-//
-//        string NOMSupport::getNthInitialAssignment(int nIndex)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            InitialAssignment oAssignment = mModel.getInitialAssignment((int)nIndex);
-//            if (oAssignment == NULL)
-//                throw Exception("The model does not have an InitialAssignment corresponding to the index provided");
-//
-//            if (!oAssignment.isSetMath())
-//                throw Exception("The InitialAssignment contains no math.");
-//
-//            return oAssignment.getSymbol() + " = " + libsbml.formulaToString(oAssignment.getMath());
-//
-//        }
-//
-//        string NOMSupport::getNthConstraint(int nIndex, out string sMessage)
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            Constraint oConstraint = mModel.getConstraint((int)nIndex);
-//            if (oConstraint == NULL)
-//                throw Exception("The model does not have a constraint corresponding to the index provided");
-//
-//            if (!oConstraint.isSetMath())
-//                throw Exception("The constraint does not provide math.");
-//
-//            if (!oConstraint.isSetMessage())
-//                sMessage = "Constraint: " + nIndex.ToString() + " was violated.";
-//            else
-//                sMessage = oConstraint.getMessage().toString();
-//            return libsbml.formulaToString(oConstraint.getMath());
-//
-//        }
-//
+string NOMSupport::getNthReactionName(const int& nIndex)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    if (nIndex >= (int)mModel->getNumReactions())
+    {
+        throw Exception("There is no reaction corresponding to the index you provided");
+    }
+
+    Reaction *r = mModel->getReaction((int)nIndex);
+    return GetName(r);
+}
+
+pair<string, string> NOMSupport::getNthInitialAssignmentPair(const int& nIndex)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+    InitialAssignment *oAssignment = mModel->getInitialAssignment((int)nIndex);
+    if (oAssignment == NULL)
+        throw Exception("The model does not have an InitialAssignment corresponding to the index provided");
+
+    if (!oAssignment->isSetMath())
+    {
+        throw Exception("The InitialAssignment contains no math.");
+    }
+
+    return pair<string, string> (oAssignment->getSymbol(), SBML_formulaToString(oAssignment->getMath()));
+}
+
+string NOMSupport::getNthInitialAssignment(const int& nIndex)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    InitialAssignment *oAssignment = mModel->getInitialAssignment((int)nIndex);
+    if (oAssignment == NULL)
+    {
+        throw Exception("The model does not have an InitialAssignment corresponding to the index provided");
+    }
+
+    if (!oAssignment->isSetMath())
+    {
+        throw Exception("The InitialAssignment contains no math.");
+    }
+
+    return oAssignment->getSymbol() + " = " + SBML_formulaToString(oAssignment->getMath());
+
+}
+
+string NOMSupport::getNthConstraint(const int& nIndex, string& sMessage)
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    Constraint *oConstraint = mModel->getConstraint((int)nIndex);
+
+    if (oConstraint == NULL)
+    {
+        throw Exception("The model does not have a constraint corresponding to the index provided");
+    }
+
+    if (!oConstraint->isSetMath())
+    {
+        throw Exception("The constraint does not provide math.");
+    }
+
+    if (!oConstraint->isSetMessage())
+    {
+        sMessage = "Constraint: " + ToString(nIndex) + " was violated.";
+    }
+    else
+    {
+    	XMLNode* node = (XMLNode*) oConstraint->getMessage();
+        sMessage = node->toString();
+    }
+
+    return SBML_formulaToString(oConstraint->getMath());
+}
+
 string NOMSupport::getNthRule(const int& nIndex)
 {
     if (mModel == NULL)
@@ -2253,7 +2277,7 @@ string NOMSupport::getNthRule(const int& nIndex)
         throw Exception("You need to load the model first");
     }
 
-    Rule *aRule = model.getRule((int)nIndex);
+    Rule *aRule = mModel->getRule((int)nIndex);
     if (aRule == NULL)
     {
         throw Exception("The model does not have a Rule corresponding to the index provided");
@@ -2298,7 +2322,7 @@ string NOMSupport::getNthRuleType(const int& arg)
         throw Exception("You need to load the model first");
     }
 
-    Rule *aRule = model.getRule((int)arg);
+    Rule *aRule = mModel->getRule((int)arg);
 
     if (aRule == NULL)
     {
@@ -2345,7 +2369,7 @@ string NOMSupport::getNthRuleType(const int& arg)
 //            {
 //                throw Exception("You need to load the model first");
 //            }
-//            return (int)mModel.getNumSpeciesWithBoundaryCondition();
+//            return (int)mModel->getNumSpeciesWithBoundaryCondition();
 //        }
 //
 int NOMSupport::getNumCompartments()
@@ -2375,33 +2399,33 @@ int NOMSupport::getNumEvents()
     return (int)mModel->getNumEvents();
 }
 
-//        int NOMSupport::getNumFloatingSpecies()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            return (int)mModel.getNumSpecies() - (int)mModel.getNumSpeciesWithBoundaryCondition();
-//
-//        }
-//
-//        int NOMSupport::getNumInitialAssignments()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            return (int)mModel.getNumInitialAssignments();
-//        }
-//
-//        int NOMSupport::getNumConstraints()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            return (int)mModel.getNumConstraints();
-//        }
+int NOMSupport::getNumFloatingSpecies()
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+    return (int)mModel->getNumSpecies() - (int)mModel->getNumSpeciesWithBoundaryCondition();
+
+}
+
+int NOMSupport::getNumInitialAssignments()
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+    return (int)mModel->getNumInitialAssignments();
+}
+
+int NOMSupport::getNumConstraints()
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+    return (int)mModel->getNumConstraints();
+}
 
 int NOMSupport::getNumFunctionDefinitions()
 {
@@ -2419,7 +2443,7 @@ int NOMSupport::getNumFunctionDefinitions()
 //            {
 //                throw Exception("You need to load the model first");
 //            }
-//            return (int)mModel.getNumParameters();
+//            return (int)mModel->getNumParameters();
 //
 //        }
 //
@@ -2449,9 +2473,9 @@ int NOMSupport::getNumParameters(const int& var0)
 //            {
 //                throw Exception("You need to load the model first");
 //            }
-//            if (var0 > mModel.getNumReactions())
+//            if (var0 > mModel->getNumReactions())
 //                throw Exception("Reaction does not exist");
-//            libsbmlcs.Reaction r = mModel.getReaction((int)var0);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)var0);
 //            return (int)r.getNumProducts();
 //        }
 //
@@ -2461,9 +2485,9 @@ int NOMSupport::getNumParameters(const int& var0)
 //            {
 //                throw Exception("You need to load the model first");
 //            }
-//            if (var0 > mModel.getNumReactions())
+//            if (var0 > mModel->getNumReactions())
 //                throw Exception("Reaction does not exist");
-//            libsbmlcs.Reaction r = mModel.getReaction((int)var0);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)var0);
 //            return (int)r.getNumReactants();
 //        }
 //
@@ -2493,7 +2517,7 @@ int NOMSupport::getNumRules()
 //
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(var0);
+//            Compartment oCompartment = mModel->getCompartment(var0);
 //            if (oCompartment == NULL)
 //            {
 //                throw Exception("There is no compartment corresponding to the input argument.");
@@ -2695,38 +2719,38 @@ string NOMSupport::getSBML()
 //                //throw Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                return oSpecies.getSBOTerm();
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                return oParameter.getSBOTerm();
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                return oCompartment.getSBOTerm();
 //            }
 //
-//            libsbmlcs.Reaction oReaction = mModel.getReaction(sId);
+//            libsbmlcs.Reaction oReaction = mModel->getReaction(sId);
 //            if (oReaction != NULL)
 //            {
 //                return oReaction.getSBOTerm();
 //            }
 //
-//            Rule oRule = mModel.getRule(sId);
+//            Rule oRule = mModel->getRule(sId);
 //            if (oRule != NULL)
 //            {
 //                return oRule.getSBOTerm();
 //            }
 //
-//            if (mModel.getId() == sId)
-//                return mModel.getSBOTerm();
+//            if (mModel->getId() == sId)
+//                return mModel->getSBOTerm();
 //
 //            return 0;
 //            //throw Exception("Invalid id. No element with the given id exists in the model.");
@@ -2756,7 +2780,7 @@ string NOMSupport::getSBML()
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                if (oSpecies.isSetInitialAmount())
@@ -2765,21 +2789,21 @@ string NOMSupport::getSBML()
 //                    return oSpecies.getInitialConcentration();
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                return oCompartment.getVolume();
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                return oParameter.getValue();
 //            }
 //
-//            for (int i = 0; i < mModel.getNumReactions(); i++)
+//            for (int i = 0; i < mModel->getNumReactions(); i++)
 //            {
-//                var reaction = mModel.getReaction(i);
+//                var reaction = mModel->getReaction(i);
 //                for (int j = 0; j < reaction.getNumReactants(); j++)
 //                {
 //                    var reference = reaction.getReactant(j);
@@ -2817,7 +2841,7 @@ string NOMSupport::getSBML()
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //                return oSpecies.isSetInitialAmount();
 //
@@ -2832,7 +2856,7 @@ string NOMSupport::getSBML()
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //                return oSpecies.isSetInitialConcentration();
 //
@@ -2846,31 +2870,31 @@ string NOMSupport::getSBML()
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                return oSpecies.isSetSBOTerm();
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                return oParameter.isSetSBOTerm();
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                return oCompartment.isSetSBOTerm();
 //            }
 //
-//            libsbmlcs.Reaction oReaction = mModel.getReaction(sId);
+//            libsbmlcs.Reaction oReaction = mModel->getReaction(sId);
 //            if (oReaction != NULL)
 //            {
 //                return oReaction.isSetSBOTerm();
 //            }
 //
-//            Rule oRule = mModel.getRule(sId);
+//            Rule oRule = mModel->getRule(sId);
 //            if (oRule != NULL)
 //            {
 //                return oRule.isSetSBOTerm();
@@ -2887,20 +2911,20 @@ string NOMSupport::getSBML()
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                return (oSpecies.isSetInitialAmount() || oSpecies.isSetInitialAmount());
 //
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                return oCompartment.isSetVolume();
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                return oParameter.isSetValue();
@@ -2916,7 +2940,7 @@ string NOMSupport::getSBML()
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //                return oSpecies.getConstant();
 //
@@ -2932,12 +2956,12 @@ string NOMSupport::getSBML()
 //
 //            ArrayList productList = new ArrayList();
 //
-//            if (nIndex >= (int)mModel.getNumReactions())
+//            if (nIndex >= (int)mModel->getNumReactions())
 //            {
 //                throw Exception("There is no reaction corresponding to the index you provided");
 //            }
 //
-//            libsbmlcs.Reaction r = mModel.getReaction((int)nIndex);
+//            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            return r.getReversible();
 //        }
 //
@@ -3406,41 +3430,41 @@ void NOMSupport::loadSBML(const string& var0)
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            if (mModel.getId() == sId || mModel.getName() == sId)
+//            if (mModel->getId() == sId || mModel->getName() == sId)
 //            {
-//                mModel.setAnnotation(sAnnotation);
+//                mModel->setAnnotation(sAnnotation);
 //                return;
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                oSpecies.setAnnotation(sAnnotation);
 //                return;
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                oParameter.setAnnotation(sAnnotation);
 //                return;
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                oCompartment.setAnnotation(sAnnotation);
 //                return;
 //            }
 //
-//            libsbmlcs.Reaction oReaction = mModel.getReaction(sId);
+//            libsbmlcs.Reaction oReaction = mModel->getReaction(sId);
 //            if (oReaction != NULL)
 //            {
 //                oReaction.setAnnotation(sAnnotation);
 //                return;
 //            }
 //
-//            Rule oRule = mModel.getRule(sId);
+//            Rule oRule = mModel->getRule(sId);
 //            if (oRule != NULL)
 //            {
 //                oRule.setAnnotation(sAnnotation);
@@ -3456,7 +3480,7 @@ void NOMSupport::loadSBML(const string& var0)
 //            {
 //                throw Exception("You need to load the model first");
 //            }
-//            mModel.setId(sId);
+//            mModel->setId(sId);
 //        }
 //
 //        void NOMSupport::setNotes(string sId, string sNotes)
@@ -3466,41 +3490,41 @@ void NOMSupport::loadSBML(const string& var0)
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            if (mModel.getId() == sId || mModel.getName() == sId)
+//            if (mModel->getId() == sId || mModel->getName() == sId)
 //            {
-//                mModel.setNotes(sNotes);
+//                mModel->setNotes(sNotes);
 //                return;
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                oSpecies.setNotes(sNotes);
 //                return;
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                oParameter.setNotes(sNotes);
 //                return;
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                oCompartment.setNotes(sNotes);
 //                return;
 //            }
 //
-//            libsbmlcs.Reaction oReaction = mModel.getReaction(sId);
+//            libsbmlcs.Reaction oReaction = mModel->getReaction(sId);
 //            if (oReaction != NULL)
 //            {
 //                oReaction.setNotes(sNotes);
 //                return;
 //            }
 //
-//            Rule oRule = mModel.getRule(sId);
+//            Rule oRule = mModel->getRule(sId);
 //            if (oRule != NULL)
 //            {
 //                oRule.setNotes(sNotes);
@@ -3517,35 +3541,35 @@ void NOMSupport::loadSBML(const string& var0)
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                oSpecies.setSBOTerm(nSBOTerm);
 //                return;
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                oParameter.setSBOTerm(nSBOTerm);
 //                return;
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                oCompartment.setSBOTerm(nSBOTerm);
 //                return;
 //            }
 //
-//            libsbmlcs.Reaction oReaction = mModel.getReaction(sId);
+//            libsbmlcs.Reaction oReaction = mModel->getReaction(sId);
 //            if (oReaction != NULL)
 //            {
 //                oReaction.setSBOTerm(nSBOTerm);
 //                return;
 //            }
 //
-//            Rule oRule = mModel.getRule(sId);
+//            Rule oRule = mModel->getRule(sId);
 //            if (oRule != NULL)
 //            {
 //                oRule.setSBOTerm(nSBOTerm);
@@ -3586,9 +3610,9 @@ void NOMSupport::loadSBML(const string& var0)
 //                return;
 //            }
 //
-//            for (int i = 0; i < mModel.getNumReactions(); i++)
+//            for (int i = 0; i < mModel->getNumReactions(); i++)
 //            {
-//                var reaction = mModel.getReaction(i);
+//                var reaction = mModel->getReaction(i);
 //                for (int j = 0; j < reaction.getNumReactants(); j++)
 //                {
 //                    var reference = reaction.getReactant(j);
@@ -3785,18 +3809,27 @@ string NOMSupport::validateSBML(const string& sModel)
 //        }
 //        #endregion
 //
-//        /// <summary>
-//        /// Checks whether the element for the given SBML id is a compartment
-//        /// </summary>
-//        /// <param name="sId">the id to check</param>
-//        /// <returns>true if element is a compartment, false otherwise</returns>
-//        bool NOMSupport::IsCompartment(string sId)
-//        {
-//            libsbmlcs.Compartment temp = mModel.getCompartment(sId);
-//            if (temp != NULL) return true;
-//            return false;
-//        }
-//
+/// <summary>
+/// Checks whether the element for the given SBML id is a compartment
+/// </summary>
+/// <param name="sId">the id to check</param>
+/// <returns>true if element is a compartment, false otherwise</returns>
+bool NOMSupport::IsCompartment(const string& sId)
+{
+	if(!mModel)
+    {
+    	//Todo: should this throw.?
+    	return false;
+    }
+
+    Compartment* temp = mModel->getCompartment(sId);
+    if (temp != NULL)
+    {
+    	return true;
+    }
+    return false;
+}
+
 //        /// <summary>
 //        /// Checks whether the element for the given SBML id is a species
 //        /// </summary>
@@ -3804,7 +3837,7 @@ string NOMSupport::validateSBML(const string& sModel)
 //        /// <returns>true if element is a species, false otherwise</returns>
 //        bool NOMSupport::IsSpecies (string sId)
 //        {
-//            var temp = mModel.getSpecies(sId);
+//            var temp = mModel->getSpecies(sId);
 //            if (temp != NULL) return true;
 //            return false;
 //        }
@@ -3816,7 +3849,7 @@ string NOMSupport::validateSBML(const string& sModel)
 //        /// <returns>true if element is a floating species, false otherwise</returns>
 //        bool NOMSupport::IsFloating(string sId)
 //        {
-//            var temp = mModel.getSpecies(sId);
+//            var temp = mModel->getSpecies(sId);
 //            if (temp != NULL && temp.getBoundaryCondition() == false) return true;
 //            return false;
 //        }
@@ -3833,27 +3866,27 @@ string NOMSupport::validateSBML(const string& sModel)
 //                throw Exception("You need to load the model first");
 //            }
 //
-//            libsbmlcs.Species oSpecies = mModel.getSpecies(sId);
+//            libsbmlcs.Species oSpecies = mModel->getSpecies(sId);
 //            if (oSpecies != NULL)
 //            {
 //                return oSpecies;
 //            }
 //
-//            Compartment oCompartment = mModel.getCompartment(sId);
+//            Compartment oCompartment = mModel->getCompartment(sId);
 //            if (oCompartment != NULL)
 //            {
 //                return oCompartment;
 //            }
 //
-//            Parameter oParameter = mModel.getParameter(sId);
+//            Parameter oParameter = mModel->getParameter(sId);
 //            if (oParameter != NULL)
 //            {
 //                return oParameter;
 //            }
 //
-//            for (int i = 0; i < mModel.getNumReactions(); i++)
+//            for (int i = 0; i < mModel->getNumReactions(); i++)
 //            {
-//                var reaction = mModel.getReaction(i);
+//                var reaction = mModel->getReaction(i);
 //
 //                if (reaction.isSetId() && reaction.getId() == sId)
 //                    return reaction;
@@ -3889,35 +3922,40 @@ string NOMSupport::validateSBML(const string& sModel)
 //        /// <returns>true if element is a boundary species, false otherwise</returns>
 //        bool NOMSupport::IsBoundary(string sId)
 //        {
-//            var temp = mModel.getSpecies(sId);
+//            var temp = mModel->getSpecies(sId);
 //            if (temp != NULL && temp.getBoundaryCondition() == true) return true;
 //            return false;
 //        }
 //
-//        bool NOMSupport::MultiplyCompartment(string sbmlId, out string compartmentId)
-//        {
-//
-//            compartmentId = NULL;
-//
-//            libsbmlcs.Species temp = mModel.getSpecies(sbmlId);
-//            if (temp != NULL &&
-//                //temp.isSetInitialAmount() &&
-//                temp.isSetCompartment() &&
-//                !temp.getHasOnlySubstanceUnits())
-//            {
-//
-//                compartmentId = temp.getCompartment();
-//
-//                libsbmlcs.Compartment comp = mModel.getCompartment(compartmentId);
-//                if (comp == NULL || comp.getSpatialDimensions() == 0)
-//                    return false;
-//
-//                return true;
-//            }
-//            return false;
-//
-//        }
-//
+bool NOMSupport::MultiplyCompartment(const string& sbmlId, string& compartmentId)
+{
+    compartmentId = "";
+
+    if(!mModel)
+    {
+    	return false;
+    }
+
+    Species* temp = mModel->getSpecies(sbmlId);
+    if (temp != NULL &&
+        //temp.isSetInitialAmount() &&
+        temp->isSetCompartment() &&
+        !temp->getHasOnlySubstanceUnits())
+    {
+
+        compartmentId = temp->getCompartment();
+
+        Compartment* comp = mModel->getCompartment(compartmentId);
+        if (comp == NULL || comp->getSpatialDimensions() == 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+    return false;
+}
+
 /// <summary>
 /// This should return an initialization for the given sbmlId that is sideeffect free
 /// </summary>

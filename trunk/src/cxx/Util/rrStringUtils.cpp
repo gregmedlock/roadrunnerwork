@@ -17,15 +17,74 @@
 
 namespace rr
 {
+bool StartsWith(const string& src, const string& sub)
+{
+	return src.compare(0, sub.size(), sub);
+}
+
+string Trim(const string& str)
+{
+
+	string trimmed(str);
+
+	string::size_type pos = trimmed.find_last_not_of(' ');
+  	if(pos != string::npos)
+    {
+    	trimmed.erase(pos + 1);
+    	pos = trimmed.find_first_not_of(' ');
+    	if(pos != string::npos)
+        {
+        	trimmed.erase(0, pos);
+        }
+  	}
+    else
+    {
+    	trimmed.erase(trimmed.begin(), trimmed.end());
+    }
+	return trimmed;
+}
+
 
 string RemoveNewLines(const string& str, const int& howMany)
 {
 	return Substitute(str, "\n" , "", howMany);
 }
 
+string Format(const string& src, const string& arg)
+{
+	return Substitute(src, "{0}", arg);
+}
+
 string Format(const string& src, const int& arg)
 {
 	return Substitute(src, "{0}", ToString(arg));
+}
+
+string Format(const string& src, const string& arg1, const string& arg2)
+{
+	string tmp = Substitute(src, "{0}", arg1);
+    return Substitute(tmp, "{1}", arg2);
+}
+
+string Format(const string& src, const string& arg1, const int& arg2)
+{
+	string tmp = Substitute(src, "{0}", arg1);
+    return Substitute(tmp, "{1}", ToString(arg2));
+}
+
+
+string Format(const string& src, const string& arg1, const string& arg2, const string& arg3)
+{
+	string tmp = Substitute(src, "{0}", arg1);
+    tmp = Substitute(src, "{1}", arg2);
+ 	return Substitute(src, "{2}", arg3);
+}
+
+string Format(const string& src, const string& arg1, const int& arg2, const string& arg3)
+{
+	string tmp = Substitute(src, "{0}", arg1);
+    tmp = Substitute(src, "{1}", ToString(arg2));
+ 	return Substitute(src, "{2}", arg3);
 }
 
 string Substitute(const string& src, const string& thisOne, const int& withThisOne, const int& howMany)
