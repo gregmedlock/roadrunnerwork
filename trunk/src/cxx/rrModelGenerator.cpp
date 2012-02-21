@@ -2011,20 +2011,19 @@ string ModelGenerator::FindSymbol(const string& varName)
 
 void ModelGenerator::WriteTestConstraints(StringBuilder& sb)
 {
-//      sb.Append("\tpublic: void testConstraints()" + NL());
-//      sb.Append("\t{" + NL());
-//
-//      for (int i = 0; i < NOM.getNumConstraints(); i++)
-//      {
-//          string sMessage;
-//          string sCheck = NOM.getNthConstraint(i, out sMessage);
-//
-//          sb.Append("\t\tif (" + substituteTerms(NOM.getNumReactions(), "", sCheck) + " == 0.0 )" + NL());
-//          sb.Append("\t\t\tthrow new Exception(\"" + sMessage + "\");" + NL());
-//      }
-//
-//
-//      sb.Append("\t}" + NL() + NL());
+    sb.Append("\tpublic: void testConstraints()" + NL());
+    sb.Append("\t{" + NL());
+
+    for (int i = 0; i < mNOM.getNumConstraints(); i++)
+    {
+        string sMessage;
+        string sCheck = mNOM.getNthConstraint(i, sMessage);
+
+        sb.Append("\t\tif (" + substituteTerms(mNOM.getNumReactions(), "", sCheck) + " == 0.0 )" + NL());
+        sb.Append("\t\t\tthrow new Exception(\"" + sMessage + "\");" + NL());
+    }
+
+    sb.Append("\t}" + NL() + NL());
 }
 
 bool ModelGenerator::ExpressionContainsSymbol(ASTNode *ast, const string& symbol)
