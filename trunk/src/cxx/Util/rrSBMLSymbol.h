@@ -1,8 +1,10 @@
 #ifndef rrSBMLSymbolH
 #define rrSBMLSymbolH
-//---------------------------------------------------------------------------
+#include <vector>
 #include "rrObject.h"
 #include "rrUtils.h"
+
+using std::vector;
 namespace rr
 {
 
@@ -10,52 +12,31 @@ class RR_DECLSPEC SBMLSymbol : public rrObject
 {
 	protected:
     public:
-		string mId;
-////        private string _Id;
-////        public string Id
-////        {
-////            get { return _Id; }
-////            set { _Id = value; }
-////        }
-////
-		enum SBMLType mType;
-////        public SBMLType Type
-////        {
-////            get { return _Type; }
-////            set { _Type = value; }
-////        }
-////
-////        private List<SBMLSymbol> _Dependencies = new List<SBMLSymbol>();
-////        public List<SBMLSymbol> Dependencies
-////        {
-////            get { return _Dependencies; }
-////            set { _Dependencies = value; }
-////        }
-////
-	bool HasValue(){return IsNaN(mValue) ? true : false;}
-////        {
-////            get { return !Double.IsNaN(_Value); }
-////        }
-////
-////        private double _Value = Double.NaN;
-	double mValue;
-	double& mConcentration; //Assing ref to mValue..
-	double& mAmount; //Assing ref to mValue..
-	bool IsSetAmount;
-	bool IsSetConcentration;
-	bool HasInitialAssignment(){return mInitialAssignment.size() ? true : false;}
-	string	mInitialAssignment;
+    string 					mId;
+    enum SBMLType 			mType;
 
-	bool mHasRule;
-	bool HasRule(){return mRule.size() ? true : false;}
-	string mRule;
+	vector<SBMLSymbol> 		mDependencies;
+	bool 					HasValue(){return IsNaN(mValue) ? true : false;}
+	double 					mValue;
+	double& 				mConcentration; //Assing ref to mValue..
+	double& 				mAmount; //Assing ref to mValue..
+	bool 					IsSetAmount;
+	bool 					IsSetConcentration;
+	bool 					HasInitialAssignment(){return mInitialAssignment.size() ? true : false;}
+	string					mInitialAssignment;
+
+	bool 					mHasRule;
+	bool 					HasRule(){return mRule.size() ? true : false;}
+	string 					mRule;
 
     public:
-    	SBMLSymbol() : mConcentration(mValue), mAmount(mValue){}
-        SBMLSymbol(const SBMLSymbol& cp) : mConcentration(mValue), mAmount(mValue){}
+    	SBMLSymbol();
+        SBMLSymbol(const SBMLSymbol& cp);
         SBMLSymbol& operator =(const SBMLSymbol& rhs);
-};
 
+};
+//COuld make it a friend...
+ostream& RR_DECLSPEC operator<<(ostream& stream, const SBMLSymbol& symbol);
 }
 #endif
 

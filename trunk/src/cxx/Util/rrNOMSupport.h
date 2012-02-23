@@ -44,7 +44,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         string 					GetInitialAssignmentFor(const string& sbmlId);
         string 					GetName(SBase* element);
         string 					GetRuleFor(const string& sbmlId);
-        void                    addDependenciesToList(ASTNode* node, StringList sResult);
+        void                    addDependenciesToList(const ASTNode* node, StringList& sResult);
         void                    AddMissingParameter(const string& parameterId, SBMLDocument *doc);
         void                    BuildSymbolTable();
         void                    ChangeNameToCSymbol(Model* model, const string& name, const int& type);

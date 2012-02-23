@@ -16,7 +16,8 @@ class RR_DECLSPEC StringSymbolHashTable : public rrObject, public hash_map<strin
 
     public:
 		StringSymbolHashTable(){}
-
+	    hash_map<string, SBMLSymbol>::iterator 	mIter;
+        bool									ContainsKey(const string& aKey);
 };
 
 

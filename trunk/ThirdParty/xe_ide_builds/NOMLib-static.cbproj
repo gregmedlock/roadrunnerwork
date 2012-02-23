@@ -22,7 +22,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<Defines>EXPORT_NOM;$(Defines)</Defines>
+			<Defines>EXPORT_NOM;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
 			<ProjectType>CppStaticLibrary</ProjectType>
 			<PackageImports>rtl.bpi;vclimg.bpi;vcl.bpi;vclx.bpi;vcldb.bpi;dbrtl.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;vcltouch.bpi;xmlrtl.bpi;vclactnband.bpi;dsnap.bpi;dbxcds.bpi;dbexpress.bpi;DbxCommonDriver.bpi;vclribbon.bpi;DataSnapIndy10ServerTransport.bpi;DbxClientDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;bcbsmp.bpi;IndyProtocols.bpi;inet.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vcldbx.bpi;bdertl.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;DataSnapProviderClient.bpi;vclie.bpi;inetdbbde.bpi;inetdbxpress.bpi;DataSnapClient.bpi;inetdb.bpi;DataSnapServer.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi;DuneComponents.bpi;mtkCommonRTL.bpi;VCLCommonRTL.bpi;VCLData.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;GenesisVisualComponents.bpi</PackageImports>

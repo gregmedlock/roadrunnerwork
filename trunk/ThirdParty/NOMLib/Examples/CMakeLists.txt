@@ -2,8 +2,11 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
 PROJECT(NOMLibExamples)
 
 #Link with libsbml library
-link_libraries(${target} libsbml-static)
+link_libraries(${target} libsbml)
+link_libraries(${target} NOMLib)
 
+	add_definitions(/DNO_NOM_DLL) #static lib?
+	add_definitions(/DNO_SBML_DLL) #static lib?
 
 set(examples 	
 		Example_1

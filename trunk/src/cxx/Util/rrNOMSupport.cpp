@@ -13,6 +13,7 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
+using namespace std;
 //using namespace libsbml;
 namespace rr
 {
@@ -3005,9 +3006,13 @@ string NOMSupport::getSBML()
 /// <returns>assignment rules in independent order</returns>
 list<Rule> NOMSupport::ReorderAssignmentRules(list<Rule>& assignmentRules)
 {
-//    if (assignmentRules == NULL || assignmentRules.Count < 2)
-//        return assignmentRules;
-//
+    if (assignmentRules.size() < 2)
+    {
+    	return assignmentRules;
+    }
+
+    //Todo: Need XML file to test this:
+
     list<Rule> result;// = new List<Rule>();
 //    var allSymbols = new Dictionary<int, List<string>>();
 //    var map = new Dictionary<string, List<string>>();
@@ -3124,9 +3129,9 @@ void NOMSupport::ReorderRules(SBMLDocument& doc, Model& model)
         }
     }
 
-
+    //TODO: Need to load suitable XML file to test and convert following code..
     assignmentRules = ReorderAssignmentRules(assignmentRules);
-    //TODO: Figure out what the following is doing!!..
+
 //    assignmentRules.ForEach(item => model.addRule(item));
 //    rateRules.ForEach(item => model.addRule(item));
 //    algebraicRules.ForEach(item => model.addRule(item));
@@ -3145,9 +3150,10 @@ void NOMSupport::loadSBML(const string& var0, const string& sTimeSymbol)
 
     changeTimeSymbol(aModel, sTimeSymbol);
     changeSymbol(aModel, "avogadro", AST_NAME_AVOGADRO);
+	SBMLDocument &sbmlDoc = *mSBMLDoc;
 
-    modifyKineticLaws(*mSBMLDoc, aModel);
-    ReorderRules(*mSBMLDoc, aModel);
+    modifyKineticLaws(sbmlDoc, aModel);
+    ReorderRules(sbmlDoc, aModel);
     BuildSymbolTable();
 }
 
@@ -3240,63 +3246,83 @@ void NOMSupport::BuildSymbolTable()
         mSymbolTable[symbol.mId] = symbol;
     }
 
+	StringSymbolHashTable::iterator iter;
+    Log(lDebug4)<<"========== Symbols read into Symbol Table ("<<mSymbolTable.size()<<") ==============";
+    for (iter = mSymbolTable.begin(); iter != mSymbolTable.end(); iter++)//string sbmlId in mSymbolTable.Keys)
+    {
+		SBMLSymbol& aSymbol = (iter->second);
+		Log(lDebug3)<<"Key = "<<iter->first<<endl<<aSymbol;
+    }
+
     LookForDependencies();
 }
 
 void NOMSupport::LookForDependencies()
 {
-	Log(lDebug)<<"In function "<<__FUNCTION__;
+	Log(lDebug5)<<"In function "<<__FUNCTION__;
+
     // Go through each found Id, and test for dependencies
-//    foreach (string sbmlId in _symbolTable.Keys)
-//    {
-//        UpdateDependencies(sbmlId);
-//    }
+	StringSymbolHashTable::iterator iter;
+
+    for (iter = mSymbolTable.begin(); iter != mSymbolTable.end(); iter++)//string sbmlId in mSymbolTable.Keys)
+    {
+    	string sbmlId = (*iter).first;
+        UpdateDependencies(sbmlId);
+    }
 }
 
-//        void NOMSupport::UpdateDependencies(string sbmlId)
-//        {
-//            SBMLSymbol current = (SBMLSymbol)_symbolTable[sbmlId];
-//            if (current == NULL) return;
-//
-//            if (current.HasInitialAssignment)
-//            {
-//                List<string> dependentSymbols = GetSymbols(current.InitialAssignment);
-//                foreach (string dependency in dependentSymbols)
-//                    if (dependency != current.Id)
-//                        current.Dependencies.Add((SBMLSymbol)_symbolTable[dependency]);
-//            }
-//
-//            if (current.HasRule)
-//            {
-//                List<string> dependentSymbols = GetSymbols(current.Rule);
-//                foreach (string dependency in dependentSymbols)
-//                    if (dependency != current.Id)
-//                        current.Dependencies.Add((SBMLSymbol)_symbolTable[dependency]);
-//            }
-//        }
-//
-//        List<string> NOMSupport::GetSymbols(string formula)
-//        {
-//            List<string> sResult = new List<string>();
-//            if (string.IsNullOrEmpty(formula)) return sResult;
-//            ASTNode node = libsbml::parseFormula(formula);
-//
-//            addDependenciesToList(node, sResult);
-//
-//            return sResult;
-//        }
-//
-//        void NOMSupport::addDependenciesToList(ASTNode node, List<string> sResult)
-//        {
-//            for (int i = 0; i < node.getNumChildren(); i++)
-//            {
-//                addDependenciesToList(node.getChild(i), sResult);
-//            }
-//
-//            if (node.isName() && _symbolTable.ContainsKey(node.getName()))
-//                sResult.Add(node.getName());
-//        }
-//
+void NOMSupport::UpdateDependencies(const string& sbmlId)
+{
+    SBMLSymbol& current = mSymbolTable[sbmlId];
+    if (!current.mId.size())
+    {
+    	return;
+    }
+
+    if (current.HasInitialAssignment())
+    {
+        StringList dependentSymbols = GetSymbols(current.mInitialAssignment);
+//        foreach (string dependency in dependentSymbols)
+//            if (dependency != current.Id)
+//                current.Dependencies.Add((SBMLSymbol)mSymbolTable[dependency]);
+    }
+
+    if (current.HasRule())
+    {
+        StringList dependentSymbols = GetSymbols(current.mRule);
+//        foreach (string dependency in dependentSymbols)
+//            if (dependency != current.Id)
+//                current.Dependencies.Add((SBMLSymbol)mSymbolTable[dependency]);
+    }
+}
+
+StringList NOMSupport::GetSymbols(const string& formula)
+{
+    StringList sResult;
+    if (IsNullOrEmpty(formula))
+    {
+    	return sResult;
+    }
+
+    ASTNode *node = SBML_parseFormula(formula.c_str());
+
+    addDependenciesToList(node, sResult);
+    return sResult;
+}
+
+void NOMSupport::addDependenciesToList(const ASTNode *node, StringList& sResult)
+{
+    for (int i = 0; i < node->getNumChildren(); i++)
+    {
+        addDependenciesToList(node->getChild(i), sResult);
+    }
+
+    if (node->isName() && mSymbolTable.ContainsKey(node->getName()))
+    {
+        sResult.Add(node->getName());
+    }
+}
+
 string NOMSupport::GetRuleFor(const string& sbmlId)
 {
     for (int i = 0; i < mModel->getNumRules(); i++)
@@ -3381,6 +3407,8 @@ void NOMSupport::loadSBML(const string& var0)
 
     // we also need to collect all namespaces from the file, or rather
     // all registered prefixes:
+
+    //Todo: How to deal with namespaces in SBML file???
 
 //    //string regex=@"^.*?xmlns:(?<prefix>\w+?)^.*= "(?<namespace>.+?).*?$";
 //    string regex = "xmlns:(?<prefix>\\w+?)\\s*=\\s*(?:\"(?<namespace>[^\"]*)\"|(?<namespace>\\S+))";

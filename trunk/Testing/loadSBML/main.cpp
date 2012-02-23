@@ -5,6 +5,7 @@
 #include <conio.h>
 #include <tchar.h>
 #include <dir.h>
+#include <iomanip>
 #include "Logger/rrLog.h"
 #include "rrException.h"
 #include "rrRoadRunner.h"
@@ -16,28 +17,36 @@ using namespace rr;
 #pragma argsused
 int _tmain(int argc, _TCHAR* argv[])
 {
- 	char exePath[MAXPATH];
-   	getcwd(exePath, MAXPATH);
-//
-    gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
-	LogOutput::mLogToConsole = true;
-    gLog.SetCutOffLogLevel(lDebug5);
-
-	Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
-	string modelsPath("C:\\RRW\\Testing\\models");
-    string model(modelsPath + "\\feedback.xml");
-    ifstream ifs(model.c_str());
-    if(!ifs)
-    {
-    	cout<<"Failed opening file";
-    }
-
-    std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
-
     try
     {
+
+        char exePath[MAXPATH];
+        getcwd(exePath, MAXPATH);
+        gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
+        LogOutput::mLogToConsole = true;
+        gLog.SetCutOffLogLevel(lDebug5);
+
+        Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
+//        string modelsPath("C:\\RRW\\Testing\\models\\test_cases_l2v4");
+        string modelsPath("C:\\RRW\\Testing\\models");
+        int caseNr = 1;
+//        stringstream model;
+//        model <<setfill('0')<<setw(5)<<caseNr<<"\\"<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
+//        string fullFilePath(modelsPath + "\\\\" + model.str());
+
+        string model("00001-sbml-l2v4.xml");
+    	string fullFilePath(modelsPath + "\\\\" + model);
+        ifstream ifs(fullFilePath.c_str());
+        if(!ifs)
+        {
+            throw(Exception("Failed to read file:" + fullFilePath));
+        }
+
+
+        std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
 		RoadRunner *rr = new RoadRunner;
-		Log(lDebug5)<<"Before loading SBML";
+		Log(lDebug5)<<"Before loading SBML..SBML string size: "<<sbml.size();
     	rr->loadSBML(sbml);
 
         cout<<"Copyright: "<<rr->getCopyright()<<endl;
@@ -52,7 +61,7 @@ int _tmain(int argc, _TCHAR* argv[])
 //        delete rr;
 
     }
-    catch(const RRException& ex)
+    catch(const Exception& ex)
     {
 		cout<<"RoadRunner exception occured: "<<ex.what()<<endl;
     }

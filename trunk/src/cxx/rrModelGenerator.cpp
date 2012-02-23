@@ -80,14 +80,23 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     _functionParameters.empty();// = new StringCollection();
 
    	LibStructural* instance = LibStructural::getInstance();
+	string msg;
+    try
+    {
+		Log(lDebug)<<"Loading sbml into StructAnalysis";
+	    msg = mStructAnalysis.LoadSBML(sASCII);
+	    if(!msg.size())
+    	{
+			Log(lError)<<"Failed loading sbml into StructAnalysis";
+	    }
 
-    Log(lDebug)<<"Loading sbml into StructAnalysis";
-    string msg = mStructAnalysis.LoadSBML(sASCII);
-    if(!msg.size())
+    }
+    catch(...)
     {
 		Log(lError)<<"Failed loading sbml into StructAnalysis";
     }
-    Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
+
+	Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
 	if (RoadRunner::_bComputeAndAssignConservationLaws)
     {
