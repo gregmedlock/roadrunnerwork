@@ -11,6 +11,7 @@
 #include "rrStringListContainer.h"
 #include "rrUtils.h"
 #include "rrRule.h"
+#include "scanner/rrScanner.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -886,91 +887,94 @@ string ModelGenerator::substituteTerms(const int& numReactions, const string& re
 ////                SubstituteEquation(reactionName, s, sb);
 ////            }
 ////        }
-////         void ModelGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner.Scanner s, (StringBuilder& sb)
-////        {
-////            switch (s.token)
-////            {
-////                case CodeTypes.tWordToken:
-////                case CodeTypes.tExternalToken:
-////                case CodeTypes.tExtToken:
-////
-////                    SubstituteWords(reactionName, bFixAmounts, s, sb);
-////                    break;
-////
-////                case CodeTypes.tDoubleToken:
-////                    sb.Append("(double)" + WriteDouble(s.tokenDouble));
-////                    break;
-////                case CodeTypes.tIntToken:
-////                    sb.Append("(double)" + WriteDouble((double)s.tokenInteger));
-////                    break;
-////                case CodeTypes.tPlusToken:
-////                    sb.AppendFormat("+{0}\t", NL());
-////                    break;
-////                case CodeTypes.tMinusToken:
-////                    sb.AppendFormat("-{0}\t", NL());
-////                    break;
-////                case CodeTypes.tDivToken:
-////                    sb.AppendFormat("/{0}\t", NL());
-////                    break;
-////                case CodeTypes.tMultToken:
-////                    sb.AppendFormat("*{0}\t", NL());
-////                    break;
-////                case CodeTypes.tPowerToken:
-////                    sb.AppendFormat("^{0}\t", NL());
-////                    break;
-////                case CodeTypes.tLParenToken:
-////                    sb.Append("(");
-////                    break;
-////                case CodeTypes.tRParenToken:
-////                    sb.AppendFormat("){0}\t", NL());
-////                    break;
-////                case CodeTypes.tCommaToken:
-////                    sb.Append(",");
-////                    break;
-////                case CodeTypes.tEqualsToken:
-////                    sb.AppendFormat(" = {0}\t", NL());
-////                    break;
-////                case CodeTypes.tTimeWord1:
-////                    sb.Append("time");
-////                    break;
-////                case CodeTypes.tTimeWord2:
-////                    sb.Append("time");
-////                    break;
-////                case CodeTypes.tTimeWord3:
-////                    sb.Append("time");
-////                    break;
-////                case CodeTypes.tAndToken:
-////                    sb.AppendFormat("{0}supportFunctions._and", NL());
-////                    break;
-////                case CodeTypes.tOrToken:
-////                    sb.AppendFormat("{0}supportFunctions._or", NL());
-////                    break;
-////                case CodeTypes.tNotToken:
-////                    sb.AppendFormat("{0}supportFunctions._not", NL());
-////                    break;
-////                case CodeTypes.tLessThanToken:
-////                    sb.AppendFormat("{0}supportFunctions._lt", NL());
-////                    break;
-////                case CodeTypes.tLessThanOrEqualToken:
-////                    sb.AppendFormat("{0}supportFunctions._leq", NL());
-////                    break;
-////                case CodeTypes.tMoreThanOrEqualToken:
-////                    sb.AppendFormat("{0}supportFunctions._geq", NL());
-////                    break;
-////                case CodeTypes.tMoreThanToken:
-////                    sb.AppendFormat("{0}supportFunctions._gt", NL());
-////                    break;
-////                case CodeTypes.tXorToken:
-////                    sb.AppendFormat("{0}supportFunctions._xor", NL());
-////                    break;
-////                default:
-////                    var ae =
-////                        new SBWApplicationException(
-////                            string.Format("Unknown token in substituteTerms: {0}", s.tokenToString(s.token)),
-////                            "Exception raised in Module:roadRunner, Method:substituteTerms");
-////                    throw ae;
-////            }
-////        }
+
+void ModelGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb)
+{
+	CodeTypes codeType = s.token();
+    switch(codeType)
+    {
+        case CodeTypes::tWordToken:
+        case CodeTypes::tExternalToken:
+        case CodeTypes::tExtToken:
+//            SubstituteWords(reactionName, bFixAmounts, s, sb);
+            break;
+//
+        case CodeTypes::tDoubleToken:
+//            sb.Append("(double)" + WriteDouble(s.tokenDouble));
+//            break;
+        case CodeTypes::tIntToken:
+//            sb.Append("(double)" + WriteDouble((double)s.tokenInteger));
+//            break;
+        case CodeTypes::tPlusToken:
+//            sb.AppendFormat("+{0}\t", NL());
+//            break;
+        case CodeTypes::tMinusToken:
+//            sb.AppendFormat("-{0}\t", NL());
+//            break;
+        case CodeTypes::tDivToken:
+//            sb.AppendFormat("/{0}\t", NL());
+//            break;
+        case CodeTypes::tMultToken:
+//            sb.AppendFormat("*{0}\t", NL());
+//            break;
+        case CodeTypes::tPowerToken:
+//            sb.AppendFormat("^{0}\t", NL());
+//            break;
+        case CodeTypes::tLParenToken:
+//            sb.Append("(");
+//            break;
+        case CodeTypes::tRParenToken:
+//            sb.AppendFormat("){0}\t", NL());
+//            break;
+        case CodeTypes::tCommaToken:
+//            sb.Append(",");
+//            break;
+        case CodeTypes::tEqualsToken:
+//            sb.AppendFormat(" = {0}\t", NL());
+//            break;
+        case CodeTypes::tTimeWord1:
+//            sb.Append("time");
+//            break;
+        case CodeTypes::tTimeWord2:
+//            sb.Append("time");
+//            break;
+        case CodeTypes::tTimeWord3:
+//            sb.Append("time");
+//            break;
+        case CodeTypes::tAndToken:
+//            sb.AppendFormat("{0}supportFunctions._and", NL());
+//            break;
+        case CodeTypes::tOrToken:
+//            sb.AppendFormat("{0}supportFunctions._or", NL());
+//            break;
+        case CodeTypes::tNotToken:
+//            sb.AppendFormat("{0}supportFunctions._not", NL());
+//            break;
+        case CodeTypes::tLessThanToken:
+//            sb.AppendFormat("{0}supportFunctions._lt", NL());
+//            break;
+        case CodeTypes::tLessThanOrEqualToken:
+//            sb.AppendFormat("{0}supportFunctions._leq", NL());
+//            break;
+        case CodeTypes::tMoreThanOrEqualToken:
+//            sb.AppendFormat("{0}supportFunctions._geq", NL());
+//            break;
+        case CodeTypes::tMoreThanToken:
+//            sb.AppendFormat("{0}supportFunctions._gt", NL());
+//            break;
+        case CodeTypes::tXorToken:
+//            sb.AppendFormat("{0}supportFunctions._xor", NL());
+//            break;
+        default:
+        ;
+//            Exception ae = SBWApplicationException(
+//                    Format("Unknown token in substituteTerms: {0}", s.tokenToString(s.token)),
+//                    "Exception raised in Module:roadRunner, Method:substituteTerms");
+//            throw ae;
+    }
+}
+
+
 ASTNode* ModelGenerator::CleanEquation(ASTNode* astP)
 {
 	ASTNode& ast = *astP; //For convenience...
@@ -1046,30 +1050,34 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
     	return string("0");
     }
 
-//     var s = new Scanner.Scanner();
-//     Stream ss = new MemoryStream(Encoding.Default.GetBytes(equation));
-//     s.stream = ss;
-//     s.startScanner();
-//     s.nextToken();
-//     var sb = new StringBuilder();
-//
-//     try
-//     {
-//         while (s.token != CodeTypes.tEndOfStreamToken)
-//         {
-//             SubstituteToken(reactionName, bFixAmounts, s, sb);
-//             s.nextToken();
-//         }
-//     }
-//     catch (SBWApplicationException)
-//     {
-//         throw;
-//     }
-//     catch (Exception e)
-//     {
-//         throw new SBWApplicationException(e.Message);
-//     }
-//     return sb.ToString();
+     Scanner s ;//= new Scanner.Scanner();
+     //     Stream ss = new MemoryStream(Encoding.Default.GetBytes(equation));
+     stringstream ss;
+     ss<<equation;
+
+
+     s.AssignStream(ss);
+     s.startScanner();
+     s.nextToken();
+     StringBuilder sb;// = new StringBuilder();
+
+    try
+    {
+    	while (s.token() != CodeTypes::tEndOfStreamToken)
+       	{
+        	SubstituteToken(reactionName, bFixAmounts, s, sb);
+        	s.nextToken();
+       	}
+    }
+    catch (SBWApplicationException)
+    {
+    	throw;
+    }
+    catch (Exception e)
+    {
+       throw new SBWApplicationException(e.Message);
+    }
+    return sb.ToString();
 }
 
 string ModelGenerator::NL()

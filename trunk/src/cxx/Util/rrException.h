@@ -41,6 +41,12 @@ class RR_DECLSPEC SBWApplicationException : public RRException
         : RRException(msg){}
 };
 
+class RR_DECLSPEC ScannerException : public RRException
+{
+	public:
+	    ScannerException(const string& msg)
+        : RRException(msg){}
+};
 
 
 }//namepsace rr

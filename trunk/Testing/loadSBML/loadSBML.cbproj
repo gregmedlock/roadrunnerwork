@@ -74,9 +74,17 @@
 			<None Include="..\..\src\cxx\rrLogger.h">
 				<BuildOrder>7</BuildOrder>
 			</None>
+			<CppCompile Include="..\..\src\cxx\Scanner\rrCodeTypes.cpp">
+				<DependentOn>..\..\src\cxx\Scanner\rrCodeTypes.h</DependentOn>
+				<BuildOrder>10</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\cxx\Scanner\rrScanner.cpp">
 				<DependentOn>..\..\src\cxx\Scanner\rrScanner.h</DependentOn>
-				<BuildOrder>9</BuildOrder>
+				<BuildOrder>11</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\cxx\Scanner\rrToken.cpp">
+				<DependentOn>..\..\src\cxx\Scanner\rrToken.h</DependentOn>
+				<BuildOrder>11</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\cxx\Util\rrLibStructSupport.cpp">
 				<BuildOrder>6</BuildOrder>
