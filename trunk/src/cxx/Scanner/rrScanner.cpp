@@ -26,18 +26,16 @@ timeWord2("Time"),
 timeWord3("TIME"),
 FromQueue(true),
 IgnoreNewLines(true),
-currentToken(),
 fch('\0'),
-previousToken(),
 tokenDouble(),
 tokenInteger(),
 tokenScalar(), // Used to retrieve int or double
 tokenString(),
-pStream(NULL)
+pStream(NULL),
+previousToken(CodeTypes::tEmptyToken),
+currentToken(CodeTypes::tEmptyToken)
 {
     wordTable;
-    previousToken;
-    currentToken;
     tokenQueue;
 	FCharTable.resize(255);
 	buffer.resize(255);
@@ -47,14 +45,30 @@ pStream(NULL)
 void Scanner::initScanner()
 {
     char ch;
-    for (ch = '\x00'; ch < '\xFF'; ch++)
-        FCharTable[ch] = TCharCode::cSPECIAL;
+//    for (ch = '\x00'; ch < '\xFF'; ch++)
+//    {
+//        FCharTable[ch] = TCharCode::cSPECIAL;
+//    }
+
+    for (int i = 0; i < 48; i++)
+    {
+        FCharTable[i] = TCharCode::cSPECIAL;
+    }
+
     for (ch = '0'; ch <= '9'; ch++)
+    {
         FCharTable[ch] = TCharCode::cDIGIT;
+    }
+
     for (ch = 'A'; ch <= 'Z'; ch++)
+    {
         FCharTable[ch] = TCharCode::cLETTER;
+    }
+
     for (ch = 'a'; ch <= 'z'; ch++)
+    {
         FCharTable[ch] = TCharCode::cLETTER;
+    }
 
     FCharTable['.'] = TCharCode::cPOINT;
     FCharTable['"'] = TCharCode::cDOUBLEQUOTE;
@@ -170,7 +184,6 @@ void Scanner::skipBlanks()
 // Scan for a word, words start with letter or underscore then continue
 // with letters, digits or underscore
 // -------------------------------------------------------------------
-
 void Scanner::getWord()
 {
     while ((FCharTable[fch] == TCharCode::cLETTER)
@@ -581,11 +594,9 @@ bool Scanner::IsQueueEmpty()
     return (tokenQueue.size() == 0);
 }
 
-
 // -------------------------------------------------------------------
 // Add the current token to the queue
 // -------------------------------------------------------------------
-
 void Scanner::AddTokenToQueue()
 {
     Token t;// = new Token();
@@ -605,12 +616,9 @@ void Scanner::AddTokenToQueue()
 void Scanner::getTokenFromQueue()
 {
 //    Token t = (Token) tokenQueue.Dequeue();
-
-
     Token t = (Token) 	tokenQueue.front();
     tokenQueue.pop();
-
-    ftoken = t.tokenCode;
+    ftoken 		= t.tokenCode;
     tokenString = t.tokenString;
     tokenScalar = t.tokenValue;
     tokenInteger = t.tokenInteger;
@@ -637,9 +645,9 @@ void Scanner::nextTokenInternal()
     // from the queue and exit. If not, read as normal from the stream.
     // Checking the queue before reading from the stream can be turned off and on
     // by setting the FromQueue Flag.
-    if (FromQueue)
+    if(FromQueue)
     {
-        if (! IsQueueEmpty())
+        if(!IsQueueEmpty())
         {
             getTokenFromQueue();
             return;
@@ -649,7 +657,8 @@ void Scanner::nextTokenInternal()
     skipBlanks();
     tokenString = "";
 
-    switch (FCharTable[fch])
+    TCharCode code = FCharTable[fch];
+    switch(code)
     {
         case TCharCode::cLETTER:
         case TCharCode::cUNDERSCORE:
@@ -713,7 +722,6 @@ void Scanner::UnGetToken()
 // -------------------------------------------------------------------
 // Given a token, this function returns the string eqauivalent
 // -------------------------------------------------------------------
-
 string Scanner::tokenToString(const CodeTypes& code)
 {
     switch (code)
@@ -788,7 +796,6 @@ string Scanner::tokenToString(const CodeTypes& code)
             return "if";
         case CodeTypes::tWhileToken:
             return "while";
-            ;
         case CodeTypes::tdefnToken:
             return "defn";
         case CodeTypes::tEndToken:

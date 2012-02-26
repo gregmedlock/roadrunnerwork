@@ -53,8 +53,8 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         string                              convertSymbolToGP(const string& parameterName);
         string                              convertUserFunctionExpression(const string& equation);
         string                              substituteTerms(const int& numReactions, const string& reactionName, const string& equation);
-        //        void SubstituteEquation(const string& reactionName, LibRoadRunner.Scanner.Scanner s, StringBuilder sb);
-        //        void SubstituteWords(const string& reactionName, bool bFixAmounts, LibRoadRunner.Scanner.Scanner s, StringBuilder sb);
+        void 								SubstituteEquation(const string& reactionName, Scanner& s, StringBuilder& sb);
+        void 								SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb);
         void 								SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb);
 		ASTNode* 							CleanEquation(ASTNode* ast);
         string 		                		CleanEquation(const string& equation);

@@ -379,11 +379,49 @@ class TModel : IModel
 	// Compute the reaction rates
 	public void computeReactionRates (double time, double[] y)
 	{
-		_rates[0] = ;
-		_rates[1] = ;
-		_rates[2] = ;
-		_rates[3] = ;
-		_rates[4] = ;
+		_rates[0] = _gp[0]*
+	(_bc[0]-
+	y[0]/
+	_gp[1])
+	/
+	((double)1+
+	_bc[0]+
+	y[0]+
+	Math.Pow(y[2],_gp[2])
+	)
+	;
+		_rates[1] = ((double)10*
+	y[0]-
+	(double)2*
+	y[3])
+	/
+	((double)1+
+	y[0]+
+	y[3])
+	;
+		_rates[2] = ((double)10*
+	y[3]-
+	(double)2*
+	y[1])
+	/
+	((double)1+
+	y[3]+
+	y[1])
+	;
+		_rates[3] = ((double)10*
+	y[1]-
+	(double)2*
+	y[2])
+	/
+	((double)1+
+	y[1]+
+	y[2])
+	;
+		_rates[4] = _gp[3]*
+	y[2]/
+	(_gp[4]+
+	y[2])
+	;
 	}
 
 	// Model Function

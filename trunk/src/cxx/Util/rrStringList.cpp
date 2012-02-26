@@ -12,21 +12,15 @@ namespace rr
 {
 
 StringList::StringList()
-{
-
-}
+{}
 
 StringList::StringList(const vector<string>& strings)
 :
 mStrings(strings)
-{
-
-}
+{}
 
 StringList::~StringList()
-{
-
-}
+{}
 
 StringList::StringList(const StringList& cp)
 {
@@ -42,6 +36,11 @@ void StringList::Add(const string& str)
 int StringList::find(const string& item)
 {
 	return IndexOf(mStrings, item);
+}
+
+bool StringList::Contains(const string& item)
+{
+	return std::find(mStrings.begin(), mStrings.end(), item) != mStrings.end() ? true : false;
 }
 
 } //namespace rr

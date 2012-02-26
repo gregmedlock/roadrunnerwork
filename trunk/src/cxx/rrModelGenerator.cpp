@@ -610,367 +610,374 @@ string ModelGenerator::substituteTerms(const int& numReactions, const string& re
     return substituteTerms(reactionName, equation, false);
 }
 
-////         void ModelGenerator::SubstituteEquation(const string& reactionName, LibRoadRunner.Scanner.Scanner s, (StringBuilder& sb)
-////        {
-////            switch (s.tokenString)
-////            {
-////                case "pow":
-////                    sb.Append("Math.Pow");
-////                    break;
-////                case "sqrt":
-////                    sb.Append("Math.Sqrt");
-////                    break;
-////                case "log":
-////                    sb.Append("supportFunctions._log");
-////                    break;
-////                case "floor":
-////                    sb.Append("Math.Floor");
-////                    break;
-////                case "ceil":
-////                    sb.Append("Math.Ceiling");
-////                    break;
-////                case "factorial":
-////                    sb.Append("supportFunctions._factorial");
-////                    break;
-////                case "log10":
-////                    sb.Append("Math.Log10");
-////                    break;
-////                case "exp":
-////                    sb.Append("Math.Exp");
-////                    break;
-////                case "abs":
-////                    sb.Append("Math.Abs");
-////                    break;
-////                case "sin":
-////                    sb.Append("Math.Sin");
-////                    break;
-////                case "cos":
-////                    sb.Append("Math.Cos");
-////                    break;
-////                case "tan":
-////                    sb.Append("Math.Tan");
-////                    break;
-////                case "asin":
-////                    sb.Append("Math.Asin");
-////                    break;
-////                case "acos":
-////                    sb.Append("Math.Acos");
-////                    break;
-////                case "atan":
-////                    sb.Append("Math.Atan");
-////                    break;
-////                case "sec":
-////                    sb.Append("MathKGI.Sec");
-////                    break;
-////                case "csc":
-////                    sb.Append("MathKGI.Csc");
-////                    break;
-////                case "cot":
-////                    sb.Append("MathKGI.Cot");
-////                    break;
-////                case "arcsec":
-////                    sb.Append("MathKGI.Asec");
-////                    break;
-////                case "arccsc":
-////                    sb.Append("MathKGI.Acsc");
-////                    break;
-////                case "arccot":
-////                    sb.Append("MathKGI.Acot");
-////                    break;
-////                case "sinh":
-////                    sb.Append("Math.Sinh");
-////                    break;
-////                case "cosh":
-////                    sb.Append("Math.Cosh");
-////                    break;
-////                case "tanh":
-////                    sb.Append("Math.Tanh");
-////                    break;
-////                case "arcsinh":
-////                    sb.Append("MathKGI.Asinh");
-////                    break;
-////                case "arccosh":
-////                    sb.Append("MathKGI.Acosh");
-////                    break;
-////                case "arctanh":
-////                    sb.Append("MathKGI.Atanh");
-////                    break;
-////                case "sech":
-////                    sb.Append("MathKGI.Sech");
-////                    break;
-////                case "csch":
-////                    sb.Append("MathKGI.Csch");
-////                    break;
-////                case "coth":
-////                    sb.Append("MathKGI.Coth");
-////                    break;
-////                case "arcsech":
-////                    sb.Append("MathKGI.Asech");
-////                    break;
-////                case "arccsch":
-////                    sb.Append("MathKGI.Acsch");
-////                    break;
-////                case "arccoth":
-////                    sb.Append("MathKGI.Acoth");
-////                    break;
-////                case "pi":
-////                    sb.Append("Math.PI");
-////                    break;
-////                case "avogadro":
-////                    sb.Append("6.02214179e23");
-////                    break;
-////                case "exponentiale":
-////                    sb.Append("Math.E");
-////                    break;
-////                case "true":
-////                    //sb.Append("true");
-////                    sb.Append("1.0");
-////                    break;
-////                case "false":
-////                    //sb.Append("false");
-////                    sb.Append("0.0");
-////                    break;
-////                case "NaN":
-////                    sb.Append("double.NaN");
-////                    break;
-////                case "INF":
-////                    sb.Append("double.PositiveInfinity");
-////                    break;
-////                case "geq":
-////                    sb.Append("supportFunctions._geq");
-////                    break;
-////                case "leq":
-////                    sb.Append("supportFunctions._leq");
-////                    break;
-////                case "gt":
-////                    sb.Append("supportFunctions._gt");
-////                    break;
-////                case "lt":
-////                    sb.Append("supportFunctions._lt");
-////                    break;
-////                case "eq":
-////                    sb.Append("supportFunctions._eq");
-////                    break;
-////                case "neq":
-////                    sb.Append("supportFunctions._neq");
-////                    break;
-////                case "and":
-////                    sb.Append("supportFunction._and");
-////                    break;
-////                case "or":
-////                    sb.Append("supportFunction._or");
-////                    break;
-////                case "not":
-////                    sb.Append("supportFunction._not");
-////                    break;
-////                case "xor":
-////                    sb.Append("supportFunction._xor");
-////                    break;
-////                case "root":
-////                    sb.Append("supportFunctions._root");
-////                    break;
-////                case "piecewise":
-////                    sb.Append("supportFunctions._piecewise");
-////                    break;
-////                case "delay":
-////                    sb.Append("supportFunctions._delay");
-////                    Warnings.Add("RoadRunner does not yet support delay differential equations in SBML, they will be ignored (i.e. treated as delay = 0).");
-////                    break;
-////                default:
-////                    bool bReplaced = false;
-////                    int index;
-////                    if (reactionList.find(reactionName, out index))
-////                    {
-////                        int nParamIndex = 0;
-////                        if (localParameterList[index].find(s.tokenString, out nParamIndex))
-////                        {
-////                            sb.Append("_lp[" + index + "][" + nParamIndex + "]");
-////                            bReplaced = true;
-////                            break;
-////                        }
-////                    }
-////
-////                    if (boundarySpeciesList.find(s.tokenString, out index))
-////                    {
-////                        sb.Append("_bc[" + index + "]");
-////                        bReplaced = true;
-////                        break;
-////                    }
-////                    if (!bReplaced &&
-////                        (_functionParameters != NULL && !_functionParameters.Contains(s.tokenString)))
-////                    {
-////                        throw new ArgumentException("Token '" + s.tokenString + "' not recognized.");
-////                    }
-////                    break;
-////            }
-////        }
-////         void ModelGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, LibRoadRunner.Scanner.Scanner s, (StringBuilder& sb)
-////        {
-////            // Global parameters have priority
-////            int index;
-////            if (globalParameterList.find(s.tokenString, out index))
-////            {
-////                sb.AppendFormat("_gp[{0}]", index);
-////            }
-////            else if (boundarySpeciesList.find(s.tokenString, out index))
-////            {
-////                sb.AppendFormat("_bc[{0}]", index);
-////
-////                var symbol = boundarySpeciesList[index];
-////                if (symbol.hasOnlySubstance)
-////                {
-////                    // we only store concentration for the boundary so we better
-////                    // fix that.
-////                    int nCompIndex = 0;
-////                    if (compartmentList.find(symbol.compartmentName, out nCompIndex))
-////                    {
-////                        sb.AppendFormat("{0}_c[{1}]", STR_FixAmountCompartments, nCompIndex);
-////                    }
-////                }
-////
-////
-////                //if (!bFixAmounts) return;
-////                //
-////                //string compartmentId = "";
-////                //if (NOM.MultiplyCompartment(s.tokenString, out compartmentId))
-////                //{
-////                //    int nCompIndex = 0;
-////                //    if (compartmentId != NULL && compartmentList.find(compartmentId, out nCompIndex))
-////                //    {
-////                //        sb.AppendFormat("{0}_c[{1}]", STR_FixAmountCompartments, nCompIndex);
-////                //    }
-////                //}
-////            }
-////            else if (floatingSpeciesConcentrationList.find(s.tokenString, out index))
-////            {
-////                var floating1 = floatingSpeciesConcentrationList[index];
-////                if (floating1.hasOnlySubstance)
-////                {
-////                    sb.AppendFormat("amounts[{0}]", index);
-////                }
-////                else
-////                {
-////                    sb.AppendFormat("_y[{0}]", index);
-////                }
-////
-////                //if (!bFixAmounts) return;
-////                //
-////                //
-////                //string compartmentId = "";
-////                //if (NOM.MultiplyCompartment(s.tokenString, out compartmentId))
-////                //{
-////                //    int nCompIndex = 0;
-////                //    if (compartmentId != NULL && compartmentList.find(compartmentId, out nCompIndex))
-////                //    {
-////                //        sb.AppendFormat("{0}_c[{1}]", STR_FixAmountCompartments, nCompIndex);
-////                //    }
-////                //}
-////            }
-////            else if (compartmentList.find(s.tokenString, out index))
-////            {
-////                sb.AppendFormat("_c[{0}]", index);
-////            }
-////            else if (_functionNames.Contains(s.tokenString))
-////            {
-////                sb.AppendFormat("{0} ", s.tokenString);
-////            }
-////            else if (ModifiableSpeciesReferenceList.find(s.tokenString, out index))
-////            {
-////                sb.AppendFormat("_sr[{0}]", index);
-////            }
-////            else if (reactionList.find(s.tokenString, out index))
-////            {
-////                sb.AppendFormat("_rates[{0}]", index);
-////            }
-////            else
-////            {
-////                SubstituteEquation(reactionName, s, sb);
-////            }
-////        }
+void ModelGenerator::SubstituteEquation(const string& reactionName, Scanner& s, StringBuilder& sb)
+{
+	string theToken(s.tokenString);
+	if(theToken == "pow")
+    {
+    	sb.Append("Math.Pow");
+    }
+//	switch (s.tokenString)
+//    {
+//        case "pow":
+//            sb.Append("Math.Pow");
+//            break;
+//        case "sqrt":
+//            sb.Append("Math.Sqrt");
+//            break;
+//        case "log":
+//            sb.Append("supportFunctions._log");
+//            break;
+//        case "floor":
+//            sb.Append("Math.Floor");
+//            break;
+//        case "ceil":
+//            sb.Append("Math.Ceiling");
+//            break;
+//        case "factorial":
+//            sb.Append("supportFunctions._factorial");
+//            break;
+//        case "log10":
+//            sb.Append("Math.Log10");
+//            break;
+//        case "exp":
+//            sb.Append("Math.Exp");
+//            break;
+//        case "abs":
+//            sb.Append("Math.Abs");
+//            break;
+//        case "sin":
+//            sb.Append("Math.Sin");
+//            break;
+//        case "cos":
+//            sb.Append("Math.Cos");
+//            break;
+//        case "tan":
+//            sb.Append("Math.Tan");
+//            break;
+//        case "asin":
+//            sb.Append("Math.Asin");
+//            break;
+//        case "acos":
+//            sb.Append("Math.Acos");
+//            break;
+//        case "atan":
+//            sb.Append("Math.Atan");
+//            break;
+//        case "sec":
+//            sb.Append("MathKGI.Sec");
+//            break;
+//        case "csc":
+//            sb.Append("MathKGI.Csc");
+//            break;
+//        case "cot":
+//            sb.Append("MathKGI.Cot");
+//            break;
+//        case "arcsec":
+//            sb.Append("MathKGI.Asec");
+//            break;
+//        case "arccsc":
+//            sb.Append("MathKGI.Acsc");
+//            break;
+//        case "arccot":
+//            sb.Append("MathKGI.Acot");
+//            break;
+//        case "sinh":
+//            sb.Append("Math.Sinh");
+//            break;
+//        case "cosh":
+//            sb.Append("Math.Cosh");
+//            break;
+//        case "tanh":
+//            sb.Append("Math.Tanh");
+//            break;
+//        case "arcsinh":
+//            sb.Append("MathKGI.Asinh");
+//            break;
+//        case "arccosh":
+//            sb.Append("MathKGI.Acosh");
+//            break;
+//        case "arctanh":
+//            sb.Append("MathKGI.Atanh");
+//            break;
+//        case "sech":
+//            sb.Append("MathKGI.Sech");
+//            break;
+//        case "csch":
+//            sb.Append("MathKGI.Csch");
+//            break;
+//        case "coth":
+//            sb.Append("MathKGI.Coth");
+//            break;
+//        case "arcsech":
+//            sb.Append("MathKGI.Asech");
+//            break;
+//        case "arccsch":
+//            sb.Append("MathKGI.Acsch");
+//            break;
+//        case "arccoth":
+//            sb.Append("MathKGI.Acoth");
+//            break;
+//        case "pi":
+//            sb.Append("Math.PI");
+//            break;
+//        case "avogadro":
+//            sb.Append("6.02214179e23");
+//            break;
+//        case "exponentiale":
+//            sb.Append("Math.E");
+//            break;
+//        case "true":
+//            //sb.Append("true");
+//            sb.Append("1.0");
+//            break;
+//        case "false":
+//            //sb.Append("false");
+//            sb.Append("0.0");
+//            break;
+//        case "NaN":
+//            sb.Append("double.NaN");
+//            break;
+//        case "INF":
+//            sb.Append("double.PositiveInfinity");
+//            break;
+//        case "geq":
+//            sb.Append("supportFunctions._geq");
+//            break;
+//        case "leq":
+//            sb.Append("supportFunctions._leq");
+//            break;
+//        case "gt":
+//            sb.Append("supportFunctions._gt");
+//            break;
+//        case "lt":
+//            sb.Append("supportFunctions._lt");
+//            break;
+//        case "eq":
+//            sb.Append("supportFunctions._eq");
+//            break;
+//        case "neq":
+//            sb.Append("supportFunctions._neq");
+//            break;
+//        case "and":
+//            sb.Append("supportFunction._and");
+//            break;
+//        case "or":
+//            sb.Append("supportFunction._or");
+//            break;
+//        case "not":
+//            sb.Append("supportFunction._not");
+//            break;
+//        case "xor":
+//            sb.Append("supportFunction._xor");
+//            break;
+//        case "root":
+//            sb.Append("supportFunctions._root");
+//            break;
+//        case "piecewise":
+//            sb.Append("supportFunctions._piecewise");
+//            break;
+//        case "delay":
+//            sb.Append("supportFunctions._delay");
+//            Warnings.Add("RoadRunner does not yet support delay differential equations in SBML, they will be ignored (i.e. treated as delay = 0).");
+//            break;
+//        default:
+//            bool bReplaced = false;
+//            int index;
+//            if (reactionList.find(reactionName, out index))
+//            {
+//                int nParamIndex = 0;
+//                if (localParameterList[index].find(s.tokenString, out nParamIndex))
+//                {
+//                    sb.Append("_lp[" + index + "][" + nParamIndex + "]");
+//                    bReplaced = true;
+//                    break;
+//                }
+//            }
+//
+//            if (boundarySpeciesList.find(s.tokenString, out index))
+//            {
+//                sb.Append("_bc[" + index + "]");
+//                bReplaced = true;
+//                break;
+//            }
+//            if (!bReplaced &&
+//                (_functionParameters != NULL && !_functionParameters.Contains(s.tokenString)))
+//            {
+//                throw new ArgumentException("Token '" + s.tokenString + "' not recognized.");
+//            }
+//            break;
+//    }
+}
+
+void ModelGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb)
+{
+    // Global parameters have priority
+    int index;
+    if (globalParameterList.find(s.tokenString, index))
+    {
+        sb.AppendFormat("_gp[{0}]", index);
+    }
+    else if (boundarySpeciesList.find(s.tokenString, index))
+    {
+        sb.AppendFormat("_bc[{0}]", index);
+
+        Symbol symbol = boundarySpeciesList[index];
+        if (symbol.hasOnlySubstance)
+        {
+            // we only store concentration for the boundary so we better
+            // fix that.
+            int nCompIndex = 0;
+            if (compartmentList.find(symbol.compartmentName, nCompIndex))
+            {
+                sb.AppendFormat("{0}_c[{1}]", STR_FixAmountCompartments, nCompIndex);
+            }
+        }
+
+
+        //if (!bFixAmounts) return;
+        //
+        //string compartmentId = "";
+        //if (NOM.MultiplyCompartment(s.tokenString, out compartmentId))
+        //{
+        //    int nCompIndex = 0;
+        //    if (compartmentId != NULL && compartmentList.find(compartmentId, out nCompIndex))
+        //    {
+        //        sb.AppendFormat("{0}_c[{1}]", STR_FixAmountCompartments, nCompIndex);
+        //    }
+        //}
+    }
+    else if (floatingSpeciesConcentrationList.find(s.tokenString, index))
+    {
+        Symbol floating1 = floatingSpeciesConcentrationList[index];
+        if (floating1.hasOnlySubstance)
+        {
+            sb.AppendFormat("amounts[{0}]", index);
+        }
+        else
+        {
+            sb.AppendFormat("_y[{0}]", index);
+        }
+
+        //if (!bFixAmounts) return;
+        //
+        //
+        //string compartmentId = "";
+        //if (NOM.MultiplyCompartment(s.tokenString, out compartmentId))
+        //{
+        //    int nCompIndex = 0;
+        //    if (compartmentId != NULL && compartmentList.find(compartmentId, out nCompIndex))
+        //    {
+        //        sb.AppendFormat("{0}_c[{1}]", STR_FixAmountCompartments, nCompIndex);
+        //    }
+        //}
+    }
+    else if (compartmentList.find(s.tokenString, index))
+    {
+        sb.AppendFormat("_c[{0}]", index);
+    }
+    else if (_functionNames.Contains(s.tokenString))
+    {
+        sb.AppendFormat("{0} ", s.tokenString);
+    }
+    else if (ModifiableSpeciesReferenceList.find(s.tokenString, index))
+    {
+        sb.AppendFormat("_sr[{0}]", index);
+    }
+    else if (reactionList.find(s.tokenString, index))
+    {
+        sb.AppendFormat("_rates[{0}]", index);
+    }
+    else
+    {
+        SubstituteEquation(reactionName, s, sb);
+	}
+}
 
 void ModelGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb)
 {
+	string aToken = s.tokenString;
 	CodeTypes codeType = s.token();
     switch(codeType)
     {
         case CodeTypes::tWordToken:
         case CodeTypes::tExternalToken:
         case CodeTypes::tExtToken:
-//            SubstituteWords(reactionName, bFixAmounts, s, sb);
+            SubstituteWords(reactionName, bFixAmounts, s, sb);
             break;
-//
+
         case CodeTypes::tDoubleToken:
-//            sb.Append("(double)" + WriteDouble(s.tokenDouble));
-//            break;
+            sb.Append("(double)" + WriteDouble(s.tokenDouble));
+            break;
         case CodeTypes::tIntToken:
-//            sb.Append("(double)" + WriteDouble((double)s.tokenInteger));
-//            break;
+            sb.Append("(double)" + WriteDouble((double)s.tokenInteger));
+            break;
         case CodeTypes::tPlusToken:
-//            sb.AppendFormat("+{0}\t", NL());
-//            break;
+            sb.AppendFormat("+{0}\t", NL());
+            break;
         case CodeTypes::tMinusToken:
-//            sb.AppendFormat("-{0}\t", NL());
-//            break;
+            sb.AppendFormat("-{0}\t", NL());
+            break;
         case CodeTypes::tDivToken:
-//            sb.AppendFormat("/{0}\t", NL());
-//            break;
+            sb.AppendFormat("/{0}\t", NL());
+            break;
         case CodeTypes::tMultToken:
-//            sb.AppendFormat("*{0}\t", NL());
-//            break;
+            sb.AppendFormat("*{0}\t", NL());
+            break;
         case CodeTypes::tPowerToken:
-//            sb.AppendFormat("^{0}\t", NL());
-//            break;
+            sb.AppendFormat("^{0}\t", NL());
+            break;
         case CodeTypes::tLParenToken:
-//            sb.Append("(");
-//            break;
+            sb.Append("(");
+            break;
         case CodeTypes::tRParenToken:
-//            sb.AppendFormat("){0}\t", NL());
-//            break;
+            sb.AppendFormat("){0}\t", NL());
+            break;
         case CodeTypes::tCommaToken:
-//            sb.Append(",");
-//            break;
+            sb.Append(",");
+            break;
         case CodeTypes::tEqualsToken:
-//            sb.AppendFormat(" = {0}\t", NL());
-//            break;
-        case CodeTypes::tTimeWord1:
-//            sb.Append("time");
-//            break;
+            sb.AppendFormat(" = {0}\t", NL());
+            break;
+      case CodeTypes::tTimeWord1:
+            sb.Append("time");
+            break;
         case CodeTypes::tTimeWord2:
-//            sb.Append("time");
-//            break;
+            sb.Append("time");
+            break;
         case CodeTypes::tTimeWord3:
-//            sb.Append("time");
-//            break;
+            sb.Append("time");
+            break;
         case CodeTypes::tAndToken:
-//            sb.AppendFormat("{0}supportFunctions._and", NL());
-//            break;
+            sb.AppendFormat("{0}supportFunctions._and", NL());
+            break;
         case CodeTypes::tOrToken:
-//            sb.AppendFormat("{0}supportFunctions._or", NL());
-//            break;
+            sb.AppendFormat("{0}supportFunctions._or", NL());
+            break;
         case CodeTypes::tNotToken:
-//            sb.AppendFormat("{0}supportFunctions._not", NL());
-//            break;
+            sb.AppendFormat("{0}supportFunctions._not", NL());
+            break;
         case CodeTypes::tLessThanToken:
-//            sb.AppendFormat("{0}supportFunctions._lt", NL());
-//            break;
+            sb.AppendFormat("{0}supportFunctions._lt", NL());
+            break;
         case CodeTypes::tLessThanOrEqualToken:
-//            sb.AppendFormat("{0}supportFunctions._leq", NL());
-//            break;
+            sb.AppendFormat("{0}supportFunctions._leq", NL());
+            break;
         case CodeTypes::tMoreThanOrEqualToken:
-//            sb.AppendFormat("{0}supportFunctions._geq", NL());
-//            break;
+            sb.AppendFormat("{0}supportFunctions._geq", NL());
+            break;
         case CodeTypes::tMoreThanToken:
-//            sb.AppendFormat("{0}supportFunctions._gt", NL());
-//            break;
+            sb.AppendFormat("{0}supportFunctions._gt", NL());
+            break;
         case CodeTypes::tXorToken:
-//            sb.AppendFormat("{0}supportFunctions._xor", NL());
-//            break;
+            sb.AppendFormat("{0}supportFunctions._xor", NL());
+            break;
         default:
-        ;
-//            Exception ae = SBWApplicationException(
-//                    Format("Unknown token in substituteTerms: {0}", s.tokenToString(s.token)),
-//                    "Exception raised in Module:roadRunner, Method:substituteTerms");
-//            throw ae;
+        string aToken = s.tokenToString(s.token());
+        Exception ae = Exception(
+                 Format("Unknown token in substituteTerms: {0}", aToken,
+                 "Exception raised in Module:roadRunner, Method:substituteTerms"));
+         throw ae;
     }
 }
 

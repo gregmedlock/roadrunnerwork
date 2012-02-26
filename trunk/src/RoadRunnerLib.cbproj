@@ -172,6 +172,10 @@
 				<DependentOn>cxx\Scanner\rrScanner.h</DependentOn>
 				<BuildOrder>49</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="cxx\Scanner\rrToken.cpp">
+				<DependentOn>cxx\Scanner\rrToken.h</DependentOn>
+				<BuildOrder>50</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="cxx\Solvers\rrCvodeInterface.cpp">
 				<DependentOn>cxx\Solvers\rrCvodeInterface.h</DependentOn>
 				<BuildOrder>17</BuildOrder>

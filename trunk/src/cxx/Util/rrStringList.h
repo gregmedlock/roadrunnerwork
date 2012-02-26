@@ -27,6 +27,7 @@ class RR_DECLSPEC StringList : public rrObject
 	    string&  			        operator[](const int& index){return mStrings[index];}
         int					        find(const string& item);
         void						empty(){mStrings.clear();}
+        bool						Contains(const string& item);
 };
 
 }
