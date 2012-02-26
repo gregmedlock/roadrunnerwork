@@ -24,40 +24,15 @@ class RR_DECLSPEC Symbol : public rrObject
         string              keyName; 			// Used when storing local parameters, keyName is the reaction name
         string              name;
 
-        Symbol(const string& _name = "", const double& _value = 0)
-        {
-            name = _name;
-            value = _value;
-            rateRule = false;
-        }
-
-        Symbol(const string& _keyName, const string& _name, const double& _value)
-        {
-            keyName = _keyName;
-            name = _name;
-            value = _value;
-            rateRule = false;
-        }
-
-        Symbol(const string& _name, const double _value, const string& _compartmentName)
-        {
-            name = _name;
-            value = _value;
-            compartmentName = _compartmentName;
-        }
-
-        Symbol(const string& _name, const double& _value, const string& _compartmentName, const string& _formula)
-        {
-            name = _name;
-            value = _value;
-            compartmentName = _compartmentName;
-            formula = _formula;
-        }
+        //Constructors
+        Symbol(const string& _name = "", const double& _value = 0);
+        Symbol(const string& _keyName, const string& _name, const double& _value);
+        Symbol(const string& _name, const double _value, const string& _compartmentName);
+        Symbol(const string& _name, const double& _value, const string& _compartmentName, const string& _formula);
 }; //class rr::Symbol
 }//namespace rr
-
-
 #endif
+
 //namespace LibRoadRunner.Util
 //{
 //    public class Symbol

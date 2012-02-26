@@ -278,10 +278,10 @@ string ToString(const bool& val)
     return val ? "true" : "false";
 }
 
-string ToString(const double& d)
+string ToString(const double& d, const string& format)
 {
     char sBuffer[256];
-    sprintf(sBuffer,"%e", d);
+    sprintf(sBuffer, format.c_str(), d);
     return string(sBuffer);
 }
 

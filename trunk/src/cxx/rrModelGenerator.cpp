@@ -27,9 +27,9 @@ namespace rr
 {
 ModelGenerator::ModelGenerator()
 :
-mStructAnalysis()
+mStructAnalysis(),
 //mLibStructRef(mStructAnalysis.GetInstance())
-
+STR_DoubleFormat("%.3g")
 {
 
 }
@@ -1038,7 +1038,7 @@ string ModelGenerator::CleanEquation(const string& equation)
       return SBML_formulaToString(ast);
 }
 
-string ModelGenerator::substituteTerms(const string& reactionName, string inputEquation, bool bFixAmounts)
+string ModelGenerator::substituteTerms(const string& reactionName, const string& inputEquation, bool bFixAmounts)
 {
 	string equation = CleanEquation(inputEquation);
     if (equation.size() < 1)
@@ -1104,19 +1104,24 @@ DoubleMatrix ModelGenerator::InitializeL0()
 
 void ModelGenerator::WriteOutSymbolTables(StringBuilder& sb)
 {
-      sb.Append("\tvoid loadSymbolTables() {" + NL());
+    sb.Append("\tvoid loadSymbolTables() {" + NL());
 
-      for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
-          sb.AppendFormat("\t\tvariableTable[{0}] = \"{1}\";{2}", i, floatingSpeciesConcentrationList[i].name, NL());
+    for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
+    {
+        sb.AppendFormat("\t\tvariableTable[{0}] = \"{1}\";{2}", i, floatingSpeciesConcentrationList[i].name, NL());
+    }
 
-      for (int i = 0; i < boundarySpeciesList.size(); i++)
-          sb.AppendFormat("\t\tboundaryTable[{0}] = \"{1}\";{2}", i, boundarySpeciesList[i].name, NL());
+    for (int i = 0; i < boundarySpeciesList.size(); i++)
+    {
+        sb.AppendFormat("\t\tboundaryTable[{0}] = \"{1}\";{2}", i, boundarySpeciesList[i].name, NL());
+    }
 
-      for (int i = 0; i < globalParameterList.size(); i++)
-      {
-          sb.AppendFormat("\t\tglobalParameterTable[{0}] = \"{1}\";{2}", i, globalParameterList[i].name, NL());
-      }
-      sb.AppendFormat("\t}{0}{0}", NL());
+	for (int i = 0; i < globalParameterList.size(); i++)
+    {
+		string name = globalParameterList[i].name;
+       	sb.AppendFormat("\t\tglobalParameterTable[{0}] = \"{1}\";{2}", i, globalParameterList[i].name, NL());
+    }
+    sb.AppendFormat("\t}{0}{0}", NL());
 }
 
 int ModelGenerator::ReadFloatingSpecies()
@@ -1968,7 +1973,7 @@ void ModelGenerator::WriteAccessors(StringBuilder& sb)
 
 string ModelGenerator::WriteDouble(const double& value)
 {
-	return ToString(value);
+	return ToString(value, STR_DoubleFormat);
 }
 
 void ModelGenerator::WriteClassHeader(StringBuilder& sb)
@@ -2418,7 +2423,6 @@ void ModelGenerator::WriteEvalModel(StringBuilder& sb, int numReactions, int num
 
     // Write out the ODE equations
     string stoich;
-
     for (int i = 0; i < numIndependentSpecies; i++)
     {
         StringBuilder eqnBuilder;// = new StringBuilder(" ");
@@ -2570,7 +2574,7 @@ void ModelGenerator::WriteEvalModel(StringBuilder& sb, int numReactions, int num
         // in the model function from overriding it. I think this is expected behavior.
         if (!floatingSpeciesConcentrationList[i].rateRule)
         {
-            sb<<"\t\t_dydt[" << i << "] = " << final << ";" << NL();
+            sb<<"\t\t_dydt[" << i << "] =" << final << ";" << NL();
         }
     }
 

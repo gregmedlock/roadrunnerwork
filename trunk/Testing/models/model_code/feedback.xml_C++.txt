@@ -84,10 +84,10 @@ class TModel : IModel
 		boundaryTable[0] = "X0";
 		boundaryTable[1] = "X1";
 		globalParameterTable[0] = "J0_VM1";
-		globalParameterTable[1] = "J0_VM1";
-		globalParameterTable[2] = "J0_VM1";
-		globalParameterTable[3] = "J0_VM1";
-		globalParameterTable[4] = "J0_VM1";
+		globalParameterTable[1] = "J0_Keq1";
+		globalParameterTable[2] = "J0_h";
+		globalParameterTable[3] = "J4_V4";
+		globalParameterTable[4] = "J4_KS4";
 	}
 
 
@@ -291,10 +291,10 @@ class TModel : IModel
 
 	public void initializeInitialConditions ()
 	{
-		_init_y[0] = (double)0.000000e+00;
-		_init_y[1] = (double)0.000000e+00;
-		_init_y[2] = (double)0.000000e+00;
-		_init_y[3] = (double)0.000000e+00;
+		_init_y[0] = (double)0;
+		_init_y[1] = (double)0;
+		_init_y[2] = (double)0;
+		_init_y[3] = (double)0;
 
 	}
 
@@ -313,22 +313,22 @@ class TModel : IModel
 
 	public void setBoundaryConditions ()
 	{
-		_bc[0] = (double)1.000000e+01;
-		_bc[1] = (double)0.000000e+00;
+		_bc[0] = (double)10;
+		_bc[1] = (double)0;
 	}
 
 	public void setCompartmentVolumes ()
 	{
-		_c[0] = (double)1.000000e+00;
+		_c[0] = (double)1;
 	}
 
 	public void setParameterValues ()
 	{
-		_gp[0] = (double)1.000000e+01;
-		_gp[0] = (double)1.000000e+01;
-		_gp[0] = (double)1.000000e+01;
-		_gp[0] = (double)1.000000e+01;
-		_gp[0] = (double)1.000000e+01;
+		_gp[0] = (double)10;
+		_gp[1] = (double)10;
+		_gp[2] = (double)10;
+		_gp[3] = (double)2.5;
+		_gp[4] = (double)0.5;
 	}
 
 	// Uses the equation: C = Sd - L0*Si
@@ -398,8 +398,10 @@ class TModel : IModel
 		_time = timein;  // Don't remove
 		updateDependentSpeciesValues (_y);
 		computeReactionRates (time, _y);
-		_dydt[1] =  + _rates[2] - _rates[3];
-		_dydt[3] =  + _rates[1] - _rates[2];
+		_dydt[0] = + _rates[0] - _rates[1];
+		_dydt[1] = + _rates[2] - _rates[3];
+		_dydt[2] = + _rates[3] - _rates[4];
+		_dydt[3] = + _rates[1] - _rates[2];
 		convertToAmounts ();
 	}
 

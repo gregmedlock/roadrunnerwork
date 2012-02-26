@@ -57,7 +57,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         //        void SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner.Scanner s, StringBuilder sb);
 		ASTNode* 							CleanEquation(ASTNode* ast);
         string 		                		CleanEquation(const string& equation);
-        string 				                substituteTerms(const string& reactionName, string inputEquation, bool bFixAmounts);
+        string 				                substituteTerms(const string& reactionName, const string& inputEquation, bool bFixAmounts);
         string 				                NL();
         DoubleMatrix 		                InitializeL0();
 	    bool 								ExpressionContainsSymbol(ASTNode* ast, const string& symbol);

@@ -1353,14 +1353,13 @@ ArrayList NOMSupport::getListOfParameters()
     ArrayList paramStrValueList;// = new ArrayList();
 
     int numOfGlobalParameters = mModel->getNumParameters();
-    string paramStr;
-//    Parameter parameter;
-    StringList tempStrValueList;
-    double paramValue;
+
     for (int i = 0; i < numOfGlobalParameters; i++)
     {
         Parameter *parameter = mModel->getParameter(i);
-        paramStr = parameter->getId();
+	    double paramValue;
+        string paramStr = parameter->getId();
+        StringList tempStrValueList;
 		//        tempStrValueList = new ArrayList();
         tempStrValueList.Add(paramStr);
 
@@ -1394,9 +1393,9 @@ ArrayList NOMSupport::getListOfParameters()
             for (int j = 0; j < numOfLocalParameters; j++)
             {
                 Parameter *parameter = kl->getParameter(j);
-                paramStr = parameter->getId();
-                tempStrValueList;// = new ArrayList();
-
+                string paramStr = parameter->getId();
+                StringList tempStrValueList;
+                double paramValue;
                 tempStrValueList.Add(paramStr);
                 if (parameter->isSetValue())
                 {

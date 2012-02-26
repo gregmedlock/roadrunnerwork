@@ -31,7 +31,7 @@ int _tmain(int argc, _TCHAR* argv[])
         int caseNr = 1;
 //        stringstream model;
 //        model <<setfill('0')<<setw(5)<<caseNr<<"\\"<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
-//        string fullFilePath(modelsPath + "\\\\" + model.str());
+//        string fullFilePath(modelsPath +   "\\\\" + model.str());
 
         string model("feedback.xml");
     	string fullFilePath(modelsPath + "\\\\" + model);
