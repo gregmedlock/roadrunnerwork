@@ -47,6 +47,15 @@ int _tmain(int argc, _TCHAR* argv[])
 		Log(lDebug5)<<"Before loading SBML..SBML string size: "<<sbml.size();
     	rr->loadSBML(sbml);
 
+        //Save source code
+        string srcCodeFileName(modelsPath + "//model_code//" + model + "_C++.txt");
+        string code = rr->GetModelSourceCode();
+        if(code.size())
+        {
+        	ofstream outFile(srcCodeFileName.c_str());
+            outFile<<code;
+        }
+
         cout<<"Copyright: "<<rr->getCopyright()<<endl;
 
 //        list<string> compartments  = rr->getCompartmentNames();

@@ -159,7 +159,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     WriteEventAssignments(sb, _NumReactions, _NumEvents);
     WriteEvalInitialAssignments(sb, _NumReactions);
     WriteTestConstraints(sb);
-	sb.AppendFormat("}}{0}{0}", NL());
+	sb.AppendFormat("}{0}", NL());
 	return sb.ToString();
 }
 
@@ -1116,7 +1116,7 @@ void ModelGenerator::WriteOutSymbolTables(StringBuilder& sb)
       {
           sb.AppendFormat("\t\tglobalParameterTable[{0}] = \"{1}\";{2}", i, globalParameterList[i].name, NL());
       }
-      sb.AppendFormat("\t}}{0}{0}", NL());
+      sb.AppendFormat("\t}{0}{0}", NL());
 }
 
 int ModelGenerator::ReadFloatingSpecies()
@@ -1394,7 +1394,7 @@ void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, int numInde
 {
     // ------------------------------------------------------------------------------
     sb.Append("\t// Uses the equation: dSd/dt = L0 dSi/dt" + NL());
-    sb.Append("\tpublic: void computeAllRatesOfChange ()" + NL());
+    sb.Append("\tpublic void computeAllRatesOfChange ()" + NL());
     sb.Append("\t{" + NL());
     sb.Append("\t\tdouble[] dTemp = new double[amounts.Length + rateRules.Length];" + NL());
     for (int i = 0; i < NumAdditionalRates(); i++)
@@ -1445,13 +1445,13 @@ void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, int numInde
         sb.AppendFormat(";{0}", NL());
     }
 
-    sb.AppendFormat("\t}}{0}{0}", NL());
+    sb.AppendFormat("\t}{0}{0}", NL());
 }
 
 void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, int numFloatingSpecies, int numDependentSpecies)
 {
     sb.Append("\t// Uses the equation: C = Sd - L0*Si" + NL());
-    sb.Append("\tpublic: void computeConservedTotals ()" + NL());
+    sb.Append("\tpublic void computeConservedTotals ()" + NL());
     sb.Append("\t{" + NL());
     if (numDependentSpecies > 0)
     {
@@ -1510,7 +1510,7 @@ void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, int numIndep
 {
     sb.Append("\t// Compute values of dependent species " + NL());
     sb.Append("\t// Uses the equation: Sd = C + L0*Si" + NL());
-    sb.Append("\tpublic: void updateDependentSpeciesValues (double[] y)" + NL());
+    sb.Append("\tpublic void updateDependentSpeciesValues (double[] y)" + NL());
     sb.Append("\t{" + NL());
 
     if (numDependentSpecies > 0)
@@ -1576,7 +1576,7 @@ void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, int numIndep
             }
         }
     }
-    sb.AppendFormat("\t}}{0}{0}", NL());
+    sb.AppendFormat("\t}{0}{0}", NL());
 }
 
 void ModelGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
@@ -1593,7 +1593,7 @@ void ModelGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
             string sBody = (string) oList[2][0];
 
             sb.AppendFormat("\t// User defined function:  {0}{1}", sName, NL());
-            sb.AppendFormat("\tpublic: double {0} (", sName);
+            sb.AppendFormat("\tpublic double {0} (", sName);
 
             for (int j = 0; j < oArguments.size(); j++)
             {
@@ -1618,21 +1618,21 @@ void ModelGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
 
 void ModelGenerator::WriteResetEvents(StringBuilder& sb, int numEvents)
 {
-      sb.AppendFormat("{0}\tpublic: void resetEvents() {{{0}", NL());
+      sb.AppendFormat("{0}\tpublic void resetEvents() {{0}", NL());
       for (int i = 0; i < numEvents; i++)
       {
           sb.AppendFormat("\t\t_eventStatusArray[{0}] = false;{1}", i, NL());
           sb.AppendFormat("\t\t_previousEventStatusArray[{0}] = false;{1}", i, NL());
       }
-      sb.AppendFormat("\t}}{0}{0}", NL());
+      sb.AppendFormat("\t}{0}{0}", NL());
 }
 
 void ModelGenerator::WriteSetConcentration(StringBuilder& sb)
 {
-    sb.AppendFormat("\tpublic: void setConcentration(int index, double value) {{{0}", NL());
+    sb.AppendFormat("\tpublic void setConcentration(int index, double value) {{0}", NL());
     sb.AppendFormat("\t\tdouble volume = 0.0;{0}", NL());
     sb.AppendFormat("\t\t_y[index] = value;{0}", NL());
-    sb.AppendFormat("\t\tswitch (index) {{{0}", NL());
+    sb.AppendFormat("\t\tswitch (index) {{0}", NL());
     for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
     {
     	sb.AppendFormat("\t\t\tcase {0}: volume = {1};{2}",
@@ -1641,21 +1641,21 @@ void ModelGenerator::WriteSetConcentration(StringBuilder& sb)
           NL());
       sb.AppendFormat("\t\t\t\tbreak;{0}", NL());
     }
-    sb.AppendFormat("\t\t}}{0}", NL());
+    sb.AppendFormat("\t\t}{0}", NL());
     sb.AppendFormat("\t\t_amounts[index] = _y[index]*volume;{0}", NL());
-    sb.AppendFormat("\t}}{0}{0}", NL());
+    sb.AppendFormat("\t}{0}{0}", NL());
 }
 
 void ModelGenerator::WriteGetConcentration(StringBuilder& sb)
 {
-    sb.AppendFormat("\tpublic: double getConcentration(int index) {{{0}", NL());
+    sb.AppendFormat("\tpublic double getConcentration(int index) {{0}", NL());
     sb.AppendFormat("\t\treturn _y[index];{0}", NL());
-    sb.AppendFormat("\t}}{0}{0}", NL());
+    sb.AppendFormat("\t}{0}{0}", NL());
 }
 
 void ModelGenerator::WriteConvertToAmounts(StringBuilder& sb)
 {
-    sb.AppendFormat("\tpublic: void convertToAmounts() {{{0}", NL());
+    sb.AppendFormat("\tpublic void convertToAmounts() {{0}", NL());
     for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
     {
         sb.AppendFormat("\t\t_amounts[{0}] = _y[{0}]*{1};{2}",
@@ -1663,12 +1663,12 @@ void ModelGenerator::WriteConvertToAmounts(StringBuilder& sb)
             convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName),
             NL());
     }
-    sb.AppendFormat("\t}}{0}{0}", NL());
+    sb.AppendFormat("\t}{0}{0}", NL());
 }
 
 void ModelGenerator::WriteConvertToConcentrations(StringBuilder& sb)
 {
-    sb.Append("\tpublic: void convertToConcentrations() {" + NL());
+    sb.Append("\tpublic void convertToConcentrations() {" + NL());
     for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
     {
         sb<<"\t\t_y[" << i << "] = _amounts[" << i << "]/" <<
@@ -1679,117 +1679,117 @@ void ModelGenerator::WriteConvertToConcentrations(StringBuilder& sb)
 
 void ModelGenerator::WriteProperties(StringBuilder& sb)
 {
-    sb.Append("\tpublic: double[] y {" + NL());
+    sb.Append("\tpublic double[] y {" + NL());
     sb.Append("\t\tget { return _y; } " + NL());
     sb.Append("\t\tset { _y = value; } " + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] init_y {" + NL());
+    sb.Append("\tpublic double[] init_y {" + NL());
     sb.Append("\t\tget { return _init_y; } " + NL());
     sb.Append("\t\tset { _init_y = value; } " + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] amounts {" + NL());
+    sb.Append("\tpublic double[] amounts {" + NL());
     sb.Append("\t\tget { return _amounts; } " + NL());
     sb.Append("\t\tset { _amounts = value; } " + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] bc {" + NL());
+    sb.Append("\tpublic double[] bc {" + NL());
     sb.Append("\t\tget { return _bc; } " + NL());
     sb.Append("\t\tset { _bc = value; } " + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] gp {" + NL());
+    sb.Append("\tpublic double[] gp {" + NL());
     sb.Append("\t\tget { return _gp; } " + NL());
     sb.Append("\t\tset { _gp = value; } " + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] sr {" + NL());
+    sb.Append("\tpublic double[] sr {" + NL());
     sb.Append("\t\tget { return _sr; } " + NL());
     sb.Append("\t\tset { _sr = value; } " + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: DoubleMatrix lp {" + NL());
+    sb.Append("\tpublic double[][] lp {" + NL());
     sb.Append("\t\tget { return _lp; } " + NL());
     sb.Append("\t\tset { _lp = value; } " + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] c {" + NL());
+    sb.Append("\tpublic double[] c {" + NL());
     sb.Append("\t\tget { return _c; } " + NL());
     sb.Append("\t\tset { _c = value; } " + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] dydt {" + NL());
+    sb.Append("\tpublic double[] dydt {" + NL());
     sb.Append("\t\tget { return _dydt; }" + NL());
     sb.Append("\t\tset { _dydt = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] rateRules {" + NL());
+    sb.Append("\tpublic double[] rateRules {" + NL());
     sb.Append("\t\tget { return _rateRules; }" + NL());
     sb.Append("\t\tset { _rateRules = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] rates {" + NL());
+    sb.Append("\tpublic double[] rates {" + NL());
     sb.Append("\t\tget { return _rates; }" + NL());
     sb.Append("\t\tset { _rates = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] ct {" + NL());
+    sb.Append("\tpublic double[] ct {" + NL());
     sb.Append("\t\tget { return _ct; }" + NL());
     sb.Append("\t\tset { _ct = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] eventTests {" + NL());
+    sb.Append("\tpublic double[] eventTests {" + NL());
     sb.Append("\t\tget { return _eventTests; }" + NL());
     sb.Append("\t\tset { _eventTests = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: TEventDelayDelegate[] eventDelay {" + NL());
+    sb.Append("\tpublic TEventDelayDelegate[] eventDelay {" + NL());
     sb.Append("\t\tget { return _eventDelay; }" + NL());
     sb.Append("\t\tset { _eventDelay = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: bool[] eventType {" + NL());
+    sb.Append("\tpublic bool[] eventType {" + NL());
     sb.Append("\t\tget { return _eventType; }" + NL());
     sb.Append("\t\tset { _eventType = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: bool[] eventPersistentType {" + NL());
+    sb.Append("\tpublic bool[] eventPersistentType {" + NL());
     sb.Append("\t\tget { return _eventPersistentType; }" + NL());
     sb.Append("\t\tset { _eventPersistentType = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: bool[] eventStatusArray {" + NL());
+    sb.Append("\tpublic bool[] eventStatusArray {" + NL());
     sb.Append("\t\tget { return _eventStatusArray; }" + NL());
     sb.Append("\t\tset { _eventStatusArray = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: bool[] previousEventStatusArray {" + NL());
+    sb.Append("\tpublic bool[] previousEventStatusArray {" + NL());
     sb.Append("\t\tget { return _previousEventStatusArray; }" + NL());
     sb.Append("\t\tset { _previousEventStatusArray = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double[] eventPriorities {" + NL());
+    sb.Append("\tpublic double[] eventPriorities {" + NL());
     sb.Append("\t\tget { return _eventPriorities; }" + NL());
     sb.Append("\t\tset { _eventPriorities = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: TEventAssignmentDelegate[] eventAssignments {" + NL());
+    sb.Append("\tpublic TEventAssignmentDelegate[] eventAssignments {" + NL());
     sb.Append("\t\tget { return _eventAssignments; }" + NL());
     sb.Append("\t\tset { _eventAssignments = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: TComputeEventAssignmentDelegate[] computeEventAssignments {" + NL());
+    sb.Append("\tpublic TComputeEventAssignmentDelegate[] computeEventAssignments {" + NL());
     sb.Append("\t\tget { return _computeEventAssignments; }" + NL());
     sb.Append("\t\tset { _computeEventAssignments = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: TPerformEventAssignmentDelegate[] performEventAssignments {" + NL());
+    sb.Append("\tpublic TPerformEventAssignmentDelegate[] performEventAssignments {" + NL());
     sb.Append("\t\tget { return _performEventAssignments; }" + NL());
     sb.Append("\t\tset { _performEventAssignments = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: double time {" + NL());
+    sb.Append("\tpublic double time {" + NL());
     sb.Append("\t\tget { return _time; }" + NL());
     sb.Append("\t\tset { _time = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
@@ -1797,48 +1797,48 @@ void ModelGenerator::WriteProperties(StringBuilder& sb)
 
 void ModelGenerator::WriteAccessors(StringBuilder& sb)
 {
-    sb.Append("\tpublic: int getNumIndependentVariables {" + NL());
+    sb.Append("\tpublic int getNumIndependentVariables {" + NL());
     sb.Append("\t\tget { return numIndependentVariables; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: int getNumDependentVariables {" + NL());
+    sb.Append("\tpublic int getNumDependentVariables {" + NL());
     sb.Append("\t\tget { return numDependentVariables; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: int getNumTotalVariables {" + NL());
+    sb.Append("\tpublic int getNumTotalVariables {" + NL());
     sb.Append("\t\tget { return numTotalVariables; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: int getNumBoundarySpecies {" + NL());
+    sb.Append("\tpublic int getNumBoundarySpecies {" + NL());
     sb.Append("\t\tget { return numBoundaryVariables; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: int getNumGlobalParameters {" + NL());
+    sb.Append("\tpublic int getNumGlobalParameters {" + NL());
     sb.Append("\t\tget { return numGlobalParameters; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: int getNumLocalParameters(int reactionId)" + NL());
+    sb.Append("\tpublic int getNumLocalParameters(int reactionId)" + NL());
     sb.Append("\t{" + NL());
     sb.Append("\t\treturn localParameterDimensions[reactionId];" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: int getNumCompartments {" + NL());
+    sb.Append("\tpublic int getNumCompartments {" + NL());
     sb.Append("\t\tget { return numCompartments; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: int getNumReactions {" + NL());
+    sb.Append("\tpublic int getNumReactions {" + NL());
     sb.Append("\t\tget { return numReactions; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: int getNumEvents {" + NL());
+    sb.Append("\tpublic int getNumEvents {" + NL());
     sb.Append("\t\tget { return numEvents; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: int getNumRules {" + NL());
+    sb.Append("\tpublic int getNumRules {" + NL());
     sb.Append("\t\tget { return numRules; }" + NL());
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: List<string> Warnings {" + NL());
+    sb.Append("\tpublic List<string> Warnings {" + NL());
     sb.Append("\t\tget { return _Warnings; }" + NL());
     sb.Append("\t\tset { _Warnings = value; }" + NL());
     sb.Append("\t}" + NL() + NL());
@@ -1846,72 +1846,72 @@ void ModelGenerator::WriteAccessors(StringBuilder& sb)
 
  void ModelGenerator::WriteOutVariables(StringBuilder& sb)
 {
-      sb.Append("\tprivate: List<string> _Warnings = new List<string>();" + NL());
-      sb.Append("\tprivate: double[] _gp = new double[" + ToString(_NumGlobalParameters + _TotalLocalParmeters) +
+      sb.Append("\tprivate List<string> _Warnings = new List<string>();" + NL());
+      sb.Append("\tprivate double[] _gp = new double[" + ToString(_NumGlobalParameters + _TotalLocalParmeters) +
                 "];           // Vector containing all the global parameters in the System  " + NL());
-      sb.Append("\tprivate: double[] _sr = new double[" + ToString(_NumModifiableSpeciesReferences) +
+      sb.Append("\tprivate double[] _sr = new double[" + ToString(_NumModifiableSpeciesReferences) +
                 "];           // Vector containing all the modifiable species references  " + NL());
-      sb.Append("\tprivate: DoubleMatrix _lp = new double[" + ToString(_NumReactions) +
+      sb.Append("\tprivate double[][] _lp = new double[" + ToString(_NumReactions) +
                 "][];       // Vector containing all the local parameters in the System  " + NL());
 
-      sb.Append("\tprivate: double[] _y = new double[", floatingSpeciesConcentrationList.size(),
+      sb.Append("\tprivate double[] _y = new double[", floatingSpeciesConcentrationList.size(),
                 "];            // Vector containing the concentrations of all floating species ",  NL());
 
       //sb.Append(String.Format("\tprivate double[] _init_y = new double[{0}];            // Vector containing the initial concentrations of all floating species {1}", floatingSpeciesConcentrationList.Count, NL()));
-      sb.AppendFormat("\tprivate: double[] _init_y = new double[{0}];            // Vector containing the initial concentrations of all floating species {1}", floatingSpeciesConcentrationList.Count(), NL());
+      sb.AppendFormat("\tprivate double[] _init_y = new double[{0}];            // Vector containing the initial concentrations of all floating species {1}", floatingSpeciesConcentrationList.Count(), NL());
 
-      sb.Append("\tprivate: double[] _amounts = new double[", floatingSpeciesConcentrationList.size(),
+      sb.Append("\tprivate double[] _amounts = new double[", floatingSpeciesConcentrationList.size(),
                 "];      // Vector containing the amounts of all floating species ", NL());
 
-      sb.Append("\tprivate: double[] _bc = new double[", _NumBoundarySpecies,
+      sb.Append("\tprivate double[] _bc = new double[", _NumBoundarySpecies,
                 "];           // Vector containing all the boundary species concentration values   " , NL());
 
-      sb.Append("\tprivate: double[] _c = new double[" , _NumCompartments ,
+      sb.Append("\tprivate double[] _c = new double[" , _NumCompartments ,
                 "];            // Vector containing all the compartment values   " + NL());
 
-      sb.Append("\tprivate: double[] _dydt = new double[" , floatingSpeciesConcentrationList.size() ,
+      sb.Append("\tprivate double[] _dydt = new double[" , floatingSpeciesConcentrationList.size() ,
                 "];         // Vector containing rates of changes of all species   " , NL());
 
-      sb.Append("\tprivate: double[] _rates = new double[" , _NumReactions ,
+      sb.Append("\tprivate double[] _rates = new double[" , _NumReactions ,
                 "];        // Vector containing the rate laws of all reactions    " , NL());
 
-      sb.Append("\tprivate: double[] _ct = new double[" , _NumDependentSpecies ,
+      sb.Append("\tprivate double[] _ct = new double[" , _NumDependentSpecies ,
                 "];           // Vector containing values of all conserved sums      " , NL());
 
-      sb.Append("\tprivate: double[] _eventTests = new double[" , _NumEvents ,
+      sb.Append("\tprivate double[] _eventTests = new double[" , _NumEvents ,
                 "];   // Vector containing results of any event tests        " , NL());
 
-      sb.Append("\tprivate: TEventDelayDelegate[] _eventDelay = new TEventDelayDelegate[" , _NumEvents ,
+      sb.Append("\tprivate TEventDelayDelegate[] _eventDelay = new TEventDelayDelegate[" , _NumEvents ,
                 "]; // array of trigger function pointers" , NL());
 
-      sb.Append("\tprivate: bool[] _eventType = new bool[" , _NumEvents ,
+      sb.Append("\tprivate bool[] _eventType = new bool[" , _NumEvents ,
                 "]; // array holding the status whether events are useValuesFromTriggerTime or not" , NL());
 
-      sb.Append("\tprivate: bool[] _eventPersistentType = new bool[" , _NumEvents ,
+      sb.Append("\tprivate bool[] _eventPersistentType = new bool[" , _NumEvents ,
                 "]; // array holding the status whether events are persitstent or not" , NL());
 
-      sb.Append("\tprivate: double _time;" , NL());
-      sb.Append("\tprivate: int numIndependentVariables;" , NL());
-      sb.Append("\tprivate: int numDependentVariables;" , NL());
-      sb.Append("\tprivate: int numTotalVariables;" , NL());
-      sb.Append("\tprivate: int numBoundaryVariables;" , NL());
-      sb.Append("\tprivate: int numGlobalParameters;" , NL());
-      sb.Append("\tprivate: int numCompartments;" , NL());
-      sb.Append("\tprivate: int numReactions;" , NL());
-      sb.Append("\tprivate: int numRules;" , NL());
-      sb.Append("\tprivate: int numEvents;" , NL());
-      sb.Append("\tvector<string> variableTable = new string[" , floatingSpeciesConcentrationList.size() , "];" , NL());
-      sb.Append("\tvector<string> boundaryTable = new string[" , boundarySpeciesList.size() , "];" , NL());
-      sb.Append("\tvector<string> globalParameterTable = new string[" , globalParameterList.size() , "];" , NL());
-      sb.Append("\tvector<int> localParameterDimensions = new int[" , _NumReactions , "];" , NL());
-      sb.Append("\tprivate: TEventAssignmentDelegate[] _eventAssignments;" , NL());
-      sb.Append("\tprivate: double[] _eventPriorities;" , NL());
-      sb.Append("\tprivate: TComputeEventAssignmentDelegate[] _computeEventAssignments;" , NL());
-      sb.Append("\tprivate: TPerformEventAssignmentDelegate[] _performEventAssignments;" , NL());
-      sb.Append("\tprivate: bool[] _eventStatusArray = new bool[" , _NumEvents , "];" , NL());
-      sb.Append("\tprivate: bool[] _previousEventStatusArray = new bool[" , _NumEvents , "];" , NL());
+      sb.Append("\tprivate double _time;" , NL());
+      sb.Append("\tprivate int numIndependentVariables;" , NL());
+      sb.Append("\tprivate int numDependentVariables;" , NL());
+      sb.Append("\tprivate int numTotalVariables;" , NL());
+      sb.Append("\tprivate int numBoundaryVariables;" , NL());
+      sb.Append("\tprivate int numGlobalParameters;" , NL());
+      sb.Append("\tprivate int numCompartments;" , NL());
+      sb.Append("\tprivate int numReactions;" , NL());
+      sb.Append("\tprivate int numRules;" , NL());
+      sb.Append("\tprivate int numEvents;" , NL());
+      sb.Append("\tstring[] variableTable = new string[" , floatingSpeciesConcentrationList.size() , "];" , NL());
+      sb.Append("\tstring[] boundaryTable = new string[" , boundarySpeciesList.size() , "];" , NL());
+      sb.Append("\tstring[] globalParameterTable = new string[" , globalParameterList.size() , "];" , NL());
+      sb.Append("\tint[] localParameterDimensions = new int[" , _NumReactions , "];" , NL());
+      sb.Append("\tprivate TEventAssignmentDelegate[] _eventAssignments;" , NL());
+      sb.Append("\tprivate double[] _eventPriorities;" , NL());
+      sb.Append("\tprivate TComputeEventAssignmentDelegate[] _computeEventAssignments;" , NL());
+      sb.Append("\tprivate TPerformEventAssignmentDelegate[] _performEventAssignments;" , NL());
+      sb.Append("\tprivate bool[] _eventStatusArray = new bool[" , _NumEvents , "];" , NL());
+      sb.Append("\tprivate bool[] _previousEventStatusArray = new bool[" , _NumEvents , "];" , NL());
       sb.Append(NL());
-      sb.Append("\tpublic: TModel ()  " , NL());
+      sb.Append("\tpublic TModel ()  " , NL());
       sb.Append("\t{" , NL());
 
       sb.Append("\t\tnumIndependentVariables = " , _NumIndependentSpecies , ";" , NL());
@@ -2020,7 +2020,7 @@ string ModelGenerator::FindSymbol(const string& varName)
 
 void ModelGenerator::WriteTestConstraints(StringBuilder& sb)
 {
-    sb.Append("\tpublic: void testConstraints()" + NL());
+    sb.Append("\tpublic void testConstraints()" + NL());
     sb.Append("\t{" + NL());
 
     for (int i = 0; i < mNOM.getNumConstraints(); i++)
@@ -2072,7 +2072,7 @@ bool ModelGenerator::ExpressionContainsSymbol(const string& expression,const str
 
 void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, int numReactions)
 {
-    sb.Append("\tpublic: void evalInitialAssignments()" + NL());
+    sb.Append("\tpublic void evalInitialAssignments()" + NL());
     sb.Append("\t{" + NL());
 
     int numInitialAssignments = mNOM.getNumInitialAssignments();
@@ -2148,7 +2148,7 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
     int numRateRules = 0;
 
 
-    sb.Append("\tpublic: void computeRules(double[] y) {" + NL());
+    sb.Append("\tpublic void computeRules(double[] y) {" + NL());
     // ------------------------------------------------------------------------------
     for (int i = 0; i < numOfRules; i++)
     {
@@ -2247,10 +2247,10 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
     }
 
     sb.Append("\t}" + NL() + NL());
-    sb.Append("\tprivate: double[] _rateRules = new double[" + ToString(numRateRules) +
+    sb.Append("\tprivate double[] _rateRules = new double[" + ToString(numRateRules) +
               "];           // Vector containing values of additional rate rules      " + NL());
 
-    sb.Append("\tpublic: void InitializeRates()" + NL() + "\t{" + NL());
+    sb.Append("\tpublic void InitializeRates()" + NL() + "\t{" + NL());
 
     for (int i = 0; i < numRateRules; i++)
     {
@@ -2258,7 +2258,7 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
     }
 
     sb.Append("\t}" + NL() + NL());
-    sb.Append("\tpublic: void AssignRates()" + NL() + "\t{" + NL());
+    sb.Append("\tpublic void AssignRates()" + NL() + "\t{" + NL());
 
     for (int i = 0; i < _oMapRateRule.size(); i++)
     {
@@ -2267,7 +2267,7 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
 
     sb.Append("\t}" + NL() + NL());
 
-    sb.Append("\tpublic: void InitializeRateRuleSymbols()" + NL() + "\t{" + NL());
+    sb.Append("\tpublic void InitializeRateRuleSymbols()" + NL() + "\t{" + NL());
     for (int i = 0; i < _oMapRateRule.size(); i++)
     {
         string varName = (string)mapVariables[i];
@@ -2279,7 +2279,7 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
     }
 
     sb.Append("\t}" + NL() + NL());
-    sb.Append("\tpublic: void AssignRates(double[] oRates)" + NL() + "\t{" + NL());
+    sb.Append("\tpublic void AssignRates(double[] oRates)" + NL() + "\t{" + NL());
 
     for (int i = 0; i < _oMapRateRule.size(); i++)
     {
@@ -2287,7 +2287,7 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
     }
 
     sb.Append("\t}" + NL() + NL());
-    sb.Append("\tpublic: double[] GetCurrentValues()" + NL() + "\t{" + NL());
+    sb.Append("\tpublic double[] GetCurrentValues()" + NL() + "\t{" + NL());
     sb.Append("\t\tdouble[] dResult = new double[" + ToString(NumAdditionalRates()) + "];" + NL());
 
     for (int i = 0; i < _oMapRateRule.size(); i++)
@@ -2303,7 +2303,7 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
 void ModelGenerator::WriteComputeReactionRates(StringBuilder& sb, const int& numReactions)
 {
     sb.Append("\t// Compute the reaction rates" + NL());
-    sb.Append("\tpublic: void computeReactionRates (double time, double[] y)" + NL());
+    sb.Append("\tpublic void computeReactionRates (double time, double[] y)" + NL());
     sb.Append("\t{" + NL());
 
 
@@ -2333,13 +2333,13 @@ void ModelGenerator::WriteComputeReactionRates(StringBuilder& sb, const int& num
 
         sb.AppendFormat("\t\t_rates[{0}] = {1}{2}", i, modKineticLaw, NL());
     }
-    sb.AppendFormat("\t}}{0}{0}", NL());
+    sb.AppendFormat("\t}{0}{0}", NL());
 }
 
 void ModelGenerator::WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies)
 {
     sb.Append("\t// Event handling function" + NL());
-    sb.Append("\tpublic: void evalEvents (double timeIn, double[] oAmounts)" + NL());
+    sb.Append("\tpublic void evalEvents (double timeIn, double[] oAmounts)" + NL());
     sb.Append("\t{" + NL());
 
     if (numEvents > 0)
@@ -2382,7 +2382,7 @@ void ModelGenerator::WriteEvalEvents(StringBuilder& sb, int numEvents, int numFl
 void ModelGenerator::WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies, int numFloatingSpecies, int numOfRules)
 {
     sb.Append("\t// Model Function" + NL());
-    sb.Append("\tpublic: void evalModel (double timein, double[] oAmounts)" + NL());
+    sb.Append("\tpublic void evalModel (double timein, double[] oAmounts)" + NL());
     sb.Append("\t{" + NL());
 
     //sb.Append("\t\tconvertToConcentrations (); " + NL());
@@ -2611,10 +2611,10 @@ void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, 
             string str = substituteTerms(numReactions, "", (string) event[1]);
             delays.Add(str);
 
-            sb.AppendFormat("\tpublic: void eventAssignment_{0} () {{{1}", i, NL());
+            sb.AppendFormat("\tpublic void eventAssignment_{0} () {{1}", i, NL());
             sb.AppendFormat("\t\tperformEventAssignment_{0}( computeEventAssignment_{0}() );{1}", i, NL());
             sb.Append("\t}" + NL());
-            sb.AppendFormat("\tpublic: double[] computeEventAssignment_{0} () {{{1}", i, NL());
+            sb.AppendFormat("\tpublic double[] computeEventAssignment_{0} () {{1}", i, NL());
             StringList oTemp;// = new StringList();
             StringList oValue;// = new StringList();
             int nCount = 0;
@@ -2649,7 +2649,7 @@ void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, 
             }
             sb.Append("\t\treturn values;" + NL());
             sb.Append("\t}" + NL());
-            sb.AppendFormat("\tpublic: void performEventAssignment_{0} (double[] values) {{{1}", i, NL());
+            sb.AppendFormat("\tpublic void performEventAssignment_{0} (double[] values) {{1}", i, NL());
 
             for (int j = 0; j < oTemp.size(); j++)
             {
@@ -2668,16 +2668,16 @@ void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, 
         sb.Append("\t" + NL());
     }
 
-    sb.AppendFormat("{0}{0}\tprivate: void InitializeDelays() {{ {0}", NL());
+    sb.AppendFormat("{0}{0}\tprivate void InitializeDelays() { {0}", NL());
     for (int i = 0; i < delays.size(); i++)
     {
         sb.AppendFormat("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate {{ return {1}; }} );{2}", i, delays[i], NL());
         sb.AppendFormat("\t\t_eventType[{0}] = {1};{2}", i, ToString((eventType[i] ? true : false)), NL());
         sb.AppendFormat("\t\t_eventPersistentType[{0}] = {1};{2}", i, (eventPersistentType[i] ? "true" : "false"), NL());
     }
-    sb.AppendFormat("\t}}{0}{0}", NL());
+    sb.AppendFormat("\t}{0}{0}", NL());
 
-    sb.AppendFormat("{0}{0}\tpublic: void computeEventPriorites() {{ {0}", NL());
+    sb.AppendFormat("{0}{0}\tpublic void computeEventPriorites() { {0}", NL());
     for (int i = 0; i < numEvents; i++)
     {
         Event* current = mNOM.GetModel()->getEvent(i);
@@ -2692,7 +2692,7 @@ void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, 
             sb.AppendFormat("\t\t_eventPriorities[{0}] = 0f;{1}", i, NL());
         }
     }
-    sb.AppendFormat("\t}}{0}{0}", NL());
+    sb.AppendFormat("\t}{0}{0}", NL());
 }
 
 
@@ -2710,7 +2710,7 @@ void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, 
 
 void ModelGenerator::WriteSetParameterValues(StringBuilder& sb, int numReactions)
 {
-    sb.Append("\tpublic: void setParameterValues ()" + NL());
+    sb.Append("\tpublic void setParameterValues ()" + NL());
     sb.Append("\t{" + NL());
 
     for (int i = 0; i < globalParameterList.size(); i++)
@@ -2738,7 +2738,7 @@ void ModelGenerator::WriteSetParameterValues(StringBuilder& sb, int numReactions
 void ModelGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
 {
 	// ------------------------------------------------------------------------------
-    sb.Append("\tpublic: void setCompartmentVolumes ()" + NL());
+    sb.Append("\tpublic void setCompartmentVolumes ()" + NL());
     sb.Append("\t{" + NL());
     for (int i = 0; i < compartmentList.size(); i++)
     {
@@ -2763,7 +2763,7 @@ void ModelGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
 
 void ModelGenerator::WriteSetBoundaryConditions(StringBuilder& sb)
 {
-    sb.Append("\tpublic: void setBoundaryConditions ()" + NL());
+    sb.Append("\tpublic void setBoundaryConditions ()" + NL());
     sb.Append("\t{" + NL());
     for (int i = 0; i < boundarySpeciesList.size(); i++)
     {
@@ -2784,7 +2784,7 @@ void ModelGenerator::WriteSetBoundaryConditions(StringBuilder& sb)
 
 void ModelGenerator::WriteSetInitialConditions(StringBuilder& sb, int numFloatingSpecies)
 {
-    sb.Append("\tpublic: void initializeInitialConditions ()" + NL());
+    sb.Append("\tpublic void initializeInitialConditions ()" + NL());
     sb.Append("\t{" + NL());
     for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
     {
@@ -2804,7 +2804,7 @@ void ModelGenerator::WriteSetInitialConditions(StringBuilder& sb, int numFloatin
     sb.Append("\t}" + NL() + NL());
 
     // ------------------------------------------------------------------------------
-    sb.Append("\tpublic: void setInitialConditions ()" + NL());
+    sb.Append("\tpublic void setInitialConditions ()" + NL());
     sb.Append("\t{" + NL());
 
     for (int i = 0; i < numFloatingSpecies; i++)

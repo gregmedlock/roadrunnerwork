@@ -47,6 +47,10 @@ RoadRunner::~RoadRunner()
     delete mCompiler;
 }
 
+string RoadRunner::GetModelSourceCode()
+{
+	return _sModelCode;
+}
 
 void RoadRunner::InitializeModel(IModel* aModel)
 {
@@ -515,7 +519,7 @@ void RoadRunner::loadSBML(const string& sbml)
 //        Compiler.addAssembly(typeof(MathKGI).Assembly.Location);
 //        Compiler.addAssembly(typeof(System.Collections.Generic.List<string>).Assembly.Location);
 
-		if(!mCompiler)
+ 		if(!mCompiler)
         {
         	mCompiler  = new Compiler;
         }

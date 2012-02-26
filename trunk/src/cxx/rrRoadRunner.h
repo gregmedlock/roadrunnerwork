@@ -93,6 +93,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		//Functions --------------------------------------------------------------------
         								RoadRunner();
         virtual 						~RoadRunner();
+        string							GetModelSourceCode();
     	DoubleMatrix 					runSimulation();
 		void 							InitializeModel(IModel* model);
 		//static void                   DumpResults(TextWriter writer, double[,] data, ArrayList colLabels);
