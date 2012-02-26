@@ -1,6 +1,7 @@
 set(target NOMLib)
 
 #Link with libsbml libraries
+link_libraries(${target} libsbml)
 
 if(${MSVC})
 link_libraries(${target} libxml2)
@@ -14,7 +15,7 @@ ENDIF (BUILD_SHARED_LIBS)
 
 endif()
 
-if(${BORLANDC})
+if(${BORLAND})
 link_libraries(${target} libxml2_xe)
 endif()
 

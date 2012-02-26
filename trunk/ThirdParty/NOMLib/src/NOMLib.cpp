@@ -59,7 +59,6 @@
 #include <sstream>
 
 using namespace std;
-using namespace libsbml;
 
 SBMLDocument* 	_oSBMLDocCPP = NULL;
 Model* 			_oModelCPP = NULL;

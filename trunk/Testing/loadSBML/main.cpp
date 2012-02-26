@@ -27,21 +27,19 @@ int _tmain(int argc, _TCHAR* argv[])
         gLog.SetCutOffLogLevel(lDebug5);
 
         Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
-//        string modelsPath("C:\\RRW\\Testing\\models\\test_cases_l2v4");
         string modelsPath("C:\\RRW\\Testing\\models");
         int caseNr = 1;
 //        stringstream model;
 //        model <<setfill('0')<<setw(5)<<caseNr<<"\\"<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
 //        string fullFilePath(modelsPath + "\\\\" + model.str());
 
-        string model("00001-sbml-l2v4.xml");
+        string model("feedback.xml");
     	string fullFilePath(modelsPath + "\\\\" + model);
         ifstream ifs(fullFilePath.c_str());
         if(!ifs)
         {
             throw(Exception("Failed to read file:" + fullFilePath));
         }
-
 
         std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 

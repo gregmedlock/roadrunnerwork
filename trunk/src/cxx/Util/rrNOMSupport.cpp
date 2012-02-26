@@ -8,7 +8,7 @@
 #include "rrStringUtils.h"
 #include "rrException.h"
 #include "rrStringBuilder.h"
-#include "math/FormulaFormatter.h"
+#include "sbml/math/FormulaFormatter.h"
 #include "rrSBMLSymbol.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)

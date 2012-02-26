@@ -6,7 +6,7 @@
 #include <string>
 #include <stack>
 #include <memory>
-#include "math/ASTNode.h"
+#include "sbml/math/ASTNode.h"
 #include "NOMLib.h"
 #include "rrObject.h"
 #include "rrStringListContainer.h"
