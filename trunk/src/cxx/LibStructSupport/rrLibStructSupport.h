@@ -72,8 +72,9 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        double[][] GetKMatrix()
 //        void GetKMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
         DoubleMatrix GetL0Matrix();
+        DoubleMatrix GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels);
 //        double[][] GetL0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
-//        void GetL0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+        void GetL0MatrixLabels(vector<string>& sRowLabels, vector<string>& sColumnLabels);
 //        double[][] GetLinkMatrix()
 //        double[][] GetLinkMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetLinkMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)

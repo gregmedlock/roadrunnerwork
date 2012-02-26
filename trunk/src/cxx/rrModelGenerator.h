@@ -105,7 +105,6 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 									        ModelGenerator();
 		virtual						       ~ModelGenerator();
 
-
         //        public: static ModelGenerator Instance
         SymbolList                         	boundarySpeciesList;
         SymbolList                         	compartmentList;

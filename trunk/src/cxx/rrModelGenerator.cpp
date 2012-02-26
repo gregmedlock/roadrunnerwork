@@ -18,12 +18,6 @@
 using namespace std;
 using namespace LIB_STRUCTURAL;
 
-namespace libsbml
-{
-//	formulaToString();
-//	typedef formulaToString SBML_formulaToString;
-}
-
 namespace rr
 {
 ModelGenerator::ModelGenerator()
@@ -164,67 +158,6 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 	return sb.ToString();
 }
 
-//        	const string STR_DoubleFormat;// = "G"; //"G17";
-//			const string STR_FixAmountCompartments;// = "*";
-//			static ModelGenerator _instance;
-//			//        private: static NumberFormatInfo oInfo = new CultureInfo("en-US").NumberFormat;
-//			vector<int> _LocalParameterDimensions;
-//			string _ModelName;
-//			int _NumBoundarySpecies;
-//			int _NumCompartments;
-//			int _NumDependentSpecies;
-//			int _NumEvents;
-//			int _NumFloatingSpecies;
-//			int _NumGlobalParameters;
-//			int _NumIndependentSpecies;
-//			int _NumReactions;
-//			int _TotalLocalParmeters;
-//			list<string> _functionNames;
-//			list<string> _functionParameters;
-//			//        private: Hashtable _oMapRateRule = new Hashtable();
-//			vector<string> dependentSpeciesList;
-//			vector<string> independentSpeciesList;
-//			int _NumModifiableSpeciesReferences;
-//
-//		public:
-//			SymbolList boundarySpeciesList;
-//			SymbolList compartmentList;
-//			SymbolList conservationList;
-//			SymbolList floatingSpeciesAmountsList;
-//			SymbolList floatingSpeciesConcentrationList;
-//			SymbolList globalParameterList;
-//			vector<SymbolList> localParameterList;
-//			SymbolList reactionList;
-//
-//        private: ModelGenerator()
-//        {
-//            //oInfo = new CultureInfo("en-US").NumberFormat;
-//            //oInfo.NumberDecimalSeparator = ".";
-//        }
-//
-////         static ModelGenerator Instance
-////        {
-////            get
-////            {
-////                if (_instance == NULL)
-////                    _instance = new ModelGenerator();
-////                return _instance;
-////            }
-////        }
-//
-//         SymbolList ModifiableSpeciesReferenceList;// { get; set; }
-//        public: list<string> Warnings;// { get; set; }
-//        public: int NumAdditionalRates;
-////        {
-////            get { return _oMapRateRule.Count; }
-////        }
-//
-//
-//        public: int getNumberOfReactions()
-//        {
-//            return reactionList.size();
-//        }
-//
 string ModelGenerator::convertSpeciesToY(const string& speciesName)
 {
     int index;
@@ -1091,7 +1024,7 @@ string ModelGenerator::NL()
 {
 	stringstream newLine;
     newLine << endl;
-    return newLine.str();//Environment.NewLine;
+    return newLine.str();
 }
 
 
@@ -1101,9 +1034,10 @@ DoubleMatrix ModelGenerator::InitializeL0()
     try
     {
         if (_NumDependentSpecies > 0)
-//        if (_NumDependentSpecies == 0)
         {
-            L0 = mStructAnalysis.GetL0Matrix();
+        	vector<string> RowLabels;
+            vector<string> ColumnLabels;
+            L0 = mStructAnalysis.GetL0Matrix(RowLabels, ColumnLabels);
         }
         else
         {
@@ -1221,58 +1155,6 @@ int ModelGenerator::ReadFloatingSpecies()
       return oFloatingSpecies.size();
 }
 
-////        private int ReadFloatingSpecies()
-////        {
-////            // Load a reordered list into the variable list.
-////            string[] reOrderedList;
-////            if ((RoadRunner._bComputeAndAssignConservationLaws))
-////                reOrderedList = StructAnalysis.GetReorderedSpeciesIds();
-////            else
-////                reOrderedList = StructAnalysis.GetSpeciesIds();
-////
-////            ArrayList oFloatingSpecies = NOM.getListOfFloatingSpecies();
-////
-////
-////            ArrayList oTempList;
-////            for (int i = 0; i < reOrderedList.Length; i++)
-////            {
-////                for (int j = 0; j < oFloatingSpecies.Count; j++)
-////                {
-////                    oTempList = (ArrayList)oFloatingSpecies[j];
-////                    if (reOrderedList[i] != (string)oTempList[0]) continue;
-////
-////                    string compartmentName = NOM.getNthFloatingSpeciesCompartmentName(j);
-////                    var bIsConcentration = (bool)oTempList[2];
-////                    var dValue = (double)oTempList[1];
-////                    if (double.IsNaN(dValue))
-////                        dValue = 0;
-////                    Symbol symbol = NULL;
-////                    if (bIsConcentration)
-////                    {
-////                        symbol = new Symbol(reOrderedList[i], dValue, compartmentName);
-////                    }
-////                    else
-////                    {
-////                        int nCompartmentIndex;
-////                        compartmentList.find(compartmentName, out nCompartmentIndex);
-////                        double dVolume = compartmentList[nCompartmentIndex].value;
-////                        if (double.IsNaN(dVolume)) dVolume = 1;
-////                        symbol = new Symbol(reOrderedList[i],
-////                            dValue / dVolume,
-////                            compartmentName,
-////                            string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
-////                    }
-////                    symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(reOrderedList[i]).getHasOnlySubstanceUnits();
-////                    floatingSpeciesConcentrationList.Add(symbol);
-////                    break;
-////                }
-////                //throw new SBWApplicationException("Reordered Species " + reOrderedList[i] + " not found.");
-////            }
-////            return oFloatingSpecies.Count;
-////        }
-
-
-
 int ModelGenerator::ReadBoundarySpecies()
 {
 	int numBoundarySpecies;
@@ -1383,36 +1265,8 @@ void ModelGenerator::ReadLocalParameters(const int& numReactions,  vector<int>& 
     }
 }
 
-
-////        private void ReadLocalParameters(int numReactions, out int[] localParameterDimensions,
-////                                         out int totalLocalParmeters)
-////        {
-////            string name;
-////            double value;
-////            int numLocalParameters;
-////            totalLocalParmeters = 0;
-////            string reactionName;
-////            localParameterDimensions = new int[numReactions];
-////            for (int i = 0; i < numReactions; i++)
-////            {
-////                numLocalParameters = NOM.getNumParameters(i);
-////                reactionName = NOM.getNthReactionId(i);
-////                reactionList.Add(new Symbol(reactionName, 0.0));
-////                localParameterList[i] = new SymbolList();
-////                for (int j = 0; j < numLocalParameters; j++)
-////                {
-////                    localParameterDimensions[i] = numLocalParameters;
-////                    name = NOM.getNthParameterId(i, j);
-////                    value = NOM.getNthParameterValue(i, j);
-////                    localParameterList[i].Add(new Symbol(reactionName, name, value));
-////                }
-////            }
-////        }
-
-
 void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, DoubleMatrix L0)
 {
-    // ------------------------------------------------------------------------------
     sb.Append("\t// Uses the equation: dSd/dt = L0 dSi/dt" + NL());
     sb.Append("\tpublic void computeAllRatesOfChange ()" + NL());
     sb.Append("\t{" + NL());
@@ -1986,11 +1840,6 @@ void ModelGenerator::WriteAccessors(StringBuilder& sb)
       sb.Append("\t}" + NL() + NL());
 }
 
-string ModelGenerator::WriteDouble(const double& value)
-{
-	return ToString(value, STR_DoubleFormat);
-}
-
 void ModelGenerator::WriteClassHeader(StringBuilder& sb)
 {
     sb.Append("using System;" + NL());
@@ -2161,12 +2010,9 @@ void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, int numReact
 
 int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions)
 {
-    int numOfRules = mNOM.getNumRules();
-	//    _oMapRateRule = new Hashtable();
-
-    IntStringHashTable mapVariables;// = new Hashtable();
+    IntStringHashTable mapVariables;
     int numRateRules = 0;
-
+    int numOfRules = mNOM.getNumRules();
 
     sb.Append("\tpublic void computeRules(double[] y) {" + NL());
     // ------------------------------------------------------------------------------
@@ -2180,7 +2026,6 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
 
             // We only support assignment and ode rules at the moment
             string eqnRule = mNOM.getNthRule(i);
-
             RRRule aRule(eqnRule, ruleType);
 
 //            int index = eqnRule.IndexOf("=");
@@ -2229,7 +2074,6 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
                 bool isSpecies = floatingSpeciesConcentrationList.find(varName, speciesIndex);
 
                 Symbol* symbol = (speciesIndex != -1) ? &(floatingSpeciesConcentrationList[speciesIndex]) : NULL;
-
                 string sCompartment;
 
 ////                            !rightSide.Contains(sCompartment)
@@ -2349,8 +2193,6 @@ void ModelGenerator::WriteComputeReactionRates(StringBuilder& sb, const int& num
 
         // modify to use current y ...
         modKineticLaw = Substitute(modKineticLaw, "_y[", "y[");
-
-
         sb.AppendFormat("\t\t_rates[{0}] = {1}{2}", i, modKineticLaw, NL());
     }
     sb.AppendFormat("\t}{0}{0}", NL());
@@ -2374,7 +2216,6 @@ void ModelGenerator::WriteEvalEvents(StringBuilder& sb, int numEvents, int numFl
                       convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) << ";" << NL();
         }
     }
-
 
     sb.Append("\t\t_time = timeIn;  // Don't remove" + NL());
     sb.Append("\t\tupdateDependentSpeciesValues(_y);" + NL());
@@ -2406,7 +2247,6 @@ void ModelGenerator::WriteEvalModel(StringBuilder& sb, int numReactions, int num
     sb.Append("\t{" + NL());
 
     //sb.Append("\t\tconvertToConcentrations (); " + NL());
-
 
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
@@ -2714,6 +2554,11 @@ void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, 
     sb.AppendFormat("\t}{0}{0}", NL());
 }
 
+
+string ModelGenerator::WriteDouble(const double& value)
+{
+	return ToString(value, STR_DoubleFormat);
+}
 
 //         static string ModelGenerator::WriteDouble(double value)
 //        {

@@ -6,29 +6,6 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-
-//// Author: fbergmann
-//// Project: LibStructuralCSharp
-//// Path: C:\Users\fbergmann\Documents\Visual Studio Codename Orcas\Projects\CLAPACK\LibStructuralCSharp
-//// Creation date: 6/27/2008 5:26 PM
-//// Last modified: 7/3/2008 12:10 PM
-//
-//#region Using directives
-//using System;
-//using System.Runtime.InteropServices;
-//#endregion
-//
-//namespace libstructural
-//{
-//    /// <summary>
-//    /// Interop utilities
-//    /// </summary>
-//    internal static class InteropUtil
-//    {
-//
-//        /// <summary>
-//        /// Free ptr matrix
-//        /// </summary>
 //        internal static void FreePtrMatrix(IntPtr pointer, int nRows)
 //        {
 //            IntPtr[] rows = new IntPtr[nRows];
@@ -353,4 +330,3 @@
 //
 //
 //    } // class InteropUtil
-//} // namespace libstructural
