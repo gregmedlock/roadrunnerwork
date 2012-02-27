@@ -10,7 +10,7 @@
 #include "rrStringUtils.h"
 #include "rrRoadRunner.h"
 #include "rrException.h"
-#include "rrLibStructSupport.h"
+#include "LibstructSupport/rrLibStructSupport.h"
 #include "rrNOMSupport.h"
 #include "rrScanner.h"
 using std::string;

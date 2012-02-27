@@ -4,11 +4,14 @@
 #pragma hdrstop
 #include "rrLibStructSupport.h"
 #include "rrException.h"
+#include "rrInteropUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
 namespace rr
 {
+
+using namespace LIB_STRUCTURAL;
 StructAnalysis::StructAnalysis()
 :
 mInstance(LibStructural::getInstance())
@@ -526,17 +529,18 @@ StringList	StructAnalysis::GetIndependentSpeciesIds()
 /// </summary>
 DoubleMatrix StructAnalysis::GetL0Matrix()
 {
-    //IntPtr pointer;
-    long pointer;
+    IntPtr pointer;
     int nRows;
     int nCols;
 
     if (LibStructural_getL0Matrix((double***) pointer, &nRows, &nCols) < 0)
-        throw new Exception("The L0 Matrix has not yet been calculated, please call one of the analyze methods first.");
+    {
+        throw Exception("The L0 Matrix has not yet been calculated, please call one of the analyze methods first.");
+    }
 
 //    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
     return GetDoubleMatrixFromPtr((double***)pointer, nRows, nCols);
-} // GetL0Matrix()
+}
 
 /// <summary>
 /// Get L0 matrix
@@ -586,16 +590,28 @@ DoubleMatrix StructAnalysis::GetL0Matrix(vector<string>& sRowLabels, vector<stri
 /// will hold the row lables for the matrix.</param>
 void StructAnalysis::GetL0MatrixLabels(vector<string>& sRowLabels, vector<string>& sColumnLabels)
 {
-    char*** outRowLabels;
-    char*** outColLabels;
+    IntPtr outRowLabels;
+    IntPtr outColLabels;
     int outRowCount;
     int outColCount;
 
+    LibStructural_getL0MatrixLabels((char***) &outRowLabels, &outRowCount,(char***) &outColLabels, &outColCount);
+    sRowLabels = GetStringArrayFromPtr(outRowLabels, outRowCount);
+    sColumnLabels = GetStringArrayFromPtr(outColLabels, outColCount);
+}
 
-    LibStructural_getL0MatrixLabels(outRowLabels, &outRowCount, outColLabels, &outColCount);
-//    sRowLabels = InteropUtil.GetStringArrayFromPtr(outRowLabels, outRowCount);
-//    sColumnLabels = InteropUtil.GetStringArrayFromPtr(outColLabels, outColCount);
-} // GetL0MatrixLabels(sRowLabels, sColumnLabels)
+////        public static void GetL0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
+////        {
+////            IntPtr outRowLabels; IntPtr outColLabels; int outRowCount; int outColCount;
+////            LibStructural_getL0MatrixLabels(out outRowLabels, out outRowCount, out outColLabels, out outColCount);
+////            sRowLabels = InteropUtil.GetStringArrayFromPtr(outRowLabels, outRowCount);
+////            sColumnLabels = InteropUtil.GetStringArrayFromPtr(outColLabels, outColCount);
+////        } // GetL0MatrixLabels(sRowLabels, sColumnLabels)
+
+
+
+
+
 
 ////        /// <summary>
 ////        /// Get L matrix (link matrix)
@@ -1085,17 +1101,14 @@ StringList StructAnalysis::GetSpeciesIds()
 ////        /// <param name="sbml">the SBML string</param>
 string StructAnalysis::LoadSBML(const string& sbml)
 {
-    long pointer;
+    IntPtr pointer;
 	int nLength;
 
     if (LibStructural_loadSBML(sbml.c_str(),  (char**) pointer, &nLength) < 0)
     {
         throw Exception("The SBML could not be loaded, please verify that it is a valid SBML file.");
     }
-    return GetStringFromPtr((char**) pointer, nLength);
-
-//	string msg = LibStructural::getInstance()->loadSBML(sbml);
-	string msg;
+	string msg =  GetStringFromPtr(pointer, nLength);;
   	return msg;
 }
 

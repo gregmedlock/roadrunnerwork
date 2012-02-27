@@ -1,11 +1,12 @@
-//---------------------------------------------------------------------------
-
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
 #pragma hdrstop
-
 #include "rrInteropUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-
+namespace rr
+{
 //        internal static void FreePtrMatrix(IntPtr pointer, int nRows)
 //        {
 //            IntPtr[] rows = new IntPtr[nRows];
@@ -212,24 +213,44 @@
 //        } // GetIntMatrixFromPtr(pointer, nRows, nCols)
 //
 //
-//        /// <summary>
-//        /// Get string array from ptr
-//        /// </summary>
-//        internal static string[] GetStringArrayFromPtr(IntPtr pointer, int nLength)
-//        {
-//            IntPtr[] rawRows = new IntPtr[nLength];
-//            string[] oResult = new string[nLength];
-//            Marshal.Copy(pointer, rawRows, 0, nLength);
+/// <summary>
+/// Get string array from ptr
+/// </summary>
+vector<string> GetStringArrayFromPtr(IntPtr pointer, int nStrings)
+{
+    vector<string> oResult;
+    oResult.resize(nStrings);
+//	if(nStrings == 1)
+//    {
+//      	char** oneString = (char**) pointer;
+//        string aString(*oneString);
+//		oResult[0] = aString;
+//    }
+//    else
+    {
+
+        char** stringRows = (char**) pointer;//new char**[nStrings];
+
+        for(int i = 0; i < nStrings; i++)
+        {
+	        char* oneString = stringRows[i];
+            string aString(oneString);
+			oResult[i] = aString;
+        }
+    }
+
+
+//    Marshal.Copy(pointer, rawRows, 0, nStrings);
 //
-//            for (int i = 0; i < nLength; i++)
-//            {
-//                oResult[i] = Marshal.PtrToStringAnsi(rawRows[i]);
-//            } // for (int)
+//    for (int i = 0; i < nStrings; i++)
+//    {
+//        oResult[i] = Marshal.PtrToStringAnsi(rawRows[i]);
+//    } // for (int)
 //
-//            StructAnalysis.FreeMatrix(pointer, nLength);
-//            return oResult;
-//        } // GetStringArrayFromPtr(pointer, nLength)
-//
+//    FreeMatrix(pointer, nStrings);
+    return oResult;
+}
+
 //        /// <summary>
 //        /// Get string array from ptr
 //        /// </summary>
@@ -248,15 +269,17 @@
 //            return oResult;
 //        } // GetStringArrayFromPtrLA(pointer, nLength)
 //
-//        /// <summary>
-//        /// Get string from ptr
-//        /// </summary>
-//        internal static string GetStringFromPtr(IntPtr pointer, int nLength)
-//        {
-//            string sResult = Marshal.PtrToStringAnsi(pointer, nLength);
-//            StructAnalysis.FreeVector(pointer);
-//            return sResult;
-//        } // GetStringFromPtr(pointer, nLength)
+/// <summary>
+/// Get string from ptr
+/// </summary>
+string GetStringFromPtr(IntPtr pointer, int nLength)
+{
+	char** oneString = (char**) pointer;
+//    string sResult = Marshal.PtrToStringAnsi(pointer, nLength);
+//    StructAnalysis.FreeVector(pointer);
+	string sResult(*oneString);
+    return sResult;
+}
 //
 //        /// <summary>
 //        /// Get string from ptr
@@ -330,3 +353,4 @@
 //
 //
 //    } // class InteropUtil
+}//namespace rr

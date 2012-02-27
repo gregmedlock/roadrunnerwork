@@ -103,13 +103,11 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     {
         _NumIndependentSpecies = mStructAnalysis.GetNumSpecies();
         independentSpeciesList = mStructAnalysis.GetSpeciesIds();
-//        dependentSpeciesList = new string[0];
     }
 
     sb.Append("//************************************************************************** " + NL());
 
     // Load the compartment array (name and value)
-	//    _NumCompartments = ReadCompartments();
 	_NumCompartments 		= ReadCompartments();
 
     // Read FloatingSpecies
@@ -125,7 +123,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 
     // Load up local parameters next
 	ReadLocalParameters(_NumReactions, _LocalParameterDimensions, _TotalLocalParmeters);
-    _NumEvents 				= mNOM.getNumEvents();
+    _NumEvents = mNOM.getNumEvents();
 
     // Get the L0 matrix
     DoubleMatrix L0 = InitializeL0();

@@ -11,6 +11,7 @@ using std::vector;
 using std::string;
 
 //---------------------------------------------------------------------------
+typedef long* IntPtr;
 namespace rr
 {
 using namespace LIB_STRUCTURAL;
@@ -164,7 +165,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        bool[] ValidateStructuralMatrices(  )
 
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_freeMatrix")]
-//        void FreeMatrix(IntPtr matrix, int numRows);
+        void FreeMatrix(IntPtr matrix, int numRows);
 
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_freeVector")]
 //        void FreeVector(IntPtr vector);
