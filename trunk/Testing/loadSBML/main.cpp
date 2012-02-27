@@ -26,17 +26,25 @@ int _tmain(int argc, _TCHAR* argv[])
         gLog.SetCutOffLogLevel(lDebug5);
         Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
 
-
+        string modelsRootPath("C:\\RRW\\Testing\\models");
         //Loading models
-        string modelsPath("C:\\RRW\\Testing\\models\\test_cases_l2v4");
         int caseNr = 1;
-        stringstream model;
-        model <<setfill('0')<<setw(5)<<caseNr<<"\\"<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
-        string fullFilePath(modelsPath +   "\\\\" + model.str());
+        stringstream modelSubPath;
+        stringstream modelFName;
 
-//        string model("feedback.xml");
-//    	string fullFilePath(modelsPath + "\\\\" + model);
+		string subFolder("test_cases_l2v4");
+        modelSubPath <<setfill('0')<<setw(5)<<caseNr;
 
+        modelFName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
+
+		//string subFolder("");
+        //model<<"feedback.xml";
+        if(subFolder.size())
+        {
+        	modelsRootPath = modelsRootPath + "\\" + subFolder + "\\" + modelSubPath.str();
+        }
+
+        string fullFilePath(modelsRootPath +   "\\\\" + modelFName.str());
 
         ifstream ifs(fullFilePath.c_str());
         if(!ifs)
@@ -53,11 +61,15 @@ int _tmain(int argc, _TCHAR* argv[])
     	rr->loadSBML(sbml);
 
         //Save source code
-        string srcCodeFileName(modelsPath + "//model_code//" + model.str() + "_C++.txt");
+        string srcCodeFileName("C:\\RRW\\Testing\\models\\model_code//" + modelFName.str() + "_C++.txt");
         string code = rr->GetModelSourceCode();
         if(code.size())
         {
         	ofstream outFile(srcCodeFileName.c_str());
+            if(!outFile)
+            {
+	            throw(Exception("Failed to write file:" + srcCodeFileName));
+            }
             outFile<<code;
         }
 

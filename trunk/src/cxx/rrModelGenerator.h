@@ -25,7 +25,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
     private:
         const string                        STR_DoubleFormat;// = "G"; //"G17";
         const string                        STR_FixAmountCompartments;// = "*";
-//        static ModelGenerator 				_instance;
+		//        static ModelGenerator 				_instance;
         //        static NumberFormatInfo oInfo = new CultureInfo("en-US").NumberFormat;
         vector<int> 		                _LocalParameterDimensions;
         string 				                _ModelName;
@@ -60,7 +60,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         string 		                		CleanEquation(const string& equation);
         string 				                substituteTerms(const string& reactionName, const string& inputEquation, bool bFixAmounts);
         string 				                NL();
-        DoubleMatrix 		                InitializeL0();
+        double*				                InitializeL0();
 	    bool 								ExpressionContainsSymbol(ASTNode* ast, const string& symbol);
         bool 		                		ExpressionContainsSymbol(const string& expression, const string& symbol);
         Symbol*				                GetSpecies(const string& id);

@@ -299,20 +299,18 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 /// <summary>
 /// Get Gamma matrix
 /// </summary>
-DoubleMatrix StructAnalysis::GetGammaMatrix()
+double* StructAnalysis::GetGammaMatrix()
 {
     IntPtr pointer;
     int nRows;
     int nCols;
 
-    if (LibStructural_getGammaMatrix((double***) pointer, &nRows, &nCols) < 0 )
+    if (LibStructural_getGammaMatrix((double***) &pointer, &nRows, &nCols) < 0 )
     {
         throw Exception("The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.");
     }
 	double *res = GetDoubleMatrixFromPtr(pointer, nRows, nCols);
-    DoubleMatrix test(res);
-
-    return test;
+    return res;
 }
 
 ////        /// <summary>
@@ -547,7 +545,7 @@ double* StructAnalysis::GetL0Matrix()
     int nRows;
     int nCols;
 
-    if (LibStructural_getL0Matrix((double***) pointer, &nRows, &nCols) < 0)
+    if (LibStructural_getL0Matrix((double***) &pointer, &nRows, &nCols) < 0)
     {
         throw Exception("The L0 Matrix has not yet been calculated, please call one of the analyze methods first.");
     }

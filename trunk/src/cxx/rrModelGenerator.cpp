@@ -126,7 +126,8 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     _NumEvents = mNOM.getNumEvents();
 
     // Get the L0 matrix
-    DoubleMatrix L0 = InitializeL0();
+    double* L0 = InitializeL0(); //Todo: What is this doing? answer.. it is used below..
+
     WriteClassHeader(sb);
     WriteOutVariables(sb);
     WriteOutSymbolTables(sb);
@@ -143,6 +144,9 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     WriteSetCompartmentVolumes(sb);
     WriteSetParameterValues(sb, _NumReactions);
     WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
+
+
+
     WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
     int numOfRules = WriteComputeRules(sb, _NumReactions);
     WriteComputeAllRatesOfChange(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
@@ -1026,20 +1030,20 @@ string ModelGenerator::NL()
 }
 
 
-DoubleMatrix ModelGenerator::InitializeL0()
+double* ModelGenerator::InitializeL0()
 {
-	DoubleMatrix L0;
+	double* L0;
     try
     {
         if (_NumDependentSpecies > 0)
         {
         	vector<string> RowLabels;
-            vector<string> ColumnLabels;
+            vector<string> ColumnLabels; //Todo: Filling these out here is meaningless?
             L0 = mStructAnalysis.GetL0Matrix(RowLabels, ColumnLabels);
         }
         else
         {
-        	L0.Allocate(1,1);// = new double[0][];
+        	L0 = new double[1];//.Allocate(1,1);// = new double[0][];
         }
     }
     catch (Exception)
@@ -1328,7 +1332,8 @@ void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, int numFloat
     if (numDependentSpecies > 0)
     {
         string factor;
-        DoubleMatrix gamma = mStructAnalysis.GetGammaMatrix();
+        double* matPtr = mStructAnalysis.GetGammaMatrix();
+        DoubleMatrix gamma(numDependentSpecies, numFloatingSpecies);
         for (int i = 0; i < numDependentSpecies; i++)
         {
             sb.AppendFormat("\t\t_ct[{0}] = ", i);
