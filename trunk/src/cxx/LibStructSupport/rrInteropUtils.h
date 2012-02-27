@@ -1,8 +1,9 @@
 #ifndef rrInteropUtilsH
 #define rrInteropUtilsH
-#include "rrExporter.h"
 #include <vector>
 #include <string>
+#include "rrExporter.h"
+
 using std::string;
 using std::vector;
 
@@ -47,10 +48,10 @@ namespace rr
 //        /// </summary>
 //        internal static double[] GetDoubleArrayFromPtrLA(IntPtr pointer, int nLength)
 
-//        /// <summary>
-//        /// Get double matrix from ptr
-//        /// </summary>
-//        internal static double[][] GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
+/// <summary>
+/// Get double matrix from ptr
+/// </summary>
+double* GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols);
 
 //        /// <summary>
 //        /// Get double matrix from ptr

@@ -9,6 +9,7 @@
 namespace rr
 {
 
+
 DoubleMatrix::DoubleMatrix(unsigned rows, unsigned cols)
 :
 mRowCount (rows),
@@ -19,6 +20,12 @@ mMatrix(NULL)
 	{
     	mMatrix = new double[rows * cols];
 	}
+}
+
+DoubleMatrix::DoubleMatrix(double* ptrToArray)
+{
+	//Shallow or deep copy?
+    mMatrix = ptrToArray; //Thats is pretty shallow...
 }
 
 DoubleMatrix::~DoubleMatrix()

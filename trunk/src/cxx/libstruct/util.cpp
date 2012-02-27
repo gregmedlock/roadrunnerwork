@@ -657,10 +657,20 @@ void Util::CopyMatrix(DoubleMatrix& oMatrix, double** &outMatrix, int &outNumRow
 	int numRows = oMatrix.numRows();
 	int numCols = oMatrix.numCols();
 
-	outMatrix = (double **) malloc(sizeof(double*) *numRows); if (outMatrix == NULL) throw new ApplicationException("Out of Memory during Matrix copy"); memset(outMatrix, 0, sizeof(double*)*numRows);
+	outMatrix = (double **) malloc(sizeof(double*) *numRows);
+    if (outMatrix == NULL)
+    {
+    	throw new ApplicationException("Out of Memory during Matrix copy");
+    }
+    memset(outMatrix, 0, sizeof(double*)*numRows);
 	for (int i = 0; i < numRows; i++)
 	{
-		outMatrix[i] = (double*) malloc(sizeof(double)*numCols); if (outMatrix[i] == NULL) throw new ApplicationException("Out of Memory during Matrix copy"); memset(outMatrix[i], 0, sizeof(double)*numCols);
+		outMatrix[i] = (double*) malloc(sizeof(double)*numCols);
+        if (outMatrix[i] == NULL)
+        {
+        	throw new ApplicationException("Out of Memory during Matrix copy");
+        }
+        memset(outMatrix[i], 0, sizeof(double)*numCols);
 	}
 
 	for (int i = 0; i < numRows; i++)

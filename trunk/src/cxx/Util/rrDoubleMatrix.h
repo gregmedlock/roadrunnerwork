@@ -16,6 +16,7 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
 
     public:
     					DoubleMatrix(unsigned rows = 0, unsigned cols = 0);
+    					DoubleMatrix(double* ptrToArray);
 		int				RSize() const {return mRowCount;}
         int 			CSize() const {return mColCount;}
     	double& 		operator() (unsigned row, unsigned col);
@@ -29,7 +30,7 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
 
 };
 
-DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const int& nRows, const int& nCols);
+//DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const int& nRows, const int& nCols);
 ostream& RR_DECLSPEC operator<<(ostream&, const DoubleMatrix& mat);
 }
 #endif

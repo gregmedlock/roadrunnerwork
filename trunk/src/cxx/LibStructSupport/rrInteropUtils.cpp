@@ -121,23 +121,26 @@ namespace rr
 //            return oResult;
 //        } // GetDoubleArrayFromPtr(pointer, nLength)
 //
-//        /// <summary>
-//        /// Get double matrix from ptr
-//        /// </summary>
-//        internal static double[][] GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
-//        {
-//            IntPtr[] rawRows = new IntPtr[nRows];
-//            double[][] oResult = new double[nRows][];
-//            Marshal.Copy(pointer, rawRows, 0, nRows);
-//            for (int i = 0; i < nRows; i++)
-//            {
-//                oResult[i] = new double[nCols];
-//                Marshal.Copy(rawRows[i], oResult[i], 0, nCols);
-//            } // for (int)
-//            StructAnalysis.FreeMatrix(pointer, nRows);
-//            return oResult;
-//        } // GetDoubleMatrixFromPtr(pointer, nRows, nCols)
-//
+/// <summary>
+/// Get double matrix from ptr
+/// </summary>
+double* GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
+{
+	double* oResult = new double(nRows*nCols);
+
+    double* Matrix = (double*) pointer;
+    for(int row = 0; row < nRows; row++)
+    {
+      	for(int col = 0; col < nCols; col++)
+        {
+        	oResult[nCols*row + col] = Matrix[nCols*row + col];
+        }
+    }
+
+//    StructAnalysis.FreeMatrix(pointer, nRows);
+    return oResult;
+}
+
 //        /// <summary>
 //        /// Get double matrix from ptr
 //        /// </summary>
@@ -218,35 +221,16 @@ namespace rr
 /// </summary>
 vector<string> GetStringArrayFromPtr(IntPtr pointer, int nStrings)
 {
-    vector<string> oResult;
+	vector<string> oResult;
     oResult.resize(nStrings);
-//	if(nStrings == 1)
-//    {
-//      	char** oneString = (char**) pointer;
-//        string aString(*oneString);
-//		oResult[0] = aString;
-//    }
-//    else
+    char** stringRows = (char**) pointer;//new char**[nStrings];
+
+    for(int i = 0; i < nStrings; i++)
     {
-
-        char** stringRows = (char**) pointer;//new char**[nStrings];
-
-        for(int i = 0; i < nStrings; i++)
-        {
-	        char* oneString = stringRows[i];
-            string aString(oneString);
-			oResult[i] = aString;
-        }
+        char* oneString = stringRows[i];
+        string aString(oneString);
+        oResult[i] = aString;
     }
-
-
-//    Marshal.Copy(pointer, rawRows, 0, nStrings);
-//
-//    for (int i = 0; i < nStrings; i++)
-//    {
-//        oResult[i] = Marshal.PtrToStringAnsi(rawRows[i]);
-//    } // for (int)
-//
 //    FreeMatrix(pointer, nStrings);
     return oResult;
 }
