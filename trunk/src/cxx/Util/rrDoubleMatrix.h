@@ -16,7 +16,7 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
 
     public:
     					DoubleMatrix(unsigned rows = 0, unsigned cols = 0);
-    					DoubleMatrix(double* ptrToArray);
+    					DoubleMatrix(double* ptrToArray, const int& rowCount = 0, const int& colCount = 0);
 		int				RSize() const {return mRowCount;}
         int 			CSize() const {return mColCount;}
     	double& 		operator() (unsigned row, unsigned col);
@@ -27,6 +27,7 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
     					~DoubleMatrix();                            // Destructor
         //    			DoubleMatrix(DoubleMatrix const& m);        // Copy constructor
         DoubleMatrix& 	operator = (DoubleMatrix const& rhs);   	// Assignment operator
+        double*			GetPointer(){return mMatrix;}
 
 };
 

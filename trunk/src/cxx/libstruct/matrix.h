@@ -1,6 +1,5 @@
 #ifndef LIB_LA_MATRIX_H
 #define LIB_LA_MATRIX_H
-
 #include <iosfwd>
 #include "libutil.h"
 #include "string.h"

@@ -28,11 +28,15 @@ class RR_DECLSPEC StringBuilder : public rrObject
 
 		stringstream& operator<<(const string& str);
 
+        //Only strings..
         void AppendFormat(const string& str1, const string& str2);
         void AppendFormat(const string& str1, const string& str2, const string& str3);
         void AppendFormat(const string& str1, const string& arg1, const string& arg2, const string& arg3);
-        void AppendFormat(const string& str1, const string& arg1, const int& arg2);
+        void AppendFormat(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4);
+        void AppendFormat(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4, const string& arg5);
 
+        //Strings and ints..
+        void AppendFormat(const string& str1, const string& arg1, const int& arg2);
         void AppendFormat(const string& str1, const int& arg);
         void AppendFormat(const string& str1, const unsigned int& arg1, const string& arg2);
         void AppendFormat(const string& str1, const string& arg1, const int& arg2, const string& arg3);

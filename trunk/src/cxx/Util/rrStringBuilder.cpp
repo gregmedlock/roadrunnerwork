@@ -100,6 +100,38 @@ void StringBuilder::AppendFormat(const string& str1, const string& arg1, const s
 	Append(newString);
 }
 
+void StringBuilder::AppendFormat(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4)
+{
+	string token1("{0}");
+	string token2("{1}");
+	string token3("{2}");
+	string token4("{3}");
+	string newString(str1);
+
+    newString = Substitute(newString, token1, arg1);
+    newString = Substitute(newString, token2, arg2);
+    newString = Substitute(newString, token3, arg3);
+    newString = Substitute(newString, token4, arg4);
+	Append(newString);
+}
+
+void StringBuilder::AppendFormat(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4, const string& arg5)
+{
+	string token1("{0}");
+	string token2("{1}");
+	string token3("{2}");
+	string token4("{3}");
+	string token5("{4}");
+	string newString(str1);
+
+    newString = Substitute(newString, token1, arg1);
+    newString = Substitute(newString, token2, arg2);
+    newString = Substitute(newString, token3, arg3);
+    newString = Substitute(newString, token4, arg4);
+    newString = Substitute(newString, token5, arg5);
+	Append(newString);
+}
+
 void StringBuilder::AppendFormat(const string& str1, const int& arg1)
 {
 	string token1("{0}");

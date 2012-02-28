@@ -128,12 +128,13 @@ double* GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
 {
 	double* oResult = new double(nRows*nCols);
 
-    double* Matrix = (double*) pointer;
+//    double* Matrix = (double*) pointer;
+   	double** Matrix = (double**) pointer;
     for(int row = 0; row < nRows; row++)
     {
       	for(int col = 0; col < nCols; col++)
         {
-        	oResult[nCols*row + col] = Matrix[nCols*row + col];
+        	oResult[nCols*row + col] = Matrix[row][col];
         }
     }
 

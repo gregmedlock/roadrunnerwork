@@ -550,8 +550,9 @@ double* StructAnalysis::GetL0Matrix()
         throw Exception("The L0 Matrix has not yet been calculated, please call one of the analyze methods first.");
     }
 
-//    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
-    return GetDoubleMatrixFromPtr(pointer, nRows, nCols);
+	double** mat = (double**) pointer;
+
+    return GetDoubleMatrixFromPtr(pointer, nRows, nCols); //    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
 }
 
 /// <summary>

@@ -24,7 +24,8 @@ ModelGenerator::ModelGenerator()
 :
 mStructAnalysis(),
 //mLibStructRef(mStructAnalysis.GetInstance())
-STR_DoubleFormat("%.3g")
+STR_DoubleFormat("%.3g"),
+STR_FixAmountCompartments("*")
 {
 
 }
@@ -126,7 +127,9 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     _NumEvents = mNOM.getNumEvents();
 
     // Get the L0 matrix
-    double* L0 = InitializeL0(); //Todo: What is this doing? answer.. it is used below..
+    double* aL0 = InitializeL0(); //Todo: What is this doing? answer.. it is used below..
+
+    DoubleMatrix L0(aL0); //How many rows and cols??
 
     WriteClassHeader(sb);
     WriteOutVariables(sb);
@@ -1267,7 +1270,7 @@ void ModelGenerator::ReadLocalParameters(const int& numReactions,  vector<int>& 
     }
 }
 
-void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, DoubleMatrix L0)
+void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
 {
     sb.Append("\t// Uses the equation: dSd/dt = L0 dSi/dt" + NL());
     sb.Append("\tpublic void computeAllRatesOfChange ()" + NL());
@@ -1289,30 +1292,30 @@ void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, int numInde
         {
             string dyName = Format("_dydt[{0}]", j);
 
-//            if (L0[i][j] > 0)
-//            {
-//                isThereAnEntry = true;
-//                if (L0[i][j] == 1)
-//                {
-//                    sb.AppendFormat(" + {0}{1}", dyName, NL());
-//                }
-//                else
-//                {
-//                    sb.AppendFormat(" + (double){0}{1}{2}{3}", WriteDouble(L0[i][j]), STR_FixAmountCompartments, dyName, NL());
-//                }
-//            }
-//            else if (L0[i][j] < 0)
-//            {
-//                isThereAnEntry = true;
-//                if (L0[i][j] == -1)
-//                {
-//                    sb.AppendFormat(" - {0}{1}", dyName, NL());
-//                }
-//                else
-//                {
-//                    sb.AppendFormat(" - (double){0}{1}{2}{3}", WriteDouble(Math.Abs(L0[i][j])), STR_FixAmountCompartments, dyName, NL());
-//                }
-//            }
+            if (L0(i,j) > 0)
+            {
+                isThereAnEntry = true;
+                if (L0(i,j) == 1)
+                {
+                    sb.AppendFormat(" + {0}{1}", dyName, NL());
+                }
+                else
+                {
+                    sb.AppendFormat(" + (double){0}{1}{2}{3}", WriteDouble(L0(i,j)), STR_FixAmountCompartments, dyName, NL());
+                }
+            }
+            else if (L0(i,j) < 0)
+            {
+                isThereAnEntry = true;
+                if (L0(i,j) == -1)
+                {
+                    sb.AppendFormat(" - {0}{1}", dyName, NL());
+                }
+                else
+                {
+                    sb.AppendFormat(" - (double){0}{1}{2}{3}", WriteDouble(fabs(L0(i,j))), STR_FixAmountCompartments, dyName, NL());
+                }
+            }
         }
         if (!isThereAnEntry)
         {
@@ -1324,7 +1327,7 @@ void ModelGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, int numInde
     sb.AppendFormat("\t}{0}{0}", NL());
 }
 
-void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, int numFloatingSpecies, int numDependentSpecies)
+void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, const int& numFloatingSpecies, const int& numDependentSpecies)
 {
     sb.Append("\t// Uses the equation: C = Sd - L0*Si" + NL());
     sb.Append("\tpublic void computeConservedTotals ()" + NL());
@@ -1333,7 +1336,9 @@ void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, int numFloat
     {
         string factor;
         double* matPtr = mStructAnalysis.GetGammaMatrix();
-        DoubleMatrix gamma(numDependentSpecies, numFloatingSpecies);
+
+        DoubleMatrix gamma(matPtr, numDependentSpecies, numFloatingSpecies);
+//        gamma.
         for (int i = 0; i < numDependentSpecies; i++)
         {
             sb.AppendFormat("\t\t_ct[{0}] = ", i);
@@ -1341,10 +1346,9 @@ void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, int numFloat
             {
                 double current = gamma(i,j);//gamma[i][j];
 
-
                 if (current != 0.0)
                 {
-                    if (IsNaN(current))
+                    if (IsNaN(current)) //C# code is doing one of these.. factor = "" .. ??
                     {
                         // TODO: fix this
                         factor = "";
@@ -1361,6 +1365,8 @@ void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, int numFloat
 
                     if (current > 0)
                     {
+                    	string cYY = convertSpeciesToY(floatingSpeciesConcentrationList[j].name);
+                        string cTC = convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName);
                         sb.Append(" + " + factor + convertSpeciesToY(floatingSpeciesConcentrationList[j].name) +
                                   STR_FixAmountCompartments +
                                   convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName) +
@@ -1377,13 +1383,13 @@ void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, int numFloat
             }
             sb.Append(";" + NL());
 
-//            conservationList.Add(Symbol("CSUM" + i, NaN));//TODO: how to deal with this?
+//            conservationList.Add(Symbol("CSUM" + i, NaN)); //TODO: how to deal with this?
         }
     }
     sb.Append("	}" + NL() + NL());
 }
 
-void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, int numIndependentSpecies, int numDependentSpecies, DoubleMatrix L0)
+void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
 {
     sb.Append("\t// Compute values of dependent species " + NL());
     sb.Append("\t// Uses the equation: Sd = C + L0*Si" + NL());
@@ -1407,47 +1413,48 @@ void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, int numIndep
                 {
                     string yName = Format("y[{0}]", j);
                     string cName = convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName);
-
-//                    if (L0[i][j] > 0)
-//                    {
-//                        if (L0[i][j] == 1)
-//                        {
-//                            sb.AppendFormat(" + {0}\t{1}{2}{3}{0}\t",
-//                                NL(),
-//                                yName,
-//                                STR_FixAmountCompartments,
-//                                cName);
-//                        }
-//                        else
-//                        {
-//                            sb.AppendFormat("{0}\t" + " + (double){1}{2}{3}{2}{4}",
-//                                NL(),
-//                                WriteDouble(L0[i][j]),
-//                                STR_FixAmountCompartments,
-//                                yName,
-//                                cName);
-//                        }
-//                    }
-//                    else if (L0[i][j] < 0)
-//                    {
-//                        if (L0[i][j] == -1)
-//                        {
-//                            sb.AppendFormat("{0}\t" + " - {1}{2}{3}",
-//                                NL(),
-//                                yName,
-//                                STR_FixAmountCompartments,
-//                                cName);
-//                        }
-//                        else
-//                        {
-//                            sb.AppendFormat("{0}\t" + " - (double){1}{2}{3}{2}{4}",
-//                                NL(),
-//                                WriteDouble(Math.Abs(L0[i][j])),
-//                                STR_FixAmountCompartments,
-//                                yName,
-//                                cName);
-//                        }
-//                    }
+                    double* mat = L0.GetPointer();
+                    double matElementValue = L0(i,j);
+                    if (L0(i,j) > 0)
+                    {
+                        if (L0(i,j) == 1)
+                        {
+                            sb.AppendFormat(" + {0}\t{1}{2}{3}{0}\t",
+                                NL(),
+                                yName,
+                                STR_FixAmountCompartments,
+                                cName);
+                        }
+                        else
+                        {
+                            sb.AppendFormat("{0}\t (double){1}{2}{3}{2}{4}",
+                                NL(),
+                                WriteDouble(L0(i,j)),
+                                STR_FixAmountCompartments,
+                                yName,
+                                cName);
+                        }
+                    }
+                    else if (L0(i,j) < 0)
+                    {
+                        if (L0(i,j) == -1)
+                        {
+                            sb.AppendFormat("{0}\t - {1}{2}{3}",
+                                NL(),
+                                yName,
+                                STR_FixAmountCompartments,
+                                cName);
+                        }
+                        else
+                        {
+                            sb.AppendFormat("{0}\t - (double){1}{2}{3}{2}{4}",
+                                NL(),
+                                WriteDouble(fabs(L0(i,j))),
+                                STR_FixAmountCompartments,
+                                yName,
+                                cName);
+                        }
+                    }
                 }
                 sb.AppendFormat(")/{0};{1}", cLeftName, NL());
             }
@@ -1493,7 +1500,7 @@ void ModelGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
     }
 }
 
-void ModelGenerator::WriteResetEvents(StringBuilder& sb, int numEvents)
+void ModelGenerator::WriteResetEvents(StringBuilder& sb, const int& numEvents)
 {
       sb.AppendFormat("{0}\tpublic void resetEvents() {{0}", NL());
       for (int i = 0; i < numEvents; i++)
@@ -1942,7 +1949,7 @@ bool ModelGenerator::ExpressionContainsSymbol(const string& expression,const str
 }
 
 
-void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, int numReactions)
+void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, const int& numReactions)
 {
     sb.Append("\tpublic void evalInitialAssignments()" + NL());
     sb.Append("\t{" + NL());
@@ -2201,7 +2208,7 @@ void ModelGenerator::WriteComputeReactionRates(StringBuilder& sb, const int& num
     sb.AppendFormat("\t}{0}{0}", NL());
 }
 
-void ModelGenerator::WriteEvalEvents(StringBuilder& sb, int numEvents, int numFloatingSpecies)
+void ModelGenerator::WriteEvalEvents(StringBuilder& sb, const int& numEvents, const int& numFloatingSpecies)
 {
     sb.Append("\t// Event handling function" + NL());
     sb.Append("\tpublic void evalEvents (double timeIn, double[] oAmounts)" + NL());
@@ -2243,7 +2250,7 @@ void ModelGenerator::WriteEvalEvents(StringBuilder& sb, int numEvents, int numFl
     sb.Append("\t}" + NL() + NL());
 }
 
-void ModelGenerator::WriteEvalModel(StringBuilder& sb, int numReactions, int numIndependentSpecies, int numFloatingSpecies, int numOfRules)
+void ModelGenerator::WriteEvalModel(StringBuilder& sb, const int& numReactions, const int& numIndependentSpecies, const int& numFloatingSpecies, const int& numOfRules)
 {
     sb.Append("\t// Model Function" + NL());
     sb.Append("\tpublic void evalModel (double timein, double[] oAmounts)" + NL());
@@ -2455,7 +2462,7 @@ Symbol* ModelGenerator::GetSpecies(const string& id)
     return NULL;
 }
 
-void ModelGenerator::WriteEventAssignments(StringBuilder& sb, int numReactions, int numEvents)
+void ModelGenerator::WriteEventAssignments(StringBuilder& sb, const int& numReactions, const int& numEvents)
 {
 	StringList delays;// = new StringList();
     vector<bool> eventType;// = new List<bool>();
@@ -2575,7 +2582,7 @@ string ModelGenerator::WriteDouble(const double& value)
 //        }
 //
 
-void ModelGenerator::WriteSetParameterValues(StringBuilder& sb, int numReactions)
+void ModelGenerator::WriteSetParameterValues(StringBuilder& sb, const int& numReactions)
 {
     sb.Append("\tpublic void setParameterValues ()" + NL());
     sb.Append("\t{" + NL());
@@ -2649,7 +2656,7 @@ void ModelGenerator::WriteSetBoundaryConditions(StringBuilder& sb)
 }
 
 
-void ModelGenerator::WriteSetInitialConditions(StringBuilder& sb, int numFloatingSpecies)
+void ModelGenerator::WriteSetInitialConditions(StringBuilder& sb, const int& numFloatingSpecies)
 {
     sb.Append("\tpublic void initializeInitialConditions ()" + NL());
     sb.Append("\t{" + NL());

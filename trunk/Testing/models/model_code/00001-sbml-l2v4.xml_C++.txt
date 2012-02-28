@@ -296,8 +296,8 @@ class TModel : IModel
 	// Uses the equation: C = Sd - L0*Si
 	public void computeConservedTotals ()
 	{
-		_ct[0] =  + 1.59e-298_y[0]_c[0]
- + 2.75e-311_y[1]_c[0]
+		_ct[0] =  + _y[0]*_c[0]
+ + _y[1]*_c[0]
 ;
 	}
 
@@ -306,7 +306,8 @@ class TModel : IModel
 	public void updateDependentSpeciesValues (double[] y)
 	{
 		_y[1] = 
-	(_ct[0])/_c[0];
+	(_ct[0]
+	 - y[0]*_c[0])/_c[0];
 	}
 
 	public void computeRules(double[] y) {
@@ -341,7 +342,8 @@ class TModel : IModel
 		double[] dTemp = new double[amounts.Length + rateRules.Length];
 		amounts.CopyTo(dTemp, rateRules.Length);
 		evalModel (time, dTemp);
-		_dydt[1] = 0;
+		_dydt[1] =  - _dydt[0]
+;
 	}
 
 	// Compute the reaction rates

@@ -2,6 +2,7 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include "rrException.h"
 #include "rrDoubleMatrix.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -22,8 +23,11 @@ mMatrix(NULL)
 	}
 }
 
-DoubleMatrix::DoubleMatrix(double* ptrToArray)
+DoubleMatrix::DoubleMatrix(double* ptrToArray, const int& rowCount, const int& colCount)
 {
+	mRowCount = rowCount;
+	mColCount = colCount;
+
 	//Shallow or deep copy?
     mMatrix = ptrToArray; //Thats is pretty shallow...
 }
@@ -41,22 +45,24 @@ bool DoubleMatrix::Allocate(unsigned rows, unsigned cols)
     }
 
 	mMatrix = new double[rows * cols];
+	mRowCount = rows;
+	mColCount = cols;
     return mMatrix ? true : false;
 }
 
 //=========== OPERATORS
 double& DoubleMatrix::operator() (unsigned row, unsigned col)
 {
-    if (row >= mRowCount || col >= mColCount)
+//    if (row >= mRowCount || col >= mColCount)
     {
-    // throw BadIndex("Matrix subscript out of bounds");
+//    	throw Exception("Matrix subscript out of bounds");
     }
     return mMatrix[mColCount*row + col];
 }
 
 double DoubleMatrix::operator() (unsigned row, unsigned col) const
 {
-    if (row >= mRowCount || col >= mColCount)
+//    if (row >= mRowCount || col >= mColCount)
     {
     //    throw BadIndex("const Matrix subscript out of bounds");
     }
