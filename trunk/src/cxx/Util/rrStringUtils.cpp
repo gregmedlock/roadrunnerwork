@@ -17,6 +17,30 @@
 
 namespace rr
 {
+
+string ChangeFileNameExtensionTo(const string& fName, const string& newExtension)
+{
+	string newFName;
+
+	//First create the file name, remove current extension if it exists
+    if(fName.find('.'))
+    {
+		//Extension does exist. Cut it, and append new one
+        newFName =  fName.substr(0, fName.find_last_of('.'));
+    }
+
+    if(newExtension[0] == '.')
+    {
+        newFName = newFName + newExtension;
+    }
+    else
+    {
+    	newFName = newFName + "." + newExtension;
+    }
+
+	return newFName;
+}
+
 bool StartsWith(const string& src, const string& sub)
 {
 	return src.compare(0, sub.size(), sub);
@@ -72,7 +96,6 @@ string Format(const string& src, const string& arg1, const int& arg2)
     return Substitute(tmp, "{1}", ToString(arg2));
 }
 
-
 string Format(const string& src, const string& arg1, const string& arg2, const string& arg3)
 {
 	string tmp = Substitute(src, "{0}", arg1);
@@ -112,21 +135,18 @@ string Substitute(const string& src, const string& thisOne, const string& withTh
 	return newString;
 }
 
-
 //bool InStringList(const string& fldr, list<string>& theList)
 //{
 //	list<string>::iterator index = std::find_if(theList.begin(), theList.end(),  mtkCompareStrings(fldr));
 //	return (index != theList.end()) ? true : false;
 //}
 
-
 string IntToStr(const int& nt)
 {
 	//char *itoa(int value, char *string, int radix);
-	char str[100];// = new char(100);
+	char str[100];
 	itoa(nt, str, 10);
 	string valStr(str);
-//	delete str;
 	return valStr;
 }
 

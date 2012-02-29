@@ -9,6 +9,7 @@
 #include "Logger/rrLog.h"
 #include "rrException.h"
 #include "rrRoadRunner.h"
+#include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace rr;
@@ -24,7 +25,7 @@ int _tmain(int argc, _TCHAR* argv[])
         LogOutput::mLogToConsole = true;
 
 //        gLog.SetCutOffLogLevel(lDebug5);
-        gLog.SetCutOffLogLevel(lWarning);
+        gLog.SetCutOffLogLevel(lInfo);
 
         Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
 
@@ -65,24 +66,27 @@ int _tmain(int argc, _TCHAR* argv[])
             {
                 throw(Exception("Failed to read file:" + fullFilePath));
             }
-            Log(lDebug5)<<"Trying to load model file:"<<fullFilePath;
+            Log(lInfo)<<"\n\n ===== Loading model file:"<<fullFilePath<<" ==============";
             std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
             ifs.close();
             Log(lDebug5)<<"Before loading SBML..SBML string size: "<<sbml.size();
             roadRunner->loadSBML(sbml);
 
             //Save source code
-            string srcCodeFileName("C:\\RRW\\Testing\\models\\model_code//C++//" + modelFName.str() + "_C++.txt");
             string code = roadRunner->GetModelSourceCode();
             if(code.size())
             {
+	            string srcCodeFileName("C:\\RRW\\Testing\\models\\model_code//C++//" + modelFName.str());
+            	srcCodeFileName = ChangeFileNameExtensionTo(srcCodeFileName, ".cs");
                 ofstream outFile(srcCodeFileName.c_str());
                 if(!outFile)
                 {
                     throw(Exception("Failed to write file:" + srcCodeFileName));
                 }
                 outFile<<code;
+				Log(lInfo)<<"Wrote c# code to: "<<srcCodeFileName;
             }
+
         }//test cases loop
 
         cout<<"Copyright: "<<roadRunner->getCopyright()<<endl;
