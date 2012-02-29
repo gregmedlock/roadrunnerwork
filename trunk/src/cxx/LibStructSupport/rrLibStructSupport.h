@@ -40,6 +40,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 						    	StructAnalysis();
     	virtual 			   ~StructAnalysis();
 		LibStructural&			GetInstance(){return *mInstance;}
+        void					Reset();
 
 //        internal const string LIBRARY_FILE = "LibStructural";
 //        string AnalyzeWithFullyPivotedLU()

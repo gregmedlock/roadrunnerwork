@@ -15,8 +15,11 @@ void StringListContainer::Add(const StringList& list)
 	mContainer.push_back(list);
 }
 
-void StringListContainer::Add(const string& coll)
+void StringListContainer::Add(const string& item)
 {
+	StringList list;
+    list.push_back(item);
+	Add(list);
 
 }
 

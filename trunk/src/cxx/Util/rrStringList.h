@@ -28,6 +28,7 @@ class RR_DECLSPEC StringList : public rrObject
         int					        find(const string& item);
         void						empty(){mStrings.clear();}
         bool						Contains(const string& item);
+        void						push_back(const string& item);
 };
 
 }

@@ -24,13 +24,20 @@ NOMSupport::NOMSupport()
 :
 mModel(NULL),
 mSBMLDoc(NULL)//,
-//model(&mModel)
 {
 
 }
 
 NOMSupport::~NOMSupport()
 {
+}
+
+void NOMSupport::Reset()
+{
+	delete mModel;
+    delete mSBMLDoc;
+    mModel 		= NULL;
+    mSBMLDoc	= NULL;
 }
 
 //int	NOMSupport::LoadSBML(const string& sbml)
@@ -1815,12 +1822,12 @@ ArrayList NOMSupport::getNthFunctionDefinition(const int& arg)
     string fnId = fnDefn->getId();
     string fnMath = SBML_formulaToString(fnDefn->getBody());
 
-    ArrayList fnDefnList;// = new ArrayList();
-
+    ArrayList fnDefnList;
     fnDefnList.Add(fnId);
 
     int numArgs = (int) fnDefn->getNumArguments();
-    StringList argList;// = new ArrayList();
+
+    StringList argList;
     for(int n = 0; n < numArgs; n++)
     {
         argList.Add(fnDefn->getArgument(n)->getName());

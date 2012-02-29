@@ -654,6 +654,13 @@ void Util::CopyMatrix(IntMatrix& oMatrix, int** &outMatrix, int &outNumRows, int
 }
 void Util::CopyMatrix(DoubleMatrix& oMatrix, double** &outMatrix, int &outNumRows, int &outNumCols)
 {
+	if(!oMatrix.getArray())
+    {
+		outMatrix = NULL;
+		outNumRows = 0;
+		outNumCols = 0;
+        return;
+    }
 	int numRows = oMatrix.numRows();
 	int numCols = oMatrix.numCols();
 

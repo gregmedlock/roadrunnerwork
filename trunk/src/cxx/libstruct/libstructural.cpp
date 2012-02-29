@@ -28,7 +28,27 @@ using namespace std;
 
 namespace LIB_STRUCTURAL
 {
+
 LibStructural* LibStructural::_Instance = NULL;
+
+void LibStructural::Reset()
+{
+	_NumIndependent = 0;
+    _Sparsity = 0;
+    _Pvalue = 0;
+    _svd_rank_Nmat = 0;
+    _svd_rank_Nrmat = 0;
+    _qr_rank_Nrmat = 0;
+    _NumIndependent = 0;					// number of independent species;
+    _NumDependent = 0;
+
+    nz_count = 0;
+    numFloating = 0;
+    numReactions = 0;
+    numBoundary = 0;
+    zero_nmat = 0;
+	FreeMatrices();
+}
 
 //#ifndef NO_SBML
 LibStructural::LibStructural() :   _NumRows(0), _NumCols(0),
@@ -44,9 +64,6 @@ LibStructural::LibStructural() :   _NumRows(0), _NumCols(0),
 		{}
 
 #ifndef NO_SBML
-
-
-
 // ----------------------------------------------------------------------------------------
 // string loadSBML(string)
 //
@@ -60,13 +77,15 @@ LibStructural::LibStructural() :   _NumRows(0), _NumCols(0),
 // ----------------------------------------------------------------------------------------
 string LibStructural::loadSBML(string sSBML)
 {
-	DELETE_IF_NON_NULL(_Model);		_Model = new SBMLmodel(sSBML);
+	DELETE_IF_NON_NULL(_Model);
+    _Model = new SBMLmodel(sSBML);
 	return analyzeWithQR();
 }
 
 string LibStructural::loadSBMLFromFile(string sFileName)
 {
-	DELETE_IF_NON_NULL(_Model);		_Model = SBMLmodel::FromFile(sFileName);
+	DELETE_IF_NON_NULL(_Model);
+    _Model = SBMLmodel::FromFile(sFileName);
 	return analyzeWithQR();
 }
 
@@ -80,12 +99,12 @@ string LibStructural::loadSBMLwithTests(string sSBML)
 	oResult << analyzeWithQR();
 	oResult << endl << endl;
 	oResult << getTestDetails();
-
 	return oResult.str();
 }
 
 void LibStructural::InitializeFromModel(LIB_STRUCTURAL::SBMLmodel& oModel)
 {
+	Reset();
 	numFloating = oModel.numFloatingSpecies();
 	numReactions = oModel.numReactions();
 	numBoundary = oModel.getModel()->getNumSpeciesWithBoundaryCondition();
@@ -170,7 +189,7 @@ string LibStructural::GenerateResultString()
 	oBuffer << "Size of Stochiometric Matrix: " << _NumRows << " x "  << _NumCols 
 		<< " (Rank is  " << _NumIndependent << ")";		
 
-	if (_NumCols > 0)  
+	if (_NumCols > 0)
 	{
 		oBuffer << endl << "Nonzero entries in Stochiometric Matrix: " << nz_count
 			<< "  (" << _Sparsity << "% full)" << endl;
@@ -285,7 +304,7 @@ void LibStructural::Initialize()
 			for (unsigned int i = 0; i < _Nmat->numCols(); i++)
 			{
 				stringstream sTemp; sTemp << i;
-				_inputReactionNames.push_back( sTemp.str() ); 
+				_inputReactionNames.push_back( sTemp.str() );
 			}
 		}
 		if (_Nmat->numRows() != _inputSpeciesNames.size())
@@ -302,15 +321,13 @@ void LibStructural::Initialize()
 		DoubleMatrix oCopy(*_Nmat);
 
 		InitializeFromStoichiometryMatrix( oCopy	,
-			_inputSpeciesNames, _inputReactionNames, 
+			_inputSpeciesNames, _inputReactionNames,
 			_inputValues);
 	}
-
-
 }
 
 void LibStructural::InitializeFromStoichiometryMatrix(DoubleMatrix& oMatrix,
-													  vector<string>& speciesNames, 
+													  vector<string>& speciesNames,
 													  vector<string>& reactionNames,
 													  vector<double>& concentrations)
 {
@@ -355,10 +372,19 @@ void LibStructural::InitializeFromStoichiometryMatrix(DoubleMatrix& oMatrix)
 	_NumRows = oMatrix.numRows();
 	_NumCols = oMatrix.numCols();
 
-	if (_Nmat == NULL) _Nmat = new DoubleMatrix(oMatrix);
+	//Todo: we should not be here if rows and cols are zero...
+    if(!_NumRows || !_NumCols)
+    {
+    	return;
+    }
+
+	if (_Nmat == NULL)
+    {
+    	_Nmat = new DoubleMatrix(oMatrix);
+    }
 
 	// number of non-zero elements
-	nz_count = 0;		
+	nz_count = 0;
 	for (int i=0; i<_NumRows; i++) {
 		for (int j=0; j<_NumCols; j++) {
 			if (fabs(oMatrix(i,j)) > _Tolerance) nz_count++;
@@ -941,7 +967,7 @@ string LibStructural::analyzeWithFullyPivotedLU()
 			// if there are zeros, the columns of NmatT have to be permuted.
 			// First we check if nInfo is < 0 (illegal value) or if it is > 0 (this
 			// means a zero has been encountered on the diagonal while computing LU
-			// factorization). nInfo = 0 implies a successful exit. So we have to 
+			// factorization). nInfo = 0 implies a successful exit. So we have to
 			// to swap the cols only if nInfo > 0
 			int nInfo = oLUResult->nInfo;
 
@@ -1752,8 +1778,6 @@ void LibStructural::getNDCMatrixLabels(vector< string > &oRows, vector< string >
 	}
 }
 
-
-
 void LibStructural::getColumnReorderedNrMatrixLabels(vector< string > &oRows, vector< string > &oCols )
 {
 	oRows = getIndependentSpecies();   //getReorderedSpecies();
@@ -1762,16 +1786,13 @@ void LibStructural::getColumnReorderedNrMatrixLabels(vector< string > &oRows, ve
 
 	for (int j = 0; j < nDependent; j++)
 	{
-		oCols.push_back(_reactionIndexList[colVec[j + nIndependent]]); 		
+		oCols.push_back(_reactionIndexList[colVec[j + nIndependent]]);
 	}
 	for (int j = 0; j < nIndependent; j++)
 	{
-		oCols.push_back(_reactionIndexList[colVec[j]]); 		
+		oCols.push_back(_reactionIndexList[colVec[j]]);
 	}
-
-
 }
-
 
 DoubleMatrix* LibStructural::getColumnReorderedNrMatrix()
 {
@@ -2092,7 +2113,8 @@ LIB_EXTERN  int LibStructural_loadSBML(const char* sSBML, char** oResult, int *n
 {
 	try
 	{
-		*oResult = strdup(LibStructural::getInstance()->loadSBML(string(sSBML)).c_str());
+    	string msg = LibStructural::getInstance()->loadSBML(string(sSBML));
+		*oResult = strdup(msg.c_str());
 		*nLength = strlen(*oResult);
 		return 0;
 	}

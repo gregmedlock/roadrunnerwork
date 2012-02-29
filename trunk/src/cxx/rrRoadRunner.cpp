@@ -47,6 +47,14 @@ RoadRunner::~RoadRunner()
     delete mCompiler;
 }
 
+void RoadRunner::Reset()
+{
+	if(mModelGenerator)
+    {
+		mModelGenerator->Reset();
+	}
+}
+
 string RoadRunner::GetModelSourceCode()
 {
 	return _sModelCode;
@@ -54,14 +62,16 @@ RoadRunner::~RoadRunner()
 
 void RoadRunner::InitializeModel(IModel* aModel)
 {
-    mModel = aModel;//((IModel)o);
+    mModel = aModel;
 
     if(!mModel)
     {
     	return;
     }
     IModel& model = *mModel;
+
     //model.Warnings.AddRange(ModelGenerator.Instance.Warnings);
+
     modelLoaded = true;
     _bConservedTotalChanged = false;
 
@@ -70,10 +80,8 @@ void RoadRunner::InitializeModel(IModel* aModel)
     model.setParameterValues();
     model.setCompartmentVolumes();
     model.setBoundaryConditions();
-
     model.setInitialConditions();
     model.convertToAmounts();
-
     model.evalInitialAssignments();
     model.computeRules(model.y);
     model.convertToAmounts();

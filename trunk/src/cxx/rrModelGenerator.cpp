@@ -23,15 +23,20 @@ namespace rr
 ModelGenerator::ModelGenerator()
 :
 mStructAnalysis(),
-//mLibStructRef(mStructAnalysis.GetInstance())
 STR_DoubleFormat("%.3g"),
 STR_FixAmountCompartments("*")
 {
-
+	mNOM.Reset();
+    mStructAnalysis.Reset();
 }
 
 ModelGenerator::~ModelGenerator(){}
 
+void ModelGenerator::Reset()
+{
+	mNOM.Reset();
+    mStructAnalysis.Reset();
+}
 
 int ModelGenerator::NumAdditionalRates()
 {
@@ -63,17 +68,17 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 
     Log(lDebug3)<<"Number of reactions:"<<_NumReactions;
 
-	globalParameterList.Clear();// = new SymbolList();
-    ModifiableSpeciesReferenceList.Clear();// = new SymbolList();
-    localParameterList.reserve(_NumReactions);// = new SymbolList[_NumReactions];
-    reactionList.Clear();// = new SymbolList();
-    boundarySpeciesList.Clear();// = new SymbolList();
-    floatingSpeciesConcentrationList.Clear();// = new SymbolList();
-    floatingSpeciesAmountsList.Clear();// = new SymbolList();
-    compartmentList.Clear();// = new SymbolList();
-    conservationList.Clear();// = new SymbolList();
-    _functionNames.empty();// = new list<string>();
-    _functionParameters.empty();// = new StringCollection();
+	globalParameterList.Clear();
+    ModifiableSpeciesReferenceList.Clear();
+    localParameterList.reserve(_NumReactions);
+    reactionList.Clear();
+    boundarySpeciesList.Clear();
+    floatingSpeciesConcentrationList.Clear();
+    floatingSpeciesAmountsList.Clear();
+    compartmentList.Clear();
+    conservationList.Clear();
+    _functionNames.empty();
+    _functionParameters.empty();
 
    	LibStructural* instance = LibStructural::getInstance();
 	string msg;
@@ -85,7 +90,6 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     	{
 			Log(lError)<<"Failed loading sbml into StructAnalysis";
 	    }
-
     }
     catch(...)
     {
@@ -147,8 +151,6 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     WriteSetCompartmentVolumes(sb);
     WriteSetParameterValues(sb, _NumReactions);
     WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
-
-
 
     WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
     int numOfRules = WriteComputeRules(sb, _NumReactions);
@@ -1338,7 +1340,6 @@ void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, const int& n
         double* matPtr = mStructAnalysis.GetGammaMatrix();
 
         DoubleMatrix gamma(matPtr, numDependentSpecies, numFloatingSpecies);
-//        gamma.
         for (int i = 0; i < numDependentSpecies; i++)
         {
             sb.AppendFormat("\t\t_ct[{0}] = ", i);
@@ -1415,7 +1416,7 @@ void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, const int& n
                     string cName = convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName);
                     double* mat = L0.GetPointer();
                     double matElementValue = L0(i,j);
-                    if (L0(i,j) > 0)
+                    if (L0(i,j) > 0) // In C# code there is no checking for index out of bound..
                     {
                         if (L0(i,j) == 1)
                         {
@@ -1470,11 +1471,14 @@ void ModelGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
     	try
         {
         	StringListContainer oList = mNOM.getNthFunctionDefinition(i);
-          	string sName = (string) oList[0][0];
+            StringList aList = oList[0];
+
+          	string sName = aList[0];
           	//sName.Trim();
             _functionNames.Add(sName);
-            StringList oArguments = (StringList) oList[1];
-            string sBody = (string) oList[2][0];
+            StringList oArguments = oList[1];
+            StringList list2 = oList[2];
+            string sBody = list2[0];
 
             sb.AppendFormat("\t// User defined function:  {0}{1}", sName, NL());
             sb.AppendFormat("\tpublic double {0} (", sName);

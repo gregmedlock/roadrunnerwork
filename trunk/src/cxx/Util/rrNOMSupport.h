@@ -24,23 +24,31 @@ namespace rr
 using namespace libsbml;
 class RR_DECLSPEC NOMSupport : public rrObject
 {
-
-    protected:
 		//The C# SBMLSupport.cs have two static objects, SBMLDocument and Model, created when NOM reads SBML..
-    	SBMLDocument		   *mSBMLDoc; 	//Correspond to C# _oDoc
-		Model 				   *mModel;		//Correspond to C# _oModel
 //        Model*				   *model;		//Tie to mModel in constructor
-
 //        static SBMLDocument _oDoc;
 //        static Model _oModel;
-        StringSymbolHashTable 	mSymbolTable;// = new Hashtable();
+//        ParameterSets _ParameterSets;
+
+//        StringList Namespaces
+//        Model Model
+//        Model SbmlModel
+//        ParameterSets ParameterSets;
+//        SBMLDocument SbmlDocument
+//        static SBMLDocument Document
+
+    protected:
+
+    	SBMLDocument		   *mSBMLDoc; 		//Correspond to C# _oDoc
+		Model 				   *mModel;			//Correspond to C# _oModel
+        StringSymbolHashTable 	mSymbolTable;
         ArrayList 				returnUnitDefinition(UnitDefinition oDefinition);
         const ASTNode* 			changeSymbol(ASTNode* node, const string& time, const int& targetType);
         ASTNode 				changeTimeToCSymbol(ASTNode* node, const string& name, const int& type);
         bool 					addMissingModifiers(Model *oModel);
         StringList 				_Namespaces;
         StringList 				GetSymbols(const string& formula);
-//        ParameterSets _ParameterSets;
+
         string 					GetInitialAssignmentFor(const string& sbmlId);
         string 					GetName(SBase* element);
         string 					GetRuleFor(const string& sbmlId);
@@ -125,15 +133,9 @@ class RR_DECLSPEC NOMSupport : public rrObject
         list<Rule> 				ReorderAssignmentRules(list<Rule>& assignmentRules);
         StringList 				GetSymbols(ASTNode* math);
 
-//        StringList Namespaces
-//        Model Model
-//        Model SbmlModel
         pair<string, string> 	getNthInitialAssignmentPair(const int& nIndex);
-//        ParameterSets ParameterSets;
         SBase* 					GetElement(const string& sId);
-//        SBMLDocument SbmlDocument
         stack<string> 			GetMatchForSymbol(const string& sbmlId);
-//        static SBMLDocument Document
         string                  addEmptySetNode(const string& sbml);
         string                  addEmptySetNodes(const string& sbml);
         string                  addMissingModifiers(const string& sModel);
@@ -205,6 +207,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
 		string 					getNthBoundarySpeciesCompartmentName(const int& nIndex);
 		string 					getNthFloatingSpeciesCompartmentName(const int& nIndex);
 		StringListContainer 	getListOfBoundarySpecies();
+        void					Reset();
 };
 
 }//namespace rr

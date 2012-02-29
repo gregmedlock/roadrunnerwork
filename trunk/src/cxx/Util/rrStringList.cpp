@@ -33,6 +33,11 @@ void StringList::Add(const string& str)
 	mStrings.push_back(str);
 }
 
+void StringList::push_back(const string& item)
+{
+	Add(item);
+}
+
 int StringList::find(const string& item)
 {
 	return IndexOf(mStrings, item);

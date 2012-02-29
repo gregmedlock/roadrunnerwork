@@ -259,10 +259,10 @@ vector<string> GetStringArrayFromPtr(IntPtr pointer, int nStrings)
 /// </summary>
 string GetStringFromPtr(IntPtr pointer, int nLength)
 {
-	char** oneString = (char**) pointer;
+	char* oneString = (char*) pointer;
 //    string sResult = Marshal.PtrToStringAnsi(pointer, nLength);
 //    StructAnalysis.FreeVector(pointer);
-	string sResult(*oneString);
+	string sResult(oneString);
     return sResult;
 }
 //

@@ -87,9 +87,10 @@ namespace LIB_STRUCTURAL
 	class LIB_EXTERN LibStructural
 	{
 	public:
-		typedef LIB_LA::Matrix< double > DoubleMatrix;
-		typedef LIB_LA::Matrix< int > IntMatrix;
-		typedef LIB_LA::Matrix< LIB_LA::Complex > ComplexMatrix;
+		typedef LIB_LA::Matrix< int > 				IntMatrix;
+		typedef LIB_LA::Matrix< double > 			DoubleMatrix;
+		typedef LIB_LA::Matrix< LIB_LA::Complex > 	ComplexMatrix;
+        void										Reset();		//Call between loading different models
 
 	private:
 
@@ -115,7 +116,6 @@ namespace LIB_STRUCTURAL
 		double*								_IC;
 		double*								_BC;
 
-
 		int*								spVec;
 		int*								colVec;
 		std::vector < std::string >         _consv_list;
@@ -128,10 +128,10 @@ namespace LIB_STRUCTURAL
 		int									_NumDependent;
 
 		int									nz_count;
-		int numFloating;
-		int numReactions;
-		int numBoundary;
-		bool zero_nmat;
+		int                                 numFloating;
+		int                                 numReactions;
+		int                                 numBoundary;
+		bool                                zero_nmat;
 
 
 		int _SvdRankNr;
@@ -144,28 +144,23 @@ namespace LIB_STRUCTURAL
 		std::map<std::string, int>					_speciesIndexList2;
 		std::map<int, std::string>					_speciesNamesList;
 		std::map<std::string, int>					_speciesNamesList2;
-
 		std::map<int, std::string>					_reactionIndexList;
 		std::map<int, std::string>					_reactionNamesList;
-
 		std::map<std::string, int>					_modSpeciesIndexList;
 		std::map<std::string, int>					_modSpeciesNamesList;
-
 		std::map<std::string, double>				_speciesValueList;
 		std::map<std::string, double>				_variableList;
-
 		std::map<int, std::string>					_bSpeciesIndexList;
 		std::map<std::string, int>					_bSpeciesIndexList2;
 		std::map<int, std::string>					_bSpeciesNamesList;
 		std::map<std::string, int>					_bSpeciesNamesList2;
 		std::map<std::string, double>				_bSpeciesValueList;
 
-
 		std::vector<std::string>			        _inputSpeciesNames;
 		std::vector<std::string>			        _inputReactionNames;
 		std::vector<double>		                    _inputValues;
 
-	private: 
+	private:
 
 		std::string GenerateResultString();
 

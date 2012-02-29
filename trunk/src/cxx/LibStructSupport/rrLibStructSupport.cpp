@@ -20,6 +20,13 @@ mInstance(LibStructural::getInstance())
 StructAnalysis::~StructAnalysis()
 {}
 
+void StructAnalysis::Reset()
+{
+	if(mInstance)
+    {
+		mInstance->Reset();
+    }
+}
 
 //vector<string> StructAnalysis::GetReorderedSpeciesIds()
 //{
@@ -1101,7 +1108,7 @@ string StructAnalysis::LoadSBML(const string& sbml)
     IntPtr pointer;
 	int nLength;
 
-    if (LibStructural_loadSBML(sbml.c_str(),  (char**) pointer, &nLength) < 0)
+    if (LibStructural_loadSBML(sbml.c_str(),  (char**) &pointer, &nLength) < 0)
     {
         throw Exception("The SBML could not be loaded, please verify that it is a valid SBML file.");
     }
