@@ -23,13 +23,15 @@ int _tmain(int argc, _TCHAR* argv[])
         gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
         LogOutput::mLogToConsole = true;
 
-        gLog.SetCutOffLogLevel(lDebug5);
+//        gLog.SetCutOffLogLevel(lDebug5);
+        gLog.SetCutOffLogLevel(lWarning);
+
         Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
 
 	    RoadRunner *roadRunner = NULL;
 
         //Loading models
-		for(int caseNr = 49; caseNr < 100; caseNr++)
+		for(int caseNr = 1; caseNr < 100; caseNr++)
         {
         	//int caseNr = 41;
 			if(roadRunner)
@@ -70,7 +72,7 @@ int _tmain(int argc, _TCHAR* argv[])
             roadRunner->loadSBML(sbml);
 
             //Save source code
-            string srcCodeFileName("C:\\RRW\\Testing\\models\\model_code//" + modelFName.str() + "_C++.txt");
+            string srcCodeFileName("C:\\RRW\\Testing\\models\\model_code//C++//" + modelFName.str() + "_C++.txt");
             string code = roadRunner->GetModelSourceCode();
             if(code.size())
             {
