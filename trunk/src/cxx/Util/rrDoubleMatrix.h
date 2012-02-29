@@ -13,6 +13,7 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
     	unsigned 		mRowCount;
         unsigned 		mColCount;
     	double* 		mMatrix;
+		bool			mIsOwner;
 
     public:
     					DoubleMatrix(unsigned rows = 0, unsigned cols = 0);

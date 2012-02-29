@@ -81,7 +81,7 @@ double* GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols);
 //        /// <summary>
 //        /// Get string array from ptr
 //        /// </summary>
-vector<string> GetStringArrayFromPtr(IntPtr pointer, int nLength);
+vector<string> GetStringArrayFromPtr(IntPtr &pointer, int nLength);
 
 //        /// <summary>
 //        /// Get string array from ptr
@@ -91,7 +91,7 @@ vector<string> GetStringArrayFromPtr(IntPtr pointer, int nLength);
 //        /// <summary>
 //        /// Get string from ptr
 //        /// </summary>
-RR_DECLSPEC string GetStringFromPtr(IntPtr pointer, int nLength);
+RR_DECLSPEC string GetStringFromPtr(IntPtr &pointer, int nLength);
 
 //        /// <summary>
 //        /// Get string from ptr

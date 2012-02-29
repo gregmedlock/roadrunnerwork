@@ -22,15 +22,16 @@ int _tmain(int argc, _TCHAR* argv[])
         getcwd(exePath, MAXPATH);
         gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
         LogOutput::mLogToConsole = true;
+
         gLog.SetCutOffLogLevel(lDebug5);
         Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
 
 	    RoadRunner *roadRunner = NULL;
 
         //Loading models
-		for(int caseNr = 1; caseNr < 50; caseNr++)
+		for(int caseNr = 49; caseNr < 100; caseNr++)
         {
-        	int caseNr = 29;
+        	//int caseNr = 41;
 			if(roadRunner)
             {
             	delete roadRunner;
@@ -62,7 +63,7 @@ int _tmain(int argc, _TCHAR* argv[])
             {
                 throw(Exception("Failed to read file:" + fullFilePath));
             }
-            Log(lDebug5)<<"Loaded mode file:"<<fullFilePath;
+            Log(lDebug5)<<"Trying to load model file:"<<fullFilePath;
             std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
             ifs.close();
             Log(lDebug5)<<"Before loading SBML..SBML string size: "<<sbml.size();

@@ -22,6 +22,9 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
+			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
+			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<Defines>IMPORT_RR;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi;mtkCommonRTL.bpi</LinkPackageImports>
@@ -44,6 +47,9 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
+			<BCC_MonitorThis>true</BCC_MonitorThis>
+			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<_TCHARMapping>char</_TCHARMapping>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
 			<FinalOutputDir>C:\RRW\build\bin\</FinalOutputDir>

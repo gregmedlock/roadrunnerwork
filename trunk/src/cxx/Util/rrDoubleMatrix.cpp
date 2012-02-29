@@ -15,7 +15,8 @@ DoubleMatrix::DoubleMatrix(unsigned rows, unsigned cols)
 :
 mRowCount (rows),
 mColCount (cols),
-mMatrix(NULL)
+mMatrix(NULL),
+mIsOwner(true)
 {
 	if (rows != 0 && cols != 0)
 	{
@@ -30,11 +31,15 @@ DoubleMatrix::DoubleMatrix(double* ptrToArray, const int& rowCount, const int& c
 
 	//Shallow or deep copy?
     mMatrix = ptrToArray; //Thats is pretty shallow...
+    mIsOwner = false; 	  //Somebody else allocatesd this one
 }
 
 DoubleMatrix::~DoubleMatrix()
 {
-	delete[] mMatrix;
+	if(mIsOwner)
+    {
+    	delete mMatrix;
+    }
 }
 
 bool DoubleMatrix::Allocate(unsigned rows, unsigned cols)

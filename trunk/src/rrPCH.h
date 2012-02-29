@@ -1,15 +1,13 @@
 #ifndef rrPCHH
 #define rrPCHH
-
-#include <windows.h>
+//#include <windows.h>
 #include <string>
 #include <vector>
 #include <list>
 #include <iostream>
 #include <fstream>
-
-#include <math.h>
-#include <stdarg.h>
+//#include <math.h>
+//#include <stdarg.h>
 
 #include "Logger/rrLog.h"
 #endif

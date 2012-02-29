@@ -130,10 +130,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 	ReadLocalParameters(_NumReactions, _LocalParameterDimensions, _TotalLocalParmeters);
     _NumEvents = mNOM.getNumEvents();
 
-    // Get the L0 matrix
-    double* aL0 = InitializeL0(); //Todo: What is this doing? answer.. it is used below..
 
-    DoubleMatrix L0(aL0); //How many rows and cols??
 
     WriteClassHeader(sb);
     WriteOutVariables(sb);
@@ -150,10 +147,19 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     WriteSetBoundaryConditions(sb);
     WriteSetCompartmentVolumes(sb);
     WriteSetParameterValues(sb, _NumReactions);
-    WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
+
+    if(mStructAnalysis.GetGammaMatrix())
+    {
+    	WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
+    }
+
+    // Get the L0 matrix
+    double* aL0 = InitializeL0(); //Todo: What is this doing? answer.. it is used below..
+    DoubleMatrix L0(aL0); //How many rows and cols??
 
     WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
     int numOfRules = WriteComputeRules(sb, _NumReactions);
+
     WriteComputeAllRatesOfChange(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
     WriteComputeReactionRates(sb, _NumReactions);
     WriteEvalModel(sb, _NumReactions, _NumIndependentSpecies, _NumFloatingSpecies, numOfRules);
@@ -2481,7 +2487,8 @@ void ModelGenerator::WriteEventAssignments(StringBuilder& sb, const int& numReac
             eventPersistentType.push_back(mNOM.GetModel()->getEvent(i)->getTrigger()->getPersistent());
 
             StringList event = ev[1];
-            string str = substituteTerms(numReactions, "", (string) event[1]);
+            int numItems = event.size();
+            string str = substituteTerms(numReactions, "", event[0]);
             delays.Add(str);
 
             sb.AppendFormat("\tpublic void eventAssignment_{0} () {{1}", i, NL());

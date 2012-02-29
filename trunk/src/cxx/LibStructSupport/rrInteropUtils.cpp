@@ -126,7 +126,7 @@ namespace rr
 /// </summary>
 double* GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
 {
-	double* oResult = new double(nRows*nCols);
+	double* oResult = new double[nRows*nCols];
 
 //    double* Matrix = (double*) pointer;
    	double** Matrix = (double**) pointer;
@@ -220,7 +220,7 @@ double* GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
 /// <summary>
 /// Get string array from ptr
 /// </summary>
-vector<string> GetStringArrayFromPtr(IntPtr pointer, int nStrings)
+vector<string> GetStringArrayFromPtr(IntPtr &pointer, int nStrings)
 {
 	vector<string> oResult;
     oResult.resize(nStrings);
@@ -257,7 +257,7 @@ vector<string> GetStringArrayFromPtr(IntPtr pointer, int nStrings)
 /// <summary>
 /// Get string from ptr
 /// </summary>
-string GetStringFromPtr(IntPtr pointer, int nLength)
+string GetStringFromPtr(IntPtr &pointer, int nLength)
 {
 	char* oneString = (char*) pointer;
 //    string sResult = Marshal.PtrToStringAnsi(pointer, nLength);

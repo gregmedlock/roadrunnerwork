@@ -332,7 +332,7 @@ class TModel : IModel
 		_y[2] = 
 	(_ct[0]
 	 - y[0]*_c[0]
-	 (double)1.71e-296*y[1]*_c[0])/_c[0];
+	 - y[1]*_c[0])/_c[0];
 	}
 
 	public void computeRules(double[] y) {
@@ -368,7 +368,7 @@ class TModel : IModel
 		amounts.CopyTo(dTemp, rateRules.Length);
 		evalModel (time, dTemp);
 		_dydt[2] =  - _dydt[0]
- + (double)1.71e-296*_dydt[1]
+ - _dydt[1]
 ;
 	}
 

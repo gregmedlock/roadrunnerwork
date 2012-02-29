@@ -314,7 +314,9 @@ double* StructAnalysis::GetGammaMatrix()
 
     if (LibStructural_getGammaMatrix((double***) &pointer, &nRows, &nCols) < 0 )
     {
-        throw Exception("The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.");
+//        throw Exception("The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.");
+		Log(lWarning)<<("The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.");
+        return NULL;
     }
 	double *res = GetDoubleMatrixFromPtr(pointer, nRows, nCols);
     return res;
@@ -600,8 +602,8 @@ void StructAnalysis::GetL0MatrixLabels(vector<string>& sRowLabels, vector<string
     int outColCount;
 
     LibStructural_getL0MatrixLabels((char***) &outRowLabels, &outRowCount,(char***) &outColLabels, &outColCount);
-    sRowLabels = GetStringArrayFromPtr(outRowLabels, outRowCount);
-    sColumnLabels = GetStringArrayFromPtr(outColLabels, outColCount);
+    sRowLabels 		= GetStringArrayFromPtr(outRowLabels, outRowCount);
+    sColumnLabels 	= GetStringArrayFromPtr(outColLabels, outColCount);
 }
 
 ////        public static void GetL0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)

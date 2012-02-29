@@ -329,8 +329,9 @@ class TModel : IModel
 	public void updateDependentSpeciesValues (double[] y)
 	{
 		_y[2] = 
-	(_ct[0]
-	 (double)2.97e-298*y[1]*_c[0])/_c[0];
+	(_ct[0] + 
+	y[1]*_c[0]
+	)/_c[0];
 	}
 
 	public void computeRules(double[] y) {
@@ -365,7 +366,7 @@ class TModel : IModel
 		double[] dTemp = new double[amounts.Length + rateRules.Length];
 		amounts.CopyTo(dTemp, rateRules.Length);
 		evalModel (time, dTemp);
-		_dydt[2] =  + (double)2.97e-298*_dydt[1]
+		_dydt[2] =  + _dydt[1]
 ;
 	}
 
