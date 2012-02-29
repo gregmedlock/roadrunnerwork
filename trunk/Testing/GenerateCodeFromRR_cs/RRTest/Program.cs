@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,34 +14,48 @@ namespace RRTest
 	{
 		static void Main(string[] args)
 		{
-			RoadRunner oService = new RoadRunner();
-	        string modelsRootPath = "C:\\RRW\\Testing\\models";
+			RoadRunner rr = new RoadRunner();
+			string modelsRootPath = "C:\\RRW\\Models";
+			string caseList = modelsRootPath + "\\list_of_test_cases_l2v4.txt";
+
+			string[] models = System.IO.File.ReadAllLines(caseList);
+
+			int i = 0;
+			foreach(string model in models)			
+			{
+				models[i++] = "C:\\RRW\\" + model;				
+			}
+
+			foreach (string model in models)
+			{
+				System.Console.WriteLine(model);
+				string sbml = System.IO.File.ReadAllText(model);
+
+				rr.loadSBML(sbml);
+				string modelCode = rr.getCSharpCode();
+				
+				//Write the code to file
+				string currentModel = Path.GetFileNameWithoutExtension(model) +".cs";
+
+				string outPath = "C:\\RRW\\Testing\\rr_code_output\\cs_from_rr_cs";
+				string outFName = outPath + "\\" + currentModel;
+				System.IO.File.WriteAllText(outFName, modelCode);
+
+
+		
+
+			}
             
-            StringStream modelSubPath;
-            StringStream modelFName;
+            
 
-            string subFolder = ("test_cases_l2v4");
 
-            //modelSubPath <<setfill('0')<<setw(5)<<caseNr;
-
-            //modelFName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
-
-            //string subFolder("");
-            //model<<"feedback.xml";
-            if(subFolder.Length > 0)
-            {
-                modelsRootPath = modelsRootPath + "\\" + subFolder + "\\" + modelSubPath.str();
-            }
-
-            string fullFilePath = (modelsRootPath +   "\\\\" + modelFName.str());
-
-			string sbml= System.IO.File.ReadAllText(fullFilePath);
+			//
             
             
             
 
 
-			oService.loadSBMLFromFile("feedback.xml");			
+
 		}
 	}
 }

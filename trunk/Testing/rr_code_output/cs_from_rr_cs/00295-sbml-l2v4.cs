@@ -13,19 +13,20 @@ class TModel : IModel
 
 	// y[0] = S1
 	// y[1] = S2
+	// y[2] = S3
 
 	private List<string> _Warnings = new List<string>();
-	private double[] _gp = new double[1];           // Vector containing all the global parameters in the System  
+	private double[] _gp = new double[2];           // Vector containing all the global parameters in the System  
 	private double[] _sr = new double[0];           // Vector containing all the modifiable species references  
 	private double[][] _lp = new double[1][];       // Vector containing all the local parameters in the System  
-	private double[] _y = new double[2];            // Vector containing the concentrations of all floating species 
-	private double[] _init_y = new double[2];            // Vector containing the initial concentrations of all floating species 
-	private double[] _amounts = new double[2];      // Vector containing the amounts of all floating species 
+	private double[] _y = new double[3];            // Vector containing the concentrations of all floating species 
+	private double[] _init_y = new double[3];            // Vector containing the initial concentrations of all floating species 
+	private double[] _amounts = new double[3];      // Vector containing the amounts of all floating species 
 	private double[] _bc = new double[0];           // Vector containing all the boundary species concentration values   
 	private double[] _c = new double[1];            // Vector containing all the compartment values   
-	private double[] _dydt = new double[2];         // Vector containing rates of changes of all species   
+	private double[] _dydt = new double[3];         // Vector containing rates of changes of all species   
 	private double[] _rates = new double[1];        // Vector containing the rate laws of all reactions    
-	private double[] _ct = new double[1];           // Vector containing values of all conserved sums      
+	private double[] _ct = new double[2];           // Vector containing values of all conserved sums      
 	private double[] _eventTests = new double[0];   // Vector containing results of any event tests        
 	private TEventDelayDelegate[] _eventDelay = new TEventDelayDelegate[0]; // array of trigger function pointers
 	private bool[] _eventType = new bool[0]; // array holding the status whether events are useValuesFromTriggerTime or not
@@ -40,9 +41,9 @@ class TModel : IModel
 	private int numReactions;
 	private int numRules;
 	private int numEvents;
-	string[] variableTable = new string[2];
+	string[] variableTable = new string[3];
 	string[] boundaryTable = new string[0];
-	string[] globalParameterTable = new string[1];
+	string[] globalParameterTable = new string[2];
 	int[] localParameterDimensions = new int[1];
 	private TEventAssignmentDelegate[] _eventAssignments;
 	private double[] _eventPriorities;
@@ -54,10 +55,10 @@ class TModel : IModel
 	public TModel ()  
 	{
 		numIndependentVariables = 1;
-		numDependentVariables = 1;
-		numTotalVariables = 2;
+		numDependentVariables = 2;
+		numTotalVariables = 3;
 		numBoundaryVariables = 0;
-		numGlobalParameters = 1;
+		numGlobalParameters = 2;
 		numCompartments = 1;
 		numReactions = 1;
 		numEvents = 0;
@@ -69,7 +70,9 @@ class TModel : IModel
 	void loadSymbolTables() {
 		variableTable[0] = "S1";
 		variableTable[1] = "S2";
+		variableTable[2] = "S3";
 		globalParameterTable[0] = "k1";
+		globalParameterTable[1] = "k2";
 	}
 
 
@@ -84,6 +87,8 @@ class TModel : IModel
 				break;
 			case 1: volume = _c[0];
 				break;
+			case 2: volume = _c[0];
+				break;
 		}
 		_amounts[index] = _y[index]*volume;
 	}
@@ -95,11 +100,13 @@ class TModel : IModel
 	public void convertToAmounts() {
 		_amounts[0] = _y[0]*_c[0];
 		_amounts[1] = _y[1]*_c[0];
+		_amounts[2] = _y[2]*_c[0];
 	}
 
 	public void convertToConcentrations() {
 		_y[0] = _amounts[0]/_c[0];
 		_y[1] = _amounts[1]/_c[0];
+		_y[2] = _amounts[2]/_c[0];
 	}
 
 	public double[] y {
@@ -265,8 +272,9 @@ class TModel : IModel
 
 	public void initializeInitialConditions ()
 	{
-		_init_y[0] = (double)0.00015/ _c[0];
-		_init_y[1] = (double)0/ _c[0];
+		_init_y[0] = (double)0.1/ _c[0];
+		_init_y[1] = (double)0.15/ _c[0];
+		_init_y[2] = (double)0/ _c[0];
 
 	}
 
@@ -276,6 +284,8 @@ class TModel : IModel
 		_amounts[0] = _y[0]*_c[0];
 		_y[1] =  _init_y[1];
 		_amounts[1] = _y[1]*_c[0];
+		_y[2] =  _init_y[2];
+		_amounts[2] = _y[2]*_c[0];
 
 	}
 
@@ -292,7 +302,8 @@ class TModel : IModel
 
 	public void setParameterValues ()
 	{
-		_gp[0] = (double)1;
+		_gp[0] = (double)1.05;
+		_gp[1] = (double)1.15;
 	}
 
 	// Uses the equation: C = Sd - L0*Si
@@ -300,6 +311,8 @@ class TModel : IModel
 	{
 		_ct[0] =  + _y[0]*_c[0]
  + _y[1]*_c[0]
+;
+		_ct[1] =  + _y[2]*_c[0]
 ;
 	}
 
@@ -310,9 +323,13 @@ class TModel : IModel
 		_y[1] = 
 	(_ct[0]
 	 - y[0]*_c[0])/_c[0];
+		_y[2] = 
+	(_ct[1])/_c[0];
 	}
 
 	public void computeRules(double[] y) {
+		_y[2] = (_gp[0]*
+	amounts[1]) / 		_c[0];
 	}
 
 	private double[] _rateRules = new double[0];           // Vector containing values of additional rate rules      
@@ -346,14 +363,14 @@ class TModel : IModel
 		evalModel (time, dTemp);
 		_dydt[1] =  - _dydt[0]
 ;
+		_dydt[2] = 0;
 	}
 
 	// Compute the reaction rates
 	public void computeReactionRates (double time, double[] y)
 	{
-		_rates[0] = _c[0]*
-	_gp[0]*
-	y[0];
+		_rates[0] = _gp[1]*
+	amounts[0];
 	}
 
 	// Model Function
@@ -361,10 +378,12 @@ class TModel : IModel
 	{
 		_y[0] = oAmounts[0]/_c[0];
 		_y[1] = oAmounts[1]/_c[0];
+		_y[2] = oAmounts[2]/_c[0];
 
 		convertToAmounts();
 		_time = timein;  // Don't remove
 		updateDependentSpeciesValues (_y);
+		computeRules (_y);
 		computeReactionRates (time, _y);
 		_dydt[0] = - _rates[0];
 		convertToAmounts ();
@@ -397,3 +416,4 @@ class TModel : IModel
 	}
 
 }
+
