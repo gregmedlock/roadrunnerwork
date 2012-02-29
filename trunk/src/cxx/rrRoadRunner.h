@@ -78,11 +78,11 @@ class RR_DECLSPEC RoadRunner : public rrObject
      	static bool                     _bComputeAndAssignConservationLaws;
         static bool                     _bConservedTotalChanged;
         static bool                     _ReMultiplyCompartments;
-        DoubleMatrix                  	_L;//double[][] _L;
-        DoubleMatrix                  	_L0;//double[][] _L0;
-        DoubleMatrix                  	_N;//double[][] _N;
-        DoubleMatrix                  	_Nr;//double[][] _Nr;
-        bool 							modelLoaded;// = false;
+        double*                    		_L;
+        double*                  		_L0;
+        double*                  		_N;
+        double*                  		_Nr;
+        bool 							modelLoaded;
         int 							numPoints;
         string 							sbmlStr;
 	    IModel*							mModel;
@@ -95,7 +95,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         virtual 					   ~RoadRunner();
         void							Reset();
         string							GetModelSourceCode();
-    	DoubleMatrix 					runSimulation();
+    	double* 						runSimulation();
 		void 							InitializeModel(IModel* model);
 		//static void                   DumpResults(TextWriter writer, double[,] data, ArrayList colLabels);
     	//static void                   TestDirectory(string directory, bool testSubDirs);
@@ -113,8 +113,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void                            setNumPoints(const int& nummberOfPoints);
         void                            reset();
         void                            changeInitialConditions(const vector<double>& ic);
-        DoubleMatrix                  	simulate();
-        DoubleMatrix                  	simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
+        double*                  		simulate();
+        double*                  		simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
         vector<double>                  getReactionRates();
         vector<double>                  getRatesOfChange();
         StringList 						getSpeciesNames();
@@ -142,18 +142,18 @@ class RR_DECLSPEC RoadRunner : public rrObject
         // ---------------------------------------------------------------------
         double 							steadyState();
         static void 					TestSettings();
-        DoubleMatrix                  	mult(const DoubleMatrix& m1,const DoubleMatrix& m2);
-        DoubleMatrix                  	getReducedJacobian();
-        DoubleMatrix                  	getFullJacobian();
+        double*                  		mult(const double*& m1,const double*& m2);
+        double*                  		getReducedJacobian();
+        double*                  		getFullJacobian();
 
         // ---------------------------------------------------------------------
         // Start of Level 4 API Methods
         // ---------------------------------------------------------------------
-        DoubleMatrix                  	getLinkMatrix();
-        DoubleMatrix                  	getNrMatrix();
-        DoubleMatrix                  	getL0Matrix();
-        DoubleMatrix                  	getStoichiometryMatrix();
-        DoubleMatrix                  	getConservationMatrix();
+        double*                  		getLinkMatrix();
+        double*                  		getNrMatrix();
+        double*                  		getL0Matrix();
+        double*                  		getStoichiometryMatrix();
+        double*                  		getConservationMatrix();
         int                             getNumberOfDependentSpecies();
         int                             getNumberOfIndependentSpecies();
 
@@ -182,7 +182,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         static void                     ReMultiplyCompartments(const bool& bValue);
         static void                     ComputeAndAssignConservationLaws(const bool& bValue);
         string 							getCSharpCode();
-        DoubleMatrix 					steadyStateParameterScan(const string& symbol, const double& startValue, const double& endValue, const double& stepSize);
+        double* 						steadyStateParameterScan(const string& symbol, const double& startValue, const double& endValue, const double& stepSize);
         string 							writeSBML();
         int 							getNumberOfLocalParameters(const int& reactionId);
         void 							setLocalParameterByIndex(const int& reactionId, const int index, const double& value);
