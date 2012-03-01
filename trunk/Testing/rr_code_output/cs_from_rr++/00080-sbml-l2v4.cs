@@ -362,13 +362,9 @@ class TModel : IModel
 	 - y[0]*_c[0]
 	 - y[1]*_c[0])/_c[0];
 		_y[3] = 
-	(_ct[1]
-	 - y[0]*_c[0]
-	 - y[1]*_c[0])/_c[0];
+	(_ct[1])/_c[0];
 		_y[4] = 
-	(_ct[2]
-	 - y[0]*_c[0]
-	 - y[1]*_c[0])/_c[0];
+	(_ct[2])/_c[0];
 	}
 
 	public void computeRules(double[] y) {
@@ -406,12 +402,8 @@ class TModel : IModel
 		_dydt[2] =  - _dydt[0]
  - _dydt[1]
 ;
-		_dydt[3] =  - _dydt[0]
- - _dydt[1]
-;
-		_dydt[4] =  - _dydt[0]
- - _dydt[1]
-;
+		_dydt[3] = 0;
+		_dydt[4] = 0;
 	}
 
 	// Compute the reaction rates

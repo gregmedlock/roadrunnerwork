@@ -285,7 +285,7 @@ class TModel : IModel
 
 	public void setParameterValues ()
 	{
-		_gp[0] = (double)1.02;
+		_gp[0] = (double)1.023;
 	}
 
 	// Uses the equation: C = Sd - L0*Si

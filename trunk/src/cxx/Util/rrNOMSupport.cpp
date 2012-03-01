@@ -40,15 +40,6 @@ void NOMSupport::Reset()
     mSBMLDoc	= NULL;
 }
 
-//int	NOMSupport::LoadSBML(const string& sbml)
-//{
-//
-//	int res = loadSBML(sbml.c_str());
-//	mModel = GetSBMLModel();
-//    return res;
-//}
-
-
 string NOMSupport::getNthCompartmentId(const int& nIndex)
 {
     if (mModel == NULL)
@@ -177,7 +168,6 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
 
     return boundarySpeciesList;
 }
-
 
 // ============ From NOM.cs in SBMLSupport
 ///// <summary>
@@ -3010,7 +3000,7 @@ string NOMSupport::getSBML()
 /// </summary>
 /// <param name="assignmentRules">assignment rules in original ordering</param>
 /// <returns>assignment rules in independent order</returns>
-list<Rule> NOMSupport::ReorderAssignmentRules(list<Rule>& assignmentRules)
+deque<Rule> NOMSupport::ReorderAssignmentRules(deque<Rule>& assignmentRules)
 {
     if (assignmentRules.size() < 2)
     {
@@ -3019,12 +3009,16 @@ list<Rule> NOMSupport::ReorderAssignmentRules(list<Rule>& assignmentRules)
 
     //Todo: Need XML file to test this:
 
-    list<Rule> result;// = new List<Rule>();
+    deque<Rule> result;
 //    var allSymbols = new Dictionary<int, List<string>>();
-//    var map = new Dictionary<string, List<string>>();
+	hash_map<int, list<string> > allSymbols;
+
+    //    var map = new Dictionary<string, List<string>>();
+	map<string, list<string> > map;
 //    var idList = new List<string>();
-//
-//    // read id list, initialize all symbols
+	list<string> idList;
+
+    // read id list, initialize all symbols
 //    for (int index = 0; index < assignmentRules.Count; index++)
 //    {
 //        var rule = (AssignmentRule)assignmentRules[index];
@@ -3111,15 +3105,16 @@ list<Rule> NOMSupport::ReorderAssignmentRules(list<Rule>& assignmentRules)
 /// <param name="model">the model to use</param>
 void NOMSupport::ReorderRules(SBMLDocument& doc, Model& model)
 {
+//	Model model = theModel;
     int numRules = (int) model.getNumRules();
 
-    list<Rule> assignmentRules;// = new List<Rule>();
-    list<Rule> rateRules;// = new List<Rule>();
-    list<Rule> algebraicRules;// = new List<Rule>();
+    deque<Rule> assignmentRules;
+    deque<Rule> rateRules;
+    deque<Rule> algebraicRules;
 
     for (int i = numRules - 1; i >= 0; i--)
     {
-        Rule* current = model.removeRule(i);
+        Rule* current = model.removeRule(i);   //Todo: The rule is removed here. Is this for a copy? of the model??
         switch (current->getTypeCode())
         {
             case SBML_ALGEBRAIC_RULE:
@@ -3138,9 +3133,25 @@ void NOMSupport::ReorderRules(SBMLDocument& doc, Model& model)
     //TODO: Need to load suitable XML file to test and convert following code..
     assignmentRules = ReorderAssignmentRules(assignmentRules);
 
-//    assignmentRules.ForEach(item => model.addRule(item));
-//    rateRules.ForEach(item => model.addRule(item));
-//    algebraicRules.ForEach(item => model.addRule(item));
+    //Add rules back to the model..
+	//    assignmentRules.ForEach(item => model.addRule(item));
+    for(int i = 0; i < assignmentRules.size(); i++)
+    {
+    	model.addRule( new Rule(assignmentRules[i]));
+    }
+
+    //    rateRules.ForEach(item => model.addRule(item));
+    for(int i = 0; i < rateRules.size(); i++)
+    {
+    	model.addRule(new Rule(rateRules[i]));
+    }
+
+	//    algebraicRules.ForEach(item => model.addRule(item));
+    for(int i = 0; i < algebraicRules.size(); i++)
+    {
+    	model.addRule(new Rule(algebraicRules[i]));
+    }
+
 }
 
 void NOMSupport::loadSBML(const string& var0, const string& sTimeSymbol)

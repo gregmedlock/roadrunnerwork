@@ -3,6 +3,7 @@
 //---------------------------------------------------------------------------
 #include <list>
 #include <vector>
+#include <deque>
 #include <string>
 #include <stack>
 #include <memory>
@@ -17,6 +18,7 @@ using std::string;
 using std::pair;
 using std::list;
 using std::stack;
+using std::deque;
 //---------------------------------------------------------------------------
 namespace rr
 {
@@ -130,7 +132,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         int                     getNumReactions();
         int                     getNumRules();
         int                     getSBOTerm(const string& sId);
-        list<Rule> 				ReorderAssignmentRules(list<Rule>& assignmentRules);
+        deque<Rule>  			ReorderAssignmentRules(deque<Rule>& assignmentRules);
         StringList 				GetSymbols(ASTNode* math);
 
         pair<string, string> 	getNthInitialAssignmentPair(const int& nIndex);

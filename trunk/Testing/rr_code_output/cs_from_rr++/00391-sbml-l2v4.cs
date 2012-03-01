@@ -330,8 +330,8 @@ class TModel : IModel
 
 	public void setParameterValues ()
 	{
-		_gp[0] = (double)7.5e+03;
-		_gp[1] = (double)2.5e+03;
+		_gp[0] = (double)7500;
+		_gp[1] = (double)2500;
 		_gp[2] = (double)0.5;
 	}
 
@@ -355,9 +355,8 @@ class TModel : IModel
 	y[1]*_c[0]
 	)/_c[0];
 		_y[3] = 
-	(_ct[1] + 
-	y[1]*_c[0]
-	)/_c[0];
+	(_ct[1]
+	 - y[1]*_c[0])/_c[0];
 	}
 
 	public void computeRules(double[] y) {
@@ -394,7 +393,7 @@ class TModel : IModel
 		evalModel (time, dTemp);
 		_dydt[2] =  + _dydt[1]
 ;
-		_dydt[3] =  + _dydt[1]
+		_dydt[3] =  - _dydt[1]
 ;
 	}
 
@@ -450,7 +449,7 @@ class TModel : IModel
 		}
 		previousEventStatusArray[1] = eventStatusArray[1];
 		if ((_y[0],(double)1/
-	(double)4e+03)
+	(double)4000)
 	 == 1.0) {
 		     eventStatusArray[1] = true;
 		     eventTests[1] = 1;

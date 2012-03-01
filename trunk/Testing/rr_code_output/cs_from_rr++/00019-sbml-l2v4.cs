@@ -316,7 +316,7 @@ class TModel : IModel
 
 	public void setParameterValues ()
 	{
-		_gp[0] = (double)1e+03;
+		_gp[0] = (double)1000;
 		_gp[1] = (double)0.9;
 		_gp[2] = (double)0.7;
 	}
@@ -343,10 +343,8 @@ class TModel : IModel
 	
 	 - y[1]*_c[0])/_c[0];
 		_y[3] = 
-	(_ct[1] + 
-	y[0]*_c[0]
-	
-	 - y[1]*_c[0])/_c[0];
+	(_ct[1]
+	 - y[0]*_c[0])/_c[0];
 	}
 
 	public void computeRules(double[] y) {
@@ -384,8 +382,7 @@ class TModel : IModel
 		_dydt[2] =  + _dydt[0]
  - _dydt[1]
 ;
-		_dydt[3] =  + _dydt[0]
- - _dydt[1]
+		_dydt[3] =  - _dydt[0]
 ;
 	}
 

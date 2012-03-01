@@ -304,7 +304,7 @@ class TModel : IModel
 
 	public void setParameterValues ()
 	{
-		_gp[0] = (double)1.6e+04;
+		_gp[0] = (double)16000;
 		_gp[1] = (double)0.7;
 	}
 
@@ -325,10 +325,10 @@ class TModel : IModel
 	{
 		_y[1] = 
 	(_ct[0]
-	 (double)0.5*y[0]*_c[0])/_c[0];
+	 + (double)0.5*y[0]*_c[0])/_c[0];
 		_y[2] = 
 	(_ct[1]
-	 (double)0.5*y[0]*_c[0])/_c[0];
+	 - (double)0.5*y[0]*_c[0])/_c[0];
 	}
 
 	public void computeRules(double[] y) {
@@ -365,7 +365,7 @@ class TModel : IModel
 		evalModel (time, dTemp);
 		_dydt[1] =  + (double)0.5*_dydt[0]
 ;
-		_dydt[2] =  + (double)0.5*_dydt[0]
+		_dydt[2] =  - (double)0.5*_dydt[0]
 ;
 	}
 

@@ -31,8 +31,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	    RoadRunner *roadRunner = NULL;
 
-        //Loading models
-		for(int caseNr = 9; caseNr < 10; caseNr++)
+        //Loading models (max is 459
+		for(int caseNr = 1; caseNr < 459; caseNr++)
         {
         	//int caseNr = 41;
 			if(roadRunner)

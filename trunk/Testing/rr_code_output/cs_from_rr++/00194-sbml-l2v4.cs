@@ -339,7 +339,7 @@ class TModel : IModel
 	 - y[0]*_c[0])/_c[0];
 		_y[3] = 
 	(_ct[1]
-	 - y[0]*_c[0])/_c[0];
+	 - y[1]*_c[0])/_c[0];
 	}
 
 	public void computeRules(double[] y) {
@@ -376,7 +376,7 @@ class TModel : IModel
 		evalModel (time, dTemp);
 		_dydt[2] =  - _dydt[0]
 ;
-		_dydt[3] =  - _dydt[0]
+		_dydt[3] =  - _dydt[1]
 ;
 	}
 

@@ -357,13 +357,12 @@ class TModel : IModel
 	 - y[1]*_c[1]
 	 - y[2]*_c[1])/_c[1];
 		_y[4] = 
-	(_ct[1]
-	 - y[0]*_c[1]
-	 - y[1]*_c[1]
-	 - y[2]*_c[1])/_c[1];
+	(_ct[1])/_c[1];
 	}
 
 	public void computeRules(double[] y) {
+		_y[4] = _gp[3]*
+	_y[0];
 	}
 
 	private double[] _rateRules = new double[0];           // Vector containing values of additional rate rules      
@@ -399,10 +398,7 @@ class TModel : IModel
  - _dydt[1]
  - _dydt[2]
 ;
-		_dydt[4] =  - _dydt[0]
- - _dydt[1]
- - _dydt[2]
-;
+		_dydt[4] = 0;
 	}
 
 	// Compute the reaction rates
@@ -437,6 +433,7 @@ class TModel : IModel
 		convertToAmounts();
 		_time = timein;  // Don't remove
 		updateDependentSpeciesValues (_y);
+		computeRules (_y);
 		computeReactionRates (time, _y);
 		_dydt[0] = + 2*_rates[0] - _rates[0] - _rates[1];
 		_dydt[1] = + _rates[1] - _rates[2];

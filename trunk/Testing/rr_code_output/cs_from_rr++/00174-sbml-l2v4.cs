@@ -272,6 +272,11 @@ class TModel : IModel
 		_gp[0] = (double)0;
 	}
 
+	// Uses the equation: C = Sd - L0*Si
+	public void computeConservedTotals ()
+	{
+	}
+
 	// Compute values of dependent species 
 	// Uses the equation: Sd = C + L0*Si
 	public void updateDependentSpeciesValues (double[] y)
@@ -279,6 +284,7 @@ class TModel : IModel
 	}
 
 	public void computeRules(double[] y) {
+		_gp[0] = (double)7;
 	}
 
 	private double[] _rateRules = new double[0];           // Vector containing values of additional rate rules      
@@ -324,6 +330,7 @@ class TModel : IModel
 		convertToAmounts();
 		_time = timein;  // Don't remove
 		updateDependentSpeciesValues (_y);
+		computeRules (_y);
 		computeReactionRates (time, _y);
 		convertToAmounts ();
 	}

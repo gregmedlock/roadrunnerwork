@@ -317,28 +317,38 @@ class TModel : IModel
 	}
 
 	public void computeRules(double[] y) {
+		_dydt[1] = ((double)0.0005*
+	_gp[0]) * 		_c[0];
+		_rateRules[0] = (-
+	(double)0.0005*
+	_gp[1]) * 		_c[0];
 	}
 
-	private double[] _rateRules = new double[0];           // Vector containing values of additional rate rules      
+	private double[] _rateRules = new double[1];           // Vector containing values of additional rate rules      
 	public void InitializeRates()
 	{
+		_rateRules[0] = 		_bc[1];
 	}
 
 	public void AssignRates()
 	{
+		_bc[1] = _rateRules[0];
 	}
 
 	public void InitializeRateRuleSymbols()
 	{
+		_bc[1] = 0.004;
 	}
 
 	public void AssignRates(double[] oRates)
 	{
+		_bc[1] = oRates[0];
 	}
 
 	public double[] GetCurrentValues()
 	{
-		double[] dResult = new double[0];
+		double[] dResult = new double[1];
+		dResult[0] = 		_bc[1];
 		return dResult;
 	}
 
@@ -346,6 +356,7 @@ class TModel : IModel
 	public void computeAllRatesOfChange ()
 	{
 		double[] dTemp = new double[amounts.Length + rateRules.Length];
+		dTemp[0] = 		_bc[1];
 		amounts.CopyTo(dTemp, rateRules.Length);
 		evalModel (time, dTemp);
 		_dydt[1] = 0;
@@ -362,12 +373,14 @@ class TModel : IModel
 	// Model Function
 	public void evalModel (double timein, double[] oAmounts)
 	{
+		_bc[1] = oAmounts[0];
 		_y[0] = oAmounts[0]/_c[0];
-		_y[1] = oAmounts[1]/_c[0];
+		_y[1] = oAmounts[2]/_c[0];
 
 		convertToAmounts();
 		_time = timein;  // Don't remove
 		updateDependentSpeciesValues (_y);
+		computeRules (_y);
 		computeReactionRates (time, _y);
 		_dydt[0] = + _rates[0];
 		convertToAmounts ();

@@ -364,6 +364,7 @@ class TModel : IModel
 		convertToAmounts();
 		_time = timein;  // Don't remove
 		updateDependentSpeciesValues (_y);
+		computeRules (_y);
 		computeReactionRates (time, _y);
 		_dydt[0] = + _rates[0];
 		convertToAmounts ();

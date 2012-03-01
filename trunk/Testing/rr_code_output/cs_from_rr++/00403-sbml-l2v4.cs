@@ -293,6 +293,11 @@ class TModel : IModel
 		_gp[5] = (double)0.25;
 	}
 
+	// Uses the equation: C = Sd - L0*Si
+	public void computeConservedTotals ()
+	{
+	}
+
 	// Compute values of dependent species 
 	// Uses the equation: Sd = C + L0*Si
 	public void updateDependentSpeciesValues (double[] y)
@@ -300,28 +305,61 @@ class TModel : IModel
 	}
 
 	public void computeRules(double[] y) {
+		_rateRules[0] = _gp[5]*
+	_gp[2]+
+	-
+	(double)1*
+	_gp[3]*
+	_gp[0];
+		_rateRules[1] = _gp[3]*
+	_gp[0]+
+	-
+	(double)1*
+	_gp[4]*
+	_gp[1];
+		_rateRules[2] = _gp[4]*
+	_gp[1]+
+	-
+	(double)1*
+	_gp[5]*
+	_gp[2];
 	}
 
-	private double[] _rateRules = new double[0];           // Vector containing values of additional rate rules      
+	private double[] _rateRules = new double[3];           // Vector containing values of additional rate rules      
 	public void InitializeRates()
 	{
+		_rateRules[0] = 		_gp[0];
+		_rateRules[1] = 		_gp[1];
+		_rateRules[2] = 		_gp[2];
 	}
 
 	public void AssignRates()
 	{
+		_gp[0] = _rateRules[0];
+		_gp[1] = _rateRules[1];
+		_gp[2] = _rateRules[2];
 	}
 
 	public void InitializeRateRuleSymbols()
 	{
+		_gp[0] = 1;
+		_gp[1] = 2;
+		_gp[2] = 1;
 	}
 
 	public void AssignRates(double[] oRates)
 	{
+		_gp[0] = oRates[0];
+		_gp[1] = oRates[1];
+		_gp[2] = oRates[2];
 	}
 
 	public double[] GetCurrentValues()
 	{
-		double[] dResult = new double[0];
+		double[] dResult = new double[3];
+		dResult[0] = 		_gp[0];
+		dResult[1] = 		_gp[1];
+		dResult[2] = 		_gp[2];
 		return dResult;
 	}
 
@@ -329,6 +367,9 @@ class TModel : IModel
 	public void computeAllRatesOfChange ()
 	{
 		double[] dTemp = new double[amounts.Length + rateRules.Length];
+		dTemp[0] = 		_gp[0];
+		dTemp[1] = 		_gp[1];
+		dTemp[2] = 		_gp[2];
 		amounts.CopyTo(dTemp, rateRules.Length);
 		evalModel (time, dTemp);
 	}
@@ -341,10 +382,14 @@ class TModel : IModel
 	// Model Function
 	public void evalModel (double timein, double[] oAmounts)
 	{
+		_gp[0] = oAmounts[0];
+		_gp[1] = oAmounts[1];
+		_gp[2] = oAmounts[2];
 
 		convertToAmounts();
 		_time = timein;  // Don't remove
 		updateDependentSpeciesValues (_y);
+		computeRules (_y);
 		computeReactionRates (time, _y);
 		convertToAmounts ();
 	}
@@ -352,6 +397,9 @@ class TModel : IModel
 	// Event handling function
 	public void evalEvents (double timeIn, double[] oAmounts)
 	{
+		_gp[0] = oAmounts[0];
+		_gp[1] = oAmounts[1];
+		_gp[2] = oAmounts[2];
 		_time = timeIn;  // Don't remove
 		updateDependentSpeciesValues(_y);
 		computeRules (_y);

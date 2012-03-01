@@ -23,7 +23,7 @@ namespace rr
 ModelGenerator::ModelGenerator()
 :
 mStructAnalysis(),
-STR_DoubleFormat("%.3g"),
+STR_DoubleFormat("%.5g"),
 STR_FixAmountCompartments("*")
 {
 	mNOM.Reset();
@@ -146,14 +146,17 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     WriteSetCompartmentVolumes(sb);
     WriteSetParameterValues(sb, _NumReactions);
 
-//    if(mStructAnalysis.GetGammaMatrix())
+//    if(mStructAnalysis.GetGammaMatrix()) //Todo: If there is no Gamma matrix, this just causes an empty function.
+
     {
     	WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
     }
 
     // Get the L0 matrix
-    double* aL0 = InitializeL0(); 	//Todo: What is this doing? answer.. it is used below..
-    DoubleMatrix L0(aL0); 			//How many rows and cols??
+    int nrRows;
+    int nrCols;
+    double* aL0 = InitializeL0(nrRows, nrCols); 	//Todo: What is this doing? answer.. it is used below..
+    DoubleMatrix L0(aL0,nrRows, nrCols); 		//How many rows and cols?? We need to know that in order to use the matrix properly!
 
     WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
     int numOfRules = WriteComputeRules(sb, _NumReactions);
@@ -1037,7 +1040,7 @@ string ModelGenerator::NL()
 }
 
 
-double* ModelGenerator::InitializeL0()
+double* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
 {
 	double* L0;
     try
@@ -1047,15 +1050,19 @@ double* ModelGenerator::InitializeL0()
         	vector<string> RowLabels;
             vector<string> ColumnLabels; //Todo: Filling these out here is meaningless?
             L0 = mStructAnalysis.GetL0Matrix(RowLabels, ColumnLabels);
+            nrRows = RowLabels.size();
+            nrCols = ColumnLabels.size();
         }
         else
         {
         	L0 = new double[1];//.Allocate(1,1);// = new double[0][];
+		    nrRows = nrCols = 1;
         }
     }
     catch (Exception)
     {
-        //L0 = new double[0][];
+	    nrRows = nrCols = 0;
+        L0 = NULL;
     }
     return L0;
 }
@@ -1156,7 +1163,8 @@ int ModelGenerator::ReadFloatingSpecies()
                 symbol->hasOnlySubstance = false;
 
             }
-            floatingSpeciesConcentrationList.Add(*(symbol));
+//            floatingSpeciesConcentrationList.Add(*(symbol));
+			floatingSpeciesConcentrationList.Add(*(symbol));
             break;
           }
           //throw RRException("Reordered Species " + reOrderedList[i] + " not found.");
@@ -1347,7 +1355,7 @@ void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, const int& n
             sb.AppendFormat("\t\t_ct[{0}] = ", i);
             for (int j = 0; j < numFloatingSpecies; j++)
             {
-                double current = gamma(i,j);//gamma[i][j];
+                double current = (matPtr != NULL) ? gamma(i,j) : 1.0;	//Todo: This is a bug? We should not be here if the matrix i NULL.. Triggered by model 00029
 
                 if (current != 0.0)
                 {
@@ -1418,6 +1426,7 @@ void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, const int& n
                     string cName = convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName);
                     double* mat = L0.GetPointer();
                     double matElementValue = L0(i,j);
+
                     if (L0(i,j) > 0) // In C# code there is no checking for index out of bound..
                     {
                         if (L0(i,j) == 1)
@@ -1430,7 +1439,7 @@ void ModelGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, const int& n
                         }
                         else
                         {
-                            sb.AppendFormat("{0}\t (double){1}{2}{3}{2}{4}",
+                            sb.AppendFormat("{0}\t + (double){1}{2}{3}{2}{4}",
                                 NL(),
                                 WriteDouble(L0(i,j)),
                                 STR_FixAmountCompartments,
@@ -2045,8 +2054,8 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
             RRRule aRule(eqnRule, ruleType);
 
 //            int index = eqnRule.IndexOf("=");
-            string varName =  aRule.GetLHS();	//eqnRule.Substring(0, index).Trim();
-            string rightSide = aRule.GetRHS();	//eqnRule.Substring(index + 1).Trim();
+            string varName =  Trim(aRule.GetLHS());	//eqnRule.Substring(0, index).Trim();
+            string rightSide = Trim(aRule.GetRHS());	//eqnRule.Substring(index + 1).Trim();
 
             bool isRateRule = false;
 

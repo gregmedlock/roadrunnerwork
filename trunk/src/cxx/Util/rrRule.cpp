@@ -21,24 +21,25 @@ mRuleType(rtUnknown)
 
 string RRRule::GetLHS()
 {
-
+	//Rules have equal signs, or?
+    string lhs = mTheRule.substr(0, mTheRule.find('='));
+    return lhs;
 }
 
 string RRRule::GetRHS()
 {
-
+    string rhs = mTheRule.substr(mTheRule.find('=') + 1);
+    return rhs;
 }
 
 RuleType RRRule::GetType()
 {
-
+	return mRuleType;
 }
 
 void RRRule::AssignType()
 {
-
 	mRuleType = GetRuleTypeFromString(mRuleTypeStr);
-
 }
 
 RuleType GetRuleTypeFromString(const string& str)

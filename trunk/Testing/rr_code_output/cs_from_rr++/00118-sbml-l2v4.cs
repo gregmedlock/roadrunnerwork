@@ -291,6 +291,11 @@ class TModel : IModel
 		_gp[1] = (double)0.25;
 	}
 
+	// Uses the equation: C = Sd - L0*Si
+	public void computeConservedTotals ()
+	{
+	}
+
 	// Compute values of dependent species 
 	// Uses the equation: Sd = C + L0*Si
 	public void updateDependentSpeciesValues (double[] y)
