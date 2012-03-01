@@ -55,6 +55,12 @@ void Scanner::initScanner()
         FCharTable[i] = TCharCode::cSPECIAL;
     }
 
+	for (int i = 57; i < 63; i++)
+    {
+    	char ch = i;
+
+        FCharTable[i] = TCharCode::cSPECIAL;
+    }
     for (ch = '0'; ch <= '9'; ch++)
     {
         FCharTable[ch] = TCharCode::cDIGIT;
@@ -70,12 +76,15 @@ void Scanner::initScanner()
         FCharTable[ch] = TCharCode::cLETTER;
     }
 
+    FCharTable['='] = TCharCode::cSPECIAL;
+
     FCharTable['.'] = TCharCode::cPOINT;
     FCharTable['"'] = TCharCode::cDOUBLEQUOTE;
     FCharTable['_'] = TCharCode::cUNDERSCORE;
     FCharTable['\t'] = TCharCode::cWHITESPACE;
     FCharTable[' '] = TCharCode::cWHITESPACE;
     FCharTable[EOFCHAR] = TCharCode::cETX;
+
 
     wordTable["and"]  = CodeTypes::tAndToken;
     wordTable["or"]  = CodeTypes::tOrToken;

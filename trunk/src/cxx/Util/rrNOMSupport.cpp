@@ -4024,6 +4024,11 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
         stack.push(symbol.mId + " = " + ToString(symbol.mValue));
     }
 
+    for(int i = 0; i < symbol.mDependencies.size(); i++)
+    {
+    	SBMLSymbol dependency = symbol.mDependencies[0];
+    	FillStack(stack, dependency); //hmm recursive.. Todo: perhaps
+    }
 //    foreach (SBMLSymbol dependency in symbol.Dependencies)
 //    {
 //        FillStack(stack, dependency);

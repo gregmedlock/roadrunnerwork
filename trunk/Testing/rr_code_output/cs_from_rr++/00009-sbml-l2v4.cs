@@ -275,12 +275,19 @@ class TModel : IModel
 	public void setCompartmentVolumes ()
 	{
 		_c[0] = (double)1;
+		_c[0] = 
+	(double)1;
 	}
 
 	public void setParameterValues ()
 	{
 		_gp[0] = (double)0.5;
 		_gp[1] = (double)0.25;
+	}
+
+	// Uses the equation: C = Sd - L0*Si
+	public void computeConservedTotals ()
+	{
 	}
 
 	// Compute values of dependent species 
@@ -372,3 +379,4 @@ class TModel : IModel
 	}
 
 }
+

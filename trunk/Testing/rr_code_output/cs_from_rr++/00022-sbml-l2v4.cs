@@ -289,6 +289,8 @@ class TModel : IModel
 	public void setCompartmentVolumes ()
 	{
 		_c[0] = (double)0.3;
+		_c[0] = 
+	(double)0.3;
 	}
 
 	public void setParameterValues ()
@@ -395,3 +397,4 @@ class TModel : IModel
 	}
 
 }
+

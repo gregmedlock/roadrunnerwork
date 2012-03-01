@@ -130,8 +130,6 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 	ReadLocalParameters(_NumReactions, _LocalParameterDimensions, _TotalLocalParmeters);
     _NumEvents = mNOM.getNumEvents();
 
-
-
     WriteClassHeader(sb);
     WriteOutVariables(sb);
     WriteOutSymbolTables(sb);
@@ -148,14 +146,14 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     WriteSetCompartmentVolumes(sb);
     WriteSetParameterValues(sb, _NumReactions);
 
-    if(mStructAnalysis.GetGammaMatrix())
+//    if(mStructAnalysis.GetGammaMatrix())
     {
     	WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
     }
 
     // Get the L0 matrix
-    double* aL0 = InitializeL0(); //Todo: What is this doing? answer.. it is used below..
-    DoubleMatrix L0(aL0); //How many rows and cols??
+    double* aL0 = InitializeL0(); 	//Todo: What is this doing? answer.. it is used below..
+    DoubleMatrix L0(aL0); 			//How many rows and cols??
 
     WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
     int numOfRules = WriteComputeRules(sb, _NumReactions);
@@ -167,7 +165,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     WriteEventAssignments(sb, _NumReactions, _NumEvents);
     WriteEvalInitialAssignments(sb, _NumReactions);
     WriteTestConstraints(sb);
-	sb.AppendFormat("}{0}", NL());
+	sb.AppendFormat("}{0}{0}", NL());
 	return sb.ToString();
 }
 
@@ -1003,16 +1001,14 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
     	return string("0");
     }
 
-     Scanner s ;//= new Scanner.Scanner();
-     //     Stream ss = new MemoryStream(Encoding.Default.GetBytes(equation));
+     Scanner s;
      stringstream ss;
      ss<<equation;
 
-
-     s.AssignStream(ss);
+     s.AssignStream(ss);
      s.startScanner();
      s.nextToken();
-     StringBuilder sb;// = new StringBuilder();
+     StringBuilder sb;
 
     try
     {

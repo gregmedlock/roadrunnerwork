@@ -32,24 +32,23 @@ int _tmain(int argc, _TCHAR* argv[])
 	    RoadRunner *roadRunner = NULL;
 
         //Loading models
-		for(int caseNr = 1; caseNr < 100; caseNr++)
+		for(int caseNr = 9; caseNr < 10; caseNr++)
         {
         	//int caseNr = 41;
 			if(roadRunner)
             {
-            	delete roadRunner;
+            	delete roadRunner;	//Hav to do this because some initialization problems(?) in libs
             }
 
             roadRunner = new RoadRunner;
             roadRunner->Reset();
-	        string modelsRootPath("C:\\RRW\\Testing\\models");
+	        string modelsRootPath("C:\\RRW\\Models");
+            string subFolder("test_cases_l2v4");
+
             //int caseNr = 1;
             stringstream modelSubPath;
             stringstream modelFName;
-
-            string subFolder("test_cases_l2v4");
-            modelSubPath <<setfill('0')<<setw(5)<<caseNr;
-
+            modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
             modelFName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
 
             //string subFolder("");
@@ -59,24 +58,23 @@ int _tmain(int argc, _TCHAR* argv[])
                 modelsRootPath = modelsRootPath + "\\" + subFolder + "\\" + modelSubPath.str();
             }
 
-            string fullFilePath(modelsRootPath +   "\\\\" + modelFName.str());
-
-            ifstream ifs(fullFilePath.c_str());
-            if(!ifs)
+            string fullFilePath(modelsRootPath +   "\\" + modelFName.str());
+            ifstream inFileStream(fullFilePath.c_str());
+            if(!inFileStream)
             {
-                throw(Exception("Failed to read file:" + fullFilePath));
+                throw(Exception("Failed to open the model file:" + fullFilePath));
             }
-            Log(lInfo)<<"\n\n ===== Loading model file:"<<fullFilePath<<" ==============";
-            std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
-            ifs.close();
-            Log(lDebug5)<<"Before loading SBML..SBML string size: "<<sbml.size();
+            Log(lInfo)<<"\n\n ===== Reading model file:"<<fullFilePath<<" ==============";
+            std::string sbml((std::istreambuf_iterator<char>(inFileStream)), std::istreambuf_iterator<char>());
+            inFileStream.close();
+            Log(lDebug5)<<"Before loading SBML. SBML model code size: "<<sbml.size();
             roadRunner->loadSBML(sbml);
 
             //Save source code
             string code = roadRunner->GetModelSourceCode();
             if(code.size())
             {
-	            string srcCodeFileName("C:\\RRW\\Testing\\models\\model_code//C++//" + modelFName.str());
+	            string srcCodeFileName("C:\\RRW\\Testing\\rr_code_output\\cs_from_rr++\\" + modelFName.str());
             	srcCodeFileName = ChangeFileNameExtensionTo(srcCodeFileName, ".cs");
                 ofstream outFile(srcCodeFileName.c_str());
                 if(!outFile)
@@ -84,7 +82,7 @@ int _tmain(int argc, _TCHAR* argv[])
                     throw(Exception("Failed to write file:" + srcCodeFileName));
                 }
                 outFile<<code;
-				Log(lInfo)<<"Wrote c# code to: "<<srcCodeFileName;
+				Log(lInfo)<<"Wrote c# code to file: "<<srcCodeFileName;
             }
 
         }//test cases loop

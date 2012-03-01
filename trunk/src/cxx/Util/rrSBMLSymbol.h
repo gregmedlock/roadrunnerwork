@@ -12,22 +12,25 @@ class RR_DECLSPEC SBMLSymbol : public rrObject
 {
 	protected:
     public:
-    string 					mId;
-    enum SBMLType 			mType;
+        string 					mId;
+        enum SBMLType 			mType;
+        vector<SBMLSymbol> 		mDependencies;
 
-	vector<SBMLSymbol> 		mDependencies;
-	bool 					HasValue(){return IsNaN(mValue) ? true : false;}
-	double 					mValue;
-	double& 				mConcentration; //Assing ref to mValue..
-	double& 				mAmount; //Assing ref to mValue..
-	bool 					IsSetAmount;
-	bool 					IsSetConcentration;
-	bool 					HasInitialAssignment(){return mInitialAssignment.size() ? true : false;}
-	string					mInitialAssignment;
+        double 					mValue;
+        bool 					HasValue();
 
-	bool 					mHasRule;
-	bool 					HasRule(){return mRule.size() ? true : false;}
-	string 					mRule;
+        double& 				mConcentration; //Assing ref to mValue..
+        double& 				mAmount; //Assing ref to mValue..
+
+        bool 					IsSetAmount;
+        bool 					IsSetConcentration;
+
+        bool 					HasInitialAssignment();
+        string					mInitialAssignment;
+
+        bool 					mHasRule;
+        bool 					HasRule();
+        string 					mRule;
 
     public:
     	SBMLSymbol();

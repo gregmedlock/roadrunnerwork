@@ -51,6 +51,22 @@ SBMLSymbol& SBMLSymbol::operator =(const SBMLSymbol& rhs)
 }
 
 
+bool SBMLSymbol::HasValue()
+{
+	return IsNaN(mValue) ? false : true;
+}
+
+bool SBMLSymbol::HasInitialAssignment()
+{
+	return mInitialAssignment.size() ? true : false;
+}
+
+bool SBMLSymbol::HasRule()
+{
+	return mRule.size() ? true : false;
+}
+
+
 ostream& operator<<(ostream& stream, const SBMLSymbol& symbol)
 {
 	//stream symbol to stream
