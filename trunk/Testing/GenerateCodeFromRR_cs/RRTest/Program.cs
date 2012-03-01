@@ -36,26 +36,10 @@ namespace RRTest
 				
 				//Write the code to file
 				string currentModel = Path.GetFileNameWithoutExtension(model) +".cs";
-
 				string outPath = "C:\\RRW\\Testing\\rr_code_output\\cs_from_rr_cs";
 				string outFName = outPath + "\\" + currentModel;
 				System.IO.File.WriteAllText(outFName, modelCode);
-
-
-		
-
 			}
-            
-            
-
-
-			//
-            
-            
-            
-
-
-
 		}
 	}
 }
