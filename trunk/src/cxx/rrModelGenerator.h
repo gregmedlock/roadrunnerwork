@@ -1188,6 +1188,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 ////                            string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
 ////                    }
 ////                    symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(reOrderedList[i]).getHasOnlySubstanceUnits();
+////                    symbol.constant = NOM.SbmlModel.getSpecies(reOrderedList[i]).getConstant();
 ////                    floatingSpeciesConcentrationList.Add(symbol);
 ////                    break;
 ////                }
@@ -1222,6 +1223,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 ////                                                       string.Format("{0}/ _c[{1}]", dValue, nCompartmentIndex));
 ////                }
 ////                symbol.hasOnlySubstance = NOM.SbmlModel.getSpecies(sName).getHasOnlySubstanceUnits();
+////                symbol.constant = NOM.SbmlModel.getSpecies(sName).getConstant();
 ////                boundarySpeciesList.Add(symbol);
 ////            }
 ////            return numBoundarySpecies;

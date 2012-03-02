@@ -79,7 +79,15 @@ string LibStructural::loadSBML(string sSBML)
 {
 	DELETE_IF_NON_NULL(_Model);
     _Model = new SBMLmodel(sSBML);
-	return analyzeWithQR();
+	string msg = analyzeWithQR();
+
+    std::map<int, std::string>::iterator iter = _speciesIndexList.begin();
+    for(iter = _speciesIndexList.begin(); iter != _speciesIndexList.end(); iter++)
+    {
+        cout<<(*iter).first<<(*iter).second<<endl;
+    }
+
+	return msg;
 }
 
 string LibStructural::loadSBMLFromFile(string sFileName)
@@ -527,14 +535,14 @@ string LibStructural::analyzeWithQR()
 
 		DELETE_IF_NON_NULL(_L0); _L0 = L0t.getTranspose();
 
-		// reorder species
+		// reorder species //Todo: This causes c++ generated code be different from c#??
 		for (unsigned int i = 0; i < P->numRows(); i++)
 		{
 			for (unsigned int j = 0; j < P->numCols(); j++)
 			{
-				if ((*P)(i,j) == 1) 
+				if ((*P)(i,j) == 1)
 				{
-					spVec[j]=i;
+					spVec[j]=i;        //here it is!!!
 					break;
 				}
 			}
@@ -549,7 +557,6 @@ string LibStructural::analyzeWithQR()
 			}
 			(*_G)(i,_NumIndependent+i) = 1.0;
 		}
-
 
 		reorderNmatrix();
 		computeNrMatrix();
@@ -1218,12 +1225,14 @@ vector< string > LibStructural::getReorderedReactions()
 	}
 	return oResult;
 }
-//Returns the reordered list of species 
+
+//Returns the reordered list of species
 vector< string > LibStructural::getReorderedSpecies()
 {
 	vector< string >	oResult;
 	for (int i = 0; i < numFloating; i++)
 	{
+    	string species =_speciesIndexList[spVec[i]];
 		oResult.push_back(_speciesIndexList[spVec[i]]);
 	}
 	return oResult;
@@ -2113,8 +2122,7 @@ LIB_EXTERN  int LibStructural_loadSBML(const char* sSBML, char** oResult, int *n
 {
 	try
 	{
-    	string msg = LibStructural::getInstance()->loadSBML(string(sSBML));
-		*oResult = strdup(msg.c_str());
+		*oResult = strdup(LibStructural::getInstance()->loadSBML(string(sSBML)).c_str());
 		*nLength = strlen(*oResult);
 		return 0;
 	}
@@ -2417,7 +2425,7 @@ LIB_EXTERN  int LibStructural_getNumSpecies()
 }
 
 //Returns the number of independent species
-int LibStructural_getNumIndSpecies()
+LIB_EXTERN  int LibStructural_getNumIndSpecies()
 {
 	return LibStructural::getInstance()->getNumIndSpecies();
 }

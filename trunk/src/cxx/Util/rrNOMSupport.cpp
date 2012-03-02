@@ -3170,7 +3170,7 @@ void NOMSupport::loadSBML(const string& var0, const string& sTimeSymbol)
 	SBMLDocument &sbmlDoc = *mSBMLDoc;
 
     modifyKineticLaws(sbmlDoc, aModel);
-    ReorderRules(sbmlDoc, aModel);
+//    ReorderRules(sbmlDoc, aModel);
     BuildSymbolTable();
 }
 

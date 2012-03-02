@@ -2,8 +2,9 @@
 #define rrSymbolH
 #include <string>
 #include "rrObject.h"
-
+#include <ostream>
 using std::string;
+using std::ostream;
 
 namespace rr
 {
@@ -15,6 +16,7 @@ class RR_DECLSPEC Symbol : public rrObject
         // in the model function if there is a rate rule for it
         bool 				rateRule;
         double 				value;
+        bool				constant;
 
 
     public:
@@ -29,7 +31,11 @@ class RR_DECLSPEC Symbol : public rrObject
         Symbol(const string& _keyName, const string& _name, const double& _value);
         Symbol(const string& _name, const double _value, const string& _compartmentName);
         Symbol(const string& _name, const double& _value, const string& _compartmentName, const string& _formula);
+
 }; //class rr::Symbol
+
+        ostream& operator<<(ostream& stream, const Symbol& symbol);
+
 }//namespace rr
 #endif
 

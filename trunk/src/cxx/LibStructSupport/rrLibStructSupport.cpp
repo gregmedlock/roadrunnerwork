@@ -28,19 +28,6 @@ void StructAnalysis::Reset()
     }
 }
 
-//vector<string> StructAnalysis::GetReorderedSpeciesIds()
-//{
-////	return (mInstance) ? mInstance->getReorderedSpecies() : vector<string>(0);
-//
-//}
-
-//bool StructAnalysis::LoadSBML(const string& sbml)
-//{
-//    string msg = mInstance->LibStructural::loadSBML(sbml);
-////    cout << msg;
-//    return true;
-//}
-//
 int	StructAnalysis::GetNumIndependentSpecies()
 {
 	return LibStructural_getNumIndSpecies();
@@ -250,13 +237,10 @@ int StructAnalysis::GetNumSpecies()
 ////        /// </summary>
 StringList StructAnalysis::GetDependentSpeciesIds()
 {
-	vector<string> oValues = LibStructural::getInstance()->getDependentSpecies();
-    StringList aList(oValues);
-    return aList;
-
-//    IntPtr pointer; int nLength;
-//    LibStructural_getDependentSpeciesIds(out pointer, out nLength);
-//    return InteropUtil.GetStringArrayFromPtr(pointer, nLength);
+    IntPtr pointer;
+    int nLength;
+    LibStructural_getDependentSpeciesIds((char***) &pointer, &nLength);
+    return GetStringArrayFromPtr(pointer, nLength);
 }
 ////
 ////
@@ -438,14 +422,10 @@ double* StructAnalysis::GetGammaMatrix()
 ////        /// </summary>
 StringList	StructAnalysis::GetIndependentSpeciesIds()
 {
-	vector<string> oValues = LibStructural::getInstance()->getIndependentSpecies();
-    StringList aList(oValues);
-    return aList;
-
-//    IntPtr pointer;
-//    int nLength;
-//    LibStructural_getIndependentSpeciesIds(out pointer, out nLength);
-//    return InteropUtil.GetStringArrayFromPtr(pointer, nLength);
+    IntPtr pointer;
+    int nLength;
+    LibStructural_getIndependentSpeciesIds((char***) &pointer, &nLength);
+    return GetStringArrayFromPtr(pointer, nLength);
 }
 
 ////
@@ -950,17 +930,28 @@ void StructAnalysis::GetL0MatrixLabels(vector<string>& sRowLabels, vector<string
 ////            return InteropUtil.GetStringArrayFromPtr(pointer, nLength);
 ////        } // GetReorderedReactionIds()
 ////
-/// <summary>
-/// Get reordered species ids
-/// </summary>
+////        /// <summary>
+////        /// Get reordered species ids
+////        /// </summary>
 StringList StructAnalysis::GetReorderedSpeciesIds()
 {
-	return LibStructural::getInstance()->getReorderedSpecies();
-//    IntPtr pointer; int nLength;
-//    LibStructural_getReorderedSpeciesIds(out pointer, out nLength);
+    IntPtr pointer;
+    int nLength;
+    LibStructural_getReorderedSpeciesIds((char***) &pointer, &nLength);
+    return GetStringArrayFromPtr(pointer, nLength);
 //    return InteropUtil.GetStringArrayFromPtr(pointer, nLength);
-
 } // GetReorderedSpeciesIds()
+
+////        /// <summary>
+////        /// Get reordered species ids
+////        /// </summary>
+////        public static string[] GetReorderedSpeciesIds()
+////        {
+////            IntPtr pointer; int nLength;
+////            LibStructural_getReorderedSpeciesIds(out pointer, out nLength);
+////            return InteropUtil.GetStringArrayFromPtr(pointer, nLength);
+////        } // GetReorderedSpeciesIds()
+
 ////
 ////        /// <summary>
 ////        /// Get reordered stoichiometry matrix

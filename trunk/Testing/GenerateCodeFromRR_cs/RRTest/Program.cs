@@ -23,22 +23,25 @@ namespace RRTest
 			int i = 0;
 			foreach(string model in models)			
 			{
-				models[i++] = "C:\\RRW\\" + model;				
+				models[i++] = modelsRootPath +"\\" + model;				
 			}
 
 			foreach (string model in models)
 			{
-				System.Console.WriteLine(model);
-				string sbml = System.IO.File.ReadAllText(model);
+				if (model.Contains("00019"))
+				{
+					System.Console.WriteLine(model);
+					string sbml = System.IO.File.ReadAllText(model);
 
-				rr.loadSBML(sbml);
-				string modelCode = rr.getCSharpCode();
-				
-				//Write the code to file
-				string currentModel = Path.GetFileNameWithoutExtension(model) +".cs";
-				string outPath = "C:\\RRW\\Testing\\rr_code_output\\cs_from_rr_cs";
-				string outFName = outPath + "\\" + currentModel;
-				System.IO.File.WriteAllText(outFName, modelCode);
+					rr.loadSBML(sbml);
+					string modelCode = rr.getCSharpCode();
+
+					//Write the code to file
+					string currentModel = Path.GetFileNameWithoutExtension(model) + ".cs";
+					string outPath = "C:\\RRW\\Testing\\rr_code_output\\cs_from_rr_cs";
+					string outFName = outPath + "\\" + currentModel;
+					System.IO.File.WriteAllText(outFName, modelCode);
+				}
 			}
 		}
 	}

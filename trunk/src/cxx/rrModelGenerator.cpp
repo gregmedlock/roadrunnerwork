@@ -96,6 +96,9 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 		Log(lError)<<"Failed loading sbml into StructAnalysis";
     }
 
+    ///////// Are the list scrambled here??
+    StringList reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
+
 	Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
 	if (RoadRunner::_bComputeAndAssignConservationLaws)
@@ -1104,7 +1107,6 @@ int ModelGenerator::ReadFloatingSpecies()
 
     StringListContainer oFloatingSpecies = mNOM.getListOfFloatingSpecies();
 
-
 	for (int i = 0; i < reOrderedList.size(); i++)
     {
     	for (int j = 0; j < oFloatingSpecies.size(); j++)
@@ -1154,6 +1156,7 @@ int ModelGenerator::ReadFloatingSpecies()
                 if(aSpecies)
                 {
                     symbol->hasOnlySubstance = aSpecies->getHasOnlySubstanceUnits();
+	                symbol->constant = aSpecies->getConstant();
                 }
             }
             else
@@ -1161,9 +1164,8 @@ int ModelGenerator::ReadFloatingSpecies()
                 //TODO: How to report error...?
                 //Log an error...
                 symbol->hasOnlySubstance = false;
-
             }
-//            floatingSpeciesConcentrationList.Add(*(symbol));
+			Log(lDebug5)<<"Adding symbol to floatingSpeciesConcentrationList:"<<(*symbol);
 			floatingSpeciesConcentrationList.Add(*(symbol));
             break;
           }
@@ -1223,6 +1225,7 @@ int ModelGenerator::ReadBoundarySpecies()
         	if(species)
             {
 		        symbol->hasOnlySubstance = species->getHasOnlySubstanceUnits();
+	            symbol->constant = species->getConstant();
             }
         }
         else

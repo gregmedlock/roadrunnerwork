@@ -45,4 +45,9 @@ hasOnlySubstance(false),
 rateRule(false)
 {}
 
+ostream& operator<<(ostream& stream, const Symbol& symbol)
+{
+	stream<<"Name: "<<symbol.name;
+    return stream;
+}
 }

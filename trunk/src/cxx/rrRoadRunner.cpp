@@ -522,11 +522,6 @@ void RoadRunner::loadSBML(const string& sbml)
         			<<_sModelCode
                     <<" ----- End of Model Code -----\n";
 
-
-//        string sLocation = GetType().Assembly.Location;
-//        Compiler.addAssembly(typeof(MathKGI).Assembly.Location);
-//        Compiler.addAssembly(typeof(System.Collections.Generic.List<string>).Assembly.Location);
-
  		if(!mCompiler)
         {
         	mCompiler  = new Compiler;

@@ -16,7 +16,7 @@ namespace rr
 {
 using namespace LIB_STRUCTURAL;
 
-//The following class is a translation of C#'s StructAnalysis
+//The following class is a translation of C#'s StructuralAnalysis.cs in LibStructurlaCSharp
 //
 class RR_DECLSPEC StructAnalysis : public rrObject
 {
