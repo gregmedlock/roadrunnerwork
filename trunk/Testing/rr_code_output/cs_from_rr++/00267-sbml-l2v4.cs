@@ -281,9 +281,9 @@ class TModel : IModel
 	public void initializeInitialConditions ()
 	{
 		_init_y[0] = (double)0/ _c[0];
-		_init_y[1] = (double)0/ _c[0];
-		_init_y[2] = (double)2e-06/ _c[0];
-		_init_y[3] = (double)1e-06/ _c[0];
+		_init_y[1] = (double)5E-07/ _c[0];
+		_init_y[2] = (double)2E-06/ _c[0];
+		_init_y[3] = (double)1E-06/ _c[0];
 
 	}
 
@@ -313,8 +313,8 @@ class TModel : IModel
 
 	public void setParameterValues ()
 	{
-		_gp[0] = (double)9e+05;
-		_gp[1] = (double)1.5e+05;
+		_gp[0] = (double)900000;
+		_gp[1] = (double)150000;
 	}
 
 	// Uses the equation: C = Sd - L0*Si

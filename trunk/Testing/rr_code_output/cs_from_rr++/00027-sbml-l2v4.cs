@@ -392,6 +392,7 @@ class TModel : IModel
 
 	public void evalInitialAssignments()
 	{
+		_c[0] = (double)0.534;
 	}
 
 	public void testConstraints()

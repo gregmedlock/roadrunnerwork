@@ -43,7 +43,8 @@ string ChangeFileNameExtensionTo(const string& fName, const string& newExtension
 
 bool StartsWith(const string& src, const string& sub)
 {
-	return src.compare(0, sub.size(), sub);
+	bool result = (src.compare(0, sub.size(), sub) == 0);
+	return result;
 }
 
 string Trim(const string& str)

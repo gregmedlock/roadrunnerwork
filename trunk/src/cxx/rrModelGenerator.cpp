@@ -23,7 +23,7 @@ namespace rr
 ModelGenerator::ModelGenerator()
 :
 mStructAnalysis(),
-STR_DoubleFormat("%.5g"),
+STR_DoubleFormat("%.12G"),
 STR_FixAmountCompartments("*")
 {
 	mNOM.Reset();
@@ -50,6 +50,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     string sASCII = sbmlStr; //Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(sbmlStr));
     StringList  Warnings;
     StringBuilder sb;
+	mNOM.Reset();
     sASCII = mNOM.convertTime(sASCII, "time");
 
 	Log(lDebug4)<<"Loading SBML into NOM";
@@ -311,7 +312,6 @@ string ModelGenerator::convertUserFunctionExpression(const string& equation)
            	switch (s.token())
            	{
             	case CodeTypes::tWordToken:
-
 					if(theToken == "pow")
 					{
                     	sb.Append("Math.Pow");
@@ -619,201 +619,246 @@ string ModelGenerator::substituteTerms(const int& numReactions, const string& re
 void ModelGenerator::SubstituteEquation(const string& reactionName, Scanner& s, StringBuilder& sb)
 {
 	string theToken(s.tokenString);
-	if(theToken == "pow")
+    if(theToken == "pow")
     {
-    	sb.Append("Math.Pow");
+        sb.Append("Math.Pow");
     }
-//	switch (s.tokenString)
-//    {
-//        case "pow":
-//            sb.Append("Math.Pow");
-//            break;
-//        case "sqrt":
-//            sb.Append("Math.Sqrt");
-//            break;
-//        case "log":
-//            sb.Append("supportFunctions._log");
-//            break;
-//        case "floor":
-//            sb.Append("Math.Floor");
-//            break;
-//        case "ceil":
-//            sb.Append("Math.Ceiling");
-//            break;
-//        case "factorial":
-//            sb.Append("supportFunctions._factorial");
-//            break;
-//        case "log10":
-//            sb.Append("Math.Log10");
-//            break;
-//        case "exp":
-//            sb.Append("Math.Exp");
-//            break;
-//        case "abs":
-//            sb.Append("Math.Abs");
-//            break;
-//        case "sin":
-//            sb.Append("Math.Sin");
-//            break;
-//        case "cos":
-//            sb.Append("Math.Cos");
-//            break;
-//        case "tan":
-//            sb.Append("Math.Tan");
-//            break;
-//        case "asin":
-//            sb.Append("Math.Asin");
-//            break;
-//        case "acos":
-//            sb.Append("Math.Acos");
-//            break;
-//        case "atan":
-//            sb.Append("Math.Atan");
-//            break;
-//        case "sec":
-//            sb.Append("MathKGI.Sec");
-//            break;
-//        case "csc":
-//            sb.Append("MathKGI.Csc");
-//            break;
-//        case "cot":
-//            sb.Append("MathKGI.Cot");
-//            break;
-//        case "arcsec":
-//            sb.Append("MathKGI.Asec");
-//            break;
-//        case "arccsc":
-//            sb.Append("MathKGI.Acsc");
-//            break;
-//        case "arccot":
-//            sb.Append("MathKGI.Acot");
-//            break;
-//        case "sinh":
-//            sb.Append("Math.Sinh");
-//            break;
-//        case "cosh":
-//            sb.Append("Math.Cosh");
-//            break;
-//        case "tanh":
-//            sb.Append("Math.Tanh");
-//            break;
-//        case "arcsinh":
-//            sb.Append("MathKGI.Asinh");
-//            break;
-//        case "arccosh":
-//            sb.Append("MathKGI.Acosh");
-//            break;
-//        case "arctanh":
-//            sb.Append("MathKGI.Atanh");
-//            break;
-//        case "sech":
-//            sb.Append("MathKGI.Sech");
-//            break;
-//        case "csch":
-//            sb.Append("MathKGI.Csch");
-//            break;
-//        case "coth":
-//            sb.Append("MathKGI.Coth");
-//            break;
-//        case "arcsech":
-//            sb.Append("MathKGI.Asech");
-//            break;
-//        case "arccsch":
-//            sb.Append("MathKGI.Acsch");
-//            break;
-//        case "arccoth":
-//            sb.Append("MathKGI.Acoth");
-//            break;
-//        case "pi":
-//            sb.Append("Math.PI");
-//            break;
-//        case "avogadro":
-//            sb.Append("6.02214179e23");
-//            break;
-//        case "exponentiale":
-//            sb.Append("Math.E");
-//            break;
-//        case "true":
-//            //sb.Append("true");
-//            sb.Append("1.0");
-//            break;
-//        case "false":
-//            //sb.Append("false");
-//            sb.Append("0.0");
-//            break;
-//        case "NaN":
-//            sb.Append("double.NaN");
-//            break;
-//        case "INF":
-//            sb.Append("double.PositiveInfinity");
-//            break;
-//        case "geq":
-//            sb.Append("supportFunctions._geq");
-//            break;
-//        case "leq":
-//            sb.Append("supportFunctions._leq");
-//            break;
-//        case "gt":
-//            sb.Append("supportFunctions._gt");
-//            break;
-//        case "lt":
-//            sb.Append("supportFunctions._lt");
-//            break;
-//        case "eq":
-//            sb.Append("supportFunctions._eq");
-//            break;
-//        case "neq":
-//            sb.Append("supportFunctions._neq");
-//            break;
-//        case "and":
-//            sb.Append("supportFunction._and");
-//            break;
-//        case "or":
-//            sb.Append("supportFunction._or");
-//            break;
-//        case "not":
-//            sb.Append("supportFunction._not");
-//            break;
-//        case "xor":
-//            sb.Append("supportFunction._xor");
-//            break;
-//        case "root":
-//            sb.Append("supportFunctions._root");
-//            break;
-//        case "piecewise":
-//            sb.Append("supportFunctions._piecewise");
-//            break;
-//        case "delay":
-//            sb.Append("supportFunctions._delay");
-//            Warnings.Add("RoadRunner does not yet support delay differential equations in SBML, they will be ignored (i.e. treated as delay = 0).");
-//            break;
-//        default:
-//            bool bReplaced = false;
-//            int index;
-//            if (reactionList.find(reactionName, out index))
-//            {
-//                int nParamIndex = 0;
-//                if (localParameterList[index].find(s.tokenString, out nParamIndex))
-//                {
-//                    sb.Append("_lp[" + index + "][" + nParamIndex + "]");
-//                    bReplaced = true;
-//                    break;
-//                }
-//            }
-//
-//            if (boundarySpeciesList.find(s.tokenString, out index))
-//            {
-//                sb.Append("_bc[" + index + "]");
-//                bReplaced = true;
-//                break;
-//            }
-//            if (!bReplaced &&
-//                (_functionParameters != NULL && !_functionParameters.Contains(s.tokenString)))
-//            {
-//                throw new ArgumentException("Token '" + s.tokenString + "' not recognized.");
-//            }
-//            break;
-//    }
+    else if(theToken == "sqrt")
+    {
+        sb.Append("Math.Sqrt");
+    }
+    else if(theToken == "log")
+    {
+        sb.Append("supportFunctions._log");
+    }
+    else if(theToken == "floor")
+    {
+        sb.Append("Math.Floor");
+    }
+    else if(theToken == "ceil")
+    {
+        sb.Append("Math.Ceiling");
+    }
+    else if(theToken == "factorial")
+    {
+        sb.Append("supportFunctions._factorial");
+    }
+    else if(theToken == "log10")
+    {
+        sb.Append("Math.Log10");
+    }
+    else if(theToken == "exp")
+    {
+        sb.Append("Math.Exp");
+    }
+    else if(theToken == "abs")
+    {
+        sb.Append("Math.Abs");
+    }
+    else if(theToken == "sin")
+    {
+        sb.Append("Math.Sin");
+    }
+    else if(theToken == "cos")
+    {
+        sb.Append("Math.Cos");
+    }
+    else if(theToken == "tan")
+    {
+        sb.Append("Math.Tan");
+    }
+    else if(theToken == "asin")
+    {
+        sb.Append("Math.Asin");
+    }
+    else if(theToken == "acos")
+    {
+        sb.Append("Math.Acos");
+    }
+    else if(theToken == "atan")
+    {
+        sb.Append("Math.Atan");
+    }
+    else if(theToken == "sec")
+    {
+        sb.Append("MathKGI.Sec");
+    }
+    else if(theToken == "csc")
+    {
+        sb.Append("MathKGI.Csc");
+    }
+    else if(theToken == "cot")
+    {
+        sb.Append("MathKGI.Cot");
+    }
+    else if(theToken == "arcsec")
+    {
+        sb.Append("MathKGI.Asec");
+    }
+    else if(theToken == "arccsc")
+    {
+        sb.Append("MathKGI.Acsc");
+    }
+    else if(theToken == "arccot")
+    {
+        sb.Append("MathKGI.Acot");
+    }
+    else if(theToken == "sinh")
+    {
+        sb.Append("Math.Sinh");
+    }
+    else if(theToken == "cosh")
+    {
+        sb.Append("Math.Cosh");
+    }
+    else if(theToken == "tanh")
+    {
+        sb.Append("Math.Tanh");
+    }
+    else if(theToken == "arcsinh")
+    {
+        sb.Append("MathKGI.Asinh");
+    }
+    else if(theToken == "arccosh")
+    {
+        sb.Append("MathKGI.Acosh");
+    }
+    else if(theToken == "arctanh")
+    {
+        sb.Append("MathKGI.Atanh");
+    }
+    else if(theToken == "sech")
+    {
+        sb.Append("MathKGI.Sech");
+    }
+    else if(theToken == "csch")
+    {
+        sb.Append("MathKGI.Csch");
+    }
+    else if(theToken == "coth")
+    {
+        sb.Append("MathKGI.Coth");
+    }
+    else if(theToken == "arcsech")
+    {
+        sb.Append("MathKGI.Asech");
+    }
+    else if(theToken == "arccsch")
+    {
+        sb.Append("MathKGI.Acsch");
+    }
+    else if(theToken == "arccoth")
+    {
+        sb.Append("MathKGI.Acoth");
+    }
+    else if(theToken == "pi")
+    {
+        sb.Append("Math.PI");
+    }
+    else if(theToken == "avogadro")
+    {
+        sb.Append("6.02214179e23");
+    }
+    else if(theToken == "exponentiale")
+    {
+        sb.Append("Math.E");
+    }
+    else if(theToken == "true")
+    {
+        //sb.Append("true");
+        sb.Append("1.0");
+    }
+    else if(theToken == "false")
+    {
+        //sb.Append("false");
+        sb.Append("0.0");
+    }
+    else if(theToken == "NaN")
+    {
+        sb.Append("double.NaN");
+    }
+    else if(theToken == "INF")
+    {
+        sb.Append("double.PositiveInfinity");
+    }
+    else if(theToken == "geq")
+    {
+        sb.Append("supportFunctions._geq");
+    }
+    else if(theToken == "leq")
+    {
+        sb.Append("supportFunctions._leq");
+    }
+    else if(theToken == "gt")
+    {
+        sb.Append("supportFunctions._gt");
+    }
+    else if(theToken == "lt")
+    {
+        sb.Append("supportFunctions._lt");
+    }
+    else if(theToken == "eq")
+    {
+        sb.Append("supportFunctions._eq");
+    }
+    else if(theToken == "neq")
+    {
+        sb.Append("supportFunctions._neq");
+    }
+    else if(theToken == "and")
+    {
+        sb.Append("supportFunction._and");
+    }
+    else if(theToken == "or")
+    {
+        sb.Append("supportFunction._or");
+    }
+    else if(theToken == "not")
+    {
+        sb.Append("supportFunction._not");
+    }
+    else if(theToken == "xor")
+    {
+        sb.Append("supportFunction._xor");
+    }
+    else if(theToken == "root")
+    {
+        sb.Append("supportFunctions._root");
+    }
+    else if(theToken == "piecewise")
+    {
+        sb.Append("supportFunctions._piecewise");
+    }
+    else if(theToken == "delay")
+    {
+        sb.Append("supportFunctions._delay");
+        Warnings.Add("RoadRunner does not yet support delay differential equations in SBML, they will be ignored (i.e. treated as delay = 0).");
+    }
+    else
+    {
+        bool bReplaced = false;
+        int index;
+        if (reactionList.find(reactionName, index))
+        {
+            int nParamIndex = 0;
+            if (localParameterList[index].find(s.tokenString, nParamIndex))
+            {
+                sb.Append("_lp[" + ToString(index) + "][" + ToString(nParamIndex) + "]");
+                bReplaced = true;
+            }
+        }
+
+        if (boundarySpeciesList.find(s.tokenString, index))
+        {
+            sb.Append("_bc[" + ToString(index) + "]");
+            bReplaced = true;
+        }
+        if (!bReplaced &&
+            (_functionParameters.size() != 0 && !_functionParameters.Contains(s.tokenString)))
+        {
+            throw Exception("Token '" + s.tokenString + "' not recognized.");
+        }
+    }
 }
 
 void ModelGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb)
@@ -1198,7 +1243,7 @@ int ModelGenerator::ReadFloatingSpecies()
               }
 
               stringstream formula;
-              formula<<dValue<<"/ _c["<<nCompartmentIndex<<"]";
+              formula<<ToString(dValue,STR_DoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
 
               symbol = new Symbol(reOrderedList[i],
                   dValue / dVolume,
@@ -1268,7 +1313,7 @@ int ModelGenerator::ReadBoundarySpecies()
                 }
             }
             stringstream formula;
-            formula<<dValue<<"/ _c["<<nCompartmentIndex<<"]";
+            formula<<ToString(dValue, STR_DoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
             symbol = new Symbol(sName,
             					dValue / dVolume,
                                 compartmentName,
@@ -2069,18 +2114,18 @@ void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, const int& n
             }
         }
 
-//        foreach (var pair in oList) //Todo: fix the foreach
-//        {
-//            string leftSideRule = FindSymbol(pair.First);
-//            string rightSideRule = pair.Second;
-//            if (leftSideRule != NULL)
-//            {
-//                sb.Append(leftSideRule + " = ");
-//                sb.Append(substituteTerms(numReactions, "", rightSideRule) + ";" + NL());
-//            }
-//        }
-
-
+		vector< pair<string, string> >::iterator iter;
+        for(iter = oList.begin(); iter < oList.end(); iter++)
+        {
+			pair<string, string>& pair = (*iter);
+            string leftSideRule = FindSymbol(pair.first);
+            string rightSideRule = pair.second;
+            if (leftSideRule.size())
+            {
+                sb.Append(leftSideRule + " = ");
+                sb.Append(substituteTerms(numReactions, "", rightSideRule) + ";" + NL());
+            }
+        }
     }
     for (int i = 0; i < mNOM.GetModel()->getNumEvents(); i++)
     {
@@ -2220,7 +2265,7 @@ int ModelGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions
         double value = mNOM.getValue(varName);
         if (!IsNaN(value))
         {
-            sb<< _oMapRateRule[i] << " = " << value << ";" << NL();
+            sb<< _oMapRateRule[i] << " = " << ToString(value, STR_DoubleFormat) << ";" << NL();
         }
     }
 
@@ -2337,12 +2382,16 @@ void ModelGenerator::WriteEvalModel(StringBuilder& sb, const int& numReactions, 
 
     for (int i = 0; i < numFloatingSpecies; i++)
     {
-        //if (floatingSpeciesConcentrationList[i].rateRule)
-        //    sb.Append("\t\t_y[" + i.ToString() + "] = oAmounts[" + (i + NumAdditionalRates).ToString() + "];");
-        ////sb.Append("\t\t_y[" + i.ToString() + "] = oAmounts[" + (i+NumAdditionalRates).ToString() + "]/" + convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
-        //else
-        sb<<"\t\t_y[" << i << "] = oAmounts[" << (i << NumAdditionalRates()) << "]/" <<
+//        if (floatingSpeciesConcentrationList[i].rateRule)
+//        {
+//        	sb<<"\t\t_y[" << i << "] = oAmounts[" << (i + NumAdditionalRates() )<< "];"<<NL();
+//        ////sb.Append("\t\t_y[" + i.ToString() + "] = oAmounts[" + (i+NumAdditionalRates).ToString() + "]/" + convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
+//        }
+//        else
+        {
+        	sb<<"\t\t_y[" << i << "] = oAmounts[" << i + NumAdditionalRates() << "]/" <<
                   convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) << ";" << NL();
+        }
     }
 
     sb.Append(NL());
@@ -2585,7 +2634,7 @@ void ModelGenerator::WriteEventAssignments(StringBuilder& sb, const int& numReac
                 oTemp.Add(assignmentVar);
                 oValue.Add(sTempVar);
 
-                str = sTempVar;// + str.Substring(str.IndexOf(" = ", System.StringComparison.Ordinal)); //Todo: fix this
+                str = sTempVar+ str.substr(str.find(" ="));
                 nCount++;
                 sb.AppendFormat("\t\t{0};{1}", str, NL());
             }
@@ -2613,7 +2662,7 @@ void ModelGenerator::WriteEventAssignments(StringBuilder& sb, const int& numReac
     sb.AppendFormat("{0}{0}\tprivate void InitializeDelays() { {0}", NL());
     for (int i = 0; i < delays.size(); i++)
     {
-        sb.AppendFormat("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate {{ return {1}; }} );{2}", i, delays[i], NL());
+        sb.AppendFormat("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate { return {1}; } );{2}", i, delays[i], NL());
         sb.AppendFormat("\t\t_eventType[{0}] = {1};{2}", i, ToString((eventType[i] ? true : false)), NL());
         sb.AppendFormat("\t\t_eventPersistentType[{0}] = {1};{2}", i, (eventPersistentType[i] ? "true" : "false"), NL());
     }
@@ -2703,7 +2752,15 @@ void ModelGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
             sb.Append("\t\t" + substituteTerms(_NumReactions, "", term) + ";" + NL());
             initializations.pop();
         }
+
+////                Stack<string> initializations = NOM.GetMatchForSymbol(compartmentList[i].name);
+////                while (initializations.Count > 0)
+////                {
+////                    sb.Append("\t\t" + substituteTerms(_NumReactions, "", initializations.Pop()) + ";" + NL());
+////                }
+
     }
+
 
     sb.Append("\t}" + NL() + NL());
 }

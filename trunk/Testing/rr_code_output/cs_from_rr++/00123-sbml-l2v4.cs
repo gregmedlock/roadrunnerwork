@@ -288,10 +288,10 @@ class TModel : IModel
 
 	public void initializeInitialConditions ()
 	{
-		_init_y[0] = (double)1e-06/ _c[0];
-		_init_y[1] = (double)2e-06/ _c[0];
-		_init_y[2] = (double)2e-06/ _c[0];
-		_init_y[3] = (double)0/ _c[0];
+		_init_y[0] = (double)1E-06/ _c[0];
+		_init_y[1] = (double)1.5E-06/ _c[0];
+		_init_y[2] = (double)2E-06/ _c[0];
+		_init_y[3] = (double)5E-07/ _c[0];
 
 	}
 
@@ -321,9 +321,9 @@ class TModel : IModel
 
 	public void setParameterValues ()
 	{
-		_gp[0] = (double)1e+06;
-		_gp[1] = (double)3e+05;
-		_gp[2] = (double)7e+05;
+		_gp[0] = (double)1000000;
+		_gp[1] = (double)300000;
+		_gp[2] = (double)700000;
 		_gp[3] = (double)1;
 	}
 
@@ -376,7 +376,7 @@ class TModel : IModel
 
 	public void InitializeRateRuleSymbols()
 	{
-		_gp[0] = 1e+06;
+		_gp[0] = 1000000;
 	}
 
 	public void AssignRates(double[] oRates)
@@ -423,10 +423,10 @@ class TModel : IModel
 	public void evalModel (double timein, double[] oAmounts)
 	{
 		_gp[0] = oAmounts[0];
-		_y[0] = oAmounts[0]/_c[0];
+		_y[0] = oAmounts[1]/_c[0];
 		_y[1] = oAmounts[2]/_c[0];
-		_y[2] = oAmounts[4]/_c[0];
-		_y[3] = oAmounts[6]/_c[0];
+		_y[2] = oAmounts[3]/_c[0];
+		_y[3] = oAmounts[4]/_c[0];
 
 		convertToAmounts();
 		_time = timein;  // Don't remove

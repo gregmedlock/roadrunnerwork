@@ -384,8 +384,8 @@ class TModel : IModel
 	{
 		_bc[0] = oAmounts[0];
 		_bc[1] = oAmounts[1];
-		_y[0] = oAmounts[0]/_c[0];
-		_y[1] = oAmounts[4]/_c[0];
+		_y[0] = oAmounts[2]/_c[0];
+		_y[1] = oAmounts[3]/_c[0];
 
 		convertToAmounts();
 		_time = timein;  // Don't remove

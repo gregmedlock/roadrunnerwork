@@ -275,9 +275,9 @@ class TModel : IModel
 
 	public void initializeInitialConditions ()
 	{
-		_init_y[0] = (double)2e-06/ _c[0];
-		_init_y[1] = (double)2e-06/ _c[0];
-		_init_y[2] = (double)1e-06/ _c[0];
+		_init_y[0] = (double)2E-06/ _c[0];
+		_init_y[1] = (double)1.5E-06/ _c[0];
+		_init_y[2] = (double)1E-06/ _c[0];
 
 	}
 
@@ -294,7 +294,7 @@ class TModel : IModel
 
 	public void setBoundaryConditions ()
 	{
-		_bc[0] = (double)2e-06/ _c[0];
+		_bc[0] = (double)2E-06/ _c[0];
 	}
 
 	public void setCompartmentVolumes ()
@@ -306,7 +306,7 @@ class TModel : IModel
 
 	public void setParameterValues ()
 	{
-		_gp[0] = (double)7.5e+05;
+		_gp[0] = (double)750000;
 		_gp[1] = (double)0.00025;
 	}
 
@@ -332,7 +332,7 @@ class TModel : IModel
 	}
 
 	public void computeRules(double[] y) {
-		_dydt[2] = ((double)1e-07) * 		_c[0];
+		_dydt[2] = ((double)1E-07) * 		_c[0];
 	}
 
 	private double[] _rateRules = new double[0];           // Vector containing values of additional rate rules      

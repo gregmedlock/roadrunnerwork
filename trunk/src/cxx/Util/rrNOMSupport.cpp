@@ -34,6 +34,7 @@ NOMSupport::~NOMSupport()
 
 void NOMSupport::Reset()
 {
+	mSymbolTable.clear();
 	delete mModel;
     delete mSBMLDoc;
     mModel 		= NULL;
@@ -1309,7 +1310,7 @@ StringListContainer NOMSupport::getListOfFloatingSpecies()
             StringList oSpeciesValues;
             oSpeciesValues.Add( oSpecies->getId() );
 	        double concentration = oSpecies->isSetInitialConcentration() ? oSpecies->getInitialConcentration() : oSpecies->getInitialAmount();
-            oSpeciesValues.Add( ToString(concentration) );
+            oSpeciesValues.Add( ToString(concentration,"%.5G") );
             oSpeciesValues.Add( ToString(oSpecies->isSetInitialConcentration()));
 
             floatingSpeciesList.Add(oSpeciesValues);
@@ -4008,7 +4009,6 @@ stack<string> NOMSupport::GetMatchForSymbol(const string& sbmlId)
 {
     stack<string> result;// = new Stack<string>();
 
-//    FillStack(result, mSymbolTable[sbmlId] as SBMLSymbol);
     FillStack(result, mSymbolTable[sbmlId]);
     return result;
 }
@@ -4038,10 +4038,6 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
     	SBMLSymbol dependency = symbol.mDependencies[0];
     	FillStack(stack, dependency); //hmm recursive.. Todo: perhaps
     }
-//    foreach (SBMLSymbol dependency in symbol.Dependencies)
-//    {
-//        FillStack(stack, dependency);
-//    }
 }
 
 //        string NOMSupport::addSourceSinkNodes(string sbml)

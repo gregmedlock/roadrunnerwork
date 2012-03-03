@@ -419,7 +419,7 @@ class TModel : IModel
 		updateDependentSpeciesValues(_y);
 		computeRules (_y);
 		previousEventStatusArray[0] = eventStatusArray[0];
-		if ((_y[0],(double)0.75)
+		if (supportFunctions._lt(_y[0],(double)0.75)
 	 == 1.0) {
 		     eventStatusArray[0] = true;
 		     eventTests[0] = 1;
@@ -435,24 +435,21 @@ class TModel : IModel
 	}
 	public double[] computeEventAssignment_0 () {
 		double[] values = new double[ 3];
-		values[0];
-		values[1];
-		values[2];
+		values[0] = _y[2];
+		values[1] = _y[1];
+		values[2] = _y[0];
 		return values;
 	}
 	public void performEventAssignment_0 (double[] values) {
 				_y[1] = values[0];
-		convertToConcentrations();
 				_y[0] = values[1];
-		convertToConcentrations();
 				_y[2] = values[2];
-		convertToConcentrations();
 	}
 	
 
 
 	private void InitializeDelays() { 
-		_eventDelay[0] = new TEventDelayDelegate(delegate {{ return (double)0; }} );
+		_eventDelay[0] = new TEventDelayDelegate(delegate { return (double)0; } );
 		_eventType[0] = true;
 		_eventPersistentType[0] = true;
 	}

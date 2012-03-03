@@ -296,7 +296,7 @@ class TModel : IModel
 	public void setParameterValues ()
 	{
 		_gp[0] = (double)1.75;
-		_gp[1] = (double)1.5e-05;
+		_gp[1] = (double)1.5E-05;
 	}
 
 	// Uses the equation: C = Sd - L0*Si
@@ -372,7 +372,7 @@ class TModel : IModel
 	public void evalModel (double timein, double[] oAmounts)
 	{
 		_bc[0] = oAmounts[0];
-		_y[0] = oAmounts[0]/_c[0];
+		_y[0] = oAmounts[1]/_c[0];
 		_y[1] = oAmounts[2]/_c[0];
 
 		convertToAmounts();

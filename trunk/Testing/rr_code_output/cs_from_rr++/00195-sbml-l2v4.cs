@@ -355,7 +355,7 @@ class TModel : IModel
 	{
 		_rates[0] = y[0]*
 	_c[0]*
-	(_gp[0],,_gp[1])
+	supportFunctions._piecewise(_gp[0],1.0,_gp[1])
 	;
 	}
 

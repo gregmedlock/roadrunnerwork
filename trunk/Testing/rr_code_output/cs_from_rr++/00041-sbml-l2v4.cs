@@ -395,7 +395,7 @@ class TModel : IModel
 		updateDependentSpeciesValues(_y);
 		computeRules (_y);
 		previousEventStatusArray[0] = eventStatusArray[0];
-		if ((_y[0],(double)0.1)
+		if (supportFunctions._lt(_y[0],(double)0.1)
 	 == 1.0) {
 		     eventStatusArray[0] = true;
 		     eventTests[0] = 1;
@@ -404,7 +404,7 @@ class TModel : IModel
 		     eventTests[0] = -1;
 		}
 		previousEventStatusArray[1] = eventStatusArray[1];
-		if ((_y[1],(double)0.5)
+		if (supportFunctions._gt(_y[1],(double)0.5)
 	 == 1.0) {
 		     eventStatusArray[1] = true;
 		     eventTests[1] = 1;
@@ -420,33 +420,31 @@ class TModel : IModel
 	}
 	public double[] computeEventAssignment_0 () {
 		double[] values = new double[ 1];
-		values[0];
+		values[0] = (double)1;
 		return values;
 	}
 	public void performEventAssignment_0 (double[] values) {
 				_y[0] = values[0];
-		convertToConcentrations();
 	}
 	public void eventAssignment_1 () {
 		performEventAssignment_1( computeEventAssignment_1() );
 	}
 	public double[] computeEventAssignment_1 () {
 		double[] values = new double[ 1];
-		values[0];
+		values[0] = (double)0;
 		return values;
 	}
 	public void performEventAssignment_1 (double[] values) {
 				_y[1] = values[0];
-		convertToConcentrations();
 	}
 	
 
 
 	private void InitializeDelays() { 
-		_eventDelay[0] = new TEventDelayDelegate(delegate {{ return (double)0; }} );
+		_eventDelay[0] = new TEventDelayDelegate(delegate { return (double)0; } );
 		_eventType[0] = true;
 		_eventPersistentType[0] = true;
-		_eventDelay[1] = new TEventDelayDelegate(delegate {{ return (double)0; }} );
+		_eventDelay[1] = new TEventDelayDelegate(delegate { return (double)0; } );
 		_eventType[1] = true;
 		_eventPersistentType[1] = true;
 	}

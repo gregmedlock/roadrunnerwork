@@ -292,14 +292,14 @@ class TModel : IModel
 	public void computeRules(double[] y) {
 		_rateRules[0] = -
 	(double)1*
-	((_gp[2]*
+	supportFunctions._factorial(Math.Ceiling(_gp[2]*
 	_gp[0])
 	)
 	*
 	Math.Pow(_gp[3],-
 	(double)1)
 	;
-		_rateRules[1] = ((_gp[2]*
+		_rateRules[1] = supportFunctions._factorial(Math.Ceiling(_gp[2]*
 	_gp[0])
 	)
 	*

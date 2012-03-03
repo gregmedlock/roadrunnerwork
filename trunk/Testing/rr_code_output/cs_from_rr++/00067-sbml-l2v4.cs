@@ -393,9 +393,9 @@ class TModel : IModel
 	public void evalModel (double timein, double[] oAmounts)
 	{
 		_gp[0] = oAmounts[0];
-		_y[0] = oAmounts[0]/_c[0];
+		_y[0] = oAmounts[1]/_c[0];
 		_y[1] = oAmounts[2]/_c[0];
-		_y[2] = oAmounts[4]/_c[0];
+		_y[2] = oAmounts[3]/_c[0];
 
 		convertToAmounts();
 		_time = timein;  // Don't remove

@@ -384,6 +384,10 @@ class TModel : IModel
 
 	public void evalInitialAssignments()
 	{
+		_gp[0] = (double)1.33333333333*
+	_gp[3];
+		_gp[1] = _gp[4]*
+	(double)3E-17;
 	}
 
 	public void testConstraints()

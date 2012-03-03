@@ -450,21 +450,20 @@ class TModel : IModel
 	}
 	public double[] computeEventAssignment_0 () {
 		double[] values = new double[ 2];
-		values[0];
-		values[1];
+		values[0] = (double)1.5;
+		values[1] = add (_gp[2],_gp[3])
+	;
 		return values;
 	}
 	public void performEventAssignment_0 (double[] values) {
 				_y[1] = values[0];
-		convertToConcentrations();
 				_y[0] = values[1];
-		convertToConcentrations();
 	}
 	
 
 
 	private void InitializeDelays() { 
-		_eventDelay[0] = new TEventDelayDelegate(delegate {{ return (double)2; }} );
+		_eventDelay[0] = new TEventDelayDelegate(delegate { return (double)2; } );
 		_eventType[0] = true;
 		_eventPersistentType[0] = true;
 	}

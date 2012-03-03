@@ -386,10 +386,10 @@ class TModel : IModel
 		_rates[0] = _c[0]*
 	_gp[2]*
 	y[0];
-		_rates[1] = (_gp[0],
-supportFunctions._xor((y[2],(double)4)
-	,(y[2],(double)1)
-	,(y[2],(double)2)
+		_rates[1] = supportFunctions._piecewise(_gp[0],
+supportFunctions._xor(supportFunctions._gt(y[2],(double)4)
+	,supportFunctions._lt(y[2],(double)1)
+	,supportFunctions._lt(y[2],(double)2)
 	)
 	,_gp[1])
 	;

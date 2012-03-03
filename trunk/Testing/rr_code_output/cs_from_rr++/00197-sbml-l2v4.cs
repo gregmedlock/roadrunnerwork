@@ -353,7 +353,7 @@ class TModel : IModel
 	// Compute the reaction rates
 	public void computeReactionRates (double time, double[] y)
 	{
-		_rates[0] = (_gp[0]*
+		_rates[0] = Math.Ceiling(_gp[0]*
 	y[0])
 	*
 	Math.Pow(_gp[1],-

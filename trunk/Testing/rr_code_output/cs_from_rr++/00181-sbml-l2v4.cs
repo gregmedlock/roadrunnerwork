@@ -318,7 +318,7 @@ class TModel : IModel
 	public void InitializeRateRuleSymbols()
 	{
 		_gp[0] = 1;
-		_gp[1] = 1.5e-15;
+		_gp[1] = 1.5E-15;
 	}
 
 	public void AssignRates(double[] oRates)

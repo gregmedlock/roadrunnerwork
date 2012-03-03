@@ -277,7 +277,7 @@ class TModel : IModel
 	{
 		_init_y[0] = (double)0.0001/ _c[0];
 		_init_y[1] = (double)0.0002/ _c[0];
-		_init_y[2] = (double)1e-05/ _c[0];
+		_init_y[2] = (double)1E-05/ _c[0];
 
 	}
 

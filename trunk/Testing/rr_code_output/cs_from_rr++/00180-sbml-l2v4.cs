@@ -380,6 +380,8 @@ class TModel : IModel
 
 	public void evalInitialAssignments()
 	{
+		_gp[0] = _gp[2]*
+	_gp[1];
 	}
 
 	public void testConstraints()

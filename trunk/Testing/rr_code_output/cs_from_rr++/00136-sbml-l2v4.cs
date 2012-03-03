@@ -392,6 +392,8 @@ class TModel : IModel
 
 	public void evalInitialAssignments()
 	{
+		_gp[0] = _gp[1]/
+	(double)100;
 	}
 
 	public void testConstraints()

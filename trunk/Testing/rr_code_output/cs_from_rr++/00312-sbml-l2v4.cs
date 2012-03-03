@@ -376,7 +376,7 @@ class TModel : IModel
 	public void evalModel (double timein, double[] oAmounts)
 	{
 		_gp[2] = oAmounts[0];
-		_y[0] = oAmounts[0]/_c[0];
+		_y[0] = oAmounts[1]/_c[0];
 		_y[1] = oAmounts[2]/_c[0];
 
 		convertToAmounts();
