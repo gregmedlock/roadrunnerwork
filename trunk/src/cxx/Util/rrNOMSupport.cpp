@@ -23,7 +23,9 @@ namespace rr
 NOMSupport::NOMSupport()
 :
 mModel(NULL),
+STR_DoubleFormat("%.5G"),
 mSBMLDoc(NULL)//,
+
 {
 
 }
@@ -156,11 +158,10 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
         Species *oSpecies = mModel->getSpecies(i);
         if (oSpecies->getBoundaryCondition())
         {
-            StringList oSpeciesValues;// = new ArrayList();
-//            oSpeciesValues.Add(GetId(oSpecies));
+            StringList oSpeciesValues;
             oSpeciesValues.Add(oSpecies->getId());
             double concentration = oSpecies->isSetInitialConcentration() ? oSpecies->getInitialConcentration() : oSpecies->getInitialAmount();
-            oSpeciesValues.Add( ToString(concentration) );
+            oSpeciesValues.Add( ToString(concentration, STR_DoubleFormat) );
             oSpeciesValues.Add( ToString(oSpecies->isSetInitialConcentration()) );
 
             boundarySpeciesList.Add(oSpeciesValues);
@@ -1310,7 +1311,7 @@ StringListContainer NOMSupport::getListOfFloatingSpecies()
             StringList oSpeciesValues;
             oSpeciesValues.Add( oSpecies->getId() );
 	        double concentration = oSpecies->isSetInitialConcentration() ? oSpecies->getInitialConcentration() : oSpecies->getInitialAmount();
-            oSpeciesValues.Add( ToString(concentration,"%.5G") );
+            oSpeciesValues.Add( ToString(concentration, STR_DoubleFormat) );
             oSpeciesValues.Add( ToString(oSpecies->isSetInitialConcentration()));
 
             floatingSpeciesList.Add(oSpeciesValues);
@@ -4007,7 +4008,10 @@ bool NOMSupport::MultiplyCompartment(const string& sbmlId, string& compartmentId
 /// <returns></returns>
 stack<string> NOMSupport::GetMatchForSymbol(const string& sbmlId)
 {
-    stack<string> result;// = new Stack<string>();
+    stack<string> result;
+
+    SBMLSymbol *symbol = &(mSymbolTable[sbmlId]);
+	Log(lDebug5)<<"In "<<__FUNCTION__<<" Filling stack with symbol: "<<(*symbol);
 
     FillStack(result, mSymbolTable[sbmlId]);
     return result;
@@ -4030,7 +4034,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
     }
     if (symbol.HasValue())
     {
-        stack.push(symbol.mId + " = " + ToString(symbol.mValue));
+        stack.push(symbol.mId + " = " + ToString(symbol.mValue, STR_DoubleFormat));
     }
 
     for(int i = 0; i < symbol.mDependencies.size(); i++)

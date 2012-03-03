@@ -3,6 +3,8 @@
 #endif
 #pragma hdrstop
 #include <iostream>
+#include <limits>
+
 #include "rrSBMLSymbol.h"
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
@@ -13,6 +15,7 @@ namespace rr
 {
 SBMLSymbol::SBMLSymbol()
 :
+mValue(std::numeric_limits<double>::quiet_NaN()),//Represents an un-initialized value
 mConcentration(mValue),
 mAmount(mValue),
 mHasRule(false)

@@ -2733,7 +2733,6 @@ void ModelGenerator::WriteSetParameterValues(StringBuilder& sb, const int& numRe
 
 void ModelGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
 {
-	// ------------------------------------------------------------------------------
     sb.Append("\tpublic void setCompartmentVolumes ()" + NL());
     sb.Append("\t{" + NL());
     for (int i = 0; i < compartmentList.size(); i++)
@@ -2743,8 +2742,6 @@ void ModelGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
 
         // at this point we also have to take care of all initial assignments for compartments as well as
         // the assignment rules on compartments ... otherwise we are in trouble :)
-
-        //Stack<string> initializations = mNOM.GetMatchForSymbol(compartmentList[i].name);
 		stack<string> initializations = mNOM.GetMatchForSymbol(compartmentList[i].name);
         while (initializations.size() > 0)
         {

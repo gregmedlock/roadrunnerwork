@@ -299,8 +299,6 @@ class TModel : IModel
 	{
 		_c[0] = (double)1;
 		_c[0] = 
-	(double)0;
-		_c[0] = 
 	(double)1;
 	}
 
