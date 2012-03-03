@@ -81,11 +81,11 @@ string LibStructural::loadSBML(string sSBML)
     _Model = new SBMLmodel(sSBML);
 	string msg = analyzeWithQR();
 
-    std::map<int, std::string>::iterator iter = _speciesIndexList.begin();
-    for(iter = _speciesIndexList.begin(); iter != _speciesIndexList.end(); iter++)
-    {
-        cout<<(*iter).first<<(*iter).second<<endl;
-    }
+//    std::map<int, std::string>::iterator iter = _speciesIndexList.begin();
+//    for(iter = _speciesIndexList.begin(); iter != _speciesIndexList.end(); iter++)
+//    {
+//        cout<<(*iter).first<<(*iter).second<<endl;
+//    }
 
 	return msg;
 }
@@ -533,13 +533,15 @@ string LibStructural::analyzeWithQR()
 			}
 		}
 
-		DELETE_IF_NON_NULL(_L0); _L0 = L0t.getTranspose();
+		DELETE_IF_NON_NULL(_L0);
+        _L0 = L0t.getTranspose();
 
 		// reorder species //Todo: This causes c++ generated code be different from c#??
 		for (unsigned int i = 0; i < P->numRows(); i++)
 		{
 			for (unsigned int j = 0; j < P->numCols(); j++)
 			{
+            	double aNUm = (*P)(i,j);
 				if ((*P)(i,j) == 1)
 				{
 					spVec[j]=i;        //here it is!!!

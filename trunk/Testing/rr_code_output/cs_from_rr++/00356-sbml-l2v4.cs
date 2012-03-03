@@ -293,13 +293,13 @@ class TModel : IModel
 	// User defined function:  add
 	public double add (double x, double y)
 	{
-		 return ;
+		 return x+y;
 	}
 
 	// User defined function:  divide
 	public double divide (double x, double y)
 	{
-		 return ;
+		 return x*Math.Pow(y,-1);
 	}
 
 	public void initializeInitialConditions ()

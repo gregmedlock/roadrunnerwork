@@ -3105,9 +3105,7 @@ deque<Rule> NOMSupport::ReorderAssignmentRules(deque<Rule>& assignmentRules)
 /// <param name="model">the model to use</param>
 void NOMSupport::ReorderRules(SBMLDocument& doc, Model& model)
 {
-//	Model model = theModel;
     int numRules = (int) model.getNumRules();
-
     deque<Rule> assignmentRules;
     deque<Rule> rateRules;
     deque<Rule> algebraicRules;
@@ -3170,7 +3168,7 @@ void NOMSupport::loadSBML(const string& var0, const string& sTimeSymbol)
 	SBMLDocument &sbmlDoc = *mSBMLDoc;
 
     modifyKineticLaws(sbmlDoc, aModel);
-//    ReorderRules(sbmlDoc, aModel);
+    ReorderRules(sbmlDoc, aModel);
     BuildSymbolTable();
 }
 

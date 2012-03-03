@@ -19,6 +19,7 @@ class RR_DECLSPEC StringBuilder : public rrObject
 
     	StringBuilder(const string& aStr = "");
         void  Append(const string& str);
+        void  Append(const int& str);
         void  Append(const unsigned int& str);
         void  Append(const double& str);
         void  Append(const string& s1, const string& s2);

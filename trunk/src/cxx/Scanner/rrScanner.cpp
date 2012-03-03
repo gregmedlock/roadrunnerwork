@@ -120,6 +120,10 @@ void Scanner::startScanner()
 
 char Scanner::getCharFromBuffer()
 {
+	if(!pStream)
+    {
+    	throw Exception("There is no stream assigned to the scanner.. exiting");
+    }
     // If the buffer is empty, read a new chuck of text from the
     // input stream, this might be a stream or console
     if (bufferPtr == 0)
@@ -127,6 +131,7 @@ char Scanner::getCharFromBuffer()
         // Read a chunck of data from the input stream
         //        bufferLength = (char) FStream.Read(buffer, 0, 255);
         char chars[255];
+
         pStream ->read(chars, 255);
 
         bufferLength = pStream->gcount();//(char) pStream->read(buffer, 0, 255);

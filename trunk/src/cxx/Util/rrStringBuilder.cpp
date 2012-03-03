@@ -21,6 +21,12 @@ void StringBuilder::Append(const string& str)
 	Log(lDebug5)<<"Appended :"<<RemoveNewLines(str, 1);
 }
 
+void StringBuilder::Append(const int& str)
+{
+    mStringing<<str;
+	Log(lDebug5)<<"Appended :"<<str;
+}
+
 void StringBuilder::Append(const unsigned int& str)
 {
     mStringing<<str;

@@ -267,7 +267,7 @@ class TModel : IModel
 	// User defined function:  calculate
 	public double calculate (double x, double y)
 	{
-		 return ;
+		 return x;
 	}
 
 	public void initializeInitialConditions ()

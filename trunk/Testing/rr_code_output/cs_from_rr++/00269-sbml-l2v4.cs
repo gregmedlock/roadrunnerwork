@@ -267,7 +267,7 @@ class TModel : IModel
 	// User defined function:  calculate
 	public double calculate (double x, double y, double z)
 	{
-		 return ;
+		 return supportFunctions._factorial(Math.Ceiling(x*y))*Math.Pow(z,-1);
 	}
 
 	public void initializeInitialConditions ()

@@ -275,7 +275,7 @@ class TModel : IModel
 	// User defined function:  multiply
 	public double multiply (double x, double y, double z)
 	{
-		 return ;
+		 return x*y*z;
 	}
 
 	public void initializeInitialConditions ()

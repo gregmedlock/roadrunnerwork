@@ -286,7 +286,7 @@ class TModel : IModel
 	// User defined function:  lessthan
 	public double lessthan (double x, double y)
 	{
-		 return ;
+		 return supportFunctions._lt(x,y);
 	}
 
 	public void initializeInitialConditions ()

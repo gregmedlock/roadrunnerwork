@@ -282,7 +282,7 @@ class TModel : IModel
 	// User defined function:  calculate
 	public double calculate (double x, double y, double z)
 	{
-		 return ;
+		 return supportFunctions._piecewise(y,supportFunctions._or(supportFunctions._lt(x,2),supportFunctions._gt(x,4),supportFunctions._lt(x,1)),z);
 	}
 
 	public void initializeInitialConditions ()
