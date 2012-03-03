@@ -24,15 +24,15 @@ int _tmain(int argc, _TCHAR* argv[])
         gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
         LogOutput::mLogToConsole = true;
 
-        gLog.SetCutOffLogLevel(lDebug5);
-        gLog.SetCutOffLogLevel(lInfo);
+    	gLog.SetCutOffLogLevel(lDebug5);
+       	gLog.SetCutOffLogLevel(lInfo);
 
         Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
 
 	    RoadRunner *roadRunner = NULL;
 
         //Loading models (max is 459)
-		for(int caseNr = 1; caseNr < 450; caseNr++)
+		for(int caseNr = 1; caseNr < 460; caseNr++)
         {
         	//int caseNr = 41;
 			if(roadRunner)

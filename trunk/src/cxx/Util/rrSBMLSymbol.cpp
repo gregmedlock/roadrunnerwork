@@ -59,7 +59,7 @@ bool SBMLSymbol::HasValue()
 	return IsNaN(mValue) ? false : true;
 }
 
-bool SBMLSymbol::HasInitialAssignment()
+bool SBMLSymbol::HasInitialAssignment() const
 {
 	return mInitialAssignment.size() ? true : false;
 }
@@ -73,11 +73,17 @@ bool SBMLSymbol::HasRule()
 ostream& operator<<(ostream& stream, const SBMLSymbol& symbol)
 {
 	//stream symbol to stream
-    stream<<"ID = "<<			symbol.mId						<<endl;
-    stream<<"Type = "<<         symbol.mType					<<endl;
-    stream<<"Value = "<<		symbol.mValue					<<endl;
-    stream<<"..add more info..."<<						   endl;
-    stream<<"Has Rule = "<<		ToString(symbol.mHasRule)		<<endl;
+    stream<<"ID = "<<			symbol.mId								<<endl;
+    stream<<"Type = "<<         symbol.mType							<<endl;
+    stream<<"Value = "<<		symbol.mValue							<<endl;
+	stream<<"Has Initial Assignment = "<<symbol.HasInitialAssignment() 	<<endl;
+
+    if(symbol.HasInitialAssignment())
+    {
+    	stream<<"Intial Assignment = "<<symbol.mInitialAssignment			<<endl;
+    }
+    stream<<"..add more info..."										<<endl;
+    stream<<"Has Rule = "<<		ToString(symbol.mHasRule)				<<endl;
     if(symbol.mHasRule)
     {
 		stream<<"Rule = "<<		symbol.mRule					<<endl;

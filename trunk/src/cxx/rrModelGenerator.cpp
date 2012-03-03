@@ -23,7 +23,7 @@ namespace rr
 ModelGenerator::ModelGenerator()
 :
 mStructAnalysis(),
-STR_DoubleFormat("%.12G"),
+STR_DoubleFormat("%.15G"),
 STR_FixAmountCompartments("*")
 {
 	mNOM.Reset();
@@ -1352,7 +1352,10 @@ int ModelGenerator::ReadGlobalParameters()
 
         string name 	= parameter[0];
         double value 	= ToDouble(parameter[1]);
-        globalParameterList.Add(Symbol(name, value));
+        Symbol aSymbol(name, value);
+        Log(lDebug5)<<"Adding symbol"<<aSymbol<<" to global parameters";
+
+        globalParameterList.Add(aSymbol);
     }
     return numGlobalParameters;
 }
@@ -2080,6 +2083,7 @@ void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, const int& n
         vector< pair<string, string> > oList;// = new List<Pair<string, string>>();
         for (int i = 0; i < numInitialAssignments; i++)
         {
+			pair<string, string> pair = mNOM.getNthInitialAssignmentPair(i);
             oList.push_back(mNOM.getNthInitialAssignmentPair(i));
         }
 
@@ -2102,7 +2106,10 @@ void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, const int& n
                         break;
                     }
                 }
-                if (bChange) break;
+                if (bChange)
+                {
+                	break;
+                }
             }
 
             if (bChange)

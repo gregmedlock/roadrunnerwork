@@ -146,7 +146,7 @@ double NOMSupport::getValue(const string& sId)
 
 StringListContainer NOMSupport::getListOfBoundarySpecies()
 {
-    StringListContainer boundarySpeciesList;// = new StringListContainer();
+    StringListContainer boundarySpeciesList;
 
     if (mModel == NULL)
     {
@@ -1349,7 +1349,7 @@ ArrayList NOMSupport::getListOfParameters()
         throw Exception("You need to load the model first");
     }
 
-    ArrayList paramStrValueList;// = new ArrayList();
+    ArrayList paramStrValueList;
 
     int numOfGlobalParameters = mModel->getNumParameters();
 
@@ -1370,7 +1370,7 @@ ArrayList NOMSupport::getListOfParameters()
         {
             paramValue = 0.0;
         }
-        tempStrValueList.Add(ToString(paramValue));
+        tempStrValueList.Add(ToString(paramValue, STR_DoubleFormat));
 
         paramStrValueList.Add(tempStrValueList);
     }
@@ -1404,7 +1404,7 @@ ArrayList NOMSupport::getListOfParameters()
                 {
                     paramValue = 0.0;
                 }
-                tempStrValueList.Add(ToString(paramValue));
+                tempStrValueList.Add(ToString(paramValue, STR_DoubleFormat));
                 paramStrValueList.Add(tempStrValueList);
             }
         }
@@ -2203,15 +2203,19 @@ pair<string, string> NOMSupport::getNthInitialAssignmentPair(const int& nIndex)
     {
         throw Exception("You need to load the model first");
     }
+
     InitialAssignment *oAssignment = mModel->getInitialAssignment((int)nIndex);
+
     if (oAssignment == NULL)
+    {
         throw Exception("The model does not have an InitialAssignment corresponding to the index provided");
+    }
 
     if (!oAssignment->isSetMath())
     {
         throw Exception("The InitialAssignment contains no math.");
     }
-
+	string second = SBML_formulaToString(oAssignment->getMath());
     return pair<string, string> (oAssignment->getSymbol(), SBML_formulaToString(oAssignment->getMath()));
 }
 
@@ -4040,7 +4044,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
     for(int i = 0; i < symbol.mDependencies.size(); i++)
     {
     	SBMLSymbol dependency = symbol.mDependencies[0];
-    	FillStack(stack, dependency); //hmm recursive.. Todo: perhaps
+    	FillStack(stack, dependency); //hmm recursive.. Todo: ...?
     }
 }
 

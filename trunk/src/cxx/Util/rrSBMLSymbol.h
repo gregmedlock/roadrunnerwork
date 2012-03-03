@@ -25,7 +25,7 @@ class RR_DECLSPEC SBMLSymbol : public rrObject
         bool 					IsSetAmount;
         bool 					IsSetConcentration;
 
-        bool 					HasInitialAssignment();
+        bool 					HasInitialAssignment() const;
         string					mInitialAssignment;
 
         bool 					mHasRule;
@@ -38,7 +38,7 @@ class RR_DECLSPEC SBMLSymbol : public rrObject
         SBMLSymbol& operator =(const SBMLSymbol& rhs);
 
 };
-//COuld make it a friend...
+//Could make it a friend...
 ostream& RR_DECLSPEC operator<<(ostream& stream, const SBMLSymbol& symbol);
 }
 #endif
