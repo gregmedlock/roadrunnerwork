@@ -1,16 +1,16 @@
 /*!  \file		libla.h
 \brief		All definitions needed for the LibLA (Linear Algebra) library
 
-\par 
-The current scope of the library encompasses matrix factorizations (QR and LU 
+\par
+The current scope of the library encompasses matrix factorizations (QR and LU
 factorization) as well as commonly needed matrix operations, such as calculating
-the inverse of a matrix, computing eigen values and singular values as well as 
-the null space of a matrix (both left and right null space) along with a method 
+the inverse of a matrix, computing eigen values and singular values as well as
+the null space of a matrix (both left and right null space) along with a method
 for the computation of the row echelon or Gauss Jordan form of a matrix.
 
 \author     Frank T. Bergmann (fbergman@u.washington.edu)
 \author	 Herbert M. Sauro
-\author	 Ravishankar Rao Vallabhajosyula (developed a previous version of the sructural analysis code)		
+\author	 Ravishankar Rao Vallabhajosyula (developed a previous version of the sructural analysis code)
 
 */
 #ifndef LIB_LA_LIBCLAPACK_H
@@ -29,7 +29,7 @@ for the computation of the row echelon or Gauss Jordan form of a matrix.
 \brief	   The LIB_LA namespace contains all functions and classes enabling the Linear Algebra functions.
 
 The namespace consists mainly of three classes LIB_LA::Complex, a straight forward implementation of a complex type, 
-LIB_LA::Matrix a template matrix class used by the C++ API and of course LIB_LA:LibLA the entry point of the 
+LIB_LA::Matrix a template matrix class used by the C++ API and of course LIB_LA:LibLA the entry point of the
 LA library which encapsulates all functionality. 
 */
 namespace LIB_LA
@@ -109,7 +109,7 @@ namespace LIB_LA
 		{ return _Tolerance; }
 		/*! \brief Set user specified tolerance
 
-		This function sets the tolerance used by the library to determine what value 
+		This function sets the tolerance used by the library to determine what value
 		is considered as zero. Any value with absolute value smaller than this tolerance is considered as zero 
 		and will be neglected. 
 
@@ -422,11 +422,10 @@ namespace LIB_LA
 	};
 
 }
-
 #endif // __cplusplus
 
-BEGIN_C_DECLS;
 
+BEGIN_C_DECLS;
 /*! \brief Returns the currently used tolerance
 
 This function returns the tolerance currently used by the library to determine what value 

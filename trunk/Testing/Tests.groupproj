@@ -7,7 +7,7 @@
 				<Dependencies/>
 			</Projects>
 			<Projects Include="loadSBML\loadSBML.cbproj">
-				<Dependencies/>
+				<Dependencies>..\xe_lib_projects\RoadRunner++_xe.cbproj</Dependencies>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -26,13 +26,13 @@
 		<Target Name="RoadRunner++_xe:Make">
 			<MSBuild Projects="..\xe_lib_projects\RoadRunner++_xe.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="loadSBML">
+		<Target Name="loadSBML" DependsOnTargets="RoadRunner++_xe">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj"/>
 		</Target>
-		<Target Name="loadSBML:Clean">
+		<Target Name="loadSBML:Clean" DependsOnTargets="RoadRunner++_xe:Clean">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="loadSBML:Make">
+		<Target Name="loadSBML:Make" DependsOnTargets="RoadRunner++_xe:Make">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">

@@ -46,6 +46,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<ILINK_Verbose>true</ILINK_Verbose>
 			<IncludePath>C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
 			<_TCHARMapping>char</_TCHARMapping>
 			<BCC_PCHName>rrLib.csm</BCC_PCHName>
@@ -71,15 +72,7 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>57</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>58</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrBuilds\xe\clapack\SRC\lapack.lib">
+			<LibFiles Include="C:\rrInstalls\vs\clapack\liblapack_xe.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>56</BuildOrder>
 			</LibFiles>
