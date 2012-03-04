@@ -309,6 +309,10 @@ class TModel : IModel
 	public void setCompartmentVolumes ()
 	{
 		_c[0] = (double)1;
+		_gp[3] = 
+	(double)1.5;
+		_gp[2] = 
+	(double)0.1;
 		_c[0] = 
 	(double)1;
 		_c[0] = 

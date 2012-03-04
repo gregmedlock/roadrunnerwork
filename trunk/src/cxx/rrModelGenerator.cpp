@@ -230,9 +230,11 @@ string ModelGenerator::convertSymbolToC(const string& compartmentName)
 
 StringList ModelGenerator::getCompartmentList()
 {
-    StringList tmp;// = new StringList();
+    StringList tmp;
     for (int i = 0; i < compartmentList.size(); i++)
+    {
         tmp.Add(compartmentList[i].name);
+    }
     return tmp;
 }
 //
@@ -2753,18 +2755,11 @@ void ModelGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
         while (initializations.size() > 0)
         {
         	string term(initializations.top());
-            sb.Append("\t\t" + substituteTerms(_NumReactions, "", term) + ";" + NL());
+            string sub = substituteTerms(_NumReactions, "", term);
+            sb.Append("\t\t" + sub + ";" + NL());
             initializations.pop();
         }
-
-////                Stack<string> initializations = NOM.GetMatchForSymbol(compartmentList[i].name);
-////                while (initializations.Count > 0)
-////                {
-////                    sb.Append("\t\t" + substituteTerms(_NumReactions, "", initializations.Pop()) + ";" + NL());
-////                }
-
     }
-
 
     sb.Append("\t}" + NL() + NL());
 }

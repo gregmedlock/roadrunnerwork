@@ -1359,7 +1359,6 @@ ArrayList NOMSupport::getListOfParameters()
 	    double paramValue;
         string paramStr = parameter->getId();
         StringList tempStrValueList;
-		//        tempStrValueList = new ArrayList();
         tempStrValueList.Add(paramStr);
 
         if ((parameter->isSetValue()))
@@ -3303,6 +3302,15 @@ void NOMSupport::UpdateDependencies(const string& sbmlId)
     if (current.HasInitialAssignment())
     {
         StringList dependentSymbols = GetSymbols(current.mInitialAssignment);
+        for(int i = 0; i < dependentSymbols.size(); i++)
+        {
+        	string dependency = dependentSymbols[i];
+        	if(dependency != current.mId)
+            {
+            	current.mDependencies.push_back(mSymbolTable[dependency]);
+            }
+        }
+
 //        foreach (string dependency in dependentSymbols)
 //            if (dependency != current.Id)
 //                current.Dependencies.Add((SBMLSymbol)mSymbolTable[dependency]);
@@ -3311,6 +3319,14 @@ void NOMSupport::UpdateDependencies(const string& sbmlId)
     if (current.HasRule())
     {
         StringList dependentSymbols = GetSymbols(current.mRule);
+        for(int i = 0; i < dependentSymbols.size(); i++)
+        {
+        	string dependency = dependentSymbols[i];
+        	if(dependency != current.mId)
+            {
+            	current.mDependencies.push_back(mSymbolTable[dependency]);
+            }
+        }
 //        foreach (string dependency in dependentSymbols)
 //            if (dependency != current.Id)
 //                current.Dependencies.Add((SBMLSymbol)mSymbolTable[dependency]);
@@ -4015,7 +4031,6 @@ stack<string> NOMSupport::GetMatchForSymbol(const string& sbmlId)
     stack<string> result;
 
     SBMLSymbol *symbol = &(mSymbolTable[sbmlId]);
-	Log(lDebug5)<<"In "<<__FUNCTION__<<" Filling stack with symbol: "<<(*symbol);
 
     FillStack(result, mSymbolTable[sbmlId]);
     return result;
@@ -4023,6 +4038,7 @@ stack<string> NOMSupport::GetMatchForSymbol(const string& sbmlId)
 
 void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 {
+	Log(lDebug5)<<"In "<<__FUNCTION__<<" Filling stack with symbol: "<<(symbol);
     if (!symbol.mId.size())
     {
     	return;
@@ -4043,7 +4059,7 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 
     for(int i = 0; i < symbol.mDependencies.size(); i++)
     {
-    	SBMLSymbol dependency = symbol.mDependencies[0];
+    	SBMLSymbol dependency = symbol.mDependencies[i];
     	FillStack(stack, dependency); //hmm recursive.. Todo: ...?
     }
 }

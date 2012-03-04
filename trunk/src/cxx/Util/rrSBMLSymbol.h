@@ -1,10 +1,12 @@
 #ifndef rrSBMLSymbolH
 #define rrSBMLSymbolH
 #include <vector>
+#include <deque>
 #include "rrObject.h"
 #include "rrUtils.h"
 
 using std::vector;
+using std::deque;
 namespace rr
 {
 
@@ -14,7 +16,7 @@ class RR_DECLSPEC SBMLSymbol : public rrObject
     public:
         string 					mId;
         enum SBMLType 			mType;
-        vector<SBMLSymbol> 		mDependencies;
+        deque<SBMLSymbol> 		mDependencies;
 
         double 					mValue;
         bool 					HasValue();
