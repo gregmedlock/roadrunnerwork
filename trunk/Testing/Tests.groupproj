@@ -3,14 +3,11 @@
 			<ProjectGuid>{8FC33672-CD3D-4B85-844F-3B755C2666C5}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
-			<Projects Include="..\ThirdParty\xe_ide_builds\NOMLib-static.cbproj">
-				<Dependencies/>
-			</Projects>
-			<Projects Include="..\src\RoadRunnerLib.cbproj">
+			<Projects Include="..\xe_lib_projects\RoadRunner++_xe.cbproj">
 				<Dependencies/>
 			</Projects>
 			<Projects Include="loadSBML\loadSBML.cbproj">
-				<Dependencies>..\src\RoadRunnerLib.cbproj</Dependencies>
+				<Dependencies/>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -20,41 +17,32 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
-		<Target Name="NOMLib-static">
-			<MSBuild Projects="..\ThirdParty\xe_ide_builds\NOMLib-static.cbproj"/>
+		<Target Name="RoadRunner++_xe">
+			<MSBuild Projects="..\xe_lib_projects\RoadRunner++_xe.cbproj"/>
 		</Target>
-		<Target Name="NOMLib-static:Clean">
-			<MSBuild Projects="..\ThirdParty\xe_ide_builds\NOMLib-static.cbproj" Targets="Clean"/>
+		<Target Name="RoadRunner++_xe:Clean">
+			<MSBuild Projects="..\xe_lib_projects\RoadRunner++_xe.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="NOMLib-static:Make">
-			<MSBuild Projects="..\ThirdParty\xe_ide_builds\NOMLib-static.cbproj" Targets="Make"/>
+		<Target Name="RoadRunner++_xe:Make">
+			<MSBuild Projects="..\xe_lib_projects\RoadRunner++_xe.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="RoadRunnerLib">
-			<MSBuild Projects="..\src\RoadRunnerLib.cbproj"/>
-		</Target>
-		<Target Name="RoadRunnerLib:Clean">
-			<MSBuild Projects="..\src\RoadRunnerLib.cbproj" Targets="Clean"/>
-		</Target>
-		<Target Name="RoadRunnerLib:Make">
-			<MSBuild Projects="..\src\RoadRunnerLib.cbproj" Targets="Make"/>
-		</Target>
-		<Target Name="loadSBML" DependsOnTargets="RoadRunnerLib">
+		<Target Name="loadSBML">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj"/>
 		</Target>
-		<Target Name="loadSBML:Clean" DependsOnTargets="RoadRunnerLib:Clean">
+		<Target Name="loadSBML:Clean">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="loadSBML:Make" DependsOnTargets="RoadRunnerLib:Make">
+		<Target Name="loadSBML:Make">
 			<MSBuild Projects="loadSBML\loadSBML.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="NOMLib-static;RoadRunnerLib;loadSBML"/>
+			<CallTarget Targets="RoadRunner++_xe;loadSBML"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="NOMLib-static:Clean;RoadRunnerLib:Clean;loadSBML:Clean"/>
+			<CallTarget Targets="RoadRunner++_xe:Clean;loadSBML:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="NOMLib-static:Make;RoadRunnerLib:Make;loadSBML:Make"/>
+			<CallTarget Targets="RoadRunner++_xe:Make;loadSBML:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

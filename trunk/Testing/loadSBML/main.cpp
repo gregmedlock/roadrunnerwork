@@ -6,16 +6,16 @@
 #include <tchar.h>
 #include <dir.h>
 #include <iomanip>
-#include "Logger/rrLog.h"
-#include "rrException.h"
 #include "rrRoadRunner.h"
-#include "rrStringUtils.h"
+#include "Logger/rrLog.h"
+#include "Util/rrException.h"
+#include "Util/rrStringUtils.h"
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace rr;
 
 #pragma argsused
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, _TCHAR* argv[])
 {
     try
     {

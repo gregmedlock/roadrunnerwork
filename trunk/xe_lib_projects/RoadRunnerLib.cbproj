@@ -33,8 +33,8 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>cxx\libstruct\;cxx\LibStructSupport\;..\ThirdParty\libstruct_xe\LibStructural\;cxx\Scanner\;..\ThirdParty\libstruct\LibStructural\;..\ThirdParty\NOMLib\src\;cxx\Logger\;cxx\Util\mtrand\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;C:\rrInstalls\xe\sundials\include;C:\rrInstalls\xe\libstruct\include;C:\rrInstalls\xe\libsbml\include;C:\rrInstalls\xe\libsbml\include\sbml;cxx\LibStruct;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>C:\rrBuilds\xe\clapack\Testing\MATGEN\;C:\rrInstalls\vs\clapack\;cxx\libstruct\;cxx\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\ThirdParty\libstruct_xe\LibStructural\;cxx\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;C:\rrInstalls\xe\libstruct\lib\;cxx\Logger\;..\ThirdParty\NOMLib\src\;..\ThirdParty\libstruct\LibStructural\;C:\rrBuilds\clapack_xe\BLAS\SRC\;C:\rrBuilds\clapack_xe\F2CLIBS\libf2c\;C:\rrBuilds\clapack_xe\SRC\;C:\rrThirdPartyInstalls\libstruct\lib\;C:\rrThirdPartyInstalls\sundials\;..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\bins\;C:\rrThirdPartyInstalls\;..\Externals\libsbml\src\sbml\xml\;..\Externals\libsbml\src\sbml\;C:\rr_install\lib\;cxx\Util\mtrand\;..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\src\libstruct\;..\src\LibStructSupport\;..\src\Scanner\;..\ThirdParty\NOMLib\src\;..\src\Logger\;..\src\Util\mtrand\;..\src\Util\;..\src\Solvers\;..\src\;C:\RRW\src\;C:\rrInstalls\xe\sundials\include;C:\rrInstalls\xe\libstruct\include;C:\rrInstalls\xe\libsbml\include;C:\rrInstalls\xe\libsbml\include\sbml;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>C:\rrBuilds\xe\clapack\Testing\MATGEN\;C:\rrInstalls\vs\clapack\;..\src\libstruct\;..\src\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\src\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;..\src\Logger\;..\ThirdParty\libsbml\dependencies\lib\;..\src\Util\mtrand\;..\build\link\;..\src\Util\;..\src\Solvers\;..\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -99,196 +99,196 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>48</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="cxx\LibStructSupport\rrInteropUtils.cpp">
-				<DependentOn>cxx\LibStructSupport\rrInteropUtils.h</DependentOn>
+			<CppCompile Include="..\src\LibStructSupport\rrInteropUtils.cpp">
+				<DependentOn>..\src\LibStructSupport\rrInteropUtils.h</DependentOn>
 				<BuildOrder>57</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\LibStructSupport\rrLibStructSupport.cpp">
-				<DependentOn>cxx\LibStructSupport\rrLibStructSupport.h</DependentOn>
+			<CppCompile Include="..\src\LibStructSupport\rrLibStructSupport.cpp">
+				<DependentOn>..\src\LibStructSupport\rrLibStructSupport.h</DependentOn>
 				<BuildOrder>58</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\libstruct\libla.cpp">
+			<CppCompile Include="..\src\libstruct\libla.cpp">
 				<BuildOrder>56</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\libstruct\libstructural.cpp">
+			<CppCompile Include="..\src\libstruct\libstructural.cpp">
 				<BuildOrder>55</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\libstruct\sbmlmodel.cpp">
+			<CppCompile Include="..\src\libstruct\sbmlmodel.cpp">
 				<BuildOrder>58</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\libstruct\util.cpp">
+			<CppCompile Include="..\src\libstruct\util.cpp">
 				<BuildOrder>57</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Logger\rrFileLog.cpp">
-				<DependentOn>cxx\Logger\rrFileLog.h</DependentOn>
+			<CppCompile Include="..\src\Logger\rrFileLog.cpp">
+				<DependentOn>..\src\Logger\rrFileLog.h</DependentOn>
 				<BuildOrder>50</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Logger\rrLog.cpp">
+			<CppCompile Include="..\src\Logger\rrLog.cpp">
 				<BuildOrder>51</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Logger\rrLogFile.cpp">
-				<DependentOn>cxx\Logger\rrLogFile.h</DependentOn>
+			<CppCompile Include="..\src\Logger\rrLogFile.cpp">
+				<DependentOn>..\src\Logger\rrLogFile.h</DependentOn>
 				<BuildOrder>52</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Logger\rrLoggerUtils.cpp">
-				<DependentOn>cxx\Logger\rrLoggerUtils.h</DependentOn>
+			<CppCompile Include="..\src\Logger\rrLoggerUtils.cpp">
+				<DependentOn>..\src\Logger\rrLoggerUtils.h</DependentOn>
 				<BuildOrder>53</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Logger\rrLogLevel.cpp">
-				<DependentOn>cxx\Logger\rrLogLevel.h</DependentOn>
+			<CppCompile Include="..\src\Logger\rrLogLevel.cpp">
+				<DependentOn>..\src\Logger\rrLogLevel.h</DependentOn>
 				<BuildOrder>54</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Logger\rrLogOutput.cpp">
-				<DependentOn>cxx\Logger\rrLogOutput.h</DependentOn>
+			<CppCompile Include="..\src\Logger\rrLogOutput.cpp">
+				<DependentOn>..\src\Logger\rrLogOutput.h</DependentOn>
 				<BuildOrder>55</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrIModel.cpp">
-				<DependentOn>cxx\rrIModel.h</DependentOn>
+			<CppCompile Include="..\src\rrIModel.cpp">
+				<DependentOn>..\src\rrIModel.h</DependentOn>
 				<BuildOrder>8</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrMath.cpp">
-				<DependentOn>cxx\rrMath.h</DependentOn>
+			<CppCompile Include="..\src\rrMath.cpp">
+				<DependentOn>..\src\rrMath.h</DependentOn>
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrModelGenerator.cpp">
-				<DependentOn>cxx\rrModelGenerator.h</DependentOn>
+			<CppCompile Include="..\src\rrModelGenerator.cpp">
+				<DependentOn>..\src\rrModelGenerator.h</DependentOn>
 				<BuildOrder>14</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrModelState.cpp">
-				<DependentOn>cxx\rrModelState.h</DependentOn>
+			<CppCompile Include="..\src\rrModelState.cpp">
+				<DependentOn>..\src\rrModelState.h</DependentOn>
 				<BuildOrder>7</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrObject.cpp">
-				<DependentOn>cxx\rrObject.h</DependentOn>
+			<CppCompile Include="..\src\rrObject.cpp">
+				<DependentOn>..\src\rrObject.h</DependentOn>
 				<BuildOrder>25</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrPendingAssignment.cpp">
-				<DependentOn>cxx\rrPendingAssignment.h</DependentOn>
+			<CppCompile Include="..\src\rrPendingAssignment.cpp">
+				<DependentOn>..\src\rrPendingAssignment.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrRoadRunner.cpp">
-				<DependentOn>cxx\rrRoadRunner.h</DependentOn>
+			<CppCompile Include="..\src\rrRoadRunner.cpp">
+				<DependentOn>..\src\rrRoadRunner.h</DependentOn>
 				<BuildOrder>15</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrSupportCode.cpp">
-				<DependentOn>cxx\rrSupportCode.h</DependentOn>
+			<CppCompile Include="..\src\rrSupportCode.cpp">
+				<DependentOn>..\src\rrSupportCode.h</DependentOn>
 				<BuildOrder>3</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrTComputeEventAssignmentDelegate.cpp">
-				<DependentOn>cxx\rrTComputeEventAssignmentDelegate.h</DependentOn>
+			<CppCompile Include="..\src\rrTComputeEventAssignmentDelegate.cpp">
+				<DependentOn>..\src\rrTComputeEventAssignmentDelegate.h</DependentOn>
 				<BuildOrder>4</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrTEventAssignmentDelegate.cpp">
-				<DependentOn>cxx\rrTEventAssignmentDelegate.h</DependentOn>
+			<CppCompile Include="..\src\rrTEventAssignmentDelegate.cpp">
+				<DependentOn>..\src\rrTEventAssignmentDelegate.h</DependentOn>
 				<BuildOrder>10</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrTEventDelayDelegate.cpp">
-				<DependentOn>cxx\rrTEventDelayDelegate.h</DependentOn>
+			<CppCompile Include="..\src\rrTEventDelayDelegate.cpp">
+				<DependentOn>..\src\rrTEventDelayDelegate.h</DependentOn>
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrTEventDelegate.cpp">
-				<DependentOn>cxx\rrTEventDelegate.h</DependentOn>
+			<CppCompile Include="..\src\rrTEventDelegate.cpp">
+				<DependentOn>..\src\rrTEventDelegate.h</DependentOn>
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrTParameterType.cpp">
-				<DependentOn>cxx\rrTParameterType.h</DependentOn>
+			<CppCompile Include="..\src\rrTParameterType.cpp">
+				<DependentOn>..\src\rrTParameterType.h</DependentOn>
 				<BuildOrder>13</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrTPerformEventAssignmentDelegate.cpp">
-				<DependentOn>cxx\rrTPerformEventAssignmentDelegate.h</DependentOn>
+			<CppCompile Include="..\src\rrTPerformEventAssignmentDelegate.cpp">
+				<DependentOn>..\src\rrTPerformEventAssignmentDelegate.h</DependentOn>
 				<BuildOrder>5</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\rrTVariableType.cpp">
-				<DependentOn>cxx\rrTVariableType.h</DependentOn>
+			<CppCompile Include="..\src\rrTVariableType.cpp">
+				<DependentOn>..\src\rrTVariableType.h</DependentOn>
 				<BuildOrder>12</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Scanner\rrScanner.cpp">
-				<DependentOn>cxx\Scanner\rrScanner.h</DependentOn>
+			<CppCompile Include="..\src\Scanner\rrScanner.cpp">
+				<DependentOn>..\src\Scanner\rrScanner.h</DependentOn>
 				<BuildOrder>49</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Scanner\rrToken.cpp">
-				<DependentOn>cxx\Scanner\rrToken.h</DependentOn>
+			<CppCompile Include="..\src\Scanner\rrToken.cpp">
+				<DependentOn>..\src\Scanner\rrToken.h</DependentOn>
 				<BuildOrder>50</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Solvers\rrCvodeInterface.cpp">
-				<DependentOn>cxx\Solvers\rrCvodeInterface.h</DependentOn>
+			<CppCompile Include="..\src\Solvers\rrCvodeInterface.cpp">
+				<DependentOn>..\src\Solvers\rrCvodeInterface.h</DependentOn>
 				<BuildOrder>17</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Solvers\rrNLEQInterface.cpp">
-				<DependentOn>cxx\Solvers\rrNLEQInterface.h</DependentOn>
+			<CppCompile Include="..\src\Solvers\rrNLEQInterface.cpp">
+				<DependentOn>..\src\Solvers\rrNLEQInterface.h</DependentOn>
 				<BuildOrder>18</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\mtrand\mtrand.cpp">
+			<CppCompile Include="..\src\Util\mtrand\mtrand.cpp">
 				<BuildOrder>31</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrCompiler.cpp">
+			<CppCompile Include="..\src\Util\rrCompiler.cpp">
 				<BuildOrder>27</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrDoubleMatrix.cpp">
-				<DependentOn>cxx\Util\rrDoubleMatrix.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrDoubleMatrix.cpp">
+				<DependentOn>..\src\Util\rrDoubleMatrix.h</DependentOn>
 				<BuildOrder>23</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrException.cpp">
-				<DependentOn>cxx\Util\rrException.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrException.cpp">
+				<DependentOn>..\src\Util\rrException.h</DependentOn>
 				<BuildOrder>22</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrHashTable.cpp">
-				<DependentOn>cxx\Util\rrHashTable.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrHashTable.cpp">
+				<DependentOn>..\src\Util\rrHashTable.h</DependentOn>
 				<BuildOrder>46</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrNOMSupport.cpp">
-				<DependentOn>cxx\Util\rrNOMSupport.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrNOMSupport.cpp">
+				<DependentOn>..\src\Util\rrNOMSupport.h</DependentOn>
 				<BuildOrder>43</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrParameterSet.cpp">
-				<DependentOn>cxx\Util\rrParameterSet.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrParameterSet.cpp">
+				<DependentOn>..\src\Util\rrParameterSet.h</DependentOn>
 				<BuildOrder>48</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrParameterSets.cpp">
-				<DependentOn>cxx\Util\rrParameterSets.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrParameterSets.cpp">
+				<DependentOn>..\src\Util\rrParameterSets.h</DependentOn>
 				<BuildOrder>49</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrRandom.cpp">
-				<DependentOn>cxx\Util\rrRandom.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrRandom.cpp">
+				<DependentOn>..\src\Util\rrRandom.h</DependentOn>
 				<BuildOrder>30</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrRule.cpp">
+			<CppCompile Include="..\src\Util\rrRule.cpp">
 				<BuildOrder>56</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrSBMLSymbol.cpp">
-				<DependentOn>cxx\Util\rrSBMLSymbol.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrSBMLSymbol.cpp">
+				<DependentOn>..\src\Util\rrSBMLSymbol.h</DependentOn>
 				<BuildOrder>47</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrStreamWriter.cpp">
-				<DependentOn>cxx\Util\rrStreamWriter.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrStreamWriter.cpp">
+				<DependentOn>..\src\Util\rrStreamWriter.h</DependentOn>
 				<BuildOrder>27</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrStringBuilder.cpp">
-				<DependentOn>cxx\Util\rrStringBuilder.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrStringBuilder.cpp">
+				<DependentOn>..\src\Util\rrStringBuilder.h</DependentOn>
 				<BuildOrder>21</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrStringList.cpp">
-				<DependentOn>cxx\Util\rrStringList.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrStringList.cpp">
+				<DependentOn>..\src\Util\rrStringList.h</DependentOn>
 				<BuildOrder>44</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrStringListContainer.cpp">
-				<DependentOn>cxx\Util\rrStringListContainer.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrStringListContainer.cpp">
+				<DependentOn>..\src\Util\rrStringListContainer.h</DependentOn>
 				<BuildOrder>26</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrStringUtils.cpp">
-				<DependentOn>cxx\Util\rrStringUtils.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrStringUtils.cpp">
+				<DependentOn>..\src\Util\rrStringUtils.h</DependentOn>
 				<BuildOrder>22</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrSymbol.cpp">
-				<DependentOn>cxx\Util\rrSymbol.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrSymbol.cpp">
+				<DependentOn>..\src\Util\rrSymbol.h</DependentOn>
 				<BuildOrder>20</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrSymbolList.cpp">
-				<DependentOn>cxx\Util\rrSymbolList.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrSymbolList.cpp">
+				<DependentOn>..\src\Util\rrSymbolList.h</DependentOn>
 				<BuildOrder>19</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="cxx\Util\rrUtils.cpp">
-				<DependentOn>cxx\Util\rrUtils.h</DependentOn>
+			<CppCompile Include="..\src\Util\rrUtils.cpp">
+				<DependentOn>..\src\Util\rrUtils.h</DependentOn>
 				<BuildOrder>45</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="RoadRunnerLib.cpp">

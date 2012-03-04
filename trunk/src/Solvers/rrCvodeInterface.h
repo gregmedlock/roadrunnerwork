@@ -2,7 +2,7 @@
 #define rrCvodeInterfaceH
 #include <string>
 #include "rrObject.h"
-#include "rrRandom.h"
+#include "Util/rrRandom.h"
 #include "cvode/cvode.h"
 
 using std::string;

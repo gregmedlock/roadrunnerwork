@@ -32,10 +32,10 @@
 			<PackageImports>rtl.bpi;vclimg.bpi;vcl.bpi;vclx.bpi;vcldb.bpi;dbrtl.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;vcltouch.bpi;xmlrtl.bpi;vclactnband.bpi;dsnap.bpi;dbxcds.bpi;dbexpress.bpi;DbxCommonDriver.bpi;vclribbon.bpi;DataSnapIndy10ServerTransport.bpi;DbxClientDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;bcbsmp.bpi;IndyProtocols.bpi;inet.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vcldbx.bpi;bdertl.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;DataSnapProviderClient.bpi;vclie.bpi;inetdbbde.bpi;inetdbxpress.bpi;DataSnapClient.bpi;inetdb.bpi;DataSnapServer.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi;DuneComponents.bpi;mtkCommonRTL.bpi;VCLCommonRTL.bpi;VCLData.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;GenesisVisualComponents.bpi</PackageImports>
 			<OutputExt>exe</OutputExt>
 			<AllPackageLibs>rtl.lib;vcl.lib;mtkCommonRTL.lib</AllPackageLibs>
-			<_TCHARMapping>wchar_t</_TCHARMapping>
+			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\ThirdParty\libstruct\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;C:\RRW\Testing\loadSBML\;C:\RRW\src\cxx;C:\RRW\src\cxx\Util;C:\rrInstalls\xe\sundials\include;C:\rrInstalls\xe\libsbml\include;C:\rrInstalls\xe\nom\include;C:\rrInstalls\xe\libstruct\include;$(IncludePath)</IncludePath>
+			<IncludePath>C:\RRW\Testing\loadSBML\;C:\rrInstalls\xe\sundials\include;C:\rrInstalls\xe\libsbml\include;C:\rrInstalls\xe\nom\include;..\..\src;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -74,45 +74,10 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="..\..\build\link\RoadRunnerLib.lib">
+			<LibFiles Include="..\..\build\link\RoadRunner++_xe.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>2</BuildOrder>
+				<BuildOrder>1</BuildOrder>
 			</LibFiles>
-			<None Include="..\..\src\cxx\rrLogger.h">
-				<BuildOrder>7</BuildOrder>
-			</None>
-			<CppCompile Include="..\..\src\cxx\Scanner\rrCodeTypes.cpp">
-				<DependentOn>..\..\src\cxx\Scanner\rrCodeTypes.h</DependentOn>
-				<BuildOrder>10</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\cxx\Scanner\rrScanner.cpp">
-				<DependentOn>..\..\src\cxx\Scanner\rrScanner.h</DependentOn>
-				<BuildOrder>11</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\cxx\Scanner\rrToken.cpp">
-				<DependentOn>..\..\src\cxx\Scanner\rrToken.h</DependentOn>
-				<BuildOrder>11</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\cxx\Util\rrNOMSupport.cpp">
-				<DependentOn>..\..\src\cxx\Util\rrNOMSupport.h</DependentOn>
-				<BuildOrder>2</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\cxx\Util\rrRule.cpp">
-				<DependentOn>..\..\src\cxx\Util\rrRule.h</DependentOn>
-				<BuildOrder>10</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\cxx\Util\rrStringList.cpp">
-				<DependentOn>..\..\src\cxx\Util\rrStringList.h</DependentOn>
-				<BuildOrder>4</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\cxx\Util\rrStringUtils.cpp">
-				<DependentOn>..\..\src\cxx\Util\rrStringUtils.h</DependentOn>
-				<BuildOrder>8</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\cxx\Util\rrUtils.cpp">
-				<DependentOn>..\..\src\cxx\Util\rrUtils.h</DependentOn>
-				<BuildOrder>5</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
