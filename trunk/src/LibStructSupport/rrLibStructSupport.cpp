@@ -6,7 +6,11 @@
 #include "rrException.h"
 #include "rrInteropUtils.h"
 //---------------------------------------------------------------------------
+#if defined(__BORLANDC__)
 #pragma package(smart_init)
+#endif
+//---------------------------------------------------------------------------
+
 
 namespace rr
 {

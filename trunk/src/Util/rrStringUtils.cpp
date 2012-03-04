@@ -8,12 +8,16 @@
 #include <stdio.h>
 #include <time.h>
 #ifdef __CODEGEARC__
-#pragma package(smart_init)
+
 #endif
 
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
+#if defined(__BORLANDC__)
 #pragma package(smart_init)
+#endif
+//---------------------------------------------------------------------------
+
 
 namespace rr
 {

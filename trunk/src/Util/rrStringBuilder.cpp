@@ -5,7 +5,11 @@
 #include "rrStringBuilder.h"
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
+#if defined(__BORLANDC__)
 #pragma package(smart_init)
+#endif
+//---------------------------------------------------------------------------
+
 
 namespace rr
 {
@@ -26,13 +30,15 @@ void StringBuilder::Append(const int& str)
     mStringing<<str;
 	Log(lDebug5)<<"Appended :"<<str;
 }
-
+
+
 void StringBuilder::Append(const unsigned int& str)
 {
     mStringing<<str;
 	Log(lDebug5)<<"Appended :"<<str;
 }
-
+
+
 void StringBuilder::Append(const string& s1, const string& s2)
 {
     Append(s1);

@@ -10,11 +10,15 @@
 #include "matrix.h"
 #include "util.h"
 
-extern "C"
-{
+//extern "C"
+//{
 #include "f2c.h"
 #include "clapack.h"
-}
+//---------------------------------------------------------------------------
+#if defined(__BORLANDC__)
+#pragma package(smart_init)
+#endif
+//}
 
 
 using namespace std;
@@ -555,7 +559,7 @@ ComplexMatrix *LibLA::getEigenVectors(DoubleMatrix &oMatrix)
 	int index;
 	for(int i=0; i<numRows; i++) 
 	{       	
-		for(int j=0; j<numCols; j++) 
+		for(int j=0; j<numCols; j++)
 		{ 	
 			index = (j+numRows*i);
 			A[index].r = oMatrix(j,i);
@@ -825,7 +829,7 @@ double LibLA::getRCond(DoubleMatrix &oMatrix)
 	double rcond = 0.0; 
 	dgecon_(&norm, &numRows, A, &numRows, &dnorm, &rcond, work, iwork, &info);
 
-	delete[] vecP; delete[] A; delete[] work; delete[] iwork; 
+	delete[] vecP; delete[] A; delete[] work; delete[] iwork;
 
 	return rcond;
 
@@ -870,7 +874,7 @@ LU_Result* LibLA::getLU(DoubleMatrix &oMatrix)
 	DoubleMatrix *U = new DoubleMatrix(minRC,numCols);
 
 	// Assign values to Lmat and Umat
-	for (int i=0; i<minRC; i++) 
+	for (int i=0; i<minRC; i++)
 	{
 		(*L)(i,i) = 1.0;
 		(*U)(i,i) = A[i+numRows*i];

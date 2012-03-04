@@ -1,6 +1,10 @@
 // mtrand.cpp, see include file mtrand.h for information
 
 #include "mtrand.h"
+//---------------------------------------------------------------------------
+#if defined(__BORLANDC__)
+#pragma package(smart_init)
+#endif
 // non-inline function definitions and static member definitions cannot
 // reside in header file because of the risk of multiple declarations
 

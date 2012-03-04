@@ -5,7 +5,11 @@
 #include "rrException.h"
 #include "rrDoubleMatrix.h"
 //---------------------------------------------------------------------------
+#if defined(__BORLANDC__)
 #pragma package(smart_init)
+#endif
+//---------------------------------------------------------------------------
+
 
 namespace rr
 {
@@ -119,18 +123,18 @@ DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const int& nR
 	return mat;
 }
 
-ostream& operator<<(ostream& out, const DoubleMatrix& mat)
+ostream& operator<<(ostream& stream, const DoubleMatrix& mat)
 {
 	for(int row = 0; row < mat.RSize(); row++)
     {
 	    for(int col = 0; col < mat.CSize(); col++)
         {
         	double val = mat(row,col);
-			out<<val<<"\t";
+			stream<<val<<"\t";
         }
-        out<<std::endl;
+        stream<<std::endl;
     }
-
+	return stream;
 }
 
 } //namespace rr

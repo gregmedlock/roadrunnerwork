@@ -4,8 +4,12 @@
 #pragma hdrstop
 #include <string>
 #include "rrLog.h"
-#ifdef __CODEGEARC__
+//---------------------------------------------------------------------------
+#if defined(__BORLANDC__)
 #pragma package(smart_init)
+#endif
+#ifdef __CODEGEARC__
+
 #endif
 
 namespace rr

@@ -1,6 +1,10 @@
 // test program mttest.cpp, see mtreadme.txt for information
 #include "mtrand.h"
 #include <cstdio>
+//---------------------------------------------------------------------------
+#if defined(__BORLANDC__)
+#pragma package(smart_init)
+#endif
 
 int main() {
   unsigned long init[4] = {0x123, 0x234, 0x345, 0x456}, length = 4;

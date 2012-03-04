@@ -12,8 +12,8 @@ class TModel : IModel
 	// Symbol Mappings
 
 	// y[0] = S1
-	// y[1] = S4
-	// y[2] = S2
+	// y[1] = S2
+	// y[2] = S4
 	// y[3] = S3
 
 	private List<string> _Warnings = new List<string>();
@@ -74,8 +74,8 @@ class TModel : IModel
 
 	void loadSymbolTables() {
 		variableTable[0] = "S1";
-		variableTable[1] = "S4";
-		variableTable[2] = "S2";
+		variableTable[1] = "S2";
+		variableTable[2] = "S4";
 		variableTable[3] = "S3";
 		globalParameterTable[0] = "k1";
 		globalParameterTable[1] = "k2";
@@ -284,8 +284,8 @@ class TModel : IModel
 	public void initializeInitialConditions ()
 	{
 		_init_y[0] = (double)0.002/ _c[0];
-		_init_y[1] = (double)0/ _c[0];
-		_init_y[2] = (double)0.002/ _c[0];
+		_init_y[1] = (double)0.002/ _c[0];
+		_init_y[2] = (double)0/ _c[0];
 		_init_y[3] = (double)0/ _c[0];
 
 	}
@@ -392,7 +392,7 @@ class TModel : IModel
 		_rates[0] = _c[0]*
 	_gp[0]*
 	y[0]*
-	y[2];
+	y[1];
 		_rates[1] = _c[0]*
 	_gp[1]*
 	y[3];
@@ -414,7 +414,7 @@ class TModel : IModel
 		updateDependentSpeciesValues (_y);
 		computeReactionRates (time, _y);
 		_dydt[0] = - _rates[0] + _rates[1] + _rates[2];
-		_dydt[1] = + _rates[2];
+		_dydt[1] = - _rates[0] + _rates[1];
 		convertToAmounts ();
 	}
 

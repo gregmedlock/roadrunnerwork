@@ -2235,7 +2235,8 @@ doublereal clantr_(char *norm, char *uplo, char *diag, integer *m, integer *n,
 /* Subroutine */ int dgeqlf_(integer *m, integer *n, doublereal *a, integer *
 	lda, doublereal *tau, doublereal *work, integer *lwork, integer *info);
 
-/* Subroutine */ int dgeqp3_(integer *m, integer *n, doublereal *a, integer *
+/* Subroutine */
+extern "C" int dgeqp3_(integer *m, integer *n, doublereal *a, integer *
 	lda, integer *jpvt, doublereal *tau, doublereal *work, integer *lwork, 
 	 integer *info);
 
@@ -3167,7 +3168,8 @@ doublereal dlapy3_(doublereal *x, doublereal *y, doublereal *z__);
 	a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, 
 	integer *info);
 
-/* Subroutine */ int dorgqr_(integer *m, integer *n, integer *k, doublereal *
+/* Subroutine */
+extern "C" int dorgqr_(integer *m, integer *n, integer *k, doublereal *
 	a, integer *lda, doublereal *tau, doublereal *work, integer *lwork, 
 	integer *info);
 

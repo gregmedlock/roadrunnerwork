@@ -32,6 +32,7 @@ The namespace consists mainly of three classes LIB_LA::Complex, a straight forwa
 LIB_LA::Matrix a template matrix class used by the C++ API and of course LIB_LA:LibLA the entry point of the
 LA library which encapsulates all functionality. 
 */
+
 namespace LIB_LA
 {	
 

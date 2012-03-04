@@ -3,14 +3,17 @@
 #endif
 #pragma hdrstop
 #include <iostream>
-
 #include "rrRoadRunner.h"
 #include "rrException.h"
 #include "rrModelGenerator.h"
 #include "rrCompiler.h"
 #include "rrStreamWriter.h"
 //---------------------------------------------------------------------------
+#if defined(__BORLANDC__)
 #pragma package(smart_init)
+#endif
+//---------------------------------------------------------------------------
+
 using namespace std;
 namespace rr
 {
@@ -47,18 +50,29 @@ RoadRunner::~RoadRunner()
     delete mCompiler;
 }
 
-void RoadRunner::Reset()
-{
-	if(mModelGenerator)
-    {
-		mModelGenerator->Reset();
-	}
-}
 
-string RoadRunner::GetModelSourceCode()
-{
-	return _sModelCode;
-}
+void RoadRunner::Reset()
+
+{
+
+	if(mModelGenerator)
+
+    {
+
+		mModelGenerator->Reset();
+
+	}
+
+}
+
+
+string RoadRunner::GetModelSourceCode()
+
+{
+
+	return _sModelCode;
+
+}
 
 void RoadRunner::InitializeModel(IModel* aModel)
 {

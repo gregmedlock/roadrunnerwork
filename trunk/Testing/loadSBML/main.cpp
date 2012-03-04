@@ -69,7 +69,7 @@ int main(int argc, _TCHAR* argv[])
             inFileStream.close();
             Log(lDebug5)<<"Before loading SBML. SBML model code size: "<<sbml.size();
 
-            //////////////////////////////////////////
+            //////////////////
 	        roadRunner->loadSBML(sbml);
             //////////////////
 
