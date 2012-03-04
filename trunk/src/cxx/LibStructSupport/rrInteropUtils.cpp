@@ -224,7 +224,7 @@ vector<string> GetStringArrayFromPtr(IntPtr &pointer, int nStrings)
 {
 	vector<string> oResult;
     oResult.resize(nStrings);
-    char** stringRows = (char**) pointer;//new char**[nStrings];
+    char** stringRows = (char**) pointer;
 
     for(int i = 0; i < nStrings; i++)
     {
@@ -232,7 +232,9 @@ vector<string> GetStringArrayFromPtr(IntPtr &pointer, int nStrings)
         string aString(oneString);
         oResult[i] = aString;
     }
-//    FreeMatrix(pointer, nStrings);
+
+//	LibStructural_freeMatrix(pointer, nStrings);
+    //StructAnalysis::FreeMatrix(pointer, nStrings);
     return oResult;
 }
 

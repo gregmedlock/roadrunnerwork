@@ -5,22 +5,20 @@
 #include <stdlib.h>
 #include <cmath>
 #include <sstream>
-
 #include <string.h>
-
 #include "libla.h"
 #include "matrix.h"
 #include "util.h"
 
+extern "C"
+{
 #include "f2c.h"
 #include "clapack.h"
+}
 
 
 using namespace std;
 using namespace LIB_LA;
-
-//#define ENABLE_DEBUG_OUTPUT 1
-
 
 vector< LIB_LA::Complex> LibLA::getEigenValues(DoubleMatrix &oMatrix)
 {
@@ -162,19 +160,25 @@ vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
 	{
 		P = new doublereal[col*col]; memset(P, 0, sizeof(doublereal)*col*col);
 	}
+#ifdef ENABLE_DEBUG_OUTPUT
+	cout << "before dorgqr A:\n"; Util::print(row, col, A);
+	cout << endl << endl << "Q: \n"; Util::print(row, row, Q);
+	cout << endl << endl << "R: \n"; Util::print(row, col, R);
+	cout << endl << endl << "P: \n"; Util::print(col, col, P);
+#endif
 
 
-	doublereal* tau = NULL; 
+	doublereal* tau = NULL;
 	if (minRowCol)
 	{
 		tau = new doublereal[minRowCol]; memset(tau, 0, sizeof(doublereal)*minRowCol);
 	}
-	integer* jpvt = NULL; 
+	integer* jpvt = NULL;
 	if (col)
 	{
 		jpvt = new integer[col]; memset(jpvt, 0, sizeof(integer)*col);
 	}
-	doublereal* work = NULL; 
+	doublereal* work = NULL;
 	if (lwork)
 	{
 		work = new doublereal[lwork]; memset(work, 0, lwork);
@@ -184,19 +188,19 @@ vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
 	int out;
 
 #ifdef ENABLE_DEBUG_OUTPUT
-	cout << "Input:\n"; Util::print(row, col, A);	
+	cout << "Input:\n"; Util::print(row, col, A);
 #endif
 
 	// call lapack routine dgepq3_ to generate householder reflections
-	out = dgeqp3_ (&row, &col, A, &row, jpvt, tau, work, &lwork, &info);	
+	out = dgeqp3_ (&row, &col, A, &row, jpvt, tau, work, &lwork, &info);
 
 
 #ifdef ENABLE_DEBUG_OUTPUT
-	cout << "before permutation" << endl;	
+	cout << "before permutation" << endl;
 #endif
 
 
-	// Building permutation matrix P and	
+	// Building permutation matrix P and
 	for (int i=0; i<col; i++) 
 	{
 		size_t pos = i*col+(jpvt[i]-1);
@@ -220,13 +224,13 @@ vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
 	int index = 0;
 	for (int i = 0; i < row; i++)
 	{
-		for (int j=0; j<minRowCol; j++) 
+		for (int j=0; j<minRowCol; j++)
 		{
 			index = i+row*j;
 			Q[index] = A[index];
 		}
 
-		if (i >= 1) for (int j=0; j<min(i,col); j++) 
+		if (i >= 1) for (int j=0; j<min(i,col); j++)
 		{
 			R[i+row*j] = 0.0;
 		}
@@ -234,7 +238,11 @@ vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
 	}
 
 #ifdef ENABLE_DEBUG_OUTPUT
-	cout << "before dorgqr:\n"; Util::print(row, col, A);	
+	cout << "before dorgqr:\n"; Util::print(row, col, A);
+
+	cout << endl << endl << "Q: \n"; Util::print(row, row, Q);
+	cout << endl << endl << "R: \n"; Util::print(row, col, R);
+	cout << endl << endl << "P: \n"; Util::print(col, col, P);
 #endif
 
 
@@ -242,9 +250,9 @@ vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
 	out = dorgqr_ (&row, &row, &minRowCol, Q, &row, tau, work, &lwork, &info);
 
 #ifdef ENABLE_DEBUG_OUTPUT
-	cout << endl << endl << "Q: )\n"; Util::print(row, row, Q);	
-	cout << endl << endl << "R: )\n"; Util::print(row, col, R);	
-	cout << endl << endl << "P: )\n"; Util::print(col, col, P);	
+	cout << endl << endl << "Q: \n"; Util::print(row, row, Q);
+	cout << endl << endl << "R: \n"; Util::print(row, col, R);
+	cout << endl << endl << "P: \n"; Util::print(col, col, P);
 #endif
 
 	DoubleMatrix* oMatrixQ = new DoubleMatrix(Q, row, row, true); Util::RoundMatrixToTolerance(*oMatrixQ, _Tolerance);
@@ -271,7 +279,7 @@ vector< DoubleMatrix* > LibLA::getQR(DoubleMatrix &oMatrix)
 #endif
 
 	integer row			= oMatrix.numRows();
-	integer col			= oMatrix.numCols();		
+	integer col			= oMatrix.numCols();
 	if (row * col == 0)
 	{
 		vector< DoubleMatrix* > oResult;
@@ -294,7 +302,7 @@ vector< DoubleMatrix* > LibLA::getQR(DoubleMatrix &oMatrix)
 
 
 #ifdef ENABLE_DEBUG_OUTPUT
-	cout << "Input:\n"; Util::print(row, col, A);			
+	cout << "Input:\n"; Util::print(row, col, A);
 #endif
 
 	integer info;
@@ -304,7 +312,7 @@ vector< DoubleMatrix* > LibLA::getQR(DoubleMatrix &oMatrix)
 	cout << "A: after dgeqrt)\n"; Util::print(row, col, A);
 	cout << "tau: after dgeqrt)\n"; Util::print(1, minRowCol, tau);
 #endif
-	// set R to A before calling dorgqr	
+	// set R to A before calling dorgqr
 	memcpy(R,A,sizeof(double)*row*col);
 	int index;
 	for (int i=0; i<row; i++)

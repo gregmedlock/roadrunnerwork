@@ -4,13 +4,14 @@
 #include <windows.h>
 #endif
 #include <iostream>
+#include <iomanip>
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "util.h"
-#include "f2c.h"
-#include "clapack.h"
+//#include "f2c.h"
+//#include "clapack.h"
 
 using namespace std;
 using namespace LIB_LA;
@@ -351,7 +352,7 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 #ifdef ENABLE_DEBUG_OUTPUT
 	cout << " INSIDE GAUSSIAN ELIMINATION METHOD \n";
 	cout << " \nInput matrix : \n";
-	print(m, n, A);
+	//print(m, n, A);
 #endif
 
 	int x; 	int nPivotRow = 0; 	int nPivotCol = 0;
@@ -408,8 +409,8 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 
 		nPivotCol++;  // Next column
 #ifdef ENABLE_DEBUG_OUTPUT
-		cout << "Printing matrices PivotCol = " << PivotCol << " \n";
-		print(m, n, A, EM);
+		cout << "Printing matrices PivotCol = " << nPivotCol << " \n";
+//		print(m, n, A, EM);
 		cout << "-----------------------------------------------------------------\n";
 #endif
 	}		
@@ -503,15 +504,15 @@ void Util::print(int mr, int nc, int** A)
 void Util::print(int mr, int nc, double* A)
 {
 
-	cout << "[";
-	for (int i=0; i<mr; i++) {
-		cout << "[";
-		for (int j=0; j<nc; j++) {
-			cout << A[i+j*mr] << (j+1<nc? ",    " : "    ");
+	for (int i=0; i<mr; i++)
+    {
+		for (int j=0; j<nc; j++)
+        {
+			cout <<left<<setw(10)<< setprecision(3)<<A[i+j*mr];
 		}
-		cout << (i + 1 < mr ? "],\n" : "]\n");
+		cout << "\n";
 	}
-	cout << "]" << endl << endl;
+	cout << endl << endl;
 }
 
 // ----------------------------------------------------------------------------

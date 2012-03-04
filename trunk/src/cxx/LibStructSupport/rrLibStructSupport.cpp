@@ -24,7 +24,7 @@ void StructAnalysis::Reset()
 {
 	if(mInstance)
     {
-		mInstance->Reset();
+//		mInstance->Reset();
     }
 }
 
@@ -298,8 +298,9 @@ double* StructAnalysis::GetGammaMatrix()
 
     if (LibStructural_getGammaMatrix((double***) &pointer, &nRows, &nCols) < 0 )
     {
-//        throw Exception("The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.");
-		Log(lWarning)<<("The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.");
+		Log(lError)<<"\n=====================================\n\
+        	The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.\n\
+            ===============================================";
         return NULL;
     }
 	double *res = GetDoubleMatrixFromPtr(pointer, nRows, nCols);
@@ -998,9 +999,14 @@ StringList StructAnalysis::GetReorderedSpeciesIds()
 /// </summary>
 StringList StructAnalysis::GetSpeciesIds()
 {
- 	vector<string> oValues = LibStructural::getInstance()->getSpecies();
-    StringList aList(oValues);
-    return aList;
+    IntPtr pointer;
+    int nLength;
+    LibStructural_getSpeciesIds((char ***) &pointer, &nLength);
+    return GetStringArrayFromPtr(pointer, nLength);
+
+ 	//vector<string> oValues = LibStructural::getInstance()->getSpecies();
+//    StringList aList(oValues);
+//    return aList;
 
 //    IntPtr pointer; int nLength;
 //    LibStructural_getSpeciesIds(out pointer, out nLength);
@@ -1100,12 +1106,12 @@ string StructAnalysis::LoadSBML(const string& sbml)
 {
     IntPtr pointer;
 	int nLength;
-
-    if (LibStructural_loadSBML(sbml.c_str(),  (char**) &pointer, &nLength) < 0)
-    {
-        throw Exception("The SBML could not be loaded, please verify that it is a valid SBML file.");
-    }
-	string msg =  GetStringFromPtr(pointer, nLength);;
+	string msg = LibStructural::getInstance()->loadSBML(sbml);
+//    if (LibStructural_loadSBML(sbml.c_str(),  (char**) &pointer, &nLength) < 0)
+//    {
+//        throw Exception("The SBML could not be loaded, please verify that it is a valid SBML file.");
+//    }
+//	string msg =  GetStringFromPtr(pointer, nLength);;
   	return msg;
 }
 

@@ -34,7 +34,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>cxx\libstruct\;cxx\LibStructSupport\;..\ThirdParty\libstruct_xe\LibStructural\;cxx\Scanner\;..\ThirdParty\libstruct\LibStructural\;..\ThirdParty\NOMLib\src\;cxx\Logger\;cxx\Util\mtrand\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;C:\rrInstalls\xe\sundials\include;C:\rrInstalls\xe\libstruct\include;C:\rrInstalls\xe\libsbml\include;C:\rrInstalls\xe\libsbml\include\sbml;cxx\LibStruct;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>cxx\libstruct\;cxx\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\ThirdParty\libstruct_xe\LibStructural\;cxx\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;C:\rrInstalls\xe\libstruct\lib\;cxx\Logger\;..\ThirdParty\NOMLib\src\;..\ThirdParty\libstruct\LibStructural\;C:\rrBuilds\clapack_xe\BLAS\SRC\;C:\rrBuilds\clapack_xe\F2CLIBS\libf2c\;C:\rrBuilds\clapack_xe\SRC\;C:\rrThirdPartyInstalls\libstruct\lib\;C:\rrThirdPartyInstalls\sundials\;..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\bins\;C:\rrThirdPartyInstalls\;..\Externals\libsbml\src\sbml\xml\;..\Externals\libsbml\src\sbml\;C:\rr_install\lib\;cxx\Util\mtrand\;..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>C:\rrBuilds\xe\clapack\Testing\MATGEN\;C:\rrInstalls\vs\clapack\;cxx\libstruct\;cxx\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\ThirdParty\libstruct_xe\LibStructural\;cxx\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;C:\rrInstalls\xe\libstruct\lib\;cxx\Logger\;..\ThirdParty\NOMLib\src\;..\ThirdParty\libstruct\LibStructural\;C:\rrBuilds\clapack_xe\BLAS\SRC\;C:\rrBuilds\clapack_xe\F2CLIBS\libf2c\;C:\rrBuilds\clapack_xe\SRC\;C:\rrThirdPartyInstalls\libstruct\lib\;C:\rrThirdPartyInstalls\sundials\;..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\bins\;C:\rrThirdPartyInstalls\;..\Externals\libsbml\src\sbml\xml\;..\Externals\libsbml\src\sbml\;C:\rr_install\lib\;cxx\Util\mtrand\;..\xe_builds\Debug\Win32\;C:\sbw_libs\libsbml\lib\;C:\sbw_libs\libsbml\bin\;..\NOMLib\src\;..\build\link\;cxx\Util\;cxx\Solvers\;cxx\;C:\RRW\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -46,6 +46,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<IncludePath>C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
 			<_TCHARMapping>char</_TCHARMapping>
 			<BCC_PCHName>rrLib.csm</BCC_PCHName>
 			<FinalOutputDir>C:\RRW\build\link</FinalOutputDir>
@@ -53,7 +54,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;WIN32;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
+			<Defines>_DEBUG;WIN32;LIBSBML_USE_CPP_NAMESPACE;ENABLE_DEBUG_OUTPUT;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -72,15 +73,15 @@
 		<ItemGroup>
 			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>55</BuildOrder>
+				<BuildOrder>57</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>56</BuildOrder>
+				<BuildOrder>58</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="C:\rrBuilds\xe\clapack\SRC\lapack.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>54</BuildOrder>
+				<BuildOrder>56</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="C:\rrInstalls\xe\libsbml\lib\libsbml.lib">
 				<IgnorePath>true</IgnorePath>

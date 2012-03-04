@@ -16,6 +16,7 @@ string 			RR_DECLSPEC ChangeFileNameExtensionTo(const string& theFileName, const
 
 string			RR_DECLSPEC Trim(const string& str);
 bool			RR_DECLSPEC StartsWith(const string& src, const string& sub);
+bool			RR_DECLSPEC EndsWith(const string& src, const string& sub);
 //conversions
 string			RR_DECLSPEC IntToStr(const int& nt);
 int				RR_DECLSPEC StrToInt(const string& nt);

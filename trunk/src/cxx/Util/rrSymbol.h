@@ -1,8 +1,9 @@
 #ifndef rrSymbolH
 #define rrSymbolH
 #include <string>
-#include "rrObject.h"
 #include <ostream>
+#include <limits>
+#include "rrObject.h"
 using std::string;
 using std::ostream;
 
@@ -27,9 +28,9 @@ class RR_DECLSPEC Symbol : public rrObject
         string              name;
 
         //Constructors
-        Symbol(const string& _name = "", const double& _value = 0);
-        Symbol(const string& _keyName, const string& _name, const double& _value);
-        Symbol(const string& _name, const double _value, const string& _compartmentName);
+        Symbol(const string& _name = "", const double& _value = std::numeric_limits<double>::quiet_NaN());
+        Symbol(const string& _keyName, const string& _name, const double& _value= std::numeric_limits<double>::quiet_NaN());
+        Symbol(const string& _name, const double& _value, const string& _compartmentName);
         Symbol(const string& _name, const double& _value, const string& _compartmentName, const string& _formula);
 
 }; //class rr::Symbol

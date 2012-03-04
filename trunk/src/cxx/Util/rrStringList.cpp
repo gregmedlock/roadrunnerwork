@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include <algorithm>
+#include <iostream>
 #include "rrStringList.h"
 #include "rrUtils.h"
 //---------------------------------------------------------------------------
@@ -48,5 +49,15 @@ bool StringList::Contains(const string& item)
 	return std::find(mStrings.begin(), mStrings.end(), item) != mStrings.end() ? true : false;
 }
 
+ostream& operator<<(ostream& stream, StringList& list)
+{
+	vector<string>::iterator iter;
+    int count = 0;
+    for(iter = list.begin(); iter != list.end(); iter++)
+    {
+		stream<<"List Item "<<++count<<" : "<<(*iter)<<std::endl;
+    }
+	return stream;
+}
 } //namespace rr
 

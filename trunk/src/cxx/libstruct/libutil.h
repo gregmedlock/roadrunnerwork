@@ -8,7 +8,6 @@
 #  define LIB_EXTERN
 #else
 #  define LIB_EXTERN __declspec(dllimport)
-
 #endif
 #else
 #  define LIB_EXTERN

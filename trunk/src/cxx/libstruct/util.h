@@ -39,8 +39,6 @@
 
 #include <string>
 
-//#include "f2c.h"
-
 namespace LIB_LA
 {
 

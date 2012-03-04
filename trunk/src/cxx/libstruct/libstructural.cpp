@@ -79,7 +79,9 @@ string LibStructural::loadSBML(string sSBML)
 {
 	DELETE_IF_NON_NULL(_Model);
     _Model = new SBMLmodel(sSBML);
-	string msg = analyzeWithQR();
+
+	string msg = "";
+	msg = analyzeWithQR();
 
 //    std::map<int, std::string>::iterator iter = _speciesIndexList.begin();
 //    for(iter = _speciesIndexList.begin(); iter != _speciesIndexList.end(); iter++)
@@ -268,7 +270,7 @@ string LibStructural::GenerateResultString()
 	{
 		oBuffer << ": NONE" << endl;
 	}
-	else 
+	else
 	{ 
 		oBuffer << endl;
 		for (int i = 0; i < _NumDependent; i++)
@@ -497,7 +499,6 @@ void  LibStructural::BuildStoichiometryMatrixFromModel(LIB_STRUCTURAL::SBMLmodel
 string LibStructural::analyzeWithQR()
 {
 	stringstream oResult;
-
 	Initialize();
 
 	if (_NumRows == 0)
@@ -518,7 +519,7 @@ string LibStructural::analyzeWithQR()
 		Util::gaussJordan(*R, _Tolerance);
 
 		// The rank is obtained by looking at the number of zero rows of R, which is
-		// a lower trapezoidal matrix. 
+		// a lower trapezoidal matrix.
 		_NumIndependent = Util::findRank(*R, _Tolerance);
 
 		_NumDependent = _NumRows - _NumIndependent;
@@ -580,9 +581,9 @@ string LibStructural::analyzeWithQR()
 void LibStructural::reorderNmatrix()
 {
 	DELETE_IF_NON_NULL(_Nmat); _Nmat = new DoubleMatrix(_NumRows, _NumCols);
-	for (int i=0; i<_NumRows; i++) 
+	for (int i=0; i<_NumRows; i++)
 	{
-		for (int j=0; j<_NumCols; j++) 
+		for (int j=0; j<_NumCols; j++)
 		{
 			(*_Nmat)(i,j) = (* _NmatT_orig)(j,spVec[i]);
 		}

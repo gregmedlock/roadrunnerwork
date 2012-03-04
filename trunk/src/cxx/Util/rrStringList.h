@@ -29,7 +29,10 @@ class RR_DECLSPEC StringList : public rrObject
         void						empty(){mStrings.clear();}
         bool						Contains(const string& item);
         void						push_back(const string& item);
+        vector<string>::iterator 	begin(){return mStrings.begin();}
+        vector<string>::iterator 	end(){return mStrings.end();}
 };
 
+ostream& operator<<(ostream& stream, StringList& list);
 }
 #endif

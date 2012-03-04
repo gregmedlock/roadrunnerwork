@@ -47,6 +47,12 @@ bool StartsWith(const string& src, const string& sub)
 	return result;
 }
 
+bool EndsWith(const string& src, const string& sub)
+{
+	bool result = (src.compare(src.size() - sub.size(), src.size(), sub) == 0);
+	return result;
+}
+
 string Trim(const string& str)
 {
 

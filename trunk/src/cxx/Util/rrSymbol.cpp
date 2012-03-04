@@ -26,7 +26,7 @@ hasOnlySubstance(false),
 rateRule(false)
 {}
 
-Symbol::Symbol(const string& _name, const double _value, const string& _compartmentName)
+Symbol::Symbol(const string& _name, const double& _value, const string& _compartmentName)
 :
 name(_name),
 value(_value),

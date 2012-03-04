@@ -368,6 +368,10 @@ class TModel : IModel
 	}
 
 	public void computeRules(double[] y) {
+		_y[3] = func1 (_y[0],_gp[2])
+	;
+		_y[4] = multiply (_y[3],_gp[2])
+	;
 	}
 
 	private double[] _rateRules = new double[0];           // Vector containing values of additional rate rules      
@@ -429,6 +433,7 @@ class TModel : IModel
 		convertToAmounts();
 		_time = timein;  // Don't remove
 		updateDependentSpeciesValues (_y);
+		computeRules (_y);
 		computeReactionRates (time, _y);
 		_dydt[0] = + _rates[0] - _rates[1];
 		_dydt[1] = + _rates[1];

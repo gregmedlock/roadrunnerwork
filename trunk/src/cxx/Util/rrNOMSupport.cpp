@@ -24,11 +24,8 @@ NOMSupport::NOMSupport()
 :
 mModel(NULL),
 STR_DoubleFormat("%.5G"),
-mSBMLDoc(NULL)//,
-
-{
-
-}
+mSBMLDoc(NULL)
+{}
 
 NOMSupport::~NOMSupport()
 {
@@ -58,7 +55,6 @@ string NOMSupport::getNthCompartmentId(const int& nIndex)
     Compartment *oCompartment = mModel->getCompartment((int)nIndex);
     return GetId(*oCompartment);
 }
-
 
 double NOMSupport::getValue(const string& sId)
 {
@@ -2673,15 +2669,17 @@ void NOMSupport::modifyKineticLaws(SBMLDocument& oSBMLDoc, Model& oModel)
 
         modifyKineticLawsForReaction(*oLaw, sId, oModel);
 
-        if (oLaw != NULL)
-        {
-//        	oLaw.Dispose();
-        }
-
-        if (oReaction != NULL)
-        {
-//        	oReaction.Dispose();
-        }
+//        if (oLaw != NULL)
+//        {
+//        	delete oLaw;
+//            oLaw = NULL;
+//        }
+//
+//        if (oReaction != NULL)
+//        {
+//        	delete oReaction;
+//            oReaction  = NULL;
+//        }
     }
 }
 
@@ -2966,37 +2964,48 @@ string NOMSupport::getSBML()
 //            libsbmlcs.Reaction r = mModel->getReaction((int)nIndex);
 //            return r.getReversible();
 //        }
-//
-//        void NOMSupport::GetSymbols(ASTNode node, List<System.String> list)
-//        {
-//            if (node.isName())
-//            {
-//                var name = node.getName();
-//                if (!list.Contains(name))
-//                    list.Add(name);
-//            }
-//
-//            for (int i = 0; i < node.getNumChildren(); i++)
-//            {
-//                GetSymbols(node.getChild(i), list);
-//            }
-//
-//        }
-//        /// <summary>
-//        /// Returns the list of all names contained in the ASTNode
-//        /// </summary>
-//        /// <param name="math">ASTnode</param>
-//        /// <returns>List of all symbols</returns>
-//        List<string> NOMSupport::GetSymbols(ASTNode math)
-//        {
-//            var result = new List<string>();
-//            if (math == NULL) return result;
-//
-//            GetSymbols(math, result);
-//
-//            return result;
-//        }
-//
+
+void NOMSupport::GetSymbols(ASTNode* aNode, StringList& list)
+{
+	if(!aNode)
+    {
+    	return;
+    }
+	ASTNode& node = *aNode;
+
+    if (node.isName())
+    {
+        string name = node.getName();
+        if (!list.Contains(name))
+        {
+            list.Add(name);
+        }
+    }
+
+    for (int i = 0; i < node.getNumChildren(); i++)
+    {
+        GetSymbols(node.getChild(i), list);
+    }
+
+}
+
+/// <summary>
+/// Returns the list of all names contained in the ASTNode
+/// </summary>
+/// <param name="math">ASTnode</param>
+/// <returns>List of all symbols</returns>
+StringList NOMSupport::GetSymbols(ASTNode* math)
+{
+    StringList result; //= new List<string>();
+    if (math == NULL)
+    {
+    	return result;
+    }
+
+    GetSymbols(math, result);
+    return result;
+}
+
 /// <summary>
 /// Reorders assignment rules. In SBML assignment rules does not have to appear in the correct order.
 /// That is you could have an assignment rule A = B, and a rule B = C. Now the result would differ,
@@ -3013,93 +3022,108 @@ deque<Rule> NOMSupport::ReorderAssignmentRules(deque<Rule>& assignmentRules)
     }
 
     //Todo: Need XML file to test this:
-
+////            var result = new List<Rule>();
     deque<Rule> result;
+
 //    var allSymbols = new Dictionary<int, List<string>>();
-	hash_map<int, list<string> > allSymbols;
+	hash_map<int, StringList > allSymbols;
 
     //    var map = new Dictionary<string, List<string>>();
-	map<string, list<string> > map;
+	map<string, StringList > map;
 //    var idList = new List<string>();
-	list<string> idList;
+	StringList idList;
 
     // read id list, initialize all symbols
-//    for (int index = 0; index < assignmentRules.Count; index++)
-//    {
-//        var rule = (AssignmentRule)assignmentRules[index];
-//        var variable = rule.getVariable();
-//        if (!rule.isSetMath())
-//            allSymbols[index] = new List<string>();
-//        else
-//            allSymbols[index] = GetSymbols(rule.getMath());
-//        idList.Add(variable);
-//        map[variable] = new List<string>();
-//    }
-//
-//    // initialize order array
-//    var order = new int[assignmentRules.Count];
-//    for (int i = 0; i < assignmentRules.Count; i++)
-//    {
-//        order[i] = i;
-//    }
-//
-//    // build dependency graph
+    for (int index = 0; index < assignmentRules.size(); index++)
+    {
+    	Rule aRule = assignmentRules[index];
+        AssignmentRule *rule = (AssignmentRule*) &aRule;
+        string variable = rule->getVariable();
+        if (!rule->isSetMath())
+        {
+            allSymbols[index] = StringList();
+        }
+        else
+        {
+            allSymbols[index] = GetSymbols((ASTNode*) rule->getMath());
+        }
+        idList.Add(variable);
+        map[variable] = StringList();//new List<string>();
+    }
+
+    // initialize order array
+    vector<int> order;
+    order.resize(assignmentRules.size()); // = new int[assignmentRules.size()];
+    for (int i = 0; i < assignmentRules.size(); i++)
+    {
+        order[i] = i;
+    }
+
+    // build dependency graph
+    vector<string>::iterator    id;
 //    foreach (var id in idList)
-//    {
-//        for (int index = 0; index < assignmentRules.Count; index++)
-//            if (allSymbols[index].Contains(id))
-//                map[(assignmentRules[index]).getVariable()].Add(id);
-//    }
-//
-//    // print dependency graph
-//    //foreach (var id in idList)
-//    //{
-//    //    System.Diagnostics.Debug.Write(id + " depends on: ");
-//    //    foreach (var symbol in map[id])
-//    //    {
-//    //        System.Diagnostics.Debug.Write(symbol + ", ");
-//    //    }
-//    //    System.Diagnostics.Debug.WriteLine("");
-//    //}
-//
-//
-//    // sort
-//    bool changed = true;
-//    while (changed)
-//    {
-//        changed = false;
-//        for (int i = 0; i < order.Length; i++)
-//        {
-//
-//            var first = order[i];
-//            for (int j = i + 1; j < order.Length; j++)
-//            {
-//                var second = order[j];
-//
-//                var secondVar = assignmentRules[second].getVariable();
-//                var firstVar = assignmentRules[first].getVariable();
-//
-//                if (map[firstVar].Contains(secondVar))
-//                {
-//                    // found dependency, swap and start over
-//                    order[i] = second;
-//                    order[j] = first;
-//
-//                    changed = true;
-//                    break;
-//                }
-//            }
-//
-//            // if swapped start over
-//            if (changed)
-//                break;
-//        }
-//    }
-//
-//    // create new order
-//    for (int i = 0; i < order.Length; i++)
-//        result.Add(assignmentRules[order[i]]);
-//
+	for(id = idList.begin(); id != idList.end(); id++)
+    {
+        for (int index = 0; index < assignmentRules.size(); index++)
+        {
+            if (allSymbols[index].Contains( (*id) ))
+        	{
+                map[(assignmentRules[index]).getVariable()].Add( (*id) );
+            }
+        }
+    }
+
+    // print dependency graph
+    //foreach (var id in idList)
+    //{
+    //    System.Diagnostics.Debug.Write(id + " depends on: ");
+    //    foreach (var symbol in map[id])
+    //    {
+    //        System.Diagnostics.Debug.Write(symbol + ", ");
+    //    }
+    //    System.Diagnostics.Debug.WriteLine("");
+    //}
+
+
+    // sort
+    bool changed = true;
+    while (changed)
+    {
+        changed = false;
+        for (int i = 0; i < order.size(); i++)
+        {
+
+            int first = order[i];
+            for (int j = i + 1; j < order.size(); j++)
+            {
+                int second = order[j];
+
+                string secondVar = assignmentRules[second].getVariable();
+                string firstVar = assignmentRules[first].getVariable();
+
+                if (map[firstVar].Contains(secondVar))
+                {
+                    // found dependency, swap and start over
+                    order[i] = second;
+                    order[j] = first;
+
+                    changed = true;
+                    break;
+                }
+            }
+
+            // if swapped start over
+            if (changed)
+                break;
+        }
+    }
+
+    // create new order
+    for (int i = 0; i < order.size(); i++)
+    {
+        result.push_back(assignmentRules[order[i]]);
+    }
+
     return result;
 }
 

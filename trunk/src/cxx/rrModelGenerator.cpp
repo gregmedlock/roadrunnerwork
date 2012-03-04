@@ -97,8 +97,10 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 		Log(lError)<<"Failed loading sbml into StructAnalysis";
     }
 
-    ///////// Are the list scrambled here??
+    // Are the list scrambled here??
     StringList reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
+
+//    Log(lDebug5)<<reOrderedList;
 
 	Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
@@ -150,8 +152,7 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
     WriteSetCompartmentVolumes(sb);
     WriteSetParameterValues(sb, _NumReactions);
 
-//    if(mStructAnalysis.GetGammaMatrix()) //Todo: If there is no Gamma matrix, this just causes an empty function.
-
+//    if(mStructAnalysis.GetGammaMatrix()) //Todo: If there is no Gamma matrix, some problems in the next functions?
     {
     	WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
     }
@@ -175,6 +176,130 @@ string ModelGenerator::generateModelCode(const string& sbmlStr)
 	sb.AppendFormat("}{0}{0}", NL());
 	return sb.ToString();
 }
+
+
+////        public string generateModelCode(string sbmlStr)
+////        {
+////            string sASCII = Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(sbmlStr));
+////            Warnings = new List<string>();
+////            var sb = new StringBuilder();
+////            sASCII = NOM.convertTime(sASCII, "time");
+////            NOM.loadSBML(sASCII, "time");
+////
+////            _ModelName = NOM.getModelName();
+////            _NumReactions = NOM.getNumReactions();
+////
+////            globalParameterList = new SymbolList();
+////            ModifiableSpeciesReferenceList = new SymbolList();
+////
+////            localParameterList = new SymbolList[_NumReactions];
+////            reactionList = new SymbolList();
+////            boundarySpeciesList = new SymbolList();
+////            floatingSpeciesConcentrationList = new SymbolList();
+////            floatingSpeciesAmountsList = new SymbolList();
+////            compartmentList = new SymbolList();
+////            conservationList = new SymbolList();
+////            _functionNames = new ArrayList();
+////            _functionParameters = new StringCollection();
+////
+////            StructAnalysis.LoadSBML(sASCII);
+////
+////            if (RoadRunner._bComputeAndAssignConservationLaws)
+////            {
+////                _NumIndependentSpecies = StructAnalysis.GetNumIndependentSpecies();
+////                independentSpeciesList = StructAnalysis.GetIndependentSpeciesIds();
+////                dependentSpeciesList = StructAnalysis.GetDependentSpeciesIds();
+////            }
+////            else
+////            {
+////                _NumIndependentSpecies = StructAnalysis.GetNumSpecies();
+////                independentSpeciesList = StructAnalysis.GetSpeciesIds();
+////                dependentSpeciesList = new string[0];
+////            }
+////
+////            sb.Append("//************************************************************************** " + NL());
+////
+////            // Load the compartment array (name and value)
+////            _NumCompartments = ReadCompartments();
+////
+////            // Read FloatingSpecies
+////            _NumFloatingSpecies = ReadFloatingSpecies();
+////
+////            _NumDependentSpecies = _NumFloatingSpecies - _NumIndependentSpecies;
+////
+////            // Load the boundary species array (name and value)
+////            _NumBoundarySpecies = ReadBoundarySpecies();
+////
+////            // Get all the parameters into a list, global and local
+////            _NumGlobalParameters = ReadGlobalParameters();
+////
+////            _NumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
+////
+////            // Load up local parameters next
+////            ReadLocalParameters(_NumReactions, out _LocalParameterDimensions, out _TotalLocalParmeters);
+////
+////            _NumEvents = NOM.getNumEvents();
+////
+////            // Get the L0 matrix
+////            double[][] L0 = InitializeL0();
+////
+////
+////            WriteClassHeader(sb);
+////
+////            WriteOutVariables(sb);
+////
+////            WriteOutSymbolTables(sb);
+////
+////            WriteResetEvents(sb, _NumEvents);
+////
+////            WriteSetConcentration(sb);
+////
+////            WriteGetConcentration(sb);
+////
+////            WriteConvertToAmounts(sb);
+////
+////            WriteConvertToConcentrations(sb);
+////
+////            WriteProperties(sb);
+////
+////            WriteAccessors(sb);
+////
+////            WriteUserDefinedFunctions(sb);
+////
+////            WriteSetInitialConditions(sb, _NumFloatingSpecies);
+////
+////            WriteSetBoundaryConditions(sb);
+////
+////            WriteSetCompartmentVolumes(sb);
+////
+////            WriteSetParameterValues(sb, _NumReactions);
+////
+////            WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
+////
+////            WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
+////
+////            int numOfRules = WriteComputeRules(sb, _NumReactions);
+////
+////            WriteComputeAllRatesOfChange(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
+////
+////            WriteComputeReactionRates(sb, _NumReactions);
+////
+////            WriteEvalModel(sb, _NumReactions, _NumIndependentSpecies, _NumFloatingSpecies, numOfRules);
+////
+////            WriteEvalEvents(sb, _NumEvents, _NumFloatingSpecies);
+////
+////            WriteEventAssignments(sb, _NumReactions, _NumEvents);
+////
+////            WriteEvalInitialAssignments(sb, _NumReactions);
+////
+////            WriteTestConstraints(sb);
+////
+////            sb.AppendFormat("}}{0}{0}", NL());
+////
+////            return sb.ToString();
+////        }
+////    }
+
 
 string ModelGenerator::convertSpeciesToY(const string& speciesName)
 {
@@ -237,60 +362,7 @@ StringList ModelGenerator::getCompartmentList()
     }
     return tmp;
 }
-//
-//         StringList ModelGenerator::getFloatingSpeciesConcentrationList()
-//        {
-//            StringList tmp;// = new StringList();
-//            for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
-//                tmp.push_back(floatingSpeciesConcentrationList[i].name);
-//            return tmp;
-//        }
-//
-//         StringList ModelGenerator::getConservationList()
-//        {
-//            StringList tmp;// = new StringList();
-//            for (int i = 0; i < conservationList.size(); i++)
-//                tmp.push_back(conservationList[i].name);
-//            return tmp;
-//        }
-//
-//
-//         StringList ModelGenerator::getBoundarySpeciesList()
-//        {
-//            StringList tmp;// = new StringList();
-//            for (int i = 0; i < boundarySpeciesList.size(); i++)
-//                tmp.push_back(boundarySpeciesList[i].name);
-//            return tmp;
-//        }
-//
-//         StringList ModelGenerator::getGlobalParameterList()
-//        {
-//            StringList tmp;// = new StringList();
-//            for (int i = 0; i < globalParameterList.size(); i++)
-//                tmp.push_back(globalParameterList[i].name);
-//
-//            for (int i = 0; i < conservationList.size(); i++)
-//                tmp.push_back(conservationList[i].name);
-//
-//            return tmp;
-//        }
-//
-//         StringList ModelGenerator::getLocalParameterList(int reactionId)
-//        {
-//            StringList tmp;// = new StringList();
-//            for (int i = 0; i < localParameterList[reactionId].size(); i++)
-//                tmp.push_back(localParameterList[reactionId][i].name);
-//            return tmp;
-//        }
-//
-//         StringList ModelGenerator::getReactionNames()
-//        {
-//            StringList tmp;// = new StringList();
-//            for (int i = 0; i < reactionList.size(); i++)
-//                tmp.push_back(reactionList[i].name);
-//            return tmp;
-//        }
-//
+
 string ModelGenerator::convertUserFunctionExpression(const string& equation)
 {
 	if(!equation.size())
@@ -298,13 +370,13 @@ string ModelGenerator::convertUserFunctionExpression(const string& equation)
     	Log(lError)<<"The equation string supplied to "<<__FUNCTION__<<" is empty";
         return "";
     }
-    Scanner s;// = new Scanner();
-    stringstream ss ;//= new MemoryStream(Encoding.Default.GetBytes(equation));
+    Scanner s;
+    stringstream ss;
     ss<<equation;
     s.AssignStream(ss);
     s.startScanner();
     s.nextToken();
-    StringBuilder  sb;// = new StringBuilder();
+    StringBuilder  sb;
 
     try
     {
@@ -1068,38 +1140,52 @@ ASTNode* ModelGenerator::CleanEquation(ASTNode* astP)
     return astP;
 }
 
-string ModelGenerator::CleanEquation(const string& equation)
+string ModelGenerator::CleanEquation(const string& eqn)
 {
-    if (equation.size() < 1)
+    if (eqn.size() < 1)
+    {
+    	return "0";
+    }
+	string equation(eqn);
+    if (equation == " + ")
     {
     	return "0";
     }
 
-    if (equation == " + ") return "0";
-    if (equation == " * ") return "1";
+    if (equation == " * ")
+    {
+    	return "1";
+    }
 
-      ASTNode* ast = SBML_parseFormula(equation.c_str());
-      if (ast == NULL)
-      {
-//          // we are in trouble!
-//          if (equation.EndsWith("* "))
-//          {
-//              equation = equation.Substring(0, equation.Length - 2);
-//          }
-//
-//          equation = equation.Replace("*  +", "+");
-//          equation = equation.Replace("*  -", "-");
+    ASTNode* ast = SBML_parseFormula(equation.c_str());
+    if (ast == NULL)
+    {
+        // we are in trouble!
+        if (EndsWith(equation, "* "))
+        {
+          	equation = equation.substr(0, equation.size() - 2);
+        }
 
-          ast = SBML_parseFormula(equation.c_str());
-          if (ast == NULL)
-          {
-          	return equation;
-          }
-      }
+       	string sought("*  +");
+        if(equation.find(sought) != string::npos)
+        {
+        	equation.replace(equation.find(sought), sought.size(), string("+"));
+        }
+        sought = ("*  -");
+        if(equation.find(sought) != string::npos)
+        {
+	        equation = equation.replace(equation.find(sought), sought.size(), "-");
+        }
 
-      ast = CleanEquation(ast);
+        ast = SBML_parseFormula(equation.c_str());
+        if (ast == NULL)
+        {
+        	return equation;
+        }
+    }
 
-      return SBML_formulaToString(ast);
+    ast = CleanEquation(ast);
+    return SBML_formulaToString(ast);
 }
 
 string ModelGenerator::substituteTerms(const string& reactionName, const string& inputEquation, bool bFixAmounts)
@@ -1370,7 +1456,6 @@ void ModelGenerator::ReadLocalParameters(const int& numReactions,  vector<int>& 
     int numLocalParameters;
     totalLocalParmeters = 0;
     string reactionName;
-//    localParameterDimensions = new int[numReactions];
 	localParameterDimensions.resize(numReactions);
     for (int i = 0; i < numReactions; i++)
     {
@@ -1378,7 +1463,7 @@ void ModelGenerator::ReadLocalParameters(const int& numReactions,  vector<int>& 
         reactionName = mNOM.getNthReactionId(i);
         reactionList.Add(Symbol(reactionName, 0.0));
         SymbolList newList;
-        //localParameterList[i] = new SymbolList();
+        //localParameterList[i] = new SymbolList(); //TK redid the logic here a little
         for (int j = 0; j < numLocalParameters; j++)
         {
             localParameterDimensions[i] = numLocalParameters;
@@ -1466,9 +1551,9 @@ void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, const int& n
             {
                 double current = (matPtr != NULL) ? gamma(i,j) : 1.0;	//Todo: This is a bug? We should not be here if the matrix i NULL.. Triggered by model 00029
 
-                if (current != 0.0)
+                if ( current != 0.0 )
                 {
-                    if (IsNaN(current)) //C# code is doing one of these.. factor = "" .. ??
+                    if (!matPtr)//IsNaN(current)) //C# code is doing one of these.. factor = "" .. ??
                     {
                         // TODO: fix this
                         factor = "";
@@ -1502,8 +1587,7 @@ void ModelGenerator::WriteComputeConservedTotals(StringBuilder& sb, const int& n
                 }
             }
             sb.Append(";" + NL());
-
-//            conservationList.Add(Symbol("CSUM" + i, NaN)); //TODO: how to deal with this?
+            conservationList.Add(Symbol("CSUM" + ToString(i))); //TODO: how to deal with this?
         }
     }
     sb.Append("	}" + NL() + NL());
@@ -2382,8 +2466,6 @@ void ModelGenerator::WriteEvalModel(StringBuilder& sb, const int& numReactions, 
     sb.Append("\tpublic void evalModel (double timein, double[] oAmounts)" + NL());
     sb.Append("\t{" + NL());
 
-    //sb.Append("\t\tconvertToConcentrations (); " + NL());
-
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
         sb<<(string)_oMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
@@ -2391,16 +2473,8 @@ void ModelGenerator::WriteEvalModel(StringBuilder& sb, const int& numReactions, 
 
     for (int i = 0; i < numFloatingSpecies; i++)
     {
-//        if (floatingSpeciesConcentrationList[i].rateRule)
-//        {
-//        	sb<<"\t\t_y[" << i << "] = oAmounts[" << (i + NumAdditionalRates() )<< "];"<<NL();
-//        ////sb.Append("\t\t_y[" + i.ToString() + "] = oAmounts[" + (i+NumAdditionalRates).ToString() + "]/" + convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) + ";" + NL());
-//        }
-//        else
-        {
-        	sb<<"\t\t_y[" << i << "] = oAmounts[" << i + NumAdditionalRates() << "]/" <<
+    	sb<<"\t\t_y[" << i << "] = oAmounts[" << i + NumAdditionalRates() << "]/" <<
                   convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) << ";" << NL();
-        }
     }
 
     sb.Append(NL());
@@ -2414,7 +2488,6 @@ void ModelGenerator::WriteEvalModel(StringBuilder& sb, const int& numReactions, 
     }
 
     sb.Append("\t\tcomputeReactionRates (time, _y);" + NL());
-    //sb.Append("\t\tcomputeReactionRates (time, _y);" + NL());
 
     // Write out the ODE equations
     string stoich;
@@ -2594,9 +2667,9 @@ Symbol* ModelGenerator::GetSpecies(const string& id)
 
 void ModelGenerator::WriteEventAssignments(StringBuilder& sb, const int& numReactions, const int& numEvents)
 {
-	StringList delays;// = new StringList();
-    vector<bool> eventType;// = new List<bool>();
-    vector<bool> eventPersistentType;// = new List<bool>();
+	StringList delays;
+    vector<bool> eventType;
+    vector<bool> eventPersistentType;
     if (numEvents > 0)
     {
         sb.Append("\t// Event assignments" + NL());
@@ -2615,8 +2688,8 @@ void ModelGenerator::WriteEventAssignments(StringBuilder& sb, const int& numReac
             sb.AppendFormat("\t\tperformEventAssignment_{0}( computeEventAssignment_{0}() );{1}", i, NL());
             sb.Append("\t}" + NL());
             sb.AppendFormat("\tpublic double[] computeEventAssignment_{0} () {{1}", i, NL());
-            StringList oTemp;// = new StringList();
-            StringList oValue;// = new StringList();
+            StringList oTemp;
+            StringList oValue;
             int nCount = 0;
             int numAssignments = ev.size() - 2;
             sb.AppendFormat("\t\tdouble[] values = new double[ {0}];{1}", numAssignments, NL());
@@ -2701,18 +2774,6 @@ string ModelGenerator::WriteDouble(const double& value)
 	return ToString(value, STR_DoubleFormat);
 }
 
-//         static string ModelGenerator::WriteDouble(double value)
-//        {
-////            if (double.IsNegativeInfinity(value))
-////                return "double.NegativeInfinity";
-////            if (double.IsPositiveInfinity(value))
-////                return "double.PositiveInfinity";
-////            if (double.IsNaN(value))
-////                return "double.NaN";
-////            return value.ToString(STR_DoubleFormat, oInfo);
-//        }
-//
-
 void ModelGenerator::WriteSetParameterValues(StringBuilder& sb, const int& numReactions)
 {
     sb.Append("\tpublic void setParameterValues ()" + NL());
@@ -2725,6 +2786,7 @@ void ModelGenerator::WriteSetParameterValues(StringBuilder& sb, const int& numRe
                       WriteDouble(globalParameterList[i].value),
                       NL());
     }
+
     // Initialize local parameter values
     for (int i = 0; i < numReactions; i++)
     {
@@ -2899,4 +2961,4 @@ int ModelGenerator::ReadModifiableSpeciesReferences()
     return ModifiableSpeciesReferenceList.size();
 }
 
-}//namespace
+}//rr namespace
