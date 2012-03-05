@@ -50,7 +50,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ROADRUNNER_VS_EXPORTS;ENABLE_DEBUG_OUTPUT;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ROADRUNNER_VS_EXPORTS;ENABLE_DEBUG_OUTPUT;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;EXPORT_RR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(rr_src);$(rr_src)\libstruct;$(rr_src)\LibStructSupport;$(rr_src)\Solvers;$(rr_src)\Logger;$(rr_src)\Scanner;$(rr_src)\Util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>

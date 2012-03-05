@@ -34,6 +34,6 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
 
 
 //DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const int& nRows, const int& nCols);
-ostream& RR_DECLSPEC operator<<(ostream&, const DoubleMatrix& mat);
+RR_DECLSPEC ostream& operator<<(ostream&, const DoubleMatrix& mat);
 }
 #endif

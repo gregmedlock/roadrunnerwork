@@ -286,10 +286,10 @@ class TModel : IModel
 
 	public void initializeInitialConditions ()
 	{
-		_init_y[0] = (double)1.5E-06/ _c[0];
-		_init_y[1] = (double)2E-06/ _c[0];
-		_init_y[2] = (double)1.5E-06/ _c[0];
-		_init_y[3] = (double)1E-06/ _c[0];
+		_init_y[0] = (double)1.5E-006/ _c[0];
+		_init_y[1] = (double)2E-006/ _c[0];
+		_init_y[2] = (double)1.5E-006/ _c[0];
+		_init_y[3] = (double)1E-006/ _c[0];
 
 	}
 
@@ -352,7 +352,7 @@ class TModel : IModel
 	}
 
 	public void computeRules(double[] y) {
-		_dydt[3] = (multiply (_gp[1],(double)4E-06)
+		_dydt[3] = (multiply (_gp[1],(double)4E-006)
 	) * 		_c[0];
 	}
 

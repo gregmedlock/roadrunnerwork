@@ -4,11 +4,11 @@
 #if defined(EXPORT_RR) //DLL
 	#define RR_DECLSPEC __declspec(dllexport)
 
-#elif defined(IMPORT_RR)
-	#define RR_DECLSPEC __declspec(dllimport)
+#elif defined(NO_RR_DLL)
+	#define RR_DECLSPEC
 
 #else
-	#define RR_DECLSPEC
+	#define RR_DECLSPEC  __declspec(dllimport)
 
 #endif
 

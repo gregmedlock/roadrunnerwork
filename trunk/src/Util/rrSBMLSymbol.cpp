@@ -37,7 +37,9 @@ IsSetConcentration(cp.IsSetConcentration),
 mInitialAssignment(cp.mInitialAssignment),
 mHasRule(cp.mHasRule),
 mRule(cp.mRule)
-{}
+{
+  mDependencies = (cp.mDependencies);
+}
 
 SBMLSymbol& SBMLSymbol::operator =(const SBMLSymbol& rhs)
 {
@@ -50,6 +52,7 @@ SBMLSymbol& SBMLSymbol::operator =(const SBMLSymbol& rhs)
 	mInitialAssignment = rhs.mInitialAssignment;
 	mHasRule = rhs.mHasRule;
 	mRule = rhs.mRule;
+	*mDependencies = (*rhs.mDependencies);
 	return *this;
 }
 

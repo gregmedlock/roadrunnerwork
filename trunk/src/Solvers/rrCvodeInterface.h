@@ -103,7 +103,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 
 //        [DllImport(CVODE, EntryPoint = "fileOpen", ExactSpelling = false,
 //            CharSet = CharSet.Ansi, SetLastError = true)]
-		IntPtr fileOpen(string fileName){};
+		IntPtr fileOpen(string fileName){return NULL;}
 //
 //        [DllImport(CVODE, EntryPoint = "fileClose", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
@@ -135,7 +135,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //
 //        [DllImport(CVODE, EntryPoint = "Create_ADAMS_FUNCTIONAL_CVode", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		IntPtr Create_ADAMS_FUNCTIONAL_CVode(){};
+		IntPtr Create_ADAMS_FUNCTIONAL_CVode(){return NULL;}
 //
 //        [DllImport(CVODE, EntryPoint = "AllocateCvodeMem", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
@@ -149,17 +149,17 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //
 //        [DllImport(CVODE, EntryPoint = "CVReInit", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int CVReInit(IntPtr cvode_mem, double t0, IntPtr y0, double reltol, IntPtr abstol){};
+		int CVReInit(IntPtr cvode_mem, double t0, IntPtr y0, double reltol, IntPtr abstol){return NULL;}
 //
 //        [DllImport(CVODE, EntryPoint = "Run_Cvode")]
 //        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr  y, ref double t, string ErrMsg){};
-		int RunCvode(IntPtr cvode_mem, double tout, IntPtr y, double t){};
+		int RunCvode(IntPtr cvode_mem, double tout, IntPtr y, double t){return NULL;}
 //
 //        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr y, ref double t);  // t = double *
 //
 //        [DllImport(CVODE, EntryPoint = "CVGetRootInfo", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int CVGetRootInfo(IntPtr cvode_mem, IntPtr rootsFound){};
+		int CVGetRootInfo(IntPtr cvode_mem, IntPtr rootsFound){return NULL;}
 //
 //        [DllImport(CVODE, EntryPoint = "CVRootInit", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
@@ -191,15 +191,15 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //
 //        [DllImport(CVODE, EntryPoint = "SetMaxConvFails", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int SetMaxConvFails(IntPtr cvode_mem, int maxncf){};
+		int SetMaxConvFails(IntPtr cvode_mem, int maxncf){return NULL;}
 //
 //        [DllImport(CVODE, EntryPoint = "SetMaxNonLinIters", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int SetMaxNonLinIters(IntPtr cvode_mem, int maxcor){};
+		int SetMaxNonLinIters(IntPtr cvode_mem, int maxcor){return NULL;}
 //
 //        [DllImport(CVODE, EntryPoint = "SetErrFile", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int SetErrFile(IntPtr cvode_mem, IntPtr errfp){};
+		int SetErrFile(IntPtr cvode_mem, IntPtr errfp){return NULL;}
 
 
 //        private static int nCount;

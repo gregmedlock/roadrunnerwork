@@ -12,8 +12,8 @@ class TModel : IModel
 	// Symbol Mappings
 
 	// y[0] = S1
-	// y[1] = S3
-	// y[2] = S2
+	// y[1] = S2
+	// y[2] = S3
 	// y[3] = S4
 
 	private List<string> _Warnings = new List<string>();
@@ -72,8 +72,8 @@ class TModel : IModel
 
 	void loadSymbolTables() {
 		variableTable[0] = "S1";
-		variableTable[1] = "S3";
-		variableTable[2] = "S2";
+		variableTable[1] = "S2";
+		variableTable[2] = "S3";
 		variableTable[3] = "S4";
 		globalParameterTable[0] = "k1";
 		globalParameterTable[1] = "k2";
@@ -281,9 +281,9 @@ class TModel : IModel
 
 	public void initializeInitialConditions ()
 	{
-		_init_y[0] = (double)1E-05/ _c[0];
-		_init_y[1] = (double)1E-05/ _c[0];
-		_init_y[2] = (double)1.5E-05/ _c[0];
+		_init_y[0] = (double)1E-005/ _c[0];
+		_init_y[1] = (double)1.5E-005/ _c[0];
+		_init_y[2] = (double)1E-005/ _c[0];
 		_init_y[3] = (double)0/ _c[0];
 
 	}
@@ -322,10 +322,10 @@ class TModel : IModel
 	// Uses the equation: C = Sd - L0*Si
 	public void computeConservedTotals ()
 	{
-		_ct[0] =  + _y[0]*_c[0]
- + _y[1]*_c[0]
+		_ct[0] =  + _y[1]*_c[0]
 ;
-		_ct[1] =  + _y[2]*_c[0]
+		_ct[1] =  + _y[0]*_c[0]
+ + _y[2]*_c[0]
 ;
 		_ct[2] =  + _y[3]*_c[0]
 ;
@@ -336,10 +336,10 @@ class TModel : IModel
 	public void updateDependentSpeciesValues (double[] y)
 	{
 		_y[1] = 
-	(_ct[0]
-	 - y[0]*_c[0])/_c[0];
+	(_ct[0])/_c[0];
 		_y[2] = 
-	(_ct[1])/_c[0];
+	(_ct[1]
+	 - y[0]*_c[0])/_c[0];
 		_y[3] = 
 	(_ct[2])/_c[0];
 	}
@@ -347,8 +347,8 @@ class TModel : IModel
 	public void computeRules(double[] y) {
 		_y[3] = _gp[2]*
 	_y[0];
-		_dydt[2] = (_gp[1]*
-	_y[1]+
+		_dydt[1] = (_gp[1]*
+	_y[2]+
 	-
 	(double)1*
 	_gp[0]*
@@ -384,9 +384,9 @@ class TModel : IModel
 		double[] dTemp = new double[amounts.Length + rateRules.Length];
 		amounts.CopyTo(dTemp, rateRules.Length);
 		evalModel (time, dTemp);
-		_dydt[1] =  - _dydt[0]
+		_dydt[1] = 0;
+		_dydt[2] =  - _dydt[0]
 ;
-		_dydt[2] = 0;
 		_dydt[3] = 0;
 	}
 
@@ -398,7 +398,7 @@ class TModel : IModel
 	y[0];
 		_rates[1] = _c[0]*
 	_gp[1]*
-	y[1];
+	y[2];
 	}
 
 	// Model Function

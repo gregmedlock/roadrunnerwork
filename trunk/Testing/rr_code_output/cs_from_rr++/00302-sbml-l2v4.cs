@@ -271,8 +271,8 @@ class TModel : IModel
 
 	public void initializeInitialConditions ()
 	{
-		_init_y[0] = (double)1E-05/ _c[0];
-		_init_y[1] = (double)1.5E-05/ _c[0];
+		_init_y[0] = (double)1E-005/ _c[0];
+		_init_y[1] = (double)1.5E-005/ _c[0];
 
 	}
 
@@ -287,8 +287,8 @@ class TModel : IModel
 
 	public void setBoundaryConditions ()
 	{
-		_bc[0] = (double)1E-05/ _c[0];
-		_bc[1] = (double)2.25E-05/ _c[0];
+		_bc[0] = (double)1E-005/ _c[0];
+		_bc[1] = (double)2.25E-005/ _c[0];
 	}
 
 	public void setCompartmentVolumes ()

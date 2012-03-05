@@ -63,7 +63,7 @@ class RR_DECLSPEC SymbolDependencies : public rrObject
 		SBMLSymbol				At(const int& i);
 };
 
-std::ostream& RR_DECLSPEC operator<<(ostream& stream, const SBMLSymbol& symbol);
+RR_DECLSPEC std::ostream& operator<<(ostream& stream, const SBMLSymbol& symbol);
 }
 #endif
 

@@ -387,7 +387,7 @@ class TModel : IModel
 		_gp[0] = (double)1.33333333333333*
 	_gp[3];
 		_gp[1] = _gp[4]*
-	(double)3E-17;
+	(double)3E-017;
 	}
 
 	public void testConstraints()
