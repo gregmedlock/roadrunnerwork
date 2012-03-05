@@ -3,12 +3,14 @@
 #endif
 #pragma hdrstop
 #include <math.h>
+#include "sbml/Model.h"
+#include "sbml/SBMLDocument.h"
+#include "sbml/math/FormulaFormatter.h"
 #include "rrLogger.h"
 #include "rrNOMSupport.h"
 #include "rrStringUtils.h"
 #include "rrException.h"
 #include "rrStringBuilder.h"
-#include "sbml/math/FormulaFormatter.h"
 #include "rrSBMLSymbol.h"
 //---------------------------------------------------------------------------
 #if defined(__BORLANDC__)
@@ -2713,6 +2715,7 @@ string NOMSupport::getSBML()
 //        _ParameterSets.AddToModel(mModel);
 //
 //    return libsbml::writeSBMLToString(mSBMLDoc);
+	return "";
 }
 
 //        int getSBOTerm(string sId)
@@ -3247,7 +3250,7 @@ void NOMSupport::BuildSymbolTable()
 
         symbol.mInitialAssignment = GetInitialAssignmentFor(symbol.mId);
         symbol.mRule = GetRuleFor(symbol.mId);
-        symbol.mType = SBMLType::stCompartment;
+        symbol.mType = stCompartment;
 
         mSymbolTable[symbol.mId] = symbol;
     }
@@ -3265,7 +3268,7 @@ void NOMSupport::BuildSymbolTable()
         }
         symbol.mInitialAssignment = GetInitialAssignmentFor(symbol.mId);
         symbol.mRule = GetRuleFor(symbol.mId);
-        symbol.mType = SBMLType::stParameter;
+        symbol.mType = stParameter;
 
         mSymbolTable[symbol.mId] = symbol;
     }
@@ -3289,7 +3292,7 @@ void NOMSupport::BuildSymbolTable()
 
         symbol.mInitialAssignment = GetInitialAssignmentFor(symbol.mId);
         symbol.mRule = GetRuleFor(symbol.mId);
-        symbol.mType = SBMLType::stSpecies;
+        symbol.mType = stSpecies;
 
         mSymbolTable[symbol.mId] = symbol;
     }
@@ -3335,7 +3338,8 @@ void NOMSupport::UpdateDependencies(const string& sbmlId)
         	string dependency = dependentSymbols[i];
         	if(dependency != current.mId)
             {
-            	current.mDependencies.push_back(mSymbolTable[dependency]);
+				SBMLSymbol *sym = &(mSymbolTable[dependency]); 
+            	current.AddDependency(sym);
             }
         }
 
@@ -3352,7 +3356,8 @@ void NOMSupport::UpdateDependencies(const string& sbmlId)
         	string dependency = dependentSymbols[i];
         	if(dependency != current.mId)
             {
-            	current.mDependencies.push_back(mSymbolTable[dependency]);
+				SBMLSymbol *sym = &(mSymbolTable[dependency]); 
+            	current.AddDependency(sym);
             }
         }
 //        foreach (string dependency in dependentSymbols)
@@ -4085,9 +4090,9 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
         stack.push(symbol.mId + " = " + ToString(symbol.mValue, STR_DoubleFormat));
     }
 
-    for(int i = 0; i < symbol.mDependencies.size(); i++)
+	for(int i = 0; i < symbol.NumberOfDependencies(); i++)
     {
-    	SBMLSymbol dependency = symbol.mDependencies[i];
+    	SBMLSymbol dependency = symbol.GetDependency(i);
     	FillStack(stack, dependency); //hmm recursive.. Todo: ...?
     }
 }

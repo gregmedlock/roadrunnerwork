@@ -8,7 +8,6 @@
 #include <stack>
 #include <memory>
 #include "sbml/math/ASTNode.h"
-#include "NOMLib.h"
 #include "rrObject.h"
 #include "rrStringListContainer.h"
 #include "rrHashTable.h"

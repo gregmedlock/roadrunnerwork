@@ -2,7 +2,7 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
-
+#include "rrLogger.h"
 #include "rrCompiler.h"
 //---------------------------------------------------------------------------
 #if defined(__BORLANDC__)
@@ -81,6 +81,7 @@ rrObject* Compiler::getInstance(const string& source, const string& sClassName, 
     //addAssembly(sLocation);
 //    CSharpCodeProvider *cscp = new CSharpCodeProvider();
 //    return Compile2(cscp, source, sClassName);
+	return NULL;
 }
 //
 //

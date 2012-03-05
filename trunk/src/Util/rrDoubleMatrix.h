@@ -4,7 +4,7 @@
 #include "rrObject.h"
 
 using std::vector;
-
+using std::ostream;
 namespace rr
 {
 class RR_DECLSPEC DoubleMatrix : public rrObject
@@ -32,7 +32,8 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
 
 };
 
-//DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const int& nRows, const int& nCols);
+
+//DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const int& nRows, const int& nCols);
 ostream& RR_DECLSPEC operator<<(ostream&, const DoubleMatrix& mat);
 }
 #endif

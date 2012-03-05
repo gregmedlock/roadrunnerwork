@@ -8,6 +8,7 @@
 #include "rrModelGenerator.h"
 #include "rrCompiler.h"
 #include "rrStreamWriter.h"
+#include "rrLogger.h"
 //---------------------------------------------------------------------------
 #if defined(__BORLANDC__)
 #pragma package(smart_init)
@@ -31,10 +32,10 @@ STEADYSTATE_THRESHOLD(1.E-2),
 cvode(NULL),
 mModelGenerator(NULL),
 mCompiler(NULL),
-_L(0,0),
-_L0(0,0),
-_N(0,0),
-_Nr(0,0),
+_L(NULL),
+_L0(NULL),
+_N(NULL),
+_Nr(NULL),
 mModel(NULL)
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
@@ -108,11 +109,11 @@ void RoadRunner::InitializeModel(IModel* aModel)
 
     // Construct default selection list
     selectionList.resize(model.getNumTotalVariables + 1); // + 1 to include time
-    selectionList[0].selectionType = TSelectionType::clTime;
+    selectionList[0].selectionType = clTime;
     for (int i = 0; i < model.getNumTotalVariables; i++)
     {
         selectionList[i + 1].index = i;
-        selectionList[i + 1].selectionType = TSelectionType::clFloatingSpecies;
+        selectionList[i + 1].selectionType = clFloatingSpecies;
     }
 
 //    _oSteadyStateSelection = NULL;

@@ -8,7 +8,7 @@
 #include "rrTParameterType.h"
 #include "Solvers/rrCvodeInterface.h"
 #include "Solvers/rrNLEQInterface.h"
-#include "/Util/rrStringList.h"
+#include "Util/rrStringList.h"
 using std::string;
 
 namespace rr

@@ -1,10 +1,14 @@
 #ifndef rrModelStateH
 #define rrModelStateH
+#include <ostream>
+#include <istream>
 #include <vector>
 #include "rrObject.h"
 #include "rrIModel.h"
 
 using std::vector;
+using std::istream;
+using std::ostream;
 
 namespace rr
 {
@@ -28,10 +32,10 @@ class RR_DECLSPEC ModelState : public rrObject
 
     public:
         								ModelState(IModel& model);
-        void 							WriteTo(string fileName);
-        static ModelState 				ReadFrom(istream stream);
-        static ModelState 				ReadFrom(string fileName);
-        void 							WriteTo(ostream stream);
+        void 							WriteTo(const string& fileName);
+        static ModelState 				ReadFrom(istream& stream);
+        static ModelState 				ReadFrom(const string& fileName);
+        void 							WriteTo(ostream& stream);
         void 							AssignToModel(IModel& model);
         vector<double> 					GetCopy(const vector<double>& oVector);
         vector<bool> 					GetCopy(const vector<bool>& oVector);

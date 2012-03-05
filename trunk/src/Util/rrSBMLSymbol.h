@@ -1,5 +1,6 @@
 #ifndef rrSBMLSymbolH
 #define rrSBMLSymbolH
+#include <ostream>
 #include <vector>
 #include <deque>
 #include "rrObject.h"
@@ -7,8 +8,11 @@
 
 using std::vector;
 using std::deque;
+using std::ostream;
 namespace rr
 {
+
+class SymbolDependencies;
 
 class RR_DECLSPEC SBMLSymbol : public rrObject
 {
@@ -16,7 +20,8 @@ class RR_DECLSPEC SBMLSymbol : public rrObject
     public:
         string 					mId;
         enum SBMLType 			mType;
-        deque<SBMLSymbol> 		mDependencies;
+        SymbolDependencies	   *mDependencies;
+			//deque<SBMLSymbol> 		mDependencies;
 
         double 					mValue;
         bool 					HasValue();
@@ -35,13 +40,30 @@ class RR_DECLSPEC SBMLSymbol : public rrObject
         string 					mRule;
 
     public:
-    	SBMLSymbol();
-        SBMLSymbol(const SBMLSymbol& cp);
-        SBMLSymbol& operator =(const SBMLSymbol& rhs);
-
+    							SBMLSymbol();
+								SBMLSymbol(const SBMLSymbol& cp);
+								SBMLSymbol& operator =(const SBMLSymbol& rhs);
+		void					AddDependency(SBMLSymbol* symbol);
+		int						NumberOfDependencies();
+		SBMLSymbol				GetDependency(const int& i);
+		
 };
-//Could make it a friend...
-ostream& RR_DECLSPEC operator<<(ostream& stream, const SBMLSymbol& symbol);
+
+class RR_DECLSPEC SymbolDependencies : public rrObject
+{
+	protected:
+		deque<SBMLSymbol>		mDependencies;
+	public:
+		
+
+	public:
+								SymbolDependencies(){}
+		void					Add(SBMLSymbol* symbol);
+		int						Count();
+		SBMLSymbol				At(const int& i);
+};
+
+std::ostream& RR_DECLSPEC operator<<(ostream& stream, const SBMLSymbol& symbol);
 }
 #endif
 

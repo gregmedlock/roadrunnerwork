@@ -4,6 +4,7 @@
 #pragma hdrstop
 #include "rrStringBuilder.h"
 #include "rrStringUtils.h"
+#include "rrLogger.h"
 //---------------------------------------------------------------------------
 #if defined(__BORLANDC__)
 #pragma package(smart_init)

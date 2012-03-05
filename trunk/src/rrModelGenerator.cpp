@@ -5,13 +5,16 @@
 #include <iostream>
 #include <cmath>
 #include <stack>
+#include "sbml/Model.h"
+#include "sbml/SBMLDocument.h"
 #include "rrModelGenerator.h"
-#include "NOMLib.h"
+//#include "NOMLib.h"
 #include "libstructural.h"
 #include "rrStringListContainer.h"
 #include "rrUtils.h"
 #include "rrRule.h"
-#include "scanner/rrScanner.h"
+#include "rrScanner.h"
+#include "rrLogger.h"
 //---------------------------------------------------------------------------
 #if defined(__BORLANDC__)
 #pragma package(smart_init)
@@ -2207,7 +2210,7 @@ void ModelGenerator::WriteEvalInitialAssignments(StringBuilder& sb, const int& n
                 pair<string, string> pairToMove = oList[nIndex];
                 oList.erase(oList.begin() + nIndex);
                 //oList.RemoveAt(nIndex);
-                oList.insert(0, pairToMove);
+				oList.insert(oList.begin(), pairToMove);	//Todo: check it this is correct...
             }
         }
 

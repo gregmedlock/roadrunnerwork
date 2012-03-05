@@ -27,9 +27,9 @@ vector<string> 	RR_DECLSPEC SplitString(const string& input, const char& delimit
 int				RR_DECLSPEC ToInt(const string& str);
 bool			RR_DECLSPEC ToBool(const string& str);
 double			RR_DECLSPEC ToDouble(const string& str);
-string			RR_DECLSPEC ToUpperOrLowerCase(const string& inStr, int (*func)(int) = std::toupper);
-string			RR_DECLSPEC ToUpper(const string& inStr);
-string			RR_DECLSPEC ToLower(const string& inStr);
+//string			RR_DECLSPEC ToUpperOrLowerCase(const string& inStr, int (*func)(int) = std::toupper);
+//string			RR_DECLSPEC ToUpper(const string& inStr);
+//string			RR_DECLSPEC ToLower(const string& inStr);
 string			RR_DECLSPEC ToString(const bool& b);
 string			RR_DECLSPEC ToString(const double& d, const string& format = "%f");
 string			RR_DECLSPEC ToString(const unsigned int n, const int nBase=10);

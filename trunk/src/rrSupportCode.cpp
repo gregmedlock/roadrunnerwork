@@ -122,7 +122,9 @@ int _factorial(const int& a)
 {
     static int b = (int) a;
     if (b < 2)
-        return 1.0;
+	{
+        return 1;
+	}
     return b*_factorial(b - 1);
 }
 

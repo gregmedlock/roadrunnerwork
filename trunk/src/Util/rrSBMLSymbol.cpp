@@ -4,19 +4,17 @@
 #pragma hdrstop
 #include <iostream>
 #include <limits>
-
 #include "rrSBMLSymbol.h"
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 #if defined(__BORLANDC__)
 #pragma package(smart_init)
 #endif
-//---------------------------------------------------------------------------
-
 
 using namespace std;
 namespace rr
 {
+
 SBMLSymbol::SBMLSymbol()
 :
 mValue(std::numeric_limits<double>::quiet_NaN()),//Represents an un-initialized value
@@ -24,7 +22,7 @@ mConcentration(mValue),
 mAmount(mValue),
 mHasRule(false)
 {
-
+	mDependencies = new SymbolDependencies;
 }
 
 SBMLSymbol::SBMLSymbol(const SBMLSymbol& cp)
@@ -39,9 +37,7 @@ IsSetConcentration(cp.IsSetConcentration),
 mInitialAssignment(cp.mInitialAssignment),
 mHasRule(cp.mHasRule),
 mRule(cp.mRule)
-{
-
-}
+{}
 
 SBMLSymbol& SBMLSymbol::operator =(const SBMLSymbol& rhs)
 {
@@ -57,6 +53,20 @@ SBMLSymbol& SBMLSymbol::operator =(const SBMLSymbol& rhs)
 	return *this;
 }
 
+int	SBMLSymbol::NumberOfDependencies()
+{
+	return mDependencies->Count();
+}
+
+void SBMLSymbol::AddDependency(SBMLSymbol* symbol)
+{
+	mDependencies->Add(symbol);
+}
+
+SBMLSymbol SBMLSymbol::GetDependency(const int& i)
+{
+	return mDependencies->At(i);
+}
 
 bool SBMLSymbol::HasValue()
 {
@@ -96,4 +106,19 @@ ostream& operator<<(ostream& stream, const SBMLSymbol& symbol)
     return stream;
 }
 
+
+void SymbolDependencies::Add(SBMLSymbol* symbol)
+{
+	mDependencies.push_back(*symbol);	//Makes a copy
+}
+
+int SymbolDependencies::Count()
+{
+	return mDependencies.size();
+}
+
+SBMLSymbol	SymbolDependencies::At(const int& i)
+{
+	return mDependencies[i];
+}
 }
