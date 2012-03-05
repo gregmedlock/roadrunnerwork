@@ -2,7 +2,7 @@
 #define rrCvodeInterfaceH
 #include <string>
 #include "rrObject.h"
-#include "Util/rrRandom.h"
+#include "rrRandom.h"
 #include "cvode/cvode.h"
 
 using std::string;
@@ -111,7 +111,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //
 //        [DllImport(CVODE, EntryPoint = "NewCvode_Vector", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-       	static IntPtr NewCvode_Vector(int n){};
+       	static IntPtr NewCvode_Vector(int n){return NULL;}
 //
 //        [DllImport(CVODE, EntryPoint = "FreeCvode_Vector", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
@@ -139,11 +139,11 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //
 //        [DllImport(CVODE, EntryPoint = "AllocateCvodeMem", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int AllocateCvodeMem(IntPtr cvode_mem, int n, TCallBackModelFcn fcn, double t0, IntPtr y, double reltol, IntPtr abstol){};
+		int AllocateCvodeMem(IntPtr cvode_mem, int n, TCallBackModelFcn fcn, double t0, IntPtr y, double reltol, IntPtr abstol){return -1;}
 //
 //        [DllImport(CVODE, EntryPoint = "CvDense", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int CvDense(IntPtr cvode_mem, int n){};
+		int CvDense(IntPtr cvode_mem, int n){return -1;}
 //
 //        // int = size of systems
 //
@@ -163,19 +163,19 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //
 //        [DllImport(CVODE, EntryPoint = "CVRootInit", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int CVRootInit(IntPtr cvode_mem, int numRoots, TCallBackRootFcn rootfcn, IntPtr gdata){};
+		int CVRootInit(IntPtr cvode_mem, int numRoots, TCallBackRootFcn rootfcn, IntPtr gdata){return -1;}
 //
 //        [DllImport(CVODE, EntryPoint = "SetMaxNumSteps", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int SetMaxNumSteps(IntPtr cvode_mem, int mxsteps){};
+		int SetMaxNumSteps(IntPtr cvode_mem, int mxsteps){return -1;}
 //
 //        [DllImport(CVODE, EntryPoint = "SetMinStep", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int SetMinStep(IntPtr cvode_mem, double minStep){};
+		int SetMinStep(IntPtr cvode_mem, double minStep){return -1;}
 
 //        [DllImport(CVODE, EntryPoint = "SetMaxStep", ExactSpelling = false,
 //                    CharSet = CharSet.Unicode, SetLastError = true)]
-		int SetMaxStep(IntPtr cvode_mem, double maxStep){};
+		int SetMaxStep(IntPtr cvode_mem, double maxStep){return -1;}
 
 //        [DllImport(CVODE, EntryPoint = "SetInitStep", ExactSpelling = false,
 //                    CharSet = CharSet.Unicode, SetLastError = true)]
@@ -183,7 +183,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //
 //        [DllImport(CVODE, EntryPoint = "SetMaxOrder", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-		int SetMaxOrder(IntPtr cvode_mem, int mxorder){};
+		int SetMaxOrder(IntPtr cvode_mem, int mxorder){return -1;}
 //
 //        [DllImport(CVODE, EntryPoint = "SetMaxErrTestFails", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
@@ -665,7 +665,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 ////            oErrorCodes[10] = new CvodeErrorCodes(-10, "The right-hand side function had repetead recoverable errors.");
 ////            oErrorCodes[11] = new CvodeErrorCodes(-11,
 ////                                                  "The right-hand side function had a recoverable error, but no recovery is possible.");
-////            oErrorCodes[12] = new CvodeErrorCodes(-12, "The root¯nding function failed in an unrecoverable manner.");
+////            oErrorCodes[12] = new CvodeErrorCodes(-12, "The rootï¿½nding function failed in an unrecoverable manner.");
 ////            oErrorCodes[13] = new CvodeErrorCodes(-13, "");
 ////            oErrorCodes[14] = new CvodeErrorCodes(-14, "");
 ////            oErrorCodes[15] = new CvodeErrorCodes(-15, "");

@@ -2,6 +2,7 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include "rrLogger.h"
 #include "rrLibStructSupport.h"
 #include "rrException.h"
 #include "rrInteropUtils.h"

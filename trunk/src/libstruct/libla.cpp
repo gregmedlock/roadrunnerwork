@@ -10,15 +10,15 @@
 #include "matrix.h"
 #include "util.h"
 
-//extern "C"
-//{
+extern "C"
+{
 #include "f2c.h"
 #include "clapack.h"
+}
 //---------------------------------------------------------------------------
 #if defined(__BORLANDC__)
 #pragma package(smart_init)
 #endif
-//}
 
 
 using namespace std;

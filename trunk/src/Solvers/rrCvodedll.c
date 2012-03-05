@@ -5,13 +5,13 @@
 #ifdef WIN32
 #include <windows.h>
 
-BOOL APIENTRY DllMain( HANDLE hModule, 
-	DWORD  ul_reason_for_call, 
-	LPVOID lpReserved
-	)
-{
-	return TRUE;
-}
+//BOOL APIENTRY DllMain( HANDLE hModule, 
+//	DWORD  ul_reason_for_call, 
+//	LPVOID lpReserved
+//	)
+//{
+//	return TRUE;
+//}
 
 #define DLLEXPORT __declspec(dllexport)
 #define STDCALL  __stdcall

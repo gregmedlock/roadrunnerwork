@@ -75,9 +75,8 @@ cvodeLogFile("cvodeLogFile")
 
 CvodeInterface::~CvodeInterface()
 {
-
-
 }
+
 ////
 ////        public bool HaveVariables
 ////        {

@@ -39,7 +39,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\rrInstalls\vs\libsbml\include;C:\RRW\src\libstruct;C:\rrInstalls\vs\sundials\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;C:\rrInstalls\vs\libsbml\include;C:\RRW\src\libstruct;C:\rrInstalls\vs\sundials\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\rrInstalls\vs\sundials\lib;C:\rrInstalls\vs\clapack;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -49,12 +50,14 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ROADRUNNER_VS_EXPORTS;LIBSBML_USE_CPP_NAMESPACE;ENABLE_DEBUG_OUTPUT;NO_LIBSTRUCT_DLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ROADRUNNER_VS_EXPORTS;ENABLE_DEBUG_OUTPUT;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(rr_src);$(rr_src)\libstruct;$(rr_src)\LibStructSupport;$(rr_src)\Solvers;$(rr_src)\Logger;$(rr_src)\Scanner;$(rr_src)\Util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\rrInstalls\vs\libsbml\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);libsbml.lib;sundials_cvode.lib;liblapack.lib;libblas.lib;sundials_nvecserial.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,6 +85,14 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\LibStructSupport\rrInteropUtils.cpp" />
+    <ClCompile Include="..\..\src\LibStructSupport\rrLibStructSupport.cpp" />
+    <ClCompile Include="..\..\src\libstruct\complex.cpp" />
+    <ClCompile Include="..\..\src\libstruct\libla.cpp" />
+    <ClCompile Include="..\..\src\libstruct\libstructural.cpp" />
+    <ClCompile Include="..\..\src\libstruct\matrix.cpp" />
+    <ClCompile Include="..\..\src\libstruct\sbmlmodel.cpp" />
+    <ClCompile Include="..\..\src\libstruct\util.cpp" />
     <ClCompile Include="..\..\src\Logger\rrFileLog.cpp" />
     <ClCompile Include="..\..\src\Logger\rrLog.cpp" />
     <ClCompile Include="..\..\src\Logger\rrLogFile.cpp" />
@@ -103,6 +114,11 @@
     <ClCompile Include="..\..\src\rrTParameterType.cpp" />
     <ClCompile Include="..\..\src\rrTPerformEventAssignmentDelegate.cpp" />
     <ClCompile Include="..\..\src\rrTVariableType.cpp" />
+    <ClCompile Include="..\..\src\Scanner\rrCodeTypes.cpp" />
+    <ClCompile Include="..\..\src\Scanner\rrScanner.cpp" />
+    <ClCompile Include="..\..\src\Scanner\rrToken.cpp" />
+    <ClCompile Include="..\..\src\Solvers\rrCvodeInterface.cpp" />
+    <ClCompile Include="..\..\src\Util\mtrand\mtrand.cpp" />
     <ClCompile Include="..\..\src\Util\rrCompiler.cpp" />
     <ClCompile Include="..\..\src\Util\rrDoubleMatrix.cpp" />
     <ClCompile Include="..\..\src\Util\rrException.cpp" />
