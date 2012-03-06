@@ -9,6 +9,7 @@
 #include "rrCompiler.h"
 #include "rrStreamWriter.h"
 #include "rrLogger.h"
+#include "rrCSharpGenerator.h"
 //---------------------------------------------------------------------------
 #if defined(__CODEGEARC__)
 #pragma package(smart_init)
@@ -40,7 +41,7 @@ mModel(NULL)
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
 
-	mModelGenerator = new CSharpModelGenerator();
+	mModelGenerator = new CSharpGenerator();
 }
 
 RoadRunner::~RoadRunner()

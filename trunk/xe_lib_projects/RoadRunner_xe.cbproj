@@ -34,7 +34,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\src\libstruct\;..\src\LibStructSupport\;..\src\Scanner\;..\ThirdParty\NOMLib\src\;..\src\Logger\;..\src\Util\mtrand\;..\src\Util\;..\src\Solvers\;..\src\;C:\RRW\src\;C:\rrInstalls\xe\sundials\include;C:\rrInstalls\xe\libstruct\include;C:\rrInstalls\xe\libsbml\include;C:\rrInstalls\xe\libsbml\include\sbml;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>C:\rrBuilds\xe\clapack\Testing\MATGEN\;C:\rrInstalls\vs\clapack\;..\src\libstruct\;..\src\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\src\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;..\src\Logger\;..\ThirdParty\libsbml\dependencies\lib\;..\src\Util\mtrand\;..\build\link\;..\src\Util\;..\src\Solvers\;..\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>C:\rrBuilds\xe\clapack\Testing\MATGEN\;..\src\libstruct\;..\src\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\src\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;..\src\Logger\;..\ThirdParty\libsbml\dependencies\lib\;..\src\Util\mtrand\;..\build\link\;..\src\Util\;..\src\Solvers\;..\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -142,6 +142,14 @@
 			<CppCompile Include="..\src\Logger\rrLogOutput.cpp">
 				<DependentOn>..\src\Logger\rrLogOutput.h</DependentOn>
 				<BuildOrder>55</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\src\rrCGenerator.cpp">
+				<DependentOn>..\src\rrCGenerator.h</DependentOn>
+				<BuildOrder>59</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\src\rrCSharpGenerator.cpp">
+				<DependentOn>..\src\rrCSharpGenerator.h</DependentOn>
+				<BuildOrder>58</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\src\rrIModel.cpp">
 				<DependentOn>..\src\rrIModel.h</DependentOn>

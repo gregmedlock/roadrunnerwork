@@ -5,3 +5,16 @@
 #include "rrCSharpGenerator.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+
+
+namespace rr
+{
+
+
+CSharpGenerator::CSharpGenerator()
+{}
+
+CSharpGenerator::~CSharpGenerator()
+{}
+
+}//namespace

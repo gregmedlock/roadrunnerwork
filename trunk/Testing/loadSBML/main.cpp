@@ -26,14 +26,14 @@ int _tmain()
         LogOutput::mLogToConsole = true;
 
     	gLog.SetCutOffLogLevel(lDebug4);
-       	gLog.SetCutOffLogLevel(lInfo);
+//       	gLog.SetCutOffLogLevel(lInfo);
 
         Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
 
 	    RoadRunner *roadRunner = NULL;
 
         //Loading models (max is 459)
-		for(int caseNr = 1; caseNr < 460; caseNr++)
+		for(int caseNr = 1; caseNr < 2; caseNr++)
         {
         	//int caseNr = 41;
 			if(roadRunner)
