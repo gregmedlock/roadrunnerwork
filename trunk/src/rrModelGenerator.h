@@ -23,10 +23,8 @@ namespace rr
 class RR_DECLSPEC ModelGenerator : public rrObject
 {
     private:
-        const string                        STR_DoubleFormat;// = "G"; //"G17";
-        const string                        STR_FixAmountCompartments;// = "*";
-		//        static ModelGenerator 				_instance;
-        //        static NumberFormatInfo oInfo = new CultureInfo("en-US").NumberFormat;
+        const string                        STR_DoubleFormat;
+        const string                        STR_FixAmountCompartments;
         vector<int> 		                _LocalParameterDimensions;
         string 				                _ModelName;
         int                                 _NumBoundarySpecies;
@@ -43,8 +41,9 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         StringList                     		dependentSpeciesList;
         StringList		                    independentSpeciesList;
         int 				                _NumModifiableSpeciesReferences;
-
-        IntStringHashTable   			    _oMapRateRule;// = new Hashtable();
+        StructAnalysis						mStructAnalysis;		//!Object to facilitate calls to libStruct library
+        NOMSupport							mNOM;					//Object that provide some wrappers and new "NOM" functions
+        IntStringHashTable   			    _oMapRateRule;
 
         string                              convertCompartmentToC(const string& compartmentName);
         string                              convertSpeciesToBc(const string& speciesName);
@@ -97,15 +96,10 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         int 				                ReadCompartments();
         int 				                ReadModifiableSpeciesReferences();
 
-        StructAnalysis						mStructAnalysis;		//!Object to facilitate calls to libStruct library
-        NOMSupport							mNOM;					//Object that provide some wrappers and new "NOM" functions
-
     public:
 									        ModelGenerator();
 		virtual						       ~ModelGenerator();
-
         void								Reset();
-        //        public: static ModelGenerator Instance
         SymbolList                         	boundarySpeciesList;
         SymbolList                         	compartmentList;
         SymbolList                         	conservationList;
@@ -115,7 +109,6 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         vector<SymbolList> 					localParameterList;
         SymbolList 							reactionList;
         int                                 getNumberOfReactions();
-//        int                                 NumAdditionalRates;	//this variable is the size of _oMapRateRule
         int                                 NumAdditionalRates();	//this variable is the size of _oMapRateRule
         StringList                          getBoundarySpeciesList();
         StringList                          getCompartmentList();
@@ -124,8 +117,8 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         StringList                          getGlobalParameterList();
         StringList                          getLocalParameterList(int reactionId);
         StringList  	                   	getReactionNames();
-        StringList	                        Warnings;// { get; set; }
-        SymbolList 							ModifiableSpeciesReferenceList;// { get; set; }
+        StringList	                        Warnings;
+        SymbolList 							ModifiableSpeciesReferenceList;
     	string 								WriteDouble(const double& value);
 
     	// Generates the Model Code from the SBML string

@@ -8,7 +8,6 @@
 #include "sbml/Model.h"
 #include "sbml/SBMLDocument.h"
 #include "rrModelGenerator.h"
-//#include "NOMLib.h"
 #include "libstructural.h"
 #include "rrStringListContainer.h"
 #include "rrUtils.h"

@@ -39,7 +39,8 @@ _Nr(NULL),
 mModel(NULL)
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
-	mModelGenerator = new ModelGenerator();
+
+	mModelGenerator = new CSharpModelGenerator();
 }
 
 RoadRunner::~RoadRunner()
@@ -53,26 +54,17 @@ RoadRunner::~RoadRunner()
 
 
 void RoadRunner::Reset()
-
 {
-
 	if(mModelGenerator)
-
     {
-
 		mModelGenerator->Reset();
-
 	}
-
 }
 
 
 string RoadRunner::GetModelSourceCode()
-
 {
-
 	return _sModelCode;
-
 }
 
 void RoadRunner::InitializeModel(IModel* aModel)
