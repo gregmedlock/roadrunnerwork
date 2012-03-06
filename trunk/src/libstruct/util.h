@@ -38,7 +38,9 @@
 
 
 #include <string>
-
+#include <ostream>
+using std::ostream;
+using std::string;
 namespace LIB_LA
 {
 
@@ -49,17 +51,17 @@ namespace LIB_LA
 		std::string _Message;
 		std::string _DetailedMessage;
 
-	public: 
+	public:
 		LIB_EXTERN ApplicationException() : _Message(""), _DetailedMessage("") {}
 		LIB_EXTERN ApplicationException(const std::string &message) : _Message(message), _DetailedMessage("") {}
-		LIB_EXTERN ApplicationException(const std::string &message, const std::string &detailedMessage) : 
+		LIB_EXTERN ApplicationException(const std::string &message, const std::string &detailedMessage) :
 		_Message(message), _DetailedMessage(detailedMessage) {}
 
 		LIB_EXTERN std::string getMessage() { return _Message; }
-		LIB_EXTERN std::string getDetailedMessage() { return _DetailedMessage; } 
+		LIB_EXTERN std::string getDetailedMessage() { return _DetailedMessage; }
 
 	};
-	
+
 
 	class Util
 	{
@@ -73,7 +75,7 @@ namespace LIB_LA
 		LIB_EXTERN static DoubleMatrix* matMult(unsigned int mA, unsigned int nA, DoubleMatrix &A, DoubleMatrix &B, unsigned int nB);
 		LIB_EXTERN static DoubleMatrix* matMult(DoubleMatrix &A, DoubleMatrix &B);
 		LIB_EXTERN static DoubleMatrix* matMult(IntMatrix &A, DoubleMatrix &B);
-		LIB_EXTERN static IntMatrix* matMult(IntMatrix &A, IntMatrix &B);		
+		LIB_EXTERN static IntMatrix* matMult(IntMatrix &A, IntMatrix &B);
 
 		LIB_EXTERN static bool isPositive(DoubleMatrix &A, double dTolerance);
 
@@ -94,21 +96,21 @@ namespace LIB_LA
 		LIB_EXTERN static void gaussJordan(DoubleMatrix &oMatrix, double dTolerance);
 		LIB_EXTERN static int findRank(DoubleMatrix &oMatrix, double dTolerance);
 
-		LIB_EXTERN static void print(int mr, int nc, int *A);
+		LIB_EXTERN static string print(int mr, int nc, int *A);
 		//static void print(int mr, int nc, integer *A);
-		LIB_EXTERN static void print(int mr, int nc, int **A);
-		LIB_EXTERN static void print(int mr, int nc, double *A);
-		LIB_EXTERN static void print(int mr, int nc, double **A);
-		LIB_EXTERN static void print(IntMatrix& A);
-		LIB_EXTERN static void print(DoubleMatrix& A);
-		LIB_EXTERN static void print(ComplexMatrix& A);
+		LIB_EXTERN static string print(int mr, int nc, int **A);
+		LIB_EXTERN static string print(int mr, int nc, double *A);
+		LIB_EXTERN static string print(int mr, int nc, double **A);
+		LIB_EXTERN static string print(IntMatrix& A);
+		LIB_EXTERN static string print(DoubleMatrix& A);
+		LIB_EXTERN static string print(ComplexMatrix& A);
 		//static void print(int mr, int nc, doublecomplex *A);
 		//static void print(int mr, int nc, doublecomplex **A);
-		LIB_EXTERN static void print(int mr, int nc, LIB_LA::Complex *A);
-		LIB_EXTERN static void print(int mr, int nc, LIB_LA::Complex **A);
-		LIB_EXTERN static void print(int mr, int nc, int *A, int *B);
-		LIB_EXTERN static void print(int mr, int nc, int **A, int **B);
-		LIB_EXTERN static void print(int mr, int nc, double **A, double **B);
+		LIB_EXTERN static string print(int mr, int nc, LIB_LA::Complex *A);
+		LIB_EXTERN static string print(int mr, int nc, LIB_LA::Complex **A);
+		LIB_EXTERN static string print(int mr, int nc, int *A, int *B);
+		LIB_EXTERN static string print(int mr, int nc, int **A, int **B);
+		LIB_EXTERN static string print(int mr, int nc, double **A, double **B);
 	};
 }
 

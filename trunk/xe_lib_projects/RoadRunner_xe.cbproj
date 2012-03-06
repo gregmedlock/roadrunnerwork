@@ -72,7 +72,15 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="C:\rrInstalls\vs\clapack\liblapack_xe.lib">
+			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>57</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>55</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\SRC\lapack.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>56</BuildOrder>
 			</LibFiles>
@@ -302,7 +310,7 @@
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 		<PropertyGroup Condition="'$(FileToCompile)'==''">
-			<PostBuildEvent><![CDATA[cygwin_here.bat -p PostBuild.sh RoadRunner++_xe Debug]]></PostBuildEvent>
+			<PostBuildEvent><![CDATA[cygwin_here.bat -p PostBuild.sh RoadRunner_xe Debug]]></PostBuildEvent>
 		</PropertyGroup>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>

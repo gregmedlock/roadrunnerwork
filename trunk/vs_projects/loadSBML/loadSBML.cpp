@@ -1,12 +1,9 @@
-// loadSBML.cpp : Defines the entry point for the console application.
-//
 #include "stdafx.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <conio.h>
 #include <tchar.h>
-//#include <dir.h>
 #include <direct.h>
 #include <iomanip>
 #include "rrRoadRunner.h"
@@ -28,8 +25,8 @@ int main(int argc, _TCHAR* argv[])
         gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
         LogOutput::mLogToConsole = true;
 
-    	gLog.SetCutOffLogLevel(lDebug5);
-       	gLog.SetCutOffLogLevel(lInfo);
+    	gLog.SetCutOffLogLevel(lDebug4);
+       	//gLog.SetCutOffLogLevel(lInfo);
 
         Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
 
@@ -55,8 +52,6 @@ int main(int argc, _TCHAR* argv[])
             modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
             modelFName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
 
-            //string subFolder("");
-            //model<<"feedback.xml";
             if(subFolder.size())
             {
                 modelsRootPath = modelsRootPath + "\\" + subFolder + "\\" + modelSubPath.str();
@@ -107,10 +102,3 @@ int main(int argc, _TCHAR* argv[])
     getch();
 	return 0;
 }
-//
-//
-//int _tmain(int argc, _TCHAR* argv[])
-//{
-//	return 0;
-//}
-//

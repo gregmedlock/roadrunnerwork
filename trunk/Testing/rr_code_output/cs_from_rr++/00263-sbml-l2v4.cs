@@ -275,7 +275,7 @@ class TModel : IModel
 	public void initializeInitialConditions ()
 	{
 		_init_y[0] = (double)0.0001/ _c[0];
-		_init_y[1] = (double)5E-005/ _c[0];
+		_init_y[1] = (double)5E-05/ _c[0];
 		_init_y[2] = (double)0.0001/ _c[0];
 
 	}

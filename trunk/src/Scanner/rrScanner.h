@@ -38,7 +38,7 @@ class RR_DECLSPEC Scanner : public rrObject
         vector<TCharCode>				FCharTable;
         vector<char> 	 				buffer;
         queue<Token>	 				tokenQueue;
-        hash_map<string, CodeTypes> 	wordTable;
+        map<string, CodeTypes> 	wordTable;
         stringstream				   *pStream;
         int 							bufferLength;
         int 							bufferPtr; // Index of position in buffer containing current char

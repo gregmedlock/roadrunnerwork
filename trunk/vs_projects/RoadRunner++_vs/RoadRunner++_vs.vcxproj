@@ -56,8 +56,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\rrInstalls\vs\libsbml\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies);libsbml.lib;sundials_cvode.lib;liblapack.lib;libblas.lib;sundials_nvecserial.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\rrBuilds\vs\clapack\SRC\Debug;C:\rrInstalls\vs\libsbml\lib;C:\rrBuilds\vs\clapack\F2CLIBS\libf2c\Debug;C:\rrBuilds\vs\clapack\BLAS\SRC\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);libsbml.lib;sundials_cvode.lib;sundials_nvecserial.lib;clapack.lib;blas.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

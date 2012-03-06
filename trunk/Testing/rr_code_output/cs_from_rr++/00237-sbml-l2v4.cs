@@ -287,7 +287,7 @@ class TModel : IModel
 	public void setBoundaryConditions ()
 	{
 		_bc[0] = (double)0.00015/ _c[0];
-		_bc[1] = (double)1E-005/ _c[0];
+		_bc[1] = (double)1E-05/ _c[0];
 	}
 
 	public void setCompartmentVolumes ()

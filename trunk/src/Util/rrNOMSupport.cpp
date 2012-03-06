@@ -3033,7 +3033,7 @@ deque<Rule> NOMSupport::ReorderAssignmentRules(deque<Rule>& assignmentRules)
     deque<Rule> result;
 
 //    var allSymbols = new Dictionary<int, List<string>>();
-	hash_map<int, StringList > allSymbols;
+	map<int, StringList > allSymbols;
 
     //    var map = new Dictionary<string, List<string>>();
 	map<string, StringList > map;

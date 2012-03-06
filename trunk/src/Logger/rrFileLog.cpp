@@ -17,7 +17,7 @@ int FileLog::mNrOfInstances = 0;
 
 FileLog::FileLog()
 :
-//mLogFile(NULL),
+mLogFile(),
 mLogPrefix("none"),
 mLogLevel(lDebug5),
 mLogToServer(false)
@@ -35,16 +35,16 @@ bool FileLog::Init(const string& logPrefix, const LogLevel& level, unique_ptr<Lo
 {
     mLogPrefix = logPrefix;
     mLogLevel = level;
-//    mLogFile = move(logFile);
-// 	return mLogFile.get() ? true : false;
+    mLogFile = move(logFile);
+ 	return mLogFile.get() ? true : false;
 }
 
 string FileLog::GetLogFileName()
 {
-//	if(mLogFile)
-//    {
-//    	return mLogFile->GetFileName();
-//    }
+	if(mLogFile)
+    {
+    	return mLogFile->GetFileName();
+    }
     return string("<none>");
 }
 
@@ -70,16 +70,16 @@ string FileLog::GetLogPrefix()
 
 void FileLog::write(const char* str)
 {
-//	if(!mLogFile.get())
-//    {
-//		return;
-//    }
-//	fprintf(mLogFile->mFILEHandle, "%s", str);
-//
-//    if (EOF == fflush(mLogFile->mFILEHandle))
-//    {
-//        throw std::runtime_error("file write failure");
-//    }
+	if(!mLogFile.get())
+    {
+		return;
+    }
+	fprintf(mLogFile->mFILEHandle, "%s", str);
+
+    if (EOF == fflush(mLogFile->mFILEHandle))
+    {
+        throw std::runtime_error("file write failure");
+    }
 }
 
 }

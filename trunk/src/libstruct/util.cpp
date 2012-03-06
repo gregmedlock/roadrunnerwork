@@ -14,10 +14,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include "util.h"
-//#include "f2c.h"
-//#include "clapack.h"
+#include "rrLogger.h"
 //---------------------------------------------------------------------------
 #if defined(__CODEGEARC__)
 #pragma package(smart_init)
@@ -25,14 +23,14 @@
 
 using namespace std;
 using namespace LIB_LA;
-
+using namespace rr;
 
 DoubleMatrix* Util::getSubMatrix(int /*Mb*/, int /*Nb*/, int ms, int ns, int mi, int nj, DoubleMatrix& A)
 {
 	DoubleMatrix* subMatrix = new DoubleMatrix(ms, ns);
-	for (int i=0; i<ms; i++) 
+	for (int i=0; i<ms; i++)
 	{
-		for (int j=0; j<ns; j++) 
+		for (int j=0; j<ns; j++)
 		{
 			(*subMatrix)(i,j) = A(i+mi,j+nj);
 		}
@@ -129,7 +127,7 @@ int** Util::matMult(int mA, int nA, int** A, int** B, int nB) {
 
 // ----------------------------------------------------------------------------
 // double[][] matMult(int, int, double**, double**, int)
-// 
+//
 // Matrix Multiplication
 // ----------------------------------------------------------------------------
 double** Util::matMult(int mA, int nA, double** A, double** B, int nB) {
@@ -317,9 +315,8 @@ std::vector<int> Util::GaussJordan(DoubleMatrix &oMatrix, double dTolerance)
 
 		// get the pivot
 		dPivot = oMatrix(nCurrentRow, nCurrentCol);
-#ifdef ENABLE_DEBUG_OUTPUT
-		cout << "pivot: " << dPivot << " row: " << nCurrentRow << " col: " << nCurrentCol<< endl;
-#endif
+		Log(lDebug4) << "pivot: " << dPivot << " row: " << nCurrentRow << " col: " << nCurrentCol<< endl;
+
 		if (dPivot == 0.0)
 		{
 			//nCurrentRow ++;	if (nCurrentRow >= nRows) break;
@@ -359,11 +356,9 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 	int nRows = oMatrix.numRows();
 	int nCols = oMatrix.numCols();
 
-#ifdef ENABLE_DEBUG_OUTPUT
-	cout << " INSIDE GAUSSIAN ELIMINATION METHOD \n";
-	cout << " \nInput matrix : \n";
-	//print(m, n, A);
-#endif
+	Log(lDebug4) << "INSIDE GAUSSIAN ELIMINATION METHOD \n";
+	Log(lDebug4) << " \nInput matrix : \n";
+	Log(lDebug4)<<print(oMatrix);
 
 	int x; 	int nPivotRow = 0; 	int nPivotCol = 0;
 	while ((nPivotRow < nRows) && (nPivotCol < nCols))
@@ -392,9 +387,7 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 		}
 
 		dPivot = oMatrix(nPivotRow,nPivotCol);
-#ifdef ENABLE_DEBUG_OUTPUT
-		cout << "pivot: " << dPivot << endl;
-#endif
+		Log(lDebug4) << "pivot: " << dPivot << endl;
 		if(fabs(dPivot) > dTolerance) 
 		{
 			// Introduce a '1' at the pivot point
@@ -418,230 +411,248 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 		}
 
 		nPivotCol++;  // Next column
-#ifdef ENABLE_DEBUG_OUTPUT
-		cout << "Printing matrices PivotCol = " << nPivotCol << " \n";
+		Log(lDebug4) << "Printing matrices PivotCol = " << nPivotCol << " \n";
 //		print(m, n, A, EM);
-		cout << "-----------------------------------------------------------------\n";
-#endif
-	}		
+		Log(lDebug4) << "-----------------------------------------------------------------\n";
+	}
 	Util::RoundMatrixToTolerance(oMatrix, dTolerance);
 }
 
 // ----------------------------------------------------------------------------
 // void print (int, int, int*)
-// 
-// Prints to cout an arrray in Nrows x Ncols
+//
+// Prints to Log(lDebug4) an arrray in Nrows x Ncols
 // ----------------------------------------------------------------------------
-void Util::print(int mr, int nc, int* A)
+string Util::print(int mr, int nc, int* A)
 {
-	cout << "[";
+	stringstream stream;
+	stream << "[";
 	for (int i=0; i<mr; i++) {
-		cout << "[";
+		stream << "[";
 		for (int j=0; j<nc; j++) {
-			cout << A[i+j*mr] << (j+1<nc? ",    " : "    ");
+			stream << A[i+j*mr] << (j+1<nc? ",    " : "    ");
 		}
-		cout << (i + 1 < mr ? "],\n" : "]\n");
+		stream << (i + 1 < mr ? "],\n" : "]\n");
 	}
-	cout << "]" << endl << endl;
+	stream << "]" << endl << endl;
+	return stream.str();
 }
 
 
 // ----------------------------------------------------------------------------
 // void print (int, int, int**)
-// 
-// Prints to cout a matrix in Nrows x Ncols
-// ----------------------------------------------------------------------------	
-void Util::print(IntMatrix& A) 
+//
+// Prints to stream a matrix in Nrows x Ncols
+// ----------------------------------------------------------------------------
+string Util::print(IntMatrix& A)
 {
-	cout << "[";
-	for (unsigned int i=0; i < A.numRows(); i++) 
+	stringstream stream;
+	stream << "[";
+	for (unsigned int i=0; i < A.numRows(); i++)
 	{
-		cout << "[";
-		for (unsigned int j=0; j < A.numCols(); j++) 
+		stream << "[";
+		for (unsigned int j=0; j < A.numCols(); j++)
 		{
-			cout << A(i,j) << (j+1 < A.numCols()? ",    " : "");
+			stream << A(i,j) << (j+1 < A.numCols()? ",    " : "");
 		}
-		cout << (i + 1 < A.numRows() ? "],\n" : "]\n");
+		stream << (i + 1 < A.numRows() ? "],\n" : "]\n");
 	}
-	cout << "]" << endl << endl;
+	stream << "]" << endl << endl;
+	return stream.str();
 }
-void Util::print(DoubleMatrix& A) 
+
+string Util::print(DoubleMatrix& A)
 {
-	cout << "[";
-	for (unsigned int i=0; i < A.numRows(); i++) 
+	stringstream stream;
+	stream << "[";
+	for (unsigned int i=0; i < A.numRows(); i++)
 	{
-		cout << "[";
-		for (unsigned int j=0; j < A.numCols(); j++) 
+		stream << "[";
+		for (unsigned int j=0; j < A.numCols(); j++)
 		{
-			cout << A(i,j) << (j+1<A.numCols()? ",    " : "");
+			stream << A(i,j) << (j+1<A.numCols()? ",    " : "");
 		}
-		cout << (i + 1 < A.numRows() ? "],\n" : "]\n");
+		stream << (i + 1 < A.numRows() ? "],\n" : "]\n");
 	}
-	cout << "]" << endl << endl;
+	stream << "]" << endl << endl;
+	return stream.str();
 }
-void Util::print(ComplexMatrix& A) 
+
+string Util::print(ComplexMatrix& A)
 {
-	cout << "[";
-	for (unsigned int i=0; i < A.numRows(); i++) 
+	stringstream stream;
+	stream << "[";
+	for (unsigned int i=0; i < A.numRows(); i++)
 	{
-		cout << "[";
-		for (unsigned int j=0; j < A.numCols(); j++) 
+		stream << "[";
+		for (unsigned int j=0; j < A.numCols(); j++)
 		{
-			cout << "(" << A(i,j).Real << " + " << A(i,j).Imag << "i)" << (j+1<A.numCols()? ",    " : "");
+			stream << "(" << A(i,j).Real << " + " << A(i,j).Imag << "i)" << (j+1<A.numCols()? ",    " : "");
 		}
-		cout << (i + 1 < A.numRows() ? "],\n" : "]\n");
+		stream << (i + 1 < A.numRows() ? "],\n" : "]\n");
 	}
-	cout << "]" << endl << endl;
+	stream << "]" << endl << endl;
+	return stream.str();
 }
-void Util::print(int mr, int nc, int** A) 
+
+string Util::print(int mr, int nc, int** A)
 {
-	cout << "[";
+	stringstream stream;
+	stream << "[";
 	for (int i=0; i<mr; i++) {
-		cout << "[";
+		stream << "[";
 		for (int j=0; j<nc; j++) {
-			cout << A[i][j] << (j+1<nc? ",    " : "    ");
+			stream << A[i][j] << (j+1<nc? ",    " : "    ");
 		}
-		cout << (i + 1 < mr ? "],\n" : "]\n");
+		stream << (i + 1 < mr ? "],\n" : "]\n");
 	}
-	cout << "]" << endl << endl;
+	stream << "]" << endl << endl;
+	return stream.str();
 }
 
 // ----------------------------------------------------------------------------
 // void print (int, int, double*)
-// 
-// Prints to cout an arrray in Nrows x Ncols
+//
+// Prints to stream an arrray in Nrows x Ncols
 // ----------------------------------------------------------------------------
-void Util::print(int mr, int nc, double* A)
+string Util::print(int mr, int nc, double* A)
 {
-
+	stringstream stream;
 	for (int i=0; i<mr; i++)
     {
 		for (int j=0; j<nc; j++)
         {
-			cout <<left<<setw(10)<< setprecision(3)<<A[i+j*mr];
+			stream <<left<<setw(10)<< setprecision(3)<<A[i+j*mr];
 		}
-		cout << "\n";
+		stream << "\n";
 	}
-	cout << endl << endl;
+	stream << endl << endl;
+	return stream.str();
 }
 
 // ----------------------------------------------------------------------------
 // void print (int, int, double**)
-// 
-// Prints to cout a matrix in Nrows x Ncols
-// ----------------------------------------------------------------------------	
-void Util::print(int mr, int nc, double** A) 
+//
+// Prints to stream a matrix in Nrows x Ncols
+// ----------------------------------------------------------------------------
+string Util::print(int mr, int nc, double** A)
 {
-
-	cout << "[";
+	stringstream stream;
+	stream << "[";
 	for (int i=0; i<mr; i++) {
-		cout << "[";
+		stream << "[";
 		for (int j=0; j<nc; j++) {
-			cout << A[i][j] << (j+1<nc? ",    " : "    ");
+			stream << A[i][j] << (j+1<nc? ",    " : "    ");
 		}
-		cout << (i + 1 < mr ? "],\n" : "]\n");
+		stream << (i + 1 < mr ? "],\n" : "]\n");
 	}
-	cout << "]" << endl << endl;
+	stream << "]" << endl << endl;
+	return stream.str();
 }
 
 // ----------------------------------------------------------------------------
 // void print (int, int, Complex*)
-// 
-// Prints to cout an arrray in Nrows x Ncols
+//
+// Prints to stream an arrray in Nrows x Ncols
 // ----------------------------------------------------------------------------
-void Util::print(int mr, int nc, LIB_LA::Complex* A)
+string Util::print(int mr, int nc, LIB_LA::Complex* A)
 {
-
-	cout << "[";
+	stringstream stream;
+	stream << "[";
 	for (int i=0; i<mr; i++) {
-		cout << "[";
+		stream << "[";
 		for (int j=0; j<nc; j++) {
-			cout << "(" << A[i+j*mr].Real << ", " << A[i+j*mr].Imag << ")  ";
+			stream << "(" << A[i+j*mr].Real << ", " << A[i+j*mr].Imag << ")  ";
 		}
-		cout << (i + 1 < mr ? "],\n" : "]\n");
+		stream << (i + 1 < mr ? "],\n" : "]\n");
 	}
-	cout << "]" << endl << endl;
+	stream << "]" << endl << endl;
+	return stream.str();
 }
 
 // ----------------------------------------------------------------------------
 // void print (int, int, Complex**)
-// 
-// Prints to cout a matrix in Nrows x Ncols
-// ----------------------------------------------------------------------------	
-void Util::print(int mr, int nc, LIB_LA::Complex** A) 
+//
+// Prints to stream a matrix in Nrows x Ncols
+// ----------------------------------------------------------------------------
+string Util::print(int mr, int nc, LIB_LA::Complex** A)
 {
-
-	cout << "[";
+	stringstream stream;
+	stream << "[";
 	for (int i=0; i<mr; i++) {
-		cout << "[";
+		stream << "[";
 		for (int j=0; j<nc; j++) {
-			cout << "(" << A[i][j].Real << ", " << A[i][j].Imag << ")  ";
+			stream << "(" << A[i][j].Real << ", " << A[i][j].Imag << ")  ";
 		}
-		cout << (i + 1 < mr ? "],\n" : "]\n");
+		stream << (i + 1 < mr ? "],\n" : "]\n");
 	}
-	cout << "]" << endl << endl;
+	stream << "]" << endl << endl;
+	return stream.str();
 }
 
 // ----------------------------------------------------------------------------
 // void print (int, int, int**, int** )
-// 
+//
 // Prints two matrices next to each other Nrows x Ncols | Nrows x Nrows
-// ----------------------------------------------------------------------------	
-void Util::print(int mr, int nc, int* A, int* B) 
+// ----------------------------------------------------------------------------
+string Util::print(int mr, int nc, int* A, int* B)
 {
-
+	stringstream stream;
 	for (int i=0; i<mr; i++) {
 		for (int j=0; j<nc; j++) {
-			cout << A[j+i*mr] << ",   ";
+			stream << A[j+i*mr] << ",   ";
 		}
-		cout << "  |  ";
+		stream << "  |  ";
 		for (int j=0; j<nc; j++) {
-			cout << B[j+i*mr] << ",   ";
+			stream << B[j+i*mr] << ",   ";
 		}
-		cout << "\n ";
+		stream << "\n ";
 	}
+	return stream.str();
 }
 
 // ----------------------------------------------------------------------------
 // void print (int, int, int**, int** )
-// 
+//
 // Prints two matrices next to each other Nrows x Ncols | Nrows x Nrows
-// ----------------------------------------------------------------------------	
-void Util::print(int mr, int nc, int** A, int** B) 
+// ----------------------------------------------------------------------------
+string Util::print(int mr, int nc, int** A, int** B)
 {
-
-	cout.precision(8);
+	stringstream stream;
+	stream.precision(8);
 	for (int i=0; i<mr; i++) {
 		for (int j=0; j<nc; j++) {
-			cout << A[i][j] << ",   ";
+			stream << A[i][j] << ",   ";
 		}
-		cout << "  |  ";
+		stream << "  |  ";
 		for (int j=0; j<mr; j++) {
-			cout << B[i][j] << ",   ";
+			stream << B[i][j] << ",   ";
 		}
-		cout << "\n ";
+		stream << "\n ";
 	}
+	return stream.str();
 }
 
 // ----------------------------------------------------------------------------
-// void print (int, int, double**, double** )
-// 
+// string print (int, int, double**, double** )
+//
 // Prints two matrices next to each other Nrows x Ncols | Nrows x Nrows
-// ----------------------------------------------------------------------------	
-void Util::print(int mr, int nc, double** A, double** B) 
+// ----------------------------------------------------------------------------
+string Util::print(int mr, int nc, double** A, double** B)
 {
-
-	cout.precision(8);
+	stringstream stream;
+	stream.precision(8);
 	for (int i=0; i<mr; i++) {
 		for (int j=0; j<nc; j++) {
-			cout << A[i][j] << ",   ";
+			stream << A[i][j] << ",   ";
 		}
-		cout << "  |  ";
+		stream << "  |  ";
 		for (int j=0; j<mr; j++) {
-			cout << B[i][j] << ",   ";
+			stream << B[i][j] << ",   ";
 		}
-		cout << "\n ";
+		stream << "\n ";
 	}
+	return stream.str();
 }
 
 void Util::CopyMatrix(IntMatrix& oMatrix, int** &outMatrix, int &outNumRows, int &outNumCols)
@@ -748,7 +759,6 @@ void Util::CopyComplexVector(const std::vector< Complex> &vector, double* &outVe
 		outVectorImag[i] = vector[i].Imag;
 	}
 }
-
 
 void Util::CopyDoubleVector(const std::vector< double > &vector, double* &outVector, int &outLength)
 {

@@ -22,7 +22,7 @@ bool StringSymbolHashTable::ContainsKey(const string& aKey)
 
 ostream& operator<<(ostream& stream, StringSymbolHashTable& hash)
 {
-	hash_map<string, SBMLSymbol>::iterator iter;
+	map<string, SBMLSymbol>::iterator iter;
 
 	for(iter = hash.begin(); iter != hash.end(); iter++)
     {

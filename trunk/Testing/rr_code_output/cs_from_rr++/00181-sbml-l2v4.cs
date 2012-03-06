@@ -274,7 +274,7 @@ class TModel : IModel
 	public void setParameterValues ()
 	{
 		_gp[0] = (double)1;
-		_gp[1] = (double)1.5E-015;
+		_gp[1] = (double)1.5E-15;
 		_gp[2] = (double)0;
 		_gp[3] = (double)0.75;
 		_gp[4] = (double)50;
@@ -318,7 +318,7 @@ class TModel : IModel
 	public void InitializeRateRuleSymbols()
 	{
 		_gp[0] = 1;
-		_gp[1] = 1.5E-015;
+		_gp[1] = 1.5E-15;
 	}
 
 	public void AssignRates(double[] oRates)

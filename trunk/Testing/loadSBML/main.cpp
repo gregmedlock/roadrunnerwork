@@ -18,14 +18,14 @@ using namespace rr;
 #pragma argsused
 int _tmain()
 {
-//    try
-//    {
+    try
+    {
         char exePath[MAXPATH];
         getcwd(exePath, MAXPATH);
         gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
         LogOutput::mLogToConsole = true;
 
-    	gLog.SetCutOffLogLevel(lDebug5);
+    	gLog.SetCutOffLogLevel(lDebug4);
        	gLog.SetCutOffLogLevel(lInfo);
 
         Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
@@ -33,7 +33,7 @@ int _tmain()
 	    RoadRunner *roadRunner = NULL;
 
         //Loading models (max is 459)
-		for(int caseNr = 19; caseNr < 20; caseNr++)
+		for(int caseNr = 1; caseNr < 460; caseNr++)
         {
         	//int caseNr = 41;
 			if(roadRunner)
@@ -94,16 +94,17 @@ int _tmain()
         cout<<"Copyright: "<<roadRunner->getCopyright()<<endl;
         delete roadRunner;
 
-//    }
-//    catch(Exception& ex)
-//    {
-////		cout<<"RoadRunner exception occured: "<<ex.what()<<endl;
-//    }
+    }
+    catch(Exception& ex)
+    {
+		cout<<"RoadRunner exception occured: "<<ex.what()<<endl;
+    }
 
   	//-------------------------------------
 	cout<<"Hit any key to exit...";
 	cin.ignore(0,'\n');
     getch();
+	cout<<"\nexiting....\n";
 	return 0;
 }
 

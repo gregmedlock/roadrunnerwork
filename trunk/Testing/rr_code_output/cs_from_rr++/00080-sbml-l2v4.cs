@@ -12,8 +12,8 @@ class TModel : IModel
 	// Symbol Mappings
 
 	// y[0] = S3
-	// y[1] = S1
-	// y[2] = S2
+	// y[1] = S2
+	// y[2] = S1
 	// y[3] = S4
 	// y[4] = S5
 
@@ -73,8 +73,8 @@ class TModel : IModel
 
 	void loadSymbolTables() {
 		variableTable[0] = "S3";
-		variableTable[1] = "S1";
-		variableTable[2] = "S2";
+		variableTable[1] = "S2";
+		variableTable[2] = "S1";
 		variableTable[3] = "S4";
 		variableTable[4] = "S5";
 		globalParameterTable[0] = "k1";
@@ -300,8 +300,8 @@ class TModel : IModel
 	public void initializeInitialConditions ()
 	{
 		_init_y[0] = (double)0/ _c[0];
-		_init_y[1] = (double)1/ _c[0];
-		_init_y[2] = (double)0/ _c[0];
+		_init_y[1] = (double)0/ _c[0];
+		_init_y[2] = (double)1/ _c[0];
 		_init_y[3] = (double)0/ _c[0];
 		_init_y[4] = (double)0/ _c[0];
 
@@ -415,7 +415,7 @@ class TModel : IModel
 	{
 		_rates[0] = _c[0]*
 	_gp[0]*
-	y[1];
+	y[2];
 		_rates[1] = _c[0]*
 	_gp[1]*
 	y[4];
@@ -436,7 +436,7 @@ class TModel : IModel
 		computeRules (_y);
 		computeReactionRates (time, _y);
 		_dydt[0] = + _rates[0] - _rates[1];
-		_dydt[1] = - _rates[0];
+		_dydt[1] = + _rates[1];
 		convertToAmounts ();
 	}
 

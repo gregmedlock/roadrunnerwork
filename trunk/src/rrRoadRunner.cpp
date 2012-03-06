@@ -533,7 +533,7 @@ void RoadRunner::loadSBML(const string& sbml)
         {
             throw RRException("Failed to generate Model Code");
         }
-        Log(lDebug)<<" ------ Model Code --------\n"
+        Log(lDebug3)<<" ------ Model Code --------\n"
         			<<_sModelCode
                     <<" ----- End of Model Code -----\n";
 
