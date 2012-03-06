@@ -1,11 +1,18 @@
-//---------------------------------------------------------------------------
-
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
 #pragma hdrstop
-
 #include "rrObject.h"
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
-//---------------------------------------------------------------------------
+
+namespace rr
+{
+
+rrObject::rrObject(){}
+rrObject::~rrObject(){}
+
+}
 

@@ -1,10 +1,14 @@
-// mtrand.cpp, see include file mtrand.h for information
-
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
+#pragma hdrstop
 #include "mtrand.h"
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
+// mtrand.cpp, see include file mtrand.h for information
+
 // non-inline function definitions and static member definitions cannot
 // reside in header file because of the risk of multiple declarations
 

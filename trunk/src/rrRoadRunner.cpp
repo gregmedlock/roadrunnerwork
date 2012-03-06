@@ -10,7 +10,7 @@
 #include "rrStreamWriter.h"
 #include "rrLogger.h"
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
 //---------------------------------------------------------------------------

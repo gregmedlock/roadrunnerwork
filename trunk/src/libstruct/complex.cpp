@@ -1,5 +1,9 @@
-#include "complex.h"
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
+#pragma hdrstop
 
+#include "complex.h"
 #include <ostream>
 
 using namespace std;

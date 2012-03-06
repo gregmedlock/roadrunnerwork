@@ -15,7 +15,7 @@ namespace rr
 class RR_DECLSPEC FileLog : public rrObject
 {
     private:
-        unique_ptr<LogFile>  	mLogFile;
+        //unique_ptr<LogFile>  	mLogFile;
         string		           	mLogPrefix;
      	LogLevel	           	mLogLevel;
 		static int				mNrOfInstances;
@@ -38,7 +38,7 @@ class RR_DECLSPEC FileLog : public rrObject
         int						GetNrOfInstances(){return mNrOfInstances;}
 };
 
-extern RR_DECLSPEC FileLog gLog;
+RR_DECLSPEC extern FileLog gLog;
 }
 
 #endif

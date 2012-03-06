@@ -1,3 +1,7 @@
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
+#pragma hdrstop
 #include "matrix.h"
 #include "complex.h"
 #include "util.h"
@@ -5,7 +9,7 @@
 #include <stdlib.h>
 #include <complex>
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
 

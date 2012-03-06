@@ -32,11 +32,11 @@ RELEASE_FOLDER=$RR_BIN_FOLDER
 
 #Copy needed "global" binaries needed for releases
 SHARED_BINS=" \
-$RR_LINK_FOLDER/RoadRunner++_xe.dll
+$RR_LINK_FOLDER/RoadRunner_xe.dll
 "
 
 DEBUG_FILES=" \
-$RR_LINK_FOLDER/RoadRunner++_xe.tds
+$RR_LINK_FOLDER/RoadRunner_xe.tds
 "
 
 #Copy needed misc files needed for releases

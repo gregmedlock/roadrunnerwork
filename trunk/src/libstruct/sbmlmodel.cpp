@@ -1,15 +1,16 @@
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
+#pragma hdrstop
 #include "sbmlmodel.h"
-
 #include <string>
 #include <vector>
-
 #include <sbml/SBMLDocument.h>
 #include <sbml/Model.h>
 #include <sbml/SBMLReader.h>
-
 #include "util.h"
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
 

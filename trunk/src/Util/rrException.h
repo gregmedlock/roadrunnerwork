@@ -10,7 +10,7 @@ using std::exception;
 namespace rr
 {
 
-class RR_DECLSPEC Exception : public rrObject , public std::exception
+class RR_DECLSPEC Exception : public std::exception
 {
 	protected:
     	string mMessage;   //Exception message
@@ -18,34 +18,28 @@ class RR_DECLSPEC Exception : public rrObject , public std::exception
 	public:
         string& Message;
 
-		Exception(const string& desc) : mMessage(desc), Message(mMessage){}
-       	virtual ~Exception() throw() {}
-
-		virtual const char* what() const throw()
-  		{
-    		return mMessage.c_str();
-  		}
+		Exception(const string& desc);
+       	virtual ~Exception() throw();
+		virtual const char* what() const throw();
 };
 
 class RR_DECLSPEC RRException : public Exception
 {
 	public:
-	    RRException(const string& msg)
-        : Exception(msg){}
+	    RRException(const string& msg);
 };
 
 class RR_DECLSPEC SBWApplicationException : public RRException
 {
 	public:
-	    SBWApplicationException(const string& msg)
-        : RRException(msg){}
+	    SBWApplicationException(const string& msg);
 };
 
 class RR_DECLSPEC ScannerException : public RRException
 {
 	public:
-	    ScannerException(const string& msg)
-        : RRException(msg){}
+	    ScannerException(const string& msg);
+
 };
 
 

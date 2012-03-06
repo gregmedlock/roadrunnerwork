@@ -1,16 +1,13 @@
-#ifdef MTK_PCH
-#include "rr_pch.h"
+#ifdef USE_PCH
+#include "rrPCH.h"
 #endif
 #pragma hdrstop
 //#include <fstream>
 #include <stdio.h>
 #include "rrLogFile.h"
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
-#endif
-#ifdef __CODEGEARC__
-
 #endif
 
 namespace rr

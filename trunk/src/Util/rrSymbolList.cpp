@@ -1,10 +1,10 @@
-#ifdef MTK_PCH
+#ifdef USE_PCH
 #include "mtk_pch.h"
 #endif
 #pragma hdrstop
 #include "rrSymbolList.h"
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
 //---------------------------------------------------------------------------

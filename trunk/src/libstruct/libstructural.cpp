@@ -1,3 +1,8 @@
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
+#pragma hdrstop
+
 #ifdef WIN32
 #pragma warning(disable: 4996)
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
@@ -17,7 +22,7 @@
 #include "util.h"
 #include "math.h"
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
 

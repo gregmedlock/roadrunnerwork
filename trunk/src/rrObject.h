@@ -17,8 +17,8 @@ class RR_DECLSPEC rrObject
 	protected:
 
     public:
-    					rrObject(){}
-        virtual 	   ~rrObject(){}
+    					rrObject();
+        virtual 	   ~rrObject();
 
 
 };

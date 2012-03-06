@@ -4,7 +4,7 @@
 #pragma hdrstop
 #include "rrIModel.h"
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
 //---------------------------------------------------------------------------
@@ -23,7 +23,7 @@ vector<double>&	IModel::Get_dydt(){return  dydt;}
 vector<double>&	IModel::Get_rates(){return  rates;}
 vector<double>&	IModel::Get_rateRules(){return  rateRules;}
 vector<double>&	IModel::Get_sr(){return  sr;}
-double			IModel::Get_time(){return  time;}
+double		IModel::Get_time(){return  time;}
 vector<bool>&	IModel::Get_eventStatusArray(){return eventStatusArray;}
 vector<double>&	IModel::Get_eventTests(){return eventTests;}
 vector<bool>&	IModel::Get_previousEventStatusArray(){return previousEventStatusArray;}

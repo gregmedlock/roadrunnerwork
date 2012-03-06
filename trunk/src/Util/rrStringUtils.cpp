@@ -7,13 +7,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
-#ifdef __CODEGEARC__
-
-#endif
-
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
 //---------------------------------------------------------------------------

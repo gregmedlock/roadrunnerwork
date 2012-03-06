@@ -6,19 +6,20 @@
 #include <tchar.h>
 #include <dir.h>
 #include <iomanip>
+#include "rrLog.h"
 #include "rrRoadRunner.h"
-#include "Logger/rrLog.h"
-#include "Util/rrException.h"
-#include "Util/rrStringUtils.h"
+#include "rrException.h"
+#include "rrStringUtils.h"
 //---------------------------------------------------------------------------
+
 using namespace std;
 using namespace rr;
 
 #pragma argsused
-int main(int argc, _TCHAR* argv[])
+int _tmain()
 {
-    try
-    {
+//    try
+//    {
         char exePath[MAXPATH];
         getcwd(exePath, MAXPATH);
         gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
@@ -91,11 +92,13 @@ int main(int argc, _TCHAR* argv[])
         }//test cases loop
 
         cout<<"Copyright: "<<roadRunner->getCopyright()<<endl;
-    }
-    catch(const Exception& ex)
-    {
-		cout<<"RoadRunner exception occured: "<<ex.what()<<endl;
-    }
+        delete roadRunner;
+
+//    }
+//    catch(Exception& ex)
+//    {
+////		cout<<"RoadRunner exception occured: "<<ex.what()<<endl;
+//    }
 
   	//-------------------------------------
 	cout<<"Hit any key to exit...";

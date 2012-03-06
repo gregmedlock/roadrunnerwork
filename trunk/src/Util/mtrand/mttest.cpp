@@ -1,8 +1,13 @@
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
+#pragma hdrstop
+
 // test program mttest.cpp, see mtreadme.txt for information
 #include "mtrand.h"
 #include <cstdio>
 //---------------------------------------------------------------------------
-#if defined(__BORLANDC__)
+#if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
 

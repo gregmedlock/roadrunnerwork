@@ -13,8 +13,8 @@ class TModel : IModel
 
 	// y[0] = S1
 	// y[1] = S2
-	// y[2] = S3
-	// y[3] = S4
+	// y[2] = S4
+	// y[3] = S3
 
 	private List<string> _Warnings = new List<string>();
 	private double[] _gp = new double[3];           // Vector containing all the global parameters in the System  
@@ -75,8 +75,8 @@ class TModel : IModel
 	void loadSymbolTables() {
 		variableTable[0] = "S1";
 		variableTable[1] = "S2";
-		variableTable[2] = "S3";
-		variableTable[3] = "S4";
+		variableTable[2] = "S4";
+		variableTable[3] = "S3";
 		globalParameterTable[0] = "k1";
 		globalParameterTable[1] = "k2";
 		globalParameterTable[2] = "k3";
@@ -324,11 +324,11 @@ class TModel : IModel
 	// Uses the equation: C = Sd - L0*Si
 	public void computeConservedTotals ()
 	{
-		_ct[0] =  + _y[0]*_c[0]
+		_ct[0] =  - _y[0]*_c[0]
+ + _y[1]*_c[0]
  + _y[2]*_c[0]
 ;
-		_ct[1] =  - _y[0]*_c[0]
- + _y[1]*_c[0]
+		_ct[1] =  + _y[0]*_c[0]
  + _y[3]*_c[0]
 ;
 	}
@@ -338,13 +338,13 @@ class TModel : IModel
 	public void updateDependentSpeciesValues (double[] y)
 	{
 		_y[2] = 
-	(_ct[0]
-	 - y[0]*_c[0])/_c[0];
-		_y[3] = 
-	(_ct[1] + 
+	(_ct[0] + 
 	y[0]*_c[0]
 	
 	 - y[1]*_c[0])/_c[0];
+		_y[3] = 
+	(_ct[1]
+	 - y[0]*_c[0])/_c[0];
 	}
 
 	public void computeRules(double[] y) {
@@ -379,10 +379,10 @@ class TModel : IModel
 		double[] dTemp = new double[amounts.Length + rateRules.Length];
 		amounts.CopyTo(dTemp, rateRules.Length);
 		evalModel (time, dTemp);
-		_dydt[2] =  - _dydt[0]
-;
-		_dydt[3] =  + _dydt[0]
+		_dydt[2] =  + _dydt[0]
  - _dydt[1]
+;
+		_dydt[3] =  - _dydt[0]
 ;
 	}
 
@@ -395,10 +395,10 @@ class TModel : IModel
 	y[1];
 		_rates[1] = _c[0]*
 	_gp[1]*
-	y[2];
+	y[3];
 		_rates[2] = _c[0]*
 	_gp[2]*
-	y[2];
+	y[3];
 	}
 
 	// Model Function
