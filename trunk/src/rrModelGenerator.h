@@ -22,7 +22,7 @@ namespace rr
 
 class RR_DECLSPEC ModelGenerator : public rrObject
 {
-    private:
+    protected:
         const string                        STR_DoubleFormat;
         const string                        STR_FixAmountCompartments;
         vector<int> 		                _LocalParameterDimensions;
@@ -41,11 +41,11 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         StringList                     		dependentSpeciesList;
         StringList		                    independentSpeciesList;
         int 				                _NumModifiableSpeciesReferences;
-        StructAnalysis						mStructAnalysis;		//!Object to facilitate calls to libStruct library
-        NOMSupport							mNOM;					//Object that provide some wrappers and new "NOM" functions
+        StructAnalysis						mStructAnalysis;					//Object to facilitate calls to libStruct library
+        NOMSupport							mNOM;								//Object that provide some wrappers and new "NOM" functions
         IntStringHashTable   			    _oMapRateRule;
 
-        string                              convertCompartmentToC(const string& compartmentName);
+        string      		                convertCompartmentToC(const string& compartmentName);
         string                              convertSpeciesToBc(const string& speciesName);
         string                              convertSpeciesToY(const string& speciesName);
         string                              convertSymbolToC(const string& compartmentName);
