@@ -45,17 +45,6 @@ class RR_DECLSPEC CSharpGenerator : public ModelGenerator
     public:
 									        CSharpGenerator();
 		virtual						       ~CSharpGenerator();
-        void								Reset();
-        int                                 getNumberOfReactions();
-        StringList                          getBoundarySpeciesList();
-        StringList                          getCompartmentList();
-        StringList                          getConservationList();
-        StringList                          getFloatingSpeciesConcentrationList();
-        StringList                          getGlobalParameterList();
-        StringList                          getLocalParameterList(int reactionId);
-        StringList  	                   	getReactionNames();
-        StringList	                        Warnings;
-        SymbolList 							ModifiableSpeciesReferenceList;
 
     	// Generates the Model Code from the SBML string
     	string 								generateModelCode(const string& sbmlStr);

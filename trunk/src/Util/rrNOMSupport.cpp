@@ -94,7 +94,7 @@ double NOMSupport::getValue(const string& sId)
         return oParameter->getValue();
     }
 
-    for (int i = 0; i < mModel->getNumReactions(); i++)
+    for (u_int i = 0; i < mModel->getNumReactions(); i++)
     {
         Reaction* reaction = mModel->getReaction(i);
         for (int j = 0; j < reaction->getNumReactants(); j++)

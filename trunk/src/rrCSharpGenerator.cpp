@@ -135,11 +135,8 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     WriteSetBoundaryConditions(sb);
     WriteSetCompartmentVolumes(sb);
     WriteSetParameterValues(sb, _NumReactions);
+   	WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
 
-//    if(mStructAnalysis.GetGammaMatrix()) //Todo: If there is no Gamma matrix, some problems in the next functions?
-    {
-    	WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
-    }
 
     // Get the L0 matrix
     int nrRows;
@@ -149,7 +146,6 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
 
     WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
     int numOfRules = WriteComputeRules(sb, _NumReactions);
-
     WriteComputeAllRatesOfChange(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
     WriteComputeReactionRates(sb, _NumReactions);
     WriteEvalModel(sb, _NumReactions, _NumIndependentSpecies, _NumFloatingSpecies, numOfRules);

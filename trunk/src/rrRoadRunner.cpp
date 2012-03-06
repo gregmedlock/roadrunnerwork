@@ -40,7 +40,6 @@ _Nr(NULL),
 mModel(NULL)
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
-
 	mModelGenerator = new CSharpGenerator();
 }
 
