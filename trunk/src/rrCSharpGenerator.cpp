@@ -7,10 +7,13 @@
 #include "rrCSharpGenerator.h"
 #include "libstructural.h"
 #include "rrStringListContainer.h"
+#include "rrStringUtils.h"
 #include "rrUtils.h"
 #include "rrRule.h"
 #include "rrScanner.h"
 #include "rrLogger.h"
+#include "rrRoadRunner.h"
+#include "rrException.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -2380,5 +2383,60 @@ void CSharpGenerator::WriteSetInitialConditions(StringBuilder& sb, const int& nu
     sb.Append(NL());
 	sb.Append("\t}" + NL() + NL());
 }
+
+
+
+string CSharpGenerator::convertSpeciesToY(const string& speciesName)
+{
+    int index;
+    if (floatingSpeciesConcentrationList.find(speciesName, index))
+    {
+        return "_y[" + ToString(index) + "]";
+    }
+    throw new SBWApplicationException("Internal Error: Unable to locate species: " + speciesName);
+}
+
+string CSharpGenerator::convertSpeciesToBc(const string& speciesName)
+{
+    int index;
+    if (boundarySpeciesList.find(speciesName, index))
+    {
+        return "_bc[" + ToString(index) + "]";
+    }
+	throw SBWApplicationException("Internal Error: Unable to locate species: " + speciesName);
+}
+
+string CSharpGenerator::convertCompartmentToC(const string& compartmentName)
+{
+    int index;
+    if (compartmentList.find(compartmentName, index))
+    {
+        return "_c[" + ToString(index) + "]";
+    }
+
+    throw RRException("Internal Error: Unable to locate compartment: " + compartmentName);
+}
+
+string CSharpGenerator::convertSymbolToGP(const string& parameterName)
+{
+    int index;
+    if (globalParameterList.find(parameterName, index))
+    {
+        return "_gp[" + ToString(index) + "]";
+    }
+      throw SBWApplicationException("Internal Error: Unable to locate parameter: " + parameterName);
+}
+
+string CSharpGenerator::convertSymbolToC(const string& compartmentName)
+{
+	int index;
+    if (compartmentList.find(compartmentName, index))
+    {
+        return "_c[" + ToString(index) + "]";
+    }
+      throw SBWApplicationException("Internal Error: Unable to locate compartment: " + compartmentName);
+}
+
+
 
 }//rr namespace

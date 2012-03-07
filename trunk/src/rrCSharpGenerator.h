@@ -9,7 +9,14 @@ namespace rr
 class RR_DECLSPEC CSharpGenerator : public ModelGenerator
 {
 	protected:
+
         string                              convertUserFunctionExpression(const string& equation);
+        string                            	convertCompartmentToC(const string& compartmentName);
+        string                              convertSpeciesToBc(const string& speciesName);
+        string                              convertSpeciesToY(const string& speciesName);
+        string                              convertSymbolToC(const string& compartmentName);
+        string                              convertSymbolToGP(const string& parameterName);
+
         void 								SubstituteEquation(const string& reactionName, Scanner& s, StringBuilder& sb);
         void 								SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb);
         void 								SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb);
