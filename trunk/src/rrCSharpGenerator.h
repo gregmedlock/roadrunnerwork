@@ -57,6 +57,5 @@ class RR_DECLSPEC CSharpGenerator : public ModelGenerator
     	string 								generateModelCode(const string& sbmlStr);
 };
 
-
 }
 #endif

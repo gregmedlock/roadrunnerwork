@@ -6,11 +6,7 @@
 #include "rrObject.h"
 #include "rrStringList.h"
 #include "rrSymbolList.h"
-//#include "rrDoubleMatrix.h"
 #include "rrStringBuilder.h"
-
-//#include "rrRoadRunner.h"
-
 #include "rrLibStructSupport.h"
 #include "rrNOMSupport.h"
 #include "rrScanner.h"

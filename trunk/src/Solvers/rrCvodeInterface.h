@@ -1,4 +1,4 @@
-#ifndef rrCvodeInterfaceH
+﻿#ifndef rrCvodeInterfaceH
 #define rrCvodeInterfaceH
 #include <string>
 #include "rrObject.h"

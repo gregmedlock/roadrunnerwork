@@ -10,6 +10,7 @@
 #include "rrStreamWriter.h"
 #include "rrLogger.h"
 #include "rrCSharpGenerator.h"
+#include "rrCGenerator.h"
 //---------------------------------------------------------------------------
 #if defined(__CODEGEARC__)
 #pragma package(smart_init)
@@ -31,7 +32,6 @@ DiffStepSize(0.05),
 emptyModelStr("A model needs to be loaded before one can use this method"),
 STEADYSTATE_THRESHOLD(1.E-2),
 cvode(NULL),
-mModelGenerator(NULL),
 mCompiler(NULL),
 _L(NULL),
 _L0(NULL),
@@ -40,18 +40,25 @@ _Nr(NULL),
 mModel(NULL)
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
-	mModelGenerator = new CSharpGenerator();
+	mCSharpGenerator = new CSharpGenerator();
+	mCGenerator = new CGenerator();
+    mModelGenerator = mCGenerator; //Switch between?
 }
 
 RoadRunner::~RoadRunner()
 {
 	Log(lDebug4)<<"In RoadRunner DTOR";
-	delete mModelGenerator;
+	delete mCSharpGenerator;
+	delete mCGenerator;
     delete mModel;
     delete cvode;
     delete mCompiler;
 }
 
+ModelGenerator*	RoadRunner::GetCodeGenerator()
+{
+	return mModelGenerator;
+}
 
 void RoadRunner::Reset()
 {
@@ -107,15 +114,9 @@ void RoadRunner::InitializeModel(IModel* aModel)
         selectionList[i + 1].index = i;
         selectionList[i + 1].selectionType = clFloatingSpecies;
     }
-
-//    _oSteadyStateSelection = NULL;
 }
 
 
-//        //private ArrayList _oSteadyStateSelection;
-//        private TSelectionRecord[] _oSteadyStateSelection;
-//        private string _sModelCode;
-//
 //        private CvodeInterface cvode;
 //        //kinSolverInterface kinSolver;  // Use NLEQ1 instead
 //

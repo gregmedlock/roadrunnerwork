@@ -54,6 +54,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		CvodeInterface 				   *cvode;
 		ISteadyStateSolver			   *steadyStateSolver;
         vector<TSelectionRecord> 		selectionList;
+        ModelGenerator				   *mCSharpGenerator;
+        ModelGenerator				   *mCGenerator;
         ModelGenerator				   *mModelGenerator;
         Compiler					   *mCompiler;
 
@@ -71,7 +73,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
         vector<double> 					computeSteadyStateValues(const vector<TSelectionRecord>& oSelection, const bool& computeSteadyState);
         double 							computeSteadyStateValue(const TSelectionRecord& record);
         list<string> 					getParameterNames();
-
 
 	public:
     	// Properties -----------------------------------------------------------------------------
@@ -93,13 +94,11 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		//Functions --------------------------------------------------------------------
         								RoadRunner();
         virtual 					   ~RoadRunner();
+        ModelGenerator*					GetCodeGenerator();
         void							Reset();
         string							GetModelSourceCode();
     	double* 						runSimulation();
 		void 							InitializeModel(IModel* model);
-		//static void                   DumpResults(TextWriter writer, double[,] data, ArrayList colLabels);
-    	//static void                   TestDirectory(string directory, bool testSubDirs);
-    	//static void                   TestDirectory(string directory, bool testSubDirs, string pattern);
         static void                     SimulateSBMLFile(const string& fileName, const bool& useConservationLaws);
         static void                     SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
         void                            loadSBMLFromFile(const string& fileName);

@@ -22,7 +22,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<Defines>EXPORT_RR;USE_PCH;NO_NOM_DLL;NO_LIBSTRUCT_DLL;$(Defines)</Defines>
+			<Defines>EXPORT_RR;NO_NOM_DLL;NO_LIBSTRUCT_DLL;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>

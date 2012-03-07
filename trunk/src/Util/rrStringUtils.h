@@ -17,6 +17,7 @@ string 			RR_DECLSPEC ChangeFileNameExtensionTo(const string& theFileName, const
 string			RR_DECLSPEC Trim(const string& str);
 bool			RR_DECLSPEC StartsWith(const string& src, const string& sub);
 bool			RR_DECLSPEC EndsWith(const string& src, const string& sub);
+
 //conversions
 string			RR_DECLSPEC IntToStr(const int& nt);
 int				RR_DECLSPEC StrToInt(const string& nt);
@@ -27,9 +28,7 @@ vector<string> 	RR_DECLSPEC SplitString(const string& input, const char& delimit
 int				RR_DECLSPEC ToInt(const string& str);
 bool			RR_DECLSPEC ToBool(const string& str);
 double			RR_DECLSPEC ToDouble(const string& str);
-//string			RR_DECLSPEC ToUpperOrLowerCase(const string& inStr, int (*func)(int) = std::toupper);
-//string			RR_DECLSPEC ToUpper(const string& inStr);
-//string			RR_DECLSPEC ToLower(const string& inStr);
+
 string			RR_DECLSPEC ToString(const bool& b);
 string			RR_DECLSPEC ToString(const double& d, const string& format = "%f");
 string			RR_DECLSPEC ToString(const unsigned int n, const int nBase=10);
@@ -51,7 +50,6 @@ string 			RR_DECLSPEC Format(const string& src, const string& arg1, const string
 
 string 			RR_DECLSPEC Format(const string& src, const string& arg1, const int& arg2);
 string 			RR_DECLSPEC Format(const string& src, const string& arg1, const int& arg2, const string& arg3);
-
 
 string 			RR_DECLSPEC Substitute(const string& src, const string& thisOne, const string& withThisOne, const int& howMany = -1);
 string 			RR_DECLSPEC Substitute(const string& src, const string& thisOne, const int& withThisOne, const int& howMany = -1);

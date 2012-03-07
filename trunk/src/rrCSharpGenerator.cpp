@@ -24,14 +24,10 @@ using namespace LIB_STRUCTURAL;
 namespace rr
 {
 CSharpGenerator::CSharpGenerator()
-
 {
-	mNOM.Reset();
-    mStructAnalysis.Reset();
 }
 
 CSharpGenerator::~CSharpGenerator(){}
-
 
 // Generates the Model Code from the SBML string
 string CSharpGenerator::generateModelCode(const string& sbmlStr)
