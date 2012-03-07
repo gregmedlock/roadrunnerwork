@@ -6,7 +6,7 @@
 //---------------------------------------------------------------------------
 extern "C"
 {
-#include "00001-sbml-l2v4.h"
+#include "../../rr_code_output/c_from_rr++/00001-sbml-l2v4.h"
 }
 
 #pragma argsused
@@ -18,7 +18,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
     gTheModel._gp[0] = 2;
 	InitModel();
-    cout<<"Global parameter is now"<<gTheModel._gp[0]<<"\n";
+    cout<<"Global parameter is now: "<<gTheModel._gp[0]<<"\n";
 	return 0;
 }
 

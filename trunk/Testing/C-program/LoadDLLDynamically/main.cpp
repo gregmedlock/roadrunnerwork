@@ -4,11 +4,6 @@
 #include <tchar.h>
 #include <iostream>
 //---------------------------------------------------------------------------
-//extern "C"
-//{
-//#include "00001-sbml-l2v4.h"
-//}
-
 #pragma argsused
 using namespace std;
 
