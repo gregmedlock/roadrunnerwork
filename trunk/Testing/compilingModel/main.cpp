@@ -126,7 +126,7 @@ int _tmain()
         InitModel = (cfunc1) GetProcAddress((HMODULE) dllHandle, "InitModel");
         if(InitModel == NULL)
         {
-            cout << "Unable to load function." << endl;
+            Log(lError) << "Unable to load function." << endl;
             FreeLibrary((HMODULE) dllHandle);
             return -1;
         }
@@ -134,32 +134,32 @@ int _tmain()
         GetModelName = (cfunc2) GetProcAddress((HMODULE) dllHandle, "GetModelName");
         if(GetModelName == NULL)
         {
-            cout << "Unable to load function." << endl;
+            Log(lError) << "Unable to load function." << endl;
             FreeLibrary((HMODULE) dllHandle);
             return -1;
         }
 
-        cout<<"Calling init...";
+        Log(lInfo)<<"Calling init...";
         int res = InitModel();
-        cout<<"The result was: "<<res;
+        Log(lInfo)<<"The result was: "<<res;
 
         char* modelName = GetModelName();
         if(modelName)
         {
-        	cout<<"Model Name is"<<modelName;
+        	Log(lInfo)<<"Model Name is:"<<modelName;
         }
 
     //    cout<<"Global parameter is now"<<gTheModel._gp[0]<<"\n";
         FreeLibrary((HMODULE) dllHandle);
 
-        cout<<"\nCopyright: "<<roadRunner->getCopyright()<<endl;
+        Log(lInfo)<<"\nCopyright: "<<roadRunner->getCopyright()<<endl;
         delete roadRunner;
 
 
     }
     catch(Exception& ex)
     {
-        cout<<"RoadRunner exception occured: "<<ex.what()<<endl;
+        Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
     }
 
   	//-------------------------------------

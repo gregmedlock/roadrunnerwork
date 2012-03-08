@@ -20,19 +20,19 @@ ModelState::ModelState(IModel& model)
 void ModelState::InitializeFromModel(IModel& model)
 {
     model.convertToConcentrations();
-    _FloatingSpeciesConcentrations 	= GetCopy(model.Get_y());
-    _BoundarySpeciesConcentrations 	= GetCopy(model.Get_bc());
-    _CompartmentVolumes 			= GetCopy(model.Get_c());
-    _GlobalParameters 				= GetCopy(model.Get_gp());
-    _ConservedTotals 				= GetCopy(model.Get_ct());
-    _DyDt 							= GetCopy(model.Get_dydt());
-    _Rates 							= GetCopy(model.Get_rates());
-    _RateRules 						= GetCopy(model.Get_rateRules());
-    _ModifiableSpeciesReferences 	= GetCopy(model.Get_sr());
-    _Time 							= model.Get_time();
-    _EventStatusArray 		   		= GetCopy(model.Get_eventStatusArray());
-    _EventTests 			   		= GetCopy(model.Get_eventTests());
-    _PreviousEventStatusArray  		= GetCopy(model.Get_previousEventStatusArray());
+    mFloatingSpeciesConcentrations 	= GetCopy(model.Get_y());
+    mBoundarySpeciesConcentrations 	= GetCopy(model.Get_bc());
+    mCompartmentVolumes 			= GetCopy(model.Get_c());
+    mGlobalParameters 				= GetCopy(model.Get_gp());
+    mConservedTotals 				= GetCopy(model.Get_ct());
+    mDyDt 							= GetCopy(model.Get_dydt());
+    mRates 							= GetCopy(model.Get_rates());
+    mRateRules 						= GetCopy(model.Get_rateRules());
+    mModifiableSpeciesReferences 	= GetCopy(model.Get_sr());
+    mTime 							= model.Get_time();
+    mEventStatusArray 		   		= GetCopy(model.Get_eventStatusArray());
+    mEventTests 			   		= GetCopy(model.Get_eventTests());
+    mPreviousEventStatusArray  		= GetCopy(model.Get_previousEventStatusArray());
 }
 
 vector<double> ModelState::GetCopy(const vector<double>& oVector)
@@ -76,23 +76,23 @@ vector<bool> ModelState::GetCopy(const vector<bool>& oVector)
 //
 void ModelState::AssignToModel(IModel& model)
 {
-   model.y = _FloatingSpeciesConcentrations;
-   model.bc = _BoundarySpeciesConcentrations;
-   model.c = _CompartmentVolumes;
-   model.gp = _GlobalParameters;
-   model.ct = _ConservedTotals;
+   model.y = mFloatingSpeciesConcentrations;
+   model.bc = mBoundarySpeciesConcentrations;
+   model.c = mCompartmentVolumes;
+   model.gp = mGlobalParameters;
+   model.ct = mConservedTotals;
 
-   model.dydt = _DyDt;
-   model.rates = _Rates;
-   model.rateRules = _RateRules;
+   model.dydt = mDyDt;
+   model.rates = mRates;
+   model.rateRules = mRateRules;
 
-   model.eventTests = _EventTests;
-   model.eventStatusArray = _EventStatusArray;
-   model.previousEventStatusArray = _PreviousEventStatusArray;
-   model.time = _Time;
+   model.eventTests = mEventTests;
+   model.eventStatusArray = mEventStatusArray;
+   model.previousEventStatusArray = mPreviousEventStatusArray;
+   model.time = mTime;
    model.convertToAmounts();
 
-   model.sr = _ModifiableSpeciesReferences;
+   model.sr = mModifiableSpeciesReferences;
 }
 
 

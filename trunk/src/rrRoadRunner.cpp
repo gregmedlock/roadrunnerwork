@@ -22,9 +22,9 @@ namespace rr
 {
 
 //Initialize statics..
-bool RoadRunner::_bComputeAndAssignConservationLaws = true;
-bool RoadRunner::_bConservedTotalChanged 			= false;
-bool RoadRunner::_ReMultiplyCompartments 			= false;
+bool RoadRunner::mbComputeAndAssignConservationLaws = true;
+bool RoadRunner::mbConservedTotalChanged 			= false;
+bool RoadRunner::mReMultiplyCompartments 			= false;
 
 RoadRunner::RoadRunner()
 :
@@ -33,10 +33,10 @@ emptyModelStr("A model needs to be loaded before one can use this method"),
 STEADYSTATE_THRESHOLD(1.E-2),
 cvode(NULL),
 mCompiler(NULL),
-_L(NULL),
-_L0(NULL),
-_N(NULL),
-_Nr(NULL),
+mL(NULL),
+mL0(NULL),
+mN(NULL),
+mNr(NULL),
 mModel(NULL)
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
@@ -71,7 +71,7 @@ void RoadRunner::Reset()
 
 string RoadRunner::GetModelSourceCode()
 {
-	return _sModelCode;
+	return mModelCode;
 }
 
 void RoadRunner::InitializeModel(IModel* aModel)
@@ -87,7 +87,7 @@ void RoadRunner::InitializeModel(IModel* aModel)
     //model.Warnings.AddRange(ModelGenerator.Instance.Warnings);
 
     modelLoaded = true;
-    _bConservedTotalChanged = false;
+    mbConservedTotalChanged = false;
 
     model.setCompartmentVolumes();
     model.initializeInitialConditions();
@@ -100,7 +100,10 @@ void RoadRunner::InitializeModel(IModel* aModel)
     model.computeRules(model.y);
     model.convertToAmounts();
 
-    if (_bComputeAndAssignConservationLaws) model.computeConservedTotals();
+    if (mbComputeAndAssignConservationLaws)
+    {
+    	model.computeConservedTotals();
+    }
 
     cvode = new CvodeInterface(mModel);
 
@@ -520,14 +523,14 @@ void RoadRunner::loadSBML(const string& sbml)
 
         sbmlStr = sbml;
 
-		_sModelCode = mModelGenerator->generateModelCode(sbmlStr);
+		mModelCode = mModelGenerator->generateModelCode(sbmlStr);
 
-        if(!_sModelCode.size())
+        if(!mModelCode.size())
         {
             throw RRException("Failed to generate Model Code");
         }
         Log(lDebug3)<<" ------ Model Code --------\n"
-        			<<_sModelCode
+        			<<mModelCode
                     <<" ----- End of Model Code -----\n";
 
  		if(!mCompiler)
@@ -556,7 +559,7 @@ void RoadRunner::loadSBML(const string& sbml)
                     sw.WriteLine("ErrorMessage: ");
                     //sw.WriteLine(mCompiler->getLastErrors());
                     sw.WriteLine("C# Model Code: ");
-                    sw.Write(_sModelCode);
+                    sw.Write(mModelCode);
                     sw.Close();
                 }
                 catch(...)

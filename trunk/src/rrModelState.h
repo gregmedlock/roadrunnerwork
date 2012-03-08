@@ -15,19 +15,19 @@ namespace rr
 class RR_DECLSPEC ModelState : public rrObject
 {
     private:
-        vector<double>                  _BoundarySpeciesConcentrations;
-        vector<double>                  _CompartmentVolumes;
-        vector<double>                  _ConservedTotals;
-        vector<double>                  _DyDt;
-        vector<bool>                    _EventStatusArray;
-        vector<double>                  _EventTests;
-        vector<double>                  _FloatingSpeciesConcentrations;
-        vector<double>                  _GlobalParameters;
-        vector<bool>                    _PreviousEventStatusArray;
-        vector<double>                  _RateRules;
-        vector<double>                  _Rates;
-        vector<double>                  _ModifiableSpeciesReferences;
-        double 							_Time;
+        vector<double>                  mBoundarySpeciesConcentrations;
+        vector<double>                  mCompartmentVolumes;
+        vector<double>                  mConservedTotals;
+        vector<double>                  mDyDt;
+        vector<bool>                    mEventStatusArray;
+        vector<double>                  mEventTests;
+        vector<double>                  mFloatingSpeciesConcentrations;
+        vector<double>                  mGlobalParameters;
+        vector<bool>                    mPreviousEventStatusArray;
+        vector<double>                  mRateRules;
+        vector<double>                  mRates;
+        vector<double>                  mModifiableSpeciesReferences;
+        double 							mTime;
         void 							InitializeFromModel(IModel& model);
 
     public:

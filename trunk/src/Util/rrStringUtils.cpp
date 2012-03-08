@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <sstream>
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 #if defined(__CODEGEARC__)
@@ -14,9 +15,26 @@
 #endif
 //---------------------------------------------------------------------------
 
-
+using namespace std;
 namespace rr
 {
+
+string tabs(const int& nr)
+{
+	stringstream some_tabs;
+    for(int i = 0;i < nr; i++)
+    {
+    	some_tabs <<"\t";
+    }
+    return some_tabs.str();
+}
+
+string NL()
+{
+	stringstream newLine;
+    newLine << endl;
+    return newLine.str();
+}
 
 string GetFileNameNoPath(const string& fName)
 {

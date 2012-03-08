@@ -11,6 +11,8 @@ using std::vector;
 
 namespace rr
 {
+string          RR_DECLSPEC tabs(const int& nr);
+string          RR_DECLSPEC NL();
 
 string 			RR_DECLSPEC GetFileNameNoPath(const string& fName);
 string 			RR_DECLSPEC ChangeFileNameExtensionTo(const string& theFileName, const string& newExtension);

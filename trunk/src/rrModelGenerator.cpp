@@ -41,7 +41,7 @@ void ModelGenerator::Reset()
 
 int ModelGenerator::NumAdditionalRates()
 {
-	return _oMapRateRule.size();
+	return mMapRateRule.size();
 }
 
 StringList ModelGenerator::getCompartmentList()
@@ -176,19 +176,12 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
     return sb.ToString();
 }
 
-string ModelGenerator::NL()
-{
-	stringstream newLine;
-    newLine << endl;
-    return newLine.str();
-}
-
 double* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
 {
 	double* L0;
     try
     {
-        if (_NumDependentSpecies > 0)
+        if (mNumDependentSpecies > 0)
         {
         	vector<string> RowLabels;
             vector<string> ColumnLabels; //Todo: Filling these out here is meaningless?

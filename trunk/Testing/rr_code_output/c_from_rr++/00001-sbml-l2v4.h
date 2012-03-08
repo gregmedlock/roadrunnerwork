@@ -17,8 +17,8 @@
 
 D_S struct TModel
 {
-	char		 mModelName[2048];
-	char** 	_Warnings;
+	char*				mModelName;
+	char**				mWarnings;
 	double _gp[1];		// Vector containing all the global parameters in the System  
 } gTheModel;	//This is global data in the DLL
 

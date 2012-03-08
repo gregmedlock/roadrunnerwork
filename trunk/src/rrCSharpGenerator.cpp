@@ -44,29 +44,29 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
 	mNOM.loadSBML(sASCII.c_str(), "time");
 
 
-    _ModelName = mNOM.getModelName();
-    if(!_ModelName.size())
+    mModelName = mNOM.getModelName();
+    if(!mModelName.size())
     {
         Log(lError)<<"Model name is empty! Exiting...";
     	return "";
     }
 
-    Log(lDebug3)<<"Model name is "<<_ModelName;
-    _NumReactions = mNOM.getNumReactions();
+    Log(lDebug3)<<"Model name is "<<mModelName;
+    mNumReactions = mNOM.getNumReactions();
 
-    Log(lDebug3)<<"Number of reactions:"<<_NumReactions;
+    Log(lDebug3)<<"Number of reactions:"<<mNumReactions;
 
 	globalParameterList.Clear();
     ModifiableSpeciesReferenceList.Clear();
-    localParameterList.reserve(_NumReactions);
+    localParameterList.reserve(mNumReactions);
     reactionList.Clear();
     boundarySpeciesList.Clear();
     floatingSpeciesConcentrationList.Clear();
     floatingSpeciesAmountsList.Clear();
     compartmentList.Clear();
     conservationList.Clear();
-    _functionNames.empty();
-    _functionParameters.empty();
+    mfunctionNames.empty();
+    mfunctionParameters.empty();
 
    	LibStructural* instance = LibStructural::getInstance();
 	string msg;
@@ -87,42 +87,42 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
 
 	Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
-	if (RoadRunner::_bComputeAndAssignConservationLaws)
+	if (RoadRunner::mbComputeAndAssignConservationLaws)
     {
-        _NumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
+        mNumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
         independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
         dependentSpeciesList   = mStructAnalysis.GetDependentSpeciesIds();
     }
     else
     {
-        _NumIndependentSpecies = mStructAnalysis.GetNumSpecies();
+        mNumIndependentSpecies = mStructAnalysis.GetNumSpecies();
         independentSpeciesList = mStructAnalysis.GetSpeciesIds();
     }
 
     sb.Append("//************************************************************************** " + NL());
 
     // Load the compartment array (name and value)
-	_NumCompartments 		= ReadCompartments();
+	mNumCompartments 		= ReadCompartments();
 
     // Read FloatingSpecies
-    _NumFloatingSpecies 	= ReadFloatingSpecies();
-    _NumDependentSpecies 	= _NumFloatingSpecies - _NumIndependentSpecies;
+    mNumFloatingSpecies 	= ReadFloatingSpecies();
+    mNumDependentSpecies 	= mNumFloatingSpecies - mNumIndependentSpecies;
 
     // Load the boundary species array (name and value)
-	_NumBoundarySpecies 	= ReadBoundarySpecies();
+	mNumBoundarySpecies 	= ReadBoundarySpecies();
 
     // Get all the parameters into a list, global and local
-    _NumGlobalParameters 	= ReadGlobalParameters();
-	_NumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
+    mNumGlobalParameters 	= ReadGlobalParameters();
+	mNumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
 
     // Load up local parameters next
-	ReadLocalParameters(_NumReactions, _LocalParameterDimensions, _TotalLocalParmeters);
-    _NumEvents = mNOM.getNumEvents();
+	ReadLocalParameters(mNumReactions, mLocalParameterDimensions, mTotalLocalParmeters);
+    mNumEvents = mNOM.getNumEvents();
 
     WriteClassHeader(sb);
     WriteOutVariables(sb);
     WriteOutSymbolTables(sb);
-    WriteResetEvents(sb, _NumEvents);
+    WriteResetEvents(sb, mNumEvents);
     WriteSetConcentration(sb);
     WriteGetConcentration(sb);
     WriteConvertToAmounts(sb);
@@ -130,11 +130,11 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     WriteProperties(sb);
     WriteAccessors(sb);
     WriteUserDefinedFunctions(sb);
-    WriteSetInitialConditions(sb, _NumFloatingSpecies);
+    WriteSetInitialConditions(sb, mNumFloatingSpecies);
     WriteSetBoundaryConditions(sb);
     WriteSetCompartmentVolumes(sb);
-    WriteSetParameterValues(sb, _NumReactions);
-   	WriteComputeConservedTotals(sb, _NumFloatingSpecies, _NumDependentSpecies);
+    WriteSetParameterValues(sb, mNumReactions);
+   	WriteComputeConservedTotals(sb, mNumFloatingSpecies, mNumDependentSpecies);
 
 
     // Get the L0 matrix
@@ -143,14 +143,14 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     double* aL0 = InitializeL0(nrRows, nrCols); 	//Todo: What is this doing? answer.. it is used below..
     DoubleMatrix L0(aL0,nrRows, nrCols); 		//How many rows and cols?? We need to know that in order to use the matrix properly!
 
-    WriteUpdateDependentSpecies(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
-    int numOfRules = WriteComputeRules(sb, _NumReactions);
-    WriteComputeAllRatesOfChange(sb, _NumIndependentSpecies, _NumDependentSpecies, L0);
-    WriteComputeReactionRates(sb, _NumReactions);
-    WriteEvalModel(sb, _NumReactions, _NumIndependentSpecies, _NumFloatingSpecies, numOfRules);
-    WriteEvalEvents(sb, _NumEvents, _NumFloatingSpecies);
-    WriteEventAssignments(sb, _NumReactions, _NumEvents);
-    WriteEvalInitialAssignments(sb, _NumReactions);
+    WriteUpdateDependentSpecies(sb, mNumIndependentSpecies, mNumDependentSpecies, L0);
+    int numOfRules = WriteComputeRules(sb, mNumReactions);
+    WriteComputeAllRatesOfChange(sb, mNumIndependentSpecies, mNumDependentSpecies, L0);
+    WriteComputeReactionRates(sb, mNumReactions);
+    WriteEvalModel(sb, mNumReactions, mNumIndependentSpecies, mNumFloatingSpecies, numOfRules);
+    WriteEvalEvents(sb, mNumEvents, mNumFloatingSpecies);
+    WriteEventAssignments(sb, mNumReactions, mNumEvents);
+    WriteEvalInitialAssignments(sb, mNumReactions);
     WriteTestConstraints(sb);
 	sb.AppendFormat("}{0}{0}", NL());
 	return sb.ToString();
@@ -381,7 +381,7 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
                     {
                         sb.Append("supportFunctions._piecewise");
                     }
-                    else if (!_functionParameters.Contains(s.tokenString))
+                    else if (!mfunctionParameters.Contains(s.tokenString))
                     {
                     	throw Exception("Token '" + s.tokenString + "' not recognized.");
                     }
@@ -716,7 +716,7 @@ void CSharpGenerator::SubstituteEquation(const string& reactionName, Scanner& s,
             bReplaced = true;
         }
         if (!bReplaced &&
-            (_functionParameters.size() != 0 && !_functionParameters.Contains(s.tokenString)))
+            (mfunctionParameters.size() != 0 && !mfunctionParameters.Contains(s.tokenString)))
         {
             throw Exception("Token '" + s.tokenString + "' not recognized.");
         }
@@ -763,7 +763,7 @@ void CSharpGenerator::SubstituteWords(const string& reactionName, bool bFixAmoun
     {
         sb.AppendFormat("_c[{0}]", index);
     }
-    else if (_functionNames.Contains(s.tokenString))
+    else if (mfunctionNames.Contains(s.tokenString))
     {
         sb.AppendFormat("{0} ", s.tokenString);
     }
@@ -894,7 +894,7 @@ int CSharpGenerator::ReadFloatingSpecies()
 {
     // Load a reordered list into the variable list.
     StringList reOrderedList;
-    if ((RoadRunner::_bComputeAndAssignConservationLaws))
+    if ((RoadRunner::mbComputeAndAssignConservationLaws))
 	{
        reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
 	}
@@ -1046,7 +1046,7 @@ void CSharpGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, const int&
     sb.Append("\t\tdouble[] dTemp = new double[amounts.Length + rateRules.Length];" + NL());
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
-        sb.AppendFormat("\t\tdTemp[{0}] = {1};{2}", i, _oMapRateRule[i], NL());
+        sb.AppendFormat("\t\tdTemp[{0}] = {1};{2}", i, mMapRateRule[i], NL());
     }
     //sb.Append("\t\trateRules.CopyTo(dTemp, 0);" + NL());
     sb.Append("\t\tamounts.CopyTo(dTemp, rateRules.Length);" + NL());
@@ -1241,7 +1241,7 @@ void CSharpGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
 
           	string sName = aList[0];
           	//sName.Trim();
-            _functionNames.Add(sName);
+            mfunctionNames.Add(sName);
             StringList oArguments = oList[1];
             StringList list2 = oList[2];
             string sBody = list2[0];
@@ -1252,7 +1252,7 @@ void CSharpGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
             for (int j = 0; j < oArguments.size(); j++)
             {
                 sb.Append("double " + (string)oArguments[j]);
-                _functionParameters.Add((string)oArguments[j]);
+                mfunctionParameters.Add((string)oArguments[j]);
                 if (j < oArguments.size() - 1)
                     sb.Append(", ");
             }
@@ -1500,11 +1500,11 @@ void CSharpGenerator::WriteAccessors(StringBuilder& sb)
  void CSharpGenerator::WriteOutVariables(StringBuilder& sb)
 {
       sb.Append("\tprivate List<string> _Warnings = new List<string>();" + NL());
-      sb.Append("\tprivate double[] _gp = new double[" + ToString(_NumGlobalParameters + _TotalLocalParmeters) +
+      sb.Append("\tprivate double[] _gp = new double[" + ToString(mNumGlobalParameters + mTotalLocalParmeters) +
                 "];           // Vector containing all the global parameters in the System  " + NL());
-      sb.Append("\tprivate double[] _sr = new double[" + ToString(_NumModifiableSpeciesReferences) +
+      sb.Append("\tprivate double[] _sr = new double[" + ToString(mNumModifiableSpeciesReferences) +
                 "];           // Vector containing all the modifiable species references  " + NL());
-      sb.Append("\tprivate double[][] _lp = new double[" + ToString(_NumReactions) +
+      sb.Append("\tprivate double[][] _lp = new double[" + ToString(mNumReactions) +
                 "][];       // Vector containing all the local parameters in the System  " + NL());
 
       sb.Append("\tprivate double[] _y = new double[", floatingSpeciesConcentrationList.size(),
@@ -1516,31 +1516,31 @@ void CSharpGenerator::WriteAccessors(StringBuilder& sb)
       sb.Append("\tprivate double[] _amounts = new double[", floatingSpeciesConcentrationList.size(),
                 "];      // Vector containing the amounts of all floating species ", NL());
 
-      sb.Append("\tprivate double[] _bc = new double[", _NumBoundarySpecies,
+      sb.Append("\tprivate double[] _bc = new double[", mNumBoundarySpecies,
                 "];           // Vector containing all the boundary species concentration values   " , NL());
 
-      sb.Append("\tprivate double[] _c = new double[" , _NumCompartments ,
+      sb.Append("\tprivate double[] _c = new double[" , mNumCompartments ,
                 "];            // Vector containing all the compartment values   " + NL());
 
       sb.Append("\tprivate double[] _dydt = new double[" , floatingSpeciesConcentrationList.size() ,
                 "];         // Vector containing rates of changes of all species   " , NL());
 
-      sb.Append("\tprivate double[] _rates = new double[" , _NumReactions ,
+      sb.Append("\tprivate double[] _rates = new double[" , mNumReactions ,
                 "];        // Vector containing the rate laws of all reactions    " , NL());
 
-      sb.Append("\tprivate double[] _ct = new double[" , _NumDependentSpecies ,
+      sb.Append("\tprivate double[] _ct = new double[" , mNumDependentSpecies ,
                 "];           // Vector containing values of all conserved sums      " , NL());
 
-      sb.Append("\tprivate double[] _eventTests = new double[" , _NumEvents ,
+      sb.Append("\tprivate double[] _eventTests = new double[" , mNumEvents ,
                 "];   // Vector containing results of any event tests        " , NL());
 
-      sb.Append("\tprivate TEventDelayDelegate[] _eventDelay = new TEventDelayDelegate[" , _NumEvents ,
+      sb.Append("\tprivate TEventDelayDelegate[] _eventDelay = new TEventDelayDelegate[" , mNumEvents ,
                 "]; // array of trigger function pointers" , NL());
 
-      sb.Append("\tprivate bool[] _eventType = new bool[" , _NumEvents ,
+      sb.Append("\tprivate bool[] _eventType = new bool[" , mNumEvents ,
                 "]; // array holding the status whether events are useValuesFromTriggerTime or not" , NL());
 
-      sb.Append("\tprivate bool[] _eventPersistentType = new bool[" , _NumEvents ,
+      sb.Append("\tprivate bool[] _eventPersistentType = new bool[" , mNumEvents ,
                 "]; // array holding the status whether events are persitstent or not" , NL());
 
       sb.Append("\tprivate double _time;" , NL());
@@ -1556,36 +1556,36 @@ void CSharpGenerator::WriteAccessors(StringBuilder& sb)
       sb.Append("\tstring[] variableTable = new string[" , floatingSpeciesConcentrationList.size() , "];" , NL());
       sb.Append("\tstring[] boundaryTable = new string[" , boundarySpeciesList.size() , "];" , NL());
       sb.Append("\tstring[] globalParameterTable = new string[" , globalParameterList.size() , "];" , NL());
-      sb.Append("\tint[] localParameterDimensions = new int[" , _NumReactions , "];" , NL());
+      sb.Append("\tint[] localParameterDimensions = new int[" , mNumReactions , "];" , NL());
       sb.Append("\tprivate TEventAssignmentDelegate[] _eventAssignments;" , NL());
       sb.Append("\tprivate double[] _eventPriorities;" , NL());
       sb.Append("\tprivate TComputeEventAssignmentDelegate[] _computeEventAssignments;" , NL());
       sb.Append("\tprivate TPerformEventAssignmentDelegate[] _performEventAssignments;" , NL());
-      sb.Append("\tprivate bool[] _eventStatusArray = new bool[" , _NumEvents , "];" , NL());
-      sb.Append("\tprivate bool[] _previousEventStatusArray = new bool[" , _NumEvents , "];" , NL());
+      sb.Append("\tprivate bool[] _eventStatusArray = new bool[" , mNumEvents , "];" , NL());
+      sb.Append("\tprivate bool[] _previousEventStatusArray = new bool[" , mNumEvents , "];" , NL());
       sb.Append(NL());
       sb.Append("\tpublic TModel ()  " , NL());
       sb.Append("\t{" , NL());
 
-      sb.Append("\t\tnumIndependentVariables = " , _NumIndependentSpecies , ";" , NL());
-      sb.Append("\t\tnumDependentVariables = " , _NumDependentSpecies , ";" , NL());
-      sb.Append("\t\tnumTotalVariables = " , _NumFloatingSpecies , ";" , NL());
-      sb.Append("\t\tnumBoundaryVariables = " , _NumBoundarySpecies , ";" , NL());
+      sb.Append("\t\tnumIndependentVariables = " , mNumIndependentSpecies , ";" , NL());
+      sb.Append("\t\tnumDependentVariables = " , mNumDependentSpecies , ";" , NL());
+      sb.Append("\t\tnumTotalVariables = " , mNumFloatingSpecies , ";" , NL());
+      sb.Append("\t\tnumBoundaryVariables = " , mNumBoundarySpecies , ";" , NL());
       sb.Append("\t\tnumGlobalParameters = " , globalParameterList.size() , ";" , NL());
       sb.Append("\t\tnumCompartments = " , compartmentList.size() , ";" , NL());
       sb.Append("\t\tnumReactions = " , reactionList.size() , ";" , NL());
-      sb.Append("\t\tnumEvents = " , _NumEvents , ";" , NL());
+      sb.Append("\t\tnumEvents = " , mNumEvents , ";" , NL());
       sb.Append("\t\tInitializeDelays();" , NL());
 
       // Declare any eventAssignment delegates
-      if (_NumEvents > 0)
+      if (mNumEvents > 0)
       {
           sb.Append("\t\t_eventAssignments = new TEventAssignmentDelegate[numEvents];" , NL());
           sb.Append("\t\t_eventPriorities = new double[numEvents];" , NL());
           sb.Append("\t\t_computeEventAssignments= new TComputeEventAssignmentDelegate[numEvents];" , NL());
           sb.Append("\t\t_performEventAssignments= new TPerformEventAssignmentDelegate[numEvents];" , NL());
 
-          for (int i = 0; i < _NumEvents; i++)
+          for (int i = 0; i < mNumEvents; i++)
           {
           	string iStr = ToString(i);
               sb.Append("\t\t_eventAssignments[" + iStr + "] = new TEventAssignmentDelegate (eventAssignment_" + iStr +
@@ -1600,7 +1600,7 @@ void CSharpGenerator::WriteAccessors(StringBuilder& sb)
           sb.Append(NL());
       }
 
-      if (_NumModifiableSpeciesReferences > 0)
+      if (mNumModifiableSpeciesReferences > 0)
       {
           for (int i = 0; i < ModifiableSpeciesReferenceList.size(); i++)
           {
@@ -1610,10 +1610,10 @@ void CSharpGenerator::WriteAccessors(StringBuilder& sb)
       }
 
       // Declare space for local parameters
-      for (int i = 0; i < _NumReactions; i++)
+      for (int i = 0; i < mNumReactions; i++)
       {
-          sb.Append("\t\tlocalParameterDimensions[" + ToString(i) + "] = " , _LocalParameterDimensions[i] , ";" + NL());
-          sb.Append("\t\t_lp[" + ToString(i) + "] = new double[" , _LocalParameterDimensions[i] , "];" , NL());
+          sb.Append("\t\tlocalParameterDimensions[" + ToString(i) + "] = " , mLocalParameterDimensions[i] , ";" + NL());
+          sb.Append("\t\t_lp[" + ToString(i) + "] = new double[" , mLocalParameterDimensions[i] , "];" , NL());
       }
 
       sb.Append("\t}" + NL() + NL());
@@ -1802,7 +1802,7 @@ int CSharpGenerator::WriteComputeRules(StringBuilder& sb, const int& numReaction
                     else
                     {
                         leftSideRule = "\t\t_rateRules[" + ToString(numRateRules) + "]";
-                        _oMapRateRule[numRateRules] = FindSymbol(varName);
+                        mMapRateRule[numRateRules] = FindSymbol(varName);
                         mapVariables[numRateRules] = varName;
                         numRateRules++;
                     }
@@ -1858,45 +1858,45 @@ int CSharpGenerator::WriteComputeRules(StringBuilder& sb, const int& numReaction
 
     for (int i = 0; i < numRateRules; i++)
     {
-        sb<<"\t\t_rateRules[" << i << "] = " << _oMapRateRule[i] << ";" << NL();
+        sb<<"\t\t_rateRules[" << i << "] = " << mMapRateRule[i] << ";" << NL();
     }
 
     sb.Append("\t}" + NL() + NL());
     sb.Append("\tpublic void AssignRates()" + NL() + "\t{" + NL());
 
-    for (int i = 0; i < _oMapRateRule.size(); i++)
+    for (int i = 0; i < mMapRateRule.size(); i++)
     {
-        sb<<(string)_oMapRateRule[i] << " = _rateRules[" << i << "];" << NL();
+        sb<<(string)mMapRateRule[i] << " = _rateRules[" << i << "];" << NL();
     }
 
     sb.Append("\t}" + NL() + NL());
 
     sb.Append("\tpublic void InitializeRateRuleSymbols()" + NL() + "\t{" + NL());
-    for (int i = 0; i < _oMapRateRule.size(); i++)
+    for (int i = 0; i < mMapRateRule.size(); i++)
     {
         string varName = (string)mapVariables[i];
         double value = mNOM.getValue(varName);
         if (!IsNaN(value))
         {
-            sb<< _oMapRateRule[i] << " = " << ToString(value, STR_DoubleFormat) << ";" << NL();
+            sb<< mMapRateRule[i] << " = " << ToString(value, STR_DoubleFormat) << ";" << NL();
         }
     }
 
     sb.Append("\t}" + NL() + NL());
     sb.Append("\tpublic void AssignRates(double[] oRates)" + NL() + "\t{" + NL());
 
-    for (int i = 0; i < _oMapRateRule.size(); i++)
+    for (int i = 0; i < mMapRateRule.size(); i++)
     {
-        sb<< _oMapRateRule[i] << " = oRates[" << i << "];" << NL();
+        sb<< mMapRateRule[i] << " = oRates[" << i << "];" << NL();
     }
 
     sb.Append("\t}" + NL() + NL());
     sb.Append("\tpublic double[] GetCurrentValues()" + NL() + "\t{" + NL());
     sb.Append("\t\tdouble[] dResult = new double[" + ToString(NumAdditionalRates()) + "];" + NL());
 
-    for (int i = 0; i < _oMapRateRule.size(); i++)
+    for (int i = 0; i < mMapRateRule.size(); i++)
     {
-        sb<<"\t\tdResult[" << i << "] = " << _oMapRateRule[i] << ";" << NL();
+        sb<<"\t\tdResult[" << i << "] = " << mMapRateRule[i] << ";" << NL();
     }
     sb.Append("\t\treturn dResult;" + NL());
 
@@ -1948,7 +1948,7 @@ void CSharpGenerator::WriteEvalEvents(StringBuilder& sb, const int& numEvents, c
     {
         for (int i = 0; i < NumAdditionalRates(); i++)
         {
-            sb<<(string) _oMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
+            sb<<(string) mMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
         }
         for (int i = 0; i < numFloatingSpecies; i++)
         {
@@ -1988,7 +1988,7 @@ void CSharpGenerator::WriteEvalModel(StringBuilder& sb, const int& numReactions,
 
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
-        sb<<(string)_oMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
+        sb<<(string)mMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
     }
 
     for (int i = 0; i < numFloatingSpecies; i++)
@@ -2314,7 +2314,7 @@ void CSharpGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
         while (initializations.size() > 0)
         {
         	string term(initializations.top());
-            string sub = substituteTerms(_NumReactions, "", term);
+            string sub = substituteTerms(mNumReactions, "", term);
             sb.Append("\t\t" + sub + ";" + NL());
             initializations.pop();
         }

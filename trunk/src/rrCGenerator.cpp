@@ -93,29 +93,29 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 	Log(lDebug4)<<"Loading SBML into NOM";
 	mNOM.loadSBML(sASCII.c_str(), "time");
 
-    _ModelName = mNOM.getModelName();
-    if(!_ModelName.size())
+    mModelName = mNOM.getModelName();
+    if(!mModelName.size())
     {
         Log(lError)<<"Model name is empty! Exiting...";
     	return "";
     }
 
-    Log(lDebug3)<<"Model name is "<<_ModelName;
-    _NumReactions = mNOM.getNumReactions();
+    Log(lDebug3)<<"Model name is "<<mModelName;
+    mNumReactions = mNOM.getNumReactions();
 
-    Log(lDebug3)<<"Number of reactions:"<<_NumReactions;
+    Log(lDebug3)<<"Number of reactions:"<<mNumReactions;
 
 	globalParameterList.Clear();
     ModifiableSpeciesReferenceList.Clear();
-    localParameterList.reserve(_NumReactions);
+    localParameterList.reserve(mNumReactions);
     reactionList.Clear();
     boundarySpeciesList.Clear();
     floatingSpeciesConcentrationList.Clear();
     floatingSpeciesAmountsList.Clear();
     compartmentList.Clear();
     conservationList.Clear();
-    _functionNames.empty();
-    _functionParameters.empty();
+    mfunctionNames.empty();
+    mfunctionParameters.empty();
 
    	LibStructural* instance = LibStructural::getInstance();
 	string msg;
@@ -136,42 +136,42 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 
 	Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
-	if (RoadRunner::_bComputeAndAssignConservationLaws)
+	if (RoadRunner::mbComputeAndAssignConservationLaws)
     {
-        _NumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
+        mNumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
         independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
         dependentSpeciesList   = mStructAnalysis.GetDependentSpeciesIds();
     }
     else
     {
-        _NumIndependentSpecies = mStructAnalysis.GetNumSpecies();
+        mNumIndependentSpecies = mStructAnalysis.GetNumSpecies();
         independentSpeciesList = mStructAnalysis.GetSpeciesIds();
     }
 
     // Load the compartment array (name and value)
-	_NumCompartments 		= ReadCompartments();
+	mNumCompartments 		= ReadCompartments();
 
     // Read FloatingSpecies
-    _NumFloatingSpecies 	= ReadFloatingSpecies();
-    _NumDependentSpecies 	= _NumFloatingSpecies - _NumIndependentSpecies;
+    mNumFloatingSpecies 	= ReadFloatingSpecies();
+    mNumDependentSpecies 	= mNumFloatingSpecies - mNumIndependentSpecies;
 
     // Load the boundary species array (name and value)
-	_NumBoundarySpecies 	= ReadBoundarySpecies();
+	mNumBoundarySpecies 	= ReadBoundarySpecies();
 
     // Get all the parameters into a list, global and local
-    _NumGlobalParameters 	= ReadGlobalParameters();
-	_NumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
+    mNumGlobalParameters 	= ReadGlobalParameters();
+	mNumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
 
     // Load up local parameters next
-	ReadLocalParameters(_NumReactions, _LocalParameterDimensions, _TotalLocalParmeters);
-    _NumEvents = mNOM.getNumEvents();
+	ReadLocalParameters(mNumReactions, mLocalParameterDimensions, mTotalLocalParmeters);
+    mNumEvents = mNOM.getNumEvents();
 
 
     //Write model to String builder...
 	WriteClassHeader(sbh);
     WriteOutVariables(sbh);
 //    WriteOutSymbolTables(sbh);
-//    WriteResetEvents(sbh, _NumEvents);
+//    WriteResetEvents(sbh, mNumEvents);
 //    WriteSetConcentration(sbh);
 //    WriteGetConcentration(sbh);
 //    WriteConvertToAmounts(sbh);
@@ -179,11 +179,11 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 //    WriteProperties(sbh);
 //    WriteAccessors(sbh);
 //    WriteUserDefinedFunctions(sbh);
-//    WriteSetInitialConditions(sbh, _NumFloatingSpecies);
+//    WriteSetInitialConditions(sbh, mNumFloatingSpecies);
 //    WriteSetBoundaryConditions(sbh);
 //    WriteSetCompartmentVolumes(sbh);
-//    WriteSetParameterValues(sbh, _NumReactions);
-//   	WriteComputeConservedTotals(sbh, _NumFloatingSpecies, _NumDependentSpecies);
+//    WriteSetParameterValues(sbh, mNumReactions);
+//   	WriteComputeConservedTotals(sbh, mNumFloatingSpecies, mNumDependentSpecies);
 //
 //
 //    // Get the L0 matrix
@@ -192,14 +192,14 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 //    double* aL0 = InitializeL0(nrRows, nrCols); 	//Todo: What is this doing? answer.. it is used below..
 //    DoubleMatrix L0(aL0,nrRows, nrCols); 		//How many rows and cols?? We need to know that in order to use the matrix properly!
 //
-//    WriteUpdateDependentSpecies(sbh, _NumIndependentSpecies, _NumDependentSpecies, L0);
-//    int numOfRules = WriteComputeRules(sbh, _NumReactions);
-//    WriteComputeAllRatesOfChange(sbh, _NumIndependentSpecies, _NumDependentSpecies, L0);
-//    WriteComputeReactionRates(sbh, _NumReactions);
-//    WriteEvalModel(sbh, _NumReactions, _NumIndependentSpecies, _NumFloatingSpecies, numOfRules);
-//    WriteEvalEvents(sbh, _NumEvents, _NumFloatingSpecies);
-//    WriteEventAssignments(sbh, _NumReactions, _NumEvents);
-//    WriteEvalInitialAssignments(sbh, _NumReactions);
+//    WriteUpdateDependentSpecies(sbh, mNumIndependentSpecies, mNumDependentSpecies, L0);
+//    int numOfRules = WriteComputeRules(sbh, mNumReactions);
+//    WriteComputeAllRatesOfChange(sbh, mNumIndependentSpecies, mNumDependentSpecies, L0);
+//    WriteComputeReactionRates(sbh, mNumReactions);
+//    WriteEvalModel(sbh, mNumReactions, mNumIndependentSpecies, mNumFloatingSpecies, numOfRules);
+//    WriteEvalEvents(sbh, mNumEvents, mNumFloatingSpecies);
+//    WriteEventAssignments(sbh, mNumReactions, mNumEvents);
+//    WriteEvalInitialAssignments(sbh, mNumReactions);
 //    WriteTestConstraints(sbh);
 
 	sbh.AppendFormat("} gTheModel;\t//This is global data in the DLL{0}", NL());
@@ -240,12 +240,12 @@ void CGenerator::WriteClassHeader(StringBuilder& sbh)
 
 void CGenerator::WriteOutVariables(StringBuilder& sbh)
 {
-    sbh.Append("\tchar		 mModelName[2048];" + NL());
-    sbh.Append("\tchar** 	_Warnings;" + NL());
-	sbh<<"\tdouble _gp["<<(_NumGlobalParameters + _TotalLocalParmeters)<<"];\t\t// Vector containing all the global parameters in the System  "<<NL();
-	if(_NumModifiableSpeciesReferences)
+    sbh<<"\tchar*"<<tabs(4)<<"mModelName;"<<NL();
+    sbh<<"\tchar**"<<tabs(4)<<"mWarnings;"<<NL();
+	sbh<<"\tdouble _gp["<<(mNumGlobalParameters + mTotalLocalParmeters)<<"];\t\t// Vector containing all the global parameters in the System  "<<NL();
+	if(mNumModifiableSpeciesReferences)
     {
-      sbh<<"\tdouble _sr["<<_NumModifiableSpeciesReferences<<"];           // Vector containing all the modifiable species references  "<<endl;
+      sbh<<"\tdouble _sr["<<mNumModifiableSpeciesReferences<<"];           // Vector containing all the modifiable species references  "<<endl;
     }
 //      sbh.Append("\t double[][] _lp = new double[" + ToString(_NumReactions) +
 //                "][];       // Vector containing all the local parameters in the System  " + NL());
@@ -259,31 +259,31 @@ void CGenerator::WriteOutVariables(StringBuilder& sbh)
 //      sbh.Append("\t double[] _amounts = new double[", floatingSpeciesConcentrationList.size(),
 //                "];      // Vector containing the amounts of all floating species ", NL());
 //
-//      sbh.Append("\t double[] _bc = new double[", _NumBoundarySpecies,
+//      sbh.Append("\t double[] _bc = new double[", mNumBoundarySpecies,
 //                "];           // Vector containing all the boundary species concentration values   " , NL());
 //
-//      sbh.Append("\t double[] _c = new double[" , _NumCompartments ,
+//      sbh.Append("\t double[] _c = new double[" , mNumCompartments ,
 //                "];            // Vector containing all the compartment values   " + NL());
 //
 //      sbh.Append("\t double[] _dydt = new double[" , floatingSpeciesConcentrationList.size() ,
 //                "];         // Vector containing rates of changes of all species   " , NL());
 //
-//      sbh.Append("\t double[] _rates = new double[" , _NumReactions ,
+//      sbh.Append("\t double[] _rates = new double[" , mNumReactions ,
 //                "];        // Vector containing the rate laws of all reactions    " , NL());
 //
-//      sbh.Append("\t double[] _ct = new double[" , _NumDependentSpecies ,
+//      sbh.Append("\t double[] _ct = new double[" , mNumDependentSpecies ,
 //                "];           // Vector containing values of all conserved sums      " , NL());
 //
-//      sbh.Append("\t double[] _eventTests = new double[" , _NumEvents ,
+//      sbh.Append("\t double[] _eventTests = new double[" , mNumEvents ,
 //                "];   // Vector containing results of any event tests        " , NL());
 //
-//      sbh.Append("\t TEventDelayDelegate[] _eventDelay = new TEventDelayDelegate[" , _NumEvents ,
+//      sbh.Append("\t TEventDelayDelegate[] _eventDelay = new TEventDelayDelegate[" , mNumEvents ,
 //                "]; // array of trigger function pointers" , NL());
 //
-//      sbh.Append("\t bool[] _eventType = new bool[" , _NumEvents ,
+//      sbh.Append("\t bool[] _eventType = new bool[" , mNumEvents ,
 //                "]; // array holding the status whether events are useValuesFromTriggerTime or not" , NL());
 //
-//      sbh.Append("\t bool[] _eventPersistentType = new bool[" , _NumEvents ,
+//      sbh.Append("\t bool[] _eventPersistentType = new bool[" , mNumEvents ,
 //                "]; // array holding the status whether events are persitstent or not" , NL());
 //
 //      sbh.Append("\t double _time;" , NL());
@@ -299,7 +299,7 @@ void CGenerator::WriteOutVariables(StringBuilder& sbh)
 //      sbh.Append("\tstring[] variableTable = new string[" , floatingSpeciesConcentrationList.size() , "];" , NL());
 //      sbh.Append("\tstring[] boundaryTable = new string[" , boundarySpeciesList.size() , "];" , NL());
 //      sbh.Append("\tstring[] globalParameterTable = new string[" , globalParameterList.size() , "];" , NL());
-//      sbh.Append("\tint[] localParameterDimensions = new int[" , _NumReactions , "];" , NL());
+//      sbh.Append("\tint[] localParameterDimensions = new int[" , mNumReactions , "];" , NL());
 //      sbh.Append("\t TEventAssignmentDelegate[] _eventAssignments;" , NL());
 //      sbh.Append("\t double[] _eventPriorities;" , NL());
 //      sbh.Append("\t TComputeEventAssignmentDelegate[] _computeEventAssignments;" , NL());
@@ -371,7 +371,7 @@ void CGenerator::WriteComputeAllRatesOfChange(StringBuilder& sbh, const int& num
     sbh.Append("\t\tdouble[] dTemp = new double[amounts.Length + rateRules.Length];" + NL());
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
-        sbh.AppendFormat("\t\tdTemp[{0}] = {1};{2}", i, _oMapRateRule[i], NL());
+        sbh.AppendFormat("\t\tdTemp[{0}] = {1};{2}", i, mMapRateRule[i], NL());
     }
     //sbh.Append("\t\trateRules.CopyTo(dTemp, 0);" + NL());
     sbh.Append("\t\tamounts.CopyTo(dTemp, rateRules.Length);" + NL());
@@ -566,7 +566,7 @@ void CGenerator::WriteUserDefinedFunctions(StringBuilder& sbh)
 
           	string sName = aList[0];
           	//sName.Trim();
-            _functionNames.Add(sName);
+            mfunctionNames.Add(sName);
             StringList oArguments = oList[1];
             StringList list2 = oList[2];
             string sBody = list2[0];
@@ -577,7 +577,7 @@ void CGenerator::WriteUserDefinedFunctions(StringBuilder& sbh)
             for (int j = 0; j < oArguments.size(); j++)
             {
                 sbh.Append("double " + (string)oArguments[j]);
-                _functionParameters.Add((string)oArguments[j]);
+                mfunctionParameters.Add((string)oArguments[j]);
                 if (j < oArguments.size() - 1)
                     sbh.Append(", ");
             }
@@ -986,7 +986,7 @@ int CGenerator::WriteComputeRules(StringBuilder& sbh, const int& numReactions)
                     else
                     {
                         leftSideRule = "\t\t_rateRules[" + ToString(numRateRules) + "]";
-                        _oMapRateRule[numRateRules] = FindSymbol(varName);
+                        mMapRateRule[numRateRules] = FindSymbol(varName);
                         mapVariables[numRateRules] = varName;
                         numRateRules++;
                     }
@@ -1042,45 +1042,45 @@ int CGenerator::WriteComputeRules(StringBuilder& sbh, const int& numReactions)
 
     for (int i = 0; i < numRateRules; i++)
     {
-        sbh<<"\t\t_rateRules[" << i << "] = " << _oMapRateRule[i] << ";" << NL();
+        sbh<<"\t\t_rateRules[" << i << "] = " << mMapRateRule[i] << ";" << NL();
     }
 
     sbh.Append("\t}" + NL() + NL());
     sbh.Append("\t void AssignRates()" + NL() + "\t{" + NL());
 
-    for (int i = 0; i < _oMapRateRule.size(); i++)
+    for (int i = 0; i < mMapRateRule.size(); i++)
     {
-        sbh<<(string)_oMapRateRule[i] << " = _rateRules[" << i << "];" << NL();
+        sbh<<(string)mMapRateRule[i] << " = _rateRules[" << i << "];" << NL();
     }
 
     sbh.Append("\t}" + NL() + NL());
 
     sbh.Append("\t void InitializeRateRuleSymbols()" + NL() + "\t{" + NL());
-    for (int i = 0; i < _oMapRateRule.size(); i++)
+    for (int i = 0; i < mMapRateRule.size(); i++)
     {
         string varName = (string)mapVariables[i];
         double value = mNOM.getValue(varName);
         if (!IsNaN(value))
         {
-            sbh<< _oMapRateRule[i] << " = " << ToString(value, STR_DoubleFormat) << ";" << NL();
+            sbh<< mMapRateRule[i] << " = " << ToString(value, STR_DoubleFormat) << ";" << NL();
         }
     }
 
     sbh.Append("\t}" + NL() + NL());
     sbh.Append("\t void AssignRates(double[] oRates)" + NL() + "\t{" + NL());
 
-    for (int i = 0; i < _oMapRateRule.size(); i++)
+    for (int i = 0; i < mMapRateRule.size(); i++)
     {
-        sbh<< _oMapRateRule[i] << " = oRates[" << i << "];" << NL();
+        sbh<< mMapRateRule[i] << " = oRates[" << i << "];" << NL();
     }
 
     sbh.Append("\t}" + NL() + NL());
     sbh.Append("\t double[] GetCurrentValues()" + NL() + "\t{" + NL());
     sbh.Append("\t\tdouble[] dResult = new double[" + ToString(NumAdditionalRates()) + "];" + NL());
 
-    for (int i = 0; i < _oMapRateRule.size(); i++)
+    for (int i = 0; i < mMapRateRule.size(); i++)
     {
-        sbh<<"\t\tdResult[" << i << "] = " << _oMapRateRule[i] << ";" << NL();
+        sbh<<"\t\tdResult[" << i << "] = " << mMapRateRule[i] << ";" << NL();
     }
     sbh.Append("\t\treturn dResult;" + NL());
 
@@ -1132,7 +1132,7 @@ void CGenerator::WriteEvalEvents(StringBuilder& sbh, const int& numEvents, const
     {
         for (int i = 0; i < NumAdditionalRates(); i++)
         {
-            sbh<<(string) _oMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
+            sbh<<(string) mMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
         }
         for (int i = 0; i < numFloatingSpecies; i++)
         {
@@ -1172,7 +1172,7 @@ void CGenerator::WriteEvalModel(StringBuilder& sbh, const int& numReactions, con
 
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
-        sbh<<(string)_oMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
+        sbh<<(string)mMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
     }
 
     for (int i = 0; i < numFloatingSpecies; i++)
@@ -1498,7 +1498,7 @@ void CGenerator::WriteSetCompartmentVolumes(StringBuilder& sbh)
         while (initializations.size() > 0)
         {
         	string term(initializations.top());
-            string sub = substituteTerms(_NumReactions, "", term);
+            string sub = substituteTerms(mNumReactions, "", term);
             sbh.Append("\t\t" + sub + ";" + NL());
             initializations.pop();
         }
@@ -1842,7 +1842,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     {
                         sbh.Append("supportFunctions._piecewise");
                     }
-                    else if (!_functionParameters.Contains(s.tokenString))
+                    else if (!mfunctionParameters.Contains(s.tokenString))
                     {
                     	throw Exception("Token '" + s.tokenString + "' not recognized.");
                     }
@@ -2177,7 +2177,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
             bReplaced = true;
         }
         if (!bReplaced &&
-            (_functionParameters.size() != 0 && !_functionParameters.Contains(s.tokenString)))
+            (mfunctionParameters.size() != 0 && !mfunctionParameters.Contains(s.tokenString)))
         {
             throw Exception("Token '" + s.tokenString + "' not recognized.");
         }
@@ -2224,7 +2224,7 @@ void CGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, S
     {
         sbh.AppendFormat("_c[{0}]", index);
     }
-    else if (_functionNames.Contains(s.tokenString))
+    else if (mfunctionNames.Contains(s.tokenString))
     {
         sbh.AppendFormat("{0} ", s.tokenString);
     }
@@ -2355,7 +2355,7 @@ int CGenerator::ReadFloatingSpecies()
 {
     // Load a reordered list into the variable list.
     StringList reOrderedList;
-    if ((RoadRunner::_bComputeAndAssignConservationLaws))
+    if ((RoadRunner::mbComputeAndAssignConservationLaws))
 	{
        reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
 	}
@@ -2499,25 +2499,31 @@ int CGenerator::ReadBoundarySpecies()
     return numBoundarySpecies;
 }
 
+#define tab tabs(1)
+#define eol <<endl;
+#define bol  sbc<<
+#define bolt sbc<<"\t"<<
+
 void CGenerator::WriteInitFunction(StringBuilder& sbh, StringBuilder& sbc)
 {
-	sbh	<<"\n//EXPORTS ========================================\n"
-    	<<"D_S "<<"int InitModel();\n"
-       	<<"D_S "<<"char* GetModelName();\n";
+	sbh	<<	"\n//EXPORTS ========================================"	eol
+    sbh	<<	"D_S "<<"int InitModel();"     							eol
+    sbh	<<	"D_S "<<"char* GetModelName();"                         eol
 
-	sbc	<<"\n//Function to initialize the model data structure. Returns an integer indicating result\n"
-    	<<""<<"int InitModel()\n"
-    	<<"{\n"
-   		<<"\tstrcpy(gTheModel.mModelName,\""<<_ModelName<<"\");\n"
-		<<"\tgTheModel._gp[0] = 1234;\n"
-    	<<"\treturn 0;\n"
-    	<<"}\n";
+		bol "\n//Function to initialize the model data structure. Returns an integer indicating result"		eol
+    	bol "int InitModel()"                                   	                                        eol
+    	bol "{"                                                                                             eol
+        bolt	"gTheModel.mModelName = (char*) malloc(sizeof(char)*"<<strlen(mModelName.c_str()) + 1<<");"	eol
+   		bolt 	"strcpy(gTheModel.mModelName,\""<<mModelName<<"\");"                                       	eol
+		bolt 	"gTheModel._gp[0] = 1234;"                                                                 	eol
+    	bolt 	"return 0;"                                                                                	eol
+    	bol "}"                                                                                             eol
 
-	sbc	<<"\n"
-    	<<""<<"char* GetModelName()\n"
-    	<<"{\n"
-    	<<"\treturn gTheModel.mModelName;\n"
-    	<<"}\n";
+	 	bol	"\n"									eol
+    	bol	"char* GetModelName()" 				  	eol
+    	bol	"{"                                   	eol
+    	bolt	"return gTheModel.mModelName;"    	eol
+    	bol	"}"                                   	eol
 
 }
 }//Namespace

@@ -49,8 +49,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
     	const double 					DiffStepSize;
 		const string 					emptyModelStr;
 		const double 					STEADYSTATE_THRESHOLD;
-     	vector<TSelectionRecord> 		_oSteadyStateSelection;
-		string 							_sModelCode;
+     	vector<TSelectionRecord> 		mSteadyStateSelection;
+		string 							mModelCode;
 		CvodeInterface 				   *cvode;
 		ISteadyStateSolver			   *steadyStateSolver;
         vector<TSelectionRecord> 		selectionList;
@@ -61,7 +61,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 		// void 						AddNthOutputToResult(double[,] results, int nRow, double dCurrentTime);
         bool 							IsNleqAvailable();
-        string 							_NL();
         void 							emptyModel();
         double 							GetValueForRecord(const TSelectionRecord& record);
         double 							GetNthSelectedOutput(const int& index, const double& dCurrentTime);
@@ -76,13 +75,13 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 	public:
     	// Properties -----------------------------------------------------------------------------
-     	static bool                     _bComputeAndAssignConservationLaws;
-        static bool                     _bConservedTotalChanged;
-        static bool                     _ReMultiplyCompartments;
-        double*                    		_L;
-        double*                  		_L0;
-        double*                  		_N;
-        double*                  		_Nr;
+     	static bool                     mbComputeAndAssignConservationLaws;
+        static bool                     mbConservedTotalChanged;
+        static bool                     mReMultiplyCompartments;
+        double*                    		mL;
+        double*                  		mL0;
+        double*                  		mN;
+        double*                  		mNr;
         bool 							modelLoaded;
         int 							numPoints;
         string 							sbmlStr;

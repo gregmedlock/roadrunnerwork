@@ -22,26 +22,26 @@ class RR_DECLSPEC ModelGenerator : public rrObject
     protected:
         const string                        STR_DoubleFormat;
         const string                        STR_FixAmountCompartments;
-        string								mCurrentXMLModelFileName;
-        vector<int> 		                _LocalParameterDimensions;
-        string 				                _ModelName;
-        int                                 _NumBoundarySpecies;
-        int                                 _NumCompartments;
-        int                                 _NumDependentSpecies;
-        int                                 _NumEvents;
-        int                                 _NumFloatingSpecies;
-        int                                 _NumGlobalParameters;
-        int                                 _NumIndependentSpecies;
-        int                                 _NumReactions;
-        int                                 _TotalLocalParmeters;
-        StringList       	                _functionNames;
-        StringList          	            _functionParameters;
+        string					  			mCurrentXMLModelFileName;
+        vector<int> 		                mLocalParameterDimensions;
+        string 				                mModelName;
+        int                                 mNumBoundarySpecies;
+        int                                 mNumCompartments;
+        int                                 mNumDependentSpecies;
+        int                                 mNumEvents;
+        int                                 mNumFloatingSpecies;
+        int                                 mNumGlobalParameters;
+        int                                 mNumIndependentSpecies;
+        int                                 mNumReactions;
+        int                                 mTotalLocalParmeters;
+        StringList       	                mfunctionNames;
+        StringList          	            mfunctionParameters;
         StringList                     		dependentSpeciesList;
         StringList		                    independentSpeciesList;
-        int 				                _NumModifiableSpeciesReferences;
+        int 				                mNumModifiableSpeciesReferences;
         StructAnalysis						mStructAnalysis;					//Object to facilitate calls to libStruct library
         NOMSupport							mNOM;								//Object that provide some wrappers and new "NOM" functions
-        IntStringHashTable   			    _oMapRateRule;
+        IntStringHashTable   			    mMapRateRule;
         SymbolList                         	boundarySpeciesList;
         SymbolList                         	compartmentList;
         SymbolList                         	conservationList;
@@ -97,7 +97,6 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 		ASTNode* 							CleanEquation(ASTNode* ast);
         string 		                		CleanEquation(const string& equation);
         string 				                substituteTerms(const string& reactionName, const string& inputEquation, bool bFixAmounts);
-        string 				                NL();
         double*				                InitializeL0(int& nrRows, int& nrCols);
 	    bool 								ExpressionContainsSymbol(ASTNode* ast, const string& symbol);
         bool 		                		ExpressionContainsSymbol(const string& expression, const string& symbol);
@@ -112,7 +111,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 		virtual						       ~ModelGenerator();
         void								Reset();
         int                                 getNumberOfReactions();
-        int                                 NumAdditionalRates();	//this variable is the size of _oMapRateRule
+        int                                 NumAdditionalRates();	//this variable is the size of moMapRateRule
         StringList                          getBoundarySpeciesList();
         StringList                          getCompartmentList();
         StringList                          getConservationList();
