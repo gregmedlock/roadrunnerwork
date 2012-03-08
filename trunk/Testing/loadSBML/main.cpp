@@ -32,6 +32,8 @@ int _tmain()
 
     RoadRunner *roadRunner = NULL;
 
+    try
+    {
     //Loading models (max is 459)
     for(int caseNr = 1; caseNr < 2; caseNr++)
     {
@@ -79,20 +81,20 @@ int _tmain()
         if(code.size())
         {
             string fileName;
-//            if(generateCSharp)
-//            {
-//                fileName = ("C:\\RRW\\Testing\\rr_code_output\\cs_from_rr++\\" + modelFName.str());
-//                fileName = ChangeFileNameExtensionTo(fileName, ".cs");
-//                ofstream outFile(fileName.c_str());
-//                if(!outFile)
-//                {
-//                    throw(Exception("Failed to write file:" + fileName));
-//                }
-//                outFile<<code;
-//                Log(lInfo)<<"Wrote source code to file: "<<fileName;
-//
-//            }
-//            else
+            if(generateCSharp)
+            {
+                fileName = ("C:\\RRW\\Testing\\rr_code_output\\cs_from_rr++\\" + modelFName.str());
+                fileName = ChangeFileNameExtensionTo(fileName, ".cs");
+                ofstream outFile(fileName.c_str());
+                if(!outFile)
+                {
+                    throw(Exception("Failed to write file:" + fileName));
+                }
+                outFile<<code;
+                Log(lInfo)<<"Wrote source code to file: "<<fileName;
+
+            }
+            else
             {
 
                 CGenerator *codeGen = dynamic_cast<CGenerator*>(roadRunner->GetCodeGenerator());
@@ -134,11 +136,11 @@ int _tmain()
     cout<<"Copyright: "<<roadRunner->getCopyright()<<endl;
     delete roadRunner;
 
-//    }
-//    catch(Exception& ex)
-//    {
-//		cout<<"RoadRunner exception occured: "<<ex.what()<<endl;
-//    }
+    }
+    catch(Exception& ex)
+    {
+		cout<<"RoadRunner exception occured: "<<ex.what()<<endl;
+    }
 
   	//-------------------------------------
 //	cout<<"Hit any key to exit...";

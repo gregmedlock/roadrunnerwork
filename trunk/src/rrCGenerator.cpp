@@ -37,6 +37,47 @@ string CGenerator::GetSourceCode()
 	return mSourceCode;
 }
 
+string CGenerator::GetHeaderCodeFileName()
+{
+	return mHeaderCodeFileName;
+}
+
+string CGenerator::GetSourceCodeFileName()
+{
+	return mSourceCodeFileName;
+}
+
+bool CGenerator::SaveSourceCodeToFolder(const string& folder)
+{
+    mHeaderCodeFileName = folder + string("\\") + mCurrentXMLModelFileName;
+    mHeaderCodeFileName = ChangeFileNameExtensionTo(mHeaderCodeFileName, ".h");
+
+    ofstream outFile(mHeaderCodeFileName.c_str());
+    if(!outFile)
+    {
+        throw(Exception("Failed to open file:" + mHeaderCodeFileName));
+    }
+    outFile<<GetHeaderCode();
+    Log(lInfo)<<"Wrote header to file: "<<mHeaderCodeFileName;
+    outFile.close();
+
+    mSourceCodeFileName = ChangeFileNameExtensionTo(mHeaderCodeFileName, ".c");
+    outFile.open(mSourceCodeFileName.c_str());
+
+    //We don't know the name of the file until here..
+    //Write an include statement to it..
+    vector<string> fNameParts = SplitString(mSourceCodeFileName,"\\");
+    string headerFName = fNameParts[fNameParts.size() - 1];
+
+    headerFName = ChangeFileNameExtensionTo(headerFName, ".h");
+    outFile<<"#include \""<<headerFName<<"\"\n"<<endl;
+    outFile<<GetSourceCode();
+    outFile.close();
+    Log(lInfo)<<"Wrote source code to file: "<<mSourceCodeFileName;
+
+	return true;
+}
+
 // Generates the Model Code from the SBML string
 string CGenerator::generateModelCode(const string& sbmlStr)
 {
@@ -163,14 +204,11 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 
 	sbh.AppendFormat("} gTheModel;\t//This is global data in the DLL{0}", NL());
 
-
 	WriteInitFunction(sbh, sbc);
     sbh<<"#endif //modelH"<<NL();
-  	sbh<<"//End of generated model code"<<endl;
 
     mHeaderCode = sbh.ToString();
     mSourceCode = sbc.ToString();
-
 	return mHeaderCode + mSourceCode;
 }
 
@@ -180,7 +218,7 @@ void CGenerator::WriteClassHeader(StringBuilder& sbh)
     sbh.Append("#ifndef modelH" + NL());
     sbh.Append("#define modelH" + NL());
     sbh.Append("#include <stdio.h>" + NL());
-    sbh	<<"#if defined(BUILD_MODEL_DLL)\n"
+    sbh	<<"\n#if defined(BUILD_MODEL_DLL)\n"
     	<<"#define D_S __declspec(dllexport)\n"
         <<"#else\n"
         <<"#define D_S __declspec(dllimport)\n"
@@ -202,7 +240,8 @@ void CGenerator::WriteClassHeader(StringBuilder& sbh)
 
 void CGenerator::WriteOutVariables(StringBuilder& sbh)
 {
-    sbh.Append("\tchar** _Warnings;" + NL());
+    sbh.Append("\tchar		 mModelName[2048];" + NL());
+    sbh.Append("\tchar** 	_Warnings;" + NL());
 	sbh<<"\tdouble _gp["<<(_NumGlobalParameters + _TotalLocalParmeters)<<"];\t\t// Vector containing all the global parameters in the System  "<<NL();
 	if(_NumModifiableSpeciesReferences)
     {
@@ -2463,14 +2502,23 @@ int CGenerator::ReadBoundarySpecies()
 void CGenerator::WriteInitFunction(StringBuilder& sbh, StringBuilder& sbc)
 {
 	sbh	<<"\n//Initialize DLL data, i.e. the TModel struct, and return integer indicating result\n"
-    	<<"D_S "<<"int InitModel();\n";
+    	<<"D_S "<<"int InitModel();\n"
+       	<<"D_S "<<"char* GetModelName();\n";
 
 	sbc	<<"\n//Initialize DLL data, i.e. the TModel struct, and return integer indicating result\n"
     	<<"D_S "<<"int InitModel()\n"
     	<<"{\n"
+   		<<"\tstrcpy(gTheModel.mModelName,\""<<mCurrentXMLModelFileName<<"\");\n"
 		<<"\tgTheModel._gp[0] = 1234;\n"
     	<<"\treturn 0;\n"
     	<<"}\n";
+
+	sbc	<<"\n"
+    	<<"D_S "<<"char* GetModelName()\n"
+    	<<"{\n"
+    	<<"\treturn gTheModel.mModelName;\n"
+    	<<"}\n";
+
 }
 }//Namespace
 

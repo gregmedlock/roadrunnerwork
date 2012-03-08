@@ -1,6 +1,7 @@
 #ifndef modelH
 #define modelH
 #include <stdio.h>
+
 #if defined(BUILD_MODEL_DLL)
 #define D_S __declspec(dllexport)
 #else
@@ -16,11 +17,12 @@
 
 D_S struct TModel
 {
-	char** _Warnings;
+	char		 mModelName[2048];
+	char** 	_Warnings;
 	double _gp[1];		// Vector containing all the global parameters in the System  
 } gTheModel;	//This is global data in the DLL
 
 //Initialize DLL data, i.e. the TModel struct, and return integer indicating result
 D_S int InitModel();
+D_S char* GetModelName();
 #endif //modelH
-//End of generated model code

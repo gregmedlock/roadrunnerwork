@@ -7,7 +7,7 @@
 				<Dependencies/>
 			</Projects>
 			<Projects Include="LoadModelSource\UsingImportLib.cbproj">
-				<Dependencies/>
+				<Dependencies>LoadModelSource\ModelDll.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="LoadDLLDynamically\Dynamically.cbproj">
 				<Dependencies/>
@@ -29,13 +29,13 @@
 		<Target Name="ModelDll:Make">
 			<MSBuild Projects="LoadModelSource\ModelDll.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="UsingImportLib">
+		<Target Name="UsingImportLib" DependsOnTargets="ModelDll">
 			<MSBuild Projects="LoadModelSource\UsingImportLib.cbproj"/>
 		</Target>
-		<Target Name="UsingImportLib:Clean">
+		<Target Name="UsingImportLib:Clean" DependsOnTargets="ModelDll:Clean">
 			<MSBuild Projects="LoadModelSource\UsingImportLib.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="UsingImportLib:Make">
+		<Target Name="UsingImportLib:Make" DependsOnTargets="ModelDll:Make">
 			<MSBuild Projects="LoadModelSource\UsingImportLib.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Dynamically">

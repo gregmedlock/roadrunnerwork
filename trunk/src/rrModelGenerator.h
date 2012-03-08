@@ -22,6 +22,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
     protected:
         const string                        STR_DoubleFormat;
         const string                        STR_FixAmountCompartments;
+        string								mCurrentXMLModelFileName;
         vector<int> 		                _LocalParameterDimensions;
         string 				                _ModelName;
         int                                 _NumBoundarySpecies;
@@ -124,6 +125,8 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 
     	// Generates the Model Code from the SBML string
     	virtual string 		 				generateModelCode(const string& sbmlStr) = 0;	//Any decendant need to implement at least this one
+        virtual	bool						SaveSourceCodeToFolder(const string& folder){return false;}	//Save generated source code to folder..
+		void								SetXMLModelFileName(const string& name){mCurrentXMLModelFileName = name;}
 };
 }//namespace rr
 

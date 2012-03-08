@@ -12,6 +12,9 @@ class RR_DECLSPEC CGenerator : public ModelGenerator
 		string    							mHeaderCode;
         string 								mSourceCode;
 
+		string    							mHeaderCodeFileName;
+        string 								mSourceCodeFileName;
+
         string                              convertUserFunctionExpression(const string& equation);
         string                            	convertCompartmentToC(const string& compartmentName);
         string                              convertSpeciesToBc(const string& speciesName);
@@ -62,6 +65,9 @@ class RR_DECLSPEC CGenerator : public ModelGenerator
         void								WriteInitFunction(StringBuilder& sbh, StringBuilder& sbc);
         string								GetHeaderCode();
         string								GetSourceCode();
+        string								GetSourceCodeFileName();
+        string								GetHeaderCodeFileName();
+        bool								SaveSourceCodeToFolder(const string& folder);
 
 };
 }

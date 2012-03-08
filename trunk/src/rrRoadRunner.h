@@ -96,6 +96,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         virtual 					   ~RoadRunner();
         ModelGenerator*					GetCodeGenerator();
         void							Reset();
+        bool							CreateModelSourceCode();
         string							GetModelSourceCode();
     	double* 						runSimulation();
 		void 							InitializeModel(IModel* model);

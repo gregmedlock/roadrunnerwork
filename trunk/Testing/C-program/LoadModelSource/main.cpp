@@ -19,6 +19,7 @@ int _tmain(int argc, _TCHAR* argv[])
     gTheModel._gp[0] = 2;
 	InitModel();
     cout<<"Global parameter is now: "<<gTheModel._gp[0]<<"\n";
+    cout<<GetModelName();
 	return 0;
 }
 

@@ -17,7 +17,8 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	cout<<"Hello ....\n";
 
-    wstring dll(L"C:\\RRW\\Testing\\C-program\\LoadModelSource\\Debug\\Win32\\ModelDLL.dll");
+//    wstring dll(L"C:\\RRW\\Testing\\C-program\\LoadModelSource\\Debug\\Win32\\ModelDLL.dll");
+	wstring dll(L"C:\\RRW\\Testing\\rr_code_output\\c_from_rr++\\00001-sbml-l2v4.dll");
     HINSTANCE hLib=LoadLibrary(dll.c_str());
 
     if(hLib==NULL)
@@ -34,7 +35,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
     wcout << "Library loaded: " <<name.c_str() << endl;
 
-	InitModel = (cfunc) GetProcAddress((HMODULE) hLib, "_InitModel");
+	InitModel = (cfunc) GetProcAddress((HMODULE) hLib, "InitModel");
     if(InitModel==NULL)
     {
         cout << "Unable to load function." << endl;

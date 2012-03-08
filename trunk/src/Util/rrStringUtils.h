@@ -12,6 +12,7 @@ using std::vector;
 namespace rr
 {
 
+string 			RR_DECLSPEC GetFileNameNoPath(const string& fName);
 string 			RR_DECLSPEC ChangeFileNameExtensionTo(const string& theFileName, const string& newExtension);
 
 string			RR_DECLSPEC Trim(const string& str);

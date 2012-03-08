@@ -18,6 +18,17 @@
 namespace rr
 {
 
+string GetFileNameNoPath(const string& fName)
+{
+    vector<string> fNameParts = SplitString(fName,"\\");
+    string aFName(fName);
+    if(fNameParts.size())
+    {
+    	aFName = fNameParts[fNameParts.size() - 1];
+    }
+    return aFName;
+}
+
 string ChangeFileNameExtensionTo(const string& fName, const string& newExtension)
 {
 	string newFName;
