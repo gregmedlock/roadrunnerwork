@@ -152,7 +152,7 @@ int _tmain()
     //    cout<<"Global parameter is now"<<gTheModel._gp[0]<<"\n";
         FreeLibrary((HMODULE) dllHandle);
 
-        cout<<"Copyright: "<<roadRunner->getCopyright()<<endl;
+        cout<<"\nCopyright: "<<roadRunner->getCopyright()<<endl;
         delete roadRunner;
 
 

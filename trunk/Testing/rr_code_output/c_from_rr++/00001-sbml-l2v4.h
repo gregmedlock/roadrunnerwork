@@ -22,7 +22,7 @@ D_S struct TModel
 	double _gp[1];		// Vector containing all the global parameters in the System  
 } gTheModel;	//This is global data in the DLL
 
-//Initialize DLL data, i.e. the TModel struct, and return integer indicating result
+//EXPORTS ========================================
 D_S int InitModel();
 D_S char* GetModelName();
 #endif //modelH

@@ -2501,20 +2501,20 @@ int CGenerator::ReadBoundarySpecies()
 
 void CGenerator::WriteInitFunction(StringBuilder& sbh, StringBuilder& sbc)
 {
-	sbh	<<"\n//Initialize DLL data, i.e. the TModel struct, and return integer indicating result\n"
+	sbh	<<"\n//EXPORTS ========================================\n"
     	<<"D_S "<<"int InitModel();\n"
        	<<"D_S "<<"char* GetModelName();\n";
 
-	sbc	<<"\n//Initialize DLL data, i.e. the TModel struct, and return integer indicating result\n"
-    	<<"D_S "<<"int InitModel()\n"
+	sbc	<<"\n//Function to initialize the model data structure. Returns an integer indicating result\n"
+    	<<""<<"int InitModel()\n"
     	<<"{\n"
-   		<<"\tstrcpy(gTheModel.mModelName,\""<<mCurrentXMLModelFileName<<"\");\n"
+   		<<"\tstrcpy(gTheModel.mModelName,\""<<_ModelName<<"\");\n"
 		<<"\tgTheModel._gp[0] = 1234;\n"
     	<<"\treturn 0;\n"
     	<<"}\n";
 
 	sbc	<<"\n"
-    	<<"D_S "<<"char* GetModelName()\n"
+    	<<""<<"char* GetModelName()\n"
     	<<"{\n"
     	<<"\treturn gTheModel.mModelName;\n"
     	<<"}\n";
