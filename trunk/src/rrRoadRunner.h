@@ -91,7 +91,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
     	string 							NL;
 
 		//Functions --------------------------------------------------------------------
-        								RoadRunner();
+        								RoadRunner(bool GenerateCSharp = false);
         virtual 					   ~RoadRunner();
         ModelGenerator*					GetCodeGenerator();
         void							Reset();

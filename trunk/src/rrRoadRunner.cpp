@@ -26,7 +26,7 @@ bool RoadRunner::mbComputeAndAssignConservationLaws = true;
 bool RoadRunner::mbConservedTotalChanged 			= false;
 bool RoadRunner::mReMultiplyCompartments 			= false;
 
-RoadRunner::RoadRunner()
+RoadRunner::RoadRunner(bool generateCSharp)
 :
 DiffStepSize(0.05),
 emptyModelStr("A model needs to be loaded before one can use this method"),
@@ -42,7 +42,14 @@ mModel(NULL)
 	Log(lDebug4)<<"In RoadRunner CTOR";
 	mCSharpGenerator = new CSharpGenerator();
 	mCGenerator = new CGenerator();
-    mModelGenerator = mCGenerator; //Switch between?
+    if(generateCSharp)
+    {
+    	mModelGenerator = mCSharpGenerator;
+    }
+    else
+    {
+		mModelGenerator = mCGenerator;
+    }
 }
 
 RoadRunner::~RoadRunner()

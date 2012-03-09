@@ -19,14 +19,13 @@ using namespace rr;
 #pragma argsused
 int _tmain()
 {
-    bool generateCSharp = false;
     char exePath[MAXPATH];
     getcwd(exePath, MAXPATH);
     gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("LoadSBML.log")));
     LogOutput::mLogToConsole = true;
 
     gLog.SetCutOffLogLevel(lDebug4);
-//       	gLog.SetCutOffLogLevel(lInfo);
+   	gLog.SetCutOffLogLevel(lInfo);
 
     Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
 
@@ -35,7 +34,7 @@ int _tmain()
     try
     {
     //Loading models (max is 459)
-    for(int caseNr = 1; caseNr < 2; caseNr++)
+    for(int caseNr = 1; caseNr < 460; caseNr++)
     {
         //int caseNr = 41;
         if(roadRunner)
@@ -43,7 +42,8 @@ int _tmain()
             delete roadRunner;	//Hav to do this because some initialization problems(?) in libs
         }
 
-        roadRunner = new RoadRunner;
+        bool generateCSharp = true;
+        roadRunner = new RoadRunner(generateCSharp);
         roadRunner->Reset();
         string modelsRootPath("C:\\RRW\\Models");
         string subFolder("test_cases_l2v4");

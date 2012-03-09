@@ -133,16 +133,18 @@ string Format(const string& src, const string& arg1, const int& arg2)
 
 string Format(const string& src, const string& arg1, const string& arg2, const string& arg3)
 {
-	string tmp = Substitute(src, "{0}", arg1);
-    tmp = Substitute(src, "{1}", arg2);
- 	return Substitute(src, "{2}", arg3);
+	string tmp(src);
+    tmp = Substitute(tmp, "{0}", arg1);
+    tmp = Substitute(tmp, "{1}", arg2);
+ 	tmp = Substitute(tmp, "{2}", arg3);
+    return tmp;
 }
 
 string Format(const string& src, const string& arg1, const int& arg2, const string& arg3)
 {
 	string tmp = Substitute(src, "{0}", arg1);
-    tmp = Substitute(src, "{1}", ToString(arg2));
- 	return Substitute(src, "{2}", arg3);
+    tmp = Substitute(tmp, "{1}", ToString(arg2));
+ 	return Substitute(tmp, "{2}", arg3);
 }
 
 string Format(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4)
