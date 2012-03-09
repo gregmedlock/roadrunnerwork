@@ -9,41 +9,30 @@ using std::string;
 
 namespace rr
 {
+#define tab "\t"
 
 class RR_DECLSPEC StringBuilder : public rrObject
 {
-	protected:
-    	stringstream mStringing;
 
+	protected:
+    	stringstream 				mStringing;
+		int							mSizeOfVarField1;
+		int							mSizeOfVarField2;
+		int							mSizeOfVarField3;
 	public:
 
-    	StringBuilder(const string& aStr = "");
-        void  Append(const string& str);
-        void  Append(const int& str);
-        void  Append(const unsigned int& str);
-        void  Append(const double& str);
-        void  Append(const string& s1, const string& s2);
-        void  Append(const string& s1, const string& s2, const string& s3);
-        void  Append(const string& s1, const unsigned int& s2, const string& s3);
-        void  Append(const string& s1, const unsigned int& s2, const string& s3, const string& s4);
+    								StringBuilder(const string& aStr = "");
 
-		stringstream& operator<<(const string& str);
+		stringstream& 				operator<<(const string& str);
+        string 						ToString();
+		void 						FormatVariable(const string& type, const string& varName, const string& comment = "");
+		void 						FormatArray(const string& type, const string& varName, const int& arraySize, const string& comment = "");
+        void						NewLine(const string& line = "");
+        void						Line(const string& line);
+        void						TLine(const string& line, const int& tabs = 1);
+        void						Clear();
 
-        //Only strings..
-        void AppendFormat(const string& str1, const string& str2);
-        void AppendFormat(const string& str1, const string& str2, const string& str3);
-        void AppendFormat(const string& str1, const string& arg1, const string& arg2, const string& arg3);
-        void AppendFormat(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4);
-        void AppendFormat(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4, const string& arg5);
 
-        //Strings and ints..
-        void AppendFormat(const string& str1, const string& arg1, const int& arg2);
-        void AppendFormat(const string& str1, const int& arg);
-        void AppendFormat(const string& str1, const unsigned int& arg1, const string& arg2);
-        void AppendFormat(const string& str1, const string& arg1, const int& arg2, const string& arg3);
-        void AppendFormat(const string& str1, const unsigned int& arg1, const unsigned int& arg2, const string& arg3, const string& arg4);
-        void AppendFormat(const string& str1, const unsigned int& arg1, const string& arg2, const string& arg3);
-        string ToString(){return mStringing.str();}
 };
 
 }

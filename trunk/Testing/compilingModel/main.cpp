@@ -101,14 +101,17 @@ int _tmain()
 
         //Now compile the code and load the resulting dll, and call an exported function in it...
 		stringstream exeCmd;
-        exeCmd<<"tcc -v -shared "<<codeGen->GetSourceCodeFileName()<<" -DBUILD_MODEL_DLL";
+        exeCmd<<"tcc -g -v -shared "<<codeGen->GetSourceCodeFileName()<<" -DBUILD_MODEL_DLL";
 
 
         Log(lInfo)<<"Executing "<<exeCmd.str();
 
         if(!CreateDLL(exeCmd.str()))
         {
-
+			Log(lError)<<"Creating DLL failed..";
+            cout<<"Hit any key to exit...";
+            cin.ignore(0,'\n');
+            getch();	cout<<"\nexiting....\n";
         }
 
         //Check if the DLL exists...
@@ -146,7 +149,7 @@ int _tmain()
         char* modelName = GetModelName();
         if(modelName)
         {
-        	Log(lInfo)<<"Model Name is:"<<modelName;
+        	Log(lInfo)<<"Model Name is: "<<modelName;
         }
 
     //    cout<<"Global parameter is now"<<gTheModel._gp[0]<<"\n";
@@ -154,8 +157,6 @@ int _tmain()
 
         Log(lInfo)<<"\nCopyright: "<<roadRunner->getCopyright()<<endl;
         delete roadRunner;
-
-
     }
     catch(Exception& ex)
     {

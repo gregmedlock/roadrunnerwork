@@ -2,6 +2,7 @@
 #define rrCGeneratorH
 //---------------------------------------------------------------------------
 #include "rrModelGenerator.h"
+#include "rrStringBuilder.h"
 namespace rr
 {
 
@@ -9,8 +10,8 @@ namespace rr
 class RR_DECLSPEC CGenerator : public ModelGenerator
 {
 	protected:
-		string    							mHeaderCode;
-        string 								mSourceCode;
+    	StringBuilder						mHeader;
+        StringBuilder						mSource;
 
 		string    							mHeaderCodeFileName;
         string 								mSourceCodeFileName;

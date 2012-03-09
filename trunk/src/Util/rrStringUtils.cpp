@@ -104,7 +104,6 @@ string Trim(const string& str)
 	return trimmed;
 }
 
-
 string RemoveNewLines(const string& str, const int& howMany)
 {
 	return Substitute(str, "\n" , "", howMany);
@@ -144,6 +143,79 @@ string Format(const string& src, const string& arg1, const int& arg2, const stri
 	string tmp = Substitute(src, "{0}", arg1);
     tmp = Substitute(src, "{1}", ToString(arg2));
  	return Substitute(src, "{2}", arg3);
+}
+
+string Format(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4)
+{
+	string token1("{0}");
+	string token2("{1}");
+	string token3("{2}");
+	string token4("{3}");
+	string newString(str1);
+
+    newString = Substitute(newString, token1, arg1);
+    newString = Substitute(newString, token2, arg2);
+    newString = Substitute(newString, token3, arg3);
+    newString = Substitute(newString, token4, arg4);
+	return newString;
+}
+
+string Format(const string& str1, const string& arg1, const string& arg2, const string& arg3, const string& arg4, const string& arg5)
+{
+	string token1("{0}");
+	string token2("{1}");
+	string token3("{2}");
+	string token4("{3}");
+	string token5("{4}");
+	string newString(str1);
+
+    newString = Substitute(newString, token1, arg1);
+    newString = Substitute(newString, token2, arg2);
+    newString = Substitute(newString, token3, arg3);
+    newString = Substitute(newString, token4, arg4);
+    newString = Substitute(newString, token5, arg5);
+	return newString;
+}
+
+string Format(const string& str1, const unsigned int& arg1, const string& arg2)
+{
+	string token1("{0}");
+	string token2("{1}");
+	string newString(str1);
+
+    newString = Substitute(newString, token1, arg1);
+    newString = Substitute(newString, token2, arg2);
+	return newString;
+}
+
+string Format(const string& str1, const unsigned int& arg1, const string& arg2, const string& arg3)
+{
+	string token1("{0}");
+	string token2("{1}");
+	string token3("{2}");
+	string newString(str1);
+
+    newString = Substitute(newString, token1, rr::ToString(arg1));
+	newString = Substitute(newString, token2, arg2);
+  	newString = Substitute(newString, token3, arg3);
+
+	return newString;
+}
+
+string Format(const string& str1, const unsigned int& arg1, const unsigned int& arg2, const string& arg3, const string& arg4)
+{
+	string tok1("{0}");
+	string tok2("{1}");
+	string tok3("{2}");
+	string tok4("{2}");
+	string newString(str1);
+
+    newString = Substitute(newString, tok1, arg1);
+	newString = Substitute(newString, tok2, arg2);
+  	newString = Substitute(newString, tok3, arg3);
+  	newString = Substitute(newString, tok4, arg4);
+
+	return newString;
 }
 
 string Substitute(const string& src, const string& thisOne, const int& withThisOne, const int& howMany)
@@ -290,9 +362,13 @@ int ToInt(const string& str)
 bool ToBool(const string& str)
 {
     if(str.size() < 2)
+    {
         return (str == "1")     ? true : false;
+    }
     else
+    {
         return (str == "true")  ? true : false;
+    }
 }
 
 double ToDouble(const string& str)
@@ -303,6 +379,7 @@ double ToDouble(const string& str)
 	char *endptr = NULL;
 	return strtod(str.c_str(), &endptr);
 }
+
 string ToUpperOrLowerCase(const string& inStr, int (*func)(int))
 {
 	string rString(inStr);
@@ -457,28 +534,56 @@ int CompareNoCase(const string& str1, const string& str2)
 	return res;
 }
 
+string Append(const string& str)
+{
+	stringstream ss;
+    ss<<str;
+	return ss.str();
+}
 
-//double ConvertstringToDouble(const string& dbl);
-//double ConvertstringToDouble(const string& s)
-//{
-//	//get unit;
-//	int nPos = strcspn(s.c_str(), "nums");
-//	char unit = s[nPos];
-//
-//	//get the scaling factor;
-//	double dScale = 1.0;
-//	switch (unit)
-//	{
-//		case 'n':   dScale = 1.0; break;
-//		case 'u':   dScale = 1.0e3; break;
-//		case 'm':   dScale = 1.0e6; break;
-//		case 's':   dScale = 1.0e9; break;
-//		default:
-//	            dScale = 1.0;
-//	}
-//
-//	return atof(s.c_str()) * dScale;
-//}
+string Append(const int& str)
+{
+	stringstream ss;
+    ss<<str;
+   	return ss.str();
+}
+
+
+string Append(const unsigned int& str)
+{
+	stringstream ss;
+    ss<<str;
+	return ss.str();
+}
+
+
+string Append(const string& s1, const string& s2)
+{
+	stringstream ss;
+    ss<<s1<<s2;
+	return ss.str();
+}
+
+string Append(const string& s1, const string& s2, const string& s3)
+{
+	stringstream ss;
+    ss<<s1<<s2<<s3;
+	return ss.str();
+}
+
+string Append(const string& s1, const unsigned int& s2, const string& s3)
+{
+	stringstream ss;
+	ss<<s1<<s2<<s3;
+	return ss.str();
+}
+
+string Append(const string& s1, const unsigned int& s2, const string& s3, const string& s4)
+{
+	stringstream ss;
+   	ss<<s1<<s2<<s3<<s4;
+	return ss.str();
+}
 
 }
 
