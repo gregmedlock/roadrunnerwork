@@ -16,8 +16,22 @@
 //************************************************************************** 
 
 
-D_S struct TModel
-{
+	//The following structures mimics two members of the base class to the model
+	struct 
+	{
+		double* vec;
+		int Length;
+	} amounts;
+
+	struct 
+	{
+		double* vec;
+		int Length;
+	} rateRules;
+
+	double                             time;                                       
+	//End of base class members
+
 	char*                              mModelName;                                       
 	char**                             mWarnings;                                       
 	double                             _gp[1];                                 //Vector containing all the global parameters in the System  
@@ -54,8 +68,7 @@ D_S struct TModel
 	//TPerformEventAssignmentDelegate  _performEventAssignments;                                       
 	bool                               _eventStatusArray[0];                   
 	bool                               _previousEventStatusArray[0];           
-} g;	//This is global data in the DLL
-
+D_S void evalModel(double timein, double* _amounts);
 
 //NON - EXPORTS ========================================
 void				InitializeDelays();

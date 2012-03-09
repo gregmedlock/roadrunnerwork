@@ -18,8 +18,9 @@
 using namespace std;
 using namespace rr;
 
-bool CreateDLL(const string& cmdLine);
-HINSTANCE LoadDLL(const string& dllName);
+bool 		CreateDLL(const string& cmdLine);
+HINSTANCE 	LoadDLL(const string& dllName);
+void 		PauseBeforeExit(bool doIt = true);
 
 const int MAXMODULE = 512;
 
@@ -104,25 +105,25 @@ int _tmain()
         exeCmd<<"tcc -g -v -shared "<<codeGen->GetSourceCodeFileName()<<" -DBUILD_MODEL_DLL";
 
 
-        Log(lInfo)<<"Executing "<<exeCmd.str();
+        Log(lInfo)<<"\n================ Compiling the DLL =============";
+        Log(lInfo)<<"\nExecuting: "<<exeCmd.str();
 
         if(!CreateDLL(exeCmd.str()))
         {
 			Log(lError)<<"Creating DLL failed..";
-            cout<<"Hit any key to exit...";
-            cin.ignore(0,'\n');
-            getch();	cout<<"\nexiting....\n";
+            PauseBeforeExit();
         }
 
         //Check if the DLL exists...
-
         string dllFName(GetFileNameNoPath(codeGen->GetSourceCodeFileName()));
         string dllName(appPath + "\\" + ChangeFileNameExtensionTo(dllFName,"dll"));
+
         //Load the DLL
         HINSTANCE dllHandle = LoadDLL(dllName);
 		if(!dllHandle)
         {
-
+			Log(lError)<<"Loading the DLL failed..";
+            PauseBeforeExit();
         }
 
         //Load functions..
@@ -131,7 +132,7 @@ int _tmain()
         {
             Log(lError) << "Unable to load function." << endl;
             FreeLibrary((HMODULE) dllHandle);
-            return -1;
+            PauseBeforeExit();
         }
 
         GetModelName = (cfunc2) GetProcAddress((HMODULE) dllHandle, "GetModelName");
@@ -139,10 +140,10 @@ int _tmain()
         {
             Log(lError) << "Unable to load function." << endl;
             FreeLibrary((HMODULE) dllHandle);
-            return -1;
+            PauseBeforeExit();
         }
 
-        Log(lInfo)<<"Calling init...";
+        Log(lInfo)<<"\n================= Testing some DLL functions ========================";
         int res = InitModel();
         Log(lInfo)<<"The result was: "<<res;
 
@@ -164,9 +165,7 @@ int _tmain()
     }
 
   	//-------------------------------------
-//	cout<<"Hit any key to exit...";
-//	cin.ignore(0,'\n');
-//    getch();	cout<<"\nexiting....\n";
+    PauseBeforeExit();
 	return 0;
 }
 
@@ -203,16 +202,16 @@ bool CreateDLL(const string& cmdLine)
     }
 
     // Start the child process.
-    if( !CreateProcess( NULL,   // No module name (use command line)
+    if( !CreateProcess( NULL,   		// No module name (use command line)
         (char*) cmdLine.c_str(),        // Command line
-        NULL,           // Process handle not inheritable
-        NULL,           // Thread handle not inheritable
-        FALSE,          // Set handle inheritance to FALSE
-        0,              // No creation flags
-        NULL,           // Use parent's environment block
-        NULL,           // Use parent's starting directory
-        &si,            // Pointer to STARTUPINFO structure
-        &pi )           // Pointer to PROCESS_INFORMATION structure
+        NULL,                           // Process handle not inheritable
+        NULL,                           // Thread handle not inheritable
+        FALSE,                          // Set handle inheritance to FALSE
+        0,                              // No creation flags
+        NULL,                           // Use parent's environment block
+        NULL,                           // Use parent's starting directory
+        &si,                            // Pointer to STARTUPINFO structure
+        &pi )                           // Pointer to PROCESS_INFORMATION structure
     )
     {
         printf( "CreateProcess failed (%d).\n", GetLastError() );
@@ -228,4 +227,16 @@ bool CreateDLL(const string& cmdLine)
     return true;
 }
 
+void PauseBeforeExit(bool doIt)
+{
+	if(!doIt)
+    {
+    	return;
+    }
 
+    cout<<"Hit any key to exit...";
+    cin.ignore(0,'\n');
+    getch();
+    cout<<"\nExiting....\n";
+    exit(0);
+}
