@@ -74,6 +74,10 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="..\..\build\link\RoadRunner_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>1</BuildOrder>
+			</LibFiles>
 			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>

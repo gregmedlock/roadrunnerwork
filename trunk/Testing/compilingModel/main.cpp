@@ -36,7 +36,7 @@ int _tmain()
     char exePath[MAXPATH];
     getcwd(exePath, MAXPATH);
     string appPath(exePath);
-    gLog.Init("loadSBML", lDebug5, unique_ptr<LogFile>(new LogFile("CompilingModel.log")));
+    gLog.Init("compileModel", lDebug5, unique_ptr<LogFile>(new LogFile("CompilingModel.log")));
     LogOutput::mLogToConsole = true;
 
     gLog.SetCutOffLogLevel(lDebug4);
@@ -58,8 +58,8 @@ int _tmain()
 
         roadRunner = new RoadRunner;
         roadRunner->Reset();
-        string modelsRootPath("C:\\RRW\\Models");
-        string subFolder("test_cases_l2v4");
+        string modelsRootPath("C:\\rrw\\Models");
+        string subFolder("l2v4");
 
         //int caseNr = 1;
         stringstream modelSubPath;
@@ -97,7 +97,7 @@ int _tmain()
             throw;
         }
 
-        string srcCodeFolder("C:\\RRW\\Testing\\rr_code_output\\c_from_rr++");
+        string srcCodeFolder("C:\\rrw\\Testing\\rr_code_output\\c_from_rr++");
 		codeGen->SaveSourceCodeToFolder(srcCodeFolder);
 
         //Now compile the code and load the resulting dll, and call an exported function in it...
