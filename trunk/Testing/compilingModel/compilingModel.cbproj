@@ -35,7 +35,7 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\;..\..\src\Util\;C:\RRW\Testing\loadSBML\;C:\rrInstalls\xe\sundials\include;C:\rrInstalls\xe\libsbml\include;C:\rrInstalls\xe\nom\include;..\..\src;..\..\src\Logger;..\..\src\Scanner;..\..\src\LibStructSupport;..\..\src\libstruct;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\src\;..\..\src\Util\;..\..\src;..\..\src\Logger;..\..\src\Scanner;..\..\src\LibStructSupport;..\..\src\libstruct;C:\rrInstalls\include;C:\rrInstalls\sundials\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\src\;..\..\src\Util\;..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -74,10 +74,6 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="..\..\build\link\RoadRunner_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>3</BuildOrder>
-			</LibFiles>
 			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>

@@ -1,6 +1,7 @@
 #! /usr/bin/bash
 #This script carries out any post build needs
-#1: copy road runner dl(s) to the RRW/build/bin folder
+#1: copy road runner dll to the RRW/build/bin folder
+#2: copy road runner link lib to RRW/build/link folder
 
 #Argument1 is the applications name (no extension)
 arg1=$1
@@ -16,49 +17,54 @@ OUTPUT_PATH=`cygpath $arg2`
 [[ $OUTPUT_PATH =~ 'Debug' ]] && MODE="DEBUG" || MODE="NO_DEBUG"
 echo "Compilation mode is: "$MODE
 
-APP_BUILD_INFO_FILE="AppBuildInfo"
+BUILD_INFO_FILE="BuildInfo"
 APP_ROOT=`pwd`
-RR_BUILD_FOLDER="/cygdrive/c/RRW/build"
-RR_BIN_FOLDER=$RR_BUILD_FOLDER"/bin"
-RR_LINK_FOLDER=$RR_BUILD_FOLDER"/link"
+BUILD_FOLDER=$APP_ROOT/$arg2/"Win32"
+INSTALL_FOLDER="/cygdrive/c/rrw/build"
+BIN_FOLDER=$INSTALL_FOLDER"/bin"
+LINK_FOLDER=$INSTALL_FOLDER"/link"
 THIRD_PARTY="/cygdrive/p/ThirdParty"
 
 #Document SVN revisions
-RRW_SVN_REVISION=`svn info $APP_ROOT | grep Revision | cut -d ":" -f2`
-echo "RR library svn revision: "$RRW_SVN_REVISION > $APP_BUILD_INFO_FILE
+SVN_REVISION=`svn info $APP_ROOT | grep Revision | cut -d ":" -f2`
+echo "svn revision: "$SVN_REVISION > $BUILD_INFO_FILE
 
-#RELEASE_FOLDER=$OUTPUT_PATH
-RELEASE_FOLDER=$RR_BIN_FOLDER
-
-#Copy needed "global" binaries needed for releases
+#Files to move around...
 SHARED_BINS=" \
-$RR_LINK_FOLDER/RoadRunner_xe.dll
+$BUILD_FOLDER/$arg1.dll
+"
+LINK_LIBS=" \
+$BUILD_FOLDER/$arg1.lib
 "
 
 DEBUG_FILES=" \
-$RR_LINK_FOLDER/RoadRunner_xe.tds
+$BUILD_FOLDER/$arg1.tds
 "
 
-#Copy needed misc files needed for releases
 MISC_FILES=" \
-$APP_BUILD_INFO_FILE \
+$BUILD_INFO_FILE \
 "
 
 #Binaries
 for file in $SHARED_BINS; do
-	cp -fv $file $RELEASE_FOLDER
+	cp -fv $file $BIN_FOLDER
+done
+
+#Binaries
+for file in $LINK_LIBS; do
+	cp -fv $file $LINK_FOLDER
 done
 
 #Other
 for file in $MISC_FILES; do
-	cp -fv $file $RELEASE_FOLDER
+	cp -fv $file $INSTALL_FOLDER
 done
 
 #Debug Files
 if [ $MODE = "DEBUG" ]; then
 
 for file in $DEBUG_FILES; do
-	cp -fv $file $RELEASE_FOLDER
+	cp -fv $file $BIN_FOLDER
 done
 fi
 echo "DONE"

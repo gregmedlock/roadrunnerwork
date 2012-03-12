@@ -28,13 +28,12 @@
 			<ProjectType>CppDynamicLibrary</ProjectType>
 			<PackageImports>rtl.bpi;vclimg.bpi;vcl.bpi;vclx.bpi;vcldb.bpi;dbrtl.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;vcltouch.bpi;xmlrtl.bpi;vclactnband.bpi;dsnap.bpi;dbxcds.bpi;dbexpress.bpi;DbxCommonDriver.bpi;vclribbon.bpi;DataSnapIndy10ServerTransport.bpi;DbxClientDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;bcbsmp.bpi;IndyProtocols.bpi;inet.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vcldbx.bpi;bdertl.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;DataSnapProviderClient.bpi;vclie.bpi;inetdbbde.bpi;inetdbxpress.bpi;DataSnapClient.bpi;inetdb.bpi;DataSnapServer.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi;DuneComponents.bpi;mtkCommonRTL.bpi;VCLCommonRTL.bpi;vtkComponents.bpi;mtkGraphicsRTL.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;VCLData.bpi;VCLMolecule.bpi;mtkMoleculeRTL.bpi;mtkSpinRTL.bpi;GenesisVisualComponents.bpi</PackageImports>
 			<OutputExt>dll</OutputExt>
-			<FinalOutputDir>C:\RRW\build\bin\</FinalOutputDir>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
-			<_TCHARMapping>wchar_t</_TCHARMapping>
+			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\src\libstruct\;..\src\LibStructSupport\;..\src\Scanner\;..\ThirdParty\NOMLib\src\;..\src\Logger\;..\src\Util\mtrand\;..\src\Util\;..\src\Solvers\;..\src\;C:\RRW\src\;C:\rrInstalls\xe\sundials\include;C:\rrInstalls\xe\libstruct\include;C:\rrInstalls\xe\libsbml\include;C:\rrInstalls\xe\libsbml\include\sbml;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>C:\rrBuilds\xe\clapack\Testing\MATGEN\;..\src\libstruct\;..\src\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\src\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;..\src\Logger\;..\ThirdParty\libsbml\dependencies\lib\;..\src\Util\mtrand\;..\build\link\;..\src\Util\;..\src\Solvers\;..\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\src\libstruct\;..\src\LibStructSupport\;..\src\Scanner\;..\ThirdParty\NOMLib\src\;..\src\Logger\;..\src\Util\mtrand\;..\src\Util\;..\src\Solvers\;..\src\;C:\RRW\src\;C:\rrInstalls\include;C:\rrInstalls\sundials\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>C:\rrInstalls\sundials\lib\;..\ThirdParty\clapack\PreBuilt\;C:\rrInstalls\;C:\rrBuilds\xe\clapack\Testing\MATGEN\;..\src\libstruct\;..\src\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\src\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;..\src\Logger\;..\ThirdParty\libsbml\dependencies\lib\;..\src\Util\mtrand\;..\build\link\;..\src\Util\;..\src\Solvers\;..\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -50,7 +49,6 @@
 			<IncludePath>C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
 			<_TCHARMapping>char</_TCHARMapping>
 			<BCC_PCHName>rrLib.csm</BCC_PCHName>
-			<FinalOutputDir>C:\RRW\build\link</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -72,33 +70,17 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
+			<LibFiles Include="C:\rrInstalls\libsbml.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>57</BuildOrder>
+				<BuildOrder>53</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>55</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrBuilds\xe\clapack\SRC\lapack.lib">
+			<LibFiles Include="C:\rrInstalls\sundials\lib\sundials_cvode.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>56</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\libsbml\lib\libsbml.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>58</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\libsbml\lib\libxml2_xe.lib">
+			<LibFiles Include="C:\rrInstalls\sundials\lib\sundials_nvecserial.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>57</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\sundials\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>47</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\sundials\lib\sundials_nvecserial.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>48</BuildOrder>
 			</LibFiles>
 			<CppCompile Include="..\src\LibStructSupport\rrInteropUtils.cpp">
 				<DependentOn>..\src\LibStructSupport\rrInteropUtils.h</DependentOn>
@@ -300,6 +282,14 @@
 				<DependentOn>..\src\Util\rrUtils.h</DependentOn>
 				<BuildOrder>45</BuildOrder>
 			</CppCompile>
+			<LibFiles Include="..\ThirdParty\clapack\PreBuilt\libblas_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>54</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\ThirdParty\clapack\PreBuilt\liblapack_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>55</BuildOrder>
+			</LibFiles>
 			<CppCompile Include="RoadRunnerLib.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
