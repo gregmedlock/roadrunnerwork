@@ -32,7 +32,7 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\src\libstruct\;..\src\LibStructSupport\;..\src\Scanner\;..\ThirdParty\NOMLib\src\;..\src\Logger\;..\src\Util\mtrand\;..\src\Util\;..\src\Solvers\;..\src\;C:\RRW\src\;C:\rrInstalls\include;C:\rrInstalls\sundials\include;$(IncludePath)</IncludePath>
+			<IncludePath>..\src\libstruct\;..\src\LibStructSupport\;..\src\Scanner\;..\ThirdParty\NOMLib\src\;..\src\Logger\;..\src\Util\mtrand\;..\src\Util\;..\src\Solvers\;..\src\;C:\RRW\src\;C:\rrInstalls\xe\libsbml\include;C:\rrInstalls\xe\libsbml\include\sbml;C:\rrInstalls\xe\sundials\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>C:\rrInstalls\sundials\lib\;..\ThirdParty\clapack\PreBuilt\;C:\rrInstalls\;C:\rrBuilds\xe\clapack\Testing\MATGEN\;..\src\libstruct\;..\src\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\src\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;..\src\Logger\;..\ThirdParty\libsbml\dependencies\lib\;..\src\Util\mtrand\;..\build\link\;..\src\Util\;..\src\Solvers\;..\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -281,6 +281,10 @@
 			<CppCompile Include="..\src\Util\rrSymbolList.cpp">
 				<DependentOn>..\src\Util\rrSymbolList.h</DependentOn>
 				<BuildOrder>19</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\src\Util\rrTextWriter.cpp">
+				<DependentOn>..\src\Util\rrTextWriter.h</DependentOn>
+				<BuildOrder>59</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\src\Util\rrUtils.cpp">
 				<DependentOn>..\src\Util\rrUtils.h</DependentOn>

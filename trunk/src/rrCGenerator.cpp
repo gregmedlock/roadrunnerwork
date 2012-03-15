@@ -2339,44 +2339,44 @@ void CGenerator::WriteInitFunction(StringBuilder& ignore, StringBuilder& source)
 
     source<<"\t"<<Append("InitializeDelays();" , NL());
 
-      // Declare any eventAssignment delegates
-      if (mNumEvents > 0)
-      {
-          source<<Append("\t\t_eventAssignments = new TEventAssignmentDelegate[numEvents];" , NL());
-          source<<Append("\t\t_eventPriorities = new double[numEvents];" , NL());
-          source<<Append("\t\t_computeEventAssignments= new TComputeEventAssignmentDelegate[numEvents];" , NL());
-          source<<Append("\t\t_performEventAssignments= new TPerformEventAssignmentDelegate[numEvents];" , NL());
+    // Declare any eventAssignment delegates
+    if (mNumEvents > 0)
+    {
+        source<<Append("\t\t_eventAssignments = new TEventAssignmentDelegate[numEvents];" , NL());
+        source<<Append("\t\t_eventPriorities = new double[numEvents];" , NL());
+        source<<Append("\t\t_computeEventAssignments= new TComputeEventAssignmentDelegate[numEvents];" , NL());
+        source<<Append("\t\t_performEventAssignments= new TPerformEventAssignmentDelegate[numEvents];" , NL());
 
-          for (int i = 0; i < mNumEvents; i++)
-          {
-          	string iStr = ToString(i);
-              source<<Append("\t\t_eventAssignments[" + iStr + "] = new TEventAssignmentDelegate (eventAssignment_" + iStr +
-                        ");" + NL());
-              source<<Append("\t\t_computeEventAssignments[" + iStr +
-                        "] = new TComputeEventAssignmentDelegate (computeEventAssignment_" + iStr + ");" + NL());
-              source<<Append("\t\t_performEventAssignments[" + iStr +
-                        "] = new TPerformEventAssignmentDelegate (performEventAssignment_" + iStr + ");" + NL());
-          }
+        for (int i = 0; i < mNumEvents; i++)
+        {
+        	string iStr = ToString(i);
+            source<<Append("\t\t_eventAssignments[" + iStr + "] = new TEventAssignmentDelegate (eventAssignment_" + iStr +
+                      ");" + NL());
+            source<<Append("\t\t_computeEventAssignments[" + iStr +
+                      "] = new TComputeEventAssignmentDelegate (computeEventAssignment_" + iStr + ");" + NL());
+            source<<Append("\t\t_performEventAssignments[" + iStr +
+                      "] = new TPerformEventAssignmentDelegate (performEventAssignment_" + iStr + ");" + NL());
+        }
 
-          source<<Append("\t\tresetEvents();" + NL());
-          source<<Append(NL());
-      }
+        source<<Append("\t\tresetEvents();" + NL());
+        source<<Append(NL());
+    }
 
-      if (mNumModifiableSpeciesReferences > 0)
-      {
-          for (int i = 0; i < ModifiableSpeciesReferenceList.size(); i++)
-          {
-              source<<Append("\t\t_sr[" + ToString(i) + "]  = " + WriteDouble(ModifiableSpeciesReferenceList[i].value) + ";" + NL());
-          }
-          source<<Append(NL());
-      }
+    if (mNumModifiableSpeciesReferences > 0)
+    {
+        for (int i = 0; i < ModifiableSpeciesReferenceList.size(); i++)
+        {
+            source<<Append("\t\t_sr[" + ToString(i) + "] = " + WriteDouble(ModifiableSpeciesReferenceList[i].value) + ";" + NL());
+        }
+        source<<Append(NL());
+    }
 
-      // Declare space for local parameters
-      for (int i = 0; i < mNumReactions; i++)
-      {
-          source<<Append("\tlocalParameterDimensions[" + ToString(i) + "] = " , mLocalParameterDimensions[i] , ";" + NL());
-          source<<"\t_lp["<<i<<"] = (double*) malloc(sizeof(double)*"<<mLocalParameterDimensions[i]<<");"<<endl;
-      }
+    // Declare space for local parameters
+    for (int i = 0; i < mNumReactions; i++)
+    {
+        source<<Append("\tlocalParameterDimensions[" + ToString(i) + "] = " , mLocalParameterDimensions[i] , ";" + NL());
+        source<<"\t_lp["<<i<<"] = (double*) malloc(sizeof(double)*"<<mLocalParameterDimensions[i]<<");"<<endl;
+    }
 
     source.TLine("return 0;");
     source.Line("}");

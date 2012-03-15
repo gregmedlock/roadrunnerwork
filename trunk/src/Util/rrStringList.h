@@ -24,8 +24,10 @@ class RR_DECLSPEC StringList : public rrObject
 	   								StringList(const StringList& cp);
 
     	void 				        Add(const string& str);
-        int  				        size(){return mStrings.size();}
+        int  				        size() const {return mStrings.size();}
+        int  				        Count() const {return mStrings.size();}
 	    string&  			        operator[](const int& index){return mStrings[index];}
+	    string  			        operator[](const int& index) const {return mStrings[index];}
         int					        find(const string& item);
         void						empty(){mStrings.clear();}
         bool						Contains(const string& item);

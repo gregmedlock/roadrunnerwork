@@ -10,6 +10,7 @@
 #include "rrNLEQInterface.h"
 #include "rrStringList.h"
 #include "rrMisc.h"
+#include "rrTextWriter.h"
 using std::string;
 
 namespace rr
@@ -26,7 +27,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		const double 					STEADYSTATE_THRESHOLD;
      	vector<TSelectionRecord> 		mSteadyStateSelection;
 		string 							mModelCode;
-		CvodeInterface 				   *cvode;
+		CvodeInterface 				   *mCVode;
 		ISteadyStateSolver			   *steadyStateSolver;
         vector<TSelectionRecord> 		selectionList;
         ModelGenerator				   *mCSharpGenerator;
@@ -47,6 +48,93 @@ class RR_DECLSPEC RoadRunner : public rrObject
         vector<double> 					computeSteadyStateValues(const vector<TSelectionRecord>& oSelection, const bool& computeSteadyState);
         double 							computeSteadyStateValue(const TSelectionRecord& record);
         list<string> 					getParameterNames();
+
+
+
+        //RoadRunner MCA functions......
+
+        //[Help("Get unscaled control coefficient with respect to a global parameter")]
+        double getuCC(string variableName, string parameterName);
+
+        //[Help("Get scaled control coefficient with respect to a global parameter")]
+        double getCC(string variableName, string parameterName);
+
+        //[Help("Get unscaled elasticity coefficient with respect to a global parameter or species")]
+        double getuEE(string reactionName, string parameterName);
+
+        //[Help("Get unscaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
+        double getuEE(string reactionName, string parameterName, bool computeSteadystate);
+
+        //[Help("Get scaled elasticity coefficient with respect to a global parameter or species")]
+        double getEE(string reactionName, string parameterName);
+
+        //[Help("Get scaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
+        double getEE(string reactionName, string parameterName, bool computeSteadyState);
+
+        // Get a single species elasticity value
+        // IMPORTANT:
+        // Assumes that the reaction rates have been precomputed at the operating point !!
+        double getUnscaledSpeciesElasticity(int reactionId, int speciesIndex);
+
+        //"Returns the elasticity of a given reaction to a given parameter. Parameters can be boundary species or global parameters"
+        double getUnScaledElasticity(string reactionName, string parameterName);
+
+        //"Compute the unscaled species elasticity matrix at the current operating point")]
+        double** getUnscaledElasticityMatrix();
+
+        //"Compute the unscaled elasticity matrix at the current operating point")]
+        double** getScaledElasticityMatrix();
+
+        //[Help("Compute the unscaled elasticity for a given reaction and given species")]
+        double getUnscaledFloatingSpeciesElasticity(string reactionName, string speciesName);
+
+        //[Help("Compute the scaled elasticity for a given reaction and given species")]
+        double getScaledFloatingSpeciesElasticity(string reactionName, string speciesName);
+
+        // Changes a given parameter type by the given increment
+        void changeParameter(TParameterType parameterType, int reactionIndex, int parameterIndex, double originalValue, double increment);
+        //[Help("Returns the unscaled elasticity for a named reaction with respect to a named parameter (local or global)"
+        double getUnscaledParameterElasticity(string reactionName, string parameterName);
+
+        // Use the formula: ucc = -L Jac^-1 Nr
+        //[Help("Compute the matrix of unscaled concentration control coefficients")]
+        double** getUnscaledConcentrationControlCoefficientMatrix();
+//        static Complex[][] ConvertComplex(SimpleComplex[][] oMatrix);
+
+        //[Help("Compute the matrix of scaled concentration control coefficients")]
+        double** getScaledConcentrationControlCoefficientMatrix();
+
+        // Use the formula: ucc = elast CS + I
+        //[Help("Compute the matrix of unscaled flux control coefficients")]
+        double** getUnscaledFluxControlCoefficientMatrix();
+
+        //[Help("Compute the matrix of scaled flux control coefficients")]
+        double** getScaledFluxControlCoefficientMatrix();
+
+        //"Compute the value for a particular unscaled concentration control coefficients with respect to a local parameter"
+        double getUnscaledConcentrationControlCoefficient(string speciesName, string localReactionName, string parameterName);
+
+        //"Compute the value for a particular scaled concentration control coefficients with respect to a local parameter"
+        double getScaledConcentrationControlCoefficient(string speciesName, string localReactionName, string parameterName);
+		//"Compute the value for a particular concentration control coefficient, permitted parameters include global parameters, boundary conditions and conservation totals"
+        double getUnscaledConcentrationControlCoefficient(string speciesName, string parameterName);
+
+        //"Compute the value for a particular scaled concentration control coefficients with respect to a global or boundary species parameter"
+        double getScaledConcentrationControlCoefficient(string speciesName, string parameterName);
+
+        //[Help("Compute the value for a particular unscaled flux control coefficients with respect to a local parameter")
+        double getUnscaledFluxControlCoefficient(string fluxName, string localReactionName, string parameterName);
+
+        //"Compute the value for a particular flux control coefficient, permitted parameters include global parameters, boundary conditions and conservation totals"
+        double getUnscaledFluxControlCoefficient(string reactionName, string parameterName);
+
+        //[Help("Compute the value for a particular scaled flux control coefficients with respect to a local parameter");]
+        double getScaledFluxControlCoefficient(string reactionName, string localReactionName, string parameterName);
+
+        //    "Compute the value for a particular scaled flux control coefficients with respect to a global or boundary species parameter"
+        double getScaledFluxControlCoefficient(string reactionName, string parameterName);
+
+    	//-------------- End of MCA functions
 
 	public:
     	// Properties -----------------------------------------------------------------------------
@@ -87,7 +175,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void                            setNumPoints(const int& nummberOfPoints);
         void                            reset();
         void                            changeInitialConditions(const vector<double>& ic);
-        vector<double>             		simulate();
+        vector< vector<double> >   		simulate();
         vector<double>            		simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
         vector<double>                  getReactionRates();
         vector<double>                  getRatesOfChange();
@@ -224,6 +312,1498 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 
 ////C# - four slashes to make it clearer...
+//// Below are first RoadRunner MCA - partial class and then RoadRunner.cs
+
+////using System;
+////using System.Collections;
+////using System.Diagnostics;
+////using LibRoadRunner.Util;
+////using LibRoadRunner.Util.Unused;
+////using libstructural;
+////using SBW;
+////
+////namespace LibRoadRunner
+////{
+////    partial class RoadRunner
+////    {
+////        [Help("Get unscaled control coefficient with respect to a global parameter")]
+////        public double getuCC(string variableName, string parameterName)
+////        {
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    TParameterType parameterType;
+////                    TVariableType variableType;
+////                    double originalParameterValue;
+////                    int variableIndex;
+////                    int parameterIndex;
+////                    double f1;
+////                    double f2;
+////
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    // Check the variable name
+////                    if (ModelGenerator.Instance.reactionList.find(variableName, out variableIndex))
+////                    {
+////                        variableType = TVariableType.vtFlux;
+////                    }
+////                    else if (ModelGenerator.Instance.floatingSpeciesConcentrationList.find(variableName,
+////                                                                                           out variableIndex))
+////                    {
+////                        variableType = TVariableType.vtSpecies;
+////                    }
+////                    else throw new SBWApplicationException("Unable to locate variable: [" + variableName + "]");
+////
+////                    // Check for the parameter name
+////                    if (ModelGenerator.Instance.globalParameterList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptGlobalParameter;
+////                        originalParameterValue = model.gp[parameterIndex];
+////                    }
+////                    else if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptBoundaryParameter;
+////                        originalParameterValue = model.bc[parameterIndex];
+////                    }
+////                    else if (ModelGenerator.Instance.conservationList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptConservationParameter;
+////                        originalParameterValue = model.ct[parameterIndex];
+////                    }
+////                    else throw new SBWApplicationException("Unable to locate parameter: [" + parameterName + "]");
+////
+////                    // Get the original parameter value
+////                    originalParameterValue = getParameterValue(parameterType, parameterIndex);
+////
+////                    double hstep = DiffStepSize*originalParameterValue;
+////                    if (Math.Abs(hstep) < 1E-12)
+////                        hstep = DiffStepSize;
+////
+////                    try
+////                    {
+////                        model.convertToConcentrations();
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue + hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fi = getVariableValue(variableType, variableIndex);
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue + 2*hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fi2 = getVariableValue(variableType, variableIndex);
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue - hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fd = getVariableValue(variableType, variableIndex);
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue - 2*hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fd2 = getVariableValue(variableType, variableIndex);
+////
+////                        // Use instead the 5th order approximation double unscaledValue = (0.5/hstep)*(fi-fd);
+////                        // The following separated lines avoid small amounts of roundoff error
+////                        f1 = fd2 + 8*fi;
+////                        f2 = -(8*fd + fi2);
+////                    }
+////                    finally
+////                    {
+////                        // What ever happens, make sure we restore the parameter level
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue);
+////                        steadyState();
+////                    }
+////                    return 1/(12*hstep)*(f1 + f2);
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getuCC ()", e.Message);
+////            }
+////        }
+////
+////
+////        [Help("Get scaled control coefficient with respect to a global parameter")]
+////        public double getCC(string variableName, string parameterName)
+////        {
+////            TVariableType variableType;
+////            TParameterType parameterType;
+////            int variableIndex;
+////            int parameterIndex;
+////            //double originalParameterValue;
+////
+////            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
+////            // Check the variable name
+////            if (ModelGenerator.Instance.reactionList.find(variableName, out variableIndex))
+////            {
+////                variableType = TVariableType.vtFlux;
+////            }
+////            else if (ModelGenerator.Instance.floatingSpeciesConcentrationList.find(variableName, out variableIndex))
+////            {
+////                variableType = TVariableType.vtSpecies;
+////            }
+////            else throw new SBWApplicationException("Unable to locate variable: [" + variableName + "]");
+////
+////            // Check for the parameter name
+////            if (ModelGenerator.Instance.globalParameterList.find(parameterName, out parameterIndex))
+////            {
+////                parameterType = TParameterType.ptGlobalParameter;
+////                //originalParameterValue = model.gp[parameterIndex];
+////            }
+////            else if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out parameterIndex))
+////            {
+////                parameterType = TParameterType.ptBoundaryParameter;
+////                //originalParameterValue = model.bc[parameterIndex];
+////            }
+////            else if (ModelGenerator.Instance.conservationList.find(parameterName, out parameterIndex))
+////            {
+////                parameterType = TParameterType.ptConservationParameter;
+////                //originalParameterValue = model.ct[parameterIndex];
+////            }
+////
+////
+////            else throw new SBWApplicationException("Unable to locate parameter: [" + parameterName + "]");
+////
+////            steadyState();
+////            double variableValue = getVariableValue(variableType, variableIndex);
+////            double parameterValue = getParameterValue(parameterType, parameterIndex);
+////
+////            return getuCC(variableName, parameterName)*parameterValue/variableValue;
+////        }
+////
+////
+////        [Help("Get unscaled elasticity coefficient with respect to a global parameter or species")]
+////        public double getuEE(string reactionName, string parameterName)
+////        {
+////            return getuEE(reactionName, parameterName, true);
+////        }
+////
+////        [Help("Get unscaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
+////        public double getuEE(string reactionName, string parameterName, bool computeSteadystate)
+////        {
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    TParameterType parameterType;
+////                    double originalParameterValue;
+////                    int reactionIndex;
+////                    int parameterIndex;
+////                    double f1;
+////                    double f2;
+////
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    // Check the reaction name
+////                    if (!ModelGenerator.Instance.reactionList.find(reactionName, out reactionIndex))
+////                    {
+////                        throw new SBWApplicationException("Unable to locate reaction name: [" + reactionName + "]");
+////                    }
+////
+////                    // Find out what kind of parameter we are dealing with
+////                    if (ModelGenerator.Instance.floatingSpeciesConcentrationList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptFloatingSpecies;
+////                        originalParameterValue = model.y[parameterIndex];
+////                    }
+////                    else if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptBoundaryParameter;
+////                        originalParameterValue = model.bc[parameterIndex];
+////                    }
+////                    else if (ModelGenerator.Instance.globalParameterList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptGlobalParameter;
+////                        originalParameterValue = model.gp[parameterIndex];
+////                    }
+////                    else if (ModelGenerator.Instance.conservationList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptConservationParameter;
+////                        originalParameterValue = model.ct[parameterIndex];
+////                    }
+////                    else throw new SBWApplicationException("Unable to locate variable: [" + parameterName + "]");
+////
+////                    double hstep = DiffStepSize*originalParameterValue;
+////                    if (Math.Abs(hstep) < 1E-12)
+////                        hstep = DiffStepSize;
+////
+////                    try
+////                    {
+////                        model.convertToConcentrations();
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue + hstep);
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fi = model.rates[reactionIndex];
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue + 2*hstep);
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fi2 = model.rates[reactionIndex];
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue - hstep);
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fd = model.rates[reactionIndex];
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue - 2*hstep);
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fd2 = model.rates[reactionIndex];
+////
+////                        // Use instead the 5th order approximation double unscaledValue = (0.5/hstep)*(fi-fd);
+////                        // The following separated lines avoid small amounts of roundoff error
+////                        f1 = fd2 + 8*fi;
+////                        f2 = -(8*fd + fi2);
+////                    }
+////                    finally
+////                    {
+////                        // What ever happens, make sure we restore the parameter level
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue);
+////                        model.computeReactionRates(model.time, model.y);
+////                        if (computeSteadystate) steadyState();
+////                    }
+////                    return 1/(12*hstep)*(f1 + f2);
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getuEE ()", e.Message);
+////            }
+////        }
+////
+////
+////        [Help("Get scaled elasticity coefficient with respect to a global parameter or species")]
+////        public double getEE(string reactionName, string parameterName)
+////        {
+////            return getEE(reactionName, parameterName, true);
+////        }
+////
+////        [Help("Get scaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
+////        public double getEE(string reactionName, string parameterName, bool computeSteadyState)
+////        {
+////            TParameterType parameterType;
+////            int reactionIndex;
+////            int parameterIndex;
+////
+////            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
+////            // Check the reaction name
+////            if (!ModelGenerator.Instance.reactionList.find(reactionName, out reactionIndex))
+////            {
+////                throw new SBWApplicationException(String.Format("Unable to locate reaction name: [{0}]", reactionName));
+////            }
+////
+////            // Find out what kind of parameter we are dealing with
+////            if (ModelGenerator.Instance.floatingSpeciesConcentrationList.find(parameterName, out parameterIndex))
+////            {
+////                parameterType = TParameterType.ptFloatingSpecies;
+////            }
+////            else if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out parameterIndex))
+////            {
+////                parameterType = TParameterType.ptBoundaryParameter;
+////            }
+////            else if (ModelGenerator.Instance.globalParameterList.find(parameterName, out parameterIndex))
+////            {
+////                parameterType = TParameterType.ptGlobalParameter;
+////            }
+////            else if (ModelGenerator.Instance.conservationList.find(parameterName, out parameterIndex))
+////            {
+////                parameterType = TParameterType.ptConservationParameter;
+////            }
+////            else throw new SBWApplicationException(String.Format("Unable to locate variable: [{0}]", parameterName));
+////
+////            model.computeReactionRates(model.time, model.y);
+////            double variableValue = model.rates[reactionIndex];
+////            double parameterValue = getParameterValue(parameterType, parameterIndex);
+////            if (variableValue == 0) variableValue = 1e-12;
+////            return getuEE(reactionName, parameterName, computeSteadyState) * parameterValue / variableValue;
+////        }
+////
+////        [Ignore]
+////        // Get a single species elasticity value
+////        // IMPORTANT:
+////        // Assumes that the reaction rates have been precomputed at the operating point !!
+////        private double getUnscaledSpeciesElasticity(int reactionId, int speciesIndex)
+////        {
+////            double f1, f2, fi, fi2, fd, fd2;
+////            double originalParameterValue = model.getConcentration(speciesIndex);
+////
+////            double hstep = DiffStepSize*originalParameterValue;
+////            if (Math.Abs(hstep) < 1E-12)
+////                hstep = DiffStepSize;
+////
+////            model.convertToConcentrations();
+////            model.setConcentration(speciesIndex, originalParameterValue + hstep);
+////            try
+////            {
+////                model.computeReactionRates(model.time, model.y);
+////                fi = model.rates[reactionId];
+////
+////                model.setConcentration(speciesIndex, originalParameterValue + 2*hstep);
+////                model.computeReactionRates(model.time, model.y);
+////                fi2 = model.rates[reactionId];
+////
+////                model.setConcentration(speciesIndex, originalParameterValue - hstep);
+////                model.computeReactionRates(model.time, model.y);
+////                fd = model.rates[reactionId];
+////
+////                model.setConcentration(speciesIndex, originalParameterValue - 2*hstep);
+////                model.computeReactionRates(model.time, model.y);
+////                fd2 = model.rates[reactionId];
+////
+////                // Use instead the 5th order approximation double unscaledElasticity = (0.5/hstep)*(fi-fd);
+////                // The following separated lines avoid small amounts of roundoff error
+////                f1 = fd2 + 8*fi;
+////                f2 = -(8*fd + fi2);
+////            }
+////            finally
+////            {
+////                // What ever happens, make sure we restore the species level
+////                model.setConcentration(speciesIndex, originalParameterValue);
+////            }
+////            return 1/(12*hstep)*(f1 + f2);
+////        }
+////
+////
+////        [Help(
+////            "Returns the elasticity of a given reaction to a given parameter. Parameters can be boundary species or global parameters"
+////            )]
+////        public double getUnScaledElasticity(string reactionName, string parameterName)
+////        {
+////            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
+////            double f1, f2, fi, fi2, fd, fd2;
+////            double hstep;
+////
+////            int reactionId = -1;
+////            if (!(ModelGenerator.Instance.reactionList.find(reactionName, out reactionId)))
+////                throw new SBWApplicationException("Unrecognized reaction name in call to getUnScaledElasticity [" +
+////                                                  reactionName + "]");
+////
+////            int index = -1;
+////            // Find out what kind of parameter it is, species or global parmaeter
+////            if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out index))
+////            {
+////                double originalParameterValue = model.bc[index];
+////                hstep = DiffStepSize*originalParameterValue;
+////                if (Math.Abs(hstep) < 1E-12)
+////                    hstep = DiffStepSize;
+////
+////                try
+////                {
+////                    model.convertToConcentrations();
+////                    model.bc[index] = originalParameterValue + hstep;
+////                    model.computeReactionRates(model.time, model.y);
+////                    fi = model.rates[reactionId];
+////
+////                    model.bc[index] = originalParameterValue + 2*hstep;
+////                    model.computeReactionRates(model.time, model.y);
+////                    fi2 = model.rates[reactionId];
+////
+////                    model.bc[index] = originalParameterValue - hstep;
+////                    model.computeReactionRates(model.time, model.y);
+////                    fd = model.rates[reactionId];
+////
+////                    model.bc[index] = originalParameterValue - 2*hstep;
+////                    model.computeReactionRates(model.time, model.y);
+////                    fd2 = model.rates[reactionId];
+////
+////                    // Use instead the 5th order approximation double unscaledElasticity = (0.5/hstep)*(fi-fd);
+////                    // The following separated lines avoid small amounts of roundoff error
+////                    f1 = fd2 + 8*fi;
+////                    f2 = -(8*fd + fi2);
+////                }
+////                finally
+////                {
+////                    model.bc[index] = originalParameterValue;
+////                }
+////            }
+////            else
+////            {
+////                if (ModelGenerator.Instance.globalParameterList.find(parameterName, out index))
+////                {
+////                    double originalParameterValue = model.gp[index];
+////                    hstep = DiffStepSize*originalParameterValue;
+////                    if (Math.Abs(hstep) < 1E-12)
+////                        hstep = DiffStepSize;
+////
+////                    try
+////                    {
+////                        model.convertToConcentrations();
+////
+////                        model.gp[index] = originalParameterValue + hstep;
+////                        model.computeReactionRates(model.time, model.y);
+////                        fi = model.rates[reactionId];
+////
+////                        model.gp[index] = originalParameterValue + 2*hstep;
+////                        model.computeReactionRates(model.time, model.y);
+////                        fi2 = model.rates[reactionId];
+////
+////                        model.gp[index] = originalParameterValue - hstep;
+////                        model.computeReactionRates(model.time, model.y);
+////                        fd = model.rates[reactionId];
+////
+////                        model.gp[index] = originalParameterValue - 2*hstep;
+////                        model.computeReactionRates(model.time, model.y);
+////                        fd2 = model.rates[reactionId];
+////
+////                        // Use instead the 5th order approximation double unscaledElasticity = (0.5/hstep)*(fi-fd);
+////                        // The following separated lines avoid small amounts of roundoff error
+////                        f1 = fd2 + 8*fi;
+////                        f2 = -(8*fd + fi2);
+////                    }
+////                    finally
+////                    {
+////                        model.gp[index] = originalParameterValue;
+////                    }
+////                }
+////                else if (ModelGenerator.Instance.conservationList.find(parameterName, out index))
+////                {
+////                    double originalParameterValue = model.gp[index];
+////                    hstep = DiffStepSize*originalParameterValue;
+////                    if (Math.Abs(hstep) < 1E-12)
+////                        hstep = DiffStepSize;
+////
+////                    try
+////                    {
+////                        model.convertToConcentrations();
+////
+////                        model.ct[index] = originalParameterValue + hstep;
+////                        model.computeReactionRates(model.time, model.y);
+////                        fi = model.rates[reactionId];
+////
+////                        model.ct[index] = originalParameterValue + 2*hstep;
+////                        model.computeReactionRates(model.time, model.y);
+////                        fi2 = model.rates[reactionId];
+////
+////                        model.ct[index] = originalParameterValue - hstep;
+////                        model.computeReactionRates(model.time, model.y);
+////                        fd = model.rates[reactionId];
+////
+////                        model.ct[index] = originalParameterValue - 2*hstep;
+////                        model.computeReactionRates(model.time, model.y);
+////                        fd2 = model.rates[reactionId];
+////
+////                        // Use instead the 5th order approximation double unscaledElasticity = (0.5/hstep)*(fi-fd);
+////                        // The following separated lines avoid small amounts of roundoff error
+////                        f1 = fd2 + 8*fi;
+////                        f2 = -(8*fd + fi2);
+////                    }
+////                    finally
+////                    {
+////                        model.ct[index] = originalParameterValue;
+////                    }
+////                }
+////                else
+////                    throw new SBWApplicationException("Unrecognized parameter name in call to getUnScaledElasticity [" +
+////                                                      parameterName + "]");
+////            }
+////            return 1/(12*hstep)*(f1 + f2);
+////        }
+////
+////
+////        [Help("Compute the unscaled species elasticity matrix at the current operating point")]
+////        public double[][] getUnscaledElasticityMatrix()
+////        {
+////            var uElastMatrix = new double[model.getNumReactions][];
+////            for (int i = 0; i < model.getNumReactions; i++) uElastMatrix[i] = new double[model.getNumTotalVariables];
+////
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    model.convertToConcentrations();
+////                    // Compute reaction velocities at the current operating point
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    for (int i = 0; i < model.getNumReactions; i++)
+////                        for (int j = 0; j < model.getNumTotalVariables; j++)
+////                            uElastMatrix[i][j] = getUnscaledSpeciesElasticity(i, j);
+////
+////                    return uElastMatrix;
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from unscaledElasticityMatrix()", e.Message);
+////            }
+////        }
+////
+////        [Help("Compute the unscaled elasticity matrix at the current operating point")]
+////        public double[][] getScaledElasticityMatrix()
+////        {
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    double[][] uelast = getUnscaledElasticityMatrix();
+////
+////                    var result = new double[uelast.Length][];
+////                    for (int i = 0; i < uelast.Length; i++)
+////                        result[i] = new double[uelast[0].Length];
+////
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////                    double[] rates = model.rates;
+////                    for (int i = 0; i < uelast.Length; i++)
+////                    {
+////                        // Rows are rates
+////                        if (rates[i] == 0)
+////                            throw new SBWApplicationException("Unable to compute elasticity, reaction rate [" +
+////                                                              ModelGenerator.Instance.reactionList[i].name +
+////                                                              "] set to zero");
+////
+////                        for (int j = 0; j < uelast[0].Length; j++) // Columns are species
+////                            result[i][j] = uelast[i][j]*model.getConcentration(j)/rates[i];
+////                    }
+////                    return result;
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message);
+////            }
+////        }
+////
+////
+////        [Help("Compute the unscaled elasticity for a given reaction and given species")]
+////        public double getUnscaledFloatingSpeciesElasticity(string reactionName, string speciesName)
+////        {
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    int speciesIndex = 0;
+////                    int reactionIndex = 0;
+////
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    if (!ModelGenerator.Instance.floatingSpeciesConcentrationList.find(speciesName, out speciesIndex))
+////                        throw new SBWApplicationException(
+////                            "Internal Error: unable to locate species name while computing unscaled elasticity");
+////                    if (!ModelGenerator.Instance.reactionList.find(reactionName, out reactionIndex))
+////                        throw new SBWApplicationException(
+////                            "Internal Error: unable to locate reaction name while computing unscaled elasticity");
+////
+////                    return getUnscaledSpeciesElasticity(reactionIndex, speciesIndex);
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message);
+////            }
+////        }
+////
+////        [Help("Compute the scaled elasticity for a given reaction and given species")]
+////        public double getScaledFloatingSpeciesElasticity(string reactionName, string speciesName)
+////        {
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    int speciesIndex = 0;
+////                    int reactionIndex = 0;
+////
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    if (!ModelGenerator.Instance.floatingSpeciesConcentrationList.find(speciesName, out speciesIndex))
+////                        throw new SBWApplicationException(
+////                            "Internal Error: unable to locate species name while computing unscaled elasticity");
+////                    if (!ModelGenerator.Instance.reactionList.find(reactionName, out reactionIndex))
+////                        throw new SBWApplicationException(
+////                            "Internal Error: unable to locate reaction name while computing unscaled elasticity");
+////
+////                    return getUnscaledSpeciesElasticity(reactionIndex, speciesIndex)*
+////                           model.getConcentration(speciesIndex)/model.rates[reactionIndex];
+////                    ;
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message);
+////            }
+////        }
+////
+////
+////        [Ignore]
+////        // Changes a given parameter type by the given increment
+////        private void changeParameter(TParameterType parameterType, int reactionIndex, int parameterIndex,
+////                                     double originalValue, double increment)
+////        {
+////            switch (parameterType)
+////            {
+////                case TParameterType.ptLocalParameter:
+////                    model.lp[reactionIndex][parameterIndex] = originalValue + increment;
+////                    break;
+////                case TParameterType.ptGlobalParameter:
+////                    model.gp[parameterIndex] = originalValue + increment;
+////                    break;
+////                case TParameterType.ptBoundaryParameter:
+////                    model.bc[parameterIndex] = originalValue + increment;
+////                    break;
+////                case TParameterType.ptConservationParameter:
+////                    model.ct[parameterIndex] = originalValue + increment;
+////                    break;
+////            }
+////        }
+////
+////
+////        [Help("Returns the unscaled elasticity for a named reaction with respect to a named parameter (local or global)"
+////            )]
+////        private double getUnscaledParameterElasticity(string reactionName, string parameterName)
+////        {
+////            int reactionIndex;
+////            int parameterIndex;
+////            double originalParameterValue;
+////            TParameterType parameterType;
+////
+////            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
+////            model.convertToConcentrations();
+////            model.computeReactionRates(model.time, model.y);
+////
+////            if (!ModelGenerator.Instance.reactionList.find(reactionName, out reactionIndex))
+////                throw new SBWApplicationException(
+////                    "Internal Error: unable to locate reaction name while computing unscaled elasticity");
+////
+////            // Look for the parameter name, check local parameters first, then global
+////            if (ModelGenerator.Instance.localParameterList[reactionIndex].find(reactionName, parameterName,
+////                                                                               out parameterIndex))
+////                parameterType = TParameterType.ptLocalParameter;
+////            else if (ModelGenerator.Instance.globalParameterList.find(parameterName, out parameterIndex))
+////                parameterType = TParameterType.ptGlobalParameter;
+////            else if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out parameterIndex))
+////                parameterType = TParameterType.ptBoundaryParameter;
+////            else if (ModelGenerator.Instance.conservationList.find(parameterName, out parameterIndex))
+////                parameterType = TParameterType.ptConservationParameter;
+////            else
+////                return 0.0;
+////
+////            double f1, f2, fi, fi2, fd, fd2;
+////            originalParameterValue = 0.0;
+////            switch (parameterType)
+////            {
+////                case TParameterType.ptLocalParameter:
+////                    originalParameterValue = model.lp[reactionIndex][parameterIndex];
+////                    break;
+////                case TParameterType.ptGlobalParameter:
+////                    originalParameterValue = model.gp[parameterIndex];
+////                    break;
+////                case TParameterType.ptBoundaryParameter:
+////                    originalParameterValue = model.bc[parameterIndex];
+////                    break;
+////                case TParameterType.ptConservationParameter:
+////                    originalParameterValue = model.ct[parameterIndex];
+////                    break;
+////            }
+////
+////            double hstep = DiffStepSize*originalParameterValue;
+////            if (Math.Abs(hstep) < 1E-12)
+////                hstep = DiffStepSize;
+////
+////            try
+////            {
+////                changeParameter(parameterType, reactionIndex, parameterIndex, originalParameterValue, hstep);
+////                model.convertToConcentrations();
+////                model.computeReactionRates(model.time, model.y);
+////                fi = model.rates[reactionIndex];
+////
+////                changeParameter(parameterType, reactionIndex, parameterIndex, originalParameterValue, 2*hstep);
+////                model.computeReactionRates(model.time, model.y);
+////                fi2 = model.rates[reactionIndex];
+////
+////                changeParameter(parameterType, reactionIndex, parameterIndex, originalParameterValue, -hstep);
+////                model.computeReactionRates(model.time, model.y);
+////                fd = model.rates[reactionIndex];
+////
+////                changeParameter(parameterType, reactionIndex, parameterIndex, originalParameterValue, -2*hstep);
+////                model.computeReactionRates(model.time, model.y);
+////                fd2 = model.rates[reactionIndex];
+////
+////                // Use instead the 5th order approximation double unscaledElasticity = (0.5/hstep)*(fi-fd);
+////                // The following separated lines avoid small amounts of roundoff error
+////                f1 = fd2 + 8*fi;
+////                f2 = -(8*fd + fi2);
+////            }
+////            finally
+////            {
+////                // What ever happens, make sure we restore the species level
+////                switch (parameterType)
+////                {
+////                    case TParameterType.ptLocalParameter:
+////                        model.lp[reactionIndex][parameterIndex] = originalParameterValue;
+////                        break;
+////                    case TParameterType.ptGlobalParameter:
+////                        model.gp[parameterIndex] = originalParameterValue;
+////                        break;
+////                    case TParameterType.ptBoundaryParameter:
+////                        model.bc[parameterIndex] = originalParameterValue;
+////                        break;
+////                    case TParameterType.ptConservationParameter:
+////                        model.ct[parameterIndex] = originalParameterValue;
+////                        break;
+////                }
+////            }
+////            return 1/(12*hstep)*(f1 + f2);
+////        }
+////
+////
+////        // Use the formula: ucc = -L Jac^-1 Nr
+////        [Help("Compute the matrix of unscaled concentration control coefficients")]
+////        public double[][] getUnscaledConcentrationControlCoefficientMatrix()
+////        {
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    Matrix uelast;
+////                    Matrix Nr;
+////                    Matrix LinkMatrix;
+////
+////                    setTimeStart(0.0);
+////                    setTimeEnd(50.0);
+////                    setNumPoints(1);
+////                    simulate();
+////                    if (steadyState() > STEADYSTATE_THRESHOLD)
+////                    {
+////                        if (steadyState() > 1E-2)
+////                            throw new SBWApplicationException(
+////                                "Unable to locate steady state during frequency response computation");
+////                    }
+////
+////                    uelast = new Matrix(getUnscaledElasticityMatrix());
+////                    Nr = new Matrix(getNrMatrix());
+////                    LinkMatrix = new Matrix(getLinkMatrix());
+////
+////                    var Inv = new Matrix(Nr.nRows, LinkMatrix.nCols);
+////                    var T2 = new Matrix(Nr.nRows, LinkMatrix.nCols); // Stores -Jac  and (-Jac)^-1
+////                    var T3 = new Matrix(LinkMatrix.nRows, 1); // Stores (-Jac)^-1 . Nr
+////                    var T4 = new Matrix(Nr.nRows, Nr.nCols);
+////
+////                    // Compute the Jacobian first
+////                    var T1 = new Matrix(Nr.nRows, uelast.nCols);
+////                    T1.mult(Nr, uelast);
+////                    var Jac = new Matrix(Nr.nRows, LinkMatrix.nCols);
+////                    Jac.mult(T1, LinkMatrix);
+////                    T2.mult(Jac, -1.0); // Compute -Jac
+////
+////                    //ArrayList reactionNames = getReactionNames();
+////                    //ArrayList speciesNames = getSpeciesNames();
+////
+////                    //SBWComplex[][] T8 = SBW_CLAPACK.Zinverse(T2.data);  // Compute ( - Jac)^-1
+////                    //for (int i1 = 0; i1 < Inv.nRows; i1++)
+////                    //    for (int j1 = 0; j1 < Inv.nCols; j1++)
+////                    //    {
+////                    //        Inv[i1, j1].Real = T8[i1][j1].Real;
+////                    //        Inv[i1, j1].Imag = T8[i1][j1].Imag;
+////                    //    }
+////
+////
+////                    Complex[][] T8 = LA.GetInverse(ConvertComplex(T2.data));
+////                    for (int i1 = 0; i1 < Inv.nRows; i1++)
+////                        for (int j1 = 0; j1 < Inv.nCols; j1++)
+////                        {
+////                            Inv[i1, j1].Real = T8[i1][j1].Real;
+////                            Inv[i1, j1].Imag = T8[i1][j1].Imag;
+////                        }
+////
+////                    T3.mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
+////
+////                    // Finally include the dependent set as well.
+////                    T4.mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
+////                    return Matrix.convertToDouble(T4);
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException(
+////                    "Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message);
+////            }
+////        }
+////
+////        internal static Complex[][] ConvertComplex(SimpleComplex[][] oMatrix)
+////        {
+////            var oResult = new Complex[oMatrix.Length][];
+////            for (int i = 0; i < oMatrix.Length; i++)
+////            {
+////                oResult[i] = new Complex[oMatrix[i].Length];
+////                for (int j = 0; j < oMatrix[i].Length; j++)
+////                {
+////                    oResult[i][j] = new Complex();
+////                    oResult[i][j].Real = oMatrix[i][j].Real;
+////                    oResult[i][j].Imag = oMatrix[i][j].Imag;
+////                }
+////            }
+////            return oResult;
+////        }
+////
+////        [Help("Compute the matrix of scaled concentration control coefficients")]
+////        public double[][] getScaledConcentrationControlCoefficientMatrix()
+////        {
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    double[][] ucc = getUnscaledConcentrationControlCoefficientMatrix();
+////
+////                    if (ucc.Length > 0)
+////                    {
+////                        model.convertToConcentrations();
+////                        model.computeReactionRates(model.time, model.y);
+////                        for (int i = 0; i < ucc.Length; i++)
+////                            for (int j = 0; j < ucc[0].Length; j++)
+////                            {
+////                                ucc[i][j] = ucc[i][j]*model.rates[j]/model.getConcentration(i);
+////                            }
+////                    }
+////                    return ucc;
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException(
+////                    "Unexpected error from getScaledConcentrationControlCoefficientMatrix()", e.Message);
+////            }
+////        }
+////
+////
+////        // Use the formula: ucc = elast CS + I
+////        [Help("Compute the matrix of unscaled flux control coefficients")]
+////        public double[][] getUnscaledFluxControlCoefficientMatrix()
+////        {
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    double[][] ucc = getUnscaledConcentrationControlCoefficientMatrix();
+////                    double[][] uee = getUnscaledElasticityMatrix();
+////                    var ucc_m = new Matrix(ucc);
+////                    var uee_m = new Matrix(uee);
+////
+////                    var T1 = new Matrix(uee_m.nRows, ucc_m.nCols);
+////                    T1.mult(uee_m, ucc_m);
+////                    Matrix T2 = Matrix.Identity(uee.Length);
+////                    T1.add(T2);
+////                    return Matrix.convertToDouble(T1);
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getUnscaledFluxControlCoefficientMatrix()",
+////                                                  e.Message);
+////            }
+////        }
+////
+////
+////        [Help("Compute the matrix of scaled flux control coefficients")]
+////        public double[][] getScaledFluxControlCoefficientMatrix()
+////        {
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    double[][] ufcc = getUnscaledFluxControlCoefficientMatrix();
+////
+////                    if (ufcc.Length > 0)
+////                    {
+////                        model.convertToConcentrations();
+////                        model.computeReactionRates(model.time, model.y);
+////                        for (int i = 0; i < ufcc.Length; i++)
+////                            for (int j = 0; j < ufcc[0].Length; j++)
+////                            {
+////                                ufcc[i][j] = ufcc[i][j]*model.rates[i]/model.rates[j];
+////                            }
+////                    }
+////                    return ufcc;
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
+////                                                  e.Message);
+////            }
+////        }
+////
+////
+////        // ----------------------------------------------------------------------------------------------
+////
+////
+////        [Help(
+////            "Compute the value for a particular unscaled concentration control coefficients with respect to a local parameter"
+////            )]
+////        public double getUnscaledConcentrationControlCoefficient(string speciesName, string localReactionName,
+////                                                                 string parameterName)
+////        {
+////            int parameterIndex;
+////            int reactionIndex;
+////            int speciesIndex;
+////            double f1;
+////            double f2;
+////
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    if (!ModelGenerator.Instance.reactionList.find(localReactionName, out reactionIndex))
+////                        throw new SBWApplicationException(
+////                            "Internal Error: unable to locate reaction name while computing unscaled control coefficient");
+////
+////                    if (!ModelGenerator.Instance.floatingSpeciesConcentrationList.find(speciesName, out speciesIndex))
+////                        throw new SBWApplicationException(
+////                            "Internal Error: unable to locate species name while computing unscaled control coefficient");
+////
+////                    // Look for the parameter name
+////                    if (ModelGenerator.Instance.localParameterList[reactionIndex].find(parameterName,
+////                                                                                       out parameterIndex))
+////                    {
+////                        double originalParameterValue = model.lp[reactionIndex][parameterIndex];
+////                        double hstep = DiffStepSize*originalParameterValue;
+////                        if (Math.Abs(hstep) < 1E-12)
+////                            hstep = DiffStepSize;
+////
+////                        try
+////                        {
+////                            model.convertToConcentrations();
+////                            model.lp[reactionIndex][parameterIndex] = originalParameterValue + hstep;
+////                            model.computeReactionRates(model.time, model.y);
+////                            double fi = model.getConcentration(speciesIndex);
+////
+////                            model.lp[reactionIndex][parameterIndex] = originalParameterValue + 2*hstep;
+////                            model.computeReactionRates(model.time, model.y);
+////                            double fi2 = model.getConcentration(speciesIndex);
+////
+////                            model.lp[reactionIndex][parameterIndex] = originalParameterValue - hstep;
+////                            model.computeReactionRates(model.time, model.y);
+////                            double fd = model.getConcentration(speciesIndex);
+////
+////                            model.lp[reactionIndex][parameterIndex] = originalParameterValue - 2*hstep;
+////                            model.computeReactionRates(model.time, model.y);
+////                            double fd2 = model.getConcentration(speciesIndex);
+////
+////                            // Use instead the 5th order approximation double unscaledElasticity = (0.5/hstep)*(fi-fd);
+////                            // The following separated lines avoid small amounts of roundoff error
+////                            f1 = fd2 + 8*fi;
+////                            f2 = -(8*fd + fi2);
+////                        }
+////                        finally
+////                        {
+////                            // What ever happens, make sure we restore the species level
+////                            model.lp[reactionIndex][parameterIndex] = originalParameterValue;
+////                        }
+////                        return 1/(12*hstep)*(f1 + f2);
+////                    }
+////                    else
+////                        throw new SBWApplicationException("Unable to locate local parameter [" + parameterName +
+////                                                          "] in reaction [" + localReactionName + "]");
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
+////                                                  e.Message);
+////            }
+////        }
+////
+////
+////        [Help(
+////            "Compute the value for a particular scaled concentration control coefficients with respect to a local parameter"
+////            )]
+////        public double getScaledConcentrationControlCoefficient(string speciesName, string localReactionName,
+////                                                               string parameterName)
+////        {
+////            int localReactionIndex;
+////            int parameterIndex;
+////            int speciesIndex;
+////
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    double ucc = getUnscaledConcentrationControlCoefficient(speciesName, localReactionName,
+////                                                                            parameterName);
+////
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    ModelGenerator.Instance.reactionList.find(localReactionName, out localReactionIndex);
+////                    ModelGenerator.Instance.floatingSpeciesConcentrationList.find(localReactionName, out speciesIndex);
+////                    ModelGenerator.Instance.localParameterList[localReactionIndex].find(parameterName,
+////                                                                                        out parameterIndex);
+////
+////                    return ucc*model.lp[localReactionIndex][parameterIndex]/model.getConcentration(speciesIndex);
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
+////                                                  e.Message);
+////            }
+////        }
+////
+////
+////        [Help(
+////            "Compute the value for a particular concentration control coefficient, permitted parameters include global parameters, boundary conditions and conservation totals"
+////            )]
+////        public double getUnscaledConcentrationControlCoefficient(string speciesName, string parameterName)
+////        {
+////            int speciesIndex;
+////            int parameterIndex;
+////            TParameterType parameterType;
+////            double originalParameterValue;
+////            double f1;
+////            double f2;
+////
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    if (!ModelGenerator.Instance.floatingSpeciesConcentrationList.find(speciesName, out speciesIndex))
+////                        throw new SBWApplicationException(
+////                            "Internal Error: unable to locate species name while computing unscaled control coefficient");
+////
+////                    if (ModelGenerator.Instance.globalParameterList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptGlobalParameter;
+////                        originalParameterValue = model.gp[parameterIndex];
+////                    }
+////                    else if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptBoundaryParameter;
+////                        originalParameterValue = model.bc[parameterIndex];
+////                    }
+////                    else if (ModelGenerator.Instance.conservationList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptConservationParameter;
+////                        originalParameterValue = model.ct[parameterIndex];
+////                    }
+////                    else throw new SBWApplicationException("Unable to locate parameter: [" + parameterName + "]");
+////
+////                    double hstep = DiffStepSize*originalParameterValue;
+////                    if (Math.Abs(hstep) < 1E-12)
+////                        hstep = DiffStepSize;
+////
+////                    try
+////                    {
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue + hstep);
+////                        steadyState();
+////                        model.convertToConcentrations();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fi = model.getConcentration(speciesIndex);
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue + 2*hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fi2 = model.getConcentration(speciesIndex);
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue - hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fd = model.getConcentration(speciesIndex);
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue - 2*hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fd2 = model.getConcentration(speciesIndex);
+////
+////                        // Use instead the 5th order approximation double unscaledElasticity = (0.5/hstep)*(fi-fd);
+////                        // The following separated lines avoid small amounts of roundoff error
+////                        f1 = fd2 + 8*fi;
+////                        f2 = -(8*fd + fi2);
+////                    }
+////                    finally
+////                    {
+////                        // What ever happens, make sure we restore the species level
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue);
+////                        steadyState();
+////                    }
+////                    return 1/(12*hstep)*(f1 + f2);
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
+////                                                  e.Message);
+////            }
+////        }
+////
+////
+////        [Help(
+////            "Compute the value for a particular scaled concentration control coefficients with respect to a global or boundary species parameter"
+////            )]
+////        public double getScaledConcentrationControlCoefficient(string speciesName, string parameterName)
+////        {
+////            int parameterIndex;
+////            int speciesIndex;
+////
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    double ucc = getUnscaledConcentrationControlCoefficient(speciesName, parameterName);
+////
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    ModelGenerator.Instance.floatingSpeciesConcentrationList.find(speciesName, out speciesIndex);
+////                    if (ModelGenerator.Instance.globalParameterList.find(parameterName, out parameterIndex))
+////                        return ucc*model.gp[parameterIndex]/model.getConcentration(speciesIndex);
+////                    else if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out parameterIndex))
+////                        return ucc*model.bc[parameterIndex]/model.getConcentration(speciesIndex);
+////                    else if (ModelGenerator.Instance.conservationList.find(parameterName, out parameterIndex))
+////                        return ucc*model.ct[parameterIndex]/model.getConcentration(speciesIndex);
+////                    return 0.0;
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
+////                                                  e.Message);
+////            }
+////        }
+////
+////
+////        // ----------------------------------------------------------------------------------------------
+////
+////
+////        [Help("Compute the value for a particular unscaled flux control coefficients with respect to a local parameter")
+////        ]
+////        public double getUnscaledFluxControlCoefficient(string fluxName, string localReactionName, string parameterName)
+////        {
+////            int parameterIndex;
+////            int localReactionIndex;
+////            int fluxIndex;
+////            double f1;
+////            double f2;
+////
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    if (!ModelGenerator.Instance.reactionList.find(localReactionName, out localReactionIndex))
+////                        throw new SBWApplicationException(
+////                            "Internal Error: unable to locate reaction name while computing unscaled control coefficient");
+////
+////                    if (!ModelGenerator.Instance.reactionList.find(fluxName, out fluxIndex))
+////                        throw new SBWApplicationException(
+////                            "Internal Error: unable to locate reaction name while computing unscaled control coefficient");
+////
+////                    // Look for the parameter name
+////                    if (ModelGenerator.Instance.localParameterList[localReactionIndex].find(parameterName,
+////                                                                                            out parameterIndex))
+////                    {
+////                        double originalParameterValue = model.lp[localReactionIndex][parameterIndex];
+////                        double hstep = DiffStepSize*originalParameterValue;
+////                        if (Math.Abs(hstep) < 1E-12)
+////                            hstep = DiffStepSize;
+////
+////                        try
+////                        {
+////                            model.convertToConcentrations();
+////                            model.lp[localReactionIndex][parameterIndex] = originalParameterValue + hstep;
+////                            steadyState();
+////                            model.computeReactionRates(model.time, model.y);
+////                            double fi = model.rates[fluxIndex];
+////
+////                            model.lp[localReactionIndex][parameterIndex] = originalParameterValue + 2*hstep;
+////                            steadyState();
+////                            model.computeReactionRates(model.time, model.y);
+////                            double fi2 = model.rates[fluxIndex];
+////
+////                            model.lp[localReactionIndex][parameterIndex] = originalParameterValue - hstep;
+////                            steadyState();
+////                            model.computeReactionRates(model.time, model.y);
+////                            double fd = model.rates[fluxIndex];
+////
+////                            model.lp[localReactionIndex][parameterIndex] = originalParameterValue - 2*hstep;
+////                            steadyState();
+////                            model.computeReactionRates(model.time, model.y);
+////                            double fd2 = model.rates[fluxIndex];
+////
+////                            // Use instead the 5th order approximation double unscaledElasticity = (0.5/hstep)*(fi-fd);
+////                            // The following separated lines avoid small amounts of roundoff error
+////                            f1 = fd2 + 8*fi;
+////                            f2 = -(8*fd + fi2);
+////                        }
+////                        finally
+////                        {
+////                            // What ever happens, make sure we restore the species level
+////                            model.lp[localReactionIndex][parameterIndex] = originalParameterValue;
+////                            steadyState();
+////                        }
+////                        return 1/(12*hstep)*(f1 + f2);
+////                    }
+////                    else
+////                        throw new SBWApplicationException("Unable to locate local parameter [" + parameterName +
+////                                                          "] in reaction [" + localReactionName + "]");
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
+////                                                  e.Message);
+////            }
+////        }
+////
+////
+////        [Help(
+////            "Compute the value for a particular flux control coefficient, permitted parameters include global parameters, boundary conditions and conservation totals"
+////            )]
+////        public double getUnscaledFluxControlCoefficient(string reactionName, string parameterName)
+////        {
+////            int fluxIndex;
+////            int parameterIndex;
+////            TParameterType parameterType;
+////            double originalParameterValue;
+////            double f1;
+////            double f2;
+////
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    if (!ModelGenerator.Instance.reactionList.find(reactionName, out fluxIndex))
+////                        throw new SBWApplicationException(
+////                            "Internal Error: unable to locate species name while computing unscaled control coefficient");
+////
+////                    if (ModelGenerator.Instance.globalParameterList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptGlobalParameter;
+////                        originalParameterValue = model.gp[parameterIndex];
+////                    }
+////                    else if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptBoundaryParameter;
+////                        originalParameterValue = model.bc[parameterIndex];
+////                    }
+////                    else if (ModelGenerator.Instance.conservationList.find(parameterName, out parameterIndex))
+////                    {
+////                        parameterType = TParameterType.ptConservationParameter;
+////                        originalParameterValue = model.ct[parameterIndex];
+////                    }
+////                    else throw new SBWApplicationException("Unable to locate parameter: [" + parameterName + "]");
+////
+////                    double hstep = DiffStepSize*originalParameterValue;
+////                    if (Math.Abs(hstep) < 1E-12)
+////                        hstep = DiffStepSize;
+////
+////                    try
+////                    {
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue + hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fi = model.rates[fluxIndex];
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue + 2*hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fi2 = model.rates[fluxIndex];
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue - hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fd = model.rates[fluxIndex];
+////
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue - 2*hstep);
+////                        steadyState();
+////                        model.computeReactionRates(model.time, model.y);
+////                        double fd2 = model.rates[fluxIndex];
+////
+////                        // Use instead the 5th order approximation double unscaledElasticity = (0.5/hstep)*(fi-fd);
+////                        // The following separated lines avoid small amounts of roundoff error
+////                        f1 = fd2 + 8*fi;
+////                        f2 = -(8*fd + fi2);
+////                    }
+////                    finally
+////                    {
+////                        // What ever happens, make sure we restore the species level
+////                        setParameterValue(parameterType, parameterIndex, originalParameterValue);
+////                        steadyState();
+////                    }
+////                    return 1/(12*hstep)*(f1 + f2);
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
+////                                                  e.Message);
+////            }
+////        }
+////
+////
+////        [Help("Compute the value for a particular scaled flux control coefficients with respect to a local parameter")]
+////        public double getScaledFluxControlCoefficient(string reactionName, string localReactionName,
+////                                                      string parameterName)
+////        {
+////            int parameterIndex;
+////            int reactionIndex;
+////
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    double ufcc = getUnscaledFluxControlCoefficient(reactionName, localReactionName, parameterName);
+////
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    ModelGenerator.Instance.reactionList.find(reactionName, out reactionIndex);
+////                    if (ModelGenerator.Instance.globalParameterList.find(parameterName, out parameterIndex))
+////                        return ufcc*model.gp[parameterIndex]/model.rates[reactionIndex];
+////                    else if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out parameterIndex))
+////                        return ufcc*model.bc[parameterIndex]/model.rates[reactionIndex];
+////                    else if (ModelGenerator.Instance.conservationList.find(parameterName, out parameterIndex))
+////                        return ufcc*model.ct[parameterIndex]/model.rates[reactionIndex];
+////                    return 0.0;
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
+////                                                  e.Message);
+////            }
+////        }
+////
+////
+////        [Help(
+////            "Compute the value for a particular scaled flux control coefficients with respect to a global or boundary species parameter"
+////            )]
+////        public double getScaledFluxControlCoefficient(string reactionName, string parameterName)
+////        {
+////            int parameterIndex;
+////            int reactionIndex;
+////
+////            try
+////            {
+////                if (modelLoaded)
+////                {
+////                    double ufcc = getUnscaledFluxControlCoefficient(reactionName, parameterName);
+////
+////                    model.convertToConcentrations();
+////                    model.computeReactionRates(model.time, model.y);
+////
+////                    ModelGenerator.Instance.reactionList.find(reactionName, out reactionIndex);
+////                    if (ModelGenerator.Instance.globalParameterList.find(parameterName, out parameterIndex))
+////                        return ufcc*model.gp[parameterIndex]/model.rates[reactionIndex];
+////                    else if (ModelGenerator.Instance.boundarySpeciesList.find(parameterName, out parameterIndex))
+////                        return ufcc*model.bc[parameterIndex]/model.rates[reactionIndex];
+////                    else if (ModelGenerator.Instance.conservationList.find(parameterName, out parameterIndex))
+////                        return ufcc*model.ct[parameterIndex]/model.rates[reactionIndex];
+////                    return 0.0;
+////                }
+////                else throw new SBWApplicationException(emptyModelStr);
+////            }
+////            catch (SBWException)
+////            {
+////                throw;
+////            }
+////            catch (Exception e)
+////            {
+////                throw new SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
+////                                                  e.Message);
+////            }
+////        }
+////    }
+////}
+
+//-------------------------------------------------------------------------------------------------------
+
 ////using System;
 ////using System.Collections;
 ////using System.Collections.Generic;

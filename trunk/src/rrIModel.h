@@ -18,14 +18,27 @@ namespace rr
 
 class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
 {
-    private:
+
+    protected:
+    	//These variables is also generated in the c-code.
+        //Init a decendent models data later
+        int                                     numIndependentVariables;
+        int                                     numDependentVariables;
+        int                                     numTotalVariables;
+        int                                     numBoundaryVariables;
+        int                                     numGlobalParameters;
+        int                                     numCompartments;
+        int                                     numReactions;
+        int                                     numRules;
+        int                                     numEvents;
+
 
     public://==== this makes the following attributes public.. for now. No great design..
 
         // Property signatures:
         vector<double> 					        y;// { get; set; }
         list<string> 					        Warnings;// { get; set; }
-        vector<double>                          init_y;// { get; set; }
+        vector<double>                  		init_y;// { get; set; }
         vector<double>                          amounts;// { get; set; }
         vector<double>                          bc;// { get; set; }
 
@@ -64,15 +77,15 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
         vector<TComputeEventAssignmentDelegate> computeEventAssignments;// { get; set; }
         vector<TPerformEventAssignmentDelegate> performEventAssignments;// { get; set; }
 
-        int                                     getNumIndependentVariables;// { get; }
-        int                                     getNumDependentVariables;// { get; }
-        int                                     getNumTotalVariables;// { get; }
-        int                                     getNumBoundarySpecies;// { get; }
-        int                                     getNumGlobalParameters;// { get; }
-        int                                     getNumCompartments;// { get; }
-        int                                     getNumReactions;//{ get; }
-        int                                     getNumRules;// { get; }
-        int                                     getNumEvents;// { get; }
+        virtual int                             getNumIndependentVariables();// { get; }
+        virtual int                             getNumDependentVariables();// { get; }
+        virtual int                             getNumTotalVariables();// { get; }
+        virtual int                             getNumBoundarySpecies();// { get; }
+        virtual int                             getNumGlobalParameters();// { get; }
+        virtual int                             getNumCompartments();// { get; }
+        virtual int                             getNumReactions();//{ get; }
+        virtual int                             getNumRules();// { get; }
+        virtual int                             getNumEvents();// { get; }
 
     public:
 												IModel();

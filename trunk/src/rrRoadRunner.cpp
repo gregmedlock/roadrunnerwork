@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include <iostream>
+#include <complex>
 #include "rrRoadRunner.h"
 #include "rrException.h"
 #include "rrModelGenerator.h"
@@ -11,6 +12,7 @@
 #include "rrLogger.h"
 #include "rrCSharpGenerator.h"
 #include "rrCGenerator.h"
+#include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 #if defined(__CODEGEARC__)
 #pragma package(smart_init)
@@ -30,7 +32,7 @@ RoadRunner::RoadRunner(bool generateCSharp)
 :
 emptyModelStr("A model needs to be loaded before one can use this method"),
 STEADYSTATE_THRESHOLD(1.E-2),
-cvode(NULL),
+mCVode(NULL),
 mCompiler(NULL),
 mL(NULL),
 mL0(NULL),
@@ -55,7 +57,7 @@ RoadRunner::~RoadRunner()
 	delete mCSharpGenerator;
 	delete mCGenerator;
     delete mModel;
-    delete cvode;
+    delete mCVode;
     delete mCompiler;
 }
 
@@ -108,14 +110,14 @@ void RoadRunner::InitializeModel(IModel* aModel)
     	model.computeConservedTotals();
     }
 
-    cvode = new CvodeInterface(mModel);
+    mCVode = new CvodeInterface(mModel);
 
     reset();
 
     // Construct default selection list
-    selectionList.resize(model.getNumTotalVariables + 1); // + 1 to include time
+    selectionList.resize(model.getNumTotalVariables() + 1); // + 1 to include time
     selectionList[0].selectionType = clTime;
-    for (int i = 0; i < model.getNumTotalVariables; i++)
+    for (int i = 0; i < model.getNumTotalVariables(); i++)
     {
         selectionList[i + 1].index = i;
         selectionList[i + 1].selectionType = clFloatingSpecies;
@@ -192,9 +194,9 @@ void RoadRunner::InitializeModel(IModel* aModel)
 //
 //            ////sim.CorrectMaxStep();
 //            //CvodeInterface.MaxStep = 0.0001;
-//            //sim.cvode.reStart(0.0, sim.model);
+//            //sim.mCVode.reStart(0.0, sim.model);
 //
-//            ////sim.cvode.
+//            ////sim.mCVode.
 //            //results = sim.simulateEx(0, 5, 51);
 //            //DumpResults(Console.Out, results, sim.getSelectionList());
 //
@@ -210,81 +212,83 @@ void RoadRunner::InitializeModel(IModel* aModel)
 //        }
 //
 //
-//        double RoadRunner::GetValueForRecord(TSelectionRecord record)
-//        {
-//            double dResult;
-//            switch (record.selectionType)
+double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
+{
+    double dResult;
+    switch (record.selectionType)
+    {
+        case TSelectionType::clFloatingSpecies:
+            dResult = mModel->getConcentration(record.index);
+            break;
+        case TSelectionType::clBoundarySpecies:
+            dResult = mModel->bc[record.index];
+            break;
+        case TSelectionType::clFlux:
+            dResult = mModel->rates[record.index];
+            break;
+        case TSelectionType::clRateOfChange:
+            dResult = mModel->dydt[record.index];
+            break;
+        case TSelectionType::clVolume:
+            dResult = mModel->c[record.index];
+            break;
+        case TSelectionType::clParameter:
+            {
+                if (record.index > mModel->gp.size() - 1)
+                    dResult = mModel->ct[record.index - mModel->gp.size()];
+                else
+                    dResult = mModel->gp[record.index];
+            }
+            break;
+        case TSelectionType::clFloatingAmount:
+            dResult = mModel->amounts[record.index];
+            break;
+        case TSelectionType::clBoundaryAmount:
+            int nIndex;
+//            if (
+//                ModelGenerator.Instance.compartmentList.find(
+//                    ModelGenerator.Instance.boundarySpeciesList[record.index].compartmentName,
+//                    out nIndex)) //Todo: enable this
+                dResult = mModel->bc[record.index] * mModel->c[nIndex];
+//            else
+                dResult = 0.0;
+            break;
+        case TSelectionType::clElasticity:
+            dResult = getEE(record.p1, record.p2, false);
+            break;
+        case TSelectionType::clUnscaledElasticity:
+            dResult = getuEE(record.p1, record.p2, false);
+            break;
+        case TSelectionType::clEigenValue:	//Todo: Enable this..
+//            vector< complex<double> >oComplex = LA.GetEigenValues(getReducedJacobian());
+//            if (oComplex.Length > record.index)
 //            {
-//                case TSelectionType.clFloatingSpecies:
-//                    dResult = model.getConcentration(record.index);
-//                    break;
-//                case TSelectionType.clBoundarySpecies:
-//                    dResult = model.bc[record.index];
-//                    break;
-//                case TSelectionType.clFlux:
-//                    dResult = model.rates[record.index];
-//                    break;
-//                case TSelectionType.clRateOfChange:
-//                    dResult = model.dydt[record.index];
-//                    break;
-//                case TSelectionType.clVolume:
-//                    dResult = model.c[record.index];
-//                    break;
-//                case TSelectionType.clParameter:
-//                    {
-//                        if (record.index > model.gp.Length - 1)
-//                            dResult = model.ct[record.index - model.gp.Length];
-//                        else
-//                            dResult = model.gp[record.index];
-//                    }
-//                    break;
-//                case TSelectionType.clFloatingAmount:
-//                    dResult = model.amounts[record.index];
-//                    break;
-//                case TSelectionType.clBoundaryAmount:
-//                    int nIndex;
-//                    if (
-//                        ModelGenerator.Instance.compartmentList.find(
-//                            ModelGenerator.Instance.boundarySpeciesList[record.index].compartmentName,
-//                            out nIndex))
-//                        dResult = model.bc[record.index] * model.c[nIndex];
-//                    else
-//                        dResult = 0.0;
-//                    break;
-//                case TSelectionType.clElasticity:
-//                    dResult = getEE(record.p1, record.p2, false);
-//                    break;
-//                case TSelectionType.clUnscaledElasticity:
-//                    dResult = getuEE(record.p1, record.p2, false);
-//                    break;
-//                case TSelectionType.clEigenValue:
-//                    Complex[] oComplex = LA.GetEigenValues(getReducedJacobian());
-//                    if (oComplex.Length > record.index)
-//                    {
-//                        dResult = oComplex[record.index].Real;
-//                    }
-//                    else
-//                        dResult = Double.NaN;
-//                    break;
-//                case TSelectionType.clStoichiometry:
-//                    dResult = model.sr[record.index];
-//                    break;
-//                default:
-//                    dResult = 0.0;
-//                    break;
+//                dResult = oComplex[record.index].Real;
 //            }
-//            return dResult;
-//        }
-//
-//        double RoadRunner::GetNthSelectedOutput(int index, double dCurrentTime)
-//        {
-//            TSelectionRecord record = selectionList[index];
-//            if (record.selectionType == TSelectionType.clTime)
-//                return dCurrentTime;
-//
-//            return GetValueForRecord(record);
-//        }
-//
+//            else
+//                dResult = Double.NaN;
+            break;
+        case TSelectionType::clStoichiometry:
+            dResult = mModel->sr[record.index];
+            break;
+        default:
+            dResult = 0.0;
+            break;
+    }
+    return dResult;
+}
+
+double RoadRunner::GetNthSelectedOutput(const int& index, const double& dCurrentTime)
+{
+    TSelectionRecord record = selectionList[index];
+    if (record.selectionType == TSelectionType::clTime)
+    {
+        return dCurrentTime;
+    }
+
+    return GetValueForRecord(record);
+}
+
 void RoadRunner::AddNthOutputToResult(vector< vector<double> >& results, int nRow, double dCurrentTime)
 {
     for (int j = 0; j < selectionList.size(); j++)
@@ -319,16 +323,16 @@ vector< vector<double> > RoadRunner::runSimulation()
 
     AddNthOutputToResult(results, 0, timeStart);
 
-    if (cvode->HaveVariables())
+    if (mCVode->HaveVariables())
     {
-        int restartResult = cvode->reStart(timeStart, mModel);
+        int restartResult = mCVode->reStart(timeStart, mModel);
         if (restartResult != 0)
             throw new SBWApplicationException("Error in reStart call to CVODE");
     }
     double tout = timeStart;
     for (int i = 1; i < numPoints; i++)
     {
-        cvode->OneStep(tout, hstep);
+        mCVode->OneStep(tout, hstep);
         tout = timeStart + i * hstep;
         AddNthOutputToResult(results, i, tout);
     }
@@ -349,25 +353,26 @@ vector< vector<double> > RoadRunner::runSimulation()
 //            }
 //        }
 
-void RoadRunner::DumpResults(TextWriter& writer, vector< vector<double> >& data, const StringList& colLabels);
+void RoadRunner::DumpResults(TextWriter& writer, vector< vector<double> >& data, const StringList& colLabels)
 {
-    for (int i = 0; i < colLabels.Count; i++)
+    for (int i = 0; i < colLabels.Count(); i++)
     {
         writer.Write(colLabels[i] + "\t");
-        Debug.Write(colLabels[i] + "\t");
+        Log(lDebug)<<colLabels[i]<<"\t";
     }
     writer.WriteLine();
-    Debug.WriteLine("");
+    Log(lDebug)<<endl;
 
-    for (int i = 0; i < data.GetLength(0); i++)
+    for (int i = 0; i < data.size(); i++)
     {
-        for (int j = 0; j < data.GetLength(1); j++)
+        for (int j = 0; j < data[0].size(); j++)
         {
-            writer.Write(data[i, j] + "\t");
-            Debug.Write(data[i, j] + "\t");
+        	string val = ToString(data[i][j]);
+            writer.Write(val + "\t");
+            Log(lDebug)<<val << "\t";
         }
         writer.WriteLine();
-        Debug.WriteLine("");
+	    Log(lDebug)<<endl;
     }
 }
 
@@ -407,10 +412,10 @@ void RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 
     //loadSBML(File.ReadAllText(fileName));
 
-    vector<double> data;
+    vector< vector<double> > data;
     data = simulate();
     StringList list = getSelectionList();
-    //TextWriter writer = Console.Out;
+    TextWriter writer(cout);
 
     DumpResults(writer, data, list);
     return;
@@ -476,8 +481,8 @@ void RoadRunner::loadSBML(const string& sbml)
     {
         if(mModel != NULL)
         {
-            delete cvode;
-            cvode = NULL;
+            delete mCVode;
+            mCVode = NULL;
             delete mModel;
             mModel = NULL;
             modelLoaded = false;
@@ -638,8 +643,8 @@ void RoadRunner::reset()
 //
 //                if (_bComputeAndAssignConservationLaws && !_bConservedTotalChanged) model.computeConservedTotals();
 //
-//                cvode.AssignNewVector(model, true);
-//                cvode.TestRootsAtInitialTime();
+//                mCVode.AssignNewVector(model, true);
+//                mCVode.TestRootsAtInitialTime();
 //
 //                //double hstep = (timeEnd - timeStart) / (numPoints - 1);
 //                //CvodeInterface.MaxStep = Math.Min(CvodeInterface.MaxStep, hstep);
@@ -648,9 +653,9 @@ void RoadRunner::reset()
 //
 //
 //                model.time = 0.0;
-//                cvode.reStart(0.0, model);
+//                mCVode.reStart(0.0, model);
 //
-//                cvode.assignments.Clear();
+//                mCVode.assignments.Clear();
 //
 //                try
 //                {
@@ -681,7 +686,7 @@ void RoadRunner::reset()
 //
 //
 //        Help("Carry out a time course simulation")
-double[,] RoadRunner::simulate()
+vector< vector<double> > RoadRunner::simulate()
 {
     try
     {
@@ -694,10 +699,6 @@ double[,] RoadRunner::simulate()
             throw new SBWApplicationException("Error: time end must be greater than time start");
         }
         return runSimulation();
-    }
-    catch (SBWException)
-    {
-        throw;
     }
     catch (Exception e)
     {
@@ -823,12 +824,12 @@ double[,] RoadRunner::simulate()
 //
 //            if (modelLoaded)
 //            {
-//                cvode = new CvodeInterface(model);
+//                mCVode = new CvodeInterface(model);
 //                for (int i = 0; i < model.getNumIndependentVariables; i++)
 //                {
-//                    cvode.setAbsTolerance(i, CvodeInterface.absTol);
+//                    mCVode.setAbsTolerance(i, CvodeInterface.absTol);
 //                }
-//                cvode.reStart(0.0, model);
+//                mCVode.reStart(0.0, model);
 //            }
 //
 //            if (cs.HasSection("integration") && cs["integration"].HasCapability("usekinsol"))
@@ -1222,8 +1223,8 @@ double[,] RoadRunner::simulate()
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            if (reset)
-//                cvode.reStart(currentTime, model);
-//            return cvode.OneStep(currentTime, stepSize);
+//                mCVode.reStart(currentTime, model);
+//            return mCVode.OneStep(currentTime, stepSize);
 //        }
 //
 //
@@ -2833,7 +2834,8 @@ void RoadRunner::EvalModel()
         throw new SBWApplicationException(emptyModelStr);
     }
     mModel->convertToAmounts();
-    mModel->evalModel(model.time, cvode.BuildEvalArgument());
+    vector<double> args = mCVode->BuildEvalArgument();
+    mModel->evalModel(mModel->time, args);
 }
 //
 //        Help("Returns the name of module")

@@ -2,11 +2,14 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include <math.h>
 #include "rrIModel.h"
 #include "rrCvodeInterface.h"
 #include "rrException.h"
 #include "rrModelState.h"
 #include "rrCvodedll.h"
+#include "rrLogger.h"
+#include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 #if defined(__CODEGEARC__)
 #pragma package(smart_init)
@@ -20,6 +23,7 @@ namespace rr
 // Model contains all the symbol tables associated with the model
 // ev is the model function
 // -------------------------------------------------------------------------
+
 CvodeInterface::CvodeInterface(IModel *aModel)
 :
 mRandom(),
@@ -37,6 +41,7 @@ MaxStep(0.0),
 MaxNumSteps(defaultMaxNumSteps),
 relTol(defaultReltol),
 absTol(defaultAbsTol),
+followEvents(true),
 //CV_ROOT_RETURN(2),
 //CV_TSTOP_RETURN(1),
 //CV_SUCCESS(0),
@@ -73,7 +78,7 @@ CvodeInterface::~CvodeInterface()
 {
 }
 
-bool CvodeInterface::HaveVariables
+bool CvodeInterface::HaveVariables()
 {
     return (numAdditionalRules + numIndependentVariables > 0);
 }
@@ -89,7 +94,7 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
     try
     {
         model = oModel;
-        numIndependentVariables = oModel->getNumIndependentVariables;
+        numIndependentVariables = oModel->getNumIndependentVariables();
         numAdditionalRules = oModel->rateRules.size();
 //        modelDelegate = &ModelFcn;
 //        eventDelegate = new TCallBackRootFcn(EventFcn);
@@ -120,14 +125,14 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
             errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, modelDelegate, 0.0, _amounts, relTol,
                                        abstolArray);
             if (errCode < 0) HandleCVODEError(errCode);
-            if (oModel->getNumEvents > 0)
-                errCode = CVRootInit(cvodeMem, oModel->getNumEvents, eventDelegate, gdata);
+            if (oModel->getNumEvents() > 0)
+                errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
             errCode = CvDense(cvodeMem, allocatedMemory); // int = size of systems
             if (errCode < 0) HandleCVODEError(errCode);
 
             oModel->resetEvents();
         }
-        else if (model->getNumEvents > 0)
+        else if (model->getNumEvents() > 0)
         {
             int allocated = 1;
             _amounts = NewCvode_Vector(allocated);
@@ -145,8 +150,8 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
             //SetErrFile(cvodeMem, fileHandle);
             errCode = AllocateCvodeMem(cvodeMem, allocated, modelDelegate, 0.0, _amounts, relTol, abstolArray);
             if (errCode < 0) HandleCVODEError(errCode);
-            if (oModel->getNumEvents > 0)
-                errCode = CVRootInit(cvodeMem, oModel->getNumEvents, eventDelegate, gdata);
+            if (oModel->getNumEvents() > 0)
+                errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
             errCode = CvDense(cvodeMem, allocated); // int = size of systems
             if (errCode < 0) HandleCVODEError(errCode);
 
@@ -420,7 +425,7 @@ void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr 
 ////            AssignResultsToModel();
 ////            model.evalEvents(time, BuildEvalArgument());
 ////
-////            Marshal.Copy(model.eventTests, 0, gdot, model.getNumEvents);
+////            Marshal.Copy(model.eventTests, 0, gdot, model.getNumEvents());
 ////
 ////#if (PRINT_EVENT_DEBUG)
 ////		            System.Diagnostics.Debug.Write("Rootfunction Out: t=" + time.ToString("F14") + " (" + nRootCount + "): ");
@@ -536,15 +541,15 @@ void CvodeInterface::HandleCVODEError(int errCode)
 ////        #endregion
 ////
 
-double OneStep(double timeStart, double hstep)
+double CvodeInterface::OneStep(double timeStart, double hstep)
 {
-//#if (PRINT_DEBUG)
-//		            System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
-//		            System.Diagnostics.Debug.WriteLine("--- O N E     S T E P      ( " + nOneStepCount + " ) ");
-//		            System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
-//#endif
-    nOneStepCount++;
-    nCount = 0;
+
+    Log(lDebug3)<<"---------------------------------------------------";
+    Log(lDebug3)<<"--- O N E     S T E P      ( "<<mOneStepCount<< " ) ";
+    Log(lDebug3)<<"---------------------------------------------------";
+
+    mOneStepCount++;
+    mCount = 0;
 
     double timeEnd = 0.0;
     double tout = timeStart + hstep;
@@ -558,10 +563,11 @@ double OneStep(double timeStart, double hstep)
 
             // here we bail in case we have no ODEs set up with CVODE ... though we should
             // still at least evaluate the model function
-            if (!HaveVariables && model.getNumEvents == 0)
+            if (!HaveVariables() && model->getNumEvents() == 0)
             {
-                model.convertToAmounts();
-                model.evalModel(tout, BuildEvalArgument());
+                model->convertToAmounts();
+                vector<double> args = BuildEvalArgument();
+                model->evalModel(tout, args);
                 return tout;
             }
 
@@ -570,13 +576,13 @@ double OneStep(double timeStart, double hstep)
                 reStart(timeStart, model);
 
             double nextTargetEndTime = tout;
-            if (assignmentTimes.Count > 0 && assignmentTimes[0] < nextTargetEndTime)
+            if (assignmentTimes.size() > 0 && assignmentTimes[0] < nextTargetEndTime)
             {
                 nextTargetEndTime = assignmentTimes[0];
-                assignmentTimes.RemoveAt(0);
+                assignmentTimes.erase(0);
             }
 
-            int nResult = RunCvode(cvodeMem, nextTargetEndTime, _amounts, ref timeEnd); // t = double *
+            int nResult = RunCvode(cvodeMem, nextTargetEndTime, _amounts, timeEnd); // t = double *
 
             if (nResult == CV_ROOT_RETURN && followEvents)
             {
@@ -587,7 +593,7 @@ double OneStep(double timeStart, double hstep)
 //#endif
 
                 //bool tooCloseToStart = Math.Abs(timeEnd - timeStart) > absTol;
-                bool tooCloseToStart = Math.Abs(timeEnd - lastEvent) > relTol;
+                bool tooCloseToStart = fabs(timeEnd - lastEvent) > relTol;
                 if (tooCloseToStart)
                     strikes = 3;
                 else
@@ -595,15 +601,15 @@ double OneStep(double timeStart, double hstep)
 
                 if (tooCloseToStart || strikes > 0)
                 {
-                    HandleRootsFound(ref timeEnd, tout);
+                    HandleRootsFound(timeEnd, tout);
                     reStart(timeEnd, model);
                     lastEvent = timeEnd;
                 }
             }
             else if (nResult == CV_SUCCESS || !followEvents)
             {
-                //model.resetEvents();
-                model.time = tout;
+                //model->resetEvents();
+                model->time = tout;
                 AssignResultsToModel();
             }
             else
@@ -615,12 +621,11 @@ double OneStep(double timeStart, double hstep)
 
             try
             {
-                model.testConstraints();
+                model->testConstraints();
             }
             catch (Exception e)
             {
-                model.Warnings.Add("Constraint Violated at time = " + timeEnd + "\n" +
-                                                     e.Message);
+                model->Warnings.push_back("Constraint Violated at time = " + ToString(timeEnd) + "\n" + e.Message);
             }
 
             AssignPendingEvents(timeEnd, tout);
@@ -629,10 +634,6 @@ double OneStep(double timeStart, double hstep)
                 timeStart = timeEnd;
         }
         return (timeEnd);
-    }
-    catch (NullReferenceException ex)
-    {
-        throw new SBWApplicationException("Internal error, please reload the model", ex.StackTrace);
     }
     catch (Exception)
     {
@@ -647,14 +648,14 @@ double OneStep(double timeStart, double hstep)
 ////            {
 ////                if (timeEnd >= assignments[i].Time)
 ////                {
-////                    model.time = tout;
+////                    model->time = tout;
 ////                    AssignResultsToModel();
-////                    model.convertToConcentrations();
-////                    model.updateDependentSpeciesValues(model.y);
+////                    model->convertToConcentrations();
+////                    model->updateDependentSpeciesValues(model->y);
 ////                    assignments[i].AssignToModel();
-////                    if (!RoadRunner._bConservedTotalChanged) model.computeConservedTotals();
-////                    model.convertToAmounts();
-////                    model.evalModel(timeEnd, BuildEvalArgument());
+////                    if (!RoadRunner._bConservedTotalChanged) model->computeConservedTotals();
+////                    model->convertToAmounts();
+////                    model->evalModel(timeEnd, BuildEvalArgument());
 ////
 ////                    reStart(timeEnd, model);
 ////
@@ -684,18 +685,18 @@ double OneStep(double timeStart, double hstep)
 ////            var result = new List<int>();
 ////            removeEvents = new List<int>();
 ////
-////            if (!RoadRunner._bConservedTotalChanged) model.computeConservedTotals();
-////            model.convertToAmounts();
-////            model.evalModel(timeEnd, BuildEvalArgument());
+////            if (!RoadRunner._bConservedTotalChanged) model->computeConservedTotals();
+////            model->convertToAmounts();
+////            model->evalModel(timeEnd, BuildEvalArgument());
 ////
 ////            var oldState = new ModelState(model);
-////            model.evalEvents(timeEnd, BuildEvalArgument());
+////            model->evalEvents(timeEnd, BuildEvalArgument());
 ////
-////            for (int i = 0; i < model.getNumEvents; i++)
+////            for (int i = 0; i < model->getNumEvents; i++)
 ////            {
-////                if (model.eventStatusArray[i] == true && oldState.EventStatusArray[i] == false && !handledEvents.Contains(i))
+////                if (model->eventStatusArray[i] == true && oldState.EventStatusArray[i] == false && !handledEvents.Contains(i))
 ////                    result.Add(i);
-////                if (model.eventStatusArray[i] == false && oldState.EventStatusArray[i] == true && !model.eventPersistentType[i])
+////                if (model->eventStatusArray[i] == false && oldState.EventStatusArray[i] == true && !model->eventPersistentType[i])
 ////                {
 ////                    removeEvents.Add(i);
 ////                }
@@ -709,11 +710,11 @@ double OneStep(double timeStart, double hstep)
 ////
 ////        private void HandleRootsFound(ref double timeEnd, double tout)
 ////        {
-////            var rootsFound = new int[model.getNumEvents];
+////            var rootsFound = new int[model->getNumEvents];
 ////            // Create some space for the CVGetRootInfo call
-////            _rootsFound = Marshal.AllocHGlobal(model.getNumEvents*sizeof (Int32));
+////            _rootsFound = Marshal.AllocHGlobal(model->getNumEvents*sizeof (Int32));
 ////            CVGetRootInfo(cvodeMem, _rootsFound);
-////            Marshal.Copy(_rootsFound, rootsFound, 0, model.getNumEvents);
+////            Marshal.Copy(_rootsFound, rootsFound, 0, model->getNumEvents);
 ////            Marshal.FreeHGlobal(_rootsFound); // Free space used by CVGetRootInfo
 ////
 ////            HandleRootsForTime(timeEnd, rootsFound);
@@ -725,7 +726,7 @@ double OneStep(double timeStart, double hstep)
 ////            var events = RetestEvents(0, new List<int>(), true);
 ////            if (events.Count > 0)
 ////            {
-////                var rootsFound = new int[model.getNumEvents];
+////                var rootsFound = new int[model->getNumEvents];
 ////                foreach (int item in events)
 ////                {
 ////                    rootsFound[item] = 1;
@@ -748,11 +749,11 @@ double OneStep(double timeStart, double hstep)
 ////        {
 ////            if ((firedEvents.Count > 1))
 ////            {
-////                model.computeEventPriorites();
+////                model->computeEventPriorites();
 ////                firedEvents.Sort(new Comparison<int>((index1, index2) =>
 ////                                                         {
-////                                                             double priority1 = model.eventPriorities[index1];
-////                                                             double priority2 = model.eventPriorities[index2];
+////                                                             double priority1 = model->eventPriorities[index1];
+////                                                             double priority2 = model->eventPriorities[index2];
 ////
 ////                                                             // random toss in case we have same priorites
 ////                                                             if (priority1 == priority2 && priority1 != 0 &&
@@ -771,32 +772,32 @@ double OneStep(double timeStart, double hstep)
 ////        private void HandleRootsForTime(double timeEnd, int[] rootsFound)
 ////        {
 ////            AssignResultsToModel();
-////            model.convertToConcentrations();
-////            model.updateDependentSpeciesValues(model.y);
+////            model->convertToConcentrations();
+////            model->updateDependentSpeciesValues(model->y);
 ////
-////            model.evalEvents(timeEnd, BuildEvalArgument());
+////            model->evalEvents(timeEnd, BuildEvalArgument());
 ////
 ////
 ////            var firedEvents = new List<int>();
 ////            var preComputedAssignments = new Dictionary<int, double[]>();
 ////
 ////
-////            for (int i = 0; i < model.getNumEvents; i++)
+////            for (int i = 0; i < model->getNumEvents; i++)
 ////            {
 ////                // We only fire an event if we transition from false to true
 ////                if (rootsFound[i] == 1)
 ////                {
-////                    if (model.eventStatusArray[i])
+////                    if (model->eventStatusArray[i])
 ////                    {
 ////                        firedEvents.Add(i);
-////                        if (model.eventType[i])
-////                            preComputedAssignments[i] = model.computeEventAssignments[i]();
+////                        if (model->eventType[i])
+////                            preComputedAssignments[i] = model->computeEventAssignments[i]();
 ////                    }
 ////                }
 ////                else
 ////                {
 ////                    // if the trigger condition is not supposed to be persistent, remove the event from the firedEvents list;
-////                    if (!model.eventPersistentType[i])
+////                    if (!model->eventPersistentType[i])
 ////                    {
 ////                        RemovePendingAssignmentForIndex(i);
 ////                    }
@@ -812,14 +813,14 @@ double OneStep(double timeStart, double hstep)
 ////                    var currentEvent = firedEvents[i];
 ////                    // We only fire an event if we transition from false to true
 ////
-////                    model.previousEventStatusArray[currentEvent] = model.eventStatusArray[currentEvent];
-////                    double eventDelay = model.eventDelay[currentEvent]();
+////                    model->previousEventStatusArray[currentEvent] = model->eventStatusArray[currentEvent];
+////                    double eventDelay = model->eventDelay[currentEvent]();
 ////                    if (eventDelay == 0)
 ////                    {
-////                        if (model.eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
-////                            model.performEventAssignments[currentEvent](preComputedAssignments[currentEvent]);
+////                        if (model->eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
+////                            model->performEventAssignments[currentEvent](preComputedAssignments[currentEvent]);
 ////                        else
-////                            model.eventAssignments[currentEvent]();
+////                            model->eventAssignments[currentEvent]();
 ////
 ////                        handled.Add(currentEvent);
 ////                        List<int> removeEvents;
@@ -828,11 +829,11 @@ double OneStep(double timeStart, double hstep)
 ////
 ////                        foreach (var newEvent in additionalEvents)
 ////                        {
-////                            if (model.eventType[newEvent])
-////                                preComputedAssignments[newEvent] = model.computeEventAssignments[newEvent]();
+////                            if (model->eventType[newEvent])
+////                                preComputedAssignments[newEvent] = model->computeEventAssignments[newEvent]();
 ////                        }
 ////
-////                        model.eventStatusArray[currentEvent] = false;
+////                        model->eventStatusArray[currentEvent] = false;
 ////                        firedEvents.RemoveAt(i);
 ////
 ////                        foreach (var item in removeEvents)
@@ -854,36 +855,36 @@ double OneStep(double timeStart, double hstep)
 ////
 ////                        var pending = new PendingAssignment(
 ////                                                                    timeEnd + eventDelay,
-////                                                                    model.computeEventAssignments[currentEvent],
-////                                                                    model.performEventAssignments[currentEvent],
-////                                                                    model.eventType[currentEvent], currentEvent);
+////                                                                    model->computeEventAssignments[currentEvent],
+////                                                                    model->performEventAssignments[currentEvent],
+////                                                                    model->eventType[currentEvent], currentEvent);
 ////
-////                        if (model.eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
+////                        if (model->eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
 ////                            pending.ComputedValues = preComputedAssignments[currentEvent];
 ////
 ////                        assignments.Add(pending);
-////                        model.eventStatusArray[currentEvent] = false;
+////                        model->eventStatusArray[currentEvent] = false;
 ////                        firedEvents.RemoveAt(i);
 ////                        break;
 ////                    }
 ////
 ////#if (PRINT_DEBUG)
-////		                    System.Diagnostics.Debug.WriteLine("time: " + model.time.ToString("F4") + " Event " + (i + 1).ToString());
+////		                    System.Diagnostics.Debug.WriteLine("time: " + model->time.ToString("F4") + " Event " + (i + 1).ToString());
 ////#endif
 ////                }
 ////            }
 ////
-////            if (!RoadRunner._bConservedTotalChanged) model.computeConservedTotals();
-////            model.convertToAmounts();
+////            if (!RoadRunner._bConservedTotalChanged) model->computeConservedTotals();
+////            model->convertToAmounts();
 ////
 ////
-////            model.evalModel(timeEnd, BuildEvalArgument());
-////            double[] dCurrentValues = model.GetCurrentValues();
+////            model->evalModel(timeEnd, BuildEvalArgument());
+////            double[] dCurrentValues = model->GetCurrentValues();
 ////            for (int k = 0; k < numAdditionalRules; k++)
 ////                Cvode_SetVector(_amounts, k, dCurrentValues[k]);
 ////
 ////            for (int k = 0; k < numIndependentVariables; k++)
-////                Cvode_SetVector(_amounts, k + numAdditionalRules, model.amounts[k]);
+////                Cvode_SetVector(_amounts, k + numAdditionalRules, model->amounts[k]);
 ////
 ////            CVReInit(cvodeMem, timeEnd, _amounts, relTol, abstolArray);
 ////            assignmentTimes.Sort();
@@ -892,25 +893,25 @@ double OneStep(double timeStart, double hstep)
 ////
 ////        private void AssignResultsToModel()
 ////        {
-////            model.updateDependentSpeciesValues(model.y);
+////            model->updateDependentSpeciesValues(model->y);
 ////            var dTemp = new double[numAdditionalRules];
 ////            for (int i = 0; i < numAdditionalRules; i++)
 ////            {
 ////                dTemp[i] = Cvode_GetVector(_amounts, i);
 ////            }
 ////            for (int i = 0; i < numIndependentVariables; i++)
-////                model.amounts[i] = Cvode_GetVector(_amounts, i + numAdditionalRules);
+////                model->amounts[i] = Cvode_GetVector(_amounts, i + numAdditionalRules);
 ////
-////            model.computeRules(BuildEvalArgument());
-////            model.AssignRates(dTemp);
-////            model.computeAllRatesOfChange();
+////            model->computeRules(BuildEvalArgument());
+////            model->AssignRates(dTemp);
+////            model->computeAllRatesOfChange();
 ////        }
 ////
 ////
 ////        // Restart the simulation using a different initial condition
 void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
 {
-////            double[] dTemp = model.GetCurrentValues();
+////            double[] dTemp = model->GetCurrentValues();
 ////            double dMin = absTol;
 ////
 ////            for (int i = 0; i < numAdditionalRules; i++)
@@ -934,7 +935,7 @@ void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
 ////            }
 ////
 ////
-////            if (!HaveVariables && model.getNumEvents > 0)
+////            if (!HaveVariables && model->getNumEvents > 0)
 ////            {
 ////                if (bAssignNewTolerances) setAbsTolerance(0, dMin);
 ////                Cvode_SetVector(_amounts, 0, 1f);
@@ -981,10 +982,10 @@ void CvodeInterface::AssignNewVector(IModel *model)
 ////
 ////        internal double[] BuildEvalArgument()
 ////        {
-////            var dResult = new double[model.amounts.Length + model.rateRules.Length];
-////            double[] dCurrentValues = model.GetCurrentValues();
+////            var dResult = new double[model->amounts.Length + model->rateRules.Length];
+////            double[] dCurrentValues = model->GetCurrentValues();
 ////            dCurrentValues.CopyTo(dResult, 0);
-////            model.amounts.CopyTo(dResult, model.rateRules.Length);
+////            model->amounts.CopyTo(dResult, model->rateRules.Length);
 ////            return dResult;
 ////        }
 ////

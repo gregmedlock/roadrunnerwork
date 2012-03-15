@@ -3,6 +3,7 @@
 #include <string>
 #include "rrObject.h"
 #include "rrRandom.h"
+#include "rrPendingAssignment.h"
 #include "cvode/cvode.h"
 
 using std::string;
@@ -20,10 +21,14 @@ class RR_DECLSPEC CvodeInterface : public rrObject
     /// </summary>
     private:
 		const string 		CVODE;
-        static int 			nOneStepCount;
+		static int 			mCount;
+		static int 			mRootCount;
+        static int 			mOneStepCount;
+
         const double 		defaultReltol;
         const double 		defaultAbsTol;
         const int 			defaultMaxNumSteps;
+
 
 //        // Error codes
 //        const int CV_ROOT_RETURN;
@@ -46,50 +51,48 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //        const int CV_BAD_T;
 //        const int CV_BAD_DKY;
 //        const int CV_PDATA_NULL;
-        static string 			tempPathstring;// = Path.GetTempPath();
-        static int 				errorFileCounter;
-        IntPtr 					fileHandle;
-		IModel 					*model;
-        int 					numIndependentVariables;
-        IntPtr 					gdata;
-        IntPtr 					_amounts;
-        IntPtr 					_rootsFound;
-        IntPtr 					abstolArray;
-        string 					cvodeLogFile;// = "cvodeLogFile";
-        IntPtr 					cvodeMem;
-       	int 					numAdditionalRules;
-
-		void 					HandleCVODEError(int errCode);
-//        internal List<double> assignmentTimes = new List<double>();
-//        internal List<PendingAssignment> assignments = new List<PendingAssignment>();
-//        private bool followEvents = true;
-//        private void AssignPendingEvents(double timeEnd, double tout)
-//        private List<int> RetestEvents(double timeEnd, List<int> handledEvents)
-//        private List<int> RetestEvents(double timeEnd, List<int> handledEvents, out List<int> removeEvents)
-//        private List<int> RetestEvents(double timeEnd, List<int> handledEvents, bool assignOldState)
-//        private List<int> RetestEvents(double timeEnd, List<int> handledEvents, bool assignOldState, out List<int> removeEvents)
-//        private void HandleRootsFound(ref double timeEnd, double tout)
-//        internal void TestRootsAtInitialTime()
-//        private void RemovePendingAssignmentForIndex(int eventIndex)
-//        private void SortEventsByPriority(List<int> firedEvents)
-//        private void HandleRootsForTime(double timeEnd, int[] rootsFound)
-//        private void AssignResultsToModel()
-
+        static string 			    tempPathstring;// = Path.GetTempPath();
+        static int 				    errorFileCounter;
+        IntPtr 					    fileHandle;
+		IModel 					    *model;
+        int 					    numIndependentVariables;
+        IntPtr 					    gdata;
+        IntPtr 					    _amounts;
+        IntPtr 					    _rootsFound;
+        IntPtr 					    abstolArray;
+        string 					    cvodeLogFile;// = "cvodeLogFile";
+        IntPtr 					    cvodeMem;
+       	int 					    numAdditionalRules;
+		void 						HandleCVODEError(int errCode);
+        vector<double> 				assignmentTimes;// = new List<double>();
+       	vector<PendingAssignment> 	assignments;// = new List<PendingAssignment>();
+        bool 						followEvents;
+       	void 	                    AssignPendingEvents(const double& timeEnd, const double& tout);
+       	vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents);
+       	vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, vector<int> &removeEvents);
+       	vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, bool assignOldState);
+       	vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, bool assignOldState, vector<int> &removeEvents);
+		void 					    HandleRootsFound(double &timeEnd, const double& tout);
+       	void                        TestRootsAtInitialTime();
+       	void                        RemovePendingAssignmentForIndex(const int& eventIndex);
+       	void                        SortEventsByPriority(const vector<int>& firedEvents);
+       	void                        HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound);
+       	void                        AssignResultsToModel();
 
 	public:
-    	Random 			  		mRandom;// { get; set; }
-        int 					defaultMaxAdamsOrder;// = 12;
-        int 					defaultMaxBDFOrder;// = 5;
-        int 					MaxAdamsOrder;// = defaultMaxAdamsOrder;
-        int 					MaxBDFOrder;// = defaultMaxBDFOrder;
-        double                  InitStep;// = 0.0;
-        double                  MinStep;// = 0.0;
-        double                  MaxStep;// = 0.0;
-        int 					MaxNumSteps;// = defaultMaxNumSteps;
-        double                  relTol;// = defaultReltol;
-        double                  absTol;// = defaultAbsTol;
-        int 					errCode;
-        static double 			lastTimeValue;
+    	Random 			  		    mRandom;// { get; set; }
+        int 					    defaultMaxAdamsOrder;// = 12;
+        int 					    defaultMaxBDFOrder;// = 5;
+        int 					    MaxAdamsOrder;// = defaultMaxAdamsOrder;
+        int 					    MaxBDFOrder;// = defaultMaxBDFOrder;
+        double                      InitStep;// = 0.0;
+        double                      MinStep;// = 0.0;
+        double                      MaxStep;// = 0.0;
+        int 					    MaxNumSteps;// = defaultMaxNumSteps;
+        double                      relTol;// = defaultReltol;
+        double                      absTol;// = defaultAbsTol;
+        int 					    errCode;
+        static double 			    lastTimeValue;
 
 //        public delegate void TCallBackModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
 		typedef void (CvodeInterface::*TCallBackModelFcn)(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
@@ -201,12 +204,12 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 		int 					SetErrFile(IntPtr cvode_mem, IntPtr errfp){return NULL;}
 
 
-//        private static int nCount;
-//        private static int nRootCount;
+
+
 		void 					ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
-//        public double[] GetCopy(double[] oVector)
-//        public bool[] GetCopy(bool[] oVector)
-//        public void EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata)
+//        public double[] GetCopy(double[] oVector);
+//        public bool[] GetCopy(bool[] oVector);
+//        public void EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata);
 //        // -------------------------------------------------------------------------
 //        // Constructor
 //        // Model contains all the symbol tables associated with the model
@@ -219,22 +222,22 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 		void 					InitializeCVODEInterface(IModel *oModel);
 //        internal static CvodeErrorCodes[] errorCodes = InitilizeErrorCodes();
 //
-//        internal static CvodeErrorCodes[] InitilizeErrorCodes()
+//        internal static CvodeErrorCodes[] InitilizeErrorCodes();
 //        [DebuggerHidden, DebuggerStepThrough]
 
-//        internal double lastEvent;
+        double 					lastEvent;
 //        //internal List<double> eventOccurance = new List<double>();
-//        public void Dispose()
+//        public void Dispose();
         double 					OneStep(double timeStart, double hstep);
 
         // Restart the simulation using a different initial condition
 		void                   	AssignNewVector(IModel *oModel, bool bAssignNewTolerances);
         void                   	AssignNewVector(IModel *model);
-//        public void setAbsTolerance(int index, double dValue)
+//        public void setAbsTolerance(int index, double dValue);
 		int 					reStart(double timeStart, IModel* model);
-//        public double getValue(int index)
-//        internal double[] BuildEvalArgument()
-//        public void release()
+//        public double getValue(int index);
+        vector<double> 			BuildEvalArgument();
+//        public void release();
 //        /// <summary>
 //        /// Random number generator used to implement the random choosing
 //        /// of event priorities.
