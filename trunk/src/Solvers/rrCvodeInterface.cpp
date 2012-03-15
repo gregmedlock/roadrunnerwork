@@ -15,7 +15,6 @@
 
 namespace rr
 {
-
 // -------------------------------------------------------------------------
 // Constructor
 // Model contains all the symbol tables associated with the model
@@ -74,12 +73,11 @@ CvodeInterface::~CvodeInterface()
 {
 }
 
-////
-////        public bool HaveVariables
-////        {
-////            get { return (numAdditionalRules + numIndependentVariables > 0); }
-////        }
-////
+bool CvodeInterface::HaveVariables
+{
+    return (numAdditionalRules + numIndependentVariables > 0);
+}
+
 void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 {
 
@@ -108,7 +106,7 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 
             AssignNewVector(oModel, true);
 
-            cvodeMem = (int*) Create_BDF_NEWTON_CVode();
+            cvodeMem = (long*) Create_BDF_NEWTON_CVode();
             SetMaxOrder(cvodeMem, MaxBDFOrder);
             //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
             //SetMaxOrder(cvodeMem, MaxAdamsOrder);
@@ -137,7 +135,7 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
             Cvode_SetVector(_amounts, 0, 10);
             Cvode_SetVector(abstolArray, 0, defaultAbsTol);
 
-            cvodeMem = (int*) Create_BDF_NEWTON_CVode();
+            cvodeMem = (long*) Create_BDF_NEWTON_CVode();
             SetMaxOrder(cvodeMem, MaxBDFOrder);
             //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
             //SetMaxOrder(cvodeMem, MaxAdamsOrder);
@@ -537,111 +535,112 @@ void CvodeInterface::HandleCVODEError(int errCode)
 ////
 ////        #endregion
 ////
-////        public double OneStep(double timeStart, double hstep)
-////        {
-////#if (PRINT_DEBUG)
-////		            System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
-////		            System.Diagnostics.Debug.WriteLine("--- O N E     S T E P      ( " + nOneStepCount + " ) ");
-////		            System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
-////#endif
-////            nOneStepCount++;
-////            nCount = 0;
-////
-////            double timeEnd = 0.0;
-////            double tout = timeStart + hstep;
-////            int strikes = 3;
-////            try
-////            {
-////                // here we stop for a too small timestep ... this seems troublesome to me ...
-////                while (tout - timeEnd > 1E-16)
-////                {
-////                    if (hstep < 1E-16) return tout;
-////
-////                    // here we bail in case we have no ODEs set up with CVODE ... though we should
-////                    // still at least evaluate the model function
-////                    if (!HaveVariables && model.getNumEvents == 0)
-////                    {
-////                        model.convertToAmounts();
-////                        model.evalModel(tout, BuildEvalArgument());
-////                        return tout;
-////                    }
-////
-////
-////                    if (lastTimeValue > timeStart)
-////                        reStart(timeStart, model);
-////
-////                    double nextTargetEndTime = tout;
-////                    if (assignmentTimes.Count > 0 && assignmentTimes[0] < nextTargetEndTime)
-////                    {
-////                        nextTargetEndTime = assignmentTimes[0];
-////                        assignmentTimes.RemoveAt(0);
-////                    }
-////
-////                    int nResult = RunCvode(cvodeMem, nextTargetEndTime, _amounts, ref timeEnd); // t = double *
-////
-////                    if (nResult == CV_ROOT_RETURN && followEvents)
-////                    {
-////#if (PRINT_DEBUG)
-////		                        System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
-////		                        System.Diagnostics.Debug.WriteLine("--- E V E N T      ( " + nOneStepCount + " ) ");
-////		                        System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
-////#endif
-////
-////                        //bool tooCloseToStart = Math.Abs(timeEnd - timeStart) > absTol;
-////                        bool tooCloseToStart = Math.Abs(timeEnd - lastEvent) > relTol;
-////                        if (tooCloseToStart)
-////                            strikes = 3;
-////                        else
-////                            strikes--;
-////
-////                        if (tooCloseToStart || strikes > 0)
-////                        {
-////                            HandleRootsFound(ref timeEnd, tout);
-////                            reStart(timeEnd, model);
-////                            lastEvent = timeEnd;
-////                        }
-////                    }
-////                    else if (nResult == CV_SUCCESS || !followEvents)
-////                    {
-////                        //model.resetEvents();
-////                        model.time = tout;
-////                        AssignResultsToModel();
-////                    }
-////                    else
-////                    {
-////                        HandleCVODEError(nResult);
-////                    }
-////
-////                    lastTimeValue = timeEnd;
-////
-////                    try
-////                    {
-////                        model.testConstraints();
-////                    }
-////                    catch (Exception e)
-////                    {
-////                        model.Warnings.Add("Constraint Violated at time = " + timeEnd + "\n" +
-////                                                             e.Message);
-////                    }
-////
-////                    AssignPendingEvents(timeEnd, tout);
-////
-////                    if (tout - timeEnd > 1E-16)
-////                        timeStart = timeEnd;
-////                }
-////                return (timeEnd);
-////            }
-////            catch (NullReferenceException ex)
-////            {
-////                throw new SBWApplicationException("Internal error, please reload the model", ex.StackTrace);
-////            }
-////            catch (Exception)
-////            {
-////                InitializeCVODEInterface(model);
-////                throw;
-////            }
-////        }
-////
+
+double OneStep(double timeStart, double hstep)
+{
+//#if (PRINT_DEBUG)
+//		            System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+//		            System.Diagnostics.Debug.WriteLine("--- O N E     S T E P      ( " + nOneStepCount + " ) ");
+//		            System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+//#endif
+    nOneStepCount++;
+    nCount = 0;
+
+    double timeEnd = 0.0;
+    double tout = timeStart + hstep;
+    int strikes = 3;
+    try
+    {
+        // here we stop for a too small timestep ... this seems troublesome to me ...
+        while (tout - timeEnd > 1E-16)
+        {
+            if (hstep < 1E-16) return tout;
+
+            // here we bail in case we have no ODEs set up with CVODE ... though we should
+            // still at least evaluate the model function
+            if (!HaveVariables && model.getNumEvents == 0)
+            {
+                model.convertToAmounts();
+                model.evalModel(tout, BuildEvalArgument());
+                return tout;
+            }
+
+
+            if (lastTimeValue > timeStart)
+                reStart(timeStart, model);
+
+            double nextTargetEndTime = tout;
+            if (assignmentTimes.Count > 0 && assignmentTimes[0] < nextTargetEndTime)
+            {
+                nextTargetEndTime = assignmentTimes[0];
+                assignmentTimes.RemoveAt(0);
+            }
+
+            int nResult = RunCvode(cvodeMem, nextTargetEndTime, _amounts, ref timeEnd); // t = double *
+
+            if (nResult == CV_ROOT_RETURN && followEvents)
+            {
+//#if (PRINT_DEBUG)
+//		                        System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+//		                        System.Diagnostics.Debug.WriteLine("--- E V E N T      ( " + nOneStepCount + " ) ");
+//		                        System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+//#endif
+
+                //bool tooCloseToStart = Math.Abs(timeEnd - timeStart) > absTol;
+                bool tooCloseToStart = Math.Abs(timeEnd - lastEvent) > relTol;
+                if (tooCloseToStart)
+                    strikes = 3;
+                else
+                    strikes--;
+
+                if (tooCloseToStart || strikes > 0)
+                {
+                    HandleRootsFound(ref timeEnd, tout);
+                    reStart(timeEnd, model);
+                    lastEvent = timeEnd;
+                }
+            }
+            else if (nResult == CV_SUCCESS || !followEvents)
+            {
+                //model.resetEvents();
+                model.time = tout;
+                AssignResultsToModel();
+            }
+            else
+            {
+                HandleCVODEError(nResult);
+            }
+
+            lastTimeValue = timeEnd;
+
+            try
+            {
+                model.testConstraints();
+            }
+            catch (Exception e)
+            {
+                model.Warnings.Add("Constraint Violated at time = " + timeEnd + "\n" +
+                                                     e.Message);
+            }
+
+            AssignPendingEvents(timeEnd, tout);
+
+            if (tout - timeEnd > 1E-16)
+                timeStart = timeEnd;
+        }
+        return (timeEnd);
+    }
+    catch (NullReferenceException ex)
+    {
+        throw new SBWApplicationException("Internal error, please reload the model", ex.StackTrace);
+    }
+    catch (Exception)
+    {
+        InitializeCVODEInterface(model);
+        throw;
+    }
+}
+
 ////        private void AssignPendingEvents(double timeEnd, double tout)
 ////        {
 ////            for (int i = assignments.Count - 1; i >= 0; i--)

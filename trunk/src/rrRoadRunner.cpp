@@ -28,7 +28,6 @@ bool RoadRunner::mReMultiplyCompartments 			= false;
 
 RoadRunner::RoadRunner(bool generateCSharp)
 :
-DiffStepSize(0.05),
 emptyModelStr("A model needs to be loaded before one can use this method"),
 STEADYSTATE_THRESHOLD(1.E-2),
 cvode(NULL),
@@ -37,19 +36,17 @@ mL(NULL),
 mL0(NULL),
 mN(NULL),
 mNr(NULL),
+DiffStepSize(0.05),
+timeStart(0),
+timeEnd(10),
+numPoints(21),
+sbmlStr(""),
 mModel(NULL)
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
 	mCSharpGenerator = new CSharpGenerator();
 	mCGenerator = new CGenerator();
-    if(generateCSharp)
-    {
-    	mModelGenerator = mCSharpGenerator;
-    }
-    else
-    {
-		mModelGenerator = mCGenerator;
-    }
+    mModelGenerator = generateCSharp == true ? mCSharpGenerator : mCGenerator;
 }
 
 RoadRunner::~RoadRunner()
@@ -74,7 +71,6 @@ void RoadRunner::Reset()
 		mModelGenerator->Reset();
 	}
 }
-
 
 string RoadRunner::GetModelSourceCode()
 {
@@ -127,39 +123,12 @@ void RoadRunner::InitializeModel(IModel* aModel)
 }
 
 
-//        private CvodeInterface cvode;
-//        //kinSolverInterface kinSolver;  // Use NLEQ1 instead
-//
-//        public IModel model = null;
-//        public bool modelLoaded = false;
-//        private ISteadyStateSolver steadyStateSolver;
-//        public int numPoints;
-//        public string sbmlStr;
-//        private TSelectionRecord[] selectionList;
-//        public double timeEnd;
-//        public double timeStart;
-//
-//        public RoadRunner()
-//        {
-//
-//            System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CreateSpecificCulture("en");
-//            culture.NumberFormat.NumberDecimalSeparator = ".";
-//            Thread.CurrentThread.CurrentCulture = culture;
-//            // Set up some defaults
-//            timeStart = 0;
-//            timeEnd = 10;
-//            numPoints = 21;
-//            sbmlStr = "";
-//
-//            UseKinsol = IsNleqAvailable() ? 0 : 1;
-//        }
-//
-//        private bool IsNleqAvailable()
-//        {
-//            return NLEQInterface.IsAvailable;
-//        }
-//#if DEBUG
-//        public static void Test()
+//bool RoadRunner::IsNleqAvailable()
+//{
+//    return NLEQInterface.IsAvailable;
+//}
+
+//        void RoadRunner::Test()
 //        {
 //
 //            double[,] results;
@@ -235,29 +204,13 @@ void RoadRunner::InitializeModel(IModel* aModel)
 //        }
 //#endif
 //
-//        [Ignore]
-//        public string NL
-//        {
-//            [Ignore]
-//            get { return _NL(); }
-//        }
-//
-//
-//        [Ignore]
-//        private string _NL()
-//        {
-//            return Environment.NewLine;
-//        }
-//
-//
-//        [Ignore]
-//        private void emptyModel()
+//         void RoadRunner::emptyModel()
 //        {
 //            throw new SBWApplicationException(emptyModelStr);
 //        }
 //
 //
-//        private double GetValueForRecord(TSelectionRecord record)
+//        double RoadRunner::GetValueForRecord(TSelectionRecord record)
 //        {
 //            double dResult;
 //            switch (record.selectionType)
@@ -323,7 +276,7 @@ void RoadRunner::InitializeModel(IModel* aModel)
 //            return dResult;
 //        }
 //
-//        private double GetNthSelectedOutput(int index, double dCurrentTime)
+//        double RoadRunner::GetNthSelectedOutput(int index, double dCurrentTime)
 //        {
 //            TSelectionRecord record = selectionList[index];
 //            if (record.selectionType == TSelectionType.clTime)
@@ -332,54 +285,59 @@ void RoadRunner::InitializeModel(IModel* aModel)
 //            return GetValueForRecord(record);
 //        }
 //
-//        private void AddNthOutputToResult(double[,] results, int nRow, double dCurrentTime)
-//        {
-//            for (int j = 0; j < selectionList.Length; j++)
-//            {
-//                results[nRow, j] = GetNthSelectedOutput(j, dCurrentTime);
-//            }
-//        }
+void RoadRunner::AddNthOutputToResult(vector< vector<double> >& results, int nRow, double dCurrentTime)
+{
+    for (int j = 0; j < selectionList.size(); j++)
+    {
+        results[nRow][j] = GetNthSelectedOutput(j, dCurrentTime);
+    }
+}
+
+vector<double> RoadRunner::BuildModelEvalArgument()
+{
+    vector<double> dResult;// = new double[model.amounts.Length + model.rateRules.Length];
+    vector<double> dCurrentRuleValues = mModel->GetCurrentValues();
+    dResult = dCurrentRuleValues;//.CopyTo(dResult, 0);
+    mModel->amounts = dResult;//.CopyTo(dResult, model.rateRules.Length);
+    return dResult;
+}
+
+vector< vector<double> > RoadRunner::runSimulation()
+{
+    double hstep = (timeEnd - timeStart) / (numPoints - 1);
+    vector< vector<double> >  results;// = new double[numPoints, selectionList.Length];
+    results.resize(selectionList.size());
+
+    if(mModel)
+    {
+    	return results;
+    }
+
+    vector<double> y;
+    y=BuildModelEvalArgument();
+    mModel->evalModel(timeStart, y);
+
+    AddNthOutputToResult(results, 0, timeStart);
+
+    if (cvode->HaveVariables())
+    {
+        int restartResult = cvode->reStart(timeStart, mModel);
+        if (restartResult != 0)
+            throw new SBWApplicationException("Error in reStart call to CVODE");
+    }
+    double tout = timeStart;
+    for (int i = 1; i < numPoints; i++)
+    {
+        cvode->OneStep(tout, hstep);
+        tout = timeStart + i * hstep;
+        AddNthOutputToResult(results, i, tout);
+    }
+    return results;
+}
+
+// -------------------------------------------------------------------------------
 //
-//        private double[] BuildModelEvalArgument()
-//        {
-//            var dResult = new double[model.amounts.Length + model.rateRules.Length];
-//            double[] dCurrentRuleValues = model.GetCurrentValues();
-//            dCurrentRuleValues.CopyTo(dResult, 0);
-//            model.amounts.CopyTo(dResult, model.rateRules.Length);
-//            return dResult;
-//        }
-//
-//        [Ignore]
-//        public double[,] runSimulation()
-//        {
-//            double hstep = (timeEnd - timeStart) / (numPoints - 1);
-//            var results = new double[numPoints, selectionList.Length];
-//
-//            model.evalModel(timeStart, BuildModelEvalArgument());
-//
-//            AddNthOutputToResult(results, 0, timeStart);
-//
-//            if (cvode.HaveVariables)
-//            {
-//
-//                int restartResult = cvode.reStart(timeStart, model);
-//                if (restartResult != 0)
-//                    throw new SBWApplicationException("Error in reStart call to CVODE");
-//            }
-//            double tout = timeStart;
-//            for (int i = 1; i < numPoints; i++)
-//            {
-//                cvode.OneStep(tout, hstep);
-//                tout = timeStart + i * hstep;
-//                AddNthOutputToResult(results, i, tout);
-//            }
-//            return results;
-//        }
-//
-//        // -------------------------------------------------------------------------------
-//
-//#if DEBUG
-//        public static void PrintTout(double start, double end, int numPoints)
+//        void RoadRunner::PrintTout(double start, double end, int numPoints)
 //        {
 //            double hstep = (end - start) / (numPoints - 1);
 //            Debug.WriteLine("Using step " + hstep);
@@ -390,39 +348,37 @@ void RoadRunner::InitializeModel(IModel* aModel)
 //                Debug.WriteLine(tout.ToString("G17"));
 //            }
 //        }
-//#endif
-//
 
-//        private static void DumpResults(TextWriter writer, double[,] data, ArrayList colLabels)
-//        {
-//            for (int i = 0; i < colLabels.Count; i++)
-//            {
-//                writer.Write(colLabels[i] + "\t");
-//                Debug.Write(colLabels[i] + "\t");
-//            }
-//            writer.WriteLine();
-//            Debug.WriteLine("");
-//
-//            for (int i = 0; i < data.GetLength(0); i++)
-//            {
-//                for (int j = 0; j < data.GetLength(1); j++)
-//                {
-//                    writer.Write(data[i, j] + "\t");
-//                    Debug.Write(data[i, j] + "\t");
-//                }
-//                writer.WriteLine();
-//                Debug.WriteLine("");
-//            }
-//        }
-//
-//
-//        //public static void TestDirectory(string directory, bool testSubDirs)
+void RoadRunner::DumpResults(TextWriter& writer, vector< vector<double> >& data, const StringList& colLabels);
+{
+    for (int i = 0; i < colLabels.Count; i++)
+    {
+        writer.Write(colLabels[i] + "\t");
+        Debug.Write(colLabels[i] + "\t");
+    }
+    writer.WriteLine();
+    Debug.WriteLine("");
+
+    for (int i = 0; i < data.GetLength(0); i++)
+    {
+        for (int j = 0; j < data.GetLength(1); j++)
+        {
+            writer.Write(data[i, j] + "\t");
+            Debug.Write(data[i, j] + "\t");
+        }
+        writer.WriteLine();
+        Debug.WriteLine("");
+    }
+}
+
+
+//        //void RoadRunner::TestDirectory(string directory, bool testSubDirs)
 //        //{
 //        //    //TestDirectory(directory, testSubDirs, "*sbml-l3v1.xml");
 //        //    TestDirectory(directory, testSubDirs, "*.xml");
 //        //}
 //
-//    //    public static void TestDirectory(string directory, bool testSubDirs, string pattern)
+//    //    void RoadRunner::TestDirectory(string directory, bool testSubDirs, string pattern)
 //    //{
 //    //        var files = Directory.GetFiles(directory, pattern,
 //    //            (testSubDirs ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly));
@@ -442,50 +398,49 @@ void RoadRunner::InitializeModel(IModel* aModel)
 //    //            }
 //    //        }
 //    //    }
+
+
+void RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws)
+{
+    //var sim = new RoadRunner();
+    ComputeAndAssignConservationLaws(useConservationLaws);
+
+    //loadSBML(File.ReadAllText(fileName));
+
+    vector<double> data;
+    data = simulate();
+    StringList list = getSelectionList();
+    //TextWriter writer = Console.Out;
+
+    DumpResults(writer, data, list);
+    return;
+}
+
+void RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints)
+{
+//    var sim = new RoadRunner();
+//    ComputeAndAssignConservationLaws(useConservationLaws);
+//    sim.loadSBML(File.ReadAllText(fileName));
 //
+//    try
+//    {
+//        double[,] data = sim.simulateEx(startTime, endTime, numPoints);
+//        ArrayList list = sim.getSelectionList();
+//        TextWriter writer = Console.Error;
 //
-//        [Ignore]
-//        public static void SimulateSBMLFile(string fileName, bool useConservationLaws)
-//        {
-//            var sim = new RoadRunner();
-//            ComputeAndAssignConservationLaws(useConservationLaws);
-//            sim.loadSBML(File.ReadAllText(fileName));
+//        DumpResults(writer, data, list);
+//    }
+//    catch (Exception ex)
+//    {
+//        Debug.WriteLine(ex);
+//    }
 //
-//            double[,] data = sim.simulate();
-//            ArrayList list = sim.getSelectionList();
-//            TextWriter writer = Console.Out;
+//    //Debug.WriteLine(sim.getCapabilities());
 //
-//            DumpResults(writer, data, list);
-//            return;
-//        }
-//
-//        [Ignore]
-//        public static void SimulateSBMLFile(string fileName, bool useConservationLaws, double startTime, double endTime,
-//                                            int numPoints)
-//        {
-//            var sim = new RoadRunner();
-//            ComputeAndAssignConservationLaws(useConservationLaws);
-//            sim.loadSBML(File.ReadAllText(fileName));
-//
-//            try
-//            {
-//                double[,] data = sim.simulateEx(startTime, endTime, numPoints);
-//                ArrayList list = sim.getSelectionList();
-//                TextWriter writer = Console.Error;
-//
-//                DumpResults(writer, data, list);
-//            }
-//            catch (Exception ex)
-//            {
-//                Debug.WriteLine(ex);
-//            }
-//
-//            //Debug.WriteLine(sim.getCapabilities());
-//
-//            return;
-//        }
-//
-//        [Help("Load SBML into simulator")]
+//    return;
+}
+
+//        Help("Load SBML into simulator")
 void RoadRunner::loadSBMLFromFile(const string& fileName)
 {
     ifstream ifs(fileName.c_str());
@@ -501,7 +456,7 @@ void RoadRunner::loadSBMLFromFile(const string& fileName)
     loadSBML(sbml);
 }
 
-//        [Help("Load SBML into simulator")]
+//        Help("Load SBML into simulator")
 void RoadRunner::loadSBML(const string& sbml)
 {
 	Log(lDebug4)<<"Loading SBML into simulator";
@@ -589,32 +544,32 @@ void RoadRunner::loadSBML(const string& sbml)
     }
 }
 
-//        [Help("Returns the initially loaded model as SBML")]
-//        public string getSBML()
+//        Help("Returns the initially loaded model as SBML")
+//        string RoadRunner::getSBML()
 //        {
 //            return sbmlStr;
 //        }
 //
-//        [Help("get the currently set time start")]
-//        public double getTimeStart()
+//        Help("get the currently set time start")
+//        double RoadRunner::getTimeStart()
 //        {
 //            return timeStart;
 //        }
 //
-//        [Help("get the currently set time end")]
-//        public double getTimeEnd()
+//        Help("get the currently set time end")
+//        double RoadRunner::getTimeEnd()
 //        {
 //            return timeEnd;
 //        }
 //
-//        [Help("get the currently set number of points")]
-//        public int getNumPoints()
+//        Help("get the currently set number of points")
+//        int RoadRunner::getNumPoints()
 //        {
 //            return numPoints;
 //        }
 //
-//        [Help("Set the time start for the simulation")]
-//        public void setTimeStart(double startTime)
+//        Help("Set the time start for the simulation")
+//        void RoadRunner::setTimeStart(double startTime)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -623,8 +578,8 @@ void RoadRunner::loadSBML(const string& sbml)
 //            this.timeStart = startTime;
 //        }
 //
-//        [Help("Set the time end for the simulation")]
-//        public void setTimeEnd(double endTime)
+//        Help("Set the time end for the simulation")
+//        void RoadRunner::setTimeEnd(double endTime)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -633,8 +588,8 @@ void RoadRunner::loadSBML(const string& sbml)
 //            this.timeEnd = endTime;
 //        }
 //
-//        [Help("Set the number of points to generate during the simulation")]
-//        public void setNumPoints(int nummberOfPoints)
+//        Help("Set the number of points to generate during the simulation")
+//        void RoadRunner::setNumPoints(int nummberOfPoints)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -643,7 +598,7 @@ void RoadRunner::loadSBML(const string& sbml)
 //            this.numPoints = nummberOfPoints;
 //        }
 //
-//        [Help("reset the simulator back to the initial conditions specified in the SBML model")]
+//        Help("reset the simulator back to the initial conditions specified in the SBML model")
 void RoadRunner::reset()
 {
 //            if (!modelLoaded)
@@ -708,10 +663,10 @@ void RoadRunner::reset()
 //            }
 }
 //
-//        [Help(
+//        Help(
 //            "Change the initial conditions to another concentration vector (changes only initial conditions for floating Species)"
-//            )]
-//        public void changeInitialConditions(double[] ic)
+//            )
+//        void RoadRunner::changeInitialConditions(double[] ic)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            for (int i = 0; i < ic.Length; i++)
@@ -725,31 +680,35 @@ void RoadRunner::reset()
 //        }
 //
 //
-//        [Help("Carry out a time course simulation")]
-//        public double[,] simulate()
-//        {
-//            try
-//            {
-//                if (!modelLoaded)
-//                    throw new SBWApplicationException(emptyModelStr);
-//                if (timeEnd <= timeStart)
-//                    throw new SBWApplicationException("Error: time end must be greater than time start");
-//                return runSimulation();
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw new SBWApplicationException("Unexpected error from simulate(): " + e.Message);
-//            }
-//        }
-//
-//        [Help(
+//        Help("Carry out a time course simulation")
+double[,] RoadRunner::simulate()
+{
+    try
+    {
+        if (!modelLoaded)
+        {
+            throw new SBWApplicationException(emptyModelStr);
+        }
+        if (timeEnd <= timeStart)
+        {
+            throw new SBWApplicationException("Error: time end must be greater than time start");
+        }
+        return runSimulation();
+    }
+    catch (SBWException)
+    {
+        throw;
+    }
+    catch (Exception e)
+    {
+        throw new SBWApplicationException("Unexpected error from simulate(): " + e.Message);
+    }
+}
+
+//        Help(
 //            "Extension method to simulate (time start, time end, number of points). This routine resets the model to its initial condition before running the simulation (unlike simulate())"
-//            )]
-//        public double[,] simulateEx(double startTime, double endTime, int numberOfPoints)
+//            )
+//        double[,] RoadRunner::simulateEx(double startTime, double endTime, int numberOfPoints)
 //        {
 //            try
 //            {
@@ -775,8 +734,8 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Help("Returns the current vector of reactions rates")]
-//        public double[] getReactionRates()
+//        Help("Returns the current vector of reactions rates")
+//        double[] RoadRunner::getReactionRates()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -785,8 +744,8 @@ void RoadRunner::reset()
 //            return model.rates;
 //        }
 //
-//        [Help("Returns the current vector of rates of change")]
-//        public double[] getRatesOfChange()
+//        Help("Returns the current vector of rates of change")
+//        double[] RoadRunner::getRatesOfChange()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -795,10 +754,10 @@ void RoadRunner::reset()
 //            return model.dydt;
 //        }
 //
-//        [Help(
+//        Help(
 //            "Returns a list of floating species names: This method is deprecated, please use getFloatingSpeciesNames()")
-//        ]
-//        public ArrayList getSpeciesNames()
+//        
+//        ArrayList RoadRunner::getSpeciesNames()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -806,8 +765,8 @@ void RoadRunner::reset()
 //            return ModelGenerator.Instance.getFloatingSpeciesConcentrationList(); // Reordered list
 //        }
 //
-//        [Help("Returns a list of reaction names")]
-//        public ArrayList getReactionNames()
+//        Help("Returns a list of reaction names")
+//        ArrayList RoadRunner::getReactionNames()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -820,10 +779,10 @@ void RoadRunner::reset()
 //        // Start of Level 2 API Methods
 //        // ---------------------------------------------------------------------
 //
-//        public int UseKinsol { get; set; }
+//        int RoadRunner::UseKinsol { get; set; }
 //
-//        [Help("Get Simulator Capabilities")]
-//        public string getCapabilities()
+//        Help("Get Simulator Capabilities")
+//        string RoadRunner::getCapabilities()
 //        {
 //            CapsSupport current = CapsSupport.CurrentSettings;
 //            current["integration"].Capabilities.Add(new CapsSupport.Capability
@@ -835,29 +794,27 @@ void RoadRunner::reset()
 //            return current.ToXml();
 //        }
 //
-//        [Ignore]
-//        public void setTolerances(double aTol, double rTol)
+//        void RoadRunner::setTolerances(double aTol, double rTol)
 //        {
 //            CvodeInterface.relTol = rTol;
 //            CvodeInterface.absTol = aTol;
 //        }
 //
-//        [Ignore]
-//        public void setTolerances(double aTol, double rTol, int maxSteps)
+//        void RoadRunner::setTolerances(double aTol, double rTol, int maxSteps)
 //        {
 //            setTolerances(aTol, rTol);
 //            CvodeInterface.MaxNumSteps = maxSteps;
 //        }
 //
-//        public void CorrectMaxStep()
+//        void RoadRunner::CorrectMaxStep()
 //        {
 //            double maxStep = (timeEnd - timeStart) / (numPoints);
 //            maxStep = Math.Min(CvodeInterface.MaxStep, maxStep);
 //            CvodeInterface.MaxStep = maxStep;
 //        }
 //
-//        [Help("Set Simulator Capabilites")]
-//        public void setCapabilities(string capsStr)
+//        Help("Set Simulator Capabilites")
+//        void RoadRunner::setCapabilities(string capsStr)
 //        {
 //            var cs = new CapsSupport(capsStr);
 //            cs.Apply();
@@ -883,8 +840,8 @@ void RoadRunner::reset()
 //
 //        }
 //
-//        [Help("Sets the value of the given species or global parameter to the given value (not of local parameters)")]
-//        public void setValue(string sId, double dValue)
+//        Help("Sets the value of the given species or global parameter to the given value (not of local parameters)")
+//        void RoadRunner::setValue(string sId, double dValue)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -937,8 +894,8 @@ void RoadRunner::reset()
 //        }
 //
 //
-//        [Help("Gets the Value of the given species or global parameter (not of local parameters)")]
-//        public double getValue(string sId)
+//        Help("Gets the Value of the given species or global parameter (not of local parameters)")
+//        double RoadRunner::getValue(string sId)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -1020,10 +977,10 @@ void RoadRunner::reset()
 //                                              "Only species, global parameter values and fluxes can be returned");
 //        }
 //
-//        [Help(
+//        Help(
 //            "Returns symbols of the currently loaded model, that can be used for the selectionlist format array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }."
-//            )]
-//        public ArrayList getAvailableSymbols()
+//            )
+//        ArrayList RoadRunner::getAvailableSymbols()
 //        {
 //            var oResult = new ArrayList {new ArrayList(new object[] {"Time", new ArrayList(new object[] {"time"})})};
 //
@@ -1046,8 +1003,8 @@ void RoadRunner::reset()
 //        }
 //
 //
-//        [Help("Returns the currently selected columns that will be returned by calls to simulate() or simulateEx(,,).")]
-//        public ArrayList getSelectionList()
+//        Help("Returns the currently selected columns that will be returned by calls to simulate() or simulateEx(,,).")
+//        ArrayList RoadRunner::getSelectionList()
 //        {
 //            var oResult = new ArrayList();
 //
@@ -1115,9 +1072,9 @@ void RoadRunner::reset()
 //        }
 //
 //
-//        [Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
-//              " time, species names, , volume, reaction rates and rates of change (speciesName')")]
-//        public void setSelectionList(ArrayList newSelectionList)
+//        Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
+//              " time, species names, , volume, reaction rates and rates of change (speciesName')")
+//        void RoadRunner::setSelectionList(ArrayList newSelectionList)
 //        {
 //            selectionList = new TSelectionRecord[newSelectionList.Count];
 //            ArrayList fs = ModelGenerator.Instance.getFloatingSpeciesConcentrationList();
@@ -1250,18 +1207,18 @@ void RoadRunner::reset()
 //        }
 //
 //
-//        [Help(
+//        Help(
 //            "Carry out a single integration step using a stepsize as indicated in the method call (the intergrator is reset to take into account all variable changes). Arguments: double CurrentTime, double StepSize, Return Value: new CurrentTime."
-//            )]
-//        public double oneStep(double currentTime, double stepSize)
+//            )
+//        double RoadRunner::oneStep(double currentTime, double stepSize)
 //        {
 //            return oneStep(currentTime, stepSize, true);
 //        }
 //
-//        [Help(
+//        Help(
 //           "Carry out a single integration step using a stepsize as indicated in the method call. Arguments: double CurrentTime, double StepSize, bool: reset integrator if true, Return Value: new CurrentTime."
-//           )]
-//        public double oneStep(double currentTime, double stepSize, bool reset)
+//           )
+//        double RoadRunner::oneStep(double currentTime, double stepSize, bool reset)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            if (reset)
@@ -1274,8 +1231,8 @@ void RoadRunner::reset()
 //        // Start of Level 3 API Methods
 //        // ---------------------------------------------------------------------
 //
-//        /*[Help("Compute the steady state of the model, returns the sum of squares of the solution")]
-//        public double steadyState () {
+//        /*Help("Compute the steady state of the model, returns the sum of squares of the solution")
+//        double RoadRunner::steadyState () {
 //            try {
 //                if (modelLoaded) {
 //                    kinSolver = new kinSolverInterface(model);
@@ -1289,7 +1246,7 @@ void RoadRunner::reset()
 //        }*/
 //
 //
-//        //public static void TestSettings()
+//        //void TestSettings()
 //        //{
 //        //    var rr = new RoadRunner();
 //
@@ -1305,8 +1262,8 @@ void RoadRunner::reset()
 //
 //        //}
 //
-//        [Help("Compute the steady state of the model, returns the sum of squares of the solution")]
-//        public double steadyState()
+//        Help("Compute the steady state of the model, returns the sum of squares of the solution")
+//        double RoadRunner::steadyState()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -1338,8 +1295,7 @@ void RoadRunner::reset()
 //        // Usage:  A.mult (A1, A2); multiply A1 by A2 giving A                  }
 //        //                                                                      }
 //        // ******************************************************************** }
-//        [Ignore()]
-//        public double[][] mult(double[][] m1, double[][] m2)
+//        double[][] mult(double[][] m1, double[][] m2)
 //        {
 //            int m1_nRows = m1.GetLength(0);
 //            int m2_nRows = m2.GetLength(0);
@@ -1383,8 +1339,8 @@ void RoadRunner::reset()
 //        }
 //
 //
-//        [Help("Compute the reduced Jacobian at the current operating point")]
-//        public double[][] getReducedJacobian()
+//        Help("Compute the reduced Jacobian at the current operating point")
+//        double[][] RoadRunner::getReducedJacobian()
 //        {
 //            try
 //            {
@@ -1411,8 +1367,8 @@ void RoadRunner::reset()
 //        }
 //
 //
-//        [Help("Compute the full Jacobian at the current operating point")]
-//        public double[][] getFullJacobian()
+//        Help("Compute the full Jacobian at the current operating point")
+//        double[][] RoadRunner::getFullJacobian()
 //        {
 //            try
 //            {
@@ -1440,8 +1396,8 @@ void RoadRunner::reset()
 //        // Start of Level 4 API Methods
 //        // ---------------------------------------------------------------------
 //
-//        [Help("Returns the Link Matrix for the currently loaded model")]
-//        public double[][] getLinkMatrix()
+//        Help("Returns the Link Matrix for the currently loaded model")
+//        double[][] RoadRunner::getLinkMatrix()
 //        {
 //            try
 //            {
@@ -1461,8 +1417,8 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Help("Returns the reduced stoichiometry matrix (Nr) for the currently loaded model")]
-//        public double[][] getNrMatrix()
+//        Help("Returns the reduced stoichiometry matrix (Nr) for the currently loaded model")
+//        double[][] RoadRunner::getNrMatrix()
 //        {
 //            try
 //            {
@@ -1482,8 +1438,8 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Help("Returns the L0 matrix for the currently loaded model")]
-//        public double[][] getL0Matrix()
+//        Help("Returns the L0 matrix for the currently loaded model")
+//        double[][] RoadRunner::getL0Matrix()
 //        {
 //            try
 //            {
@@ -1503,8 +1459,8 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Help("Returns the stoichiometry matrix for the currently loaded model")]
-//        public double[][] getStoichiometryMatrix()
+//        Help("Returns the stoichiometry matrix for the currently loaded model")
+//        double[][] RoadRunner::getStoichiometryMatrix()
 //        {
 //            try
 //            {
@@ -1524,8 +1480,8 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Help("Returns the conservation matrix (gamma) for the currently loaded model")]
-//        public double[][] getConservationMatrix()
+//        Help("Returns the conservation matrix (gamma) for the currently loaded model")
+//        double[][] RoadRunner::getConservationMatrix()
 //        {
 //            try
 //            {
@@ -1544,8 +1500,8 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Help("Returns the number of dependent species in the model")]
-//        public int getNumberOfDependentSpecies()
+//        Help("Returns the number of dependent species in the model")
+//        int RoadRunner::getNumberOfDependentSpecies()
 //        {
 //            try
 //            {
@@ -1564,8 +1520,8 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Help("Returns the number of independent species in the model")]
-//        public int getNumberOfIndependentSpecies()
+//        Help("Returns the number of independent species in the model")
+//        int RoadRunner::getNumberOfIndependentSpecies()
 //        {
 //            try
 //            {
@@ -1584,8 +1540,7 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Ignore]
-//        private double getVariableValue(TVariableType variableType, int variableIndex)
+//        double RoadRunner::getVariableValue(TVariableType variableType, int variableIndex)
 //        {
 //            switch (variableType)
 //            {
@@ -1600,8 +1555,7 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Ignore]
-//        private void setParameterValue(TParameterType parameterType, int parameterIndex, double value)
+//        void RoadRunner::setParameterValue(TParameterType parameterType, int parameterIndex, double value)
 //        {
 //            switch (parameterType)
 //            {
@@ -1626,8 +1580,7 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Ignore]
-//        private double getParameterValue(TParameterType parameterType, int parameterIndex)
+//        double RoadRunner::getParameterValue(TParameterType parameterType, int parameterIndex)
 //        {
 //            switch (parameterType)
 //            {
@@ -1655,7 +1608,7 @@ void RoadRunner::reset()
 //        /// </summary>
 //        /// <param name="T2">The Matrix to calculate the Inverse for</param>
 //        /// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
-//        private static void GetInverse(Matrix T2, Matrix Inv)
+//        void RoadRunner::GetInverse(Matrix T2, Matrix Inv)
 //        {
 //            try
 //            {
@@ -1675,10 +1628,10 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Help(
+//        Help(
 //            "Derpar Continuation, stepSize = stepsize; independentVariable = index to parameter; parameterType = {'globalParameter', 'boundarySpecies'"
-//            )]
-//        public void computeContinuation(double stepSize, int independentVariable, string parameterTypeStr)
+//            )
+//        void RoadRunner::computeContinuation(double stepSize, int independentVariable, string parameterTypeStr)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            var derpar = new TDerpar(this, model.getNumTotalVariables, model.getNumIndependentVariables);
@@ -1700,8 +1653,8 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Help("Returns the Symbols of all Flux Control Coefficients.")]
-//        public ArrayList getFluxControlCoefficientNames()
+//        Help("Returns the Symbols of all Flux Control Coefficients.")
+//        ArrayList RoadRunner::getFluxControlCoefficientNames()
 //        {
 //            var oResult = new ArrayList();
 //            if (!modelLoaded) return oResult;
@@ -1739,8 +1692,8 @@ void RoadRunner::reset()
 //            return oResult;
 //        }
 //
-//        [Help("Returns the Symbols of all Concentration Control Coefficients.")]
-//        public ArrayList getConcentrationControlCoefficientNames()
+//        Help("Returns the Symbols of all Concentration Control Coefficients.")
+//        ArrayList RoadRunner::getConcentrationControlCoefficientNames()
 //        {
 //            var oResult = new ArrayList();
 //            if (!modelLoaded) return oResult;
@@ -1778,8 +1731,8 @@ void RoadRunner::reset()
 //            return oResult;
 //        }
 //
-//        [Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")]
-//        public ArrayList getUnscaledConcentrationControlCoefficientNames()
+//        Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")
+//        ArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
 //        {
 //            var oResult = new ArrayList();
 //            if (!modelLoaded) return oResult;
@@ -1817,8 +1770,8 @@ void RoadRunner::reset()
 //            return oResult;
 //        }
 //
-//        [Help("Returns the Symbols of all Elasticity Coefficients.")]
-//        public ArrayList getElasticityCoefficientNames()
+//        Help("Returns the Symbols of all Elasticity Coefficients.")
+//        ArrayList RoadRunner::getElasticityCoefficientNames()
 //        {
 //            var oResult = new ArrayList();
 //            if (!modelLoaded) return oResult;
@@ -1862,8 +1815,8 @@ void RoadRunner::reset()
 //            return oResult;
 //        }
 //
-//        [Help("Returns the Symbols of all Unscaled Elasticity Coefficients.")]
-//        public ArrayList getUnscaledElasticityCoefficientNames()
+//        Help("Returns the Symbols of all Unscaled Elasticity Coefficients.")
+//        ArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
 //        {
 //            var oResult = new ArrayList();
 //            if (!modelLoaded) return oResult;
@@ -1908,8 +1861,8 @@ void RoadRunner::reset()
 //            return oResult;
 //        }
 //
-//        [Help("Returns the Symbols of all Floating Species Eigenvalues.")]
-//        public ArrayList getEigenValueNames()
+//        Help("Returns the Symbols of all Floating Species Eigenvalues.")
+//        ArrayList RoadRunner::getEigenValueNames()
 //        {
 //            var oResult = new ArrayList();
 //            if (!modelLoaded) return oResult;
@@ -1924,10 +1877,10 @@ void RoadRunner::reset()
 //            return oResult;
 //        }
 //
-//        [Help(
+//        Help(
 //            "Returns symbols of the currently loaded model, that can be used for steady state analysis. Format: array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }  or { { \"groupname\", { \"subgroup\", { \"item1\" ... } } } }."
-//            )]
-//        public ArrayList getAvailableSteadyStateSymbols()
+//            )
+//        ArrayList RoadRunner::getAvailableSteadyStateSymbols()
 //        {
 //            var oResult = new ArrayList();
 //            if (!modelLoaded) return oResult;
@@ -1943,7 +1896,7 @@ void RoadRunner::reset()
 //            oResult.Add(
 //                new ArrayList(new object[] { "Concentration Control Coefficients", getConcentrationControlCoefficientNames() }));
 //            oResult.Add(
-//                new ArrayList(new object[]
+//                new ArrayList(new object[
 //                                  {
 //                                      "Unscaled Concentration Control Coefficients",
 //                                      getUnscaledConcentrationControlCoefficientNames()
@@ -1956,8 +1909,8 @@ void RoadRunner::reset()
 //            return oResult;
 //        }
 //
-//        [Help("Returns the selection list as returned by computeSteadyStateValues().")]
-//        public ArrayList getSteadyStateSelectionList()
+//        Help("Returns the selection list as returned by computeSteadyStateValues().")
+//        ArrayList RoadRunner::getSteadyStateSelectionList()
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2035,7 +1988,7 @@ void RoadRunner::reset()
 //            return result ;
 //        }
 //
-//        private TSelectionRecord[] GetSteadyStateSelection(ArrayList newSelectionList)
+//        TSelectionRecord[] RoadRunner::GetSteadyStateSelection(ArrayList newSelectionList)
 //        {
 //            var steadyStateSelection = new TSelectionRecord[newSelectionList.Count];
 //            ArrayList fs = ModelGenerator.Instance.getFloatingSpeciesConcentrationList();
@@ -2150,8 +2103,8 @@ void RoadRunner::reset()
 //            return steadyStateSelection;
 //        }
 //
-//        [Help("sets the selection list as returned by computeSteadyStateValues().")]
-//        public void setSteadyStateSelectionList(ArrayList newSelectionList)
+//        Help("sets the selection list as returned by computeSteadyStateValues().")
+//        void RoadRunner::setSteadyStateSelectionList(ArrayList newSelectionList)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2161,14 +2114,14 @@ void RoadRunner::reset()
 //
 //        }
 //
-//        [Help("performs steady state analysis, returning values as given by setSteadyStateSelectionList().")]
-//        public double[] computeSteadyStateValues()
+//        Help("performs steady state analysis, returning values as given by setSteadyStateSelectionList().")
+//        double[] RoadRunner::computeSteadyStateValues()
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            return computeSteadyStateValues(_oSteadyStateSelection, true);
 //        }
 //
-//        private double[] computeSteadyStateValues(TSelectionRecord[] oSelection, bool computeSteadyState)
+//        double[] RoadRunner::computeSteadyStateValues(TSelectionRecord[] oSelection, bool computeSteadyState)
 //        {
 //            if (computeSteadyState) steadyState();
 //
@@ -2181,15 +2134,15 @@ void RoadRunner::reset()
 //
 //        }
 //
-//        [Help("performs steady state analysis, returning values as specified by the given selection list.")]
-//        public double[] computeSteadyStateValues(ArrayList oSelection)
+//        Help("performs steady state analysis, returning values as specified by the given selection list.")
+//        double[] RoadRunner::computeSteadyStateValues(ArrayList oSelection)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            var selection = GetSteadyStateSelection(oSelection);
 //            return computeSteadyStateValues(selection, true);
 //        }
 //
-//        private double computeSteadyStateValue(TSelectionRecord record)
+//        double RoadRunner::computeSteadyStateValue(TSelectionRecord record)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            if (record.selectionType == TSelectionType.clUnknown)
@@ -2197,8 +2150,8 @@ void RoadRunner::reset()
 //            return GetValueForRecord(record);
 //        }
 //
-//        [Help("Returns the value of the given steady state identifier.")]
-//        public double computeSteadyStateValue(string sId)
+//        Help("Returns the value of the given steady state identifier.")
+//        double RoadRunner::computeSteadyStateValue(string sId)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2260,8 +2213,8 @@ void RoadRunner::reset()
 //            }
 //        }
 //
-//        [Help("Returns the values selected with setSelectionList() for the current model time / timestep")]
-//        public double[] getSelectedValues()
+//        Help("Returns the values selected with setSelectionList() for the current model time / timestep")
+//        double[] RoadRunner::getSelectedValues()
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2274,30 +2227,30 @@ void RoadRunner::reset()
 //            return result;
 //        }
 //
-//        [Help("Returns any warnings that occured during the loading of the SBML")]
-//        public string[] getWarnings()
+//        Help("Returns any warnings that occured during the loading of the SBML")
+//        string[] RoadRunner::getWarnings()
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            return model.Warnings.ToArray();
 //        }
 //
-//        [Help("When turned on, this method will cause rates, event assignments, rules and such to be multiplied " +
+//        Help("When turned on, this method will cause rates, event assignments, rules and such to be multiplied " +
 //              "with the compartment volume, if species are defined as initialAmounts. By default this behavior is off.")
-//        ]
-//        public static void ReMultiplyCompartments(bool bValue)
+//        
+//        void RoadRunner::ReMultiplyCompartments(bool bValue)
 //        {
 //            _ReMultiplyCompartments = bValue;
 //        }
 //
-//        [Help("This method turns on / off the computation and adherence to conservation laws."
-//              + "By default roadRunner will discover conservation cycles and reduce the model accordingly.")]
-//        public static void ComputeAndAssignConservationLaws(bool bValue)
+//        Help("This method turns on / off the computation and adherence to conservation laws."
+//              + "By default roadRunner will discover conservation cycles and reduce the model accordingly.")
+//        void RoadRunner::ComputeAndAssignConservationLaws(bool bValue)
 //        {
 //            _bComputeAndAssignConservationLaws = bValue;
 //        }
 //
-//        [Help("Returns the current generated source code")]
-//        public string getCSharpCode()
+//        Help("Returns the current generated source code")
+//        string RoadRunner::getCSharpCode()
 //        {
 //            if (modelLoaded)
 //            {
@@ -2307,10 +2260,10 @@ void RoadRunner::reset()
 //            throw new SBWApplicationException("Model has to be loaded first");
 //        }
 //
-//        [Help(
+//        Help(
 //            "Performs a steady state parameter scan with the given parameters returning all elments from the selectionList: (Format: symnbol, startValue, endValue, stepSize)"
-//            )]
-//        public double[][] steadyStateParameterScan(string symbol, double startValue, double endValue, double stepSize)
+//            )
+//        double[][] RoadRunner::steadyStateParameterScan(string symbol, double startValue, double endValue, double stepSize)
 //        {
 //            var results = new List<double[]>();
 //
@@ -2341,8 +2294,8 @@ void RoadRunner::reset()
 //        }
 //
 //
-//        [Help("Returns the SBML with the current parameterset")]
-//        public string writeSBML()
+//        Help("Returns the SBML with the current parameterset")
+//        string RoadRunner::writeSBML()
 //        {
 //            NOM.loadSBML(NOM.getParamPromotedSBML(sbmlStr));
 //            var state = new ModelState(model);
@@ -2366,19 +2319,15 @@ void RoadRunner::reset()
 //            return NOM.getSBML();
 //        }
 //
-//        #region Get Local Parameter Names / Values
-//
-//        // -----------------------------------------------------------------
-//
-//        [Help("Get the number of local parameters for a given reaction")]
-//        public int getNumberOfLocalParameters(int reactionId)
+//        Help("Get the number of local parameters for a given reaction")
+//        int RoadRunner::getNumberOfLocalParameters(int reactionId)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            return getNumberOfLocalParameters(reactionId);
 //        }
 //
-//        [Help("Sets the value of a global parameter by its index")]
-//        public void setLocalParameterByIndex(int reactionId, int index, double value)
+//        Help("Sets the value of a global parameter by its index")
+//        void RoadRunner::setLocalParameterByIndex(int reactionId, int index, double value)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2389,8 +2338,8 @@ void RoadRunner::reset()
 //                throw new SBWApplicationException(string.Format("Index in setLocalParameterByIndex out of range: [{0}]", index));
 //        }
 //
-//        [Help("Returns the value of a global parameter by its index")]
-//        public double getLocalParameterByIndex(int reactionId, int index)
+//        Help("Returns the value of a global parameter by its index")
+//        double RoadRunner::getLocalParameterByIndex(int reactionId, int index)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2402,8 +2351,8 @@ void RoadRunner::reset()
 //            throw new SBWApplicationException(String.Format("Index in getLocalParameterByIndex out of range: [{0}]", index));
 //        }
 //
-//        [Help("Set the values for all global parameters in the model")]
-//        public void setLocalParameterValues(int reactionId, double[] values)
+//        Help("Set the values for all global parameters in the model")
+//        void RoadRunner::setLocalParameterValues(int reactionId, double[] values)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2414,8 +2363,8 @@ void RoadRunner::reset()
 //                throw new SBWApplicationException(String.Format("Index in setLocalParameterValues out of range: [{0}]", reactionId));
 //        }
 //
-//        [Help("Get the values for all global parameters in the model")]
-//        public double[] getLocalParameterValues(int reactionId)
+//        Help("Get the values for all global parameters in the model")
+//        double[] RoadRunner::getLocalParameterValues(int reactionId)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2425,8 +2374,8 @@ void RoadRunner::reset()
 //            throw new SBWApplicationException(String.Format("Index in getLocalParameterValues out of range: [{0}]", reactionId));
 //        }
 //
-//        [Help("Gets the list of parameter names")]
-//        public ArrayList getLocalParameterNames(int reactionId)
+//        Help("Gets the list of parameter names")
+//        ArrayList RoadRunner::getLocalParameterNames(int reactionId)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2436,8 +2385,8 @@ void RoadRunner::reset()
 //            throw (new SBWApplicationException("reaction Id out of range in call to getLocalParameterNames"));
 //        }
 //
-//        [Help("Returns a list of global parameter tuples: { {parameter Name, value},...")]
-//        public ArrayList getAllLocalParameterTupleList()
+//        Help("Returns a list of global parameter tuples: { {parameter Name, value},...")
+//        ArrayList RoadRunner::getAllLocalParameterTupleList()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2458,21 +2407,15 @@ void RoadRunner::reset()
 //            return tupleList;
 //        }
 //
-//        #endregion
-//
-//        #region Get Reaction Rate / Names ...
-//
-//        // -----------------------------------------------------------------
-//
-//        [Help("Get the number of reactions")]
-//        public int getNumberOfReactions()
+//        Help("Get the number of reactions")
+//        int RoadRunner::getNumberOfReactions()
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            return model.getNumReactions;
 //        }
 //
-//        [Help("Returns the rate of a reaction by its index")]
-//        public double getReactionRate(int index)
+//        Help("Returns the rate of a reaction by its index")
+//        double RoadRunner::getReactionRate(int index)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2486,8 +2429,8 @@ void RoadRunner::reset()
 //            throw new SBWApplicationException(String.Format("Index in getReactionRate out of range: [{0}]", index));
 //        }
 //
-//        [Help("Returns the rate of changes of a species by its index")]
-//        public double getRateOfChange(int index)
+//        Help("Returns the rate of changes of a species by its index")
+//        double RoadRunner::getRateOfChange(int index)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2500,8 +2443,8 @@ void RoadRunner::reset()
 //            throw new SBWApplicationException(String.Format("Index in getRateOfChange out of range: [{0}]", index));
 //        }
 //
-//        [Help("Returns the names given to the rate of change of the floating species")]
-//        public ArrayList getRateOfChangeNames()
+//        Help("Returns the names given to the rate of change of the floating species")
+//        ArrayList RoadRunner::getRateOfChangeNames()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2511,8 +2454,8 @@ void RoadRunner::reset()
 //            return sp;
 //        }
 //
-//        [Help("Returns the rates of changes given an array of new floating species concentrations")]
-//        public double[] getRatesOfChangeEx(double[] values)
+//        Help("Returns the rates of changes given an array of new floating species concentrations")
+//        double[] RoadRunner::getRatesOfChangeEx(double[] values)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2521,8 +2464,8 @@ void RoadRunner::reset()
 //            return model.dydt;
 //        }
 //
-//        [Help("Returns the rates of changes given an array of new floating species concentrations")]
-//        public double[] getReactionRatesEx(double[] values)
+//        Help("Returns the rates of changes given an array of new floating species concentrations")
+//        double[] RoadRunner::getReactionRatesEx(double[] values)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2532,29 +2475,25 @@ void RoadRunner::reset()
 //        }
 //
 //
-//        public string[] GetFloatingSpeciesNamesArray()
+//        string[] RoadRunner::GetFloatingSpeciesNamesArray()
 //        {
 //            return (string[])getFloatingSpeciesNames().ToArray(typeof(string));
 //        }
 //
-//        public string[] GetGlobalParameterNamesArray()
+//        string[] RoadRunner::GetGlobalParameterNamesArray()
 //        {
 //            return (string[])getGlobalParameterNames().ToArray(typeof(string));
 //        }
 //
-//        #endregion
-//
-//        #region Get Compartment Names / Values
-//
-//        [Help("Get the number of compartments")]
-//        public int getNumberOfCompartments()
+//        Help("Get the number of compartments")
+//        int RoadRunner::getNumberOfCompartments()
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            return model.getNumCompartments;
 //        }
 //
-//        [Help("Sets the value of a compartment by its index")]
-//        public void setCompartmentByIndex(int index, double value)
+//        Help("Sets the value of a compartment by its index")
+//        void RoadRunner::setCompartmentByIndex(int index, double value)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2564,8 +2503,8 @@ void RoadRunner::reset()
 //                throw new SBWApplicationException(String.Format("Index in getCompartmentByIndex out of range: [{0}]", index));
 //        }
 //
-//        [Help("Returns the value of a compartment by its index")]
-//        public double getCompartmentByIndex(int index)
+//        Help("Returns the value of a compartment by its index")
+//        double RoadRunner::getCompartmentByIndex(int index)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2574,8 +2513,8 @@ void RoadRunner::reset()
 //            throw (new SBWApplicationException(String.Format("Index in getCompartmentByIndex out of range: [{0}]", index)));
 //        }
 //
-//        [Help("Returns the value of a compartment by its index")]
-//        public void setCompartmentVolumes(double[] values)
+//        Help("Returns the value of a compartment by its index")
+//        void RoadRunner::setCompartmentVolumes(double[] values)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2585,7 +2524,7 @@ void RoadRunner::reset()
 //                throw (new SBWApplicationException(String.Format("Size of vector out not in range in setCompartmentValues: [{0}]", values.Length)));
 //        }
 //
-//        [Help("Gets the list of compartment names")]
+//        Help("Gets the list of compartment names")
 StringList RoadRunner::getCompartmentNames()
 {
     if (!modelLoaded)
@@ -2595,22 +2534,16 @@ StringList RoadRunner::getCompartmentNames()
     return mModelGenerator->getCompartmentList();
 }
 
-//        #endregion
-//
-//        #region Get Boundary Species Names / Values
-//
-//        // -----------------------------------------------------------------
-//
-//        [Help("Get the number of boundary species")]
-//        public int getNumberOfBoundarySpecies()
+//        Help("Get the number of boundary species")
+//        int RoadRunner::getNumberOfBoundarySpecies()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
 //            return model.getNumBoundarySpecies;
 //        }
 //
-//        [Help("Sets the value of a boundary species by its index")]
-//        public void setBoundarySpeciesByIndex(int index, double value)
+//        Help("Sets the value of a boundary species by its index")
+//        void RoadRunner::setBoundarySpeciesByIndex(int index, double value)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            if ((index >= 0) && (index < model.getNumBoundarySpecies))
@@ -2619,8 +2552,8 @@ StringList RoadRunner::getCompartmentNames()
 //                throw new SBWApplicationException(String.Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
 //        }
 //
-//        [Help("Returns the value of a boundary species by its index")]
-//        public double getBoundarySpeciesByIndex(int index)
+//        Help("Returns the value of a boundary species by its index")
+//        double RoadRunner::getBoundarySpeciesByIndex(int index)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2629,53 +2562,47 @@ StringList RoadRunner::getCompartmentNames()
 //            throw new SBWApplicationException(String.Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
 //        }
 //
-//        [Help("Returns an array of boundary species concentrations")]
-//        public double[] getBoundarySpeciesConcentrations()
+//        Help("Returns an array of boundary species concentrations")
+//        double[] RoadRunner::getBoundarySpeciesConcentrations()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
 //            return model.bc;
 //        }
 //
-//        [Help("Set the concentrations for all boundary species in the model")]
-//        public void setBoundarySpeciesConcentrations(double[] values)
+//        Help("Set the concentrations for all boundary species in the model")
+//        void RoadRunner::setBoundarySpeciesConcentrations(double[] values)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
 //            model.bc = values;
 //        }
 //
-//        [Help("Gets the list of boundary species names")]
-//        public ArrayList getBoundarySpeciesNames()
+//        Help("Gets the list of boundary species names")
+//        ArrayList RoadRunner::getBoundarySpeciesNames()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
 //            return ModelGenerator.Instance.getBoundarySpeciesList();
 //        }
 //
-//        [Help("Gets the list of boundary species amount names")]
-//        public ArrayList getBoundarySpeciesAmountNames()
+//        Help("Gets the list of boundary species amount names")
+//        ArrayList RoadRunner::getBoundarySpeciesAmountNames()
 //        {
 //            var oResult = new ArrayList();
 //            foreach (string s in getBoundarySpeciesNames()) oResult.Add("[" + s + "]");
 //            return oResult;
 //        }
 //
-//        #endregion
-//
-//        #region Get Floating Species Names / Values
-//
-//        // -----------------------------------------------------------------
-//
-//        [Help("Get the number of floating species")]
-//        public int getNumberOfFloatingSpecies()
+//        Help("Get the number of floating species")
+//        int RoadRunner::getNumberOfFloatingSpecies()
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            return model.getNumTotalVariables;
 //        }
 //
-//        [Help("Sets the value of a floating species by its index")]
-//        public void setFloatingSpeciesByIndex(int index, double value)
+//        Help("Sets the value of a floating species by its index")
+//        void RoadRunner::setFloatingSpeciesByIndex(int index, double value)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2688,8 +2615,8 @@ StringList RoadRunner::getCompartmentNames()
 //                throw new SBWApplicationException(String.Format("Index in setFloatingSpeciesByIndex out of range: [{0}]", index));
 //        }
 //
-//        [Help("Returns the value of a floating species by its index")]
-//        public double getFloatingSpeciesByIndex(int index)
+//        Help("Returns the value of a floating species by its index")
+//        double RoadRunner::getFloatingSpeciesByIndex(int index)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2698,8 +2625,8 @@ StringList RoadRunner::getCompartmentNames()
 //            throw new SBWApplicationException(String.Format("Index in getFloatingSpeciesByIndex out of range: [{0}]", index));
 //        }
 //
-//        [Help("Returns an array of floating species concentrations")]
-//        public double[] getFloatingSpeciesConcentrations()
+//        Help("Returns an array of floating species concentrations")
+//        double[] RoadRunner::getFloatingSpeciesConcentrations()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2708,8 +2635,8 @@ StringList RoadRunner::getCompartmentNames()
 //            return model.y;
 //        }
 //
-//        [Help("returns an array of floating species initial conditions")]
-//        public double[] getFloatingSpeciesInitialConcentrations()
+//        Help("returns an array of floating species initial conditions")
+//        double[] RoadRunner::getFloatingSpeciesInitialConcentrations()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2718,8 +2645,8 @@ StringList RoadRunner::getCompartmentNames()
 //
 //
 //        // This is a level 1 Method 1
-//        [Help("Set the concentrations for all floating species in the model")]
-//        public void setFloatingSpeciesConcentrations(double[] values)
+//        Help("Set the concentrations for all floating species in the model")
+//        void RoadRunner::setFloatingSpeciesConcentrations(double[] values)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2729,8 +2656,8 @@ StringList RoadRunner::getCompartmentNames()
 //            if (!_bConservedTotalChanged) model.computeConservedTotals();
 //        }
 //
-//        [Help("Sets the value of a floating species by its index")]
-//        public void setFloatingSpeciesInitialConcentrationByIndex(int index, double value)
+//        Help("Sets the value of a floating species by its index")
+//        void RoadRunner::setFloatingSpeciesInitialConcentrationByIndex(int index, double value)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2743,8 +2670,8 @@ StringList RoadRunner::getCompartmentNames()
 //                throw new SBWApplicationException(String.Format("Index in setFloatingSpeciesInitialConcentrationByIndex out of range: [{0}]", index));
 //        }
 //
-//        [Help("Sets the initial conditions for all floating species in the model")]
-//        public void setFloatingSpeciesInitialConcentrations(double[] values)
+//        Help("Sets the initial conditions for all floating species in the model")
+//        void RoadRunner::setFloatingSpeciesInitialConcentrations(double[] values)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
@@ -2754,8 +2681,8 @@ StringList RoadRunner::getCompartmentNames()
 //
 //
 //        // This is a Level 1 method !
-//        [Help("Returns a list of floating species names")]
-//        public ArrayList getFloatingSpeciesNames()
+//        Help("Returns a list of floating species names")
+//        ArrayList RoadRunner::getFloatingSpeciesNames()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2763,8 +2690,8 @@ StringList RoadRunner::getCompartmentNames()
 //            return ModelGenerator.Instance.getFloatingSpeciesConcentrationList(); // Reordered list
 //        }
 //
-//        [Help("Returns a list of floating species initial condition names")]
-//        public ArrayList getFloatingSpeciesInitialConditionNames()
+//        Help("Returns a list of floating species initial condition names")
+//        ArrayList RoadRunner::getFloatingSpeciesInitialConditionNames()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2779,29 +2706,23 @@ StringList RoadRunner::getCompartmentNames()
 //        }
 //
 //
-//        [Help("Returns the list of floating species amount names")]
-//        public ArrayList getFloatingSpeciesAmountNames()
+//        Help("Returns the list of floating species amount names")
+//        ArrayList RoadRunner::getFloatingSpeciesAmountNames()
 //        {
 //            var oResult = new ArrayList();
 //            foreach (string s in getFloatingSpeciesNames()) oResult.Add(String.Format("[{0}]", s));
 //            return oResult;
 //        }
 //
-//        #endregion
-//
-//        #region Get Global Parameter  Names / Values
-//
-//        // -----------------------------------------------------------------
-//
-//        [Help("Get the number of global parameters")]
-//        public int getNumberOfGlobalParameters()
+//        Help("Get the number of global parameters")
+//        int RoadRunner::getNumberOfGlobalParameters()
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            return ModelGenerator.Instance.getGlobalParameterList().Count;
 //        }
 //
-//        [Help("Sets the value of a global parameter by its index")]
-//        public void setGlobalParameterByIndex(int index, double value)
+//        Help("Sets the value of a global parameter by its index")
+//        void RoadRunner::setGlobalParameterByIndex(int index, double value)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            if ((index >= 0) && (index < model.getNumGlobalParameters + model.ct.Length))
@@ -2819,8 +2740,8 @@ StringList RoadRunner::getCompartmentNames()
 //                throw new SBWApplicationException(String.Format("Index in getNumGlobalParameters out of range: [{0}]", index));
 //        }
 //
-//        [Help("Returns the value of a global parameter by its index")]
-//        public double getGlobalParameterByIndex(int index)
+//        Help("Returns the value of a global parameter by its index")
+//        double RoadRunner::getGlobalParameterByIndex(int index)
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2836,8 +2757,8 @@ StringList RoadRunner::getCompartmentNames()
 //            throw new SBWApplicationException(String.Format("Index in getNumGlobalParameters out of range: [{0}]", index));
 //        }
 //
-//        [Help("Set the values for all global parameters in the model")]
-//        public void setGlobalParameterValues(double[] values)
+//        Help("Set the values for all global parameters in the model")
+//        void RoadRunner::setGlobalParameterValues(double[] values)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //            if (values.Length == model.gp.Length)
@@ -2857,8 +2778,8 @@ StringList RoadRunner::getCompartmentNames()
 //            }
 //        }
 //
-//        [Help("Get the values for all global parameters in the model")]
-//        public double[] getGlobalParameterValues()
+//        Help("Get the values for all global parameters in the model")
+//        double[] RoadRunner::getGlobalParameterValues()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2872,16 +2793,16 @@ StringList RoadRunner::getCompartmentNames()
 //            return model.gp;
 //        }
 //
-//        [Help("Gets the list of parameter names")]
-//        public ArrayList getGlobalParameterNames()
+//        Help("Gets the list of parameter names")
+//        ArrayList RoadRunner::getGlobalParameterNames()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
 //            return ModelGenerator.Instance.getGlobalParameterList();
 //        }
 //
-//        [Help("Returns a list of global parameter tuples: { {parameter Name, value},...")]
-//        public ArrayList getAllGlobalParameterTupleList()
+//        Help("Returns a list of global parameter tuples: { {parameter Name, value},...")
+//        ArrayList RoadRunner::getAllGlobalParameterTupleList()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2896,7 +2817,7 @@ StringList RoadRunner::getCompartmentNames()
 //            return tupleList;
 //        }
 //
-//        private ArrayList getParameterNames()
+//        ArrayList RoadRunner::getParameterNames()
 //        {
 //            if (!modelLoaded)
 //                throw new SBWApplicationException(emptyModelStr);
@@ -2904,79 +2825,60 @@ StringList RoadRunner::getCompartmentNames()
 //            return sp;
 //        }
 //
-//        [Help("Updates the model based on all recent changes")]
-//        public void EvalModel()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            model.convertToAmounts();
-//            model.evalModel(model.time, cvode.BuildEvalArgument());
-//        }
+//        Help("Updates the model based on all recent changes")
+void RoadRunner::EvalModel()
+{
+    if (!modelLoaded)
+    {
+        throw new SBWApplicationException(emptyModelStr);
+    }
+    mModel->convertToAmounts();
+    mModel->evalModel(model.time, cvode.BuildEvalArgument());
+}
 //
-//        #endregion
-//
-//        #region Information about Roadrunner: getName
-//
-//        [Help("Returns the name of module")]
-//        public string getName()
+//        Help("Returns the name of module")
+//        string RoadRunner::getName()
 //        {
 //            return "roadRunner";
 //        }
 //
-//        [Help("Returns the version number of the module")]
-//        public static string getVersion()
+//        Help("Returns the version number of the module")
+//        string RoadRunner::getVersion()
 //        {
 //            return "2.0.1";
 //        }
 //
-//        [Help("Returns the name of the module author")]
-//        public static string getAuthor()
+//        Help("Returns the name of the module author")
+//        string RoadRunner::getAuthor()
 //        {
 //            return "H. M. Sauro and F. T. Bergmann";
 //        }
 //
-//        [Help("Returns a description of the module")]
-//        public static string getDescription()
+//        Help("Returns a description of the module")
+//        string RoadRunner::getDescription()
 //        {
 //            return "Simulator API based on CVODE/NLEQ/CSharp implementation";
 //        }
 //
-//        [Help("Returns the display name of the module")]
-//        public static string getDisplayName()
+//        Help("Returns the display name of the module")
+//        string RoadRunner::getDisplayName()
 //        {
 //            return "RoadRunner";
 //        }
 //
-//        [Help("Returns the copyright string for the module")]
-        string RoadRunner::getCopyright()
-        {
-            return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";
-        }
-//
-//        [Help("Returns the URL string associated with the module (if any)")]
-//        public static string getURL()
-//        {
-//            return "http://sys-bio.org";
-//        }
-//
-//        #endregion
-//
-//        #region Nested type: TSelectionRecord
-//
-//        public struct TSelectionRecord
-//        {
-//            public int index;
-//            public string p1;
-//            public string p2;
-//
-//            public TSelectionType selectionType;
-//        }
-//
-//        #endregion
-//
-//
-// #if DEBUG
-//       public static void TestChange()
+//        Help("Returns the copyright string for the module")
+string RoadRunner::getCopyright()
+{
+    return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";
+}
+
+//        Help("Returns the URL string associated with the module (if any)")
+string RoadRunner::getURL()
+{
+    return "http://sys-bio.org";
+}
+
+//       void RoadRunner::TestChange()
 //        {
 //            var sbml = File.ReadAllText(@"C:\Users\fbergmann\Desktop\testModel.xml");
 //            var sim = new RoadRunner();

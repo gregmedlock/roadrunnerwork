@@ -153,7 +153,9 @@ int _tmain()
         	Log(lInfo)<<"Model Name is: "<<modelName;
         }
 
-    //    cout<<"Global parameter is now"<<gTheModel._gp[0]<<"\n";
+        roadRunner->SimulateSBMLFile(fullFilePath, true);
+
+
         FreeLibrary((HMODULE) dllHandle);
 
         Log(lInfo)<<"\nCopyright: "<<roadRunner->getCopyright()<<endl;

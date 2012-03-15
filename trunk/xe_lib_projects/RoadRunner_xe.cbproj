@@ -141,6 +141,10 @@
 				<DependentOn>..\src\rrMath.h</DependentOn>
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\src\rrMisc.cpp">
+				<DependentOn>..\src\rrMisc.h</DependentOn>
+				<BuildOrder>58</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\src\rrModelGenerator.cpp">
 				<DependentOn>..\src\rrModelGenerator.h</DependentOn>
 				<BuildOrder>14</BuildOrder>

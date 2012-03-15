@@ -2,13 +2,14 @@
 #define rrRoadRunnerH
 #include <string>
 #include "rrObject.h"
-#include "Util/rrDoubleMatrix.h"
+#include "rrDoubleMatrix.h"
 #include "rrIModel.h"
 #include "rrTVariableType.h"
 #include "rrTParameterType.h"
-#include "Solvers/rrCvodeInterface.h"
-#include "Solvers/rrNLEQInterface.h"
-#include "Util/rrStringList.h"
+#include "rrCvodeInterface.h"
+#include "rrNLEQInterface.h"
+#include "rrStringList.h"
+#include "rrMisc.h"
 using std::string;
 
 namespace rr
@@ -16,32 +17,6 @@ namespace rr
 
 class ModelGenerator;
 class Compiler;
-
-enum TSelectionType
-{
-    clTime,
-    clBoundarySpecies,
-    clFloatingSpecies,
-    clFlux,
-    clRateOfChange,
-    clVolume,
-    clParameter,
-    clFloatingAmount,
-    clBoundaryAmount,
-    clElasticity,
-    clUnscaledElasticity,
-    clEigenValue,
-    clUnknown,
-    clStoichiometry
-};
-
-struct TSelectionRecord
-{
-    int 			index;
-    string 			p1;
-    string 			p2;
-    TSelectionType selectionType;
-};
 
 class RR_DECLSPEC RoadRunner : public rrObject
 {
@@ -59,7 +34,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         ModelGenerator				   *mModelGenerator;
         Compiler					   *mCompiler;
 
-		// void 						AddNthOutputToResult(double[,] results, int nRow, double dCurrentTime);
+		void 							AddNthOutputToResult(vector< vector<double> >& results, int nRow, double dCurrentTime);
         bool 							IsNleqAvailable();
         void 							emptyModel();
         double 							GetValueForRecord(const TSelectionRecord& record);
@@ -97,10 +72,10 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void							Reset();
         bool							CreateModelSourceCode();
         string							GetModelSourceCode();
-    	double* 						runSimulation();
+    	vector< vector<double> >  		runSimulation();
 		void 							InitializeModel(IModel* model);
-        static void                     SimulateSBMLFile(const string& fileName, const bool& useConservationLaws);
-        static void                     SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
+        void                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws);
+        void                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
         void                            loadSBMLFromFile(const string& fileName);
         void                            loadSBML(const string& sbml);
         string                          getSBML();
@@ -112,8 +87,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void                            setNumPoints(const int& nummberOfPoints);
         void                            reset();
         void                            changeInitialConditions(const vector<double>& ic);
-        double*                  		simulate();
-        double*                  		simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
+        vector<double>             		simulate();
+        vector<double>            		simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
         vector<double>                  getReactionRates();
         vector<double>                  getRatesOfChange();
         StringList 						getSpeciesNames();
@@ -237,11 +212,10 @@ class RR_DECLSPEC RoadRunner : public rrObject
         static string                   getCopyright();
         static string                   getURL();
 
-        #if DEBUG
         static void                     Test();
         static void                     PrintTout(const double& start, const double& end, const int& numPoints);
         static void                     TestChange();
-        #endif
+        void 							DumpResults(TextWriter& writer, vector< vector<double> >& data, const StringList& colLabels);
 
 }; //class RoadRunner
 
