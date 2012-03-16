@@ -71,14 +71,36 @@
 
 
 //NON - EXPORTS ========================================
-   void                               InitializeDelays();                     
+    void                               InitializeDelays();                     
 
 
 //EXPORTS ========================================
 D_S int                                InitModel();                            
 D_S char*                              GetModelName();                         
+D_S void                               resetEvents();                          
+D_S void                               setConcentration(int index, double value);
+D_S double                             getConcentration(int index);            
+D_S void                               convertToAmounts();                     
+D_S int                                getNumLocalParameters(int reactionId);  
+D_S void                               initializeInitialConditions();          
+D_S void                               setInitialConditions();                 
+D_S void                               setBoundaryConditions();                
 D_S void                               setCompartmentVolumes();                
-D_S void                               evalModel(double timein, double* _amounts);
+D_S void                               setParameterValues();                   
+D_S void                               computeConservedTotals();               
+D_S void                               updateDependentSpeciesValues(double* y);
+D_S void                               computeRules(double* y);                
+D_S void                               InitializeRates();                      
+D_S void                               AssignRates();                          
+D_S void                               InitializeRateRuleSymbols();            
+D_S void                               AssignRates(double oRates[]);           
+D_S double*                            GetCurrentValues();                     
+D_S void                               computeAllRatesOfChange();              
+D_S void                               computeReactionRates(double time, double y[]);
+D_S void                               evalModel(double, double*);             
+D_S void                               evalEvents(double timeIn, double oAmounts[]);
+D_S void                               evalInitialAssignments();               
+D_S void                               testConstraints();                      
 
 
 #endif //modelH

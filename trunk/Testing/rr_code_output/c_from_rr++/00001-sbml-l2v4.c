@@ -45,6 +45,10 @@ void convertToConcentrations()
 	_y[1] = _amounts[1] / _c[0];
 }
 
+int getNumLocalParameters(int reactionId)
+{
+	return localParameterDimensions[reactionId];
+}
 void initializeInitialConditions()
 {
 	_init_y[0] = (double) 0.00015/ _c[0];
@@ -141,11 +145,11 @@ void evalModel (double timein, double* oAmounts)
 		updateDependentSpeciesValues (_y);
 		computeReactionRates (time, _y);
 		_dydt[0] = - _rates[0];
-	convertToAmounts ();
+	convertToAmounts();
 }
 
 // Event handling function
-void evalEvents (double timeIn, double oAmounts[])
+void evalEvents(double timeIn, double oAmounts[])
 {
 	_time = timeIn;  // Don't remove
 	updateDependentSpeciesValues(_y);

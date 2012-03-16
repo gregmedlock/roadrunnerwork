@@ -34,13 +34,17 @@ int 	CvodeInterface::mCount = 0;
 
 CvodeInterface::CvodeInterface(IModel *aModel)
 :
-mRandom(),
-modelDelegate(&CvodeInterface::ModelFcn),
+
 defaultReltol(1E-6),
 defaultAbsTol(1E-12),
 defaultMaxNumSteps(10000),
+gdata(NULL),
+cvodeLogFile("cvodeLogFile"),
+followEvents(true),
+mRandom(),
 defaultMaxAdamsOrder(12),
 defaultMaxBDFOrder(5),
+
 MaxAdamsOrder(defaultMaxAdamsOrder),
 MaxBDFOrder(defaultMaxBDFOrder),
 InitStep(0.0),
@@ -49,7 +53,7 @@ MaxStep(0.0),
 MaxNumSteps(defaultMaxNumSteps),
 relTol(defaultReltol),
 absTol(defaultAbsTol),
-followEvents(true),
+
 //CV_ROOT_RETURN(2),
 //CV_TSTOP_RETURN(1),
 //CV_SUCCESS(0),
@@ -71,11 +75,13 @@ followEvents(true),
 //CV_BAD_DKY(-16),
 //CV_PDATA_NULL(-17),
 //errorFileCounter,
-gdata(NULL),
+
 //_amounts),
 //_rootsFound),
 //abstolArray),
-cvodeLogFile("cvodeLogFile")
+
+
+modelDelegate(&CvodeInterface::ModelFcn)
 {
 
     InitializeCVODEInterface(aModel);

@@ -30,6 +30,7 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to b
         int                                     numReactions;
         int                                     numRules;
         int                                     numEvents;
+        string 									mModelName;
 
 
     public:
@@ -60,6 +61,7 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to b
 
 												IModel();
 		virtual								   ~IModel();
+        string									GetModelName();
 
     	// Virtual functions --------------------------------------------------------
         virtual int                             getNumIndependentVariables();
@@ -99,6 +101,7 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to b
         virtual vector<double> 					GetCurrentValues() = 0 ;
         virtual double 							getConcentration(int index) = 0;
         virtual int 							getNumLocalParameters(int reactionId) = 0;         // Level 2 support
+
 };
 } //namespace rr
 

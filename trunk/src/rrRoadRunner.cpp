@@ -531,13 +531,15 @@ bool RoadRunner::loadSBML(const string& sbml)
         if (mModelDllHandle != NULL)
         {
         	//Create a model
-            ModelFromC *rrCModel = new ModelFromC();
-            if(!rrCModel->SetupFunctions(mModelDllHandle))
+            ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);
+            mModel = rrCModel;			//Should use an auto pointer?
+            if(!mModel)
             {
-            	Log(lError)<<"Failed to setup functions in C Model";
+            	Log(lError)<<"Failed to create ModelFromC";
               	return false;
             }
-            mModel = rrCModel;			//Should use an auto pointer?
+
+
             if(!InitializeModel())
             {
             	Log(lError)<<"Failed Initializing C Model";

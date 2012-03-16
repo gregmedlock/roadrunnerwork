@@ -17,11 +17,12 @@ using namespace std;
 namespace rr
 {
 
-StringBuilder::StringBuilder(const string& aStr)
+StringBuilder::StringBuilder(const string& aStr, const string& decl_spec)
 :
 mSizeOfVarField1(35),
 mSizeOfVarField2(40),
-mSizeOfVarField3(20)
+mSizeOfVarField3(20),
+mDeclSpec(decl_spec)
 {
     mStringing<<aStr;
 }
@@ -55,9 +56,14 @@ void StringBuilder::FormatVariable(const string& type, const string& varName, co
    	mStringing<<endl;
 }
 
-void StringBuilder::AddFunctionExport(const string& exp, const string& retValue, const string& funcProto)
+void StringBuilder::AddFunctionExport(const string& retValue, const string& funcProto)
 {
-	mStringing<<exp<<" "<<left<<setw(mSizeOfVarField1)<<retValue<<setw(mSizeOfVarField2)<<funcProto + ";"<<endl;
+	mStringing<<mDeclSpec<<" "<<left<<setw(mSizeOfVarField1)<<retValue<<setw(mSizeOfVarField2)<<funcProto + ";"<<endl;
+}
+
+void StringBuilder::AddFunctionProto(const string& retValue, const string& funcProto)
+{
+	mStringing<<"   "<<" "<<left<<setw(mSizeOfVarField1)<<retValue<<setw(mSizeOfVarField2)<<funcProto + ";"<<endl;
 }
 
 void StringBuilder::FormatArray(const string& type, const string& varName, const int& arraySize, const string& comment)

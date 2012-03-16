@@ -24,7 +24,8 @@ numCompartments(0),
 numReactions(0),
 numRules(0),
 numEvents(0),
-time(0)
+time(0),
+mModelName("NoNameSet")
 {}
 
 IModel::~IModel(){}
