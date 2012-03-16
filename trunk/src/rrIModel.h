@@ -18,7 +18,6 @@ namespace rr
 
 class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
 {
-
     protected:
     	//These variables is also generated in the c-code.
         //Init a decendent models data later
@@ -36,62 +35,62 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
     public://==== this makes the following attributes public.. for now. No great design..
 
         // Property signatures:
-        vector<double> 					        y;// { get; set; }
-        list<string> 					        Warnings;// { get; set; }
-        vector<double>                  		init_y;// { get; set; }
-        vector<double>                          amounts;// { get; set; }
-        vector<double>                          bc;// { get; set; }
+        vector<double> 					        y;
+        list<string> 					        Warnings;
+        vector<double>                  		init_y;
+        vector<double>                          amounts;
+        vector<double>                          bc;
 
         /// <summary>
         /// modifiable species
         ///reference values
         /// </summary>
-        vector<double> 					        sr;// { get; set; }
+        vector<double> 					        sr;
 
         // Global parameters
-        vector<double> 					        gp;// { get; set; }
+        vector<double> 					        gp;
 
         // Local parameters
-        vector<double> 					        lp ;//{ get; set; }
+        vector<double> 					        lp ;
 
         // Compartment volumes
-        vector<double> 	                        c ;//{ get; set; }
-        vector<double> 	                        dydt;// { get; set; }
-        vector<double> 	                        rates;// { get; set; }
+        vector<double> 	                        c ;
+        vector<double> 	                        dydt;
+        vector<double> 	                        rates;
 
         // Conservation totals
-        vector<double> 					        ct ;//{ get; set; }
+        vector<double> 					        ct ;
 
         // additional rateRules
-        vector<double> 					        rateRules;// { get; set; }
-        double 							        time ;//{ get; set; }
-        vector<double> 					        eventTests;// { get; set; }
-        vector<double> 					        eventPriorities;// { get; set; }
-        vector<TEventDelayDelegate> 	        eventDelay;// { get; set; }
-        vector<bool>                            eventType;// { get; set; }
-        vector<bool>                            eventPersistentType;// { get; set; }
-        vector<bool>                            eventStatusArray;// { get; set; }
-        vector<bool>                            previousEventStatusArray;// { get; set; }
+        vector<double> 					        rateRules;
+        double 							        time ;
+        vector<double> 					        eventTests;
+        vector<double> 					        eventPriorities;
+        vector<TEventDelayDelegate> 	        eventDelay;
+        vector<bool>                            eventType;
+        vector<bool>                            eventPersistentType;
+        vector<bool>                            eventStatusArray;
+        vector<bool>                            previousEventStatusArray;
 
-        vector<TEventAssignmentDelegate>		eventAssignments;// { get; set; }
-        vector<TComputeEventAssignmentDelegate> computeEventAssignments;// { get; set; }
-        vector<TPerformEventAssignmentDelegate> performEventAssignments;// { get; set; }
+        vector<TEventAssignmentDelegate>		eventAssignments;
+        vector<TComputeEventAssignmentDelegate> computeEventAssignments;
+        vector<TPerformEventAssignmentDelegate> performEventAssignments;
 
-        virtual int                             getNumIndependentVariables();// { get; }
-        virtual int                             getNumDependentVariables();// { get; }
-        virtual int                             getNumTotalVariables();// { get; }
-        virtual int                             getNumBoundarySpecies();// { get; }
-        virtual int                             getNumGlobalParameters();// { get; }
-        virtual int                             getNumCompartments();// { get; }
-        virtual int                             getNumReactions();//{ get; }
-        virtual int                             getNumRules();// { get; }
-        virtual int                             getNumEvents();// { get; }
+        virtual int                             getNumIndependentVariables();
+        virtual int                             getNumDependentVariables();
+        virtual int                             getNumTotalVariables();
+        virtual int                             getNumBoundarySpecies();
+        virtual int                             getNumGlobalParameters();
+        virtual int                             getNumCompartments();
+        virtual int                             getNumReactions();
+        virtual int                             getNumRules();
+        virtual int                             getNumEvents();
 
     public:
 												IModel();
 		virtual									~IModel();
 
-		//get,set
+		
         vector<double>&							Get_y();
         vector<double>&							Get_bc();
 		vector<double>&							Get_c();
@@ -107,8 +106,8 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
 		vector<bool>&							Get_previousEventStatusArray();
 
         virtual void                            setCompartmentVolumes() = 0;
-        virtual vector<double> 					GetCurrentValues() = 0 ;//{}
-        virtual double 							getConcentration(int index) = 0;//{}
+        virtual vector<double> 					GetCurrentValues() = 0 ;
+        virtual double 							getConcentration(int index) = 0;
         virtual void                            initializeInitialConditions(){}
         virtual void                            setInitialConditions(){}
         virtual void                            setParameterValues(){}
@@ -135,7 +134,7 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
         virtual void                            InitializeRateRuleSymbols(){}
 
         // Level 2 support
-        virtual int 							getNumLocalParameters(int reactionId) = 0;//{}
+        virtual int 							getNumLocalParameters(int reactionId) = 0;
 };
 } //namespace rr
 

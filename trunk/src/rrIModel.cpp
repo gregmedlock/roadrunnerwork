@@ -96,38 +96,47 @@ vector<bool>& IModel::Get_previousEventStatusArray()
 
 int IModel::getNumIndependentVariables()
 {
+	return 0;
 }
 
 int IModel::getNumDependentVariables()
 {
+	return 0;
 }
 
 int IModel::getNumTotalVariables()
 {
+	return 0;
 }
 
 int IModel::getNumBoundarySpecies()
 {
+	return 0;
 }
 
 int IModel::getNumGlobalParameters()
 {
+	return 0;
 }
 
 int IModel::getNumCompartments()
 {
+	return 0;
 }
 
 int IModel::getNumReactions()
 {
+	return 0;
 }
 
 int IModel::getNumRules()
 {
+	return 0;
 }
 
 int IModel::getNumEvents()
 {
+	return 0;
 }
 
 

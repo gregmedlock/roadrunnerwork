@@ -119,8 +119,8 @@ HINSTANCE Compiler::LoadDLL(const string& dll)
         return NULL;
     }
 
-	TCHAR mod[MAXMODULE];
-    GetModuleFileNameA((HMODULE)hLib, (LPTSTR) mod, MAXMODULE);
+	TCHAR mod[MAX_MODULE];
+    GetModuleFileNameA((HMODULE)hLib, (LPTSTR) mod, MAX_MODULE);
     string name(mod);
 
     Log(lError) << "Library loaded: " <<name.c_str() << endl;
