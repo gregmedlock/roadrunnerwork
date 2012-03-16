@@ -22,15 +22,13 @@ bool 		CreateDLL(const string& cmdLine);
 HINSTANCE 	LoadDLL(const string& dllName);
 void 		PauseBeforeExit(bool doIt = true);
 
-const int MAXMODULE = 512;
-
 typedef int 	(WINAPI*cfunc1)();
 typedef char* 	(WINAPI*cfunc2)();
 
 cfunc1 InitModel;
 cfunc2 GetModelName;
 
-int _tmain()
+int main()
 {
     bool generateCSharp = false;
     char exePath[MAXPATH];
@@ -75,95 +73,85 @@ int _tmain()
         }
 
         string fullFilePath(modelsRootPath +   "\\" + modelFName.str());
-        ifstream inFileStream(fullFilePath.c_str());
-        if(!inFileStream)
-        {
-            throw(Exception("Failed to open the model file:" + fullFilePath));
-        }
-        Log(lInfo)<<"\n\n ===== Reading model file:"<<fullFilePath<<" ==============";
-        std::string sbml((std::istreambuf_iterator<char>(inFileStream)), std::istreambuf_iterator<char>());
-        inFileStream.close();
-        Log(lDebug5)<<"Before loading SBML. SBML model code size: "<<sbml.size();
 
-        // --------------------------------------
-        CGenerator *codeGen = dynamic_cast<CGenerator*>(roadRunner->GetCodeGenerator());
-		codeGen->SetXMLModelFileName(modelFName.str());
+        roadRunner->SimulateSBMLFile(fullFilePath, true);	//This does create the source code..
 
-        roadRunner->loadSBML(sbml);	//This does create the source code..
+//        CGenerator *codeGen = dynamic_cast<CGenerator*>(roadRunner->GetCodeGenerator());
+//		codeGen->SetXMLModelFileName(modelFName.str());
 
-        if(!codeGen)
-        {
-            Log(lInfo)<<"Could not get the C Code Generator?";
-            throw;
-        }
-
-        string srcCodeFolder("C:\\rrw\\Testing\\rr_code_output\\c_from_rr++");
-		codeGen->SaveSourceCodeToFolder(srcCodeFolder);
-
-        //Now compile the code and load the resulting dll, and call an exported function in it...
-		stringstream exeCmd;
-        exeCmd<<"tcc -g -v -shared "<<codeGen->GetSourceCodeFileName()<<" -DBUILD_MODEL_DLL";
-
-
-        Log(lInfo)<<"\n================ Compiling the DLL =============";
-        Log(lInfo)<<"\nExecuting: "<<exeCmd.str();
-
-        if(!CreateDLL(exeCmd.str()))
-        {
-			Log(lError)<<"Creating DLL failed..";
-            PauseBeforeExit();
-        }
-
-        //Check if the DLL exists...
-        string dllFName(GetFileNameNoPath(codeGen->GetSourceCodeFileName()));
-        string dllName(appPath + "\\" + ChangeFileNameExtensionTo(dllFName,"dll"));
-
-        //Load the DLL
-        HINSTANCE dllHandle = LoadDLL(dllName);
-		if(!dllHandle)
-        {
-			Log(lError)<<"Loading the DLL failed..";
-            PauseBeforeExit();
-        }
-
-        //Load functions..
-        InitModel = (cfunc1) GetProcAddress((HMODULE) dllHandle, "InitModel");
-        if(InitModel == NULL)
-        {
-            Log(lError) << "Unable to load function." << endl;
-            FreeLibrary((HMODULE) dllHandle);
-            PauseBeforeExit();
-        }
-
-        GetModelName = (cfunc2) GetProcAddress((HMODULE) dllHandle, "GetModelName");
-        if(GetModelName == NULL)
-        {
-            Log(lError) << "Unable to load function." << endl;
-            FreeLibrary((HMODULE) dllHandle);
-            PauseBeforeExit();
-        }
-
-        Log(lInfo)<<"\n================= Testing some DLL functions ========================";
-        int res = InitModel();
-        Log(lInfo)<<"The result was: "<<res;
-
-        char* modelName = GetModelName();
-        if(modelName)
-        {
-        	Log(lInfo)<<"Model Name is: "<<modelName;
-        }
-
-        roadRunner->SimulateSBMLFile(fullFilePath, true);
-        FreeLibrary((HMODULE) dllHandle);
+//        if(!codeGen)
+//        {
+//            Log(lInfo)<<"Could not get the C Code Generator?";
+//            throw;
+//        }
+//
+//        string srcCodeFolder("C:\\rrw\\Testing\\rr_code_output\\c_from_rr++");
+//		codeGen->SaveSourceCodeToFolder(srcCodeFolder);
+//
+//        //Now compile the code and load the resulting dll, and call an exported function in it...
+//		stringstream exeCmd;
+//        exeCmd<<"tcc -g -v -shared "<<codeGen->GetSourceCodeFileName()<<" -DBUILD_MODEL_DLL";
+//
+//
+//        Log(lInfo)<<"\n================ Compiling the DLL =============";
+//        Log(lInfo)<<"\nExecuting: "<<exeCmd.str();
+//
+//        if(!CreateDLL(exeCmd.str()))
+//        {
+//			Log(lError)<<"Creating DLL failed..";
+//            PauseBeforeExit();
+//        }
+//
+//        //Check if the DLL exists...
+//        string dllFName(GetFileNameNoPath(codeGen->GetSourceCodeFileName()));
+//        string dllName(appPath + "\\" + ChangeFileNameExtensionTo(dllFName,"dll"));
+//
+//        //Load the DLL
+//        HINSTANCE dllHandle = LoadDLL(dllName);
+//		if(!dllHandle)
+//        {
+//			Log(lError)<<"Loading the DLL failed..";
+//            PauseBeforeExit();
+//        }
+//
+//        //Load functions..
+//        InitModel = (cfunc1) GetProcAddress((HMODULE) dllHandle, "InitModel");
+//        if(InitModel == NULL)
+//        {
+//            Log(lError) << "Unable to load function." << endl;
+//            FreeLibrary((HMODULE) dllHandle);
+//            PauseBeforeExit();
+//        }
+//
+//        GetModelName = (cfunc2) GetProcAddress((HMODULE) dllHandle, "GetModelName");
+//        if(GetModelName == NULL)
+//        {
+//            Log(lError) << "Unable to load function." << endl;
+//            FreeLibrary((HMODULE) dllHandle);
+//            PauseBeforeExit();
+//        }
+//
+//        Log(lInfo)<<"\n================= Testing some DLL functions ========================";
+//        int res = InitModel();
+//        Log(lInfo)<<"The result was: "<<res;
+//
+//        char* modelName = GetModelName();
+//        if(modelName)
+//        {
+//        	Log(lInfo)<<"Model Name is: "<<modelName;
+//        }
+//
+//        roadRunner->SimulateSBMLFile(fullFilePath, true);
+//        FreeLibrary((HMODULE) dllHandle);
 
         Log(lInfo)<<"\nCopyright: "<<roadRunner->getCopyright()<<endl;
-        delete roadRunner;
     }
     catch(Exception& ex)
     {
         Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
     }
 
+    delete roadRunner;
   	//-------------------------------------
     PauseBeforeExit();
 	return 0;
@@ -236,7 +224,6 @@ void PauseBeforeExit(bool doIt)
 
     cout<<"Hit any key to exit...";
     cin.ignore(0,'\n');
-    getch();
+     getch();
     cout<<"\nExiting....\n";
-    exit(0);
 }
