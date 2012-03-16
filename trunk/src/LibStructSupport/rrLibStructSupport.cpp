@@ -15,15 +15,21 @@
 
 namespace rr
 {
-
+LibStructural* StructAnalysis::mInstance = NULL;
 using namespace LIB_STRUCTURAL;
 StructAnalysis::StructAnalysis()
-:
-mInstance(LibStructural::getInstance())
-{}
+{
+	mInstance = (LibStructural::getInstance());
+}
 
 StructAnalysis::~StructAnalysis()
-{}
+{
+	if(mInstance)
+    {
+		delete mInstance;
+    }
+    mInstance = NULL;
+}
 
 void StructAnalysis::Reset()
 {

@@ -35,11 +35,22 @@ class RR_DECLSPEC SBWApplicationException : public RRException
 	    SBWApplicationException(const string& msg);
 };
 
+class RR_DECLSPEC SBWException : public RRException
+{
+	public:
+	    SBWException(const string& msg);
+};
+
 class RR_DECLSPEC ScannerException : public RRException
 {
 	public:
 	    ScannerException(const string& msg);
+};
 
+class RR_DECLSPEC NLEQException : public RRException
+{
+	public:
+	    NLEQException(const string& msg);
 };
 
 

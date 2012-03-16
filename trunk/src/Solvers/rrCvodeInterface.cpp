@@ -3,6 +3,8 @@
 #endif
 #pragma hdrstop
 #include <math.h>
+#include <map>
+#include "rrRoadRunner.h"
 #include "rrIModel.h"
 #include "rrCvodeInterface.h"
 #include "rrException.h"
@@ -16,8 +18,14 @@
 #endif
 //---------------------------------------------------------------------------
 
+using namespace std;
 namespace rr
 {
+
+//Static stuff...
+double 	CvodeInterface::lastTimeValue = 0;
+int 	CvodeInterface::mOneStepCount = 0;
+int 	CvodeInterface::mCount = 0;
 // -------------------------------------------------------------------------
 // Constructor
 // Model contains all the symbol tables associated with the model
@@ -63,7 +71,6 @@ followEvents(true),
 //CV_BAD_DKY(-16),
 //CV_PDATA_NULL(-17),
 //errorFileCounter,
-//lastTimeValue),
 gdata(NULL),
 //_amounts),
 //_rootsFound),
@@ -164,82 +171,82 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
     }
 }
 
-////    public class CvodeInterface : IDisposable
+////    class CvodeInterface : IDisposable
 ////    {
 ////        /// <summary>
 ////        /// Point to the CVODE DLL to use
 ////        /// </summary>
-////        private const string CVODE = "cvodedll";
+////        const string CVODE = "cvodedll";
 ////
-////        private static int nOneStepCount;
+////        static int nOneStepCount;
 ////
 ////        #region Default CVODE Settings
 ////
-////        private const double defaultReltol = 1E-6;
-////        private const double defaultAbsTol = 1E-12;
-////        private const int defaultMaxNumSteps = 10000;
-////        public static int defaultMaxAdamsOrder = 12;
-////        public static int defaultMaxBDFOrder = 5;
+////        const double defaultReltol = 1E-6;
+////        const double defaultAbsTol = 1E-12;
+////        const int defaultMaxNumSteps = 10000;
+////        static int defaultMaxAdamsOrder = 12;
+////        static int defaultMaxBDFOrder = 5;
 ////
-////        public static int MaxAdamsOrder = defaultMaxAdamsOrder;
-////        public static int MaxBDFOrder = defaultMaxBDFOrder;
+////        static int MaxAdamsOrder = defaultMaxAdamsOrder;
+////        static int MaxBDFOrder = defaultMaxBDFOrder;
 ////
-////        public static double InitStep = 0.0;
-////        public static double MinStep = 0.0;
-////        public static double MaxStep = 0.0;
+////        static double InitStep = 0.0;
+////        static double MinStep = 0.0;
+////        static double MaxStep = 0.0;
 ////
 ////
-////        //static public double defaultReltol = 1E-15;
-////        //static public double defaultAbsTol = 1E-20;
+////        //static double defaultReltol = 1E-15;
+////        //static double defaultAbsTol = 1E-20;
 ////
-////        public static int MaxNumSteps = defaultMaxNumSteps;
-////        public static double relTol = defaultReltol;
-////        public static double absTol = defaultAbsTol;
+////        static int MaxNumSteps = defaultMaxNumSteps;
+////        static double relTol = defaultReltol;
+////        static double absTol = defaultAbsTol;
 ////
 ////        #endregion
 ////
 ////        #region Class Variables
 ////
 ////        // Error codes
-////        private const int CV_ROOT_RETURN = 2;
-////        private const int CV_TSTOP_RETURN = 1;
-////        private const int CV_SUCCESS = 0;
-////        private const int CV_MEM_NULL = -1;
-////        private const int CV_ILL_INPUT = -2;
-////        private const int CV_NO_MALLOC = -3;
-////        private const int CV_TOO_MUCH_WORK = -4;
-////        private const int CV_TOO_MUCH_ACC = -5;
-////        private const int CV_ERR_FAILURE = -6;
-////        private const int CV_CONV_FAILURE = -7;
-////        private const int CV_LINIT_FAIL = -8;
-////        private const int CV_LSETUP_FAIL = -9;
-////        private const int CV_LSOLVE_FAIL = -10;
+////        const int CV_ROOT_RETURN = 2;
+////        const int CV_TSTOP_RETURN = 1;
+////        const int CV_SUCCESS = 0;
+////        const int CV_MEM_NULL = -1;
+////        const int CV_ILL_INPUT = -2;
+////        const int CV_NO_MALLOC = -3;
+////        const int CV_TOO_MUCH_WORK = -4;
+////        const int CV_TOO_MUCH_ACC = -5;
+////        const int CV_ERR_FAILURE = -6;
+////        const int CV_CONV_FAILURE = -7;
+////        const int CV_LINIT_FAIL = -8;
+////        const int CV_LSETUP_FAIL = -9;
+////        const int CV_LSOLVE_FAIL = -10;
 ////
-////        private const int CV_MEM_FAIL = -11;
+////        const int CV_MEM_FAIL = -11;
 ////
-////        private const int CV_RTFUNC_NULL = -12;
-////        private const int CV_NO_SLDET = -13;
-////        private const int CV_BAD_K = -14;
-////        private const int CV_BAD_T = -15;
-////        private const int CV_BAD_DKY = -16;
+////        const int CV_RTFUNC_NULL = -12;
+////        const int CV_NO_SLDET = -13;
+////        const int CV_BAD_K = -14;
+////        const int CV_BAD_T = -15;
+////        const int CV_BAD_DKY = -16;
 ////
-////        private const int CV_PDATA_NULL = -17;
-////        private static readonly string tempPathstring = Path.GetTempPath();
+////        const int CV_PDATA_NULL = -17;
+////        static readonly string tempPathstring = Path.GetTempPath();
 ////
 ////
-////        private static int errorFileCounter;
-////        public static double lastTimeValue;
-////        private readonly IntPtr gdata = IntPtr.Zero;
-////        private IntPtr _amounts;
-////        private IntPtr _rootsFound;
-////        private IntPtr abstolArray;
-////        private string cvodeLogFile = "cvodeLogFile";
-////        private IntPtr cvodeMem;
-////        public int errCode;
+////        static int errorFileCounter;
+////        static double lastTimeValue;
+////        readonly IntPtr gdata = IntPtr.Zero;
+////        IntPtr _amounts;
+////        IntPtr _rootsFound;
+////        IntPtr abstolArray;
+////        string cvodeLogFile = "cvodeLogFile";
+////        IntPtr cvodeMem;
+////        int errCode;
 ////
-////        private IntPtr fileHandle;
-////        private IModel model;
-////        private int numIndependentVariables;
+////        IntPtr fileHandle;
+////        IModel model;
+////        int numIndependentVariables;
 ////
 ////        #endregion
 ////
@@ -247,107 +254,107 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 ////
 ////        [DllImport(CVODE, EntryPoint = "fileOpen", ExactSpelling = false,
 ////            CharSet = CharSet.Ansi, SetLastError = true)]
-////        public static extern IntPtr fileOpen(string fileName);
+////        static extern IntPtr fileOpen(string fileName);
 ////
 ////        [DllImport(CVODE, EntryPoint = "fileClose", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern void fileClose(IntPtr fp);
+////        static extern void fileClose(IntPtr fp);
 ////
 ////
 ////        [DllImport(CVODE, EntryPoint = "NewCvode_Vector", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern IntPtr NewCvode_Vector(int n);
+////        static extern IntPtr NewCvode_Vector(int n);
 ////
 ////        [DllImport(CVODE, EntryPoint = "FreeCvode_Vector", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern void FreeCvode_Vector(IntPtr vect);
+////        static extern void FreeCvode_Vector(IntPtr vect);
 ////
 ////        [DllImport(CVODE, EntryPoint = "FreeCvode_Mem", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern void FreeCvode_Mem(IntPtr p);
+////        static extern void FreeCvode_Mem(IntPtr p);
 ////
 ////        // void *p
 ////
 ////        [DllImport(CVODE, EntryPoint = "Cvode_SetVector", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern void Cvode_SetVector(IntPtr v, int Index, double Value);
+////        static extern void Cvode_SetVector(IntPtr v, int Index, double Value);
 ////
 ////        [DllImport(CVODE, EntryPoint = "Cvode_GetVector", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern double Cvode_GetVector(IntPtr v, int Index);
+////        static extern double Cvode_GetVector(IntPtr v, int Index);
 ////
 ////        [DllImport(CVODE, EntryPoint = "Create_BDF_NEWTON_CVode", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern IntPtr Create_BDF_NEWTON_CVode();
+////        static extern IntPtr Create_BDF_NEWTON_CVode();
 ////
 ////        [DllImport(CVODE, EntryPoint = "Create_ADAMS_FUNCTIONAL_CVode", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern IntPtr Create_ADAMS_FUNCTIONAL_CVode();
+////        static extern IntPtr Create_ADAMS_FUNCTIONAL_CVode();
 ////
 ////        [DllImport(CVODE, EntryPoint = "AllocateCvodeMem", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int AllocateCvodeMem(IntPtr cvode_mem, int n, TCallBackModelFcn fcn, double t0, IntPtr y,
+////        static extern int AllocateCvodeMem(IntPtr cvode_mem, int n, TCallBackModelFcn fcn, double t0, IntPtr y,
 ////                                                  double reltol, IntPtr abstol);
 ////
 ////        [DllImport(CVODE, EntryPoint = "CvDense", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int CvDense(IntPtr cvode_mem, int n);
+////        static extern int CvDense(IntPtr cvode_mem, int n);
 ////
 ////        // int = size of systems
 ////
 ////        [DllImport(CVODE, EntryPoint = "CVReInit", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int CVReInit(IntPtr cvode_mem, double t0, IntPtr y0, double reltol, IntPtr abstol);
+////        static extern int CVReInit(IntPtr cvode_mem, double t0, IntPtr y0, double reltol, IntPtr abstol);
 ////
 ////        [DllImport(CVODE, EntryPoint = "Run_Cvode")]
-////        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr  y, ref double t, string ErrMsg);
-////        public static extern int RunCvode(IntPtr cvode_mem, double tout, IntPtr y, ref double t);
+////        //static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr  y, ref double t, string ErrMsg);
+////        static extern int RunCvode(IntPtr cvode_mem, double tout, IntPtr y, ref double t);
 ////
-////        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr y, ref double t);  // t = double *
+////        //static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr y, ref double t);  // t = double *
 ////
 ////
 ////        [DllImport(CVODE, EntryPoint = "CVGetRootInfo", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int CVGetRootInfo(IntPtr cvode_mem, IntPtr rootsFound);
+////        static extern int CVGetRootInfo(IntPtr cvode_mem, IntPtr rootsFound);
 ////
 ////        [DllImport(CVODE, EntryPoint = "CVRootInit", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int CVRootInit(IntPtr cvode_mem, int numRoots, TCallBackRootFcn rootfcn, IntPtr gdata);
+////        static extern int CVRootInit(IntPtr cvode_mem, int numRoots, TCallBackRootFcn rootfcn, IntPtr gdata);
 ////
 ////        [DllImport(CVODE, EntryPoint = "SetMaxNumSteps", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int SetMaxNumSteps(IntPtr cvode_mem, int mxsteps);
+////        static extern int SetMaxNumSteps(IntPtr cvode_mem, int mxsteps);
 ////
 ////
 ////        [DllImport(CVODE, EntryPoint = "SetMinStep", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int SetMinStep(IntPtr cvode_mem, double minStep);
+////        static extern int SetMinStep(IntPtr cvode_mem, double minStep);
 ////        [DllImport(CVODE, EntryPoint = "SetMaxStep", ExactSpelling = false,
 ////                    CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int SetMaxStep(IntPtr cvode_mem, double maxStep);
+////        static extern int SetMaxStep(IntPtr cvode_mem, double maxStep);
 ////        [DllImport(CVODE, EntryPoint = "SetInitStep", ExactSpelling = false,
 ////                    CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int SetInitStep(IntPtr cvode_mem, double initStep);
+////        static extern int SetInitStep(IntPtr cvode_mem, double initStep);
 ////
 ////        [DllImport(CVODE, EntryPoint = "SetMaxOrder", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int SetMaxOrder(IntPtr cvode_mem, int mxorder);
+////        static extern int SetMaxOrder(IntPtr cvode_mem, int mxorder);
 ////
 ////        [DllImport(CVODE, EntryPoint = "SetMaxErrTestFails", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int SetMaxErrTestFails(IntPtr cvode_mem, int maxnef);
+////        static extern int SetMaxErrTestFails(IntPtr cvode_mem, int maxnef);
 ////
 ////        [DllImport(CVODE, EntryPoint = "SetMaxConvFails", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int SetMaxConvFails(IntPtr cvode_mem, int maxncf);
+////        static extern int SetMaxConvFails(IntPtr cvode_mem, int maxncf);
 ////
 ////        [DllImport(CVODE, EntryPoint = "SetMaxNonLinIters", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int SetMaxNonLinIters(IntPtr cvode_mem, int maxcor);
+////        static extern int SetMaxNonLinIters(IntPtr cvode_mem, int maxcor);
 ////
 ////        [DllImport(CVODE, EntryPoint = "SetErrFile", ExactSpelling = false,
 ////            CharSet = CharSet.Unicode, SetLastError = true)]
-////        public static extern int SetErrFile(IntPtr cvode_mem, IntPtr errfp);
+////        static extern int SetErrFile(IntPtr cvode_mem, IntPtr errfp);
 ////
 ////        #endregion
 ////
@@ -355,17 +362,17 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 ////
 ////        #region Delegates
 ////
-////        public delegate void TCallBackModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
+////        delegate void TCallBackModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
 ////
-////        public delegate void TCallBackRootFcn(double t, IntPtr y, IntPtr gdot, IntPtr gdata);
+////        delegate void TCallBackRootFcn(double t, IntPtr y, IntPtr gdot, IntPtr gdata);
 ////
 ////        #endregion
 ////
-////        public static TCallBackModelFcn modelDelegate;
-////        public static TCallBackRootFcn eventDelegate;
+////        static TCallBackModelFcn modelDelegate;
+////        static TCallBackRootFcn eventDelegate;
 ////
-////        private static int nCount;
-////        private static int nRootCount;
+////        static int nCount;
+////        static int nRootCount;
 ////
 void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
 {
@@ -402,21 +409,21 @@ void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr 
 //    oldState.AssignToModel(model);
 }
 
-////        public double[] GetCopy(double[] oVector)
+////        double[] CvodeInterface::GetCopy(double[] oVector)
 ////        {
 ////            var oResult = new double[oVector.Length];
 ////            oVector.CopyTo(oResult, 0);
 ////            return oResult;
 ////        }
 ////
-////        public bool[] GetCopy(bool[] oVector)
+////        bool[] CvodeInterface::GetCopy(bool[] oVector)
 ////        {
 ////            var oResult = new bool[oVector.Length];
 ////            oVector.CopyTo(oResult, 0);
 ////            return oResult;
 ////        }
 ////
-////        public void EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata)
+////        void CvodeInterface::EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata)
 ////        {
 ////
 ////            var oldState = new ModelState(model);
@@ -446,19 +453,19 @@ void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr 
 ////
 ////        #region ErrorHandling
 ////
-////        internal static CvodeErrorCodes[] errorCodes = InitilizeErrorCodes();
+////        static CvodeErrorCodes[] errorCodes = InitilizeErrorCodes();
 ////
-////        internal static CvodeErrorCodes[] InitilizeErrorCodes()
+////        static CvodeErrorCodes[] CvodeInterface::InitilizeErrorCodes()
 ////        {
 ////            var oErrorCodes = new CvodeErrorCodes[28];
 ////            oErrorCodes[0] = new CvodeErrorCodes(CV_SUCCESS, "Success");
-////            oErrorCodes[1] = new CvodeErrorCodes(-1, "The solver took mxstep internal steps but could not reach tout.");
+////            oErrorCodes[1] = new CvodeErrorCodes(-1, "The solver took mxstep steps but could not reach tout.");
 ////            oErrorCodes[2] = new CvodeErrorCodes(-2,
-////                                                 "The solver could not satisfy the accuracy demanded by the user for some internal step.");
+////                                                 "The solver could not satisfy the accuracy demanded by the user for some step.");
 ////            oErrorCodes[3] = new CvodeErrorCodes(-3,
-////                                                 "Error test failures occurred too many times during one internal time step or minimum step size was reached.");
+////                                                 "Error test failures occurred too many times during one time step or minimum step size was reached.");
 ////            oErrorCodes[4] = new CvodeErrorCodes(-4,
-////                                                 "Convergence test failures occurred too many times during one internal time step or minimum step size was reached.");
+////                                                 "Convergence test failures occurred too many times during one time step or minimum step size was reached.");
 ////            oErrorCodes[5] = new CvodeErrorCodes(-5, "The linear solver's initialization function failed.");
 ////            oErrorCodes[6] = new CvodeErrorCodes(-6,
 ////                                                 "The linear solver's setup function failed in an unrecoverable manner.");
@@ -524,16 +531,16 @@ void CvodeInterface::HandleCVODEError(int errCode)
 ////
 ////        #endregion
 ////
-////        internal List<double> assignmentTimes = new List<double>();
-////        internal List<PendingAssignment> assignments = new List<PendingAssignment>();
-////        private bool followEvents = true;
+////        List<double> assignmentTimes = new List<double>();
+////        List<PendingAssignment> assignments = new List<PendingAssignment>();
+////        bool followEvents = true;
 ////
-////        internal double lastEvent;
-////        //internal List<double> eventOccurance = new List<double>();
+////        double lastEvent;
+////        //List<double> eventOccurance = new List<double>();
 ////
 ////        #region IDisposable Members
 ////
-////        public void Dispose()
+////        void Dispose()
 ////        {
 ////            release();
 ////        }
@@ -642,45 +649,48 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
     }
 }
 
-////        private void AssignPendingEvents(double timeEnd, double tout)
-////        {
-////            for (int i = assignments.Count - 1; i >= 0; i--)
-////            {
-////                if (timeEnd >= assignments[i].Time)
-////                {
-////                    model->time = tout;
-////                    AssignResultsToModel();
-////                    model->convertToConcentrations();
-////                    model->updateDependentSpeciesValues(model->y);
-////                    assignments[i].AssignToModel();
-////                    if (!RoadRunner._bConservedTotalChanged) model->computeConservedTotals();
-////                    model->convertToAmounts();
-////                    model->evalModel(timeEnd, BuildEvalArgument());
-////
-////                    reStart(timeEnd, model);
-////
-////                    assignments.RemoveAt(i);
-////                }
-////            }
-////        }
-////
-////        private List<int> RetestEvents(double timeEnd, List<int> handledEvents)
+void CvodeInterface::AssignPendingEvents(const double& timeEnd, const double& tout)
+{
+    for (int i = assignments.size() - 1; i >= 0; i--)
+    {
+        if (timeEnd >= assignments[i].GetTime())
+        {
+            model->time = tout;
+            AssignResultsToModel();
+            model->convertToConcentrations();
+            model->updateDependentSpeciesValues(model->y);
+            assignments[i].AssignToModel();
+
+            if (!RoadRunner::mConservedTotalChanged)
+            {
+             	model->computeConservedTotals();
+            }
+            model->convertToAmounts();
+            vector<double> args = BuildEvalArgument();
+            model->evalModel(timeEnd, args);
+            reStart(timeEnd, model);
+            assignments.erase(assignments.begin() + i);
+        }
+    }
+}
+
+////        List<int> CvodeInterface::RetestEvents(double timeEnd, List<int> handledEvents)
 ////        {
 ////            return RetestEvents(timeEnd, handledEvents, false);
 ////        }
 ////
-////        private List<int> RetestEvents(double timeEnd, List<int> handledEvents, out List<int> removeEvents)
+////        List<int> CvodeInterface::RetestEvents(double timeEnd, List<int> handledEvents, out List<int> removeEvents)
 ////        {
 ////            return RetestEvents(timeEnd, handledEvents, false, out removeEvents);
 ////        }
 ////
-////        private List<int> RetestEvents(double timeEnd, List<int> handledEvents, bool assignOldState)
+////        List<int> CvodeInterface::RetestEvents(double timeEnd, List<int> handledEvents, bool assignOldState)
 ////        {
 ////            List<int> removeEvents;
 ////            return RetestEvents(timeEnd, handledEvents, assignOldState, out removeEvents);
 ////        }
 ////
-////        private List<int> RetestEvents(double timeEnd, List<int> handledEvents, bool assignOldState, out List<int> removeEvents)
+////        List<int> CvodeInterface::RetestEvents(double timeEnd, List<int> handledEvents, bool assignOldState, out List<int> removeEvents)
 ////        {
 ////            var result = new List<int>();
 ////            removeEvents = new List<int>();
@@ -708,20 +718,19 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
 ////        }
 ////
 ////
-////        private void HandleRootsFound(ref double timeEnd, double tout)
-////        {
-////            var rootsFound = new int[model->getNumEvents];
-////            // Create some space for the CVGetRootInfo call
-////            _rootsFound = Marshal.AllocHGlobal(model->getNumEvents*sizeof (Int32));
-////            CVGetRootInfo(cvodeMem, _rootsFound);
-////            Marshal.Copy(_rootsFound, rootsFound, 0, model->getNumEvents);
-////            Marshal.FreeHGlobal(_rootsFound); // Free space used by CVGetRootInfo
+void CvodeInterface::HandleRootsFound(double &timeEnd, const double& tout)
+{
+    vector<int> rootsFound;// = new int[model->getNumEvents];
+    // Create some space for the CVGetRootInfo call
+    //_rootsFound = Marshal.AllocHGlobal(model->getNumEvents*sizeof (Int32));
+//    CVGetRootInfo(cvodeMem, _rootsFound);	//This is a DLL Call.. Todo: implement..
+	//    Marshal.Copy(_rootsFound, rootsFound, 0, model->getNumEvents);
+	//    Marshal.FreeHGlobal(_rootsFound); // Free space used by CVGetRootInfo
+
+    HandleRootsForTime(timeEnd, rootsFound);
+}
 ////
-////            HandleRootsForTime(timeEnd, rootsFound);
-////
-////        }
-////
-////        internal void TestRootsAtInitialTime()
+////        void CvodeInterface::TestRootsAtInitialTime()
 ////        {
 ////            var events = RetestEvents(0, new List<int>(), true);
 ////            if (events.Count > 0)
@@ -736,179 +745,201 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
 ////            }
 ////        }
 ////
-////        private void RemovePendingAssignmentForIndex(int eventIndex)
-////        {
-////            for (int j = assignments.Count - 1; j >= 0; j--)
-////            {
-////                if (assignments[j].Index == eventIndex)
-////                    assignments.RemoveAt(j);
-////            }
-////        }
-////
-////        private void SortEventsByPriority(List<int> firedEvents)
-////        {
-////            if ((firedEvents.Count > 1))
-////            {
-////                model->computeEventPriorites();
-////                firedEvents.Sort(new Comparison<int>((index1, index2) =>
-////                                                         {
-////                                                             double priority1 = model->eventPriorities[index1];
-////                                                             double priority2 = model->eventPriorities[index2];
-////
-////                                                             // random toss in case we have same priorites
-////                                                             if (priority1 == priority2 && priority1 != 0 &&
-////                                                                 index1 != index2)
-////                                                             {
-////                                                                 if (Random.NextDouble() > 0.5)
-////                                                                     return -1;
-////                                                                 else
-////                                                                     return 1;
-////                                                             }
-////
-////                                                             return -1 * priority1.CompareTo(priority2);
-////                                                         }));
-////            }
-////        }
-////        private void HandleRootsForTime(double timeEnd, int[] rootsFound)
-////        {
-////            AssignResultsToModel();
-////            model->convertToConcentrations();
-////            model->updateDependentSpeciesValues(model->y);
-////
-////            model->evalEvents(timeEnd, BuildEvalArgument());
-////
-////
-////            var firedEvents = new List<int>();
-////            var preComputedAssignments = new Dictionary<int, double[]>();
-////
-////
-////            for (int i = 0; i < model->getNumEvents; i++)
-////            {
-////                // We only fire an event if we transition from false to true
-////                if (rootsFound[i] == 1)
-////                {
-////                    if (model->eventStatusArray[i])
-////                    {
-////                        firedEvents.Add(i);
-////                        if (model->eventType[i])
-////                            preComputedAssignments[i] = model->computeEventAssignments[i]();
-////                    }
-////                }
-////                else
-////                {
-////                    // if the trigger condition is not supposed to be persistent, remove the event from the firedEvents list;
-////                    if (!model->eventPersistentType[i])
-////                    {
-////                        RemovePendingAssignmentForIndex(i);
-////                    }
-////                }
-////            }
-////            var handled = new List<int>();
-////            while (firedEvents.Count > 0)
-////            {
-////                SortEventsByPriority(firedEvents);
-////                // Call event assignment if the eventstatus flag for the particular event is false
-////                for (int i = 0; i < firedEvents.Count; i++)
-////                {
-////                    var currentEvent = firedEvents[i];
-////                    // We only fire an event if we transition from false to true
-////
-////                    model->previousEventStatusArray[currentEvent] = model->eventStatusArray[currentEvent];
-////                    double eventDelay = model->eventDelay[currentEvent]();
-////                    if (eventDelay == 0)
-////                    {
-////                        if (model->eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
-////                            model->performEventAssignments[currentEvent](preComputedAssignments[currentEvent]);
-////                        else
-////                            model->eventAssignments[currentEvent]();
-////
-////                        handled.Add(currentEvent);
-////                        List<int> removeEvents;
-////                        var additionalEvents = RetestEvents(timeEnd, handled, out removeEvents);
-////                        firedEvents.AddRange(additionalEvents);
-////
-////                        foreach (var newEvent in additionalEvents)
-////                        {
-////                            if (model->eventType[newEvent])
-////                                preComputedAssignments[newEvent] = model->computeEventAssignments[newEvent]();
-////                        }
-////
-////                        model->eventStatusArray[currentEvent] = false;
-////                        firedEvents.RemoveAt(i);
-////
-////                        foreach (var item in removeEvents)
-////                        {
-////                            if (firedEvents.Contains(item))
-////                            {
-////                                firedEvents.Remove(item);
-////                                RemovePendingAssignmentForIndex(item);
-////                            }
-////                        }
-////
-////                        break;
-////                    }
-////                    else
-////                    {
-////                        if (!assignmentTimes.Contains(timeEnd + eventDelay))
-////                            assignmentTimes.Add(timeEnd + eventDelay);
-////
-////
-////                        var pending = new PendingAssignment(
-////                                                                    timeEnd + eventDelay,
-////                                                                    model->computeEventAssignments[currentEvent],
-////                                                                    model->performEventAssignments[currentEvent],
-////                                                                    model->eventType[currentEvent], currentEvent);
-////
-////                        if (model->eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
-////                            pending.ComputedValues = preComputedAssignments[currentEvent];
-////
-////                        assignments.Add(pending);
-////                        model->eventStatusArray[currentEvent] = false;
-////                        firedEvents.RemoveAt(i);
-////                        break;
-////                    }
-////
-////#if (PRINT_DEBUG)
-////		                    System.Diagnostics.Debug.WriteLine("time: " + model->time.ToString("F4") + " Event " + (i + 1).ToString());
-////#endif
-////                }
-////            }
-////
-////            if (!RoadRunner._bConservedTotalChanged) model->computeConservedTotals();
-////            model->convertToAmounts();
-////
-////
-////            model->evalModel(timeEnd, BuildEvalArgument());
-////            double[] dCurrentValues = model->GetCurrentValues();
-////            for (int k = 0; k < numAdditionalRules; k++)
-////                Cvode_SetVector(_amounts, k, dCurrentValues[k]);
-////
-////            for (int k = 0; k < numIndependentVariables; k++)
-////                Cvode_SetVector(_amounts, k + numAdditionalRules, model->amounts[k]);
-////
-////            CVReInit(cvodeMem, timeEnd, _amounts, relTol, abstolArray);
-////            assignmentTimes.Sort();
-////        }
-////
-////
-////        private void AssignResultsToModel()
-////        {
-////            model->updateDependentSpeciesValues(model->y);
-////            var dTemp = new double[numAdditionalRules];
-////            for (int i = 0; i < numAdditionalRules; i++)
-////            {
-////                dTemp[i] = Cvode_GetVector(_amounts, i);
-////            }
-////            for (int i = 0; i < numIndependentVariables; i++)
-////                model->amounts[i] = Cvode_GetVector(_amounts, i + numAdditionalRules);
-////
-////            model->computeRules(BuildEvalArgument());
-////            model->AssignRates(dTemp);
-////            model->computeAllRatesOfChange();
-////        }
-////
-////
-////        // Restart the simulation using a different initial condition
+void CvodeInterface::RemovePendingAssignmentForIndex(const int& eventIndex)
+{
+    for (int j = assignments.size() - 1; j >= 0; j--)
+    {
+        if (assignments[j].GetIndex() == eventIndex)
+        {
+            //assignments.RemoveAt(j);
+			assignments.erase(assignments.begin() + j);
+        }
+    }
+}
+
+void CvodeInterface::SortEventsByPriority(vector<int>& firedEvents)
+{
+    if ((firedEvents.size() > 1))
+    {
+        model->computeEventPriorites();
+        //Todo: do the sorting...
+//        firedEvents.Sort(new Comparison<int>((index1, index2) =>
+//                                                 {
+//                                                     double priority1 = model->eventPriorities[index1];
+//                                                     double priority2 = model->eventPriorities[index2];
+//
+//                                                     // random toss in case we have same priorites
+//                                                     if (priority1 == priority2 && priority1 != 0 &&
+//                                                         index1 != index2)
+//                                                     {
+//                                                         if (Random.NextDouble() > 0.5)
+//                                                             return -1;
+//                                                         else
+//                                                             return 1;
+//                                                     }
+//
+//                                                     return -1 * priority1.CompareTo(priority2);
+//                                                 }));
+    }
+}
+
+
+void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound)
+{
+    AssignResultsToModel();
+    model->convertToConcentrations();
+    model->updateDependentSpeciesValues(model->y);
+
+    vector<double> args = BuildEvalArgument();
+    model->evalEvents(timeEnd, args);
+
+
+    vector<int> firedEvents;// = new List<int>();
+    map<int, vector<double> > preComputedAssignments;// = new Dictionary<int, double[]>();
+
+
+    for (int i = 0; i < model->getNumEvents(); i++)
+    {
+        // We only fire an event if we transition from false to true
+        if (rootsFound[i] == 1)
+        {
+            if (model->eventStatusArray[i])
+            {
+                firedEvents.push_back(i);
+                if (model->eventType[i])
+                {
+                    preComputedAssignments[i] = model->computeEventAssignments[i]();
+                }
+            }
+        }
+        else
+        {
+            // if the trigger condition is not supposed to be persistent, remove the event from the firedEvents list;
+            if (!model->eventPersistentType[i])
+            {
+                RemovePendingAssignmentForIndex(i);
+            }
+        }
+    }
+    vector<int> handled;// = new List<int>();
+    while (firedEvents.size() > 0)
+    {
+        SortEventsByPriority(firedEvents);
+        // Call event assignment if the eventstatus flag for the particular event is false
+        for (int i = 0; i < firedEvents.size(); i++)
+        {
+            int currentEvent = firedEvents[i];
+            // We only fire an event if we transition from false to true
+
+            model->previousEventStatusArray[currentEvent] = model->eventStatusArray[currentEvent];
+            double eventDelay = model->eventDelay[currentEvent]();
+            if (eventDelay == 0)
+            {	//Todo: enable this...
+//                if (model->eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
+//                    model->performEventAssignments[currentEvent](preComputedAssignments[currentEvent]);
+//                else
+//                    model->eventAssignments[currentEvent]();
+//
+//                handled.Add(currentEvent);
+//                List<int> removeEvents;
+//                var additionalEvents = RetestEvents(timeEnd, handled, out removeEvents);
+//                firedEvents.AddRange(additionalEvents);
+//
+//                foreach (var newEvent in additionalEvents)
+//                {
+//                    if (model->eventType[newEvent])
+//                        preComputedAssignments[newEvent] = model->computeEventAssignments[newEvent]();
+//                }
+//
+//                model->eventStatusArray[currentEvent] = false;
+//                firedEvents.RemoveAt(i);
+//
+//                foreach (var item in removeEvents)
+//                {
+//                    if (firedEvents.Contains(item))
+//                    {
+//                        firedEvents.Remove(item);
+//                        RemovePendingAssignmentForIndex(item);
+//                    }
+//                }
+//
+                break;
+            }
+            else
+            {
+            //Todo: enable this...
+//                if (!assignmentTimes.Contains(timeEnd + eventDelay))
+//                    assignmentTimes.Add(timeEnd + eventDelay);
+//
+//
+//                var pending = new PendingAssignment(
+//                                                            timeEnd + eventDelay,
+//                                                            model->computeEventAssignments[currentEvent],
+//                                                            model->performEventAssignments[currentEvent],
+//                                                            model->eventType[currentEvent], currentEvent);
+//
+//                if (model->eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
+//                    pending.ComputedValues = preComputedAssignments[currentEvent];
+//
+//                assignments.Add(pending);
+//                model->eventStatusArray[currentEvent] = false;
+//                firedEvents.RemoveAt(i);
+                break;
+            }
+
+            Log(lDebug)<<"time: "<<model->time<<" Event "<<(i + 1);
+
+        }
+    }
+
+    if (!RoadRunner::mConservedTotalChanged)
+    {
+    	model->computeConservedTotals();
+    }
+    model->convertToAmounts();
+
+
+	args = BuildEvalArgument();
+    model->evalModel(timeEnd, args);
+
+    vector<double> dCurrentValues = model->GetCurrentValues();
+    for (int k = 0; k < numAdditionalRules; k++)
+    {
+        Cvode_SetVector(_amounts, k, dCurrentValues[k]);
+    }
+
+    for (int k = 0; k < numIndependentVariables; k++)
+    {
+        Cvode_SetVector(_amounts, k + numAdditionalRules, model->amounts[k]);
+    }
+
+    CVReInit(cvodeMem, timeEnd, _amounts, relTol, abstolArray);
+//    assignmentTimes.Sort();	//Todo: enable sorting. somehow
+}
+
+
+void CvodeInterface::AssignResultsToModel()
+{
+    model->updateDependentSpeciesValues(model->y);
+    vector<double> dTemp(numAdditionalRules);// = new double[numAdditionalRules];
+    for (int i = 0; i < numAdditionalRules; i++)
+    {
+        dTemp[i] = Cvode_GetVector((_generic_N_Vector*) _amounts, i);
+
+    }
+
+    for (int i = 0; i < numIndependentVariables; i++)
+    {
+        model->amounts[i] = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
+    }
+
+    vector<double> args = BuildEvalArgument();
+    model->computeRules(args);
+    model->AssignRates(dTemp);
+    model->computeAllRatesOfChange();
+}
+
+// Restart the simulation using a different initial condition
 void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
 {
 ////            double[] dTemp = model->GetCurrentValues();
@@ -953,7 +984,7 @@ void CvodeInterface::AssignNewVector(IModel *model)
 ////            AssignNewVector(model, false);
 }
 ////
-////        public void setAbsTolerance(int index, double dValue)
+////        void setAbsTolerance(int index, double dValue)
 ////        {
 ////            double dTolerance = dValue;
 ////            if (dValue > 0 && absTol > dValue)
@@ -964,32 +995,33 @@ void CvodeInterface::AssignNewVector(IModel *model)
 ////            Cvode_SetVector(abstolArray, index, dTolerance);
 ////        }
 ////
-////        public int reStart(double timeStart, IModel model)
-////        {
-////            AssignNewVector(model);
+int CvodeInterface::reStart(double timeStart, IModel* model)
+{
+    AssignNewVector(model);
+
+    SetInitStep(cvodeMem, InitStep);
+    SetMinStep(cvodeMem, MinStep);
+    SetMaxStep(cvodeMem, MaxStep);
+
+    return (CVReInit(cvodeMem, timeStart, _amounts, relTol, abstolArray));
+}
 ////
-////            SetInitStep(cvodeMem, InitStep);
-////            SetMinStep(cvodeMem, MinStep);
-////            SetMaxStep(cvodeMem, MaxStep);
-////
-////            return (CVReInit(cvodeMem, timeStart, _amounts, relTol, abstolArray));
-////        }
-////
-////        public double getValue(int index)
+////        double CvodeInterface::getValue(int index)
 ////        {
 ////            return (Cvode_GetVector(_amounts, index + numAdditionalRules));
 ////        }
 ////
-////        internal double[] BuildEvalArgument()
-////        {
-////            var dResult = new double[model->amounts.Length + model->rateRules.Length];
-////            double[] dCurrentValues = model->GetCurrentValues();
-////            dCurrentValues.CopyTo(dResult, 0);
-////            model->amounts.CopyTo(dResult, model->rateRules.Length);
-////            return dResult;
-////        }
+vector<double> CvodeInterface::BuildEvalArgument()
+{
+    vector<double> dResult; //= new double[model->amounts.Length + model->rateRules.Length];
+    vector<double> dCurrentValues = model->GetCurrentValues();
+    dResult = dCurrentValues;//dCurrentValues.CopyTo(dResult, 0);
+    dResult.insert(dResult.end(), model->amounts.begin(), model->amounts.end());
+//    model->amounts.CopyTo(dResult, model->rateRules.Length);
+    return dResult;
+}
 ////
-////        public void release()
+////        void CvodeInterface::release()
 ////        {
 ////            FreeCvode_Mem(cvodeMem);
 ////            FreeCvode_Vector(_amounts);
@@ -1002,7 +1034,7 @@ void CvodeInterface::AssignNewVector(IModel *model)
 ////        /// <remarks>ReInitialize with specific seed in order to produce
 ////        /// repeatable runs.</remarks>
 ////        /// </summary>
-////        public Random Random { get; set; }
+////        Random CvodeInterface::Random { get; set; }
 ////    }
 ////}
 

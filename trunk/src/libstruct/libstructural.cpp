@@ -2,19 +2,16 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
-
 #ifdef WIN32
 #pragma warning(disable: 4996)
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 #include <windows.h>
 #endif
-
 #include <iostream>
 #include <string>
 #include <vector>
 #include <sstream>
 #include <algorithm>
-
 #include "libstructural.h"
 #include "libla.h"
 #include "sbmlmodel.h"
@@ -26,12 +23,10 @@
 #pragma package(smart_init)
 #endif
 
-#define SMALL_NUM           1.0E-9
-#define PRINT_PRECISION		10
+//#define SMALL_NUM           1.0E-9
+//#define PRINT_PRECISION		10
 #define LINE			    "-----------------------------------------------------------------------------"
 
-
-//using namespace LIB_STRUCTURAL;
 using namespace LIB_LA;
 using namespace std;
 
@@ -39,6 +34,12 @@ namespace LIB_STRUCTURAL
 {
 
 LibStructural* LibStructural::_Instance = NULL;
+
+LibStructural::~LibStructural()
+{
+	//How to cleanup static ...?
+	Reset();
+}
 
 void LibStructural::Reset()
 {

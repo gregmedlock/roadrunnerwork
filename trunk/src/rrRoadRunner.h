@@ -26,7 +26,9 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		const string 					emptyModelStr;
 		const double 					STEADYSTATE_THRESHOLD;
      	vector<TSelectionRecord> 		mSteadyStateSelection;
+        string							mModelXMLFileName;
 		string 							mModelCode;
+
 		CvodeInterface 				   *mCVode;
 		ISteadyStateSolver			   *steadyStateSolver;
         vector<TSelectionRecord> 		selectionList;
@@ -47,7 +49,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         vector<TSelectionRecord> 		GetSteadyStateSelection(const list<string>& newSelectionList);
         vector<double> 					computeSteadyStateValues(const vector<TSelectionRecord>& oSelection, const bool& computeSteadyState);
         double 							computeSteadyStateValue(const TSelectionRecord& record);
-        list<string> 					getParameterNames();
+        StringList 						getParameterNames();
 
 
 
@@ -138,8 +140,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 	public:
     	// Properties -----------------------------------------------------------------------------
-     	static bool                     mbComputeAndAssignConservationLaws;
-        static bool                     mbConservedTotalChanged;
+     	static bool                     mComputeAndAssignConservationLaws;
+        static bool                     mConservedTotalChanged;
         static bool                     mReMultiplyCompartments;
         double*                    		mL;
         double*                  		mL0;

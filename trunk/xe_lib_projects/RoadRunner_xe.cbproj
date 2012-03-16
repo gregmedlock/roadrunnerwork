@@ -70,6 +70,18 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>59</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>60</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\SRC\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>61</BuildOrder>
+			</LibFiles>
 			<LibFiles Include="C:\rrInstalls\libsbml.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>53</BuildOrder>
@@ -144,6 +156,10 @@
 			<CppCompile Include="..\src\rrMisc.cpp">
 				<DependentOn>..\src\rrMisc.h</DependentOn>
 				<BuildOrder>58</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\src\rrModelFromC.cpp">
+				<DependentOn>..\src\rrModelFromC.h</DependentOn>
+				<BuildOrder>60</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\src\rrModelGenerator.cpp">
 				<DependentOn>..\src\rrModelGenerator.h</DependentOn>
@@ -290,14 +306,6 @@
 				<DependentOn>..\src\Util\rrUtils.h</DependentOn>
 				<BuildOrder>45</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="..\ThirdParty\clapack\PreBuilt\libblas_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>54</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\ThirdParty\clapack\PreBuilt\liblapack_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>55</BuildOrder>
-			</LibFiles>
 			<CppCompile Include="RoadRunnerLib.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>

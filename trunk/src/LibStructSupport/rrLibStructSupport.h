@@ -21,7 +21,7 @@ using namespace LIB_STRUCTURAL;
 class RR_DECLSPEC StructAnalysis : public rrObject
 {
     protected:
-       	LibStructural		   *mInstance;
+       	static LibStructural		   *mInstance;
 //        void WriteMatlabForm(System.IO.TextWriter oWriter, double[][] oMatrix)
 
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getGammaMatrixGJ")]

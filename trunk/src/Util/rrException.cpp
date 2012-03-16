@@ -35,11 +35,19 @@ SBWApplicationException::SBWApplicationException(const string& msg)
 RRException(msg)
 {}
 
+SBWException::SBWException(const string& msg)
+:
+RRException(msg)
+{}
 
 ScannerException::ScannerException(const string& msg)
 :
 RRException(msg)
 {}
 
+NLEQException::NLEQException(const string& msg)
+:
+RRException(msg)
+{}
 
 }

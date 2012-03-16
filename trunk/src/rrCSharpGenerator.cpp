@@ -87,7 +87,7 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
 
 	Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
-	if (RoadRunner::mbComputeAndAssignConservationLaws)
+	if (RoadRunner::mComputeAndAssignConservationLaws)
     {
         mNumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
         independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
@@ -894,7 +894,7 @@ int CSharpGenerator::ReadFloatingSpecies()
 {
     // Load a reordered list into the variable list.
     StringList reOrderedList;
-    if ((RoadRunner::mbComputeAndAssignConservationLaws))
+    if ((RoadRunner::mComputeAndAssignConservationLaws))
 	{
        reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
 	}

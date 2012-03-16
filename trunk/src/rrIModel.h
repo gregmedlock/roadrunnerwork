@@ -107,6 +107,8 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
 		vector<bool>&							Get_previousEventStatusArray();
 
         virtual void                            setCompartmentVolumes() = 0;
+        virtual vector<double> 					GetCurrentValues() = 0 ;//{}
+        virtual double 							getConcentration(int index) = 0;//{}
         virtual void                            initializeInitialConditions(){}
         virtual void                            setInitialConditions(){}
         virtual void                            setParameterValues(){}
@@ -114,11 +116,11 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
         virtual void                            InitializeRates(){}
         virtual void                            AssignRates(){}
         virtual void                            AssignRates(vector<double>& rates){}
-        virtual vector<double> 					GetCurrentValues() = 0 ;//{}
+
         virtual void                            computeConservedTotals(){}
         virtual void                            computeEventPriorites(){}
         virtual void                            setConcentration(int index, double value){}
-        virtual double 							getConcentration(int index) = 0;//{}
+
         virtual void                            convertToAmounts(){}
         virtual void                            convertToConcentrations(){}
         virtual void                            updateDependentSpeciesValues(vector<double>& _y){}

@@ -75,7 +75,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 		void 					    HandleRootsFound(double &timeEnd, const double& tout);
        	void                        TestRootsAtInitialTime();
        	void                        RemovePendingAssignmentForIndex(const int& eventIndex);
-       	void                        SortEventsByPriority(const vector<int>& firedEvents);
+       	void                        SortEventsByPriority(vector<int>& firedEvents);
        	void                        HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound);
        	void                        AssignResultsToModel();
 

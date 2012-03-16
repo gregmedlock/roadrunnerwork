@@ -30,8 +30,12 @@ class RR_DECLSPEC PendingAssignment : public rrObject
         /// Initializes a new instance of the PendingAssignment class.
         /// </summary>
         /// <param name="time"></param>
-        PendingAssignment(	double time, TComputeEventAssignmentDelegate computeAssignment, TPerformEventAssignmentDelegate performAssignment,
-                            bool useValuesFromTriggerTime, int index);
+        								PendingAssignment(	double time,
+                                        					TComputeEventAssignmentDelegate computeAssignment,
+                                                            TPerformEventAssignmentDelegate performAssignment,
+                            								bool useValuesFromTriggerTime, int index);
+		int 							GetIndex(){return Index;}
+		double 							GetTime(){return Time;}
         void AssignToModel();
 };
 

@@ -2,21 +2,28 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include <windows.h>		//For HINSTANCE and other
+#include <sstream>
+#include <dir.h>
 #include "rrLogger.h"
 #include "rrCompiler.h"
+#include "rrException.h"
+#include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 #if defined(__CODEGEARC__)
 #pragma package(smart_init)
 #endif
 //---------------------------------------------------------------------------
 
+using namespace std;
 namespace rr
 {
-
-vector<string> Compiler::m_oAssemblies;
-vector<string> Compiler::m_sCompileErrors;
+//vector<string> Compiler::m_oAssemblies;
+//vector<string> Compiler::m_sCompileErrors;
 
 Compiler::Compiler()
+:
+mDLLHandle(NULL)
 {
 	Log(lDebug5)<<"In Compiler CTOR";
 }
@@ -26,6 +33,99 @@ Compiler::~Compiler()
 
 }
 
+HINSTANCE Compiler::CompileC_DLL(const string& sourceFileName)
+{
+    char exePath[MAXPATH];
+    getcwd(exePath, MAXPATH);
+    string appPath(exePath);
+
+    //Now compile the code and load the resulting dll, and call an exported function in it...
+    stringstream exeCmd;
+    exeCmd<<"tcc -g -v -shared "<<sourceFileName<<" -DBUILD_MODEL_DLL";
+
+    Log(lInfo)<<"\n================ Compiling the DLL =============";
+    Log(lInfo)<<"\nExecuting: "<<exeCmd.str();
+
+    if(!CreateDLL(exeCmd.str()))
+    {
+        Log(lError)<<"Creating DLL failed..";
+        throw Exception("Creating DLL failed..");
+    }
+
+    //Check if the DLL exists...
+    string dllFName(GetFileNameNoPath(sourceFileName));
+    string dllName(appPath + "\\" + ChangeFileNameExtensionTo(dllFName,"dll"));
+
+    //Load the DLL
+    HINSTANCE dllHandle = LoadDLL(dllName);
+    if(!dllHandle)
+    {
+        Log(lError)<<"Loading the DLL failed..";
+        //PauseBeforeExit();
+    }
+
+
+	return dllHandle;
+}
+
+bool Compiler::CreateDLL(const string& cmdLine)
+{
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+
+    ZeroMemory( &si, sizeof(si) );
+    si.cb = sizeof(si);
+    ZeroMemory( &pi, sizeof(pi) );
+
+    if( !cmdLine.size() )
+    {
+        return false;
+    }
+
+    // Start the child process.
+    if( !CreateProcess( NULL,   		// No module name (use command line)
+        (char*) cmdLine.c_str(),        // Command line
+        NULL,                           // Process handle not inheritable
+        NULL,                           // Thread handle not inheritable
+        FALSE,                          // Set handle inheritance to FALSE
+        0,                              // No creation flags
+        NULL,                           // Use parent's environment block
+        NULL,                           // Use parent's starting directory
+        &si,                            // Pointer to STARTUPINFO structure
+        &pi )                           // Pointer to PROCESS_INFORMATION structure
+    )
+    {
+        printf( "CreateProcess failed (%d).\n", GetLastError() );
+        return false;
+    }
+
+    // Wait until child process exits.
+    WaitForSingleObject( pi.hProcess, INFINITE );
+
+    // Close process and thread handles.
+    CloseHandle( pi.hProcess );
+    CloseHandle( pi.hThread );
+    return true;
+}
+
+
+HINSTANCE Compiler::LoadDLL(const string& dll)
+{
+    HINSTANCE hLib = LoadLibrary(dll.c_str());
+
+    if(hLib == NULL)
+    {
+    	Log(lError) << "Unable to load library!" << endl;
+        return NULL;
+    }
+
+	TCHAR mod[MAXMODULE];
+    GetModuleFileNameA((HMODULE)hLib, (LPTSTR) mod, MAXMODULE);
+    string name(mod);
+
+    Log(lError) << "Library loaded: " <<name.c_str() << endl;
+	return hLib;
+}
 
 //	private:
 //        static readonly StringCollection m_oAssemblies = new StringCollection();

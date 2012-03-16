@@ -676,6 +676,7 @@ namespace LIB_STRUCTURAL
 #endif
 //		{}
 
+		~LibStructural();
 		//! static method to get an instance of LibStructural (allows use as singleton)
 		LIB_EXTERN static LibStructural* getInstance();
 	private: 

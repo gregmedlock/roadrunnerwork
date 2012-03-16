@@ -1,7 +1,9 @@
-#ifndef ccCompilerH
-#define ccCompilerH
+#ifndef rrCompilerH
+#define rrCompilerH
+#include <windows.h>
 #include <vector>
 #include <string>
+
 #include "rrObject.h"
 #include "rrStringList.h"
 
@@ -15,18 +17,16 @@ namespace rr
     /// classes in memory at runtime and then compile them ...
     /// </summary>
 
-class CodeDomProvider;
-class CSharpCodeProvider;
-
 class RR_DECLSPEC Compiler : public rrObject
 {
 	private:
-        static vector<string> 	m_oAssemblies;
-        static vector<string> 	m_sCompileErrors;
+//        static vector<string> 	m_oAssemblies;
+//        static vector<string> 	m_sCompileErrors;
 
-        vector<string> 			m_oProxies;
-     	void 					Compile(CodeDomProvider& provider, const string& source);
-     	rrObject* 				Compile2(CodeDomProvider* provider, const string& source, const string& sClassName);
+//        vector<string> 			m_oProxies;
+//     	void 					Compile(const string& source);
+//     	rrObject* 				Compile2(const string& source, const string& sClassName);
+        HINSTANCE 				mDLLHandle;
 
     public:
         /// <summary>
@@ -34,10 +34,11 @@ class RR_DECLSPEC Compiler : public rrObject
         /// compiles them and executes methods on the classes
         /// </summary>
         /// <param name="source"></param>
-		void 					Execute(const string& source);
-
+//		void 					Execute(const string& source);
         						Compiler();
         					   ~Compiler();
+		bool					CreateDLL(const string& cmdLine);
+        HINSTANCE 				LoadDLL(const string& dll);
 
         /// <summary>
         /// the execute method takes a stringcollection of wrapper classes,
@@ -47,13 +48,14 @@ class RR_DECLSPEC Compiler : public rrObject
         void 					Execute(StringList& oProxyCode);
         static rrObject 		getInstance(const string& source, const string& sClassName);
         static rrObject* 		getInstance(const string& source, const string& sClassName, const string& sLocation);
+        HINSTANCE				CompileC_DLL(const string& cSource);
 
         /// <summary>
         /// adds an assembly to the assembly list ... this list will be needed
         /// to add references to that assemblies for the newly compiled class
         /// </summary>
         /// <param name="sAssembly"></param>
-        static void addAssembly(const string& sAssembly);
+//        static void 			addAssembly(const string& sAssembly);
 
         /// <summary>
         /// sets the list of proxies. This is a list of strings representing Namespace
@@ -61,7 +63,7 @@ class RR_DECLSPEC Compiler : public rrObject
         /// instances later on
         /// </summary>
         /// <param name="oProxies"></param>
-        void addProxy(StringList oProxies);
+  //      void addProxy(StringList oProxies);
 
     	static string getLastErrors();
 

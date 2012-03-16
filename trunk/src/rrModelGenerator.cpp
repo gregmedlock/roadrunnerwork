@@ -378,4 +378,50 @@ int ModelGenerator::ReadModifiableSpeciesReferences()
     return ModifiableSpeciesReferenceList.size();
 }
 
+StringList ModelGenerator::getReactionNames()
+{
+    StringList tmp;// = new ArrayList();
+    for (int i = 0; i < reactionList.size(); i++)
+    {
+        tmp.Add(reactionList[i].name);
+    }
+    return tmp;
+}
+
+StringList ModelGenerator::getFloatingSpeciesConcentrationList()
+{
+    StringList tmp;// = new ArrayList();
+    for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
+    {
+        tmp.Add(floatingSpeciesConcentrationList[i].name);
+    }
+    return tmp;
+}
+
+StringList ModelGenerator::getBoundarySpeciesList()
+{
+    StringList tmp;// = new ArrayList();
+    for (int i = 0; i < boundarySpeciesList.size(); i++)
+    {
+        tmp.Add(boundarySpeciesList[i].name);
+    }
+    return tmp;
+}
+
+StringList ModelGenerator::getGlobalParameterList()
+{
+    StringList tmp;// = new ArrayList();
+    for (int i = 0; i < globalParameterList.size(); i++)
+    {
+        tmp.Add(globalParameterList[i].name);
+    }
+
+    for (int i = 0; i < conservationList.Count(); i++)
+    {
+        tmp.Add(conservationList[i].name);
+    }
+
+    return tmp;
+}
+
 }//rr namespace
