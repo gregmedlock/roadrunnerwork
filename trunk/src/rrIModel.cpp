@@ -15,130 +15,88 @@ namespace rr
 
 IModel::IModel()
 :
-numIndependentVariables(-1),
-numDependentVariables(-1),
-numTotalVariables(-1),
-numBoundaryVariables(-1),
-numGlobalParameters(-1),
-numCompartments(-1),
-numReactions(-1),
-numRules(-1),
-numEvents(-1)
+numIndependentVariables(0),
+numDependentVariables(0),
+numTotalVariables(0),
+numBoundaryVariables(0),
+numGlobalParameters(0),
+numCompartments(0),
+numReactions(0),
+numRules(0),
+numEvents(0),
+time(0)
 {}
 
 IModel::~IModel(){}
 
-//get,set
-vector<double>&	IModel::Get_y()
-{
-	return y;
-}
-
-vector<double>& IModel::Get_bc()
-{
-	return bc;
-}
-
-vector<double>&	IModel::Get_c()
-{
-	return  c;
-}
-
-vector<double>&	IModel::Get_gp()
-{
-	return  gp;
-}
-
-vector<double>&	IModel::Get_ct()
-{
-	return  ct;
-}
-
-vector<double>&	IModel::Get_dydt()
-{
-	return  dydt;
-}
-
-vector<double>&	IModel::Get_rates()
-{
-	return  rates;
-}
-
-vector<double>&	IModel::Get_rateRules()
-{
-	return  rateRules;
-}
-
-vector<double>&	IModel::Get_sr()
-{
-	return  sr;
-}
-
-double IModel::Get_time()
-{
-	return  time;
-}
-
-vector<bool>& IModel::Get_eventStatusArray()
-{
-	return eventStatusArray;
-}
-
-vector<double>&	IModel::Get_eventTests()
-{
-	return eventTests;
-}
-
-vector<bool>& IModel::Get_previousEventStatusArray()
-{
-	return previousEventStatusArray;
-}
 
 int IModel::getNumIndependentVariables()
 {
-	return 0;
+	return numIndependentVariables;
 }
 
 int IModel::getNumDependentVariables()
 {
-	return 0;
+	return numDependentVariables;
 }
 
 int IModel::getNumTotalVariables()
 {
-	return 0;
+	return numTotalVariables;
 }
 
 int IModel::getNumBoundarySpecies()
 {
-	return 0;
+	return numBoundaryVariables;	//Todos: bad naming - is Variables/Species, choose one..
 }
 
 int IModel::getNumGlobalParameters()
 {
-	return 0;
+	return numGlobalParameters;
 }
 
 int IModel::getNumCompartments()
 {
-	return 0;
+	return numCompartments;
 }
 
 int IModel::getNumReactions()
 {
-	return 0;
+	return numReactions;
 }
 
 int IModel::getNumRules()
 {
-	return 0;
+	return numRules;
 }
 
 int IModel::getNumEvents()
 {
-	return 0;
+	return numEvents;
 }
 
-
+//////Virtual functions that should be implemented in decendant..
+void  IModel::initializeInitialConditions(){}
+void  IModel::setInitialConditions(){}
+void  IModel::setParameterValues(){}
+void  IModel::setBoundaryConditions(){}
+void  IModel::InitializeRates(){}
+void  IModel::AssignRates(){}
+void  IModel::AssignRates(vector<double>& rates){}
+void  IModel::computeConservedTotals(){}
+void  IModel::computeEventPriorites(){}
+void  IModel::setConcentration(int index, double value){}
+void  IModel::convertToAmounts(){}
+void  IModel::convertToConcentrations(){}
+void  IModel::updateDependentSpeciesValues(vector<double>& _y){}
+void  IModel::computeRules(vector<double>& _y){}
+void  IModel::computeReactionRates(double time, vector<double>& y){}
+void  IModel::computeAllRatesOfChange(){}
+void  IModel::evalModel(double time, vector<double>& y){}
+void  IModel::evalEvents(double time, vector<double>& y){}
+void  IModel::resetEvents(){}
+void  IModel::evalInitialAssignments(){}
+void  IModel::testConstraints(){}
+void  IModel::InitializeRateRuleSymbols(){}
 
 } //namespace rr

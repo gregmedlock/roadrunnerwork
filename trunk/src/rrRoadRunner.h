@@ -1,6 +1,7 @@
 #ifndef rrRoadRunnerH
 #define rrRoadRunnerH
 #include <string>
+#include <windows.h>
 #include "rrObject.h"
 #include "rrDoubleMatrix.h"
 #include "rrIModel.h"
@@ -36,7 +37,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         ModelGenerator				   *mCGenerator;
         ModelGenerator				   *mModelGenerator;
         Compiler					   *mCompiler;
-
+		HINSTANCE 						mModelDllHandle;
 		void 							AddNthOutputToResult(vector< vector<double> >& results, int nRow, double dCurrentTime);
         bool 							IsNleqAvailable();
         void 							emptyModel();
@@ -163,11 +164,11 @@ class RR_DECLSPEC RoadRunner : public rrObject
         bool							CreateModelSourceCode();
         string							GetModelSourceCode();
     	vector< vector<double> >  		runSimulation();
-		void 							InitializeModel(IModel* model);
+		bool 							InitializeModel();
         void                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws);
         void                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
         void                            loadSBMLFromFile(const string& fileName);
-        void                            loadSBML(const string& sbml);
+        bool                            loadSBML(const string& sbml);
         string                          getSBML();
         double                          getTimeStart();
         double                          getTimeEnd();

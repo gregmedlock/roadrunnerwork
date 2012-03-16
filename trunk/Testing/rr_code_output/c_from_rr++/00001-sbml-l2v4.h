@@ -68,15 +68,17 @@
 	//TPerformEventAssignmentDelegate  _performEventAssignments;                                       
 	bool                               _eventStatusArray[0];                   
 	bool                               _previousEventStatusArray[0];           
-D_S void evalModel(double timein, double* _amounts);
+
 
 //NON - EXPORTS ========================================
-void				InitializeDelays();
+   void                               InitializeDelays();                     
+
 
 //EXPORTS ========================================
-D_S int				InitModel();
-D_S char*			GetModelName();
-
+D_S int                                InitModel();                            
+D_S char*                              GetModelName();                         
+D_S void                               setCompartmentVolumes();                
+D_S void                               evalModel(double timein, double* _amounts);
 
 
 #endif //modelH

@@ -16,10 +16,10 @@ using std::string;
 namespace rr
 {
 
-class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
+class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to be simulated
 {
     protected:
-    	//These variables is also generated in the c-code.
+    	//These variables is also generated in the c-code, weird ??
         //Init a decendent models data later
         int                                     numIndependentVariables;
         int                                     numDependentVariables;
@@ -32,38 +32,21 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
         int                                     numEvents;
 
 
-    public://==== this makes the following attributes public.. for now. No great design..
-
-        // Property signatures:
+    public:
+        double 							        time;
         vector<double> 					        y;
         list<string> 					        Warnings;
         vector<double>                  		init_y;
         vector<double>                          amounts;
         vector<double>                          bc;
-
-        /// <summary>
-        /// modifiable species
-        ///reference values
-        /// </summary>
         vector<double> 					        sr;
-
-        // Global parameters
-        vector<double> 					        gp;
-
-        // Local parameters
-        vector<double> 					        lp ;
-
-        // Compartment volumes
-        vector<double> 	                        c ;
+        vector<double> 					        gp;				//Global parameters
+        vector<double> 					        lp ;        	//Local parameters
+        vector<double> 	                        c ;        		//Compartment volumes
         vector<double> 	                        dydt;
         vector<double> 	                        rates;
-
-        // Conservation totals
-        vector<double> 					        ct ;
-
-        // additional rateRules
-        vector<double> 					        rateRules;
-        double 							        time ;
+        vector<double> 					        ct ;         	//Conservation totals
+        vector<double> 					        rateRules;		//additional rateRules
         vector<double> 					        eventTests;
         vector<double> 					        eventPriorities;
         vector<TEventDelayDelegate> 	        eventDelay;
@@ -71,11 +54,14 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
         vector<bool>                            eventPersistentType;
         vector<bool>                            eventStatusArray;
         vector<bool>                            previousEventStatusArray;
-
         vector<TEventAssignmentDelegate>		eventAssignments;
         vector<TComputeEventAssignmentDelegate> computeEventAssignments;
         vector<TPerformEventAssignmentDelegate> performEventAssignments;
 
+												IModel();
+		virtual								   ~IModel();
+
+    	// Virtual functions --------------------------------------------------------
         virtual int                             getNumIndependentVariables();
         virtual int                             getNumDependentVariables();
         virtual int                             getNumTotalVariables();
@@ -85,56 +71,34 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for Models
         virtual int                             getNumReactions();
         virtual int                             getNumRules();
         virtual int                             getNumEvents();
+        virtual void                            initializeInitialConditions();
+        virtual void                            setInitialConditions();
+        virtual void                            setParameterValues();
+        virtual void                            setBoundaryConditions();
+        virtual void                            InitializeRates();
+        virtual void                            AssignRates();
+        virtual void                            AssignRates(vector<double>& rates);
+        virtual void                            computeConservedTotals();
+        virtual void                            computeEventPriorites();
+        virtual void                            setConcentration(int index, double value);
+        virtual void                            convertToAmounts();
+        virtual void                            convertToConcentrations();
+        virtual void                            updateDependentSpeciesValues(vector<double>& _y);
+        virtual void                            computeRules(vector<double>& _y);
+        virtual void                            computeReactionRates(double time, vector<double>& y);
+        virtual void                            computeAllRatesOfChange();
+        virtual void                            evalModel(double time, vector<double>& y);
+        virtual void                            evalEvents(double time, vector<double>& y);
+        virtual void                            resetEvents();
+        virtual void                            evalInitialAssignments();
+        virtual void                            testConstraints();
+        virtual void                            InitializeRateRuleSymbols();
 
-    public:
-												IModel();
-		virtual									~IModel();
-
-		
-        vector<double>&							Get_y();
-        vector<double>&							Get_bc();
-		vector<double>&							Get_c();
-		vector<double>&							Get_gp();
-		vector<double>&							Get_ct();
-		vector<double>&							Get_dydt();
-		vector<double>&							Get_rates();
-		vector<double>&							Get_rateRules();
-		vector<double>&							Get_sr();
-		double									Get_time();
-		vector<bool>&							Get_eventStatusArray();
-		vector<double>&							Get_eventTests();
-		vector<bool>&							Get_previousEventStatusArray();
-
+        //Pure virtuals - force implementation...
         virtual void                            setCompartmentVolumes() = 0;
         virtual vector<double> 					GetCurrentValues() = 0 ;
         virtual double 							getConcentration(int index) = 0;
-        virtual void                            initializeInitialConditions(){}
-        virtual void                            setInitialConditions(){}
-        virtual void                            setParameterValues(){}
-        virtual void                            setBoundaryConditions(){}
-        virtual void                            InitializeRates(){}
-        virtual void                            AssignRates(){}
-        virtual void                            AssignRates(vector<double>& rates){}
-
-        virtual void                            computeConservedTotals(){}
-        virtual void                            computeEventPriorites(){}
-        virtual void                            setConcentration(int index, double value){}
-
-        virtual void                            convertToAmounts(){}
-        virtual void                            convertToConcentrations(){}
-        virtual void                            updateDependentSpeciesValues(vector<double>& _y){}
-        virtual void                            computeRules(vector<double>& _y){}
-        virtual void                            computeReactionRates(double time, vector<double>& y){}
-        virtual void                            computeAllRatesOfChange(){}
-        virtual void                            evalModel(double time, vector<double>& y){}
-        virtual void                            evalEvents(double time, vector<double>& y){}
-        virtual void                            resetEvents(){}
-        virtual void                            evalInitialAssignments(){}
-        virtual void                            testConstraints(){}
-        virtual void                            InitializeRateRuleSymbols(){}
-
-        // Level 2 support
-        virtual int 							getNumLocalParameters(int reactionId) = 0;
+        virtual int 							getNumLocalParameters(int reactionId) = 0;         // Level 2 support
 };
 } //namespace rr
 

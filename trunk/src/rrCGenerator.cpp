@@ -174,6 +174,18 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 	WriteClassHeader(ignore);
     WriteOutVariables(ignore);
     WriteOutSymbolTables(ignore);
+
+    ///// Write non exports
+   	mHeader.NewLine("\n//NON - EXPORTS ========================================");
+   	mHeader.AddFunctionExport("  ", "void", "InitializeDelays()");
+
+
+    ///// Start of exported functions
+   	mHeader.NewLine("\n//EXPORTS ========================================");
+   	mHeader.AddFunctionExport("D_S", "int", "InitModel()");
+   	mHeader.AddFunctionExport("D_S", "char*", "GetModelName()");
+    ///////////////
+
     WriteResetEvents(ignore, mNumEvents);
     WriteSetConcentration(ignore);
     WriteGetConcentration(ignore);
@@ -208,21 +220,9 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 //	mHeader<<Format("} g;\t//This is global data in the DLL{0}", NL());
 
 
-    ///// Write non exports
-   	mHeader.NewLine("\n//NON - EXPORTS ========================================");
-	mHeader<<"void"<<tabs(4)<<"InitializeDelays();";
-
-    ///// Write exported functions
-   	mHeader.NewLine("\n//EXPORTS ========================================");
-    mHeader<<"D_S int"<<tabs(4)<<"InitModel();"<<endl;
-    mHeader<<"D_S char*"<<tabs(3)<<"GetModelName();"<<endl;
-   	mHeader.NewLine("\n");
-    ///////////////
-
-
 	WriteInitFunction(mHeader, mSource);
 
-    mHeader<<"#endif //modelH"<<NL();
+    mHeader<<"\n\n#endif //modelH"<<NL();
 	return mHeader.ToString() + mSource.ToString();
 }
 
@@ -317,8 +317,7 @@ void CGenerator::WriteOutVariables(StringBuilder& ignore)
 void CGenerator::WriteComputeAllRatesOfChange(StringBuilder& ignore, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
 {
  	//In header
-    mHeader<<"D_S void evalModel(double timein, double* _amounts);";
-
+   	mHeader.AddFunctionExport("D_S", "void", "evalModel(double timein, double* _amounts)");
     mSource<<Append("// Uses the equation: dSd/dt = L0 dSi/dt" + NL());
     mSource<<"void computeAllRatesOfChange()\n{";
 
@@ -1299,7 +1298,8 @@ void CGenerator::WriteSetParameterValues(StringBuilder& ignore, const int& numRe
 
 void CGenerator::WriteSetCompartmentVolumes(StringBuilder& ignore)
 {
-    mSource<<"void setCompartmentVolumes()\n{";
+	mHeader.AddFunctionExport("D_S", "void", "setCompartmentVolumes()");
+    mSource << "void setCompartmentVolumes()\n{";
 
     for (int i = 0; i < compartmentList.size(); i++)
     {

@@ -25,7 +25,9 @@ class RR_DECLSPEC StringBuilder : public rrObject
 
 		stringstream& 				operator<<(const string& str);
         string 						ToString();
+
 		void 						FormatVariable(const string& type, const string& varName, const string& comment = "");
+		void						AddFunctionExport(const string& exp, const string& retValue, const string& funcProto);
 		void 						FormatArray(const string& type, const string& varName, const int& arraySize, const string& comment = "");
         void						NewLine(const string& line = "");
         void						Line(const string& line);

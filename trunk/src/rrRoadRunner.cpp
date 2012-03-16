@@ -44,7 +44,8 @@ timeStart(0),
 timeEnd(10),
 numPoints(21),
 sbmlStr(""),
-mModel(NULL)
+mModel(NULL),
+mModelDllHandle(NULL)
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
 	mCSharpGenerator = new CSharpGenerator();
@@ -80,35 +81,33 @@ string RoadRunner::GetModelSourceCode()
 	return mModelCode;
 }
 
-void RoadRunner::InitializeModel(IModel* aModel)
+bool RoadRunner::InitializeModel()
 {
-    mModel = aModel;
-
     if(!mModel)
     {
-    	return;
+    	Log(lError)<<"Trying to initialize a NULL model";
+    	return false ;
     }
-    IModel& model = *mModel;
 
     //model.Warnings.AddRange(ModelGenerator.Instance.Warnings);
 
     modelLoaded = true;
     mConservedTotalChanged = false;
 
-    model.setCompartmentVolumes();
-    model.initializeInitialConditions();
-    model.setParameterValues();
-    model.setCompartmentVolumes();
-    model.setBoundaryConditions();
-    model.setInitialConditions();
-    model.convertToAmounts();
-    model.evalInitialAssignments();
-    model.computeRules(model.y);
-    model.convertToAmounts();
+    mModel->setCompartmentVolumes();
+    mModel->initializeInitialConditions();
+    mModel->setParameterValues();
+    mModel->setCompartmentVolumes();
+    mModel->setBoundaryConditions();
+    mModel->setInitialConditions();
+    mModel->convertToAmounts();
+    mModel->evalInitialAssignments();
+    mModel->computeRules(mModel->y);
+    mModel->convertToAmounts();
 
     if (mComputeAndAssignConservationLaws)
     {
-    	model.computeConservedTotals();
+    	mModel->computeConservedTotals();
     }
 
     mCVode = new CvodeInterface(mModel);
@@ -116,13 +115,14 @@ void RoadRunner::InitializeModel(IModel* aModel)
     reset();
 
     // Construct default selection list
-    selectionList.resize(model.getNumTotalVariables() + 1); // + 1 to include time
+    selectionList.resize(mModel->getNumTotalVariables() + 1); // + 1 to include time
     selectionList[0].selectionType = clTime;
-    for (int i = 0; i < model.getNumTotalVariables(); i++)
+    for (int i = 0; i < mModel->getNumTotalVariables(); i++)
     {
         selectionList[i + 1].index = i;
         selectionList[i + 1].selectionType = clFloatingSpecies;
     }
+    return true;
 }
 
 
@@ -476,7 +476,7 @@ void RoadRunner::loadSBMLFromFile(const string& fileName)
 }
 
 //        Help("Load SBML into simulator")
-void RoadRunner::loadSBML(const string& sbml)
+bool RoadRunner::loadSBML(const string& sbml)
 {
 	Log(lDebug4)<<"Loading SBML into simulator";
     if (!sbml.size())
@@ -488,7 +488,7 @@ void RoadRunner::loadSBML(const string& sbml)
     // just reset the initial conditions
     if (modelLoaded && mModel != NULL && (sbml == sbmlStr) && (sbml != ""))
     {
-        InitializeModel(mModel);
+        InitializeModel();
         //reset();
     }
     else
@@ -526,13 +526,25 @@ void RoadRunner::loadSBML(const string& sbml)
         string srcCodeFolder("C:\\rrw\\Testing\\rr_code_output\\c_from_rr++");
 		codeGen->SaveSourceCodeToFolder(srcCodeFolder);
 
-        HINSTANCE dllHandle = mCompiler->CompileC_DLL(codeGen->GetSourceCodeFileName());
+        mModelDllHandle = mCompiler->CompileC_DLL(codeGen->GetSourceCodeFileName());
 
-        if (dllHandle != NULL)
+        if (mModelDllHandle != NULL)
         {
         	//Create a model
             ModelFromC *rrCModel = new ModelFromC();
-            InitializeModel(rrCModel);
+            if(!rrCModel->SetupFunctions(mModelDllHandle))
+            {
+            	Log(lError)<<"Failed to setup functions in C Model";
+              	return false;
+            }
+            mModel = rrCModel;			//Should use an auto pointer?
+            if(!InitializeModel())
+            {
+            	Log(lError)<<"Failed Initializing C Model";
+                return false;
+            }
+
+
         }
         else
         {
@@ -569,6 +581,7 @@ void RoadRunner::loadSBML(const string& sbml)
 //        _N = StructAnalysis.GetReorderedStoichiometryMatrix();
 //        _Nr = StructAnalysis.GetNrMatrix();
     }
+    return true;
 }
 
 //        Help("Returns the initially loaded model as SBML")

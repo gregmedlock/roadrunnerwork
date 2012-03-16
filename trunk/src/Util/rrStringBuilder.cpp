@@ -55,6 +55,11 @@ void StringBuilder::FormatVariable(const string& type, const string& varName, co
    	mStringing<<endl;
 }
 
+void StringBuilder::AddFunctionExport(const string& exp, const string& retValue, const string& funcProto)
+{
+	mStringing<<exp<<" "<<left<<setw(mSizeOfVarField1)<<retValue<<setw(mSizeOfVarField2)<<funcProto + ";"<<endl;
+}
+
 void StringBuilder::FormatArray(const string& type, const string& varName, const int& arraySize, const string& comment)
 {
 	string field2(varName +"["+ rr::ToString(arraySize)+"];");

@@ -20,19 +20,19 @@ ModelState::ModelState(IModel& model)
 void ModelState::InitializeFromModel(IModel& model)
 {
     model.convertToConcentrations();
-    mFloatingSpeciesConcentrations 	= GetCopy(model.Get_y());
-    mBoundarySpeciesConcentrations 	= GetCopy(model.Get_bc());
-    mCompartmentVolumes 			= GetCopy(model.Get_c());
-    mGlobalParameters 				= GetCopy(model.Get_gp());
-    mConservedTotals 				= GetCopy(model.Get_ct());
-    mDyDt 							= GetCopy(model.Get_dydt());
-    mRates 							= GetCopy(model.Get_rates());
-    mRateRules 						= GetCopy(model.Get_rateRules());
-    mModifiableSpeciesReferences 	= GetCopy(model.Get_sr());
-    mTime 							= model.Get_time();
-    mEventStatusArray 		   		= GetCopy(model.Get_eventStatusArray());
-    mEventTests 			   		= GetCopy(model.Get_eventTests());
-    mPreviousEventStatusArray  		= GetCopy(model.Get_previousEventStatusArray());
+    mFloatingSpeciesConcentrations 	= GetCopy(model.y);
+    mBoundarySpeciesConcentrations 	= GetCopy(model.bc);
+    mCompartmentVolumes 			= GetCopy(model.c);
+    mGlobalParameters 				= GetCopy(model.gp);
+    mConservedTotals 				= GetCopy(model.ct);
+    mDyDt 							= GetCopy(model.dydt);
+    mRates 							= GetCopy(model.rates);
+    mRateRules 						= GetCopy(model.rateRules);
+    mModifiableSpeciesReferences 	= GetCopy(model.sr);
+    mTime 							= model.time;
+    mEventStatusArray 		   		= GetCopy(model.eventStatusArray);
+    mEventTests 			   		= GetCopy(model.eventTests);
+    mPreviousEventStatusArray  		= GetCopy(model.previousEventStatusArray);
 }
 
 vector<double> ModelState::GetCopy(const vector<double>& oVector)
