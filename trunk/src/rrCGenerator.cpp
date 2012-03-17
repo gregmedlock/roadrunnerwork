@@ -290,7 +290,8 @@ void CGenerator::WriteOutVariables(StringBuilder& ignore)
     mHeader.FormatArray("bool",				  	                "_eventPersistentType", mNumEvents								, 	"Array holding the status whether events are persitstent or not");
 
 	mHeader.FormatVariable("double",  					    	"_time");
-    mHeader.FormatVariable("int",	  						    "numIndependentVariables");
+    mHeader.FormatVariable("D_S int",	  					    "numIndependentVariables");
+//    mSource.FormatVariable("int",	 					    "numIndependentVariables = 24");
     mHeader.FormatVariable("int",	  						    "numDependentVariables");
     mHeader.FormatVariable("int",	  						    "numTotalVariables");
     mHeader.FormatVariable("int",	  						    "numBoundaryVariables");
@@ -2394,7 +2395,7 @@ void CGenerator::WriteInitFunction(StringBuilder& ignore, StringBuilder& source)
     source.Line("{");
 
     //The following is from the constructor..
-    source<<"\t"<<Append("numIndependentVariables = " , 	mNumIndependentSpecies , ";" , NL());
+    source<<"\t"<<Append("numIndependentVariables = " , 	mNumIndependentSpecies + 2, ";" , NL());
     source<<"\t"<<Append("numDependentVariables = " , 		mNumDependentSpecies , ";" , NL());
     source<<"\t"<<Append("numTotalVariables = " , 			mNumFloatingSpecies , ";" , NL());
     source<<"\t"<<Append("numBoundaryVariables = " , 		mNumBoundarySpecies , ";" , NL());

@@ -41,7 +41,7 @@ HINSTANCE Compiler::CompileC_DLL(const string& sourceFileName)
 
     //Now compile the code and load the resulting dll, and call an exported function in it...
     stringstream exeCmd;
-    exeCmd<<"tcc -g -v -shared "<<sourceFileName<<" -DBUILD_MODEL_DLL";
+    exeCmd<<"tcc -g -v -shared -rdynamic "<<sourceFileName<<" -DBUILD_MODEL_DLL";
 
     Log(lInfo)<<"\n================ Compiling the DLL =============";
     Log(lInfo)<<"\nExecuting: "<<exeCmd.str();

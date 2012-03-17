@@ -68,10 +68,6 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
         void    	         	    computeConservedTotals();
         double		   				getConcentration(int index);
         vector<double> 				GetCurrentValues();
-
-
-
-
 };
 
 }

@@ -20,37 +20,15 @@ class RR_DECLSPEC CvodeInterface : public rrObject
     /// Point to the CVODE DLL to use
     /// </summary>
     private:
-		const string 		CVODE;
-		static int 			mCount;
-		static int 			mRootCount;
-        static int 			mOneStepCount;
+		const string 		        CVODE;
+		static int 			        mCount;
+		static int 			        mRootCount;
+        static int 			        mOneStepCount;
 
-        const double 		defaultReltol;
-        const double 		defaultAbsTol;
-        const int 			defaultMaxNumSteps;
+        const double 		        defaultReltol;
+        const double 		        defaultAbsTol;
+        const int 			        defaultMaxNumSteps;
 
-
-//        // Error codes
-//        const int CV_ROOT_RETURN;
-//        const int CV_TSTOP_RETURN;
-//        const int CV_SUCCESS;
-//        const int CV_MEM_NULL;
-//        const int CV_ILL_INPUT;
-//        const int CV_NO_MALLOC;
-//        const int CV_TOO_MUCH_WORK;
-//        const int CV_TOO_MUCH_ACC;
-//        const int CV_ERR_FAILURE;
-//        const int CV_CONV_FAILURE;
-//        const int CV_LINIT_FAIL;
-//        const int CV_LSETUP_FAIL;
-//        const int CV_LSOLVE_FAIL;
-//        const int CV_MEM_FAIL;
-//        const int CV_RTFUNC_NULL;
-//        const int CV_NO_SLDET;
-//        const int CV_BAD_K;
-//        const int CV_BAD_T;
-//        const int CV_BAD_DKY;
-//        const int CV_PDATA_NULL;
         static string 			    tempPathstring;// = Path.GetTempPath();
         static int 				    errorFileCounter;
         IntPtr 					    fileHandle;

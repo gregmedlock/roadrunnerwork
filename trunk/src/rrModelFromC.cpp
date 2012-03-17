@@ -53,20 +53,7 @@ bool ModelFromC::SetupDLLFunctions()
     ccomputeConservedTotals           = (c_void)                GetFunctionPtr("computeConservedTotals");
     cgetConcentration                 = (c_double_int)          GetFunctionPtr("getConcentration");
     cGetCurrentValues                 = (c_doubleStar_void)     GetFunctionPtr("GetCurrentValues");
-
 	return true;
-}
-
-HANDLE ModelFromC::GetFunctionPtr(const string& funcName)
-{
-	HANDLE handle = GetProcAddress((HMODULE) mDLLHandle, funcName.c_str());
-    if(handle == NULL)
-    {
-        Log(lError) << "Unable to load the function: " << funcName;
-        return NULL;
-    }
-    Log(lInfo)<<"Loaded function " << funcName;
-    return handle;
 }
 
 bool ModelFromC::SetupDLLData()
@@ -84,8 +71,30 @@ bool ModelFromC::SetupDLLData()
     	mModelName = modelName;
     }
 
+    //
+  	int *test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numIndependentVariables");
+    int& test2 = *test;
+
+	if(test)
+    {
+        Log(lInfo)<<"Var is"<< test2;
+    }
     return true;
 }
+
+
+HANDLE ModelFromC::GetFunctionPtr(const string& funcName)
+{
+	HANDLE handle = GetProcAddress((HMODULE) mDLLHandle, funcName.c_str());
+    if(handle == NULL)
+    {
+        Log(lError) << "Unable to load the function: " << funcName;
+        return NULL;
+    }
+    Log(lInfo)<<"Loaded function " << funcName;
+    return handle;
+}
+
 
 void ModelFromC::setCompartmentVolumes()
 {

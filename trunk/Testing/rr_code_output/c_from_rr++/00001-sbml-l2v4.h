@@ -49,7 +49,7 @@
 	bool                               _eventType[0];                          //Array holding the status whether events are useValuesFromTriggerTime or not
 	bool                               _eventPersistentType[0];                //Array holding the status whether events are persitstent or not
 	double                             _time;                                       
-	int                                numIndependentVariables;                                       
+	D_S int                            numIndependentVariables;                                       
 	int                                numDependentVariables;                                       
 	int                                numTotalVariables;                                       
 	int                                numBoundaryVariables;                                       
