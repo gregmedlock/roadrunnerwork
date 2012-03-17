@@ -2,21 +2,20 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
-
-#include "rrCvodedll.h>
+#include "nvector/nvector_serial.h"
+#include "cvode/cvode_dense.h"
+#include "rrCvodedll.h"
 
 // C File IO interface routines
-FILE *fileOpen (char *fileName) {
+FILE *fileOpen (char *fileName)
+{
 	return fopen (fileName, "w");
 }
 
-
-void fileClose (FILE *fp) {
+void fileClose (FILE *fp)
+{
 	fclose (fp);
 }
-
-
-// ---------------------------------------------------------------------
 
 // Creates a new N_Vector object and returns a pointer to the caller
 void *NewCvode_Vector (int n)

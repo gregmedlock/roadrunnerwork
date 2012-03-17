@@ -221,6 +221,9 @@
 				<DependentOn>..\src\Scanner\rrToken.h</DependentOn>
 				<BuildOrder>50</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\src\Solvers\rrCvodedll.cpp">
+				<BuildOrder>62</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\src\Solvers\rrCvodeInterface.cpp">
 				<DependentOn>..\src\Solvers\rrCvodeInterface.h</DependentOn>
 				<BuildOrder>17</BuildOrder>

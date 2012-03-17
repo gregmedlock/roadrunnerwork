@@ -1,11 +1,8 @@
 #ifndef rrCvodedllH
 #define rrCvodedllH
 #include <stdlib.h>
-//#include <sundials/sundials_types.h>
-//#include <nvector/nvector_serial.h>
-//#include <cvode/cvode.h>
-//#include <cvode/cvode_dense.h>
-//#include <cvode/cvode_bandpre.h>
+#include <cvode/cvode.h>
+#include "rrExporter.h"
 
 #ifdef WIN32
 #include <windows.h>
