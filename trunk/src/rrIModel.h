@@ -21,15 +21,16 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to b
     protected:
     	//These variables is also generated in the c-code, weird ??
         //Init a decendent models data later
-        int                                     numIndependentVariables;
-        int                                     numDependentVariables;
-        int                                     numTotalVariables;
-        int                                     numBoundaryVariables;
-        int                                     numGlobalParameters;
-        int                                     numCompartments;
-        int                                     numReactions;
-        int                                     numRules;
-        int                                     numEvents;
+        int										mDummyInt;
+        int                                    *numIndependentVariables;
+        int                                    *numDependentVariables;
+        int                                    *numTotalVariables;
+        int                                    *numBoundaryVariables;
+        int                                    *numGlobalParameters;
+        int                                    *numCompartments;
+        int                                    *numReactions;
+        int                                    *numRules;
+        int                                    *numEvents;
         string 									mModelName;
 
 

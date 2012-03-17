@@ -3,58 +3,7 @@
 #endif
 #pragma hdrstop
 
-#include <stdlib.h>
-#ifdef WIN32
-#include <windows.h>
-
-//BOOL APIENTRY DllMain( HANDLE hModule,
-//	DWORD  ul_reason_for_call,
-//	LPVOID lpReserved
-//	)
-//{
-//	return TRUE;
-//}
-
-
-
-// N_Vector is a point to an N_Vector structure
-
-DLLEXPORT void* 	NewCvode_Vector(int);
-DLLEXPORT void 		FreeCvode_Vector (N_Vector);
-DLLEXPORT void 		FreeCvode_Mem (void **p);
-DLLEXPORT void 		Cvode_SetVector (N_Vector v, int Index, double Value);
-DLLEXPORT double 	Cvode_GetVector (N_Vector v, int Index);
-
-DLLEXPORT void*		Create_BDF_NEWTON_CVode();
-DLLEXPORT void*		Create_ADAMS_FUNCTIONAL_CVode();
-DLLEXPORT int  		AllocateCvodeMem (void *, int n, TModelCallBack, double, N_Vector, double, N_Vector);//, long int[], double[]);
-DLLEXPORT int  		CvDense (void *, int);  // int = size of systems
-DLLEXPORT int  		CVReInit (void *cvode_mem, double t0, N_Vector y0, double reltol, N_Vector abstol);
-DLLEXPORT int  		Run_Cvode (void *cvode_mem, double tout, N_Vector y, double *t, char *ErrMsg);
-DLLEXPORT int  		CVGetRootInfo (void *cvode_mem, int *rootsFound); 
-DLLEXPORT int  		CVRootInit (void *cvode_mem, int numRoots, TRootCallBack callBack, void *gdata);
-
-DLLEXPORT int  SetMaxNumSteps(void *cvode_mem, int mxsteps);
-DLLEXPORT int  SetMaxOrder(void *cvode_mem, int mxorder);
-DLLEXPORT int  CVSetFData (void *cvode_mem, void *f_data); 
-DLLEXPORT int  SetMaxErrTestFails(void *cvode_mem, int maxnef);
-DLLEXPORT int  SetMaxConvFails(void *cvode_mem, int maxncf);
-DLLEXPORT int  SetMaxNonLinIters (void *cvode_mem, int maxcor);
-DLLEXPORT int  SetErrFile (void *cvode_mem, FILE *errfp);
-DLLEXPORT int  SetErrHandler (void *cvode_mem, CVErrHandlerFn callback, void* user_data );
-DLLEXPORT int  SetMinStep(void *cvode_mem, double minStep);
-DLLEXPORT int  SetMaxStep(void *cvode_mem, double maxStep);
-DLLEXPORT int  SetInitStep(void *cvode_mem, double initStep);
-
-DLLEXPORT FILE *fileOpen (char *fileName);
-DLLEXPORT void  fileClose (FILE *fp);
-
-#define Ith(v,i)    NV_Ith_S(v,i-1)       /* Ith numbers components 1..NEQ */
-
-// Declare the call back pointers
-TModelCallBack callBackModel;
-TRootCallBack  callBackRoot;
-
+#include "rrCvodedll.h>
 
 // C File IO interface routines
 FILE *fileOpen (char *fileName) {

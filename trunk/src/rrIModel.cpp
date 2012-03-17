@@ -15,15 +15,16 @@ namespace rr
 
 IModel::IModel()
 :
-numIndependentVariables(0),
-numDependentVariables(0),
-numTotalVariables(0),
-numBoundaryVariables(0),
-numGlobalParameters(0),
-numCompartments(0),
-numReactions(0),
-numRules(0),
-numEvents(0),
+mDummyInt(0),
+numIndependentVariables(&mDummyInt),
+numDependentVariables(&mDummyInt),
+numTotalVariables(&mDummyInt),
+numBoundaryVariables(&mDummyInt),
+numGlobalParameters(&mDummyInt),
+numCompartments(&mDummyInt),
+numReactions(&mDummyInt),
+numRules(&mDummyInt),
+numEvents(&mDummyInt),
 time(0),
 mModelName("NoNameSet")
 {}
@@ -33,47 +34,47 @@ IModel::~IModel(){}
 
 int IModel::getNumIndependentVariables()
 {
-	return numIndependentVariables;
+	return *numIndependentVariables;
 }
 
 int IModel::getNumDependentVariables()
 {
-	return numDependentVariables;
+	return *numDependentVariables;
 }
 
 int IModel::getNumTotalVariables()
 {
-	return numTotalVariables;
+	return *numTotalVariables;
 }
 
 int IModel::getNumBoundarySpecies()
 {
-	return numBoundaryVariables;	//Todos: bad naming - is Variables/Species, choose one..
+	return *numBoundaryVariables;	//Todos: bad naming - is Variables/Species, choose one..
 }
 
 int IModel::getNumGlobalParameters()
 {
-	return numGlobalParameters;
+	return *numGlobalParameters;
 }
 
 int IModel::getNumCompartments()
 {
-	return numCompartments;
+	return *numCompartments;
 }
 
 int IModel::getNumReactions()
 {
-	return numReactions;
+	return *numReactions;
 }
 
 int IModel::getNumRules()
 {
-	return numRules;
+	return *numRules;
 }
 
 int IModel::getNumEvents()
 {
-	return numEvents;
+	return *numEvents;
 }
 
 //////Virtual functions that should be implemented in decendant..

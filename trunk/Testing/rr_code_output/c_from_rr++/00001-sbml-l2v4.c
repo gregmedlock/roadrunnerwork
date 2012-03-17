@@ -174,7 +174,7 @@ void testConstraints()
 //Function to initialize the model data structure. Returns an integer indicating result
 int InitModel()
 {
-	numIndependentVariables = 3;
+	numIndependentVariables = 1;
 	numDependentVariables = 1;
 	numTotalVariables = 2;
 	numBoundaryVariables = 0;

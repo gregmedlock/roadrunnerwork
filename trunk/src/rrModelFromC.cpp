@@ -71,17 +71,12 @@ bool ModelFromC::SetupDLLData()
     	mModelName = modelName;
     }
 
-    //
-  	int *test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numIndependentVariables");
-    int& test2 = *test;
 
-	if(test)
-    {
-        Log(lInfo)<<"Var is"<< test2;
-    }
+  	int *test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numIndependentVariables");
+
+    numIndependentVariables = test;
     return true;
 }
-
 
 HANDLE ModelFromC::GetFunctionPtr(const string& funcName)
 {
@@ -94,7 +89,6 @@ HANDLE ModelFromC::GetFunctionPtr(const string& funcName)
     Log(lInfo)<<"Loaded function " << funcName;
     return handle;
 }
-
 
 void ModelFromC::setCompartmentVolumes()
 {

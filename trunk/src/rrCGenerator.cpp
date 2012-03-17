@@ -2395,7 +2395,7 @@ void CGenerator::WriteInitFunction(StringBuilder& ignore, StringBuilder& source)
     source.Line("{");
 
     //The following is from the constructor..
-    source<<"\t"<<Append("numIndependentVariables = " , 	mNumIndependentSpecies + 2, ";" , NL());
+    source<<"\t"<<Append("numIndependentVariables = " , 	mNumIndependentSpecies, ";" , NL());
     source<<"\t"<<Append("numDependentVariables = " , 		mNumDependentSpecies , ";" , NL());
     source<<"\t"<<Append("numTotalVariables = " , 			mNumFloatingSpecies , ";" , NL());
     source<<"\t"<<Append("numBoundaryVariables = " , 		mNumBoundarySpecies , ";" , NL());
