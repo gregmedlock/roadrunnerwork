@@ -53,6 +53,10 @@ class RR_DECLSPEC NLEQException : public RRException
 	    NLEQException(const string& msg);
 };
 
-
+class RR_DECLSPEC CvodeException : public RRException
+{
+	public:
+	    CvodeException(const string& msg);
+};
 }//namepsace rr
 #endif

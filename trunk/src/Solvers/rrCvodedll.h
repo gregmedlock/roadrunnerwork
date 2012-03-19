@@ -1,7 +1,7 @@
 #ifndef rrCvodedllH
 #define rrCvodedllH
 #include <stdlib.h>
-#include <cvode/cvode.h>
+#include "cvode/cvode.h"
 #include "rrExporter.h"
 
 #ifdef WIN32
@@ -34,6 +34,7 @@ RR_DECLSPEC int  		AllocateCvodeMem (void *, int n, TModelCallBack, double, N_Ve
 RR_DECLSPEC int  		CvDense (void *, int);  // int = size of systems
 RR_DECLSPEC int  		CVReInit (void *cvode_mem, double t0, N_Vector y0, double reltol, N_Vector abstol);
 RR_DECLSPEC int  		Run_Cvode (void *cvode_mem, double tout, N_Vector y, double *t, char *ErrMsg);
+
 RR_DECLSPEC int  		CVGetRootInfo (void *cvode_mem, int *rootsFound);
 RR_DECLSPEC int  		CVRootInit (void *cvode_mem, int numRoots, TRootCallBack callBack, void *gdata);
 RR_DECLSPEC int         SetMaxNumSteps(void *cvode_mem, int mxsteps);

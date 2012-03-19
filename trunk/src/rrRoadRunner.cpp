@@ -292,9 +292,13 @@ double RoadRunner::GetNthSelectedOutput(const int& index, const double& dCurrent
 
 void RoadRunner::AddNthOutputToResult(vector< vector<double> >& results, int nRow, double dCurrentTime)
 {
+	int size = selectionList.size();
+
     for (int j = 0; j < selectionList.size(); j++)
     {
-        results[nRow][j] = GetNthSelectedOutput(j, dCurrentTime);
+        double out =  GetNthSelectedOutput(j, dCurrentTime);
+//        results[nRow][j] = out;
+		results[nRow].push_back(out);
     }
 }
 
@@ -313,13 +317,13 @@ vector< vector<double> > RoadRunner::runSimulation()
     vector< vector<double> >  results;// = new double[numPoints, selectionList.Length];
     results.resize(selectionList.size());
 
-    if(mModel)
+    if(!mModel)
     {
     	return results;
     }
 
     vector<double> y;
-    y=BuildModelEvalArgument();
+    y = BuildModelEvalArgument();
     mModel->evalModel(timeStart, y);
 
     AddNthOutputToResult(results, 0, timeStart);
@@ -328,11 +332,16 @@ vector< vector<double> > RoadRunner::runSimulation()
     {
         int restartResult = mCVode->reStart(timeStart, mModel);
         if (restartResult != 0)
-            throw new SBWApplicationException("Error in reStart call to CVODE");
+        {
+            throw SBWApplicationException("Error in reStart call to CVODE");
+        }
     }
+
     double tout = timeStart;
+    Log(lInfo)<<"Will run OneStep "<<numPoints<<" times";
     for (int i = 1; i < numPoints; i++)
     {
+    	Log(lDebug3)<<"Step "<<i;
         mCVode->OneStep(tout, hstep);
         tout = timeStart + i * hstep;
         AddNthOutputToResult(results, i, tout);
@@ -643,66 +652,70 @@ bool RoadRunner::loadSBML(const string& sbml)
 //        Help("reset the simulator back to the initial conditions specified in the SBML model")
 void RoadRunner::reset()
 {
-//            if (!modelLoaded)
-//            {
-//                // rather make sure that the simulator is!!!! in a stable state
-//                model = null;
-//                sbmlStr = "";
-//            }
-//            else
-//            {
-//                model.time = 0.0;
-//
-//                // Reset the event flags
-//                model.resetEvents();
-//
-//                model.setCompartmentVolumes();
-//
-//                model.setInitialConditions();
-//
-//                model.convertToAmounts();
-//
-//                // in case we have ODE rules we should assign those as initial values
-//                model.InitializeRateRuleSymbols();
-//                model.InitializeRates();
-//                // and of course initial assignments should override anything
-//                model.evalInitialAssignments();
-//                model.convertToAmounts();
-//                // also we might need to set some initial assignment rules.
-//                model.convertToConcentrations();
-//                model.computeRules(model.y);
-//                model.InitializeRates();
-//                model.InitializeRateRuleSymbols();
-//                model.evalInitialAssignments();
-//                model.computeRules(model.y);
-//
-//                model.convertToAmounts();
-//
-//                if (mComputeAndAssignConservationLaws && !_bConservedTotalChanged) model.computeConservedTotals();
-//
-//                mCVode.AssignNewVector(model, true);
-//                mCVode.TestRootsAtInitialTime();
-//
-//                //double hstep = (timeEnd - timeStart) / (numPoints - 1);
-//                //CvodeInterface.MaxStep = Math.Min(CvodeInterface.MaxStep, hstep);
-//                //if (CvodeInterface.MaxStep == 0)
-//                //    CvodeInterface.MaxStep = hstep;
-//
-//
-//                model.time = 0.0;
-//                mCVode.reStart(0.0, model);
-//
-//                mCVode.assignments.Clear();
-//
-//                try
-//                {
-//                    model.testConstraints();
-//                }
-//                catch (Exception e)
-//                {
-//                    model.Warnings.Add("Constraint Violated at time = 0\n" + e.Message);
-//                }
-//            }
+    if (!modelLoaded)
+    {
+        // rather make sure that the simulator is!!!! in a stable state
+        mModel = NULL;
+        sbmlStr = "";
+    }
+    else
+    {
+        mModel->time = 0.0;
+
+        // Reset the event flags
+        mModel->resetEvents();
+
+        mModel->setCompartmentVolumes();
+
+        mModel->setInitialConditions();
+
+        mModel->convertToAmounts();
+
+        // in case we have ODE rules we should assign those as initial values
+        mModel->InitializeRateRuleSymbols();
+        mModel->InitializeRates();
+        // and of course initial assignments should override anything
+        mModel->evalInitialAssignments();
+        mModel->convertToAmounts();
+        // also we might need to set some initial assignment rules.
+        mModel->convertToConcentrations();
+        mModel->computeRules(mModel->y);
+        mModel->InitializeRates();
+        mModel->InitializeRateRuleSymbols();
+        mModel->evalInitialAssignments();
+        mModel->computeRules(mModel->y);
+
+        mModel->convertToAmounts();
+
+        if (mComputeAndAssignConservationLaws && ! mConservedTotalChanged)
+        {
+        	mModel->computeConservedTotals();
+        }
+
+        mCVode->AssignNewVector(mModel, true);
+        mCVode->TestRootsAtInitialTime();
+
+        //double hstep = (timeEnd - timeStart) / (numPoints - 1);
+        //CvodeInterface.MaxStep = Math.Min(CvodeInterface.MaxStep, hstep);
+        //if (CvodeInterface.MaxStep == 0)
+        //    CvodeInterface.MaxStep = hstep;
+
+
+        mModel->time = 0.0;
+        mCVode->reStart(0.0, mModel);
+
+        mCVode->assignments.clear();//Clear();
+
+        try
+        {
+            mModel->testConstraints();
+        }
+        catch (Exception e)
+        {
+            mModel->Warnings.push_back("Constraint Violated at time = 0\n" + e.Message);
+            Log(lWarning)<<"Constraint Violated at time = 0\n"<<e.Message;
+        }
+    }
 }
 //
 //        Help(

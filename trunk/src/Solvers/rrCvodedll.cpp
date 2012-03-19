@@ -6,23 +6,11 @@
 #include "cvode/cvode_dense.h"
 #include "rrCvodedll.h"
 
-// C File IO interface routines
-FILE *fileOpen (char *fileName)
-{
-	return fopen (fileName, "w");
-}
-
-void fileClose (FILE *fp)
-{
-	fclose (fp);
-}
-
 // Creates a new N_Vector object and returns a pointer to the caller
 void *NewCvode_Vector (int n)
 {
 	return N_VNew_Serial (n);
 }
-
 
 // Frees an N_Vector object
 void FreeCvode_Vector (N_Vector v)
@@ -100,7 +88,7 @@ int AllocateCvodeMem (void *cvode_mem, int n, TModelCallBack callBack, double t0
 int CVRootInit (void *cvode_mem, int numRoots, TRootCallBack callBack, void *gdata)
 {
 	if (cvode_mem == NULL) return CV_SUCCESS;
-	callBackRoot = callBack;	
+	callBackRoot = callBack;
 	return CVodeRootInit (cvode_mem, numRoots, InternalRootCall);
 }
 
@@ -197,3 +185,15 @@ int SetInitStep(void *cvode_mem, double initStep)
 	if (cvode_mem == NULL) return CV_SUCCESS;
 	return CVodeSetInitStep(cvode_mem, initStep);
 }
+
+// C File IO interface routines
+FILE *fileOpen (char *fileName)
+{
+	return fopen (fileName, "w");
+}
+
+void fileClose (FILE *fp)
+{
+	fclose (fp);
+}
+

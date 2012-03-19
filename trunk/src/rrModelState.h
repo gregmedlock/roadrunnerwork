@@ -14,7 +14,8 @@ namespace rr
 {
 class RR_DECLSPEC ModelState : public rrObject
 {
-    private:
+    protected:
+    public:
         vector<double>                  mBoundarySpeciesConcentrations;
         vector<double>                  mCompartmentVolumes;
         vector<double>                  mConservedTotals;

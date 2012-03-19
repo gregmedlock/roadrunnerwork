@@ -50,4 +50,9 @@ NLEQException::NLEQException(const string& msg)
 RRException(msg)
 {}
 
+CvodeException::CvodeException(const string& msg)
+:
+RRException(msg)
+{}
+
 }

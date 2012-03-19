@@ -12,6 +12,7 @@
 #include "rrCvodedll.h"
 #include "rrLogger.h"
 #include "rrStringUtils.h"
+#include "rrException.h"
 //---------------------------------------------------------------------------
 #if defined(__CODEGEARC__)
 #pragma package(smart_init)
@@ -26,6 +27,8 @@ namespace rr
 double 	CvodeInterface::lastTimeValue = 0;
 int 	CvodeInterface::mOneStepCount = 0;
 int 	CvodeInterface::mCount = 0;
+int 	CvodeInterface::errorFileCounter = 0;
+string  CvodeInterface::tempPathstring = "c:\\";
 // -------------------------------------------------------------------------
 // Constructor
 // Model contains all the symbol tables associated with the model
@@ -56,6 +59,7 @@ absTol(defaultAbsTol),
 //_amounts),
 //_rootsFound),
 //abstolArray),
+_amounts(NULL),
 modelDelegate(&CvodeInterface::ModelFcn)
 {
     InitializeCVODEInterface(aModel);
@@ -88,11 +92,11 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
         if (numAdditionalRules + numIndependentVariables > 0)
         {
             int allocatedMemory = numIndependentVariables + numAdditionalRules;
-            _amounts = NewCvode_Vector(allocatedMemory);
-            abstolArray = NewCvode_Vector(allocatedMemory);
+            _amounts = (IntPtr) NewCvode_Vector(allocatedMemory);
+            abstolArray = (IntPtr) NewCvode_Vector(allocatedMemory);
             for (int i = 0; i < allocatedMemory; i++)
             {
-                Cvode_SetVector(abstolArray, i, defaultAbsTol);
+                Cvode_SetVector((N_Vector) abstolArray, i, defaultAbsTol);
             }
 
             AssignNewVector(oModel, true);
@@ -108,23 +112,32 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
             SetMaxNumSteps(cvodeMem, MaxNumSteps);
 //            fileHandle = fileOpen(tempPathstring + cvodeLogFile + errorFileCounter + ".txt");
 //            SetErrFile(cvodeMem, fileHandle);
-            errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, modelDelegate, 0.0, _amounts, relTol,
-                                       abstolArray);
-            if (errCode < 0) HandleCVODEError(errCode);
+            errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, modelDelegate, 0.0, _amounts, relTol, abstolArray);
+            if (errCode < 0)
+            {
+            	HandleCVODEError(errCode);
+            }
+
             if (oModel->getNumEvents() > 0)
+            {
                 errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
+            }
+
             errCode = CvDense(cvodeMem, allocatedMemory); // int = size of systems
-            if (errCode < 0) HandleCVODEError(errCode);
+            if (errCode < 0)
+            {
+            	HandleCVODEError(errCode);
+            }
 
             oModel->resetEvents();
         }
         else if (model->getNumEvents() > 0)
         {
             int allocated = 1;
-            _amounts = NewCvode_Vector(allocated);
-            abstolArray = NewCvode_Vector(allocated);
-            Cvode_SetVector(_amounts, 0, 10);
-            Cvode_SetVector(abstolArray, 0, defaultAbsTol);
+            _amounts = (IntPtr) NewCvode_Vector(allocated);
+            abstolArray = (IntPtr) NewCvode_Vector(allocated);
+            Cvode_SetVector( (N_Vector) _amounts, 0, 10);
+            Cvode_SetVector((N_Vector) abstolArray, 0, defaultAbsTol);
 
             cvodeMem = (long*) Create_BDF_NEWTON_CVode();
             SetMaxOrder(cvodeMem, MaxBDFOrder);
@@ -146,7 +159,7 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
     }
     catch (RRException ex)
     {
-        throw new SBWApplicationException("Fatal Error while initializing CVODE");//, ex.mMessage);
+        throw SBWApplicationException("Fatal Error while initializing CVODE");//, ex.mMessage);
     }
 }
 
@@ -478,34 +491,42 @@ void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr 
 ////        [DebuggerHidden, DebuggerStepThrough]
 void CvodeInterface::HandleCVODEError(int errCode)
 {
-////            if (errCode < 0)
-////            {
-////                string msg = "";
-////                string errorFile = tempPathstring + cvodeLogFile + errorFileCounter + ".txt";
-////
-////                // and open a new file handle
-////                errorFileCounter++;
-////                IntPtr newHandle = fileOpen(tempPathstring + cvodeLogFile + errorFileCounter + ".txt");
-////                if (newHandle != IntPtr.Zero && cvodeMem != IntPtr.Zero) SetErrFile(cvodeMem, newHandle);
-////                // close error file used by the cvode library
-////                if (fileHandle != IntPtr.Zero) fileClose(fileHandle);
-////                fileHandle = newHandle;
-////
-////                try
-////                {
-////                    msg = File.ReadAllText(errorFile);
-////                    File.Delete(errorFile);
-////                }
-////                catch (Exception)
-////                {
-////                    // actually we don't need this error message any more ...
-////                    // the error code will automatically be converted by the erroCodes list
-////                    // hence if we can't read the log file there is no reason to worry the user.
-////                    //msg = " Unknown Error from CVODE (ff)";
-////                }
-////
-////                throw new CvodeException("Error in RunCVode: " + errorCodes[-errCode].msg + msg);
-////            }
+    if (errCode < 0)
+    {
+        string msg = "";
+        string errorFile = tempPathstring + cvodeLogFile + ToString(errorFileCounter) + ".txt";
+
+        // and open a new file handle
+        errorFileCounter++;
+        IntPtr newHandle = fileOpen(tempPathstring + cvodeLogFile + ToString(errorFileCounter) + ".txt");
+        if (newHandle != NULL && cvodeMem != NULL)
+        {
+        	SetErrFile(cvodeMem, newHandle);
+        }
+        // close error file used by the cvode library
+        if (fileHandle != NULL)
+        {
+        	fileClose(fileHandle);
+        }
+        fileHandle = newHandle;
+
+        try
+        {
+//            msg = File.ReadAllText(errorFile);	//Todo: enable this..
+//            File.Delete(errorFile);
+        }
+        catch (Exception)
+        {
+            // actually we don't need this error message any more ...
+            // the error code will automatically be converted by the erroCodes list
+            // hence if we can't read the log file there is no reason to worry the user.
+            //msg = " Unknown Error from CVODE (ff)";
+        }
+
+        //throw CvodeException("Error in RunCVode: " + errorCodes[-errCode].msg + msg);
+        Log(lError)<<"Error in RunCVode: "<<errCode<<msg;
+        throw CvodeException("Error in RunCVode: " + ToString(errCode) + msg);
+    }
 }
 ////
 ////        #endregion
@@ -529,7 +550,7 @@ void CvodeInterface::HandleCVODEError(int errCode)
 
 double CvodeInterface::OneStep(double timeStart, double hstep)
 {
-
+	const char tab = '\t';
     Log(lDebug3)<<"---------------------------------------------------";
     Log(lDebug3)<<"--- O N E     S T E P      ( "<<mOneStepCount<< " ) ";
     Log(lDebug3)<<"---------------------------------------------------";
@@ -545,6 +566,7 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
         // here we stop for a too small timestep ... this seems troublesome to me ...
         while (tout - timeEnd > 1E-16)
         {
+        	Log(lDebug3)<<"tout: "<<tout<<tab<<"timeEnd: "<<timeEnd;
             if (hstep < 1E-16) return tout;
 
             // here we bail in case we have no ODEs set up with CVODE ... though we should
@@ -557,9 +579,10 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
                 return tout;
             }
 
-
             if (lastTimeValue > timeStart)
+            {
                 reStart(timeStart, model);
+            }
 
             double nextTargetEndTime = tout;
             if (assignmentTimes.size() > 0 && assignmentTimes[0] < nextTargetEndTime)
@@ -568,22 +591,21 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
                 assignmentTimes.erase(0);
             }
 
-            int nResult = RunCvode(cvodeMem, nextTargetEndTime, _amounts, timeEnd); // t = double *
+            char err[512];
+			//RR_DECLSPEC int  		Run_Cvode (void *cvode_mem, double tout, N_Vector y, double *t, char *ErrMsg);
+
+            //int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  _amounts, timeEnd, err); // t = double *
+			int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  (N_Vector) _amounts, &timeEnd, err); // t = double *
 
             if (nResult == CV_ROOT_RETURN && followEvents)
             {
-//#if (PRINT_DEBUG)
-//		                        System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
-//		                        System.Diagnostics.Debug.WriteLine("--- E V E N T      ( " + nOneStepCount + " ) ");
-//		                        System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
-//#endif
+                Log(lDebug3)<<("---------------------------------------------------");
+                Log(lDebug3)<<"--- E V E N T      ( " << mOneStepCount << " ) ";
+                Log(lDebug3)<<("---------------------------------------------------");
 
                 //bool tooCloseToStart = Math.Abs(timeEnd - timeStart) > absTol;
                 bool tooCloseToStart = fabs(timeEnd - lastEvent) > relTol;
-                if (tooCloseToStart)
-                    strikes = 3;
-                else
-                    strikes--;
+                strikes = (tooCloseToStart) ? 3 : strikes--;
 
                 if (tooCloseToStart || strikes > 0)
                 {
@@ -617,7 +639,9 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
             AssignPendingEvents(timeEnd, tout);
 
             if (tout - timeEnd > 1E-16)
+            {
                 timeStart = timeEnd;
+            }
         }
         return (timeEnd);
     }
@@ -663,40 +687,55 @@ void CvodeInterface::AssignPendingEvents(const double& timeEnd, const double& to
 ////            return RetestEvents(timeEnd, handledEvents, false, out removeEvents);
 ////        }
 ////
-////        List<int> CvodeInterface::RetestEvents(double timeEnd, List<int> handledEvents, bool assignOldState)
-////        {
-////            List<int> removeEvents;
-////            return RetestEvents(timeEnd, handledEvents, assignOldState, out removeEvents);
-////        }
-////
-////        List<int> CvodeInterface::RetestEvents(double timeEnd, List<int> handledEvents, bool assignOldState, out List<int> removeEvents)
-////        {
-////            var result = new List<int>();
-////            removeEvents = new List<int>();
-////
-////            if (!RoadRunner._bConservedTotalChanged) model->computeConservedTotals();
-////            model->convertToAmounts();
-////            model->evalModel(timeEnd, BuildEvalArgument());
-////
-////            var oldState = new ModelState(model);
-////            model->evalEvents(timeEnd, BuildEvalArgument());
-////
-////            for (int i = 0; i < model->getNumEvents; i++)
-////            {
-////                if (model->eventStatusArray[i] == true && oldState.EventStatusArray[i] == false && !handledEvents.Contains(i))
-////                    result.Add(i);
-////                if (model->eventStatusArray[i] == false && oldState.EventStatusArray[i] == true && !model->eventPersistentType[i])
-////                {
-////                    removeEvents.Add(i);
-////                }
-////            }
-////            if (assignOldState)
-////                oldState.AssignToModel(model);
-////
-////            return result;
-////        }
-////
-////
+vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& handledEvents, const bool& assignOldState)
+{
+    vector<int> removeEvents;
+    return RetestEvents(timeEnd, handledEvents, assignOldState, removeEvents);
+}
+
+vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents)
+{
+    vector<int> result;// = new vector<int>();
+//     vector<int> removeEvents;// = new vector<int>();	//Todo: this code was like this originally.. which removeEvents to use???
+
+    if (!RoadRunner::mConservedTotalChanged)
+    {
+    	model->computeConservedTotals();
+    }
+
+    model->convertToAmounts();
+    vector<double> args = BuildEvalArgument();
+    model->evalModel(timeEnd, args);
+
+    ModelState *oldState = new ModelState(*model);
+
+    args = BuildEvalArgument();
+    model->evalEvents(timeEnd, args);
+
+    for (int i = 0; i < model->getNumEvents(); i++)
+    {
+//        if (model->eventStatusArray[i] == true && oldState->mEventStatusArray[i] == false && !handledEvents.Contains(i))
+		bool containsI = (find(handledEvents.begin(), handledEvents.end(), i) != handledEvents.end()) ? true : false;
+        if (model->eventStatusArray[i] == true && oldState->mEventStatusArray[i] == false && !containsI)
+        {
+            result.push_back(i);
+        }
+
+        if (model->eventStatusArray[i] == false && oldState->mEventStatusArray[i] == true && !model->eventPersistentType[i])
+        {
+            removeEvents.push_back(i);
+        }
+    }
+
+    if (assignOldState)
+    {
+        oldState->AssignToModel(*model);
+    }
+
+    return result;
+}
+
+
 void CvodeInterface::HandleRootsFound(double &timeEnd, const double& tout)
 {
     vector<int> rootsFound;// = new int[model->getNumEvents];
@@ -708,22 +747,23 @@ void CvodeInterface::HandleRootsFound(double &timeEnd, const double& tout)
 
     HandleRootsForTime(timeEnd, rootsFound);
 }
-////
-////        void CvodeInterface::TestRootsAtInitialTime()
-////        {
-////            var events = RetestEvents(0, new List<int>(), true);
-////            if (events.Count > 0)
-////            {
-////                var rootsFound = new int[model->getNumEvents];
-////                foreach (int item in events)
-////                {
-////                    rootsFound[item] = 1;
-////                }
-////                HandleRootsForTime(0, rootsFound);
-////
-////            }
-////        }
-////
+
+void CvodeInterface::TestRootsAtInitialTime()
+{
+	vector<int> dummy;
+    vector<int> events = RetestEvents(0, dummy, true); //Todo: dummy is passed but is not used..?
+    if (events.size() > 0)
+    {
+        vector<int> rootsFound(model->getNumEvents());//         = new int[model->getNumEvents];
+        vector<int>::iterator iter;
+        for(iter = rootsFound.begin(); iter != rootsFound.end(); iter ++) //int item in events)
+        {
+            (*iter) = 1;
+        }
+        HandleRootsForTime(0, rootsFound);
+    }
+}
+
 void CvodeInterface::RemovePendingAssignmentForIndex(const int& eventIndex)
 {
     for (int j = assignments.size() - 1; j >= 0; j--)
@@ -884,12 +924,12 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
     vector<double> dCurrentValues = model->GetCurrentValues();
     for (int k = 0; k < numAdditionalRules; k++)
     {
-        Cvode_SetVector(_amounts, k, dCurrentValues[k]);
+        Cvode_SetVector((N_Vector) _amounts, k, dCurrentValues[k]);
     }
 
     for (int k = 0; k < numIndependentVariables; k++)
     {
-        Cvode_SetVector(_amounts, k + numAdditionalRules, model->amounts[k]);
+        Cvode_SetVector((N_Vector) _amounts, k + numAdditionalRules, model->amounts[k]);
     }
 
     CVReInit(cvodeMem, timeEnd, _amounts, relTol, abstolArray);
@@ -909,7 +949,9 @@ void CvodeInterface::AssignResultsToModel()
 
     for (int i = 0; i < numIndependentVariables; i++)
     {
-        model->amounts[i] = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
+//        model->amounts[i] = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
+		double val = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
+        model->amounts.push_back(val);
     }
 
     vector<double> args = BuildEvalArgument();

@@ -39,20 +39,21 @@ bool ModelFromC::SetupDLLFunctions()
     }
 
     //Load functions..
-    cInitModel                        = (c_int)					GetFunctionPtr("InitModel");
-    cGetModelName                     = (c_charStar)			GetFunctionPtr("GetModelName");
-    cinitializeInitialConditions      = (c_void)                GetFunctionPtr("initializeInitialConditions");
-    csetParameterValues               = (c_void)                GetFunctionPtr("setParameterValues");
-    csetCompartmentVolumes            = (c_void)  				GetFunctionPtr("setCompartmentVolumes");
-    cgetNumLocalParameters            = (c_int_int)             GetFunctionPtr("getNumLocalParameters");
-    csetBoundaryConditions            = (c_void)                GetFunctionPtr("setBoundaryConditions");
-    csetInitialConditions             = (c_void)                GetFunctionPtr("setInitialConditions");
-    cevalInitialAssignments           = (c_void)                GetFunctionPtr("evalInitialAssignments");
-    ccomputeRules                     = (c_void_doubleStar)     GetFunctionPtr("computeRules");
-    cconvertToAmounts                 = (c_void)                GetFunctionPtr("convertToAmounts");
-    ccomputeConservedTotals           = (c_void)                GetFunctionPtr("computeConservedTotals");
-    cgetConcentration                 = (c_double_int)          GetFunctionPtr("getConcentration");
-    cGetCurrentValues                 = (c_doubleStar_void)     GetFunctionPtr("GetCurrentValues");
+    cInitModel                          = (c_int)					GetFunctionPtr("InitModel");
+    cGetModelName                       = (c_charStar)		 		GetFunctionPtr("GetModelName");
+    cinitializeInitialConditions        = (c_void)                	GetFunctionPtr("initializeInitialConditions");
+    csetParameterValues                 = (c_void)                	GetFunctionPtr("setParameterValues");
+    csetCompartmentVolumes              = (c_void)  				GetFunctionPtr("setCompartmentVolumes");
+    cgetNumLocalParameters              = (c_int_int)             	GetFunctionPtr("getNumLocalParameters");
+    csetBoundaryConditions              = (c_void)                	GetFunctionPtr("setBoundaryConditions");
+    csetInitialConditions               = (c_void)                	GetFunctionPtr("setInitialConditions");
+    cevalInitialAssignments             = (c_void)                  GetFunctionPtr("evalInitialAssignments");
+    ccomputeRules                       = (c_void_doubleStar)       GetFunctionPtr("computeRules");
+    cconvertToAmounts                   = (c_void)                  GetFunctionPtr("convertToAmounts");
+    ccomputeConservedTotals             = (c_void)                  GetFunctionPtr("computeConservedTotals");
+    cgetConcentration                   = (c_double_int)            GetFunctionPtr("getConcentration");
+    cGetCurrentValues                   = (c_doubleStar_void)       GetFunctionPtr("GetCurrentValues");
+    cevalModel                			= (c_double_doubleStar)     GetFunctionPtr("evalModel");
 	return true;
 }
 
@@ -232,7 +233,18 @@ void ModelFromC::setInitialConditions()
 
 //void  ModelFromC::computeReactionRates(double time, vector<double>& y){}
 //void  ModelFromC::computeAllRatesOfChange(){}
-//void  ModelFromC::evalModel(double time, vector<double>& y){}
+void  ModelFromC::evalModel(double time, vector<double>& y)
+{
+    if(!cevalModel)
+    {
+    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+        return;
+	}
+	double *y_vec = new double(y.size());
+
+    cevalModel(time, y_vec);
+
+}
 //void  ModelFromC::evalEvents(double time, vector<double>& y){}
 //void  ModelFromC::resetEvents(){}
 

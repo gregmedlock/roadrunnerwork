@@ -15,6 +15,7 @@ typedef char* 	(WINAPI*c_charStar)();
 typedef void    (WINAPI*c_void_doubleStar)(double*);
 typedef double  (WINAPI*c_double_int)(int);
 typedef double* (WINAPI*c_doubleStar_void)();
+typedef void	(WINAPI*c_double_doubleStar)(double, double*);
 
 class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary handles to C DLL functions
 {
@@ -38,6 +39,7 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
         c_void                      ccomputeConservedTotals;
         c_double_int   		        cgetConcentration;
         c_doubleStar_void	        cGetCurrentValues;
+        c_double_doubleStar			cevalModel;
 
 		//Utility
 		HANDLE 						GetFunctionPtr(const string& function);
@@ -68,6 +70,39 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
         void    	         	    computeConservedTotals();
         double		   				getConcentration(int index);
         vector<double> 				GetCurrentValues();
+
+//        int                         getNumIndependentVariables();
+//        int                         getNumDependentVariables();
+//        int                         getNumTotalVariables();
+//        int                         getNumBoundarySpecies();
+//        int                         getNumGlobalParameters();
+//        int                         getNumCompartments();
+//        int                         getNumReactions();
+//        int                         getNumRules();
+//        int                         getNumEvents();
+//        void                        initializeInitialConditions();
+//        void                        setInitialConditions();
+//        void                        setParameterValues();
+//        void                        setBoundaryConditions();
+//        void                        InitializeRates();
+//        void                        AssignRates();
+//        void                        AssignRates(vector<double>& rates);
+//        void                        computeConservedTotals();
+//        void                        computeEventPriorites();
+//        void                        setConcentration(int index, double value);
+//        void                        convertToAmounts();
+//        void                        convertToConcentrations();
+//        void                        updateDependentSpeciesValues(vector<double>& _y);
+//        void                        computeRules(vector<double>& _y);
+//        void                        computeReactionRates(double time, vector<double>& y);
+//        void                        computeAllRatesOfChange();
+		void                        evalModel(double time, vector<double>& y);
+//        void                        evalEvents(double time, vector<double>& y);
+//        void                        resetEvents();
+//        void                        evalInitialAssignments();
+//        void                        testConstraints();
+//        void                        InitializeRateRuleSymbols();
+
 };
 
 }

@@ -5,6 +5,7 @@
 #include "rrRandom.h"
 #include "rrPendingAssignment.h"
 #include "cvode/cvode.h"
+#include "rrCvodedll.h"
 
 using std::string;
 
@@ -16,9 +17,6 @@ typedef void* CVodeMemPtr;
 
 class RR_DECLSPEC CvodeInterface : public rrObject
 {
-    /// <summary>
-    /// Point to the CVODE DLL to use
-    /// </summary>
     private:
 		const string 		        CVODE;
 		static int 			        mCount;
@@ -43,21 +41,21 @@ class RR_DECLSPEC CvodeInterface : public rrObject
        	int 					    numAdditionalRules;
 		void 						HandleCVODEError(int errCode);
         vector<double> 				assignmentTimes;// = new List<double>();
-       	vector<PendingAssignment> 	assignments;// = new List<PendingAssignment>();
+
         bool 						followEvents;
        	void 	                    AssignPendingEvents(const double& timeEnd, const double& tout);
-       	vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents);
-       	vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, vector<int> &removeEvents);
-       	vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, bool assignOldState);
-       	vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, bool assignOldState, vector<int> &removeEvents);
+       	vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents);
+       	vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents, vector<int>& removeEvents);
+       	vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents, const bool& assignOldState);
+       	vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents);
 		void 					    HandleRootsFound(double &timeEnd, const double& tout);
-       	void                        TestRootsAtInitialTime();
        	void                        RemovePendingAssignmentForIndex(const int& eventIndex);
        	void                        SortEventsByPriority(vector<int>& firedEvents);
        	void                        HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound);
        	void                        AssignResultsToModel();
 
 	public:
+       	vector<PendingAssignment> 	assignments;// = new List<PendingAssignment>();
     	Random 			  		    mRandom;// { get; set; }
         int 					    defaultMaxAdamsOrder;// = 12;
         int 					    defaultMaxBDFOrder;// = 5;
@@ -72,6 +70,15 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         int 					    errCode;
         static double 			    lastTimeValue;
 
+                                    // -------------------------------------------------------------------------
+                                    // Constructor
+                                    // Model contains all the symbol tables associated with the model
+                                    // ev is the model function
+                                    // -------------------------------------------------------------------------
+									CvodeInterface(IModel* oModel);
+							   	   ~CvodeInterface();
+
+       	void                        TestRootsAtInitialTime();
 //        public delegate void TCallBackModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
 		typedef void (CvodeInterface::*TCallBackModelFcn)(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
 
@@ -91,8 +98,13 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //
 //        [DllImport(CVODE, EntryPoint = "NewCvode_Vector", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
-       	static IntPtr 			NewCvode_Vector(int n){return NULL;}
+//       	static IntPtr 			NewCvode_Vector(int n);
 //
+
+//        [DllImport(CVODE, EntryPoint = "Cvode_SetVector", ExactSpelling = false,
+//            CharSet = CharSet.Unicode, SetLastError = true)]
+//		void 					Cvode_SetVector(IntPtr v, int Index, double Value){};
+
 //        [DllImport(CVODE, EntryPoint = "FreeCvode_Vector", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
 		void 					FreeCvode_Vector(IntPtr vect){};
@@ -101,9 +113,6 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //            CharSet = CharSet.Unicode, SetLastError = true)]
 		void 					FreeCvode_Mem(IntPtr p){};
 //
-//        [DllImport(CVODE, EntryPoint = "Cvode_SetVector", ExactSpelling = false,
-//            CharSet = CharSet.Unicode, SetLastError = true)]
-		void 					Cvode_SetVector(IntPtr v, int Index, double Value){};
 //
 //        [DllImport(CVODE, EntryPoint = "Cvode_GetVector", ExactSpelling = false,
 //            CharSet = CharSet.Unicode, SetLastError = true)]
@@ -133,7 +142,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //
 //        [DllImport(CVODE, EntryPoint = "Run_Cvode")]
 //        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr  y, ref double t, string ErrMsg){};
-		int 					RunCvode(IntPtr cvode_mem, double tout, IntPtr y, double t){return NULL;}
+//		int 					RunCvode(IntPtr cvode_mem, double tout, IntPtr y, double t){return NULL;}
 //
 //        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr y, ref double t);  // t = double *
 //
@@ -188,13 +197,6 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //        public double[] GetCopy(double[] oVector);
 //        public bool[] GetCopy(bool[] oVector);
 //        public void EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata);
-//        // -------------------------------------------------------------------------
-//        // Constructor
-//        // Model contains all the symbol tables associated with the model
-//        // ev is the model function
-//        // -------------------------------------------------------------------------
-								CvodeInterface(IModel* oModel);
-							   ~CvodeInterface();
 //
 		bool 					HaveVariables();
 		void 					InitializeCVODEInterface(IModel *oModel);
