@@ -110,7 +110,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 									        ModelGenerator();
 		virtual						       ~ModelGenerator();
         void								Reset();
-        int                                 getNumberOfReactions();
+        int                                 GetNumberOfReactions();
         int                                 NumAdditionalRates();		//this variable is the size of moMapRateRule
 
         StringList                          getCompartmentList();

@@ -14,8 +14,9 @@ typedef int 	(WINAPI*c_int_int)(int);
 typedef char* 	(WINAPI*c_charStar)();
 typedef void    (WINAPI*c_void_doubleStar)(double*);
 typedef double  (WINAPI*c_double_int)(int);
-typedef double* (WINAPI*c_doubleStar_void)();
-typedef void	(WINAPI*c_double_doubleStar)(double, double*);
+typedef double* (WINAPI*c_doubleStar)();
+typedef void	(WINAPI*c_void_double_doubleStar)(double, double*);
+
 
 class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary handles to C DLL functions
 {
@@ -25,6 +26,14 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
         bool						mIsInitialized;	//If all functions are found properly in the dll, this one is true
 		HINSTANCE					mDLLHandle;
 
+        double*						mAmounts;		//This is the "amounts" data in the DLL. IModel also has amounts.. CONFUSING
+		double*						m_dydt;	   		//This is the "dydt" data in the DLL. IModel also has amounts.. CONFUSING
+		double*						mInitY;
+        double*						mY;             //Corresponds to y in IModel
+        double*						mRates;
+        double*						mGP;
+
+		//Function pointers...
         c_int 				        cInitModel;
         c_charStar 		            cGetModelName;
         c_void                      cinitializeInitialConditions;
@@ -38,23 +47,23 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
         c_void                      cconvertToAmounts;
         c_void                      ccomputeConservedTotals;
         c_double_int   		        cgetConcentration;
-        c_doubleStar_void	        cGetCurrentValues;
-        c_double_doubleStar			cevalModel;
+        c_doubleStar	        	cGetCurrentValues;
+        c_void_double_doubleStar 	cevalModel;
+        c_void                      cconvertToConcentrations;
+        c_void_double_doubleStar    cevalEvents;
+
 
 		//Utility
 		HANDLE 						GetFunctionPtr(const string& function);
 
-
     public:
 						    		ModelFromC(CGenerator* generator, HINSTANCE dllHandle = NULL);
                                    ~ModelFromC();
-		bool						SetupDLLFunctions();
-
-
         //Non inherited
         bool						SetupDLLData();
+		bool						SetupDLLFunctions();
 
-
+        void						LoadData();	//This one copies data from the DLL to vectors and lists in the model..
         //The following functions C equivalent may need to be in the DLL
         //Inherited functions
     	void 						setCompartmentVolumes();
@@ -69,7 +78,11 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
         void 	                	convertToAmounts();
         void    	         	    computeConservedTotals();
         double		   				getConcentration(int index);
+
+        //Access dll data
         vector<double> 				GetCurrentValues();
+        double		   				GetAmounts(const int& i);
+        vector<double>				GetdYdT();
 
 //        int                         getNumIndependentVariables();
 //        int                         getNumDependentVariables();
@@ -91,13 +104,13 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
 //        void                        computeEventPriorites();
 //        void                        setConcentration(int index, double value);
 //        void                        convertToAmounts();
-//        void                        convertToConcentrations();
+        void                        convertToConcentrations();
 //        void                        updateDependentSpeciesValues(vector<double>& _y);
 //        void                        computeRules(vector<double>& _y);
 //        void                        computeReactionRates(double time, vector<double>& y);
 //        void                        computeAllRatesOfChange();
 		void                        evalModel(double time, vector<double>& y);
-//        void                        evalEvents(double time, vector<double>& y);
+        void                        evalEvents(double time, vector<double>& y);
 //        void                        resetEvents();
 //        void                        evalInitialAssignments();
 //        void                        testConstraints();

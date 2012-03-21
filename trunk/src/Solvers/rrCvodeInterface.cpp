@@ -6,13 +6,15 @@
 #include <map>
 #include "rrRoadRunner.h"
 #include "rrIModel.h"
-#include "rrCvodeInterface.h"
+#include "rrCvodedll.h"
 #include "rrException.h"
 #include "rrModelState.h"
-#include "rrCvodedll.h"
 #include "rrLogger.h"
 #include "rrStringUtils.h"
 #include "rrException.h"
+#include "rrCvodeInterface.h"
+#include "rrCvodeDll.h"
+
 //---------------------------------------------------------------------------
 #if defined(__CODEGEARC__)
 #pragma package(smart_init)
@@ -29,6 +31,7 @@ int 	CvodeInterface::mOneStepCount = 0;
 int 	CvodeInterface::mCount = 0;
 int 	CvodeInterface::errorFileCounter = 0;
 string  CvodeInterface::tempPathstring = "c:\\";
+IModel* CvodeInterface::model = NULL;
 // -------------------------------------------------------------------------
 // Constructor
 // Model contains all the symbol tables associated with the model
@@ -41,7 +44,8 @@ CvodeInterface::CvodeInterface(IModel *aModel)
 defaultReltol(1E-6),
 defaultAbsTol(1E-12),
 defaultMaxNumSteps(10000),
-gdata(NULL),
+//gdata(NULL),
+_amounts(NULL),
 cvodeLogFile("cvodeLogFile"),
 followEvents(true),
 mRandom(),
@@ -54,13 +58,13 @@ MinStep(0.0),
 MaxStep(0.0),
 MaxNumSteps(defaultMaxNumSteps),
 relTol(defaultReltol),
-absTol(defaultAbsTol),
+absTol(defaultAbsTol)
 //errorFileCounter,
 //_amounts),
 //_rootsFound),
 //abstolArray),
-_amounts(NULL),
-modelDelegate(&CvodeInterface::ModelFcn)
+
+//modelDelegate(&CvodeInterface::ModelFcn)
 {
     InitializeCVODEInterface(aModel);
 }
@@ -86,14 +90,18 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
         model = oModel;
         numIndependentVariables = oModel->getNumIndependentVariables();
         numAdditionalRules = oModel->rateRules.size();
-//        modelDelegate = &ModelFcn;
+
+////                modelDelegate = new TCallBackModelFcn(ModelFcn);
+////                eventDelegate = new TCallBackRootFcn(EventFcn);
+
+//		modelDelegate = &ModelFcn;
 //        eventDelegate = new TCallBackRootFcn(EventFcn);
 
         if (numAdditionalRules + numIndependentVariables > 0)
         {
             int allocatedMemory = numIndependentVariables + numAdditionalRules;
-            _amounts = (IntPtr) NewCvode_Vector(allocatedMemory);
-            abstolArray = (IntPtr) NewCvode_Vector(allocatedMemory);
+            _amounts = 	NewCvode_Vector(allocatedMemory);
+            abstolArray = NewCvode_Vector(allocatedMemory);
             for (int i = 0; i < allocatedMemory; i++)
             {
                 Cvode_SetVector((N_Vector) abstolArray, i, defaultAbsTol);
@@ -103,16 +111,17 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 
             cvodeMem = (long*) Create_BDF_NEWTON_CVode();
             SetMaxOrder(cvodeMem, MaxBDFOrder);
-            //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
-            //SetMaxOrder(cvodeMem, MaxAdamsOrder);
             CVodeSetInitStep(cvodeMem, InitStep);
             SetMinStep(cvodeMem, MinStep);
             SetMaxStep(cvodeMem, MaxStep);
 
             SetMaxNumSteps(cvodeMem, MaxNumSteps);
-//            fileHandle = fileOpen(tempPathstring + cvodeLogFile + errorFileCounter + ".txt");
-//            SetErrFile(cvodeMem, fileHandle);
-            errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, modelDelegate, 0.0, _amounts, relTol, abstolArray);
+
+            fileHandle = fileOpen(tempPathstring + cvodeLogFile + ToString(errorFileCounter) + ".txt");
+            SetErrFile(cvodeMem, fileHandle);
+//            errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, modelDelegate, 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
+			errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, ModelFcn, 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
+
             if (errCode < 0)
             {
             	HandleCVODEError(errCode);
@@ -120,7 +129,7 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 
             if (oModel->getNumEvents() > 0)
             {
-                errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
+                //errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
             }
 
             errCode = CvDense(cvodeMem, allocatedMemory); // int = size of systems
@@ -134,25 +143,35 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
         else if (model->getNumEvents() > 0)
         {
             int allocated = 1;
-            _amounts = (IntPtr) NewCvode_Vector(allocated);
-            abstolArray = (IntPtr) NewCvode_Vector(allocated);
+            _amounts =  NewCvode_Vector(allocated);
+            abstolArray =  NewCvode_Vector(allocated);
             Cvode_SetVector( (N_Vector) _amounts, 0, 10);
-            Cvode_SetVector((N_Vector) abstolArray, 0, defaultAbsTol);
+            Cvode_SetVector( (N_Vector) abstolArray, 0, defaultAbsTol);
 
             cvodeMem = (long*) Create_BDF_NEWTON_CVode();
             SetMaxOrder(cvodeMem, MaxBDFOrder);
-            //cvodeMem = Create_ADAMS_FUNCTIONAL_CVode();
-            //SetMaxOrder(cvodeMem, MaxAdamsOrder);
             SetMaxNumSteps(cvodeMem, MaxNumSteps);
 
-            //fileHandle = fileOpen(tempPathstring + cvodeLogFile + errorFileCounter + ".txt");
-            //SetErrFile(cvodeMem, fileHandle);
-            errCode = AllocateCvodeMem(cvodeMem, allocated, modelDelegate, 0.0, _amounts, relTol, abstolArray);
-            if (errCode < 0) HandleCVODEError(errCode);
+            fileHandle = fileOpen(tempPathstring + cvodeLogFile + ToString(errorFileCounter) + ".txt");
+            SetErrFile(cvodeMem, fileHandle);
+
+//            errCode = AllocateCvodeMem(cvodeMem, allocated, modelDelegate, 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
+            errCode = AllocateCvodeMem(cvodeMem, allocated, ModelFcn, 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
+            if (errCode < 0)
+            {
+            	HandleCVODEError(errCode);
+            }
+
             if (oModel->getNumEvents() > 0)
-                errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
+            {
+                //errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
+            }
+
             errCode = CvDense(cvodeMem, allocated); // int = size of systems
-            if (errCode < 0) HandleCVODEError(errCode);
+            if (errCode < 0)
+            {
+            	HandleCVODEError(errCode);
+            }
 
             oModel->resetEvents();
         }
@@ -366,39 +385,95 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 ////        static int nCount;
 ////        static int nRootCount;
 ////
-void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
-{
-    ModelState *oldState = new ModelState(*model);
 
-//    var dCVodeArgument = new double[model.amounts.Length + model.rateRules.Length];
+
+////        public void ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
+////        {
+////            var oldState = new ModelState(model);
+////
+////            var dCVodeArgument = new double[model.amounts.Length + model.rateRules.Length];
+////            Marshal.Copy(y, dCVodeArgument, 0, Math.Min(n, dCVodeArgument.Length));
+////
+////#if (PRINT_STEP_DEBUG)
+////		            System.Diagnostics.Debug.Write("CVode In: (" + nCount + ")" );
+////		            for (int i = 0; i < dCVodeArgument.Length; i++)
+////		            {
+////		                System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
+////		            }
+////		            System.Diagnostics.Debug.WriteLine("");
+////#endif
+////
+////            model.evalModel(time, dCVodeArgument);
+////
+////            model.rateRules.CopyTo(dCVodeArgument, 0);
+////            model.dydt.CopyTo(dCVodeArgument, model.rateRules.Length);
+////
+////#if (PRINT_STEP_DEBUG)
+////		            System.Diagnostics.Debug.Write("CVode Out: (" + nCount + ")");
+////		            for (int i = 0; i < dCVodeArgument.Length; i++)
+////		            {
+////		                System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
+////		            }
+////		            System.Diagnostics.Debug.WriteLine("");
+////#endif
+////
+////            Marshal.Copy(dCVodeArgument, 0, ydot, Math.Min(dCVodeArgument.Length, n));
+////
+////            nCount++;
+////
+////            oldState.AssignToModel(model);
+////        }
+
+//void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
+void ModelFcn(int n, double time, double* y, double* ydot, void* fdata)
+{
+    IModel *model = CvodeInterface::model;
+    ModelState oldState(*model);
+    int size = model->amounts.size() + model->rateRules.size();
+	vector<double> dCVodeArgument(size);//model->.amounts.Length + model.rateRules.Length];
+
 //    Marshal.Copy(y, dCVodeArgument, 0, Math.Min(n, dCVodeArgument.Length));
-//
-//	#if (PRINT_STEP_DEBUG)
-//	    System.Diagnostics.Debug.Write("CVode In: (" + nCount + ")" );
-//	    for (int i = 0; i < dCVodeArgument.Length; i++)
-//	    {
-//	        System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
-//	    }
-//	    System.Diagnostics.Debug.WriteLine("");
-//	#endif
-//	model.evalModel(time, dCVodeArgument);
+	for(int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
+    {
+		dCVodeArgument[i] = y[i];
+    }
+
+    stringstream msg;
+    msg<<"CVode In: ("<<CvodeInterface::mCount << ")\t";
+
+    for (int i = 0; i < dCVodeArgument.size(); i++)
+    {
+        msg<<ToString(dCVodeArgument[i], "%g") + ", ";
+    }
+    Log(lDebug)<<msg.str();
+
+	msg.str("");
+	model->evalModel(time, dCVodeArgument);
 //	model.rateRules.CopyTo(dCVodeArgument, 0);
-//	model.dydt.CopyTo(dCVodeArgument, model.rateRules.Length);
-//
-//	#if (PRINT_STEP_DEBUG)
-//	    System.Diagnostics.Debug.Write("CVode Out: (" + nCount + ")");
-//	    for (int i = 0; i < dCVodeArgument.Length; i++)
-//	    {
-//	        System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
-//	    }
-//	    System.Diagnostics.Debug.WriteLine("");
-//	#endif
-//
+	dCVodeArgument = model->rateRules;
+
+    //	model.dydt.CopyTo(dCVodeArgument, model.rateRules.Length);
+    for(int i = 0 ; i < model->GetdYdT().size(); i++)
+    {
+		dCVodeArgument.push_back(model->GetdYdT().at(i));
+    }
+
+    msg<<"CVode Out: ("<<CvodeInterface::mCount << ")\t" ;
+    for (int i = 0; i < dCVodeArgument.size(); i++)
+    {
+		msg<<ToString(dCVodeArgument[i], "%g") + ", ";
+    }
+    Log(lDebug)<<msg.str();
+
 //    Marshal.Copy(dCVodeArgument, 0, ydot, Math.Min(dCVodeArgument.Length, n));
-//
-//    nCount++;
-//
-//    oldState.AssignToModel(model);
+
+    for (int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
+    {
+        ydot[i]= dCVodeArgument[i];
+    }
+
+    CvodeInterface::mCount++;
+    oldState.AssignToModel(*model);
 }
 
 ////        double[] CvodeInterface::GetCopy(double[] oVector)
@@ -488,7 +563,7 @@ void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr 
 ////            return oErrorCodes;
 ////        }
 ////
-////        [DebuggerHidden, DebuggerStepThrough]
+
 void CvodeInterface::HandleCVODEError(int errCode)
 {
     if (errCode < 0)
@@ -498,7 +573,7 @@ void CvodeInterface::HandleCVODEError(int errCode)
 
         // and open a new file handle
         errorFileCounter++;
-        IntPtr newHandle = fileOpen(tempPathstring + cvodeLogFile + ToString(errorFileCounter) + ".txt");
+        FILE* newHandle = fileOpen(tempPathstring + cvodeLogFile + ToString(errorFileCounter) + ".txt");
         if (newHandle != NULL && cvodeMem != NULL)
         {
         	SetErrFile(cvodeMem, newHandle);
@@ -528,25 +603,6 @@ void CvodeInterface::HandleCVODEError(int errCode)
         throw CvodeException("Error in RunCVode: " + ToString(errCode) + msg);
     }
 }
-////
-////        #endregion
-////
-////        List<double> assignmentTimes = new List<double>();
-////        List<PendingAssignment> assignments = new List<PendingAssignment>();
-////        bool followEvents = true;
-////
-////        double lastEvent;
-////        //List<double> eventOccurance = new List<double>();
-////
-////        #region IDisposable Members
-////
-////        void Dispose()
-////        {
-////            release();
-////        }
-////
-////        #endregion
-////
 
 double CvodeInterface::OneStep(double timeStart, double hstep)
 {
@@ -567,7 +623,10 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
         while (tout - timeEnd > 1E-16)
         {
         	Log(lDebug3)<<"tout: "<<tout<<tab<<"timeEnd: "<<timeEnd;
-            if (hstep < 1E-16) return tout;
+            if (hstep < 1E-16)
+            {
+            	return tout;
+            }
 
             // here we bail in case we have no ODEs set up with CVODE ... though we should
             // still at least evaluate the model function
@@ -591,11 +650,11 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
                 assignmentTimes.erase(0);
             }
 
-            char err[512];
+            char* err;
 			//RR_DECLSPEC int  		Run_Cvode (void *cvode_mem, double tout, N_Vector y, double *t, char *ErrMsg);
 
             //int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  _amounts, timeEnd, err); // t = double *
-			int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  (N_Vector) _amounts, &timeEnd, err); // t = double *
+			int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  _amounts, &timeEnd, err); // t = double *
 
             if (nResult == CV_ROOT_RETURN && followEvents)
             {
@@ -617,7 +676,7 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
             else if (nResult == CV_SUCCESS || !followEvents)
             {
                 //model->resetEvents();
-                model->time = tout;
+                model->SetTime(tout);
                 AssignResultsToModel();
             }
             else
@@ -658,7 +717,7 @@ void CvodeInterface::AssignPendingEvents(const double& timeEnd, const double& to
     {
         if (timeEnd >= assignments[i].GetTime())
         {
-            model->time = tout;
+            model->SetTime(tout);
             AssignResultsToModel();
             model->convertToConcentrations();
             model->updateDependentSpeciesValues(model->y);
@@ -734,7 +793,6 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& han
 
     return result;
 }
-
 
 void CvodeInterface::HandleRootsFound(double &timeEnd, const double& tout)
 {
@@ -963,59 +1021,79 @@ void CvodeInterface::AssignResultsToModel()
 // Restart the simulation using a different initial condition
 void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
 {
-////            double[] dTemp = model->GetCurrentValues();
-////            double dMin = absTol;
-////
-////            for (int i = 0; i < numAdditionalRules; i++)
-////            {
-////                if (dTemp[i] > 0 && dTemp[i]/1000f < dMin) dMin = dTemp[i]/1000f;
-////            }
-////            for (int i = 0; i < numIndependentVariables; i++)
-////            {
-////                if (oModel.amounts[i] > 0 && oModel.amounts[i]/1000f < dMin) dMin = oModel.amounts[i]/1000f;
-////            }
-////
-////            for (int i = 0; i < numAdditionalRules; i++)
-////            {
-////                if (bAssignNewTolerances) setAbsTolerance(i, dMin);
-////                Cvode_SetVector(_amounts, i, dTemp[i]);
-////            }
-////            for (int i = 0; i < numIndependentVariables; i++)
-////            {
-////                if (bAssignNewTolerances) setAbsTolerance(i + numAdditionalRules, dMin);
-////                Cvode_SetVector(_amounts, i + numAdditionalRules, oModel.amounts[i]);
-////            }
-////
-////
-////            if (!HaveVariables && model->getNumEvents > 0)
-////            {
-////                if (bAssignNewTolerances) setAbsTolerance(0, dMin);
-////                Cvode_SetVector(_amounts, 0, 1f);
-////            }
-////
-////            //if (bAssignNewTolerances)
-////            //{
-////            //    System.Diagnostics.Debug.WriteLine(string.Format("Set tolerance to: {0:G}", dMin));
-////            //}
+    vector<double> dTemp = model->GetCurrentValues();
+    double dMin = absTol;
+
+    for (int i = 0; i < numAdditionalRules; i++)
+    {
+        if (dTemp[i] > 0 && dTemp[i]/1000. < dMin)
+        {
+        	dMin = dTemp[i]/1000.0;
+        }
+    }
+
+    for (int i = 0; i < numIndependentVariables; i++)
+    {
+        if (oModel->GetAmounts(i) > 0 && oModel->GetAmounts(i)/1000.0 < dMin)	//Todo: was calling oModel->amounts[i]  is this in fact GetAmountsForSpeciesNr(i) ??
+        {
+        	dMin = oModel->amounts[i]/1000.0;
+        }
+    }
+
+    for (int i = 0; i < numAdditionalRules; i++)
+    {
+        if (bAssignNewTolerances)
+        {
+        	setAbsTolerance(i, dMin);
+        }
+        Cvode_SetVector(_amounts, i, dTemp[i]);
+    }
+
+    for (int i = 0; i < numIndependentVariables; i++)
+    {
+        if (bAssignNewTolerances)
+        {
+        	setAbsTolerance(i + numAdditionalRules, dMin);
+        }
+        Cvode_SetVector(_amounts, i + numAdditionalRules, oModel->GetAmounts(i));
+    }
+
+    if (!HaveVariables() && model->getNumEvents() > 0)
+    {
+        if (bAssignNewTolerances)
+        {
+        	setAbsTolerance(0, dMin);
+        }
+        Cvode_SetVector(_amounts, 0, 1.0);
+    }
+
+    //if (bAssignNewTolerances)
+    //{
+    //    System.Diagnostics.Debug.WriteLine(string.Format("Set tolerance to: {0:G}", dMin));
+    //}
 }
-////
-////
+
+
 void CvodeInterface::AssignNewVector(IModel *model)
 {
-////            AssignNewVector(model, false);
+	AssignNewVector(model, false);
 }
-////
-////        void setAbsTolerance(int index, double dValue)
-////        {
-////            double dTolerance = dValue;
-////            if (dValue > 0 && absTol > dValue)
-////                dTolerance = dValue;
-////            else
-////                dTolerance = absTol;
-////
-////            Cvode_SetVector(abstolArray, index, dTolerance);
-////        }
-////
+
+void CvodeInterface::setAbsTolerance(int index, double dValue)
+{
+    double dTolerance = dValue;
+    if (dValue > 0 && absTol > dValue)
+    {
+        dTolerance = dValue;
+    }
+    else
+    {
+        dTolerance = absTol;
+    }
+
+    Cvode_SetVector(abstolArray, index, dTolerance);
+}
+
 int CvodeInterface::reStart(double timeStart, IModel* model)
 {
     AssignNewVector(model);
@@ -1032,13 +1110,24 @@ int CvodeInterface::reStart(double timeStart, IModel* model)
 ////            return (Cvode_GetVector(_amounts, index + numAdditionalRules));
 ////        }
 ////
+
+////        internal double[] BuildEvalArgument()
+////        {
+////            var dResult = new double[model.amounts.Length + model.rateRules.Length];
+////            double[] dCurrentValues = model.GetCurrentValues();
+////            dCurrentValues.CopyTo(dResult, 0);
+////            model.amounts.CopyTo(dResult, model.rateRules.Length);
+////            return dResult;
+////        }
+
+
 vector<double> CvodeInterface::BuildEvalArgument()
 {
-    vector<double> dResult; //= new double[model->amounts.Length + model->rateRules.Length];
+    vector<double> dResult;
     vector<double> dCurrentValues = model->GetCurrentValues();
-    dResult = dCurrentValues;//dCurrentValues.CopyTo(dResult, 0);
+    dResult = dCurrentValues;
     dResult.insert(dResult.end(), model->amounts.begin(), model->amounts.end());
-//    model->amounts.CopyTo(dResult, model->rateRules.Length);
+    Log(lDebug4)<<"Size of dResult in BuildEvalArgument: "<<dResult.size();
     return dResult;
 }
 ////

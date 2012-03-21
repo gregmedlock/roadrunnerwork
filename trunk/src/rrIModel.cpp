@@ -78,7 +78,7 @@ int IModel::getNumEvents()
 }
 
 //////Virtual functions that should be implemented in decendant..
-void  IModel::initializeInitialConditions(){}
+//void  IModel::initializeInitialConditions(){}
 void  IModel::setInitialConditions(){}
 void  IModel::setParameterValues(){}
 void  IModel::setBoundaryConditions(){}
@@ -89,13 +89,13 @@ void  IModel::computeConservedTotals(){}
 void  IModel::computeEventPriorites(){}
 void  IModel::setConcentration(int index, double value){}
 void  IModel::convertToAmounts(){}
-void  IModel::convertToConcentrations(){}
+//void  IModel::convertToConcentrations() = 0;
 void  IModel::updateDependentSpeciesValues(vector<double>& _y){}
 void  IModel::computeRules(vector<double>& _y){}
 void  IModel::computeReactionRates(double time, vector<double>& y){}
 void  IModel::computeAllRatesOfChange(){}
 void  IModel::evalModel(double time, vector<double>& y){}
-void  IModel::evalEvents(double time, vector<double>& y){}
+//void  IModel::evalEvents(double time, vector<double>& y){}
 void  IModel::resetEvents(){}
 void  IModel::evalInitialAssignments(){}
 void  IModel::testConstraints(){}

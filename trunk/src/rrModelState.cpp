@@ -19,20 +19,40 @@ ModelState::ModelState(IModel& model)
 
 void ModelState::InitializeFromModel(IModel& model)
 {
+	model.LoadData();
+
     model.convertToConcentrations();
-    mFloatingSpeciesConcentrations 	= GetCopy(model.y);
-    mBoundarySpeciesConcentrations 	= GetCopy(model.bc);
-    mCompartmentVolumes 			= GetCopy(model.c);
-    mGlobalParameters 				= GetCopy(model.gp);
-    mConservedTotals 				= GetCopy(model.ct);
-    mDyDt 							= GetCopy(model.dydt);
-    mRates 							= GetCopy(model.rates);
-    mRateRules 						= GetCopy(model.rateRules);
-    mModifiableSpeciesReferences 	= GetCopy(model.sr);
-    mTime 							= model.time;
-    mEventStatusArray 		   		= GetCopy(model.eventStatusArray);
-    mEventTests 			   		= GetCopy(model.eventTests);
-    mPreviousEventStatusArray  		= GetCopy(model.previousEventStatusArray);
+    mFloatingSpeciesConcentrations 	= model.y;
+    mBoundarySpeciesConcentrations 	= model.bc;
+    mCompartmentVolumes 			= model.c;
+    mGlobalParameters 				= model.gp;
+    mConservedTotals 				= model.ct;
+    mDyDt 							= model.dydt;
+    mRates 							= model.rates;
+    mRateRules 						= model.rateRules;
+    mModifiableSpeciesReferences 	= model.sr;
+    mTime 							= model.GetTime();
+    mEventStatusArray 		   		= model.eventStatusArray;
+    mEventTests 			   		= model.eventTests;
+    mPreviousEventStatusArray  		= model.previousEventStatusArray;
+}
+
+void ModelState::AssignToModel(IModel& model)
+{
+   model.y 		                    = mFloatingSpeciesConcentrations;
+   model.bc 	                    = mBoundarySpeciesConcentrations;
+   model.c 		                    = mCompartmentVolumes;
+   model.gp 	                    = mGlobalParameters;
+   model.ct 	                    = mConservedTotals;
+   model.dydt 	                    = mDyDt;
+   model.rates 			            = mRates;
+   model.rateRules 		            = mRateRules;
+   model.eventTests 	            = mEventTests;
+   model.eventStatusArray 	        = mEventStatusArray;
+   model.previousEventStatusArray 	= mPreviousEventStatusArray;
+   model.SetTime(mTime);
+   model.convertToAmounts();
+   model.sr = mModifiableSpeciesReferences;
 }
 
 vector<double> ModelState::GetCopy(const vector<double>& oVector)
@@ -44,7 +64,6 @@ vector<bool> ModelState::GetCopy(const vector<bool>& oVector)
 {
     return vector<bool>(oVector);
 }
-
 
 //        public void WriteTo(string fileName)
 //        {
@@ -74,27 +93,6 @@ vector<bool> ModelState::GetCopy(const vector<bool>& oVector)
 //            stream.Close();
 //        }
 //
-void ModelState::AssignToModel(IModel& model)
-{
-   model.y = mFloatingSpeciesConcentrations;
-   model.bc = mBoundarySpeciesConcentrations;
-   model.c = mCompartmentVolumes;
-   model.gp = mGlobalParameters;
-   model.ct = mConservedTotals;
-
-   model.dydt = mDyDt;
-   model.rates = mRates;
-   model.rateRules = mRateRules;
-
-   model.eventTests = mEventTests;
-   model.eventStatusArray = mEventStatusArray;
-   model.previousEventStatusArray = mPreviousEventStatusArray;
-   model.time = mTime;
-   model.convertToAmounts();
-
-   model.sr = mModifiableSpeciesReferences;
-}
-
 
 
 }

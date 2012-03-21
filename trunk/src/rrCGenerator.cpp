@@ -27,6 +27,11 @@ CGenerator::CGenerator(){}
 
 CGenerator::~CGenerator(){}
 
+int	CGenerator::GetNumberOfFloatingSpecies()
+{
+	return floatingSpeciesConcentrationList.size();	//Todo: is there a list of floating species?
+}
+
 string CGenerator::GetHeaderCode()
 {
 	return mHeader.ToString();
@@ -258,10 +263,10 @@ void CGenerator::WriteClassHeader(StringBuilder& ignore)
 
 void CGenerator::WriteOutVariables(StringBuilder& ignore)
 {
-	mHeader<<"\t//The following structures mimics two members of the base class to the model\n";
-	mHeader<<"\tstruct \n\t{\n\t\tdouble* vec;\n\t\tint Length;\n\t} amounts;\n\n";
-	mHeader<<"\tstruct \n\t{\n\t\tdouble* vec;\n\t\tint Length;\n\t} rateRules;\n\n";
-    mHeader.FormatVariable("double", 	 						"time");
+//	mHeader<<"\t//The following structures mimics two members of the base class to the model\n";
+//	mHeader<<"\tstruct \n\t{\n\t\tdouble* vec;\n\t\tint Length;\n\t} amounts;\n\n";
+//	mHeader<<"\tstruct \n\t{\n\t\tdouble* vec;\n\t\tint Length;\n\t} rateRules;\n\n";
+//    mHeader.FormatVariable("double", 	 						"time");
 	mHeader<<"\t//End of base class members\n\n";
 
     mHeader.FormatVariable("char*", 	 						"mModelName");
@@ -288,10 +293,8 @@ void CGenerator::WriteOutVariables(StringBuilder& ignore)
     mHeader.FormatArray("//TEventDelayDelegate",	            "_eventDelay",			mNumEvents 								, 	"Array of trigger function pointers");
     mHeader.FormatArray("bool",				  	                "_eventType",			mNumEvents								, 	"Array holding the status whether events are useValuesFromTriggerTime or not");
     mHeader.FormatArray("bool",				  	                "_eventPersistentType", mNumEvents								, 	"Array holding the status whether events are persitstent or not");
-
 	mHeader.FormatVariable("double",  					    	"_time");
-    mHeader.FormatVariable("D_S int",	  					    "numIndependentVariables");
-//    mSource.FormatVariable("int",	 					    "numIndependentVariables = 24");
+    mHeader.FormatVariable("int",	  						    "numIndependentVariables");
     mHeader.FormatVariable("int",	  						    "numDependentVariables");
     mHeader.FormatVariable("int",	  						    "numTotalVariables");
     mHeader.FormatVariable("int",	  						    "numBoundaryVariables");
@@ -318,17 +321,17 @@ void CGenerator::WriteComputeAllRatesOfChange(StringBuilder& ignore, const int& 
 {
  	//In header
    	mHeader.AddFunctionExport("void", "computeAllRatesOfChange()");
-    mSource<<Append("// Uses the equation: dSd/dt = L0 dSi/dt" + NL());
+    mSource<<Append("//Uses the equation: dSd/dt = L0 dSi/dt" + NL());
     mSource<<"void computeAllRatesOfChange()\n{";
 
-    mSource<<"\n\tdouble* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );\n";
+    mSource<<"\n\t//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );\n";
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
         mSource<<Format("\tdTemp[{0}] = {1};{2}", i, mMapRateRule[i], NL());
     }
 
     mSource<<Append("\t//amounts.CopyTo(dTemp, rateRules.Length); Todo: fix this.." + NL());
-    mSource<<Append("\tevalModel(time, dTemp);" + NL());
+    mSource<<Append("\tevalModel(_time, _amounts);" + NL());
     bool isThereAnEntry = false;
     for (int i = 0; i < numDependentSpecies; i++)
     {
@@ -609,6 +612,7 @@ void CGenerator::WriteConvertToAmounts(StringBuilder& ignore)
 
 void CGenerator::WriteConvertToConcentrations(StringBuilder& ignore)
 {
+    mHeader.AddFunctionExport("void", "convertToConcentrations()");
     mSource<<"void convertToConcentrations()\n{";
     for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
     {
@@ -1068,7 +1072,7 @@ void CGenerator::WriteEvalModel(StringBuilder& ignore, const int& numReactions, 
         mSource<<Append("\t\tcomputeRules (_y);" + NL());
     }
 
-    mSource<<Append("\t\tcomputeReactionRates (time, _y);" + NL());
+    mSource<<Append("\t\tcomputeReactionRates (_time, _y);" + NL());
 
     // Write out the ODE equations
     string stoich;

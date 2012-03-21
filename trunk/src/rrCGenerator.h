@@ -69,6 +69,7 @@ class RR_DECLSPEC CGenerator : public ModelGenerator
         string								GetSourceCodeFileName();
         string								GetHeaderCodeFileName();
         bool								SaveSourceCodeToFolder(const string& folder);
+        int									GetNumberOfFloatingSpecies();
 
 };
 }

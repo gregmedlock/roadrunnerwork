@@ -33,7 +33,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\src\libstruct\;..\src\LibStructSupport\;..\src\Scanner\;..\ThirdParty\NOMLib\src\;..\src\Logger\;..\src\Util\mtrand\;..\src\Util\;..\src\Solvers\;..\src\;C:\RRW\src\;C:\rrInstalls\xe\libsbml\include;C:\rrInstalls\xe\libsbml\include\sbml;C:\rrInstalls\xe\sundials\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>C:\rrInstalls\xe\;C:\rrInstalls\sundials\lib\;..\ThirdParty\clapack\PreBuilt\;C:\rrInstalls\;C:\rrBuilds\xe\clapack\Testing\MATGEN\;..\src\libstruct\;..\src\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\src\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;..\src\Logger\;..\ThirdParty\libsbml\dependencies\lib\;..\src\Util\mtrand\;..\build\link\;..\src\Util\;..\src\Solvers\;..\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>C:\rrInstalls\xe\sundials\;C:\rrInstalls\xe\;C:\rrInstalls\sundials\lib\;..\ThirdParty\clapack\PreBuilt\;C:\rrInstalls\;C:\rrBuilds\xe\clapack\Testing\MATGEN\;..\src\libstruct\;..\src\LibStructSupport\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\src\Scanner\;C:\rrInstalls\xe\sundials\lib\;C:\rrInstalls\xe\libsbml\lib\;C:\rrInstalls\xe\nom\bin\;..\src\Logger\;..\ThirdParty\libsbml\dependencies\lib\;..\src\Util\mtrand\;..\build\link\;..\src\Util\;..\src\Solvers\;..\src\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -82,17 +82,17 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>61</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\sundials\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>56</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\sundials\lib\sundials_nvecserial.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>57</BuildOrder>
-			</LibFiles>
 			<LibFiles Include="C:\rrInstalls\xe\libsbml.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>61</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\sundials\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>61</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\sundials\sundials_nvecserial.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>62</BuildOrder>
 			</LibFiles>
 			<CppCompile Include="..\src\LibStructSupport\rrInteropUtils.cpp">
 				<DependentOn>..\src\LibStructSupport\rrInteropUtils.h</DependentOn>

@@ -115,12 +115,12 @@ double* GetCurrentValues()
 	return dResult;
 }
 
-// Uses the equation: dSd/dt = L0 dSi/dt
+//Uses the equation: dSd/dt = L0 dSi/dt
 void computeAllRatesOfChange()
 {
-	double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );
+	//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );
 	//amounts.CopyTo(dTemp, rateRules.Length); Todo: fix this..
-	evalModel(time, dTemp);
+	evalModel(_time, _amounts);
 	_dydt[1] =  - _dydt[0];
 
 }
@@ -143,7 +143,7 @@ void evalModel (double timein, double* oAmounts)
 		convertToAmounts();
 		_time = timein;  // Don't remove
 		updateDependentSpeciesValues (_y);
-		computeReactionRates (time, _y);
+		computeReactionRates (_time, _y);
 		_dydt[0] = - _rates[0];
 	convertToAmounts();
 }

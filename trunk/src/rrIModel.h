@@ -35,11 +35,14 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to b
 
 
     public:
-        double 							        time;
+        double 							       *time;
+        void									SetTime(double _time){*time = _time;}
+		double							        GetTime(){return *time;}
         vector<double> 					        y;
         list<string> 					        Warnings;
         vector<double>                  		init_y;
         vector<double>                          amounts;
+        virtual double							GetAmounts(const int& i) = 0;
         vector<double>                          bc;
         vector<double> 					        sr;
         vector<double> 					        gp;				//Global parameters
@@ -74,7 +77,7 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to b
         virtual int                             getNumReactions();
         virtual int                             getNumRules();
         virtual int                             getNumEvents();
-        virtual void                            initializeInitialConditions();
+        virtual void                            initializeInitialConditions() = 0;
         virtual void                            setInitialConditions();
         virtual void                            setParameterValues();
         virtual void                            setBoundaryConditions();
@@ -85,13 +88,13 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to b
         virtual void                            computeEventPriorites();
         virtual void                            setConcentration(int index, double value);
         virtual void                            convertToAmounts();
-        virtual void                            convertToConcentrations();
+        virtual void                            convertToConcentrations() = 0;
         virtual void                            updateDependentSpeciesValues(vector<double>& _y);
         virtual void                            computeRules(vector<double>& _y);
         virtual void                            computeReactionRates(double time, vector<double>& y);
         virtual void                            computeAllRatesOfChange();
         virtual void                            evalModel(double time, vector<double>& y);
-        virtual void                            evalEvents(double time, vector<double>& y);
+        virtual void                            evalEvents(double time, vector<double>& y) = 0;
         virtual void                            resetEvents();
         virtual void                            evalInitialAssignments();
         virtual void                            testConstraints();
@@ -102,6 +105,9 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to b
         virtual vector<double> 					GetCurrentValues() = 0 ;
         virtual double 							getConcentration(int index) = 0;
         virtual int 							getNumLocalParameters(int reactionId) = 0;         // Level 2 support
+
+        virtual vector<double>					GetdYdT() = 0;
+        virtual void							LoadData() = 0;	//This one copies data from the DLL to vectors and lists in the model..
 
 };
 } //namespace rr

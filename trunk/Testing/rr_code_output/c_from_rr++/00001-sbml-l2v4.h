@@ -16,20 +16,6 @@
 //************************************************************************** 
 
 
-	//The following structures mimics two members of the base class to the model
-	struct 
-	{
-		double* vec;
-		int Length;
-	} amounts;
-
-	struct 
-	{
-		double* vec;
-		int Length;
-	} rateRules;
-
-	double                             time;                                       
 	//End of base class members
 
 	char*                              mModelName;                                       
@@ -49,7 +35,7 @@
 	bool                               _eventType[0];                          //Array holding the status whether events are useValuesFromTriggerTime or not
 	bool                               _eventPersistentType[0];                //Array holding the status whether events are persitstent or not
 	double                             _time;                                       
-	D_S int                            numIndependentVariables;                                       
+	int                                numIndependentVariables;                                       
 	int                                numDependentVariables;                                       
 	int                                numTotalVariables;                                       
 	int                                numBoundaryVariables;                                       
@@ -81,6 +67,7 @@ D_S void                               resetEvents();
 D_S void                               setConcentration(int index, double value);
 D_S double                             getConcentration(int index);            
 D_S void                               convertToAmounts();                     
+D_S void                               convertToConcentrations();              
 D_S int                                getNumLocalParameters(int reactionId);  
 D_S void                               initializeInitialConditions();          
 D_S void                               setInitialConditions();                 
