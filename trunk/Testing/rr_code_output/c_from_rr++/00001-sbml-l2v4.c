@@ -4,8 +4,10 @@
 void loadSymbolTables()
 {
 	variableTable[0] = "S1";
-	variableTable[1] = "S2";
+	boundaryTable[0] = "Xo";
+	boundaryTable[1] = "X1";
 	globalParameterTable[0] = "k1";
+	globalParameterTable[1] = "k2";
 }
 
 void resetEvents()
@@ -21,9 +23,6 @@ void setConcentration(int index, double value)
 		case 0:
 			volume = _c[0];
 		break;
-		case 1:
-			volume = _c[0];
-		break;
 	}
 	_amounts[index] = _y[index]*volume;
 }
@@ -36,13 +35,11 @@ double getConcentration(int index)
 void convertToAmounts()
 {
 	_amounts[0] = _y[0]*_c[0];
-	_amounts[1] = _y[1]*_c[0];
 }
 
 void convertToConcentrations()
 {
 	_y[0] = _amounts[0] / _c[0];
-	_y[1] = _amounts[1] / _c[0];
 }
 
 int getNumLocalParameters(int reactionId)
@@ -51,21 +48,19 @@ int getNumLocalParameters(int reactionId)
 }
 void initializeInitialConditions()
 {
-	_init_y[0] = (double) 0.00015/ _c[0];
-	_init_y[1] = (double) 0/ _c[0];
+	_init_y[0] = (double)0;
 }
 
 void setInitialConditions()
 {
 	_y[0] =  _init_y[0];
 	_amounts[0] = _y[0]*_c[0];
-
-	_y[1] =  _init_y[1];
-	_amounts[1] = _y[1]*_c[0];
 }
 
 void setBoundaryConditions()
-{}
+{	_bc[0] = (double)10;
+	_bc[1] = (double)0;
+}
 
 void setCompartmentVolumes()
 {
@@ -77,20 +72,18 @@ void setCompartmentVolumes()
 void setParameterValues()
 {
 	_gp[0] = (double)1;
+
+	_gp[1] = (double)2;
 }
 
 // Uses the equation: C = Sd - L0*Si
 void computeConservedTotals()
-{
-	_ct[0] =  + _y[0]*_c[0] + _y[1]*_c[0];
-}
+{}
 
 // Compute values of dependent species 
 // Uses the equation: Sd = C + L0*Si
 void updateDependentSpeciesValues(double* y)
-{
-	_y[1] = (_ct[0] - y[0]*_c[0]) / _c[0];
-}
+{}
 
 void computeRules(double* y)
 {}
@@ -121,15 +114,15 @@ void computeAllRatesOfChange()
 	//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );
 	//amounts.CopyTo(dTemp, rateRules.Length); Todo: fix this..
 	evalModel(_time, _amounts);
-	_dydt[1] =  - _dydt[0];
-
 }
 
 // Compute the reaction rates
 void computeReactionRates(double time, double y[])
 {
-	_rates[0] = _c[0]*
-	_gp[0]*
+	_rates[0] = _gp[0]*
+	_bc[0];
+
+	_rates[1] = _gp[1]*
 	y[0];
 }
 
@@ -138,13 +131,11 @@ void evalModel (double timein, double* oAmounts)
 {
 	_y[0] = oAmounts[0]/_c[0];
 
-	_y[1] = oAmounts[1]/_c[0];
-
 		convertToAmounts();
 		_time = timein;  // Don't remove
 		updateDependentSpeciesValues (_y);
 		computeReactionRates (_time, _y);
-		_dydt[0] = - _rates[0];
+		_dydt[0] = + _rates[0] - _rates[1];
 	convertToAmounts();
 }
 
@@ -175,19 +166,21 @@ void testConstraints()
 int InitModel()
 {
 	numIndependentVariables = 1;
-	numDependentVariables = 1;
-	numTotalVariables = 2;
-	numBoundaryVariables = 0;
-	numGlobalParameters = 1;
+	numDependentVariables = 0;
+	numTotalVariables = 1;
+	numBoundaryVariables = 2;
+	numGlobalParameters = 2;
 	numCompartments = 1;
-	numReactions = 1;
+	numReactions = 2;
 	numEvents = 0;
-	mModelName = (char*) malloc(sizeof(char)*10);
-	strcpy(mModelName,"case00001");
+	mModelName = (char*) malloc(sizeof(char)*5);
+	strcpy(mModelName,"cell");
 	_gp[0] = 1234;
 	InitializeDelays();
 	localParameterDimensions[0] = 0;
 	_lp[0] = (double*) malloc(sizeof(double)*0);
+	localParameterDimensions[1] = 0;
+	_lp[1] = (double*) malloc(sizeof(double)*0);
 	return 0;
 }
 

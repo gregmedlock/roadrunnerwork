@@ -109,7 +109,7 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 
             AssignNewVector(oModel, true);
 
-            cvodeMem = (long*) Create_BDF_NEWTON_CVode();
+            cvodeMem = (void*) Create_BDF_NEWTON_CVode();
             SetMaxOrder(cvodeMem, MaxBDFOrder);
             CVodeSetInitStep(cvodeMem, InitStep);
             SetMinStep(cvodeMem, MinStep);
