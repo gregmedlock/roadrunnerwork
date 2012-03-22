@@ -298,7 +298,8 @@ void RoadRunner::AddNthOutputToResult(vector< vector<double> >& results, int nRo
     {
         double out =  GetNthSelectedOutput(j, dCurrentTime);
 //        results[nRow][j] = out;
-		results[nRow].push_back(out);
+//		results[nRow].push_back(out);
+        Log(lDebug3)<<"In AddNthOutput to result: "<<out;
     }
 }
 

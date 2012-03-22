@@ -308,6 +308,7 @@ void  ModelFromC::convertToConcentrations()
 	}
 	cconvertToConcentrations();
 }
+
 //void  ModelFromC::updateDependentSpeciesValues(vector<double>& _y){}
 
 void  ModelFromC::computeRules(vector<double>& y)
@@ -348,6 +349,7 @@ void  ModelFromC::evalModel(double timein, vector<double>& y)
     for(int i = 0; i < y.size(); i++)
     {
     	mAmounts[i] = y[i];
+    	//y[i] = mAmounts[i];
     }
 
     cevalModel(timein, mAmounts);

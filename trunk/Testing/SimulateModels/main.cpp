@@ -22,13 +22,14 @@ void PauseBeforeExit(bool doIt = true);
 
 int main()
 {
+_control87(MCW_EM,MCW_EM);
     bool generateCSharp = false;
     char exePath[MAXPATH];
     getcwd(exePath, MAXPATH);
     string appPath(exePath);
-    gLog.Init("compileModel", lDebug5, unique_ptr<LogFile>(new LogFile("CompilingModel.log")));
+    gLog.Init("simulateModel", lDebug5, unique_ptr<LogFile>(new LogFile("SimulateModel.log")));
     LogOutput::mLogToConsole = true;
-    gLog.SetCutOffLogLevel(lDebug4);
+    gLog.SetCutOffLogLevel(lDebug2);
 //       	gLog.SetCutOffLogLevel(lInfo);
 
     Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";
@@ -39,22 +40,25 @@ int main()
         roadRunner = new RoadRunner;
         roadRunner->Reset();
         string modelsRootPath("C:\\rrw\\Models");
-        string subFolder("l2v4");
-
-        stringstream modelSubPath;
+//        string subFolder("l2v4");
+//
+//        stringstream modelSubPath;
         stringstream modelFName;
+//
+//        int caseNr = 1;
+//        //int caseNr = 41;
+//
+//        modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
+//        modelFName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
+//
+//        if(subFolder.size())
+//        {
+//            modelsRootPath = modelsRootPath + "\\" + subFolder + "\\" + modelSubPath.str();
+//        }
+//
+//        string fullFilePath(modelsRootPath +   "\\" + modelFName.str());
 
-        int caseNr = 1;
-        //int caseNr = 41;
-
-        modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
-        modelFName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
-
-        if(subFolder.size())
-        {
-            modelsRootPath = modelsRootPath + "\\" + subFolder + "\\" + modelSubPath.str();
-        }
-
+		modelFName<<"simple.xml";
         string fullFilePath(modelsRootPath +   "\\" + modelFName.str());
 
         //The following will load and compile and simulate the sbml model in the file

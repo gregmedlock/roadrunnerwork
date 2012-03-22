@@ -2,6 +2,7 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include <iomanip>
 #include <math.h>
 #include <map>
 #include "rrRoadRunner.h"
@@ -439,15 +440,13 @@ void ModelFcn(int n, double time, double* y, double* ydot, void* fdata)
     }
 
     stringstream msg;
-    msg<<"CVode In: ("<<CvodeInterface::mCount << ")\t";
+    msg<<left<<setw(20)<<"" + ToString(CvodeInterface::mCount) ;
 
     for (int i = 0; i < dCVodeArgument.size(); i++)
     {
-        msg<<ToString(dCVodeArgument[i], "%g") + ", ";
+        msg<<left<<setw(20)<<setprecision (18)<<dCVodeArgument[i];
     }
-    Log(lDebug)<<msg.str();
 
-	msg.str("");
 	model->evalModel(time, dCVodeArgument);
 //	model.rateRules.CopyTo(dCVodeArgument, 0);
 	dCVodeArgument = model->rateRules;
@@ -458,10 +457,10 @@ void ModelFcn(int n, double time, double* y, double* ydot, void* fdata)
 		dCVodeArgument.push_back(model->GetdYdT().at(i));
     }
 
-    msg<<"CVode Out: ("<<CvodeInterface::mCount << ")\t" ;
+    msg<<"\t"<<CvodeInterface::mCount << "\t" ;
     for (int i = 0; i < dCVodeArgument.size(); i++)
     {
-		msg<<ToString(dCVodeArgument[i], "%g") + ", ";
+		msg<<setw(10)<<left<<setprecision (18)<<dCVodeArgument[i];
     }
     Log(lDebug)<<msg.str();
 
