@@ -45,6 +45,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BCC_FastFloatingPoint>false</BCC_FastFloatingPoint>
 			<ILINK_Verbose>true</ILINK_Verbose>
 			<IncludePath>C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
 			<_TCHARMapping>char</_TCHARMapping>

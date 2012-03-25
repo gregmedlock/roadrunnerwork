@@ -33,15 +33,15 @@ void FreeCvode_Mem (void **p)
 }
 
 // Sets the value of an element in a N_Vector object
-void Cvode_SetVector (N_Vector v, int Index, double Value)
+void Cvode_SetVector (N_Vector v, int Index, cvode_precision Value)
 {
-	double *data = NV_DATA_S(v);
+	cvode_precision *data = NV_DATA_S(v);
 	data[Index] = Value;
 }
 
-double Cvode_GetVector (N_Vector v, int Index)
+cvode_precision Cvode_GetVector (N_Vector v, int Index)
 {
-	double *data = NV_DATA_S(v);
+	cvode_precision *data = NV_DATA_S(v);
 	return data[Index];
 }
 
@@ -58,7 +58,7 @@ void *Create_ADAMS_FUNCTIONAL_CVode ()
 }
 
 // CallBack is the host application function that computes the dy/dt terms
-int AllocateCvodeMem (void *cvode_mem, int n, TModelCallBack callBack, double t0, N_Vector y, double reltol, N_Vector abstol/*, long int iopt[], double ropt[]*/)
+int AllocateCvodeMem (void *cvode_mem, int n, TModelCallBack callBack, cvode_precision t0, N_Vector y, cvode_precision reltol, N_Vector abstol/*, long int iopt[], cvode_precision ropt[]*/)
 {
 	int result;
 
@@ -116,7 +116,7 @@ int CvDense (void *p, int n)
 	return CVDense(p, n);
 }
 
-int Run_Cvode (void *cvode_mem, double tout, N_Vector y, double *t, char *ErrMsg)
+int Run_Cvode (void *cvode_mem, cvode_precision tout, N_Vector y, cvode_precision *t, char *ErrMsg)
 {
 	if (cvode_mem == NULL)
     {
@@ -126,7 +126,7 @@ int Run_Cvode (void *cvode_mem, double tout, N_Vector y, double *t, char *ErrMsg
 }
 
 // Initialize cvode with a new set of initial conditions
-int CVReInit (void *cvode_mem, double t0, N_Vector y0, double reltol, N_Vector abstol)
+int CVReInit (void *cvode_mem, cvode_precision t0, N_Vector y0, cvode_precision reltol, N_Vector abstol)
 {
 	int result;
 
@@ -223,7 +223,7 @@ int	SetErrHandler (void *cvode_mem, CVErrHandlerFn callback, void* user_data )
 	return CVodeSetErrHandlerFn (cvode_mem,  callback, user_data);
 }
 
-int SetMinStep(void *cvode_mem, double minStep)
+int SetMinStep(void *cvode_mem, cvode_precision minStep)
 {
 	if (cvode_mem == NULL)
     {
@@ -232,7 +232,7 @@ int SetMinStep(void *cvode_mem, double minStep)
 	return CVodeSetMinStep(cvode_mem, minStep);
 }
 
-int SetMaxStep(void *cvode_mem, double maxStep)
+int SetMaxStep(void *cvode_mem, cvode_precision maxStep)
 {
 	if (cvode_mem == NULL)
     {
@@ -241,7 +241,7 @@ int SetMaxStep(void *cvode_mem, double maxStep)
 	return CVodeSetMaxStep(cvode_mem, maxStep);
 }
 
-int SetInitStep(void *cvode_mem, double initStep)
+int SetInitStep(void *cvode_mem, cvode_precision initStep)
 {
 	if (cvode_mem == NULL)
     {

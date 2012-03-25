@@ -47,6 +47,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BCC_FastFloatingPoint>false</BCC_FastFloatingPoint>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>

@@ -5,7 +5,7 @@
 #include "rrRandom.h"
 #include "rrPendingAssignment.h"
 #include "cvode/cvode.h"
-
+#include "rrCvodedll.h"
 using std::string;
 
 class IModel;
@@ -14,7 +14,7 @@ namespace rr
 typedef long* IntPtr;
 typedef void* CVodeMemPtr;
 
-void ModelFcn(int n, double time, double* y, double* ydot, void* fdata);
+void ModelFcn(int n, cvode_precision time, cvode_precision* y, cvode_precision* ydot, void* fdata);
 
 class RR_DECLSPEC CvodeInterface : public rrObject
 {

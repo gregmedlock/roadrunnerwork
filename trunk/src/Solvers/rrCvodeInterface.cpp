@@ -121,7 +121,7 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
             fileHandle = fileOpen(tempPathstring + cvodeLogFile + ToString(errorFileCounter) + ".txt");
             SetErrFile(cvodeMem, fileHandle);
 //            errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, modelDelegate, 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
-			errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, ModelFcn, 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
+			errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, ModelFcn, (cvode_precision) 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
 
             if (errCode < 0)
             {
@@ -426,7 +426,7 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 ////        }
 
 //void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
-void ModelFcn(int n, double time, double* y, double* ydot, void* fdata)
+void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, void* fdata)
 {
     IModel *model = CvodeInterface::model;
     ModelState oldState(*model);

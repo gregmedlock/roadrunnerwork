@@ -22,7 +22,7 @@ void PauseBeforeExit(bool doIt = true);
 
 int main()
 {
-_control87(MCW_EM,MCW_EM);
+	_control87(MCW_EM,MCW_EM);
     bool generateCSharp = false;
     char exePath[MAXPATH];
     getcwd(exePath, MAXPATH);
