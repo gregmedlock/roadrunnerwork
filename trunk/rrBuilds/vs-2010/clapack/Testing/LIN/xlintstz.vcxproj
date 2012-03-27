@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|Win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{1123F724-11CD-474D-A55F-9BEFC447D15B}</ProjectGUID>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>Win32</Platform>
+    <ProjectName>xlintstz</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+    <PropertyGroup>
+      <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\Debug\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">xlintstz.dir\Debug\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">xlintstz</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\Release\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">xlintstz.dir\Release\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">xlintstz</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\MinSizeRel\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">xlintstz.dir\MinSizeRel\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">xlintstz</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
+      <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\RelWithDebInfo\</OutDir>
+      <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">xlintstz.dir\RelWithDebInfo\</IntDir>
+      <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">xlintstz</TargetName>
+      <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
+      <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
+      <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+    </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalOptions> /Zm1000 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;NO_ISATTY;MSDOS;USE_CLOCK;NO_BLAS_WRAP;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>Debug</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/Debug/xlintstz.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;NO_ISATTY;MSDOS;USE_CLOCK;NO_BLAS_WRAP;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /debug %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\MATGEN\Debug\tmglib.lib;..\..\SRC\Debug\lapack.lib;..\..\BLAS\SRC\Debug\blas.lib;..\..\F2CLIBS\libf2c\Debug\libf2c.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/Debug/xlintstz.lib</ImportLibrary>
+      <LinkIncremental>true</LinkIncremental>
+      <ProgramDataBaseFileName>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/Debug/xlintstz.pdb</ProgramDataBaseFileName>
+      <StackReserveSize>900000000000000000</StackReserveSize>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalOptions> /Zm1000 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NO_ISATTY;MSDOS;USE_CLOCK;NO_BLAS_WRAP;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>Release</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/Release/xlintstz.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NO_ISATTY;MSDOS;USE_CLOCK;NO_BLAS_WRAP;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\MATGEN\Release\tmglib.lib;..\..\SRC\Release\lapack.lib;..\..\BLAS\SRC\Release\blas.lib;..\..\F2CLIBS\libf2c\Release\libf2c.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ImportLibrary>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/Release/xlintstz.lib</ImportLibrary>
+      <ProgramDataBaseFileName>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/Release/xlintstz.pdb</ProgramDataBaseFileName>
+      <StackReserveSize>900000000000000000</StackReserveSize>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+    <ClCompile>
+      <AdditionalOptions> /Zm1000 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat></DebugInformationFormat>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NO_ISATTY;MSDOS;USE_CLOCK;NO_BLAS_WRAP;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>MinSizeRel</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/MinSizeRel/xlintstz.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NO_ISATTY;MSDOS;USE_CLOCK;NO_BLAS_WRAP;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\MATGEN\MinSizeRel\tmglib.lib;..\..\SRC\MinSizeRel\lapack.lib;..\..\BLAS\SRC\MinSizeRel\blas.lib;..\..\F2CLIBS\libf2c\MinSizeRel\libf2c.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ImportLibrary>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/MinSizeRel/xlintstz.lib</ImportLibrary>
+      <ProgramDataBaseFileName>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/MinSizeRel/xlintstz.pdb</ProgramDataBaseFileName>
+      <StackReserveSize>900000000000000000</StackReserveSize>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+    <ClCompile>
+      <AdditionalOptions> /Zm1000 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsC</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NO_ISATTY;MSDOS;USE_CLOCK;NO_BLAS_WRAP;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerListingLocation>RelWithDebInfo</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/RelWithDebInfo/xlintstz.pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;NO_ISATTY;MSDOS;USE_CLOCK;NO_BLAS_WRAP;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:/rrw/ThirdParty/clapack/3.2.1/INCLUDE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions> /debug %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;..\MATGEN\RelWithDebInfo\tmglib.lib;..\..\SRC\RelWithDebInfo\lapack.lib;..\..\BLAS\SRC\RelWithDebInfo\blas.lib;..\..\F2CLIBS\libf2c\RelWithDebInfo\libf2c.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImportLibrary>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/RelWithDebInfo/xlintstz.lib</ImportLibrary>
+      <LinkIncremental>true</LinkIncremental>
+      <ProgramDataBaseFileName>C:/rrw/rrBuilds/vs-2010/clapack/Testing/LIN/RelWithDebInfo/xlintstz.pdb</ProgramDataBaseFileName>
+      <StackReserveSize>900000000000000000</StackReserveSize>
+      <SubSystem>Console</SubSystem>
+      <Version></Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\..\..\ThirdParty\clapack\3.2.1\TESTING\LIN\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/rrw/ThirdParty/clapack/3.2.1/TESTING/LIN/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -HC:/rrw/ThirdParty/clapack/3.2.1 -BC:/rrw/rrBuilds/vs-2010/clapack --check-stamp-file C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/rrw/ThirdParty/clapack/3.2.1/TESTING/LIN/CMakeLists.txt;C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\CMakeLists.txt;C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/rrw/ThirdParty/clapack/3.2.1/TESTING/LIN/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -HC:/rrw/ThirdParty/clapack/3.2.1 -BC:/rrw/rrBuilds/vs-2010/clapack --check-stamp-file C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/rrw/ThirdParty/clapack/3.2.1/TESTING/LIN/CMakeLists.txt;C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\CMakeLists.txt;C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/rrw/ThirdParty/clapack/3.2.1/TESTING/LIN/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -HC:/rrw/ThirdParty/clapack/3.2.1 -BC:/rrw/rrBuilds/vs-2010/clapack --check-stamp-file C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/rrw/ThirdParty/clapack/3.2.1/TESTING/LIN/CMakeLists.txt;C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\CMakeLists.txt;C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\CMakeFiles\generate.stamp</Outputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/rrw/ThirdParty/clapack/3.2.1/TESTING/LIN/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+"C:\Program Files\CMake 2.8\bin\cmake.exe" -HC:/rrw/ThirdParty/clapack/3.2.1 -BC:/rrw/rrBuilds/vs-2010/clapack --check-stamp-file C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\CMakeFiles\generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/rrw/ThirdParty/clapack/3.2.1/TESTING/LIN/CMakeLists.txt;C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\CMakeLists.txt;C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\rrw\rrBuilds\vs-2010\clapack\Testing\LIN\CMakeFiles\generate.stamp</Outputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\aladhd.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\alaerh.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\alaesm.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\alahd.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\alareq.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\alasum.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\alasvm.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\chkxer.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\icopy.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ilaenv.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\xlaenv.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\xerbla.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkaa.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkeq.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkgb.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkge.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkgt.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkhe.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkhp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchklq.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkpb.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkpo.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkps.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkpp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkpt.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkq3.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkql.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkqp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkqr.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchkrq.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchksp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchksy.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchktb.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchktp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchktr.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zchktz.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvgt.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvhe.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvhp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvls.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvpb.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvpp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvpt.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvsp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvsy.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrgt.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrhe.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrlq.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrls.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrps.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrql.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrqp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrqr.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrrq.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrsy.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrtr.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrtz.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrvx.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgbt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgbt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgbt05.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgelqs.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgeqls.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgeqrs.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgerqs.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zget01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zget02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zget03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zget04.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zget07.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgtt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgtt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgtt05.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zhet01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zhpt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlaipd.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlaptm.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlarhs.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlatb4.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlatb5.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlatsp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlatsy.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlattb.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlattp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlattr.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlavhe.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlavhp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlavsp.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlavsy.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlqt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlqt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zlqt03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zpbt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zpbt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zpbt05.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zpot01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zpot02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zpot03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zpot05.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zpst01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zppt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zppt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zppt03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zppt05.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zptt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zptt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zptt05.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqlt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqlt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqlt03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqpt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqrt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqrt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqrt03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqrt11.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqrt12.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqrt13.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqrt14.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqrt15.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqrt16.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zqrt17.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zrqt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zrqt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zrqt03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zrzt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zrzt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zsbmv.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zspt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zspt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zspt03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zsyt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zsyt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zsyt03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztbt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztbt03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztbt05.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztbt06.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztpt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztpt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztpt03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztpt05.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztpt06.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztrt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztrt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztrt03.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztrt05.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztrt06.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztzt01.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ztzt02.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\dget06.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zgennd.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvge.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvgb.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrge.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zdrvpo.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\zerrpo.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\dlaord.c" />
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\INSTALL\windsecnd.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:/rrw/rrBuilds/vs-2010/clapack/ZERO_CHECK.vcxproj">
+      <Project>9FAA5849-2A08-4466-B9F4-6115BEFEE4EC</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/rrw/rrBuilds/vs-2010/clapack/SRC/lapack.vcxproj">
+      <Project>416B5BCB-C791-47BD-9CF0-DB79E49EF755</Project>
+    </ProjectReference>
+    <ProjectReference Include="C:/rrw/rrBuilds/vs-2010/clapack/Testing/MATGEN/tmglib.vcxproj">
+      <Project>BD0EB9C4-79F3-4807-8430-7A9AB8EA7865</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

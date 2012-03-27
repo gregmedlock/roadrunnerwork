@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\dchkab.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ddrvab.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\ddrvac.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\derrab.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\derrac.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\dget08.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\alaerh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\alahd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\aladhd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\alareq.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\chkxer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\dlarhs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\dlatb4.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\xerbla.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\dget02.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\LIN\dpot06.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\INSTALL\winsecond.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\INSTALL\windsecnd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\..\..\ThirdParty\clapack\3.2.1\TESTING\LIN\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4F53BB13-BC36-4337-97A8-EBCBDEBEC30D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
