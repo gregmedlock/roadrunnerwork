@@ -1,0 +1,27 @@
+The system is: Windows - 6.1 - x86
+Determining if the C compiler works passed with the following output:
+Change Dir: C:/rrw/rrBuilds/vs-2010/sundials/CMakeFiles/CMakeTmp
+
+Run Build Command:C:\PROGRA~1\MICROS~2.0\Common7\IDE\devenv.com CMAKE_TRY_COMPILE.sln /build Debug /project cmTryCompileExec
+
+Microsoft (R) Visual Studio Version 10.0.40219.1.
+Copyright (C) Microsoft Corp. All rights reserved.
+1>------ Build started: Project: cmTryCompileExec, Configuration: Debug Win32 ------
+1>  testCCompiler.c
+1>  cmTryCompileExec.vcxproj -> C:\rrw\rrBuilds\vs-2010\sundials\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: C:/rrw/rrBuilds/vs-2010/sundials/CMakeFiles/CMakeTmp
+
+Run Build Command:C:\PROGRA~1\MICROS~2.0\Common7\IDE\devenv.com CMAKE_TRY_COMPILE.sln /build Debug /project cmTryCompileExec
+
+Microsoft (R) Visual Studio Version 10.0.40219.1.
+Copyright (C) Microsoft Corp. All rights reserved.
+1>------ Build started: Project: cmTryCompileExec, Configuration: Debug Win32 ------
+1>  CMakeCCompilerABI.c
+1>  cmTryCompileExec.vcxproj -> C:\rrw\rrBuilds\vs-2010\sundials\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+
+
