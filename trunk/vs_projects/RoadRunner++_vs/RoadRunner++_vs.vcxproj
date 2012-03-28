@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -39,8 +39,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;C:\rrInstalls\vs\libsbml\include;C:\RRW\src\libstruct;C:\rrInstalls\vs\sundials\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\rrInstalls\vs\sundials\lib;C:\rrInstalls\vs\clapack;$(LibraryPath)</LibraryPath>
+    <IncludePath>c:\rrw\ThirdParty\clapack\3.2.1\INCLUDE;$rr_root)\ThirdParty\clapack\3.2.1\INCLUDE;$(rr_root)\src\Scanner;$(rr_root)\src\libstruct;$(rr_root)\src\LibStructSupport;$(rr_root)\src\Logger;$(rr_root)\src\Solvers;$(rr_root)\src\Util;$(rr_root)\src;$(rr_root)\Installs\vs\libsbml\include;$(rr_root)\Installs\vs\libsbml\include\sbml;$(rr_root)\Installs\vs\sundials\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(rr_root)\Installs\vs\libsbml\lib;$(rr_root)\Installs\vs\sundials\lib;$(rr_root)\rrInstalls\vs\clapack;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ROADRUNNER_VS_EXPORTS;ENABLE_DEBUG_OUTPUT;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;EXPORT_RR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(rr_src);$(rr_src)\libstruct;$(rr_src)\LibStructSupport;$(rr_src)\Solvers;$(rr_src)\Logger;$(rr_src)\Scanner;$(rr_src)\Util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(rr_root)\src;$(rr_src)\libstruct;$(rr_src)\LibStructSupport;$(rr_src)\Solvers;$(rr_src)\Logger;$(rr_src)\Scanner;$(rr_src)\Util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

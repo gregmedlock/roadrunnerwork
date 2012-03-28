@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loadSBML", "loadSBML.vcxproj", "{A3D07D49-2328-4473-8CB0-28F2C795CBD3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6907FF3F-BC82-49D3-A176-D168999D592E} = {6907FF3F-BC82-49D3-A176-D168999D592E}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RoadRunner++_vs", "..\RoadRunner++_vs\RoadRunner++_vs.vcxproj", "{6907FF3F-BC82-49D3-A176-D168999D592E}"
 EndProject

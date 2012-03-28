@@ -87,10 +87,10 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=/INCREMENTAL:NO
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //Full path to the library output directory
-CMAKE_INSTALL_LIBDIR:PATH=C:/rrw/Installs/libsbml/lib
+CMAKE_INSTALL_LIBDIR:PATH=C:/rrw/Installs/vs/libsbml/lib
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C;\rrw\Installs\libsbml
+CMAKE_INSTALL_PREFIX:PATH=C:/rrw/Installs/vs/libsbml
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=CMAKE_LINKER-NOTFOUND

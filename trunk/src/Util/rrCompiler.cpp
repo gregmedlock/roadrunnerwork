@@ -4,7 +4,11 @@
 #pragma hdrstop
 #include <windows.h>		//For HINSTANCE and other
 #include <sstream>
+#if defined(__CODEGEARC__)
 #include <dir.h>
+#else
+#include <direct.h>
+#endif
 #include "rrLogger.h"
 #include "rrCompiler.h"
 #include "rrException.h"
@@ -35,8 +39,8 @@ Compiler::~Compiler()
 
 HINSTANCE Compiler::CompileC_DLL(const string& sourceFileName)
 {
-    char exePath[MAXPATH];
-    getcwd(exePath, MAXPATH);
+    char exePath[MAX_PATH];
+    _getcwd(exePath, MAX_PATH);
     string appPath(exePath);
 
     //Now compile the code and load the resulting dll, and call an exported function in it...
@@ -83,7 +87,7 @@ bool Compiler::CreateDLL(const string& cmdLine)
     }
 
     // Start the child process.
-    if( !CreateProcess( NULL,   		// No module name (use command line)
+    if( !CreateProcessA( NULL,   		// No module name (use command line)
         (char*) cmdLine.c_str(),        // Command line
         NULL,                           // Process handle not inheritable
         NULL,                           // Thread handle not inheritable
@@ -111,7 +115,7 @@ bool Compiler::CreateDLL(const string& cmdLine)
 
 HINSTANCE Compiler::LoadDLL(const string& dll)
 {
-    HINSTANCE hLib = LoadLibrary(dll.c_str());
+    HINSTANCE hLib = LoadLibraryA(dll.c_str());
 
     if(hLib == NULL)
     {
@@ -120,7 +124,7 @@ HINSTANCE Compiler::LoadDLL(const string& dll)
     }
 
 	TCHAR mod[MAX_MODULE];
-    GetModuleFileNameA((HMODULE)hLib, (LPTSTR) mod, MAX_MODULE);
+    GetModuleFileNameA((HMODULE)hLib, (LPSTR) mod, MAX_MODULE);
     string name(mod);
 
     Log(lError) << "Library loaded: " <<name.c_str() << endl;

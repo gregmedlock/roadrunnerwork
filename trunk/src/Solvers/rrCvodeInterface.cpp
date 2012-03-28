@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <math.h>
 #include <map>
+#include <algorithm>
 #include "rrRoadRunner.h"
 #include "rrIModel.h"
 #include "rrCvodedll.h"
@@ -542,7 +543,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
 ////            oErrorCodes[10] = new CvodeErrorCodes(-10, "The right-hand side function had repetead recoverable errors.");
 ////            oErrorCodes[11] = new CvodeErrorCodes(-11,
 ////                                                  "The right-hand side function had a recoverable error, but no recovery is possible.");
-////            oErrorCodes[12] = new CvodeErrorCodes(-12, "The root¯nding function failed in an unrecoverable manner.");
+////            oErrorCodes[12] = new CvodeErrorCodes(-12, "The rootï¿½nding function failed in an unrecoverable manner.");
 ////            oErrorCodes[13] = new CvodeErrorCodes(-13, "");
 ////            oErrorCodes[14] = new CvodeErrorCodes(-14, "");
 ////            oErrorCodes[15] = new CvodeErrorCodes(-15, "");
@@ -646,7 +647,7 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
             if (assignmentTimes.size() > 0 && assignmentTimes[0] < nextTargetEndTime)
             {
                 nextTargetEndTime = assignmentTimes[0];
-                assignmentTimes.erase(0);
+                assignmentTimes.erase(assignmentTimes.begin());
             }
 
             char* err;
@@ -773,7 +774,7 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& han
     for (int i = 0; i < model->getNumEvents(); i++)
     {
 //        if (model->eventStatusArray[i] == true && oldState->mEventStatusArray[i] == false && !handledEvents.Contains(i))
-		bool containsI = (find(handledEvents.begin(), handledEvents.end(), i) != handledEvents.end()) ? true : false;
+		bool containsI = (std::find(handledEvents.begin(), handledEvents.end(), i) != handledEvents.end()) ? true : false;
         if (model->eventStatusArray[i] == true && oldState->mEventStatusArray[i] == false && !containsI)
         {
             result.push_back(i);
