@@ -43,7 +43,9 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
         c_void                      csetBoundaryConditions;
         c_void                      csetInitialConditions;
         c_void                      cevalInitialAssignments;
+		
         c_void_doubleStar           ccomputeRules;
+		
         c_void                      cconvertToAmounts;
         c_void                      ccomputeConservedTotals;
         c_double_int   		        cgetConcentration;
@@ -64,13 +66,16 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
 		bool						SetupDLLFunctions();
 
         void						LoadData();	//This one copies data from the DLL to vectors and lists in the model..
+
         //The following functions C equivalent may need to be in the DLL
         //Inherited functions
     	void 						setCompartmentVolumes();
         int 						getNumLocalParameters(int reactionId);
         void                        computeRules(vector<double>& _y);
-		void  						initializeInitialConditions();
-		void  						setParameterValues();
+
+		void  						initializeInitialConditions();
+
+		void  						setParameterValues();
 		void 						setBoundaryConditions();
 		void 						setInitialConditions();
         void	                 	evalInitialAssignments();

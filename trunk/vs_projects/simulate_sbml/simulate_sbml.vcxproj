@@ -14,6 +14,7 @@
     <ProjectGuid>{A3D07D49-2328-4473-8CB0-28F2C795CBD3}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>loadSBML</RootNamespace>
+    <ProjectName>simulate_sbml</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -39,7 +40,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(rr_root)\src;$(rr_root)\Installs\vs\sundials\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(rr_root)\src\Util;$(rr_root)\src;$(rr_root)\Installs\vs\sundials\include;$(IncludePath)</IncludePath>
+    <OutDir>$(rr_root)\bin\vs\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -50,15 +52,19 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(rr_src);$(rr_src)\Logger;$(rr_src)\libstruct;$(rr_src)\Util;$(rr_src)\Solvers;$(rr_src)\Scanner;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(rr_root)\src\LibStructSupport;$(rr_root);$(rr_root)\src\Logger;$(rr_root)\src\libstruct;$(rr_root)\src\Util;$(rr_root)\src\Solvers;$(rr_root)\src\Scanner;$(rr_root)\Installs\vs\libsbml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\RRW\vs_projects\RoadRunner++_vs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(rr_root)\bin\vs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>RoadRunner++_vs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(rr_root)\Installs\vs\libsbml\bin\*.dll $(rr_root)\bin\vs\ 
+</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -85,7 +91,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="loadSBML.cpp" />
+    <ClCompile Include="..\..\Testing\SimulateModels\main.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

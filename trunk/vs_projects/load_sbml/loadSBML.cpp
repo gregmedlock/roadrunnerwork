@@ -43,8 +43,8 @@ int main(int argc, _TCHAR* argv[])
 
             roadRunner = new RoadRunner;
             roadRunner->Reset();
-	        string modelsRootPath("C:\\RRW\\Models");
-            string subFolder("test_cases_l2v4");
+	        string modelsRootPath("C:\\rrw\\Models");
+            string subFolder("l2v4");
 
             //int caseNr = 1;
             stringstream modelSubPath;

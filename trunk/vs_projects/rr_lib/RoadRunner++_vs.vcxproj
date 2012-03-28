@@ -41,6 +41,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>c:\rrw\ThirdParty\clapack\3.2.1\INCLUDE;$rr_root)\ThirdParty\clapack\3.2.1\INCLUDE;$(rr_root)\src\Scanner;$(rr_root)\src\libstruct;$(rr_root)\src\LibStructSupport;$(rr_root)\src\Logger;$(rr_root)\src\Solvers;$(rr_root)\src\Util;$(rr_root)\src;$(rr_root)\Installs\vs\libsbml\include;$(rr_root)\Installs\vs\libsbml\include\sbml;$(rr_root)\Installs\vs\sundials\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(rr_root)\Installs\vs\libsbml\lib;$(rr_root)\Installs\vs\sundials\lib;$(rr_root)\rrInstalls\vs\clapack;$(LibraryPath)</LibraryPath>
+    <OutDir>$(rr_root)\bin\vs</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -51,13 +52,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ROADRUNNER_VS_EXPORTS;ENABLE_DEBUG_OUTPUT;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;EXPORT_RR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(rr_root)\src;$(rr_src)\libstruct;$(rr_src)\LibStructSupport;$(rr_src)\Solvers;$(rr_src)\Logger;$(rr_src)\Scanner;$(rr_src)\Util;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(rr_root)\src\Util;$(rr_root)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\rrBuilds\vs\clapack\SRC\Debug;C:\rrInstalls\vs\libsbml\lib;C:\rrBuilds\vs\clapack\F2CLIBS\libf2c\Debug;C:\rrBuilds\vs\clapack\BLAS\SRC\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies);libsbml.lib;sundials_cvode.lib;sundials_nvecserial.lib;clapack.lib;blas.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(rr_root)\rrBuilds\vs-2010\clapack\SRC\Debug;$(rr_root)\rrBuilds\vs-2010\libsbml\lib;$(rr_root)\rrBuilds\vs-2010\clapack\F2CLIBS\libf2c\Debug;$(rr_root)\rrBuilds\vs-2010\clapack\BLAS\SRC\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);libsbml.lib;sundials_cvode.lib;sundials_nvecserial.lib;libf2c.lib;lapack.lib;blas.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -99,8 +100,11 @@
     <ClCompile Include="..\..\src\Logger\rrLoggerUtils.cpp" />
     <ClCompile Include="..\..\src\Logger\rrLogLevel.cpp" />
     <ClCompile Include="..\..\src\Logger\rrLogOutput.cpp" />
+    <ClCompile Include="..\..\src\rrCGenerator.cpp" />
+    <ClCompile Include="..\..\src\rrCSharpGenerator.cpp" />
     <ClCompile Include="..\..\src\rrIModel.cpp" />
     <ClCompile Include="..\..\src\rrMath.cpp" />
+    <ClCompile Include="..\..\src\rrModelFromC.cpp" />
     <ClCompile Include="..\..\src\rrModelGenerator.cpp" />
     <ClCompile Include="..\..\src\rrModelState.cpp" />
     <ClCompile Include="..\..\src\rrObject.cpp" />
@@ -117,7 +121,9 @@
     <ClCompile Include="..\..\src\Scanner\rrCodeTypes.cpp" />
     <ClCompile Include="..\..\src\Scanner\rrScanner.cpp" />
     <ClCompile Include="..\..\src\Scanner\rrToken.cpp" />
+    <ClCompile Include="..\..\src\Solvers\rrCvodedll.cpp" />
     <ClCompile Include="..\..\src\Solvers\rrCvodeInterface.cpp" />
+    <ClCompile Include="..\..\src\Solvers\rrNLEQInterface.cpp" />
     <ClCompile Include="..\..\src\Util\mtrand\mtrand.cpp" />
     <ClCompile Include="..\..\src\Util\rrCompiler.cpp" />
     <ClCompile Include="..\..\src\Util\rrDoubleMatrix.cpp" />
@@ -136,6 +142,7 @@
     <ClCompile Include="..\..\src\Util\rrStringUtils.cpp" />
     <ClCompile Include="..\..\src\Util\rrSymbol.cpp" />
     <ClCompile Include="..\..\src\Util\rrSymbolList.cpp" />
+    <ClCompile Include="..\..\src\Util\rrTextWriter.cpp" />
     <ClCompile Include="..\..\src\Util\rrUtils.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
