@@ -41,7 +41,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(rr_root)\src\Util;$(rr_root)\src;$(rr_root)\installs\vs-2010\include\cvode;$(rr_root)\installs\vs-2010\include;$(IncludePath)</IncludePath>
-    <OutDir>$(rr_root)\installs\bin\</OutDir>
+    <OutDir>$(rr_root)\installs\vs-2010\bin\</OutDir>
+    <LibraryPath>$(rr_root)\installs\vs-2010\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -63,7 +64,7 @@
     </Link>
     <PostBuildEvent>
       <Command>
-</Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
