@@ -2,7 +2,7 @@
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "$(rr_root)/installs/")
+  SET(CMAKE_INSTALL_PREFIX "c:/rrw/installs/vs-2010")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -240,13 +240,21 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unsp
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/$(rr_root)/installs/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/rrw/builds/vs-2010/libsbml/src/Debug/libsbml.lib")
+    list(APPEND CPACK_ABSOLUTE_DESTINATION_FILES
+     "c:/rrw/installs/vs-2010/lib/libsbml.lib")
+FILE(INSTALL DESTINATION "c:/rrw/installs/vs-2010/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/rrw/builds/vs-2010/libsbml/src/Debug/libsbml.lib")
   ELSEIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/$(rr_root)/installs/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/rrw/builds/vs-2010/libsbml/src/Release/libsbml.lib")
+    list(APPEND CPACK_ABSOLUTE_DESTINATION_FILES
+     "c:/rrw/installs/vs-2010/lib/libsbml.lib")
+FILE(INSTALL DESTINATION "c:/rrw/installs/vs-2010/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/rrw/builds/vs-2010/libsbml/src/Release/libsbml.lib")
   ELSEIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/$(rr_root)/installs/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/rrw/builds/vs-2010/libsbml/src/MinSizeRel/libsbml.lib")
+    list(APPEND CPACK_ABSOLUTE_DESTINATION_FILES
+     "c:/rrw/installs/vs-2010/lib/libsbml.lib")
+FILE(INSTALL DESTINATION "c:/rrw/installs/vs-2010/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/rrw/builds/vs-2010/libsbml/src/MinSizeRel/libsbml.lib")
   ELSEIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/$(rr_root)/installs/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/rrw/builds/vs-2010/libsbml/src/RelWithDebInfo/libsbml.lib")
+    list(APPEND CPACK_ABSOLUTE_DESTINATION_FILES
+     "c:/rrw/installs/vs-2010/lib/libsbml.lib")
+FILE(INSTALL DESTINATION "c:/rrw/installs/vs-2010/lib" TYPE STATIC_LIBRARY OPTIONAL FILES "C:/rrw/builds/vs-2010/libsbml/src/RelWithDebInfo/libsbml.lib")
   ENDIF()
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 
@@ -264,13 +272,21 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unsp
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   IF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Dd][Ee][Bb][Uu][Gg])$")
-    FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/$(rr_root)/installs/lib" TYPE STATIC_LIBRARY FILES "C:/rrw/builds/vs-2010/libsbml/src/Debug/libsbml-static.lib")
+    list(APPEND CPACK_ABSOLUTE_DESTINATION_FILES
+     "c:/rrw/installs/vs-2010/lib/libsbml-static.lib")
+FILE(INSTALL DESTINATION "c:/rrw/installs/vs-2010/lib" TYPE STATIC_LIBRARY FILES "C:/rrw/builds/vs-2010/libsbml/src/Debug/libsbml-static.lib")
   ELSEIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ee][Aa][Ss][Ee])$")
-    FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/$(rr_root)/installs/lib" TYPE STATIC_LIBRARY FILES "C:/rrw/builds/vs-2010/libsbml/src/Release/libsbml-static.lib")
+    list(APPEND CPACK_ABSOLUTE_DESTINATION_FILES
+     "c:/rrw/installs/vs-2010/lib/libsbml-static.lib")
+FILE(INSTALL DESTINATION "c:/rrw/installs/vs-2010/lib" TYPE STATIC_LIBRARY FILES "C:/rrw/builds/vs-2010/libsbml/src/Release/libsbml-static.lib")
   ELSEIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Mm][Ii][Nn][Ss][Ii][Zz][Ee][Rr][Ee][Ll])$")
-    FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/$(rr_root)/installs/lib" TYPE STATIC_LIBRARY FILES "C:/rrw/builds/vs-2010/libsbml/src/MinSizeRel/libsbml-static.lib")
+    list(APPEND CPACK_ABSOLUTE_DESTINATION_FILES
+     "c:/rrw/installs/vs-2010/lib/libsbml-static.lib")
+FILE(INSTALL DESTINATION "c:/rrw/installs/vs-2010/lib" TYPE STATIC_LIBRARY FILES "C:/rrw/builds/vs-2010/libsbml/src/MinSizeRel/libsbml-static.lib")
   ELSEIF("${CMAKE_INSTALL_CONFIG_NAME}" MATCHES "^([Rr][Ee][Ll][Ww][Ii][Tt][Hh][Dd][Ee][Bb][Ii][Nn][Ff][Oo])$")
-    FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/$(rr_root)/installs/lib" TYPE STATIC_LIBRARY FILES "C:/rrw/builds/vs-2010/libsbml/src/RelWithDebInfo/libsbml-static.lib")
+    list(APPEND CPACK_ABSOLUTE_DESTINATION_FILES
+     "c:/rrw/installs/vs-2010/lib/libsbml-static.lib")
+FILE(INSTALL DESTINATION "c:/rrw/installs/vs-2010/lib" TYPE STATIC_LIBRARY FILES "C:/rrw/builds/vs-2010/libsbml/src/RelWithDebInfo/libsbml-static.lib")
   ENDIF()
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

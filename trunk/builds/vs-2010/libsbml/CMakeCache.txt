@@ -87,10 +87,10 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=/INCREMENTAL:NO
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 
 //Full path to the library output directory
-CMAKE_INSTALL_LIBDIR:PATH=$(rr_root)/installs/lib
+CMAKE_INSTALL_LIBDIR:PATH=c:/rrw//installs/vs-2010/lib
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=$(rr_root)/installs/
+CMAKE_INSTALL_PREFIX:PATH=c:/rrw/installs/vs-2010
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=c:/cygwin/bin/link.exe

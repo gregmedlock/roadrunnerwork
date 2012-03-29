@@ -39,9 +39,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>c:\rrw\ThirdParty\clapack\3.2.1\INCLUDE;$rr_root)\ThirdParty\clapack\3.2.1\INCLUDE;$(rr_root)\src\Scanner;$(rr_root)\src\libstruct;$(rr_root)\src\LibStructSupport;$(rr_root)\src\Logger;$(rr_root)\src\Solvers;$(rr_root)\src\Util;$(rr_root)\src;$(rr_root)\Installs\vs\libsbml\include;$(rr_root)\Installs\vs\libsbml\include\sbml;$(rr_root)\Installs\vs\sundials\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(rr_root)\Installs\vs\libsbml\lib;$(rr_root)\Installs\vs\sundials\lib;$(rr_root)\rrInstalls\vs\clapack;$(LibraryPath)</LibraryPath>
-    <OutDir>$(rr_root)\bin\vs</OutDir>
+    <IncludePath>$(rr_root)\ThirdParty\clapack\3.2.1\INCLUDE;$(rr_root)\src\Scanner;$(rr_root)\src\libstruct;$(rr_root)\src\LibStructSupport;$(rr_root)\src\Logger;$(rr_root)\src\Solvers;$(rr_root)\src\Util;$(rr_root)\src;$(rr_root)\installs\vs-2010\include\sbml;$(rr_root)\installs\vs-2010\include\;$(rr_root)\installs\vs-2010\include\cvode;$(IncludePath)</IncludePath>
+    <LibraryPath>$(rr_root)\installs\vs-2010\lib;$(rr_root)\installs\vs-2010\sundials\lib;$(rr_root)\builds\vs-2010\clapack;$(LibraryPath)</LibraryPath>
+    <OutDir>$(rr_root)\installs\vs-2010\bin</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -60,6 +60,9 @@
       <AdditionalLibraryDirectories>$(rr_root)\rrBuilds\vs-2010\clapack\SRC\Debug;$(rr_root)\rrBuilds\vs-2010\libsbml\lib;$(rr_root)\rrBuilds\vs-2010\clapack\F2CLIBS\libf2c\Debug;$(rr_root)\rrBuilds\vs-2010\clapack\BLAS\SRC\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>%(AdditionalDependencies);libsbml.lib;sundials_cvode.lib;sundials_nvecserial.lib;libf2c.lib;lapack.lib;blas.lib</AdditionalDependencies>
     </Link>
+    <PreLinkEvent>
+      <Command>$(rr_root)\scripts\install_clapack.bat</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
