@@ -40,8 +40,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(rr_root)\src\Util;$(rr_root)\src;$(rr_root)\Installs\vs\sundials\include;$(IncludePath)</IncludePath>
-    <OutDir>$(rr_root)\bin\vs\</OutDir>
+    <IncludePath>$(rr_root)\src\Util;$(rr_root)\src;$(rr_root)\installs\vs-2010\include\cvode;$(rr_root)\installs\vs-2010\include;$(IncludePath)</IncludePath>
+    <OutDir>$(rr_root)\installs\bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -62,7 +62,7 @@
       <AdditionalDependencies>RoadRunner++_vs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(rr_root)\Installs\vs\libsbml\bin\*.dll $(rr_root)\bin\vs\ 
+      <Command>
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -91,7 +91,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Testing\SimulateModels\main.cpp" />
+    <ClCompile Include="..\..\Testing\simulate_sbml\main.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -41,7 +41,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(rr_root)\ThirdParty\clapack\3.2.1\INCLUDE;$(rr_root)\src\Scanner;$(rr_root)\src\libstruct;$(rr_root)\src\LibStructSupport;$(rr_root)\src\Logger;$(rr_root)\src\Solvers;$(rr_root)\src\Util;$(rr_root)\src;$(rr_root)\installs\vs-2010\include\sbml;$(rr_root)\installs\vs-2010\include\;$(rr_root)\installs\vs-2010\include\cvode;$(IncludePath)</IncludePath>
     <LibraryPath>$(rr_root)\installs\vs-2010\lib;$(rr_root)\installs\vs-2010\sundials\lib;$(rr_root)\builds\vs-2010\clapack;$(LibraryPath)</LibraryPath>
-    <OutDir>$(rr_root)\installs\vs-2010\bin</OutDir>
+    <OutDir>$(rr_root)\installs\vs-2010\bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -63,6 +63,9 @@
     <PreLinkEvent>
       <Command>$(rr_root)\scripts\install_clapack.bat</Command>
     </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>move /Y "$(rr_root)\installs\vs-2010\bin\$(ProjectName).lib" "$(rr_root)\installs\vs-2010\lib\$(ProjectName).lib"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
