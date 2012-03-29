@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkee.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sbdt01.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sbdt02.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sbdt03.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkbb.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkbd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkbk.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkbl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkgg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkgk.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkgl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkhs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schksb.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\schkst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sckglm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sckgqr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sckgsv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\scklse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrges.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrgev.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrgsx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrgvx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrvbd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrves.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrvev.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrvgg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrvsg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrvst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrvsx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sdrvvx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\serrbd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\serrec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\serred.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\serrgg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\serrhs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\serrst.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget02.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget10.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget22.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget23.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget24.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget31.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget33.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget34.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget35.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget36.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget37.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget38.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget39.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget51.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget52.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget53.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sget54.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sglmts.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sgqrts.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sgrqts.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sgsvts.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\shst01.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\slarfy.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\slarhs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\slatm4.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\slctes.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\slctsx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\slsets.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sort01.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sort03.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\ssbt21.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\ssgt01.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sslect.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sspt21.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sstt21.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sstt22.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\ssyt21.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\ssyt22.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\slafts.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\slahd2.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\slasum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\slatb9.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sstech.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\sstect.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\ssvdch.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\ssvdct.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\ssxt1.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\alahdg.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\alasum.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\alasvm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\alareq.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\ilaenv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\xerbla.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\xlaenv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\TESTING\EIG\chkxer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\clapack\3.2.1\INSTALL\winsecond.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\..\..\ThirdParty\clapack\3.2.1\TESTING\EIG\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4A2378B7-1B8A-4192-8FFD-BECF34C7604E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
