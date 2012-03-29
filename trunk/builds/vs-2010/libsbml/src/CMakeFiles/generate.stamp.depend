@@ -1,0 +1,7 @@
+# CMake generation dependency list for this directory.
+C:/rrw/ThirdParty/libsbml/src/CMakeLists.txt
+C:/rrw/ThirdParty/libsbml/src/layout-package.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/CheckIncludeFiles.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/CheckLibraryExists.cmake
+C:/rrw/ThirdParty/libsbml/src/sbml/common/libsbml-config-common.h.cmake
+C:/rrw/ThirdParty/libsbml/src/sbml/common/libsbml-version.h.cmake

@@ -1,0 +1,17 @@
+# CMake generation dependency list for this directory.
+C:/rrw/ThirdParty/sundials/CMakeLists.txt
+C:/rrw/rrBuilds/vs-2010/sundials/CMakeFiles/CMakeSystem.cmake
+C:/rrw/rrBuilds/vs-2010/sundials/CMakeFiles/CMakeCCompiler.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/CMakeSystemSpecificInformation.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/CMakeGenericSystem.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/Platform/Windows.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/Platform/WindowsPaths.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/CMakeCInformation.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/Platform/Windows-cl.cmake
+C:/rrw/rrBuilds/vs-2010/sundials/CMakeFiles/CMakeCPlatform.cmake
+C:/rrw/rrBuilds/vs-2010/sundials/CMakeFiles/CMakeCXXPlatform.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/Platform/cl.cmake
+C:/rrw/rrBuilds/vs-2010/sundials/CMakeFiles/CMakeRCCompiler.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/CMakeRCInformation.cmake
+C:/Program Files/CMake 2.8/share/cmake-2.8/Modules/CMakeCommonLanguageInclude.cmake
+C:/rrw/ThirdParty/sundials/include/sundials/sundials_config.in

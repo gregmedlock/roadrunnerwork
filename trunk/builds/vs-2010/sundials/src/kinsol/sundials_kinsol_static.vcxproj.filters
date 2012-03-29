@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\kinsol\kinsol.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\kinsol\kinsol_io.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\kinsol\kinsol_direct.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\kinsol\kinsol_band.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\kinsol\kinsol_dense.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\kinsol\kinsol_spils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\kinsol\kinsol_spbcgs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\kinsol\kinsol_spgmr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\kinsol\kinsol_sptfqmr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\kinsol\kinsol_bbdpre.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\sundials\sundials_nvector.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\sundials\sundials_math.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\sundials\sundials_direct.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\sundials\sundials_band.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\sundials\sundials_dense.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\sundials\sundials_iterative.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\sundials\sundials_spbcgs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\sundials\sundials_spgmr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\rrw\ThirdParty\sundials\src\sundials\sundials_sptfqmr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\..\..\ThirdParty\sundials\src\kinsol\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{483C1CF8-56B2-4956-9FAE-20FAC34EB41C}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
