@@ -4,7 +4,7 @@
 #pragma hdrstop
 #include "rrTextWriter.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
+
 
 using namespace std;
 namespace rr

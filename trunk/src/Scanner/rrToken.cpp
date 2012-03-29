@@ -4,10 +4,7 @@
 #pragma hdrstop
 #include "rrToken.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
-//---------------------------------------------------------------------------
+
 
 
 namespace rr

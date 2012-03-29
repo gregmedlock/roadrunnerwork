@@ -7,10 +7,7 @@
 #include "rrException.h"
 #include "rrInteropUtils.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
-//---------------------------------------------------------------------------
+
 
 
 namespace rr
@@ -1115,8 +1112,8 @@ StringList StructAnalysis::GetSpeciesIds()
 ////        /// <param name="sbml">the SBML string</param>
 string StructAnalysis::LoadSBML(const string& sbml)
 {
-    IntPtr pointer;
-	int nLength;
+    //IntPtr pointer;
+	//int nLength;
 	string msg = LibStructural::getInstance()->loadSBML(sbml);
 //    if (LibStructural_loadSBML(sbml.c_str(),  (char**) &pointer, &nLength) < 0)
 //    {

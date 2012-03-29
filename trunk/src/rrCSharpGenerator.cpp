@@ -15,7 +15,7 @@
 #include "rrRoadRunner.h"
 #include "rrException.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
+
 
 
 using namespace std;

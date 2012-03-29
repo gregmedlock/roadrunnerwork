@@ -19,9 +19,7 @@
 #include "util.h"
 #include "math.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
+
 
 //#define SMALL_NUM           1.0E-9
 //#define PRINT_PRECISION		10

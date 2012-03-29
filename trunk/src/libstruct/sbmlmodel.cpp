@@ -10,9 +10,7 @@
 #include <sbml/SBMLReader.h>
 #include "util.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
+
 
 using namespace LIB_STRUCTURAL;
 using namespace LIB_LA;

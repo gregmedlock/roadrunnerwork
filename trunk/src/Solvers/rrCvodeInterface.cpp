@@ -18,10 +18,7 @@
 #include "rrCvodeDll.h"
 
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
-//---------------------------------------------------------------------------
+
 
 using namespace std;
 namespace rr
@@ -650,11 +647,9 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
                 assignmentTimes.erase(assignmentTimes.begin());
             }
 
-            char* err;
 			//RR_DECLSPEC int  		Run_Cvode (void *cvode_mem, double tout, N_Vector y, double *t, char *ErrMsg);
-
-            //int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  _amounts, timeEnd, err); // t = double *
-			int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  _amounts, &timeEnd, err); // t = double *
+            
+			int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  _amounts, &timeEnd);//, err); // t = double *
 
             if (nResult == CV_ROOT_RETURN && followEvents)
             {

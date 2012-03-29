@@ -16,7 +16,7 @@
 #include "rrException.h"
 #include "rrCGenerator.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
+
 
 using namespace std;
 using namespace LIB_STRUCTURAL;

@@ -7,10 +7,7 @@
 #include "rrStringList.h"
 #include "rrUtils.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
-//---------------------------------------------------------------------------
+
 
 
 namespace rr

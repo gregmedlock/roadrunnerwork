@@ -7,9 +7,7 @@
 #include "rrSBMLSymbol.h"
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
+
 
 using namespace std;
 namespace rr

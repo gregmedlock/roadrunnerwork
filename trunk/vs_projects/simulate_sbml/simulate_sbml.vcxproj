@@ -55,6 +55,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(rr_root)\src\LibStructSupport;$(rr_root);$(rr_root)\src\Logger;$(rr_root)\src\libstruct;$(rr_root)\src\Util;$(rr_root)\src\Solvers;$(rr_root)\src\Scanner;$(rr_root)\Installs\vs\libsbml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FloatingPointModel>Strict</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

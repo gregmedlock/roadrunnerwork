@@ -4,16 +4,16 @@
 #pragma hdrstop
 #include "mtrand.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
+
 // mtrand.cpp, see include file mtrand.h for information
 
 // non-inline function definitions and static member definitions cannot
 // reside in header file because of the risk of multiple declarations
-
 // initialization of static private members
-unsigned long MTRand_int32::state[n] = {0x0UL};
+const int MTRand_int32::n = 632;
+const int MTRand_int32::m = 397;
+
+unsigned long MTRand_int32::state[MTRand_int32::n] = {0x0UL};
 int MTRand_int32::p = 0;
 bool MTRand_int32::init = false;
 

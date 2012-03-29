@@ -13,10 +13,7 @@
 #include "rrStringBuilder.h"
 #include "rrSBMLSymbol.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
-//---------------------------------------------------------------------------
+
 
 
 using namespace std;

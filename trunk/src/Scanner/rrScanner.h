@@ -40,7 +40,7 @@ class RR_DECLSPEC Scanner : public rrObject
         queue<Token>	 				tokenQueue;
         map<string, CodeTypes> 	wordTable;
         stringstream				   *pStream;
-        int 							bufferLength;
+        std::streamsize						bufferLength;
         int 							bufferPtr; // Index of position in buffer containing current char
 		CodeTypes 						ftoken;
 		int 							yylineno; // Current line number

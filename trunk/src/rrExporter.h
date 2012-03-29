@@ -18,6 +18,7 @@
 #pragma warning(disable : 4996) // _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable : 4018) // int to unsigned int comparison
 #pragma warning(disable : 4482) // prefixing enums...
+#pragma warning(disable : 4251) // _CRT_SECURE_NO_WARNINGS
 
 #define __FUNC__ "not defined in VS"
 #endif

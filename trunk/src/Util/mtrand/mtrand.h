@@ -45,7 +45,10 @@
 #ifndef MTRAND_H
 #define MTRAND_H
 
-class MTRand_int32 { // Mersenne Twister random number generator
+#include "rrExporter.h"
+
+class RR_DECLSPEC  MTRand_int32 
+{ // Mersenne Twister random number generator
 public:
 // default constructor: uses default seed only if this is the first instance
   MTRand_int32() { if (!init) seed(5489UL); init = true; }
@@ -63,9 +66,10 @@ public:
 protected: // used by derived classes, otherwise not accessible; use the ()-operator
   unsigned long rand_int32(); // generate 32 bit random integer
 private:
-  static const int n = 624, m = 397; // compile time constants
+  static const int n;//
+  static const int m;//= 624, m = 397; // compile time constants
 // the variables below are static (no duplicates can exist)
-  static unsigned long state[n]; // state vector array
+  static unsigned long state[]; // state vector array
   static int p; // position in state array
   static bool init; // true if init function is called
 // private functions used to generate the pseudo random numbers
@@ -122,7 +126,7 @@ private:
 };
 
 // generates double floating point numbers in the open interval (0, 1)
-class MTRand_open : public MTRand_int32 {
+class RR_DECLSPEC MTRand_open : public MTRand_int32 {
 public:
   MTRand_open() : MTRand_int32() {}
   MTRand_open(unsigned long seed) : MTRand_int32(seed) {}

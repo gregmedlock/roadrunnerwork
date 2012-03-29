@@ -8,14 +8,14 @@ namespace rr
 {
 class CGenerator;
 
-typedef void 	(WINAPI*c_void)();
-typedef int 	(WINAPI*c_int)();
-typedef int 	(WINAPI*c_int_int)(int);
-typedef char* 	(WINAPI*c_charStar)();
-typedef void    (WINAPI*c_void_doubleStar)(double*);
-typedef double  (WINAPI*c_double_int)(int);
-typedef double* (WINAPI*c_doubleStar)();
-typedef void	(WINAPI*c_void_double_doubleStar)(double, double*);
+typedef void 	(__cdecl*c_void)();
+typedef int 	(__cdecl*c_int)();
+typedef int 	(__cdecl*c_int_int)(int);
+typedef char* 	(__cdecl*c_charStar)();
+typedef void    (__cdecl*c_void_doubleStar)(double*);
+typedef double  (__cdecl*c_double_int)(int);
+typedef double* (__cdecl*c_doubleStar)();
+typedef void	(__cdecl*c_void_double_doubleStar)(double, double*);
 
 
 class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary handles to C DLL functions

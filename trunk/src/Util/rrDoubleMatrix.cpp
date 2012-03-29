@@ -5,10 +5,7 @@
 #include "rrException.h"
 #include "rrDoubleMatrix.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
-//---------------------------------------------------------------------------
+
 
 
 namespace rr

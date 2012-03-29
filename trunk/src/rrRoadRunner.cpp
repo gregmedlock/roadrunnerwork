@@ -15,10 +15,6 @@
 #include "rrStringUtils.h"
 #include "rrModelFromC.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-#pragma package(smart_init)
-#endif
-//---------------------------------------------------------------------------
 
 using namespace std;
 namespace rr
@@ -216,6 +212,7 @@ bool RoadRunner::InitializeModel()
 double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 {
     double dResult;
+	
     switch (record.selectionType)
     {
         case TSelectionType::clFloatingSpecies:
@@ -245,12 +242,13 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
             dResult = mModel->amounts[record.index];
             break;
         case TSelectionType::clBoundaryAmount:
-            int nIndex;
+//            int nIndex;
+			//Todo: enable this
 //            if (
 //                mModelGenerator->compartmentList.find(
 //                    mModelGenerator->boundarySpeciesList[record.index].compartmentName,
-//                    out nIndex)) //Todo: enable this
-                dResult = mModel->bc[record.index] * mModel->c[nIndex];
+//                    out nIndex)) 
+//                dResult = mModel->bc[record.index] * mModel->c[nIndex];
 //            else
                 dResult = 0.0;
             break;

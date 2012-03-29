@@ -18,7 +18,6 @@
 #include "rrException.h"
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
-#pragma argsused
 
 using namespace std;
 using namespace rr;
@@ -32,7 +31,7 @@ int main()
     char exePath[MAX_PATH];
     getcwd(exePath, MAX_PATH);
     string appPath(exePath);
-    gLog.Init("simulateModel", lDebug5, unique_ptr<LogFile>(new LogFile("SimulateModel.log")));
+    gLog.Init("simulateModel", lDebug5, unique_ptr<LogFile>(new LogFile("simulate_sbml.log")));
     LogOutput::mLogToConsole = true;
     gLog.SetCutOffLogLevel(lDebug2);
 //       	gLog.SetCutOffLogLevel(lInfo);

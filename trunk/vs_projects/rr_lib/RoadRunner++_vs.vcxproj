@@ -53,6 +53,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ROADRUNNER_VS_EXPORTS;ENABLE_DEBUG_OUTPUT;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;EXPORT_RR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(rr_root)\src\Util;$(rr_root)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <FloatingPointModel>Strict</FloatingPointModel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
