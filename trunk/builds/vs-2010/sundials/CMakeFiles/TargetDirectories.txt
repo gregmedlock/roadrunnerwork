@@ -1,0 +1,5 @@
+C:/rrw/builds/vs-2010/sundials/CMakeFiles/ALL_BUILD.dir
+C:/rrw/builds/vs-2010/sundials/CMakeFiles/ZERO_CHECK.dir
+C:/rrw/builds/vs-2010/sundials/src/cvode/CMakeFiles/sundials_cvode_static.dir
+C:/rrw/builds/vs-2010/sundials/src/kinsol/CMakeFiles/sundials_kinsol_static.dir
+C:/rrw/builds/vs-2010/sundials/src/nvec_ser/CMakeFiles/sundials_nvecserial_static.dir
