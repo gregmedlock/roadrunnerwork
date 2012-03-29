@@ -1,6 +1,0 @@
-C:/rrw/rrBuilds/vs-2010/libsbml/CMakeFiles/ALL_BUILD.dir
-C:/rrw/rrBuilds/vs-2010/libsbml/CMakeFiles/ZERO_CHECK.dir
-C:/rrw/rrBuilds/vs-2010/libsbml/CMakeFiles/check.dir
-C:/rrw/rrBuilds/vs-2010/libsbml/CMakeFiles/dist.dir
-C:/rrw/rrBuilds/vs-2010/libsbml/src/CMakeFiles/libsbml.dir
-C:/rrw/rrBuilds/vs-2010/libsbml/src/CMakeFiles/libsbml-static.dir
