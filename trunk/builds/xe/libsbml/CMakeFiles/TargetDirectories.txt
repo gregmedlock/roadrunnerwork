@@ -1,0 +1,4 @@
+C:/rrw/builds/xe/libsbml/CMakeFiles/check.dir
+C:/rrw/builds/xe/libsbml/CMakeFiles/dist.dir
+C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir
+C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml-static.dir

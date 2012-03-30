@@ -14,12 +14,14 @@ using namespace std;
 namespace rr
 {
 
-StringBuilder::StringBuilder(const string& aStr, const string& decl_spec)
+StringBuilder::StringBuilder(const string& aStr, const string& decl_spec, const string& call_conv)
 :
 mSizeOfVarField1(35),
 mSizeOfVarField2(40),
 mSizeOfVarField3(20),
-mDeclSpec(decl_spec)
+mDeclSpec(decl_spec),
+mCallingConvention(call_conv)
+
 {
     mStringing<<aStr;
 }
@@ -55,6 +57,7 @@ void StringBuilder::FormatVariable(const string& type, const string& varName, co
 
 void StringBuilder::AddFunctionExport(const string& retValue, const string& funcProto)
 {
+	//mStringing<<mDeclSpec<<" "<<left<<setw(mSizeOfVarField1)<<retValue<<mCallingConvention<<setw(mSizeOfVarField2)<<funcProto + ";"<<endl;
 	mStringing<<mDeclSpec<<" "<<left<<setw(mSizeOfVarField1)<<retValue<<setw(mSizeOfVarField2)<<funcProto + ";"<<endl;
 }
 

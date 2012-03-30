@@ -13,16 +13,16 @@ namespace rr
 
 class RR_DECLSPEC StringBuilder : public rrObject
 {
-
 	protected:
     	stringstream 				mStringing;
 		int							mSizeOfVarField1;
 		int							mSizeOfVarField2;
 		int							mSizeOfVarField3;
         string						mDeclSpec;
+        string						mCallingConvention;
 	public:
 
-    								StringBuilder(const string& aStr = "", const string& decl_spec = "D_S");
+    								StringBuilder(const string& aStr = "", const string& decl_spec = "D_S", const string& call_conv = "__cdecl");
 
 		stringstream& 				operator<<(const string& str);
         string 						ToString();
@@ -35,8 +35,6 @@ class RR_DECLSPEC StringBuilder : public rrObject
         void						Line(const string& line);
         void						TLine(const string& line, const int& tabs = 1);
         void						Clear();
-
-
 };
 
 }
