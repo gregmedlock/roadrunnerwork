@@ -6,10 +6,6 @@ SET(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
   "C:/rrw/ThirdParty/libsbml/src/sbml/UnitKind.c" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/UnitKind.c.obj"
-  "C:/rrw/ThirdParty/libsbml/src/sbml/compress/ioapi.c" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/compress/ioapi.c.obj"
-  "C:/rrw/ThirdParty/libsbml/src/sbml/compress/iowin32.c" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/compress/iowin32.c.obj"
-  "C:/rrw/ThirdParty/libsbml/src/sbml/compress/unzip.c" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/compress/unzip.c.obj"
-  "C:/rrw/ThirdParty/libsbml/src/sbml/compress/zip.c" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/compress/zip.c.obj"
   "C:/rrw/ThirdParty/libsbml/src/sbml/math/FormulaFormatter.c" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/math/FormulaFormatter.c.obj"
   "C:/rrw/ThirdParty/libsbml/src/sbml/math/FormulaParser.c" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/math/FormulaParser.c.obj"
   "C:/rrw/ThirdParty/libsbml/src/sbml/math/FormulaTokenizer.c" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/math/FormulaTokenizer.c.obj"
@@ -72,9 +68,6 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "C:/rrw/ThirdParty/libsbml/src/sbml/compress/CompressCommon.cpp" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/compress/CompressCommon.cpp.obj"
   "C:/rrw/ThirdParty/libsbml/src/sbml/compress/InputDecompressor.cpp" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/compress/InputDecompressor.cpp.obj"
   "C:/rrw/ThirdParty/libsbml/src/sbml/compress/OutputCompressor.cpp" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/compress/OutputCompressor.cpp.obj"
-  "C:/rrw/ThirdParty/libsbml/src/sbml/compress/bzfstream.cpp" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/compress/bzfstream.cpp.obj"
-  "C:/rrw/ThirdParty/libsbml/src/sbml/compress/zfstream.cpp" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/compress/zfstream.cpp.obj"
-  "C:/rrw/ThirdParty/libsbml/src/sbml/compress/zipfstream.cpp" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/compress/zipfstream.cpp.obj"
   "C:/rrw/ThirdParty/libsbml/src/sbml/conversion/ConversionOption.cpp" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/conversion/ConversionOption.cpp.obj"
   "C:/rrw/ThirdParty/libsbml/src/sbml/conversion/ConversionProperties.cpp" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/conversion/ConversionProperties.cpp.obj"
   "C:/rrw/ThirdParty/libsbml/src/sbml/conversion/RegisterConverters.cpp" "C:/rrw/builds/xe/libsbml/src/CMakeFiles/libsbml.dir/sbml/conversion/RegisterConverters.cpp.obj"
@@ -192,8 +185,6 @@ SET(CMAKE_CXX_COMPILER_ID "Borland")
 SET(CMAKE_TARGET_DEFINITIONS
   "LIBSBML_USE_CPP_NAMESPACE"
   "USE_LIBXML"
-  "USE_BZ2"
-  "USE_ZLIB"
   "PACKAGE_VERSION=\"5.4.1\""
   "PACKAGE_NAME=\"libsbml\""
   "WIN32"

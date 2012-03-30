@@ -179,7 +179,7 @@ EXTRA_LIBS:STRING=
 LIBBZ_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml/dependencies/include
 
 //The file name of the bzip2 library.
-LIBBZ_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml/dependencies/lib/bzip2.lib
+LIBBZ_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml/dependencies/lib/bzip2_xe.lib
 
 //Directory containing libraries that libSBML depends upon. (Particularly
 // important on Windows.)
@@ -196,7 +196,7 @@ LIBSBML_USE_STRICT_INCLUDES:BOOL=OFF
 LIBXML_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml/dependencies/include
 
 //The file name of the libxml2 library.
-LIBXML_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml/dependencies/lib/libxml2.lib
+LIBXML_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml/dependencies/lib/libxml2_xe.lib
 
 //The directory containing the zlib include files.
 LIBZ_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml/dependencies/include
@@ -208,7 +208,7 @@ LIBZ_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml/dependencies/lib/zdll.lib
 SWIG_EXECUTABLE:FILEPATH=c:/swigwin-2.0.4/swig.exe
 
 //Enable the use of bzip2 compression.
-WITH_BZIP2:BOOL=ON
+WITH_BZIP2:BOOL=OFF
 
 //Compile unit tests. Run with 'make test' or 'ctest'.
 WITH_CHECK:BOOL=OFF
@@ -259,16 +259,16 @@ WITH_WALL:BOOL=OFF
 WITH_XERCES:BOOL=OFF
 
 //Enable the use of zip compression.
-WITH_ZLIB:BOOL=ON
+WITH_ZLIB:BOOL=OFF
 
 //Dependencies for the target
-libsbml-static_LIB_DEPENDS:STATIC=general;C:/rrw/ThirdParty/libsbml/dependencies/lib/bzip2.lib;general;C:/rrw/ThirdParty/libsbml/dependencies/lib/zdll.lib;general;C:/rrw/ThirdParty/libsbml/dependencies/lib/libxml2.lib;
+libsbml-static_LIB_DEPENDS:STATIC=general;C:/rrw/ThirdParty/libsbml/dependencies/lib/libxml2_xe.lib;
 
 //Value Computed by CMake
 libsbml_BINARY_DIR:STATIC=C:/rrw/builds/xe/libsbml
 
 //Dependencies for the target
-libsbml_LIB_DEPENDS:STATIC=general;C:/rrw/ThirdParty/libsbml/dependencies/lib/bzip2.lib;general;C:/rrw/ThirdParty/libsbml/dependencies/lib/zdll.lib;general;C:/rrw/ThirdParty/libsbml/dependencies/lib/libxml2.lib;
+libsbml_LIB_DEPENDS:STATIC=general;C:/rrw/ThirdParty/libsbml/dependencies/lib/libxml2_xe.lib;
 
 //Value Computed by CMake
 libsbml_SOURCE_DIR:STATIC=C:/rrw/ThirdParty/libsbml

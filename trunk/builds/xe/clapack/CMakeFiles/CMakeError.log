@@ -1,0 +1,24 @@
+Determining if the C compiler works failed with the following output:
+Change Dir: C:/rrw/builds/xe/clapack/CMakeFiles/CMakeTmp
+
+Run Build Command:make "cmTryCompileExec\fast"
+MAKE Version 5.4  Copyright (c) 1987, 2010 Embarcadero Technologies, Inc.
+	make -f CMakeFiles\cmTryCompileExec.dir\build.make -l -o  CMakeFiles\cmTryCompileExec.dir\build
+MAKE Version 5.4  Copyright (c) 1987, 2010 Embarcadero Technologies, Inc.
+	"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E cmake_progress_report C:\rrw\builds\xe\clapack\CMakeFiles\CMakeTmp\CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/testCCompiler.c.obj
+	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe -tWR -tW-  @MAKE0000.@@@
+Embarcadero C++ 6.31 for Win32 Copyright (c) 1993-2010 Embarcadero Technologies, Inc.
+C:\rrw\builds\xe\clapack\CMakeFiles\CMakeTmp\testCCompiler.c:
+Linking C executable cmTryCompileExec.exe
+	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe -tWR -tW- -ecmTryCompileExec.exe @MAKE0002.@@@
+Embarcadero C++ 6.31 for Win32 Copyright (c) 1993-2010 Embarcadero Technologies, Inc.
+Turbo Incremental Link 6.11 Copyright (c) 1997-2010 Embarcadero Technologies, Inc.
+Error: Unresolved external 'WinMain' referenced from C:\PROGRAM FILES (X86)\EMBARCADERO\RAD STUDIO\8.0\LIB\WIN32\RELEASE\C0W32.OBJ
+Error: Unable to perform link
+
+** error 1 ** deleting cmTryCompileExec.exe
+
+** error 1 ** deleting cmTryCompileExec\fast
+
+

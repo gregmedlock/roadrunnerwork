@@ -4669,226 +4669,9 @@ src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj.provide
 
 src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj
 
-src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\compress\bzfstream.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_150)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/compress/bzfstream.cpp.obj"
-	cd C:\rrw\builds\xe\libsbml\src
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\bzfstream.cpp
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/compress/bzfstream.cpp.i"
-	cd C:\rrw\builds\xe\libsbml\src
-	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\bzfstream.cpp
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libsbml-static.dir/sbml/compress/bzfstream.cpp.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj.requires:
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj.requires
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj.provides: src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj.requires
-	$(MAKE) -f src\CMakeFiles\libsbml-static.dir\build.make -$(MAKEFLAGS) src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj.provides.build
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj.provides
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\compress\zip.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_151)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/compress/zip.c.obj"
-	cd C:\rrw\builds\xe\libsbml\src
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\zip.c
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/compress/zip.c.i"
-	cd C:\rrw\builds\xe\libsbml\src
-	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\zip.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\zip.c
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/libsbml-static.dir/sbml/compress/zip.c.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_ASSEMBLY_SOURCE
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj.requires:
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj.requires
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj.provides: src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj.requires
-	$(MAKE) -f src\CMakeFiles\libsbml-static.dir\build.make -$(MAKEFLAGS) src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj.provides.build
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj.provides
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\compress\unzip.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_152)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/compress/unzip.c.obj"
-	cd C:\rrw\builds\xe\libsbml\src
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\unzip.c
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/compress/unzip.c.i"
-	cd C:\rrw\builds\xe\libsbml\src
-	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\unzip.c
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/libsbml-static.dir/sbml/compress/unzip.c.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_ASSEMBLY_SOURCE
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj.requires:
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj.requires
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj.provides: src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj.requires
-	$(MAKE) -f src\CMakeFiles\libsbml-static.dir\build.make -$(MAKEFLAGS) src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj.provides.build
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj.provides
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\compress\ioapi.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_153)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/compress/ioapi.c.obj"
-	cd C:\rrw\builds\xe\libsbml\src
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\ioapi.c
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/compress/ioapi.c.i"
-	cd C:\rrw\builds\xe\libsbml\src
-	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\ioapi.c
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/libsbml-static.dir/sbml/compress/ioapi.c.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_ASSEMBLY_SOURCE
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj.requires:
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj.requires
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj.provides: src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj.requires
-	$(MAKE) -f src\CMakeFiles\libsbml-static.dir\build.make -$(MAKEFLAGS) src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj.provides.build
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj.provides
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\compress\zfstream.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_154)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/compress/zfstream.cpp.obj"
-	cd C:\rrw\builds\xe\libsbml\src
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\zfstream.cpp
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/compress/zfstream.cpp.i"
-	cd C:\rrw\builds\xe\libsbml\src
-	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\zfstream.cpp
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libsbml-static.dir/sbml/compress/zfstream.cpp.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj.requires:
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj.requires
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj.provides: src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj.requires
-	$(MAKE) -f src\CMakeFiles\libsbml-static.dir\build.make -$(MAKEFLAGS) src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj.provides.build
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj.provides
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\compress\zipfstream.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_155)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/compress/zipfstream.cpp.obj"
-	cd C:\rrw\builds\xe\libsbml\src
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\zipfstream.cpp
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/compress/zipfstream.cpp.i"
-	cd C:\rrw\builds\xe\libsbml\src
-	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\zipfstream.cpp
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/libsbml-static.dir/sbml/compress/zipfstream.cpp.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_CXX_CREATE_ASSEMBLY_SOURCE
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj.requires:
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj.requires
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj.provides: src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj.requires
-	$(MAKE) -f src\CMakeFiles\libsbml-static.dir\build.make -$(MAKEFLAGS) src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj.provides.build
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj.provides
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\compress\iowin32.c
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_156)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/compress/iowin32.c.obj"
-	cd C:\rrw\builds\xe\libsbml\src
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\iowin32.c
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/compress/iowin32.c.i"
-	cd C:\rrw\builds\xe\libsbml\src
-	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\iowin32.c
-|
-	cd C:\rrw\builds\xe\libsbml
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/libsbml-static.dir/sbml/compress/iowin32.c.s"
-	$(CMAKE_COMMAND) -E cmake_unimplemented_variable CMAKE_C_CREATE_ASSEMBLY_SOURCE
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj.requires:
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj.requires
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj.provides: src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj.requires
-	$(MAKE) -f src\CMakeFiles\libsbml-static.dir\build.make -$(MAKEFLAGS) src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj.provides.build
-.PHONY : src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj.provides
-
-src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj
-
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLAttributes.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_157)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_150)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLAttributes.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -4919,7 +4702,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj.provides.build:
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLBuffer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_158)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_151)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLBuffer.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -4950,7 +4733,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj.provides.build: src
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLConstructorException.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_159)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_152)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLConstructorException.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -4981,7 +4764,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj.provi
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLError.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_160)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_153)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLError.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5012,7 +4795,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj.provides.build: src\
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLErrorLog.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_161)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_154)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLErrorLog.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5043,7 +4826,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj.provides.build: s
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLFileBuffer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_162)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_155)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLFileBuffer.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5074,7 +4857,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj.provides.build:
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_163)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_156)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLHandler.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5105,7 +4888,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj.provides.build: sr
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLInputStream.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_164)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_157)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLInputStream.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5136,7 +4919,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj.provides.build
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLMemoryBuffer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_165)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_158)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLMemoryBuffer.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5167,7 +4950,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj.provides.buil
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLNamespaces.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_166)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_159)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLNamespaces.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5198,7 +4981,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj.provides.build:
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLNode.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_167)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_160)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLNode.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5229,7 +5012,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj.provides.build: src\C
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLOutputStream.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_168)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_161)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLOutputStream.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5260,7 +5043,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj.provides.buil
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_169)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_162)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLParser.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5291,7 +5074,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj.provides.build: src
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLToken.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_170)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_163)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLToken.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5322,7 +5105,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj.provides.build: src\
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLTokenizer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_171)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_164)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLTokenizer.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5353,7 +5136,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj.provides.build: 
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLTriple.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_172)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_165)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLTriple.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5384,7 +5167,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj.provides.build: src
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLAttributes.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_173)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_166)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLAttributes.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5415,7 +5198,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj.provides.bui
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_174)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_167)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLHandler.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5446,7 +5229,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj.provides.build:
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLNamespaces.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_175)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_168)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLNamespaces.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5477,7 +5260,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj.provides.bui
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLParser.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_176)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_169)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLParser.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5508,7 +5291,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj.provides.build: 
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLTranscode.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLTranscode.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLTranscode.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_177)
+	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_170)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLTranscode.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
@@ -5688,13 +5471,6 @@ libsbml-static_OBJECTS = \
 "CMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj" \
 "CMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj" \
 "CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj" \
-"CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj" \
-"CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj" \
-"CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj" \
-"CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj" \
-"CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj" \
-"CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj" \
-"CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj" \
 "CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj" \
 "CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj" \
 "CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj" \
@@ -5869,13 +5645,6 @@ src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\validator\constra
 src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj
 src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj
 src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj
-src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj
-src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj
-src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj
-src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj
-src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj
-src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj
-src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj
 src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj
 src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj
 src\libsbml-static.lib: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj
@@ -6061,13 +5830,6 @@ src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sb
 src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj.requires
 src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj.requires
 src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj.requires
-src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\compress\bzfstream.cpp.obj.requires
-src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\compress\zip.c.obj.requires
-src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\compress\unzip.c.obj.requires
-src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\compress\ioapi.c.obj.requires
-src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\compress\zfstream.cpp.obj.requires
-src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\compress\zipfstream.cpp.obj.requires
-src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\compress\iowin32.c.obj.requires
 src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj.requires
 src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj.requires
 src\CMakeFiles\libsbml-static.dir\requires: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj.requires

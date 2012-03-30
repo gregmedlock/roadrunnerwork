@@ -1,0 +1,3 @@
+C:/rrw/builds/xe/sundials/src/cvode/CMakeFiles/sundials_cvode_static.dir
+C:/rrw/builds/xe/sundials/src/kinsol/CMakeFiles/sundials_kinsol_static.dir
+C:/rrw/builds/xe/sundials/src/nvec_ser/CMakeFiles/sundials_nvecserial_static.dir
