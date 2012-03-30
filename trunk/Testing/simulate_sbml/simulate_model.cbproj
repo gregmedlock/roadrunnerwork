@@ -35,8 +35,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\;..\..\src;..\..\src\Util\;..\..\src\Logger;..\..\src\Scanner;..\..\src\LibStructSupport;..\..\src\libstruct;..\..\src\Solvers;C:\rrInstalls\xe\sundials\include;C:\rrInstalls\xe\libsbml\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\src\;..\..\src\Util\;..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\src\;..\..\src;..\..\src\Util\;..\..\src\Logger;..\..\src\Scanner;..\..\src\LibStructSupport;..\..\src\libstruct;..\..\src\Solvers;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\installs\xe\lib\;..\..\src\;..\..\src\Util\;..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -53,7 +53,7 @@
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<_TCHARMapping>char</_TCHARMapping>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
-			<FinalOutputDir>C:\RRW\build\bin\</FinalOutputDir>
+			<FinalOutputDir>C:\rrw\installs\xe\bin\</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -75,9 +75,9 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="..\..\build\link\RoadRunner_xe.lib">
+			<LibFiles Include="..\..\installs\xe\lib\RoadRunner_xe.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>1</BuildOrder>
+				<BuildOrder>2</BuildOrder>
 			</LibFiles>
 			<CppCompile Include="..\..\src\rrModelFromC.cpp">
 				<DependentOn>..\..\src\rrModelFromC.h</DependentOn>
