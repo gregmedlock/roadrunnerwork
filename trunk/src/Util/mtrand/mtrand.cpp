@@ -13,7 +13,8 @@
 const int MTRand_int32::n = 632;
 const int MTRand_int32::m = 397;
 
-unsigned long MTRand_int32::state[MTRand_int32::n] = {0x0UL};
+unsigned long MTRand_int32::state[632] = {0x0UL};
+
 int MTRand_int32::p = 0;
 bool MTRand_int32::init = false;
 

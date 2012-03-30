@@ -40,7 +40,7 @@ RM = "C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = "C:\Program Files (x86)\CMake 2.8\bin\cmake-gui.exe"
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\rrw\ThirdParty\libsbml
+CMAKE_SOURCE_DIR = C:\rrw\ThirdParty\libsbml_xe
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = C:\rrw\builds\xe\libsbml

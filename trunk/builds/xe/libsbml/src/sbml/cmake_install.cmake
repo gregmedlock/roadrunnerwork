@@ -1,8 +1,8 @@
-# Install script for directory: C:/rrw/ThirdParty/libsbml/src/sbml
+# Install script for directory: C:/rrw/ThirdParty/libsbml_xe/src/sbml
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "c:/rrw/installs/xe/libsbml")
+  SET(CMAKE_INSTALL_PREFIX "C:/rrw/installs/xe")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

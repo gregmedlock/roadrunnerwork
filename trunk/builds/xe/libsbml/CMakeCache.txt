@@ -86,10 +86,10 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=-v
 
 //Full path to the library output directory
-CMAKE_INSTALL_LIBDIR:PATH=c:/rrw/installs/xe/libsbml/lib
+CMAKE_INSTALL_LIBDIR:PATH=C:/rrw/installs/xe/lib
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=c:/rrw/installs/xe/libsbml
+CMAKE_INSTALL_PREFIX:PATH=C:/rrw/installs/xe
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=c:/cygwin/bin/ld.exe
@@ -176,14 +176,14 @@ EXIT_ON_ERROR:BOOL=OFF
 EXTRA_LIBS:STRING=
 
 //The directory containing the bzip2 include files.
-LIBBZ_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml/dependencies/include
+LIBBZ_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/include
 
 //The file name of the bzip2 library.
-LIBBZ_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml/dependencies/lib/bzip2_xe.lib
+LIBBZ_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/bzip2.lib
 
 //Directory containing libraries that libSBML depends upon. (Particularly
 // important on Windows.)
-LIBSBML_DEPENDENCY_DIR:PATH=C:/rrw/ThirdParty/libsbml/dependencies
+LIBSBML_DEPENDENCY_DIR:PATH=C:/rrw/ThirdParty/libsbml_xe/dependencies
 
 //Build the libsbml shared library with version information
 LIBSBML_SHARED_VERSION:BOOL=ON
@@ -193,16 +193,16 @@ LIBSBML_SHARED_VERSION:BOOL=ON
 LIBSBML_USE_STRICT_INCLUDES:BOOL=OFF
 
 //The directory containing the libxml2 include files.
-LIBXML_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml/dependencies/include
+LIBXML_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/include
 
 //The file name of the libxml2 library.
-LIBXML_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml/dependencies/lib/libxml2_xe.lib
+LIBXML_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/libxml2_xe.lib
 
 //The directory containing the zlib include files.
-LIBZ_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml/dependencies/include
+LIBZ_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/include
 
 //The file name of the zip compression library.
-LIBZ_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml/dependencies/lib/zdll.lib
+LIBZ_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/zdll.lib
 
 //The file name of the swig executable.
 SWIG_EXECUTABLE:FILEPATH=c:/swigwin-2.0.4/swig.exe
@@ -262,16 +262,16 @@ WITH_XERCES:BOOL=OFF
 WITH_ZLIB:BOOL=OFF
 
 //Dependencies for the target
-libsbml-static_LIB_DEPENDS:STATIC=general;C:/rrw/ThirdParty/libsbml/dependencies/lib/libxml2_xe.lib;
+libsbml-static_LIB_DEPENDS:STATIC=general;C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/libxml2_xe.lib;
 
 //Value Computed by CMake
 libsbml_BINARY_DIR:STATIC=C:/rrw/builds/xe/libsbml
 
 //Dependencies for the target
-libsbml_LIB_DEPENDS:STATIC=general;C:/rrw/ThirdParty/libsbml/dependencies/lib/libxml2_xe.lib;
+libsbml_LIB_DEPENDS:STATIC=general;C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/libxml2_xe.lib;
 
 //Value Computed by CMake
-libsbml_SOURCE_DIR:STATIC=C:/rrw/ThirdParty/libsbml
+libsbml_SOURCE_DIR:STATIC=C:/rrw/ThirdParty/libsbml_xe
 
 
 ########################
@@ -352,7 +352,7 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_GENERATOR:INTERNAL=Borland Makefiles
 //Start directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=C:/rrw/ThirdParty/libsbml
+CMAKE_HOME_DIRECTORY:INTERNAL=C:/rrw/ThirdParty/libsbml_xe
 //ADVANCED property for variable: CMAKE_LINKER
 CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MAKE_PROGRAM
@@ -370,7 +370,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=4
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=3
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -422,13 +422,13 @@ HAVE_LIBM:INTERNAL=
 HAVE_MATH_H:INTERNAL=1
 //Have include HAVE_SYS_TYPES_H
 HAVE_SYS_TYPES_H:INTERNAL=1
-//Have library C:/rrw/ThirdParty/libsbml/dependencies/lib/bzip2.lib
+//Have library C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/bzip2.lib
 LIBBZ_FOUND_SYMBOL:INTERNAL=
 //ADVANCED property for variable: LIBSBML_SHARED_VERSION
 LIBSBML_SHARED_VERSION-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: LIBSBML_USE_STRICT_INCLUDES
 LIBSBML_USE_STRICT_INCLUDES-ADVANCED:INTERNAL=1
-//Have library C:/rrw/ThirdParty/libsbml/dependencies/lib/zdll.lib
+//Have library C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/zdll.lib
 LIBZ_FOUND_SYMBOL:INTERNAL=
 //Have include STDC_HEADERS
 STDC_HEADERS:INTERNAL=1

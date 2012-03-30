@@ -1,8 +1,8 @@
-# Install script for directory: C:/rrw/ThirdParty/libsbml
+# Install script for directory: C:/rrw/ThirdParty/libsbml_xe
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  SET(CMAKE_INSTALL_PREFIX "c:/rrw/installs/xe/libsbml")
+  SET(CMAKE_INSTALL_PREFIX "C:/rrw/installs/xe")
 ENDIF(NOT DEFINED CMAKE_INSTALL_PREFIX)
 STRING(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -29,12 +29,12 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT)
 
 IF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   FILE(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE FILE FILES
-    "C:/rrw/ThirdParty/libsbml/COPYING.txt"
-    "C:/rrw/ThirdParty/libsbml/FUNDING.txt"
-    "C:/rrw/ThirdParty/libsbml/LICENSE.txt"
-    "C:/rrw/ThirdParty/libsbml/NEWS.txt"
-    "C:/rrw/ThirdParty/libsbml/README.txt"
-    "C:/rrw/ThirdParty/libsbml/VERSION.txt"
+    "C:/rrw/ThirdParty/libsbml_xe/COPYING.txt"
+    "C:/rrw/ThirdParty/libsbml_xe/FUNDING.txt"
+    "C:/rrw/ThirdParty/libsbml_xe/LICENSE.txt"
+    "C:/rrw/ThirdParty/libsbml_xe/NEWS.txt"
+    "C:/rrw/ThirdParty/libsbml_xe/README.txt"
+    "C:/rrw/ThirdParty/libsbml_xe/VERSION.txt"
     )
 ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
 

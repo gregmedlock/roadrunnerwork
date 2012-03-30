@@ -36,7 +36,7 @@ RM = "C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E remove -f
 CMAKE_EDIT_COMMAND = "C:\Program Files (x86)\CMake 2.8\bin\cmake-gui.exe"
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = C:\rrw\ThirdParty\libsbml
+CMAKE_SOURCE_DIR = C:\rrw\ThirdParty\libsbml_xe
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = C:\rrw\builds\xe\libsbml
@@ -51,12 +51,12 @@ CMAKE_BINARY_DIR = C:\rrw\builds\xe\libsbml
 !include src\CMakeFiles\libsbml-static.dir\flags.make
 
 src\CMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\annotation\CVTerm.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\CVTerm.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/annotation/CVTerm.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\annotation\CVTerm.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\CVTerm.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -64,7 +64,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/annotation/CVTerm.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\annotation\CVTerm.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\CVTerm.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -82,12 +82,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.obj.provides: src\C
 src\CMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\annotation\CVTerm.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\annotation\Date.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\Date.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/annotation/Date.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\annotation\Date.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\Date.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -95,7 +95,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/annotation/Date.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\annotation\Date.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\Date.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -113,12 +113,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.obj.provides: src\CMa
 src\CMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\annotation\Date.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\annotation\ModelCreator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\ModelCreator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/annotation/ModelCreator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\annotation\ModelCreator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\ModelCreator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -126,7 +126,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.i: cmake_forc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/annotation/ModelCreator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\annotation\ModelCreator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\ModelCreator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -144,12 +144,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.obj.provides:
 src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelCreator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\annotation\ModelHistory.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\ModelHistory.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/annotation/ModelHistory.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\annotation\ModelHistory.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\ModelHistory.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -157,7 +157,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.i: cmake_forc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/annotation/ModelHistory.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\annotation\ModelHistory.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\ModelHistory.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -175,12 +175,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.obj.provides:
 src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\annotation\ModelHistory.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\annotation\RDFAnnotation.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\RDFAnnotation.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/annotation/RDFAnnotation.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\annotation\RDFAnnotation.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\RDFAnnotation.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -188,7 +188,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.i: cmake_for
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/annotation/RDFAnnotation.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\annotation\RDFAnnotation.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\annotation\RDFAnnotation.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -206,12 +206,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.obj.provides
 src\CMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\annotation\RDFAnnotation.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\common\libsbml-version.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\common\libsbml-version.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/common/libsbml-version.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\common\libsbml-version.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\common\libsbml-version.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -219,7 +219,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/common/libsbml-version.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\common\libsbml-version.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\common\libsbml-version.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -237,12 +237,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.obj.provides: 
 src\CMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\common\libsbml-version.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\ConversionOption.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\ConversionOption.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/ConversionOption.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\ConversionOption.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\ConversionOption.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -250,7 +250,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.i: cmake_
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/ConversionOption.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\ConversionOption.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\ConversionOption.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -268,12 +268,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.obj.provi
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionOption.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\ConversionProperties.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\ConversionProperties.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/ConversionProperties.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\ConversionProperties.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\ConversionProperties.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -281,7 +281,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.i: cm
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/ConversionProperties.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\ConversionProperties.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\ConversionProperties.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -299,12 +299,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.obj.p
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\ConversionProperties.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\RegisterConverters.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\RegisterConverters.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/RegisterConverters.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\RegisterConverters.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\RegisterConverters.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -312,7 +312,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.i: cmak
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/RegisterConverters.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\RegisterConverters.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\RegisterConverters.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -330,12 +330,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.obj.pro
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\RegisterConverters.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLConverter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLConverter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLConverter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLConverter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -343,7 +343,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.i: cmake_for
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLConverter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLConverter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -361,12 +361,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.obj.provides
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLConverterRegistry.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLConverterRegistry.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLConverterRegistry.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLConverterRegistry.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLConverterRegistry.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -374,7 +374,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.i: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLConverterRegistry.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLConverterRegistry.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLConverterRegistry.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -392,12 +392,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.obj.
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLConverterRegistry.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLFunctionDefinitionConverter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLFunctionDefinitionConverter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLFunctionDefinitionConverter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLFunctionDefinitionConverter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLFunctionDefinitionConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -405,7 +405,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverte
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLFunctionDefinitionConverter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLFunctionDefinitionConverter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLFunctionDefinitionConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -423,12 +423,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverte
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLFunctionDefinitionConverter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLInitialAssignmentConverter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLInitialAssignmentConverter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLInitialAssignmentConverter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLInitialAssignmentConverter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLInitialAssignmentConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -436,7 +436,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLInitialAssignmentConverter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLInitialAssignmentConverter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLInitialAssignmentConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -454,12 +454,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLInitialAssignmentConverter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLLevelVersionConverter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLLevelVersionConverter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLLevelVersionConverter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLLevelVersionConverter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLLevelVersionConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -467,7 +467,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLLevelVersionConverter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLLevelVersionConverter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLLevelVersionConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -485,12 +485,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLLevelVersionConverter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLRuleConverter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLRuleConverter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLRuleConverter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLRuleConverter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLRuleConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -498,7 +498,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.i: cmake
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLRuleConverter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLRuleConverter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLRuleConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -516,12 +516,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.obj.prov
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLRuleConverter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLStripPackageConverter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLStripPackageConverter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLStripPackageConverter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLStripPackageConverter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLStripPackageConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -529,7 +529,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLStripPackageConverter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLStripPackageConverter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLStripPackageConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -547,12 +547,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLStripPackageConverter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLUnitsConverter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLUnitsConverter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLUnitsConverter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLUnitsConverter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLUnitsConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -560,7 +560,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.i: cmak
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/conversion/SBMLUnitsConverter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\conversion\SBMLUnitsConverter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\conversion\SBMLUnitsConverter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -578,12 +578,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.obj.pro
 src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\conversion\SBMLUnitsConverter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\extension\ISBMLExtensionNamespaces.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\ISBMLExtensionNamespaces.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/extension/ISBMLExtensionNamespaces.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\ISBMLExtensionNamespaces.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\ISBMLExtensionNamespaces.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -591,7 +591,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.i:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/extension/ISBMLExtensionNamespaces.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\ISBMLExtensionNamespaces.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\ISBMLExtensionNamespaces.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -609,12 +609,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.ob
 src\CMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\extension\ISBMLExtensionNamespaces.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBaseExtensionPoint.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBaseExtensionPoint.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/extension/SBaseExtensionPoint.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBaseExtensionPoint.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBaseExtensionPoint.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -622,7 +622,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.i: cmak
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/extension/SBaseExtensionPoint.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBaseExtensionPoint.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBaseExtensionPoint.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -640,12 +640,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.obj.pro
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\extension\SBaseExtensionPoint.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBasePlugin.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBasePlugin.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/extension/SBasePlugin.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBasePlugin.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBasePlugin.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -653,7 +653,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/extension/SBasePlugin.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBasePlugin.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBasePlugin.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -671,12 +671,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.obj.provides: s
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePlugin.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBasePluginCreatorBase.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBasePluginCreatorBase.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/extension/SBasePluginCreatorBase.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBasePluginCreatorBase.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBasePluginCreatorBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -684,7 +684,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.i: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/extension/SBasePluginCreatorBase.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBasePluginCreatorBase.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBasePluginCreatorBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -702,12 +702,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.obj.
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\extension\SBasePluginCreatorBase.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLDocumentPlugin.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLDocumentPlugin.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_22)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/extension/SBMLDocumentPlugin.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLDocumentPlugin.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLDocumentPlugin.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -715,7 +715,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.i: cmake
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/extension/SBMLDocumentPlugin.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLDocumentPlugin.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLDocumentPlugin.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -733,12 +733,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.obj.prov
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLDocumentPlugin.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtension.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtension.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_23)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/extension/SBMLExtension.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtension.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtension.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -746,7 +746,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.i: cmake_forc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/extension/SBMLExtension.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtension.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtension.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -764,12 +764,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.obj.provides:
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtension.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionException.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtensionException.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_24)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/extension/SBMLExtensionException.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionException.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtensionException.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -777,7 +777,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.i: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/extension/SBMLExtensionException.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionException.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtensionException.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -795,12 +795,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.obj.
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionException.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionNamespaces.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtensionNamespaces.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_25)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/extension/SBMLExtensionNamespaces.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionNamespaces.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtensionNamespaces.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -808,7 +808,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.i: 
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/extension/SBMLExtensionNamespaces.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionNamespaces.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtensionNamespaces.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -826,12 +826,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.obj
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionNamespaces.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionRegistry.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtensionRegistry.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_26)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/extension/SBMLExtensionRegistry.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionRegistry.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtensionRegistry.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -839,7 +839,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.i: cm
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/extension/SBMLExtensionRegistry.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionRegistry.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\extension\SBMLExtensionRegistry.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -857,12 +857,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.obj.p
 src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\extension\SBMLExtensionRegistry.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\math\ASTNode.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\ASTNode.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_27)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/math/ASTNode.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\math\ASTNode.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\ASTNode.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -870,7 +870,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/math/ASTNode.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\math\ASTNode.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\ASTNode.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -888,12 +888,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.obj.provides: src\CMakeF
 src\CMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\math\ASTNode.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\math\MathML.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\MathML.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_28)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/math/MathML.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\math\MathML.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\MathML.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -901,7 +901,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/math/MathML.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\math\MathML.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\MathML.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -919,12 +919,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.obj.provides: src\CMakeFi
 src\CMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\math\MathML.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\math\FormulaFormatter.c
+src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\FormulaFormatter.c
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_29)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/math/FormulaFormatter.c.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\math\FormulaFormatter.c
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\FormulaFormatter.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -932,7 +932,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/math/FormulaFormatter.c.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\math\FormulaFormatter.c
+-DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.i -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\FormulaFormatter.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -950,12 +950,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.obj.provides: src
 src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaFormatter.c.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\math\FormulaParser.c
+src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\FormulaParser.c
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_30)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/math/FormulaParser.c.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\math\FormulaParser.c
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\FormulaParser.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -963,7 +963,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/math/FormulaParser.c.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\math\FormulaParser.c
+-DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.i -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\FormulaParser.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -981,12 +981,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.obj.provides: src\CM
 src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaParser.c.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\math\FormulaTokenizer.c
+src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\FormulaTokenizer.c
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_31)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/math/FormulaTokenizer.c.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\math\FormulaTokenizer.c
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\FormulaTokenizer.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -994,7 +994,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/math/FormulaTokenizer.c.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\math\FormulaTokenizer.c
+-DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.i -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\math\FormulaTokenizer.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1012,12 +1012,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.obj.provides: src
 src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\math\FormulaTokenizer.c.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\AlgebraicRule.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\AlgebraicRule.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_32)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/AlgebraicRule.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\AlgebraicRule.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\AlgebraicRule.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1025,7 +1025,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/AlgebraicRule.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\AlgebraicRule.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\AlgebraicRule.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1043,12 +1043,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.obj.provides: src\CMake
 src\CMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\AlgebraicRule.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\AssignmentRule.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\AssignmentRule.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_33)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/AssignmentRule.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\AssignmentRule.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\AssignmentRule.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1056,7 +1056,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/AssignmentRule.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\AssignmentRule.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\AssignmentRule.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1074,12 +1074,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.obj.provides: src\CMak
 src\CMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\AssignmentRule.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Compartment.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Compartment.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_34)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Compartment.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Compartment.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Compartment.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1087,7 +1087,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Compartment.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Compartment.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Compartment.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1105,12 +1105,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.obj.provides: src\CMakeFi
 src\CMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Compartment.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\CompartmentType.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\CompartmentType.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_35)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/CompartmentType.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\CompartmentType.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\CompartmentType.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1118,7 +1118,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/CompartmentType.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\CompartmentType.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\CompartmentType.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1136,12 +1136,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.obj.provides: src\CMa
 src\CMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\CompartmentType.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Constraint.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Constraint.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_36)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Constraint.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Constraint.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Constraint.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1149,7 +1149,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Constraint.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Constraint.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Constraint.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1167,12 +1167,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.obj.provides: src\CMakeFil
 src\CMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Constraint.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Delay.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Delay.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Delay.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Delay.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Delay.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_37)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Delay.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Delay.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Delay.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Delay.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Delay.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1180,7 +1180,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Delay.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Delay.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Delay.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Delay.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Delay.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Delay.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1198,12 +1198,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Delay.cpp.obj.provides: src\CMakeFiles\li
 src\CMakeFiles\libsbml-static.dir\sbml\Delay.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Delay.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Event.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Event.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Event.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Event.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Event.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_38)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Event.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Event.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Event.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Event.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Event.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1211,7 +1211,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Event.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Event.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Event.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Event.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Event.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Event.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1229,12 +1229,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Event.cpp.obj.provides: src\CMakeFiles\li
 src\CMakeFiles\libsbml-static.dir\sbml\Event.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Event.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\EventAssignment.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\EventAssignment.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_39)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/EventAssignment.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\EventAssignment.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\EventAssignment.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1242,7 +1242,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/EventAssignment.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\EventAssignment.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\EventAssignment.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1260,12 +1260,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.obj.provides: src\CMa
 src\CMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\EventAssignment.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\ExpectedAttributes.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\ExpectedAttributes.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_40)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/ExpectedAttributes.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\ExpectedAttributes.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\ExpectedAttributes.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1273,7 +1273,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/ExpectedAttributes.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\ExpectedAttributes.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\ExpectedAttributes.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1291,12 +1291,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.obj.provides: src\
 src\CMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\ExpectedAttributes.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\FunctionDefinition.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\FunctionDefinition.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_41)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/FunctionDefinition.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\FunctionDefinition.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\FunctionDefinition.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1304,7 +1304,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/FunctionDefinition.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\FunctionDefinition.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\FunctionDefinition.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1322,12 +1322,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.obj.provides: src\
 src\CMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\FunctionDefinition.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\InitialAssignment.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\InitialAssignment.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_42)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/InitialAssignment.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\InitialAssignment.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\InitialAssignment.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1335,7 +1335,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/InitialAssignment.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\InitialAssignment.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\InitialAssignment.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1353,12 +1353,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.obj.provides: src\C
 src\CMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\InitialAssignment.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\KineticLaw.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\KineticLaw.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_43)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/KineticLaw.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\KineticLaw.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\KineticLaw.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1366,7 +1366,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/KineticLaw.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\KineticLaw.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\KineticLaw.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1384,12 +1384,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.obj.provides: src\CMakeFil
 src\CMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\KineticLaw.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\ListOf.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\ListOf.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_44)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/ListOf.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\ListOf.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\ListOf.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1397,7 +1397,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/ListOf.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\ListOf.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\ListOf.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1415,12 +1415,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.obj.provides: src\CMakeFiles\l
 src\CMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\ListOf.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\LocalParameter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\LocalParameter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_45)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/LocalParameter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\LocalParameter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\LocalParameter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1428,7 +1428,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/LocalParameter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\LocalParameter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\LocalParameter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1446,12 +1446,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.obj.provides: src\CMak
 src\CMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\LocalParameter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Model.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Model.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Model.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Model.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Model.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_46)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Model.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Model.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Model.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Model.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Model.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1459,7 +1459,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Model.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Model.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Model.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Model.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Model.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Model.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1477,12 +1477,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Model.cpp.obj.provides: src\CMakeFiles\li
 src\CMakeFiles\libsbml-static.dir\sbml\Model.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Model.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\ModifierSpeciesReference.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\ModifierSpeciesReference.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_47)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/ModifierSpeciesReference.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\ModifierSpeciesReference.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\ModifierSpeciesReference.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1490,7 +1490,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.i: cmake_for
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/ModifierSpeciesReference.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\ModifierSpeciesReference.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\ModifierSpeciesReference.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1508,12 +1508,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.obj.provides
 src\CMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\ModifierSpeciesReference.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Parameter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Parameter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_48)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Parameter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Parameter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Parameter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1521,7 +1521,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Parameter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Parameter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Parameter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1539,12 +1539,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.obj.provides: src\CMakeFile
 src\CMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Parameter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Priority.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Priority.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Priority.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Priority.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Priority.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_49)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Priority.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Priority.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Priority.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Priority.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Priority.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1552,7 +1552,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Priority.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Priority.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Priority.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Priority.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Priority.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Priority.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1570,12 +1570,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Priority.cpp.obj.provides: src\CMakeFiles
 src\CMakeFiles\libsbml-static.dir\sbml\Priority.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Priority.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\RateRule.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\RateRule.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_50)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/RateRule.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\RateRule.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\RateRule.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1583,7 +1583,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/RateRule.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\RateRule.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\RateRule.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1601,12 +1601,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.obj.provides: src\CMakeFiles
 src\CMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\RateRule.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Reaction.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Reaction.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_51)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Reaction.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Reaction.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Reaction.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1614,7 +1614,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Reaction.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Reaction.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Reaction.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1632,12 +1632,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.obj.provides: src\CMakeFiles
 src\CMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Reaction.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Rule.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Rule.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Rule.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Rule.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Rule.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_52)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Rule.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Rule.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Rule.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Rule.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Rule.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1645,7 +1645,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Rule.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Rule.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Rule.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Rule.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Rule.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Rule.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1663,12 +1663,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Rule.cpp.obj.provides: src\CMakeFiles\lib
 src\CMakeFiles\libsbml-static.dir\sbml\Rule.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Rule.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBase.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBase.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBase.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBase.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBase.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_53)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBase.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBase.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1676,7 +1676,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBase.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBase.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBase.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1694,12 +1694,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBase.cpp.obj.provides: src\CMakeFiles\li
 src\CMakeFiles\libsbml-static.dir\sbml\SBase.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBase.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLConstructorException.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLConstructorException.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_54)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLConstructorException.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLConstructorException.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLConstructorException.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1707,7 +1707,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.i: cmake_for
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLConstructorException.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLConstructorException.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLConstructorException.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1725,12 +1725,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.obj.provides
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLConstructorException.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLConvert.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLConvert.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_55)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLConvert.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLConvert.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLConvert.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1738,7 +1738,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLConvert.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLConvert.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLConvert.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1756,12 +1756,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.obj.provides: src\CMakeFi
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLConvert.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLDocument.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLDocument.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_56)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLDocument.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLDocument.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLDocument.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1769,7 +1769,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLDocument.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLDocument.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLDocument.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1787,12 +1787,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.obj.provides: src\CMakeF
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLDocument.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLError.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLError.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_57)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLError.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLError.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLError.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1800,7 +1800,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLError.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLError.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLError.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1818,12 +1818,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.obj.provides: src\CMakeFile
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLError.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLErrorLog.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLErrorLog.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_58)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLErrorLog.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLErrorLog.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLErrorLog.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1831,7 +1831,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLErrorLog.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLErrorLog.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLErrorLog.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1849,12 +1849,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.obj.provides: src\CMakeF
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLErrorLog.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLNamespaces.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLNamespaces.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_59)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLNamespaces.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLNamespaces.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLNamespaces.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1862,7 +1862,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLNamespaces.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLNamespaces.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLNamespaces.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1880,12 +1880,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.obj.provides: src\CMak
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLNamespaces.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLReader.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLReader.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_60)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLReader.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLReader.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLReader.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1893,7 +1893,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLReader.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLReader.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLReader.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1911,12 +1911,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.obj.provides: src\CMakeFil
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLReader.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLTransforms.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLTransforms.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_61)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLTransforms.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLTransforms.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLTransforms.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1924,7 +1924,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLTransforms.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLTransforms.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLTransforms.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1942,12 +1942,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.obj.provides: src\CMak
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLTransforms.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLTypeCodes.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLTypeCodes.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_62)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLTypeCodes.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLTypeCodes.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLTypeCodes.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1955,7 +1955,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLTypeCodes.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLTypeCodes.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLTypeCodes.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1973,12 +1973,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.obj.provides: src\CMake
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLTypeCodes.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLVisitor.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLVisitor.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_63)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLVisitor.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLVisitor.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLVisitor.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -1986,7 +1986,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLVisitor.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLVisitor.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLVisitor.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2004,12 +2004,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.obj.provides: src\CMakeFi
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLVisitor.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBMLWriter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLWriter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_64)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBMLWriter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLWriter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLWriter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2017,7 +2017,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBMLWriter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBMLWriter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBMLWriter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2035,12 +2035,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.obj.provides: src\CMakeFil
 src\CMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBMLWriter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SBO.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SBO.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SBO.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SBO.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBO.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_65)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SBO.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBO.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBO.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SBO.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBO.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2048,7 +2048,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBO.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SBO.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBO.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SBO.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SBO.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SBO.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2066,12 +2066,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SBO.cpp.obj.provides: src\CMakeFiles\libs
 src\CMakeFiles\libsbml-static.dir\sbml\SBO.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SBO.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SimpleSpeciesReference.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SimpleSpeciesReference.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_66)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SimpleSpeciesReference.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SimpleSpeciesReference.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SimpleSpeciesReference.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2079,7 +2079,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SimpleSpeciesReference.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SimpleSpeciesReference.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SimpleSpeciesReference.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2097,12 +2097,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.obj.provides: 
 src\CMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SimpleSpeciesReference.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Species.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Species.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Species.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Species.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Species.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_67)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Species.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Species.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Species.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Species.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Species.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2110,7 +2110,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Species.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Species.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Species.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Species.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Species.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Species.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2128,12 +2128,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Species.cpp.obj.provides: src\CMakeFiles\
 src\CMakeFiles\libsbml-static.dir\sbml\Species.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Species.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SpeciesReference.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SpeciesReference.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_68)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SpeciesReference.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SpeciesReference.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SpeciesReference.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2141,7 +2141,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SpeciesReference.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SpeciesReference.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SpeciesReference.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2159,12 +2159,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.obj.provides: src\CM
 src\CMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SpeciesReference.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SpeciesType.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SpeciesType.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_69)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SpeciesType.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SpeciesType.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SpeciesType.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2172,7 +2172,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SpeciesType.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SpeciesType.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SpeciesType.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2190,12 +2190,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.obj.provides: src\CMakeFi
 src\CMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SpeciesType.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\StoichiometryMath.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\StoichiometryMath.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_70)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/StoichiometryMath.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\StoichiometryMath.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\StoichiometryMath.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2203,7 +2203,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/StoichiometryMath.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\StoichiometryMath.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\StoichiometryMath.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2221,12 +2221,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.obj.provides: src\C
 src\CMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\StoichiometryMath.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\SyntaxChecker.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\SyntaxChecker.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_71)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/SyntaxChecker.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SyntaxChecker.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SyntaxChecker.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2234,7 +2234,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/SyntaxChecker.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\SyntaxChecker.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\SyntaxChecker.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2252,12 +2252,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.obj.provides: src\CMake
 src\CMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\SyntaxChecker.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Trigger.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Trigger.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_72)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Trigger.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Trigger.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Trigger.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2265,7 +2265,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Trigger.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Trigger.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Trigger.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2283,12 +2283,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.obj.provides: src\CMakeFiles\
 src\CMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Trigger.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\Unit.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\Unit.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\Unit.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\Unit.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\Unit.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_73)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/Unit.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Unit.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Unit.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\Unit.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Unit.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2296,7 +2296,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\Unit.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/Unit.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Unit.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\Unit.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\Unit.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\Unit.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2314,12 +2314,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\Unit.cpp.obj.provides: src\CMakeFiles\lib
 src\CMakeFiles\libsbml-static.dir\sbml\Unit.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\Unit.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\UnitDefinition.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\UnitDefinition.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_74)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/UnitDefinition.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\UnitDefinition.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\UnitDefinition.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2327,7 +2327,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/UnitDefinition.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\UnitDefinition.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\UnitDefinition.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2345,12 +2345,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.obj.provides: src\CMak
 src\CMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\UnitDefinition.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\UnitKind.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\UnitKind.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\UnitKind.c
+src\CMakeFiles\libsbml-static.dir\sbml\UnitKind.c.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\UnitKind.c
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_75)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/UnitKind.c.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\UnitKind.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\UnitKind.c
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\UnitKind.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\UnitKind.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2358,7 +2358,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\UnitKind.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/UnitKind.c.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\UnitKind.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\UnitKind.c
+-DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\UnitKind.c.i -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\UnitKind.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2376,12 +2376,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\UnitKind.c.obj.provides: src\CMakeFiles\l
 src\CMakeFiles\libsbml-static.dir\sbml\UnitKind.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\UnitKind.c.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\units\FormulaUnitsData.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\units\FormulaUnitsData.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_76)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/units/FormulaUnitsData.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\units\FormulaUnitsData.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\units\FormulaUnitsData.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2389,7 +2389,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/units/FormulaUnitsData.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\units\FormulaUnitsData.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\units\FormulaUnitsData.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2407,12 +2407,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.obj.provides: 
 src\CMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\units\FormulaUnitsData.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\units\UnitFormulaFormatter.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\units\UnitFormulaFormatter.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_77)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/units/UnitFormulaFormatter.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\units\UnitFormulaFormatter.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\units\UnitFormulaFormatter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2420,7 +2420,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.i: cmake_f
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/units/UnitFormulaFormatter.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\units\UnitFormulaFormatter.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\units\UnitFormulaFormatter.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2438,12 +2438,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.obj.provid
 src\CMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\units\UnitFormulaFormatter.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\units\UnitKindList.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\units\UnitKindList.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_78)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/units/UnitKindList.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\units\UnitKindList.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\units\UnitKindList.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2451,7 +2451,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/units/UnitKindList.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\units\UnitKindList.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\units\UnitKindList.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2469,12 +2469,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.obj.provides: src\
 src\CMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\units\UnitKindList.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\util\List.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\util\List.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\util\List.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\util\List.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\List.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_79)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/util/List.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\util\List.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\util\List.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\util\List.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\List.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2482,7 +2482,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\util\List.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/util/List.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\util\List.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\util\List.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\util\List.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\List.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2500,12 +2500,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\util\List.cpp.obj.provides: src\CMakeFile
 src\CMakeFiles\libsbml-static.dir\sbml\util\List.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\util\List.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\util\memory.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\util\memory.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\util\memory.c
+src\CMakeFiles\libsbml-static.dir\sbml\util\memory.c.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\memory.c
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_80)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/util/memory.c.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\util\memory.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\util\memory.c
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\util\memory.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\memory.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2513,7 +2513,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\util\memory.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/util/memory.c.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\util\memory.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\util\memory.c
+-DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\util\memory.c.i -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\memory.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2531,12 +2531,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\util\memory.c.obj.provides: src\CMakeFile
 src\CMakeFiles\libsbml-static.dir\sbml\util\memory.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\util\memory.c.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\util\Stack.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\util\Stack.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\util\Stack.c
+src\CMakeFiles\libsbml-static.dir\sbml\util\Stack.c.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\Stack.c
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_81)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/util/Stack.c.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\util\Stack.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\util\Stack.c
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\util\Stack.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\Stack.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2544,7 +2544,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\util\Stack.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/util/Stack.c.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\util\Stack.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\util\Stack.c
+-DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\util\Stack.c.i -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\Stack.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2562,12 +2562,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\util\Stack.c.obj.provides: src\CMakeFiles
 src\CMakeFiles\libsbml-static.dir\sbml\util\Stack.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\util\Stack.c.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\util\StringBuffer.c
+src\CMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\StringBuffer.c
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_82)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/util/StringBuffer.c.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\util\StringBuffer.c
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\StringBuffer.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2575,7 +2575,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/util/StringBuffer.c.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\util\StringBuffer.c
+-DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.i -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\StringBuffer.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2593,12 +2593,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.obj.provides: src\CMa
 src\CMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\util\StringBuffer.c.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\util\util.c.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\util\util.c.obj: C:\rrw\ThirdParty\libsbml\src\sbml\util\util.c
+src\CMakeFiles\libsbml-static.dir\sbml\util\util.c.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\util.c
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_83)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/CMakeFiles/libsbml-static.dir/sbml/util/util.c.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\util\util.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml\src\sbml\util\util.c
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\util\util.c.obj $(C_FLAGS) -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\util.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2606,7 +2606,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\util\util.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/libsbml-static.dir/sbml/util/util.c.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(C_DEFINES) @&&|
--DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\util\util.c.i -c C:\rrw\ThirdParty\libsbml\src\sbml\util\util.c
+-DWIN32 $(C_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\util\util.c.i -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\util\util.c
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2624,12 +2624,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\util\util.c.obj.provides: src\CMakeFiles\
 src\CMakeFiles\libsbml-static.dir\sbml\util\util.c.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\util\util.c.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\ConsistencyValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\ConsistencyValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_84)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/ConsistencyValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\ConsistencyValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\ConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2637,7 +2637,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.i: cma
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/ConsistencyValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\ConsistencyValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\ConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2655,12 +2655,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.obj.pr
 src\CMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\ConsistencyValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\IdentifierConsistencyValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\IdentifierConsistencyValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_85)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/IdentifierConsistencyValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\IdentifierConsistencyValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\IdentifierConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2668,7 +2668,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/IdentifierConsistencyValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\IdentifierConsistencyValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\IdentifierConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2686,12 +2686,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\IdentifierConsistencyValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\InternalConsistencyValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\InternalConsistencyValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_86)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/InternalConsistencyValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\InternalConsistencyValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\InternalConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2699,7 +2699,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/InternalConsistencyValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\InternalConsistencyValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\InternalConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2717,12 +2717,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cp
 src\CMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\InternalConsistencyValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\L1CompatibilityValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L1CompatibilityValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_87)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/L1CompatibilityValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L1CompatibilityValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L1CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2730,7 +2730,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.i:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/L1CompatibilityValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L1CompatibilityValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L1CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2748,12 +2748,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.ob
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\L1CompatibilityValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v1CompatibilityValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v1CompatibilityValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_88)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/L2v1CompatibilityValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v1CompatibilityValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v1CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2761,7 +2761,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/L2v1CompatibilityValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v1CompatibilityValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v1CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2779,12 +2779,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v1CompatibilityValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v2CompatibilityValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v2CompatibilityValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_89)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/L2v2CompatibilityValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v2CompatibilityValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v2CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2792,7 +2792,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/L2v2CompatibilityValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v2CompatibilityValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v2CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2810,12 +2810,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v2CompatibilityValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v3CompatibilityValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v3CompatibilityValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_90)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/L2v3CompatibilityValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v3CompatibilityValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v3CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2823,7 +2823,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/L2v3CompatibilityValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v3CompatibilityValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v3CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2841,12 +2841,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v3CompatibilityValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v4CompatibilityValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v4CompatibilityValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_91)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/L2v4CompatibilityValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v4CompatibilityValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v4CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2854,7 +2854,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/L2v4CompatibilityValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L2v4CompatibilityValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L2v4CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2872,12 +2872,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\L2v4CompatibilityValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\L3v1CompatibilityValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L3v1CompatibilityValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_92)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/L3v1CompatibilityValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L3v1CompatibilityValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L3v1CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2885,7 +2885,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/L3v1CompatibilityValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\L3v1CompatibilityValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\L3v1CompatibilityValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2903,12 +2903,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\L3v1CompatibilityValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\MathMLConsistencyValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\MathMLConsistencyValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_93)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/MathMLConsistencyValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\MathMLConsistencyValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\MathMLConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2916,7 +2916,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/MathMLConsistencyValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\MathMLConsistencyValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\MathMLConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2934,12 +2934,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\MathMLConsistencyValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\ModelingPracticeValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\ModelingPracticeValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_94)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/ModelingPracticeValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\ModelingPracticeValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\ModelingPracticeValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2947,7 +2947,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.i
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/ModelingPracticeValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\ModelingPracticeValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\ModelingPracticeValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2965,12 +2965,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.o
 src\CMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\ModelingPracticeValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\OverdeterminedValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\OverdeterminedValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_95)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/OverdeterminedValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\OverdeterminedValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\OverdeterminedValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2978,7 +2978,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.i: 
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/OverdeterminedValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\OverdeterminedValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\OverdeterminedValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -2996,12 +2996,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.obj
 src\CMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\OverdeterminedValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBMLExternalValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBMLExternalValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_96)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/SBMLExternalValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBMLExternalValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBMLExternalValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3009,7 +3009,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.i: cm
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/SBMLExternalValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBMLExternalValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBMLExternalValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3027,12 +3027,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.obj.p
 src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLExternalValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBMLInternalValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBMLInternalValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_97)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/SBMLInternalValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBMLInternalValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBMLInternalValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3040,7 +3040,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.i: cm
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/SBMLInternalValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBMLInternalValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBMLInternalValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3058,12 +3058,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.obj.p
 src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLInternalValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBMLValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBMLValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_98)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/SBMLValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBMLValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBMLValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3071,7 +3071,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.i: cmake_forc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/SBMLValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBMLValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBMLValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3089,12 +3089,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.obj.provides:
 src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\SBMLValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBOConsistencyValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBOConsistencyValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_99)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/SBOConsistencyValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBOConsistencyValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBOConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3102,7 +3102,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.i: 
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/SBOConsistencyValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\SBOConsistencyValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\SBOConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3120,12 +3120,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.obj
 src\CMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\SBOConsistencyValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\UnitConsistencyValidator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\UnitConsistencyValidator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_100)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/UnitConsistencyValidator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\UnitConsistencyValidator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\UnitConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3133,7 +3133,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.i:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/UnitConsistencyValidator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\UnitConsistencyValidator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\UnitConsistencyValidator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3151,12 +3151,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.ob
 src\CMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\UnitConsistencyValidator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\Validator.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\Validator.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_101)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/Validator.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\Validator.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\Validator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3164,7 +3164,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/Validator.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\Validator.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\Validator.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3182,12 +3182,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.obj.provides: src
 src\CMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\Validator.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\VConstraint.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\VConstraint.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_102)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/VConstraint.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\VConstraint.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\VConstraint.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3195,7 +3195,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/VConstraint.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\VConstraint.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\VConstraint.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3213,12 +3213,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.obj.provides: s
 src\CMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\VConstraint.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ArgumentsUnitsCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_103)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/ArgumentsUnitsCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ArgumentsUnitsCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3226,7 +3226,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/ArgumentsUnitsCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ArgumentsUnitsCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3244,12 +3244,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_104)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/ArgumentsUnitsCheckWarnings.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3257,7 +3257,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/ArgumentsUnitsCheckWarnings.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3275,12 +3275,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheck
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\AssignmentCycles.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\AssignmentCycles.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_105)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/AssignmentCycles.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\AssignmentCycles.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\AssignmentCycles.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3288,7 +3288,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/AssignmentCycles.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\AssignmentCycles.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\AssignmentCycles.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3306,12 +3306,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cp
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentCycles.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrdering.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrdering.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\AssignmentRuleOrdering.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrdering.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\AssignmentRuleOrdering.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_106)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/AssignmentRuleOrdering.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrdering.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\AssignmentRuleOrdering.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrdering.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\AssignmentRuleOrdering.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3319,7 +3319,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrder
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/AssignmentRuleOrdering.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrdering.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\AssignmentRuleOrdering.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrdering.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\AssignmentRuleOrdering.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3337,12 +3337,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrder
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrdering.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\AssignmentRuleOrdering.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\CiElementMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\CiElementMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_107)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/CiElementMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\CiElementMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\CiElementMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3350,7 +3350,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/CiElementMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\CiElementMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\CiElementMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3368,12 +3368,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CiElementMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideCycles.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideCycles.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\CompartmentOutsideCycles.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideCycles.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\CompartmentOutsideCycles.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_108)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/CompartmentOutsideCycles.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideCycles.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\CompartmentOutsideCycles.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideCycles.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\CompartmentOutsideCycles.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3381,7 +3381,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideC
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/CompartmentOutsideCycles.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideCycles.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\CompartmentOutsideCycles.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideCycles.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\CompartmentOutsideCycles.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3399,12 +3399,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideC
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideCycles.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\CompartmentOutsideCycles.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_109)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/DuplicateTopLevelAnnotation.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3412,7 +3412,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAn
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/DuplicateTopLevelAnnotation.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3430,12 +3430,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAn
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\EqualityArgsMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\EqualityArgsMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_110)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/EqualityArgsMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\EqualityArgsMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\EqualityArgsMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3443,7 +3443,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathChe
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/EqualityArgsMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\EqualityArgsMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\EqualityArgsMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3461,12 +3461,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathChe
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\EqualityArgsMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ExponentUnitsCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ExponentUnitsCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_111)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/ExponentUnitsCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ExponentUnitsCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ExponentUnitsCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3474,7 +3474,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/ExponentUnitsCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ExponentUnitsCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ExponentUnitsCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3492,12 +3492,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ExponentUnitsCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionApplyMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionApplyMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_112)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/FunctionApplyMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionApplyMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionApplyMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3505,7 +3505,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCh
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/FunctionApplyMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionApplyMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionApplyMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3523,12 +3523,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCh
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionApplyMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionVars.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionVars.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionDefinitionVars.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionVars.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionDefinitionVars.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_113)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/FunctionDefinitionVars.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionVars.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionDefinitionVars.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionVars.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionDefinitionVars.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3536,7 +3536,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionV
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/FunctionDefinitionVars.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionVars.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionDefinitionVars.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionVars.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionDefinitionVars.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3554,12 +3554,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionV
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionVars.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionDefinitionVars.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_114)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/FunctionNoArgsMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3567,7 +3567,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathC
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/FunctionNoArgsMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3585,12 +3585,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathC
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToExists.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToExists.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionReferredToExists.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToExists.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionReferredToExists.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_115)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/FunctionReferredToExists.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToExists.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionReferredToExists.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToExists.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionReferredToExists.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3598,7 +3598,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToE
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/FunctionReferredToExists.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToExists.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionReferredToExists.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToExists.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\FunctionReferredToExists.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3616,12 +3616,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToE
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToExists.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\FunctionReferredToExists.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\IdBase.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\IdBase.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_116)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/IdBase.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\IdBase.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\IdBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3629,7 +3629,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.i: cmake
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/IdBase.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\IdBase.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\IdBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3647,12 +3647,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.obj.prov
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdBase.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\IdList.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\IdList.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_117)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/IdList.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\IdList.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\IdList.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3660,7 +3660,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.i: cmake
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/IdList.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\IdList.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\IdList.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3678,12 +3678,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.obj.prov
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\IdList.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\KineticLawUnitsCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\KineticLawUnitsCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_118)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/KineticLawUnitsCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\KineticLawUnitsCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\KineticLawUnitsCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3691,7 +3691,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsChec
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/KineticLawUnitsCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\KineticLawUnitsCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\KineticLawUnitsCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3709,12 +3709,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsChec
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawUnitsCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\KineticLawVars.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\KineticLawVars.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_119)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/KineticLawVars.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\KineticLawVars.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\KineticLawVars.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3722,7 +3722,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/KineticLawVars.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\KineticLawVars.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\KineticLawVars.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3740,12 +3740,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\KineticLawVars.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LambdaMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LambdaMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_120)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/LambdaMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LambdaMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LambdaMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3753,7 +3753,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/LambdaMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LambdaMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LambdaMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3771,12 +3771,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LambdaMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LocalParameterMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LocalParameterMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_121)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/LocalParameterMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LocalParameterMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LocalParameterMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3784,7 +3784,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathC
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/LocalParameterMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LocalParameterMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LocalParameterMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3802,12 +3802,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathC
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_122)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/LocalParameterShadowsIdInModel.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3815,7 +3815,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShado
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/LocalParameterShadowsIdInModel.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3833,12 +3833,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShado
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LogicalArgsMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LogicalArgsMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_123)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/LogicalArgsMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LogicalArgsMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LogicalArgsMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3846,7 +3846,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathChec
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/LogicalArgsMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\LogicalArgsMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\LogicalArgsMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3864,12 +3864,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathChec
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\LogicalArgsMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\MathMLBase.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\MathMLBase.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_124)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/MathMLBase.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\MathMLBase.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\MathMLBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3877,7 +3877,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.i: c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/MathMLBase.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\MathMLBase.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\MathMLBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3895,12 +3895,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.obj.
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\MathMLBase.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\NumberArgsMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\NumberArgsMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_125)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/NumberArgsMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\NumberArgsMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\NumberArgsMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3908,7 +3908,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/NumberArgsMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\NumberArgsMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\NumberArgsMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3926,12 +3926,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumberArgsMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\NumericArgsMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\NumericArgsMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_126)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/NumericArgsMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\NumericArgsMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\NumericArgsMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3939,7 +3939,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathChec
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/NumericArgsMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\NumericArgsMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\NumericArgsMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3957,12 +3957,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathChec
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericArgsMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\NumericReturnMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\NumericReturnMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_127)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/NumericReturnMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\NumericReturnMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\NumericReturnMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3970,7 +3970,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCh
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/NumericReturnMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\NumericReturnMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\NumericReturnMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -3988,12 +3988,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCh
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\NumericReturnMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\OverDeterminedCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\OverDeterminedCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_128)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/OverDeterminedCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\OverDeterminedCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\OverDeterminedCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4001,7 +4001,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/OverDeterminedCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\OverDeterminedCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\OverDeterminedCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4019,12 +4019,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\OverDeterminedCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\PieceBooleanMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\PieceBooleanMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_129)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/PieceBooleanMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\PieceBooleanMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\PieceBooleanMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4032,7 +4032,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathChe
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/PieceBooleanMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\PieceBooleanMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\PieceBooleanMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4050,12 +4050,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathChe
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PieceBooleanMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\PiecewiseValueMathCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\PiecewiseValueMathCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_130)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/PiecewiseValueMathCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\PiecewiseValueMathCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\PiecewiseValueMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4063,7 +4063,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathC
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/PiecewiseValueMathCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\PiecewiseValueMathCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\PiecewiseValueMathCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4081,12 +4081,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathC
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PiecewiseValueMathCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\PowerUnitsCheck.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\PowerUnitsCheck.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_131)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/PowerUnitsCheck.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\PowerUnitsCheck.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\PowerUnitsCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4094,7 +4094,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/PowerUnitsCheck.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\PowerUnitsCheck.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\PowerUnitsCheck.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4112,12 +4112,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\PowerUnitsCheck.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRule.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRule.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\SpeciesReactionOrRule.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRule.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\SpeciesReactionOrRule.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_132)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/SpeciesReactionOrRule.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRule.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\SpeciesReactionOrRule.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRule.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\SpeciesReactionOrRule.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4125,7 +4125,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRu
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/SpeciesReactionOrRule.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRule.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\SpeciesReactionOrRule.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRule.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\SpeciesReactionOrRule.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4143,12 +4143,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRu
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRule.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\SpeciesReactionOrRule.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVars.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVars.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\StoichiometryMathVars.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVars.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\StoichiometryMathVars.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_133)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/StoichiometryMathVars.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVars.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\StoichiometryMathVars.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVars.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\StoichiometryMathVars.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4156,7 +4156,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVa
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/StoichiometryMathVars.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVars.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\StoichiometryMathVars.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVars.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\StoichiometryMathVars.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4174,12 +4174,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVa
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVars.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\StoichiometryMathVars.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdBase.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdBase.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_134)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueIdBase.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdBase.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4187,7 +4187,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.i:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueIdBase.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdBase.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4205,12 +4205,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.ob
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdBase.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_135)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueIdsForUnitDefinitions.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4218,7 +4218,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDef
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueIdsForUnitDefinitions.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4236,12 +4236,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDef
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_136)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueIdsInKineticLaw.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4249,7 +4249,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticL
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueIdsInKineticLaw.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4267,12 +4267,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticL
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsInModel.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdsInModel.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_137)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueIdsInModel.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsInModel.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdsInModel.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4280,7 +4280,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueIdsInModel.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsInModel.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueIdsInModel.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4298,12 +4298,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cp
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueIdsInModel.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueMetaId.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueMetaId.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_138)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueMetaId.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueMetaId.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueMetaId.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4311,7 +4311,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.i:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueMetaId.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueMetaId.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueMetaId.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4329,12 +4329,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.ob
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueMetaId.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_139)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueSpeciesTypesInCompartment.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4342,7 +4342,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesI
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueSpeciesTypesInCompartment.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4360,12 +4360,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesI
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_140)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueSymbolsInInitialAssignments.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4373,7 +4373,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInit
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueSymbolsInInitialAssignments.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4391,12 +4391,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInit
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_141)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueVarsInEventAssignments.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4404,7 +4404,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAs
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueVarsInEventAssignments.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4422,12 +4422,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAs
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_142)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueVarsInEventsAndRules.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4435,7 +4435,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsA
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueVarsInEventsAndRules.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4453,12 +4453,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsA
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_143)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueVarsInInitialAssignmentsAndRules.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4466,7 +4466,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitial
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueVarsInInitialAssignmentsAndRules.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4484,12 +4484,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitial
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInRules.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInRules.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_144)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueVarsInRules.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInRules.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInRules.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4497,7 +4497,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UniqueVarsInRules.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInRules.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UniqueVarsInRules.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4515,12 +4515,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.c
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UniqueVarsInRules.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UnitsBase.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UnitsBase.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_145)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UnitsBase.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UnitsBase.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UnitsBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4528,7 +4528,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.i: cm
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/UnitsBase.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\UnitsBase.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\UnitsBase.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4546,12 +4546,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.obj.p
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\UnitsBase.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ValidCnUnitsValue.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ValidCnUnitsValue.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_146)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/validator/constraints/ValidCnUnitsValue.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ValidCnUnitsValue.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ValidCnUnitsValue.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4559,7 +4559,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/validator/constraints/ValidCnUnitsValue.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\validator\constraints\ValidCnUnitsValue.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\validator\constraints\ValidCnUnitsValue.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4577,12 +4577,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.c
 src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\validator\constraints\ValidCnUnitsValue.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\compress\CompressCommon.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\compress\CompressCommon.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_147)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/compress/CompressCommon.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\CompressCommon.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\compress\CompressCommon.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4590,7 +4590,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.i: cmake_forc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/compress/CompressCommon.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\CompressCommon.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\compress\CompressCommon.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4608,12 +4608,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj.provides:
 src\CMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\CompressCommon.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\compress\InputDecompressor.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\compress\InputDecompressor.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_148)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/compress/InputDecompressor.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\InputDecompressor.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\compress\InputDecompressor.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4621,7 +4621,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.i: cmake_f
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/compress/InputDecompressor.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\InputDecompressor.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\compress\InputDecompressor.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4639,12 +4639,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj.provid
 src\CMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\InputDecompressor.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\compress\OutputCompressor.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\compress\OutputCompressor.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_149)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/compress/OutputCompressor.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\OutputCompressor.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\compress\OutputCompressor.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4652,7 +4652,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.i: cmake_fo
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/compress/OutputCompressor.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\compress\OutputCompressor.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\compress\OutputCompressor.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4670,12 +4670,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj.provide
 src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\compress\OutputCompressor.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLAttributes.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLAttributes.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_150)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLAttributes.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLAttributes.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLAttributes.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4683,7 +4683,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLAttributes.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLAttributes.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLAttributes.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4701,12 +4701,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj.provides: src\C
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLAttributes.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLBuffer.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLBuffer.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_151)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLBuffer.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLBuffer.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLBuffer.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4714,7 +4714,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLBuffer.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLBuffer.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLBuffer.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4732,12 +4732,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj.provides: src\CMake
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLBuffer.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLConstructorException.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLConstructorException.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_152)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLConstructorException.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLConstructorException.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLConstructorException.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4745,7 +4745,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.i: cmake_
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLConstructorException.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLConstructorException.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLConstructorException.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4763,12 +4763,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj.provi
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLConstructorException.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLError.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLError.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_153)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLError.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLError.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLError.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4776,7 +4776,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLError.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLError.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLError.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4794,12 +4794,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj.provides: src\CMakeF
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLError.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLErrorLog.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLErrorLog.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_154)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLErrorLog.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLErrorLog.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLErrorLog.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4807,7 +4807,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLErrorLog.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLErrorLog.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLErrorLog.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4825,12 +4825,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj.provides: src\CMa
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLErrorLog.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLFileBuffer.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLFileBuffer.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_155)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLFileBuffer.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLFileBuffer.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLFileBuffer.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4838,7 +4838,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLFileBuffer.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLFileBuffer.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLFileBuffer.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4856,12 +4856,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj.provides: src\C
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLFileBuffer.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLHandler.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLHandler.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_156)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLHandler.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLHandler.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLHandler.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4869,7 +4869,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLHandler.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLHandler.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLHandler.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4887,12 +4887,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj.provides: src\CMak
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLHandler.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLInputStream.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLInputStream.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_157)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLInputStream.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLInputStream.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLInputStream.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4900,7 +4900,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLInputStream.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLInputStream.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLInputStream.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4918,12 +4918,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj.provides: src\
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLInputStream.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLMemoryBuffer.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLMemoryBuffer.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_158)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLMemoryBuffer.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLMemoryBuffer.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLMemoryBuffer.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4931,7 +4931,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLMemoryBuffer.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLMemoryBuffer.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLMemoryBuffer.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4949,12 +4949,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj.provides: src
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLMemoryBuffer.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLNamespaces.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLNamespaces.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_159)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLNamespaces.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLNamespaces.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLNamespaces.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4962,7 +4962,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLNamespaces.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLNamespaces.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLNamespaces.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4980,12 +4980,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj.provides: src\C
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNamespaces.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLNode.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLNode.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_160)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLNode.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLNode.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLNode.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -4993,7 +4993,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLNode.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLNode.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLNode.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5011,12 +5011,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj.provides: src\CMakeFi
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLNode.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLOutputStream.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLOutputStream.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_161)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLOutputStream.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLOutputStream.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLOutputStream.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5024,7 +5024,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLOutputStream.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLOutputStream.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLOutputStream.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5042,12 +5042,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj.provides: src
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLOutputStream.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLParser.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLParser.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_162)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLParser.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLParser.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLParser.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5055,7 +5055,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLParser.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLParser.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLParser.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5073,12 +5073,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj.provides: src\CMake
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLParser.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLToken.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLToken.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_163)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLToken.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLToken.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLToken.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5086,7 +5086,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLToken.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLToken.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLToken.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5104,12 +5104,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj.provides: src\CMakeF
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLToken.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLTokenizer.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLTokenizer.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_164)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLTokenizer.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLTokenizer.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLTokenizer.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5117,7 +5117,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLTokenizer.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLTokenizer.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLTokenizer.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5135,12 +5135,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj.provides: src\CM
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTokenizer.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLTriple.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLTriple.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_165)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/XMLTriple.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLTriple.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLTriple.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5148,7 +5148,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/XMLTriple.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\XMLTriple.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\XMLTriple.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5166,12 +5166,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj.provides: src\CMake
 src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\XMLTriple.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLAttributes.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLAttributes.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_166)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLAttributes.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLAttributes.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLAttributes.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5179,7 +5179,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLAttributes.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLAttributes.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLAttributes.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5197,12 +5197,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj.provides: sr
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLAttributes.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLHandler.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLHandler.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_167)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLHandler.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLHandler.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLHandler.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5210,7 +5210,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLHandler.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLHandler.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLHandler.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5228,12 +5228,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj.provides: src\C
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLHandler.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLNamespaces.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLNamespaces.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_168)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLNamespaces.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLNamespaces.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLNamespaces.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5241,7 +5241,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLNamespaces.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLNamespaces.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLNamespaces.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5259,12 +5259,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj.provides: sr
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLNamespaces.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLParser.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLParser.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_169)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLParser.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLParser.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLParser.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5272,7 +5272,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLParser.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLParser.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLParser.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5290,12 +5290,12 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj.provides: src\CM
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj.provides.build: src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLParser.cpp.obj
 
 src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLTranscode.cpp.obj: src\CMakeFiles\libsbml-static.dir\flags.make
-src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLTranscode.cpp.obj: C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLTranscode.cpp
+src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLTranscode.cpp.obj: C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLTranscode.cpp
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles $(CMAKE_PROGRESS_170)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object src/CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLTranscode.cpp.obj"
 	cd C:\rrw\builds\xe\libsbml\src
 	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(CXX_DEFINES) @&&|
--DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLTranscode.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLTranscode.cpp
+-DWIN32 -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLTranscode.cpp.obj $(CXX_FLAGS) -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLTranscode.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5303,7 +5303,7 @@ src\CMakeFiles\libsbml-static.dir\sbml\xml\LibXMLTranscode.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/libsbml-static.dir/sbml/xml/LibXMLTranscode.cpp.i"
 	cd C:\rrw\builds\xe\libsbml\src
 	cpp32 $(CXX_DEFINES) @&&|
--DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLTranscode.cpp.i -P -c C:\rrw\ThirdParty\libsbml\src\sbml\xml\LibXMLTranscode.cpp
+-DWIN32 $(CXX_FLAGS) -oCMakeFiles\libsbml-static.dir\sbml\xml\LibXMLTranscode.cpp.i -P -c C:\rrw\ThirdParty\libsbml_xe\src\sbml\xml\LibXMLTranscode.cpp
 |
 	cd C:\rrw\builds\xe\libsbml
 
@@ -5860,6 +5860,6 @@ src\CMakeFiles\libsbml-static.dir\clean:
 .PHONY : src\CMakeFiles\libsbml-static.dir\clean
 
 src\CMakeFiles\libsbml-static.dir\depend:
-	$(CMAKE_COMMAND) -E cmake_depends "Borland Makefiles" C:\rrw\ThirdParty\libsbml C:\rrw\ThirdParty\libsbml\src C:\rrw\builds\xe\libsbml C:\rrw\builds\xe\libsbml\src C:\rrw\builds\xe\libsbml\src\CMakeFiles\libsbml-static.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "Borland Makefiles" C:\rrw\ThirdParty\libsbml_xe C:\rrw\ThirdParty\libsbml_xe\src C:\rrw\builds\xe\libsbml C:\rrw\builds\xe\libsbml\src C:\rrw\builds\xe\libsbml\src\CMakeFiles\libsbml-static.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : src\CMakeFiles\libsbml-static.dir\depend
 

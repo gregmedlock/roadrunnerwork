@@ -88,7 +88,7 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=-v
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/rrw/installs/xe/sundials
+CMAKE_INSTALL_PREFIX:PATH=C:/rrw/installs/xe
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=c:/cygwin/bin/ld.exe
