@@ -44,24 +44,24 @@ int main()
         roadRunner = new RoadRunner;
         roadRunner->Reset();
         string modelsRootPath("C:\\rrw\\Models");
-        string subFolder("l2v4");
-
+        //string subFolder("l2v4");
+        string subFolder("");
         stringstream modelSubPath;
         stringstream modelFName;
 
         int caseNr = 1;
 //        //int caseNr = 41;
 
-        modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
-        modelFName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
+//        modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
+ //       modelFName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
 
         if(subFolder.size())
         {
             modelsRootPath = modelsRootPath + "\\" + subFolder + "\\" + modelSubPath.str();
         }
 
-        
-//		modelFName<<"simple.xml";
+
+		modelFName<<"simple.xml";
         string fullFilePath(modelsRootPath +   "\\" + modelFName.str());
 
         //The following will load and compile and simulate the sbml model in the file

@@ -1,4 +1,4 @@
-#ifdef USE_PCH
+﻿#ifdef USE_PCH
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
@@ -1005,6 +1005,7 @@ void CvodeInterface::AssignResultsToModel()
 //        model->amounts[i] = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
 		double val = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
         model->amounts.push_back(val);
+        Log(lDebug)<<"Amount "<<setprecision(16)<<val;
     }
 
     vector<double> args = BuildEvalArgument();

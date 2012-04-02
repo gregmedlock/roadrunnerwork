@@ -83,6 +83,10 @@
 				<DependentOn>..\..\src\rrModelFromC.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\src\rrRoadRunner.cpp">
+				<DependentOn>..\..\src\rrRoadRunner.h</DependentOn>
+				<BuildOrder>3</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>

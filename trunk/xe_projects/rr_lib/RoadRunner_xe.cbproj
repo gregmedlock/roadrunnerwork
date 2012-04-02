@@ -33,7 +33,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\src\;..\..\src\Util\;..\..\src\Util\mtrand\;..\..\src\Logger\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\src\libstruct\;..\..\src\LibStructSupport\;..\..\installs\xe\include\sbml;..\..\installs\xe\include;..\..\installs\xe\include\cvode;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\installs\xe\lib\;..\..\src\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\src\LibStructSupport\;..\..\src\Util\;..\..\src\Logger\;..\..\src\libstruct\;..\..\src\Util\mtrand\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\installs\xe\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\builds\xe\clapack_32\F2CLIBS\libf2c\;..\..\builds\xe\clapack_32\BLAS\SRC\;..\..\builds\xe\clapack_32\SRC\;..\..\installs\xe\lib\;..\..\src\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\src\LibStructSupport\;..\..\src\Util\;..\..\src\Logger\;..\..\src\libstruct\;..\..\src\Util\mtrand\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\installs\xe\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -72,17 +72,17 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="..\..\builds\xe\clapack\BLAS\SRC\blas.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>59</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\..\builds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>60</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\..\builds\xe\clapack\SRC\lapack.lib">
+			<LibFiles Include="..\..\builds\xe\clapack_32\BLAS\SRC\blas.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>61</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\builds\xe\clapack_32\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>62</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\builds\xe\clapack_32\SRC\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>60</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="..\..\installs\xe\lib\libsbml.lib">
 				<IgnorePath>true</IgnorePath>

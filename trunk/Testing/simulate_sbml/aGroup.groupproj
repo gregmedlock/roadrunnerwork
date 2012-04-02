@@ -3,11 +3,11 @@
 			<ProjectGuid>{AA027461-2698-4050-8A05-5FF3D88F36EE}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
-			<Projects Include="..\..\xe_lib_projects\RoadRunner_xe.cbproj">
+			<Projects Include="..\..\xe_projects\rr_lib\RoadRunner_xe.cbproj">
 				<Dependencies/>
 			</Projects>
 			<Projects Include="simulate_model.cbproj">
-				<Dependencies>..\..\xe_lib_projects\RoadRunner_xe.cbproj</Dependencies>
+				<Dependencies>..\..\xe_projects\rr_lib\RoadRunner_xe.cbproj</Dependencies>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -18,13 +18,13 @@
 			</BorlandProject>
 		</ProjectExtensions>
 		<Target Name="RoadRunner_xe">
-			<MSBuild Projects="..\..\xe_lib_projects\RoadRunner_xe.cbproj"/>
+			<MSBuild Projects="..\..\xe_projects\rr_lib\RoadRunner_xe.cbproj"/>
 		</Target>
 		<Target Name="RoadRunner_xe:Clean">
-			<MSBuild Projects="..\..\xe_lib_projects\RoadRunner_xe.cbproj" Targets="Clean"/>
+			<MSBuild Projects="..\..\xe_projects\rr_lib\RoadRunner_xe.cbproj" Targets="Clean"/>
 		</Target>
 		<Target Name="RoadRunner_xe:Make">
-			<MSBuild Projects="..\..\xe_lib_projects\RoadRunner_xe.cbproj" Targets="Make"/>
+			<MSBuild Projects="..\..\xe_projects\rr_lib\RoadRunner_xe.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="simulate_model" DependsOnTargets="RoadRunner_xe">
 			<MSBuild Projects="simulate_model.cbproj"/>

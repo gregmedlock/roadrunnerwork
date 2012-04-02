@@ -345,6 +345,7 @@ vector< vector<double> > RoadRunner::runSimulation()
         mCVode->OneStep(tout, hstep);
         tout = timeStart + i * hstep;
         AddNthOutputToResult(results, i, tout);
+        //Log(lDebug)<<tout<<tab<
     }
     return results;
 }
