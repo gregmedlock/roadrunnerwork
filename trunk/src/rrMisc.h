@@ -27,7 +27,7 @@ enum TSelectionType
 
 struct TSelectionRecord
 {
-    int 			index;
+	unsigned int	index;
     string 			p1;
     string 			p2;
     TSelectionType selectionType;

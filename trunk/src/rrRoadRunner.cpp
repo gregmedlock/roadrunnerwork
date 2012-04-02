@@ -230,12 +230,16 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
         case TSelectionType::clVolume:
             dResult = mModel->c[record.index];
             break;
-        case TSelectionType::clParameter:
-            {
-                if (record.index > mModel->gp.size() - 1)
-                    dResult = mModel->ct[record.index - mModel->gp.size()];
-                else
-                    dResult = mModel->gp[record.index];
+		case TSelectionType::clParameter:
+			{
+				if (record.index > (mModel->gp.size() - 1))
+				{
+					dResult = mModel->ct[record.index - mModel->gp.size()];
+				}
+				else
+				{
+					dResult = mModel->gp[record.index];
+				}
             }
             break;
         case TSelectionType::clFloatingAmount:
@@ -290,15 +294,15 @@ double RoadRunner::GetNthSelectedOutput(const int& index, const double& dCurrent
 
 void RoadRunner::AddNthOutputToResult(vector< vector<double> >& results, int nRow, double dCurrentTime)
 {
-	int size = selectionList.size();
+//	int size = selectionList.size();
 
-    for (int j = 0; j < selectionList.size(); j++)
-    {
-        double out =  GetNthSelectedOutput(j, dCurrentTime);
+	for (u_int j = 0; j < selectionList.size(); j++)
+	{
+		double out =  GetNthSelectedOutput(j, dCurrentTime);
 //        results[nRow][j] = out;
 //		results[nRow].push_back(out);
-        Log(lDebug3)<<"In AddNthOutput to result: "<<out;
-    }
+		Log(lDebug3)<<"In AddNthOutput to result: "<<out;
+	}
 }
 
 vector<double> RoadRunner::BuildModelEvalArgument()
@@ -352,26 +356,26 @@ vector< vector<double> > RoadRunner::runSimulation()
 
 void RoadRunner::DumpResults(TextWriter& writer, vector< vector<double> >& data, const StringList& colLabels)
 {
-    for (int i = 0; i < colLabels.Count(); i++)
-    {
-        writer.Write(colLabels[i] + "\t");
-        Log(lDebug)<<colLabels[i]<<"\t";
-    }
-    writer.WriteLine();
-    Log(lDebug)<<endl;
+	for (int i = 0; i < colLabels.Count(); i++)
+	{
+		writer.Write(colLabels[i] + "\t");
+		Log(lDebug)<<colLabels[i]<<"\t";
+	}
+	writer.WriteLine();
+	Log(lDebug)<<endl;
 
-    int size =  data.size();
-    for (int i = 0; i < data.size(); i++)
-    {
-        for (int j = 0; j < data[0].size(); j++)
-        {
-        	string val = ToString(data[i][j]);
-            writer.Write(val + "\t");
-            Log(lDebug)<<val << "\t";
-        }
-        writer.WriteLine();
-	    Log(lDebug)<<endl;
-    }
+//	int size =  data.size();
+	for (u_int i = 0; i < data.size(); i++)
+	{
+		for (u_int j = 0; j < data[0].size(); j++)
+		{
+			string val = ToString(data[i][j]);
+			writer.Write(val + "\t");
+			Log(lDebug)<<val << "\t";
+		}
+		writer.WriteLine();
+		Log(lDebug)<<endl;
+	}
 }
 
 // -------------------------------------------------------------------------------

@@ -93,19 +93,25 @@ bool ModelFromC::SetupDLLData()
 {
     if(!cInitModel)
     {
-    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
-        return false;
+		Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+		return false;
 	}
 
-    int res = cInitModel();
-	char* modelName = cGetModelName();
-    if(modelName)
-    {
-    	mModelName = modelName;
-    }
+	int res = cInitModel();
+	if(res != 0)
+	{
+		Log(lError)<<"Failed to InitModel in "<<__FUNCTION__;
+		return false;
+	}
 
-  	int *test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numIndependentVariables");
-    numIndependentVariables = test;
+	char* modelName = cGetModelName();
+	if(modelName)
+	{
+		mModelName = modelName;
+	}
+
+	int *test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numIndependentVariables");
+	numIndependentVariables = test;
 
   	mAmounts  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_amounts");
     if(!mAmounts)
@@ -335,16 +341,16 @@ void ModelFromC::setInitialConditions()
 
 //void  ModelFromC::computeReactionRates(double time, vector<double>& y){}
 //void  ModelFromC::computeAllRatesOfChange(){}
-void  ModelFromC::evalModel(double timein, vector<double>& y)
+void ModelFromC::evalModel(double timein, vector<double>& y)
 {
-    if(!cevalModel)
-    {
-    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
-        return;
+	if(!cevalModel)
+	{
+		Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+		return;
 	}
 
-    //copy y values to mAmounts
-    for(int i = 0; i < y.size(); i++)
+	//copy y values to mAmounts
+	for(u_int i = 0; i < y.size(); i++)
     {
     	mAmounts[i] = y[i];
     	//y[i] = mAmounts[i];

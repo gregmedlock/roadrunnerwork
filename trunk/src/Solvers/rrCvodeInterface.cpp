@@ -440,7 +440,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
     stringstream msg;
     msg<<left<<setw(20)<<"" + ToString(CvodeInterface::mCount) ;
 
-    for (int i = 0; i < dCVodeArgument.size(); i++)
+	for (u_int i = 0; i < dCVodeArgument.size(); i++)
     {
         msg<<left<<setw(20)<<setprecision (18)<<dCVodeArgument[i];
     }
@@ -450,13 +450,13 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
 	dCVodeArgument = model->rateRules;
 
     //	model.dydt.CopyTo(dCVodeArgument, model.rateRules.Length);
-    for(int i = 0 ; i < model->GetdYdT().size(); i++)
+	for(u_int i = 0 ; i < model->GetdYdT().size(); i++)
     {
 		dCVodeArgument.push_back(model->GetdYdT().at(i));
     }
 
     msg<<"\t"<<CvodeInterface::mCount << "\t" ;
-    for (int i = 0; i < dCVodeArgument.size(); i++)
+	for (u_int i = 0; i < dCVodeArgument.size(); i++)
     {
 		msg<<setw(10)<<left<<setprecision (18)<<dCVodeArgument[i];
     }
@@ -898,7 +898,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
     {
         SortEventsByPriority(firedEvents);
         // Call event assignment if the eventstatus flag for the particular event is false
-        for (int i = 0; i < firedEvents.size(); i++)
+		for (u_int i = 0; i < firedEvents.size(); i++)
         {
             int currentEvent = firedEvents[i];
             // We only fire an event if we transition from false to true
@@ -959,7 +959,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
                 break;
             }
 
-            Log(lDebug)<<"time: "<<model->time<<" Event "<<(i + 1);
+			Log(lDebug)<<"time: "<<model->time<<" Event "<<(i + 1);
 
         }
     }
