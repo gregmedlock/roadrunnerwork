@@ -34,33 +34,35 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<UsingDelphiRTL>true</UsingDelphiRTL>
+			<AllPackageLibs>rtl.lib;fmxobj.lib;fmx.lib;xmlrtl.lib</AllPackageLibs>
+			<BPILibOutputDir>$(rr_root)\installs\xe2\lib</BPILibOutputDir>
 			<Multithreaded>true</Multithreaded>
 			<PackageImports>bindcompfmx;fmx;rtl;dbrtl;IndySystem;DbxClientDriver;bindcomp;inetdb;DBXInterBaseDriver;xmlrtl;DbxCommonDriver;IndyProtocols;DBXMySQLDriver;dbxcds;soaprtl;bindengine;CustomIPTransport;dsnap;fmxase;IndyCore;inet;fmxobj;inetdbxpress;fmxdae;IPIndyImpl;dbexpress;$(PackageImports)</PackageImports>
 			<_TCHARMapping>char</_TCHARMapping>
-			<ILINK_LibraryPath>..\..\src\Logger\;..\..\src\;C:\rrw\xe_2\rr_lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-			<IncludePath>..\..\src\Logger\;..\..\src\;C:\rrw\xe_2\rr_lib\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\src\LibStructSupport\;..\..\src\Scanner\;..\..\src\Util\;..\..\src\libstruct\;..\..\src\Solvers\;..\..\src\Util\mtrand\;..\..\src\Logger\;..\..\src\;C:\rrw\xe_2\rr_lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\src\LibStructSupport\;..\..\src\Scanner\;..\..\src\Util\;..\..\src\libstruct\;..\..\src\Solvers\;..\..\src\Util\mtrand\;..\..\src\Logger\;..\..\src\;C:\rrw\xe_2\rr_lib\;$(rr_root)\installs\xe2\include\sbml;$(rr_root)\installs\xe2\include;..\..\src\Util;..\..\src\LibStructSupport;..\..\src\libstruct;..\..\src\Scanner;..\..\src\Solvers;$(rr_root)\installs\xe2\include\cvode;$(rr_root)\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
 			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
 			<ProjectType>CppDynamicLibrary</ProjectType>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<Manifest_File>None</Manifest_File>
 			<VerInfo_Locale>1033</VerInfo_Locale>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-			<Defines>EXPORT_RR;USE_PCH;$(Defines)</Defines>
+			<Defines>EXPORT_RR;USE_PCH;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>
 			<IntermediateOutputDir>.\$(Platform)\$(Config)</IntermediateOutputDir>
-			<FinalOutputDir>.\$(Platform)\$(Config)</FinalOutputDir>
+			<FinalOutputDir>$(rr_root)\installs\xe2\bin</FinalOutputDir>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<ILINK_LibraryPath>C:\rrw\builds\xe2\clapack\F2CLIBS\libf2c\;C:\rrw\builds\xe2\clapack\BLAS\SRC\;C:\rrw\builds\xe2\clapack\SRC\;C:\rrw\ThirdParty\libsbml_xe\dependencies\lib\;C:\rrw\installs\xe2\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<PackageImports>vcldbx;frx16;Rave100VCL;vclib;inetdbbde;ibxpress;vclimg;frxDB16;fs16;vclactnband;vcldb;vcldsnap;bindcompvcl;vclie;vcltouch;bcbsmp;websnap;vclribbon;VclSmp;frxe16;fsDB16;vcl;CloudService;dsnapcon;vclx;webdsnap;bdertl;bcbie;adortl;$(PackageImports)</PackageImports>
 			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
 			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-			<VerInfo_Locale>1033</VerInfo_Locale>
-			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -81,27 +83,275 @@
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<UsingDelphiRTL>false</UsingDelphiRTL>
+			<LinkPackageStatics>rtl.lib;fmxobj.lib;fmx.lib;xmlrtl.lib</LinkPackageStatics>
 			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-			<Manifest_File>None</Manifest_File>
-			<VerInfo_Locale>1033</VerInfo_Locale>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
 			<Defines>NDEBUG;$(Defines)</Defines>
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\builds\xe2\clapack\BLAS\SRC\blas.lib">
+				<BuildOrder>66</BuildOrder>
+				<IgnorePath>true</IgnorePath>
+			</LibFiles>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\builds\xe2\clapack\F2CLIBS\libf2c\libf2c.lib">
+				<BuildOrder>67</BuildOrder>
+				<IgnorePath>true</IgnorePath>
+			</LibFiles>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\builds\xe2\clapack\SRC\lapack.lib">
+				<BuildOrder>65</BuildOrder>
+				<IgnorePath>true</IgnorePath>
+			</LibFiles>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\libsbml-static.lib">
+				<BuildOrder>60</BuildOrder>
+				<IgnorePath>true</IgnorePath>
+			</LibFiles>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\sundials_cvode.lib">
+				<BuildOrder>61</BuildOrder>
+				<IgnorePath>true</IgnorePath>
+			</LibFiles>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\sundials_kinsol.lib">
+				<BuildOrder>62</BuildOrder>
+				<IgnorePath>true</IgnorePath>
+			</LibFiles>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\sundials_nvecserial.lib">
+				<BuildOrder>63</BuildOrder>
+				<IgnorePath>true</IgnorePath>
+			</LibFiles>
+			<CppCompile Include="..\..\src\LibStructSupport\rrInteropUtils.cpp">
+				<DependentOn>..\..\src\LibStructSupport\rrInteropUtils.h</DependentOn>
+				<BuildOrder>58</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\LibStructSupport\rrLibStructSupport.cpp">
+				<DependentOn>..\..\src\LibStructSupport\rrLibStructSupport.h</DependentOn>
+				<BuildOrder>59</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\libstruct\complex.cpp">
+				<BuildOrder>26</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\libstruct\libla.cpp">
+				<BuildOrder>27</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\libstruct\libstructural.cpp">
+				<BuildOrder>28</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\libstruct\matrix.cpp">
+				<BuildOrder>29</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\libstruct\sbmlmodel.cpp">
+				<BuildOrder>30</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\libstruct\util.cpp">
+				<BuildOrder>31</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\Logger\rrFileLog.cpp">
 				<DependentOn>..\..\src\Logger\rrFileLog.h</DependentOn>
-				<BuildOrder>2</BuildOrder>
+				<BuildOrder>50</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Logger\rrLog.cpp">
+				<DependentOn>..\..\src\Logger\rrLog.h</DependentOn>
+				<BuildOrder>51</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\Logger\rrLogFile.cpp">
 				<DependentOn>..\..\src\Logger\rrLogFile.h</DependentOn>
-				<BuildOrder>3</BuildOrder>
+				<BuildOrder>67</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Logger\rrLoggerUtils.cpp">
+				<DependentOn>..\..\src\Logger\rrLoggerUtils.h</DependentOn>
+				<BuildOrder>52</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Logger\rrLogLevel.cpp">
+				<DependentOn>..\..\src\Logger\rrLogLevel.h</DependentOn>
+				<BuildOrder>53</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Logger\rrLogOutput.cpp">
+				<DependentOn>..\..\src\Logger\rrLogOutput.h</DependentOn>
+				<BuildOrder>54</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrCGenerator.cpp">
+				<DependentOn>..\..\src\rrCGenerator.h</DependentOn>
+				<BuildOrder>25</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrCSharpGenerator.cpp">
+				<DependentOn>..\..\src\rrCSharpGenerator.h</DependentOn>
+				<BuildOrder>25</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrIModel.cpp">
+				<DependentOn>..\..\src\rrIModel.h</DependentOn>
+				<BuildOrder>24</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrMath.cpp">
+				<DependentOn>..\..\src\rrMath.h</DependentOn>
+				<BuildOrder>23</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrMisc.cpp">
+				<DependentOn>..\..\src\rrMisc.h</DependentOn>
+				<BuildOrder>8</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrModelFromC.cpp">
+				<DependentOn>..\..\src\rrModelFromC.h</DependentOn>
+				<BuildOrder>23</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrModelGenerator.cpp">
+				<DependentOn>..\..\src\rrModelGenerator.h</DependentOn>
+				<BuildOrder>22</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrModelState.cpp">
+				<DependentOn>..\..\src\rrModelState.h</DependentOn>
+				<BuildOrder>21</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\rrObject.cpp">
 				<DependentOn>..\..\src\rrObject.h</DependentOn>
-				<BuildOrder>1</BuildOrder>
+				<BuildOrder>20</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\src\rrPendingAssignment.cpp">
+				<DependentOn>..\..\src\rrPendingAssignment.h</DependentOn>
+				<BuildOrder>20</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrRoadRunner.cpp">
+				<DependentOn>..\..\src\rrRoadRunner.h</DependentOn>
+				<BuildOrder>11</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrSupportCode.cpp">
+				<DependentOn>..\..\src\rrSupportCode.h</DependentOn>
+				<BuildOrder>19</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrTComputeEventAssignmentDelegate.cpp">
+				<DependentOn>..\..\src\rrTComputeEventAssignmentDelegate.h</DependentOn>
+				<BuildOrder>18</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrTEventAssignmentDelegate.cpp">
+				<DependentOn>..\..\src\rrTEventAssignmentDelegate.h</DependentOn>
+				<BuildOrder>17</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrTEventDelayDelegate.cpp">
+				<DependentOn>..\..\src\rrTEventDelayDelegate.h</DependentOn>
+				<BuildOrder>16</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrTEventDelegate.cpp">
+				<DependentOn>..\..\src\rrTEventDelegate.h</DependentOn>
+				<BuildOrder>15</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrTParameterType.cpp">
+				<DependentOn>..\..\src\rrTParameterType.h</DependentOn>
+				<BuildOrder>14</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrTPerformEventAssignmentDelegate.cpp">
+				<DependentOn>..\..\src\rrTPerformEventAssignmentDelegate.h</DependentOn>
+				<BuildOrder>13</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrTVariableType.cpp">
+				<DependentOn>..\..\src\rrTVariableType.h</DependentOn>
+				<BuildOrder>12</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Scanner\rrCodeTypes.cpp">
+				<DependentOn>..\..\src\Scanner\rrCodeTypes.h</DependentOn>
+				<BuildOrder>55</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Scanner\rrScanner.cpp">
+				<DependentOn>..\..\src\Scanner\rrScanner.h</DependentOn>
+				<BuildOrder>56</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Scanner\rrToken.cpp">
+				<DependentOn>..\..\src\Scanner\rrToken.h</DependentOn>
+				<BuildOrder>57</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Solvers\rrCvodedll.cpp">
+				<DependentOn>..\..\src\Solvers\rrCvodedll.h</DependentOn>
+				<BuildOrder>8</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Solvers\rrCvodeInterface.cpp">
+				<DependentOn>..\..\src\Solvers\rrCvodeInterface.h</DependentOn>
+				<BuildOrder>9</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Solvers\rrNLEQInterface.cpp">
+				<DependentOn>..\..\src\Solvers\rrNLEQInterface.h</DependentOn>
+				<BuildOrder>10</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\mtrand\mtrand.cpp">
+				<BuildOrder>7</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrCompiler.cpp">
+				<DependentOn>..\..\src\Util\rrCompiler.h</DependentOn>
+				<BuildOrder>32</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrDoubleMatrix.cpp">
+				<DependentOn>..\..\src\Util\rrDoubleMatrix.h</DependentOn>
+				<BuildOrder>33</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrException.cpp">
+				<DependentOn>..\..\src\Util\rrException.h</DependentOn>
+				<BuildOrder>67</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrHashTable.cpp">
+				<DependentOn>..\..\src\Util\rrHashTable.h</DependentOn>
+				<BuildOrder>35</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrNOMSupport.cpp">
+				<DependentOn>..\..\src\Util\rrNOMSupport.h</DependentOn>
+				<BuildOrder>36</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrParameterSet.cpp">
+				<DependentOn>..\..\src\Util\rrParameterSet.h</DependentOn>
+				<BuildOrder>37</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrParameterSets.cpp">
+				<DependentOn>..\..\src\Util\rrParameterSets.h</DependentOn>
+				<BuildOrder>38</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrRandom.cpp">
+				<DependentOn>..\..\src\Util\rrRandom.h</DependentOn>
+				<BuildOrder>39</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrRule.cpp">
+				<DependentOn>..\..\src\Util\rrRule.h</DependentOn>
+				<BuildOrder>40</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrSBMLSymbol.cpp">
+				<DependentOn>..\..\src\Util\rrSBMLSymbol.h</DependentOn>
+				<BuildOrder>41</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrStreamWriter.cpp">
+				<DependentOn>..\..\src\Util\rrStreamWriter.h</DependentOn>
+				<BuildOrder>42</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrStringBuilder.cpp">
+				<DependentOn>..\..\src\Util\rrStringBuilder.h</DependentOn>
+				<BuildOrder>43</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrStringList.cpp">
+				<DependentOn>..\..\src\Util\rrStringList.h</DependentOn>
+				<BuildOrder>44</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrStringListContainer.cpp">
+				<DependentOn>..\..\src\Util\rrStringListContainer.h</DependentOn>
+				<BuildOrder>45</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrStringUtils.cpp">
+				<DependentOn>..\..\src\Util\rrStringUtils.h</DependentOn>
+				<BuildOrder>46</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrSymbol.cpp">
+				<DependentOn>..\..\src\Util\rrSymbol.h</DependentOn>
+				<BuildOrder>47</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrSymbolList.cpp">
+				<BuildOrder>48</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrTextWriter.cpp">
+				<DependentOn>..\..\src\Util\rrTextWriter.h</DependentOn>
+				<BuildOrder>49</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrUtils.cpp">
+				<DependentOn>..\..\src\Util\rrUtils.h</DependentOn>
+				<BuildOrder>50</BuildOrder>
+			</CppCompile>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib">
+				<BuildOrder>64</BuildOrder>
+				<IgnorePath>true</IgnorePath>
+			</LibFiles>
 			<CppCompile Include="RoadRunnerLib.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
