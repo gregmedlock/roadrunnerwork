@@ -17,7 +17,6 @@ class RR_DECLSPEC TextWriter : public rrObject
     				    TextWriter(ostream& aStream);
     	void            Write(const string& chars);
     	void            WriteLine();
-
 };
 
 }

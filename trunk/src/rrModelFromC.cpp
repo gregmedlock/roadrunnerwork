@@ -88,6 +88,12 @@ bool ModelFromC::SetupDLLFunctions()
 	cevalEvents							= (c_void_double_doubleStar)    GetFunctionPtr("evalEvents");
 	cupdateDependentSpeciesValues	    = (c_void_doubleStar)			GetFunctionPtr("updateDependentSpeciesValues");
 	ccomputeAllRatesOfChange   			= (c_void)						GetFunctionPtr("computeAllRatesOfChange");
+	cAssignRates_a 						= (c_void)						GetFunctionPtr("AssignRates");
+	cAssignRates_b 						= (c_void_doubleStar)			GetFunctionPtr("AssignRates");
+	ctestConstraints 	   				= (c_void)						GetFunctionPtr("testConstraints");
+	cresetEvents	 	   				= (c_void)						GetFunctionPtr("resetEvents");
+	cInitializeRateRuleSymbols			= (c_void)						GetFunctionPtr("InitializeRateRuleSymbols");
+	cInitializeRates					= (c_void)						GetFunctionPtr("InitializeRates");
 	return true;
 }
 
@@ -271,7 +277,7 @@ int ModelFromC::getNumLocalParameters(int reactionId)
 }
 
 //////Virtual functions that should be implemented in decendant..
-void  ModelFromC::initializeInitialConditions()
+void ModelFromC::initializeInitialConditions()
 {
 	if(!cinitializeInitialConditions)
     {
@@ -281,8 +287,8 @@ void  ModelFromC::initializeInitialConditions()
 	cinitializeInitialConditions();
 }
 
-//void  ModelFromC::setInitialConditions(){}
-void  ModelFromC::setParameterValues()
+//void ModelFromC::setInitialConditions(){}
+void ModelFromC::setParameterValues()
 {
 	if(!csetParameterValues)
     {
@@ -292,7 +298,7 @@ void  ModelFromC::setParameterValues()
     csetParameterValues();
 }
 
-void  ModelFromC::setBoundaryConditions()
+void ModelFromC::setBoundaryConditions()
 {
     if(!csetBoundaryConditions)
     {
@@ -302,10 +308,44 @@ void  ModelFromC::setBoundaryConditions()
     csetBoundaryConditions();
 }
 
-//void  ModelFromC::InitializeRates(){}
-//void  ModelFromC::AssignRates(){}
-//void  ModelFromC::AssignRates(vector<double>& rates){}
-void  ModelFromC::computeConservedTotals()
+void ModelFromC::InitializeRates()
+{
+    if(!cInitializeRates)
+    {
+    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+        return;
+	}
+    cInitializeRates();
+}
+
+void ModelFromC::AssignRates()
+{
+    if(!cAssignRates_a)
+    {
+    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+        return;
+	}
+    cAssignRates_a();
+}
+
+void ModelFromC::AssignRates(vector<double>& _rates)
+{
+    if(!cAssignRates_b)
+    {
+    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+        return;
+	}
+
+	auto_ptr<double> rates(new double(_rates.size()));
+	for(int i = 0; i < _rates.size(); i++)
+	{
+		(rates).get()[i] = _rates[i];
+	}
+
+    cAssignRates_b(rates.get());
+}
+
+void ModelFromC::computeConservedTotals()
 {
     if(!ccomputeConservedTotals)
     {
@@ -315,9 +355,9 @@ void  ModelFromC::computeConservedTotals()
 	ccomputeConservedTotals();
 }
 
-//void  ModelFromC::computeEventPriorites(){}
-//void  ModelFromC::setConcentration(int index, double value){}
-void  ModelFromC::convertToAmounts()
+//void ModelFromC::computeEventPriorites(){}
+//void ModelFromC::setConcentration(int index, double value){}
+void ModelFromC::convertToAmounts()
 {
     if(!cconvertToAmounts)
     {
@@ -354,7 +394,7 @@ void ModelFromC::updateDependentSpeciesValues(vector<double>& _y)
 	cupdateDependentSpeciesValues(y_vec.get());
 }
 
-void  ModelFromC::computeRules(vector<double>& y)
+void ModelFromC::computeRules(vector<double>& y)
 {
 
 	if(!ccomputeRules)
@@ -379,8 +419,8 @@ void ModelFromC::setInitialConditions()
     csetInitialConditions();
 }
 
-//void  ModelFromC::computeReactionRates(double time, vector<double>& y){}
-void  ModelFromC::computeAllRatesOfChange()
+//void ModelFromC::computeReactionRates(double time, vector<double>& y){}
+void ModelFromC::computeAllRatesOfChange()
 {
 	if(!ccomputeAllRatesOfChange)
 	{
@@ -408,7 +448,7 @@ void ModelFromC::evalModel(double timein, vector<double>& y)
     cevalModel(timein, mAmounts);
 
 }
-void  ModelFromC::evalEvents(double timeIn, vector<double>& y)
+void ModelFromC::evalEvents(double timeIn, vector<double>& y)
 {
     if(!cevalEvents)
     {
@@ -419,9 +459,19 @@ void  ModelFromC::evalEvents(double timeIn, vector<double>& y)
     cevalEvents(timeIn, mAmounts);
 
 }
-//void  ModelFromC::resetEvents(){}
 
-void  ModelFromC::evalInitialAssignments()
+void ModelFromC::resetEvents()
+{
+    if(!cresetEvents)
+    {
+    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+        return;
+	}
+
+    cresetEvents();
+}
+
+void ModelFromC::evalInitialAssignments()
 {
     if(!cevalInitialAssignments)
     {
@@ -432,7 +482,26 @@ void  ModelFromC::evalInitialAssignments()
     cevalInitialAssignments();
 }
 
-//void  ModelFromC::testConstraints(){}
-//void  ModelFromC::InitializeRateRuleSymbols(){}
+void ModelFromC::testConstraints()
+{
+    if(!ctestConstraints)
+    {
+    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+        return;
+	}
+
+    ctestConstraints();
+}
+
+void ModelFromC::InitializeRateRuleSymbols()
+{
+    if(!cInitializeRateRuleSymbols)
+    {
+    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+        return;
+	}
+
+    cInitializeRateRuleSymbols();
+}
 
 }//Namespace rr

@@ -45,7 +45,6 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
 		c_void                      cevalInitialAssignments;
 		c_void_doubleStar			cupdateDependentSpeciesValues;
 		c_void_doubleStar           ccomputeRules;
-
 		c_void                      cconvertToAmounts;
 		c_void                      ccomputeConservedTotals;
 		c_double_int   		        cgetConcentration;
@@ -54,7 +53,12 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
 		c_void                      cconvertToConcentrations;
 		c_void_double_doubleStar    cevalEvents;
 		c_void						ccomputeAllRatesOfChange;
-
+   		c_void						cAssignRates_a;
+		c_void_doubleStar			cAssignRates_b;
+		c_void						ctestConstraints;
+		c_void						cresetEvents;
+		c_void						cInitializeRates;
+		c_void						cInitializeRateRuleSymbols;
 
 		//Utility
 		HANDLE 						GetFunctionPtr(const string& function);
@@ -103,9 +107,9 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
 //        void                        setInitialConditions();
 //        void                        setParameterValues();
 //        void                        setBoundaryConditions();
-//        void                        InitializeRates();
-//        void                        AssignRates();
-//        void                        AssignRates(vector<double>& rates);
+        void                        InitializeRates();
+        void                        AssignRates();
+        void                        AssignRates(vector<double>& rates);
 //        void                        computeConservedTotals();
 //        void                        computeEventPriorites();
 //        void                        setConcentration(int index, double value);
@@ -117,10 +121,10 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
 		void                        computeAllRatesOfChange();
 		void                        evalModel(double time, vector<double>& y);
         void                        evalEvents(double time, vector<double>& y);
-//        void                        resetEvents();
+        void                        resetEvents();
 //        void                        evalInitialAssignments();
-//        void                        testConstraints();
-//        void                        InitializeRateRuleSymbols();
+        void                        testConstraints();
+        void                        InitializeRateRuleSymbols();
 
 };
 

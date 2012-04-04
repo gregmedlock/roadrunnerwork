@@ -32,7 +32,7 @@ int main()
     string appPath(exePath);
     gLog.Init("simulateModel", lDebug5, unique_ptr<LogFile>(new LogFile("simulate_sbml.log")));
     LogOutput::mLogToConsole = true;
-    gLog.SetCutOffLogLevel(lDebug5);
+    gLog.SetCutOffLogLevel(lDebug2);
 //       	gLog.SetCutOffLogLevel(lInfo);
 
     Log(lDebug4)<<"Logs are going to "<<exePath<<"\\"<<gLog.GetLogFileName()<< " (and cout)";

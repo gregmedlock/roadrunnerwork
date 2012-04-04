@@ -347,25 +347,27 @@ void RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 	//var sim = new RoadRunner();
 	ComputeAndAssignConservationLaws(useConservationLaws);
 
-	string fullFilePath(fileName);
-	ifstream inFileStream(fullFilePath.c_str());
-	if(!inFileStream)
+    mModelXMLFileName = fileName;
+	ifstream fs(mModelXMLFileName.c_str());
+	if(!fs)
 	{
-		throw(Exception("Failed to open the model file:" + fullFilePath));
+		throw(Exception("Failed to open the model file:" + mModelXMLFileName));
 	}
-	Log(lInfo)<<"\n\n ===== Reading model file:"<<fullFilePath<<" ==============";
-	std::string sbml((std::istreambuf_iterator<char>(inFileStream)), std::istreambuf_iterator<char>());
-	inFileStream.close();
-	Log(lDebug5)<<"Before loading SBML. SBML model code size: "<<sbml.size();
-	mModelXMLFileName = fullFilePath;
+
+	Log(lInfo)<<"\n\n ===== Reading model file:"<<mModelXMLFileName<<" ==============";
+	string sbml((std::istreambuf_iterator<char>(fs)), std::istreambuf_iterator<char>());
+	fs.close();
+
+	Log(lDebug5)<<"Loading SBML. SBML model code size: "<<sbml.size();
 
 	loadSBML(sbml);
 
-	DoubleMatrix data( simulate() );
-//    data = simulate();
-	StringList list = getSelectionList();
-	TextWriter writer(cout);
+	DoubleMatrix data;
+    data = simulate();
 
+	StringList list = getSelectionList();
+
+	TextWriter writer(cout);
 	DumpResults(writer, data, list);
 	return;
 }
