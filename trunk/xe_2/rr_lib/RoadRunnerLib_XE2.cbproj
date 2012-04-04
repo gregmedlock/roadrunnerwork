@@ -311,7 +311,11 @@
 			</CppCompile>
 			<CppCompile Include="..\..\src\Util\rrSBMLSymbol.cpp">
 				<DependentOn>..\..\src\Util\rrSBMLSymbol.h</DependentOn>
-				<BuildOrder>41</BuildOrder>
+				<BuildOrder>68</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrSBMLSymbolDependencies.cpp">
+				<DependentOn>..\..\src\Util\rrSBMLSymbolDependencies.h</DependentOn>
+				<BuildOrder>68</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\Util\rrStreamWriter.cpp">
 				<DependentOn>..\..\src\Util\rrStreamWriter.h</DependentOn>

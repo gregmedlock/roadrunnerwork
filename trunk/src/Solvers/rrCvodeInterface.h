@@ -34,8 +34,8 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 		int 					    numIndependentVariables;
 		//IntPtr 					    gdata;
 		//IntPtr 					    _amounts;
-		N_Vector					_amounts;
 		//IntPtr 					    _rootsFound;
+		N_Vector					_amounts;
 		N_Vector				    abstolArray;
 		string 					    cvodeLogFile;// = "cvodeLogFile";
 		void*					    cvodeMem;
@@ -183,17 +183,17 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 //        internal static CvodeErrorCodes[] errorCodes = InitilizeErrorCodes();
 //        internal static CvodeErrorCodes[] InitilizeErrorCodes();
 
-        double 					lastEvent;
+		double 					lastEvent;
 //        //internal List<double> eventOccurance = new List<double>();
-        double 					OneStep(double timeStart, double hstep);
+		double 					OneStep(double timeStart, double hstep);
 
-        // Restart the simulation using a different initial condition
+		// Restart the simulation using a different initial condition
 		void                   	AssignNewVector(IModel *oModel, bool bAssignNewTolerances);
-        void                   	AssignNewVector(IModel *model);
-        void 					setAbsTolerance(int index, double dValue);
+		void                   	AssignNewVector(IModel *model);
+		void 					setAbsTolerance(int index, double dValue);
 		int 					reStart(double timeStart, IModel* model);
 //        public double getValue(int index);
-        vector<double> 			BuildEvalArgument();
+		vector<double> 			BuildEvalArgument();
 
 };	//class
 }//namespace rr

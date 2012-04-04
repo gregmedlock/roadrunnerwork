@@ -62,7 +62,6 @@ absTol(defaultAbsTol)
 //_amounts),
 //_rootsFound),
 //abstolArray),
-
 //modelDelegate(&CvodeInterface::ModelFcn)
 {
 	InitializeCVODEInterface(aModel);
@@ -72,6 +71,7 @@ CvodeInterface::~CvodeInterface()
 {
 	FreeCvode_Mem((void**) cvodeMem);
 	FreeCvode_Vector(_amounts);
+	FreeCvode_Vector(abstolArray);
 	fileClose(fileHandle);
 }
 
@@ -764,31 +764,32 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& han
     vector<double> args = BuildEvalArgument();
     model->evalModel(timeEnd, args);
 
-    ModelState *oldState = new ModelState(*model);
+	ModelState *oldState = new ModelState(*model);
 
-    args = BuildEvalArgument();
-    model->evalEvents(timeEnd, args);
+	args = BuildEvalArgument();
+	model->evalEvents(timeEnd, args);
 
-    for (int i = 0; i < model->getNumEvents(); i++)
-    {
+	for (int i = 0; i < model->getNumEvents(); i++)
+	{
 //        if (model->eventStatusArray[i] == true && oldState->mEventStatusArray[i] == false && !handledEvents.Contains(i))
 		bool containsI = (std::find(handledEvents.begin(), handledEvents.end(), i) != handledEvents.end()) ? true : false;
-        if (model->eventStatusArray[i] == true && oldState->mEventStatusArray[i] == false && !containsI)
-        {
-            result.push_back(i);
-        }
+		if (model->eventStatusArray[i] == true && oldState->mEventStatusArray[i] == false && !containsI)
+		{
+			result.push_back(i);
+		}
 
-        if (model->eventStatusArray[i] == false && oldState->mEventStatusArray[i] == true && !model->eventPersistentType[i])
-        {
-            removeEvents.push_back(i);
-        }
-    }
+		if (model->eventStatusArray[i] == false && oldState->mEventStatusArray[i] == true && !model->eventPersistentType[i])
+		{
+			removeEvents.push_back(i);
+		}
+	}
 
-    if (assignOldState)
-    {
-        oldState->AssignToModel(*model);
-    }
+	if (assignOldState)
+	{
+		oldState->AssignToModel(*model);
+	}
 
+	delete oldState;
     return result;
 }
 

@@ -345,13 +345,13 @@ void ModelFromC::updateDependentSpeciesValues(vector<double>& _y)
 		return;
 	}
 
-	double *y_vec = new double(y.size());
+	auto_ptr<double> y_vec(new double(y.size()));
 	for(int i = 0; i < y.size(); i++)
 	{
-		y_vec[i] = y[i];
+		(y_vec).get()[i] = y[i];
 	}
 
-	cupdateDependentSpeciesValues(y_vec);
+	cupdateDependentSpeciesValues(y_vec.get());
 }
 
 void  ModelFromC::computeRules(vector<double>& y)
@@ -363,8 +363,9 @@ void  ModelFromC::computeRules(vector<double>& y)
 		return;
 	}
 
-	double *y_vec = new double(y.size());
-    ccomputeRules(y_vec);
+	auto_ptr<double> y_vec (new double(y.size()));
+	ccomputeRules(y_vec.get());
+
 }
 
 void ModelFromC::setInitialConditions()

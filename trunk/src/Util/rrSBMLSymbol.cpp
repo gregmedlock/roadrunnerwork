@@ -6,6 +6,7 @@
 #include <limits>
 #include "rrSBMLSymbol.h"
 #include "rrStringUtils.h"
+#include "rrSBMLSymbolDependencies.h"
 //---------------------------------------------------------------------------
 
 
@@ -20,23 +21,28 @@ mConcentration(mValue),
 mAmount(mValue),
 mHasRule(false)
 {
-	mDependencies = new SymbolDependencies;
+//	mDependencies = new SBMLSymbolDependencies;
 }
 
 SBMLSymbol::SBMLSymbol(const SBMLSymbol& cp)
 :
-mValue(cp.mValue),
-mConcentration(mValue), //tie reference.. does this work?
-mAmount(mValue),			//tie reference.. does this work?
 mId(cp.mId),
 mType(cp.mType),
+mValue(cp.mValue),
+mConcentration(mValue), 	//tie reference.. does this work?
+mAmount(mValue),			//tie reference.. does this work?
 IsSetAmount(cp.IsSetAmount),
 IsSetConcentration(cp.IsSetConcentration),
 mInitialAssignment(cp.mInitialAssignment),
 mHasRule(cp.mHasRule),
 mRule(cp.mRule)
 {
-  mDependencies = (cp.mDependencies);
+  *this  = (cp);
+}
+
+SBMLSymbol::~SBMLSymbol()
+{
+//	delete mDependencies;
 }
 
 SBMLSymbol& SBMLSymbol::operator =(const SBMLSymbol& rhs)
@@ -50,23 +56,23 @@ SBMLSymbol& SBMLSymbol::operator =(const SBMLSymbol& rhs)
 	mInitialAssignment = rhs.mInitialAssignment;
 	mHasRule = rhs.mHasRule;
 	mRule = rhs.mRule;
-	*mDependencies = (*rhs.mDependencies);
+	mDependencies = (rhs.mDependencies);
 	return *this;
 }
 
 int	SBMLSymbol::NumberOfDependencies()
 {
-	return mDependencies->Count();
+	return mDependencies.Count();
 }
 
 void SBMLSymbol::AddDependency(SBMLSymbol* symbol)
 {
-	mDependencies->Add(symbol);
+	mDependencies.Add(symbol);
 }
 
 SBMLSymbol SBMLSymbol::GetDependency(const int& i)
 {
-	return mDependencies->At(i);
+	return mDependencies.At(i);
 }
 
 bool SBMLSymbol::HasValue()
@@ -107,19 +113,4 @@ ostream& operator<<(ostream& stream, const SBMLSymbol& symbol)
     return stream;
 }
 
-
-void SymbolDependencies::Add(SBMLSymbol* symbol)
-{
-	mDependencies.push_back(*symbol);	//Makes a copy
-}
-
-int SymbolDependencies::Count()
-{
-	return mDependencies.size();
-}
-
-SBMLSymbol	SymbolDependencies::At(const int& i)
-{
-	return mDependencies[i];
-}
 }

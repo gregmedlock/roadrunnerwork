@@ -5,62 +5,48 @@
 #include <deque>
 #include "rrObject.h"
 #include "rrUtils.h"
-
+#include "rrSBMLSymbolDependencies.h"
 using std::vector;
 using std::deque;
 using std::ostream;
 namespace rr
 {
 
-class SymbolDependencies;
+//class SBMLSymbolDependencies;
 
 class RR_DECLSPEC SBMLSymbol : public rrObject
 {
 	protected:
-    public:
-        string 					mId;
-        enum SBMLType 			mType;
-        SymbolDependencies	   *mDependencies;
-			//deque<SBMLSymbol> 		mDependencies;
-
-        double 					mValue;
-        bool 					HasValue();
-
-        double& 				mConcentration; //Assing ref to mValue..
-        double& 				mAmount; //Assing ref to mValue..
-
-        bool 					IsSetAmount;
-        bool 					IsSetConcentration;
-
-        bool 					HasInitialAssignment() const;
-        string					mInitialAssignment;
-
-        bool 					mHasRule;
-        bool 					HasRule();
-        string 					mRule;
-
-    public:
-    							SBMLSymbol();
-								SBMLSymbol(const SBMLSymbol& cp);
-								SBMLSymbol& operator =(const SBMLSymbol& rhs);
-		void					AddDependency(SBMLSymbol* symbol);
-		int						NumberOfDependencies();
-		SBMLSymbol				GetDependency(const int& i);
-		
-};
-
-class RR_DECLSPEC SymbolDependencies : public rrObject
-{
-	protected:
-		deque<SBMLSymbol>		mDependencies;
 	public:
-		
+		string 			   				mId;
+		enum SBMLType 		           	mType;
+		SBMLSymbolDependencies          mDependencies;
+
+		double 				           	mValue;
+		bool 				           	HasValue();
+
+		double& 			           	mConcentration; //Assing ref to mValue..
+		double& 			           	mAmount; //Assing ref to mValue..
+
+		bool 				           	IsSetAmount;
+		bool 				           	IsSetConcentration;
+
+		bool 				           	HasInitialAssignment() const;
+		string				           	mInitialAssignment;
+
+		bool 				           	mHasRule;
+		bool 				           	HasRule();
+		string 				           	mRule;
 
 	public:
-								SymbolDependencies(){}
-		void					Add(SBMLSymbol* symbol);
-		int						Count();
-		SBMLSymbol				At(const int& i);
+										SBMLSymbol();
+									   ~SBMLSymbol();
+										SBMLSymbol(const SBMLSymbol& cp);
+										SBMLSymbol& operator =(const SBMLSymbol& rhs);
+		void				           	AddDependency(SBMLSymbol* symbol);
+		int					           	NumberOfDependencies();
+		SBMLSymbol			           	GetDependency(const int& i);
+
 };
 
 RR_DECLSPEC std::ostream& operator<<(ostream& stream, const SBMLSymbol& symbol);

@@ -2277,66 +2277,67 @@ int CGenerator::ReadFloatingSpecies()
                   dValue = 0;
             }
 
-            Symbol *symbol = NULL;
-            if (bIsConcentration)
-            {
-              symbol = new Symbol(reOrderedList[i], dValue, compartmentName);
-            }
-            else
-            {
-              int nCompartmentIndex;
-              compartmentList.find(compartmentName, nCompartmentIndex);
+			Symbol *symbol = NULL;
+			if (bIsConcentration)
+			{
+			  symbol = new Symbol(reOrderedList[i], dValue, compartmentName);
+			}
+			else
+			{
+			  int nCompartmentIndex;
+			  compartmentList.find(compartmentName, nCompartmentIndex);
 
-              double dVolume = compartmentList[nCompartmentIndex].value;
-              if (IsNaN(dVolume))
-              {
-              	dVolume = 1;
-              }
+			  double dVolume = compartmentList[nCompartmentIndex].value;
+			  if (IsNaN(dVolume))
+			  {
+				dVolume = 1;
+			  }
 
-              stringstream formula;
-              formula<<ToString(dValue,STR_DoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
+			  stringstream formula;
+			  formula<<ToString(dValue,STR_DoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
 
-              symbol = new Symbol(reOrderedList[i],
-                  dValue / dVolume,
-                  compartmentName,
-                  formula.str());
-            }
+			  symbol = new Symbol(reOrderedList[i],
+				  dValue / dVolume,
+				  compartmentName,
+				  formula.str());
+			}
 
-            if(mNOM.GetModel())
-            {
-	            Species *aSpecies = mNOM.GetModel()->getSpecies(reOrderedList[i]);
-                if(aSpecies)
-                {
-                    symbol->hasOnlySubstance = aSpecies->getHasOnlySubstanceUnits();
-	                symbol->constant = aSpecies->getConstant();
-                }
-            }
-            else
-            {
-                //TODO: How to report error...?
-                //Log an error...
-                symbol->hasOnlySubstance = false;
-            }
+			if(mNOM.GetModel())
+			{
+				Species *aSpecies = mNOM.GetModel()->getSpecies(reOrderedList[i]);
+				if(aSpecies)
+				{
+					symbol->hasOnlySubstance = aSpecies->getHasOnlySubstanceUnits();
+					symbol->constant = aSpecies->getConstant();
+				}
+			}
+			else
+			{
+				//TODO: How to report error...?
+				//Log an error...
+				symbol->hasOnlySubstance = false;
+			}
 			Log(lDebug5)<<"Adding symbol to floatingSpeciesConcentrationList:"<<(*symbol);
 			floatingSpeciesConcentrationList.Add(*(symbol));
-            break;
-          }
-          //throw RRException("Reordered Species " + reOrderedList[i] + " not found.");
-      }
-      return oFloatingSpecies.size();
+			delete symbol;
+			break;
+		  }
+		  //throw RRException("Reordered Species " + reOrderedList[i] + " not found.");
+	  }
+	  return oFloatingSpecies.size();
 }
 
 int CGenerator::ReadBoundarySpecies()
 {
 	int numBoundarySpecies;
-    StringListContainer oBoundarySpecies = mNOM.getListOfBoundarySpecies();
-    numBoundarySpecies = oBoundarySpecies.size(); // sp1.size();
-    for (int i = 0; i < numBoundarySpecies; i++)
-    {
-        StringList oTempList 	= oBoundarySpecies[i];
-        string sName 			= oTempList[0];
-        string compartmentName 	= mNOM.getNthBoundarySpeciesCompartmentName(i);
-        bool bIsConcentration 	= ToBool(oTempList[2]);
+	StringListContainer oBoundarySpecies = mNOM.getListOfBoundarySpecies();
+	numBoundarySpecies = oBoundarySpecies.size(); // sp1.size();
+	for (int i = 0; i < numBoundarySpecies; i++)
+	{
+		StringList oTempList 	= oBoundarySpecies[i];
+		string sName 			= oTempList[0];
+		string compartmentName 	= mNOM.getNthBoundarySpeciesCompartmentName(i);
+		bool bIsConcentration 	= ToBool(oTempList[2]);
         double dValue 			= ToDouble(oTempList[1]);
         if (IsNaN(dValue))
         {
