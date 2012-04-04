@@ -1004,11 +1004,11 @@ void CvodeInterface::AssignResultsToModel()
     {
 //        model->amounts[i] = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
 		double val = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
-        model->amounts.push_back(val);
-        Log(lDebug)<<"Amount "<<setprecision(16)<<val;
-    }
+        model->amounts[i] = (val);
+		Log(lDebug)<<"Amount "<<setprecision(16)<<val;
+	}
 
-    vector<double> args = BuildEvalArgument();
+	vector<double> args = BuildEvalArgument();
     model->computeRules(args);
     model->AssignRates(dTemp);
     model->computeAllRatesOfChange();
@@ -1063,10 +1063,10 @@ void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
         Cvode_SetVector(_amounts, 0, 1.0);
     }
 
-    //if (bAssignNewTolerances)
-    //{
-    //    System.Diagnostics.Debug.WriteLine(string.Format("Set tolerance to: {0:G}", dMin));
-    //}
+    if (bAssignNewTolerances)
+    {
+        Log(lInfo)<<Format("Set tolerance to: {0:G}", dMin);
+	}
 }
 
 

@@ -19,10 +19,10 @@ mDLLHandle(dllHandle),
 mCodeGenerator(generator)
 {
 	if(mDLLHandle)
-    {
-    	SetupDLLFunctions();
+	{
+		SetupDLLFunctions();
 		SetupDLLData();
-    }
+	}
 }
 
 ModelFromC::~ModelFromC()
@@ -30,28 +30,28 @@ ModelFromC::~ModelFromC()
 
 void ModelFromC::LoadData()
 {
-   	CopyDblArray(mGP, gp, mCodeGenerator->GetNumberOfFloatingSpecies());
-   	CopyDblArray(mInitY, init_y, mCodeGenerator->GetNumberOfFloatingSpecies());
-   	CopyDblArray(mY, y, mCodeGenerator->GetNumberOfFloatingSpecies());
-	CopyDblArray(m_dydt, dydt, mCodeGenerator->GetNumberOfFloatingSpecies());
-	CopyDblArray(mAmounts, amounts, mCodeGenerator->GetNumberOfFloatingSpecies());
-	CopyDblArray(mRates, rates, mCodeGenerator->GetNumberOfReactions());
+	CopyDblArray(mGP, 			gp, 			mCodeGenerator->GetNumberOfFloatingSpecies());
+	CopyDblArray(mInitY, 		init_y, 		mCodeGenerator->GetNumberOfFloatingSpecies());
+	CopyDblArray(mY, 			y, 				mCodeGenerator->GetNumberOfFloatingSpecies());
+	CopyDblArray(m_dydt, 		dydt, 			mCodeGenerator->GetNumberOfFloatingSpecies());
+	CopyDblArray(mAmounts, 		amounts, 		mCodeGenerator->GetNumberOfFloatingSpecies());
+	CopyDblArray(mRates, 		rates, 			mCodeGenerator->GetNumberOfReactions());
 }
 
 bool CopyDblArray(double* src, vector<double>& dest, int size)
 {
 	if(!src)
-    {
+	{
 		Log(lError)<<"Tried to copy from NULL vector";
-        return false;
-    }
+		return false;
+	}
 
-    dest.resize(size);
-    for(int i = 0; i < size; i++)
-    {
-        dest[i] = src[i];
-    }
-    return true;
+	dest.resize(size);
+	for(int i = 0; i < size; i++)
+	{
+		dest[i] = src[i];
+	}
+	return true;
 }
 
 double ModelFromC::GetAmounts(const int& i)
@@ -62,43 +62,45 @@ double ModelFromC::GetAmounts(const int& i)
 bool ModelFromC::SetupDLLFunctions()
 {
 	//Exported functions in the dll need to be assigned to a function pointer here..
-    if(!mDLLHandle)
-    {
-    	Log(lError)<<"DLL handle not valid in SetupModel function";
-        return false;
-    }
+	if(!mDLLHandle)
+	{
+		Log(lError)<<"DLL handle not valid in SetupModel function";
+		return false;
+	}
 
-    //Load functions..
-    cInitModel                          = (c_int)						GetFunctionPtr("InitModel");
-    cGetModelName                       = (c_charStar)		 		    GetFunctionPtr("GetModelName");
-    cinitializeInitialConditions        = (c_void)                	    GetFunctionPtr("initializeInitialConditions");
-    csetParameterValues                 = (c_void)                	    GetFunctionPtr("setParameterValues");
-    csetCompartmentVolumes              = (c_void)  				    GetFunctionPtr("setCompartmentVolumes");
-    cgetNumLocalParameters              = (c_int_int)             	    GetFunctionPtr("getNumLocalParameters");
-    csetBoundaryConditions              = (c_void)                	    GetFunctionPtr("setBoundaryConditions");
-    csetInitialConditions               = (c_void)                	    GetFunctionPtr("setInitialConditions");
-    cevalInitialAssignments             = (c_void)                      GetFunctionPtr("evalInitialAssignments");
-    ccomputeRules                       = (c_void_doubleStar)           GetFunctionPtr("computeRules");
-    cconvertToAmounts                   = (c_void)                      GetFunctionPtr("convertToAmounts");
-    ccomputeConservedTotals             = (c_void)                      GetFunctionPtr("computeConservedTotals");
-    cgetConcentration                   = (c_double_int)                GetFunctionPtr("getConcentration");
-    cGetCurrentValues                   = (c_doubleStar)    	        GetFunctionPtr("GetCurrentValues");
-    cevalModel                			= (c_void_double_doubleStar)    GetFunctionPtr("evalModel");
-    cconvertToConcentrations  			= (c_void)     				    GetFunctionPtr("convertToConcentrations");
-    cevalEvents							= (c_void_double_doubleStar)    GetFunctionPtr("evalEvents");
+	//Load functions..
+	cInitModel                          = (c_int)						GetFunctionPtr("InitModel");
+	cGetModelName                       = (c_charStar)		 		    GetFunctionPtr("GetModelName");
+	cinitializeInitialConditions        = (c_void)                	    GetFunctionPtr("initializeInitialConditions");
+	csetParameterValues                 = (c_void)                	    GetFunctionPtr("setParameterValues");
+	csetCompartmentVolumes              = (c_void)  				    GetFunctionPtr("setCompartmentVolumes");
+	cgetNumLocalParameters              = (c_int_int)             	    GetFunctionPtr("getNumLocalParameters");
+	csetBoundaryConditions              = (c_void)                	    GetFunctionPtr("setBoundaryConditions");
+	csetInitialConditions               = (c_void)                	    GetFunctionPtr("setInitialConditions");
+	cevalInitialAssignments             = (c_void)                      GetFunctionPtr("evalInitialAssignments");
+	ccomputeRules                       = (c_void_doubleStar)           GetFunctionPtr("computeRules");
+	cconvertToAmounts                   = (c_void)                      GetFunctionPtr("convertToAmounts");
+	ccomputeConservedTotals             = (c_void)                      GetFunctionPtr("computeConservedTotals");
+	cgetConcentration                   = (c_double_int)                GetFunctionPtr("getConcentration");
+	cGetCurrentValues                   = (c_doubleStar)    	        GetFunctionPtr("GetCurrentValues");
+	cevalModel                			= (c_void_double_doubleStar)    GetFunctionPtr("evalModel");
+	cconvertToConcentrations  			= (c_void)     				    GetFunctionPtr("convertToConcentrations");
+	cevalEvents							= (c_void_double_doubleStar)    GetFunctionPtr("evalEvents");
+	cupdateDependentSpeciesValues	    = (c_void_doubleStar)			GetFunctionPtr("updateDependentSpeciesValues");
+	ccomputeAllRatesOfChange   			= (c_void)						GetFunctionPtr("computeAllRatesOfChange");
 	return true;
 }
 
 bool ModelFromC::SetupDLLData()
 {
-    if(!cInitModel)
-    {
+	if(!cInitModel)
+	{
 		Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
 		return false;
 	}
 
-	int res = cInitModel();
-	if(res != 0)
+	//This setup up data in the DLL...
+	if(cInitModel() != 0)
 	{
 		Log(lError)<<"Failed to InitModel in "<<__FUNCTION__;
 		return false;
@@ -110,19 +112,41 @@ bool ModelFromC::SetupDLLData()
 		mModelName = modelName;
 	}
 
+	//Simple variables...
 	int *test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numIndependentVariables");
 	numIndependentVariables = test;
 
-  	mAmounts  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_amounts");
-    if(!mAmounts)
-    {
-		Log(lError)<<"Failed to assign to mAmounts";
-        return false;
-    }
+	test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numDependentVariables");
+	numDependentVariables = test;
 
-    m_dydt  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_dydt");
-    if(!m_dydt)
-    {
+	test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numTotalVariables");
+	numTotalVariables = test;
+
+	test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numBoundaryVariables");
+	numBoundaryVariables = test;
+
+	test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numGlobalParameters");
+	numGlobalParameters = test;
+
+	test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numCompartments");
+	numCompartments = test;
+
+	test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numReactions");
+	numReactions = test;
+
+	test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numEvents");
+	numEvents = test;
+
+	mAmounts  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_amounts");
+	if(!mAmounts)
+	{
+		Log(lError)<<"Failed to assign to mAmounts";
+		return false;
+	}
+
+	m_dydt  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_dydt");
+	if(!m_dydt)
+	{
 		Log(lError)<<"Failed to assign to m_dydt";
         return false;
     }
@@ -146,7 +170,7 @@ bool ModelFromC::SetupDLLData()
     {
 		Log(lError)<<"Failed to assign to time";
         return false;
-    }
+	}
 
     mInitY	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_init_y");
     if(!mInitY)
@@ -182,7 +206,7 @@ void ModelFromC::setCompartmentVolumes()
     if(!csetCompartmentVolumes)
     {
     	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
-        return;
+		return;
 	}
 
 	csetCompartmentVolumes();
@@ -254,7 +278,7 @@ void  ModelFromC::initializeInitialConditions()
     	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
 		return;
     }
-    cinitializeInitialConditions();
+	cinitializeInitialConditions();
 }
 
 //void  ModelFromC::setInitialConditions(){}
@@ -303,25 +327,40 @@ void  ModelFromC::convertToAmounts()
 	cconvertToAmounts();
 }
 
-void  ModelFromC::convertToConcentrations()
+void ModelFromC::convertToConcentrations()
 {
-    if(!cconvertToConcentrations)
-    {
-    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
-        return;
+	if(!cconvertToConcentrations)
+	{
+		Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+		return;
 	}
 	cconvertToConcentrations();
 }
 
-//void  ModelFromC::updateDependentSpeciesValues(vector<double>& _y){}
+void ModelFromC::updateDependentSpeciesValues(vector<double>& _y)
+{
+	if(!cupdateDependentSpeciesValues)
+	{
+		Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+		return;
+	}
+
+	double *y_vec = new double(y.size());
+	for(int i = 0; i < y.size(); i++)
+	{
+		y_vec[i] = y[i];
+	}
+
+	cupdateDependentSpeciesValues(y_vec);
+}
 
 void  ModelFromC::computeRules(vector<double>& y)
 {
 
-    if(!ccomputeRules)
-    {
-    	Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
-        return;
+	if(!ccomputeRules)
+	{
+		Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+		return;
 	}
 
 	double *y_vec = new double(y.size());
@@ -340,7 +379,16 @@ void ModelFromC::setInitialConditions()
 }
 
 //void  ModelFromC::computeReactionRates(double time, vector<double>& y){}
-//void  ModelFromC::computeAllRatesOfChange(){}
+void  ModelFromC::computeAllRatesOfChange()
+{
+	if(!ccomputeAllRatesOfChange)
+	{
+		Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+		return;
+	}
+	ccomputeAllRatesOfChange();
+}
+
 void ModelFromC::evalModel(double timein, vector<double>& y)
 {
 	if(!cevalModel)

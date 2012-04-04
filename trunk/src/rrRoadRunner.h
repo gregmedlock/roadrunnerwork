@@ -23,36 +23,34 @@ class Compiler;
 class RR_DECLSPEC RoadRunner : public rrObject
 {
 	private:
-    	const double 					DiffStepSize;
+		const double 					DiffStepSize;
 		const string 					emptyModelStr;
 		const double 					STEADYSTATE_THRESHOLD;
-     	vector<TSelectionRecord> 		mSteadyStateSelection;
-        string							mModelXMLFileName;
+		vector<TSelectionRecord> 		mSteadyStateSelection;
+		string							mModelXMLFileName;
 		string 							mModelCode;
 
 		CvodeInterface 				   *mCVode;
 		ISteadyStateSolver			   *steadyStateSolver;
-        vector<TSelectionRecord> 		selectionList;
-        ModelGenerator				   *mCSharpGenerator;
-        ModelGenerator				   *mCGenerator;
-        ModelGenerator				   *mModelGenerator;
-        Compiler					   *mCompiler;
+		vector<TSelectionRecord> 		selectionList;
+		ModelGenerator				   *mCSharpGenerator;
+		ModelGenerator				   *mCGenerator;
+		ModelGenerator				   *mModelGenerator;
+		Compiler					   *mCompiler;
 		HINSTANCE 						mModelDllHandle;
-		void 							AddNthOutputToResult(vector< vector<double> >& results, int nRow, double dCurrentTime);
-        bool 							IsNleqAvailable();
-        void 							emptyModel();
-        double 							GetValueForRecord(const TSelectionRecord& record);
-        double 							GetNthSelectedOutput(const int& index, const double& dCurrentTime);
-        vector<double> 					BuildModelEvalArgument();
-        double 							getVariableValue(const TVariableType& variableType, const int& variableIndex);
-        void 							setParameterValue(const TParameterType& parameterType, const int& parameterIndex, const double& value);
-        double 							getParameterValue(const TParameterType& parameterType, const int& parameterIndex);
-        vector<TSelectionRecord> 		GetSteadyStateSelection(const list<string>& newSelectionList);
-        vector<double> 					computeSteadyStateValues(const vector<TSelectionRecord>& oSelection, const bool& computeSteadyState);
-        double 							computeSteadyStateValue(const TSelectionRecord& record);
-        StringList 						getParameterNames();
-
-
+		void 							AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime);
+		bool 							IsNleqAvailable();
+		void 							emptyModel();
+		double 							GetValueForRecord(const TSelectionRecord& record);
+		double 							GetNthSelectedOutput(const int& index, const double& dCurrentTime);
+		vector<double> 					BuildModelEvalArgument();
+		double 							getVariableValue(const TVariableType& variableType, const int& variableIndex);
+		void 							setParameterValue(const TParameterType& parameterType, const int& parameterIndex, const double& value);
+		double 							getParameterValue(const TParameterType& parameterType, const int& parameterIndex);
+		vector<TSelectionRecord> 		GetSteadyStateSelection(const list<string>& newSelectionList);
+		vector<double> 					computeSteadyStateValues(const vector<TSelectionRecord>& oSelection, const bool& computeSteadyState);
+		double 							computeSteadyStateValue(const TSelectionRecord& record);
+		StringList 						getParameterNames();
 
         //RoadRunner MCA functions......
 
@@ -163,22 +161,22 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void							Reset();
         bool							CreateModelSourceCode();
         string							GetModelSourceCode();
-    	vector< vector<double> >  		runSimulation();
+		DoubleMatrix		  			runSimulation();
 		bool 							InitializeModel();
-        void                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws);
-        void                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
-        void                            loadSBMLFromFile(const string& fileName);
-        bool                            loadSBML(const string& sbml);
-        string                          getSBML();
-        double                          getTimeStart();
-        double                          getTimeEnd();
-        int 							getNumPoints();
-        void                            setTimeStart(const double& startTime);
-        void                            setTimeEnd(const double& endTime);
-        void                            setNumPoints(const int& nummberOfPoints);
-        void                            reset();
-        void                            changeInitialConditions(const vector<double>& ic);
-        vector< vector<double> >   		simulate();
+		void                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws);
+		void                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
+		void                            loadSBMLFromFile(const string& fileName);
+		bool                            loadSBML(const string& sbml);
+		string                          getSBML();
+		double                          getTimeStart();
+		double                          getTimeEnd();
+		int 							getNumPoints();
+		void                            setTimeStart(const double& startTime);
+		void                            setTimeEnd(const double& endTime);
+		void                            setNumPoints(const int& nummberOfPoints);
+		void                            reset();
+		void                            changeInitialConditions(const vector<double>& ic);
+        DoubleMatrix 					simulate();
         vector<double>            		simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
         vector<double>                  getReactionRates();
         vector<double>                  getRatesOfChange();
@@ -306,7 +304,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         static void                     Test();
         static void                     PrintTout(const double& start, const double& end, const int& numPoints);
         static void                     TestChange();
-        void 							DumpResults(TextWriter& writer, vector< vector<double> >& data, const StringList& colLabels);
+        void 							DumpResults(TextWriter& writer, DoubleMatrix& data, const StringList& colLabels);
 
 }; //class RoadRunner
 

@@ -27,7 +27,7 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
 
     					~DoubleMatrix();                            // Destructor
         //    			DoubleMatrix(DoubleMatrix const& m);        // Copy constructor
-        DoubleMatrix& 	operator = (DoubleMatrix const& rhs);   	// Assignment operator
+        DoubleMatrix& 	operator = (const DoubleMatrix & rhs);   	// Assignment operator
         double*			GetPointer(){return mMatrix;}
 
 };

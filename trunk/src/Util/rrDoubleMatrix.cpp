@@ -21,7 +21,11 @@ mIsOwner(true)
 {
 	if (rows != 0 && cols != 0)
 	{
-    	mMatrix = new double[rows * cols];
+		mMatrix = new double[rows * cols];
+		for(int i = 0; i < rows * cols; i++)
+		{
+        	mMatrix[i] = 0;
+		}
 	}
 }
 
@@ -39,7 +43,7 @@ DoubleMatrix::~DoubleMatrix()
 {
 	if(mIsOwner)
     {
-    	delete mMatrix;
+    	delete [] mMatrix;
     }
 }
 
@@ -76,14 +80,17 @@ double DoubleMatrix::operator() (unsigned row, unsigned col) const
 }
 
 
-DoubleMatrix& DoubleMatrix::operator = (DoubleMatrix const& rhs)
+DoubleMatrix& DoubleMatrix::operator = (const DoubleMatrix &rhs)
 {
-	DoubleMatrix mat(rhs.RSize(), rhs.CSize());
+	if (this == &rhs)      // Same object?
+		return *this;
 
-    for(int col = 0; col < CSize(); col++)
-    {
+	Allocate(rhs.RSize(), rhs.CSize());
+
+	for(int col = 0; col < CSize(); col++)
+	{
 		for(int row = 0; row < RSize(); row++)
-        {
+		{
 			mMatrix[col*row + col] = rhs(col,row);
         }
     }

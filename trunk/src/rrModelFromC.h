@@ -41,18 +41,19 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
         c_void                      csetCompartmentVolumes;
 		c_int_int			        cgetNumLocalParameters;
         c_void                      csetBoundaryConditions;
-        c_void                      csetInitialConditions;
-        c_void                      cevalInitialAssignments;
-		
-        c_void_doubleStar           ccomputeRules;
-		
-        c_void                      cconvertToAmounts;
-        c_void                      ccomputeConservedTotals;
-        c_double_int   		        cgetConcentration;
-        c_doubleStar	        	cGetCurrentValues;
-        c_void_double_doubleStar 	cevalModel;
-        c_void                      cconvertToConcentrations;
-        c_void_double_doubleStar    cevalEvents;
+		c_void                      csetInitialConditions;
+		c_void                      cevalInitialAssignments;
+		c_void_doubleStar			cupdateDependentSpeciesValues;
+		c_void_doubleStar           ccomputeRules;
+
+		c_void                      cconvertToAmounts;
+		c_void                      ccomputeConservedTotals;
+		c_double_int   		        cgetConcentration;
+		c_doubleStar	        	cGetCurrentValues;
+		c_void_double_doubleStar 	cevalModel;
+		c_void                      cconvertToConcentrations;
+		c_void_double_doubleStar    cevalEvents;
+		c_void						ccomputeAllRatesOfChange;
 
 
 		//Utility
@@ -110,10 +111,10 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
 //        void                        setConcentration(int index, double value);
 //        void                        convertToAmounts();
         void                        convertToConcentrations();
-//        void                        updateDependentSpeciesValues(vector<double>& _y);
+        void                        updateDependentSpeciesValues(vector<double>& _y);
 //        void                        computeRules(vector<double>& _y);
 //        void                        computeReactionRates(double time, vector<double>& y);
-//        void                        computeAllRatesOfChange();
+		void                        computeAllRatesOfChange();
 		void                        evalModel(double time, vector<double>& y);
         void                        evalEvents(double time, vector<double>& y);
 //        void                        resetEvents();

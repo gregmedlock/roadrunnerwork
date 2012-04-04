@@ -104,8 +104,8 @@
 				<BuildOrder>65</BuildOrder>
 				<IgnorePath>true</IgnorePath>
 			</LibFiles>
-			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\libsbml-static.lib">
-				<BuildOrder>60</BuildOrder>
+			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\libsbml.lib">
+				<BuildOrder>67</BuildOrder>
 				<IgnorePath>true</IgnorePath>
 			</LibFiles>
 			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\sundials_cvode.lib">
