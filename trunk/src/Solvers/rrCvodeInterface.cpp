@@ -65,11 +65,14 @@ absTol(defaultAbsTol)
 
 //modelDelegate(&CvodeInterface::ModelFcn)
 {
-    InitializeCVODEInterface(aModel);
+	InitializeCVODEInterface(aModel);
 }
 
 CvodeInterface::~CvodeInterface()
 {
+	FreeCvode_Mem((void**) cvodeMem);
+	FreeCvode_Vector(_amounts);
+	fileClose(fileHandle);
 }
 
 bool CvodeInterface::HaveVariables()

@@ -6,13 +6,10 @@
 #include "rrDoubleMatrix.h"
 //---------------------------------------------------------------------------
 
-
-
 namespace rr
 {
 
-
-DoubleMatrix::DoubleMatrix(unsigned rows, unsigned cols)
+DoubleMatrix::DoubleMatrix(const unsigned& rows, const unsigned& cols)
 :
 mRowCount (rows),
 mColCount (cols),
@@ -22,81 +19,86 @@ mIsOwner(true)
 	if (rows != 0 && cols != 0)
 	{
 		mMatrix = new double[rows * cols];
-		for(int i = 0; i < rows * cols; i++)
+		for(unsigned i = 0; i < rows * cols; i++)
 		{
-        	mMatrix[i] = 0;
+			mMatrix[i] = i + 1;
 		}
 	}
 }
 
-DoubleMatrix::DoubleMatrix(double* ptrToArray, const int& rowCount, const int& colCount)
+DoubleMatrix::DoubleMatrix(const DoubleMatrix& m)        // Copy constructor
+{
+	mMatrix = NULL;
+	*this = m;
+}
+
+DoubleMatrix::DoubleMatrix(double* ptrToArray, const unsigned& rowCount, const unsigned& colCount)
 {
 	mRowCount = rowCount;
 	mColCount = colCount;
 
 	//Shallow or deep copy?
-    mMatrix = ptrToArray; //Thats is pretty shallow...
-    mIsOwner = false; 	  //Somebody else allocatesd this one
+	mMatrix = ptrToArray; //Thats is pretty shallow...
+	mIsOwner = false; 	  //Somebody else allocatesd this one
 }
 
 DoubleMatrix::~DoubleMatrix()
 {
 	if(mIsOwner)
-    {
-    	delete [] mMatrix;
-    }
+	{
+		delete [] mMatrix;
+	}
 }
 
 bool DoubleMatrix::Allocate(unsigned rows, unsigned cols)
 {
 	if(mMatrix)
-    {
-    	delete [] mMatrix;
-    }
+	{
+		delete [] mMatrix;
+	}
 
 	mMatrix = new double[rows * cols];
 	mRowCount = rows;
 	mColCount = cols;
-    return mMatrix ? true : false;
+	return mMatrix ? true : false;
 }
 
 //=========== OPERATORS
-double& DoubleMatrix::operator() (unsigned row, unsigned col)
+double& DoubleMatrix::operator() (const unsigned& row, const unsigned& col)
 {
-//    if (row >= mRowCount || col >= mColCount)
-    {
-//    	throw Exception("Matrix subscript out of bounds");
-    }
-    return mMatrix[mColCount*row + col];
+	if (row >= mRowCount || col >= mColCount)
+	{
+		throw Exception("Matrix subscript out of bounds");
+	}
+	return mMatrix[mColCount*row + col];
 }
 
-double DoubleMatrix::operator() (unsigned row, unsigned col) const
+double DoubleMatrix::operator() (const unsigned& row, const unsigned& col) const
 {
-//    if (row >= mRowCount || col >= mColCount)
-    {
-    //    throw BadIndex("const Matrix subscript out of bounds");
-    }
-    return mMatrix[mColCount*row + col];
+	if (row >= mRowCount || col >= mColCount)
+	{
+		throw Exception("Matrix subscript out of bounds");
+	}
+	return mMatrix[mColCount*row + col];
 }
 
 
-DoubleMatrix& DoubleMatrix::operator = (const DoubleMatrix &rhs)
+DoubleMatrix& DoubleMatrix::operator = (const DoubleMatrix& rhs)
 {
 	if (this == &rhs)      // Same object?
 		return *this;
 
 	Allocate(rhs.RSize(), rhs.CSize());
 
-	for(int col = 0; col < CSize(); col++)
+	for(unsigned row = 0; row < RSize(); row++)
 	{
-		for(int row = 0; row < RSize(); row++)
+		for(unsigned col = 0; col < CSize(); col++)
 		{
-			mMatrix[col*row + col] = rhs(col,row);
-        }
-    }
+			this->operator()(row, col) = rhs(row, col);
+		}
+	}
 	return *this;
 }
-
 
 ////        internal static double[][] GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
 ////        {
@@ -112,32 +114,32 @@ DoubleMatrix& DoubleMatrix::operator = (const DoubleMatrix &rhs)
 ////            return oResult;
 ////        } // GetDoubleMatrixFromPtr(pointer, nRows, nCols)
 
-DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const int& nRows, const int& nCols)
+DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const unsigned& nRows, const unsigned& nCols)
 {
 	DoubleMatrix mat(nRows, nCols);
-    for(int col = 0; col < mat.CSize(); col++)
-    {
-		for(int row = 0; row < mat.RSize(); row++)
-        {
-        	double val = **pointer[col*row + col];
+	for(unsigned col = 0; col < mat.CSize(); col++)
+	{
+		for(unsigned row = 0; row < mat.RSize(); row++)
+		{
+			double val = **pointer[col*row + col];
 			mat(row,col) = val ;
-        }
-    }
+		}
+	}
 
 	return mat;
 }
 
 ostream& operator<<(ostream& stream, const DoubleMatrix& mat)
 {
-	for(int row = 0; row < mat.RSize(); row++)
-    {
-	    for(int col = 0; col < mat.CSize(); col++)
-        {
-        	double val = mat(row,col);
+	for(unsigned row = 0; row < mat.RSize(); row++)
+	{
+		for(unsigned col = 0; col < mat.CSize(); col++)
+		{
+			double val = mat(row,col);
 			stream<<val<<"\t";
-        }
-        stream<<std::endl;
-    }
+		}
+		stream<<std::endl;
+	}
 	return stream;
 }
 

@@ -16,22 +16,19 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
 		bool			mIsOwner;
 
     public:
-    					DoubleMatrix(unsigned rows = 0, unsigned cols = 0);
-    					DoubleMatrix(double* ptrToArray, const int& rowCount = 0, const int& colCount = 0);
-		int				RSize() const {return mRowCount;}
-        int 			CSize() const {return mColCount;}
-    	double& 		operator() (unsigned row, unsigned col);
-    	double  		operator() (unsigned row, unsigned col) const;
+						DoubleMatrix(const unsigned& rows = 0, const unsigned& cols = 0);
+						DoubleMatrix(const DoubleMatrix& m);        // Copy constructor
+						~DoubleMatrix();                            // Destructor
+						DoubleMatrix(double* ptrToArray, const unsigned& rowCount = 0, const unsigned& colCount = 0);
+		DoubleMatrix& 	operator = (const DoubleMatrix & rhs);   	// Assignment operator
+		double& 		operator() (const unsigned& row, const unsigned& col);
+		double  		operator() (const unsigned& row, const unsigned& col) const;
 
-        bool			Allocate(unsigned rows, unsigned cols);
-
-    					~DoubleMatrix();                            // Destructor
-        //    			DoubleMatrix(DoubleMatrix const& m);        // Copy constructor
-        DoubleMatrix& 	operator = (const DoubleMatrix & rhs);   	// Assignment operator
-        double*			GetPointer(){return mMatrix;}
-
+		unsigned 		RSize() const {return mRowCount;}
+		unsigned		CSize() const {return mColCount;}
+		bool			Allocate(unsigned rows, unsigned cols);
+		double*			GetPointer(){return mMatrix;}
 };
-
 
 //DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const int& nRows, const int& nCols);
 RR_DECLSPEC ostream& operator<<(ostream&, const DoubleMatrix& mat);
