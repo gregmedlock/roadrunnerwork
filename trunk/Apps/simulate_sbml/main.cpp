@@ -65,6 +65,7 @@ int main()
 
         //The following will load and compile and simulate the sbml model in the file
         roadRunner->SimulateSBMLFile(fullFilePath, true);
+        roadRunner->SaveResult(
     }
     catch(Exception& ex)
     {
