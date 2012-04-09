@@ -39,13 +39,14 @@ DiffStepSize(0.05),
 timeStart(0),
 timeEnd(10),
 numPoints(21),
-sbmlStr(""),
+mCurrentSBML(""),
 mModel(NULL),
 mModelDllHandle(NULL)
+
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
-	mCSharpGenerator = new CSharpGenerator();
-	mCGenerator = new CGenerator();
+	mCSharpGenerator 	= new CSharpGenerator();
+	mCGenerator 		= new CGenerator();
 	mModelGenerator = generateCSharp == true ? mCSharpGenerator : mCGenerator;
 }
 
@@ -85,9 +86,9 @@ bool RoadRunner::InitializeModel()
     	return false ;
 	}
 
-    //model.Warnings.AddRange(ModelGenerator.Instance.Warnings);
-
     modelLoaded = true;
+//    mModelCode = mModelGenerator->generateModelCode(mCurrentSBML);
+
     mConservedTotalChanged = false;
 
     mModel->setCompartmentVolumes();
@@ -106,6 +107,10 @@ bool RoadRunner::InitializeModel()
 		mModel->computeConservedTotals();
 	}
 
+    if(mCVode)
+    {
+    	delete mCVode;
+    }
 	mCVode = new CvodeInterface(mModel);
 
 	reset();
@@ -131,6 +136,10 @@ string RoadRunner::getURL()
 	return "http://sys-bio.org";
 }
 
+DoubleMatrix RoadRunner::GetSimulationResult()
+{
+	return mSimulationResult;
+}
 
 double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 {
@@ -280,7 +289,6 @@ DoubleMatrix RoadRunner::runSimulation()
 	double hstep = (timeEnd - timeStart) / (numPoints - 1);
 	DoubleMatrix results(numPoints, selectionList.size());
 
-
 	if(!mModel)
 	{
 		return results;
@@ -302,7 +310,9 @@ DoubleMatrix RoadRunner::runSimulation()
     }
 
 	double tout = timeStart;
-	Log(lInfo)<<"Will run OneStep function "<<numPoints<<" times";
+
+	//The simulation is done here..
+	Log(lInfo)<<"Will run the OneStep function "<<numPoints<<" times";
 	for (int i = 1; i < numPoints; i++)
 	{
 		Log(lDebug3)<<"Step "<<i;
@@ -312,8 +322,6 @@ DoubleMatrix RoadRunner::runSimulation()
 		//Log(lDebug)<<tout<<tab<
 	}
 
-	//Simulation is done here..
-	//print out amounts
 	Log(lInfo)<<"Result: (point, time, value)";
 	for (int i = 0; i < numPoints; i++)
 	{
@@ -342,9 +350,28 @@ void RoadRunner::DumpResults(TextWriter& writer, DoubleMatrix& data, const Strin
 	}
 }
 
-void RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws)
+bool RoadRunner::Simulate(const bool& useConservationLaws)
 {
-	//var sim = new RoadRunner();
+	ComputeAndAssignConservationLaws(useConservationLaws);
+
+    if(!mModel)
+    {
+    	Log(lError)<<"No model is loaded, can't simulate..";
+    	return false;
+    }
+
+	DoubleMatrix data;
+    data = simulate();
+
+	StringList list = getSelectionList();
+
+	TextWriter writer(cout);
+	DumpResults(writer, data, list);
+	return true;
+}
+
+bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws)
+{
 	ComputeAndAssignConservationLaws(useConservationLaws);
 
     mModelXMLFileName = fileName;
@@ -369,10 +396,10 @@ void RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 
 	TextWriter writer(cout);
 	DumpResults(writer, data, list);
-	return;
+	return true;
 }
 
-void RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints)
+bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints)
 {
 //    var sim = new RoadRunner();
 //    ComputeAndAssignConservationLaws(useConservationLaws);
@@ -396,7 +423,7 @@ void RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 //    return;
 }
 
-void RoadRunner::loadSBMLFromFile(const string& fileName)
+bool RoadRunner::loadSBMLFromFile(const string& fileName)
 {
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
@@ -407,9 +434,10 @@ void RoadRunner::loadSBMLFromFile(const string& fileName)
 	}
 
 	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
-	cout<<sbml<<endl;
+
+	Log(lDebug)<<"Loaded SBML content:\n "<<sbml<< "\n============ End of SBML "<<endl;
 	mModelXMLFileName = fileName;
-	loadSBML(sbml);
+	return loadSBML(sbml);
 }
 
 bool RoadRunner::loadSBML(const string& sbml)
@@ -417,106 +445,96 @@ bool RoadRunner::loadSBML(const string& sbml)
 	Log(lDebug4)<<"Loading SBML into simulator";
 	if (!sbml.size())
 	{
-		throw RRException("No SBML  content..!");
+		Log(lError)<<"No SBML content..!";
+        return false;
 	}
 
-	// If the user loads the same model again, don't both loading into NOM,
+	// If the user loads the same model again, don't bother loading into NOM,
 	// just reset the initial conditions
-	if (modelLoaded && mModel != NULL && (sbml == sbmlStr) && (sbml != ""))
+	if (modelLoaded && mModel != NULL && sbml == mCurrentSBML)
 	{
-		InitializeModel();
-		//reset();
+		return InitializeModel();
 	}
-	else
-	{
-		if(mModel != NULL)
-		{
-			delete mCVode;
-			mCVode = NULL;
-			delete mModel;
-			mModel = NULL;
-			modelLoaded = false;
-		}
 
-		sbmlStr = sbml;
+    if(mModel != NULL)
+    {
+        delete mModel;
+        mModel = NULL;
+        modelLoaded = false;
+    }
 
-		mModelCode = mModelGenerator->generateModelCode(sbmlStr);
+    mCurrentSBML = sbml;
 
-		if(!mModelCode.size())
-		{
-			throw RRException("Failed to generate Model Code");
-		}
-		Log(lDebug3)<<" ------ Model Code --------\n"
-					<<mModelCode
-					<<" ----- End of Model Code -----\n";
+    if (CompileModel() != false)
+    {
+        if(!mModel)
+        {
+            Log(lError)<<"Failed to create ModelFromC";
+            return false;
+        }
+    }
+    else
+    {
+        mModel 		= NULL;
+        modelLoaded = false;
+        Log(lError)<<"Failed to compile model..";
+    }
 
-		if(!mCompiler)
-		{
-			mCompiler  = new Compiler;
-		}
+	//Finally intitilaize the model..
+    if(!InitializeModel())
+    {
+        Log(lError)<<"Failed Initializing C Model";
+        return false;
+    }
 
-		//The get instance function actually compiles the supplied code..
-//        rrObject* o = mCompiler->getInstance(_sModelCode, "TModel", sLocation);
-		CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
-		codeGen->SetXMLModelFileName(mModelXMLFileName);
-		string srcCodeFolder("C:\\rrw\\Testing\\rr_code_output\\c_from_rr++");
-		codeGen->SaveSourceCodeToFolder(srcCodeFolder);
-
-		mModelDllHandle = mCompiler->CompileC_DLL(codeGen->GetSourceCodeFileName());
-
-		if (mModelDllHandle != NULL)
-		{
-			//Create a model
-			ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);
-			mModel = rrCModel;			//Should use an auto pointer?
-			if(!mModel)
-			{
-				Log(lError)<<"Failed to create ModelFromC";
-				return false;
-			}
-
-
-			if(!InitializeModel())
-			{
-				Log(lError)<<"Failed Initializing C Model";
-				return false;
-			}
-		}
-		else
-		{
-			mModel 		= NULL;
-			modelLoaded = false;
-			string filePath = "SBW_ErrorLog.txt";
-			try
-			{
-				StreamWriter sw(filePath);// Environment.GetEnvironmentVariable("TEMP") + "/SBW_ErrorLog.txt");
-				try
-				{
-					sw.WriteLine("ErrorMessage: ");
-					//sw.WriteLine(mCompiler->getLastErrors());
-					sw.WriteLine("C# Model Code: ");
-					sw.Write(mModelCode);
-					sw.Close();
-				}
-				catch(...)
-				{
-					throw SBWApplicationException("Failed to write to file");
-				}
-			}
-			catch (RRException)
-			{
-			}
-			throw SBWApplicationException("Internal Error: The model has failed to compile." + NL
-										  + "The model file has been deposited at " +
-										  filePath);
-		}
 
 //        _L = mStructAnalysis.GetLinkMatrix();
 //        _L0 = StructAnalysis.GetL0Matrix();
 //        _N = StructAnalysis.GetReorderedStoichiometryMatrix();
 //        _Nr = StructAnalysis.GetNrMatrix();
-	}
+
 	return true;
+}
+
+bool RoadRunner::CompileModel()
+{
+    mModelCode = mModelGenerator->generateModelCode(mCurrentSBML);
+
+    if(!mModelCode.size())
+    {
+        throw RRException("Failed to generate Model Code");
+    }
+    Log(lDebug3)<<" ------ Model Code --------\n"
+                <<mModelCode
+                <<" ----- End of Model Code -----\n";
+
+    if(!mCompiler)
+    {
+        mCompiler  = new Compiler;
+    }
+
+    //The get instance function actually compiles the supplied code..
+//        rrObject* o = mCompiler->getInstance(_sModelCode, "TModel", sLocation);
+    CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
+    codeGen->SetXMLModelFileName(mModelXMLFileName);
+    string srcCodeFolder("C:\\rrw\\Testing\\rr_code_output\\c_from_rr++");
+    codeGen->SaveSourceCodeToFolder(srcCodeFolder);
+
+    mModelDllHandle = mCompiler->CompileC_DLL(codeGen->GetSourceCodeFileName());
+
+    //Create a model
+    if(mModelDllHandle)
+    {
+    	ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);
+    	mModel = rrCModel;			//Should use an auto pointer?
+    }
+    else
+    {
+        Log(lError)<<"Failed to create DLL for model";
+    	mModel = NULL;
+    }
+
+	return mModel != NULL ? true : false;
 }
 
 //Reset the simulator back to the initial conditions specified in the SBML model
@@ -526,7 +544,7 @@ void RoadRunner::reset()
 	{
 		// rather make sure that the simulator is!!!! in a stable state
 		mModel = NULL;
-		sbmlStr = "";
+		mCurrentSBML = "";
 	}
 	else
 	{
@@ -2119,7 +2137,7 @@ void RoadRunner::EvalModel()
 //        Help("Returns the SBML with the current parameterset")
 //        string RoadRunner::writeSBML()
 //        {
-//            NOM.loadSBML(NOM.getParamPromotedSBML(sbmlStr));
+//            NOM.loadSBML(NOM.getParamPromotedSBML(mCurrentSBML));
 //            var state = new ModelState(model);
 //
 //            ArrayList array = getFloatingSpeciesNames();
@@ -3871,7 +3889,7 @@ void RoadRunner::EvalModel()
 //        Help("Returns the initially loaded model as SBML")
 //        string RoadRunner::getSBML()
 //        {
-//            return sbmlStr;
+//            return mCurrentSBML;
 //        }
 //
 //        Help("get the currently set time start")

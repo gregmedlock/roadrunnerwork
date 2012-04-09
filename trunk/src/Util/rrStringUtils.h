@@ -15,12 +15,13 @@ string          RR_DECLSPEC tabs(const int& nr);
 string          RR_DECLSPEC NL();
 
 string 			RR_DECLSPEC GetFileNameNoPath(const string& fName);
-string 			RR_DECLSPEC ChangeFileNameExtensionTo(const string& theFileName, const string& newExtension);
+string 			RR_DECLSPEC ChangeFileExtensionTo(const string& theFileName, const string& newExtension);
 
 string			RR_DECLSPEC Trim(const string& str);
 bool			RR_DECLSPEC StartsWith(const string& src, const string& sub);
 bool			RR_DECLSPEC EndsWith(const string& src, const string& sub);
 
+string 			RR_DECLSPEC JoinPath(const string& aPath, const string& aFile);
 //conversions
 string			RR_DECLSPEC IntToStr(const int& nt);
 int				RR_DECLSPEC StrToInt(const string& nt);

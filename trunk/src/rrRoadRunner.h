@@ -27,15 +27,17 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		const string 					emptyModelStr;
 		const double 					STEADYSTATE_THRESHOLD;
 		vector<TSelectionRecord> 		mSteadyStateSelection;
+        DoubleMatrix					mSimulationResult;
 		string							mModelXMLFileName;
 		string 							mModelCode;
 
 		CvodeInterface 				   *mCVode;
 		ISteadyStateSolver			   *steadyStateSolver;
 		vector<TSelectionRecord> 		selectionList;
+		ModelGenerator				   *mModelGenerator;	//Pointer to one of the below ones..
 		ModelGenerator				   *mCSharpGenerator;
 		ModelGenerator				   *mCGenerator;
-		ModelGenerator				   *mModelGenerator;
+
 		Compiler					   *mCompiler;
 		HINSTANCE 						mModelDllHandle;
 		void 							AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime);
@@ -148,7 +150,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double*                  		mNr;
         bool 							modelLoaded;
         int 							numPoints;
-        string 							sbmlStr;
+        string 							mCurrentSBML;
 	    IModel*							mModel;
         double                         	timeEnd;
         double                         	timeStart;
@@ -157,15 +159,18 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		//Functions --------------------------------------------------------------------
         								RoadRunner(bool GenerateCSharp = false);
         virtual 					   ~RoadRunner();
+        bool							CompileModel();
+        DoubleMatrix					GetSimulationResult();
         ModelGenerator*					GetCodeGenerator();
         void							Reset();
         bool							CreateModelSourceCode();
         string							GetModelSourceCode();
 		DoubleMatrix		  			runSimulation();
 		bool 							InitializeModel();
-		void                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws);
-		void                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
-		void                            loadSBMLFromFile(const string& fileName);
+		bool                     		Simulate(const bool& useConservationLaws = true);
+		bool                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws = true);
+		bool                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
+		bool                           	loadSBMLFromFile(const string& fileName);
 		bool                            loadSBML(const string& sbml);
 		string                          getSBML();
 		double                          getTimeStart();

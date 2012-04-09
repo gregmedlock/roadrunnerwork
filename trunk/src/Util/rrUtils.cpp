@@ -3,11 +3,9 @@
 #endif
 #pragma hdrstop
 #include <algorithm>
+#include <conio.h>
 #include "rrUtils.h"
 //---------------------------------------------------------------------------
-
-
-
 using namespace std;
 namespace rr
 {
@@ -26,6 +24,19 @@ bool IsNaN(const double& aNum)
 bool IsNullOrEmpty(const string& str)
 {
 	return !str.size();
+}
+
+void Pause(bool doIt)
+{
+	if(!doIt)
+    {
+    	return;
+    }
+
+    cout<<"Hit any key to exit...";
+    cin.ignore(0,'\n');
+    getch();
+    cout<<"\nExiting....\n";
 }
 
 }

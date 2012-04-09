@@ -309,6 +309,10 @@
 				<DependentOn>..\..\src\Util\rrRule.h</DependentOn>
 				<BuildOrder>40</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrSBMLModelSimulation.cpp">
+				<DependentOn>..\..\src\Util\rrSBMLModelSimulation.h</DependentOn>
+				<BuildOrder>69</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\Util\rrSBMLSymbol.cpp">
 				<DependentOn>..\..\src\Util\rrSBMLSymbol.h</DependentOn>
 				<BuildOrder>68</BuildOrder>

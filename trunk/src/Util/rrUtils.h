@@ -12,10 +12,9 @@ namespace rr
 {
 
 std::size_t RR_DECLSPEC IndexOf(std::vector<std::string>& vec, const std::string& elem );
-
 bool 		RR_DECLSPEC IsNaN(const double& aNum);
 bool 		RR_DECLSPEC IsNullOrEmpty(const string& str);	//Can't be null, but empty
-
+void 		RR_DECLSPEC Pause(bool doIt = true);
 }
 
 #endif

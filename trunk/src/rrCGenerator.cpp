@@ -55,7 +55,7 @@ string CGenerator::GetSourceCodeFileName()
 bool CGenerator::SaveSourceCodeToFolder(const string& folder)
 {
     mHeaderCodeFileName = folder + string("\\") + GetFileNameNoPath(mCurrentXMLModelFileName);
-    mHeaderCodeFileName = ChangeFileNameExtensionTo(mHeaderCodeFileName, ".h");
+    mHeaderCodeFileName = ChangeFileExtensionTo(mHeaderCodeFileName, ".h");
 
     ofstream outFile(mHeaderCodeFileName.c_str());
     if(!outFile)
@@ -66,7 +66,7 @@ bool CGenerator::SaveSourceCodeToFolder(const string& folder)
     Log(lInfo)<<"Wrote header to file: "<<mHeaderCodeFileName;
     outFile.close();
 
-    mSourceCodeFileName = ChangeFileNameExtensionTo(mHeaderCodeFileName, ".c");
+    mSourceCodeFileName = ChangeFileExtensionTo(mHeaderCodeFileName, ".c");
     outFile.open(mSourceCodeFileName.c_str());
 
     //We don't know the name of the file until here..
@@ -74,7 +74,7 @@ bool CGenerator::SaveSourceCodeToFolder(const string& folder)
     vector<string> fNameParts = SplitString(mSourceCodeFileName,"\\");
     string headerFName = fNameParts[fNameParts.size() - 1];
 
-    headerFName = ChangeFileNameExtensionTo(headerFName, ".h");
+    headerFName = ChangeFileExtensionTo(headerFName, ".h");
     outFile<<"#include \""<<headerFName<<"\"\n"<<endl;
     outFile<<GetSourceCode();
     outFile.close();
@@ -109,7 +109,7 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     	return "";
     }
 
-    Log(lDebug3)<<"Model name is "<<mModelName;
+    Log(lInfo)<<"Model name is "<<mModelName;
     mNumReactions = mNOM.getNumReactions();
 
     Log(lDebug3)<<"Number of reactions:"<<mNumReactions;

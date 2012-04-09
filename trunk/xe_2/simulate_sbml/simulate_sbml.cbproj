@@ -40,9 +40,9 @@
 			<VerInfo_Locale>1033</VerInfo_Locale>
 			<PackageImports>bindcompfmx;fmx;rtl;dbrtl;IndySystem;DbxClientDriver;bindcomp;inetdb;DBXInterBaseDriver;xmlrtl;DbxCommonDriver;IndyProtocols;DBXMySQLDriver;dbxcds;soaprtl;bindengine;CustomIPTransport;dsnap;fmxase;IndyCore;inet;fmxobj;inetdbxpress;fmxdae;IPIndyImpl;dbexpress;$(PackageImports)</PackageImports>
 			<Multithreaded>true</Multithreaded>
-			<ILINK_LibraryPath>..\..\Testing\simulate_sbml\;C:\rrw\Testing\simulate_sbml\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\src\Util\;..\..\Apps\simulate_sbml\;..\..\Testing\simulate_sbml\;C:\rrw\Testing\simulate_sbml\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-			<IncludePath>..\..\Testing\simulate_sbml\;C:\rrw\Testing\simulate_sbml\;$(rr_root)\src;$(rr_root)\src\Util;$(rr_root)\src\Solvers;$(rr_root)\src\Scanner;$(rr_root)\src\Logger;$(rr_root)\installs\xe2\include\cvode;$(rr_root)\installs\xe2\include;$(rr_root)\installs\xe2\include\sbml\;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\src\Util\;..\..\Apps\simulate_sbml\;$(rr_root)\src;$(rr_root)\src\Util;$(rr_root)\src\Solvers;$(rr_root)\src\Scanner;$(rr_root)\src\Logger;$(rr_root)\installs\xe2\include\cvode;$(rr_root)\installs\xe2\include;$(rr_root)\installs\xe2\include\sbml\;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(IncludePath)</IncludePath>
 			<ProjectType>CppConsoleApplication</ProjectType>
 			<_TCHARMapping>char</_TCHARMapping>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -89,12 +89,16 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="..\..\Apps\simulate_sbml\main.cpp">
+				<BuildOrder>1</BuildOrder>
+			</CppCompile>
 			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\RoadRunnerLib_XE2.lib">
 				<BuildOrder>1</BuildOrder>
 				<IgnorePath>true</IgnorePath>
 			</LibFiles>
-			<CppCompile Include="..\..\Testing\simulate_sbml\main.cpp">
-				<BuildOrder>0</BuildOrder>
+			<CppCompile Include="..\..\src\Util\rrSBMLModelSimulation.cpp">
+				<DependentOn>..\..\src\Util\rrSBMLModelSimulation.h</DependentOn>
+				<BuildOrder>2</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
@@ -145,9 +149,7 @@
 						<ProjectProperties Name="ManagePaths">True</ProjectProperties>
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
-					<Excluded_Packages>
-						<Excluded_Packages Name="$(BDSBIN)\fmidesigner160.bpl">FMI Form designer and property and component editors</Excluded_Packages>
-					</Excluded_Packages>
+					<Excluded_Packages/>
 				</CPlusPlusBuilder.Personality>
 				<Deployment/>
 				<Platforms>

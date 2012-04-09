@@ -55,7 +55,7 @@ HINSTANCE Compiler::CompileC_DLL(const string& sourceFileName)
 
     //Check if the DLL exists...
     string dllFName(GetFileNameNoPath(sourceFileName));
-    string dllName(appPath + "\\" + ChangeFileNameExtensionTo(dllFName,"dll"));
+    string dllName(appPath + "\\" + ChangeFileExtensionTo(dllFName,"dll"));
 
     //Load the DLL
     HINSTANCE dllHandle = LoadDLL(dllName);

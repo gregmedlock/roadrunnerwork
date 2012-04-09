@@ -16,6 +16,21 @@ using namespace std;
 namespace rr
 {
 
+string JoinPath(const string& aPath, const string& aFile)
+{
+	//Just check the paths last position. it has to be a "/"
+	//Otherwise, add it before joining
+	if(aPath.size() > 0)
+	{
+		if(aPath[aPath.size() - 1] != '\\')
+		{
+			return aPath + "\\" + aFile;
+		}
+		return aPath + aFile;
+	}
+	return aFile;
+}
+
 string tabs(const int& nr)
 {
 	stringstream some_tabs;
@@ -44,7 +59,7 @@ string GetFileNameNoPath(const string& fName)
     return aFName;
 }
 
-string ChangeFileNameExtensionTo(const string& fName, const string& newExtension)
+string ChangeFileExtensionTo(const string& fName, const string& newExtension)
 {
 	string newFName;
 
