@@ -36,13 +36,12 @@ mL0(NULL),
 mN(NULL),
 mNr(NULL),
 DiffStepSize(0.05),
-timeStart(0),
-timeEnd(10),
-numPoints(21),
+mTimeStart(0),
+mTimeEnd(10),
+mNumPoints(21),
 mCurrentSBML(""),
 mModel(NULL),
 mModelDllHandle(NULL)
-
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
 	mCSharpGenerator 	= new CSharpGenerator();
@@ -58,6 +57,16 @@ RoadRunner::~RoadRunner()
 	delete mModel;
 	delete mCVode;
 	delete mCompiler;
+}
+
+bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
+{
+	mSettings 	= settings;
+	mTimeStart 	= mSettings.mStartTime;
+    mTimeEnd    = mSettings.mEndTime;
+    mNumPoints	= mSettings.mSteps + 1;
+
+	return true;
 }
 
 ModelGenerator*	RoadRunner::GetCodeGenerator()
@@ -136,9 +145,9 @@ string RoadRunner::getURL()
 	return "http://sys-bio.org";
 }
 
-DoubleMatrix RoadRunner::GetSimulationResult()
+SimulationData RoadRunner::GetSimulationResult()
 {
-	return mSimulationResult;
+	return mSimulationData;
 }
 
 double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
@@ -148,7 +157,8 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 	switch (record.selectionType)
 	{
 		case TSelectionType::clFloatingSpecies:
-			dResult = mModel->getConcentration(record.index);
+//			dResult = mModel->getConcentration(record.index);
+			dResult = mModel->amounts[record.index];
 		break;
 
 		case TSelectionType::clBoundarySpecies:
@@ -212,6 +222,7 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 //            }
 //            else
 //                dResult = Double.NaN;
+				dResult = 0.0;
 		break;
 
 		case TSelectionType::clStoichiometry:
@@ -286,8 +297,8 @@ vector<double> RoadRunner::BuildModelEvalArgument()
 
 DoubleMatrix RoadRunner::runSimulation()
 {
-	double hstep = (timeEnd - timeStart) / (numPoints - 1);
-	DoubleMatrix results(numPoints, selectionList.size());
+	double hstep = (mTimeEnd - mTimeStart) / (mNumPoints - 1);
+	DoubleMatrix results(mNumPoints, selectionList.size());
 
 	if(!mModel)
 	{
@@ -296,34 +307,34 @@ DoubleMatrix RoadRunner::runSimulation()
 
 	vector<double> y;
 	y = BuildModelEvalArgument();
-	mModel->evalModel(timeStart, y);
+	mModel->evalModel(mTimeStart, y);
 
-	AddNthOutputToResult(results, 0, timeStart);
+	AddNthOutputToResult(results, 0, mTimeStart);
 
 	if (mCVode->HaveVariables())
 	{
-        int restartResult = mCVode->reStart(timeStart, mModel);
+        int restartResult = mCVode->reStart(mTimeStart, mModel);
         if (restartResult != 0)
         {
 			throw SBWApplicationException("Error in reStart call to CVODE");
         }
     }
 
-	double tout = timeStart;
+	double tout = mTimeStart;
 
 	//The simulation is done here..
-	Log(lInfo)<<"Will run the OneStep function "<<numPoints<<" times";
-	for (int i = 1; i < numPoints; i++)
+	Log(lInfo)<<"Will run the OneStep function "<<mNumPoints<<" times";
+	for (int i = 1; i < mNumPoints; i++)
 	{
 		Log(lDebug3)<<"Step "<<i;
 		mCVode->OneStep(tout, hstep);
-		tout = timeStart + i * hstep;
+		tout = mTimeStart + i * hstep;
 		AddNthOutputToResult(results, i, tout);
 		//Log(lDebug)<<tout<<tab<
 	}
 
 	Log(lInfo)<<"Result: (point, time, value)";
-	for (int i = 0; i < numPoints; i++)
+	for (int i = 0; i < mNumPoints; i++)
 	{
 		Log(lInfo)<<i<<tab<<results(i,0)<<tab<<setprecision(16)<<results(i,1)<<endl;
 	}
@@ -360,13 +371,16 @@ bool RoadRunner::Simulate(const bool& useConservationLaws)
     	return false;
     }
 
+    //Populate simulation result
 	DoubleMatrix data;
     data = simulate();
 
 	StringList list = getSelectionList();
 
-	TextWriter writer(cout);
-	DumpResults(writer, data, list);
+	mSimulationData.SetColumnNames(list);
+    mSimulationData.SetData(data);
+//	TextWriter writer(cout);
+//	DumpResults(writer, data, list);
 	return true;
 }
 
@@ -399,7 +413,7 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 	return true;
 }
 
-bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints)
+bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& mNumPoints)
 {
 //    var sim = new RoadRunner();
 //    ComputeAndAssignConservationLaws(useConservationLaws);
@@ -407,7 +421,7 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 //
 //    try
 //    {
-//        double[,] data = sim.simulateEx(startTime, endTime, numPoints);
+//        double[,] data = sim.simulateEx(startTime, endTime, mNumPoints);
 //        ArrayList list = sim.getSelectionList();
 //        TextWriter writer = Console.Error;
 //
@@ -582,7 +596,7 @@ void RoadRunner::reset()
 		mCVode->AssignNewVector(mModel, true);
 		mCVode->TestRootsAtInitialTime();
 
-		//double hstep = (timeEnd - timeStart) / (numPoints - 1);
+		//double hstep = (timeEnd - mTimeStart) / (mNumPoints - 1);
 		//CvodeInterface.MaxStep = Math.Min(CvodeInterface.MaxStep, hstep);
 		//if (CvodeInterface.MaxStep == 0)
 		//    CvodeInterface.MaxStep = hstep;
@@ -612,7 +626,8 @@ DoubleMatrix RoadRunner::simulate()
 		{
 			throw SBWApplicationException(emptyModelStr);
 		}
-		if (timeEnd <= timeStart)
+
+		if (mTimeEnd <= mTimeStart)
 		{
 			throw SBWApplicationException("Error: time end must be greater than time start");
 		}
@@ -931,7 +946,9 @@ double RoadRunner::getuEE(string reactionName, string parameterName, bool comput
 
 			double hstep = DiffStepSize*originalParameterValue;
 			if (fabs(hstep) < 1E-12)
+            {
 				hstep = DiffStepSize;
+            }
 
 			try
 			{
@@ -2675,9 +2692,9 @@ void RoadRunner::EvalModel()
 //            var sbml = File.ReadAllText(@"C:\Users\fbergmann\Desktop\testModel.xml");
 //            var sim = new RoadRunner();
 //            sim.loadSBML(sbml);
-//            sim.setTimeStart(0);
+//            sim.setmTimeStart(0);
 //            sim.setTimeEnd(10);
-//            sim.setNumPoints(10);
+//            sim.setmNumPoints(10);
 //            var data = sim.simulate();
 //            var writer = new StringWriter();
 //            DumpResults(writer, data, sim.getSelectionList());
@@ -3308,9 +3325,9 @@ void RoadRunner::EvalModel()
 //                    Matrix Nr;
 //                    Matrix LinkMatrix;
 //
-//                    setTimeStart(0.0);
+//                    setmTimeStart(0.0);
 //                    setTimeEnd(50.0);
-//                    setNumPoints(1);
+//                    setmNumPoints(1);
 //                    simulate();
 //                    if (steadyState() > STEADYSTATE_THRESHOLD)
 //                    {
@@ -3848,12 +3865,12 @@ void RoadRunner::EvalModel()
 //
 // -------------------------------------------------------------------------------
 //
-//        void RoadRunner::PrintTout(double start, double end, int numPoints)
+//        void RoadRunner::PrintTout(double start, double end, int mNumPoints)
 //        {
-//            double hstep = (end - start) / (numPoints - 1);
+//            double hstep = (end - start) / (mNumPoints - 1);
 //            Debug.WriteLine("Using step " + hstep);
 //            double tout = start;
-//            for (int i = 1; i < numPoints; i++)
+//            for (int i = 1; i < mNumPoints; i++)
 //            {
 //                tout = start + i*hstep;
 //                Debug.WriteLine(tout.ToString("G17"));
@@ -3893,31 +3910,31 @@ void RoadRunner::EvalModel()
 //        }
 //
 //        Help("get the currently set time start")
-//        double RoadRunner::getTimeStart()
+//        double RoadRunner::getmTimeStart()
 //        {
-//            return timeStart;
+//            return mTimeStart;
 //        }
 //
 //        Help("get the currently set time end")
 //        double RoadRunner::getTimeEnd()
 //        {
-//            return timeEnd;
+//            return mTimeEnd;
 //        }
 //
 //        Help("get the currently set number of points")
-//        int RoadRunner::getNumPoints()
+//        int RoadRunner::getmNumPoints()
 //        {
-//            return numPoints;
+//            return mNumPoints;
 //        }
 //
 //        Help("Set the time start for the simulation")
-//        void RoadRunner::setTimeStart(double startTime)
+//        void RoadRunner::setmTimeStart(double startTime)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
 //            if (startTime < 0)
 //                throw new SBWApplicationException("Time Start most be greater than zero");
-//            this.timeStart = startTime;
+//            this.mTimeStart = startTime;
 //        }
 //
 //        Help("Set the time end for the simulation")
@@ -3927,17 +3944,17 @@ void RoadRunner::EvalModel()
 //
 //            if (endTime <= 0)
 //                throw new SBWApplicationException("Time End most be greater than zero");
-//            this.timeEnd = endTime;
+//            this.mTimeEnd = endTime;
 //        }
 //
 //        Help("Set the number of points to generate during the simulation")
-//        void RoadRunner::setNumPoints(int nummberOfPoints)
+//        void RoadRunner::setmNumPoints(int nummberOfPoints)
 //        {
 //            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
 //
 //            if (nummberOfPoints <= 0)
 //                nummberOfPoints = 1;
-//            this.numPoints = nummberOfPoints;
+//            this.mNumPoints = nummberOfPoints;
 //        }
 //
 //        Help(
@@ -3970,9 +3987,9 @@ void RoadRunner::EvalModel()
 //                if (endTime < 0 || startTime < 0 || numberOfPoints <= 0 || endTime <= startTime)
 //                    throw new SBWApplicationException("Illegal input to simulateEx");
 //
-//                this.timeEnd = endTime;
-//                this.timeStart = startTime;
-//                numPoints = numberOfPoints;
+//                this.mTimeEnd = endTime;
+//                this.mTimeStart = startTime;
+//                mNumPoints = numberOfPoints;
 //                return runSimulation();
 //            }
 //            catch (SBWException)
@@ -4059,7 +4076,7 @@ void RoadRunner::EvalModel()
 //
 //        void RoadRunner::CorrectMaxStep()
 //        {
-//            double maxStep = (timeEnd - timeStart) / (numPoints);
+//            double maxStep = (mTimeEnd - mTimeStart) / (mNumPoints);
 //            maxStep = Math.Min(CvodeInterface.MaxStep, maxStep);
 //            CvodeInterface.MaxStep = maxStep;
 //        }

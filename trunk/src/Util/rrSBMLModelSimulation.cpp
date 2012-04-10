@@ -11,12 +11,33 @@
 
 namespace rr
 {
+
 SBMLModelSimulation::SBMLModelSimulation(const string& modelFilePath, const string& modelFileName)
 :
 mModelFilePath(modelFilePath),
 mModelFileName(modelFileName)
-{
+{}
 
+bool SBMLModelSimulation::LoadSettings(const string& fName)
+{
+	if(fName.size())
+    {
+
+    }
+    else
+    {
+    	//Try to read from a file within folder where the model is
+        mSettings.mStartTime = 0;
+        mSettings.mDuration = 5;
+        mSettings.mSteps = 50;
+        mSettings.mEndTime = mSettings.mStartTime + mSettings.mDuration;
+        if(mEngine)
+        {
+        	mEngine->UseSimulationSettings(mSettings);
+        }
+
+    }
+	return true;
 }
 
 bool SBMLModelSimulation::LoadModel()
@@ -48,8 +69,12 @@ bool SBMLModelSimulation::SaveResult()
 	string resultFileName(GetModelsFullFilePath());
 	resultFileName = ChangeFileExtensionTo(resultFileName, "result.dat");
 
-    DoubleMatrix result = mEngine->GetSimulationResult();
+	Log(lInfo)<<"Saving simulat ion result to file: "<<resultFileName;
+    SimulationData result = mEngine->GetSimulationResult();
 
+    ofstream fs(resultFileName.c_str());
+    fs << result;
+    fs.close();
     return true;
 
 }

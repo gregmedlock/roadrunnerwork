@@ -214,6 +214,14 @@
 				<DependentOn>..\..\src\rrRoadRunner.h</DependentOn>
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\src\rrSimulationData.cpp">
+				<DependentOn>..\..\src\rrSimulationData.h</DependentOn>
+				<BuildOrder>70</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrSimulationSettings.cpp">
+				<DependentOn>..\..\src\rrSimulationSettings.h</DependentOn>
+				<BuildOrder>71</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\rrSupportCode.cpp">
 				<DependentOn>..\..\src\rrSupportCode.h</DependentOn>
 				<BuildOrder>19</BuildOrder>

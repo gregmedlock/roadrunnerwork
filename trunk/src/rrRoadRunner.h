@@ -12,6 +12,10 @@
 #include "rrStringList.h"
 #include "rrMisc.h"
 #include "rrTextWriter.h"
+#include "rrSimulationData.h"
+#include "rrSimulationSettings.h"
+
+
 using std::string;
 
 namespace rr
@@ -27,7 +31,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		const string 					emptyModelStr;
 		const double 					STEADYSTATE_THRESHOLD;
 		vector<TSelectionRecord> 		mSteadyStateSelection;
-        DoubleMatrix					mSimulationResult;
+        SimulationData					mSimulationData;
 		string							mModelXMLFileName;
 		string 							mModelCode;
 
@@ -139,6 +143,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
     	//-------------- End of MCA functions
 
+        SimulationSettings				mSettings;
+
 	public:
     	// Properties -----------------------------------------------------------------------------
      	static bool                     mComputeAndAssignConservationLaws;
@@ -149,19 +155,22 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double*                  		mN;
         double*                  		mNr;
         bool 							modelLoaded;
-        int 							numPoints;
+
         string 							mCurrentSBML;
 	    IModel*							mModel;
-        double                         	timeEnd;
-        double                         	timeStart;
+        double                         	mTimeStart;
+        double                         	mTimeEnd;
+        int 							mNumPoints;
     	string 							NL;
+
 
 		//Functions --------------------------------------------------------------------
         								RoadRunner(bool GenerateCSharp = false);
         virtual 					   ~RoadRunner();
         bool							CompileModel();
-        DoubleMatrix					GetSimulationResult();
+        SimulationData 					GetSimulationResult();
         ModelGenerator*					GetCodeGenerator();
+        bool							UseSimulationSettings(SimulationSettings& settings);
         void							Reset();
         bool							CreateModelSourceCode();
         string							GetModelSourceCode();

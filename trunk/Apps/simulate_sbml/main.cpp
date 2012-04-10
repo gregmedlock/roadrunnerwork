@@ -31,7 +31,7 @@ int main()
     gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile("simulate_sbml.log")));
     LogOutput::mLogToConsole = true;
 
-    gLog.SetCutOffLogLevel(lDebug2);
+    gLog.SetCutOffLogLevel(lDebug4);
 	//gLog.SetCutOffLogLevel(lInfo);
 
     Log(lDebug4)<<"Logs are going to "<<gLog.GetLogFileName();
@@ -45,22 +45,22 @@ int main()
 
         string modelFilePath("C:\\rrw\\Models");
 
-        //string subFolder("l2v4");
-        string subFolder("");
+        string subFolder("l2v4");
+        //string subFolder("");
         stringstream modelSubPath;
         stringstream modelFileName;
 
         int caseNr = 1;
         //int caseNr = 41;
-        //modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
-		//modelFName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
+        modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
+		modelFileName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
 
         if(subFolder.size())
         {
             modelFilePath = modelFilePath + "\\" + subFolder + "\\" + modelSubPath.str();
         }
 
-		modelFileName<<"simple.xml";
+		//modelFileName<<"simple.xml";
         string fullFilePath(modelFilePath +   "\\" + modelFileName.str());
 
         //The following will load and compile and simulate the sbml model in the file
@@ -74,11 +74,11 @@ int main()
         	Log(lError)<<"Failed loading SBML model";
         }
 
-//        //Then Read settings file if it exists..
-//		if(!simulation.LoadSettings())
-//        {
-//        	Log(lError)<<"Failed loading SBML model settings";
-//        }
+        //Then Read settings file if it exists..
+		if(!simulation.LoadSettings())
+        {
+        	Log(lError)<<"Failed loading SBML model settings";
+        }
 
         //Then Simulate model
 		if(!simulation.Run())

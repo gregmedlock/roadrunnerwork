@@ -40,9 +40,9 @@
 			<VerInfo_Locale>1033</VerInfo_Locale>
 			<PackageImports>bindcompfmx;fmx;rtl;dbrtl;IndySystem;DbxClientDriver;bindcomp;inetdb;DBXInterBaseDriver;xmlrtl;DbxCommonDriver;IndyProtocols;DBXMySQLDriver;dbxcds;soaprtl;bindengine;CustomIPTransport;dsnap;fmxase;IndyCore;inet;fmxobj;inetdbxpress;fmxdae;IPIndyImpl;dbexpress;$(PackageImports)</PackageImports>
 			<Multithreaded>true</Multithreaded>
-			<ILINK_LibraryPath>..\..\src\Util\;..\..\Apps\simulate_sbml\;..\..\Testing\simulate_sbml\;C:\rrw\Testing\simulate_sbml\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\src\;..\..\src\Util\;..\..\Apps\simulate_sbml\;..\..\Testing\simulate_sbml\;C:\rrw\Testing\simulate_sbml\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-			<IncludePath>..\..\src\Util\;..\..\Apps\simulate_sbml\;$(rr_root)\src;$(rr_root)\src\Util;$(rr_root)\src\Solvers;$(rr_root)\src\Scanner;$(rr_root)\src\Logger;$(rr_root)\installs\xe2\include\cvode;$(rr_root)\installs\xe2\include;$(rr_root)\installs\xe2\include\sbml\;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\src\;..\..\src\Util\;..\..\Apps\simulate_sbml\;$(rr_root)\src;$(rr_root)\src\Util;$(rr_root)\src\Solvers;$(rr_root)\src\Scanner;$(rr_root)\src\Logger;$(rr_root)\installs\xe2\include\cvode;$(rr_root)\installs\xe2\include;$(rr_root)\installs\xe2\include\sbml\;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(IncludePath)</IncludePath>
 			<ProjectType>CppConsoleApplication</ProjectType>
 			<_TCHARMapping>char</_TCHARMapping>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -96,6 +96,14 @@
 				<BuildOrder>1</BuildOrder>
 				<IgnorePath>true</IgnorePath>
 			</LibFiles>
+			<CppCompile Include="..\..\src\rrSimulationData.cpp">
+				<DependentOn>..\..\src\rrSimulationData.h</DependentOn>
+				<BuildOrder>3</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrSimulationSettings.cpp">
+				<DependentOn>..\..\src\rrSimulationSettings.h</DependentOn>
+				<BuildOrder>4</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\Util\rrSBMLModelSimulation.cpp">
 				<DependentOn>..\..\src\Util\rrSBMLModelSimulation.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
