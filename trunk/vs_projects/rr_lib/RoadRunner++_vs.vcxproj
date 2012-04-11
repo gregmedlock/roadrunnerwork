@@ -85,6 +85,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +118,8 @@
     <ClCompile Include="..\..\src\rrObject.cpp" />
     <ClCompile Include="..\..\src\rrPendingAssignment.cpp" />
     <ClCompile Include="..\..\src\rrRoadRunner.cpp" />
+    <ClCompile Include="..\..\src\rrSimulationData.cpp" />
+    <ClCompile Include="..\..\src\rrSimulationSettings.cpp" />
     <ClCompile Include="..\..\src\rrSupportCode.cpp" />
     <ClCompile Include="..\..\src\rrTComputeEventAssignmentDelegate.cpp" />
     <ClCompile Include="..\..\src\rrTEventAssignmentDelegate.cpp" />
@@ -141,7 +144,9 @@
     <ClCompile Include="..\..\src\Util\rrParameterSets.cpp" />
     <ClCompile Include="..\..\src\Util\rrRandom.cpp" />
     <ClCompile Include="..\..\src\Util\rrRule.cpp" />
+    <ClCompile Include="..\..\src\Util\rrSBMLModelSimulation.cpp" />
     <ClCompile Include="..\..\src\Util\rrSBMLSymbol.cpp" />
+    <ClCompile Include="..\..\src\Util\rrSBMLSymbolDependencies.cpp" />
     <ClCompile Include="..\..\src\Util\rrStreamWriter.cpp" />
     <ClCompile Include="..\..\src\Util\rrStringBuilder.cpp" />
     <ClCompile Include="..\..\src\Util\rrStringList.cpp" />

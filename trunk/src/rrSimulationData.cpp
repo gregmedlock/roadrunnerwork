@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include <iomanip>
+#include "rrLogger.h"
 #include "rrSimulationData.h"
 //---------------------------------------------------------------------------
 #if defined(__CODEGEARC__)

@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include "rrIModel.h"
+#include "rrLogger.h"
 //---------------------------------------------------------------------------
 
 namespace rr

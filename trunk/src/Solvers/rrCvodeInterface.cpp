@@ -606,7 +606,6 @@ void CvodeInterface::HandleCVODEError(int errCode)
 
 double CvodeInterface::OneStep(double timeStart, double hstep)
 {
-	const char tab = '\t';
     Log(lDebug3)<<"---------------------------------------------------";
     Log(lDebug3)<<"--- O N E     S T E P      ( "<<mOneStepCount<< " ) ";
     Log(lDebug3)<<"---------------------------------------------------";

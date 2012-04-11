@@ -96,10 +96,7 @@ bool RoadRunner::InitializeModel()
 	}
 
     modelLoaded = true;
-//    mModelCode = mModelGenerator->generateModelCode(mCurrentSBML);
-
     mConservedTotalChanged = false;
-
     mModel->setCompartmentVolumes();
     mModel->initializeInitialConditions();
     mModel->setParameterValues();
@@ -434,7 +431,7 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 //
 //    //Debug.WriteLine(sim.getCapabilities());
 //
-//    return;
+    return false;
 }
 
 bool RoadRunner::loadSBMLFromFile(const string& fileName)

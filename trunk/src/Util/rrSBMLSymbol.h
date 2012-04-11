@@ -12,8 +12,6 @@ using std::ostream;
 namespace rr
 {
 
-//class SBMLSymbolDependencies;
-
 class RR_DECLSPEC SBMLSymbol : public rrObject
 {
 	protected:

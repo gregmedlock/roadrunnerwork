@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include <algorithm>
+#include <iostream>
 #include <conio.h>
 #include "rrUtils.h"
 //---------------------------------------------------------------------------

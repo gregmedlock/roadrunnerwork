@@ -30,7 +30,9 @@ SBMLSymbolDependencies& SBMLSymbolDependencies::operator=(const SBMLSymbolDepend
 
 void SBMLSymbolDependencies::Add(SBMLSymbol* symbol)
 {
-	mDependencies.push_back(*symbol);	//Makes a copy
+	SBMLSymbol *symbDep = new SBMLSymbol( (*symbol) );
+
+	mDependencies.push_back(symbDep);	//Makes a copy
 }
 
 int SBMLSymbolDependencies::Count()
@@ -40,6 +42,6 @@ int SBMLSymbolDependencies::Count()
 
 SBMLSymbol	SBMLSymbolDependencies::At(const int& i)
 {
-	return mDependencies[i];
+	return *mDependencies[i];
 }
 }

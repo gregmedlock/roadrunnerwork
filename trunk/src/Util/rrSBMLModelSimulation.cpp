@@ -2,6 +2,7 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include "rrLogger.h"
 #include "rrSBMLModelSimulation.h"
 //---------------------------------------------------------------------------
 
@@ -17,6 +18,11 @@ SBMLModelSimulation::SBMLModelSimulation(const string& modelFilePath, const stri
 mModelFilePath(modelFilePath),
 mModelFileName(modelFileName)
 {}
+
+SBMLModelSimulation::~SBMLModelSimulation()
+{
+
+}
 
 bool SBMLModelSimulation::LoadSettings(const string& fName)
 {

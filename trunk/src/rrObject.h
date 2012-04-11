@@ -6,7 +6,7 @@
 namespace rr
 {
 using std::string;
-
+const char tab = '\t';
 enum SBMLType {stCompartment = 0, stSpecies, stParameter};	//Species clashes with class Species, prefix enums with st, for SbmlType
 const int MAX_MODULE = 512;
 typedef unsigned int u_int;

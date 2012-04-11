@@ -23,14 +23,15 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
 
     public:
 						        SBMLModelSimulation(const string& modelFilePath = "", const string& modelFileName = "");
+							   ~SBMLModelSimulation();		
     	bool			        SetModelFilePath(const string& path){mModelFilePath = path; return true;}
     	bool			        SetModelFileName(const string& name){mModelFileName = name; return true;}
         string 			        GetModelsFullFilePath(){return JoinPath(mModelFilePath, mModelFileName);}
-        bool			        UseEngine(RoadRunner* engine){mEngine = engine;}
+        bool			        UseEngine(RoadRunner* engine){mEngine = engine; return true;}
         bool			        LoadModel();
 		bool			        CompileModel();
         bool			        Run();
-        bool			        SaveResult();
+		bool			        SaveResult();
         bool			        LoadSettings(const string& fName = "");
 
 };

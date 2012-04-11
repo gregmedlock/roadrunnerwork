@@ -17,7 +17,7 @@ class SBMLSymbol;
 class RR_DECLSPEC SBMLSymbolDependencies : public rrObject
 {
 	protected:
-		deque<SBMLSymbol>		    mDependencies;
+		deque<SBMLSymbol*>		    mDependencies;
 
 	public:
 								    SBMLSymbolDependencies(){}

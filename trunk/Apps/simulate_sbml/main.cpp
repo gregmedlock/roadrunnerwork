@@ -90,8 +90,9 @@ int main()
         if(!simulation.SaveResult())
         {
         	//Failed to simulate the model...
-
         }
+
+//        simulation.LoadReference(
 
     }
     catch(Exception& ex)

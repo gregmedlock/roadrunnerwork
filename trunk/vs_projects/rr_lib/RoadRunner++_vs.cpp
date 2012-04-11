@@ -2,9 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "RoadRunner++_vs.h"
 
-//
 //// This is an example of an exported variable
 //ROADRUNNER_VS_API int nRoadRunner_vs=0;
 //
