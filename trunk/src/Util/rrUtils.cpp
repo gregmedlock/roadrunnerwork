@@ -2,14 +2,38 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include <io.h>
 #include <algorithm>
 #include <iostream>
 #include <conio.h>
+#include <fstream>
+#include "rrStringUtils.h"
 #include "rrUtils.h"
+#include "rrLogger.h"
 //---------------------------------------------------------------------------
 using namespace std;
 namespace rr
 {
+
+
+vector<string> GetLinesInFile(const string& fName)
+{
+	vector<string> lines;
+
+	ifstream ifs(fName.c_str());
+	if(!ifs)
+	{
+		Log(lWarning)<<"Failed opening file: "<<fName;
+        return lines;
+	}
+
+	std::string oneLine((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+    lines = SplitString(oneLine, "\n");
+
+	return lines;
+
+}
 
 std::size_t IndexOf(std::vector<std::string>& vec, const std::string& elem )
 {
@@ -39,5 +63,16 @@ void Pause(bool doIt)
     getch();
     cout<<"\nExiting....\n";
 }
+
+bool FileExists(const string& fName)
+{
+  	if (!fName.size())
+ 	{
+		return false;
+	}
+    bool res = (access(fName.c_str(), 0) == 0);
+    return res;
+}
+
 
 }

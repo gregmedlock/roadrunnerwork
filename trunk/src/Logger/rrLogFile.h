@@ -21,7 +21,8 @@ class RR_DECLSPEC LogFile : public rrObject
 		string					mFileName;
 
 	public:
-	  							LogFile(const char* fName);
+//	  							LogFile(const char* fName);
+	  							LogFile(const string& fName);
 			   				   ~LogFile();
 		FILE* 					mFILEHandle;
         string					GetFileName(){return mFileName;}

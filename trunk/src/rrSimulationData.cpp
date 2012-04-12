@@ -42,7 +42,7 @@ void SimulationData::SetColumnNames(const StringList& colNames)
 void SimulationData::SetData(const DoubleMatrix& theData)
 {
 	mTheData = theData;
-    Log(lDebug3)<<"Simulation Data: "<<mTheData;
+    Log(lDebug5)<<"Simulation Data =========== \n"<<mTheData;
     Check();
 }
 

@@ -46,54 +46,6 @@ Error: Unable to perform link
 ** error 1 ** deleting cmTryCompileExec\fast
 
 
-Determining if the function BZ2_bzCompressInit exists in the C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/bzip2.lib failed with the following output:
-Change Dir: C:/rrw/builds/xe/libsbml/CMakeFiles/CMakeTmp
-
-Run Build Command:make "cmTryCompileExec\fast"
-MAKE Version 5.4  Copyright (c) 1987, 2010 Embarcadero Technologies, Inc.
-	make -f CMakeFiles\cmTryCompileExec.dir\build.make -l -o  CMakeFiles\cmTryCompileExec.dir\build
-MAKE Version 5.4  Copyright (c) 1987, 2010 Embarcadero Technologies, Inc.
-	"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles\CMakeTmp\CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.obj
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe -tWR -tW-  @MAKE0000.@@@
-Embarcadero C++ 6.31 for Win32 Copyright (c) 1993-2010 Embarcadero Technologies, Inc.
-C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckFunctionExists.c:
-Warning W8065 C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckFunctionExists.c 11: Call to function 'BZ2_bzCompressInit' with no prototype in function main
-Linking C executable cmTryCompileExec.exe
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe -tWR -tW- -ecmTryCompileExec.exe @MAKE0002.@@@
-Embarcadero C++ 6.31 for Win32 Copyright (c) 1993-2010 Embarcadero Technologies, Inc.
-Turbo Incremental Link 6.11 Copyright (c) 1997-2010 Embarcadero Technologies, Inc.
-Error: 'C:\RRW\THIRDPARTY\LIBSBML_XE\DEPENDENCIES\LIB\BZIP2.LIB' contains invalid OMF record, type 0x21 (possibly COFF)
-
-** error 1 ** deleting cmTryCompileExec.exe
-
-** error 1 ** deleting cmTryCompileExec\fast
-
-
-Determining if the function gzopen exists in the C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/zdll.lib failed with the following output:
-Change Dir: C:/rrw/builds/xe/libsbml/CMakeFiles/CMakeTmp
-
-Run Build Command:make "cmTryCompileExec\fast"
-MAKE Version 5.4  Copyright (c) 1987, 2010 Embarcadero Technologies, Inc.
-	make -f CMakeFiles\cmTryCompileExec.dir\build.make -l -o  CMakeFiles\cmTryCompileExec.dir\build
-MAKE Version 5.4  Copyright (c) 1987, 2010 Embarcadero Technologies, Inc.
-	"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -E cmake_progress_report C:\rrw\builds\xe\libsbml\CMakeFiles\CMakeTmp\CMakeFiles 1
-Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.obj
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe -tWR -tW-  @MAKE0000.@@@
-Embarcadero C++ 6.31 for Win32 Copyright (c) 1993-2010 Embarcadero Technologies, Inc.
-C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckFunctionExists.c:
-Warning W8065 C:\Program Files (x86)\CMake 2.8\share\cmake-2.8\Modules\CheckFunctionExists.c 11: Call to function 'gzopen' with no prototype in function main
-Linking C executable cmTryCompileExec.exe
-	C:\PROGRA~2\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe -tWR -tW- -ecmTryCompileExec.exe @MAKE0002.@@@
-Embarcadero C++ 6.31 for Win32 Copyright (c) 1993-2010 Embarcadero Technologies, Inc.
-Turbo Incremental Link 6.11 Copyright (c) 1997-2010 Embarcadero Technologies, Inc.
-Error: 'C:\RRW\THIRDPARTY\LIBSBML_XE\DEPENDENCIES\LIB\ZDLL.LIB' contains invalid OMF record, type 0x21 (possibly COFF)
-
-** error 1 ** deleting cmTryCompileExec.exe
-
-** error 1 ** deleting cmTryCompileExec\fast
-
-
 Determining if files check.h exist failed with the following output:
 Change Dir: C:/rrw/builds/xe/libsbml/CMakeFiles/CMakeTmp
 

@@ -55,7 +55,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;WIN32;LIBSBML_USE_CPP_NAMESPACE;ENABLE_DEBUG_OUTPUT;$(Defines)</Defines>
+			<Defines>_DEBUG;WIN32;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -183,6 +183,14 @@
 				<DependentOn>..\..\src\rrRoadRunner.h</DependentOn>
 				<BuildOrder>15</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\src\rrSimulationData.cpp">
+				<DependentOn>..\..\src\rrSimulationData.h</DependentOn>
+				<BuildOrder>64</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrSimulationSettings.cpp">
+				<DependentOn>..\..\src\rrSimulationSettings.h</DependentOn>
+				<BuildOrder>65</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\rrSupportCode.cpp">
 				<DependentOn>..\..\src\rrSupportCode.h</DependentOn>
 				<BuildOrder>3</BuildOrder>
@@ -271,9 +279,17 @@
 			<CppCompile Include="..\..\src\Util\rrRule.cpp">
 				<BuildOrder>56</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrSBMLModelSimulation.cpp">
+				<DependentOn>..\..\src\Util\rrSBMLModelSimulation.h</DependentOn>
+				<BuildOrder>66</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\Util\rrSBMLSymbol.cpp">
 				<DependentOn>..\..\src\Util\rrSBMLSymbol.h</DependentOn>
 				<BuildOrder>47</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrSBMLSymbolDependencies.cpp">
+				<DependentOn>..\..\src\Util\rrSBMLSymbolDependencies.h</DependentOn>
+				<BuildOrder>63</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\Util\rrStreamWriter.cpp">
 				<DependentOn>..\..\src\Util\rrStreamWriter.h</DependentOn>

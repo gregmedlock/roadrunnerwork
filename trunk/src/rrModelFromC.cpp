@@ -377,7 +377,7 @@ void ModelFromC::convertToConcentrations()
 	cconvertToConcentrations();
 }
 
-void ModelFromC::updateDependentSpeciesValues(vector<double>& _y)
+void ModelFromC::updateDependentSpeciesValues(vector<double>& y)
 {
 	if(!cupdateDependentSpeciesValues)
 	{
@@ -385,13 +385,15 @@ void ModelFromC::updateDependentSpeciesValues(vector<double>& _y)
 		return;
 	}
 
-	auto_ptr<double> y_vec(new double(y.size()));
+	int size = y.size();
+	double* y_vec = new double[y.size()];
 	for(int i = 0; i < y.size(); i++)
 	{
-		(y_vec).get()[i] = y[i];
+		y_vec[i] = y[i];
 	}
 
-	cupdateDependentSpeciesValues(y_vec.get());
+	cupdateDependentSpeciesValues(y_vec);
+	delete [] y_vec;
 }
 
 void ModelFromC::computeRules(vector<double>& y)

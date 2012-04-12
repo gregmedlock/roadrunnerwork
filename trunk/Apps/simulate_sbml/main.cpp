@@ -23,50 +23,39 @@
 
 using namespace std;
 using namespace rr;
-
+void   CreateTestSuiteName(int caseNr, string& modelFilePath, string& modelFileName);
 int main()
 {
-	SBMLModelSimulation simulation;
+    string dataOutputFolder("C:\\rrw\\DataOutput");
+	SBMLModelSimulation simulation(dataOutputFolder);
 
-    gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile("simulate_sbml.log")));
+    gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, "simulate_sbml.log"))));
     LogOutput::mLogToConsole = true;
 
     gLog.SetCutOffLogLevel(lDebug4);
 	//gLog.SetCutOffLogLevel(lInfo);
 
     Log(lDebug4)<<"Logs are going to "<<gLog.GetLogFileName();
-    RoadRunner *roadRunner = NULL;
-
+	RoadRunner *roadRunner = NULL;
     try
     {
         roadRunner = new RoadRunner;
         roadRunner->Reset();
+
+
         simulation.UseEngine(roadRunner);
 
-        string modelFilePath("C:\\rrw\\Models");
+        //Read SBML models.....
+        string modelFilePath("C:\\rrw\\Models\\l2v4");
 
-        string subFolder("l2v4");
-        //string subFolder("");
-        stringstream modelSubPath;
-        stringstream modelFileName;
-
-        int caseNr = 1;
-        //int caseNr = 41;
-        modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
-		modelFileName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
-
-        if(subFolder.size())
-        {
-            modelFilePath = modelFilePath + "\\" + subFolder + "\\" + modelSubPath.str();
-        }
-
-		//modelFileName<<"simple.xml";
-        string fullFilePath(modelFilePath +   "\\" + modelFileName.str());
+        string modelFileName;
+        int caseNumber = 1;
+        simulation.SetCaseNumber(caseNumber);
+        CreateTestSuiteName(caseNumber, modelFilePath, modelFileName);
 
         //The following will load and compile and simulate the sbml model in the file
-
         simulation.SetModelFilePath(modelFilePath);
-        simulation.SetModelFileName(modelFileName.str());
+        simulation.SetModelFileName(modelFileName);
 
         //First load the model
 		if(!simulation.LoadModel())
@@ -74,7 +63,7 @@ int main()
         	Log(lError)<<"Failed loading SBML model";
         }
 
-        //Then Read settings file if it exists..
+        //Then read settings file if it exists..
 		if(!simulation.LoadSettings())
         {
         	Log(lError)<<"Failed loading SBML model settings";
@@ -92,8 +81,13 @@ int main()
         	//Failed to simulate the model...
         }
 
-//        simulation.LoadReference(
+        if(!simulation.LoadReferenceData())
+        {
 
+        }
+        simulation.CreateErrorData();
+
+        simulation.SaveAllData();
     }
     catch(Exception& ex)
     {
@@ -107,3 +101,18 @@ int main()
 	return 0;
 }
 
+void CreateTestSuiteName(int caseNr, string& modelFilePath, string& modelName)
+{
+     stringstream modelSubPath;
+     stringstream modelFileName;
+
+//    int caseNr = 1;
+    //int caseNr = 41;
+
+    modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
+    modelFileName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
+
+    modelFilePath = modelFilePath + "\\" + modelSubPath.str();
+
+    modelName =  modelFileName.str();
+}

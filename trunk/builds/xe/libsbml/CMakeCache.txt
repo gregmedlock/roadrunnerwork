@@ -175,11 +175,8 @@ EXIT_ON_ERROR:BOOL=OFF
 //List of additional libraries to link against.
 EXTRA_LIBS:STRING=
 
-//The directory containing the bzip2 include files.
-LIBBZ_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/include
-
 //The file name of the bzip2 library.
-LIBBZ_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/bzip2.lib
+LIBBZ_LIBRARY:FILEPATH=LIBBZ_LIBRARY-NOTFOUND
 
 //Directory containing libraries that libSBML depends upon. (Particularly
 // important on Windows.)
@@ -198,11 +195,8 @@ LIBXML_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/include
 //The file name of the libxml2 library.
 LIBXML_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/libxml2_xe.lib
 
-//The directory containing the zlib include files.
-LIBZ_INCLUDE_DIR:PATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/include
-
 //The file name of the zip compression library.
-LIBZ_LIBRARY:FILEPATH=C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/zdll.lib
+LIBZ_LIBRARY:FILEPATH=LIBZ_LIBRARY-NOTFOUND
 
 //The file name of the swig executable.
 SWIG_EXECUTABLE:FILEPATH=c:/swigwin-2.0.4/swig.exe
@@ -422,14 +416,10 @@ HAVE_LIBM:INTERNAL=
 HAVE_MATH_H:INTERNAL=1
 //Have include HAVE_SYS_TYPES_H
 HAVE_SYS_TYPES_H:INTERNAL=1
-//Have library C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/bzip2.lib
-LIBBZ_FOUND_SYMBOL:INTERNAL=
 //ADVANCED property for variable: LIBSBML_SHARED_VERSION
 LIBSBML_SHARED_VERSION-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: LIBSBML_USE_STRICT_INCLUDES
 LIBSBML_USE_STRICT_INCLUDES-ADVANCED:INTERNAL=1
-//Have library C:/rrw/ThirdParty/libsbml_xe/dependencies/lib/zdll.lib
-LIBZ_FOUND_SYMBOL:INTERNAL=
 //Have include STDC_HEADERS
 STDC_HEADERS:INTERNAL=1
 //ADVANCED property for variable: WITH_WALL

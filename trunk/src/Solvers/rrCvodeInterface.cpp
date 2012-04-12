@@ -463,7 +463,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
     {
 		msg<<setw(10)<<left<<setprecision (18)<<dCVodeArgument[i];
     }
-    Log(lDebug)<<msg.str();
+    Log(lDebug5)<<msg.str();
 
 //    Marshal.Copy(dCVodeArgument, 0, ydot, Math.Min(dCVodeArgument.Length, n));
 
@@ -1003,7 +1003,7 @@ void CvodeInterface::AssignResultsToModel()
 
     }
 
-    for (int i = 0; i < numIndependentVariables; i++)
+    for (int i = 0; i < numIndependentVariables; i++) //
     {
 //        model->amounts[i] = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
 		double val = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);

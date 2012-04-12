@@ -30,6 +30,7 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
 		double*						m_dydt;	   		//This is the "dydt" data in the DLL. IModel also has amounts.. CONFUSING
 		double*						mInitY;
         double*						mY;             //Corresponds to y in IModel
+//        double*						y;             //Corresponds to y in IModel
         double*						mRates;
         double*						mGP;
 

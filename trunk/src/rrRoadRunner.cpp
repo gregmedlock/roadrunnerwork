@@ -66,6 +66,7 @@ bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
     mTimeEnd    = mSettings.mEndTime;
     mNumPoints	= mSettings.mSteps + 1;
 
+    //Assign absolute and relative somewhere..??
 	return true;
 }
 
@@ -333,7 +334,7 @@ DoubleMatrix RoadRunner::runSimulation()
 	Log(lInfo)<<"Result: (point, time, value)";
 	for (int i = 0; i < mNumPoints; i++)
 	{
-		Log(lInfo)<<i<<tab<<results(i,0)<<tab<<setprecision(16)<<results(i,1)<<endl;
+		Log(lDebug5)<<i<<tab<<results(i,0)<<tab<<setprecision(16)<<results(i,1);
 	}
 	return results;
 }

@@ -42,6 +42,10 @@ HINSTANCE Compiler::CompileC_DLL(const string& sourceFileName)
 
     //Now compile the code and load the resulting dll, and call an exported function in it...
     stringstream exeCmd;
+	//-g adds runtime debug information
+	//-v is for verbose
+	//-rdynamic : Export global symbols to the dynamic linker
+	//-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied. Note that the generated code is slower and bigger in this case.
     exeCmd<<"tcc -g -v -shared -rdynamic "<<sourceFileName<<" -DBUILD_MODEL_DLL";
 
     Log(lInfo)<<"\n================ Compiling the DLL =============";
@@ -64,7 +68,6 @@ HINSTANCE Compiler::CompileC_DLL(const string& sourceFileName)
         Log(lError)<<"Loading the DLL failed..";
         //PauseBeforeExit();
     }
-
 
 	return dllHandle;
 }

@@ -11,16 +11,27 @@
 namespace rr
 {
 using std::fstream;
-LogFile::LogFile(const char* name)
+LogFile::LogFile(const string& name)
 :
 mFileName(name),
-mFILEHandle(fopen(name, "w"))
+mFILEHandle(fopen(name.c_str(), "w"))
 {
     if (!mFILEHandle)
     {
         throw std::runtime_error("File Open failure");
     }
 }
+
+//LogFile::LogFile(const char* name)
+//:
+//mFileName(name),
+//mFILEHandle(fopen(name, "w"))
+//{
+//    if (!mFILEHandle)
+//    {
+//        throw std::runtime_error("File Open failure");
+//    }
+//}
 
 LogFile::~LogFile()
 {

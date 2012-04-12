@@ -15,9 +15,9 @@ class RR_DECLSPEC SimulationSettings : rrObject
         double		mStartTime;
      	double		mDuration;
 		double 		mEndTime;
+        double		mAbsolute;		//what is this for??
         double		mRelative;		//what is this for??
 };
-
 
 
 } //End of namespace

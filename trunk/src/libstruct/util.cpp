@@ -313,7 +313,7 @@ std::vector<int> Util::GaussJordan(DoubleMatrix &oMatrix, double dTolerance)
 
 		// get the pivot
 		dPivot = oMatrix(nCurrentRow, nCurrentCol);
-		Log(lDebug4) << "pivot: " << dPivot << " row: " << nCurrentRow << " col: " << nCurrentCol<< endl;
+		Log(lDebug5) << "pivot: " << dPivot << " row: " << nCurrentRow << " col: " << nCurrentCol<< endl;
 
 		if (dPivot == 0.0)
 		{
@@ -354,9 +354,9 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 	int nRows = oMatrix.numRows();
 	int nCols = oMatrix.numCols();
 
-	Log(lDebug4) << "INSIDE GAUSSIAN ELIMINATION METHOD \n";
-	Log(lDebug4) << " \nInput matrix : \n";
-	Log(lDebug4)<<print(oMatrix);
+	Log(lDebug5) << "INSIDE GAUSSIAN ELIMINATION METHOD \n";
+	Log(lDebug5) << " \nInput matrix : \n";
+	Log(lDebug5)<<print(oMatrix);
 
 	int x; 	int nPivotRow = 0; 	int nPivotCol = 0;
 	while ((nPivotRow < nRows) && (nPivotCol < nCols))
@@ -385,7 +385,7 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 		}
 
 		dPivot = oMatrix(nPivotRow,nPivotCol);
-		Log(lDebug4) << "pivot: " << dPivot << endl;
+		Log(lDebug5) << "pivot: " << dPivot << endl;
 		if(fabs(dPivot) > dTolerance) 
 		{
 			// Introduce a '1' at the pivot point
@@ -409,9 +409,9 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 		}
 
 		nPivotCol++;  // Next column
-		Log(lDebug4) << "Printing matrices PivotCol = " << nPivotCol << " \n";
+		Log(lDebug5) << "Printing matrices PivotCol = " << nPivotCol << " \n";
 //		print(m, n, A, EM);
-		Log(lDebug4) << "-----------------------------------------------------------------\n";
+		Log(lDebug5) << "-----------------------------------------------------------------\n";
 	}
 	Util::RoundMatrixToTolerance(oMatrix, dTolerance);
 }
@@ -419,7 +419,7 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 // ----------------------------------------------------------------------------
 // void print (int, int, int*)
 //
-// Prints to Log(lDebug4) an arrray in Nrows x Ncols
+// Prints to Log(lDebug5) an arrray in Nrows x Ncols
 // ----------------------------------------------------------------------------
 string Util::print(int mr, int nc, int* A)
 {
