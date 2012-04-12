@@ -28,9 +28,7 @@ mCurrentCaseNumber(-1)
 }
 
 SBMLModelSimulation::~SBMLModelSimulation()
-{
-
-}
+{}
 
 bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
 {
@@ -109,17 +107,138 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
 
 bool SBMLModelSimulation::LoadReferenceData()
 {
+	//The reference data is located in the folder where the model is located
+    string refDataFileName = JoinPath(mModelFilePath, GetReferenceDataFileNameForCase(mCurrentCaseNumber));
+	if(!FileExists(refDataFileName))
+    {
+		Log(lWarning)<<"Could not open reference data file: "<<refDataFileName;
+		return false;
+    }
+
+    vector<string> lines = GetLinesInFile(refDataFileName);
+    if(!lines.size())
+    {
+		Log(lWarning)<<"This file is empty..";
+    	return false;
+    }
+
+    //Create the data..
+    for(int row = 0; row < lines.size(); row++)
+    {
+       	vector<string> recs = SplitString(lines[row], ",");
+    	if(row == 0) //This is the header
+        {
+            mReferenceData.SetColumnNames(recs);
+            //Assign how many columns the data has
+            mReferenceData.Allocate(lines.size() - 1, recs.size());
+        }
+        else	//This is data
+        {
+        	for(int col = 0; col < mReferenceData.GetNrOfCols(); col++)
+            {
+             	double val = ToDouble(recs[col]);
+                mReferenceData(row - 1,col) = val; //First line is the header..
+             }
+		}
+    }
 
 	return true;
 }
 
 bool SBMLModelSimulation::CreateErrorData()
 {
+	//Check tht result data and reference data has the same dimensions
+    if(mResultData.GetNrOfCols() != mReferenceData.GetNrOfCols() || mResultData.GetNrOfRows() != mReferenceData.GetNrOfRows())
+    {
+    	return false;
+    }
+
+    mErrorData.Allocate(mResultData.GetNrOfRows(), mResultData.GetNrOfCols());
+
+    //First calculate sum of squares
+    for(int row = 0; row < mResultData.GetNrOfRows(); row++)
+    {
+    	for(int col = 0; col < mResultData.GetNrOfCols(); col++)
+        {
+			double error = fabs(mResultData(row, col) - mReferenceData(row,col));
+            mErrorData(row, col) = error;
+        }
+    }
 	return true;
 }
 
 bool SBMLModelSimulation::SaveAllData()
 {
+	//Save all data to one file that can be plotted "as one"
+
+	//First save the reference data to a file for comparison to result data
+    string refDataFileName = JoinPath(mDataOutputFolder, GetReferenceDataFileNameForCase(mCurrentCaseNumber));
+    ofstream fs(refDataFileName.c_str());
+    fs<<mReferenceData;
+    fs.close();
+
+    fs.open("theResult.dat");
+
+    for(int row = 0; row < mResultData.GetNrOfRows(); row++)
+    {
+    	for(int col = 0; col < mResultData.GetNrOfCols(); col++)
+        {
+			if(row == 0)
+            {
+            	if(col == 0)
+                {
+            		fs << mResultData.GetColumnNames() << mReferenceData.GetColumnNames() << mErrorData.GetColumnNames();
+                }
+            }
+            else
+            {
+            	//First column is the time...
+                if(col == 0)
+                {
+            		fs << endl << setw(10)<<left<<setprecision(6)<< mResultData(row, col); // this is time..
+                }
+                else
+                {
+                    fs << "," << mResultData(row, col);
+                }
+            }
+        }
+
+        //Then the reference data
+    	for(int col = 0; col < mReferenceData.GetNrOfCols(); col++)
+        {
+			if(row != 0)
+            {
+            	//First column is the time...
+                if(col == 0)
+                {
+            		fs << ","<< setw(10)<<left<<setprecision(6)<< mReferenceData(row, col); // this is time..
+                }
+                else
+                {
+                    fs << "," << mReferenceData(row, col);
+                }
+            }
+        }
+
+        //Then the error data
+    	for(int col = 0; col < mErrorData.GetNrOfCols(); col++)
+        {
+			if(row != 0)
+            {
+            	//First column is the time...
+                if(col == 0)
+                {
+            		fs << "," << setw(10)<<left<<setprecision(6)<<mErrorData(row, col); // this is time..
+                }
+                else
+                {
+                    fs << "," << mErrorData(row, col);
+                }
+            }
+        }
+    }
+
 	return true;
 }
 
@@ -153,10 +272,10 @@ bool SBMLModelSimulation::SaveResult()
 	resultFileName = ChangeFileExtensionTo(resultFileName, "result.dat");
 
 	Log(lInfo)<<"Saving simulation result to file: "<<resultFileName;
-    SimulationData result = mEngine->GetSimulationResult();
+    mResultData = mEngine->GetSimulationResult();
 
     ofstream fs(resultFileName.c_str());
-    fs << result;
+    fs << mResultData;
     fs.close();
     return true;
 
@@ -168,6 +287,14 @@ string SBMLModelSimulation::GetSettingsFileNameForCase(int caseNr)
     name<<setfill('0')<<setw(5)<<caseNr<<"-settings.txt";		//create the "00023" subfolder format
 
 	return name.str();
+}
+
+string SBMLModelSimulation::GetReferenceDataFileNameForCase(int caseNr)
+{
+    stringstream name;
+    name<<setfill('0')<<setw(5)<<caseNr<<"-results.csv";
+	return name.str();
+
 }
 
 } //end of namespace

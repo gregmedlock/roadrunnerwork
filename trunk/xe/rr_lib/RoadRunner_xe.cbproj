@@ -386,7 +386,7 @@
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="HostApplication">C:\RRW\build\bin\loadSBML.exe</Parameters>
+						<Parameters Name="HostApplication">C:\rrw\installs\xe\bin\simulate_model.exe</Parameters>
 					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

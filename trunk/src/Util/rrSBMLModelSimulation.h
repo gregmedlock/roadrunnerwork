@@ -1,11 +1,13 @@
 #ifndef rrSBMLModelSimulationH
 #define rrSBMLModelSimulationH
 //---------------------------------------------------------------------------
+#include <string>
 #include "rrObject.h"
 #include "rrStringUtils.h"
 #include "rrRoadRunner.h"
 #include "rrSimulationSettings.h"
 #include "rrSimulationData.h"
+
 namespace rr
 {
 
@@ -25,6 +27,7 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
         SimulationData			mReferenceData;
         SimulationData			mErrorData;
 		string				    GetSettingsFileNameForCase(int sim_case);
+		string 					GetReferenceDataFileNameForCase(int caseNr);
 
 
     public:

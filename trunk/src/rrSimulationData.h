@@ -17,22 +17,29 @@ class SimulationData : public rrObject
 	protected:
 		StringList 			mColumnNames;
         DoubleMatrix       	mTheData;
-        DoubleMatrix       	mReferenceData;
 		int					mTimePrecision;		//The precision when saved to file
 		int					mDataPrecision;		//The precision when saved to file
 
 	public:
 							SimulationData();
 							SimulationData(const StringList& colNames, const DoubleMatrix& theData);
+		string 				GetColumnNames();
+		void				Allocate(const int& cSize, const int& rSize);
 		void				SetTimeDataPrecision(const int& prec){mTimePrecision = prec;}
 		void				SetDataPrecision(const int& prec){mDataPrecision = prec;}
 		void				SetColumnNames(const StringList& colNames);
+		void				SetNrOfCols(const int& cols);
+        int					GetNrOfCols(){return mTheData.CSize();}
+        int					GetNrOfRows(){return mTheData.RSize();}
 		void				SetData(const DoubleMatrix& theData);
 		bool				Load(const string& fileName);
-		bool				LoadReference(const string& fileName);//When comparing to a reference
 		bool				WriteTo(const string& fileName);
         friend ofstream& 	operator << (ofstream& fs, SimulationData& data);
         bool				Check();	//Check if containst proper data
+
+		double& 			operator() (const unsigned& row, const unsigned& col);
+		double  			operator() (const unsigned& row, const unsigned& col) const;
+
 };
 
 

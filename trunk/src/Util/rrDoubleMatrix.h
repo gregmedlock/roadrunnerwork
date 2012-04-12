@@ -20,6 +20,7 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
 						DoubleMatrix(const DoubleMatrix& m);        // Copy constructor
 						~DoubleMatrix();                            // Destructor
 						DoubleMatrix(double* ptrToArray, const unsigned& rowCount = 0, const unsigned& colCount = 0);
+
 		DoubleMatrix& 	operator = (const DoubleMatrix & rhs);   	// Assignment operator
 		double& 		operator() (const unsigned& row, const unsigned& col);
 		double  		operator() (const unsigned& row, const unsigned& col) const;

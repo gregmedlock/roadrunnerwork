@@ -46,10 +46,10 @@ int main()
         simulation.UseEngine(roadRunner);
 
         //Read SBML models.....
-        string modelFilePath("C:\\rrw\\Models\\l2v4");
+        string modelFilePath("C:\\rrw\\Models\\l2v4_full");
 
         string modelFileName;
-        int caseNumber = 1;
+        int caseNumber = 19;
         simulation.SetCaseNumber(caseNumber);
         CreateTestSuiteName(caseNumber, modelFilePath, modelFileName);
 
@@ -78,15 +78,14 @@ int main()
         //Write result
         if(!simulation.SaveResult())
         {
-        	//Failed to simulate the model...
+        	//Failed to save data
         }
 
         if(!simulation.LoadReferenceData())
         {
-
+	        Log(lError)<<"Failed loading reference data";
         }
         simulation.CreateErrorData();
-
         simulation.SaveAllData();
     }
     catch(Exception& ex)

@@ -33,10 +33,45 @@ mTheData(theData)
 
 }
 
+string SimulationData::GetColumnNames()
+{
+	stringstream names;
+    for(int i = 0; i < mColumnNames.size(); i++)
+    {
+    	names<<mColumnNames[i];
+        if( i < mColumnNames.size() + 1)
+        {
+        	names<<",";
+        }
+    }
+	return names.str();
+}
+
+void SimulationData::Allocate(const int& cSize, const int& rSize)
+{
+	mTheData.Allocate(cSize, rSize);
+}
+
+//=========== OPERATORS
+double& SimulationData::operator() (const unsigned& row, const unsigned& col)
+{
+	return mTheData(row,col);
+}
+
+double SimulationData::operator() (const unsigned& row, const unsigned& col) const
+{
+	return mTheData(row,col);
+}
+
 void SimulationData::SetColumnNames(const StringList& colNames)
 {
 	mColumnNames = colNames;
     Log(lDebug3)<<"Simulation Data Columns: "<<mColumnNames;
+}
+
+void SimulationData::SetNrOfCols(const int& cols)
+{
+	mTheData.Allocate(1, cols);
 }
 
 void SimulationData::SetData(const DoubleMatrix& theData)
@@ -61,11 +96,12 @@ bool SimulationData::Load(const string& fileName)
 	return false;
 }
 
-//When comparing to a reference
-bool SimulationData::LoadReference(const string& fileName)
-{
-	return false;
-}
+////When comparing to a reference
+//bool SimulationData::LoadReference(const string& fileName)
+//{
+//	return false;
+//}
+
 bool SimulationData::WriteTo(const string& fileName)
 {
 	return false;
