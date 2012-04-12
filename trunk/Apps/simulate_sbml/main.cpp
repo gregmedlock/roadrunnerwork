@@ -23,17 +23,21 @@
 
 using namespace std;
 using namespace rr;
-void   CreateTestSuiteName(int caseNr, string& modelFilePath, string& modelFileName);
+
 int main()
 {
     string dataOutputFolder("C:\\rrw\\DataOutput");
-	SBMLModelSimulation simulation(dataOutputFolder);
 
-    gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, "simulate_sbml.log"))));
+	SBMLModelSimulation simulation(dataOutputFolder);
+
+	string dummy;
+    string logFileName;
+    int caseNumber = 19;
+    CreateTestSuiteFileNameParts(caseNumber, ".log", dummy, logFileName);
+    gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
     LogOutput::mLogToConsole = true;
 
-    gLog.SetCutOffLogLevel(lDebug4);
-	//gLog.SetCutOffLogLevel(lInfo);
+    gLog.SetCutOffLogLevel(lDebug3);
 
     Log(lDebug4)<<"Logs are going to "<<gLog.GetLogFileName();
 	RoadRunner *roadRunner = NULL;
@@ -42,16 +46,15 @@ int main()
         roadRunner = new RoadRunner;
         roadRunner->Reset();
 
-
         simulation.UseEngine(roadRunner);
 
         //Read SBML models.....
         string modelFilePath("C:\\rrw\\Models\\l2v4_full");
-
         string modelFileName;
-        int caseNumber = 19;
+
         simulation.SetCaseNumber(caseNumber);
-        CreateTestSuiteName(caseNumber, modelFilePath, modelFileName);
+
+        CreateTestSuiteFileNameParts(caseNumber, "-sbml-l2v4.xml", modelFilePath, modelFileName);
 
         //The following will load and compile and simulate the sbml model in the file
         simulation.SetModelFilePath(modelFilePath);
@@ -73,6 +76,7 @@ int main()
 		if(!simulation.Run())
         {
         	Log(lError)<<"Failed running simulation";
+            throw("Failed running simulation");
         }
 
         //Write result
@@ -100,18 +104,4 @@ int main()
 	return 0;
 }
 
-void CreateTestSuiteName(int caseNr, string& modelFilePath, string& modelName)
-{
-     stringstream modelSubPath;
-     stringstream modelFileName;
 
-//    int caseNr = 1;
-    //int caseNr = 41;
-
-    modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
-    modelFileName<<setfill('0')<<setw(5)<<caseNr<<"-sbml-l2v4.xml";
-
-    modelFilePath = modelFilePath + "\\" + modelSubPath.str();
-
-    modelName =  modelFileName.str();
-}

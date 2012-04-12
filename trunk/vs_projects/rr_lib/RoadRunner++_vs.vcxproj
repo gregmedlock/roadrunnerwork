@@ -58,8 +58,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(rr_root)\rrBuilds\vs-2010\clapack\SRC\Debug;$(rr_root)\rrBuilds\vs-2010\libsbml\lib;$(rr_root)\rrBuilds\vs-2010\clapack\F2CLIBS\libf2c\Debug;$(rr_root)\rrBuilds\vs-2010\clapack\BLAS\SRC\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies);libsbml.lib;sundials_cvode.lib;sundials_nvecserial.lib;libf2c.lib;lapack.lib;blas.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(rr_root)\rrBuilds\vs-2010\libsbml\lib;$(rr_root)\rrBuilds\vs-2010\clapack\SRC\Debug;$(rr_root)\rrBuilds\vs-2010\clapack\F2CLIBS\libf2c\Debug;$(rr_root)\rrBuilds\vs-2010\clapack\BLAS\SRC\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies);libsbml.lib;sundials_cvode.lib;sundials_nvecserial.lib;clapack.lib</AdditionalDependencies>
     </Link>
     <PreLinkEvent>
       <Command>$(rr_root)\scripts\install_clapack.bat</Command>

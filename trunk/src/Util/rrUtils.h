@@ -17,7 +17,7 @@ bool 		    RR_DECLSPEC IsNullOrEmpty(const string& str);	//Can't be null, but em
 void 		    RR_DECLSPEC Pause(bool doIt = true);
 bool            RR_DECLSPEC	FileExists(const string& fileN);
 vector<string> 	RR_DECLSPEC	GetLinesInFile(const string& fName);
-
+void 			RR_DECLSPEC CreateTestSuiteFileNameParts(int caseNr, const string& postFixPart, string& FilePath, string& modelFileName);
 }
 
 #endif

@@ -33,18 +33,14 @@ mTheData(theData)
 
 }
 
-string SimulationData::GetColumnNames()
+StringList SimulationData::GetColumnNames()
 {
-	stringstream names;
-    for(int i = 0; i < mColumnNames.size(); i++)
-    {
-    	names<<mColumnNames[i];
-        if( i < mColumnNames.size() + 1)
-        {
-        	names<<",";
-        }
-    }
-	return names.str();
+	return mColumnNames;
+}
+
+string SimulationData::GetColumnNamesAsString()
+{
+	return mColumnNames.AsString();
 }
 
 void SimulationData::Allocate(const int& cSize, const int& rSize)

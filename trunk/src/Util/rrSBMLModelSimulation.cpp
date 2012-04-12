@@ -86,7 +86,7 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
         mSettings.mDuration = (it != settings.end()) ?  ToDouble((*it).second) : 0;
 
         it = settings.find("steps");
-        mSettings.mSteps = (it != settings.end()) ?  ToDouble((*it).second) : 50;
+        mSettings.mSteps = (it != settings.end()) ?  ToInt((*it).second) : 50;
 
         it = settings.find("absolute");
         mSettings.mAbsolute = (it != settings.end()) ?  ToDouble((*it).second) : 1.e-7;
@@ -177,46 +177,58 @@ bool SBMLModelSimulation::SaveAllData()
     fs<<mReferenceData;
     fs.close();
 
-    fs.open("theResult.dat");
+	string outputAllFileName;
+    string dummy;
+    CreateTestSuiteFileNameParts(mCurrentCaseNumber, "-result-comparison.dat", dummy, outputAllFileName);
+    fs.open(JoinPath(mDataOutputFolder, outputAllFileName).c_str());
 
     for(int row = 0; row < mResultData.GetNrOfRows(); row++)
     {
-    	for(int col = 0; col < mResultData.GetNrOfCols(); col++)
+    	for(int col = 0; col < mReferenceData.GetNrOfCols(); col++)
         {
 			if(row == 0)
             {
             	if(col == 0)
                 {
-            		fs << mResultData.GetColumnNames() << mReferenceData.GetColumnNames() << mErrorData.GetColumnNames();
+                	StringList ref_cnames =  mReferenceData.GetColumnNames();
+                    ref_cnames.PostFix("_ref");
+            		fs << ref_cnames.AsString();
+
+                    StringList res_cnames =  mResultData.GetColumnNames();
+                    res_cnames.PostFix("_rr");
+                    fs << res_cnames.AsString();
+
+                    StringList err_names = ref_cnames - res_cnames;
+                    fs << err_names.AsString();
                 }
             }
             else
             {
-            	//First column is the time...
+				//First column is the time...
                 if(col == 0)
                 {
-            		fs << endl << setw(10)<<left<<setprecision(6)<< mResultData(row, col); // this is time..
-                }
-                else
-                {
-                    fs << "," << mResultData(row, col);
-                }
-            }
-        }
-
-        //Then the reference data
-    	for(int col = 0; col < mReferenceData.GetNrOfCols(); col++)
-        {
-			if(row != 0)
-            {
-            	//First column is the time...
-                if(col == 0)
-                {
-            		fs << ","<< setw(10)<<left<<setprecision(6)<< mReferenceData(row, col); // this is time..
+            		fs << endl << setw(10)<<left<<setprecision(6)<< mReferenceData(row, col); // this is time..
                 }
                 else
                 {
                     fs << "," << mReferenceData(row, col);
+                }
+            }
+        }
+
+        //Then the simulated data
+    	for(int col = 0; col < mResultData.GetNrOfCols(); col++)
+        {
+			if(row != 0)
+            {            	
+            	//First column is the time...
+                if(col == 0)
+                {
+            		fs << "," << setw(10)<<left<<setprecision(6)<< mResultData(row, col); // this is time..
+                }
+                else
+                {
+                    fs << "," << mResultData(row, col);
                 }
             }
         }

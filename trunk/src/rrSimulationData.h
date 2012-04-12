@@ -23,7 +23,8 @@ class SimulationData : public rrObject
 	public:
 							SimulationData();
 							SimulationData(const StringList& colNames, const DoubleMatrix& theData);
-		string 				GetColumnNames();
+		StringList			GetColumnNames();
+		string 				GetColumnNamesAsString();
 		void				Allocate(const int& cSize, const int& rSize);
 		void				SetTimeDataPrecision(const int& prec){mTimePrecision = prec;}
 		void				SetDataPrecision(const int& prec){mDataPrecision = prec;}

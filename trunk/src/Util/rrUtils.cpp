@@ -7,6 +7,7 @@
 #include <iostream>
 #include <conio.h>
 #include <fstream>
+#include <iomanip>
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 #include "rrLogger.h"
@@ -14,7 +15,6 @@
 using namespace std;
 namespace rr
 {
-
 
 vector<string> GetLinesInFile(const string& fName)
 {
@@ -74,5 +74,13 @@ bool FileExists(const string& fName)
     return res;
 }
 
-
+void CreateTestSuiteFileNameParts(int caseNr, const string& postFixPart, string& modelFilePath, string& modelName)
+{
+	stringstream modelSubPath;
+    stringstream modelFileName;
+    modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
+    modelFileName<<setfill('0')<<setw(5)<<caseNr<<postFixPart;
+    modelFilePath = modelFilePath + "\\" + modelSubPath.str();
+    modelName =  modelFileName.str();
+}
 }
