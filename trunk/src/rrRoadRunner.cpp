@@ -21,7 +21,7 @@ namespace rr
 {
 
 //Initialize statics..
-bool RoadRunner::mComputeAndAssignConservationLaws 	= true;
+bool RoadRunner::mComputeAndAssignConservationLaws 	= false;
 bool RoadRunner::mConservedTotalChanged 			= false;
 bool RoadRunner::mReMultiplyCompartments 			= false;
 
@@ -156,7 +156,7 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 	{
 		case TSelectionType::clFloatingSpecies:
 //			dResult = mModel->getConcentration(record.index);
-			dResult = mModel->amounts[record.index];
+			dResult = mModel->amounts[record.index];			//Todo: something is going on here...
 		break;
 
 		case TSelectionType::clBoundarySpecies:

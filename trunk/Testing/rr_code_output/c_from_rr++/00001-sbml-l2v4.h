@@ -29,7 +29,7 @@
 	double                             _c[1];                                  //Vector containing all the compartment values   
 	double                             _dydt[2];                               //Vector containing rates of changes of all species   
 	double                             _rates[1];                              //Vector containing the rate laws of all reactions    
-	double                             _ct[1];                                 //Vector containing values of all conserved sums      
+	double                             _ct[0];                                 //Vector containing values of all conserved sums      
 	double                             _eventTests[0];                         //Vector containing results of any event tests        
 	//TEventDelayDelegate              _eventDelay[0];                         //Array of trigger function pointers
 	bool                               _eventType[0];                          //Array holding the status whether events are useValuesFromTriggerTime or not

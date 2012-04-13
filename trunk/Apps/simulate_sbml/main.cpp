@@ -26,7 +26,7 @@ using namespace rr;
 
 int main()
 {
-    string dataOutputFolder("C:\\rrw\\DataOutput");
+    string dataOutputFolder("C:\\rrw\\DataOutput\\XE");
 
 	SBMLModelSimulation simulation(dataOutputFolder);
 
@@ -34,6 +34,8 @@ int main()
     string logFileName;
     int caseNumber = 19;
     CreateTestSuiteFileNameParts(caseNumber, ".log", dummy, logFileName);
+
+    dataOutputFolder += dummy;
     gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
     LogOutput::mLogToConsole = true;
 
@@ -89,7 +91,11 @@ int main()
         {
 	        Log(lError)<<"Failed loading reference data";
         }
+
+
         simulation.CreateErrorData();
+
+
         simulation.SaveAllData();
     }
     catch(Exception& ex)

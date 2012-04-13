@@ -81,16 +81,12 @@ void setParameterValues()
 
 // Uses the equation: C = Sd - L0*Si
 void computeConservedTotals()
-{
-	_ct[0] =  + _y[0]*_c[0] + _y[1]*_c[0];
-}
+{}
 
 // Compute values of dependent species 
 // Uses the equation: Sd = C + L0*Si
 void updateDependentSpeciesValues(double* y)
-{
-	_y[1] = (_ct[0] - y[0]*_c[0]) / _c[0];
-}
+{}
 
 void computeRules(double* y)
 {}
@@ -121,8 +117,6 @@ void computeAllRatesOfChange()
 	//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );
 	//amounts.CopyTo(dTemp, rateRules.Length); Todo: fix this..
 	evalModel(_time, _amounts);
-	_dydt[1] =  - _dydt[0];
-
 }
 
 // Compute the reaction rates
@@ -145,6 +139,7 @@ void evalModel (double timein, double* oAmounts)
 		updateDependentSpeciesValues (_y);
 		computeReactionRates (_time, _y);
 		_dydt[0] = - _rates[0];
+		_dydt[1] = + _rates[0];
 	convertToAmounts();
 }
 
@@ -174,8 +169,8 @@ void testConstraints()
 //Function to initialize the model data structure. Returns an integer indicating result
 int InitModel()
 {
-	numIndependentVariables = 1;
-	numDependentVariables = 1;
+	numIndependentVariables = 2;
+	numDependentVariables = 0;
 	numTotalVariables = 2;
 	numBoundaryVariables = 0;
 	numGlobalParameters = 1;
