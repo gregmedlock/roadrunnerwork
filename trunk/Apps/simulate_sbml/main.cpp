@@ -26,7 +26,7 @@ using namespace rr;
 
 int main()
 {
-    string dataOutputFolder("C:\\rrw\\DataOutput");
+    string dataOutputFolder("C:\\rrw\\DataOutput\\XE");
 
 	SBMLModelSimulation simulation(dataOutputFolder);
 
@@ -47,22 +47,19 @@ int main()
     {
         roadRunner = new RoadRunner;
         roadRunner->Reset();
-
         simulation.UseEngine(roadRunner);
 
         //Read SBML models.....
 		string modelFilePath("C:\\rrw\\Models\\sbml-test-cases-2.0.2\\cases\\semantic");
-        //string modelFilePath("C:\\rrw\\Models\\l2v4_full");
         string modelFileName;
 
         simulation.SetCaseNumber(caseNumber);
-
         CreateTestSuiteFileNameParts(caseNumber, "-sbml-l2v4.xml", modelFilePath, modelFileName);
 
         //The following will load and compile and simulate the sbml model in the file
         simulation.SetModelFilePath(modelFilePath);
         simulation.SetModelFileName(modelFileName);
-
+		simulation.CompileIfDllExists(false);
         //First load the model
 		if(!simulation.LoadModel())
         {
@@ -70,7 +67,8 @@ int main()
         }
 
         //Then read settings file if it exists..
-		if(!simulation.LoadSettings())
+        string settingsOveride("C:\\rrw\\Models\\settings_override.txt");
+		if(!simulation.LoadSettings(settingsOveride))
         {
         	Log(lError)<<"Failed loading SBML model settings";
         }
@@ -95,8 +93,6 @@ int main()
 
 
         simulation.CreateErrorData();
-
-
         simulation.SaveAllData();
     }
     catch(Exception& ex)
