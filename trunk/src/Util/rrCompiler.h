@@ -16,6 +16,7 @@ namespace rr
     /// the Compile class was written out of the idea to generate wrapper
     /// classes in memory at runtime and then compile them ...
     /// </summary>
+HINSTANCE LoadDLL(const string& dll);
 
 class RR_DECLSPEC Compiler : public rrObject
 {
@@ -27,6 +28,7 @@ class RR_DECLSPEC Compiler : public rrObject
 //     	void 					Compile(const string& source);
 //     	rrObject* 				Compile2(const string& source, const string& sClassName);
         HINSTANCE 				mDLLHandle;
+        string					mDLLFileName;	//With path
 
     public:
         /// <summary>
@@ -38,7 +40,7 @@ class RR_DECLSPEC Compiler : public rrObject
         						Compiler();
         					   ~Compiler();
 		bool					CreateDLL(const string& cmdLine);
-        HINSTANCE 				LoadDLL(const string& dll);
+		string					GetDLLName(){return mDLLFileName;}
 
         /// <summary>
         /// the execute method takes a stringcollection of wrapper classes,
@@ -48,7 +50,7 @@ class RR_DECLSPEC Compiler : public rrObject
         void 					Execute(StringList& oProxyCode);
         static rrObject 		getInstance(const string& source, const string& sClassName);
         static rrObject* 		getInstance(const string& source, const string& sClassName, const string& sLocation);
-        HINSTANCE				CompileC_DLL(const string& cSource);
+        bool					CompileC_DLL(const string& cSource);
 
         /// <summary>
         /// adds an assembly to the assembly list ... this list will be needed

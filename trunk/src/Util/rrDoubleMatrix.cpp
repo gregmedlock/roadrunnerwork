@@ -2,6 +2,7 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include <strstream>
 #include "rrException.h"
 #include "rrDoubleMatrix.h"
 //---------------------------------------------------------------------------
@@ -9,12 +10,13 @@
 namespace rr
 {
 
-DoubleMatrix::DoubleMatrix(const unsigned& rows, const unsigned& cols)
+DoubleMatrix::DoubleMatrix(const unsigned& rows, const unsigned& cols, const string& name)
 :
 mRowCount (rows),
 mColCount (cols),
 mMatrix(NULL),
-mIsOwner(true)
+mIsOwner(true),
+mNamePtr(NULL)
 {
 	if (rows != 0 && cols != 0)
 	{
@@ -66,9 +68,12 @@ bool DoubleMatrix::Allocate(unsigned rows, unsigned cols)
 //=========== OPERATORS
 double& DoubleMatrix::operator() (const unsigned& row, const unsigned& col)
 {
-	if (row >= mRowCount || col >= mColCount)
+	if (row >= mRowCount || col >= mColCount)//If doing a lot of these, don't check, its to costly..
 	{
-		throw Exception("Matrix subscript out of bounds");
+    	strstream msg;
+        string matName = mNamePtr != NULL ? *mNamePtr : string("");
+        msg << "Subscript out of bounds in matrix ("<<matName<<") RSize, CSize = "<<mRowCount<<", "<<mColCount<<" Row, Col = "<<row<<", "<<col;
+		throw Exception(msg.str());
 	}
 	return mMatrix[mColCount*row + col];
 }
@@ -77,7 +82,10 @@ double DoubleMatrix::operator() (const unsigned& row, const unsigned& col) const
 {
 	if (row >= mRowCount || col >= mColCount)
 	{
-		throw Exception("Matrix subscript out of bounds");
+      	strstream msg;
+        string matName = mNamePtr != NULL ? *mNamePtr : string("");
+        msg << "Subscript out of bounds in matrix ("<<matName<<") RSize, CSize = "<<mRowCount<<", "<<mColCount<<" Row, Col = "<<row<<", "<<col;
+		throw Exception(msg.str());
 	}
 	return mMatrix[mColCount*row + col];
 }

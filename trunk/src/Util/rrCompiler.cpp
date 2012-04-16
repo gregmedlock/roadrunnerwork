@@ -13,6 +13,7 @@
 #include "rrCompiler.h"
 #include "rrException.h"
 #include "rrStringUtils.h"
+#include "rrUtils.h"
 //---------------------------------------------------------------------------
 
 
@@ -34,19 +35,18 @@ Compiler::~Compiler()
 
 }
 
-HINSTANCE Compiler::CompileC_DLL(const string& sourceFileName)
+bool Compiler::CompileC_DLL(const string& sourceFileName)
 {
-    char exePath[MAX_PATH];
-    _getcwd(exePath, MAX_PATH);
-    string appPath(exePath);
-
     //Now compile the code and load the resulting dll, and call an exported function in it...
-    stringstream exeCmd;
+    string dllFName(GetFileNameNoPath(sourceFileName));
+    mDLLFileName = GetPathNoFileName(sourceFileName) + "\\" + ChangeFileExtensionTo(dllFName, "dll");
+
 	//-g adds runtime debug information
 	//-v is for verbose
 	//-rdynamic : Export global symbols to the dynamic linker
 	//-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied. Note that the generated code is slower and bigger in this case.
-    exeCmd<<"tcc -g -v -shared -rdynamic "<<sourceFileName<<" -DBUILD_MODEL_DLL";
+    stringstream exeCmd;
+    exeCmd<<"tcc -g -vvv -shared -rdynamic "<<sourceFileName<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL";
 
     Log(lInfo)<<"\n================ Compiling the DLL =============";
     Log(lInfo)<<"\nExecuting: "<<exeCmd.str();
@@ -58,18 +58,8 @@ HINSTANCE Compiler::CompileC_DLL(const string& sourceFileName)
     }
 
     //Check if the DLL exists...
-    string dllFName(GetFileNameNoPath(sourceFileName));
-    string dllName(appPath + "\\" + ChangeFileExtensionTo(dllFName,"dll"));
 
-    //Load the DLL
-    HINSTANCE dllHandle = LoadDLL(dllName);
-    if(!dllHandle)
-    {
-        Log(lError)<<"Loading the DLL failed..";
-        //PauseBeforeExit();
-    }
-
-	return dllHandle;
+    return FileExists(mDLLFileName);
 }
 
 bool Compiler::CreateDLL(const string& cmdLine)
@@ -113,7 +103,7 @@ bool Compiler::CreateDLL(const string& cmdLine)
 }
 
 
-HINSTANCE Compiler::LoadDLL(const string& dll)
+HINSTANCE LoadDLL(const string& dll)
 {
     HINSTANCE hLib = LoadLibraryA(dll.c_str());
 

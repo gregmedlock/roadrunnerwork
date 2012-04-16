@@ -14,6 +14,7 @@ namespace rr
 string          RR_DECLSPEC tabs(const int& nr);
 string          RR_DECLSPEC NL();
 
+string 			RR_DECLSPEC GetPathNoFileName(const string& fName);
 string 			RR_DECLSPEC GetFileNameNoPath(const string& fName);
 string 			RR_DECLSPEC ChangeFileExtensionTo(const string& theFileName, const string& newExtension);
 

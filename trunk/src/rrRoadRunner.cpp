@@ -14,6 +14,7 @@
 #include "rrCGenerator.h"
 #include "rrStringUtils.h"
 #include "rrModelFromC.h"
+#include "rrSBMLModelSimulation.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -41,7 +42,9 @@ mTimeEnd(10),
 mNumPoints(21),
 mCurrentSBML(""),
 mModel(NULL),
-mModelDllHandle(NULL)
+mModelDllHandle(NULL),
+mSimulation(NULL),
+mTempFileFolder("C:\\tmp")
 {
 	Log(lDebug4)<<"In RoadRunner CTOR";
 	mCSharpGenerator 	= new CSharpGenerator();
@@ -447,7 +450,7 @@ bool RoadRunner::loadSBMLFromFile(const string& fileName)
 
 	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
-	Log(lDebug)<<"Loaded SBML content:\n "<<sbml<< "\n============ End of SBML "<<endl;
+	Log(lDebug)<<"Read SBML content from file:\n "<<sbml<< "\n============ End of SBML "<<endl;
 	mModelXMLFileName = fileName;
 	return loadSBML(sbml);
 }
@@ -477,8 +480,25 @@ bool RoadRunner::loadSBML(const string& sbml)
 
     mCurrentSBML = sbml;
 
-    if (CompileModel() != false)
+	string   dllName  = GetDLLName();
+
+    //Shall we compile model if it exists?
+    bool compileIfDllExists = mSimulation->CompileIfDllExists();
+    bool dllExists = FileExists(dllName);
+    bool compile = true;
+    if(dllExists && compileIfDllExists == false)
     {
+		compile = false;
+    }
+
+    if(compile && GenerateAndCompileModel())
+    {
+    	//Load the DLL
+        mModelDllHandle = LoadDLL(mCompiler->GetDLLName());
+
+		//Now create the Model using the compiled DLL
+    	mModel = CreateModel();
+
         if(!mModel)
         {
             Log(lError)<<"Failed to create ModelFromC";
@@ -508,7 +528,20 @@ bool RoadRunner::loadSBML(const string& sbml)
 	return true;
 }
 
-bool RoadRunner::CompileModel()
+string RoadRunner::GetDLLName()
+{
+	string srcCodeFolder;
+    srcCodeFolder = (mSimulation) ?
+    	mSimulation->GetDataOutputFolder()
+        :
+    	string(mTempFileFolder);
+
+
+    string dllName  = srcCodeFolder + "\\" + ChangeFileExtensionTo(GetFileNameNoPath(mModelXMLFileName), "dll");
+    return dllName;
+}
+
+bool RoadRunner::GenerateAndCompileModel()
 {
     mModelCode = mModelGenerator->generateModelCode(mCurrentSBML);
 
@@ -516,7 +549,7 @@ bool RoadRunner::CompileModel()
     {
         throw RRException("Failed to generate Model Code");
     }
-    Log(lDebug3)<<" ------ Model Code --------\n"
+    Log(lDebug4)<<" ------ Model Code --------\n"
                 <<mModelCode
                 <<" ----- End of Model Code -----\n";
 
@@ -526,18 +559,43 @@ bool RoadRunner::CompileModel()
     }
 
     //The get instance function actually compiles the supplied code..
-//        rrObject* o = mCompiler->getInstance(_sModelCode, "TModel", sLocation);
+	//        rrObject* o = mCompiler->getInstance(_sModelCode, "TModel", sLocation);
     CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
     codeGen->SetXMLModelFileName(mModelXMLFileName);
-    string srcCodeFolder("C:\\rrw\\Testing\\rr_code_output\\c_from_rr++");
+
+    string srcCodeFolder;
+    if(mSimulation)
+    {
+    	srcCodeFolder = mSimulation->GetDataOutputFolder();
+    }
+    else
+    {
+    	srcCodeFolder = ("C:\\tmp");
+    }
+
+
     codeGen->SaveSourceCodeToFolder(srcCodeFolder);
 
-    mModelDllHandle = mCompiler->CompileC_DLL(codeGen->GetSourceCodeFileName());
+     //Compile the model
+    if(mCompiler->CompileC_DLL(codeGen->GetSourceCodeFileName()))
+    {
+    	Log(lError)<<"The DLL ("<<mCompiler->GetDLLName()<<") was created";
+    	return true;
+    }
+    else
+    {
+    	Log(lError)<<"Failed compiling DLL ("<<mCompiler->GetDLLName()<<")";
+        return false;
+    }
+}
 
+IModel* RoadRunner::CreateModel()
+{
     //Create a model
     if(mModelDllHandle)
     {
-    	ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);
+    	CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
+	 	ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);
     	mModel = rrCModel;			//Should use an auto pointer?
     }
     else
@@ -546,7 +604,7 @@ bool RoadRunner::CompileModel()
     	mModel = NULL;
     }
 
-	return mModel != NULL ? true : false;
+	return mModel;
 }
 
 //Reset the simulator back to the initial conditions specified in the SBML model

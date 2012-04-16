@@ -23,6 +23,7 @@ namespace rr
 
 class ModelGenerator;
 class Compiler;
+class SBMLModelSimulation;
 
 class RR_DECLSPEC RoadRunner : public rrObject
 {
@@ -34,6 +35,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
         SimulationData					mSimulationData;
 		string							mModelXMLFileName;
 		string 							mModelCode;
+        string							mTempFileFolder;
+		SBMLModelSimulation			   *mSimulation;
 
 		CvodeInterface 				   *mCVode;
 		ISteadyStateSolver			   *steadyStateSolver;
@@ -57,6 +60,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		vector<double> 					computeSteadyStateValues(const vector<TSelectionRecord>& oSelection, const bool& computeSteadyState);
 		double 							computeSteadyStateValue(const TSelectionRecord& record);
 		StringList 						getParameterNames();
+        string 							GetDLLName();
 
         //RoadRunner MCA functions......
 
@@ -167,7 +171,9 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		//Functions --------------------------------------------------------------------
         								RoadRunner(bool GenerateCSharp = false);
         virtual 					   ~RoadRunner();
-        bool							CompileModel();
+        void							PartOfSimulation(SBMLModelSimulation* simulation){mSimulation = simulation;}
+        bool							GenerateAndCompileModel();
+        IModel*							CreateModel();
         SimulationData 					GetSimulationResult();
         ModelGenerator*					GetCodeGenerator();
         bool							UseSimulationSettings(SimulationSettings& settings);

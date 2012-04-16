@@ -21,14 +21,27 @@ SBMLModelSimulation::SBMLModelSimulation(const string& dataOutputFolder, const s
 mModelFilePath(modelFilePath),
 mModelFileName(modelFileName),
 mDataOutputFolder(dataOutputFolder),
-mCurrentCaseNumber(-1)
+mCurrentCaseNumber(-1),
+mCompileIfDllExists(true)
 {
 	//make sure the output folder exists..
-
+	mReferenceData.SetName("ReferenceData");
+	mResultData.SetName("ResultData");
+    mErrorData.SetName("ErrorData");
 }
 
 SBMLModelSimulation::~SBMLModelSimulation()
 {}
+
+bool SBMLModelSimulation::UseEngine(RoadRunner* engine)
+{
+	mEngine = engine;
+    if(mEngine)
+    {
+    	mEngine->PartOfSimulation(this);	//Road runner then gets access to data oupt folders etc..
+    }
+    return true;
+}
 
 bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
 {
@@ -182,6 +195,14 @@ bool SBMLModelSimulation::SaveAllData()
     CreateTestSuiteFileNameParts(mCurrentCaseNumber, "-result-comparison.dat", dummy, outputAllFileName);
     fs.open(JoinPath(mDataOutputFolder, outputAllFileName).c_str());
 
+    //Check matrices dimension, if they are not equal, bail..?
+    if(mResultData.Dimension() != mReferenceData.Dimension() ||
+       mResultData.Dimension() != mErrorData.Dimension()   	 ||
+       mErrorData.Dimension()  != mReferenceData.Dimension() )
+    {
+		Log(lWarning)<<"Data dimensions are not equal, not saving to one file..";
+        return false;
+    }
     for(int row = 0; row < mResultData.GetNrOfRows(); row++)
     {
     	for(int col = 0; col < mReferenceData.GetNrOfCols(); col++)
@@ -211,7 +232,14 @@ bool SBMLModelSimulation::SaveAllData()
                 }
                 else
                 {
-                    fs << "," << mReferenceData(row, col);
+                	if(row <= mReferenceData.GetNrOfRows())
+                    {
+                    	fs << "," << mReferenceData(row, col);
+                    }
+                    else
+                    {
+						fs << "," << " ";
+                    }
                 }
             }
         }
@@ -259,13 +287,13 @@ bool SBMLModelSimulation::LoadModel()
 	return (mEngine) ? mEngine->loadSBMLFromFile(GetModelsFullFilePath()) : false;
 }
 
-bool SBMLModelSimulation::CompileModel()
+bool SBMLModelSimulation::GenerateAndCompileModel()
 {
 	if(!mEngine)
     {
     	return false;
     }
-    return mEngine->CompileModel();
+    return mEngine->GenerateAndCompileModel();
 }
 
 bool SBMLModelSimulation::Run()

@@ -48,6 +48,23 @@ string NL()
     return newLine.str();
 }
 
+string GetPathNoFileName(const string& fPathAndName)
+{
+	string file = fPathAndName;
+	//Check if the file comes with a path..
+	string separators = "\\";
+	int start = file.find_first_of(separators);
+	int end   = file.find_last_of(separators);
+	if(start < 0)//no path
+	{
+		return string("");
+	}
+	else
+    {
+		return string(file.erase(end, file.size()));
+	}
+}
+
 string GetFileNameNoPath(const string& fName)
 {
     vector<string> fNameParts = SplitString(fName,"\\");

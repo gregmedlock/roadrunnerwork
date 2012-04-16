@@ -19,6 +19,7 @@ class SimulationData : public rrObject
         DoubleMatrix       	mTheData;
 		int					mTimePrecision;		//The precision when saved to file
 		int					mDataPrecision;		//The precision when saved to file
+        string				mName;				//For debugging purposes mainly..
 
 	public:
 							SimulationData();
@@ -40,6 +41,9 @@ class SimulationData : public rrObject
 
 		double& 			operator() (const unsigned& row, const unsigned& col);
 		double  			operator() (const unsigned& row, const unsigned& col) const;
+        void				SetName(const string& name);
+        string				GetName(){return mName;}
+        pair<int,int>		Dimension(){return pair<int,int>(mTheData.RSize(), mTheData.CSize());}
 
 };
 

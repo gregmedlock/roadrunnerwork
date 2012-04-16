@@ -14,9 +14,10 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
         unsigned 		mColCount;
     	double* 		mMatrix;
 		bool			mIsOwner;
+		const string*			mNamePtr;
 
     public:
-						DoubleMatrix(const unsigned& rows = 0, const unsigned& cols = 0);
+						DoubleMatrix(const unsigned& rows = 0, const unsigned& cols = 0, const string& name = "");
 						DoubleMatrix(const DoubleMatrix& m);        // Copy constructor
 						~DoubleMatrix();                            // Destructor
 						DoubleMatrix(double* ptrToArray, const unsigned& rowCount = 0, const unsigned& colCount = 0);
@@ -29,6 +30,8 @@ class RR_DECLSPEC DoubleMatrix : public rrObject
 		unsigned		CSize() const {return mColCount;}
 		bool			Allocate(unsigned rows, unsigned cols);
 		double*			GetPointer(){return mMatrix;}
+        void			SetNamePointer(const string* namePtr){mNamePtr = namePtr;}
+
 };
 
 //DoubleMatrix RR_DECLSPEC GetDoubleMatrixFromPtr(double** *pointer, const int& nRows, const int& nCols);
