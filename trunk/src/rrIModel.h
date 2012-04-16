@@ -41,6 +41,7 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to b
         vector<double> 					        y;
         list<string> 					        Warnings;
         vector<double>                  		init_y;
+		double*						m_dydt;	   		//This is the "dydt" data in the DLL. IModel also has amounts.. CONFUSING
         vector<double>                          amounts;
         virtual double							GetAmounts(const int& i) = 0;
         vector<double>                          bc;

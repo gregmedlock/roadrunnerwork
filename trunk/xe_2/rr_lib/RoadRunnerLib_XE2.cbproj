@@ -8,24 +8,14 @@
 			<Platform Condition="'$(Platform)'==''">Win32</Platform>
 			<TargetedPlatforms>1</TargetedPlatforms>
 			<AppType>Library</AppType>
+			<Platform>Win32</Platform>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
-			<Base>true</Base>
-		</PropertyGroup>
-		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
-			<Base_Win32>true</Base_Win32>
-			<CfgParent>Base</CfgParent>
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
 			<Cfg_1>true</Cfg_1>
 			<CfgParent>Base</CfgParent>
-			<Base>true</Base>
-		</PropertyGroup>
-		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
-			<Cfg_1_Win32>true</Cfg_1_Win32>
-			<CfgParent>Cfg_1</CfgParent>
-			<Cfg_1>true</Cfg_1>
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
@@ -38,9 +28,9 @@
 			<AllPackageLibs>rtl.lib;fmxobj.lib;fmx.lib;xmlrtl.lib</AllPackageLibs>
 			<BPILibOutputDir>$(rr_root)\installs\xe2\lib</BPILibOutputDir>
 			<Multithreaded>true</Multithreaded>
-			<PackageImports>bindcompfmx;fmx;rtl;dbrtl;IndySystem;DbxClientDriver;bindcomp;inetdb;DBXInterBaseDriver;xmlrtl;DbxCommonDriver;IndyProtocols;DBXMySQLDriver;dbxcds;soaprtl;bindengine;CustomIPTransport;dsnap;fmxase;IndyCore;inet;fmxobj;inetdbxpress;fmxdae;IPIndyImpl;dbexpress;$(PackageImports)</PackageImports>
+			<PackageImports>bindcompfmx.bpi;fmx.bpi;rtl.bpi;dbrtl.bpi;IndySystem.bpi;DbxClientDriver.bpi;bindcomp.bpi;inetdb.bpi;DBXInterBaseDriver.bpi;xmlrtl.bpi;DbxCommonDriver.bpi;IndyProtocols.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;soaprtl.bpi;bindengine.bpi;CustomIPTransport.bpi;dsnap.bpi;fmxase.bpi;IndyCore.bpi;inet.bpi;fmxobj.bpi;inetdbxpress.bpi;fmxdae.bpi;IPIndyImpl.bpi;dbexpress.bpi;$(PackageImports).bpi</PackageImports>
 			<_TCHARMapping>char</_TCHARMapping>
-			<ILINK_LibraryPath>..\..\src\LibStructSupport\;..\..\src\Scanner\;..\..\src\Util\;..\..\src\libstruct\;..\..\src\Solvers\;..\..\src\Util\mtrand\;..\..\src\Logger\;..\..\src\;C:\rrw\xe_2\rr_lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\src\LibStructSupport\;..\..\src\Scanner\;..\..\src\Util\;..\..\src\libstruct\;..\..\src\Solvers\;..\..\src\Util\mtrand\;..\..\src\Logger\;..\..\src\;C:\rrw\xe_2\rr_lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<IncludePath>..\..\src\LibStructSupport\;..\..\src\Scanner\;..\..\src\Util\;..\..\src\libstruct\;..\..\src\Solvers\;..\..\src\Util\mtrand\;..\..\src\Logger\;..\..\src\;C:\rrw\xe_2\rr_lib\;$(rr_root)\installs\xe2\include\sbml;$(rr_root)\installs\xe2\include;..\..\src\Util;..\..\src\LibStructSupport;..\..\src\libstruct;..\..\src\Scanner;..\..\src\Solvers;$(rr_root)\installs\xe2\include\cvode;$(rr_root)\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
 			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
 			<ProjectType>CppDynamicLibrary</ProjectType>
@@ -57,12 +47,6 @@
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Base_Win32)'!=''">
-			<ILINK_LibraryPath>C:\rrw\builds\xe2\clapack\F2CLIBS\libf2c\;C:\rrw\builds\xe2\clapack\BLAS\SRC\;C:\rrw\builds\xe2\clapack\SRC\;C:\rrw\ThirdParty\libsbml_xe\dependencies\lib\;C:\rrw\installs\xe2\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-			<PackageImports>vcldbx;frx16;Rave100VCL;vclib;inetdbbde;ibxpress;vclimg;frxDB16;fs16;vclactnband;vcldb;vcldsnap;bindcompvcl;vclie;vcltouch;bcbsmp;websnap;vclribbon;VclSmp;frxe16;fsDB16;vcl;CloudService;dsnapcon;vclx;webdsnap;bdertl;bcbie;adortl;$(PackageImports)</PackageImports>
-			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
@@ -82,43 +66,38 @@
 			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
-		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-			<UsingDelphiRTL>false</UsingDelphiRTL>
-			<LinkPackageStatics>rtl.lib;fmxobj.lib;fmx.lib;xmlrtl.lib</LinkPackageStatics>
-			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
 			<Defines>NDEBUG;$(Defines)</Defines>
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\builds\xe2\clapack\BLAS\SRC\blas.lib">
+			<LibFiles Include="..\..\builds\xe2\clapack\BLAS\SRC\blas.lib">
+				<IgnorePath>true</IgnorePath>
 				<BuildOrder>66</BuildOrder>
-				<IgnorePath>true</IgnorePath>
 			</LibFiles>
-			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\builds\xe2\clapack\F2CLIBS\libf2c\libf2c.lib">
+			<LibFiles Include="..\..\builds\xe2\clapack\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
 				<BuildOrder>67</BuildOrder>
-				<IgnorePath>true</IgnorePath>
 			</LibFiles>
-			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\builds\xe2\clapack\SRC\lapack.lib">
+			<LibFiles Include="..\..\builds\xe2\clapack\SRC\lapack.lib">
+				<IgnorePath>true</IgnorePath>
 				<BuildOrder>65</BuildOrder>
-				<IgnorePath>true</IgnorePath>
 			</LibFiles>
-			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\libsbml.lib">
+			<LibFiles Include="..\..\installs\xe2\lib\libsbml.lib">
+				<IgnorePath>true</IgnorePath>
 				<BuildOrder>67</BuildOrder>
-				<IgnorePath>true</IgnorePath>
 			</LibFiles>
-			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\sundials_cvode.lib">
+			<LibFiles Include="..\..\installs\xe2\lib\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
 				<BuildOrder>61</BuildOrder>
-				<IgnorePath>true</IgnorePath>
 			</LibFiles>
-			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\sundials_kinsol.lib">
+			<LibFiles Include="..\..\installs\xe2\lib\sundials_kinsol.lib">
+				<IgnorePath>true</IgnorePath>
 				<BuildOrder>62</BuildOrder>
-				<IgnorePath>true</IgnorePath>
 			</LibFiles>
-			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\installs\xe2\lib\sundials_nvecserial.lib">
-				<BuildOrder>63</BuildOrder>
+			<LibFiles Include="..\..\installs\xe2\lib\sundials_nvecserial.lib">
 				<IgnorePath>true</IgnorePath>
+				<BuildOrder>63</BuildOrder>
 			</LibFiles>
 			<CppCompile Include="..\..\src\LibStructSupport\rrInteropUtils.cpp">
 				<DependentOn>..\..\src\LibStructSupport\rrInteropUtils.h</DependentOn>
@@ -364,9 +343,9 @@
 				<DependentOn>..\..\src\Util\rrUtils.h</DependentOn>
 				<BuildOrder>50</BuildOrder>
 			</CppCompile>
-			<LibFiles Condition="'$(Platform)'=='Win32'" Include="..\..\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib">
-				<BuildOrder>64</BuildOrder>
+			<LibFiles Include="..\..\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib">
 				<IgnorePath>true</IgnorePath>
+				<BuildOrder>64</BuildOrder>
 			</LibFiles>
 			<CppCompile Include="RoadRunnerLib.cpp">
 				<BuildOrder>0</BuildOrder>
@@ -383,6 +362,8 @@
 				<CfgParent>Base</CfgParent>
 			</BuildConfiguration>
 		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
 			<Borland.ProjectType>CppDynamicLibrary</Borland.ProjectType>
@@ -429,6 +410,4 @@
 			</BorlandProject>
 			<ProjectFileVersion>12</ProjectFileVersion>
 		</ProjectExtensions>
-		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
-		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 	</Project>

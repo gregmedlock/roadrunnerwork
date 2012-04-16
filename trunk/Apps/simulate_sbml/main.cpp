@@ -26,16 +26,16 @@ using namespace rr;
 
 int main()
 {
-    string dataOutputFolder("C:\\rrw\\DataOutput\\XE");
+    string dataOutputFolder("C:\\rrw\\DataOutput");
 
 	SBMLModelSimulation simulation(dataOutputFolder);
 
 	string dummy;
     string logFileName;
-    int caseNumber = 19;
+    int caseNumber = 1;
     CreateTestSuiteFileNameParts(caseNumber, ".log", dummy, logFileName);
 
-    dataOutputFolder += dummy;
+    //dataOutputFolder += dummy;
     gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
     LogOutput::mLogToConsole = true;
 
@@ -51,7 +51,8 @@ int main()
         simulation.UseEngine(roadRunner);
 
         //Read SBML models.....
-        string modelFilePath("C:\\rrw\\Models\\l2v4_full");
+		string modelFilePath("C:\\rrw\\Models\\sbml-test-cases-2.0.2\\cases\\semantic");
+        //string modelFilePath("C:\\rrw\\Models\\l2v4_full");
         string modelFileName;
 
         simulation.SetCaseNumber(caseNumber);

@@ -20,14 +20,14 @@ typedef void	(__cdecl*c_void_double_doubleStar)(double, double*);
 
 class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary handles to C DLL functions
 {
-	protected:
+	public:
 	    CGenerator*					mCodeGenerator;	//There are some arrays returned that we don't know the size of..!
 
         bool						mIsInitialized;	//If all functions are found properly in the dll, this one is true
 		HINSTANCE					mDLLHandle;
 
         double*						mAmounts;		//This is the "amounts" data in the DLL. IModel also has amounts.. CONFUSING
-		double*						m_dydt;	   		//This is the "dydt" data in the DLL. IModel also has amounts.. CONFUSING
+		
 		double*						mInitY;
         double*						mY;             //Corresponds to y in IModel
 //        double*						y;             //Corresponds to y in IModel
