@@ -75,6 +75,11 @@ bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
     mNumPoints	= mSettings.mSteps + 1;
 
     //Assign absolute and relative somewhere..??
+    if (mCVode)
+    {
+//    	mCVode->absTol = settings.mAbsolute;
+//    	mCVode->relTol = settings.mRelative;
+    }
 	return true;
 }
 

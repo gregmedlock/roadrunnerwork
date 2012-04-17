@@ -41,8 +41,8 @@ CvodeInterface::CvodeInterface(IModel *aModel)
 :
 //defaultReltol(1E-12),
 //defaultAbsTol(1E-16),
-defaultReltol(1E-6),
-defaultAbsTol(1E-12),
+defaultReltol(1E-15),
+defaultAbsTol(1E-20),
 
 defaultMaxNumSteps(10000),
 //gdata(NULL),
@@ -657,30 +657,7 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
 
 			//RR_DECLSPEC int  		Run_Cvode (void *cvode_mem, double tout, N_Vector y, double *t, char *ErrMsg);
             
-			int nResult = 0;
-			//int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  _amounts, &timeEnd);//, err); // t = double *
-			double ydot[2];
-			vector<double> dCVodeArgument(2);//model->.amounts.Length + model.rateRules.Length];
-            for(int i = 0; i < min((int) dCVodeArgument.size(), 2); i++)
-			{
-			dCVodeArgument[i] =  Cvode_GetVector (_amounts, i);
-			}
-
-			model->evalModel(timeStart, dCVodeArgument);
-			dCVodeArgument.clear();
-
-			for(u_int i = 0 ; i < model->GetdYdT().size(); i++) {
-    			//dCVodeArgument.push_back(model->GetdYdT().at(i));
-				dCVodeArgument.push_back( model->m_dydt[i]);
-			}
-			for (int i=0; i<2; i++) {
-				Cvode_SetVector(_amounts, i, Cvode_GetVector (_amounts, i) + dCVodeArgument[i]*hstep);
-				double x1 = Cvode_GetVector (_amounts, i);
-				Log(lInfo)<<"====================================\t"<<x1<<endl;
-			}			
-			timeEnd = tout;
-			//timeEnd = timeEnd + hstep;
-
+			int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  _amounts, &timeEnd);//, err); // t = double *
 
             if (nResult == CV_ROOT_RETURN && followEvents)
             {

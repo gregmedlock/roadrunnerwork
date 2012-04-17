@@ -67,7 +67,7 @@ int main()
         }
 
         //Then read settings file if it exists..
-        string settingsOveride("C:\\rrw\\Models\\settings_override.txt");
+        string settingsOveride("");//C:\\rrw\\Models\\settings_override.txt");
 		if(!simulation.LoadSettings(settingsOveride))
         {
         	Log(lError)<<"Failed loading SBML model settings";
