@@ -437,7 +437,8 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
 {
     IModel *model = CvodeInterface::model;
     ModelState oldState(*model);
-    int size = model->amounts.size() + model->rateRules.size();
+//    int size = model->amounts.size() + model->rateRules.size();
+    int size = model->getNumIndependentVariables() + model->rateRules.size();
 	vector<double> dCVodeArgument(size);//model->.amounts.Length + model.rateRules.Length];
 
 //    Marshal.Copy(y, dCVodeArgument, 0, Math.Min(n, dCVodeArgument.Length));
@@ -1012,10 +1013,11 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
         Cvode_SetVector((N_Vector) _amounts, k, dCurrentValues[k]);
     }
 
-    for (int k = 0; k < numIndependentVariables; k++)
-    {
-        Cvode_SetVector((N_Vector) _amounts, k + numAdditionalRules, model->amounts[k]);
-    }
+//Todo: enable this
+//    for (int k = 0; k < numIndependentVariables; k++)
+//    {
+//        Cvode_SetVector((N_Vector) _amounts, k + numAdditionalRules, model->amounts[k]);
+//    }
 
     CVReInit(cvodeMem, timeEnd, _amounts, relTol, abstolArray);
 //    assignmentTimes.Sort();	//Todo: enable sorting. somehow
@@ -1034,9 +1036,10 @@ void CvodeInterface::AssignResultsToModel()
 
     for (int i = 0; i < numIndependentVariables; i++) //
     {
-//        model->amounts[i] = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
 		double val = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
-        model->amounts[i] = (val);
+		//Todo: Here is the culprit!! storing the results in amounts instead of mAmounts caused the problem
+        model->mAmounts[i] = (val);
+        //model->amounts[i] = (val);
 		Log(lDebug)<<"Amount "<<setprecision(16)<<val;
 	}
 
@@ -1064,7 +1067,8 @@ void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
     {
         if (oModel->GetAmounts(i) > 0 && oModel->GetAmounts(i)/1000.0 < dMin)	//Todo: was calling oModel->amounts[i]  is this in fact GetAmountsForSpeciesNr(i) ??
         {
-        	dMin = oModel->amounts[i]/1000.0;
+//        	dMin = oModel->amounts[i]/1000.0;
+        	dMin = oModel->mAmounts[i]/1000.0;
         }
     }
 
@@ -1154,7 +1158,11 @@ vector<double> CvodeInterface::BuildEvalArgument()
     vector<double> dResult;
     vector<double> dCurrentValues = model->GetCurrentValues();
     dResult = dCurrentValues;
-    dResult.insert(dResult.end(), model->amounts.begin(), model->amounts.end());
+//    dResult.insert(dResult.end(), model->amounts.begin(), model->amounts.end());
+    for(int i = 0; i < model->getNumIndependentVariables(); i++)
+    {
+    	dResult.push_back(model->mAmounts[i]);
+    }
     Log(lDebug4)<<"Size of dResult in BuildEvalArgument: "<<dResult.size();
     return dResult;
 }

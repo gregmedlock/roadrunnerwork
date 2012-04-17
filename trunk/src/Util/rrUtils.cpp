@@ -83,4 +83,38 @@ void CreateTestSuiteFileNameParts(int caseNr, const string& postFixPart, string&
     modelFilePath = modelFilePath + "\\" + modelSubPath.str();
     modelName =  modelFileName.str();
 }
+
+bool CopyCArrayToStdVector(double* src, vector<double>& dest, int size)
+{
+	if(!src)
+	{
+		Log(lError)<<"Tried to copy from NULL vector";
+		return false;
+	}
+
+	dest.resize(size);
+	for(int i = 0; i < size; i++)
+	{
+		dest[i] = src[i];
+	}
+	return true;
 }
+
+double*	CreateCVectorFromStdVector(const vector<double>& vec)
+{
+    double* avec = new double[vec.size()];
+    if(!avec)
+    {
+		Log(lError)<<"Failed to allocate c vector";
+    	return NULL;
+    }
+
+    for(int i = 0; i < vec.size(); i++)
+    {
+          avec[i] = vec[i];
+    }
+    return avec;
+}
+
+
+}//end of namespace

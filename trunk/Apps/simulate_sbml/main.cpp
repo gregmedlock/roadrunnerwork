@@ -59,7 +59,7 @@ int main()
         //The following will load and compile and simulate the sbml model in the file
         simulation.SetModelFilePath(modelFilePath);
         simulation.SetModelFileName(modelFileName);
-		simulation.CompileIfDllExists(false);
+		simulation.CompileIfDllExists(true);
         //First load the model
 		if(!simulation.LoadModel())
         {

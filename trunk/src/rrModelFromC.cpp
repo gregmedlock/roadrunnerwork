@@ -34,7 +34,7 @@ void ModelFromC::LoadData()
 	CopyDblArray(mInitY, 		init_y, 		mCodeGenerator->GetNumberOfFloatingSpecies());
 	CopyDblArray(mY, 			y, 				mCodeGenerator->GetNumberOfFloatingSpecies());
 	CopyDblArray(m_dydt, 		dydt, 			mCodeGenerator->GetNumberOfFloatingSpecies());
-	CopyDblArray(mAmounts, 		amounts, 		mCodeGenerator->GetNumberOfFloatingSpecies());
+//	CopyDblArray(mAmounts, 		amounts, 		mCodeGenerator->GetNumberOfFloatingSpecies());
 	CopyDblArray(mRates, 		rates, 			mCodeGenerator->GetNumberOfReactions());
 }
 

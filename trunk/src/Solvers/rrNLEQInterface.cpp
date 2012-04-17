@@ -441,9 +441,11 @@ double NLEQInterface::ComputeSumsOfSquares()
     dTemp = model->rateRules;//model->rateRules.CopyTo(dTemp, 0);
 
     //model->amounts.CopyTo(dTemp, model->rateRules.Length);
-    for(int i = 0; i < model->amounts.size(); i++)
+//    for(int i = 0; i < model->amounts.size(); i++)
+    for(int i = 0; i < model->getNumIndependentVariables(); i++)
     {
-		dTemp.push_back(model->amounts[i]);
+//		dTemp.push_back(model->amounts[i]);
+		dTemp.push_back(model->mAmounts[i]);
     }
 
     model->evalModel(0.0, dTemp);

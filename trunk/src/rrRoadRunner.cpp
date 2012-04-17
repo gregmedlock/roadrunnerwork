@@ -60,6 +60,11 @@ RoadRunner::~RoadRunner()
 	delete mModel;
 	delete mCVode;
 	delete mCompiler;
+    if(mModelDllHandle)
+    {
+    	//Unload the DLL
+        FreeLibrary(mModelDllHandle);
+    }
 }
 
 bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
@@ -158,8 +163,8 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 	switch (record.selectionType)
 	{
 		case TSelectionType::clFloatingSpecies:
-//			dResult = mModel->getConcentration(record.index);
-			dResult = mModel->amounts[record.index];			//Todo: something is going on here...
+			dResult = mModel->getConcentration(record.index);
+//			dResult = mModel->amounts[record.index];			//Todo: something is going on here...
 		break;
 
 		case TSelectionType::clBoundarySpecies:
@@ -192,7 +197,8 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 		break;
 
 		case TSelectionType::clFloatingAmount:
-			dResult = mModel->amounts[record.index];
+			//dResult = mModel->amounts[record.index];//Todo: howis this working?
+            dResult = mModel->mAmounts[record.index];
 		break;
 
 		case TSelectionType::clBoundaryAmount:
@@ -281,7 +287,8 @@ vector<double> RoadRunner::BuildModelEvalArgument()
 
 	for(int i = 0; i < mModel->rateRules.size(); i++)
 	{
-		dResult.push_back(mModel->amounts[i]);
+//		dResult.push_back(mModel->amounts[i]);
+		dResult.push_back(mModel->mAmounts[i]);
 	}
 
 	return dResult;
@@ -491,25 +498,25 @@ bool RoadRunner::loadSBML(const string& sbml)
 		compile = false;
     }
 
-    if(compile && GenerateAndCompileModel())
+    if(compile)
     {
-    	//Load the DLL
-        mModelDllHandle = LoadDLL(mCompiler->GetDLLName());
-
-		//Now create the Model using the compiled DLL
-    	mModel = CreateModel();
-
-        if(!mModel)
+	    if(!GenerateAndCompileModel())
         {
-            Log(lError)<<"Failed to create ModelFromC";
-            return false;
+        	return false;
         }
     }
-    else
+
+    //Load the DLL
+    mModelDllHandle = LoadDLL(dllName);
+
+    //Now create the Model using the compiled DLL
+    mModel = CreateModel();
+
+    if(!mModel)
     {
-        mModel 		= NULL;
         modelLoaded = false;
-        Log(lError)<<"Failed to compile model..";
+        Log(lError)<<"Failed to create ModelFromC";
+        return false;
     }
 
 	//Finally intitilaize the model..
@@ -518,7 +525,6 @@ bool RoadRunner::loadSBML(const string& sbml)
         Log(lError)<<"Failed Initializing C Model";
         return false;
     }
-
 
 //        _L = mStructAnalysis.GetLinkMatrix();
 //        _L0 = StructAnalysis.GetL0Matrix();
@@ -783,7 +789,11 @@ double RoadRunner::steadyState()
 //            steadyStateSolver = new KinSolveInterface(mModel);
 		}
 		//oneStep(0.0,0.05);
-		double ss = steadyStateSolver->solve(mModel->amounts);
+        //Get a std vector for the solver
+        vector<double> someAmounts;
+        CopyCArrayToStdVector(mModel->mAmounts, someAmounts, mModel->getNumIndependentVariables());
+
+		double ss = steadyStateSolver->solve(someAmounts);//mModel->amounts);
 		mModel->convertToConcentrations();
 		return ss;
 	}
