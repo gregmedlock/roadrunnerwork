@@ -40,10 +40,10 @@ void LogOutput::Output(const string& msg, const LogLevel& /*lvl*/)
     //Log to file, always..
 	gLog.write(msg.c_str());
 
-    if(mLogToConsole == true) 	//Default is standard error
+    if(mLogToConsole == true)
     {
-		fprintf(stderr, "%s", msg.c_str());
-	    fflush(stderr);
+		fprintf(stdout, "%s", msg.c_str());
+	    fflush(stdout);
     }
 }
 
