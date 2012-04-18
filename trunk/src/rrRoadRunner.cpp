@@ -336,7 +336,7 @@ DoubleMatrix RoadRunner::runSimulation()
 	double tout = mTimeStart;
 
 	//The simulation is done here..
-	Log(lInfo)<<"Will run the OneStep function "<<mNumPoints<<" times";
+	Log(lDebug)<<"Will run the OneStep function "<<mNumPoints<<" times";
 	for (int i = 1; i < mNumPoints; i++)
 	{
 		Log(lDebug3)<<"Step "<<i;
@@ -346,7 +346,7 @@ DoubleMatrix RoadRunner::runSimulation()
 		//Log(lDebug)<<tout<<tab<
 	}
 
-	Log(lInfo)<<"Result: (point, time, value)";
+	Log(lDebug)<<"Result: (point, time, value)";
 	for (int i = 0; i < mNumPoints; i++)
 	{
 		Log(lDebug5)<<i<<tab<<results(i,0)<<tab<<setprecision(16)<<results(i,1);
@@ -590,12 +590,12 @@ bool RoadRunner::GenerateAndCompileModel()
      //Compile the model
     if(mCompiler->CompileC_DLL(codeGen->GetSourceCodeFileName()))
     {
-    	Log(lError)<<"The DLL ("<<mCompiler->GetDLLName()<<") was created";
+    	Log(lDebug)<<"The DLL ("<<mCompiler->GetDLLName()<<") was created";
     	return true;
     }
     else
     {
-    	Log(lError)<<"Failed compiling DLL ("<<mCompiler->GetDLLName()<<")";
+    	Log(lError)<<"Failed compiling SBML model dll ("<<mCompiler->GetDLLName()<<")";
         return false;
     }
 }

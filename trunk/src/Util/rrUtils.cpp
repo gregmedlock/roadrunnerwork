@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include <io.h>
+#include <dir.h>
 #include <algorithm>
 #include <iostream>
 #include <conio.h>
@@ -82,6 +83,24 @@ void CreateTestSuiteFileNameParts(int caseNr, const string& postFixPart, string&
     modelFileName<<setfill('0')<<setw(5)<<caseNr<<postFixPart;
     modelFilePath = modelFilePath + "\\" + modelSubPath.str();
     modelName =  modelFileName.str();
+}
+
+string GetTestSuiteSubFolderName(int caseNr)
+{
+	stringstream modelSubPath;
+    modelSubPath<<setfill('0')<<setw(5)<<caseNr;		//create the "00023" subfolder format
+    return modelSubPath.str();
+}
+
+bool CreateFolder(const string& folder)
+{
+	if(FileExists(folder))
+    {
+    	return true;
+    }
+
+	int res = mkdir(folder.c_str());
+	return (res==0) ? true : false;
 }
 
 bool CopyCArrayToStdVector(double* src, vector<double>& dest, int size)

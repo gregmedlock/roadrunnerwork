@@ -27,30 +27,34 @@ using namespace rr;
 int main()
 {
     string dataOutputFolder("C:\\rrw\\DataOutput\\XE");
-
-	SBMLModelSimulation simulation(dataOutputFolder);
-
-	string dummy;
+    string dummy;
     string logFileName;
-    int caseNumber = 1;
+    int caseNumber = 3;
     CreateTestSuiteFileNameParts(caseNumber, ".log", dummy, logFileName);
-
-    //dataOutputFolder += dummy;
-    gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
     LogOutput::mLogToConsole = true;
-
-    gLog.SetCutOffLogLevel(lDebug3);
-
-    Log(lDebug4)<<"Logs are going to "<<gLog.GetLogFileName();
-	RoadRunner *roadRunner = NULL;
     try
     {
+        //Create subfolder for data output
+        dataOutputFolder = JoinPath(dataOutputFolder, GetTestSuiteSubFolderName(caseNumber));
+
+        if(!CreateFolder(dataOutputFolder))
+        {
+            throw(Exception("Failed creating output folder for data output"));
+        }
+
+        gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
+	    Log(lInfo)<<"Logs are going to "<<gLog.GetLogFileName();
+	    gLog.SetCutOffLogLevel(lInfo);
+
+        SBMLModelSimulation simulation(dataOutputFolder);
+        //dataOutputFolder += dummy;
+        RoadRunner *roadRunner = NULL;
         roadRunner = new RoadRunner;
         roadRunner->Reset();
         simulation.UseEngine(roadRunner);
 
         //Read SBML models.....
-		string modelFilePath("C:\\rrw\\Models\\sbml-test-cases-2.0.2\\cases\\semantic");
+        string modelFilePath("C:\\rrw\\Models\\sbml-test-cases-2.0.2\\cases\\semantic");
         string modelFileName;
 
         simulation.SetCaseNumber(caseNumber);
@@ -59,51 +63,51 @@ int main()
         //The following will load and compile and simulate the sbml model in the file
         simulation.SetModelFilePath(modelFilePath);
         simulation.SetModelFileName(modelFileName);
-		simulation.CompileIfDllExists(true);
+        simulation.CompileIfDllExists(true);
+
         //First load the model
-		if(!simulation.LoadModel())
+        if(!simulation.LoadModel())
         {
-        	Log(lError)<<"Failed loading SBML model";
+            Log(lError)<<"Failed loading SBML model";
         }
 
         //Then read settings file if it exists..
         string settingsOveride("");//C:\\rrw\\Models\\settings_override.txt");
-		if(!simulation.LoadSettings(settingsOveride))
+        if(!simulation.LoadSettings(settingsOveride))
         {
-        	Log(lError)<<"Failed loading SBML model settings";
+            Log(lError)<<"Failed loading SBML model settings";
         }
 
         //Then Simulate model
-		if(!simulation.Run())
+        if(!simulation.Run())
         {
-        	Log(lError)<<"Failed running simulation";
+            Log(lError)<<"Failed running simulation";
             throw("Failed running simulation");
         }
 
         //Write result
         if(!simulation.SaveResult())
         {
-        	//Failed to save data
+            //Failed to save data
         }
 
         if(!simulation.LoadReferenceData())
         {
-	        Log(lError)<<"Failed loading reference data";
+            Log(lError)<<"Failed loading reference data";
         }
 
 
         simulation.CreateErrorData();
         simulation.SaveAllData();
+	    delete roadRunner;
     }
-    catch(Exception& ex)
-    {
-        Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
-    }
+	catch(Exception& ex)
+	{
+    	Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
+	}
 
-    delete roadRunner;
 
-  	//-------------------------------------
-    Pause();
+     Pause();
 	return 0;
 }
 

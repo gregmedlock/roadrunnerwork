@@ -1078,7 +1078,7 @@ void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
 
     if (bAssignNewTolerances)
     {
-        Log(lInfo)<<Format("Set tolerance to: {0:G}", dMin);
+        Log(lDebug)<<"Set tolerance to: "<<setprecision(16)<< dMin;
 	}
 }
 

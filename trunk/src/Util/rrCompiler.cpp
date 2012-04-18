@@ -46,10 +46,11 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 	//-rdynamic : Export global symbols to the dynamic linker
 	//-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied. Note that the generated code is slower and bigger in this case.
     stringstream exeCmd;
-    exeCmd<<"tcc -g -vvv -shared -rdynamic "<<sourceFileName<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL";
 
-    Log(lInfo)<<"\n================ Compiling the DLL =============";
-    Log(lInfo)<<"\nExecuting: "<<exeCmd.str();
+    exeCmd<<"tcc -g -shared -rdynamic "<<sourceFileName<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL";
+
+    Log(lDebug)<<"Compiling model..";
+    Log(lDebug)<<"\nExecuting: "<<exeCmd.str();
 
     if(!CreateDLL(exeCmd.str()))
     {
@@ -89,7 +90,7 @@ bool Compiler::CreateDLL(const string& cmdLine)
         &pi )                           // Pointer to PROCESS_INFORMATION structure
     )
     {
-        printf( "CreateProcess failed (%d).\n", GetLastError() );
+        Log(lError)<<"CreateProcess failed: "<<GetLastError();
         return false;
     }
 
@@ -117,7 +118,7 @@ HINSTANCE LoadDLL(const string& dll)
     GetModuleFileNameA((HMODULE)hLib, (LPSTR) mod, MAX_MODULE);
     string name(mod);
 
-    Log(lError) << "Library loaded: " <<name.c_str() << endl;
+    Log(lDebug) << "DLL Library loaded: " <<name.c_str() << endl;
 	return hLib;
 }
 

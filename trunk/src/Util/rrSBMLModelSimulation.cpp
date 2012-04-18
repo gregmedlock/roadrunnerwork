@@ -80,7 +80,7 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
             }
             else
             {
-                Log(lWarning)<<"Badly formatted line in settings file:"<<lines[i];
+                Log(lDebug)<<"Badly formatted, or empty line in settings file:"<<lines[i];
             }
         }
 
@@ -311,7 +311,7 @@ bool SBMLModelSimulation::SaveResult()
 	string resultFileName(JoinPath(mDataOutputFolder, mModelFileName));
 	resultFileName = ChangeFileExtensionTo(resultFileName, "result.dat");
 
-	Log(lInfo)<<"Saving simulation result to file: "<<resultFileName;
+	Log(lInfo)<<"Saving result to file: "<<resultFileName;
     mResultData = mEngine->GetSimulationResult();
 
     ofstream fs(resultFileName.c_str());

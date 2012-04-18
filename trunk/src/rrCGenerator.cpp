@@ -63,7 +63,7 @@ bool CGenerator::SaveSourceCodeToFolder(const string& folder)
         throw(Exception("Failed to open file:" + mHeaderCodeFileName));
     }
     outFile<<GetHeaderCode();
-    Log(lInfo)<<"Wrote header to file: "<<mHeaderCodeFileName;
+    Log(lDebug)<<"Wrote header to file: "<<mHeaderCodeFileName;
     outFile.close();
 
     mSourceCodeFileName = ChangeFileExtensionTo(mHeaderCodeFileName, ".c");
@@ -78,7 +78,7 @@ bool CGenerator::SaveSourceCodeToFolder(const string& folder)
     outFile<<"#include \""<<headerFName<<"\"\n"<<endl;
     outFile<<GetSourceCode();
     outFile.close();
-    Log(lInfo)<<"Wrote source code to file: "<<mSourceCodeFileName;
+    Log(lDebug)<<"Wrote source code to file: "<<mSourceCodeFileName;
 
 	return true;
 }
@@ -109,7 +109,7 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     	return "";
     }
 
-    Log(lInfo)<<"Model name is "<<mModelName;
+    Log(lInfo)<<"SBML model name is "<<mModelName;
     mNumReactions = mNOM.getNumReactions();
 
     Log(lDebug3)<<"Number of reactions:"<<mNumReactions;
@@ -1312,7 +1312,7 @@ void CGenerator::WriteEventAssignments(StringBuilder& ignore, const int& numReac
 
 
     mSource<<"void InitializeDelays()\n{\n";
-	mSource<<tab<<"printf(\"At line %d in function %s \\n\",__LINE__, __FUNCTION__);"<<endl;
+	//mSource<<tab<<"printf(\"At line %d in function %s \\n\",__LINE__, __FUNCTION__);"<<endl;
 
     for (int i = 0; i < delays.size(); i++)
     {

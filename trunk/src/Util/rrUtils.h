@@ -18,6 +18,8 @@ void 		    RR_DECLSPEC Pause(bool doIt = true);
 bool            RR_DECLSPEC	FileExists(const string& fileN);
 vector<string> 	RR_DECLSPEC	GetLinesInFile(const string& fName);
 void 			RR_DECLSPEC CreateTestSuiteFileNameParts(int caseNr, const string& postFixPart, string& FilePath, string& modelFileName);
+string 			RR_DECLSPEC GetTestSuiteSubFolderName(int caseNr);
+bool 			RR_DECLSPEC CreateFolder(const string& path);
 bool 			RR_DECLSPEC CopyCArrayToStdVector(double* src, vector<double>& dest, int size);
 double*			RR_DECLSPEC CreateCVectorFromStdVector(const vector<double>& vec);
 }
