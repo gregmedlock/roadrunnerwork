@@ -19,23 +19,57 @@
 #include "rrUtils.h"
 #include "rrStringUtils.h"
 #include "rrSBMLModelSimulation.h"
+#include "rrGetOptions.h"
+#include "CommandLineParameters.h"
 //---------------------------------------------------------------------------
-
 using namespace std;
 using namespace rr;
+string Usage(const string& prg);
 
-int main()
+int main(int argc, char * argv[])
 {
+
+	if(argc < 2)
+	{
+		cout<<Usage(argv[0])<<endl;
+		exit(0);
+	}
+
+    Paras paras;
+    int c;
+	while ((c = GetOptions(argc, argv, ("n:"))) != -1)
+	{
+		switch (c)
+		{
+			case ('n'): paras.CaseNumber  				= ToInt(optarg);       	break;
+//			case ('v'): paras.mVerboseMode 				= true; 				break;
+			case ('?'):
+                {
+	                cout<<Usage(argv[0])<<endl;
+				}
+			default:
+                {
+                    string str = argv[optind-1];
+                    if(str != "-?")
+                    {
+                        cout<<"*** Illegal option:\t"<<argv[optind-1]<<" ***\n"<<endl;
+                    }
+                    exit(-1);
+                }
+            break;
+		}
+	}
+
     string dataOutputFolder("C:\\rrw\\DataOutput\\XE");
     string dummy;
     string logFileName;
-    int caseNumber = 3;
-    CreateTestSuiteFileNameParts(caseNumber, ".log", dummy, logFileName);
+
+    CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
     LogOutput::mLogToConsole = true;
     try
     {
         //Create subfolder for data output
-        dataOutputFolder = JoinPath(dataOutputFolder, GetTestSuiteSubFolderName(caseNumber));
+        dataOutputFolder = JoinPath(dataOutputFolder, GetTestSuiteSubFolderName(paras.CaseNumber));
 
         if(!CreateFolder(dataOutputFolder))
         {
@@ -57,8 +91,8 @@ int main()
         string modelFilePath("C:\\rrw\\Models\\sbml-test-cases-2.0.2\\cases\\semantic");
         string modelFileName;
 
-        simulation.SetCaseNumber(caseNumber);
-        CreateTestSuiteFileNameParts(caseNumber, "-sbml-l2v4.xml", modelFilePath, modelFileName);
+        simulation.SetCaseNumber(paras.CaseNumber);
+        CreateTestSuiteFileNameParts(paras.CaseNumber, "-sbml-l2v4.xml", modelFilePath, modelFileName);
 
         //The following will load and compile and simulate the sbml model in the file
         simulation.SetModelFilePath(modelFilePath);
@@ -107,8 +141,21 @@ int main()
 	}
 
 
-     Pause();
+    Pause();
 	return 0;
+}
+string Usage(const string& prg)
+{
+    stringstream usage;
+    usage << "\nUSAGE for "<<prg<<": (options and parameters)\n\n";
+    usage<<left;
+    usage<<setfill('.');
+    usage<<setw(25)<<"-n\"number\" "    <<" TestSuite number\n";
+    usage<<setw(25)<<"-v"                <<" Verbose mode. Ouputs information during program execution\n";
+    usage<<setw(25)<<"-? "               <<" Shows the help screen.\n\n";
+
+    usage<<"\nSystems Biology, UW 2012\n";
+    return usage.str();
 }
 
 
