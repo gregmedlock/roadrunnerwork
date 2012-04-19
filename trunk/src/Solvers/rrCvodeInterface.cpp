@@ -470,6 +470,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
     {
 		msg<<setw(10)<<left<<setprecision (18)<<dCVodeArgument[i];
     }
+
     Log(lDebug5)<<msg.str();
 
 //    Marshal.Copy(dCVodeArgument, 0, ydot, Math.Min(dCVodeArgument.Length, n));

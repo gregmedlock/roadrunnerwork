@@ -9,6 +9,7 @@ class Paras
         								Paras();
         virtual 		               ~Paras(){}
 		int								CaseNumber;
+        double							ErrorThreshold;
 
 };
 

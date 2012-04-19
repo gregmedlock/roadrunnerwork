@@ -8,7 +8,8 @@
 
 Paras::Paras()
 :
-CaseNumber(1)
+CaseNumber(1),
+ErrorThreshold(1.e-6)
 {
 
 }

@@ -22,7 +22,8 @@ mModelFilePath(modelFilePath),
 mModelFileName(modelFileName),
 mDataOutputFolder(dataOutputFolder),
 mCurrentCaseNumber(-1),
-mCompileIfDllExists(true)
+mCompileIfDllExists(true),
+mSimulationError(0)			//No error if not calculated..
 {
 	//make sure the output folder exists..
 	mReferenceData.SetName("ReferenceData");
@@ -168,13 +169,18 @@ bool SBMLModelSimulation::CreateErrorData()
 
     mErrorData.Allocate(mResultData.GetNrOfRows(), mResultData.GetNrOfCols());
 
-    //First calculate sum of squares
+
     for(int row = 0; row < mResultData.GetNrOfRows(); row++)
     {
     	for(int col = 0; col < mResultData.GetNrOfCols(); col++)
         {
 			double error = fabs(mResultData(row, col) - mReferenceData(row,col));
             mErrorData(row, col) = error;
+
+            if(error > mSimulationError)
+            {
+				mSimulationError = error;
+            }
         }
     }
 	return true;
@@ -336,7 +342,10 @@ string SBMLModelSimulation::GetReferenceDataFileNameForCase(int caseNr)
 	return name.str();
 
 }
-
+double SBMLModelSimulation::GetSimulationError()
+{
+	return mSimulationError;
+}
 } //end of namespace
 
 

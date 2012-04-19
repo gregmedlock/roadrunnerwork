@@ -256,6 +256,10 @@
 				<DependentOn>..\..\src\Util\rrException.h</DependentOn>
 				<BuildOrder>22</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\src\Util\rrGetOptions.cpp">
+				<DependentOn>..\..\src\Util\rrGetOptions.h</DependentOn>
+				<BuildOrder>67</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\Util\rrHashTable.cpp">
 				<DependentOn>..\..\src\Util\rrHashTable.h</DependentOn>
 				<BuildOrder>46</BuildOrder>

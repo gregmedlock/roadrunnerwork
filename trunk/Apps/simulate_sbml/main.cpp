@@ -60,12 +60,14 @@ int main(int argc, char * argv[])
 		}
 	}
 
+    paras.CaseNumber = 4;
     string dataOutputFolder("C:\\rrw\\DataOutput\\XE");
     string dummy;
     string logFileName;
 
     CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
     LogOutput::mLogToConsole = true;
+
     try
     {
         //Create subfolder for data output
@@ -76,11 +78,12 @@ int main(int argc, char * argv[])
             throw(Exception("Failed creating output folder for data output"));
         }
 
-        gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
-	    Log(lInfo)<<"Logs are going to "<<gLog.GetLogFileName();
-	    gLog.SetCutOffLogLevel(lInfo);
+//        gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
+	    gLog.SetCutOffLogLevel(lDebug5);
+	    Log(lDebug)<<"Logs are going to "<<gLog.GetLogFileName();
 
         SBMLModelSimulation simulation(dataOutputFolder);
+
         //dataOutputFolder += dummy;
         RoadRunner *roadRunner = NULL;
         roadRunner = new RoadRunner;
@@ -132,6 +135,13 @@ int main(int argc, char * argv[])
 
 
         simulation.CreateErrorData();
+
+        //Check error data.. if an error in the set is larger than threshold, signal an error
+        if(simulation.GetSimulationError() > paras.ErrorThreshold)
+        {
+        	Log(lError)<<"********** Error larger than "<<paras.ErrorThreshold;
+        }
+
         simulation.SaveAllData();
 	    delete roadRunner;
     }
@@ -139,11 +149,10 @@ int main(int argc, char * argv[])
 	{
     	Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
 	}
-
-
-    Pause();
+	Log(lInfo)<<"Done";
 	return 0;
 }
+
 string Usage(const string& prg)
 {
     stringstream usage;

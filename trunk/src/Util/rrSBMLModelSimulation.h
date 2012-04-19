@@ -29,6 +29,7 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
 		string				    GetSettingsFileNameForCase(int sim_case);
 		string 					GetReferenceDataFileNameForCase(int caseNr);
         bool					mCompileIfDllExists;
+        double					mSimulationError;
 
     public:
 						        SBMLModelSimulation(const string& dataOutputFolder = "", const string& modelFilePath = "", const string& modelFileName = "");
@@ -50,7 +51,7 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
         bool					SaveAllData();
         void					CompileIfDllExists(const bool& doIt){mCompileIfDllExists = doIt;}
         bool					CompileIfDllExists(){return mCompileIfDllExists;}
-
+		double					GetSimulationError();
 
 };
 
