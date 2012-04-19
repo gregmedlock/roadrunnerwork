@@ -47,7 +47,7 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 	//-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied. Note that the generated code is slower and bigger in this case.
     stringstream exeCmd;
 
-    exeCmd<<"tcc -g -shared -rdynamic "<<sourceFileName<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL";
+    exeCmd<<"tcc -g -shared -rdynamic rrSupportFunctions.c rrMathSupport.c"<<sourceFileName<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL -Ic:\\rrw\\c_src";
 
     Log(lDebug3)<<"Compiling model..";
     Log(lDebug5)<<"\nExecuting: "<<exeCmd.str();

@@ -63,7 +63,7 @@ int main(int argc, char * argv[])
 	}
 
     gLog.SetCutOffLogLevel(IntToLogLevel(paras.VerboseMode));
-    paras.CaseNumber = 1;
+    paras.CaseNumber = 26;
     string dataOutputFolder("C:\\rrw\\DataOutput\\XE");
     string dummy;
     string logFileName;

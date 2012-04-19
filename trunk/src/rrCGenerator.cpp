@@ -237,11 +237,8 @@ void CGenerator::WriteClassHeader(StringBuilder& ignore)
     mHeader<<"#define modelH"<<endl;
     mHeader<<"#include <stdio.h>"<<endl;
     mHeader<<"#include <stdbool.h>"<<endl;
-    mHeader<<"\n#if defined(BUILD_MODEL_DLL)\n"
-    	<<"#define D_S __declspec(dllexport)\n"
-        <<"#else\n"
-        <<"#define D_S __declspec(dllimport)\n"
-        <<"#endif\n";
+    mHeader<<"#include \"rrExporter.h\"\t 			//Export Stuff."<<endl;
+    mHeader<<"#include \"rrSupportFunctions.h\"\t 	//Supportfunctions for event handling.."<<endl;
 
     mHeader<<Append("//************************************************************************** " + NL());
     mHeader<<Format("\t// Model Symbol Mappings{0}{0}", NL());

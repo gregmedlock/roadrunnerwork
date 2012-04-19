@@ -32,8 +32,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\;..\..\src\Util\;..\..\src\Util\mtrand\;..\..\src\Logger\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\src\libstruct\;..\..\src\LibStructSupport\;..\..\installs\xe\include\sbml;..\..\installs\xe\include;..\..\installs\xe\include\cvode;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\builds\xe\clapack_32\F2CLIBS\libf2c\;..\..\builds\xe\clapack_32\BLAS\SRC\;..\..\builds\xe\clapack_32\SRC\;..\..\installs\xe\lib\;..\..\src\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\src\LibStructSupport\;..\..\src\Util\;..\..\src\Logger\;..\..\src\libstruct\;..\..\src\Util\mtrand\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\installs\xe\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\c_src\;..\..\src\;..\..\src\Util\;..\..\src\Util\mtrand\;..\..\src\Logger\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\src\libstruct\;..\..\src\LibStructSupport\;..\..\installs\xe\include\sbml;..\..\installs\xe\include;..\..\installs\xe\include\cvode;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\c_src\;..\..\builds\xe\clapack_32\F2CLIBS\libf2c\;..\..\builds\xe\clapack_32\BLAS\SRC\;..\..\builds\xe\clapack_32\SRC\;..\..\installs\xe\lib\;..\..\src\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\src\LibStructSupport\;..\..\src\Util\;..\..\src\Logger\;..\..\src\libstruct\;..\..\src\Util\mtrand\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\installs\xe\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -84,6 +84,10 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>60</BuildOrder>
 			</LibFiles>
+			<CppCompile Include="..\..\c_src\rrSupportFunction.cpp">
+				<DependentOn>..\..\c_src\rrSupportFunction.h</DependentOn>
+				<BuildOrder>3</BuildOrder>
+			</CppCompile>
 			<LibFiles Include="..\..\installs\xe\lib\libsbml.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>62</BuildOrder>
@@ -151,10 +155,6 @@
 				<DependentOn>..\..\src\rrIModel.h</DependentOn>
 				<BuildOrder>8</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrMath.cpp">
-				<DependentOn>..\..\src\rrMath.h</DependentOn>
-				<BuildOrder>1</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\src\rrMisc.cpp">
 				<DependentOn>..\..\src\rrMisc.h</DependentOn>
 				<BuildOrder>58</BuildOrder>
@@ -190,10 +190,6 @@
 			<CppCompile Include="..\..\src\rrSimulationSettings.cpp">
 				<DependentOn>..\..\src\rrSimulationSettings.h</DependentOn>
 				<BuildOrder>65</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\rrSupportCode.cpp">
-				<DependentOn>..\..\src\rrSupportCode.h</DependentOn>
-				<BuildOrder>3</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\rrTComputeEventAssignmentDelegate.cpp">
 				<DependentOn>..\..\src\rrTComputeEventAssignmentDelegate.h</DependentOn>

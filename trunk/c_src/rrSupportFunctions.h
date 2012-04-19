@@ -1,33 +1,29 @@
-#ifndef rrSupportCodeH
-#define rrSupportCodeH
-#include <math.h>
-#include "rrMath.h"
+#ifndef rrSupportFunctionH
+#define rrSupportFunctionH
 #include "rrExporter.h"
+#include "rrMathSupport.h"
 
-namespace rr
-{
 // Boolean functions for event handling" + NL());
-RR_DECLSPEC double 	_gt(double a, double b);
-RR_DECLSPEC double 	_lt(double a, double b);
-RR_DECLSPEC double 	_geq(double a, double b);
-RR_DECLSPEC double 	_leq(double a, double b);
-RR_DECLSPEC double 	_eq(double a, double b);
-RR_DECLSPEC double 	_neq(double a, double b);
-//RR_DECLSPEC double 	_and(params double[] a);
-//RR_DECLSPEC bool 	_and(params bool[] a);
-//RR_DECLSPEC double 	_or(params double[] a);
-//RR_DECLSPEC bool 	_or(params bool[] a);
-RR_DECLSPEC double 	_not(double a);
-RR_DECLSPEC bool 	_not(bool a);
-//RR_DECLSPEC double 	_xor(params double[] a);
-//RR_DECLSPEC bool 	_xor(params bool[] a);
-RR_DECLSPEC int 	_factorial(const int& a);
-RR_DECLSPEC double 	_log(double a);
-RR_DECLSPEC double 	_log(double a, double b);
-RR_DECLSPEC double 	_delay(double a, double b);
-RR_DECLSPEC double 	_root(double a, double b);
-//RR_DECLSPEC double 	_piecewise(params object[] args);
-}	//namespace rr
+D_S double 	spf_gt(double a, double b);
+D_S double 	spf_lt(double a, double b);
+D_S double 	spf_geq(double a, double b);
+D_S double 	spf_leq(double a, double b);
+D_S double 	spf_eq(double a, double b);
+D_S double 	spf_neq(double a, double b);
+//D_S double 	_and(params double[] a);
+//D_S bool 	_and(params bool[] a);
+//D_S double 	_or(params double[] a);
+//D_S bool 	_or(params bool[] a);
+D_S double 	spf_not(double a);
+//D_S bool 	spf_not(bool a);
+//D_S double 	_xor(params double[] a);
+//D_S bool 	_xor(params bool[] a);
+D_S int 	spf_factorial(int a);
+D_S double 	spf_log(double a);
+//D_S double 	spf_log(double a, double b);
+D_S double 	spf_delay(double a, double b);
+D_S double 	spf_root(double a, double b);
+//D_S double 	_piecewise(params object[] args);
 
 #endif
 
