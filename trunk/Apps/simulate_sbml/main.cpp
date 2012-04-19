@@ -36,13 +36,15 @@ int main(int argc, char * argv[])
 	}
 
     Paras paras;
-    int c;
-	while ((c = GetOptions(argc, argv, ("n:"))) != -1)
+    char c;
+	while ((c = GetOptions(argc, argv, ("n:cv:"))) != -1)
 	{
 		switch (c)
 		{
 			case ('n'): paras.CaseNumber  				= ToInt(optarg);       	break;
-//			case ('v'): paras.mVerboseMode 				= true; 				break;
+			case ('v'):	paras.VerboseMode 				= ToInt(optarg) + 2;        break;
+			case ('c'): paras.OnlyCompile  				= true;	       			break;
+
 			case ('?'):
                 {
 	                cout<<Usage(argv[0])<<endl;
@@ -60,14 +62,15 @@ int main(int argc, char * argv[])
 		}
 	}
 
-    paras.CaseNumber = 4;
+    gLog.SetCutOffLogLevel(IntToLogLevel(paras.VerboseMode));
+    paras.CaseNumber = 1;
     string dataOutputFolder("C:\\rrw\\DataOutput\\XE");
     string dummy;
     string logFileName;
 
     CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
     LogOutput::mLogToConsole = true;
-
+    RoadRunner *roadRunner = NULL;
     try
     {
         //Create subfolder for data output
@@ -78,14 +81,12 @@ int main(int argc, char * argv[])
             throw(Exception("Failed creating output folder for data output"));
         }
 
-//        gLog.Init("", lDebug5, unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
-	    gLog.SetCutOffLogLevel(lDebug5);
-	    Log(lDebug)<<"Logs are going to "<<gLog.GetLogFileName();
+        gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
+	    Log(lDebug2)<<"Logs are going to "<<gLog.GetLogFileName();
 
         SBMLModelSimulation simulation(dataOutputFolder);
 
         //dataOutputFolder += dummy;
-        RoadRunner *roadRunner = NULL;
         roadRunner = new RoadRunner;
         roadRunner->Reset();
         simulation.UseEngine(roadRunner);
@@ -106,6 +107,12 @@ int main(int argc, char * argv[])
         if(!simulation.LoadModel())
         {
             Log(lError)<<"Failed loading SBML model";
+            goto end;
+        }
+
+        if(paras.OnlyCompile)
+        {
+        	goto end;
         }
 
         //Then read settings file if it exists..
@@ -143,13 +150,17 @@ int main(int argc, char * argv[])
         }
 
         simulation.SaveAllData();
-	    delete roadRunner;
+
     }
 	catch(Exception& ex)
 	{
-    	Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
+		Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
 	}
+
+    end:	//I have not used a label in 15 years!
+    delete roadRunner;
 	Log(lInfo)<<"Done";
+    Pause();
 	return 0;
 }
 

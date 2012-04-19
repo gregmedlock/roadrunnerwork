@@ -6,10 +6,4 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-Paras::Paras()
-:
-CaseNumber(1),
-ErrorThreshold(1.e-6)
-{
 
-}

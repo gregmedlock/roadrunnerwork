@@ -3236,7 +3236,7 @@ void NOMSupport::BuildSymbolTable()
     {
         Compartment *temp = mModel->getCompartment(i);
 
-        Log(lDebug)<<"Processing compartment with ID: "<<temp->getId();
+        Log(lDebug1)<<"Processing compartment with ID: "<<temp->getId();
         SBMLSymbol symbol;
         symbol.mId = temp->getId();
 
@@ -3256,7 +3256,7 @@ void NOMSupport::BuildSymbolTable()
     for (int i = 0; i < mModel->getNumParameters(); i++)
     {
         Parameter *temp = mModel->getParameter(i);
-        Log(lDebug)<<"Processing parameter with ID:"<<temp->getId();
+        Log(lDebug1)<<"Processing parameter with ID:"<<temp->getId();
         SBMLSymbol symbol;
         symbol.mId = temp->getId();
         if (temp->isSetValue())
@@ -3274,7 +3274,7 @@ void NOMSupport::BuildSymbolTable()
     for (int i = 0; i < mModel->getNumSpecies(); i++)
     {
         Species *temp = mModel->getSpecies(i);
-        Log(lDebug)<<"Processing species with ID: "<<temp->getId();
+        Log(lDebug1)<<"Processing species with ID: "<<temp->getId();
         SBMLSymbol symbol;
         symbol.mId = temp->getId();
         if (temp->isSetInitialConcentration())

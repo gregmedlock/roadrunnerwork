@@ -49,8 +49,8 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 
     exeCmd<<"tcc -g -shared -rdynamic "<<sourceFileName<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL";
 
-    Log(lDebug)<<"Compiling model..";
-    Log(lDebug)<<"\nExecuting: "<<exeCmd.str();
+    Log(lDebug3)<<"Compiling model..";
+    Log(lDebug5)<<"\nExecuting: "<<exeCmd.str();
 
     if(!CreateDLL(exeCmd.str()))
     {
@@ -118,7 +118,7 @@ HINSTANCE LoadDLL(const string& dll)
     GetModuleFileNameA((HMODULE)hLib, (LPSTR) mod, MAX_MODULE);
     string name(mod);
 
-    Log(lDebug) << "DLL Library loaded: " <<name.c_str() << endl;
+    Log(lDebug3) << "DLL Library loaded: " <<name.c_str() << endl;
 	return hLib;
 }
 

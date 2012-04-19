@@ -85,7 +85,7 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
             }
         }
 
-        Log(lDebug)<<"Settings File =============";
+        Log(lDebug3)<<"Settings File =============";
         for (it = settings.begin() ; it != settings.end(); it++ )
         {
             Log(lDebug) << (*it).first << " => " << (*it).second;
@@ -315,7 +315,7 @@ bool SBMLModelSimulation::Run()
 bool SBMLModelSimulation::SaveResult()
 {
 	string resultFileName(JoinPath(mDataOutputFolder, mModelFileName));
-	resultFileName = ChangeFileExtensionTo(resultFileName, "result.dat");
+	resultFileName = ChangeFileExtensionTo(resultFileName, ".csv");
 
 	Log(lInfo)<<"Saving result to file: "<<resultFileName;
     mResultData = mEngine->GetSimulationResult();

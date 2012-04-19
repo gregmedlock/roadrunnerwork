@@ -18,8 +18,6 @@
 #include "rrCvodeDll.h"
 
 //---------------------------------------------------------------------------
-
-
 using namespace std;
 namespace rr
 {
@@ -1018,7 +1016,7 @@ void CvodeInterface::AssignResultsToModel()
 		//Todo: Here is the culprit!! storing the results in amounts instead of mAmounts caused the problem
         model->mAmounts[i] = (val);
         //model->amounts[i] = (val);
-		Log(lDebug)<<"Amount "<<setprecision(16)<<val;
+		Log(lDebug3)<<"Amount "<<setprecision(16)<<val;
 	}
 
 	vector<double> args = BuildEvalArgument();
@@ -1079,7 +1077,7 @@ void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
 
     if (bAssignNewTolerances)
     {
-        Log(lDebug)<<"Set tolerance to: "<<setprecision(16)<< dMin;
+        Log(lDebug1)<<"Set tolerance to: "<<setprecision(16)<< dMin;
 	}
 }
 

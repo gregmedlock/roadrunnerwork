@@ -63,7 +63,7 @@ bool CGenerator::SaveSourceCodeToFolder(const string& folder)
         throw(Exception("Failed to open file:" + mHeaderCodeFileName));
     }
     outFile<<GetHeaderCode();
-    Log(lDebug)<<"Wrote header to file: "<<mHeaderCodeFileName;
+    Log(lDebug3)<<"Wrote header to file: "<<mHeaderCodeFileName;
     outFile.close();
 
     mSourceCodeFileName = ChangeFileExtensionTo(mHeaderCodeFileName, ".c");
@@ -78,7 +78,7 @@ bool CGenerator::SaveSourceCodeToFolder(const string& folder)
     outFile<<"#include \""<<headerFName<<"\"\n"<<endl;
     outFile<<GetSourceCode();
     outFile.close();
-    Log(lDebug)<<"Wrote source code to file: "<<mSourceCodeFileName;
+    Log(lDebug3)<<"Wrote source code to file: "<<mSourceCodeFileName;
 
 	return true;
 }
@@ -109,7 +109,7 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     	return "";
     }
 
-    Log(lInfo)<<"SBML model name is "<<mModelName;
+    Log(lInfo)<<"Processing model: "<<mModelName;
     mNumReactions = mNOM.getNumReactions();
 
     Log(lDebug3)<<"Number of reactions:"<<mNumReactions;
@@ -130,7 +130,7 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 	string msg;
     try
     {
-		Log(lDebug)<<"Loading sbml into StructAnalysis";
+		Log(lDebug3)<<"Loading sbml into StructAnalysis";
 	    msg = mStructAnalysis.LoadSBML(sASCII);
 	    if(!msg.size())
     	{
@@ -289,8 +289,10 @@ void CGenerator::WriteOutVariables(StringBuilder& ignore)
     mHeader.FormatArray("double",	                            "_dydt",		 		floatingSpeciesConcentrationList.size() ,  	"Vector containing rates of changes of all species   ");
     mHeader.FormatArray("double",	                            "_rates",				mNumReactions 							, 	"Vector containing the rate laws of all reactions    ");
     mHeader.FormatArray("double",	                            "_ct",					mNumDependentSpecies 					,  	"Vector containing values of all conserved sums      ");
-    mHeader.FormatArray("double",	                            "_eventTests",			mNumEvents 								, 	"Vector containing results of any event tests        ");
-    mHeader.FormatArray("//TEventDelayDelegate",	            "_eventDelay",			mNumEvents 								, 	"Array of trigger function pointers");
+    mHeader.FormatArray("double",	                            "mEventTests",			mNumEvents 								, 	"Vector containing results of any event tests        ");
+
+	mHeader<<"\ttypedef void (*TEventDelayDelegate)();"<<endl;
+    mHeader.FormatArray("TEventDelayDelegate",	 	           "mEventDelay",			mNumEvents 								, 	"Array of trigger function pointers");
     mHeader.FormatArray("bool",				  	                "_eventType",			mNumEvents								, 	"Array holding the status whether events are useValuesFromTriggerTime or not");
     mHeader.FormatArray("bool",				  	                "_eventPersistentType", mNumEvents								, 	"Array holding the status whether events are persitstent or not");
 	mHeader.FormatVariable("double",  					    	"_time");
@@ -304,16 +306,19 @@ void CGenerator::WriteOutVariables(StringBuilder& ignore)
     mHeader.FormatVariable("int",	  						    "numRules");
     mHeader.FormatVariable("int",	  						    "numEvents");
 
-    mHeader.FormatArray("char*",						        	"variableTable", 				floatingSpeciesConcentrationList.size());
-    mHeader.FormatArray("char*",						        	"boundaryTable", 				boundarySpeciesList.size());
-    mHeader.FormatArray("char*",						        	"globalParameterTable", 		globalParameterList.size());
+    mHeader.FormatArray("char*",						       	"variableTable", 				floatingSpeciesConcentrationList.size());
+    mHeader.FormatArray("char*",						       	"boundaryTable", 				boundarySpeciesList.size());
+    mHeader.FormatArray("char*",						       	"globalParameterTable", 		globalParameterList.size());
     mHeader.FormatArray("int",							        "localParameterDimensions", 	mNumReactions );
-    mHeader.FormatVariable("//TEventAssignmentDelegate",	    	"_eventAssignments","");
-    mHeader.FormatVariable("double",						    	"_eventPriorities");
-    mHeader.FormatVariable("//TComputeEventAssignmentDelegate",	"_computeEventAssignments");
-    mHeader.FormatVariable("//TPerformEventAssignmentDelegate",	"_performEventAssignments");
-    mHeader.FormatArray("bool",					            	"_eventStatusArray", 			mNumEvents);
-    mHeader.FormatArray("bool",					            	"_previousEventStatusArray", 	mNumEvents);
+	mHeader<<"\ttypedef void (*TEventAssignmentDelegate)();"<<endl;
+    mHeader.FormatVariable("TEventAssignmentDelegate",	    	"_eventAssignments","");
+    mHeader.FormatVariable("double*",						   	"_eventPriorities");
+	mHeader<<"\ttypedef void (*TComputeEventAssignmentDelegate)();"<<endl;
+    mHeader.FormatVariable("TComputeEventAssignmentDelegate",	"_computeEventAssignments");
+	mHeader<<"\ttypedef void (*TPerformEventAssignmentDelegate)();"<<endl;
+    mHeader.FormatVariable("TPerformEventAssignmentDelegate",	"_performEventAssignments");
+    mHeader.FormatArray("bool",					            	"mEventStatusArray", 			mNumEvents);
+    mHeader.FormatArray("bool",					            	"mPreviousEventStatusArray", 	mNumEvents);
 }
 
 
@@ -555,8 +560,8 @@ void CGenerator::WriteResetEvents(StringBuilder& ignore, const int& numEvents)
       mSource<<"void resetEvents()\n{";
       for (int i = 0; i < numEvents; i++)
       {
-          mSource<<Format("\n\t_eventStatusArray[{0}] = false;{1}", i, NL());
-          mSource<<Format("\t_previousEventStatusArray[{0}] = false;", i);
+          mSource<<Format("\n\tmEventStatusArray[{0}] = false;{1}", i, NL());
+          mSource<<Format("\tmPreviousEventStatusArray[{0}] = false;", i);
           if(i == numEvents -1)
           {
           	mSource<<"\n";
@@ -623,7 +628,140 @@ void CGenerator::WriteConvertToConcentrations(StringBuilder& ignore)
 }
 
 void CGenerator::WriteProperties(StringBuilder& ignore)
-{}
+{
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] y {" + NL());
+////            sb.Append("\t\tget { return _y; } " + NL());
+////            sb.Append("\t\tset { _y = value; } " + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] init_y {" + NL());
+////            sb.Append("\t\tget { return _init_y; } " + NL());
+////            sb.Append("\t\tset { _init_y = value; } " + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] amounts {" + NL());
+////            sb.Append("\t\tget { return _amounts; } " + NL());
+////            sb.Append("\t\tset { _amounts = value; } " + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] bc {" + NL());
+////            sb.Append("\t\tget { return _bc; } " + NL());
+////            sb.Append("\t\tset { _bc = value; } " + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] gp {" + NL());
+////            sb.Append("\t\tget { return _gp; } " + NL());
+////            sb.Append("\t\tset { _gp = value; } " + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] sr {" + NL());
+////            sb.Append("\t\tget { return _sr; } " + NL());
+////            sb.Append("\t\tset { _sr = value; } " + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[][] lp {" + NL());
+////            sb.Append("\t\tget { return _lp; } " + NL());
+////            sb.Append("\t\tset { _lp = value; } " + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] c {" + NL());
+////            sb.Append("\t\tget { return _c; } " + NL());
+////            sb.Append("\t\tset { _c = value; } " + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] dydt {" + NL());
+////            sb.Append("\t\tget { return _dydt; }" + NL());
+////            sb.Append("\t\tset { _dydt = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] rateRules {" + NL());
+////            sb.Append("\t\tget { return _rateRules; }" + NL());
+////            sb.Append("\t\tset { _rateRules = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] rates {" + NL());
+////            sb.Append("\t\tget { return _rates; }" + NL());
+////            sb.Append("\t\tset { _rates = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] ct {" + NL());
+////            sb.Append("\t\tget { return _ct; }" + NL());
+////            sb.Append("\t\tset { _ct = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] eventTests {" + NL());
+////            sb.Append("\t\tget { return _eventTests; }" + NL());
+////            sb.Append("\t\tset { _eventTests = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic TEventDelayDelegate[] eventDelay {" + NL());
+////            sb.Append("\t\tget { return _eventDelay; }" + NL());
+////            sb.Append("\t\tset { _eventDelay = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic bool[] eventType {" + NL());
+////            sb.Append("\t\tget { return _eventType; }" + NL());
+////            sb.Append("\t\tset { _eventType = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic bool[] eventPersistentType {" + NL());
+////            sb.Append("\t\tget { return _eventPersistentType; }" + NL());
+////            sb.Append("\t\tset { _eventPersistentType = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic bool[] eventStatusArray {" + NL());
+////            sb.Append("\t\tget { return _eventStatusArray; }" + NL());
+////            sb.Append("\t\tset { _eventStatusArray = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic bool[] previousEventStatusArray {" + NL());
+////            sb.Append("\t\tget { return _previousEventStatusArray; }" + NL());
+////            sb.Append("\t\tset { _previousEventStatusArray = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double[] eventPriorities {" + NL());
+////            sb.Append("\t\tget { return _eventPriorities; }" + NL());
+////            sb.Append("\t\tset { _eventPriorities = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic TEventAssignmentDelegate[] eventAssignments {" + NL());
+////            sb.Append("\t\tget { return _eventAssignments; }" + NL());
+////            sb.Append("\t\tset { _eventAssignments = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic TComputeEventAssignmentDelegate[] computeEventAssignments {" + NL());
+////            sb.Append("\t\tget { return _computeEventAssignments; }" + NL());
+////            sb.Append("\t\tset { _computeEventAssignments = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic TPerformEventAssignmentDelegate[] performEventAssignments {" + NL());
+////            sb.Append("\t\tget { return _performEventAssignments; }" + NL());
+////            sb.Append("\t\tset { _performEventAssignments = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+////            // ------------------------------------------------------------------------------
+////            sb.Append("\tpublic double time {" + NL());
+////            sb.Append("\t\tget { return _time; }" + NL());
+////            sb.Append("\t\tset { _time = value; }" + NL());
+////            sb.Append("\t}" + NL() + NL());
+
+}
 
 void CGenerator::WriteAccessors(StringBuilder& ignore)
 {
@@ -789,8 +927,8 @@ void CGenerator::WriteEvalInitialAssignments(StringBuilder& ignore, const int& n
     {
         Event *current = mNOM.GetModel()->getEvent(i);
         string initialTriggerValue = ToString(current->getTrigger()->getInitialValue());//.ToString().ToLowerInvariant();
-        mSource<<Append("\t_eventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
-        mSource<<Append("\t_previousEventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
+        mSource<<Append("\tmEventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
+        mSource<<Append("\tmPreviousEventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
     }
     mSource<<Append("}" + NL() + NL());
 }
@@ -1032,13 +1170,13 @@ void CGenerator::WriteEvalEvents(StringBuilder& ignore, const int& numEvents, co
         string eventString = tempList[0];
 
         eventString = substituteTerms(0, "", eventString);
-        mSource<<"\t\tpreviousEventStatusArray[" << i << "] = eventStatusArray[" << i << "];" << NL();
+        mSource<<"\t\tmPreviousEventStatusArray[" << i << "] = mEventStatusArray[" << i << "];" << NL();
         mSource<<Append("\t\tif (" + eventString + " == 1.0) {" + NL());
-        mSource<<Append("\t\t     eventStatusArray[" + ToString(i) + "] = true;" + NL());
-        mSource<<Append("\t\t     eventTests[" + ToString(i) + "] = 1;" + NL());
+        mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = true;" + NL());
+        mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = 1;" + NL());
         mSource<<Append("\t\t} else {" + NL());
-        mSource<<Append("\t\t     eventStatusArray[" + ToString(i) + "] = false;" + NL());
-        mSource<<Append("\t\t     eventTests[" + ToString(i) + "] = -1;" + NL());
+        mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = false;" + NL());
+        mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = -1;" + NL());
         mSource<<Append("\t\t}" + NL());
     }
     mSource<<Append("}" + NL() + NL());
@@ -1254,14 +1392,21 @@ void CGenerator::WriteEventAssignments(StringBuilder& ignore, const int& numReac
             delays.Add(str);
 
             mSource<<Format("\t void eventAssignment_{0} () {{1}", i, NL());
+
+            string funcName(Format("performEventAssignment_{0}(double* values)", i));
+		    mHeader.AddFunctionExport("void", funcName);
             mSource<<Format("\t\tperformEventAssignment_{0}( computeEventAssignment_{0}() );{1}", i, NL());
             mSource<<Append("\t}" + NL());
-            mSource<<Format("\t double[] computeEventAssignment_{0} () {{1}", i, NL());
+
+
+            funcName = (Format("computeEventAssignment_{0}()", i));
+		    mHeader.AddFunctionExport("double*", funcName);
+            mSource<<Format("\t double* computeEventAssignment_{0} () {{1}", i, NL());
             StringList oTemp;
             StringList oValue;
             int nCount = 0;
             int numAssignments = ev.size() - 2;
-            mSource<<Format("\t\tdouble[] values = new double[ {0}];{1}", numAssignments, NL());
+            mSource<<Format("\t\tdouble* values = (double*) malloc(sizeof(double)*{0});{1}", numAssignments, NL());
             for (int j = 2; j < ev.size(); j++)
             {
                 StringList asgn = (StringList) ev[j];
@@ -1291,7 +1436,7 @@ void CGenerator::WriteEventAssignments(StringBuilder& ignore, const int& numReac
             }
             mSource<<Append("\t\treturn values;" + NL());
             mSource<<Append("\t}" + NL());
-            mSource<<Format("\t void performEventAssignment_{0} (double[] values) {{1}", i, NL());
+            mSource<<Format("\t void performEventAssignment_{0} (double* values) {{1}", i, NL());
 
             for (int j = 0; j < oTemp.size(); j++)
             {
@@ -1316,7 +1461,8 @@ void CGenerator::WriteEventAssignments(StringBuilder& ignore, const int& numReac
 
     for (int i = 0; i < delays.size(); i++)
     {
-        mSource<<Format("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate { return {1}; } );{2}", i, delays[i], NL());
+//        mSource<<Format("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate { return {1}; } );{2}", i, delays[i], NL());
+     	mSource<<Format("\t\tmEventDelay[{0}] = (TEventDelayDelegate) malloc(sizeof(TEventDelayDelegate) * 1);{2}", i, delays[i], NL());
         mSource<<Format("\t\t_eventType[{0}] = {1};{2}", i, ToString((eventType[i] ? true : false)), NL());
         mSource<<Format("\t\t_eventPersistentType[{0}] = {1};{2}", i, (eventPersistentType[i] ? "true" : "false"), NL());
     }
@@ -1334,7 +1480,8 @@ void CGenerator::WriteEventAssignments(StringBuilder& ignore, const int& numReac
         }
         else
         {
-            mSource<<"\n"<<Format("\t_eventPriorities[{0}] = 0f;{1}", i, NL());
+//            mSource<<"\n"<<Format("\t_eventPriorities[{0}] = 0f;{1}", i, NL());
+            mSource<<"\n"<<Format("\t_eventPriorities[{0}] = 0;{1}", i, NL());
         }
     }
     mSource<<Format("}{0}{0}", NL());
@@ -1527,15 +1674,15 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
             	case CodeTypes::tWordToken:
 					if(theToken == "pow")
 					{
-                    	mSource<<Append("Math.Pow");
+                    	mSource<<Append("pow");
                     }
 					else if(theToken == "sqrt")
                     {
-                        mSource<<Append("Math.Sqrt");
+                        mSource<<Append("sqrt");
                   	}
                     else if(theToken == "log")
                     {
-                    	mSource<<Append("supportFunctions._log");
+                    	mSource<<Append("spf_log");
                     }
                     else if(theToken == "log10")
                     {
@@ -1551,7 +1698,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "factorial")
                     {
-                    	mSource<<Append("supportFunctions._factorial");
+                    	mSource<<Append("spf_factorial");
                     }
                     else if(theToken == "exp")
                     {
@@ -1681,27 +1828,27 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "gt")
                     {
-                        mSource<<Append("supportFunctions._gt");
+                        mSource<<Append("spf_gt");
                     }
                     else if(theToken == "lt")
                     {
-                        mSource<<Append("supportFunctions._lt");
+                        mSource<<Append("spf_lt");
                     }
                     else if(theToken == "eq")
                     {
-                        mSource<<Append("supportFunctions._eq");
+                        mSource<<Append("spf_eq");
                     }
                     else if(theToken == "neq")
                     {
-                        mSource<<Append("supportFunctions._neq");
+                        mSource<<Append("spf_neq");
                     }
                     else if(theToken == "geq")
                     {
-                        mSource<<Append("supportFunctions._geq");
+                        mSource<<Append("spf_geq");
                     }
                     else if(theToken == "leq")
                     {
-                        mSource<<Append("supportFunctions._leq");
+                        mSource<<Append("spf_leq");
                     }
                     else if(theToken == "and")
                     {
@@ -1721,11 +1868,11 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "root")
                     {
-                        mSource<<Append("supportFunctions._root");
+                        mSource<<Append("spf_root");
                     }
                     else if(theToken == "piecewise")
                     {
-                        mSource<<Append("supportFunctions._piecewise");
+                        mSource<<Append("spf_piecewise");
                     }
                     else if (!mfunctionParameters.Contains(s.tokenString))
                     {
@@ -1781,28 +1928,28 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                    mSource<<Append("time");
                    break;
                	case CodeTypes::tAndToken:
-                   mSource<<Append("supportFunctions._and");
+                   mSource<<Append("spf_and");
                    break;
                	case CodeTypes::tOrToken:
-                   mSource<<Append("supportFunctions._or");
+                   mSource<<Append("spf_or");
                    break;
                	case CodeTypes::tNotToken:
-                   mSource<<Append("supportFunctions._not");
+                   mSource<<Append("spf_not");
                    break;
                	case CodeTypes::tLessThanToken:
-                   mSource<<Append("supportFunctions._lt");
+                   mSource<<Append("spf_lt");
                    break;
                	case CodeTypes::tLessThanOrEqualToken:
-                   mSource<<Append("supportFunctions._leq");
+                   mSource<<Append("spf_leq");
                    break;
                	case CodeTypes::tMoreThanOrEqualToken:
-                   mSource<<Append("supportFunctions._geq");
+                   mSource<<Append("spf_geq");
                    break;
                	case CodeTypes::tMoreThanToken:
-                   mSource<<Append("supportFunctions._gt");
+                   mSource<<Append("spf_gt");
                    break;
                	case CodeTypes::tXorToken:
-                   mSource<<Append("supportFunctions._xor");
+                   mSource<<Append("spf_xor");
                    break;
                	default:
                    stringstream msg;
@@ -1838,7 +1985,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "log")
     {
-        mSource<<Append("supportFunctions._log");
+        mSource<<Append("spf_log");
     }
     else if(theToken == "floor")
     {
@@ -1850,7 +1997,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "factorial")
     {
-        mSource<<Append("supportFunctions._factorial");
+        mSource<<Append("spf_factorial");
     }
     else if(theToken == "log10")
     {
@@ -1992,27 +2139,27 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "geq")
     {
-        mSource<<Append("supportFunctions._geq");
+        mSource<<Append("spf_geq");
     }
     else if(theToken == "leq")
     {
-        mSource<<Append("supportFunctions._leq");
+        mSource<<Append("spf_leq");
     }
     else if(theToken == "gt")
     {
-        mSource<<Append("supportFunctions._gt");
+        mSource<<Append("spf_gt");
     }
     else if(theToken == "lt")
     {
-        mSource<<Append("supportFunctions._lt");
+        mSource<<Append("spf_lt");
     }
     else if(theToken == "eq")
     {
-        mSource<<Append("supportFunctions._eq");
+        mSource<<Append("spf_eq");
     }
     else if(theToken == "neq")
     {
-        mSource<<Append("supportFunctions._neq");
+        mSource<<Append("spf_neq");
     }
     else if(theToken == "and")
     {
@@ -2032,15 +2179,15 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "root")
     {
-        mSource<<Append("supportFunctions._root");
+        mSource<<Append("spf_root");
     }
     else if(theToken == "piecewise")
     {
-        mSource<<Append("supportFunctions._piecewise");
+        mSource<<Append("spf_piecewise");
     }
     else if(theToken == "delay")
     {
-        mSource<<Append("supportFunctions._delay");
+        mSource<<Append("spf_delay");
         Warnings.Add("RoadRunner does not yet support delay differential equations in SBML, they will be ignored (i.e. treated as delay = 0).");
     }
     else
@@ -2183,28 +2330,28 @@ void CGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, S
             mSource<<Append("time");
             break;
         case CodeTypes::tAndToken:
-            mSource<<Format("{0}supportFunctions._and", NL());
+            mSource<<Format("{0}spf_and", NL());
             break;
         case CodeTypes::tOrToken:
-            mSource<<Format("{0}supportFunctions._or", NL());
+            mSource<<Format("{0}spf_or", NL());
             break;
         case CodeTypes::tNotToken:
-            mSource<<Format("{0}supportFunctions._not", NL());
+            mSource<<Format("{0}spf_not", NL());
             break;
         case CodeTypes::tLessThanToken:
-            mSource<<Format("{0}supportFunctions._lt", NL());
+            mSource<<Format("{0}spf_lt", NL());
             break;
         case CodeTypes::tLessThanOrEqualToken:
-            mSource<<Format("{0}supportFunctions._leq", NL());
+            mSource<<Format("{0}spf_leq", NL());
             break;
         case CodeTypes::tMoreThanOrEqualToken:
-            mSource<<Format("{0}supportFunctions._geq", NL());
+            mSource<<Format("{0}spf_geq", NL());
             break;
         case CodeTypes::tMoreThanToken:
-            mSource<<Format("{0}supportFunctions._gt", NL());
+            mSource<<Format("{0}spf_gt", NL());
             break;
         case CodeTypes::tXorToken:
-            mSource<<Format("{0}supportFunctions._xor", NL());
+            mSource<<Format("{0}spf_xor", NL());
             break;
         default:
         string aToken = s.tokenToString(s.token());
@@ -2419,20 +2566,20 @@ void CGenerator::WriteInitFunction(StringBuilder& ignore, StringBuilder& source)
     // Declare any eventAssignment delegates
     if (mNumEvents > 0)
     {
-        source<<Append("\t\t_eventAssignments = new TEventAssignmentDelegate[numEvents];" , NL());
-        source<<Append("\t\t_eventPriorities = new double[numEvents];" , NL());
-        source<<Append("\t\t_computeEventAssignments= new TComputeEventAssignmentDelegate[numEvents];" , NL());
-        source<<Append("\t\t_performEventAssignments= new TPerformEventAssignmentDelegate[numEvents];" , NL());
+        source<<Append("\t\t_eventAssignments = (TEventAssignmentDelegate) malloc(sizeof(TEventAssignmentDelegate)*numEvents);" , NL());
+        source<<Append("\t\t_eventPriorities = (double*) malloc(sizeof(double)* numEvents);" , NL());
+//        source<<Append("\t\t_computeEventAssignments= new TComputeEventAssignmentDelegate[numEvents];" , NL());
+        source<<Append("\t\t_computeEventAssignments = (TComputeEventAssignmentDelegate) malloc(sizeof(TComputeEventAssignmentDelegate)*numEvents);" , NL());
+
+//        source<<Append("\t\t_performEventAssignments= new TPerformEventAssignmentDelegate[numEvents];" , NL());
+        source<<Append("\t\t_performEventAssignments = (TPerformEventAssignmentDelegate) malloc(sizeof(TPerformEventAssignmentDelegate)*numEvents);" , NL());
 
         for (int i = 0; i < mNumEvents; i++)
         {
         	string iStr = ToString(i);
-            source<<Append("\t\t_eventAssignments[" + iStr + "] = new TEventAssignmentDelegate (eventAssignment_" + iStr +
-                      ");" + NL());
-            source<<Append("\t\t_computeEventAssignments[" + iStr +
-                      "] = new TComputeEventAssignmentDelegate (computeEventAssignment_" + iStr + ");" + NL());
-            source<<Append("\t\t_performEventAssignments[" + iStr +
-                      "] = new TPerformEventAssignmentDelegate (performEventAssignment_" + iStr + ");" + NL());
+            source<<Append("//\t\t_eventAssignments[" + iStr + "] = new TEventAssignmentDelegate (eventAssignment_" + iStr +");" + NL());
+            source<<Append("//\t\t_computeEventAssignments[" + iStr + "] = new TComputeEventAssignmentDelegate (computeEventAssignment_" + iStr + ");" + NL());
+            source<<Append("//\t\t_performEventAssignments[" + iStr + "] = new TPerformEventAssignmentDelegate (performEventAssignment_" + iStr + ");" + NL());
         }
 
         source<<Append("\t\tresetEvents();" + NL());

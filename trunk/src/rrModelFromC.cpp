@@ -203,7 +203,7 @@ HANDLE ModelFromC::GetFunctionPtr(const string& funcName)
         Log(lError) << "Unable to load the function: " << funcName;
         return NULL;
     }
-    Log(lDebug)<<"Loaded function " << funcName;
+    Log(lDebug3)<<"Loaded function " << funcName;
     return handle;
 }
 

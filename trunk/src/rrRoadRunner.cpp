@@ -336,7 +336,7 @@ DoubleMatrix RoadRunner::runSimulation()
 	double tout = mTimeStart;
 
 	//The simulation is done here..
-	Log(lDebug)<<"Will run the OneStep function "<<mNumPoints<<" times";
+	Log(lDebug3)<<"Will run the OneStep function "<<mNumPoints<<" times";
 	for (int i = 1; i < mNumPoints; i++)
 	{
 		Log(lDebug3)<<"Step "<<i;
@@ -462,7 +462,7 @@ bool RoadRunner::loadSBMLFromFile(const string& fileName)
 
 	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
-	Log(lDebug)<<"Read SBML content from file:\n "<<sbml<< "\n============ End of SBML "<<endl;
+	Log(lDebug5)<<"Read SBML content from file:\n "<<sbml<< "\n============ End of SBML "<<endl;
 	mModelXMLFileName = fileName;
 	return loadSBML(sbml);
 }
@@ -590,12 +590,13 @@ bool RoadRunner::GenerateAndCompileModel()
      //Compile the model
     if(mCompiler->CompileC_DLL(codeGen->GetSourceCodeFileName()))
     {
-    	Log(lDebug)<<"The DLL ("<<mCompiler->GetDLLName()<<") was created";
+    	Log(lDebug)<<"Model compiled succesfully. ";
+        Log(lDebug3)<<mCompiler->GetDLLName()<<" was created";
     	return true;
     }
     else
     {
-    	Log(lError)<<"Failed compiling SBML model dll ("<<mCompiler->GetDLLName()<<")";
+    	Log(lError)<<"Model failed compilation";
         return false;
     }
 }
