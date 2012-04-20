@@ -42,7 +42,7 @@ int main(int argc, char * argv[])
 		switch (c)
 		{
 			case ('n'): paras.CaseNumber  				= ToInt(optarg);       	break;
-			case ('v'):	paras.VerboseMode 				= ToInt(optarg) + 2;        break;
+			case ('v'):	paras.VerboseMode 				= ToInt(optarg);        break;
 			case ('c'): paras.OnlyCompile  				= true;	       			break;
 
 			case ('?'):
@@ -61,15 +61,16 @@ int main(int argc, char * argv[])
             break;
 		}
 	}
-
+    LogOutput::mLogToConsole = true;
     gLog.SetCutOffLogLevel(IntToLogLevel(paras.VerboseMode));
-    paras.CaseNumber = 26;
+    Log(lForceShow)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+//    paras.CaseNumber = 51;
     string dataOutputFolder("C:\\rrw\\DataOutput\\XE");
     string dummy;
     string logFileName;
 
     CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
-    LogOutput::mLogToConsole = true;
+
     RoadRunner *roadRunner = NULL;
     try
     {
@@ -160,7 +161,7 @@ int main(int argc, char * argv[])
     end:	//I have not used a label in 15 years!
     delete roadRunner;
 	Log(lInfo)<<"Done";
-    Pause();
+//    Pause();
 	return 0;
 }
 

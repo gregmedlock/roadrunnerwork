@@ -56,7 +56,7 @@ LogLevel IntToLogLevel(const int& level)
 {
     switch (level)
     {
-        case -1:  return lUndef;
+        case -1:  return lForceShow;
         case 0:   return lError;
         case 1:   return lWarning;
         case 2:   return lInfo;

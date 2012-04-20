@@ -47,7 +47,12 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 	//-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied. Note that the generated code is slower and bigger in this case.
     stringstream exeCmd;
 
-    exeCmd<<"tcc -g -shared -rdynamic rrSupportFunctions.c rrMathSupport.c"<<sourceFileName<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL -Ic:\\rrw\\c_src";
+    exeCmd<<"tcc -g -shared -rdynamic " \
+    <<sourceFileName \
+    <<" c:\\rrw\\c_src\\rrSupportFunctions.c"
+    <<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL " \
+    <<"-Ic:\\rrw\\c_src " \
+    <<"-Lc:\\rrw\\c_src";
 
     Log(lDebug3)<<"Compiling model..";
     Log(lDebug5)<<"\nExecuting: "<<exeCmd.str();
@@ -59,7 +64,6 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
     }
 
     //Check if the DLL exists...
-
     return FileExists(mDLLFileName);
 }
 
@@ -118,7 +122,7 @@ HINSTANCE LoadDLL(const string& dll)
     GetModuleFileNameA((HMODULE)hLib, (LPSTR) mod, MAX_MODULE);
     string name(mod);
 
-    Log(lDebug3) << "DLL Library loaded: " <<name.c_str() << endl;
+    Log(lDebug) << "DLL Library loaded: " <<name.c_str() << endl;
 	return hLib;
 }
 

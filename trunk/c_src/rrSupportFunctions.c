@@ -2,12 +2,12 @@
 
 //---------------------------------------------------------------------------
 // Boolean functions for event handling" + NL());
-double _gt(double a, double b)
+double spf_gt(double a, double b)
 {
     return (a > b ? 1.0 : 0.0);
 }
 
-double _lt(double a, double b)
+double spf_lt(double a, double b)
 {
     return (a < b ? 1.0 : 0.0);
 }

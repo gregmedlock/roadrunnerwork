@@ -5,11 +5,8 @@
 #include <math.h>
 #include "rrScanner.h"
 #include "rrException.h"
-#include "rrMath.h"
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
-
-
 
 namespace rr
 {

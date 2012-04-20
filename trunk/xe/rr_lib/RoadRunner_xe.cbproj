@@ -84,10 +84,6 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>60</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\..\c_src\rrSupportFunction.cpp">
-				<DependentOn>..\..\c_src\rrSupportFunction.h</DependentOn>
-				<BuildOrder>3</BuildOrder>
-			</CppCompile>
 			<LibFiles Include="..\..\installs\xe\lib\libsbml.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>62</BuildOrder>

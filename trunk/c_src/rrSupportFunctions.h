@@ -1,6 +1,6 @@
 #ifndef rrSupportFunctionsH
 #define rrSupportFunctionsH
-#include "rrExporter.h"
+//#include "rrCExporter.h"
 
 // See: http://en.wikipedia.org/wiki/Mathematical_constant
 //const double EULER_CONSTANT_GAMMA 	= 0.57721566490153286060651209008;
@@ -22,8 +22,8 @@
 //const double LNPI 					= 1.14472988584940017414342735135; /* ln(pi) */
 
 // Boolean functions for event handling" + NL());
-//D_S double 	spf_gt(double a, double b);
-D_S double 	spf_lt(double a, double b);
+double 	spf_gt(double a, double b);
+double 	spf_lt(double a, double b);
 //D_S double 	spf_geq(double a, double b);
 //D_S double 	spf_leq(double a, double b);
 //D_S double 	spf_eq(double a, double b);

@@ -10,7 +10,7 @@ namespace rr
 
 RR_DECLSPEC enum  LogLevel
     {
-    	lUndef      = -1,
+    	lForceShow  = -1,
         lError      = 0,
         lWarning    = 1,
         lInfo       = 2,

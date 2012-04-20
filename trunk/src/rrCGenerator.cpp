@@ -237,7 +237,7 @@ void CGenerator::WriteClassHeader(StringBuilder& ignore)
     mHeader<<"#define modelH"<<endl;
     mHeader<<"#include <stdio.h>"<<endl;
     mHeader<<"#include <stdbool.h>"<<endl;
-    mHeader<<"#include \"rrExporter.h\"\t 			//Export Stuff."<<endl;
+    mHeader<<"#include \"rrCExporter.h\"\t 			//Export Stuff."<<endl;
     mHeader<<"#include \"rrSupportFunctions.h\"\t 	//Supportfunctions for event handling.."<<endl;
 
     mHeader<<Append("//************************************************************************** " + NL());
@@ -326,7 +326,8 @@ void CGenerator::WriteComputeAllRatesOfChange(StringBuilder& ignore, const int& 
     mSource<<Append("//Uses the equation: dSd/dt = L0 dSi/dt" + NL());
     mSource<<"void computeAllRatesOfChange()\n{";
 
-    mSource<<"\n\t//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );\n";
+//    mSource<<"\n\t//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );\n";
+    mSource<<"\n\tdouble* dTemp = (double*) malloc( sizeof(double)* ("<<numIndependentSpecies + numDependentSpecies<<") );\n"; //Todo: Check this
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
         mSource<<Format("\tdTemp[{0}] = {1};{2}", i, mMapRateRule[i], NL());
@@ -1025,7 +1026,9 @@ int CGenerator::WriteComputeRules(StringBuilder& ignore, const int& numReactions
     }
 
     mSource<<Append("}" + NL() + NL());
-    mSource<<"\t double _rateRules["<<numRateRules<<"];           // Vector containing values of additional rate rules      \n"; //Todo: why is t his here in nowhere?
+
+
+    mHeader<<"\t double _rateRules["<<numRateRules<<"];           // Vector containing values of additional rate rules      \n"; //Todo: why is t his here in nowhere?
 
     mHeader.AddFunctionExport("void", "InitializeRates()");
     mSource<<"void InitializeRates()\n{";
@@ -1683,15 +1686,15 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "log10")
                     {
-                        mSource<<Append("Math.Log10");
+                        mSource<<Append("Log10");
                     }
                     else if(theToken == "floor")
                     {
-                        mSource<<Append("Math.Floor");
+                        mSource<<Append("floor");
                     }
                     else if(theToken == "ceil")
                     {
-                    	mSource<<Append("Math.Ceiling");
+                    	mSource<<Append("ceil");
                     }
                     else if(theToken == "factorial")
                     {
@@ -1703,31 +1706,31 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "sin")
                     {
-                    	mSource<<Append("Math.Sin");
+                    	mSource<<Append("sin");
                     }
                     else if(theToken == "cos")
                     {
-                        mSource<<Append("Math.Cos");
+                        mSource<<Append("cos");
                     }
                     else if(theToken == "tan")
                     {
-                        mSource<<Append("Math.Tan");
+                        mSource<<Append("tan");
                     }
                     else if(theToken == "abs")
                     {
-                        mSource<<Append("Math.Abs");
+                        mSource<<Append("abs");
                     }
                     else if(theToken == "asin")
                     {
-                        mSource<<Append("Math.Asin");
+                        mSource<<Append("asin");
                     }
                     else if(theToken == "acos")
                     {
-                        mSource<<Append("Math.Acos");
+                        mSource<<Append("acos");
                     }
                     else if(theToken == "atan")
                     {
-                    	mSource<<Append("Math.Atan");
+                    	mSource<<Append("atan");
                     }
                     else if(theToken == "sec")
                     {
@@ -1803,7 +1806,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "pi")
                     {
-                        mSource<<Append("Math.PI");
+                        mSource<<Append("PI");
                     }
                     else if(theToken == "exponentiale")
                     {
@@ -1990,7 +1993,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "ceil")
     {
-        mSource<<Append("Math.Ceiling");
+        mSource<<Append("ceil");
     }
     else if(theToken == "factorial")
     {
@@ -2243,7 +2246,7 @@ void CGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, S
         Symbol floating1 = floatingSpeciesConcentrationList[index];
         if (floating1.hasOnlySubstance)
         {
-            mSource<<Format("amounts[{0}]", index);
+            mSource<<Format("_amounts[{0}]", index);
         }
         else
         {

@@ -81,7 +81,7 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
             }
             else
             {
-                Log(lDebug)<<"Badly formatted, or empty line in settings file:"<<lines[i];
+                Log(lDebug2)<<"Empty line in settings file: "<<lines[i];
             }
         }
 
