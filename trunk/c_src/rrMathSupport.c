@@ -11,7 +11,8 @@ double sqr(double a)
 
 double Logbase(double value, double baseValue)
 {
-    return log(value, baseValue);
+//    return log(value, baseValue);
+	return log(value)/log(baseValue); //Todo: is this correct?
 }
 
 // -----------------------------------------------------------------------
@@ -254,10 +255,10 @@ double Not(double a)
     return (a == 1.0 ? 0.0 : 1.0);
 }
 
-bool Not(bool a)
-{
-    return ! a;
-}
+//bool Not(bool a)
+//{
+//    return ! a;
+//}
 
 //        double Xor(params double[] a)
 //        {
@@ -301,16 +302,16 @@ bool Not(bool a)
 //            return b*Factorial(b - 1);
 //        }
 
-double log(double a)
-{
-    return ::log(a);
-}
+//double log(double a)
+//{
+//    return ::log(a);
+//}
 
-double log(double a, double b)
-{
-//            return Math.log(b, a);
-    return log(a) / log(b);
-}
+//double log(double a, double b)
+//{
+////            return Math.log(b, a);
+//    return log(a) / log(b);
+//}
 
 double Delay(double a, double b)
 {
@@ -319,14 +320,14 @@ double Delay(double a, double b)
 
 double Root(double a, double b)
 {
-    try
+	if(a)
     {
         return pow(b, 1.0/a);
     }
-    catch(...)
+    else
     {
         return 1.0;
-    };
+    }
 }
 
 //        double Piecewise(params object[] args)

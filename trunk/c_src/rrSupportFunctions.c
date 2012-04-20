@@ -67,11 +67,10 @@ double _not(double a)
     return (a == 1.0 ? 0.0 : 1.0);
 }
 
-bool _not(bool a)
-{
-    return ! a;
-}
-
+//bool _not(bool a)
+//{
+//    return ! a;
+//}
 //        double _xor(params double[] a)
 //        {
 //            bool result = false;
@@ -106,24 +105,24 @@ bool _not(bool a)
 //            return result;
 //        }
 //
-int _factorial(const int& a)
+int spf_factorial(int a)
 {
-    static int b = (int) a;
-    if (b < 2)
-	{
-        return 1;
-	}
-    return b*_factorial(b - 1);
+//    static int b = a;
+//    if (b < 2)
+//	{
+//        return 1;
+//	}
+//    return b * spf_factorial(b - 1);
 }
 
-double _log(double a)
-{
-    return rr::log(a);
-}
+//double _log(double a)
+//{
+//    return log(a);
+//}
 
-double _log(double a, double b)
+double spf_log(double a, double b)
 {
-    return rr::log(b, a);
+    return log(b, a);
 }
 
 double _delay(double a, double b)
@@ -133,11 +132,11 @@ double _delay(double a, double b)
 
 double _root(double a, double b)
 {
-    try
+    if(a != 0)
     {
         return pow(b, 1.0/a);
     }
-    catch(...)
+    else
     {
         return 1.0;
     }
