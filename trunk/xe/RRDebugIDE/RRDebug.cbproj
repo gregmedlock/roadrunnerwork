@@ -1,14 +1,13 @@
 ﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
-			<ProjectGuid>{BB98A606-C02D-454F-B743-70C12C4C53CD}</ProjectGuid>
-			<ProjectVersion>13.4</ProjectVersion>
+			<ProjectGuid>{619F9EC0-6898-4881-AAD7-BF0A1106F13E}</ProjectGuid>
+			<ProjectVersion>12.3</ProjectVersion>
+			<MainSource>RRDebug.cpp</MainSource>
 			<Base>True</Base>
 			<Config Condition="'$(Config)'==''">Debug</Config>
-			<AppType>Console</AppType>
-			<FrameworkType>None</FrameworkType>
-			<Platform Condition="'$(Platform)'==''">Win32</Platform>
-			<TargetedPlatforms>1</TargetedPlatforms>
 			<Platform>Win32</Platform>
+			<AppType>Application</AppType>
+			<FrameworkType>VCL</FrameworkType>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
 			<Base>true</Base>
@@ -24,47 +23,33 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<LinkPackageStatics>vcl.lib;mtkCommonRTL.lib</LinkPackageStatics>
-			<Manifest_File>None</Manifest_File>
-			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-			<VerInfo_Locale>1033</VerInfo_Locale>
-			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
-			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
-			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<Defines>IMPORT_RR;$(Defines)</Defines>
-			<NoVCL>true</NoVCL>
-			<LinkPackageImports>rtl.bpi</LinkPackageImports>
-			<ProjectType>CppConsoleApplication</ProjectType>
-			<PackageImports>rtl.bpi;$(PackageImports).bpi</PackageImports>
+			<UsePackages>true</UsePackages>
+			<LinkPackageStatics>rtl.lib;vcl.lib;DuneComponents.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib</LinkPackageStatics>
+			<ProjectType>CppVCLApplication</ProjectType>
+			<PackageImports>vcl.bpi;rtl.bpi;mtkCommon.bpi</PackageImports>
 			<OutputExt>exe</OutputExt>
-			<AllPackageLibs>rtl.lib;vcl.lib;mtkCommonRTL.lib</AllPackageLibs>
-			<_TCHARMapping>char</_TCHARMapping>
+			<AllPackageLibs>rtl.lib;vcl.lib;DuneComponents.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib</AllPackageLibs>
+			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\Util\;..\..\Apps\simulate_sbml\;..\..\src\;$(rr_root)\src\;$(rr_root)\src\Util\;$(rr_root)\src\Logger;$(rr_root)\src\Scanner;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(rr_root)\src\Solvers;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\Apps\simulate_sbml\;..\..\Testing\simulate_sbml\;..\Testing\simulate_sbml\;..\installs\xe\lib\;..\src\;..\..\installs\xe\lib\;..\..\src\;..\..\src\Util\;..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>P:\DiscoverI\mtk\VCL\Common\;C:\rrw\Apps\RRDebugIDE\;P:\mtk\Components\vtk\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>P:\DiscoverI\mtk\VCL\Common\;C:\rrw\Apps\RRDebugIDE\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
-			<UsePackages>true</UsePackages>
 			<IntermediateOutputDir>.\$(Config)\$(Platform)</IntermediateOutputDir>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<BCC_FastFloatingPoint>false</BCC_FastFloatingPoint>
-			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
-			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
-			<_TCHARMapping>char</_TCHARMapping>
-			<BCC_PCHName>rr.csm</BCC_PCHName>
 			<FinalOutputDir>C:\rrw\installs\xe\bin\</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;WIN32;LIBSBML_USE_CPP_NAMESPACE;ENABLE_DEBUG_OUTPUT;$(Defines)</Defines>
+			<Defines>_DEBUG;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -81,17 +66,22 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\Apps\simulate_sbml\CommandLineParameters.cpp">
-				<DependentOn>..\..\Apps\simulate_sbml\CommandLineParameters.h</DependentOn>
+			<CppCompile Include="Main.cpp">
+				<Form>Form1</Form>
+				<DependentOn>Main.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Apps\simulate_sbml\main.cpp">
-				<BuildOrder>2</BuildOrder>
+			<CppCompile Include="RRDebug.cpp">
+				<BuildOrder>0</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="..\..\installs\xe\lib\RoadRunner_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>2</BuildOrder>
-			</LibFiles>
+			<ResFiles Include="RRDebug.res">
+				<BuildOrder>1</BuildOrder>
+			</ResFiles>
+			<CppCompile Include="P:\DiscoverI\mtk\VCL\Common\mtkExeFile.cpp">
+				<DependentOn>P:\DiscoverI\mtk\VCL\Common\mtkExeFile.h</DependentOn>
+				<BuildOrder>3</BuildOrder>
+			</CppCompile>
+			<FormResources Include="Main.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
@@ -108,9 +98,12 @@
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
-			<Borland.ProjectType>CppConsoleApplication</Borland.ProjectType>
+			<Borland.ProjectType>CppVCLApplication</Borland.ProjectType>
 			<BorlandProject>
 				<CPlusPlusBuilder.Personality>
+					<Source>
+						<Source Name="MainSource">RRDebug.cpp</Source>
+					</Source>
 					<VersionInfo>
 						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
 						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
@@ -138,21 +131,16 @@
 						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
-					<Excluded_Packages/>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclwebsnap150.bpl">Embarcadero WebSnap Components</Excluded_Packages>
+					</Excluded_Packages>
 					<ProjectProperties>
 						<ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
 						<ProjectProperties Name="ManagePaths">True</ProjectProperties>
-						<ProjectProperties Name="VerifyPackages">False</ProjectProperties>
+						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
-					<Parameters>
-						<Parameters Name="DebugSourceDirs">C:\RRW\src\cxx</Parameters>
-					</Parameters>
-					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-n190 -v1 -c</Parameters_Win32>
-					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>
-					<Platform value="OSX32">False</Platform>
 					<Platform value="Win32">True</Platform>
 				</Platforms>
 			</BorlandProject>

@@ -1981,7 +1981,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "sqrt")
     {
-        mSource<<Append("Math.Sqrt");
+        mSource<<Append("sqrt");
     }
     else if(theToken == "log")
     {
@@ -1989,7 +1989,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "floor")
     {
-        mSource<<Append("Math.Floor");
+        mSource<<Append("floor");
     }
     else if(theToken == "ceil")
     {
@@ -2005,111 +2005,111 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "exp")
     {
-        mSource<<Append("Math.Exp");
+        mSource<<Append("exp");
     }
     else if(theToken == "abs")
     {
-        mSource<<Append("Math.Abs");
+        mSource<<Append("abs");
     }
     else if(theToken == "sin")
     {
-        mSource<<Append("Math.Sin");
+        mSource<<Append("sin");
     }
     else if(theToken == "cos")
     {
-        mSource<<Append("Math.Cos");
+        mSource<<Append("cos");
     }
     else if(theToken == "tan")
     {
-        mSource<<Append("Math.Tan");
+        mSource<<Append("tan");
     }
     else if(theToken == "asin")
     {
-        mSource<<Append("Math.Asin");
+        mSource<<Append("asin");
     }
     else if(theToken == "acos")
     {
-        mSource<<Append("Math.Acos");
+        mSource<<Append("acos");
     }
     else if(theToken == "atan")
     {
-        mSource<<Append("Math.Atan");
+        mSource<<Append("atan");
     }
     else if(theToken == "sec")
     {
-        mSource<<Append("MathKGI.Sec");
+        mSource<<Append("sec");
     }
     else if(theToken == "csc")
     {
-        mSource<<Append("MathKGI.Csc");
+        mSource<<Append("csc");
     }
     else if(theToken == "cot")
     {
-        mSource<<Append("MathKGI.Cot");
+        mSource<<Append("cot");
     }
     else if(theToken == "arcsec")
     {
-        mSource<<Append("MathKGI.Asec");
+        mSource<<Append("asec");
     }
     else if(theToken == "arccsc")
     {
-        mSource<<Append("MathKGI.Acsc");
+        mSource<<Append("arccsc");
     }
     else if(theToken == "arccot")
     {
-        mSource<<Append("MathKGI.Acot");
+        mSource<<Append("arccot");
     }
     else if(theToken == "sinh")
     {
-        mSource<<Append("Math.Sinh");
+        mSource<<Append("sinh");
     }
     else if(theToken == "cosh")
     {
-        mSource<<Append("Math.Cosh");
+        mSource<<Append("cosh");
     }
     else if(theToken == "tanh")
     {
-        mSource<<Append("Math.Tanh");
+        mSource<<Append("tanh");
     }
     else if(theToken == "arcsinh")
     {
-        mSource<<Append("MathKGI.Asinh");
+        mSource<<Append("arcsinh");
     }
     else if(theToken == "arccosh")
     {
-        mSource<<Append("MathKGI.Acosh");
+        mSource<<Append("arccosh");
     }
     else if(theToken == "arctanh")
     {
-        mSource<<Append("MathKGI.Atanh");
+        mSource<<Append("arctanh");
     }
     else if(theToken == "sech")
     {
-        mSource<<Append("MathKGI.Sech");
+        mSource<<Append("sech");
     }
     else if(theToken == "csch")
     {
-        mSource<<Append("MathKGI.Csch");
+        mSource<<Append("csch");
     }
     else if(theToken == "coth")
     {
-        mSource<<Append("MathKGI.Coth");
+        mSource<<Append("coth");
     }
     else if(theToken == "arcsech")
     {
-        mSource<<Append("MathKGI.Asech");
+        mSource<<Append("arcsech");
     }
     else if(theToken == "arccsch")
     {
-        mSource<<Append("MathKGI.Acsch");
+        mSource<<Append("arccsch");
     }
     else if(theToken == "arccoth")
     {
-        mSource<<Append("MathKGI.Acoth");
+        mSource<<Append("arccoth");
     }
     else if(theToken == "pi")
     {
-        mSource<<Append("Math.PI");
+        mSource<<Append("PI");
     }
     else if(theToken == "avogadro")
     {
@@ -2117,7 +2117,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "exponentiale")
     {
-        mSource<<Append("Math.E");
+        mSource<<Append("E");
     }
     else if(theToken == "true")
     {
@@ -2131,11 +2131,11 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "NaN")
     {
-        mSource<<Append("double.NaN");
+        mSource<<Append("NaN");
     }
     else if(theToken == "INF")
     {
-        mSource<<Append("double.PositiveInfinity");
+        mSource<<Append("INF");
     }
     else if(theToken == "geq")
     {
@@ -2163,19 +2163,19 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "and")
     {
-        mSource<<Append("supportFunction._and");
+        mSource<<Append("spf_and");
     }
     else if(theToken == "or")
     {
-        mSource<<Append("supportFunction._or");
+        mSource<<Append("spf_or");
     }
     else if(theToken == "not")
     {
-        mSource<<Append("supportFunction._not");
+        mSource<<Append("spf_not");
     }
     else if(theToken == "xor")
     {
-        mSource<<Append("supportFunction._xor");
+        mSource<<Append("spf_xor");
     }
     else if(theToken == "root")
     {

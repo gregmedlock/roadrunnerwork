@@ -24,40 +24,42 @@
 // Boolean functions for event handling" + NL());
 double 	spf_gt(double a, double b);
 double 	spf_lt(double a, double b);
-//D_S double 	spf_geq(double a, double b);
-//D_S double 	spf_leq(double a, double b);
-//D_S double 	spf_eq(double a, double b);
-//D_S double 	spf_neq(double a, double b);
-////D_S double 	_and(params double[] a);
-////D_S bool 	_and(params bool[] a);
-////D_S double 	_or(params double[] a);
-////D_S bool 	_or(params bool[] a);
+double 	spf_geq(double a, double b);
+double 	spf_leq(double a, double b);
+double 	spf_eq(double a, double b);
+double 	spf_neq(double a, double b);
+double 	spf_and(double val1, double val2);
+//bool 	spf_and(params bool[] a);
+//double 	spf_or(params double[] a);
+//bool 	spf_or(params bool[] a);
 //D_S double 	spf_not(double a);
 ////D_S bool 	spf_not(bool a);
-////D_S double 	_xor(params double[] a);
-////D_S bool 	_xor(params bool[] a);
-//D_S int 	spf_factorial(int a);
+////D_S double 	spf_xor(params double[] a);
+////D_S bool 	spf_xor(params bool[] a);
+int 	spf_factorial(int a);
 //D_S double 	spf_log(double a);
-////D_S double 	spf_log(double a, double b);
-//D_S double 	spf_delay(double a, double b);
-//D_S double 	spf_root(double a, double b);
-//D_S double 	_piecewise(params object[] args);
+double 	spf_log(double a, double b);
+double 	spf_delay(double a, double b);
+double 	spf_root(double a, double b);
+//double 	spf_piecewise(params object[] args);
+double 	spf_piecewise(double val1, double val2, double val3);
 
 
 // Square
-//D_S double sqr(double a);
-//D_S double Logbase(double value, double baseValue);
-//
+double spf_sqr(double a);
+double Logbase(double value, double baseValue);
+
 //// -----------------------------------------------------------------------
 //// Start of trig functions
 //// -----------------------------------------------------------------------
 //
 //// Convert degrees to Radians
-//D_S double degToRad(double degrees);
+double degToRad(double degrees);
 //
+
 //// Convert radians to degrees
-//D_S double radToDeg(double radians);
-//
+double radToDeg(double radians);
+
 //// Cotangent
 //D_S double Cot(double a);
 //

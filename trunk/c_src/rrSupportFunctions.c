@@ -12,32 +12,40 @@ double spf_lt(double a, double b)
     return (a < b ? 1.0 : 0.0);
 }
 
-double _geq(double a, double b)
+double spf_geq(double a, double b)
 {
     return (a >= b ? 1.0 : 0.0);
 }
 
-double _leq(double a, double b)
+double spf_leq(double a, double b)
 {
     return (a <= b ? 1.0 : 0.0);
 }
 
-double _eq(double a, double b)
+double spf_eq(double a, double b)
 {
     return (a == b ? 1.0 : 0.0);
 }
 
-double _neq(double a, double b)
+double spf_neq(double a, double b)
 {
     return (a != b ? 1.0 : 0.0);
 }
 
-//        double _and(params double[] a)
-//        {
-//            foreach (double b in a)
-//                if (b != 1.0) return 0.0;
-//            return 1.0;
-//        }
+double spf_and(double val1, double val2)
+{
+	if(val1 != 1.0 || val2 != 1.0)
+    {
+    	return 0.0;
+    }
+    else
+    {
+    	return 1.0;
+    }
+//    foreach (double b in a)
+//        if (b != 1.0) return 0.0;
+//    return 1.0;
+}
 
 //        bool _and(params bool[] a)
 //        {
@@ -62,7 +70,7 @@ double _neq(double a, double b)
 //            return result;
 //        }
 
-double _not(double a)
+double spf_not(double a)
 {
     return (a == 1.0 ? 0.0 : 1.0);
 }
@@ -125,12 +133,12 @@ double spf_log(double a, double b)
     return log(b, a);
 }
 
-double _delay(double a, double b)
+double spf_delay(double a, double b)
 {
     return a;
 }
 
-double _root(double a, double b)
+double spf_root(double a, double b)
 {
     if(a != 0)
     {
@@ -142,6 +150,10 @@ double _root(double a, double b)
     }
 }
 
+double spf_piecewise(double val1, double val2, double val3)
+{
+	return -1;	//Todo: implement this one
+}
 //        double _piecewise(params object[] args)
 //        {
 //            try
