@@ -104,8 +104,19 @@ int main(int argc, char * argv[])
         simulation.SetModelFileName(modelFileName);
         simulation.CompileIfDllExists(true);
 
-        //First load the model
-        if(!simulation.LoadModel())
+        if(!simulation.LoadSBMLFromFile())
+        {
+            Log(lError)<<"Failed loading SBML model";
+            goto end;
+        }
+
+        if(!simulation.GenerateModelCode())
+        {
+            Log(lError)<<"Failed loading SBML model";
+            goto end;
+        }
+
+        if(!simulation.CompileModel())
         {
             Log(lError)<<"Failed loading SBML model";
             goto end;
@@ -114,6 +125,19 @@ int main(int argc, char * argv[])
         if(paras.OnlyCompile)
         {
         	goto end;
+        }
+
+        if(!simulation.CreateModel())
+        {
+            Log(lError)<<"Failed creating Model";
+            goto end;
+        }
+
+        //First load the model
+        if(!simulation.InitializeModel())
+        {
+            Log(lError)<<"Failed initializing SBML model";
+            goto end;
         }
 
         //Then read settings file if it exists..

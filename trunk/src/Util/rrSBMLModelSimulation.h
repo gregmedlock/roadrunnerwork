@@ -41,7 +41,11 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
         string 			        GetModelsFullFilePath(){return JoinPath(mModelFilePath, mModelFileName);}
         string					GetDataOutputFolder(){return mDataOutputFolder;}
         bool			        UseEngine(RoadRunner* engine);
-        bool			        LoadModel();
+		bool 					LoadSBMLFromFile();					//Use current file information to load sbml from file
+		bool 					GenerateModelCode();
+		bool 					CreateModel();
+		bool					CompileModel();
+        bool			        InitializeModel();
 		bool			        GenerateAndCompileModel();
         bool			        Run();
 		bool			        SaveResult();

@@ -14,7 +14,7 @@
 #include "rrTextWriter.h"
 #include "rrSimulationData.h"
 #include "rrSimulationSettings.h"
-
+#include "rrCompiler.h"
 
 using std::string;
 
@@ -22,7 +22,6 @@ namespace rr
 {
 
 class ModelGenerator;
-class Compiler;
 class SBMLModelSimulation;
 
 class RR_DECLSPEC RoadRunner : public rrObject
@@ -45,7 +44,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		ModelGenerator				   *mCSharpGenerator;
 		ModelGenerator				   *mCGenerator;
 
-		Compiler					   *mCompiler;
+		Compiler					   	mCompiler;
 		HINSTANCE 						mModelDllHandle;
 		void 							AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime);
 		bool 							IsNleqAvailable();
@@ -172,7 +171,9 @@ class RR_DECLSPEC RoadRunner : public rrObject
         								RoadRunner(bool GenerateCSharp = false);
         virtual 					   ~RoadRunner();
         void							PartOfSimulation(SBMLModelSimulation* simulation){mSimulation = simulation;}
+        bool							GenerateModelCode(const string& sbml = string(""));
         bool							GenerateAndCompileModel();
+		bool							CompileCurrentModel();
         IModel*							CreateModel();
         SimulationData 					GetSimulationResult();
         ModelGenerator*					GetCodeGenerator();
@@ -185,7 +186,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		bool                     		Simulate(const bool& useConservationLaws = true);
 		bool                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws = true);
 		bool                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
-		bool                           	loadSBMLFromFile(const string& fileName);
+		bool                           	LoadSBMLFromFile(const string& fileName);	//Just load the content of a sbml file
 		bool                            loadSBML(const string& sbml);
 		string                          getSBML();
 		double                          getTimeStart();

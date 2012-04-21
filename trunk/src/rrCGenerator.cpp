@@ -62,6 +62,7 @@ bool CGenerator::SaveSourceCodeToFolder(const string& folder)
     {
         throw(Exception("Failed to open file:" + mHeaderCodeFileName));
     }
+
     outFile<<GetHeaderCode();
     Log(lDebug3)<<"Wrote header to file: "<<mHeaderCodeFileName;
     outFile.close();

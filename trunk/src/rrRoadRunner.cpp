@@ -31,7 +31,6 @@ RoadRunner::RoadRunner(bool generateCSharp)
 emptyModelStr("A model needs to be loaded before one can use this method"),
 STEADYSTATE_THRESHOLD(1.E-2),
 mCVode(NULL),
-mCompiler(NULL),
 mL(NULL),
 mL0(NULL),
 mN(NULL),
@@ -59,7 +58,6 @@ RoadRunner::~RoadRunner()
 	delete mCGenerator;
 	delete mModel;
 	delete mCVode;
-	delete mCompiler;
     if(mModelDllHandle)
     {
     	//Unload the DLL
@@ -105,8 +103,14 @@ bool RoadRunner::InitializeModel()
 {
     if(!mModel)
     {
-    	Log(lError)<<"Trying to initialize a NULL model";
-    	return false ;
+        //Now create the Model using the compiled DLL
+	    mModel = CreateModel();
+
+      	if(!mModel)
+        {
+    		Log(lError)<<"Failed Creating Model";
+	    	return false ;
+        }
 	}
 
     modelLoaded = true;
@@ -450,21 +454,24 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
     return false;
 }
 
-bool RoadRunner::loadSBMLFromFile(const string& fileName)
+bool RoadRunner::LoadSBMLFromFile(const string& fileName)
 {
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
 		stringstream msg;
 		msg<<"Failed opening file: "<<fileName;
-		throw SBWApplicationException(msg.str());
+		return false;
 	}
 
 	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
-	Log(lDebug5)<<"Read SBML content from file:\n "<<sbml<< "\n============ End of SBML "<<endl;
+	Log(lDebug5)<<"Read SBML content from file:\n "<<sbml \
+    			<< "\n============ End of SBML "<<endl;
+
 	mModelXMLFileName = fileName;
-	return loadSBML(sbml);
+	mCurrentSBML = sbml;
+    return true;
 }
 
 bool RoadRunner::loadSBML(const string& sbml)
@@ -552,21 +559,11 @@ string RoadRunner::GetDLLName()
     return dllName;
 }
 
-bool RoadRunner::GenerateAndCompileModel()
+bool RoadRunner::GenerateModelCode(const string& sbml)
 {
-    mModelCode = mModelGenerator->generateModelCode(mCurrentSBML);
-
-    if(!mModelCode.size())
+	if(sbml.size())
     {
-        throw RRException("Failed to generate Model Code");
-    }
-    Log(lDebug4)<<" ------ Model Code --------\n"
-                <<mModelCode
-                <<" ----- End of Model Code -----\n";
-
-    if(!mCompiler)
-    {
-        mCompiler  = new Compiler;
+		mCurrentSBML = sbml; //This should be used in stead of the file name below..
     }
 
     //The get instance function actually compiles the supplied code..
@@ -584,25 +581,70 @@ bool RoadRunner::GenerateAndCompileModel()
     	srcCodeFolder = ("C:\\tmp");
     }
 
+    mModelCode = mModelGenerator->generateModelCode(mCurrentSBML);
+
+    if(!mModelCode.size())
+    {
+        Log(lError)<<"Failed to generate model code";
+        return false;
+    }
 
     codeGen->SaveSourceCodeToFolder(srcCodeFolder);
 
-     //Compile the model
-    if(mCompiler->CompileC_DLL(codeGen->GetSourceCodeFileName()))
+    Log(lDebug4)<<" ------ Model Code --------\n"
+                <<mModelCode
+                <<" ----- End of Model Code -----\n";
+	return true;
+}
+
+bool RoadRunner::CompileCurrentModel()
+{
+    CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
+    if(!codeGen)
     {
-    	Log(lDebug)<<"Model compiled succesfully. ";
-        Log(lDebug3)<<mCompiler->GetDLLName()<<" was created";
-    	return true;
+    	//CodeGenerator has not been allocaed
+        Log(lError)<<"Generate code before compiling....";
+        return false;
     }
-    else
+
+     //Compile the model
+    if(!mCompiler.CompileC_DLL(codeGen->GetSourceCodeFileName()))
     {
     	Log(lError)<<"Model failed compilation";
         return false;
     }
+    Log(lDebug)<<"Model compiled succesfully. ";
+    Log(lDebug3)<<mCompiler.GetDLLName()<<" was created";
+    return true;
+}
+
+bool RoadRunner::GenerateAndCompileModel()
+{
+	if(!GenerateModelCode())
+    {
+    	Log(lError)<<"Failed generating model from SBML";
+        return false;
+    }
+
+	if(!CompileCurrentModel())
+    {
+	   	Log(lError)<<"Failed compiling model";
+        return false;
+    }
+
+    return true;
 }
 
 IModel* RoadRunner::CreateModel()
 {
+	//Load dll
+    if(!mModelDllHandle)
+    {
+		string   dllName  = GetDLLName();
+    	//Load the DLL
+    	mModelDllHandle = LoadDLL(dllName);
+    }
+
     //Create a model
     if(mModelDllHandle)
     {

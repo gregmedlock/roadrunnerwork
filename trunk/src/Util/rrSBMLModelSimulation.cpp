@@ -44,6 +44,25 @@ bool SBMLModelSimulation::UseEngine(RoadRunner* engine)
     return true;
 }
 
+bool SBMLModelSimulation::GenerateModelCode()
+{
+	if(!mEngine)
+    {
+    	return false;
+    }
+	return mEngine->GenerateModelCode();
+}
+
+bool SBMLModelSimulation::CompileModel()
+{
+	if(!mEngine)
+    {
+    	return false;
+    }
+
+	return mEngine->CompileCurrentModel();
+}
+
 bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
 {
 	string fName(settingsFName);
@@ -288,9 +307,34 @@ bool SBMLModelSimulation::SaveAllData()
 	return true;
 }
 
-bool SBMLModelSimulation::LoadModel()
+bool SBMLModelSimulation::LoadSBMLFromFile()					//Use current file information to load sbml from file
 {
-	return (mEngine) ? mEngine->loadSBMLFromFile(GetModelsFullFilePath()) : false;
+	if(!mEngine)
+    {
+    	return false;
+    }
+    bool val = mEngine->LoadSBMLFromFile(GetModelsFullFilePath());
+    return val;
+}
+
+bool SBMLModelSimulation::CreateModel()
+{
+	if(!mEngine)
+    {
+    	return false;
+    }
+
+	return mEngine->CreateModel();
+}
+
+bool SBMLModelSimulation::InitializeModel()
+{
+	if(!mEngine)
+    {
+    	return false;
+    }
+
+	return mEngine->InitializeModel();
 }
 
 bool SBMLModelSimulation::GenerateAndCompileModel()
@@ -324,7 +368,6 @@ bool SBMLModelSimulation::SaveResult()
     fs << mResultData;
     fs.close();
     return true;
-
 }
 
 string SBMLModelSimulation::GetSettingsFileNameForCase(int caseNr)
