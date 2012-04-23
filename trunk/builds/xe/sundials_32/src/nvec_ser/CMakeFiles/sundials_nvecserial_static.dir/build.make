@@ -55,7 +55,7 @@ src\nvec_ser\CMakeFiles\sundials_nvecserial_static.dir\nvector_serial.obj: C:\rr
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\sundials_32\CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/nvec_ser/CMakeFiles/sundials_nvecserial_static.dir/nvector_serial.obj"
 	cd C:\rrw\builds\xe\sundials_32\src\nvec_ser
-	C:\PROGRA~1\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
+	C:\PROGRA~1\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tR -tR- $(C_DEFINES) @&&|
 -DWIN32 -oCMakeFiles\sundials_nvecserial_static.dir\nvector_serial.obj $(C_FLAGS) -c C:\rrw\ThirdParty\sundials\src\nvec_ser\nvector_serial.c
 |
 	cd C:\rrw\builds\xe\sundials_32
@@ -86,7 +86,7 @@ src\nvec_ser\CMakeFiles\sundials_nvecserial_static.dir\__\sundials\sundials_math
 	$(CMAKE_COMMAND) -E cmake_progress_report C:\rrw\builds\xe\sundials_32\CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building C object src/nvec_ser/CMakeFiles/sundials_nvecserial_static.dir/__/sundials/sundials_math.obj"
 	cd C:\rrw\builds\xe\sundials_32\src\nvec_ser
-	C:\PROGRA~1\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tWR -tW- $(C_DEFINES) @&&|
+	C:\PROGRA~1\EMBARC~1\RADSTU~1\8.0\bin\bcc32.exe  -tR -tR- $(C_DEFINES) @&&|
 -DWIN32 -oCMakeFiles\sundials_nvecserial_static.dir\__\sundials\sundials_math.obj $(C_FLAGS) -c C:\rrw\ThirdParty\sundials\src\sundials\sundials_math.c
 |
 	cd C:\rrw\builds\xe\sundials_32

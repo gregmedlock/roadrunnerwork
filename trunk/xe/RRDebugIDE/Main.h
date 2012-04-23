@@ -32,7 +32,7 @@ __published:	// IDE-managed Components
 	TButton *Button1;
 	TActionList *ActionList1;
 	TAction *LoadModelA;
-	TAction *CompileModelA;
+	TAction *TestModelA;
 	TMemo *Log1;
 	TPanel *Panel3;
 	TEdit *mModelFileName;
@@ -42,9 +42,13 @@ __published:	// IDE-managed Components
 	TMemo *Memo3;
 	TMemo *Memo4;
 	TSplitter *Splitter2;
+	TGroupBox *GroupBox2;
+	TCheckBox *CheckBox1;
+	TCheckBox *CheckBox2;
+	TCheckBox *CheckBox3;
 	void __fastcall LoadModelAExecute(TObject *Sender);
 	void __fastcall fsfTreeView1DblClick(TObject *Sender);
-	void __fastcall CompileModelAExecute(TObject *Sender);
+	void __fastcall TestModelAExecute(TObject *Sender);
 	void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
 	void __fastcall fsfTreeView1Click(TObject *Sender);
 

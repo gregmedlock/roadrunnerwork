@@ -23,10 +23,11 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<UsePackages>true</UsePackages>
-			<LinkPackageStatics>rtl.lib;vcl.lib;DuneComponents.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib</LinkPackageStatics>
+			<LinkPackageStatics>DuneComponents.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib</LinkPackageStatics>
 			<ProjectType>CppVCLApplication</ProjectType>
-			<PackageImports>vcl.bpi;rtl.bpi;mtkCommon.bpi</PackageImports>
+			<PackageImports>vcl.bpi;rtl.bpi;mtkCommon.bpi;vclCommon.bpi</PackageImports>
 			<OutputExt>exe</OutputExt>
 			<AllPackageLibs>rtl.lib;vcl.lib;DuneComponents.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib</AllPackageLibs>
 			<_TCHARMapping>wchar_t</_TCHARMapping>
@@ -77,10 +78,6 @@
 			<ResFiles Include="RRDebug.res">
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
-			<CppCompile Include="P:\DiscoverI\mtk\VCL\Common\mtkExeFile.cpp">
-				<DependentOn>P:\DiscoverI\mtk\VCL\Common\mtkExeFile.h</DependentOn>
-				<BuildOrder>3</BuildOrder>
-			</CppCompile>
 			<FormResources Include="Main.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
@@ -132,7 +129,7 @@
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
 					<Excluded_Packages>
-						<Excluded_Packages Name="$(BDSBIN)\dclwebsnap150.bpl">Embarcadero WebSnap Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcltee9150.bpl">TeeChart Standard 9 Components</Excluded_Packages>
 					</Excluded_Packages>
 					<ProjectProperties>
 						<ProjectProperties Name="AutoShowDeps">False</ProjectProperties>

@@ -18,7 +18,6 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 :
 TForm(Owner)
 {
-
 	mrrModelsRoot = "C:\\rrw\\Models\\sbml-test-cases-2.0.2\\cases\\semantic";
 	mOutputRoot  = "C:\\rrw\\DataOutput\\XE";
 
@@ -28,7 +27,6 @@ TForm(Owner)
 
 	fsf->TreeView1->OnClick    = fsfTreeView1Click;
     fsf->TreeView1->OnDblClick = fsfTreeView1DblClick;
-
 
     TMenuItem* loadXML = new TMenuItem(NULL);
     loadXML->Action = LoadModelA;
@@ -77,7 +75,7 @@ void __fastcall TForm1::fsfTreeView1DblClick(TObject *Sender)
 }
 
 
-void __fastcall TForm1::CompileModelAExecute(TObject *Sender)
+void __fastcall TForm1::TestModelAExecute(TObject *Sender)
 {
 	Log1->Clear();
     mtkProcess	rr(&mRR);
