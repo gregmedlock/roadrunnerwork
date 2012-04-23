@@ -1149,16 +1149,32 @@ void CGenerator::WriteComputeReactionRates(StringBuilder& ignore, const int& num
             {
             	string funcArgs = expression.substr(leftPos + string("spf_and(").size(), rightPos - 1);
 	            int nrOfArgs    = CountArguments(funcArgs);
+
+                //Convert to a va_list thing
+                //insert nrOfArgs, jsut after leftPos
+                expression.insert(leftPos + string("spf_and(").size(), ToString(nrOfArgs) + ", ");
             }
 
         }
-        if(expression.find("spf_piecewise"))
+
+        if(expression.find("spf_piecewise") != string::npos )
         {
-            			//Convert this to variable syntax...
+        	//Convert this to variable syntax...
+            size_t leftPos  = expression.find("spf_piecewise(");
+            size_t rightPos = FindMatchingParenthesis(expression, leftPos);
+            if(rightPos != string::npos)
+            {
+            	string funcArgs = expression.substr(leftPos + string("spf_piecewise(").size(), rightPos - 1);
+	            int nrOfArgs    = CountArguments(funcArgs);
+
+                //Convert to a va_list thing
+                //insert nrOfArgs, jsut after leftPos
+                expression.insert(leftPos + string("spf_piecewise(").size(), ToString(nrOfArgs) + ", ");
+            }
         }
 
         mSource<<expression;
-          }
+	}
     mSource<<Format("}{0}{0}", NL());
 }
 
