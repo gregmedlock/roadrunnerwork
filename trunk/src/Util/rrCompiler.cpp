@@ -50,7 +50,7 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
     exeCmd<<"tcc -g -shared -rdynamic " \
     <<sourceFileName \
     <<" c:\\rrw\\c_src\\rrSupportFunctions.c"
-    <<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL " \
+    <<" -vvv -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL " \
     <<"-Ic:\\rrw\\c_src " \
     <<"-Lc:\\rrw\\c_src";
 

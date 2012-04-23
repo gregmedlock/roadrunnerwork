@@ -28,7 +28,7 @@ double 	spf_geq(double a, double b);
 double 	spf_leq(double a, double b);
 double 	spf_eq(double a, double b);
 double 	spf_neq(double a, double b);
-double 	spf_and(double val1, double val2);
+double 	spf_and(int numArgs, ...);
 //bool 	spf_and(params bool[] a);
 //double 	spf_or(params double[] a);
 //bool 	spf_or(params bool[] a);
@@ -42,7 +42,7 @@ double 	spf_log(double a, double b);
 double 	spf_delay(double a, double b);
 double 	spf_root(double a, double b);
 //double 	spf_piecewise(params object[] args);
-double 	spf_piecewise(double val1, double val2, double val3);
+double 	spf_piecewise(int nrOfArgs, ...);
 
 
 // Square

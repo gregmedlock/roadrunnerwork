@@ -1,3 +1,4 @@
+#include <stdarg.h>				//va_list etc..
 #include "rrSupportFunctions.h"
 
 //---------------------------------------------------------------------------
@@ -32,20 +33,41 @@ double spf_neq(double a, double b)
     return (a != b ? 1.0 : 0.0);
 }
 
-double spf_and(double val1, double val2)
+double spf_and(int nrOfArguments, ...)
 {
-	if(val1 != 1.0 || val2 != 1.0)
+	va_list listPointer;
+
+    // Currently, listPointer is UNINITIALIZED, however,
+    // make listPointer point to the first argument in the list
+    va_start(listPointer, nrOfArguments);
+
+	double result = 1.0;
+
+    int i;	//This is C!
+    for(i = 0; i < nrOfArguments; i++)
     {
-    	return 0.0;
-    }
-    else
-    {
-    	return 1.0;
-    }
-//    foreach (double b in a)
-//        if (b != 1.0) return 0.0;
-//    return 1.0;
+        // Get an argument.  Must know
+        // the type of the arg to retrieve
+        // it from the va_list.
+      double arg = va_arg( listPointer, double);
+
+		printf( "    The %dth arg is %f\n", i, arg );
+      	if(arg != 1.0)
+      	{
+      		result = 0.0;
+          	break;
+      	}
+	}
+	va_end( listPointer );
+    return result;
 }
+
+//double spf_and(double val1, double val2)
+//{
+////    foreach (double b in a)
+////        if (b != 1.0) return 0.0;
+////    return 1.0;
+//}
 
 //        bool _and(params bool[] a)
 //        {
@@ -150,7 +172,7 @@ double spf_root(double a, double b)
     }
 }
 
-double spf_piecewise(double val1, double val2, double val3)
+double spf_piecewise(int nrOfArgs, ...)
 {
 	return -1;	//Todo: implement this one
 }

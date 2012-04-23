@@ -1106,6 +1106,9 @@ int CGenerator::WriteComputeRules(StringBuilder& ignore, const int& numReactions
     return numOfRules;
 }
 
+size_t FindMatchingParenthesis(const string& expression, size_t leftPPos);
+int  CountArguments(const string& expression);
+
 void CGenerator::WriteComputeReactionRates(StringBuilder& ignore, const int& numReactions)
 {
     mHeader.AddFunctionExport("void", "computeReactionRates(double time, double y[])");
@@ -1135,9 +1138,80 @@ void CGenerator::WriteComputeReactionRates(StringBuilder& ignore, const int& num
 
         // modify to use current y ...
         modKineticLaw = Substitute(modKineticLaw, "_y[", "y[");
-        mSource<<Format("\n\t_rates[{0}] = {1}{2}", i, modKineticLaw, NL());
-    }
+        string expression = Format("\n\t_rates[{0}] = {1}{2}", i, modKineticLaw, NL());
+
+        if(expression.find("spf_and(") != string::npos)
+        {
+			//Convert this to variable syntax...
+            size_t leftPos  = expression.find("spf_and(");
+            size_t rightPos = FindMatchingParenthesis(expression, leftPos);
+            if(rightPos != string::npos)
+            {
+            	string funcArgs = expression.substr(leftPos + string("spf_and(").size(), rightPos - 1);
+	            int nrOfArgs    = CountArguments(funcArgs);
+            }
+
+        }
+        if(expression.find("spf_piecewise"))
+        {
+            			//Convert this to variable syntax...
+        }
+
+        mSource<<expression;
+          }
     mSource<<Format("}{0}{0}", NL());
+}
+
+size_t FindMatchingParenthesis(const string& expression, size_t leftPPos)
+{
+	int pCount = 0;
+    for(size_t i = leftPPos; i < expression.size(); i++)
+    {
+    	char ch = expression[i];
+        if(ch == '(')
+        {
+	        pCount++;
+        }
+        if(ch == ')')
+        {
+   	        pCount--;
+        }
+        if(pCount == 0)
+        {
+        	//found it..
+            return i + leftPPos;
+        }
+    }
+
+    return std::string::npos;
+}
+
+int  CountArguments(const string& expression)
+{
+	int pCount = 0;	//count parenthesis
+	int nrOfArgs = 1;
+
+	for(int i = 0; i < expression.size(); i++)
+    {
+		char ch = expression[i];
+        if(ch == '(')
+        {
+	        pCount++;
+        }
+        if(ch == ')')
+        {
+   	        pCount--;
+        }
+        if(ch == ',' && pCount == 0)
+        {
+            nrOfArgs++;
+        }
+     }
+     if(expression.size() == 0)
+     {
+     	nrOfArgs--;
+     }
+     return nrOfArgs;
 }
 
 void CGenerator::WriteEvalEvents(StringBuilder& ignore, const int& numEvents, const int& numFloatingSpecies)
