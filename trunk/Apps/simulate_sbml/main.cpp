@@ -118,7 +118,7 @@ int main(int argc, char * argv[])
 
         if(!simulation.CompileModel())
         {
-            Log(lError)<<"Failed loading SBML model";
+            Log(lError)<<"Failed compiling SBML model:" <<paras.CaseNumber;
             goto end;
         }
 
