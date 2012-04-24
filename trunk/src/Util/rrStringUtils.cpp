@@ -16,6 +16,27 @@ using namespace std;
 namespace rr
 {
 
+bool ConvertFunctionCallToUseVarArgsSyntax(const string& funcName, string& expression)
+{
+    size_t startFrom = expression.find(funcName);
+    if(startFrom != string::npos)
+    {
+        //Convert this to variable syntax...
+        size_t rightPos = FindMatchingRightParenthesis(expression, startFrom);
+        if(rightPos != string::npos)
+        {
+            string funcArgs = expression.substr(startFrom, rightPos - startFrom);
+            int nrOfArgs    = GetNumberOfFunctionArguments(funcArgs);
+
+            //Convert to a va_list thing
+            //insert nrOfArgs, jsut after leftPos
+            expression.insert(startFrom + funcName.size() + 1, ToString(nrOfArgs) + ", ");
+        }
+    }
+    return true;
+}
+
+
 string RemoveChars(const string& str, const string& chars)
 {
 	string result(str);

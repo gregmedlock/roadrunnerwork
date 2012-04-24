@@ -1139,37 +1139,24 @@ void CGenerator::WriteComputeReactionRates(StringBuilder& ignore, const int& num
         modKineticLaw = Substitute(modKineticLaw, "_y[", "y[");
         string expression = Format("\n\t_rates[{0}] = {1}{2}", i, modKineticLaw, NL());
 
-        size_t startFrom = expression.find("spf_and(");
-        if(startFrom != string::npos)
+		if(expression.find("spf_and") != string::npos)
         {
-			//Convert this to variable syntax...
-            size_t rightPos = FindMatchingRightParenthesis(expression, startFrom);
-            if(rightPos != string::npos)
-            {
-            	string funcArgs = expression.substr(startFrom, rightPos - startFrom);
-	            int nrOfArgs    = GetNumberOfFunctionArguments(funcArgs);
-
-                //Convert to a va_list thing
-                //insert nrOfArgs, jsut after leftPos
-                expression.insert(startFrom + string("spf_and(").size(), ToString(nrOfArgs) + ", ");
-            }
-
+        	ConvertFunctionCallToUseVarArgsSyntax("spf_and", expression);
         }
 
-        startFrom = expression.find("spf_piecewise(");
-        if(startFrom != string::npos )
+        if(expression.find("spf_or") != string::npos)
         {
-        	//Convert this to variable syntax...
-            size_t rightPos = FindMatchingRightParenthesis(expression, startFrom);
-            if(rightPos != string::npos)
-            {
-            	string funcArgs = expression.substr(startFrom, rightPos - startFrom);
-	            int nrOfArgs    = GetNumberOfFunctionArguments(funcArgs);
+        	ConvertFunctionCallToUseVarArgsSyntax("spf_or", expression);
+        }
 
-                //Convert to a va_list thing
-                //insert nrOfArgs, jsut after leftPos
-                expression.insert(startFrom + string("spf_piecewise(").size(), ToString(nrOfArgs) + ", ");
-            }
+        if(expression.find("spf_xor") != string::npos)
+        {
+        	ConvertFunctionCallToUseVarArgsSyntax("spf_xor", expression);
+        }
+
+        if(expression.find("spf_piecewise") != string::npos)
+        {
+        	ConvertFunctionCallToUseVarArgsSyntax("spf_piecewise", expression);
         }
 
         expression = RemoveChars(expression, "\t ");
@@ -1178,7 +1165,6 @@ void CGenerator::WriteComputeReactionRates(StringBuilder& ignore, const int& num
 
     mSource<<Format("}{0}{0}", NL());
 }
-
 
 void CGenerator::WriteEvalEvents(StringBuilder& ignore, const int& numEvents, const int& numFloatingSpecies)
 {

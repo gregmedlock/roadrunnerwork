@@ -29,9 +29,10 @@ double 	spf_leq(double a, double b);
 double 	spf_eq(double a, double b);
 double 	spf_neq(double a, double b);
 double 	spf_and(int numArgs, ...);
-//bool 	spf_and(params bool[] a);
-//double 	spf_or(params double[] a);
-//bool 	spf_or(params bool[] a);
+double 	spf_or(int numArgs, ...);
+double 	spf_xor(int numArgs, ...);
+
+
 //D_S double 	spf_not(double a);
 ////D_S bool 	spf_not(bool a);
 ////D_S double 	spf_xor(params double[] a);

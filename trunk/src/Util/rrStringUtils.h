@@ -12,6 +12,7 @@ using std::vector;
 namespace rr
 {
 
+bool 			RR_DECLSPEC ConvertFunctionCallToUseVarArgsSyntax(const string& funcName, string& expression);
 string          RR_DECLSPEC RemoveChars(const string& str, const string& chars);
 bool          	RR_DECLSPEC IsUnwantedChar(char ch); //Predicate for find_if algorithms..
 size_t          RR_DECLSPEC FindMatchingRightParenthesis(const string& expression, const size_t startFrom);

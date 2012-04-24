@@ -1,4 +1,5 @@
 #include <stdarg.h>				//va_list etc..
+#include <stdbool.h>
 #include "rrSupportFunctions.h"
 
 //---------------------------------------------------------------------------
@@ -62,6 +63,95 @@ double spf_and(int nrOfArguments, ...)
     return result;
 }
 
+double spf_or(int nrOfArguments, ...)
+{
+	va_list listPointer;
+    va_start(listPointer, nrOfArguments);
+
+	double result = 0.0;
+
+    int i;	//This is C..
+    for(i = 0; i < nrOfArguments; i++)
+    {
+        // Get an argument.  Must know
+        // the type of the arg to retrieve
+        // it from the va_list.
+      double arg = va_arg( listPointer, double);
+
+		printf( "    The %dth arg is %f\n", i, arg );
+      	if(arg == 1.0)
+      	{
+      		result = 1.0;
+          	break;
+      	}
+	}
+	va_end( listPointer );
+    return result;
+}
+
+//        bool _xor(params bool[] a)
+//        {
+//            bool result = false;
+//            for (int i = 0; i < a.Length; i++)
+//            {
+//                if (i == 0)
+//                {
+//                    result = a[i];
+//                }
+//                else
+//                {
+//                    result ^= a[i];
+//                }
+//            }
+//            return result;
+//        }
+
+//        public static double _xor(params double[] a)
+//        {
+//            bool result = false;
+//            for (int i = 0; i < a.Length; i++)
+//            {
+//                if (i == 0)
+//                {
+//                    result = (a[i] == 1.0);
+//                }
+//                else
+//                {
+//                    result ^= (a[i] == 1.0);
+//                }
+//            }
+//            return (result ? 1.0 : 0.0);
+//        }
+
+double spf_xor(int nrOfArguments, ...)
+{
+	va_list listPointer;
+    va_start(listPointer, nrOfArguments);
+
+	_Bool result = false;
+
+    int i;	//This is C..
+    for(i = 0; i < nrOfArguments; i++)
+    {
+        // Get an argument.  Must know
+        // the type of the arg to retrieve
+        // it from the va_list.
+    	double arg = va_arg( listPointer, double);
+		printf( "    The %dth arg is %f\n", i, arg );
+
+      	if(i == 0)
+      	{
+      		result = (arg == 1.0);
+        }
+        else
+        {
+        	result ^= (arg == 1.0);
+        }
+	}
+	va_end( listPointer );
+    return (result ? 1.0 : 0.0);
+}
+
 //double spf_and(double val1, double val2)
 //{
 ////    foreach (double b in a)
@@ -117,24 +207,8 @@ double spf_not(double a)
 //            }
 //            return (result ? 1.0 : 0.0);
 //        }
-//
-//        bool _xor(params bool[] a)
-//        {
-//            bool result = false;
-//            for (int i = 0; i < a.Length; i++)
-//            {
-//                if (i == 0)
-//                {
-//                    result = a[i];
-//                }
-//                else
-//                {
-//                    result ^= a[i];
-//                }
-//            }
-//            return result;
-//        }
-//
+
+
 int spf_factorial(int a)
 {
 //    static int b = a;
