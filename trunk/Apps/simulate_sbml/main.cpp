@@ -65,7 +65,7 @@ int main(int argc, char * argv[])
     gLog.SetCutOffLogLevel(IntToLogLevel(paras.VerboseMode));
     Log(lForceShow)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
 //    paras.CaseNumber = 51;
-    string dataOutputFolder("C:\\rrw\\DataOutput\\XE");
+    string dataOutputFolder("C:\\DataOutput");
     string dummy;
     string logFileName;
 
@@ -93,7 +93,7 @@ int main(int argc, char * argv[])
         simulation.UseEngine(roadRunner);
 
         //Read SBML models.....
-        string modelFilePath("C:\\rrw\\Models\\sbml-test-cases-2.0.2\\cases\\semantic");
+        string modelFilePath("C:\\SBMLTestCases");
         string modelFileName;
 
         simulation.SetCaseNumber(paras.CaseNumber);
