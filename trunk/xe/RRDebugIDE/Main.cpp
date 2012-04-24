@@ -9,15 +9,20 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "TFileSelectionFrame"
+#pragma link "mtkIniFileC"
 #pragma resource "*.dfm"
-TForm1 *Form1;
+TMainForm *MainForm;
 
 using namespace mtk;
 //---------------------------------------------------------------------------
-__fastcall TForm1::TForm1(TComponent* Owner)
+__fastcall TMainForm::TMainForm(TComponent* Owner)
 :
-TForm(Owner)
+TForm(Owner),
+mFormSaver(this, "MainForm", mIniFile->GetIniFile())
 {
+	mIniFile->Init();
+	mIniFile->Load();
+	mFormSaver.Read();
 	mrrModelsRoot = "C:\\rrw\\Models\\sbml-test-cases-2.0.2\\cases\\semantic";
 	mOutputRoot  = "C:\\rrw\\DataOutput\\XE";
 
@@ -35,8 +40,13 @@ TForm(Owner)
     mRR.SetMessageHandling(CATCHMESSAGE);
 }
 
+__fastcall TMainForm::~TMainForm()
+{
+	mFormSaver.Write();
+	mIniFile->Save();
 
-string TForm1::GetSelectedFileName()
+}
+string TMainForm::GetSelectedFileName()
 {
 	//Load XML file into XML memo
     string itemName;
@@ -59,7 +69,7 @@ string TForm1::GetSelectedFileName()
 
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::LoadModelAExecute(TObject *Sender)
+void __fastcall TMainForm::LoadModelAExecute(TObject *Sender)
 {
     string fName = GetSelectedFileName();
 
@@ -69,13 +79,13 @@ void __fastcall TForm1::LoadModelAExecute(TObject *Sender)
     }
 }
 
-void __fastcall TForm1::fsfTreeView1DblClick(TObject *Sender)
+void __fastcall TMainForm::fsfTreeView1DblClick(TObject *Sender)
 {
 	LoadModelAExecute(NULL);
 }
 
 
-void __fastcall TForm1::TestModelAExecute(TObject *Sender)
+void __fastcall TMainForm::TestModelAExecute(TObject *Sender)
 {
 	Log1->Clear();
     mtkProcess	rr(&mRR);
@@ -85,11 +95,17 @@ void __fastcall TForm1::TestModelAExecute(TObject *Sender)
     fName = ExtractFileName(fName);
     vector<string> parts = SplitString(fName,"-");
 
-    //First part is the number
+    //First part is the model number
     int nTheNumber = ToInt(parts[0]);
 
     stringstream paras;
     paras<<"-v"<<RGLogLevel->ItemIndex<<" -n"<<nTheNumber;
+
+
+    if(compileOnlyCB->Checked)
+    {
+		paras<<" -c";
+    }
 
     rr.Create(paras.str().c_str());
     rr.Run();
@@ -101,7 +117,7 @@ void __fastcall TForm1::TestModelAExecute(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+void __fastcall TMainForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
     if(Key == VK_ESCAPE)
     {
@@ -109,7 +125,7 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shif
     }
 }
 
-void __fastcall TForm1::fsfTreeView1Click(TObject *Sender)
+void __fastcall TMainForm::fsfTreeView1Click(TObject *Sender)
 {
 	//Fill out filename
     string name = GetSelectedFileName();

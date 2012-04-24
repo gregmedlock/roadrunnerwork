@@ -2,6 +2,8 @@
 #include "rrPCH.h"
 #endif
 #pragma hdrstop
+#include <algorithm>
+#include <cctype>
 #include "sbml/Model.h"
 #include "sbml/SBMLDocument.h"
 #include "rrCSharpGenerator.h"
@@ -1106,9 +1108,6 @@ int CGenerator::WriteComputeRules(StringBuilder& ignore, const int& numReactions
     return numOfRules;
 }
 
-size_t FindMatchingParenthesis(const string& expression, size_t leftPPos);
-int  CountArguments(const string& expression);
-
 void CGenerator::WriteComputeReactionRates(StringBuilder& ignore, const int& numReactions)
 {
     mHeader.AddFunctionExport("void", "computeReactionRates(double time, double y[])");
@@ -1140,95 +1139,46 @@ void CGenerator::WriteComputeReactionRates(StringBuilder& ignore, const int& num
         modKineticLaw = Substitute(modKineticLaw, "_y[", "y[");
         string expression = Format("\n\t_rates[{0}] = {1}{2}", i, modKineticLaw, NL());
 
-        if(expression.find("spf_and(") != string::npos)
+        size_t startFrom = expression.find("spf_and(");
+        if(startFrom != string::npos)
         {
 			//Convert this to variable syntax...
-            size_t leftPos  = expression.find("spf_and(");
-            size_t rightPos = FindMatchingParenthesis(expression, leftPos);
+            size_t rightPos = FindMatchingRightParenthesis(expression, startFrom);
             if(rightPos != string::npos)
             {
-            	string funcArgs = expression.substr(leftPos + string("spf_and(").size(), rightPos - 1);
-	            int nrOfArgs    = CountArguments(funcArgs);
+            	string funcArgs = expression.substr(startFrom, rightPos - startFrom);
+	            int nrOfArgs    = GetNumberOfFunctionArguments(funcArgs);
 
                 //Convert to a va_list thing
                 //insert nrOfArgs, jsut after leftPos
-                expression.insert(leftPos + string("spf_and(").size(), ToString(nrOfArgs) + ", ");
+                expression.insert(startFrom + string("spf_and(").size(), ToString(nrOfArgs) + ", ");
             }
 
         }
 
-        if(expression.find("spf_piecewise") != string::npos )
+        startFrom = expression.find("spf_piecewise(");
+        if(startFrom != string::npos )
         {
         	//Convert this to variable syntax...
-            size_t leftPos  = expression.find("spf_piecewise(");
-            size_t rightPos = FindMatchingParenthesis(expression, leftPos);
+            size_t rightPos = FindMatchingRightParenthesis(expression, startFrom);
             if(rightPos != string::npos)
             {
-            	string funcArgs = expression.substr(leftPos + string("spf_piecewise(").size(), rightPos - 1);
-	            int nrOfArgs    = CountArguments(funcArgs);
+            	string funcArgs = expression.substr(startFrom, rightPos - startFrom);
+	            int nrOfArgs    = GetNumberOfFunctionArguments(funcArgs);
 
                 //Convert to a va_list thing
                 //insert nrOfArgs, jsut after leftPos
-                expression.insert(leftPos + string("spf_piecewise(").size(), ToString(nrOfArgs) + ", ");
+                expression.insert(startFrom + string("spf_piecewise(").size(), ToString(nrOfArgs) + ", ");
             }
         }
 
+        expression = RemoveChars(expression, "\t ");
         mSource<<expression;
 	}
+
     mSource<<Format("}{0}{0}", NL());
 }
 
-size_t FindMatchingParenthesis(const string& expression, size_t leftPPos)
-{
-	int pCount = 0;
-    for(size_t i = leftPPos; i < expression.size(); i++)
-    {
-    	char ch = expression[i];
-        if(ch == '(')
-        {
-	        pCount++;
-        }
-        if(ch == ')')
-        {
-   	        pCount--;
-        }
-        if(pCount == 0)
-        {
-        	//found it..
-            return i + leftPPos;
-        }
-    }
-
-    return std::string::npos;
-}
-
-int  CountArguments(const string& expression)
-{
-	int pCount = 0;	//count parenthesis
-	int nrOfArgs = 1;
-
-	for(int i = 0; i < expression.size(); i++)
-    {
-		char ch = expression[i];
-        if(ch == '(')
-        {
-	        pCount++;
-        }
-        if(ch == ')')
-        {
-   	        pCount--;
-        }
-        if(ch == ',' && pCount == 0)
-        {
-            nrOfArgs++;
-        }
-     }
-     if(expression.size() == 0)
-     {
-     	nrOfArgs--;
-     }
-     return nrOfArgs;
-}
 
 void CGenerator::WriteEvalEvents(StringBuilder& ignore, const int& numEvents, const int& numFloatingSpecies)
 {

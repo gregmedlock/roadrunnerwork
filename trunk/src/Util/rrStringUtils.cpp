@@ -16,6 +16,86 @@ using namespace std;
 namespace rr
 {
 
+string RemoveChars(const string& str, const string& chars)
+{
+	string result(str);
+    for(int chrNr = 0; chrNr < chars.size(); chrNr++)
+    {
+	   	result.erase(std::remove(result.begin(), result.end(), chars[chrNr]), result.end());
+    }
+
+	return result;
+}
+
+bool IsUnwantedChar(char ch) //Predicate for find_if algorithms..
+{
+	if(ch == '\n' || ch == '\t' || ch ==' ')
+    {
+        return true;
+    }
+    return false;
+}
+
+size_t FindMatchingRightParenthesis(const string& expression, const size_t startFrom)
+{
+	int pCount = 0;
+
+    size_t leftPos  = expression.find("(", startFrom);	//First lef parenthesis
+    bool isScanning = false;	//Start scanning when first left parenthesis is found
+
+    for(size_t i = startFrom; i < expression.size(); i++)
+    {
+    	char ch = expression[i];
+        if(ch == '(')
+        {
+	        pCount++;
+            isScanning = true;
+        }
+        if(ch == ')')
+        {
+   	        pCount--;
+        }
+        if(pCount == 0 && isScanning == true)
+        {
+        	//found it..
+            return i;
+        }
+    }
+
+    return std::string::npos;
+}
+
+int GetNumberOfFunctionArguments(const string& expression)
+{
+	int pCount = 0;	//count parenthesis
+	int nrOfArgs = 1;
+    bool isScanning = false;	//Start scanning when first left parenthesis is found
+	for(int i = 0; i < expression.size(); i++)
+    {
+		char ch = expression[i];
+        if(ch == '(')
+        {
+	        isScanning = true;
+	        pCount++;
+        }
+        if(ch == ')')
+        {
+   	        pCount--;
+        }
+        if(ch == ',' && pCount == 1 && isScanning == true)
+        {
+            nrOfArgs++;
+        }
+     }
+
+     if(expression.size() == 0)
+     {
+     	-1;
+     }
+     return nrOfArgs;
+}
+
+
 string JoinPath(const string& aPath, const string& aFile)
 {
 	//Just check the paths last position. it has to be a "/"

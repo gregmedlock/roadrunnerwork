@@ -68,7 +68,7 @@
 		</PropertyGroup>
 		<ItemGroup>
 			<CppCompile Include="Main.cpp">
-				<Form>Form1</Form>
+				<Form>MainForm</Form>
 				<DependentOn>Main.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>

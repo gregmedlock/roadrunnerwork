@@ -1,7 +1,7 @@
-object Form1: TForm1
+object MainForm: TMainForm
   Left = 0
   Top = 0
-  Caption = 'Form1'
+  Caption = 'MainForm'
   ClientHeight = 470
   ClientWidth = 781
   Color = clBtnFace
@@ -55,9 +55,6 @@ object Form1: TForm1
       Height = 468
       Align = alClient
       TabOrder = 0
-      ExplicitLeft = 3
-      ExplicitTop = 2
-      ExplicitWidth = 271
     end
   end
   object Panel2: TPanel
@@ -68,9 +65,6 @@ object Form1: TForm1
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 3
-    ExplicitLeft = 276
-    ExplicitWidth = 802
-    ExplicitHeight = 657
   end
   object PageControl1: TPageControl
     Left = 172
@@ -80,12 +74,12 @@ object Form1: TForm1
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 4
-    ExplicitLeft = 276
-    ExplicitWidth = 802
-    ExplicitHeight = 657
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
-      ExplicitWidth = 497
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Log1: TMemo
         Left = 0
         Top = 297
@@ -95,7 +89,6 @@ object Form1: TForm1
         ReadOnly = True
         ScrollBars = ssBoth
         TabOrder = 0
-        ExplicitWidth = 497
       end
       object Panel3: TPanel
         Left = 0
@@ -104,7 +97,6 @@ object Form1: TForm1
         Height = 297
         Align = alTop
         TabOrder = 1
-        ExplicitWidth = 497
         DesignSize = (
           601
           297)
@@ -125,7 +117,6 @@ object Form1: TForm1
           ReadOnly = True
           TabOrder = 1
           Text = 'mModelFileName'
-          ExplicitWidth = 464
         end
         object GroupBox2: TGroupBox
           Left = 16
@@ -134,7 +125,7 @@ object Form1: TForm1
           Height = 205
           Caption = 'Program Options'
           TabOrder = 2
-          object CheckBox1: TCheckBox
+          object compileOnlyCB: TCheckBox
             Left = 32
             Top = 24
             Width = 97
@@ -184,7 +175,10 @@ object Form1: TForm1
     object TabSheet2: TTabSheet
       Caption = 'XML'
       ImageIndex = 1
-      ExplicitWidth = 497
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Memo2: TMemo
         Left = 0
         Top = 0
@@ -196,14 +190,15 @@ object Form1: TForm1
         ReadOnly = True
         ScrollBars = ssBoth
         TabOrder = 0
-        ExplicitWidth = 497
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'TabSheet3'
       ImageIndex = 2
-      ExplicitWidth = 794
-      ExplicitHeight = 629
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object Splitter2: TSplitter
         Left = 393
         Top = 0
@@ -221,7 +216,6 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo3')
         TabOrder = 0
-        ExplicitHeight = 629
       end
       object Memo4: TMemo
         Left = 396
@@ -232,8 +226,6 @@ object Form1: TForm1
         Lines.Strings = (
           'Memo4')
         TabOrder = 1
-        ExplicitWidth = 398
-        ExplicitHeight = 629
       end
     end
   end
@@ -251,5 +243,11 @@ object Form1: TForm1
     object updateFileName: TAction
       Caption = 'updateFileName'
     end
+  end
+  object mIniFile: mtkIniFileC
+    IniFileName = 'SBMLTester.ini'
+    RootFolder = '.'
+    Left = 680
+    Top = 136
   end
 end

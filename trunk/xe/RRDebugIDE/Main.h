@@ -11,12 +11,14 @@
 #include <ExtCtrls.hpp>
 #include <ActnList.hpp>
 #include <ComCtrls.hpp>
+#include "mtkIniFileC.h"
 #include <string>
+#include "mtkFormSaver.h"
 #include "mtkExeFile.h"
 #include "mtkProcess.h"
 using namespace std;
 //---------------------------------------------------------------------------
-class TForm1 : public TForm
+class TMainForm : public TForm
 {
 __published:	// IDE-managed Components
 	TGroupBox *GroupBox1;
@@ -43,9 +45,10 @@ __published:	// IDE-managed Components
 	TMemo *Memo4;
 	TSplitter *Splitter2;
 	TGroupBox *GroupBox2;
-	TCheckBox *CheckBox1;
+	TCheckBox *compileOnlyCB;
 	TCheckBox *CheckBox2;
 	TCheckBox *CheckBox3;
+	mtkIniFileC *mIniFile;
 	void __fastcall LoadModelAExecute(TObject *Sender);
 	void __fastcall fsfTreeView1DblClick(TObject *Sender);
 	void __fastcall TestModelAExecute(TObject *Sender);
@@ -58,10 +61,13 @@ private:	// User declarations
     mtkExeFile		mRR;
 	string 			GetSelectedFileName();
 
+    mtkFormSaver	mFormSaver;
+
 public:		// User declarations
-	__fastcall TForm1(TComponent* Owner);
+	__fastcall 		TMainForm(TComponent* Owner);
+	__fastcall 	   ~TMainForm();
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TForm1 *Form1;
+extern PACKAGE TMainForm *MainForm;
 //---------------------------------------------------------------------------
 #endif
