@@ -1,0 +1,4 @@
+STDIN
+ 892 Log level is:DEBUG Processing model: case00892 Model failed compilation Failed compiling SBML model:892 Done 
+ 957 Log level is:DEBUG Processing model: case000957 Model failed compilation Failed compiling SBML model:957 Done 
+ 958 Log level is:DEBUG Processing model: case000958 Model failed compilation Failed compiling SBML model:958 Done 

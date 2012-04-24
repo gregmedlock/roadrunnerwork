@@ -16,6 +16,17 @@ using namespace std;
 namespace rr
 {
 
+string RR_DECLSPEC ReplaceWord(const string& str1, const string& str2, const string& theString)
+{
+	string temp(theString);
+    while(temp.find(str1) != string::npos)
+    {
+        temp.replace(temp.find(str1), str1.size(), str2);
+    };
+
+    return temp;
+}
+
 bool ConvertFunctionCallToUseVarArgsSyntax(const string& funcName, string& expression)
 {
     size_t startFrom = expression.find(funcName);

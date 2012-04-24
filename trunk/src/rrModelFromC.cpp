@@ -171,7 +171,7 @@ bool ModelFromC::SetupDLLData()
         return false;
     }
 
-    time	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_time");
+    time	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "mTime");
     if(!time)
     {
 		Log(lError)<<"Failed to assign to time";

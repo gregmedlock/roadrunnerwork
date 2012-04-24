@@ -295,7 +295,7 @@ void CGenerator::WriteOutVariables(StringBuilder& ignore)
     mHeader.FormatArray("TEventDelayDelegate",	 	           "mEventDelay",			mNumEvents 								, 	"Array of trigger function pointers");
     mHeader.FormatArray("bool",				  	                "_eventType",			mNumEvents								, 	"Array holding the status whether events are useValuesFromTriggerTime or not");
     mHeader.FormatArray("bool",				  	                "_eventPersistentType", mNumEvents								, 	"Array holding the status whether events are persitstent or not");
-	mHeader.FormatVariable("double",  					    	"_time");
+	mHeader.FormatVariable("double",  					    	"mTime");
     mHeader.FormatVariable("int",	  						    "numIndependentVariables");
     mHeader.FormatVariable("int",	  						    "numDependentVariables");
     mHeader.FormatVariable("int",	  						    "numTotalVariables");
@@ -337,7 +337,7 @@ void CGenerator::WriteComputeAllRatesOfChange(StringBuilder& ignore, const int& 
     }
 
     mSource<<Append("\t//amounts.CopyTo(dTemp, rateRules.Length); Todo: fix this.." + NL());
-    mSource<<Append("\tevalModel(_time, _amounts);" + NL());
+    mSource<<Append("\tevalModel(mTime, _amounts);" + NL());
     bool isThereAnEntry = false;
     for (int i = 0; i < numDependentSpecies; i++)
     {
@@ -920,7 +920,9 @@ void CGenerator::WriteEvalInitialAssignments(StringBuilder& ignore, const int& n
             if (leftSideRule.size())
             {
                 mSource<<Append(leftSideRule + " = ");
-                mSource<<Append(substituteTerms(numReactions, "", rightSideRule) + ";" + NL());
+                string temp = Append(substituteTerms(numReactions, "", rightSideRule) + ";" + NL());
+                temp = ReplaceWord("time", "mTime", temp);
+                mSource<<temp;
             }
         }
     }
@@ -1002,7 +1004,9 @@ int CGenerator::WriteComputeRules(StringBuilder& ignore, const int& numReactions
 
                 if(isRateRule && mNOM.MultiplyCompartment(varName, sCompartment) && (rightSide.find(sCompartment) == string::npos))
                 {
-                    mSource<<Format("({0}) * {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(sCompartment), NL());
+                	string temp = Format("({0}) * {1};{2}", substituteTerms(numReactions, "", rightSideRule), FindSymbol(sCompartment), NL());
+                    temp = ReplaceWord("time", "mTime", temp);
+                    mSource<<temp;
                 }
                 else
                 {
@@ -1012,7 +1016,9 @@ int CGenerator::WriteComputeRules(StringBuilder& ignore, const int& numReactions
                     }
                     else
                     {
-                        mSource<<Format("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL());
+                    	string temp   = Format("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL());
+                        temp = ReplaceWord("time", "mTime", temp);
+                        mSource<<temp;
                     }
                 }
 
@@ -1030,9 +1036,7 @@ int CGenerator::WriteComputeRules(StringBuilder& ignore, const int& numReactions
 
     mSource<<Append("}" + NL() + NL());
 
-
     mHeader<<"\t double _rateRules["<<numRateRules<<"];           // Vector containing values of additional rate rules      \n"; //Todo: why is t his here in nowhere?
-
     mHeader.AddFunctionExport("void", "InitializeRates()");
     mSource<<"void InitializeRates()\n{";
 
@@ -1186,7 +1190,7 @@ void CGenerator::WriteEvalEvents(StringBuilder& ignore, const int& numEvents, co
         }
     }
 
-    mSource<<Append("\t_time = timeIn;  // Don't remove" + NL());
+    mSource<<Append("\tmTime = timeIn;  // Don't remove" + NL());
     mSource<<Append("\tupdateDependentSpeciesValues(_y);" + NL());
     mSource<<Append("\tcomputeRules(_y);" + NL());
 
@@ -1197,6 +1201,7 @@ void CGenerator::WriteEvalEvents(StringBuilder& ignore, const int& numEvents, co
         string eventString = tempList[0];
 
         eventString = substituteTerms(0, "", eventString);
+        eventString = ReplaceWord("time", "mTime", eventString);
         mSource<<"\t\tmPreviousEventStatusArray[" << i << "] = mEventStatusArray[" << i << "];" << NL();
         mSource<<Append("\t\tif (" + eventString + " == 1.0) {" + NL());
         mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = true;" + NL());
@@ -1229,7 +1234,7 @@ void CGenerator::WriteEvalModel(StringBuilder& ignore, const int& numReactions, 
 
     mSource<<Append(NL());
     mSource<<Append("\t\tconvertToAmounts();" + NL());
-    mSource<<Append("\t\t_time = timein;  // Don't remove" + NL());
+    mSource<<Append("\t\tmTime = timein;  // Don't remove" + NL());
     mSource<<Append("\t\tupdateDependentSpeciesValues (_y);" + NL());
 
     if (numOfRules > 0)
@@ -1237,7 +1242,7 @@ void CGenerator::WriteEvalModel(StringBuilder& ignore, const int& numReactions, 
         mSource<<Append("\t\tcomputeRules (_y);" + NL());
     }
 
-    mSource<<Append("\t\tcomputeReactionRates (_time, _y);" + NL());
+    mSource<<Append("\t\tcomputeReactionRates (mTime, _y);" + NL());
 
     // Write out the ODE equations
     string stoich;
@@ -1459,7 +1464,9 @@ void CGenerator::WriteEventAssignments(StringBuilder& ignore, const int& numReac
 
                 str = sTempVar+ str.substr(str.find(" ="));
                 nCount++;
-                mSource<<Format("\t\t{0};{1}", str, NL());
+                string temp = Format("\t\t{0};{1}", str, NL());
+                temp = ReplaceWord("time", "mTime", temp);
+                mSource<<temp;
             }
             mSource<<Append("\t\treturn values;" + NL());
             mSource<<Append("\t}" + NL());
@@ -1522,10 +1529,17 @@ void CGenerator::WriteSetParameterValues(StringBuilder& ignore, const int& numRe
 
     for (int i = 0; i < globalParameterList.size(); i++)
     {
-        mSource<<Format("\n\t{0} = (double){1};{2}",
+    	//If !+INF
+        string para = Format("\n\t{0} = (double){1};{2}",
                       convertSymbolToGP(globalParameterList[i].name),
                       WriteDouble(globalParameterList[i].value),
                       NL());
+		//If a parameter is INF, it means it is not initialized properly ??
+		if(para.find("INF") == string::npos && para.find("NAN") == string::npos)
+        {
+        	mSource<<para;
+        }
+
     }
 
     // Initialize local parameter values
@@ -2028,7 +2042,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
     else if(theToken == "log10")
     {
-        mSource<<Append("Math.Log10");
+        mSource<<Append("spf_log10");
     }
     else if(theToken == "exp")
     {

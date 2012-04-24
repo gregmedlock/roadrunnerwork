@@ -49,9 +49,24 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 
     exeCmd<<"tcc -g -shared -rdynamic " \
     <<sourceFileName \
-    <<" c:\\rrw\\c_src\\rrSupportFunctions.c"
-//    <<" -vvv"
-    <<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL " \
+    <<" c:\\rrw\\c_src\\rrSupportFunctions.c";
+
+    if(gLog.GetLogLevel() == lDebug1)
+    {
+    	exeCmd<<" -v";
+    }
+
+    if(gLog.GetLogLevel() == lDebug2)
+    {
+    	exeCmd<<" -vv";
+    }
+
+    if(gLog.GetLogLevel() == lDebug3)
+    {
+    	exeCmd<<" -vvv";
+    }
+
+    exeCmd<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL " \
     <<"-Ic:\\rrw\\c_src " \
     <<"-Lc:\\rrw\\c_src";
 

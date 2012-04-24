@@ -385,7 +385,7 @@ copy c:\rrw\ThirdParty\libsbml\dependencies\bin\zlib1.dll $(rr_root)\installs\xe
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="HostApplication">C:\rrw\installs\xe\bin\simulate_model.exe</Parameters>
+						<Parameters Name="HostApplication">C:\rrw\installs\xe\bin\simulate.exe</Parameters>
 					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

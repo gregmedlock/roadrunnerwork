@@ -10,7 +10,7 @@
 //const double SQRT2 					= 1.41421356237309504880168872421; /* sqrt(2) */
 //const double SQRT1_2 				= 0.70710678118654752440084436210; /* sqrt(1/2) */
 //const double SQRT3 					= 1.73205080756887729352744634151; /* sqrt(3) */
-//const double PI		 				= 3.14159265358979323846264338327; /* pi */
+#define PI		 				3.14159265358979323846264338327
 //const double PI_BY_2 				= 1.57079632679489661923132169164; /* pi/2 */
 //const double PI_BY_4 				= 0.78539816339744830966156608458; /* pi/4 */
 //const double SQRTPI 				= 1.77245385090551602729816748334; /* sqrt(pi) */
@@ -32,19 +32,20 @@ double 	spf_and(int numArgs, ...);
 double 	spf_or(int numArgs, ...);
 double 	spf_xor(int numArgs, ...);
 
-
 //D_S double 	spf_not(double a);
 ////D_S bool 	spf_not(bool a);
 ////D_S double 	spf_xor(params double[] a);
 ////D_S bool 	spf_xor(params bool[] a);
 int 	spf_factorial(int a);
-//D_S double 	spf_log(double a);
-double 	spf_log(double a, double b);
+double 	spf_log(double a);
+double 	spf_log10(double a);
+
+//double 	spf_log(double a, double b);
 double 	spf_delay(double a, double b);
 double 	spf_root(double a, double b);
+
 //double 	spf_piecewise(params object[] args);
 double 	spf_piecewise(int nrOfArgs, ...);
-
 
 // Square
 double spf_sqr(double a);
@@ -53,64 +54,68 @@ double Logbase(double value, double baseValue);
 //// -----------------------------------------------------------------------
 //// Start of trig functions
 //// -----------------------------------------------------------------------
-//
+
 //// Convert degrees to Radians
 double degToRad(double degrees);
-//
 
-//// Convert radians to degrees
+// Convert radians to degrees
 double radToDeg(double radians);
 
+//// Secant
+double sec(double a);
+
 //// Cotangent
-//D_S double Cot(double a);
+double cot(double a);
 //
 //// Inverse cotangent
-//D_S double Acot(double a);
+double arccot(double a);
 //
 //// Inverse cotangent - ratio numerator and denominator provided
-//D_S double Acot2(double a, double b);
-//
-//// Secant
-//D_S double Sec(double a);
-//
+double arccot2(double a, double b);
 //// Inverse secant
-//D_S double Asec(double a);
-//
+double asec(double a);
+
+// Inverse secant
+double arcsech(double a);
+
 //// Cosecant
-//D_S double Csc(double a);
+double csc(double a);
 //
 //// Inverse cosecant
-//D_S double Acsc(double a);
+double acsc(double a);
 //
 //// Hyperbolic secant of a double number
-//D_S double Sech(double a);
+double sech(double a);
 //
 //// Inverse hyperbolic secant of a double number
-//D_S double Asech(double a);
+double asech(double a);
 //
 //// Hyperbolic cosecant of a double number
-//D_S double Csch(double a);
+double csch(double a);
 //
 //// Inverse hyperbolic cosecant of a double number
-//D_S double Acsch(double a);
+double arccsc(double a);
+
+//// Inverse hyperbolic cosecant of a double number
+double arccsch(double a);
 //
 //
 //// Hyperbolic cotangent of a double number
-//D_S double Coth(double a);
+double coth(double a);
 //
 //// Inverse hyperbolic cotangent of a double number
-//D_S double Acoth(double a);
+double arccoth(double a);
 //
 //// Inverse hyperbolic functions
 //// --------------------------------------------------------------
 //// Inverse hyperbolic sine of a double number
-//D_S double Asinh(double a);
+double arcsinh(double a);
 //
 //// Inverse hyperbolic cosine of a double number
-//D_S double Acosh(double a);
+double arccosh(double a);
 //
 //// Inverse hyperbolic tangent of a double number
-//D_S double Atanh(double a);
+double arctanh(double a);
 //
 //// Boolean functions for event handling" + NL());
 //D_S double Gt(double a, double b);

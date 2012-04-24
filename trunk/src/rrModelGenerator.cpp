@@ -161,13 +161,9 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
         	s.nextToken();
        	}
     }
-    catch (SBWApplicationException)
+    catch (const Exception& e)
     {
-    	throw;
-    }
-    catch (Exception e)
-    {
-       throw new SBWApplicationException(e.Message);
+       throw Exception(e.Message);
     }
     return sb.ToString();
 }

@@ -23,8 +23,8 @@ mFormSaver(this, "MainForm", mIniFile->GetIniFile())
 	mIniFile->Init();
 	mIniFile->Load();
 	mFormSaver.Read();
-	mrrModelsRoot = "C:\\rrw\\Models\\sbml-test-cases-2.0.2\\cases\\semantic";
-	mOutputRoot  = "C:\\rrw\\DataOutput\\XE";
+	mrrModelsRoot = "C:\\SBMLTestCases";
+	mOutputRoot  = "C:\\DataOutput";
 
 	fsf->MonitorFolder(mrrModelsRoot,"*l2v4.xml");
 	fsf->MonitorFolder(mOutputRoot,"*.c");

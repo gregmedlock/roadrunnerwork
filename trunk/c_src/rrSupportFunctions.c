@@ -211,23 +211,29 @@ double spf_not(double a)
 
 int spf_factorial(int a)
 {
-//    static int b = a;
-//    if (b < 2)
-//	{
-//        return 1;
-//	}
-//    return b * spf_factorial(b - 1);
+    static int b;
+    b = a;
+    if (b < 2)
+	{
+        return 1;
+	}
+    return b * spf_factorial(b - 1);
 }
 
-//double _log(double a)
-//{
-//    return log(a);
-//}
-
-double spf_log(double a, double b)
+double spf_log(double a)
 {
-    return log(b, a);
+    return log(a);
 }
+
+double spf_log10(double a)
+{
+    return log10(a);
+}
+
+//double spf_log(double a, double b)
+//{
+//    return log(b, a);
+//}
 
 double spf_delay(double a, double b)
 {
@@ -277,4 +283,84 @@ double spf_piecewise(int nrOfArgs, ...)
 //            }
 //        }
 //    }
+
+//
+double sec(double a)
+{
+	return sec(a);
+}
+
+//// Cotangent
+double cot(double a)
+{return -1;}
+//
+//// Inverse cotangent
+double arccot(double a)
+{return -1;}
+//
+//// Inverse cotangent - ratio numerator and denominator provided
+double arccot2(double a, double b)
+{return -1;}
+//
+//
+//// Inverse secant
+double asec(double a)
+{return -1;}
+//
+//// Cosecant
+double csc(double a)
+{return -1;}
+//
+//// Inverse cosecant
+double acsc(double a)
+{return -1;}
+//
+//// Hyperbolic secant of a double number
+double sech(double a)
+{return -1;}
+//
+//// Inverse hyperbolic secant of a double number
+double asech(double a)
+{return -1;}
+
+double arcsech(double a)
+{return -1;}
+//
+//// Hyperbolic cosecant of a double number
+double csch(double a)
+{return -1;}
+//
+
+//// Inverse hyperbolic cosecant of a double number
+double arccsc(double a)
+{
+	return -1;
+}
+
+//// Inverse hyperbolic cosecant of a double number
+double arccsch(double a)
+{return -1;}
+//
+//
+//// Hyperbolic cotangent of a double number
+double coth(double a)
+{return -1;}
+//
+//// Inverse hyperbolic cotangent of a double number
+double arccoth(double a)
+{return -1;}
+//
+//// Inverse hyperbolic functions
+//// --------------------------------------------------------------
+//// Inverse hyperbolic sine of a double number
+double arcsinh(double a)
+{return -1;}
+//
+//// Inverse hyperbolic cosine of a double number
+double arccosh(double a)
+{return -1;}
+//
+//// Inverse hyperbolic tangent of a double number
+double arctanh(double a)
+{return -1;}
 
