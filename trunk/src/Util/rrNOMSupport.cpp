@@ -2364,15 +2364,15 @@ string NOMSupport::getNthRuleType(const int& arg)
     return result;
 }
 
-//        int NOMSupport::getNumBoundarySpecies()
-//        {
-//            if (mModel == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//            return (int)mModel->getNumSpeciesWithBoundaryCondition();
-//        }
-//
+int NOMSupport::getNumBoundarySpecies()
+{
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+    return (int)mModel->getNumSpeciesWithBoundaryCondition();
+}
+
 int NOMSupport::getNumCompartments()
 {
     if (mModel == NULL)

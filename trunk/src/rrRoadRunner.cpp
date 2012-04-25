@@ -2486,12 +2486,12 @@ void RoadRunner::EvalModel()
 //        }
 //
 //        Help("Get the number of boundary species")
-//        int RoadRunner::getNumberOfBoundarySpecies()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            return mModel->getNumBoundarySpecies;
-//        }
+int RoadRunner::getNumberOfBoundarySpecies()
+{
+    if (!modelLoaded)
+        throw new Exception(emptyModelStr);
+    return mModel->getNumBoundarySpecies();
+}
 //
 //        Help("Sets the value of a boundary species by its index")
 //        void RoadRunner::setBoundarySpeciesByIndex(int index, double value)
