@@ -143,8 +143,6 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
             }
         	mEngine->setSelectionList(newList);
         }
-
-
     }
 
     if(mEngine)

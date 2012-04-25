@@ -2017,7 +2017,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
 	string theToken(s.tokenString);
     if(theToken == "pow")
     {
-        mSource<<Append("pow");
+        mSource<<Append("spf_pow");
         //mSource<<Append("");
     }
     else if(theToken == "sqrt")

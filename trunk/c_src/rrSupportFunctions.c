@@ -2,6 +2,12 @@
 #include <stdbool.h>
 #include "rrSupportFunctions.h"
 
+double spf_pow(double a, double b)
+{
+	printf("computing %d to the power of %d", a, b);
+    double res = pow(a,b);
+    return res;
+}
 //---------------------------------------------------------------------------
 // Boolean functions for event handling" + NL());
 double spf_gt(double a, double b)

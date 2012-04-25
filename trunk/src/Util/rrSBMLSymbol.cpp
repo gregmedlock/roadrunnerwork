@@ -103,12 +103,11 @@ ostream& operator<<(ostream& stream, const SBMLSymbol& symbol)
     {
     	stream<<"Intial Assignment = "<<symbol.mInitialAssignment			<<endl;
     }
-    stream<<"..add more info..."										<<endl;
+
     stream<<"Has Rule = "<<		ToString(symbol.mHasRule)				<<endl;
     if(symbol.mHasRule)
     {
 		stream<<"Rule = "<<		symbol.mRule					<<endl;
-
     }
     return stream;
 }

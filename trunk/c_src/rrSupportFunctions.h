@@ -36,6 +36,7 @@ double 	spf_xor(int numArgs, ...);
 ////D_S bool 	spf_not(bool a);
 ////D_S double 	spf_xor(params double[] a);
 ////D_S bool 	spf_xor(params bool[] a);
+double  spf_pow(double a, double b);
 int 	spf_factorial(int a);
 double 	spf_log(double a);
 double 	spf_log10(double a);
