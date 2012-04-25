@@ -148,7 +148,7 @@
 						<Parameters Name="DebugSourceDirs">C:\RRW\src\cxx</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-n979 -v8 -c</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-n1 -v2</Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>
