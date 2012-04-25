@@ -10,6 +10,7 @@
 #include "rrCvodeInterface.h"
 #include "rrNLEQInterface.h"
 #include "rrStringList.h"
+#include "rrStringListContainer.h"
 #include "rrMisc.h"
 #include "rrTextWriter.h"
 #include "rrSimulationData.h"
@@ -215,7 +216,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void                            setCapabilities(const string& capsStr);
         void                            setValue(const string& sId, const double& dValue);
         double 							getValue(const string& sId);
-        StringList                    	getAvailableSymbols();
+        StringListContainer            	getAvailableSymbols();
         StringList                    	getSelectionList();
         void 							setSelectionList(const StringList& newSelectionList);
         double                          oneStep(const double& currentTime, const double& stepSize);

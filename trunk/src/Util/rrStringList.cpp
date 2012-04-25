@@ -25,6 +25,7 @@ StringList::~StringList()
 
 StringList::StringList(const StringList& cp)
 {
+	mLabel = cp.mLabel;
 	mStrings = cp.mStrings;
 }
 
@@ -106,5 +107,17 @@ ostream& operator<<(ostream& stream, StringList& list)
     }
 	return stream;
 }
+
+ostringstream& operator<<(ostringstream& stream, StringList& list)
+{
+	vector<string>::iterator iter;
+    int count = 0;
+    for(iter = list.begin(); iter != list.end(); iter++)
+    {
+		stream<<"List Item "<<++count<<" : "<<(*iter)<<std::endl;
+    }
+	return stream;
+}
+
 } //namespace rr
 

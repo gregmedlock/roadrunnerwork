@@ -128,6 +128,23 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
         mSettings.mRelative = (it != settings.end()) ?  ToDouble((*it).second) : 1.e-4;
 
         mSettings.mEndTime = mSettings.mStartTime + mSettings.mDuration;
+
+		it = settings.find("variables");
+        if(it != settings.end())
+        {
+        	StringList newList;
+	        newList.Add("time");
+            vector<string> vars = SplitString((*it).second, ",");
+            for(int i=0; i < vars.size(); i++)
+            {
+				string aVar = Trim(vars[i]);
+    	    	newList.Add(aVar);
+
+            }
+        	mEngine->setSelectionList(newList);
+        }
+
+
     }
 
     if(mEngine)

@@ -14,15 +14,18 @@ namespace rr
 class RR_DECLSPEC StringList : public rrObject
 {
 	protected:
+
 		vector<string> 				mStrings;
         vector<string>::iterator    mLI;	//ListITerator
 
 	public:
+   		string 						mLabel;
     								StringList();
 	   								StringList(const StringList& cp);
 	   								StringList(const vector<string>& strings);
     							   ~StringList();
 
+    	void 				        Label(const string& lbl){mLabel = lbl;}
     	void 				        Add(const string& str);
         string						AsString(const string& delimiter = ",");
         int  				        size() const {return mStrings.size();}
@@ -44,5 +47,6 @@ class RR_DECLSPEC StringList : public rrObject
 };
 
 ostream& operator<<(ostream& stream, StringList& list);
+ostringstream& operator<<(ostringstream& stream, StringList& list);
 }
 #endif

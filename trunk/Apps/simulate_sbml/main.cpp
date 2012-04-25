@@ -93,7 +93,7 @@ int main(int argc, char * argv[])
         simulation.UseEngine(roadRunner);
 
         //Read SBML models.....
-        string modelFilePath("C:\\SBMLTestCases");
+        string modelFilePath("C:\\SBMLTestCases\\all");
         string modelFileName;
 
         simulation.SetCaseNumber(paras.CaseNumber);
@@ -142,7 +142,7 @@ int main(int argc, char * argv[])
 
         //Then read settings file if it exists..
         string settingsOveride("");//C:\\rrw\\Models\\settings_override.txt");
-        if(!simulation.LoadSettings(settingsOveride))
+        if(!simulation.LoadSettings(settingsOveride))    //set selection list here!
         {
             Log(lError)<<"Failed loading SBML model settings";
         }

@@ -170,39 +170,6 @@ StringListContainer NOMSupport::getListOfBoundarySpecies()
     return boundarySpeciesList;
 }
 
-// ============ From NOM.cs in SBMLSupport
-///// <summary>
-//    /// Summary description for NOM.
-//    /// </summary>
-//    public class NOM
-//    {
-//
-//        static SBMLDocument _oDoc;
-//
-//        SBMLDocument Document
-//        {
-//            get
-//            {
-//                return _oDoc;
-//            }
-//        }
-//
-//        static Model mModel;
-//
-//        Model Model
-//        {
-//            get
-//            {
-//                return mModel;
-//            }
-//        }
-//
-//        string GetAnnotatedModel(string targetSBML, string sourceSBML, bool checkModelId)
-//        {
-//            return AnnotationUtil.GetAnnotatedModel(targetSBML, sourceSBML, checkModelId);
-//        }
-//
-
 string NOMSupport::GetId(SBase& element)
 {
     if (element.isSetId())

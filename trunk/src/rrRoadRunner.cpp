@@ -142,11 +142,12 @@ bool RoadRunner::InitializeModel()
 	// Construct default selection list
 	selectionList.resize(mModel->getNumTotalVariables() + 1); // + 1 to include time
 	selectionList[0].selectionType = clTime;
-	for (int i = 0; i < mModel->getNumTotalVariables(); i++)
+	for (int i = 1; i < mModel->getNumTotalVariables() + 1; i++)
 	{
-		selectionList[i + 1].index = i;
-		selectionList[i + 1].selectionType = clFloatingSpecies;
+		selectionList[i].index = i - 1;
+		selectionList[i].selectionType = clFloatingSpecies;
 	}
+
 	return true;
 }
 
@@ -296,7 +297,6 @@ vector<double> RoadRunner::BuildModelEvalArgument()
 
 	for(int i = 0; i < mModel->rateRules.size(); i++)
 	{
-//		dResult.push_back(mModel->amounts[i]);
 		dResult.push_back(mModel->mAmounts[i]);
 	}
 
@@ -391,6 +391,9 @@ bool RoadRunner::Simulate(const bool& useConservationLaws)
     //Populate simulation result
 	DoubleMatrix data;
     data = simulate();
+
+    StringListContainer l = getAvailableSymbols();
+    Log(lError)<<l;
 
 	StringList list = getSelectionList();
 
@@ -1122,139 +1125,139 @@ void RoadRunner::EvalModel()
 
 //        Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
 //              " time, species names, , volume, reaction rates and rates of change (speciesName')")
-//        void RoadRunner::setSelectionList(ArrayList newSelectionList)
+void RoadRunner::setSelectionList(const StringList& newSelectionList)
+{
+    selectionList.resize(newSelectionList.Count());// = new TSelectionRecord[newSelectionList.Count()];
+    StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
+    StringList bs = mModelGenerator->getBoundarySpeciesList();
+    //ArrayList rs = mModelGenerator->getReactionNames();
+    //ArrayList vol = mModelGenerator->getCompartmentList();
+    StringList gp = mModelGenerator->getGlobalParameterList();
+//    var sr = mModelGenerator->ModifiableSpeciesReferenceList;
+
+    for (int i = 0; i < newSelectionList.Count(); i++)
+    {
+        // Check for species
+        for (int j = 0; j < fs.Count(); j++)
+        {
+            if ((string)newSelectionList[i] == (string)fs[j])
+            {
+                selectionList[i].index = j;
+                selectionList[i].selectionType = TSelectionType::clFloatingSpecies;
+                break;
+            }
+
+            if ((string)newSelectionList[i] == "[" + (string)fs[j] + "]")
+            {
+                selectionList[i].index = j;
+                selectionList[i].selectionType = TSelectionType::clFloatingAmount;
+                break;
+            }
+
+            // Check for species rate of change
+            if ((string)newSelectionList[i] == (string)fs[j] + "'")
+            {
+                selectionList[i].index = j;
+                selectionList[i].selectionType = TSelectionType::clRateOfChange;
+                break;
+            }
+        }
+
+        // Check fgr boundary species
+        for (int j = 0; j < bs.Count(); j++)
+        {
+            if ((string)newSelectionList[i] == (string)bs[j])
+            {
+                selectionList[i].index = j;
+                selectionList[i].selectionType = TSelectionType::clBoundarySpecies;
+                break;
+            }
+            if ((string)newSelectionList[i] == "[" + (string)bs[j] + "]")
+            {
+                selectionList[i].index = j;
+                selectionList[i].selectionType = TSelectionType::clBoundaryAmount;
+                break;
+            }
+        }
+
+
+        if ((string)newSelectionList[i] == "time")
+        {
+            selectionList[i].selectionType = TSelectionType::clTime;
+        }
+
+//        for (int j = 0; j < rs.Count(); j++)
 //        {
-//            selectionList = new TSelectionRecord[newSelectionList.Count];
-//            ArrayList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
-//            ArrayList bs = mModelGenerator->getBoundarySpeciesList();
-//            ArrayList rs = mModelGenerator->getReactionNames();
-//            ArrayList vol = mModelGenerator->getCompartmentList();
-//            ArrayList gp = mModelGenerator->getGlobalParameterList();
-//            var sr = mModelGenerator->ModifiableSpeciesReferenceList;
-//
-//            for (int i = 0; i < newSelectionList.Count; i++)
+//            // Check for reaction rate
+//            if ((string)newSelectionList[i] == (string)rs[j])
 //            {
-//                // Check for species
-//                for (int j = 0; j < fs.Count; j++)
-//                {
-//                    if ((string)newSelectionList[i] == (string)fs[j])
-//                    {
-//                        selectionList[i].index = j;
-//                        selectionList[i].selectionType = TSelectionType::clFloatingSpecies;
-//                        break;
-//                    }
-//
-//                    if ((string)newSelectionList[i] == "[" + (string)fs[j] + "]")
-//                    {
-//                        selectionList[i].index = j;
-//                        selectionList[i].selectionType = TSelectionType::clFloatingAmount;
-//                        break;
-//                    }
-//
-//                    // Check for species rate of change
-//                    if ((string)newSelectionList[i] == (string)fs[j] + "'")
-//                    {
-//                        selectionList[i].index = j;
-//                        selectionList[i].selectionType = TSelectionType::clRateOfChange;
-//                        break;
-//                    }
-//                }
-//
-//                // Check fgr boundary species
-//                for (int j = 0; j < bs.Count; j++)
-//                {
-//                    if ((string)newSelectionList[i] == (string)bs[j])
-//                    {
-//                        selectionList[i].index = j;
-//                        selectionList[i].selectionType = TSelectionType::clBoundarySpecies;
-//                        break;
-//                    }
-//                    if ((string)newSelectionList[i] == "[" + (string)bs[j] + "]")
-//                    {
-//                        selectionList[i].index = j;
-//                        selectionList[i].selectionType = TSelectionType::clBoundaryAmount;
-//                        break;
-//                    }
-//                }
-//
-//
-//                if ((string)newSelectionList[i] == "time")
-//                {
-//                    selectionList[i].selectionType = TSelectionType::clTime;
-//                }
-//
-//                for (int j = 0; j < rs.Count; j++)
-//                {
-//                    // Check for reaction rate
-//                    if ((string)newSelectionList[i] == (string)rs[j])
-//                    {
-//                        selectionList[i].index = j;
-//                        selectionList[i].selectionType = TSelectionType::clFlux;
-//                        break;
-//                    }
-//                }
-//
-//                for (int j = 0; j < vol.Count; j++)
-//                {
-//                    // Check for volume
-//                    if ((string)newSelectionList[i] == (string)vol[j])
-//                    {
-//                        selectionList[i].index = j;
-//                        selectionList[i].selectionType = TSelectionType::clVolume;
-//                        break;
-//                    }
-//                }
-//
-//                for (int j = 0; j < gp.Count; j++)
-//                {
-//                    // Check for volume
-//                    if ((string)newSelectionList[i] == (string)gp[j])
-//                    {
-//                        selectionList[i].index = j;
-//                        selectionList[i].selectionType = TSelectionType::clParameter;
-//                        break;
-//                    }
-//                }
-//
-//                if (((string)newSelectionList[i]).StartsWith("EE:"))
-//                {
-//                    string parameters = ((string)newSelectionList[i]).Substring(3);
-//                    var p1 = parameters.Substring(0, parameters.IndexOf(","));
-//                    var p2 = parameters.Substring(parameters.IndexOf(",") + 1);
-//                    selectionList[i].selectionType = TSelectionType::clElasticity;
-//                    selectionList[i].p1 = p1;
-//                    selectionList[i].p2 = p2;
-//                }
-//
-//                if (((string)newSelectionList[i]).StartsWith("uEE:"))
-//                {
-//                    string parameters = ((string)newSelectionList[i]).Substring(4);
-//                    var p1 = parameters.Substring(0, parameters.IndexOf(","));
-//                    var p2 = parameters.Substring(parameters.IndexOf(",") + 1);
-//                    selectionList[i].selectionType = TSelectionType::clUnscaledElasticity;
-//                    selectionList[i].p1 = p1;
-//                    selectionList[i].p2 = p2;
-//                }
-//                if (((string)newSelectionList[i]).StartsWith("eigen_"))
-//                {
-//                    var species = ((string)newSelectionList[i]).Substring("eigen_".Length);
-//                    selectionList[i].selectionType = TSelectionType::clEigenValue;
-//                    selectionList[i].p1 = species;
-//                    mModelGenerator->floatingSpeciesConcentrationList.find(species, out selectionList[i].index);
-//                }
-//
-//                int index;
-//                if (sr.find((string)newSelectionList[i], out index))
-//                {
-//                    selectionList[i].selectionType = TSelectionType::clStoichiometry;
-//                    selectionList[i].index = index;
-//                    selectionList[i].p1 = (string) newSelectionList[i];
-//                }
-//
+//                selectionList[i].index = j;
+//                selectionList[i].selectionType = TSelectionType::clFlux;
+//                break;
 //            }
 //        }
 //
+//        for (int j = 0; j < vol.Count(); j++)
+//        {
+//            // Check for volume
+//            if ((string)newSelectionList[i] == (string)vol[j])
+//            {
+//                selectionList[i].index = j;
+//                selectionList[i].selectionType = TSelectionType::clVolume;
+//                break;
+//            }
+//        }
+
+        for (int j = 0; j < gp.Count(); j++)
+        {
+            // Check for volume
+            if ((string)newSelectionList[i] == (string)gp[j])
+            {
+                selectionList[i].index = j;
+                selectionList[i].selectionType = TSelectionType::clParameter;
+                break;
+            }
+        }
+
+//        if (((string)newSelectionList[i]).StartsWith("EE:"))
+//        {
+//            string parameters = ((string)newSelectionList[i]).Substring(3);
+//            var p1 = parameters.Substring(0, parameters.IndexOf(","));
+//            var p2 = parameters.Substring(parameters.IndexOf(",") + 1);
+//            selectionList[i].selectionType = TSelectionType::clElasticity;
+//            selectionList[i].p1 = p1;
+//            selectionList[i].p2 = p2;
+//        }
 //
+//        if (((string)newSelectionList[i]).StartsWith("uEE:"))
+//        {
+//            string parameters = ((string)newSelectionList[i]).Substring(4);
+//            var p1 = parameters.Substring(0, parameters.IndexOf(","));
+//            var p2 = parameters.Substring(parameters.IndexOf(",") + 1);
+//            selectionList[i].selectionType = TSelectionType::clUnscaledElasticity;
+//            selectionList[i].p1 = p1;
+//            selectionList[i].p2 = p2;
+//        }
+//        if (((string)newSelectionList[i]).StartsWith("eigen_"))
+//        {
+//            var species = ((string)newSelectionList[i]).Substring("eigen_".Length);
+//            selectionList[i].selectionType = TSelectionType::clEigenValue;
+//            selectionList[i].p1 = species;
+//            mModelGenerator->floatingSpeciesConcentrationList.find(species, out selectionList[i].index);
+//        }
+//
+//        int index;
+//        if (sr.find((string)newSelectionList[i], out index))
+//        {
+//            selectionList[i].selectionType = TSelectionType::clStoichiometry;
+//            selectionList[i].index = index;
+//            selectionList[i].p1 = (string) newSelectionList[i];
+//        }
+
+    }
+}
+
+
 //        Help(
 //            "Carry out a single integration step using a stepsize as indicated in the method call (the intergrator is reset to take into account all variable changes). Arguments: double CurrentTime, double StepSize, Return Value: new CurrentTime."
 //            )
@@ -2631,15 +2634,15 @@ int RoadRunner::getNumberOfBoundarySpecies()
 //        }
 //
 //
-//        // This is a Level 1 method !
-//        Help("Returns a list of floating species names")
-//        ArrayList RoadRunner::getFloatingSpeciesNames()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            return mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
-//        }
+// This is a Level 1 method !
+//Help("Returns a list of floating species names")
+StringList RoadRunner::getFloatingSpeciesNames()
+{
+    if (!modelLoaded)
+        throw new SBWApplicationException(emptyModelStr);
+
+    return mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
+}
 //
 //        Help("Returns a list of floating species initial condition names")
 //        ArrayList RoadRunner::getFloatingSpeciesInitialConditionNames()
@@ -4362,29 +4365,33 @@ int RoadRunner::getNumberOfBoundarySpecies()
 //        Help(
 //            "Returns symbols of the currently loaded model, that can be used for the selectionlist format array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }."
 //            )
-//        ArrayList RoadRunner::getAvailableSymbols()
-//        {
-//            var oResult = new ArrayList {new ArrayList(new object[] {"Time", new ArrayList(new object[] {"time"})})};
-//
-//            if (!modelLoaded) return oResult;
-//
-//            oResult.Add(new ArrayList(new object[] { "Floating Species", getFloatingSpeciesNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Boundary Species", getBoundarySpeciesNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Floating Species (amount)", getFloatingSpeciesAmountNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Boundary Species (amount)", getBoundarySpeciesAmountNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Global Parameters", getParameterNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Fluxes", getReactionNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Rates of Change", getRateOfChangeNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Volumes", mModelGenerator->getCompartmentList() }));
-//            oResult.Add(new ArrayList(new object[] { "Elasticity Coefficients", getElasticityCoefficientNames() }));
-//            oResult.Add(
-//                new ArrayList(new object[] { "Unscaled Elasticity Coefficients", getUnscaledElasticityCoefficientNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Eigenvalues", getEigenValueNames() }));
-//
-//            return oResult;
-//        }
-//
-//
+StringListContainer RoadRunner::getAvailableSymbols()
+{
+    StringListContainer oResult;
+     //= new ArrayList {new ArrayList(new object[] {"Time", new ArrayList(new object[] {"time"})})};
+
+    if (!modelLoaded)
+    {
+    	return oResult;
+    }
+
+    oResult.Add("Floating Species", getFloatingSpeciesNames() );
+//    oResult.Add(new ArrayList(new object[] { "Boundary Species", getBoundarySpeciesNames() }));
+//    oResult.Add(new ArrayList(new object[] { "Floating Species (amount)", getFloatingSpeciesAmountNames() }));
+//    oResult.Add(new ArrayList(new object[] { "Boundary Species (amount)", getBoundarySpeciesAmountNames() }));
+//    oResult.Add(new ArrayList(new object[] { "Global Parameters", getParameterNames() }));
+//    oResult.Add(new ArrayList(new object[] { "Fluxes", getReactionNames() }));
+//    oResult.Add(new ArrayList(new object[] { "Rates of Change", getRateOfChangeNames() }));
+//    oResult.Add(new ArrayList(new object[] { "Volumes", mModelGenerator->getCompartmentList() }));
+//    oResult.Add(new ArrayList(new object[] { "Elasticity Coefficients", getElasticityCoefficientNames() }));
+//    oResult.Add(
+//        new ArrayList(new object[] { "Unscaled Elasticity Coefficients", getUnscaledElasticityCoefficientNames() }));
+//    oResult.Add(new ArrayList(new object[] { "Eigenvalues", getEigenValueNames() }));
+
+    return oResult;
+}
+
+
 //bool RoadRunner::IsNleqAvailable()
 //{
 //    return NLEQInterface.IsAvailable;

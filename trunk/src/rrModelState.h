@@ -16,7 +16,8 @@ class RR_DECLSPEC ModelState : public rrObject
 {
     protected:
     public:
-        vector<double>                  mBoundarySpeciesConcentrations;
+        //vector<double>                  mBoundarySpeciesConcentrations;
+        double*							mBoundarySpeciesConcentrations;
         vector<double>                  mCompartmentVolumes;
         vector<double>                  mConservedTotals;
         vector<double>                  mDyDt;
