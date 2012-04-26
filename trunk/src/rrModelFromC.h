@@ -21,12 +21,15 @@ typedef double  (__cdecl*c_double_int)(int);
 typedef double* (__cdecl*c_doubleStar)();
 typedef void	(__cdecl*c_void_double_doubleStar)(double, double*);
 
-//: public IModel	//This model sets up nnecessary handles to C DLL functions: public IModel	//This model sets up nnecessary handles to C DLL functions
+
+//ModelFromC used to inherit from IModel. This inheritance is not necessary, so removed..
+
+//: public IModel	//This model sets up necessary handles to C DLL functions: public IModel	//This model sets up nnecessary handles to C DLL functions
 class RR_DECLSPEC ModelFromC : public rrObject
 {
     protected:
-//    	//These variables is also generated in the c-code, weird ??
-//        //Init a decendent models data later
+    	//These variables is also generated in the c-code, weird ??
+        //Init a decendent models data later
         int										mDummyInt;
         int                                    *numIndependentVariables;
         int                                    *numDependentVariables;
@@ -41,26 +44,44 @@ class RR_DECLSPEC ModelFromC : public rrObject
 //
 //
     public:
+    	//variables in the DLL are prefixed with _ (will remove that later)
+        //In this interface, corresponding variable is prefixed with 'm', followed by capital letter, if possible
+        list<string> 					        Warnings;
+
+
         double 							       *time;
         void									SetTime(double _time){*time = _time;}
 		double							        GetTime(){return *time;}
+
+        double*									mY;             //Corresponds to y in IModel
         vector<double> 					        y;
-        list<string> 					        Warnings;
+
+		double*									mInitY;
         vector<double>                  		init_y;
-		double*									m_dydt;	   		//This is the "dydt" data in the DLL. IModel also has amounts.. CONFUSING
-////        vector<double>                          amounts;
-        double*									mAmounts;		//This is the "amounts" data in the DLL. IModel also has amounts.. CONFUSING
-//        virtual double							GetAmounts(const int& i) = 0;
+
+   		double*									m_dydt;	   		//This is the "dydt" data in the DLL.
+        vector<double> 	                        dydt;
+
+//        vector<double>                          amounts;
+        double*									mAmounts;		//This is the "amounts" data in the DLL.
+
 //        //vector<double>                          bc;
         double*									bc;
+
         vector<double> 					        sr;
+
+        double*									mGP;
         vector<double> 					        gp;				//Global parameters
 //        vector<double> 					        lp ;        	//Local parameters
+
 //        //vector<double> 	                        c ;        		//Compartment volumes
         double* 	         	               	c;        		//Compartment volumes
-        vector<double> 	                        dydt;
+
+
+        double*									mRates;
         vector<double> 	                        rates;
         vector<double> 					        ct ;         	//Conservation totals
+
         vector<double> 					        rateRules;		//additional rateRules
         vector<double> 					        eventTests;
 //        vector<double> 					        eventPriorities;
@@ -128,13 +149,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
 		HINSTANCE					mDLLHandle;
 
 
-		
-		double*						mInitY;
-        double*						mY;             //Corresponds to y in IModel
-//        double*						y;             //Corresponds to y in IModel
-        double*						mRates;
-        double*						mGP;
-//        double*						mC;			//CompartmentVolume
+
 
 		//Function pointers...
         c_int 				        cInitModel;

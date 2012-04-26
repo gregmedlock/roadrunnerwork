@@ -81,6 +81,32 @@ bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
 	return true;
 }
 
+bool RoadRunner::CreateSelectionList()
+{
+	//read from settings the variables found in the amounts and concentrations lists
+	StringList theList;
+    TSelectionRecord record;
+
+	theList.Add("time");
+    for(int i = 0; i < mSettings.mAmount.size(); i++)
+    {
+    	theList.Add("[" + mSettings.mAmount[i] + "]");		//In the setSelection list below, the [] selects the correct 'type'
+    }
+
+    for(int i = 0; i < mSettings.mConcentration.size(); i++)
+    {
+    	theList.Add(mSettings.mConcentration[i]);
+    }
+
+	setSelectionList(theList);
+
+    Log(lInfo)<<"The following is selected:";
+    for(int i = 0; i < selectionList.size(); i++)
+    {
+    	Log(lInfo)<<selectionList[i];
+    }
+}
+
 ModelGenerator*	RoadRunner::GetCodeGenerator()
 {
 	return mModelGenerator;
@@ -163,8 +189,8 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 	switch (record.selectionType)
 	{
 		case TSelectionType::clFloatingSpecies:
-//			dResult = mModel->getConcentration(record.index);
-			dResult = mModel->mAmounts[record.index];			//Todo:
+			dResult = mModel->getConcentration(record.index);
+//			dResult = mModel->mAmounts[record.index];			//Todo:
 		break;
 
 		case TSelectionType::clBoundarySpecies:
@@ -197,20 +223,20 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 		break;
 
 		case TSelectionType::clFloatingAmount:
-			//dResult = mModel->amounts[record.index];//Todo: howis this working?
             dResult = mModel->mAmounts[record.index];
 		break;
 
 		case TSelectionType::clBoundaryAmount:
-//            int nIndex;
+            int nIndex;
 			//Todo: enable this
-//            if (
-//                mModelGenerator->compartmentList.find(
-//                    mModelGenerator->boundarySpeciesList[record.index].compartmentName,
-//                    out nIndex))
-//                dResult = mModel->bc[record.index] * mModel->c[nIndex];
-//            else
+            if (
+                mModelGenerator->compartmentList.find(
+                    mModelGenerator->boundarySpeciesList[record.index].compartmentName, nIndex))
+                dResult = mModel->bc[record.index] * mModel->c[nIndex];
+            else
+            {
 				dResult = 0.0;
+            }
 		break;
 
 		case TSelectionType::clElasticity:
@@ -745,12 +771,12 @@ StringList RoadRunner::getSelectionList()
 		return oResult;
 	}
 
-	StringList oFloating = mModelGenerator->getFloatingSpeciesConcentrationList();
-	StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
-	StringList oFluxes = mModelGenerator->getReactionNames();
-	StringList oVolumes = mModelGenerator->getCompartmentList();
-	StringList oRates = getRateOfChangeNames();
-	StringList oParameters = getParameterNames();
+	StringList oFloating 	= mModelGenerator->getFloatingSpeciesConcentrationList();
+	StringList oBoundary 	= mModelGenerator->getBoundarySpeciesList();
+	StringList oFluxes 		= mModelGenerator->getReactionNames();
+	StringList oVolumes 	= mModelGenerator->getCompartmentList();
+	StringList oRates 		= getRateOfChangeNames();
+	StringList oParameters 	= getParameterNames();
 
 	vector<TSelectionRecord>::iterator iter;
 	int size = selectionList.size();
@@ -1113,7 +1139,7 @@ void RoadRunner::setSelectionList(const StringList& newSelectionList)
     StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList bs = mModelGenerator->getBoundarySpeciesList();
     //ArrayList rs = mModelGenerator->getReactionNames();
-    //ArrayList vol = mModelGenerator->getCompartmentList();
+    StringList vol = mModelGenerator->getCompartmentList();
     StringList gp = mModelGenerator->getGlobalParameterList();
 //    var sr = mModelGenerator->ModifiableSpeciesReferenceList;
 

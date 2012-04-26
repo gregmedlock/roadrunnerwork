@@ -93,7 +93,7 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 
     StringList  	Warnings;
 
-	StringBuilder ignore; 	//The Write functions below are inherited with a stringbuilder in the
+	CodeBuilder ignore; 	//The Write functions below are inherited with a CodeBuilder in the
     						//prototype that is not to be used..
 
     //Clear header and source file objects...
@@ -233,7 +233,7 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 	return mHeader.ToString() + mSource.ToString();
 }
 
-void CGenerator::WriteClassHeader(StringBuilder& ignore)
+void CGenerator::WriteClassHeader(CodeBuilder& ignore)
 {
 	//Create c code header file....
     mHeader<<"#ifndef modelH"<<endl;
@@ -261,7 +261,7 @@ void CGenerator::WriteClassHeader(StringBuilder& ignore)
 
 }
 
-void CGenerator::WriteOutVariables(StringBuilder& ignore)
+void CGenerator::WriteOutVariables(CodeBuilder& ignore)
 {
 //	mHeader<<"\t//The following structures mimics two members of the base class to the model\n";
 //	mHeader<<"\tstruct \n\t{\n\t\tdouble* vec;\n\t\tint Length;\n\t} amounts;\n\n";
@@ -322,7 +322,7 @@ void CGenerator::WriteOutVariables(StringBuilder& ignore)
 }
 
 
-void CGenerator::WriteComputeAllRatesOfChange(StringBuilder& ignore, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
+void CGenerator::WriteComputeAllRatesOfChange(CodeBuilder& ignore, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
 {
  	//In header
    	mHeader.AddFunctionExport("void", "computeAllRatesOfChange()");
@@ -389,7 +389,7 @@ void CGenerator::WriteComputeAllRatesOfChange(StringBuilder& ignore, const int& 
     mSource<<Format("}{0}{0}", NL());
 }
 
-void CGenerator::WriteComputeConservedTotals(StringBuilder& ignore, const int& numFloatingSpecies, const int& numDependentSpecies)
+void CGenerator::WriteComputeConservedTotals(CodeBuilder& ignore, const int& numFloatingSpecies, const int& numDependentSpecies)
 {
     mHeader.AddFunctionExport("void", "computeConservedTotals()");
     mSource<<"// Uses the equation: C = Sd - L0*Si"<<endl;
@@ -447,12 +447,12 @@ void CGenerator::WriteComputeConservedTotals(StringBuilder& ignore, const int& n
     }
     else
     {
-		mSource<<"printf(\"In an empty ComputeConservedTotals!\");\n";
+		mSource<<"printf(\"In an empty ComputeConservedTotals!\n\");\n";
     }
     mSource<<"}\n\n";
 }
 
-void CGenerator::WriteUpdateDependentSpecies(StringBuilder& ignore, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
+void CGenerator::WriteUpdateDependentSpecies(CodeBuilder& ignore, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
 {
     mHeader.AddFunctionExport("void", "updateDependentSpeciesValues(double* y)");
     mSource<<Append("// Compute values of dependent species " + NL());
@@ -527,7 +527,7 @@ void CGenerator::WriteUpdateDependentSpecies(StringBuilder& ignore, const int& n
     mSource<<Format("}{0}{0}", NL());
 }
 
-void CGenerator::WriteUserDefinedFunctions(StringBuilder& ignore)
+void CGenerator::WriteUserDefinedFunctions(CodeBuilder& ignore)
 {
 	for (int i = 0; i < mNOM.getNumFunctionDefinitions(); i++)
     {
@@ -559,14 +559,14 @@ void CGenerator::WriteUserDefinedFunctions(StringBuilder& ignore)
         }
         catch (const Exception& ex)
         {
-        	StringBuilder msg;
+        	CodeBuilder msg;
             msg<<"Error while trying to get Function Definition #" << i <<ex.what() << "\r\n\r\n";
             throw Exception(msg.ToString());
         }
     }
 }
 
-void CGenerator::WriteResetEvents(StringBuilder& ignore, const int& numEvents)
+void CGenerator::WriteResetEvents(CodeBuilder& ignore, const int& numEvents)
 {
       mHeader.AddFunctionExport("void", "resetEvents()");
       mSource<<"void resetEvents()\n{";
@@ -582,7 +582,7 @@ void CGenerator::WriteResetEvents(StringBuilder& ignore, const int& numEvents)
       mSource<<Format("}{0}{0}", NL());
 }
 
-void CGenerator::WriteSetConcentration(StringBuilder& ignore)
+void CGenerator::WriteSetConcentration(CodeBuilder& ignore)
 {
     mHeader.AddFunctionExport("void", "setConcentration(int index, double value)");
     mSource<<"\nvoid setConcentration(int index, double value)\n{";
@@ -605,7 +605,7 @@ void CGenerator::WriteSetConcentration(StringBuilder& ignore)
     mSource<<Format("}{0}{0}", NL());
 }
 
-void CGenerator::WriteGetConcentration(StringBuilder& ignore)
+void CGenerator::WriteGetConcentration(CodeBuilder& ignore)
 {
 	mHeader.AddFunctionExport("double", "getConcentration(int index)");
     mSource<<Format("double getConcentration(int index)\n{{0}", NL());
@@ -613,7 +613,7 @@ void CGenerator::WriteGetConcentration(StringBuilder& ignore)
     mSource<<Format("}{0}{0}", NL());
 }
 
-void CGenerator::WriteConvertToAmounts(StringBuilder& ignore)
+void CGenerator::WriteConvertToAmounts(CodeBuilder& ignore)
 {
     mHeader.AddFunctionExport("void", "convertToAmounts()");
     mSource<<Format("void convertToAmounts()\n{{0}", NL());
@@ -627,7 +627,7 @@ void CGenerator::WriteConvertToAmounts(StringBuilder& ignore)
     mSource<<Format("}{0}{0}", NL());
 }
 
-void CGenerator::WriteConvertToConcentrations(StringBuilder& ignore)
+void CGenerator::WriteConvertToConcentrations(CodeBuilder& ignore)
 {
     mHeader.AddFunctionExport("void", "convertToConcentrations()");
     mSource<<"void convertToConcentrations()\n{";
@@ -639,7 +639,7 @@ void CGenerator::WriteConvertToConcentrations(StringBuilder& ignore)
     mSource<<Append("\n}" + NL() + NL());
 }
 
-void CGenerator::WriteProperties(StringBuilder& ignore)
+void CGenerator::WriteProperties(CodeBuilder& ignore)
 {
 ////            // ------------------------------------------------------------------------------
 ////            sb.Append("\tpublic double[] y {" + NL());
@@ -775,7 +775,7 @@ void CGenerator::WriteProperties(StringBuilder& ignore)
 
 }
 
-void CGenerator::WriteAccessors(StringBuilder& ignore)
+void CGenerator::WriteAccessors(CodeBuilder& ignore)
 {
 //    sb<<Append("\tpublic int getNumIndependentVariables {" + NL());
 //    sb<<Append("\t\tget { return numIndependentVariables; }" + NL());
@@ -853,7 +853,7 @@ string CGenerator::FindSymbol(const string& varName)
           throw Exception(Format("Unable to locate lefthand side symbol in assignment[{0}]", varName));
 }
 
-void CGenerator::WriteTestConstraints(StringBuilder& ignore)
+void CGenerator::WriteTestConstraints(CodeBuilder& ignore)
 {
     mHeader.AddFunctionExport("void", "testConstraints()");
     mSource<<Append("void testConstraints()" + NL());
@@ -871,7 +871,7 @@ void CGenerator::WriteTestConstraints(StringBuilder& ignore)
     mSource<<Append("}" + NL() + NL());
 }
 
-void CGenerator::WriteEvalInitialAssignments(StringBuilder& ignore, const int& numReactions)
+void CGenerator::WriteEvalInitialAssignments(CodeBuilder& ignore, const int& numReactions)
 {
     mHeader.AddFunctionExport("void", "evalInitialAssignments()");
     mSource<<Append("void evalInitialAssignments()" + NL());
@@ -947,7 +947,7 @@ void CGenerator::WriteEvalInitialAssignments(StringBuilder& ignore, const int& n
     mSource<<Append("}" + NL() + NL());
 }
 
-int CGenerator::WriteComputeRules(StringBuilder& ignore, const int& numReactions)
+int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
 {
     IntStringHashTable mapVariables;
     int numRateRules = 0;
@@ -1123,7 +1123,7 @@ int CGenerator::WriteComputeRules(StringBuilder& ignore, const int& numReactions
     return numOfRules;
 }
 
-void CGenerator::WriteComputeReactionRates(StringBuilder& ignore, const int& numReactions)
+void CGenerator::WriteComputeReactionRates(CodeBuilder& ignore, const int& numReactions)
 {
     mHeader.AddFunctionExport("void", "computeReactionRates(double time, double y[])");
     mSource<<Append("// Compute the reaction rates" + NL());
@@ -1181,7 +1181,7 @@ void CGenerator::WriteComputeReactionRates(StringBuilder& ignore, const int& num
     mSource<<Format("}{0}{0}", NL());
 }
 
-void CGenerator::WriteEvalEvents(StringBuilder& ignore, const int& numEvents, const int& numFloatingSpecies)
+void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, const int& numFloatingSpecies)
 {
     mSource<<Append("// Event handling function" + NL());
     mHeader.AddFunctionExport("void", "evalEvents(double timeIn, double oAmounts[])");
@@ -1225,7 +1225,7 @@ void CGenerator::WriteEvalEvents(StringBuilder& ignore, const int& numEvents, co
     mSource<<Append("}" + NL() + NL());
 }
 
-void CGenerator::WriteEvalModel(StringBuilder& ignore, const int& numReactions, const int& numIndependentSpecies, const int& numFloatingSpecies, const int& numOfRules)
+void CGenerator::WriteEvalModel(CodeBuilder& ignore, const int& numReactions, const int& numIndependentSpecies, const int& numFloatingSpecies, const int& numOfRules)
 {
     mHeader.AddFunctionExport("void", "evalModel(double, double*)");
     mSource<<Append("//Model Function" + NL());
@@ -1259,7 +1259,7 @@ void CGenerator::WriteEvalModel(StringBuilder& ignore, const int& numReactions, 
     string stoich;
     for (int i = 0; i < numIndependentSpecies; i++)
     {
-        StringBuilder eqnBuilder;// = new StringBuilder(" ");
+        CodeBuilder eqnBuilder;// = new CodeBuilder(" ");
         string floatingSpeciesName = independentSpeciesList[i];
         for (int j = 0; j < numReactions; j++)
         {
@@ -1415,7 +1415,7 @@ void CGenerator::WriteEvalModel(StringBuilder& ignore, const int& numReactions, 
     mSource<<Append("}" + NL() + NL());
 }
 
-void CGenerator::WriteEventAssignments(StringBuilder& ignore, const int& numReactions, const int& numEvents)
+void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReactions, const int& numEvents)
 {
 	StringList delays;
     vector<bool> eventType;
@@ -1532,7 +1532,7 @@ void CGenerator::WriteEventAssignments(StringBuilder& ignore, const int& numReac
     mSource<<Format("}{0}{0}", NL());
 }
 
-void CGenerator::WriteSetParameterValues(StringBuilder& ignore, const int& numReactions)
+void CGenerator::WriteSetParameterValues(CodeBuilder& ignore, const int& numReactions)
 {
     mHeader.AddFunctionExport("void", "setParameterValues()");
     mSource<<"void setParameterValues()\n{";
@@ -1567,7 +1567,7 @@ void CGenerator::WriteSetParameterValues(StringBuilder& ignore, const int& numRe
     mSource<<Append("}" + NL() + NL());
 }
 
-void CGenerator::WriteSetCompartmentVolumes(StringBuilder& ignore)
+void CGenerator::WriteSetCompartmentVolumes(CodeBuilder& ignore)
 {
 	mHeader.AddFunctionExport("void", "setCompartmentVolumes()");
     mSource << "void setCompartmentVolumes()\n{";
@@ -1592,7 +1592,7 @@ void CGenerator::WriteSetCompartmentVolumes(StringBuilder& ignore)
     mSource<<Append("}" + NL() + NL());
 }
 
-void CGenerator::WriteSetBoundaryConditions(StringBuilder& ignore)
+void CGenerator::WriteSetBoundaryConditions(CodeBuilder& ignore)
 {
     mHeader.AddFunctionExport("void", "setBoundaryConditions()");
     mSource<<"void setBoundaryConditions()\n{";
@@ -1614,7 +1614,7 @@ void CGenerator::WriteSetBoundaryConditions(StringBuilder& ignore)
 }
 
 
-void CGenerator::WriteSetInitialConditions(StringBuilder& ignore, const int& numFloatingSpecies)
+void CGenerator::WriteSetInitialConditions(CodeBuilder& ignore, const int& numFloatingSpecies)
 {
     mHeader.AddFunctionExport("void", "initializeInitialConditions()");
     mSource<<"void initializeInitialConditions()\n{";
@@ -1714,7 +1714,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
     s.AssignStream(ss);
     s.startScanner();
     s.nextToken();
-    StringBuilder  mSource;
+    CodeBuilder  mSource;
 
     try
     {
@@ -2023,7 +2023,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
 	return mSource.ToString();
 }
 
-void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, StringBuilder& mSource)
+void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, CodeBuilder& mSource)
 {
 	string theToken(s.tokenString);
     if(theToken == "pow")
@@ -2269,7 +2269,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Stri
     }
 }
 
-void CGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& mSource)
+void CGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& mSource)
 {
     // Global parameters have priority
     int index;
@@ -2327,7 +2327,7 @@ void CGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, S
 	}
 }
 
-void CGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& mSource)
+void CGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& mSource)
 {
 	string aToken = s.tokenString;
 	CodeTypes codeType = s.token();
@@ -2414,7 +2414,7 @@ void CGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, S
     }
 }
 
-void CGenerator::WriteOutSymbolTables(StringBuilder& ignore)
+void CGenerator::WriteOutSymbolTables(CodeBuilder& ignore)
 {
     mSource<<Append("void loadSymbolTables()\n{");
 
@@ -2593,7 +2593,7 @@ int CGenerator::ReadBoundarySpecies()
     return numBoundarySpecies;
 }
 
-void CGenerator::WriteInitFunction(StringBuilder& ignore, StringBuilder& source)
+void CGenerator::WriteInitFunction(CodeBuilder& ignore, CodeBuilder& source)
 {
 	source.Line("\n//Function to initialize the model data structure. Returns an integer indicating result");
     source.Line("int InitModel()");

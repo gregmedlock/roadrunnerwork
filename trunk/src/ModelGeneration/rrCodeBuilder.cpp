@@ -19,7 +19,6 @@ mSizeOfVarField2(40),
 mSizeOfVarField3(20),
 mDeclSpec(decl_spec),
 mCallingConvention(call_conv)
-
 {
     mStringing<<aStr;
 }

@@ -132,22 +132,46 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
 		it = settings.find("variables");
         if(it != settings.end())
         {
-        	StringList newList;
-	        newList.Add("time");
             vector<string> vars = SplitString((*it).second, ",");
             for(int i=0; i < vars.size(); i++)
             {
-				string aVar = Trim(vars[i]);
-    	    	newList.Add(aVar);
-
+            	mSettings.mVariables.push_back(Trim(vars[i]));
             }
-        	mEngine->setSelectionList(newList);
+        }
+
+		it = settings.find("amount");
+        if(it != settings.end())
+        {
+            vector<string> vars = SplitString((*it).second, ",");
+            for(int i=0; i < vars.size(); i++)
+            {
+            	string rec = Trim(vars[i]);
+                if(rec.size())
+                {
+	            	mSettings.mAmount.push_back(rec);
+                }
+            }
+        }
+
+		it = settings.find("concentration");
+        if(it != settings.end())
+        {
+            vector<string> vars = SplitString((*it).second, ",");
+            for(int i=0; i < vars.size(); i++)
+            {
+            	string rec = Trim(vars[i]);
+                if(rec.size())
+                {
+	            	mSettings.mConcentration.push_back(rec);
+                }
+            }
         }
     }
 
     if(mEngine)
     {
         mEngine->UseSimulationSettings(mSettings);
+        mEngine->CreateSelectionList();	//This one creates the list of what we will look at in the result
     }
 
 	return true;

@@ -151,7 +151,7 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
      s.AssignStream(ss);
      s.startScanner();
      s.nextToken();
-     StringBuilder sb;
+     CodeBuilder sb;
 
     try
     {

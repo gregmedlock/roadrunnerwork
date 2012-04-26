@@ -151,10 +151,6 @@
 				<DependentOn>..\..\src\rrCSharpGenerator.h</DependentOn>
 				<BuildOrder>58</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrIModel.cpp">
-				<DependentOn>..\..\src\rrIModel.h</DependentOn>
-				<BuildOrder>8</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\src\rrMisc.cpp">
 				<DependentOn>..\..\src\rrMisc.h</DependentOn>
 				<BuildOrder>58</BuildOrder>

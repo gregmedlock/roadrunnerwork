@@ -6,7 +6,7 @@
 #include "rrObject.h"
 #include "rrStringList.h"
 #include "rrSymbolList.h"
-#include "rrStringBuilder.h"
+#include "rrCodeBuilder.h"
 #include "rrLibStructSupport.h"
 #include "rrNOMSupport.h"
 #include "rrScanner.h"
@@ -19,7 +19,7 @@ namespace rr
 
 class RR_DECLSPEC ModelGenerator : public rrObject
 {
-    protected:
+    public:
         const string                        STR_DoubleFormat;
         const string                        STR_FixAmountCompartments;
         string					  			mCurrentXMLModelFileName;
@@ -54,37 +54,37 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 
 		//Pure Virtual functions... =====================================
         virtual string                      convertUserFunctionExpression(const string& equation) = 0;
-        virtual void 						SubstituteEquation(const string& reactionName, Scanner& s, StringBuilder& sb) = 0;
-        virtual void 						SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb) = 0;
-        virtual void 						SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb) = 0;
+        virtual void 						SubstituteEquation(const string& reactionName, Scanner& s, CodeBuilder& sb) = 0;
+        virtual void 						SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& sb) = 0;
+        virtual void 						SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& sb) = 0;
         virtual string 				        FindSymbol(const string& varName) = 0;
         virtual int                         ReadFloatingSpecies() = 0;
         virtual int                         ReadBoundarySpecies() = 0;
-        virtual void                        WriteOutSymbolTables(StringBuilder& sb) = 0;
-        virtual void                        WriteComputeAllRatesOfChange(StringBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0) = 0;
-        virtual void                        WriteComputeConservedTotals(StringBuilder& sb, const int& numFloatingSpecies, const int& numDependentSpecies) = 0;
-        virtual void                        WriteUpdateDependentSpecies(StringBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0) = 0;
-        virtual void                        WriteUserDefinedFunctions(StringBuilder& sb) = 0;
-        virtual void                        WriteResetEvents(StringBuilder& sb, const int& numEvents) = 0;
-        virtual void                        WriteSetConcentration(StringBuilder& sb) = 0;
-        virtual void                        WriteGetConcentration(StringBuilder& sb) = 0;
-        virtual void                        WriteConvertToAmounts(StringBuilder& sb) = 0;
-        virtual void                        WriteConvertToConcentrations(StringBuilder& sb) = 0;
-        virtual void                        WriteProperties(StringBuilder& sb) = 0;
-        virtual void                        WriteAccessors(StringBuilder& sb) = 0;
-        virtual void                        WriteOutVariables(StringBuilder& sb) = 0;
-        virtual void                        WriteClassHeader(StringBuilder& sb) = 0;
-        virtual void                        WriteTestConstraints(StringBuilder& sb) = 0;
-        virtual void                        WriteEvalInitialAssignments(StringBuilder& sb, const int& numReactions) = 0;
-        virtual int 		 		        WriteComputeRules(StringBuilder& sb, const int& numReactions) = 0;
-        virtual void                        WriteComputeReactionRates(StringBuilder& sb, const int& numReactions) = 0;
-        virtual void                        WriteEvalEvents(StringBuilder& sb, const int& numEvents, const int& numFloatingSpecies) = 0;
-        virtual void                        WriteEvalModel(StringBuilder& sb, const int& numReactions, const int& numIndependentSpecies, const int& numFloatingSpecies, const int& numOfRules) = 0;
-        virtual void                        WriteEventAssignments(StringBuilder& sb, const int& numReactions, const int& numEvents) = 0;
-        virtual void                        WriteSetParameterValues(StringBuilder& sb, const int& numReactions) = 0;
-        virtual void                        WriteSetCompartmentVolumes(StringBuilder& sb) = 0;
-        virtual void                        WriteSetBoundaryConditions(StringBuilder& sb) = 0;
-        virtual void                        WriteSetInitialConditions(StringBuilder& sb, const int& numFloatingSpecies) = 0;
+        virtual void                        WriteOutSymbolTables(CodeBuilder& sb) = 0;
+        virtual void                        WriteComputeAllRatesOfChange(CodeBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0) = 0;
+        virtual void                        WriteComputeConservedTotals(CodeBuilder& sb, const int& numFloatingSpecies, const int& numDependentSpecies) = 0;
+        virtual void                        WriteUpdateDependentSpecies(CodeBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0) = 0;
+        virtual void                        WriteUserDefinedFunctions(CodeBuilder& sb) = 0;
+        virtual void                        WriteResetEvents(CodeBuilder& sb, const int& numEvents) = 0;
+        virtual void                        WriteSetConcentration(CodeBuilder& sb) = 0;
+        virtual void                        WriteGetConcentration(CodeBuilder& sb) = 0;
+        virtual void                        WriteConvertToAmounts(CodeBuilder& sb) = 0;
+        virtual void                        WriteConvertToConcentrations(CodeBuilder& sb) = 0;
+        virtual void                        WriteProperties(CodeBuilder& sb) = 0;
+        virtual void                        WriteAccessors(CodeBuilder& sb) = 0;
+        virtual void                        WriteOutVariables(CodeBuilder& sb) = 0;
+        virtual void                        WriteClassHeader(CodeBuilder& sb) = 0;
+        virtual void                        WriteTestConstraints(CodeBuilder& sb) = 0;
+        virtual void                        WriteEvalInitialAssignments(CodeBuilder& sb, const int& numReactions) = 0;
+        virtual int 		 		        WriteComputeRules(CodeBuilder& sb, const int& numReactions) = 0;
+        virtual void                        WriteComputeReactionRates(CodeBuilder& sb, const int& numReactions) = 0;
+        virtual void                        WriteEvalEvents(CodeBuilder& sb, const int& numEvents, const int& numFloatingSpecies) = 0;
+        virtual void                        WriteEvalModel(CodeBuilder& sb, const int& numReactions, const int& numIndependentSpecies, const int& numFloatingSpecies, const int& numOfRules) = 0;
+        virtual void                        WriteEventAssignments(CodeBuilder& sb, const int& numReactions, const int& numEvents) = 0;
+        virtual void                        WriteSetParameterValues(CodeBuilder& sb, const int& numReactions) = 0;
+        virtual void                        WriteSetCompartmentVolumes(CodeBuilder& sb) = 0;
+        virtual void                        WriteSetBoundaryConditions(CodeBuilder& sb) = 0;
+        virtual void                        WriteSetInitialConditions(CodeBuilder& sb, const int& numFloatingSpecies) = 0;
         virtual string                    	convertCompartmentToC(const string& compartmentName) = 0;
         virtual string                      convertSpeciesToBc(const string& speciesName) = 0;
         virtual string                      convertSpeciesToY(const string& speciesName) = 0;
@@ -396,7 +396,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 ////            s.stream = ss;
 ////            s.startScanner();
 ////            s.nextToken();
-////            var sb = new StringBuilder();
+////            var sb = new CodeBuilder();
 ////
 ////            try
 ////            {

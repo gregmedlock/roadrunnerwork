@@ -32,7 +32,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		const double 					DiffStepSize;
 		const string 					emptyModelStr;
 		const double 					STEADYSTATE_THRESHOLD;
-		vector<TSelectionRecord> 		mSteadyStateSelection;
         SimulationData					mSimulationData;
 		string							mModelXMLFileName;
 		string 							mModelCode;
@@ -57,6 +56,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		double 							getVariableValue(const TVariableType& variableType, const int& variableIndex);
 		void 							setParameterValue(const TParameterType& parameterType, const int& parameterIndex, const double& value);
 		double 							getParameterValue(const TParameterType& parameterType, const int& parameterIndex);
+
+		vector<TSelectionRecord> 		mSteadyStateSelection;
 		vector<TSelectionRecord> 		GetSteadyStateSelection(const list<string>& newSelectionList);
 		vector<double> 					computeSteadyStateValues(const vector<TSelectionRecord>& oSelection, const bool& computeSteadyState);
 		double 							computeSteadyStateValue(const TSelectionRecord& record);
@@ -173,11 +174,12 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		//Functions --------------------------------------------------------------------
         								RoadRunner(bool GenerateCSharp = false);
         virtual 					   ~RoadRunner();
+        bool							CreateSelectionList();
         void							PartOfSimulation(SBMLModelSimulation* simulation){mSimulation = simulation;}
         bool							GenerateModelCode(const string& sbml = string(""));
         bool							GenerateAndCompileModel();
 		bool							CompileCurrentModel();
-        ModelFromC*							CreateModel();
+        ModelFromC*				 		CreateModel();
         SimulationData 					GetSimulationResult();
         ModelGenerator*					GetCodeGenerator();
         bool							UseSimulationSettings(SimulationSettings& settings);

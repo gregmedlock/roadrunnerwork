@@ -37,7 +37,7 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     StringList  	Warnings;
 
 	mSource.Clear();
-    StringBuilder& 	sb = mSource;
+    CodeBuilder& 	sb = mSource;
 
 	mNOM.Reset();
     string sASCII = mNOM.convertTime(sbmlStr, "time");
@@ -192,7 +192,7 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
     s.AssignStream(ss);
     s.startScanner();
     s.nextToken();
-    StringBuilder  sb;
+    CodeBuilder  sb;
 
     try
     {
@@ -501,7 +501,7 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
 	return sb.ToString();
 }
 
-void CSharpGenerator::SubstituteEquation(const string& reactionName, Scanner& s, StringBuilder& sb)
+void CSharpGenerator::SubstituteEquation(const string& reactionName, Scanner& s, CodeBuilder& sb)
 {
 	string theToken(s.tokenString);
     if(theToken == "pow")
@@ -746,7 +746,7 @@ void CSharpGenerator::SubstituteEquation(const string& reactionName, Scanner& s,
     }
 }
 
-void CSharpGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb)
+void CSharpGenerator::SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& sb)
 {
     // Global parameters have priority
     int index;
@@ -804,7 +804,7 @@ void CSharpGenerator::SubstituteWords(const string& reactionName, bool bFixAmoun
 	}
 }
 
-void CSharpGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, StringBuilder& sb)
+void CSharpGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& sb)
 {
 	string aToken = s.tokenString;
 	CodeTypes codeType = s.token();
@@ -891,7 +891,7 @@ void CSharpGenerator::SubstituteToken(const string& reactionName, bool bFixAmoun
     }
 }
 
-void CSharpGenerator::WriteOutSymbolTables(StringBuilder& sb)
+void CSharpGenerator::WriteOutSymbolTables(CodeBuilder& sb)
 {
     sb<<Append("\tvoid loadSymbolTables() {" + NL());
 
@@ -1061,7 +1061,7 @@ int CSharpGenerator::ReadBoundarySpecies()
     return numBoundarySpecies;
 }
 
-void CSharpGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
+void CSharpGenerator::WriteComputeAllRatesOfChange(CodeBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
 {
     sb<<Append("\t// Uses the equation: dSd/dt = L0 dSi/dt" + NL());
     sb<<Append("\tpublic void computeAllRatesOfChange ()" + NL());
@@ -1118,7 +1118,7 @@ void CSharpGenerator::WriteComputeAllRatesOfChange(StringBuilder& sb, const int&
     sb<<Format("\t}{0}{0}", NL());
 }
 
-void CSharpGenerator::WriteComputeConservedTotals(StringBuilder& sb, const int& numFloatingSpecies, const int& numDependentSpecies)
+void CSharpGenerator::WriteComputeConservedTotals(CodeBuilder& sb, const int& numFloatingSpecies, const int& numDependentSpecies)
 {
     sb<<Append("\t// Uses the equation: C = Sd - L0*Si" + NL());
     sb<<Append("\tpublic void computeConservedTotals ()" + NL());
@@ -1178,7 +1178,7 @@ void CSharpGenerator::WriteComputeConservedTotals(StringBuilder& sb, const int& 
     sb<<Append("	}" + NL() + NL());
 }
 
-void CSharpGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
+void CSharpGenerator::WriteUpdateDependentSpecies(CodeBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
 {
     sb<<Append("\t// Compute values of dependent species " + NL());
     sb<<Append("\t// Uses the equation: Sd = C + L0*Si" + NL());
@@ -1253,7 +1253,7 @@ void CSharpGenerator::WriteUpdateDependentSpecies(StringBuilder& sb, const int& 
     sb<<Format("\t}{0}{0}", NL());
 }
 
-void CSharpGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
+void CSharpGenerator::WriteUserDefinedFunctions(CodeBuilder& sb)
 {
 	for (int i = 0; i < mNOM.getNumFunctionDefinitions(); i++)
     {
@@ -1285,14 +1285,14 @@ void CSharpGenerator::WriteUserDefinedFunctions(StringBuilder& sb)
         }
         catch (const Exception& ex)
         {
-        	StringBuilder msg;
+        	CodeBuilder msg;
             msg<<"Error while trying to get Function Definition #" << i <<ex.what() << "\r\n\r\n";
             throw Exception(msg.ToString());
         }
     }
 }
 
-void CSharpGenerator::WriteResetEvents(StringBuilder& sb, const int& numEvents)
+void CSharpGenerator::WriteResetEvents(CodeBuilder& sb, const int& numEvents)
 {
       sb<<Format("{0}\tpublic void resetEvents() {{0}", NL());
       for (int i = 0; i < numEvents; i++)
@@ -1303,7 +1303,7 @@ void CSharpGenerator::WriteResetEvents(StringBuilder& sb, const int& numEvents)
       sb<<Format("\t}{0}{0}", NL());
 }
 
-void CSharpGenerator::WriteSetConcentration(StringBuilder& sb)
+void CSharpGenerator::WriteSetConcentration(CodeBuilder& sb)
 {
     sb<<Format("\tpublic void setConcentration(int index, double value) {{0}", NL());
     sb<<Format("\t\tdouble volume = 0.0;{0}", NL());
@@ -1322,14 +1322,14 @@ void CSharpGenerator::WriteSetConcentration(StringBuilder& sb)
     sb<<Format("\t}{0}{0}", NL());
 }
 
-void CSharpGenerator::WriteGetConcentration(StringBuilder& sb)
+void CSharpGenerator::WriteGetConcentration(CodeBuilder& sb)
 {
     sb<<Format("\tpublic double getConcentration(int index) {{0}", NL());
     sb<<Format("\t\treturn _y[index];{0}", NL());
     sb<<Format("\t}{0}{0}", NL());
 }
 
-void CSharpGenerator::WriteConvertToAmounts(StringBuilder& sb)
+void CSharpGenerator::WriteConvertToAmounts(CodeBuilder& sb)
 {
     sb<<Format("\tpublic void convertToAmounts() {{0}", NL());
     for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
@@ -1342,7 +1342,7 @@ void CSharpGenerator::WriteConvertToAmounts(StringBuilder& sb)
     sb<<Format("\t}{0}{0}", NL());
 }
 
-void CSharpGenerator::WriteConvertToConcentrations(StringBuilder& sb)
+void CSharpGenerator::WriteConvertToConcentrations(CodeBuilder& sb)
 {
     sb<<Append("\tpublic void convertToConcentrations() {" + NL());
     for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
@@ -1353,7 +1353,7 @@ void CSharpGenerator::WriteConvertToConcentrations(StringBuilder& sb)
     sb<<Append("\t}" + NL() + NL());
 }
 
-void CSharpGenerator::WriteProperties(StringBuilder& sb)
+void CSharpGenerator::WriteProperties(CodeBuilder& sb)
 {
     sb<<Append("\tpublic double[] y {" + NL());
     sb<<Append("\t\tget { return _y; } " + NL());
@@ -1471,7 +1471,7 @@ void CSharpGenerator::WriteProperties(StringBuilder& sb)
     sb<<Append("\t}" + NL() + NL());
 }
 
-void CSharpGenerator::WriteAccessors(StringBuilder& sb)
+void CSharpGenerator::WriteAccessors(CodeBuilder& sb)
 {
     sb<<Append("\tpublic int getNumIndependentVariables {" + NL());
     sb<<Append("\t\tget { return numIndependentVariables; }" + NL());
@@ -1520,7 +1520,7 @@ void CSharpGenerator::WriteAccessors(StringBuilder& sb)
     sb<<Append("\t}" + NL() + NL());
 }
 
- void CSharpGenerator::WriteOutVariables(StringBuilder& sb)
+ void CSharpGenerator::WriteOutVariables(CodeBuilder& sb)
 {
       sb<<Append("\tprivate List<string> _Warnings = new List<string>();" + NL());
       sb<<Append("\tprivate double[] _gp = new double[" + ToString(mNumGlobalParameters + mTotalLocalParmeters) +
@@ -1642,7 +1642,7 @@ void CSharpGenerator::WriteAccessors(StringBuilder& sb)
       sb<<Append("\t}" + NL() + NL());
 }
 
-void CSharpGenerator::WriteClassHeader(StringBuilder& sb)
+void CSharpGenerator::WriteClassHeader(CodeBuilder& sb)
 {
     sb<<Append("using System;" + NL());
     sb<<Append("using System.IO;" + NL());
@@ -1689,7 +1689,7 @@ string CSharpGenerator::FindSymbol(const string& varName)
           throw Exception(Format("Unable to locate lefthand side symbol in assignment[{0}]", varName));
 }
 
-void CSharpGenerator::WriteTestConstraints(StringBuilder& sb)
+void CSharpGenerator::WriteTestConstraints(CodeBuilder& sb)
 {
     sb<<Append("\tpublic void testConstraints()" + NL());
     sb<<Append("\t{" + NL());
@@ -1706,7 +1706,7 @@ void CSharpGenerator::WriteTestConstraints(StringBuilder& sb)
     sb<<Append("\t}" + NL() + NL());
 }
 
-void CSharpGenerator::WriteEvalInitialAssignments(StringBuilder& sb, const int& numReactions)
+void CSharpGenerator::WriteEvalInitialAssignments(CodeBuilder& sb, const int& numReactions)
 {
     sb<<Append("\tpublic void evalInitialAssignments()" + NL());
     sb<<Append("\t{" + NL());
@@ -1779,7 +1779,7 @@ void CSharpGenerator::WriteEvalInitialAssignments(StringBuilder& sb, const int& 
     sb<<Append("\t}" + NL() + NL());
 }
 
-int CSharpGenerator::WriteComputeRules(StringBuilder& sb, const int& numReactions)
+int CSharpGenerator::WriteComputeRules(CodeBuilder& sb, const int& numReactions)
 {
     IntStringHashTable mapVariables;
     int numRateRules = 0;
@@ -1927,7 +1927,7 @@ int CSharpGenerator::WriteComputeRules(StringBuilder& sb, const int& numReaction
     return numOfRules;
 }
 
-void CSharpGenerator::WriteComputeReactionRates(StringBuilder& sb, const int& numReactions)
+void CSharpGenerator::WriteComputeReactionRates(CodeBuilder& sb, const int& numReactions)
 {
     sb<<Append("\t// Compute the reaction rates" + NL());
     sb<<Append("\tpublic void computeReactionRates (double time, double[] y)" + NL());
@@ -1961,7 +1961,7 @@ void CSharpGenerator::WriteComputeReactionRates(StringBuilder& sb, const int& nu
     sb<<Format("\t}{0}{0}", NL());
 }
 
-void CSharpGenerator::WriteEvalEvents(StringBuilder& sb, const int& numEvents, const int& numFloatingSpecies)
+void CSharpGenerator::WriteEvalEvents(CodeBuilder& sb, const int& numEvents, const int& numFloatingSpecies)
 {
     sb<<Append("\t// Event handling function" + NL());
     sb<<Append("\tpublic void evalEvents (double timeIn, double[] oAmounts)" + NL());
@@ -2003,7 +2003,7 @@ void CSharpGenerator::WriteEvalEvents(StringBuilder& sb, const int& numEvents, c
     sb<<Append("\t}" + NL() + NL());
 }
 
-void CSharpGenerator::WriteEvalModel(StringBuilder& sb, const int& numReactions, const int& numIndependentSpecies, const int& numFloatingSpecies, const int& numOfRules)
+void CSharpGenerator::WriteEvalModel(CodeBuilder& sb, const int& numReactions, const int& numIndependentSpecies, const int& numFloatingSpecies, const int& numOfRules)
 {
     sb<<Append("\t// Model Function" + NL());
     sb<<Append("\tpublic void evalModel (double timein, double[] oAmounts)" + NL());
@@ -2036,7 +2036,7 @@ void CSharpGenerator::WriteEvalModel(StringBuilder& sb, const int& numReactions,
     string stoich;
     for (int i = 0; i < numIndependentSpecies; i++)
     {
-        StringBuilder eqnBuilder;// = new StringBuilder(" ");
+        CodeBuilder eqnBuilder;// = new StringBuilder(" ");
         string floatingSpeciesName = independentSpeciesList[i];
         for (int j = 0; j < numReactions; j++)
         {
@@ -2192,7 +2192,7 @@ void CSharpGenerator::WriteEvalModel(StringBuilder& sb, const int& numReactions,
     sb<<Append("\t}" + NL() + NL());
 }
 
-void CSharpGenerator::WriteEventAssignments(StringBuilder& sb, const int& numReactions, const int& numEvents)
+void CSharpGenerator::WriteEventAssignments(CodeBuilder& sb, const int& numReactions, const int& numEvents)
 {
 	StringList delays;
     vector<bool> eventType;
@@ -2295,7 +2295,7 @@ void CSharpGenerator::WriteEventAssignments(StringBuilder& sb, const int& numRea
     sb<<Format("\t}{0}{0}", NL());
 }
 
-void CSharpGenerator::WriteSetParameterValues(StringBuilder& sb, const int& numReactions)
+void CSharpGenerator::WriteSetParameterValues(CodeBuilder& sb, const int& numReactions)
 {
     sb<<Append("\tpublic void setParameterValues ()" + NL());
     sb<<Append("\t{" + NL());
@@ -2322,7 +2322,7 @@ void CSharpGenerator::WriteSetParameterValues(StringBuilder& sb, const int& numR
     sb<<Append("\t}" + NL() + NL());
 }
 
-void CSharpGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
+void CSharpGenerator::WriteSetCompartmentVolumes(CodeBuilder& sb)
 {
     sb<<Append("\tpublic void setCompartmentVolumes ()" + NL());
     sb<<Append("\t{" + NL());
@@ -2346,7 +2346,7 @@ void CSharpGenerator::WriteSetCompartmentVolumes(StringBuilder& sb)
     sb<<Append("\t}" + NL() + NL());
 }
 
-void CSharpGenerator::WriteSetBoundaryConditions(StringBuilder& sb)
+void CSharpGenerator::WriteSetBoundaryConditions(CodeBuilder& sb)
 {
     sb<<Append("\tpublic void setBoundaryConditions ()" + NL());
     sb<<Append("\t{" + NL());
@@ -2367,7 +2367,7 @@ void CSharpGenerator::WriteSetBoundaryConditions(StringBuilder& sb)
 }
 
 
-void CSharpGenerator::WriteSetInitialConditions(StringBuilder& sb, const int& numFloatingSpecies)
+void CSharpGenerator::WriteSetInitialConditions(CodeBuilder& sb, const int& numFloatingSpecies)
 {
     sb<<Append("\tpublic void initializeInitialConditions ()" + NL());
     sb<<Append("\t{" + NL());
