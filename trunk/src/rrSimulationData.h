@@ -4,14 +4,14 @@
 #include "rrObject.h"
 #include "rrStringList.h"
 #include "rrDoubleMatrix.h"
-
+#include "rrExporter.h"
 namespace rr
 {
 
 using std::ofstream;
 
 //Class that  holds the data after a simulation...
-class SimulationData : public rrObject
+class RR_DECLSPEC SimulationData : public rrObject
 {
 
 	protected:

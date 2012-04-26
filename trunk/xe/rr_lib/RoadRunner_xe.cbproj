@@ -22,6 +22,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<BCC_PCHName>rr.csm</BCC_PCHName>
 			<Defines>EXPORT_RR;NO_NOM_DLL;NO_LIBSTRUCT_DLL;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>

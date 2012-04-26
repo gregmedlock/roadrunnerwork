@@ -153,7 +153,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
     	// Properties -----------------------------------------------------------------------------
      	static bool                     mComputeAndAssignConservationLaws;
         static bool                     mConservedTotalChanged;
-        static bool                     mReMultiplyCompartments;
+//        static bool                     mReMultiplyCompartments;
         double*                    		mL;
         double*                  		mL0;
         double*                  		mN;
@@ -184,7 +184,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         string							GetModelSourceCode();
 		DoubleMatrix		  			runSimulation();
 		bool 							InitializeModel();
-		bool                     		Simulate(const bool& useConservationLaws = true);
+		bool                     		Simulate();
 		bool                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws = true);
 		bool                     		SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
 		bool                           	LoadSBMLFromFile(const string& fileName);	//Just load the content of a sbml file

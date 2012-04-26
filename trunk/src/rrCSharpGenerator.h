@@ -9,7 +9,8 @@ namespace rr
 class RR_DECLSPEC CSharpGenerator : public ModelGenerator
 {
 	protected:
-
+    	string								mSourceCodeFileName;
+        StringBuilder						mSource;
         string                              convertUserFunctionExpression(const string& equation);
         string                            	convertCompartmentToC(const string& compartmentName);
         string                              convertSpeciesToBc(const string& speciesName);
@@ -55,6 +56,7 @@ class RR_DECLSPEC CSharpGenerator : public ModelGenerator
 
     	// Generates the Model Code from the SBML string
     	string 								generateModelCode(const string& sbmlStr);
+		bool 								SaveSourceCodeToFolder(const string& folder);
 };
 
 }

@@ -33,6 +33,7 @@ class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary han
 //        double*						y;             //Corresponds to y in IModel
         double*						mRates;
         double*						mGP;
+//        double*						mC;			//CompartmentVolume
 
 		//Function pointers...
         c_int 				        cInitModel;

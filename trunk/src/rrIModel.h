@@ -50,7 +50,8 @@ class RR_DECLSPEC IModel : public rrObject	//Abstract class for SBML Models to b
         vector<double> 					        sr;
         vector<double> 					        gp;				//Global parameters
         vector<double> 					        lp ;        	//Local parameters
-        vector<double> 	                        c ;        		//Compartment volumes
+        //vector<double> 	                        c ;        		//Compartment volumes
+        double* 	         	               	c;        		//Compartment volumes
         vector<double> 	                        dydt;
         vector<double> 	                        rates;
         vector<double> 					        ct ;         	//Conservation totals

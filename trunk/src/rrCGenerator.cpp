@@ -329,15 +329,22 @@ void CGenerator::WriteComputeAllRatesOfChange(StringBuilder& ignore, const int& 
     mSource<<Append("//Uses the equation: dSd/dt = L0 dSi/dt" + NL());
     mSource<<"void computeAllRatesOfChange()\n{";
 
+    mSource<<"\n#if defined(DEBUG_C_DLL)\n";
+    mSource.TLine("printf(\"In function computeAllRatesOfChange()\"); ");
+    mSource<<"#endif";
 //    mSource<<"\n\t//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );\n";
     mSource<<"\n\tdouble* dTemp = (double*) malloc( sizeof(double)* ("<<numIndependentSpecies + numDependentSpecies<<") );\n"; //Todo: Check this
+
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
         mSource<<Format("\tdTemp[{0}] = {1};{2}", i, mMapRateRule[i], NL());
     }
 
-    mSource<<Append("\t//amounts.CopyTo(dTemp, rateRules.Length); Todo: fix this.." + NL());
-    mSource<<Append("\tevalModel(mTime, _amounts);" + NL());
+	mSource<<tab<<"int i;\n\tfor(i = 0; i < "<<numIndependentSpecies + numDependentSpecies<<"; i++)\n";
+    mSource<<tab<<"{\n"<<tab<<tab<<"dTemp[i] = _amounts[i];\n\t}";
+    mSource<<Append("\n\t//amounts.CopyTo(dTemp, rateRules.Length); " + NL());
+
+    mSource<<Append("\tevalModel(mTime, dTemp);" + NL());
     bool isThereAnEntry = false;
     for (int i = 0; i < numDependentSpecies; i++)
     {
@@ -437,6 +444,10 @@ void CGenerator::WriteComputeConservedTotals(StringBuilder& ignore, const int& n
             mSource<<Append(";" + NL());
             conservationList.Add(Symbol("CSUM" + ToString(i))); //TODO: how to deal with this?
         }
+    }
+    else
+    {
+		mSource<<"printf(\"In an empty ComputeConservedTotals!\");\n";
     }
     mSource<<"}\n\n";
 }
@@ -2600,7 +2611,6 @@ void CGenerator::WriteInitFunction(StringBuilder& ignore, StringBuilder& source)
 
     source<<tab<<	"mModelName = (char*) malloc(sizeof(char)*"<<strlen(mModelName.c_str()) + 1<<");" <<endl;
    	source<<tab<<	"strcpy(mModelName,\""<<mModelName<<"\");"<<endl;
-	source.TLine(	"_gp[0] = 1234;");
 
     source<<"\t"<<Append("InitializeDelays();" , NL());
 

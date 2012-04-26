@@ -1,5 +1,7 @@
 #! /bin/bash 
 
+dataFolder="/cygdrive/c/DataOutput/"
+tmpFolder="/cygdrive/c/temp"
 echo "Hello";
 logFile="testLog.txt"
 logTable="testLogTable.txt"
@@ -9,6 +11,9 @@ start=$1
 end=$2
 
 echo "" > $logFile
+echo "" > $logTable
+echo "" > $failed
+
 for ((i=$start; i<=$end; i++ )); 
 do 
 	echo "Running $i" ; 
@@ -16,11 +21,18 @@ do
 	$simulator -n$i -v3 >> $logFile;
 	echo "Next" >> $logFile;
 done
-
-#Creeate a table
-
-make_table -f$logFile -o$logTable -w"Next"
-#filter failed ones
-
-cat $logTable | grep "failed" > $failed
+#
+##Creeate a table
+#
+#make_table -f$logFile -o$logTable -w"Next"
+##filter failed ones
+#
+#cat $logTable | grep "failed" > $failed
+#
+#Copy files and zip them up
+dataFiles="dataFiles.txt"
+/usr/bin/find '/cygdrive/c/DataOutput'  -name '*l2v4.csv' > $dataFiles
+cygpath -d `cat dataFiles.txt` > $dataFiles
+zipFile="data_`date | cut -d' ' -f4 | tr ':' '-'`.zip"
+7za a $zipFile `cat $dataFiles`
 echo "Done" 

@@ -1,3 +1,6 @@
+#ifdef USE_PCH
+#include "rrPCH.h"
+#endif
 #pragma hdrstop
 #include <windows.h>
 #include <iostream>
@@ -58,20 +61,18 @@ int main(int argc, char * argv[])
                     }
                     exit(-1);
                 }
-            break;
 		}
 	}
     LogOutput::mLogToConsole = true;
     gLog.SetCutOffLogLevel(IntToLogLevel(paras.VerboseMode));
     Log(lForceShow)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
-//    paras.CaseNumber = 51;
     string dataOutputFolder("C:\\DataOutput");
     string dummy;
     string logFileName;
 
     CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
 
-    RoadRunner *roadRunner = NULL;
+    RoadRunner *rr = NULL;
     try
     {
         //Create subfolder for data output
@@ -88,9 +89,9 @@ int main(int argc, char * argv[])
         SBMLModelSimulation simulation(dataOutputFolder);
 
         //dataOutputFolder += dummy;
-        roadRunner = new RoadRunner;
-        roadRunner->Reset();
-        simulation.UseEngine(roadRunner);
+        rr = new RoadRunner();
+        rr->Reset();
+        simulation.UseEngine(rr);
 
         //Read SBML models.....
         string modelFilePath("C:\\SBMLTestCases\\all");
@@ -147,6 +148,7 @@ int main(int argc, char * argv[])
             Log(lError)<<"Failed loading SBML model settings";
         }
 
+//		rr->ComputeAndAssignConservationLaws(false);
         //Then Simulate model
         if(!simulation.Run())
         {
@@ -183,7 +185,7 @@ int main(int argc, char * argv[])
 	}
 
     end:	//I have not used a label in 15 years!
-    delete roadRunner;
+    delete rr;
 	Log(lInfo)<<"Done";
 //    Pause();
 	return 0;

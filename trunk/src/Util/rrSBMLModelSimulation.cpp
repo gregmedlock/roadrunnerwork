@@ -263,23 +263,21 @@ bool SBMLModelSimulation::SaveAllData()
                     fs << err_names.AsString();
                 }
             }
+
+            //First column is the time...
+            if(col == 0)
+            {
+                fs << endl << setw(10)<<left<<setprecision(6)<< mReferenceData(row, col); // this is time..
+            }
             else
             {
-				//First column is the time...
-                if(col == 0)
+                if(row <= mReferenceData.GetNrOfRows())
                 {
-            		fs << endl << setw(10)<<left<<setprecision(6)<< mReferenceData(row, col); // this is time..
+                    fs << "," << mReferenceData(row, col);
                 }
                 else
                 {
-                	if(row <= mReferenceData.GetNrOfRows())
-                    {
-                    	fs << "," << mReferenceData(row, col);
-                    }
-                    else
-                    {
-						fs << "," << " ";
-                    }
+                    fs << "," << " ";
                 }
             }
         }
@@ -287,34 +285,28 @@ bool SBMLModelSimulation::SaveAllData()
         //Then the simulated data
     	for(int col = 0; col < mResultData.GetNrOfCols(); col++)
         {
-			if(row != 0)
-            {            	
-            	//First column is the time...
-                if(col == 0)
-                {
-            		fs << "," << setw(10)<<left<<setprecision(6)<< mResultData(row, col); // this is time..
-                }
-                else
-                {
-                    fs << "," << mResultData(row, col);
-                }
+            //First column is the time...
+            if(col == 0)
+            {
+                fs << "," << setw(10)<<left<<setprecision(6)<< mResultData(row , col);
+            }
+            else
+            {
+                fs << "," << mResultData(row, col);
             }
         }
 
         //Then the error data
     	for(int col = 0; col < mErrorData.GetNrOfCols(); col++)
         {
-			if(row != 0)
+            //First column is the time...
+            if(col == 0)
             {
-            	//First column is the time...
-                if(col == 0)
-                {
-            		fs << "," << setw(10)<<left<<setprecision(6)<<mErrorData(row, col); // this is time..
-                }
-                else
-                {
-                    fs << "," << mErrorData(row, col);
-                }
+                fs << "," << setw(10)<<left<<setprecision(6)<<mErrorData(row, col); //Becuase row 0 is the header
+            }
+            else
+            {
+                fs << "," << mErrorData(row, col);
             }
         }
     }

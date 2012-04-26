@@ -35,7 +35,9 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
 	Log(lDebug4)<<"Entering CSharpGenerators generateModelCode(string) function";
 
     StringList  	Warnings;
-    StringBuilder 	sb;
+
+	mSource.Clear();
+    StringBuilder& 	sb = mSource;
 
 	mNOM.Reset();
     string sASCII = mNOM.convertTime(sbmlStr, "time");
@@ -154,6 +156,27 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     WriteTestConstraints(sb);
 	sb<<Format("}{0}{0}", NL());
 	return sb.ToString();
+}
+
+bool CSharpGenerator::SaveSourceCodeToFolder(const string& folder)
+{
+    mSourceCodeFileName = folder + string("\\") + GetFileNameNoPath(mCurrentXMLModelFileName);
+    mSourceCodeFileName = ChangeFileExtensionTo(mSourceCodeFileName, ".cs");
+
+	ofstream outFile;
+    outFile.open(mSourceCodeFileName.c_str());
+
+    //We don't know the name of the file until here..
+    //Write an include statement to it..
+    vector<string> fNameParts = SplitString(mSourceCodeFileName,"\\");
+    string headerFName = fNameParts[fNameParts.size() - 1];
+
+    outFile<<"//\""<<headerFName<<"\"\n"<<endl;
+    outFile<<mSource.ToString();
+    outFile.close();
+    Log(lDebug3)<<"Wrote source code to file: "<<mSourceCodeFileName;
+
+	return true;
 }
 
 string CSharpGenerator::convertUserFunctionExpression(const string& equation)

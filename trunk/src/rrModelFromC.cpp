@@ -192,6 +192,13 @@ bool ModelFromC::SetupDLLData()
         return false;
     }
 
+    c	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_c");
+    if(!c)
+    {
+		Log(lError)<<"Failed to assign to mC";
+        return false;
+    }
+
     bc	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_bc");
     if(!bc)
     {

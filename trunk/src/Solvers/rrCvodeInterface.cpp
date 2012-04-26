@@ -79,6 +79,92 @@ CvodeInterface::~CvodeInterface()
 	fileClose(fileHandle);
 }
 
+
+////        public void ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
+////        {
+////            var oldState = new ModelState(model);
+////
+////            var dCVodeArgument = new double[model.amounts.Length + model.rateRules.Length];
+////            Marshal.Copy(y, dCVodeArgument, 0, Math.Min(n, dCVodeArgument.Length));
+////
+////#if (PRINT_STEP_DEBUG)
+////		            System.Diagnostics.Debug.Write("CVode In: (" + nCount + ")" );
+////		            for (int i = 0; i < dCVodeArgument.Length; i++)
+////		            {
+////		                System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
+////		            }
+////		            System.Diagnostics.Debug.WriteLine("");
+////#endif
+////
+////            model.evalModel(time, dCVodeArgument);
+////
+////            model.rateRules.CopyTo(dCVodeArgument, 0);
+////            model.dydt.CopyTo(dCVodeArgument, model.rateRules.Length);
+////
+////#if (PRINT_STEP_DEBUG)
+////		            System.Diagnostics.Debug.Write("CVode Out: (" + nCount + ")");
+////		            for (int i = 0; i < dCVodeArgument.Length; i++)
+////		            {
+////		                System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
+////		            }
+////		            System.Diagnostics.Debug.WriteLine("");
+////#endif
+////
+////            Marshal.Copy(dCVodeArgument, 0, ydot, Math.Min(dCVodeArgument.Length, n));
+////
+////            nCount++;
+////
+////            oldState.AssignToModel(model);
+////        }
+
+//void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
+void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, void* fdata)
+{
+    IModel *model = CvodeInterface::model;
+    ModelState oldState(*model);
+//    int size = model->amounts.size() + model->rateRules.size();
+
+    int size = model->getNumIndependentVariables() + model->rateRules.size();
+	vector<double> dCVodeArgument(size);//model->.amounts.Length + model.rateRules.Length];
+
+	for(int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
+    {
+		dCVodeArgument[i] = y[i];
+    }
+
+//    stringstream msg;
+//    msg<<left<<setw(20)<<"" + ToString(CvodeInterface::mCount) ;
+
+//	for (u_int i = 0; i < dCVodeArgument.size(); i++)
+//    {
+//        msg<<left<<setw(20)<<setprecision (18)<<dCVodeArgument[i];
+//    }
+
+	model->evalModel(time, dCVodeArgument);
+	dCVodeArgument = model->rateRules;
+
+	for(u_int i = 0 ; i < model->GetdYdT().size(); i++)
+    {
+		dCVodeArgument.push_back(model->GetdYdT().at(i));
+    }
+
+//    msg<<"\t"<<CvodeInterface::mCount << "\t" ;
+//	for (u_int i = 0; i < dCVodeArgument.size(); i++)
+//    {
+//		msg<<setw(10)<<left<<setprecision (18)<<dCVodeArgument[i];
+//    }
+
+//    Log(lDebug)<<msg.str();
+
+    for (int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
+    {
+        ydot[i]= dCVodeArgument[i];
+    }
+
+    CvodeInterface::mCount++;
+    oldState.AssignToModel(*model);
+}
+
 bool CvodeInterface::HaveVariables()
 {
     return (numAdditionalRules + numIndependentVariables > 0);
@@ -393,94 +479,6 @@ void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
 ////
 
 
-////        public void ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
-////        {
-////            var oldState = new ModelState(model);
-////
-////            var dCVodeArgument = new double[model.amounts.Length + model.rateRules.Length];
-////            Marshal.Copy(y, dCVodeArgument, 0, Math.Min(n, dCVodeArgument.Length));
-////
-////#if (PRINT_STEP_DEBUG)
-////		            System.Diagnostics.Debug.Write("CVode In: (" + nCount + ")" );
-////		            for (int i = 0; i < dCVodeArgument.Length; i++)
-////		            {
-////		                System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
-////		            }
-////		            System.Diagnostics.Debug.WriteLine("");
-////#endif
-////
-////            model.evalModel(time, dCVodeArgument);
-////
-////            model.rateRules.CopyTo(dCVodeArgument, 0);
-////            model.dydt.CopyTo(dCVodeArgument, model.rateRules.Length);
-////
-////#if (PRINT_STEP_DEBUG)
-////		            System.Diagnostics.Debug.Write("CVode Out: (" + nCount + ")");
-////		            for (int i = 0; i < dCVodeArgument.Length; i++)
-////		            {
-////		                System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
-////		            }
-////		            System.Diagnostics.Debug.WriteLine("");
-////#endif
-////
-////            Marshal.Copy(dCVodeArgument, 0, ydot, Math.Min(dCVodeArgument.Length, n));
-////
-////            nCount++;
-////
-////            oldState.AssignToModel(model);
-////        }
-
-//void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
-void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, void* fdata)
-{
-    IModel *model = CvodeInterface::model;
-    ModelState oldState(*model);
-//    int size = model->amounts.size() + model->rateRules.size();
-    int size = model->getNumIndependentVariables() + model->rateRules.size();
-	vector<double> dCVodeArgument(size);//model->.amounts.Length + model.rateRules.Length];
-
-//    Marshal.Copy(y, dCVodeArgument, 0, Math.Min(n, dCVodeArgument.Length));
-	for(int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
-    {
-		dCVodeArgument[i] = y[i];
-    }
-
-    stringstream msg;
-    msg<<left<<setw(20)<<"" + ToString(CvodeInterface::mCount) ;
-
-	for (u_int i = 0; i < dCVodeArgument.size(); i++)
-    {
-        msg<<left<<setw(20)<<setprecision (18)<<dCVodeArgument[i];
-    }
-
-	model->evalModel(time, dCVodeArgument);
-//	model.rateRules.CopyTo(dCVodeArgument, 0);
-	dCVodeArgument = model->rateRules;
-
-    //	model.dydt.CopyTo(dCVodeArgument, model.rateRules.Length);
-	for(u_int i = 0 ; i < model->GetdYdT().size(); i++)
-    {
-		dCVodeArgument.push_back(model->GetdYdT().at(i));
-    }
-
-    msg<<"\t"<<CvodeInterface::mCount << "\t" ;
-	for (u_int i = 0; i < dCVodeArgument.size(); i++)
-    {
-		msg<<setw(10)<<left<<setprecision (18)<<dCVodeArgument[i];
-    }
-
-    Log(lDebug5)<<msg.str();
-
-//    Marshal.Copy(dCVodeArgument, 0, ydot, Math.Min(dCVodeArgument.Length, n));
-
-    for (int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
-    {
-        ydot[i]= dCVodeArgument[i];
-    }
-
-    CvodeInterface::mCount++;
-    oldState.AssignToModel(*model);
-}
 
 ////        double[] CvodeInterface::GetCopy(double[] oVector)
 ////        {

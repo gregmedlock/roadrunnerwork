@@ -18,7 +18,8 @@ class RR_DECLSPEC ModelState : public rrObject
     public:
         //vector<double>                  mBoundarySpeciesConcentrations;
         double*							mBoundarySpeciesConcentrations;
-        vector<double>                  mCompartmentVolumes;
+        //vector<double>                  mCompartmentVolumes;
+		double*		                	mCompartmentVolumes;
         vector<double>                  mConservedTotals;
         vector<double>                  mDyDt;
         vector<bool>                    mEventStatusArray;

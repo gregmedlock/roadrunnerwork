@@ -24,7 +24,7 @@ namespace rr
 //Initialize statics..
 bool RoadRunner::mComputeAndAssignConservationLaws 	= false;
 bool RoadRunner::mConservedTotalChanged 			= false;
-bool RoadRunner::mReMultiplyCompartments 			= false;
+//bool RoadRunner::mReMultiplyCompartments 			= true;
 
 RoadRunner::RoadRunner(bool generateCSharp)
 :
@@ -151,16 +151,6 @@ bool RoadRunner::InitializeModel()
 	return true;
 }
 
-string RoadRunner::getCopyright()
-{
-	return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";
-}
-
-string RoadRunner::getURL()
-{
-	return "http://sys-bio.org";
-}
-
 SimulationData RoadRunner::GetSimulationResult()
 {
 	return mSimulationData;
@@ -174,7 +164,7 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 	{
 		case TSelectionType::clFloatingSpecies:
 			dResult = mModel->getConcentration(record.index);
-//			dResult = mModel->amounts[record.index];			//Todo: something is going on here...
+//			dResult = mModel->mAmounts[record.index];			//Todo:
 		break;
 
 		case TSelectionType::clBoundarySpecies:
@@ -269,24 +259,13 @@ double RoadRunner::GetNthSelectedOutput(const int& index, const double& dCurrent
 
 void RoadRunner::AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime)
 {
-//	int size = selectionList.size();
-
 	for (u_int j = 0; j < selectionList.size(); j++)
 	{
 		double out =  GetNthSelectedOutput(j, dCurrentTime);
 		results(nRow,j) = out;
-		Log(lDebug3)<<"In AddNthOutput to result: "<<out;
+		Log(lInfo)<<"Adding result to row\t"<<nRow<<" : "<<out;
 	}
 }
-
-////        private void AddNthOutputToResult(double[,] results, int nRow, double dCurrentTime)
-////        {
-////            for (int j = 0; j < selectionList.Length; j++)
-////            {
-////                results[nRow, j] = GetNthSelectedOutput(j, dCurrentTime);
-////            }
-////        }
-
 
 vector<double> RoadRunner::BuildModelEvalArgument()
 {
@@ -325,7 +304,6 @@ DoubleMatrix RoadRunner::runSimulation()
 	vector<double> y;
 	y = BuildModelEvalArgument();
 	mModel->evalModel(mTimeStart, y);
-
 	AddNthOutputToResult(results, 0, mTimeStart);
 
 	if (mCVode->HaveVariables())
@@ -347,7 +325,6 @@ DoubleMatrix RoadRunner::runSimulation()
 		mCVode->OneStep(tout, hstep);
 		tout = mTimeStart + i * hstep;
 		AddNthOutputToResult(results, i, tout);
-		//Log(lDebug)<<tout<<tab<
 	}
 
 	Log(lDebug)<<"Result: (point, time, value)";
@@ -378,9 +355,10 @@ void RoadRunner::DumpResults(TextWriter& writer, DoubleMatrix& data, const Strin
 	}
 }
 
-bool RoadRunner::Simulate(const bool& useConservationLaws)
+bool RoadRunner::Simulate()
 {
-	ComputeAndAssignConservationLaws(useConservationLaws);
+	ComputeAndAssignConservationLaws(false);
+
 
     if(!mModel)
     {
@@ -571,8 +549,9 @@ bool RoadRunner::GenerateModelCode(const string& sbml)
 
     //The get instance function actually compiles the supplied code..
 	//        rrObject* o = mCompiler->getInstance(_sModelCode, "TModel", sLocation);
-    CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
-    codeGen->SetXMLModelFileName(mModelXMLFileName);
+    //CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
+
+    mModelGenerator->SetXMLModelFileName(mModelXMLFileName);
 
     string srcCodeFolder;
     if(mSimulation)
@@ -592,9 +571,12 @@ bool RoadRunner::GenerateModelCode(const string& sbml)
         return false;
     }
 
-    codeGen->SaveSourceCodeToFolder(srcCodeFolder);
+    if(!mModelGenerator->SaveSourceCodeToFolder(srcCodeFolder))
+    {
+	    Log(lError)<<"Failed saving generated source code";
+    }
 
-    Log(lDebug4)<<" ------ Model Code --------\n"
+    Log(lDebug5)<<" ------ Model Code --------\n"
                 <<mModelCode
                 <<" ----- End of Model Code -----\n";
 	return true;
@@ -4653,5 +4635,15 @@ StringListContainer RoadRunner::getAvailableSymbols()
 //    }
 //}
 
+
+string RoadRunner::getCopyright()
+{
+	return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";
+}
+
+string RoadRunner::getURL()
+{
+	return "http://sys-bio.org";
+}
 
 }//namespace rr

@@ -4,9 +4,20 @@
 
 double spf_pow(double a, double b)
 {
-	printf("computing %d to the power of %d", a, b);
-    double res = pow(a,b);
-    return res;
+    double res = 1;
+    if(b == 2)
+    {
+//		printf("computing %f to the power of %f\n", a, b);
+    	res = a*a;//pow(a,b);
+//   		printf("Result: %f\n", res);
+    }
+    else
+    {
+#if defined (DEBUG_SPF)
+   		printf("b is: %f\n", b);
+#endif
+    }
+    return 0;
 }
 //---------------------------------------------------------------------------
 // Boolean functions for event handling" + NL());

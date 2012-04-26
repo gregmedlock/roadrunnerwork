@@ -66,8 +66,15 @@ void StringBuilder::AddFunctionProto(const string& retValue, const string& funcP
 	mStringing<<"   "<<" "<<left<<setw(mSizeOfVarField1)<<retValue<<setw(mSizeOfVarField2)<<funcProto + ";"<<endl;
 }
 
-void StringBuilder::FormatArray(const string& type, const string& varName, const int& arraySize, const string& comment)
+void StringBuilder::FormatArray(const string& type, const string& varName, const int& _arraySize, const string& comment)
 {
+	int arraySize = _arraySize;
+    if(arraySize == 0)
+    {
+        //an array of zero length is undefined.. don't put it in the header..
+     //   mStringing<<"//";
+     	arraySize = 10;
+    }
 	string field2(varName +"["+ rr::ToString(arraySize)+"];");
     mStringing<<"\t"<<left<<setw(mSizeOfVarField1)<<type	<< setw(mSizeOfVarField2)<<field2;
     if(comment.size())
