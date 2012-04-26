@@ -20,7 +20,7 @@ namespace rr
 
 typedef double cvode_precision; //This is the precision that the cvode library is using, can be float, double and long double
 
-class IModel;
+class ModelFromC;
 typedef  void (*TModelCallBack)(int n, double Time, double *y, double *ydot, void *f_data);
 typedef  void (*TRootCallBack)(double t, double *y, double *gout, void *g_data);
 

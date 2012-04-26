@@ -7,7 +7,7 @@
 #include <map>
 #include <algorithm>
 #include "rrRoadRunner.h"
-#include "rrIModel.h"
+#include "rrModelFromC.h"
 #include "rrCvodedll.h"
 #include "rrException.h"
 #include "rrModelState.h"
@@ -28,14 +28,14 @@ int 	CvodeInterface::mOneStepCount = 0;
 int 	CvodeInterface::mCount = 0;
 int 	CvodeInterface::errorFileCounter = 0;
 string  CvodeInterface::tempPathstring = "c:\\";
-IModel* CvodeInterface::model = NULL;
+ModelFromC* CvodeInterface::model = NULL;
 // -------------------------------------------------------------------------
 // Constructor
 // Model contains all the symbol tables associated with the model
 // ev is the model function
 // -------------------------------------------------------------------------
 
-CvodeInterface::CvodeInterface(IModel *aModel)
+CvodeInterface::CvodeInterface(ModelFromC *aModel)
 :
 //defaultReltol(1E-12),
 //defaultAbsTol(1E-16),
@@ -120,7 +120,7 @@ CvodeInterface::~CvodeInterface()
 //void CvodeInterface::ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
 void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, void* fdata)
 {
-    IModel *model = CvodeInterface::model;
+    ModelFromC *model = CvodeInterface::model;
     ModelState oldState(*model);
 //    int size = model->amounts.size() + model->rateRules.size();
 
@@ -170,7 +170,7 @@ bool CvodeInterface::HaveVariables()
     return (numAdditionalRules + numIndependentVariables > 0);
 }
 
-void CvodeInterface::InitializeCVODEInterface(IModel *oModel)
+void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
 {
 	if(!oModel)
     {
@@ -1024,7 +1024,7 @@ void CvodeInterface::AssignResultsToModel()
 }
 
 // Restart the simulation using a different initial condition
-void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
+void CvodeInterface::AssignNewVector(ModelFromC *oModel, bool bAssignNewTolerances)
 {
     vector<double> dTemp = model->GetCurrentValues();
     double dMin = absTol;
@@ -1080,7 +1080,7 @@ void CvodeInterface::AssignNewVector(IModel *oModel, bool bAssignNewTolerances)
 }
 
 
-void CvodeInterface::AssignNewVector(IModel *model)
+void CvodeInterface::AssignNewVector(ModelFromC *model)
 {
 	AssignNewVector(model, false);
 }
@@ -1100,7 +1100,7 @@ void CvodeInterface::setAbsTolerance(int index, double dValue)
     Cvode_SetVector(abstolArray, index, dTolerance);
 }
 
-int CvodeInterface::reStart(double timeStart, IModel* model)
+int CvodeInterface::reStart(double timeStart, ModelFromC* model)
 {
     AssignNewVector(model);
 

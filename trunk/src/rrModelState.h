@@ -4,7 +4,7 @@
 #include <istream>
 #include <vector>
 #include "rrObject.h"
-#include "rrIModel.h"
+#include "rrModelFromC.h"
 
 using std::vector;
 using std::istream;
@@ -31,15 +31,15 @@ class RR_DECLSPEC ModelState : public rrObject
         vector<double>                  mRates;
         vector<double>                  mModifiableSpeciesReferences;
         double 							mTime;
-        void 							InitializeFromModel(IModel& model);
+        void 							InitializeFromModel(ModelFromC& model);
 
     public:
-        								ModelState(IModel& model);
+        								ModelState(ModelFromC& model);
         void 							WriteTo(const string& fileName);
         static ModelState 				ReadFrom(istream& stream);
         static ModelState 				ReadFrom(const string& fileName);
         void 							WriteTo(ostream& stream);
-        void 							AssignToModel(IModel& model);
+        void 							AssignToModel(ModelFromC& model);
         vector<double> 					GetCopy(const vector<double>& oVector);
         vector<bool> 					GetCopy(const vector<bool>& oVector);
 };

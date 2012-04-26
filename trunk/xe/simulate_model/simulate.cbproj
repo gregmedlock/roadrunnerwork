@@ -48,8 +48,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>C:\DataOutput\00022\;..\..\src\Util\;..\..\Apps\simulate_sbml\;..\..\src\;$(rr_root)\src\;$(rr_root)\src\Util\;$(rr_root)\src\Logger;$(rr_root)\src\Scanner;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(rr_root)\src\Solvers;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>C:\DataOutput\00022\;..\..\Apps\simulate_sbml\;..\..\Testing\simulate_sbml\;..\Testing\simulate_sbml\;..\installs\xe\lib\;..\src\;..\..\installs\xe\lib\;..\..\src\;..\..\src\Util\;..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\src\ModelGeneration\;C:\DataOutput\00022\;..\..\src\Util\;..\..\Apps\simulate_sbml\;..\..\src\;$(rr_root)\src\;$(rr_root)\src\Util\;$(rr_root)\src\Logger;$(rr_root)\src\Scanner;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(rr_root)\src\Solvers;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\src\ModelGeneration\;C:\DataOutput\00022\;..\..\Apps\simulate_sbml\;..\..\Testing\simulate_sbml\;..\Testing\simulate_sbml\;..\installs\xe\lib\;..\src\;..\..\installs\xe\lib\;..\..\src\;..\..\src\Util\;..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
@@ -85,20 +85,11 @@
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
 			<IncludePath>C:\rrw\c_src;$(IncludePath)</IncludePath>
 		</PropertyGroup>
-		<PropertyGroup Condition="'$(Cfg_1)'!='' And '$(FileToCompile)'=='..\..\Apps\simulate_sbml\00022-sbml-l2v4.c'">
-			<BCC_CPPCompileAlways>true</BCC_CPPCompileAlways>
-			<BCC_CallingConvention>stdcall</BCC_CallingConvention>
-		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
 			<Defines>NDEBUG;$(Defines)</Defines>
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\Apps\simulate_sbml\00022-sbml-l2v4.c">
-				<HasBuildEvent>true</HasBuildEvent>
-				<BuildOrder>3</BuildOrder>
-				<OptionOverrides>true</OptionOverrides>
-			</CppCompile>
 			<CppCompile Include="..\..\Apps\simulate_sbml\CommandLineParameters.cpp">
 				<DependentOn>..\..\Apps\simulate_sbml\CommandLineParameters.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
@@ -167,7 +158,7 @@
 						<Parameters Name="RunParams">-n1 -v4</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-n29 -v4</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-n22 -v4</Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

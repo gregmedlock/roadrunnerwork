@@ -28,6 +28,99 @@ mCodeGenerator(generator)
 ModelFromC::~ModelFromC()
 {}
 
+
+
+/////////////////// The following used to be in IModel
+ModelFromC::ModelFromC()
+:
+mDummyInt(0),
+numIndependentVariables(&mDummyInt),
+numDependentVariables(&mDummyInt),
+numTotalVariables(&mDummyInt),
+numBoundaryVariables(&mDummyInt),
+numGlobalParameters(&mDummyInt),
+numCompartments(&mDummyInt),
+numReactions(&mDummyInt),
+numRules(&mDummyInt),
+numEvents(&mDummyInt),
+time(0),
+mModelName("NoNameSet")
+{}
+
+//ModelFromC::~ModelFromC(){}
+
+int ModelFromC::getNumIndependentVariables()
+{
+	return *numIndependentVariables;
+}
+
+int ModelFromC::getNumDependentVariables()
+{
+	return *numDependentVariables;
+}
+
+int ModelFromC::getNumTotalVariables()
+{
+	return *numTotalVariables;
+}
+
+int ModelFromC::getNumBoundarySpecies()
+{
+	return *numBoundaryVariables;	//Todos: bad naming - is Variables/Species, choose one..
+}
+
+int ModelFromC::getNumGlobalParameters()
+{
+	return *numGlobalParameters;
+}
+
+int ModelFromC::getNumCompartments()
+{
+	return *numCompartments;
+}
+
+int ModelFromC::getNumReactions()
+{
+	return *numReactions;
+}
+
+int ModelFromC::getNumRules()
+{
+	return *numRules;
+}
+
+int ModelFromC::getNumEvents()
+{
+	return *numEvents;
+}
+
+//Virtual functions that should(?) be implemented in decendant..
+//void  IModel::initializeInitialConditions(){}
+//void  ModelFromC::setInitialConditions()					            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::setParameterValues()						            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::setBoundaryConditions()					            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::InitializeRates()							            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::AssignRates()								            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::AssignRates(vector<double>& rates)		            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::computeConservedTotals()					            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+void  ModelFromC::computeEventPriorites()					            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+void  ModelFromC::setConcentration(int index, double value)	            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::convertToAmounts()						            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::convertToConcentrations() = 0;
+//void  ModelFromC::updateDependentSpeciesValues(vector<double>& _y)		{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::computeRules(vector<double>& _y)						{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+void  ModelFromC::computeReactionRates(double time, vector<double>& y)	{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::computeAllRatesOfChange()								{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::evalModel(double time, vector<double>& y)				{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::evalEvents(double time, vector<double>& y){}
+//void  ModelFromC::resetEvents()								            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::evalInitialAssignments()					            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::testConstraints()							            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::InitializeRateRuleSymbols()				            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+
+/////////////////// END OF USED TO BE IN IModel
+
+
 void ModelFromC::LoadData()
 {
 	CopyDblArray(mGP, 			gp, 			mCodeGenerator->GetNumberOfFloatingSpecies());

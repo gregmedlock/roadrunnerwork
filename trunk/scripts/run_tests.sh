@@ -14,6 +14,10 @@ echo "" > $logFile
 echo "" > $logTable
 echo "" > $failed
 
+#Remove previous data files
+find $dataFolder -name '*l2v4.csv' -exec rm -fv {} \;
+
+
 for ((i=$start; i<=$end; i++ )); 
 do 
 	echo "Running $i" ; 
@@ -31,7 +35,7 @@ done
 #
 #Copy files and zip them up
 dataFiles="dataFiles.txt"
-/usr/bin/find '/cygdrive/c/DataOutput'  -name '*l2v4.csv' > $dataFiles
+find '/cygdrive/c/DataOutput'  -name '*l2v4.csv' > $dataFiles
 cygpath -d `cat dataFiles.txt` > $dataFiles
 zipFile="data_`date | cut -d' ' -f4 | tr ':' '-'`.zip"
 7za a $zipFile `cat $dataFiles`

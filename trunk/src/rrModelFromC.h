@@ -1,8 +1,12 @@
 #ifndef rrModelFromCH
 #define rrModelFromCH
 #include <windows.h>
-#include "rrIModel.h"
-//---------------------------------------------------------------------------
+#include <list>
+//#include "rrIModel.h"
+#include "rrTEventDelayDelegate.h"
+#include "rrTEventAssignmentDelegate.h"
+#include "rrTComputeEventAssignmentDelegate.h"
+#include "rrTPerformEventAssignmentDelegate.h"
 
 namespace rr
 {
@@ -17,9 +21,106 @@ typedef double  (__cdecl*c_double_int)(int);
 typedef double* (__cdecl*c_doubleStar)();
 typedef void	(__cdecl*c_void_double_doubleStar)(double, double*);
 
-
-class RR_DECLSPEC ModelFromC : public IModel	//This model sets up nnecessary handles to C DLL functions
+//: public IModel	//This model sets up nnecessary handles to C DLL functions: public IModel	//This model sets up nnecessary handles to C DLL functions
+class RR_DECLSPEC ModelFromC : public rrObject
 {
+    protected:
+//    	//These variables is also generated in the c-code, weird ??
+//        //Init a decendent models data later
+        int										mDummyInt;
+        int                                    *numIndependentVariables;
+        int                                    *numDependentVariables;
+        int                                    *numTotalVariables;
+        int                                    *numBoundaryVariables;
+        int                                    *numGlobalParameters;
+        int                                    *numCompartments;
+        int                                    *numReactions;
+        int                                    *numRules;
+        int                                    *numEvents;
+        string 									mModelName;
+//
+//
+    public:
+        double 							       *time;
+        void									SetTime(double _time){*time = _time;}
+		double							        GetTime(){return *time;}
+        vector<double> 					        y;
+        list<string> 					        Warnings;
+        vector<double>                  		init_y;
+		double*									m_dydt;	   		//This is the "dydt" data in the DLL. IModel also has amounts.. CONFUSING
+////        vector<double>                          amounts;
+        double*									mAmounts;		//This is the "amounts" data in the DLL. IModel also has amounts.. CONFUSING
+//        virtual double							GetAmounts(const int& i) = 0;
+//        //vector<double>                          bc;
+        double*									bc;
+        vector<double> 					        sr;
+        vector<double> 					        gp;				//Global parameters
+//        vector<double> 					        lp ;        	//Local parameters
+//        //vector<double> 	                        c ;        		//Compartment volumes
+        double* 	         	               	c;        		//Compartment volumes
+        vector<double> 	                        dydt;
+        vector<double> 	                        rates;
+        vector<double> 					        ct ;         	//Conservation totals
+        vector<double> 					        rateRules;		//additional rateRules
+        vector<double> 					        eventTests;
+//        vector<double> 					        eventPriorities;
+        vector<TEventDelayDelegate> 	        eventDelay;
+        vector<bool>                            eventType;
+        vector<bool>                            eventPersistentType;
+        vector<bool>                            eventStatusArray;
+        vector<bool>                            previousEventStatusArray;
+//        vector<TEventAssignmentDelegate>		eventAssignments;
+        vector<TComputeEventAssignmentDelegate> computeEventAssignments;
+//        vector<TPerformEventAssignmentDelegate> performEventAssignments;
+
+												ModelFromC();
+//		virtual								   ~IModel();
+//        string									GetModelName();
+//
+//    	// Virtual functions --------------------------------------------------------
+        virtual int                             getNumIndependentVariables();
+        virtual int                             getNumDependentVariables();
+        virtual int                             getNumTotalVariables();
+        virtual int                             getNumBoundarySpecies();
+        virtual int                             getNumGlobalParameters();
+        virtual int                             getNumCompartments();
+        virtual int                             getNumReactions();
+        virtual int                             getNumRules();
+        virtual int                             getNumEvents();
+//        virtual void                            initializeInitialConditions() = 0;
+//        virtual void                            setInitialConditions();
+//        virtual void                            setParameterValues();
+//        virtual void                            setBoundaryConditions();
+//        virtual void                            InitializeRates();
+//        virtual void                            AssignRates();
+//        virtual void                            AssignRates(vector<double>& rates);
+//        virtual void                            computeConservedTotals();
+        virtual void                            computeEventPriorites();
+        virtual void                            setConcentration(int index, double value);
+//        virtual void                            convertToAmounts();
+//        virtual void                            convertToConcentrations() = 0;
+//        virtual void                            updateDependentSpeciesValues(vector<double>& _y);
+//        virtual void                            computeRules(vector<double>& _y);
+        virtual void                            computeReactionRates(double time, vector<double>& y);
+//        virtual void                            computeAllRatesOfChange();
+//        virtual void                            evalModel(double time, vector<double>& y);
+//        virtual void                            evalEvents(double time, vector<double>& y) = 0;
+//        virtual void                            resetEvents();
+//        virtual void                            evalInitialAssignments();
+//        virtual void                            testConstraints();
+//        virtual void                            InitializeRateRuleSymbols();
+//
+//        //Pure virtuals - force implementation...
+//        virtual void                            setCompartmentVolumes() = 0;
+//        virtual vector<double> 					GetCurrentValues() = 0 ;
+//        virtual double 							getConcentration(int index) = 0;
+//        virtual int 							getNumLocalParameters(int reactionId) = 0;         // Level 2 support
+//
+//        virtual vector<double>					GetdYdT() = 0;
+//        virtual void							LoadData() = 0;	//This one copies data from the DLL to vectors and lists in the model..
+
+
+
 	public:
 	    CGenerator*					mCodeGenerator;	//There are some arrays returned that we don't know the size of..!
 

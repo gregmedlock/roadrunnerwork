@@ -33,8 +33,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\c_src\;..\..\src\;..\..\src\Util\;..\..\src\Util\mtrand\;..\..\src\Logger\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\src\libstruct\;..\..\src\LibStructSupport\;..\..\installs\xe\include\sbml;..\..\installs\xe\include;..\..\installs\xe\include\cvode;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\c_src\;..\..\builds\xe\clapack_32\F2CLIBS\libf2c\;..\..\builds\xe\clapack_32\BLAS\SRC\;..\..\builds\xe\clapack_32\SRC\;..\..\installs\xe\lib\;..\..\src\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\src\LibStructSupport\;..\..\src\Util\;..\..\src\Logger\;..\..\src\libstruct\;..\..\src\Util\mtrand\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\installs\xe\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\src\ModelGeneration\;..\..\c_src\;..\..\src\;..\..\src\Util\;..\..\src\Util\mtrand\;..\..\src\Logger\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\src\libstruct\;..\..\src\LibStructSupport\;..\..\installs\xe\include\sbml;..\..\installs\xe\include;..\..\installs\xe\include\cvode;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\src\ModelGeneration\;..\..\c_src\;..\..\builds\xe\clapack_32\F2CLIBS\libf2c\;..\..\builds\xe\clapack_32\BLAS\SRC\;..\..\builds\xe\clapack_32\SRC\;..\..\installs\xe\lib\;..\..\src\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\src\LibStructSupport\;..\..\src\Util\;..\..\src\Logger\;..\..\src\libstruct\;..\..\src\Util\mtrand\;..\..\src\Solvers\;..\..\src\Scanner\;..\..\installs\xe\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -139,6 +139,9 @@
 			<CppCompile Include="..\..\src\Logger\rrLogOutput.cpp">
 				<DependentOn>..\..\src\Logger\rrLogOutput.h</DependentOn>
 				<BuildOrder>55</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\ModelGeneration\rrCodeBuilder.cpp">
+				<BuildOrder>66</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\rrCGenerator.cpp">
 				<DependentOn>..\..\src\rrCGenerator.h</DependentOn>

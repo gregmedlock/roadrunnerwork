@@ -2,7 +2,7 @@
 #define rrNLEQInterfaceH
 #include <vector>
 #include "rrObject.h"
-#include "rrIModel.h"
+#include "rrModelFromC.h"
 using std::vector;
 //class IModel;
 
@@ -30,7 +30,7 @@ namespace rr
             vector<double> 	XScal;
             int 			ierr;
             vector<int> 	iopt;	// = new int[nOpts];
-            IModel 		   *model; 	// Model generated from the SBML
+            ModelFromC 		   *model; 	// Model generated from the SBML
             int 			n;
 
 //        /// <summary>
@@ -50,7 +50,7 @@ namespace rr
 
 	public:
         bool 						IsAvailable;
-        							NLEQInterface(IModel *_model = NULL){}
+        							NLEQInterface(ModelFromC *_model = NULL){}
 
 //        static TCallBackModelFcn fcn;
 		double 						defaultTolerance;

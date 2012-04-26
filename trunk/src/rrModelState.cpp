@@ -7,12 +7,12 @@
 
 namespace rr
 {
-ModelState::ModelState(IModel& model)
+ModelState::ModelState(ModelFromC& model)
 {
 	InitializeFromModel(model);
 }
 
-void ModelState::InitializeFromModel(IModel& model)
+void ModelState::InitializeFromModel(ModelFromC& model)
 {
 	model.LoadData();
 
@@ -32,7 +32,7 @@ void ModelState::InitializeFromModel(IModel& model)
     mPreviousEventStatusArray  		= model.previousEventStatusArray;
 }
 
-void ModelState::AssignToModel(IModel& model)
+void ModelState::AssignToModel(ModelFromC& model)
 {
    model.y 		                    = mFloatingSpeciesConcentrations;
    model.bc 	                    = mBoundarySpeciesConcentrations;

@@ -163,8 +163,8 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 	switch (record.selectionType)
 	{
 		case TSelectionType::clFloatingSpecies:
-			dResult = mModel->getConcentration(record.index);
-//			dResult = mModel->mAmounts[record.index];			//Todo:
+//			dResult = mModel->getConcentration(record.index);
+			dResult = mModel->mAmounts[record.index];			//Todo:
 		break;
 
 		case TSelectionType::clBoundarySpecies:
@@ -620,7 +620,7 @@ bool RoadRunner::GenerateAndCompileModel()
     return true;
 }
 
-IModel* RoadRunner::CreateModel()
+ModelFromC* RoadRunner::CreateModel()
 {
 	//Load dll
     if(!mModelDllHandle)

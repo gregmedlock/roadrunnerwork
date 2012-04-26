@@ -8,7 +8,7 @@
 #include "rrCvodedll.h"
 using std::string;
 
-class IModel;
+class ModelFromC;
 namespace rr
 {
 typedef long* IntPtr;
@@ -57,7 +57,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 
 	public:
 		static int 			        mCount;
-		static IModel 	    	    *model;
+		static ModelFromC 	    	    *model;
 		vector<PendingAssignment> 	assignments;// = new List<PendingAssignment>();
 		Random 			  		    mRandom;// { get; set; }
 		int 					    defaultMaxAdamsOrder;// = 12;
@@ -78,7 +78,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 									// Model contains all the symbol tables associated with the model
 									// ev is the model function
 									// -------------------------------------------------------------------------
-									CvodeInterface(IModel* oModel);
+									CvodeInterface(ModelFromC* oModel);
 								   ~CvodeInterface();
 
 		void                        TestRootsAtInitialTime();
@@ -179,7 +179,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 		//public void EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata);
 
 		bool 					HaveVariables();
-		void 					InitializeCVODEInterface(IModel *oModel);
+		void 					InitializeCVODEInterface(ModelFromC *oModel);
 //        internal static CvodeErrorCodes[] errorCodes = InitilizeErrorCodes();
 //        internal static CvodeErrorCodes[] InitilizeErrorCodes();
 
@@ -188,10 +188,10 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 		double 					OneStep(double timeStart, double hstep);
 
 		// Restart the simulation using a different initial condition
-		void                   	AssignNewVector(IModel *oModel, bool bAssignNewTolerances);
-		void                   	AssignNewVector(IModel *model);
+		void                   	AssignNewVector(ModelFromC *oModel, bool bAssignNewTolerances);
+		void                   	AssignNewVector(ModelFromC *model);
 		void 					setAbsTolerance(int index, double dValue);
-		int 					reStart(double timeStart, IModel* model);
+		int 					reStart(double timeStart, ModelFromC* model);
 //        public double getValue(int index);
 		vector<double> 			BuildEvalArgument();
 

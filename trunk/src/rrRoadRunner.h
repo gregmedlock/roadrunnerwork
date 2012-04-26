@@ -4,7 +4,7 @@
 #include <windows.h>
 #include "rrObject.h"
 #include "rrDoubleMatrix.h"
-#include "rrIModel.h"
+//#include "rrIModel.h"
 #include "rrTVariableType.h"
 #include "rrTParameterType.h"
 #include "rrCvodeInterface.h"
@@ -24,6 +24,7 @@ namespace rr
 
 class ModelGenerator;
 class SBMLModelSimulation;
+class ModelFromC;
 
 class RR_DECLSPEC RoadRunner : public rrObject
 {
@@ -161,7 +162,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
         bool 							modelLoaded;
 
         string 							mCurrentSBML;
-	    IModel*							mModel;
+	    //IModel*							mModel;
+		ModelFromC*	   					mModel;
         double                         	mTimeStart;
         double                         	mTimeEnd;
         int 							mNumPoints;
@@ -175,7 +177,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         bool							GenerateModelCode(const string& sbml = string(""));
         bool							GenerateAndCompileModel();
 		bool							CompileCurrentModel();
-        IModel*							CreateModel();
+        ModelFromC*							CreateModel();
         SimulationData 					GetSimulationResult();
         ModelGenerator*					GetCodeGenerator();
         bool							UseSimulationSettings(SimulationSettings& settings);
