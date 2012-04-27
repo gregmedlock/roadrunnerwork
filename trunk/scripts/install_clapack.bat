@@ -8,4 +8,6 @@ REM copy %rr_root%\builds\vs-2010\clapack\BLAS\SRC\Debug\blas.lib %rr_root%\inst
 REM copy %rr_root%\builds\vs-2010\clapack\SRC\Debug\lapack.lib %rr_root%\installs\vs-2010\lib
 REM copy %rr_root%\builds\vs-2010\clapack\F2CLIBS\libf2c\Debug\libf2c.lib  %rr_root%\installs\vs-2010\lib
 
+echo copying XE CLAPACK libs
+rem copy %rr_root%\builds\xe\clapack\BLAS\SRC\blas.lib %rr_root%\installs\xe\lib
 

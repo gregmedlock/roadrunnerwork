@@ -48,8 +48,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\ModelGeneration\;C:\DataOutput\00022\;..\..\src\Util\;..\..\Apps\simulate_sbml\;..\..\src\;$(rr_root)\src\;$(rr_root)\src\Util\;$(rr_root)\src\Logger;$(rr_root)\src\Scanner;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(rr_root)\src\Solvers;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\src\ModelGeneration\;C:\DataOutput\00022\;..\..\Apps\simulate_sbml\;..\..\Testing\simulate_sbml\;..\Testing\simulate_sbml\;..\installs\xe\lib\;..\src\;..\..\installs\xe\lib\;..\..\src\;..\..\src\Util\;..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\Apps\simulate_sbml\;..\..\src\ModelGeneration\;C:\DataOutput\00022\;..\..\src\Util\;..\..\Apps\simulate_sbml\;..\..\src\;$(rr_root)\src\;$(rr_root)\src\Util\;$(rr_root)\src\Logger;$(rr_root)\src\Scanner;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(rr_root)\src\Solvers;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\installs\xe\bin\;..\..\..\Apps\simulate_sbml\;..\..\src\ModelGeneration\;C:\DataOutput\00022\;..\..\Apps\simulate_sbml\;..\..\Testing\simulate_sbml\;..\Testing\simulate_sbml\;..\installs\xe\lib\;..\src\;..\..\installs\xe\lib\;..\..\src\;..\..\src\Util\;..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
@@ -90,14 +90,14 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\Apps\simulate_sbml\CommandLineParameters.cpp">
-				<DependentOn>..\..\Apps\simulate_sbml\CommandLineParameters.h</DependentOn>
+			<CppCompile Include="..\..\..\Apps\simulate_sbml\CommandLineParameters.cpp">
+				<DependentOn>..\..\..\Apps\simulate_sbml\CommandLineParameters.h</DependentOn>
+				<BuildOrder>1</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\Apps\simulate_sbml\main.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Apps\simulate_sbml\main.cpp">
-				<BuildOrder>2</BuildOrder>
-			</CppCompile>
-			<LibFiles Include="..\..\installs\xe\lib\RoadRunner_xe.lib">
+			<LibFiles Include="..\..\..\installs\xe\bin\RoadRunner_xe.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>

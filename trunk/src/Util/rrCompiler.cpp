@@ -49,7 +49,7 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 
     exeCmd<<"tcc -g -shared -rdynamic " \
     <<sourceFileName \
-    <<" c:\\rrw\\c_src\\rrSupportFunctions.c";
+    <<" c:\\rrw\\src\\c_src\\rrSupportFunctions.c";
 
     if(gLog.GetLogLevel() == lDebug1)
     {
@@ -67,8 +67,8 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
     }
 
     exeCmd<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL " \
-    <<"-Ic:\\rrw\\c_src " \
-    <<"-Lc:\\rrw\\c_src";
+    <<"-Ic:\\rrw\\src\\c_src " \
+    <<"-Lc:\\rrw\\src\\c_src";
 
     Log(lDebug3)<<"Compiling model..";
     Log(lDebug5)<<"\nExecuting: "<<exeCmd.str();
