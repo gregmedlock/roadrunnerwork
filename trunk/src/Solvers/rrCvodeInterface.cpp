@@ -40,8 +40,8 @@ CvodeInterface::CvodeInterface(ModelFromC *aModel)
 :
 //defaultReltol(1E-12),
 //defaultAbsTol(1E-16),
-defaultReltol(1E-12),
-defaultAbsTol(1E-16),
+defaultReltol(1E-15),
+defaultAbsTol(1E-20),
 defaultMaxNumSteps(10000),
 //gdata(NULL),
 _amounts(NULL),

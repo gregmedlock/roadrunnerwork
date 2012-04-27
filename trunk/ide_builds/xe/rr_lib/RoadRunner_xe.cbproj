@@ -90,7 +90,7 @@
 			</LibFiles>
 			<LibFiles Include="..\..\..\installs\xe\lib\libsbml.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>63</BuildOrder>
+				<BuildOrder>66</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="..\..\..\installs\xe\lib\sundials_cvode.lib">
 				<IgnorePath>true</IgnorePath>
