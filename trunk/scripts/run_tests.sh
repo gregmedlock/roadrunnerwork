@@ -22,9 +22,13 @@ for ((i=$start; i<=$end; i++ ));
 do 
 	echo "Running $i" ; 
 	echo $i >> $logFile; 
-	$simulator -n$i -v3 >> $logFile 
+	$simulator -n$i -v3 >> $logFile &
 	echo "Next" >> $logFile;
+	sleep .01
 done
+
+echo "Waiting for background jobs to finish..."
+wait
 #
 ##Creeate a table
 #

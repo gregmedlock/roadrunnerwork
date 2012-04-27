@@ -6,7 +6,7 @@
 #include "rrObject.h"
 #include "rrStringList.h"
 #include "rrSymbolList.h"
-#include "rrCodeBuilder.h"
+#include "ModelGeneration/rrCodeBuilder.h"
 #include "rrLibStructSupport.h"
 #include "rrNOMSupport.h"
 #include "rrScanner.h"

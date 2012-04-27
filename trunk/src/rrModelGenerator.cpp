@@ -20,7 +20,7 @@ namespace rr
 ModelGenerator::ModelGenerator()
 :
 mStructAnalysis(),
-STR_DoubleFormat("%f"),
+STR_DoubleFormat("%.19G"),
 STR_FixAmountCompartments("*")
 {
 	mNOM.Reset();
