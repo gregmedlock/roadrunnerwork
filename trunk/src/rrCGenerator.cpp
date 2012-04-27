@@ -1047,7 +1047,8 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
 
     mSource<<Append("}" + NL() + NL());
 
-    mHeader<<"\t double _rateRules["<<numRateRules<<"];           // Vector containing values of additional rate rules      \n"; //Todo: why is t his here in nowhere?
+    mHeader<<"double _rateRules["<<numRateRules<<"];           // Vector containing values of additional rate rules      \n"; //Todo: why is t his here in nowhere?
+    mHeader<<"int _rateRulesSize="<<numRateRules<<";           // Number of rateRules   \n"; //Todo: why is t his here in nowhere?
     mHeader.AddFunctionExport("void", "InitializeRates()");
     mSource<<"void InitializeRates()\n{";
 

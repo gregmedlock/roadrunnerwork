@@ -16,6 +16,7 @@
 #include "rrException.h"
 #include "rrCvodeInterface.h"
 #include "rrCvodeDll.h"
+#include "rrUtils.h"
 
 //---------------------------------------------------------------------------
 using namespace std;
@@ -39,9 +40,8 @@ CvodeInterface::CvodeInterface(ModelFromC *aModel)
 :
 //defaultReltol(1E-12),
 //defaultAbsTol(1E-16),
-defaultReltol(1E-15),
-defaultAbsTol(1E-20),
-
+defaultReltol(1E-12),
+defaultAbsTol(1E-16),
 defaultMaxNumSteps(10000),
 //gdata(NULL),
 _amounts(NULL),
@@ -57,12 +57,14 @@ MinStep(0.0),
 MaxStep(0.0),
 MaxNumSteps(defaultMaxNumSteps),
 relTol(defaultReltol),
-absTol(defaultAbsTol)
+absTol(defaultAbsTol),
 //errorFileCounter,
-//_amounts),
 //_rootsFound),
-//abstolArray),
+abstolArray(NULL),
+fileHandle(NULL)
 //modelDelegate(&CvodeInterface::ModelFcn)
+,
+cvodeMem(NULL)
 {
 	//relTol = 1.e-4;
 	//absTol = 1.(defaultReltol),
@@ -124,7 +126,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
     ModelState oldState(*model);
 //    int size = model->amounts.size() + model->rateRules.size();
 
-    int size = model->getNumIndependentVariables() + model->rateRules.size();
+    int size = model->getNumIndependentVariables() + (model->rateRulesSize);
 	vector<double> dCVodeArgument(size);//model->.amounts.Length + model.rateRules.Length];
 
 	for(int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
@@ -141,11 +143,12 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
 //    }
 
 	model->evalModel(time, dCVodeArgument);
-	dCVodeArgument = model->rateRules;
 
-	for(u_int i = 0 ; i < model->GetdYdT().size(); i++)
+    CopyCArrayToStdVector(model->rateRules,	dCVodeArgument, (model->rateRulesSize));
+
+	for(u_int i = 0 ; i < (*model->dydtSize); i++)
     {
-		dCVodeArgument.push_back(model->GetdYdT().at(i));
+		dCVodeArgument.push_back(model->dydt[i]);
     }
 
 //    msg<<"\t"<<CvodeInterface::mCount << "\t" ;
@@ -181,7 +184,7 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
     {
         model = oModel;
         numIndependentVariables = oModel->getNumIndependentVariables();
-        numAdditionalRules = oModel->rateRules.size();
+        numAdditionalRules = (oModel->rateRulesSize);
 
 ////                modelDelegate = new TCallBackModelFcn(ModelFcn);
 ////                eventDelegate = new TCallBackRootFcn(EventFcn);
@@ -1012,7 +1015,7 @@ void CvodeInterface::AssignResultsToModel()
     {
 		double val = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
 		//Todo: Here is the culprit!! storing the results in amounts instead of mAmounts caused the problem
-        model->mAmounts[i] = (val);
+        model->amounts[i] = (val);
         //model->amounts[i] = (val);
 		Log(lDebug3)<<"Amount "<<setprecision(16)<<val;
 	}
@@ -1042,7 +1045,7 @@ void CvodeInterface::AssignNewVector(ModelFromC *oModel, bool bAssignNewToleranc
         if (oModel->GetAmounts(i) > 0 && oModel->GetAmounts(i)/1000.0 < dMin)	//Todo: was calling oModel->amounts[i]  is this in fact GetAmountsForSpeciesNr(i) ??
         {
 //        	dMin = oModel->amounts[i]/1000.0;
-        	dMin = oModel->mAmounts[i]/1000.0;
+        	dMin = oModel->amounts[i]/1000.0;
         }
     }
 
@@ -1135,7 +1138,7 @@ vector<double> CvodeInterface::BuildEvalArgument()
 //    dResult.insert(dResult.end(), model->amounts.begin(), model->amounts.end());
     for(int i = 0; i < model->getNumIndependentVariables(); i++)
     {
-    	dResult.push_back(model->mAmounts[i]);
+    	dResult.push_back(model->amounts[i]);
     }
     Log(lDebug4)<<"Size of dResult in BuildEvalArgument: "<<dResult.size();
     return dResult;

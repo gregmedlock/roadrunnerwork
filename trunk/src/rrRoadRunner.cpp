@@ -71,13 +71,6 @@ bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
 	mTimeStart 	= mSettings.mStartTime;
     mTimeEnd    = mSettings.mEndTime;
     mNumPoints	= mSettings.mSteps + 1;
-
-    //Assign absolute and relative somewhere..??
-    if (mCVode)
-    {
-//    	mCVode->absTol = settings.mAbsolute;
-//    	mCVode->relTol = settings.mRelative;
-    }
 	return true;
 }
 
@@ -96,6 +89,14 @@ bool RoadRunner::CreateSelectionList()
     for(int i = 0; i < mSettings.mConcentration.size(); i++)
     {
     	theList.Add(mSettings.mConcentration[i]);
+    }
+
+    if(theList.size() < 2)
+    {
+		for(int i = 0; i < mSettings.mVariables.size(); i++)
+	    {
+    		theList.Add(mSettings.mVariables[i]);
+    	}
     }
 
 	setSelectionList(theList);
@@ -190,7 +191,6 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 	{
 		case TSelectionType::clFloatingSpecies:
 			dResult = mModel->getConcentration(record.index);
-//			dResult = mModel->mAmounts[record.index];			//Todo:
 		break;
 
 		case TSelectionType::clBoundarySpecies:
@@ -211,9 +211,9 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 
 		case TSelectionType::clParameter:
 			{
-				if (record.index > (mModel->gp.size() - 1))
+				if (record.index > ((*mModel->gpSize) - 1))
 				{
-					dResult = mModel->ct[record.index - mModel->gp.size()];
+					dResult = mModel->ct[record.index - (*mModel->gpSize)];
 				}
 				else
 				{
@@ -223,16 +223,15 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 		break;
 
 		case TSelectionType::clFloatingAmount:
-            dResult = mModel->mAmounts[record.index];
+            dResult = mModel->amounts[record.index];
 		break;
 
 		case TSelectionType::clBoundaryAmount:
             int nIndex;
-			//Todo: enable this
-            if (
-                mModelGenerator->compartmentList.find(
-                    mModelGenerator->boundarySpeciesList[record.index].compartmentName, nIndex))
+            if (mModelGenerator->compartmentList.find(mModelGenerator->boundarySpeciesList[record.index].compartmentName, nIndex))
+			{
                 dResult = mModel->bc[record.index] * mModel->c[nIndex];
+            }
             else
             {
 				dResult = 0.0;
@@ -296,13 +295,14 @@ void RoadRunner::AddNthOutputToResult(DoubleMatrix& results, int nRow, double dC
 vector<double> RoadRunner::BuildModelEvalArgument()
 {
 	vector<double> dResult;// = new double[model.amounts.Length + model.rateRules.Length];
+    dResult.resize((*mModel->amountsSize) + (mModel->rateRulesSize) );
 	vector<double> dCurrentRuleValues = mModel->GetCurrentValues();
 
 	dResult 		= dCurrentRuleValues;//.CopyTo(dResult, 0);
 
-	for(int i = 0; i < mModel->rateRules.size(); i++)
+	for(int i = 0; i < (mModel->rateRulesSize); i++)
 	{
-		dResult.push_back(mModel->mAmounts[i]);
+		dResult.push_back(mModel->amounts[i]);
 	}
 
 	return dResult;
@@ -850,7 +850,7 @@ double RoadRunner::steadyState()
 		//oneStep(0.0,0.05);
         //Get a std vector for the solver
         vector<double> someAmounts;
-        CopyCArrayToStdVector(mModel->mAmounts, someAmounts, mModel->getNumIndependentVariables());
+        CopyCArrayToStdVector(mModel->amounts, someAmounts, mModel->getNumIndependentVariables());
 
 		double ss = steadyStateSolver->solve(someAmounts);//mModel->amounts);
 		mModel->convertToConcentrations();

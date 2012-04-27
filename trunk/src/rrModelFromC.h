@@ -59,30 +59,35 @@ class RR_DECLSPEC ModelFromC : public rrObject
 		double*									mInitY;
         vector<double>                  		init_y;
 
-   		double*									m_dydt;	   		//This is the "dydt" data in the DLL.
-        vector<double> 	                        dydt;
+   		double*									dydt;	   		//This is the "dydt" data in the DLL.
+ 		int*									dydtSize;	   		//This is the "dydt" data in the DLL.
 
 //        vector<double>                          amounts;
-        double*									mAmounts;		//This is the "amounts" data in the DLL.
+        double*									amounts;		//This is the "amounts" data in the DLL.
+        int*									amountsSize;
 
 //        //vector<double>                          bc;
         double*									bc;
+        double*									bcSize;
 
         vector<double> 					        sr;
 
-        double*									mGP;
-        vector<double> 					        gp;				//Global parameters
+        double*									gp;
+        int*									gpSize;
+//        vector<double> 					        gp;				//Global parameters
 //        vector<double> 					        lp ;        	//Local parameters
 
 //        //vector<double> 	                        c ;        		//Compartment volumes
         double* 	         	               	c;        		//Compartment volumes
-
+		double* 	         	               	cSize;        		//Compartment volumes
 
         double*									mRates;
         vector<double> 	                        rates;
         vector<double> 					        ct ;         	//Conservation totals
 
-        vector<double> 					        rateRules;		//additional rateRules
+        double* 						        rateRules;		//additional rateRules
+        int		 						        rateRulesSize;	//additional rateRules
+
         vector<double> 					        eventTests;
 //        vector<double> 					        eventPriorities;
         vector<TEventDelayDelegate> 	        eventDelay;
@@ -210,7 +215,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
         //Access dll data
         vector<double> 				GetCurrentValues();
         double		   				GetAmounts(const int& i);
-        vector<double>				GetdYdT();
+//        vector<double>				GetdYdT();
 
 //        int                         getNumIndependentVariables();
 //        int                         getNumDependentVariables();

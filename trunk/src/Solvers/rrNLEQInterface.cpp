@@ -7,6 +7,7 @@
 #include "rrNLEQInterface.h"
 #include "rrModelFromC.h"
 #include "rrStringUtils.h"
+#include "rrUtils.h"
 //---------------------------------------------------------------------------
 
 namespace rr
@@ -438,14 +439,13 @@ double NLEQInterface::ComputeSumsOfSquares()
     vector<double> dTemp;// = new double[model->amounts.Length + model->rateRules.Length];
 //    dTemp.resize(model->amounts.size() + model->rateRules.size());
 
-    dTemp = model->rateRules;//model->rateRules.CopyTo(dTemp, 0);
-
+	//    dTemp = model->rateRules;//model->rateRules.CopyTo(dTemp, 0);
+	CopyCArrayToStdVector(model->rateRules,   dTemp, (model->rateRulesSize));//model->rateRules.CopyTo(dTemp, 0);
     //model->amounts.CopyTo(dTemp, model->rateRules.Length);
 //    for(int i = 0; i < model->amounts.size(); i++)
     for(int i = 0; i < model->getNumIndependentVariables(); i++)
     {
-//		dTemp.push_back(model->amounts[i]);
-		dTemp.push_back(model->mAmounts[i]);
+		dTemp.push_back(model->amounts[i]);
     }
 
     model->evalModel(0.0, dTemp);

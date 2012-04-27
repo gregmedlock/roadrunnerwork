@@ -52,8 +52,8 @@ void CodeBuilder::FormatArray(const string& type, const string& varName, const i
     if(arraySize == 0)
     {
         //an array of zero length is undefined.. don't put it in the header..
-     //   mStringing<<"//";
-     	arraySize = 10;
+        mStringing<<"\t//The array size for the follwoing variable was generated as 0. We put 1, to make it legal code.\n";
+     	arraySize = 1;
     }
 	string field2(varName +"["+ rr::ToString(arraySize)+"];");
     mStringing<<"\t"<<left<<setw(mSizeOfVarField1)<<type	<< setw(mSizeOfVarField2)<<field2;
@@ -61,6 +61,9 @@ void CodeBuilder::FormatArray(const string& type, const string& varName, const i
     {
     	mStringing<<left<<setw(mSizeOfVarField3)<<"//" + comment;
     }
+    mStringing<<"\n";
+	//Add the size for each array, so we don't have to calculate later on..
+    mStringing<<"\t"<<left<<setw(mSizeOfVarField1)<<"const int"	<< setw(mSizeOfVarField2)<<varName + "Size=" + rr::ToString(arraySize) + ";";
 
    	mStringing<<endl;
 }

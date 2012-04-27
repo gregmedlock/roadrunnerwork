@@ -21,13 +21,13 @@ class RR_DECLSPEC ModelState : public rrObject
         //vector<double>                  mCompartmentVolumes;
 		double*		                	mCompartmentVolumes;
         vector<double>                  mConservedTotals;
-        vector<double>                  mDyDt;
+        double*			                mDyDt;
         vector<bool>                    mEventStatusArray;
         vector<double>                  mEventTests;
         vector<double>                  mFloatingSpeciesConcentrations;
-        vector<double>                  mGlobalParameters;
+        double*			                mGlobalParameters;
         vector<bool>                    mPreviousEventStatusArray;
-        vector<double>                  mRateRules;
+        double*			                mRateRules;
         vector<double>                  mRates;
         vector<double>                  mModifiableSpeciesReferences;
         double 							mTime;

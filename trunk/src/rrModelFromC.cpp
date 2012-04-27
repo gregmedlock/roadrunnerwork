@@ -123,10 +123,10 @@ void  ModelFromC::computeReactionRates(double time, vector<double>& y)	{Log(lErr
 
 void ModelFromC::LoadData()
 {
-	CopyDblArray(mGP, 			gp, 			mCodeGenerator->GetNumberOfFloatingSpecies());
+//	CopyDblArray(mGP, 			gp, 			mCodeGenerator->GetNumberOfFloatingSpecies());
 	CopyDblArray(mInitY, 		init_y, 		mCodeGenerator->GetNumberOfFloatingSpecies());
 	CopyDblArray(mY, 			y, 				mCodeGenerator->GetNumberOfFloatingSpecies());
-	CopyDblArray(m_dydt, 		dydt, 			mCodeGenerator->GetNumberOfFloatingSpecies());
+//	CopyDblArray(m_dydt, 		dydt, 			mCodeGenerator->GetNumberOfFloatingSpecies());
 //	CopyDblArray(mAmounts, 		amounts, 		mCodeGenerator->GetNumberOfFloatingSpecies());
 	CopyDblArray(mRates, 		rates, 			mCodeGenerator->GetNumberOfReactions());
 }
@@ -149,7 +149,7 @@ bool CopyDblArray(double* src, vector<double>& dest, int size)
 
 double ModelFromC::GetAmounts(const int& i)
 {
-	return (mAmounts ) ? mAmounts[i] : -1;
+	return (amounts ) ? amounts[i] : -1;
 }
 
 bool ModelFromC::SetupDLLFunctions()
@@ -236,67 +236,92 @@ bool ModelFromC::SetupDLLData()
 	test = (int*) GetProcAddress((HMODULE) mDLLHandle, "numEvents");
 	numEvents = test;
 
-	mAmounts  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_amounts");
-	if(!mAmounts)
+	amounts  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_amounts");
+	if(!amounts)
 	{
-		Log(lError)<<"Failed to assign to mAmounts";
-		return false;
+		Log(lError)<<"Failed to assign to amounts";
 	}
 
-	m_dydt  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_dydt");
-	if(!m_dydt)
+	amountsSize  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_amountsSize");
+	if(!amountsSize)
 	{
-		Log(lError)<<"Failed to assign to m_dydt";
-        return false;
+		Log(lError)<<"Failed to assign to amountsSize";
+	}
+
+	dydt  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_dydt");
+	if(!dydt)
+	{
+		Log(lError)<<"Failed to assign to dydt";
+    }
+
+	dydtSize  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_dydtSize");
+	if(!dydtSize)
+	{
+		Log(lError)<<"Failed to assign to dydtSize";
+    }
+
+	rateRules  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_rateRules");
+	if(!rateRules)
+	{
+		Log(lError)<<"Failed to assign to rateRules";
+    }
+
+	int* ptr = (int*) GetProcAddress((HMODULE) mDLLHandle, "_rateRulesSize");
+	if(!ptr)
+	{
+		Log(lError)<<"Failed to assign to rateRules";
+    }
+    else
+    {
+	    rateRulesSize  = *ptr;
     }
 
     mY  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_y");
     if(!mY)
     {
 		Log(lError)<<"Failed to assign to mY";
-        return false;
     }
 
     mRates  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_rates");
     if(!mY)
     {
 		Log(lError)<<"Failed to assign to mRateLaws";
-        return false;
     }
 
     time	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "mTime");
     if(!time)
     {
 		Log(lError)<<"Failed to assign to time";
-        return false;
 	}
 
     mInitY	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_init_y");
     if(!mInitY)
     {
 		Log(lError)<<"Failed to assign to mInitY";
-        return false;
     }
 
-    mGP	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_gp");
-    if(!mGP)
+    gp	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_gp");
+    if(!gp)
     {
-		Log(lError)<<"Failed to assign to mGP";
-        return false;
+		Log(lError)<<"Failed to assign to gp";
+    }
+
+    gpSize	   = (int*) GetProcAddress((HMODULE) mDLLHandle, "_gpSize");
+    if(!gpSize)
+    {
+		Log(lError)<<"Failed to assign to gpSize";
     }
 
     c	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_c");
     if(!c)
     {
 		Log(lError)<<"Failed to assign to mC";
-        return false;
     }
 
     bc	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_bc");
     if(!bc)
     {
 		Log(lError)<<"Failed to assign to bc";
-        return false;
     }
 
     return true;
@@ -348,18 +373,18 @@ vector<double> ModelFromC::GetCurrentValues()
 	return vals;
 }
 
-vector<double> ModelFromC::GetdYdT()
-{
-	//Copy values from dll to vector
-    int nrSpecies = mCodeGenerator->getFloatingSpeciesConcentrationList().size();
-    dydt.resize(nrSpecies);
-    for(int i = 0; i < nrSpecies; i++)
-    {
-		dydt[i] = m_dydt[i];
-    }
-    return dydt;
-
-}
+//vector<double> ModelFromC::GetdYdT()
+//{
+//	//Copy values from dll to vector
+//    int nrSpecies = mCodeGenerator->getFloatingSpeciesConcentrationList().size();
+//    dydt.resize(nrSpecies);
+//    for(int i = 0; i < nrSpecies; i++)
+//    {
+//		dydt[i] = m_dydt[i];
+//    }
+//    return dydt;
+//
+//}
 
 double ModelFromC::getConcentration(int index)
 {
@@ -547,16 +572,15 @@ void ModelFromC::evalModel(double timein, vector<double>& y)
 		return;
 	}
 
-	//copy y values to mAmounts
+	//copy y values to amounts
 	for(u_int i = 0; i < y.size(); i++)
     {
-    	mAmounts[i] = y[i];
-    	//y[i] = mAmounts[i];
+    	amounts[i] = y[i];
     }
 
-    cevalModel(timein, mAmounts);
-
+    cevalModel(timein, amounts);
 }
+
 void ModelFromC::evalEvents(double timeIn, vector<double>& y)
 {
     if(!cevalEvents)
@@ -565,7 +589,7 @@ void ModelFromC::evalEvents(double timeIn, vector<double>& y)
         return;
 	}
 
-    cevalEvents(timeIn, mAmounts);
+    cevalEvents(timeIn, amounts);
 
 }
 
