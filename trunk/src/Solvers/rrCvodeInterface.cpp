@@ -1021,6 +1021,8 @@ void CvodeInterface::AssignResultsToModel()
 	}
 
 	vector<double> args = BuildEvalArgument();
+
+
     model->computeRules(args);
     model->AssignRates(dTemp);
     model->computeAllRatesOfChange();

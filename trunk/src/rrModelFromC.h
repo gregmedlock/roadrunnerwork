@@ -31,6 +31,8 @@ class RR_DECLSPEC ModelFromC : public rrObject
     	//These variables is also generated in the c-code, weird ??
         //Init a decendent models data later
         int										mDummyInt;
+        int										mDummyDouble;
+        double*									mDummyDoubleArray;
         int                                    *numIndependentVariables;
         int                                    *numDependentVariables;
         int                                    *numTotalVariables;
@@ -53,37 +55,37 @@ class RR_DECLSPEC ModelFromC : public rrObject
         void									SetTime(double _time){*time = _time;}
 		double							        GetTime(){return *time;}
 
-        double*									mY;             //Corresponds to y in IModel
-        vector<double> 					        y;
+        double*									y;             //Corresponds to y in IModel
+        int*									ySize;             //Corresponds to y in IModel
 
-		double*									mInitY;
-        vector<double>                  		init_y;
+		double*									init_y;
+		int*									init_ySize;
 
    		double*									dydt;	   		//This is the "dydt" data in the DLL.
  		int*									dydtSize;	   		//This is the "dydt" data in the DLL.
 
-//        vector<double>                          amounts;
         double*									amounts;		//This is the "amounts" data in the DLL.
         int*									amountsSize;
 
-//        //vector<double>                          bc;
         double*									bc;
-        double*									bcSize;
+        int*									bcSize;
 
-        vector<double> 					        sr;
+        double*		 					        sr;
+        int*	 						        srSize;
 
         double*									gp;
         int*									gpSize;
-//        vector<double> 					        gp;				//Global parameters
+
 //        vector<double> 					        lp ;        	//Local parameters
 
-//        //vector<double> 	                        c ;        		//Compartment volumes
         double* 	         	               	c;        		//Compartment volumes
 		double* 	         	               	cSize;        		//Compartment volumes
 
-        double*									mRates;
-        vector<double> 	                        rates;
-        vector<double> 					        ct ;         	//Conservation totals
+        double*									rates;
+        int*									ratesSize;
+
+        double*	 					        	ct;         	//Conservation totals
+        int*	 					        	ctSize;        	//Conservation totals
 
         double* 						        rateRules;		//additional rateRules
         int		 						        rateRulesSize;	//additional rateRules
@@ -127,7 +129,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
 //        virtual void                            convertToConcentrations() = 0;
 //        virtual void                            updateDependentSpeciesValues(vector<double>& _y);
 //        virtual void                            computeRules(vector<double>& _y);
-        virtual void                            computeReactionRates(double time, vector<double>& y);
+        virtual void                            computeReactionRates(double time, double* y);
 //        virtual void                            computeAllRatesOfChange();
 //        virtual void                            evalModel(double time, vector<double>& y);
 //        virtual void                            evalEvents(double time, vector<double>& y) = 0;
@@ -199,7 +201,8 @@ class RR_DECLSPEC ModelFromC : public rrObject
         //Inherited functions
     	void 						setCompartmentVolumes();
         int 						getNumLocalParameters(int reactionId);
-        void                        computeRules(vector<double>& _y);
+       void                        computeRules(vector<double>& _y);
+       void			           		computeRules(double* ay, int size);
 
 		void  						initializeInitialConditions();
 
@@ -207,7 +210,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
 		void 						setBoundaryConditions();
 		void 						setInitialConditions();
         void	                 	evalInitialAssignments();
-        void			           	computeRules(double* ay);
+
         void 	                	convertToAmounts();
         void    	         	    computeConservedTotals();
         double		   				getConcentration(int index);
@@ -238,7 +241,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
 //        void                        setConcentration(int index, double value);
 //        void                        convertToAmounts();
         void                        convertToConcentrations();
-        void                        updateDependentSpeciesValues(vector<double>& _y);
+        void                        updateDependentSpeciesValues(double* _y);
 //        void                        computeRules(vector<double>& _y);
 //        void                        computeReactionRates(double time, vector<double>& y);
 		void                        computeAllRatesOfChange();

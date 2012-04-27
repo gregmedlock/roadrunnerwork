@@ -16,21 +16,21 @@ class RR_DECLSPEC ModelState : public rrObject
 {
     protected:
     public:
-        //vector<double>                  mBoundarySpeciesConcentrations;
-        double*							mBoundarySpeciesConcentrations;
-        //vector<double>                  mCompartmentVolumes;
-		double*		                	mCompartmentVolumes;
-        vector<double>                  mConservedTotals;
-        double*			                mDyDt;
+
+        double							mBoundarySpeciesConcentrations;
+		double		                	mCompartmentVolumes;
+        double			                mConservedTotals;
+        double			                mDyDt;
+        double		                  	mFloatingSpeciesConcentrations;
+        double			                mGlobalParameters;
+        vector<bool>                    mPreviousEventStatusArray;
+        double			                mRateRules;
+        double	                  		mRates;
+        double			                mModifiableSpeciesReferences;
+        double 							mTime;
         vector<bool>                    mEventStatusArray;
         vector<double>                  mEventTests;
-        vector<double>                  mFloatingSpeciesConcentrations;
-        double*			                mGlobalParameters;
-        vector<bool>                    mPreviousEventStatusArray;
-        double*			                mRateRules;
-        vector<double>                  mRates;
-        vector<double>                  mModifiableSpeciesReferences;
-        double 							mTime;
+
         void 							InitializeFromModel(ModelFromC& model);
 
     public:

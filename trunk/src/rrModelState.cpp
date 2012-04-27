@@ -17,37 +17,37 @@ void ModelState::InitializeFromModel(ModelFromC& model)
 	model.LoadData();
 
     model.convertToConcentrations();
-    mFloatingSpeciesConcentrations 	= model.y;
-    mBoundarySpeciesConcentrations 	= model.bc;
-    mCompartmentVolumes 			= model.c;
-    mGlobalParameters 				= model.gp;
-    mConservedTotals 				= model.ct;
-    mDyDt 							= model.dydt;
-    mRates 							= model.rates;
-    mRateRules 						= model.rateRules;
-    mModifiableSpeciesReferences 	= model.sr;
-    mTime 							= model.GetTime();
-    mEventStatusArray 		   		= model.eventStatusArray;
-    mEventTests 			   		= model.eventTests;
-    mPreviousEventStatusArray  		= model.previousEventStatusArray;
+    mFloatingSpeciesConcentrations 	= *model.y;
+    mBoundarySpeciesConcentrations 	= *model.bc;
+    mCompartmentVolumes 			= *model.c;
+    mGlobalParameters 				= *model.gp;
+    mConservedTotals 				= *model.ct;
+    mDyDt 							= *model.dydt;
+    mRates 							= *model.rates;
+    mRateRules 						= *model.rateRules;
+    mModifiableSpeciesReferences 	= *model.sr;
+    mTime 							= *model.time;
+//    mEventStatusArray 		   		= *model.eventStatusArray;
+//    mEventTests 			   		= *model.eventTests;
+//    mPreviousEventStatusArray  		= *model.previousEventStatusArray;
 }
 
 void ModelState::AssignToModel(ModelFromC& model)
 {
-   model.y 		                    = mFloatingSpeciesConcentrations;
-   model.bc 	                    = mBoundarySpeciesConcentrations;
-   model.c 		                    = mCompartmentVolumes;
-   model.gp 	                    = mGlobalParameters;
-   model.ct 	                    = mConservedTotals;
-   model.dydt 	                    = mDyDt;
-   model.rates 			            = mRates;
-   model.rateRules 		            = mRateRules;
-   model.eventTests 	            = mEventTests;
-   model.eventStatusArray 	        = mEventStatusArray;
-   model.previousEventStatusArray 	= mPreviousEventStatusArray;
+   *model.y 		                    = mFloatingSpeciesConcentrations;
+   *model.bc 	                    = mBoundarySpeciesConcentrations;
+   *model.c 		                    = mCompartmentVolumes;
+   *model.gp 	                    = mGlobalParameters;
+   *model.ct 	                    = mConservedTotals;
+   *model.dydt 	                    = mDyDt;
+   *model.rates 			            = mRates;
+   *model.rateRules 		            = mRateRules;
+   //model.eventTests 	            = mEventTests;
+   //model.eventStatusArray 	        = mEventStatusArray;
+   //model.previousEventStatusArray 	= mPreviousEventStatusArray;
    model.SetTime(mTime);
    model.convertToAmounts();
-   model.sr = mModifiableSpeciesReferences;
+   *model.sr = mModifiableSpeciesReferences;
 }
 
 vector<double> ModelState::GetCopy(const vector<double>& oVector)

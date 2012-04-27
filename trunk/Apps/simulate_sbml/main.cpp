@@ -148,7 +148,7 @@ int main(int argc, char * argv[])
             Log(lError)<<"Failed loading SBML model settings";
         }
 
-//		rr->ComputeAndAssignConservationLaws(false);
+//		rr->ComputeAndAssignConservationLaws(true);
         //Then Simulate model
         if(!simulation.Run())
         {

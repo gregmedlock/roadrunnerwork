@@ -6,6 +6,7 @@
 #include "rrLogger.h"
 #include "rrModelFromC.h"
 #include "rrCGenerator.h"
+#include "rrUtils.h"
 //---------------------------------------------------------------------------
 using namespace std;
 namespace rr
@@ -14,10 +15,26 @@ bool CopyDblArray(double* src, vector<double>& dest, int size);
 
 ModelFromC::ModelFromC(CGenerator* generator, HINSTANCE dllHandle)
 :
+mCodeGenerator(generator),
 mIsInitialized(false),
 mDLLHandle(dllHandle),
-mCodeGenerator(generator)
+mDummyInt(0),
+mDummyDouble(0),
+mDummyDoubleArray(new double[1]),
+numIndependentVariables(&mDummyInt),
+numDependentVariables(&mDummyInt),
+numTotalVariables(&mDummyInt),
+numBoundaryVariables(&mDummyInt),
+numGlobalParameters(&mDummyInt),
+numCompartments(&mDummyInt),
+numReactions(&mDummyInt),
+numRules(&mDummyInt),
+numEvents(&mDummyInt),
+time(0),
+mModelName("NoNameSet")
 {
+	mDummyDoubleArray[0] = 1;
+
 	if(mDLLHandle)
 	{
 		SetupDLLFunctions();
@@ -32,20 +49,9 @@ ModelFromC::~ModelFromC()
 
 /////////////////// The following used to be in IModel
 ModelFromC::ModelFromC()
-:
-mDummyInt(0),
-numIndependentVariables(&mDummyInt),
-numDependentVariables(&mDummyInt),
-numTotalVariables(&mDummyInt),
-numBoundaryVariables(&mDummyInt),
-numGlobalParameters(&mDummyInt),
-numCompartments(&mDummyInt),
-numReactions(&mDummyInt),
-numRules(&mDummyInt),
-numEvents(&mDummyInt),
-time(0),
-mModelName("NoNameSet")
-{}
+{
+
+}
 
 //ModelFromC::~ModelFromC(){}
 
@@ -109,7 +115,7 @@ void  ModelFromC::setConcentration(int index, double value)	            {Log(lEr
 //void  ModelFromC::convertToConcentrations() = 0;
 //void  ModelFromC::updateDependentSpeciesValues(vector<double>& _y)		{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::computeRules(vector<double>& _y)						{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-void  ModelFromC::computeReactionRates(double time, vector<double>& y)	{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+void  ModelFromC::computeReactionRates(double time, double* y)			{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::computeAllRatesOfChange()								{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::evalModel(double time, vector<double>& y)				{Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::evalEvents(double time, vector<double>& y){}
@@ -124,11 +130,11 @@ void  ModelFromC::computeReactionRates(double time, vector<double>& y)	{Log(lErr
 void ModelFromC::LoadData()
 {
 //	CopyDblArray(mGP, 			gp, 			mCodeGenerator->GetNumberOfFloatingSpecies());
-	CopyDblArray(mInitY, 		init_y, 		mCodeGenerator->GetNumberOfFloatingSpecies());
-	CopyDblArray(mY, 			y, 				mCodeGenerator->GetNumberOfFloatingSpecies());
+//	CopyDblArray(mInitY, 		init_y, 		mCodeGenerator->GetNumberOfFloatingSpecies());
+//	CopyDblArray(mY, 			y, 				mCodeGenerator->GetNumberOfFloatingSpecies());
 //	CopyDblArray(m_dydt, 		dydt, 			mCodeGenerator->GetNumberOfFloatingSpecies());
 //	CopyDblArray(mAmounts, 		amounts, 		mCodeGenerator->GetNumberOfFloatingSpecies());
-	CopyDblArray(mRates, 		rates, 			mCodeGenerator->GetNumberOfReactions());
+//	CopyDblArray(mRates, 		rates, 			mCodeGenerator->GetNumberOfReactions());
 }
 
 bool CopyDblArray(double* src, vector<double>& dest, int size)
@@ -276,16 +282,40 @@ bool ModelFromC::SetupDLLData()
 	    rateRulesSize  = *ptr;
     }
 
-    mY  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_y");
-    if(!mY)
+    y  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_y");
+    if(!y)
     {
 		Log(lError)<<"Failed to assign to mY";
     }
 
-    mRates  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_rates");
-    if(!mY)
+    ySize  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_ySize");
+    if(!ySize)
     {
-		Log(lError)<<"Failed to assign to mRateLaws";
+		Log(lError)<<"Failed to assign to ySize";
+    }
+
+    rates  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_rates");
+    if(!rates)
+    {
+		Log(lError)<<"Failed to assign to rates";
+    }
+
+    ratesSize  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_ratesSize");
+    if(!ratesSize)
+    {
+		Log(lError)<<"Failed to assign to ratesSize";
+    }
+
+    ct  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_ct");
+    if(!ct)
+    {
+		Log(lError)<<"Failed to assign to ct";
+    }
+
+    ctSize  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_ctSize");
+    if(!ctSize)
+    {
+		Log(lError)<<"Failed to assign to ctSize";
     }
 
     time	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "mTime");
@@ -294,10 +324,10 @@ bool ModelFromC::SetupDLLData()
 		Log(lError)<<"Failed to assign to time";
 	}
 
-    mInitY	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_init_y");
-    if(!mInitY)
+    init_y	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_init_y");
+    if(!init_y)
     {
-		Log(lError)<<"Failed to assign to mInitY";
+		Log(lError)<<"Failed to assign to init_y";
     }
 
     gp	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_gp");
@@ -318,10 +348,35 @@ bool ModelFromC::SetupDLLData()
 		Log(lError)<<"Failed to assign to mC";
     }
 
+    cSize	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_cSize");
+    if(!cSize)
+    {
+		Log(lError)<<"Failed to assign to cSize";
+    }
+
     bc	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_bc");
     if(!bc)
     {
 		Log(lError)<<"Failed to assign to bc";
+    }
+
+    bcSize	   = (int*) GetProcAddress((HMODULE) mDLLHandle, "_bcSize");
+    if(!bcSize)
+    {
+		Log(lError)<<"Failed to assign to bcSize";
+    }
+
+    sr	   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_sr");
+    if(!sr)
+    {
+		Log(lError)<<"Failed to assign to sr";
+        sr = mDummyDoubleArray;
+    }
+
+    srSize	   = (int*) GetProcAddress((HMODULE) mDLLHandle, "_srSize");
+    if(!srSize)
+    {
+		Log(lError)<<"Failed to assign to srSize";
     }
 
     return true;
@@ -509,7 +564,7 @@ void ModelFromC::convertToConcentrations()
 	cconvertToConcentrations();
 }
 
-void ModelFromC::updateDependentSpeciesValues(vector<double>& y)
+void ModelFromC::updateDependentSpeciesValues(double* y_vec)
 {
 	if(!cupdateDependentSpeciesValues)
 	{
@@ -517,18 +572,25 @@ void ModelFromC::updateDependentSpeciesValues(vector<double>& y)
 		return;
 	}
 
-	int size = y.size();
-	double* y_vec = new double[y.size()];
-	for(int i = 0; i < y.size(); i++)
-	{
-		y_vec[i] = y[i];
-	}
+//	int size = size;
+//	double* y_vec = new double[y.size()];
+//	for(int i = 0; i < y.size(); i++)
+//	{
+//		y_vec[i] = y[i];
+//	}
 
 	cupdateDependentSpeciesValues(y_vec);
-	delete [] y_vec;
+//	delete [] y_vec;
 }
 
-void ModelFromC::computeRules(vector<double>& y)
+void ModelFromC::computeRules(vector<double>& arr)
+{
+	double* cArr = CreateCVectorFromStdVector(arr);
+    computeRules(cArr, arr.size());
+    delete [] cArr;
+
+}
+void ModelFromC::computeRules(double* y, int size)
 {
 
 	if(!ccomputeRules)
@@ -537,9 +599,7 @@ void ModelFromC::computeRules(vector<double>& y)
 		return;
 	}
 
-	auto_ptr<double> y_vec (new double(y.size()));
-	ccomputeRules(y_vec.get());
-
+	ccomputeRules(y);
 }
 
 void ModelFromC::setInitialConditions()

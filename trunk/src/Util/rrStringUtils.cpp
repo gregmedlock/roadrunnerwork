@@ -554,10 +554,10 @@ string ToString(const bool& val)
     return val ? "true" : "false";
 }
 
-string ToString(const double& d, const string& format)
+string ToString(const double& val, const string& format)
 {
     char sBuffer[256];
-    sprintf(sBuffer, format.c_str(), d);
+    sprintf(sBuffer, format.c_str(), val);
     return string(sBuffer);
 }
 

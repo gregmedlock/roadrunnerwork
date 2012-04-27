@@ -150,7 +150,8 @@ bool RoadRunner::InitializeModel()
     mModel->setInitialConditions();
     mModel->convertToAmounts();
     mModel->evalInitialAssignments();
-    mModel->computeRules(mModel->y);
+
+    mModel->computeRules(mModel->y, *mModel->ySize);
     mModel->convertToAmounts();
 
 	if (mComputeAndAssignConservationLaws)
@@ -701,11 +702,11 @@ void RoadRunner::reset()
 
 		// also we might need to set some initial assignment rules.
 		mModel->convertToConcentrations();
-		mModel->computeRules(mModel->y);
+		mModel->computeRules(mModel->y, *mModel->ySize);
 		mModel->InitializeRates();
 		mModel->InitializeRateRuleSymbols();
 		mModel->evalInitialAssignments();
-		mModel->computeRules(mModel->y);
+		mModel->computeRules(mModel->y, *mModel->ySize);
 
 		mModel->convertToAmounts();
 
