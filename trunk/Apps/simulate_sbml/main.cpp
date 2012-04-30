@@ -119,7 +119,7 @@ int main(int argc, char * argv[])
 
         if(!simulation.CompileModel())
         {
-            Log(lError)<<"Failed compiling SBML model:" <<paras.CaseNumber;
+	            Log(lError)<<"Failed compiling SBML model:" <<paras.CaseNumber;
             goto end;
         }
 
@@ -174,6 +174,10 @@ int main(int argc, char * argv[])
         if(simulation.GetSimulationError() > paras.ErrorThreshold)
         {
         	Log(lError)<<"********** Error larger than "<<paras.ErrorThreshold;
+        }
+        else
+        {
+			Log(lError)<<"Passed Test: "<<paras.CaseNumber<<" Largest error was: "<<simulation.GetSimulationError();
         }
 
         simulation.SaveAllData();

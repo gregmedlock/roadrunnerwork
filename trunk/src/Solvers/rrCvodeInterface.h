@@ -57,7 +57,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 
 	public:
 		static int 			        mCount;
-		static ModelFromC 	    	    *model;
+		static ModelFromC 	       *model;
 		vector<PendingAssignment> 	assignments;// = new List<PendingAssignment>();
 		Random 			  		    mRandom;// { get; set; }
 		int 					    defaultMaxAdamsOrder;// = 12;

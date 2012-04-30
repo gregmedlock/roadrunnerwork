@@ -333,15 +333,15 @@ void CGenerator::WriteComputeAllRatesOfChange(CodeBuilder& ignore, const int& nu
     mSource.TLine("printf(\"In function computeAllRatesOfChange()\"); ");
     mSource<<"#endif";
 //    mSource<<"\n\t//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );\n";
-    mSource<<"\n\tdouble* dTemp = (double*) malloc( sizeof(double)* ("<<numIndependentSpecies + numDependentSpecies<<") );\n"; //Todo: Check this
+    mSource<<"\n\tstatic double* dTemp = (double*) malloc( sizeof(double)* (_amountsSize + _rateRulesSize) );\n"; //Todo: Check this
 
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
         mSource<<Format("\tdTemp[{0}] = {1};{2}", i, mMapRateRule[i], NL());
     }
 
-	mSource<<tab<<"int i;\n\tfor(i = 0; i < "<<numIndependentSpecies + numDependentSpecies<<"; i++)\n";
-    mSource<<tab<<"{\n"<<tab<<tab<<"dTemp[i] = _amounts[i];\n\t}";
+	mSource<<tab<<"int i;\n\tfor(i = 0; i < _amountsSize; i++)\n";
+    mSource<<tab<<"{\n"<<tab<<tab<<"dTemp[i + _rateRulesSize] = _amounts[i];\n\t}";
     mSource<<Append("\n\t//amounts.CopyTo(dTemp, rateRules.Length); " + NL());
 
     mSource<<Append("\tevalModel(mTime, dTemp);" + NL());

@@ -24,11 +24,11 @@ namespace rr
 {
 
 //Static stuff...
-double 	CvodeInterface::lastTimeValue = 0;
-int 	CvodeInterface::mOneStepCount = 0;
-int 	CvodeInterface::mCount = 0;
-int 	CvodeInterface::errorFileCounter = 0;
-string  CvodeInterface::tempPathstring = "c:\\";
+double 		CvodeInterface::lastTimeValue = 0;
+int 		CvodeInterface::mOneStepCount = 0;
+int 		CvodeInterface::mCount = 0;
+int 		CvodeInterface::errorFileCounter = 0;
+string  	CvodeInterface::tempPathstring = "c:\\";
 ModelFromC* CvodeInterface::model = NULL;
 // -------------------------------------------------------------------------
 // Constructor
@@ -40,7 +40,7 @@ CvodeInterface::CvodeInterface(ModelFromC *aModel)
 :
 //defaultReltol(1E-12),
 //defaultAbsTol(1E-16),
-defaultReltol(1E-15),
+defaultReltol(1E-17),
 defaultAbsTol(1E-20),
 defaultMaxNumSteps(10000),
 //gdata(NULL),
@@ -134,13 +134,13 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
 		dCVodeArgument[i] = y[i];
     }
 
-//    stringstream msg;
-//    msg<<left<<setw(20)<<"" + ToString(CvodeInterface::mCount) ;
+    stringstream msg;
+    msg<<left<<setw(20)<<"" + ToString(CvodeInterface::mCount) ;
 
-//	for (u_int i = 0; i < dCVodeArgument.size(); i++)
-//    {
-//        msg<<left<<setw(20)<<setprecision (18)<<dCVodeArgument[i];
-//    }
+	for (u_int i = 0; i < dCVodeArgument.size(); i++)
+    {
+        msg<<left<<setw(20)<<setprecision(4)<<dCVodeArgument[i];
+    }
 
 	model->evalModel(time, dCVodeArgument);
 
@@ -151,13 +151,13 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
 		dCVodeArgument.push_back(model->dydt[i]);
     }
 
-//    msg<<"\t"<<CvodeInterface::mCount << "\t" ;
-//	for (u_int i = 0; i < dCVodeArgument.size(); i++)
-//    {
-//		msg<<setw(10)<<left<<setprecision (18)<<dCVodeArgument[i];
-//    }
+	msg<<"\t"<<CvodeInterface::mCount << "\t" ;
+	for (u_int i = 0; i < dCVodeArgument.size(); i++)
+    {
+		msg<<setw(20)<<left<<setprecision(4)<<dCVodeArgument[i];
+    }
 
-//    Log(lDebug)<<msg.str();
+    Log(lDebug)<<msg.str();
 
     for (int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
     {
