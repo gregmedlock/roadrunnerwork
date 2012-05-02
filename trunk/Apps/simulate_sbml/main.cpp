@@ -71,7 +71,7 @@ int main(int argc, char * argv[])
     string logFileName;
 
     CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
-
+    gLog.SetCutOffLogLevel(lError);
     RoadRunner *rr = NULL;
     try
     {
@@ -134,6 +134,7 @@ int main(int argc, char * argv[])
             goto end;
         }
 
+        gLog.SetCutOffLogLevel(lDebug5);
         //First load the model
         if(!simulation.InitializeModel())
         {
@@ -192,7 +193,7 @@ int main(int argc, char * argv[])
     delete rr;
 	Log(lInfo)<<"Done";
 //    Pause();
-	return 0;
+		return 0;
 }
 
 string Usage(const string& prg)

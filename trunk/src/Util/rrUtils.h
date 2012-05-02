@@ -20,7 +20,13 @@ vector<string> 	RR_DECLSPEC	GetLinesInFile(const string& fName);
 void 			RR_DECLSPEC CreateTestSuiteFileNameParts(int caseNr, const string& postFixPart, string& FilePath, string& modelFileName);
 string 			RR_DECLSPEC GetTestSuiteSubFolderName(int caseNr);
 bool 			RR_DECLSPEC CreateFolder(const string& path);
+
 bool 			RR_DECLSPEC CopyCArrayToStdVector(double* src, vector<double>& dest, int size);
+bool 			RR_DECLSPEC CopyCArrayToStdVector(bool* src, vector<bool>& dest, int size);
+
+bool 			RR_DECLSPEC CopyStdVectorToCArray(vector<double>& src, double* dest,  int size);
+bool 			RR_DECLSPEC CopyStdVectorToCArray(vector<bool>&   src,  bool*  dest,  int size);
+
 double*			RR_DECLSPEC CreateCVectorFromStdVector(const vector<double>& vec);
 }
 

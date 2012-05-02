@@ -311,12 +311,12 @@ void CGenerator::WriteOutVariables(CodeBuilder& ignore)
     mHeader.FormatArray("char*",						       	"globalParameterTable", 		globalParameterList.size());
     mHeader.FormatArray("int",							        "localParameterDimensions", 	mNumReactions );
 	mHeader<<"\ttypedef void (*TEventAssignmentDelegate)();"<<endl;
-    mHeader.FormatVariable("TEventAssignmentDelegate",	    	"_eventAssignments","");
+    mHeader.FormatVariable("TEventAssignmentDelegate*",	    	"_eventAssignments","");
     mHeader.FormatVariable("double*",						   	"_eventPriorities");
 	mHeader<<"\ttypedef void (*TComputeEventAssignmentDelegate)();"<<endl;
-    mHeader.FormatVariable("TComputeEventAssignmentDelegate",	"_computeEventAssignments");
+    mHeader.FormatVariable("TComputeEventAssignmentDelegate*",	"_computeEventAssignments");
 	mHeader<<"\ttypedef void (*TPerformEventAssignmentDelegate)();"<<endl;
-    mHeader.FormatVariable("TPerformEventAssignmentDelegate",	"_performEventAssignments");
+    mHeader.FormatVariable("TPerformEventAssignmentDelegate*",	"_performEventAssignments");
     mHeader.FormatArray("bool",					            	"mEventStatusArray", 			mNumEvents);
     mHeader.FormatArray("bool",					            	"mPreviousEventStatusArray", 	mNumEvents);
 }
@@ -333,7 +333,7 @@ void CGenerator::WriteComputeAllRatesOfChange(CodeBuilder& ignore, const int& nu
     mSource.TLine("printf(\"In function computeAllRatesOfChange()\"); ");
     mSource<<"#endif";
 //    mSource<<"\n\t//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );\n";
-    mSource<<"\n\tstatic double* dTemp = (double*) malloc( sizeof(double)* (_amountsSize + _rateRulesSize) );\n"; //Todo: Check this
+    mSource<<"\n\tdouble* dTemp = (double*) malloc( sizeof(double)* (_amountsSize + _rateRulesSize) );\n"; //Todo: Check this
 
     for (int i = 0; i < NumAdditionalRates(); i++)
     {
@@ -1184,10 +1184,11 @@ void CGenerator::WriteComputeReactionRates(CodeBuilder& ignore, const int& numRe
 
 void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, const int& numFloatingSpecies)
 {
-    mSource<<Append("// Event handling function" + NL());
+    mSource<<Append("//Event handling function" + NL());
     mHeader.AddFunctionExport("void", "evalEvents(double timeIn, double oAmounts[])");
     mSource<<Append("void evalEvents(double timeIn, double oAmounts[])" + NL());
     mSource<<Append("{" + NL());
+    mSource<<Append("\tprintf(\"In Eval events\");" + NL());
 
     if (numEvents > 0)
     {
@@ -1423,7 +1424,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
     vector<bool> eventPersistentType;
     if (numEvents > 0)
     {
-        mSource<<Append("\t// Event assignments" + NL());
+        mSource<<Append("// Event assignments" + NL());
         for (int i = 0; i < numEvents; i++)
         {
             ArrayList ev = mNOM.getNthEvent(i);
@@ -1435,17 +1436,18 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
             string str = substituteTerms(numReactions, "", event[0]);
             delays.Add(str);
 
-            mSource<<Format("\t void eventAssignment_{0} () {{1}", i, NL());
+            mSource<<Format("void eventAssignment_{0}() \n{{1}", i, NL());
 
             string funcName(Format("performEventAssignment_{0}(double* values)", i));
 		    mHeader.AddFunctionExport("void", funcName);
-            mSource<<Format("\t\tperformEventAssignment_{0}( computeEventAssignment_{0}() );{1}", i, NL());
-            mSource<<Append("\t}" + NL());
+            mSource<<Format("\tperformEventAssignment_{0}( computeEventAssignment_{0}() );{1}", i, NL());
+            mSource<<Append("}\n\n");
 
 
             funcName = (Format("computeEventAssignment_{0}()", i));
 		    mHeader.AddFunctionExport("double*", funcName);
-            mSource<<Format("\t double* computeEventAssignment_{0} () {{1}", i, NL());
+
+            mSource<<Format("double* computeEventAssignment_{0}()\n{{1}", i, NL());
             StringList oTemp;
             StringList oValue;
             int nCount = 0;
@@ -1480,9 +1482,9 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
                 temp = ReplaceWord("time", "mTime", temp);
                 mSource<<temp;
             }
-            mSource<<Append("\t\treturn values;" + NL());
-            mSource<<Append("\t}" + NL());
-            mSource<<Format("\t void performEventAssignment_{0} (double* values) {{1}", i, NL());
+            mSource<<Append("\treturn values;" + NL());
+            mSource<<Append("}" + NL());
+            mSource<<Format("void performEventAssignment_{0}(double* values) \n{{1}", i, NL());
 
             for (int j = 0; j < oTemp.size(); j++)
             {
@@ -1496,7 +1498,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
                 }
             }
 
-            mSource<<Append("\t}" + NL());
+            mSource<<Append("}" + NL());
         }
         mSource<<Append("\t" + NL());
     }
@@ -2618,23 +2620,24 @@ void CGenerator::WriteInitFunction(CodeBuilder& ignore, CodeBuilder& source)
     // Declare any eventAssignment delegates
     if (mNumEvents > 0)
     {
-        source<<Append("\t\t_eventAssignments = (TEventAssignmentDelegate) malloc(sizeof(TEventAssignmentDelegate)*numEvents);" , NL());
-        source<<Append("\t\t_eventPriorities = (double*) malloc(sizeof(double)* numEvents);" , NL());
+        source<<Append("\t_eventAssignments = (TEventAssignmentDelegate*) malloc(sizeof(TEventAssignmentDelegate)*numEvents);" , NL());
+        source<<Append("\t_eventPriorities = (double*) malloc(sizeof(double)* numEvents);" , NL());
+
 //        source<<Append("\t\t_computeEventAssignments= new TComputeEventAssignmentDelegate[numEvents];" , NL());
-        source<<Append("\t\t_computeEventAssignments = (TComputeEventAssignmentDelegate) malloc(sizeof(TComputeEventAssignmentDelegate)*numEvents);" , NL());
+        source<<Append("\t_computeEventAssignments = (TComputeEventAssignmentDelegate*) malloc(sizeof(TComputeEventAssignmentDelegate)*numEvents);" , NL());
 
 //        source<<Append("\t\t_performEventAssignments= new TPerformEventAssignmentDelegate[numEvents];" , NL());
-        source<<Append("\t\t_performEventAssignments = (TPerformEventAssignmentDelegate) malloc(sizeof(TPerformEventAssignmentDelegate)*numEvents);" , NL());
+        source<<Append("\t_performEventAssignments = (TPerformEventAssignmentDelegate*) malloc(sizeof(TPerformEventAssignmentDelegate)*numEvents);" , NL());
 
         for (int i = 0; i < mNumEvents; i++)
         {
         	string iStr = ToString(i);
-            source<<Append("//\t\t_eventAssignments[" + iStr + "] = new TEventAssignmentDelegate (eventAssignment_" + iStr +");" + NL());
-            source<<Append("//\t\t_computeEventAssignments[" + iStr + "] = new TComputeEventAssignmentDelegate (computeEventAssignment_" + iStr + ");" + NL());
-            source<<Append("//\t\t_performEventAssignments[" + iStr + "] = new TPerformEventAssignmentDelegate (performEventAssignment_" + iStr + ");" + NL());
+            source<<Append("\t_eventAssignments[" + iStr + "] = (TComputeEventAssignmentDelegate) eventAssignment_" + iStr +";" + NL());
+            source<<Append("\t_computeEventAssignments[" + iStr + "] = (TComputeEventAssignmentDelegate) computeEventAssignment_" + iStr + ";" + NL());
+            source<<Append("\t_performEventAssignments[" + iStr + "] = (TPerformEventAssignmentDelegate) performEventAssignment_" + iStr + ";" + NL());
         }
 
-        source<<Append("\t\tresetEvents();" + NL());
+        source<<Append("\tresetEvents();" + NL());
         source<<Append(NL());
     }
 

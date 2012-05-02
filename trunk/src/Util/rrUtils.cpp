@@ -103,7 +103,57 @@ bool CreateFolder(const string& folder)
 	return (res==0) ? true : false;
 }
 
+
+bool CopyStdVectorToCArray(vector<double>& src, double* dest,  int size)
+{
+	if(!dest)
+	{
+		Log(lError)<<"Tried to copy to NULL vector";
+		return false;
+	}
+
+	for(int i = 0; i < size; i++)
+	{
+		dest[i] = src[i];
+	}
+	return true;
+
+}
+
+bool CopyStdVectorToCArray(vector<bool>&   src,  bool*  dest,  int size)
+{
+	if(!dest)
+	{
+		Log(lError)<<"Tried to copy to NULL vector";
+		return false;
+	}
+
+	for(int i = 0; i < size; i++)
+	{
+		dest[i] = src[i];
+	}
+	return true;
+
+}
+
+
 bool CopyCArrayToStdVector(double* src, vector<double>& dest, int size)
+{
+	if(!src)
+	{
+		Log(lError)<<"Tried to copy from NULL vector";
+		return false;
+	}
+
+	dest.resize(size);
+	for(int i = 0; i < size; i++)
+	{
+		dest[i] = src[i];
+	}
+	return true;
+}
+
+bool CopyCArrayToStdVector(bool* src, vector<bool>& dest, int size)
 {
 	if(!src)
 	{

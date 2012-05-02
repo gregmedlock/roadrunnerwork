@@ -3,7 +3,7 @@
 			<ProjectGuid>{BB98A606-C02D-454F-B743-70C12C4C53CD}</ProjectGuid>
 			<ProjectVersion>13.4</ProjectVersion>
 			<Base>True</Base>
-			<Config Condition="'$(Config)'==''">Release</Config>
+			<Config Condition="'$(Config)'==''">Debug</Config>
 			<AppType>Console</AppType>
 			<FrameworkType>None</FrameworkType>
 			<Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -38,7 +38,7 @@
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<Defines>IMPORT_RR;BUILD_MODEL_DLL;$(Defines)</Defines>
+			<Defines>IMPORT_RR;BUILD_MODEL_DLL;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
@@ -48,8 +48,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\Apps\simulate_sbml\;..\..\src\ModelGeneration\;C:\DataOutput\00022\;..\..\src\Util\;..\..\Apps\simulate_sbml\;..\..\src\;$(rr_root)\src\;$(rr_root)\src\Util\;$(rr_root)\src\Logger;$(rr_root)\src\Scanner;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(rr_root)\src\Solvers;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\installs\xe\bin\;..\..\..\Apps\simulate_sbml\;..\..\src\ModelGeneration\;C:\DataOutput\00022\;..\..\Apps\simulate_sbml\;..\..\Testing\simulate_sbml\;..\Testing\simulate_sbml\;..\installs\xe\lib\;..\src\;..\..\installs\xe\lib\;..\..\src\;..\..\src\Util\;..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\Apps\simulate_sbml\;$(rr_root)\src\;$(rr_root)\src\Util\;$(rr_root)\src\Logger;$(rr_root)\src\Scanner;$(rr_root)\src\LibStructSupport;$(rr_root)\src\libstruct;$(rr_root)\src\Solvers;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\installs\xe\bin\;..\..\..\Apps\simulate_sbml\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
@@ -70,7 +70,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;WIN32;LIBSBML_USE_CPP_NAMESPACE;ENABLE_DEBUG_OUTPUT;$(Defines)</Defines>
+			<Defines>_DEBUG;WIN32;ENABLE_DEBUG_OUTPUT;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -155,10 +155,10 @@
 					</ProjectProperties>
 					<Parameters>
 						<Parameters Name="DebugSourceDirs">C:\RRW\src\cxx</Parameters>
-						<Parameters Name="RunParams">-n1 -v4</Parameters>
+						<Parameters Name="RunParams">-n41 -v4</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-n185 -v10</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-n26 -v10</Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

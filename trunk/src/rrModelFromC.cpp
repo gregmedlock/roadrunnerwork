@@ -11,7 +11,6 @@
 using namespace std;
 namespace rr
 {
-bool CopyDblArray(double* src, vector<double>& dest, int size);
 
 ModelFromC::ModelFromC(CGenerator* generator, HINSTANCE dllHandle)
 :
@@ -45,16 +44,7 @@ mModelName("NoNameSet")
 ModelFromC::~ModelFromC()
 {}
 
-
-
 /////////////////// The following used to be in IModel
-ModelFromC::ModelFromC()
-{
-
-}
-
-//ModelFromC::~ModelFromC(){}
-
 int ModelFromC::getNumIndependentVariables()
 {
 	return *numIndependentVariables;
@@ -135,22 +125,6 @@ void ModelFromC::LoadData()
 //	CopyDblArray(m_dydt, 		dydt, 			mCodeGenerator->GetNumberOfFloatingSpecies());
 //	CopyDblArray(mAmounts, 		amounts, 		mCodeGenerator->GetNumberOfFloatingSpecies());
 //	CopyDblArray(mRates, 		rates, 			mCodeGenerator->GetNumberOfReactions());
-}
-
-bool CopyDblArray(double* src, vector<double>& dest, int size)
-{
-	if(!src)
-	{
-		Log(lError)<<"Tried to copy from NULL vector";
-		return false;
-	}
-
-	dest.resize(size);
-	for(int i = 0; i < size; i++)
-	{
-		dest[i] = src[i];
-	}
-	return true;
 }
 
 double ModelFromC::GetAmounts(const int& i)
@@ -377,6 +351,61 @@ bool ModelFromC::SetupDLLData()
     if(!srSize)
     {
 		Log(lError)<<"Failed to assign to srSize";
+        srSize = &mDummyInt;
+    }
+
+    eventStatusArray   = (bool*) GetProcAddress((HMODULE) mDLLHandle, "mEventStatusArray");
+    if(!eventStatusArray)
+    {
+		Log(lError)<<"Failed to assign to eventStatusArray";
+        eventStatusArray = NULL;
+    }
+
+    eventStatusArraySize	  = (int*) GetProcAddress((HMODULE) mDLLHandle, "mEventStatusArraySize");
+    if(!eventStatusArraySize)
+    {
+		Log(lError)<<"Failed to assign to eventStatusArraySize";
+    }
+
+    previousEventStatusArray   = (bool*) GetProcAddress((HMODULE) mDLLHandle, "_previousEventStatusArray");
+    if(!previousEventStatusArray)
+    {
+		Log(lError)<<"Failed to assign to previousEventStatusArray";
+        previousEventStatusArray = NULL;
+    }
+
+    previousEventStatusArraySize	  = (int*) GetProcAddress((HMODULE) mDLLHandle, "previousEventStatusArraySize");
+    if(!previousEventStatusArraySize)
+    {
+		Log(lError)<<"Failed to assign to previousEventStatusArraySize";
+        previousEventStatusArraySize = &mDummyInt;
+    }
+
+    eventPersistentType   = (bool*) GetProcAddress((HMODULE) mDLLHandle, "_eventPersistentType");
+    if(!eventPersistentType)
+    {
+		Log(lError)<<"Failed to assign to eventPersistentType";
+        eventPersistentType = NULL;
+    }
+
+    eventPersistentTypeSize	  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_eventPersistentTypeSize");
+    if(!eventPersistentTypeSize)
+    {
+		Log(lError)<<"Failed to assign to eventPersistentTypeSize";
+    }
+
+    eventTests   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_eventTests");
+    if(!eventTests)
+    {
+		Log(lError)<<"Failed to assign to eventTests";
+        eventTests = NULL;
+    }
+
+    eventTestsSize	  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_eventTestsSize");
+    if(!eventTestsSize)
+    {
+		Log(lError)<<"Failed to assign to eventTestsSize";
+        eventTestsSize = & mDummyInt;
     }
 
     return true;

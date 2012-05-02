@@ -22,11 +22,13 @@
 using namespace std;
 namespace rr
 {
+vector<double> BuildEvalArgument(ModelFromC* model);
 
 //Static stuff...
 double 		CvodeInterface::lastTimeValue = 0;
 int 		CvodeInterface::mOneStepCount = 0;
 int 		CvodeInterface::mCount = 0;
+int 		CvodeInterface::mRootCount = 0;
 int 		CvodeInterface::errorFileCounter = 0;
 string  	CvodeInterface::tempPathstring = "c:\\";
 ModelFromC* CvodeInterface::model = NULL;
@@ -40,7 +42,7 @@ CvodeInterface::CvodeInterface(ModelFromC *aModel)
 :
 //defaultReltol(1E-12),
 //defaultAbsTol(1E-16),
-defaultReltol(1E-17),
+defaultReltol(1E-15),
 defaultAbsTol(1E-20),
 defaultMaxNumSteps(10000),
 //gdata(NULL),
@@ -168,6 +170,55 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
     oldState.AssignToModel(*model);
 }
 
+////        void CvodeInterface::EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata)
+void EventFcn(double time, cvode_precision* y, cvode_precision* gdot, void* fdata)
+{
+    ModelFromC *model = CvodeInterface::model;
+    ModelState* oldState = new ModelState(*model);
+
+    vector<double> args = BuildEvalArgument(model);
+    model->evalModel(time, args);
+//    AssignResultsToModel();
+	args = BuildEvalArgument(model);
+    model->evalEvents(time, args);
+
+//    Marshal.Copy(model.eventTests, 0, gdot, model.getNumEvents());
+    Log(lDebug3)<<"Rootfunction Out: t="<<time<<" (";// + nRootCount + "): ";
+    for (int i = 0; i < *model->eventTestsSize; i++)
+    {
+        //Log(lDebug3)<<model->eventTests[i]->ToString() + " p=" + model.previousEventStatusArray[i] + " c=" + model.eventStatusArray[i] + ", ";
+    }
+    CvodeInterface::mRootCount++;
+    oldState->AssignToModel(*model);
+}
+
+////        void CvodeInterface::EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata)
+////        {
+////
+////            var oldState = new ModelState(model);
+////
+////            model.evalModel(time, BuildEvalArgument());
+////            AssignResultsToModel();
+////            model.evalEvents(time, BuildEvalArgument());
+////
+////            Marshal.Copy(model.eventTests, 0, gdot, model.getNumEvents());
+////
+////#if (PRINT_EVENT_DEBUG)
+////		            System.Diagnostics.Debug.Write("Rootfunction Out: t=" + time.ToString("F14") + " (" + nRootCount + "): ");
+////		            for (int i = 0; i < model.eventTests.Length; i++)
+////		            {
+////		                System.Diagnostics.Debug.Write(model.eventTests[i].ToString() + " p=" + model.previousEventStatusArray[i] + " c=" + model.eventStatusArray[i] + ", ");
+////		            }
+////		            System.Diagnostics.Debug.WriteLine("");
+////#endif
+////
+////            nRootCount++;
+////
+////            oldState.AssignToModel(model);
+////        }
+////
+////        #endregion
+
 bool CvodeInterface::HaveVariables()
 {
     return (numAdditionalRules + numIndependentVariables > 0);
@@ -225,6 +276,7 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
             if (oModel->getNumEvents() > 0)
             {
                 //errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
+                errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), EventFcn, gdata);
             }
 
             errCode = CvDense(cvodeMem, allocatedMemory); // int = size of systems
@@ -497,32 +549,6 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
 ////            return oResult;
 ////        }
 ////
-////        void CvodeInterface::EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata)
-////        {
-////
-////            var oldState = new ModelState(model);
-////
-////            model.evalModel(time, BuildEvalArgument());
-////            AssignResultsToModel();
-////            model.evalEvents(time, BuildEvalArgument());
-////
-////            Marshal.Copy(model.eventTests, 0, gdot, model.getNumEvents());
-////
-////#if (PRINT_EVENT_DEBUG)
-////		            System.Diagnostics.Debug.Write("Rootfunction Out: t=" + time.ToString("F14") + " (" + nRootCount + "): ");
-////		            for (int i = 0; i < model.eventTests.Length; i++)
-////		            {
-////		                System.Diagnostics.Debug.Write(model.eventTests[i].ToString() + " p=" + model.previousEventStatusArray[i] + " c=" + model.eventStatusArray[i] + ", ");
-////		            }
-////		            System.Diagnostics.Debug.WriteLine("");
-////#endif
-////
-////            nRootCount++;
-////
-////            oldState.AssignToModel(model);
-////        }
-////
-////        #endregion
 ////
 ////
 ////        #region ErrorHandling
@@ -1132,6 +1158,18 @@ int CvodeInterface::reStart(double timeStart, ModelFromC* model)
 ////        }
 
 
+vector<double> BuildEvalArgument(ModelFromC* model)
+{
+    vector<double> dResult;
+    dResult = model->GetCurrentValues();
+    for(int i = 0; i < model->getNumIndependentVariables(); i++)
+    {
+    	dResult.push_back(model->amounts[i]);
+    }
+    Log(lDebug4)<<"Size of dResult in BuildEvalArgument: "<<dResult.size();
+    return dResult;
+}
+
 vector<double> CvodeInterface::BuildEvalArgument()
 {
     vector<double> dResult;
@@ -1145,7 +1183,7 @@ vector<double> CvodeInterface::BuildEvalArgument()
     Log(lDebug4)<<"Size of dResult in BuildEvalArgument: "<<dResult.size();
     return dResult;
 }
-////
+
 ////        void CvodeInterface::release()
 ////        {
 ////            FreeCvode_Mem(cvodeMem);

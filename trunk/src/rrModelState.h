@@ -16,20 +16,20 @@ class RR_DECLSPEC ModelState : public rrObject
 {
     protected:
     public:
-
-        double							mBoundarySpeciesConcentrations;
-		double		                	mCompartmentVolumes;
-        double			                mConservedTotals;
-        double			                mDyDt;
-        double		                  	mFloatingSpeciesConcentrations;
-        double			                mGlobalParameters;
-        vector<bool>                    mPreviousEventStatusArray;
-        double			                mRateRules;
-        double	                  		mRates;
-        double			                mModifiableSpeciesReferences;
-        double 							mTime;
-        vector<bool>                    mEventStatusArray;
-        vector<double>                  mEventTests;
+        //Todo:  Lot of stuff is wrong here..
+        vector<double>					mBoundarySpeciesConcentrations;
+		vector<double>		            mCompartmentVolumes;
+        vector<double>			        mConservedTotals;
+        vector<double>			        mDyDt;
+        vector<double>		            mFloatingSpeciesConcentrations;
+        vector<double>			        mGlobalParameters;
+        vector<bool>		            mPreviousEventStatusArray;
+        vector<double>			        mRateRules;
+        vector<double>	                mRates;
+        vector<double>			        mModifiableSpeciesReferences;
+        double							mTime;
+        vector<bool>	           		mEventStatusArray;
+        vector<double>		            mEventTests;
 
         void 							InitializeFromModel(ModelFromC& model);
 
@@ -40,8 +40,6 @@ class RR_DECLSPEC ModelState : public rrObject
         static ModelState 				ReadFrom(const string& fileName);
         void 							WriteTo(ostream& stream);
         void 							AssignToModel(ModelFromC& model);
-        vector<double> 					GetCopy(const vector<double>& oVector);
-        vector<bool> 					GetCopy(const vector<bool>& oVector);
 };
 
 }

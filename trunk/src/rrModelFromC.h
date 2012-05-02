@@ -90,13 +90,17 @@ class RR_DECLSPEC ModelFromC : public rrObject
         double* 						        rateRules;		//additional rateRules
         int		 						        rateRulesSize;	//additional rateRules
 
-        vector<double> 					        eventTests;
+        double*		 					        eventTests;
+        int*		 					        eventTestsSize;
 //        vector<double> 					        eventPriorities;
         vector<TEventDelayDelegate> 	        eventDelay;
         vector<bool>                            eventType;
-        vector<bool>                            eventPersistentType;
-        vector<bool>                            eventStatusArray;
-        vector<bool>                            previousEventStatusArray;
+        bool*		                            eventPersistentType;
+        int*                                    eventPersistentTypeSize;
+        bool*                            		eventStatusArray;
+        int*									eventStatusArraySize;
+        bool*                  			        previousEventStatusArray;
+        int*									previousEventStatusArraySize;
 //        vector<TEventAssignmentDelegate>		eventAssignments;
         vector<TComputeEventAssignmentDelegate> computeEventAssignments;
 //        vector<TPerformEventAssignmentDelegate> performEventAssignments;

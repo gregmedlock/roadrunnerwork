@@ -15,13 +15,12 @@ typedef long* IntPtr;
 typedef void* CVodeMemPtr;
 
 void ModelFcn(int n, cvode_precision time, cvode_precision* y, cvode_precision* ydot, void* fdata);
+void EventFcn(double time, cvode_precision* y, cvode_precision* gdot, void* fdata);
 
 class RR_DECLSPEC CvodeInterface : public rrObject
 {
     private:
 		const string 		        CVODE;
-		static int 			        mRootCount;
-        static int 			        mOneStepCount;
 
         const double 		        defaultReltol;
         const double 		        defaultAbsTol;
@@ -32,7 +31,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 		FILE* 					    fileHandle;
 
 		int 					    numIndependentVariables;
-		//IntPtr 					    gdata;
+		IntPtr 					    gdata;
 		//IntPtr 					    _amounts;
 		//IntPtr 					    _rootsFound;
 		N_Vector					_amounts;
@@ -57,6 +56,9 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 
 	public:
 		static int 			        mCount;
+		static int 			        mRootCount;
+        static int 			        mOneStepCount;
+
 		static ModelFromC 	       *model;
 		vector<PendingAssignment> 	assignments;// = new List<PendingAssignment>();
 		Random 			  		    mRandom;// { get; set; }
@@ -176,7 +178,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 
 		//public double[] GetCopy(double[] oVector);
 		//public bool[] GetCopy(bool[] oVector);
-		//public void EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata);
+
 
 		bool 					HaveVariables();
 		void 					InitializeCVODEInterface(ModelFromC *oModel);

@@ -3,7 +3,7 @@
 			<ProjectGuid>{8708D8F2-E671-4837-BD8C-BC7D269B101F}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
 			<Base>True</Base>
-			<Config Condition="'$(Config)'==''">Release</Config>
+			<Config Condition="'$(Config)'==''">Debug</Config>
 			<Platform>Win32</Platform>
 			<AppType>Library</AppType>
 			<FrameworkType>None</FrameworkType>
@@ -22,8 +22,9 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<FinalOutputDir>C:\rrw\installs\xe\bin\</FinalOutputDir>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
-			<Defines>EXPORT_RR;NO_NOM_DLL;NO_LIBSTRUCT_DLL;$(Defines)</Defines>
+			<Defines>EXPORT_RR;NO_NOM_DLL;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>
@@ -33,7 +34,7 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\src\LibStructSupport\;..\..\..\src\ModelGeneration\;..\..\..\src\;..\..\..\src\Util\;..\..\..\src\Logger\;..\..\..\src\libstruct\;..\..\..\src\Util\mtrand\;..\..\..\src\Solvers\;..\..\..\src\Scanner\;..\..\..\installs\xe\include\sbml;..\..\..\installs\xe\include;..\..\..\installs\xe\include\cvode;..\..\..\installs\xe\include\nvector;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\..\src\LibStructSupport\;..\..\..\src\ModelGeneration\;..\..\..\src\;..\..\..\src\Util\;..\..\..\src\Logger\;..\..\..\src\libstruct\;..\..\..\src\Util\mtrand\;..\..\..\src\Solvers\;..\..\..\src\Scanner\;..\..\..\installs\xe\include\sbml;..\..\..\installs\xe\include;..\..\..\installs\xe\include\cvode;..\..\..\installs\xe\include\nvector;C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\..\src\LibStructSupport\;..\..\..\installs\xe\lib\;..\..\..\src\ModelGeneration\;..\..\..\src\;..\..\..\src\Util\;..\..\..\src\Logger\;..\..\..\src\libstruct\;..\..\..\src\Util\mtrand\;..\..\..\src\Solvers\;..\..\..\src\Scanner\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
