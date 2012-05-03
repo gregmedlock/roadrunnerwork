@@ -15,19 +15,20 @@ echo "" > $logTable
 echo "" > $failed
 
 #Remove previous data files
-find $dataFolder -name '*l2v4.csv' -exec rm -fv {} \;
+#find $dataFolder -name '*l2v4.csv' -exec rm -fv {} \;
 
 for ((i=$start; i<=$end; i++ )); 
 do 
 	echo "Running $i" ; 
 	echo $i >> $logFile; 
-	$simulator -n$i -v3 >> $logFile &
+#	$simulator -n$i -v3 >> $logFile &
+	$simulator -n$i -v3 >> $logFile 
 	echo "Next" >> $logFile;
-	sleep .005
+#	sleep .005
 done
 
-echo "Waiting for background jobs to finish..."
-wait
+#echo "Waiting for background jobs to finish..."
+#wait
 #
 ##Creeate a table
 #
@@ -40,7 +41,7 @@ wait
 dataFiles="dataFiles.txt"
 find '/cygdrive/c/DataOutput'  -name '*l2v4.csv' > $dataFiles
 cygpath -d `cat dataFiles.txt` > $dataFiles
-zipFile="data_`date | cut -d' ' -f4 | tr ':' '-'`.zip"
+zipFile="data_`date +"%m%d%Y"`.zip"
 rm -v $zipFile
 7za a $zipFile `cat $dataFiles`
 echo "Done" 

@@ -134,7 +134,6 @@ int main(int argc, char * argv[])
             goto end;
         }
 
-        gLog.SetCutOffLogLevel(lDebug5);
         //First load the model
         if(!simulation.InitializeModel())
         {

@@ -263,10 +263,6 @@ void CGenerator::WriteClassHeader(CodeBuilder& ignore)
 
 void CGenerator::WriteOutVariables(CodeBuilder& ignore)
 {
-//	mHeader<<"\t//The following structures mimics two members of the base class to the model\n";
-//	mHeader<<"\tstruct \n\t{\n\t\tdouble* vec;\n\t\tint Length;\n\t} amounts;\n\n";
-//	mHeader<<"\tstruct \n\t{\n\t\tdouble* vec;\n\t\tint Length;\n\t} rateRules;\n\n";
-//    mHeader.FormatVariable("double", 	 						"time");
 	mHeader<<"\t//End of base class members\n\n";
 
     mHeader.FormatVariable("char*", 	 						"mModelName");
@@ -291,8 +287,9 @@ void CGenerator::WriteOutVariables(CodeBuilder& ignore)
     mHeader.FormatArray("double",	                            "_ct",					mNumDependentSpecies 					,  	"Vector containing values of all conserved sums      ");
     mHeader.FormatArray("double",	                            "mEventTests",			mNumEvents 								, 	"Vector containing results of any event tests        ");
 
-	mHeader<<"\ttypedef void (*TEventDelayDelegate)();"<<endl;
+	mHeader<<"\ttypedef double (*TEventDelayDelegate)();"<<endl;
     mHeader.FormatArray("TEventDelayDelegate",	 	           "mEventDelay",			mNumEvents 								, 	"Array of trigger function pointers");
+    mHeader.AddFunctionExport("TEventDelayDelegate*",           "GetEventDelays()");
     mHeader.FormatArray("bool",				  	                "_eventType",			mNumEvents								, 	"Array holding the status whether events are useValuesFromTriggerTime or not");
     mHeader.FormatArray("bool",				  	                "_eventPersistentType", mNumEvents								, 	"Array holding the status whether events are persitstent or not");
 	mHeader.FormatVariable("double",  					    	"mTime");
@@ -312,9 +309,13 @@ void CGenerator::WriteOutVariables(CodeBuilder& ignore)
     mHeader.FormatArray("int",							        "localParameterDimensions", 	mNumReactions );
 	mHeader<<"\ttypedef void __cdecl (*TEventAssignmentDelegate)();"<<endl;
     mHeader.FormatVariable("TEventAssignmentDelegate*",	    	"_eventAssignments","");
+	mHeader.AddFunctionExport("TEventAssignmentDelegate*",	   	"Get_eventAssignments()");
     mHeader.FormatVariable("double*",						   	"_eventPriorities");
+
 	mHeader<<"\ttypedef double* (*TComputeEventAssignmentDelegate)();"<<endl;
+    mHeader.AddFunctionExport("TComputeEventAssignmentDelegate*",	   	"Get_computeEventAssignments()");
     mHeader.FormatVariable("TComputeEventAssignmentDelegate*",	"_computeEventAssignments");
+
 	mHeader<<"\ttypedef void (*TPerformEventAssignmentDelegate)();"<<endl;
     mHeader.FormatVariable("TPerformEventAssignmentDelegate*",	"_performEventAssignments");
     mHeader.FormatArray("bool",					            	"mEventStatusArray", 			mNumEvents);
@@ -1424,6 +1425,9 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
     vector<bool> eventPersistentType;
     if (numEvents > 0)
     {
+		mSource<<("TEventAssignmentDelegate* Get_eventAssignments() \n{\n\treturn _eventAssignments;\n}\n\n");
+        mSource<<("TComputeEventAssignmentDelegate* Get_computeEventAssignments() \n{\n\treturn _computeEventAssignments;\n}\n\n");
+        mSource<<("TEventDelayDelegate* GetEventDelays() \n{\n\treturn mEventDelay;\n}\n\n");
         mSource<<Append("// Event assignments" + NL());
         for (int i = 0; i < numEvents; i++)
         {
@@ -1436,13 +1440,12 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
             string str = substituteTerms(numReactions, "", event[0]);
             delays.Add(str);
 
-            mSource<<Format("void __cdecl eventAssignment_{0}() \n{{1}", i, NL());
+            mSource<<Format("void eventAssignment_{0}() \n{{1}", i, NL());
 
             string funcName(Format("performEventAssignment_{0}(double* values)", i));
 		    mHeader.AddFunctionExport("void", funcName);
             mSource<<Format("\tperformEventAssignment_{0}( computeEventAssignment_{0}() );{1}", i, NL());
             mSource<<Append("}\n\n");
-
 
             funcName = (Format("computeEventAssignment_{0}()", i));
 		    mHeader.AddFunctionExport("double*", funcName);
@@ -1505,13 +1508,25 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
     }
 
 
+    //Have to create TEventDelegate functions here
+    for (int i = 0; i < delays.size(); i++)
+    {
+    	mSource<<"double GetEventDelay_"<<i<<"()\n{\treturn "<<delays[i]<<";\n}\n";
+    }
+
     mSource<<"void InitializeDelays()\n{\n";
+
 	//mSource<<tab<<"printf(\"At line %d in function %s \\n\",__LINE__, __FUNCTION__);"<<endl;
 
     for (int i = 0; i < delays.size(); i++)
     {
 //        mSource<<Format("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate { return {1}; } );{2}", i, delays[i], NL());
+
+
      	mSource<<Format("\t\tmEventDelay[{0}] = (TEventDelayDelegate) malloc(sizeof(TEventDelayDelegate) * 1);{2}", i, delays[i], NL());
+
+        //Inititialize
+		mSource<<Format("\t\tmEventDelay[{0}] = GetEventDelay_{0};\n", i);
         mSource<<Format("\t\t_eventType[{0}] = {1};{2}", i, ToString((eventType[i] ? true : false)), NL());
         mSource<<Format("\t\t_eventPersistentType[{0}] = {1};{2}", i, (eventPersistentType[i] ? "true" : "false"), NL());
     }

@@ -21,11 +21,13 @@ typedef double  (__cdecl *c_double_int)(int);
 typedef double* (__cdecl *c_doubleStar)();
 typedef void	(__cdecl *c_void_double_doubleStar)(double, double*);
 typedef void 	(__cdecl *TEventAssignmentDelegate)();
+//typedef double*	(__cdecl *TComputeEventAssignmentDelegate)();
+typedef TEventAssignmentDelegate* (__cdecl *c_TEventAssignmentDelegateStar)();
+typedef TComputeEventAssignmentDelegate* (__cdecl *c_TComputeEventAssignmentDelegateStar)();
 
-
+typedef TEventDelayDelegate* (__cdecl *c_GetEventDelayDelegatesStar)();
 //ModelFromC used to inherit from IModel. This inheritance is not necessary, so removed..
 class CvodeInterface;
-//: public IModel	//This model sets up necessary handles to C DLL functions: public IModel	//This model sets up nnecessary handles to C DLL functions
 class RR_DECLSPEC ModelFromC : public rrObject
 {
     protected:
@@ -44,13 +46,11 @@ class RR_DECLSPEC ModelFromC : public rrObject
         int                                    *numRules;
         int                                    *numEvents;
         string 									mModelName;
-//
-//
+
     public:
     	//variables in the DLL are prefixed with _ (will remove that later)
         //In this interface, corresponding variable is prefixed with 'm', followed by capital letter, if possible
         list<string> 					        Warnings;
-        TEventAssignmentDelegate  				eventAssignments[2];
         CvodeInterface*							mCvodeInterface;
 		void 									AssignCVodeInterface(CvodeInterface* cvodeI);
         double 							       *time;
@@ -95,7 +95,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
         double*		 					        eventTests;
         int*		 					        eventTestsSize;
 //        vector<double> 					        eventPriorities;
-        TEventDelayDelegate*	 		        eventDelay;
+        TEventDelayDelegate*	 		        eventDelays;		//
         bool*		                            eventType;
         int*		                            eventTypeSize;
         bool*		                            eventPersistentType;
@@ -105,14 +105,14 @@ class RR_DECLSPEC ModelFromC : public rrObject
         bool*                  			        previousEventStatusArray;
         int*									previousEventStatusArraySize;
 
-		//c_eventAssDelegateArray					eventAssignments;
+        TEventAssignmentDelegate*  				eventAssignments;
         TComputeEventAssignmentDelegate*	 	computeEventAssignments;
         TPerformEventAssignmentDelegate* 		performEventAssignments;
+
+		// CTOR
 												ModelFromC();
-//		virtual								   ~IModel();
-//        string									GetModelName();
-//
-//    	// Virtual functions --------------------------------------------------------
+
+    	// Virtual functions --------------------------------------------------------
         virtual int                             getNumIndependentVariables();
         virtual int                             getNumDependentVariables();
         virtual int                             getNumTotalVariables();

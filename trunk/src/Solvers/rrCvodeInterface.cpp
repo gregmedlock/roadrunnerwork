@@ -922,7 +922,6 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
                 firedEvents.push_back(i);
                 if (model->eventType[i])
                 {
-	                model->computeEventAssignments[i];
                     preComputedAssignments[i] = model->computeEventAssignments[i]();
                 }
             }
@@ -947,16 +946,20 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
             // We only fire an event if we transition from false to true
 
             model->previousEventStatusArray[currentEvent] = model->eventStatusArray[currentEvent];
-            double eventDelay = model->eventDelay[currentEvent]();
+            double eventDelay = model->eventDelays[currentEvent]();
             if (eventDelay == 0)
-            {	//Todo: enable this...
+            {
 //                if (model->eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
+//                {
 //                    model->performEventAssignments[currentEvent](preComputedAssignments[currentEvent]);
+//                }
 //                else
-//                    model->eventAssignments[currentEvent]();
-//
-//                handled.Add(currentEvent);
-//                List<int> removeEvents;
+//                {
+                    model->eventAssignments[currentEvent]();
+//                }
+
+				//handled.Add(currentEvent);
+                //vecor<int> removeEvents;
 //                var additionalEvents = RetestEvents(timeEnd, handled, out removeEvents);
 //                firedEvents.AddRange(additionalEvents);
 //
@@ -967,7 +970,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
 //                }
 //
 //                model->eventStatusArray[currentEvent] = false;
-//                firedEvents.RemoveAt(i);
+                firedEvents.erase(firedEvents.begin() + i);
 //
 //                foreach (var item in removeEvents)
 //                {
@@ -998,12 +1001,11 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
 //
 //                assignments.Add(pending);
 //                model->eventStatusArray[currentEvent] = false;
-//                firedEvents.RemoveAt(i);
+                firedEvents.erase(firedEvents.begin() + i);
                 break;
             }
 
 			Log(lDebug)<<"time: "<<model->time<<" Event "<<(i + 1);
-
         }
     }
 
