@@ -14,6 +14,8 @@ echo "" > $logFile
 echo "" > $logTable
 echo "" > $failed
 
+excludeTest="1 2 3"
+
 #Remove previous data files
 #find $dataFolder -name '*l2v4.csv' -exec rm -fv {} \;
 
