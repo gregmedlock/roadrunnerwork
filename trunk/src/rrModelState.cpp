@@ -15,8 +15,6 @@ ModelState::ModelState(ModelFromC& model)
 
 void ModelState::InitializeFromModel(ModelFromC& model)
 {
-	model.LoadData();
-
     model.convertToConcentrations();
     CopyCArrayToStdVector(model.y,		  				  mFloatingSpeciesConcentrations, 	*model.ySize);
     CopyCArrayToStdVector(model.bc,                       mBoundarySpeciesConcentrations, 	*model.bcSize);

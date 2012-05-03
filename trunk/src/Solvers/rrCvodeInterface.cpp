@@ -83,7 +83,6 @@ CvodeInterface::~CvodeInterface()
 	fileClose(fileHandle);
 }
 
-
 ////        public void ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata)
 ////        {
 ////            var oldState = new ModelState(model);
@@ -178,15 +177,22 @@ void EventFcn(double time, cvode_precision* y, cvode_precision* gdot, void* fdat
 
     vector<double> args = BuildEvalArgument(model);
     model->evalModel(time, args);
-//    AssignResultsToModel();
+    model->mCvodeInterface->AssignResultsToModel(); //AssignResultsToModel();
+
 	args = BuildEvalArgument(model);
     model->evalEvents(time, args);
 
 //    Marshal.Copy(model.eventTests, 0, gdot, model.getNumEvents());
-    Log(lDebug3)<<"Rootfunction Out: t="<<time<<" (";// + nRootCount + "): ";
+
+	for(int i = 0; i < model->getNumEvents(); i++)
+    {
+		gdot[i] = model->eventTests[i];
+    }
+
+    Log(lDebug3)<<"Rootfunction Out: t="<<time<<" ("<< CvodeInterface::mRootCount <<"): ";
     for (int i = 0; i < *model->eventTestsSize; i++)
     {
-        //Log(lDebug3)<<model->eventTests[i]->ToString() + " p=" + model.previousEventStatusArray[i] + " c=" + model.eventStatusArray[i] + ", ";
+        Log(lDebug3)<<ToString(model->eventTests[i])<<" p="<<model->previousEventStatusArray[i]<<" c="<<ToString(model->eventStatusArray[i])<<", ";
     }
     CvodeInterface::mRootCount++;
     oldState->AssignToModel(*model);
@@ -827,13 +833,13 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& han
 
 void CvodeInterface::HandleRootsFound(double &timeEnd, const double& tout)
 {
-    vector<int> rootsFound;// = new int[model->getNumEvents];
-    // Create some space for the CVGetRootInfo call
-    //_rootsFound = Marshal.AllocHGlobal(model->getNumEvents*sizeof (Int32));
-//    CVGetRootInfo(cvodeMem, _rootsFound);	//This is a DLL Call.. Todo: implement..
-	//    Marshal.Copy(_rootsFound, rootsFound, 0, model->getNumEvents);
-	//    Marshal.FreeHGlobal(_rootsFound); // Free space used by CVGetRootInfo
+    vector<int> rootsFound(model->getNumEvents());
 
+    // Create some space for the CVGetRootInfo call
+	_rootsFound = new int(model->getNumEvents());
+    CVGetRootInfo(cvodeMem, _rootsFound);	//This is a DLL Call.. Todo: implement..
+    CopyCArrayToStdVector(_rootsFound, rootsFound, model->getNumEvents());
+    delete [] _rootsFound;
     HandleRootsForTime(timeEnd, rootsFound);
 }
 
@@ -902,8 +908,8 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
     model->evalEvents(timeEnd, args);
 
 
-    vector<int> firedEvents;// = new List<int>();
-    map<int, vector<double> > preComputedAssignments;// = new Dictionary<int, double[]>();
+    vector<int> firedEvents;
+    map<int, double* > preComputedAssignments;// = new Dictionary<int, double[]>();
 
 
     for (int i = 0; i < model->getNumEvents(); i++)
@@ -916,6 +922,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
                 firedEvents.push_back(i);
                 if (model->eventType[i])
                 {
+	                model->computeEventAssignments[i];
                     preComputedAssignments[i] = model->computeEventAssignments[i]();
                 }
             }
@@ -1016,11 +1023,11 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
         Cvode_SetVector((N_Vector) _amounts, k, dCurrentValues[k]);
     }
 
-//Todo: enable this
-//    for (int k = 0; k < numIndependentVariables; k++)
-//    {
-//        Cvode_SetVector((N_Vector) _amounts, k + numAdditionalRules, model->amounts[k]);
-//    }
+	//Todo: enable this
+    for (int k = 0; k < numIndependentVariables; k++)
+    {
+        Cvode_SetVector((N_Vector) _amounts, k + numAdditionalRules, model->amounts[k]);
+    }
 
     CVReInit(cvodeMem, timeEnd, _amounts, relTol, abstolArray);
 //    assignmentTimes.Sort();	//Todo: enable sorting. somehow
@@ -1030,25 +1037,21 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
 void CvodeInterface::AssignResultsToModel()
 {
     model->updateDependentSpeciesValues(model->y);
-    vector<double> dTemp(numAdditionalRules);// = new double[numAdditionalRules];
+    vector<double> dTemp(numAdditionalRules);
+
     for (int i = 0; i < numAdditionalRules; i++)
     {
         dTemp[i] = Cvode_GetVector((_generic_N_Vector*) _amounts, i);
-
     }
 
     for (int i = 0; i < numIndependentVariables; i++) //
     {
 		double val = Cvode_GetVector((_generic_N_Vector*) _amounts, i + numAdditionalRules);
-		//Todo: Here is the culprit!! storing the results in amounts instead of mAmounts caused the problem
         model->amounts[i] = (val);
-        //model->amounts[i] = (val);
-		Log(lDebug3)<<"Amount "<<setprecision(16)<<val;
+		Log(lDebug5)<<"Amount "<<setprecision(16)<<val;
 	}
 
 	vector<double> args = BuildEvalArgument();
-
-
     model->computeRules(args);
     model->AssignRates(dTemp);
     model->computeAllRatesOfChange();

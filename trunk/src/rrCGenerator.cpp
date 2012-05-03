@@ -310,15 +310,15 @@ void CGenerator::WriteOutVariables(CodeBuilder& ignore)
     mHeader.FormatArray("char*",						       	"boundaryTable", 				boundarySpeciesList.size());
     mHeader.FormatArray("char*",						       	"globalParameterTable", 		globalParameterList.size());
     mHeader.FormatArray("int",							        "localParameterDimensions", 	mNumReactions );
-	mHeader<<"\ttypedef void (*TEventAssignmentDelegate)();"<<endl;
+	mHeader<<"\ttypedef void __cdecl (*TEventAssignmentDelegate)();"<<endl;
     mHeader.FormatVariable("TEventAssignmentDelegate*",	    	"_eventAssignments","");
     mHeader.FormatVariable("double*",						   	"_eventPriorities");
-	mHeader<<"\ttypedef void (*TComputeEventAssignmentDelegate)();"<<endl;
+	mHeader<<"\ttypedef double* (*TComputeEventAssignmentDelegate)();"<<endl;
     mHeader.FormatVariable("TComputeEventAssignmentDelegate*",	"_computeEventAssignments");
 	mHeader<<"\ttypedef void (*TPerformEventAssignmentDelegate)();"<<endl;
     mHeader.FormatVariable("TPerformEventAssignmentDelegate*",	"_performEventAssignments");
     mHeader.FormatArray("bool",					            	"mEventStatusArray", 			mNumEvents);
-    mHeader.FormatArray("bool",					            	"mPreviousEventStatusArray", 	mNumEvents);
+    mHeader.FormatArray("bool",					            	"_previousEventStatusArray", 	mNumEvents);
 }
 
 
@@ -573,7 +573,7 @@ void CGenerator::WriteResetEvents(CodeBuilder& ignore, const int& numEvents)
       for (int i = 0; i < numEvents; i++)
       {
           mSource<<Format("\n\tmEventStatusArray[{0}] = false;{1}", i, NL());
-          mSource<<Format("\tmPreviousEventStatusArray[{0}] = false;", i);
+          mSource<<Format("\t_previousEventStatusArray[{0}] = false;", i);
           if(i == numEvents -1)
           {
           	mSource<<"\n";
@@ -942,7 +942,7 @@ void CGenerator::WriteEvalInitialAssignments(CodeBuilder& ignore, const int& num
         Event *current = mNOM.GetModel()->getEvent(i);
         string initialTriggerValue = ToString(current->getTrigger()->getInitialValue());//.ToString().ToLowerInvariant();
         mSource<<Append("\tmEventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
-        mSource<<Append("\tmPreviousEventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
+        mSource<<Append("\t_previousEventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
     }
     mSource<<Append("}" + NL() + NL());
 }
@@ -1188,7 +1188,7 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
     mHeader.AddFunctionExport("void", "evalEvents(double timeIn, double oAmounts[])");
     mSource<<Append("void evalEvents(double timeIn, double oAmounts[])" + NL());
     mSource<<Append("{" + NL());
-    mSource<<Append("\tprintf(\"In Eval events\");" + NL());
+    mSource<<Append("\tprintf(\"In Eval events\n\");" + NL());
 
     if (numEvents > 0)
     {
@@ -1215,7 +1215,7 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
 
         eventString = substituteTerms(0, "", eventString);
         eventString = ReplaceWord("time", "mTime", eventString);
-        mSource<<"\t\tmPreviousEventStatusArray[" << i << "] = mEventStatusArray[" << i << "];" << NL();
+        mSource<<"\t\t_previousEventStatusArray[" << i << "] = mEventStatusArray[" << i << "];" << NL();
         mSource<<Append("\t\tif (" + eventString + " == 1.0) {" + NL());
         mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = true;" + NL());
         mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = 1;" + NL());
@@ -1436,7 +1436,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
             string str = substituteTerms(numReactions, "", event[0]);
             delays.Add(str);
 
-            mSource<<Format("void eventAssignment_{0}() \n{{1}", i, NL());
+            mSource<<Format("void __cdecl eventAssignment_{0}() \n{{1}", i, NL());
 
             string funcName(Format("performEventAssignment_{0}(double* values)", i));
 		    mHeader.AddFunctionExport("void", funcName);
@@ -1452,6 +1452,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
             StringList oValue;
             int nCount = 0;
             int numAssignments = ev.size() - 2;
+            mSource<<"\n\tprintf(\"In computeEventAssignment_ \n\");\n";
             mSource<<Format("\t\tdouble* values = (double*) malloc(sizeof(double)*{0});{1}", numAssignments, NL());
             for (int j = 2; j < ev.size(); j++)
             {
@@ -2632,12 +2633,15 @@ void CGenerator::WriteInitFunction(CodeBuilder& ignore, CodeBuilder& source)
         for (int i = 0; i < mNumEvents; i++)
         {
         	string iStr = ToString(i);
-            source<<Append("\t_eventAssignments[" + iStr + "] = (TComputeEventAssignmentDelegate) eventAssignment_" + iStr +";" + NL());
+//            source<<Append("\t_eventAssignments[" + iStr + "] = (TEventAssignmentDelegate) eventAssignment_" + iStr +";" + NL());
+            source<<Append("\t_eventAssignments[" + iStr + "] = eventAssignment_" + iStr +";" + NL());
             source<<Append("\t_computeEventAssignments[" + iStr + "] = (TComputeEventAssignmentDelegate) computeEventAssignment_" + iStr + ";" + NL());
             source<<Append("\t_performEventAssignments[" + iStr + "] = (TPerformEventAssignmentDelegate) performEventAssignment_" + iStr + ";" + NL());
         }
 
         source<<Append("\tresetEvents();" + NL());
+        ////Test to call a function
+        source<<Append("\t_eventAssignments[0]();\n");
         source<<Append(NL());
     }
 

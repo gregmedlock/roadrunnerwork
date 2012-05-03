@@ -21,7 +21,6 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 {
     private:
 		const string 		        CVODE;
-
         const double 		        defaultReltol;
         const double 		        defaultAbsTol;
         const int 			        defaultMaxNumSteps;
@@ -31,17 +30,15 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 		FILE* 					    fileHandle;
 
 		int 					    numIndependentVariables;
-		IntPtr 					    gdata;
-		//IntPtr 					    _amounts;
-		//IntPtr 					    _rootsFound;
-		N_Vector					_amounts;
+		N_Vector				    gdata;
+		int* 					    _rootsFound;
+		N_Vector					_amounts; 		//IntPtr 					    _amounts;
 		N_Vector				    abstolArray;
-		string 					    cvodeLogFile;// = "cvodeLogFile";
+		string 					    cvodeLogFile;
 		void*					    cvodeMem;
 		int 					    numAdditionalRules;
 		void 						HandleCVODEError(int errCode);
-		vector<double> 				assignmentTimes;// = new List<double>();
-
+		vector<double> 				assignmentTimes;
 		bool 						followEvents;
 		void 	                    AssignPendingEvents(const double& timeEnd, const double& tout);
 		vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents);
@@ -52,9 +49,9 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 		void                        RemovePendingAssignmentForIndex(const int& eventIndex);
 		void                        SortEventsByPriority(vector<int>& firedEvents);
 		void                        HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound);
-		void                        AssignResultsToModel();
 
 	public:
+		void         	        	AssignResultsToModel();
 		static int 			        mCount;
 		static int 			        mRootCount;
         static int 			        mOneStepCount;

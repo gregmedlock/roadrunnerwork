@@ -136,6 +136,21 @@ bool CopyStdVectorToCArray(vector<bool>&   src,  bool*  dest,  int size)
 
 }
 
+bool CopyCArrayToStdVector(int* src, vector<int>& dest, int size)
+{
+	if(!src)
+	{
+		Log(lError)<<"Tried to copy from NULL vector";
+		return false;
+	}
+
+	dest.resize(size);
+	for(int i = 0; i < size; i++)
+	{
+		dest[i] = src[i];
+	}
+	return true;
+}
 
 bool CopyCArrayToStdVector(double* src, vector<double>& dest, int size)
 {

@@ -62,9 +62,13 @@ void CodeBuilder::FormatArray(const string& type, const string& varName, const i
     	mStringing<<left<<setw(mSizeOfVarField3)<<"//" + comment;
     }
     mStringing<<"\n";
-	//Add the size for each array, so we don't have to calculate later on..
-    mStringing<<"\t"<<left<<setw(mSizeOfVarField1)<<"const int"	<< setw(mSizeOfVarField2)<<varName + "Size=" + rr::ToString(arraySize) + ";";
 
+	//Add the size for each array, so we don't have to calculate later on..
+    if(_arraySize == 0)
+    {
+        arraySize = 0;
+    }
+    mStringing<<"\t"<<left<<setw(mSizeOfVarField1)<<"const int"	<< setw(mSizeOfVarField2)<<varName + "Size=" + rr::ToString(arraySize) + ";";
    	mStringing<<endl;
 }
 

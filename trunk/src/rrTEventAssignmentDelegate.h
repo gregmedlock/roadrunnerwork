@@ -1,10 +1,10 @@
 #ifndef rrTEventAssignmentDelegateH
 #define rrTEventAssignmentDelegateH
 
-namespace rr
-{
-	typedef void (*TEventAssignmentDelegate)();
-}
+//namespace rr
+//{
+//	typedef void (__cdecl *TEventAssignmentDelegate)();
+//}
 
 #endif
 //c#

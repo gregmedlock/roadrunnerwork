@@ -24,7 +24,7 @@
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<FinalOutputDir>C:\rrw\installs\xe\bin\</FinalOutputDir>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
-			<Defines>EXPORT_RR;NO_NOM_DLL;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
+			<Defines>EXPORT_RR;NO_NOM_DLL;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>
@@ -50,14 +50,13 @@
 			<FinalOutputDir>C:\rrw\installs\xe\bin\</FinalOutputDir>
 			<BCC_FastFloatingPoint>false</BCC_FastFloatingPoint>
 			<ILINK_Verbose>true</ILINK_Verbose>
-			<IncludePath>C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
 			<_TCHARMapping>char</_TCHARMapping>
 			<BCC_PCHName>rrLib.csm</BCC_PCHName>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;WIN32;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
+			<Defines>_DEBUG;WIN32;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>

@@ -21,6 +21,7 @@ void 			RR_DECLSPEC CreateTestSuiteFileNameParts(int caseNr, const string& postF
 string 			RR_DECLSPEC GetTestSuiteSubFolderName(int caseNr);
 bool 			RR_DECLSPEC CreateFolder(const string& path);
 
+bool 			RR_DECLSPEC CopyCArrayToStdVector(int* src, vector<int>& dest, int size);
 bool 			RR_DECLSPEC CopyCArrayToStdVector(double* src, vector<double>& dest, int size);
 bool 			RR_DECLSPEC CopyCArrayToStdVector(bool* src, vector<bool>& dest, int size);
 

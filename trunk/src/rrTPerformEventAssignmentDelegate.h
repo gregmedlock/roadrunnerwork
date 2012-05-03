@@ -6,7 +6,7 @@ using std::vector;
 
 namespace rr
 {
-	typedef void (*TPerformEventAssignmentDelegate)(vector<double>& values);
+	typedef void (*TPerformEventAssignmentDelegate)(double* values);
 }
 
 #endif

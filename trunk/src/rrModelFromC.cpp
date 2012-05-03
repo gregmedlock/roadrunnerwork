@@ -44,6 +44,11 @@ mModelName("NoNameSet")
 ModelFromC::~ModelFromC()
 {}
 
+void ModelFromC::AssignCVodeInterface(CvodeInterface* cvodeI)
+{
+	mCvodeInterface = cvodeI;
+}
+
 /////////////////// The following used to be in IModel
 int ModelFromC::getNumIndependentVariables()
 {
@@ -116,17 +121,6 @@ void  ModelFromC::computeReactionRates(double time, double* y)			{Log(lError) <<
 
 /////////////////// END OF USED TO BE IN IModel
 
-
-void ModelFromC::LoadData()
-{
-//	CopyDblArray(mGP, 			gp, 			mCodeGenerator->GetNumberOfFloatingSpecies());
-//	CopyDblArray(mInitY, 		init_y, 		mCodeGenerator->GetNumberOfFloatingSpecies());
-//	CopyDblArray(mY, 			y, 				mCodeGenerator->GetNumberOfFloatingSpecies());
-//	CopyDblArray(m_dydt, 		dydt, 			mCodeGenerator->GetNumberOfFloatingSpecies());
-//	CopyDblArray(mAmounts, 		amounts, 		mCodeGenerator->GetNumberOfFloatingSpecies());
-//	CopyDblArray(mRates, 		rates, 			mCodeGenerator->GetNumberOfReactions());
-}
-
 double ModelFromC::GetAmounts(const int& i)
 {
 	return (amounts ) ? amounts[i] : -1;
@@ -184,6 +178,7 @@ bool ModelFromC::SetupDLLData()
 		Log(lError)<<"Failed to InitModel in "<<__FUNCTION__;
 		return false;
 	}
+
 
 	char* modelName = cGetModelName();
 	if(modelName)
@@ -374,7 +369,7 @@ bool ModelFromC::SetupDLLData()
         previousEventStatusArray = NULL;
     }
 
-    previousEventStatusArraySize	  = (int*) GetProcAddress((HMODULE) mDLLHandle, "previousEventStatusArraySize");
+    previousEventStatusArraySize	  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_previousEventStatusArraySize");
     if(!previousEventStatusArraySize)
     {
 		Log(lError)<<"Failed to assign to previousEventStatusArraySize";
@@ -394,19 +389,66 @@ bool ModelFromC::SetupDLLData()
 		Log(lError)<<"Failed to assign to eventPersistentTypeSize";
     }
 
-    eventTests   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_eventTests");
+    eventTests   = (double*) GetProcAddress((HMODULE) mDLLHandle, "mEventTests");
     if(!eventTests)
     {
 		Log(lError)<<"Failed to assign to eventTests";
         eventTests = NULL;
     }
 
-    eventTestsSize	  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_eventTestsSize");
+    eventTestsSize	  = (int*) GetProcAddress((HMODULE) mDLLHandle, "mEventTestsSize");
     if(!eventTestsSize)
     {
 		Log(lError)<<"Failed to assign to eventTestsSize";
         eventTestsSize = & mDummyInt;
     }
+
+    eventType   = (bool*) GetProcAddress((HMODULE) mDLLHandle, "_eventType");
+    if(!eventType)
+    {
+		Log(lError)<<"Failed to assign to eventType";
+        eventType = NULL;
+    }
+
+    eventTypeSize	  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_eventTypeSize");
+    if(!eventTypeSize)
+    {
+		Log(lError)<<"Failed to assign to eventTypeSize";
+        eventTypeSize = & mDummyInt;
+    }
+
+    //Event function pointer stuff
+    TEventAssignmentDelegate*				eventAssignments;
+    eventAssignments  = (TEventAssignmentDelegate*) GetProcAddress((HMODULE) mDLLHandle, "_eventAssignments");
+    if(!eventAssignments)
+    {
+		Log(lError)<<"Failed to assign to eventAssignments";
+    }
+
+    TEventAssignmentDelegate func = (TEventAssignmentDelegate) GetProcAddress((HMODULE) mDLLHandle, "eventAssignment_0");
+
+    func();
+    func();
+    TEventAssignmentDelegate func2 =  (TEventAssignmentDelegate) (*eventAssignments[0]);
+    func2();
+
+
+//    TEventAssignmentDelegate func2 = (TEventAssignmentDelegate) (*eventAssignments[0])();
+//    func2();
+
+//    TComputeEventAssignmentDelegate*	 	computeEventAssignments;
+    computeEventAssignments	  = (TComputeEventAssignmentDelegate*) GetProcAddress((HMODULE) mDLLHandle, "_computeEventAssignments");
+    if(!computeEventAssignments)
+    {
+		Log(lError)<<"Failed to assign to computeEventAssignments";
+    }
+//    TPerformEventAssignmentDelegate* 		performEventAssignments;
+    performEventAssignments	  = (TPerformEventAssignmentDelegate*) GetProcAddress((HMODULE) mDLLHandle, "_performEventAssignments");
+    if(!performEventAssignments)
+    {
+		Log(lError)<<"Failed to assign to performEventAssignments";
+    }
+
 
     return true;
 }
@@ -456,19 +498,6 @@ vector<double> ModelFromC::GetCurrentValues()
 
 	return vals;
 }
-
-//vector<double> ModelFromC::GetdYdT()
-//{
-//	//Copy values from dll to vector
-//    int nrSpecies = mCodeGenerator->getFloatingSpeciesConcentrationList().size();
-//    dydt.resize(nrSpecies);
-//    for(int i = 0; i < nrSpecies; i++)
-//    {
-//		dydt[i] = m_dydt[i];
-//    }
-//    return dydt;
-//
-//}
 
 double ModelFromC::getConcentration(int index)
 {

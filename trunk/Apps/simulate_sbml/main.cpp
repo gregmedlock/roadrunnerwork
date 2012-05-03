@@ -65,13 +65,13 @@ int main(int argc, char * argv[])
 	}
     LogOutput::mLogToConsole = true;
     gLog.SetCutOffLogLevel(IntToLogLevel(paras.VerboseMode));
-    Log(lForceShow)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+    Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
     string dataOutputFolder("C:\\DataOutput");
     string dummy;
     string logFileName;
 
     CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
-    gLog.SetCutOffLogLevel(lError);
+    gLog.SetCutOffLogLevel(lDebug3);
     RoadRunner *rr = NULL;
     try
     {
@@ -84,7 +84,7 @@ int main(int argc, char * argv[])
         }
 
         gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
-	    Log(lDebug2)<<"Logs are going to "<<gLog.GetLogFileName();
+	    Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
 
         SBMLModelSimulation simulation(dataOutputFolder);
 

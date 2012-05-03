@@ -23,7 +23,8 @@ class RR_DECLSPEC PendingAssignment : public rrObject
         bool        					UseValuesFromTriggerTime;
 		TComputeEventAssignmentDelegate ComputeAssignment;
 		TPerformEventAssignmentDelegate PerformAssignment;
-       	vector<double>					ComputedValues;
+       	double*							ComputedValues;
+       	int								ComputedValuesSize;
 
     public:
           /// <summary>

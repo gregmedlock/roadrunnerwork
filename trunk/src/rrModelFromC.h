@@ -12,18 +12,19 @@ namespace rr
 {
 class CGenerator;
 
-typedef void 	(__cdecl*c_void)();
-typedef int 	(__cdecl*c_int)();
-typedef int 	(__cdecl*c_int_int)(int);
-typedef char* 	(__cdecl*c_charStar)();
-typedef void    (__cdecl*c_void_doubleStar)(double*);
-typedef double  (__cdecl*c_double_int)(int);
-typedef double* (__cdecl*c_doubleStar)();
-typedef void	(__cdecl*c_void_double_doubleStar)(double, double*);
+typedef void 	(__cdecl *c_void)();
+typedef int 	(__cdecl *c_int)();
+typedef int 	(__cdecl *c_int_int)(int);
+typedef char* 	(__cdecl *c_charStar)();
+typedef void    (__cdecl *c_void_doubleStar)(double*);
+typedef double  (__cdecl *c_double_int)(int);
+typedef double* (__cdecl *c_doubleStar)();
+typedef void	(__cdecl *c_void_double_doubleStar)(double, double*);
+typedef void 	(__cdecl *TEventAssignmentDelegate)();
 
 
 //ModelFromC used to inherit from IModel. This inheritance is not necessary, so removed..
-
+class CvodeInterface;
 //: public IModel	//This model sets up necessary handles to C DLL functions: public IModel	//This model sets up nnecessary handles to C DLL functions
 class RR_DECLSPEC ModelFromC : public rrObject
 {
@@ -49,8 +50,9 @@ class RR_DECLSPEC ModelFromC : public rrObject
     	//variables in the DLL are prefixed with _ (will remove that later)
         //In this interface, corresponding variable is prefixed with 'm', followed by capital letter, if possible
         list<string> 					        Warnings;
-
-
+        TEventAssignmentDelegate  				eventAssignments[2];
+        CvodeInterface*							mCvodeInterface;
+		void 									AssignCVodeInterface(CvodeInterface* cvodeI);
         double 							       *time;
         void									SetTime(double _time){*time = _time;}
 		double							        GetTime(){return *time;}
@@ -93,18 +95,19 @@ class RR_DECLSPEC ModelFromC : public rrObject
         double*		 					        eventTests;
         int*		 					        eventTestsSize;
 //        vector<double> 					        eventPriorities;
-        vector<TEventDelayDelegate> 	        eventDelay;
-        vector<bool>                            eventType;
+        TEventDelayDelegate*	 		        eventDelay;
+        bool*		                            eventType;
+        int*		                            eventTypeSize;
         bool*		                            eventPersistentType;
         int*                                    eventPersistentTypeSize;
         bool*                            		eventStatusArray;
         int*									eventStatusArraySize;
         bool*                  			        previousEventStatusArray;
         int*									previousEventStatusArraySize;
-//        vector<TEventAssignmentDelegate>		eventAssignments;
-        vector<TComputeEventAssignmentDelegate> computeEventAssignments;
-//        vector<TPerformEventAssignmentDelegate> performEventAssignments;
 
+		//c_eventAssDelegateArray					eventAssignments;
+        TComputeEventAssignmentDelegate*	 	computeEventAssignments;
+        TPerformEventAssignmentDelegate* 		performEventAssignments;
 												ModelFromC();
 //		virtual								   ~IModel();
 //        string									GetModelName();
@@ -149,18 +152,12 @@ class RR_DECLSPEC ModelFromC : public rrObject
 //        virtual int 							getNumLocalParameters(int reactionId) = 0;         // Level 2 support
 //
 //        virtual vector<double>					GetdYdT() = 0;
-//        virtual void							LoadData() = 0;	//This one copies data from the DLL to vectors and lists in the model..
-
 
 
 	public:
 	    CGenerator*					mCodeGenerator;	//There are some arrays returned that we don't know the size of..!
-
         bool						mIsInitialized;	//If all functions are found properly in the dll, this one is true
 		HINSTANCE					mDLLHandle;
-
-
-
 
 		//Function pointers...
         c_int 				        cInitModel;
@@ -199,14 +196,12 @@ class RR_DECLSPEC ModelFromC : public rrObject
         bool						SetupDLLData();
 		bool						SetupDLLFunctions();
 
-        void						LoadData();	//This one copies data from the DLL to vectors and lists in the model..
-
         //The following functions C equivalent may need to be in the DLL
         //Inherited functions
     	void 						setCompartmentVolumes();
         int 						getNumLocalParameters(int reactionId);
-       void                        computeRules(vector<double>& _y);
-       void			           		computeRules(double* ay, int size);
+       	void                        computeRules(vector<double>& _y);
+       	void	  	           		computeRules(double* ay, int size);
 
 		void  						initializeInitialConditions();
 
@@ -255,15 +250,9 @@ class RR_DECLSPEC ModelFromC : public rrObject
 //        void                        evalInitialAssignments();
         void                        testConstraints();
         void                        InitializeRateRuleSymbols();
-
 };
-
 }
-
-
 #endif
-
-
 ////    public class ModelGenerator
 ////    {
 ////        private const string STR_DoubleFormat = "G"; //"G17";

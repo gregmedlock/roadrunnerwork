@@ -164,6 +164,7 @@ bool RoadRunner::InitializeModel()
     	delete mCVode;
     }
 	mCVode = new CvodeInterface(mModel);
+	mModel->AssignCVodeInterface(mCVode);
 
 	reset();
 
