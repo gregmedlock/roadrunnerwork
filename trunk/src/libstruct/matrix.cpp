@@ -13,6 +13,7 @@
 
 using namespace LIB_LA;
 
+
 template<typename T> void Matrix<T>::initializeFrom2DMatrix( T** &oRawData, int rows, int cols)
 {
 

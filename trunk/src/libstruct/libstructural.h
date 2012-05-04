@@ -226,7 +226,7 @@ namespace LIB_STRUCTURAL
 
 			\param oMatrix the stoichiometry matrix to load
 		*/
-		LIB_EXTERN
+//		LIB_EXTERN
         void loadStoichiometryMatrix (DoubleMatrix& oMatrix);
 		/*! \brief Load species names and initial values.
 
@@ -242,7 +242,8 @@ namespace LIB_STRUCTURAL
 			\param speciesNames a vector of species names (ids) to load
 			\param speciesValues a vector of initial concentrations
 		*/
-		LIB_EXTERN void loadSpecies ( std::vector< std::string > &speciesNames, std::vector<double> &speciesValues);
+		//LIB_EXTERN
+        void loadSpecies ( std::vector< std::string > &speciesNames, std::vector<double> &speciesValues);
 		/*! \brief Load reaction names.
 
 			This function should be used whenever labeled matrices are important as these
@@ -253,7 +254,7 @@ namespace LIB_STRUCTURAL
 
 			\param reactionNames a vector of reaction names (ids)
 		*/
-		LIB_EXTERN void loadReactionNames ( std::vector< std::string > &reactionNames);
+		/*LIB_EXTERN*/ void loadReactionNames ( std::vector< std::string > &reactionNames);
 
 #ifndef NO_SBML
 
@@ -261,19 +262,19 @@ namespace LIB_STRUCTURAL
 			\param sSBML the SBML string to load
 			\return information about the loaded model
 		*/
-		LIB_EXTERN std::string loadSBML(std::string sSBML);
+		/*LIB_EXTERN*/ std::string loadSBML(std::string sSBML);
 
-		/*! \brief Load a SBML model from the specified file. 
+		/*! \brief Load a SBML model from the specified file.
 			\param sFileName a file name to a SBML file to load
 			\return information about the loaded model
 		*/
-		LIB_EXTERN std::string loadSBMLFromFile(std::string sFileName);
+		/*LIB_EXTERN*/ std::string loadSBMLFromFile(std::string sFileName);
 
-		/*! \brief Load an SBML model into the library and carry out tests using the internal test suite.  
+		/*! \brief Load an SBML model into the library and carry out tests using the internal test suite.
 			\param sSBML the SBML file to load
 			\return information about the loaded model and results of the internal test suite
 		*/
-		LIB_EXTERN std::string loadSBMLwithTests(std::string sSBML); 
+		/*LIB_EXTERN*/ std::string loadSBMLwithTests(std::string sSBML);
 #endif
 		/*! \brief Uses QR factorization for structural analysis
 
@@ -293,7 +294,7 @@ namespace LIB_STRUCTURAL
 
 			\return a result string with information about the analysis process
 		*/
-		LIB_EXTERN std::string analyzeWithQR();
+		/*LIB_EXTERN*/ std::string analyzeWithQR();
 		/*! \brief Uses LU Decomposition for Conservation analysis
 
 			This method performs the actual analysis of the stoichiometry matrix (loaded either
@@ -309,7 +310,7 @@ namespace LIB_STRUCTURAL
 
 			\return a result string with information about the analysis process
 		*/
-		LIB_EXTERN std::string analyzeWithLU(); 
+		/*LIB_EXTERN*/ std::string analyzeWithLU();
 		/*! \brief Uses LU Decomposition for Conservation analysis
 
 			This method performs the actual analysis of the stoichiometry matrix (loaded either
@@ -328,7 +329,7 @@ namespace LIB_STRUCTURAL
 
 			\return a result string with information about the analysis process
 		*/
-		LIB_EXTERN std::string analyzeWithLUandRunTests(); 
+		/*LIB_EXTERN*/ std::string analyzeWithLUandRunTests();
 		/*! \brief Uses fully pivoted LU Decomposition for Conservation analysis
 
 			This method performs the actual analysis of the stoichiometry matrix (loaded either
@@ -345,7 +346,7 @@ namespace LIB_STRUCTURAL
 
 			\return a result string with information about the analysis process
 		*/
-		LIB_EXTERN std::string analyzeWithFullyPivotedLU(); 
+		/*LIB_EXTERN*/ std::string analyzeWithFullyPivotedLU();
 		/*! \brief Uses fully pivoted LU Decomposition for Conservation analysis
 
 			This method performs the actual analysis of the stoichiometry matrix (loaded either
@@ -363,7 +364,7 @@ namespace LIB_STRUCTURAL
 
 			\return a result string with information about the analysis process
 		*/
-		LIB_EXTERN std::string analyzeWithFullyPivotedLUwithTests(); 
+		/*LIB_EXTERN*/ std::string analyzeWithFullyPivotedLUwithTests();
 
 		/*! \brief Returns the L0 Matrix. 
 
@@ -371,101 +372,101 @@ namespace LIB_STRUCTURAL
 			linear dependent rows from the lower portion of the reordered stoichiometry matrix.
 
 		*/
-		LIB_EXTERN DoubleMatrix* getL0Matrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getL0Matrix();
 
 		/*! \brief Returns the L0 Matrix row and column labels.
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getL0MatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
+		/*LIB_EXTERN*/ void getL0MatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		/*! \brief Returns the Nr Matrix. 
 
 			The rows of the Nr matrix will be linearly independent.
 
 		*/
-		LIB_EXTERN DoubleMatrix* getNrMatrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getNrMatrix();
 
 		/*! \brief Returns the Nr Matrix row and column labels.
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getNrMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getNrMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		//! Returns the Nr Matrix repartitioned into NIC (independent columns) and NDC (dependent columns).
-		LIB_EXTERN DoubleMatrix* getColumnReorderedNrMatrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getColumnReorderedNrMatrix();
 
 		/*! \brief Returns the Nr Matrix row and column labels (repartitioned into NIC and NDC).
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getColumnReorderedNrMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getColumnReorderedNrMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		//!  Returns the NIC Matrix (the set of linearly independent columns of Nr)
-		LIB_EXTERN DoubleMatrix* getNICMatrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getNICMatrix();
 
 		/*! \brief Returns the NIC Matrix row and column labels.
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getNICMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getNICMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		//! Returns the NDC Matrix (the set of linearly dependent columns of Nr).
-		LIB_EXTERN DoubleMatrix* getNDCMatrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getNDCMatrix();
 		/*!  \brief Returns the NDC Matrix row and column labels.
 
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getNDCMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getNDCMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		/*! \brief Returns the N0 Matrix. 
 
 			The N0 matrix is the set of linearly dependent rows of N where L0 Nr = N0.
 		*/
-		LIB_EXTERN DoubleMatrix* getN0Matrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getN0Matrix();
 
 		/*! \brief Returns the N0 Matrix row and column labels.
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getN0MatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getN0MatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		/*! \brief Returns L, the Link Matrix, left nullspace (aka nullspace of the transpose Nr). 
 
 			L will have the structure, [I L0]', such that L Nr  = N
 		*/
-		LIB_EXTERN DoubleMatrix* getLinkMatrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getLinkMatrix();
 
 		/*! \brief Returns the row and column labels for the Link Matrix, L
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getLinkMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getLinkMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		/*! \brief Returns the K0 Matrix.
 
 			K0 is defined such that K0 = -(NIC)^-1 NDC, or equivalently, [NDC NIC][I K0]' = 0 where [NDC NIC] = Nr
 		*/
-		LIB_EXTERN DoubleMatrix* getK0Matrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getK0Matrix();
 
 		/*! \brief  Returns the K0 Matrix row and column labels.
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getK0MatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getK0MatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		/*! \brief Returns the K matrix (right nullspace of Nr) 
 
 			The K matrix has the structure, [I K0]'  
 		*/
-		LIB_EXTERN DoubleMatrix* getKMatrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getKMatrix();
 
 		/*! \brief  Returns the K matrix row and column labels.
 		    \param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getKMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getKMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		/*! \brief Returns Gamma, the conservation law array. 
 
@@ -479,7 +480,7 @@ namespace LIB_STRUCTURAL
 
 
 		*/
-		LIB_EXTERN DoubleMatrix* getGammaMatrix();
+		/*LIB_EXTERN*/ DoubleMatrix* getGammaMatrix();
 
 
 		/*! \brief Returns Gamma, the conservation law array. 
@@ -505,7 +506,7 @@ namespace LIB_STRUCTURAL
 			
 
 		*/
-		LIB_EXTERN DoubleMatrix* getGammaMatrixGJ(DoubleMatrix &stoichiometry); 
+		/*LIB_EXTERN*/ DoubleMatrix* getGammaMatrixGJ(DoubleMatrix &stoichiometry);
 
 		/*! \brief try and find a positive Gamma Matrix
 
@@ -518,7 +519,7 @@ namespace LIB_STRUCTURAL
 							 be provided. This vector will be permuted and will present the column
 							 labels for the gamma matrix.
 		*/
-		LIB_EXTERN DoubleMatrix* findPositiveGammaMatrix(DoubleMatrix &stoichiometry, 
+		/*LIB_EXTERN*/ DoubleMatrix* findPositiveGammaMatrix(DoubleMatrix &stoichiometry,
 														 std::vector< std::string> &rowLabels); 
 		
 		
@@ -526,81 +527,81 @@ namespace LIB_STRUCTURAL
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getGammaMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getGammaMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		//! Returns the original, unaltered stoichiometry matrix.
-		LIB_EXTERN DoubleMatrix* getStoichiometryMatrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getStoichiometryMatrix();
 
 		/*! \brief Returns the row and column labels for the original and unaltered stoichiometry matrix.
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getStoichiometryMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getStoichiometryMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		//! Returns the reordered stoichiometry matrix (row reordered stoichiometry matrix, columns are not reordered!)
-		LIB_EXTERN DoubleMatrix* getReorderedStoichiometryMatrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getReorderedStoichiometryMatrix();
 
 		/*! \brief Returns the row and column labels for the reordered stoichiometry matrix (row reordered stoichiometry matrix)
 
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getReorderedStoichiometryMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
+		/*LIB_EXTERN*/ void getReorderedStoichiometryMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		//! Returns the fully reordered stoichiometry matrix (row and column reordered stoichiometry matrix)
-		LIB_EXTERN DoubleMatrix* getFullyReorderedStoichiometryMatrix(); 
+		/*LIB_EXTERN*/ DoubleMatrix* getFullyReorderedStoichiometryMatrix();
 
 		/*! \brief Returns the row and column labels for the fully reordered stoichiometry matrix (row and column reordered stoichiometry matrix)
 
 			\param oRows a string vector that will be overwritten to hold the row labels
 			\param oCols a string vector that will be overwritten to hold the column labels.
 		*/
-		LIB_EXTERN void getFullyReorderedStoichiometryMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols ); 
+		/*LIB_EXTERN*/ void getFullyReorderedStoichiometryMatrixLabels(std::vector< std::string > &oRows, std::vector< std::string > &oCols );
 
 		//! Returns the reordered list of molecular species. (choosing the SBML Id if possible )
-		LIB_EXTERN std::vector< std::string > getReorderedSpecies(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getReorderedSpecies();
 
 		//!  Returns the unordered list of species Ids
-		LIB_EXTERN std::vector< std::string > getSpecies();
+		/*LIB_EXTERN*/ std::vector< std::string > getSpecies();
 
 		//! Returns the reordered list of molecular species.  (choosing the SBML Name if possible )
-		LIB_EXTERN std::vector< std::string > getReorderedSpeciesNamesList(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getReorderedSpeciesNamesList();
 
 		//! Returns the list of independent species 
-		LIB_EXTERN std::vector< std::string > getIndependentSpecies(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getIndependentSpecies();
 
 		//! Returns the actual names of the independent species 
-		LIB_EXTERN std::vector< std::string > getIndependentSpeciesNamesList(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getIndependentSpeciesNamesList();
 
 		//! Returns the list of dependent species 
-		LIB_EXTERN std::vector< std::string > getDependentSpecies(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getDependentSpecies();
 
 		//! Returns the actual names of the dependent species
-		LIB_EXTERN std::vector< std::string > getDependentSpeciesNamesList(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getDependentSpeciesNamesList();
 
 		//! Returns the list of Reactions
-		LIB_EXTERN std::vector< std::string > getReactions(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getReactions();
 
 		//! Returns the list of independent reactions 
-		LIB_EXTERN std::vector< std::string > getIndependentReactionIds(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getIndependentReactionIds();
 
 		//! Returns the list of dependent reactions 
-		LIB_EXTERN std::vector< std::string > getDependentReactionIds(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getDependentReactionIds();
 
 		//! Returns actual names of the Reactions 
-		LIB_EXTERN std::vector< std::string > getReactionsNamesList(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getReactionsNamesList();
 
 		//! Returns the reordered list of reactions
-		LIB_EXTERN std::vector< std::string > getReorderedReactions(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getReorderedReactions();
 
 		//! Returns algebraic expressions for conserved cycles 
-		LIB_EXTERN std::vector< std::string > getConservedLaws(); 
+		/*LIB_EXTERN*/ std::vector< std::string > getConservedLaws();
 
 		//! Returns values for conservation laws using the current initial conditions 
-		LIB_EXTERN std::vector< double > getConservedSums(); 
+		/*LIB_EXTERN*/ std::vector< double > getConservedSums();
 
 		//! Returns Initial Conditions used in the model
-		LIB_EXTERN std::vector< std::pair <std::string, double> > getInitialConditions(); 
+		/*LIB_EXTERN*/ std::vector< std::pair <std::string, double> > getInitialConditions();
 
 		/*! \brief Validates structural matrices.
 
@@ -614,35 +615,35 @@ namespace LIB_STRUCTURAL
 			\li Test 5 : L0 obtained with QR matches Q21*inv(Q11)
 			\li Test 6 : N*K = 0 (Zero matrix)
 		*/
-		LIB_EXTERN std::vector< std::string > validateStructuralMatrices(); 
+		/*LIB_EXTERN*/ std::vector< std::string > validateStructuralMatrices();
 
 		//! Return Return Details about validation tests.
-		LIB_EXTERN std::string getTestDetails(); 
+		/*LIB_EXTERN*/ std::string getTestDetails();
 
 		/*! \brief Returns the name of the model. 
 
 			Returns the name of the model if SBML model has Name-tag, otherwise it returns the 
 			SBML id. If only a stoichiometry matrix was loaded 'untitled' will be returned.
 		*/
-		LIB_EXTERN std::string getModelName(); 
+		/*LIB_EXTERN*/ std::string getModelName();
 
 		//! Returns the total number of species
-		LIB_EXTERN int getNumSpecies(); 
+		/*LIB_EXTERN*/ int getNumSpecies();
 		//! Returns the number of independent species
-		LIB_EXTERN int getNumIndSpecies(); 
+		/*LIB_EXTERN*/ int getNumIndSpecies();
 		//! Returns the number of dependent species
-		LIB_EXTERN int getNumDepSpecies(); 
+		/*LIB_EXTERN*/ int getNumDepSpecies();
 		//! Returns the total number of reactions
-		LIB_EXTERN int getNumReactions(); 
+		/*LIB_EXTERN*/ int getNumReactions();
 		//! Returns the number of independent reactions
-		LIB_EXTERN int getNumIndReactions(); 
+		/*LIB_EXTERN*/ int getNumIndReactions();
 		//! Returns the number of dependent reactions
-		LIB_EXTERN int getNumDepReactions(); 
+		/*LIB_EXTERN*/ int getNumDepReactions();
 
 		//! Returns rank of stoichiometry matrix
-		LIB_EXTERN int getRank();
+		/*LIB_EXTERN*/ int getRank();
 		//! Returns the number of nonzero values in Stoichiometry matrix
-		LIB_EXTERN double getNmatrixSparsity(); 
+		/*LIB_EXTERN*/ double getNmatrixSparsity();
 		/*! \brief Set user specified tolerance
 
 			This function sets the tolerance used by the library to determine what value 
@@ -651,14 +652,14 @@ namespace LIB_STRUCTURAL
 
 			\param dTolerance Sets the tolerance used by the library to determine a  value close to zero
 		*/
-		LIB_EXTERN void setTolerance(double dTolerance); 
+		/*LIB_EXTERN*/ void setTolerance(double dTolerance);
 		/*! \brief Returns the currently used tolerance
 
 			This function returns the tolerance currently used by the library to determine what value 
 			is considered as zero. Any value with absolute value smaller than this tolerance is considered zero 
 			and will be neglected.
 		*/
-		LIB_EXTERN double getTolerance() { return _Tolerance; }
+		/*LIB_EXTERN*/ double getTolerance() { return _Tolerance; }
 
 
 	public:
@@ -669,7 +670,7 @@ namespace LIB_STRUCTURAL
 //			_Nmat(NULL), _Nmat_orig(NULL), _NmatT(NULL), _NmatT_orig(NULL),
 //			_Totals(NULL), _IC(NULL), _BC(NULL), spVec(NULL), colVec(NULL), _sModelName("untitled"),_Tolerance(1.0E-9),_Model(NULL)
 #else
-		LIB_EXTERN LibStructural() :   _NumRows(0), _NumCols(0),
+		/*LIB_EXTERN*/ LibStructural() :   _NumRows(0), _NumCols(0),
 			_K0(NULL), _N0(NULL), _Nr(NULL), _L0(NULL), _L(NULL),_K(NULL),_NullN(NULL),_G(NULL),
 			_Nmat(NULL), _Nmat_orig(NULL), _NmatT(NULL), _NmatT_orig(NULL),
 			_Totals(NULL), _IC(NULL), _BC(NULL), spVec(NULL), colVec(NULL), _sModelName("untitled"),_Tolerance(1.0E-9)
@@ -678,7 +679,7 @@ namespace LIB_STRUCTURAL
 
 		~LibStructural();
 		//! static method to get an instance of LibStructural (allows use as singleton)
-		LIB_EXTERN static LibStructural* getInstance();
+		/*LIB_EXTERN*/ static LibStructural* getInstance();
 	private: 
 		double _Tolerance;
 		static LibStructural* _Instance;
@@ -717,7 +718,7 @@ a call to this function.
 \return The return value will be zero (0) when successful, and negative (-1) in case
 an error occurred
 */
-LIB_EXTERN  int LibStructural_loadStoichiometryMatrix (const double ** oMatrix, const int nRows, const int nCols);
+/*LIB_EXTERN*/  int LibStructural_loadStoichiometryMatrix (const double ** oMatrix, const int nRows, const int nCols);
 /*!	\example examples/c/loadstoichiometry.c
 This is an example of how to load a (unlabeled) stoichiometry matrix and read test details.
 */
@@ -750,7 +751,7 @@ an error occurred
 \remarks This method should only be called after ::LibStructural_loadStoichiometryMatrix
 
 */
-LIB_EXTERN  int LibStructural_loadSpecies ( const char** speciesNames, const double* speciesValues, const int nLength);
+/*LIB_EXTERN*/  int LibStructural_loadSpecies ( const char** speciesNames, const double* speciesValues, const int nLength);
 
 /*! \brief Load reaction names.
 
@@ -769,7 +770,7 @@ an error occurred
 */
 #ifndef NO_SBML
 
-LIB_EXTERN  int LibStructural_loadReactionNames ( const char** reactionNames, const int nLength);
+/*LIB_EXTERN*/  int LibStructural_loadReactionNames ( const char** reactionNames, const int nLength);
 
 /*! \brief Load a SBML model. 
 \param sSBML the SBML string to load into the library
@@ -781,7 +782,7 @@ about the loaded SBML
 an error occurred (invalid SBML)
 
 */
-LIB_EXTERN  int LibStructural_loadSBML(const char* sSBML, char* *outMessage, int *nLength);
+/*LIB_EXTERN*/  int LibStructural_loadSBML(const char* sSBML, char* *outMessage, int *nLength);
 
 /*! \brief Load a SBML model from the specified file. 
 \param sFileName the full path to the SBML file to be loaded.
@@ -795,7 +796,7 @@ about the loaded SBML
 an error occurred (invalid SBML, file not readable ...).
 
 */
-LIB_EXTERN  int LibStructural_loadSBMLFromFile(const char* sFileName, char* *outMessage, int *nLength);
+/*LIB_EXTERN*/  int LibStructural_loadSBMLFromFile(const char* sFileName, char* *outMessage, int *nLength);
 
 /*! \brief Load an SBML model into the library and carry out tests using the internal test suite.  
 \param sSBML the SBML string to load into the library
@@ -807,7 +808,7 @@ model as well as the test results of the internal test suite.
 an error occurred (invalid SBML)
 
 */
-LIB_EXTERN  int LibStructural_loadSBMLwithTests(const char* sSBML, char* *outMessage, int *nLength);
+/*LIB_EXTERN*/  int LibStructural_loadSBMLwithTests(const char* sSBML, char* *outMessage, int *nLength);
 #endif
 /*! \brief Uses QR factorization for structural analysis
 
@@ -834,7 +835,7 @@ no stoichiometry matrix was loaded beforehand see ::LibStructural_loadStoichiome
 or ::LibStructural_loadSBML or ::LibStructural_loadSBMLFromFile
 
 */
-LIB_EXTERN  int LibStructural_analyzeWithQR(char* *outMessage, int *nLength);
+/*LIB_EXTERN*/  int LibStructural_analyzeWithQR(char* *outMessage, int *nLength);
 /*! \brief Uses LU Decomposition for structural analysis
 
 This method performs the actual analysis of the stoichiometry matrix (loaded either
@@ -856,7 +857,7 @@ will be returned.
 no stoichiometry matrix was loaded beforehand see ::LibStructural_loadStoichiometryMatrix
 or ::LibStructural_loadSBML or ::LibStructural_loadSBMLFromFile
 */
-LIB_EXTERN  int LibStructural_analyzeWithLU(char* *outMessage, int *nLength);
+/*LIB_EXTERN*/  int LibStructural_analyzeWithLU(char* *outMessage, int *nLength);
 /*! \brief Uses LU Decomposition for structural analysis
 
 This method performs the actual analysis of the stoichiometry matrix (loaded either
@@ -882,7 +883,7 @@ no stoichiometry matrix was loaded beforehand see ::LibStructural_loadStoichiome
 or ::LibStructural_loadSBML or ::LibStructural_loadSBMLFromFile
 
 */
-LIB_EXTERN  int LibStructural_analyzeWithLUandRunTests(char* *outMessage, int *nLength); 
+/*LIB_EXTERN*/  int LibStructural_analyzeWithLUandRunTests(char* *outMessage, int *nLength);
 /*! \brief Uses fully pivoted LU decomposition for structural analysis.
 
 This method performs the actual analysis of the stoichiometry matrix (loaded either
@@ -908,7 +909,7 @@ will be returned.
 no stoichiometry matrix was loaded beforehand. See ::LibStructural_loadStoichiometryMatrix
 or ::LibStructural_loadSBML or ::LibStructural_loadSBMLFromFile
 */
-LIB_EXTERN  int LibStructural_analyzeWithFullyPivotedLU(char* *outMessage, int *nLength); 
+/*LIB_EXTERN*/  int LibStructural_analyzeWithFullyPivotedLU(char* *outMessage, int *nLength);
 /*! \brief Uses fully pivoted LU decomposition for structural analysis
 
 This method performs the actual analysis of the stoichiometry matrix (loaded either
@@ -936,7 +937,7 @@ will be returned.
 no stoichiometry matrix was loaded beforehand see ::LibStructural_loadStoichiometryMatrix
 or ::LibStructural_loadSBML or ::LibStructural_loadSBMLFromFile
 */
-LIB_EXTERN  int LibStructural_analyzeWithFullyPivotedLUwithTests(char* *outMessage, int *nLength); 
+/*LIB_EXTERN*/  int LibStructural_analyzeWithFullyPivotedLUwithTests(char* *outMessage, int *nLength);
 
 /*! \brief Returns the L0 Matrix. 
 
@@ -954,7 +955,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getL0Matrix(double** *outMatrix, int* outRows, int *outCols);
+/*LIB_EXTERN*/  int LibStructural_getL0Matrix(double** *outMatrix, int* outRows, int *outCols);
 
 /*! \brief Returns the L0 Matrix row and column labels.
 
@@ -975,7 +976,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length 
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getL0MatrixLabels(char** *outRowLabels, int *outRowCount,
+/*LIB_EXTERN*/  int LibStructural_getL0MatrixLabels(char** *outRowLabels, int *outRowCount,
 												char** *outColLabels, int *outColCount);
 
 /*! \brief Returns the Nr Matrix. 
@@ -991,7 +992,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getNrMatrix(double** *outMatrix, int* outRows, int *outCols); 
+/*LIB_EXTERN*/  int LibStructural_getNrMatrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the Nr Matrix row and column labels.
 
 \param outRowLabels a pointer to a string array where the row labels will be allocated 
@@ -1011,7 +1012,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getNrMatrixLabels(char** *outRowLabels, int *outRowCount, 
+/*LIB_EXTERN*/  int LibStructural_getNrMatrixLabels(char** *outRowLabels, int *outRowCount,
 												char** *outColLabels, int *outColCount);
 
 /*! \brief Returns the Nr Matrix repartitioned into NIC (independent columns) and NDC (dependent columns).
@@ -1027,7 +1028,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getColumnReorderedNrMatrix(double** *outMatrix, int* outRows, int *outCols); 
+/*LIB_EXTERN*/  int LibStructural_getColumnReorderedNrMatrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the Nr Matrix row and column labels (repartitioned into NIC and NDC).
 
 \param outRowLabels a pointer to a string array where the row labels will be allocated 
@@ -1047,7 +1048,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length 
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getColumnReorderedNrMatrixLabels(char** *outRowLabels, int *outRowCount, 
+/*LIB_EXTERN*/  int LibStructural_getColumnReorderedNrMatrixLabels(char** *outRowLabels, int *outRowCount,
 															   char** *outColLabels, int *outColCount);
 
 /*! \brief Returns the NIC Matrix (the set of linearly independent columns of Nr)
@@ -1063,7 +1064,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getNICMatrix(double** *outMatrix, int* outRows, int *outCols); 
+/*LIB_EXTERN*/  int LibStructural_getNICMatrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the NIC Matrix row and column labels.
 
 \param outRowLabels a pointer to a string array where the row labels will be allocated 
@@ -1083,7 +1084,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length 
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getNICMatrixLabels(char** *outRowLabels, int *outRowCount,
+/*LIB_EXTERN*/  int LibStructural_getNICMatrixLabels(char** *outRowLabels, int *outRowCount,
 												 char** *outColLabels, int *outColCount);
 /*! \brief Returns the NDC Matrix (the set of linearly dependent columns of Nr).
 
@@ -1098,7 +1099,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getNDCMatrix(double** *outMatrix, int* outRows, int *outCols); 
+/*LIB_EXTERN*/  int LibStructural_getNDCMatrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the NDC Matrix row and column labels.
 
 \param outRowLabels a pointer to a string array where the row labels will be allocated 
@@ -1118,7 +1119,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length 
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getNDCMatrixLabels(char** *outRowLabels, int *outRowCount, 
+/*LIB_EXTERN*/  int LibStructural_getNDCMatrixLabels(char** *outRowLabels, int *outRowCount,
 												 char** *outColLabels, int *outColCount);
 /*! \brief Returns the N0 Matrix.
 
@@ -1135,7 +1136,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getN0Matrix(double** *outMatrix, int* outRows, int *outCols); 
+/*LIB_EXTERN*/  int LibStructural_getN0Matrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the N0 Matrix row and column labels.
 
 \param outRowLabels a pointer to a string array where the row labels will be allocated 
@@ -1155,7 +1156,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getN0MatrixLabels(char** *outRowLabels, int *outRowCount, 
+/*LIB_EXTERN*/  int LibStructural_getN0MatrixLabels(char** *outRowLabels, int *outRowCount,
 												char** *outColLabels, int *outColCount);
 
 /*! \brief Returns L, the Link Matrix, left nullspace (aka nullspace of the transpose Nr). 
@@ -1173,7 +1174,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getLinkMatrix(double** *outMatrix, int* outRows, int *outCols);
+/*LIB_EXTERN*/  int LibStructural_getLinkMatrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the row and column labels for the Link Matrix, L
 
 \param outRowLabels a pointer to a string array where the row labels will be allocated 
@@ -1193,7 +1194,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getLinkMatrixLabels(char** *outRowLabels, int *outRowCount, 
+/*LIB_EXTERN*/  int LibStructural_getLinkMatrixLabels(char** *outRowLabels, int *outRowCount,
 												  char** *outColLabels, int *outColCount);
 
 /*! \brief Returns the K0 Matrix. 
@@ -1211,7 +1212,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getK0Matrix(double** *outMatrix, int* outRows, int *outCols); 
+/*LIB_EXTERN*/  int LibStructural_getK0Matrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the K0 Matrix row and column labels.
 
 \param outRowLabels a pointer to a string array where the row labels will be allocated 
@@ -1231,7 +1232,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length 
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getK0MatrixLabels(char** *outRowLabels, int *outRowCount, 
+/*LIB_EXTERN*/  int LibStructural_getK0MatrixLabels(char** *outRowLabels, int *outRowCount,
 												char** *outColLabels, int *outColCount);
 /*! \brief Returns the K matrix (right nullspace of Nr) 
 The K matrix has the structure, [I K0]'  
@@ -1247,7 +1248,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getKMatrix(double** *outMatrix, int* outRows, int *outCols); 
+/*LIB_EXTERN*/  int LibStructural_getKMatrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the K matrix row and column labels.
 
 \param outRowLabels a pointer to a string array where the row labels will be allocated 
@@ -1267,7 +1268,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length 
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getKMatrixLabels(char** *outRowLabels, int *outRowCount, 
+/*LIB_EXTERN*/  int LibStructural_getKMatrixLabels(char** *outRowLabels, int *outRowCount,
 											   char** *outColLabels, int *outColCount);
 
 /*! \brief Returns Gamma, the conservation law array. 
@@ -1289,12 +1290,12 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols);
+/*LIB_EXTERN*/  int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols);
 
-LIB_EXTERN int LibStructural_getGammaMatrixGJ(double** inMatrix, int numRows, int numCols, 
+/*LIB_EXTERN*/ int LibStructural_getGammaMatrixGJ(double** inMatrix, int numRows, int numCols,
 										  double** *outMatrix, int *outRows, int *outCols);
 
-LIB_EXTERN int LibStructural_findPositiveGammaMatrix(double** inMatrix, int numRows, int numCols, 
+/*LIB_EXTERN*/ int LibStructural_findPositiveGammaMatrix(double** inMatrix, int numRows, int numCols,
 				const char** inRowLabels,
 				double** *outMatrix, int *outRows, int *outCols, 
 				char** *outRowLabels, int *outRowCount);
@@ -1319,7 +1320,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length 
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getGammaMatrixLabels(char** *outRowLabels, int *outRowCount, char** *outColLabels, int *outColCount);
+/*LIB_EXTERN*/  int LibStructural_getGammaMatrixLabels(char** *outRowLabels, int *outRowCount, char** *outColLabels, int *outColCount);
 /*! \brief Returns the original, unaltered stoichiometry matrix.
 \param outMatrix a pointer to a double array that holds the output
 \param outRows will be overwritten with the number of rows
@@ -1332,7 +1333,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getStoichiometryMatrix(double** *outMatrix, int* outRows, int *outCols); 
+/*LIB_EXTERN*/  int LibStructural_getStoichiometryMatrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the row and column labels for the original and unaltered stoichiometry matrix.
 
 \param outRowLabels a pointer to a string array where the row labels will be allocated 
@@ -1352,7 +1353,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length 
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getStoichiometryMatrixLabels(char** *outRowLabels, int *outRowCount, char** *outColLabels, int *outColCount);
+/*LIB_EXTERN*/  int LibStructural_getStoichiometryMatrixLabels(char** *outRowLabels, int *outRowCount, char** *outColLabels, int *outColCount);
 /*! \brief Returns the fully reordered stoichiometry matrix (row and column reordered stoichiometry matrix)
 
 \param outMatrix a pointer to a double array that holds the output
@@ -1366,7 +1367,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getFullyReorderedStoichiometryMatrix(double** *outMatrix, int* outRows, int *outCols); 
+/*LIB_EXTERN*/  int LibStructural_getFullyReorderedStoichiometryMatrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the reordered stoichiometry matrix (row reordered stoichiometry matrix, columns are not reordered!)
 
 \param outMatrix a pointer to a double array that holds the output
@@ -1380,7 +1381,7 @@ been called yet.
 \remarks To free the returned matrix call ::LibStructural_freeMatrix with the outMatrix 
 and outRows as parameter.
 */
-LIB_EXTERN  int LibStructural_getReorderedStoichiometryMatrix(double** *outMatrix, int* outRows, int *outCols);
+/*LIB_EXTERN*/  int LibStructural_getReorderedStoichiometryMatrix(double** *outMatrix, int* outRows, int *outCols);
 /*! \brief Returns the row and column labels for the fully reordered stoichiometry matrix (row and column reordered stoichiometry matrix)
 
 \param outRowLabels a pointer to a string array where the row labels will be allocated
@@ -1400,7 +1401,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length 
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getFullyReorderedStoichiometryMatrixLabels(char** *outRowLabels, int *outRowCount, char** *outColLabels, int *outColCount);
+/*LIB_EXTERN*/  int LibStructural_getFullyReorderedStoichiometryMatrixLabels(char** *outRowLabels, int *outRowCount, char** *outColLabels, int *outColCount);
 
 /*! \brief Returns the row and column labels for the reordered stoichiometry matrix (row reordered stoichiometry matrix)
 
@@ -1421,7 +1422,7 @@ been called yet.
 ::LibStructural_freeMatrix with the string array and its corresponding length 
 (outRowCount or outColCount)
 */
-LIB_EXTERN  int LibStructural_getReorderedStoichiometryMatrixLabels(char** *outRowLabels, int *outRowCount, char** *outColLabels, int *outColCount);
+/*LIB_EXTERN*/  int LibStructural_getReorderedStoichiometryMatrixLabels(char** *outRowLabels, int *outRowCount, char** *outColLabels, int *outColCount);
 
 /*! \brief Returns the reordered list of molecular species. 
 \param outArray pointer to string array that will be allocated and filled with the species Ids
@@ -1433,7 +1434,7 @@ been called yet.
 
 \remarks free outArray using ::LibStructural_freeMatrix with the outLength parameter
 */
-LIB_EXTERN  int LibStructural_getReorderedSpeciesIds(char** *outArray, int *outLength); 
+/*LIB_EXTERN*/  int LibStructural_getReorderedSpeciesIds(char** *outArray, int *outLength);
 
 
 /*! \brief Returns the unordered list of species Ids
@@ -1446,7 +1447,7 @@ no stoichiometry matrix was loaded beforehand or none of the analysis methods ha
 been called yet.
 
 */
-LIB_EXTERN  int LibStructural_getSpeciesIds(char** *outArray, int *outLength);
+/*LIB_EXTERN*/  int LibStructural_getSpeciesIds(char** *outArray, int *outLength);
 
 /*! \brief Returns the reordered list of reactions Ids. 
 \param outArray pointer to string array that will be allocated and filled with the reordered reaction Ids
@@ -1458,7 +1459,7 @@ no stoichiometry matrix was loaded beforehand or none of the analysis methods ha
 been called yet.
 
 */
-LIB_EXTERN  int LibStructural_getReorderedReactionIds(char** *outArray, int *outLength); 
+/*LIB_EXTERN*/  int LibStructural_getReorderedReactionIds(char** *outArray, int *outLength);
 
 /*! \brief Returns the list of independent species ids. 
 \param outArray pointer to string array that will be allocated and filled with the independent species Ids
@@ -1470,7 +1471,7 @@ no stoichiometry matrix was loaded beforehand or none of the analysis methods ha
 been called yet.
 
 */
-LIB_EXTERN  int LibStructural_getIndependentSpeciesIds(char** *outArray, int *outLength);
+/*LIB_EXTERN*/  int LibStructural_getIndependentSpeciesIds(char** *outArray, int *outLength);
 
 /*! \brief Returns the list of dependent species Ids. 
 \param outArray pointer to string array that will be allocated and filled with the dependent species Ids
@@ -1482,7 +1483,7 @@ been called yet.
 
 
 */
-LIB_EXTERN  int LibStructural_getDependentSpeciesIds(char** *outArray, int *outLength);
+/*LIB_EXTERN*/  int LibStructural_getDependentSpeciesIds(char** *outArray, int *outLength);
 
 /*! \brief Returns the list of independent reaction ids. 
 \param outArray pointer to string array that will be allocated and filled with the independent reaction Ids
@@ -1494,7 +1495,7 @@ no stoichiometry matrix was loaded beforehand or none of the analysis methods ha
 been called yet.
 
 */
-LIB_EXTERN  int LibStructural_getIndependentReactionIds(char** *outArray, int *outLength); 
+/*LIB_EXTERN*/  int LibStructural_getIndependentReactionIds(char** *outArray, int *outLength);
 
 /*! \brief Returns the list of dependent reaction Ids. 
 \param outArray pointer to string array that will be allocated and filled with the dependent reaction Ids
@@ -1506,7 +1507,7 @@ been called yet.
 
 
 */
-LIB_EXTERN  int LibStructural_getDependentReactionIds(char** *outArray, int *outLength); 
+/*LIB_EXTERN*/  int LibStructural_getDependentReactionIds(char** *outArray, int *outLength);
 
 /*! \brief Returns the list of unordered Reactions. 
 Returns the original list of reactions in the same order as when it was loaded.
@@ -1518,7 +1519,7 @@ no stoichiometry matrix was loaded beforehand or none of the analysis methods ha
 been called yet.
 
 */
-LIB_EXTERN  int LibStructural_getReactionIds(char** *outArray, int *outLength); 
+/*LIB_EXTERN*/  int LibStructural_getReactionIds(char** *outArray, int *outLength);
 
 /*! \brief Returns algebraic expressions for the conservation laws.
 \param outArray pointer to string array that will be allocated and filled
@@ -1529,12 +1530,12 @@ no stoichiometry matrix was loaded beforehand or none of the analysis methods ha
 been called yet.
 
 */
-LIB_EXTERN  int LibStructural_getConservedLaws(char** *outArray, int *outLength); 
+/*LIB_EXTERN*/  int LibStructural_getConservedLaws(char** *outArray, int *outLength);
 
 /*! \brief Returns the number of conservation laws.
 \return the number of conservation laws
 */
-LIB_EXTERN  int LibStructural_getNumConservedSums(); 
+/*LIB_EXTERN*/  int LibStructural_getNumConservedSums();
 /*! \brief Returns values for conservation laws using the current initial conditions 
 
 \param outArray will be allocated and filled with a double vector of all conserved sums
@@ -1546,14 +1547,14 @@ no stoichiometry matrix was loaded beforehand or none of the analysis methods ha
 been called yet.
 
 */
-LIB_EXTERN int LibStructural_getConservedSums(double* *outArray, int *outLength);
+/*LIB_EXTERN*/ int LibStructural_getConservedSums(double* *outArray, int *outLength);
 
 /*! \brief Returns the initial conditions used in the model.
 \param outVariableNames a string vector of all species Ids
 \param outValues a double vector of corresponding initial conditions
 \param outLength number of elements in outVariableNames and outValues (number of species)
 */
-LIB_EXTERN  int LibStructural_getInitialConditions(char** *outVariableNames, double* *outValues, int *outLength);
+/*LIB_EXTERN*/  int LibStructural_getInitialConditions(char** *outVariableNames, double* *outValues, int *outLength);
 
 /*! \brief Validates structural matrices.
 
@@ -1579,7 +1580,7 @@ no stoichiometry matrix was loaded beforehand or none of the analysis methods ha
 been called yet.
 
 */
-LIB_EXTERN  int  LibStructural_validateStructuralMatrices(int* *outResults, int* outLength); 
+/*LIB_EXTERN*/  int  LibStructural_validateStructuralMatrices(int* *outResults, int* outLength);
 /*! \brief Return Details about validation tests.
 \param outMessage a pointer to a string where status information of the analysis
 will be returned.
@@ -1591,7 +1592,7 @@ no stoichiometry matrix was loaded beforehand or none of the analysis methods ha
 been called yet.
 
 */
-LIB_EXTERN  int LibStructural_getTestDetails(char* *outMessage, int *nLength); 
+/*LIB_EXTERN*/  int LibStructural_getTestDetails(char* *outMessage, int *nLength);
 
 /*! \brief Returns the name of the model. 
 
@@ -1608,26 +1609,26 @@ no stoichiometry matrix was loaded beforehand or none of the analysis methods ha
 been called yet.
 
 */
-LIB_EXTERN  int LibStructural_getModelName(char* *outMessage, int *nLength); 
+/*LIB_EXTERN*/  int LibStructural_getModelName(char* *outMessage, int *nLength);
 
 //! Returns the total number of species.
-LIB_EXTERN  int LibStructural_getNumSpecies();
+/*LIB_EXTERN*/  int LibStructural_getNumSpecies();
 
 //! Returns the number of independent species.
-LIB_EXTERN  int LibStructural_getNumIndSpecies();
+/*LIB_EXTERN*/  int LibStructural_getNumIndSpecies();
 
 //! Returns the number of dependent species.
-LIB_EXTERN  int LibStructural_getNumDepSpecies(); 
+/*LIB_EXTERN*/  int LibStructural_getNumDepSpecies();
 //! Returns the total number of reactions.
-LIB_EXTERN  int LibStructural_getNumReactions();
+/*LIB_EXTERN*/  int LibStructural_getNumReactions();
 //! Returns the number of independent reactions.
-LIB_EXTERN  int LibStructural_getNumIndReactions(); 
+/*LIB_EXTERN*/  int LibStructural_getNumIndReactions();
 //! Returns the number of dependent reactions.
-LIB_EXTERN  int LibStructural_getNumDepReactions(); 
+/*LIB_EXTERN*/  int LibStructural_getNumDepReactions();
 //! Returns the rank of the stoichiometry matrix.
-LIB_EXTERN  int LibStructural_getRank(); 
+/*LIB_EXTERN*/  int LibStructural_getRank();
 //! Returns the percentage of nonzero values in the stoichiometry matrix
-LIB_EXTERN  double LibStructural_getNmatrixSparsity(); 
+/*LIB_EXTERN*/  double LibStructural_getNmatrixSparsity();
 
 /*! \brief Set user specified tolerance
 
@@ -1637,7 +1638,7 @@ and will be neglected.
 
 \param dTolerance Sets the tolerance used by the library to determine a  value close to zero
 */
-LIB_EXTERN  void LibStructural_setTolerance(const double dTolerance); 
+/*LIB_EXTERN*/  void LibStructural_setTolerance(const double dTolerance);
 
 /*! \brief Get user specified tolerance
 
@@ -1647,21 +1648,21 @@ and will be neglected.
 
 \return the tolerance used by the library to determine a  value close to zero
 */
-LIB_EXTERN  double LibStructural_getTolerance();
+/*LIB_EXTERN*/  double LibStructural_getTolerance();
 
 
 //! Frees a vector previously allocated by this library.
-LIB_EXTERN void LibStructural_freeVector(void* vector);
+/*LIB_EXTERN*/ void LibStructural_freeVector(void* vector);
 
 //! Frees a matrix previously allocated by this library.
-LIB_EXTERN void LibStructural_freeMatrix(void** matrix, int numRows);
+/*LIB_EXTERN*/ void LibStructural_freeMatrix(void** matrix, int numRows);
 
-//LIB_EXTERN  int LibStructural_getNthReorderedSpeciesId(int n,char* *outMessage, int *nLength);
-//LIB_EXTERN  int LibStructural_getNthIndependentSpeciesId(int n,char* *outMessage, int *nLength);
-//LIB_EXTERN  int LibStructural_getNthDependentSpeciesId(int n,char* *outMessage, int *nLength);
-//LIB_EXTERN  int LibStructural_getNthReactionId(int n,char* *outMessage, int *nLength);
-//LIB_EXTERN  int LibStructural_getNthConservedEntity(int n,char* *outMessage, int *nLength);
-//LIB_EXTERN double LibStructural_getNthConservedSum(int n);
+///*LIB_EXTERN*/  int LibStructural_getNthReorderedSpeciesId(int n,char* *outMessage, int *nLength);
+///*LIB_EXTERN*/  int LibStructural_getNthIndependentSpeciesId(int n,char* *outMessage, int *nLength);
+///*LIB_EXTERN*/  int LibStructural_getNthDependentSpeciesId(int n,char* *outMessage, int *nLength);
+///*LIB_EXTERN*/  int LibStructural_getNthReactionId(int n,char* *outMessage, int *nLength);
+///*LIB_EXTERN*/  int LibStructural_getNthConservedEntity(int n,char* *outMessage, int *nLength);
+///*LIB_EXTERN*/ double LibStructural_getNthConservedSum(int n);
 
 } //namespace ..
 END_C_DECLS;

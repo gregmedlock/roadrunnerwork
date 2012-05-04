@@ -25,7 +25,7 @@ void ModelState::InitializeFromModel(ModelFromC& model)
     CopyCArrayToStdVector(model.rates,                    mRates, 							*model.ratesSize);
     CopyCArrayToStdVector(model.rateRules,                mRateRules, 						model.rateRulesSize);
     CopyCArrayToStdVector(model.sr,                       mModifiableSpeciesReferences, 	*model.srSize);
-    CopyCArrayToStdVector(model.eventStatusArray,         mEventStatusArray, 				*model.eventStatusArray);
+    CopyCArrayToStdVector(model.eventStatusArray,         mEventStatusArray, 				*model.eventStatusArraySize);
     CopyCArrayToStdVector(model.eventTests,               mEventTests, 						*model.eventTestsSize);
     CopyCArrayToStdVector(model.previousEventStatusArray, mPreviousEventStatusArray, 		*model.previousEventStatusArraySize);
 	mTime = *model.time;

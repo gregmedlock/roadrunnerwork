@@ -20,14 +20,13 @@ typedef void    (__cdecl *c_void_doubleStar)(double*);
 typedef double  (__cdecl *c_double_int)(int);
 typedef double* (__cdecl *c_doubleStar)();
 typedef void	(__cdecl *c_void_double_doubleStar)(double, double*);
-typedef void 	(__cdecl *TEventAssignmentDelegate)();
-//typedef double*	(__cdecl *TComputeEventAssignmentDelegate)();
-typedef TEventAssignmentDelegate* (__cdecl *c_TEventAssignmentDelegateStar)();
-typedef TComputeEventAssignmentDelegate* (__cdecl *c_TComputeEventAssignmentDelegateStar)();
 
+typedef TComputeEventAssignmentDelegate* (__cdecl *c_TComputeEventAssignmentDelegateStar)();
 typedef TEventDelayDelegate* (__cdecl *c_GetEventDelayDelegatesStar)();
-//ModelFromC used to inherit from IModel. This inheritance is not necessary, so removed..
+
+
 class CvodeInterface;
+
 class RR_DECLSPEC ModelFromC : public rrObject
 {
     protected:

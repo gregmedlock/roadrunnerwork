@@ -1,14 +1,14 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
 #include <windows.h>
-#include "rrC_API.h"
 #include "rrRoadRunner.h"
+#include "rrC_API.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
+//#pragma package(smart_init)
 
 rr::RoadRunner *gRRHandle = NULL;
 
-DECL_SPEC RRHandle getRRInstance()
+RR_DECL_SPEC RRHandle getRRInstance()
 {
 	if(!gRRHandle)
     {
@@ -17,7 +17,7 @@ DECL_SPEC RRHandle getRRInstance()
     return gRRHandle;
 }
 
-DECL_SPEC void deleteRRInstance(RRHandle *handle)
+RR_DECL_SPEC void deleteRRInstance(RRHandle *handle)
 {
     delete handle;
 }

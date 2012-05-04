@@ -307,6 +307,7 @@ void CGenerator::WriteOutVariables(CodeBuilder& ignore)
     mHeader.FormatArray("char*",						       	"boundaryTable", 				boundarySpeciesList.size());
     mHeader.FormatArray("char*",						       	"globalParameterTable", 		globalParameterList.size());
     mHeader.FormatArray("int",							        "localParameterDimensions", 	mNumReactions );
+
 	mHeader<<"\ttypedef void __cdecl (*TEventAssignmentDelegate)();"<<endl;
     mHeader.FormatVariable("TEventAssignmentDelegate*",	    	"_eventAssignments","");
 	mHeader.AddFunctionExport("TEventAssignmentDelegate*",	   	"Get_eventAssignments()");
@@ -318,6 +319,8 @@ void CGenerator::WriteOutVariables(CodeBuilder& ignore)
 
 	mHeader<<"\ttypedef void (*TPerformEventAssignmentDelegate)();"<<endl;
     mHeader.FormatVariable("TPerformEventAssignmentDelegate*",	"_performEventAssignments");
+	mHeader.AddFunctionExport("TPerformEventAssignmentDelegate*",	   	"Get_performEventAssignments()");
+
     mHeader.FormatArray("bool",					            	"mEventStatusArray", 			mNumEvents);
     mHeader.FormatArray("bool",					            	"_previousEventStatusArray", 	mNumEvents);
 }
@@ -1189,7 +1192,7 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
     mHeader.AddFunctionExport("void", "evalEvents(double timeIn, double oAmounts[])");
     mSource<<Append("void evalEvents(double timeIn, double oAmounts[])" + NL());
     mSource<<Append("{" + NL());
-    mSource<<Append("\tprintf(\"In Eval events\n\");" + NL());
+    mSource<<Append("\tprintf(\"In Eval events\");\n\n");
 
     if (numEvents > 0)
     {
@@ -1425,7 +1428,9 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
     vector<bool> eventPersistentType;
     if (numEvents > 0)
     {
+    	//Get array of pointers functions
 		mSource<<("TEventAssignmentDelegate* Get_eventAssignments() \n{\n\treturn _eventAssignments;\n}\n\n");
+   		mSource<<("TPerformEventAssignmentDelegate* Get_performEventAssignments() \n{\n\treturn _performEventAssignments;\n}\n\n");
         mSource<<("TComputeEventAssignmentDelegate* Get_computeEventAssignments() \n{\n\treturn _computeEventAssignments;\n}\n\n");
         mSource<<("TEventDelayDelegate* GetEventDelays() \n{\n\treturn mEventDelay;\n}\n\n");
         mSource<<Append("// Event assignments" + NL());
@@ -1455,7 +1460,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
             StringList oValue;
             int nCount = 0;
             int numAssignments = ev.size() - 2;
-            mSource<<"\n\tprintf(\"In computeEventAssignment_ \n\");\n";
+            mSource<<"\n\tprintf(\"In computeEventAssignment_ \");\n\n";
             mSource<<Format("\t\tdouble* values = (double*) malloc(sizeof(double)*{0});{1}", numAssignments, NL());
             for (int j = 2; j < ev.size(); j++)
             {

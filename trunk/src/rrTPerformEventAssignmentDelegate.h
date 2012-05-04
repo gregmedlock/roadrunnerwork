@@ -6,7 +6,8 @@ using std::vector;
 
 namespace rr
 {
-	typedef void (*TPerformEventAssignmentDelegate)(double* values);
+	typedef void 								(__cdecl *TPerformEventAssignmentDelegate)(double* values);		//FuncPointer taking no args and returning void
+	typedef TPerformEventAssignmentDelegate* 	(__cdecl *c_TPerformEventAssignmentDelegateStar)();				//Array of function pointers
 }
 
 #endif

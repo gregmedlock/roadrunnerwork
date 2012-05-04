@@ -5,8 +5,7 @@
 #include "rrTEventAssignmentDelegate.h"
 //---------------------------------------------------------------------------
 
-
-
 namespace rr
 {
+
 }

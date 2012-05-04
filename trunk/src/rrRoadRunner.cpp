@@ -4663,7 +4663,6 @@ StringListContainer RoadRunner::getAvailableSymbols()
 //    }
 //}
 
-
 string RoadRunner::getCopyright()
 {
 	return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";

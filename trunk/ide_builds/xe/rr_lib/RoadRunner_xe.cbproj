@@ -22,9 +22,12 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
+			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
+			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<FinalOutputDir>C:\rrw\installs\xe\bin\</FinalOutputDir>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
-			<Defines>EXPORT_RR;NO_NOM_DLL;NO_LIBSTRUCT_DLL;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;$(Defines)</Defines>
+			<Defines>EXPORT_RR;NO_NOM_DLL;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;LIB_EXPORTS;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>
@@ -47,6 +50,9 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
+			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
+			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<FinalOutputDir>C:\rrw\installs\xe\bin\</FinalOutputDir>
 			<BCC_FastFloatingPoint>false</BCC_FastFloatingPoint>
 			<ILINK_Verbose>true</ILINK_Verbose>
@@ -112,11 +118,17 @@
 				<DependentOn>..\..\..\src\LibStructSupport\rrLibStructSupport.h</DependentOn>
 				<BuildOrder>58</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\src\libstruct\complex.cpp">
+				<BuildOrder>68</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\src\libstruct\libla.cpp">
 				<BuildOrder>56</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\src\libstruct\libstructural.cpp">
 				<BuildOrder>55</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\src\libstruct\matrix.cpp">
+				<BuildOrder>67</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\src\libstruct\sbmlmodel.cpp">
 				<BuildOrder>58</BuildOrder>

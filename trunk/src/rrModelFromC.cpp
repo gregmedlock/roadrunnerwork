@@ -441,12 +441,19 @@ bool ModelFromC::SetupDLLData()
     	computeEventAssignments = GetComputeEventAssignments();
     }
 
-////    TPerformEventAssignmentDelegate* 		performEventAssignments;
-//    performEventAssignments	  = (TPerformEventAssignmentDelegate*) GetProcAddress((HMODULE) mDLLHandle, "_performEventAssignments");
-//    if(!performEventAssignments)
-//    {
-//		Log(lError)<<"Failed to assign to performEventAssignments";
-//    }
+    c_TPerformEventAssignmentDelegateStar 	GetPerformEventAssignments;
+    GetPerformEventAssignments  = (c_TPerformEventAssignmentDelegateStar) GetProcAddress((HMODULE) mDLLHandle, "Get_performEventAssignments");
+    if(!GetPerformEventAssignments)
+    {
+		Log(lError)<<"Failed to assign to GetPerformEventAssignments";
+        performEventAssignments = NULL;
+    }
+    else
+    {
+    	performEventAssignments = GetPerformEventAssignments();
+    }
+
+
     c_GetEventDelayDelegatesStar 	GetEventDelays;
     GetEventDelays  = (c_GetEventDelayDelegatesStar) GetProcAddress((HMODULE) mDLLHandle, "GetEventDelays");
     if(!GetEventDelays)
@@ -588,13 +595,15 @@ void ModelFromC::AssignRates(vector<double>& _rates)
         return;
 	}
 
-	auto_ptr<double> rates(new double(_rates.size()));
-	for(int i = 0; i < _rates.size(); i++)
-	{
-		(rates).get()[i] = _rates[i];
-	}
+  	double* rates = CreateCVectorFromStdVector(_rates);
+//	auto_ptr<double> rates(new double(_rates.size()));
+//	for(int i = 0; i < _rates.size(); i++)
+//	{
+//		(rates).get()[i] = _rates[i];
+//	}
 
-    cAssignRates_b(rates.get());
+    cAssignRates_b(rates);
+    delete [] rates;
 }
 
 void ModelFromC::computeConservedTotals()

@@ -127,7 +127,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
     ModelState oldState(*model);
 //    int size = model->amounts.size() + model->rateRules.size();
 
-    int size = model->getNumIndependentVariables() + (model->rateRulesSize);
+    int size = *model->amountsSize + (model->rateRulesSize);
 	vector<double> dCVodeArgument(size);//model->.amounts.Length + model.rateRules.Length];
 
 	for(int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
@@ -189,13 +189,14 @@ void EventFcn(double time, cvode_precision* y, cvode_precision* gdot, void* fdat
 		gdot[i] = model->eventTests[i];
     }
 
-    Log(lDebug3)<<"Rootfunction Out: t="<<time<<" ("<< CvodeInterface::mRootCount <<"): ";
+    Log(lDebug5)<<"Rootfunction Out: t="<<time<<" ("<< CvodeInterface::mRootCount <<"): ";
     for (int i = 0; i < *model->eventTestsSize; i++)
     {
         Log(lDebug3)<<ToString(model->eventTests[i])<<" p="<<model->previousEventStatusArray[i]<<" c="<<ToString(model->eventStatusArray[i])<<", ";
     }
     CvodeInterface::mRootCount++;
     oldState->AssignToModel(*model);
+    delete oldState;
 }
 
 ////        void CvodeInterface::EventFcn(double time, IntPtr y, IntPtr gdot, IntPtr fdata)
@@ -772,11 +773,21 @@ void CvodeInterface::AssignPendingEvents(const double& timeEnd, const double& to
     }
 }
 
+vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& handledEvents)
+{
+    return RetestEvents(timeEnd, handledEvents, false);
+}
 ////        List<int> CvodeInterface::RetestEvents(double timeEnd, List<int> handledEvents)
 ////        {
 ////            return RetestEvents(timeEnd, handledEvents, false);
 ////        }
 ////
+
+vector<int> CvodeInterface::RetestEvents(const double& timeEnd, const vector<int>& handledEvents, vector<int>& removeEvents)
+{
+    return RetestEvents(timeEnd, handledEvents, false, removeEvents);
+}
+
 ////        List<int> CvodeInterface::RetestEvents(double timeEnd, List<int> handledEvents, out List<int> removeEvents)
 ////        {
 ////            return RetestEvents(timeEnd, handledEvents, false, out removeEvents);
@@ -788,7 +799,7 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& han
     return RetestEvents(timeEnd, handledEvents, assignOldState, removeEvents);
 }
 
-vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents)
+vector<int> CvodeInterface::RetestEvents(const double& timeEnd, const vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents)
 {
     vector<int> result;// = new vector<int>();
 //     vector<int> removeEvents;// = new vector<int>();	//Todo: this code was like this originally.. which removeEvents to use???
@@ -836,7 +847,7 @@ void CvodeInterface::HandleRootsFound(double &timeEnd, const double& tout)
     vector<int> rootsFound(model->getNumEvents());
 
     // Create some space for the CVGetRootInfo call
-	_rootsFound = new int(model->getNumEvents());
+	_rootsFound = new int[model->getNumEvents()];
     CVGetRootInfo(cvodeMem, _rootsFound);	//This is a DLL Call.. Todo: implement..
     CopyCArrayToStdVector(_rootsFound, rootsFound, model->getNumEvents());
     delete [] _rootsFound;
@@ -897,6 +908,127 @@ void CvodeInterface::SortEventsByPriority(vector<int>& firedEvents)
     }
 }
 
+////        private void HandleRootsForTime(double timeEnd, int[] rootsFound)
+////        {
+////            AssignResultsToModel();
+////            model.convertToConcentrations();
+////            model.updateDependentSpeciesValues(model.y);
+////
+////            model.evalEvents(timeEnd, BuildEvalArgument());
+////
+////
+////            var firedEvents = new List<int>();
+////            var preComputedAssignments = new Dictionary<int, double[]>();
+////
+////
+////            for (int i = 0; i < model.getNumEvents; i++)
+////            {
+////                // We only fire an event if we transition from false to true
+////                if (rootsFound[i] == 1)
+////                {
+////                    if (model.eventStatusArray[i])
+////                    {
+////                        firedEvents.Add(i);
+////                        if (model.eventType[i])
+////                            preComputedAssignments[i] = model.computeEventAssignments[i]();
+////                    }
+////                }
+////                else
+////                {
+////                    // if the trigger condition is not supposed to be persistent, remove the event from the firedEvents list;
+////                    if (!model.eventPersistentType[i])
+////                    {
+////                        RemovePendingAssignmentForIndex(i);
+////                    }
+////                }
+////            }
+////            var handled = new List<int>();
+////            while (firedEvents.Count > 0)
+////            {
+////                SortEventsByPriority(firedEvents);
+////                // Call event assignment if the eventstatus flag for the particular event is false
+////                for (int i = 0; i < firedEvents.Count; i++)
+////                {
+////                    var currentEvent = firedEvents[i];
+////                    // We only fire an event if we transition from false to true
+////
+////                    model.previousEventStatusArray[currentEvent] = model.eventStatusArray[currentEvent];
+////                    double eventDelay = model.eventDelay[currentEvent]();
+////                    if (eventDelay == 0)
+////                    {
+////                        if (model.eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
+////                            model.performEventAssignments[currentEvent](preComputedAssignments[currentEvent]);
+////                        else
+////                            model.eventAssignments[currentEvent]();
+////
+////                        handled.Add(currentEvent);
+////                        List<int> removeEvents;
+////                        var additionalEvents = RetestEvents(timeEnd, handled, out removeEvents);
+////                        firedEvents.AddRange(additionalEvents);
+////
+////                        foreach (var newEvent in additionalEvents)
+////                        {
+////                            if (model.eventType[newEvent])
+////                                preComputedAssignments[newEvent] = model.computeEventAssignments[newEvent]();
+////                        }
+////
+////                        model.eventStatusArray[currentEvent] = false;
+////                        firedEvents.RemoveAt(i);
+////
+////                        foreach (var item in removeEvents)
+////                        {
+////                            if (firedEvents.Contains(item))
+////                            {
+////                                firedEvents.Remove(item);
+////                                RemovePendingAssignmentForIndex(item);
+////                            }
+////                        }
+////
+////                        break;
+////                    }
+////                    else
+////                    {
+////                        if (!assignmentTimes.Contains(timeEnd + eventDelay))
+////                            assignmentTimes.Add(timeEnd + eventDelay);
+////
+////
+////                        var pending = new PendingAssignment(
+////                                                                    timeEnd + eventDelay,
+////                                                                    model.computeEventAssignments[currentEvent],
+////                                                                    model.performEventAssignments[currentEvent],
+////                                                                    model.eventType[currentEvent], currentEvent);
+////
+////                        if (model.eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
+////                            pending.ComputedValues = preComputedAssignments[currentEvent];
+////
+////                        assignments.Add(pending);
+////                        model.eventStatusArray[currentEvent] = false;
+////                        firedEvents.RemoveAt(i);
+////                        break;
+////                    }
+////
+////#if (PRINT_DEBUG)
+////		                    System.Diagnostics.Debug.WriteLine("time: " + model.time.ToString("F4") + " Event " + (i + 1).ToString());
+////#endif
+////                }
+////            }
+////
+////            if (!RoadRunner._bConservedTotalChanged) model.computeConservedTotals();
+////            model.convertToAmounts();
+////
+////
+////            model.evalModel(timeEnd, BuildEvalArgument());
+////            double[] dCurrentValues = model.GetCurrentValues();
+////            for (int k = 0; k < numAdditionalRules; k++)
+////                Cvode_SetVector(_amounts, k, dCurrentValues[k]);
+////
+////            for (int k = 0; k < numIndependentVariables; k++)
+////                Cvode_SetVector(_amounts, k + numAdditionalRules, model.amounts[k]);
+////
+////            CVReInit(cvodeMem, timeEnd, _amounts, relTol, abstolArray);
+////            assignmentTimes.Sort();
+////        }
+////
 
 void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound)
 {
@@ -949,29 +1081,34 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
             double eventDelay = model->eventDelays[currentEvent]();
             if (eventDelay == 0)
             {
-//                if (model->eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
-//                {
-//                    model->performEventAssignments[currentEvent](preComputedAssignments[currentEvent]);
-//                }
-//                else
-//                {
-                    model->eventAssignments[currentEvent]();
-//                }
 
-				//handled.Add(currentEvent);
-                //vecor<int> removeEvents;
-//                var additionalEvents = RetestEvents(timeEnd, handled, out removeEvents);
+                if (model->eventType[currentEvent] && preComputedAssignments.count(currentEvent) > 0)
+                {
+                    model->performEventAssignments[currentEvent](preComputedAssignments[currentEvent]);
+                }
+                else
+                {
+                    model->eventAssignments[currentEvent]();
+                }
+
+				handled.push_back(currentEvent);
+                vector<int> removeEvents;
+                vector<int> additionalEvents = RetestEvents(timeEnd, handled, removeEvents);
 //                firedEvents.AddRange(additionalEvents);
-//
-//                foreach (var newEvent in additionalEvents)
-//                {
-//                    if (model->eventType[newEvent])
-//                        preComputedAssignments[newEvent] = model->computeEventAssignments[newEvent]();
-//                }
-//
-//                model->eventStatusArray[currentEvent] = false;
+				std::copy (additionalEvents.begin(), additionalEvents.end(), firedEvents.end());
+
+				for (int i = 0; i < additionalEvents.size(); i++)
+                {
+                    int newEvent = additionalEvents[i];
+                    if (model->eventType[newEvent])
+                    {
+                        preComputedAssignments[newEvent] = model->computeEventAssignments[newEvent]();
+                    }
+                }
+
+                model->eventStatusArray[currentEvent] = false;
                 firedEvents.erase(firedEvents.begin() + i);
-//
+
 //                foreach (var item in removeEvents)
 //                {
 //                    if (firedEvents.Contains(item))
@@ -980,7 +1117,15 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
 //                        RemovePendingAssignmentForIndex(item);
 //                    }
 //                }
-//
+				for (int i = 0; i < removeEvents.size(); i++)
+                {
+                	int item = removeEvents[i];
+                    if (find(firedEvents.begin(), firedEvents.end(), item) != firedEvents.end())
+                    {
+                    	firedEvents.erase(find(firedEvents.begin(), firedEvents.end(), item));
+                    }
+                }
+
                 break;
             }
             else

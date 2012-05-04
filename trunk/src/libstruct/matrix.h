@@ -8,22 +8,20 @@
 
 namespace LIB_LA
 {
-
-
 	template<typename T> class Matrix;
 
 	struct Complex;
 
 	/*! \class LIB_LA::Matrix
 		\brief LIB_LA::Matrix is the matrix class used by LIB_LA::LibLA and LIB_STRUTURAL::LibStructural
-			
+
 		This class implements a template to hold real, LIB_LA::Complex and integer matrices. It also implements basic
 		operations on matrices.
 	*/
 	template <class T> class Matrix
 	{
-	public: 
-		/*! \brief the element type for this matrix, will be real, LIB_LA::Complex or integer. 
+	public:
+		/*! \brief the element type for this matrix, will be real, LIB_LA::Complex or integer.
 		*/
 		typedef T _ElementType;
 	protected:
@@ -34,7 +32,7 @@ namespace LIB_LA
 
 	public:
 		//! Creates a new matrix with the given numbers of rows and columns
-		LIB_EXTERN Matrix(unsigned int rows = 0, unsigned int cols = 0) :
+		/*LIB_EXTERN*/ Matrix(unsigned int rows = 0, unsigned int cols = 0) :
 		  _Rows(rows),
 			  _Cols(cols),
 			  _Array(NULL)
@@ -47,7 +45,7 @@ namespace LIB_LA
 		  }
 
 		  //! Copy constructor
-		  LIB_EXTERN Matrix(const Matrix <T> & src):
+		  /*LIB_EXTERN*/ Matrix(const Matrix <T> & src):
 		  _Rows(src._Rows),
 			  _Cols(src._Cols),
 			  _Array(NULL)
@@ -60,7 +58,7 @@ namespace LIB_LA
 		  }
 	
 		  //! Constructor taking a matrix mapped to a vector and reconstructing the 2D form
-		  LIB_EXTERN Matrix( T* &oRawData, int nRows, int nCols, bool transpose = true) : 
+		  /*LIB_EXTERN*/ Matrix( T* &oRawData, int nRows, int nCols, bool transpose = true) :
 		  _Rows(nRows),
 			  _Cols(nCols),
 			  _Array(NULL)
@@ -96,23 +94,23 @@ namespace LIB_LA
 		  //}
 
 		  //! constructs a matrix from 2D data
-		  LIB_EXTERN Matrix( T** &oRawData, int nRows, int nCols) : _Array(NULL), _Rows(0), _Cols(0)
+		  /*LIB_EXTERN*/ Matrix( T** &oRawData, int nRows, int nCols) : _Array(NULL), _Rows(0), _Cols(0)
 		  {
 			  initializeFrom2DMatrix(oRawData, nRows, nCols);
 		  }
 
 		  //! constructs a matrix from 2D const data
-		  LIB_EXTERN Matrix( const T** oRawData, int nRows, int nCols) : _Array(NULL), _Rows(0), _Cols(0)
+		  /*LIB_EXTERN*/ Matrix( const T** oRawData, int nRows, int nCols) : _Array(NULL), _Rows(0), _Cols(0)
 		  {
 			  initializeFromConst2DMatrix(oRawData, nRows, nCols);
 		  }
 
 
 		  //! returns a pointer to the underlying 1D array
-		  LIB_EXTERN T* getArray() { return _Array; };
+		  /*LIB_EXTERN*/ T* getArray() { return _Array; };
 
 		  //! returns a copy of the data, optionally transposing it
-		  LIB_EXTERN T* getCopy(bool transpose = false) 
+		  /*LIB_EXTERN*/ T* getCopy(bool transpose = false)
 		  {
   				  T* result = new T[_Rows * _Cols];
 				  if (_Rows * _Cols == 0) return result;
@@ -132,12 +130,12 @@ namespace LIB_LA
 		  }
 
 		  //! initializes the matrix from 2D data
-		  LIB_EXTERN void initializeFrom2DMatrix( T** &oRawData, int nRows, int nCols);
+		  /*LIB_EXTERN*/ void initializeFrom2DMatrix( T** &oRawData, int nRows, int nCols);
 		  //! initializes the matrix from 2D const data
-		  LIB_EXTERN void initializeFromConst2DMatrix( const T** oRawData, int nRows, int nCols);
+		  /*LIB_EXTERN*/ void initializeFromConst2DMatrix( const T** oRawData, int nRows, int nCols);
 
 		  //! virtual destructor
-		  LIB_EXTERN virtual ~Matrix()
+		  /*LIB_EXTERN*/ virtual ~Matrix()
 		  {
 			  if (_Array)
 			  {
@@ -147,11 +145,11 @@ namespace LIB_LA
 		  }
 
 		  //! returns a 2D data array
-		  LIB_EXTERN T** get2DMatrix(int &nRows, int &nCols);
+		  /*LIB_EXTERN*/ T** get2DMatrix(int &nRows, int &nCols);
 
 		  //! swaps the given rows
-		  LIB_EXTERN virtual void swapRows(unsigned int row1, unsigned int row2)
-		  {			  
+		  /*LIB_EXTERN*/ virtual void swapRows(unsigned int row1, unsigned int row2)
+		  {
 			  for (unsigned int i = 0; i < _Cols; i++)
 			  {
 				  T tmp = (*this)(row1,i);
@@ -161,7 +159,7 @@ namespace LIB_LA
 		  }
 
 		  //! swaps the given columns
-		  LIB_EXTERN virtual void swapCols(unsigned int col1, unsigned int col2)
+		  /*LIB_EXTERN*/ virtual void swapCols(unsigned int col1, unsigned int col2)
 		  {
 				for (unsigned int i = 0; i < _Rows; i++)
 				{
@@ -172,7 +170,7 @@ namespace LIB_LA
 		  }
 
 		  //! resizes the matrix to the given number of rows and columns
-		  LIB_EXTERN virtual void resize(unsigned int rows, unsigned int cols)
+		  /*LIB_EXTERN*/ virtual void resize(unsigned int rows, unsigned int cols)
 		  {
 			  if (rows * cols != _Rows * _Cols)
 			  {
@@ -190,7 +188,7 @@ namespace LIB_LA
 		  }
 
 		  //! creates a new matrix holding the transpose
-		  LIB_EXTERN virtual Matrix <T> * getTranspose()
+		  /*LIB_EXTERN*/ virtual Matrix <T> * getTranspose()
 		  {
 			  Matrix <T> *oResult = new Matrix <T>(_Cols, _Rows);
 			  for (unsigned int i = 0; i < _Cols; i++)
@@ -205,7 +203,7 @@ namespace LIB_LA
 		  }
 
 		  //! assignment operator
-		  LIB_EXTERN virtual Matrix <T> & operator = (const Matrix <T> & rhs)
+		  /*LIB_EXTERN*/ virtual Matrix <T> & operator = (const Matrix <T> & rhs)
 		  {
 			  if (_Rows != rhs._Rows || _Cols != rhs._Cols)
 				  resize(rhs._Rows, rhs._Cols);
@@ -216,7 +214,7 @@ namespace LIB_LA
 		  }
 
 		  //! scalar assignment operator
-		  LIB_EXTERN virtual Matrix <T> & operator = (const T & value)
+		  /*LIB_EXTERN*/ virtual Matrix <T> & operator = (const T & value)
 		  {
 			  unsigned int i, imax = _Rows * _Cols;
 			  T * tmp = _Array;
@@ -227,44 +225,44 @@ namespace LIB_LA
 		  }
 
 		  //! returns the size of the matrix
-		  LIB_EXTERN virtual unsigned int size() const 
+		  /*LIB_EXTERN*/ virtual unsigned int size() const
 		  {
 			  return _Rows * _Cols;
 		  }
 
 		  //! returns the number of rows
-		  LIB_EXTERN virtual unsigned int numRows() const 
+		  /*LIB_EXTERN*/ virtual unsigned int numRows() const
 		  {
 			  return _Rows;
 		  }
 
 		  //! returns the number of columns
-		  LIB_EXTERN virtual unsigned int numCols() const 
+		  /*LIB_EXTERN*/ virtual unsigned int numCols() const
 		  {
 			  return _Cols;
 		  }
 
 		  //! returns the selected row
-		  LIB_EXTERN virtual inline T * operator[](unsigned int row)
+		  /*LIB_EXTERN*/ virtual inline T * operator[](unsigned int row)
 		  {
 			  return _Array + row * _Cols;
 		  }
 
 		  //! returns the selected row
-		  LIB_EXTERN virtual inline const T * operator[](unsigned int row) const
+		  /*LIB_EXTERN*/ virtual inline const T * operator[](unsigned int row) const
 		  {
 			  return _Array + row * _Cols;
 		  }
 
 		  //! returns the selected matrix element
-		  LIB_EXTERN virtual inline _ElementType & operator()(const unsigned int & row,
+		  /*LIB_EXTERN*/ virtual inline _ElementType & operator()(const unsigned int & row,
 			  const unsigned int & col)
 		  {      
 			  return *(_Array + row * _Cols + col);
 		  }
 
 		  //! returns the selected matrix element (const)
-		  LIB_EXTERN virtual inline const _ElementType & operator()(const unsigned int & row,
+		  /*LIB_EXTERN*/ virtual inline const _ElementType & operator()(const unsigned int & row,
 			  const unsigned int & col) const
 		  {      
 			  return *(_Array + row * _Cols + col);
