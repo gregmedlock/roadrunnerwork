@@ -3,6 +3,9 @@
 			<ProjectGuid>{742BE929-0AC6-4052-8CEF-BEA66A5C8BC4}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
+			<Projects Include="..\..\ide_builds\xe\rr_lib\RoadRunner_xe.cbproj">
+				<Dependencies/>
+			</Projects>
 			<Projects Include="..\..\ide_builds\xe\rr_c_lib\rrC_API.cbproj">
 				<Dependencies/>
 			</Projects>
@@ -17,6 +20,15 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
+		<Target Name="RoadRunner_xe">
+			<MSBuild Projects="..\..\ide_builds\xe\rr_lib\RoadRunner_xe.cbproj"/>
+		</Target>
+		<Target Name="RoadRunner_xe:Clean">
+			<MSBuild Projects="..\..\ide_builds\xe\rr_lib\RoadRunner_xe.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="RoadRunner_xe:Make">
+			<MSBuild Projects="..\..\ide_builds\xe\rr_lib\RoadRunner_xe.cbproj" Targets="Make"/>
+		</Target>
 		<Target Name="rrC_API">
 			<MSBuild Projects="..\..\ide_builds\xe\rr_c_lib\rrC_API.cbproj"/>
 		</Target>
@@ -36,13 +48,13 @@
 			<MSBuild Projects="rrTest.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="rrC_API;rrTest"/>
+			<CallTarget Targets="RoadRunner_xe;rrC_API;rrTest"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="rrC_API:Clean;rrTest:Clean"/>
+			<CallTarget Targets="RoadRunner_xe:Clean;rrC_API:Clean;rrTest:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="rrC_API:Make;rrTest:Make"/>
+			<CallTarget Targets="RoadRunner_xe:Make;rrC_API:Make;rrTest:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

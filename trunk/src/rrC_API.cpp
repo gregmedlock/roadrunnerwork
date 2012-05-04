@@ -20,6 +20,7 @@ RR_DECL_SPEC RRHandle getRRInstance()
 RR_DECL_SPEC void deleteRRInstance(RRHandle *handle)
 {
     delete handle;
+    handle = NULL;
 }
 
 char* getCopyright()
