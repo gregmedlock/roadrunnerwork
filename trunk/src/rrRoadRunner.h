@@ -1,10 +1,9 @@
 #ifndef rrRoadRunnerH
 #define rrRoadRunnerH
-#include <string>
 #include <windows.h>
+#include <string>
 #include "rrObject.h"
 #include "rrDoubleMatrix.h"
-//#include "rrIModel.h"
 #include "rrTVariableType.h"
 #include "rrTParameterType.h"
 #include "rrCvodeInterface.h"

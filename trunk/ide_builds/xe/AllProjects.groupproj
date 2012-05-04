@@ -9,6 +9,9 @@
 			<Projects Include="simulate_model\simulate.cbproj">
 				<Dependencies>rr_lib\RoadRunner_xe.cbproj</Dependencies>
 			</Projects>
+			<Projects Include="rr_c_lib\rrc_xe.cbproj">
+				<Dependencies/>
+			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
 			<Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
 		<Target Name="simulate:Make" DependsOnTargets="RoadRunner_xe:Make">
 			<MSBuild Projects="simulate_model\simulate.cbproj" Targets="Make"/>
 		</Target>
+		<Target Name="rrc_xe">
+			<MSBuild Projects="rr_c_lib\rrc_xe.cbproj"/>
+		</Target>
+		<Target Name="rrc_xe:Clean">
+			<MSBuild Projects="rr_c_lib\rrc_xe.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="rrc_xe:Make">
+			<MSBuild Projects="rr_c_lib\rrc_xe.cbproj" Targets="Make"/>
+		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="RoadRunner_xe;simulate"/>
+			<CallTarget Targets="RoadRunner_xe;simulate;rrc_xe"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="RoadRunner_xe:Clean;simulate:Clean"/>
+			<CallTarget Targets="RoadRunner_xe:Clean;simulate:Clean;rrc_xe:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="RoadRunner_xe:Make;simulate:Make"/>
+			<CallTarget Targets="RoadRunner_xe:Make;simulate:Make;rrc_xe:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>
