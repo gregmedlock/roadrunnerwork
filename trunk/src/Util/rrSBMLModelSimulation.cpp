@@ -232,7 +232,7 @@ bool SBMLModelSimulation::CreateErrorData()
     {
     	for(int col = 0; col < mResultData.GetNrOfCols(); col++)
         {
-			double error = fabs(mResultData(row, col) - mReferenceData(row,col));
+			double error = fabsl(mResultData(row, col) - mReferenceData(row,col));
             mErrorData(row, col) = error;
 
             if(error > mSimulationError)
@@ -346,6 +346,27 @@ bool SBMLModelSimulation::LoadSBMLFromFile()					//Use current file information 
     }
     bool val = mEngine->LoadSBMLFromFile(GetModelsFullFilePath());
     return val;
+}
+
+bool SBMLModelSimulation::SaveModelAsXML(const string& folder)
+{
+	if(!mEngine)
+    {
+    	return false;
+    }
+    string fName = JoinPath(folder, mModelFileName);
+    fName = ChangeFileExtensionTo(fName, "xml");
+
+    fstream fs(fName.c_str(), fstream::out);
+
+    if(!fs)
+    {
+    	Log(lError)<<"Failed writing sbml to file "<< fName;
+        return false;
+    }
+    fs<<mEngine->getSBML();
+    fs.close();
+	return true;
 }
 
 bool SBMLModelSimulation::CreateModel()

@@ -17,14 +17,14 @@ echo "" > $failed
 excludeTest="1 2 3"
 
 #Remove previous data files
-#find $dataFolder -name '*l2v4.csv' -exec rm -fv {} \;
+find $dataFolder -name '*l2v4.csv' -exec rm -fv {} \;
 
 for ((i=$start; i<=$end; i++ )); 
 do 
 	echo "Running $i" ; 
 	echo $i >> $logFile; 
 #	$simulator -n$i -v3 >> $logFile &
-	$simulator -n$i -v >> $logFile 
+	$simulator -n$i -v0 >> $logFile 
 	echo "Next" >> $logFile;
 #    sleep .15
 done

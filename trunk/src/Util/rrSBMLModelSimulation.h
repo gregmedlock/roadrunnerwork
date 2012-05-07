@@ -56,6 +56,7 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
         void					CompileIfDllExists(const bool& doIt){mCompileIfDllExists = doIt;}
         bool					CompileIfDllExists(){return mCompileIfDllExists;}
 		double					GetSimulationError();
+        bool					SaveModelAsXML(const string& folder);
 
 };
 

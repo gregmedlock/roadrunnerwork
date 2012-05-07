@@ -64,14 +64,13 @@ int main(int argc, char * argv[])
 		}
 	}
     LogOutput::mLogToConsole = true;
-    gLog.SetCutOffLogLevel(IntToLogLevel(paras.VerboseMode));
+    gLog.SetCutOffLogLevel(IntToLogLevel(paras.VerboseMode) -2 );
 
     string dataOutputFolder("C:\\DataOutput");
     string dummy;
     string logFileName;
 
     CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
-//    gLog.SetCutOffLogLevel(lDebug3);
     RoadRunner *rr = NULL;
     try
     {
@@ -182,6 +181,7 @@ int main(int argc, char * argv[])
         }
 
         simulation.SaveAllData();
+        simulation.SaveModelAsXML(dataOutputFolder);
 
     }
 	catch(Exception& ex)

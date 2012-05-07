@@ -689,7 +689,7 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
             }
 
 			//RR_DECLSPEC int  		Run_Cvode (void *cvode_mem, double tout, N_Vector y, double *t, char *ErrMsg);
-            
+
 			int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  _amounts, &timeEnd);//, err); // t = double *
 
             if (nResult == CV_ROOT_RETURN && followEvents)
@@ -777,22 +777,12 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& han
 {
     return RetestEvents(timeEnd, handledEvents, false);
 }
-////        List<int> CvodeInterface::RetestEvents(double timeEnd, List<int> handledEvents)
-////        {
-////            return RetestEvents(timeEnd, handledEvents, false);
-////        }
-////
 
 vector<int> CvodeInterface::RetestEvents(const double& timeEnd, const vector<int>& handledEvents, vector<int>& removeEvents)
 {
     return RetestEvents(timeEnd, handledEvents, false, removeEvents);
 }
 
-////        List<int> CvodeInterface::RetestEvents(double timeEnd, List<int> handledEvents, out List<int> removeEvents)
-////        {
-////            return RetestEvents(timeEnd, handledEvents, false, out removeEvents);
-////        }
-////
 vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& handledEvents, const bool& assignOldState)
 {
     vector<int> removeEvents;
@@ -820,7 +810,6 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, const vector<int
 
 	for (int i = 0; i < model->getNumEvents(); i++)
 	{
-//        if (model->eventStatusArray[i] == true && oldState->mEventStatusArray[i] == false && !handledEvents.Contains(i))
 		bool containsI = (std::find(handledEvents.begin(), handledEvents.end(), i) != handledEvents.end()) ? true : false;
 		if (model->eventStatusArray[i] == true && oldState->mEventStatusArray[i] == false && !containsI)
 		{
@@ -876,7 +865,6 @@ void CvodeInterface::RemovePendingAssignmentForIndex(const int& eventIndex)
     {
         if (assignments[j].GetIndex() == eventIndex)
         {
-            //assignments.RemoveAt(j);
 			assignments.erase(assignments.begin() + j);
         }
     }
@@ -1035,14 +1023,11 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
     AssignResultsToModel();
     model->convertToConcentrations();
     model->updateDependentSpeciesValues(model->y);
-
     vector<double> args = BuildEvalArgument();
     model->evalEvents(timeEnd, args);
 
-
     vector<int> firedEvents;
-    map<int, double* > preComputedAssignments;// = new Dictionary<int, double[]>();
-
+    map<int, double* > preComputedAssignments;
 
     for (int i = 0; i < model->getNumEvents(); i++)
     {
@@ -1094,7 +1079,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
 				handled.push_back(currentEvent);
                 vector<int> removeEvents;
                 vector<int> additionalEvents = RetestEvents(timeEnd, handled, removeEvents);
-//                firedEvents.AddRange(additionalEvents);
+
 				std::copy (additionalEvents.begin(), additionalEvents.end(), firedEvents.end());
 
 				for (int i = 0; i < additionalEvents.size(); i++)
@@ -1109,14 +1094,6 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
                 model->eventStatusArray[currentEvent] = false;
                 firedEvents.erase(firedEvents.begin() + i);
 
-//                foreach (var item in removeEvents)
-//                {
-//                    if (firedEvents.Contains(item))
-//                    {
-//                        firedEvents.Remove(item);
-//                        RemovePendingAssignmentForIndex(item);
-//                    }
-//                }
 				for (int i = 0; i < removeEvents.size(); i++)
                 {
                 	int item = removeEvents[i];
@@ -1130,10 +1107,13 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
             }
             else
             {
-            //Todo: enable this...
-//                if (!assignmentTimes.Contains(timeEnd + eventDelay))
-//                    assignmentTimes.Add(timeEnd + eventDelay);
-//
+            	//Todo: enable this...
+            	//Contains(timeEnd + eventDelay)
+                if (find(assignmentTimes.begin(), assignmentTimes.end(), timeEnd + eventDelay) != assignmentTimes.end())
+                {
+                    assignmentTimes.push_back(timeEnd + eventDelay);
+                }
+
 //
 //                var pending = new PendingAssignment(
 //                                                            timeEnd + eventDelay,
@@ -1170,14 +1150,13 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
         Cvode_SetVector((N_Vector) _amounts, k, dCurrentValues[k]);
     }
 
-	//Todo: enable this
     for (int k = 0; k < numIndependentVariables; k++)
     {
         Cvode_SetVector((N_Vector) _amounts, k + numAdditionalRules, model->amounts[k]);
     }
 
     CVReInit(cvodeMem, timeEnd, _amounts, relTol, abstolArray);
-//    assignmentTimes.Sort();	//Todo: enable sorting. somehow
+	sort(assignmentTimes.begin(), assignmentTimes.end());
 }
 
 
@@ -1222,7 +1201,6 @@ void CvodeInterface::AssignNewVector(ModelFromC *oModel, bool bAssignNewToleranc
     {
         if (oModel->GetAmounts(i) > 0 && oModel->GetAmounts(i)/1000.0 < dMin)	//Todo: was calling oModel->amounts[i]  is this in fact GetAmountsForSpeciesNr(i) ??
         {
-//        	dMin = oModel->amounts[i]/1000.0;
         	dMin = oModel->amounts[i]/1000.0;
         }
     }
@@ -1259,7 +1237,6 @@ void CvodeInterface::AssignNewVector(ModelFromC *oModel, bool bAssignNewToleranc
         Log(lDebug1)<<"Set tolerance to: "<<setprecision(16)<< dMin;
 	}
 }
-
 
 void CvodeInterface::AssignNewVector(ModelFromC *model)
 {

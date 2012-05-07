@@ -4031,10 +4031,10 @@ StringList RoadRunner::getFloatingSpeciesNames()
 //    //        }
 //    //    }
 //        Help("Returns the initially loaded model as SBML")
-//        string RoadRunner::getSBML()
-//        {
-//            return mCurrentSBML;
-//        }
+string RoadRunner::getSBML()
+{
+    return mCurrentSBML;
+}
 //
 //        Help("get the currently set time start")
 //        double RoadRunner::getmTimeStart()

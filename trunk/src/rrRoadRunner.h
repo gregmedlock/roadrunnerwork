@@ -160,9 +160,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double*                  		mN;
         double*                  		mNr;
         bool 							modelLoaded;
-
         string 							mCurrentSBML;
-	    //IModel*							mModel;
 		ModelFromC*	   					mModel;
         double                         	mTimeStart;
         double                         	mTimeEnd;

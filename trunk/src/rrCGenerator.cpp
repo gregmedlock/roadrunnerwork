@@ -419,13 +419,13 @@ void CGenerator::WriteComputeConservedTotals(CodeBuilder& ignore, const int& num
                         // TODO: fix this
                         factor = "";
                     }
-                    else if (fabs(current) == 1.0)
+                    else if (fabsl(current) == 1.0)
                     {
                         factor = "";
                     }
                     else
                     {
-                        factor = WriteDouble(fabs(current)) +
+                        factor = WriteDouble(fabsl(current)) +
                                  STR_FixAmountCompartments;
                     }
 
@@ -517,7 +517,7 @@ void CGenerator::WriteUpdateDependentSpecies(CodeBuilder& ignore, const int& num
                         {
                             mSource<<Format("{0} - (double){1}{2}{3}{2}{4}",
                                 "",
-                                WriteDouble(fabs(L0(i,j))),
+                                WriteDouble(fabsl(L0(i,j))),
                                 STR_FixAmountCompartments,
                                 yName,
                                 cName);
@@ -1192,7 +1192,7 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
     mHeader.AddFunctionExport("void", "evalEvents(double timeIn, double oAmounts[])");
     mSource<<Append("void evalEvents(double timeIn, double oAmounts[])" + NL());
     mSource<<Append("{" + NL());
-    mSource<<Append("\tprintf(\"In Eval events\");\n\n");
+    mSource<<Append("\tprintf(\"In Eval events\\n\");\n\n");
 
     if (numEvents > 0)
     {
@@ -1219,11 +1219,11 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
 
         eventString = substituteTerms(0, "", eventString);
         eventString = ReplaceWord("time", "mTime", eventString);
-        mSource<<"\t\t_previousEventStatusArray[" << i << "] = mEventStatusArray[" << i << "];" << NL();
-        mSource<<Append("\t\tif (" + eventString + " == 1.0) {" + NL());
+        mSource<<"\t_previousEventStatusArray[" << i << "] = mEventStatusArray[" << i << "];" << NL();
+        mSource<<Append("\tif (" + eventString + " == 1.0) {" + NL());
         mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = true;" + NL());
         mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = 1;" + NL());
-        mSource<<Append("\t\t} else {" + NL());
+        mSource<<Append("\n\t} else {" + NL());
         mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = false;" + NL());
         mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = -1;" + NL());
         mSource<<Append("\t\t}" + NL());
