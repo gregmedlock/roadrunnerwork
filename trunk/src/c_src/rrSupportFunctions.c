@@ -28,7 +28,8 @@ double spf_gt(double a, double b)
 
 double spf_lt(double a, double b)
 {
-    return (a < b ? 1.0 : 0.0);
+	printf("in %f less than %f", a, b);
+    return (a <= b ? 1.0 : 0.0);
 }
 
 double spf_geq(double a, double b)
