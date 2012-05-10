@@ -38,7 +38,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\..\src\LibStructSupport\;..\..\..\src\ModelGeneration\;..\..\..\src\;..\..\..\src\Util\;..\..\..\src\Logger\;..\..\..\src\libstruct\;..\..\..\src\Util\mtrand\;..\..\..\src\Solvers\;..\..\..\src\Scanner\;..\..\..\installs\xe\include\sbml;..\..\..\installs\xe\include;..\..\..\installs\xe\include\cvode;..\..\..\installs\xe\include\nvector;C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\src\LibStructSupport\;..\..\..\installs\xe\lib\;..\..\..\src\ModelGeneration\;..\..\..\src\;..\..\..\src\Util\;..\..\..\src\Logger\;..\..\..\src\libstruct\;..\..\..\src\Util\mtrand\;..\..\..\src\Solvers\;..\..\..\src\Scanner\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\..\src\LibStructSupport\;..\..\..\installs\xe\lib\;..\..\..\src\ModelGeneration\;..\..\..\src\;..\..\..\src\Util\;..\..\..\src\Logger\;..\..\..\src\libstruct\;..\..\..\src\Util\mtrand\;..\..\..\src\Solvers\;..\..\..\src\Scanner\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -94,9 +94,9 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>66</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="..\..\..\installs\xe\lib\libsbml.lib">
+			<LibFiles Include="..\..\..\installs\xe\lib\libsbml-static.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>66</BuildOrder>
+				<BuildOrder>68</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="..\..\..\installs\xe\lib\sundials_cvode.lib">
 				<IgnorePath>true</IgnorePath>
@@ -342,6 +342,10 @@
 				<DependentOn>..\..\..\src\Util\rrUtils.h</DependentOn>
 				<BuildOrder>45</BuildOrder>
 			</CppCompile>
+			<LibFiles Include="..\..\..\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>69</BuildOrder>
+			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

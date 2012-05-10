@@ -22,6 +22,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<BPILibOutputDir>..\..\..\installs\xe\lib\</BPILibOutputDir>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<Defines>EXPORT_RR;$(Defines)</Defines>
 			<OutputExt>dll</OutputExt>
@@ -88,6 +89,9 @@
 		</ItemGroup>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+		<PropertyGroup Condition="'$(FileToCompile)'==''">
+			<PostBuildEvent><![CDATA[copy ..\..\..\src\rrC_API.h ..\..\..\installs\xe\include\]]></PostBuildEvent>
+		</PropertyGroup>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
 			<Borland.ProjectType>CppDynamicLibrary</Borland.ProjectType>

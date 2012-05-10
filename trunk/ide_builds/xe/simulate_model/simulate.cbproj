@@ -149,7 +149,7 @@
 						<Parameters Name="RunParams">-n41 -v4</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-n172 -v0</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-n173 -v7</Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

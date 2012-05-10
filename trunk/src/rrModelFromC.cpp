@@ -155,8 +155,8 @@ bool ModelFromC::SetupDLLFunctions()
 	cevalEvents							= (c_void_double_doubleStar)    GetFunctionPtr("evalEvents");
 	cupdateDependentSpeciesValues	    = (c_void_doubleStar)			GetFunctionPtr("updateDependentSpeciesValues");
 	ccomputeAllRatesOfChange   			= (c_void)						GetFunctionPtr("computeAllRatesOfChange");
-	cAssignRates_a 						= (c_void)						GetFunctionPtr("AssignRates");
-	cAssignRates_b 						= (c_void_doubleStar)			GetFunctionPtr("AssignRates");
+	cAssignRates_a 						= (c_void)						GetFunctionPtr("AssignRatesA");
+	cAssignRates_b 						= (c_void_doubleStar)			GetFunctionPtr("AssignRatesB");
 	ctestConstraints 	   				= (c_void)						GetFunctionPtr("testConstraints");
 	cresetEvents	 	   				= (c_void)						GetFunctionPtr("resetEvents");
 	cInitializeRateRuleSymbols			= (c_void)						GetFunctionPtr("InitializeRateRuleSymbols");
@@ -418,39 +418,39 @@ bool ModelFromC::SetupDLLData()
     }
 
     //Event function pointer stuff
-    c_TEventAssignmentDelegateStar 	GetEventAssignments;
-    GetEventAssignments  = (c_TEventAssignmentDelegateStar) GetProcAddress((HMODULE) mDLLHandle, "Get_eventAssignments");
-    if(!GetEventAssignments)
+    c_TEventAssignmentDelegateStar 	Get_eventAssignments;
+    Get_eventAssignments  = (c_TEventAssignmentDelegateStar) GetProcAddress((HMODULE) mDLLHandle, "Get_eventAssignments");
+    if(!Get_eventAssignments)
     {
-		Log(lError)<<"Failed to assign to GetEventAssignments";
+		Log(lError)<<"Failed to assign to Get_eventAssignments";
         eventAssignments = NULL;
     }
     else
     {
-    	eventAssignments = GetEventAssignments();
+    	eventAssignments = Get_eventAssignments();
     }
 
-    c_TComputeEventAssignmentDelegateStar 	GetComputeEventAssignments;
-    GetComputeEventAssignments	  = (c_TComputeEventAssignmentDelegateStar) GetProcAddress((HMODULE) mDLLHandle, "Get_computeEventAssignments");
-    if(!GetComputeEventAssignments)
+    c_TComputeEventAssignmentDelegateStar 	Get_computeEventAssignments;
+    Get_computeEventAssignments	  = (c_TComputeEventAssignmentDelegateStar) GetProcAddress((HMODULE) mDLLHandle, "Get_computeEventAssignments");
+    if(!Get_computeEventAssignments)
     {
 		Log(lError)<<"Failed to assign to Get_computeEventAssignments";
     }
     else
     {
-    	computeEventAssignments = GetComputeEventAssignments();
+    	computeEventAssignments = Get_computeEventAssignments();
     }
 
-    c_TPerformEventAssignmentDelegateStar 	GetPerformEventAssignments;
-    GetPerformEventAssignments  = (c_TPerformEventAssignmentDelegateStar) GetProcAddress((HMODULE) mDLLHandle, "Get_performEventAssignments");
-    if(!GetPerformEventAssignments)
+    c_TPerformEventAssignmentDelegateStar 	Get_performEventAssignments;
+    Get_performEventAssignments  = (c_TPerformEventAssignmentDelegateStar) GetProcAddress((HMODULE) mDLLHandle, "Get_performEventAssignments");
+    if(!Get_performEventAssignments)
     {
-		Log(lError)<<"Failed to assign to GetPerformEventAssignments";
+		Log(lError)<<"Failed to assign to Get_performEventAssignments";
         performEventAssignments = NULL;
     }
     else
     {
-    	performEventAssignments = GetPerformEventAssignments();
+    	performEventAssignments = Get_performEventAssignments();
     }
 
 

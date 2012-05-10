@@ -26,7 +26,7 @@ mCallingConvention(call_conv)
 void CodeBuilder::FormatVariable(const string& type, const string& varName, const string& comment)
 {
 
-    mStringing<<"\t"<<left<<setw(mSizeOfVarField1)<<type	<<varName<< 	setw(mSizeOfVarField2)<<";";
+    mStringing<<left<<setw(mSizeOfVarField1)<<type	<<varName<< 	setw(mSizeOfVarField2)<<";";
     if(comment.size())
     {
     	mStringing<<"//"<<comment;
@@ -52,11 +52,11 @@ void CodeBuilder::FormatArray(const string& type, const string& varName, const i
     if(arraySize == 0)
     {
         //an array of zero length is undefined.. don't put it in the header..
-        mStringing<<"\t//The array size for the follwoing variable was generated as 0. We put 1, to make it legal code.\n";
+        mStringing<<"\n//The array size for the follwoing variable was generated as 0. We put 1, to make it legal code.\n";
      	arraySize = 1;
     }
 	string field2(varName +"["+ rr::ToString(arraySize)+"];");
-    mStringing<<"\t"<<left<<setw(mSizeOfVarField1)<<type	<< setw(mSizeOfVarField2)<<field2;
+    mStringing<<left<<setw(mSizeOfVarField1)<<type	<< setw(mSizeOfVarField2)<<field2;
     if(comment.size())
     {
     	mStringing<<left<<setw(mSizeOfVarField3)<<"//" + comment;
@@ -68,7 +68,7 @@ void CodeBuilder::FormatArray(const string& type, const string& varName, const i
     {
         arraySize = 0;
     }
-    mStringing<<"\t"<<left<<setw(mSizeOfVarField1)<<"const int"	<< setw(mSizeOfVarField2)<<varName + "Size=" + rr::ToString(arraySize) + ";";
+    mStringing<<left<<setw(mSizeOfVarField1)<<"D_S const int"	<< setw(mSizeOfVarField2)<<varName + "Size=" + rr::ToString(arraySize) + ";";
    	mStringing<<endl;
 }
 

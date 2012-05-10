@@ -4,11 +4,11 @@
 #include "rrRoadRunner.h"
 #include "rrC_API.h"
 //---------------------------------------------------------------------------
-//#pragma package(smart_init)
+
 
 rr::RoadRunner *gRRHandle = NULL;
 
-RR_DECL_SPEC RRHandle getRRInstance()
+RRHandle getRRInstance()
 {
 	if(!gRRHandle)
     {
@@ -17,7 +17,7 @@ RR_DECL_SPEC RRHandle getRRInstance()
     return gRRHandle;
 }
 
-RR_DECL_SPEC void deleteRRInstance(RRHandle *handle)
+void deleteRRInstance(RRHandle *handle)
 {
     delete handle;
     handle = NULL;
@@ -38,8 +38,36 @@ char* getCopyright()
 }
 
 
+bool loadSBML(const char* filePath);
+bool setTimeStart(double timeStart);
+bool setTimeEnd(double timeEnd);
+bool setNumPoints(int nrPoints);
+RRResultHandle simulate(void);
+bool FreeRRResult(RRResultHandle rrResult);
+bool  setSelectionList(const char* list);
+char* getReactionNames(void);
+double getValue(void);
+bool setValue(double val);
 
-//---------------------------------------------------------------------------
+RRDataMatrixHandle getStoichiometryMatrix(void)
+{
+
+	RRDataMatrixHandle matrix;
+    matrix->mNrOfRows = 1;
+	matrix->mNrOfCols = 10;
+	matrix->mData = (double*) malloc(sizeof(double)*100);
+    return matrix;
+}
+
+bool FreeRRDataMatrixHandle(RRDataMatrixHandle matrix)
+{
+	free(matrix->mData);
+}
+
+
+
+
+//---------------------------------------------------------------------------
 //   Important note about DLL memory management when your DLL uses the
 //   static version of the RunTime Library:
 //

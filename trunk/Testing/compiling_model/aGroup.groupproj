@@ -3,11 +3,8 @@
 			<ProjectGuid>{AA027461-2698-4050-8A05-5FF3D88F36EE}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
-			<Projects Include="..\..\xe_lib_projects\RoadRunner_xe.cbproj">
-				<Dependencies/>
-			</Projects>
 			<Projects Include="compilingModel.cbproj">
-				<Dependencies>..\..\xe_lib_projects\RoadRunner_xe.cbproj</Dependencies>
+				<Dependencies/>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -17,32 +14,23 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
-		<Target Name="RoadRunner_xe">
-			<MSBuild Projects="..\..\xe_lib_projects\RoadRunner_xe.cbproj"/>
-		</Target>
-		<Target Name="RoadRunner_xe:Clean">
-			<MSBuild Projects="..\..\xe_lib_projects\RoadRunner_xe.cbproj" Targets="Clean"/>
-		</Target>
-		<Target Name="RoadRunner_xe:Make">
-			<MSBuild Projects="..\..\xe_lib_projects\RoadRunner_xe.cbproj" Targets="Make"/>
-		</Target>
-		<Target Name="compilingModel" DependsOnTargets="RoadRunner_xe">
+		<Target Name="compilingModel">
 			<MSBuild Projects="compilingModel.cbproj"/>
 		</Target>
-		<Target Name="compilingModel:Clean" DependsOnTargets="RoadRunner_xe:Clean">
+		<Target Name="compilingModel:Clean">
 			<MSBuild Projects="compilingModel.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="compilingModel:Make" DependsOnTargets="RoadRunner_xe:Make">
+		<Target Name="compilingModel:Make">
 			<MSBuild Projects="compilingModel.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="RoadRunner_xe;compilingModel"/>
+			<CallTarget Targets="compilingModel"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="RoadRunner_xe:Clean;compilingModel:Clean"/>
+			<CallTarget Targets="compilingModel:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="RoadRunner_xe:Make;compilingModel:Make"/>
+			<CallTarget Targets="compilingModel:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

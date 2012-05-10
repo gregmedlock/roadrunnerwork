@@ -66,12 +66,36 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
     	exeCmd<<" -vvv";
     }
 
+
+    if(gLog.GetLogLevel() == lDebug1)
+    {
+    	exeCmd<<" -v";
+    }
+
+    if(gLog.GetLogLevel() == lDebug2)
+    {
+    	exeCmd<<" -vv";
+    }
+
+    if(gLog.GetLogLevel() == lDebug3)
+    {
+    	exeCmd<<" -vvv";
+    }
+
+
     exeCmd<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL " \
+	<<" -DDEBUG_SPF " \
     <<"-Ic:\\rrw\\src\\c_src " \
     <<"-Lc:\\rrw\\src\\c_src";
 
-    Log(lDebug3)<<"Compiling model..";
-    Log(lDebug5)<<"\nExecuting: "<<exeCmd.str();
+
+//    exeCmd<<"bcc32 -WD ";
+//   	exeCmd<<" -e"<<mDLLFileName<<" -vu +c:\\rrw\\src\\c_src\\bcc.cfg " \
+//    <<sourceFileName \
+//    <<" c:\\rrw\\src\\c_src\\rrSupportFunctions.c";
+
+    Log(lDebug2)<<"Compiling model..";
+    Log(lDebug3)<<"\nExecuting: "<<exeCmd.str();
 
     if(!CreateDLL(exeCmd.str()))
     {
