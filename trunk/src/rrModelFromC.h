@@ -2,7 +2,6 @@
 #define rrModelFromCH
 #include <windows.h>
 #include <list>
-//#include "rrIModel.h"
 #include "rrTEventDelayDelegate.h"
 #include "rrTEventAssignmentDelegate.h"
 #include "rrTComputeEventAssignmentDelegate.h"

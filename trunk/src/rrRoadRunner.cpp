@@ -387,7 +387,6 @@ bool RoadRunner::Simulate()
 {
 	ComputeAndAssignConservationLaws(false);
 
-
     if(!mModel)
     {
     	Log(lError)<<"No model is loaded, can't simulate..";

@@ -1218,9 +1218,11 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
         eventString = ReplaceWord("time", "mTime", eventString);
         mSource<<"\t_previousEventStatusArray[" << i << "] = mEventStatusArray[" << i << "];" << NL();
         mSource<<Append("\tif (" + eventString + " == 1.0) {" + NL());
+        mSource<<Append("\t printf(\"Time for lt true: %f\n\", timeIn);\n");
         mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = true;" + NL());
         mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = 1;" + NL());
         mSource<<Append("\n\t} else {" + NL());
+         mSource<<Append("\t printf(\"Time for lt false: %f\n\", timeIn);\n");
         mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = false;" + NL());
         mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = -1;" + NL());
         mSource<<Append("\t\t}" + NL());

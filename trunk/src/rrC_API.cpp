@@ -32,11 +32,12 @@ char* getCopyright()
 {
     if(!gRRHandle)
     {
-        return "Please allocate a handle to roadrunner API before calling API functions";
+        return "Please allocate a handle to roadrunner API before calling any API function";
     }
     else
     {
         char* text = new char(512);
+
         strcpy(text, gRRHandle->getCopyright().c_str());
         return text;
     }
