@@ -19,22 +19,36 @@ type
     LoadDLL: TAction;
     UnloadDLL: TAction;
     SelectDLLA: TAction;
-    ListBox1: TListBox;
+    FunctionList: TListBox;
     FileOpen1: TFileOpen;
+    Button4: TButton;
+    LoadFunctionsA: TAction;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    Button5: TButton;
+    APIFuncs: TActionList;
+    CharStarVoidA: TAction;
     procedure FileOpen1Accept(Sender: TObject);
     procedure FileOpen1BeforeExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure LoadDLLExecute(Sender: TObject);
+    procedure ActionList1Update(Action: TBasicAction; var Handled: Boolean);
+    procedure LoadFunctionsAExecute(Sender: TObject);
+    procedure UnloadDLLExecute(Sender: TObject);
+    procedure FunctionListClick(Sender: TObject);
+    procedure CharStarVoidAExecute(Sender: TObject);
+    procedure APIFuncsUpdate(Action: TBasicAction; var Handled: Boolean);
   private
     { Private declarations }
     procedure CheckDLL(fName: string);
   public
     { Public declarations }
   end;
-//    function GetCopyright(): PChar; stdcall;
 var
-  Form1: TForm1;
+    Form1: TForm1;
+    mIsLoaded: BOOL;
+    dllHandle: THandle;
 
 implementation
 
@@ -42,14 +56,13 @@ implementation
 const DLLName = 'rrC_API.dll';
 
 type
-TCharFunc = function: PChar; stdcall;
-TIntFunc = function: Integer; stdcall;
+TCharVoidFunc   = function: PAnsiChar; stdcall;
+TIntVoidFunc    = function: Integer; stdcall;
 
 procedure TForm1.FileOpen1Accept(Sender: TObject);
 begin
     CheckDLL(FileOpen1.Dialog.FileName);
 end;
-
 
 procedure TForm1.FileOpen1BeforeExecute(Sender: TObject);
 begin
@@ -62,8 +75,7 @@ begin
     CheckDLL(FileNameE.Text);
 end;
 
-procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TForm1.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
     if(Key = VK_ESCAPE)
     then
@@ -71,59 +83,113 @@ begin
 end;
 
 procedure TForm1.LoadDLLExecute(Sender: TObject);
-    var
-    handle: THandle;
+var
     tempString: WideString;
     test: Integer;
     aString: PChar;
-    GetCopy: TCharFunc;
-    GetNumber: TIntFunc;
-    FPointer: TFarProc;
-    aString2: ShortString;
-    number: Integer;
 
 begin
-    aString2 := StrAlloc(512);
     tempString := WideString(FileNameE.Text);
     aString := PWideChar(tempString);
-    handle := LoadLibrary(aString);
+    dllHandle := LoadLibrary(aString);
 
-    if(handle <> 0)
+    if(dllHandle <> 0)
     then
     begin
-        Memo1.Lines.Add('Library was loaded.');
-        Memo1.Lines.Add('Current DLL Build info is...');
-        FPointer := GetProcAddress(handle, PChar ('_getCopyright'));
-        if FPointer <> nil then
-        begin
-            GetCopy := TCharFunc(fPointer);
-            aString := 'empty';
-            aString := PChar( GetCopy());
-            StrPas(aString);
-            Memo1.Lines.Add();
-        end;
-        FPointer := GetProcAddress(handle, PChar ('_GetNumber'));
-        if FPointer <> nil then
-        begin
-            GetNumber := TIntFunc(FPointer);
-            number := GetNumber();
-            Memo1.Lines.Add(IntToStr(number));
-        end;
-
+        Memo1.Lines.Add('C DLL was loaded.');
+        mIsLoaded := true;
     end
     else
         Memo1.Lines.Add('Library was NOT loaded..');
 end;
 
+procedure TForm1.LoadFunctionsAExecute(Sender: TObject);
+var
+    GetCopy: TCharVoidFunc;
+    GetNumber: TIntVoidFunc;
+    FPointer: TFarProc;
+
+begin
+    FPointer := GetProcAddress(dllHandle, PChar ('_getCopyright'));
+    if FPointer <> nil then
+    begin
+        GetCopy := TCharVoidFunc(FPointer);
+        Memo1.Lines.Add('Loaded C function char* _getCopyright()');
+        FunctionList.Items.AddObject('_getCopyright', TObject(FPointer));
+    end;
+
+//    FPointer := GetProcAddress(dllHandle, PChar ('_getRRInstance'));
+//    if FPointer <> nil then
+//    begin
+//        GetCopy := TCharVoidFunc(FPointer);
+//        Memo1.Lines.Add('Loaded C function char* _getCopyright()');
+//        FunctionList.Items.AddObject('_getCopyright', TObject(FPointer));
+//    end;
+    LoadFunctionsA.Enabled := false;
+end;
+
+procedure TForm1.UnloadDLLExecute(Sender: TObject);
+begin
+    FreeLibrary(dllHandle);
+    mIsLoaded := false;
+    FunctionList.Clear();
+    LoadDLL.Enabled := true;
+
+    Memo1.Lines.Add('Unloaded C DLL');
+
+end;
+
+procedure TForm1.ActionList1Update(Action: TBasicAction; var Handled: Boolean);
+begin
+    LoadFunctionsA.Enabled := mIsLoaded;
+    LoadDLL.Enabled := not mIsLoaded;
+    UnloadDLL.Enabled := mIsLoaded;
+end;
+
+procedure TForm1.APIFuncsUpdate(Action: TBasicAction; var Handled: Boolean);
+var
+  I: Integer;
+begin
+    if not mIsLoaded  then
+    for I := 0 to APIFuncs.ActionCount -1 do
+    TAction(APIFuncs.Actions[I]).Enabled := false;
+
+end;
+
+procedure TForm1.FunctionListClick(Sender: TObject);
+var itemNr: Integer;
+    funcPtr: TCharVoidFunc;
+begin
+    //Get currently selected item
+    itemNr := FunctionList.ItemIndex;
+    funcPtr := TCharVoidFunc(FunctionList.Items.Objects[itemNr]);
+    if funcPtr <> nil then
+        CharStarVoidA.Enabled := true;
+end;
+
+procedure TForm1.CharStarVoidAExecute(Sender: TObject);
+var itemNr: Integer;
+    funcPtr: TCharVoidFunc;
+    aResult: AnsiString;
+begin
+    itemNr := FunctionList.ItemIndex;
+    funcPtr := TCharVoidFunc(FunctionList.Items.Objects[itemNr]);
+    if funcPtr <> nil then
+    begin
+        aResult := funcPtr();
+        Memo1.Lines.Add(aResult);
+
+    end;
+end;
+
 procedure TForm1.CheckDLL(fName: string);
 begin
-
-        if(FileExists(fName))
-        then
-        begin
-            FileNameE.Text := fName;
-            LoadDLL.Enabled := true;
-        end;
+    if(FileExists(fName))
+    then
+    begin
+        FileNameE.Text := fName;
+        LoadDLL.Enabled := true;
+    end;
 end;
 
 end.

@@ -23,46 +23,81 @@ object Form1: TForm1
     Height = 479
     Align = alLeft
     TabOrder = 0
-    object FileNameE: TEdit
-      Left = 8
-      Top = 16
-      Width = 169
-      Height = 21
-      TabOrder = 0
-      Text = '<select rr dll>'
-    end
-    object Button1: TButton
-      Left = 192
-      Top = 14
-      Width = 27
-      Height = 25
-      Action = FileOpen1
-      TabOrder = 1
-    end
-    object Button2: TButton
-      Left = 8
-      Top = 64
-      Width = 75
-      Height = 25
-      Action = LoadDLL
-      TabOrder = 2
-    end
-    object Button3: TButton
-      Left = 102
-      Top = 64
-      Width = 75
-      Height = 25
-      Action = UnloadDLL
-      TabOrder = 3
-    end
-    object ListBox1: TListBox
+    object GroupBox1: TGroupBox
       Left = 1
-      Top = 192
+      Top = 1
       Width = 223
-      Height = 286
-      Align = alBottom
-      ItemHeight = 13
-      TabOrder = 4
+      Height = 105
+      Align = alTop
+      Caption = 'General'
+      TabOrder = 0
+      ExplicitLeft = 8
+      ExplicitTop = 86
+      ExplicitWidth = 185
+      object Button1: TButton
+        Left = 183
+        Top = 14
+        Width = 27
+        Height = 25
+        Action = FileOpen1
+        TabOrder = 0
+      end
+      object Button2: TButton
+        Left = 8
+        Top = 43
+        Width = 75
+        Height = 25
+        Action = LoadDLL
+        TabOrder = 1
+      end
+      object Button3: TButton
+        Left = 110
+        Top = 43
+        Width = 75
+        Height = 25
+        Action = UnloadDLL
+        TabOrder = 2
+      end
+      object Button4: TButton
+        Left = 8
+        Top = 74
+        Width = 101
+        Height = 25
+        Action = LoadFunctionsA
+        TabOrder = 3
+      end
+      object FileNameE: TEdit
+        Left = 8
+        Top = 16
+        Width = 169
+        Height = 21
+        TabOrder = 4
+        Text = '<select rr dll>'
+      end
+    end
+    object GroupBox2: TGroupBox
+      Left = 1
+      Top = 106
+      Width = 223
+      Height = 372
+      Align = alClient
+      Caption = 'API Functions'
+      TabOrder = 1
+      ExplicitLeft = 40
+      ExplicitTop = 152
+      ExplicitWidth = 185
+      ExplicitHeight = 105
+      object FunctionList: TListBox
+        Left = 2
+        Top = 15
+        Width = 219
+        Height = 355
+        Align = alClient
+        ItemHeight = 13
+        Sorted = True
+        TabOrder = 0
+        OnClick = FunctionListClick
+      end
     end
   end
   object Panel2: TPanel
@@ -72,7 +107,6 @@ object Form1: TForm1
     Height = 479
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 231
     object Memo1: TMemo
       Left = 1
       Top = 288
@@ -81,16 +115,26 @@ object Form1: TForm1
       Align = alBottom
       TabOrder = 0
     end
+    object Button5: TButton
+      Left = 24
+      Top = 44
+      Width = 75
+      Height = 25
+      Action = CharStarVoidA
+      TabOrder = 1
+    end
   end
   object ActionList1: TActionList
-    Left = 80
-    Top = 112
+    OnUpdate = ActionList1Update
+    Left = 136
+    Top = 136
     object LoadDLL: TAction
       Caption = 'Load'
       OnExecute = LoadDLLExecute
     end
     object UnloadDLL: TAction
       Caption = 'Unload'
+      OnExecute = UnloadDLLExecute
     end
     object SelectDLLA: TAction
       Caption = 'SelectDLLA'
@@ -103,6 +147,20 @@ object Form1: TForm1
       ShortCut = 16463
       BeforeExecute = FileOpen1BeforeExecute
       OnAccept = FileOpen1Accept
+    end
+    object LoadFunctionsA: TAction
+      Caption = 'Load Functions'
+      OnExecute = LoadFunctionsAExecute
+    end
+  end
+  object APIFuncs: TActionList
+    OnUpdate = APIFuncsUpdate
+    Left = 440
+    Top = 40
+    object CharStarVoidA: TAction
+      Caption = 'char*_void'
+      Enabled = False
+      OnExecute = CharStarVoidAExecute
     end
   end
 end

@@ -10,7 +10,7 @@ rr::RoadRunner *gRRHandle = NULL;
 
 RRHandle getRRInstance()
 {
-	if(!gRRHandle)
+    if(!gRRHandle)
     {
         gRRHandle = new rr::RoadRunner();
     }
@@ -19,7 +19,7 @@ RRHandle getRRInstance()
 
 int GetNumber()
 {
-	return 123;
+    return 123;
 }
 
 void deleteRRInstance(RRHandle *handle)
@@ -30,11 +30,9 @@ void deleteRRInstance(RRHandle *handle)
 
 char* getCopyright()
 {
-	if(!gRRHandle)
+    if(!gRRHandle)
     {
-        char* text = new char(512);
-		strcpy(text, "Please allocate a handle to roadrunner API");
-        return text;
+        return "Please allocate a handle to roadrunner API before calling API functions";
     }
     else
     {
@@ -43,7 +41,6 @@ char* getCopyright()
         return text;
     }
 }
-
 
 bool loadSBML(const char* filePath);
 bool setTimeStart(double timeStart);
