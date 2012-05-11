@@ -17,6 +17,11 @@ RRHandle getRRInstance()
     return gRRHandle;
 }
 
+int GetNumber()
+{
+	return 123;
+}
+
 void deleteRRInstance(RRHandle *handle)
 {
     delete handle;
@@ -27,7 +32,9 @@ char* getCopyright()
 {
 	if(!gRRHandle)
     {
-		return "Please allocate a handle to roadrunner API";
+        char* text = new char(512);
+		strcpy(text, "Please allocate a handle to roadrunner API");
+        return text;
     }
     else
     {

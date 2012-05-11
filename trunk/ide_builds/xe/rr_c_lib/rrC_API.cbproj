@@ -38,7 +38,6 @@
 			<ILINK_LibraryPath>..\..\..\src\;..\..\..\installs\xe\bin\;C:\rrw\ide_builds\xe\rr_c_lib\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
-			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
 			<IntermediateOutputDir>.\$(Config)\$(Platform)</IntermediateOutputDir>
 			<BCC_wpar>false</BCC_wpar>
@@ -67,6 +66,9 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<ResFiles Include="rrC_API.res">
+				<BuildOrder>2</BuildOrder>
+			</ResFiles>
 			<LibFiles Include="..\..\..\installs\xe\bin\RoadRunner_xe.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>1</BuildOrder>
@@ -98,7 +100,7 @@
 			<BorlandProject>
 				<CPlusPlusBuilder.Personality>
 					<VersionInfo>
-						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
 						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
 						<VersionInfo Name="MajorVer">1</VersionInfo>
 						<VersionInfo Name="MinorVer">0</VersionInfo>

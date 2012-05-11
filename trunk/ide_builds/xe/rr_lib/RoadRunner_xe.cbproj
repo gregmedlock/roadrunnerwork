@@ -82,6 +82,9 @@
 			<CppCompile Include="RoadRunnerLib.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
+			<ResFiles Include="RoadRunner_xe.res">
+				<BuildOrder>70</BuildOrder>
+			</ResFiles>
 			<LibFiles Include="..\..\..\installs\xe\lib\blas.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>64</BuildOrder>
@@ -372,7 +375,7 @@ copy c:\rrw\ThirdParty\libsbml\dependencies\bin\zlib1.dll $(rr_root)\installs\xe
 			<BorlandProject>
 				<CPlusPlusBuilder.Personality>
 					<VersionInfo>
-						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
 						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
 						<VersionInfo Name="MajorVer">1</VersionInfo>
 						<VersionInfo Name="MinorVer">0</VersionInfo>
@@ -382,7 +385,7 @@ copy c:\rrw\ThirdParty\libsbml\dependencies\bin\zlib1.dll $(rr_root)\installs\xe
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
 						<VersionInfo Name="Private">False</VersionInfo>
-						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="DLL">True</VersionInfo>
 						<VersionInfo Name="Locale">1033</VersionInfo>
 						<VersionInfo Name="CodePage">1252</VersionInfo>
 					</VersionInfo>

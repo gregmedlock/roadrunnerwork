@@ -54,6 +54,7 @@ RR_DECL_SPEC double 				getValue(void);
 RR_DECL_SPEC bool 					setValue(double val);
 RR_DECL_SPEC RRDataMatrixHandle		getStoichiometryMatrix(void);
 RR_DECL_SPEC bool 					FreeRRDataMatrixHandle(RRDataMatrixHandle matrix);
+RR_DECL_SPEC int 					GetNumber();
 #if defined( __cplusplus)
 }
 #endif

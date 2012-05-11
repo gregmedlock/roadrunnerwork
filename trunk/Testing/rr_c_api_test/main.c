@@ -14,7 +14,7 @@ int main()
     handle = getRRInstance();
     text = getCopyright();
     printf("In C: %s", text);
-	matrix = getStoichiometryMatrix();
+		matrix = getStoichiometryMatrix();
 
     FreeRRDataMatrixHandle(matrix);
     deleteRRInstance(handle);
