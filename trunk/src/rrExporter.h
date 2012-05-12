@@ -2,13 +2,13 @@
 #define rrExporterH
 
 #if defined(EXPORT_RR) //DLL
-	#define RR_DECLSPEC __declspec(dllexport)
+    #define RR_DECLSPEC __declspec(dllexport)
 
 #elif defined(NO_RR_DLL)
-	#define RR_DECLSPEC
+    #define RR_DECLSPEC
 
 #else
-	#define RR_DECLSPEC  __declspec(dllimport)
+    #define RR_DECLSPEC  __declspec(dllimport)
 
 #endif
 

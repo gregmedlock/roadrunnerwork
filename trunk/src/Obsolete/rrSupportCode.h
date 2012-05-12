@@ -7,27 +7,27 @@
 namespace rr
 {
 // Boolean functions for event handling" + NL());
-RR_DECLSPEC double 	spf_gt(double a, double b);
-RR_DECLSPEC double 	spf_lt(double a, double b);
-RR_DECLSPEC double 	spf_geq(double a, double b);
-RR_DECLSPEC double 	spf_leq(double a, double b);
-RR_DECLSPEC double 	spf_eq(double a, double b);
-RR_DECLSPEC double 	spf_neq(double a, double b);
-//RR_DECLSPEC double 	_and(params double[] a);
-//RR_DECLSPEC bool 	_and(params bool[] a);
-//RR_DECLSPEC double 	_or(params double[] a);
-//RR_DECLSPEC bool 	_or(params bool[] a);
-RR_DECLSPEC double 	spf_not(double a);
-RR_DECLSPEC bool 	spf_not(bool a);
-//RR_DECLSPEC double 	_xor(params double[] a);
-//RR_DECLSPEC bool 	_xor(params bool[] a);
-RR_DECLSPEC int 	spf_factorial(const int& a);
-RR_DECLSPEC double 	spf_log(double a);
-RR_DECLSPEC double 	spf_log(double a, double b);
-RR_DECLSPEC double 	spf_delay(double a, double b);
-RR_DECLSPEC double 	spf_root(double a, double b);
-//RR_DECLSPEC double 	_piecewise(params object[] args);
-}	//namespace rr
+RR_DECLSPEC double     spf_gt(double a, double b);
+RR_DECLSPEC double     spf_lt(double a, double b);
+RR_DECLSPEC double     spf_geq(double a, double b);
+RR_DECLSPEC double     spf_leq(double a, double b);
+RR_DECLSPEC double     spf_eq(double a, double b);
+RR_DECLSPEC double     spf_neq(double a, double b);
+//RR_DECLSPEC double     _and(params double[] a);
+//RR_DECLSPEC bool     _and(params bool[] a);
+//RR_DECLSPEC double     _or(params double[] a);
+//RR_DECLSPEC bool     _or(params bool[] a);
+RR_DECLSPEC double     spf_not(double a);
+RR_DECLSPEC bool     spf_not(bool a);
+//RR_DECLSPEC double     _xor(params double[] a);
+//RR_DECLSPEC bool     _xor(params bool[] a);
+RR_DECLSPEC int     spf_factorial(const int& a);
+RR_DECLSPEC double     spf_log(double a);
+RR_DECLSPEC double     spf_log(double a, double b);
+RR_DECLSPEC double     spf_delay(double a, double b);
+RR_DECLSPEC double     spf_root(double a, double b);
+//RR_DECLSPEC double     _piecewise(params object[] args);
+}    //namespace rr
 
 #endif
 

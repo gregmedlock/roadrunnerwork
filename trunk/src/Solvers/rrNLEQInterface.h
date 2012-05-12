@@ -16,27 +16,27 @@ namespace rr
         /// <param name="yin">Array of Model variables</param>
         /// <returns>sums of squares </returns>
         public:
-        	virtual double solve(const vector<double>& yin) = 0;
+            virtual double solve(const vector<double>& yin) = 0;
     };
 
     class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
     {
-    	protected:
-            int 			nOpts;
-            vector<int> 	IWK;
-            int 			LIWK;
-            int 			LWRK;
-            vector<double> 	RWK;
-            vector<double> 	XScal;
-            int 			ierr;
-            vector<int> 	iopt;	// = new int[nOpts];
-            ModelFromC 		   *model; 	// Model generated from the SBML
-            int 			n;
+        protected:
+            int             nOpts;
+            vector<int>     IWK;
+            int             LIWK;
+            int             LWRK;
+            vector<double>     RWK;
+            vector<double>     XScal;
+            int             ierr;
+            vector<int>     iopt;    // = new int[nOpts];
+            ModelFromC            *model;     // Model generated from the SBML
+            int             n;
 
 //        /// <summary>
 //        /// This function test Nleq by running it to see whether it would be working.
 //        /// </summary>
-//        private NLEQInterface()	//
+//        private NLEQInterface()    //
 
 //        /// <summary>
 //        /// This is the function that's called by NLEQ
@@ -48,13 +48,13 @@ namespace rr
 //        private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
         void ThrowErrorForStatus();
 
-	public:
-        bool 						IsAvailable;
-        							NLEQInterface(ModelFromC *_model = NULL){}
+    public:
+        bool                         IsAvailable;
+                                    NLEQInterface(ModelFromC *_model = NULL){}
 
 //        static TCallBackModelFcn fcn;
-		double 						defaultTolerance;
-        int 						defaultMaxInterations;
+        double                         defaultTolerance;
+        int                         defaultMaxInterations;
 //        delegate void TCallBackModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);
 
 //        /// <summary>
@@ -62,16 +62,16 @@ namespace rr
 //        /// </summary>
 //        /// <param name="model">the model to create NLEQ for</param>
 
-      	double 						relativeTolerance;
-        int 						maxIterations;
+          double                         relativeTolerance;
+        int                         maxIterations;
 //
 //        // NLEQ2 seems to have problems with some models so we drop back to NLEQ1 for now.
 //
 //        //        [DllImport ("nleq2", EntryPoint="NLEQ2", ExactSpelling=false,
-//        //			 CharSet=CharSet.Unicode, SetLastError=true, CallingConvention=CallingConvention.Cdecl
-//        //			 )]
+//        //             CharSet=CharSet.Unicode, SetLastError=true, CallingConvention=CallingConvention.Cdecl
+//        //             )]
 //        [DllImport("NleqLib", EntryPoint = "NLEQ1")]
-//        //		 NLEQ is a FORTRAN routine, therefore everything must be a reference
+//        //         NLEQ is a FORTRAN routine, therefore everything must be a reference
 //        static extern IntPtr NLEQ1(
 //            ref int n,
 //            TCallBackModelFcn fcn,
@@ -86,8 +86,8 @@ namespace rr
 //            ref int LRWK,
 //            [In, Out] double[] RWK);
 //
-//        //		        [DllImport ("nleq2", EntryPoint="NLEQ2")					 ]
-//        ////		 NLEQ is a FORTRAN routine, therefore everything must be a reference
+//        //                [DllImport ("nleq2", EntryPoint="NLEQ2")                     ]
+//        ////         NLEQ is a FORTRAN routine, therefore everything must be a reference
 //        //        public static extern IntPtr NLEQ2(
 //        //            ref int n,
 //        //            TCallBackModelFcn fcn,
@@ -138,14 +138,14 @@ namespace rr
 //        /// </summary>
 //        /// <returns>the Number of Model Evaluations For Jacobian</returns>
         int getNumberOfModelEvaluationsForJacobian();
-		void Test(string fileName);
+        void Test(string fileName);
 //
 //        /// <summary>
 //        /// Thea actual solver rourine making the call to NLEQ1
 //        /// </summary>
 //        /// <param name="yin">Array of Model variables</param>
 //        /// <returns>sums of squares </returns>
-		double solve(const vector<double>& yin);
+        double solve(const vector<double>& yin);
         double ComputeSumsOfSquares();
 
     }; //class NLEQ interface
@@ -329,10 +329,10 @@ namespace rr
 ////        // NLEQ2 seems to have problems with some models so we drop back to NLEQ1 for now.
 ////
 ////        //        [DllImport ("nleq2", EntryPoint="NLEQ2", ExactSpelling=false,
-////        //			 CharSet=CharSet.Unicode, SetLastError=true, CallingConvention=CallingConvention.Cdecl
-////        //			 )]
+////        //             CharSet=CharSet.Unicode, SetLastError=true, CallingConvention=CallingConvention.Cdecl
+////        //             )]
 ////        [DllImport("NleqLib", EntryPoint = "NLEQ1")]
-////        //		 NLEQ is a FORTRAN routine, therefore everything must be a reference
+////        //         NLEQ is a FORTRAN routine, therefore everything must be a reference
 ////        public static extern IntPtr NLEQ1(
 ////            ref int n,
 ////            TCallBackModelFcn fcn,
@@ -347,8 +347,8 @@ namespace rr
 ////            ref int LRWK,
 ////            [In, Out] double[] RWK);
 ////
-////        //		        [DllImport ("nleq2", EntryPoint="NLEQ2")					 ]
-////        ////		 NLEQ is a FORTRAN routine, therefore everything must be a reference
+////        //                [DllImport ("nleq2", EntryPoint="NLEQ2")                     ]
+////        ////         NLEQ is a FORTRAN routine, therefore everything must be a reference
 ////        //        public static extern IntPtr NLEQ2(
 ////        //            ref int n,
 ////        //            TCallBackModelFcn fcn,
@@ -389,20 +389,20 @@ namespace rr
 ////                model.rateRules.CopyTo(dTemp, 0);
 ////                model.amounts.CopyTo(dTemp, model.rateRules.Length);
 ////                model.evalModel(0.0, dTemp);
-////                //				bool bError = false;
+////                //                bool bError = false;
 ////
-////                //				for (int i = 0; i < model.amounts.Length; i++)
-////                //					if (model.amounts[i] < 0)
-////                //					{
-////                //						bError = true;
-////                //						break;
-////                //					}
+////                //                for (int i = 0; i < model.amounts.Length; i++)
+////                //                    if (model.amounts[i] < 0)
+////                //                    {
+////                //                        bError = true;
+////                //                        break;
+////                //                    }
 ////                //
 ////
 ////                Marshal.Copy(model.dydt, 0, fval, n);
-////                //				if (bError)
-////                //					Marshal.WriteInt32(pErr, -1);
-////                //				else
+////                //                if (bError)
+////                //                    Marshal.WriteInt32(pErr, -1);
+////                //                else
 ////                Marshal.WriteInt32(pErr, 0);
 ////            }
 ////            catch (Exception)

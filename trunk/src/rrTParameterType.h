@@ -5,7 +5,7 @@ namespace rr
 {
     enum TParameterType
     {
-    	ptGlobalParameter = 0,
+        ptGlobalParameter = 0,
         ptLocalParameter,
         ptBoundaryParameter,
         ptConservationParameter,

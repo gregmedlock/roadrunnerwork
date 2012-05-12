@@ -15,21 +15,21 @@ namespace rr
 
 class RR_DECLSPEC StringSymbolHashTable : public rrObject, public map<string, SBMLSymbol>
 {
-	protected:
+    protected:
 
     public:
-		StringSymbolHashTable(){}
-	    map<string, SBMLSymbol>::iterator 	mIter;
-        bool									ContainsKey(const string& aKey);
+        StringSymbolHashTable(){}
+        map<string, SBMLSymbol>::iterator     mIter;
+        bool                                    ContainsKey(const string& aKey);
 };
 
 ostream& operator<<(ostream& stream, StringSymbolHashTable& hash);
 class RR_DECLSPEC IntStringHashTable : public rrObject, public map<int, string>
 {
-	protected:
+    protected:
 
     public:
-		IntStringHashTable(){}
+        IntStringHashTable(){}
 
 };
 

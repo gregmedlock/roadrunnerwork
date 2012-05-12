@@ -13,18 +13,18 @@ RuleType GetRuleTypeFromString(const string& str);
 
 class RR_DECLSPEC RRRule : rrObject
 {
-	protected:
-		string 			mTheRule;
-		string 			mRuleTypeStr;
-        RuleType		mRuleType;
-        void			AssignType();
+    protected:
+        string             mTheRule;
+        string             mRuleTypeStr;
+        RuleType        mRuleType;
+        void            AssignType();
 
     public:
-						RRRule(const string& rule, const string& ruleType);
+                        RRRule(const string& rule, const string& ruleType);
 
-    	string			GetLHS();
-    	string			GetRHS();
-        RuleType		GetType();
+        string            GetLHS();
+        string            GetRHS();
+        RuleType        GetType();
 
 
 };

@@ -14,18 +14,18 @@ namespace rr
 {
 class RR_DECLSPEC LogFile : public rrObject
 {
-	private:
-                    			// prevent copying and assignment
-                				LogFile(const LogFile& logFile);
-                				LogFile& operator=(const LogFile&);
-		string					mFileName;
+    private:
+                                // prevent copying and assignment
+                                LogFile(const LogFile& logFile);
+                                LogFile& operator=(const LogFile&);
+        string                    mFileName;
 
-	public:
-//	  							LogFile(const char* fName);
-	  							LogFile(const string& fName);
-			   				   ~LogFile();
-		FILE* 					mFILEHandle;
-        string					GetFileName(){return mFileName;}
+    public:
+//                                  LogFile(const char* fName);
+                                  LogFile(const string& fName);
+                                  ~LogFile();
+        FILE*                     mFILEHandle;
+        string                    GetFileName(){return mFileName;}
 };
 
 }

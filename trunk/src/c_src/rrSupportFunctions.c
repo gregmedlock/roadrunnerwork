@@ -1,4 +1,4 @@
-#include <stdarg.h>				//va_list etc..
+#include <stdarg.h>                //va_list etc..
 #include <stdbool.h>
 #include "rrSupportFunctions.h"
 
@@ -7,14 +7,14 @@ double spf_pow(double a, double b)
     double res = 1;
     if(b == 2)
     {
-//		printf("computing %f to the power of %f\n", a, b);
-    	res = a*a;//pow(a,b);
-//   		printf("Result: %f\n", res);
+//        printf("computing %f to the power of %f\n", a, b);
+        res = a*a;//pow(a,b);
+//           printf("Result: %f\n", res);
     }
     else
     {
 #if defined (DEBUG_SPF)
-   		printf("b is: %f\n", b);
+           printf("b is: %f\n", b);
 #endif
     }
     return 0;
@@ -28,7 +28,7 @@ double spf_gt(double a, double b)
 
 double spf_lt(double a, double b)
 {
-	printf("in %f less than %f", a, b);
+    printf("in %f less than %f", a, b);
     return (a <= b ? 1.0 : 0.0);
 }
 
@@ -54,15 +54,15 @@ double spf_neq(double a, double b)
 
 double spf_and(int nrOfArguments, ...)
 {
-	va_list listPointer;
+    va_list listPointer;
 
     // Currently, listPointer is UNINITIALIZED, however,
     // make listPointer point to the first argument in the list
     va_start(listPointer, nrOfArguments);
 
-	double result = 1.0;
+    double result = 1.0;
 
-    int i;	//This is C!
+    int i;    //This is C!
     for(i = 0; i < nrOfArguments; i++)
     {
         // Get an argument.  Must know
@@ -70,25 +70,25 @@ double spf_and(int nrOfArguments, ...)
         // it from the va_list.
       double arg = va_arg( listPointer, double);
 
-		printf( "    The %dth arg is %f\n", i, arg );
-      	if(arg != 1.0)
-      	{
-      		result = 0.0;
-          	break;
-      	}
-	}
-	va_end( listPointer );
+        printf( "    The %dth arg is %f\n", i, arg );
+          if(arg != 1.0)
+          {
+              result = 0.0;
+              break;
+          }
+    }
+    va_end( listPointer );
     return result;
 }
 
 double spf_or(int nrOfArguments, ...)
 {
-	va_list listPointer;
+    va_list listPointer;
     va_start(listPointer, nrOfArguments);
 
-	double result = 0.0;
+    double result = 0.0;
 
-    int i;	//This is C..
+    int i;    //This is C..
     for(i = 0; i < nrOfArguments; i++)
     {
         // Get an argument.  Must know
@@ -96,14 +96,14 @@ double spf_or(int nrOfArguments, ...)
         // it from the va_list.
       double arg = va_arg( listPointer, double);
 
-		printf( "    The %dth arg is %f\n", i, arg );
-      	if(arg == 1.0)
-      	{
-      		result = 1.0;
-          	break;
-      	}
-	}
-	va_end( listPointer );
+        printf( "    The %dth arg is %f\n", i, arg );
+          if(arg == 1.0)
+          {
+              result = 1.0;
+              break;
+          }
+    }
+    va_end( listPointer );
     return result;
 }
 
@@ -143,30 +143,30 @@ double spf_or(int nrOfArguments, ...)
 
 double spf_xor(int nrOfArguments, ...)
 {
-	va_list listPointer;
+    va_list listPointer;
     va_start(listPointer, nrOfArguments);
 
-	_Bool result = false;
+    _Bool result = false;
 
-    int i;	//This is C..
+    int i;    //This is C..
     for(i = 0; i < nrOfArguments; i++)
     {
         // Get an argument.  Must know
         // the type of the arg to retrieve
         // it from the va_list.
-    	double arg = va_arg( listPointer, double);
-		printf( "    The %dth arg is %f\n", i, arg );
+        double arg = va_arg( listPointer, double);
+        printf( "    The %dth arg is %f\n", i, arg );
 
-      	if(i == 0)
-      	{
-      		result = (arg == 1.0);
+          if(i == 0)
+          {
+              result = (arg == 1.0);
         }
         else
         {
-        	result ^= (arg == 1.0);
+            result ^= (arg == 1.0);
         }
-	}
-	va_end( listPointer );
+    }
+    va_end( listPointer );
     return (result ? 1.0 : 0.0);
 }
 
@@ -232,9 +232,9 @@ int spf_factorial(int a)
     static int b;
     b = a;
     if (b < 2)
-	{
+    {
         return 1;
-	}
+    }
     return b * spf_factorial(b - 1);
 }
 
@@ -272,7 +272,7 @@ double spf_root(double a, double b)
 
 double spf_piecewise(int nrOfArgs, ...)
 {
-	return -1;	//Todo: implement this one
+    return -1;    //Todo: implement this one
 }
 //        double _piecewise(params object[] args)
 //        {
@@ -305,7 +305,7 @@ double spf_piecewise(int nrOfArgs, ...)
 //
 double sec(double a)
 {
-	return sec(a);
+    return sec(a);
 }
 
 //// Cotangent
@@ -352,7 +352,7 @@ double csch(double a)
 //// Inverse hyperbolic cosecant of a double number
 double arccsc(double a)
 {
-	return -1;
+    return -1;
 }
 
 //// Inverse hyperbolic cosecant of a double number

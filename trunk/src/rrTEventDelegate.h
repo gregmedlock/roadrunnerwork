@@ -3,7 +3,7 @@
 
 namespace rr
 {
-	typedef void (*TEventDelegate)();
+    typedef void (*TEventDelegate)();
 }
 
 

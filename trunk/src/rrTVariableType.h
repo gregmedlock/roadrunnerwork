@@ -3,7 +3,7 @@
 
 namespace rr
 {
-	enum TVariableType {vtSpecies = 0, vtFlux};
+    enum TVariableType {vtSpecies = 0, vtFlux};
 }
 
 #endif

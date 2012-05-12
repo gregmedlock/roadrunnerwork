@@ -11,12 +11,12 @@ namespace rr
 
 class RR_DECLSPEC TextWriter : public rrObject
 {
-	protected:
-		ostream&	    mStream;
+    protected:
+        ostream&        mStream;
     public:
-    				    TextWriter(ostream& aStream);
-    	void            Write(const string& chars);
-    	void            WriteLine();
+                        TextWriter(ostream& aStream);
+        void            Write(const string& chars);
+        void            WriteLine();
 };
 
 }

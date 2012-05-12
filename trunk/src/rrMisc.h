@@ -11,27 +11,27 @@ namespace rr
 
 enum TSelectionType
 {
-    	clTime = 0,
-    	clBoundarySpecies,
-    	clFloatingSpecies,
-    	clFlux,
-    	clRateOfChange,
-    	clVolume,
-    	clParameter,
+        clTime = 0,
+        clBoundarySpecies,
+        clFloatingSpecies,
+        clFlux,
+        clRateOfChange,
+        clVolume,
+        clParameter,
 /*7*/   clFloatingAmount,
 /*8*/   clBoundaryAmount,
-    	clElasticity,
-    	clUnscaledElasticity,
-    	clEigenValue,
-    	clUnknown,
-    	clStoichiometry
+        clElasticity,
+        clUnscaledElasticity,
+        clEigenValue,
+        clUnknown,
+        clStoichiometry
 };
 
 struct TSelectionRecord
 {
-	unsigned int	index;
-    string 			p1;
-    string 			p2;
+    unsigned int    index;
+    string             p1;
+    string             p2;
     TSelectionType selectionType;
 
 };
@@ -40,10 +40,10 @@ ostream& operator<< (ostream& stream, const TSelectionRecord& rec);
 
 ostream& operator<< (ostream& stream, const TSelectionRecord& rec)
 {
-	stream<<"Index: "<<rec.index<<endl;
-	stream<<"p1: "<<rec.p1<<endl;
-   	stream<<"p2: "<<rec.p1<<endl;
-   	stream<<"SelectionType: "<<rec.selectionType<<endl;
+    stream<<"Index: "<<rec.index<<endl;
+    stream<<"p1: "<<rec.p1<<endl;
+       stream<<"p2: "<<rec.p1<<endl;
+       stream<<"SelectionType: "<<rec.selectionType<<endl;
     return stream;
 }
 

@@ -31,21 +31,21 @@ enum TCharCode
 
 class RR_DECLSPEC Scanner : public rrObject
 {
-	protected:
-        const char                     	EOFCHAR; // Deemed end of string marker, used internally
-        const char                     	CR;
-        const char                     	LF;
-        vector<TCharCode>				FCharTable;
-        vector<char> 	 				buffer;
-        queue<Token>	 				tokenQueue;
-        map<string, CodeTypes> 	wordTable;
-        stringstream				   *pStream;
-        std::streamsize						bufferLength;
-        int 							bufferPtr; // Index of position in buffer containing current char
-		CodeTypes 						ftoken;
-		int 							yylineno; // Current line number
-		void                            initScanner();
-		char                            getCharFromBuffer();
+    protected:
+        const char                         EOFCHAR; // Deemed end of string marker, used internally
+        const char                         CR;
+        const char                         LF;
+        vector<TCharCode>                FCharTable;
+        vector<char>                      buffer;
+        queue<Token>                     tokenQueue;
+        map<string, CodeTypes>     wordTable;
+        stringstream                   *pStream;
+        std::streamsize                        bufferLength;
+        int                             bufferPtr; // Index of position in buffer containing current char
+        CodeTypes                         ftoken;
+        int                             yylineno; // Current line number
+        void                            initScanner();
+        char                            getCharFromBuffer();
         bool                            IsDoubleQuote(char ch);
         void                            getNumber();
         void                            getSpecial();
@@ -54,35 +54,35 @@ class RR_DECLSPEC Scanner : public rrObject
         void                            getWord();
         void                            nextTokenInternal();
 
-	public:
+    public:
         string                          timeWord1;
         string                          timeWord2;
         string                          timeWord3;
         bool                            FromQueue;
         bool                            IgnoreNewLines;
-        Token 							currentToken;
-        char 							fch; // Current character read
-        Token 							previousToken;
-        double 							tokenDouble;
-        int 							tokenInteger;
-        double 							tokenScalar; // Used to retrieve int or double
-        string 							tokenString;
-		int 							lineNumber();
+        Token                             currentToken;
+        char                             fch; // Current character read
+        Token                             previousToken;
+        double                             tokenDouble;
+        int                             tokenInteger;
+        double                             tokenScalar; // Used to retrieve int or double
+        string                             tokenString;
+        int                             lineNumber();
 
-//		stringstream   					stream;
-		CodeTypes 						token();
+//        stringstream                       stream;
+        CodeTypes                         token();
 
 
-        								Scanner();
-		void 							startScanner();
-        bool 							IsQueueEmpty();
-        char 							nextChar();
-        string 							tokenToString(const CodeTypes& code);
-        void 							AddTokenToQueue();
+                                        Scanner();
+        void                             startScanner();
+        bool                             IsQueueEmpty();
+        char                             nextChar();
+        string                             tokenToString(const CodeTypes& code);
+        void                             AddTokenToQueue();
         void                            nextToken();
         void                            skipBlanks();
         void                            UnGetToken();
-        void							AssignStream(stringstream& str){pStream = &str;}
+        void                            AssignStream(stringstream& str){pStream = &str;}
 }; //class scanner
 
 } //rr

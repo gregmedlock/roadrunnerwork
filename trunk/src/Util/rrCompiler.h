@@ -20,15 +20,15 @@ HINSTANCE LoadDLL(const string& dll);
 
 class RR_DECLSPEC Compiler : public rrObject
 {
-	private:
-//        static vector<string> 	m_oAssemblies;
-//        static vector<string> 	m_sCompileErrors;
+    private:
+//        static vector<string>     m_oAssemblies;
+//        static vector<string>     m_sCompileErrors;
 
-//        vector<string> 			m_oProxies;
-//     	void 					Compile(const string& source);
-//     	rrObject* 				Compile2(const string& source, const string& sClassName);
-        HINSTANCE 				mDLLHandle;
-        string					mDLLFileName;	//With path
+//        vector<string>             m_oProxies;
+//         void                     Compile(const string& source);
+//         rrObject*                 Compile2(const string& source, const string& sClassName);
+        HINSTANCE                 mDLLHandle;
+        string                    mDLLFileName;    //With path
 
     public:
         /// <summary>
@@ -36,28 +36,28 @@ class RR_DECLSPEC Compiler : public rrObject
         /// compiles them and executes methods on the classes
         /// </summary>
         /// <param name="source"></param>
-//		void 					Execute(const string& source);
-        						Compiler();
-        					   ~Compiler();
-		bool					CreateDLL(const string& cmdLine);
-		string					GetDLLName(){return mDLLFileName;}
+//        void                     Execute(const string& source);
+                                Compiler();
+                               ~Compiler();
+        bool                    CreateDLL(const string& cmdLine);
+        string                    GetDLLName(){return mDLLFileName;}
 
         /// <summary>
         /// the execute method takes a stringcollection of wrapper classes,
         /// compiles them and executes methods on the classes
         /// </summary>
         /// <param name="oProxyCode"></param>
-        void 					Execute(StringList& oProxyCode);
-        static rrObject 		getInstance(const string& source, const string& sClassName);
-        static rrObject* 		getInstance(const string& source, const string& sClassName, const string& sLocation);
-        bool					CompileC_DLL(const string& cSource);
+        void                     Execute(StringList& oProxyCode);
+        static rrObject         getInstance(const string& source, const string& sClassName);
+        static rrObject*         getInstance(const string& source, const string& sClassName, const string& sLocation);
+        bool                    CompileC_DLL(const string& cSource);
 
         /// <summary>
         /// adds an assembly to the assembly list ... this list will be needed
         /// to add references to that assemblies for the newly compiled class
         /// </summary>
         /// <param name="sAssembly"></param>
-//        static void 			addAssembly(const string& sAssembly);
+//        static void             addAssembly(const string& sAssembly);
 
         /// <summary>
         /// sets the list of proxies. This is a list of strings representing Namespace
@@ -67,7 +67,7 @@ class RR_DECLSPEC Compiler : public rrObject
         /// <param name="oProxies"></param>
   //      void addProxy(StringList oProxies);
 
-    	static string getLastErrors();
+        static string getLastErrors();
 
 }; //class compiler
 

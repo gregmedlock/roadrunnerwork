@@ -13,18 +13,18 @@ namespace rr
 
 class RR_DECLSPEC LogOutput : public rrObject
 {
-	public:
-        						LogOutput();
+    public:
+                                LogOutput();
         static bool             mShowLogTime;
         static bool             mShowLogPrefix;
-		static bool             mShowLogLevel;
-		static bool             mUseLogTabs;
+        static bool             mShowLogLevel;
+        static bool             mUseLogTabs;
         static bool             mLogToMemo;
         static bool             mLogToConsole;
         static bool             mDoLogging;
-	    static void             Output(const string& msg, const LogLevel& lvl);
-        static void				StopLogging();
-        static void				StartLogging();
+        static void             Output(const string& msg, const LogLevel& lvl);
+        static void                StopLogging();
+        static void                StartLogging();
 };
 
 }

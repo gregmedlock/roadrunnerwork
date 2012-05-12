@@ -21,7 +21,7 @@ using namespace LIB_STRUCTURAL;
 class RR_DECLSPEC StructAnalysis : public rrObject
 {
     protected:
-       	static LibStructural		   *mInstance;
+           static LibStructural           *mInstance;
 //        void WriteMatlabForm(System.IO.TextWriter oWriter, double[][] oMatrix)
 
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getGammaMatrixGJ")]
@@ -36,11 +36,11 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //            out System.IntPtr outRowLabels, out int outRowCount);
 
 
-   	public:
-						    	StructAnalysis();
-    	virtual 			   ~StructAnalysis();
-		LibStructural&			GetInstance(){return *mInstance;}
-        void					Reset();
+       public:
+                                StructAnalysis();
+        virtual                ~StructAnalysis();
+        LibStructural&            GetInstance(){return *mInstance;}
+        void                    Reset();
 
 //        internal const string LIBRARY_FILE = "LibStructural";
 //        string AnalyzeWithFullyPivotedLU()
@@ -54,18 +54,18 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        string[] getConservedLaws()
 //        double[] GetConservedSums()
 //        string[] GetDependentReactionIds()
-		StringList GetDependentSpeciesIds();
+        StringList GetDependentSpeciesIds();
 //        double[][] GetFullyReorderedStoichiometryMatrix()
 //        double[][] GetFullyReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetFullyReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-        double*	GetGammaMatrix();
+        double*    GetGammaMatrix();
 //        double[][] GetGammaMatrixGJ(double[][] oMatrix)
 //        bool FindPositiveGammaMatrix(double[][] oMatrix,  out double[][] gammaMatrix, ref string[] rowNames, out string[] colNames)
 //        bool FindPositiveGammaMatrix(double[][] oMatrix, out double[][] gammaMatrix)
 //        double[][] GetGammaMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetGammaMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
 //        string[] GetIndependentReactionIds()
-		StringList GetIndependentSpeciesIds();
+        StringList GetIndependentSpeciesIds();
 //        void GetInitialConditions(out string[] variableNames, out double[] initialValues)
 //        double[][] GetK0Matrix()
 //        double[][] GetK0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
@@ -111,7 +111,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        int GetNumDependentSpecies();
 //
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumIndSpecies")]
-		int GetNumIndependentSpecies();
+        int GetNumIndependentSpecies();
 //
 //
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getNumReactions")]
@@ -140,7 +140,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        void GetStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
 //        string GetTestDetails(  )
 //        void LoadReactionNames(string[] reactionNames)
-	      string LoadSBML(const string& sbml);
+          string LoadSBML(const string& sbml);
 //        string LoadSBMLFromFile(string sFileName)
 //        string LoadSBMLWithTests(string sbml)
 //        void LoadSpeciesNames(string[] speciesNames, double[] speciesValues)

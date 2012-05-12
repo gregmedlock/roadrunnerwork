@@ -26,7 +26,7 @@ using namespace libsbml;
 class RR_DECLSPEC NOMSupport : public rrObject
 {
     //The C# SBMLSupport.cs have two static objects, SBMLDocument and Model, created when NOM reads SBML..
-    //        Model*				   *model;		//Tie to mModel in constructor
+    //        Model*                   *model;        //Tie to mModel in constructor
     //        static SBMLDocument _oDoc;
     //        static Model _oModel;
     //        ParameterSets _ParameterSets;
@@ -40,21 +40,21 @@ class RR_DECLSPEC NOMSupport : public rrObject
 
     protected:
 
-    	SBMLDocument		   *mSBMLDoc; 				//Correspond to C# _oDoc
-		Model 				   *mModel;					//Correspond to C# _oModel
-        const string            STR_DoubleFormat;	// = "G"; //"G17";
-        StringSymbolHashTable 	mSymbolTable;
+        SBMLDocument           *mSBMLDoc;                 //Correspond to C# _oDoc
+        Model                    *mModel;                    //Correspond to C# _oModel
+        const string            STR_DoubleFormat;    // = "G"; //"G17";
+        StringSymbolHashTable     mSymbolTable;
 
-        ArrayList 				returnUnitDefinition(UnitDefinition oDefinition);
-        const ASTNode* 			changeSymbol(ASTNode* node, const string& time, const int& targetType);
-        ASTNode 				changeTimeToCSymbol(ASTNode* node, const string& name, const int& type);
-        bool 					addMissingModifiers(Model *oModel);
-        StringList 				_Namespaces;
-        StringList 				GetSymbols(const string& formula);
+        ArrayList                 returnUnitDefinition(UnitDefinition oDefinition);
+        const ASTNode*             changeSymbol(ASTNode* node, const string& time, const int& targetType);
+        ASTNode                 changeTimeToCSymbol(ASTNode* node, const string& name, const int& type);
+        bool                     addMissingModifiers(Model *oModel);
+        StringList                 _Namespaces;
+        StringList                 GetSymbols(const string& formula);
 
-        string 					GetInitialAssignmentFor(const string& sbmlId);
-        string 					GetName(SBase* element);
-        string 					GetRuleFor(const string& sbmlId);
+        string                     GetInitialAssignmentFor(const string& sbmlId);
+        string                     GetName(SBase* element);
+        string                     GetRuleFor(const string& sbmlId);
         void                    addDependenciesToList(const ASTNode* node, StringList& sResult);
         void                    AddMissingParameter(const string& parameterId, SBMLDocument *doc);
         void                    BuildSymbolTable();
@@ -75,16 +75,16 @@ class RR_DECLSPEC NOMSupport : public rrObject
         void                    UpdateDependencies(const string& sbmlId);
         void                    UpgradeToL2V4IfNecessary(SBMLDocument* doc);
 
-   	public:
-						    	NOMSupport();
-    	virtual 			   ~NOMSupport();
-        Model*					GetModel(){return mModel;}
-        SBMLDocument*			GetSBMLDocument(){return mSBMLDoc;}
+       public:
+                                NOMSupport();
+        virtual                ~NOMSupport();
+        Model*                    GetModel(){return mModel;}
+        SBMLDocument*            GetSBMLDocument(){return mSBMLDoc;}
 
-        ArrayList 				getDerivedUnitDefinition(const string& sId);
+        ArrayList                 getDerivedUnitDefinition(const string& sId);
         ArrayList               getListOfBoundarySpeciesIds();
         ArrayList               getListOfErrors();
-        StringListContainer 	getListOfFloatingSpecies();
+        StringListContainer     getListOfFloatingSpecies();
         ArrayList               getListOfFloatingSpeciesIds();
         ArrayList               getListOfParameters();
         ArrayList               getNthError(const int& nIndex);
@@ -93,7 +93,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         ArrayList               getNthListOfModifiers(const int& nIndex);
         ArrayList               getNthListOfProducts(const int& nIndex);
         ArrayList               getNthListOfReactants(const int& nIndex);
-        ASTNode 				ReplaceSymbol(ASTNode* node, const string& oldId, const string& newId);
+        ASTNode                 ReplaceSymbol(ASTNode* node, const string& oldId, const string& newId);
         bool                    exists(const string& sId);
         bool                    getNthParameterHasValue(const int& nReactionIndex, const int& nParameterIndex);
         bool                    getNthUseValuesFromTriggerTime(const int& arg);
@@ -133,12 +133,12 @@ class RR_DECLSPEC NOMSupport : public rrObject
         int                     getNumReactions();
         int                     getNumRules();
         int                     getSBOTerm(const string& sId);
-        deque<Rule>  			ReorderAssignmentRules(deque<Rule>& assignmentRules);
-        StringList 				GetSymbols(ASTNode* math);
+        deque<Rule>              ReorderAssignmentRules(deque<Rule>& assignmentRules);
+        StringList                 GetSymbols(ASTNode* math);
 
-        pair<string, string> 	getNthInitialAssignmentPair(const int& nIndex);
-        SBase* 					GetElement(const string& sId);
-        stack<string> 			GetMatchForSymbol(const string& sbmlId);
+        pair<string, string>     getNthInitialAssignmentPair(const int& nIndex);
+        SBase*                     GetElement(const string& sId);
+        stack<string>             GetMatchForSymbol(const string& sbmlId);
         string                  addEmptySetNode(const string& sbml);
         string                  addEmptySetNodes(const string& sbml);
         string                  addMissingModifiers(const string& sModel);
@@ -150,7 +150,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         string                  convertSBML(const string& sModel, const int& nLevel, const int& nVersion);
         string                  convertSBML(const string& sModel, const int& nLevel, const int& nVersion, bool throwError);
         string                  convertStringToMathML(const string& var0);
-      	string                  convertTime(const string& sArg, const string& sTimeSymbol);
+          string                  convertTime(const string& sArg, const string& sTimeSymbol);
         string                  convertTimeToCSymbol(const string& sArg, const string& sTimeSymbol);
         string                  FixCommonIssues(const string& sbml);
         string                  FixCommonIssues(const string& sbml, const string& programName, const string& programVersion);
@@ -161,7 +161,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         string                  getKineticLaw(const int& index);
         string                  getMetaId(const string& sId);
         string                  getModelId();
-      	string                  getModelName();
+          string                  getModelName();
         string                  getNotes(const string& sId);
         string                  getNthBoundarySpeciesId(const int& nIndex);
         string                  getNthBoundarySpeciesName(const int& nIndex);
@@ -196,8 +196,8 @@ class RR_DECLSPEC NOMSupport : public rrObject
         void                    FillStack(stack<string>& stack, SBMLSymbol& symbol);
         void                    loadFromFile(const string& fileName);
         void                    loadParameterPromotedSBML(const string& var0, const string& sTimeSymbol);
-      	void                    loadSBML(const string& var0);
-      	void                    loadSBML(const string& var0, const string& sTimeSymbol);
+          void                    loadSBML(const string& var0);
+          void                    loadSBML(const string& var0, const string& sTimeSymbol);
         void                    ReorderRules(SBMLDocument& oc, Model& model);
         void                    setAnnotation(const string& sId, const string& sAnnotation);
         void                    setModelId(const string& sId);
@@ -207,10 +207,10 @@ class RR_DECLSPEC NOMSupport : public rrObject
         void                    setValue(Model& model, const string& id, const double& value, const bool& throwIfNotFound);
         void                    TestASTTime();
 
-		string 					getNthBoundarySpeciesCompartmentName(const int& nIndex);
-		string 					getNthFloatingSpeciesCompartmentName(const int& nIndex);
-		StringListContainer 	getListOfBoundarySpecies();
-        void					Reset();
+        string                     getNthBoundarySpeciesCompartmentName(const int& nIndex);
+        string                     getNthFloatingSpeciesCompartmentName(const int& nIndex);
+        StringListContainer     getListOfBoundarySpecies();
+        void                    Reset();
 };
 
 }//namespace rr
@@ -3883,115 +3883,115 @@ class RR_DECLSPEC NOMSupport : public rrObject
 ////
 ////        static string[][] _oPredefinedFunctions = new string[][]
 ////
-////	{
-////		new string[]{ "massi1", "Irreversible Mass Action Kinetics for 1 substrate", "S", "k", "k * S" },
-////		new string[]{ "massi2", "Irreversible Mass Action Kinetics for 2 substrates", "S1", "S2", "k", "k * S1 * S2" },
-////		new string[]{ "massi3", "Irreversible Mass Action Kinetics for 3 substrates", "S1", "S2", "S3", "k", "k * S1 * S2 * S3" },
-////		new string[]{
-////						"massr11", "Reversible Mass Action Kinetics for 1 substrate and 1 product", "S", "P", "k_1", "k_2",
-////						"k_1 * S - k_2 * P"},
-////		new string[]{
-////						"massr12", "Reversible Mass Action Kinetics for 1 substrate and 2 products", "S", "P1", "P2", "k_1", "k_2",
-////						"k_1 * S - k_2 * P1 * P2"},
-////		new string[]{
-////						"massr13", "Reversible Mass Action Kinetics for 1 substrate and 3 products", "S", "P1", "P2", "P3", "k_1", "k_2",
-////						"k_1 * S - k_2 * P1 * P2 * P3"},
-////		new string[]{
-////						"massr21", "Reversible Mass Action Kinetics for 2 substrates and 1 product", "S1", "S2", "P", "k_1", "k_2",
-////						"k_1 * S1 * S2 - k_2 * P"},
-////		new string[]{
-////						"massr22", "Reversible Mass Action Kinetics for 2 substrates and 2 products", "S1", "S2", "P1", "P2", "k_1", "k_2",
-////						"k_1 * S1 * S2 - k_2 * P1 * P2"},
-////		new string[]{
-////						"massr23", "Reversible Mass Action Kinetics for 2 substrates and 3 products", "S1", "S2", "P1", "P2", "P3", "k_1", "k_2",
-////						"k_1 * S1 * S2 - k_2 * P1 * P2 * P3"},
-////		new string[]{
-////						"massr31", "Reversible Mass Action Kinetics for 3 substrates and 1 product", "S1", "S2", "S3", "P", "k_1", "k_2",
-////						"k_1 * S1 * S2 * S3 - k_2 * P"},
-////		new string[]{
-////						"massr32", "Reversible Mass Action Kinetics for 3 substrates and 2 products", "S1", "S2", "S3", "P1", "P2", "k_1", "k_2",
-////						"k_1 * S1 * S2 * S3 - k_2 * P1 * P2"},
-////		new string[]{
-////						"massr33", "Reversible Mass Action Kinetics for 3 substrates and 3 products", "S1", "S2", "S3", "P1", "P2", "P3", "k_1", "k_2",
-////						"k_1 * S1 * S2 * S3 - k_2 * P1 * P2 * P3"},
-////		new string[]{ "uui", "Irreversible Simple Michaelis-Menten ", "S", "V_m", "K_m", "(V_m * S)/(K_m + S)" },
-////		new string[]{
-////						"uur", "Uni-Uni Reversible Simple Michaelis-Menten", "S", "P", "V_f", "V_r", "K_ms", "K_mp",
-////						"(V_f * S / K_ms - V_r * P / K_mp)/(1 + S / K_ms +  P / K_mp)"},
-////		new string[]{
-////						"uuhr", "Uni-Uni Reversible Simple Michaelis-Menten with Haldane adjustment", "S", "P", "V_f", "K_m1", "K_m2", "K_eq",
-////						"( V_f / K_m1 * (S - P / K_eq ))/(1 + S / K_m1 + P / K_m2)"},
-////		new string[]{
-////						"isouur", "Iso Uni-Uni", "S", "P", "V_f", "K_ms", "K_mp", "K_ii", "K_eq",
-////						"(V_f * (S - P / K_eq ))/(S * (1 + P / K_ii ) + K_ms * (1 + P / K_mp))"},
-////		new string[]{ "hilli", "Hill Kinetics", "S", "V", "S_0_5", "h", "(V * pow(S,h))/(pow(S_0_5,h) + pow(S,h))"},
-////		new string[]{
-////						"hillr", "Reversible Hill Kinetics", "S", "P", "V_f", "S_0_5", "P_0_5", "h", "K_eq",
-////						"(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1))/(1 + pow(S / S_0_5 + P / P_0_5, h))"},
-////		new string[]{
-////						"hillmr", "Reversible Hill Kinetics with One Modifier", "S", "M", "P", "V_f", "K_eq", "k", "h", "alpha",
-////						"(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1))/( pow(S / S_0_5 + P / P_0_5, h) + (1 + pow(M / M_0_5, h))/(1 + alpha * pow(M/M_0_5,h)))"},
-////		new string[]{
-////						"hillmmr", "Reversible Hill Kinetics with Two Modifiers", "S", "P", "M", "V_f", "K_eq", "k", "h", "a", "b", "alpha_1", "alpha_2", "alpha_12",
-////						"(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1)) / (pow(S / S_0_5 + P / P_0_5, h) + ((1 + pow(Ma/Ma_0_5,h) + pow(Mb/Mb_0_5,h))/( 1 + alpha_1 * pow(Ma/Ma_0_5,h) + alpha_2 * pow(Mb/Mb_0_5,h) + alpha_1 * alpha_2 * alpha_12 * pow(Ma/Ma_0_5,h) * pow(Mb/Mb_0_5,h))))"},
-////		new string[]{ "usii", "Substrate Inhibition Kinetics (Irreversible)", "S", "V", "K_m", "K_i", "V*(S/K_m)/(1 + S/K_m + sqr(S)/K_i)"},
-////		new string[]{
-////						"usir", "Substrate Inhibition Kinetics (Reversible)", "S", "P", "V_f", "V_r", "K_ms", "K_mp", "K_i",
-////						"(V_f*S/K_ms + V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + sqr(S)/K_i)"},
-////		new string[]{ "usai", "Substrate Activation", "S", "V", "K_sa", "K_sc", "V * sqr(S/K_sa)/(1 + S/K_sc + sqr(S/K_sa) + S/K_sa)"},
-////		new string[]{ "ucii", "Competitive Inhibition (Irreversible)", "S", "V", "K_m", "K_i", "(V * S/K_m)/(1 + S/K_m + I/K_i)"},
-////		new string[]{
-////						"ucir", "Competitive Inhibition (Reversible)", "S", "P", "V_f", "V_r", "K_ms", "K_mp", "K_i",
-////						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + I/K_i)"},
-////		new string[]{ "unii", "Noncompetitive Inhibition (Irreversible)", "S", "I", "V", "K_m", "K_i", "(V*S/K_m)/(1 + I/K_i + (S/K_m)*(1 + I/K_i))"},
-////		new string[]{
-////						"unir", "Noncompetitive Inhibition (Reversible)", "S", "P", "I", "V_f", "K_ms", "K_mp", "K_i",
-////						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + I/K_i + (S/K_ms + P/K_mp )*(1 + I/K_i))"},
-////		new string[]{ "uuci", "Uncompetitive Inhibition (Irreversible)", "S", "I", "V", "K_m", "K_i", "(V*S/K_m)/(1 + (S/K_m)*(1 + I/K_i))"},
-////		new string[]{
-////						"uucr", "Uncompetitive Inhibition (Reversible)", "S", "P", "I", "V_f", "V_r", "K_ms", "K_mp", "K_i",
-////						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + ( S/K_ms + P/K_mp )*( 1 + I/K_i))"},
-////		new string[]{
-////						"umi", "Mixed Inhibition Kinetics (Irreversible)", "S", "I", "V", "K_m", "K_is", "K_ic",
-////						"(V*S/K_m)/(1 + I/K_is + (S/K_m)*(1 + I/K_ic))"},
-////		new string[]{
-////						"umr", "Mixed Inhibition Kinetics (Reversible)", "S", "P", "I", "V_f", "V_r", "K_ms", "K_mp", "K_is", "K_ic",
-////						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + I/K_is + ( S/K_ms + P/K_mp )*( 1 + I/K_ic ))"},
-////		new string[]{ "uai", "Specific Activation Kinetics - irreversible", "S", "A_c", "V", "K_m", "K_a", "(V*S/K_m)/(1 + S/K_m + K_a/A_c)"},
-////		new string[]{
-////						"uar", "Specific Activation Kinetics (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_a",
-////						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + K_a/A_c)"},
-////		new string[]{ "ucti", "Catalytic Activation (Irreversible)", "S", "A_c", "V", "K_m", "K_a", "(V*S/K_m)/(1 + K_a/A_c + (S/K_m)*(1 + K_a/A_c))"},
-////		new string[]{
-////						"uctr", "Catalytic Activation (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_a",
-////						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + K_a/A_c + (S/K_ms + P/K_mp)*(1 + K_a/A_c))"},
-////		new string[]{
-////						"umai", "Mixed Activation Kinetics (Irreversible)", "S", "A_c", "V", "K_m", "Kas", "Kac",
-////						"(V*S/K_m)/(1 + Kas/A_c + (S/K_m)*(1 + Kac/A_c))"},
-////		new string[]{
-////						"umar", "Mixed Activation Kinetics (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_as", "K_ac",
-////						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + K_as/A_c + (S/K_ms + P/K_mp)*(1 + K_ac/A_c))"},
-////		new string[]{
-////						"uhmi", "General Hyperbolic Modifier Kinetics (Irreversible)", "S", "M", "V", "K_m", "K_d", "a", "b",
-////						"(V*(S/K_m)*(1 + b * M / (a*K_d)))/(1 + M/K_d + (S/K_m)*(1 + M/(a*K_d)))"},
-////		new string[]{
-////						"uhmr", "General Hyperbolic Modifier Kinetics (Reversible)", "S", "P", "M", "V_f", "V_r", "K_ms", "K_mp", "K_d", "a", "b",
-////						"((V_f*S/K_ms - V_r*P/K_mp)*(1 + b*M/(a*K_d)))/(1 + M/K_d + (S/K_ms + P/K_mp)*(1 + M/(a*K_d)))"},
-////		new string[]{
-////						"ualii", "Allosteric inhibition (Irreversible)", "S", "I", "V", "K_s", "K_ii", "n", "L",
-////						"(V*pow(1 + S/K_s, n-1))/(L*pow(1 + I/K_ii,n) + pow(1 + S/K_s,n))"},
-////		new string[]{
-////						"ordubr", "Ordered Uni Bi Kinetics", "A", "P", "Q", "V_f", "V_r", "K_ma", "K_mq", "K_mp", "K_ip", "K_eq",
-////						"(V_f*( A - P*Q/K_eq))/(K_ma + A*(1 + P/K_ip) + (V_f/(V_r*K_eq))*(K_mq*P + K_mp*Q + P*Q))"},
-////		new string[]{
-////						"ordbur", "Ordered Bi Uni Kinetics", "A", "B", "P", "V_f", "V_r", "K_ma", "Kmb", "K_mp", "K_ia", "K_eq",
-////						"(V_f*(A*B - P/K_eq))/(A*B + K_ma*B + Kmb*A + (V_f/(V_r*K_eq))*(K_mp + P*(1 + A/K_ia)))"},
-////		new string[]{
-////						"ordbbr", "Ordered Bi Bi Kinetics", "A", "B", "P", "Q", "V_f", "K_ma", "K_mb", "K_mp", "K_ia", "K_ib", "K_ip", "K_eq",
-////						"(V_f*(A*B - P*Q/K_eq))/(A*B*(1 + P/K_ip) + K_mb*(A + K_ia) + K_ma*B + ((V_f / (V_r*K_eq)) * (K_mq*P*( 1 + A/K_ia) + Q*(K_mp*( 1 + (K_ma*B)/(K_ia*K_mb) + P*(1 + B/K_ib))))))"},
-////		new string[]{
-////						"ppbr", "Ping Pong Bi Bi Kinetics", "A", "B", "P", "Q", "V_f", "V_r", "K_ma", "K_mb", "K_mp", "K_mq", "K_ia", "K_iq", "K_eq",
-////						"(V_f*(A*B - P*Q/K_eq))/(A*B + K_mb*A + K_ma*B*(1 + Q/K_iq) + ((V_f/(V_r*K_eq))*(K_mq*P*(1 + A/K_ia) + Q*(K_mp + P))))"}};
+////    {
+////        new string[]{ "massi1", "Irreversible Mass Action Kinetics for 1 substrate", "S", "k", "k * S" },
+////        new string[]{ "massi2", "Irreversible Mass Action Kinetics for 2 substrates", "S1", "S2", "k", "k * S1 * S2" },
+////        new string[]{ "massi3", "Irreversible Mass Action Kinetics for 3 substrates", "S1", "S2", "S3", "k", "k * S1 * S2 * S3" },
+////        new string[]{
+////                        "massr11", "Reversible Mass Action Kinetics for 1 substrate and 1 product", "S", "P", "k_1", "k_2",
+////                        "k_1 * S - k_2 * P"},
+////        new string[]{
+////                        "massr12", "Reversible Mass Action Kinetics for 1 substrate and 2 products", "S", "P1", "P2", "k_1", "k_2",
+////                        "k_1 * S - k_2 * P1 * P2"},
+////        new string[]{
+////                        "massr13", "Reversible Mass Action Kinetics for 1 substrate and 3 products", "S", "P1", "P2", "P3", "k_1", "k_2",
+////                        "k_1 * S - k_2 * P1 * P2 * P3"},
+////        new string[]{
+////                        "massr21", "Reversible Mass Action Kinetics for 2 substrates and 1 product", "S1", "S2", "P", "k_1", "k_2",
+////                        "k_1 * S1 * S2 - k_2 * P"},
+////        new string[]{
+////                        "massr22", "Reversible Mass Action Kinetics for 2 substrates and 2 products", "S1", "S2", "P1", "P2", "k_1", "k_2",
+////                        "k_1 * S1 * S2 - k_2 * P1 * P2"},
+////        new string[]{
+////                        "massr23", "Reversible Mass Action Kinetics for 2 substrates and 3 products", "S1", "S2", "P1", "P2", "P3", "k_1", "k_2",
+////                        "k_1 * S1 * S2 - k_2 * P1 * P2 * P3"},
+////        new string[]{
+////                        "massr31", "Reversible Mass Action Kinetics for 3 substrates and 1 product", "S1", "S2", "S3", "P", "k_1", "k_2",
+////                        "k_1 * S1 * S2 * S3 - k_2 * P"},
+////        new string[]{
+////                        "massr32", "Reversible Mass Action Kinetics for 3 substrates and 2 products", "S1", "S2", "S3", "P1", "P2", "k_1", "k_2",
+////                        "k_1 * S1 * S2 * S3 - k_2 * P1 * P2"},
+////        new string[]{
+////                        "massr33", "Reversible Mass Action Kinetics for 3 substrates and 3 products", "S1", "S2", "S3", "P1", "P2", "P3", "k_1", "k_2",
+////                        "k_1 * S1 * S2 * S3 - k_2 * P1 * P2 * P3"},
+////        new string[]{ "uui", "Irreversible Simple Michaelis-Menten ", "S", "V_m", "K_m", "(V_m * S)/(K_m + S)" },
+////        new string[]{
+////                        "uur", "Uni-Uni Reversible Simple Michaelis-Menten", "S", "P", "V_f", "V_r", "K_ms", "K_mp",
+////                        "(V_f * S / K_ms - V_r * P / K_mp)/(1 + S / K_ms +  P / K_mp)"},
+////        new string[]{
+////                        "uuhr", "Uni-Uni Reversible Simple Michaelis-Menten with Haldane adjustment", "S", "P", "V_f", "K_m1", "K_m2", "K_eq",
+////                        "( V_f / K_m1 * (S - P / K_eq ))/(1 + S / K_m1 + P / K_m2)"},
+////        new string[]{
+////                        "isouur", "Iso Uni-Uni", "S", "P", "V_f", "K_ms", "K_mp", "K_ii", "K_eq",
+////                        "(V_f * (S - P / K_eq ))/(S * (1 + P / K_ii ) + K_ms * (1 + P / K_mp))"},
+////        new string[]{ "hilli", "Hill Kinetics", "S", "V", "S_0_5", "h", "(V * pow(S,h))/(pow(S_0_5,h) + pow(S,h))"},
+////        new string[]{
+////                        "hillr", "Reversible Hill Kinetics", "S", "P", "V_f", "S_0_5", "P_0_5", "h", "K_eq",
+////                        "(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1))/(1 + pow(S / S_0_5 + P / P_0_5, h))"},
+////        new string[]{
+////                        "hillmr", "Reversible Hill Kinetics with One Modifier", "S", "M", "P", "V_f", "K_eq", "k", "h", "alpha",
+////                        "(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1))/( pow(S / S_0_5 + P / P_0_5, h) + (1 + pow(M / M_0_5, h))/(1 + alpha * pow(M/M_0_5,h)))"},
+////        new string[]{
+////                        "hillmmr", "Reversible Hill Kinetics with Two Modifiers", "S", "P", "M", "V_f", "K_eq", "k", "h", "a", "b", "alpha_1", "alpha_2", "alpha_12",
+////                        "(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1)) / (pow(S / S_0_5 + P / P_0_5, h) + ((1 + pow(Ma/Ma_0_5,h) + pow(Mb/Mb_0_5,h))/( 1 + alpha_1 * pow(Ma/Ma_0_5,h) + alpha_2 * pow(Mb/Mb_0_5,h) + alpha_1 * alpha_2 * alpha_12 * pow(Ma/Ma_0_5,h) * pow(Mb/Mb_0_5,h))))"},
+////        new string[]{ "usii", "Substrate Inhibition Kinetics (Irreversible)", "S", "V", "K_m", "K_i", "V*(S/K_m)/(1 + S/K_m + sqr(S)/K_i)"},
+////        new string[]{
+////                        "usir", "Substrate Inhibition Kinetics (Reversible)", "S", "P", "V_f", "V_r", "K_ms", "K_mp", "K_i",
+////                        "(V_f*S/K_ms + V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + sqr(S)/K_i)"},
+////        new string[]{ "usai", "Substrate Activation", "S", "V", "K_sa", "K_sc", "V * sqr(S/K_sa)/(1 + S/K_sc + sqr(S/K_sa) + S/K_sa)"},
+////        new string[]{ "ucii", "Competitive Inhibition (Irreversible)", "S", "V", "K_m", "K_i", "(V * S/K_m)/(1 + S/K_m + I/K_i)"},
+////        new string[]{
+////                        "ucir", "Competitive Inhibition (Reversible)", "S", "P", "V_f", "V_r", "K_ms", "K_mp", "K_i",
+////                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + I/K_i)"},
+////        new string[]{ "unii", "Noncompetitive Inhibition (Irreversible)", "S", "I", "V", "K_m", "K_i", "(V*S/K_m)/(1 + I/K_i + (S/K_m)*(1 + I/K_i))"},
+////        new string[]{
+////                        "unir", "Noncompetitive Inhibition (Reversible)", "S", "P", "I", "V_f", "K_ms", "K_mp", "K_i",
+////                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + I/K_i + (S/K_ms + P/K_mp )*(1 + I/K_i))"},
+////        new string[]{ "uuci", "Uncompetitive Inhibition (Irreversible)", "S", "I", "V", "K_m", "K_i", "(V*S/K_m)/(1 + (S/K_m)*(1 + I/K_i))"},
+////        new string[]{
+////                        "uucr", "Uncompetitive Inhibition (Reversible)", "S", "P", "I", "V_f", "V_r", "K_ms", "K_mp", "K_i",
+////                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + ( S/K_ms + P/K_mp )*( 1 + I/K_i))"},
+////        new string[]{
+////                        "umi", "Mixed Inhibition Kinetics (Irreversible)", "S", "I", "V", "K_m", "K_is", "K_ic",
+////                        "(V*S/K_m)/(1 + I/K_is + (S/K_m)*(1 + I/K_ic))"},
+////        new string[]{
+////                        "umr", "Mixed Inhibition Kinetics (Reversible)", "S", "P", "I", "V_f", "V_r", "K_ms", "K_mp", "K_is", "K_ic",
+////                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + I/K_is + ( S/K_ms + P/K_mp )*( 1 + I/K_ic ))"},
+////        new string[]{ "uai", "Specific Activation Kinetics - irreversible", "S", "A_c", "V", "K_m", "K_a", "(V*S/K_m)/(1 + S/K_m + K_a/A_c)"},
+////        new string[]{
+////                        "uar", "Specific Activation Kinetics (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_a",
+////                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + K_a/A_c)"},
+////        new string[]{ "ucti", "Catalytic Activation (Irreversible)", "S", "A_c", "V", "K_m", "K_a", "(V*S/K_m)/(1 + K_a/A_c + (S/K_m)*(1 + K_a/A_c))"},
+////        new string[]{
+////                        "uctr", "Catalytic Activation (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_a",
+////                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + K_a/A_c + (S/K_ms + P/K_mp)*(1 + K_a/A_c))"},
+////        new string[]{
+////                        "umai", "Mixed Activation Kinetics (Irreversible)", "S", "A_c", "V", "K_m", "Kas", "Kac",
+////                        "(V*S/K_m)/(1 + Kas/A_c + (S/K_m)*(1 + Kac/A_c))"},
+////        new string[]{
+////                        "umar", "Mixed Activation Kinetics (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_as", "K_ac",
+////                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + K_as/A_c + (S/K_ms + P/K_mp)*(1 + K_ac/A_c))"},
+////        new string[]{
+////                        "uhmi", "General Hyperbolic Modifier Kinetics (Irreversible)", "S", "M", "V", "K_m", "K_d", "a", "b",
+////                        "(V*(S/K_m)*(1 + b * M / (a*K_d)))/(1 + M/K_d + (S/K_m)*(1 + M/(a*K_d)))"},
+////        new string[]{
+////                        "uhmr", "General Hyperbolic Modifier Kinetics (Reversible)", "S", "P", "M", "V_f", "V_r", "K_ms", "K_mp", "K_d", "a", "b",
+////                        "((V_f*S/K_ms - V_r*P/K_mp)*(1 + b*M/(a*K_d)))/(1 + M/K_d + (S/K_ms + P/K_mp)*(1 + M/(a*K_d)))"},
+////        new string[]{
+////                        "ualii", "Allosteric inhibition (Irreversible)", "S", "I", "V", "K_s", "K_ii", "n", "L",
+////                        "(V*pow(1 + S/K_s, n-1))/(L*pow(1 + I/K_ii,n) + pow(1 + S/K_s,n))"},
+////        new string[]{
+////                        "ordubr", "Ordered Uni Bi Kinetics", "A", "P", "Q", "V_f", "V_r", "K_ma", "K_mq", "K_mp", "K_ip", "K_eq",
+////                        "(V_f*( A - P*Q/K_eq))/(K_ma + A*(1 + P/K_ip) + (V_f/(V_r*K_eq))*(K_mq*P + K_mp*Q + P*Q))"},
+////        new string[]{
+////                        "ordbur", "Ordered Bi Uni Kinetics", "A", "B", "P", "V_f", "V_r", "K_ma", "Kmb", "K_mp", "K_ia", "K_eq",
+////                        "(V_f*(A*B - P/K_eq))/(A*B + K_ma*B + Kmb*A + (V_f/(V_r*K_eq))*(K_mp + P*(1 + A/K_ia)))"},
+////        new string[]{
+////                        "ordbbr", "Ordered Bi Bi Kinetics", "A", "B", "P", "Q", "V_f", "K_ma", "K_mb", "K_mp", "K_ia", "K_ib", "K_ip", "K_eq",
+////                        "(V_f*(A*B - P*Q/K_eq))/(A*B*(1 + P/K_ip) + K_mb*(A + K_ia) + K_ma*B + ((V_f / (V_r*K_eq)) * (K_mq*P*( 1 + A/K_ia) + Q*(K_mp*( 1 + (K_ma*B)/(K_ia*K_mb) + P*(1 + B/K_ib))))))"},
+////        new string[]{
+////                        "ppbr", "Ping Pong Bi Bi Kinetics", "A", "B", "P", "Q", "V_f", "V_r", "K_ma", "K_mb", "K_mp", "K_mq", "K_ia", "K_iq", "K_eq",
+////                        "(V_f*(A*B - P*Q/K_eq))/(A*B + K_mb*A + K_ma*B*(1 + Q/K_iq) + ((V_f/(V_r*K_eq))*(K_mq*P*(1 + A/K_ia) + Q*(K_mp + P))))"}};
 ////
 ////
 ////

@@ -39,114 +39,114 @@ using lpsolve (http://sf.net/projects/lpsolve).
 namespace LIB_STRUCTURAL
 {
 
-	/*! \enum LIB_STRUCTURAL::ExportFormats 
-		\brief enum collecting all exports format that will be written by LIB_STRUCTURAL::FluxBalance::writeToFile
+    /*! \enum LIB_STRUCTURAL::ExportFormats 
+        \brief enum collecting all exports format that will be written by LIB_STRUCTURAL::FluxBalance::writeToFile
 
-		\par 
-		After stating the linear programming question, LIB_STRUCTURAL::FluxBalance 
-		allows to export the question as several standard formats: LP, MPS or FreeMPS
+        \par 
+        After stating the linear programming question, LIB_STRUCTURAL::FluxBalance 
+        allows to export the question as several standard formats: LP, MPS or FreeMPS
 
-	*/
-	enum ExportFormats
-	{
-		LP       = FB_EXPORT_LP, 
-		MPS      = FB_EXPORT_MPS,
-		FREE_MPS = FB_EXPORT_FREE_MPS
+    */
+    enum ExportFormats
+    {
+        LP       = FB_EXPORT_LP, 
+        MPS      = FB_EXPORT_MPS,
+        FREE_MPS = FB_EXPORT_FREE_MPS
 
-	} FbExport;
-	
-	/*! \enum LIB_STRUCTURAL::ConstraintOperation 
-	 \brief enum providing human readable interpretions for LIB_STRUCTURAL::FluxBalance::addConstraint
-	 
-	 \par 
-	 When specifying the Flux Constraints one is free to choose between three operations: 
-	 
-	 \li LessOrEqual, 
-	 \li GreaterOrEqual, 
-	 \li Equal
-	 */
-	enum ConstraintOperation {
-		LessOrEqual = FB_OPERATION_LEQ, 
-		GreaterOrEqual = FB_OPERATION_GEQ, 
-		Equal = FB_OPERATION_EQ
-	} FbOperation;
+    } FbExport;
+    
+    /*! \enum LIB_STRUCTURAL::ConstraintOperation 
+     \brief enum providing human readable interpretions for LIB_STRUCTURAL::FluxBalance::addConstraint
+     
+     \par 
+     When specifying the Flux Constraints one is free to choose between three operations: 
+     
+     \li LessOrEqual, 
+     \li GreaterOrEqual, 
+     \li Equal
+     */
+    enum ConstraintOperation {
+        LessOrEqual = FB_OPERATION_LEQ, 
+        GreaterOrEqual = FB_OPERATION_GEQ, 
+        Equal = FB_OPERATION_EQ
+    } FbOperation;
 
 
-	/*! \class LIB_STRUCTURAL::FluxBalance
-		\brief basic functions for steady state flux balance analysis of SBML files
+    /*! \class LIB_STRUCTURAL::FluxBalance
+        \brief basic functions for steady state flux balance analysis of SBML files
 
-		\par 
-		LIB_STRUCTURAL::FluxBalance states flux balance analysis of SBML models (or Stoichiometry matrices)
-		along with flux constraints as linear programming question, which is then solved
-		using lpsolve (http://sf.net/projects/lpsolve).
+        \par 
+        LIB_STRUCTURAL::FluxBalance states flux balance analysis of SBML models (or Stoichiometry matrices)
+        along with flux constraints as linear programming question, which is then solved
+        using lpsolve (http://sf.net/projects/lpsolve).
 
-	*/
-	class FluxBalance
-	{
-	public:
-		typedef LIB_LA::Matrix< double > DoubleMatrix;
+    */
+    class FluxBalance
+    {
+    public:
+        typedef LIB_LA::Matrix< double > DoubleMatrix;
 
-		//! static method to get an instance of LibStructural (allows use as singleton)
-		LIB_EXTERN static FluxBalance* getInstance();
+        //! static method to get an instance of LibStructural (allows use as singleton)
+        LIB_EXTERN static FluxBalance* getInstance();
 
-		//! construct a new FluxBalance
-		LIB_EXTERN FluxBalance(void);
-		//! construct a new FluxBalance with given SBML model
-		LIB_EXTERN FluxBalance(std::string &sbmlContent);
-		//! virtual destructor
-		LIB_EXTERN virtual ~FluxBalance(void);
+        //! construct a new FluxBalance
+        LIB_EXTERN FluxBalance(void);
+        //! construct a new FluxBalance with given SBML model
+        LIB_EXTERN FluxBalance(std::string &sbmlContent);
+        //! virtual destructor
+        LIB_EXTERN virtual ~FluxBalance(void);
 
-		//! initialize this class with a sbml model passed as string
-		LIB_EXTERN void loadSBML(std::string &sbmlContent);
+        //! initialize this class with a sbml model passed as string
+        LIB_EXTERN void loadSBML(std::string &sbmlContent);
 
-		//! initialize this class with a sbml model loaded from file
-		LIB_EXTERN void loadSBMLFromFile(std::string &fileName);
+        //! initialize this class with a sbml model loaded from file
+        LIB_EXTERN void loadSBMLFromFile(std::string &fileName);
 
-		
-		//! initialize class with the given stoichiometry matrix and vector of fluxNames. 
-		LIB_EXTERN void loadStoichiometry(LIB_LA::DoubleMatrix &matrix, std::vector<std::string> &fluxNames);		
+        
+        //! initialize class with the given stoichiometry matrix and vector of fluxNames. 
+        LIB_EXTERN void loadStoichiometry(LIB_LA::DoubleMatrix &matrix, std::vector<std::string> &fluxNames);        
 
-		//! transforms the current model along with constraint and objectives as lp problem and solves the maximization objective using lpsolve.
-		LIB_EXTERN LPResult *solve();
-		//! transforms the current model along with constraint and objectives as lp problem and solves the minimization objective using lpsolve.
-		LIB_EXTERN LPResult *minimize();
-		//! transforms the current model along with constraint and objectives as lp problem and solves the maximization objective using lpsolve.
-		LIB_EXTERN LPResult *maximize();
+        //! transforms the current model along with constraint and objectives as lp problem and solves the maximization objective using lpsolve.
+        LIB_EXTERN LPResult *solve();
+        //! transforms the current model along with constraint and objectives as lp problem and solves the minimization objective using lpsolve.
+        LIB_EXTERN LPResult *minimize();
+        //! transforms the current model along with constraint and objectives as lp problem and solves the maximization objective using lpsolve.
+        LIB_EXTERN LPResult *maximize();
 
-		//! deletes all current constraints
-		LIB_EXTERN void clearConstraints();
-		/*! Adds a new constraint with given fluxName, operation type and constraint value. 
-		 * \remarks operation is one of 1: LessOrEqual, 2: GreaterOrEqual, 3:Equal
-		 *          for convenience the enum LIB_STRUCTURAL::ConstraintOperation is provided.
-		 */
-		LIB_EXTERN void addConstraint(std::string &id, int operation, double value);
-		//! replaces the current constraints with the ones specified in the given constraint vector
-		LIB_EXTERN void setConstraints(std::vector< Constraint > constraint);
+        //! deletes all current constraints
+        LIB_EXTERN void clearConstraints();
+        /*! Adds a new constraint with given fluxName, operation type and constraint value. 
+         * \remarks operation is one of 1: LessOrEqual, 2: GreaterOrEqual, 3:Equal
+         *          for convenience the enum LIB_STRUCTURAL::ConstraintOperation is provided.
+         */
+        LIB_EXTERN void addConstraint(std::string &id, int operation, double value);
+        //! replaces the current constraints with the ones specified in the given constraint vector
+        LIB_EXTERN void setConstraints(std::vector< Constraint > constraint);
 
-		//! deletes all current objectives
-		LIB_EXTERN void clearObjectives();
-		//! adds a new objective with given fluxNames and objective value
-		LIB_EXTERN void addObjective(std::string &id, double value);
-		//! replaces all current objectives with the ones specified in the given objective vector
-		LIB_EXTERN void setObjectives(std::vector< Objective > objectives);
+        //! deletes all current objectives
+        LIB_EXTERN void clearObjectives();
+        //! adds a new objective with given fluxNames and objective value
+        LIB_EXTERN void addObjective(std::string &id, double value);
+        //! replaces all current objectives with the ones specified in the given objective vector
+        LIB_EXTERN void setObjectives(std::vector< Objective > objectives);
 
-		//! writes the LP problem specified by model, objectives and constraints as file with the given format
-		LIB_EXTERN void writeToFile(std::string &fileName, ExportFormats format);
+        //! writes the LP problem specified by model, objectives and constraints as file with the given format
+        LIB_EXTERN void writeToFile(std::string &fileName, ExportFormats format);
 
-		std::vector< Objective   >	Objectives;
-		std::vector< Constraint  >	Constraints;
-		std::vector< std::string >	ReactionNames;
+        std::vector< Objective   >    Objectives;
+        std::vector< Constraint  >    Constraints;
+        std::vector< std::string >    ReactionNames;
 
-		DoubleMatrix *				Stoichiometry;
+        DoubleMatrix *                Stoichiometry;
 
-		char*						OutputFilename;
+        char*                        OutputFilename;
 
-	private:
-		int getIndex(std::string &id);
-		void loadSBMLContentIntoStructAnalysis(std::string &sbmlContent);
-		double* SetupLPsolve(void *lp, int numRows, int numColumns);
-		static FluxBalance* _Instance;
-	};
+    private:
+        int getIndex(std::string &id);
+        void loadSBMLContentIntoStructAnalysis(std::string &sbmlContent);
+        double* SetupLPsolve(void *lp, int numRows, int numColumns);
+        static FluxBalance* _Instance;
+    };
 }
 
 #endif

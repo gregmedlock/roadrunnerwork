@@ -17,26 +17,26 @@ namespace rr
 
 class RR_DECLSPEC PendingAssignment : public rrObject
 {
-	protected:
-        double 							Time;
-        int 							Index;
-        bool        					UseValuesFromTriggerTime;
-		TComputeEventAssignmentDelegate ComputeAssignment;
-		TPerformEventAssignmentDelegate PerformAssignment;
-       	double*							ComputedValues;
-       	int								ComputedValuesSize;
+    protected:
+        double                             Time;
+        int                             Index;
+        bool                            UseValuesFromTriggerTime;
+        TComputeEventAssignmentDelegate ComputeAssignment;
+        TPerformEventAssignmentDelegate PerformAssignment;
+           double*                            ComputedValues;
+           int                                ComputedValuesSize;
 
     public:
           /// <summary>
         /// Initializes a new instance of the PendingAssignment class.
         /// </summary>
         /// <param name="time"></param>
-        								PendingAssignment(	double time,
-                                        					TComputeEventAssignmentDelegate computeAssignment,
+                                        PendingAssignment(    double time,
+                                                            TComputeEventAssignmentDelegate computeAssignment,
                                                             TPerformEventAssignmentDelegate performAssignment,
-                            								bool useValuesFromTriggerTime, int index);
-		int 							GetIndex(){return Index;}
-		double 							GetTime(){return Time;}
+                                                            bool useValuesFromTriggerTime, int index);
+        int                             GetIndex(){return Index;}
+        double                             GetTime(){return Time;}
         void AssignToModel();
 };
 

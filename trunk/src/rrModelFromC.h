@@ -11,14 +11,14 @@ namespace rr
 {
 class CGenerator;
 
-typedef void 	(__cdecl *c_void)();
-typedef int 	(__cdecl *c_int)();
-typedef int 	(__cdecl *c_int_int)(int);
-typedef char* 	(__cdecl *c_charStar)();
+typedef void     (__cdecl *c_void)();
+typedef int     (__cdecl *c_int)();
+typedef int     (__cdecl *c_int_int)(int);
+typedef char*     (__cdecl *c_charStar)();
 typedef void    (__cdecl *c_void_doubleStar)(double*);
 typedef double  (__cdecl *c_double_int)(int);
 typedef double* (__cdecl *c_doubleStar)();
-typedef void	(__cdecl *c_void_double_doubleStar)(double, double*);
+typedef void    (__cdecl *c_void_double_doubleStar)(double, double*);
 
 typedef TComputeEventAssignmentDelegate* (__cdecl *c_TComputeEventAssignmentDelegateStar)();
 typedef TEventDelayDelegate* (__cdecl *c_GetEventDelayDelegatesStar)();
@@ -29,11 +29,11 @@ class CvodeInterface;
 class RR_DECLSPEC ModelFromC : public rrObject
 {
     protected:
-    	//These variables is also generated in the c-code, weird ??
+        //These variables is also generated in the c-code, weird ??
         //Init a decendent models data later
-        int										mDummyInt;
-        int										mDummyDouble;
-        double*									mDummyDoubleArray;
+        int                                        mDummyInt;
+        int                                        mDummyDouble;
+        double*                                    mDummyDoubleArray;
         int                                    *numIndependentVariables;
         int                                    *numDependentVariables;
         int                                    *numTotalVariables;
@@ -43,74 +43,74 @@ class RR_DECLSPEC ModelFromC : public rrObject
         int                                    *numReactions;
         int                                    *numRules;
         int                                    *numEvents;
-        string 									mModelName;
+        string                                     mModelName;
 
     public:
-    	//variables in the DLL are prefixed with _ (will remove that later)
+        //variables in the DLL are prefixed with _ (will remove that later)
         //In this interface, corresponding variable is prefixed with 'm', followed by capital letter, if possible
-        list<string> 					        Warnings;
-        CvodeInterface*							mCvodeInterface;
-		void 									AssignCVodeInterface(CvodeInterface* cvodeI);
-        double 							       *time;
-        void									SetTime(double _time){*time = _time;}
-		double							        GetTime(){return *time;}
+        list<string>                             Warnings;
+        CvodeInterface*                            mCvodeInterface;
+        void                                     AssignCVodeInterface(CvodeInterface* cvodeI);
+        double                                    *time;
+        void                                    SetTime(double _time){*time = _time;}
+        double                                    GetTime(){return *time;}
 
-        double*									y;             //Corresponds to y in IModel
-        int*									ySize;             //Corresponds to y in IModel
+        double*                                    y;             //Corresponds to y in IModel
+        int*                                    ySize;             //Corresponds to y in IModel
 
-		double*									init_y;
-		int*									init_ySize;
+        double*                                    init_y;
+        int*                                    init_ySize;
 
-   		double*									dydt;	   		//This is the "dydt" data in the DLL.
- 		int*									dydtSize;	   		//This is the "dydt" data in the DLL.
+           double*                                    dydt;               //This is the "dydt" data in the DLL.
+         int*                                    dydtSize;               //This is the "dydt" data in the DLL.
 
-        double*									amounts;		//This is the "amounts" data in the DLL.
-        int*									amountsSize;
+        double*                                    amounts;        //This is the "amounts" data in the DLL.
+        int*                                    amountsSize;
 
-        double*									bc;
-        int*									bcSize;
+        double*                                    bc;
+        int*                                    bcSize;
 
-        double*		 					        sr;
-        int*	 						        srSize;
+        double*                                     sr;
+        int*                                     srSize;
 
-        double*									gp;
-        int*									gpSize;
+        double*                                    gp;
+        int*                                    gpSize;
 
-//        vector<double> 					        lp ;        	//Local parameters
+//        vector<double>                             lp ;            //Local parameters
 
-        double* 	         	               	c;        		//Compartment volumes
-		double* 	         	               	cSize;        		//Compartment volumes
+        double*                                     c;                //Compartment volumes
+        double*                                     cSize;                //Compartment volumes
 
-        double*									rates;
-        int*									ratesSize;
+        double*                                    rates;
+        int*                                    ratesSize;
 
-        double*	 					        	ct;         	//Conservation totals
-        int*	 					        	ctSize;        	//Conservation totals
+        double*                                     ct;             //Conservation totals
+        int*                                     ctSize;            //Conservation totals
 
-        double* 						        rateRules;		//additional rateRules
-        int		 						        rateRulesSize;	//additional rateRules
+        double*                                 rateRules;        //additional rateRules
+        int                                         rateRulesSize;    //additional rateRules
 
-        double*		 					        eventTests;
-        int*		 					        eventTestsSize;
-//        vector<double> 					        eventPriorities;
-        TEventDelayDelegate*	 		        eventDelays;		//
-        bool*		                            eventType;
-        int*		                            eventTypeSize;
-        bool*		                            eventPersistentType;
+        double*                                     eventTests;
+        int*                                     eventTestsSize;
+//        vector<double>                             eventPriorities;
+        TEventDelayDelegate*                     eventDelays;        //
+        bool*                                    eventType;
+        int*                                    eventTypeSize;
+        bool*                                    eventPersistentType;
         int*                                    eventPersistentTypeSize;
-        bool*                            		eventStatusArray;
-        int*									eventStatusArraySize;
-        bool*                  			        previousEventStatusArray;
-        int*									previousEventStatusArraySize;
+        bool*                                    eventStatusArray;
+        int*                                    eventStatusArraySize;
+        bool*                                      previousEventStatusArray;
+        int*                                    previousEventStatusArraySize;
 
-        TEventAssignmentDelegate*  				eventAssignments;
-        TComputeEventAssignmentDelegate*	 	computeEventAssignments;
-        TPerformEventAssignmentDelegate* 		performEventAssignments;
+        TEventAssignmentDelegate*                  eventAssignments;
+        TComputeEventAssignmentDelegate*         computeEventAssignments;
+        TPerformEventAssignmentDelegate*         performEventAssignments;
 
-		// CTOR
-												ModelFromC();
+        // CTOR
+                                                ModelFromC();
 
-    	// Virtual functions --------------------------------------------------------
+        // Virtual functions --------------------------------------------------------
         virtual int                             getNumIndependentVariables();
         virtual int                             getNumDependentVariables();
         virtual int                             getNumTotalVariables();
@@ -145,77 +145,77 @@ class RR_DECLSPEC ModelFromC : public rrObject
 //
 //        //Pure virtuals - force implementation...
 //        virtual void                            setCompartmentVolumes() = 0;
-//        virtual vector<double> 					GetCurrentValues() = 0 ;
-//        virtual double 							getConcentration(int index) = 0;
-//        virtual int 							getNumLocalParameters(int reactionId) = 0;         // Level 2 support
+//        virtual vector<double>                     GetCurrentValues() = 0 ;
+//        virtual double                             getConcentration(int index) = 0;
+//        virtual int                             getNumLocalParameters(int reactionId) = 0;         // Level 2 support
 //
-//        virtual vector<double>					GetdYdT() = 0;
+//        virtual vector<double>                    GetdYdT() = 0;
 
 
-	public:
-	    CGenerator*					mCodeGenerator;	//There are some arrays returned that we don't know the size of..!
-        bool						mIsInitialized;	//If all functions are found properly in the dll, this one is true
-		HINSTANCE					mDLLHandle;
+    public:
+        CGenerator*                    mCodeGenerator;    //There are some arrays returned that we don't know the size of..!
+        bool                        mIsInitialized;    //If all functions are found properly in the dll, this one is true
+        HINSTANCE                    mDLLHandle;
 
-		//Function pointers...
-        c_int 				        cInitModel;
-        c_charStar 		            cGetModelName;
+        //Function pointers...
+        c_int                         cInitModel;
+        c_charStar                     cGetModelName;
         c_void                      cinitializeInitialConditions;
         c_void                      csetParameterValues;
         c_void                      csetCompartmentVolumes;
-		c_int_int			        cgetNumLocalParameters;
+        c_int_int                    cgetNumLocalParameters;
         c_void                      csetBoundaryConditions;
-		c_void                      csetInitialConditions;
-		c_void                      cevalInitialAssignments;
-		c_void_doubleStar			cupdateDependentSpeciesValues;
-		c_void_doubleStar           ccomputeRules;
-		c_void                      cconvertToAmounts;
-		c_void                      ccomputeConservedTotals;
-		c_double_int   		        cgetConcentration;
-		c_doubleStar	        	cGetCurrentValues;
-		c_void_double_doubleStar 	cevalModel;
-		c_void                      cconvertToConcentrations;
-		c_void_double_doubleStar    cevalEvents;
-		c_void						ccomputeAllRatesOfChange;
-   		c_void						cAssignRates_a;
-		c_void_doubleStar			cAssignRates_b;
-		c_void						ctestConstraints;
-		c_void						cresetEvents;
-		c_void						cInitializeRates;
-		c_void						cInitializeRateRuleSymbols;
+        c_void                      csetInitialConditions;
+        c_void                      cevalInitialAssignments;
+        c_void_doubleStar            cupdateDependentSpeciesValues;
+        c_void_doubleStar           ccomputeRules;
+        c_void                      cconvertToAmounts;
+        c_void                      ccomputeConservedTotals;
+        c_double_int                   cgetConcentration;
+        c_doubleStar                cGetCurrentValues;
+        c_void_double_doubleStar     cevalModel;
+        c_void                      cconvertToConcentrations;
+        c_void_double_doubleStar    cevalEvents;
+        c_void                        ccomputeAllRatesOfChange;
+           c_void                        cAssignRates_a;
+        c_void_doubleStar            cAssignRates_b;
+        c_void                        ctestConstraints;
+        c_void                        cresetEvents;
+        c_void                        cInitializeRates;
+        c_void                        cInitializeRateRuleSymbols;
 
-		//Utility
-		HANDLE 						GetFunctionPtr(const string& function);
+        //Utility
+        HANDLE                         GetFunctionPtr(const string& function);
 
     public:
-						    		ModelFromC(CGenerator* generator, HINSTANCE dllHandle = NULL);
+                                    ModelFromC(CGenerator* generator, HINSTANCE dllHandle = NULL);
                                    ~ModelFromC();
         //Non inherited
-        bool						SetupDLLData();
-		bool						SetupDLLFunctions();
+        bool                        SetupDLLData();
+        bool                        SetupDLLFunctions();
 
         //The following functions C equivalent may need to be in the DLL
         //Inherited functions
-    	void 						setCompartmentVolumes();
-        int 						getNumLocalParameters(int reactionId);
-       	void                        computeRules(vector<double>& _y);
-       	void	  	           		computeRules(double* ay, int size);
+        void                         setCompartmentVolumes();
+        int                         getNumLocalParameters(int reactionId);
+           void                        computeRules(vector<double>& _y);
+           void                             computeRules(double* ay, int size);
 
-		void  						initializeInitialConditions();
+        void                          initializeInitialConditions();
 
-		void  						setParameterValues();
-		void 						setBoundaryConditions();
-		void 						setInitialConditions();
-        void	                 	evalInitialAssignments();
+        void                          setParameterValues();
+        void                         setBoundaryConditions();
+        void                         setInitialConditions();
+        void                         evalInitialAssignments();
 
-        void 	                	convertToAmounts();
-        void    	         	    computeConservedTotals();
-        double		   				getConcentration(int index);
+        void                         convertToAmounts();
+        void                         computeConservedTotals();
+        double                           getConcentration(int index);
 
         //Access dll data
-        vector<double> 				GetCurrentValues();
-        double		   				GetAmounts(const int& i);
-//        vector<double>				GetdYdT();
+        vector<double>                 GetCurrentValues();
+        double                           GetAmounts(const int& i);
+//        vector<double>                GetdYdT();
 
 //        int                         getNumIndependentVariables();
 //        int                         getNumDependentVariables();
@@ -241,8 +241,8 @@ class RR_DECLSPEC ModelFromC : public rrObject
         void                        updateDependentSpeciesValues(double* _y);
 //        void                        computeRules(vector<double>& _y);
 //        void                        computeReactionRates(double time, vector<double>& y);
-		void                        computeAllRatesOfChange();
-		void                        evalModel(double time, vector<double>& y);
+        void                        computeAllRatesOfChange();
+        void                        evalModel(double time, vector<double>& y);
         void                        evalEvents(double time, vector<double>& y);
         void                        resetEvents();
 //        void                        evalInitialAssignments();
@@ -597,7 +597,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
 ////                                    break;
 ////                                default:
 ////                                    //if (!_functionParameters.Contains(s.tokenString))
-////                                    //	throw new ArgumentException("Token '" + s.tokenString + "' not recognized.");
+////                                    //    throw new ArgumentException("Token '" + s.tokenString + "' not recognized.");
 ////                                    //else
 ////                                    sb.Append(s.tokenString);
 ////                                    break;
@@ -1416,7 +1416,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
 ////                    conservationList.Add(new Symbol("CSUM" + i, double.NaN));
 ////                }
 ////            }
-////            sb.Append("	}" + NL() + NL());
+////            sb.Append("    }" + NL() + NL());
 ////        }
 ////
 ////        private void WriteUpdateDependentSpecies(StringBuilder sb, int numIndependentSpecies, int numDependentSpecies,

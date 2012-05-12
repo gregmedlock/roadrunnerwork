@@ -10,9 +10,9 @@ namespace rr
 class RR_DECLSPEC Random : public rrObject, public MTRand_open
 {
 
-	private:
+    private:
     public:
-    	Random();
+        Random();
 };
 
 }

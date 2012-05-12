@@ -20,181 +20,181 @@ void EventFcn(double time, cvode_precision* y, cvode_precision* gdot, void* fdat
 class RR_DECLSPEC CvodeInterface : public rrObject
 {
     private:
-		const string 		        CVODE;
-        const double 		        defaultReltol;
-        const double 		        defaultAbsTol;
-        const int 			        defaultMaxNumSteps;
+        const string                 CVODE;
+        const double                 defaultReltol;
+        const double                 defaultAbsTol;
+        const int                     defaultMaxNumSteps;
 
-		static string 			    tempPathstring;
-		static int 				    errorFileCounter;
-		FILE* 					    fileHandle;
+        static string                 tempPathstring;
+        static int                     errorFileCounter;
+        FILE*                         fileHandle;
 
-		int 					    numIndependentVariables;
-		N_Vector				    gdata;
-		int* 					    _rootsFound;
-		N_Vector					_amounts; 		//IntPtr 					    _amounts;
-		N_Vector				    abstolArray;
-		string 					    cvodeLogFile;
-		void*					    cvodeMem;
-		int 					    numAdditionalRules;
-		void 						HandleCVODEError(int errCode);
-		vector<double> 				assignmentTimes;
-		bool 						followEvents;
-		void 	                    AssignPendingEvents(const double& timeEnd, const double& tout);
-		vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents);
-		vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, vector<int>& removeEvents);
-		vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents, const bool& assignOldState);
-		vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents);
-		void 					    HandleRootsFound(double &timeEnd, const double& tout);
-		void                        RemovePendingAssignmentForIndex(const int& eventIndex);
-		void                        SortEventsByPriority(vector<int>& firedEvents);
-		void                        HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound);
+        int                         numIndependentVariables;
+        N_Vector                    gdata;
+        int*                         _rootsFound;
+        N_Vector                    _amounts;         //IntPtr                         _amounts;
+        N_Vector                    abstolArray;
+        string                         cvodeLogFile;
+        void*                        cvodeMem;
+        int                         numAdditionalRules;
+        void                         HandleCVODEError(int errCode);
+        vector<double>                 assignmentTimes;
+        bool                         followEvents;
+        void                         AssignPendingEvents(const double& timeEnd, const double& tout);
+        vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents);
+        vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, vector<int>& removeEvents);
+        vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents, const bool& assignOldState);
+        vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents);
+        void                         HandleRootsFound(double &timeEnd, const double& tout);
+        void                        RemovePendingAssignmentForIndex(const int& eventIndex);
+        void                        SortEventsByPriority(vector<int>& firedEvents);
+        void                        HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound);
 
-	public:
-		void         	        	AssignResultsToModel();
-		static int 			        mCount;
-		static int 			        mRootCount;
-        static int 			        mOneStepCount;
+    public:
+        void                         AssignResultsToModel();
+        static int                     mCount;
+        static int                     mRootCount;
+        static int                     mOneStepCount;
 
-		static ModelFromC 	       *model;
-		vector<PendingAssignment> 	assignments;// = new List<PendingAssignment>();
-		Random 			  		    mRandom;// { get; set; }
-		int 					    defaultMaxAdamsOrder;// = 12;
-		int 					    defaultMaxBDFOrder;// = 5;
-		int 					    MaxAdamsOrder;// = defaultMaxAdamsOrder;
-		int 					    MaxBDFOrder;// = defaultMaxBDFOrder;
-		double                      InitStep;// = 0.0;
-		double                      MinStep;// = 0.0;
-		double                      MaxStep;// = 0.0;
-		int 					    MaxNumSteps;// = defaultMaxNumSteps;
-		double                      relTol;// = defaultReltol;
-		double                      absTol;// = defaultAbsTol;
-		int 					    errCode;
-		static double 			    lastTimeValue;
+        static ModelFromC            *model;
+        vector<PendingAssignment>     assignments;// = new List<PendingAssignment>();
+        Random                           mRandom;// { get; set; }
+        int                         defaultMaxAdamsOrder;// = 12;
+        int                         defaultMaxBDFOrder;// = 5;
+        int                         MaxAdamsOrder;// = defaultMaxAdamsOrder;
+        int                         MaxBDFOrder;// = defaultMaxBDFOrder;
+        double                      InitStep;// = 0.0;
+        double                      MinStep;// = 0.0;
+        double                      MaxStep;// = 0.0;
+        int                         MaxNumSteps;// = defaultMaxNumSteps;
+        double                      relTol;// = defaultReltol;
+        double                      absTol;// = defaultAbsTol;
+        int                         errCode;
+        static double                 lastTimeValue;
 
-									// -------------------------------------------------------------------------
-									// Constructor
-									// Model contains all the symbol tables associated with the model
-									// ev is the model function
-									// -------------------------------------------------------------------------
-									CvodeInterface(ModelFromC* oModel);
-								   ~CvodeInterface();
+                                    // -------------------------------------------------------------------------
+                                    // Constructor
+                                    // Model contains all the symbol tables associated with the model
+                                    // ev is the model function
+                                    // -------------------------------------------------------------------------
+                                    CvodeInterface(ModelFromC* oModel);
+                                   ~CvodeInterface();
 
-		void                        TestRootsAtInitialTime();
+        void                        TestRootsAtInitialTime();
 
-		//public delegate void TCallBackModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
-		//typedef void (CvodeInterface::*TCallBackModelFcn)(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
-		//typedef void (*CallBackModelFcn)(int n, double time, double* y, double* ydot, void* fdata);
+        //public delegate void TCallBackModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
+        //typedef void (CvodeInterface::*TCallBackModelFcn)(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
+        //typedef void (*CallBackModelFcn)(int n, double time, double* y, double* ydot, void* fdata);
 
-		//public delegate void TCallBackRootFcn(double t, IntPtr y, IntPtr gdot, IntPtr gdata);
-		//typedef void (CvodeInterface::*TCallBackRootFcn)(double t, IntPtr y, IntPtr gdot, IntPtr gdata);
+        //public delegate void TCallBackRootFcn(double t, IntPtr y, IntPtr gdot, IntPtr gdata);
+        //typedef void (CvodeInterface::*TCallBackRootFcn)(double t, IntPtr y, IntPtr gdot, IntPtr gdata);
 
-		//TCallBackModelFcn 		modelDelegate;
-//		CallBackModelFcn 		modelDelegate;
-//        TCallBackRootFcn 		eventDelegate;
+        //TCallBackModelFcn         modelDelegate;
+//        CallBackModelFcn         modelDelegate;
+//        TCallBackRootFcn         eventDelegate;
 
-		//Dll functions are in rrCvodedll.h / .cpp
-//		void 					ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
-//		void 					ModelFcn(int n, double time, double* y, double* ydot, void* fdata);
-		//[DllImport(CVODE, EntryPoint = "fileOpen", ExactSpelling = false, CharSet = CharSet.Ansi, SetLastError = true)]
-//		IntPtr 					fileOpen(string fileName){return NULL;}
+        //Dll functions are in rrCvodedll.h / .cpp
+//        void                     ModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);
+//        void                     ModelFcn(int n, double time, double* y, double* ydot, void* fdata);
+        //[DllImport(CVODE, EntryPoint = "fileOpen", ExactSpelling = false, CharSet = CharSet.Ansi, SetLastError = true)]
+//        IntPtr                     fileOpen(string fileName){return NULL;}
 
-		//[DllImport(CVODE, EntryPoint = "fileClose", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		void 					fileClose(IntPtr fp){};
+        //[DllImport(CVODE, EntryPoint = "fileClose", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        void                     fileClose(IntPtr fp){};
 
-		//[DllImport(CVODE, EntryPoint = "NewCvode_Vector", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-		//static IntPtr 			NewCvode_Vector(int n);
-
-
-		//[DllImport(CVODE, EntryPoint = "Cvode_SetVector", ExactSpelling = false,  CharSet = CharSet.Unicode, SetLastError = true)]
-		//void 					Cvode_SetVector(IntPtr v, int Index, double Value){};
-
-		//[DllImport(CVODE, EntryPoint = "FreeCvode_Vector", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		void 					FreeCvode_Vector(IntPtr vect){};
-
-		//[DllImport(CVODE, EntryPoint = "FreeCvode_Mem", ExactSpelling = false,  CharSet = CharSet.Unicode, SetLastError = true)]
-//		void 					FreeCvode_Mem(IntPtr p){};
-
-		//[DllImport(CVODE, EntryPoint = "Cvode_GetVector", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-		//public static extern double Cvode_GetVector(IntPtr v, int Index){};
-
-		//[DllImport(CVODE, EntryPoint = "Create_BDF_NEWTON_CVode", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-		//IntPtr Create_BDF_NEWTON_CVode(){};
-
-		//[DllImport(CVODE, EntryPoint = "Create_ADAMS_FUNCTIONAL_CVode", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		IntPtr 					Create_ADAMS_FUNCTIONAL_CVode(){return NULL;}
-
-		//[DllImport(CVODE, EntryPoint = "AllocateCvodeMem", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-		// int 					AllocateCvodeMem(IntPtr cvode_mem, int n, TCallBackModelFcn fcn, double t0, IntPtr y, double reltol, IntPtr abstol);//{return -1;}
-		//
-		//[DllImport(CVODE, EntryPoint = "CvDense", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					CvDense(IntPtr cvode_mem, int n){return -1;}
-
-		//        // int = size of systems
-
-		//[DllImport(CVODE, EntryPoint = "CVReInit", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					CVReInit(IntPtr cvode_mem, double t0, IntPtr y0, double reltol, IntPtr abstol){return NULL;}
-
-		//[DllImport(CVODE, EntryPoint = "Run_Cvode")]
-		//        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr  y, ref double t, string ErrMsg){};
-		//		int 					RunCvode(IntPtr cvode_mem, double tout, IntPtr y, double t){return NULL;}
-		//        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr y, ref double t);  // t = double *
-		//[DllImport(CVODE, EntryPoint = "CVGetRootInfo", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					CVGetRootInfo(IntPtr cvode_mem, IntPtr rootsFound){return NULL;}
-		//[DllImport(CVODE, EntryPoint = "CVRootInit", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					CVRootInit(IntPtr cvode_mem, int numRoots, TCallBackRootFcn rootfcn, IntPtr gdata){return -1;}
-
-		//[DllImport(CVODE, EntryPoint = "SetMaxNumSteps", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					SetMaxNumSteps(IntPtr cvode_mem, int mxsteps){return -1;}
-
-		//[DllImport(CVODE, EntryPoint = "SetMinStep", ExactSpelling = false,  CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					SetMinStep(IntPtr cvode_mem, double minStep){return -1;}
-
-		//[DllImport(CVODE, EntryPoint = "SetMaxStep", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					SetMaxStep(IntPtr cvode_mem, double maxStep){return -1;}
-
-		//[DllImport(CVODE, EntryPoint = "SetInitStep", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-		//		int SetInitStep(IntPtr cvode_mem, double initStep){};
-
-		//[DllImport(CVODE, EntryPoint = "SetMaxOrder", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					SetMaxOrder(IntPtr cvode_mem, int mxorder){return -1;}
-
-		//[DllImport(CVODE, EntryPoint = "SetMaxErrTestFails", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					SetMaxErrTestFails(IntPtr cvode_mem, int maxnef);
-
-		//[DllImport(CVODE, EntryPoint = "SetMaxConvFails", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					SetMaxConvFails(IntPtr cvode_mem, int maxncf){return NULL;}
-
-		//[DllImport(CVODE, EntryPoint = "SetMaxNonLinIters", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					SetMaxNonLinIters(IntPtr cvode_mem, int maxcor){return NULL;}
-
-		//[DllImport(CVODE, EntryPoint = "SetErrFile", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
-//		int 					SetErrFile(IntPtr cvode_mem, IntPtr errfp){return NULL;}
+        //[DllImport(CVODE, EntryPoint = "NewCvode_Vector", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+        //static IntPtr             NewCvode_Vector(int n);
 
 
+        //[DllImport(CVODE, EntryPoint = "Cvode_SetVector", ExactSpelling = false,  CharSet = CharSet.Unicode, SetLastError = true)]
+        //void                     Cvode_SetVector(IntPtr v, int Index, double Value){};
 
-		//public double[] GetCopy(double[] oVector);
-		//public bool[] GetCopy(bool[] oVector);
+        //[DllImport(CVODE, EntryPoint = "FreeCvode_Vector", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        void                     FreeCvode_Vector(IntPtr vect){};
+
+        //[DllImport(CVODE, EntryPoint = "FreeCvode_Mem", ExactSpelling = false,  CharSet = CharSet.Unicode, SetLastError = true)]
+//        void                     FreeCvode_Mem(IntPtr p){};
+
+        //[DllImport(CVODE, EntryPoint = "Cvode_GetVector", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+        //public static extern double Cvode_GetVector(IntPtr v, int Index){};
+
+        //[DllImport(CVODE, EntryPoint = "Create_BDF_NEWTON_CVode", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+        //IntPtr Create_BDF_NEWTON_CVode(){};
+
+        //[DllImport(CVODE, EntryPoint = "Create_ADAMS_FUNCTIONAL_CVode", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        IntPtr                     Create_ADAMS_FUNCTIONAL_CVode(){return NULL;}
+
+        //[DllImport(CVODE, EntryPoint = "AllocateCvodeMem", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+        // int                     AllocateCvodeMem(IntPtr cvode_mem, int n, TCallBackModelFcn fcn, double t0, IntPtr y, double reltol, IntPtr abstol);//{return -1;}
+        //
+        //[DllImport(CVODE, EntryPoint = "CvDense", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     CvDense(IntPtr cvode_mem, int n){return -1;}
+
+        //        // int = size of systems
+
+        //[DllImport(CVODE, EntryPoint = "CVReInit", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     CVReInit(IntPtr cvode_mem, double t0, IntPtr y0, double reltol, IntPtr abstol){return NULL;}
+
+        //[DllImport(CVODE, EntryPoint = "Run_Cvode")]
+        //        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr  y, ref double t, string ErrMsg){};
+        //        int                     RunCvode(IntPtr cvode_mem, double tout, IntPtr y, double t){return NULL;}
+        //        //public static extern int  RunCvode (IntPtr cvode_mem, double tout, IntPtr y, ref double t);  // t = double *
+        //[DllImport(CVODE, EntryPoint = "CVGetRootInfo", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     CVGetRootInfo(IntPtr cvode_mem, IntPtr rootsFound){return NULL;}
+        //[DllImport(CVODE, EntryPoint = "CVRootInit", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     CVRootInit(IntPtr cvode_mem, int numRoots, TCallBackRootFcn rootfcn, IntPtr gdata){return -1;}
+
+        //[DllImport(CVODE, EntryPoint = "SetMaxNumSteps", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     SetMaxNumSteps(IntPtr cvode_mem, int mxsteps){return -1;}
+
+        //[DllImport(CVODE, EntryPoint = "SetMinStep", ExactSpelling = false,  CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     SetMinStep(IntPtr cvode_mem, double minStep){return -1;}
+
+        //[DllImport(CVODE, EntryPoint = "SetMaxStep", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     SetMaxStep(IntPtr cvode_mem, double maxStep){return -1;}
+
+        //[DllImport(CVODE, EntryPoint = "SetInitStep", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+        //        int SetInitStep(IntPtr cvode_mem, double initStep){};
+
+        //[DllImport(CVODE, EntryPoint = "SetMaxOrder", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     SetMaxOrder(IntPtr cvode_mem, int mxorder){return -1;}
+
+        //[DllImport(CVODE, EntryPoint = "SetMaxErrTestFails", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     SetMaxErrTestFails(IntPtr cvode_mem, int maxnef);
+
+        //[DllImport(CVODE, EntryPoint = "SetMaxConvFails", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     SetMaxConvFails(IntPtr cvode_mem, int maxncf){return NULL;}
+
+        //[DllImport(CVODE, EntryPoint = "SetMaxNonLinIters", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     SetMaxNonLinIters(IntPtr cvode_mem, int maxcor){return NULL;}
+
+        //[DllImport(CVODE, EntryPoint = "SetErrFile", ExactSpelling = false, CharSet = CharSet.Unicode, SetLastError = true)]
+//        int                     SetErrFile(IntPtr cvode_mem, IntPtr errfp){return NULL;}
 
 
-		bool 					HaveVariables();
-		void 					InitializeCVODEInterface(ModelFromC *oModel);
+
+        //public double[] GetCopy(double[] oVector);
+        //public bool[] GetCopy(bool[] oVector);
+
+
+        bool                     HaveVariables();
+        void                     InitializeCVODEInterface(ModelFromC *oModel);
 //        internal static CvodeErrorCodes[] errorCodes = InitilizeErrorCodes();
 //        internal static CvodeErrorCodes[] InitilizeErrorCodes();
 
-		double 					lastEvent;
+        double                     lastEvent;
 //        //internal List<double> eventOccurance = new List<double>();
-		double 					OneStep(double timeStart, double hstep);
+        double                     OneStep(double timeStart, double hstep);
 
-		// Restart the simulation using a different initial condition
-		void                   	AssignNewVector(ModelFromC *oModel, bool bAssignNewTolerances);
-		void                   	AssignNewVector(ModelFromC *model);
-		void 					setAbsTolerance(int index, double dValue);
-		int 					reStart(double timeStart, ModelFromC* model);
+        // Restart the simulation using a different initial condition
+        void                       AssignNewVector(ModelFromC *oModel, bool bAssignNewTolerances);
+        void                       AssignNewVector(ModelFromC *model);
+        void                     setAbsTolerance(int index, double dValue);
+        int                     reStart(double timeStart, ModelFromC* model);
 //        public double getValue(int index);
-		vector<double> 			BuildEvalArgument();
+        vector<double>             BuildEvalArgument();
 
-};	//class
+};    //class
 }//namespace rr
 
 #endif
@@ -424,12 +424,12 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 ////            Marshal.Copy(y, dCVodeArgument, 0, Math.Min(n, dCVodeArgument.Length));
 ////
 ////#if (PRINT_STEP_DEBUG)
-////		            System.Diagnostics.Debug.Write("CVode In: (" + nCount + ")" );
-////		            for (int i = 0; i < dCVodeArgument.Length; i++)
-////		            {
-////		                System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
-////		            }
-////		            System.Diagnostics.Debug.WriteLine("");
+////                    System.Diagnostics.Debug.Write("CVode In: (" + nCount + ")" );
+////                    for (int i = 0; i < dCVodeArgument.Length; i++)
+////                    {
+////                        System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
+////                    }
+////                    System.Diagnostics.Debug.WriteLine("");
 ////#endif
 ////
 ////            model.evalModel(time, dCVodeArgument);
@@ -438,12 +438,12 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 ////            model.dydt.CopyTo(dCVodeArgument, model.rateRules.Length);
 ////
 ////#if (PRINT_STEP_DEBUG)
-////		            System.Diagnostics.Debug.Write("CVode Out: (" + nCount + ")");
-////		            for (int i = 0; i < dCVodeArgument.Length; i++)
-////		            {
-////		                System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
-////		            }
-////		            System.Diagnostics.Debug.WriteLine("");
+////                    System.Diagnostics.Debug.Write("CVode Out: (" + nCount + ")");
+////                    for (int i = 0; i < dCVodeArgument.Length; i++)
+////                    {
+////                        System.Diagnostics.Debug.Write(dCVodeArgument[i].ToString() + ", ");
+////                    }
+////                    System.Diagnostics.Debug.WriteLine("");
 ////#endif
 ////
 ////            Marshal.Copy(dCVodeArgument, 0, ydot, Math.Min(dCVodeArgument.Length, n));
@@ -479,12 +479,12 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 ////            Marshal.Copy(model.eventTests, 0, gdot, model.getNumEvents);
 ////
 ////#if (PRINT_EVENT_DEBUG)
-////		            System.Diagnostics.Debug.Write("Rootfunction Out: t=" + time.ToString("F14") + " (" + nRootCount + "): ");
-////		            for (int i = 0; i < model.eventTests.Length; i++)
-////		            {
-////		                System.Diagnostics.Debug.Write(model.eventTests[i].ToString() + " p=" + model.previousEventStatusArray[i] + " c=" + model.eventStatusArray[i] + ", ");
-////		            }
-////		            System.Diagnostics.Debug.WriteLine("");
+////                    System.Diagnostics.Debug.Write("Rootfunction Out: t=" + time.ToString("F14") + " (" + nRootCount + "): ");
+////                    for (int i = 0; i < model.eventTests.Length; i++)
+////                    {
+////                        System.Diagnostics.Debug.Write(model.eventTests[i].ToString() + " p=" + model.previousEventStatusArray[i] + " c=" + model.eventStatusArray[i] + ", ");
+////                    }
+////                    System.Diagnostics.Debug.WriteLine("");
 ////#endif
 ////
 ////            nRootCount++;
@@ -691,9 +691,9 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 ////        public double OneStep(double timeStart, double hstep)
 ////        {
 ////#if (PRINT_DEBUG)
-////		            System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
-////		            System.Diagnostics.Debug.WriteLine("--- O N E     S T E P      ( " + nOneStepCount + " ) ");
-////		            System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+////                    System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+////                    System.Diagnostics.Debug.WriteLine("--- O N E     S T E P      ( " + nOneStepCount + " ) ");
+////                    System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
 ////#endif
 ////            nOneStepCount++;
 ////            nCount = 0;
@@ -733,9 +733,9 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 ////                    if (nResult == CV_ROOT_RETURN && followEvents)
 ////                    {
 ////#if (PRINT_DEBUG)
-////		                        System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
-////		                        System.Diagnostics.Debug.WriteLine("--- E V E N T      ( " + nOneStepCount + " ) ");
-////		                        System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+////                                System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+////                                System.Diagnostics.Debug.WriteLine("--- E V E N T      ( " + nOneStepCount + " ) ");
+////                                System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
 ////#endif
 ////
 ////                        //bool tooCloseToStart = Math.Abs(timeEnd - timeStart) > absTol;
@@ -1020,7 +1020,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
 ////                    }
 ////
 ////#if (PRINT_DEBUG)
-////		                    System.Diagnostics.Debug.WriteLine("time: " + model.time.ToString("F4") + " Event " + (i + 1).ToString());
+////                            System.Diagnostics.Debug.WriteLine("time: " + model.time.ToString("F4") + " Event " + (i + 1).ToString());
 ////#endif
 ////                }
 ////            }

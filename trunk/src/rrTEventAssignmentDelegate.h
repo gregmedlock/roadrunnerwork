@@ -3,8 +3,8 @@
 
 namespace rr
 {
-	typedef void 						(__cdecl *TEventAssignmentDelegate)();			//FuncPointer taking no args and returning void
-	typedef TEventAssignmentDelegate* 	(__cdecl *c_TEventAssignmentDelegateStar)();	//Array of function pointers
+    typedef void                         (__cdecl *TEventAssignmentDelegate)();            //FuncPointer taking no args and returning void
+    typedef TEventAssignmentDelegate*     (__cdecl *c_TEventAssignmentDelegateStar)();    //Array of function pointers
 }
 
 #endif

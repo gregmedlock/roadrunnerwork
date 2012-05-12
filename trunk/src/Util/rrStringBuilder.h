@@ -13,19 +13,19 @@ namespace rr
 
 class RR_DECLSPEC StringBuilder : public rrObject
 {
-	protected:
-    	stringstream 				mStringing;
+    protected:
+        stringstream                 mStringing;
 
-	public:
+    public:
 
-									StringBuilder(const string& aStr = "");
-		stringstream& 				operator<<(const string& str);
-        string 						ToString();
+                                    StringBuilder(const string& aStr = "");
+        stringstream&                 operator<<(const string& str);
+        string                         ToString();
 
-        void						NewLine(const string& line = "");
-        void						Line(const string& line);
-        void						TLine(const string& line, const int& tabs = 1);
-        void						Clear();
+        void                        NewLine(const string& line = "");
+        void                        Line(const string& line);
+        void                        TLine(const string& line, const int& tabs = 1);
+        void                        Clear();
 };
 
 }

@@ -16,17 +16,17 @@ namespace rr
 class SBMLSymbol;
 class RR_DECLSPEC SBMLSymbolDependencies : public rrObject
 {
-	protected:
-		deque<SBMLSymbol*>		    mDependencies;
+    protected:
+        deque<SBMLSymbol*>            mDependencies;
 
-	public:
-								    SBMLSymbolDependencies(){}
-									SBMLSymbolDependencies(const SBMLSymbolDependencies& cp);
-								   ~SBMLSymbolDependencies();
-		SBMLSymbolDependencies&     operator=(const SBMLSymbolDependencies& rhs);
-		void					    Add(SBMLSymbol* symbol);
-		int						    Count();
-		SBMLSymbol				    At(const int& i);
+    public:
+                                    SBMLSymbolDependencies(){}
+                                    SBMLSymbolDependencies(const SBMLSymbolDependencies& cp);
+                                   ~SBMLSymbolDependencies();
+        SBMLSymbolDependencies&     operator=(const SBMLSymbolDependencies& rhs);
+        void                        Add(SBMLSymbol* symbol);
+        int                            Count();
+        SBMLSymbol                    At(const int& i);
 };
 
 }

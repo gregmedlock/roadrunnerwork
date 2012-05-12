@@ -10,27 +10,27 @@ namespace rr
 class RR_DECLSPEC DoubleMatrix : public rrObject
 {
     protected:
-    	unsigned 		mRowCount;
-        unsigned 		mColCount;
-    	double* 		mMatrix;
-		bool			mIsOwner;
-		const string*			mNamePtr;
+        unsigned         mRowCount;
+        unsigned         mColCount;
+        double*         mMatrix;
+        bool            mIsOwner;
+        const string*            mNamePtr;
 
     public:
-						DoubleMatrix(const unsigned& rows = 0, const unsigned& cols = 0, const string& name = "");
-						DoubleMatrix(const DoubleMatrix& m);        // Copy constructor
-						~DoubleMatrix();                            // Destructor
-						DoubleMatrix(double* ptrToArray, const unsigned& rowCount = 0, const unsigned& colCount = 0);
+                        DoubleMatrix(const unsigned& rows = 0, const unsigned& cols = 0, const string& name = "");
+                        DoubleMatrix(const DoubleMatrix& m);        // Copy constructor
+                        ~DoubleMatrix();                            // Destructor
+                        DoubleMatrix(double* ptrToArray, const unsigned& rowCount = 0, const unsigned& colCount = 0);
 
-		DoubleMatrix& 	operator = (const DoubleMatrix & rhs);   	// Assignment operator
-		double& 		operator() (const unsigned& row, const unsigned& col);
-		double  		operator() (const unsigned& row, const unsigned& col) const;
+        DoubleMatrix&     operator = (const DoubleMatrix & rhs);       // Assignment operator
+        double&         operator() (const unsigned& row, const unsigned& col);
+        double          operator() (const unsigned& row, const unsigned& col) const;
 
-		unsigned 		RSize() const {return mRowCount;}
-		unsigned		CSize() const {return mColCount;}
-		bool			Allocate(unsigned rows, unsigned cols);
-		double*			GetPointer(){return mMatrix;}
-        void			SetNamePointer(const string* namePtr){mNamePtr = namePtr;}
+        unsigned         RSize() const {return mRowCount;}
+        unsigned        CSize() const {return mColCount;}
+        bool            Allocate(unsigned rows, unsigned cols);
+        double*            GetPointer(){return mMatrix;}
+        void            SetNamePointer(const string* namePtr){mNamePtr = namePtr;}
 
 };
 

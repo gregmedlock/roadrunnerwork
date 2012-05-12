@@ -5,23 +5,23 @@
 namespace rr //This namespace corresponds to C#'s namespace LibRoadRunner
 {
 // See: http://en.wikipedia.org/wiki/Mathematical_constant
-const double EULER_CONSTANT_GAMMA 	= 0.57721566490153286060651209008;
-const double GOLDEN_RATIO 			= 1.618033988749895;
-const double LOG2E 					= 1.44269504088896340735992468100; /* log_2 (e) */
-const double LOG10E 				= 0.43429448190325182765112891892; /* log_10 (e) */
-const double SQRT2 					= 1.41421356237309504880168872421; /* sqrt(2) */
-const double SQRT1_2 				= 0.70710678118654752440084436210; /* sqrt(1/2) */
-const double SQRT3 					= 1.73205080756887729352744634151; /* sqrt(3) */
-const double PI		 				= 3.14159265358979323846264338327; /* pi */
-const double PI_BY_2 				= 1.57079632679489661923132169164; /* pi/2 */
-const double PI_BY_4 				= 0.78539816339744830966156608458; /* pi/4 */
-const double SQRTPI 				= 1.77245385090551602729816748334; /* sqrt(pi) */
-const double TWO_BY_SQRTPI 			= 1.12837916709551257389615890312; /* 2/sqrt(pi) */
-const double ONE_BY_PI 				= 0.31830988618379067153776752675; /* 1/pi */
-const double TWO_BY_PI 				= 0.63661977236758134307553505349; /* 2/pi */
-const double LN10 					= 2.30258509299404568401799145468; /* ln(10) */
-const double LN2 					= 0.69314718055994530941723212146; /* ln(2) */
-const double LNPI 					= 1.14472988584940017414342735135; /* ln(pi) */
+const double EULER_CONSTANT_GAMMA     = 0.57721566490153286060651209008;
+const double GOLDEN_RATIO             = 1.618033988749895;
+const double LOG2E                     = 1.44269504088896340735992468100; /* log_2 (e) */
+const double LOG10E                 = 0.43429448190325182765112891892; /* log_10 (e) */
+const double SQRT2                     = 1.41421356237309504880168872421; /* sqrt(2) */
+const double SQRT1_2                 = 0.70710678118654752440084436210; /* sqrt(1/2) */
+const double SQRT3                     = 1.73205080756887729352744634151; /* sqrt(3) */
+const double PI                         = 3.14159265358979323846264338327; /* pi */
+const double PI_BY_2                 = 1.57079632679489661923132169164; /* pi/2 */
+const double PI_BY_4                 = 0.78539816339744830966156608458; /* pi/4 */
+const double SQRTPI                 = 1.77245385090551602729816748334; /* sqrt(pi) */
+const double TWO_BY_SQRTPI             = 1.12837916709551257389615890312; /* 2/sqrt(pi) */
+const double ONE_BY_PI                 = 0.31830988618379067153776752675; /* 1/pi */
+const double TWO_BY_PI                 = 0.63661977236758134307553505349; /* 2/pi */
+const double LN10                     = 2.30258509299404568401799145468; /* ln(10) */
+const double LN2                     = 0.69314718055994530941723212146; /* ln(2) */
+const double LNPI                     = 1.14472988584940017414342735135; /* ln(pi) */
 
 // Square
 RR_DECLSPEC double sqr(double a);
@@ -95,7 +95,7 @@ RR_DECLSPEC double Geq(double a, double b);
 RR_DECLSPEC double Leq(double a, double b);
 RR_DECLSPEC double Eq(double a, double b);
 RR_DECLSPEC double Neq(double a, double b);
-RR_DECLSPEC double And(double first, ...);	//double args...
+RR_DECLSPEC double And(double first, ...);    //double args...
 //RR_DECLSPEC bool And(params bool[] a);
 //RR_DECLSPEC double Or(params double[] a);
 //RR_DECLSPEC bool Or(params bool[] a);

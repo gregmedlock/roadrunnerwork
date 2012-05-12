@@ -7,7 +7,7 @@ namespace rr
 
 class ParameterSets : public rrObject
 {
-	protected:
+    protected:
 
     public:
 
@@ -77,7 +77,7 @@ class ParameterSets : public rrObject
 ////            }
 ////            set
 ////            {
-////            	_Values[id] = value;
+////                _Values[id] = value;
 ////            }
 ////        }
 ////

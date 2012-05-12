@@ -18,16 +18,16 @@ namespace rr
 template <class T>
 class RR_DECLSPEC LogContainer : public rrObject
 {
-	private:
-        LogLevel            	mCurrentLogLevel;
-    							LogContainer(const LogContainer&);	//Don't copy this one..
+    private:
+        LogLevel                mCurrentLogLevel;
+                                LogContainer(const LogContainer&);    //Don't copy this one..
     protected:
-	    std::ostringstream 		mOutputStream;
+        std::ostringstream         mOutputStream;
 
     public:
-        					   	LogContainer();
-        virtual    		   	   ~LogContainer();
-        std::ostringstream&    	Get(const LogLevel& level);
+                                   LogContainer();
+        virtual                      ~LogContainer();
+        std::ostringstream&        Get(const LogLevel& level);
 };
 
 class RR_DECLSPEC Logger : public LogContainer<LogOutput>
@@ -38,7 +38,7 @@ class RR_DECLSPEC Logger : public LogContainer<LogOutput>
 
 #define Log(level) \
     if (level > GetHighestLogLevel()) ;\
-	else if (level > gLog.GetLogLevel()) ; \
+    else if (level > gLog.GetLogLevel()) ; \
     else Logger().Get(level)
 
 }//Namespace rr

@@ -11,15 +11,15 @@ namespace rr
 
 class RR_DECLSPEC SymbolList : public rrObject, public vector<Symbol> //Using vector instead of list since accessing element by []
 {
-	public:
-    	void 			        Clear();
-        int 			        Add(const Symbol& item);
-        double 			        getValue(const int& index);
-        string 			        getName(const int& index);
-        string 			        getKeyName(const int& index);
-        bool 			        find(const string& name, int& index);
-        bool 		  			find(const string& keyName, const string& name, int& index);
-        unsigned int			Count(){return size();}
+    public:
+        void                     Clear();
+        int                     Add(const Symbol& item);
+        double                     getValue(const int& index);
+        string                     getName(const int& index);
+        string                     getKeyName(const int& index);
+        bool                     find(const string& name, int& index);
+        bool                       find(const string& keyName, const string& name, int& index);
+        unsigned int            Count(){return size();}
 }; //class
 
 }//namespace rr
