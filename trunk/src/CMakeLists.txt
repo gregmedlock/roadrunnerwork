@@ -5,13 +5,13 @@ add_subdirectory(Common)
 endif()
 
 
-set(modules )
+set(modules Common)
 
 foreach(module ${modules})
 FILE (GLOB headers ${module}/*.h)
-install (FILES ${headers}			 	DESTINATION Source/${module} COMPONENT cxx_headers)
+install (FILES ${headers}			 	DESTINATION src/${module} COMPONENT cxx_headers)
 endforeach(module)
 
-install (FILES CMakeLists.txt 			DESTINATION Source/Common)
-install (FILES CMakeLists.txt 			DESTINATION Source)
+install (FILES CMakeLists.txt 			DESTINATION src/Common)
+install (FILES CMakeLists.txt 			DESTINATION src)
 
