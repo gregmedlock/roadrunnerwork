@@ -2,7 +2,7 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
-#include <windows.h>		//For HINSTANCE and other
+#include <windows.h>        //For HINSTANCE and other
 #include <sstream>
 #if defined(__CODEGEARC__)
 #include <dir.h>
@@ -27,7 +27,7 @@ Compiler::Compiler()
 :
 mDLLHandle(NULL)
 {
-	Log(lDebug5)<<"In Compiler CTOR";
+    Log(lDebug5)<<"In Compiler CTOR";
 }
 
 Compiler::~Compiler()
@@ -41,10 +41,10 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
     string dllFName(GetFileNameNoPath(sourceFileName));
     mDLLFileName = GetPathNoFileName(sourceFileName) + "\\" + ChangeFileExtensionTo(dllFName, "dll");
 
-	//-g adds runtime debug information
-	//-v is for verbose
-	//-rdynamic : Export global symbols to the dynamic linker
-	//-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied. Note that the generated code is slower and bigger in this case.
+    //-g adds runtime debug information
+    //-v is for verbose
+    //-rdynamic : Export global symbols to the dynamic linker
+    //-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied. Note that the generated code is slower and bigger in this case.
     stringstream exeCmd;
 
     exeCmd<<"tcc -g -shared -rdynamic " \
@@ -53,38 +53,38 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 
     if(gLog.GetLogLevel() == lDebug1)
     {
-    	exeCmd<<" -v";
+        exeCmd<<" -v";
     }
 
     if(gLog.GetLogLevel() == lDebug2)
     {
-    	exeCmd<<" -vv";
+        exeCmd<<" -vv";
     }
 
     if(gLog.GetLogLevel() == lDebug3)
     {
-    	exeCmd<<" -vvv";
+        exeCmd<<" -vvv";
     }
 
 
     if(gLog.GetLogLevel() == lDebug1)
     {
-    	exeCmd<<" -v";
+        exeCmd<<" -v";
     }
 
     if(gLog.GetLogLevel() == lDebug2)
     {
-    	exeCmd<<" -vv";
+        exeCmd<<" -vv";
     }
 
     if(gLog.GetLogLevel() == lDebug3)
     {
-    	exeCmd<<" -vvv";
+        exeCmd<<" -vvv";
     }
 
 
     exeCmd<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL " \
-	<<" -DDEBUG_SPF " \
+    <<" -DDEBUG_SPF " \
     <<"-Ic:\\rrw\\src\\c_src " \
     <<"-Lc:\\rrw\\src\\c_src";
 
@@ -122,7 +122,7 @@ bool Compiler::CreateDLL(const string& cmdLine)
     }
 
     // Start the child process.
-    if( !CreateProcessA( NULL,   		// No module name (use command line)
+    if( !CreateProcessA( NULL,           // No module name (use command line)
         (char*) cmdLine.c_str(),        // Command line
         NULL,                           // Process handle not inheritable
         NULL,                           // Thread handle not inheritable
@@ -154,19 +154,19 @@ HINSTANCE LoadDLL(const string& dll)
 
     if(hLib == NULL)
     {
-    	Log(lError) << "Unable to load library!" << endl;
+        Log(lError) << "Unable to load library!" << endl;
         return NULL;
     }
 
-	TCHAR mod[MAX_MODULE];
+    TCHAR mod[MAX_MODULE];
     GetModuleFileNameA((HMODULE)hLib, (LPSTR) mod, MAX_MODULE);
     string name(mod);
 
     Log(lDebug) << "DLL Library loaded: " <<name.c_str() << endl;
-	return hLib;
+    return hLib;
 }
 
-//	private:
+//    private:
 //        static readonly StringCollection m_oAssemblies = new StringCollection();
 //        static readonly StringCollection m_sCompileErrors = new StringCollection();
 //        StringCollection m_oProxies = new StringCollection();
@@ -220,7 +220,7 @@ rrObject* Compiler::getInstance(const string& source, const string& sClassName, 
     //addAssembly(sLocation);
 //    CSharpCodeProvider *cscp = new CSharpCodeProvider();
 //    return Compile2(cscp, source, sClassName);
-	return NULL;
+    return NULL;
 }
 //
 //

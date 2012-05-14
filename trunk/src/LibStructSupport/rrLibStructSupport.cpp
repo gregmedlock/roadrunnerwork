@@ -16,50 +16,50 @@ LibStructural* StructAnalysis::mInstance = NULL;
 using namespace LIB_STRUCTURAL;
 StructAnalysis::StructAnalysis()
 {
-	mInstance = (LibStructural::getInstance());
+    mInstance = (LibStructural::getInstance());
 }
 
 StructAnalysis::~StructAnalysis()
 {
-	if(mInstance)
+    if(mInstance)
     {
-		delete mInstance;
+        delete mInstance;
     }
     mInstance = NULL;
 }
 
 void StructAnalysis::Reset()
 {
-	if(mInstance)
+    if(mInstance)
     {
-//		mInstance->Reset();
+//        mInstance->Reset();
     }
 }
 
-int	StructAnalysis::GetNumIndependentSpecies()
+int    StructAnalysis::GetNumIndependentSpecies()
 {
-	return LibStructural_getNumIndSpecies();
+    return LibStructural_getNumIndSpecies();
 }
 
 //
 //vector<string> StructAnalysis::GetIndependentSpecies()
 //{
-//	return LibStructural::getInstance()->getIndependentSpecies();	//Static metod of class LibStructural
+//    return LibStructural::getInstance()->getIndependentSpecies();    //Static metod of class LibStructural
 //}
 //
 //vector<string> StructAnalysis::GetDependentSpecies()
 //{
-//	return LibStructural::getInstance()->getDependentSpecies();
+//    return LibStructural::getInstance()->getDependentSpecies();
 //}
 //
 int StructAnalysis::GetNumSpecies()
 {
-	return LibStructural::getInstance()->getNumSpecies();
+    return LibStructural::getInstance()->getNumSpecies();
 }
 
 //vector<string> StructAnalysis::GetSpecies()
 //{
-//	return LibStructural::getInstance()->getSpecies();
+//    return LibStructural::getInstance()->getSpecies();
 //}
 
 //////////////////////////////////////////////
@@ -306,12 +306,12 @@ double* StructAnalysis::GetGammaMatrix()
 
     if (LibStructural_getGammaMatrix((double***) &pointer, &nRows, &nCols) < 0 )
     {
-		Log(lError)<<"\n=====================================\n\
-        	The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.\n\
+        Log(lError)<<"\n=====================================\n\
+            The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.\n\
             ===============================================";
         return NULL;
     }
-	double *res = GetDoubleMatrixFromPtr(pointer, nRows, nCols);
+    double *res = GetDoubleMatrixFromPtr(pointer, nRows, nCols);
     return res;
 }
 
@@ -429,7 +429,7 @@ double* StructAnalysis::GetGammaMatrix()
 ////        /// <summary>
 ////        /// Get independent species ids
 ////        /// </summary>
-StringList	StructAnalysis::GetIndependentSpeciesIds()
+StringList    StructAnalysis::GetIndependentSpeciesIds()
 {
     IntPtr pointer;
     int nLength;
@@ -548,7 +548,7 @@ double* StructAnalysis::GetL0Matrix()
         throw Exception("The L0 Matrix has not yet been calculated, please call one of the analyze methods first.");
     }
 
-	double** mat = (double**) pointer;
+    double** mat = (double**) pointer;
 
     return GetDoubleMatrixFromPtr(pointer, nRows, nCols); //    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
 }
@@ -558,8 +558,8 @@ double* StructAnalysis::GetL0Matrix()
 /// </summary>
 double* StructAnalysis::GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels)
 {
-	GetL0MatrixLabels(sRowLabels, sColumnLabels);
-	return GetL0Matrix(); //!We don't know the size of this one..?
+    GetL0MatrixLabels(sRowLabels, sColumnLabels);
+    return GetL0Matrix(); //!We don't know the size of this one..?
 }
 
 ////
@@ -591,8 +591,8 @@ void StructAnalysis::GetL0MatrixLabels(vector<string>& sRowLabels, vector<string
     int outColCount;
 
     LibStructural_getL0MatrixLabels((char***) &outRowLabels, &outRowCount,(char***) &outColLabels, &outColCount);
-    sRowLabels 		= GetStringArrayFromPtr(outRowLabels, outRowCount);
-    sColumnLabels 	= GetStringArrayFromPtr(outColLabels, outColCount);
+    sRowLabels         = GetStringArrayFromPtr(outRowLabels, outRowCount);
+    sColumnLabels     = GetStringArrayFromPtr(outColLabels, outColCount);
 }
 
 ////        public static void GetL0MatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
@@ -1012,7 +1012,7 @@ StringList StructAnalysis::GetSpeciesIds()
     LibStructural_getSpeciesIds((char ***) &pointer, &nLength);
     return GetStringArrayFromPtr(pointer, nLength);
 
- 	//vector<string> oValues = LibStructural::getInstance()->getSpecies();
+     //vector<string> oValues = LibStructural::getInstance()->getSpecies();
 //    StringList aList(oValues);
 //    return aList;
 
@@ -1113,14 +1113,14 @@ StringList StructAnalysis::GetSpeciesIds()
 string StructAnalysis::LoadSBML(const string& sbml)
 {
     //IntPtr pointer;
-	//int nLength;
-	string msg = LibStructural::getInstance()->loadSBML(sbml);
+    //int nLength;
+    string msg = LibStructural::getInstance()->loadSBML(sbml);
 //    if (LibStructural_loadSBML(sbml.c_str(),  (char**) &pointer, &nLength) < 0)
 //    {
 //        throw Exception("The SBML could not be loaded, please verify that it is a valid SBML file.");
 //    }
-//	string msg =  GetStringFromPtr(pointer, nLength);;
-  	return msg;
+//    string msg =  GetStringFromPtr(pointer, nLength);;
+      return msg;
 }
 
 

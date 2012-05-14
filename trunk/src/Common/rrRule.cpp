@@ -17,12 +17,12 @@ mTheRule(rule),
 mRuleTypeStr(ruleTypeStr),
 mRuleType(rtUnknown)
 {
-	AssignType();
+    AssignType();
 }
 
 string RRRule::GetLHS()
 {
-	//Rules have equal signs, or?
+    //Rules have equal signs, or?
     string lhs = mTheRule.substr(0, mTheRule.find('='));
     return lhs;
 }
@@ -35,31 +35,31 @@ string RRRule::GetRHS()
 
 RuleType RRRule::GetType()
 {
-	return mRuleType;
+    return mRuleType;
 }
 
 void RRRule::AssignType()
 {
-	mRuleType = GetRuleTypeFromString(mRuleTypeStr);
+    mRuleType = GetRuleTypeFromString(mRuleTypeStr);
 }
 
 RuleType GetRuleTypeFromString(const string& str)
 {
-	if(str == "Algebraic_Rule")
+    if(str == "Algebraic_Rule")
     {
-		return rtAlgebraic;
+        return rtAlgebraic;
     }
     else if(str == "Assignment_Rule")
     {
-		return rtAssignment;
+        return rtAssignment;
     }
     else if(str == "Rate_Rule")
     {
-		return rtRate;
+        return rtRate;
     }
     else
     {
-    	return rtUnknown;
+        return rtUnknown;
     }
 }
 

@@ -18,26 +18,26 @@ int GetHighestLogLevel(){return lAny;}
 
 LogLevel StringToLogLevel(const string& lvl)
 {
-	string level = ToUpperCase(lvl);
-	if (level == "ANY") 	        return lAny;
-	if (level == "DEBUG5") 	        return lDebug5;
-	if (level == "DEBUG4") 	        return lDebug4;
-	if (level == "DEBUG3") 	        return lDebug3;
-	if (level == "DEBUG2") 	        return lDebug2;
-	if (level == "DEBUG1") 	        return lDebug1;
-	if (level == "DEBUG") 	        return lDebug;
-	if (level == "INFO") 	        return lInfo;
-	if (level == "WARNING")         return lWarning;
-	if (level == "ERROR") 	        return lError;
+    string level = ToUpperCase(lvl);
+    if (level == "ANY")             return lAny;
+    if (level == "DEBUG5")             return lDebug5;
+    if (level == "DEBUG4")             return lDebug4;
+    if (level == "DEBUG3")             return lDebug3;
+    if (level == "DEBUG2")             return lDebug2;
+    if (level == "DEBUG1")             return lDebug1;
+    if (level == "DEBUG")             return lDebug;
+    if (level == "INFO")             return lInfo;
+    if (level == "WARNING")         return lWarning;
+    if (level == "ERROR")             return lError;
 
-	return lAny;
+    return lAny;
 }
 
 string LogLevelToString(const LogLevel& level)
 {
     switch (level)
-	{
-        case lAny   :  	return "ANY";
+    {
+        case lAny   :      return "ANY";
         case lDebug5:   return "DEBUG5";
         case lDebug4:   return "DEBUG4";
         case lDebug3:   return "DEBUG3";
@@ -74,9 +74,9 @@ LogLevel IntToLogLevel(const int& level)
 
 string ToUpperCase(const string& inStr)
 {
-	string rString(inStr);
-	std::transform(rString.begin(), rString.end(), rString.begin(), ::toupper);
-	return rString;
+    string rString(inStr);
+    std::transform(rString.begin(), rString.end(), rString.begin(), ::toupper);
+    return rString;
 }
 
 }

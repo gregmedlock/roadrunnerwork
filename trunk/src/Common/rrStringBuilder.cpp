@@ -21,40 +21,40 @@ StringBuilder::StringBuilder(const string& aStr)
 
 string StringBuilder::ToString()
 {
-	return mStringing.str();
+    return mStringing.str();
 }
 
 void StringBuilder::Clear()
 {
-	mStringing.str("");
+    mStringing.str("");
 }
 
 stringstream& StringBuilder::operator<<(const string& str)
 {
-	mStringing<<str;
-	Log(lDebug5)<<"Appended :"<<RemoveNewLines(str, 1);
+    mStringing<<str;
+    Log(lDebug5)<<"Appended :"<<RemoveNewLines(str, 1);
     return mStringing;
 }
 
 void StringBuilder::NewLine(const string& line)
 {
-	mStringing<<"\n"<<line<<endl;
+    mStringing<<"\n"<<line<<endl;
 }
 
 void StringBuilder::Line(const string& line)
 {
-	mStringing<<line<<endl;
+    mStringing<<line<<endl;
 }
 
 void StringBuilder::TLine(const string& line, const int& nrTabs)
 {
-	string tabs;
+    string tabs;
     for(int i = 0; i < nrTabs; i++)
     {
-    	tabs +="\t";
+        tabs +="\t";
     }
 
-	mStringing<<tabs<<line<<endl;
+    mStringing<<tabs<<line<<endl;
 }
 
 }

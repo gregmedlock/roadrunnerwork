@@ -20,12 +20,12 @@ mStream(aStream)
 
 void TextWriter::Write(const string& chars)
 {
-	mStream<<chars;
+    mStream<<chars;
 }
 
 void TextWriter::WriteLine()
 {
-	mStream<<endl;
+    mStream<<endl;
 }
 
 }

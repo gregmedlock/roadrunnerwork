@@ -14,7 +14,7 @@ namespace rr
 
 SBMLSymbolDependencies::SBMLSymbolDependencies(const SBMLSymbolDependencies& cp)
 {
-	mDependencies = cp.mDependencies;
+    mDependencies = cp.mDependencies;
 }
 
 SBMLSymbolDependencies::~SBMLSymbolDependencies()
@@ -24,24 +24,24 @@ SBMLSymbolDependencies::~SBMLSymbolDependencies()
 
 SBMLSymbolDependencies& SBMLSymbolDependencies::operator=(const SBMLSymbolDependencies& rhs)
 {
-	mDependencies = rhs.mDependencies;
-	return *this;
+    mDependencies = rhs.mDependencies;
+    return *this;
 }
 
 void SBMLSymbolDependencies::Add(SBMLSymbol* symbol)
 {
-	SBMLSymbol *symbDep = new SBMLSymbol( (*symbol) );
+    SBMLSymbol *symbDep = new SBMLSymbol( (*symbol) );
 
-	mDependencies.push_back(symbDep);	//Makes a copy
+    mDependencies.push_back(symbDep);    //Makes a copy
 }
 
 int SBMLSymbolDependencies::Count()
 {
-	return mDependencies.size();
+    return mDependencies.size();
 }
 
-SBMLSymbol	SBMLSymbolDependencies::At(const int& i)
+SBMLSymbol    SBMLSymbolDependencies::At(const int& i)
 {
-	return *mDependencies[i];
+    return *mDependencies[i];
 }
 }

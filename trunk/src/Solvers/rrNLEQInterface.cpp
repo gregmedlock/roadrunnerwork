@@ -178,10 +178,10 @@ namespace rr
 ////        // NLEQ2 seems to have problems with some models so we drop back to NLEQ1 for now.
 ////
 ////        //        [DllImport ("nleq2", EntryPoint="NLEQ2", ExactSpelling=false,
-////        //			 CharSet=CharSet.Unicode, SetLastError=true, CallingConvention=CallingConvention.Cdecl
-////        //			 )]
+////        //             CharSet=CharSet.Unicode, SetLastError=true, CallingConvention=CallingConvention.Cdecl
+////        //             )]
 ////        [DllImport("NleqLib", EntryPoint = "NLEQ1")]
-////        //		 NLEQ is a FORTRAN routine, therefore everything must be a reference
+////        //         NLEQ is a FORTRAN routine, therefore everything must be a reference
 ////        public static extern IntPtr NLEQ1(
 ////            ref int n,
 ////            TCallBackModelFcn fcn,
@@ -196,8 +196,8 @@ namespace rr
 ////            ref int LRWK,
 ////            [In, Out] double[] RWK);
 ////
-////        //		        [DllImport ("nleq2", EntryPoint="NLEQ2")					 ]
-////        ////		 NLEQ is a FORTRAN routine, therefore everything must be a reference
+////        //                [DllImport ("nleq2", EntryPoint="NLEQ2")                     ]
+////        ////         NLEQ is a FORTRAN routine, therefore everything must be a reference
 ////        //        public static extern IntPtr NLEQ2(
 ////        //            ref int n,
 ////        //            TCallBackModelFcn fcn,
@@ -238,20 +238,20 @@ namespace rr
 ////                model->rateRules.CopyTo(dTemp, 0);
 ////                model->amounts.CopyTo(dTemp, model->rateRules.Length);
 ////                model->evalModel(0.0, dTemp);
-////                //				bool bError = false;
+////                //                bool bError = false;
 ////
-////                //				for (int i = 0; i < model->amounts.Length; i++)
-////                //					if (model->amounts[i] < 0)
-////                //					{
-////                //						bError = true;
-////                //						break;
-////                //					}
+////                //                for (int i = 0; i < model->amounts.Length; i++)
+////                //                    if (model->amounts[i] < 0)
+////                //                    {
+////                //                        bError = true;
+////                //                        break;
+////                //                    }
 ////                //
 ////
 ////                Marshal.Copy(model->dydt, 0, fval, n);
-////                //				if (bError)
-////                //					Marshal.WriteInt32(pErr, -1);
-////                //				else
+////                //                if (bError)
+////                //                    Marshal.WriteInt32(pErr, -1);
+////                //                else
 ////                Marshal.WriteInt32(pErr, 0);
 ////            }
 ////            catch (Exception)
@@ -335,7 +335,7 @@ double NLEQInterface::solve(const vector<double>& yin)
     {
         if (yin.size() == 0)
         {
-        	return 0;
+            return 0;
         }
         // Set up a dummy Jacobian, actual Jacobian is computed
         // by NLEQ using finite differences
@@ -439,13 +439,13 @@ double NLEQInterface::ComputeSumsOfSquares()
     vector<double> dTemp;// = new double[model->amounts.Length + model->rateRules.Length];
 //    dTemp.resize(model->amounts.size() + model->rateRules.size());
 
-	//    dTemp = model->rateRules;//model->rateRules.CopyTo(dTemp, 0);
-	CopyCArrayToStdVector(model->rateRules,   dTemp, (model->rateRulesSize));//model->rateRules.CopyTo(dTemp, 0);
+    //    dTemp = model->rateRules;//model->rateRules.CopyTo(dTemp, 0);
+    CopyCArrayToStdVector(model->rateRules,   dTemp, (model->rateRulesSize));//model->rateRules.CopyTo(dTemp, 0);
     //model->amounts.CopyTo(dTemp, model->rateRules.Length);
 //    for(int i = 0; i < model->amounts.size(); i++)
     for(int i = 0; i < model->getNumIndependentVariables(); i++)
     {
-		dTemp.push_back(model->amounts[i]);
+        dTemp.push_back(model->amounts[i]);
     }
 
     model->evalModel(0.0, dTemp);

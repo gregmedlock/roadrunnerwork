@@ -8,7 +8,7 @@
 namespace rr
 {
 PendingAssignment::PendingAssignment(
-					double time,
+                    double time,
                     TComputeEventAssignmentDelegate computeAssignment,
                     TPerformEventAssignmentDelegate performAssignment,
                     bool useValuesFromTriggerTime,

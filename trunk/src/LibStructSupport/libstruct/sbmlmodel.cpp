@@ -18,16 +18,16 @@ using namespace std;
 
 SBMLmodel* SBMLmodel::FromFile(string &sFileName)
 {
-	SBMLmodel *oResult = new SBMLmodel();
-	oResult->InitializeFromFile(sFileName);
-	return oResult;
+    SBMLmodel *oResult = new SBMLmodel();
+    oResult->InitializeFromFile(sFileName);
+    return oResult;
 }
 
 SBMLmodel* SBMLmodel::FromSBML(string &sSBML)
 {
-	SBMLmodel *oResult = new SBMLmodel();
-	oResult->InitializeFromSBML(sSBML);
-	return oResult;
+    SBMLmodel *oResult = new SBMLmodel();
+    oResult->InitializeFromSBML(sSBML);
+    return oResult;
 }
 
 SBMLmodel::SBMLmodel() : _Document(NULL), _Model(NULL)
@@ -37,30 +37,30 @@ SBMLmodel::SBMLmodel() : _Document(NULL), _Model(NULL)
 
 SBMLmodel::SBMLmodel(string &sSBML) : _Document(NULL), _Model(NULL)
 {
-	InitializeFromSBML(sSBML);
+    InitializeFromSBML(sSBML);
 }
 
 
 void SBMLmodel::InitializeFromSBML(std::string &sSBML)
 {
-	SBMLReader oReader;
-	_Document = oReader.readSBMLFromString(sSBML);
-	_Model = _Document->getModel();
-	if (_Model == NULL)
-		throw new ApplicationException("Invalid SBML Model", "The SBML model was invalid. Please validate it using a SBML validator such as: http://sys-bio.org/validate.");
+    SBMLReader oReader;
+    _Document = oReader.readSBMLFromString(sSBML);
+    _Model = _Document->getModel();
+    if (_Model == NULL)
+        throw new ApplicationException("Invalid SBML Model", "The SBML model was invalid. Please validate it using a SBML validator such as: http://sys-bio.org/validate.");
 
 }
 void SBMLmodel::InitializeFromFile(std::string &sFileName)
 {
-	SBMLReader oReader;
-	_Document = oReader.readSBML(sFileName);
-	_Model = _Document->getModel();
-	if (_Model == NULL)
-		throw new ApplicationException("Invalid SBML Model", "The SBML model was invalid. Please validate it using a SBML validator such as: http://sys-bio.org/validate.");
+    SBMLReader oReader;
+    _Document = oReader.readSBML(sFileName);
+    _Model = _Document->getModel();
+    if (_Model == NULL)
+        throw new ApplicationException("Invalid SBML Model", "The SBML model was invalid. Please validate it using a SBML validator such as: http://sys-bio.org/validate.");
 }
 
 
 SBMLmodel::~SBMLmodel(void)
 {
-	delete _Document;
+    delete _Document;
 }

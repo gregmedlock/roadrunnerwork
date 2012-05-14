@@ -30,7 +30,7 @@ std::ostringstream& LogContainer<LogOutput>::Get(const LogLevel& level)
 
     if(LogOutput::mShowLogPrefix)
     {
-		mOutputStream << gLog.GetLogPrefix() <<" ";
+        mOutputStream << gLog.GetLogPrefix() <<" ";
     }
 
     if(LogOutput::mShowLogTime)
@@ -40,16 +40,16 @@ std::ostringstream& LogContainer<LogOutput>::Get(const LogLevel& level)
 
     if(LogOutput::mUseLogTabs)
     {
-		//Output tabs
-		mOutputStream << string(level > lInfo ? level - lInfo : 0, '\t');
-		mOutputStream << "\t";
+        //Output tabs
+        mOutputStream << string(level > lInfo ? level - lInfo : 0, '\t');
+        mOutputStream << "\t";
     }
 
     if(LogOutput::mShowLogLevel)
     {
          mOutputStream << LogLevelToString(level) << ": "; //Next comes the log message
     }
-	return mOutputStream;
+    return mOutputStream;
 }
 
 }//namespace

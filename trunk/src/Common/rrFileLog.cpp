@@ -20,12 +20,12 @@ mLogPrefix("none"),
 mLogLevel(lDebug5),
 mLogToServer(false)
 {
-	mNrOfInstances++;
+    mNrOfInstances++;
 }
 
 FileLog::~FileLog()
 {
-	mNrOfInstances--;
+    mNrOfInstances--;
 }
 
 
@@ -34,45 +34,45 @@ bool FileLog::Init(const string& logPrefix, const LogLevel& level, unique_ptr<Lo
     mLogPrefix = logPrefix;
     mLogLevel = level;
     mLogFile = move(logFile);
- 	return mLogFile.get() ? true : false;
+     return mLogFile.get() ? true : false;
 }
 
 string FileLog::GetLogFileName()
 {
-	if(mLogFile)
+    if(mLogFile)
     {
-    	return mLogFile->GetFileName();
+        return mLogFile->GetFileName();
     }
     return string("<none>");
 }
 
 LogLevel FileLog::GetLogLevel()
 {
-	return mLogLevel;
+    return mLogLevel;
 }
 
 void FileLog::SetCutOffLogLevel(const LogLevel& lvl)
 {
-	mLogLevel = lvl;
+    mLogLevel = lvl;
 }
 
 void FileLog::SetLogPrefix(const string& prefix)
 {
-	mLogPrefix = prefix;
+    mLogPrefix = prefix;
 }
 
 string FileLog::GetLogPrefix()
 {
-	return mLogPrefix;
+    return mLogPrefix;
 }
 
 void FileLog::write(const char* str)
 {
-	if(!mLogFile.get())
+    if(!mLogFile.get())
     {
-		return;
+        return;
     }
-	fprintf(mLogFile->mFILEHandle, "%s", str);
+    fprintf(mLogFile->mFILEHandle, "%s", str);
 
     if (EOF == fflush(mLogFile->mFILEHandle))
     {

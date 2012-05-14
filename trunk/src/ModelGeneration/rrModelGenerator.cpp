@@ -23,7 +23,7 @@ mStructAnalysis(),
 STR_DoubleFormat("%.19G"),
 STR_FixAmountCompartments("*")
 {
-	mNOM.Reset();
+    mNOM.Reset();
     mStructAnalysis.Reset();
 }
 
@@ -31,13 +31,13 @@ ModelGenerator::~ModelGenerator(){}
 
 void ModelGenerator::Reset()
 {
-	mNOM.Reset();
+    mNOM.Reset();
     mStructAnalysis.Reset();
 }
 
 int ModelGenerator::NumAdditionalRates()
 {
-	return mMapRateRule.size();
+    return mMapRateRule.size();
 }
 
 StringList ModelGenerator::getCompartmentList()
@@ -57,9 +57,9 @@ string ModelGenerator::substituteTerms(const int& numReactions, const string& re
 
 ASTNode* ModelGenerator::CleanEquation(ASTNode* astP)
 {
-	ASTNode& ast = *astP; //For convenience...
+    ASTNode& ast = *astP; //For convenience...
 
-	if (ast.getType() == AST_PLUS && ast.getNumChildren() == 0)
+    if (ast.getType() == AST_PLUS && ast.getNumChildren() == 0)
     {
         ASTNode* result = new ASTNode(AST_INTEGER);
         result->setValue(0);
@@ -92,17 +92,17 @@ string ModelGenerator::CleanEquation(const string& eqn)
 {
     if (eqn.size() < 1)
     {
-    	return "0";
+        return "0";
     }
-	string equation(eqn);
+    string equation(eqn);
     if (equation == " + ")
     {
-    	return "0";
+        return "0";
     }
 
     if (equation == " * ")
     {
-    	return "1";
+        return "1";
     }
 
     ASTNode* ast = SBML_parseFormula(equation.c_str());
@@ -111,24 +111,24 @@ string ModelGenerator::CleanEquation(const string& eqn)
         // we are in trouble!
         if (EndsWith(equation, "* "))
         {
-          	equation = equation.substr(0, equation.size() - 2);
+              equation = equation.substr(0, equation.size() - 2);
         }
 
-       	string sought("*  +");
+           string sought("*  +");
         if(equation.find(sought) != string::npos)
         {
-        	equation.replace(equation.find(sought), sought.size(), string("+"));
+            equation.replace(equation.find(sought), sought.size(), string("+"));
         }
         sought = ("*  -");
         if(equation.find(sought) != string::npos)
         {
-	        equation = equation.replace(equation.find(sought), sought.size(), "-");
+            equation = equation.replace(equation.find(sought), sought.size(), "-");
         }
 
         ast = SBML_parseFormula(equation.c_str());
         if (ast == NULL)
         {
-        	return equation;
+            return equation;
         }
     }
 
@@ -138,10 +138,10 @@ string ModelGenerator::CleanEquation(const string& eqn)
 
 string ModelGenerator::substituteTerms(const string& reactionName, const string& inputEquation, bool bFixAmounts)
 {
-	string equation = CleanEquation(inputEquation);
+    string equation = CleanEquation(inputEquation);
     if (equation.size() < 1)
     {
-    	return string("0");
+        return string("0");
     }
 
      Scanner s;
@@ -155,11 +155,11 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
 
     try
     {
-    	while (s.token() != CodeTypes::tEndOfStreamToken)
-       	{
-        	SubstituteToken(reactionName, bFixAmounts, s, sb);
-        	s.nextToken();
-       	}
+        while (s.token() != CodeTypes::tEndOfStreamToken)
+           {
+            SubstituteToken(reactionName, bFixAmounts, s, sb);
+            s.nextToken();
+           }
     }
     catch (const Exception& e)
     {
@@ -170,12 +170,12 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
 
 double* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
 {
-	double* L0;
+    double* L0;
     try
     {
         if (mNumDependentSpecies > 0)
         {
-        	vector<string> RowLabels;
+            vector<string> RowLabels;
             vector<string> ColumnLabels; //Todo: Filling these out here is meaningless?
             L0 = mStructAnalysis.GetL0Matrix(RowLabels, ColumnLabels);
             nrRows = RowLabels.size();
@@ -183,13 +183,13 @@ double* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
         }
         else
         {
-        	L0 = new double[1];//.Allocate(1,1);// = new double[0][];
-		    nrRows = nrCols = 1;
+            L0 = new double[1];//.Allocate(1,1);// = new double[0][];
+            nrRows = nrCols = 1;
         }
     }
     catch (Exception)
     {
-	    nrRows = nrCols = 0;
+        nrRows = nrCols = 0;
         L0 = NULL;
     }
     return L0;
@@ -202,10 +202,10 @@ int ModelGenerator::ReadGlobalParameters()
     numGlobalParameters = oParameters.Count();
     for (u_int i = 0; i < numGlobalParameters; i++)
     {
-    	StringList parameter = oParameters[i];
+        StringList parameter = oParameters[i];
 
-        string name 	= parameter[0];
-        double value 	= ToDouble(parameter[1]);
+        string name     = parameter[0];
+        double value     = ToDouble(parameter[1]);
         Symbol aSymbol(name, value);
         Log(lDebug5)<<"Adding symbol"<<aSymbol<<" to global parameters";
 
@@ -222,7 +222,7 @@ void ModelGenerator::ReadLocalParameters(const int& numReactions,  vector<int>& 
     int numLocalParameters;
     totalLocalParmeters = 0;
     string reactionName;
-	localParameterDimensions.resize(numReactions);
+    localParameterDimensions.resize(numReactions);
     for (int i = 0; i < numReactions; i++)
     {
         numLocalParameters = mNOM.getNumParameters(i);
@@ -244,7 +244,7 @@ bool ModelGenerator::ExpressionContainsSymbol(ASTNode *ast, const string& symbol
 {
     if (ast == NULL || IsNullOrEmpty(symbol))
     {
-    	return false;
+        return false;
     }
 
     if (ast->getType() == libsbml::AST_NAME && Trim(ast->getName()) == Trim(symbol))
@@ -267,7 +267,7 @@ bool ModelGenerator::ExpressionContainsSymbol(const string& expression,const str
 {
       if (IsNullOrEmpty(expression) || IsNullOrEmpty(symbol))
       {
-      	return false;
+          return false;
       }
       ASTNode *ast = SBML_parseFormula(expression.c_str());
       return ExpressionContainsSymbol(ast, symbol);
@@ -275,22 +275,22 @@ bool ModelGenerator::ExpressionContainsSymbol(const string& expression,const str
 
 Symbol* ModelGenerator::GetSpecies(const string& id)
 {
-	int index;
+    int index;
     if (floatingSpeciesConcentrationList.find(id, index))
     {
-    	return &(floatingSpeciesConcentrationList[index]);
+        return &(floatingSpeciesConcentrationList[index]);
     }
 
     if (boundarySpeciesList.find(id, index))
     {
-    	return &(boundarySpeciesList[index]);
+        return &(boundarySpeciesList[index]);
     }
     return NULL;
 }
 
 string ModelGenerator::WriteDouble(const double& value)
 {
-	return ToString(value, STR_DoubleFormat);
+    return ToString(value, STR_DoubleFormat);
 }
 
 int ModelGenerator::ReadCompartments()
@@ -303,7 +303,7 @@ int ModelGenerator::ReadCompartments()
 
         if(IsNaN(value))
         {
-        	value = 1;
+            value = 1;
         }
         compartmentList.Add(Symbol(sCompartmentId, value));
     }
@@ -312,16 +312,16 @@ int ModelGenerator::ReadCompartments()
 
 int ModelGenerator::ReadModifiableSpeciesReferences()
 {
-	if(!mNOM.GetSBMLDocument())
+    if(!mNOM.GetSBMLDocument())
     {
-    	return -1;
+        return -1;
     }
     SBMLDocument &SBMLDoc = *mNOM.GetSBMLDocument();
     Model &SbmlModel  = *mNOM.GetModel();
 
-	if(mNOM.GetSBMLDocument()->getLevel() < 3)
+    if(mNOM.GetSBMLDocument()->getLevel() < 3)
     {
-    	return 0;
+        return 0;
     }
 
     string id;
@@ -336,7 +336,7 @@ int ModelGenerator::ReadModifiableSpeciesReferences()
             id = reference.getId();
             if (!(id.size()))
             {
-            	continue;
+                continue;
             }
             value = reference.getStoichiometry();
             if (IsNaN(value))
@@ -353,7 +353,7 @@ int ModelGenerator::ReadModifiableSpeciesReferences()
             id = reference.getId();
             if (IsNullOrEmpty(id))
             {
-            	continue;
+                continue;
             }
             value = reference.getStoichiometry();
             if (IsNaN(value))
@@ -763,7 +763,7 @@ int ModelGenerator::GetNumberOfReactions()
 ////                                    break;
 ////                                default:
 ////                                    //if (!_functionParameters.Contains(s.tokenString))
-////                                    //	throw new ArgumentException("Token '" + s.tokenString + "' not recognized.");
+////                                    //    throw new ArgumentException("Token '" + s.tokenString + "' not recognized.");
 ////                                    //else
 ////                                    sb.Append(s.tokenString);
 ////                                    break;
@@ -1582,7 +1582,7 @@ int ModelGenerator::GetNumberOfReactions()
 ////                    conservationList.Add(new Symbol("CSUM" + i, double.NaN));
 ////                }
 ////            }
-////            sb.Append("	}" + NL() + NL());
+////            sb.Append("    }" + NL() + NL());
 ////        }
 ////
 ////        private void WriteUpdateDependentSpecies(StringBuilder sb, int numIndependentSpecies, int numDependentSpecies,

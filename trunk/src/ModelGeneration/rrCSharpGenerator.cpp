@@ -32,25 +32,25 @@ CSharpGenerator::~CSharpGenerator(){}
 // Generates the Model Code from the SBML string
 string CSharpGenerator::generateModelCode(const string& sbmlStr)
 {
-	Log(lDebug4)<<"Entering CSharpGenerators generateModelCode(string) function";
+    Log(lDebug4)<<"Entering CSharpGenerators generateModelCode(string) function";
 
-    StringList  	Warnings;
+    StringList      Warnings;
 
-	mSource.Clear();
-    CodeBuilder& 	sb = mSource;
+    mSource.Clear();
+    CodeBuilder&     sb = mSource;
 
-	mNOM.Reset();
+    mNOM.Reset();
     string sASCII = mNOM.convertTime(sbmlStr, "time");
 
-	Log(lDebug4)<<"Loading SBML into NOM";
-	mNOM.loadSBML(sASCII.c_str(), "time");
+    Log(lDebug4)<<"Loading SBML into NOM";
+    mNOM.loadSBML(sASCII.c_str(), "time");
 
 
     mModelName = mNOM.getModelName();
     if(!mModelName.size())
     {
         Log(lError)<<"Model name is empty! Exiting...";
-    	return "";
+        return "";
     }
 
     Log(lDebug3)<<"Model name is "<<mModelName;
@@ -58,7 +58,7 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
 
     Log(lDebug3)<<"Number of reactions:"<<mNumReactions;
 
-	globalParameterList.Clear();
+    globalParameterList.Clear();
     ModifiableSpeciesReferenceList.Clear();
     localParameterList.reserve(mNumReactions);
     reactionList.Clear();
@@ -70,26 +70,26 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     mfunctionNames.empty();
     mfunctionParameters.empty();
 
-   	LibStructural* instance = LibStructural::getInstance();
-	string msg;
+       LibStructural* instance = LibStructural::getInstance();
+    string msg;
     try
     {
-		Log(lDebug)<<"Loading sbml into StructAnalysis";
-	    msg = mStructAnalysis.LoadSBML(sASCII);
-	    if(!msg.size())
-    	{
-			Log(lError)<<"Failed loading sbml into StructAnalysis";
-	    }
+        Log(lDebug)<<"Loading sbml into StructAnalysis";
+        msg = mStructAnalysis.LoadSBML(sASCII);
+        if(!msg.size())
+        {
+            Log(lError)<<"Failed loading sbml into StructAnalysis";
+        }
     }
     catch(...)
     {
-		Log(lError)<<"Failed loading sbml into StructAnalysis";
+        Log(lError)<<"Failed loading sbml into StructAnalysis";
     }
 
 
-	Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
+    Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
-	if (RoadRunner::mComputeAndAssignConservationLaws)
+    if (RoadRunner::mComputeAndAssignConservationLaws)
     {
         mNumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
         independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
@@ -104,21 +104,21 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     sb<<Append("//************************************************************************** " + NL());
 
     // Load the compartment array (name and value)
-	mNumCompartments 		= ReadCompartments();
+    mNumCompartments         = ReadCompartments();
 
     // Read FloatingSpecies
-    mNumFloatingSpecies 	= ReadFloatingSpecies();
-    mNumDependentSpecies 	= mNumFloatingSpecies - mNumIndependentSpecies;
+    mNumFloatingSpecies     = ReadFloatingSpecies();
+    mNumDependentSpecies     = mNumFloatingSpecies - mNumIndependentSpecies;
 
     // Load the boundary species array (name and value)
-	mNumBoundarySpecies 	= ReadBoundarySpecies();
+    mNumBoundarySpecies     = ReadBoundarySpecies();
 
     // Get all the parameters into a list, global and local
-    mNumGlobalParameters 	= ReadGlobalParameters();
-	mNumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
+    mNumGlobalParameters     = ReadGlobalParameters();
+    mNumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
 
     // Load up local parameters next
-	ReadLocalParameters(mNumReactions, mLocalParameterDimensions, mTotalLocalParmeters);
+    ReadLocalParameters(mNumReactions, mLocalParameterDimensions, mTotalLocalParmeters);
     mNumEvents = mNOM.getNumEvents();
 
     WriteClassHeader(sb);
@@ -136,14 +136,14 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     WriteSetBoundaryConditions(sb);
     WriteSetCompartmentVolumes(sb);
     WriteSetParameterValues(sb, mNumReactions);
-   	WriteComputeConservedTotals(sb, mNumFloatingSpecies, mNumDependentSpecies);
+       WriteComputeConservedTotals(sb, mNumFloatingSpecies, mNumDependentSpecies);
 
 
     // Get the L0 matrix
     int nrRows;
     int nrCols;
-    double* aL0 = InitializeL0(nrRows, nrCols); 	//Todo: What is this doing? answer.. it is used below..
-    DoubleMatrix L0(aL0,nrRows, nrCols); 		//How many rows and cols?? We need to know that in order to use the matrix properly!
+    double* aL0 = InitializeL0(nrRows, nrCols);     //Todo: What is this doing? answer.. it is used below..
+    DoubleMatrix L0(aL0,nrRows, nrCols);         //How many rows and cols?? We need to know that in order to use the matrix properly!
 
     WriteUpdateDependentSpecies(sb, mNumIndependentSpecies, mNumDependentSpecies, L0);
     int numOfRules = WriteComputeRules(sb, mNumReactions);
@@ -154,8 +154,8 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     WriteEventAssignments(sb, mNumReactions, mNumEvents);
     WriteEvalInitialAssignments(sb, mNumReactions);
     WriteTestConstraints(sb);
-	sb<<Format("}{0}{0}", NL());
-	return sb.ToString();
+    sb<<Format("}{0}{0}", NL());
+    return sb.ToString();
 }
 
 bool CSharpGenerator::SaveSourceCodeToFolder(const string& folder)
@@ -163,7 +163,7 @@ bool CSharpGenerator::SaveSourceCodeToFolder(const string& folder)
     mSourceCodeFileName = folder + string("\\") + GetFileNameNoPath(mCurrentXMLModelFileName);
     mSourceCodeFileName = ChangeFileExtensionTo(mSourceCodeFileName, ".cs");
 
-	ofstream outFile;
+    ofstream outFile;
     outFile.open(mSourceCodeFileName.c_str());
 
     //We don't know the name of the file until here..
@@ -176,14 +176,14 @@ bool CSharpGenerator::SaveSourceCodeToFolder(const string& folder)
     outFile.close();
     Log(lDebug3)<<"Wrote source code to file: "<<mSourceCodeFileName;
 
-	return true;
+    return true;
 }
 
 string CSharpGenerator::convertUserFunctionExpression(const string& equation)
 {
-	if(!equation.size())
+    if(!equation.size())
     {
-    	Log(lError)<<"The equation string supplied to "<<__FUNCTION__<<" is empty";
+        Log(lError)<<"The equation string supplied to "<<__FUNCTION__<<" is empty";
         return "";
     }
     Scanner s;
@@ -196,23 +196,23 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
 
     try
     {
-		while (s.token() != CodeTypes::tEndOfStreamToken)
-       	{
-        	string theToken = s.tokenString;
-           	switch (s.token())
-           	{
-            	case CodeTypes::tWordToken:
-					if(theToken == "pow")
-					{
-                    	sb<<Append("Math.Pow");
+        while (s.token() != CodeTypes::tEndOfStreamToken)
+           {
+            string theToken = s.tokenString;
+               switch (s.token())
+               {
+                case CodeTypes::tWordToken:
+                    if(theToken == "pow")
+                    {
+                        sb<<Append("Math.Pow");
                     }
-					else if(theToken == "sqrt")
+                    else if(theToken == "sqrt")
                     {
                         sb<<Append("Math.Sqrt");
-                  	}
+                      }
                     else if(theToken == "log")
                     {
-                    	sb<<Append("supportFunctions._log");
+                        sb<<Append("supportFunctions._log");
                     }
                     else if(theToken == "log10")
                     {
@@ -224,19 +224,19 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "ceil")
                     {
-                    	sb<<Append("Math.Ceiling");
+                        sb<<Append("Math.Ceiling");
                     }
                     else if(theToken == "factorial")
                     {
-                    	sb<<Append("supportFunctions._factorial");
+                        sb<<Append("supportFunctions._factorial");
                     }
                     else if(theToken == "exp")
                     {
-                    	sb<<Append("Math.Exp");
+                        sb<<Append("Math.Exp");
                     }
                     else if(theToken == "sin")
                     {
-                    	sb<<Append("Math.Sin");
+                        sb<<Append("Math.Sin");
                     }
                     else if(theToken == "cos")
                     {
@@ -260,7 +260,7 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "atan")
                     {
-                    	sb<<Append("Math.Atan");
+                        sb<<Append("Math.Atan");
                     }
                     else if(theToken == "sec")
                     {
@@ -406,90 +406,90 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if (!mfunctionParameters.Contains(s.tokenString))
                     {
-                    	throw Exception("Token '" + s.tokenString + "' not recognized.");
+                        throw Exception("Token '" + s.tokenString + "' not recognized.");
                     }
                     else
                     {
-                    	sb<<Append(s.tokenString);
-                	}
+                        sb<<Append(s.tokenString);
+                    }
 
-				break; //Word token
+                break; //Word token
 
-               	case CodeTypes::tDoubleToken:
-                   	sb<<Append(WriteDouble(s.tokenDouble));
-                   	break;
-               	case CodeTypes::tIntToken:
-                	sb<<Append((int) s.tokenInteger);
-                   	break;
-               	case CodeTypes::tPlusToken:
+                   case CodeTypes::tDoubleToken:
+                       sb<<Append(WriteDouble(s.tokenDouble));
+                       break;
+                   case CodeTypes::tIntToken:
+                    sb<<Append((int) s.tokenInteger);
+                       break;
+                   case CodeTypes::tPlusToken:
                    sb<<Append("+");
                    break;
-               	case CodeTypes::tMinusToken:
+                   case CodeTypes::tMinusToken:
                    sb<<Append("-");
                    break;
-               	case CodeTypes::tDivToken:
+                   case CodeTypes::tDivToken:
                    sb<<Append("/");
                    break;
-               	case CodeTypes::tMultToken:
+                   case CodeTypes::tMultToken:
                    sb<<Append(STR_FixAmountCompartments);
                    break;
-               	case CodeTypes::tPowerToken:
+                   case CodeTypes::tPowerToken:
                    sb<<Append("^");
                    break;
-               	case CodeTypes::tLParenToken:
+                   case CodeTypes::tLParenToken:
                    sb<<Append("(");
                    break;
-               	case CodeTypes::tRParenToken:
+                   case CodeTypes::tRParenToken:
                    sb<<Append(")");
                    break;
-               	case CodeTypes::tCommaToken:
+                   case CodeTypes::tCommaToken:
                    sb<<Append(",");
                    break;
-               	case CodeTypes::tEqualsToken:
+                   case CodeTypes::tEqualsToken:
                    sb<<Append(" = ");
                    break;
-               	case CodeTypes::tTimeWord1:
+                   case CodeTypes::tTimeWord1:
                    sb<<Append("time");
                    break;
-               	case CodeTypes::tTimeWord2:
+                   case CodeTypes::tTimeWord2:
                    sb<<Append("time");
                    break;
-               	case CodeTypes::tTimeWord3:
+                   case CodeTypes::tTimeWord3:
                    sb<<Append("time");
                    break;
-               	case CodeTypes::tAndToken:
+                   case CodeTypes::tAndToken:
                    sb<<Append("supportFunctions._and");
                    break;
-               	case CodeTypes::tOrToken:
+                   case CodeTypes::tOrToken:
                    sb<<Append("supportFunctions._or");
                    break;
-               	case CodeTypes::tNotToken:
+                   case CodeTypes::tNotToken:
                    sb<<Append("supportFunctions._not");
                    break;
-               	case CodeTypes::tLessThanToken:
+                   case CodeTypes::tLessThanToken:
                    sb<<Append("supportFunctions._lt");
                    break;
-               	case CodeTypes::tLessThanOrEqualToken:
+                   case CodeTypes::tLessThanOrEqualToken:
                    sb<<Append("supportFunctions._leq");
                    break;
-               	case CodeTypes::tMoreThanOrEqualToken:
+                   case CodeTypes::tMoreThanOrEqualToken:
                    sb<<Append("supportFunctions._geq");
                    break;
-               	case CodeTypes::tMoreThanToken:
+                   case CodeTypes::tMoreThanToken:
                    sb<<Append("supportFunctions._gt");
                    break;
-               	case CodeTypes::tXorToken:
+                   case CodeTypes::tXorToken:
                    sb<<Append("supportFunctions._xor");
                    break;
-               	default:
+                   default:
                    stringstream msg;
                    msg<< "Unknown token in convertUserFunctionExpression: " << s.tokenToString(s.token()) <<
                            "Exception raised in Module:roadRunner, Method:convertUserFunctionExpression";
                    throw Exception(msg.str());
-           	}
-           	s.nextToken();
-		}
-	}
+               }
+               s.nextToken();
+        }
+    }
     catch (SBWApplicationException)
     {
        throw;
@@ -498,12 +498,12 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
     {
        throw new SBWApplicationException(e.Message);
     }
-	return sb.ToString();
+    return sb.ToString();
 }
 
 void CSharpGenerator::SubstituteEquation(const string& reactionName, Scanner& s, CodeBuilder& sb)
 {
-	string theToken(s.tokenString);
+    string theToken(s.tokenString);
     if(theToken == "pow")
     {
         sb<<Append("Math.Pow");
@@ -801,13 +801,13 @@ void CSharpGenerator::SubstituteWords(const string& reactionName, bool bFixAmoun
     else
     {
         SubstituteEquation(reactionName, s, sb);
-	}
+    }
 }
 
 void CSharpGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& sb)
 {
-	string aToken = s.tokenString;
-	CodeTypes codeType = s.token();
+    string aToken = s.tokenString;
+    CodeTypes codeType = s.token();
     switch(codeType)
     {
         case CodeTypes::tWordToken:
@@ -905,10 +905,10 @@ void CSharpGenerator::WriteOutSymbolTables(CodeBuilder& sb)
         sb<<Format("\t\tboundaryTable[{0}] = \"{1}\";{2}", i, boundarySpeciesList[i].name, NL());
     }
 
-	for (int i = 0; i < globalParameterList.size(); i++)
+    for (int i = 0; i < globalParameterList.size(); i++)
     {
-		string name = globalParameterList[i].name;
-       	sb<<Format("\t\tglobalParameterTable[{0}] = \"{1}\";{2}", i, globalParameterList[i].name, NL());
+        string name = globalParameterList[i].name;
+           sb<<Format("\t\tglobalParameterTable[{0}] = \"{1}\";{2}", i, globalParameterList[i].name, NL());
     }
     sb<<Format("\t}{0}{0}", NL());
 }
@@ -918,27 +918,27 @@ int CSharpGenerator::ReadFloatingSpecies()
     // Load a reordered list into the variable list.
     StringList reOrderedList;
     if ((RoadRunner::mComputeAndAssignConservationLaws))
-	{
+    {
        reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
-	}
-	else
-	{
-    	reOrderedList = mStructAnalysis.GetSpeciesIds();
+    }
+    else
+    {
+        reOrderedList = mStructAnalysis.GetSpeciesIds();
     }
 
     StringListContainer oFloatingSpecies = mNOM.getListOfFloatingSpecies();
 
-	for (int i = 0; i < reOrderedList.size(); i++)
+    for (int i = 0; i < reOrderedList.size(); i++)
     {
-    	for (int j = 0; j < oFloatingSpecies.size(); j++)
+        for (int j = 0; j < oFloatingSpecies.size(); j++)
         {
-        	StringList oTempList = oFloatingSpecies[j];
-          	if(reOrderedList[i] != (const string&) oTempList[0])
-          	{
-          		continue;
-          	}
+            StringList oTempList = oFloatingSpecies[j];
+              if(reOrderedList[i] != (const string&) oTempList[0])
+              {
+                  continue;
+              }
 
-			string compartmentName = mNOM.getNthFloatingSpeciesCompartmentName(j);
+            string compartmentName = mNOM.getNthFloatingSpeciesCompartmentName(j);
             bool bIsConcentration  = ToBool(oTempList[2]);
             double dValue = ToDouble(oTempList[1]);
             if (IsNaN(dValue))
@@ -959,7 +959,7 @@ int CSharpGenerator::ReadFloatingSpecies()
               double dVolume = compartmentList[nCompartmentIndex].value;
               if (IsNaN(dVolume))
               {
-              	dVolume = 1;
+                  dVolume = 1;
               }
 
               stringstream formula;
@@ -973,11 +973,11 @@ int CSharpGenerator::ReadFloatingSpecies()
 
             if(mNOM.GetModel())
             {
-	            Species *aSpecies = mNOM.GetModel()->getSpecies(reOrderedList[i]);
+                Species *aSpecies = mNOM.GetModel()->getSpecies(reOrderedList[i]);
                 if(aSpecies)
                 {
                     symbol->hasOnlySubstance = aSpecies->getHasOnlySubstanceUnits();
-	                symbol->constant = aSpecies->getConstant();
+                    symbol->constant = aSpecies->getConstant();
                 }
             }
             else
@@ -986,8 +986,8 @@ int CSharpGenerator::ReadFloatingSpecies()
                 //Log an error...
                 symbol->hasOnlySubstance = false;
             }
-			Log(lDebug5)<<"Adding symbol to floatingSpeciesConcentrationList:"<<(*symbol);
-			floatingSpeciesConcentrationList.Add(*(symbol));
+            Log(lDebug5)<<"Adding symbol to floatingSpeciesConcentrationList:"<<(*symbol);
+            floatingSpeciesConcentrationList.Add(*(symbol));
             break;
           }
           //throw RRException("Reordered Species " + reOrderedList[i] + " not found.");
@@ -997,19 +997,19 @@ int CSharpGenerator::ReadFloatingSpecies()
 
 int CSharpGenerator::ReadBoundarySpecies()
 {
-	int numBoundarySpecies;
+    int numBoundarySpecies;
     StringListContainer oBoundarySpecies = mNOM.getListOfBoundarySpecies();
     numBoundarySpecies = oBoundarySpecies.size(); // sp1.size();
     for (int i = 0; i < numBoundarySpecies; i++)
     {
-        StringList oTempList 	= oBoundarySpecies[i];
-        string sName 			= oTempList[0];
-        string compartmentName 	= mNOM.getNthBoundarySpeciesCompartmentName(i);
-        bool bIsConcentration 	= ToBool(oTempList[2]);
-        double dValue 			= ToDouble(oTempList[1]);
+        StringList oTempList     = oBoundarySpecies[i];
+        string sName             = oTempList[0];
+        string compartmentName     = mNOM.getNthBoundarySpeciesCompartmentName(i);
+        bool bIsConcentration     = ToBool(oTempList[2]);
+        double dValue             = ToDouble(oTempList[1]);
         if (IsNaN(dValue))
         {
-        	dValue = 0;
+            dValue = 0;
         }
 
         Symbol *symbol = NULL;
@@ -1019,11 +1019,11 @@ int CSharpGenerator::ReadBoundarySpecies()
         }
         else
         {
-        	int nCompartmentIndex;
+            int nCompartmentIndex;
             double dVolume;
             if(compartmentList.find(compartmentName, nCompartmentIndex))
             {
-            	dVolume = compartmentList[nCompartmentIndex].value;
+                dVolume = compartmentList[nCompartmentIndex].value;
             }
             else
             {
@@ -1035,24 +1035,24 @@ int CSharpGenerator::ReadBoundarySpecies()
             stringstream formula;
             formula<<ToString(dValue, STR_DoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
             symbol = new Symbol(sName,
-            					dValue / dVolume,
+                                dValue / dVolume,
                                 compartmentName,
                                 formula.str());
         }
 
         if(mNOM.GetModel())
         {
-			Species* species = mNOM.GetModel()->getSpecies(sName);
-        	if(species)
+            Species* species = mNOM.GetModel()->getSpecies(sName);
+            if(species)
             {
-		        symbol->hasOnlySubstance = species->getHasOnlySubstanceUnits();
-	            symbol->constant = species->getConstant();
+                symbol->hasOnlySubstance = species->getHasOnlySubstanceUnits();
+                symbol->constant = species->getConstant();
             }
         }
         else
         {
-        	//TODO: How to report error...?
-			//Log an error...
+            //TODO: How to report error...?
+            //Log an error...
             symbol->hasOnlySubstance = false;
 
         }
@@ -1134,7 +1134,7 @@ void CSharpGenerator::WriteComputeConservedTotals(CodeBuilder& sb, const int& nu
             sb<<Format("\t\t_ct[{0}] = ", i);
             for (int j = 0; j < numFloatingSpecies; j++)
             {
-                double current = (matPtr != NULL) ? gamma(i,j) : 1.0;	//Todo: This is a bug? We should not be here if the matrix i NULL.. Triggered by model 00029
+                double current = (matPtr != NULL) ? gamma(i,j) : 1.0;    //Todo: This is a bug? We should not be here if the matrix i NULL.. Triggered by model 00029
 
                 if ( current != 0.0 )
                 {
@@ -1155,7 +1155,7 @@ void CSharpGenerator::WriteComputeConservedTotals(CodeBuilder& sb, const int& nu
 
                     if (current > 0)
                     {
-                    	string cYY = convertSpeciesToY(floatingSpeciesConcentrationList[j].name);
+                        string cYY = convertSpeciesToY(floatingSpeciesConcentrationList[j].name);
                         string cTC = convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName);
                         sb<<Append(" + " + factor + convertSpeciesToY(floatingSpeciesConcentrationList[j].name) +
                                   STR_FixAmountCompartments +
@@ -1175,7 +1175,7 @@ void CSharpGenerator::WriteComputeConservedTotals(CodeBuilder& sb, const int& nu
             conservationList.Add(Symbol("CSUM" + ToString(i))); //TODO: how to deal with this?
         }
     }
-    sb<<Append("	}" + NL() + NL());
+    sb<<Append("    }" + NL() + NL());
 }
 
 void CSharpGenerator::WriteUpdateDependentSpecies(CodeBuilder& sb, const int& numIndependentSpecies, const int& numDependentSpecies, DoubleMatrix& L0)
@@ -1255,15 +1255,15 @@ void CSharpGenerator::WriteUpdateDependentSpecies(CodeBuilder& sb, const int& nu
 
 void CSharpGenerator::WriteUserDefinedFunctions(CodeBuilder& sb)
 {
-	for (int i = 0; i < mNOM.getNumFunctionDefinitions(); i++)
+    for (int i = 0; i < mNOM.getNumFunctionDefinitions(); i++)
     {
-    	try
+        try
         {
-        	StringListContainer oList = mNOM.getNthFunctionDefinition(i);
+            StringListContainer oList = mNOM.getNthFunctionDefinition(i);
             StringList aList = oList[0];
 
-          	string sName = aList[0];
-          	//sName.Trim();
+              string sName = aList[0];
+              //sName.Trim();
             mfunctionNames.Add(sName);
             StringList oArguments = oList[1];
             StringList list2 = oList[2];
@@ -1285,7 +1285,7 @@ void CSharpGenerator::WriteUserDefinedFunctions(CodeBuilder& sb)
         }
         catch (const Exception& ex)
         {
-        	CodeBuilder msg;
+            CodeBuilder msg;
             msg<<"Error while trying to get Function Definition #" << i <<ex.what() << "\r\n\r\n";
             throw Exception(msg.ToString());
         }
@@ -1311,7 +1311,7 @@ void CSharpGenerator::WriteSetConcentration(CodeBuilder& sb)
     sb<<Format("\t\tswitch (index) {{0}", NL());
     for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
     {
-    	sb<<Format("\t\t\tcase {0}: volume = {1};{2}",
+        sb<<Format("\t\t\tcase {0}: volume = {1};{2}",
           i,
           convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName),
           NL());
@@ -1610,7 +1610,7 @@ void CSharpGenerator::WriteAccessors(CodeBuilder& sb)
 
           for (int i = 0; i < mNumEvents; i++)
           {
-          	string iStr = ToString(i);
+              string iStr = ToString(i);
               sb<<Append("\t\t_eventAssignments[" + iStr + "] = new TEventAssignmentDelegate (eventAssignment_" + iStr +
                         ");" + NL());
               sb<<Append("\t\t_computeEventAssignments[" + iStr +
@@ -1655,10 +1655,10 @@ void CSharpGenerator::WriteClassHeader(CodeBuilder& sb)
     sb<<Format("class TModel : IModel{0}", NL());
     sb<<Append("{" + NL());
     sb<<Format("\t// Symbol Mappings{0}{0}", NL());
-	for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
+    for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
     {
 
-    	sb<<"\t// y["<<i<<"] = "<<floatingSpeciesConcentrationList[i].name<<endl;//{2}", NL());
+        sb<<"\t// y["<<i<<"] = "<<floatingSpeciesConcentrationList[i].name<<endl;//{2}", NL());
     }
     sb<<Append(NL());
 }
@@ -1718,7 +1718,7 @@ void CSharpGenerator::WriteEvalInitialAssignments(CodeBuilder& sb, const int& nu
         vector< pair<string, string> > oList;// = new List<Pair<string, string>>();
         for (int i = 0; i < numInitialAssignments; i++)
         {
-			pair<string, string> pair = mNOM.getNthInitialAssignmentPair(i);
+            pair<string, string> pair = mNOM.getNthInitialAssignmentPair(i);
             oList.push_back(mNOM.getNthInitialAssignmentPair(i));
         }
 
@@ -1743,7 +1743,7 @@ void CSharpGenerator::WriteEvalInitialAssignments(CodeBuilder& sb, const int& nu
                 }
                 if (bChange)
                 {
-                	break;
+                    break;
                 }
             }
 
@@ -1752,14 +1752,14 @@ void CSharpGenerator::WriteEvalInitialAssignments(CodeBuilder& sb, const int& nu
                 pair<string, string> pairToMove = oList[nIndex];
                 oList.erase(oList.begin() + nIndex);
                 //oList.RemoveAt(nIndex);
-				oList.insert(oList.begin(), pairToMove);	//Todo: check it this is correct...
+                oList.insert(oList.begin(), pairToMove);    //Todo: check it this is correct...
             }
         }
 
-		vector< pair<string, string> >::iterator iter;
+        vector< pair<string, string> >::iterator iter;
         for(iter = oList.begin(); iter < oList.end(); iter++)
         {
-			pair<string, string>& pair = (*iter);
+            pair<string, string>& pair = (*iter);
             string leftSideRule = FindSymbol(pair.first);
             string rightSideRule = pair.second;
             if (leftSideRule.size())
@@ -1798,8 +1798,8 @@ int CSharpGenerator::WriteComputeRules(CodeBuilder& sb, const int& numReactions)
             // We only support assignment and ode rules at the moment
             string eqnRule = mNOM.getNthRule(i);
             RRRule aRule(eqnRule, ruleType);
-            string varName =  Trim(aRule.GetLHS());	//eqnRule.Substring(0, index).Trim();
-            string rightSide = Trim(aRule.GetRHS());	//eqnRule.Substring(index + 1).Trim();
+            string varName =  Trim(aRule.GetLHS());    //eqnRule.Substring(0, index).Trim();
+            string rightSide = Trim(aRule.GetRHS());    //eqnRule.Substring(index + 1).Trim();
 
             bool isRateRule = false;
 
@@ -2016,7 +2016,7 @@ void CSharpGenerator::WriteEvalModel(CodeBuilder& sb, const int& numReactions, c
 
     for (int i = 0; i < numFloatingSpecies; i++)
     {
-    	sb<<"\t\t_y[" << i << "] = oAmounts[" << i + NumAdditionalRates() << "]/" <<
+        sb<<"\t\t_y[" << i << "] = oAmounts[" << i + NumAdditionalRates() << "]/" <<
                   convertCompartmentToC(floatingSpeciesConcentrationList[i].compartmentName) << ";" << NL();
     }
 
@@ -2194,7 +2194,7 @@ void CSharpGenerator::WriteEvalModel(CodeBuilder& sb, const int& numReactions, c
 
 void CSharpGenerator::WriteEventAssignments(CodeBuilder& sb, const int& numReactions, const int& numEvents)
 {
-	StringList delays;
+    StringList delays;
     vector<bool> eventType;
     vector<bool> eventPersistentType;
     if (numEvents > 0)
@@ -2333,10 +2333,10 @@ void CSharpGenerator::WriteSetCompartmentVolumes(CodeBuilder& sb)
 
         // at this point we also have to take care of all initial assignments for compartments as well as
         // the assignment rules on compartments ... otherwise we are in trouble :)
-		stack<string> initializations = mNOM.GetMatchForSymbol(compartmentList[i].name);
+        stack<string> initializations = mNOM.GetMatchForSymbol(compartmentList[i].name);
         while (initializations.size() > 0)
         {
-        	string term(initializations.top());
+            string term(initializations.top());
             string sub = substituteTerms(mNumReactions, "", term);
             sb<<Append("\t\t" + sub + ";" + NL());
             initializations.pop();
@@ -2400,7 +2400,7 @@ void CSharpGenerator::WriteSetInitialConditions(CodeBuilder& sb, const int& numF
     }
 
     sb<<Append(NL());
-	sb<<Append("\t}" + NL() + NL());
+    sb<<Append("\t}" + NL() + NL());
 }
 
 
@@ -2422,7 +2422,7 @@ string CSharpGenerator::convertSpeciesToBc(const string& speciesName)
     {
         return "_bc[" + ToString(index) + "]";
     }
-	throw SBWApplicationException("Internal Error: Unable to locate species: " + speciesName);
+    throw SBWApplicationException("Internal Error: Unable to locate species: " + speciesName);
 }
 
 string CSharpGenerator::convertCompartmentToC(const string& compartmentName)
@@ -2448,7 +2448,7 @@ string CSharpGenerator::convertSymbolToGP(const string& parameterName)
 
 string CSharpGenerator::convertSymbolToC(const string& compartmentName)
 {
-	int index;
+    int index;
     if (compartmentList.find(compartmentName, index))
     {
         return "_c[" + ToString(index) + "]";

@@ -22,7 +22,7 @@ int SymbolList::Add(const Symbol& item)
 
 double SymbolList::getValue(const int& index)
 {
-	return at(index).value;
+    return at(index).value;
 }
 
 string SymbolList::getName(const int& index)

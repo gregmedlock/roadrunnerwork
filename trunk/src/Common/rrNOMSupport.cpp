@@ -36,11 +36,11 @@ NOMSupport::~NOMSupport()
 
 void NOMSupport::Reset()
 {
-	mSymbolTable.clear();
-	delete mModel;
+    mSymbolTable.clear();
+    delete mModel;
     delete mSBMLDoc;
-    mModel 		= NULL;
-    mSBMLDoc	= NULL;
+    mModel         = NULL;
+    mSBMLDoc    = NULL;
 }
 
 string NOMSupport::getNthCompartmentId(const int& nIndex)
@@ -105,7 +105,7 @@ double NOMSupport::getValue(const string& sId)
                 }
                 else
                 {
-                	return 1;
+                    return 1;
                 }
             }
         }
@@ -121,7 +121,7 @@ double NOMSupport::getValue(const string& sId)
                 }
                 else
                 {
-                	return 1;
+                    return 1;
                 }
             }
         }
@@ -134,13 +134,13 @@ double NOMSupport::getValue(const string& sId)
 
 //double NOMSupport::getValue(const string& id)
 //{
-//	double val;
-//	if(::getValue(id.c_str(), &val))
+//    double val;
+//    if(::getValue(id.c_str(), &val))
 //    {
-//    	//How to signal error..?
-//    	return -1;
+//        //How to signal error..?
+//        return -1;
 //    }
-//	return val;
+//    return val;
 //}
 
 StringListContainer NOMSupport::getListOfBoundarySpecies()
@@ -223,9 +223,9 @@ string NOMSupport::GetId(SBase& element)
 
 string NOMSupport::GetName(SBase* element)
 {
-	if(!element)
+    if(!element)
     {
-    	return string("");
+        return string("");
     }
 
     if (element->isSetName())
@@ -709,7 +709,7 @@ string NOMSupport::convertStringToMathML(const string& var0)
     }
     catch(const Exception& msg)
     {
-    	throw(msg);
+        throw(msg);
     }
 //    finally
 //    {
@@ -722,13 +722,13 @@ string NOMSupport::convertTime(const string& sArg, const string& sTimeSymbol)
 {
     SBMLDocument* oSBMLDoc = NULL;
     Model* oModel = NULL;
-   	Log(lDebug4)<<"Entering function "<<__FUNC__<<" in file "<<__FILE__;
+       Log(lDebug4)<<"Entering function "<<__FUNC__<<" in file "<<__FILE__;
     try
     {
         oSBMLDoc = readSBMLFromString(sArg.c_str());
         if(oSBMLDoc)
         {
-        	oModel = oSBMLDoc->getModel();
+            oModel = oSBMLDoc->getModel();
         }
 
         if (oModel == NULL)
@@ -751,7 +751,7 @@ string NOMSupport::convertTime(const string& sArg, const string& sTimeSymbol)
 //        if (oSBMLDoc != NULL)
 //            oSBMLDoc.Dispose();
 //    }
-	return string("");
+    return string("");
 }
 
 //        void NOMSupport::ChangeConstantForRules(Model model)
@@ -867,13 +867,13 @@ void NOMSupport::changeSymbol(Model& oModel, const string& sTimeSymbol, const in
         Reaction *r = oModel.getReaction(i);
         if(!r)
         {
-        	continue;
+            continue;
         }
 
         if (r->getKineticLaw() != NULL && r->getKineticLaw()->isSetMath())
         {
-			const ASTNode* node = (ASTNode*) r->getKineticLaw()->getMath();
-	        const ASTNode* math = changeSymbol((ASTNode*) node, sTimeSymbol, targetType);
+            const ASTNode* node = (ASTNode*) r->getKineticLaw()->getMath();
+            const ASTNode* math = changeSymbol((ASTNode*) node, sTimeSymbol, targetType);
             r->getKineticLaw()->setMath(math);
         }
     }
@@ -1237,15 +1237,15 @@ string NOMSupport::getKineticLaw(const int& index)
 
 //StringListContainer NOMSupport::GetFloatingSpecies()
 //{
-//	StringContainer floatingSpeciesList;
-//	int nrOfSpecies = ::getNumFloatingSpecies();
+//    StringContainer floatingSpeciesList;
+//    int nrOfSpecies = ::getNumFloatingSpecies();
 //
 //    for (int i = 0; i < nrOfSpecies; i++)
 //    {
 //        Species* aSpecies = mModel->getSpecies(i);
 //        if( aSpecies != NULL && !aSpecies->getBoundaryCondition())
 //        {
-//        	StringCollection oSpeciesValues;// = new ArrayList();
+//            StringCollection oSpeciesValues;// = new ArrayList();
 //            //oSpeciesValues.Add(GetId(aSpecies));
 //            oSpeciesValues.Add(aSpecies->getId());
 //            double concentration = aSpecies->isSetInitialConcentration() ? aSpecies->getInitialConcentration() : aSpecies->getInitialAmount();
@@ -1276,7 +1276,7 @@ StringListContainer NOMSupport::getListOfFloatingSpecies()
         {
             StringList oSpeciesValues;
             oSpeciesValues.Add( oSpecies->getId() );
-	        double concentration = oSpecies->isSetInitialConcentration() ? oSpecies->getInitialConcentration() : oSpecies->getInitialAmount();
+            double concentration = oSpecies->isSetInitialConcentration() ? oSpecies->getInitialConcentration() : oSpecies->getInitialAmount();
             oSpeciesValues.Add( ToString(concentration, STR_DoubleFormat) );
             oSpeciesValues.Add( ToString(oSpecies->isSetInitialConcentration()));
 
@@ -1322,7 +1322,7 @@ ArrayList NOMSupport::getListOfParameters()
     for (int i = 0; i < numOfGlobalParameters; i++)
     {
         Parameter *parameter = mModel->getParameter(i);
-	    double paramValue;
+        double paramValue;
         string paramStr = parameter->getId();
         StringList tempStrValueList;
         tempStrValueList.Add(paramStr);
@@ -1627,7 +1627,7 @@ bool NOMSupport::getNthUseValuesFromTriggerTime(const int& arg)
 
 ArrayList NOMSupport::getNthEvent(const int& arg)
 {
-	if (mModel == NULL)
+    if (mModel == NULL)
     {
         throw Exception("You need to load the model first");
     }
@@ -2180,7 +2180,7 @@ pair<string, string> NOMSupport::getNthInitialAssignmentPair(const int& nIndex)
     {
         throw Exception("The InitialAssignment contains no math.");
     }
-	string second = SBML_formulaToString(oAssignment->getMath());
+    string second = SBML_formulaToString(oAssignment->getMath());
     return pair<string, string> (oAssignment->getSymbol(), SBML_formulaToString(oAssignment->getMath()));
 }
 
@@ -2231,7 +2231,7 @@ string NOMSupport::getNthConstraint(const int& nIndex, string& sMessage)
     }
     else
     {
-    	XMLNode* node = (XMLNode*) oConstraint->getMessage();
+        XMLNode* node = (XMLNode*) oConstraint->getMessage();
         sMessage = node->toString();
     }
 
@@ -2429,7 +2429,7 @@ int NOMSupport::getNumParameters(const int& var0)
     Reaction &r = *(mModel->getReaction(var0));
     if (!r.isSetKineticLaw())
     {
-    	return 0;
+        return 0;
     }
     return (int)r.getKineticLaw()->getNumParameters();
 
@@ -2593,7 +2593,7 @@ void NOMSupport::modifyKineticLawsForReaction(KineticLaw& oLaw, const string& re
                     ASTNode *node = readMathMLFromString(oLaw.getFormula().c_str());
                     ChangeParameterName(*node, parameterId, sPrefix);
 //                    string sNode = formulaToString(node);
-					string sNode = SBML_formulaToString(node);
+                    string sNode = SBML_formulaToString(node);
                     oLaw.setFormula(sNode);
                 }
             }
@@ -2604,7 +2604,7 @@ void NOMSupport::modifyKineticLawsForReaction(KineticLaw& oLaw, const string& re
             Parameter *oTemp = (Parameter*)oLaw.getListOfParameters()->remove(j - 1);
             if (oTemp != NULL)
             {
-            	//	oTemp.Dispose();
+                //    oTemp.Dispose();
             }
             parameter->setId(sPrefix + parameterId);
             //oModel.getListOfParameters().append(parameter);
@@ -2612,7 +2612,7 @@ void NOMSupport::modifyKineticLawsForReaction(KineticLaw& oLaw, const string& re
             oModel.addParameter(parameter);
             if (parameter != NULL)
             {
-            	//parameter.Dispose();
+                //parameter.Dispose();
             }
         }
     }
@@ -2628,9 +2628,9 @@ void NOMSupport::modifyKineticLaws(SBMLDocument& oSBMLDoc, Model& oModel)
         KineticLaw *oLaw = oReaction->getKineticLaw();
         if (oLaw == NULL)
         {
-        	if (oReaction != NULL)
+            if (oReaction != NULL)
             {
-            	//oReaction->Dispose();
+                //oReaction->Dispose();
             }
             continue;
         }
@@ -2641,13 +2641,13 @@ void NOMSupport::modifyKineticLaws(SBMLDocument& oSBMLDoc, Model& oModel)
 
 //        if (oLaw != NULL)
 //        {
-//        	delete oLaw;
+//            delete oLaw;
 //            oLaw = NULL;
 //        }
 //
 //        if (oReaction != NULL)
 //        {
-//        	delete oReaction;
+//            delete oReaction;
 //            oReaction  = NULL;
 //        }
     }
@@ -2679,7 +2679,7 @@ string NOMSupport::getSBML()
 //        _ParameterSets.AddToModel(mModel);
 //
 //    return libsbml::writeSBMLToString(mSBMLDoc);
-	return "";
+    return "";
 }
 
 //        int getSBOTerm(string sId)
@@ -2938,11 +2938,11 @@ string NOMSupport::getSBML()
 
 void NOMSupport::GetSymbols(ASTNode* aNode, StringList& list)
 {
-	if(!aNode)
+    if(!aNode)
     {
-    	return;
+        return;
     }
-	ASTNode& node = *aNode;
+    ASTNode& node = *aNode;
 
     if (node.isName())
     {
@@ -2970,7 +2970,7 @@ StringList NOMSupport::GetSymbols(ASTNode* math)
     StringList result; //= new List<string>();
     if (math == NULL)
     {
-    	return result;
+        return result;
     }
 
     GetSymbols(math, result);
@@ -2989,7 +2989,7 @@ deque<Rule> NOMSupport::ReorderAssignmentRules(deque<Rule>& assignmentRules)
 {
     if (assignmentRules.size() < 2)
     {
-    	return assignmentRules;
+        return assignmentRules;
     }
 
     //Todo: Need XML file to test this:
@@ -2997,17 +2997,17 @@ deque<Rule> NOMSupport::ReorderAssignmentRules(deque<Rule>& assignmentRules)
     deque<Rule> result;
 
 //    var allSymbols = new Dictionary<int, List<string>>();
-	map<int, StringList > allSymbols;
+    map<int, StringList > allSymbols;
 
     //    var map = new Dictionary<string, List<string>>();
-	map<string, StringList > map;
+    map<string, StringList > map;
 //    var idList = new List<string>();
-	StringList idList;
+    StringList idList;
 
     // read id list, initialize all symbols
     for (int index = 0; index < assignmentRules.size(); index++)
     {
-    	Rule aRule = assignmentRules[index];
+        Rule aRule = assignmentRules[index];
         AssignmentRule *rule = (AssignmentRule*) &aRule;
         string variable = rule->getVariable();
         if (!rule->isSetMath())
@@ -3033,12 +3033,12 @@ deque<Rule> NOMSupport::ReorderAssignmentRules(deque<Rule>& assignmentRules)
     // build dependency graph
     vector<string>::iterator    id;
 //    foreach (var id in idList)
-	for(id = idList.begin(); id != idList.end(); id++)
+    for(id = idList.begin(); id != idList.end(); id++)
     {
         for (int index = 0; index < assignmentRules.size(); index++)
         {
             if (allSymbols[index].Contains( (*id) ))
-        	{
+            {
                 map[(assignmentRules[index]).getVariable()].Add( (*id) );
             }
         }
@@ -3132,22 +3132,22 @@ void NOMSupport::ReorderRules(SBMLDocument& doc, Model& model)
     assignmentRules = ReorderAssignmentRules(assignmentRules);
 
     //Add rules back to the model..
-	//    assignmentRules.ForEach(item => model.addRule(item));
+    //    assignmentRules.ForEach(item => model.addRule(item));
     for(int i = 0; i < assignmentRules.size(); i++)
     {
-    	model.addRule( new Rule(assignmentRules[i]));
+        model.addRule( new Rule(assignmentRules[i]));
     }
 
     //    rateRules.ForEach(item => model.addRule(item));
     for(int i = 0; i < rateRules.size(); i++)
     {
-    	model.addRule(new Rule(rateRules[i]));
+        model.addRule(new Rule(rateRules[i]));
     }
 
-	//    algebraicRules.ForEach(item => model.addRule(item));
+    //    algebraicRules.ForEach(item => model.addRule(item));
     for(int i = 0; i < algebraicRules.size(); i++)
     {
-    	model.addRule(new Rule(algebraicRules[i]));
+        model.addRule(new Rule(algebraicRules[i]));
     }
 
 }
@@ -3157,15 +3157,15 @@ void NOMSupport::loadSBML(const string& var0, const string& sTimeSymbol)
     loadSBML(var0);
     if(!mModel)
     {
-    	Log(lError)<<"No model is allocated in function "<<__FUNC__<<" file "<<__FILE__;
-		return;
+        Log(lError)<<"No model is allocated in function "<<__FUNC__<<" file "<<__FILE__;
+        return;
     }
 
     Model &aModel = *mModel;
 
     changeTimeSymbol(aModel, sTimeSymbol);
     changeSymbol(aModel, "avogadro", AST_NAME_AVOGADRO);
-	SBMLDocument &sbmlDoc = *mSBMLDoc;
+    SBMLDocument &sbmlDoc = *mSBMLDoc;
 
     modifyKineticLaws(sbmlDoc, aModel);
     ReorderRules(sbmlDoc, aModel);
@@ -3209,7 +3209,7 @@ void NOMSupport::BuildSymbolTable()
 
         if (temp->isSetSize())
         {
-        	symbol.mValue = temp->getSize();
+            symbol.mValue = temp->getSize();
         }
 
         symbol.mInitialAssignment = GetInitialAssignmentFor(symbol.mId);
@@ -3228,7 +3228,7 @@ void NOMSupport::BuildSymbolTable()
         symbol.mId = temp->getId();
         if (temp->isSetValue())
         {
-        	symbol.mValue = temp->getValue();
+            symbol.mValue = temp->getValue();
         }
         symbol.mInitialAssignment = GetInitialAssignmentFor(symbol.mId);
         symbol.mRule = GetRuleFor(symbol.mId);
@@ -3246,12 +3246,12 @@ void NOMSupport::BuildSymbolTable()
         symbol.mId = temp->getId();
         if (temp->isSetInitialConcentration())
         {
-        	symbol.mConcentration = temp->getInitialConcentration();
+            symbol.mConcentration = temp->getInitialConcentration();
         }
 
         if (temp->isSetInitialAmount())
         {
-        	symbol.mAmount = temp->getInitialAmount();
+            symbol.mAmount = temp->getInitialAmount();
         }
 
         symbol.mInitialAssignment = GetInitialAssignmentFor(symbol.mId);
@@ -3261,12 +3261,12 @@ void NOMSupport::BuildSymbolTable()
         mSymbolTable[symbol.mId] = symbol;
     }
 
-	StringSymbolHashTable::iterator iter;
+    StringSymbolHashTable::iterator iter;
     Log(lDebug4)<<"========== Symbols read into Symbol Table ("<<mSymbolTable.size()<<") ==============";
     for (iter = mSymbolTable.begin(); iter != mSymbolTable.end(); iter++)//string sbmlId in mSymbolTable.Keys)
     {
-		SBMLSymbol& aSymbol = (iter->second);
-		Log(lDebug3)<<"Key = "<<iter->first<<endl<<aSymbol;
+        SBMLSymbol& aSymbol = (iter->second);
+        Log(lDebug3)<<"Key = "<<iter->first<<endl<<aSymbol;
     }
 
     LookForDependencies();
@@ -3274,14 +3274,14 @@ void NOMSupport::BuildSymbolTable()
 
 void NOMSupport::LookForDependencies()
 {
-	Log(lDebug5)<<"In function "<<__FUNCTION__;
+    Log(lDebug5)<<"In function "<<__FUNCTION__;
 
     // Go through each found Id, and test for dependencies
-	StringSymbolHashTable::iterator iter;
+    StringSymbolHashTable::iterator iter;
 
     for (iter = mSymbolTable.begin(); iter != mSymbolTable.end(); iter++)//string sbmlId in mSymbolTable.Keys)
     {
-    	string sbmlId = (*iter).first;
+        string sbmlId = (*iter).first;
         UpdateDependencies(sbmlId);
     }
 }
@@ -3291,7 +3291,7 @@ void NOMSupport::UpdateDependencies(const string& sbmlId)
     SBMLSymbol& current = mSymbolTable[sbmlId];
     if (!current.mId.size())
     {
-    	return;
+        return;
     }
 
     if (current.HasInitialAssignment())
@@ -3299,11 +3299,11 @@ void NOMSupport::UpdateDependencies(const string& sbmlId)
         StringList dependentSymbols = GetSymbols(current.mInitialAssignment);
         for(int i = 0; i < dependentSymbols.size(); i++)
         {
-        	string dependency = dependentSymbols[i];
-        	if(dependency != current.mId)
+            string dependency = dependentSymbols[i];
+            if(dependency != current.mId)
             {
-				SBMLSymbol *sym = &(mSymbolTable[dependency]); 
-            	current.AddDependency(sym);
+                SBMLSymbol *sym = &(mSymbolTable[dependency]); 
+                current.AddDependency(sym);
             }
         }
 
@@ -3317,11 +3317,11 @@ void NOMSupport::UpdateDependencies(const string& sbmlId)
         StringList dependentSymbols = GetSymbols(current.mRule);
         for(int i = 0; i < dependentSymbols.size(); i++)
         {
-        	string dependency = dependentSymbols[i];
-        	if(dependency != current.mId)
+            string dependency = dependentSymbols[i];
+            if(dependency != current.mId)
             {
-				SBMLSymbol *sym = &(mSymbolTable[dependency]); 
-            	current.AddDependency(sym);
+                SBMLSymbol *sym = &(mSymbolTable[dependency]); 
+                current.AddDependency(sym);
             }
         }
 //        foreach (string dependency in dependentSymbols)
@@ -3335,7 +3335,7 @@ StringList NOMSupport::GetSymbols(const string& formula)
     StringList sResult;
     if (IsNullOrEmpty(formula))
     {
-    	return sResult;
+        return sResult;
     }
 
     ASTNode *node = SBML_parseFormula(formula.c_str());
@@ -3384,12 +3384,12 @@ string NOMSupport::GetRuleFor(const string& sbmlId)
         }
     }
 
-	return string("");
+    return string("");
 }
 
 string NOMSupport::GetInitialAssignmentFor(const string& sbmlId)
 {
-	if(mModel)
+    if(mModel)
     {
         for (int i = 0; i < mModel->getNumInitialAssignments(); i++)
         {
@@ -3416,10 +3416,10 @@ string NOMSupport::GetInitialAssignmentFor(const string& sbmlId)
 //
 void NOMSupport::loadSBML(const string& var0)
 {
-    //byte[] oBuffer = ASCIIEncoding.ASCII.GetBytes(var0.ToCharArray());  	//Todo: Check what we can do in C++
+    //byte[] oBuffer = ASCIIEncoding.ASCII.GetBytes(var0.ToCharArray());      //Todo: Check what we can do in C++
     //System.IO.MemoryStream oStream = new System.IO.MemoryStream(oBuffer);
 //    string sTemp = new System.IO.StreamReader(oStream).ReadToEnd();
-	string sTemp = var0;
+    string sTemp = var0;
     if (mSBMLDoc != NULL)
     {
         try
@@ -3741,115 +3741,115 @@ string NOMSupport::validateSBML(const string& sModel)
 //
 //        static string[][] _oPredefinedFunctions = new string[][]
 //
-//	{
-//		new string[]{ "massi1", "Irreversible Mass Action Kinetics for 1 substrate", "S", "k", "k * S" },
-//		new string[]{ "massi2", "Irreversible Mass Action Kinetics for 2 substrates", "S1", "S2", "k", "k * S1 * S2" },
-//		new string[]{ "massi3", "Irreversible Mass Action Kinetics for 3 substrates", "S1", "S2", "S3", "k", "k * S1 * S2 * S3" },
-//		new string[]{
-//						"massr11", "Reversible Mass Action Kinetics for 1 substrate and 1 product", "S", "P", "k_1", "k_2",
-//						"k_1 * S - k_2 * P"},
-//		new string[]{
-//						"massr12", "Reversible Mass Action Kinetics for 1 substrate and 2 products", "S", "P1", "P2", "k_1", "k_2",
-//						"k_1 * S - k_2 * P1 * P2"},
-//		new string[]{
-//						"massr13", "Reversible Mass Action Kinetics for 1 substrate and 3 products", "S", "P1", "P2", "P3", "k_1", "k_2",
-//						"k_1 * S - k_2 * P1 * P2 * P3"},
-//		new string[]{
-//						"massr21", "Reversible Mass Action Kinetics for 2 substrates and 1 product", "S1", "S2", "P", "k_1", "k_2",
-//						"k_1 * S1 * S2 - k_2 * P"},
-//		new string[]{
-//						"massr22", "Reversible Mass Action Kinetics for 2 substrates and 2 products", "S1", "S2", "P1", "P2", "k_1", "k_2",
-//						"k_1 * S1 * S2 - k_2 * P1 * P2"},
-//		new string[]{
-//						"massr23", "Reversible Mass Action Kinetics for 2 substrates and 3 products", "S1", "S2", "P1", "P2", "P3", "k_1", "k_2",
-//						"k_1 * S1 * S2 - k_2 * P1 * P2 * P3"},
-//		new string[]{
-//						"massr31", "Reversible Mass Action Kinetics for 3 substrates and 1 product", "S1", "S2", "S3", "P", "k_1", "k_2",
-//						"k_1 * S1 * S2 * S3 - k_2 * P"},
-//		new string[]{
-//						"massr32", "Reversible Mass Action Kinetics for 3 substrates and 2 products", "S1", "S2", "S3", "P1", "P2", "k_1", "k_2",
-//						"k_1 * S1 * S2 * S3 - k_2 * P1 * P2"},
-//		new string[]{
-//						"massr33", "Reversible Mass Action Kinetics for 3 substrates and 3 products", "S1", "S2", "S3", "P1", "P2", "P3", "k_1", "k_2",
-//						"k_1 * S1 * S2 * S3 - k_2 * P1 * P2 * P3"},
-//		new string[]{ "uui", "Irreversible Simple Michaelis-Menten ", "S", "V_m", "K_m", "(V_m * S)/(K_m + S)" },
-//		new string[]{
-//						"uur", "Uni-Uni Reversible Simple Michaelis-Menten", "S", "P", "V_f", "V_r", "K_ms", "K_mp",
-//						"(V_f * S / K_ms - V_r * P / K_mp)/(1 + S / K_ms +  P / K_mp)"},
-//		new string[]{
-//						"uuhr", "Uni-Uni Reversible Simple Michaelis-Menten with Haldane adjustment", "S", "P", "V_f", "K_m1", "K_m2", "K_eq",
-//						"( V_f / K_m1 * (S - P / K_eq ))/(1 + S / K_m1 + P / K_m2)"},
-//		new string[]{
-//						"isouur", "Iso Uni-Uni", "S", "P", "V_f", "K_ms", "K_mp", "K_ii", "K_eq",
-//						"(V_f * (S - P / K_eq ))/(S * (1 + P / K_ii ) + K_ms * (1 + P / K_mp))"},
-//		new string[]{ "hilli", "Hill Kinetics", "S", "V", "S_0_5", "h", "(V * pow(S,h))/(pow(S_0_5,h) + pow(S,h))"},
-//		new string[]{
-//						"hillr", "Reversible Hill Kinetics", "S", "P", "V_f", "S_0_5", "P_0_5", "h", "K_eq",
-//						"(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1))/(1 + pow(S / S_0_5 + P / P_0_5, h))"},
-//		new string[]{
-//						"hillmr", "Reversible Hill Kinetics with One Modifier", "S", "M", "P", "V_f", "K_eq", "k", "h", "alpha",
-//						"(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1))/( pow(S / S_0_5 + P / P_0_5, h) + (1 + pow(M / M_0_5, h))/(1 + alpha * pow(M/M_0_5,h)))"},
-//		new string[]{
-//						"hillmmr", "Reversible Hill Kinetics with Two Modifiers", "S", "P", "M", "V_f", "K_eq", "k", "h", "a", "b", "alpha_1", "alpha_2", "alpha_12",
-//						"(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1)) / (pow(S / S_0_5 + P / P_0_5, h) + ((1 + pow(Ma/Ma_0_5,h) + pow(Mb/Mb_0_5,h))/( 1 + alpha_1 * pow(Ma/Ma_0_5,h) + alpha_2 * pow(Mb/Mb_0_5,h) + alpha_1 * alpha_2 * alpha_12 * pow(Ma/Ma_0_5,h) * pow(Mb/Mb_0_5,h))))"},
-//		new string[]{ "usii", "Substrate Inhibition Kinetics (Irreversible)", "S", "V", "K_m", "K_i", "V*(S/K_m)/(1 + S/K_m + sqr(S)/K_i)"},
-//		new string[]{
-//						"usir", "Substrate Inhibition Kinetics (Reversible)", "S", "P", "V_f", "V_r", "K_ms", "K_mp", "K_i",
-//						"(V_f*S/K_ms + V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + sqr(S)/K_i)"},
-//		new string[]{ "usai", "Substrate Activation", "S", "V", "K_sa", "K_sc", "V * sqr(S/K_sa)/(1 + S/K_sc + sqr(S/K_sa) + S/K_sa)"},
-//		new string[]{ "ucii", "Competitive Inhibition (Irreversible)", "S", "V", "K_m", "K_i", "(V * S/K_m)/(1 + S/K_m + I/K_i)"},
-//		new string[]{
-//						"ucir", "Competitive Inhibition (Reversible)", "S", "P", "V_f", "V_r", "K_ms", "K_mp", "K_i",
-//						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + I/K_i)"},
-//		new string[]{ "unii", "Noncompetitive Inhibition (Irreversible)", "S", "I", "V", "K_m", "K_i", "(V*S/K_m)/(1 + I/K_i + (S/K_m)*(1 + I/K_i))"},
-//		new string[]{
-//						"unir", "Noncompetitive Inhibition (Reversible)", "S", "P", "I", "V_f", "K_ms", "K_mp", "K_i",
-//						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + I/K_i + (S/K_ms + P/K_mp )*(1 + I/K_i))"},
-//		new string[]{ "uuci", "Uncompetitive Inhibition (Irreversible)", "S", "I", "V", "K_m", "K_i", "(V*S/K_m)/(1 + (S/K_m)*(1 + I/K_i))"},
-//		new string[]{
-//						"uucr", "Uncompetitive Inhibition (Reversible)", "S", "P", "I", "V_f", "V_r", "K_ms", "K_mp", "K_i",
-//						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + ( S/K_ms + P/K_mp )*( 1 + I/K_i))"},
-//		new string[]{
-//						"umi", "Mixed Inhibition Kinetics (Irreversible)", "S", "I", "V", "K_m", "K_is", "K_ic",
-//						"(V*S/K_m)/(1 + I/K_is + (S/K_m)*(1 + I/K_ic))"},
-//		new string[]{
-//						"umr", "Mixed Inhibition Kinetics (Reversible)", "S", "P", "I", "V_f", "V_r", "K_ms", "K_mp", "K_is", "K_ic",
-//						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + I/K_is + ( S/K_ms + P/K_mp )*( 1 + I/K_ic ))"},
-//		new string[]{ "uai", "Specific Activation Kinetics - irreversible", "S", "A_c", "V", "K_m", "K_a", "(V*S/K_m)/(1 + S/K_m + K_a/A_c)"},
-//		new string[]{
-//						"uar", "Specific Activation Kinetics (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_a",
-//						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + K_a/A_c)"},
-//		new string[]{ "ucti", "Catalytic Activation (Irreversible)", "S", "A_c", "V", "K_m", "K_a", "(V*S/K_m)/(1 + K_a/A_c + (S/K_m)*(1 + K_a/A_c))"},
-//		new string[]{
-//						"uctr", "Catalytic Activation (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_a",
-//						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + K_a/A_c + (S/K_ms + P/K_mp)*(1 + K_a/A_c))"},
-//		new string[]{
-//						"umai", "Mixed Activation Kinetics (Irreversible)", "S", "A_c", "V", "K_m", "Kas", "Kac",
-//						"(V*S/K_m)/(1 + Kas/A_c + (S/K_m)*(1 + Kac/A_c))"},
-//		new string[]{
-//						"umar", "Mixed Activation Kinetics (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_as", "K_ac",
-//						"(V_f*S/K_ms - V_r*P/K_mp)/(1 + K_as/A_c + (S/K_ms + P/K_mp)*(1 + K_ac/A_c))"},
-//		new string[]{
-//						"uhmi", "General Hyperbolic Modifier Kinetics (Irreversible)", "S", "M", "V", "K_m", "K_d", "a", "b",
-//						"(V*(S/K_m)*(1 + b * M / (a*K_d)))/(1 + M/K_d + (S/K_m)*(1 + M/(a*K_d)))"},
-//		new string[]{
-//						"uhmr", "General Hyperbolic Modifier Kinetics (Reversible)", "S", "P", "M", "V_f", "V_r", "K_ms", "K_mp", "K_d", "a", "b",
-//						"((V_f*S/K_ms - V_r*P/K_mp)*(1 + b*M/(a*K_d)))/(1 + M/K_d + (S/K_ms + P/K_mp)*(1 + M/(a*K_d)))"},
-//		new string[]{
-//						"ualii", "Allosteric inhibition (Irreversible)", "S", "I", "V", "K_s", "K_ii", "n", "L",
-//						"(V*pow(1 + S/K_s, n-1))/(L*pow(1 + I/K_ii,n) + pow(1 + S/K_s,n))"},
-//		new string[]{
-//						"ordubr", "Ordered Uni Bi Kinetics", "A", "P", "Q", "V_f", "V_r", "K_ma", "K_mq", "K_mp", "K_ip", "K_eq",
-//						"(V_f*( A - P*Q/K_eq))/(K_ma + A*(1 + P/K_ip) + (V_f/(V_r*K_eq))*(K_mq*P + K_mp*Q + P*Q))"},
-//		new string[]{
-//						"ordbur", "Ordered Bi Uni Kinetics", "A", "B", "P", "V_f", "V_r", "K_ma", "Kmb", "K_mp", "K_ia", "K_eq",
-//						"(V_f*(A*B - P/K_eq))/(A*B + K_ma*B + Kmb*A + (V_f/(V_r*K_eq))*(K_mp + P*(1 + A/K_ia)))"},
-//		new string[]{
-//						"ordbbr", "Ordered Bi Bi Kinetics", "A", "B", "P", "Q", "V_f", "K_ma", "K_mb", "K_mp", "K_ia", "K_ib", "K_ip", "K_eq",
-//						"(V_f*(A*B - P*Q/K_eq))/(A*B*(1 + P/K_ip) + K_mb*(A + K_ia) + K_ma*B + ((V_f / (V_r*K_eq)) * (K_mq*P*( 1 + A/K_ia) + Q*(K_mp*( 1 + (K_ma*B)/(K_ia*K_mb) + P*(1 + B/K_ib))))))"},
-//		new string[]{
-//						"ppbr", "Ping Pong Bi Bi Kinetics", "A", "B", "P", "Q", "V_f", "V_r", "K_ma", "K_mb", "K_mp", "K_mq", "K_ia", "K_iq", "K_eq",
-//						"(V_f*(A*B - P*Q/K_eq))/(A*B + K_mb*A + K_ma*B*(1 + Q/K_iq) + ((V_f/(V_r*K_eq))*(K_mq*P*(1 + A/K_ia) + Q*(K_mp + P))))"}};
+//    {
+//        new string[]{ "massi1", "Irreversible Mass Action Kinetics for 1 substrate", "S", "k", "k * S" },
+//        new string[]{ "massi2", "Irreversible Mass Action Kinetics for 2 substrates", "S1", "S2", "k", "k * S1 * S2" },
+//        new string[]{ "massi3", "Irreversible Mass Action Kinetics for 3 substrates", "S1", "S2", "S3", "k", "k * S1 * S2 * S3" },
+//        new string[]{
+//                        "massr11", "Reversible Mass Action Kinetics for 1 substrate and 1 product", "S", "P", "k_1", "k_2",
+//                        "k_1 * S - k_2 * P"},
+//        new string[]{
+//                        "massr12", "Reversible Mass Action Kinetics for 1 substrate and 2 products", "S", "P1", "P2", "k_1", "k_2",
+//                        "k_1 * S - k_2 * P1 * P2"},
+//        new string[]{
+//                        "massr13", "Reversible Mass Action Kinetics for 1 substrate and 3 products", "S", "P1", "P2", "P3", "k_1", "k_2",
+//                        "k_1 * S - k_2 * P1 * P2 * P3"},
+//        new string[]{
+//                        "massr21", "Reversible Mass Action Kinetics for 2 substrates and 1 product", "S1", "S2", "P", "k_1", "k_2",
+//                        "k_1 * S1 * S2 - k_2 * P"},
+//        new string[]{
+//                        "massr22", "Reversible Mass Action Kinetics for 2 substrates and 2 products", "S1", "S2", "P1", "P2", "k_1", "k_2",
+//                        "k_1 * S1 * S2 - k_2 * P1 * P2"},
+//        new string[]{
+//                        "massr23", "Reversible Mass Action Kinetics for 2 substrates and 3 products", "S1", "S2", "P1", "P2", "P3", "k_1", "k_2",
+//                        "k_1 * S1 * S2 - k_2 * P1 * P2 * P3"},
+//        new string[]{
+//                        "massr31", "Reversible Mass Action Kinetics for 3 substrates and 1 product", "S1", "S2", "S3", "P", "k_1", "k_2",
+//                        "k_1 * S1 * S2 * S3 - k_2 * P"},
+//        new string[]{
+//                        "massr32", "Reversible Mass Action Kinetics for 3 substrates and 2 products", "S1", "S2", "S3", "P1", "P2", "k_1", "k_2",
+//                        "k_1 * S1 * S2 * S3 - k_2 * P1 * P2"},
+//        new string[]{
+//                        "massr33", "Reversible Mass Action Kinetics for 3 substrates and 3 products", "S1", "S2", "S3", "P1", "P2", "P3", "k_1", "k_2",
+//                        "k_1 * S1 * S2 * S3 - k_2 * P1 * P2 * P3"},
+//        new string[]{ "uui", "Irreversible Simple Michaelis-Menten ", "S", "V_m", "K_m", "(V_m * S)/(K_m + S)" },
+//        new string[]{
+//                        "uur", "Uni-Uni Reversible Simple Michaelis-Menten", "S", "P", "V_f", "V_r", "K_ms", "K_mp",
+//                        "(V_f * S / K_ms - V_r * P / K_mp)/(1 + S / K_ms +  P / K_mp)"},
+//        new string[]{
+//                        "uuhr", "Uni-Uni Reversible Simple Michaelis-Menten with Haldane adjustment", "S", "P", "V_f", "K_m1", "K_m2", "K_eq",
+//                        "( V_f / K_m1 * (S - P / K_eq ))/(1 + S / K_m1 + P / K_m2)"},
+//        new string[]{
+//                        "isouur", "Iso Uni-Uni", "S", "P", "V_f", "K_ms", "K_mp", "K_ii", "K_eq",
+//                        "(V_f * (S - P / K_eq ))/(S * (1 + P / K_ii ) + K_ms * (1 + P / K_mp))"},
+//        new string[]{ "hilli", "Hill Kinetics", "S", "V", "S_0_5", "h", "(V * pow(S,h))/(pow(S_0_5,h) + pow(S,h))"},
+//        new string[]{
+//                        "hillr", "Reversible Hill Kinetics", "S", "P", "V_f", "S_0_5", "P_0_5", "h", "K_eq",
+//                        "(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1))/(1 + pow(S / S_0_5 + P / P_0_5, h))"},
+//        new string[]{
+//                        "hillmr", "Reversible Hill Kinetics with One Modifier", "S", "M", "P", "V_f", "K_eq", "k", "h", "alpha",
+//                        "(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1))/( pow(S / S_0_5 + P / P_0_5, h) + (1 + pow(M / M_0_5, h))/(1 + alpha * pow(M/M_0_5,h)))"},
+//        new string[]{
+//                        "hillmmr", "Reversible Hill Kinetics with Two Modifiers", "S", "P", "M", "V_f", "K_eq", "k", "h", "a", "b", "alpha_1", "alpha_2", "alpha_12",
+//                        "(V_f * (S / S_0_5) * (1 - P / (S * K_eq) ) * pow(S / S_0_5 + P / P_0_5, h-1)) / (pow(S / S_0_5 + P / P_0_5, h) + ((1 + pow(Ma/Ma_0_5,h) + pow(Mb/Mb_0_5,h))/( 1 + alpha_1 * pow(Ma/Ma_0_5,h) + alpha_2 * pow(Mb/Mb_0_5,h) + alpha_1 * alpha_2 * alpha_12 * pow(Ma/Ma_0_5,h) * pow(Mb/Mb_0_5,h))))"},
+//        new string[]{ "usii", "Substrate Inhibition Kinetics (Irreversible)", "S", "V", "K_m", "K_i", "V*(S/K_m)/(1 + S/K_m + sqr(S)/K_i)"},
+//        new string[]{
+//                        "usir", "Substrate Inhibition Kinetics (Reversible)", "S", "P", "V_f", "V_r", "K_ms", "K_mp", "K_i",
+//                        "(V_f*S/K_ms + V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + sqr(S)/K_i)"},
+//        new string[]{ "usai", "Substrate Activation", "S", "V", "K_sa", "K_sc", "V * sqr(S/K_sa)/(1 + S/K_sc + sqr(S/K_sa) + S/K_sa)"},
+//        new string[]{ "ucii", "Competitive Inhibition (Irreversible)", "S", "V", "K_m", "K_i", "(V * S/K_m)/(1 + S/K_m + I/K_i)"},
+//        new string[]{
+//                        "ucir", "Competitive Inhibition (Reversible)", "S", "P", "V_f", "V_r", "K_ms", "K_mp", "K_i",
+//                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + I/K_i)"},
+//        new string[]{ "unii", "Noncompetitive Inhibition (Irreversible)", "S", "I", "V", "K_m", "K_i", "(V*S/K_m)/(1 + I/K_i + (S/K_m)*(1 + I/K_i))"},
+//        new string[]{
+//                        "unir", "Noncompetitive Inhibition (Reversible)", "S", "P", "I", "V_f", "K_ms", "K_mp", "K_i",
+//                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + I/K_i + (S/K_ms + P/K_mp )*(1 + I/K_i))"},
+//        new string[]{ "uuci", "Uncompetitive Inhibition (Irreversible)", "S", "I", "V", "K_m", "K_i", "(V*S/K_m)/(1 + (S/K_m)*(1 + I/K_i))"},
+//        new string[]{
+//                        "uucr", "Uncompetitive Inhibition (Reversible)", "S", "P", "I", "V_f", "V_r", "K_ms", "K_mp", "K_i",
+//                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + ( S/K_ms + P/K_mp )*( 1 + I/K_i))"},
+//        new string[]{
+//                        "umi", "Mixed Inhibition Kinetics (Irreversible)", "S", "I", "V", "K_m", "K_is", "K_ic",
+//                        "(V*S/K_m)/(1 + I/K_is + (S/K_m)*(1 + I/K_ic))"},
+//        new string[]{
+//                        "umr", "Mixed Inhibition Kinetics (Reversible)", "S", "P", "I", "V_f", "V_r", "K_ms", "K_mp", "K_is", "K_ic",
+//                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + I/K_is + ( S/K_ms + P/K_mp )*( 1 + I/K_ic ))"},
+//        new string[]{ "uai", "Specific Activation Kinetics - irreversible", "S", "A_c", "V", "K_m", "K_a", "(V*S/K_m)/(1 + S/K_m + K_a/A_c)"},
+//        new string[]{
+//                        "uar", "Specific Activation Kinetics (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_a",
+//                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + S/K_ms + P/K_mp + K_a/A_c)"},
+//        new string[]{ "ucti", "Catalytic Activation (Irreversible)", "S", "A_c", "V", "K_m", "K_a", "(V*S/K_m)/(1 + K_a/A_c + (S/K_m)*(1 + K_a/A_c))"},
+//        new string[]{
+//                        "uctr", "Catalytic Activation (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_a",
+//                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + K_a/A_c + (S/K_ms + P/K_mp)*(1 + K_a/A_c))"},
+//        new string[]{
+//                        "umai", "Mixed Activation Kinetics (Irreversible)", "S", "A_c", "V", "K_m", "Kas", "Kac",
+//                        "(V*S/K_m)/(1 + Kas/A_c + (S/K_m)*(1 + Kac/A_c))"},
+//        new string[]{
+//                        "umar", "Mixed Activation Kinetics (Reversible)", "S", "P", "A_c", "V_f", "V_r", "K_ms", "K_mp", "K_as", "K_ac",
+//                        "(V_f*S/K_ms - V_r*P/K_mp)/(1 + K_as/A_c + (S/K_ms + P/K_mp)*(1 + K_ac/A_c))"},
+//        new string[]{
+//                        "uhmi", "General Hyperbolic Modifier Kinetics (Irreversible)", "S", "M", "V", "K_m", "K_d", "a", "b",
+//                        "(V*(S/K_m)*(1 + b * M / (a*K_d)))/(1 + M/K_d + (S/K_m)*(1 + M/(a*K_d)))"},
+//        new string[]{
+//                        "uhmr", "General Hyperbolic Modifier Kinetics (Reversible)", "S", "P", "M", "V_f", "V_r", "K_ms", "K_mp", "K_d", "a", "b",
+//                        "((V_f*S/K_ms - V_r*P/K_mp)*(1 + b*M/(a*K_d)))/(1 + M/K_d + (S/K_ms + P/K_mp)*(1 + M/(a*K_d)))"},
+//        new string[]{
+//                        "ualii", "Allosteric inhibition (Irreversible)", "S", "I", "V", "K_s", "K_ii", "n", "L",
+//                        "(V*pow(1 + S/K_s, n-1))/(L*pow(1 + I/K_ii,n) + pow(1 + S/K_s,n))"},
+//        new string[]{
+//                        "ordubr", "Ordered Uni Bi Kinetics", "A", "P", "Q", "V_f", "V_r", "K_ma", "K_mq", "K_mp", "K_ip", "K_eq",
+//                        "(V_f*( A - P*Q/K_eq))/(K_ma + A*(1 + P/K_ip) + (V_f/(V_r*K_eq))*(K_mq*P + K_mp*Q + P*Q))"},
+//        new string[]{
+//                        "ordbur", "Ordered Bi Uni Kinetics", "A", "B", "P", "V_f", "V_r", "K_ma", "Kmb", "K_mp", "K_ia", "K_eq",
+//                        "(V_f*(A*B - P/K_eq))/(A*B + K_ma*B + Kmb*A + (V_f/(V_r*K_eq))*(K_mp + P*(1 + A/K_ia)))"},
+//        new string[]{
+//                        "ordbbr", "Ordered Bi Bi Kinetics", "A", "B", "P", "Q", "V_f", "K_ma", "K_mb", "K_mp", "K_ia", "K_ib", "K_ip", "K_eq",
+//                        "(V_f*(A*B - P*Q/K_eq))/(A*B*(1 + P/K_ip) + K_mb*(A + K_ia) + K_ma*B + ((V_f / (V_r*K_eq)) * (K_mq*P*( 1 + A/K_ia) + Q*(K_mp*( 1 + (K_ma*B)/(K_ia*K_mb) + P*(1 + B/K_ib))))))"},
+//        new string[]{
+//                        "ppbr", "Ping Pong Bi Bi Kinetics", "A", "B", "P", "Q", "V_f", "V_r", "K_ma", "K_mb", "K_mp", "K_mq", "K_ia", "K_iq", "K_eq",
+//                        "(V_f*(A*B - P*Q/K_eq))/(A*B + K_mb*A + K_ma*B*(1 + Q/K_iq) + ((V_f/(V_r*K_eq))*(K_mq*P*(1 + A/K_ia) + Q*(K_mp + P))))"}};
 //
 //
 //
@@ -3878,16 +3878,16 @@ string NOMSupport::validateSBML(const string& sModel)
 /// <returns>true if element is a compartment, false otherwise</returns>
 bool NOMSupport::IsCompartment(const string& sId)
 {
-	if(!mModel)
+    if(!mModel)
     {
-    	//Todo: should this throw.?
-    	return false;
+        //Todo: should this throw.?
+        return false;
     }
 
     Compartment* temp = mModel->getCompartment(sId);
     if (temp != NULL)
     {
-    	return true;
+        return true;
     }
     return false;
 }
@@ -3995,7 +3995,7 @@ bool NOMSupport::MultiplyCompartment(const string& sbmlId, string& compartmentId
 
     if(!mModel)
     {
-    	return false;
+        return false;
     }
 
     Species* temp = mModel->getSpecies(sbmlId);
@@ -4035,10 +4035,10 @@ stack<string> NOMSupport::GetMatchForSymbol(const string& sbmlId)
 
 void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
 {
-	Log(lDebug5)<<"In "<<__FUNCTION__<<" Filling stack with symbol: "<<(symbol);
+    Log(lDebug5)<<"In "<<__FUNCTION__<<" Filling stack with symbol: "<<(symbol);
     if (!symbol.mId.size())
     {
-    	return;
+        return;
     }
 
     if (symbol.HasRule())
@@ -4054,10 +4054,10 @@ void NOMSupport::FillStack(stack<string>& stack, SBMLSymbol& symbol)
         stack.push(symbol.mId + " = " + ToString(symbol.mValue, STR_DoubleFormat));
     }
 
-	for(int i = 0; i < symbol.NumberOfDependencies(); i++)
+    for(int i = 0; i < symbol.NumberOfDependencies(); i++)
     {
-    	SBMLSymbol dependency = symbol.GetDependency(i);
-    	FillStack(stack, dependency); //hmm recursive.. Todo: ...?
+        SBMLSymbol dependency = symbol.GetDependency(i);
+        FillStack(stack, dependency); //hmm recursive.. Todo: ...?
     }
 }
 

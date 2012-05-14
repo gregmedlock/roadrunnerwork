@@ -127,15 +127,15 @@ namespace rr
 /// </summary>
 double* GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
 {
-	double* oResult = new double[nRows*nCols];
+    double* oResult = new double[nRows*nCols];
 
 //    double* Matrix = (double*) pointer;
-   	double** Matrix = (double**) pointer;
+       double** Matrix = (double**) pointer;
     for(int row = 0; row < nRows; row++)
     {
-      	for(int col = 0; col < nCols; col++)
+          for(int col = 0; col < nCols; col++)
         {
-        	oResult[nCols*row + col] = Matrix[row][col];
+            oResult[nCols*row + col] = Matrix[row][col];
         }
     }
 
@@ -223,7 +223,7 @@ double* GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
 /// </summary>
 vector<string> GetStringArrayFromPtr(IntPtr &pointer, int nStrings)
 {
-	vector<string> oResult;
+    vector<string> oResult;
     oResult.resize(nStrings);
     char** stringRows = (char**) pointer;
 
@@ -234,7 +234,7 @@ vector<string> GetStringArrayFromPtr(IntPtr &pointer, int nStrings)
         oResult[i] = aString;
     }
 
-//	LibStructural_freeMatrix(pointer, nStrings);
+//    LibStructural_freeMatrix(pointer, nStrings);
     //StructAnalysis::FreeMatrix(pointer, nStrings);
     return oResult;
 }
@@ -262,10 +262,10 @@ vector<string> GetStringArrayFromPtr(IntPtr &pointer, int nStrings)
 /// </summary>
 string GetStringFromPtr(IntPtr &pointer, int nLength)
 {
-	char* oneString = (char*) pointer;
+    char* oneString = (char*) pointer;
 //    string sResult = Marshal.PtrToStringAnsi(pointer, nLength);
 //    StructAnalysis.FreeVector(pointer);
-	string sResult(oneString);
+    string sResult(oneString);
     return sResult;
 }
 //

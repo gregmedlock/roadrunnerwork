@@ -35,9 +35,9 @@ currentToken(CodeTypes::tEmptyToken)
 {
     wordTable;
     tokenQueue;
-	FCharTable.resize(255);
-	buffer.resize(255);
-	initScanner();
+    FCharTable.resize(255);
+    buffer.resize(255);
+    initScanner();
 }
 
 void Scanner::initScanner()
@@ -53,9 +53,9 @@ void Scanner::initScanner()
         FCharTable[i] = TCharCode::cSPECIAL;
     }
 
-	for (int i = 57; i < 63; i++)
+    for (int i = 57; i < 63; i++)
     {
-    	char ch = i;
+        char ch = i;
 
         FCharTable[i] = TCharCode::cSPECIAL;
     }
@@ -118,9 +118,9 @@ void Scanner::startScanner()
 
 char Scanner::getCharFromBuffer()
 {
-	if(!pStream)
+    if(!pStream)
     {
-    	throw Exception("There is no stream assigned to the scanner.. exiting");
+        throw Exception("There is no stream assigned to the scanner.. exiting");
     }
     // If the buffer is empty, read a new chuck of text from the
     // input stream, this might be a stream or console
@@ -145,7 +145,7 @@ char Scanner::getCharFromBuffer()
     bufferPtr++;
     if (bufferPtr >= bufferLength)
     {
-    	bufferPtr = 0; // Indicates the buffer is empty
+        bufferPtr = 0; // Indicates the buffer is empty
     }
     return ch;
 }
@@ -590,7 +590,7 @@ void Scanner::getSpecial()
 
         default:
         {
-        	string aToken;
+            string aToken;
             aToken.push_back(fch);
             throw ScannerException("Syntax error: Unknown special token [" + aToken  + "]");
         }
@@ -612,11 +612,11 @@ bool Scanner::IsQueueEmpty()
 void Scanner::AddTokenToQueue()
 {
     Token t;// = new Token();
-    t.tokenCode 	= ftoken;
-    t.tokenDouble 	= tokenDouble;
-    t.tokenInteger 	= tokenInteger;
-    t.tokenString 	= tokenString;
-    t.tokenValue 	= tokenScalar;
+    t.tokenCode     = ftoken;
+    t.tokenDouble     = tokenDouble;
+    t.tokenInteger     = tokenInteger;
+    t.tokenString     = tokenString;
+    t.tokenValue     = tokenScalar;
     tokenQueue.push(t);// push or ??    tokenQueue.Enqueue(t);
 }
 
@@ -628,9 +628,9 @@ void Scanner::AddTokenToQueue()
 void Scanner::getTokenFromQueue()
 {
 //    Token t = (Token) tokenQueue.Dequeue();
-    Token t = (Token) 	tokenQueue.front();
+    Token t = (Token)     tokenQueue.front();
     tokenQueue.pop();
-    ftoken 		= t.tokenCode;
+    ftoken         = t.tokenCode;
     tokenString = t.tokenString;
     tokenScalar = t.tokenValue;
     tokenInteger = t.tokenInteger;

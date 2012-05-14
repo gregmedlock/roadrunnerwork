@@ -14,16 +14,16 @@ namespace rr
 
 bool StringSymbolHashTable::ContainsKey(const string& aKey)
 {
-	return (this->find( aKey ) != this->end()) ? true : false;
+    return (this->find( aKey ) != this->end()) ? true : false;
 }
 
 ostream& operator<<(ostream& stream, StringSymbolHashTable& hash)
 {
-	map<string, SBMLSymbol>::iterator iter;
+    map<string, SBMLSymbol>::iterator iter;
 
-	for(iter = hash.begin(); iter != hash.end(); iter++)
+    for(iter = hash.begin(); iter != hash.end(); iter++)
     {
-    	stream<<"Key: "<<(*iter).first<<"\tValue:"<<(*iter).second<<"\n";
+        stream<<"Key: "<<(*iter).first<<"\tValue:"<<(*iter).second<<"\n";
     }
     return stream;
 }

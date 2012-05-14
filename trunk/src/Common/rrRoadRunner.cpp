@@ -22,9 +22,9 @@ namespace rr
 {
 
 //Initialize statics..
-bool RoadRunner::mComputeAndAssignConservationLaws 	= false;
-bool RoadRunner::mConservedTotalChanged 			= false;
-//bool RoadRunner::mReMultiplyCompartments 			= true;
+bool RoadRunner::mComputeAndAssignConservationLaws     = false;
+bool RoadRunner::mConservedTotalChanged             = false;
+//bool RoadRunner::mReMultiplyCompartments             = true;
 
 RoadRunner::RoadRunner(bool generateCSharp)
 :
@@ -45,85 +45,85 @@ mModelDllHandle(NULL),
 mSimulation(NULL),
 mTempFileFolder("C:\\tmp")
 {
-	Log(lDebug4)<<"In RoadRunner CTOR";
-	mCSharpGenerator 	= new CSharpGenerator();
-	mCGenerator 		= new CGenerator();
-	mModelGenerator = generateCSharp == true ? mCSharpGenerator : mCGenerator;
+    Log(lDebug4)<<"In RoadRunner CTOR";
+    mCSharpGenerator     = new CSharpGenerator();
+    mCGenerator         = new CGenerator();
+    mModelGenerator = generateCSharp == true ? mCSharpGenerator : mCGenerator;
 }
 
 RoadRunner::~RoadRunner()
 {
-	Log(lDebug4)<<"In RoadRunner DTOR";
-	delete mCSharpGenerator;
-	delete mCGenerator;
-	delete mModel;
-	delete mCVode;
+    Log(lDebug4)<<"In RoadRunner DTOR";
+    delete mCSharpGenerator;
+    delete mCGenerator;
+    delete mModel;
+    delete mCVode;
     if(mModelDllHandle)
     {
-    	//Unload the DLL
+        //Unload the DLL
         FreeLibrary(mModelDllHandle);
     }
 }
 
 bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
 {
-	mSettings 	= settings;
-	mTimeStart 	= mSettings.mStartTime;
+    mSettings     = settings;
+    mTimeStart     = mSettings.mStartTime;
     mTimeEnd    = mSettings.mEndTime;
-    mNumPoints	= mSettings.mSteps + 1;
-	return true;
+    mNumPoints    = mSettings.mSteps + 1;
+    return true;
 }
 
 bool RoadRunner::CreateSelectionList()
 {
-	//read from settings the variables found in the amounts and concentrations lists
-	StringList theList;
+    //read from settings the variables found in the amounts and concentrations lists
+    StringList theList;
     TSelectionRecord record;
 
-	theList.Add("time");
+    theList.Add("time");
     for(int i = 0; i < mSettings.mAmount.size(); i++)
     {
-    	theList.Add("[" + mSettings.mAmount[i] + "]");		//In the setSelection list below, the [] selects the correct 'type'
+        theList.Add("[" + mSettings.mAmount[i] + "]");        //In the setSelection list below, the [] selects the correct 'type'
     }
 
     for(int i = 0; i < mSettings.mConcentration.size(); i++)
     {
-    	theList.Add(mSettings.mConcentration[i]);
+        theList.Add(mSettings.mConcentration[i]);
     }
 
     if(theList.size() < 2)
     {
-		for(int i = 0; i < mSettings.mVariables.size(); i++)
-	    {
-    		theList.Add(mSettings.mVariables[i]);
-    	}
+        for(int i = 0; i < mSettings.mVariables.size(); i++)
+        {
+            theList.Add(mSettings.mVariables[i]);
+        }
     }
 
-	setSelectionList(theList);
+    setSelectionList(theList);
 
     Log(lInfo)<<"The following is selected:";
     for(int i = 0; i < selectionList.size(); i++)
     {
-    	Log(lInfo)<<selectionList[i];
+        Log(lInfo)<<selectionList[i];
     }
 }
 
-ModelGenerator*	RoadRunner::GetCodeGenerator()
+ModelGenerator*    RoadRunner::GetCodeGenerator()
 {
-	return mModelGenerator;
+    return mModelGenerator;
 }
 
 void RoadRunner::Reset()
 {
-	if(mModelGenerator)
+    if(mModelGenerator)
     {
-		mModelGenerator->Reset();
-	}
+        mModelGenerator->Reset();
+    }
 }
 
 string RoadRunner::GetModelSourceCode()
 {
-	return mModelCode;
+    return mModelCode;
 }
 
 bool RoadRunner::InitializeModel()
@@ -131,14 +131,14 @@ bool RoadRunner::InitializeModel()
     if(!mModel)
     {
         //Now create the Model using the compiled DLL
-	    mModel = CreateModel();
+        mModel = CreateModel();
 
-      	if(!mModel)
+          if(!mModel)
         {
-    		Log(lError)<<"Failed Creating Model";
-	    	return false ;
+            Log(lError)<<"Failed Creating Model";
+            return false ;
         }
-	}
+    }
 
     modelLoaded = true;
     mConservedTotalChanged = false;
@@ -154,101 +154,101 @@ bool RoadRunner::InitializeModel()
     mModel->computeRules(mModel->y, *mModel->ySize);
     mModel->convertToAmounts();
 
-	if (mComputeAndAssignConservationLaws)
-	{
-		mModel->computeConservedTotals();
-	}
+    if (mComputeAndAssignConservationLaws)
+    {
+        mModel->computeConservedTotals();
+    }
 
     if(mCVode)
     {
-    	delete mCVode;
+        delete mCVode;
     }
-	mCVode = new CvodeInterface(mModel);
-	mModel->AssignCVodeInterface(mCVode);
+    mCVode = new CvodeInterface(mModel);
+    mModel->AssignCVodeInterface(mCVode);
 
-	reset();
+    reset();
 
-	// Construct default selection list
-	selectionList.resize(mModel->getNumTotalVariables() + 1); // + 1 to include time
-	selectionList[0].selectionType = clTime;
-	for (int i = 1; i < mModel->getNumTotalVariables() + 1; i++)
-	{
-		selectionList[i].index = i - 1;
-		selectionList[i].selectionType = clFloatingSpecies;
-	}
+    // Construct default selection list
+    selectionList.resize(mModel->getNumTotalVariables() + 1); // + 1 to include time
+    selectionList[0].selectionType = clTime;
+    for (int i = 1; i < mModel->getNumTotalVariables() + 1; i++)
+    {
+        selectionList[i].index = i - 1;
+        selectionList[i].selectionType = clFloatingSpecies;
+    }
 
-	return true;
+    return true;
 }
 
 SimulationData RoadRunner::GetSimulationResult()
 {
-	return mSimulationData;
+    return mSimulationData;
 }
 
 double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 {
-	double dResult;
+    double dResult;
 
-	switch (record.selectionType)
-	{
-		case TSelectionType::clFloatingSpecies:
-			dResult = mModel->getConcentration(record.index);
-		break;
+    switch (record.selectionType)
+    {
+        case TSelectionType::clFloatingSpecies:
+            dResult = mModel->getConcentration(record.index);
+        break;
 
-		case TSelectionType::clBoundarySpecies:
-			dResult = mModel->bc[record.index];
-		break;
+        case TSelectionType::clBoundarySpecies:
+            dResult = mModel->bc[record.index];
+        break;
 
-		case TSelectionType::clFlux:
-			dResult = mModel->rates[record.index];
-		break;
+        case TSelectionType::clFlux:
+            dResult = mModel->rates[record.index];
+        break;
 
-		case TSelectionType::clRateOfChange:
-			dResult = mModel->dydt[record.index];
-		break;
+        case TSelectionType::clRateOfChange:
+            dResult = mModel->dydt[record.index];
+        break;
 
-		case TSelectionType::clVolume:
-			dResult = mModel->c[record.index];
-		break;
+        case TSelectionType::clVolume:
+            dResult = mModel->c[record.index];
+        break;
 
-		case TSelectionType::clParameter:
-			{
-				if (record.index > ((*mModel->gpSize) - 1))
-				{
-					dResult = mModel->ct[record.index - (*mModel->gpSize)];
-				}
-				else
-				{
-					dResult = mModel->gp[record.index];
-				}
-			}
-		break;
+        case TSelectionType::clParameter:
+            {
+                if (record.index > ((*mModel->gpSize) - 1))
+                {
+                    dResult = mModel->ct[record.index - (*mModel->gpSize)];
+                }
+                else
+                {
+                    dResult = mModel->gp[record.index];
+                }
+            }
+        break;
 
-		case TSelectionType::clFloatingAmount:
+        case TSelectionType::clFloatingAmount:
             dResult = mModel->amounts[record.index];
-		break;
+        break;
 
-		case TSelectionType::clBoundaryAmount:
+        case TSelectionType::clBoundaryAmount:
             int nIndex;
             if (mModelGenerator->compartmentList.find(mModelGenerator->boundarySpeciesList[record.index].compartmentName, nIndex))
-			{
+            {
                 dResult = mModel->bc[record.index] * mModel->c[nIndex];
             }
             else
             {
-				dResult = 0.0;
+                dResult = 0.0;
             }
-		break;
+        break;
 
-		case TSelectionType::clElasticity:
-			dResult = getEE(record.p1, record.p2, false);
-		break;
+        case TSelectionType::clElasticity:
+            dResult = getEE(record.p1, record.p2, false);
+        break;
 
-		case TSelectionType::clUnscaledElasticity:
-			dResult = getuEE(record.p1, record.p2, false);
-		break;
+        case TSelectionType::clUnscaledElasticity:
+            dResult = getuEE(record.p1, record.p2, false);
+        break;
 
-		case TSelectionType::clEigenValue:	//Todo: Enable this..
+        case TSelectionType::clEigenValue:    //Todo: Enable this..
 //            vector< complex<double> >oComplex = LA.GetEigenValues(getReducedJacobian());
 //            if (oComplex.Length > record.index)
 //            {
@@ -256,58 +256,58 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
 //            }
 //            else
 //                dResult = Double.NaN;
-				dResult = 0.0;
-		break;
+                dResult = 0.0;
+        break;
 
-		case TSelectionType::clStoichiometry:
-			dResult = mModel->sr[record.index];
-		break;
+        case TSelectionType::clStoichiometry:
+            dResult = mModel->sr[record.index];
+        break;
 
-		default:
-			dResult = 0.0;
-		break;
-	}
-	return dResult;
+        default:
+            dResult = 0.0;
+        break;
+    }
+    return dResult;
 }
 
 double RoadRunner::GetNthSelectedOutput(const int& index, const double& dCurrentTime)
 {
-	TSelectionRecord record = selectionList[index];
+    TSelectionRecord record = selectionList[index];
 
-	if (record.selectionType == TSelectionType::clTime)
-	{
-		return dCurrentTime;
-	}
-	else
-	{
-		return GetValueForRecord(record);
-	}
+    if (record.selectionType == TSelectionType::clTime)
+    {
+        return dCurrentTime;
+    }
+    else
+    {
+        return GetValueForRecord(record);
+    }
 }
 
 void RoadRunner::AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime)
 {
-	for (u_int j = 0; j < selectionList.size(); j++)
-	{
-		double out =  GetNthSelectedOutput(j, dCurrentTime);
-		results(nRow,j) = out;
-		Log(lInfo)<<"Adding result to row\t"<<nRow<<" : "<<out;
-	}
+    for (u_int j = 0; j < selectionList.size(); j++)
+    {
+        double out =  GetNthSelectedOutput(j, dCurrentTime);
+        results(nRow,j) = out;
+        Log(lInfo)<<"Adding result to row\t"<<nRow<<" : "<<out;
+    }
 }
 
 vector<double> RoadRunner::BuildModelEvalArgument()
 {
-	vector<double> dResult;// = new double[model.amounts.Length + model.rateRules.Length];
+    vector<double> dResult;// = new double[model.amounts.Length + model.rateRules.Length];
     dResult.resize((*mModel->amountsSize) + (mModel->rateRulesSize) );
-	vector<double> dCurrentRuleValues = mModel->GetCurrentValues();
+    vector<double> dCurrentRuleValues = mModel->GetCurrentValues();
 
-	dResult 		= dCurrentRuleValues;//.CopyTo(dResult, 0);
+    dResult         = dCurrentRuleValues;//.CopyTo(dResult, 0);
 
-	for(int i = 0; i < (mModel->rateRulesSize); i++)
-	{
-		dResult.push_back(mModel->amounts[i]);
-	}
+    for(int i = 0; i < (mModel->rateRulesSize); i++)
+    {
+        dResult.push_back(mModel->amounts[i]);
+    }
 
-	return dResult;
+    return dResult;
 }
 
 ////        private double[] BuildModelEvalArgument()
@@ -321,121 +321,121 @@ vector<double> RoadRunner::BuildModelEvalArgument()
 
 DoubleMatrix RoadRunner::runSimulation()
 {
-	double hstep = (mTimeEnd - mTimeStart) / (mNumPoints - 1);
-	DoubleMatrix results(mNumPoints, selectionList.size());
+    double hstep = (mTimeEnd - mTimeStart) / (mNumPoints - 1);
+    DoubleMatrix results(mNumPoints, selectionList.size());
 
-	if(!mModel)
-	{
-		return results;
-	}
+    if(!mModel)
+    {
+        return results;
+    }
 
-	vector<double> y;
-	y = BuildModelEvalArgument();
-	mModel->evalModel(mTimeStart, y);
-	AddNthOutputToResult(results, 0, mTimeStart);
+    vector<double> y;
+    y = BuildModelEvalArgument();
+    mModel->evalModel(mTimeStart, y);
+    AddNthOutputToResult(results, 0, mTimeStart);
 
-	if (mCVode->HaveVariables())
-	{
+    if (mCVode->HaveVariables())
+    {
         int restartResult = mCVode->reStart(mTimeStart, mModel);
         if (restartResult != 0)
         {
-			throw SBWApplicationException("Error in reStart call to CVODE");
+            throw SBWApplicationException("Error in reStart call to CVODE");
         }
     }
 
-	double tout = mTimeStart;
+    double tout = mTimeStart;
 
-	//The simulation is done here..
-	Log(lDebug3)<<"Will run the OneStep function "<<mNumPoints<<" times";
-	for (int i = 1; i < mNumPoints; i++)
-	{
-		Log(lDebug3)<<"Step "<<i;
-		mCVode->OneStep(tout, hstep);
-		tout = mTimeStart + i * hstep;
-		AddNthOutputToResult(results, i, tout);
-	}
+    //The simulation is done here..
+    Log(lDebug3)<<"Will run the OneStep function "<<mNumPoints<<" times";
+    for (int i = 1; i < mNumPoints; i++)
+    {
+        Log(lDebug3)<<"Step "<<i;
+        mCVode->OneStep(tout, hstep);
+        tout = mTimeStart + i * hstep;
+        AddNthOutputToResult(results, i, tout);
+    }
 
-	Log(lDebug)<<"Result: (point, time, value)";
-	for (int i = 0; i < mNumPoints; i++)
-	{
-		Log(lDebug5)<<i<<tab<<results(i,0)<<tab<<setprecision(16)<<results(i,1);
-	}
-	return results;
+    Log(lDebug)<<"Result: (point, time, value)";
+    for (int i = 0; i < mNumPoints; i++)
+    {
+        Log(lDebug5)<<i<<tab<<results(i,0)<<tab<<setprecision(16)<<results(i,1);
+    }
+    return results;
 }
 
 void RoadRunner::DumpResults(TextWriter& writer, DoubleMatrix& data, const StringList& colLabels)
 {
-	for (int i = 0; i < colLabels.Count(); i++)
-	{
-		writer.Write(colLabels[i] + "\t");
-	}
+    for (int i = 0; i < colLabels.Count(); i++)
+    {
+        writer.Write(colLabels[i] + "\t");
+    }
 
-	writer.WriteLine();
+    writer.WriteLine();
 
-	for (u_int i = 0; i < data.RSize(); i++)
-	{
-		for (u_int j = 0; j < data.CSize(); j++)
-		{
-			string val = ToString(data(i,j));
-			writer.Write(val + "\t");
-		}
-		writer.WriteLine();
-	}
+    for (u_int i = 0; i < data.RSize(); i++)
+    {
+        for (u_int j = 0; j < data.CSize(); j++)
+        {
+            string val = ToString(data(i,j));
+            writer.Write(val + "\t");
+        }
+        writer.WriteLine();
+    }
 }
 
 bool RoadRunner::Simulate()
 {
-	ComputeAndAssignConservationLaws(false);
+    ComputeAndAssignConservationLaws(false);
 
     if(!mModel)
     {
-    	Log(lError)<<"No model is loaded, can't simulate..";
-    	return false;
+        Log(lError)<<"No model is loaded, can't simulate..";
+        return false;
     }
 
     //Populate simulation result
-	DoubleMatrix data;
+    DoubleMatrix data;
     data = simulate();
 
     StringListContainer l = getAvailableSymbols();
     Log(lError)<<l;
 
-	StringList list = getSelectionList();
+    StringList list = getSelectionList();
 
-	mSimulationData.SetColumnNames(list);
+    mSimulationData.SetColumnNames(list);
     mSimulationData.SetData(data);
-//	TextWriter writer(cout);
-//	DumpResults(writer, data, list);
-	return true;
+//    TextWriter writer(cout);
+//    DumpResults(writer, data, list);
+    return true;
 }
 
 bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws)
 {
-	ComputeAndAssignConservationLaws(useConservationLaws);
+    ComputeAndAssignConservationLaws(useConservationLaws);
 
     mModelXMLFileName = fileName;
-	ifstream fs(mModelXMLFileName.c_str());
-	if(!fs)
-	{
-		throw(Exception("Failed to open the model file:" + mModelXMLFileName));
-	}
+    ifstream fs(mModelXMLFileName.c_str());
+    if(!fs)
+    {
+        throw(Exception("Failed to open the model file:" + mModelXMLFileName));
+    }
 
-	Log(lInfo)<<"\n\n ===== Reading model file:"<<mModelXMLFileName<<" ==============";
-	string sbml((std::istreambuf_iterator<char>(fs)), std::istreambuf_iterator<char>());
-	fs.close();
+    Log(lInfo)<<"\n\n ===== Reading model file:"<<mModelXMLFileName<<" ==============";
+    string sbml((std::istreambuf_iterator<char>(fs)), std::istreambuf_iterator<char>());
+    fs.close();
 
-	Log(lDebug5)<<"Loading SBML. SBML model code size: "<<sbml.size();
+    Log(lDebug5)<<"Loading SBML. SBML model code size: "<<sbml.size();
 
-	loadSBML(sbml);
+    loadSBML(sbml);
 
-	DoubleMatrix data;
+    DoubleMatrix data;
     data = simulate();
 
-	StringList list = getSelectionList();
+    StringList list = getSelectionList();
 
-	TextWriter writer(cout);
-	DumpResults(writer, data, list);
-	return true;
+    TextWriter writer(cout);
+    DumpResults(writer, data, list);
+    return true;
 }
 
 bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& mNumPoints)
@@ -464,39 +464,39 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 
 bool RoadRunner::LoadSBMLFromFile(const string& fileName)
 {
-	ifstream ifs(fileName.c_str());
-	if(!ifs)
-	{
-		stringstream msg;
-		msg<<"Failed opening file: "<<fileName;
-		return false;
-	}
+    ifstream ifs(fileName.c_str());
+    if(!ifs)
+    {
+        stringstream msg;
+        msg<<"Failed opening file: "<<fileName;
+        return false;
+    }
 
-	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+    std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
-	Log(lDebug5)<<"Read SBML content from file:\n "<<sbml \
-    			<< "\n============ End of SBML "<<endl;
+    Log(lDebug5)<<"Read SBML content from file:\n "<<sbml \
+                << "\n============ End of SBML "<<endl;
 
-	mModelXMLFileName = fileName;
-	mCurrentSBML = sbml;
+    mModelXMLFileName = fileName;
+    mCurrentSBML = sbml;
     return true;
 }
 
 bool RoadRunner::loadSBML(const string& sbml)
 {
-	Log(lDebug4)<<"Loading SBML into simulator";
-	if (!sbml.size())
-	{
-		Log(lError)<<"No SBML content..!";
+    Log(lDebug4)<<"Loading SBML into simulator";
+    if (!sbml.size())
+    {
+        Log(lError)<<"No SBML content..!";
         return false;
-	}
+    }
 
-	// If the user loads the same model again, don't bother loading into NOM,
-	// just reset the initial conditions
-	if (modelLoaded && mModel != NULL && sbml == mCurrentSBML)
-	{
-		return InitializeModel();
-	}
+    // If the user loads the same model again, don't bother loading into NOM,
+    // just reset the initial conditions
+    if (modelLoaded && mModel != NULL && sbml == mCurrentSBML)
+    {
+        return InitializeModel();
+    }
 
     if(mModel != NULL)
     {
@@ -507,7 +507,7 @@ bool RoadRunner::loadSBML(const string& sbml)
 
     mCurrentSBML = sbml;
 
-	string   dllName  = GetDLLName();
+    string   dllName  = GetDLLName();
 
     //Shall we compile model if it exists?
     bool compileIfDllExists = mSimulation->CompileIfDllExists();
@@ -515,14 +515,14 @@ bool RoadRunner::loadSBML(const string& sbml)
     bool compile = true;
     if(dllExists && compileIfDllExists == false)
     {
-		compile = false;
+        compile = false;
     }
 
     if(compile)
     {
-	    if(!GenerateAndCompileModel())
+        if(!GenerateAndCompileModel())
         {
-        	return false;
+            return false;
         }
     }
 
@@ -539,7 +539,7 @@ bool RoadRunner::loadSBML(const string& sbml)
         return false;
     }
 
-	//Finally intitilaize the model..
+    //Finally intitilaize the model..
     if(!InitializeModel())
     {
         Log(lError)<<"Failed Initializing C Model";
@@ -551,16 +551,16 @@ bool RoadRunner::loadSBML(const string& sbml)
 //        _N = StructAnalysis.GetReorderedStoichiometryMatrix();
 //        _Nr = StructAnalysis.GetNrMatrix();
 
-	return true;
+    return true;
 }
 
 string RoadRunner::GetDLLName()
 {
-	string srcCodeFolder;
+    string srcCodeFolder;
     srcCodeFolder = (mSimulation) ?
-    	mSimulation->GetDataOutputFolder()
+        mSimulation->GetDataOutputFolder()
         :
-    	string(mTempFileFolder);
+        string(mTempFileFolder);
 
 
     string dllName  = srcCodeFolder + "\\" + ChangeFileExtensionTo(GetFileNameNoPath(mModelXMLFileName), "dll");
@@ -569,13 +569,13 @@ string RoadRunner::GetDLLName()
 
 bool RoadRunner::GenerateModelCode(const string& sbml)
 {
-	if(sbml.size())
+    if(sbml.size())
     {
-		mCurrentSBML = sbml; //This should be used in stead of the file name below..
+        mCurrentSBML = sbml; //This should be used in stead of the file name below..
     }
 
     //The get instance function actually compiles the supplied code..
-	//        rrObject* o = mCompiler->getInstance(_sModelCode, "TModel", sLocation);
+    //        rrObject* o = mCompiler->getInstance(_sModelCode, "TModel", sLocation);
     //CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
 
     mModelGenerator->SetXMLModelFileName(mModelXMLFileName);
@@ -583,11 +583,11 @@ bool RoadRunner::GenerateModelCode(const string& sbml)
     string srcCodeFolder;
     if(mSimulation)
     {
-    	srcCodeFolder = mSimulation->GetDataOutputFolder();
+        srcCodeFolder = mSimulation->GetDataOutputFolder();
     }
     else
     {
-    	srcCodeFolder = ("C:\\tmp");
+        srcCodeFolder = ("C:\\tmp");
     }
 
     mModelCode = mModelGenerator->generateModelCode(mCurrentSBML);
@@ -600,13 +600,13 @@ bool RoadRunner::GenerateModelCode(const string& sbml)
 
     if(!mModelGenerator->SaveSourceCodeToFolder(srcCodeFolder))
     {
-	    Log(lError)<<"Failed saving generated source code";
+        Log(lError)<<"Failed saving generated source code";
     }
 
     Log(lDebug5)<<" ------ Model Code --------\n"
                 <<mModelCode
                 <<" ----- End of Model Code -----\n";
-	return true;
+    return true;
 }
 
 bool RoadRunner::CompileCurrentModel()
@@ -614,7 +614,7 @@ bool RoadRunner::CompileCurrentModel()
     CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
     if(!codeGen)
     {
-    	//CodeGenerator has not been allocaed
+        //CodeGenerator has not been allocaed
         Log(lError)<<"Generate code before compiling....";
         return false;
     }
@@ -622,7 +622,7 @@ bool RoadRunner::CompileCurrentModel()
      //Compile the model
     if(!mCompiler.CompileC_DLL(codeGen->GetSourceCodeFileName()))
     {
-    	Log(lError)<<"Model failed compilation";
+        Log(lError)<<"Model failed compilation";
         return false;
     }
     Log(lDebug)<<"Model compiled succesfully. ";
@@ -632,15 +632,15 @@ bool RoadRunner::CompileCurrentModel()
 
 bool RoadRunner::GenerateAndCompileModel()
 {
-	if(!GenerateModelCode())
+    if(!GenerateModelCode())
     {
-    	Log(lError)<<"Failed generating model from SBML";
+        Log(lError)<<"Failed generating model from SBML";
         return false;
     }
 
-	if(!CompileCurrentModel())
+    if(!CompileCurrentModel())
     {
-	   	Log(lError)<<"Failed compiling model";
+           Log(lError)<<"Failed compiling model";
         return false;
     }
 
@@ -649,141 +649,141 @@ bool RoadRunner::GenerateAndCompileModel()
 
 ModelFromC* RoadRunner::CreateModel()
 {
-	//Load dll
+    //Load dll
     if(!mModelDllHandle)
     {
-		string   dllName  = GetDLLName();
-    	//Load the DLL
-    	mModelDllHandle = LoadDLL(dllName);
+        string   dllName  = GetDLLName();
+        //Load the DLL
+        mModelDllHandle = LoadDLL(dllName);
     }
 
     //Create a model
     if(mModelDllHandle)
     {
-    	CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
-	 	ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);
-    	mModel = rrCModel;			//Should use an auto pointer?
+        CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
+         ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);
+        mModel = rrCModel;            //Should use an auto pointer?
     }
     else
     {
         Log(lError)<<"Failed to create DLL for model";
-    	mModel = NULL;
+        mModel = NULL;
     }
 
-	return mModel;
+    return mModel;
 }
 
 //Reset the simulator back to the initial conditions specified in the SBML model
 void RoadRunner::reset()
 {
-	if (!modelLoaded)
-	{
-		// rather make sure that the simulator is!!!! in a stable state
-		mModel = NULL;
-		mCurrentSBML = "";
-	}
-	else
-	{
-		mModel->SetTime(0.0);
+    if (!modelLoaded)
+    {
+        // rather make sure that the simulator is!!!! in a stable state
+        mModel = NULL;
+        mCurrentSBML = "";
+    }
+    else
+    {
+        mModel->SetTime(0.0);
 
-		// Reset the event flags
-		mModel->resetEvents();
-		mModel->setCompartmentVolumes();
-		mModel->setInitialConditions();
-		mModel->convertToAmounts();
+        // Reset the event flags
+        mModel->resetEvents();
+        mModel->setCompartmentVolumes();
+        mModel->setInitialConditions();
+        mModel->convertToAmounts();
 
-		// in case we have ODE rules we should assign those as initial values
-		mModel->InitializeRateRuleSymbols();
-		mModel->InitializeRates();
+        // in case we have ODE rules we should assign those as initial values
+        mModel->InitializeRateRuleSymbols();
+        mModel->InitializeRates();
 
-		// and of course initial assignments should override anything
-		mModel->evalInitialAssignments();
-		mModel->convertToAmounts();
+        // and of course initial assignments should override anything
+        mModel->evalInitialAssignments();
+        mModel->convertToAmounts();
 
-		// also we might need to set some initial assignment rules.
-		mModel->convertToConcentrations();
-		mModel->computeRules(mModel->y, *mModel->ySize);
-		mModel->InitializeRates();
-		mModel->InitializeRateRuleSymbols();
-		mModel->evalInitialAssignments();
-		mModel->computeRules(mModel->y, *mModel->ySize);
+        // also we might need to set some initial assignment rules.
+        mModel->convertToConcentrations();
+        mModel->computeRules(mModel->y, *mModel->ySize);
+        mModel->InitializeRates();
+        mModel->InitializeRateRuleSymbols();
+        mModel->evalInitialAssignments();
+        mModel->computeRules(mModel->y, *mModel->ySize);
 
-		mModel->convertToAmounts();
+        mModel->convertToAmounts();
 
-		if (mComputeAndAssignConservationLaws && ! mConservedTotalChanged)
-		{
-			mModel->computeConservedTotals();
-		}
+        if (mComputeAndAssignConservationLaws && ! mConservedTotalChanged)
+        {
+            mModel->computeConservedTotals();
+        }
 
-		mCVode->AssignNewVector(mModel, true);
-		mCVode->TestRootsAtInitialTime();
+        mCVode->AssignNewVector(mModel, true);
+        mCVode->TestRootsAtInitialTime();
 
-		//double hstep = (timeEnd - mTimeStart) / (mNumPoints - 1);
-		//CvodeInterface.MaxStep = Math.Min(CvodeInterface.MaxStep, hstep);
-		//if (CvodeInterface.MaxStep == 0)
-		//    CvodeInterface.MaxStep = hstep;
+        //double hstep = (timeEnd - mTimeStart) / (mNumPoints - 1);
+        //CvodeInterface.MaxStep = Math.Min(CvodeInterface.MaxStep, hstep);
+        //if (CvodeInterface.MaxStep == 0)
+        //    CvodeInterface.MaxStep = hstep;
 
-		mModel->SetTime(0.0);
-		mCVode->reStart(0.0, mModel);
+        mModel->SetTime(0.0);
+        mCVode->reStart(0.0, mModel);
 
-		mCVode->assignments.clear();//Clear();
+        mCVode->assignments.clear();//Clear();
 
-		try
-		{
-			mModel->testConstraints();
-		}
-		catch (Exception e)
-		{
-			mModel->Warnings.push_back("Constraint Violated at time = 0\n" + e.Message);
-			Log(lWarning)<<"Constraint Violated at time = 0\n"<<e.Message;
-		}
-	}
+        try
+        {
+            mModel->testConstraints();
+        }
+        catch (Exception e)
+        {
+            mModel->Warnings.push_back("Constraint Violated at time = 0\n" + e.Message);
+            Log(lWarning)<<"Constraint Violated at time = 0\n"<<e.Message;
+        }
+    }
 }
 
 DoubleMatrix RoadRunner::simulate()
 {
-	try
-	{
-		if (!modelLoaded)
-		{
-			throw SBWApplicationException(emptyModelStr);
-		}
+    try
+    {
+        if (!modelLoaded)
+        {
+            throw SBWApplicationException(emptyModelStr);
+        }
 
-		if (mTimeEnd <= mTimeStart)
-		{
-			throw SBWApplicationException("Error: time end must be greater than time start");
-		}
-		return runSimulation();
-	}
-	catch (Exception e)
-	{
-		throw SBWApplicationException("Unexpected error from simulate(): " + e.Message);
-	}
+        if (mTimeEnd <= mTimeStart)
+        {
+            throw SBWApplicationException("Error: time end must be greater than time start");
+        }
+        return runSimulation();
+    }
+    catch (Exception e)
+    {
+        throw SBWApplicationException("Unexpected error from simulate(): " + e.Message);
+    }
 }
 
 //Returns the currently selected columns that will be returned by calls to simulate() or simulateEx(,,).
 StringList RoadRunner::getSelectionList()
 {
-	StringList oResult;
+    StringList oResult;
 
-	if (!modelLoaded)
-	{
-		oResult.Add("time");
-		return oResult;
-	}
+    if (!modelLoaded)
+    {
+        oResult.Add("time");
+        return oResult;
+    }
 
-	StringList oFloating 	= mModelGenerator->getFloatingSpeciesConcentrationList();
-	StringList oBoundary 	= mModelGenerator->getBoundarySpeciesList();
-	StringList oFluxes 		= mModelGenerator->getReactionNames();
-	StringList oVolumes 	= mModelGenerator->getCompartmentList();
-	StringList oRates 		= getRateOfChangeNames();
-	StringList oParameters 	= getParameterNames();
+    StringList oFloating     = mModelGenerator->getFloatingSpeciesConcentrationList();
+    StringList oBoundary     = mModelGenerator->getBoundarySpeciesList();
+    StringList oFluxes         = mModelGenerator->getReactionNames();
+    StringList oVolumes     = mModelGenerator->getCompartmentList();
+    StringList oRates         = getRateOfChangeNames();
+    StringList oParameters     = getParameterNames();
 
-	vector<TSelectionRecord>::iterator iter;
-	int size = selectionList.size();
-	for(iter = selectionList.begin(); iter != selectionList.end(); iter++)
-	{
-    	TSelectionRecord record = (*iter);
+    vector<TSelectionRecord>::iterator iter;
+    int size = selectionList.size();
+    for(iter = selectionList.begin(); iter != selectionList.end(); iter++)
+    {
+        TSelectionRecord record = (*iter);
         switch (record.selectionType)
         {
             case TSelectionType::clTime:
@@ -794,84 +794,84 @@ StringList RoadRunner::getSelectionList()
                 break;
             case TSelectionType::clBoundarySpecies:
                 oResult.Add(oBoundary[record.index]);
-				break;
-			case TSelectionType::clFloatingAmount:
-				oResult.Add(Format("[{0}]", oFloating[record.index]));
-				break;
-			case TSelectionType::clFloatingSpecies:
-				oResult.Add(oFloating[record.index]);
-				break;
-			case TSelectionType::clVolume:
-				oResult.Add(oVolumes[record.index]);
-				break;
-			case TSelectionType::clFlux:
-				oResult.Add(oFluxes[record.index]);
-				break;
-			case TSelectionType::clRateOfChange:
-				oResult.Add(oRates[record.index]);
-				break;
-			case TSelectionType::clParameter:
-				oResult.Add(oParameters[record.index]);
-				break;
-			case TSelectionType::clEigenValue:
-				oResult.Add("eigen_" + record.p1);
-				break;
-			case TSelectionType::clElasticity:
-				oResult.Add(Format("EE:{0},{1}", record.p1, record.p2));
-				break;
-			case TSelectionType::clUnscaledElasticity:
-				oResult.Add(Format("uEE:{0},{1}", record.p1, record.p2));
-				break;
-			case TSelectionType::clStoichiometry:
-				oResult.Add(record.p1);
-				break;
-		}
-	}
-	return oResult;
+                break;
+            case TSelectionType::clFloatingAmount:
+                oResult.Add(Format("[{0}]", oFloating[record.index]));
+                break;
+            case TSelectionType::clFloatingSpecies:
+                oResult.Add(oFloating[record.index]);
+                break;
+            case TSelectionType::clVolume:
+                oResult.Add(oVolumes[record.index]);
+                break;
+            case TSelectionType::clFlux:
+                oResult.Add(oFluxes[record.index]);
+                break;
+            case TSelectionType::clRateOfChange:
+                oResult.Add(oRates[record.index]);
+                break;
+            case TSelectionType::clParameter:
+                oResult.Add(oParameters[record.index]);
+                break;
+            case TSelectionType::clEigenValue:
+                oResult.Add("eigen_" + record.p1);
+                break;
+            case TSelectionType::clElasticity:
+                oResult.Add(Format("EE:{0},{1}", record.p1, record.p2));
+                break;
+            case TSelectionType::clUnscaledElasticity:
+                oResult.Add(Format("uEE:{0},{1}", record.p1, record.p2));
+                break;
+            case TSelectionType::clStoichiometry:
+                oResult.Add(record.p1);
+                break;
+        }
+    }
+    return oResult;
 }
 
 //        Help("Compute the steady state of the model, returns the sum of squares of the solution")
 double RoadRunner::steadyState()
 {
-	if (!modelLoaded)
-	{
-		throw SBWApplicationException(emptyModelStr);
-	}
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
 
-	try
-	{
-		if (UseKinsol == 0)
-		{
-			steadyStateSolver = new NLEQInterface(mModel);
-		}
-		else
-		{
+    try
+    {
+        if (UseKinsol == 0)
+        {
+            steadyStateSolver = new NLEQInterface(mModel);
+        }
+        else
+        {
 //            steadyStateSolver = new KinSolveInterface(mModel);
-		}
-		//oneStep(0.0,0.05);
+        }
+        //oneStep(0.0,0.05);
         //Get a std vector for the solver
         vector<double> someAmounts;
         CopyCArrayToStdVector(mModel->amounts, someAmounts, mModel->getNumIndependentVariables());
 
-		double ss = steadyStateSolver->solve(someAmounts);//mModel->amounts);
-		mModel->convertToConcentrations();
-		return ss;
-	}
-	catch (SBWException)
-	{
-		throw;
-	}
-	catch (Exception e)
-	{
-		throw new SBWApplicationException("Unexpected error from steadyState solver:" +  e.Message);
-	}
+        double ss = steadyStateSolver->solve(someAmounts);//mModel->amounts);
+        mModel->convertToConcentrations();
+        return ss;
+    }
+    catch (SBWException)
+    {
+        throw;
+    }
+    catch (Exception e)
+    {
+        throw new SBWApplicationException("Unexpected error from steadyState solver:" +  e.Message);
+    }
 }
 
 void RoadRunner::setParameterValue(const TParameterType& parameterType, const int& parameterIndex, const double& value)
 {
     switch (parameterType)
-	{
-		case TParameterType::ptBoundaryParameter:
+    {
+        case TParameterType::ptBoundaryParameter:
             mModel->bc[parameterIndex] = value;
         break;
 
@@ -881,7 +881,7 @@ void RoadRunner::setParameterValue(const TParameterType& parameterType, const in
 
         case TParameterType::ptFloatingSpecies:
             mModel->y[parameterIndex] = value;
-		break;
+        break;
 
         case TParameterType::ptConservationParameter:
             mModel->ct[parameterIndex] = value;
@@ -894,242 +894,242 @@ void RoadRunner::setParameterValue(const TParameterType& parameterType, const in
 
 double RoadRunner::getParameterValue(const TParameterType& parameterType, const int& parameterIndex)
 {
-	switch (parameterType)
+    switch (parameterType)
     {
         case TParameterType::ptBoundaryParameter:
             return mModel->bc[parameterIndex];
 
-		case TParameterType::ptGlobalParameter:
+        case TParameterType::ptGlobalParameter:
             return mModel->gp[parameterIndex];
 
         // Used when calculating elasticities
         case TParameterType::ptFloatingSpecies:
-			return mModel->y[parameterIndex];
+            return mModel->y[parameterIndex];
 
         case TParameterType::ptConservationParameter:
-			return mModel->ct[parameterIndex];
+            return mModel->ct[parameterIndex];
 
-		case TParameterType::ptLocalParameter:
-			throw Exception("Local parameters not permitted in getParameterValue (getCC?)");
+        case TParameterType::ptLocalParameter:
+            throw Exception("Local parameters not permitted in getParameterValue (getCC?)");
 
-		default:
-			return 0.0;
-	}
+        default:
+            return 0.0;
+    }
 }
 
 //        Help("This method turns on / off the computation and adherence to conservation laws."
 //              + "By default roadRunner will discover conservation cycles and reduce the model accordingly.")
 void RoadRunner::ComputeAndAssignConservationLaws(const bool& bValue)
 {
-	mComputeAndAssignConservationLaws = bValue;
+    mComputeAndAssignConservationLaws = bValue;
 }
 
 //        Help("Returns the names given to the rate of change of the floating species")
 StringList RoadRunner::getRateOfChangeNames()
 {
-	if (!modelLoaded)
-	{
-		throw SBWApplicationException(emptyModelStr);
-	}
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
 
-	StringList sp = mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
-	for (int i = 0; i < sp.size(); i++)
-	{
-		sp[i] = sp[i] + "'";
-	}
-	return sp;
+    StringList sp = mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
+    for (int i = 0; i < sp.size(); i++)
+    {
+        sp[i] = sp[i] + "'";
+    }
+    return sp;
 }
 
 //        Help("Gets the list of compartment names")
 StringList RoadRunner::getCompartmentNames()
 {
-	if (!modelLoaded)
-	{
-		throw SBWApplicationException(emptyModelStr);
-	}
-	return mModelGenerator->getCompartmentList();
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+    return mModelGenerator->getCompartmentList();
 }
 
 
 StringList RoadRunner::getParameterNames()
 {
-	if (!modelLoaded)
-	{
-		throw SBWApplicationException(emptyModelStr);
-	}
-	StringList sp = mModelGenerator->getGlobalParameterList(); // Reordered list
-	return sp;
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+    StringList sp = mModelGenerator->getGlobalParameterList(); // Reordered list
+    return sp;
 }
 
 //        [Help("Get scaled elasticity coefficient with respect to a global parameter or species")]
 double RoadRunner::getEE(string reactionName, string parameterName)
 {
-	return getEE(reactionName, parameterName, true);
+    return getEE(reactionName, parameterName, true);
 }
 
 //        [Help("Get scaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
 double RoadRunner::getEE(string reactionName, string parameterName, bool computeSteadyState)
 {
-	TParameterType parameterType;
-	int reactionIndex;
-	int parameterIndex;
+    TParameterType parameterType;
+    int reactionIndex;
+    int parameterIndex;
 
-	if (!modelLoaded)
-	{
-		throw new SBWApplicationException(emptyModelStr);
-	}
+    if (!modelLoaded)
+    {
+        throw new SBWApplicationException(emptyModelStr);
+    }
 
-	// Check the reaction name
-	if (!mModelGenerator->GetReactionList().find(reactionName, reactionIndex))
-	{
-		throw SBWApplicationException(Format("Unable to locate reaction name: [{0}]", reactionName));
-	}
+    // Check the reaction name
+    if (!mModelGenerator->GetReactionList().find(reactionName, reactionIndex))
+    {
+        throw SBWApplicationException(Format("Unable to locate reaction name: [{0}]", reactionName));
+    }
 
-	// Find out what kind of parameter we are dealing with
-	if (mModelGenerator->GetFloatingSpeciesConcentrationList().find(parameterName, parameterIndex))
-	{
-		parameterType = TParameterType::ptFloatingSpecies;
-	}
-	else if (mModelGenerator->GetBoundarySpeciesList().find(parameterName, parameterIndex))
-	{
-		parameterType = TParameterType::ptBoundaryParameter;
-	}
-	else if (mModelGenerator->GetGlobalParameterList().find(parameterName, parameterIndex))
-	{
-		parameterType = TParameterType::ptGlobalParameter;
-	}
-	else if (mModelGenerator->GetConservationList().find(parameterName, parameterIndex))
-	{
-		parameterType = TParameterType::ptConservationParameter;
-	}
-	else
-	{
-		throw SBWApplicationException(Format("Unable to locate variable: [{0}]", parameterName));
-	}
+    // Find out what kind of parameter we are dealing with
+    if (mModelGenerator->GetFloatingSpeciesConcentrationList().find(parameterName, parameterIndex))
+    {
+        parameterType = TParameterType::ptFloatingSpecies;
+    }
+    else if (mModelGenerator->GetBoundarySpeciesList().find(parameterName, parameterIndex))
+    {
+        parameterType = TParameterType::ptBoundaryParameter;
+    }
+    else if (mModelGenerator->GetGlobalParameterList().find(parameterName, parameterIndex))
+    {
+        parameterType = TParameterType::ptGlobalParameter;
+    }
+    else if (mModelGenerator->GetConservationList().find(parameterName, parameterIndex))
+    {
+        parameterType = TParameterType::ptConservationParameter;
+    }
+    else
+    {
+        throw SBWApplicationException(Format("Unable to locate variable: [{0}]", parameterName));
+    }
 
-	mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-	double variableValue = mModel->rates[reactionIndex];
-	double parameterValue = getParameterValue(parameterType, parameterIndex);
-	if (variableValue == 0)
-	{
-		variableValue = 1e-12;
-	}
-	return getuEE(reactionName, parameterName, computeSteadyState) * parameterValue / variableValue;
+    mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+    double variableValue = mModel->rates[reactionIndex];
+    double parameterValue = getParameterValue(parameterType, parameterIndex);
+    if (variableValue == 0)
+    {
+        variableValue = 1e-12;
+    }
+    return getuEE(reactionName, parameterName, computeSteadyState) * parameterValue / variableValue;
 }
 
 
 //        [Help("Get unscaled elasticity coefficient with respect to a global parameter or species")]
 double RoadRunner::getuEE(string reactionName, string parameterName)
 {
-	return getuEE(reactionName, parameterName, true);
+    return getuEE(reactionName, parameterName, true);
 }
 
 //[Help("Get unscaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
 double RoadRunner::getuEE(string reactionName, string parameterName, bool computeSteadystate)
 {
-	try
-	{
-		if (modelLoaded)
-		{
-			TParameterType parameterType;
-			double originalParameterValue;
-			int reactionIndex;
-			int parameterIndex;
-			double f1;
-			double f2;
+    try
+    {
+        if (modelLoaded)
+        {
+            TParameterType parameterType;
+            double originalParameterValue;
+            int reactionIndex;
+            int parameterIndex;
+            double f1;
+            double f2;
 
-			mModel->convertToConcentrations();
-			mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+            mModel->convertToConcentrations();
+            mModel->computeReactionRates(mModel->GetTime(), mModel->y);
 
-			// Check the reaction name
-			if (!mModelGenerator->GetReactionList().find(reactionName, reactionIndex))
-			{
-				throw new SBWApplicationException("Unable to locate reaction name: [" + reactionName + "]");
-			}
-
-			// Find out what kind of parameter we are dealing with
-			if (mModelGenerator->GetFloatingSpeciesConcentrationList().find(parameterName, parameterIndex))
-			{
-				parameterType = TParameterType::ptFloatingSpecies;
-				originalParameterValue = mModel->y[parameterIndex];
-			}
-			else if (mModelGenerator->GetBoundarySpeciesList().find(parameterName, parameterIndex))
-			{
-				parameterType = TParameterType::ptBoundaryParameter;
-				originalParameterValue = mModel->bc[parameterIndex];
-			}
-			else if (mModelGenerator->GetGlobalParameterList().find(parameterName, parameterIndex))
-			{
-				parameterType = TParameterType::ptGlobalParameter;
-				originalParameterValue = mModel->gp[parameterIndex];
-			}
-			else if (mModelGenerator->GetConservationList().find(parameterName, parameterIndex))
-			{
-				parameterType = TParameterType::ptConservationParameter;
-				originalParameterValue = mModel->ct[parameterIndex];
-			}
-			else throw new SBWApplicationException("Unable to locate variable: [" + parameterName + "]");
-
-			double hstep = DiffStepSize*originalParameterValue;
-			if (fabs(hstep) < 1E-12)
+            // Check the reaction name
+            if (!mModelGenerator->GetReactionList().find(reactionName, reactionIndex))
             {
-				hstep = DiffStepSize;
+                throw new SBWApplicationException("Unable to locate reaction name: [" + reactionName + "]");
             }
 
-			try
-			{
-				mModel->convertToConcentrations();
+            // Find out what kind of parameter we are dealing with
+            if (mModelGenerator->GetFloatingSpeciesConcentrationList().find(parameterName, parameterIndex))
+            {
+                parameterType = TParameterType::ptFloatingSpecies;
+                originalParameterValue = mModel->y[parameterIndex];
+            }
+            else if (mModelGenerator->GetBoundarySpeciesList().find(parameterName, parameterIndex))
+            {
+                parameterType = TParameterType::ptBoundaryParameter;
+                originalParameterValue = mModel->bc[parameterIndex];
+            }
+            else if (mModelGenerator->GetGlobalParameterList().find(parameterName, parameterIndex))
+            {
+                parameterType = TParameterType::ptGlobalParameter;
+                originalParameterValue = mModel->gp[parameterIndex];
+            }
+            else if (mModelGenerator->GetConservationList().find(parameterName, parameterIndex))
+            {
+                parameterType = TParameterType::ptConservationParameter;
+                originalParameterValue = mModel->ct[parameterIndex];
+            }
+            else throw new SBWApplicationException("Unable to locate variable: [" + parameterName + "]");
 
-				setParameterValue(parameterType, parameterIndex, originalParameterValue + hstep);
-				mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-				double fi = mModel->rates[reactionIndex];
+            double hstep = DiffStepSize*originalParameterValue;
+            if (fabs(hstep) < 1E-12)
+            {
+                hstep = DiffStepSize;
+            }
 
-				setParameterValue(parameterType, parameterIndex, originalParameterValue + 2*hstep);
-				mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-				double fi2 = mModel->rates[reactionIndex];
+            try
+            {
+                mModel->convertToConcentrations();
 
-				setParameterValue(parameterType, parameterIndex, originalParameterValue - hstep);
-				mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-				double fd = mModel->rates[reactionIndex];
+                setParameterValue(parameterType, parameterIndex, originalParameterValue + hstep);
+                mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+                double fi = mModel->rates[reactionIndex];
 
-				setParameterValue(parameterType, parameterIndex, originalParameterValue - 2*hstep);
-				mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-				double fd2 = mModel->rates[reactionIndex];
+                setParameterValue(parameterType, parameterIndex, originalParameterValue + 2*hstep);
+                mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+                double fi2 = mModel->rates[reactionIndex];
 
-				// Use instead the 5th order approximation double unscaledValue = (0.5/hstep)*(fi-fd);
-				// The following separated lines avoid small amounts of roundoff error
-				f1 = fd2 + 8*fi;
-				f2 = -(8*fd + fi2);
-			}
-			catch(...)
-			{}
-			//finally
-			{
-				// What ever happens, make sure we restore the parameter level
-				setParameterValue(parameterType, parameterIndex, originalParameterValue);
-				mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-				if (computeSteadystate) steadyState();
-			}
-			return 1/(12*hstep)*(f1 + f2);
-		}
-		else throw SBWApplicationException(emptyModelStr);
-	}
-	catch (Exception e)
-	{
-		throw SBWApplicationException("Unexpected error from getuEE ()" +  e.Message);
-	}
+                setParameterValue(parameterType, parameterIndex, originalParameterValue - hstep);
+                mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+                double fd = mModel->rates[reactionIndex];
+
+                setParameterValue(parameterType, parameterIndex, originalParameterValue - 2*hstep);
+                mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+                double fd2 = mModel->rates[reactionIndex];
+
+                // Use instead the 5th order approximation double unscaledValue = (0.5/hstep)*(fi-fd);
+                // The following separated lines avoid small amounts of roundoff error
+                f1 = fd2 + 8*fi;
+                f2 = -(8*fd + fi2);
+            }
+            catch(...)
+            {}
+            //finally
+            {
+                // What ever happens, make sure we restore the parameter level
+                setParameterValue(parameterType, parameterIndex, originalParameterValue);
+                mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+                if (computeSteadystate) steadyState();
+            }
+            return 1/(12*hstep)*(f1 + f2);
+        }
+        else throw SBWApplicationException(emptyModelStr);
+    }
+    catch (Exception e)
+    {
+        throw SBWApplicationException("Unexpected error from getuEE ()" +  e.Message);
+    }
 }
 
 //        Help("Updates the model based on all recent changes")
 void RoadRunner::EvalModel()
 {
-	if (!modelLoaded)
-	{
-		throw new SBWApplicationException(emptyModelStr);
-	}
-	mModel->convertToAmounts();
-	vector<double> args = mCVode->BuildEvalArgument();
-	mModel->evalModel(mModel->GetTime(), args);
+    if (!modelLoaded)
+    {
+        throw new SBWApplicationException(emptyModelStr);
+    }
+    mModel->convertToAmounts();
+    vector<double> args = mCVode->BuildEvalArgument();
+    mModel->evalModel(mModel->GetTime(), args);
 }
 
 //        Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
@@ -1411,7 +1411,7 @@ void RoadRunner::setSelectionList(const StringList& newSelectionList)
 //                if (modelLoaded)
 //                {
 //                    double[][] uelast = getUnscaledElasticityMatrix();
-//                    //					double[][] N = StructAnalysis.getReorderedStoichiometryMatrix();
+//                    //                    double[][] N = StructAnalysis.getReorderedStoichiometryMatrix();
 //
 //                    return mult(_N, uelast);
 //                }
@@ -4381,7 +4381,7 @@ StringListContainer RoadRunner::getAvailableSymbols()
 
     if (!modelLoaded)
     {
-    	return oResult;
+        return oResult;
     }
 
     oResult.Add("Floating Species", getFloatingSpeciesNames() );
@@ -4664,12 +4664,12 @@ StringListContainer RoadRunner::getAvailableSymbols()
 
 string RoadRunner::getCopyright()
 {
-	return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";
+    return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";
 }
 
 string RoadRunner::getURL()
 {
-	return "http://sys-bio.org";
+    return "http://sys-bio.org";
 }
 
 }//namespace rr
