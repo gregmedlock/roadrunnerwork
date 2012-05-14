@@ -15,8 +15,8 @@
 #include <iostream>
 #include <sstream>
 
-#include <sbml/SBMLTypes.h>
-#include "../util.h"
+#include "SBMLTypes.h"
+#include "util.h"
 
 
 using namespace std;

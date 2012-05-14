@@ -61,6 +61,7 @@ Common/rrTParameterType.cpp
 Common/rrTPerformEventAssignmentDelegate.cpp
 Common/rrTVariableType.cpp
 Common/rrUtils.cpp
+Common/mtrand/mtrand.cpp
 ModelGeneration/rrCGenerator.cpp
 ModelGeneration/rrCodeBuilder.cpp
 ModelGeneration/rrCompiler.cpp

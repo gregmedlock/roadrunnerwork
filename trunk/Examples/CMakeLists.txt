@@ -10,18 +10,22 @@ include_directories(${RR_INCLUDE_ROOT}/ModelGeneration)
 include_directories(${RR_INCLUDE_ROOT}/Scanner)
 include_directories(${RR_INCLUDE_ROOT}/Solvers)
 include_directories(${RR_INCLUDE_ROOT}/C_src)
+include_directories(${SBML_INSTALL_FOLDER}/include)
+include_directories(${SBML_INSTALL_FOLDER}/include/sbml)
+include_directories(${CVODE_INSTALL_FOLDER}/include/cvode)
 
 if(${MSVC})
 endif(${MSVC})
 
 set(examples 	
 		validate_sbml
+		simulate_sbml
 )
 
 foreach(example ${examples})
  add_subdirectory(${example})
- install (FILES ${example}/${example}.cbproj 	DESTINATION Examples/${example} COMPONENT examples_source)
- install (FILES ${example}/main.cpp 			DESTINATION Examples/${example}	COMPONENT examples_source)
+# install (FILES ${example}/${example}.cbproj 	DESTINATION Examples/${example} COMPONENT examples_source)
+ install (FILES ${example}/${example}.cpp 		DESTINATION Examples/${example}	COMPONENT examples_source)
  install (FILES ${example}/Readme.txt 			DESTINATION Examples/${example}	COMPONENT examples_source)
  install (FILES ${example}/CMakeLists.txt 		DESTINATION Examples/${example}	COMPONENT examples_source)
 endforeach(example)

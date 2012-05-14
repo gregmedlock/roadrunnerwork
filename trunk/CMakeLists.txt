@@ -50,6 +50,7 @@ include_directories(				${RR_ROOT})
 include_directories(				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
 link_directories(					${LIBRARY_OUTPUT_PATH})
+link_directories(					${SBML_INSTALL_FOLDER}/lib)
 
 if(${BORLAND})
 #include_directories(				${VTK_BINARY_ROOT}/cg-static/Rendering)
@@ -70,6 +71,7 @@ if(${BORLAND})
 add_definitions(-DUSE_PCH) #Enable pre-compiled headers
 add_definitions(-DLIBSBML_USE_CPP_NAMESPACE) 
 add_definitions(-DNO_LIBSTRUCT_DLL) 
+add_definitions(-DNO_RR_DLL) 
 add_definitions(-H=${RR_ROOT}/rr_pch.csm)
 add_definitions(-w-8012)  #Comparing signed /unsigned
 add_definitions(-w-8057)  #Parameter never used
