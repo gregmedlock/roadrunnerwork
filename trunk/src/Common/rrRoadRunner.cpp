@@ -108,7 +108,7 @@ bool RoadRunner::CreateSelectionList()
     }
 }
 
-ModelGenerator*    RoadRunner::GetCodeGenerator()
+ModelGenerator* RoadRunner::GetCodeGenerator()
 {
     return mModelGenerator;
 }

@@ -1130,7 +1130,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
                 break;
             }
 
-            Log(lDebug)<<"time: "<<model->time<<" Event "<<(i + 1);
+            Log(lDebug)<<"time: "<<model->time<<" Event "<<(i + 1); //Unreachable....
         }
     }
 

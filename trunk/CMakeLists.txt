@@ -10,6 +10,7 @@ SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
 OPTION (BUILD_EXAMPLES			"Build Examples"			OFF)
 OPTION (BUILD_SHARED_LIBS 		"Build Shared Libraries" 	OFF)
+OPTION (BUILD_C_API	 			"Build C API" 				OFF)
 
 set(RR_SOURCE_ROOT 					${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(THIRD_PARTY_ROOT 				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
@@ -42,8 +43,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/link)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 
 #SBML
-set(SBML_INSTALL_FOLDER "C:\\rrw\\installs\\xe")
-set(CVODE_INSTALL_FOLDER "C:\\rrw\\installs\\xe")
+set(SBML_INSTALL_FOLDER "C:/rrw/installs/xe")
+set(CVODE_INSTALL_FOLDER "C:/rrw/installs/xe")
 
 include_directories(				${RR_ROOT})
 include_directories(				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
@@ -106,18 +107,25 @@ endif()
 
 install (FILES Readme.txt 		DESTINATION . 	COMPONENT info)
 install (FILES License.txt 		DESTINATION . 	COMPONENT info)
-#install (FILES CMakeLists.txt 	DESTINATION . 	COMPONENT build_files)
 
 #==== INSTALL SYSTEM FILES (COMPILER SPECIFICS) =================================================
 if(${BORLAND})
-set(SYSTEM_FILES 		${THIRD_PARTY_ROOT}/CG/XE/cc32110MT.dll)
-install (FILES 			${SYSTEM_FILES}  		DESTINATION bin COMPONENT library_files)
+set(CG_RUNTIMES		cc32110MT.dll)
+
+foreach(runtime ${CG_RUNTIMES})
+install (FILES 	${THIRD_PARTY_ROOT}/CG/XE/${runtime} DESTINATION bin COMPONENT DLLs)
+endforeach()
+
 endif()
+
+set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
+foreach(system_file ${SBML_DEPENDENCIES})
+install (FILES ${SBML_INSTALL_FOLDER}/bin/${system_file}	DESTINATION bin COMPONENT DLLs)
+endforeach()
 
 #================ CPACK =========================================================================
 #Create distribution Pack
 include (InstallRequiredSystemLibraries)
-
 
 #COMPONENTS OF THE INSTALL
 set(CPACK_COMPONENTS_ALL examples_source compiled_examples cxx_headers library_files build_files info)

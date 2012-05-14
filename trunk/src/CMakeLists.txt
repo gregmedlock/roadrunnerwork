@@ -11,14 +11,11 @@ ${CVODE_INSTALL_FOLDER}/include/cvode
 ${THIRD_PARTY_ROOT}/clapack/3.2.1/INCLUDE
 )
 
-#add_subdirectory(Common)
-##add_subdirectory(C_src)
-##add_subdirectory(LibStructSupport)
-#add_subdirectory(ModelGeneration)
-#add_subdirectory(Scanner)
-#add_subdirectory(Solvers)
-
-set(target rr)
+IF(BUILD_SHARED_LIBS)
+set(target rr_shared)
+ELSE()
+set(target rr_static)
+ENDIF()
 
 add_library(${target} ${LIB_TYPE}
 Common/rrDoubleMatrix.cpp
@@ -82,7 +79,6 @@ LibStructSupport/libstruct/libstructural.cpp
 LibStructSupport/libstruct/matrix.cpp
 LibStructSupport/libstruct/sbmlmodel.cpp
 LibStructSupport/libstruct/util.cpp
-
 )
 
 if(${BUILD_SHARED_LIBS})
@@ -92,12 +88,18 @@ if(${BUILD_SHARED_LIBS})
 	endif(${BORLAND})
 endif()
 
-set(subfolders Common Scanner ModelGeneration C_src Solvers LibStructural LibStructural/libstruct)
+set(subfolders 
+Common 
+Scanner 
+ModelGeneration 
+C_src 
+Solvers 
+LibStructural 
+LibStructural/libstruct)
 
 foreach(subfolder ${subfolders})
 FILE (GLOB headers ${subfolder}/*.h)
 install (FILES ${headers}			 	DESTINATION include COMPONENT cxx_headers)
 endforeach(subfolder)
 
-#install (TARGETS ${target} 	DESTINATION libs COMPONENT library_files)
 
