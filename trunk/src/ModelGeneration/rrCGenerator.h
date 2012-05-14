@@ -2,7 +2,7 @@
 #define rrCGeneratorH
 //---------------------------------------------------------------------------
 #include "rrModelGenerator.h"
-#include "ModelGeneration/rrCodeBuilder.h"
+#include "rrCodeBuilder.h"
 namespace rr
 {
 

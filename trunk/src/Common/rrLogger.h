@@ -1,4 +1,4 @@
 #ifndef rrLoggerH
 #define rrLoggerH
-#include "Logger/rrLog.h"
+#include "rrLog.h"
 #endif

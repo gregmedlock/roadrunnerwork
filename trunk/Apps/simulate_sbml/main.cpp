@@ -32,37 +32,37 @@ string Usage(const string& prg);
 int main(int argc, char * argv[])
 {
 
-	if(argc < 2)
-	{
-		cout<<Usage(argv[0])<<endl;
-		exit(0);
-	}
+    if(argc < 2)
+    {
+        cout<<Usage(argv[0])<<endl;
+        exit(0);
+    }
 
     Paras paras;
     char c;
-	while ((c = GetOptions(argc, argv, ("n:cv:"))) != -1)
-	{
-		switch (c)
-		{
-			case ('n'): paras.CaseNumber  				= ToInt(optarg);       	break;
-			case ('v'):	paras.VerboseMode 				= ToInt(optarg);        break;
-			case ('c'): paras.OnlyCompile  				= true;	       			break;
+    while ((c = GetOptions(argc, argv, ("n:cv:"))) != -1)
+    {
+        switch (c)
+        {
+            case ('n'): paras.CaseNumber                  = ToInt(optarg);           break;
+            case ('v'):    paras.VerboseMode                 = ToInt(optarg);        break;
+            case ('c'): paras.OnlyCompile                  = true;                       break;
 
-			case ('?'):
+            case ('?'):
+            {
+                    cout<<Usage(argv[0])<<endl;
+            }
+            default:
+            {
+                string str = argv[optind-1];
+                if(str != "-?")
                 {
-	                cout<<Usage(argv[0])<<endl;
-				}
-			default:
-                {
-                    string str = argv[optind-1];
-                    if(str != "-?")
-                    {
-                        cout<<"*** Illegal option:\t"<<argv[optind-1]<<" ***\n"<<endl;
-                    }
-                    exit(-1);
+                    cout<<"*** Illegal option:\t"<<argv[optind-1]<<" ***\n"<<endl;
                 }
-		}
-	}
+                exit(-1);
+            }
+        }
+    }
     LogOutput::mLogToConsole = true;
     gLog.SetCutOffLogLevel(IntToLogLevel(paras.VerboseMode) -2 );
 
@@ -83,9 +83,9 @@ int main(int argc, char * argv[])
         }
 
         gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
-	    Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
+        Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
 
-	    Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+        Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
         SBMLModelSimulation simulation(dataOutputFolder);
 
         //dataOutputFolder += dummy;
@@ -119,13 +119,13 @@ int main(int argc, char * argv[])
 
         if(!simulation.CompileModel())
         {
-	            Log(lError)<<"Failed compiling SBML model:" <<paras.CaseNumber;
+                Log(lError)<<"Failed compiling SBML model:" <<paras.CaseNumber;
             goto end;
         }
 
         if(paras.OnlyCompile)
         {
-        	goto end;
+            goto end;
         }
 
         if(!simulation.CreateModel())
@@ -148,7 +148,7 @@ int main(int argc, char * argv[])
             Log(lError)<<"Failed loading SBML model settings";
         }
 
-//		rr->ComputeAndAssignConservationLaws(true);
+//        rr->ComputeAndAssignConservationLaws(true);
         //Then Simulate model
         if(!simulation.Run())
         {
@@ -173,27 +173,27 @@ int main(int argc, char * argv[])
         //Check error data.. if an error in the set is larger than threshold, signal an error
         if(simulation.GetSimulationError() > paras.ErrorThreshold)
         {
-        	Log(lError)<<"********** Error larger than "<<paras.ErrorThreshold;
+            Log(lError)<<"********** Error larger than "<<paras.ErrorThreshold;
         }
         else
         {
-			Log(lError)<<"Passed Test: "<<paras.CaseNumber<<" Largest error was: "<<simulation.GetSimulationError();
+            Log(lError)<<"Passed Test: "<<paras.CaseNumber<<" Largest error was: "<<simulation.GetSimulationError();
         }
 
         simulation.SaveAllData();
         simulation.SaveModelAsXML(dataOutputFolder);
 
     }
-	catch(Exception& ex)
-	{
-		Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
-	}
+    catch(Exception& ex)
+    {
+        Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
+    }
 
-    end:	//I have not used a label in 15 years!
+    end:    //I have not used a label in 15 years!
     delete rr;
-	Log(lInfo)<<"Done";
+    Log(lInfo)<<"Done";
 //    Pause();
-		return 0;
+        return 0;
 }
 
 string Usage(const string& prg)

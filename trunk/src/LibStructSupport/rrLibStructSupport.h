@@ -2,10 +2,10 @@
 #define rrLibStructSupportH
 #include <vector>
 #include <string>
-#include "Util/rrStringList.h"
+#include "rrStringList.h"
 #include "rrObject.h"
 #include "libstructural.h"
-#include "Util/rrDoubleMatrix.h"
+#include "rrDoubleMatrix.h"
 
 using std::vector;
 using std::string;

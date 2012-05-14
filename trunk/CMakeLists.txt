@@ -9,7 +9,6 @@ SET(RR_BUILD_VERSION 11)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
 OPTION (BUILD_EXAMPLES			"Build Examples"			OFF)
-OPTION (BUILD_LIBS				"Build Libs"				OFF)
 OPTION (BUILD_SHARED_LIBS 		"Build Shared Libraries" 	OFF)
 
 set(RR_SOURCE_ROOT 					${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -42,6 +41,10 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/link)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/link)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 
+#SBML
+set(SBML_INSTALL_FOLDER "C:\\rrw\\installs\\xe")
+set(CVODE_INSTALL_FOLDER "C:\\rrw\\installs\\xe")
+
 include_directories(				${RR_ROOT})
 include_directories(				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
@@ -50,6 +53,7 @@ link_directories(					${LIBRARY_OUTPUT_PATH})
 if(${BORLAND})
 #include_directories(				${VTK_BINARY_ROOT}/cg-static/Rendering)
 #link_directories(					${VTK_BINARY_ROOT}/cg-static/bin)
+
 endif()
 
 if(${MSVC})
@@ -62,8 +66,13 @@ endif()
 
 #=== COMPILER FLAGS 
 if(${BORLAND})
-add_definitions(-DRR_PCH) #Enable pre-compiled headers
+add_definitions(-DUSE_PCH) #Enable pre-compiled headers
+add_definitions(-DLIBSBML_USE_CPP_NAMESPACE) 
+add_definitions(-DNO_LIBSTRUCT_DLL) 
 add_definitions(-H=${RR_ROOT}/rr_pch.csm)
+add_definitions(-w-8012)  #Comparing signed /unsigned
+add_definitions(-w-8057)  #Parameter never used
+add_definitions(-w-8004)  #'var' is assigned a value that is never used
 endif()
 
 if(${MSVC})

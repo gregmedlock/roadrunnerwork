@@ -1,5 +1,5 @@
 #ifdef USE_PCH
-#include "rrPCH.h"
+#include "rr_pch.h"
 #endif
 #pragma hdrstop
 #include <windows.h>		//For HINSTANCE and other
@@ -90,7 +90,7 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 
 
 //    exeCmd<<"bcc32 -WD ";
-//   	exeCmd<<" -e"<<mDLLFileName<<" -vu +c:\\rrw\\src\\c_src\\bcc.cfg " \
+//    exeCmd<<" -e"<<mDLLFileName<<" -vu +c:\\rrw\\src\\c_src\\bcc.cfg " \
 //    <<sourceFileName \
 //    <<" c:\\rrw\\src\\c_src\\rrSupportFunctions.c";
 

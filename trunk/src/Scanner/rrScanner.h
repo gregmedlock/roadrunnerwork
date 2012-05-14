@@ -5,9 +5,9 @@
 #include <queue>
 #include <fstream>
 #include <sstream>
-#include "Util/rrHashTable.h"
-#include "Scanner/rrCodeTypes.h"
-#include "Scanner/rrToken.h"
+#include "rrHashTable.h"
+#include "rrCodeTypes.h"
+#include "rrToken.h"
 using std::vector;
 using std::queue;
 using std::fstream;

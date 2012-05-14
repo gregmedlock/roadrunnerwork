@@ -1,11 +1,11 @@
 #ifdef USE_PCH
-#include "rrPCH.h"
+#include "rr_pch.h"
 #endif
 #pragma hdrstop
 #include <math.h>
-#include "Model.h"
-#include "SBMLDocument.h"
-#include "math/FormulaFormatter.h"
+#include "sbml/Model.h"
+#include "sbml/SBMLDocument.h"
+#include "sbml/math/FormulaFormatter.h"
 #include "rrLogger.h"
 #include "rrNOMSupport.h"
 #include "rrStringUtils.h"
