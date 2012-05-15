@@ -15,19 +15,17 @@ include_directories(${SBML_INSTALL_FOLDER}/include)
 include_directories(${SBML_INSTALL_FOLDER}/include/sbml)
 include_directories(${CVODE_INSTALL_FOLDER}/include/cvode)
 
-
 if(${MSVC})
 endif(${MSVC})
 
-set (wrappers 	C )
-
-foreach(wrapper ${wrappers})
+if(BUILD_C_API)
+set(wrapper "C")
  add_subdirectory(${wrapper})
  install (FILES ${wrapper}/Readme.txt 			DESTINATION Examples/${wrapper}	COMPONENT wrappers_source)
  install (FILES ${wrapper}/CMakeLists.txt 		DESTINATION Examples/${wrapper}	COMPONENT wrappers_source)
-endforeach(wrapper)
+ install (FILES ${wrapper}/rrC_API.cpp 			DESTINATION Examples/${wrapper}	COMPONENT wrappers_source)
+endif()
 
- install (FILES ${wrapper}/${wrapper}.cpp 		DESTINATION Examples/${wrapper}	COMPONENT wrappers_source)
 #install (FILES auto_link.h 			DESTINATION Examples COMPONENT wrappers_source)
 install (FILES Readme.txt 			DESTINATION Examples COMPONENT info)
 #install (FILES Examples.groupproj 	DESTINATION Examples COMPONENT wrappers_source)

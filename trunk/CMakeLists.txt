@@ -13,7 +13,7 @@ OPTION (BUILD_EXAMPLES			"Build Examples"			OFF)
 OPTION (BUILD_SHARED_LIBS 		"Build Shared Libraries" 	OFF)
 
 set(RR_SOURCE_ROOT 					${CMAKE_CURRENT_SOURCE_DIR}/src)
-set(THIRD_PARTY_ROOT 				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
+set(THIRD_PARTY_FOLDER 				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
 set(exe_path		 				${PROJECT_BINARY_DIR}/bin)
 set(lib_path		 				${PROJECT_BINARY_DIR}/link)
@@ -49,8 +49,14 @@ set(CVODE_INSTALL_FOLDER "C:/rrw/installs/xe")
 include_directories(				${RR_ROOT})
 include_directories(				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
+set(CLAPACK_BUILD_FOLDER "C:/rrw/builds/xe/clapack")
+
 link_directories(					${LIBRARY_OUTPUT_PATH})
 link_directories(					${SBML_INSTALL_FOLDER}/lib)
+link_directories(					${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib)
+link_directories(					${CLAPACK_BUILD_FOLDER}/BLAS/SRC)
+link_directories(					${CLAPACK_BUILD_FOLDER}/SRC)
+link_directories(					${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c)
 
 if(${BORLAND})
 #include_directories(				${VTK_BINARY_ROOT}/cg-static/Rendering)
@@ -115,7 +121,7 @@ if(${BORLAND})
 set(CG_RUNTIMES		cc32110MT.dll)
 
 foreach(runtime ${CG_RUNTIMES})
-install (FILES 	${THIRD_PARTY_ROOT}/CG/XE/${runtime} DESTINATION bin COMPONENT DLLs)
+install (FILES 	${THIRD_PARTY_FOLDER}/CG/XE/${runtime} DESTINATION bin COMPONENT DLLs)
 endforeach()
 endif()
 
@@ -124,7 +130,7 @@ endif()
 include (InstallRequiredSystemLibraries)
 
 #COMPONENTS OF THE INSTALL
-set(CPACK_COMPONENTS_ALL examples_source compiled_examples cxx_headers library_files build_files info)
+set(CPACK_COMPONENTS_ALL examples_source compiled_examples cxx_headers library_files )
 set(CPACK_COMPONENT_EXAMPLES_SOURCE_GROUP					"Examples")
 set(CPACK_COMPONENT_COMPILED_EXAMPLES_GROUP					"Examples")
 set(CPACK_COMPONENT_LIBRARY_FILES_GROUP						"Development")
@@ -136,14 +142,14 @@ set(CPACK_COMPONENT_COMPILED_EXAMPLES_DISPLAY_NAME			"Compiled Examples")
 set(CPACK_COMPONENT_EXAMPLES_SOURCE_DISPLAY_NAME			"Examples Source")
 set(CPACK_COMPONENT_LIBRARY_FILES_DISPLAY_NAME				"rr Library Files")
 set(CPACK_COMPONENT_CXX_HEADERS_DISPLAY_NAME				"C++ Headers")
-set(CPACK_COMPONENT_BUILD_FILES_HIDDEN						"Build Files")
-set(CPACK_COMPONENT_INFO_HIDDEN								"Info Files")
+#set(CPACK_COMPONENT_BUILD_FILES_HIDDEN						"Build Files")
+#set(CPACK_COMPONENT_INFO_HIDDEN								"Info Files")
 
-set(CPACK_PACKAGE_ICON										${CMAKE_CURRENT_SOURCE_DIR}\\\\rrArt.bmp)
+#set(CPACK_PACKAGE_ICON										${CMAKE_CURRENT_SOURCE_DIR}\\\\rrArt.bmp)
 
 #NSIS Specific
-set(CPACK_NSIS_MUI_ICON										${CMAKE_CURRENT_SOURCE_DIR}/rr.ico)
-set(CPACK_NSIS_MUI_UNIICON									${CMAKE_CURRENT_SOURCE_DIR}/rr.ico)
+#set(CPACK_NSIS_MUI_ICON										${CMAKE_CURRENT_SOURCE_DIR}/rr.ico)
+#set(CPACK_NSIS_MUI_UNIICON									${CMAKE_CURRENT_SOURCE_DIR}/rr.ico)
 set(CPACK_NSIS_INSTALL_ROOT									"C:")
 
 #COMPONENTS
@@ -160,7 +166,7 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY						"rr library - headers, libraries and 
 set(CPACK_PACKAGE_VERSION_MAJOR								"${RR_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR								"${RR_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH								"${RR_BUILD_VERSION}")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY							"rr")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY							"RoadRunner")
 
 if(${BUILD_SHARED_LIBS})
 set(PACKAGE_NAME_LIB_TYPE "shared")
@@ -185,7 +191,7 @@ set(bType "release")
 endif()
 
 set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}-${PACKAGE_NAME_LIB_TYPE}-${bType}")
-set(CPACK_OUTPUT_FILE_PREFIX								"../")
+set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases")
 include(CPack)
 
 

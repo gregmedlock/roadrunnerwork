@@ -15,7 +15,7 @@ LibStructSupport LibStructSupport/libstruct
 ${SBML_INSTALL_FOLDER}/include
 ${SBML_INSTALL_FOLDER}/include/sbml
 ${CVODE_INSTALL_FOLDER}/include/cvode
-${THIRD_PARTY_ROOT}/clapack/3.2.1/INCLUDE
+${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
 )
 
 add_library(${target} ${LIB_TYPE}
@@ -92,17 +92,18 @@ else()
 add_definitions(-DNO_RR_DLL) 
 endif()
 
-IF(BUILD_SHARED_LIBS) 
-target_link_libraries (${target} libsbml)
-ELSE()
+#IF(BUILD_SHARED_LIBS) 
+#target_link_libraries (${target} libsbml)
+#ELSE()
+#Link with static libsbml, always..
 target_link_libraries (${target} libsbml-static)
-ENDIF()
+#ENDIF()
 
-#target_link_libraries (${target} libxml2_xe)
+target_link_libraries (${target} libxml2_xe)
 target_link_libraries (${target} sundials_cvode)
 target_link_libraries (${target} sundials_nvecserial)
-target_link_libraries (${target} lapack)
 target_link_libraries (${target} blas)
+target_link_libraries (${target} lapack)
 target_link_libraries (${target} libf2c)
 
 set(subfolders 
@@ -115,7 +116,6 @@ LibStructural
 LibStructural/libstruct)
 
 #--- INSTALL
-
 IF(BUILD_SHARED_LIBS) 
 install (FILES ${SBML_INSTALL_FOLDER}/bin/libsbml.dll	DESTINATION bin COMPONENT dlls)
 ELSE()
@@ -135,6 +135,14 @@ endif()
 #=== dependencies
 set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
 foreach(system_file ${SBML_DEPENDENCIES})
-install (FILES ${SBML_INSTALL_FOLDER}/bin/${system_file}	DESTINATION bin COMPONENT DLLs)
+install (FILES ${THIRD_PARTY_FOLDER}/libsbml/dependencies/bin/${system_file}	DESTINATION bin COMPONENT DLLs)
 endforeach()
+
+##== We also need to copy the libxml.lib file to install folder, if we want to link any program with the rr library
+#if(${BORLAND})
+#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/libxml2_xe.lib	DESTINATION link COMPONENT Libs)
+#else()
+#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/libxml2.lib		DESTINATION link COMPONENT Libs)
+#endif()
+
 

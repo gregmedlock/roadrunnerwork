@@ -10,13 +10,6 @@ target_link_libraries (${target} rr_static)
 target_link_libraries (${target} libsbml-static)
 ENDIF()
 
-#target_link_libraries (${target} libxml2_xe)
-#target_link_libraries (${target} sundials_cvode)
-#target_link_libraries (${target} sundials_nvecserial)
-#target_link_libraries (${target} lapack)
-#target_link_libraries (${target} blas)
-#target_link_libraries (${target} libf2c)
-
 #set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
 #=============== INSTALL =====================
 install (FILES ${target}.h 		DESTINATION include COMPONENT include_files)
@@ -77,7 +70,7 @@ set(CPACK_PACKAGE_VERSION_MINOR								"${RR_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH								"${RR_BUILD_VERSION}")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY							"rr")
 
-if(${BUILD_SHARED_LIBS})
+if(BUILD_SHARED_LIBS)
 set(PACKAGE_NAME_LIB_TYPE "shared")
 else()
 set(PACKAGE_NAME_LIB_TYPE "static")

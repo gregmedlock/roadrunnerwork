@@ -4,13 +4,13 @@ add_executable(		   ${target} simulate_sbml.cpp)
 
 IF(BUILD_SHARED_LIBS) 
 target_link_libraries (${target} rr_shared)
-target_link_libraries (${target} libsbml)
 ELSE()
 target_link_libraries (${target} rr_static)
-target_link_libraries (${target} libsbml-static)
 ENDIF()
 
-target_link_libraries (${target} libxml2_xe)
+target_link_libraries (${target} libsbml-static)
+
+#target_link_libraries (${target} libxml2_xe)
 target_link_libraries (${target} sundials_cvode)
 target_link_libraries (${target} sundials_nvecserial)
 target_link_libraries (${target} lapack)

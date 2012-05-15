@@ -25,11 +25,14 @@ set(examples
 )
 
 foreach(example ${examples})
- add_subdirectory(${example})
+ 	add_subdirectory(${example})
 # install (FILES ${example}/${example}.cbproj 	DESTINATION Examples/${example} COMPONENT examples_source)
- install (FILES ${example}/${example}.cpp 		DESTINATION Examples/${example}	COMPONENT examples_source)
- install (FILES ${example}/Readme.txt 			DESTINATION Examples/${example}	COMPONENT examples_source)
- install (FILES ${example}/CMakeLists.txt 		DESTINATION Examples/${example}	COMPONENT examples_source)
+	FILE (GLOB hdrs ${example}/*.h)
+ 	install (FILES ${hdrs} 						DESTINATION Examples/${example}	COMPONENT examples_source)
+	FILE (GLOB src ${example}/*.cpp)
+ 	install (FILES ${src} 						DESTINATION Examples/${example}	COMPONENT examples_source)
+ 	install (FILES ${example}/Readme.txt 			DESTINATION Examples/${example}	COMPONENT examples_source)
+ 	install (FILES ${example}/CMakeLists.txt 		DESTINATION Examples/${example}	COMPONENT examples_source)
 endforeach(example)
 
 #install (FILES auto_link.h 			DESTINATION Examples COMPONENT examples_source)
