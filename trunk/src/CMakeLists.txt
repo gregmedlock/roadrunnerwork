@@ -89,7 +89,7 @@ if(BUILD_SHARED_LIBS)
 	set_property(DIRECTORY 		PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
 	endif(${BORLAND})
 else()
-#add_definitions(-DNO_RR_DLL) 
+add_definitions(-DNO_RR_DLL) 
 endif()
 
 IF(BUILD_SHARED_LIBS) 
@@ -126,4 +126,15 @@ FILE (GLOB headers ${subfolder}/*.h)
 install (FILES ${headers}			 	DESTINATION include COMPONENT cxx_headers)
 endforeach(subfolder)
 
+install (FILES ${lib_path}/${target}.lib	DESTINATION link COMPONENT library_files)
+
+if(BUILD_SHARED_LIBS)
+install (FILES ${exe_path}/${target}.dll	DESTINATION bin COMPONENT library_files)
+endif()
+
+#=== dependencies
+set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
+foreach(system_file ${SBML_DEPENDENCIES})
+install (FILES ${SBML_INSTALL_FOLDER}/bin/${system_file}	DESTINATION bin COMPONENT DLLs)
+endforeach()
 

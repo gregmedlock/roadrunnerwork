@@ -8,9 +8,9 @@ SET(RR_MINOR_VERSION 5)
 SET(RR_BUILD_VERSION 11)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
+OPTION (BUILD_C_API	 			"Build C API" 				OFF)
 OPTION (BUILD_EXAMPLES			"Build Examples"			OFF)
 OPTION (BUILD_SHARED_LIBS 		"Build Shared Libraries" 	OFF)
-OPTION (BUILD_C_API	 			"Build C API" 				OFF)
 
 set(RR_SOURCE_ROOT 					${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(THIRD_PARTY_ROOT 				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
@@ -90,6 +90,7 @@ ENDIF (BUILD_SHARED_LIBS)
 
 #Source Code Folder
 add_subdirectory(src)
+add_subdirectory(Wrappers)
 
 #======================= INSTALL ========================================================
 install (FILES src/rr_pch.h	DESTINATION include COMPONENT cxx_headers)
@@ -116,13 +117,7 @@ set(CG_RUNTIMES		cc32110MT.dll)
 foreach(runtime ${CG_RUNTIMES})
 install (FILES 	${THIRD_PARTY_ROOT}/CG/XE/${runtime} DESTINATION bin COMPONENT DLLs)
 endforeach()
-
 endif()
-
-set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
-foreach(system_file ${SBML_DEPENDENCIES})
-install (FILES ${SBML_INSTALL_FOLDER}/bin/${system_file}	DESTINATION bin COMPONENT DLLs)
-endforeach()
 
 #================ CPACK =========================================================================
 #Create distribution Pack
