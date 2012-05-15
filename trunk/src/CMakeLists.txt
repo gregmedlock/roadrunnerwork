@@ -1,3 +1,10 @@
+
+IF(BUILD_SHARED_LIBS)
+set(target rr_shared)
+ELSE()
+set(target rr_static)
+ENDIF()
+
 include_directories(
 . 
 Common 
@@ -10,12 +17,6 @@ ${SBML_INSTALL_FOLDER}/include/sbml
 ${CVODE_INSTALL_FOLDER}/include/cvode
 ${THIRD_PARTY_ROOT}/clapack/3.2.1/INCLUDE
 )
-
-IF(BUILD_SHARED_LIBS)
-set(target rr_shared)
-ELSE()
-set(target rr_static)
-ENDIF()
 
 add_library(${target} ${LIB_TYPE}
 Common/rrDoubleMatrix.cpp
@@ -82,12 +83,27 @@ LibStructSupport/libstruct/sbmlmodel.cpp
 LibStructSupport/libstruct/util.cpp
 )
 
-if(${BUILD_SHARED_LIBS})
-	add_definitions(-DDEXPORT_RR)
+if(BUILD_SHARED_LIBS)
+	add_definitions(-DEXPORT_RR)
 	if(${BORLAND})
 	set_property(DIRECTORY 		PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
 	endif(${BORLAND})
+else()
+#add_definitions(-DNO_RR_DLL) 
 endif()
+
+IF(BUILD_SHARED_LIBS) 
+target_link_libraries (${target} libsbml)
+ELSE()
+target_link_libraries (${target} libsbml-static)
+ENDIF()
+
+#target_link_libraries (${target} libxml2_xe)
+target_link_libraries (${target} sundials_cvode)
+target_link_libraries (${target} sundials_nvecserial)
+target_link_libraries (${target} lapack)
+target_link_libraries (${target} blas)
+target_link_libraries (${target} libf2c)
 
 set(subfolders 
 Common 
@@ -97,6 +113,13 @@ C_src
 Solvers 
 LibStructural 
 LibStructural/libstruct)
+
+#--- INSTALL
+
+IF(BUILD_SHARED_LIBS) 
+install (FILES ${SBML_INSTALL_FOLDER}/bin/libsbml.dll	DESTINATION bin COMPONENT dlls)
+ELSE()
+ENDIF()
 
 foreach(subfolder ${subfolders})
 FILE (GLOB headers ${subfolder}/*.h)

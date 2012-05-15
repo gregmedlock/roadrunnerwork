@@ -3,6 +3,7 @@ PROJECT(rrExamples)
 set(RR_INCLUDE_ROOT "../src")
 
 # rr Includes
+include_directories(${RR_INCLUDE_ROOT})
 include_directories(${RR_INCLUDE_ROOT}/Common)
 include_directories(${RR_INCLUDE_ROOT}/LibStructSupport)
 include_directories(${RR_INCLUDE_ROOT}/LibStructSupport/libstruct)
@@ -14,11 +15,12 @@ include_directories(${SBML_INSTALL_FOLDER}/include)
 include_directories(${SBML_INSTALL_FOLDER}/include/sbml)
 include_directories(${CVODE_INSTALL_FOLDER}/include/cvode)
 
+#
 if(${MSVC})
 endif(${MSVC})
 
 set(examples 	
-		validate_sbml
+#		validate_sbml
 		simulate_sbml
 )
 

@@ -40,13 +40,14 @@ int main(int argc, char * argv[])
 
     Paras paras;
     char c;
-    while ((c = GetOptions(argc, argv, ("n:cv:"))) != -1)
+    while ((c = GetOptions(argc, argv, ("cpn:v:"))) != -1)
     {
         switch (c)
         {
-            case ('n'): paras.CaseNumber                  = ToInt(optarg);           break;
-            case ('v'):    paras.VerboseMode                 = ToInt(optarg);        break;
-            case ('c'): paras.OnlyCompile                  = true;                       break;
+            case ('n'): paras.CaseNumber                  	= ToInt(optarg);        break;
+            case ('v'): paras.VerboseMode  		           	= ToInt(optarg);        break;
+            case ('c'): paras.OnlyCompile                 	= true;                 break;
+            case ('p'): paras.Pause		                  	= true;                 break;
 
             case ('?'):
             {
@@ -192,7 +193,10 @@ int main(int argc, char * argv[])
     end:    //I have not used a label in 15 years!
     delete rr;
     Log(lInfo)<<"Done";
-//    Pause();
+	if(paras.Pause)
+	{
+    	Pause();
+	}
         return 0;
 }
 
