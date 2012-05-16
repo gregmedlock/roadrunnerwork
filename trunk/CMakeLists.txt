@@ -99,14 +99,14 @@ add_subdirectory(src)
 add_subdirectory(Wrappers)
 
 #======================= INSTALL ========================================================
-install (FILES src/rr_pch.h	DESTINATION include COMPONENT cxx_headers)
+install (FILES src/rr_pch.h	DESTINATION include COMPONENT rr_core)
 
 FILE (GLOB libs ${lib_path}/*.lib)
-install (FILES ${libs}	DESTINATION link COMPONENT library_files)
+install (FILES ${libs}	DESTINATION link COMPONENT rr_core)
 
 if(${BUILD_SHARED_LIBS})
 FILE (GLOB dlls ${exe_path}/*.dll)
-install (FILES ${dlls}	DESTINATION bin COMPONENT library_files)
+install (FILES ${dlls}	DESTINATION bin COMPONENT rr_core)
 endif()
 
 if(${BUILD_EXAMPLES})
@@ -121,47 +121,58 @@ if(${BORLAND})
 set(CG_RUNTIMES		cc32110MT.dll)
 
 foreach(runtime ${CG_RUNTIMES})
-install (FILES 	${THIRD_PARTY_FOLDER}/CG/XE/${runtime} DESTINATION bin COMPONENT DLLs)
+install (FILES 	${THIRD_PARTY_FOLDER}/CG/XE/${runtime} DESTINATION bin COMPONENT rr_core)
 endforeach()
 endif()
+
+#=== TCC ==================================================
+FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/*.*)
+install (FILES 	${tcc} DESTINATION bin COMPONENT rr_core)
+
+FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/lib/*.*)
+install (FILES 	${tcc} DESTINATION bin/lib COMPONENT rr_core)
+
+FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/*.*)
+install (FILES 	${tcc} DESTINATION bin/include COMPONENT rr_core)
+
+FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/sys/*.*)
+install (FILES 	${tcc} DESTINATION bin/include/sys COMPONENT rr_core)
+
+FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/winapi/*.*)
+install (FILES 	${tcc} DESTINATION bin/include/winapi COMPONENT rr_core)
 
 #================ CPACK =========================================================================
 #Create distribution Pack
 include (InstallRequiredSystemLibraries)
 
 #COMPONENTS OF THE INSTALL
-set(CPACK_COMPONENTS_ALL examples_source compiled_examples cxx_headers library_files )
-set(CPACK_COMPONENT_EXAMPLES_SOURCE_GROUP					"Examples")
-set(CPACK_COMPONENT_COMPILED_EXAMPLES_GROUP					"Examples")
-set(CPACK_COMPONENT_LIBRARY_FILES_GROUP						"Development")
-set(CPACK_COMPONENT_CXX_HEADERS_GROUP						"Development")
-set(CPACK_COMPONENT_BUILD_FILES_GROUP						"Development")
+set(CPACK_COMPONENTS_ALL rr_core compiled_examples examples_source)
 
-set(CPACK_COMPONENT_BUILD_FILES_DEPENDS examples_source)
-set(CPACK_COMPONENT_COMPILED_EXAMPLES_DISPLAY_NAME			"Compiled Examples")
-set(CPACK_COMPONENT_EXAMPLES_SOURCE_DISPLAY_NAME			"Examples Source")
-set(CPACK_COMPONENT_LIBRARY_FILES_DISPLAY_NAME				"rr Library Files")
-set(CPACK_COMPONENT_CXX_HEADERS_DISPLAY_NAME				"C++ Headers")
-#set(CPACK_COMPONENT_BUILD_FILES_HIDDEN						"Build Files")
-#set(CPACK_COMPONENT_INFO_HIDDEN								"Info Files")
+
+#set(CPACK_COMPONENT_RR_CORE_GROUP							"Core")
+#set(CPACK_COMPONENT_EXAMPLES_SOURCE_GROUP					"Examples")
+#set(CPACK_COMPONENT_COMPILED_EXAMPLES_GROUP					"Examples")
+
+set(CPACK_COMPONENT_RR_CORE_REQUIRED					ON)
+#set(CPACK_COMPONENT_RR_CORE_DISPLAY_NAME				"Core Files")
+#set(CPACK_COMPONENT_BUILD_FILES_DEPENDS examples_source)
+#set(CPACK_COMPONENT_COMPILED_EXAMPLES_DISPLAY_NAME			"Compiled Examples")
+#set(CPACK_COMPONENT_EXAMPLES_SOURCE_DISPLAY_NAME			"Examples Source")
 
 #set(CPACK_PACKAGE_ICON										${CMAKE_CURRENT_SOURCE_DIR}\\\\rrArt.bmp)
-
 #NSIS Specific
 #set(CPACK_NSIS_MUI_ICON										${CMAKE_CURRENT_SOURCE_DIR}/rr.ico)
 #set(CPACK_NSIS_MUI_UNIICON									${CMAKE_CURRENT_SOURCE_DIR}/rr.ico)
 set(CPACK_NSIS_INSTALL_ROOT									"C:")
 
 #COMPONENTS
+set(CPACK_COMPONENT_RR_CORE_DESCRIPTION						"Headers (.h), link library files (.lib) and if a dynamic disribution, dynamic link libraries (.dll's)")
 set(CPACK_COMPONENT_COMPILED_EXAMPLES_DESCRIPTION			"This will install pre-compiled binaries for all examples")
 set(CPACK_COMPONENT_EXAMPLES_SOURCE_DESCRIPTION				"Examples Source")
-set(CPACK_COMPONENT_LIBRARY_FILES_DESCRIPTION				"Link Library files (.lib) and if dynamic disribution Dynamic Link Libraries (.dll) ")
-set(CPACK_COMPONENT_CXX_HEADERS_DESCRIPTION					"rrLibrary C++ header files")
 set(CPACK_COMPONENT_BUILD_FILES_DESCRIPTION					"Build Files")
-set(CPACK_COMPONENT_CXX_HEADERS_DEPENDS						library_files)
 
 set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
-set(CPACK_PACKAGE_VENDOR									"Dune Scientific")
+set(CPACK_PACKAGE_VENDOR									"UW")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY						"rr library - headers, libraries and examples")
 set(CPACK_PACKAGE_VERSION_MAJOR								"${RR_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR								"${RR_MINOR_VERSION}")

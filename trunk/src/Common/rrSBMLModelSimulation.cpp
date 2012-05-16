@@ -34,6 +34,16 @@ mSimulationError(0)            //No error if not calculated..
 SBMLModelSimulation::~SBMLModelSimulation()
 {}
 
+void    SBMLModelSimulation::SetCaseNumber(int cNr){mCurrentCaseNumber = cNr;}
+bool    SBMLModelSimulation::SetModelFilePath(const string& path){mModelFilePath = path; return true;}
+bool    SBMLModelSimulation::SetModelFileName(const string& name){mModelFileName = name; return true;}
+bool    SBMLModelSimulation::SetDataOutputFolder(const string& name){mDataOutputFolder = name; return true;}
+string  SBMLModelSimulation::GetModelsFullFilePath(){return JoinPath(mModelFilePath, mModelFileName);}
+string  SBMLModelSimulation::GetDataOutputFolder(){return mDataOutputFolder;}
+void    SBMLModelSimulation::CompileIfDllExists(const bool& doIt){mCompileIfDllExists = doIt;}
+bool    SBMLModelSimulation::CompileIfDllExists(){return mCompileIfDllExists;}
+
+
 bool SBMLModelSimulation::UseEngine(RoadRunner* engine)
 {
     mEngine = engine;

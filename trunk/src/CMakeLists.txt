@@ -117,25 +117,25 @@ LibStructural/libstruct)
 
 #--- INSTALL
 IF(BUILD_SHARED_LIBS) 
-install (FILES ${SBML_INSTALL_FOLDER}/bin/libsbml.dll	DESTINATION bin COMPONENT dlls)
+install (FILES ${SBML_INSTALL_FOLDER}/bin/libsbml.dll	DESTINATION bin COMPONENT rr_core)
 ELSE()
 ENDIF()
 
 foreach(subfolder ${subfolders})
 FILE (GLOB headers ${subfolder}/*.h)
-install (FILES ${headers}			 	DESTINATION include COMPONENT cxx_headers)
+install (FILES ${headers}			 	DESTINATION include COMPONENT rr_core)
 endforeach(subfolder)
 
-install (FILES ${lib_path}/${target}.lib	DESTINATION link COMPONENT library_files)
+install (FILES ${lib_path}/${target}.lib	DESTINATION link COMPONENT rr_core)
 
 if(BUILD_SHARED_LIBS)
-install (FILES ${exe_path}/${target}.dll	DESTINATION bin COMPONENT library_files)
+install (FILES ${exe_path}/${target}.dll	DESTINATION bin COMPONENT rr_core)
 endif()
 
 #=== dependencies
 set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
 foreach(system_file ${SBML_DEPENDENCIES})
-install (FILES ${THIRD_PARTY_FOLDER}/libsbml/dependencies/bin/${system_file}	DESTINATION bin COMPONENT DLLs)
+install (FILES ${THIRD_PARTY_FOLDER}/libsbml/dependencies/bin/${system_file}	DESTINATION bin COMPONENT rr_core)
 endforeach()
 
 ##== We also need to copy the libxml.lib file to install folder, if we want to link any program with the rr library
