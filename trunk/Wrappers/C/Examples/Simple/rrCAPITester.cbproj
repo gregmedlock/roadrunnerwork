@@ -33,7 +33,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\..\releases\xe\link\;$(BDS)\lib\win32\debug\;..\..\installs\xe\lib\;..\..\installs\xe\bin\;C:\rrw\Testing\rr_c_api_test\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\..\..\releases\xe\shared\link\;..\..\..\..\releases\xe\link\;$(BDS)\lib\win32\debug\;..\..\installs\xe\lib\;..\..\installs\xe\bin\;C:\rrw\Testing\rr_c_api_test\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -44,6 +44,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<FinalOutputDir>C:\rrw\releases\xe\shared\bin\</FinalOutputDir>
 			<DynamicRTL>false</DynamicRTL>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
@@ -69,7 +70,7 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="..\..\..\..\releases\xe\link\rrC_API.lib">
+			<LibFiles Include="..\..\..\..\releases\xe\shared\link\rrC_API.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>1</BuildOrder>
 			</LibFiles>

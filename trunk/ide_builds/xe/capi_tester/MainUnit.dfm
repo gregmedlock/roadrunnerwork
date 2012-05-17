@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'RoadRunner C API Tester'
-  ClientHeight = 479
-  ClientWidth = 851
+  ClientHeight = 526
+  ClientWidth = 849
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,9 +20,10 @@ object Form1: TForm1
     Left = 0
     Top = 0
     Width = 225
-    Height = 479
+    Height = 526
     Align = alLeft
     TabOrder = 0
+    ExplicitHeight = 479
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
@@ -31,9 +32,6 @@ object Form1: TForm1
       Align = alTop
       Caption = 'General'
       TabOrder = 0
-      ExplicitLeft = 8
-      ExplicitTop = 86
-      ExplicitWidth = 185
       object Button1: TButton
         Left = 183
         Top = 14
@@ -79,39 +77,39 @@ object Form1: TForm1
       Left = 1
       Top = 106
       Width = 223
-      Height = 372
+      Height = 419
       Align = alClient
       Caption = 'API Functions'
       TabOrder = 1
-      ExplicitLeft = 40
-      ExplicitTop = 152
-      ExplicitWidth = 185
-      ExplicitHeight = 105
+      ExplicitHeight = 372
       object FunctionList: TListBox
         Left = 2
         Top = 15
         Width = 219
-        Height = 355
+        Height = 402
         Align = alClient
         ItemHeight = 13
         Sorted = True
         TabOrder = 0
         OnClick = FunctionListClick
+        ExplicitHeight = 355
       end
     end
   end
   object Panel2: TPanel
     Left = 225
     Top = 0
-    Width = 626
-    Height = 479
+    Width = 624
+    Height = 526
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 626
+    ExplicitHeight = 479
     object Memo1: TMemo
       Left = 1
-      Top = 288
-      Width = 624
-      Height = 190
+      Top = 256
+      Width = 622
+      Height = 269
       Align = alBottom
       TabOrder = 0
     end

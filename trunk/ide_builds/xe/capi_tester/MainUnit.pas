@@ -56,8 +56,8 @@ implementation
 const DLLName = 'rrC_API.dll';
 
 type
-TCharVoidFunc   = function: PAnsiChar; stdcall;
-TIntVoidFunc    = function: Integer; stdcall;
+TCharVoidFunc   = function: PAnsiChar;  stdcall;        //char* func(void)
+TIntVoidFunc    = function: Integer;    stdcall;        //int   func(void)
 
 procedure TForm1.FileOpen1Accept(Sender: TObject);
 begin
@@ -110,20 +110,20 @@ var
     FPointer: TFarProc;
 
 begin
-    FPointer := GetProcAddress(dllHandle, PChar ('_getCopyright'));
+    FPointer := GetProcAddress(dllHandle, PChar ('getCopyright'));
     if FPointer <> nil then
     begin
         GetCopy := TCharVoidFunc(FPointer);
-        Memo1.Lines.Add('Loaded C function char* _getCopyright()');
-        FunctionList.Items.AddObject('_getCopyright', TObject(FPointer));
+        Memo1.Lines.Add('Loaded C function char* getCopyright()');
+        FunctionList.Items.AddObject('getCopyright', TObject(FPointer));
     end;
 
 //    FPointer := GetProcAddress(dllHandle, PChar ('_getRRInstance'));
 //    if FPointer <> nil then
 //    begin
 //        GetCopy := TCharVoidFunc(FPointer);
-//        Memo1.Lines.Add('Loaded C function char* _getCopyright()');
-//        FunctionList.Items.AddObject('_getCopyright', TObject(FPointer));
+//        Memo1.Lines.Add('Loaded C function char* getCopyright()');
+//        FunctionList.Items.AddObject('getCopyright', TObject(FPointer));
 //    end;
     LoadFunctionsA.Enabled := false;
 end;

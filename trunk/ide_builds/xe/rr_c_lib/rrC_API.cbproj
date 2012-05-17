@@ -35,7 +35,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\..\Wrappers\C\;..\..\..\Wraps\C_api\;..\..\..\src\;..\..\..\src;..\..\..\src\Scanner;..\..\..\src\Solvers;..\..\..\src\ModelGeneration;..\..\..\src\LibStructSupport;..\..\..\src\c_src;..\..\..\installs\xe\include\cvode;..\..\..\installs\xe\include\nvector;..\..\..\installs\xe\include\sundials;..\..\..\installs\xe\include\sbml;C:\rrw\ide_builds\xe\rr_c_lib\;..\..\..\installs\xe\include;..\..\..\src\Common;..\..\..\src\LibStructSupport\libstruct;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\builds\xe\clapack\SRC\;..\..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\installs\xe\lib\;..\..\..\releases\xe\link\;..\..\..\Wrappers\C\;..\..\..\Wraps\C_api\;..\..\..\src\;..\..\..\installs\xe\bin\;C:\rrw\ide_builds\xe\rr_c_lib\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\..\releases\xe\static\link\;..\..\..\builds\xe\clapack\SRC\;..\..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\installs\xe\lib\;..\..\..\releases\xe\link\;..\..\..\Wrappers\C\;..\..\..\Wraps\C_api\;..\..\..\src\;..\..\..\installs\xe\bin\;C:\rrw\ide_builds\xe\rr_c_lib\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<UsePackages>true</UsePackages>
@@ -46,8 +46,8 @@
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
 			<DynamicRTL>true</DynamicRTL>
-			<FinalOutputDir>C:\rrw\releases\xe\bin</FinalOutputDir>
-			<BPILibOutputDir>C:\rrw\releases\xe\link\</BPILibOutputDir>
+			<FinalOutputDir>C:\rrw\releases\xe\shared\bin</FinalOutputDir>
+			<BPILibOutputDir>C:\rrw\releases\xe\shared\link\</BPILibOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -96,9 +96,9 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>5</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="..\..\..\releases\xe\link\rr_static.lib">
+			<LibFiles Include="..\..\..\releases\xe\static\link\rr_static.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>2</BuildOrder>
+				<BuildOrder>9</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="..\..\..\ThirdParty\libsbml_dependencies\lib\libxml2_xe.lib">
 				<IgnorePath>true</IgnorePath>
@@ -123,7 +123,8 @@
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 		<PropertyGroup Condition="'$(FileToCompile)'==''">
-			<PostBuildEvent><![CDATA[copy $(RR_ROOT)\Wrappers\C\rrC_API.h $(RR_ROOT)\releases\xe\include\]]></PostBuildEvent>
+			<PostBuildEvent><![CDATA[mkdir  $(RR_ROOT)\releases\xe\shared\include\
+copy $(RR_ROOT)\Wrappers\C\rrC_API.h $(RR_ROOT)\releases\xe\shared\include\]]></PostBuildEvent>
 		</PropertyGroup>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
