@@ -6,11 +6,17 @@
 			<Projects Include="rr_lib\RoadRunner_xe.cbproj">
 				<Dependencies/>
 			</Projects>
+			<Projects Include="rr_static_lib\rr_static.cbproj">
+				<Dependencies/>
+			</Projects>
 			<Projects Include="rr_c_lib\rrC_API.cbproj">
 				<Dependencies/>
 			</Projects>
 			<Projects Include="simulate_model\simulate.cbproj">
 				<Dependencies>rr_lib\RoadRunner_xe.cbproj</Dependencies>
+			</Projects>
+			<Projects Include="..\..\Wrappers\C\Examples\Simple\rrCAPITester.cbproj">
+				<Dependencies/>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -28,6 +34,15 @@
 		</Target>
 		<Target Name="RoadRunner_xe:Make">
 			<MSBuild Projects="rr_lib\RoadRunner_xe.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="rr_static">
+			<MSBuild Projects="rr_static_lib\rr_static.cbproj"/>
+		</Target>
+		<Target Name="rr_static:Clean">
+			<MSBuild Projects="rr_static_lib\rr_static.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="rr_static:Make">
+			<MSBuild Projects="rr_static_lib\rr_static.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="rrC_API">
 			<MSBuild Projects="rr_c_lib\rrC_API.cbproj"/>
@@ -47,14 +62,23 @@
 		<Target Name="simulate:Make" DependsOnTargets="RoadRunner_xe:Make">
 			<MSBuild Projects="simulate_model\simulate.cbproj" Targets="Make"/>
 		</Target>
+		<Target Name="rrCAPITester">
+			<MSBuild Projects="..\..\Wrappers\C\Examples\Simple\rrCAPITester.cbproj"/>
+		</Target>
+		<Target Name="rrCAPITester:Clean">
+			<MSBuild Projects="..\..\Wrappers\C\Examples\Simple\rrCAPITester.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="rrCAPITester:Make">
+			<MSBuild Projects="..\..\Wrappers\C\Examples\Simple\rrCAPITester.cbproj" Targets="Make"/>
+		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="RoadRunner_xe;rrC_API;simulate"/>
+			<CallTarget Targets="RoadRunner_xe;rr_static;rrC_API;simulate;rrCAPITester"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="RoadRunner_xe:Clean;rrC_API:Clean;simulate:Clean"/>
+			<CallTarget Targets="RoadRunner_xe:Clean;rr_static:Clean;rrC_API:Clean;simulate:Clean;rrCAPITester:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="RoadRunner_xe:Make;rrC_API:Make;simulate:Make"/>
+			<CallTarget Targets="RoadRunner_xe:Make;rr_static:Make;rrC_API:Make;simulate:Make;rrCAPITester:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

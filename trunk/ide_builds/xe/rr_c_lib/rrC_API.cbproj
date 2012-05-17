@@ -24,9 +24,9 @@
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<BPILibOutputDir>..\..\..\installs\xe\lib\</BPILibOutputDir>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
-			<Defines>EXPORT_RR;$(Defines)</Defines>
+			<Defines>EXPORT_RR_C_API;$(Defines)</Defines>
 			<OutputExt>dll</OutputExt>
-			<FinalOutputDir>C:\rrw\installs\xe\bin\</FinalOutputDir>
+			<FinalOutputDir>C:\rrw\releases\xe\bin\</FinalOutputDir>
 			<NoVCL>true</NoVCL>
 			<PackageImports>vclx.bpi;vcl.bpi;rtl.bpi;vclactnband.bpi;vclimg.bpi;VCLData.bpi;DuneComponents.bpi;TeePro915.bpi;TeeUI915.bpi;VCLCommonRTL.bpi;mtkCommonRTL.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;Tee915.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;bdertl.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;DbxClientDriver.bpi;dbexpress.bpi;AzureCloud.bpi;DbxCommonDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vclie.bpi;webdsnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;TeeTree2D15Tee9.bpi;bcbie.bpi;dbxcds.bpi;inetdb.bpi;websnap.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeeGL915.bpi;TeeDB915.bpi</PackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>
@@ -34,8 +34,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\Wraps\C_api\;..\..\..\src\;..\..\..\src;..\..\..\src\Scanner;..\..\..\src\Solvers;..\..\..\src\ModelGeneration;..\..\..\src\LibStructSupport;..\..\..\src\c_src;..\..\..\installs\xe\include\cvode;..\..\..\installs\xe\include\nvector;..\..\..\installs\xe\include\sundials;..\..\..\installs\xe\include\sbml;C:\rrw\ide_builds\xe\rr_c_lib\;..\..\..\installs\xe\include;..\..\..\src\Common;..\..\..\src\LibStructSupport\libstruct;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\Wraps\C_api\;..\..\..\src\;..\..\..\installs\xe\bin\;C:\rrw\ide_builds\xe\rr_c_lib\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\Wrappers\C\;..\..\..\Wraps\C_api\;..\..\..\src\;..\..\..\src;..\..\..\src\Scanner;..\..\..\src\Solvers;..\..\..\src\ModelGeneration;..\..\..\src\LibStructSupport;..\..\..\src\c_src;..\..\..\installs\xe\include\cvode;..\..\..\installs\xe\include\nvector;..\..\..\installs\xe\include\sundials;..\..\..\installs\xe\include\sbml;C:\rrw\ide_builds\xe\rr_c_lib\;..\..\..\installs\xe\include;..\..\..\src\Common;..\..\..\src\LibStructSupport\libstruct;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\builds\xe\clapack\SRC\;..\..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\installs\xe\lib\;..\..\..\releases\xe\link\;..\..\..\Wrappers\C\;..\..\..\Wraps\C_api\;..\..\..\src\;..\..\..\installs\xe\bin\;C:\rrw\ide_builds\xe\rr_c_lib\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<UsePackages>true</UsePackages>
@@ -45,6 +45,9 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DynamicRTL>true</DynamicRTL>
+			<FinalOutputDir>C:\rrw\releases\xe\bin</FinalOutputDir>
+			<BPILibOutputDir>C:\rrw\releases\xe\link\</BPILibOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -66,15 +69,43 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="..\..\..\builds\xe\clapack\BLAS\SRC\blas.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>7</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\..\builds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>8</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\..\builds\xe\clapack\SRC\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>9</BuildOrder>
+			</LibFiles>
 			<ResFiles Include="rrC_API.res">
 				<BuildOrder>2</BuildOrder>
 			</ResFiles>
-			<LibFiles Include="..\..\..\installs\xe\bin\RoadRunner_xe.lib">
+			<LibFiles Include="..\..\..\installs\xe\lib\libsbml-static.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>1</BuildOrder>
+				<BuildOrder>3</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\..\..\Wraps\C_api\rrC_API.cpp">
-				<DependentOn>..\..\..\Wraps\C_api\rrC_API.h</DependentOn>
+			<LibFiles Include="..\..\..\installs\xe\lib\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>4</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\..\installs\xe\lib\sundials_nvecserial.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>5</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\..\releases\xe\link\rr_static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>2</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\..\ThirdParty\libsbml_dependencies\lib\libxml2_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>6</BuildOrder>
+			</LibFiles>
+			<CppCompile Include="..\..\..\Wrappers\C\rrC_API.cpp">
+				<DependentOn>..\..\..\Wrappers\C\rrC_API.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">
@@ -92,7 +123,7 @@
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 		<PropertyGroup Condition="'$(FileToCompile)'==''">
-			<PostBuildEvent><![CDATA[copy ..\..\..\Wrappers\C_api\rrC_API.h ..\..\..\installs\xe\include\]]></PostBuildEvent>
+			<PostBuildEvent><![CDATA[copy $(RR_ROOT)\Wrappers\C\rrC_API.h $(RR_ROOT)\releases\xe\include\]]></PostBuildEvent>
 		</PropertyGroup>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>

@@ -12,11 +12,18 @@ OPTION (BUILD_C_API	 			"Build C API" 				OFF)
 OPTION (BUILD_EXAMPLES			"Build Examples"			OFF)
 OPTION (BUILD_SHARED_LIBS 		"Build Shared Libraries" 	OFF)
 
-set(RR_SOURCE_ROOT 					${CMAKE_CURRENT_SOURCE_DIR}/src)
-set(THIRD_PARTY_FOLDER 				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
+set(RR_ROOT 					${CMAKE_CURRENT_SOURCE_DIR})
+set(RR_SOURCE_ROOT 				${CMAKE_CURRENT_SOURCE_DIR}/src)
+set(THIRD_PARTY_FOLDER 			${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
-set(exe_path		 				${PROJECT_BINARY_DIR}/bin)
-set(lib_path		 				${PROJECT_BINARY_DIR}/link)
+set(exe_path		 			${PROJECT_BINARY_DIR}/bin)
+set(lib_path		 			${PROJECT_BINARY_DIR}/link)
+
+if(${BUILD_SHARED_LIBS})
+set(CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/shared)
+else()
+set(CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/static)
+endif()
 
 IF(WIN32)
   IF(${MSVC})
@@ -43,8 +50,8 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/link)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 
 #SBML
-set(SBML_INSTALL_FOLDER "C:/rrw/installs/xe")
-set(CVODE_INSTALL_FOLDER "C:/rrw/installs/xe")
+set(SBML_INSTALL_FOLDER 	"C:/rrw/installs/xe")
+set(CVODE_INSTALL_FOLDER 	"C:/rrw/installs/xe")
 
 include_directories(				${RR_ROOT})
 include_directories(				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
@@ -57,6 +64,7 @@ link_directories(					${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib)
 link_directories(					${CLAPACK_BUILD_FOLDER}/BLAS/SRC)
 link_directories(					${CLAPACK_BUILD_FOLDER}/SRC)
 link_directories(					${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c)
+link_directories(					${PROJECT_BINARY_DIR}/link)
 
 if(${BORLAND})
 #include_directories(				${VTK_BINARY_ROOT}/cg-static/Rendering)
@@ -113,6 +121,7 @@ if(${BUILD_EXAMPLES})
 add_subdirectory(Examples)
 endif()
 
+add_subdirectory(Models)
 install (FILES Readme.txt 		DESTINATION . 	COMPONENT info)
 install (FILES License.txt 		DESTINATION . 	COMPONENT info)
 
@@ -146,18 +155,19 @@ install (FILES 	${tcc} DESTINATION bin/include/winapi COMPONENT rr_core)
 include (InstallRequiredSystemLibraries)
 
 #COMPONENTS OF THE INSTALL
-set(CPACK_COMPONENTS_ALL rr_core compiled_examples examples_source)
+set(CPACK_COMPONENTS_ALL rr_core c_api compiled_examples example_files sbml_models)
 
 
 #set(CPACK_COMPONENT_RR_CORE_GROUP							"Core")
 #set(CPACK_COMPONENT_EXAMPLES_SOURCE_GROUP					"Examples")
-#set(CPACK_COMPONENT_COMPILED_EXAMPLES_GROUP					"Examples")
+#set(CPACK_COMPONENT_COMPILED_EXAMPLES_GROUP				"Examples")
 
-set(CPACK_COMPONENT_RR_CORE_REQUIRED					ON)
-#set(CPACK_COMPONENT_RR_CORE_DISPLAY_NAME				"Core Files")
-#set(CPACK_COMPONENT_BUILD_FILES_DEPENDS examples_source)
-#set(CPACK_COMPONENT_COMPILED_EXAMPLES_DISPLAY_NAME			"Compiled Examples")
-#set(CPACK_COMPONENT_EXAMPLES_SOURCE_DISPLAY_NAME			"Examples Source")
+#set(CPACK_COMPONENT_RR_CORE_REQUIRED						ON)
+set(CPACK_COMPONENT_RR_CORE_DISPLAY_NAME					"Core Files")
+#set(CPACK_COMPONENT_BUILD_FILES_DEPENDS example_files)
+set(CPACK_COMPONENT_COMPILED_EXAMPLES_DISPLAY_NAME			"Compiled Examples")
+set(CPACK_COMPONENT_EXAMPLE_FILES_DISPLAY_NAME				"Examples Source and Readme files")
+set(CPACK_COMPONENT_SBML_MODELS_DISPLAY_NAME				"SBML Models")
 
 #set(CPACK_PACKAGE_ICON										${CMAKE_CURRENT_SOURCE_DIR}\\\\rrArt.bmp)
 #NSIS Specific
@@ -168,8 +178,9 @@ set(CPACK_NSIS_INSTALL_ROOT									"C:")
 #COMPONENTS
 set(CPACK_COMPONENT_RR_CORE_DESCRIPTION						"Headers (.h), link library files (.lib) and if a dynamic disribution, dynamic link libraries (.dll's)")
 set(CPACK_COMPONENT_COMPILED_EXAMPLES_DESCRIPTION			"This will install pre-compiled binaries for all examples")
-set(CPACK_COMPONENT_EXAMPLES_SOURCE_DESCRIPTION				"Examples Source")
-set(CPACK_COMPONENT_BUILD_FILES_DESCRIPTION					"Build Files")
+set(CPACK_COMPONENT_EXAMPLE_FILES_DESCRIPTION				"Examples Source")
+#set(CPACK_COMPONENT_BUILD_FILES_DESCRIPTION					"Build Files")
+set(CPACK_COMPONENT_SBML_MODELS_DESCRIPTION					"Install various SBML Model files")
 
 set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
 set(CPACK_PACKAGE_VENDOR									"UW")
@@ -201,7 +212,8 @@ else()
 set(bType "release")
 endif()
 
-set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}-${PACKAGE_NAME_LIB_TYPE}-${bType}")
+#set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}-${PACKAGE_NAME_LIB_TYPE}-${bType}")
+set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}-${PACKAGE_NAME_LIB_TYPE}")
 set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases")
 include(CPack)
 

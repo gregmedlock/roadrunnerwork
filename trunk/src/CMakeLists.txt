@@ -123,7 +123,7 @@ ENDIF()
 
 foreach(subfolder ${subfolders})
 FILE (GLOB headers ${subfolder}/*.h)
-install (FILES ${headers}			 	DESTINATION include COMPONENT rr_core)
+install (FILES ${headers}			 		DESTINATION include/rr COMPONENT rr_core)
 endforeach(subfolder)
 
 install (FILES ${lib_path}/${target}.lib	DESTINATION link COMPONENT rr_core)

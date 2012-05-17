@@ -1,0 +1,4 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
+PROJECT(rrModels)
+
+install (FILES feedback.xml 		DESTINATION Models 	COMPONENT sbml_models)

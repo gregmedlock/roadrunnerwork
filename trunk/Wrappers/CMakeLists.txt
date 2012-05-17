@@ -25,7 +25,6 @@ set(wrapper "C")
  install (FILES ${wrapper}/CMakeLists.txt 		DESTINATION Examples/${wrapper}	COMPONENT c_wrapper)
 endif()
 
-#install (FILES auto_link.h 			DESTINATION Examples COMPONENT wrappers_source)
 install (FILES Readme.txt 			DESTINATION Examples COMPONENT wrappers)
 #install (FILES Examples.groupproj 	DESTINATION Examples COMPONENT wrappers)
 install (FILES CMakeLists.txt 		DESTINATION Examples COMPONENT wrappers)

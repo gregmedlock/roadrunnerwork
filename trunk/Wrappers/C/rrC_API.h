@@ -2,7 +2,7 @@
 #define rrC_APIH
 
 //Export/Import
-#if defined(EXPORT_RR)
+#if defined(EXPORT_RR_C_API)
 #define RR_DECL_SPEC __declspec(dllexport)
 #else
 #define RR_DECL_SPEC __declspec(dllimport)

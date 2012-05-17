@@ -14,10 +14,10 @@ set(examples
 
 foreach(example ${examples})
  add_subdirectory(${example})
- install (FILES ${example}/main.cpp 			DESTINATION Examples/${example}	COMPONENT examples_source)
- install (FILES ${example}/Readme.txt 			DESTINATION Examples/${example}	COMPONENT examples_source)
- install (FILES ${example}/CMakeLists.txt 		DESTINATION Examples/${example}	COMPONENT examples_source)
+ install (FILES ${example}/main.cpp 			DESTINATION Examples/${example}	COMPONENT example_files)
+ install (FILES ${example}/Readme.txt 			DESTINATION Examples/${example}	COMPONENT example_files)
+ install (FILES ${example}/CMakeLists.txt 		DESTINATION Examples/${example}	COMPONENT example_files)
 endforeach(example)
 
 install (FILES Readme.txt 			DESTINATION Examples COMPONENT info)
-install (FILES CMakeLists.txt 		DESTINATION Examples COMPONENT examples_source)
+install (FILES CMakeLists.txt 		DESTINATION Examples COMPONENT example_files)
