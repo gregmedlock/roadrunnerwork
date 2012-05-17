@@ -10,7 +10,11 @@ SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
 OPTION (BUILD_C_API	 			"Build C API" 				OFF)
 OPTION (BUILD_EXAMPLES			"Build Examples"			OFF)
-OPTION (BUILD_SHARED_LIBS 		"Build Shared Libraries" 	OFF)
+#OPTION (BUILD_SHARED_LIBS 		"Build Shared Libraries" 	OFF)
+
+#Setup so that roadrunner is always built as a dll and linked statically with 'as much as possible'
+
+set(BUILD_SHARED_LIBS 										ON)
 
 set(RR_ROOT 					${CMAKE_CURRENT_SOURCE_DIR})
 set(RR_SOURCE_ROOT 				${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -213,7 +217,7 @@ set(bType "release")
 endif()
 
 #set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}-${PACKAGE_NAME_LIB_TYPE}-${bType}")
-set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}-${PACKAGE_NAME_LIB_TYPE}")
+set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}")
 set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases")
 include(CPack)
 

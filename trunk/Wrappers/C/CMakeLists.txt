@@ -8,13 +8,19 @@ endif()
 add_library(		  ${target} rrC_API.cpp)
 
 #Link C_api dll statically or dynamically to roadrunner and libsbml
-IF(${BUILD_SHARED_FILES})
-target_link_libraries (${target} rr_shared)
-target_link_libraries (${target} libsbml)
-ELSE()
-target_link_libraries (${target} rr_static)
+#IF(${BUILD_SHARED_FILES})
+#target_link_libraries (${target} rr)
+#target_link_libraries (${target} libsbml)
+#ELSE()
+target_link_libraries (${target} rr-static)
 target_link_libraries (${target} libsbml-static)
-ENDIF()
+target_link_libraries (${target} libxml2_xe)
+target_link_libraries (${target} sundials_cvode)
+target_link_libraries (${target} sundials_nvecserial)
+target_link_libraries (${target} blas)
+target_link_libraries (${target} lapack)
+target_link_libraries (${target} libf2c)
+#ENDIF()
 
 IF(${BORLAND})
 add_definitions(-DEXPORT_RR_C_API)
@@ -40,10 +46,3 @@ foreach(system_file ${SBML_DEPENDENCIES})
 install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/${system_file}.lib	DESTINATION link COMPONENT c_api)
 install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/${system_file}_xe.lib	DESTINATION link COMPONENT c_api)
 endforeach()
-
-IF(${copy_rr_dll} STREQUAL "ON")
-install (FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/rr_shared.dll	DESTINATION bin COMPONENT c_api)
-ENDIF()
-
-
-

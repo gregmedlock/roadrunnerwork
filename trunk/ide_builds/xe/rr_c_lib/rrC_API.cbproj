@@ -88,6 +88,10 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
 			</LibFiles>
+			<LibFiles Include="..\..\..\installs\xe\lib\RoadRunner_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>9</BuildOrder>
+			</LibFiles>
 			<LibFiles Include="..\..\..\installs\xe\lib\sundials_cvode.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>4</BuildOrder>
@@ -95,10 +99,6 @@
 			<LibFiles Include="..\..\..\installs\xe\lib\sundials_nvecserial.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>5</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\..\..\releases\xe\static\link\rr_static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>9</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="..\..\..\ThirdParty\libsbml_dependencies\lib\libxml2_xe.lib">
 				<IgnorePath>true</IgnorePath>

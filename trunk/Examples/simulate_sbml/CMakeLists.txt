@@ -3,10 +3,10 @@ set(target simulate_sbml)
 add_executable(		   ${target} simulate_sbml.cpp)
 
 IF(BUILD_SHARED_LIBS) 
-target_link_libraries (${target} rr_shared)
+target_link_libraries (${target} rr)
 target_link_libraries (${target} libsbml)
 ELSE()
-target_link_libraries (${target} rr_static)
+target_link_libraries (${target} rr-static)
 target_link_libraries (${target} libsbml-static)
 ENDIF()
 
