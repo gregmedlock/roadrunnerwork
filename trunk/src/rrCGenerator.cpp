@@ -56,7 +56,7 @@ string CGenerator::GetSourceCodeFileName()
 
 bool CGenerator::SaveSourceCodeToFolder(const string& folder)
 {
-    mHeaderCodeFileName = folder + string("\\") + GetFileNameNoPath(mCurrentXMLModelFileName);
+    mHeaderCodeFileName = JoinPath(folder, ExtractFileName(mCurrentXMLModelFileName));
     mHeaderCodeFileName = ChangeFileExtensionTo(mHeaderCodeFileName, ".h");
 
     ofstream outFile(mHeaderCodeFileName.c_str());
@@ -184,13 +184,13 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     WriteOutSymbolTables(ignore);
 
     ///// Write non exports
-       mHeader.NewLine("\n//NON - EXPORTS ========================================");
-       mHeader.AddFunctionProto("void", "InitializeDelays()");
+    mHeader.NewLine("\n//NON - EXPORTS ========================================");
+    mHeader.AddFunctionProto("void", "InitializeDelays()");
 
     ///// Start of exported functions
-       mHeader.NewLine("\n//EXPORTS ========================================");
-       mHeader.AddFunctionExport("int", "InitModel()");
-       mHeader.AddFunctionExport("char*", "GetModelName()");
+    mHeader.NewLine("\n//EXPORTS ========================================");
+    mHeader.AddFunctionExport("int", "InitModel()");
+    mHeader.AddFunctionExport("char*", "GetModelName()");
     ///////////////
 
     WriteResetEvents(ignore, mNumEvents);
@@ -205,8 +205,7 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     WriteSetBoundaryConditions(ignore);
     WriteSetCompartmentVolumes(ignore);
     WriteSetParameterValues(ignore, mNumReactions);
-       WriteComputeConservedTotals(ignore, mNumFloatingSpecies, mNumDependentSpecies);
-
+    WriteComputeConservedTotals(ignore, mNumFloatingSpecies, mNumDependentSpecies);
 
     // Get the L0 matrix
     int nrRows;
@@ -224,9 +223,6 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     WriteEvalInitialAssignments(ignore, mNumReactions);
     WriteTestConstraints(ignore);
 
-//    mHeader<<Format("} g;\t//This is global data in the DLL{0}", NL());
-
-
     WriteInitFunction(mHeader, mSource);
 
     mHeader<<"\n\n#endif //modelH"<<NL();
@@ -240,7 +236,7 @@ void CGenerator::WriteClassHeader(CodeBuilder& ignore)
     mHeader<<"#define modelH"<<endl;
     mHeader<<"#include <stdio.h>"<<endl;
     mHeader<<"#include <stdbool.h>"<<endl;
-    mHeader<<"#include \"rrCExporter.h\"\t             //Export Stuff."<<endl;
+    mHeader<<"#include \"rr_c_exporter.h\"\t             //Export Stuff."<<endl;
     mHeader<<"#include \"rrSupportFunctions.h\"\t     //Supportfunctions for event handling.."<<endl;
 
     mHeader<<Append("//************************************************************************** " + NL());

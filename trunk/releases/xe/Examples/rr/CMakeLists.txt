@@ -1,8 +1,11 @@
 set(target rr)
 
 add_executable(		   ${target} 
-rr.cpp 
-args.cpp)
+rrMain.cpp 
+rrArgs.cpp
+rrUsage.cpp
+
+)
 
 #IF(BUILD_SHARED_LIBS) 
 #target_link_libraries (${target} rr)

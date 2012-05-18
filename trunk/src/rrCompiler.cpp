@@ -20,84 +20,36 @@
 using namespace std;
 namespace rr
 {
-//vector<string> Compiler::m_oAssemblies;
-//vector<string> Compiler::m_sCompileErrors;
 
 Compiler::Compiler()
 :
-mDLLHandle(NULL)
+mDLLHandle(NULL),
+mCompiler("tcc"),
+mSupportCodeFolder("../rr_support")
 {
     Log(lDebug5)<<"In Compiler CTOR";
+    mIncludePaths.push_back(".");
+    mLibraryPaths.push_back(".");
+    mIncludePaths.push_back("../rr_support");
+    mLibraryPaths.push_back(".");
+
 }
 
-Compiler::~Compiler()
-{
-
-}
+Compiler::~Compiler(){}
 
 bool Compiler::CompileC_DLL(const string& sourceFileName)
 {
     //Now compile the code and load the resulting dll, and call an exported function in it...
-    string dllFName(GetFileNameNoPath(sourceFileName));
-    mDLLFileName = GetPathNoFileName(sourceFileName) + "\\" + ChangeFileExtensionTo(dllFName, "dll");
+    string dllFName(ChangeFileExtensionTo(ExtractFileName(sourceFileName), "dll"));
 
-    //-g adds runtime debug information
-    //-v is for verbose
-    //-rdynamic : Export global symbols to the dynamic linker
-    //-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied. Note that the generated code is slower and bigger in this case.
-    stringstream exeCmd;
+    mDLLFileName = JoinPath(ExtractFilePath(sourceFileName), dllFName);
 
-    exeCmd<<"tcc -g -shared -rdynamic " \
-    <<sourceFileName \
-    <<" c:\\rrw\\src\\c_src\\rrSupportFunctions.c";
-
-    if(gLog.GetLogLevel() == lDebug1)
-    {
-        exeCmd<<" -v";
-    }
-
-    if(gLog.GetLogLevel() == lDebug2)
-    {
-        exeCmd<<" -vv";
-    }
-
-    if(gLog.GetLogLevel() == lDebug3)
-    {
-        exeCmd<<" -vvv";
-    }
-
-
-    if(gLog.GetLogLevel() == lDebug1)
-    {
-        exeCmd<<" -v";
-    }
-
-    if(gLog.GetLogLevel() == lDebug2)
-    {
-        exeCmd<<" -vv";
-    }
-
-    if(gLog.GetLogLevel() == lDebug3)
-    {
-        exeCmd<<" -vvv";
-    }
-
-
-    exeCmd<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL " \
-    <<" -DDEBUG_SPF " \
-    <<"-Ic:\\rrw\\src\\c_src " \
-    <<"-Lc:\\rrw\\src\\c_src";
-
-
-//    exeCmd<<"bcc32 -WD ";
-//    exeCmd<<" -e"<<mDLLFileName<<" -vu +c:\\rrw\\src\\c_src\\bcc.cfg " \
-//    <<sourceFileName \
-//    <<" c:\\rrw\\src\\c_src\\rrSupportFunctions.c";
+    string exeCmd = CreateCompilerCommand(mCompiler, sourceFileName);
 
     Log(lDebug2)<<"Compiling model..";
-    Log(lDebug3)<<"\nExecuting: "<<exeCmd.str();
+    Log(lInfo)<<"\nExecuting: "<<exeCmd;
 
-    if(!CreateDLL(exeCmd.str()))
+    if(!Compile(exeCmd))
     {
         Log(lError)<<"Creating DLL failed..";
         throw Exception("Creating DLL failed..");
@@ -107,9 +59,59 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
     return FileExists(mDLLFileName);
 }
 
-bool Compiler::CreateDLL(const string& cmdLine)
+string Compiler::CreateCompilerCommand(const string& compiler, const string& sourceFileName)
 {
-    STARTUPINFO si;
+    stringstream exeCmd;
+    if(compiler == "tcc")
+    {
+        //-g adds runtime debug information
+        //-v is for verbose
+        //-rdynamic : Export global symbols to the dynamic linker
+        //-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied. Note that the generated code is slower and bigger in this case.
+
+        exeCmd<<"tcc -g -shared -rdynamic " \
+        <<sourceFileName<<" " \
+        <<JoinPath(mSupportCodeFolder, "rrSupportFunctions.c");
+
+        if(gLog.GetLogLevel() == lDebug1)
+        {
+            exeCmd<<" -v";
+        }
+
+        if(gLog.GetLogLevel() == lDebug2)
+        {
+            exeCmd<<" -vv";
+        }
+
+        if(gLog.GetLogLevel() == lDebug3)
+        {
+            exeCmd<<" -vvv";
+        }
+
+        exeCmd<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL ";//
+     //   <<" -DDEBUG_SPF " \
+        //Add include paths
+
+        for(int i = 0; i < mIncludePaths.size(); i++)
+        {
+            exeCmd<<"-I"<<mIncludePaths[i]<<" " ;
+        }
+//        exeCmd<<"-Lc:\\rrw\\src\\c_src";
+    }
+    else if(compiler == "bcc")
+    {
+//    exeCmd<<"bcc32 -WD ";
+//    exeCmd<<" -e"<<mDLLFileName<<" -vu +c:\\rrw\\src\\c_src\\bcc.cfg " \
+//    <<sourceFileName \
+//    <<" c:\\rrw\\src\\c_src\\rrSupportFunctions.c";
+
+    }
+    return exeCmd.str();
+}
+
+bool Compiler::Compile(const string& cmdLine)
+{
+    STARTUPINFO         si;
     PROCESS_INFORMATION pi;
 
     ZeroMemory( &si, sizeof(si) );

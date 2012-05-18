@@ -12,6 +12,7 @@ class Args
     public:
                                         Args();
         virtual                        ~Args(){}
+        bool                            UseOSTempFolder;    //option u
         bool                            OnlyCompile;
         bool                            Pause;
         LogLevel                        LogLevel;

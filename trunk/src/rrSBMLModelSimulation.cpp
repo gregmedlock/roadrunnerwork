@@ -16,33 +16,74 @@
 namespace rr
 {
 
-SBMLModelSimulation::SBMLModelSimulation(const string& dataOutputFolder, const string& modelFilePath, const string& modelFileName)
+SBMLModelSimulation::SBMLModelSimulation(const string& dataOutputFolder, const string& tempDataFilePath)
 :
-mModelFilePath(modelFilePath),
-mModelFileName(modelFileName),
+mModelFilePath(""),
+mModelFileName(""),
 mDataOutputFolder(dataOutputFolder),
-mCurrentCaseNumber(-1),
 mCompileIfDllExists(true),
-mSimulationError(0)            //No error if not calculated..
+mTempDataFolder(tempDataFilePath)
 {
-    //make sure the output folder exists..
-    mReferenceData.SetName("ReferenceData");
     mResultData.SetName("ResultData");
-    mErrorData.SetName("ErrorData");
 }
 
 SBMLModelSimulation::~SBMLModelSimulation()
 {}
 
-void    SBMLModelSimulation::SetCaseNumber(int cNr){mCurrentCaseNumber = cNr;}
-bool    SBMLModelSimulation::SetModelFilePath(const string& path){mModelFilePath = path; return true;}
-bool    SBMLModelSimulation::SetModelFileName(const string& name){mModelFileName = name; return true;}
-bool    SBMLModelSimulation::SetDataOutputFolder(const string& name){mDataOutputFolder = name; return true;}
-string  SBMLModelSimulation::GetModelsFullFilePath(){return JoinPath(mModelFilePath, mModelFileName);}
-string  SBMLModelSimulation::GetDataOutputFolder(){return mDataOutputFolder;}
-void    SBMLModelSimulation::CompileIfDllExists(const bool& doIt){mCompileIfDllExists = doIt;}
-bool    SBMLModelSimulation::CompileIfDllExists(){return mCompileIfDllExists;}
+bool SBMLModelSimulation::SetModelFilePath(const string& path)
+{
+    mModelFilePath = path;
+    return true;
+}
 
+bool SBMLModelSimulation::SetModelFileName(const string& name)
+{
+    if(ExtractFilePath(name).size() > 0)
+    {
+        mModelFilePath = ExtractFilePath(name);
+    }
+
+    mModelFileName = ExtractFileName(name);
+
+    if(!FileExists(JoinPath(mModelFilePath, mModelFileName)))
+    {
+        Log(lError)<<"The file: "<<JoinPath(mModelFilePath, mModelFileName)<<" don't exist.";
+        return false;
+    }
+
+    return true;
+}
+
+string SBMLModelSimulation::GetTempDataFolder()
+{
+    return mTempDataFolder;
+}
+
+bool SBMLModelSimulation::SetDataOutputFolder(const string& name)
+{
+    mDataOutputFolder = name;
+    return true;
+}
+
+string  SBMLModelSimulation::GetModelsFullFilePath()
+{
+    return JoinPath(mModelFilePath, mModelFileName);
+}
+
+string  SBMLModelSimulation::GetDataOutputFolder()
+{
+    return mDataOutputFolder;
+}
+
+void    SBMLModelSimulation::CompileIfDllExists(const bool& doIt)
+{
+    mCompileIfDllExists = doIt;
+}
+
+bool    SBMLModelSimulation::CompileIfDllExists()
+{
+    return mCompileIfDllExists;
+}
 
 bool SBMLModelSimulation::UseEngine(RoadRunner* engine)
 {
@@ -79,21 +120,12 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
 
     if(!fName.size())
     {
-           //string settings file name is based on the case number
-        fName = GetSettingsFileNameForCase(mCurrentCaseNumber);
-
-        //Try to read from a file within folder where the model is
-        fName = JoinPath(mModelFilePath, fName);
-    }
-
-    if(!FileExists(fName))
-    {
-        mSettings.mStartTime     = 0;
-        mSettings.mDuration     = 5;
-        mSettings.mSteps         = 50;
-        mSettings.mAbsolute     = 1.e-7;
-        mSettings.mRelative     = 1.e-4;
-        mSettings.mEndTime         = mSettings.mStartTime + mSettings.mDuration;
+        mSettings.mStartTime   = 0;
+        mSettings.mDuration    = 5;
+        mSettings.mSteps       = 50;
+        mSettings.mAbsolute    = 1.e-7;
+        mSettings.mRelative    = 1.e-4;
+        mSettings.mEndTime     = mSettings.mStartTime + mSettings.mDuration;
     }
     else
     {
@@ -187,167 +219,6 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
     return true;
 }
 
-bool SBMLModelSimulation::LoadReferenceData()
-{
-    //The reference data is located in the folder where the model is located
-    string refDataFileName = JoinPath(mModelFilePath, GetReferenceDataFileNameForCase(mCurrentCaseNumber));
-    if(!FileExists(refDataFileName))
-    {
-        Log(lWarning)<<"Could not open reference data file: "<<refDataFileName;
-        return false;
-    }
-
-    vector<string> lines = GetLinesInFile(refDataFileName);
-    if(!lines.size())
-    {
-        Log(lWarning)<<"This file is empty..";
-        return false;
-    }
-
-    //Create the data..
-    for(int row = 0; row < lines.size(); row++)
-    {
-           vector<string> recs = SplitString(lines[row], ",");
-        if(row == 0) //This is the header
-        {
-            mReferenceData.SetColumnNames(recs);
-            //Assign how many columns the data has
-            mReferenceData.Allocate(lines.size() - 1, recs.size());
-        }
-        else    //This is data
-        {
-            for(int col = 0; col < mReferenceData.GetNrOfCols(); col++)
-            {
-                 double val = ToDouble(recs[col]);
-                mReferenceData(row - 1,col) = val; //First line is the header..
-             }
-        }
-    }
-
-    return true;
-}
-
-bool SBMLModelSimulation::CreateErrorData()
-{
-    //Check tht result data and reference data has the same dimensions
-    if(mResultData.GetNrOfCols() != mReferenceData.GetNrOfCols() || mResultData.GetNrOfRows() != mReferenceData.GetNrOfRows())
-    {
-        return false;
-    }
-
-    mErrorData.Allocate(mResultData.GetNrOfRows(), mResultData.GetNrOfCols());
-
-
-    for(int row = 0; row < mResultData.GetNrOfRows(); row++)
-    {
-        for(int col = 0; col < mResultData.GetNrOfCols(); col++)
-        {
-            double error = fabsl(mResultData(row, col) - mReferenceData(row,col));
-            mErrorData(row, col) = error;
-
-            if(error > mSimulationError)
-            {
-                mSimulationError = error;
-            }
-        }
-    }
-    return true;
-}
-
-bool SBMLModelSimulation::SaveAllData()
-{
-    //Save all data to one file that can be plotted "as one"
-
-    //First save the reference data to a file for comparison to result data
-    string refDataFileName = JoinPath(mDataOutputFolder, GetReferenceDataFileNameForCase(mCurrentCaseNumber));
-    ofstream fs(refDataFileName.c_str());
-    fs<<mReferenceData;
-    fs.close();
-
-    string outputAllFileName;
-    string dummy;
-    CreateTestSuiteFileNameParts(mCurrentCaseNumber, "-result-comparison.dat", dummy, outputAllFileName);
-    fs.open(JoinPath(mDataOutputFolder, outputAllFileName).c_str());
-
-    //Check matrices dimension, if they are not equal, bail..?
-    if(mResultData.Dimension() != mReferenceData.Dimension() ||
-       mResultData.Dimension() != mErrorData.Dimension()        ||
-       mErrorData.Dimension()  != mReferenceData.Dimension() )
-    {
-        Log(lWarning)<<"Data dimensions are not equal, not saving to one file..";
-        return false;
-    }
-    for(int row = 0; row < mResultData.GetNrOfRows(); row++)
-    {
-        for(int col = 0; col < mReferenceData.GetNrOfCols(); col++)
-        {
-            if(row == 0)
-            {
-                if(col == 0)
-                {
-                    StringList ref_cnames =  mReferenceData.GetColumnNames();
-                    ref_cnames.PostFix("_ref");
-                    fs << ref_cnames.AsString();
-
-                    StringList res_cnames =  mResultData.GetColumnNames();
-                    res_cnames.PostFix("_rr");
-                    fs << res_cnames.AsString();
-
-                    StringList err_names = ref_cnames - res_cnames;
-                    fs << err_names.AsString();
-                }
-            }
-
-            //First column is the time...
-            if(col == 0)
-            {
-                fs << endl << setw(10)<<left<<setprecision(6)<< mReferenceData(row, col); // this is time..
-            }
-            else
-            {
-                if(row <= mReferenceData.GetNrOfRows())
-                {
-                    fs << "," << mReferenceData(row, col);
-                }
-                else
-                {
-                    fs << "," << " ";
-                }
-            }
-        }
-
-        //Then the simulated data
-        for(int col = 0; col < mResultData.GetNrOfCols(); col++)
-        {
-            //First column is the time...
-            if(col == 0)
-            {
-                fs << "," << setw(10)<<left<<setprecision(6)<< mResultData(row , col);
-            }
-            else
-            {
-                fs << "," << mResultData(row, col);
-            }
-        }
-
-        //Then the error data
-        for(int col = 0; col < mErrorData.GetNrOfCols(); col++)
-        {
-            //First column is the time...
-            if(col == 0)
-            {
-                fs << "," << setw(10)<<left<<setprecision(6)<<mErrorData(row, col); //Becuase row 0 is the header
-            }
-            else
-            {
-                fs << "," << mErrorData(row, col);
-            }
-        }
-    }
-
-    return true;
-}
-
 bool SBMLModelSimulation::LoadSBMLFromFile()                    //Use current file information to load sbml from file
 {
     if(!mEngine)
@@ -430,26 +301,6 @@ bool SBMLModelSimulation::SaveResult()
     fs << mResultData;
     fs.close();
     return true;
-}
-
-string SBMLModelSimulation::GetSettingsFileNameForCase(int caseNr)
-{
-    stringstream name;
-    name<<setfill('0')<<setw(5)<<caseNr<<"-settings.txt";        //create the "00023" subfolder format
-
-    return name.str();
-}
-
-string SBMLModelSimulation::GetReferenceDataFileNameForCase(int caseNr)
-{
-    stringstream name;
-    name<<setfill('0')<<setw(5)<<caseNr<<"-results.csv";
-    return name.str();
-
-}
-double SBMLModelSimulation::GetSimulationError()
-{
-    return mSimulationError;
 }
 } //end of namespace
 

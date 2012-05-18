@@ -131,6 +131,9 @@ foreach(system_file ${SBML_DEPENDENCIES})
 install (FILES ${THIRD_PARTY_FOLDER}/libsbml/dependencies/bin/${system_file}	DESTINATION bin COMPONENT rr_core)
 endforeach()
 
+#=== Install support code for on the fly compilation<LeftMouse>
+FILE(GLOB rr_support rr_support/*.*)
+install(FILES ${rr_support} DESTINATION rr_support COMPONENT rr_core) 
 ##== We also need to copy the libxml.lib file to install folder, if we want to link any program with the rr library
 #if(${BORLAND})
 #install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/libxml2_xe.lib	DESTINATION lib COMPONENT Libs)

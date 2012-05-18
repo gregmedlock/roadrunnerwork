@@ -214,37 +214,37 @@ bool ModelFromC::SetupDLLData()
     amounts  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_amounts");
     if(!amounts)
     {
-        Log(lError)<<"Failed to assign to amounts";
+        Log(lDebug)<<"Failed to assign to amounts";
     }
 
     amountsSize  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_amountsSize");
     if(!amountsSize)
     {
-        Log(lError)<<"Failed to assign to amountsSize";
+        Log(lDebug)<<"Failed to assign to amountsSize";
     }
 
     dydt  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_dydt");
     if(!dydt)
     {
-        Log(lError)<<"Failed to assign to dydt";
+        Log(lDebug)<<"Failed to assign to dydt";
     }
 
     dydtSize  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_dydtSize");
     if(!dydtSize)
     {
-        Log(lError)<<"Failed to assign to dydtSize";
+        Log(lDebug)<<"Failed to assign to dydtSize";
     }
 
     rateRules  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_rateRules");
     if(!rateRules)
     {
-        Log(lError)<<"Failed to assign to rateRules";
+        Log(lDebug)<<"Failed to assign to rateRules";
     }
 
     int* ptr = (int*) GetProcAddress((HMODULE) mDLLHandle, "_rateRulesSize");
     if(!ptr)
     {
-        Log(lError)<<"Failed to assign to rateRules";
+        Log(lDebug)<<"Failed to assign to rateRules";
     }
     else
     {
@@ -254,166 +254,166 @@ bool ModelFromC::SetupDLLData()
     y  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_y");
     if(!y)
     {
-        Log(lError)<<"Failed to assign to mY";
+        Log(lDebug)<<"Failed to assign to mY";
     }
 
     ySize  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_ySize");
     if(!ySize)
     {
-        Log(lError)<<"Failed to assign to ySize";
+        Log(lDebug)<<"Failed to assign to ySize";
     }
 
     rates  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_rates");
     if(!rates)
     {
-        Log(lError)<<"Failed to assign to rates";
+        Log(lDebug)<<"Failed to assign to rates";
     }
 
     ratesSize  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_ratesSize");
     if(!ratesSize)
     {
-        Log(lError)<<"Failed to assign to ratesSize";
+        Log(lDebug)<<"Failed to assign to ratesSize";
     }
 
     ct  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_ct");
     if(!ct)
     {
-        Log(lError)<<"Failed to assign to ct";
+        Log(lDebug)<<"Failed to assign to ct";
     }
 
     ctSize  = (int*) GetProcAddress((HMODULE) mDLLHandle, "_ctSize");
     if(!ctSize)
     {
-        Log(lError)<<"Failed to assign to ctSize";
+        Log(lDebug)<<"Failed to assign to ctSize";
     }
 
     time       = (double*) GetProcAddress((HMODULE) mDLLHandle, "mTime");
     if(!time)
     {
-        Log(lError)<<"Failed to assign to time";
+        Log(lDebug)<<"Failed to assign to time";
     }
 
     init_y       = (double*) GetProcAddress((HMODULE) mDLLHandle, "_init_y");
     if(!init_y)
     {
-        Log(lError)<<"Failed to assign to init_y";
+        Log(lDebug)<<"Failed to assign to init_y";
     }
 
     gp       = (double*) GetProcAddress((HMODULE) mDLLHandle, "_gp");
     if(!gp)
     {
-        Log(lError)<<"Failed to assign to gp";
+        Log(lDebug)<<"Failed to assign to gp";
     }
 
     gpSize       = (int*) GetProcAddress((HMODULE) mDLLHandle, "_gpSize");
     if(!gpSize)
     {
-        Log(lError)<<"Failed to assign to gpSize";
+        Log(lDebug)<<"Failed to assign to gpSize";
     }
 
     c       = (double*) GetProcAddress((HMODULE) mDLLHandle, "_c");
     if(!c)
     {
-        Log(lError)<<"Failed to assign to mC";
+        Log(lDebug)<<"Failed to assign to mC";
     }
 
     cSize       = (double*) GetProcAddress((HMODULE) mDLLHandle, "_cSize");
     if(!cSize)
     {
-        Log(lError)<<"Failed to assign to cSize";
+        Log(lDebug)<<"Failed to assign to cSize";
     }
 
     bc       = (double*) GetProcAddress((HMODULE) mDLLHandle, "_bc");
     if(!bc)
     {
-        Log(lError)<<"Failed to assign to bc";
+        Log(lDebug)<<"Failed to assign to bc";
     }
 
     bcSize       = (int*) GetProcAddress((HMODULE) mDLLHandle, "_bcSize");
     if(!bcSize)
     {
-        Log(lError)<<"Failed to assign to bcSize";
+        Log(lDebug)<<"Failed to assign to bcSize";
     }
 
     sr       = (double*) GetProcAddress((HMODULE) mDLLHandle, "_sr");
     if(!sr)
     {
-        Log(lError)<<"Failed to assign to sr";
+        Log(lDebug)<<"Failed to assign to sr";
         sr = mDummyDoubleArray;
     }
 
     srSize       = (int*) GetProcAddress((HMODULE) mDLLHandle, "_srSize");
     if(!srSize)
     {
-        Log(lError)<<"Failed to assign to srSize";
+        Log(lDebug)<<"Failed to assign to srSize";
         srSize = &mDummyInt;
     }
 
     eventStatusArray   = (bool*) GetProcAddress((HMODULE) mDLLHandle, "mEventStatusArray");
     if(!eventStatusArray)
     {
-        Log(lError)<<"Failed to assign to eventStatusArray";
+        Log(lDebug)<<"Failed to assign to eventStatusArray";
         eventStatusArray = NULL;
     }
 
     eventStatusArraySize      = (int*) GetProcAddress((HMODULE) mDLLHandle, "mEventStatusArraySize");
     if(!eventStatusArraySize)
     {
-        Log(lError)<<"Failed to assign to eventStatusArraySize";
+        Log(lDebug)<<"Failed to assign to eventStatusArraySize";
     }
 
     previousEventStatusArray   = (bool*) GetProcAddress((HMODULE) mDLLHandle, "_previousEventStatusArray");
     if(!previousEventStatusArray)
     {
-        Log(lError)<<"Failed to assign to previousEventStatusArray";
+        Log(lDebug)<<"Failed to assign to previousEventStatusArray";
         previousEventStatusArray = NULL;
     }
 
     previousEventStatusArraySize      = (int*) GetProcAddress((HMODULE) mDLLHandle, "_previousEventStatusArraySize");
     if(!previousEventStatusArraySize)
     {
-        Log(lError)<<"Failed to assign to previousEventStatusArraySize";
+        Log(lDebug)<<"Failed to assign to previousEventStatusArraySize";
         previousEventStatusArraySize = &mDummyInt;
     }
 
     eventPersistentType   = (bool*) GetProcAddress((HMODULE) mDLLHandle, "_eventPersistentType");
     if(!eventPersistentType)
     {
-        Log(lError)<<"Failed to assign to eventPersistentType";
+        Log(lDebug)<<"Failed to assign to eventPersistentType";
         eventPersistentType = NULL;
     }
 
     eventPersistentTypeSize      = (int*) GetProcAddress((HMODULE) mDLLHandle, "_eventPersistentTypeSize");
     if(!eventPersistentTypeSize)
     {
-        Log(lError)<<"Failed to assign to eventPersistentTypeSize";
+        Log(lDebug)<<"Failed to assign to eventPersistentTypeSize";
     }
 
     eventTests   = (double*) GetProcAddress((HMODULE) mDLLHandle, "mEventTests");
     if(!eventTests)
     {
-        Log(lError)<<"Failed to assign to eventTests";
+        Log(lDebug)<<"Failed to assign to eventTests";
         eventTests = NULL;
     }
 
     eventTestsSize      = (int*) GetProcAddress((HMODULE) mDLLHandle, "mEventTestsSize");
     if(!eventTestsSize)
     {
-        Log(lError)<<"Failed to assign to eventTestsSize";
+        Log(lDebug)<<"Failed to assign to eventTestsSize";
         eventTestsSize = & mDummyInt;
     }
 
     eventType   = (bool*) GetProcAddress((HMODULE) mDLLHandle, "_eventType");
     if(!eventType)
     {
-        Log(lError)<<"Failed to assign to eventType";
+        Log(lDebug)<<"Failed to assign to eventType";
         eventType = NULL;
     }
 
     eventTypeSize      = (int*) GetProcAddress((HMODULE) mDLLHandle, "_eventTypeSize");
     if(!eventTypeSize)
     {
-        Log(lError)<<"Failed to assign to eventTypeSize";
+        Log(lDebug)<<"Failed to assign to eventTypeSize";
         eventTypeSize = & mDummyInt;
     }
 
@@ -422,7 +422,7 @@ bool ModelFromC::SetupDLLData()
     Get_eventAssignments  = (c_TEventAssignmentDelegateStar) GetProcAddress((HMODULE) mDLLHandle, "Get_eventAssignments");
     if(!Get_eventAssignments)
     {
-        Log(lError)<<"Failed to assign to Get_eventAssignments";
+        Log(lDebug)<<"Failed to assign to Get_eventAssignments";
         eventAssignments = NULL;
     }
     else
@@ -434,7 +434,7 @@ bool ModelFromC::SetupDLLData()
     Get_computeEventAssignments      = (c_TComputeEventAssignmentDelegateStar) GetProcAddress((HMODULE) mDLLHandle, "Get_computeEventAssignments");
     if(!Get_computeEventAssignments)
     {
-        Log(lError)<<"Failed to assign to Get_computeEventAssignments";
+        Log(lDebug)<<"Failed to assign to Get_computeEventAssignments";
     }
     else
     {
@@ -445,7 +445,7 @@ bool ModelFromC::SetupDLLData()
     Get_performEventAssignments  = (c_TPerformEventAssignmentDelegateStar) GetProcAddress((HMODULE) mDLLHandle, "Get_performEventAssignments");
     if(!Get_performEventAssignments)
     {
-        Log(lError)<<"Failed to assign to Get_performEventAssignments";
+        Log(lDebug)<<"Failed to assign to Get_performEventAssignments";
         performEventAssignments = NULL;
     }
     else
@@ -458,7 +458,7 @@ bool ModelFromC::SetupDLLData()
     GetEventDelays  = (c_GetEventDelayDelegatesStar) GetProcAddress((HMODULE) mDLLHandle, "GetEventDelays");
     if(!GetEventDelays)
     {
-        Log(lError)<<"Failed to assign to Get_computeEventAssignments";
+        Log(lDebug)<<"Failed to assign to Get_computeEventAssignments";
     }
     else
     {

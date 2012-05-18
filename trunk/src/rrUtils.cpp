@@ -18,6 +18,24 @@ using namespace std;
 namespace rr
 {
 
+string GetUsersTempDataFolder()
+{
+    //Default for temporary data output is the users AppData/Local/Temp Folder
+    //  Gets the temp path env string (no guarantee it's a valid path).
+    TCHAR lpTempPathBuffer[MAX_PATH];
+    DWORD dwRetVal = GetTempPath(   MAX_PATH,
+                                    lpTempPathBuffer); // buffer for path
+    if (dwRetVal > MAX_PATH || (dwRetVal == 0))
+    {
+        Log(lError)<<"GetTempPath failed";
+    }
+    else
+    {
+        Log(lInfo)<<"Users temporary files folder is: "<<string(lpTempPathBuffer);
+    }
+    return string(lpTempPathBuffer);
+}
+
 vector<string> GetLinesInFile(const string& fName)
 {
     vector<string> lines;
@@ -82,7 +100,6 @@ bool FolderExists(const string& folderName)
     DWORD dwAttrib = GetFileAttributes(szPath);
     return (dwAttrib != INVALID_FILE_ATTRIBUTES && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
 }
-
 
 void CreateTestSuiteFileNameParts(int caseNr, const string& postFixPart, string& modelFilePath, string& modelName)
 {

@@ -81,11 +81,14 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\..\apps\rr\args.cpp">
+			<CppCompile Include="..\..\..\apps\rr\rrArgs.cpp">
+				<BuildOrder>8</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\apps\rr\rrMain.cpp">
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\apps\rr\rr.cpp">
-				<BuildOrder>9</BuildOrder>
+			<CppCompile Include="..\..\..\apps\rr\rrUsage.cpp">
+				<BuildOrder>10</BuildOrder>
 			</CppCompile>
 			<LibFiles Include="..\..\..\builds\xe\clapack\BLAS\SRC\blas.lib">
 				<IgnorePath>true</IgnorePath>
@@ -103,7 +106,7 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="..\..\..\installs\xe\lib\RoadRunner_xe.lib">
+			<LibFiles Include="..\..\..\installs\xe\lib\roadrunner-cg.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>9</BuildOrder>
 			</LibFiles>
@@ -176,7 +179,7 @@
 						<Parameters Name="RunParams">-n41 -vDebug3 -tC:\\RRTemp -dc:\\RRDataOutput</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-vDebug3 -mfeedback.xml</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-p -vInfo -m&quot;../Models/feedback.xml&quot;</Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

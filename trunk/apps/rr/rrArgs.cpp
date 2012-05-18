@@ -2,19 +2,22 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
-#include "args.h"
+#include "rrArgs.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
 Args::Args()
 :
+UseOSTempFolder(false),
 OnlyCompile(false),
 Pause(false),
 LogLevel(lInfo),
-ModelFileName("")
+ModelFileName(""),
+DataOutputFolder(""),
+TempDataFolder(".")
 {
     //Default for data output is in the same dir as where the executable is
-    DataOutputFolder = ".";
+
     //CSIDL_MYDOCUMENTS
 //    TCHAR myDocs[MAX_PATH];
 //    HRESULT result = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, myDocs);
@@ -43,19 +46,6 @@ ModelFileName("")
 //
 //    }
 
-    //Default for temporary data output is the users AppData/Local/Temp Folder
-    //  Gets the temp path env string (no guarantee it's a valid path).
-    TCHAR lpTempPathBuffer[MAX_PATH];
-    DWORD dwRetVal = GetTempPath(   MAX_PATH,
-                                    lpTempPathBuffer); // buffer for path
-    if (dwRetVal > MAX_PATH || (dwRetVal == 0))
-    {
-        Log(lError)<<"GetTempPath failed";
-    }
-    else
-    {
-        Log(lInfo)<<"Writing temporary files to: "<<string(lpTempPathBuffer);
-    }
-    TempDataFolder = string(lpTempPathBuffer);
+
 }
 

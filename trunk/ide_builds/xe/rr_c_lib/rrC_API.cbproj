@@ -104,9 +104,8 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>6</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\..\..\Wrappers\C\rrC_API.cpp">
-				<DependentOn>..\..\..\Wrappers\C\rrC_API.h</DependentOn>
-				<BuildOrder>2</BuildOrder>
+			<CppCompile Include="..\..\..\Wrappers\C\rr_c_api.cpp">
+				<BuildOrder>9</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
@@ -123,8 +122,7 @@
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 		<PropertyGroup Condition="'$(FileToCompile)'==''">
-			<PostBuildEvent><![CDATA[mkdir  $(RR_ROOT)\releases\xe\shared\include\
-copy $(RR_ROOT)\Wrappers\C\rrC_API.h $(RR_ROOT)\releases\xe\shared\include\]]></PostBuildEvent>
+			<PostBuildEvent><![CDATA[copy $(RR_ROOT)\Wrappers\C\rr_c_api.h $(RR_ROOT)\installs\xe\include\]]></PostBuildEvent>
 		</PropertyGroup>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>

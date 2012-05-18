@@ -22,9 +22,9 @@ class RR_DECLSPEC ModelGenerator : public rrObject
     public:
         const string                        STR_DoubleFormat;
         const string                        STR_FixAmountCompartments;
-        string                                  mCurrentXMLModelFileName;
+        string                              mCurrentXMLModelFileName;
         vector<int>                         mLocalParameterDimensions;
-        string                                 mModelName;
+        string                              mModelName;
         int                                 mNumBoundarySpecies;
         int                                 mNumCompartments;
         int                                 mNumDependentSpecies;
@@ -34,30 +34,30 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         int                                 mNumIndependentSpecies;
         int                                 mNumReactions;
         int                                 mTotalLocalParmeters;
-        StringList                           mfunctionNames;
+        StringList                          mfunctionNames;
         StringList                          mfunctionParameters;
-        StringList                             dependentSpeciesList;
-        StringList                            independentSpeciesList;
+        StringList                          dependentSpeciesList;
+        StringList                          independentSpeciesList;
         int                                 mNumModifiableSpeciesReferences;
-        StructAnalysis                        mStructAnalysis;                    //Object to facilitate calls to libStruct library
-        NOMSupport                            mNOM;                                //Object that provide some wrappers and new "NOM" functions
-        IntStringHashTable                   mMapRateRule;
-        SymbolList                             boundarySpeciesList;
-        SymbolList                             compartmentList;
-        SymbolList                             conservationList;
-        SymbolList                             floatingSpeciesAmountsList;
-        SymbolList                             floatingSpeciesConcentrationList;
-        SymbolList                             globalParameterList;
-        vector<SymbolList>                     localParameterList;
-        SymbolList                             reactionList;
-        StringList                            Warnings;
+        StructAnalysis                      mStructAnalysis;                    //Object to facilitate calls to libStruct library
+        NOMSupport                          mNOM;                                //Object that provide some wrappers and new "NOM" functions
+        IntStringHashTable                  mMapRateRule;
+        SymbolList                          boundarySpeciesList;
+        SymbolList                          compartmentList;
+        SymbolList                          conservationList;
+        SymbolList                          floatingSpeciesAmountsList;
+        SymbolList                          floatingSpeciesConcentrationList;
+        SymbolList                          globalParameterList;
+        vector<SymbolList>                  localParameterList;
+        SymbolList                          reactionList;
+        StringList                          Warnings;
 
         //Pure Virtual functions... =====================================
         virtual string                      convertUserFunctionExpression(const string& equation) = 0;
-        virtual void                         SubstituteEquation(const string& reactionName, Scanner& s, CodeBuilder& sb) = 0;
-        virtual void                         SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& sb) = 0;
-        virtual void                         SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& sb) = 0;
-        virtual string                         FindSymbol(const string& varName) = 0;
+        virtual void                        SubstituteEquation(const string& reactionName, Scanner& s, CodeBuilder& sb) = 0;
+        virtual void                        SubstituteWords(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& sb) = 0;
+        virtual void                        SubstituteToken(const string& reactionName, bool bFixAmounts, Scanner& s, CodeBuilder& sb) = 0;
+        virtual string                      FindSymbol(const string& varName) = 0;
         virtual int                         ReadFloatingSpecies() = 0;
         virtual int                         ReadBoundarySpecies() = 0;
         virtual void                        WriteOutSymbolTables(CodeBuilder& sb) = 0;
@@ -76,7 +76,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         virtual void                        WriteClassHeader(CodeBuilder& sb) = 0;
         virtual void                        WriteTestConstraints(CodeBuilder& sb) = 0;
         virtual void                        WriteEvalInitialAssignments(CodeBuilder& sb, const int& numReactions) = 0;
-        virtual int                          WriteComputeRules(CodeBuilder& sb, const int& numReactions) = 0;
+        virtual int                         WriteComputeRules(CodeBuilder& sb, const int& numReactions) = 0;
         virtual void                        WriteComputeReactionRates(CodeBuilder& sb, const int& numReactions) = 0;
         virtual void                        WriteEvalEvents(CodeBuilder& sb, const int& numEvents, const int& numFloatingSpecies) = 0;
         virtual void                        WriteEvalModel(CodeBuilder& sb, const int& numReactions, const int& numIndependentSpecies, const int& numFloatingSpecies, const int& numOfRules) = 0;
@@ -85,7 +85,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         virtual void                        WriteSetCompartmentVolumes(CodeBuilder& sb) = 0;
         virtual void                        WriteSetBoundaryConditions(CodeBuilder& sb) = 0;
         virtual void                        WriteSetInitialConditions(CodeBuilder& sb, const int& numFloatingSpecies) = 0;
-        virtual string                        convertCompartmentToC(const string& compartmentName) = 0;
+        virtual string                      convertCompartmentToC(const string& compartmentName) = 0;
         virtual string                      convertSpeciesToBc(const string& speciesName) = 0;
         virtual string                      convertSpeciesToY(const string& speciesName) = 0;
         virtual string                      convertSymbolToC(const string& compartmentName) = 0;
@@ -94,21 +94,21 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         //////////////////////////////////////////////////////////////
 
         string                              substituteTerms(const int& numReactions, const string& reactionName, const string& equation);
-        ASTNode*                             CleanEquation(ASTNode* ast);
-        string                                 CleanEquation(const string& equation);
-        string                                 substituteTerms(const string& reactionName, const string& inputEquation, bool bFixAmounts);
-        double*                                InitializeL0(int& nrRows, int& nrCols);
-        bool                                 ExpressionContainsSymbol(ASTNode* ast, const string& symbol);
-        bool                                 ExpressionContainsSymbol(const string& expression, const string& symbol);
-        Symbol*                                GetSpecies(const string& id);
+        ASTNode*                            CleanEquation(ASTNode* ast);
+        string                              CleanEquation(const string& equation);
+        string                              substituteTerms(const string& reactionName, const string& inputEquation, bool bFixAmounts);
+        double*                             InitializeL0(int& nrRows, int& nrCols);
+        bool                                ExpressionContainsSymbol(ASTNode* ast, const string& symbol);
+        bool                                ExpressionContainsSymbol(const string& expression, const string& symbol);
+        Symbol*                             GetSpecies(const string& id);
         int                                 ReadGlobalParameters();
-        void                                 ReadLocalParameters(const int& numReactions,  vector<int>& localParameterDimensions, int& totalLocalParmeters);
+        void                                ReadLocalParameters(const int& numReactions,  vector<int>& localParameterDimensions, int& totalLocalParmeters);
         int                                 ReadCompartments();
         int                                 ReadModifiableSpeciesReferences();
 
     public:
                                             ModelGenerator();
-        virtual                               ~ModelGenerator();
+        virtual                             ~ModelGenerator();
         void                                Reset();
         int                                 GetNumberOfReactions();
         int                                 NumAdditionalRates();        //this variable is the size of moMapRateRule
@@ -119,24 +119,24 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         StringList                          getGlobalParameterList();
         StringList                          getLocalParameterList(int reactionId);
 
-        SymbolList                             ModifiableSpeciesReferenceList;
+        SymbolList                          ModifiableSpeciesReferenceList;
 
-        StringList                             getReactionNames();
-        SymbolList&                            GetReactionList(){return reactionList;}
+        StringList                          getReactionNames();
+        SymbolList&                         GetReactionList(){return reactionList;}
 
         StringList                          getFloatingSpeciesConcentrationList();    //Just returns the names...!
-        SymbolList&                            GetFloatingSpeciesConcentrationList(){return floatingSpeciesConcentrationList;}
+        SymbolList&                         GetFloatingSpeciesConcentrationList(){return floatingSpeciesConcentrationList;}
 
-        StringList                             getBoundarySpeciesList();
-        SymbolList&                            GetBoundarySpeciesList(){return boundarySpeciesList;}
-        SymbolList&                            GetGlobalParameterList(){return globalParameterList;}
-        SymbolList&                            GetConservationList(){return conservationList;}
-        string                                 WriteDouble(const double& value);
+        StringList                          getBoundarySpeciesList();
+        SymbolList&                         GetBoundarySpeciesList(){return boundarySpeciesList;}
+        SymbolList&                         GetGlobalParameterList(){return globalParameterList;}
+        SymbolList&                         GetConservationList(){return conservationList;}
+        string                              WriteDouble(const double& value);
 
-        // Generates the Model Code from the SBML string
-        virtual string                          generateModelCode(const string& sbmlStr) = 0;    //Any decendant need to implement at least this one
-        virtual    bool                        SaveSourceCodeToFolder(const string& folder){return false;}    //Save generated source code to folder..
-        void                                SetXMLModelFileName(const string& name){mCurrentXMLModelFileName = name;}
+        // Generates the Model Code from theSBML string
+        virtual string                      generateModelCode(const string& sbmlStr) = 0;    //Any decendant need to implement at least this one
+        virtual    bool                     SaveSourceCodeToFolder(const string& folder){return false;}    //Save generated source code to folder..
+        void                                SetXMLModelFileName(const string& name);
 };
 }//namespace rr
 

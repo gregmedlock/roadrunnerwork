@@ -22,6 +22,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<DllSuffix>-cg</DllSuffix>
 			<BPILibOutputDir>$(RR_ROOT)\installs\xe\lib</BPILibOutputDir>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
@@ -79,10 +80,10 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="RoadRunnerLib.cpp">
+			<CppCompile Include="roadrunner.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
-			<ResFiles Include="RoadRunner_xe.res">
+			<ResFiles Include="roadrunner.res">
 				<BuildOrder>70</BuildOrder>
 			</ResFiles>
 			<LibFiles Include="..\..\..\installs\xe\lib\blas.lib">
@@ -257,8 +258,7 @@
 				<BuildOrder>38</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\src\rrSBMLModelSimulation.cpp">
-				<DependentOn>..\..\..\src\rrSBMLModelSimulation.h</DependentOn>
-				<BuildOrder>39</BuildOrder>
+				<BuildOrder>70</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\src\rrSBMLSymbol.cpp">
 				<DependentOn>..\..\..\src\rrSBMLSymbol.h</DependentOn>

@@ -558,12 +558,12 @@ string RoadRunner::GetDLLName()
 {
     string srcCodeFolder;
     srcCodeFolder = (mSimulation) ?
-        mSimulation->GetDataOutputFolder()
+        mSimulation->GetTempDataFolder()
         :
         string(mTempFileFolder);
 
 
-    string dllName  = srcCodeFolder + "\\" + ChangeFileExtensionTo(GetFileNameNoPath(mModelXMLFileName), "dll");
+    string dllName  = srcCodeFolder + "\\" + ChangeFileExtensionTo(ExtractFileName(mModelXMLFileName), "dll");
     return dllName;
 }
 
@@ -626,7 +626,7 @@ bool RoadRunner::CompileCurrentModel()
         return false;
     }
     Log(lDebug)<<"Model compiled succesfully. ";
-    Log(lDebug3)<<mCompiler.GetDLLName()<<" was created";
+    Log(lInfo)<<mCompiler.GetDLLName()<<" was created";
     return true;
 }
 
@@ -661,7 +661,7 @@ ModelFromC* RoadRunner::CreateModel()
     if(mModelDllHandle)
     {
         CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
-         ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);
+        ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);
         mModel = rrCModel;            //Should use an auto pointer?
     }
     else

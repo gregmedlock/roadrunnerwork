@@ -29,6 +29,11 @@ STR_FixAmountCompartments("*")
 
 ModelGenerator::~ModelGenerator(){}
 
+void ModelGenerator::SetXMLModelFileName(const string& name)
+{
+    mCurrentXMLModelFileName = name;
+}
+
 void ModelGenerator::Reset()
 {
     mNOM.Reset();

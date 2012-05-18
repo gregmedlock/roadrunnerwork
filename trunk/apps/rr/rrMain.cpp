@@ -23,18 +23,18 @@
 #include "rrStringUtils.h"
 #include "rrSBMLModelSimulation.h"
 #include "rrGetOptions.h"
-#include "args.h"
+#include "rrArgs.h"
+#include "rrUsage.h"
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace rr;
-string Usage(const string& prg);
 
+void ProcessCommandLineArguments(int argc, char* argv[], Args& args);
 int main(int argc, char * argv[])
 {
     string settingsOveride;
     try
     {
-
         LogOutput::mLogToConsole = true;
 
         if(argc < 2)
@@ -43,68 +43,49 @@ int main(int argc, char * argv[])
             exit(0);
         }
 
-        Args Args;
-        char c;
-        while ((c = GetOptions(argc, argv, ("cpv:n:d:t:m:"))) != -1)
-        {
-            switch (c)
-            {
-                case ('v'): Args.LogLevel                      = StringToLogLevel(optarg);     break;
-                case ('c'): Args.OnlyCompile                   = true;                         break;
-                case ('p'): Args.Pause                         = true;                         break;
-                case ('t'): Args.TempDataFolder                = optarg;                       break;
-                case ('d'): Args.DataOutputFolder              = optarg;                       break;
-                case ('m'): Args.ModelFileName                 = optarg;                       break;
-                case ('?'):
-                {
-                        cout<<Usage(argv[0])<<endl;
-                }
-                default:
-                {
-                    string str = argv[optind-1];
-                    if(str != "-?")
-                    {
-                        cout<<"*** Illegal option:\t"<<argv[optind-1]<<" ***\n"<<endl;
-                    }
-                    exit(-1);
-                }
-            }
-        }
+        Args args;
+        ProcessCommandLineArguments(argc, argv, args);
 
-        gLog.SetCutOffLogLevel(Args.LogLevel);
+        gLog.SetCutOffLogLevel(args.LogLevel);
         string logFileName;
 
         RoadRunner *rr = NULL;
-        if(!(Args.TempDataFolder.size()))
+
+        if(args.UseOSTempFolder)
         {
-            throw(rr::Exception("RoadRunner failed to assign a temporary data folder"));
+            args.TempDataFolder = GetUsersTempDataFolder();
         }
 
         gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile("RoadRunner.log")));
         Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
 
         Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
-        SBMLModelSimulation simulation(Args.DataOutputFolder);
+        SBMLModelSimulation simulation(args.DataOutputFolder, args.TempDataFolder);
 
         rr = new RoadRunner();
         rr->Reset();
         simulation.UseEngine(rr);
 
         //The following will load and compile and simulate the sbml model in the file
-        if(!Args.ModelFileName.size())
+        if(!args.ModelFileName.size())
         {
             Log(lInfo)<<"Please supply a sbml model file name, using option -m<modelfilename>";
             goto end;
         }
 
-        simulation.SetModelFileName(Args.ModelFileName);
+        if(!simulation.SetModelFileName(args.ModelFileName))
+        {
+            Log(lInfo)<<"Bad model file";
+            goto end;
+        }
+
         simulation.CompileIfDllExists(true);
         if(!simulation.LoadSBMLFromFile())
         {
             Log(lError)<<"Failed loading SBML model";
             goto end;
         }
-
+        Log(lInfo)<<"SBML semantics was loaded from file: "<<simulation.GetModelsFullFilePath();
         if(!simulation.GenerateModelCode())
         {
             Log(lError)<<"Failed loading SBML model";
@@ -113,11 +94,11 @@ int main(int argc, char * argv[])
 
         if(!simulation.CompileModel())
         {
-                Log(lError)<<"Failed compiling SBML model:" <<Args.ModelFileName;
+            Log(lError)<<"Failed compiling SBML model:" <<args.ModelFileName;
             goto end;
         }
 
-        if(Args.OnlyCompile)
+        if(args.OnlyCompile)
         {
             goto end;
         }
@@ -150,19 +131,24 @@ int main(int argc, char * argv[])
             throw("Failed running simulation");
         }
 
-        //Write result
-        if(!simulation.SaveResult())
+        if(args.DataOutputFolder.size())
         {
-            //Failed to save data
+            //Write result
+            if(!simulation.SaveResult())
+            {
+                //Failed to save data
+            }
         }
-
-        simulation.SaveAllData();
+        else
+        {
+            //Write to std out
+        }
 
         //All paths leads to end..
         end:
 
-        Log(lInfo)<<"Done";
-        if(Args.Pause)
+        Log(lInfo)<<"RoadRunner is exiting...";
+        if(args.Pause)
         {
             Pause();
         }
@@ -176,17 +162,33 @@ int main(int argc, char * argv[])
     return 0;
 }
 
-string Usage(const string& prg)
+void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
 {
-    stringstream usage;
-    usage << "\nUSAGE for "<<prg<<": (options and parameters)\n\n";
-    usage<<left;
-    usage<<setfill('.');
-    usage<<setw(25)<<"-v<debug level>"                <<" Debug level Error, Warning, Info, Debugn, where n is 1-7\n";
-    usage<<setw(25)<<"-? "                              <<" Shows the help screen.\n\n";
-
-    usage<<"\nSystems Biology, UW 2012\n";
-    return usage.str();
+    char c;
+    while ((c = GetOptions(argc, argv, ("cpuv:n:d:t:m:"))) != -1)
+    {
+        switch (c)
+        {
+            case ('v'): args.LogLevel                      = StringToLogLevel(optarg);     break;
+            case ('c'): args.OnlyCompile                   = true;                         break;
+            case ('p'): args.Pause                         = true;                         break;
+            case ('t'): args.TempDataFolder                = optarg;                       break;
+            case ('d'): args.DataOutputFolder              = optarg;                       break;
+            case ('m'): args.ModelFileName                 = optarg;                       break;
+            case ('u'): args.UseOSTempFolder               = true;                         break;
+            case ('?'):
+            {
+                    cout<<Usage(argv[0])<<endl;
+            }
+            default:
+            {
+                string str = argv[optind-1];
+                if(str != "-?")
+                {
+                    cout<<"*** Illegal option:\t"<<argv[optind-1]<<" ***\n"<<endl;
+                }
+                exit(-1);
+            }
+        }
+    }
 }
-
-

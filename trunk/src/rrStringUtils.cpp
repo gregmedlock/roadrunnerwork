@@ -136,7 +136,7 @@ string JoinPath(const string& aPath, const string& aFile)
     {
         if(aPath[aPath.size() - 1] != '\\')
         {
-            return aPath + "\\" + aFile;
+            return aPath + "/" + aFile;
         }
         return aPath + aFile;
     }
@@ -160,40 +160,75 @@ string NL()
     return newLine.str();
 }
 
-string GetPathNoFileName(const string& fPathAndName)
+
+string ExtractFileName(const string& fileN)
 {
-    string file = fPathAndName;
-    //Check if the file comes with a path..
-    string separators = "\\";
-    int start = file.find_first_of(separators);
-    int end   = file.find_last_of(separators);
-    if(start < 0)//no path
+    string fName;
+    if(fileN.find_last_of( '\\' ) != std::string::npos)
     {
-        return string("");
+        fName = fileN.substr(fileN.find_last_of( '\\' )+ 1, fileN.size());
+        return fName;
     }
-    else
+    else if(fileN.find_last_of( '/' ) != std::string::npos)
     {
-        return string(file.erase(end, file.size()));
+        fName = fileN.substr(fileN.find_last_of( '/' ) + 1, fileN.size());
+        return fName;
     }
+
+    return fileN;
 }
 
-string GetFileNameNoPath(const string& fName)
+string ExtractFilePath(const string& fileN)
 {
-    vector<string> fNameParts = SplitString(fName,"\\");
-    string aFName(fName);
-    if(fNameParts.size())
+    string path;
+    if(fileN.find_last_of( '\\' ) != std::string::npos)
     {
-        aFName = fNameParts[fNameParts.size() - 1];
+        path = fileN.substr( 0, fileN.find_last_of( '\\' ));
+        return path;
     }
-    return aFName;
+    else if(fileN.find_last_of( '/' ) != std::string::npos)
+    {
+        path = fileN.substr( 0, fileN.find_last_of( '/' ));
+        return path;
+    }
+
+    return "";
 }
+
+//string GetPathNoFileName(const string& fPathAndName)
+//{
+//    string file = fPathAndName;
+//    //Check if the file comes with a path..
+//    string separators = "\\";
+//    int start = file.find_first_of(separators);
+//    int end   = file.find_last_of(separators);
+//    if(start < 0)//no path
+//    {
+//        return string("");
+//    }
+//    else
+//    {
+//        return string(file.erase(end, file.size()));
+//    }
+//}
+//
+//string GetFileNameNoPath(const string& fName)
+//{
+//    vector<string> fNameParts = SplitString(fName,"\\");
+//    string aFName(fName);
+//    if(fNameParts.size())
+//    {
+//        aFName = fNameParts[fNameParts.size() - 1];
+//    }
+//    return aFName;
+//}
 
 string ChangeFileExtensionTo(const string& fName, const string& newExtension)
 {
     string newFName;
 
     //First create the file name, remove current extension if it exists
-    if(fName.find('.'))
+    if(fName.find_last_of('.'))
     {
         //Extension does exist. Cut it, and append new one
         newFName =  fName.substr(0, fName.find_last_of('.'));
