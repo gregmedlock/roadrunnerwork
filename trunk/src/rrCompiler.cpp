@@ -2,7 +2,6 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
-#include <windows.h>        //For HINSTANCE and other
 #include <sstream>
 #if defined(__CODEGEARC__)
 #include <dir.h>
@@ -15,7 +14,6 @@
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 //---------------------------------------------------------------------------
-
 
 using namespace std;
 namespace rr
@@ -31,6 +29,7 @@ mSupportCodeFolder("../rr_support")
     mIncludePaths.push_back(".");
     mLibraryPaths.push_back(".");
     mIncludePaths.push_back("../rr_support");
+    mIncludePaths.push_back("./include");
     mLibraryPaths.push_back(".");
 
 }
@@ -147,25 +146,6 @@ bool Compiler::Compile(const string& cmdLine)
     CloseHandle( pi.hProcess );
     CloseHandle( pi.hThread );
     return true;
-}
-
-
-HINSTANCE LoadDLL(const string& dll)
-{
-    HINSTANCE hLib = LoadLibraryA(dll.c_str());
-
-    if(hLib == NULL)
-    {
-        Log(lError) << "Unable to load library!" << endl;
-        return NULL;
-    }
-
-    TCHAR mod[MAX_MODULE];
-    GetModuleFileNameA((HMODULE)hLib, (LPSTR) mod, MAX_MODULE);
-    string name(mod);
-
-    Log(lDebug) << "DLL Library loaded: " <<name.c_str() << endl;
-    return hLib;
 }
 
 //    private:

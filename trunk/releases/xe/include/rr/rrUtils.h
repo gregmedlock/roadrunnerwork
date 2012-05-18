@@ -1,6 +1,7 @@
 #ifndef rrUtilsH
 #define rrUtilsH
 //---------------------------------------------------------------------------
+#include <windows.h>
 #include <float.h>    //ms compatible IEEE functions, e.g. _isnan
 #include <vector>
 #include <string>
@@ -33,6 +34,7 @@ bool            RR_DECLSPEC CopyStdVectorToCArray(vector<bool>&   src,  bool*  d
 
 double*         RR_DECLSPEC CreateCVectorFromStdVector(const vector<double>& vec);
 
+HINSTANCE       LoadDLL(const string& dll);
 }
 
 #endif

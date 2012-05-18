@@ -3,7 +3,6 @@
 #include <windows.h>
 #include <vector>
 #include <string>
-
 #include "rrObject.h"
 #include "rrStringList.h"
 
@@ -16,7 +15,6 @@ namespace rr
     /// the Compile class was written out of the idea to generate wrapper
     /// classes in memory at runtime and then compile them ...
     /// </summary>
-HINSTANCE LoadDLL(const string& dll);
 
 class RR_DECLSPEC Compiler : public rrObject
 {

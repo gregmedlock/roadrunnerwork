@@ -226,5 +226,22 @@ double*    CreateCVectorFromStdVector(const vector<double>& vec)
     return avec;
 }
 
+HINSTANCE LoadDLL(const string& dll)
+{
+    HINSTANCE hLib = LoadLibraryA(dll.c_str());
+
+    if(hLib == NULL)
+    {
+        Log(lError) << "Unable to load library!" << endl;
+        return NULL;
+    }
+
+    TCHAR mod[MAX_MODULE];
+    GetModuleFileNameA((HMODULE)hLib, (LPSTR) mod, MAX_MODULE);
+    string name(mod);
+
+    Log(lDebug) << "DLL Library loaded: " <<name.c_str() << endl;
+    return hLib;
+}
 
 }//end of namespace
