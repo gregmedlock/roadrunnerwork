@@ -31,6 +31,10 @@ string Usage(const string& prg);
 
 int main(int argc, char * argv[])
 {
+    try
+    {
+
+    LogOutput::mLogToConsole = true;
 
     if(argc < 2)
     {
@@ -40,15 +44,16 @@ int main(int argc, char * argv[])
 
     Paras paras;
     char c;
-    while ((c = GetOptions(argc, argv, ("cpn:v:"))) != -1)
+    while ((c = GetOptions(argc, argv, ("cpv:n:d:t:m:"))) != -1)
     {
         switch (c)
         {
-            case ('n'): paras.CaseNumber                  	= ToInt(optarg);        break;
-            case ('v'): paras.VerboseMode  		           	= ToInt(optarg);        break;
-            case ('c'): paras.OnlyCompile                 	= true;                 break;
-            case ('p'): paras.Pause		                  	= true;                 break;
-
+            case ('v'): paras.LogLevel                      = StringToLogLevel(optarg);     break;
+            case ('c'): paras.OnlyCompile                   = true;                         break;
+            case ('p'): paras.Pause                         = true;                         break;
+            case ('t'): paras.TempDataFolder                = optarg;                       break;
+            case ('d'): paras.DataOutputFolder              = optarg;                       break;
+            case ('m'): paras.ModelFileName                 = optarg;                       break;
             case ('?'):
             {
                     cout<<Usage(argv[0])<<endl;
@@ -64,48 +69,44 @@ int main(int argc, char * argv[])
             }
         }
     }
-    LogOutput::mLogToConsole = true;
-    gLog.SetCutOffLogLevel(IntToLogLevel(paras.VerboseMode) -2 );
 
-    string dataOutputFolder("C:\\DataOutput");
-    string dummy;
+
+    gLog.SetCutOffLogLevel(paras.LogLevel);
     string logFileName;
 
-    CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
     RoadRunner *rr = NULL;
-    try
+    if(!(paras.TempDataFolder.size()))
     {
-        //Create subfolder for data output
-        dataOutputFolder = JoinPath(dataOutputFolder, GetTestSuiteSubFolderName(paras.CaseNumber));
+        throw(rr::Exception("RoadRunner failed to assign a temporary data folder"));
+    }
 
-        if(!CreateFolder(dataOutputFolder))
-        {
-            throw(Exception("Failed creating output folder for data output"));
-        }
 
-        gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
-        Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
+    gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile("RoadRunner.log")));
+    Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
 
-        Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
-        SBMLModelSimulation simulation(dataOutputFolder);
+    Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+    SBMLModelSimulation simulation(paras.DataOutputFolder);
 
-        //dataOutputFolder += dummy;
-        rr = new RoadRunner();
-        rr->Reset();
-        simulation.UseEngine(rr);
+    rr = new RoadRunner();
+    rr->Reset();
+    simulation.UseEngine(rr);
 
-        //Read SBML models.....
-        string modelFilePath("C:\\SBMLTestCases\\all");
-        string modelFileName;
+    //Read SBML models.....
+    string modelFilePath("C:\\SBMLTestCases\\all");
+    string modelFileName;
 
-        simulation.SetCaseNumber(paras.CaseNumber);
-        CreateTestSuiteFileNameParts(paras.CaseNumber, "-sbml-l2v4.xml", modelFilePath, modelFileName);
 
-        //The following will load and compile and simulate the sbml model in the file
-        simulation.SetModelFilePath(modelFilePath);
-        simulation.SetModelFileName(modelFileName);
+    //The following will load and compile and simulate the sbml model in the file
+    simulation.SetModelFileName(paras.ModelFileName);
+
+
+    if(!paras.ModelFileName.size())
+    {
+        Log(lInfo)<<"Please supply a sbml model file name, using option -m<modelfilename>";
+    }
+    else
+    {
         simulation.CompileIfDllExists(true);
-
         if(!simulation.LoadSBMLFromFile())
         {
             Log(lError)<<"Failed loading SBML model";
@@ -120,7 +121,7 @@ int main(int argc, char * argv[])
 
         if(!simulation.CompileModel())
         {
-                Log(lError)<<"Failed compiling SBML model:" <<paras.CaseNumber;
+                Log(lError)<<"Failed compiling SBML model:" <<paras.ModelFileName;
             goto end;
         }
 
@@ -149,7 +150,7 @@ int main(int argc, char * argv[])
             Log(lError)<<"Failed loading SBML model settings";
         }
 
-//        rr->ComputeAndAssignConservationLaws(true);
+        //        rr->ComputeAndAssignConservationLaws(true);
         //Then Simulate model
         if(!simulation.Run())
         {
@@ -163,41 +164,27 @@ int main(int argc, char * argv[])
             //Failed to save data
         }
 
-        if(!simulation.LoadReferenceData())
-        {
-            Log(lError)<<"Failed loading reference data";
-        }
-
-
-        simulation.CreateErrorData();
-
-        //Check error data.. if an error in the set is larger than threshold, signal an error
-        if(simulation.GetSimulationError() > paras.ErrorThreshold)
-        {
-            Log(lError)<<"********** Error larger than "<<paras.ErrorThreshold;
-        }
-        else
-        {
-            Log(lError)<<"Passed Test: "<<paras.CaseNumber<<" Largest error was: "<<simulation.GetSimulationError();
-        }
-
         simulation.SaveAllData();
-        simulation.SaveModelAsXML(dataOutputFolder);
 
+        }
+
+        end:
+
+        Log(lInfo)<<"Done";
+        if(paras.Pause)
+        {
+            Pause();
+        }
+
+        delete rr;
     }
-    catch(Exception& ex)
+    catch(rr::Exception& ex)
     {
         Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
     }
 
-    end:    //I have not used a label in 15 years!
-    delete rr;
-    Log(lInfo)<<"Done";
-	if(paras.Pause)
-	{
-    	Pause();
-	}
-        return 0;
+
+    return 0;
 }
 
 string Usage(const string& prg)
@@ -206,9 +193,8 @@ string Usage(const string& prg)
     usage << "\nUSAGE for "<<prg<<": (options and parameters)\n\n";
     usage<<left;
     usage<<setfill('.');
-    usage<<setw(25)<<"-n\"number\" "    <<" TestSuite number\n";
-    usage<<setw(25)<<"-v"                <<" Verbose mode. Ouputs information during program execution\n";
-    usage<<setw(25)<<"-? "               <<" Shows the help screen.\n\n";
+    usage<<setw(25)<<"-v<debug level>"                <<" Debug level Error, Warning, Info, Debugn, where n is 1-7\n";
+    usage<<setw(25)<<"-? "                              <<" Shows the help screen.\n\n";
 
     usage<<"\nSystems Biology, UW 2012\n";
     return usage.str();

@@ -1,29 +1,24 @@
 //---------------------------------------------------------------------------
 #ifndef CommandLineParametersH
 #define CommandLineParametersH
+#include <windows.h>
+#include <shlobj.h>
+#include "rrUtils.h"
+#include "rrLogger.h"
 //---------------------------------------------------------------------------
-
+using namespace rr;
 class Paras
 {
     public:
-        								Paras();
-        virtual 		               ~Paras(){}
-		int								CaseNumber;
-        double							ErrorThreshold;
-        bool							OnlyCompile;
-        bool							Pause;
-        int                             VerboseMode;
-
+                                        Paras();
+        virtual                        ~Paras(){}
+        bool                            OnlyCompile;
+        bool                            Pause;
+        LogLevel                        LogLevel;
+        string                          DataOutputFolder;   //option d:
+        string                          TempDataFolder;     //option t:
+        string                          ModelFileName;      //option m:
 };
 
-Paras::Paras()
-:
-CaseNumber(1),
-ErrorThreshold(1.e-6),
-OnlyCompile(false),
-Pause(false)
-{
-
-}
 
 #endif
