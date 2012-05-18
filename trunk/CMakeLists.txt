@@ -159,7 +159,7 @@ install (FILES 	${tcc} DESTINATION bin/include/winapi COMPONENT rr_core)
 include (InstallRequiredSystemLibraries)
 
 #COMPONENTS OF THE INSTALL
-set(CPACK_COMPONENTS_ALL rr_core c_api compiled_examples example_files sbml_models)
+set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models)
 
 
 #set(CPACK_COMPONENT_RR_CORE_GROUP							"Core")

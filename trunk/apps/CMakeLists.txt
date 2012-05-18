@@ -1,5 +1,5 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
-PROJECT(rrExamples)
+PROJECT(Apps)
 set(RR_INCLUDE_ROOT "../src")
 
 # rr Includes
@@ -14,11 +14,12 @@ if(${MSVC})
 endif(${MSVC})
 
 set(examples 	
-	validate_sbml
+		rr
 )
 
 foreach(example ${examples})
  	add_subdirectory(${example})
+# install (FILES ${example}/${example}.cbproj 	DESTINATION Examples/${example} COMPONENT example_files)
 	FILE (GLOB hdrs ${example}/*.h)
  	install (FILES ${hdrs} 						DESTINATION Examples/${example}	COMPONENT example_files)
 	FILE (GLOB src ${example}/*.cpp)
@@ -27,7 +28,5 @@ foreach(example ${examples})
  	install (FILES ${example}/CMakeLists.txt 		DESTINATION Examples/${example}	COMPONENT example_files)
 endforeach(example)
 
-#install (FILES auto_link.h 			DESTINATION Examples COMPONENT example_files)
 install (FILES Readme.txt 			DESTINATION Examples COMPONENT info)
-#install (FILES Examples.groupproj 	DESTINATION Examples COMPONENT example_files)
 install (FILES CMakeLists.txt 		DESTINATION Examples COMPONENT example_files)
