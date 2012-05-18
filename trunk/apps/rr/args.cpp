@@ -1,12 +1,12 @@
 #ifdef USE_PCH
-#include "rrPCH.h"
+#include "rr_pch.h"
 #endif
 #pragma hdrstop
-#include "CommandLineParameters.h"
+#include "args.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
-Paras::Paras()
+Args::Args()
 :
 OnlyCompile(false),
 Pause(false),

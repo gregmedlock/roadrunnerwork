@@ -43,7 +43,7 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\src\;..\..\..\Examples\rr\;$(rr_root)\src\;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(rr_root)\src\libstruct;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\..\apps\rr\;..\..\..\src\;..\..\..\Examples\rr\;$(rr_root)\src\;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(rr_root)\src\libstruct;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\..\src\;..\..\..\releases\xe\shared\link\;..\..\..\builds\xe\clapack\SRC\;..\..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\installs\xe\lib\;..\..\..\Examples\rr\;..\..\..\releases\xe\link\;..\..\..\installs\xe\bin\;..\..\..\Apps\rr\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>
@@ -81,6 +81,12 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="..\..\..\apps\rr\args.cpp">
+				<BuildOrder>9</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\apps\rr\rr.cpp">
+				<BuildOrder>9</BuildOrder>
+			</CppCompile>
 			<LibFiles Include="..\..\..\builds\xe\clapack\BLAS\SRC\blas.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>7</BuildOrder>
@@ -93,13 +99,6 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>9</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\..\..\Examples\rr\CommandLineParameters.cpp">
-				<DependentOn>..\..\..\Examples\rr\CommandLineParameters.h</DependentOn>
-				<BuildOrder>1</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\..\Examples\rr\rr.cpp">
-				<BuildOrder>2</BuildOrder>
-			</CppCompile>
 			<LibFiles Include="..\..\..\installs\xe\lib\libsbml-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>

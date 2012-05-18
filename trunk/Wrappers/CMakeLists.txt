@@ -4,12 +4,6 @@ set(RR_INCLUDE_ROOT "../src")
 
 # rr Includes
 include_directories(${RR_INCLUDE_ROOT})
-include_directories(${RR_INCLUDE_ROOT}/Common)
-include_directories(${RR_INCLUDE_ROOT}/LibStructSupport)
-include_directories(${RR_INCLUDE_ROOT}/LibStructSupport/libstruct)
-include_directories(${RR_INCLUDE_ROOT}/ModelGeneration)
-include_directories(${RR_INCLUDE_ROOT}/Scanner)
-include_directories(${RR_INCLUDE_ROOT}/Solvers)
 include_directories(${RR_INCLUDE_ROOT}/C_src)
 include_directories(${SBML_INSTALL_FOLDER}/include)
 include_directories(${SBML_INSTALL_FOLDER}/include/sbml)
@@ -26,5 +20,4 @@ set(wrapper "C")
 endif()
 
 install (FILES Readme.txt 			DESTINATION Examples COMPONENT wrappers)
-#install (FILES Examples.groupproj 	DESTINATION Examples COMPONENT wrappers)
 install (FILES CMakeLists.txt 		DESTINATION Examples COMPONENT wrappers)

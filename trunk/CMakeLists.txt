@@ -8,13 +8,12 @@ SET(RR_MINOR_VERSION 5)
 SET(RR_BUILD_VERSION 11)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
-OPTION (BUILD_C_API	 			"Build C API" 				OFF)
-OPTION (BUILD_EXAMPLES			"Build Examples"			OFF)
-#OPTION (BUILD_SHARED_LIBS 		"Build Shared Libraries" 	OFF)
+OPTION (BUILD_C_API	 			"Create C API DLL" 					OFF)
+OPTION (BUILD_EXAMPLES			"Build and install Examples"		OFF)
+OPTION (INSTALL_STATIC_LIB		"Install RoadRunner static lib"		OFF)
 
 #Setup so that roadrunner is always built as a dll and linked statically with 'as much as possible'
-
-set(BUILD_SHARED_LIBS 										ON)
+set(BUILD_SHARED_LIBS 												ON)
 
 set(RR_ROOT 					${CMAKE_CURRENT_SOURCE_DIR})
 set(RR_SOURCE_ROOT 				${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -110,16 +109,9 @@ ENDIF (BUILD_SHARED_LIBS)
 add_subdirectory(src)
 add_subdirectory(Wrappers)
 
+add_subdirectory(apps)
 #======================= INSTALL ========================================================
 install (FILES src/rr_pch.h	DESTINATION include COMPONENT rr_core)
-
-#FILE (GLOB libs ${lib_path}/*.lib)
-#install (FILES ${libs}	DESTINATION lib COMPONENT rr_core)
-
-#if(${BUILD_SHARED_LIBS})
-#FILE (GLOB dlls ${exe_path}/*.dll)
-#install (FILES ${dlls}	DESTINATION bin COMPONENT rr_core)
-#endif()
 
 if(${BUILD_EXAMPLES})
 add_subdirectory(Examples)
@@ -168,6 +160,8 @@ set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml
 
 #set(CPACK_COMPONENT_RR_CORE_REQUIRED						ON)
 set(CPACK_COMPONENT_RR_CORE_DISPLAY_NAME					"Core Files")
+set(CPACK_COMPONENT_APPS_DISPLAY_NAME						"Applications")
+set(CPACK_COMPONENT_C_API_DISPLAY_NAME						"C API DLL")
 #set(CPACK_COMPONENT_BUILD_FILES_DEPENDS example_files)
 set(CPACK_COMPONENT_COMPILED_EXAMPLES_DISPLAY_NAME			"Compiled Examples")
 set(CPACK_COMPONENT_EXAMPLE_FILES_DISPLAY_NAME				"Examples Source and Readme files")
@@ -181,9 +175,10 @@ set(CPACK_NSIS_INSTALL_ROOT									"C:")
 
 #COMPONENTS
 set(CPACK_COMPONENT_RR_CORE_DESCRIPTION						"Headers (.h), link library files (.lib) and if a dynamic disribution, dynamic link libraries (.dll's)")
+set(CPACK_COMPONENT_APPS_DESCRIPTION						"Applications using RoadRunner API")
+set(CPACK_COMPONENT_C_API_DESCRIPTION						"C API Wrapper for RoadRunner")
 set(CPACK_COMPONENT_COMPILED_EXAMPLES_DESCRIPTION			"This will install pre-compiled binaries for all examples")
 set(CPACK_COMPONENT_EXAMPLE_FILES_DESCRIPTION				"Examples Source")
-#set(CPACK_COMPONENT_BUILD_FILES_DESCRIPTION					"Build Files")
 set(CPACK_COMPONENT_SBML_MODELS_DESCRIPTION					"Install various SBML Model files")
 
 set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/License.txt")

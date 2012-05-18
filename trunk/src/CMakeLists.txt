@@ -1,9 +1,5 @@
 
-IF(BUILD_SHARED_LIBS)
-set(target rr) 
-ELSE()
-set(target rr_static)
-ENDIF()
+set(target roadrunner) 
 
 include_directories(
 . 
@@ -79,30 +75,17 @@ libstruct/sbmlmodel.cpp
 libstruct/util.cpp
 )
 
-add_library(${target} ${LIB_TYPE}
-${rrSources}
-)
+#Build both static and shared version
+#Link with static libs
+add_library(${target} 			SHARED ${rrSources})
+add_library(${target}-static 	STATIC ${rrSources})
 
-add_library(${target}-static STATIC
-${rrSources}
-)
-
-
-if(BUILD_SHARED_LIBS)
-	add_definitions(-DEXPORT_RR)
-	if(${BORLAND})
+add_definitions(-DEXPORT_RR)
+if(${BORLAND})
 	set_property(DIRECTORY 		PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
-	endif(${BORLAND})
-else()
-add_definitions(-DNO_RR_DLL) 
-endif()
+endif(${BORLAND})
 
-#IF(BUILD_SHARED_LIBS) 
-#target_link_libraries (${target} libsbml)
-#ELSE()
-#Link with static libsbml, always..
 target_link_libraries (${target} libsbml-static)
-#ENDIF()
 
 target_link_libraries (${target} libxml2_xe)
 target_link_libraries (${target} sundials_cvode)
@@ -111,6 +94,14 @@ target_link_libraries (${target} blas)
 target_link_libraries (${target} lapack)
 target_link_libraries (${target} libf2c)
 
+target_link_libraries (${target}-static libsbml-static)
+target_link_libraries (${target}-static libxml2_xe)
+target_link_libraries (${target}-static sundials_cvode)
+target_link_libraries (${target}-static sundials_nvecserial)
+target_link_libraries (${target}-static blas)
+target_link_libraries (${target}-static lapack)
+target_link_libraries (${target}-static libf2c)
+
 set(subfolders 
 .
 ./C_src 
@@ -118,11 +109,11 @@ set(subfolders
 )
 
 #--- INSTALL
-IF(BUILD_SHARED_LIBS) 
-install (FILES ${SBML_INSTALL_FOLDER}/bin/libsbml.dll	DESTINATION bin COMPONENT rr_core)
 install (FILES ${lib_path}/${target}.lib	DESTINATION lib COMPONENT rr_core)
-ELSE()
-ENDIF()
+
+if(INSTALL_STATIC_LIB)
+install (FILES ${lib_path}/${target}-static.lib	DESTINATION lib COMPONENT rr_core)
+endif()
 
 foreach(subfolder ${subfolders})
 FILE (GLOB headers ${subfolder}/*.h)

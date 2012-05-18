@@ -13,20 +13,20 @@ include_directories(${CVODE_INSTALL_FOLDER}/include/cvode)
 if(${MSVC})
 endif(${MSVC})
 
-set(examples 	
+set(apps 	
 		rr
 )
 
-foreach(example ${examples})
- 	add_subdirectory(${example})
-# install (FILES ${example}/${example}.cbproj 	DESTINATION Examples/${example} COMPONENT example_files)
-	FILE (GLOB hdrs ${example}/*.h)
- 	install (FILES ${hdrs} 						DESTINATION Examples/${example}	COMPONENT example_files)
-	FILE (GLOB src ${example}/*.cpp)
- 	install (FILES ${src} 						DESTINATION Examples/${example}	COMPONENT example_files)
- 	install (FILES ${example}/Readme.txt 			DESTINATION Examples/${example}	COMPONENT example_files)
- 	install (FILES ${example}/CMakeLists.txt 		DESTINATION Examples/${example}	COMPONENT example_files)
-endforeach(example)
+foreach(app ${apps})
+ 	add_subdirectory(${app})
+# install (FILES ${app}/${app}.cbproj 	DESTINATION Examples/${app} COMPONENT example_files)
+	FILE (GLOB hdrs ${app}/*.h)
+ 	install (FILES ${hdrs} 						DESTINATION Examples/${app}	COMPONENT example_files)
+	FILE (GLOB src ${app}/*.cpp)
+ 	install (FILES ${src} 						DESTINATION Examples/${app}	COMPONENT example_files)
+ 	install (FILES ${app}/Readme.txt 			DESTINATION Examples/${app}	COMPONENT example_files)
+ 	install (FILES ${app}/CMakeLists.txt 		DESTINATION Examples/${app}	COMPONENT example_files)
+endforeach(app)
 
 install (FILES Readme.txt 			DESTINATION Examples COMPONENT info)
 install (FILES CMakeLists.txt 		DESTINATION Examples COMPONENT example_files)

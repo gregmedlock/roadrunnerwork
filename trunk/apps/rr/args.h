@@ -7,11 +7,11 @@
 #include "rrLogger.h"
 //---------------------------------------------------------------------------
 using namespace rr;
-class Paras
+class Args
 {
     public:
-                                        Paras();
-        virtual                        ~Paras(){}
+                                        Args();
+        virtual                        ~Args(){}
         bool                            OnlyCompile;
         bool                            Pause;
         LogLevel                        LogLevel;

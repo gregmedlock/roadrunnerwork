@@ -2,7 +2,7 @@
 #pragma hdrstop
 #include <windows.h>
 #include "rrRoadRunner.h"
-#include "rrC_API.h"
+#include "rr_c_api.h"
 //---------------------------------------------------------------------------
 
 rr::RoadRunner *gRRHandle = NULL;
