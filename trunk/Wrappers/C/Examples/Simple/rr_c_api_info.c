@@ -10,7 +10,6 @@ int main()
     RRDataMatrixHandle matrix;
     printf("This is c \n");
 
-
     handle  = getRRInstance();
     text    = getCopyright();
     printf("In C: %s", text);

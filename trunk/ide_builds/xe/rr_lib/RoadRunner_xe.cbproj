@@ -22,11 +22,11 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<BPILibOutputDir>C:\rrw\releases\xe\shared\link</BPILibOutputDir>
+			<BPILibOutputDir>$(RR_ROOT)\installs\xe\lib</BPILibOutputDir>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<FinalOutputDir>C:\rrw\releases\xe\shared\bin\</FinalOutputDir>
+			<FinalOutputDir>$(RR_ROOT)\installs\xe\bin\</FinalOutputDir>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
 			<Defines>EXPORT_RR;NO_NOM_DLL;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;LIB_EXPORTS;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>

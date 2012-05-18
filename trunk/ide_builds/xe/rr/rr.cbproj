@@ -18,19 +18,13 @@
 			<CfgParent>Base</CfgParent>
 			<Base>true</Base>
 		</PropertyGroup>
-		<PropertyGroup Condition="'$(Platform)'=='Win32' and '$(Cfg_1)'=='true' or '$(Cfg_1_Win32)'!=''">
-			<Cfg_1_Win32>true</Cfg_1_Win32>
-			<CfgParent>Cfg_1</CfgParent>
-			<Cfg_1>true</Cfg_1>
-			<Base>true</Base>
-		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
 			<Cfg_2>true</Cfg_2>
 			<CfgParent>Base</CfgParent>
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<FinalOutputDir>C:\rrw\releases\xe\shared\bin\</FinalOutputDir>
+			<FinalOutputDir>$(RR_ROOT)\installs\xe\bin\</FinalOutputDir>
 			<LinkPackageStatics>vcl.lib;mtkCommonRTL.lib</LinkPackageStatics>
 			<Manifest_File>None</Manifest_File>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -39,7 +33,7 @@
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<Defines>IMPORT_RR;BUILD_MODEL_DLL;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
+			<Defines>BUILD_MODEL_DLL;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
@@ -49,8 +43,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\Examples\simulate_sbml\;..\..\..\Apps\simulate_sbml\;$(rr_root)\src\;$(rr_root)\src\Scanner;$(rr_root)\src\LibStructSupport;$(rr_root)\src\Solvers;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(rr_root)\src\Common;$(rr_root)\src\ModelGeneration;$(rr_root)\src\LibStructSupport\libstruct;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\releases\xe\shared\link\;..\..\..\builds\xe\clapack\SRC\;..\..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\installs\xe\lib\;..\..\..\Examples\simulate_sbml\;..\..\..\releases\xe\link\;..\..\..\installs\xe\bin\;..\..\..\Apps\simulate_sbml\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\src\;..\..\..\Examples\rr\;$(rr_root)\src\;$(rr_root)\installs\xe\include;$(rr_root)\installs\xe\include\sbml;$(rr_root)\installs\xe\include\cvode;$(rr_root)\src\libstruct;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\src\;..\..\..\releases\xe\shared\link\;..\..\..\builds\xe\clapack\SRC\;..\..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\installs\xe\lib\;..\..\..\Examples\rr\;..\..\..\releases\xe\link\;..\..\..\installs\xe\bin\;..\..\..\Apps\rr\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
@@ -82,9 +76,6 @@
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 		</PropertyGroup>
-		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-			<FinalOutputDir>C:\rrw\releases\xe\shared\bin\</FinalOutputDir>
-		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
 			<Defines>NDEBUG;$(Defines)</Defines>
 			<TASM_Debugging>None</TASM_Debugging>
@@ -102,16 +93,20 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>9</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\..\..\Examples\simulate_sbml\CommandLineParameters.cpp">
-				<DependentOn>..\..\..\Examples\simulate_sbml\CommandLineParameters.h</DependentOn>
+			<CppCompile Include="..\..\..\Examples\rr\CommandLineParameters.cpp">
+				<DependentOn>..\..\..\Examples\rr\CommandLineParameters.h</DependentOn>
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\Examples\simulate_sbml\simulate_sbml.cpp">
+			<CppCompile Include="..\..\..\Examples\rr\rr.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
 			<LibFiles Include="..\..\..\installs\xe\lib\libsbml-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\..\installs\xe\lib\RoadRunner_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>9</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="..\..\..\installs\xe\lib\sundials_cvode.lib">
 				<IgnorePath>true</IgnorePath>
@@ -120,10 +115,6 @@
 			<LibFiles Include="..\..\..\installs\xe\lib\sundials_nvecserial.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>5</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\..\..\releases\xe\shared\link\RoadRunner_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>9</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="..\..\..\ThirdParty\libsbml_dependencies\lib\libxml2_xe.lib">
 				<IgnorePath>true</IgnorePath>
@@ -182,11 +173,11 @@
 						<ProjectProperties Name="VerifyPackages">False</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="DebugSourceDirs">C:\RRW\src\cxx</Parameters>
-						<Parameters Name="RunParams">-n41 -v4</Parameters>
+						<Parameters Name="DebugSourceDirs">C:\RRW\src</Parameters>
+						<Parameters Name="RunParams">-n41 -vDebug3 -tC:\\RRTemp -dc:\\RRDataOutput</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-n173 -v7</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-vDebug3 -mfeedback.xml</Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

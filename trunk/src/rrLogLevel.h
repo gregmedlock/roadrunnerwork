@@ -24,11 +24,11 @@ RR_DECLSPEC enum  LogLevel
         lUser
     };
 
-string               RR_DECLSPEC ToUpperCase(const string& inStr);
-int                RR_DECLSPEC GetHighestLogLevel();
-LogLevel         RR_DECLSPEC StringToLogLevel(const string& level);
-string          RR_DECLSPEC LogLevelToString(const LogLevel& level);
-LogLevel         RR_DECLSPEC IntToLogLevel(const int& lvl);
+string         RR_DECLSPEC ToUpperCase(const string& inStr);
+int            RR_DECLSPEC GetHighestLogLevel();
+LogLevel       RR_DECLSPEC StringToLogLevel(const string& level);
+string         RR_DECLSPEC LogLevelToString(const LogLevel& level);
+LogLevel       RR_DECLSPEC IntToLogLevel(const int& lvl);
 
 }
 #endif

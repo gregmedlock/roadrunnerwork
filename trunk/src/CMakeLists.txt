@@ -112,17 +112,15 @@ target_link_libraries (${target} lapack)
 target_link_libraries (${target} libf2c)
 
 set(subfolders 
-Common 
-Scanner 
-ModelGeneration 
-C_src 
-Solvers 
-LibStructural 
-LibStructural/libstruct)
+.
+./C_src 
+./libstruct
+)
 
 #--- INSTALL
 IF(BUILD_SHARED_LIBS) 
 install (FILES ${SBML_INSTALL_FOLDER}/bin/libsbml.dll	DESTINATION bin COMPONENT rr_core)
+install (FILES ${lib_path}/${target}.lib	DESTINATION lib COMPONENT rr_core)
 ELSE()
 ENDIF()
 
@@ -131,7 +129,6 @@ FILE (GLOB headers ${subfolder}/*.h)
 install (FILES ${headers}			 		DESTINATION include/rr COMPONENT rr_core)
 endforeach(subfolder)
 
-install (FILES ${lib_path}/${target}.lib	DESTINATION link COMPONENT rr_core)
 
 if(BUILD_SHARED_LIBS)
 install (FILES ${exe_path}/${target}.dll	DESTINATION bin COMPONENT rr_core)
@@ -145,9 +142,9 @@ endforeach()
 
 ##== We also need to copy the libxml.lib file to install folder, if we want to link any program with the rr library
 #if(${BORLAND})
-#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/libxml2_xe.lib	DESTINATION link COMPONENT Libs)
+#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/libxml2_xe.lib	DESTINATION lib COMPONENT Libs)
 #else()
-#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/libxml2.lib		DESTINATION link COMPONENT Libs)
+#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/libxml2.lib		DESTINATION lib COMPONENT Libs)
 #endif()
 
 

@@ -2,6 +2,7 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
+#include <windows.h>
 #include <io.h>
 #include <dir.h>
 #include <algorithm>
@@ -67,13 +68,21 @@ void Pause(bool doIt)
 
 bool FileExists(const string& fName)
 {
-      if (!fName.size())
-     {
+    if (!fName.size())
+    {
         return false;
     }
     bool res = (access(fName.c_str(), 0) == 0);
     return res;
 }
+
+bool FolderExists(const string& folderName)
+{
+    LPCTSTR szPath = folderName.c_str();
+    DWORD dwAttrib = GetFileAttributes(szPath);
+    return (dwAttrib != INVALID_FILE_ATTRIBUTES && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY));
+}
+
 
 void CreateTestSuiteFileNameParts(int caseNr, const string& postFixPart, string& modelFilePath, string& modelName)
 {

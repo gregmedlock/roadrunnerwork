@@ -12,7 +12,7 @@ namespace rr
 {
 
 char    *optarg;        // global argument pointer
-int        optind = 0;     // global argv index
+int      optind = 0;     // global argv index
 
 int GetOptions(int argc, char *argv[], char *optstring)
 {
