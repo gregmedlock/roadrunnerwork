@@ -31,6 +31,7 @@ mSupportCodeFolder("../rr_support")
     mIncludePaths.push_back("../rr_support");
     mIncludePaths.push_back("./include");
     mLibraryPaths.push_back(".");
+    mLibraryPaths.push_back("./lib");
 
 }
 
@@ -66,7 +67,7 @@ string Compiler::CreateCompilerCommand(const string& compiler, const string& sou
         //-g adds runtime debug information
         //-v is for verbose
         //-rdynamic : Export global symbols to the dynamic linker
-        //-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied. Note that the generated code is slower and bigger in this case.
+        //-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied.
 
         exeCmd<<"tcc -g -shared -rdynamic " \
         <<sourceFileName<<" " \
@@ -88,14 +89,19 @@ string Compiler::CreateCompilerCommand(const string& compiler, const string& sou
         }
 
         exeCmd<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL ";//
-     //   <<" -DDEBUG_SPF " \
-        //Add include paths
+        //   <<" -DDEBUG_SPF " \
 
+        //Add include paths
         for(int i = 0; i < mIncludePaths.size(); i++)
         {
             exeCmd<<"-I"<<mIncludePaths[i]<<" " ;
         }
-//        exeCmd<<"-Lc:\\rrw\\src\\c_src";
+
+        //Add library paths
+        for(int i = 0; i < mLibraryPaths.size(); i++)
+        {
+            exeCmd<<"-L"<<mLibraryPaths[i]<<" " ;
+        }
     }
     else if(compiler == "bcc")
     {

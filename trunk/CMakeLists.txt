@@ -3,9 +3,9 @@ project(rr)
 
 #-----------------------------------------------------------------------------
 # version number.  
-SET(RR_MAJOR_VERSION 0)
+SET(RR_MAJOR_VERSION 2012)
 SET(RR_MINOR_VERSION 5)
-SET(RR_BUILD_VERSION 11)
+SET(RR_BUILD_VERSION 21)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
 OPTION (BUILD_C_API	 			"Create C API DLL" 					OFF)
