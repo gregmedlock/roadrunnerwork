@@ -14,7 +14,11 @@ Pause(false),
 LogLevel(lInfo),
 ModelFileName(""),
 DataOutputFolder(""),
-TempDataFolder(".")
+TempDataFolder("."),
+StartTime(0),
+Duration(5),
+EndTime(StartTime + Duration),
+Steps(50)
 {
     //Default for data output is in the same dir as where the executable is
 

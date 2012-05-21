@@ -56,7 +56,16 @@ int main(int argc, char * argv[])
             args.TempDataFolder = GetUsersTempDataFolder();
         }
 
-        gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile("RoadRunner.log")));
+        if(args.ModelFileName.size())
+        {
+            string logName = ExtractFileName(args.ModelFileName);
+            logName = ChangeFileExtensionTo(logName, ".log");
+            gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(args.TempDataFolder, logName) )));
+        }
+        else
+        {
+            gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(args.TempDataFolder, "RoadRunner.log") )));
+        }
         Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
 
         Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
@@ -165,17 +174,21 @@ int main(int argc, char * argv[])
 void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
 {
     char c;
-    while ((c = GetOptions(argc, argv, ("cpuv:n:d:t:m:"))) != -1)
+    while ((c = GetOptions(argc, argv, ("cpuv:n:d:t:l:m:s:e:"))) != -1)
     {
         switch (c)
         {
-            case ('v'): args.LogLevel                      = StringToLogLevel(optarg);     break;
-            case ('c'): args.OnlyCompile                   = true;                         break;
-            case ('p'): args.Pause                         = true;                         break;
-            case ('t'): args.TempDataFolder                = optarg;                       break;
-            case ('d'): args.DataOutputFolder              = optarg;                       break;
-            case ('m'): args.ModelFileName                 = optarg;                       break;
-            case ('u'): args.UseOSTempFolder               = true;                         break;
+            case ('v'): args.LogLevel                       = StringToLogLevel(optarg);     break;
+            case ('c'): args.OnlyCompile                    = true;                         break;
+            case ('p'): args.Pause                          = true;                         break;
+            case ('t'): args.TempDataFolder                 = optarg;                       break;
+            case ('d'): args.DataOutputFolder               = optarg;                       break;
+            case ('m'): args.ModelFileName                  = optarg;                       break;
+            case ('u'): args.UseOSTempFolder                = true;                         break;
+            case ('l'): args.SelectionList                  = optarg;                       break;
+            case ('s'): args.StartTime                      = ToDouble(optarg);                       break;
+            case ('e'): args.EndTime                        = ToDouble(optarg);                       break;
+            case ('z'): args.Steps                          = ToInt(optarg);                       break;
             case ('?'):
             {
                     cout<<Usage(argv[0])<<endl;

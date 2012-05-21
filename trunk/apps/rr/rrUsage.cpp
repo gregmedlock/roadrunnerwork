@@ -28,6 +28,7 @@ string Usage(const string& prg)
     usage<<setw(25)<<"-t<FilePath>"                 <<" Temporary data output folder. If not given, temp files are output to current directory\n";
     usage<<setw(25)<<"-p"                           <<" Pause before exiting.\n";
     usage<<setw(25)<<"-c"                           <<" Stop execution after compiling model\n";
+    usage<<setw(25)<<"-u"                           <<" Use users OS designated temporary folder\n";
     usage<<setw(25)<<"-? "                          <<" Shows the help screen.\n\n";
 
     usage<<"\nSystems Biology, UW 2012\n";
