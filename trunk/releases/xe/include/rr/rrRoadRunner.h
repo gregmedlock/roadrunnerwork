@@ -20,7 +20,6 @@ using std::string;
 
 namespace rr
 {
-
 class ModelGenerator;
 class SBMLModelSimulation;
 class ModelFromC;
@@ -28,40 +27,40 @@ class ModelFromC;
 class RR_DECLSPEC RoadRunner : public rrObject
 {
     private:
-        const double                     DiffStepSize;
-        const string                     emptyModelStr;
-        const double                     STEADYSTATE_THRESHOLD;
-        SimulationData                    mSimulationData;
-        string                            mModelXMLFileName;
-        string                             mModelCode;
-        string                            mTempFileFolder;
-        SBMLModelSimulation               *mSimulation;
+        const double                    DiffStepSize;
+        const string                    emptyModelStr;
+        const double                    STEADYSTATE_THRESHOLD;
+        SimulationData                  mSimulationData;
+        string                          mModelXMLFileName;
+        string                          mModelCode;
+        string                          mTempFileFolder;
+        SBMLModelSimulation             *mSimulation;
 
-        CvodeInterface                    *mCVode;
-        ISteadyStateSolver               *steadyStateSolver;
-        vector<TSelectionRecord>         selectionList;
-        ModelGenerator                   *mModelGenerator;    //Pointer to one of the below ones..
-        ModelGenerator                   *mCSharpGenerator;
-        ModelGenerator                   *mCGenerator;
+        CvodeInterface                  *mCVode;
+        ISteadyStateSolver              *steadyStateSolver;
+        vector<TSelectionRecord>        selectionList;
+        ModelGenerator                  *mModelGenerator;    //Pointer to one of the below ones..
+        ModelGenerator                  *mCSharpGenerator;
+        ModelGenerator                  *mCGenerator;
 
-        Compiler                           mCompiler;
-        HINSTANCE                         mModelDllHandle;
-        void                             AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime);
-        bool                             IsNleqAvailable();
-        void                             emptyModel();
-        double                             GetValueForRecord(const TSelectionRecord& record);
-        double                             GetNthSelectedOutput(const int& index, const double& dCurrentTime);
-        vector<double>                     BuildModelEvalArgument();
-        double                             getVariableValue(const TVariableType& variableType, const int& variableIndex);
-        void                             setParameterValue(const TParameterType& parameterType, const int& parameterIndex, const double& value);
-        double                             getParameterValue(const TParameterType& parameterType, const int& parameterIndex);
+        Compiler                        mCompiler;
+        HINSTANCE                       mModelDllHandle;
+        void                            AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime);
+        bool                            IsNleqAvailable();
+        void                            emptyModel();
+        double                          GetValueForRecord(const TSelectionRecord& record);
+        double                          GetNthSelectedOutput(const int& index, const double& dCurrentTime);
+        vector<double>                  BuildModelEvalArgument();
+        double                          getVariableValue(const TVariableType& variableType, const int& variableIndex);
+        void                            setParameterValue(const TParameterType& parameterType, const int& parameterIndex, const double& value);
+        double                          getParameterValue(const TParameterType& parameterType, const int& parameterIndex);
 
-        vector<TSelectionRecord>         mSteadyStateSelection;
-        vector<TSelectionRecord>         GetSteadyStateSelection(const list<string>& newSelectionList);
-        vector<double>                     computeSteadyStateValues(const vector<TSelectionRecord>& oSelection, const bool& computeSteadyState);
-        double                             computeSteadyStateValue(const TSelectionRecord& record);
-        StringList                         getParameterNames();
-        string                             GetDLLName();
+        vector<TSelectionRecord>        mSteadyStateSelection;
+        vector<TSelectionRecord>        GetSteadyStateSelection(const list<string>& newSelectionList);
+        vector<double>                  computeSteadyStateValues(const vector<TSelectionRecord>& oSelection, const bool& computeSteadyState);
+        double                          computeSteadyStateValue(const TSelectionRecord& record);
+        StringList                      getParameterNames();
+        string                          GetDLLName();
 
         //RoadRunner MCA functions......
 
@@ -148,24 +147,24 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
         //-------------- End of MCA functions
 
-        SimulationSettings                mSettings;
+        SimulationSettings              mSettings;
 
     public:
         // Properties -----------------------------------------------------------------------------
-         static bool                     mComputeAndAssignConservationLaws;
+         static bool                    mComputeAndAssignConservationLaws;
         static bool                     mConservedTotalChanged;
-//        static bool                     mReMultiplyCompartments;
-        double*                            mL;
-        double*                          mL0;
-        double*                          mN;
-        double*                          mNr;
-        bool                             modelLoaded;
-        string                             mCurrentSBML;
-        ModelFromC*                           mModel;
-        double                             mTimeStart;
-        double                             mTimeEnd;
+//        static bool                   mReMultiplyCompartments;
+        double*                         mL;
+        double*                         mL0;
+        double*                         mN;
+        double*                         mNr;
+        bool                            modelLoaded;
+        string                          mCurrentSBML;
+        ModelFromC*                     mModel;
+        double                          mTimeStart;
+        double                          mTimeEnd;
         int                             mNumPoints;
-        string                             NL;
+        string                          NL;
 
 
         //Functions --------------------------------------------------------------------
@@ -176,19 +175,19 @@ class RR_DECLSPEC RoadRunner : public rrObject
         bool                            GenerateModelCode(const string& sbml = string(""));
         bool                            GenerateAndCompileModel();
         bool                            CompileCurrentModel();
-        ModelFromC*                         CreateModel();
-        SimulationData                     GetSimulationResult();
-        ModelGenerator*                    GetCodeGenerator();
+        ModelFromC*                     CreateModel();
+        SimulationData                  GetSimulationResult();
+        ModelGenerator*                 GetCodeGenerator();
         bool                            UseSimulationSettings(SimulationSettings& settings);
         void                            Reset();
         bool                            CreateModelSourceCode();
-        string                            GetModelSourceCode();
-        DoubleMatrix                      runSimulation();
-        bool                             InitializeModel();
-        bool                             Simulate();
-        bool                             SimulateSBMLFile(const string& fileName, const bool& useConservationLaws = true);
-        bool                             SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
-        bool                               LoadSBMLFromFile(const string& fileName);    //Just load the content of a sbml file
+        string                          GetModelSourceCode();
+        DoubleMatrix                    runSimulation();
+        bool                            InitializeModel();
+        bool                            Simulate();
+        bool                            SimulateSBMLFile(const string& fileName, const bool& useConservationLaws = true);
+        bool                            SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
+        bool                            LoadSBMLFromFile(const string& fileName);    //Just load the content of a sbml file
         bool                            loadSBML(const string& sbml);
         string                          getSBML();
         double                          getTimeStart();
@@ -199,47 +198,47 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void                            setNumPoints(const int& nummberOfPoints);
         void                            reset();
         void                            changeInitialConditions(const vector<double>& ic);
-        DoubleMatrix                     simulate();
-        vector<double>                    simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
+        DoubleMatrix                    simulate();
+        vector<double>                  simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
         vector<double>                  getReactionRates();
         vector<double>                  getRatesOfChange();
-        StringList                         getSpeciesNames();
-        StringList                         getReactionNames();
+        StringList                      getSpeciesNames();
+        StringList                      getReactionNames();
 
         // ---------------------------------------------------------------------
         // Start of Level 2 API Methods
         // ---------------------------------------------------------------------
         int                             UseKinsol;
-        string                             getCapabilities();
+        string                          getCapabilities();
         void                            setTolerances(const double& aTol, const double& rTol);
         void                            setTolerances(const double& aTol, const double& rTol, const int& maxSteps);
         void                            CorrectMaxStep();
         void                            setCapabilities(const string& capsStr);
         void                            setValue(const string& sId, const double& dValue);
-        double                             getValue(const string& sId);
-        StringListContainer                getAvailableSymbols();
-        StringList                        getSelectionList();
-        void                             setSelectionList(const StringList& newSelectionList);
+        double                          getValue(const string& sId);
+        StringListContainer             getAvailableSymbols();
+        StringList                      getSelectionList();
+        void                            setSelectionList(const StringList& newSelectionList);
         double                          oneStep(const double& currentTime, const double& stepSize);
         double                          oneStep(const double& currentTime, const double& stepSize, const bool& reset);
 
         // ---------------------------------------------------------------------
         // Start of Level 3 API Methods
         // ---------------------------------------------------------------------
-        double                             steadyState();
+        double                          steadyState();
         static void                     TestSettings();
-        double*                          mult(const double*& m1,const double*& m2);
-        double*                          getReducedJacobian();
-        double*                          getFullJacobian();
+        double*                         mult(const double*& m1,const double*& m2);
+        double*                         getReducedJacobian();
+        double*                         getFullJacobian();
 
         // ---------------------------------------------------------------------
         // Start of Level 4 API Methods
         // ---------------------------------------------------------------------
-        double*                          getLinkMatrix();
-        double*                          getNrMatrix();
-        double*                          getL0Matrix();
-        double*                          getStoichiometryMatrix();
-        double*                          getConservationMatrix();
+        double*                         getLinkMatrix();
+        double*                         getNrMatrix();
+        double*                         getL0Matrix();
+        double*                         getStoichiometryMatrix();
+        double*                         getConservationMatrix();
         int                             getNumberOfDependentSpecies();
         int                             getNumberOfIndependentSpecies();
 
@@ -250,7 +249,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         /// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
         //static void                     GetInverse(Matrix T2, Matrix Inv);
 
-        void                             computeContinuation(const double& stepSize, const int& independentVariable, const string& parameterTypeStr);
+        void                            computeContinuation(const double& stepSize, const int& independentVariable, const string& parameterTypeStr);
         StringList                      getFluxControlCoefficientNames();
         StringList                      getConcentrationControlCoefficientNames();
         StringList                      getUnscaledConcentrationControlCoefficientNames();
@@ -259,47 +258,47 @@ class RR_DECLSPEC RoadRunner : public rrObject
         StringList                      getEigenValueNames();
         StringList                      getAvailableSteadyStateSymbols();
         StringList                      getSteadyStateSelectionList();
-        void                             setSteadyStateSelectionList(const StringList& newSelectionList);
+        void                            setSteadyStateSelectionList(const StringList& newSelectionList);
         vector<double>                  computeSteadyStateValues();
         vector<double>                  computeSteadyStateValues(const StringList& oSelection);
-        double                             computeSteadyStateValue(const string& sId);
-        vector<double>                     getSelectedValues();
-        vector<string>                     getWarnings();
+        double                          computeSteadyStateValue(const string& sId);
+        vector<double>                  getSelectedValues();
+        vector<string>                  getWarnings();
         static void                     ReMultiplyCompartments(const bool& bValue);
         static void                     ComputeAndAssignConservationLaws(const bool& bValue);
-        string                             getCSharpCode();
+        string                          getCSharpCode();
         double*                         steadyStateParameterScan(const string& symbol, const double& startValue, const double& endValue, const double& stepSize);
-        string                             writeSBML();
+        string                          writeSBML();
         int                             getNumberOfLocalParameters(const int& reactionId);
-        void                             setLocalParameterByIndex(const int& reactionId, const int index, const double& value);
-        double                             getLocalParameterByIndex(const int& reactionId, const int& index);
-        void                             setLocalParameterValues(const int& reactionId, const vector<double>& values);
-        vector<double>                     getLocalParameterValues(const int& reactionId);
+        void                            setLocalParameterByIndex(const int& reactionId, const int index, const double& value);
+        double                          getLocalParameterByIndex(const int& reactionId, const int& index);
+        void                            setLocalParameterValues(const int& reactionId, const vector<double>& values);
+        vector<double>                  getLocalParameterValues(const int& reactionId);
         StringList                      getLocalParameterNames(const int& reactionId);
         StringList                      getAllLocalParameterTupleList();
         int                             getNumberOfReactions();
         double                          getReactionRate(const int& index);
         double                          getRateOfChange(const int& index);
-        StringList                         getRateOfChangeNames();
+        StringList                      getRateOfChangeNames();
         vector<double>                  getRatesOfChangeEx(const vector<double>& values);
         vector<double>                  getReactionRatesEx(const vector<double>& values);
         vector<string>                  GetFloatingSpeciesNamesArray();
         vector<string>                  GetGlobalParameterNamesArray();
         int                             getNumberOfCompartments();
-        void                             setCompartmentByIndex(const int& index, const double& value);
-        double                             getCompartmentByIndex(const int& index);
-        void                             setCompartmentVolumes(const vector<double>& values);
-        StringList                         getCompartmentNames();
+        void                            setCompartmentByIndex(const int& index, const double& value);
+        double                          getCompartmentByIndex(const int& index);
+        void                            setCompartmentVolumes(const vector<double>& values);
+        StringList                      getCompartmentNames();
         int                             getNumberOfBoundarySpecies();
-        void                             setBoundarySpeciesByIndex(const int& index, const double& value);
-        double                             getBoundarySpeciesByIndex(const int& index);
-        vector<double>                     getBoundarySpeciesConcentrations();
-        void                             setBoundarySpeciesConcentrations(const vector<double>& values);
+        void                            setBoundarySpeciesByIndex(const int& index, const double& value);
+        double                          getBoundarySpeciesByIndex(const int& index);
+        vector<double>                  getBoundarySpeciesConcentrations();
+        void                            setBoundarySpeciesConcentrations(const vector<double>& values);
         StringList                      getBoundarySpeciesNames();
         StringList                      getBoundarySpeciesAmountNames();
         int                             getNumberOfFloatingSpecies();
-        void                             setFloatingSpeciesByIndex(const int& index, const double& value);
-        double                             getFloatingSpeciesByIndex(const int& index);
+        void                            setFloatingSpeciesByIndex(const int& index, const double& value);
+        double                          getFloatingSpeciesByIndex(const int& index);
         vector<double>                  getFloatingSpeciesConcentrations();
         vector<double>                  getFloatingSpeciesInitialConcentrations();
         void                            setFloatingSpeciesConcentrations(const vector<double>& values);
@@ -309,14 +308,14 @@ class RR_DECLSPEC RoadRunner : public rrObject
         StringList                      getFloatingSpeciesInitialConditionNames();
         StringList                      getFloatingSpeciesAmountNames();
         int                             getNumberOfGlobalParameters();
-        void                             setGlobalParameterByIndex(const int& index, const double& value);
-        double                             getGlobalParameterByIndex(const int& index);
-        void                             setGlobalParameterValues(const vector<double>& values);
-        vector<double>                     getGlobalParameterValues();
+        void                            setGlobalParameterByIndex(const int& index, const double& value);
+        double                          getGlobalParameterByIndex(const int& index);
+        void                            setGlobalParameterValues(const vector<double>& values);
+        vector<double>                  getGlobalParameterValues();
         StringList                      getGlobalParameterNames();
         StringList                      getAllGlobalParameterTupleList();
-        void                             EvalModel();
-        string                             getName();
+        void                            EvalModel();
+        string                          getName();
         static string                   getVersion();
         static string                   getAuthor();
         static string                   getDescription();
@@ -327,7 +326,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         static void                     Test();
         static void                     PrintTout(const double& start, const double& end, const int& numPoints);
         static void                     TestChange();
-        void                             DumpResults(TextWriter& writer, DoubleMatrix& data, const StringList& colLabels);
+        void                            DumpResults(TextWriter& writer, DoubleMatrix& data, const StringList& colLabels);
 
 }; //class RoadRunner
 

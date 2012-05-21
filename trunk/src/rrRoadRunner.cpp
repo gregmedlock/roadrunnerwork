@@ -67,10 +67,10 @@ RoadRunner::~RoadRunner()
 
 bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
 {
-    mSettings     = settings;
-    mTimeStart     = mSettings.mStartTime;
+    mSettings   = settings;
+    mTimeStart  = mSettings.mStartTime;
     mTimeEnd    = mSettings.mEndTime;
-    mNumPoints    = mSettings.mSteps + 1;
+    mNumPoints  = mSettings.mSteps + 1;
     return true;
 }
 
@@ -105,6 +105,11 @@ bool RoadRunner::CreateSelectionList()
     for(int i = 0; i < selectionList.size(); i++)
     {
         Log(lInfo)<<selectionList[i];
+    }
+
+    if(selectionList.size() < 2)
+    {
+        Log(lWarning)<<"You have not made a selection. No data is selected";
     }
 }
 
@@ -290,7 +295,7 @@ void RoadRunner::AddNthOutputToResult(DoubleMatrix& results, int nRow, double dC
     {
         double out =  GetNthSelectedOutput(j, dCurrentTime);
         results(nRow,j) = out;
-        Log(lInfo)<<"Adding result to row\t"<<nRow<<" : "<<out;
+        Log(lDebug)<<"Adding result to row\t"<<nRow<<" : "<<out;
     }
 }
 
@@ -355,10 +360,10 @@ DoubleMatrix RoadRunner::runSimulation()
         AddNthOutputToResult(results, i, tout);
     }
 
-    Log(lDebug)<<"Result: (point, time, value)";
+    Log(lDebug2)<<"Result: (point, time, value)";
     for (int i = 0; i < mNumPoints; i++)
     {
-        Log(lDebug5)<<i<<tab<<results(i,0)<<tab<<setprecision(16)<<results(i,1);
+        Log(lDebug2)<<i<<tab<<results(i,0)<<tab<<setprecision(16)<<results(i,1);
     }
     return results;
 }
@@ -404,8 +409,6 @@ bool RoadRunner::Simulate()
 
     mSimulationData.SetColumnNames(list);
     mSimulationData.SetData(data);
-//    TextWriter writer(cout);
-//    DumpResults(writer, data, list);
     return true;
 }
 
@@ -574,16 +577,12 @@ bool RoadRunner::GenerateModelCode(const string& sbml)
         mCurrentSBML = sbml; //This should be used in stead of the file name below..
     }
 
-    //The get instance function actually compiles the supplied code..
-    //        rrObject* o = mCompiler->getInstance(_sModelCode, "TModel", sLocation);
-    //CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
-
     mModelGenerator->SetXMLModelFileName(mModelXMLFileName);
 
     string srcCodeFolder;
     if(mSimulation)
     {
-        srcCodeFolder = mSimulation->GetDataOutputFolder();
+        srcCodeFolder = mSimulation->GetTempDataFolder();
     }
     else
     {

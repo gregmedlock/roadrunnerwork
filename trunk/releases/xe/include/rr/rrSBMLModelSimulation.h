@@ -22,7 +22,6 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
         string                  mTempDataFolder;
         RoadRunner             *mEngine;
         SimulationSettings      mSettings;
-        SimulationData          mResultData;
         bool                    mCompileIfDllExists;
 
     public:
@@ -35,18 +34,28 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
         string                  GetDataOutputFolder();
         string                  GetTempDataFolder();
         bool                    UseEngine(RoadRunner* engine);
-        bool                    LoadSBMLFromFile();                    //Use current file information to load sbml from file
+
+        SimulationData          GetResult();
+
         bool                    GenerateModelCode();
         bool                    CreateModel();
         bool                    CompileModel();
         bool                    InitializeModel();
         bool                    GenerateAndCompileModel();
-        bool                    Run();
+        bool                    Simulate();
         bool                    SaveResult();
         bool                    LoadSettings(const string& fName = "");
         void                    CompileIfDllExists(const bool& doIt);
         bool                    CompileIfDllExists();
         bool                    SaveModelAsXML(const string& folder);
+
+        //API
+        bool                    SetTimeStart(const double& tStart);
+        bool                    SetTimeEnd(const double& tEnd);
+        bool                    SetNumberOfPoints(const int& pts);
+        bool                    SetSelectionList(const string& list);
+
+        bool                    LoadSBMLFromFile();                    //Use current file information to load sbml from file
 };
 
 }

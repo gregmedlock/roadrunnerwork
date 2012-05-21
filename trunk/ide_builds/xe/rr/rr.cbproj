@@ -81,14 +81,8 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\..\apps\rr\rrArgs.cpp">
-				<BuildOrder>8</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\..\apps\rr\rrMain.cpp">
 				<BuildOrder>9</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\..\apps\rr\rrUsage.cpp">
-				<BuildOrder>10</BuildOrder>
 			</CppCompile>
 			<LibFiles Include="..\..\..\builds\xe\clapack\BLAS\SRC\blas.lib">
 				<IgnorePath>true</IgnorePath>
@@ -179,7 +173,7 @@
 						<Parameters Name="RunParams">-n41 -vDebug3 -tC:\\RRTemp -dc:\\RRDataOutput</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-p -vInfo -m&quot;../Models/feedback.xml&quot;</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-s5 -e15 -p -vInfo -m&quot;../Models/simple_test_1.xml&quot; -t&quot;c:\temp&quot; -l&quot;S1 S2&quot; -d&quot;.&quot; -z300</Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

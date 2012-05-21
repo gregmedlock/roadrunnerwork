@@ -3,28 +3,33 @@
 #define CommandLineParametersH
 #include <windows.h>
 #include <shlobj.h>
-#include "rrUtils.h"
+#include <string>
 #include "rrLogger.h"
 //---------------------------------------------------------------------------
-using namespace rr;
+namespace rr
+{
+
+using std::string;
+string Usage(const string& prg);
+
 class Args
 {
     public:
                                         Args();
         virtual                        ~Args(){}
-        bool                            UseOSTempFolder;    //option u
-        bool                            OnlyCompile;        //option c
-        bool                            Pause;              //option p
-        double                          StartTime;
-        double                          Duration;
-        double                          EndTime;
-        int                             Steps;
         LogLevel                        LogLevel;           //option v:
+        string                          ModelFileName;      //option m:
         string                          DataOutputFolder;   //option d:
         string                          TempDataFolder;     //option t:
-        string                          ModelFileName;      //option m:
+        bool                            Pause;              //option p
+        bool                            OnlyCompile;        //option c
+        bool                            UseOSTempFolder;    //option u
+        double                          StartTime;          //option s
+        double                          Duration;
+        double                          EndTime;            //option e
+        int                             Steps;              //option z
         string                          SelectionList;      //option l:
 };
-
+}
 
 #endif

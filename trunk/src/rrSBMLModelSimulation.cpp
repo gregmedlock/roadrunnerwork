@@ -24,7 +24,9 @@ mDataOutputFolder(dataOutputFolder),
 mCompileIfDllExists(true),
 mTempDataFolder(tempDataFilePath)
 {
-    mResultData.SetName("ResultData");
+    mSettings.mAbsolute    = 1.e-7;
+    mSettings.mRelative    = 1.e-4;
+//    mResultData.SetName("ResultData");
 }
 
 SBMLModelSimulation::~SBMLModelSimulation()
@@ -34,6 +36,18 @@ bool SBMLModelSimulation::SetModelFilePath(const string& path)
 {
     mModelFilePath = path;
     return true;
+}
+
+SimulationData SBMLModelSimulation::GetResult()
+{
+    if(mEngine)
+    {
+        return mEngine->GetSimulationResult();
+    }
+    else
+    {
+        return SimulationData();
+    }
 }
 
 bool SBMLModelSimulation::SetModelFileName(const string& name)
@@ -120,12 +134,8 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
 
     if(!fName.size())
     {
-        mSettings.mStartTime   = 0;
-        mSettings.mDuration    = 5;
-        mSettings.mSteps       = 50;
-        mSettings.mAbsolute    = 1.e-7;
-        mSettings.mRelative    = 1.e-4;
-        mSettings.mEndTime     = mSettings.mStartTime + mSettings.mDuration;
+        Log(lError)<<"Empty file name for setings file";
+        return false;
     }
     else
     {
@@ -155,19 +165,19 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
 
         //Assign values
         it = settings.find("start");
-        mSettings.mStartTime = (it != settings.end()) ?  ToDouble((*it).second) : 0;
+        mSettings.mStartTime = (it != settings.end())   ? ToDouble((*it).second) : 0;
 
         it = settings.find("duration");
-        mSettings.mDuration = (it != settings.end()) ?  ToDouble((*it).second) : 0;
+        mSettings.mDuration = (it != settings.end())    ? ToDouble((*it).second) : 0;
 
         it = settings.find("steps");
-        mSettings.mSteps = (it != settings.end()) ?  ToInt((*it).second) : 50;
+        mSettings.mSteps = (it != settings.end())       ? ToInt((*it).second) : 50;
 
         it = settings.find("absolute");
-        mSettings.mAbsolute = (it != settings.end()) ?  ToDouble((*it).second) : 1.e-7;
+        mSettings.mAbsolute = (it != settings.end())    ? ToDouble((*it).second) : 1.e-7;
 
         it = settings.find("relative");
-        mSettings.mRelative = (it != settings.end()) ?  ToDouble((*it).second) : 1.e-4;
+        mSettings.mRelative = (it != settings.end())    ? ToDouble((*it).second) : 1.e-4;
 
         mSettings.mEndTime = mSettings.mStartTime + mSettings.mDuration;
 
@@ -218,6 +228,39 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
 
     return true;
 }
+
+bool SBMLModelSimulation::SetTimeStart(const double& startTime)
+{
+    mSettings.mStartTime   = startTime;
+    return true;
+}
+
+bool SBMLModelSimulation::SetTimeEnd(const double& endTime)
+{
+    mSettings.mEndTime = endTime;
+    mSettings.mDuration = mSettings.mEndTime - mSettings.mStartTime;
+    return true;
+}
+
+bool SBMLModelSimulation::SetNumberOfPoints(const int& steps)
+{
+    mSettings.mSteps       = steps;
+    return true;
+}
+
+bool SBMLModelSimulation::SetSelectionList(const string& selectionList)
+{
+    vector<string> vars = SplitString(selectionList, ", ");
+    for(int i=0; i < vars.size(); i++)
+    {
+        mSettings.mVariables.push_back(Trim(vars[i]));
+    }
+
+    mEngine->UseSimulationSettings(mSettings);
+    mEngine->CreateSelectionList();    //This one creates the list of what we will look at in the result
+    return true;
+}
+
 
 bool SBMLModelSimulation::LoadSBMLFromFile()                    //Use current file information to load sbml from file
 {
@@ -279,7 +322,7 @@ bool SBMLModelSimulation::GenerateAndCompileModel()
     return mEngine->GenerateAndCompileModel();
 }
 
-bool SBMLModelSimulation::Run()
+bool SBMLModelSimulation::Simulate()
 {
     if(!mEngine)
     {
@@ -295,10 +338,10 @@ bool SBMLModelSimulation::SaveResult()
     resultFileName = ChangeFileExtensionTo(resultFileName, ".csv");
 
     Log(lInfo)<<"Saving result to file: "<<resultFileName;
-    mResultData = mEngine->GetSimulationResult();
+    SimulationData resultData = mEngine->GetSimulationResult();
 
     ofstream fs(resultFileName.c_str());
-    fs << mResultData;
+    fs << resultData;
     fs.close();
     return true;
 }

@@ -109,26 +109,26 @@ bool SimulationData::WriteTo(const string& fileName)
     return false;
 }
 
-ofstream& operator << (ofstream& fs, SimulationData& data)
+ostream& operator << (ostream& ss, SimulationData& data)
 {
     //Check that the dimensions of col header and data is ok
     if(!data.Check())
     {
         Log(lError)<<"Can't write data..";
-        return fs;
+        return ss;
     }
 
     //First create the header
     for(u_int i = 0; i < data.mColumnNames.size(); i++)
     {
-        fs<<data.mColumnNames[i];
+        ss<<data.mColumnNames[i];
         if(i < data.mColumnNames.size() - 1)
         {
-            fs << ",";
+            ss << ",";
         }
         else
         {
-            fs << endl;
+            ss << endl;
         }
     }
     //Then the data
@@ -138,25 +138,25 @@ ofstream& operator << (ofstream& fs, SimulationData& data)
         {
             if(col == 0)
             {
-                fs<<setprecision(data.mTimePrecision)<<data.mTheData(row, col);
+                ss<<setprecision(data.mTimePrecision)<<data.mTheData(row, col);
             }
             else
             {
-                fs<<setprecision(data.mDataPrecision)<<data.mTheData(row, col);
+                ss<<setprecision(data.mDataPrecision)<<data.mTheData(row, col);
             }
 
             if(col <data.mTheData.CSize() -1)
             {
-                fs << ",";
+                ss << ",";
             }
             else
             {
-                fs << endl;
+                ss << endl;
             }
         }
     }
 
-    return fs;
+    return ss;
 }
 
 }//end of namespace

@@ -24,7 +24,6 @@
 #include "rrSBMLModelSimulation.h"
 #include "rrGetOptions.h"
 #include "rrArgs.h"
-#include "rrUsage.h"
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace rr;
@@ -32,7 +31,7 @@ using namespace rr;
 void ProcessCommandLineArguments(int argc, char* argv[], Args& args);
 int main(int argc, char * argv[])
 {
-    string settingsOveride;
+    string settingsFile;
     try
     {
         LogOutput::mLogToConsole = true;
@@ -126,15 +125,24 @@ int main(int argc, char * argv[])
         }
 
         //Then read settings file if it exists..
-        settingsOveride = ("");//C:\\rrw\\Models\\settings_override.txt");
-        if(!simulation.LoadSettings(settingsOveride))    //set selection list here!
+        if(settingsFile.size())
         {
-            Log(lError)<<"Failed loading SBML model settings";
+            if(!simulation.LoadSettings(settingsFile))    //set selection list here!
+            {
+                Log(lError)<<"Failed loading SBML model settings";
+            }
+        }
+        else //Read from commandline
+        {
+            simulation.SetTimeStart(args.StartTime);
+            simulation.SetTimeEnd(args.EndTime);
+            simulation.SetNumberOfPoints(args.Steps);
+            simulation.SetSelectionList(args.SelectionList);
         }
 
-        //        rr->ComputeAndAssignConservationLaws(true);
+        //rr->ComputeAndAssignConservationLaws(true);
         //Then Simulate model
-        if(!simulation.Run())
+        if(!simulation.Simulate())
         {
             Log(lError)<<"Failed running simulation";
             throw("Failed running simulation");
@@ -151,6 +159,9 @@ int main(int argc, char * argv[])
         else
         {
             //Write to std out
+            SimulationData result = simulation.GetResult();
+            Log(lShowAlways)<<result;
+
         }
 
         //All paths leads to end..
@@ -174,7 +185,7 @@ int main(int argc, char * argv[])
 void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
 {
     char c;
-    while ((c = GetOptions(argc, argv, ("cpuv:n:d:t:l:m:s:e:"))) != -1)
+    while ((c = GetOptions(argc, argv, ("cpuv:n:d:t:l:m:s:e:z:"))) != -1)
     {
         switch (c)
         {
@@ -186,9 +197,9 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
             case ('m'): args.ModelFileName                  = optarg;                       break;
             case ('u'): args.UseOSTempFolder                = true;                         break;
             case ('l'): args.SelectionList                  = optarg;                       break;
-            case ('s'): args.StartTime                      = ToDouble(optarg);                       break;
-            case ('e'): args.EndTime                        = ToDouble(optarg);                       break;
-            case ('z'): args.Steps                          = ToInt(optarg);                       break;
+            case ('s'): args.StartTime                      = ToDouble(optarg);             break;
+            case ('e'): args.EndTime                        = ToDouble(optarg);             break;
+            case ('z'): args.Steps                          = ToInt(optarg);                break;
             case ('?'):
             {
                     cout<<Usage(argv[0])<<endl;
@@ -204,4 +215,7 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
             }
         }
     }
+
+    //Check arguments, and choose to bail here if something is not right...
+
 }

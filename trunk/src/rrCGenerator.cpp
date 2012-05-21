@@ -78,7 +78,7 @@ bool CGenerator::SaveSourceCodeToFolder(const string& folder)
     string headerFName = fNameParts[fNameParts.size() - 1];
 
     headerFName = ChangeFileExtensionTo(headerFName, ".h");
-    outFile<<"#include \""<<headerFName<<"\"\n"<<endl;
+    outFile<<"#include \""<<ExtractFileName(headerFName)<<"\"\n"<<endl;
     outFile<<GetSourceCode();
     outFile.close();
     Log(lDebug3)<<"Wrote source code to file: "<<mSourceCodeFileName;

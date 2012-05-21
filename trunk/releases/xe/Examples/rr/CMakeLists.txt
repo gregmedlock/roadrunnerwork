@@ -3,8 +3,6 @@ set(target rr)
 add_executable(		   ${target} 
 rrMain.cpp 
 rrArgs.cpp
-rrUsage.cpp
-
 )
 
 #IF(BUILD_SHARED_LIBS) 

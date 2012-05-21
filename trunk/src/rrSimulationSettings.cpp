@@ -16,8 +16,9 @@ SimulationSettings::SimulationSettings()
 mSteps(50),
 mStartTime(0),
 mDuration(5),
-mRelative(0.0001),
-mEndTime(mStartTime + mDuration)
+mEndTime(mStartTime + mDuration),
+mAbsolute(1.e-7),
+mRelative(1.e-4)
 {}
 
 

@@ -27,28 +27,17 @@ enum TSelectionType
         clStoichiometry
 };
 
-struct TSelectionRecord
+struct RR_DECLSPEC TSelectionRecord
 {
-    unsigned int    index;
-    string             p1;
-    string             p2;
-    TSelectionType selectionType;
+    unsigned int        index;
+    string              p1;
+    string              p2;
+    TSelectionType      selectionType;
+                        TSelectionRecord();
 
 };
 
 ostream& operator<< (ostream& stream, const TSelectionRecord& rec);
-
-ostream& operator<< (ostream& stream, const TSelectionRecord& rec)
-{
-    stream<<"Index: "<<rec.index<<endl;
-    stream<<"p1: "<<rec.p1<<endl;
-       stream<<"p2: "<<rec.p1<<endl;
-       stream<<"SelectionType: "<<rec.selectionType<<endl;
-    return stream;
-}
-
-
-
 }
 
 
