@@ -131,9 +131,6 @@
 			<CppCompile Include="..\..\..\src\mtrand\mtrand.cpp">
 				<BuildOrder>65</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\src\rrArgs.cpp">
-				<BuildOrder>71</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\..\src\rrCGenerator.cpp">
 				<DependentOn>..\..\..\src\rrCGenerator.h</DependentOn>
 				<BuildOrder>60</BuildOrder>

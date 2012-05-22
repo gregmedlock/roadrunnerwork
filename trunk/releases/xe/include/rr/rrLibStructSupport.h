@@ -4,7 +4,7 @@
 #include <string>
 #include "rrStringList.h"
 #include "rrObject.h"
-#include "libstructural.h"
+#include "libstruct/libstructural.h"
 #include "rrDoubleMatrix.h"
 
 using std::vector;
@@ -17,11 +17,11 @@ namespace rr
 using namespace LIB_STRUCTURAL;
 
 //The following class is a translation of C#'s StructuralAnalysis.cs in LibStructurlaCSharp
-//
 class RR_DECLSPEC StructAnalysis : public rrObject
 {
     protected:
-           static LibStructural           *mInstance;
+        static LibStructural           *mInstance;
+
 //        void WriteMatlabForm(System.IO.TextWriter oWriter, double[][] oMatrix)
 
 //        [DllImportAttribute(LIBRARY_FILE, EntryPoint = "LibStructural_getGammaMatrixGJ")]
@@ -37,10 +37,10 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 
 
        public:
-                                StructAnalysis();
-        virtual                ~StructAnalysis();
-        LibStructural&            GetInstance(){return *mInstance;}
-        void                    Reset();
+                                                        StructAnalysis();
+        virtual                                        ~StructAnalysis();
+        LibStructural*                                  GetInstance(){return mInstance;}
+        void                                            Reset();
 
 //        internal const string LIBRARY_FILE = "LibStructural";
 //        string AnalyzeWithFullyPivotedLU()

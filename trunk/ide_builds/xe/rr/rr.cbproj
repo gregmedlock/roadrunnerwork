@@ -81,6 +81,9 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="..\..\..\apps\rr\rrArgs.cpp">
+				<BuildOrder>9</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\..\apps\rr\rrMain.cpp">
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>

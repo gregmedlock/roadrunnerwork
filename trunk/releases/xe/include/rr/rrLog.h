@@ -19,15 +19,15 @@ template <class T>
 class RR_DECLSPEC LogContainer : public rrObject
 {
     private:
-        LogLevel                mCurrentLogLevel;
-                                LogContainer(const LogContainer&);    //Don't copy this one..
+        LogLevel                    mCurrentLogLevel;
+                                    LogContainer(const LogContainer&);    //Don't copy this one..
     protected:
-        std::ostringstream         mOutputStream;
+        std::ostringstream          mOutputStream;
 
     public:
-                                   LogContainer();
-        virtual                      ~LogContainer();
-        std::ostringstream&        Get(const LogLevel& level);
+                                    LogContainer();
+        virtual                    ~LogContainer();
+        std::ostringstream&         Get(const LogLevel& level);
 };
 
 class RR_DECLSPEC Logger : public LogContainer<LogOutput>

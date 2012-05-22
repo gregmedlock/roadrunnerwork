@@ -39,7 +39,7 @@ class RR_DECLSPEC SimulationData : public rrObject
         bool                    Load(const string& fileName);
         bool                    WriteTo(const string& fileName);
 
-        friend std::ostream&    operator << (std::ostream& ss, SimulationData& data);
+RR_DECLSPEC        friend std::ostream&    operator << (std::ostream& ss, SimulationData& data);
         bool                    Check();    //Check if containst proper data
 
         double&                 operator() (const unsigned& row, const unsigned& col);

@@ -126,7 +126,9 @@ bool RoadRunner::CreateSelectionList()
     if(selectionList.size() < 2)
     {
         Log(lWarning)<<"You have not made a selection. No data is selected";
+        return false;
     }
+    return true;
 }
 
 ModelGenerator* RoadRunner::GetCodeGenerator()
@@ -1550,7 +1552,6 @@ DoubleMatrix  RoadRunner::getStoichiometryMatrix()
     {
         throw SBWApplicationException("Unexpected error from getReorderedStoichiometryMatrix()" + e.Message);
     }
-    return mat;
 }
 //
 //        Help("Returns the conservation matrix (gamma) for the currently loaded model")

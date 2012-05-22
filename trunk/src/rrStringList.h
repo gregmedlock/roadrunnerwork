@@ -46,7 +46,7 @@ class RR_DECLSPEC StringList : public rrObject
         vector<string>::iterator    end(){return mStrings.end();}
         void                        PreFix(const string& fix);
         void                        PostFix(const string& fix);
-        friend ostream&             operator<<(ostream& stream, StringList& list);
+//        friend ostream&             operator<<(ostream& stream, StringList& list);
 };
 
 RR_DECLSPEC ostream&             operator<<(ostream& stream, StringList& list);

@@ -3,9 +3,9 @@
 
 //Export/Import
 #if defined(EXPORT_RR_C_API)
-#define RR_DECL_SPEC __declspec(dllexport)
+#define C_DECL_SPEC __declspec(dllexport)
 #else
-#define RR_DECL_SPEC __declspec(dllimport)
+#define C_DECL_SPEC __declspec(dllimport)
 #endif
 
 #if defined(__cplusplus)
@@ -13,44 +13,59 @@ extern "C"
 {
 #else
 #include <stdio.h>
-#include "../../src/c_src/stdbool.h"
+#include "rr_support/stdbool.h"
 #endif
 
 typedef void*                   RRHandle;
 typedef struct RRDataMatrix*    RRDataMatrixHandle;
 typedef struct RRResult*        RRResultHandle;
+typedef struct RRStringList*    RRStringListHandle;
 
-RR_DECL_SPEC struct RRDataMatrix
+C_DECL_SPEC struct RRDataMatrix
 {
-    int             mNrOfRows;
-    int             mNrOfCols;
-    double*         mData;
+    int             RSize;
+    int             CSize;
+    double*         Data;
 };
 
-RR_DECL_SPEC struct RRResult
+C_DECL_SPEC struct RRResult
 {
-    int             mNrOfRows;
-    int             mNrOfCols;
-    double*         mData;
-    char**          mColumnHeaders;
+    int             RSize;
+    int             CSize;
+    double*         Data;
+    char**          ColumnHeaders;
+                   ~RRResult();     //Is this OK???
 };
 
-RR_DECL_SPEC RRHandle           __stdcall   getRRInstance(void);
-RR_DECL_SPEC void               __stdcall   deleteRRInstance(RRHandle *handle);
-RR_DECL_SPEC char*              __stdcall   getCopyright(void);
-RR_DECL_SPEC bool               __stdcall   loadSBML(const char* filePath);
-RR_DECL_SPEC bool               __stdcall   setTimeStart(double timeStart);
-RR_DECL_SPEC bool               __stdcall   setTimeEnd(double timeEnd);
-RR_DECL_SPEC bool               __stdcall   setNumPoints(int nrPoints);
-RR_DECL_SPEC RRResultHandle     __stdcall   simulate(void);
-RR_DECL_SPEC bool               __stdcall   FreeRRResult(RRResultHandle rrResult);
-RR_DECL_SPEC bool               __stdcall   setSelectionList(const char* list);
-RR_DECL_SPEC char*              __stdcall   getReactionNames(void);
-RR_DECL_SPEC double             __stdcall   getValue(void);
-RR_DECL_SPEC bool               __stdcall   setValue(double val);
-RR_DECL_SPEC RRDataMatrixHandle __stdcall   getStoichiometryMatrix(void);
-RR_DECL_SPEC bool               __stdcall   FreeRRDataMatrixHandle(RRDataMatrixHandle matrix);
-RR_DECL_SPEC int                __stdcall   GetNumber();
+C_DECL_SPEC struct RRStringList
+{
+    int             Count;
+    char**          String;
+};
+
+/////////////////////  API FUNCTIONS ///////////////////////////////////////////////
+C_DECL_SPEC RRHandle                __stdcall   getRRInstance(void);
+C_DECL_SPEC char*                   __stdcall   getBuildDate(void);
+C_DECL_SPEC void                    __stdcall   deleteRRInstance(RRHandle handle);
+C_DECL_SPEC char*                   __stdcall   getCopyright(void);
+C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder);
+C_DECL_SPEC bool                    __stdcall   loadSBML(const char* sbml);
+C_DECL_SPEC bool                    __stdcall   setTimeStart(double timeStart);
+C_DECL_SPEC bool                    __stdcall   setTimeEnd(double timeEnd);
+C_DECL_SPEC bool                    __stdcall   setNumPoints(int nrPoints);
+C_DECL_SPEC RRResultHandle          __stdcall   simulate(void);
+C_DECL_SPEC bool                    __stdcall   freeRRResult();
+C_DECL_SPEC bool                    __stdcall   setSelectionList(const char* list);
+C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);
+C_DECL_SPEC double                  __stdcall   getValue(void);
+C_DECL_SPEC bool                    __stdcall   setValue(double val);
+C_DECL_SPEC RRDataMatrixHandle      __stdcall   getStoichiometryMatrix(void);
+C_DECL_SPEC bool                    __stdcall   freeRRDataMatrixHandle(RRDataMatrixHandle matrix);
+C_DECL_SPEC void                    __stdcall   printMatrix(RRDataMatrixHandle mat);
+
+// Free functions
+C_DECL_SPEC bool                    __stdcall   freeStringList(RRStringListHandle sl);
+//C_DECL_SPEC void                    __stdcall   AssignLogger(FileLog& logger);
 
 #if defined( __cplusplus)
 }

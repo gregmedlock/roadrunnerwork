@@ -23,8 +23,8 @@ class RR_DECLSPEC LogOutput : public rrObject
         static bool             mLogToConsole;
         static bool             mDoLogging;
         static void             Output(const string& msg, const LogLevel& lvl);
-        static void                StopLogging();
-        static void                StartLogging();
+        static void             StopLogging();
+        static void             StartLogging();
 };
 
 }
