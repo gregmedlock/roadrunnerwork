@@ -3,9 +3,8 @@
 #endif
 #pragma hdrstop
 #include "rrFileLog.h"
+
 //---------------------------------------------------------------------------
-
-
 namespace rr
 {
 
@@ -28,13 +27,12 @@ FileLog::~FileLog()
     mNrOfInstances--;
 }
 
-
 bool FileLog::Init(const string& logPrefix, const LogLevel& level, unique_ptr<LogFile> logFile)
 {
     mLogPrefix = logPrefix;
     mLogLevel = level;
     mLogFile = move(logFile);
-     return mLogFile.get() ? true : false;
+    return mLogFile.get() ? true : false;
 }
 
 string FileLog::GetLogFileName()

@@ -16,9 +16,7 @@ using namespace LIB_LA;
 
 template<typename T> void Matrix<T>::initializeFrom2DMatrix( T** &oRawData, int rows, int cols)
 {
-
     resize(rows, cols);
-
     for (unsigned int i = 0; i < _Rows; i++)
     {
         for (unsigned int j = 0; j < _Cols; j++)
@@ -26,12 +24,11 @@ template<typename T> void Matrix<T>::initializeFrom2DMatrix( T** &oRawData, int 
             this->operator ()(i,j) = oRawData[i][j];
         }
     }
-    
+
 }
 template<typename T> void Matrix<T>::initializeFromConst2DMatrix( const T** oRawData, int rows, int cols)
 {
     resize(rows, cols);
-    
     for (unsigned int i = 0; i < _Rows; i++)
     {
         for (unsigned int j = 0; j < _Cols; j++)
@@ -39,7 +36,6 @@ template<typename T> void Matrix<T>::initializeFromConst2DMatrix( const T** oRaw
             (*this)(i,j) = oRawData[i][j];
         }
     }
-    
 }
 
 template<typename T> T** Matrix<T>::get2DMatrix(int &nRows, int &nCols)

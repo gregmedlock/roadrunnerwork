@@ -32,6 +32,18 @@ mTempDataFolder(tempDataFilePath)
 SBMLModelSimulation::~SBMLModelSimulation()
 {}
 
+string SBMLModelSimulation::GetTempDataFolder()
+{
+    return mTempDataFolder;
+}
+
+void SBMLModelSimulation::CompileIfDllExists(const bool& doIt)
+{
+    mCompileIfDllExists = doIt;
+}
+
+
+
 bool SBMLModelSimulation::SetModelFilePath(const string& path)
 {
     mModelFilePath = path;
@@ -68,11 +80,6 @@ bool SBMLModelSimulation::SetModelFileName(const string& name)
     return true;
 }
 
-string SBMLModelSimulation::GetTempDataFolder()
-{
-    return mTempDataFolder;
-}
-
 bool SBMLModelSimulation::SetDataOutputFolder(const string& name)
 {
     mDataOutputFolder = name;
@@ -87,11 +94,6 @@ string  SBMLModelSimulation::GetModelsFullFilePath()
 string  SBMLModelSimulation::GetDataOutputFolder()
 {
     return mDataOutputFolder;
-}
-
-void    SBMLModelSimulation::CompileIfDllExists(const bool& doIt)
-{
-    mCompileIfDllExists = doIt;
 }
 
 bool    SBMLModelSimulation::CompileIfDllExists()

@@ -9,11 +9,11 @@
 			<Projects Include="rr_static_lib\rr_static.cbproj">
 				<Dependencies/>
 			</Projects>
-			<Projects Include="rr_c_lib\rrC_API.cbproj">
-				<Dependencies/>
+			<Projects Include="rr_c_lib\rr_c_api.cbproj">
+				<Dependencies>rr_static_lib\rr_static.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="..\..\Wrappers\C\Examples\Simple\rrCAPITester.cbproj">
-				<Dependencies/>
+				<Dependencies>rr_c_lib\rr_c_api.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="rr\rr.cbproj">
 				<Dependencies>rr_lib\roadrunner.cbproj</Dependencies>
@@ -44,22 +44,22 @@
 		<Target Name="rr_static:Make">
 			<MSBuild Projects="rr_static_lib\rr_static.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="rrC_API">
-			<MSBuild Projects="rr_c_lib\rrC_API.cbproj"/>
+		<Target Name="rr_c_api" DependsOnTargets="rr_static">
+			<MSBuild Projects="rr_c_lib\rr_c_api.cbproj"/>
 		</Target>
-		<Target Name="rrC_API:Clean">
-			<MSBuild Projects="rr_c_lib\rrC_API.cbproj" Targets="Clean"/>
+		<Target Name="rr_c_api:Clean" DependsOnTargets="rr_static:Clean">
+			<MSBuild Projects="rr_c_lib\rr_c_api.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="rrC_API:Make">
-			<MSBuild Projects="rr_c_lib\rrC_API.cbproj" Targets="Make"/>
+		<Target Name="rr_c_api:Make" DependsOnTargets="rr_static:Make">
+			<MSBuild Projects="rr_c_lib\rr_c_api.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="rrCAPITester">
+		<Target Name="rrCAPITester" DependsOnTargets="rr_c_api">
 			<MSBuild Projects="..\..\Wrappers\C\Examples\Simple\rrCAPITester.cbproj"/>
 		</Target>
-		<Target Name="rrCAPITester:Clean">
+		<Target Name="rrCAPITester:Clean" DependsOnTargets="rr_c_api:Clean">
 			<MSBuild Projects="..\..\Wrappers\C\Examples\Simple\rrCAPITester.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="rrCAPITester:Make">
+		<Target Name="rrCAPITester:Make" DependsOnTargets="rr_c_api:Make">
 			<MSBuild Projects="..\..\Wrappers\C\Examples\Simple\rrCAPITester.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="rr" DependsOnTargets="roadrunner">
@@ -72,13 +72,13 @@
 			<MSBuild Projects="rr\rr.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="roadrunner;rr_static;rrC_API;rrCAPITester;rr"/>
+			<CallTarget Targets="roadrunner;rr_static;rr_c_api;rrCAPITester;rr"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="roadrunner:Clean;rr_static:Clean;rrC_API:Clean;rrCAPITester:Clean;rr:Clean"/>
+			<CallTarget Targets="roadrunner:Clean;rr_static:Clean;rr_c_api:Clean;rrCAPITester:Clean;rr:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="roadrunner:Make;rr_static:Make;rrC_API:Make;rrCAPITester:Make;rr:Make"/>
+			<CallTarget Targets="roadrunner:Make;rr_static:Make;rr_c_api:Make;rrCAPITester:Make;rr:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

@@ -15,7 +15,7 @@
 #include "rrSimulationData.h"
 #include "rrSimulationSettings.h"
 #include "rrCompiler.h"
-
+#include "rrLibStructSupport.h"
 using std::string;
 
 namespace rr
@@ -165,12 +165,14 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double                          mTimeEnd;
         int                             mNumPoints;
         string                          NL;
+        StructAnalysis                  mStructAnalysis;                    //Object to facilitate calls to libStruct library
 
 
         //Functions --------------------------------------------------------------------
                                         RoadRunner(bool GenerateCSharp = false);
         virtual                        ~RoadRunner();
         bool                            CreateSelectionList();
+        bool                            SetTempFileFolder(const string& folder);
         void                            PartOfSimulation(SBMLModelSimulation* simulation){mSimulation = simulation;}
         bool                            GenerateModelCode(const string& sbml = string(""));
         bool                            GenerateAndCompileModel();
@@ -218,6 +220,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double                          getValue(const string& sId);
         StringListContainer             getAvailableSymbols();
         StringList                      getSelectionList();
+        void                            setSelectionList(const string& List);
         void                            setSelectionList(const StringList& newSelectionList);
         double                          oneStep(const double& currentTime, const double& stepSize);
         double                          oneStep(const double& currentTime, const double& stepSize, const bool& reset);
@@ -237,7 +240,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double*                         getLinkMatrix();
         double*                         getNrMatrix();
         double*                         getL0Matrix();
-        double*                         getStoichiometryMatrix();
+        DoubleMatrix                    getStoichiometryMatrix();
         double*                         getConservationMatrix();
         int                             getNumberOfDependentSpecies();
         int                             getNumberOfIndependentSpecies();

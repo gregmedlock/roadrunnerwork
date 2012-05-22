@@ -58,6 +58,7 @@
     analysis of SBML models, or Stoichiometry matrices, and LIB_STRUCTURAL::SBMLmodel, a small utility class for easy
     access of the needed information.
 */
+
 namespace LIB_STRUCTURAL
 {
 #ifndef NO_SBML
@@ -87,13 +88,12 @@ namespace LIB_STRUCTURAL
     class LIB_EXTERN LibStructural
     {
     public:
-        typedef LIB_LA::Matrix< int >                 IntMatrix;
-        typedef LIB_LA::Matrix< double >             DoubleMatrix;
-        typedef LIB_LA::Matrix< LIB_LA::Complex >     ComplexMatrix;
-        void                                        Reset();        //Call between loading different models
+        typedef LIB_LA::Matrix< int >                   IntMatrix;
+        typedef LIB_LA::Matrix< double >                DoubleMatrix;
+        typedef LIB_LA::Matrix< LIB_LA::Complex >       ComplexMatrix;
+        void                                            Reset();        //Call between loading different models
 
     private:
-
         int _NumRows;
         int _NumCols;
 
@@ -112,53 +112,52 @@ namespace LIB_STRUCTURAL
         DoubleMatrix* _NmatT_orig;
 
 
-        double*                                _Totals; // conserved totals
-        double*                                _IC;
-        double*                                _BC;
+        double*                                         _Totals; // conserved totals
+        double*                                         _IC;
+        double*                                         _BC;
 
-        int*                                spVec;
-        int*                                colVec;
-        std::vector < std::string >         _consv_list;
-        double                                _Sparsity;
-        double                                _Pvalue;
-        int                                    _svd_rank_Nmat;
-        int                                    _svd_rank_Nrmat;
-        int                                    _qr_rank_Nrmat;
-        int                                    _NumIndependent;                    // number of independent species;
-        int                                    _NumDependent;
+        int*                                            spVec;
+        int*                                            colVec;
+        std::vector < std::string >                     _consv_list;
+        double                                          _Sparsity;
+        double                                          _Pvalue;
+        int                                             _svd_rank_Nmat;
+        int                                             _svd_rank_Nrmat;
+        int                                             _qr_rank_Nrmat;
+        int                                             _NumIndependent;                    // number of independent species;
+        int                                             _NumDependent;
 
-        int                                    nz_count;
-        int                                 numFloating;
-        int                                 numReactions;
-        int                                 numBoundary;
-        bool                                zero_nmat;
+        int                                             nz_count;
+        int                                             numFloating;
+        int                                             numReactions;
+        int                                             numBoundary;
+        bool                                            zero_nmat;
 
 
         int _SvdRankNr;
         int _SvdRankNmat;
         int _QrRankNmat;
 
-        std::string                                    _sModelName;
+        std::string                                     _sModelName;
 
-        std::map<int, std::string>                    _speciesIndexList;
-        std::map<std::string, int>                    _speciesIndexList2;
-        std::map<int, std::string>                    _speciesNamesList;
-        std::map<std::string, int>                    _speciesNamesList2;
-        std::map<int, std::string>                    _reactionIndexList;
-        std::map<int, std::string>                    _reactionNamesList;
-        std::map<std::string, int>                    _modSpeciesIndexList;
-        std::map<std::string, int>                    _modSpeciesNamesList;
-        std::map<std::string, double>                _speciesValueList;
-        std::map<std::string, double>                _variableList;
-        std::map<int, std::string>                    _bSpeciesIndexList;
-        std::map<std::string, int>                    _bSpeciesIndexList2;
-        std::map<int, std::string>                    _bSpeciesNamesList;
-        std::map<std::string, int>                    _bSpeciesNamesList2;
-        std::map<std::string, double>                _bSpeciesValueList;
-
-        std::vector<std::string>                    _inputSpeciesNames;
-        std::vector<std::string>                    _inputReactionNames;
-        std::vector<double>                            _inputValues;
+        std::map<int, std::string>                      _speciesIndexList;
+        std::map<std::string, int>                      _speciesIndexList2;
+        std::map<int, std::string>                      _speciesNamesList;
+        std::map<std::string, int>                      _speciesNamesList2;
+        std::map<int, std::string>                      _reactionIndexList;
+        std::map<int, std::string>                      _reactionNamesList;
+        std::map<std::string, int>                      _modSpeciesIndexList;
+        std::map<std::string, int>                      _modSpeciesNamesList;
+        std::map<std::string, double>                   _speciesValueList;
+        std::map<std::string, double>                   _variableList;
+        std::map<int, std::string>                      _bSpeciesIndexList;
+        std::map<std::string, int>                      _bSpeciesIndexList2;
+        std::map<int, std::string>                      _bSpeciesNamesList;
+        std::map<std::string, int>                      _bSpeciesNamesList2;
+        std::map<std::string, double>                   _bSpeciesValueList;
+        std::vector<std::string>                        _inputSpeciesNames;
+        std::vector<std::string>                        _inputReactionNames;
+        std::vector<double>                             _inputValues;
 
     private:
 
@@ -168,20 +167,16 @@ namespace LIB_STRUCTURAL
 
 #ifndef NO_SBML
         void InitializeFromModel(LIB_STRUCTURAL::SBMLmodel& oModel);
-#endif
-        void InitializeFromStoichiometryMatrix(DoubleMatrix& oMatrix);
-
-#ifndef NO_SBML
         void BuildStoichiometryMatrixFromModel(LIB_STRUCTURAL::SBMLmodel& oModel);
 #endif
 
-        void InitializeFromStoichiometryMatrix(DoubleMatrix& oMatrix, 
-            std::vector<std::string>& speciesNames, 
+        void InitializeFromStoichiometryMatrix(DoubleMatrix& oMatrix);
+        void InitializeFromStoichiometryMatrix(DoubleMatrix& oMatrix,
+            std::vector<std::string>& speciesNames,
             std::vector<std::string>& reactionNames,
             std::vector<double>& inputValues);
 
         void FreeMatrices();
-
         void reorderNmatrix();
         void computeNrMatrix();
         void computeN0Matrix();
@@ -189,8 +184,6 @@ namespace LIB_STRUCTURAL
         void computeConservedSums();
         void computeConservedEntities();
         void computeK0andKMatrices();
-
-
         bool testConservationLaw_1();
         bool testConservationLaw_2();
         bool testConservationLaw_3();
@@ -210,10 +203,10 @@ namespace LIB_STRUCTURAL
             This example demonstrates how to access the matrices calculated by the library from C++
         */
 
-        /*! \brief Load a new stoichiometry matrix. 
+        /*! \brief Load a new stoichiometry matrix.
 
             Loads the stoichiometry matrix into the library. To analyze the stoichiometry
-            call one of the following: 
+            call one of the following:
 
             \li ::LibStructural_analyzeWithQR,
             \li ::LibStructural_analyzeWithLU,
@@ -458,7 +451,7 @@ namespace LIB_STRUCTURAL
 
         /*! \brief Returns the K matrix (right nullspace of Nr) 
 
-            The K matrix has the structure, [I K0]'  
+            The K matrix has the structure, [I K0]'
         */
         /*LIB_EXTERN*/ DoubleMatrix* getKMatrix();
 
@@ -502,7 +495,7 @@ namespace LIB_STRUCTURAL
             column label will be the same label as the stoichiometry matrix;
 
             \param stoichiometry the stoichiometry matrix that will be used to calculate gamma
-            
+
             
 
         */

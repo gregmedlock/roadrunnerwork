@@ -20,15 +20,16 @@ namespace LIB_LA
     */
     template <class T> class Matrix
     {
+
     public:
         /*! \brief the element type for this matrix, will be real, LIB_LA::Complex or integer.
         */
         typedef T _ElementType;
+
     protected:
-        unsigned int _Rows;
-        unsigned int _Cols;
-        T * _Array;
-    private:
+        unsigned int    _Rows;
+        unsigned int    _Cols;
+        T*              _Array;
 
     public:
         //! Creates a new matrix with the given numbers of rows and columns
@@ -271,10 +272,12 @@ namespace LIB_LA
 
     //! defines a real matrix (hides the templates in signatures)
     typedef Matrix< double > DoubleMatrix;
+
     //! defines a integer matrix (hides the templates in signatures)
     typedef Matrix< int > IntMatrix;
+
     //! defines a complex matrix (hides the templates in signatures)
-    typedef Matrix< Complex > ComplexMatrix;    
+    typedef Matrix< Complex > ComplexMatrix;
 }
 
 #endif // __cplusplus

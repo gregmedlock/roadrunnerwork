@@ -43,12 +43,13 @@ mCurrentSBML(""),
 mModel(NULL),
 mModelDllHandle(NULL),
 mSimulation(NULL),
-mTempFileFolder("C:\\tmp")
+mModelXMLFileName("sbml_model")
 {
     Log(lDebug4)<<"In RoadRunner CTOR";
-    mCSharpGenerator     = new CSharpGenerator();
+    mCSharpGenerator    = new CSharpGenerator();
     mCGenerator         = new CGenerator();
-    mModelGenerator = generateCSharp == true ? mCSharpGenerator : mCGenerator;
+    mModelGenerator     = generateCSharp == true ? mCSharpGenerator : mCGenerator;
+    mTempFileFolder     = GetUsersTempDataFolder();//("C:\\temp"),
 }
 
 RoadRunner::~RoadRunner()
@@ -72,6 +73,21 @@ bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
     mTimeEnd    = mSettings.mEndTime;
     mNumPoints  = mSettings.mSteps + 1;
     return true;
+}
+
+bool RoadRunner::SetTempFileFolder(const string& folder)
+{
+    if(FolderExists(folder))
+    {
+        mTempFileFolder = folder;
+        return true;
+    }
+    else
+    {
+        Log(lError)<<"The folder: "<<folder<<" don't exist...";
+        return false;
+    }
+
 }
 
 bool RoadRunner::CreateSelectionList()
@@ -513,7 +529,7 @@ bool RoadRunner::loadSBML(const string& sbml)
     string   dllName  = GetDLLName();
 
     //Shall we compile model if it exists?
-    bool compileIfDllExists = mSimulation->CompileIfDllExists();
+    bool compileIfDllExists = mSimulation ? mSimulation->CompileIfDllExists() : true;
     bool dllExists = FileExists(dllName);
     bool compile = true;
     if(dllExists && compileIfDllExists == false)
@@ -586,7 +602,7 @@ bool RoadRunner::GenerateModelCode(const string& sbml)
     }
     else
     {
-        srcCodeFolder = ("C:\\tmp");
+        srcCodeFolder = mTempFileFolder;
     }
 
     mModelCode = mModelGenerator->generateModelCode(mCurrentSBML);
@@ -771,12 +787,12 @@ StringList RoadRunner::getSelectionList()
         return oResult;
     }
 
-    StringList oFloating     = mModelGenerator->getFloatingSpeciesConcentrationList();
-    StringList oBoundary     = mModelGenerator->getBoundarySpeciesList();
-    StringList oFluxes         = mModelGenerator->getReactionNames();
+    StringList oFloating    = mModelGenerator->getFloatingSpeciesConcentrationList();
+    StringList oBoundary    = mModelGenerator->getBoundarySpeciesList();
+    StringList oFluxes      = mModelGenerator->getReactionNames();
     StringList oVolumes     = mModelGenerator->getCompartmentList();
-    StringList oRates         = getRateOfChangeNames();
-    StringList oParameters     = getParameterNames();
+    StringList oRates       = getRateOfChangeNames();
+    StringList oParameters  = getParameterNames();
 
     vector<TSelectionRecord>::iterator iter;
     int size = selectionList.size();
@@ -1129,6 +1145,12 @@ void RoadRunner::EvalModel()
     mModel->convertToAmounts();
     vector<double> args = mCVode->BuildEvalArgument();
     mModel->evalModel(mModel->GetTime(), args);
+}
+
+void RoadRunner::setSelectionList(const string& list)
+{
+    StringList aList(list,", ");
+    setSelectionList(aList);
 }
 
 //        Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
@@ -1495,25 +1517,41 @@ void RoadRunner::setSelectionList(const StringList& newSelectionList)
 //        }
 //
 //        Help("Returns the stoichiometry matrix for the currently loaded model")
-//        double[][] RoadRunner::getStoichiometryMatrix()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//
-//                    return _N; //StructAnalysis.getReorderedStoichiometryMatrix();
-//
-//                throw new SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw new SBWApplicationException("Unexpected error from getReorderedStoichiometryMatrix()", e.Message);
-//            }
-//        }
+DoubleMatrix  RoadRunner::getStoichiometryMatrix()
+{
+    //Todo: Room to improve how matrices are handled across LibStruct/RoadRunner/C-API
+    DoubleMatrix mat;
+
+    try
+    {
+        if (modelLoaded)
+        {
+            LibStructural::DoubleMatrix* aMat = mStructAnalysis.GetInstance()->getStoichiometryMatrix();
+
+            if(aMat)
+            {
+                mat.Allocate(aMat->numRows(), aMat->numCols());
+                for(int row = 0; row < mat.RSize(); row++)
+                {
+                    for(int col = 0; col < mat.CSize(); col++)
+                    {
+                        mat(row,col) = (*aMat)(row,col);
+                    }
+                }
+            }
+
+            return mat;
+            //return _N; //StructAnalysis.getReorderedStoichiometryMatrix();
+        }
+
+        throw SBWApplicationException(emptyModelStr);
+    }
+    catch (Exception e)
+    {
+        throw SBWApplicationException("Unexpected error from getReorderedStoichiometryMatrix()" + e.Message);
+    }
+    return mat;
+}
 //
 //        Help("Returns the conservation matrix (gamma) for the currently loaded model")
 //        double[][] RoadRunner::getConservationMatrix()
@@ -4053,34 +4091,47 @@ string RoadRunner::getSBML()
 //        }
 //
 //        Help("Set the time start for the simulation")
-//        void RoadRunner::setmTimeStart(double startTime)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            if (startTime < 0)
-//                throw new SBWApplicationException("Time Start most be greater than zero");
-//            this.mTimeStart = startTime;
-//        }
-//
-//        Help("Set the time end for the simulation")
-//        void RoadRunner::setTimeEnd(double endTime)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            if (endTime <= 0)
-//                throw new SBWApplicationException("Time End most be greater than zero");
-//            this.mTimeEnd = endTime;
-//        }
-//
-//        Help("Set the number of points to generate during the simulation")
-//        void RoadRunner::setmNumPoints(int nummberOfPoints)
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            if (nummberOfPoints <= 0)
-//                nummberOfPoints = 1;
-//            this.mNumPoints = nummberOfPoints;
-//        }
+void RoadRunner::setTimeStart(const double& startTime)
+{
+    if (!modelLoaded)
+    {
+        throw new SBWApplicationException(emptyModelStr);
+    }
+
+    if (startTime < 0)
+    {
+        throw new SBWApplicationException("Time Start most be greater than zero");
+    }
+
+    mTimeStart = startTime;
+}
+
+//Help("Set the time end for the simulation")
+void RoadRunner::setTimeEnd(const double& endTime)
+{
+    if (!modelLoaded)
+    {
+        throw new SBWApplicationException(emptyModelStr);
+    }
+
+    if (endTime <= 0)
+    {
+        throw new SBWApplicationException("Time End most be greater than zero");
+    }
+
+    mTimeEnd = endTime;
+}
+
+//Help("Set the number of points to generate during the simulation")
+void RoadRunner::setNumPoints(const int& pts)
+{
+    if(!modelLoaded)
+    {
+        throw new SBWApplicationException(emptyModelStr);
+    }
+
+    mNumPoints = (pts <= 0) ? 1 : pts;
+}
 //
 //        Help(
 //            "Change the initial conditions to another concentration vector (changes only initial conditions for floating Species)"
@@ -4159,13 +4210,15 @@ string RoadRunner::getSBML()
 //        }
 //
 //        Help("Returns a list of reaction names")
-//        ArrayList RoadRunner::getReactionNames()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//
-//            return mModelGenerator->getReactionNames();
-//        }
+StringList RoadRunner::getReactionNames()
+{
+    if (!modelLoaded)
+    {
+        throw new SBWApplicationException(emptyModelStr);
+    }
+
+    return mModelGenerator->getReactionNames();
+}
 //
 //
 //        // ---------------------------------------------------------------------

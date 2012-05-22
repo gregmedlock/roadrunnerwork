@@ -553,9 +553,9 @@ double* StructAnalysis::GetL0Matrix()
     return GetDoubleMatrixFromPtr(pointer, nRows, nCols); //    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
 }
 
-/// <summary>
-/// Get L0 matrix
-/// </summary>
+// <summary>
+// Get L0 matrix
+// </summary>
 double* StructAnalysis::GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels)
 {
     GetL0MatrixLabels(sRowLabels, sColumnLabels);

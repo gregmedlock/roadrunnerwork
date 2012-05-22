@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iostream>
 #include <sstream>
+#include "rrStringUtils.h"
 #include "rrStringList.h"
 #include "rrUtils.h"
 //---------------------------------------------------------------------------
@@ -22,6 +23,11 @@ mStrings(strings)
 
 StringList::~StringList()
 {}
+
+StringList::StringList(const string& str, const string& delimiter)
+{
+    mStrings = SplitString(str, delimiter);
+}
 
 StringList::StringList(const StringList& cp)
 {
@@ -108,16 +114,6 @@ ostream& operator<<(ostream& stream, StringList& list)
     return stream;
 }
 
-ostringstream& operator<<(ostringstream& stream, StringList& list)
-{
-    vector<string>::iterator iter;
-    int count = 0;
-    for(iter = list.begin(); iter != list.end(); iter++)
-    {
-        stream<<"List Item "<<++count<<" : "<<(*iter)<<std::endl;
-    }
-    return stream;
-}
 
 } //namespace rr
 

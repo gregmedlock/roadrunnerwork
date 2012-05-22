@@ -21,7 +21,8 @@ ModelGenerator::ModelGenerator()
 :
 mStructAnalysis(),
 STR_DoubleFormat("%.19G"),
-STR_FixAmountCompartments("*")
+STR_FixAmountCompartments("*"),
+mCurrentXMLModelFileName("sbml_model")  //
 {
     mNOM.Reset();
     mStructAnalysis.Reset();
