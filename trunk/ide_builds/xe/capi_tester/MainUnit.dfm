@@ -23,7 +23,6 @@ object Form1: TForm1
     Height = 526
     Align = alLeft
     TabOrder = 0
-    ExplicitHeight = 479
     object GroupBox1: TGroupBox
       Left = 1
       Top = 1
@@ -81,7 +80,6 @@ object Form1: TForm1
       Align = alClient
       Caption = 'API Functions'
       TabOrder = 1
-      ExplicitHeight = 372
       object FunctionList: TListBox
         Left = 2
         Top = 15
@@ -92,7 +90,6 @@ object Form1: TForm1
         Sorted = True
         TabOrder = 0
         OnClick = FunctionListClick
-        ExplicitHeight = 355
       end
     end
   end
@@ -103,13 +100,11 @@ object Form1: TForm1
     Height = 526
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 626
-    ExplicitHeight = 479
     object Memo1: TMemo
       Left = 1
-      Top = 256
+      Top = 408
       Width = 622
-      Height = 269
+      Height = 117
       Align = alBottom
       TabOrder = 0
     end
@@ -120,6 +115,28 @@ object Form1: TForm1
       Height = 25
       Action = CharStarVoidA
       TabOrder = 1
+    end
+    object btnLoadSBML: TButton
+      Left = 24
+      Top = 13
+      Width = 75
+      Height = 25
+      Caption = 'Load SBML'
+      TabOrder = 2
+      OnClick = btnLoadSBMLClick
+    end
+    object grid: TStringGrid
+      Left = 222
+      Top = 1
+      Width = 401
+      Height = 407
+      Align = alRight
+      FixedCols = 0
+      FixedRows = 0
+      TabOrder = 3
+      ExplicitLeft = 176
+      ExplicitTop = 8
+      ExplicitHeight = 385
     end
   end
   object ActionList1: TActionList
@@ -153,12 +170,16 @@ object Form1: TForm1
   end
   object APIFuncs: TActionList
     OnUpdate = APIFuncsUpdate
-    Left = 440
-    Top = 40
+    Left = 256
+    Top = 72
     object CharStarVoidA: TAction
       Caption = 'char*_void'
       Enabled = False
       OnExecute = CharStarVoidAExecute
     end
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 256
+    Top = 112
   end
 end

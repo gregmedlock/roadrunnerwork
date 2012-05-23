@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ActnList, ExtCtrls, StdActns;
+  Dialogs, StdCtrls, ActnList, ExtCtrls, StdActns, IOUtils, Grids;
 
 type
   TForm1 = class(TForm)
@@ -28,6 +28,9 @@ type
     Button5: TButton;
     APIFuncs: TActionList;
     CharStarVoidA: TAction;
+    btnLoadSBML: TButton;
+    OpenDialog1: TOpenDialog;
+    grid: TStringGrid;
     procedure FileOpen1Accept(Sender: TObject);
     procedure FileOpen1BeforeExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -39,6 +42,7 @@ type
     procedure FunctionListClick(Sender: TObject);
     procedure CharStarVoidAExecute(Sender: TObject);
     procedure APIFuncsUpdate(Action: TBasicAction; var Handled: Boolean);
+    procedure btnLoadSBMLClick(Sender: TObject);
   private
     { Private declarations }
     procedure CheckDLL(fName: string);
@@ -53,11 +57,28 @@ var
 implementation
 
 {$R *.dfm}
-const DLLName = 'rrC_API.dll';
+const DLLName = 'rr_c_API.dll';
 
 type
 TCharVoidFunc   = function: PAnsiChar;  stdcall;        //char* func(void)
 TIntVoidFunc    = function: Integer;    stdcall;        //int   func(void)
+TLoadSBML       = function  (sbml : PAnsiChar) : boolean; stdcall;
+TSimulate       = function: Pointer;    stdcall;
+
+PString = ^PAnsiChar;
+PDoubleArray = array of double;
+TData = record
+     RSize : integer;
+     CSize : integer;
+     data : PDoubleArray;
+     ColumnHeaders : PString;
+end;
+
+PData = ^TData;
+
+var
+  loadSBML : TLoadSBML;
+  simulate : TSimulate;
 
 procedure TForm1.FileOpen1Accept(Sender: TObject);
 begin
@@ -108,7 +129,6 @@ var
     GetCopy: TCharVoidFunc;
     GetNumber: TIntVoidFunc;
     FPointer: TFarProc;
-
 begin
     FPointer := GetProcAddress(dllHandle, PChar ('getCopyright'));
     if FPointer <> nil then
@@ -118,13 +138,30 @@ begin
         FunctionList.Items.AddObject('getCopyright', TObject(FPointer));
     end;
 
-//    FPointer := GetProcAddress(dllHandle, PChar ('_getRRInstance'));
-//    if FPointer <> nil then
-//    begin
-//        GetCopy := TCharVoidFunc(FPointer);
-//        Memo1.Lines.Add('Loaded C function char* getCopyright()');
-//        FunctionList.Items.AddObject('getCopyright', TObject(FPointer));
-//    end;
+    FPointer := GetProcAddress(dllHandle, PChar ('getRRInstance'));
+    if FPointer <> nil then
+    begin
+        //GetCopy := TCharVoidFunc(FPointer);
+        Memo1.Lines.Add('Loaded C function void* getRRInstance()');
+        FunctionList.Items.AddObject('getRRInstance', TObject(FPointer));
+    end;
+
+    FPointer := GetProcAddress(dllHandle, PChar ('loadSBML'));
+    if FPointer <> nil then
+    begin
+        Memo1.Lines.Add('Loaded C function loadSBML(const char* sbml)');
+        FunctionList.Items.AddObject('loadSBML', TObject(FPointer));
+        loadSBML := FPointer;
+    end;
+
+    FPointer := GetProcAddress(dllHandle, PChar ('simulate'));
+    if FPointer <> nil then
+    begin
+        Memo1.Lines.Add('Loaded C function simulate()');
+        FunctionList.Items.AddObject('simulate', TObject(FPointer));
+        simulate := FPointer;
+    end;
+
     LoadFunctionsA.Enabled := false;
 end;
 
@@ -136,7 +173,6 @@ begin
     LoadDLL.Enabled := true;
 
     Memo1.Lines.Add('Unloaded C DLL');
-
 end;
 
 procedure TForm1.ActionList1Update(Action: TBasicAction; var Handled: Boolean);
@@ -154,6 +190,26 @@ begin
     for I := 0 to APIFuncs.ActionCount -1 do
     TAction(APIFuncs.Actions[I]).Enabled := false;
 
+end;
+
+procedure TForm1.btnLoadSBMLClick(Sender: TObject);
+var sbml : AnsiString;
+    b : boolean;
+    d : PData;
+    i, j: integer;
+begin
+  if OpenDialog1.execute then
+     begin
+     sbml := TFile.ReadAllText(OpenDialog1.FileName);
+     b := loadSBML (PAnsiChar (sbml));
+     if not b then
+        showmessage ('Error');
+     d := simulate();
+     grid.RowCount := d.RSize;
+     for i := 0 to d.RSize - 1 do
+         for j := 0 to d.CSize - 1 do
+             grid.Cells [j, i] := (floattostr (d.data[i * d.CSize + j]));
+     end;
 end;
 
 procedure TForm1.FunctionListClick(Sender: TObject);

@@ -1,6 +1,11 @@
 program rr_api_tester;
 
 uses
+///  madExcept,
+//  madLinkDisAsm,
+//  madListHardware,
+//  madListProcesses,
+//  madListModules,
   Forms,
   MainUnit in 'MainUnit.pas' {Form1};
 
