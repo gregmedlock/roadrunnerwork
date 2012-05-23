@@ -1,0 +1,26 @@
+set(target rr_ts)
+
+add_executable(		   ${target} 
+rrMain.cpp 
+rrArgs.cpp
+)
+
+#IF(BUILD_SHARED_LIBS) 
+#target_link_libraries (${target} rr)
+#target_link_libraries (${target} libsbml)
+#ELSE()
+target_link_libraries (${target} roadrunner)
+target_link_libraries (${target} libsbml-static)
+#ENDIF()
+
+
+##target_link_libraries (${target} libxml2_xe)
+#target_link_libraries (${target} sundials_cvode)
+#target_link_libraries (${target} sundials_nvecserial)
+#target_link_libraries (${target} lapack)
+#target_link_libraries (${target} blas)
+#target_link_libraries (${target} libf2c)
+
+set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
+
+install (TARGETS ${target} 		DESTINATION bin COMPONENT apps)

@@ -15,6 +15,7 @@ endif(${MSVC})
 
 set(apps 	
 		rr
+		rr_ts
 )
 
 foreach(app ${apps})

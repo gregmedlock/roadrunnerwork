@@ -26,7 +26,6 @@ mTempDataFolder(tempDataFilePath)
 {
     mSettings.mAbsolute    = 1.e-7;
     mSettings.mRelative    = 1.e-4;
-//    mResultData.SetName("ResultData");
 }
 
 SBMLModelSimulation::~SBMLModelSimulation()
@@ -225,7 +224,9 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
     if(mEngine)
     {
         mEngine->UseSimulationSettings(mSettings);
-        mEngine->CreateSelectionList();    //This one creates the list of what we will look at in the result
+
+        //This one creates the list of what we will look at in the result
+        mEngine->CreateSelectionList();
     }
 
     return true;

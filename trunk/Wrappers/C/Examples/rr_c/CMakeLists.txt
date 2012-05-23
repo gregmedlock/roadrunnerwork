@@ -1,4 +1,4 @@
-set(target rr_c_api_info)
+set(target rr_c)
 
 add_executable(		   ${target} 
 main.cxx

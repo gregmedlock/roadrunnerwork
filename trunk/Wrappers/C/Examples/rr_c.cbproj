@@ -32,8 +32,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\;$(RR_SRC);$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\..\installs\xe\lib\;..\..\..\..\releases\xe\shared\link\;..\..\..\..\releases\xe\link\;$(BDS)\lib\win32\debug\;..\..\installs\xe\lib\;..\..\installs\xe\bin\;C:\rrw\Testing\rr_c_api_test\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>rr_c\;..\;$(RR_SRC);$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\installs\xe\lib\;rr_c\;..\..\..\..\installs\xe\lib\;..\..\..\..\releases\xe\shared\link\;..\..\..\..\releases\xe\link\;$(BDS)\lib\win32\debug\;..\..\installs\xe\lib\;..\..\installs\xe\bin\;C:\rrw\Testing\rr_c_api_test\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -68,18 +68,18 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="..\..\..\..\installs\xe\lib\rr_c_api-cg.lib">
+			<LibFiles Include="C:\installs\xe\lib\rr_static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="..\..\..\..\installs\xe\lib\rr_static.lib">
+			<LibFiles Include="..\..\..\installs\xe\lib\rr_c_api-cg.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>2</BuildOrder>
+				<BuildOrder>3</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="main.cxx">
-				<BuildOrder>1</BuildOrder>
+			<CppCompile Include="rr_c\main.cxx">
+				<BuildOrder>3</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="rrArgs.cpp">
+			<CppCompile Include="rr_c\rrArgs.cpp">
 				<BuildOrder>3</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">

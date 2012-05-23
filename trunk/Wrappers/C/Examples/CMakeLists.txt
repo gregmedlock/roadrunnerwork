@@ -9,7 +9,7 @@ if(${MSVC})
 endif(${MSVC})
 
 set(examples 	
-		Simple
+		rr_c
 #		simulate_sbml
 )
 
