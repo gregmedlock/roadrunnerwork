@@ -97,7 +97,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         ASTNode*                            CleanEquation(ASTNode* ast);
         string                              CleanEquation(const string& equation);
         string                              substituteTerms(const string& reactionName, const string& inputEquation, bool bFixAmounts);
-        double*                             InitializeL0(int& nrRows, int& nrCols);
+        LIB_LA::DoubleMatrix*               InitializeL0(int& nrRows, int& nrCols);
         bool                                ExpressionContainsSymbol(ASTNode* ast, const string& symbol);
         bool                                ExpressionContainsSymbol(const string& expression, const string& symbol);
         Symbol*                             GetSpecies(const string& id);

@@ -16,34 +16,34 @@ class RR_DECLSPEC SBMLSymbol : public rrObject
 {
     protected:
     public:
-        string                                mId;
-        enum SBMLType                        mType;
+        string                          mId;
+        enum SBMLType                   mType;
         SBMLSymbolDependencies          mDependencies;
 
-        double                                mValue;
-        bool                                HasValue();
+        double                          mValue;
+        bool                            HasValue();
 
-        double&                            mConcentration; //Assing ref to mValue..
-        double&                            mAmount; //Assing ref to mValue..
+        double&                         mConcentration; //Assing ref to mValue..
+        double&                         mAmount; //Assing ref to mValue..
 
-        bool                                IsSetAmount;
-        bool                                IsSetConcentration;
+        bool                            IsSetAmount;
+        bool                            IsSetConcentration;
 
-        bool                                HasInitialAssignment() const;
-        string                               mInitialAssignment;
+        bool                            HasInitialAssignment() const;
+        string                          mInitialAssignment;
 
-        bool                                mHasRule;
-        bool                                HasRule();
-        string                                mRule;
+        bool                            mHasRule;
+        bool                            HasRule();
+        string                          mRule;
 
     public:
                                         SBMLSymbol();
                                        ~SBMLSymbol();
                                         SBMLSymbol(const SBMLSymbol& cp);
                                         SBMLSymbol& operator =(const SBMLSymbol& rhs);
-        void                               AddDependency(SBMLSymbol* symbol);
-        int                                   NumberOfDependencies();
-        SBMLSymbol                           GetDependency(const int& i);
+        void                            AddDependency(SBMLSymbol* symbol);
+        int                             NumberOfDependencies();
+        SBMLSymbol                      GetDependency(const int& i);
 
 };
 

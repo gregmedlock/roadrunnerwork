@@ -58,7 +58,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        double[][] GetFullyReorderedStoichiometryMatrix()
 //        double[][] GetFullyReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetFullyReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-        double*    GetGammaMatrix();
+        LIB_LA::DoubleMatrix*    GetGammaMatrix();
 //        double[][] GetGammaMatrixGJ(double[][] oMatrix)
 //        bool FindPositiveGammaMatrix(double[][] oMatrix,  out double[][] gammaMatrix, ref string[] rowNames, out string[] colNames)
 //        bool FindPositiveGammaMatrix(double[][] oMatrix, out double[][] gammaMatrix)
@@ -73,11 +73,11 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        double[][] GetKMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        double[][] GetKMatrix()
 //        void GetKMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-        double* GetL0Matrix();
-        double* GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels);
+        LIB_LA::DoubleMatrix*   GetL0Matrix();
+        LIB_LA::DoubleMatrix*   GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels);
 //        double[][] GetL0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
         void GetL0MatrixLabels(vector<string>& sRowLabels, vector<string>& sColumnLabels);
-//        double[][] GetLinkMatrix()
+        LIB_LA::DoubleMatrix*   GetLinkMatrix();
 //        double[][] GetLinkMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetLinkMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
 //        double[][] GetLMatrix()

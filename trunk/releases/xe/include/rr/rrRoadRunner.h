@@ -16,13 +16,17 @@
 #include "rrSimulationSettings.h"
 #include "rrCompiler.h"
 #include "rrLibStructSupport.h"
-using std::string;
+#include "libstruct/libla.h"
 
+using std::string;
+using namespace LIB_LA;
 namespace rr
 {
 class ModelGenerator;
 class SBMLModelSimulation;
 class ModelFromC;
+
+LIB_LA::DoubleMatrix            mult(LIB_LA::DoubleMatrix& m1, LIB_LA::DoubleMatrix& m2);
 
 class RR_DECLSPEC RoadRunner : public rrObject
 {
@@ -34,14 +38,20 @@ class RR_DECLSPEC RoadRunner : public rrObject
         string                          mModelXMLFileName;
         string                          mModelCode;
         string                          mTempFileFolder;
-        SBMLModelSimulation             *mSimulation;
+        SBMLModelSimulation            *mSimulation;
 
-        CvodeInterface                  *mCVode;
-        ISteadyStateSolver              *steadyStateSolver;
-        vector<TSelectionRecord>        selectionList;
-        ModelGenerator                  *mModelGenerator;    //Pointer to one of the below ones..
-        ModelGenerator                  *mCSharpGenerator;
-        ModelGenerator                  *mCGenerator;
+        CvodeInterface                 *mCVode;
+        ISteadyStateSolver             *steadyStateSolver;
+        vector<TSelectionRecord>       selectionList;
+        ModelGenerator                 *mModelGenerator;    //Pointer to one of the below ones..
+        ModelGenerator                 *mCSharpGenerator;
+        ModelGenerator                 *mCGenerator;
+
+        LIB_LA::DoubleMatrix           *_L;
+        LIB_LA::DoubleMatrix           *_L0;
+        LIB_LA::DoubleMatrix           *_N;
+        LIB_LA::DoubleMatrix           *_Nr;
+
 
         Compiler                        mCompiler;
         HINSTANCE                       mModelDllHandle;
@@ -91,7 +101,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double getUnScaledElasticity(string reactionName, string parameterName);
 
         //"Compute the unscaled species elasticity matrix at the current operating point")]
-        double** getUnscaledElasticityMatrix();
+        LIB_LA::DoubleMatrix getUnscaledElasticityMatrix();
 
         //"Compute the unscaled elasticity matrix at the current operating point")]
         double** getScaledElasticityMatrix();
@@ -151,7 +161,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
     public:
         // Properties -----------------------------------------------------------------------------
-         static bool                    mComputeAndAssignConservationLaws;
+        static bool                     mComputeAndAssignConservationLaws;
         static bool                     mConservedTotalChanged;
 //        static bool                   mReMultiplyCompartments;
         double*                         mL;
@@ -216,7 +226,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         void                            setTolerances(const double& aTol, const double& rTol, const int& maxSteps);
         void                            CorrectMaxStep();
         void                            setCapabilities(const string& capsStr);
-        void                            setValue(const string& sId, const double& dValue);
+        bool                            setValue(const string& sId, const double& dValue);
         double                          getValue(const string& sId);
         StringListContainer             getAvailableSymbols();
         StringList                      getSelectionList();
@@ -230,8 +240,9 @@ class RR_DECLSPEC RoadRunner : public rrObject
         // ---------------------------------------------------------------------
         double                          steadyState();
         static void                     TestSettings();
-        double*                         mult(const double*& m1,const double*& m2);
-        double*                         getReducedJacobian();
+//        double*                         mult(const double*& m1,const double*& m2);
+
+        LIB_LA::DoubleMatrix            getReducedJacobian();
         double*                         getFullJacobian();
 
         // ---------------------------------------------------------------------

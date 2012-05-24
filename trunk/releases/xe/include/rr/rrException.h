@@ -33,6 +33,7 @@ class RR_DECLSPEC SBWApplicationException : public RRException
 {
     public:
         SBWApplicationException(const string& msg);
+        SBWApplicationException(const string& msg1, const string& msg2);
 };
 
 class RR_DECLSPEC SBWException : public RRException

@@ -19,6 +19,7 @@ typedef void    (__cdecl *c_void_doubleStar)(double*);
 typedef double  (__cdecl *c_double_int)(int);
 typedef double* (__cdecl *c_doubleStar)();
 typedef void    (__cdecl *c_void_double_doubleStar)(double, double*);
+typedef void    (__cdecl *c_void_int_double)(int, double);
 
 typedef TComputeEventAssignmentDelegate* (__cdecl *c_TComputeEventAssignmentDelegateStar)();
 typedef TEventDelayDelegate* (__cdecl *c_GetEventDelayDelegatesStar)();
@@ -177,12 +178,13 @@ class RR_DECLSPEC ModelFromC : public rrObject
         c_void                                  cconvertToConcentrations;
         c_void_double_doubleStar                cevalEvents;
         c_void                                  ccomputeAllRatesOfChange;
-           c_void                               cAssignRates_a;
+        c_void                                  cAssignRates_a;
         c_void_doubleStar                       cAssignRates_b;
         c_void                                  ctestConstraints;
         c_void                                  cresetEvents;
         c_void                                  cInitializeRates;
         c_void                                  cInitializeRateRuleSymbols;
+        c_void_int_double                       csetConcentration;
 
         //Utility
         HANDLE                                  GetFunctionPtr(const string& function);

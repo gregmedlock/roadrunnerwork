@@ -28,18 +28,18 @@ for the computation of the row echelon or Gauss Jordan form of a matrix.
 /*!    \namespace LIB_LA
 \brief       The LIB_LA namespace contains all functions and classes enabling the Linear Algebra functions.
 
-The namespace consists mainly of three classes LIB_LA::Complex, a straight forward implementation of a complex type, 
+The namespace consists mainly of three classes LIB_LA::Complex, a straight forward implementation of a complex type,
 LIB_LA::Matrix a template matrix class used by the C++ API and of course LIB_LA:LibLA the entry point of the
-LA library which encapsulates all functionality. 
+LA library which encapsulates all functionality.
 */
 
 namespace LIB_LA
-{    
+{
 
     /*! \class LIB_LA::LU_Result
     \brief LUResult is intended to hold the return values of the Clapack LU decomposition methods
 
-    This class will hold the result from the methods LIB_LA::LibLA::getLU and 
+    This class will hold the result from the methods LIB_LA::LibLA::getLU and
     LIB_LA::LibLA::getLUwithFullPivoting.
     */
     class LU_Result
@@ -48,22 +48,22 @@ namespace LIB_LA
         //! Constructor of a new result object (all result variables are NULL)
         LU_Result() : L(NULL), U(NULL), P(NULL),Q(NULL) {};
         //! Destructor deletes all non-NULL matrices
-        ~LU_Result() 
-        { 
-            if (L) delete L; L = NULL; 
+        ~LU_Result()
+        {
+            if (L) delete L; L = NULL;
             if (U) delete U; U = NULL;
             if (P) delete P; P = NULL;
             if (Q) delete Q; Q = NULL;
         }
 
-        //! \brief L is a lower triangular matrix 
+        //! \brief L is a lower triangular matrix
         DoubleMatrix* L;
-        //! \brief U is an upper triangular matrix 
+        //! \brief U is an upper triangular matrix
         DoubleMatrix* U;
-        //! \brief P is a permutation matrix representing row permutations 
+        //! \brief P is a permutation matrix representing row permutations
         IntMatrix* P;
         /*! \brief Q is a permutation matrix representing column permutations.
-        \remarks and is only available after a call to LIB_LA::LibLA::getLUwithFullPivoting and NULL otherwise 
+        \remarks and is only available after a call to LIB_LA::LibLA::getLUwithFullPivoting and NULL otherwise
         */
         IntMatrix* Q;
         /*! \brief  Info represents status information about the LU factorization its value is to be interpreted as:
@@ -128,7 +128,7 @@ namespace LIB_LA
         \param oMatrix a real matrix
         \return a vector of LIB_LA::Complex numbers representing the eigen-values of the matrix
         */
-        LIB_EXTERN std::vector< Complex > getEigenValues(DoubleMatrix &oMatrix);
+        LIB_EXTERN std::vector< Complex > getEigenValues(DoubleMatrix& oMatrix);
 
         /*! \brief Calculates the eigen-vectors of a square real matrix. 
 
