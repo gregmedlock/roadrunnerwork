@@ -168,7 +168,7 @@ install (FILES 	${tcc} DESTINATION bin/include/winapi COMPONENT rr_core)
 include (InstallRequiredSystemLibraries)
 
 #COMPONENTS OF THE INSTALL
-set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models)
+set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models delphi)
 
 
 #set(CPACK_COMPONENT_RR_CORE_GROUP							"Core")
@@ -183,6 +183,7 @@ set(CPACK_COMPONENT_C_API_DISPLAY_NAME						"C API DLL")
 set(CPACK_COMPONENT_COMPILED_EXAMPLES_DISPLAY_NAME			"Compiled Examples")
 set(CPACK_COMPONENT_EXAMPLE_FILES_DISPLAY_NAME				"Examples Source and Readme files")
 set(CPACK_COMPONENT_SBML_MODELS_DISPLAY_NAME				"SBML Models")
+set(CPACK_COMPONENT_DELPHI_DISPLAY_NAME						"Delphi Units")
 
 #set(CPACK_PACKAGE_ICON										${CMAKE_CURRENT_SOURCE_DIR}\\\\rrArt.bmp)
 #NSIS Specific
@@ -197,6 +198,7 @@ set(CPACK_COMPONENT_C_API_DESCRIPTION						"C API Wrapper for RoadRunner")
 set(CPACK_COMPONENT_COMPILED_EXAMPLES_DESCRIPTION			"This will install pre-compiled binaries for all examples")
 set(CPACK_COMPONENT_EXAMPLE_FILES_DESCRIPTION				"Examples Source")
 set(CPACK_COMPONENT_SBML_MODELS_DESCRIPTION					"Install various SBML Model files")
+set(CPACK_COMPONENT_DELPHI_DESCRIPTION						"Installs RoadRunner Delphi Units")
 
 set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
 set(CPACK_PACKAGE_VENDOR									"UW")

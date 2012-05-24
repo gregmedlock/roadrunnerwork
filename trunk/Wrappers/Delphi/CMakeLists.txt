@@ -1,0 +1,4 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
+PROJECT(rrWrappers)
+
+install (FILES RoadRunnerAPI.pas 				DESTINATION Delphi 	COMPONENT delphi)

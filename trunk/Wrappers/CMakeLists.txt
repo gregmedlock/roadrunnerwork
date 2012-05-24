@@ -19,5 +19,6 @@ set(wrapper "C")
  install (FILES ${wrapper}/CMakeLists.txt 		DESTINATION Examples/${wrapper}	COMPONENT c_wrapper)
 endif()
 
+add_subdirectory(Delphi)
 install (FILES Readme.txt 			DESTINATION Examples COMPONENT wrappers)
 install (FILES CMakeLists.txt 		DESTINATION Examples COMPONENT wrappers)
