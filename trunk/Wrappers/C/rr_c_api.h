@@ -57,7 +57,7 @@ C_DECL_SPEC RRResultHandle          __stdcall   simulate(void);
 C_DECL_SPEC bool                    __stdcall   freeRRResult();
 C_DECL_SPEC bool                    __stdcall   setSelectionList(const char* list);
 C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);
-C_DECL_SPEC double                  __stdcall   getValue(const char* specie);
+C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
 C_DECL_SPEC RRDataMatrixHandle      __stdcall   getStoichiometryMatrix(void);
 C_DECL_SPEC bool                    __stdcall   freeRRDataMatrixHandle(RRDataMatrixHandle matrix);
