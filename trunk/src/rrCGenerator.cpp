@@ -210,12 +210,13 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     // Get the L0 matrix
     int nrRows;
     int nrCols;
-    double* aL0 = InitializeL0(nrRows, nrCols);     //Todo: What is this doing? answer.. it is used below..
-    DoubleMatrix L0(aL0,nrRows, nrCols);         //How many rows and cols?? We need to know that in order to use the matrix properly!
+    LIB_LA::DoubleMatrix* aL0 = InitializeL0(nrRows, nrCols);     //Todo: What is this doing? answer.. it is used below..
+//    DoubleMatrix L0(aL0, nrRows, nrCols);         //How many rows and cols?? We need to know that in order to use the matrix properly!
 
-    WriteUpdateDependentSpecies(ignore, mNumIndependentSpecies, mNumDependentSpecies, L0);
+    WriteUpdateDependentSpecies(ignore, mNumIndependentSpecies, mNumDependentSpecies, *aL0);
     int numOfRules = WriteComputeRules(ignore, mNumReactions);
-    WriteComputeAllRatesOfChange(ignore, mNumIndependentSpecies, mNumDependentSpecies, L0);
+
+    WriteComputeAllRatesOfChange(ignore, mNumIndependentSpecies, mNumDependentSpecies, *aL0);
     WriteComputeReactionRates(ignore, mNumReactions);
     WriteEvalModel(ignore, mNumReactions, mNumIndependentSpecies, mNumFloatingSpecies, numOfRules);
     WriteEvalEvents(ignore, mNumEvents, mNumFloatingSpecies);
@@ -395,19 +396,20 @@ void CGenerator::WriteComputeConservedTotals(CodeBuilder& ignore, const int& num
     if (numDependentSpecies > 0)
     {
         string factor;
-        double* matPtr = mStructAnalysis.GetGammaMatrix();
+        LIB_LA::DoubleMatrix *gamma = mStructAnalysis.GetGammaMatrix();
 
-        DoubleMatrix gamma(matPtr, numDependentSpecies, numFloatingSpecies);
+//        double* matPtr =
+//        DoubleMatrix gamma(matPtr, numDependentSpecies, numFloatingSpecies);
         for (int i = 0; i < numDependentSpecies; i++)
         {
             mSource<<Format("\n\t_ct[{0}] = ", i);
             for (int j = 0; j < numFloatingSpecies; j++)
             {
-                double current = (matPtr != NULL) ? gamma(i,j) : 1.0;    //Todo: This is a bug? We should not be here if the matrix i NULL.. Triggered by model 00029
+                double current = (gamma != NULL) ? (*gamma)(i,j) : 1.0;    //Todo: This is a bug? We should not be here if the matrix is NULL.. Triggered by model 00029
 
                 if ( current != 0.0 )
                 {
-                    if (!matPtr)//IsNaN(current)) //C# code is doing one of these.. factor = "" .. ??
+                    if (!gamma)//IsNaN(current)) //C# code is doing one of these.. factor = "" .. ??
                     {
                         // TODO: fix this
                         factor = "";

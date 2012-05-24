@@ -2311,7 +2311,8 @@ void LibStructural::loadReactionNames ( vector< string > &reactionNames)
 
 
 //Returns Gamma, the conservation law array 
-/*LIB_EXTERN*/  int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols)
+/*LIB_EXTERN*/
+int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols)
 {
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getGammaMatrix();
     if (oMatrix == NULL)

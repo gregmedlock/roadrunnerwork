@@ -136,18 +136,18 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     WriteSetBoundaryConditions(sb);
     WriteSetCompartmentVolumes(sb);
     WriteSetParameterValues(sb, mNumReactions);
-       WriteComputeConservedTotals(sb, mNumFloatingSpecies, mNumDependentSpecies);
+    WriteComputeConservedTotals(sb, mNumFloatingSpecies, mNumDependentSpecies);
 
 
     // Get the L0 matrix
     int nrRows;
     int nrCols;
-    double* aL0 = InitializeL0(nrRows, nrCols);     //Todo: What is this doing? answer.. it is used below..
-    DoubleMatrix L0(aL0,nrRows, nrCols);         //How many rows and cols?? We need to know that in order to use the matrix properly!
+    DoubleMatrix* aL0 = InitializeL0(nrRows, nrCols);     //Todo: What is this doing? answer.. it is used below..
+//    DoubleMatrix L0(aL0,nrRows, nrCols);         //How many rows and cols?? We need to know that in order to use the matrix properly!
 
-    WriteUpdateDependentSpecies(sb, mNumIndependentSpecies, mNumDependentSpecies, L0);
+    WriteUpdateDependentSpecies(sb, mNumIndependentSpecies, mNumDependentSpecies, *aL0);
     int numOfRules = WriteComputeRules(sb, mNumReactions);
-    WriteComputeAllRatesOfChange(sb, mNumIndependentSpecies, mNumDependentSpecies, L0);
+    WriteComputeAllRatesOfChange(sb, mNumIndependentSpecies, mNumDependentSpecies, *aL0);
     WriteComputeReactionRates(sb, mNumReactions);
     WriteEvalModel(sb, mNumReactions, mNumIndependentSpecies, mNumFloatingSpecies, numOfRules);
     WriteEvalEvents(sb, mNumEvents, mNumFloatingSpecies);
@@ -1126,19 +1126,19 @@ void CSharpGenerator::WriteComputeConservedTotals(CodeBuilder& sb, const int& nu
     if (numDependentSpecies > 0)
     {
         string factor;
-        double* matPtr = mStructAnalysis.GetGammaMatrix();
+        LIB_LA::DoubleMatrix* gamma = mStructAnalysis.GetGammaMatrix();
 
-        DoubleMatrix gamma(matPtr, numDependentSpecies, numFloatingSpecies);
+//        DoubleMatrix gamma(matPtr, numDependentSpecies, numFloatingSpecies);
         for (int i = 0; i < numDependentSpecies; i++)
         {
             sb<<Format("\t\t_ct[{0}] = ", i);
             for (int j = 0; j < numFloatingSpecies; j++)
             {
-                double current = (matPtr != NULL) ? gamma(i,j) : 1.0;    //Todo: This is a bug? We should not be here if the matrix i NULL.. Triggered by model 00029
+                double current = (gamma != NULL) ? (*gamma)(i,j) : 1.0;    //Todo: This is a bug? We should not be here if the matrix i NULL.. Triggered by model 00029
 
                 if ( current != 0.0 )
                 {
-                    if (!matPtr)//IsNaN(current)) //C# code is doing one of these.. factor = "" .. ??
+                    if (!gamma)//IsNaN(current)) //C# code is doing one of these.. factor = "" .. ??
                     {
                         // TODO: fix this
                         factor = "";

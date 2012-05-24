@@ -33,6 +33,11 @@ SBWApplicationException::SBWApplicationException(const string& msg)
 RRException(msg)
 {}
 
+SBWApplicationException::SBWApplicationException(const string& msg1, const string& msg2)
+:
+RRException(msg1 + msg2)
+{}
+
 SBWException::SBWException(const string& msg)
 :
 RRException(msg)

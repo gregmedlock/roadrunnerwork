@@ -174,9 +174,9 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
     return sb.ToString();
 }
 
-double* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
+LIB_LA::DoubleMatrix* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
 {
-    double* L0;
+    LIB_LA::DoubleMatrix* L0;
     try
     {
         if (mNumDependentSpecies > 0)
@@ -189,7 +189,7 @@ double* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
         }
         else
         {
-            L0 = new double[1];//.Allocate(1,1);// = new double[0][];
+            L0 = new LIB_LA::DoubleMatrix(1,1);//.Allocate(1,1);// = new double[0][];
             nrRows = nrCols = 1;
         }
     }

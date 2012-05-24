@@ -36,7 +36,7 @@ mTheData(theData)
 void SimulationData::SetName(const string& name)
 {
     mName = name;
-    mTheData.SetNamePointer(&mName);
+//    mTheData.SetNamePointer(&mName);
 }
 
 StringList SimulationData::GetColumnNames()

@@ -76,7 +76,7 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="rr_c\main.cxx">
+			<CppCompile Include="rr_c\main.cpp">
 				<BuildOrder>3</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="rr_c\rrArgs.cpp">
@@ -134,7 +134,7 @@
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="RunParams">-m..\Models\test_1.xml -vDebug3 -t&quot;C:\temp&quot; -l&quot;S1 S2&quot;</Parameters>
+						<Parameters Name="RunParams">-m..\Models\test_1.xml -vInfo -t&quot;C:\temp&quot; -l&quot;S1 S2&quot; -p</Parameters>
 					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

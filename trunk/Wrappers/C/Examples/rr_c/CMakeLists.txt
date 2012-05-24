@@ -1,7 +1,7 @@
 set(target rr_c)
 
 add_executable(		   ${target} 
-main.cxx
+main.cpp
 rrArgs.cpp
 )
 

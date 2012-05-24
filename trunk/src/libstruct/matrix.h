@@ -33,10 +33,9 @@ namespace LIB_LA
 
     public:
         //! Creates a new matrix with the given numbers of rows and columns
-        /*LIB_EXTERN*/ Matrix(unsigned int rows = 0, unsigned int cols = 0) :
-          _Rows(rows),
-              _Cols(cols),
-              _Array(NULL)
+        /*LIB_EXTERN*/
+        Matrix(unsigned int rows = 0, unsigned int cols = 0) :
+        _Rows(rows), _Cols(cols), _Array(NULL)
           {
               if (_Rows && _Cols)
               {
@@ -46,10 +45,9 @@ namespace LIB_LA
           }
 
           //! Copy constructor
-          /*LIB_EXTERN*/ Matrix(const Matrix <T> & src):
-          _Rows(src._Rows),
-              _Cols(src._Cols),
-              _Array(NULL)
+          /*LIB_EXTERN*/
+          Matrix(const Matrix <T> & src):
+          _Rows(src._Rows), _Cols(src._Cols), _Array(NULL)
           {
               if (_Rows && _Cols)
               {
@@ -57,15 +55,13 @@ namespace LIB_LA
                   memcpy(_Array, src._Array, _Rows * _Cols * sizeof(T));
               }
           }
-    
-          //! Constructor taking a matrix mapped to a vector and reconstructing the 2D form
-          /*LIB_EXTERN*/ Matrix( T* &oRawData, int nRows, int nCols, bool transpose = true) :
-          _Rows(nRows),
-              _Cols(nCols),
-              _Array(NULL)
 
+          //! Constructor taking a matrix mapped to a vector and reconstructing the 2D form
+          /*LIB_EXTERN*/
+          Matrix( T* &oRawData, int nRows, int nCols, bool transpose = true) :
+          _Rows(nRows), _Cols(nCols), _Array(NULL)
           {
-              if (_Rows && _Cols) 
+              if (_Rows && _Cols)
               {
                   _Array = new T[_Rows * _Cols];
                   if (!transpose)
@@ -83,8 +79,24 @@ namespace LIB_LA
               }
           }
 
+          virtual T* GetPointer()
+          {
+            return _Array;
+          }
+          virtual unsigned int CSize() const
+          {
+              return _Cols;
+          }
+
+          //! returns the number of columns
+          /*LIB_EXTERN*/
+          virtual unsigned int RSize() const
+          {
+              return _Rows;
+          }
+
           //virtual Matrix <T> & operator + (const Matrix <T> & rhs)
-          //{              
+          //{
           // unsigned int i, imax = _Rows * _Cols;
           // T * tmp1 = _Array;
           // T * tmp2 = rhs._Array;
@@ -188,6 +200,12 @@ namespace LIB_LA
               _Cols = cols;
           }
 
+            bool Allocate(unsigned int rows, unsigned int cols)
+            {
+                resize(rows,cols);
+                return _Array ? true : false;
+            }
+
           //! creates a new matrix holding the transpose
           /*LIB_EXTERN*/ virtual Matrix <T> * getTranspose()
           {
@@ -232,25 +250,27 @@ namespace LIB_LA
           }
 
           //! returns the number of rows
-          /*LIB_EXTERN*/ virtual unsigned int numRows() const
+          /*LIB_EXTERN*/
+          virtual unsigned int numRows() const
           {
               return _Rows;
           }
 
           //! returns the number of columns
-          /*LIB_EXTERN*/ virtual unsigned int numCols() const
+          /*LIB_EXTERN*/
+          virtual unsigned int numCols() const
           {
               return _Cols;
           }
 
           //! returns the selected row
-          /*LIB_EXTERN*/ virtual inline T * operator[](unsigned int row)
+          /*LIB_EXTERN*/ virtual inline T* operator[](unsigned int row)
           {
               return _Array + row * _Cols;
           }
 
           //! returns the selected row
-          /*LIB_EXTERN*/ virtual inline const T * operator[](unsigned int row) const
+          /*LIB_EXTERN*/ virtual inline const T* operator[](unsigned int row) const
           {
               return _Array + row * _Cols;
           }
@@ -258,14 +278,15 @@ namespace LIB_LA
           //! returns the selected matrix element
           /*LIB_EXTERN*/ virtual inline _ElementType & operator()(const unsigned int & row,
               const unsigned int & col)
-          {      
+          {
               return *(_Array + row * _Cols + col);
           }
 
           //! returns the selected matrix element (const)
-          /*LIB_EXTERN*/ virtual inline const _ElementType & operator()(const unsigned int & row,
+          /*LIB_EXTERN*/
+          virtual inline const _ElementType& operator()(const unsigned int & row,
               const unsigned int & col) const
-          {      
+          {
               return *(_Array + row * _Cols + col);
           }
     };
@@ -278,6 +299,8 @@ namespace LIB_LA
 
     //! defines a complex matrix (hides the templates in signatures)
     typedef Matrix< Complex > ComplexMatrix;
+
+     ostream& operator<<(ostream& stream, const DoubleMatrix& mat);
 }
 
 #endif // __cplusplus

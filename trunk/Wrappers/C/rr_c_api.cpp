@@ -9,11 +9,11 @@
 using namespace rr;
 rr::RoadRunner *gRRHandle = NULL;
 RRResult*       gResult = NULL;
+char*           gError = NULL;
 
-void __stdcall   AssignLogger(FileLog& logger)
-{
-//    gLog = logger;
-}
+//Internal prototypes
+void SetError(const string& err);
+
 
 RRResult::~RRResult()
 {
@@ -21,7 +21,7 @@ RRResult::~RRResult()
     delete [] ColumnHeaders;
 }
 
-char* __stdcall   getBuildDate(void)
+char* __stdcall getBuildDate(void)
 {
     return __DATE__;
 }
@@ -43,12 +43,15 @@ void __stdcall deleteRRInstance(RRHandle handle)
 
 char* __stdcall getCopyright()
 {
+    char* text;
     if(!gRRHandle)
     {
-        return "Please allocate a handle to roadrunner API before calling any API function";
+        string msg = "Please allocate a handle to roadrunner API before calling any API function";
+        text = new char[msg.size() + 1]; //Where do we free this one.. ->  freeText(....);
+        return text;
     }
 
-    char* text = new char[512]; //Where do we free this one.. ->  freeText(....);
+    text = new char[gRRHandle->getCopyright().size() + 1];
     strcpy(text, gRRHandle->getCopyright().c_str());
     return text;
 }
@@ -68,10 +71,16 @@ char* __stdcall getCopyright()
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetError("Please allocate a handle to roadrunner API before calling any API function");
         return false;
     }
-    return gRRHandle->loadSBML(sbml);
+
+    if(!gRRHandle->loadSBML(sbml))
+    {
+        SetError("Failed to load SBML semantics");
+        return false;
+    }
+    return true;
 }
 
 bool __stdcall setTimeStart(double timeStart)
@@ -205,14 +214,25 @@ bool __stdcall freeStringList(RRStringListHandle sl)
     return true;
 }
 
-double __stdcall getValue(void)
+double __stdcall getValue(const char* speciesID)
 {
-    return false;
+    if(!gRRHandle)
+    {
+        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        return NULL;
+    }
+    return gRRHandle->getValue(speciesID);
 }
 
-bool __stdcall setValue(double val)
+bool __stdcall setValue(const char* speciesID, const double& val)
 {
-    return false;
+    if(!gRRHandle)
+    {
+        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        return false;
+    }
+
+    return gRRHandle->setValue(speciesID, val);
 }
 
 RRDataMatrixHandle __stdcall getStoichiometryMatrix(void)
@@ -223,7 +243,7 @@ RRDataMatrixHandle __stdcall getStoichiometryMatrix(void)
         return NULL;
     }
 
-    DoubleMatrix tempMat = gRRHandle->getStoichiometryMatrix();
+    LIB_LA::DoubleMatrix tempMat = gRRHandle->getStoichiometryMatrix();
 
     RRDataMatrixHandle matrix = new RRDataMatrix;
     matrix->RSize = tempMat.RSize();
@@ -279,12 +299,23 @@ bool __stdcall freeRRDataMatrixHandle(RRDataMatrixHandle matrix)
     return true;
 }
 
+void SetError(const string& err)
+{
+    gError = new char[err.size() + 1];
+    strcpy(gError, err.c_str());
+}
+
+char* __stdcall getLastError()
+{
+    return gError;
+}
+
 //============================================================================
 #pragma argsused
 int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)
 {
     //Intialize the logger here..
-    LogOutput::mLogToConsole = true;
+    LogOutput::mLogToConsole = false;
     return 1;
 }
 

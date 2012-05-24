@@ -45,10 +45,10 @@ vector< LIB_LA::Complex> LibLA::getEigenValues(DoubleMatrix &oMatrix)
 
     if (numRows == 0) return oResult;
 
-    doublecomplex* A = new doublecomplex[numRows*numRows]; memset(A, 0, sizeof(doublecomplex)*numRows*numRows);
-    doublecomplex* eigVals = new doublecomplex[numRows]; memset(eigVals, 0, sizeof(doublecomplex)*numRows);
-    doublecomplex* work = new doublecomplex[lwork]; memset(work, 0, sizeof(doublecomplex)*lwork);
-    doublereal* rwork = new doublereal[lwork]; memset(rwork, 0, sizeof(doublereal)*lwork);
+    doublecomplex* A        = new doublecomplex[numRows*numRows]; memset(A, 0, sizeof(doublecomplex)*numRows*numRows);
+    doublecomplex* eigVals  = new doublecomplex[numRows]; memset(eigVals, 0, sizeof(doublecomplex)*numRows);
+    doublecomplex* work     = new doublecomplex[lwork]; memset(work, 0, sizeof(doublecomplex)*lwork);
+    doublereal* rwork       = new doublereal[lwork]; memset(rwork, 0, sizeof(doublereal)*lwork);
 
     int index;
     for(int i=0; i<numRows; i++)

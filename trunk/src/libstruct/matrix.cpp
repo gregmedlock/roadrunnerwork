@@ -8,13 +8,27 @@
 #include <string.h>
 #include <stdlib.h>
 #include <complex>
+
 //---------------------------------------------------------------------------
+namespace LIB_LA
+{
+
+ostream& operator<<(ostream& stream, const DoubleMatrix& mat)
+{
+    for(unsigned row = 0; row < mat.RSize(); row++)
+    {
+        for(unsigned col = 0; col < mat.CSize(); col++)
+        {
+            double val = mat(row,col);
+            stream<<val<<"\t";
+        }
+        stream<<std::endl;
+    }
+    return stream;
+}
 
 
-using namespace LIB_LA;
-
-
-template<typename T> void Matrix<T>::initializeFrom2DMatrix( T** &oRawData, int rows, int cols)
+template<typename T> void Matrix<T>::initializeFrom2DMatrix(T** &oRawData, int rows, int cols)
 {
     resize(rows, cols);
     for (unsigned int i = 0; i < _Rows; i++)
@@ -26,7 +40,7 @@ template<typename T> void Matrix<T>::initializeFrom2DMatrix( T** &oRawData, int 
     }
 
 }
-template<typename T> void Matrix<T>::initializeFromConst2DMatrix( const T** oRawData, int rows, int cols)
+template<typename T> void Matrix<T>::initializeFromConst2DMatrix(const T** oRawData, int rows, int cols)
 {
     resize(rows, cols);
     for (unsigned int i = 0; i < _Rows; i++)
@@ -68,3 +82,4 @@ template class Matrix<int>;
 template class Matrix< LIB_LA::Complex >;
 template class Matrix< std::complex<double> >;
 
+}

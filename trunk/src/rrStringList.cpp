@@ -90,7 +90,12 @@ void StringList::push_back(const string& item)
 
 int StringList::find(const string& item)
 {
-    return IndexOf(mStrings, item);
+    return rr::IndexOf(mStrings, item);
+}
+
+int StringList::IndexOf(const string& item)
+{
+    return rr::IndexOf(mStrings, item);
 }
 
 bool StringList::Contains(const string& item)

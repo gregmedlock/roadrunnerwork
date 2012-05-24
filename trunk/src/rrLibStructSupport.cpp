@@ -298,21 +298,23 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 /// <summary>
 /// Get Gamma matrix
 /// </summary>
-double* StructAnalysis::GetGammaMatrix()
+LIB_LA::DoubleMatrix* StructAnalysis::GetGammaMatrix()
 {
     IntPtr pointer;
     int nRows;
     int nCols;
 
-    if (LibStructural_getGammaMatrix((double***) &pointer, &nRows, &nCols) < 0 )
-    {
-        Log(lError)<<"\n=====================================\n\
-            The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.\n\
-            ===============================================";
-        return NULL;
-    }
-    double *res = GetDoubleMatrixFromPtr(pointer, nRows, nCols);
-    return res;
+    return mInstance->getGammaMatrix();
+//    if (LibStructural_getGammaMatrix((double***) &pointer, &nRows, &nCols) < 0 )
+//    {
+//        Log(lError)<<"\n=====================================\n\
+//            The Conservation Law Array has not yet been calculated, please call one of the analyze methods first.\n\
+//            ===============================================";
+//        return NULL;
+//    }
+////    double *res =
+//    return GetDoubleMatrixFromPtr(pointer, nRows, nCols);
+//    return res;
 }
 
 ////        /// <summary>
@@ -537,26 +539,28 @@ StringList    StructAnalysis::GetIndependentSpeciesIds()
 /// <summary>
 /// Get L0 matrix
 /// </summary>
-double* StructAnalysis::GetL0Matrix()
+LIB_LA::DoubleMatrix* StructAnalysis::GetL0Matrix()
 {
-    IntPtr pointer;
-    int nRows;
-    int nCols;
-
-    if (LibStructural_getL0Matrix((double***) &pointer, &nRows, &nCols) < 0)
-    {
-        throw Exception("The L0 Matrix has not yet been calculated, please call one of the analyze methods first.");
-    }
-
-    double** mat = (double**) pointer;
-
-    return GetDoubleMatrixFromPtr(pointer, nRows, nCols); //    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
+    return mInstance->getL0Matrix();
+//    IntPtr pointer;
+//    int nRows;
+//    int nCols;
+//
+//    if (LibStructural_getL0Matrix((double***) &pointer, &nRows, &nCols) < 0)
+//    {
+//        throw Exception("The L0 Matrix has not yet been calculated, please call one of the analyze methods first.");
+//    }
+//
+////    double** mat = (double**) pointer;
+//
+//    LIB_LA::DoubleMatrix mat =  GetDoubleMatrixFromPtr(pointer, nRows, nCols); //    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
+//    return mat;
 }
 
 // <summary>
 // Get L0 matrix
 // </summary>
-double* StructAnalysis::GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels)
+LIB_LA::DoubleMatrix* StructAnalysis::GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels)
 {
     GetL0MatrixLabels(sRowLabels, sColumnLabels);
     return GetL0Matrix(); //!We don't know the size of this one..?
@@ -611,8 +615,10 @@ void StructAnalysis::GetL0MatrixLabels(vector<string>& sRowLabels, vector<string
 ////        /// <summary>
 ////        /// Get L matrix (link matrix)
 ////        /// </summary>
-////        public static DoubleMatrix GetLinkMatrix()
-////        {
+DoubleMatrix* StructAnalysis::GetLinkMatrix()
+{
+    return mInstance->getL0Matrix();
+}
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getLinkMatrix(out pointer, out nRows, out nCols) < 0)
 ////                throw new Exception("The Link Matrix has not yet been calculated, please call one of the analyze methods first.");

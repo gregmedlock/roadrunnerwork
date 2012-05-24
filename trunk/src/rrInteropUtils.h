@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include "rrExporter.h"
-
+#include "matrix.h"
 using std::string;
 using std::vector;
 
@@ -51,7 +51,7 @@ namespace rr
 /// <summary>
 /// Get double matrix from ptr
 /// </summary>
-double* GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols);
+LIB_LA::DoubleMatrix GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols);
 
 //        /// <summary>
 //        /// Get double matrix from ptr

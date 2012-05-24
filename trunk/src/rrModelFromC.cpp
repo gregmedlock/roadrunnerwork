@@ -105,7 +105,7 @@ int ModelFromC::getNumEvents()
 //void  ModelFromC::AssignRates(vector<double>& rates)                    {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::computeConservedTotals()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 void  ModelFromC::computeEventPriorites()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-void  ModelFromC::setConcentration(int index, double value)                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+
 //void  ModelFromC::convertToAmounts()                                    {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::convertToConcentrations() = 0;
 //void  ModelFromC::updateDependentSpeciesValues(vector<double>& _y)        {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
@@ -136,31 +136,32 @@ bool ModelFromC::SetupDLLFunctions()
     }
 
     //Load functions..
-    cInitModel                          = (c_int)                        GetFunctionPtr("InitModel");
-    cGetModelName                       = (c_charStar)                     GetFunctionPtr("GetModelName");
-    cinitializeInitialConditions        = (c_void)                        GetFunctionPtr("initializeInitialConditions");
-    csetParameterValues                 = (c_void)                        GetFunctionPtr("setParameterValues");
-    csetCompartmentVolumes              = (c_void)                      GetFunctionPtr("setCompartmentVolumes");
-    cgetNumLocalParameters              = (c_int_int)                     GetFunctionPtr("getNumLocalParameters");
-    csetBoundaryConditions              = (c_void)                        GetFunctionPtr("setBoundaryConditions");
-    csetInitialConditions               = (c_void)                        GetFunctionPtr("setInitialConditions");
-    cevalInitialAssignments             = (c_void)                      GetFunctionPtr("evalInitialAssignments");
-    ccomputeRules                       = (c_void_doubleStar)           GetFunctionPtr("computeRules");
-    cconvertToAmounts                   = (c_void)                      GetFunctionPtr("convertToAmounts");
-    ccomputeConservedTotals             = (c_void)                      GetFunctionPtr("computeConservedTotals");
-    cgetConcentration                   = (c_double_int)                GetFunctionPtr("getConcentration");
-    cGetCurrentValues                   = (c_doubleStar)                GetFunctionPtr("GetCurrentValues");
-    cevalModel                            = (c_void_double_doubleStar)    GetFunctionPtr("evalModel");
-    cconvertToConcentrations              = (c_void)                         GetFunctionPtr("convertToConcentrations");
-    cevalEvents                            = (c_void_double_doubleStar)    GetFunctionPtr("evalEvents");
-    cupdateDependentSpeciesValues        = (c_void_doubleStar)            GetFunctionPtr("updateDependentSpeciesValues");
-    ccomputeAllRatesOfChange               = (c_void)                        GetFunctionPtr("computeAllRatesOfChange");
-    cAssignRates_a                         = (c_void)                        GetFunctionPtr("AssignRatesA");
-    cAssignRates_b                         = (c_void_doubleStar)            GetFunctionPtr("AssignRatesB");
-    ctestConstraints                        = (c_void)                        GetFunctionPtr("testConstraints");
-    cresetEvents                            = (c_void)                        GetFunctionPtr("resetEvents");
-    cInitializeRateRuleSymbols            = (c_void)                        GetFunctionPtr("InitializeRateRuleSymbols");
-    cInitializeRates                    = (c_void)                        GetFunctionPtr("InitializeRates");
+    cInitModel                          = (c_int)                      GetFunctionPtr("InitModel");
+    cGetModelName                       = (c_charStar)                 GetFunctionPtr("GetModelName");
+    cinitializeInitialConditions        = (c_void)                     GetFunctionPtr("initializeInitialConditions");
+    csetParameterValues                 = (c_void)                     GetFunctionPtr("setParameterValues");
+    csetCompartmentVolumes              = (c_void)                     GetFunctionPtr("setCompartmentVolumes");
+    cgetNumLocalParameters              = (c_int_int)                  GetFunctionPtr("getNumLocalParameters");
+    csetBoundaryConditions              = (c_void)                     GetFunctionPtr("setBoundaryConditions");
+    csetInitialConditions               = (c_void)                     GetFunctionPtr("setInitialConditions");
+    cevalInitialAssignments             = (c_void)                     GetFunctionPtr("evalInitialAssignments");
+    ccomputeRules                       = (c_void_doubleStar)          GetFunctionPtr("computeRules");
+    cconvertToAmounts                   = (c_void)                     GetFunctionPtr("convertToAmounts");
+    ccomputeConservedTotals             = (c_void)                     GetFunctionPtr("computeConservedTotals");
+    cgetConcentration                   = (c_double_int)               GetFunctionPtr("getConcentration");
+    cGetCurrentValues                   = (c_doubleStar)               GetFunctionPtr("GetCurrentValues");
+    cevalModel                          = (c_void_double_doubleStar)   GetFunctionPtr("evalModel");
+    cconvertToConcentrations            = (c_void)                     GetFunctionPtr("convertToConcentrations");
+    cevalEvents                         = (c_void_double_doubleStar)   GetFunctionPtr("evalEvents");
+    cupdateDependentSpeciesValues       = (c_void_doubleStar)          GetFunctionPtr("updateDependentSpeciesValues");
+    ccomputeAllRatesOfChange            = (c_void)                     GetFunctionPtr("computeAllRatesOfChange");
+    cAssignRates_a                      = (c_void)                     GetFunctionPtr("AssignRatesA");
+    cAssignRates_b                      = (c_void_doubleStar)          GetFunctionPtr("AssignRatesB");
+    ctestConstraints                    = (c_void)                     GetFunctionPtr("testConstraints");
+    cresetEvents                        = (c_void)                     GetFunctionPtr("resetEvents");
+    cInitializeRateRuleSymbols          = (c_void)                     GetFunctionPtr("InitializeRateRuleSymbols");
+    cInitializeRates                    = (c_void)                     GetFunctionPtr("InitializeRates");
+    csetConcentration                   = (c_void_int_double)          GetFunctionPtr("setConcentration");
     return true;
 }
 
@@ -488,6 +489,17 @@ void ModelFromC::setCompartmentVolumes()
     }
 
     csetCompartmentVolumes();
+}
+
+void  ModelFromC::setConcentration(int index, double value)
+{
+    if(!csetConcentration)
+    {
+        Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+        return;
+    }
+
+    csetConcentration(index, value);
 }
 
 vector<double> ModelFromC::GetCurrentValues()
