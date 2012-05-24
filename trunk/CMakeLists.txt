@@ -1,11 +1,28 @@
 cmake_minimum_required(VERSION 2.8)
 project(rr)
 
-#-----------------------------------------------------------------------------
-# version number.  
+#MACRO (TODAY RESULT)
+#    IF (WIN32)
+#        EXECUTE_PROCESS(COMMAND "date" "/T" OUTPUT_VARIABLE ${RESULT})
+#        string(REGEX REPLACE "(..)/(..)/..(..).*" "\\3\\2\\1"
+#${RESULT} ${${RESULT}})
+#    ELSEIF(UNIX)
+#        EXECUTE_PROCESS(COMMAND "date" "+%d/%m/%Y" OUTPUT_VARIABLE ${RESULT})
+#        string(REGEX REPLACE "(..)/(..)/..(..).*" "\\3\\2\\1"
+#${RESULT} ${${RESULT}})
+#    ELSE (WIN32)
+#        MESSAGE(SEND_ERROR "date not implemented")
+#        SET(${RESULT} 000000)
+#    ENDIF (WIN32)
+#ENDMACRO (TODAY)
+#
+##-----------------------------------------------------------------------------
+## version number.  
+#TODAY(THE_DATE)
+#
 SET(RR_MAJOR_VERSION 2012)
 SET(RR_MINOR_VERSION 5)
-SET(RR_BUILD_VERSION 22)
+SET(RR_BUILD_VERSION ${TODAY})
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
 OPTION (BUILD_C_API	 			"Create C API DLL" 					OFF)

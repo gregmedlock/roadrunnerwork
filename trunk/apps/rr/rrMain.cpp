@@ -148,7 +148,7 @@ int main(int argc, char * argv[])
             throw("Failed running simulation");
         }
 
-        if(args.DataOutputFolder.size())
+        if(args.SaveResultToFile)
         {
             //Write result
             if(!simulation.SaveResult())
@@ -185,7 +185,7 @@ int main(int argc, char * argv[])
 void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
 {
     char c;
-    while ((c = GetOptions(argc, argv, ("cpuv:n:d:t:l:m:s:e:z:"))) != -1)
+    while ((c = GetOptions(argc, argv, ("cpufv:n:d:t:l:m:s:e:z:"))) != -1)
     {
         switch (c)
         {
@@ -200,6 +200,7 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
             case ('s'): args.StartTime                      = ToDouble(optarg);             break;
             case ('e'): args.EndTime                        = ToDouble(optarg);             break;
             case ('z'): args.Steps                          = ToInt(optarg);                break;
+            case ('f'): args.SaveResultToFile               = true;                         break;
             case ('?'):
             {
                     cout<<Usage(argv[0])<<endl;

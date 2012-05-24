@@ -1,24 +1,72 @@
+#include <stdio.h>                //va_list etc..
 #include <stdarg.h>                //va_list etc..
 #include <stdbool.h>
-#include "rrSupportFunctions.h"
+#include <math.h>
+#include "rrSupport.h"
 
-double spf_pow(double a, double b)
+#define IS_ODD(n)  ((n) & 1)
+double trunc(double d)
 {
-    double res = 1;
-    if(b == 2)
+    return (d>0) ? floor(d) : ceil(d) ;
+}
+
+double IntPower(double base, int exponent)
+{
+    double value = 1.0;
+    int count = 0;
+    do
     {
-//        printf("computing %f to the power of %f\n", a, b);
-        res = a*a;//pow(a,b);
-//           printf("Result: %f\n", res);
+        if(IS_ODD(exponent))
+        {
+            value *= base;
+        }
+        exponent >>= 1;
+        base *= base;
+        ++count;
+    }
+    while (exponent);
+    return (value);
+}
+
+double MyPower(double base, double exponent)
+{
+    double result;
+    int sign = 1;
+    double x = 0;
+    if (base < 0)
+    {
+        sign = -1;
+        base = fabs(base);
+    }
+
+    if (exponent == 0.0)
+    {
+         return (1.0*sign);              // n**0 = 1
+    }
+
+    if ((base == 0.0) && (exponent > 0.0))
+    {
+         return (0.0);                   // 0**n = 0, n > 0
+    }
+
+    x = exponent - trunc (exponent);
+
+    if ((x == 0.0) && (fabs(exponent) <= 2147483647))
+    {
+        result = (sign*IntPower(base, trunc (exponent)));
     }
     else
     {
-#if defined (DEBUG_SPF)
-           printf("b is: %f\n", b);
-#endif
+        result = (sign*exp(exponent * log(base)));
     }
-    return 0;
+    return result;
 }
+
+double spf_pow(double base, double exp)
+{
+    return MyPower(base, exp);
+}
+
 //---------------------------------------------------------------------------
 // Boolean functions for event handling" + NL());
 double spf_gt(double a, double b)
@@ -54,28 +102,27 @@ double spf_neq(double a, double b)
 
 double spf_and(int nrOfArguments, ...)
 {
+    double result = 1.0;
+    int i;
     va_list listPointer;
 
     // Currently, listPointer is UNINITIALIZED, however,
+
     // make listPointer point to the first argument in the list
     va_start(listPointer, nrOfArguments);
 
-    double result = 1.0;
-
-    int i;    //This is C!
     for(i = 0; i < nrOfArguments; i++)
     {
-        // Get an argument.  Must know
-        // the type of the arg to retrieve
+        // Get an argument.  Must know the type of the arg to retrieve
         // it from the va_list.
-      double arg = va_arg( listPointer, double);
+        double arg = va_arg(listPointer, double);
 
-        printf( "    The %dth arg is %f\n", i, arg );
-          if(arg != 1.0)
-          {
-              result = 0.0;
-              break;
-          }
+        printf( "The %dth arg is %f\n", i, arg );
+        if(arg != 1.0)
+        {
+            result = 0.0;
+            break;
+        }
     }
     va_end( listPointer );
     return result;
@@ -83,25 +130,24 @@ double spf_and(int nrOfArguments, ...)
 
 double spf_or(int nrOfArguments, ...)
 {
+    double result = 0.0;
+    int i;
     va_list listPointer;
     va_start(listPointer, nrOfArguments);
 
-    double result = 0.0;
-
-    int i;    //This is C..
     for(i = 0; i < nrOfArguments; i++)
     {
         // Get an argument.  Must know
         // the type of the arg to retrieve
         // it from the va_list.
-      double arg = va_arg( listPointer, double);
+        double arg = va_arg( listPointer, double);
 
-        printf( "    The %dth arg is %f\n", i, arg );
-          if(arg == 1.0)
-          {
-              result = 1.0;
-              break;
-          }
+        printf("The %dth arg is %f\n", i, arg);
+        if(arg == 1.0)
+        {
+            result = 1.0;
+            break;
+        }
     }
     va_end( listPointer );
     return result;
@@ -143,12 +189,11 @@ double spf_or(int nrOfArguments, ...)
 
 double spf_xor(int nrOfArguments, ...)
 {
+    int i;
+    bool result = false;
     va_list listPointer;
     va_start(listPointer, nrOfArguments);
 
-    _Bool result = false;
-
-    int i;    //This is C..
     for(i = 0; i < nrOfArguments; i++)
     {
         // Get an argument.  Must know
@@ -262,7 +307,7 @@ double spf_root(double a, double b)
 {
     if(a != 0)
     {
-        return pow(b, 1.0/a);
+        return spf_pow(b, 1.0/a);
     }
     else
     {
@@ -310,44 +355,62 @@ double sec(double a)
 
 //// Cotangent
 double cot(double a)
-{return -1;}
+{
+    return -1;
+}
 //
 //// Inverse cotangent
 double arccot(double a)
-{return -1;}
-//
+{
+    return -1;
+}
+
 //// Inverse cotangent - ratio numerator and denominator provided
 double arccot2(double a, double b)
-{return -1;}
-//
-//
+{
+    return -1;
+}
+
 //// Inverse secant
 double asec(double a)
-{return -1;}
-//
+{
+    return -1;
+}
+
 //// Cosecant
 double csc(double a)
-{return -1;}
-//
+{
+    return -1;
+}
+
 //// Inverse cosecant
 double acsc(double a)
-{return -1;}
-//
+{
+    return -1;
+}
+
 //// Hyperbolic secant of a double number
 double sech(double a)
-{return -1;}
-//
+{
+    return -1;
+}
+
 //// Inverse hyperbolic secant of a double number
 double asech(double a)
-{return -1;}
+{
+    return -1;
+}
 
 double arcsech(double a)
-{return -1;}
-//
+{
+    return -1;
+}
+
 //// Hyperbolic cosecant of a double number
 double csch(double a)
-{return -1;}
-//
+{
+    return -1;
+}
 
 //// Inverse hyperbolic cosecant of a double number
 double arccsc(double a)
@@ -357,28 +420,39 @@ double arccsc(double a)
 
 //// Inverse hyperbolic cosecant of a double number
 double arccsch(double a)
-{return -1;}
-//
-//
+{
+    return -1;
+}
+
 //// Hyperbolic cotangent of a double number
 double coth(double a)
-{return -1;}
-//
+{
+    return -1;
+}
+
 //// Inverse hyperbolic cotangent of a double number
 double arccoth(double a)
-{return -1;}
-//
+{
+    return -1;
+}
+
 //// Inverse hyperbolic functions
 //// --------------------------------------------------------------
 //// Inverse hyperbolic sine of a double number
 double arcsinh(double a)
-{return -1;}
-//
+{
+    return -1;
+}
+
 //// Inverse hyperbolic cosine of a double number
 double arccosh(double a)
-{return -1;}
-//
+{
+    return -1;
+}
+
 //// Inverse hyperbolic tangent of a double number
 double arctanh(double a)
-{return -1;}
+{
+    return -1;
+}
 

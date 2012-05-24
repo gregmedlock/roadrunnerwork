@@ -23,37 +23,8 @@ StartTime(0),
 Duration(5),
 EndTime(StartTime + Duration),
 Steps(50)
-{
-    //Default for data output is in the same dir as where the executable is
+{}
 
-    //CSIDL_MYDOCUMENTS
-//    TCHAR myDocs[MAX_PATH];
-//    HRESULT result = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, myDocs);
-//
-//    if(result == S_OK)
-//    {
-//        //Make Sure MyDocuments/RoadRunner exists..
-//        TCHAR rrDocs[MAX_PATH];
-//        strcpy(rrDocs, strcat(myDocs,"\\RoadRunner"));
-//        if(FolderExists(rrDocs))
-//        {
-//            DataOutputFolder = rrDocs;
-//        }
-//        else
-//        {
-//            if(!CreateFolder(rrDocs))
-//            {
-//                Log(lError)<<"No data output folder..";
-//                DataOutputFolder = "";
-//            }
-//            else
-//            {
-//                DataOutputFolder = rrDocs;
-//            }
-//        }
-//
-//    }
-}
 //        LogLevel                        LogLevel;           //option v:
 //        string                          ModelFileName;      //option m:
 //        string                          DataOutputFile;     //option d:
@@ -76,7 +47,8 @@ string Usage(const string& prg)
     usage<<setfill('.');
     usage<<setw(25)<<"-v<debug level>"              <<" Debug levels: Error, Warning, Info, Debug, Debug'n', where n is 1-7. Defualt: Info\n";
     usage<<setw(25)<<"-m<FileName>"                 <<" SBML Model File Name (with path)\n";
-    usage<<setw(25)<<"-d<FilePath>"                 <<" Data output folder. If not given, data is output to console\n";
+    usage<<setw(25)<<"-f"                           <<" Save result to file (file name: \"<modelName>.csv\". If -f is not given, data is output to screen\n";
+    usage<<setw(25)<<"-d<FilePath>"                 <<" Data output folder. If not given, data is output to current directory (implies -f is given)\n";
     usage<<setw(25)<<"-t<FilePath>"                 <<" Temporary data output folder. If not given, temp files are output to current directory\n";
     usage<<setw(25)<<"-p"                           <<" Pause before exiting.\n";
     usage<<setw(25)<<"-c"                           <<" Stop execution after compiling model\n";

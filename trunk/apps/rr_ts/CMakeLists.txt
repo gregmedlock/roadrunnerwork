@@ -1,8 +1,9 @@
 set(target rr_ts)
 
 add_executable(		   ${target} 
-rrMain.cpp 
-rrArgs.cpp
+main.cpp 
+Args.cpp
+TestSuiteModelSimulation.cpp
 )
 
 #IF(BUILD_SHARED_LIBS) 

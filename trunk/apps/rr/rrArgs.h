@@ -19,6 +19,7 @@ class Args
         virtual                        ~Args(){}
         LogLevel                        LogLevel;           //option v:
         string                          ModelFileName;      //option m:
+        bool                            SaveResultToFile;   //option f
         string                          DataOutputFolder;   //option d:
         string                          TempDataFolder;     //option t:
         bool                            Pause;              //option p

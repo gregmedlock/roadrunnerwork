@@ -26,7 +26,7 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
 
     public:
                                 SBMLModelSimulation(const string& dataOutputFolder = "", const string& tempDataFilePath = "");
-                               ~SBMLModelSimulation();
+        virtual                ~SBMLModelSimulation();
         bool                    SetModelFilePath(const string& path);
         bool                    SetModelFileName(const string& name);
         bool                    SetDataOutputFolder(const string& name);

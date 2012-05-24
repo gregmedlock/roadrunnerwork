@@ -236,8 +236,8 @@ void CGenerator::WriteClassHeader(CodeBuilder& ignore)
     mHeader<<"#define modelH"<<endl;
     mHeader<<"#include <stdio.h>"<<endl;
     mHeader<<"#include <stdbool.h>"<<endl;
-    mHeader<<"#include \"rr_c_exporter.h\"\t             //Export Stuff."<<endl;
-    mHeader<<"#include \"rrSupportFunctions.h\"\t     //Supportfunctions for event handling.."<<endl;
+    mHeader<<"#include \"rrCExporter.h\"\t             //Export Stuff."<<endl;
+    mHeader<<"#include \"rrSupport.h\"\t     //Supportfunctions for event handling.."<<endl;
 
     mHeader<<Append("//************************************************************************** " + NL());
     mHeader<<"//Number of floating species: "<<floatingSpeciesConcentrationList.size()<<endl;

@@ -71,7 +71,7 @@ string Compiler::CreateCompilerCommand(const string& compiler, const string& sou
 
         exeCmd<<"tcc -g -shared -rdynamic " \
         <<sourceFileName<<" " \
-        <<JoinPath(mSupportCodeFolder, "rrSupportFunctions.c");
+        <<JoinPath(mSupportCodeFolder, "rrSupport.c");
 
         if(gLog.GetLogLevel() == lDebug1)
         {
@@ -108,7 +108,7 @@ string Compiler::CreateCompilerCommand(const string& compiler, const string& sou
 //    exeCmd<<"bcc32 -WD ";
 //    exeCmd<<" -e"<<mDLLFileName<<" -vu +c:\\rrw\\src\\c_src\\bcc.cfg " \
 //    <<sourceFileName \
-//    <<" c:\\rrw\\src\\c_src\\rrSupportFunctions.c";
+//    <<" c:\\rrw\\src\\c_src\\rrSupport.c";
 
     }
     return exeCmd.str();
