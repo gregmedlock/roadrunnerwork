@@ -24,8 +24,8 @@ int main()
     cout<<" And is "<< ToString( spf_and(3, (double) 1, (double) 0, (double) 1) )<<endl;
 
     //Power function
-    double base = -2.1;
-    double exp = 3;
+    double base = 25;
+    double exp = -1;
     cout<<base<<" to the power of "<<exp<<" = "<<spf_pow(base, exp)<<endl;
     cout<<"CG: "<<base<<" to the power of "<<exp<<" = "<<pow(base, exp)<<endl;
     //////////////////////////////////////////////////

@@ -158,7 +158,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
         msg<<setw(20)<<left<<setprecision(4)<<dCVodeArgument[i];
     }
 
-    Log(lDebug)<<msg.str();
+    Log(lDebug3)<<msg.str();
 
     for (int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
     {

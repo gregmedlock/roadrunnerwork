@@ -18,10 +18,12 @@ namespace rr
 
 TestSuiteModelSimulation::TestSuiteModelSimulation(const string& dataOutputFolder, const string& modelFilePath, const string& modelFileName)
 :
+SBMLModelSimulation(dataOutputFolder, dataOutputFolder),
 mCurrentCaseNumber(-1),
 mSimulationError(0)            //No error if not calculated..
 {
     //make sure the output folder exists..
+    mResultData.SetName("ResultData");
     mReferenceData.SetName("ReferenceData");
     mErrorData.SetName("ErrorData");
 }
@@ -32,6 +34,17 @@ TestSuiteModelSimulation::~TestSuiteModelSimulation()
 void TestSuiteModelSimulation::SetCaseNumber(int cNr)
 {
     mCurrentCaseNumber = cNr;
+}
+
+bool TestSuiteModelSimulation::LoadSettings(const string& settingsFName)
+{
+    string fName(settingsFName);
+
+    if(!fName.size())
+    {
+        fName = JoinPath(mModelFilePath, GetSettingsFileNameForCase(mCurrentCaseNumber));
+    }
+    return SBMLModelSimulation::LoadSettings(fName);
 }
 
 bool TestSuiteModelSimulation::LoadReferenceData()
@@ -77,6 +90,7 @@ bool TestSuiteModelSimulation::LoadReferenceData()
 bool TestSuiteModelSimulation::CreateErrorData()
 {
 
+    mResultData = GetResult();
     //Check that result data and reference data has the same dimensions
     if(mResultData.GetNrOfCols() != mReferenceData.GetNrOfCols() || mResultData.GetNrOfRows() != mReferenceData.GetNrOfRows())
     {

@@ -128,7 +128,7 @@ int GetNumberOfFunctionArguments(const string& expression)
 }
 
 
-string JoinPath(const string& aPath, const string& aFile)
+string JoinPath(const string& aPath, const string& aFile, const string& pathSeparator)
 {
     //Just check the paths last position. it has to be a "/"
     //Otherwise, add it before joining
@@ -136,7 +136,7 @@ string JoinPath(const string& aPath, const string& aFile)
     {
         if(aPath[aPath.size() - 1] != '\\')
         {
-            return aPath + "/" + aFile;
+            return aPath + pathSeparator + aFile;
         }
         return aPath + aFile;
     }

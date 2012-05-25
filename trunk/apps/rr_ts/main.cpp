@@ -68,11 +68,17 @@ int main(int argc, char * argv[])
         }
     }
 
+    vector<int> exceptions;
+    exceptions.push_back(374);
+
+    if(std::find(exceptions.begin(), exceptions.end(), paras.CaseNumber) != exceptions.end())
+    {
+        //Don't simulate this one..
+        throw(rr::Exception("Bad model"));
+    }
 
     gLog.SetCutOffLogLevel(paras.LogLevel);
-
-
-    string dataOutputFolder("C:\\RR_DataOutput");
+    string dataOutputFolder("C:\\DataOutput");
     string dummy;
     string logFileName;
 

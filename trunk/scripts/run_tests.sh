@@ -5,7 +5,7 @@ tmpFolder="/cygdrive/c/temp"
 logFile="testLog.txt"
 logTable="testLogTable.txt"
 failed="failedTests.txt"
-simulator="/cygdrive/c/rrw/installs/xe/bin/simulate.exe"
+simulator="/cygdrive/c/rrw/installs/xe/bin/rr_ts.exe"
 start=$1
 end=$2
 
@@ -23,14 +23,14 @@ for ((i=$start; i<=$end; i++ ));
 do 
 	echo "Running $i" ; 
 	echo $i >> $logFile; 
-	$simulator -n$i -v0 >> $logFile &
-#	$simulator -n$i -v0 >> $logFile 
+#	$simulator -n$i -v0 >> $logFile &
+	$simulator -n$i -vError >> $logFile 
 	echo "Next" >> $logFile;
-    sleep .15
+    #sleep .15
 done
 
 echo "Waiting for background jobs to finish..."
-wait
+#wait
 
 ##Creeate a table
 #

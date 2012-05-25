@@ -371,10 +371,10 @@ DoubleMatrix RoadRunner::runSimulation()
     double tout = mTimeStart;
 
     //The simulation is done here..
-    Log(lDebug3)<<"Will run the OneStep function "<<mNumPoints<<" times";
+    Log(lDebug)<<"Will run the OneStep function "<<mNumPoints<<" times";
     for (int i = 1; i < mNumPoints; i++)
     {
-        Log(lDebug3)<<"Step "<<i;
+        Log(lDebug)<<"Step "<<i;
         mCVode->OneStep(tout, hstep);
         tout = mTimeStart + i * hstep;
         AddNthOutputToResult(results, i, tout);

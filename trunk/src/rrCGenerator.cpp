@@ -56,7 +56,8 @@ string CGenerator::GetSourceCodeFileName()
 
 bool CGenerator::SaveSourceCodeToFolder(const string& folder)
 {
-    mHeaderCodeFileName = JoinPath(folder, ExtractFileName(mCurrentXMLModelFileName));
+    string fName = ExtractFileName(mCurrentXMLModelFileName);
+    mHeaderCodeFileName = JoinPath(folder, fName);
     mHeaderCodeFileName = ChangeFileExtensionTo(mHeaderCodeFileName, ".h");
 
     ofstream outFile(mHeaderCodeFileName.c_str());
@@ -446,7 +447,7 @@ void CGenerator::WriteComputeConservedTotals(CodeBuilder& ignore, const int& num
     }
     else
     {
-        mSource<<"printf(\"In an empty ComputeConservedTotals!\\n \");\n";
+        //mSource<<"printf(\"In an empty ComputeConservedTotals!\\n \");\n";
     }
     mSource<<"}\n\n";
 }
@@ -1187,7 +1188,7 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
     mHeader.AddFunctionExport("void", "evalEvents(double timeIn, double oAmounts[])");
     mSource<<Append("void evalEvents(double timeIn, double oAmounts[])" + NL());
     mSource<<Append("{" + NL());
-    mSource<<Append("\tprintf(\"In Eval events\\n\");\n\n");
+//    mSource<<Append("\tprintf(\"In Eval events\\n\");\n\n");
 
     if (numEvents > 0)
     {
@@ -1216,11 +1217,11 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
         eventString = ReplaceWord("time", "mTime", eventString);
         mSource<<"\t_previousEventStatusArray[" << i << "] = mEventStatusArray[" << i << "];" << NL();
         mSource<<Append("\tif (" + eventString + " == 1.0) {" + NL());
-        mSource<<Append("\t printf(\"Time for lt true: %f\n\", timeIn);\n");
+//        mSource<<Append("\t printf(\"Time for lt true: %f\n\", timeIn);\n");
         mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = true;" + NL());
         mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = 1;" + NL());
         mSource<<Append("\n\t} else {" + NL());
-         mSource<<Append("\t printf(\"Time for lt false: %f\n\", timeIn);\n");
+//         mSource<<Append("\t printf(\"Time for lt false: %f\n\", timeIn);\n");
         mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = false;" + NL());
         mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = -1;" + NL());
         mSource<<Append("\t\t}" + NL());

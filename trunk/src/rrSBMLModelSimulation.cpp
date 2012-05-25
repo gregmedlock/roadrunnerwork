@@ -95,7 +95,7 @@ string  SBMLModelSimulation::GetDataOutputFolder()
     return mDataOutputFolder;
 }
 
-bool    SBMLModelSimulation::CompileIfDllExists()
+bool SBMLModelSimulation::CompileIfDllExists()
 {
     return mCompileIfDllExists;
 }

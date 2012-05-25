@@ -10,22 +10,39 @@ double trunc(double d)
     return (d>0) ? floor(d) : ceil(d) ;
 }
 
-double IntPower(double base, int exponent)
+double IntPower(double x, int y)
 {
-    double value = 1.0;
-    int count = 0;
-    do
+//    double value = 1.0;
+//    int count = 0;
+//    do
+//    {
+//        if(IS_ODD(exponent))
+//        {
+//            value *= base;
+//        }
+//        exponent >>= 1;
+//        base *= base;
+//        ++count;
+//    }
+//    while (exponent);
+//    return (value);
+
+    double  temp;
+    if( y == 0)
     {
-        if(IS_ODD(exponent))
-        {
-            value *= base;
-        }
-        exponent >>= 1;
-        base *= base;
-        ++count;
+       return 1;
     }
-    while (exponent);
-    return (value);
+
+    temp = IntPower(x, y/2);
+    if (y%2 == 0)
+        return temp*temp;
+    else
+    {
+        if(y > 0)
+            return x*temp*temp;
+        else
+            return (temp*temp)/x;
+    }
 }
 
 double MyPower(double base, double exponent)
@@ -64,6 +81,9 @@ double MyPower(double base, double exponent)
 
 double spf_pow(double base, double exp)
 {
+	if(base == 0)
+		return 0;
+	else
     return MyPower(base, exp);
 }
 
@@ -76,7 +96,7 @@ double spf_gt(double a, double b)
 
 double spf_lt(double a, double b)
 {
-    printf("in %f less than %f", a, b);
+//    printf("in %f less than %f", a, b);
     return (a <= b ? 1.0 : 0.0);
 }
 
