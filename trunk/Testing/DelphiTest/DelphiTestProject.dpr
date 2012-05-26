@@ -1,6 +1,11 @@
 program DelphiTestProject;
 
 uses
+//  madExcept,
+//  madLinkDisAsm,
+//  madListHardware,
+//  madListProcesses,
+//  madListModules,
   Forms,
   ufMain in 'ufMain.pas' {Form2},
   uRoadRunnerAPI in '..\..\Wrappers\Delphi\uRoadRunnerAPI.pas';

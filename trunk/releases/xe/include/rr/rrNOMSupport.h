@@ -41,20 +41,20 @@ class RR_DECLSPEC NOMSupport : public rrObject
     protected:
 
         SBMLDocument           *mSBMLDoc;                 //Correspond to C# _oDoc
-        Model                    *mModel;                    //Correspond to C# _oModel
+        Model                  *mModel;                    //Correspond to C# _oModel
         const string            STR_DoubleFormat;    // = "G"; //"G17";
-        StringSymbolHashTable     mSymbolTable;
+        StringSymbolHashTable   mSymbolTable;
 
-        ArrayList                 returnUnitDefinition(UnitDefinition oDefinition);
-        const ASTNode*             changeSymbol(ASTNode* node, const string& time, const int& targetType);
+        ArrayList               returnUnitDefinition(UnitDefinition oDefinition);
+        const ASTNode*          changeSymbol(ASTNode* node, const string& time, const int& targetType);
         ASTNode                 changeTimeToCSymbol(ASTNode* node, const string& name, const int& type);
-        bool                     addMissingModifiers(Model *oModel);
-        StringList                 _Namespaces;
-        StringList                 GetSymbols(const string& formula);
+        bool                    addMissingModifiers(Model *oModel);
+        StringList             _Namespaces;
+        StringList              GetSymbols(const string& formula);
 
-        string                     GetInitialAssignmentFor(const string& sbmlId);
-        string                     GetName(SBase* element);
-        string                     GetRuleFor(const string& sbmlId);
+        string                  GetInitialAssignmentFor(const string& sbmlId);
+        string                  GetName(SBase* element);
+        string                  GetRuleFor(const string& sbmlId);
         void                    addDependenciesToList(const ASTNode* node, StringList& sResult);
         void                    AddMissingParameter(const string& parameterId, SBMLDocument *doc);
         void                    BuildSymbolTable();
@@ -78,10 +78,10 @@ class RR_DECLSPEC NOMSupport : public rrObject
        public:
                                 NOMSupport();
         virtual                ~NOMSupport();
-        Model*                    GetModel(){return mModel;}
-        SBMLDocument*            GetSBMLDocument(){return mSBMLDoc;}
+        Model*                  GetModel(){return mModel;}
+        SBMLDocument*           GetSBMLDocument(){return mSBMLDoc;}
 
-        ArrayList                 getDerivedUnitDefinition(const string& sId);
+        ArrayList               getDerivedUnitDefinition(const string& sId);
         ArrayList               getListOfBoundarySpeciesIds();
         ArrayList               getListOfErrors();
         StringListContainer     getListOfFloatingSpecies();

@@ -22,7 +22,6 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<DllSuffix>-cg</DllSuffix>
 			<BPILibOutputDir>$(RR_ROOT)\installs\xe\lib</BPILibOutputDir>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
@@ -40,7 +39,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\..\src\libstruct\;..\..\..\src\mtrand\;..\..\..\src\;..\..\..\src\;..\..\..\src;..\..\..\src\;..\..\..\src\libstruct;..\..\..\src\;..\..\..\src\;..\..\..\src\;..\..\..\installs\xe\include\sbml;..\..\..\installs\xe\include;..\..\..\installs\xe\include\cvode;..\..\..\installs\xe\include\nvector;..\..\..\src;C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\src\libstruct\;..\..\..\src\mtrand\;..\..\..\src\;..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\..\src\;..\..\..\installs\xe\lib\;..\..\..\src\;..\..\..\src\;..\..\..\src\Util\;..\..\..\src\Logger\;..\..\..\src\libstruct\;..\..\..\src\Util\mtrand\;..\..\..\src\;..\..\..\src\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\..\builds\xe\clapack\SRC\;..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\src\libstruct\;..\..\..\src\mtrand\;..\..\..\src\;..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\..\src\;..\..\..\installs\xe\lib\;..\..\..\src\;..\..\..\src\;..\..\..\src\Util\;..\..\..\src\Logger\;..\..\..\src\libstruct\;..\..\..\src\Util\mtrand\;..\..\..\src\;..\..\..\src\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -80,24 +79,24 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="..\..\..\builds\xe\clapack\BLAS\SRC\blas.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>69</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\..\builds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>70</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\..\builds\xe\clapack\SRC\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>68</BuildOrder>
+			</LibFiles>
 			<CppCompile Include="roadrunner.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
 			<ResFiles Include="roadrunner.res">
 				<BuildOrder>70</BuildOrder>
 			</ResFiles>
-			<LibFiles Include="..\..\..\installs\xe\lib\blas.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>68</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\..\..\installs\xe\lib\lapack.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>69</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\..\..\installs\xe\lib\libf2c.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>70</BuildOrder>
-			</LibFiles>
 			<LibFiles Include="..\..\..\installs\xe\lib\libsbml-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>71</BuildOrder>

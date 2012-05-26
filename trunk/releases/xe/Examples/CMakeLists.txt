@@ -5,9 +5,8 @@ set(RR_INCLUDE_ROOT "../src")
 # rr Includes
 include_directories(${RR_INCLUDE_ROOT})
 include_directories(${RR_INCLUDE_ROOT}/libstruct)
-include_directories(${RR_INCLUDE_ROOT}/C_src)
-include_directories(${SBML_INSTALL_FOLDER}/include)
-include_directories(${SBML_INSTALL_FOLDER}/include/sbml)
+include_directories(${LIBSBML_INSTALL_FOLDER}/include)
+include_directories(${LIBSBML_INSTALL_FOLDER}/include/sbml)
 include_directories(${CVODE_INSTALL_FOLDER}/include/cvode)
 
 if(${MSVC})

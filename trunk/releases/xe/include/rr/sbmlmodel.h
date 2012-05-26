@@ -3,7 +3,7 @@
 #ifndef NO_SBML
 
 #include <string>
-#include <sbml/SBMLDocument.h>
+#include <SBMLDocument.h>
 #include <sbml/Model.h>
 #include <sbml/Species.h>
 

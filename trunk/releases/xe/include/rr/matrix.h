@@ -1,10 +1,12 @@
 #ifndef LIB_LA_MATRIX_H
 #define LIB_LA_MATRIX_H
 #include <iosfwd>
+#include <ostream>
 #include "libutil.h"
 #include "string.h"
 
 #ifdef __cplusplus
+using std::ostream;
 
 namespace LIB_LA
 {

@@ -2,7 +2,10 @@
 #define rrMiscH
 #include <string>
 #include <iomanip>
+#include <ostream>
 #include "rrExporter.h"
+using std::ostream;
+
 using std::string;
 using std::endl;
 //---------------------------------------------------------------------------

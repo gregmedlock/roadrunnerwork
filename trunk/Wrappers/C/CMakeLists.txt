@@ -11,9 +11,15 @@ rr_c_api.cpp
 
 #Link C_api dll statically or dynamically to roadrunner and libsbml
 IF(${BORLAND})
-#target_link_libraries (${target} rr)
-#target_link_libraries (${target} libsbml)
 add_definitions(-DEXPORT_RR_C_API)
+target_link_libraries (${target} roadrunner-static)
+target_link_libraries (${target} libsbml-static)
+target_link_libraries (${target} libxml2_xe)
+target_link_libraries (${target} sundials_cvode)
+target_link_libraries (${target} sundials_nvecserial)
+target_link_libraries (${target} blas)
+target_link_libraries (${target} lapack)
+target_link_libraries (${target} libf2c)
 ELSE()
 add_definitions(-DEXPORT_RR_C_API)
 target_link_libraries (${target} roadrunner-static)
@@ -26,7 +32,7 @@ target_link_libraries (${target} lapack)
 target_link_libraries (${target} libf2c)
 ENDIF()
 
-#add_subdirectory(Examples)
+add_subdirectory(Examples)
 
 #set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
 #=============== INSTALL =====================

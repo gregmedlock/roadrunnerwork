@@ -223,27 +223,33 @@ string ExtractFilePath(const string& fileN)
 //    return aFName;
 //}
 
-string ChangeFileExtensionTo(const string& fName, const string& newExtension)
+string ChangeFileExtensionTo(const string& _fName, const string& newExtension)
 {
-    string newFName;
 
+    //Be aware of the case
+    //".\\fName"
+    //where  the . is not part of the filename
+    string path = ExtractFilePath(_fName);
+    string fName = ExtractFileName(_fName);
     //First create the file name, remove current extension if it exists
-    if(fName.find_last_of('.'))
+
+
+    if(fName.find_last_of('.') != string::npos)
     {
         //Extension does exist. Cut it, and append new one
-        newFName =  fName.substr(0, fName.find_last_of('.'));
+        fName =  fName.substr(0, fName.find_last_of('.'));
     }
 
     if(newExtension[0] == '.')
     {
-        newFName = newFName + newExtension;
+        fName = fName + newExtension;
     }
     else
     {
-        newFName = newFName + "." + newExtension;
+        fName = fName + "." + newExtension;
     }
 
-    return newFName;
+    return JoinPath(path, fName);
 }
 
 bool StartsWith(const string& src, const string& sub)

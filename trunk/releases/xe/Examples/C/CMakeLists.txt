@@ -1,20 +1,17 @@
 set(target rr_c_api)
 
 
-set(copy_rr_dll ${BUILD_SHARED_LIBS})
-
 if(NOT BUILD_SHARED_LIBS)
 set(BUILD_SHARED_LIBS 	ON)
 endif()
 
 add_library(${target} 
-rr_c_api.cpp)
+rr_c_api.cpp
+)
 
 #Link C_api dll statically or dynamically to roadrunner and libsbml
-#IF(${BUILD_SHARED_FILES})
-#target_link_libraries (${target} rr)
-#target_link_libraries (${target} libsbml)
-#ELSE()
+IF(${BORLAND})
+add_definitions(-DEXPORT_RR_C_API)
 target_link_libraries (${target} roadrunner-static)
 target_link_libraries (${target} libsbml-static)
 target_link_libraries (${target} libxml2_xe)
@@ -23,10 +20,16 @@ target_link_libraries (${target} sundials_nvecserial)
 target_link_libraries (${target} blas)
 target_link_libraries (${target} lapack)
 target_link_libraries (${target} libf2c)
-#ENDIF()
-
-IF(${BORLAND})
+ELSE()
 add_definitions(-DEXPORT_RR_C_API)
+target_link_libraries (${target} roadrunner-static)
+target_link_libraries (${target} libsbml-static)
+target_link_libraries (${target} libxml2)
+target_link_libraries (${target} sundials_cvode)
+target_link_libraries (${target} sundials_nvecserial)
+target_link_libraries (${target} blas)
+target_link_libraries (${target} lapack)
+target_link_libraries (${target} libf2c)
 ENDIF()
 
 add_subdirectory(Examples)

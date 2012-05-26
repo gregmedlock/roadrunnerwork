@@ -72,7 +72,7 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="..\..\..\installs\xe\lib\rr_c_api-cg.lib">
+			<LibFiles Include="..\..\..\installs\xe\lib\rr_c_api.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
 			</LibFiles>
@@ -134,7 +134,7 @@
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="RunParams">-m..\Models\test_1.xml -vInfo -t&quot;C:\temp&quot; -l&quot;S1 S2&quot; -p</Parameters>
+						<Parameters Name="RunParams">-m..\Models\test_1.xml -vInfo -l&quot;S1 S2&quot; -p </Parameters>
 					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

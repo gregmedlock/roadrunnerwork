@@ -32,7 +32,7 @@ bool            RR_DECLSPEC CopyCArrayToStdVector(bool* src, vector<bool>& dest,
 bool            RR_DECLSPEC CopyStdVectorToCArray(vector<double>& src, double* dest,  int size);
 bool            RR_DECLSPEC CopyStdVectorToCArray(vector<bool>&   src,  bool*  dest,  int size);
 
-double*         RR_DECLSPEC CreateCVectorFromStdVector(const vector<double>& vec);
+RR_DECLSPEC  double*         CreateCVectorFromStdVector(const vector<double>& vec);
 
 HINSTANCE       LoadDLL(const string& dll);
 }

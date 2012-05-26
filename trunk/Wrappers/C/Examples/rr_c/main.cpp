@@ -1,9 +1,19 @@
+#ifdef USE_PCH
+#include "rr_pch.h"
+#endif
 #pragma hdrstop
 #include <windows.h>
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <tchar.h>
+
+#if defined(__CODEGEARC__)
+#include <dir.h>
+#else
+#include <direct.h>
+#endif
+
 #include <iomanip>
 #include "rrException.h"
 #include "rrUtils.h"

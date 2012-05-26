@@ -43,8 +43,8 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
         bool                    InitializeModel();
         bool                    GenerateAndCompileModel();
         bool                    Simulate();
-        bool                    SaveResult();
-        bool                    LoadSettings(const string& fName = "");
+        virtual bool            SaveResult();
+        virtual bool            LoadSettings(const string& fName = "");
         void                    CompileIfDllExists(const bool& doIt);
         bool                    CompileIfDllExists();
         bool                    SaveModelAsXML(const string& folder);

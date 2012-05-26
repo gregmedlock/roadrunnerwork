@@ -81,14 +81,15 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\..\apps\rr_ts\Args.cpp">
-				<BuildOrder>9</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\..\apps\rr_ts\main.cpp">
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\apps\rr_ts\TestSuiteModelSimulation.cpp">
 				<BuildOrder>8</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\apps\rr_ts\tsArgs.cpp">
+				<DependentOn>..\..\..\apps\rr_ts\tsArgs.h</DependentOn>
+				<BuildOrder>9</BuildOrder>
 			</CppCompile>
 			<LibFiles Include="..\..\..\builds\xe\clapack\BLAS\SRC\blas.lib">
 				<IgnorePath>true</IgnorePath>

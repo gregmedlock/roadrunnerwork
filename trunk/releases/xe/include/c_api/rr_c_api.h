@@ -34,7 +34,7 @@ C_DECL_SPEC struct RRResult
     int             CSize;
     double*         Data;
     char**          ColumnHeaders;
-                   ~RRResult();     //Is this OK???
+                   ~RRResult();     
 };
 
 C_DECL_SPEC struct RRStringList
