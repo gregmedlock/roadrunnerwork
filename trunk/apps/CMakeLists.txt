@@ -3,12 +3,15 @@ PROJECT(Apps)
 set(RR_INCLUDE_ROOT "../src")
 
 # rr Includes
-include_directories(${RR_INCLUDE_ROOT})
-include_directories(${RR_INCLUDE_ROOT}/libstruct)
-include_directories(${RR_INCLUDE_ROOT}/rr_support)
-include_directories(${SBML_INSTALL_FOLDER}/include)
-include_directories(${SBML_INSTALL_FOLDER}/include/sbml)
-include_directories(${CVODE_INSTALL_FOLDER}/include/cvode)
+include_directories(
+${RR_INCLUDE_ROOT}
+${RR_INCLUDE_ROOT}/libstruct
+${RR_INCLUDE_ROOT}/rr_support
+${LIBSBML_INSTALL_FOLDER}/include
+${LIBSBML_INSTALL_FOLDER}/include/sbml
+${CVODE_INSTALL_FOLDER}/include/cvode
+${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
+)
 
 if(${MSVC})
 endif(${MSVC})

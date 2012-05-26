@@ -56,21 +56,21 @@ char* __stdcall getCopyright()
     return text;
 }
 
-bool __stdcall setTempFolder(const char* folder)
-{
-    if(!gRRHandle)
-    {
+bool __stdcall setTempFolder(const char* folder)
+{
+    if(!gRRHandle)
+    {
         Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
         return false;
     }
 
-    return gRRHandle->SetTempFileFolder(folder);
-}
+    return gRRHandle->SetTempFileFolder(folder);
+}
 
-bool __stdcall loadSBML(const char* sbml)
-{
-    if(!gRRHandle)
-    {
+bool __stdcall loadSBML(const char* sbml)
+{
+    if(!gRRHandle)
+    {
         SetError("Please allocate a handle to roadrunner API before calling any API function");
         return false;
     }
@@ -83,7 +83,7 @@ char* __stdcall getCopyright()
     return true;
 }
 
-bool __stdcall setTimeStart(double timeStart)
+bool __stdcall setTimeStart(double timeStart)
 {
     if(!gRRHandle)
     {
@@ -221,7 +221,7 @@ double __stdcall getValue(const char* speciesID)
         Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
         return NULL;
     }
-    return gRRHandle->getValue(speciesID);
+    return gRRHandle->getValue(speciesID);
 }
 
 bool __stdcall setValue(const char* speciesID, const double& val)
@@ -231,7 +231,7 @@ bool __stdcall setValue(const char* speciesID, const double& val)
         Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
         return false;
     }
-
+
     return gRRHandle->setValue(speciesID, val);
 }
 
@@ -312,7 +312,7 @@ char* __stdcall getLastError()
 
 //============================================================================
 #pragma argsused
-int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)
+int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)
 {
     //Intialize the logger here..
     LogOutput::mLogToConsole = false;

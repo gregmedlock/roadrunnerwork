@@ -4,9 +4,9 @@ set(RR_INCLUDE_ROOT "../src")
 
 # rr Includes
 include_directories(${RR_INCLUDE_ROOT})
-include_directories(${RR_INCLUDE_ROOT}/C_src)
-include_directories(${SBML_INSTALL_FOLDER}/include)
-include_directories(${SBML_INSTALL_FOLDER}/include/sbml)
+include_directories(${LIBSBML_INSTALL_FOLDER}/include)
+include_directories(${LIBSBML_INSTALL_FOLDER}/include/sbml)
+include_directories(${CVODE_INSTALL_FOLDER}/include)
 include_directories(${CVODE_INSTALL_FOLDER}/include/cvode)
 
 if(${MSVC})
@@ -18,6 +18,13 @@ set(wrapper "C")
  install (FILES ${wrapper}/Readme.txt 			DESTINATION Examples/${wrapper}	COMPONENT c_wrapper)
  install (FILES ${wrapper}/CMakeLists.txt 		DESTINATION Examples/${wrapper}	COMPONENT c_wrapper)
 endif()
+
+IF( PYTHON_WRAPPER )
+set(wrapper "Python")
+    add_subdirectory( ${wrapper} )
+ 	install (FILES ${wrapper}/Readme.txt 			DESTINATION Examples/${wrapper}	COMPONENT python_wrapper)
+ 	install (FILES ${wrapper}/CMakeLists.txt 		DESTINATION Examples/${wrapper}	COMPONENT python_wrapper)
+ENDIF()
 
 add_subdirectory(Delphi)
 install (FILES Readme.txt 			DESTINATION Examples COMPONENT wrappers)

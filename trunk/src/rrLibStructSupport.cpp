@@ -300,9 +300,9 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 /// </summary>
 LIB_LA::DoubleMatrix* StructAnalysis::GetGammaMatrix()
 {
-    IntPtr pointer;
-    int nRows;
-    int nCols;
+    //IntPtr pointer;
+    //int nRows;
+    //int nCols;
 
     return mInstance->getGammaMatrix();
 //    if (LibStructural_getGammaMatrix((double***) &pointer, &nRows, &nCols) < 0 )

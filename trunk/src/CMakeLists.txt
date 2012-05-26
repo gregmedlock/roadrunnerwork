@@ -4,8 +4,8 @@ set(target roadrunner)
 include_directories(
 . 
 ./libstruct
-${SBML_INSTALL_FOLDER}/include
-${SBML_INSTALL_FOLDER}/include/sbml
+${LIBSBML_INSTALL_FOLDER}/include
+${LIBSBML_INSTALL_FOLDER}/include/sbml
 ${CVODE_INSTALL_FOLDER}/include/cvode
 ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
 )
@@ -87,13 +87,15 @@ endif(${BORLAND})
 
 target_link_libraries (${target} libsbml-static)
 
+#libraries to link with our shared lib
+if(${BORLAND})
 target_link_libraries (${target} libxml2_xe)
 target_link_libraries (${target} sundials_cvode)
 target_link_libraries (${target} sundials_nvecserial)
 target_link_libraries (${target} blas)
 target_link_libraries (${target} lapack)
 target_link_libraries (${target} libf2c)
-
+#libraries to link with our static lib
 target_link_libraries (${target}-static libsbml-static)
 target_link_libraries (${target}-static libxml2_xe)
 target_link_libraries (${target}-static sundials_cvode)
@@ -101,10 +103,27 @@ target_link_libraries (${target}-static sundials_nvecserial)
 target_link_libraries (${target}-static blas)
 target_link_libraries (${target}-static lapack)
 target_link_libraries (${target}-static libf2c)
+else()
 
+target_link_libraries (${target} libxml2)
+target_link_libraries (${target} sundials_cvode)
+target_link_libraries (${target} sundials_nvecserial)
+target_link_libraries (${target} blas)
+target_link_libraries (${target} lapack)
+target_link_libraries (${target} libf2c)
+#target_link_libraries (${target} bzip2)
+
+#libraries to link with our static lib
+target_link_libraries (${target}-static libsbml-static)
+target_link_libraries (${target}-static libxml2)
+target_link_libraries (${target}-static sundials_cvode)
+target_link_libraries (${target}-static sundials_nvecserial)
+target_link_libraries (${target}-static blas)
+target_link_libraries (${target}-static lapack)
+target_link_libraries (${target}-static libf2c)
+endif()
 set(subfolders 
 .
-./C_src 
 ./libstruct
 )
 
@@ -120,7 +139,6 @@ FILE (GLOB headers ${subfolder}/*.h)
 install (FILES ${headers}			 		DESTINATION include/rr COMPONENT rr_core)
 endforeach(subfolder)
 
-
 if(BUILD_SHARED_LIBS)
 install (FILES ${exe_path}/${target}.dll	DESTINATION bin COMPONENT rr_core)
 endif()
@@ -131,7 +149,7 @@ foreach(system_file ${SBML_DEPENDENCIES})
 install (FILES ${THIRD_PARTY_FOLDER}/libsbml/dependencies/bin/${system_file}	DESTINATION bin COMPONENT rr_core)
 endforeach()
 
-#=== Install support code for on the fly compilation<LeftMouse>
+#=== Install support code for on the fly compilation
 FILE(GLOB rr_support rr_support/*.*)
 install(FILES ${rr_support} DESTINATION rr_support COMPONENT rr_core) 
 ##== We also need to copy the libxml.lib file to install folder, if we want to link any program with the rr library

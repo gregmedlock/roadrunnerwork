@@ -6,7 +6,9 @@
 #include "rrStringUtils.h"
 #include "rrCodeBuilder.h"
 //---------------------------------------------------------------------------
+#if defined(__CODEGEAR__)
 #pragma package(smart_init)
+#endif
 
 using namespace std;
 namespace rr

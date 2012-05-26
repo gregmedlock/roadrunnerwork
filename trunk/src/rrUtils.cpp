@@ -4,7 +4,13 @@
 #pragma hdrstop
 #include <windows.h>
 #include <io.h>
+#if defined(BORLANDC)
 #include <dir.h>
+#else
+#include <direct.h>
+
+#endif
+
 #include <algorithm>
 #include <iostream>
 #include <conio.h>

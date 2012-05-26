@@ -318,7 +318,7 @@ bool ModelFromC::SetupDLLData()
         Log(lDebug)<<"Failed to assign to mC";
     }
 
-    cSize       = (double*) GetProcAddress((HMODULE) mDLLHandle, "_cSize");
+    cSize       = (int*) GetProcAddress((HMODULE) mDLLHandle, "_cSize");
     if(!cSize)
     {
         Log(lDebug)<<"Failed to assign to cSize";

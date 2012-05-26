@@ -17,6 +17,7 @@ using namespace std;
 using namespace rr;
 
 void ProcessCommandLineArguments(int argc, char* argv[], Args& args);
+
 int main(int argc, char * argv[])
 {
     LogOutput::mLogToConsole = true;

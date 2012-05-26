@@ -303,7 +303,7 @@ bool SBMLModelSimulation::CreateModel()
         return false;
     }
 
-    return mEngine->CreateModel();
+    return (mEngine->CreateModel() != NULL) ? true : false;
 }
 
 bool SBMLModelSimulation::InitializeModel()
