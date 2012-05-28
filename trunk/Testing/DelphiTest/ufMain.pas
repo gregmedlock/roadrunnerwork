@@ -41,16 +41,22 @@ procedure TForm2.btnLoadSBMLClick(Sender: TObject);
 var str : AnsiString;
     m : TMatrix;
     i, j : integer;
+    list : TStringList;
 begin
+  list := TStringList.Create;
   str := TFile.ReadAllText('feedback.xml');
   if not loadSBML(str) then
      lblProgress.Caption := 'Failed to load SBML model';
+  list.Add ('time');
+  list.Add ('S1');
+  setSelectionList (list);
   m := simulate();
   grid.ColCount := m.c + 1;
   grid.RowCount := m.r + 1;
   for i := 1 to m.r do
       for j := 1 to m.c do
           grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
+  list.free;
 end;
 
 

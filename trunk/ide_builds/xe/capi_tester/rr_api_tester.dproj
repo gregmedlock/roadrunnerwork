@@ -32,7 +32,7 @@
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
 			<DCC_MapFile>3</DCC_MapFile>
 			<DCC_ExeOutput>C:\RoadRunner\bin\</DCC_ExeOutput>
-			<DCC_Define>DEBUG;madExcept;$(DCC_Define)</DCC_Define>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
 		</PropertyGroup>
@@ -46,9 +46,15 @@
 			<DelphiCompile Include="rr_api_tester.dpr">
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
+			<DCCReference Include="..\..\..\Wrappers\Delphi\uRoadRunnerAPI.pas"/>
 			<DCCReference Include="MainUnit.pas">
 				<Form>Form1</Form>
 			</DCCReference>
+			<DCCReference Include="..\..\..\Testing\DelphiTest\uComplex.pas"/>
+			<DCCReference Include="..\..\..\Testing\DelphiTest\uEigenvalues.pas"/>
+			<DCCReference Include="..\..\..\Testing\DelphiTest\uIMSLLib.pas"/>
+			<DCCReference Include="..\..\..\Testing\DelphiTest\uJVector.pas"/>
+			<DCCReference Include="..\..\..\Testing\DelphiTest\uMatrix.pas"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

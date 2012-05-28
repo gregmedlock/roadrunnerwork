@@ -2,9 +2,14 @@ unit uRoadRunnerAPI;
 
 interface
 
-Uses SysUtils, Windows, uMatrix;
+Uses SysUtils, Classes, Windows, uMatrix;
 
 type
+  TAnsiCharArray = array[0..0] of AnsiChar;
+  PAnsiCharArray = ^TAnsiCharArray;
+  TArrayOfAnsiCharArray = array of PAnsiCharArray;
+  PArrayOfAnsiCharArray = ^TArrayOfAnsiCharArray;
+
   TCharVoidFunc = function: PAnsiChar; stdcall;   //char* func(void)
   TPointerVoidFunc = function : Pointer; stdcall; //void* func(void)
   TCharBoolFunc = function (str : PAnsiChar) : bool; stdcall;  // bool func (char *)
@@ -14,12 +19,21 @@ type
 
   TGetCopyright = TCharVoidFunc;
   TGetRRInstance = TPointerVoidFunc;
+  TDeleteRRInstance = function (p : Pointer) : bool; stdcall;
   TLoadSBML = TCharBoolFunc;
   TSetTimeStart = TDoubleBoolFunc;
   TSetTimeEnd = TDoubleBoolFunc;
   TSetNumPoints = TIntBoolFunc;
   TSimulate = TPointerVoidFunc;
   TFreeRRResult = TVoidBoolFunc;
+
+  TSetSelectionList = function (list : PArrayOfAnsiCharArray) : bool; stdcall;
+  TGetValue = function (speciesId : PAnsiChar) : bool; stdcall;
+  TSetValue = function (speciesId : PAnsiChar; var value : double) : bool; stdcall;
+
+  //bool                      setSelectionList(const char* list)
+  //RRStringListHandle      __stdcall   getReactionNames(void);
+
 
   TRRResult = record
      RSize : integer;
@@ -40,6 +54,8 @@ var
 function  getCopyright : AnsiString;
 function  loadSBML (sbmlStr : AnsiString) : boolean;
 function  simulate : TMatrix;
+function  setSelectionList (strList : TStringList) : boolean;
+
 
 procedure setRoadRunnerLibraryName (newLibName : AnsiString);
 function  loadRoadRunner (var errMsg : AnsiString) : boolean;
@@ -53,8 +69,12 @@ var DLLHandle : Cardinal;
 
     libGetCopyright : TGetCopyright;
     libGetRRInstance : TGetRRInstance;
+    libDeleteRRInstance : TDeleteRRInstance;
     libSimulate : TSimulate;
     libFreeRRResult : TFreeRRResult;
+    libGetValue : TGetValue;
+    libSetValue : TSetValue;
+    libSetSelectionList : TSetSelectionList;
 
 
 function getCopyright : AnsiString;
@@ -70,6 +90,29 @@ begin
   result := libLoadSBML (PAnsiChar (sbmlStr));
 end;
 
+
+function setSelectionList (strList : TStringList) : boolean;
+var pList : PArrayOfAnsiCharArray;
+    list : TArrayOfAnsiCharArray;
+    i, j : integer; l : integer;
+    ch : AnsiChar; p : PAnsiCharArray;
+begin
+  setLength (list, strList.Count);
+  for i := 0 to strList.Count - 1 do
+      begin
+      l := length (strList[i]);
+      list[i] := GetMemory (l + 1);
+      for j := 0 to l - 1 do
+          begin
+          ch := AnsiChar (strList[i][j]);
+          p := list[i];
+          p[j] := ch;
+          end;
+      p[j+1] := #0;
+      end;
+  pList := @list;
+  libSetSelectionList (plist);
+end;
 
 function simulate : TMatrix;
 var RRResult : PRRResult;
@@ -122,7 +165,17 @@ begin
    @libFreeRRResult := GetProcAddress (dllHandle, PChar ('freeRRResult'));
    if not Assigned (libFreeRRResult) then
       begin errMsg := 'Unable to locate freeRRResult'; result := false; exit; end;
-end;
+   @libSetValue := GetProcAddress (dllHandle, PChar ('setValue'));
+   if not Assigned (libFreeRRResult) then
+      begin errMsg := 'Unable to locate setValue'; result := false; exit; end;
+   @libGetValue := GetProcAddress (dllHandle, PChar ('getValue'));
+   if not Assigned (libFreeRRResult) then
+      begin errMsg := 'Unable to locate getValue'; result := false; exit; end;
+   @libSetSelectionList := GetProcAddress (dllHandle, PChar ('setSelectionList'));
+   if not Assigned (libFreeRRResult) then
+      begin errMsg := 'Unable to locate setSelectionList'; result := false; exit; end;
+
+      end;
 
 
 function loadRoadRunner (var errMsg : AnsiString) : boolean;
@@ -164,6 +217,7 @@ end;
 procedure releaseRoadRunnerLibrary;
 begin
   DLLLoaded := false;
+  libDeleteRRInstance (instance);
   freeLibrary (DLLHandle);
 end;
 
