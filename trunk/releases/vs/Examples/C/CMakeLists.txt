@@ -1,3 +1,5 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+
 set(target rr_c_api)
 
 

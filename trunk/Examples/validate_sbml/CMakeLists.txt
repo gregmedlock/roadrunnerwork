@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+
 set(target validate_sbml)
 
 add_executable(		   ${target} validate_sbml.cpp util.c)
