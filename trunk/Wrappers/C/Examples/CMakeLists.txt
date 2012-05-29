@@ -6,16 +6,16 @@ set(C_API_INCLUDE_ROOT "${RR_ROOT}/Wrappers/C")
 include_directories(${C_API_INCLUDE_ROOT})
 
 if(${MSVC})
+
 endif(${MSVC})
 
 set(examples 	
-		rr_c
+#		rr_c  not sure why this one don't get access to GetOption funcs in roadrunner lib?
 #		simulate_sbml
 )
 
 foreach(example ${examples})
  	add_subdirectory(${example})
-# install (FILES ${example}/${example}.cbproj 	DESTINATION Examples/${example} COMPONENT example_files)
 	FILE (GLOB hdrs ${example}/*.h)
  	install (FILES ${hdrs} 						DESTINATION Examples/C_API/${example}	COMPONENT example_files)
 	FILE (GLOB src ${example}/*.c)

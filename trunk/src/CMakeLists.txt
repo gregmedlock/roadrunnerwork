@@ -112,7 +112,6 @@ target_link_libraries (${target} sundials_nvecserial)
 target_link_libraries (${target} blas)
 target_link_libraries (${target} lapack)
 target_link_libraries (${target} libf2c)
-#target_link_libraries (${target} bzip2)
 
 #libraries to link with our static lib
 target_link_libraries (${target}-static libsbml-static)
