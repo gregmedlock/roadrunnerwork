@@ -49,7 +49,7 @@ endif()
 else(${BORLAND})
 set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}/builds/vs/clapack CACHE PATH
     "Directory containing clapack libraries.")
-if("${CLAPACK_INSTALL_FOLDER}" STREQUAL "")
+if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
   set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}/builds/vs/clapack CACHE PATH
   "Directory containing clapack libraries" FORCE)
 endif()
