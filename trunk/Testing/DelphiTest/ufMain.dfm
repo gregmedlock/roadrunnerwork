@@ -15,9 +15,9 @@ object Form2: TForm2
   PixelsPerInch = 96
   TextHeight = 13
   object Button1: TButton
-    Left = 24
+    Left = 17
     Top = 16
-    Width = 89
+    Width = 105
     Height = 25
     Caption = 'Load DLL'
     TabOrder = 0
@@ -30,7 +30,6 @@ object Form2: TForm2
     Height = 41
     Align = alBottom
     TabOrder = 1
-    ExplicitWidth = 481
     object lblProgress: TLabel
       Left = 8
       Top = 16
@@ -40,18 +39,18 @@ object Form2: TForm2
     end
   end
   object btnGetCopyright: TButton
-    Left = 24
+    Left = 17
     Top = 47
-    Width = 89
+    Width = 105
     Height = 25
     Caption = 'Get Copyright'
     TabOrder = 2
     OnClick = btnGetCopyrightClick
   end
   object btnLoadSBML: TButton
-    Left = 24
+    Left = 17
     Top = 78
-    Width = 89
+    Width = 105
     Height = 25
     Caption = 'Load SBML'
     TabOrder = 3
@@ -67,5 +66,14 @@ object Form2: TForm2
     DefaultColWidth = 84
     FixedCols = 0
     TabOrder = 4
+  end
+  object btnGetReactionNames: TButton
+    Left = 17
+    Top = 109
+    Width = 105
+    Height = 25
+    Caption = 'Get Reaction Names'
+    TabOrder = 5
+    OnClick = btnGetReactionNamesClick
   end
 end

@@ -14,9 +14,11 @@ type
     btnGetCopyright: TButton;
     btnLoadSBML: TButton;
     grid: TStringGrid;
+    btnGetReactionNames: TButton;
     procedure Button1Click(Sender: TObject);
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
+    procedure btnGetReactionNamesClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,7 +36,16 @@ Uses uMatrix;
 
 procedure TForm2.btnGetCopyrightClick(Sender: TObject);
 begin
-  lblProgress.caption := getCopyright;
+  lblProgress.caption := string (getCopyright);
+end;
+
+procedure TForm2.btnGetReactionNamesClick(Sender: TObject);
+var i : integer; strList : TStringList;
+begin
+  strList := getReactionNames;
+  for i := 0 to strList.Count - 1 do
+      grid.Cells[0, i+2] := strList[i];
+  strList.Free;
 end;
 
 procedure TForm2.btnLoadSBMLClick(Sender: TObject);
@@ -44,11 +55,12 @@ var str : AnsiString;
     list : TStringList;
 begin
   list := TStringList.Create;
-  str := TFile.ReadAllText('feedback.xml');
+  str := AnsiString (TFile.ReadAllText('feedback.xml'));
   if not loadSBML(str) then
      lblProgress.Caption := 'Failed to load SBML model';
   list.Add ('time');
   list.Add ('S1');
+  list.Add ('S2');
   setSelectionList (list);
   m := simulate();
   grid.ColCount := m.c + 1;
@@ -66,7 +78,7 @@ begin
   if loadRoadRunner (errMsg) then
      lblProgress.caption := 'RoadRunner Loaded'
   else
-     lblProgress.caption := errMsg;
+     lblProgress.caption := string (errMsg);
 end;
 
 end.
