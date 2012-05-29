@@ -5,10 +5,12 @@ interface
 Uses SysUtils, Classes, Windows, uMatrix;
 
 type
-  TAnsiCharArray = array[0..0] of AnsiChar;
+  TAnsiCharArray = array[0..10] of AnsiChar;
   PAnsiCharArray = ^TAnsiCharArray;
   TArrayOfAnsiCharArray = array of PAnsiCharArray;
   PArrayOfAnsiCharArray = ^TArrayOfAnsiCharArray;
+
+  TArrayOfPAnsiCharArray = array of PAnsiCharArray;
 
   TCharVoidFunc = function: PAnsiChar; stdcall;   //char* func(void)
   TPointerVoidFunc = function : Pointer; stdcall; //void* func(void)
@@ -27,13 +29,11 @@ type
   TSimulate = TPointerVoidFunc;
   TFreeRRResult = TVoidBoolFunc;
 
-  TSetSelectionList = function (list : PArrayOfAnsiCharArray) : bool; stdcall;
+  TSetSelectionList = function (list : PAnsiChar) : bool; stdcall;
   TGetValue = function (speciesId : PAnsiChar) : bool; stdcall;
   TSetValue = function (speciesId : PAnsiChar; var value : double) : bool; stdcall;
-
-  //bool                      setSelectionList(const char* list)
-  //RRStringListHandle      __stdcall   getReactionNames(void);
-
+  TGetReactionNames = TPointerVoidFunc;
+  TFreeStringList = procedure (handle : Pointer); stdcall;
 
   TRRResult = record
      RSize : integer;
@@ -42,6 +42,14 @@ type
      ColumnHeaders : ^PAnsiChar;
   end;
   PRRResult = ^TRRResult;
+
+
+  TRRStringList = record
+    count : integer;
+    strList : TArrayOfPAnsiCharArray;
+  end;
+  PRRStringList = ^TRRStringList;
+
 
 var
    DLLLoaded : boolean;
@@ -55,6 +63,7 @@ function  getCopyright : AnsiString;
 function  loadSBML (sbmlStr : AnsiString) : boolean;
 function  simulate : TMatrix;
 function  setSelectionList (strList : TStringList) : boolean;
+function  getReactionNames : TStringList;
 
 
 procedure setRoadRunnerLibraryName (newLibName : AnsiString);
@@ -75,6 +84,35 @@ var DLLHandle : Cardinal;
     libGetValue : TGetValue;
     libSetValue : TSetValue;
     libSetSelectionList : TSetSelectionList;
+    libGetReactionNames : TGetReactionNames;
+
+libFreeStringList : TFreeStringList;
+
+
+// Utility Routines
+// --------------------------------------------------------------
+function getArrayOfStrings (pList: PRRStringList) : TStringList;
+var nStrings : integer;
+    i, j : integer;
+    element : PAnsiCharArray;
+    str : AnsiString;
+begin
+  nStrings := pList^.count;
+  result := TStringList.Create;
+  for i := 0 to nStrings - 1 do
+      begin
+      element := pList^.strList[i];
+      j := 0; str := '';
+      while element[j] <> #0 do
+          begin
+          str := str + element[j];
+          inc (j);
+          end;
+      result.Add (str);
+      end;
+end;
+
+// --------------------------------------------------------------
 
 
 function getCopyright : AnsiString;
@@ -96,23 +134,15 @@ var pList : PArrayOfAnsiCharArray;
     list : TArrayOfAnsiCharArray;
     i, j : integer; l : integer;
     ch : AnsiChar; p : PAnsiCharArray;
+    selectionList : AnsiString;
 begin
   setLength (list, strList.Count);
-  for i := 0 to strList.Count - 1 do
-      begin
-      l := length (strList[i]);
-      list[i] := GetMemory (l + 1);
-      for j := 0 to l - 1 do
-          begin
-          ch := AnsiChar (strList[i][j]);
-          p := list[i];
-          p[j] := ch;
-          end;
-      p[j+1] := #0;
-      end;
-  pList := @list;
-  libSetSelectionList (plist);
+  selectionList := strList[0];
+  for i := 1 to strList.Count - 1 do
+      selectionList := selectionList + ',' + strList[i];
+  libSetSelectionList (PAnsiChar (selectionList));
 end;
+
 
 function simulate : TMatrix;
 var RRResult : PRRResult;
@@ -127,6 +157,15 @@ begin
       for j := 0 to nc - 1 do
           result[i+1,j+1] := RRResult^.data[i*nc + j];
   libFreeRRResult;
+end;
+
+
+function getReactionNames : TStringList;
+var pList : PRRStringList;
+begin
+  pList := libGetReactionNames;
+  result := getArrayOfStrings(pList);
+  libFreeStringList (pList);
 end;
 
 
@@ -174,8 +213,13 @@ begin
    @libSetSelectionList := GetProcAddress (dllHandle, PChar ('setSelectionList'));
    if not Assigned (libFreeRRResult) then
       begin errMsg := 'Unable to locate setSelectionList'; result := false; exit; end;
-
-      end;
+   @libGetReactionNames := GetProcAddress (dllHandle, PChar ('getReactionNames'));
+   if not Assigned (libGetReactionNames) then
+      begin errMsg := 'Unable to locate getReactionNames'; result := false; exit; end;
+   @libFreeStringList := GetProcAddress (dllHandle, PChar ('freeStringList'));
+   if not Assigned (libFreeStringList) then
+      begin errMsg := 'Unable to locate freeStringList'; result := false; exit; end;
+end;
 
 
 function loadRoadRunner (var errMsg : AnsiString) : boolean;
@@ -213,6 +257,7 @@ begin
      errMsg := 'Unable to locate roadRunner library at:[' + getCurrentDir + ']';
      end;
 end;
+
 
 procedure releaseRoadRunnerLibrary;
 begin
