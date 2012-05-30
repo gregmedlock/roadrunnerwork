@@ -6,6 +6,7 @@ SET(RR_MINOR_VERSION 5)
 SET(RR_BUILD_VERSION 26)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
+option(BUILD_DOCUMENTATION "Use Doxygen to create the HTML based API documentation" OFF)
 
 IF(${BORLAND})
 set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}/installs/xe CACHE PATH
@@ -42,7 +43,7 @@ endif()
 IF(${BORLAND})
 set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}/builds/xe/clapack CACHE PATH
     "Directory containing clapack libraries.")
-if("${CLAPACK_INSTALL_FOLDER}" STREQUAL "")
+if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
   set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}/builds/xe/clapack CACHE PATH
   "Directory containing clapack libraries" FORCE)
 endif()
@@ -72,19 +73,19 @@ set(THIRD_PARTY_FOLDER 			${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 set(exe_path		 			${PROJECT_BINARY_DIR}/bin)
 set(lib_path		 			${PROJECT_BINARY_DIR}/lib)
 
-#IF(WIN32)
-#  IF(${MSVC})
-#  IF(CMAKE_BUILD_TYPE MATCHES "Debug")
+IF(WIN32)
+  IF(${MSVC})
+  IF(CMAKE_BUILD_TYPE MATCHES "Debug")
    set(exe_path ${exe_path}/Debug)
    set(lib_path ${lib_path}/Debug)
-#  ELSE(CMAKE_BUILD_TYPE MATCHES "Debug")
+  ELSE(CMAKE_BUILD_TYPE MATCHES "Debug")
 #   set(exe_path ${exe_path}/Release)
 #   set(lib_path ${lib_path}/Release)
-#  ENDIF(CMAKE_BUILD_TYPE MATCHES "Debug")
-# ELSE(WIN32)
+  ENDIF(CMAKE_BUILD_TYPE MATCHES "Debug")
+ ELSE(WIN32)
    # Linux
-# ENDIF(${MSVC})
-#ENDIF(WIN32)
+ ENDIF(${MSVC})
+ENDIF(WIN32)
 #MESSAGE( STATUS "CMAKE_BUILD_TYPE: " ${CMAKE_BUILD_TYPE} )
 
 #IF(CMAKE_BUILD_TYPE MATCHES "Debug")
@@ -102,7 +103,7 @@ include_directories(				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
 link_directories(					${LIBRARY_OUTPUT_PATH})
 link_directories(					${LIBSBML_INSTALL_FOLDER}/lib)
-link_directories(					${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib)
+link_directories(					${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib)
 link_directories(					${CLAPACK_BUILD_FOLDER}/BLAS/SRC)
 link_directories(					${CLAPACK_BUILD_FOLDER}/SRC)
 link_directories(					${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c)
@@ -181,7 +182,7 @@ install (FILES 	${tcc} DESTINATION bin/include/winapi COMPONENT rr_core)
 include (InstallRequiredSystemLibraries)
 
 #COMPONENTS OF THE INSTALL
-set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models delphi python)
+set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models delphi python rr_docs)
 
 
 #set(CPACK_COMPONENT_RR_CORE_GROUP							"Core")
@@ -249,5 +250,9 @@ endif()
 set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}")
 set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases")
 include(CPack)
+
+
+#======= DOXYGEN
+add_subdirectory(Docs)
 
 
