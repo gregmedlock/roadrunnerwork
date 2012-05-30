@@ -13,7 +13,7 @@ COMMENT "Generating API documentation with Doxygen" VERBATIM
 endif(DOXYGEN_FOUND)
 
 #install C++ documentation
-add_subdirectory(html_cpp)
-install (FILES 	DESTINATION Documentation/cpp_api COMPONENT rr_docs)
+add_subdirectory(html)
+#install (FILES 	DESTINATION Documentation/cpp_api COMPONENT rr_docs)
 
 
