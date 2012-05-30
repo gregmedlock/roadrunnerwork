@@ -103,7 +103,7 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="..\..\..\installs\xe\lib\roadrunner-cg.lib">
+			<LibFiles Include="..\..\..\installs\xe\lib\roadrunner.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>9</BuildOrder>
 			</LibFiles>

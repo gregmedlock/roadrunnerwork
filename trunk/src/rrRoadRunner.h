@@ -42,7 +42,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
         CvodeInterface                 *mCVode;
         ISteadyStateSolver             *steadyStateSolver;
-        vector<TSelectionRecord>       selectionList;
+        vector<TSelectionRecord>        selectionList;
         ModelGenerator                 *mModelGenerator;    //Pointer to one of the below ones..
         ModelGenerator                 *mCSharpGenerator;
         ModelGenerator                 *mCGenerator;
@@ -51,7 +51,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
         LIB_LA::DoubleMatrix           *_L0;
         LIB_LA::DoubleMatrix           *_N;
         LIB_LA::DoubleMatrix           *_Nr;
-
 
         Compiler                        mCompiler;
         HINSTANCE                       mModelDllHandle;

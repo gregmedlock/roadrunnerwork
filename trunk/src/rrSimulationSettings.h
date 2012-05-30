@@ -9,7 +9,7 @@ using std::vector;
 namespace rr
 {
 
-class RR_DECLSPEC SimulationSettings : rrObject
+class RR_DECLSPEC SimulationSettings : public rrObject
 {
     public:
                                 SimulationSettings();

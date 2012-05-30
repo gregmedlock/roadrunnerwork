@@ -133,12 +133,12 @@ class RR_DECLSPEC NOMSupport : public rrObject
         int                     getNumReactions();
         int                     getNumRules();
         int                     getSBOTerm(const string& sId);
-        deque<Rule>              ReorderAssignmentRules(deque<Rule>& assignmentRules);
-        StringList                 GetSymbols(ASTNode* math);
+        deque<Rule>             ReorderAssignmentRules(deque<Rule>& assignmentRules);
+        StringList              GetSymbols(ASTNode* math);
 
-        pair<string, string>     getNthInitialAssignmentPair(const int& nIndex);
-        SBase*                     GetElement(const string& sId);
-        stack<string>             GetMatchForSymbol(const string& sbmlId);
+        pair<string, string>    getNthInitialAssignmentPair(const int& nIndex);
+        SBase*                  GetElement(const string& sId);
+        stack<string>           GetMatchForSymbol(const string& sbmlId);
         string                  addEmptySetNode(const string& sbml);
         string                  addEmptySetNodes(const string& sbml);
         string                  addMissingModifiers(const string& sModel);
@@ -150,7 +150,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         string                  convertSBML(const string& sModel, const int& nLevel, const int& nVersion);
         string                  convertSBML(const string& sModel, const int& nLevel, const int& nVersion, bool throwError);
         string                  convertStringToMathML(const string& var0);
-          string                  convertTime(const string& sArg, const string& sTimeSymbol);
+        string                  convertTime(const string& sArg, const string& sTimeSymbol);
         string                  convertTimeToCSymbol(const string& sArg, const string& sTimeSymbol);
         string                  FixCommonIssues(const string& sbml);
         string                  FixCommonIssues(const string& sbml, const string& programName, const string& programVersion);
@@ -161,7 +161,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         string                  getKineticLaw(const int& index);
         string                  getMetaId(const string& sId);
         string                  getModelId();
-          string                  getModelName();
+        string                  getModelName();
         string                  getNotes(const string& sId);
         string                  getNthBoundarySpeciesId(const int& nIndex);
         string                  getNthBoundarySpeciesName(const int& nIndex);
@@ -196,8 +196,8 @@ class RR_DECLSPEC NOMSupport : public rrObject
         void                    FillStack(stack<string>& stack, SBMLSymbol& symbol);
         void                    loadFromFile(const string& fileName);
         void                    loadParameterPromotedSBML(const string& var0, const string& sTimeSymbol);
-          void                    loadSBML(const string& var0);
-          void                    loadSBML(const string& var0, const string& sTimeSymbol);
+        void                    loadSBML(const string& var0);
+        void                    loadSBML(const string& var0, const string& sTimeSymbol);
         void                    ReorderRules(SBMLDocument& oc, Model& model);
         void                    setAnnotation(const string& sId, const string& sAnnotation);
         void                    setModelId(const string& sId);
@@ -207,8 +207,8 @@ class RR_DECLSPEC NOMSupport : public rrObject
         void                    setValue(Model& model, const string& id, const double& value, const bool& throwIfNotFound);
         void                    TestASTTime();
 
-        string                     getNthBoundarySpeciesCompartmentName(const int& nIndex);
-        string                     getNthFloatingSpeciesCompartmentName(const int& nIndex);
+        string                  getNthBoundarySpeciesCompartmentName(const int& nIndex);
+        string                  getNthFloatingSpeciesCompartmentName(const int& nIndex);
         StringListContainer     getListOfBoundarySpecies();
         void                    Reset();
 };

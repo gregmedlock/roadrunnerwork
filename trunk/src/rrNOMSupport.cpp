@@ -14,14 +14,9 @@
 #include "rrSBMLSymbol.h"
 //---------------------------------------------------------------------------
 
-
-
 using namespace std;
-//using namespace libsbml;
 namespace rr
 {
-
-//using namespace ;
 
 NOMSupport::NOMSupport()
 :
@@ -39,7 +34,7 @@ void NOMSupport::Reset()
     mSymbolTable.clear();
     delete mModel;
     delete mSBMLDoc;
-    mModel         = NULL;
+    mModel      = NULL;
     mSBMLDoc    = NULL;
 }
 

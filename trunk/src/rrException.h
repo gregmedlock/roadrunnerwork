@@ -10,7 +10,7 @@ using std::exception;
 namespace rr
 {
 
-class RR_DECLSPEC Exception : public std::exception
+class RR_DECLSPEC Exception : public std::exception, public rrObject
 {
     protected:
         string mMessage;   //Exception message

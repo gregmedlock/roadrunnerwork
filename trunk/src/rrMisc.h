@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <ostream>
 #include "rrExporter.h"
+#include "rrObject.h"
 using std::ostream;
 
 using std::string;
@@ -30,13 +31,14 @@ enum TSelectionType
         clStoichiometry
 };
 
-struct RR_DECLSPEC TSelectionRecord
+class RR_DECLSPEC TSelectionRecord : public rrObject
 {
-    unsigned int        index;
-    string              p1;
-    string              p2;
-    TSelectionType      selectionType;
-                        TSelectionRecord();
+    public:
+        unsigned int        index;
+        string              p1;
+        string              p2;
+        TSelectionType      selectionType;
+                            TSelectionRecord();
 
 };
 
