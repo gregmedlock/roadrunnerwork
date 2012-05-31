@@ -9,7 +9,6 @@
 
 #else
     #define RR_DECLSPEC __declspec(dllimport)
-
 #endif
 
 

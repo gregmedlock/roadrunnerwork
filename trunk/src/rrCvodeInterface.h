@@ -4,7 +4,7 @@
 #include "rrObject.h"
 #include "rrRandom.h"
 #include "rrPendingAssignment.h"
-#include "cvode.h"
+#include "cvode/cvode.h"
 #include "rrCvodedll.h"
 using std::string;
 

@@ -125,7 +125,7 @@ if(${BORLAND})
 add_definitions(-DUSE_PCH) #Enable pre-compiled headers
 add_definitions(-DLIBSBML_USE_CPP_NAMESPACE) 
 add_definitions(-DNO_LIBSTRUCT_DLL) 
-add_definitions(-H=${RR_ROOT}/rr_pch.csm)
+add_definitions(-H=${PROJECT_BINARY_DIR}/rr_pch.csm)
 add_definitions(-w-8012)  #Comparing signed /unsigned
 add_definitions(-w-8057)  #Parameter never used
 add_definitions(-w-8004)  #'var' is assigned a value that is never used

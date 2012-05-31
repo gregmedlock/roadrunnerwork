@@ -57,8 +57,10 @@ void CodeBuilder::FormatArray(const string& type, const string& varName, const i
         mStringing<<"\n//The array size for the follwoing variable was generated as 0. We put 1, to make it legal code.\n";
          arraySize = 1;
     }
+
     string field2(varName +"["+ rr::ToString(arraySize)+"];");
     mStringing<<left<<setw(mSizeOfVarField1)<<type    << setw(mSizeOfVarField2)<<field2;
+
     if(comment.size())
     {
         mStringing<<left<<setw(mSizeOfVarField3)<<"//" + comment;
@@ -70,8 +72,9 @@ void CodeBuilder::FormatArray(const string& type, const string& varName, const i
     {
         arraySize = 0;
     }
+
     mStringing<<left<<setw(mSizeOfVarField1)<<"D_S const int"    << setw(mSizeOfVarField2)<<varName + "Size=" + rr::ToString(arraySize) + ";";
-       mStringing<<endl;
+    mStringing<<endl;
 }
 
 }

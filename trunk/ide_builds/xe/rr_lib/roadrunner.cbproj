@@ -22,11 +22,11 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<BPILibOutputDir>$(RR_ROOT)\installs\xe\lib</BPILibOutputDir>
+			<BPILibOutputDir>$(RR_INSTALL_FOLDER)\lib</BPILibOutputDir>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<FinalOutputDir>$(RR_ROOT)\installs\xe\bin\</FinalOutputDir>
+			<FinalOutputDir>$(RR_INSTALL_FOLDER)\bin\</FinalOutputDir>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
 			<Defines>EXPORT_RR;NO_NOM_DLL;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;LIB_EXPORTS;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
@@ -38,8 +38,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\src\libstruct\;..\..\..\src\mtrand\;..\..\..\src\;..\..\..\src\;..\..\..\src;..\..\..\src\;..\..\..\src\libstruct;..\..\..\src\;..\..\..\src\;..\..\..\src\;..\..\..\installs\xe\include\sbml;..\..\..\installs\xe\include;..\..\..\installs\xe\include\cvode;..\..\..\installs\xe\include\nvector;..\..\..\src;C:\RRW\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\..\builds\xe\clapack\SRC\;..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\src\libstruct\;..\..\..\src\mtrand\;..\..\..\src\;..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\..\src\;..\..\..\installs\xe\lib\;..\..\..\src\;..\..\..\src\;..\..\..\src\Util\;..\..\..\src\Logger\;..\..\..\src\libstruct\;..\..\..\src\Util\mtrand\;..\..\..\src\;..\..\..\src\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\src\;..\..\..\src\libstruct\;..\..\..\src\mtrand\;$(RR_INSTALL_FOLDER)\include;..\..\..\ThirdParty\clapack\3.2.1\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>C:\rrInstalls\xe\lib\;C:\rrBuilds\xe\clapack\SRC\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;..\..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\..\builds\xe\clapack\SRC\;..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\src\libstruct\;..\..\..\src\mtrand\;..\..\..\src\;..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\..\src\;..\..\..\installs\xe\lib\;..\..\..\src\;..\..\..\src\;..\..\..\src\Util\;..\..\..\src\Logger\;..\..\..\src\libstruct\;..\..\..\src\Util\mtrand\;..\..\..\src\;..\..\..\src\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -51,6 +51,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BPILibOutputDir>$(RR_INSTALL_FOLDER)\lib</BPILibOutputDir>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
@@ -79,17 +80,37 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="..\..\..\builds\xe\clapack\BLAS\SRC\blas.lib">
+			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>69</BuildOrder>
+				<BuildOrder>64</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="..\..\..\builds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
+			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>65</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\SRC\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>66</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\libsbml-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>67</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\libxml2_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>71</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_cvode.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>70</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="..\..\..\builds\xe\clapack\SRC\lapack.lib">
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_kinsol.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>68</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_nvecserial.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>69</BuildOrder>
 			</LibFiles>
 			<CppCompile Include="roadrunner.cpp">
 				<BuildOrder>0</BuildOrder>
@@ -97,18 +118,6 @@
 			<ResFiles Include="roadrunner.res">
 				<BuildOrder>70</BuildOrder>
 			</ResFiles>
-			<LibFiles Include="..\..\..\installs\xe\lib\libsbml-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>71</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\..\..\installs\xe\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>60</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\..\..\installs\xe\lib\sundials_nvecserial.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>62</BuildOrder>
-			</LibFiles>
 			<CppCompile Include="..\..\..\src\libstruct\complex.cpp">
 				<BuildOrder>66</BuildOrder>
 			</CppCompile>
@@ -346,10 +355,6 @@
 				<DependentOn>..\..\..\src\rrUtils.h</DependentOn>
 				<BuildOrder>59</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="..\..\..\ThirdParty\libsbml_dependencies\lib\libxml2_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>71</BuildOrder>
-			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
@@ -364,12 +369,6 @@
 		</ItemGroup>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
-		<PropertyGroup Condition="'$(FileToCompile)'==''">
-			<PostBuildEvent><![CDATA[copy $(OUTPUTDIR)\$(OUTPUTNAME).lib $(rr_root)\installs\xe\lib
-copy c:\rrw\ThirdParty\libsbml\dependencies\bin\libxml2.dll $(rr_root)\installs\xe\bin
-copy c:\rrw\ThirdParty\libsbml\dependencies\bin\iconv.dll $(rr_root)\installs\xe\bin
-copy c:\rrw\ThirdParty\libsbml\dependencies\bin\zlib1.dll $(rr_root)\installs\xe\bin]]></PostBuildEvent>
-		</PropertyGroup>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
 			<Borland.ProjectType>CppDynamicLibrary</Borland.ProjectType>

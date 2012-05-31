@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cmath>
 #include <stack>
-#include "SBMLDocument.h"
+#include "sbml/SBMLDocument.h"
 #include "rrModelGenerator.h"
 #include "rrLogger.h"
 #include "rrStringUtils.h"
