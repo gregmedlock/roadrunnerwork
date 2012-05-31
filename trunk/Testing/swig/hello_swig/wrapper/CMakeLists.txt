@@ -1,6 +1,7 @@
-FIND_PACKAGE( SWIG       )
-FIND_PACKAGE( PythonLibs )
-IF( SWIG_FOUND AND PYTHONLIBS_FOUND )
+FIND_PACKAGE( SWIG )
+IF( SWIG_FOUND )
+    FIND_PACKAGE( PythonLibs )
+    IF( PYTHONLIBS_FOUND )
 
     # set up SWIG
     INCLUDE_DIRECTORIES( ${PYTHON_INCLUDE_PATH} )
@@ -8,32 +9,26 @@ IF( SWIG_FOUND AND PYTHONLIBS_FOUND )
     SET( CMAKE_SWIG_FLAGS "" )
     SET( CMAKE_SWIG_OUTDIR ${HELLO_RELEASE_DIR} )
 
-    # set up your project
+    # build wrapper
     INCLUDE_DIRECTORIES( ${HELLO_SOURCE_DIR} )
-    FILE( GLOB HELLO_SOURCE_FILES
-        ${HELLO_WRAPPER_DIR}/hello.i
+    SWIG_ADD_MODULE( hello_swig
+        python
+        hello.i
         ${HELLO_SOURCE_DIR}/hello.h
         ${HELLO_SOURCE_DIR}/hello.c
     )
+    SWIG_LINK_LIBRARIES( hello_swig ${PYTHON_LIBRARIES} )
 
-    # build low-level Python wrapper
-    # (if not adding a high-level wrapper,
-    #  can name this hello instead of libhello)
-    SWIG_ADD_MODULE( libhello
-        python
-        ${HELLO_SOURCE_FILES}
-    )
-    SWIG_LINK_LIBRARIES( libhello ${PYTHON_LIBRARIES} )
-
-    # copy high-level wrapper to the release dir
-    # (it's not auto-generated during a build)
+    # copy the manually written object-oriented wrapper
+    # to the release dir so everything's in one place
     FILE(
-        COPY        hello.py
+        COPY hello_oo.py
         DESTINATION ${HELLO_RELEASE_DIR}
     )
 
+    ELSE( PYTHONLIBS_FOUND )
+        MESSAGE( "Python not found; unable to generate Python wrapper" )
+    ENDIF( PYTHONLIBS_FOUND )
 ELSE( SWIG_FOUND )
     MESSAGE( "SWIG not found; unable to generate Python wrapper" )
-ELSE( PYTHONLIBS_FOUND )
-    MESSAGE( "Python not found; unable to generate Python wrapper" )
-ENDIF()
+ENDIF( SWIG_FOUND )

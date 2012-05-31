@@ -1,7 +1,6 @@
-%module libhello
+%module hello_swig
 %{
-    // tell SWIG that libhello
-    // should be a C extension for Python
+    // tell SWIG to make Python C extension
     #define SWIG_FILE_WITH_INIT
 
     #include "hello.h"

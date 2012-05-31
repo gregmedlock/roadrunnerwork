@@ -1,4 +1,6 @@
-import libhello as h
+import sys
+sys.path.append('../release')
+import hello_swig as h
 
 print 'creating g'
 g = h.create_greeter()
