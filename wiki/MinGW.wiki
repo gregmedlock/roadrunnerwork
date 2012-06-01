@@ -5,9 +5,10 @@
 
 This page contain relevant information about how to build RoadRunner using the MinGW compiler.
 = Setup =
-You need to download the Mingw compiler and do an install.
-By default Mingw install to C:\MinGW.
-First thing to do is to add MinGW's binary folder to your 'PATH', so you can run commands from the command line, and So that CMake can execute MinGW commands.
+Download the Mingw compiler (from http://sourceforge.net/projects/mingw/files/latest/download?source=files )and install it.
+By default MinGW installs to C:\MinGW.
+
+Next add MinGW's binary folder to your 'PATH', so you can run MinGW commands from the command line, and so that CMake can execute MinGW commands.
 MinGW's binary folder is
 *C:\MinGW\bin*
 
