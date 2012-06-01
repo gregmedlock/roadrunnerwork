@@ -1,0 +1,16 @@
+#labels Phase-Support
+#Notes about building RoadRunner with the MinGW compiler
+
+= Introduction =
+
+This page contain relevant information about how to build RoadRunner using the MinGW compiler.
+
+
+= Build Dependencies =
+== clapack, version 3.2.1 ==
+
+The first problem you may run into is an error regarding _EM_DENORMAL plus some others _'are not defined'_. This is an effect of two headers using the same name in the MingW distribution, namely float.h, contained in MingW/include and another (gcc-specific) see
+http://sourceforge.net/tracker/?func=detail&aid=3011968&group_id=2435&atid=302435
+
+for a fix.
+ 
