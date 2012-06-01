@@ -14,7 +14,6 @@ char*           gError = NULL;
 //Internal prototypes
 void SetError(const string& err);
 
-
 RRResult::~RRResult()
 {
     delete [] Data;

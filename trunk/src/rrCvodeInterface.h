@@ -4,7 +4,7 @@
 #include "rrObject.h"
 #include "rrRandom.h"
 #include "rrPendingAssignment.h"
-#include "cvode/cvode.h"
+#include "cvode/cvode.h"            //For IDE development, you may need to define RR_INSTALL_FOLDER
 #include "rrCvodedll.h"
 using std::string;
 
@@ -20,45 +20,45 @@ void EventFcn(double time, cvode_precision* y, cvode_precision* gdot, void* fdat
 class RR_DECLSPEC CvodeInterface : public rrObject
 {
     private:
-        const string                 CVODE;
-        const double                 defaultReltol;
-        const double                 defaultAbsTol;
-        const int                     defaultMaxNumSteps;
+        const string                CVODE;
+        const double                defaultReltol;
+        const double                defaultAbsTol;
+        const int                   defaultMaxNumSteps;
 
-        static string                 tempPathstring;
-        static int                     errorFileCounter;
-        FILE*                         fileHandle;
+        static string               tempPathstring;
+        static int                  errorFileCounter;
+        FILE*                       fileHandle;
 
         int                         numIndependentVariables;
         N_Vector                    gdata;
-        int*                         _rootsFound;
+        int*                        _rootsFound;
         N_Vector                    _amounts;         //IntPtr                         _amounts;
         N_Vector                    abstolArray;
-        string                         cvodeLogFile;
-        void*                        cvodeMem;
+        string                      cvodeLogFile;
+        void*                       cvodeMem;
         int                         numAdditionalRules;
-        void                         HandleCVODEError(int errCode);
-        vector<double>                 assignmentTimes;
-        bool                         followEvents;
-        void                         AssignPendingEvents(const double& timeEnd, const double& tout);
+        void                        HandleCVODEError(int errCode);
+        vector<double>              assignmentTimes;
+        bool                        followEvents;
+        void                        AssignPendingEvents(const double& timeEnd, const double& tout);
         vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents);
         vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, vector<int>& removeEvents);
         vector<int>                 RetestEvents(const double& timeEnd, vector<int>& handledEvents, const bool& assignOldState);
         vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents);
-        void                         HandleRootsFound(double &timeEnd, const double& tout);
+        void                        HandleRootsFound(double &timeEnd, const double& tout);
         void                        RemovePendingAssignmentForIndex(const int& eventIndex);
         void                        SortEventsByPriority(vector<int>& firedEvents);
         void                        HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound);
 
     public:
-        void                         AssignResultsToModel();
-        static int                     mCount;
-        static int                     mRootCount;
-        static int                     mOneStepCount;
+        void                        AssignResultsToModel();
+        static int                  mCount;
+        static int                  mRootCount;
+        static int                  mOneStepCount;
 
-        static ModelFromC            *model;
-        vector<PendingAssignment>     assignments;// = new List<PendingAssignment>();
-        Random                           mRandom;// { get; set; }
+        static ModelFromC          *model;
+        vector<PendingAssignment>   assignments;// = new List<PendingAssignment>();
+        Random                      mRandom;// { get; set; }
         int                         defaultMaxAdamsOrder;// = 12;
         int                         defaultMaxBDFOrder;// = 5;
         int                         MaxAdamsOrder;// = defaultMaxAdamsOrder;
@@ -70,7 +70,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         double                      relTol;// = defaultReltol;
         double                      absTol;// = defaultAbsTol;
         int                         errCode;
-        static double                 lastTimeValue;
+        static double               lastTimeValue;
 
                                     // -------------------------------------------------------------------------
                                     // Constructor
