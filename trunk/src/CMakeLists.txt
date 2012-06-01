@@ -146,7 +146,7 @@ endif()
 #=== dependencies
 set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
 foreach(system_file ${SBML_DEPENDENCIES})
-install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/bin/${system_file}	DESTINATION bin COMPONENT rr_core)
+install (FILES ${THIRD_PARTY_FOLDER}/runtime_dependencies/${system_file}	DESTINATION bin COMPONENT rr_core)
 endforeach()
 
 #=== Install support code for on the fly compilation

@@ -145,7 +145,7 @@ install (FILES License.txt 		DESTINATION . 	COMPONENT info)
 if(${BORLAND})
 set(CG_RUNTIMES		cc32110MT.dll)
 foreach(runtime ${CG_RUNTIMES})
-install (FILES 	${THIRD_PARTY_FOLDER}/CG/XE/${runtime} DESTINATION bin COMPONENT rr_core)
+install (FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/cg/xe/${runtime} DESTINATION bin COMPONENT rr_core)
 endforeach()
 endif()
 
