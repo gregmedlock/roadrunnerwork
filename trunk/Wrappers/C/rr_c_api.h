@@ -16,32 +16,7 @@ extern "C"
 #include "rr_support/stdbool.h"
 #endif
 
-typedef void*                   RRHandle;
-typedef struct RRDataMatrix*    RRDataMatrixHandle;
-typedef struct RRResult*        RRResultHandle;
-typedef struct RRStringList*    RRStringListHandle;
-
-C_DECL_SPEC struct RRDataMatrix
-{
-    int             RSize;
-    int             CSize;
-    double*         Data;
-};
-
-C_DECL_SPEC struct RRResult
-{
-    int             RSize;
-    int             CSize;
-    double*         Data;
-    char**          ColumnHeaders;
-                   ~RRResult();     
-};
-
-C_DECL_SPEC struct RRStringList
-{
-    int             Count;
-    char**          String;
-};
+#include "rr_c_types.h"
 
 /////////////////////  API FUNCTIONS ///////////////////////////////////////////////
 C_DECL_SPEC RRHandle                __stdcall   getRRInstance(void);
@@ -60,15 +35,30 @@ C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);
 C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
 C_DECL_SPEC RRDataMatrixHandle      __stdcall   getStoichiometryMatrix(void);
-C_DECL_SPEC bool                    __stdcall   freeRRDataMatrixHandle(RRDataMatrixHandle matrix);
-C_DECL_SPEC void                    __stdcall   printMatrix(RRDataMatrixHandle mat);
+C_DECL_SPEC bool                    __stdcall   freeRRDataMatrixHandle(RRDataMatrix matrix);
+C_DECL_SPEC void                    __stdcall   printMatrix(RRDataMatrix mat);
 C_DECL_SPEC char*                   __stdcall   getLastError();
 C_DECL_SPEC char*                   __stdcall   freeText(char* text);
 
+C_DECL_SPEC bool                    __stdcall   reset();
+C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
+C_DECL_SPEC double                  __stdcall   getReactionRate(int);
+C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
+C_DECL_SPEC char*                   __stdcall   getBoundarySpeciesNames();          // <- treat char* as you treat it in setSelectionList (char *)
+C_DECL_SPEC int                     __stdcall   getNumberOfFloatingSpecies();
+C_DECL_SPEC char*                   __stdcall   getFloatingSpeciesNames();
+C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameterNames();
+C_DECL_SPEC char*                   __stdcall   getGlobalParameterNames();
+C_DECL_SPEC void                    __stdcall   setInitialConditions(double[]);     // <- might be called changeInitialConditions in roadRunner
+C_DECL_SPEC double                  __stdcall   oneStep (double, double);
+C_DECL_SPEC RRSymbolListHandle      __stdcall   getAvailableSymbols();              // <- You'll have to decide what type to return
+C_DECL_SPEC double                  __stdcall   steadyState();
+C_DECL_SPEC RRDoubleVectorHandle    __stdcall   computeSteadyStateValues();
+C_DECL_SPEC void                    __stdcall   setSteadyStateSelectionList(char *);
 
-// Free functions
+
+// Free memory functions
 C_DECL_SPEC bool                    __stdcall   freeStringList(RRStringListHandle sl);
-
 
 #if defined( __cplusplus)
 }

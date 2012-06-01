@@ -89,7 +89,7 @@ string Compiler::CreateCompilerCommand(const string& compiler, const string& sou
         }
 
         exeCmd<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL ";//
-        //   <<" -DDEBUG_SPF " \
+        //   <<" -DDEBUG_SPF "
 
         //Add include paths
         for(int i = 0; i < mIncludePaths.size(); i++)
@@ -105,11 +105,11 @@ string Compiler::CreateCompilerCommand(const string& compiler, const string& sou
     }
     else if(compiler == "bcc")
     {
-//    exeCmd<<"bcc32 -WD ";
+/*    exeCmd<<"bcc32 -WD ";
 //    exeCmd<<" -e"<<mDLLFileName<<" -vu +c:\\rrw\\src\\c_src\\bcc.cfg " \
 //    <<sourceFileName \
 //    <<" c:\\rrw\\src\\c_src\\rrSupport.c";
-
+*/
     }
     return exeCmd.str();
 }

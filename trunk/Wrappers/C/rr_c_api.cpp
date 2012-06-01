@@ -1,5 +1,7 @@
-//---------------------------------------------------------------------------
-#pragma hdrstop
+#ifdef USE_PCH
+#include "rr_pch.h"
+#endif
+#pragma hdrstop//---------------------------------------------------------------------------
 #include <windows.h>
 #include "rrRoadRunner.h"
 #include "rrLogger.h"
@@ -309,11 +311,93 @@ char* __stdcall getLastError()
     return gError;
 }
 
+bool __stdcall reset()
+{
+    if(!gRRHandle)
+    {
+        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        return false;
+    }
+    gRRHandle->reset();
+    return true;
+}
+
+int   __stdcall getNumberOfReactions()
+{
+
+}
+
+double __stdcall getReactionRate(int)
+{
+
+}
+
+int __stdcall getNumberOfBoundarySpecies()
+{
+
+}
+
+char* __stdcall getBoundarySpeciesNames()          // <- treat char* as you treat it in setSelectionList (char *)
+{
+
+}
+
+int __stdcall getNumberOfFloatingSpecies()
+{
+
+}
+
+char* __stdcall getFloatingSpeciesNames()
+{
+
+}
+
+int __stdcall getNumberOfGlobalParameterNames()
+{
+
+}
+
+char* __stdcall getGlobalParameterNames()
+{
+
+}
+
+void __stdcall setInitialConditions(double[])     // <- might be called changeInitialConditions in roadRunner
+{
+
+}
+
+double __stdcall oneStep (double, double)
+{
+
+}
+
+RRSymbolListHandle __stdcall getAvailableSymbols()              // <- You'll have to decide what type to return
+{
+
+}
+
+double __stdcall steadyState()
+{
+
+}
+
+RRDoubleVectorHandle __stdcall computeSteadyStateValues()
+{
+
+}
+
+void __stdcall setSteadyStateSelectionList(char *)
+{
+
+}
+
+
 //============================================================================
 #pragma argsused
 int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)
 {
-    //Intialize the logger here..
+    //Intialize the logger
     LogOutput::mLogToConsole = false;
     return 1;
 }

@@ -3,55 +3,53 @@ project(rr)
 
 SET(RR_MAJOR_VERSION 2012)
 SET(RR_MINOR_VERSION 5)
-SET(RR_BUILD_VERSION 26)
+SET(RR_BUILD_VERSION 31)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
-option(BUILD_DOCUMENTATION "Use Doxygen to create the HTML based API documentation" OFF)
-
 IF(${BORLAND})
-set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}/installs/xe CACHE PATH
+set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH
     "Directory containing libsbml libraries.")
 if("${LIBSBML_INSTALL_FOLDER}" STREQUAL "")
-  set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}/installs/xe CACHE PATH
+  set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH
   "Directory containing libsbml libraries" FORCE)
 endif()
 else(${BORLAND})
-set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}/installs/vs CACHE PATH
+set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH
     "Directory containing libsbml libraries.")
 if("${LIBSBML_INSTALL_FOLDER}" STREQUAL "")
-  set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}/installs/vs CACHE PATH
+  set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH
   "Directory containing libsbml libraries" FORCE)
 endif()
 endif()
 
 IF(${BORLAND})
-set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}/installs/xe CACHE PATH
+set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH
     "Directory containing cvode libraries.")
 if("${CVODE_INSTALL_FOLDER}" STREQUAL "")
-  set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}/installs/xe CACHE PATH
+  set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH
   "Directory containing cvode libraries" FORCE)
 endif()
 else(${BORLAND})
-set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}/installs/vs CACHE PATH
+set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH
     "Directory containing cvode libraries.")
 if("${CVODE_INSTALL_FOLDER}" STREQUAL "")
-  set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}/installs/vs CACHE PATH
+  set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH
   "Directory containing cvode libraries" FORCE)
 endif()
 endif()
 
 IF(${BORLAND})
-set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}/builds/xe/clapack CACHE PATH
+set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/xe/clapack CACHE PATH
     "Directory containing clapack libraries.")
 if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
-  set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}/builds/xe/clapack CACHE PATH
+  set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/xe/clapack CACHE PATH
   "Directory containing clapack libraries" FORCE)
 endif()
 else(${BORLAND})
-set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}/builds/vs/clapack CACHE PATH
+set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/vs/clapack CACHE PATH
     "Directory containing clapack libraries.")
 if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
-  set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}/builds/vs/clapack CACHE PATH
+  set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/vs/clapack CACHE PATH
   "Directory containing clapack libraries" FORCE)
 endif()
 endif()
