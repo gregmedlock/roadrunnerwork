@@ -30,7 +30,22 @@ to the end of the float.h header located in
 C:\MinGW\lib\gcc\mingw32\4.6.2\include
 
 == sundials ==
+Sundials builds 'out of the box'
 
+== libsbml ==
+Some pre-work is needed
+=== Libxml2 (Precompiled) ===
+
+Download pexports-0.43.zip
+Unzip pexports.exe to C:/MinGW/bin
+
+Unzip libxml2-2.7.8.win32.zip to C:/MinGW
+In the shell:
+
+cd /mingw/bin
+pexports libxml2.dll > libxml2.def
+dlltool –dllname libxml2.dll –def libxml2.def –output-lib ../lib/libxml2.a
+Instructions taken from this [http://www.multigesture.net/articles/how-to-upgrade-your-mingw-with-commonly-used-libraries/ site]
 
 
  
