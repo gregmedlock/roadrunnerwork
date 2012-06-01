@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-set(target rr_ts)
+set(target rr_ts_tester)
 
 add_executable(		   ${target} 
 main.cpp 
@@ -14,14 +14,6 @@ TestSuiteModelSimulation.cpp
 target_link_libraries (${target} roadrunner)
 target_link_libraries (${target} libsbml-static)
 #ENDIF()
-
-
-##target_link_libraries (${target} libxml2_xe)
-#target_link_libraries (${target} sundials_cvode)
-#target_link_libraries (${target} sundials_nvecserial)
-#target_link_libraries (${target} lapack)
-#target_link_libraries (${target} blas)
-#target_link_libraries (${target} libf2c)
 
 set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
 

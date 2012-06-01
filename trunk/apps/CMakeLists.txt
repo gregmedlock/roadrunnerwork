@@ -13,17 +13,14 @@ ${CVODE_INSTALL_FOLDER}/include/cvode
 ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
 )
 
-if(${MSVC})
-endif(${MSVC})
-
 set(apps 	
 		rr
-		rr_ts
+        rr_test_suite_tester
 )
+
 
 foreach(app ${apps})
  	add_subdirectory(${app})
-# install (FILES ${app}/${app}.cbproj 	DESTINATION Examples/${app} COMPONENT example_files)
 	FILE (GLOB hdrs ${app}/*.h)
  	install (FILES ${hdrs} 						DESTINATION Examples/${app}	COMPONENT example_files)
 	FILE (GLOB src ${app}/*.cpp)

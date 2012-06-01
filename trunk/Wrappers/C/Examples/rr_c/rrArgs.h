@@ -6,9 +6,6 @@
 #include <string>
 #include "rrLogger.h"
 //---------------------------------------------------------------------------
-namespace rr
-{
-
 using std::string;
 string Usage(const string& prg);
 
@@ -30,6 +27,5 @@ class Args
         int                             Steps;              //option z
         string                          SelectionList;      //option l:
 };
-}
 
 #endif

@@ -5,10 +5,6 @@
 #include <iomanip>
 #include "rrArgs.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
-
-namespace rr
-{
 
 Args::Args()
 :
@@ -61,4 +57,3 @@ string Usage(const string& prg)
     return usage.str();
 }
 
-}
