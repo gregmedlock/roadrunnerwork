@@ -6,6 +6,7 @@ SET(RR_MINOR_VERSION 5)
 SET(RR_BUILD_VERSION 31)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
+#These will be the defaults ...
 SET(RR_BUILDS_ROOT "C:/rrBuilds")
 SET(RR_INSTALLS_ROOT "C:/rrInstalls")
 
@@ -44,7 +45,6 @@ if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
   set(CLAPACK_BUILD_FOLDER ${RR_BUILDS_ROOT}/vs/clapack CACHE PATH "Directory containing clapack libraries" FORCE)
 endif()
 endif()
-
 
 OPTION (PYTHON_WRAPPER 			"Generate Python wrapper " 		    FALSE)
 OPTION (BUILD_C_API	 			"Create C API DLL" 					OFF)

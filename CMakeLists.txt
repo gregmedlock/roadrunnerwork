@@ -42,6 +42,7 @@ set(CPACK_COMPONENT_EXAMPLE_FILES_DISPLAY_NAME				"Examples Source and Readme fi
 set(CPACK_COMPONENT_SBML_MODELS_DISPLAY_NAME				"SBML Models")
 set(CPACK_COMPONENT_DELPHI_DISPLAY_NAME						"Delphi Units")
 set(CPACK_COMPONENT_PYTHON_DISPLAY_NAME						"Python Module")
+set(CPACK_COMPONENT_RR_DOCS_DISPLAY_NAME					"Doxygen Documentation")
 
 #set(CPACK_PACKAGE_ICON										${CMAKE_CURRENT_SOURCE_DIR}\\\\rrArt.bmp)
 #NSIS Specific
@@ -58,6 +59,7 @@ set(CPACK_COMPONENT_EXAMPLE_FILES_DESCRIPTION				"Examples Source")
 set(CPACK_COMPONENT_SBML_MODELS_DESCRIPTION					"Install various SBML Model files")
 set(CPACK_COMPONENT_DELPHI_DESCRIPTION						"Installs RoadRunner Delphi Units")
 set(CPACK_COMPONENT_PYTHON_DESCRIPTION						"Installs RoadRunner Python Module")
+set(CPACK_COMPONENT_RR_DOCS_DESCRIPTION						"Installs RoadRunner Doxygen Documentation")
 
 set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/trunk/License.txt")
 set(CPACK_PACKAGE_VENDOR									"UW")

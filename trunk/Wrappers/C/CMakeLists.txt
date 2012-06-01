@@ -30,6 +30,7 @@ add_subdirectory(Examples)
 #set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
 #=============== INSTALL =====================
 install (FILES ${target}.h 					DESTINATION include/c_api  	COMPONENT c_api)
+install (FILES rr_c_types.h 				DESTINATION include/c_api  	COMPONENT c_api)
 install (FILES ${lib_path}/${target}.lib	DESTINATION lib 			COMPONENT c_api)
 install (FILES ${exe_path}/${target}.dll	DESTINATION bin 			COMPONENT c_api)
 
