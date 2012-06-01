@@ -6,55 +6,42 @@ SET(RR_MINOR_VERSION 5)
 SET(RR_BUILD_VERSION 31)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
-IF(${BORLAND})
-set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH
-    "Directory containing libsbml libraries.")
+if(${BORLAND})
+set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH "Directory containing libsbml libraries.")
 if("${LIBSBML_INSTALL_FOLDER}" STREQUAL "")
-  set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH
-  "Directory containing libsbml libraries" FORCE)
+  set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH "Directory containing libsbml libraries" FORCE)
 endif()
 else(${BORLAND})
-set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH
-    "Directory containing libsbml libraries.")
+set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH "Directory containing libsbml libraries.")
 if("${LIBSBML_INSTALL_FOLDER}" STREQUAL "")
-  set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH
-  "Directory containing libsbml libraries" FORCE)
+  set(LIBSBML_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH "Directory containing libsbml libraries" FORCE)
 endif()
 endif()
 
-IF(${BORLAND})
-set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH
-    "Directory containing cvode libraries.")
+if(${BORLAND})
+set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH "Directory containing cvode libraries.")
 if("${CVODE_INSTALL_FOLDER}" STREQUAL "")
-  set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH
-  "Directory containing cvode libraries" FORCE)
+  set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/xe CACHE PATH "Directory containing cvode libraries" FORCE)
 endif()
 else(${BORLAND})
-set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH
-    "Directory containing cvode libraries.")
+set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH "Directory containing cvode libraries.")
 if("${CVODE_INSTALL_FOLDER}" STREQUAL "")
-  set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH
-  "Directory containing cvode libraries" FORCE)
+  set(CVODE_INSTALL_FOLDER ${CMAKE_SOURCE_DIR}Installs/vs CACHE PATH "Directory containing cvode libraries" FORCE)
 endif()
 endif()
 
-IF(${BORLAND})
-set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/xe/clapack CACHE PATH
-    "Directory containing clapack libraries.")
+if(${BORLAND})
+set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/xe/clapack CACHE PATH "Directory containing clapack libraries.")
 if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
-  set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/xe/clapack CACHE PATH
-  "Directory containing clapack libraries" FORCE)
+  set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/xe/clapack CACHE PATH "Directory containing clapack libraries" FORCE)
 endif()
 else(${BORLAND})
-set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/vs/clapack CACHE PATH
-    "Directory containing clapack libraries.")
+set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/vs/clapack CACHE PATH "Directory containing clapack libraries.")
 if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
-  set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/vs/clapack CACHE PATH
-  "Directory containing clapack libraries" FORCE)
+  set(CLAPACK_BUILD_FOLDER ${CMAKE_SOURCE_DIR}Builds/vs/clapack CACHE PATH "Directory containing clapack libraries" FORCE)
 endif()
 endif()
 
-#set(CLAPACK_BUILD_FOLDER "C:/rrw/builds/xe/clapack")
 
 OPTION (PYTHON_WRAPPER 			"Generate Python wrapper " 		    FALSE)
 OPTION (BUILD_C_API	 			"Create C API DLL" 					OFF)
@@ -174,83 +161,5 @@ install (FILES 	${tcc} DESTINATION bin/include/sys COMPONENT rr_core)
 
 FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/winapi/*.*)
 install (FILES 	${tcc} DESTINATION bin/include/winapi COMPONENT rr_core)
-
-#================ CPACK =========================================================================
-#Create distribution Pack
-include (InstallRequiredSystemLibraries)
-
-#COMPONENTS OF THE INSTALL
-set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models delphi python rr_docs)
-
-
-#set(CPACK_COMPONENT_RR_CORE_GROUP							"Core")
-#set(CPACK_COMPONENT_EXAMPLES_SOURCE_GROUP					"Examples")
-#set(CPACK_COMPONENT_COMPILED_EXAMPLES_GROUP				"Examples")
-
-#set(CPACK_COMPONENT_RR_CORE_REQUIRED						ON)
-set(CPACK_COMPONENT_RR_CORE_DISPLAY_NAME					"Core Files")
-set(CPACK_COMPONENT_APPS_DISPLAY_NAME						"Applications")
-set(CPACK_COMPONENT_C_API_DISPLAY_NAME						"C API DLL")
-#set(CPACK_COMPONENT_BUILD_FILES_DEPENDS example_files)
-set(CPACK_COMPONENT_COMPILED_EXAMPLES_DISPLAY_NAME			"Compiled Examples")
-set(CPACK_COMPONENT_EXAMPLE_FILES_DISPLAY_NAME				"Examples Source and Readme files")
-set(CPACK_COMPONENT_SBML_MODELS_DISPLAY_NAME				"SBML Models")
-set(CPACK_COMPONENT_DELPHI_DISPLAY_NAME						"Delphi Units")
-set(CPACK_COMPONENT_PYTHON_DISPLAY_NAME						"Python Module")
-
-#set(CPACK_PACKAGE_ICON										${CMAKE_CURRENT_SOURCE_DIR}\\\\rrArt.bmp)
-#NSIS Specific
-#set(CPACK_NSIS_MUI_ICON										${CMAKE_CURRENT_SOURCE_DIR}/rr.ico)
-#set(CPACK_NSIS_MUI_UNIICON									${CMAKE_CURRENT_SOURCE_DIR}/rr.ico)
-set(CPACK_NSIS_INSTALL_ROOT									"C:")
-
-#COMPONENTS
-set(CPACK_COMPONENT_RR_CORE_DESCRIPTION						"Headers (.h), link library files (.lib) and if a dynamic disribution, dynamic link libraries (.dll's)")
-set(CPACK_COMPONENT_APPS_DESCRIPTION						"Applications using RoadRunner API")
-set(CPACK_COMPONENT_C_API_DESCRIPTION						"C API Wrapper for RoadRunner")
-set(CPACK_COMPONENT_COMPILED_EXAMPLES_DESCRIPTION			"This will install pre-compiled binaries for all examples")
-set(CPACK_COMPONENT_EXAMPLE_FILES_DESCRIPTION				"Examples Source")
-set(CPACK_COMPONENT_SBML_MODELS_DESCRIPTION					"Install various SBML Model files")
-set(CPACK_COMPONENT_DELPHI_DESCRIPTION						"Installs RoadRunner Delphi Units")
-set(CPACK_COMPONENT_PYTHON_DESCRIPTION						"Installs RoadRunner Python Module")
-
-set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
-set(CPACK_PACKAGE_VENDOR									"UW")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY						"rr library - headers, libraries and examples")
-set(CPACK_PACKAGE_VERSION_MAJOR								"${RR_MAJOR_VERSION}")
-set(CPACK_PACKAGE_VERSION_MINOR								"${RR_MINOR_VERSION}")
-set(CPACK_PACKAGE_VERSION_PATCH								"${RR_BUILD_VERSION}")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY							"RoadRunner")
-
-if(${BUILD_SHARED_LIBS})
-set(PACKAGE_NAME_LIB_TYPE "shared")
-else()
-set(PACKAGE_NAME_LIB_TYPE "static")
-endif()
-
-if(${BORLAND})
-set(COMPILER_FOR_PACKAGE "cg")
-endif()
-
-if(${MSVC})
-set(COMPILER_FOR_PACKAGE "vs")
-endif()
-
-#MESSAGE( STATUS "CMAKE_CFG_INTDIR: " ${CMAKE_CFG_INTDIR} )
-
-#if(${CMAKE_CFG_INTDIR} MATCHES "/Debug")
-#set(bType "debug")
-#else()
-#set(bType "release")
-#endif()
-
-#set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}-${PACKAGE_NAME_LIB_TYPE}-${bType}")
-set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}")
-set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases")
-include(CPack)
-
-
-#======= DOXYGEN
-add_subdirectory(Docs)
 
 
