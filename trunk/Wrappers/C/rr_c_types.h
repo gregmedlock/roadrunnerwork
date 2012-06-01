@@ -52,5 +52,3 @@ C_DECL_SPEC typedef struct RRStringList
 
 
 #endif
-
-

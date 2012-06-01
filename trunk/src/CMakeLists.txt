@@ -88,40 +88,32 @@ endif(${BORLAND})
 
 target_link_libraries (${target} libsbml-static)
 
+
 #libraries to link with our shared lib
+target_link_libraries (${target} sundials_cvode)
+target_link_libraries (${target} sundials_nvecserial)
+target_link_libraries (${target} blas)
+target_link_libraries (${target} lapack)
+target_link_libraries (${target} libf2c)
+
+#libraries to link with our static lib
+target_link_libraries (${target}-static libsbml-static)
+target_link_libraries (${target}-static sundials_cvode)
+target_link_libraries (${target}-static sundials_nvecserial)
+target_link_libraries (${target}-static blas)
+target_link_libraries (${target}-static lapack)
+target_link_libraries (${target}-static libf2c)
+
+#Libxml we can't build right now
 if(${BORLAND})
 target_link_libraries (${target} libxml2_xe)
-target_link_libraries (${target} sundials_cvode)
-target_link_libraries (${target} sundials_nvecserial)
-target_link_libraries (${target} blas)
-target_link_libraries (${target} lapack)
-target_link_libraries (${target} libf2c)
-#libraries to link with our static lib
-target_link_libraries (${target}-static libsbml-static)
 target_link_libraries (${target}-static libxml2_xe)
-target_link_libraries (${target}-static sundials_cvode)
-target_link_libraries (${target}-static sundials_nvecserial)
-target_link_libraries (${target}-static blas)
-target_link_libraries (${target}-static lapack)
-target_link_libraries (${target}-static libf2c)
 else()
-
 target_link_libraries (${target} libxml2)
-target_link_libraries (${target} sundials_cvode)
-target_link_libraries (${target} sundials_nvecserial)
-target_link_libraries (${target} blas)
-target_link_libraries (${target} lapack)
-target_link_libraries (${target} libf2c)
-
-#libraries to link with our static lib
-target_link_libraries (${target}-static libsbml-static)
 target_link_libraries (${target}-static libxml2)
-target_link_libraries (${target}-static sundials_cvode)
-target_link_libraries (${target}-static sundials_nvecserial)
-target_link_libraries (${target}-static blas)
-target_link_libraries (${target}-static lapack)
-target_link_libraries (${target}-static libf2c)
 endif()
+
+
 set(subfolders 
 .
 ./libstruct
