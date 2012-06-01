@@ -43,9 +43,12 @@ Unzip libxml2-2.7.8.win32.zip to C:/MinGW
 In the shell:
 
 cd /mingw/bin
+
 pexports libxml2.dll > libxml2.def
+
 dlltool –dllname libxml2.dll –def libxml2.def –output-lib ../lib/libxml2.a
-Instructions taken from this [http://www.multigesture.net/articles/how-to-upgrade-your-mingw-with-commonly-used-libraries/ site]
+Instructions taken from this 
+[http://www.multigesture.net/articles/how-to-upgrade-your-mingw-with-commonly-used-libraries/ site]
 
 
  
