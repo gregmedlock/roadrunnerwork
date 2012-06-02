@@ -112,9 +112,6 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>69</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="roadrunner.cpp">
-				<BuildOrder>0</BuildOrder>
-			</CppCompile>
 			<ResFiles Include="roadrunner.res">
 				<BuildOrder>70</BuildOrder>
 			</ResFiles>
@@ -161,6 +158,9 @@
 			<CppCompile Include="..\..\..\src\rrCvodeInterface.cpp">
 				<DependentOn>..\..\..\src\rrCvodeInterface.h</DependentOn>
 				<BuildOrder>17</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\src\rrDLLEntry.cpp">
+				<BuildOrder>71</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\src\rrDoubleMatrix.cpp">
 				<DependentOn>..\..\..\src\rrDoubleMatrix.h</DependentOn>

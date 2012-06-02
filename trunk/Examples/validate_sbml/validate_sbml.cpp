@@ -15,7 +15,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "SBMLTypes.h"
+#include "sbml\SBMLTypes.h"
 #include "util.h"
 
 

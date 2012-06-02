@@ -18,8 +18,8 @@
 #include "rrException.h"
 #include "rrUtils.h"
 #include "rrStringUtils.h"
-#include "rrGetOptions.h"
-#include "rrArgs.h"
+#include "GetOptions.h"
+#include "Args.h"
 #include "rr_c_api.h"
 
 //---------------------------------------------------------------------------

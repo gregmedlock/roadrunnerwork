@@ -22,6 +22,8 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<Defines>LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
+			<FinalOutputDir>$(RR_INSTALL_FOLDER)\bin</FinalOutputDir>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
@@ -31,8 +33,8 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\;C:\RRW\Testing\libSBMLTests\validate\;P:\mtk\Components\vtk\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\;..\..\..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\;C:\RRW\Testing\libSBMLTests\validate\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\;..\..\..\Examples\validate_sbml\;$(RR_INSTALL_FOLDER);$(RR_INSTALL_FOLDER)\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrInstalls\xe\lib\;..\..\..\Examples\validate_sbml\;..\;..\..\..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\;C:\RRW\Testing\libSBMLTests\validate\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -66,20 +68,48 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="C:\rrThirdPartyInstalls\libsbml-static.lib">
+			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>1</BuildOrder>
+				<BuildOrder>10</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\util.c">
+			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>8</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\SRC\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>9</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\libsbml-static.lib">
+				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="validateSBML.cpp">
-				<BuildOrder>0</BuildOrder>
-			</CppCompile>
-			<LibFiles Include="..\..\..\ThirdParty\libsbml\dependencies\lib\libxml2.lib">
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\libxml2_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>4</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\roadrunner-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>5</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>6</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_kinsol.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>7</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_nvecserial.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>
+			<CppCompile Include="..\..\..\Examples\validate_sbml\util.c">
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\..\Examples\validate_sbml\validate_sbml.cpp">
+				<BuildOrder>3</BuildOrder>
+			</CppCompile>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

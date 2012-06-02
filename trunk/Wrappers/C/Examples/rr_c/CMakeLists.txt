@@ -2,7 +2,8 @@ set(target rr_c)
 
 add_executable(		   ${target} 
 main.cpp
-rrArgs.cpp
+Args.cpp
+GetOptions
 )
 
 target_link_libraries (${target} rr_c_api)

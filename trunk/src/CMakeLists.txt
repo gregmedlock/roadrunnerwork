@@ -68,6 +68,7 @@ rrCvodedll.cpp
 rrNLEQInterface.cpp
 rrLibStructSupport.cpp
 rrInteropUtils.cpp
+rrDLLEntry.cpp
 libstruct/complex.cpp
 libstruct/libla.cpp
 libstruct/libstructural.cpp
