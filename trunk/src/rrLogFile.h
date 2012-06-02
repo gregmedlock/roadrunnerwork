@@ -2,6 +2,7 @@
 #define rrLogFileH
 #include <memory>
 #include <string>
+#include <fstream>
 #include "rrLogLevel.h"
 #include "rrObject.h"
 

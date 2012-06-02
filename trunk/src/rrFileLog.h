@@ -2,7 +2,13 @@
 #ifndef rrFileLogH
 #define rrFileLogH
 //---------------------------------------------------------------------------
+
+#if defined (__MINGW32__)
+#include <tr1/memory> 
+#else
 #include <memory>
+#endif
+
 #include "stdio.h"
 #include "rrObject.h"
 #include "rrLogLevel.h"

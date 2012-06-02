@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <sstream>
+#include <cstring>
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 

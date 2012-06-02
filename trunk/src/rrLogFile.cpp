@@ -2,7 +2,7 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
-//#include <fstream>
+#include <stdexcept>
 #include <stdio.h>
 #include "rrLogFile.h"
 //---------------------------------------------------------------------------

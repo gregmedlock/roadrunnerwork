@@ -468,9 +468,9 @@ bool ModelFromC::SetupDLLData()
     return true;
 }
 
-HANDLE ModelFromC::GetFunctionPtr(const string& funcName)
+FARPROC ModelFromC::GetFunctionPtr(const string& funcName)
 {
-    HANDLE handle = GetProcAddress((HMODULE) mDLLHandle, funcName.c_str());
+    FARPROC handle = GetProcAddress((HMODULE) mDLLHandle, funcName.c_str());
     if(handle == NULL)
     {
         Log(lError) << "Unable to load the function: " << funcName;

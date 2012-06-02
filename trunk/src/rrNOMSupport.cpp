@@ -14,6 +14,10 @@
 #include "rrSBMLSymbol.h"
 //---------------------------------------------------------------------------
 
+#if defined (__MINGW32__)
+#define __FUNC__ __FUNCTION__
+#endif
+
 using namespace std;
 namespace rr
 {
@@ -717,7 +721,7 @@ string NOMSupport::convertTime(const string& sArg, const string& sTimeSymbol)
 {
     SBMLDocument* oSBMLDoc = NULL;
     Model* oModel = NULL;
-       Log(lDebug4)<<"Entering function "<<__FUNC__<<" in file "<<__FILE__;
+    Log(lDebug4)<<"Entering function "<<__FUNC__<<" in file "<<__FILE__;
     try
     {
         oSBMLDoc = readSBMLFromString(sArg.c_str());

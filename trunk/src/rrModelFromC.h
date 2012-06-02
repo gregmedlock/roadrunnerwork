@@ -187,7 +187,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
         c_void_int_double                       csetConcentration;
 
         //Utility
-        HANDLE                                  GetFunctionPtr(const string& function);
+        FARPROC                                  GetFunctionPtr(const string& function);
 
     public:
                                                 ModelFromC(CGenerator* generator, HINSTANCE dllHandle = NULL);
