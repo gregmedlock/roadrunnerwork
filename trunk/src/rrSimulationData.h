@@ -29,12 +29,12 @@ class RR_DECLSPEC SimulationData : public rrObject
         StringList              GetColumnNames();
         string                  GetColumnNamesAsString();
         void                    Allocate(const int& cSize, const int& rSize);
-        void                    SetTimeDataPrecision(const int& prec){mTimePrecision = prec;}
-        void                    SetDataPrecision(const int& prec){mDataPrecision = prec;}
+        void                    SetTimeDataPrecision(const int& prec);
+        void                    SetDataPrecision(const int& prec);
         void                    SetColumnNames(const StringList& colNames);
         void                    SetNrOfCols(const int& cols);
-        int                     GetNrOfCols(){return mTheData.CSize();}
-        int                     GetNrOfRows(){return mTheData.RSize();}
+        int                     GetNrOfCols();
+        int                     GetNrOfRows();
         void                    SetData(const DoubleMatrix& theData);
         bool                    Load(const string& fileName);
         bool                    WriteTo(const string& fileName);
@@ -45,8 +45,8 @@ RR_DECLSPEC        friend std::ostream&    operator << (std::ostream& ss, Simula
         double&                 operator() (const unsigned& row, const unsigned& col);
         double                  operator() (const unsigned& row, const unsigned& col) const;
         void                    SetName(const string& name);
-        string                  GetName(){return mName;}
-        pair<int,int>           Dimension(){return pair<int,int>(mTheData.RSize(), mTheData.CSize());}
+        string                  GetName();
+        pair<int,int>           Dimension();
 
 };
 

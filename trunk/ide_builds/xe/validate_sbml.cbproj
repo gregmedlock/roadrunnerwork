@@ -1,14 +1,12 @@
 ﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
-			<ProjectGuid>{BB98A606-C02D-454F-B743-70C12C4C53CD}</ProjectGuid>
-			<ProjectVersion>13.4</ProjectVersion>
+			<ProjectGuid>{510D6EA1-6D3D-4AF5-9F40-3DC0BE91F4A2}</ProjectGuid>
+			<ProjectVersion>12.3</ProjectVersion>
 			<Base>True</Base>
 			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Platform>Win32</Platform>
 			<AppType>Console</AppType>
 			<FrameworkType>None</FrameworkType>
-			<Platform Condition="'$(Platform)'==''">Win32</Platform>
-			<TargetedPlatforms>1</TargetedPlatforms>
-			<Platform>Win32</Platform>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
 			<Base>true</Base>
@@ -24,28 +22,21 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<Defines>LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<FinalOutputDir>$(RR_INSTALL_FOLDER)\bin</FinalOutputDir>
-			<LinkPackageStatics>vcl.lib;mtkCommonRTL.lib</LinkPackageStatics>
-			<Manifest_File>None</Manifest_File>
-			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
-			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-			<VerInfo_Locale>1033</VerInfo_Locale>
-			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
-			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
-			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<Defines>BUILD_MODEL_DLL;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
-			<LinkPackageImports>rtl.bpi</LinkPackageImports>
+			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
-			<PackageImports>rtl.bpi;$(PackageImports).bpi</PackageImports>
+			<PackageImports>rtl.bpi;vclimg.bpi;vcl.bpi;vclx.bpi;vcldb.bpi;dbrtl.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;vcltouch.bpi;xmlrtl.bpi;vclactnband.bpi;dsnap.bpi;dbxcds.bpi;dbexpress.bpi;DbxCommonDriver.bpi;vclribbon.bpi;DataSnapIndy10ServerTransport.bpi;DbxClientDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;bcbsmp.bpi;IndyProtocols.bpi;inet.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vcldbx.bpi;bdertl.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;DataSnapProviderClient.bpi;vclie.bpi;inetdbbde.bpi;inetdbxpress.bpi;DataSnapClient.bpi;inetdb.bpi;DataSnapServer.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi;DuneComponents.bpi;mtkCommonRTL.bpi;VCLCommonRTL.bpi;VCLData.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;GenesisVisualComponents.bpi</PackageImports>
 			<OutputExt>exe</OutputExt>
-			<AllPackageLibs>rtl.lib;vcl.lib;mtkCommonRTL.lib</AllPackageLibs>
-			<_TCHARMapping>char</_TCHARMapping>
+			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
+			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\src\;..\..\..\src\libstruct;..\..\..\apps\rr\;$(RR_INSTALL_FOLDER)\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>C:\rrInstalls\xe\lib\;..\..\..\src\;..\..\..\releases\xe\shared\link\;..\..\..\builds\xe\clapack\SRC\;..\..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\..\builds\xe\clapack\BLAS\SRC\;..\..\..\ThirdParty\libsbml_dependencies\lib\;..\..\..\installs\xe\lib\;..\..\..\Examples\rr\;..\..\..\releases\xe\link\;..\..\..\installs\xe\bin\;..\..\..\Apps\rr\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\Examples\validate_sbml\;..\;..\..\..\Examples\validate_sbml\;$(RR_INSTALL_FOLDER);$(RR_INSTALL_FOLDER)\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\Examples\validate_sbml\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrInstalls\xe\lib\;..\..\..\Examples\validate_sbml\;..\;..\..\..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\;C:\RRW\Testing\libSBMLTests\validate\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
 			<IntermediateOutputDir>.\$(Config)\$(Platform)</IntermediateOutputDir>
@@ -54,17 +45,13 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<BCC_FastFloatingPoint>false</BCC_FastFloatingPoint>
-			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
-			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
+			<IncludePath>C:\rrThirdPartyInstalls;C:\rrThirdPartyInstalls\libsbml\include;$(IncludePath)</IncludePath>
 			<_TCHARMapping>char</_TCHARMapping>
-			<BCC_PCHName>rr.csm</BCC_PCHName>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;WIN32;ENABLE_DEBUG_OUTPUT;$(Defines)</Defines>
+			<Defines>_DEBUG;WIN32;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -81,35 +68,47 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>10</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>8</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\SRC\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>9</BuildOrder>
+			</LibFiles>
 			<LibFiles Include="C:\rrInstalls\xe\lib\libsbml-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>4</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\libxml2_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>5</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\roadrunner.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>6</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>7</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_kinsol.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>2</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_nvecserial.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\..\..\apps\rr\rrArgs.cpp">
+			<LibFiles Include="C:\rrInstalls\xe\lib\libxml2_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>4</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\roadrunner-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>5</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>6</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_kinsol.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>7</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_nvecserial.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>2</BuildOrder>
+			</LibFiles>
+			<CppCompile Include="..\..\Examples\validate_sbml\util.c">
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\apps\rr\rrMain.cpp">
-				<BuildOrder>9</BuildOrder>
+			<CppCompile Include="..\..\Examples\validate_sbml\validate_sbml.cpp">
+				<BuildOrder>10</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
@@ -157,22 +156,19 @@
 						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
 						<VersionInfoKeys Name="Comments"/>
 					</VersionInfoKeys>
-					<Excluded_Packages/>
+					<Excluded_Packages>
+						<Excluded_Packages Name="p:\mtk\BPL\Dummy.bpl">File p:\mtk\BPL\Dummy.bpl not found</Excluded_Packages>
+					</Excluded_Packages>
 					<ProjectProperties>
 						<ProjectProperties Name="AutoShowDeps">False</ProjectProperties>
 						<ProjectProperties Name="ManagePaths">True</ProjectProperties>
-						<ProjectProperties Name="VerifyPackages">False</ProjectProperties>
+						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="DebugSourceDirs">C:\RRW\src</Parameters>
-						<Parameters Name="RunParams">-n41 -vDebug3 -tC:\\RRTemp -dc:\\RRDataOutput</Parameters>
+						<Parameters Name="RunParams">C:\RRW\Testing\models\feedback.xml</Parameters>
 					</Parameters>
-					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-s5 -e15 -p -vInfo -m&quot;../Models/simple_test_1.xml&quot; -t&quot;c:\temp&quot; -l&quot;S1 S2&quot; -d&quot;.&quot; -z300</Parameters_Win32>
-					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>
-					<Platform value="OSX32">False</Platform>
 					<Platform value="Win32">True</Platform>
 				</Platforms>
 			</BorlandProject>

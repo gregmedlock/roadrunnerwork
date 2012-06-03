@@ -33,6 +33,16 @@ mTheData(theData)
 
 }
 
+int SimulationData::GetNrOfCols()
+{
+    return mTheData.CSize();
+}
+
+int SimulationData::GetNrOfRows()
+{
+    return mTheData.RSize();
+}
+
 void SimulationData::SetName(const string& name)
 {
     mName = name;
@@ -42,6 +52,26 @@ void SimulationData::SetName(const string& name)
 StringList SimulationData::GetColumnNames()
 {
     return mColumnNames;
+}
+
+pair<int,int> SimulationData::Dimension()
+{
+    return pair<int,int>(mTheData.RSize(), mTheData.CSize());
+}
+
+string SimulationData::GetName()
+{
+    return mName;
+}
+
+void SimulationData::SetTimeDataPrecision(const int& prec)
+{
+    mTimePrecision = prec;
+}
+
+void SimulationData::SetDataPrecision(const int& prec)
+{
+    mDataPrecision = prec;
 }
 
 string SimulationData::GetColumnNamesAsString()

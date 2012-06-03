@@ -180,7 +180,6 @@ int main(int argc, char * argv[])
             Log(lError)<<"Failed loading reference data";
         }
 
-
         simulation.CreateErrorData();
 
         //Check error data.. if an error in the set is larger than threshold, signal an error
