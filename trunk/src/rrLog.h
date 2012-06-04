@@ -37,8 +37,8 @@ class RR_DECLSPEC Logger : public LogContainer<LogOutput>
 
 
 #define Log(level) \
-    if (level > GetHighestLogLevel()) ;\
-    else if (level > gLog.GetLogLevel()) ; \
+    if (level > GetHighestLogLevel()) { ; }\
+    else if (level > gLog.GetLogLevel()) { ; } \
     else Logger().Get(level)
 
 }//Namespace rr

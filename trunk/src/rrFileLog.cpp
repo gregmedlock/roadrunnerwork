@@ -28,6 +28,11 @@ FileLog::~FileLog()
     mNrOfInstances--;
 }
 
+int  FileLog::GetNrOfInstances()
+{
+    return mNrOfInstances;
+}
+
 bool FileLog::Init(const string& logPrefix, const LogLevel& level, unique_ptr<LogFile> logFile)
 {
     mLogPrefix = logPrefix;

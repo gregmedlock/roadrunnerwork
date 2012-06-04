@@ -52,4 +52,4 @@ std::ostringstream& LogContainer<LogOutput>::Get(const LogLevel& level)
     return mOutputStream;
 }
 
-}//namespace
+}

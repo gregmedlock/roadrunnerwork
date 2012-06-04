@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{510D6EA1-6D3D-4AF5-9F40-3DC0BE91F4A2}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -23,7 +23,7 @@
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<Defines>LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
-			<FinalOutputDir>$(RR_INSTALL_FOLDER)\bin</FinalOutputDir>
+			<FinalOutputDir>$(RR_INSTALLS)\bin</FinalOutputDir>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
@@ -33,7 +33,7 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\Examples\validate_sbml\;..\;..\..\..\Examples\validate_sbml\;$(RR_INSTALL_FOLDER);$(RR_INSTALL_FOLDER)\include;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\Examples\validate_sbml\;..\;..\..\..\Examples\validate_sbml\;$(RR_INSTALLS);$(RR_INSTALLS)\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\Examples\validate_sbml\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrInstalls\xe\lib\;..\..\..\Examples\validate_sbml\;..\;..\..\..\ThirdParty\libsbml\dependencies\lib\;C:\rrThirdPartyInstalls\;C:\RRW\Testing\libSBMLTests\validate\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>

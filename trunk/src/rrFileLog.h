@@ -4,7 +4,7 @@
 //---------------------------------------------------------------------------
 
 #if defined (__MINGW32__)
-#include <tr1/memory> 
+#include <tr1/memory>
 #else
 #include <memory>
 #endif
@@ -14,6 +14,7 @@
 #include "rrLogLevel.h"
 #include "rrLogFile.h"
 using std::unique_ptr;
+
 //Global class holding logfile and other settings. Should Persist trougout the life of the application that is using it. Based on RAII
 namespace rr
 {
@@ -32,7 +33,7 @@ class RR_DECLSPEC FileLog : public rrObject
 
     public:
                                 FileLog();
-                                ~FileLog();
+                               ~FileLog();
         string                  GetLogPrefix();
         void                    SetLogPrefix(const string& prefix);
         LogLevel                GetLogLevel();
@@ -41,7 +42,7 @@ class RR_DECLSPEC FileLog : public rrObject
         void                    write(const char* str);
         bool                    mLogToServer;
         string                  GetLogFileName();
-        int                     GetNrOfInstances(){return mNrOfInstances;}
+        int                     GetNrOfInstances();
 };
 
 RR_DECLSPEC extern FileLog gLog;

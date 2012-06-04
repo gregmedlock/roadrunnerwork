@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{BB98A606-C02D-454F-B743-70C12C4C53CD}</ProjectGuid>
 			<ProjectVersion>13.4</ProjectVersion>
@@ -43,7 +43,7 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\apps\rr_test_suite_tester\;..\..\src\;..\..\apps\rr_ts\;..\..\apps\rr\;$(RR_INSTALL_FOLDER)\include;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\apps\rr_test_suite_tester\;..\..\src\;..\..\apps\rr_ts\;..\..\apps\rr\;$(RR_INSTALLS)\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\..\apps\rr_test_suite_tester\;C:\rrInstalls\xe\lib\;..\..\apps\rr_ts\;..\..\src\;..\..\releases\xe\shared\link\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\installs\xe\lib\;..\..\Examples\rr\;..\..\releases\xe\link\;..\..\installs\xe\bin\;..\..\Apps\rr\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>

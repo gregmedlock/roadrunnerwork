@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{F02A4FDC-5DE6-4A6D-8997-98420C96BAF4}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -28,17 +28,17 @@
 			<PackageImports>vclx.bpi;vcl.bpi;VclSmp.bpi;rtl.bpi;vclimg.bpi;bcbie.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;svnui.bpi;svn.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;bdertl.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;inet.bpi;inetdb.bpi;webdsnap.bpi;websnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;DbxCommonDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbexpress.bpi;dbxcds.bpi;TeeTree2D15Tee9.bpi;DbxClientDriver.bpi;AzureCloud.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi</PackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>
 			<_TCHARMapping>char</_TCHARMapping>
-			<IncludePath>..\..\src;..\..\Wrappers\C\;$(RR_INSTALL_FOLDER)\include;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\src;..\..\Wrappers\C\;$(RR_INSTALLS)\include;$(IncludePath)</IncludePath>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
 			<OutputExt>dll</OutputExt>
-			<BPILibOutputDir>$(RR_INSTALL_FOLDER)\lib</BPILibOutputDir>
+			<BPILibOutputDir>$(RR_INSTALLS)\lib</BPILibOutputDir>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
 			<IntermediateOutputDir>.\$(Config)\$(Platform)</IntermediateOutputDir>
-			<FinalOutputDir>$(RR_INSTALL_FOLDER)\bin</FinalOutputDir>
+			<FinalOutputDir>$(RR_INSTALLS)\bin</FinalOutputDir>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>

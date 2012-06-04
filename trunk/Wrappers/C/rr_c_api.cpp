@@ -1,7 +1,8 @@
 #ifdef USE_PCH
 #include "rr_pch.h"
 #endif
-#pragma hdrstop//---------------------------------------------------------------------------
+#pragma hdrstop
+//---------------------------------------------------------------------------
 #include <windows.h>
 #include "rrRoadRunner.h"
 #include "rrLogger.h"
