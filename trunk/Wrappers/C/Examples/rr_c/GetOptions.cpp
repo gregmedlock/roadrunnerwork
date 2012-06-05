@@ -10,9 +10,6 @@
 #pragma package(smart_init)
 #endif
 
-namespace rr
-{
-
 char    *optarg;            // global argument pointer
 int      optind = 0;        // global argv index
 
@@ -78,5 +75,3 @@ int GetOptions(int argc, char *argv[], char *optstring)
 
     return c;
 }
-
-}//namepsace

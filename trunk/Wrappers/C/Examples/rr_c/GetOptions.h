@@ -1,14 +1,12 @@
-#ifndef rrGetOptionsH
-#define rrGetOptionsH                                                                                  \
+#ifndef GetOptionsH
+#define GetOptionsH                                                                                  \
 #include "rrExporter.h"
 //---------------------------------------------------------------------------
 
-namespace rr
-{
 extern int                         optind;
-extern  int                         opterr;
-extern  char                       *optarg;
-        int                         GetOptions(int argc, char *argv[], char *optstring);
-}
+extern int                         opterr;
+extern char                       *optarg;
+       int                         GetOptions(int argc, char *argv[], char *optstring);
+
 
 #endif

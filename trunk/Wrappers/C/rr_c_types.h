@@ -36,7 +36,6 @@ C_DECL_SPEC typedef struct RRResult
     int             CSize;
     double*         Data;
     char**          ColumnHeaders;
-                   ~RRResult();
 } *RRResultHandle ;
 
 C_DECL_SPEC typedef struct RRStringList

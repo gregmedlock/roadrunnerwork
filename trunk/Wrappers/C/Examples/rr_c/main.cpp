@@ -28,7 +28,7 @@ using namespace rr;
 
 void ProcessCommandLineArguments(int argc, char* argv[], Args& args);
 
-int main(int argc, char * argv[])
+int main(int argc, char* argv[])
 {
     LogOutput::mLogToConsole = true;
     Args args;
@@ -110,6 +110,7 @@ int main(int argc, char * argv[])
         {
             printMatrix(mat);
         }
+
         result = simulate();
 
         if(!result)

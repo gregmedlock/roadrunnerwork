@@ -8,7 +8,7 @@
 //---------------------------------------------------------------------------
 using std::string;
 string Usage(const string& prg);
-
+using namespace rr;
 class Args
 {
     public:

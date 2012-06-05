@@ -5,23 +5,13 @@
 //---------------------------------------------------------------------------
 #include <windows.h>
 #include "rrRoadRunner.h"
-#include "rrLogger.h"
+#include "rrLogger.h"           //Might be useful for debugging later on
 #include "rr_c_api.h"
+#include "rr_c_api_support.h"   //Support functions, not exposed as api functions and or data
 //---------------------------------------------------------------------------
-
 using namespace rr;
-rr::RoadRunner *gRRHandle = NULL;
-RRResult*       gResult = NULL;
-char*           gError = NULL;
-
-//Internal prototypes
-void SetError(const string& err);
-
-RRResult::~RRResult()
-{
-    delete [] Data;
-    delete [] ColumnHeaders;
-}
+static rr::RoadRunner*  gRRHandle = NULL;
+char*            gLastError = NULL;
 
 char* __stdcall getBuildDate(void)
 {
@@ -37,24 +27,20 @@ RRHandle __stdcall getRRInstance()
     return gRRHandle;
 }
 
-void __stdcall deleteRRInstance(RRHandle handle)
-{
-    delete handle;
-    handle = NULL;
-}
-
 char* __stdcall getCopyright()
 {
-    char* text;
+    char* text = NULL;
     if(!gRRHandle)
     {
-        string msg = "Please allocate a handle to roadrunner API before calling any API function";
-        text = new char[msg.size() + 1]; //Where do we free this one.. ->  freeText(....);
-        return text;
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        text = new char[strlen(ALLOCATE_API_ERROR_MSG) + 1];
+        strcpy(text, ALLOCATE_API_ERROR_MSG);
     }
-
-    text = new char[gRRHandle->getCopyright().size() + 1];
-    strcpy(text, gRRHandle->getCopyright().c_str());
+    else
+    {
+        text = new char[gRRHandle->getCopyright().size() + 1];
+        strcpy(text, gRRHandle->getCopyright().c_str());
+    }
     return text;
 }
 
@@ -62,7 +48,7 @@ bool __stdcall setTempFolder(const char* folder)
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
 
@@ -73,13 +59,13 @@ bool __stdcall loadSBML(const char* sbml)
 {
     if(!gRRHandle)
     {
-        SetError("Please allocate a handle to roadrunner API before calling any API function");
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
 
     if(!gRRHandle->loadSBML(sbml))
     {
-        SetError("Failed to load SBML semantics");
+        SetAPIError("Failed to load SBML semantics");
         return false;
     }
     return true;
@@ -89,7 +75,7 @@ bool __stdcall setTimeStart(double timeStart)
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
 
@@ -101,7 +87,7 @@ bool __stdcall setTimeEnd(double timeEnd)
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
 
@@ -113,7 +99,7 @@ bool __stdcall setNumPoints(int nrPoints)
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
 
@@ -125,7 +111,7 @@ bool  __stdcall setSelectionList(const char* list)
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
 
@@ -137,7 +123,7 @@ RRResultHandle __stdcall simulate(void)
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
 
@@ -146,29 +132,29 @@ RRResultHandle __stdcall simulate(void)
         SimulationData result = gRRHandle->GetSimulationResult();
 
         //Extract the data and return struct..
-        gResult  = new RRResult;
-        gResult->ColumnHeaders = new char*[result.GetNrOfCols()];
+        RRResult* aResult  = new RRResult;
+        aResult->ColumnHeaders = new char*[result.GetNrOfCols()];
         for(int i = 0; i < result.GetNrOfCols(); i++)
         {
-            gResult->ColumnHeaders[i] = new char(32);
-            strcpy(gResult->ColumnHeaders[i], result.GetColumnNames()[i].c_str());
+            aResult->ColumnHeaders[i] = new char(32);
+            strcpy(aResult->ColumnHeaders[i], result.GetColumnNames()[i].c_str());
         }
 
-        gResult->RSize = result.GetNrOfRows();
-        gResult->CSize = result.GetNrOfCols();
-        int size = gResult->RSize*gResult->CSize;
-        gResult->Data = new double[size];
+        aResult->RSize = result.GetNrOfRows();
+        aResult->CSize = result.GetNrOfCols();
+        int size = aResult->RSize*aResult->CSize;
+        aResult->Data = new double[size];
 
         int index = 0;
         //The data layout is simple row after row, in one single long row...
-        for(int row = 0; row < gResult->RSize; row++)
+        for(int row = 0; row < aResult->RSize; row++)
         {
-            for(int col = 0; col < gResult->CSize; col++)
+            for(int col = 0; col < aResult->CSize; col++)
             {
-                gResult->Data[index++] = result(row, col);
+                aResult->Data[index++] = result(row, col);
             }
         }
-        return gResult;
+        return aResult;
     }
     else
     {
@@ -176,17 +162,11 @@ RRResultHandle __stdcall simulate(void)
     }
 }
 
-bool __stdcall freeRRResult()
-{
-    delete gResult;
-    return true;
-}
-
 RRStringListHandle __stdcall getReactionNames(void)
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return NULL;
     }
 
@@ -210,17 +190,11 @@ RRStringListHandle __stdcall getReactionNames(void)
     return sl;
 }
 
-bool __stdcall freeStringList(RRStringListHandle sl)
-{
-    delete sl;
-    return true;
-}
-
 double __stdcall getValue(const char* speciesID)
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return NULL;
     }
     return gRRHandle->getValue(speciesID);
@@ -230,7 +204,7 @@ bool __stdcall setValue(const char* speciesID, const double& val)
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
 
@@ -241,7 +215,7 @@ RRDataMatrixHandle __stdcall getStoichiometryMatrix(void)
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return NULL;
     }
 
@@ -295,28 +269,21 @@ void __stdcall printMatrix(RRDataMatrixHandle matrixHandle)
     Log(lInfo)<<ss.str();
 }
 
-bool __stdcall freeRRDataMatrixHandle(RRDataMatrixHandle matrix)
+C_DECL_SPEC bool __stdcall hasError()
 {
-    free(matrix->Data);
-    return true;
-}
-
-void SetError(const string& err)
-{
-    gError = new char[err.size() + 1];
-    strcpy(gError, err.c_str());
+    return (gLastError != NULL) ? true : false;
 }
 
 char* __stdcall getLastError()
 {
-    return gError;
+    return gLastError;
 }
 
 bool __stdcall reset()
 {
     if(!gRRHandle)
     {
-        Log(lError)<<"Please allocate a handle to roadrunner API before calling any API function";
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
     gRRHandle->reset();
@@ -325,74 +292,173 @@ bool __stdcall reset()
 
 int   __stdcall getNumberOfReactions()
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
 double __stdcall getReactionRate(int)
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
 int __stdcall getNumberOfBoundarySpecies()
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
 char* __stdcall getBoundarySpeciesNames()          // <- treat char* as you treat it in setSelectionList (char *)
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
 int __stdcall getNumberOfFloatingSpecies()
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
 char* __stdcall getFloatingSpeciesNames()
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
 int __stdcall getNumberOfGlobalParameterNames()
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
 char* __stdcall getGlobalParameterNames()
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
-void __stdcall setInitialConditions(double[])     // <- might be called changeInitialConditions in roadRunner
+bool __stdcall setInitialConditions(double[])     // <- might be called changeInitialConditions in roadRunner
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
 double __stdcall oneStep (double, double)
 {
-
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 }
 
 RRSymbolListHandle __stdcall getAvailableSymbols()              // <- You'll have to decide what type to return
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
 double __stdcall steadyState()
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
 RRDoubleVectorHandle __stdcall computeSteadyStateValues()
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
-void __stdcall setSteadyStateSelectionList(char *)
+bool __stdcall setSteadyStateSelectionList(char *)
 {
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
 
 }
 
+//Free Functions
+void __stdcall freeRRInstance(RRHandle handle)
+{
+    delete handle;
+    handle = NULL;
+}
+
+bool __stdcall freeRRDataMatrixHandle(RRDataMatrixHandle matrix)
+{
+    free(matrix->Data);
+    return true;
+}
+
+bool __stdcall freeRRResult(RRResultHandle handle)
+{
+    delete handle;
+    return true;
+}
+
+bool __stdcall freeText(char* text)
+{
+    delete text;
+    return true;
+}
+
+bool __stdcall freeStringList(RRStringListHandle sl)
+{
+    delete sl;
+    return true;
+}
 
 //============================================================================
 #pragma argsused
