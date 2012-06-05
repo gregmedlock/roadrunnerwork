@@ -32,7 +32,6 @@ void __fastcall TMainForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState S
     }
 }
 
-
 void __fastcall TMainForm::LoadDLLExecute(TObject *Sender)
 {
 

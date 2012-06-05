@@ -176,7 +176,7 @@ string ExtractFileName(const string& fileN)
         return fName;
     }
 
-    return fileN;
+    return fileN; //There was no path in present..
 }
 
 string ExtractFilePath(const string& fileN)

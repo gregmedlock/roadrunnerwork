@@ -53,10 +53,6 @@ object MainForm: TMainForm
       Align = alClient
       ItemHeight = 13
       TabOrder = 1
-      ExplicitLeft = 16
-      ExplicitTop = 152
-      ExplicitWidth = 121
-      ExplicitHeight = 97
     end
   end
   object Panel3: TPanel

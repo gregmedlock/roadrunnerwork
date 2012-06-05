@@ -111,7 +111,6 @@
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
 			<ResFiles Include="rrCAPI.res">
-				<ModuleName>rrCAPI.res</ModuleName>
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
 			<PackageImport Include="VCLCommonRTL.bpi">
