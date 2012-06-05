@@ -87,15 +87,15 @@ if(${BORLAND})
 	set_property(DIRECTORY 		PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
 endif(${BORLAND})
 
-target_link_libraries (${target} libsbml-static)
 
 
 #libraries to link with our shared lib
+#target_link_libraries (${target} libsbml-static)
 target_link_libraries (${target} sundials_cvode)
 target_link_libraries (${target} sundials_nvecserial)
+target_link_libraries (${target} libf2c)
 target_link_libraries (${target} blas)
 target_link_libraries (${target} lapack)
-target_link_libraries (${target} libf2c)
 
 #libraries to link with our static lib
 target_link_libraries (${target}-static libsbml-static)
