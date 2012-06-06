@@ -90,7 +90,7 @@ endif(${BORLAND})
 
 
 #libraries to link with our shared lib
-#target_link_libraries (${target} libsbml-static)
+target_link_libraries (${target} libsbml-static)
 target_link_libraries (${target} sundials_cvode)
 target_link_libraries (${target} sundials_nvecserial)
 target_link_libraries (${target} libf2c)
