@@ -10,8 +10,12 @@
 #include "rr_c_api_support.h"   //Support functions, not exposed as api functions and or data
 //---------------------------------------------------------------------------
 using namespace rr;
-static rr::RoadRunner*  gRRHandle = NULL;
-char*            gLastError = NULL;
+using namespace rr_c_api;
+namespace rr_c_api
+{
+static  rr::RoadRunner*     gRRHandle       = NULL;
+char*                       gLastError      = NULL;
+}
 
 char* __stdcall getBuildDate(void)
 {
@@ -145,39 +149,37 @@ RRResultHandle __stdcall simulate(void)
         return false;
     }
 
-    if(gRRHandle->Simulate())
-    {
-        SimulationData result = gRRHandle->GetSimulationResult();
-
-        //Extract the data and return struct..
-        RRResult* aResult  = new RRResult;
-        aResult->ColumnHeaders = new char*[result.GetNrOfCols()];
-        for(int i = 0; i < result.GetNrOfCols(); i++)
-        {
-            aResult->ColumnHeaders[i] = new char(32);
-            strcpy(aResult->ColumnHeaders[i], result.GetColumnNames()[i].c_str());
-        }
-
-        aResult->RSize = result.GetNrOfRows();
-        aResult->CSize = result.GetNrOfCols();
-        int size = aResult->RSize*aResult->CSize;
-        aResult->Data = new double[size];
-
-        int index = 0;
-        //The data layout is simple row after row, in one single long row...
-        for(int row = 0; row < aResult->RSize; row++)
-        {
-            for(int col = 0; col < aResult->CSize; col++)
-            {
-                aResult->Data[index++] = result(row, col);
-            }
-        }
-        return aResult;
-    }
-    else
+    if(!gRRHandle->Simulate())
     {
         return NULL;
     }
+
+    SimulationData result = gRRHandle->GetSimulationResult();
+
+    //Extract the data and return struct..
+    RRResult* aResult  = new RRResult;
+    aResult->ColumnHeaders = new char*[result.GetNrOfCols()];
+    for(int i = 0; i < result.GetNrOfCols(); i++)
+    {
+        aResult->ColumnHeaders[i] = new char(32);
+        strcpy(aResult->ColumnHeaders[i], result.GetColumnNames()[i].c_str());
+    }
+
+    aResult->RSize = result.GetNrOfRows();
+    aResult->CSize = result.GetNrOfCols();
+    int size = aResult->RSize*aResult->CSize;
+    aResult->Data = new double[size];
+
+    int index = 0;
+    //The data layout is simple row after row, in one single long row...
+    for(int row = 0; row < aResult->RSize; row++)
+    {
+        for(int col = 0; col < aResult->CSize; col++)
+        {
+            aResult->Data[index++] = result(row, col);
+        }
+    }
+    return aResult;
 }
 
 RRStringListHandle __stdcall getReactionNames(void)
@@ -195,17 +197,17 @@ RRStringListHandle __stdcall getReactionNames(void)
         return NULL;
     }
 
-    RRStringListHandle sl = new RRStringList;
-    sl->Count = rNames.size();
-    sl->String = new char*[sl->Count];
+    RRStringListHandle list = new RRStringList;
+    list->Count = rNames.size();
+    list->String = new char*[list->Count];
 
-    for(int i = 0; i < sl->Count; i++)
+    for(int i = 0; i < list->Count; i++)
     {
-        sl->String[i] = new char[rNames[i].size()];
-        strcpy(sl->String[i], rNames[i].c_str());
+        list->String[i] = new char[rNames[i].size()];
+        strcpy(list->String[i], rNames[i].c_str());
     }
 
-    return sl;
+    return list;
 }
 
 double __stdcall getValue(const char* speciesID)
@@ -213,7 +215,7 @@ double __stdcall getValue(const char* speciesID)
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
-        return NULL;
+        return 0;
     }
     return gRRHandle->getValue(speciesID);
 }
@@ -245,11 +247,10 @@ RRDataMatrixHandle __stdcall getStoichiometryMatrix(void)
     matrix->Data =  new double[tempMat.RSize()*tempMat.CSize()];
 
     int index = 0;
-    for(int row = 0; row < tempMat.RSize(); row++)
+    for(rr::u_int row = 0; row < tempMat.RSize(); row++)
     {
-        for(int col = 0; col < tempMat.CSize(); col++)
+        for(rr::u_int col = 0; col < tempMat.CSize(); col++)
         {
-//            double val = tempMat(row,col);
             matrix->Data[index++] = tempMat(row,col);
         }
     }
@@ -313,17 +314,19 @@ int   __stdcall getNumberOfReactions()
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
-        return false;
+        return -1;
     }
+    return gRRHandle->getNumberOfReactions();
 }
 
-double __stdcall getReactionRate(int)
+double __stdcall getReactionRate(int rateNr)
 {
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
-        return false;
+        return -1;
     }
+    return gRRHandle->getReactionRate(rateNr);
 }
 
 int __stdcall getNumberOfBoundarySpecies()
@@ -331,8 +334,9 @@ int __stdcall getNumberOfBoundarySpecies()
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
-        return false;
+        return -1;
     }
+    return gRRHandle->getNumberOfBoundarySpecies();
 }
 
 char* __stdcall getBoundarySpeciesNames()          // <- treat char* as you treat it in setSelectionList (char *)
@@ -340,8 +344,14 @@ char* __stdcall getBoundarySpeciesNames()          // <- treat char* as you trea
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
-        return false;
+        return NULL;
     }
+
+    StringList names = gRRHandle->getBoundarySpeciesNames();
+    string namesTemp = names.AsString();
+    char* nameList = new char[namesTemp.size() + 1];
+    strcpy(nameList, namesTemp.c_str());
+    return nameList;
 }
 
 int __stdcall getNumberOfFloatingSpecies()
@@ -351,6 +361,7 @@ int __stdcall getNumberOfFloatingSpecies()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
+    return gRRHandle->getNumberOfFloatingSpecies();
 }
 
 char* __stdcall getFloatingSpeciesNames()
@@ -360,15 +371,23 @@ char* __stdcall getFloatingSpeciesNames()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
+
+    StringList names = gRRHandle->getFloatingSpeciesNames();
+    string namesTemp = names.AsString();
+    char* nameList = new char[namesTemp.size() + 1];
+    strcpy(nameList, namesTemp.c_str());
+    return nameList;
 }
 
-int __stdcall getNumberOfGlobalParameterNames()
+//int __stdcall getNumberOfGlobalParameterNames()
+int __stdcall getNumberOfGlobalParameter()
 {
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
+    return gRRHandle->getNumberOfGlobalParameters();
 }
 
 char* __stdcall getGlobalParameterNames()
@@ -378,18 +397,28 @@ char* __stdcall getGlobalParameterNames()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
+    StringList names = gRRHandle->getGlobalParameterNames();
+    string namesTemp = names.AsString();
+    char* nameList = new char[namesTemp.size() + 1];
+    strcpy(nameList, namesTemp.c_str());
+    return nameList;
 }
 
-bool __stdcall setInitialConditions(double[])     // <- might be called changeInitialConditions in roadRunner
+bool __stdcall setInitialConditions(RRDoubleVector* vec)     // <- might be called changeInitialConditions in roadRunner
 {
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
+    vector<double> aVec;
+    CopyRRVector(vec, aVec);
+    gRRHandle->changeInitialConditions(aVec);
+    return true;
+
 }
 
-double __stdcall oneStep (double, double)
+double __stdcall oneStep(const double& currentTime, const double& stepSize)
 {
     if(!gRRHandle)
     {
@@ -397,15 +426,42 @@ double __stdcall oneStep (double, double)
         return false;
     }
 
+    return gRRHandle->oneStep(currentTime, stepSize);
 }
 
-RRSymbolListHandle __stdcall getAvailableSymbols()              // <- You'll have to decide what type to return
+RRSymbolListsHandle __stdcall getAvailableSymbols()              // <- You'll have to decide what type to return
 {
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
-        return false;
+        return NULL;
     }
+
+    StringListContainer slSymbols = gRRHandle->getAvailableSymbols();
+
+    RRSymbolListsHandle symbols = new RRSymbolLists;
+    symbols->NumberOfLists  = slSymbols.Count();
+    symbols->List           = new RRStringList[slSymbols.Count()];
+
+    //Allocate and fill out lists
+    for(int listNr = 0; listNr < slSymbols.Count(); listNr++)
+    {
+        StringList aList = slSymbols[listNr];
+        symbols->List[listNr].Count = aList.Count();
+        symbols->List[listNr].Label = new char[aList.mLabel.size() + 1];
+        strcpy(symbols->List[listNr].Label, aList.mLabel.c_str());
+
+        if(aList.Count())
+        {
+            symbols->List[listNr].String = new char*[aList.Count()];
+            for(int itemNr = 0; itemNr < aList.Count(); itemNr++)
+            {
+                symbols->List[listNr].String[itemNr] = new char[aList[itemNr].size() + 1];
+                strcpy(symbols->List[listNr].String[itemNr], aList[itemNr].c_str());
+            }
+        }
+    }
+    return symbols;
 }
 
 double __stdcall steadyState()
@@ -415,6 +471,8 @@ double __stdcall steadyState()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
+
+    return gRRHandle->steadyState();
 }
 
 RRDoubleVectorHandle __stdcall computeSteadyStateValues()
@@ -424,28 +482,49 @@ RRDoubleVectorHandle __stdcall computeSteadyStateValues()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
+    vector<double> vec =  gRRHandle->computeSteadyStateValues();
+
+    RRDoubleVector* aVec = CreateRRDoubleVecFrom(vec);
+    return aVec;
 }
 
-bool __stdcall setSteadyStateSelectionList(char *)
+bool __stdcall setSteadyStateSelectionList(char* list)
 {
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
+
+    StringList aList(list, " ,");
+    gRRHandle->setSteadyStateSelectionList(aList);
+    return true;
 }
 
 //Free Functions
 void __stdcall freeRRInstance(RRHandle handle)
 {
-    delete gRRHandle;
-//    delete handle;
-    handle = NULL;
+//    rr::RoadRunner* test = (rr::RoadRunner*)(handle);
+
+    //We don't really care about the handle.
+    //Delete the roadrunner instance and if succesful, set the handle to
+    //NULL
+
+//    if(test == gRRHandle)
+//    {
+        delete gRRHandle;
+        gRRHandle = NULL;
+        handle = NULL;
+//    }
 }
 
 bool __stdcall freeRRDataMatrix(RRDataMatrixHandle matrix)
 {
-    delete [] (matrix->Data);
+    if(matrix)
+    {
+        delete [] (matrix->Data);
+        delete matrix;
+    }
     return true;
 }
 

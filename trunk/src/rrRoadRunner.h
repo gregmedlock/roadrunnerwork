@@ -65,9 +65,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double                          getParameterValue(const TParameterType& parameterType, const int& parameterIndex);
 
         vector<TSelectionRecord>        mSteadyStateSelection;
-        vector<TSelectionRecord>        GetSteadyStateSelection(const list<string>& newSelectionList);
-        vector<double>                  computeSteadyStateValues(const vector<TSelectionRecord>& oSelection, const bool& computeSteadyState);
-        double                          computeSteadyStateValue(const TSelectionRecord& record);
+        vector<TSelectionRecord>        GetSteadyStateSelection(const StringList& newSelectionList);
         StringList                      getParameterNames();
         string                          GetDLLName();
 
@@ -178,7 +176,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 
         //Functions --------------------------------------------------------------------
-                                        RoadRunner(bool GenerateCSharp = false);
+                                        RoadRunner();
         virtual                        ~RoadRunner();
         bool                            CreateSelectionList();
         bool                            SetTempFileFolder(const string& folder);
@@ -267,14 +265,18 @@ class RR_DECLSPEC RoadRunner : public rrObject
         StringList                      getFluxControlCoefficientNames();
         StringList                      getConcentrationControlCoefficientNames();
         StringList                      getUnscaledConcentrationControlCoefficientNames();
-        StringList                      getElasticityCoefficientNames();
-        StringList                      getUnscaledElasticityCoefficientNames();
+        ArrayList                       getElasticityCoefficientNames();
+        ArrayList                       getUnscaledElasticityCoefficientNames();
         StringList                      getEigenValueNames();
         StringList                      getAvailableSteadyStateSymbols();
         StringList                      getSteadyStateSelectionList();
         void                            setSteadyStateSelectionList(const StringList& newSelectionList);
+
+        double                          computeSteadyStateValue(const TSelectionRecord& record);
         vector<double>                  computeSteadyStateValues();
-        vector<double>                  computeSteadyStateValues(const StringList& oSelection);
+        vector<double>                  computeSteadyStateValues(const StringList& selection);
+        vector<double>                  computeSteadyStateValues(const vector<TSelectionRecord>& selection, const bool& computeSteadyState);
+
         double                          computeSteadyStateValue(const string& sId);
         vector<double>                  getSelectedValues();
         vector<string>                  getWarnings();

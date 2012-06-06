@@ -189,7 +189,7 @@ LIB_LA::DoubleMatrix* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
         }
         else
         {
-            L0 = new LIB_LA::DoubleMatrix(1,1);//.Allocate(1,1);// = new double[0][];
+            L0 = new LIB_LA::DoubleMatrix(1,1);//.Allocate(1,1);// = new double[0][];             //Todo: memoryleak
             nrRows = nrCols = 1;
         }
     }
@@ -551,13 +551,15 @@ int ModelGenerator::GetNumberOfReactions()
 ////            return tmp;
 ////        }
 ////
-////        public ArrayList getConservationList()
-////        {
-////            var tmp = new ArrayList();
-////            for (int i = 0; i < conservationList.Count; i++)
-////                tmp.Add(conservationList[i].name);
-////            return tmp;
-////        }
+StringList ModelGenerator::getConservationList()
+{
+    StringList tmp;// = new ArrayList();
+    for (int i = 0; i < conservationList.Count(); i++)
+    {
+        tmp.Add(conservationList[i].name);
+    }
+    return tmp;
+}
 ////
 ////
 ////        public ArrayList getBoundarySpeciesList()

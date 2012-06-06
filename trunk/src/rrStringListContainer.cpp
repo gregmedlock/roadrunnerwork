@@ -16,14 +16,66 @@ StringListContainer::StringListContainer()
 }
 
 StringListContainer::StringListContainer(const StringListContainer& cp)
+:
+mContainer(cp.mContainer)
+{}
+
+StringListContainer::StringListContainer(const string& lbl, const StringListContainer& cp)
+:
+mLabel(lbl),
+mContainer(cp.mContainer)
+{}
+
+StringListContainer::StringListContainer(const StringList& cp)
 {
-    mContainer = cp.mContainer;
+    Add(cp.mLabel, cp);
 }
 
 //void StringListContainer::operator=(const StringListContainer& rhs)
 //{
 //
 //}
+
+int StringListContainer::size() const
+{
+    return mContainer.size();
+}
+
+int StringListContainer::Count() const
+{
+    return mContainer.size();
+}
+
+StringList& StringListContainer::operator[](const int& index)
+{
+    return mContainer[index];
+}
+
+vector<StringList>::iterator StringListContainer::begin()
+{
+    return mContainer.begin();
+}
+
+vector<StringList>::iterator StringListContainer::end()
+{
+    return mContainer.end();
+}
+
+void StringListContainer::Add(const string& lbl, const StringListContainer& lists)
+{
+    mLabel = lbl;
+    Add(lists);
+}
+
+void StringListContainer::Add(const StringListContainer& lists)
+{
+    for(int i = 0; i < lists.size(); i++)
+    {
+        StringList aList;
+        aList = lists.mContainer[i];    //Todo: lists[i] should work...
+        Add(aList);
+    }
+}
 
 void StringListContainer::Add(const StringList& list)
 {

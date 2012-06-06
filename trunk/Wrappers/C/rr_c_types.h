@@ -18,10 +18,18 @@ C_DECL_SPEC typedef struct RRDoubleVector
 } *RRDoubleVectorHandle ;
 
 
-C_DECL_SPEC typedef struct RRSymbolList
+C_DECL_SPEC typedef struct RRStringList
 {
+    int             Count;
+    char*           Label;
+    char**          String;
+} *RRStringListHandle ;
 
-} *RRSymbolListHandle ;
+C_DECL_SPEC typedef struct RRSymbolLists
+{
+    int             NumberOfLists;
+    RRStringList*   List;
+}*RRSymbolListsHandle ;
 
 C_DECL_SPEC typedef struct RRDataMatrix
 {
@@ -29,12 +37,6 @@ C_DECL_SPEC typedef struct RRDataMatrix
     int             CSize;
     double*         Data;
 } *RRDataMatrixHandle ;
-
-C_DECL_SPEC typedef struct RRStringList
-{
-    int             Count;
-    char**          String;
-} *RRStringListHandle ;
 
 C_DECL_SPEC typedef struct RRResult
 {

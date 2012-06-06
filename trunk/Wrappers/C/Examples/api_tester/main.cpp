@@ -44,12 +44,48 @@ int main()
     printMatrix(matrix);
     freeRRDataMatrix(matrix);
 
+    RRStringList* names = getReactionNames();
+
+    if(names)
+    {
+        for(int i = 0; i < names->Count; i++)
+        {
+            cout<<names->String[i]<<endl;
+        }
+    }
+
+    RRSymbolLists* symbols = getAvailableSymbols();
+    if(symbols)
+    {
+        for(int i = 0; i < symbols->NumberOfLists; i++)
+        {
+
+            cout<<"========= ";
+            if( symbols->List[i].Label != NULL && strlen(symbols->List[i].Label) > 0)
+            {
+                cout<<symbols->List[i].Label;
+            }
+            else
+            {
+                cout<<"no name";
+            }
+            cout<<"  ==============="<<endl;
+
+            for(int j = 0; j < symbols->List[i].Count; j++)
+            {
+                cout<<symbols->List[i].String[j]<<endl;
+            }
+
+        }
+    }
+
     cout<<text;
     freeText(text);
 
     reset();
 
     freeRRInstance(rrHandle);
+
     return 0;
 }
 

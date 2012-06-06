@@ -13,23 +13,27 @@ namespace rr
 class RR_DECLSPEC StringListContainer : public rrObject
 {
     protected:
-        vector<StringList>                 mContainer;
+        string                          mLabel;
+        vector<StringList>              mContainer;
 
     public:
-                                           StringListContainer();
-                                           StringListContainer(const StringListContainer& cp);
+                                        StringListContainer();
+                                        StringListContainer(const string& lbl, const StringListContainer& cp);
+                                        StringListContainer(const StringListContainer& cp);
+                                        StringListContainer(const StringList& cp);
         void                            operator=(const StringListContainer& rhs);
-           void                             Add(const string& listName, const StringList& coll);
-        void                             Add(const StringList& coll);
-        void                             Add(const string& coll);
-        void                             Add(const int& coll);
-        int                              size(){return mContainer.size();}
-        int                              Count(){return mContainer.size();}
-        StringList&                     operator[](const int& index){return mContainer[index];}
-        vector<StringList>::iterator     begin(){return mContainer.begin();}
-        vector<StringList>::iterator     end(){return mContainer.end();}
+        void                            Add(const StringListContainer& lists);
+        void                            Add(const string& lbl, const StringListContainer& lists);
 
-
+        void                            Add(const string& listName, const StringList& coll);
+        void                            Add(const StringList& coll);
+        void                            Add(const string& coll);
+        void                            Add(const int& coll);
+        int                             size() const ;
+        int                             Count() const;
+        StringList&                     operator[](const int& index);
+        vector<StringList>::iterator    begin();
+        vector<StringList>::iterator    end();
 };
 
 ostream& operator<<(ostream& stream, StringListContainer& list);
