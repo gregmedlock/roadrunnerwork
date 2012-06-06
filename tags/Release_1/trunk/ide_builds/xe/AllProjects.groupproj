@@ -1,0 +1,96 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{8AA929FD-F762-4676-B2BC-2AD621E4E45C}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="roadrunner.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="roadrunner-static.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="rr.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="rr_ts.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="validate_sbml.cbproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="rr_c_api.cbproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="roadrunner">
+			<MSBuild Projects="roadrunner.cbproj"/>
+		</Target>
+		<Target Name="roadrunner:Clean">
+			<MSBuild Projects="roadrunner.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="roadrunner:Make">
+			<MSBuild Projects="roadrunner.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="roadrunner-static">
+			<MSBuild Projects="roadrunner-static.cbproj"/>
+		</Target>
+		<Target Name="roadrunner-static:Clean">
+			<MSBuild Projects="roadrunner-static.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="roadrunner-static:Make">
+			<MSBuild Projects="roadrunner-static.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="rr">
+			<MSBuild Projects="rr.cbproj"/>
+		</Target>
+		<Target Name="rr:Clean">
+			<MSBuild Projects="rr.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="rr:Make">
+			<MSBuild Projects="rr.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="rr_ts">
+			<MSBuild Projects="rr_ts.cbproj"/>
+		</Target>
+		<Target Name="rr_ts:Clean">
+			<MSBuild Projects="rr_ts.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="rr_ts:Make">
+			<MSBuild Projects="rr_ts.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="validate_sbml">
+			<MSBuild Projects="validate_sbml.cbproj"/>
+		</Target>
+		<Target Name="validate_sbml:Clean">
+			<MSBuild Projects="validate_sbml.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="validate_sbml:Make">
+			<MSBuild Projects="validate_sbml.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="rr_c_api">
+			<MSBuild Projects="rr_c_api.cbproj"/>
+		</Target>
+		<Target Name="rr_c_api:Clean">
+			<MSBuild Projects="rr_c_api.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="rr_c_api:Make">
+			<MSBuild Projects="rr_c_api.cbproj" Targets="Make"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="roadrunner;roadrunner-static;rr;rr_ts;validate_sbml;rr_c_api"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="roadrunner:Clean;roadrunner-static:Clean;rr:Clean;rr_ts:Clean;validate_sbml:Clean;rr_c_api:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="roadrunner:Make;roadrunner-static:Make;rr:Make;rr_ts:Make;validate_sbml:Make;rr_c_api:Make"/>
+		</Target>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
+	</Project>
