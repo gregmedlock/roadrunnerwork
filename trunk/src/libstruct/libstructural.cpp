@@ -86,7 +86,7 @@ LibStructural::LibStructural() :   _NumRows(0), _NumCols(0),
 string LibStructural::loadSBML(string sSBML)
 {
     DELETE_IF_NON_NULL(_Model);
-    _Model = new SBMLmodel(sSBML);
+    _Model = new SBMLmodel(sSBML); //Todo: memoryleak
 
     string msg = "";
     msg = analyzeWithQR();
@@ -417,8 +417,11 @@ void LibStructural::InitializeFromStoichiometryMatrix(DoubleMatrix& oMatrix)
     DELETE_IF_NON_NULL(_NmatT); _NmatT = oMatrix.getTranspose();
 
     // store copies of stoichimetry matrix and it's transpose
-    DELETE_IF_NON_NULL(_Nmat_orig); _Nmat_orig = new DoubleMatrix(oMatrix);
-    DELETE_IF_NON_NULL(_NmatT_orig);_NmatT_orig = new DoubleMatrix(*_NmatT);
+    DELETE_IF_NON_NULL(_Nmat_orig);
+    _Nmat_orig = new DoubleMatrix(oMatrix); //Todo: memoryleak
+
+    DELETE_IF_NON_NULL(_NmatT_orig);
+    _NmatT_orig = new DoubleMatrix(*_NmatT);//Todo: memoryleak
 
 
     // If the network has reactions only between boundary species, the stoichiometry matrix will be 
@@ -643,12 +646,14 @@ void LibStructural::computeLinkMatrix()
 }
 void LibStructural::computeConservedSums()
 {
+    //Todo: memoryleak
     CREATE_ARRAY(_IC,double,numFloating);
     for (int i=0; i<numFloating; i++) 
     {
         _IC[i] = _speciesValueList[_speciesIndexList[spVec[i]]];
     }
 
+    //Todo: memoryleak
     CREATE_ARRAY(_BC,double,numBoundary);
     for (int i=0; i<numBoundary; i++) 
     {
@@ -667,7 +672,8 @@ void LibStructural::computeConservedSums()
     }
     else 
     {
-        _Totals = new double[_NumDependent]; memset(_Totals, 0, sizeof(double)*_NumDependent);
+        _Totals = new double[_NumDependent]; //Todo: memoryleak
+        memset(_Totals, 0, sizeof(double)*_NumDependent);
 
         for (int i=0; i<_NumDependent; i++) 
         {
@@ -810,9 +816,12 @@ void LibStructural::computeK0andKMatrices()
         }
     }
 
-    DELETE_IF_NON_NULL(_NullN);    _NullN = new DoubleMatrix(*_K);
+    DELETE_IF_NON_NULL(_NullN);
+    _NullN = new DoubleMatrix(*_K); //Todo: memoryleak
 
-    DELETE_IF_NON_NULL(Q); DELETE_IF_NON_NULL(R); DELETE_IF_NON_NULL(P);
+    DELETE_IF_NON_NULL(Q);
+    DELETE_IF_NON_NULL(R);
+    DELETE_IF_NON_NULL(P);
 }
 
 
@@ -2053,7 +2062,9 @@ void LibStructural::setTolerance(double dTolerance)
 LibStructural* LibStructural::getInstance()
 {
     if (_Instance == NULL)
-        _Instance = new LibStructural();
+    {
+        _Instance = new LibStructural();//Todo: memoryleak
+    }
     return _Instance;
 }
 

@@ -1,6 +1,6 @@
 ﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
-			<ProjectGuid>{E262B969-ABD6-4C83-B624-61A156F60C28}</ProjectGuid>
+			<ProjectGuid>{15A35B10-E1F3-471E-A8EA-86C0202E1251}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
 			<Base>True</Base>
 			<Config Condition="'$(Config)'==''">Debug</Config>
@@ -22,18 +22,17 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<FinalOutputDir>$(RR_INSTALLS)\bin</FinalOutputDir>
-			<OutputExt>exe</OutputExt>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
 			<PackageImports>vclx.bpi;vcl.bpi;rtl.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;vclimg.bpi;svnui.bpi;svn.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;bdertl.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;DbxClientDriver.bpi;dbexpress.bpi;AzureCloud.bpi;DbxCommonDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vclie.bpi;webdsnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;TeeTree2D15Tee9.bpi;bcbie.bpi;dbxcds.bpi;inetdb.bpi;websnap.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi;DuneComponents.bpi;mtkCommonRTL.bpi;VCLCommonRTL.bpi;VCLData.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;GenesisVisualComponents.bpi;vtkComponents.bpi;mtkGraphicsRTL.bpi;mtkSpinRTL.bpi;VCLMolecule.bpi;mtkMoleculeRTL.bpi</PackageImports>
+			<OutputExt>exe</OutputExt>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\Wrappers\C\Examples\api_tester\;C:\roadrunnerwork\trunk\ide_builds\xe\;..\..\Wrappers\C;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>C:\rrInstalls\xe\lib\;..\..\Wrappers\C\Examples\api_tester\;C:\roadrunnerwork\trunk\ide_builds\xe\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\src;..\..\Wrappers\C;..\..\Wrappers\C\Examples\rr_c\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>C:\rrInstalls\xe\lib\;..\..\Wrappers\C\Examples\rr_c\;C:\roadrunnerwork\trunk\Wrappers\C\Examples\rr_c\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -44,10 +43,6 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
-			<BCC_AllCodeguardOptions>true</BCC_AllCodeguardOptions>
-			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -69,7 +64,13 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\Wrappers\C\Examples\api_tester\main.cpp">
+			<CppCompile Include="..\..\Wrappers\C\Examples\rr_c\Args.cpp">
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Wrappers\C\Examples\rr_c\GetOptions.cpp">
+				<BuildOrder>3</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Wrappers\C\Examples\rr_c\main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
 			<LibFiles Include="C:\rrInstalls\xe\lib\rr_c_api.lib">

@@ -18,6 +18,7 @@ C_DECL_SPEC char*                   __stdcall   getBuildDate(void);
 C_DECL_SPEC char*                   __stdcall   getCopyright(void);
 C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder);
 C_DECL_SPEC bool                    __stdcall   loadSBML(const char* sbml);
+C_DECL_SPEC bool                    __stdcall   loadSBMLFromFile(const char* sbml);
 C_DECL_SPEC bool                    __stdcall   setTimeStart(double timeStart);
 C_DECL_SPEC bool                    __stdcall   setTimeEnd(double timeEnd);
 C_DECL_SPEC bool                    __stdcall   setNumPoints(int nrPoints);
@@ -54,7 +55,7 @@ C_DECL_SPEC void                    __stdcall   freeRRInstance(RRHandle handle);
 C_DECL_SPEC bool                    __stdcall   freeRRResult(RRResultHandle handle);
 C_DECL_SPEC bool                    __stdcall   freeText(char* text);
 C_DECL_SPEC bool                    __stdcall   freeStringList(RRStringListHandle sl);
-C_DECL_SPEC bool                    __stdcall   freeRRDataMatrixHandle(RRDataMatrixHandle matrix);
+C_DECL_SPEC bool                    __stdcall   freeRRDataMatrix(RRDataMatrixHandle matrix);
 
 #if defined( __cplusplus)
 }

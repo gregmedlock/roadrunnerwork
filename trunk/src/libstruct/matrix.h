@@ -41,7 +41,7 @@ namespace LIB_LA
           {
               if (_Rows && _Cols)
               {
-                  _Array = new T[_Rows * _Cols];
+                  _Array = new T[_Rows * _Cols]; //Todo: memoryleak
                   memset(_Array, 0, (sizeof(T)*_Rows*_Cols));
               }
           }
@@ -53,7 +53,7 @@ namespace LIB_LA
           {
               if (_Rows && _Cols)
               {
-                  _Array = new T[_Rows * _Cols];
+                  _Array = new T[_Rows * _Cols]; //Todo: memoryleak
                   memcpy(_Array, src._Array, _Rows * _Cols * sizeof(T));
               }
           }
@@ -211,7 +211,7 @@ namespace LIB_LA
           //! creates a new matrix holding the transpose
           /*LIB_EXTERN*/ virtual Matrix <T> * getTranspose()
           {
-              Matrix <T> *oResult = new Matrix <T>(_Cols, _Rows);
+              Matrix <T> *oResult = new Matrix <T>(_Cols, _Rows);  //Todo: memoryleak
               for (unsigned int i = 0; i < _Cols; i++)
               {
                   for (unsigned int j = 0; j <_Rows; j++)

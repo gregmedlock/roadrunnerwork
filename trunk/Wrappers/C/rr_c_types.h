@@ -30,6 +30,12 @@ C_DECL_SPEC typedef struct RRDataMatrix
     double*         Data;
 } *RRDataMatrixHandle ;
 
+C_DECL_SPEC typedef struct RRStringList
+{
+    int             Count;
+    char**          String;
+} *RRStringListHandle ;
+
 C_DECL_SPEC typedef struct RRResult
 {
     int             RSize;
@@ -37,13 +43,6 @@ C_DECL_SPEC typedef struct RRResult
     double*         Data;
     char**          ColumnHeaders;
 } *RRResultHandle ;
-
-C_DECL_SPEC typedef struct RRStringList
-{
-    int             Count;
-    char**          String;
-} *RRStringListHandle ;
-
 
 #if defined( __cplusplus)
 }

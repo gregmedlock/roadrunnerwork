@@ -2569,6 +2569,7 @@ int CGenerator::ReadBoundarySpecies()
         Symbol *symbol = NULL;
         if (bIsConcentration)
         {
+            //Todo: memoryleak
             symbol = new Symbol(sName, dValue, compartmentName);
         }
         else

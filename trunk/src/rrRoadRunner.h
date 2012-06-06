@@ -199,6 +199,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         bool                            SimulateSBMLFile(const string& fileName, const bool& useConservationLaws = true);
         bool                            SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
         bool                            LoadSBMLFromFile(const string& fileName);    //Just load the content of a sbml file
+        bool                            loadSBMLFromFile(const string& fileName);
         bool                            loadSBML(const string& sbml);
         string                          getSBML();
         double                          getTimeStart();

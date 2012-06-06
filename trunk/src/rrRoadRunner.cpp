@@ -49,7 +49,7 @@ mModelXMLFileName("sbml_model")
 {
     Log(lDebug4)<<"In RoadRunner CTOR";
     mCSharpGenerator    = new CSharpGenerator();
-    mCGenerator         = new CGenerator();
+    mCGenerator         = new CGenerator();//Todo: memoryleak
     mModelGenerator     = generateCSharp == true ? mCSharpGenerator : mCGenerator;
     mTempFileFolder     = GetUsersTempDataFolder();//("C:\\temp"),
 }
@@ -485,7 +485,7 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
     return false;
 }
 
-bool RoadRunner::LoadSBMLFromFile(const string& fileName)
+bool RoadRunner::LoadSBMLFromFile(const string& fileName) //Todo: Gotta make this obsolete
 {
     ifstream ifs(fileName.c_str());
     if(!ifs)
@@ -503,6 +503,26 @@ bool RoadRunner::LoadSBMLFromFile(const string& fileName)
     mModelXMLFileName = fileName;
     mCurrentSBML = sbml;
     return true;
+}
+
+bool RoadRunner::loadSBMLFromFile(const string& fileName)
+{
+    ifstream ifs(fileName.c_str());
+    if(!ifs)
+    {
+        stringstream msg;
+        msg<<"Failed opening file: "<<fileName;
+        return false;
+    }
+
+    std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+    Log(lDebug5)<<"Read SBML content from file:\n "<<sbml \
+                << "\n============ End of SBML "<<endl;
+
+    mModelXMLFileName = fileName;
+    mCurrentSBML = sbml;
+    return loadSBML(mCurrentSBML);
 }
 
 bool RoadRunner::loadSBML(const string& sbml)
@@ -680,7 +700,7 @@ ModelFromC* RoadRunner::CreateModel()
     if(mModelDllHandle)
     {
         CGenerator *codeGen = dynamic_cast<CGenerator*>(mModelGenerator);
-        ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);
+        ModelFromC *rrCModel = new ModelFromC(codeGen, mModelDllHandle);     //Todo: memoryleak
         mModel = rrCModel;            //Should use an auto pointer?
     }
     else

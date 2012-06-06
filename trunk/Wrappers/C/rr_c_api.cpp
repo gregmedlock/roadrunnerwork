@@ -15,7 +15,9 @@ char*            gLastError = NULL;
 
 char* __stdcall getBuildDate(void)
 {
-    return __DATE__;
+    char* date = new char[strlen(__DATE__) + 1];
+    strcpy(date, __DATE__);
+    return date;
 }
 
 RRHandle __stdcall getRRInstance()
@@ -53,6 +55,22 @@ bool __stdcall setTempFolder(const char* folder)
     }
 
     return gRRHandle->SetTempFileFolder(folder);
+}
+
+bool __stdcall loadSBMLFromFile(const char* sbmlFileName)
+{
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
+
+    if(!gRRHandle->loadSBMLFromFile(sbmlFileName))
+    {
+        SetAPIError("Failed to load SBML semantics");
+        return false;
+    }
+    return true;
 }
 
 bool __stdcall loadSBML(const char* sbml)
@@ -266,7 +284,7 @@ void __stdcall printMatrix(RRDataMatrixHandle matrixHandle)
         }
         ss<<endl;
     }
-    Log(lInfo)<<ss.str();
+    cout<<ss.str();
 }
 
 C_DECL_SPEC bool __stdcall hasError()
@@ -297,7 +315,6 @@ int   __stdcall getNumberOfReactions()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 double __stdcall getReactionRate(int)
@@ -307,7 +324,6 @@ double __stdcall getReactionRate(int)
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 int __stdcall getNumberOfBoundarySpecies()
@@ -317,7 +333,6 @@ int __stdcall getNumberOfBoundarySpecies()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 char* __stdcall getBoundarySpeciesNames()          // <- treat char* as you treat it in setSelectionList (char *)
@@ -327,7 +342,6 @@ char* __stdcall getBoundarySpeciesNames()          // <- treat char* as you trea
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 int __stdcall getNumberOfFloatingSpecies()
@@ -337,7 +351,6 @@ int __stdcall getNumberOfFloatingSpecies()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 char* __stdcall getFloatingSpeciesNames()
@@ -347,7 +360,6 @@ char* __stdcall getFloatingSpeciesNames()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 int __stdcall getNumberOfGlobalParameterNames()
@@ -357,7 +369,6 @@ int __stdcall getNumberOfGlobalParameterNames()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 char* __stdcall getGlobalParameterNames()
@@ -367,7 +378,6 @@ char* __stdcall getGlobalParameterNames()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 bool __stdcall setInitialConditions(double[])     // <- might be called changeInitialConditions in roadRunner
@@ -377,7 +387,6 @@ bool __stdcall setInitialConditions(double[])     // <- might be called changeIn
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 double __stdcall oneStep (double, double)
@@ -387,6 +396,7 @@ double __stdcall oneStep (double, double)
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
+
 }
 
 RRSymbolListHandle __stdcall getAvailableSymbols()              // <- You'll have to decide what type to return
@@ -396,7 +406,6 @@ RRSymbolListHandle __stdcall getAvailableSymbols()              // <- You'll hav
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 double __stdcall steadyState()
@@ -406,7 +415,6 @@ double __stdcall steadyState()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 RRDoubleVectorHandle __stdcall computeSteadyStateValues()
@@ -416,7 +424,6 @@ RRDoubleVectorHandle __stdcall computeSteadyStateValues()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 bool __stdcall setSteadyStateSelectionList(char *)
@@ -426,19 +433,19 @@ bool __stdcall setSteadyStateSelectionList(char *)
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-
 }
 
 //Free Functions
 void __stdcall freeRRInstance(RRHandle handle)
 {
-    delete handle;
+    delete gRRHandle;
+//    delete handle;
     handle = NULL;
 }
 
-bool __stdcall freeRRDataMatrixHandle(RRDataMatrixHandle matrix)
+bool __stdcall freeRRDataMatrix(RRDataMatrixHandle matrix)
 {
-    free(matrix->Data);
+    delete [] (matrix->Data);
     return true;
 }
 
@@ -450,7 +457,10 @@ bool __stdcall freeRRResult(RRResultHandle handle)
 
 bool __stdcall freeText(char* text)
 {
-    delete text;
+    if(text != ALLOCATE_API_ERROR_MSG)
+    {
+        delete [] text;
+    }
     return true;
 }
 
