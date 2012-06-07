@@ -15,9 +15,9 @@ namespace rr_c_api
 const char ALLOCATE_API_ERROR_MSG[] = {"Please allocate a handle to the roadrunner API before calling any API function"};
 
 //Internal prototypes
-void            SetAPIError(const string& err);
-bool            CopyRRVector(const RRDoubleVector* vec, vector<double>& aVec);
-RRDoubleVector* CreateRRDoubleVecFrom(const vector<double>& vec);
+void                SetAPIError(const string& err);
+bool                CopyRRVector(const RRDoubleVector* vec, vector<double>& aVec);
+RRDoubleVector*     CreateRRDoubleVecFrom(const vector<double>& vec);
 }
 
 #endif
