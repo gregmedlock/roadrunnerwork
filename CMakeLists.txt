@@ -6,7 +6,7 @@ SET(RR_MINOR_VERSION 6)
 SET(RR_BUILD_VERSION 6)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
-add_subdirectory(trunk)
+add_subdirectory(source/trunk)
 
 if(${BORLAND})
 set(RELEASE_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/releases/xe CACHE PATH "Directory containing roadrunner releases.")
@@ -61,7 +61,7 @@ set(CPACK_COMPONENT_DELPHI_DESCRIPTION						"Installs RoadRunner Delphi Units")
 set(CPACK_COMPONENT_PYTHON_DESCRIPTION						"Installs RoadRunner Python Module")
 set(CPACK_COMPONENT_RR_DOCS_DESCRIPTION						"Installs RoadRunner Doxygen Documentation")
 
-set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/trunk/License.txt")
+set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/source/trunk/License.txt")
 set(CPACK_PACKAGE_VENDOR									"UW")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY						"rr library - headers, libraries and examples")
 set(CPACK_PACKAGE_VERSION_MAJOR								"${RR_MAJOR_VERSION}")

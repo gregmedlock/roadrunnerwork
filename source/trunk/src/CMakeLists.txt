@@ -125,7 +125,7 @@ if(${MINGW})
     SET(staticLibrary ${lib_path}/lib${target}-static.a)
 else()
     SET(linkLibrary ${lib_path}/${target}.lib)
-    SET(sharedLibrary ${bin_path}/${target}.dll)
+    SET(sharedLibrary ${exe_path}/${target}.dll)
     SET(staticLibrary ${lib_path}/${target}-static.lib)
 endif()
 
@@ -147,7 +147,9 @@ endif()
 #=== HEADERS
 foreach(subfolder ${subfolders})
     FILE (GLOB headers ${subfolder}/*.h)
-    install (FILES ${headers}			 		DESTINATION include/rr COMPONENT rr_core)
+    install (FILES ${headers}			 		
+                DESTINATION include/rr 
+                COMPONENT rr_core)
 endforeach(subfolder)
 
 #=== dependencies
