@@ -10,14 +10,12 @@
 #pragma package(smart_init)
 #endif
 
-namespace rr
-{
 tsArgs::tsArgs()
 :
 UseOSTempFolder(false),
 OnlyCompile(false),
 Pause(false),
-LogLevel(lInfo),
+CurrentLogLevel(lInfo),
 ModelFileName(""),
 DataOutputFolder(""),
 TempDataFolder("."),
@@ -96,4 +94,3 @@ string tsUsage(const string& prg)
 }
 
 
-}

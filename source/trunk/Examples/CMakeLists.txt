@@ -26,7 +26,5 @@ foreach(example ${examples})
  	install (FILES ${example}/CMakeLists.txt 		DESTINATION Examples/${example}	COMPONENT example_files)
 endforeach(example)
 
-#install (FILES auto_link.h 			DESTINATION Examples COMPONENT example_files)
 install (FILES Readme.txt 			DESTINATION Examples COMPONENT info)
-#install (FILES Examples.groupproj 	DESTINATION Examples COMPONENT example_files)
 install (FILES CMakeLists.txt 		DESTINATION Examples COMPONENT example_files)

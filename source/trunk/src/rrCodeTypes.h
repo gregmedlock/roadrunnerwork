@@ -4,7 +4,7 @@
 
 namespace rr
 {
-RR_DECLSPEC enum CodeTypes
+enum CodeTypes
 {
     tEmptyToken = 0,
     tEndOfStreamToken,

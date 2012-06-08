@@ -36,7 +36,7 @@ int main(int argc, char * argv[])
 
     if(argc < 2)
     {
-        cout<<rr::tsUsage(argv[0])<<endl;
+        cout<<tsUsage(argv[0])<<endl;
         exit(0);
     }
 
@@ -47,14 +47,14 @@ int main(int argc, char * argv[])
         switch (c)
         {
             case ('n'): paras.CaseNumber                    = ToInt(optarg);                break;
-            case ('v'): paras.LogLevel                      = StringToLogLevel(optarg);     break;
+            case ('v'): paras.CurrentLogLevel               = StringToLogLevel(optarg);     break;
             case ('c'): paras.OnlyCompile                   = true;                         break;
             case ('p'): paras.Pause                         = true;                         break;
             case ('t'): paras.TempDataFolder                = optarg;                       break;
             case ('d'): paras.DataOutputFolder              = optarg;                       break;
             case ('?'):
             {
-                    cout<<rr::tsUsage(argv[0])<<endl;
+                    cout<<tsUsage(argv[0])<<endl;
             }
             default:
             {
@@ -78,7 +78,7 @@ int main(int argc, char * argv[])
         throw(rr::Exception("Bad model"));
     }
 
-    gLog.SetCutOffLogLevel(paras.LogLevel);
+    gLog.SetCutOffLogLevel(paras.CurrentLogLevel);
     string dataOutputFolder("C:\\DataOutput");
     string dummy;
     string logFileName;

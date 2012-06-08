@@ -477,7 +477,7 @@ double __stdcall steadyState()
 
 RRDoubleVectorHandle __stdcall computeSteadyStateValues()
 {
-    if(!gRRHandle)
+    if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
@@ -490,7 +490,7 @@ RRDoubleVectorHandle __stdcall computeSteadyStateValues()
 
 bool __stdcall setSteadyStateSelectionList(char* list)
 {
-    if(!gRRHandle)
+    if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
@@ -550,11 +550,11 @@ bool __stdcall freeStringList(RRStringListHandle sl)
 }
 
 //============================================================================
-#pragma argsused
-int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)
-{
-    //Intialize the logger
-    LogOutput::mLogToConsole = false;
-    return 1;
-}
-
+//#pragma argsused
+//int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)
+//{
+//    //Intialize the logger
+//    LogOutput::mLogToConsole = false;
+//    return 1;
+//}
+//

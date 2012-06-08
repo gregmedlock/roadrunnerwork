@@ -2,16 +2,15 @@ cmake_minimum_required(VERSION 2.8)
 set(target rr)
 
 add_executable(		   ${target} 
-rrMain.cpp 
-rrArgs.cpp
+main.cpp 
+Args.cpp
 )
 
 #IF(BUILD_SHARED_LIBS) 
 #target_link_libraries (${target} rr)
 #target_link_libraries (${target} libsbml)
 #ELSE()
-target_link_libraries (${target} roadrunner)
-target_link_libraries (${target} libsbml-static)
+target_link_libraries (${target} roadrunner-static)
 #ENDIF()
 
 

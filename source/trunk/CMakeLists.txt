@@ -91,12 +91,12 @@ include_directories(				${RR_ROOT})
 include_directories(				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
 link_directories(					${LIBRARY_OUTPUT_PATH})
-link_directories(					${PROJECT_BINARY_DIR}/lib)
 link_directories(					${LIBSBML_INSTALL_FOLDER}/lib)
 link_directories(					${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib)
 link_directories(					${CLAPACK_BUILD_FOLDER}/SRC)
 link_directories(					${CLAPACK_BUILD_FOLDER}/BLAS/SRC)
 link_directories(					${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c)
+link_directories(					C:/rrBuilds/libsbml/src)
 
 if(${MSVC})
 link_directories(					${CLAPACK_BUILD_FOLDER}/SRC/Debug)
@@ -111,6 +111,7 @@ endif()
 if(${MINGW})
 SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} -std=gnu++0x")
 endif()
+
 if(${BORLAND})
 link_directories(${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib)
 add_definitions(-DUSE_PCH) #Enable pre-compiled headers
@@ -123,6 +124,7 @@ endif()
 #Common compiler definitions
 add_definitions(-DLIBSBML_USE_CPP_NAMESPACE) 
 add_definitions(-DNO_LIBSTRUCT_DLL) 
+
 # Allow the developer to select if Dynamic or Static libraries are built
 SET (LIB_TYPE STATIC)
 IF (BUILD_SHARED_LIBS)
@@ -131,9 +133,9 @@ ENDIF (BUILD_SHARED_LIBS)
 
 #Source Code Folder
 add_subdirectory(src)
+add_subdirectory(apps)
 add_subdirectory(Wrappers)
 
-add_subdirectory(apps)
 #======================= INSTALL ========================================================
 install (FILES src/rr_pch.h	DESTINATION include COMPONENT rr_core)
 
@@ -168,7 +170,7 @@ endif()
 #endif()
 #endforeach()
 
-#=== TCC ==================================================
+#=== INSTALL TCC ==================================================
 FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/*.*)
 install (FILES 	${tcc} DESTINATION bin COMPONENT rr_core)
 

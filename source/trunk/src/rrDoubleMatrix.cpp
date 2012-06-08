@@ -2,8 +2,6 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
-#include <strstream>
-#include "rrException.h"
 #include "rrDoubleMatrix.h"
 //---------------------------------------------------------------------------
 

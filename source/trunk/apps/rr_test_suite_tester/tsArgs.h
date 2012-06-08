@@ -6,10 +6,9 @@
 #include <string>
 #include "rrLogger.h"
 //---------------------------------------------------------------------------
-namespace rr
-{
 
 using std::string;
+using namespace rr;
 string tsUsage(const string& prg);
 
 class tsArgs
@@ -19,7 +18,7 @@ class tsArgs
         virtual                        ~tsArgs(){}
         int                             CaseNumber;
         double                          ErrorThreshold;
-        LogLevel                        LogLevel;           //option v:
+        LogLevel                        CurrentLogLevel;    //option v:
         string                          ModelFileName;      //option m:
         string                          DataOutputFolder;   //option d:
         string                          TempDataFolder;     //option t:
@@ -32,6 +31,5 @@ class tsArgs
         int                             Steps;              //option z
         string                          SelectionList;      //option l:
 };
-}
 
 #endif

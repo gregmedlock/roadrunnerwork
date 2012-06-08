@@ -4,6 +4,7 @@
 #pragma hdrstop
 #include <iomanip>
 #include <map>
+#include <math.h>
 #include "rrLogger.h"
 #include "TestSuiteModelSimulation.h"
 #include "rrUtils.h"

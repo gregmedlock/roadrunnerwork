@@ -8,7 +8,7 @@ using std::string;
 namespace rr
 {
 
-RR_DECLSPEC enum  LogLevel
+enum  LogLevel
     {
         lShowAlways = -1,
         lError      = 0,

@@ -12,6 +12,10 @@
 #endif
 
 
+#if defined (__MINGW32__)
+#undef RR_DECLSPEC2
+#endif
+
 #if defined(_MSC_VER)
 #pragma warning(disable : 4996) // _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable : 4018) // int to unsigned int comparison

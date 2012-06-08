@@ -2894,11 +2894,14 @@ StringList RoadRunner::getFloatingSpeciesAmountNames()
 }
 
 //        Help("Get the number of global parameters")
-//        int RoadRunner::getNumberOfGlobalParameters()
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//            return mModelGenerator->getGlobalParameterList().Count;
-//        }
+int RoadRunner::getNumberOfGlobalParameters()
+{
+    if (!modelLoaded) 
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+    return mModelGenerator->getGlobalParameterList().Count();
+}
 //
 //        Help("Sets the value of a global parameter by its index")
 //        void RoadRunner::setGlobalParameterByIndex(int index, double value)

@@ -12,7 +12,7 @@ TestSuiteModelSimulation.cpp
 #target_link_libraries (${target} libsbml)
 #ELSE()
 target_link_libraries (${target} roadrunner)
-target_link_libraries (${target} libsbml-static)
+target_link_libraries (${target} libsbml)
 #ENDIF()
 
 set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
