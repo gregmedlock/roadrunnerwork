@@ -10,7 +10,8 @@ if(${MSVC})
 endif(${MSVC})
 
 set(examples 	
-#		rr_c  not sure why this one don't get access to GetOption funcs in roadrunner lib?
+		rr_c  #not sure why this one don't get access to GetOption funcs in roadrunner lib?
+        api_tester
 #		simulate_sbml
 )
 

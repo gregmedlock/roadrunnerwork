@@ -2,6 +2,7 @@
 #pragma hdrstop
 #include <iostream>
 #include <string>
+#include <string.h>
 #include "rr_c_api.h"
 //---------------------------------------------------------------------------
 

@@ -103,7 +103,6 @@ add_library(${target}-static 	STATIC ${rrSources})
 
 if(${MINGW})
 #can't build static at the moment..
-
 else()
 target_link_libraries (${target}-static 
                                         libsbml-static
@@ -125,11 +124,6 @@ target_link_libraries (${target}        libxml2)
 target_link_libraries (${target}-static libxml2)
 endif()
 
-
-set(subfolders 
-.
-./libstruct
-)
 
 #--- INSTALL
 if(${MINGW})
@@ -158,6 +152,8 @@ endif()
                 COMPONENT rr_core)
 
 #=== HEADERS
+set(subfolders .  ./libstruct)
+
 foreach(subfolder ${subfolders})
     FILE (GLOB headers ${subfolder}/*.h)
     install (FILES ${headers}			 		

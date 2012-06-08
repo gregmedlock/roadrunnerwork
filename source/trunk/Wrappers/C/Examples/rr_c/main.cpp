@@ -40,7 +40,6 @@ int main(int argc, char* argv[])
         string settingsFile;
         vector<string> lines;
         string sbml;
-        RRResultHandle result;
         stringstream ss;
 
         Log(lInfo)<<"======== Testing RoadRunner C API (from C++) ==================\n";
@@ -111,7 +110,7 @@ int main(int argc, char* argv[])
             printMatrix(mat);
         }
 
-        result = simulate();
+        RRResultHandle result = simulate();
 
         if(!result)
         {
@@ -157,8 +156,8 @@ int main(int argc, char* argv[])
             ss<<"\n";
         }
         Log(lInfo)<<ss.str();
-        freeRRResult();
-        deleteRRInstance(aHandle);
+        freeRRResult(result);
+        freeRRInstance(aHandle);
     }
     catch(const RRException& e)
     {
@@ -181,7 +180,7 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
     {
         switch (c)
         {
-            case ('v'): args.LogLevel                       = StringToLogLevel(optarg);     break;
+            case ('v'): args.CurrentLogLevel                = StringToLogLevel(optarg);     break;
             case ('c'): args.OnlyCompile                    = true;                         break;
             case ('p'): args.Pause                          = true;                         break;
             case ('t'): args.TempDataFolder                 = optarg;                       break;
@@ -215,7 +214,7 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
         exit(0);
     }
 
-    gLog.SetCutOffLogLevel(args.LogLevel);
+    gLog.SetCutOffLogLevel(args.CurrentLogLevel);
 
 }
 

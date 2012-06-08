@@ -7,14 +7,15 @@
 #include "rrLogger.h"
 //---------------------------------------------------------------------------
 using std::string;
-string Usage(const string& prg);
 using namespace rr;
+
+string Usage(const string& prg);
 class Args
 {
     public:
                                         Args();
         virtual                        ~Args(){}
-        LogLevel                        LogLevel;           //option v:
+        LogLevel                        CurrentLogLevel;    //option v:
         string                          ModelFileName;      //option m:
         string                          DataOutputFolder;   //option d:
         string                          TempDataFolder;     //option t:
