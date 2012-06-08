@@ -1,62 +1,45 @@
-FIND_PACKAGE(SWIG REQUIRED)
-INCLUDE( ${SWIG_USE_FILE} )
+PROJECT( HELLO )
+CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
-FIND_PACKAGE(PythonLibs REQUIRED)
-INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+SET( HELLO_ROOT_DIR         ${CMAKE_CURRENT_SOURCE_DIR} )
+SET( HELLO_SOURCE_DIR       ${HELLO_ROOT_DIR}/source    )
+SET( HELLO_RELEASE_DIR      ${HELLO_ROOT_DIR}/release   )
+SET( EXECUTABLE_OUTPUT_PATH ${HELLO_RELEASE_DIR}        )
+SET( LIBRARY_OUTPUT_PATH    ${HELLO_RELEASE_DIR}        )
 
-INCLUDE_DIRECTORIES(
-../../src
-../C
-)
-SET( CMAKE_SWIG_FLAGS "" )
-SET( CMAKE_SWIG_OUTDIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} )
+#ADD_SUBDIRECTORY( wrapper )
 
-SET_SOURCE_FILES_PROPERTIES(rr_python.i PROPERTIES CPLUSPLUS ON)
-SET_SOURCE_FILES_PROPERTIES(example.i PROPERTIES SWIG_FLAGS "-includeall")
+FIND_PACKAGE( SWIG )
+IF( SWIG_FOUND )
+    FIND_PACKAGE( PythonLibs )
+    IF( PYTHONLIBS_FOUND )
 
-set(target RoadRunner)
-
-SWIG_ADD_MODULE(
-${target}
-python
-rr_python.i 
-)
-
-SWIG_LINK_LIBRARIES(
-${target}
-${PYTHON_LIBRARIES}
-roadrunner-cg
-rr_c_api-cg
-)
-
-
-install (FILES ${CMAKE_SWIG_OUTDIR}/${target}.py		DESTINATION bin COMPONENT python)
-install (FILES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/_${target}.pyd		DESTINATION lib COMPONENT python)
     # set up SWIG
-#    SET( CMAKE_SWIG_OUTDIR ${HELLO_RELEASE_DIR} )
+    INCLUDE_DIRECTORIES( ${PYTHON_INCLUDE_PATH} )
+    INCLUDE( ${SWIG_USE_FILE} )
+    SET( CMAKE_SWIG_FLAGS "" )
+    SET( CMAKE_SWIG_OUTDIR ${HELLO_RELEASE_DIR} )
 
-    # set up project
-#    INCLUDE_DIRECTORIES( ${HELLO_SOURCE_DIR} )
-#    FILE( GLOB HELLO_SOURCE_FILES
-#        ${HELLO_WRAPPER_DIR}/hello.i
-#        ${HELLO_SOURCE_DIR}/hello.h
-#        ${HELLO_SOURCE_DIR}/hello.c
-#    )
-#
-    # build low-level Python wrapper
-    # (if not adding a high-level wrapper,
-    #  can name this hello instead of libhello)
-#    SWIG_ADD_MODULE( RoadRunner
-#        python
-#        ${HELLO_SOURCE_FILES}
-#    )
-#    SWIG_LINK_LIBRARIES( libhello ${PYTHON_LIBRARIES} )
+    # build wrapper
+    INCLUDE_DIRECTORIES( ${HELLO_SOURCE_DIR} )
+    SWIG_ADD_MODULE( hello_swig
+        python
+        rrPython.i
+        ${HELLO_SOURCE_DIR}/hello.h
+        ${HELLO_SOURCE_DIR}/hello.c
+    )
+    SWIG_LINK_LIBRARIES( hello_swig ${PYTHON_LIBRARIES} )
 
-    # copy high-level wrapper to the release dir
-    # (it's not auto-generated during a build)
-#    FILE(
-#        COPY        hello.py
-#        DESTINATION ${HELLO_RELEASE_DIR}
-#    )
+    # copy the manually written object-oriented wrapper
+    # to the release dir so everything's in one place
+    FILE(
+        COPY hello_oo.py
+        DESTINATION ${HELLO_RELEASE_DIR}
+    )
 
+    ELSE( PYTHONLIBS_FOUND )
+        MESSAGE( "Python not found; unable to generate Python wrapper" )
+    ENDIF( PYTHONLIBS_FOUND )
+ELSE( SWIG_FOUND )
+    MESSAGE( "SWIG not found; unable to generate Python wrapper" )
+ENDIF( SWIG_FOUND )

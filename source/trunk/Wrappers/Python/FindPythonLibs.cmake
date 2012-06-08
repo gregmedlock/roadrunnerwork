@@ -94,7 +94,6 @@ FOREACH(_CURRENT_VERSION ${_Python_VERSIONS})
     # Avoid finding the .dll in the PATH.  We want the .lib.
     NO_SYSTEM_ENVIRONMENT_PATH
   )
-
   # Look for the static library in the Python config directory
   FIND_LIBRARY(PYTHON_LIBRARY
     NAMES python${_CURRENT_VERSION_NO_DOTS} python${_CURRENT_VERSION}
@@ -103,6 +102,7 @@ FOREACH(_CURRENT_VERSION ${_Python_VERSIONS})
     # This is where the static library is usually located
     PATH_SUFFIXES python${_CURRENT_VERSION}/config
   )
+
   # For backward compatibility, honour value of PYTHON_INCLUDE_PATH, if
   # PYTHON_INCLUDE_DIR is not set.
   IF(DEFINED PYTHON_INCLUDE_PATH AND NOT DEFINED PYTHON_INCLUDE_DIR)
@@ -163,13 +163,7 @@ SET(PYTHON_DEBUG_LIBRARIES "${PYTHON_DEBUG_LIBRARY}")
 # These variables have been historically named in this module different from
 # what SELECT_LIBRARY_CONFIGURATIONS() expects.
 SET(PYTHON_LIBRARY_DEBUG "${PYTHON_DEBUG_LIBRARY}")
-
-if(${BORLAND})
-SET(PYTHON_LIBRARY_RELEASE "${PYTHON_LIBRARY}_bcc")
-else
 SET(PYTHON_LIBRARY_RELEASE "${PYTHON_LIBRARY}")
-endif()
-
 INCLUDE(${CMAKE_CURRENT_LIST_DIR}/SelectLibraryConfigurations.cmake)
 SELECT_LIBRARY_CONFIGURATIONS(PYTHON)
 # SELECT_LIBRARY_CONFIGURATIONS() sets ${PREFIX}_FOUND if it has a library.
