@@ -87,23 +87,34 @@ target_link_libraries (${target}
                                     libsbml
                                     sundials_cvode
                                     sundials_nvecserial
-                                    libf2c
                                     blas
                                     lapack
                       )
+if(${MINGW})
+
+else()
+target_link_libraries (${target}
+                                    libf2c
+                      )
+endif()
 
 #libraries to link with static lib
 add_library(${target}-static 	STATIC ${rrSources})
 
+if(${MINGW})
+#can't build static at the moment..
+
+else()
 target_link_libraries (${target}-static 
                                         libsbml-static
                                         sundials_cvode
                                         sundials_nvecserial
                                         blas
                                         lapack
-                                        libf2c
+                                        #libf2c
                       )
 
+endif()
 
 #Libxml we can't build right now
 if(${BORLAND})

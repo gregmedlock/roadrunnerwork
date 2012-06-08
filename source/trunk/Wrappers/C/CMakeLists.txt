@@ -18,8 +18,11 @@ target_link_libraries (${target} libxml2)
 ENDIF()
 
 #Link C_api dll statically to roadrunner and libsbml
-
+if(${MINGW})
+target_link_libraries (${target} roadrunner)
+else()
 target_link_libraries (${target} roadrunner-static)
+endif()
 #target_link_libraries (${target} libsbml-static)
 #target_link_libraries (${target} sundials_cvode)
 #target_link_libraries (${target} sundials_nvecserial)
