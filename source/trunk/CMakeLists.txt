@@ -46,6 +46,7 @@ if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
 endif()
 endif()
 
+
 OPTION (PYTHON_WRAPPER 			"Generate Python wrapper " 		    FALSE)
 OPTION (BUILD_C_API	 			"Create C API DLL" 					OFF)
 OPTION (BUILD_EXAMPLES			"Build and install Examples"		OFF)
@@ -107,6 +108,9 @@ SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKR_FLAGS} /FORCE:MULTIPLE")
 endif()
 
 #=== COMPILER FLAGS 
+if(${MINGW})
+SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} -std=gnu++0x")
+endif()
 if(${BORLAND})
 link_directories(${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib)
 add_definitions(-DUSE_PCH) #Enable pre-compiled headers
