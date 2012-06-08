@@ -94,6 +94,7 @@ target_link_libraries (${target}
 
 #libraries to link with static lib
 add_library(${target}-static 	STATIC ${rrSources})
+
 target_link_libraries (${target}-static 
                                         libsbml-static
                                         sundials_cvode
@@ -102,6 +103,7 @@ target_link_libraries (${target}-static
                                         lapack
                                         libf2c
                       )
+
 
 #Libxml we can't build right now
 if(${BORLAND})
