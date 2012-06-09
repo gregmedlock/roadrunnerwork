@@ -2,8 +2,8 @@ PROJECT( HELLO )
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8 )
 
 SET( HELLO_ROOT_DIR         ${CMAKE_CURRENT_SOURCE_DIR} )
-SET( HELLO_SOURCE_DIR       ${HELLO_ROOT_DIR}/source    )
-SET( HELLO_RELEASE_DIR      ${HELLO_ROOT_DIR}/release   )
+SET( C_API_SOURCE_DIR       "C:/rrSource/Wrappers/C")
+SET( C_API_RELEASE_DIR      ${HELLO_ROOT_DIR}/release   )
 SET( EXECUTABLE_OUTPUT_PATH ${HELLO_RELEASE_DIR}        )
 SET( LIBRARY_OUTPUT_PATH    ${HELLO_RELEASE_DIR}        )
 
@@ -15,7 +15,10 @@ IF( SWIG_FOUND )
     IF( PYTHONLIBS_FOUND )
 
     # set up SWIG
-    INCLUDE_DIRECTORIES( ${PYTHON_INCLUDE_PATH} )
+    INCLUDE_DIRECTORIES( 
+        ${PYTHON_INCLUDE_PATH} 
+        "C:/rrSource/src/"
+       )
     INCLUDE( ${SWIG_USE_FILE} )
     SET( CMAKE_SWIG_FLAGS "" )
     SET( CMAKE_SWIG_OUTDIR ${HELLO_RELEASE_DIR} )
@@ -25,8 +28,8 @@ IF( SWIG_FOUND )
     SWIG_ADD_MODULE( hello_swig
         python
         rrPython.i
-        ${HELLO_SOURCE_DIR}/hello.h
-        ${HELLO_SOURCE_DIR}/hello.c
+        ${C_API_SOURCE_DIR}/rr_c_api.h
+        ${C_API_SOURCE_DIR}/rr_c_api.cpp
     )
     SWIG_LINK_LIBRARIES( hello_swig ${PYTHON_LIBRARIES} )
 
@@ -34,7 +37,7 @@ IF( SWIG_FOUND )
     # to the release dir so everything's in one place
     FILE(
         COPY hello_oo.py
-        DESTINATION ${HELLO_RELEASE_DIR}
+        DESTINATION ${C_API_RELEASE_DIR}
     )
 
     ELSE( PYTHONLIBS_FOUND )

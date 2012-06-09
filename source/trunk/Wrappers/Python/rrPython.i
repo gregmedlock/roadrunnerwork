@@ -3,7 +3,7 @@
     // tell SWIG to make Python C extension
     #define SWIG_FILE_WITH_INIT
 
-    #include "hello.h"
+    #include "C:/rrSOurce/Wrappers/C/rr_c_api.h"
 %}
 
 #ifdef SWIGWIN
