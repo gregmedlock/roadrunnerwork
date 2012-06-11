@@ -1,4 +1,4 @@
-#labels Phase-Support
+#labels Phase-Support,Featured
 #Notes about building RoadRunner with the MinGW compiler
 
 = Introduction =
