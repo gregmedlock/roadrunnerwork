@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
 project(RoadRunner)
 
-SET(RR_MAJOR_VERSION 2012)
-SET(RR_MINOR_VERSION 6)
-SET(RR_BUILD_VERSION 6)
-SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
+SET(RR_MAJOR_VERSION 1)
+SET(RR_MINOR_VERSION 0)
+SET(RR_BUILD_VERSION 0)
+#SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
+SET(RR_VERSION "")
 
 add_subdirectory(source/trunk)
 
@@ -69,12 +70,6 @@ set(CPACK_PACKAGE_VERSION_MINOR								"${RR_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH								"${RR_BUILD_VERSION}")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY							"RoadRunner")
 
-if(${BUILD_SHARED_LIBS})
-set(PACKAGE_NAME_LIB_TYPE "shared")
-else()
-set(PACKAGE_NAME_LIB_TYPE "static")
-endif()
-
 if(${BORLAND})
 set(COMPILER_FOR_PACKAGE "cg")
 endif()
@@ -83,19 +78,16 @@ if(${MSVC})
 set(COMPILER_FOR_PACKAGE "vs")
 endif()
 
+if(${MINGW})
+set(COMPILER_FOR_PACKAGE "mingw")
+endif()
+
 #MESSAGE( STATUS "CMAKE_CFG_INTDIR: " ${CMAKE_CFG_INTDIR} )
+MESSAGE( STATUS "PACKAGE NAME: " ${CPACK_PACKAGE_NAME})
 
-#if(${CMAKE_CFG_INTDIR} MATCHES "/Debug")
-#set(bType "debug")
-#else()
-#set(bType "release")
-#endif()
-
-#set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}-${PACKAGE_NAME_LIB_TYPE}-${bType}")
 set(CPACK_PACKAGE_NAME										"rr-${COMPILER_FOR_PACKAGE}")
-set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases")
+set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases/${COMPILER_FOR_PACKAGE}")
 include(CPack)
-
 
 #======= DOXYGEN
 add_subdirectory(docs)

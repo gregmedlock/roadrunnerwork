@@ -103,6 +103,7 @@ add_library(${target}-static 	STATIC ${rrSources})
 
 if(${MINGW})
 #can't build static at the moment..
+
 else()
 target_link_libraries (${target}-static 
                                         libsbml-static
@@ -112,7 +113,6 @@ target_link_libraries (${target}-static
                                         lapack
                                         #libf2c
                       )
-
 endif()
 
 #Libxml we can't build right now
@@ -124,39 +124,31 @@ target_link_libraries (${target}        libxml2)
 target_link_libraries (${target}-static libxml2)
 endif()
 
-
-#--- INSTALL
-if(${MINGW})
-    SET(linkLibrary ${lib_path}/lib${target}.dll.a)
-    SET(sharedLibrary ${exe_path}/lib${target}.dll)
-    SET(staticLibrary ${lib_path}/lib${target}-static.a)
-else()
-    SET(linkLibrary ${lib_path}/${target}.lib)
-    SET(sharedLibrary ${exe_path}/${target}.dll)
-    SET(staticLibrary ${lib_path}/${target}-static.lib)
-endif()
+#--- INSTALL STUFF
 
 if(INSTALL_STATIC_LIB)
-    install (   FILES ${staticLibrary}	
+    install (   TARGETS ${target}-static	
                 DESTINATION lib 
                 COMPONENT rr_core)
 endif()
 
-#=== Shared target
-    install (   FILES ${linkLibrary}	
-                DESTINATION lib 
-                COMPONENT rr_core)
-
-    install (   FILES ${sharedLibrary}	
-                DESTINATION bin 
-                COMPONENT rr_core)
+#=== Targets
+install(    TARGETS ${target} 
+            RUNTIME DESTINATION bin
+            LIBRARY DESTINATION lib
+            ARCHIVE DESTINATION lib
+            COMPONENT rr_core
+)            
 
 #=== HEADERS
-set(subfolders .  ./libstruct)
+set(subfolders 
+.
+./libstruct
+)
 
 foreach(subfolder ${subfolders})
     FILE (GLOB headers ${subfolder}/*.h)
-    install (FILES ${headers}			 		
+    install (   FILES ${headers}			 		
                 DESTINATION include/rr 
                 COMPONENT rr_core)
 endforeach(subfolder)
