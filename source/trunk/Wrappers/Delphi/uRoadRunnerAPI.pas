@@ -12,14 +12,17 @@ type
 
   TArrayOfPAnsiCharArray = array of PAnsiCharArray;
 
-  TCharVoidFunc = function: PAnsiChar; stdcall;   //char* func(void)
+  TVoidCharFunc = function: PAnsiChar; stdcall;   //char* func(void)
   TPointerVoidFunc = function : Pointer; stdcall; //void* func(void)
   TCharBoolFunc = function (str : PAnsiChar) : bool; stdcall;  // bool func (char *)
   TDoubleBoolFunc = function (value : double) : bool; stdcall; // bool func (double)
   TIntBoolFunc = function (value : integer) : bool; stdcall;   // bool func (double)
   TVoidBoolFunc = function : boolean; stdcall; // bool func (void);
+  TVoidIntFunc = function : integer; stdcall;
+  TVoidDoubleFunc = function : double; stdcall;
+  TIntDoubleFunc = function (index : integer) : double; stdcall;
 
-  TGetCopyright = TCharVoidFunc;
+  TGetCopyright = TVoidCharFunc;
   TGetRRInstance = TPointerVoidFunc;
   TDeleteRRInstance = function (p : Pointer) : bool; stdcall;
   TLoadSBML = TCharBoolFunc;
@@ -33,7 +36,9 @@ type
   TGetValue = function (speciesId : PAnsiChar) : bool; stdcall;
   TSetValue = function (speciesId : PAnsiChar; var value : double) : bool; stdcall;
   TGetReactionNames = TPointerVoidFunc;
+  TReset = function : bool; stdcall;
   TFreeStringList = procedure (handle : Pointer); stdcall;
+  TOneStep = function (var currentTime : double; var stepSize : double) : double; stdcall;
 
   TRRResult = record
      RSize : integer;
@@ -85,8 +90,25 @@ var DLLHandle : Cardinal;
     libSetValue : TSetValue;
     libSetSelectionList : TSetSelectionList;
     libGetReactionNames : TGetReactionNames;
+    libReset : TReset;
+    libGetNumberOfReactions : TVoidIntFunc;
+    libGetNumberOfBoundarySpecies : TVoidIntFunc;
+    libGetNumberOfFloatingSpecies : TVoidIntFunc;
+    libGetNumberOfGlobalParameterNames : TVoidIntFunc;
+    libSteadyState : TVoidDoubleFunc;
+    libGetReactionRate : TIntDoubleFunc;
+    libOneStep : TOneStep;
+    libGetBoundarySpeciesNames : TVoidCharFunc;
+    libGetFloatingSpeciesNames : TVoidCharFunc;
+    libGetGlobalParameterNames : TVoidCharFunc;
+    libSetSteadyStateSelectionList : TCharBoolFunc;
 
-libFreeStringList : TFreeStringList;
+    libFreeStringList : TFreeStringList;
+
+
+//bool                    __stdcall   setInitialConditions(RRDoubleVector* vec);     // <- might be called changeInitialConditions in roadRunner
+//RSymbolListsHandle     __stdcall   getAvailableSymbols();              // <- You'll have to decide what type to return
+//RRDoubleVectorHandle    __stdcall   computeSteadyStateValues();
 
 
 // Utility Routines
@@ -219,6 +241,43 @@ begin
    @libFreeStringList := GetProcAddress (dllHandle, PChar ('freeStringList'));
    if not Assigned (libFreeStringList) then
       begin errMsg := 'Unable to locate freeStringList'; result := false; exit; end;
+   @libReset := GetProcAddress (dllHandle, PChar ('reset'));
+   if not Assigned (libReset) then
+      begin errMsg := 'Unable to locate reset'; result := false; exit; end;
+   @libGetNumberOfReactions := GetProcAddress (dllHandle, PChar ('getNumberOfReactions'));
+   if not Assigned (libGetNumberOfReactions) then
+      begin errMsg := 'Unable to locate getNumberOfReactions'; result := false; exit; end;
+   @libGetNumberOfBoundarySpecies := GetProcAddress (dllHandle, PChar ('getNumberOfBoundarySpecies'));
+   if not Assigned (libGetNumberOfBoundarySpecies) then
+      begin errMsg := 'Unable to locate getNumberOfBoundarySpecies'; result := false; exit; end;
+   @libGetNumberOfFloatingSpecies := GetProcAddress (dllHandle, PChar ('getNumberOfFloatingSpecies'));
+   if not Assigned (libGetNumberOfFloatingSpecies) then
+      begin errMsg := 'Unable to locate getNumberOfFloatingSpecies'; result := false; exit; end;
+   @libGetNumberOfGlobalParameterNames := GetProcAddress (dllHandle, PChar ('getNumberOfGlobalParameterNames'));
+   if not Assigned (libGetNumberOfGlobalParameterNames) then
+      begin errMsg := 'Unable to locate getNumberOfGlobalParameterNames'; result := false; exit; end;
+   @libSteadyState := GetProcAddress (dllHandle, PChar ('steadyState'));
+   if not Assigned (libSteadyState) then
+      begin errMsg := 'Unable to locate steadyState'; result := false; exit; end;
+   @libGetReactionRate := GetProcAddress (dllHandle, PChar ('getReactionRate'));
+   if not Assigned (libGetReactionRate) then
+      begin errMsg := 'Unable to locate getReactionRate'; result := false; exit; end;
+   @libOneStep := GetProcAddress (dllHandle, PChar ('oneStep'));
+   if not Assigned (libOneStep) then
+      begin errMsg := 'Unable to locate oneStep'; result := false; exit; end;
+   @libGetBoundarySpeciesNames := GetProcAddress (dllHandle, PChar ('getBoundarySpeciesNames'));
+   if not Assigned (libGetBoundarySpeciesNames) then
+      begin errMsg := 'Unable to locate getBoundarySpeciesNames'; result := false; exit; end;
+   @libGetFloatingSpeciesNames := GetProcAddress (dllHandle, PChar ('getFloatingSpeciesNames'));
+   if not Assigned (libGetFloatingSpeciesNames) then
+      begin errMsg := 'Unable to locate getFloatingSpeciesNames'; result := false; exit; end;
+   @libGetGlobalParameterNames := GetProcAddress (dllHandle, PChar ('getGlobalParameterNames'));
+   if not Assigned (libGetGlobalParameterNames) then
+      begin errMsg := 'Unable to locate getGlobalParameterNames'; result := false; exit; end;
+   @libSetSteadyStateSelectionList := GetProcAddress (dllHandle, PChar ('setSteadyStateSelectionList'));
+   if not Assigned (libSetSteadyStateSelectionList) then
+      begin errMsg := 'Unable to locate setSteadyStateSelectionList'; result := false; exit; end;
+
 end;
 
 
