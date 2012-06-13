@@ -22,6 +22,9 @@
 using namespace std;
 using namespace LIB_LA;
 using namespace rr;
+namespace LIB_LA
+{
+
 
 DoubleMatrix* Util::getSubMatrix(int /*Mb*/, int /*Nb*/, int ms, int ns, int mi, int nj, DoubleMatrix& A)
 {
@@ -165,9 +168,11 @@ double Util::RoundToTolerance(double dValue, double dTolerance)
     else if (fabs(dValue - floor(dValue)) < dTolerance)
     {
         dValue = floor(dValue);
-    }            
+    }
     return dValue;
 }
+
+
 
 void Util::RoundMatrixToTolerance(DoubleMatrix& oMatrix, double dTolerance)
 {
@@ -253,7 +258,7 @@ bool Util::isPositive(DoubleMatrix &A, double dTolerance)
     {
         for (unsigned int j = 0; j < A.numCols(); j++)
         {
-            if (A(i,j) < dTolerance*-1) 
+            if (A(i,j) < dTolerance*-1)
             {
                 //Util::print(A);
                 return false;
@@ -300,7 +305,7 @@ std::vector<int> Util::GaussJordan(DoubleMatrix &oMatrix, double dTolerance)
                 nTempPivotRow = nRow;
             }
         }
-        
+
         // found better pivot so lets swap rows
         if (nCurrentRow != nTempPivotRow)
         {            
@@ -779,4 +784,4 @@ void Util::CopyStringVector(const std::vector< std::string > &vector, char** &ou
     }
 }
 
-
+}
