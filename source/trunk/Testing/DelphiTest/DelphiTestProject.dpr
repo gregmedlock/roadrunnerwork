@@ -1,6 +1,11 @@
 program DelphiTestProject;
 
 uses
+  madExcept,
+  madLinkDisAsm,
+  madListHardware,
+  madListProcesses,
+  madListModules,
 //  madExcept,
 //  madLinkDisAsm,
 //  madListHardware,

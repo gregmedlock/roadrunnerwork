@@ -15,10 +15,15 @@ type
     btnLoadSBML: TButton;
     grid: TStringGrid;
     btnGetReactionNames: TButton;
+    Button2: TButton;
+    ListBox1: TListBox;
+    btnSteadyState: TButton;
     procedure Button1Click(Sender: TObject);
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetReactionNamesClick(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure btnSteadyStateClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -72,6 +77,13 @@ begin
 end;
 
 
+procedure TForm2.btnSteadyStateClick(Sender: TObject);
+var d : double;
+begin
+  d := steadyState;
+  showmessage (floattostr (d));
+end;
+
 procedure TForm2.Button1Click(Sender: TObject);
 var errMsg : AnsiString;
 begin
@@ -79,6 +91,18 @@ begin
      lblProgress.caption := 'RoadRunner Loaded'
   else
      lblProgress.caption := string (errMsg);
+end;
+
+procedure TForm2.Button2Click(Sender: TObject);
+var x : TListOfLabeledStringLists; i, j : integer;
+begin
+  x := getAvailableSymbols;
+  for i := 0 to length (x) - 1 do
+      begin
+      listbox1.Items.Add (x[i].labeStr);
+      for j := 0 to x[i].stringList.Count - 1 do
+          listBox1.Items.Add (x[i].stringList[j]);
+      end;
 end;
 
 end.
