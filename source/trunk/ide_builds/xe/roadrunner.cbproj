@@ -1,4 +1,4 @@
-	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{8708D8F2-E671-4837-BD8C-BC7D269B101F}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -80,38 +80,6 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>64</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>65</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrBuilds\xe\clapack\SRC\lapack.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>66</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\libsbml-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>67</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\libxml2_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>71</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>70</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_kinsol.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>68</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_nvecserial.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>69</BuildOrder>
-			</LibFiles>
 			<ResFiles Include="roadrunner.res">
 				<BuildOrder>70</BuildOrder>
 			</ResFiles>
@@ -161,10 +129,6 @@
 			</CppCompile>
 			<CppCompile Include="..\..\src\rrDLLEntry.cpp">
 				<BuildOrder>71</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\rrDoubleMatrix.cpp">
-				<DependentOn>..\..\src\rrDoubleMatrix.h</DependentOn>
-				<BuildOrder>17</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\rrException.cpp">
 				<DependentOn>..\..\src\rrException.h</DependentOn>
@@ -315,22 +279,6 @@
 			<CppCompile Include="..\..\src\rrSymbolList.cpp">
 				<BuildOrder>50</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrTComputeEventAssignmentDelegate.cpp">
-				<DependentOn>..\..\src\rrTComputeEventAssignmentDelegate.h</DependentOn>
-				<BuildOrder>51</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\rrTEventAssignmentDelegate.cpp">
-				<DependentOn>..\..\src\rrTEventAssignmentDelegate.h</DependentOn>
-				<BuildOrder>52</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\rrTEventDelayDelegate.cpp">
-				<DependentOn>..\..\src\rrTEventDelayDelegate.h</DependentOn>
-				<BuildOrder>53</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\rrTEventDelegate.cpp">
-				<DependentOn>..\..\src\rrTEventDelegate.h</DependentOn>
-				<BuildOrder>54</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\src\rrTextWriter.cpp">
 				<DependentOn>..\..\src\rrTextWriter.h</DependentOn>
 				<BuildOrder>55</BuildOrder>
@@ -343,10 +291,6 @@
 				<DependentOn>..\..\src\rrTParameterType.h</DependentOn>
 				<BuildOrder>56</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrTPerformEventAssignmentDelegate.cpp">
-				<DependentOn>..\..\src\rrTPerformEventAssignmentDelegate.h</DependentOn>
-				<BuildOrder>57</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\src\rrTVariableType.cpp">
 				<DependentOn>..\..\src\rrTVariableType.h</DependentOn>
 				<BuildOrder>58</BuildOrder>
@@ -355,6 +299,38 @@
 				<DependentOn>..\..\src\rrUtils.h</DependentOn>
 				<BuildOrder>59</BuildOrder>
 			</CppCompile>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>64</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>65</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrBuilds\xe\clapack\SRC\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>66</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\libsbml-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>67</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\libxml2_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>71</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>70</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_kinsol.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>68</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_nvecserial.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>69</BuildOrder>
+			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

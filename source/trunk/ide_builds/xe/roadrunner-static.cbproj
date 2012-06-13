@@ -1,4 +1,4 @@
-	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{8EB6E32B-8078-4937-A8C7-604DE4B273E4}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -117,10 +117,6 @@
 			<CppCompile Include="..\..\src\rrCvodeInterface.cpp">
 				<DependentOn>..\..\src\rrCvodeInterface.h</DependentOn>
 				<BuildOrder>60</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\rrDoubleMatrix.cpp">
-				<DependentOn>..\..\src\rrDoubleMatrix.h</DependentOn>
-				<BuildOrder>13</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\rrException.cpp">
 				<DependentOn>..\..\src\rrException.h</DependentOn>
@@ -272,22 +268,6 @@
 			<CppCompile Include="..\..\src\rrSymbolList.cpp">
 				<BuildOrder>3</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrTComputeEventAssignmentDelegate.cpp">
-				<DependentOn>..\..\src\rrTComputeEventAssignmentDelegate.h</DependentOn>
-				<BuildOrder>4</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\rrTEventAssignmentDelegate.cpp">
-				<DependentOn>..\..\src\rrTEventAssignmentDelegate.h</DependentOn>
-				<BuildOrder>5</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\rrTEventDelayDelegate.cpp">
-				<DependentOn>..\..\src\rrTEventDelayDelegate.h</DependentOn>
-				<BuildOrder>6</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\rrTEventDelegate.cpp">
-				<DependentOn>..\..\src\rrTEventDelegate.h</DependentOn>
-				<BuildOrder>7</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\src\rrTextWriter.cpp">
 				<DependentOn>..\..\src\rrTextWriter.h</DependentOn>
 				<BuildOrder>8</BuildOrder>
@@ -299,10 +279,6 @@
 			<CppCompile Include="..\..\src\rrTParameterType.cpp">
 				<DependentOn>..\..\src\rrTParameterType.h</DependentOn>
 				<BuildOrder>9</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\rrTPerformEventAssignmentDelegate.cpp">
-				<DependentOn>..\..\src\rrTPerformEventAssignmentDelegate.h</DependentOn>
-				<BuildOrder>10</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\rrTVariableType.cpp">
 				<DependentOn>..\..\src\rrTVariableType.h</DependentOn>

@@ -9,13 +9,13 @@
 
 using std::string;
 using namespace rr;
-string tsUsage(const string& prg);
+string Usage(const string& prg);
 
-class tsArgs
+class Args
 {
     public:
-                                        tsArgs();
-        virtual                        ~tsArgs(){}
+                                        Args();
+        virtual                        ~Args(){}
         int                             CaseNumber;
         double                          ErrorThreshold;
         LogLevel                        CurrentLogLevel;    //option v:

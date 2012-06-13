@@ -1,4 +1,4 @@
-	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{BB98A606-C02D-454F-B743-70C12C4C53CD}</ProjectGuid>
 			<ProjectVersion>13.4</ProjectVersion>
@@ -81,6 +81,12 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="..\..\apps\rr\Args.cpp">
+				<BuildOrder>9</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\apps\rr\main.cpp">
+				<BuildOrder>10</BuildOrder>
+			</CppCompile>
 			<LibFiles Include="C:\rrBuilds\xe\clapack\BLAS\SRC\blas.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>9</BuildOrder>
@@ -117,12 +123,6 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\..\apps\rr\rrArgs.cpp">
-				<BuildOrder>9</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\apps\rr\rrMain.cpp">
-				<BuildOrder>9</BuildOrder>
-			</CppCompile>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

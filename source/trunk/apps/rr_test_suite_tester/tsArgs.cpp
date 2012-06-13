@@ -10,7 +10,7 @@
 #pragma package(smart_init)
 #endif
 
-tsArgs::tsArgs()
+Args::Args()
 :
 UseOSTempFolder(false),
 OnlyCompile(false),
@@ -70,7 +70,7 @@ Steps(50)
 //        string                          SelectionList;      //option l:
 
 
-string tsUsage(const string& prg)
+string Usage(const string& prg)
 {
     stringstream usage;
     usage << "\nUSAGE for "<<prg<<"\n\n";

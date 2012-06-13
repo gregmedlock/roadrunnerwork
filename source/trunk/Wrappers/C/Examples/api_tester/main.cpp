@@ -84,6 +84,7 @@ int main()
     freeText(text);
 
     reset();
+    steadyState();
 
     freeRRInstance(rrHandle);
 

@@ -8,30 +8,31 @@ using std::vector;
 
 namespace rr
 {
-    class RR_DECLSPEC ISteadyStateSolver : public rrObject
-    {
-        /// <summary>
-        /// Thea actual solver rourine making the call to NLEQ1
-        /// </summary>
-        /// <param name="yin">Array of Model variables</param>
-        /// <returns>sums of squares </returns>
-        public:
-            virtual double solve(const vector<double>& yin) = 0;
-    };
 
-    class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
-    {
-        protected:
-            int             nOpts;
-            vector<int>     IWK;
-            int             LIWK;
-            int             LWRK;
-            vector<double>     RWK;
-            vector<double>     XScal;
-            int             ierr;
-            vector<int>     iopt;    // = new int[nOpts];
-            ModelFromC            *model;     // Model generated from the SBML
-            int             n;
+class RR_DECLSPEC ISteadyStateSolver : public rrObject
+{
+    /// <summary>
+    /// Thea actual solver routine making the call to NLEQ1
+    /// </summary>
+    /// <param name="yin">Array of Model variables</param>
+    /// <returns>sums of squares </returns>
+    public:
+        virtual double solve(const vector<double>& yin) = 0;
+};
+
+class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
+{
+    protected:
+            int                         nOpts;
+            vector<int>                 IWK;
+            int                         LIWK;
+            int                         LWRK;
+            vector<double>              RWK;
+            vector<double>              XScal;
+            int                         ierr;
+            vector<int>                 iopt;    // = new int[nOpts];
+            ModelFromC                 *model;     // Model generated from the SBML
+            int                         n;
 
 //        /// <summary>
 //        /// This function test Nleq by running it to see whether it would be working.
@@ -49,12 +50,12 @@ namespace rr
         void ThrowErrorForStatus();
 
     public:
-        bool                         IsAvailable;
-                                    NLEQInterface(ModelFromC *_model = NULL){}
+        bool                            IsAvailable;
+                                        NLEQInterface(ModelFromC *_model = NULL);
 
 //        static TCallBackModelFcn fcn;
-        double                         defaultTolerance;
-        int                         defaultMaxInterations;
+        double                          defaultTolerance;
+        int                             defaultMaxInterations;
 //        delegate void TCallBackModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);
 
 //        /// <summary>
@@ -62,8 +63,8 @@ namespace rr
 //        /// </summary>
 //        /// <param name="model">the model to create NLEQ for</param>
 
-          double                         relativeTolerance;
-        int                         maxIterations;
+          double                        relativeTolerance;
+          int                           maxIterations;
 //
 //        // NLEQ2 seems to have problems with some models so we drop back to NLEQ1 for now.
 //

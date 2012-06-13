@@ -116,48 +116,46 @@ namespace rr
 /// </summary>
 /// <param name="model">the model to create NLEQ for</param>
 //
-//NLEQInterface::NLEQInterface(IModel *_model)
-//:
-//defaultTolerance(1e-4),
-//defaultMaxInterations(100),
-//nOpts(50)
-//{
-//    try
-//    {
-//        this->model = _model;
-//        n = model->getNumIndependentVariables();
-//
+NLEQInterface::NLEQInterface(ModelFromC *_model)
+:
+defaultTolerance(1e-4),
+defaultMaxInterations(100),
+nOpts(50)
+{
+    try
+    {
+        this->model = _model;
+        n = model->getNumIndependentVariables();
+
 //        fcn = new TCallBackModelFcn(ModelFcn);
-//
-//        // Allocate space, see NLEQ docs for details
-//        LWRK = (n + 2 + 15)*n + 61;
-//        LIWK = n + 52;
-//
-//        XScal = new double[n];
-//        IWK = new int[LIWK];
-//        RWK = new double[LWRK];
-//
-//        // Set up default scaling factors
-//        for (int i = 0; i < n; i++) XScal[i] = 1.0;
-//
-//        for (int i = 0; i < nOpts; i++) iopt[i] = 0;
-//        iopt[31 - 1] = 4; // Set for Highly nonlinear problem
-//
-//        // Initialise all array elements to 0.0
-//        for (int i = 0; i < LIWK; i++)
-//            IWK[i] = 0;
-//        IWK[31 - 1] = maxIterations; // Max iterations
-//        for (int i = 0; i < LWRK; i++)
-//            RWK[i] = 0.0;
-//        RWK[22 - 1] = 1E-16; // Minimal allowed damping factor
-//
-//
-//    }
-//    catch (Exception e)
-//    {
-//        throw new SBWException("Error during NLEQ Obejct creation:", e.Message);
-//    }
-//}
+
+        // Allocate space, see NLEQ docs for details
+        LWRK = (n + 2 + 15)*n + 61;
+        LIWK = n + 52;
+
+        XScal.resize(n);// = new double[n];
+        IWK.resize(LIWK);// = new int[LIWK];
+        RWK.resize(LWRK);// = new double[LWRK];
+
+        // Set up default scaling factors
+        for (int i = 0; i < n; i++) XScal[i] = 1.0;
+
+        for (int i = 0; i < nOpts; i++) iopt[i] = 0;
+        iopt[31 - 1] = 4; // Set for Highly nonlinear problem
+
+        // Initialise all array elements to 0.0
+        for (int i = 0; i < LIWK; i++)
+            IWK[i] = 0;
+        IWK[31 - 1] = maxIterations; // Max iterations
+        for (int i = 0; i < LWRK; i++)
+            RWK[i] = 0.0;
+        RWK[22 - 1] = 1E-16; // Minimal allowed damping factor
+    }
+    catch (Exception &e)
+    {
+        throw SBWException("Error during NLEQ Obejct creation:" + e.Message);
+    }
+}
 
 ////        public static double relativeTolerance
 ////        {
