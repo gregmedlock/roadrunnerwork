@@ -1,15 +1,18 @@
 set(target rr_c_api)
 
-
-set(BUILD_SHARED_LIBS 	ON)
-
-add_library(${target} 
+add_library(${target} SHARED
 rr_c_api.cpp
 rr_dll_entry_point.cpp
 rr_c_api_support.cpp
 )
 
-add_definitions(-DEXPORT_RR_C_API)
+set_property(   TARGET ${target} 
+                PROPERTY  COMPILE_DEFINITIONS 
+                                EXPORT_RR_C_API
+                                NO_RR_DLL         #when linking with static lib, no declspec shuld be present..
+                                LIBSBML_STATIC
+					  LIBLAX_STATIC
+)
 
 IF(${BORLAND})
 target_link_libraries (${target} libxml2_xe)
@@ -33,10 +36,16 @@ endif()
 add_subdirectory(Examples)
 
 #=============== INSTALL =====================
-install (FILES ${target}.h 					DESTINATION include/c_api  	COMPONENT c_api)
-install (FILES rr_c_types.h 				DESTINATION include/c_api  	COMPONENT c_api)
+install (   FILES ${target}.h 					
+            DESTINATION include/c_api  	
+            COMPONENT c_api)
 
-install (   TARGETS ${target}
+install (   FILES rr_c_types.h 				
+            DESTINATION include/c_api  
+            COMPONENT c_api)
+
+install (   
+            TARGETS ${target}
             RUNTIME DESTINATION bin
             LIBRARY DESTINATION lib
             ARCHIVE DESTINATION lib

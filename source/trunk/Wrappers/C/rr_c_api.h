@@ -40,7 +40,7 @@ C_DECL_SPEC double                  __stdcall   getReactionRate(int);
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
 C_DECL_SPEC char*                   __stdcall   getBoundarySpeciesNames();          // <- treat char* as you treat it in setSelectionList (char *)
 C_DECL_SPEC int                     __stdcall   getNumberOfFloatingSpecies();
-C_DECL_SPEC char*                   __stdcall   getFloatingSpeciesNames();
+C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameters();
 C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameterNames();
 C_DECL_SPEC char*                   __stdcall   getGlobalParameterNames();
 C_DECL_SPEC bool                    __stdcall   setInitialConditions(RRDoubleVector* vec);     // <- might be called changeInitialConditions in roadRunner

@@ -379,8 +379,8 @@ char* __stdcall getFloatingSpeciesNames()
     return nameList;
 }
 
-//int __stdcall getNumberOfGlobalParameterNames()
-int __stdcall getNumberOfGlobalParameter()
+
+int __stdcall getNumberOfGlobalParameters()
 {
     if(!gRRHandle)
     {

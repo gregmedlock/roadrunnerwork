@@ -24,7 +24,6 @@ class RR_DECLSPEC StringList : public rrObject
                                     StringList(const string& str, const string& delimiter);
                                     StringList(const vector<string>& strings);
                                     StringList(const StringList& cp);
-
                                    ~StringList();
 
         void                        Label(const string& lbl){mLabel = lbl;}
@@ -35,7 +34,6 @@ class RR_DECLSPEC StringList : public rrObject
         void                        operator=(const StringList& rhs);
         string&                     operator[](const int& index){return mStrings[index];}
         string                      operator[](const int& index) const {return mStrings[index];}
-
         StringList                  operator-(const StringList& rhs);
 
         int                         find(const string& item);
@@ -47,10 +45,9 @@ class RR_DECLSPEC StringList : public rrObject
         vector<string>::iterator    end(){return mStrings.end();}
         void                        PreFix(const string& fix);
         void                        PostFix(const string& fix);
-//        friend ostream&             operator<<(ostream& stream, StringList& list);
 };
 
 RR_DECLSPEC ostream&             operator<<(ostream& stream, StringList& list);
-//ostringstream&  operator<<(ostringstream& stream, StringList& list);
+
 }
 #endif

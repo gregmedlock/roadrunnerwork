@@ -53,8 +53,8 @@ class RR_DECLSPEC ModelFromC : public rrObject
         CvodeInterface*                         mCvodeInterface;
         void                                    AssignCVodeInterface(CvodeInterface* cvodeI);
         double                                  *time;
-        void                                    SetTime(double _time){*time = _time;}
-        double                                  GetTime(){return *time;}
+        void                                    SetTime(double _time);
+        double                                  GetTime();
 
         double*                                 y;             //Corresponds to y in IModel
         int*                                    ySize;             //Corresponds to y in IModel

@@ -12,7 +12,6 @@ ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
 )
 
 set(rrSources 
-rrDoubleMatrix.cpp
 rrException.cpp
 rrFileLog.cpp
 rrGetOptions.cpp
@@ -28,8 +27,8 @@ rrModelFromC.cpp
 rrModelState.cpp
 rrNOMSupport.cpp
 rrObject.cpp
-rrParameterSet.cpp
-rrParameterSets.cpp
+#rrParameterSet.cpp
+#rrParameterSets.cpp
 rrPendingAssignment.cpp
 rrRandom.cpp
 rrRoadRunner.cpp
@@ -46,13 +45,8 @@ rrStringListContainer.cpp
 rrStringUtils.cpp
 rrSymbol.cpp
 rrSymbolList.cpp
-rrTComputeEventAssignmentDelegate.cpp
-rrTEventAssignmentDelegate.cpp
-rrTEventDelayDelegate.cpp
-rrTEventDelegate.cpp
 rrTextWriter.cpp
 rrTParameterType.cpp
-rrTPerformEventAssignmentDelegate.cpp
 rrTVariableType.cpp
 rrUtils.cpp
 mtrand/mtrand.cpp
@@ -79,8 +73,8 @@ libstruct/util.cpp
 
 #Build both static and shared version
 #Link with static libs
-add_definitions(-DEXPORT_RR)
-add_library(${target} 			SHARED ${rrSources})
+add_library(${target} 	SHARED ${rrSources})
+set_property(TARGET ${target}  PROPERTY COMPILE_DEFINITIONS EXPORT_RR) 
 
 #libraries to link with our shared lib
 target_link_libraries (${target}    
@@ -100,6 +94,11 @@ endif()
 
 #libraries to link with static lib
 add_library(${target}-static 	STATIC ${rrSources})
+set_property(TARGET ${target}-static PROPERTY COMPILE_DEFINITIONS 
+                                        NO_RR_DLL 
+                                        LIBSBML_STATIC
+                                        LIBLAX_STATIC 
+                                     ) 
 
 if(${MINGW})
 #can't build static at the moment..
@@ -166,14 +165,6 @@ FILE(GLOB rr_support rr_support/*.*)
 install(FILES ${rr_support} 
                 DESTINATION rr_support
                 COMPONENT rr_core) 
-
-##== We also need to copy the libxml.lib file to install folder, if we want to link any program with the rr library
-#if(${BORLAND})
-#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/libxml2_xe.lib	DESTINATION lib COMPONENT Libs)
-#else()
-#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/libxml2.lib		DESTINATION lib COMPONENT Libs)
-#endif()
-
 
 #=== MISC
 if(${BORLAND})

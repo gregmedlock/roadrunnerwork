@@ -49,6 +49,16 @@ void ModelFromC::AssignCVodeInterface(CvodeInterface* cvodeI)
     mCvodeInterface = cvodeI;
 }
 
+void ModelFromC::SetTime(double _time)
+{
+		*time = _time;
+}
+
+double ModelFromC::GetTime()
+{
+	return *time;
+}
+
 /////////////////// The following used to be in IModel
 int ModelFromC::getNumIndependentVariables()
 {

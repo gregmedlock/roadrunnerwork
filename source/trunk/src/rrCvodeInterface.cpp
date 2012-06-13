@@ -1,4 +1,4 @@
-﻿#ifdef USE_PCH
+#ifdef USE_PCH
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
@@ -1082,9 +1082,9 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
 
                 std::copy (additionalEvents.begin(), additionalEvents.end(), firedEvents.end());
 
-                for (int i = 0; i < additionalEvents.size(); i++)
+                for (int j = 0; j < additionalEvents.size(); j++)
                 {
-                    int newEvent = additionalEvents[i];
+                    int newEvent = additionalEvents[j];
                     if (model->eventType[newEvent])
                     {
                         preComputedAssignments[newEvent] = model->computeEventAssignments[newEvent]();

@@ -90,6 +90,6 @@ set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases/${COMP
 include(CPack)
 
 #======= DOXYGEN
-add_subdirectory(docs)
+#add_subdirectory(docs)
 
 

@@ -1,11 +1,26 @@
 set(target rr_c)
 
-add_executable(		   ${target} 
+add_executable( ${target} 
 main.cpp
 Args.cpp
 GetOptions
+../../rr_c_api.cpp
+../../rr_c_api_support.cpp
 )
 
-target_link_libraries (${target} rr_c_api)
+remove_definitions(
+-DEXPORT_RR
+#-DNO_RR_DLL 
+)
+add_definitions(
+-DSTATIC_RR_C_API
+)
 
-install (TARGETS ${target} 		DESTINATION bin COMPONENT compiled_examples)
+target_link_libraries (${target} 
+roadrunner
+)
+
+install(
+        TARGETS ${target} 		
+        DESTINATION bin 
+        COMPONENT compiled_examples)
