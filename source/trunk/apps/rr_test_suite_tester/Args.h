@@ -9,7 +9,7 @@
 
 using std::string;
 using namespace rr;
-string Usage(const string& prg);
+//string Usage(const string& prg);
 
 class Args
 {

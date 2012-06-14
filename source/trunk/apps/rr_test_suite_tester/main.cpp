@@ -23,11 +23,11 @@
 #include "rrStringUtils.h"
 #include "TestSuiteModelSimulation.h"
 #include "rrGetOptions.h"
-#include "tsArgs.h"
+#include "Args.h"
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace rr;
-string tsUsage(const string& prg);
+string Usage(const string& prg);
 
 int main(int argc, char * argv[])
 {
@@ -36,11 +36,11 @@ int main(int argc, char * argv[])
 
     if(argc < 2)
     {
-        cout<<tsUsage(argv[0])<<endl;
+        cout<<Usage(argv[0])<<endl;
         exit(0);
     }
 
-    tsArgs paras;
+    Args paras;
     char c;
     while ((c = GetOptions(argc, argv, ("cpv:n:d:t:"))) != -1)
     {
@@ -54,7 +54,7 @@ int main(int argc, char * argv[])
             case ('d'): paras.DataOutputFolder              = optarg;                       break;
             case ('?'):
             {
-                    cout<<tsUsage(argv[0])<<endl;
+                    cout<<Usage(argv[0])<<endl;
             }
             default:
             {

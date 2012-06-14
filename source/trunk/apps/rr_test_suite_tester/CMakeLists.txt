@@ -3,7 +3,7 @@ set(target rr_ts_tester)
 
 add_executable(		   ${target} 
 main.cpp 
-tsArgs.cpp
+Args.cpp
 TestSuiteModelSimulation.cpp
 )
 
