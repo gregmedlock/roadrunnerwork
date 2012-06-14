@@ -42,7 +42,7 @@ C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames();
 C_DECL_SPEC int                     __stdcall   getNumberOfFloatingSpecies();
 C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameters();
 C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameterNames();
-C_DECL_SPEC char*                   __stdcall   getGlobalParameterNames();
+C_DECL_SPEC RRStringListHandle      __stdcall   getGlobalParameterNames();
 C_DECL_SPEC bool                    __stdcall   setInitialConditions(RRDoubleVector* vec);     // <- might be called changeInitialConditions in roadRunner
 C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTime, const double& stepSize);
 C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();              // <- You'll have to decide what type to return

@@ -403,18 +403,32 @@ int __stdcall getNumberOfGlobalParameters()
     return gRRHandle->getNumberOfGlobalParameters();
 }
 
-char* __stdcall getGlobalParameterNames()
+
+RRStringListHandle __stdcall getGlobalParameterNames()
 {
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-    StringList names = gRRHandle->getGlobalParameterNames();
-    string namesTemp = names.AsString();
-    char* nameList = new char[namesTemp.size() + 1];
-    strcpy(nameList, namesTemp.c_str());
-    return nameList;
+    StringList pNames = gRRHandle->getGlobalParameterNames();
+    
+    if(!pNames.Count())
+    {
+        return NULL;
+    }
+
+    RRStringListHandle list = new RRStringList;
+    list->Count = pNames.size();
+    list->String = new char*[list->Count];
+
+    for(int i = 0; i < list->Count; i++)
+    {
+        list->String[i] = new char[pNames[i].size()];
+        strcpy(list->String[i], pNames[i].c_str());
+    }
+
+    return list;
 }
 
 bool __stdcall setInitialConditions(RRDoubleVector* vec)     // <- might be called changeInitialConditions in roadRunner
