@@ -604,6 +604,15 @@ bool __stdcall freeLabelStringList(RRLabelStringListHandle sl)
     return true;
 }
 
+bool __stdcall freeRRDoubleVector(RRDoubleVectorHandle vector)
+{
+    if(vector)
+    {
+        delete [] vector->Data;
+    }
+    return true;
+}
+
 //============================================================================
 //#pragma argsused
 //int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)

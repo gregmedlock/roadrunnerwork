@@ -76,6 +76,7 @@ C_DECL_SPEC bool                    __stdcall   freeRRResult(RRResultHandle hand
 C_DECL_SPEC bool                    __stdcall   freeText(char* text);
 C_DECL_SPEC bool                    __stdcall   freeLabelStringList(RRLabelStringListHandle sl);
 C_DECL_SPEC bool                    __stdcall   freeStringList(RRStringListHandle sl);
+C_DECL_SPEC bool                    __stdcall   freeRRDoubleVector(RRDoubleVectorHandle vector);
 C_DECL_SPEC bool                    __stdcall   freeRRDataMatrix(RRDataMatrixHandle matrix);
 
 #if defined( __cplusplus)

@@ -35,9 +35,9 @@ typedef struct RRStringList
 
 typedef struct RRSymbolLists
 {
-    int             NumberOfLists;
-    RRLabelStringList*   List;
-}*RRSymbolListsHandle ;
+    int                 NumberOfLists;
+    RRLabelStringList*  List;
+} *RRSymbolListsHandle ;
 
 typedef struct RRDataMatrix
 {
