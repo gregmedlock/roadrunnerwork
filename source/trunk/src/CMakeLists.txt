@@ -74,11 +74,16 @@ libstruct/util.cpp
 #Build both static and shared version
 #Link with static libs
 add_library(${target} 	SHARED ${rrSources})
-set_property(TARGET ${target}  PROPERTY COMPILE_DEFINITIONS EXPORT_RR) 
+set_property(TARGET ${target}  
+                PROPERTY    COMPILE_DEFINITIONS 
+                            EXPORT_RR 
+                            LIBSBML_STATIC 
+                            LIBLAX_STATIC 
+                            ) 
 
 #libraries to link with our shared lib
 target_link_libraries (${target}    
-                                    libsbml
+                                    libsbml-static
                                     sundials_cvode
                                     sundials_nvecserial
                                     blas
@@ -94,11 +99,12 @@ endif()
 
 #libraries to link with static lib
 add_library(${target}-static 	STATIC ${rrSources})
-set_property(TARGET ${target}-static PROPERTY COMPILE_DEFINITIONS 
-                                        NO_RR_DLL 
-                                        LIBSBML_STATIC
-                                        LIBLAX_STATIC 
-                                     ) 
+set_property(TARGET ${target}-static 
+                PROPERTY    COMPILE_DEFINITIONS 
+                            NO_RR_DLL 
+                            LIBSBML_STATIC
+                            LIBLAX_STATIC 
+                            ) 
 
 if(${MINGW})
 #can't build static at the moment..
@@ -138,6 +144,32 @@ install(    TARGETS ${target}
             ARCHIVE DESTINATION lib
             COMPONENT rr_core
 )            
+
+
+if(${MINGW})
+    SET(linkLibrary ${lib_path}/lib${target}.dll.a)
+    SET(sharedLibrary ${exe_path}/lib${target}.dll)
+    SET(staticLibrary ${lib_path}/lib${target}-static.a)
+else()
+    SET(linkLibrary ${lib_path}/${target}.lib)
+    SET(sharedLibrary ${exe_path}/${target}.dll)
+    SET(staticLibrary ${lib_path}/${target}-static.lib)
+endif()
+
+if(INSTALL_STATIC_LIB)
+    install (   FILES ${staticLibrary}	
+                DESTINATION lib 
+                COMPONENT rr_core)
+endif()
+
+#=== Shared target
+    install (   FILES ${linkLibrary}	
+                DESTINATION lib 
+                COMPONENT rr_core)
+
+    install (   FILES ${sharedLibrary}	
+                DESTINATION bin 
+                COMPONENT rr_core)
 
 #=== HEADERS
 set(subfolders 

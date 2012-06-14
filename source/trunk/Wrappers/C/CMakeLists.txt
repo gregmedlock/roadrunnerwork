@@ -8,10 +8,10 @@ rr_c_api_support.cpp
 
 set_property(   TARGET ${target} 
                 PROPERTY  COMPILE_DEFINITIONS 
-                                EXPORT_RR_C_API
-                                NO_RR_DLL         #when linking with static lib, no declspec shuld be present..
-                                LIBSBML_STATIC
-					  LIBLAX_STATIC
+                          EXPORT_RR_C_API
+                          NO_RR_DLL         #when linking with static lib, no declspec shuld be present..
+                          LIBSBML_STATIC
+					      LIBLAX_STATIC
 )
 
 IF(${BORLAND})
@@ -25,9 +25,9 @@ if(${MINGW})
 target_link_libraries (${target} roadrunner)
 else()
 target_link_libraries (${target} roadrunner-static)
-target_link_libraries (${target} libsbml-static)
-target_link_libraries (${target} sundials_cvode)
-target_link_libraries (${target} sundials_nvecserial)
+#target_link_libraries (${target} libsbml-static)
+#target_link_libraries (${target} sundials_cvode)
+#target_link_libraries (${target} sundials_nvecserial)
 target_link_libraries (${target} blas)
 target_link_libraries (${target} lapack)
 target_link_libraries (${target} libf2c)
@@ -50,5 +50,15 @@ install (
             LIBRARY DESTINATION lib
             ARCHIVE DESTINATION lib
             COMPONENT c_api)
+
+install (   FILES ${lib_path}/${target}.lib	
+            DESTINATION lib 			
+            COMPONENT c_api)
+
+install (   FILES ${exe_path}/${target}.dll	
+            DESTINATION bin 			
+            COMPONENT c_api)
+
+            
 
 #set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)

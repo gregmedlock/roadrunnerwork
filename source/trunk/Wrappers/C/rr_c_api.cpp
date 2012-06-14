@@ -182,12 +182,12 @@ RRResultHandle __stdcall simulate(void)
     return aResult;
 }
 
-RRResultHandle __stdcall simulateEx (double timeStart, double timeEnd, int numberOfPoints);
+RRResultHandle __stdcall simulateEx (const double& timeStart, const double& timeEnd, const int& numberOfPoints)
 {
-  setTimeStart(double timeStart);
-  setTimeEnd (double timeEnd);
+  setTimeStart(timeStart);
+  setTimeEnd (timeEnd);
   setNumPoints(numberOfPoints);
-  return simulate ();
+  return simulate();
 }
 
 

@@ -30,7 +30,7 @@ C_DECL_SPEC bool                    __stdcall   setNumPoints(int nrPoints);
 C_DECL_SPEC bool                    __stdcall   setSelectionList(const char* list);
 // C_DECL_SPEC RRStringListHandle      __stdcall   getSelectionList(); <- to be added
 C_DECL_SPEC RRResultHandle          __stdcall   simulate(void);
-C_DECL_SPEC RRResultHandle          __stdcall   simulateEx(double timeStart, double timeEnd, int numberOfPoints);
+C_DECL_SPEC RRResultHandle          __stdcall   simulateEx(const double& timeStart, const double& timeEnd, const int& numberOfPoints);
 C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTime, const double& stepSize);
 
 // Steady State Methods
