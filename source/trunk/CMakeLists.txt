@@ -62,6 +62,15 @@ set(THIRD_PARTY_FOLDER 			${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 set(exe_path		 			${PROJECT_BINARY_DIR}/bin)
 set(lib_path		 			${PROJECT_BINARY_DIR}/lib)
 
+set(CMAKE_BUILD_TYPE "Debug" CACHE STRING
+    "Choose the build type. The options are: None (CMAKE_CXX_FLAGS or
+     CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel.")
+if("${CMAKE_BUILD_TYPE}" STREQUAL "")
+  set(CMAKE_BUILD_TYPE "Debug" CACHE STRING
+  "Choose the build type. The options are: None (CMAKE_CXX_FLAGS or
+  CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel." FORCE)
+endif()
+
 IF(WIN32)
     IF(${MSVC})
         IF(CMAKE_BUILD_TYPE MATCHES "Debug")
@@ -75,13 +84,7 @@ IF(WIN32)
    # Linux
     ENDIF(${MSVC})
 ENDIF(WIN32)
-#MESSAGE( STATUS "CMAKE_BUILD_TYPE: " ${CMAKE_BUILD_TYPE} )
-
-#IF(CMAKE_BUILD_TYPE MATCHES "Debug")
-#set(BUILD_TYPE "debug")
-#ELSE(CMAKE_BUILD_TYPE MATCHES "Debug")
-#set(BUILD_TYPE "release")
-#ENDIF(CMAKE_BUILD_TYPE MATCHES "Debug")
+MESSAGE( STATUS "CMAKE_BUILD_TYPE: " ${CMAKE_BUILD_TYPE} )
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
