@@ -347,7 +347,7 @@ RRStringListHandle __stdcall getBoundarySpeciesNames()          // <- treat char
         return NULL;
     }
 
-    StringList bnames = gRRHandle->getBoundarySpeciesNames();
+    StringList bNames = gRRHandle->getBoundarySpeciesNames();
  
     if(!bNames.Count())
     {
@@ -377,7 +377,7 @@ int __stdcall getNumberOfFloatingSpecies()
     return gRRHandle->getNumberOfFloatingSpecies();
 }
 
-char* __stdcall getFloatingSpeciesNames()
+RRStringListHandle __stdcall getFloatingSpeciesNames()
 {
     if(!gRRHandle)
     {
@@ -385,11 +385,24 @@ char* __stdcall getFloatingSpeciesNames()
         return false;
     }
 
-    StringList names = gRRHandle->getFloatingSpeciesNames();
-    string namesTemp = names.AsString();
-    char* nameList = new char[namesTemp.size() + 1];
-    strcpy(nameList, namesTemp.c_str());
-    return nameList;
+    StringList fNames = gRRHandle->getFloatingSpeciesNames();
+
+    if(!fNames.Count())
+    {
+        return NULL;
+    }
+
+    RRStringListHandle list = new RRStringList;
+    list->Count = fNames.size();
+    list->String = new char*[list->Count];
+
+    for(int i = 0; i < list->Count; i++)
+    {
+        list->String[i] = new char[fNames[i].size()];
+        strcpy(list->String[i], fNames[i].c_str());
+    }
+
+    return list;       
 }
 
 
