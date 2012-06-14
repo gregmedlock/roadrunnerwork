@@ -182,6 +182,15 @@ RRResultHandle __stdcall simulate(void)
     return aResult;
 }
 
+RRResultHandle __stdcall simulateEx (double timeStart, double timeEnd, int numberOfPoints);
+{
+  setTimeStart(double timeStart);
+  setTimeEnd (double timeEnd);
+  setNumPoints(numberOfPoints);
+  return simulate ();
+}
+
+
 RRStringListHandle __stdcall getReactionNames(void)
 {
     if(!gRRHandle)
