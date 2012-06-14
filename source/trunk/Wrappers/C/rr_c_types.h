@@ -18,17 +18,25 @@ typedef struct RRDoubleVector
 } *RRDoubleVectorHandle ;
 
 
-typedef struct RRStringList
+typedef struct RRLabelStringList
 {
     int             Count;
     char*           Label;
     char**          String;
+} *RRLabelStringListHandle ;
+
+
+typedef struct RRStringList
+{
+    int             Count;
+    char**          String;
 } *RRStringListHandle ;
+
 
 typedef struct RRSymbolLists
 {
     int             NumberOfLists;
-    RRStringList*   List;
+    RRLabelStringList*   List;
 }*RRSymbolListsHandle ;
 
 typedef struct RRDataMatrix

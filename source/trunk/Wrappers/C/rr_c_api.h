@@ -74,6 +74,7 @@ C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();          
 C_DECL_SPEC void                    __stdcall   freeRRInstance(RRHandle handle);
 C_DECL_SPEC bool                    __stdcall   freeRRResult(RRResultHandle handle);
 C_DECL_SPEC bool                    __stdcall   freeText(char* text);
+C_DECL_SPEC bool                    __stdcall   freeLabelStringList(RRLabelStringListHandle sl);
 C_DECL_SPEC bool                    __stdcall   freeStringList(RRStringListHandle sl);
 C_DECL_SPEC bool                    __stdcall   freeRRDataMatrix(RRDataMatrixHandle matrix);
 

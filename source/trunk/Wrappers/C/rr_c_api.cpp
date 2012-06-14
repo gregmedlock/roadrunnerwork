@@ -490,7 +490,7 @@ RRSymbolListsHandle __stdcall getAvailableSymbols()              // <- You'll ha
 
     RRSymbolListsHandle symbols = new RRSymbolLists;
     symbols->NumberOfLists  = slSymbols.Count();
-    symbols->List           = new RRStringList[slSymbols.Count()];
+    symbols->List           = new RRLabelStringList[slSymbols.Count()];
 
     //Allocate and fill out lists
     for(int listNr = 0; listNr < slSymbols.Count(); listNr++)
@@ -593,6 +593,12 @@ bool __stdcall freeText(char* text)
 }
 
 bool __stdcall freeStringList(RRStringListHandle sl)
+{
+    delete sl;
+    return true;
+}
+
+bool __stdcall freeLabelStringList(RRLabelStringListHandle sl)
 {
     delete sl;
     return true;

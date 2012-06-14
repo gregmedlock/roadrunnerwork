@@ -70,12 +70,14 @@ type
   TIntBoolFunc = function (value : integer) : bool; stdcall;   // bool func (double)
   TIntDoubleFunc = function (index : integer) : double; stdcall;
 
+  TVoidStringListFunc = function() : PRRLabeledStringList; stdcall;
+
   TGetCopyright = TVoidCharFunc;
   TGetRRInstance = TPointerVoidFunc;
   TSetTimeStart = TDoubleBoolFunc;
   TSetTimeEnd = TDoubleBoolFunc;
   TSetNumPoints = TIntBoolFunc;
-  TSimulate = TPointerVoidFunc;
+  TSimulateEx = function (var timeStart : double; var timeEnd : double; var numberOfPoints : integer) : PRRResultHandle;
   TGetStoichiometryMatrix = function : PRRDataMatrixHandle; stdcall;
   TFreeRRResult = function (ptr : PRRResultHandle) : boolean; stdcall;
   TFreeRRInstance = procedure (instance : Pointer); stdcall;
@@ -107,10 +109,12 @@ function  getValue (Id : AnsiString) : double;
 function  setValue (Id : AnsiString; value : double) : boolean;
 function  reset : boolean;
 function  simulate : TMatrix;
+function  simulateEx (timeStart: double; timeEnd : double; numberOfPoints : integer)  : TMatrix;
 function  oneStep (var currentTime : double; var stepSize : double) : double;
 function  setSelectionList (strList : TStringList) : boolean;
 function  getReactionNames : TStringList;
 function  getBoundarySpeciesNames : TStringList;
+function  getFloatingSpeciesNames : TStringList;
 function  getNumberOfReactions : integer;
 function  getNumberOfBoundarySpecies : integer;
 function  getNumberOfFloatingSpecies : integer;
@@ -148,7 +152,8 @@ var DLLHandle : Cardinal;
     libFreeRRInstance : TFreeRRInstance;    //
     libFreeRRResult : TFreeRRResult;        //
 
-    libSimulate : TSimulate;                //
+    libSimulate : TPointerVoidFunc;         //
+    libSimulateEx : TSimulateEx;            //
     libGetValue : TGetValue;                //
     libSetValue : TSetValue;                //
     libSetSelectionList : TSetSelectionList;//
@@ -160,20 +165,20 @@ var DLLHandle : Cardinal;
     libGetNumberOfGlobalParameters : TVoidIntFunc;//
     libSteadyState : TVoidDoubleFunc; //
     libGetReactionRate : TIntDoubleFunc; //
-    libOneStep : TOneStep;
-    libGetBoundarySpeciesNames : TVoidCharFunc;
-    libGetFloatingSpeciesNames : TVoidCharFunc;
-    libGetGlobalParameterNames : TVoidCharFunc;
+    libOneStep : TOneStep;         //
+    libGetBoundarySpeciesNames : TVoidStringListFunc; //
+    libGetFloatingSpeciesNames : TVoidStringListFunc; //
+    libGetGlobalParameterNames : TVoidStringListFunc; //
     libSetSteadyStateSelectionList : TCharBoolFunc;
     libGetAvailableSymbols : TLibGetAvailableSymbols;
     libComputeSteadyStateValues : TlibComputeSteadyStateValues;
     libSetInitialConditions : TlibSetInitialConditions;
 
-    libGetStoichiometryMatrix :  TGetStoichiometryMatrix;
+    libGetStoichiometryMatrix :  TGetStoichiometryMatrix;  //
 
-    libFreeStringList : TFreeStringList;
-    libFreeRRDataMatrix : TFreeRRDataMatrix;
-    libFreeText : TCharBoolFunc;
+    libFreeStringList : TFreeStringList;     //
+    libFreeRRDataMatrix : TFreeRRDataMatrix; //
+    libFreeText : TCharBoolFunc;             //
 
 // Utility Routines
 // --------------------------------------------------------------
@@ -289,6 +294,23 @@ begin
   libFreeRRResult (RRResult);
 end;
 
+
+function simulateEx (timeStart: double; timeEnd : double; numberOfPoints : integer)  : TMatrix;
+var RRResult : PRRResultHandle;
+    i, j : integer;
+    nr, nc : integer;
+begin
+  RRResult := libSimulateEx (timeStart, timeEnd, numberOfPoints);
+  nr := RRResult^.RSize;
+  nc := RRResult^.CSize;
+  result := TMatrix.Create (nr, nc);
+  for i := 0 to nr - 1 do
+      for j := 0 to nc - 1 do
+          result[i+1,j+1] := RRResult^.data[i*nc + j];
+  libFreeRRResult (RRResult);
+end;
+
+
 function oneStep (var currentTime : double; var stepSize : double) : double;
 begin
   result := libOneStep (currentTime, stepSize);
@@ -315,12 +337,21 @@ begin
 end;
 
 function getBoundarySpeciesNames : TStringList;
-var pList : PRRLabeledStringList;
+var p : PRRLabeledStringList;
 begin
-  //p := libGetBoundarySpeciesNames;
-  //result := getArrayOfStrings(p);
-  //libFreeStringList (p);
+  p := libGetBoundarySpeciesNames;
+  result := getArrayOfStrings(p);
+  libFreeStringList (p);
 end;
+
+function  getFloatingSpeciesNames : TStringList;
+var p : PRRLabeledStringList;
+begin
+  p := libGetFloatingSpeciesNames;
+  result := getArrayOfStrings(p);
+  libFreeStringList (p);
+end;
+
 
 function getNumberOfFloatingSpecies : integer;
 begin
@@ -443,8 +474,11 @@ begin
    if not Assigned (setNumberOfPoints) then
       begin errMsg := 'Unable to locate setNumPoints'; result := false; exit; end;
    @libSimulate := GetProcAddress (dllHandle, PChar ('simulate'));
-   if not Assigned (setNumberOfPoints) then
+   if not Assigned (libSimulate) then
       begin errMsg := 'Unable to locate simulate'; result := false; exit; end;
+   @libSimulateEx := GetProcAddress (dllHandle, PChar ('simulateEx'));
+   if not Assigned (libSimulateEx) then
+      begin errMsg := 'Unable to locate simulateEx'; result := false; exit; end;
    @libSetValue := GetProcAddress (dllHandle, PChar ('setValue'));
    if not Assigned (libSetValue) then
       begin errMsg := 'Unable to locate setValue'; result := false; exit; end;

@@ -18,6 +18,7 @@ type
     Button2: TButton;
     lstSummary: TListBox;
     btnSteadyState: TButton;
+    lblBuildDate: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
@@ -48,8 +49,9 @@ procedure TForm2.btnGetReactionNamesClick(Sender: TObject);
 var i : integer; strList : TStringList;
 begin
   strList := getReactionNames;
+  lstSummary.Clear;
   for i := 0 to strList.Count - 1 do
-      grid.Cells[0, i+2] := strList[i];
+      lstSummary.Items.Add (strList[i]);
   strList.Free;
 end;
 
@@ -59,6 +61,7 @@ var str : AnsiString;
     i, j : integer;
     list : TStringList;
 begin
+  lstSummary.Clear;
   list := TStringList.Create;
   str := AnsiString (TFile.ReadAllText('feedback.xml'));
   if not loadSBML(str) then
@@ -83,10 +86,12 @@ begin
   for i := 0 to list.Count - 1 do
       lstSummary.Items.Add ('Reaction Name: ' + list[i]);
   list.Free;
-  list := ;
+  list := getBoundarySpeciesNames;
   for i := 0 to list.Count - 1 do
-      lstSummary.Items.Add ('Reaction Name: ' + list[i]);
-
+      lstSummary.Items.Add ('Boundary Species Name: ' + list[i]);
+  list := getFloatingSpeciesNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Floating Species Name: ' + list[i]);
 end;
 
 
@@ -101,9 +106,15 @@ procedure TForm2.Button1Click(Sender: TObject);
 var errMsg : AnsiString;
 begin
   if loadRoadRunner (errMsg) then
-     lblProgress.caption := 'RoadRunner Loaded'
+     begin
+     lblProgress.caption := 'RoadRunner Loaded';
+     lblBuildDate.Caption := 'Build Date: ' + getBuildDate;
+     end
   else
+     begin
      lblProgress.caption := string (errMsg);
+     lblBuildDate.Caption := 'Failed to load';
+     end;
 end;
 
 procedure TForm2.Button2Click(Sender: TObject);

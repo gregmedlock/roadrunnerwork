@@ -2,7 +2,7 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'Test uRoadRunnerAPI.pas'
-  ClientHeight = 473
+  ClientHeight = 522
   ClientWidth = 700
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,18 +14,26 @@ object Form2: TForm2
   Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
+  object lblBuildDate: TLabel
+    Left = 10
+    Top = 48
+    Width = 14
+    Height = 13
+    Caption = 'NA'
+  end
   object Button1: TButton
     Left = 8
     Top = 16
     Width = 121
     Height = 25
     Caption = 'Load DLL'
+    Default = True
     TabOrder = 0
     OnClick = Button1Click
   end
   object pnlBottm: TPanel
     Left = 0
-    Top = 432
+    Top = 481
     Width = 700
     Height = 41
     Align = alBottom
@@ -42,7 +50,7 @@ object Form2: TForm2
   end
   object btnGetCopyright: TButton
     Left = 8
-    Top = 47
+    Top = 75
     Width = 121
     Height = 25
     Caption = 'Get Copyright'
@@ -51,7 +59,7 @@ object Form2: TForm2
   end
   object btnLoadSBML: TButton
     Left = 8
-    Top = 78
+    Top = 106
     Width = 121
     Height = 25
     Caption = 'Load SBML'
@@ -62,7 +70,7 @@ object Form2: TForm2
     Left = 278
     Top = 0
     Width = 422
-    Height = 432
+    Height = 481
     Align = alRight
     Anchors = [akLeft, akTop, akBottom]
     DefaultColWidth = 84
@@ -73,7 +81,7 @@ object Form2: TForm2
   end
   object btnGetReactionNames: TButton
     Left = 8
-    Top = 109
+    Top = 137
     Width = 121
     Height = 25
     Caption = 'Get Reaction Names'
@@ -81,8 +89,8 @@ object Form2: TForm2
     OnClick = btnGetReactionNamesClick
   end
   object Button2: TButton
-    Left = 8
-    Top = 140
+    Left = 135
+    Top = 106
     Width = 121
     Height = 25
     Caption = 'Get Available Symbols'
@@ -91,15 +99,15 @@ object Form2: TForm2
   end
   object lstSummary: TListBox
     Left = 8
-    Top = 176
-    Width = 241
-    Height = 250
+    Top = 199
+    Width = 248
+    Height = 276
     ItemHeight = 13
     TabOrder = 7
   end
   object btnSteadyState: TButton
     Left = 135
-    Top = 16
+    Top = 75
     Width = 121
     Height = 25
     Caption = 'Steady State'
