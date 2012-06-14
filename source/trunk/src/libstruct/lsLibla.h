@@ -16,13 +16,13 @@ for the computation of the row echelon or Gauss Jordan form of a matrix.
 #ifndef LIB_LA_LIBCLAPACK_H
 #define LIB_LA_LIBCLAPACK_H
 
-#include "libutil.h"
+#include "lsLibutil.h"
 
 #ifdef __cplusplus
 
 #include <vector>
-#include "matrix.h"
-#include "complex.h"
+#include "lsMatrix.h"
+#include "lsComplex.h"
 
 
 /*!    \namespace LIB_LA

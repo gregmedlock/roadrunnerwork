@@ -5,7 +5,7 @@
 #ifdef __cplusplus
 
 #include <iosfwd>
-#include "libutil.h"
+#include "lsLibutil.h"
 
 namespace LIB_LA
 {

@@ -10,9 +10,9 @@
 #include <cmath>
 #include <sstream>
 #include <string.h>
-#include "libla.h"
-#include "matrix.h"
-#include "util.h"
+#include "lsLibla.h"
+#include "lsMatrix.h"
+#include "lsUtil.h"
 #include "rrLogger.h"
 
 extern "C"

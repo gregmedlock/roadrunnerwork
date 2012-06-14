@@ -3,7 +3,7 @@
 #endif
 #pragma hdrstop
 
-#include "complex.h"
+#include "lsComplex.h"
 #include <ostream>
 
 using namespace std;

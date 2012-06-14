@@ -45,12 +45,13 @@
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
-			<IntermediateOutputDir>.\$(Config)\$(Platform)</IntermediateOutputDir>
+			<IntermediateOutputDir>.\$(Config)\$(Platform)\shared</IntermediateOutputDir>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<IntermediateOutputDir>.\$(Config)\$(Platform)\shared</IntermediateOutputDir>
 			<BPILibOutputDir>$(RR_INSTALLS)\lib</BPILibOutputDir>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
@@ -83,23 +84,23 @@
 			<ResFiles Include="roadrunner.res">
 				<BuildOrder>70</BuildOrder>
 			</ResFiles>
-			<CppCompile Include="..\..\src\libstruct\complex.cpp">
-				<BuildOrder>66</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsComplex.cpp">
+				<BuildOrder>60</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\libstruct\libla.cpp">
-				<BuildOrder>67</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsLibla.cpp">
+				<BuildOrder>61</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\libstruct\libstructural.cpp">
-				<BuildOrder>68</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsLibstructural.cpp">
+				<BuildOrder>62</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\libstruct\matrix.cpp">
-				<BuildOrder>69</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsMatrix.cpp">
+				<BuildOrder>63</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\libstruct\sbmlmodel.cpp">
-				<BuildOrder>70</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsSBMLModel.cpp">
+				<BuildOrder>64</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\libstruct\util.cpp">
-				<BuildOrder>71</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsUtil.cpp">
+				<BuildOrder>65</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\mtrand\mtrand.cpp">
 				<BuildOrder>65</BuildOrder>

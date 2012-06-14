@@ -21,8 +21,8 @@
 			<Projects Include="rr_c_api.cbproj">
 				<Dependencies/>
 			</Projects>
-			<Projects Include="c_api_tests\c_api_tests.cbproj">
-				<Dependencies>rr_c_api.cbproj</Dependencies>
+			<Projects Include="c_api_tests.cbproj">
+				<Dependencies/>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -86,14 +86,14 @@
 		<Target Name="rr_c_api:Make">
 			<MSBuild Projects="rr_c_api.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="c_api_tests" DependsOnTargets="rr_c_api">
-			<MSBuild Projects="c_api_tests\c_api_tests.cbproj"/>
+		<Target Name="c_api_tests">
+			<MSBuild Projects="c_api_tests.cbproj"/>
 		</Target>
-		<Target Name="c_api_tests:Clean" DependsOnTargets="rr_c_api:Clean">
-			<MSBuild Projects="c_api_tests\c_api_tests.cbproj" Targets="Clean"/>
+		<Target Name="c_api_tests:Clean">
+			<MSBuild Projects="c_api_tests.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="c_api_tests:Make" DependsOnTargets="rr_c_api:Make">
-			<MSBuild Projects="c_api_tests\c_api_tests.cbproj" Targets="Make"/>
+		<Target Name="c_api_tests:Make">
+			<MSBuild Projects="c_api_tests.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
 			<CallTarget Targets="roadrunner;roadrunner-static;rr;rr_ts;validate_sbml;rr_c_api;c_api_tests"/>

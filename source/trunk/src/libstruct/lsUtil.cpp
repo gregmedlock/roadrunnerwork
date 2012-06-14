@@ -14,17 +14,19 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
-#include "util.h"
+#include "lsUtil.h"
 #include "rrLogger.h"
 //---------------------------------------------------------------------------
-
 
 using namespace std;
 using namespace LIB_LA;
 using namespace rr;
+
 namespace LIB_LA
 {
 
+namespace Util
+{
 
 DoubleMatrix* Util::getSubMatrix(int /*Mb*/, int /*Nb*/, int ms, int ns, int mi, int nj, DoubleMatrix& A)
 {
@@ -692,7 +694,7 @@ void Util::CopyMatrix(DoubleMatrix& oMatrix, double** &outMatrix, int &outNumRow
     outMatrix = (double **) malloc(sizeof(double*) *numRows);
     if (outMatrix == NULL)
     {
-        throw new ApplicationException("Out of Memory during Matrix copy");
+        throw ApplicationException("Out of Memory during Matrix copy");
     }
     memset(outMatrix, 0, sizeof(double*)*numRows);
     for (int i = 0; i < numRows; i++)
@@ -700,7 +702,7 @@ void Util::CopyMatrix(DoubleMatrix& oMatrix, double** &outMatrix, int &outNumRow
         outMatrix[i] = (double*) malloc(sizeof(double)*numCols);
         if (outMatrix[i] == NULL)
         {
-            throw new ApplicationException("Out of Memory during Matrix copy");
+            throw ApplicationException("Out of Memory during Matrix copy");
         }
         memset(outMatrix[i], 0, sizeof(double)*numCols);
     }
@@ -773,7 +775,7 @@ void Util::CopyDoubleVector(const std::vector< double > &vector, double* &outVec
     }
 }
 
-void Util::CopyStringVector(const std::vector< std::string > &vector, char** &outVector, int &outLength)
+void CopyStringVector(const std::vector< std::string > &vector, char** &outVector, int &outLength)
 {
     outLength = vector.size();
     outVector = (char**) malloc(sizeof(char*) *outLength);
@@ -784,4 +786,5 @@ void Util::CopyStringVector(const std::vector< std::string > &vector, char** &ou
     }
 }
 
+}
 }

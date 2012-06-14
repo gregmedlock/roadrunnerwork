@@ -1885,7 +1885,7 @@ double RoadRunner::getVariableValue(const TVariableType& variableType, const int
 //        Help("Returns the Symbols of all Elasticity Coefficients.")
 ArrayList RoadRunner::getElasticityCoefficientNames()
 {
-    ArrayList oResult;// = new ArrayList();
+    ArrayList oResult;
     if (!modelLoaded)
     {
         return oResult;
@@ -1897,37 +1897,32 @@ ArrayList RoadRunner::getElasticityCoefficientNames()
     StringList conservationNames    = mModelGenerator->getConservationList();
     StringList globalParameterNames = mModelGenerator->getGlobalParameterList();
 
-//    foreach (string s in reactionNames)
     for(int i = 0; i < reactionNames.size(); i++)
     {
         string s = reactionNames[i];
 
-        ArrayList oCCReaction;// = new ArrayList();
-        StringList oInner;// = new ArrayList();
+        ArrayList oCCReaction;
+        StringList oInner;
         oCCReaction.Add(s);
 
-        //foreach (string variable in floatingSpeciesNames)
         for(int j = 0; j < floatingSpeciesNames.size(); j++)
         {
             string variable = floatingSpeciesNames[j];
             oInner.Add(Format("EE:{0},{1}", s, variable));
         }
 
-//        foreach (string variable in boundarySpeciesNames)
         for(int j = 0; j < boundarySpeciesNames.size(); j++)
         {
             string variable = boundarySpeciesNames[j];
             oInner.Add(Format("EE:{0},{1}", s, variable));
         }
 
-//        foreach (string variable in globalParameterNames)
         for(int j = 0; j < globalParameterNames.size(); j++)
         {
             string variable = globalParameterNames[j];
             oInner.Add(Format("EE:{0},{1}", s, variable));
         }
 
-//        foreach (string variable in conservationNames)
         for(int j = 0; j < conservationNames.size(); j++)
         {
             string variable = conservationNames[j];
@@ -4788,7 +4783,6 @@ double RoadRunner::getValue(const string& sId)
 StringListContainer RoadRunner::getAvailableSymbols()
 {
     StringListContainer oResult;
-     //= new ArrayList {new ArrayList(new object[] {"Time", new ArrayList(new object[] {"time"})})};
 
     if (!modelLoaded)
     {

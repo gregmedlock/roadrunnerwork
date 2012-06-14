@@ -9,6 +9,7 @@
 #include "rr_c_api.h"
 #include "rr_c_api_support.h"   //Support functions, not exposed as api functions and or data
 //---------------------------------------------------------------------------
+
 using namespace rr;
 using namespace rr_c_api;
 namespace rr_c_api
@@ -612,13 +613,3 @@ bool __stdcall freeRRDoubleVector(RRDoubleVectorHandle vector)
     }
     return true;
 }
-
-//============================================================================
-//#pragma argsused
-//int WINAPI DllEntryPoint(HINSTANCE hinst, unsigned long reason, void* lpReserved)
-//{
-//    //Intialize the logger
-//    LogOutput::mLogToConsole = false;
-//    return 1;
-//}
-//

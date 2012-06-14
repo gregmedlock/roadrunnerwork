@@ -4,7 +4,7 @@
 #include <string>
 #include "rrStringList.h"
 #include "rrObject.h"
-#include "libstruct/libstructural.h"
+#include "libstruct/lsLibstructural.h"
 #include "rrDoubleMatrix.h"
 
 using std::vector;

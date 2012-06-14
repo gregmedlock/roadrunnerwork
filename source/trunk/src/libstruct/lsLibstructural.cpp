@@ -12,12 +12,13 @@
 #include <vector>
 #include <sstream>
 #include <algorithm>
-#include "libstructural.h"
-#include "libla.h"
-#include "sbmlmodel.h"
-#include "matrix.h"
-#include "util.h"
-#include "math.h"
+#include <math.h>
+#include "lsLibstructural.h"
+#include "lsLibla.h"
+#include "lsSBMLModel.h"
+#include "lsMatrix.h"
+#include "lsUtil.h"
+
 //---------------------------------------------------------------------------
 
 

@@ -38,7 +38,7 @@
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
-			<IntermediateOutputDir>.\$(Config)\$(Platform)</IntermediateOutputDir>
+			<IntermediateOutputDir>.\$(Config)\$(Platform)\rr_c_api</IntermediateOutputDir>
 			<FinalOutputDir>$(RR_INSTALLS)\bin</FinalOutputDir>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>

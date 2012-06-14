@@ -40,7 +40,7 @@
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
-			<IntermediateOutputDir>.\$(Config)\$(Platform)</IntermediateOutputDir>
+			<IntermediateOutputDir>.\$(Config)\$(Platform)\static</IntermediateOutputDir>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
@@ -69,23 +69,23 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\src\libstruct\complex.cpp">
-				<BuildOrder>47</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsComplex.cpp">
+				<BuildOrder>51</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\libstruct\libla.cpp">
-				<BuildOrder>48</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsLibla.cpp">
+				<BuildOrder>52</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\libstruct\libstructural.cpp">
-				<BuildOrder>49</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsLibstructural.cpp">
+				<BuildOrder>53</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\libstruct\matrix.cpp">
-				<BuildOrder>50</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsMatrix.cpp">
+				<BuildOrder>54</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\libstruct\sbmlmodel.cpp">
-				<BuildOrder>45</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsSBMLModel.cpp">
+				<BuildOrder>55</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\libstruct\util.cpp">
-				<BuildOrder>46</BuildOrder>
+			<CppCompile Include="..\..\src\libstruct\lsUtil.cpp">
+				<BuildOrder>56</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\mtrand\mtrand.cpp">
 				<BuildOrder>62</BuildOrder>

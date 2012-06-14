@@ -39,7 +39,7 @@
 #ifndef LIBCONSERVATION_LIBCONSERVATION_H
 #define LIBCONSERVATION_LIBCONSERVATION_H
 
-#include "libutil.h"
+#include "lsLibutil.h"
 
 #ifdef __cplusplus
 
@@ -47,9 +47,9 @@
 #include <string>
 #include <map>
 
-#include "libla.h"
-#include "matrix.h"
-#include "complex.h"
+#include "lsLibla.h"
+#include "lsMatrix.h"
+#include "lsComplex.h"
 
 /*!    \namespace LIB_STRUCTURAL
     \brief       The LIB_STRUCTURAL namespace contains all functions and classes directly related to Structural Analysis.

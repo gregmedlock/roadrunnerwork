@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include "rrExporter.h"
-#include "matrix.h"
+#include "lsMatrix.h"
 using std::string;
 using std::vector;
 

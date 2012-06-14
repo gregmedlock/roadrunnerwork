@@ -30,7 +30,7 @@
 			<PackageImports>rtl.bpi;vclimg.bpi;vcl.bpi;vclx.bpi;vcldb.bpi;dbrtl.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;vcltouch.bpi;xmlrtl.bpi;vclactnband.bpi;dsnap.bpi;dbxcds.bpi;dbexpress.bpi;DbxCommonDriver.bpi;vclribbon.bpi;DataSnapIndy10ServerTransport.bpi;DbxClientDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;bcbsmp.bpi;IndyProtocols.bpi;inet.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vcldbx.bpi;bdertl.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;DataSnapProviderClient.bpi;vclie.bpi;inetdbbde.bpi;inetdbxpress.bpi;DataSnapClient.bpi;inetdb.bpi;DataSnapServer.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi;DuneComponents.bpi;mtkCommonRTL.bpi;VCLCommonRTL.bpi;VCLData.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;GenesisVisualComponents.bpi</PackageImports>
 			<OutputExt>exe</OutputExt>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
-			<_TCHARMapping>wchar_t</_TCHARMapping>
+			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\Examples\validate_sbml\;..\;..\..\..\Examples\validate_sbml\;$(RR_INSTALLS);$(RR_INSTALLS)\include;$(IncludePath)</IncludePath>
@@ -39,7 +39,7 @@
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
-			<IntermediateOutputDir>.\$(Config)\$(Platform)</IntermediateOutputDir>
+			<IntermediateOutputDir>.\$(Config)\$(Platform)\validate_sbml</IntermediateOutputDir>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>

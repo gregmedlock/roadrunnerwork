@@ -2,7 +2,7 @@
 #define rrDoubleMatrixH
 #include <vector>
 #include "rrObject.h"
-#include "libstruct/matrix.h"
+#include "libstruct/lsMatrix.h"
 using std::vector;
 using std::ostream;
 namespace rr

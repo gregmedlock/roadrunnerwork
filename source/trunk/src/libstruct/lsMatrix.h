@@ -2,7 +2,7 @@
 #define LIB_LA_MATRIX_H
 #include <iosfwd>
 #include <ostream>
-#include "libutil.h"
+#include "lsLibutil.h"
 #include "string.h"
 
 #ifdef __cplusplus

@@ -1,31 +1,13 @@
+#ifndef SBW_CLAPACK_UTIL_H
+#define SBW_CLAPACK_UTIL_H
+
 ///
 /// This file contains several useful utility functions
 ///
 ///
 
-#ifndef SBW_CLAPACK_UTIL_H
-#define SBW_CLAPACK_UTIL_H
-
-#include "libla.h"
-#include "libutil.h"
-
-#define DELETE_2D_ARRAY(oArray, nLength)\
-    {\
-        for (int i=0; i<nLength; i++) {\
-            delete[] oArray[i];\
-        }\
-        delete[] oArray;\
-        oArray = NULL;\
-    }
-
-#define FREE_2D_ARRAY(oArray, nLength)\
-    {\
-        for (int i=0; i<nLength; i++) {\
-            free(oArray[i]);\
-        }\
-        free(oArray);\
-        oArray = NULL;\
-    }
+#include "lsLibla.h"
+#include "lsLibutil.h"
 
 #define CREATE_ARRAY(variableName,type,length)\
     if(variableName) { delete[] variableName; variableName = NULL;}\
@@ -33,6 +15,7 @@
 
 #define DELETE_ARRAY_IF_NON_NULL(target)\
     if(target) { delete[] target; target = NULL;}
+
 #define DELETE_IF_NON_NULL(target)\
     if(target) { delete target; target = NULL;}
 
@@ -43,7 +26,6 @@ using std::ostream;
 using std::string;
 namespace LIB_LA
 {
-
     class ApplicationException
     {
 
@@ -64,10 +46,6 @@ namespace LIB_LA
 
 namespace Util
 {
-//    class Util
-//    {
-//    public:
-
         LIB_EXTERN int** matMult(int mA, int nA, int **A, int **B, int nB);
         LIB_EXTERN double** matMult(int mA, int nA, double **A, double **B, int nB);
         LIB_EXTERN void checkTolerance(int nrows, double *A, double dTolerance);
@@ -112,7 +90,7 @@ namespace Util
         LIB_EXTERN string print(int mr, int nc, int *A, int *B);
         LIB_EXTERN string print(int mr, int nc, int **A, int **B);
         LIB_EXTERN string print(int mr, int nc, double **A, double **B);
-//    };
+
 }
 }
 

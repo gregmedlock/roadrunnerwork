@@ -16,7 +16,7 @@
 #include "rrSimulationSettings.h"
 #include "rrCompiler.h"
 #include "rrLibStructSupport.h"
-#include "libstruct/libla.h"
+#include "libstruct/lsLibla.h"
 
 using std::string;
 using namespace LIB_LA;

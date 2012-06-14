@@ -2,12 +2,13 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
-#include "matrix.h"
-#include "complex.h"
-#include "util.h"
 #include <string.h>
 #include <stdlib.h>
 #include <complex>
+
+#include "lsMatrix.h"
+#include "lsComplex.h"
+#include "lsUtil.h"
 
 //---------------------------------------------------------------------------
 namespace LIB_LA

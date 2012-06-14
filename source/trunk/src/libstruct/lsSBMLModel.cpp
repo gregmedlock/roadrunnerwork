@@ -2,13 +2,13 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
-#include "sbmlmodel.h"
 #include <string>
 #include <vector>
 #include <sbml/SBMLDocument.h>
 #include <sbml/Model.h>
 #include <sbml/SBMLReader.h>
-#include "util.h"
+#include "lsSBMLModel.h"
+#include "lsUtil.h"
 //---------------------------------------------------------------------------
 
 
