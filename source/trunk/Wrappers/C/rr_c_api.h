@@ -17,6 +17,7 @@ C_DECL_SPEC RRHandle                __stdcall   getRRInstance(void);
 C_DECL_SPEC char*                   __stdcall   getBuildDate(void);
 C_DECL_SPEC char*                   __stdcall   getCopyright(void);
 C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder);
+//C_DECL_SPEC char*                   __stdcall   getTempFolder(void);
 //C_DECL_SPEC char*                   __stdcall   getCCode(void);
 
 // SBML Methods
