@@ -339,7 +339,7 @@ int __stdcall getNumberOfBoundarySpecies()
     return gRRHandle->getNumberOfBoundarySpecies();
 }
 
-char* __stdcall getBoundarySpeciesNames()          // <- treat char* as you treat it in setSelectionList (char *)
+RRStringListHandle __stdcall getBoundarySpeciesNames()          // <- treat char* as you treat it in setSelectionList (char *)
 {
     if(!gRRHandle)
     {
@@ -347,11 +347,24 @@ char* __stdcall getBoundarySpeciesNames()          // <- treat char* as you trea
         return NULL;
     }
 
-    StringList names = gRRHandle->getBoundarySpeciesNames();
-    string namesTemp = names.AsString();
-    char* nameList = new char[namesTemp.size() + 1];
-    strcpy(nameList, namesTemp.c_str());
-    return nameList;
+    StringList bnames = gRRHandle->getBoundarySpeciesNames();
+ 
+    if(!bNames.Count())
+    {
+        return NULL;
+    }
+
+    RRStringListHandle list = new RRStringList;
+    list->Count = bNames.size();
+    list->String = new char*[list->Count];
+
+    for(int i = 0; i < list->Count; i++)
+    {
+        list->String[i] = new char[bNames[i].size()];
+        strcpy(list->String[i], bNames[i].c_str());
+    }
+
+    return list;       
 }
 
 int __stdcall getNumberOfFloatingSpecies()

@@ -16,7 +16,7 @@ type
     grid: TStringGrid;
     btnGetReactionNames: TButton;
     Button2: TButton;
-    ListBox1: TListBox;
+    lstSummary: TListBox;
     btnSteadyState: TButton;
     procedure Button1Click(Sender: TObject);
     procedure btnGetCopyrightClick(Sender: TObject);
@@ -74,6 +74,19 @@ begin
       for j := 1 to m.c do
           grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
   list.free;
+
+  lstSummary.Items.Add ('Number of Reactions: ' + inttostr (getNumberOfReactions));
+  lstSummary.Items.Add ('Number of Boundary Species: ' + inttostr (getNumberOfBoundarySpecies));
+  lstSummary.Items.Add ('Number of Floating Species: ' + inttostr (getNumberOfFloatingSpecies));
+  //lstSummary.Items.Add ('Number of Parameters: ' + inttostr (getNumberOfGlobalParameters));
+  list := getReactionNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Reaction Name: ' + list[i]);
+  list.Free;
+  list := ;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Reaction Name: ' + list[i]);
+
 end;
 
 
@@ -99,9 +112,9 @@ begin
   x := getAvailableSymbols;
   for i := 0 to length (x) - 1 do
       begin
-      listbox1.Items.Add (x[i].labeStr);
+      lstSummary.Items.Add (x[i].labeStr);
       for j := 0 to x[i].stringList.Count - 1 do
-          listBox1.Items.Add (x[i].stringList[j]);
+          lstSummary.Items.Add (x[i].stringList[j]);
       end;
 end;
 

@@ -110,10 +110,11 @@ function  simulate : TMatrix;
 function  oneStep (var currentTime : double; var stepSize : double) : double;
 function  setSelectionList (strList : TStringList) : boolean;
 function  getReactionNames : TStringList;
+function  getBoundarySpeciesNames : TStringList;
 function  getNumberOfReactions : integer;
 function  getNumberOfBoundarySpecies : integer;
 function  getNumberOfFloatingSpecies : integer;
-function  getNumberOfGlobalParameterNames : integer;
+function  getNumberOfGlobalParameters : integer;
 function  steadyState : double;
 function  computeSteadyStateValues : TDoubleArray;
 
@@ -156,7 +157,7 @@ var DLLHandle : Cardinal;
     libGetNumberOfReactions : TVoidIntFunc; //
     libGetNumberOfBoundarySpecies : TVoidIntFunc;//
     libGetNumberOfFloatingSpecies : TVoidIntFunc;//
-    libGetNumberOfGlobalParameterNames : TVoidIntFunc;//
+    libGetNumberOfGlobalParameters : TVoidIntFunc;//
     libSteadyState : TVoidDoubleFunc; //
     libGetReactionRate : TIntDoubleFunc; //
     libOneStep : TOneStep;
@@ -302,6 +303,7 @@ begin
   libFreeStringList (pList);
 end;
 
+
 function getNumberOfReactions : integer;
 begin
   result := libGetNumberOfReactions;
@@ -312,16 +314,23 @@ begin
   result := libGetNumberOfBoundarySpecies;
 end;
 
+function getBoundarySpeciesNames : TStringList;
+var pList : PRRLabeledStringList;
+begin
+  //p := libGetBoundarySpeciesNames;
+  //result := getArrayOfStrings(p);
+  //libFreeStringList (p);
+end;
 
 function getNumberOfFloatingSpecies : integer;
 begin
-  result := getNumberOfFloatingSpecies;
+  result := libGetNumberOfFloatingSpecies;
 end;
 
 
-function getNumberOfGlobalParameterNames : integer;
+function getNumberOfGlobalParameters : integer;
 begin
-  result := getNumberOfGlobalParameterNames;
+  result := libGetNumberOfGlobalParameters;
 end;
 
 function steadyState : double;

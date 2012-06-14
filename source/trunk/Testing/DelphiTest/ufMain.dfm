@@ -89,8 +89,8 @@ object Form2: TForm2
     TabOrder = 6
     OnClick = Button2Click
   end
-  object ListBox1: TListBox
-    Left = 16
+  object lstSummary: TListBox
+    Left = 8
     Top = 176
     Width = 241
     Height = 250

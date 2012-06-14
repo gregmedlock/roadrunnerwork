@@ -38,7 +38,7 @@ C_DECL_SPEC bool                    __stdcall   reset();
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
 C_DECL_SPEC double                  __stdcall   getReactionRate(int);
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
-C_DECL_SPEC char*                   __stdcall   getBoundarySpeciesNames();          // <- treat char* as you treat it in setSelectionList (char *)
+C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames();        
 C_DECL_SPEC int                     __stdcall   getNumberOfFloatingSpecies();
 C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameters();
 C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameterNames();
