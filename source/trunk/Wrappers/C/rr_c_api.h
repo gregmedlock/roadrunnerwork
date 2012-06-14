@@ -17,6 +17,7 @@ C_DECL_SPEC RRHandle                __stdcall   getRRInstance(void);
 C_DECL_SPEC char*                   __stdcall   getBuildDate(void);
 C_DECL_SPEC char*                   __stdcall   getCopyright(void);
 C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder);
+//C_DECL_SPEC char*                   __stdcall   getCCode(void);
 
 // SBML Methods
 C_DECL_SPEC bool                    __stdcall   loadSBML(const char* sbml);
@@ -27,20 +28,25 @@ C_DECL_SPEC bool                    __stdcall   setTimeStart(double timeStart);
 C_DECL_SPEC bool                    __stdcall   setTimeEnd(double timeEnd);
 C_DECL_SPEC bool                    __stdcall   setNumPoints(int nrPoints);
 C_DECL_SPEC bool                    __stdcall   setSelectionList(const char* list);
+// C_DECL_SPEC RRStringListHandle      __stdcall   getSelectionList(); <- to be added
 C_DECL_SPEC RRResultHandle          __stdcall   simulate(void);
 C_DECL_SPEC RRResultHandle          __stdcall   simulateEx(double timeStart, double timeEnd, int numberOfPoints);
-
 C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTime, const double& stepSize);
 
 // Steady State Methods
 C_DECL_SPEC double                  __stdcall   steadyState();
 C_DECL_SPEC RRDoubleVectorHandle    __stdcall   computeSteadyStateValues();
 C_DECL_SPEC bool                    __stdcall   setSteadyStateSelectionList(char *);
+//C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
 
 C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
 
 C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);
+
+// Jacobian Methods
+//C_DECL_SPEC RRDataMatrixHandle      __stdcall   getFullJacobian(void); 
+//C_DECL_SPEC RRDataMatrixHandle      __stdcall   getReducedJacobian(void); 
 
 // Stoichiometry Methods
 C_DECL_SPEC RRDataMatrixHandle      __stdcall   getStoichiometryMatrix(void);
