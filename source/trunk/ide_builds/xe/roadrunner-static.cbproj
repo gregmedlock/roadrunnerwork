@@ -33,7 +33,7 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\;..\..\src\mtrand\;..\..\src\libstruct\;..\..\ThirdParty\clapack\3.2.1\include;$(RR_INSTALLS)\include;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\src\nleq\;..\..\src\;..\..\src\mtrand\;..\..\src\libstruct\;..\..\ThirdParty\clapack\3.2.1\include;$(RR_INSTALLS)\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -89,6 +89,27 @@
 			</CppCompile>
 			<CppCompile Include="..\..\src\mtrand\mtrand.cpp">
 				<BuildOrder>62</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\nleq\linalg_nleq1.c">
+				<BuildOrder>57</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\nleq\nleq1.c">
+				<BuildOrder>58</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\nleq\nleq1e.c">
+				<BuildOrder>59</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\nleq\wnorm.c">
+				<BuildOrder>60</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\nleq\zibconst.c">
+				<BuildOrder>61</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\nleq\zibmon.c">
+				<BuildOrder>62</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\nleq\zibsec.c">
+				<BuildOrder>63</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\src\rrCGenerator.cpp">
 				<DependentOn>..\..\src\rrCGenerator.h</DependentOn>

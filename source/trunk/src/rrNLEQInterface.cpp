@@ -9,7 +9,7 @@
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 //---------------------------------------------------------------------------
-#include "nleq1.h"
+#include "nleq/nleq1.h"
 
 namespace rr
 {
@@ -172,22 +172,6 @@ nOpts(50)
     }
 }
 
-////        public static double relativeTolerance
-////        {
-////            get { return _relativeTolerance; // return the value from privte field.
-////            }
-////            set { _relativeTolerance = value; // save value into private field.
-////            }
-////        }
-////
-////        public static int maxIterations
-////        {
-////            get { return _maxIterations; // return the value from privte field.
-////            }
-////            set { _maxIterations = value; // save value into private field.
-////            }
-////        }
-////
 ////        // NLEQ2 seems to have problems with some models so we drop back to NLEQ1 for now.
 ////
 ////        //        [DllImport ("nleq2", EntryPoint="NLEQ2", ExactSpelling=false,
