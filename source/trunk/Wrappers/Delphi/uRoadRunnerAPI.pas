@@ -1,8 +1,40 @@
 unit uRoadRunnerAPI;
 
+{
+   Copyright 2012 Herbert M Sauro
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+   In plain english this means:
+
+   You CAN freely download and use this software, in whole or in part, for personal,
+   company internal, or commercial purposes;
+
+   You CAN use the software in packages or distributions that you create.
+
+   You SHOULD include a copy of the license in any redistribution you may make;
+
+   You are NOT required include the source of software, or of any modifications you may
+   have made to it, in any redistribution you may assemble that includes it.
+
+   YOU CANNOT:
+
+   redistribute any piece of this software without proper attribution;
+}
+
 interface
 
-Uses SysUtils, Classes, Windows, uMatrix, Generics.Collections, IOUtils;
+Uses SysUtils, Classes, Windows, uMatrix, Generics.Collections, IOUtils, uRRList;
 
 type
   TAnsiCharArray = array[0..20000] of AnsiChar;
@@ -12,7 +44,6 @@ type
   TDoubleArray = array of double;
 
   TArrayOfPAnsiCharArray = array of PAnsiCharArray;
-
 
   TRRResult = record
      RSize : integer;
@@ -131,7 +162,7 @@ function  getNumberOfGlobalParameters : integer;
 function  steadyState : double;
 function  computeSteadyStateValues : TDoubleArray;
 
-function  getAvailableSymbols : TListOfLabeledStringLists;
+function  getAvailableSymbols : TRRLIst;
 
 procedure setRoadRunnerLibraryName (newLibName : AnsiString);
 function  loadRoadRunner (var errMsg : AnsiString) : boolean;
@@ -213,6 +244,9 @@ begin
       end;
 end;
 
+// --------------------------------------------------------------
+// For doumentation, see the C API docs at:
+//   http://code.google.com/p/roadrunnerwork/
 // --------------------------------------------------------------
 
 function getBuildDate : AnsiString;
@@ -439,17 +473,128 @@ begin
 end;
 
 
-function getAvailableSymbols : TListOfLabeledStringLists;
-var p : PRRLabeledSymbolLists; i, j : integer;
+  {st := getFluxControlCoefficientNames();
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Flux Control Coefficients'));
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;}
+
+  {st := getUnscaledConcentrationControlCoefficientNames();
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Unscaled Concentration Control Coefficients'));
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;}
+
+
+
+function getAvailableSymbols : TRRList;
+var subList : TRRList; st : TStringList;
+    i : integer; item : TRRListItem;
 begin
-  p := libGetAvailableSymbols;
+  result := TRRList.Create;
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('time'));
+  result.Add (TRRListItem.Create (subList));
+
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Floating Species'));
+  st := getFloatingSpeciesNames();
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;
+
+  st := getBoundarySpeciesNames();
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Boundary Species'));
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;
+
+  {st := getFloatingSpeciesAmountNames();
+  subList := TRRList.Create;
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;}
+
+  {st := getBoundarySpeciesAmountNames();
+  subList := TRRList.Create;
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  lresultist.Add (TRRListItem.Create (subList));
+  st.Free;}
+
+  st := getGlobalParameterNames();
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Global Parameter Names'));
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;
+
+  {st := getCompartmentNames();
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Compartments'));
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;}
+
+  st := getReactionNames();
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Reaction Names'));
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;
+
+  {st := getRatesOfChangeNames();
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Rate of Change Names'));
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;}
+
+  {st := getElasticityCoefficientNames();
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Elasticity Coefficients'));
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;}
+
+  {st := getUnscaledElasticityCoefficientNames();
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Unscaled Elasticity Coefficients'));
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;}
+
+  {st := getEigenValueNames();
+  subList := TRRList.Create;
+  subList.Add (TRRListItem.Create ('Eigenvalues'));
+  for i := 0 to st.Count - 1 do
+      subList.Add (TRRListItem.Create (st[i]));
+  result.Add (TRRListItem.Create (subList));
+  st.Free;}
+
+  {p := libGetAvailableSymbols;
   setLength (result, p^.count);
   for i := 0 to p^.count - 1 do
       begin
       result[i].labeStr := p^.list[i].labelStr;
       result[i].stringList := getArrayOfStrings  (@(p^.list[i]));
-      end;
+      end;}
 end;
+
 
 function getReactionRate (index : integer) : double;
 begin
