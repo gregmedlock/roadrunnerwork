@@ -31,6 +31,13 @@ type
   PRRLabeledStringList = ^TRRLabeledStringList;
 
 
+  TRRStringList = record
+    labelStr : PAnsiChar;
+    strList : TArrayOfPAnsiCharArray;
+  end;
+  PRRStringList = ^TRRStringList;
+
+
   TRRLabeledSymbolLists = record
     count : integer;
     list : array of TRRLabeledStringList;
@@ -89,6 +96,7 @@ type
   TReset = function : bool; stdcall;
   TFreeStringList = procedure (handle : Pointer); stdcall;
   TFreeRRDataMatrix = function (matrix : PRRDataMatrixHandle) : boolean; stdcall;
+  TFreeRRDoubleVector = function (vector : PRRDoubleVectorHandle) : boolean ; stdcall;
   TOneStep = function (var currentTime : double; var stepSize : double) : double; stdcall;
 
 var
@@ -115,6 +123,7 @@ function  setSelectionList (strList : TStringList) : boolean;
 function  getReactionNames : TStringList;
 function  getBoundarySpeciesNames : TStringList;
 function  getFloatingSpeciesNames : TStringList;
+function  getGlobalParameterNames : TStringList;
 function  getNumberOfReactions : integer;
 function  getNumberOfBoundarySpecies : integer;
 function  getNumberOfFloatingSpecies : integer;
@@ -179,6 +188,7 @@ var DLLHandle : Cardinal;
     libFreeStringList : TFreeStringList;     //
     libFreeRRDataMatrix : TFreeRRDataMatrix; //
     libFreeText : TCharBoolFunc;             //
+    libFreeDoubleVector : TFreeRRDoubleVector; //
 
 // Utility Routines
 // --------------------------------------------------------------
@@ -218,6 +228,7 @@ begin
   result := AnsiString (p);
 end;
 
+
 function hasError : boolean;
 begin
   result := libHasError;
@@ -235,6 +246,7 @@ begin
   result := libLoadSBML (PAnsiChar (sbmlStr));
 end;
 
+
 function loadSBMLFromFile (fileName : AnsiString) : boolean;
 var str : AnsiString;
 begin
@@ -247,6 +259,7 @@ begin
      raise Exception.Create ('Unable to locate SBML file [' + fileName + ']');
 end;
 
+
 function getValue (Id : AnsiString) : double;
 begin
   result := libGetValue (PAnsiChar (Id));
@@ -257,6 +270,7 @@ function setValue (Id : AnsiString; value : double) : boolean;
 begin
   result := libSetValue (PAnsiChar (Id), value);
 end;
+
 
 function reset : boolean;
 begin
@@ -285,13 +299,16 @@ var RRResult : PRRResultHandle;
     nr, nc : integer;
 begin
   RRResult := libSimulate;
-  nr := RRResult^.RSize;
-  nc := RRResult^.CSize;
-  result := TMatrix.Create (nr, nc);
-  for i := 0 to nr - 1 do
-      for j := 0 to nc - 1 do
-          result[i+1,j+1] := RRResult^.data[i*nc + j];
-  libFreeRRResult (RRResult);
+  try
+     nr := RRResult^.RSize;
+     nc := RRResult^.CSize;
+     result := TMatrix.Create (nr, nc);
+     for i := 0 to nr - 1 do
+         for j := 0 to nc - 1 do
+             result[i+1,j+1] := RRResult^.data[i*nc + j];
+  finally
+    libFreeRRResult (RRResult);
+  end;
 end;
 
 
@@ -301,13 +318,16 @@ var RRResult : PRRResultHandle;
     nr, nc : integer;
 begin
   RRResult := libSimulateEx (timeStart, timeEnd, numberOfPoints);
-  nr := RRResult^.RSize;
-  nc := RRResult^.CSize;
-  result := TMatrix.Create (nr, nc);
-  for i := 0 to nr - 1 do
-      for j := 0 to nc - 1 do
-          result[i+1,j+1] := RRResult^.data[i*nc + j];
-  libFreeRRResult (RRResult);
+  try
+     nr := RRResult^.RSize;
+     nc := RRResult^.CSize;
+     result := TMatrix.Create (nr, nc);
+     for i := 0 to nr - 1 do
+         for j := 0 to nc - 1 do
+             result[i+1,j+1] := RRResult^.data[i*nc + j];
+  finally
+    libFreeRRResult (RRResult);
+  end;
 end;
 
 
@@ -321,8 +341,11 @@ function getReactionNames : TStringList;
 var pList : PRRLabeledStringList;
 begin
   pList := libGetReactionNames;
-  result := getArrayOfStrings(pList);
-  libFreeStringList (pList);
+  try
+    result := getArrayOfStrings(pList);
+  finally
+    libFreeStringList (pList);
+  end;
 end;
 
 
@@ -340,16 +363,34 @@ function getBoundarySpeciesNames : TStringList;
 var p : PRRLabeledStringList;
 begin
   p := libGetBoundarySpeciesNames;
-  result := getArrayOfStrings(p);
-  libFreeStringList (p);
+  try
+    result := getArrayOfStrings(p);
+  finally
+    libFreeStringList (p);
+  end;
 end;
 
 function  getFloatingSpeciesNames : TStringList;
 var p : PRRLabeledStringList;
 begin
   p := libGetFloatingSpeciesNames;
-  result := getArrayOfStrings(p);
-  libFreeStringList (p);
+  try
+    result := getArrayOfStrings(p);
+  finally
+    libFreeStringList (p);
+  end;
+end;
+
+
+function getGlobalParameterNames : TStringList;
+var p : PRRLabeledStringList;
+begin
+  p := libGetGlobalParameterNames;
+  try
+    result := getArrayOfStrings (p);
+  finally
+    libFreeStringList (p);
+  end;
 end;
 
 
@@ -374,10 +415,13 @@ function computeSteadyStateValues : TDoubleArray;
 var p : PRRDoubleVectorHandle; i : integer;
 begin
   p := libComputeSteadyStateValues;
-  setLength (result, p^.count);
-  for i := 0 to p^.count - 1 do
-      result[i] := p^.data[i];
-  //libFreeDoubleVector;
+  try
+    setLength (result, p^.count);
+    for i := 0 to p^.count - 1 do
+        result[i] := p^.data[i];
+  finally
+    // #### libFreeDoubleVector (p);
+  end;
 end;
 
 function setSteadyStateSelectionList (strList : TStringList) : boolean;
@@ -412,19 +456,23 @@ begin
   result := libGetReactionRate (index);
 end;
 
+
 function getStoichiometryMatrix : TMatrix;
 var st : PRRDataMatrixHandle;
     nr, nc : integer;
     i, j : integer;
 begin
   st := libGetStoichiometryMatrix;
-  nr := st^.RSize;
-  nc := st^.CSize;
-  result := TMatrix.Create (nr, nc);
-  for i := 0 to nr - 1 do
-      for j := 0 to nc - 1 do
-          result[i+1,j+1] := st^.data[i*nc + j];
-  libFreeRRDataMatrix (st);
+  try
+    nr := st^.RSize;
+    nc := st^.CSize;
+    result := TMatrix.Create (nr, nc);
+    for i := 0 to nr - 1 do
+        for j := 0 to nc - 1 do
+            result[i+1,j+1] := st^.data[i*nc + j];
+  finally
+    libFreeRRDataMatrix (st);
+  end;
 end;
 
 
@@ -506,9 +554,9 @@ begin
    @libGetNumberOfFloatingSpecies := GetProcAddress (dllHandle, PChar ('getNumberOfFloatingSpecies'));
    if not Assigned (libGetNumberOfFloatingSpecies) then
       begin errMsg := 'Unable to locate getNumberOfFloatingSpecies'; result := false; exit; end;
-   //@libGetNumberOfGlobalParameterNames := GetProcAddress (dllHandle, PChar ('getNumberOfGlobalParameterNames'));
-   //if not Assigned (libGetNumberOfGlobalParameterNames) then
-   //   begin errMsg := 'Unable to locate getNumberOfGlobalParameterNames'; result := false; exit; end;
+   @libGetNumberOfGlobalParameters := GetProcAddress (dllHandle, PChar ('getNumberOfGlobalParameters'));
+   if not Assigned (libGetNumberOfGlobalParameters) then
+      begin errMsg := 'Unable to locate getNumberOfGlobalParameters'; result := false; exit; end;
    @libSteadyState := GetProcAddress (dllHandle, PChar ('steadyState'));
    if not Assigned (libSteadyState) then
       begin errMsg := 'Unable to locate steadyState'; result := false; exit; end;
@@ -555,7 +603,9 @@ begin
    @libFreeText := GetProcAddress (dllHandle, PChar ('freeText'));
    if not Assigned (libFreeText) then
       begin errMsg := 'Unable to locate freeText'; result := false; exit; end;
-
+   //@libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeDoubleVector'));
+   //if not Assigned (libFreeDoubleVector) then
+   //   begin errMsg := 'Unable to locate freeDoubleVector'; result := false; exit; end;
 end;
 
 function loadRoadRunner (var errMsg : AnsiString) : boolean;
