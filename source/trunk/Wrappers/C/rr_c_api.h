@@ -57,12 +57,12 @@ C_DECL_SPEC char*                   __stdcall   getLastError();
 
 C_DECL_SPEC bool                    __stdcall   reset();
 C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRDoubleVector* vec); 
-// C_DECL_SPEC RRDoubleVectorHandle __stccall   getFloatingSpeciesInitialConcentrations (void);  <- to be added
+C_DECL_SPEC RRDoubleVectorHandle    __stccall   getFloatingSpeciesInitialConcentrations (void);  
 
 // Reaction Rates
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
 C_DECL_SPEC double                  __stdcall   getReactionRate(int);
-//C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getReactionRates(); <- to be added
+C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getReactionRates(); 
 
 // get Number Family
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();

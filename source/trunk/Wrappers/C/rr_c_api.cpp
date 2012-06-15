@@ -369,6 +369,20 @@ double __stdcall getReactionRate(int rateNr)
     return gRRHandle->getReactionRate(rateNr);
 }
 
+RRDoubleVectorHandle __stdcall getReactionRates()
+{
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
+    vector<double> vec =  gRRHandle->getReactionRates();
+
+    RRDoubleVector* aVec = CreateRRDoubleVecFrom(vec);
+    return aVec;
+}
+
+
 int __stdcall getNumberOfBoundarySpecies()
 {
     if(!gRRHandle)
@@ -496,6 +510,19 @@ bool __stdcall setFloatingSpeciesInitialConcentrations(RRDoubleVector* vec)
     gRRHandle->changeInitialConditions(aVec);
     return true;
 
+}
+
+RRDoubleVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
+{
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
+    vector<double> vec =  gRRHandle->getFloatingSpeciesInitialConcentrations
+
+    RRDoubleVector* aVec = CreateRRDoubleVecFrom(vec);
+    return aVec;
 }
 
 double __stdcall oneStep(const double& currentTime, const double& stepSize)
