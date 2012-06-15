@@ -127,7 +127,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
     ModelState oldState(*model);
 //    int size = model->amounts.size() + model->rateRules.size();
 
-    int size = *model->amountsSize + (model->rateRulesSize);
+    int size = *model->amountsSize + (*model->rateRulesSize);
     vector<double> dCVodeArgument(size);//model->.amounts.Length + model.rateRules.Length];
 
     for(int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
@@ -145,7 +145,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
 
     model->evalModel(time, dCVodeArgument);
 
-    CopyCArrayToStdVector(model->rateRules,    dCVodeArgument, (model->rateRulesSize));
+    CopyCArrayToStdVector(model->rateRules,    dCVodeArgument, (*model->rateRulesSize));
 
     for(u_int i = 0 ; i < (*model->dydtSize); i++)
     {
@@ -242,7 +242,7 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
     {
         model = oModel;
         numIndependentVariables = oModel->getNumIndependentVariables();
-        numAdditionalRules = (oModel->rateRulesSize);
+        numAdditionalRules = (*oModel->rateRulesSize);
 
 ////                modelDelegate = new TCallBackModelFcn(ModelFcn);
 ////                eventDelegate = new TCallBackRootFcn(EventFcn);

@@ -69,6 +69,11 @@ libstruct/lsLibstructural.cpp
 libstruct/lsMatrix.cpp
 libstruct/lsSBMLModel.cpp
 libstruct/lsUtil.cpp
+nleq/nleq1.c
+nleq/wnorm.c
+nleq/zibconst.c
+nleq/zibmon.c
+nleq/zibsec.c
 )
 
 #Build both static and shared version

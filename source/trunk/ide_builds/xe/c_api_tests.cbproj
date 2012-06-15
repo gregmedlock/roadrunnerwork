@@ -32,8 +32,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\Wrappers\C\Examples\api_tester\;..\..\Wrappers\C\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\Wrappers\C\Examples\api_tester\;C:\rrInstalls\xe\lib\;..\..\..\Wrappers\C\Examples\api_tester\;C:\roadrunnerwork\source\trunk\Wrappers\C\Examples\api_tester\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\src\;..\..\Wrappers\C\Examples\api_tester\;..\..\Wrappers\C\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\src\;..\..\Wrappers\C\Examples\api_tester\;C:\rrInstalls\xe\lib\;..\..\..\Wrappers\C\Examples\api_tester\;C:\roadrunnerwork\source\trunk\Wrappers\C\Examples\api_tester\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>

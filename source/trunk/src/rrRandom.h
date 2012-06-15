@@ -7,7 +7,7 @@
 namespace rr
 {
 
-class RR_DECLSPEC Random : public rrObject, public MTRand_open
+class RR_DECLSPEC Random : public MTRand_open
 {
 
     private:

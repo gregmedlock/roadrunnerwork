@@ -45,9 +45,11 @@
 #ifndef MTRAND_H
 #define MTRAND_H
 
-#include "rrExporter.h"
+#include "rrObject.h"
 
-class RR_DECLSPEC  MTRand_int32 
+using namespace rr;
+
+class RR_DECLSPEC  MTRand_int32 : public rrObject
 { // Mersenne Twister random number generator
 public:
 // default constructor: uses default seed only if this is the first instance

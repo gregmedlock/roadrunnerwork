@@ -3,154 +3,144 @@
 #include <vector>
 #include "rrObject.h"
 #include "rrModelFromC.h"
+#include "rrSteadyStateSolver.h"
 using std::vector;
 
 namespace rr
 {
 
-class RR_DECLSPEC ISteadyStateSolver : public rrObject
-{
-    /// <summary>
-    /// Thea actual solver routine making the call to NLEQ1
-    /// </summary>
-    /// <param name="yin">Array of Model variables</param>
-    /// <returns>sums of squares </returns>
-    public:
-        virtual double solve(const vector<double>& yin) = 0;
-};
+// <summary>
+// This is the function that's called by NLEQ
+// </summary>
+// <param name="nx"></param>
+// <param name="y"></param>
+// <param name="fval"></param>
+// <param name="pErr"></param>
+void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);
 
-typedef long* IntPtr;
-int NLEQModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);
+
 int NLEQModelFcn(...);
+string ErrorForStatus(const int& error);
 
 class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
 {
     protected:
-            int                         nOpts;
-            vector<int>                 IWK;
-            long                        LIWK;
-            long                        LWRK;
-            vector<double>              RWK;
-            vector<double>              XScal;
-            long                        ierr;
-            vector<int>                 iopt;    // = new int[nOpts];
-            ModelFromC                 *model;     // Model generated from the SBML
-            long                         n;
+        int                             nOpts;
+        long                           *IWK;
+        long                            LIWK;
+        long                            LWRK;
+        double                         *RWK;
+        double                         *XScal;
+        long                            ierr;
+        long                           *iopt;    // = new int[nOpts];
+        static ModelFromC              *model;     // Model generated from the SBML
+        long                            n;
 
-//        /// <summary>
-//        /// This function test Nleq by running it to see whether it would be working.
-//        /// </summary>
-//        private NLEQInterface()    //
-
-//        /// <summary>
-//        /// This is the function that's called by NLEQ
-//        /// </summary>
-//        /// <param name="nx"></param>
-//        /// <param name="y"></param>
-//        /// <param name="fval"></param>
-//        /// <param name="pErr"></param>
-//        private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
-        void ThrowErrorForStatus();
-
+                                        //  private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr) //tk made this a non class member, 'standalone' function
     public:
-        bool                            IsAvailable;
+        bool                            IsAvailable();
+
+                                        //        static TCallBackModelFcn fcn;
+        static ModelFromC*              GetModel();
+        int                             maxIterations;
+        int                             defaultMaxInterations;
+        double                          defaultTolerance;
+        double                          relativeTolerance;
+
+                                        //        delegate void TCallBackModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);
+
+                                        /// <summary>
+                                        /// Creates a new Instance of NLEQ for the given Model
+                                        /// </summary>
+                                        /// <param name="model">the model to create NLEQ for</param>
                                         NLEQInterface(ModelFromC *_model = NULL);
 
-//        static TCallBackModelFcn fcn;
-        double                          defaultTolerance;
-        int                             defaultMaxInterations;
-//        delegate void TCallBackModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);
 
-//        /// <summary>
-//        /// Creates a new Instance of NLEQ for the given Model
-//        /// </summary>
-//        /// <param name="model">the model to create NLEQ for</param>
+                                        // NLEQ2 seems to have problems with some models so we drop back to NLEQ1 for now.
 
-          double                        relativeTolerance;
-          int                           maxIterations;
-//
-//        // NLEQ2 seems to have problems with some models so we drop back to NLEQ1 for now.
-//
-//        //        [DllImport ("nleq2", EntryPoint="NLEQ2", ExactSpelling=false,
-//        //             CharSet=CharSet.Unicode, SetLastError=true, CallingConvention=CallingConvention.Cdecl
-//        //             )]
-//        [DllImport("NleqLib", EntryPoint = "NLEQ1")]
-//        //         NLEQ is a FORTRAN routine, therefore everything must be a reference
-//        static extern IntPtr NLEQ1(
-//            ref int n,
-//            TCallBackModelFcn fcn,
-//            [In, Out] double[,] Jacobian,
-//            [In, Out] double[] x,
-//            [In, Out] double[] xscal,
-//            ref double rtol,
-//            [In, Out] int[] iopt,
-//            ref int ierr,
-//            ref int LIWK,
-//            [In, Out] int[] IWK,
-//            ref int LRWK,
-//            [In, Out] double[] RWK);
-//
-//        //                [DllImport ("nleq2", EntryPoint="NLEQ2")                     ]
-//        ////         NLEQ is a FORTRAN routine, therefore everything must be a reference
-//        //        public static extern IntPtr NLEQ2(
-//        //            ref int n,
-//        //            TCallBackModelFcn fcn,
-//        //            [In, Out] double[,] Jacobian,
-//        //            [In, Out] double[] x,
-//        //            [In, Out] double[] xscal,
-//        //            ref double rtol,
-//        //            [In, Out] int[] iopt,
-//        //            ref int ierr,
-//        //            ref int LIWK,
-//        //            [In, Out] int[] IWK,
-//        //            ref int LRWK,
-//        //            [In, Out] double[] RWK);
-//
-//
-//        /// <summary>
-//        /// Sets the Scaling Factors
-//        /// </summary>
-//        /// <param name="sx">Array of Scaling factors</param>
-        void setScalingFactors(vector<double>& sx);
-//
-//        /// <summary>
-//        /// Returns the Number of Newton Iterations
-//        /// </summary>
-//        /// <returns>the Number of Newton Iterations</returns>
-        int getNumberOfNewtonIterations();
-//
-//        /// <summary>
-//        /// Returns the Number of Corrector steps
-//        /// </summary>
-//        /// <returns>Returns the Number of Corrector steps</returns>
-        int getNumberOfCorrectorSteps();
-//
-//        /// <summary>
-//        /// Returns the Number of Model Evaluations
-//        /// </summary>
-//        /// <returns>the Number of Model Evaluations</returns>
-        int getNumberOfModelEvaluations();
-//
-//        /// <summary>
-//        /// Returns the Number Of Jacobian Evaluations
-//        /// </summary>
-//        /// <returns>the Number Of Jacobian Evaluations</returns>
-        int getNumberOfJacobianEvaluations();
-//
-//        /// <summary>
-//        /// Returns the Number of Model Evaluations For Jacobian
-//        /// </summary>
-//        /// <returns>the Number of Model Evaluations For Jacobian</returns>
-        int getNumberOfModelEvaluationsForJacobian();
-        void Test(string fileName);
-//
-//        /// <summary>
-//        /// Thea actual solver rourine making the call to NLEQ1
-//        /// </summary>
-//        /// <param name="yin">Array of Model variables</param>
-//        /// <returns>sums of squares </returns>
-        double solve(const vector<double>& yin);
-        double ComputeSumsOfSquares();
+                                        //        [DllImport ("nleq2", EntryPoint="NLEQ2", ExactSpelling=false,
+                                        //             CharSet=CharSet.Unicode, SetLastError=true, CallingConvention=CallingConvention.Cdecl
+                                        //             )]
+                                        //        [DllImport("NleqLib", EntryPoint = "NLEQ1")]
+                                        //        //         NLEQ is a FORTRAN routine, therefore everything must be a reference
+                                        //        static extern IntPtr NLEQ1(
+                                        //            ref int n,
+                                        //            TCallBackModelFcn fcn,
+                                        //            [In, Out] double[,] Jacobian,
+                                        //            [In, Out] double[] x,
+                                        //            [In, Out] double[] xscal,
+                                        //            ref double rtol,
+                                        //            [In, Out] int[] iopt,
+                                        //            ref int ierr,
+                                        //            ref int LIWK,
+                                        //            [In, Out] int[] IWK,
+                                        //            ref int LRWK,
+                                        //            [In, Out] double[] RWK);
+                                        //
+                                        //        //                [DllImport ("nleq2", EntryPoint="NLEQ2")                     ]
+                                        //        ////         NLEQ is a FORTRAN routine, therefore everything must be a reference
+                                        //        //        public static extern IntPtr NLEQ2(
+                                        //        //            ref int n,
+                                        //        //            TCallBackModelFcn fcn,
+                                        //        //            [In, Out] double[,] Jacobian,
+                                        //        //            [In, Out] double[] x,
+                                        //        //            [In, Out] double[] xscal,
+                                        //        //            ref double rtol,
+                                        //        //            [In, Out] int[] iopt,
+                                        //        //            ref int ierr,
+                                        //        //            ref int LIWK,
+                                        //        //            [In, Out] int[] IWK,
+                                        //        //            ref int LRWK,
+                                        //        //            [In, Out] double[] RWK);
+
+
+                                        /// <summary>
+                                        /// Sets the Scaling Factors
+                                        /// </summary>
+                                        /// <param name="sx">Array of Scaling factors</param>
+        void                            setScalingFactors(const vector<double>& sx);
+
+                                        /// <summary>
+                                        /// Returns the Number of Newton Iterations
+                                        /// </summary>
+                                        /// <returns>the Number of Newton Iterations</returns>
+        int                             getNumberOfNewtonIterations();
+
+                                        /// <summary>
+                                        /// Returns the Number of Corrector steps
+                                        /// </summary>
+                                        /// <returns>Returns the Number of Corrector steps</returns>
+        int                             getNumberOfCorrectorSteps();
+
+                                        /// <summary>
+                                        /// Returns the Number of Model Evaluations
+                                        /// </summary>
+                                        /// <returns>the Number of Model Evaluations</returns>
+        int                             getNumberOfModelEvaluations();
+
+                                        /// <summary>
+                                        /// Returns the Number Of Jacobian Evaluations
+                                        /// </summary>
+                                        /// <returns>the Number Of Jacobian Evaluations</returns>
+        int                             getNumberOfJacobianEvaluations();
+
+                                        /// <summary>
+                                        /// Returns the Number of Model Evaluations For Jacobian
+                                        /// </summary>
+                                        /// <returns>the Number of Model Evaluations For Jacobian</returns>
+        int                             getNumberOfModelEvaluationsForJacobian();
+
+        bool                            Test(const string& fileName);
+
+                                        /// <summary>
+                                        /// Thea actual solver rourine making the call to NLEQ1
+                                        /// </summary>
+                                        /// <param name="yin">Array of Model variables</param>
+                                        /// <returns>sums of squares </returns>
+        double                          solve(const vector<double>& yin);
+
+
+        double                          ComputeSumsOfSquares();
 
     }; //class NLEQ interface
 }//namespace rr

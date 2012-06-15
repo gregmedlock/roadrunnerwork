@@ -5,7 +5,6 @@
 #include <vector>
 #include "rr_c_api.h"
 //---------------------------------------------------------------------------
-
 using namespace std;
 
 int main()
@@ -73,7 +72,7 @@ int main()
     }
 
     reset();
-//    steadyState();
+    cout<<"This is steady state number: "<<steadyState();
 
     RRDoubleVectorHandle concs = getFloatingSpeciesInitialConcentrations();
     printVector(concs);
@@ -90,8 +89,6 @@ int main()
     cout<<text<<endl;
 
     freeText(text);
-
-
     freeRRInstance(rrHandle);
     return 0;
 }

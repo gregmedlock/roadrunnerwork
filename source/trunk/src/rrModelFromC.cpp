@@ -252,15 +252,15 @@ bool ModelFromC::SetupDLLData()
         Log(lDebug)<<"Failed to assign to rateRules";
     }
 
-    int* ptr = (int*) GetProcAddress((HMODULE) mDLLHandle, "_rateRulesSize");
-    if(!ptr)
+    rateRulesSize = (int*) GetProcAddress((HMODULE) mDLLHandle, "_rateRulesSize");
+    if(!rateRulesSize)
     {
-        Log(lDebug)<<"Failed to assign to rateRules";
+        Log(lDebug)<<"Failed to assign to rateRulesSize";
     }
-    else
-    {
-        rateRulesSize  = *ptr;
-    }
+//    else
+//    {
+//        rateRulesSize  = *ptr;
+//    }
 
     y  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_y");
     if(!y)

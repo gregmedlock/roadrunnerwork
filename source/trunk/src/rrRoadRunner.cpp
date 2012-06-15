@@ -322,12 +322,12 @@ void RoadRunner::AddNthOutputToResult(DoubleMatrix& results, int nRow, double dC
 vector<double> RoadRunner::BuildModelEvalArgument()
 {
     vector<double> dResult;// = new double[model.amounts.Length + model.rateRules.Length];
-    dResult.resize((*mModel->amountsSize) + (mModel->rateRulesSize) );
+    dResult.resize((*mModel->amountsSize) + (*mModel->rateRulesSize) );
     vector<double> dCurrentRuleValues = mModel->GetCurrentValues();
 
     dResult         = dCurrentRuleValues;//.CopyTo(dResult, 0);
 
-    for(int i = 0; i < (mModel->rateRulesSize); i++)
+    for(int i = 0; i < (*mModel->rateRulesSize); i++)
     {
         dResult.push_back(mModel->amounts[i]);
     }
@@ -879,30 +879,36 @@ double RoadRunner::steadyState()
 
     try
     {
-        if (UseKinsol == 0)
-        {
-            steadyStateSolver = new NLEQInterface(mModel);
-        }
-        else
+        if (UseKinsol)
         {
 //            steadyStateSolver = new KinSolveInterface(mModel);
         }
+        else
+        {
+            steadyStateSolver = new NLEQInterface(mModel);
+        }
+
         //oneStep(0.0,0.05);
+
         //Get a std vector for the solver
         vector<double> someAmounts;
         CopyCArrayToStdVector(mModel->amounts, someAmounts, mModel->getNumIndependentVariables());
 
-        double ss = steadyStateSolver->solve(someAmounts);//mModel->amounts);
+        double ss = steadyStateSolver->solve(someAmounts);
+        if(ss < 0)
+        {
+            Log(lError)<<"Steady State solver failed...";
+        }
         mModel->convertToConcentrations();
+
+        delete steadyStateSolver;
+        steadyStateSolver = NULL;
+
         return ss;
-    }
-    catch (SBWException)
-    {
-        throw;
     }
     catch (Exception e)
     {
-        throw new SBWApplicationException("Unexpected error from steadyState solver:" +  e.Message);
+        throw SBWApplicationException("Unexpected error from steadyState solver:" +  e.Message);
     }
 }
 

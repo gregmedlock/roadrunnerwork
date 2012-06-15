@@ -343,7 +343,6 @@ void __stdcall printVector(RRDoubleVectorHandle vecHandle)
     stringstream ss;
     ss<<"vector dimension: "<<vec.Size<<" \n";
 
-    int index = 0;
     for(int index = 0; index < vec.Size; index++)
     {
         ss<<vec.Data[index];

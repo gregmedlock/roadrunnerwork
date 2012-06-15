@@ -89,7 +89,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
         int*                                    ctSize;             //Conservation totals
 
         double*                                 rateRules;          //additional rateRules
-        int                                     rateRulesSize;      //additional rateRules
+        int*                                    rateRulesSize;      //additional rateRules
 
         double*                                 eventTests;
         int*                                    eventTestsSize;
