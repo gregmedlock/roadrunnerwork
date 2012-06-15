@@ -91,14 +91,14 @@ object Form2: TForm2
     TabOrder = 5
     OnClick = btnGetReactionNamesClick
   end
-  object Button2: TButton
+  object btnGetAvailableSymbols: TButton
     Left = 135
     Top = 106
     Width = 121
     Height = 25
     Caption = 'Get Available Symbols'
     TabOrder = 6
-    OnClick = Button2Click
+    OnClick = btnGetAvailableSymbolsClick
   end
   object lstSummary: TListBox
     Left = 8

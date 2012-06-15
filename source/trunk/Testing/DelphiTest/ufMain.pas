@@ -15,7 +15,7 @@ type
     btnLoadSBML: TButton;
     grid: TStringGrid;
     btnGetReactionNames: TButton;
-    Button2: TButton;
+    btnGetAvailableSymbols: TButton;
     lstSummary: TListBox;
     btnSteadyState: TButton;
     lblBuildDate: TLabel;
@@ -23,7 +23,7 @@ type
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetReactionNamesClick(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    procedure btnGetAvailableSymbolsClick(Sender: TObject);
     procedure btnSteadyStateClick(Sender: TObject);
   private
     { Private declarations }
@@ -38,7 +38,7 @@ implementation
 
 {$R *.dfm}
 
-Uses uMatrix;
+Uses uMatrix, uRRList;
 
 procedure TForm2.btnGetCopyrightClick(Sender: TObject);
 begin
@@ -131,16 +131,20 @@ begin
      end;
 end;
 
-procedure TForm2.Button2Click(Sender: TObject);
-var x : TListOfLabeledStringLists; i, j : integer;
+procedure TForm2.btnGetAvailableSymbolsClick(Sender: TObject);
+var x, list : TRRList; i, j : integer;
 begin
   lstSummary.Clear;
   x := getAvailableSymbols;
-  for i := 0 to length (x) - 1 do
+  for i := 0 to x.count - 1 do
       begin
-      lstSummary.Items.Add (x[i].labeStr);
-      for j := 0 to x[i].stringList.Count - 1 do
-          lstSummary.Items.Add (x[i].stringList[j]);
+      lstSummary.Items.Add (x[i].getList[0].getString);   // Label
+      if x[i].getList.count > 1 then
+         begin
+         list := x[i].getList;
+         for j := 1 to list.Count - 1 do
+             lstSummary.Items.Add (list[j].getString);
+         end;
       end;
 end;
 
