@@ -32,7 +32,7 @@ type
 
 
   TRRStringList = record
-    labelStr : PAnsiChar;
+    count : integer;
     strList : TArrayOfPAnsiCharArray;
   end;
   PRRStringList = ^TRRStringList;
@@ -77,7 +77,7 @@ type
   TIntBoolFunc = function (value : integer) : bool; stdcall;   // bool func (double)
   TIntDoubleFunc = function (index : integer) : double; stdcall;
 
-  TVoidStringListFunc = function() : PRRLabeledStringList; stdcall;
+  TVoidStringListFunc = function() : PRRStringList; stdcall;
 
   TGetCopyright = TVoidCharFunc;
   TGetRRInstance = TPointerVoidFunc;
@@ -192,7 +192,7 @@ var DLLHandle : Cardinal;
 
 // Utility Routines
 // --------------------------------------------------------------
-function getArrayOfStrings (pList: PRRLabeledStringList) : TStringList;
+function getArrayOfStrings (pList: PRRStringList) : TStringList;
 var nStrings : integer;
     i, j : integer;
     element : PAnsiCharArray;
@@ -338,7 +338,7 @@ end;
 
 
 function getReactionNames : TStringList;
-var pList : PRRLabeledStringList;
+var pList : PRRStringList;
 begin
   pList := libGetReactionNames;
   try
@@ -360,7 +360,7 @@ begin
 end;
 
 function getBoundarySpeciesNames : TStringList;
-var p : PRRLabeledStringList;
+var p : PRRStringList;
 begin
   p := libGetBoundarySpeciesNames;
   try
@@ -371,7 +371,7 @@ begin
 end;
 
 function  getFloatingSpeciesNames : TStringList;
-var p : PRRLabeledStringList;
+var p : PRRStringList;
 begin
   p := libGetFloatingSpeciesNames;
   try
@@ -383,7 +383,7 @@ end;
 
 
 function getGlobalParameterNames : TStringList;
-var p : PRRLabeledStringList;
+var p : PRRStringList;
 begin
   p := libGetGlobalParameterNames;
   try
@@ -420,7 +420,7 @@ begin
     for i := 0 to p^.count - 1 do
         result[i] := p^.data[i];
   finally
-    // #### libFreeDoubleVector (p);
+    libFreeDoubleVector (p);
   end;
 end;
 
