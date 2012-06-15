@@ -2047,83 +2047,87 @@ StringList RoadRunner::getEigenValueNames()
 //        }
 //
 //        Help("Returns the selection list as returned by computeSteadyStateValues().")
-//        ArrayList RoadRunner::getSteadyStateSelectionList()
-//        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
-//
-//            if (_oSteadyStateSelection == null)
-//            {
-//                // default should be species only ...
-//                ArrayList floatingSpecies = getFloatingSpeciesNames();
-//                _oSteadyStateSelection = new TSelectionRecord[floatingSpecies.Count];
-//                for (int i = 0; i < floatingSpecies.Count; i++)
-//                {
-//                    _oSteadyStateSelection[i] = new TSelectionRecord
-//                                                    {
-//                                                        selectionType = TSelectionType::clFloatingSpecies,
-//                                                        p1 = (string) floatingSpecies[i],
-//                                                        index = i
-//                                                    };
-//                }
-//            }
-//
-//            ArrayList oFloating = mModelGenerator->getFloatingSpeciesConcentrationList();
-//            ArrayList oBoundary = mModelGenerator->getBoundarySpeciesList();
-//            ArrayList oFluxes = mModelGenerator->getReactionNames();
-//            ArrayList oVolumes = mModelGenerator->getCompartmentList();
-//            ArrayList oRates = getRateOfChangeNames();
-//            ArrayList oParameters = getParameterNames();
-//
-//            var result = new ArrayList();
-//            foreach (var record in _oSteadyStateSelection)
-//            {
-//                switch (record.selectionType)
-//                {
-//                    case TSelectionType::clTime:
-//                        result.Add("time");
-//                        break;
-//                    case TSelectionType::clBoundaryAmount:
-//                        result.Add(string.Format("[{0}]", oBoundary[record.index]));
-//                        break;
-//                    case TSelectionType::clBoundarySpecies:
-//                        result.Add(oBoundary[record.index]);
-//                        break;
-//                    case TSelectionType::clFloatingAmount:
-//                        result.Add("[" + (string)oFloating[record.index] + "]");
-//                        break;
-//                    case TSelectionType::clFloatingSpecies:
-//                        result.Add(oFloating[record.index]);
-//                        break;
-//                    case TSelectionType::clVolume:
-//                        result.Add(oVolumes[record.index]);
-//                        break;
-//                    case TSelectionType::clFlux:
-//                        result.Add(oFluxes[record.index]);
-//                        break;
-//                    case TSelectionType::clRateOfChange:
-//                        result.Add(oRates[record.index]);
-//                        break;
-//                    case TSelectionType::clParameter:
-//                        result.Add(oParameters[record.index]);
-//                        break;
-//                    case TSelectionType::clEigenValue:
-//                        result.Add("eigen_" + record.p1);
-//                        break;
-//                    case TSelectionType::clElasticity:
-//                        result.Add("EE:" + record.p1 + "," + record.p2);
-//                        break;
-//                    case TSelectionType::clUnscaledElasticity:
-//                        result.Add("uEE:" + record.p1 + "," + record.p2);
-//                        break;
-//                    case TSelectionType::clUnknown:
-//                        result.Add(record.p1);
-//                        break;
-//                }
-//
-//            }
-//
-//            return result ;
-//        }
+ArrayList RoadRunner::getSteadyStateSelectionList()
+{
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+//    if (mSteadyStateSelection == null)
+    {
+        // default should be species only ...
+        ArrayList floatingSpecies = getFloatingSpeciesNames();
+        mSteadyStateSelection.resize(floatingSpecies.Count());// = new TSelectionRecord[floatingSpecies.Count];
+        for (int i = 0; i < floatingSpecies.Count(); i++)
+        {
+            TSelectionRecord aRec;
+            aRec.selectionType = TSelectionType::clFloatingSpecies;
+            aRec.p1 = floatingSpecies[i].AsString();
+            aRec.index = i;
+            mSteadyStateSelection[i] = aRec;
+        }
+    }
+
+    ArrayList oFloating     = mModelGenerator->getFloatingSpeciesConcentrationList();
+    ArrayList oBoundary     = mModelGenerator->getBoundarySpeciesList();
+    ArrayList oFluxes       = mModelGenerator->getReactionNames();
+    ArrayList oVolumes      = mModelGenerator->getCompartmentList();
+    ArrayList oRates        = getRateOfChangeNames();
+    ArrayList oParameters   = getParameterNames();
+
+    ArrayList result;// = new ArrayList();
+//    foreach (var record in mSteadyStateSelection)
+    for(int i = 0; i < mSteadyStateSelection.size(); i++)
+    {
+        TSelectionRecord record = mSteadyStateSelection[i];
+        switch (record.selectionType)
+        {
+            case TSelectionType::clTime:
+                result.Add("time");
+            break;
+            case TSelectionType::clBoundaryAmount:
+                result.Add(Format("[{0}]", oBoundary[record.index].AsString()));
+            break;
+            case TSelectionType::clBoundarySpecies:
+                result.Add(oBoundary[record.index]);
+            break;
+            case TSelectionType::clFloatingAmount:
+                result.Add("[" + (string)oFloating[record.index].AsString() + "]");
+            break;
+            case TSelectionType::clFloatingSpecies:
+                result.Add(oFloating[record.index]);
+            break;
+            case TSelectionType::clVolume:
+                result.Add(oVolumes[record.index]);
+            break;
+            case TSelectionType::clFlux:
+                result.Add(oFluxes[record.index]);
+            break;
+            case TSelectionType::clRateOfChange:
+                result.Add(oRates[record.index]);
+            break;
+            case TSelectionType::clParameter:
+                result.Add(oParameters[record.index]);
+            break;
+            case TSelectionType::clEigenValue:
+                result.Add("eigen_" + record.p1);
+            break;
+            case TSelectionType::clElasticity:
+                result.Add("EE:" + record.p1 + "," + record.p2);
+            break;
+            case TSelectionType::clUnscaledElasticity:
+                result.Add("uEE:" + record.p1 + "," + record.p2);
+            break;
+            case TSelectionType::clUnknown:
+                result.Add(record.p1);
+                break;
+        }
+
+    }
+
+    return result ;
+}
 
 vector<TSelectionRecord> RoadRunner::GetSteadyStateSelection(const StringList& newSelectionList)
 {
@@ -2803,14 +2807,18 @@ int RoadRunner::getNumberOfFloatingSpecies()
 //        }
 //
 //        Help("returns an array of floating species initial conditions")
-//        double[] RoadRunner::getFloatingSpeciesInitialConcentrations()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            return mModel->init_y;
-//        }
-//
-//
+vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
+{
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+    vector<double> initYs;
+    CopyCArrayToStdVector(mModel->init_y, initYs, *mModel->init_ySize);
+    return initYs;
+}
+
+
 //        // This is a level 1 Method 1
 //        Help("Set the concentrations for all floating species in the model")
 //        void RoadRunner::setFloatingSpeciesConcentrations(double[] values)
@@ -4383,15 +4391,20 @@ void RoadRunner::changeInitialConditions(const vector<double>& ic)
 //        }
 //
 //        Help("Returns the current vector of reactions rates")
-//        double[] RoadRunner::getReactionRates()
-//        {
-//            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
-//            model.convertToConcentrations();
-//            model.computeReactionRates(0.0, model.y);
-//            return model.rates;
-//        }
-//
+vector<double> RoadRunner::getReactionRates()
+{
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+    mModel->convertToConcentrations();
+    mModel->computeReactionRates(0.0, mModel->y);
+
+    vector<double> _rates;
+    CopyCArrayToStdVector(mModel->rates, _rates, *mModel->ratesSize);
+    return _rates;
+}
+
 //        Help("Returns the current vector of rates of change")
 //        double[] RoadRunner::getRatesOfChange()
 //        {

@@ -310,6 +310,12 @@ bool ModelFromC::SetupDLLData()
         Log(lDebug)<<"Failed to assign to init_y";
     }
 
+    init_ySize       = (int*) GetProcAddress((HMODULE) mDLLHandle, "_init_ySize");
+    if(!init_ySize)
+    {
+        Log(lDebug)<<"Failed to assign to init_ySize";
+    }
+
     gp       = (double*) GetProcAddress((HMODULE) mDLLHandle, "_gp");
     if(!gp)
     {

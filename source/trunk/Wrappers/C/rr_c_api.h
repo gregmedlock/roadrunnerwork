@@ -29,7 +29,7 @@ C_DECL_SPEC bool                    __stdcall   setTimeStart(double timeStart);
 C_DECL_SPEC bool                    __stdcall   setTimeEnd(double timeEnd);
 C_DECL_SPEC bool                    __stdcall   setNumPoints(int nrPoints);
 C_DECL_SPEC bool                    __stdcall   setSelectionList(const char* list);
-C_DECL_SPEC RRStringListHandle      __stdcall   getSelectionList(); 
+C_DECL_SPEC RRStringListHandle      __stdcall   getSelectionList();
 C_DECL_SPEC RRResultHandle          __stdcall   simulate(void);
 C_DECL_SPEC RRResultHandle          __stdcall   simulateEx(const double& timeStart, const double& timeEnd, const int& numberOfPoints);
 C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTime, const double& stepSize);
@@ -38,7 +38,7 @@ C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTim
 C_DECL_SPEC double                  __stdcall   steadyState();
 C_DECL_SPEC RRDoubleVectorHandle    __stdcall   computeSteadyStateValues();
 C_DECL_SPEC bool                    __stdcall   setSteadyStateSelectionList(char *);
-C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList(); 
+C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
 
 C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
@@ -49,20 +49,19 @@ C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, 
 
 // Stoichiometry Methods
 C_DECL_SPEC RRDataMatrixHandle      __stdcall   getStoichiometryMatrix(void);
-C_DECL_SPEC void                    __stdcall   printMatrix(RRDataMatrixHandle mat);
 
 // Error handling
 C_DECL_SPEC bool                    __stdcall   hasError();
 C_DECL_SPEC char*                   __stdcall   getLastError();
 
 C_DECL_SPEC bool                    __stdcall   reset();
-C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRDoubleVector* vec); 
-C_DECL_SPEC RRDoubleVectorHandle    __stccall   getFloatingSpeciesInitialConcentrations (void);  
+C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRDoubleVector* vec);
+C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getFloatingSpeciesInitialConcentrations (void);
 
 // Reaction Rates
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
 C_DECL_SPEC double                  __stdcall   getReactionRate(int);
-C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getReactionRates(); 
+C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getReactionRates();
 
 // get Number Family
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
@@ -72,10 +71,14 @@ C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameterNames(
 
 // get Names Family
 C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);
-C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames(); 
-C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();        
+C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames();
+C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getGlobalParameterNames();
 C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();              // <- You'll have to decide what type to return
+
+// Print functions
+C_DECL_SPEC void                    __stdcall   printMatrix(RRDataMatrixHandle mat);
+C_DECL_SPEC void                    __stdcall   printVector(RRDoubleVectorHandle vec);
 
 // Free memory functions
 C_DECL_SPEC void                    __stdcall   freeRRInstance(RRHandle handle);

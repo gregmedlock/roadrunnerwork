@@ -56,16 +56,16 @@ class RR_DECLSPEC ModelFromC : public rrObject
         void                                    SetTime(double _time);
         double                                  GetTime();
 
-        double*                                 y;             //Corresponds to y in IModel
-        int*                                    ySize;             //Corresponds to y in IModel
+        double*                                 y;                  //Corresponds to y in IModel
+        int*                                    ySize;              //Corresponds to y in IModel
 
         double*                                 init_y;
         int*                                    init_ySize;
 
         double*                                 dydt;               //This is the "dydt" data in the DLL.
-        int*                                    dydtSize;               //This is the "dydt" data in the DLL.
+        int*                                    dydtSize;           //This is the "dydt" data in the DLL.
 
-        double*                                 amounts;        //This is the "amounts" data in the DLL.
+        double*                                 amounts;            //This is the "amounts" data in the DLL.
         int*                                    amountsSize;
 
         double*                                 bc;
@@ -77,24 +77,24 @@ class RR_DECLSPEC ModelFromC : public rrObject
         double*                                 gp;
         int*                                    gpSize;
 
-//        vector<double>                        lp ;            //Local parameters
+//        vector<double>                        lp ;                //Local parameters
 
-        double*                                 c;                //Compartment volumes
-        int*									cSize;                //Compartment volumes
+        double*                                 c;                  //Compartment volumes
+        int*                                    cSize;              //Compartment volumes
 
         double*                                 rates;
         int*                                    ratesSize;
 
-        double*                                 ct;             //Conservation totals
-        int*                                    ctSize;            //Conservation totals
+        double*                                 ct;                 //Conservation totals
+        int*                                    ctSize;             //Conservation totals
 
-        double*                                 rateRules;        //additional rateRules
-        int                                     rateRulesSize;    //additional rateRules
+        double*                                 rateRules;          //additional rateRules
+        int                                     rateRulesSize;      //additional rateRules
 
         double*                                 eventTests;
         int*                                    eventTestsSize;
 //        vector<double>                        eventPriorities;
-        TEventDelayDelegate*                    eventDelays;        //
+        TEventDelayDelegate*                    eventDelays;
         bool*                                   eventType;
         int*                                    eventTypeSize;
         bool*                                   eventPersistentType;

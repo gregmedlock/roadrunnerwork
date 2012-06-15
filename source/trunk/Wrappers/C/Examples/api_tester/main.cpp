@@ -2,7 +2,7 @@
 #pragma hdrstop
 #include <iostream>
 #include <string>
-#include <string.h>
+#include <vector>
 #include "rr_c_api.h"
 //---------------------------------------------------------------------------
 
@@ -26,14 +26,6 @@ int main()
         cout<<"Build date: "<<text<<endl;
         freeText(text);
     }
-
-    text = getCopyright();
-    if(hasError())
-    {
-        char* error = getLastError();
-        cout<<error<<endl;
-    }
-
 
     string xmlFileName = "..\\Models\\feedback.xml";
     if(!loadSBMLFromFile(xmlFileName.c_str()))
@@ -80,14 +72,27 @@ int main()
         }
     }
 
-    cout<<text;
+    reset();
+//    steadyState();
+
+    RRDoubleVectorHandle concs = getFloatingSpeciesInitialConcentrations();
+    printVector(concs);
+    freeRRDoubleVector(concs);
+
+
+    text = getCopyright();
+    if(hasError())
+    {
+        char* error = getLastError();
+        cout<<error<<endl;
+    }
+
+    cout<<text<<endl;
+
     freeText(text);
 
-    reset();
-    steadyState();
 
     freeRRInstance(rrHandle);
-
     return 0;
 }
 

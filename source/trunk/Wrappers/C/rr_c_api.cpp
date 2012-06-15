@@ -152,7 +152,7 @@ RRStringListHandle __stdcall getSelectionList()
         return NULL;
     }
 
-    StringList sNames = gRRHandle->getSelectionList);
+    StringList sNames = gRRHandle->getSelectionList();
  
     if(!sNames.Count())
     {
@@ -325,6 +325,35 @@ void __stdcall printMatrix(RRDataMatrixHandle matrixHandle)
         }
         ss<<endl;
     }
+    cout<<ss.str();
+}
+
+void __stdcall printVector(RRDoubleVectorHandle vecHandle)
+{
+    gLog.SetCutOffLogLevel(lDebug2);
+
+    if(!vecHandle)
+    {
+        Log(lInfo)<<"Null vector in printMatrix...";
+        return;
+    }
+
+    RRDoubleVector& vec = *vecHandle;
+
+    stringstream ss;
+    ss<<"vector dimension: "<<vec.Size<<" \n";
+
+    int index = 0;
+    for(int index = 0; index < vec.Size; index++)
+    {
+        ss<<vec.Data[index];
+        if(index < vec.Size + 1)
+        {
+            ss<<"\t";
+        }
+    }
+    ss<<endl;
+
     cout<<ss.str();
 }
 
@@ -519,7 +548,8 @@ RRDoubleVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
         SetAPIError(ALLOCATE_API_ERROR_MSG);
         return false;
     }
-    vector<double> vec =  gRRHandle->getFloatingSpeciesInitialConcentrations
+
+    vector<double> vec =  gRRHandle->getFloatingSpeciesInitialConcentrations();
 
     RRDoubleVector* aVec = CreateRRDoubleVecFrom(vec);
     return aVec;
@@ -616,7 +646,7 @@ RRStringListHandle __stdcall getSteadyStateSelectionList()
         return NULL;
     }
 
-    StringList sNames = gRRHandle->getSteadyStateSelectionList);
+    ArrayList sNames = gRRHandle->getSteadyStateSelectionList();
  
     if(!sNames.Count())
     {
@@ -630,7 +660,7 @@ RRStringListHandle __stdcall getSteadyStateSelectionList()
     for(int i = 0; i < list->Count; i++)
     {
         list->String[i] = new char[sNames[i].size()];
-        strcpy(list->String[i], sNames[i].c_str());
+        strcpy(list->String[i], sNames[i].AsString().c_str());
     }
 
     return list;       
