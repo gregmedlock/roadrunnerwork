@@ -38,16 +38,14 @@ C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTim
 C_DECL_SPEC double                  __stdcall   steadyState();
 C_DECL_SPEC RRDoubleVectorHandle    __stdcall   computeSteadyStateValues();
 C_DECL_SPEC bool                    __stdcall   setSteadyStateSelectionList(char *);
-//C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
+//C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList(); <- to be added
 
 C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
 
-C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);
-
-// Jacobian Methods
-//C_DECL_SPEC RRDataMatrixHandle      __stdcall   getFullJacobian(void); 
-//C_DECL_SPEC RRDataMatrixHandle      __stdcall   getReducedJacobian(void); 
+// Jacobian Matrix Methods
+//C_DECL_SPEC RRDataMatrixHandle      __stdcall   getFullJacobian(void);  <- to be added
+//C_DECL_SPEC RRDataMatrixHandle      __stdcall   getReducedJacobian(void);  <- to be added
 
 // Stoichiometry Methods
 C_DECL_SPEC RRDataMatrixHandle      __stdcall   getStoichiometryMatrix(void);
@@ -58,18 +56,26 @@ C_DECL_SPEC bool                    __stdcall   hasError();
 C_DECL_SPEC char*                   __stdcall   getLastError();
 
 C_DECL_SPEC bool                    __stdcall   reset();
-C_DECL_SPEC bool                    __stdcall   setInitialConditions(RRDoubleVector* vec);    
+C_DECL_SPEC bool                    __stdcall   setInitialConditions(RRDoubleVector* vec); <- rename to setFloatingSpeciesInitialConcentrations
+// C_DECL_SPEC RRDoubleVectorHandle __stccall   getFloatingSpeciesInitialConcentrations (void);  <- to be added  
+
+// Reaction Rates
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
 C_DECL_SPEC double                  __stdcall   getReactionRate(int);
+//C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getReactionRates(); <- to be added
+
+// get Number Family
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
-C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames(); 
-C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();        
 C_DECL_SPEC int                     __stdcall   getNumberOfFloatingSpecies();
 C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameters();
 C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameterNames();
+
+// get Names Family
+C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);
+C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames(); 
+C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();        
 C_DECL_SPEC RRStringListHandle      __stdcall   getGlobalParameterNames();
 C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();              // <- You'll have to decide what type to return
-
 
 // Free memory functions
 C_DECL_SPEC void                    __stdcall   freeRRInstance(RRHandle handle);
