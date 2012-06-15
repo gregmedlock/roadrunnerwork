@@ -10,15 +10,17 @@ if(${MSVC})
 endif(${MSVC})
 
 set(examples 	
-		rr_c  #not sure why this one don't get access to GetOption funcs in roadrunner lib?
+		rr_c  
         api_tester
-#		simulate_sbml
 )
 
 foreach(example ${examples})
  	add_subdirectory(${example})
 	FILE (GLOB hdrs ${example}/*.h)
- 	install (FILES ${hdrs} 						DESTINATION Examples/C_API/${example}	COMPONENT example_files)
+ 	install (FILES ${hdrs} 						
+                DESTINATION Examples/C_API/${example}	
+                COMPONENT example_files)
+
 	FILE (GLOB src ${example}/*.c)
  	install (FILES ${src} 						DESTINATION Examples/C_API/${example}	COMPONENT example_files)
  	install (FILES ${example}/Readme.txt 		DESTINATION Examples/C_API/${example}	COMPONENT example_files)

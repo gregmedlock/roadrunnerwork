@@ -56,8 +56,8 @@ C_DECL_SPEC bool                    __stdcall   hasError();
 C_DECL_SPEC char*                   __stdcall   getLastError();
 
 C_DECL_SPEC bool                    __stdcall   reset();
-C_DECL_SPEC bool                    __stdcall   setInitialConditions(RRDoubleVector* vec); <- rename to setFloatingSpeciesInitialConcentrations
-// C_DECL_SPEC RRDoubleVectorHandle __stccall   getFloatingSpeciesInitialConcentrations (void);  <- to be added  
+C_DECL_SPEC bool                    __stdcall   setInitialConditions(RRDoubleVector* vec); //<- rename to setFloatingSpeciesInitialConcentrations
+// C_DECL_SPEC RRDoubleVectorHandle __stccall   getFloatingSpeciesInitialConcentrations (void);  <- to be added
 
 // Reaction Rates
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();

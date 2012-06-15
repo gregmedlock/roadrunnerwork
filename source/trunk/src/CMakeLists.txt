@@ -63,12 +63,12 @@ rrNLEQInterface.cpp
 rrLibStructSupport.cpp
 rrInteropUtils.cpp
 rrDLLEntry.cpp
-libstruct/complex.cpp
-libstruct/libla.cpp
-libstruct/libstructural.cpp
-libstruct/matrix.cpp
-libstruct/sbmlmodel.cpp
-libstruct/util.cpp
+libstruct/lsComplex.cpp
+libstruct/lsLibla.cpp
+libstruct/lsLibstructural.cpp
+libstruct/lsMatrix.cpp
+libstruct/lsSBMLModel.cpp
+libstruct/lsUtil.cpp
 )
 
 #Build both static and shared version

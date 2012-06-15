@@ -177,22 +177,22 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         //public bool[] GetCopy(bool[] oVector);
 
 
-        bool                     HaveVariables();
-        void                     InitializeCVODEInterface(ModelFromC *oModel);
+        bool                        HaveVariables();
+        void                        InitializeCVODEInterface(ModelFromC *oModel);
 //        internal static CvodeErrorCodes[] errorCodes = InitilizeErrorCodes();
 //        internal static CvodeErrorCodes[] InitilizeErrorCodes();
 
-        double                     lastEvent;
+        double                      lastEvent;
 //        //internal List<double> eventOccurance = new List<double>();
-        double                     OneStep(double timeStart, double hstep);
+        double                      OneStep(double timeStart, double hstep);
 
         // Restart the simulation using a different initial condition
-        void                       AssignNewVector(ModelFromC *oModel, bool bAssignNewTolerances);
-        void                       AssignNewVector(ModelFromC *model);
-        void                     setAbsTolerance(int index, double dValue);
-        int                     reStart(double timeStart, ModelFromC* model);
+        void                        AssignNewVector(ModelFromC *oModel, bool bAssignNewTolerances);
+        void                        AssignNewVector(ModelFromC *model);
+        void                        setAbsTolerance(int index, double dValue);
+        int                         reStart(double timeStart, ModelFromC* model);
 //        public double getValue(int index);
-        vector<double>             BuildEvalArgument();
+        vector<double>              BuildEvalArgument();
 
 };    //class
 }//namespace rr

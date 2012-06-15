@@ -4,7 +4,6 @@
 #include "rrObject.h"
 #include "rrModelFromC.h"
 using std::vector;
-//class IModel;
 
 namespace rr
 {
@@ -19,6 +18,9 @@ class RR_DECLSPEC ISteadyStateSolver : public rrObject
     public:
         virtual double solve(const vector<double>& yin) = 0;
 };
+
+typedef long* IntPtr;
+void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);
 
 class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
 {

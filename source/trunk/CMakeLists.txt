@@ -98,7 +98,6 @@ link_directories(					${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib)
 link_directories(					${CLAPACK_BUILD_FOLDER}/SRC)
 link_directories(					${CLAPACK_BUILD_FOLDER}/BLAS/SRC)
 link_directories(					${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c)
-link_directories(					C:/rrBuilds/libsbml/src)
 
 if(${MSVC})
 add_definitions(-DCRT_NONSTDC_NO_DEPRECATE)

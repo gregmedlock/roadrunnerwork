@@ -1899,34 +1899,34 @@ ArrayList RoadRunner::getElasticityCoefficientNames()
 
     for(int i = 0; i < reactionNames.size(); i++)
     {
-        string s = reactionNames[i];
+        string aString = reactionNames[i];
 
         ArrayList oCCReaction;
         StringList oInner;
-        oCCReaction.Add(s);
+        oCCReaction.Add(aString);
 
         for(int j = 0; j < floatingSpeciesNames.size(); j++)
         {
             string variable = floatingSpeciesNames[j];
-            oInner.Add(Format("EE:{0},{1}", s, variable));
+            oInner.Add(Format("EE:{0},{1}", aString, variable));
         }
 
         for(int j = 0; j < boundarySpeciesNames.size(); j++)
         {
             string variable = boundarySpeciesNames[j];
-            oInner.Add(Format("EE:{0},{1}", s, variable));
+            oInner.Add(Format("EE:{0},{1}", aString, variable));
         }
 
         for(int j = 0; j < globalParameterNames.size(); j++)
         {
             string variable = globalParameterNames[j];
-            oInner.Add(Format("EE:{0},{1}", s, variable));
+            oInner.Add(Format("EE:{0},{1}", aString, variable));
         }
 
         for(int j = 0; j < conservationNames.size(); j++)
         {
             string variable = conservationNames[j];
-            oInner.Add(Format("EE:{0},{1}", s, variable));
+            oInner.Add(Format("EE:{0},{1}", aString, variable));
         }
 
         oCCReaction.Add(oInner);
@@ -1954,37 +1954,37 @@ ArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
 //    foreach (string s in oReactions)
     for(int i = 0; i < oReactions.size(); i++)
     {
-        string s = oReactions[i];
+        string aString = oReactions[i];
         ArrayList oCCReaction;// = new ArrayList();
         StringList oInner;// = new ArrayList();
-        oCCReaction.Add(s);
+        oCCReaction.Add(aString);
 
 //        foreach (string variable in oFloating)
         for(int j = 0; j < oFloating.size(); j++)
         {
             string variable = oFloating[j];
-            oInner.Add(Format("uEE:{0},{1}", s, variable));
+            oInner.Add(Format("uEE:{0},{1}", aString, variable));
         }
 
 //        foreach (string variable in oBoundary)
         for(int j = 0; j < oBoundary.size(); j++)
         {
             string variable = oBoundary[j];
-            oInner.Add(Format("uEE:{0},{1}", s, variable));
+            oInner.Add(Format("uEE:{0},{1}", aString, variable));
         }
 
 //        foreach (string variable in oGlobalParameters)
         for(int j = 0; j < oGlobalParameters.size(); j++)
         {
             string variable = oGlobalParameters[j];
-            oInner.Add(Format("uEE:{0},{1}", s, variable));
+            oInner.Add(Format("uEE:{0},{1}", aString, variable));
         }
 
 //        foreach (string variable in oConservation)
         for(int j = 0; j < oConservation.size(); j++)
         {
             string variable = oConservation[j];
-            oInner.Add(Format("uEE:{0},{1}", s, variable));
+            oInner.Add(Format("uEE:{0},{1}", aString, variable));
         }
 
         oCCReaction.Add(oInner);

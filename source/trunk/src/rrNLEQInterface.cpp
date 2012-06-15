@@ -134,21 +134,35 @@ nOpts(50)
         LIWK = n + 52;
 
         XScal.resize(n);// = new double[n];
-        IWK.resize(LIWK);// = new int[LIWK];
-        RWK.resize(LWRK);// = new double[LWRK];
-
         // Set up default scaling factors
-        for (int i = 0; i < n; i++) XScal[i] = 1.0;
+        for (int i = 0; i < n; i++)
+        {
+            XScal[i] = 1.0;
+        }
 
-        for (int i = 0; i < nOpts; i++) iopt[i] = 0;
+        iopt.resize(nOpts);
+        for (int i = 0; i < nOpts; i++)
+        {
+            iopt[i] = 0;
+        }
+
         iopt[31 - 1] = 4; // Set for Highly nonlinear problem
 
+
         // Initialise all array elements to 0.0
+        IWK.resize(LIWK);// = new int[LIWK];
         for (int i = 0; i < LIWK; i++)
+        {
             IWK[i] = 0;
+        }
         IWK[31 - 1] = maxIterations; // Max iterations
+
+
+        RWK.resize(LWRK);// = new double[LWRK];
         for (int i = 0; i < LWRK; i++)
+        {
             RWK[i] = 0.0;
+        }
         RWK[22 - 1] = 1E-16; // Minimal allowed damping factor
     }
     catch (Exception &e)
@@ -218,46 +232,46 @@ nOpts(50)
 ////        /// <param name="y"></param>
 ////        /// <param name="fval"></param>
 ////        /// <param name="pErr"></param>
-////        private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
-////        {
-////            if (model == null)
-////            {
-////                var temp = new double[n];
-////                Marshal.Copy(temp, 0, fval, n);
-////                Marshal.WriteInt32(pErr, 0);
-////                return;
-////            }
-////
-////
-////            try
-////            {
-////                Marshal.Copy(y, model->amounts, 0, n);
-////                var dTemp = new double[model->amounts.Length + model->rateRules.Length];
-////                model->rateRules.CopyTo(dTemp, 0);
-////                model->amounts.CopyTo(dTemp, model->rateRules.Length);
-////                model->evalModel(0.0, dTemp);
-////                //                bool bError = false;
-////
-////                //                for (int i = 0; i < model->amounts.Length; i++)
-////                //                    if (model->amounts[i] < 0)
-////                //                    {
-////                //                        bError = true;
-////                //                        break;
-////                //                    }
-////                //
-////
-////                Marshal.Copy(model->dydt, 0, fval, n);
-////                //                if (bError)
-////                //                    Marshal.WriteInt32(pErr, -1);
-////                //                else
-////                Marshal.WriteInt32(pErr, 0);
-////            }
-////            catch (Exception)
-////            {
-////            }
-////        }
-////
-////
+void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
+{
+//    if (model == null)
+//    {
+//        var temp = new double[n];
+//        Marshal.Copy(temp, 0, fval, n);
+//        Marshal.WriteInt32(pErr, 0);
+//        return;
+//    }
+//
+//
+//    try
+//    {
+//        Marshal.Copy(y, model->amounts, 0, n);
+//        var dTemp = new double[model->amounts.Length + model->rateRules.Length];
+//        model->rateRules.CopyTo(dTemp, 0);
+//        model->amounts.CopyTo(dTemp, model->rateRules.Length);
+//        model->evalModel(0.0, dTemp);
+//        //                bool bError = false;
+//
+//        //                for (int i = 0; i < model->amounts.Length; i++)
+//        //                    if (model->amounts[i] < 0)
+//        //                    {
+//        //                        bError = true;
+//        //                        break;
+//        //                    }
+//        //
+//
+//        Marshal.Copy(model->dydt, 0, fval, n);
+//        //                if (bError)
+//        //                    Marshal.WriteInt32(pErr, -1);
+//        //                else
+//        Marshal.WriteInt32(pErr, 0);
+//    }
+//    catch (Exception)
+//    {
+//    }
+}
+
+
 ////        /// <summary>
 ////        /// Sets the Scaling Factors
 ////        /// </summary>
@@ -345,24 +359,38 @@ double NLEQInterface::solve(const vector<double>& yin)
         IWK[31 - 1] = maxIterations; // Max iterations
 
         // Set up default scaling factors
-        for (int i = 0; i < n; i++) XScal[i] = 1.0;
+        for (int i = 0; i < n; i++)
+        {
+            XScal[i] = 1.0;
+        }
 
-        for (int i = 0; i < nOpts; i++) iopt[i] = 0;
+        for (int i = 0; i < nOpts; i++)
+        {
+            iopt[i] = 0;
+        }
+
         iopt[31 - 1] = 3; // Set for Highly nonlinear problem
 
         // Initialise all array elements to 0.0
         for (int i = 0; i < LIWK; i++)
+        {
             IWK[i] = 0;
+        }
+
         IWK[31 - 1] = maxIterations; // Max iterations
         for (int i = 0; i < LWRK; i++)
+        {
             RWK[i] = 0.0;
+        }
+
         RWK[22 - 1] = 1E-20; // Minimal allowed damping factor
 
         // For some reason NLEQ modifies the tolerance value, use a local copy instead
         double tmpTol = relativeTolerance;
 
         //This is a DLL' imported function..? //Todo: enable..
-//        NLEQ1(ref n, fcn, null, model->amounts, XScal, ref tmpTol, iopt, ref ierr, ref LIWK, IWK, ref LWRK, RWK);
+        //NLEQ1(ref n, fcn, null, model->amounts, XScal, ref tmpTol, iopt, ref ierr, ref LIWK, IWK, ref LWRK, RWK);
+//        NLEQ1(n, fcn, null, model->amounts, XScal, tmpTol, iopt, ierr, LIWK, IWK, LWRK, RWK);
 
         if (ierr == 2) // retry
         {
@@ -378,13 +406,9 @@ double NLEQInterface::solve(const vector<double>& yin)
         ThrowErrorForStatus();
         return ComputeSumsOfSquares();
     }
-    catch (NLEQException)
+    catch (Exception &e)
     {
-        throw;
-    }
-    catch (Exception e)
-    {
-        throw new SBWException("Unexpected error from solve routine of NLEQ: " + e.Message);
+        throw SBWException("Unexpected error from solve routine of NLEQ: " + e.Message);
     }
 }
 
