@@ -454,7 +454,7 @@ RRStringListHandle __stdcall getGlobalParameterNames()
     return list;
 }
 
-bool __stdcall setInitialConditions(RRDoubleVector* vec)     // <- might be called changeInitialConditions in roadRunner
+bool __stdcall setFloatingSpeciesInitialConcentrations(RRDoubleVector* vec)   
 {
     if(!gRRHandle)
     {

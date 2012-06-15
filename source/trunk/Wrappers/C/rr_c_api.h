@@ -29,7 +29,7 @@ C_DECL_SPEC bool                    __stdcall   setTimeStart(double timeStart);
 C_DECL_SPEC bool                    __stdcall   setTimeEnd(double timeEnd);
 C_DECL_SPEC bool                    __stdcall   setNumPoints(int nrPoints);
 C_DECL_SPEC bool                    __stdcall   setSelectionList(const char* list);
-// C_DECL_SPEC RRStringListHandle      __stdcall   getSelectionList(); <- to be added
+C_DECL_SPEC RRStringListHandle      __stdcall   getSelectionList(); 
 C_DECL_SPEC RRResultHandle          __stdcall   simulate(void);
 C_DECL_SPEC RRResultHandle          __stdcall   simulateEx(const double& timeStart, const double& timeEnd, const int& numberOfPoints);
 C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTime, const double& stepSize);
@@ -56,7 +56,7 @@ C_DECL_SPEC bool                    __stdcall   hasError();
 C_DECL_SPEC char*                   __stdcall   getLastError();
 
 C_DECL_SPEC bool                    __stdcall   reset();
-C_DECL_SPEC bool                    __stdcall   setInitialConditions(RRDoubleVector* vec); //<- rename to setFloatingSpeciesInitialConcentrations
+C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRDoubleVector* vec); 
 // C_DECL_SPEC RRDoubleVectorHandle __stccall   getFloatingSpeciesInitialConcentrations (void);  <- to be added
 
 // Reaction Rates
