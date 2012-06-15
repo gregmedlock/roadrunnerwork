@@ -9,6 +9,7 @@
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 //---------------------------------------------------------------------------
+#include "nleq1.h"
 
 namespace rr
 {
@@ -232,7 +233,13 @@ nOpts(50)
 ////        /// <param name="y"></param>
 ////        /// <param name="fval"></param>
 ////        /// <param name="pErr"></param>
-void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
+
+int NLEQModelFcn(...)
+{
+    return -1;
+}
+
+int NLEQModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
 {
 //    if (model == null)
 //    {
@@ -269,6 +276,7 @@ void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
 //    catch (Exception)
 //    {
 //    }
+    return -1;
 }
 
 
@@ -390,7 +398,24 @@ double NLEQInterface::solve(const vector<double>& yin)
 
         //This is a DLL' imported function..? //Todo: enable..
         //NLEQ1(ref n, fcn, null, model->amounts, XScal, ref tmpTol, iopt, ref ierr, ref LIWK, IWK, ref LWRK, RWK);
-//        NLEQ1(n, fcn, null, model->amounts, XScal, tmpTol, iopt, ierr, LIWK, IWK, LWRK, RWK);
+        //void* fcn;
+        double* dvXScal;
+        long*   lviopt;
+        long*   lvIWK;
+        double dvRWK;
+//        NLEQ1(&n, &NLEQModelFcn, NULL, model->amounts, XScal, tmpTol, iopt, ierr, LIWK, IWK, LWRK, RWK);
+        NLEQ1(      &n,
+                    &NLEQModelFcn,
+                    NULL,
+                    model->amounts,
+                    dvXScal,
+                    &tmpTol,
+                    lviopt,
+                    &ierr,
+                    &LIWK,
+                    lvIWK,
+                    &LWRK,
+                    &dvRWK);
 
         if (ierr == 2) // retry
         {

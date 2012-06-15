@@ -20,21 +20,22 @@ class RR_DECLSPEC ISteadyStateSolver : public rrObject
 };
 
 typedef long* IntPtr;
-void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);
+int NLEQModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);
+int NLEQModelFcn(...);
 
 class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
 {
     protected:
             int                         nOpts;
             vector<int>                 IWK;
-            int                         LIWK;
-            int                         LWRK;
+            long                        LIWK;
+            long                        LWRK;
             vector<double>              RWK;
             vector<double>              XScal;
-            int                         ierr;
+            long                        ierr;
             vector<int>                 iopt;    // = new int[nOpts];
             ModelFromC                 *model;     // Model generated from the SBML
-            int                         n;
+            long                         n;
 
 //        /// <summary>
 //        /// This function test Nleq by running it to see whether it would be working.
