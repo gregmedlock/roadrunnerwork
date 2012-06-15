@@ -81,17 +81,31 @@ begin
   lstSummary.Items.Add ('Number of Reactions: ' + inttostr (getNumberOfReactions));
   lstSummary.Items.Add ('Number of Boundary Species: ' + inttostr (getNumberOfBoundarySpecies));
   lstSummary.Items.Add ('Number of Floating Species: ' + inttostr (getNumberOfFloatingSpecies));
-  //lstSummary.Items.Add ('Number of Parameters: ' + inttostr (getNumberOfGlobalParameters));
+  lstSummary.Items.Add ('Number of Global Parameters: ' + inttostr (getNumberOfGlobalParameters));
+  lstSummary.Items.Add ('');
   list := getReactionNames;
   for i := 0 to list.Count - 1 do
       lstSummary.Items.Add ('Reaction Name: ' + list[i]);
   list.Free;
+  lstSummary.Items.Add ('');
+
   list := getBoundarySpeciesNames;
   for i := 0 to list.Count - 1 do
       lstSummary.Items.Add ('Boundary Species Name: ' + list[i]);
+  list.Free;
+  lstSummary.Items.Add ('');
+
   list := getFloatingSpeciesNames;
   for i := 0 to list.Count - 1 do
       lstSummary.Items.Add ('Floating Species Name: ' + list[i]);
+  list.Free;
+  lstSummary.Items.Add ('');
+
+  list := getGlobalParameterNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Global Parameter Name: ' + list[i]);
+  lstSummary.Items.Add ('');
+  list.Free;
 end;
 
 
@@ -120,6 +134,7 @@ end;
 procedure TForm2.Button2Click(Sender: TObject);
 var x : TListOfLabeledStringLists; i, j : integer;
 begin
+  lstSummary.Clear;
   x := getAvailableSymbols;
   for i := 0 to length (x) - 1 do
       begin

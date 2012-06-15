@@ -12,6 +12,9 @@ object Form2: TForm2
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  DesignSize = (
+    700
+    522)
   PixelsPerInch = 96
   TextHeight = 13
   object lblBuildDate: TLabel
@@ -102,6 +105,7 @@ object Form2: TForm2
     Top = 199
     Width = 248
     Height = 276
+    Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 13
     TabOrder = 7
   end
