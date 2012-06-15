@@ -130,6 +130,7 @@ bool __stdcall setNumPoints(int nrPoints)
     return true;
 }
 
+
 bool  __stdcall setSelectionList(const char* list)
 {
     if(!gRRHandle)
@@ -140,6 +141,35 @@ bool  __stdcall setSelectionList(const char* list)
 
     gRRHandle->setSelectionList(list);
     return true;
+}
+
+
+RRStringListHandle __stdcall getSelectionList()
+{
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return NULL;
+    }
+
+    StringList sNames = gRRHandle->getSelectionList);
+ 
+    if(!sNames.Count())
+    {
+        return NULL;
+    }
+
+    RRStringListHandle list = new RRStringList;
+    list->Count = sNames.size();
+    list->String = new char*[list->Count];
+
+    for(int i = 0; i < list->Count; i++)
+    {
+        list->String[i] = new char[sNames[i].size()];
+        strcpy(list->String[i], sNames[i].c_str());
+    }
+
+    return list;       
 }
 
 RRResultHandle __stdcall simulate(void)
@@ -550,6 +580,35 @@ bool __stdcall setSteadyStateSelectionList(char* list)
     gRRHandle->setSteadyStateSelectionList(aList);
     return true;
 }
+
+RRStringListHandle __stdcall getSteadyStateSelectionList()
+{
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return NULL;
+    }
+
+    StringList sNames = gRRHandle->getSteadyStateSelectionList);
+ 
+    if(!sNames.Count())
+    {
+        return NULL;
+    }
+
+    RRStringListHandle list = new RRStringList;
+    list->Count = sNames.size();
+    list->String = new char*[list->Count];
+
+    for(int i = 0; i < list->Count; i++)
+    {
+        list->String[i] = new char[sNames[i].size()];
+        strcpy(list->String[i], sNames[i].c_str());
+    }
+
+    return list;       
+}
+
 
 //Free Functions
 void __stdcall freeRRInstance(RRHandle handle)

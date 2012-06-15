@@ -38,7 +38,7 @@ C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTim
 C_DECL_SPEC double                  __stdcall   steadyState();
 C_DECL_SPEC RRDoubleVectorHandle    __stdcall   computeSteadyStateValues();
 C_DECL_SPEC bool                    __stdcall   setSteadyStateSelectionList(char *);
-//C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList(); <- to be added
+C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList(); 
 
 C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
