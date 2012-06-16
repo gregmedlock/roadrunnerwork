@@ -1,7 +1,6 @@
 unit uRoadRunnerAPI;
 
-{
-   Copyright 2012 Herbert M Sauro
+{ Copyright 2012 Herbert M Sauro
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -137,6 +136,8 @@ var
    setNumberOfPoints : TSetNumPoints;
 
 function  hasError : boolean;
+function  getRRInstance : Pointer;
+procedure freeRRInstance;
 function  getLastError : AnsiString;
 function  getBuildDate : AnsiString;
 function  getCopyright : AnsiString;
@@ -178,7 +179,7 @@ type
 
 var DLLHandle : Cardinal;
     libName : AnsiString = 'rr_c_API.dll';
-    instance : Pointer;
+    instance : Pointer = nil;
 
     libLoadSBML : TCharBoolFunc;            //
     libLoadSBMLFromFile : TCharBoolFunc;    //
@@ -248,6 +249,18 @@ end;
 // For doumentation, see the C API docs at:
 //   http://code.google.com/p/roadrunnerwork/
 // --------------------------------------------------------------
+
+function getRRInstance : Pointer;
+begin
+  result := libGetRRInstance;
+end;
+
+procedure freeRRInstance;
+begin
+  if instance <> nil then
+     libFreeRRInstance (instance);
+end;
+
 
 function getBuildDate : AnsiString;
 begin
@@ -398,7 +411,10 @@ var p : PRRStringList;
 begin
   p := libGetBoundarySpeciesNames;
   try
-    result := getArrayOfStrings(p);
+    if p = nil then
+       result := TStringList.Create
+    else
+       result := getArrayOfStrings(p);
   finally
     libFreeStringList (p);
   end;
@@ -409,7 +425,10 @@ var p : PRRStringList;
 begin
   p := libGetFloatingSpeciesNames;
   try
-    result := getArrayOfStrings(p);
+    if p = nil then
+       result := TStringList.Create
+    else
+       result := getArrayOfStrings(p);
   finally
     libFreeStringList (p);
   end;
@@ -421,7 +440,10 @@ var p : PRRStringList;
 begin
   p := libGetGlobalParameterNames;
   try
-    result := getArrayOfStrings (p);
+    if p = nil then
+       result := TStringList.Create
+    else
+       result := getArrayOfStrings (p);
   finally
     libFreeStringList (p);
   end;
@@ -645,6 +667,10 @@ begin
    @libGetRRInstance := GetProcAddress(dllHandle, PChar ('getRRInstance'));
    if not Assigned (libGetRRInstance) then
       begin errMsg := 'Unable to locate getRRInstance'; result := false; exit; end;
+   @libFreeRRInstance := GetProcAddress(dllHandle, PChar ('freeRRInstance'));
+   if not Assigned (libFreeRRInstance) then
+      begin errMsg := 'Unable to locate freeRRInstance'; result := false; exit; end;
+
 
    @libGetCopyright := GetProcAddress(dllHandle, PChar ('getCopyright'));
    if not Assigned (libGetCopyright) then
