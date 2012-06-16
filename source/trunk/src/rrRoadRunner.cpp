@@ -2716,21 +2716,21 @@ int RoadRunner::getNumberOfBoundarySpecies()
 //        Help("Sets the value of a boundary species by its index")
 //        void RoadRunner::setBoundarySpeciesByIndex(int index, double value)
 //        {
-//            if (!modelLoaded) throw new SBWApplicationException(emptyModelStr);
+//            if (!modelLoaded) throw Exception(emptyModelStr);
 //            if ((index >= 0) && (index < mModel->getNumBoundarySpecies))
 //                mModel->bc[index] = value;
 //            else
-//                throw new SBWApplicationException(String.Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
+//                throw Exception(String.Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
 //        }
 //
 //        Help("Returns the value of a boundary species by its index")
 //        double RoadRunner::getBoundarySpeciesByIndex(int index)
 //        {
 //            if (!modelLoaded)
-//                throw new SBWApplicationException(emptyModelStr);
+//                throw Exception(emptyModelStr);
 //            if ((index >= 0) && (index < mModel->getNumBoundarySpecies))
 //                return mModel->bc[index];
-//            throw new SBWApplicationException(String.Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
+//            throw Exception(String.Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
 //        }
 //
 //        Help("Returns an array of boundary species concentrations")

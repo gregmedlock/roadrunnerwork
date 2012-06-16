@@ -17,11 +17,11 @@ unit uRRList;
    In plain english this means:
 
    You CAN freely download and use this software, in whole or in part, for personal,
-   company internal, or commercial purposes;
+   company internal, or commercial purposes.
 
    You CAN use the software in packages or distributions that you create.
 
-   You SHOULD include a copy of the license in any redistribution you may make;
+   You SHOULD include a copy of the license in any redistribution you may make.
 
    You are NOT required include the source of software, or of any modifications you may
    have made to it, in any redistribution you may assemble that includes it.

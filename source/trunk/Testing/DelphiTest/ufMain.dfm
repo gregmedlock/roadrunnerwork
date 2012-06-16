@@ -2,8 +2,8 @@ object Form2: TForm2
   Left = 0
   Top = 0
   Caption = 'Test uRoadRunnerAPI.pas'
-  ClientHeight = 522
-  ClientWidth = 700
+  ClientHeight = 563
+  ClientWidth = 814
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,8 +13,8 @@ object Form2: TForm2
   OldCreateOrder = False
   Position = poScreenCenter
   DesignSize = (
-    700
-    522)
+    814
+    563)
   PixelsPerInch = 96
   TextHeight = 13
   object lblBuildDate: TLabel
@@ -36,8 +36,8 @@ object Form2: TForm2
   end
   object pnlBottm: TPanel
     Left = 0
-    Top = 481
-    Width = 700
+    Top = 522
+    Width = 814
     Height = 41
     Align = alBottom
     TabOrder = 1
@@ -70,10 +70,10 @@ object Form2: TForm2
     OnClick = btnLoadSBMLClick
   end
   object grid: TStringGrid
-    Left = 278
+    Left = 392
     Top = 0
     Width = 422
-    Height = 481
+    Height = 522
     Align = alRight
     Anchors = [akLeft, akTop, akBottom]
     DefaultColWidth = 84
@@ -83,8 +83,8 @@ object Form2: TForm2
     ExplicitHeight = 298
   end
   object btnGetReactionNames: TButton
-    Left = 8
-    Top = 137
+    Left = 262
+    Top = 75
     Width = 121
     Height = 25
     Caption = 'Get Reaction Names'
@@ -103,8 +103,8 @@ object Form2: TForm2
   object lstSummary: TListBox
     Left = 8
     Top = 199
-    Width = 248
-    Height = 276
+    Width = 375
+    Height = 317
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 13
     TabOrder = 7
@@ -117,5 +117,13 @@ object Form2: TForm2
     Caption = 'Steady State'
     TabOrder = 8
     OnClick = btnSteadyStateClick
+  end
+  object edtModelName: TEdit
+    Left = 135
+    Top = 18
+    Width = 121
+    Height = 21
+    TabOrder = 9
+    Text = 'equilib.xml'
   end
 end

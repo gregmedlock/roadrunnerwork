@@ -19,6 +19,7 @@ type
     lstSummary: TListBox;
     btnSteadyState: TButton;
     lblBuildDate: TLabel;
+    edtModelName: TEdit;
     procedure Button1Click(Sender: TObject);
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
@@ -60,16 +61,24 @@ var str : AnsiString;
     m : TMatrix;
     i, j : integer;
     list : TStringList;
+    instance : Pointer;
 begin
+  //freeRRInstance;
+  instance := getRRInstance;
+
   lstSummary.Clear;
-  list := TStringList.Create;
-  str := AnsiString (TFile.ReadAllText('feedback.xml'));
+
+  str := AnsiString (TFile.ReadAllText(edtModelName.text));
   if not loadSBML(str) then
+     begin
      lblProgress.Caption := 'Failed to load SBML model';
-  list.Add ('time');
-  list.Add ('S1');
-  list.Add ('S2');
-  setSelectionList (list);
+     exit;
+     end;
+  list := TStringList.Create;
+  //list.Add ('time');
+  //list.Add ('Node0');
+  //list.Add ('Node1');
+  //setSelectionList (list);
   m := simulate();
   grid.ColCount := m.c + 1;
   grid.RowCount := m.r + 1;
