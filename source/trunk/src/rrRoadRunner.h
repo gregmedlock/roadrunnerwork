@@ -180,6 +180,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         virtual                        ~RoadRunner();
         bool                            CreateSelectionList();
         bool                            SetTempFileFolder(const string& folder);
+        string                          GetTempFileFolder();
         void                            PartOfSimulation(SBMLModelSimulation* simulation){mSimulation = simulation;}
         bool                            GenerateModelCode(const string& sbml = string(""));
         bool                            GenerateAndCompileModel();

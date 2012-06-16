@@ -89,8 +89,14 @@ bool RoadRunner::SetTempFileFolder(const string& folder)
         Log(lError)<<"The folder: "<<folder<<" don't exist...";
         return false;
     }
-
 }
+
+
+string RoadRunner::GetTempFileFolder ()
+{
+    return mTempFileFolder;
+}
+
 
 bool RoadRunner::CreateSelectionList()
 {
