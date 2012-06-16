@@ -18,7 +18,11 @@ C_DECL_SPEC char*                   __stdcall   getBuildDate(void);
 C_DECL_SPEC char*                   __stdcall   getCopyright(void);
 C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder);
 C_DECL_SPEC char*                   __stdcall   getTempFolder(void);
-//C_DECL_SPEC char*                   __stdcall   getCCode(void);
+//C_DECL_SPEC char*                   __stdcall   getCCode(void); <- to be added
+
+// Error handling
+C_DECL_SPEC bool                    __stdcall   hasError();
+C_DECL_SPEC char*                   __stdcall   getLastError();
 
 // SBML Methods
 C_DECL_SPEC bool                    __stdcall   loadSBML(const char* sbml);
@@ -42,6 +46,12 @@ C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
 
 C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
+//C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex (int index, double value); <- to be added
+//C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesByIndex (int index, double value);
+//C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex  (int index, double value);
+//C_DECL_SPEC double                  __stdcall   getBoundarySpeciesByIndex (int index);
+//C_DECL_SPEC double                  __stdcall   getFloatingSpeciesByIndex (int index);
+//C_DECL_SPEC double                  __stdcall   getGlobalParameterByIndex (int index);
 
 // Jacobian Matrix Methods
 //C_DECL_SPEC RRDataMatrixHandle      __stdcall   getFullJacobian(void);  <- to be added
@@ -49,10 +59,6 @@ C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, 
 
 // Stoichiometry Methods
 C_DECL_SPEC RRDataMatrixHandle      __stdcall   getStoichiometryMatrix(void);
-
-// Error handling
-C_DECL_SPEC bool                    __stdcall   hasError();
-C_DECL_SPEC char*                   __stdcall   getLastError();
 
 C_DECL_SPEC bool                    __stdcall   reset();
 C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRDoubleVector* vec);
@@ -64,7 +70,7 @@ C_DECL_SPEC double                  __stdcall   getReactionRate(int);
 C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getReactionRates();
 
 // Rates of Change
-//C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames(); <-- to be added
+//C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames(); <- to be added
 
 // get Number Family
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
