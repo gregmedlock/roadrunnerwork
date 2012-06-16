@@ -17,7 +17,7 @@ C_DECL_SPEC RRHandle                __stdcall   getRRInstance(void);
 C_DECL_SPEC char*                   __stdcall   getBuildDate(void);
 C_DECL_SPEC char*                   __stdcall   getCopyright(void);
 C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder);
-//C_DECL_SPEC char*                   __stdcall   getTempFolder(void);
+C_DECL_SPEC char*                   __stdcall   getTempFolder(void);
 //C_DECL_SPEC char*                   __stdcall   getCCode(void);
 
 // SBML Methods
@@ -62,6 +62,9 @@ C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getFloatingSpeciesInitialConcent
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
 C_DECL_SPEC double                  __stdcall   getReactionRate(int);
 C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getReactionRates();
+
+// Rates of Change
+//C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames(); <-- to be added
 
 // get Number Family
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();

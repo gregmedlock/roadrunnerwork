@@ -62,6 +62,22 @@ bool __stdcall setTempFolder(const char* folder)
     return gRRHandle->SetTempFileFolder(folder);
 }
 
+
+char* __stdcall getTempFolder()
+{
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
+
+    text = new char[gRRHandle->GetTempFileFolder().size() + 1];
+    strcpy(text, gRRHandle->GetTempFileFolder(r).c_str());
+
+    return text;
+}
+
+
 bool __stdcall loadSBMLFromFile(const char* sbmlFileName)
 {
     if(!gRRHandle)
