@@ -137,7 +137,8 @@ var
 
 function  hasError : boolean;
 function  getRRInstance : Pointer;
-procedure freeRRInstance;
+procedure freeRRInstance; overload;
+procedure freeRRInstance (myInstance : Pointer); overload;
 function  getLastError : AnsiString;
 function  getBuildDate : AnsiString;
 function  getCopyright : AnsiString;
@@ -253,6 +254,12 @@ end;
 function getRRInstance : Pointer;
 begin
   result := libGetRRInstance;
+end;
+
+procedure freeRRInstance (myInstance : Pointer);
+begin
+  if myInstance <> nil then
+     libFreeRRInstance (myInstance);
 end;
 
 procedure freeRRInstance;
@@ -794,7 +801,7 @@ begin
          begin
          if loadMethods (errMsg) then
             begin
-            instance := libGetRRInstance;
+            //instance := libGetRRInstance;
             DLLLoaded := True;
             result := true;
             end

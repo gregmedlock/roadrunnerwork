@@ -2,7 +2,7 @@ program DelphiTestProject;
 
 uses
   Forms,
-  ufMain in 'ufMain.pas' {Form2},
+  ufMain in 'ufMain.pas' {frmMain},
   uRoadRunnerAPI in '..\..\Wrappers\Delphi\uRoadRunnerAPI.pas',
   uRRList in '..\..\Wrappers\Delphi\uRRList.pas';
 
@@ -11,6 +11,6 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TfrmMain, frmMain);
   Application.Run;
 end.

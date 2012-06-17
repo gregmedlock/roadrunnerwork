@@ -47,7 +47,7 @@
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="ufMain.pas">
-				<Form>Form2</Form>
+				<Form>frmMain</Form>
 			</DCCReference>
 			<DCCReference Include="..\..\Wrappers\Delphi\uRoadRunnerAPI.pas"/>
 			<DCCReference Include="..\..\Wrappers\Delphi\uRRList.pas"/>

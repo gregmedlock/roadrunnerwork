@@ -1,4 +1,4 @@
-object Form2: TForm2
+object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'Test uRoadRunnerAPI.pas'
@@ -12,6 +12,7 @@ object Form2: TForm2
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnClose = FormClose
   DesignSize = (
     814
     563)
@@ -41,8 +42,6 @@ object Form2: TForm2
     Height = 41
     Align = alBottom
     TabOrder = 1
-    ExplicitTop = 298
-    ExplicitWidth = 566
     object lblProgress: TLabel
       Left = 8
       Top = 16
@@ -79,8 +78,6 @@ object Form2: TForm2
     DefaultColWidth = 84
     FixedCols = 0
     TabOrder = 4
-    ExplicitLeft = 144
-    ExplicitHeight = 298
   end
   object btnGetReactionNames: TButton
     Left = 262
@@ -125,5 +122,14 @@ object Form2: TForm2
     Height = 21
     TabOrder = 9
     Text = 'equilib.xml'
+  end
+  object btnLoadTwoModels: TButton
+    Left = 262
+    Top = 106
+    Width = 121
+    Height = 25
+    Caption = 'Load Two Models'
+    TabOrder = 10
+    OnClick = btnLoadTwoModelsClick
   end
 end

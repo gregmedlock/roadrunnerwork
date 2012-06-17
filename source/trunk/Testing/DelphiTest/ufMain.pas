@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, uRoadRunnerAPI, ExtCtrls, IOUtils, Grids;
 
 type
-  TForm2 = class(TForm)
+  TfrmMain = class(TForm)
     Button1: TButton;
     pnlBottm: TPanel;
     lblProgress: TLabel;
@@ -20,20 +20,24 @@ type
     btnSteadyState: TButton;
     lblBuildDate: TLabel;
     edtModelName: TEdit;
+    btnLoadTwoModels: TButton;
     procedure Button1Click(Sender: TObject);
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetReactionNamesClick(Sender: TObject);
     procedure btnGetAvailableSymbolsClick(Sender: TObject);
     procedure btnSteadyStateClick(Sender: TObject);
+    procedure btnLoadTwoModelsClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
     { Public declarations }
+    rrInstance : Pointer;
   end;
 
 var
-  Form2: TForm2;
+  frmMain: TfrmMain;
 
 implementation
 
@@ -41,12 +45,12 @@ implementation
 
 Uses uMatrix, uRRList;
 
-procedure TForm2.btnGetCopyrightClick(Sender: TObject);
+procedure TfrmMain.btnGetCopyrightClick(Sender: TObject);
 begin
   lblProgress.caption := string (getCopyright);
 end;
 
-procedure TForm2.btnGetReactionNamesClick(Sender: TObject);
+procedure TfrmMain.btnGetReactionNamesClick(Sender: TObject);
 var i : integer; strList : TStringList;
 begin
   strList := getReactionNames;
@@ -56,15 +60,13 @@ begin
   strList.Free;
 end;
 
-procedure TForm2.btnLoadSBMLClick(Sender: TObject);
+procedure TfrmMain.btnLoadSBMLClick(Sender: TObject);
 var str : AnsiString;
     m : TMatrix;
     i, j : integer;
     list : TStringList;
-    instance : Pointer;
 begin
-  //freeRRInstance;
-  instance := getRRInstance;
+  rrInstance := getRRInstance;
 
   lstSummary.Clear;
 
@@ -118,14 +120,14 @@ begin
 end;
 
 
-procedure TForm2.btnSteadyStateClick(Sender: TObject);
+procedure TfrmMain.btnSteadyStateClick(Sender: TObject);
 var d : double;
 begin
   d := steadyState;
   showmessage (floattostr (d));
 end;
 
-procedure TForm2.Button1Click(Sender: TObject);
+procedure TfrmMain.Button1Click(Sender: TObject);
 var errMsg : AnsiString;
 begin
   if loadRoadRunner (errMsg) then
@@ -140,7 +142,23 @@ begin
      end;
 end;
 
-procedure TForm2.btnGetAvailableSymbolsClick(Sender: TObject);
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  freeRRInstance (rrInstance);
+end;
+
+procedure TfrmMain.btnLoadTwoModelsClick(Sender: TObject);
+var  instance : Pointer;
+     str : string;
+begin
+  instance := getRRInstance;
+  str := AnsiString (TFile.ReadAllText('equilib.xml'));
+  loadSBML (str);
+  str := AnsiString (TFile.ReadAllText('feedback.xml'));
+  loadSBML (str);
+end;
+
+procedure TfrmMain.btnGetAvailableSymbolsClick(Sender: TObject);
 var x, list : TRRList; i, j : integer;
 begin
   lstSummary.Clear;
