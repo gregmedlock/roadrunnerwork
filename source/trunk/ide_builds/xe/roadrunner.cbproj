@@ -362,7 +362,10 @@
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Cpp.Targets')" Project="$(BDS)\Bin\CodeGear.Cpp.Targets"/>
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 		<PropertyGroup Condition="'$(FileToCompile)'==''">
-			<PostBuildEvent><![CDATA[copy $(RR_ROOT)\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib $(RR_INSTALLS)\lib\libxml2_xe.lib]]></PostBuildEvent>
+			<PostBuildEvent><![CDATA[copy $(RR_ROOT)\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib $(RR_INSTALLS)\lib\libxml2_xe.lib
+copy $(RR_ROOT)\ThirdParty\libsbml_xe\dependencies\bin\libxml2.dll $(RR_INSTALLS)\bin\libxml2.dll
+copy $(RR_ROOT)\ThirdParty\libsbml_xe\dependencies\bin\iconv.dll $(RR_INSTALLS)\bin\iconv.dll
+copy $(RR_ROOT)\ThirdParty\libsbml_xe\dependencies\bin\zlib1.dll $(RR_INSTALLS)\bin\zlib1.dll]]></PostBuildEvent>
 		</PropertyGroup>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>

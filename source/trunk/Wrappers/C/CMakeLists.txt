@@ -9,7 +9,7 @@ rr_c_api_support.cpp
 set_property(   TARGET ${target} 
                 PROPERTY  COMPILE_DEFINITIONS 
                           EXPORT_RR_C_API
-                          NO_RR_DLL         #when linking with static lib, no declspec shuld be present..
+                          STATIC_RR             #when linking with static lib, no declspec shuld be present..
                           LIBSBML_STATIC
 					      LIBLAX_STATIC
 )
@@ -59,6 +59,5 @@ install (   FILES ${exe_path}/${target}.dll
             DESTINATION bin 			
             COMPONENT c_api)
 
-            
 
 #set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)

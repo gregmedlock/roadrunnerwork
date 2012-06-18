@@ -62,7 +62,6 @@ bool __stdcall setTempFolder(const char* folder)
     return gRRHandle->SetTempFileFolder(folder);
 }
 
-
 char* __stdcall getTempFolder()
 {
     if(!gRRHandle)
@@ -73,9 +72,9 @@ char* __stdcall getTempFolder()
 
     char* text = new char[gRRHandle->GetTempFileFolder().size() + 1];
     strcpy(text, gRRHandle->GetTempFileFolder().c_str());
+
     return text;
 }
-
 
 bool __stdcall loadSBMLFromFile(const char* sbmlFileName)
 {
@@ -235,7 +234,6 @@ RRResultHandle __stdcall simulateEx (const double& timeStart, const double& time
   setNumPoints(numberOfPoints);
   return simulate();
 }
-
 
 RRStringListHandle __stdcall getReactionNames(void)
 {
@@ -552,7 +550,6 @@ bool __stdcall setFloatingSpeciesInitialConcentrations(RRDoubleVector* vec)
     CopyRRVector(vec, aVec);
     gRRHandle->changeInitialConditions(aVec);
     return true;
-
 }
 
 RRDoubleVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()

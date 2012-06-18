@@ -106,7 +106,7 @@ endif()
 add_library(${target}-static 	STATIC ${rrSources})
 set_property(TARGET ${target}-static 
                 PROPERTY    COMPILE_DEFINITIONS 
-                            NO_RR_DLL 
+                            STATIC_RR 
                             LIBSBML_STATIC
                             LIBLAX_STATIC 
                             ) 
