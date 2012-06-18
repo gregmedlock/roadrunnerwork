@@ -16,11 +16,10 @@ namespace rr
 // <param name="y"></param>
 // <param name="fval"></param>
 // <param name="pErr"></param>
-void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);
 
 
 int NLEQModelFcn(...);
-string ErrorForStatus(const int& error);
+void ModelFcn(long int& nx, double* y, double* fval, long int& pErr);
 
 class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
 {
@@ -32,11 +31,12 @@ class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
         double                         *RWK;
         double                         *XScal;
         long                            ierr;
-        long                           *iopt;    // = new int[nOpts];
+        long                           *iopt;
         static ModelFromC              *model;     // Model generated from the SBML
         long                            n;
 
-                                        //  private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr) //tk made this a non class member, 'standalone' function
+                                         //tk made this a non class member, 'standalone' function
+                                        //  private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
     public:
         bool                            IsAvailable();
 

@@ -116,12 +116,12 @@ if(${MINGW})
 
 else()
 target_link_libraries (${target}-static 
-                                        libsbml-static
-                                        sundials_cvode
-                                        sundials_nvecserial
-                                        blas
-                                        lapack
-                                        #libf2c
+                           libsbml-static
+                           sundials_cvode
+                           sundials_nvecserial
+                           blas
+                           lapack
+                           #libf2c
                       )
 endif()
 
@@ -149,7 +149,6 @@ install(    TARGETS ${target}
             ARCHIVE DESTINATION lib
             COMPONENT rr_core
 )            
-
 
 if(${MINGW})
     SET(linkLibrary ${lib_path}/lib${target}.dll.a)
@@ -180,6 +179,8 @@ endif()
 set(subfolders 
 .
 ./libstruct
+./nleq
+./mtrand
 )
 
 foreach(subfolder ${subfolders})

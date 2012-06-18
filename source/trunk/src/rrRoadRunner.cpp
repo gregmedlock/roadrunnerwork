@@ -91,7 +91,6 @@ bool RoadRunner::SetTempFileFolder(const string& folder)
     }
 }
 
-
 string RoadRunner::GetTempFileFolder ()
 {
     return mTempFileFolder;

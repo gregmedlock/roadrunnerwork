@@ -68,12 +68,11 @@ char* __stdcall getTempFolder()
     if(!gRRHandle)
     {
         SetAPIError(ALLOCATE_API_ERROR_MSG);
-        return false;
+        return NULL;
     }
 
-    text = new char[gRRHandle->GetTempFileFolder().size() + 1];
-    strcpy(text, gRRHandle->GetTempFileFolder(r).c_str());
-
+    char* text = new char[gRRHandle->GetTempFileFolder().size() + 1];
+    strcpy(text, gRRHandle->GetTempFileFolder().c_str());
     return text;
 }
 

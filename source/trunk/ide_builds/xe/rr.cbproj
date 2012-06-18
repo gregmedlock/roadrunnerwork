@@ -39,7 +39,7 @@
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<Defines>BUILD_MODEL_DLL;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
+			<Defines>BUILD_MODEL_DLL;LIBSBML_USE_CPP_NAMESPACE;STATIC_RR;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>

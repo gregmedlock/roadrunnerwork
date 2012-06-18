@@ -13,17 +13,16 @@
 #include "rrLogger.h"
 //---------------------------------------------------------------------------
 
-
 namespace rr
 {
 
+string ErrorForStatus(const int& error);
 ModelFromC* NLEQInterface::model = NULL;     // Model generated from the SBML
 
 ModelFromC* NLEQInterface::GetModel()
 {
     return NLEQInterface::model;
 }
-
 
 bool NLEQInterface::IsAvailable()
 {
@@ -185,11 +184,27 @@ double NLEQInterface::solve(const vector<double>& yin)
 
 int NLEQModelFcn(...)
 {
+    va_list     listPointer;
+    long*       nrOfArguments;
+    // = 4;
+    va_start(listPointer, nrOfArguments);
 
-    return -1;
+    // Get an argument.  Must know
+    // the type of the arg to retrieve
+    // it from the va_list.
+    long*   arg1 = va_arg(listPointer,  long*);
+    long*   arg2 = va_arg(listPointer,  long*);
+    long*   arg3 = va_arg(listPointer,  long*);
+    long*   arg4 = va_arg(listPointer,  long*);
+    va_end( listPointer );
+
+    double* test = (double*) arg2;
+
+//    ModelFcn(*arg1, arg2, arg3, arg4);
+    return 0;
 }
 
-void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
+void ModelFcn(long& nx, double* y, double* fval, long& pErr)
 {
     ModelFromC* model = NLEQInterface::GetModel();
     if (model == NULL)
@@ -199,8 +214,7 @@ void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
 //        Marshal.WriteInt32(pErr, 0);
         return;
     }
-//
-//
+
     try
     {
 //        Marshal.Copy(y, model->amounts, 0, n);
@@ -210,15 +224,17 @@ void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
 //        model->rateRules.CopyTo(dTemp, 0);
 //        model->amounts.CopyTo(dTemp, model->rateRules.Length);
         model->evalModel(0.0, dTemp);
-        //                bool bError = false;
+        bool bError = false;
 
-        //                for (int i = 0; i < model->amounts.Length; i++)
-        //                    if (model->amounts[i] < 0)
-        //                    {
-        //                        bError = true;
-        //                        break;
-        //                    }
-        //
+        for (int i = 0; i < *model->amountsSize; i++)
+        {
+            if (model->amounts[i] < 0)
+            {
+                bError = true;
+                break;
+            }
+        }
+
 
 //        Marshal.Copy(model->dydt, 0, fval, n);
         //                if (bError)
