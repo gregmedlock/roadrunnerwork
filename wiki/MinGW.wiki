@@ -27,7 +27,9 @@ for a fix.
 In short, add 
 
 #ifdef __MINGW32__
+
 #include_next<float.h>
+
 #endif
 
 to the end of the float.h header located in
