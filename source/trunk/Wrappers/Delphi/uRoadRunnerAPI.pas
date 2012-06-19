@@ -142,6 +142,7 @@ procedure freeRRInstance (myInstance : Pointer); overload;
 function  getLastError : AnsiString;
 function  getBuildDate : AnsiString;
 function  getCopyright : AnsiString;
+function  getTempFolder : AnsiString;
 
 function  loadSBML (sbmlStr : AnsiString) : boolean;
 function  loadSBMLFromFile (fileName : AnsiString) : boolean;
@@ -190,6 +191,7 @@ var DLLHandle : Cardinal;
 
     libGetBuildDate : TVoidCharFunc;        //
     libGetCopyright : TGetCopyright;        //
+    libGetTempFolder : TVoidCharFunc;
     libGetRRInstance : TGetRRInstance;      //
     libFreeRRInstance : TFreeRRInstance;    //
     libFreeRRResult : TFreeRRResult;        //
@@ -282,6 +284,10 @@ begin
   result := AnsiString (p);
 end;
 
+function  getTempFolder : AnsiString;
+begin
+  result := libGetTempFolder;
+end;
 
 function hasError : boolean;
 begin
@@ -682,6 +688,9 @@ begin
    @libGetCopyright := GetProcAddress(dllHandle, PChar ('getCopyright'));
    if not Assigned (libGetCopyright) then
       begin errMsg := 'Unable to locate getCopyright'; result := false; exit; end;
+   @libGetTempFolder := GetProcAddress(dllHandle, PChar ('getTempFolder'));
+   if not Assigned (libGetTempFolder) then
+      begin errMsg := 'Unable to locate getTempFolder'; result := false; exit; end;
 
    @libLoadSBMLFromFile := GetProcAddress (dllHandle, PChar ('loadSBMLFromFile'));
    if not Assigned (libLoadSBMLFromFile) then

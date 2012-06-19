@@ -49,6 +49,21 @@ object frmMain: TfrmMain
       Height = 13
       Caption = 'Ok'
     end
+    object Label1: TLabel
+      Left = 352
+      Top = 16
+      Width = 66
+      Height = 13
+      Caption = 'Temp Folder: '
+    end
+    object lblTempFolder: TEdit
+      Left = 420
+      Top = 13
+      Width = 269
+      Height = 19
+      TabOrder = 0
+      Text = 'C:\'
+    end
   end
   object btnGetCopyright: TButton
     Left = 8

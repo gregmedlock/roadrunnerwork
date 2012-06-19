@@ -21,6 +21,8 @@ type
     lblBuildDate: TLabel;
     edtModelName: TEdit;
     btnLoadTwoModels: TButton;
+    Label1: TLabel;
+    lblTempFolder: TEdit;
     procedure Button1Click(Sender: TObject);
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
@@ -128,12 +130,14 @@ begin
 end;
 
 procedure TfrmMain.Button1Click(Sender: TObject);
-var errMsg : AnsiString;
+var errMsg : AnsiString; instance : Pointer;
 begin
   if loadRoadRunner (errMsg) then
      begin
+     instance := getRRInstance;
      lblProgress.caption := 'RoadRunner Loaded';
      lblBuildDate.Caption := 'Build Date: ' + getBuildDate;
+     lblTempFolder.Text := getTempFolder;
      end
   else
      begin
@@ -149,14 +153,25 @@ end;
 
 procedure TfrmMain.btnLoadTwoModelsClick(Sender: TObject);
 var  instance : Pointer;
-     str : string;
+     str1, str2 : string;
+     b : boolean;
 begin
   instance := getRRInstance;
-  str := AnsiString (TFile.ReadAllText('equilib.xml'));
-  loadSBML (str);
-  str := AnsiString (TFile.ReadAllText('feedback.xml'));
-  loadSBML (str);
+  str1 := AnsiString (TFile.ReadAllText('feedback.xml'));
+  b := loadSBML (str1);
+  if b then
+     showmessage ('loadSBML successful (true)')
+  else
+     showmessage ('Failed to loadSBML (false)');
+  if fileExists ('equilib.xml') then
+     begin
+     str2 := AnsiString (TFile.ReadAllText('equilib.xml'));
+     b := loadSBML (str2);
+     end
+  else
+     showmessage ('Failed to find file');
 end;
+
 
 procedure TfrmMain.btnGetAvailableSymbolsClick(Sender: TObject);
 var x, list : TRRList; i, j : integer;
