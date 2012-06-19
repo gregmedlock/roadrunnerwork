@@ -16,8 +16,6 @@ zibmon.c
 zibsec.c
 )
 
-#Build both static and shared version
-#Link with static libs
 add_library(${target} 	SHARED ${sources})
 
 set_property(TARGET ${target}  
@@ -27,7 +25,6 @@ set_property(TARGET ${target}
 
 #libraries to link with our shared lib
 if(${MINGW})
-
 else()
 target_link_libraries (${target}
                                     libf2c
@@ -49,18 +46,11 @@ install(    TARGETS ${target}
 if(${MINGW})
     SET(linkLibrary ${lib_path}/lib${target}.dll.a)
     SET(sharedLibrary ${exe_path}/lib${target}.dll)
-    SET(staticLibrary ${lib_path}/lib${target}-static.a)
 else()
     SET(linkLibrary ${lib_path}/${target}.lib)
     SET(sharedLibrary ${exe_path}/${target}.dll)
-    SET(staticLibrary ${lib_path}/${target}-static.lib)
 endif()
 
-if(INSTALL_STATIC_LIB)
-    install (   FILES ${staticLibrary}	
-                DESTINATION lib 
-                COMPONENT rr_core)
-endif()
 
 #=== Shared target
     install (   FILES ${linkLibrary}	

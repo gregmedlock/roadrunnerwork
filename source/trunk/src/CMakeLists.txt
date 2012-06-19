@@ -131,6 +131,8 @@ target_link_libraries (${target}        libxml2)
 target_link_libraries (${target}-static libxml2)
 endif()
 
+add_subdirectory(nleq)
+
 #--- INSTALL STUFF
 
 if(INSTALL_STATIC_LIB)
@@ -172,6 +174,8 @@ endif()
                 DESTINATION bin 
                 COMPONENT rr_core)
 
+
+
 #=== HEADERS
 set(subfolders 
 .
@@ -179,6 +183,7 @@ set(subfolders
 ./nleq
 ./mtrand
 )
+
 
 foreach(subfolder ${subfolders})
     FILE (GLOB headers ${subfolder}/*.h)
