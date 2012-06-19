@@ -35,11 +35,11 @@ ModelFromC* NLEQInterface::GetModel()
 NLEQInterface::NLEQInterface(ModelFromC *_model)
 :
 nOpts(50),
+mNLEQDLLName("rr_nleq.dll"),
+mDLLInstance(NULL),
 defaultMaxInterations(100),
 defaultTolerance(1.e-4),
-relativeTolerance(defaultTolerance),
-mNLEQDLLName("rr_nleq.dll"),
-mDLLInstance(NULL)
+relativeTolerance(defaultTolerance)
 {
 	//First load the nleq DLL and assign nleq function to function pointer
     mDLLInstance = LoadDLL(mNLEQDLLName);

@@ -19,57 +19,51 @@ int main()
         cout<<"No handle...";
     }
 
-    char* text;
-    text = getBuildDate();
+	char* text;
+	text = getBuildDate();
 
-    if(text)
-    {
-        cout<<"Build date: "<<text<<endl;
-        freeText(text);
-    }
+	if(text)
+	{
+		cout<<"Build date: "<<text<<endl;
+		freeText(text);
+	}
 
-    string fileName = "..\\Models\\feedback.xml";
-    ifstream ifs(fileName.c_str());
-    if(!ifs)
-    {
-        stringstream msg;
-        msg<<"Failed opening file: "<<fileName;
-        return false;
-    }
+	string fileName = "..\\Models\\feedback.xml";
+	ifstream ifs(fileName.c_str());
+	if(!ifs)
+	{
+		stringstream msg;
+		msg<<"Failed opening file: "<<fileName;
+		cerr<<msg;
+		return false;
+	}
 
-    std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
-    if(!loadSBML(sbml.c_str()))
-    {
-        cout<<"Failed loading SBML from file:"<<fileName;
-        cout<<"Last error was"<<getLastError()<<endl;
-    }
+	if(!loadSBML(sbml.c_str()))
+	{
+		cerr<<"Failed loading SBML from file:"<<fileName<<endl;
+		cerr<<"Last error was"<<getLastError()<<endl;
+		return -1;
+	}
 
-	fileName = "C:\\SBMLTestCases\\all\\00004\\00004-sbml-l2v4.xml";
+	RRDataMatrixHandle matrix = getStoichiometryMatrix();
+	printMatrix(matrix);
+	freeRRDataMatrix(matrix);
 
-    if(!loadSBML(sbml.c_str()))
-    {
-        cout<<"Failed loading SBML from file:"<<fileName;
-        cout<<"Last error was"<<getLastError()<<endl;
-    }
+	RRStringList* names = getReactionNames();
 
-    RRDataMatrixHandle matrix = getStoichiometryMatrix();
-    printMatrix(matrix);
-    freeRRDataMatrix(matrix);
+	if(names)
+	{
+		for(int i = 0; i < names->Count; i++)
+		{
+			cout<<names->String[i]<<endl;
+		}
+	}
 
-    RRStringList* names = getReactionNames();
-
-    if(names)
-    {
-        for(int i = 0; i < names->Count; i++)
-        {
-            cout<<names->String[i]<<endl;
-        }
-    }
-
-    RRSymbolLists* symbols = getAvailableSymbols();
-    if(symbols)
-    {
+	RRSymbolLists* symbols = getAvailableSymbols();
+	if(symbols)
+	{
         for(int i = 0; i < symbols->NumberOfLists; i++)
         {
 
@@ -92,12 +86,12 @@ int main()
     }
 
 //    reset();
-	setSteadyStateSelectionList("S3");
+	setSteadyStateSelectionList("S1");
 
-    double _steadyState = steadyState();
+	double _steadyState = steadyState();
     cout<<"This is steady state number: "<<_steadyState<<endl;
 
-    RRDoubleVectorHandle concs = getFloatingSpeciesInitialConcentrations();
+	RRDoubleVectorHandle concs = getFloatingSpeciesInitialConcentrations();
     printVector(concs);
     freeRRDoubleVector(concs);
 
