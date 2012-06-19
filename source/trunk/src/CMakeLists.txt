@@ -99,6 +99,8 @@ endif()
 
 #libraries to link with static lib
 add_library(${target}-static 	STATIC ${rrSources})
+
+
 set_property(TARGET ${target}-static 
                 PROPERTY    COMPILE_DEFINITIONS 
                             STATIC_RR 

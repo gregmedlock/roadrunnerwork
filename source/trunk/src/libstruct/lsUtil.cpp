@@ -28,7 +28,7 @@ namespace LIB_LA
 namespace Util
 {
 
-DoubleMatrix* Util::getSubMatrix(int /*Mb*/, int /*Nb*/, int ms, int ns, int mi, int nj, DoubleMatrix& A)
+DoubleMatrix* getSubMatrix(int /*Mb*/, int /*Nb*/, int ms, int ns, int mi, int nj, DoubleMatrix& A)
 {
     DoubleMatrix* subMatrix = new DoubleMatrix(ms, ns);
     for (int i=0; i<ms; i++)
@@ -42,7 +42,7 @@ DoubleMatrix* Util::getSubMatrix(int /*Mb*/, int /*Nb*/, int ms, int ns, int mi,
 }
 
 
-DoubleMatrix* Util::matMult(unsigned int mA, unsigned int nA, DoubleMatrix &A, DoubleMatrix &B,unsigned  int nB)
+DoubleMatrix* matMult(unsigned int mA, unsigned int nA, DoubleMatrix &A, DoubleMatrix &B,unsigned  int nB)
 {
     DoubleMatrix* oResult = new DoubleMatrix(mA, nB);
     double sum = 0;
@@ -62,12 +62,12 @@ DoubleMatrix* Util::matMult(unsigned int mA, unsigned int nA, DoubleMatrix &A, D
 
 }
 
-DoubleMatrix* Util::matMult(DoubleMatrix &A, DoubleMatrix &B)
+DoubleMatrix* matMult(DoubleMatrix &A, DoubleMatrix &B)
 {
     return matMult(A.numRows(), A.numCols(), A, B, B.numCols());
 }
 
-DoubleMatrix* Util::matMult(IntMatrix &A, DoubleMatrix &B)
+DoubleMatrix* matMult(IntMatrix &A, DoubleMatrix &B)
 {
     DoubleMatrix* oResult = new DoubleMatrix(A.numRows(), B.numCols());
     double sum = 0;
@@ -86,7 +86,7 @@ DoubleMatrix* Util::matMult(IntMatrix &A, DoubleMatrix &B)
     return oResult;
 }
 
-IntMatrix* Util::matMult(IntMatrix &A, IntMatrix &B)
+IntMatrix* matMult(IntMatrix &A, IntMatrix &B)
 {
     IntMatrix* oResult = new IntMatrix(A.numRows(), B.numCols());
     int sum = 0;
@@ -111,7 +111,7 @@ IntMatrix* Util::matMult(IntMatrix &A, IntMatrix &B)
 // 
 // Integer Matrix Multiplication
 // ----------------------------------------------------------------------------
-int** Util::matMult(int mA, int nA, int** A, int** B, int nB) {
+int** matMult(int mA, int nA, int** A, int** B, int nB) {
     int sum;
     int** prod;
     prod = new int*[mA];
@@ -133,7 +133,7 @@ int** Util::matMult(int mA, int nA, int** A, int** B, int nB) {
 //
 // Matrix Multiplication
 // ----------------------------------------------------------------------------
-double** Util::matMult(int mA, int nA, double** A, double** B, int nB) {
+double** matMult(int mA, int nA, double** A, double** B, int nB) {
     double sum;
     double** prod;
     prod = new double*[mA];
@@ -150,14 +150,14 @@ double** Util::matMult(int mA, int nA, double** A, double** B, int nB) {
     return prod;
 }
 
-void Util::checkTolerance(int nrows, double* A, double dTolerance) {
+void checkTolerance(int nrows, double* A, double dTolerance) {
     for (int i=0; i<nrows; i++) 
     {
         A[i] = RoundToTolerance(A[i], dTolerance);
     }
 }
 
-double Util::RoundToTolerance(double dValue, double dTolerance)
+double RoundToTolerance(double dValue, double dTolerance)
 {
     if (fabs(dValue) < dTolerance)
     {
@@ -176,7 +176,7 @@ double Util::RoundToTolerance(double dValue, double dTolerance)
 
 
 
-void Util::RoundMatrixToTolerance(DoubleMatrix& oMatrix, double dTolerance)
+void RoundMatrixToTolerance(DoubleMatrix& oMatrix, double dTolerance)
 {
     for (unsigned int i = 0; i < oMatrix.numRows(); i++)
     {
@@ -187,7 +187,7 @@ void Util::RoundMatrixToTolerance(DoubleMatrix& oMatrix, double dTolerance)
     }
 }
 
-void Util::checkTolerance(int nrows, int ncols, double** A, double dTolerance) {
+void checkTolerance(int nrows, int ncols, double** A, double dTolerance) {
     for (int i=0; i<nrows; i++) 
     {
         for (int j=0; j<ncols; j++) 
@@ -197,7 +197,7 @@ void Util::checkTolerance(int nrows, int ncols, double** A, double dTolerance) {
     }
 }
 
-int Util::findRank(DoubleMatrix &oMatrix, double dTolerance)
+int findRank(DoubleMatrix &oMatrix, double dTolerance)
 {
     int i;
     int rank = oMatrix.numRows();        
@@ -222,12 +222,12 @@ int Util::findRank(DoubleMatrix &oMatrix, double dTolerance)
 }
 
 // fully pivoted gauss jordan, returning a pair of row pivots and column pivots
-void Util::FullyPivotedGaussJordan(DoubleMatrix &oMatrix, double dTolerance, std::vector< int > &rowPivots, std::vector< int > &colPivots)
+void FullyPivotedGaussJordan(DoubleMatrix &oMatrix, double dTolerance, std::vector< int > &rowPivots, std::vector< int > &colPivots)
 {
 
     DoubleMatrix *oTranspose = oMatrix.getTranspose();
 
-    colPivots = Util::GaussJordan(*oTranspose, dTolerance);
+    colPivots = GaussJordan(*oTranspose, dTolerance);
     std::vector<int> oColCopy(colPivots.begin(), colPivots.end());    // take a copy 
     // take permutations and swap columns in original matrix
 
@@ -254,7 +254,7 @@ void Util::FullyPivotedGaussJordan(DoubleMatrix &oMatrix, double dTolerance, std
     delete oTranspose;
     rowPivots = GaussJordan(oMatrix, dTolerance);    
 }
-bool Util::isPositive(DoubleMatrix &A, double dTolerance)
+bool isPositive(DoubleMatrix &A, double dTolerance)
 {
     for (unsigned int i = 0; i < A.numRows(); i++)
     {
@@ -262,7 +262,7 @@ bool Util::isPositive(DoubleMatrix &A, double dTolerance)
         {
             if (A(i,j) < dTolerance*-1)
             {
-                //Util::print(A);
+                //print(A);
                 return false;
             }
         }
@@ -270,7 +270,7 @@ bool Util::isPositive(DoubleMatrix &A, double dTolerance)
     return true;
 }
 
-std::vector<int> Util::GaussJordan(DoubleMatrix &oMatrix, double dTolerance)
+std::vector<int> GaussJordan(DoubleMatrix &oMatrix, double dTolerance)
 {
     std::vector<int> oPivots;
 
@@ -351,10 +351,10 @@ std::vector<int> Util::GaussJordan(DoubleMatrix &oMatrix, double dTolerance)
         nCurrentRow ++;    if (nCurrentRow >= nRows) break;
     }
     // round matrix for good measure
-    Util::RoundMatrixToTolerance(oMatrix, dTolerance);
+    RoundMatrixToTolerance(oMatrix, dTolerance);
     return oPivots;
 }
-void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
+void gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 {
     //GaussJordan(oMatrix, dTolerance);
     double dPivot, dTemp;
@@ -420,7 +420,7 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 //        print(m, n, A, EM);
         Log(lDebug5) << "-----------------------------------------------------------------\n";
     }
-    Util::RoundMatrixToTolerance(oMatrix, dTolerance);
+    RoundMatrixToTolerance(oMatrix, dTolerance);
 }
 
 // ----------------------------------------------------------------------------
@@ -428,7 +428,7 @@ void Util::gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
 //
 // Prints to Log(lDebug5) an arrray in Nrows x Ncols
 // ----------------------------------------------------------------------------
-string Util::print(int mr, int nc, int* A)
+string print(int mr, int nc, int* A)
 {
     stringstream stream;
     stream << "[";
@@ -449,7 +449,7 @@ string Util::print(int mr, int nc, int* A)
 //
 // Prints to stream a matrix in Nrows x Ncols
 // ----------------------------------------------------------------------------
-string Util::print(IntMatrix& A)
+string print(IntMatrix& A)
 {
     stringstream stream;
     stream << "[";
@@ -466,7 +466,7 @@ string Util::print(IntMatrix& A)
     return stream.str();
 }
 
-string Util::print(DoubleMatrix& A)
+string print(DoubleMatrix& A)
 {
     stringstream stream;
     stream << "[";
@@ -483,7 +483,7 @@ string Util::print(DoubleMatrix& A)
     return stream.str();
 }
 
-string Util::print(ComplexMatrix& A)
+string print(ComplexMatrix& A)
 {
     stringstream stream;
     stream << "[";
@@ -500,7 +500,7 @@ string Util::print(ComplexMatrix& A)
     return stream.str();
 }
 
-string Util::print(int mr, int nc, int** A)
+string print(int mr, int nc, int** A)
 {
     stringstream stream;
     stream << "[";
@@ -520,7 +520,7 @@ string Util::print(int mr, int nc, int** A)
 //
 // Prints to stream an arrray in Nrows x Ncols
 // ----------------------------------------------------------------------------
-string Util::print(int mr, int nc, double* A)
+string print(int mr, int nc, double* A)
 {
     stringstream stream;
     for (int i=0; i<mr; i++)
@@ -540,7 +540,7 @@ string Util::print(int mr, int nc, double* A)
 //
 // Prints to stream a matrix in Nrows x Ncols
 // ----------------------------------------------------------------------------
-string Util::print(int mr, int nc, double** A)
+string print(int mr, int nc, double** A)
 {
     stringstream stream;
     stream << "[";
@@ -560,7 +560,7 @@ string Util::print(int mr, int nc, double** A)
 //
 // Prints to stream an arrray in Nrows x Ncols
 // ----------------------------------------------------------------------------
-string Util::print(int mr, int nc, LIB_LA::Complex* A)
+string print(int mr, int nc, LIB_LA::Complex* A)
 {
     stringstream stream;
     stream << "[";
@@ -580,7 +580,7 @@ string Util::print(int mr, int nc, LIB_LA::Complex* A)
 //
 // Prints to stream a matrix in Nrows x Ncols
 // ----------------------------------------------------------------------------
-string Util::print(int mr, int nc, LIB_LA::Complex** A)
+string print(int mr, int nc, LIB_LA::Complex** A)
 {
     stringstream stream;
     stream << "[";
@@ -600,7 +600,7 @@ string Util::print(int mr, int nc, LIB_LA::Complex** A)
 //
 // Prints two matrices next to each other Nrows x Ncols | Nrows x Nrows
 // ----------------------------------------------------------------------------
-string Util::print(int mr, int nc, int* A, int* B)
+string print(int mr, int nc, int* A, int* B)
 {
     stringstream stream;
     for (int i=0; i<mr; i++) {
@@ -621,7 +621,7 @@ string Util::print(int mr, int nc, int* A, int* B)
 //
 // Prints two matrices next to each other Nrows x Ncols | Nrows x Nrows
 // ----------------------------------------------------------------------------
-string Util::print(int mr, int nc, int** A, int** B)
+string print(int mr, int nc, int** A, int** B)
 {
     stringstream stream;
     stream.precision(8);
@@ -643,7 +643,7 @@ string Util::print(int mr, int nc, int** A, int** B)
 //
 // Prints two matrices next to each other Nrows x Ncols | Nrows x Nrows
 // ----------------------------------------------------------------------------
-string Util::print(int mr, int nc, double** A, double** B)
+string print(int mr, int nc, double** A, double** B)
 {
     stringstream stream;
     stream.precision(8);
@@ -660,7 +660,7 @@ string Util::print(int mr, int nc, double** A, double** B)
     return stream.str();
 }
 
-void Util::CopyMatrix(IntMatrix& oMatrix, int** &outMatrix, int &outNumRows, int &outNumCols)
+void CopyMatrix(IntMatrix& oMatrix, int** &outMatrix, int &outNumRows, int &outNumCols)
 {
     outNumRows = oMatrix.numRows();
     outNumCols = oMatrix.numCols();
@@ -679,7 +679,7 @@ void Util::CopyMatrix(IntMatrix& oMatrix, int** &outMatrix, int &outNumRows, int
         }
     }
 }
-void Util::CopyMatrix(DoubleMatrix& oMatrix, double** &outMatrix, int &outNumRows, int &outNumCols)
+void CopyMatrix(DoubleMatrix& oMatrix, double** &outMatrix, int &outNumRows, int &outNumCols)
 {
     if(!oMatrix.getArray())
     {
@@ -720,7 +720,7 @@ void Util::CopyMatrix(DoubleMatrix& oMatrix, double** &outMatrix, int &outNumRow
 
 }
 
-void Util::CopyMatrix(ComplexMatrix& oMatrix, double** &outMatrixReal,double** &outMatrixImag, int &outNumRows, int &outNumCols)
+void CopyMatrix(ComplexMatrix& oMatrix, double** &outMatrixReal,double** &outMatrixImag, int &outNumRows, int &outNumCols)
 {
     outNumRows = oMatrix.numRows();
     outNumCols = oMatrix.numCols();
@@ -743,7 +743,7 @@ void Util::CopyMatrix(ComplexMatrix& oMatrix, double** &outMatrixReal,double** &
     }
 }
 
-void Util::CopyIntVector(const std::vector< int > &vector, int* &outVector, int &outLength)
+void CopyIntVector(const std::vector< int > &vector, int* &outVector, int &outLength)
 {
     outLength = vector.size();
     outVector = (int*)malloc(sizeof(int)*outLength); if (outVector == NULL) throw new ApplicationException("Out of Memory during Vector copy"); memset(outVector, 0, sizeof(int)*outLength);
@@ -753,7 +753,7 @@ void Util::CopyIntVector(const std::vector< int > &vector, int* &outVector, int 
     }
 }
 
-void Util::CopyComplexVector(const std::vector< Complex> &vector, double* &outVectorReal, double* &outVectorImag, int &outLength)
+void CopyComplexVector(const std::vector< Complex> &vector, double* &outVectorReal, double* &outVectorImag, int &outLength)
 {
     outLength = vector.size();
     outVectorReal = (double*)malloc(sizeof(double)*outLength); memset(outVectorReal, 0, sizeof(double)*outLength);
@@ -765,7 +765,7 @@ void Util::CopyComplexVector(const std::vector< Complex> &vector, double* &outVe
     }
 }
 
-void Util::CopyDoubleVector(const std::vector< double > &vector, double* &outVector, int &outLength)
+void CopyDoubleVector(const std::vector< double > &vector, double* &outVector, int &outLength)
 {
     outLength = vector.size();
     outVector = (double*)malloc(sizeof(double)*outLength); memset(outVector, 0, sizeof(double)*outLength);
