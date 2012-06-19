@@ -136,7 +136,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 21
     TabOrder = 9
-    Text = 'equilib.xml'
+    Text = 'ss_threestep.xml'
   end
   object btnLoadTwoModels: TButton
     Left = 262
