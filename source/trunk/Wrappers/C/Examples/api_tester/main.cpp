@@ -26,7 +26,9 @@ int main()
         freeText(text);
     }
 
-    string xmlFileName = "..\\Models\\feedback.xml";
+ //   string xmlFileName = "..\\Models\\feedback.xml";
+	string xmlFileName = "C:\\SBMLTestCases\\all\\00004\\00004-sbml-l2v4.xml";
+
     if(!loadSBMLFromFile(xmlFileName.c_str()))
     {
         cout<<"Failed loading SBML from file:"<<xmlFileName;
@@ -67,17 +69,18 @@ int main()
             {
                 cout<<symbols->List[i].String[j]<<endl;
             }
-
         }
     }
 
-    reset();
-    cout<<"This is steady state number: "<<steadyState();
+//    reset();
+	setSteadyStateSelectionList("S3");
+
+    double _steadyState = steadyState();
+    cout<<"This is steady state number: "<<_steadyState<<endl;
 
     RRDoubleVectorHandle concs = getFloatingSpeciesInitialConcentrations();
     printVector(concs);
     freeRRDoubleVector(concs);
-
 
     text = getCopyright();
     if(hasError())

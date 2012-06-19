@@ -58,7 +58,6 @@ vector<string> GetLinesInFile(const string& fName)
     lines = SplitString(oneLine, "\n");
 
     return lines;
-
 }
 
 std::size_t IndexOf(std::vector<std::string>& vec, const std::string& elem )
@@ -249,5 +248,18 @@ HINSTANCE LoadDLL(const string& dll)
     Log(lDebug) << "DLL Library loaded: " <<name.c_str() << endl;
     return hLib;
 }
+
+FARPROC GetFunctionPtr(const string& funcName, HINSTANCE DLLHandle)
+{
+    FARPROC handle = GetProcAddress((HMODULE) DLLHandle, funcName.c_str());
+    if(handle == NULL)
+    {
+        Log(lError) << "Unable to load the function: " << funcName;
+        return NULL;
+    }
+    Log(lDebug3)<<"Loaded function " << funcName;
+    return handle;
+}
+
 
 }//end of namespace

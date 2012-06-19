@@ -2143,6 +2143,8 @@ ArrayList RoadRunner::getSteadyStateSelectionList()
 vector<TSelectionRecord> RoadRunner::GetSteadyStateSelection(const StringList& newSelectionList)
 {
     vector<TSelectionRecord> steadyStateSelection;// = new TSelectionRecord[newSelectionList.Count];
+
+	steadyStateSelection.resize(newSelectionList.size());
     StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList bs = mModelGenerator->getBoundarySpeciesList();
     StringList rs = mModelGenerator->getReactionNames();
@@ -2266,7 +2268,7 @@ void RoadRunner::setSteadyStateSelectionList(const StringList& newSelectionList)
 {
     if (!modelLoaded)
     {
-        throw new SBWApplicationException(emptyModelStr);
+        throw SBWApplicationException(emptyModelStr);
     }
 
     vector<TSelectionRecord> steadyStateSelection = GetSteadyStateSelection(newSelectionList);

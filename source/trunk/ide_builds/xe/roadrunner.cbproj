@@ -105,21 +105,6 @@
 			<CppCompile Include="..\..\src\mtrand\mtrand.cpp">
 				<BuildOrder>65</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\nleq1.c">
-				<BuildOrder>66</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\wnorm.c">
-				<BuildOrder>69</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\zibconst.c">
-				<BuildOrder>70</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\zibmon.c">
-				<BuildOrder>67</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\zibsec.c">
-				<BuildOrder>68</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\src\rrCGenerator.cpp">
 				<DependentOn>..\..\src\rrCGenerator.h</DependentOn>
 				<BuildOrder>60</BuildOrder>

@@ -9,8 +9,9 @@
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 #include "rrRoadRunner.h"
-#include "nleq/nleq1.h"
+//#include "nleq/nleq1.h"
 #include "rrLogger.h"
+#include "rrUtils.h"
 //---------------------------------------------------------------------------
 
 namespace rr
@@ -18,23 +19,17 @@ namespace rr
 
 string ErrorForStatus(const int& error);
 ModelFromC* NLEQInterface::model = NULL;     // Model generated from the SBML
+long		NLEQInterface::n	 = 0;
+
+long  NLEQInterface::GetN()
+{
+	return NLEQInterface::n;
+}
+
 
 ModelFromC* NLEQInterface::GetModel()
 {
     return NLEQInterface::model;
-}
-
-bool NLEQInterface::IsAvailable()
-{
-    NLEQInterface *temp= new NLEQInterface(NULL);
-    if(temp)
-    {
-        bool val = temp->getNumberOfModelEvaluations() ? true : false;
-        delete temp;
-        return val;
-    }
-
-    return false;
 }
 
 NLEQInterface::NLEQInterface(ModelFromC *_model)
@@ -42,9 +37,26 @@ NLEQInterface::NLEQInterface(ModelFromC *_model)
 nOpts(50),
 defaultMaxInterations(100),
 defaultTolerance(1.e-4),
-relativeTolerance(defaultTolerance)
-
+relativeTolerance(defaultTolerance),
+mNLEQDLLName("rr_nleq.dll"),
+mDLLInstance(NULL)
 {
+	//First load the nleq DLL and assign nleq function to function pointer
+    mDLLInstance = LoadDLL(mNLEQDLLName);
+    if(!mDLLInstance)
+    {
+    	Log(lError)<<"We failed to load the NLEQ DLL.";
+        return;
+    }
+
+    //Load the NLEQ1 function
+    NLEQ1 = (cNLEQ1) GetFunctionPtr("_NLEQ1", mDLLInstance);
+
+    if(!NLEQ1)
+    {
+    	Log(lError)<<"We failed to load the NLEQ function.";
+        return;
+    }
     this->model = _model;
 
     n = model->getNumIndependentVariables();
@@ -87,6 +99,19 @@ relativeTolerance(defaultTolerance)
     RWK[22 - 1] = 1E-16; // Minimal allowed damping factor
 }
 
+bool NLEQInterface::IsAvailable()
+{
+    NLEQInterface *temp= new NLEQInterface(NULL);
+    if(temp)
+    {
+        bool val = temp->getNumberOfModelEvaluations() ? true : false;
+        delete temp;
+        return val;
+    }
+
+    return false;
+}
+
 double NLEQInterface::solve(const vector<double>& yin)
 {
     if (yin.size() == 0)
@@ -96,7 +121,7 @@ double NLEQInterface::solve(const vector<double>& yin)
 
     // Set up a dummy Jacobian, actual Jacobian is computed
     // by NLEQ using finite differences
-    double* Jacobian = new double[1];
+	//    double* Jacobian = new double[1];
 
     ierr = 0;
     IWK[31 - 1] = maxIterations; // Max iterations
@@ -133,9 +158,9 @@ double NLEQInterface::solve(const vector<double>& yin)
 
     //NLEQ1(ref n, fcn, null, model->amounts, XScal, ref tmpTol, iopt, ref ierr, ref LIWK, IWK, ref LWRK, RWK);
 
-//        NLEQ1(&n, &NLEQModelFcn, NULL, model->amounts, XScal, tmpTol, iopt, ierr, LIWK, IWK, LWRK, RWK);
-    NLEQ1(      &n,
-                &NLEQModelFcn,
+    NLEQ1(
+				&n,
+                &ModelFcn,
                 NULL,
                 model->amounts,
                 XScal,
@@ -157,51 +182,30 @@ double NLEQInterface::solve(const vector<double>& yin)
         iopt[31 - 1] = 3; // Set for Highly nonlinear problem
         iopt[0] = 1; // Try again but tell NLEQ not to reinitialize
         tmpTol = relativeTolerance;
-        NLEQ1(  &n,
-                &NLEQModelFcn,
-                NULL,//Jacobian,
-                model->amounts,
-                XScal,
-                &tmpTol,
-                iopt,
-                &ierr,
-                &LIWK,
-                IWK,
-                &LWRK,
-                RWK);
+//        NLEQ1(  &n,
+//                &NLEQModelFcn,
+//                NULL,//Jacobian,
+//                model->amounts,
+//                XScal,
+//                &tmpTol,
+//                iopt,
+//                &ierr,
+//                &LIWK,
+//                IWK,
+//                &LWRK,
+//                RWK);
                 // If we get the same error then give up
     }
 
 
     if(ierr > 0 )
     {
-        Log(lError)<<"Error :"<<ErrorForStatus(ierr);
+    	string err = ErrorForStatus(ierr);
+        Log(lError)<<"Error :"<<err;
         return -1;
     }
     return ComputeSumsOfSquares();
 
-}
-
-int NLEQModelFcn(...)
-{
-    va_list     listPointer;
-    long*       nrOfArguments;
-    // = 4;
-    va_start(listPointer, nrOfArguments);
-
-    // Get an argument.  Must know
-    // the type of the arg to retrieve
-    // it from the va_list.
-    long*   arg1 = va_arg(listPointer,  long*);
-    long*   arg2 = va_arg(listPointer,  long*);
-    long*   arg3 = va_arg(listPointer,  long*);
-    long*   arg4 = va_arg(listPointer,  long*);
-    va_end( listPointer );
-
-    double* test = (double*) arg2;
-
-//    ModelFcn(*arg1, arg2, arg3, arg4);
-    return 0;
 }
 
 void ModelFcn(long& nx, double* y, double* fval, long& pErr)
@@ -209,45 +213,87 @@ void ModelFcn(long& nx, double* y, double* fval, long& pErr)
     ModelFromC* model = NLEQInterface::GetModel();
     if (model == NULL)
     {
-//        var temp = new double[n];
-//        Marshal.Copy(temp, 0, fval, n);
-//        Marshal.WriteInt32(pErr, 0);
         return;
     }
 
     try
     {
+    	int n = NLEQInterface::GetN();
 //        Marshal.Copy(y, model->amounts, 0, n);
+		for(int i = 0; i < n; i++)
+        {
+        	model->amounts[i] = y[i];
+        }
+
         int size = *model->amountsSize + *model->rateRulesSize;
         vector<double> dTemp;
         dTemp.resize(size);// = new double[size];
 //        model->rateRules.CopyTo(dTemp, 0);
 //        model->amounts.CopyTo(dTemp, model->rateRules.Length);
-        model->evalModel(0.0, dTemp);
-        bool bError = false;
-
-        for (int i = 0; i < *model->amountsSize; i++)
+		for(int i = 0; i < *model->rateRulesSize; i++)
         {
-            if (model->amounts[i] < 0)
-            {
-                bError = true;
-                break;
-            }
+        	dTemp[i] = model->rateRules[i];
         }
 
+        for(int i = *model->rateRulesSize; i < *model->amountsSize + *model->rateRulesSize; i++)
+        {
+        	dTemp[i] = model->amounts[i];
+        }
+
+        model->evalModel(0.0, dTemp);
 
 //        Marshal.Copy(model->dydt, 0, fval, n);
-        //                if (bError)
-        //                    Marshal.WriteInt32(pErr, -1);
-        //                else
-//        Marshal.WriteInt32(pErr, 0);
+		for(int i = 0; i < n; i++)
+        {
+        	fval[i] = model->dydt[i];
+        }
+
+        pErr = 0;
     }
     catch (Exception)
     {
     }
-
 }
 
+////        private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
+////        {
+////            if (model == null)
+////            {
+////                var temp = new double[n];
+////                Marshal.Copy(temp, 0, fval, n);
+////                Marshal.WriteInt32(pErr, 0);
+////                return;
+////            }
+////
+////
+////            try
+////            {
+////                Marshal.Copy(y, model.amounts, 0, n);
+////                var dTemp = new double[model.amounts.Length + model.rateRules.Length];
+////                model.rateRules.CopyTo(dTemp, 0);
+////                model.amounts.CopyTo(dTemp, model.rateRules.Length);
+////                model.evalModel(0.0, dTemp);
+////                //                bool bError = false;
+////
+////                //                for (int i = 0; i < model.amounts.Length; i++)
+////                //                    if (model.amounts[i] < 0)
+////                //                    {
+////                //                        bError = true;
+////                //                        break;
+////                //                    }
+////                //
+////
+////                Marshal.Copy(model.dydt, 0, fval, n);
+////                //                if (bError)
+////                //                    Marshal.WriteInt32(pErr, -1);
+////                //                else
+////                Marshal.WriteInt32(pErr, 0);
+////            }
+////            catch (Exception)
+////            {
+////            }
+////        }
+////
 
 ////        // NLEQ2 seems to have problems with some models so we drop back to NLEQ1 for now.
 ////
@@ -319,7 +365,6 @@ int NLEQInterface::getNumberOfModelEvaluationsForJacobian()
     return IWK[7];
 }
 
-
 bool NLEQInterface::Test(const string& fileName)
 {
     RoadRunner *rr = new RoadRunner();
@@ -369,7 +414,6 @@ string ErrorForStatus(const int& error)
 double NLEQInterface::ComputeSumsOfSquares()
 {
     // Compute the sums of squares and return value to caller
-    double sum = 0;
     vector<double> dTemp;// = new double[model->amounts.Length + model->rateRules.Length];
 //    dTemp.resize(model->amounts.size() + model->rateRules.size());
 
@@ -383,12 +427,12 @@ double NLEQInterface::ComputeSumsOfSquares()
     }
 
     model->evalModel(0.0, dTemp);
+    double sum = 0;
     for (int i = 0; i < n; i++)
     {
         sum = sum + pow(model->dydt[i], 2.0);
     }
     return sqrt(sum);
 }
-
 
 }//end of namespace
