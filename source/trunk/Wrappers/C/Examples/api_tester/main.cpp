@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <sstream>
 #include "rr_c_api.h"
 //---------------------------------------------------------------------------
 using namespace std;
@@ -26,12 +28,29 @@ int main()
         freeText(text);
     }
 
- //   string xmlFileName = "..\\Models\\feedback.xml";
-	string xmlFileName = "C:\\SBMLTestCases\\all\\00004\\00004-sbml-l2v4.xml";
-
-    if(!loadSBMLFromFile(xmlFileName.c_str()))
+    string fileName = "..\\Models\\feedback.xml";
+    ifstream ifs(fileName.c_str());
+    if(!ifs)
     {
-        cout<<"Failed loading SBML from file:"<<xmlFileName;
+        stringstream msg;
+        msg<<"Failed opening file: "<<fileName;
+        return false;
+    }
+
+    std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+    if(!loadSBML(sbml.c_str()))
+    {
+        cout<<"Failed loading SBML from file:"<<fileName;
+        cout<<"Last error was"<<getLastError()<<endl;
+    }
+
+	fileName = "C:\\SBMLTestCases\\all\\00004\\00004-sbml-l2v4.xml";
+
+    if(!loadSBML(sbml.c_str()))
+    {
+        cout<<"Failed loading SBML from file:"<<fileName;
+        cout<<"Last error was"<<getLastError()<<endl;
     }
 
     RRDataMatrixHandle matrix = getStoichiometryMatrix();

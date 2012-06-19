@@ -8,6 +8,7 @@
 #include "rrLogger.h"           //Might be useful for debugging later on
 #include "rr_c_api.h"
 #include "rr_c_api_support.h"   //Support functions, not exposed as api functions and or data
+#include "rrException.h"
 //---------------------------------------------------------------------------
 
 using namespace rr;
@@ -100,10 +101,20 @@ bool __stdcall loadSBML(const char* sbml)
         return false;
     }
 
-    if(!gRRHandle->loadSBML(sbml))
+	try
     {
-        SetAPIError("Failed to load SBML semantics");
-        return false;
+        if(!gRRHandle->loadSBML(sbml))
+        {
+            SetAPIError("Failed to load SBML semantics");
+            return false;
+        }
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    	return false;
     }
     return true;
 }

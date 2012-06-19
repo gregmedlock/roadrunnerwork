@@ -17,9 +17,8 @@ class RR_DECLSPEC Exception : public std::exception, public rrObject
 
     public:
         string& Message;
-
         Exception(const string& desc);
-           virtual ~Exception() throw();
+        virtual ~Exception() throw();
         virtual const char* what() const throw();
 };
 
