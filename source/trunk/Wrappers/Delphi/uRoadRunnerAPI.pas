@@ -101,6 +101,8 @@ type
   TVoidIntFunc = function : integer; stdcall;
   TVoidDoubleFunc = function : double; stdcall;
 
+  TBoolBoolFunc = function (var value : boolean) : boolean; stdcall;
+
   TPointerVoidFunc = function : Pointer; stdcall; //void* func(void)
   TCharBoolFunc = function (str : PAnsiChar) : bool; stdcall;  // bool func (char *)
   TDoubleBoolFunc = function (value : double) : bool; stdcall; // bool func (double)
@@ -128,6 +130,7 @@ type
   TFreeRRDataMatrix = function (matrix : PRRDataMatrixHandle) : boolean; stdcall;
   TFreeRRDoubleVector = function (vector : PRRDoubleVectorHandle) : boolean ; stdcall;
   TOneStep = function (var currentTime : double; var stepSize : double) : double; stdcall;
+  TSteadyState = function : double; stdcall;
 
 var
    DLLLoaded : boolean;
@@ -167,9 +170,12 @@ function  computeSteadyStateValues : TDoubleArray;
 
 function  getAvailableSymbols : TRRLIst;
 
+function setComputeAndAssignConservationLaws (var value : boolean) : boolean;
+
 procedure setRoadRunnerLibraryName (newLibName : AnsiString);
 function  loadRoadRunner (var errMsg : AnsiString) : boolean;
 procedure releaseRoadRunnerLibrary;
+
 
 implementation
 
@@ -207,7 +213,7 @@ var DLLHandle : Cardinal;
     libGetNumberOfBoundarySpecies : TVoidIntFunc;//
     libGetNumberOfFloatingSpecies : TVoidIntFunc;//
     libGetNumberOfGlobalParameters : TVoidIntFunc;//
-    libSteadyState : TVoidDoubleFunc; //
+    libSteadyState : TSteadyState;
     libGetReactionRate : TIntDoubleFunc; //
     libOneStep : TOneStep;         //
     libGetBoundarySpeciesNames : TVoidStringListFunc; //
@@ -217,6 +223,7 @@ var DLLHandle : Cardinal;
     libGetAvailableSymbols : TLibGetAvailableSymbols;
     libComputeSteadyStateValues : TlibComputeSteadyStateValues;
     libSetInitialConditions : TlibSetInitialConditions;
+    libSetComputeAndAssignConservationLaws : TBoolBoolFunc;
 
     libGetStoichiometryMatrix :  TGetStoichiometryMatrix;  //
 
@@ -300,6 +307,10 @@ begin
   result := libGetLastError;
 end;
 
+function setComputeAndAssignConservationLaws (var value : boolean) : boolean;
+begin
+  result := libSetComputeAndAssignConservationLaws (value);
+end;
 
 function loadSBML (sbmlStr : AnsiString) : boolean;
 begin
@@ -473,6 +484,7 @@ function getNumberOfGlobalParameters : integer;
 begin
   result := libGetNumberOfGlobalParameters;
 end;
+
 
 function steadyState : double;
 begin
@@ -691,6 +703,10 @@ begin
    @libGetTempFolder := GetProcAddress(dllHandle, PChar ('getTempFolder'));
    if not Assigned (libGetTempFolder) then
       begin errMsg := 'Unable to locate getTempFolder'; result := false; exit; end;
+
+   @libSetComputeAndAssignConservationLaws := GetProcAddress(dllHandle, PChar ('setComputeAndAssignConservationLaws'));
+   if not Assigned (libSetComputeAndAssignConservationLaws) then
+      begin errMsg := 'Unable to locate setComputeAndAssignConservationLaws'; result := false; exit; end;
 
    @libLoadSBMLFromFile := GetProcAddress (dllHandle, PChar ('loadSBMLFromFile'));
    if not Assigned (libLoadSBMLFromFile) then
