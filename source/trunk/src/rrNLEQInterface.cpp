@@ -202,10 +202,10 @@ double NLEQInterface::solve(const vector<double>& yin)
     {
     	string err = ErrorForStatus(ierr);
         Log(lError)<<"Error :"<<err;
-        return -1;
+        throw RRException(err);
     }
-    return ComputeSumsOfSquares();
 
+    return ComputeSumsOfSquares();
 }
 
 void ModelFcn(long& nx, double* y, double* fval, long& pErr)

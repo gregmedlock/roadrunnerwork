@@ -882,39 +882,32 @@ double RoadRunner::steadyState()
         throw SBWApplicationException(emptyModelStr);
     }
 
-    try
+    if (UseKinsol)
     {
-        if (UseKinsol)
-        {
 //            steadyStateSolver = new KinSolveInterface(mModel);
-        }
-        else
-        {
-            steadyStateSolver = new NLEQInterface(mModel);
-        }
-
-        //oneStep(0.0,0.05);
-
-        //Get a std vector for the solver
-        vector<double> someAmounts;
-        CopyCArrayToStdVector(mModel->amounts, someAmounts, mModel->getNumIndependentVariables());
-
-        double ss = steadyStateSolver->solve(someAmounts);
-        if(ss < 0)
-        {
-            Log(lError)<<"Steady State solver failed...";
-        }
-        mModel->convertToConcentrations();
-
-        delete steadyStateSolver;
-        steadyStateSolver = NULL;
-
-        return ss;
     }
-    catch (Exception e)
+    else
     {
-        throw SBWApplicationException("Unexpected error from steadyState solver:" +  e.Message);
+        steadyStateSolver = new NLEQInterface(mModel);
     }
+
+    //oneStep(0.0,0.05);
+
+    //Get a std vector for the solver
+    vector<double> someAmounts;
+    CopyCArrayToStdVector(mModel->amounts, someAmounts, mModel->getNumIndependentVariables());
+
+    double ss = steadyStateSolver->solve(someAmounts);
+    if(ss < 0)
+    {
+        Log(lError)<<"Steady State solver failed...";
+    }
+    mModel->convertToConcentrations();
+
+    delete steadyStateSolver;
+    steadyStateSolver = NULL;
+
+    return ss;
 }
 
 void RoadRunner::setParameterValue(const TParameterType& parameterType, const int& parameterIndex, const double& value)

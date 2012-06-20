@@ -121,7 +121,6 @@ begin
   list.Free;
 end;
 
-
 procedure TfrmMain.btnSteadyStateClick(Sender: TObject);
 var d : double;
 begin

@@ -52,6 +52,20 @@ char* __stdcall getCopyright()
     return text;
 }
 
+//Flags and Options
+
+bool __stdcall setComputeAndAssignConservationLaws(const bool& OnOrOff)
+{
+    if(!gRRHandle)
+    {
+        SetAPIError(ALLOCATE_API_ERROR_MSG);
+        return false;
+    }
+
+    gRRHandle->ComputeAndAssignConservationLaws(OnOrOff);
+    return true;
+}
+
 bool __stdcall setTempFolder(const char* folder)
 {
     if(!gRRHandle)
@@ -631,7 +645,17 @@ double __stdcall steadyState()
         return false;
     }
 
-    return gRRHandle->steadyState();
+  	try
+    {
+    	return gRRHandle->steadyState();
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    	return -1;
+    }
 }
 
 RRDoubleVectorHandle __stdcall computeSteadyStateValues()

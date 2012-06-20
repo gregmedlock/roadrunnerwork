@@ -28,7 +28,9 @@ int main()
 		freeText(text);
 	}
 
-	string fileName = "..\\Models\\ss_threestep.xml";
+    setTempFolder("c:\\rrTemp");
+
+	string fileName = "..\\Models\\ss_MinusOneError.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
@@ -38,6 +40,7 @@ int main()
 		return false;
 	}
 
+	setComputeAndAssignConservationLaws(true);
 	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
 	if(!loadSBML(sbml.c_str()))
@@ -86,10 +89,17 @@ int main()
     }
 
 //    reset();
-	setSteadyStateSelectionList("S1");
+//	setSteadyStateSelectionList("S1");
 
-	double _steadyState = steadyState();
-    cout<<"This is steady state number: "<<_steadyState<<endl;
+	double ssVal = steadyState();
+    if(ssVal == -1)
+    {
+		cerr<<"Steady State call failed. Error was: "<<getLastError()<<endl;
+    }
+    else
+    {
+	    cout<<"This is steady state number: "<<ssVal<<endl;
+    }
 
 	RRDoubleVectorHandle concs = getFloatingSpeciesInitialConcentrations();
     printVector(concs);

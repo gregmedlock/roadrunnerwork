@@ -20,6 +20,10 @@ C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder
 C_DECL_SPEC char*                   __stdcall   getTempFolder(void);
 //C_DECL_SPEC char*                   __stdcall   getCCode(void); <- to be added
 
+
+//Flags/Options
+C_DECL_SPEC bool                    __stdcall   setComputeAndAssignConservationLaws(const bool& OnOrOff);
+
 // Error handling
 C_DECL_SPEC bool                    __stdcall   hasError();
 C_DECL_SPEC char*                   __stdcall   getLastError();
