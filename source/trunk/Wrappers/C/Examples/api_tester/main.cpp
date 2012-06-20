@@ -30,7 +30,7 @@ int main()
 
     setTempFolder("c:\\rrTemp");
 
-	string fileName = "..\\Models\\ss_MinusOneError.xml";
+	string fileName = "..\\Models\\ss_TurnOnConservationAnalysis.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
