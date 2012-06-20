@@ -23,6 +23,7 @@ type
     btnLoadTwoModels: TButton;
     Label1: TLabel;
     lblTempFolder: TEdit;
+    chkConservationLaws: TCheckBox;
     procedure Button1Click(Sender: TObject);
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
@@ -31,6 +32,7 @@ type
     procedure btnSteadyStateClick(Sender: TObject);
     procedure btnLoadTwoModelsClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure chkConservationLawsClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,8 +69,11 @@ var str : AnsiString;
     m : TMatrix;
     i, j : integer;
     list : TStringList;
+    b : boolean;
 begin
   rrInstance := getRRInstance;
+  b := true;
+  setComputeAndAssignConservationLaws (b);
 
   lstSummary.Clear;
 
@@ -123,9 +128,15 @@ end;
 
 procedure TfrmMain.btnSteadyStateClick(Sender: TObject);
 var d : double;
+    fn : TStringList;
+    i : integer;
 begin
   d := steadyState;
-//  showmessage ('steadyState return value:' + floattostr (d));
+  showmessage (Format('%g', [d]));
+  fn := getFloatingSpeciesNames;
+  for i := 0 to fn.Count - 1 do
+      showmessage (floattostr (getValue(fn[i])));
+  fn.free;
 end;
 
 procedure TfrmMain.Button1Click(Sender: TObject);
@@ -143,6 +154,16 @@ begin
      lblProgress.caption := string (errMsg);
      lblBuildDate.Caption := 'Failed to load';
      end;
+end;
+
+procedure TfrmMain.chkConservationLawsClick(Sender: TObject);
+var b : boolean;
+begin
+  if chkConservationLaws.checked then
+     b := true
+  else
+     b := false;
+  setComputeAndAssignConservationLaws (b);
 end;
 
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);

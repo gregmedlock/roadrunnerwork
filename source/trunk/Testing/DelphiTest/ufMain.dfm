@@ -136,7 +136,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 21
     TabOrder = 9
-    Text = 'ss_threestep.xml'
+    Text = 'ss_MinusOneError.xml'
   end
   object btnLoadTwoModels: TButton
     Left = 262
@@ -146,5 +146,16 @@ object frmMain: TfrmMain
     Caption = 'Load Two Models'
     TabOrder = 10
     OnClick = btnLoadTwoModelsClick
+  end
+  object chkConservationLaws: TCheckBox
+    Left = 136
+    Top = 48
+    Width = 153
+    Height = 17
+    Caption = 'Use Conservation Laws'
+    Checked = True
+    State = cbChecked
+    TabOrder = 11
+    OnClick = chkConservationLawsClick
   end
 end
