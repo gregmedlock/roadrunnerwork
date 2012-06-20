@@ -34,7 +34,8 @@ unit uRRList;
 
 interface
 
-Uses SysUtils, Classes, uSBWCommon, uSBWComplex, uSBWArray;
+Uses SysUtils, Classes;
+//, uSBWCommon, uSBWComplex, uSBWArray;
 
 type
   TRRList = class;
@@ -74,7 +75,7 @@ type
 
 implementation
 
-Uses uSBWUtils;
+//Uses uSBWUtils;
 
 
 constructor TRRListItem.Create (d : double);

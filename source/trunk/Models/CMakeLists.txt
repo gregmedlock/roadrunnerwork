@@ -4,3 +4,4 @@ PROJECT(rrModels)
 
 install (FILES feedback.xml 			DESTINATION Models 	COMPONENT sbml_models)
 install (FILES test_1.xml 				DESTINATION Models 	COMPONENT sbml_models)
+install (FILES ss_threestep.xml 		DESTINATION Models 	COMPONENT sbml_models)

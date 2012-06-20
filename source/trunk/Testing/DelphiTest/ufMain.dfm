@@ -60,7 +60,7 @@ object frmMain: TfrmMain
       Left = 420
       Top = 13
       Width = 269
-      Height = 19
+      Height = 21
       TabOrder = 0
       Text = 'C:\'
     end

@@ -126,7 +126,7 @@ procedure TfrmMain.btnSteadyStateClick(Sender: TObject);
 var d : double;
 begin
   d := steadyState;
-  showmessage ('steadyState return value:' + floattostr (d));
+//  showmessage ('steadyState return value:' + floattostr (d));
 end;
 
 procedure TfrmMain.Button1Click(Sender: TObject);

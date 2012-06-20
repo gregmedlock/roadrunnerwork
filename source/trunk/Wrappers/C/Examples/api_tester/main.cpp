@@ -28,7 +28,7 @@ int main()
 		freeText(text);
 	}
 
-	string fileName = "..\\Models\\feedback.xml";
+	string fileName = "..\\Models\\ss_threestep.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
