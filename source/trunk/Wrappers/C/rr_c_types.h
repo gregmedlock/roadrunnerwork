@@ -54,6 +54,13 @@ typedef struct RRResult
     char**          ColumnHeaders;
 } *RRResultHandle ;
 
+typedef struct RRCCode
+{
+    char*   Header;
+    char*   Source;
+
+} *RRCCodeHandle ;
+
 #if defined( __cplusplus)
 }
 #endif

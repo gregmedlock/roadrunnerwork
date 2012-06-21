@@ -11,7 +11,6 @@
 #include "rrObject.h"
 #include "rrStringListContainer.h"
 #include "rrHashTable.h"
-
 using std::vector;
 using std::string;
 using std::pair;
@@ -21,7 +20,7 @@ using std::deque;
 //---------------------------------------------------------------------------
 namespace rr
 {
-//class ASTNode;
+
 using namespace libsbml;
 class RR_DECLSPEC NOMSupport : public rrObject
 {

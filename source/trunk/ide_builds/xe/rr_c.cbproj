@@ -33,8 +33,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\;..\..\Wrappers\C\Apps\;..\..\src;..\..\Wrappers\C;..\..\Wrappers\C\Examples\rr_c\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\src\;..\..\Wrappers\C\Apps\;C:\rrInstalls\xe\lib\;..\..\Wrappers\C\Examples\rr_c\;C:\roadrunnerwork\trunk\Wrappers\C\Examples\rr_c\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\Wrappers\C\Apps\rr_c\;..\..\src\;..\..\Wrappers\C\Apps\;..\..\src;..\..\Wrappers\C;..\..\Wrappers\C\Examples\rr_c\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\Wrappers\C\Apps\rr_c\;..\..\src\;..\..\Wrappers\C\Apps\;C:\rrInstalls\xe\lib\;..\..\Wrappers\C\Examples\rr_c\;C:\roadrunnerwork\trunk\Wrappers\C\Examples\rr_c\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -102,15 +102,15 @@
 				<DependentOn>..\..\src\rrUtils.h</DependentOn>
 				<BuildOrder>4</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Wrappers\C\Apps\Args.cpp">
-				<BuildOrder>2</BuildOrder>
+			<CppCompile Include="..\..\Wrappers\C\Apps\rr_c\Args.cpp">
+				<BuildOrder>12</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Wrappers\C\Apps\GetOptions.cpp">
-				<DependentOn>..\..\Wrappers\C\Apps\GetOptions.h</DependentOn>
-				<BuildOrder>3</BuildOrder>
+			<CppCompile Include="..\..\Wrappers\C\Apps\rr_c\GetOptions.cpp">
+				<DependentOn>..\..\Wrappers\C\Apps\rr_c\GetOptions.h</DependentOn>
+				<BuildOrder>10</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Wrappers\C\Apps\main.cpp">
-				<BuildOrder>1</BuildOrder>
+			<CppCompile Include="..\..\Wrappers\C\Apps\rr_c\main.cpp">
+				<BuildOrder>11</BuildOrder>
 			</CppCompile>
 			<LibFiles Include="C:\rrInstalls\xe\lib\rr_c_api.lib">
 				<IgnorePath>true</IgnorePath>

@@ -18,7 +18,8 @@ C_DECL_SPEC char*                   __stdcall   getBuildDate(void);
 C_DECL_SPEC char*                   __stdcall   getCopyright(void);
 C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder);
 C_DECL_SPEC char*                   __stdcall   getTempFolder(void);
-//C_DECL_SPEC char*                   __stdcall   getCCode(void); <- to be added
+
+C_DECL_SPEC RRCCode*               	__stdcall   getCCode(void);
 
 
 //Flags/Options
@@ -101,6 +102,7 @@ C_DECL_SPEC bool                    __stdcall   freeLabelStringList(RRLabelStrin
 C_DECL_SPEC bool                    __stdcall   freeStringList(RRStringListHandle sl);
 C_DECL_SPEC bool                    __stdcall   freeRRDoubleVector(RRDoubleVectorHandle vector);
 C_DECL_SPEC bool                    __stdcall   freeRRDataMatrix(RRDataMatrixHandle matrix);
+C_DECL_SPEC bool                    __stdcall   freeCCode(RRCCodeHandle code);
 
 #if defined( __cplusplus)
 }

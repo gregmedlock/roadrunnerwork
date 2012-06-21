@@ -6,6 +6,7 @@ endif(${MSVC})
 
 set(examples 	
         api_tester
+        get_c_code
 )
 
 foreach(example ${examples})

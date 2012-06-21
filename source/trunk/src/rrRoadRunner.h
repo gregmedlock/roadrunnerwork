@@ -20,11 +20,14 @@
 
 using std::string;
 using namespace LIB_LA;
+
 namespace rr
 {
 class ModelGenerator;
 class SBMLModelSimulation;
 class ModelFromC;
+class CSharpGenerator;
+class CGenerator;
 
 LIB_LA::DoubleMatrix            mult(LIB_LA::DoubleMatrix& m1, LIB_LA::DoubleMatrix& m2);
 
@@ -153,14 +156,13 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double getScaledFluxControlCoefficient(string reactionName, string parameterName);
 
         //-------------- End of MCA functions
-
         SimulationSettings              mSettings;
 
     public:
         // Properties -----------------------------------------------------------------------------
         static bool                     mComputeAndAssignConservationLaws;
         static bool                     mConservedTotalChanged;
-//        static bool                   mReMultiplyCompartments;
+		//        static bool                   mReMultiplyCompartments;
         double*                         mL;
         double*                         mL0;
         double*                         mN;
@@ -173,8 +175,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
         int                             mNumPoints;
         string                          NL;
         StructAnalysis                  mStructAnalysis;                    //Object to facilitate calls to libStruct library
-
-
+        CGenerator*						GetCGenerator();
+        CSharpGenerator*				GetCSharpGenerator();
         //Functions --------------------------------------------------------------------
                                         RoadRunner();
         virtual                        ~RoadRunner();
@@ -239,7 +241,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         // ---------------------------------------------------------------------
         double                          steadyState();
         static void                     TestSettings();
-//        double*                         mult(const double*& m1,const double*& m2);
+		//        double*                         mult(const double*& m1,const double*& m2);
 
         LIB_LA::DoubleMatrix            getReducedJacobian();
         double*                         getFullJacobian();

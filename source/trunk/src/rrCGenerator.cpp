@@ -91,15 +91,13 @@ bool CGenerator::SaveSourceCodeToFolder(const string& folder)
 string CGenerator::generateModelCode(const string& sbmlStr)
 {
     Log(lDebug4)<<"Entering CGenerators generateModelCode(string) function";
-
-    StringList      Warnings;
-
+    StringList  Warnings;
     CodeBuilder ignore;     //The Write functions below are inherited with a CodeBuilder in the
                             //prototype that is not to be used..
 
     //Clear header and source file objects...
     mHeader.Clear();
-      mSource.Clear();
+    mSource.Clear();
     mNOM.Reset();
     string sASCII = mNOM.convertTime(sbmlStr, "time");
 
@@ -130,7 +128,7 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     mfunctionNames.empty();
     mfunctionParameters.empty();
 
-       LibStructural* instance = LibStructural::getInstance();
+    LibStructural* instance = LibStructural::getInstance();
     string msg;
     try
     {

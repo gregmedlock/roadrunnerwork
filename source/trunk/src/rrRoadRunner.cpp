@@ -17,7 +17,6 @@
 #include "rrSBMLModelSimulation.h"
 
 //---------------------------------------------------------------------------
-
 using namespace std;
 
 namespace rr
@@ -77,6 +76,16 @@ bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
     return true;
 }
 
+CGenerator*	RoadRunner::GetCGenerator()
+{
+	return dynamic_cast<CGenerator*>(mCGenerator);
+}
+
+CSharpGenerator* RoadRunner::GetCSharpGenerator()
+{
+	return dynamic_cast<CSharpGenerator*>(mCSharpGenerator);
+}
+
 bool RoadRunner::SetTempFileFolder(const string& folder)
 {
     if(FolderExists(folder))
@@ -95,7 +104,6 @@ string RoadRunner::GetTempFileFolder ()
 {
     return mTempFileFolder;
 }
-
 
 bool RoadRunner::CreateSelectionList()
 {
