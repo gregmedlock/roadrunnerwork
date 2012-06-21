@@ -3,7 +3,7 @@ object frmMain: TfrmMain
   Top = 0
   Caption = 'Test uRoadRunnerAPI.pas'
   ClientHeight = 563
-  ClientWidth = 814
+  ClientWidth = 907
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,35 +13,20 @@ object frmMain: TfrmMain
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnCreate = FormCreate
   DesignSize = (
-    814
+    907
     563)
   PixelsPerInch = 96
   TextHeight = 13
-  object lblBuildDate: TLabel
-    Left = 10
-    Top = 48
-    Width = 14
-    Height = 13
-    Caption = 'NA'
-  end
-  object Button1: TButton
-    Left = 8
-    Top = 16
-    Width = 121
-    Height = 25
-    Caption = 'Load DLL'
-    Default = True
-    TabOrder = 0
-    OnClick = Button1Click
-  end
   object pnlBottm: TPanel
     Left = 0
     Top = 522
-    Width = 814
+    Width = 907
     Height = 41
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 0
+    ExplicitWidth = 814
     object lblProgress: TLabel
       Left = 8
       Top = 16
@@ -50,41 +35,41 @@ object frmMain: TfrmMain
       Caption = 'Ok'
     end
     object Label1: TLabel
-      Left = 352
+      Left = 417
       Top = 16
       Width = 66
       Height = 13
       Caption = 'Temp Folder: '
     end
     object lblTempFolder: TEdit
-      Left = 420
+      Left = 485
       Top = 13
-      Width = 269
+      Width = 317
       Height = 21
       TabOrder = 0
       Text = 'C:\'
     end
   end
   object btnGetCopyright: TButton
-    Left = 8
-    Top = 75
+    Left = 358
+    Top = 16
     Width = 121
     Height = 25
     Caption = 'Get Copyright'
-    TabOrder = 2
+    TabOrder = 1
     OnClick = btnGetCopyrightClick
   end
   object btnLoadSBML: TButton
     Left = 8
-    Top = 106
+    Top = 8
     Width = 121
     Height = 25
     Caption = 'Load SBML'
-    TabOrder = 3
+    TabOrder = 2
     OnClick = btnLoadSBMLClick
   end
   object grid: TStringGrid
-    Left = 392
+    Left = 485
     Top = 0
     Width = 422
     Height = 522
@@ -92,70 +77,81 @@ object frmMain: TfrmMain
     Anchors = [akLeft, akTop, akBottom]
     DefaultColWidth = 84
     FixedCols = 0
-    TabOrder = 4
+    TabOrder = 3
+    ExplicitLeft = 392
   end
   object btnGetReactionNames: TButton
-    Left = 262
-    Top = 75
+    Left = 358
+    Top = 82
     Width = 121
     Height = 25
     Caption = 'Get Reaction Names'
-    TabOrder = 5
+    TabOrder = 4
     OnClick = btnGetReactionNamesClick
   end
   object btnGetAvailableSymbols: TButton
-    Left = 135
-    Top = 106
+    Left = 358
+    Top = 113
     Width = 121
     Height = 25
     Caption = 'Get Available Symbols'
-    TabOrder = 6
+    TabOrder = 5
     OnClick = btnGetAvailableSymbolsClick
   end
   object lstSummary: TListBox
     Left = 8
     Top = 199
-    Width = 375
+    Width = 468
     Height = 317
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 13
-    TabOrder = 7
+    TabOrder = 6
+    ExplicitWidth = 375
   end
   object btnSteadyState: TButton
-    Left = 135
-    Top = 75
+    Left = 8
+    Top = 97
     Width = 121
     Height = 25
     Caption = 'Steady State'
-    TabOrder = 8
+    TabOrder = 7
     OnClick = btnSteadyStateClick
   end
   object edtModelName: TEdit
-    Left = 135
-    Top = 18
+    Left = 8
+    Top = 39
     Width = 121
     Height = 21
-    TabOrder = 9
+    TabOrder = 8
     Text = 'ss_MinusOneError.xml'
   end
   object btnLoadTwoModels: TButton
-    Left = 262
-    Top = 106
+    Left = 8
+    Top = 168
     Width = 121
     Height = 25
-    Caption = 'Load Two Models'
-    TabOrder = 10
+    Caption = 'Load Two Models Test'
+    TabOrder = 9
     OnClick = btnLoadTwoModelsClick
   end
   object chkConservationLaws: TCheckBox
-    Left = 136
-    Top = 48
+    Left = 135
+    Top = 16
     Width = 153
     Height = 17
     Caption = 'Use Conservation Laws'
     Checked = True
     State = cbChecked
-    TabOrder = 11
+    TabOrder = 10
     OnClick = chkConservationLawsClick
+  end
+  object btnSimulate: TButton
+    Left = 8
+    Top = 66
+    Width = 121
+    Height = 25
+    Caption = 'Simulate'
+    TabOrder = 11
+    OnClick = btnSimulateClick
   end
 end

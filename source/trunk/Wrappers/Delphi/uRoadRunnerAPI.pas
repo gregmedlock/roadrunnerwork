@@ -170,7 +170,7 @@ function  computeSteadyStateValues : TDoubleArray;
 
 function  getAvailableSymbols : TRRLIst;
 
-function setComputeAndAssignConservationLaws (var value : boolean) : boolean;
+function setComputeAndAssignConservationLaws (value : boolean) : boolean;
 
 procedure setRoadRunnerLibraryName (newLibName : AnsiString);
 function  loadRoadRunner (var errMsg : AnsiString) : boolean;
@@ -307,7 +307,7 @@ begin
   result := libGetLastError;
 end;
 
-function setComputeAndAssignConservationLaws (var value : boolean) : boolean;
+function setComputeAndAssignConservationLaws (value : boolean) : boolean;
 begin
   result := libSetComputeAndAssignConservationLaws (value);
 end;

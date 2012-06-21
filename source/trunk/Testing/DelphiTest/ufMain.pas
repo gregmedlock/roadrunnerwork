@@ -8,7 +8,6 @@ uses
 
 type
   TfrmMain = class(TForm)
-    Button1: TButton;
     pnlBottm: TPanel;
     lblProgress: TLabel;
     btnGetCopyright: TButton;
@@ -18,13 +17,12 @@ type
     btnGetAvailableSymbols: TButton;
     lstSummary: TListBox;
     btnSteadyState: TButton;
-    lblBuildDate: TLabel;
     edtModelName: TEdit;
     btnLoadTwoModels: TButton;
     Label1: TLabel;
     lblTempFolder: TEdit;
     chkConservationLaws: TCheckBox;
-    procedure Button1Click(Sender: TObject);
+    btnSimulate: TButton;
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetReactionNamesClick(Sender: TObject);
@@ -33,6 +31,8 @@ type
     procedure btnLoadTwoModelsClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure chkConservationLawsClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btnSimulateClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -69,12 +69,9 @@ var str : AnsiString;
     m : TMatrix;
     i, j : integer;
     list : TStringList;
-    b : boolean;
 begin
   rrInstance := getRRInstance;
-  b := true;
-  setComputeAndAssignConservationLaws (b);
-
+  setComputeAndAssignConservationLaws (chkConservationLaws.checked);
   lstSummary.Clear;
 
   str := AnsiString (TFile.ReadAllText(edtModelName.text));
@@ -83,6 +80,13 @@ begin
      lblProgress.Caption := 'Failed to load SBML model';
      exit;
      end;
+end;
+
+procedure TfrmMain.btnSimulateClick(Sender: TObject);
+var list: TStringList;
+    i, j: integer;
+    m : TMatrix;
+begin
   list := TStringList.Create;
   //list.Add ('time');
   //list.Add ('Node0');
@@ -139,23 +143,6 @@ begin
   fn.free;
 end;
 
-procedure TfrmMain.Button1Click(Sender: TObject);
-var errMsg : AnsiString; instance : Pointer;
-begin
-  if loadRoadRunner (errMsg) then
-     begin
-     instance := getRRInstance;
-     lblProgress.caption := 'RoadRunner Loaded';
-     lblBuildDate.Caption := 'Build Date: ' + getBuildDate;
-     lblTempFolder.Text := getTempFolder;
-     end
-  else
-     begin
-     lblProgress.caption := string (errMsg);
-     lblBuildDate.Caption := 'Failed to load';
-     end;
-end;
-
 procedure TfrmMain.chkConservationLawsClick(Sender: TObject);
 var b : boolean;
 begin
@@ -169,6 +156,19 @@ end;
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   freeRRInstance (rrInstance);
+end;
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+var errMsg : AnsiString;
+begin
+  if loadRoadRunner (errMsg) then
+     begin
+     rrInstance := getRRInstance;
+     lblProgress.caption := 'RoadRunner Loaded: ' + 'Build Date: ' + getBuildDate;
+     lblTempFolder.Text := getTempFolder;
+     end
+  else
+     lblProgress.caption := 'Failed to load: ' + string (errMsg);
 end;
 
 procedure TfrmMain.btnLoadTwoModelsClick(Sender: TObject);
