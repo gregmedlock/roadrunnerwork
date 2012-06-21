@@ -22,6 +22,8 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<Defines>STATIC_RR;$(Defines)</Defines>
+			<FinalOutputDir>$(RR_INSTALLS)\bin</FinalOutputDir>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
@@ -31,13 +33,13 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src;..\..\Wrappers\C;..\..\Wrappers\C\Examples\rr_c\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>C:\rrInstalls\xe\lib\;..\..\Wrappers\C\Examples\rr_c\;C:\roadrunnerwork\trunk\Wrappers\C\Examples\rr_c\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\src\;..\..\Wrappers\C\Apps\;..\..\src;..\..\Wrappers\C;..\..\Wrappers\C\Examples\rr_c\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\src\;..\..\Wrappers\C\Apps\;C:\rrInstalls\xe\lib\;..\..\Wrappers\C\Examples\rr_c\;C:\roadrunnerwork\trunk\Wrappers\C\Examples\rr_c\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
-			<IntermediateOutputDir>.\$(Config)\$(Platform)</IntermediateOutputDir>
+			<IntermediateOutputDir>.\$(Config)\$(Platform)\rr_c</IntermediateOutputDir>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
@@ -64,14 +66,51 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\Wrappers\C\Examples\rr_c\Args.cpp">
+			<CppCompile Include="..\..\src\rrFileLog.cpp">
+				<DependentOn>..\..\src\rrFileLog.h</DependentOn>
+				<BuildOrder>12</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrLog.cpp">
+				<DependentOn>..\..\src\rrLog.h</DependentOn>
+				<BuildOrder>5</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrLogFile.cpp">
+				<DependentOn>..\..\src\rrLogFile.h</DependentOn>
+				<BuildOrder>6</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrLoggerUtils.cpp">
+				<DependentOn>..\..\src\rrLoggerUtils.h</DependentOn>
+				<BuildOrder>7</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrLogLevel.cpp">
+				<DependentOn>..\..\src\rrLogLevel.h</DependentOn>
+				<BuildOrder>8</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrLogOutput.cpp">
+				<DependentOn>..\..\src\rrLogOutput.h</DependentOn>
+				<BuildOrder>9</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrObject.cpp">
+				<DependentOn>..\..\src\rrObject.h</DependentOn>
+				<BuildOrder>11</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrStringUtils.cpp">
+				<DependentOn>..\..\src\rrStringUtils.h</DependentOn>
+				<BuildOrder>10</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\src\rrUtils.cpp">
+				<DependentOn>..\..\src\rrUtils.h</DependentOn>
+				<BuildOrder>4</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\Wrappers\C\Apps\Args.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Wrappers\C\Examples\rr_c\GetOptions.cpp">
+			<CppCompile Include="..\..\Wrappers\C\Apps\GetOptions.cpp">
+				<DependentOn>..\..\Wrappers\C\Apps\GetOptions.h</DependentOn>
 				<BuildOrder>3</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\Wrappers\C\Examples\rr_c\main.cpp">
-				<BuildOrder>0</BuildOrder>
+			<CppCompile Include="..\..\Wrappers\C\Apps\main.cpp">
+				<BuildOrder>1</BuildOrder>
 			</CppCompile>
 			<LibFiles Include="C:\rrInstalls\xe\lib\rr_c_api.lib">
 				<IgnorePath>true</IgnorePath>
@@ -128,6 +167,9 @@
 						<ProjectProperties Name="ManagePaths">True</ProjectProperties>
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
+					<Parameters>
+						<Parameters Name="RunParams">-p -m./../Models/ss_TurnOnConservationAnalysis.xml -x -t&quot;c:/rrTemp&quot; -p</Parameters>
+					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>
 					<Platform value="Win32">True</Platform>

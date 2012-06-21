@@ -41,6 +41,18 @@ string GetUsersTempDataFolder()
     }
     return string(lpTempPathBuffer);
 }
+string GetFileContent(const string& fName)
+{
+	string content;
+
+    vector<string> lines = GetLinesInFile(fName);
+    for(int i = 0; i < lines.size(); i++)
+    {
+        content += lines[i];
+    }
+
+    return content;
+}
 
 vector<string> GetLinesInFile(const string& fName)
 {
@@ -54,9 +66,7 @@ vector<string> GetLinesInFile(const string& fName)
     }
 
     std::string oneLine((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
-
     lines = SplitString(oneLine, "\n");
-
     return lines;
 }
 

@@ -51,7 +51,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<IntermediateOutputDir>.\$(Config)\$(Platform)\shared</IntermediateOutputDir>
+			<IntermediateOutputDir>.\$(Config)\$(Platform)\rr_shared</IntermediateOutputDir>
 			<BPILibOutputDir>$(RR_INSTALLS)\lib</BPILibOutputDir>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>

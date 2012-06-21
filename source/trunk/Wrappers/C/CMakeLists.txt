@@ -1,5 +1,8 @@
 set(target rr_c_api)
 
+set(C_API_INCLUDE_ROOT "${RR_ROOT}/Wrappers/C")
+include_directories(${C_API_INCLUDE_ROOT})
+
 add_library(${target} SHARED
 rr_c_api.cpp
 rr_dll_entry_point.cpp
@@ -25,14 +28,14 @@ if(${MINGW})
 target_link_libraries (${target} roadrunner)
 else()
 target_link_libraries (${target} roadrunner-static)
-#target_link_libraries (${target} libsbml-static)
-#target_link_libraries (${target} sundials_cvode)
-#target_link_libraries (${target} sundials_nvecserial)
 target_link_libraries (${target} blas)
 target_link_libraries (${target} lapack)
 target_link_libraries (${target} libf2c)
 endif()
 
+
+
+add_subdirectory(Apps)
 add_subdirectory(Examples)
 
 #=============== INSTALL =====================

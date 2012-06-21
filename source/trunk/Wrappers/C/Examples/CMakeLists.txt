@@ -1,16 +1,10 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
 PROJECT(RR_C_API_Examples)
-set(C_API_INCLUDE_ROOT "${RR_ROOT}/Wrappers/C")
-
-# rr Includes
-include_directories(${C_API_INCLUDE_ROOT})
-
 if(${MSVC})
 
 endif(${MSVC})
 
 set(examples 	
-		rr_c  
         api_tester
 )
 

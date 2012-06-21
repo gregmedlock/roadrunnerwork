@@ -21,6 +21,7 @@ RR_DECLSPEC bool            FolderExists(const string& folderN);
 RR_DECLSPEC bool            CreateFolder(const string& path);
 RR_DECLSPEC string          GetUsersTempDataFolder();
 RR_DECLSPEC vector<string>  GetLinesInFile(const string& fName);
+RR_DECLSPEC string  		GetFileContent(const string& fName);
 RR_DECLSPEC void            CreateTestSuiteFileNameParts(int caseNr, const string& postFixPart, string& FilePath, string& modelFileName);
 RR_DECLSPEC string          GetTestSuiteSubFolderName(int caseNr);
 RR_DECLSPEC bool            CopyCArrayToStdVector(int* src,     vector<int>& dest, int size);

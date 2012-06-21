@@ -65,6 +65,7 @@ int main(int argc, char * argv[])
         {
             gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(args.TempDataFolder, "RoadRunner.log") )));
         }
+
         Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
 
         Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
@@ -161,7 +162,6 @@ int main(int argc, char * argv[])
             //Write to std out
             SimulationData result = simulation.GetResult();
             Log(lShowAlways)<<result;
-
         }
 
         //All paths leads to end..

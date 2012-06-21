@@ -46,7 +46,6 @@ relativeTolerance(defaultTolerance)
     if(!mDLLInstance)
     {
     	Log(lError)<<"We failed to load the NLEQ DLL.";
-        return;
     }
 
     //Load the NLEQ1 function
@@ -158,8 +157,7 @@ double NLEQInterface::solve(const vector<double>& yin)
 
     //NLEQ1(ref n, fcn, null, model->amounts, XScal, ref tmpTol, iopt, ref ierr, ref LIWK, IWK, ref LWRK, RWK);
 
-    NLEQ1(
-				&n,
+    NLEQ1(      &n,
                 &ModelFcn,
                 NULL,
                 model->amounts,

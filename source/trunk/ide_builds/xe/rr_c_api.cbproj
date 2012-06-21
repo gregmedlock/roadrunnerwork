@@ -90,21 +90,17 @@
 			</LibFiles>
 			<LibFiles Include="C:\rrInstalls\xe\lib\libsbml-static.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>6</BuildOrder>
+				<BuildOrder>10</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="C:\rrInstalls\xe\lib\libxml2_xe.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>7</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\roadrunner.lib">
+			<LibFiles Include="C:\rrInstalls\xe\lib\roadrunner-static.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>11</BuildOrder>
+				<BuildOrder>7</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>10</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="C:\rrInstalls\xe\lib\sundials_kinsol.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>8</BuildOrder>
 			</LibFiles>
