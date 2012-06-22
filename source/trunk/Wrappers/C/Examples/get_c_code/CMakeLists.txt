@@ -1,9 +1,22 @@
 set(target get_c_code)
 
+set(rrSrc "../../../../src")
 add_executable( ${target} 
 main.cpp
+${rrSrc}/rrFileLog.cpp
+${rrSrc}/rrLog.cpp
+${rrSrc}/rrLogFile.cpp
+${rrSrc}/rrLoggerUtils.cpp
+${rrSrc}/rrLogOutput.cpp
+${rrSrc}/rrObject.cpp
+${rrSrc}/rrStringUtils.cpp
+${rrSrc}/rrUtils.cpp
 )
 
+set_property(   TARGET ${target} 
+                PROPERTY  COMPILE_DEFINITIONS 
+                          STATIC_RR             #when linking with static lib, no declspec shuld be present..
+)
 target_link_libraries (${target} rr_c_api)
 
 install(

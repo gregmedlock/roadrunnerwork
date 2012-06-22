@@ -32,8 +32,7 @@ int main(int argc, char* argv[])
 
     string settingsFile;
     stringstream ss;
-    char* error;
-
+    
 	bool doMore = true;	//set to false to move to end
 
     cout<<"======== RoadRunner C API Client==================\n";

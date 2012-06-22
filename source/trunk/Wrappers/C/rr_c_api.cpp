@@ -1075,6 +1075,8 @@ RRCCode* __stdcall getCCode(void)
         }
 
         RRCCode* cCode = new RRCCode;
+		cCode->Header = NULL;
+		cCode->Source = NULL;
         string header = generator->GetHeaderCode();
         string source = generator->GetSourceCode();
 

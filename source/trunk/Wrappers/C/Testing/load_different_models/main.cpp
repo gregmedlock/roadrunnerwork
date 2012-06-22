@@ -41,34 +41,19 @@ int main()
         cerr<<"Last error: "<<getLastError()<<endl;
     }
 
-	RRCCode* code = getCCode();
-    if(!code)
+
+  	fileName = "..\\Models\\feedback.xml";
+	sbml = GetFileContent(fileName.c_str());
+
+    //To get the CCode, the CCode needs to be generated
+    if(!loadSBML(sbml.c_str()))
     {
-	  	cerr<<"Failed to get CCode from RoadRunner";
+    	cerr<<"Failed loading SBML.\n";
+        cerr<<"Last error: "<<getLastError()<<endl;
     }
 
-    cout<<"START OF CODE ==========\n";
-	if(code->Header)
-	{
-		cout<<"C Header =========== \n"<<code->Header<<"\n";
-	}
-	else
-	{
-		cout<<"C Header =========== \n"<<" is NULL"<<"\n";
-	}
-
-	if(code->Source)
-	{
-		cout<<"C Source =========== \n"<<code->Source<<"\n";
-	}
-	else
-	{
-		cout<<"C Source =========== \n"<<" is NULL"<<"\n";
-	}
-	
-    cout<<"END OF CODE ==========\n";
 	///// Cleanup
-    freeCCode(code);
+
 
     text = getCopyright();
     if(hasError())
