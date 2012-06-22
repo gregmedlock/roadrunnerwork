@@ -26,7 +26,6 @@ object frmMain: TfrmMain
     Height = 41
     Align = alBottom
     TabOrder = 0
-    ExplicitWidth = 814
     object lblProgress: TLabel
       Left = 8
       Top = 16
@@ -78,7 +77,6 @@ object frmMain: TfrmMain
     DefaultColWidth = 84
     FixedCols = 0
     TabOrder = 3
-    ExplicitLeft = 392
   end
   object btnGetReactionNames: TButton
     Left = 358
@@ -106,7 +104,6 @@ object frmMain: TfrmMain
     Anchors = [akLeft, akTop, akRight, akBottom]
     ItemHeight = 13
     TabOrder = 6
-    ExplicitWidth = 375
   end
   object btnSteadyState: TButton
     Left = 8

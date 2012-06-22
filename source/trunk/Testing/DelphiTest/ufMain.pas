@@ -136,10 +136,17 @@ var d : double;
     i : integer;
 begin
   d := steadyState;
-  showmessage (Format('%g', [d]));
+  lstSummary.Clear;
+  lstSummary.Items.Add ('Steady State Report');
+  lstSummary.Items.Add ('-------------------');
+  lstSummary.Items.Add (Format('Return value from steadyState() = %g', [d]));
+  if d < 0 then
+     lstSummary.Items.Add (getLastError);
+  lstSummary.Items.Add ('');
+  lstSummary.Items.Add ('Species Concentrations:');
   fn := getFloatingSpeciesNames;
   for i := 0 to fn.Count - 1 do
-      showmessage (floattostr (getValue(fn[i])));
+      lstSummary.Items.Add (fn[i] + ' = ' + floattostr (getValue(fn[i])));
   fn.free;
 end;
 
