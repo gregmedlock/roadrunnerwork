@@ -25,33 +25,46 @@ namespace rr
 NOMSupport::NOMSupport()
 :
 mModel(NULL),
-STR_DoubleFormat("%.5G"),
-mSBMLDoc(NULL)
+mSBMLDoc(NULL),
+STR_DoubleFormat("%.5G")
 {}
 
 NOMSupport::~NOMSupport()
 {
+//    delete mModel;
+//    delete mSBMLDoc;
+}
+
+
+Model* NOMSupport::GetModel()
+{
+	return mModel;
+}
+
+SBMLDocument* NOMSupport::GetSBMLDocument()
+{
+	return mSBMLDoc;
 }
 
 void NOMSupport::Reset()
 {
     mSymbolTable.clear();
-    delete mModel;
-    delete mSBMLDoc;
-    mModel      = NULL;
-    mSBMLDoc    = NULL;
+//    delete mModel;
+//    delete mSBMLDoc;
+//    mModel      = NULL;
+//    mSBMLDoc    = NULL;
 }
 
 string NOMSupport::getNthCompartmentId(const int& nIndex)
 {
     if (mModel == NULL)
     {
-        throw new Exception("You need to load the model first");
+        throw Exception("You need to load the model first");
     }
 
     if (nIndex < 0 || nIndex >= (int) mModel->getNumCompartments())
     {
-        throw new Exception("Invalid input - Argument should be >= 0 and should be less than total number of compartments in the model");
+        throw Exception("Invalid input - Argument should be >= 0 and should be less than total number of compartments in the model");
 
     }
     Compartment *oCompartment = mModel->getCompartment((int)nIndex);
@@ -127,7 +140,7 @@ double NOMSupport::getValue(const string& sId)
     }
 
 
-    throw new Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
+    throw Exception("Invalid string name. The id '" + sId + "' does not exist in the model");
 }
 
 
@@ -1586,7 +1599,9 @@ ArrayList NOMSupport::getNthError(const int& nIndex)
     }
 
     if (nIndex >= mSBMLDoc->getNumErrors())
+    {
         throw Exception("Index out of Bounds.");
+    }
 
     SBMLError *error = (SBMLError*) mSBMLDoc->getError(nIndex);
     ArrayList oResult;// = new ArrayList();
@@ -3425,11 +3440,11 @@ void NOMSupport::loadSBML(const string& var0)
         {
             if (mModel != NULL)
             {
-                delete mModel;//.Dispose();
-                mModel = NULL;
+                //delete mModel;//.Dispose();
+                //mModel = NULL;
             }
-            delete mSBMLDoc;//mSBMLDoc.Dispose();
-            mSBMLDoc = NULL;
+            //delete mSBMLDoc;//mSBMLDoc.Dispose();
+            //mSBMLDoc = NULL;
         }
         catch(...)
         {
@@ -3468,6 +3483,7 @@ void NOMSupport::loadSBML(const string& var0)
 
 //    _ParameterSets = new ParameterSets(sTemp);
 
+	//Who is to delete this document??
     mSBMLDoc = readSBMLFromString(sTemp.c_str());
     mModel = mSBMLDoc->getModel();
     if (mModel == NULL)

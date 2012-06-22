@@ -77,8 +77,8 @@ class RR_DECLSPEC NOMSupport : public rrObject
        public:
                                 NOMSupport();
         virtual                ~NOMSupport();
-        Model*                  GetModel(){return mModel;}
-        SBMLDocument*           GetSBMLDocument(){return mSBMLDoc;}
+        Model*                  GetModel();
+        SBMLDocument*           GetSBMLDocument();
 
         ArrayList               getDerivedUnitDefinition(const string& sId);
         ArrayList               getListOfBoundarySpeciesIds();
