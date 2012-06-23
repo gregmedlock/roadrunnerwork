@@ -96,6 +96,16 @@ type
   end;
   PRRDataMatrixHandle = ^TRRDataMatrix;
 
+  TRRCCodeAPI = record
+    Header : PAnsiChar;
+    Source : PAnsiChar;
+  end;
+  TRRCCode = record
+    Header : AnsiString;
+    Source : AnsiString;
+  end;
+  PRRCCodeHandle = ^TRRCCodeAPI;
+
   TVoidCharFunc = function : PAnsiChar; stdcall;   //char* func(void)
   TVoidBoolFunc = function : boolean; stdcall; // bool func (void);
   TVoidIntFunc = function : integer; stdcall;
@@ -113,6 +123,7 @@ type
 
   TGetCopyright = TVoidCharFunc;
   TGetRRInstance = TPointerVoidFunc;
+  TGetCCode = function : PRRCCodeHandle; stdcall;
   TSetTimeStart = TDoubleBoolFunc;
   TSetTimeEnd = TDoubleBoolFunc;
   TSetNumPoints = TIntBoolFunc;
@@ -146,6 +157,7 @@ function  getLastError : AnsiString;
 function  getBuildDate : AnsiString;
 function  getCopyright : AnsiString;
 function  getTempFolder : AnsiString;
+function  getCCode : TRRCCode;
 
 function  loadSBML (sbmlStr : AnsiString) : boolean;
 function  loadSBMLFromFile (fileName : AnsiString) : boolean;
@@ -198,6 +210,8 @@ var DLLHandle : Cardinal;
     libGetBuildDate : TVoidCharFunc;        //
     libGetCopyright : TGetCopyright;        //
     libGetTempFolder : TVoidCharFunc;
+    libGetCCode : TGetCCode;
+
     libGetRRInstance : TGetRRInstance;      //
     libFreeRRInstance : TFreeRRInstance;    //
     libFreeRRResult : TFreeRRResult;        //
@@ -305,6 +319,14 @@ end;
 function getLastError : AnsiString;
 begin
   result := libGetLastError;
+end;
+
+function getCCode : TRRCCode;
+var p : PRRCCodeHandle;
+begin
+  p := libGetCCode;
+  result.Header := p^.Header;
+  result.Source := p^.Source;
 end;
 
 function setComputeAndAssignConservationLaws (value : boolean) : boolean;
@@ -637,7 +659,7 @@ begin
   setLength (result, p^.count);
   for i := 0 to p^.count - 1 do
       begin
-      result[i].labeStr := p^.list[i].labelStr;
+      result[i].labelStr := p^.list[i].labelStr;
       result[i].stringList := getArrayOfStrings  (@(p^.list[i]));
       end;}
 end;
@@ -703,6 +725,9 @@ begin
    @libGetTempFolder := GetProcAddress(dllHandle, PChar ('getTempFolder'));
    if not Assigned (libGetTempFolder) then
       begin errMsg := 'Unable to locate getTempFolder'; result := false; exit; end;
+   @libGetCCode := GetProcAddress(dllHandle, PChar ('getCCode'));
+   if not Assigned (libGetCCode) then
+      begin errMsg := 'Unable to locate getCCode'; result := false; exit; end;
 
    @libSetComputeAndAssignConservationLaws := GetProcAddress(dllHandle, PChar ('setComputeAndAssignConservationLaws'));
    if not Assigned (libSetComputeAndAssignConservationLaws) then
