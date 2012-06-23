@@ -1,6 +1,3 @@
-#ifndef rrC_APIH
-#define rrC_APIH
-
 /** 
  * @file rr_c_api.h
  * @brief roadRunner C API 2012
@@ -41,6 +38,9 @@
  *
  * redistribute any piece of this software without proper attribution;
 */
+
+#ifndef rrC_APIH
+#define rrC_APIH
 
 #if defined(__cplusplus)
 extern "C"
