@@ -44,7 +44,8 @@ mCurrentSBML(""),
 mModel(NULL),
 mModelDllHandle(NULL),
 mSimulation(NULL),
-mModelXMLFileName("sbml_model")
+mModelXMLFileName("sbml_model"),
+UseKinsol(false)
 {
     Log(lDebug4)<<"In RoadRunner CTOR";
     mCSharpGenerator    = new CSharpGenerator();

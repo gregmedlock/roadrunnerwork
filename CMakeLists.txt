@@ -21,6 +21,7 @@ if("${RELEASE_FOLDER}" STREQUAL "")
 endif()
 endif()
 
+
 #================ CPACK =========================================================================
 #Create distribution Pack
 include (InstallRequiredSystemLibraries)
@@ -77,10 +78,12 @@ endif()
 
 if(${MSVC})
 set(COMPILER_FOR_PACKAGE "vs")
+set(CPACK_PACKAGE_FILE_NAME "rr-vs_2010")
 endif()
 
 if(${MINGW})
 set(COMPILER_FOR_PACKAGE "mingw")
+set(CPACK_PACKAGE_FILE_NAME "rr-mingw")
 endif()
 
 #MESSAGE( STATUS "CMAKE_CFG_INTDIR: " ${CMAKE_CFG_INTDIR} )

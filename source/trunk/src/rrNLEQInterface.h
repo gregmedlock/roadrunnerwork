@@ -10,9 +10,9 @@ namespace rr
 {
 
 //int NLEQModelFcn(...);
-typedef void    (*c_ModelFcn)(long&, double*, double*, long&);
-typedef int 	(*U_fp)();
-typedef int 	(*cNLEQ1)(long int*,
+typedef void            (*c_ModelFcn)(long&, double*, double*, long&);
+typedef int 	        (*U_fp)();
+typedef int     	(__stdcall *cNLEQ1)(long int*,
 								c_ModelFcn,
 								c_ModelFcn,
                                 double*,
@@ -48,9 +48,9 @@ class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
     public:
         bool                            IsAvailable();
         static ModelFromC*              GetModel();
-        static long						GetN();
-        int                             maxIterations;
+        static long						GetN();        
         int                             defaultMaxInterations;
+        int                             maxIterations;
         double                          defaultTolerance;
         double                          relativeTolerance;
 

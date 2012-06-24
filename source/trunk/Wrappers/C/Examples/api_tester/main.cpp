@@ -9,9 +9,37 @@
 //---------------------------------------------------------------------------
 using namespace std;
 
-int main()
+#if defined(_WIN32) || defined(__CODEGEAR__)
+#  include <direct.h>
+#  define getcwd _getcwd
+#  define chdir  _chrdir
+#else
+#  include <unistd.h>
+
+#endif
+
+int main(int argc, char* argv[])
 {
-    RRHandle rrHandle = NULL;
+
+	string modelsPath(".\\..\\Models");
+	if(argc > 1)
+	{
+		modelsPath = argv[1];
+	}
+
+	char* buffer;
+	// Get the current working directory:
+	if( (buffer = _getdcwd( NULL, 0 )) == NULL )
+	{
+		perror( "getcwd error" );
+	}
+	else
+	{
+		printf( "%s \nLength: %d\n", buffer, strnlen(buffer, 1024) );
+		free(buffer);
+	}
+	
+	RRHandle rrHandle = NULL;
     rrHandle =  getRRInstance();
 
     if(!rrHandle)
@@ -30,13 +58,13 @@ int main()
 
     setTempFolder("c:\\rrTemp");
 
-	string fileName = "..\\Models\\ss_TurnOnConservationAnalysis.xml";
+	string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
 		stringstream msg;
 		msg<<"Failed opening file: "<<fileName;
-		cerr<<msg;
+		cerr<<msg.str();
 		return false;
 	}
 

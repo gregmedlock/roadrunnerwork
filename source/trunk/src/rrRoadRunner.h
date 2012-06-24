@@ -221,7 +221,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         // ---------------------------------------------------------------------
         // Start of Level 2 API Methods
         // ---------------------------------------------------------------------
-        int                             UseKinsol;
+        bool                            UseKinsol;
         string                          getCapabilities();
         void                            setTolerances(const double& aTol, const double& rTol);
         void                            setTolerances(const double& aTol, const double& rTol, const int& maxSteps);

@@ -39,8 +39,10 @@ mNLEQDLLName("rr_nleq.dll"),
 mDLLInstance(NULL),
 defaultMaxInterations(100),
 defaultTolerance(1.e-4),
-relativeTolerance(defaultTolerance)
+relativeTolerance(defaultTolerance),
+maxIterations(defaultMaxInterations)
 {
+            
 	//First load the nleq DLL and assign nleq function to function pointer
     mDLLInstance = LoadDLL(mNLEQDLLName);
     if(!mDLLInstance)
@@ -49,7 +51,7 @@ relativeTolerance(defaultTolerance)
     }
 
     //Load the NLEQ1 function
-    NLEQ1 = (cNLEQ1) GetFunctionPtr("_NLEQ1", mDLLInstance);
+    NLEQ1 = (cNLEQ1) GetFunctionPtr("NLEQ1", mDLLInstance);
 
     if(!NLEQ1)
     {
@@ -386,8 +388,6 @@ bool NLEQInterface::Test(const string& fileName)
 
 string ErrorForStatus(const int& error)
 {
-    if (error > 0)
-    {
         switch (error)
         {
             case 1:     return ("Jacobian matrix singular in NLEQ");
@@ -405,8 +405,7 @@ string ErrorForStatus(const int& error)
             case 82:    return ("Possible negative concentrations in solution (NLEQ)");
             case 83:    return ("Error signalled by user routine JAC in NLEQ");
             default:    return (Format("Unknown error in NLEQ, errCode = {0}", error));
-        }
-    }
+        }   
 }
 
 double NLEQInterface::ComputeSumsOfSquares()

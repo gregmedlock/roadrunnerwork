@@ -31,7 +31,7 @@ int main()
 		freeText(text);
 	}
 
-	string fileName = "..\\Models\\test_1.xml";
+	string fileName = "..\\Models\\test_2.xml";
 	string sbml = GetFileContent(fileName.c_str());
 
     //To get the CCode, the CCode needs to be generated

@@ -31,8 +31,9 @@ static integer c__4 = 4;
 static integer c__5 = 5;
 static integer c__9 = 9;
 
+//#pragma comment(linker, "/EXPORT:NLEQ1=_NLEQ1@12")
 /* Subroutine */
-DLLEXPORT int NLEQ1(integer *n, U_fp fcn, U_fp jac, doublereal *x,
+DLLEXPORT int STDCALL NLEQ1(integer *n, U_fp fcn, U_fp jac, doublereal *x,
 	doublereal *xscal, doublereal *rtol, integer *iopt, integer *ierr,
 	integer *liwk, integer *iwk, integer *lrwk, doublereal *rwk)
 {
