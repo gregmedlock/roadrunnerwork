@@ -38,9 +38,9 @@ nOpts(50),
 mNLEQDLLName("rr_nleq.dll"),
 mDLLInstance(NULL),
 defaultMaxInterations(100),
+maxIterations(defaultMaxInterations),
 defaultTolerance(1.e-4),
-relativeTolerance(defaultTolerance),
-maxIterations(defaultMaxInterations)
+relativeTolerance(defaultTolerance)
 {
             
 	//First load the nleq DLL and assign nleq function to function pointer

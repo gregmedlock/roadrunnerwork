@@ -1,12 +1,12 @@
-/** 
+/**
  * @file rr_c_api.h
  * @brief roadRunner C API 2012
  * @author Totte Karlsson & Herbert M Sauro
- * 
+ *
  * <--------------------------------------------------------------
- * This file is part of cRoadRunner. 
+ * This file is part of cRoadRunner.
  * See http://code.google.com/p/roadrunnerwork/ for more details.
- * 
+ *
  * Copyright (C) 2012
  *   University of Washington, Seattle, WA, USA
  *
@@ -131,7 +131,8 @@ C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getGlobalParameterNames();
 C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();              // <- You'll have to decide what type to return
 
-// Print functions
+// Print/format functions
+C_DECL_SPEC char*                   __stdcall   getResultAsString(RRResultHandle result);
 C_DECL_SPEC void                    __stdcall   printMatrix(RRDataMatrixHandle mat);
 C_DECL_SPEC void                    __stdcall   printVector(RRDoubleVectorHandle vec);
 

@@ -361,7 +361,8 @@ vector<double> RoadRunner::BuildModelEvalArgument()
 DoubleMatrix RoadRunner::runSimulation()
 {
     double hstep = (mTimeEnd - mTimeStart) / (mNumPoints - 1);
-    DoubleMatrix results(mNumPoints, selectionList.size());
+    int nrCols = selectionList.size();
+    DoubleMatrix results(mNumPoints, nrCols);
 
     if(!mModel)
     {
@@ -562,9 +563,9 @@ bool RoadRunner::loadSBML(const string& sbml)
         modelLoaded = false;
     }
 
-    mCurrentSBML = sbml;
+    mCurrentSBML 	= sbml;
+    string dllName  = GetDLLName();
 
-    string   dllName  = GetDLLName();
 
     //Shall we compile model if it exists?
     bool compileIfDllExists = mSimulation ? mSimulation->CompileIfDllExists() : true;
@@ -575,8 +576,14 @@ bool RoadRunner::loadSBML(const string& sbml)
         compile = false;
     }
 
+
     if(compile)
     {
+        if(mModelDllHandle)	//Make sure the dll is unloaded
+        {
+            UnLoadDLL(mModelDllHandle);
+        }
+
         if(!GenerateAndCompileModel())
         {
             return false;

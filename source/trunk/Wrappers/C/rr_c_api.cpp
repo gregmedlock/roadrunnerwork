@@ -1,12 +1,12 @@
-/** 
+/**
  * @file rr_c_api.cpp
  * @brief roadRunner C API 2012
  * @author Totte Karlsson & Herbert M Sauro
- * 
+ *
  * <--------------------------------------------------------------
- * This file is part of cRoadRunner. 
+ * This file is part of cRoadRunner.
  * See http://code.google.com/p/roadrunnerwork/ for more details.
- * 
+ *
  * Copyright (C) 2012
  *   University of Washington, Seattle, WA, USA
  *
@@ -45,6 +45,7 @@
 #pragma hdrstop
 //---------------------------------------------------------------------------
 #include <windows.h>
+#include <sstream>
 #include "rrRoadRunner.h"
 #include "rrCGenerator.h"
 #include "rrLogger.h"           //Might be useful for debugging later on
@@ -53,6 +54,7 @@
 #include "rrException.h"
 //---------------------------------------------------------------------------
 
+using namespace std;
 using namespace rr;
 using namespace rr_c_api;
 namespace rr_c_api
@@ -539,79 +541,6 @@ RRDataMatrixHandle __stdcall getStoichiometryMatrix(void)
 	return false;
 }
 
-void __stdcall printMatrix(RRDataMatrixHandle matrixHandle)
-{
-	try
-    {
-        gLog.SetCutOffLogLevel(lDebug2);
-
-        if(!matrixHandle)
-        {
-            Log(lInfo)<<"Null matrix in printMatrix...";
-            return;
-        }
-
-        RRDataMatrix& mat = *matrixHandle;
-        stringstream ss;
-        ss<<"matrix dimension: "<<mat.RSize<<"x"<<mat.CSize<<" --\n";
-
-        int index = 0;
-        for(int row = 0; row < mat.RSize; row++)
-        {
-            for(int col = 0; col < mat.CSize; col++)
-            {
-                ss<<mat.Data[index++];
-                if(col < mat.CSize + 1)
-                {
-                    ss<<"\t";
-                }
-            }
-            ss<<endl;
-        }
-        cout<<ss.str();
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
-    }
-}
-
-void __stdcall printVector(RRDoubleVectorHandle vecHandle)
-{
-	try
-    {
-        gLog.SetCutOffLogLevel(lDebug2);
-        if(!vecHandle)
-        {
-            Log(lInfo)<<"Null vector in printMatrix...";
-            return;
-        }
-
-        RRDoubleVector& vec = *vecHandle;
-
-        stringstream ss;
-        ss<<"vector dimension: "<<vec.Size<<" \n";
-
-        for(int index = 0; index < vec.Size; index++)
-        {
-            ss<<vec.Data[index];
-            if(index < vec.Size + 1)
-            {
-                ss<<"\t";
-            }
-        }
-        ss<<endl;
-        cout<<ss.str();
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
-    }
-}
 
 C_DECL_SPEC bool __stdcall hasError()
 {
@@ -1141,6 +1070,127 @@ RRCCode* __stdcall getCCode(void)
         SetAPIError(msg.str());
     }
 	return NULL;
+}
+
+//Print functions ==========================================================
+char* __stdcall getResultAsString(RRResultHandle result)
+{
+	try
+    {
+		stringstream resStr;
+		//RRResult is a 2D matrix, and column headers (strings)
+        //First header....
+	    for(int i = 0; i < result->CSize; i++)
+        {
+        	resStr<<result->ColumnHeaders[i];
+            if(i < result->CSize -1)
+            {
+            	resStr <<"\t";
+            }
+        }
+        resStr<<endl;
+
+        //Then the data
+        int index = 0;
+	    for(int j = 0; j < result->RSize; j++)
+   	    {
+		    for(int i = 0; i < result->CSize; i++)
+    	    {
+        		resStr<<result->Data[index++];
+	            if(i < result->CSize -1)
+    	        {
+        	    	resStr <<"\t";
+            	}
+            }
+	    	resStr <<"\n";
+        }
+
+
+		string strTmp = resStr.str();
+    	char* resultChar = new char[strTmp.size() + 1];
+        strcpy(resultChar, strTmp.c_str());
+        return resultChar;
+
+    }
+    catch(Exception& ex)
+    {
+
+    }
+    return NULL;
+}
+
+void __stdcall printMatrix(RRDataMatrixHandle matrixHandle)
+{
+	try
+    {
+        gLog.SetCutOffLogLevel(lDebug2);
+
+        if(!matrixHandle)
+        {
+            Log(lInfo)<<"Null matrix in printMatrix...";
+            return;
+        }
+
+        RRDataMatrix& mat = *matrixHandle;
+        stringstream ss;
+        ss<<"matrix dimension: "<<mat.RSize<<"x"<<mat.CSize<<" --\n";
+
+        int index = 0;
+        for(int row = 0; row < mat.RSize; row++)
+        {
+            for(int col = 0; col < mat.CSize; col++)
+            {
+                ss<<mat.Data[index++];
+                if(col < mat.CSize + 1)
+                {
+                    ss<<"\t";
+                }
+            }
+            ss<<endl;
+        }
+        cout<<ss.str();
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+}
+
+void __stdcall printVector(RRDoubleVectorHandle vecHandle)
+{
+	try
+    {
+        gLog.SetCutOffLogLevel(lDebug2);
+        if(!vecHandle)
+        {
+            Log(lInfo)<<"Null vector in printMatrix...";
+            return;
+        }
+
+        RRDoubleVector& vec = *vecHandle;
+
+        stringstream ss;
+        ss<<"vector dimension: "<<vec.Size<<" \n";
+
+        for(int index = 0; index < vec.Size; index++)
+        {
+            ss<<vec.Data[index];
+            if(index < vec.Size + 1)
+            {
+                ss<<"\t";
+            }
+        }
+        ss<<endl;
+        cout<<ss.str();
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
 }
 
 //Free Functions =====================================================

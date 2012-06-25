@@ -31,6 +31,7 @@ RR_DECLSPEC bool            CopyStdVectorToCArray(vector<double>& src, double* d
 RR_DECLSPEC bool            CopyStdVectorToCArray(vector<bool>&   src,  bool*  dest,  int size);
 RR_DECLSPEC double*         CreateCVectorFromStdVector(const vector<double>& vec);
 RR_DECLSPEC HINSTANCE       LoadDLL(const string& dll);
+RR_DECLSPEC bool       		UnLoadDLL(HINSTANCE dllHandle);
 RR_DECLSPEC FARPROC 		GetFunctionPtr(const string& funcName, HINSTANCE DLLHandle);
 }
 

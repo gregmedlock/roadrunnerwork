@@ -7,20 +7,19 @@
 #include <sstream>
 #include "rr_c_api.h"
 //---------------------------------------------------------------------------
-using namespace std;
-
-#if defined(_WIN32) || defined(__CODEGEAR__)
-#  include <direct.h>
-#  define getcwd _getcwd
-#  define chdir  _chrdir
+#if defined(_MSC_VER)
+  #include <direct.h>
+  #define getcwd _getcwd
+  #define chdir  _chrdir
+#elif defined(__BORLANDC__)
+  	#include <dir.h>
 #else
-#  include <unistd.h>
-
+#include <unistd.h>
 #endif
 
+using namespace std;
 int main(int argc, char* argv[])
 {
-
 	string modelsPath(".\\..\\Models");
 	if(argc > 1)
 	{
@@ -29,13 +28,13 @@ int main(int argc, char* argv[])
 
 	char* buffer;
 	// Get the current working directory:
-	if( (buffer = _getdcwd( NULL, 0 )) == NULL )
+	if( (buffer = _getcwd( NULL, 0 )) == NULL )
 	{
 		perror( "getcwd error" );
 	}
 	else
 	{
-		printf( "%s \nLength: %d\n", buffer, strnlen(buffer, 1024) );
+		printf( "%s \nLength: %d\n", buffer, strlen(buffer) );
 		free(buffer);
 	}
 	
@@ -78,19 +77,6 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	RRDataMatrixHandle matrix = getStoichiometryMatrix();
-	printMatrix(matrix);
-	freeRRDataMatrix(matrix);
-
-	RRStringList* names = getReactionNames();
-
-	if(names)
-	{
-		for(int i = 0; i < names->Count; i++)
-		{
-			cout<<names->String[i]<<endl;
-		}
-	}
 
 	RRSymbolLists* symbols = getAvailableSymbols();
 	if(symbols)
@@ -115,9 +101,6 @@ int main(int argc, char* argv[])
             }
         }
     }
-
-//    reset();
-//	setSteadyStateSelectionList("S1");
 
 	double ssVal = steadyState();
     if(ssVal == -1)

@@ -259,6 +259,23 @@ HINSTANCE LoadDLL(const string& dll)
     return hLib;
 }
 
+bool UnLoadDLL(HINSTANCE dllHandle)
+{
+	if(!dllHandle)
+    {
+    	return false;
+    }
+
+	bool result = FreeLibrary(dllHandle);
+    if(result == false)
+    {
+        Log(lWarning) << "Failed to unload DLL library" << endl;
+        return false;
+    }
+
+	return true;
+}
+
 FARPROC GetFunctionPtr(const string& funcName, HINSTANCE DLLHandle)
 {
     FARPROC handle = GetProcAddress((HMODULE) DLLHandle, funcName.c_str());

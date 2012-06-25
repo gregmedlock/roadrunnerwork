@@ -258,7 +258,10 @@ FILE *fileOpen (const string& fileName)
 
 void fileClose (FILE *fp)
 {
-    fclose (fp);
+    if(fp)
+    {
+        fclose (fp);
+    }
 }
 
 //Todo: functions return success, when cvode_mem is NULL, not sure if that sounds right...?

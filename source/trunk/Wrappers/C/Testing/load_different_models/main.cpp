@@ -31,7 +31,8 @@ int main()
 		freeText(text);
 	}
 
-	string fileName = "..\\Models\\test_1.xml";
+    setTempFolder("C:\\rrTemp");
+	string fileName = "..\\Models\\feedback.xml";
 	string sbml = GetFileContent(fileName.c_str());
 
     //To get the CCode, the CCode needs to be generated
@@ -41,8 +42,12 @@ int main()
         cerr<<"Last error: "<<getLastError()<<endl;
     }
 
+    RRResult* result1 = simulate();
 
-  	fileName = "..\\Models\\feedback.xml";
+    string str = getResultAsString(result1);
+    cout<<str;
+
+  	fileName = "..\\Models\\test_1.xml";
 	sbml = GetFileContent(fileName.c_str());
 
     //To get the CCode, the CCode needs to be generated
@@ -51,6 +56,11 @@ int main()
     	cerr<<"Failed loading SBML.\n";
         cerr<<"Last error: "<<getLastError()<<endl;
     }
+
+    RRResult* result2 = simulate();
+
+    cout<<getResultAsString(result2);
+
 
 	///// Cleanup
 
