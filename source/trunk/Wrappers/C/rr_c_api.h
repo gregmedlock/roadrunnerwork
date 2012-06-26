@@ -91,7 +91,7 @@ C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
 C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
 //C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex (int index, double value); <- to be added
-//C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesByIndex (int index, double value);
+C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesByIndex (int index, double value);
 C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex  (int index, double value);
 //C_DECL_SPEC double                  __stdcall   getBoundarySpeciesByIndex (int index);
 //C_DECL_SPEC double                  __stdcall   getFloatingSpeciesByIndex (int index);

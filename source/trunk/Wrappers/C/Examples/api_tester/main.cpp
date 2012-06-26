@@ -26,16 +26,16 @@ int main(int argc, char* argv[])
 		modelsPath = argv[1];
 	}
 
-	char* buffer;
+	char* buffer = new char[MAXPATH];
 	// Get the current working directory:
-	if( (buffer = _getcwd( NULL, 0 )) == NULL )
+	if( (buffer = _getcwd( buffer, MAXPATH )) == NULL )
 	{
 		perror( "getcwd error" );
 	}
 	else
 	{
 		printf( "%s \nLength: %d\n", buffer, strlen(buffer) );
-		free(buffer);
+		delete [] buffer;
 	}
 
 	RRHandle rrHandle = NULL;
@@ -98,6 +98,8 @@ int main(int argc, char* argv[])
 //    }
 
     setGlobalParameterByIndex(1,23);
+
+    setFloatingSpeciesByIndex(1,1);
 	///////////////////
     text = getCopyright();
     if(hasError())

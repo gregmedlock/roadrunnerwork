@@ -2822,21 +2822,29 @@ int RoadRunner::getNumberOfFloatingSpecies()
     return mModel->getNumTotalVariables();
 }
 
-//
+
 //        Help("Sets the value of a floating species by its index")
-//        void RoadRunner::setFloatingSpeciesByIndex(int index, double value)
-//        {
-//            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
-//
-//            if ((index >= 0) && (index < mModel->getNumTotalVariables))
-//            {
-//                mModel->setConcentration(index, value); // This updates the amount vector aswell
-//                if (!_bConservedTotalChanged) mModel->computeConservedTotals();
-//            }
-//            else
-//                throw SBWApplicationException(String.Format("Index in setFloatingSpeciesByIndex out of range: [{0}]", index));
-//        }
-//
+void RoadRunner::setFloatingSpeciesByIndex(const int& index, const double& value)
+{
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    if ((index >= 0) && (index < mModel->getNumTotalVariables()))
+    {
+        mModel->setConcentration(index, value); // This updates the amount vector aswell
+        if (!mConservedTotalChanged)
+        {
+            mModel->computeConservedTotals();
+        }
+    }
+    else
+    {
+        throw SBWApplicationException(Format("Index in setFloatingSpeciesByIndex out of range: [{0}]", index));
+    }
+}
+
 //        Help("Returns the value of a floating species by its index")
 //        double RoadRunner::getFloatingSpeciesByIndex(int index)
 //        {
@@ -2879,7 +2887,7 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 //            mModel->y = values;
 //            // Update the amounts vector at the same time
 //            mModel->convertToAmounts();
-//            if (!_bConservedTotalChanged) mModel->computeConservedTotals();
+//            if (!mConservedTotalChanged) mModel->computeConservedTotals();
 //        }
 //
 //        Help("Sets the value of a floating species by its index")
@@ -3016,7 +3024,7 @@ void RoadRunner::setGlobalParameterByIndex(const int& index, const double& value
 //                for (int i = 0; i < mModel->ct.Length; i++)
 //                {
 //                    mModel->gp[i] = values[i + mModel->gp.Length];
-//                    _bConservedTotalChanged = true;
+//                    mConservedTotalChanged = true;
 //                }
 //                mModel->updateDependentSpeciesValues(mModel->y);
 //            }
@@ -4649,14 +4657,14 @@ bool RoadRunner::setValue(const string& sId, const double& dValue)
 //            {
 //                model.setConcentration(nIndex, dValue);
 //                model.convertToAmounts();
-//                if (!_bConservedTotalChanged) model.computeConservedTotals();
+//                if (!mConservedTotalChanged) model.computeConservedTotals();
 //                return;
 //            }
 //            if (mModelGenerator->conservationList.find(sId, out nIndex))
 //            {
 //                model.ct[nIndex] = dValue;
 //                model.updateDependentSpeciesValues(model.y);
-//                _bConservedTotalChanged = true;
+//                mConservedTotalChanged = true;
 //                return;
 //            }
 //
