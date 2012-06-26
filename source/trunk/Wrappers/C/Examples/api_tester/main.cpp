@@ -108,7 +108,12 @@ int main(int argc, char* argv[])
 //    }
 //    cout<< getMatrixAsString(matrix);
 
-    setBoundarySpeciesByIndex(0,12);
+    RRStringListHandle list = getRatesOfChangeNames();
+
+    cout<<getBoundarySpeciesByIndex (0)<<endl;
+    cout<<getFloatingSpeciesByIndex (0)<<endl;
+    cout<<getGlobalParameterByIndex (0)<<endl;
+
 	///////////////////
     text = getCopyright();
     if(hasError())

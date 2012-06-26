@@ -93,9 +93,9 @@ C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, 
 C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex (int index, double value);
 C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesByIndex (int index, double value);
 C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex  (int index, double value);
-//C_DECL_SPEC double                  __stdcall   getBoundarySpeciesByIndex (int index);
-//C_DECL_SPEC double                  __stdcall   getFloatingSpeciesByIndex (int index);
-//C_DECL_SPEC double                  __stdcall   getGlobalParameterByIndex (int index);
+C_DECL_SPEC double                  __stdcall   getBoundarySpeciesByIndex (int index);
+C_DECL_SPEC double                  __stdcall   getFloatingSpeciesByIndex (int index);
+C_DECL_SPEC double                  __stdcall   getGlobalParameterByIndex (int index);
 
 // Jacobian Matrix Methods
 C_DECL_SPEC RRMatrixHandle          __stdcall   getFullJacobian(void);
@@ -114,7 +114,7 @@ C_DECL_SPEC double                  __stdcall   getReactionRate(int);
 C_DECL_SPEC RRVectorHandle          __stdcall   getReactionRates();
 
 // Rates of Change
-//C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames(); <- to be added
+C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames();
 
 // get Number Family
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
@@ -127,7 +127,7 @@ C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);
 C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getGlobalParameterNames();
-C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();              // <- You'll have to decide what type to return
+C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();
 
 // Print/format functions
 C_DECL_SPEC char*                   __stdcall   getResultAsString(RRResultHandle result);

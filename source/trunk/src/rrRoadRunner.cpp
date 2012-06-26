@@ -2756,14 +2756,18 @@ void RoadRunner::setBoundarySpeciesByIndex(const int& index, const double& value
 }
 
 //        Help("Returns the value of a boundary species by its index")
-//        double RoadRunner::getBoundarySpeciesByIndex(int index)
-//        {
-//            if (!modelLoaded)
-//                throw Exception(emptyModelStr);
-//            if ((index >= 0) && (index < mModel->getNumBoundarySpecies))
-//                return mModel->bc[index];
-//            throw Exception(String.Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
-//        }
+double RoadRunner::getBoundarySpeciesByIndex(const int& index)
+{
+    if (!modelLoaded)
+    {
+        throw Exception(emptyModelStr);
+    }
+    if ((index >= 0) && (index < mModel->getNumBoundarySpecies()))
+    {
+        return mModel->bc[index];
+    }
+    throw Exception(Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
+}
 //
 //        Help("Returns an array of boundary species concentrations")
 //        double[] RoadRunner::getBoundarySpeciesConcentrations()
@@ -2839,15 +2843,20 @@ void RoadRunner::setFloatingSpeciesByIndex(const int& index, const double& value
 }
 
 //        Help("Returns the value of a floating species by its index")
-//        double RoadRunner::getFloatingSpeciesByIndex(int index)
-//        {
-//            if (!modelLoaded)
-//                throw SBWApplicationException(emptyModelStr);
-//            if ((index >= 0) && (index < mModel->getNumTotalVariables))
-//                return mModel->getConcentration(index);
-//            throw SBWApplicationException(String.Format("Index in getFloatingSpeciesByIndex out of range: [{0}]", index));
-//        }
-//
+double RoadRunner::getFloatingSpeciesByIndex(const int& index)
+{
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    if ((index >= 0) && (index < mModel->getNumTotalVariables()))
+    {
+        return mModel->getConcentration(index);
+    }
+    throw SBWApplicationException(Format("Index in getFloatingSpeciesByIndex out of range: [{0}]", index));
+}
+
 //        Help("Returns an array of floating species concentrations")
 //        double[] RoadRunner::getFloatingSpeciesConcentrations()
 //        {
@@ -2986,22 +2995,37 @@ void RoadRunner::setGlobalParameterByIndex(const int& index, const double& value
 }
 
 //        Help("Returns the value of a global parameter by its index")
-//        double RoadRunner::getGlobalParameterByIndex(int index)
-//        {
-//            if (!modelLoaded)
-//                throw SBWApplicationException(emptyModelStr);
-//
-//            if ((index >= 0) && (index < (mModel->getNumGlobalParameters + mModel->ct.Length)))
-//            {
-//                var result = new double[mModel->gp.Length + mModel->ct.Length];
-//                mModel->gp.CopyTo(result, 0);
-//                mModel->ct.CopyTo(result, mModel->gp.Length);
-//                return result[index];
-//                //return mModel->gp[index];
-//            }
-//            throw SBWApplicationException(String.Format("Index in getNumGlobalParameters out of range: [{0}]", index));
-//        }
-//
+double RoadRunner::getGlobalParameterByIndex(const int& index)
+{
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    if ((index >= 0) && (index < (mModel->getNumGlobalParameters() + *mModel->ctSize)))
+    {
+        int arraySize = *mModel->gpSize + *mModel->ctSize;
+        double* result = new double[ arraySize];
+//        mModel->gp.CopyTo(result, 0);
+        for(int i = 0; i < *mModel->gpSize; i++)
+        {
+            result[i] = mModel->gp[i];
+        }
+
+        int index = 0;
+        for(int i = *mModel->gpSize + 1; i < arraySize; i++)
+        {
+            result[i] = mModel->gp[index++];
+        }
+
+//        mModel->ct.CopyTo(result, *mModel->gpSize);
+        return result[index];
+
+    }
+
+    throw SBWApplicationException(Format("Index in getNumGlobalParameters out of range: [{0}]", index));
+}
+
 //        Help("Set the values for all global parameters in the model")
 //        void RoadRunner::setGlobalParameterValues(double[] values)
 //        {

@@ -465,6 +465,43 @@ RRStringListHandle __stdcall getReactionNames(void)
 	return NULL;
 }
 
+RRStringListHandle __stdcall getRatesOfChangeNames()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        StringList rNames = gRRHandle->getRateOfChangeNames();
+
+        if(!rNames.Count())
+        {
+            return NULL;
+        }
+
+        RRStringListHandle list = new RRStringList;
+        list->Count = rNames.size();
+        list->String = new char*[list->Count];
+
+        for(int i = 0; i < list->Count; i++)
+        {
+            list->String[i] = new char[rNames[i].size()];
+            strcpy(list->String[i], rNames[i].c_str());
+        }
+        return list;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+	return NULL;
+}
+
 double __stdcall getValue(const char* speciesID)
 {
 	try
@@ -988,6 +1025,71 @@ RRSymbolListsHandle __stdcall getAvailableSymbols()              // <- You'll ha
         SetAPIError(msg.str());
     }
 	return NULL;
+}
+
+double __stdcall getBoundarySpeciesByIndex (int index)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        return gRRHandle->getBoundarySpeciesByIndex(index);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+  	return -1;  //Todo: return NaN??
+}
+
+double __stdcall getFloatingSpeciesByIndex (int index)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        return gRRHandle->getFloatingSpeciesByIndex(index);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+  	return -1;  //Todo: return NaN??
+
+}
+
+double __stdcall getGlobalParameterByIndex (int index)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        return gRRHandle->getGlobalParameterByIndex(index);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+  	return -1;  //Todo: return NaN??
+
 }
 
 double __stdcall steadyState()
