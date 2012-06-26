@@ -947,7 +947,6 @@ RRDoubleVectorHandle __stdcall computeSteadyStateValues()
 {
 	try
     {
-
         if(!gRRHandle)
         {
             SetAPIError(ALLOCATE_API_ERROR_MSG);
@@ -1114,7 +1113,9 @@ char* __stdcall getResultAsString(RRResultHandle result)
     }
     catch(Exception& ex)
     {
-
+        stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());                
     }
     return NULL;
 }
@@ -1210,7 +1211,7 @@ void __stdcall freeRRInstance(RRHandle handle)
     }
 }
 
-bool __stdcall freeRRDataMatrix(RRDataMatrixHandle matrix)
+bool __stdcall freeDataMatrix(RRDataMatrixHandle matrix)
 {
 	try
     {
@@ -1231,7 +1232,7 @@ bool __stdcall freeRRDataMatrix(RRDataMatrixHandle matrix)
     return false;
 }
 
-bool __stdcall freeRRResult(RRResultHandle handle)
+bool __stdcall freeResult(RRResultHandle handle)
 {
 	try
     {
@@ -1298,7 +1299,7 @@ bool __stdcall freeLabelStringList(RRLabelStringListHandle sl)
     return false;
 }
 
-bool __stdcall freeRRDoubleVector(RRDoubleVectorHandle vector)
+bool __stdcall freeDoubleVector(RRDoubleVectorHandle vector)
 {
 	try
     {

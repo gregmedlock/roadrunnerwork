@@ -15,17 +15,16 @@
 #include "rrStringUtils.h"
 #include "rrModelFromC.h"
 #include "rrSBMLModelSimulation.h"
-
 //---------------------------------------------------------------------------
-using namespace std;
 
+using namespace std;
 namespace rr
 {
 
 //Initialize statics..
-bool RoadRunner::mComputeAndAssignConservationLaws     = false;
-bool RoadRunner::mConservedTotalChanged             = false;
-//bool RoadRunner::mReMultiplyCompartments             = true;
+//bool RoadRunner::mComputeAndAssignConservationLaws     	= false;
+//bool RoadRunner::mConservedTotalChanged             	= false;
+//bool RoadRunner::mReMultiplyCompartments             	= true;
 
 RoadRunner::RoadRunner()
 :
@@ -45,11 +44,13 @@ mModel(NULL),
 mModelDllHandle(NULL),
 mSimulation(NULL),
 mModelXMLFileName("sbml_model"),
-UseKinsol(false)
+UseKinsol(false),
+mComputeAndAssignConservationLaws(false),
+mConservedTotalChanged(false)
 {
     Log(lDebug4)<<"In RoadRunner CTOR";
-    mCSharpGenerator    = new CSharpGenerator();
-    mCGenerator         = new CGenerator();//Todo: memoryleak
+    mCSharpGenerator    = new CSharpGenerator(this);
+    mCGenerator         = new CGenerator(this);//Todo: memoryleak
     mModelGenerator     = mCGenerator;
     mTempFileFolder     = GetUsersTempDataFolder();
 }
@@ -75,6 +76,11 @@ bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
     mTimeEnd    = mSettings.mEndTime;
     mNumPoints  = mSettings.mSteps + 1;
     return true;
+}
+
+bool RoadRunner::ComputeAndAssignConservationLaws()
+{
+	return mComputeAndAssignConservationLaws;
 }
 
 CGenerator*	RoadRunner::GetCGenerator()
@@ -172,7 +178,7 @@ bool RoadRunner::InitializeModel()
         //Now create the Model using the compiled DLL
         mModel = CreateModel();
 
-          if(!mModel)
+        if(!mModel)
         {
             Log(lError)<<"Failed Creating Model";
             return false ;
@@ -202,7 +208,7 @@ bool RoadRunner::InitializeModel()
     {
         delete mCVode;
     }
-    mCVode = new CvodeInterface(mModel);
+    mCVode = new CvodeInterface(this, mModel);
     mModel->AssignCVodeInterface(mCVode);
 
     reset();
@@ -564,10 +570,11 @@ bool RoadRunner::loadSBML(const string& sbml)
     }
 
     mCurrentSBML 	= sbml;
+
+
     string dllName  = GetDLLName();
 
-
-    //Shall we compile model if it exists?
+     //Shall we compile model if it exists?
     bool compileIfDllExists = mSimulation ? mSimulation->CompileIfDllExists() : true;
     bool dllExists = FileExists(dllName);
     bool compile = true;
@@ -576,25 +583,13 @@ bool RoadRunner::loadSBML(const string& sbml)
         compile = false;
     }
 
-
     if(compile)
     {
-        if(mModelDllHandle)	//Make sure the dll is unloaded
-        {
-            UnLoadDLL(mModelDllHandle);
-        }
-
         if(!GenerateAndCompileModel())
         {
             return false;
         }
     }
-
-    //Load the DLL
-    mModelDllHandle = LoadDLL(dllName);
-
-    //Now create the Model using the compiled DLL
-    mModel = CreateModel();
 
     if(!mModel)
     {
@@ -692,15 +687,43 @@ bool RoadRunner::CompileCurrentModel()
 
 bool RoadRunner::GenerateAndCompileModel()
 {
+
     if(!GenerateModelCode())
     {
         Log(lError)<<"Failed generating model from SBML";
         return false;
     }
 
+    //Make sure the dll is unloaded
+    if(mModelDllHandle)	//Make sure the dll is unloaded
+    {
+        UnLoadDLL(mModelDllHandle);
+    }
+
     if(!CompileCurrentModel())
     {
-           Log(lError)<<"Failed compiling model";
+        Log(lError)<<"Failed compiling model";
+        return false;
+    }
+
+    string dllName  = GetDLLName();
+    //Load the DLL
+    mModelDllHandle = LoadDLL(dllName);
+
+    //Now create the Model using the compiled DLL
+    mModel = CreateModel();
+
+    if(!mModel)
+    {
+        modelLoaded = false;
+        Log(lError)<<"Failed to create Model";
+        return false;
+    }
+
+    //Finally intitilaize the model..
+    if(!InitializeModel())
+    {
+        Log(lError)<<"Failed Initializing Model";
         return false;
     }
 
@@ -770,7 +793,7 @@ void RoadRunner::reset()
 
         mModel->convertToAmounts();
 
-        if (mComputeAndAssignConservationLaws && ! mConservedTotalChanged)
+        if (mComputeAndAssignConservationLaws && !mConservedTotalChanged)
         {
             mModel->computeConservedTotals();
         }
@@ -981,6 +1004,12 @@ double RoadRunner::getParameterValue(const TParameterType& parameterType, const 
 void RoadRunner::ComputeAndAssignConservationLaws(const bool& bValue)
 {
     mComputeAndAssignConservationLaws = bValue;
+    if(mModel != NULL)
+    {
+        //We need no recompile the model if this flag changes..
+        GenerateAndCompileModel();
+
+    }
 }
 
 //        Help("Returns the names given to the rate of change of the floating species")
@@ -4540,16 +4569,19 @@ bool RoadRunner::setValue(const string& sId, const double& dValue)
         mModel->gp[nIndex] = dValue;
         return true;
     }
+
     if (mModelGenerator->boundarySpeciesList.find(sId, nIndex))
     {
         mModel->bc[nIndex] = dValue;
         return true;
     }
+
     if (mModelGenerator->compartmentList.find(sId, nIndex))
     {
         mModel->c[nIndex] = dValue;
         return true;
     }
+
     if (mModelGenerator->floatingSpeciesConcentrationList.find(sId, nIndex))
     {
         mModel->setConcentration(nIndex, dValue);
@@ -4560,6 +4592,7 @@ bool RoadRunner::setValue(const string& sId, const double& dValue)
         }
         return true;
     }
+
     if (mModelGenerator->conservationList.find(sId, nIndex))
     {
         mModel->ct[nIndex] = dValue;

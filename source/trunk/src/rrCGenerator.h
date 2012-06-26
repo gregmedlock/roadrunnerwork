@@ -56,7 +56,7 @@ class RR_DECLSPEC CGenerator : public ModelGenerator
         int                                 ReadBoundarySpecies();
 
     public:
-                                            CGenerator();
+                                            CGenerator(RoadRunner* rr);
         virtual                             ~CGenerator();
 
         // Generates the Model Code from th e SBML string

@@ -25,7 +25,10 @@ using namespace LIB_STRUCTURAL;
 
 namespace rr
 {
-CGenerator::CGenerator(){}
+CGenerator::CGenerator(RoadRunner* rr)
+:
+ModelGenerator(rr)
+{}
 
 CGenerator::~CGenerator(){}
 
@@ -147,7 +150,7 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 
     Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
-    if (RoadRunner::mComputeAndAssignConservationLaws)
+    if (mRR && mRR->mComputeAndAssignConservationLaws)
     {
         mNumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
         independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
@@ -2468,7 +2471,7 @@ int CGenerator::ReadFloatingSpecies()
 {
     // Load a reordered list into the variable list.
     StringList reOrderedList;
-    if ((RoadRunner::mComputeAndAssignConservationLaws))
+    if (mRR && mRR->RoadRunner::mComputeAndAssignConservationLaws)
     {
        reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
     }

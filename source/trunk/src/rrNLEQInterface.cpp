@@ -42,7 +42,6 @@ maxIterations(defaultMaxInterations),
 defaultTolerance(1.e-4),
 relativeTolerance(defaultTolerance)
 {
-            
 	//First load the nleq DLL and assign nleq function to function pointer
     mDLLInstance = LoadDLL(mNLEQDLLName);
     if(!mDLLInstance)

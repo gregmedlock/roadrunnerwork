@@ -42,7 +42,9 @@ mModelName("NoNameSet")
 }
 
 ModelFromC::~ModelFromC()
-{}
+{
+    delete [] mDummyDoubleArray;
+}
 
 void ModelFromC::AssignCVodeInterface(CvodeInterface* cvodeI)
 {

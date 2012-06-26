@@ -23,7 +23,9 @@ using namespace LIB_STRUCTURAL;
 
 namespace rr
 {
-CSharpGenerator::CSharpGenerator()
+CSharpGenerator::CSharpGenerator(RoadRunner* rr)
+:
+ModelGenerator(rr)
 {
 }
 
@@ -70,7 +72,7 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     mfunctionNames.empty();
     mfunctionParameters.empty();
 
-       LibStructural* instance = LibStructural::getInstance();
+    LibStructural* instance = LibStructural::getInstance();
     string msg;
     try
     {
@@ -89,7 +91,7 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
 
     Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
-    if (RoadRunner::mComputeAndAssignConservationLaws)
+    if (mRR != NULL && mRR->ComputeAndAssignConservationLaws())
     {
         mNumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
         independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
@@ -104,17 +106,17 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     sb<<Append("//************************************************************************** " + NL());
 
     // Load the compartment array (name and value)
-    mNumCompartments         = ReadCompartments();
+    mNumCompartments         		= ReadCompartments();
 
     // Read FloatingSpecies
-    mNumFloatingSpecies     = ReadFloatingSpecies();
-    mNumDependentSpecies     = mNumFloatingSpecies - mNumIndependentSpecies;
+    mNumFloatingSpecies     		= ReadFloatingSpecies();
+    mNumDependentSpecies     		= mNumFloatingSpecies - mNumIndependentSpecies;
 
     // Load the boundary species array (name and value)
-    mNumBoundarySpecies     = ReadBoundarySpecies();
+    mNumBoundarySpecies     		= ReadBoundarySpecies();
 
     // Get all the parameters into a list, global and local
-    mNumGlobalParameters     = ReadGlobalParameters();
+    mNumGlobalParameters     		= ReadGlobalParameters();
     mNumModifiableSpeciesReferences = ReadModifiableSpeciesReferences();
 
     // Load up local parameters next
@@ -137,7 +139,6 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     WriteSetCompartmentVolumes(sb);
     WriteSetParameterValues(sb, mNumReactions);
     WriteComputeConservedTotals(sb, mNumFloatingSpecies, mNumDependentSpecies);
-
 
     // Get the L0 matrix
     int nrRows;
@@ -917,7 +918,7 @@ int CSharpGenerator::ReadFloatingSpecies()
 {
     // Load a reordered list into the variable list.
     StringList reOrderedList;
-    if ((RoadRunner::mComputeAndAssignConservationLaws))
+    if (mRR && mRR->mComputeAndAssignConservationLaws)
     {
        reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
     }

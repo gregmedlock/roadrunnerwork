@@ -13,16 +13,16 @@
 //---------------------------------------------------------------------------
 
 using namespace std;
-//using namespace LIB_STRUCTURAL;
 
 namespace rr
 {
-ModelGenerator::ModelGenerator()
+ModelGenerator::ModelGenerator(RoadRunner* rr)
 :
 mStructAnalysis(),
 STR_DoubleFormat("%.19G"),
 STR_FixAmountCompartments("*"),
-mCurrentXMLModelFileName("sbml_model")  //
+mCurrentXMLModelFileName("sbml_model"),
+mRR(rr)
 {
     mNOM.Reset();
     mStructAnalysis.Reset();

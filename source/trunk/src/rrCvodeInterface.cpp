@@ -38,7 +38,7 @@ ModelFromC* CvodeInterface::model = NULL;
 // ev is the model function
 // -------------------------------------------------------------------------
 
-CvodeInterface::CvodeInterface(ModelFromC *aModel)
+CvodeInterface::CvodeInterface(RoadRunner* rr, ModelFromC *aModel)
 :
 //defaultReltol(1E-12),
 //defaultAbsTol(1E-16),
@@ -63,9 +63,9 @@ absTol(defaultAbsTol),
 //errorFileCounter,
 //_rootsFound),
 abstolArray(NULL),
-fileHandle(NULL)
+fileHandle(NULL),
 //modelDelegate(&CvodeInterface::ModelFcn)
-,
+mRR(rr),
 cvodeMem(NULL)
 {
     //relTol = 1.e-4;
@@ -760,7 +760,7 @@ void CvodeInterface::AssignPendingEvents(const double& timeEnd, const double& to
             model->updateDependentSpeciesValues(model->y);
             assignments[i].AssignToModel();
 
-            if (!RoadRunner::mConservedTotalChanged)
+            if (mRR && !mRR->mConservedTotalChanged)
             {
                  model->computeConservedTotals();
             }
@@ -794,7 +794,7 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, const vector<int
     vector<int> result;// = new vector<int>();
 //     vector<int> removeEvents;// = new vector<int>();    //Todo: this code was like this originally.. which removeEvents to use???
 
-    if (!RoadRunner::mConservedTotalChanged)
+    if (mRR && !mRR->mConservedTotalChanged)
     {
         model->computeConservedTotals();
     }
@@ -1134,7 +1134,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
         }
     }
 
-    if (!RoadRunner::mConservedTotalChanged)
+    if (mRR && !mRR->mConservedTotalChanged)
     {
         model->computeConservedTotals();
     }

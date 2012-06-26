@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
 		printf( "%s \nLength: %d\n", buffer, strlen(buffer) );
 		free(buffer);
 	}
-	
+
 	RRHandle rrHandle = NULL;
     rrHandle =  getRRInstance();
 
@@ -46,8 +46,7 @@ int main(int argc, char* argv[])
         cout<<"No handle...";
     }
 
-	char* text;
-	text = getBuildDate();
+	char* text = getBuildDate();
 
 	if(text)
 	{
@@ -56,7 +55,6 @@ int main(int argc, char* argv[])
 	}
 
     setTempFolder("c:\\rrTemp");
-
 	string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
@@ -77,31 +75,6 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-
-	RRSymbolLists* symbols = getAvailableSymbols();
-	if(symbols)
-	{
-        for(int i = 0; i < symbols->NumberOfLists; i++)
-        {
-
-            cout<<"========= ";
-            if( symbols->List[i].Label != NULL && strlen(symbols->List[i].Label) > 0)
-            {
-                cout<<symbols->List[i].Label;
-            }
-            else
-            {
-                cout<<"no name";
-            }
-            cout<<"  ==============="<<endl;
-
-            for(int j = 0; j < symbols->List[i].Count; j++)
-            {
-                cout<<symbols->List[i].String[j]<<endl;
-            }
-        }
-    }
-
 	double ssVal = steadyState();
     if(ssVal == -1)
     {
@@ -109,13 +82,22 @@ int main(int argc, char* argv[])
     }
     else
     {
-	    cout<<"This is steady state number: "<<ssVal<<endl;
+	    cout<<"Steady state number: "<<ssVal<<endl;
     }
 
-	RRDoubleVectorHandle concs = getFloatingSpeciesInitialConcentrations();
-    printVector(concs);
-    freeRRDoubleVector(concs);
+	setComputeAndAssignConservationLaws(false);	//Should fail now...
 
+   	ssVal = steadyState();
+    if(ssVal == -1)
+    {
+		cerr<<"Steady State call failed. Error was: "<<getLastError()<<endl;
+    }
+    else
+    {
+	    cout<<"Steady state number: "<<ssVal<<endl;
+    }
+
+	///////////////////
     text = getCopyright();
     if(hasError())
     {
@@ -124,7 +106,6 @@ int main(int argc, char* argv[])
     }
 
     cout<<text<<endl;
-
     freeText(text);
     freeRRInstance(rrHandle);
     return 0;

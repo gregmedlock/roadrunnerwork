@@ -160,8 +160,10 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
     public:
         // Properties -----------------------------------------------------------------------------
-        static bool                     mComputeAndAssignConservationLaws;
-        static bool                     mConservedTotalChanged;
+        bool                     		mComputeAndAssignConservationLaws;
+		bool        					ComputeAndAssignConservationLaws();
+
+        bool                     		mConservedTotalChanged;
 		//        static bool                   mReMultiplyCompartments;
         double*                         mL;
         double*                         mL0;
@@ -283,8 +285,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
         double                          computeSteadyStateValue(const string& sId);
         vector<double>                  getSelectedValues();
         vector<string>                  getWarnings();
-        static void                     ReMultiplyCompartments(const bool& bValue);
-        static void                     ComputeAndAssignConservationLaws(const bool& bValue);
+        void                     		ReMultiplyCompartments(const bool& bValue);
+        void                     		ComputeAndAssignConservationLaws(const bool& bValue);
         string                          getCSharpCode();
         double*                         steadyStateParameterScan(const string& symbol, const double& startValue, const double& endValue, const double& stepSize);
         string                          writeSBML();

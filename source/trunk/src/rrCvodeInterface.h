@@ -17,6 +17,8 @@ typedef void* CVodeMemPtr;
 void ModelFcn(int n, cvode_precision time, cvode_precision* y, cvode_precision* ydot, void* fdata);
 void EventFcn(double time, cvode_precision* y, cvode_precision* gdot, void* fdata);
 
+class RoadRunner;
+
 class RR_DECLSPEC CvodeInterface : public rrObject
 {
     private:
@@ -57,6 +59,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         static int                  mOneStepCount;
 
         static ModelFromC          *model;
+        RoadRunner				   *mRR;
         vector<PendingAssignment>   assignments;// = new List<PendingAssignment>();
         Random                      mRandom;// { get; set; }
         int                         defaultMaxAdamsOrder;// = 12;
@@ -72,12 +75,13 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         int                         errCode;
         static double               lastTimeValue;
 
+
                                     // -------------------------------------------------------------------------
                                     // Constructor
                                     // Model contains all the symbol tables associated with the model
                                     // ev is the model function
                                     // -------------------------------------------------------------------------
-                                    CvodeInterface(ModelFromC* oModel);
+                                    CvodeInterface(RoadRunner* rr, ModelFromC* oModel);
                                    ~CvodeInterface();
 
         void                        TestRootsAtInitialTime();

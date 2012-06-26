@@ -10,16 +10,19 @@
 #include "rrLibStructSupport.h"
 #include "rrNOMSupport.h"
 #include "rrScanner.h"
+
 using std::string;
 using std::vector;
 using std::list;
 
 namespace rr
 {
+class RoadRunner;
 
 class RR_DECLSPEC ModelGenerator : public rrObject
 {
     public:
+    	RoadRunner*							mRR;
         const string                        STR_DoubleFormat;
         const string                        STR_FixAmountCompartments;
         string                              mCurrentXMLModelFileName;
@@ -107,7 +110,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         int                                 ReadModifiableSpeciesReferences();
 
     public:
-                                            ModelGenerator();
+                                            ModelGenerator(RoadRunner* rr);
         virtual                             ~ModelGenerator();
         void                                Reset();
         int                                 GetNumberOfReactions();
