@@ -85,18 +85,19 @@ int main(int argc, char* argv[])
 	    cout<<"Steady state number: "<<ssVal<<endl;
     }
 
-	setComputeAndAssignConservationLaws(false);	//Should fail now...
+//	setComputeAndAssignConservationLaws(false);	//Should fail now...
+//
+//   	ssVal = steadyState();
+//    if(ssVal == -1)
+//    {
+//		cerr<<"Steady State call failed. Error was: "<<getLastError()<<endl;
+//    }
+//    else
+//    {
+//	    cout<<"Steady state number: "<<ssVal<<endl;
+//    }
 
-   	ssVal = steadyState();
-    if(ssVal == -1)
-    {
-		cerr<<"Steady State call failed. Error was: "<<getLastError()<<endl;
-    }
-    else
-    {
-	    cout<<"Steady state number: "<<ssVal<<endl;
-    }
-
+    setGlobalParameterByIndex(1,23);
 	///////////////////
     text = getCopyright();
     if(hasError())

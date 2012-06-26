@@ -810,29 +810,6 @@ RRStringListHandle __stdcall getGlobalParameterNames()
    	return NULL;
 }
 
-bool __stdcall setFloatingSpeciesInitialConcentrations(RRDoubleVector* vec)
-{
-	try
-    {
-        if(!gRRHandle)
-        {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
-            return false;
-        }
-        vector<double> aVec;
-        CopyRRVector(vec, aVec);
-        gRRHandle->changeInitialConditions(aVec);
-        return true;
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
-    }
-  	return false;
-}
-
 RRDoubleVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
 {
 	try
@@ -855,6 +832,51 @@ RRDoubleVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
         SetAPIError(msg.str());
     }
 	return NULL;
+}
+
+bool __stdcall setGlobalParameterByIndex(int index, double value)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        gRRHandle->setGlobalParameterByIndex(index, value);
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+  	return false;
+}
+
+bool __stdcall setFloatingSpeciesInitialConcentrations(RRDoubleVector* vec)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+        vector<double> aVec;
+        CopyRRVector(vec, aVec);
+        gRRHandle->changeInitialConditions(aVec);
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+  	return false;
 }
 
 double __stdcall oneStep(const double& currentTime, const double& stepSize)

@@ -2965,19 +2965,23 @@ void RoadRunner::setGlobalParameterByIndex(const int& index, const double& value
         throw SBWApplicationException(emptyModelStr);
     }
 
-    if ((index >= 0) && (index < mModel->getNumGlobalParameters + mModel->ct.Length))
+    if ((index >= 0) && (index < mModel->getNumGlobalParameters() + *mModel->ctSize))
     {
-        if (index >= mModel->getNumGlobalParameters)
+        if (index >= mModel->getNumGlobalParameters())
         {
-            mModel->ct[index - mModel->getNumGlobalParameters] = value;
+            mModel->ct[index - mModel->getNumGlobalParameters()] = value;
             mModel->updateDependentSpeciesValues(mModel->y);
-            _bConservedTotalChanged = true;
+            mConservedTotalChanged = true;
         }
         else
+        {
             mModel->gp[index] = value;
+        }
     }
     else
-        throw SBWApplicationException(String.Format("Index in getNumGlobalParameters out of range: [{0}]", index));
+    {
+        throw SBWApplicationException(Format("Index in getNumGlobalParameters out of range: [{0}]", index));
+    }
 }
 
 //        Help("Returns the value of a global parameter by its index")
