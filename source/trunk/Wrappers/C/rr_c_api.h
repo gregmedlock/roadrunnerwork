@@ -90,7 +90,7 @@ C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
 
 C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
-//C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex (int index, double value); <- to be added
+//C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex (int index, double value);
 C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesByIndex (int index, double value);
 C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex  (int index, double value);
 //C_DECL_SPEC double                  __stdcall   getBoundarySpeciesByIndex (int index);
@@ -98,8 +98,8 @@ C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex  (int 
 //C_DECL_SPEC double                  __stdcall   getGlobalParameterByIndex (int index);
 
 // Jacobian Matrix Methods
-//C_DECL_SPEC RRDataMatrixHandle      __stdcall   getFullJacobian(void);  <- to be added
-//C_DECL_SPEC RRDataMatrixHandle      __stdcall   getReducedJacobian(void);  <- to be added
+C_DECL_SPEC RRDataMatrixHandle      __stdcall   getFullJacobian(void);
+C_DECL_SPEC RRDataMatrixHandle      __stdcall   getReducedJacobian(void);
 
 // Stoichiometry Methods
 C_DECL_SPEC RRDataMatrixHandle      __stdcall   getStoichiometryMatrix(void);
@@ -131,6 +131,7 @@ C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();          
 
 // Print/format functions
 C_DECL_SPEC char*                   __stdcall   getResultAsString(RRResultHandle result);
+C_DECL_SPEC char*                   __stdcall   getMatrixAsString(RRDataMatrixHandle mat);
 C_DECL_SPEC void                    __stdcall   printMatrix(RRDataMatrixHandle mat);
 C_DECL_SPEC void                    __stdcall   printVector(RRDoubleVectorHandle vec);
 

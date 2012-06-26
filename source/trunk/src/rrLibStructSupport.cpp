@@ -967,19 +967,26 @@ StringList StructAnalysis::GetReorderedSpeciesIds()
 ////            return InteropUtil.GetStringArrayFromPtr(pointer, nLength);
 ////        } // GetReorderedSpeciesIds()
 
-////
-////        /// <summary>
-////        /// Get reordered stoichiometry matrix
-////        /// </summary>
-////        public static DoubleMatrix GetReorderedStoichiometryMatrix()
-////        {
-////            IntPtr pointer; int nRows; int nCols;
-////            if (LibStructural_getReorderedStoichiometryMatrix(out pointer, out nRows, out nCols) < 0)
-////                throw new Exception("The Reordered Stoichiometry matrix has not yet been calculated, please call one of the analyze methods first.");
-////
-////            return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
-////        } // GetReorderedStoichiometryMatrix()
-////
+
+/// <summary>
+/// Get reordered stoichiometry matrix
+/// </summary>
+LIB_LA::DoubleMatrix* StructAnalysis::GetReorderedStoichiometryMatrix()
+{
+    if(mInstance)
+    {
+        return mInstance->getReorderedStoichiometryMatrix();
+    }
+    return NULL;
+//    IntPtr pointer; int nRows; int nCols;
+//    if (LibStructural_getReorderedStoichiometryMatrix(out pointer, out nRows, out nCols) < 0)
+//    {
+//        throw Exception("The Reordered Stoichiometry matrix has not yet been calculated, please call one of the analyze methods first.");
+//    }
+
+//    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
+} // GetReorderedStoichiometryMatrix()
+
 ////        /// <summary>
 ////        /// Get reordered stoichiometry matrix
 ////        /// </summary>

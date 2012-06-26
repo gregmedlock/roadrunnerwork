@@ -130,8 +130,8 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        int GetRank();
 //        string[] GetReactionIds()
 //        string[] GetReorderedReactionIds()
-        StringList GetReorderedSpeciesIds();
-//        double[][] GetReorderedStoichiometryMatrix()
+        StringList              GetReorderedSpeciesIds();
+        LIB_LA::DoubleMatrix*   GetReorderedStoichiometryMatrix();
 //        double[][] GetReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
         StringList GetSpeciesIds();

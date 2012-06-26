@@ -97,9 +97,9 @@ int main(int argc, char* argv[])
 //	    cout<<"Steady state number: "<<ssVal<<endl;
 //    }
 
-    setGlobalParameterByIndex(1,23);
+    RRDataMatrixHandle matrix = getFullJacobian();
+    cout<< getMatrixAsString(matrix);
 
-    setFloatingSpeciesByIndex(1,1);
 	///////////////////
     text = getCopyright();
     if(hasError())

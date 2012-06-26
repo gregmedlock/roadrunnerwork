@@ -541,7 +541,6 @@ RRDataMatrixHandle __stdcall getStoichiometryMatrix(void)
 	return false;
 }
 
-
 C_DECL_SPEC bool __stdcall hasError()
 {
     return (gLastError != NULL) ? true : false;
@@ -625,7 +624,7 @@ RRDoubleVectorHandle __stdcall getReactionRates()
         }
         vector<double> vec =  gRRHandle->getReactionRates();
 
-        RRDoubleVector* aVec = CreateRRDoubleVecFrom(vec);
+        RRDoubleVector* aVec = createVectorFrom(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -822,7 +821,7 @@ RRDoubleVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
 
         vector<double> vec =  gRRHandle->getFloatingSpeciesInitialConcentrations();
 
-        RRDoubleVector* aVec = CreateRRDoubleVecFrom(vec);
+        RRDoubleVector* aVec = createVectorFrom(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -999,7 +998,7 @@ RRDoubleVectorHandle __stdcall computeSteadyStateValues()
         }
         vector<double> vec =  gRRHandle->computeSteadyStateValues();
 
-        RRDoubleVector* aVec = CreateRRDoubleVecFrom(vec);
+        RRDoubleVector* aVec = createVectorFrom(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -1071,6 +1070,31 @@ RRStringListHandle __stdcall getSteadyStateSelectionList()
     }
 	return NULL;
 }
+
+
+RRDataMatrixHandle __stdcall getFullJacobian(void)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        LIB_LA::DoubleMatrix tempMat = gRRHandle->getFullJacobian();
+
+        return createMatrixFrom(tempMat);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+	return false;
+}
+
 
 RRCCode* __stdcall getCCode(void)
 {
@@ -1160,9 +1184,47 @@ char* __stdcall getResultAsString(RRResultHandle result)
     {
         stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());                
+        SetAPIError(msg.str());
     }
     return NULL;
+}
+
+char* __stdcall getMatrixAsString(RRDataMatrixHandle matrixHandle)
+{
+	try
+    {
+        stringstream ss;
+        if(!matrixHandle)
+        {
+            ss<<"Null matrix in printMatrix...";
+
+            return createText(ss.str());
+        }
+
+        RRDataMatrix& mat = *matrixHandle;
+        ss<<"matrix dimension: "<<mat.RSize<<"x"<<mat.CSize<<" --\n";
+
+        int index = 0;
+        for(int row = 0; row < mat.RSize; row++)
+        {
+            for(int col = 0; col < mat.CSize; col++)
+            {
+                ss<<mat.Data[index++];
+                if(col < mat.CSize + 1)
+                {
+                    ss<<"\t";
+                }
+            }
+            ss<<endl;
+        }
+        return createText(ss.str());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
 }
 
 void __stdcall printMatrix(RRDataMatrixHandle matrixHandle)

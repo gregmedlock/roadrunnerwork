@@ -607,9 +607,8 @@ bool RoadRunner::loadSBML(const string& sbml)
 
     _L  = mStructAnalysis.GetLinkMatrix();
     _L0 = mStructAnalysis.GetL0Matrix();
-//    _N  = mStructAnalysis.GetReorderedStoichiometryMatrix();
+    _N  = mStructAnalysis.GetReorderedStoichiometryMatrix();
 //    _Nr = mStructAnalysis.GetNrMatrix();
-
     return true;
 }
 
@@ -1473,6 +1472,7 @@ double RoadRunner::oneStep(const double& currentTime, const double& stepSize, co
 //
 //            throw SBWApplicationException("Incompatible matrix operands to multiply");
 //        }
+
 // ******************************************************************** }
 // Multiply matrix 'm1' by 'm2' - returns a DoubleMatrix
 //                                                                      }
@@ -1525,13 +1525,9 @@ LIB_LA::DoubleMatrix mult(LIB_LA::DoubleMatrix& m1, LIB_LA::DoubleMatrix& m2)
         return mult(m2, m1);
     }
 
-    throw
-        SBWApplicationException("Incompatible matrix operands to multiply");
-
+    throw SBWApplicationException("Incompatible matrix operands to multiply");
 }
 
-
-//
 //        Help("Compute the reduced Jacobian at the current operating point")
 LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
 {
@@ -1561,30 +1557,25 @@ LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
 
 
 //        Help("Compute the full Jacobian at the current operating point")
-//        double[][] RoadRunner::getFullJacobian()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//                {
-//                    double[][] uelast = getUnscaledElasticityMatrix();
-//                    //                    double[][] N = StructAnalysis.getReorderedStoichiometryMatrix();
-//
-//                    return mult(_N, uelast);
-//                }
-//                throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from fullJacobian()", e.Message);
-//            }
-//        }
-//
-//
+LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
+{
+    try
+    {
+        if (modelLoaded)
+        {
+            LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
+
+            return mult((*_N), uelast);
+        }
+        throw SBWApplicationException(emptyModelStr);
+    }
+    catch (Exception e)
+    {
+        throw SBWApplicationException("Unexpected error from fullJacobian()", e.Message);
+    }
+}
+
+
 //        // ---------------------------------------------------------------------
 //        // Start of Level 4 API Methods
 //        // ---------------------------------------------------------------------

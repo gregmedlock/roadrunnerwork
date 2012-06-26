@@ -246,7 +246,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		//        double*                         mult(const double*& m1,const double*& m2);
 
         LIB_LA::DoubleMatrix            getReducedJacobian();
-        double*                         getFullJacobian();
+        LIB_LA::DoubleMatrix            getFullJacobian();
 
         // ---------------------------------------------------------------------
         // Start of Level 4 API Methods

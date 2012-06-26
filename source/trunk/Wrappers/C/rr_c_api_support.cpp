@@ -24,7 +24,33 @@ void SetAPIError(const string& err)
     strcpy(gLastError, err.c_str());
 }
 
-RRDoubleVector* CreateRRDoubleVecFrom(const vector<double>& vec)
+char* createText(const string& str)
+{
+    char* newstr = new char[str.size() + 1];
+
+    strcpy(newstr, str.c_str());
+    return newstr;
+}
+
+RRDataMatrix* createMatrixFrom(const LIB_LA::DoubleMatrix& mat)
+{
+    RRDataMatrixHandle matrix = new RRDataMatrix;
+    matrix->RSize = mat.RSize();
+    matrix->CSize = mat.CSize();
+    matrix->Data =  new double[mat.RSize()*mat.CSize()];
+
+    int index = 0;
+    for(rr::u_int row = 0; row < mat.RSize(); row++)
+    {
+        for(rr::u_int col = 0; col < mat.CSize(); col++)
+        {
+            matrix->Data[index++] = mat(row,col);
+        }
+    }
+    return matrix;
+}
+
+RRDoubleVector* createVectorFrom(const vector<double>& vec)
 {
     RRDoubleVector* aVec = new RRDoubleVector;
     aVec->Size = vec.size();
