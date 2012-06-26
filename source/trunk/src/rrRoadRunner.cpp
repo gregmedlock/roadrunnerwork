@@ -2736,17 +2736,25 @@ int RoadRunner::getNumberOfBoundarySpecies()
     }
     return mModel->getNumBoundarySpecies();
 }
-//
+
 //        Help("Sets the value of a boundary species by its index")
-//        void RoadRunner::setBoundarySpeciesByIndex(int index, double value)
-//        {
-//            if (!modelLoaded) throw Exception(emptyModelStr);
-//            if ((index >= 0) && (index < mModel->getNumBoundarySpecies))
-//                mModel->bc[index] = value;
-//            else
-//                throw Exception(String.Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
-//        }
-//
+void RoadRunner::setBoundarySpeciesByIndex(const int& index, const double& value)
+{
+    if (!modelLoaded)
+    {
+        throw Exception(emptyModelStr);
+    }
+
+    if ((index >= 0) && (index < mModel->getNumBoundarySpecies()))
+    {
+        mModel->bc[index] = value;
+    }
+    else
+    {
+        throw Exception(Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
+    }
+}
+
 //        Help("Returns the value of a boundary species by its index")
 //        double RoadRunner::getBoundarySpeciesByIndex(int index)
 //        {

@@ -84,13 +84,13 @@ C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTim
 
 // Steady State Methods
 C_DECL_SPEC double                  __stdcall   steadyState();
-C_DECL_SPEC RRVectorHandle    __stdcall   computeSteadyStateValues();
+C_DECL_SPEC RRVectorHandle          __stdcall   computeSteadyStateValues();
 C_DECL_SPEC bool                    __stdcall   setSteadyStateSelectionList(char *);
 C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
 
 C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
-//C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex (int index, double value);
+C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex (int index, double value);
 C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesByIndex (int index, double value);
 C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex  (int index, double value);
 //C_DECL_SPEC double                  __stdcall   getBoundarySpeciesByIndex (int index);
@@ -98,20 +98,20 @@ C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex  (int 
 //C_DECL_SPEC double                  __stdcall   getGlobalParameterByIndex (int index);
 
 // Jacobian Matrix Methods
-C_DECL_SPEC RRMatrixHandle      __stdcall   getFullJacobian(void);
-C_DECL_SPEC RRMatrixHandle      __stdcall   getReducedJacobian(void);
+C_DECL_SPEC RRMatrixHandle          __stdcall   getFullJacobian(void);
+C_DECL_SPEC RRMatrixHandle          __stdcall   getReducedJacobian(void);
 
 // Stoichiometry Methods
-C_DECL_SPEC RRMatrixHandle      __stdcall   getStoichiometryMatrix(void);
+C_DECL_SPEC RRMatrixHandle          __stdcall   getStoichiometryMatrix(void);
 
 C_DECL_SPEC bool                    __stdcall   reset();
 C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRVector* vec);
-C_DECL_SPEC RRVectorHandle    __stdcall   getFloatingSpeciesInitialConcentrations (void);
+C_DECL_SPEC RRVectorHandle          __stdcall   getFloatingSpeciesInitialConcentrations (void);
 
 // Reaction Rates
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
 C_DECL_SPEC double                  __stdcall   getReactionRate(int);
-C_DECL_SPEC RRVectorHandle    __stdcall   getReactionRates();
+C_DECL_SPEC RRVectorHandle          __stdcall   getReactionRates();
 
 // Rates of Change
 //C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames(); <- to be added

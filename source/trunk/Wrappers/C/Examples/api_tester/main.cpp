@@ -101,14 +101,14 @@ int main(int argc, char* argv[])
 //    cout<< getMatrixAsString(matrix);
 //    freeMatrix(matrix);
 
-    RRMatrix* matrix = getReducedJacobian();
+//    RRMatrix* matrix = getReducedJacobian();
+//    if(!matrix)
+//    {
+//        cout<<getLastError();
+//    }
+//    cout<< getMatrixAsString(matrix);
 
-    if(!matrix)
-    {
-        cout<<getLastError();
-    }
-    cout<< getMatrixAsString(matrix);
-
+    setBoundarySpeciesByIndex(0,12);
 	///////////////////
     text = getCopyright();
     if(hasError())

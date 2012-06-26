@@ -853,8 +853,31 @@ bool __stdcall setFloatingSpeciesByIndex (int index, double value)
         SetAPIError(msg.str());
     }
   	return false;
+}
+
+bool __stdcall setBoundarySpeciesByIndex (int index, double value)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        gRRHandle->setBoundarySpeciesByIndex(index, value);
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+  	return false;
 
 }
+
 
 bool __stdcall setGlobalParameterByIndex(int index, double value)
 {
