@@ -1088,8 +1088,50 @@ double __stdcall getGlobalParameterByIndex (int index)
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         SetAPIError(msg.str());
     }
-  	return -1;  //Todo: return NaN??
+  	return -1;  //Todo: return NaN?? throw??
 
+}
+
+double __stdcall getCC(char* variable, char* parameter)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        return gRRHandle->getCC(variable, parameter);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+  	return -1;  //Todo: return NaN?? throw??
+}
+
+double __stdcall getEE(char* name, char* species)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        return gRRHandle->getEE(name, species);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+  	return -1;  //Todo: return NaN?? throw??
 }
 
 double __stdcall steadyState()

@@ -72,90 +72,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
         StringList                      getParameterNames();
         string                          GetDLLName();
 
-        //RoadRunner MCA functions......
-
-        //[Help("Get unscaled control coefficient with respect to a global parameter")]
-        double getuCC(string variableName, string parameterName);
-
-        //[Help("Get scaled control coefficient with respect to a global parameter")]
-        double getCC(string variableName, string parameterName);
-
-        //[Help("Get unscaled elasticity coefficient with respect to a global parameter or species")]
-        double getuEE(string reactionName, string parameterName);
-
-        //[Help("Get unscaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
-        double getuEE(string reactionName, string parameterName, bool computeSteadystate);
-
-        //[Help("Get scaled elasticity coefficient with respect to a global parameter or species")]
-        double getEE(string reactionName, string parameterName);
-
-        //[Help("Get scaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
-        double getEE(string reactionName, string parameterName, bool computeSteadyState);
-
-        // Get a single species elasticity value
-        // IMPORTANT:
-        // Assumes that the reaction rates have been precomputed at the operating point !!
-        double getUnscaledSpeciesElasticity(int reactionId, int speciesIndex);
-
-        //"Returns the elasticity of a given reaction to a given parameter. Parameters can be boundary species or global parameters"
-        double getUnScaledElasticity(string reactionName, string parameterName);
-
-        //"Compute the unscaled species elasticity matrix at the current operating point")]
-        LIB_LA::DoubleMatrix getUnscaledElasticityMatrix();
-
-        //"Compute the unscaled elasticity matrix at the current operating point")]
-        double** getScaledElasticityMatrix();
-
-        //[Help("Compute the unscaled elasticity for a given reaction and given species")]
-        double getUnscaledFloatingSpeciesElasticity(string reactionName, string speciesName);
-
-        //[Help("Compute the scaled elasticity for a given reaction and given species")]
-        double getScaledFloatingSpeciesElasticity(string reactionName, string speciesName);
-
-        // Changes a given parameter type by the given increment
-        void changeParameter(TParameterType parameterType, int reactionIndex, int parameterIndex, double originalValue, double increment);
-        //[Help("Returns the unscaled elasticity for a named reaction with respect to a named parameter (local or global)"
-        double getUnscaledParameterElasticity(string reactionName, string parameterName);
-
-        // Use the formula: ucc = -L Jac^-1 Nr
-        //[Help("Compute the matrix of unscaled concentration control coefficients")]
-        double** getUnscaledConcentrationControlCoefficientMatrix();
-//        static Complex[][] ConvertComplex(SimpleComplex[][] oMatrix);
-
-        //[Help("Compute the matrix of scaled concentration control coefficients")]
-        double** getScaledConcentrationControlCoefficientMatrix();
-
-        // Use the formula: ucc = elast CS + I
-        //[Help("Compute the matrix of unscaled flux control coefficients")]
-        double** getUnscaledFluxControlCoefficientMatrix();
-
-        //[Help("Compute the matrix of scaled flux control coefficients")]
-        double** getScaledFluxControlCoefficientMatrix();
-
-        //"Compute the value for a particular unscaled concentration control coefficients with respect to a local parameter"
-        double getUnscaledConcentrationControlCoefficient(string speciesName, string localReactionName, string parameterName);
-
-        //"Compute the value for a particular scaled concentration control coefficients with respect to a local parameter"
-        double getScaledConcentrationControlCoefficient(string speciesName, string localReactionName, string parameterName);
-        //"Compute the value for a particular concentration control coefficient, permitted parameters include global parameters, boundary conditions and conservation totals"
-        double getUnscaledConcentrationControlCoefficient(string speciesName, string parameterName);
-
-        //"Compute the value for a particular scaled concentration control coefficients with respect to a global or boundary species parameter"
-        double getScaledConcentrationControlCoefficient(string speciesName, string parameterName);
-
-        //[Help("Compute the value for a particular unscaled flux control coefficients with respect to a local parameter")
-        double getUnscaledFluxControlCoefficient(string fluxName, string localReactionName, string parameterName);
-
-        //"Compute the value for a particular flux control coefficient, permitted parameters include global parameters, boundary conditions and conservation totals"
-        double getUnscaledFluxControlCoefficient(string reactionName, string parameterName);
-
-        //[Help("Compute the value for a particular scaled flux control coefficients with respect to a local parameter");]
-        double getScaledFluxControlCoefficient(string reactionName, string localReactionName, string parameterName);
-
-        //    "Compute the value for a particular scaled flux control coefficients with respect to a global or boundary species parameter"
-        double getScaledFluxControlCoefficient(string reactionName, string parameterName);
-
-        //-------------- End of MCA functions
         SimulationSettings              mSettings;
 
     public:
@@ -349,6 +265,92 @@ class RR_DECLSPEC RoadRunner : public rrObject
         static void                     PrintTout(const double& start, const double& end, const int& numPoints);
         static void                     TestChange();
         void                            DumpResults(TextWriter& writer, DoubleMatrix& data, const StringList& colLabels);
+
+
+        //RoadRunner MCA functions......
+
+        //[Help("Get unscaled control coefficient with respect to a global parameter")]
+        double getuCC(const string& variableName, const string& parameterName);
+
+        //[Help("Get scaled control coefficient with respect to a global parameter")]
+        double getCC(const string& variableName, const string& parameterName);
+
+        //[Help("Get unscaled elasticity coefficient with respect to a global parameter or species")]
+        double getuEE(const string& reactionName, const string& parameterName);
+
+        //[Help("Get unscaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
+        double getuEE(const string& reactionName, const string& parameterName, bool computeSteadystate);
+
+        //[Help("Get scaled elasticity coefficient with respect to a global parameter or species")]
+        double getEE(const string& reactionName, const string& parameterName);
+
+        //[Help("Get scaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
+        double getEE(const string& reactionName, const string& parameterName, bool computeSteadyState);
+
+        // Get a single species elasticity value
+        // IMPORTANT:
+        // Assumes that the reaction rates have been precomputed at the operating point !!
+        double getUnscaledSpeciesElasticity(int reactionId, int speciesIndex);
+
+        //"Returns the elasticity of a given reaction to a given parameter. Parameters can be boundary species or global parameters"
+        double getUnScaledElasticity(const string& reactionName, const string& parameterName);
+
+        //"Compute the unscaled species elasticity matrix at the current operating point")]
+        LIB_LA::DoubleMatrix getUnscaledElasticityMatrix();
+
+        //"Compute the unscaled elasticity matrix at the current operating point")]
+        double** getScaledElasticityMatrix();
+
+        //[Help("Compute the unscaled elasticity for a given reaction and given species")]
+        double getUnscaledFloatingSpeciesElasticity(const string& reactionName, const string& speciesName);
+
+        //[Help("Compute the scaled elasticity for a given reaction and given species")]
+        double getScaledFloatingSpeciesElasticity(const string& reactionName, const string& speciesName);
+
+        // Changes a given parameter type by the given increment
+        void changeParameter(TParameterType parameterType, int reactionIndex, int parameterIndex, double originalValue, double increment);
+        //[Help("Returns the unscaled elasticity for a named reaction with respect to a named parameter (local or global)"
+        double getUnscaledParameterElasticity(const string& reactionName, const string& parameterName);
+
+        // Use the formula: ucc = -L Jac^-1 Nr
+        //[Help("Compute the matrix of unscaled concentration control coefficients")]
+        double** getUnscaledConcentrationControlCoefficientMatrix();
+//        static Complex[][] ConvertComplex(SimpleComplex[][] oMatrix);
+
+        //[Help("Compute the matrix of scaled concentration control coefficients")]
+        double** getScaledConcentrationControlCoefficientMatrix();
+
+        // Use the formula: ucc = elast CS + I
+        //[Help("Compute the matrix of unscaled flux control coefficients")]
+        double** getUnscaledFluxControlCoefficientMatrix();
+
+        //[Help("Compute the matrix of scaled flux control coefficients")]
+        double** getScaledFluxControlCoefficientMatrix();
+
+        //"Compute the value for a particular unscaled concentration control coefficients with respect to a local parameter"
+        double getUnscaledConcentrationControlCoefficient(const string& speciesName, const string& localReactionName, const string& parameterName);
+
+        //"Compute the value for a particular scaled concentration control coefficients with respect to a local parameter"
+        double getScaledConcentrationControlCoefficient(const string& speciesName, const string& localReactionName, const string& parameterName);
+        //"Compute the value for a particular concentration control coefficient, permitted parameters include global parameters, boundary conditions and conservation totals"
+        double getUnscaledConcentrationControlCoefficient(const string& speciesName, const string& parameterName);
+
+        //"Compute the value for a particular scaled concentration control coefficients with respect to a global or boundary species parameter"
+        double getScaledConcentrationControlCoefficient(const string& speciesName, const string& parameterName);
+
+        //[Help("Compute the value for a particular unscaled flux control coefficients with respect to a local parameter")
+        double getUnscaledFluxControlCoefficient(const string& fluxName, const string& localReactionName, const string& parameterName);
+
+        //"Compute the value for a particular flux control coefficient, permitted parameters include global parameters, boundary conditions and conservation totals"
+        double getUnscaledFluxControlCoefficient(const string& reactionName, const string& parameterName);
+
+        //[Help("Compute the value for a particular scaled flux control coefficients with respect to a local parameter");]
+        double getScaledFluxControlCoefficient(const string& reactionName, const string& localReactionName, const string& parameterName);
+
+        //    "Compute the value for a particular scaled flux control coefficients with respect to a global or boundary species parameter"
+        double getScaledFluxControlCoefficient(const string& reactionName, const string& parameterName);
+        //-------------- End of MCA functions
+
 
 }; //class RoadRunner
 

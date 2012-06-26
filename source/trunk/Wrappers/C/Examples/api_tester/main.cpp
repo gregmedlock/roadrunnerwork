@@ -114,6 +114,9 @@ int main(int argc, char* argv[])
     cout<<getFloatingSpeciesByIndex (0)<<endl;
     cout<<getGlobalParameterByIndex (0)<<endl;
 
+    cout<<getCC("S1", "TE")<<endl;
+    cout<<getEE("S1", "TE")<<endl;
+
 	///////////////////
     text = getCopyright();
     if(hasError())

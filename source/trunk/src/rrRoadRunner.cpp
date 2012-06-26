@@ -1051,13 +1051,13 @@ StringList RoadRunner::getParameterNames()
 }
 
 //        [Help("Get scaled elasticity coefficient with respect to a global parameter or species")]
-double RoadRunner::getEE(string reactionName, string parameterName)
+double RoadRunner::getEE(const string& reactionName, const string& parameterName)
 {
     return getEE(reactionName, parameterName, true);
 }
 
 //        [Help("Get scaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
-double RoadRunner::getEE(string reactionName, string parameterName, bool computeSteadyState)
+double RoadRunner::getEE(const string& reactionName, const string& parameterName, bool computeSteadyState)
 {
     TParameterType parameterType;
     int reactionIndex;
@@ -1108,13 +1108,13 @@ double RoadRunner::getEE(string reactionName, string parameterName, bool compute
 
 
 //        [Help("Get unscaled elasticity coefficient with respect to a global parameter or species")]
-double RoadRunner::getuEE(string reactionName, string parameterName)
+double RoadRunner::getuEE(const string& reactionName, const string& parameterName)
 {
     return getuEE(reactionName, parameterName, true);
 }
 
 //[Help("Get unscaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
-double RoadRunner::getuEE(string reactionName, string parameterName, bool computeSteadystate)
+double RoadRunner::getuEE(const string& reactionName, const string& parameterName, bool computeSteadystate)
 {
     try
     {
@@ -3145,7 +3145,7 @@ StringList RoadRunner::getGlobalParameterNames()
 //    partial class RoadRunner
 //    {
 //        [Help("Get unscaled control coefficient with respect to a global parameter")]
-double RoadRunner::getuCC(string variableName, string parameterName)
+double RoadRunner::getuCC(const string& variableName, const string& parameterName)
 {
     try
     {
@@ -3258,7 +3258,7 @@ double RoadRunner::getuCC(string variableName, string parameterName)
 
 
 //        [Help("Get scaled control coefficient with respect to a global parameter")]
-double RoadRunner::getCC(string variableName, string parameterName)
+double RoadRunner::getCC(const string& variableName, const string& parameterName)
 {
     TVariableType variableType;
     TParameterType parameterType;
@@ -3266,7 +3266,11 @@ double RoadRunner::getCC(string variableName, string parameterName)
     int parameterIndex;
     //double originalParameterValue;
 
-    if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
     // Check the variable name
     if (mModelGenerator->reactionList.find(variableName, variableIndex))
     {
@@ -3276,7 +3280,10 @@ double RoadRunner::getCC(string variableName, string parameterName)
     {
         variableType = TVariableType::vtSpecies;
     }
-    else throw SBWApplicationException("Unable to locate variable: [" + variableName + "]");
+    else
+    {
+        throw SBWApplicationException("Unable to locate variable: [" + variableName + "]");
+    }
 
     // Check for the parameter name
     if (mModelGenerator->globalParameterList.find(parameterName, parameterIndex))
@@ -3295,13 +3302,15 @@ double RoadRunner::getCC(string variableName, string parameterName)
         //originalParameterValue = mModel->ct[parameterIndex];
     }
 
-
-    else throw SBWApplicationException("Unable to locate parameter: [" + parameterName + "]");
+    else
+    {
+        throw SBWApplicationException("Unable to locate parameter: [" + parameterName + "]");
+    }
 
     steadyState();
+
     double variableValue = getVariableValue(variableType, variableIndex);
     double parameterValue = getParameterValue(parameterType, parameterIndex);
-
     return getuCC(variableName, parameterName)*parameterValue/variableValue;
 }
 
@@ -3316,7 +3325,9 @@ double RoadRunner::getUnscaledSpeciesElasticity(int reactionId, int speciesIndex
 
     double hstep = DiffStepSize*originalParameterValue;
     if (fabs(hstep) < 1E-12)
+    {
         hstep = DiffStepSize;
+    }
 
     mModel->convertToConcentrations();
     mModel->setConcentration(speciesIndex, originalParameterValue + hstep);
