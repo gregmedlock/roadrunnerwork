@@ -114,17 +114,23 @@ C_DECL_SPEC double                  __stdcall   getReactionRate(int);
 C_DECL_SPEC RRVectorHandle          __stdcall   getReactionRates();
 
 // Rates of Change
+C_DECL_SPEC RRVectorHandle          __stdcall   getRatesOfChange();
 C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames();
+
+C_DECL_SPEC void                    __stdcall   evalModel();
 
 
 C_DECL_SPEC double                  __stdcall   getCC(char* variable, char* parameter);
 C_DECL_SPEC double                  __stdcall   getEE(char* name, char* species);
+
 
 // get Number Family
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
 C_DECL_SPEC int                     __stdcall   getNumberOfFloatingSpecies();
 C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameters();
 C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameterNames();
+C_DECL_SPEC int                     __stdcall   getNumberOfDependentSpecies();
+C_DECL_SPEC int                     __stdcall   getNumberOfIndependentSpecies();
 
 // get Names Family
 C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);

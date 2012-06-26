@@ -85,37 +85,17 @@ int main(int argc, char* argv[])
 	    cout<<"Steady state number: "<<ssVal<<endl;
     }
 
-//	setComputeAndAssignConservationLaws(false);	//Should fail now...
-//
-//   	ssVal = steadyState();
-//    if(ssVal == -1)
-//    {
-//		cerr<<"Steady State call failed. Error was: "<<getLastError()<<endl;
-//    }
-//    else
-//    {
-//	    cout<<"Steady state number: "<<ssVal<<endl;
-//    }
-
-//    RRMatrixHandle matrix = getFullJacobian();
-//    cout<< getMatrixAsString(matrix);
-//    freeMatrix(matrix);
-
-//    RRMatrix* matrix = getReducedJacobian();
-//    if(!matrix)
-//    {
-//        cout<<getLastError();
-//    }
-//    cout<< getMatrixAsString(matrix);
 
     RRStringListHandle list = getRatesOfChangeNames();
 
-    cout<<getBoundarySpeciesByIndex (0)<<endl;
+//    cout<<getBoundarySpeciesByIndex (0)<<endl;
     cout<<getFloatingSpeciesByIndex (0)<<endl;
     cout<<getGlobalParameterByIndex (0)<<endl;
 
-    cout<<getCC("S1", "TE")<<endl;
-    cout<<getEE("S1", "TE")<<endl;
+    cout<<getNumberOfDependentSpecies()<<endl;
+    cout<<getNumberOfIndependentSpecies()<<endl;
+
+    RRVector* vec = getRatesOfChange();
 
 	///////////////////
     text = getCopyright();

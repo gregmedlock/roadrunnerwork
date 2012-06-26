@@ -465,6 +465,42 @@ RRStringListHandle __stdcall getReactionNames(void)
 	return NULL;
 }
 
+RRVectorHandle __stdcall getRatesOfChange()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        vector<double> rates = gRRHandle->getRatesOfChange();
+
+        if(!rates.size())
+        {
+            return NULL;
+        }
+
+        RRVector* list = new RRVector;
+        list->Size = rates.size();
+        list->Data = new double[list->Size];
+
+        for(int i = 0; i < list->Size; i++)
+        {
+            list->Data[i] = rates[i];
+            return list;
+        }
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+	return NULL;
+}
+
 RRStringListHandle __stdcall getRatesOfChangeNames()
 {
 	try
@@ -1124,6 +1160,48 @@ double __stdcall getEE(char* name, char* species)
         }
 
         return gRRHandle->getEE(name, species);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+  	return -1;  //Todo: return NaN?? throw??
+}
+
+int __stdcall getNumberOfDependentSpecies()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        return gRRHandle->getNumberOfDependentSpecies();
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+  	return -1;  //Todo: return NaN?? throw??
+}
+
+int __stdcall getNumberOfIndependentSpecies()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        return gRRHandle->getNumberOfIndependentSpecies();
     }
     catch(Exception& ex)
     {

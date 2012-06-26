@@ -1694,45 +1694,42 @@ DoubleMatrix  RoadRunner::getStoichiometryMatrix()
 //        }
 //
 //        Help("Returns the number of dependent species in the model")
-//        int RoadRunner::getNumberOfDependentSpecies()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//                    return StructAnalysis.GetNumDependentSpecies();
-//                //return StructAnalysis.getNumDepSpecies();
-//                throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from getNumberOfDependentSpecies()", e.Message());
-//            }
-//        }
-//
-//        Help("Returns the number of independent species in the model")
-//        int RoadRunner::getNumberOfIndependentSpecies()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//                    return StructAnalysis.GetNumIndependentSpecies();
-//                //return StructAnalysis.getNumIndSpecies();
-//                throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from getNumberOfIndependentSpecies()", e.Message());
-//            }
-//        }
-//
+int RoadRunner::getNumberOfDependentSpecies()
+{
+    try
+    {
+        if (modelLoaded)
+        {
+            return mStructAnalysis.GetInstance()->getNumDepSpecies();
+        }
+
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    catch(Exception &e)
+    {
+        throw SBWApplicationException("Unexpected error from getNumberOfDependentSpecies()", e.Message());
+    }
+}
+
+//Help("Returns the number of independent species in the model")
+int RoadRunner::getNumberOfIndependentSpecies()
+{
+    try
+    {
+        if (modelLoaded)
+        {
+            return mStructAnalysis.GetInstance()->getNumIndSpecies();
+        }
+        //return StructAnalysis.getNumIndSpecies();
+        throw SBWApplicationException(emptyModelStr);
+    }
+    catch (Exception &e)
+    {
+        throw SBWApplicationException("Unexpected error from getNumberOfIndependentSpecies()", e.Message());
+    }
+}
+
 double RoadRunner::getVariableValue(const TVariableType& variableType, const int& variableIndex)
 {
     switch (variableType)
@@ -4501,15 +4498,20 @@ vector<double> RoadRunner::getReactionRates()
 }
 
 //        Help("Returns the current vector of rates of change")
-//        double[] RoadRunner::getRatesOfChange()
-//        {
-//            if (!modelLoaded)
-//                throw SBWApplicationException(emptyModelStr);
-//
-//            model.computeAllRatesOfChange();
-//            return model.dydt;
-//        }
-//
+vector<double> RoadRunner::getRatesOfChange()
+{
+    if (!modelLoaded)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    mModel->computeAllRatesOfChange();
+    vector<double> result;
+    CopyCArrayToStdVector(mModel->dydt, result, *mModel->dydtSize);
+
+    return result;
+}
+
 //        Help(
 //            "Returns a list of floating species names: This method is deprecated, please use getFloatingSpeciesNames()")
 //
