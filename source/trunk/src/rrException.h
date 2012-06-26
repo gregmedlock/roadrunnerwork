@@ -16,10 +16,11 @@ class RR_DECLSPEC Exception : public std::exception, public rrObject
         string mMessage;   //Exception message
 
     public:
-        string& Message;
-        Exception(const string& desc);
-        virtual ~Exception() throw();
-        virtual const char* what() const throw();
+        //string& Message;
+                                Exception(const string& desc);
+        virtual                ~Exception() throw();
+        virtual const char*     what() const throw();
+        string                  Message() const;
 };
 
 class RR_DECLSPEC RRException : public Exception

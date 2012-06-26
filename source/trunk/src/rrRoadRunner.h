@@ -177,6 +177,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
         int                             mNumPoints;
         string                          NL;
         StructAnalysis                  mStructAnalysis;                    //Object to facilitate calls to libStruct library
+        LibStructural                  *mLibStructInstance;
+
         CGenerator*						GetCGenerator();
         CSharpGenerator*				GetCSharpGenerator();
         //Functions --------------------------------------------------------------------
@@ -243,7 +245,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
         // ---------------------------------------------------------------------
         double                          steadyState();
         static void                     TestSettings();
-		//        double*                         mult(const double*& m1,const double*& m2);
 
         LIB_LA::DoubleMatrix            getReducedJacobian();
         LIB_LA::DoubleMatrix            getFullJacobian();

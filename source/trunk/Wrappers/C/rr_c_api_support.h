@@ -16,10 +16,10 @@ const char ALLOCATE_API_ERROR_MSG[] = {"Please allocate a handle to the roadrunn
 
 //Internal prototypes
 void                SetAPIError(const string& err);
-bool                CopyRRVector(const RRDoubleVector* vec, vector<double>& aVec);
-RRDoubleVector*     createVectorFrom(const vector<double>& vec);
+bool                CopyRRVector(const RRVector* vec, vector<double>& aVec);
+RRVector*           createVectorFrom(const vector<double>& vec);
 char*               createText(const string& str);      //To be deleted by client using freeText
-RRDataMatrix*       createMatrixFrom(const LIB_LA::DoubleMatrix& mat);
+RRMatrix*           createMatrixFrom(const LIB_LA::DoubleMatrix& mat);
 }
 
 #endif

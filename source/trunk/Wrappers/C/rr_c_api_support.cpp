@@ -32,9 +32,9 @@ void SetAPIError(const string& err)
     return newstr;
 }
 
-RRDataMatrix* createMatrixFrom(const LIB_LA::DoubleMatrix& mat)
+RRMatrix* createMatrixFrom(const LIB_LA::DoubleMatrix& mat)
 {
-    RRDataMatrixHandle matrix = new RRDataMatrix;
+    RRMatrixHandle matrix = new RRMatrix;
     matrix->RSize = mat.RSize();
     matrix->CSize = mat.CSize();
     matrix->Data =  new double[mat.RSize()*mat.CSize()];
@@ -50,9 +50,9 @@ void SetAPIError(const string& err)
     return matrix;
 }
 
-RRDoubleVector* createVectorFrom(const vector<double>& vec)
+RRVector* createVectorFrom(const vector<double>& vec)
 {
-    RRDoubleVector* aVec = new RRDoubleVector;
+    RRVector* aVec = new RRVector;
     aVec->Size = vec.size();
     if(aVec->Size)
     {
@@ -66,7 +66,7 @@ void SetAPIError(const string& err)
     return aVec;
 }
 
-bool CopyRRVector(const RRDoubleVector* vec, vector<double>& aVec)
+bool CopyRRVector(const RRVector* vec, vector<double>& aVec)
 {
     if(!vec)
     {

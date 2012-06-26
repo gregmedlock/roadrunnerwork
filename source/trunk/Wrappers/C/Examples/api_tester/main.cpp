@@ -97,7 +97,16 @@ int main(int argc, char* argv[])
 //	    cout<<"Steady state number: "<<ssVal<<endl;
 //    }
 
-    RRDataMatrixHandle matrix = getFullJacobian();
+//    RRMatrixHandle matrix = getFullJacobian();
+//    cout<< getMatrixAsString(matrix);
+//    freeMatrix(matrix);
+
+    RRMatrix* matrix = getReducedJacobian();
+
+    if(!matrix)
+    {
+        cout<<getLastError();
+    }
     cout<< getMatrixAsString(matrix);
 
 	///////////////////

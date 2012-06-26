@@ -52,11 +52,11 @@ extern "C"
                                     /*Hand the client a HANDLE, i.e. ptr to structure */
 typedef void*                       RRHandle;
 
-typedef struct RRDoubleVector
+typedef struct RRVector
 {
     int             Size;
     double*         Data;
-} *RRDoubleVectorHandle ;
+} *RRVectorHandle ;
 
 
 typedef struct RRLabelStringList
@@ -80,12 +80,12 @@ typedef struct RRSymbolLists
     RRLabelStringList*  List;
 } *RRSymbolListsHandle ;
 
-typedef struct RRDataMatrix
+typedef struct RRMatrix
 {
     int             RSize;
     int             CSize;
     double*         Data;
-} *RRDataMatrixHandle ;
+} *RRMatrixHandle ;
 
 typedef struct RRResult
 {

@@ -1040,9 +1040,9 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
                 }
             }
         }
-        catch (const Exception& ex)
+        catch (const Exception& e)
         {
-            throw new SBWApplicationException("Error while trying to get Rule #" + ToString(i) + ex.Message);
+            throw new SBWApplicationException("Error while trying to get Rule #" + ToString(i) + e.Message());
         }
     }
 
@@ -2041,7 +2041,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
     }
     catch (Exception e)
     {
-       throw new SBWApplicationException(e.Message);
+       throw new SBWApplicationException(e.Message());
     }
     return mSource.ToString();
 }

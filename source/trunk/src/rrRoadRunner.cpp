@@ -605,10 +605,12 @@ bool RoadRunner::loadSBML(const string& sbml)
         return false;
     }
 
+    mLibStructInstance = mStructAnalysis.GetInstance();
+
     _L  = mStructAnalysis.GetLinkMatrix();
     _L0 = mStructAnalysis.GetL0Matrix();
     _N  = mStructAnalysis.GetReorderedStoichiometryMatrix();
-//    _Nr = mStructAnalysis.GetNrMatrix();
+    _Nr = mLibStructInstance->getNrMatrix();
     return true;
 }
 
@@ -816,8 +818,8 @@ void RoadRunner::reset()
         }
         catch (Exception e)
         {
-            mModel->Warnings.push_back("Constraint Violated at time = 0\n" + e.Message);
-            Log(lWarning)<<"Constraint Violated at time = 0\n"<<e.Message;
+            mModel->Warnings.push_back("Constraint Violated at time = 0\n" + e.Message());
+            Log(lWarning)<<"Constraint Violated at time = 0\n"<<e.Message();
         }
     }
 }
@@ -839,7 +841,7 @@ DoubleMatrix RoadRunner::simulate()
     }
     catch (Exception e)
     {
-        throw SBWApplicationException("Unexpected error from simulate(): " + e.Message);
+        throw SBWApplicationException("Unexpected error from simulate(): " + e.Message());
     }
 }
 
@@ -1203,7 +1205,7 @@ double RoadRunner::getuEE(string reactionName, string parameterName, bool comput
     }
     catch (Exception e)
     {
-        throw SBWApplicationException("Unexpected error from getuEE ()" +  e.Message);
+        throw SBWApplicationException("Unexpected error from getuEE ()" +  e.Message());
     }
 }
 
@@ -1400,7 +1402,7 @@ double RoadRunner::oneStep(const double& currentTime, const double& stepSize, co
 //            } catch (SBWApplicationException) {
 //                throw;
 //            } catch (Exception e) {
-//                throw SBWApplicationException ("Unexpected error from steadyState()", e.Message);
+//                throw SBWApplicationException ("Unexpected error from steadyState()", e.Message());
 //            }
 //        }*/
 //
@@ -1525,7 +1527,7 @@ LIB_LA::DoubleMatrix mult(LIB_LA::DoubleMatrix& m1, LIB_LA::DoubleMatrix& m2)
         return mult(m2, m1);
     }
 
-    throw SBWApplicationException("Incompatible matrix operands to multiply");
+    throw Exception("Incompatible matrix operands to multiply");
 }
 
 //        Help("Compute the reduced Jacobian at the current operating point")
@@ -1536,22 +1538,14 @@ LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
         if (modelLoaded)
         {
             LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
-
-            //                    double[][] Nr = StructAnalysis.getNrMatrix();
-            //                    double[][] L = StructAnalysis.getLinkMatrix();
-
             LIB_LA::DoubleMatrix I1 = mult((*_Nr), uelast);
             return mult(I1, (*_L));
         }
         throw SBWApplicationException(emptyModelStr);
     }
-    catch (SBWException)
-    {
-        throw;
-    }
     catch (Exception e)
     {
-        throw SBWApplicationException("Unexpected error from fullJacobian()", e.Message);
+        throw SBWApplicationException("Unexpected error from fullJacobian()", e.Message());
     }
 }
 
@@ -1571,7 +1565,7 @@ LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
     }
     catch (Exception e)
     {
-        throw SBWApplicationException("Unexpected error from fullJacobian()", e.Message);
+        throw SBWApplicationException("Unexpected error from fullJacobian()", e.Message());
     }
 }
 
@@ -1597,7 +1591,7 @@ LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
 //            }
 //            catch (Exception e)
 //            {
-//                throw SBWApplicationException("Unexpected error from getLMatrix()", e.Message);
+//                throw SBWApplicationException("Unexpected error from getLMatrix()", e.Message());
 //            }
 //        }
 //
@@ -1618,7 +1612,7 @@ LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
 //            }
 //            catch (Exception e)
 //            {
-//                throw SBWApplicationException("Unexpected error from getNrMatrix()", e.Message);
+//                throw SBWApplicationException("Unexpected error from getNrMatrix()", e.Message());
 //            }
 //        }
 //
@@ -1639,7 +1633,7 @@ LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
 //            }
 //            catch (Exception e)
 //            {
-//                throw SBWApplicationException("Unexpected error from getL0Matrix()", e.Message);
+//                throw SBWApplicationException("Unexpected error from getL0Matrix()", e.Message());
 //            }
 //        }
 //
@@ -1675,7 +1669,7 @@ DoubleMatrix  RoadRunner::getStoichiometryMatrix()
     }
     catch (Exception e)
     {
-        throw SBWApplicationException("Unexpected error from getReorderedStoichiometryMatrix()" + e.Message);
+        throw SBWApplicationException("Unexpected error from getReorderedStoichiometryMatrix()" + e.Message());
     }
 }
 //
@@ -1695,7 +1689,7 @@ DoubleMatrix  RoadRunner::getStoichiometryMatrix()
 //            }
 //            catch (Exception e)
 //            {
-//                throw SBWApplicationException("Unexpected error from getConservationLawArray()", e.Message);
+//                throw SBWApplicationException("Unexpected error from getConservationLawArray()", e.Message());
 //            }
 //        }
 //
@@ -1715,7 +1709,7 @@ DoubleMatrix  RoadRunner::getStoichiometryMatrix()
 //            }
 //            catch (Exception e)
 //            {
-//                throw SBWApplicationException("Unexpected error from getNumberOfDependentSpecies()", e.Message);
+//                throw SBWApplicationException("Unexpected error from getNumberOfDependentSpecies()", e.Message());
 //            }
 //        }
 //
@@ -1735,7 +1729,7 @@ DoubleMatrix  RoadRunner::getStoichiometryMatrix()
 //            }
 //            catch (Exception e)
 //            {
-//                throw SBWApplicationException("Unexpected error from getNumberOfIndependentSpecies()", e.Message);
+//                throw SBWApplicationException("Unexpected error from getNumberOfIndependentSpecies()", e.Message());
 //            }
 //        }
 //
@@ -3226,7 +3220,7 @@ double RoadRunner::getuCC(string variableName, string parameterName)
     }
     catch (Exception e)
     {
-        throw SBWApplicationException("Unexpected error from getuCC ()", e.Message);
+        throw SBWApplicationException("Unexpected error from getuCC ()", e.Message());
     }
 }
 
@@ -3501,7 +3495,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
     }
     catch (Exception e)
     {
-        throw SBWApplicationException("Unexpected error from unscaledElasticityMatrix()", e.Message);
+        throw SBWApplicationException("Unexpected error from unscaledElasticityMatrix()", e.Message());
     }
 }
 
@@ -3542,7 +3536,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            }
 //            catch (Exception e)
 //            {
-//                throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message);
+//                throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message());
 //            }
 //        }
 //
@@ -3577,7 +3571,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            }
 //            catch (Exception e)
 //            {
-//                throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message);
+//                throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message());
 //            }
 //        }
 //
@@ -3613,7 +3607,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            }
 //            catch (Exception e)
 //            {
-//                throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message);
+//                throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message());
 //            }
 //        }
 //
@@ -3814,7 +3808,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException(
-//                    "Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message);
+//                    "Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message());
 //            }
 //        }
 //
@@ -3864,7 +3858,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException(
-//                    "Unexpected error from getScaledConcentrationControlCoefficientMatrix()", e.Message);
+//                    "Unexpected error from getScaledConcentrationControlCoefficientMatrix()", e.Message());
 //            }
 //        }
 //
@@ -3897,7 +3891,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getUnscaledFluxControlCoefficientMatrix()",
-//                                                  e.Message);
+//                                                  e.Message());
 //            }
 //        }
 //
@@ -3932,7 +3926,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-//                                                  e.Message);
+//                                                  e.Message());
 //            }
 //        }
 //
@@ -4020,7 +4014,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-//                                                  e.Message);
+//                                                  e.Message());
 //            }
 //        }
 //
@@ -4061,7 +4055,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-//                                                  e.Message);
+//                                                  e.Message());
 //            }
 //        }
 //
@@ -4155,7 +4149,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-//                                                  e.Message);
+//                                                  e.Message());
 //            }
 //        }
 //
@@ -4195,7 +4189,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-//                                                  e.Message);
+//                                                  e.Message());
 //            }
 //        }
 //
@@ -4286,7 +4280,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-//                                                  e.Message);
+//                                                  e.Message());
 //            }
 //        }
 //
@@ -4444,7 +4438,7 @@ void RoadRunner::changeInitialConditions(const vector<double>& ic)
 //            }
 //            catch (Exception e)
 //            {
-//                throw SBWApplicationException("Unexpected error from simulateEx()", e.Message);
+//                throw SBWApplicationException("Unexpected error from simulateEx()", e.Message());
 //            }
 //        }
 //
@@ -5055,7 +5049,7 @@ StringListContainer RoadRunner::getAvailableSymbols()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-//                                                  e.Message);
+//                                                  e.Message());
 //            }
 //        }
 //
@@ -5094,7 +5088,7 @@ StringListContainer RoadRunner::getAvailableSymbols()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-//                                                  e.Message);
+//                                                  e.Message());
 //            }
 //        }
 //
@@ -5134,7 +5128,7 @@ StringListContainer RoadRunner::getAvailableSymbols()
 //            catch (Exception e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-//                                                  e.Message);
+//                                                  e.Message());
 //            }
 //        }
 //    }

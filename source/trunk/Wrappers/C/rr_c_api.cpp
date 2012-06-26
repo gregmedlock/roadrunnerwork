@@ -505,7 +505,7 @@ bool __stdcall setValue(const char* speciesID, const double& val)
 	return false;
 }
 
-RRDataMatrixHandle __stdcall getStoichiometryMatrix(void)
+RRMatrixHandle __stdcall getStoichiometryMatrix(void)
 {
 	try
     {
@@ -517,7 +517,7 @@ RRDataMatrixHandle __stdcall getStoichiometryMatrix(void)
 
         LIB_LA::DoubleMatrix tempMat = gRRHandle->getStoichiometryMatrix();
 
-        RRDataMatrixHandle matrix = new RRDataMatrix;
+        RRMatrixHandle matrix = new RRMatrix;
         matrix->RSize = tempMat.RSize();
         matrix->CSize = tempMat.CSize();
         matrix->Data =  new double[tempMat.RSize()*tempMat.CSize()];
@@ -613,7 +613,7 @@ double __stdcall getReactionRate(int rateNr)
   	return 0;
 }
 
-RRDoubleVectorHandle __stdcall getReactionRates()
+RRVectorHandle __stdcall getReactionRates()
 {
 	try
     {
@@ -624,7 +624,7 @@ RRDoubleVectorHandle __stdcall getReactionRates()
         }
         vector<double> vec =  gRRHandle->getReactionRates();
 
-        RRDoubleVector* aVec = createVectorFrom(vec);
+        RRVector* aVec = createVectorFrom(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -809,7 +809,7 @@ RRStringListHandle __stdcall getGlobalParameterNames()
    	return NULL;
 }
 
-RRDoubleVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
+RRVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
 {
 	try
     {
@@ -821,7 +821,7 @@ RRDoubleVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
 
         vector<double> vec =  gRRHandle->getFloatingSpeciesInitialConcentrations();
 
-        RRDoubleVector* aVec = createVectorFrom(vec);
+        RRVector* aVec = createVectorFrom(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -878,7 +878,7 @@ bool __stdcall setGlobalParameterByIndex(int index, double value)
   	return false;
 }
 
-bool __stdcall setFloatingSpeciesInitialConcentrations(RRDoubleVector* vec)
+bool __stdcall setFloatingSpeciesInitialConcentrations(RRVector* vec)
 {
 	try
     {
@@ -987,7 +987,7 @@ double __stdcall steadyState()
   	return -1;
 }
 
-RRDoubleVectorHandle __stdcall computeSteadyStateValues()
+RRVectorHandle __stdcall computeSteadyStateValues()
 {
 	try
     {
@@ -998,7 +998,7 @@ RRDoubleVectorHandle __stdcall computeSteadyStateValues()
         }
         vector<double> vec =  gRRHandle->computeSteadyStateValues();
 
-        RRDoubleVector* aVec = createVectorFrom(vec);
+        RRVector* aVec = createVectorFrom(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -1072,7 +1072,7 @@ RRStringListHandle __stdcall getSteadyStateSelectionList()
 }
 
 
-RRDataMatrixHandle __stdcall getFullJacobian(void)
+RRMatrixHandle __stdcall getFullJacobian(void)
 {
 	try
     {
@@ -1083,7 +1083,6 @@ RRDataMatrixHandle __stdcall getFullJacobian(void)
         }
 
         LIB_LA::DoubleMatrix tempMat = gRRHandle->getFullJacobian();
-
         return createMatrixFrom(tempMat);
     }
     catch(Exception& ex)
@@ -1095,6 +1094,27 @@ RRDataMatrixHandle __stdcall getFullJacobian(void)
 	return false;
 }
 
+RRMatrixHandle __stdcall getReducedJacobian(void)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        LIB_LA::DoubleMatrix tempMat = gRRHandle->getReducedJacobian();
+        return createMatrixFrom(tempMat);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        SetAPIError(msg.str());
+    }
+	return false;
+}
 
 RRCCode* __stdcall getCCode(void)
 {
@@ -1189,7 +1209,7 @@ char* __stdcall getResultAsString(RRResultHandle result)
     return NULL;
 }
 
-char* __stdcall getMatrixAsString(RRDataMatrixHandle matrixHandle)
+char* __stdcall getMatrixAsString(RRMatrixHandle matrixHandle)
 {
 	try
     {
@@ -1201,7 +1221,7 @@ char* __stdcall getMatrixAsString(RRDataMatrixHandle matrixHandle)
             return createText(ss.str());
         }
 
-        RRDataMatrix& mat = *matrixHandle;
+        RRMatrix& mat = *matrixHandle;
         ss<<"matrix dimension: "<<mat.RSize<<"x"<<mat.CSize<<" --\n";
 
         int index = 0;
@@ -1227,7 +1247,7 @@ char* __stdcall getMatrixAsString(RRDataMatrixHandle matrixHandle)
     }
 }
 
-void __stdcall printMatrix(RRDataMatrixHandle matrixHandle)
+void __stdcall printMatrix(RRMatrixHandle matrixHandle)
 {
 	try
     {
@@ -1239,7 +1259,7 @@ void __stdcall printMatrix(RRDataMatrixHandle matrixHandle)
             return;
         }
 
-        RRDataMatrix& mat = *matrixHandle;
+        RRMatrix& mat = *matrixHandle;
         stringstream ss;
         ss<<"matrix dimension: "<<mat.RSize<<"x"<<mat.CSize<<" --\n";
 
@@ -1266,7 +1286,7 @@ void __stdcall printMatrix(RRDataMatrixHandle matrixHandle)
     }
 }
 
-void __stdcall printVector(RRDoubleVectorHandle vecHandle)
+void __stdcall printVector(RRVectorHandle vecHandle)
 {
 	try
     {
@@ -1277,7 +1297,7 @@ void __stdcall printVector(RRDoubleVectorHandle vecHandle)
             return;
         }
 
-        RRDoubleVector& vec = *vecHandle;
+        RRVector& vec = *vecHandle;
 
         stringstream ss;
         ss<<"vector dimension: "<<vec.Size<<" \n";
@@ -1318,7 +1338,7 @@ void __stdcall freeRRInstance(RRHandle handle)
     }
 }
 
-bool __stdcall freeDataMatrix(RRDataMatrixHandle matrix)
+bool __stdcall freeMatrix(RRMatrixHandle matrix)
 {
 	try
     {
@@ -1406,7 +1426,7 @@ bool __stdcall freeLabelStringList(RRLabelStringListHandle sl)
     return false;
 }
 
-bool __stdcall freeDoubleVector(RRDoubleVectorHandle vector)
+bool __stdcall freeVector(RRVectorHandle vector)
 {
 	try
     {

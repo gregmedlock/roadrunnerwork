@@ -9,10 +9,9 @@
 namespace rr
 {
 
-
 Exception::Exception(const string& desc)
 :
-mMessage(desc), Message(mMessage)
+mMessage(desc)//, Message(mMessage)
 {
 }
 
@@ -21,6 +20,11 @@ Exception::~Exception() throw() {}
 const char* Exception::what() const throw()
 {
     return mMessage.c_str();
+}
+
+string Exception::Message() const
+{
+    return mMessage;
 }
 
 RRException::RRException(const string& msg)

@@ -169,7 +169,7 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
     }
     catch (const Exception& e)
     {
-       throw Exception(e.Message);
+       throw Exception(e.Message());
     }
     return sb.ToString();
 }
@@ -860,7 +860,7 @@ StringList ModelGenerator::getConservationList()
 ////            }
 ////            catch (Exception e)
 ////            {
-////                throw new SBWApplicationException(e.Message);
+////                throw new SBWApplicationException(e.Message());
 ////            }
 ////            return sb.ToString();
 ////        }
@@ -1316,7 +1316,7 @@ StringList ModelGenerator::getConservationList()
 ////            }
 ////            catch (Exception e)
 ////            {
-////                throw new SBWApplicationException(e.Message);
+////                throw new SBWApplicationException(e.Message());
 ////            }
 ////            return sb.ToString();
 ////        }

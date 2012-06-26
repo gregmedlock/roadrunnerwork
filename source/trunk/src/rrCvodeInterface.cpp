@@ -728,7 +728,7 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
             }
             catch (Exception e)
             {
-                model->Warnings.push_back("Constraint Violated at time = " + ToString(timeEnd) + "\n" + e.Message);
+                model->Warnings.push_back("Constraint Violated at time = " + ToString(timeEnd) + "\n" + e.Message());
             }
 
             AssignPendingEvents(timeEnd, tout);

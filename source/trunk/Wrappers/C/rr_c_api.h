@@ -84,7 +84,7 @@ C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTim
 
 // Steady State Methods
 C_DECL_SPEC double                  __stdcall   steadyState();
-C_DECL_SPEC RRDoubleVectorHandle    __stdcall   computeSteadyStateValues();
+C_DECL_SPEC RRVectorHandle    __stdcall   computeSteadyStateValues();
 C_DECL_SPEC bool                    __stdcall   setSteadyStateSelectionList(char *);
 C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
 
@@ -98,20 +98,20 @@ C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex  (int 
 //C_DECL_SPEC double                  __stdcall   getGlobalParameterByIndex (int index);
 
 // Jacobian Matrix Methods
-C_DECL_SPEC RRDataMatrixHandle      __stdcall   getFullJacobian(void);
-C_DECL_SPEC RRDataMatrixHandle      __stdcall   getReducedJacobian(void);
+C_DECL_SPEC RRMatrixHandle      __stdcall   getFullJacobian(void);
+C_DECL_SPEC RRMatrixHandle      __stdcall   getReducedJacobian(void);
 
 // Stoichiometry Methods
-C_DECL_SPEC RRDataMatrixHandle      __stdcall   getStoichiometryMatrix(void);
+C_DECL_SPEC RRMatrixHandle      __stdcall   getStoichiometryMatrix(void);
 
 C_DECL_SPEC bool                    __stdcall   reset();
-C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRDoubleVector* vec);
-C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getFloatingSpeciesInitialConcentrations (void);
+C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRVector* vec);
+C_DECL_SPEC RRVectorHandle    __stdcall   getFloatingSpeciesInitialConcentrations (void);
 
 // Reaction Rates
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
 C_DECL_SPEC double                  __stdcall   getReactionRate(int);
-C_DECL_SPEC RRDoubleVectorHandle    __stdcall   getReactionRates();
+C_DECL_SPEC RRVectorHandle    __stdcall   getReactionRates();
 
 // Rates of Change
 //C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames(); <- to be added
@@ -131,9 +131,9 @@ C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();          
 
 // Print/format functions
 C_DECL_SPEC char*                   __stdcall   getResultAsString(RRResultHandle result);
-C_DECL_SPEC char*                   __stdcall   getMatrixAsString(RRDataMatrixHandle mat);
-C_DECL_SPEC void                    __stdcall   printMatrix(RRDataMatrixHandle mat);
-C_DECL_SPEC void                    __stdcall   printVector(RRDoubleVectorHandle vec);
+C_DECL_SPEC char*                   __stdcall   getMatrixAsString(RRMatrixHandle mat);
+C_DECL_SPEC void                    __stdcall   printMatrix(RRMatrixHandle mat);
+C_DECL_SPEC void                    __stdcall   printVector(RRVectorHandle vec);
 
 // Free memory functions
 C_DECL_SPEC void                    __stdcall   freeRRInstance(RRHandle handle);
@@ -141,8 +141,8 @@ C_DECL_SPEC bool                    __stdcall   freeResult(RRResultHandle handle
 C_DECL_SPEC bool                    __stdcall   freeText(char* text);
 C_DECL_SPEC bool                    __stdcall   freeLabelStringList(RRLabelStringListHandle sl);
 C_DECL_SPEC bool                    __stdcall   freeStringList(RRStringListHandle sl);
-C_DECL_SPEC bool                    __stdcall   freeDoubleVector(RRDoubleVectorHandle vector);
-C_DECL_SPEC bool                    __stdcall   freeDataMatrix(RRDataMatrixHandle matrix);
+C_DECL_SPEC bool                    __stdcall   freeVector(RRVectorHandle vector);
+C_DECL_SPEC bool                    __stdcall   freeMatrix(RRMatrixHandle matrix);
 C_DECL_SPEC bool                    __stdcall   freeCCode(RRCCodeHandle code);
 
 #if defined( __cplusplus)

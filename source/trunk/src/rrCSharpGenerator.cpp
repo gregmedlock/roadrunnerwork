@@ -16,13 +16,12 @@
 #include "rrException.h"
 //---------------------------------------------------------------------------
 
-
-
 using namespace std;
 using namespace LIB_STRUCTURAL;
 
 namespace rr
 {
+
 CSharpGenerator::CSharpGenerator(RoadRunner* rr)
 :
 ModelGenerator(rr)
@@ -497,7 +496,7 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
     }
     catch (Exception e)
     {
-       throw new SBWApplicationException(e.Message);
+       throw new SBWApplicationException(e.Message());
     }
     return sb.ToString();
 }
@@ -1868,9 +1867,9 @@ int CSharpGenerator::WriteComputeRules(CodeBuilder& sb, const int& numReactions)
                 }
             }
         }
-        catch (const Exception& ex)
+        catch (Exception& e)
         {
-            throw new SBWApplicationException("Error while trying to get Rule #" + ToString(i) + ex.Message);
+            throw SBWApplicationException("Error while trying to get Rule #" + ToString(i) + e.Message());
         }
     }
 
