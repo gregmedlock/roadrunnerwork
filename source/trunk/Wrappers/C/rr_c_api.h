@@ -53,7 +53,7 @@ extern "C"
 #include "rr_c_api_exporter.h"
 #include "rr_c_types.h"
 
-//  RoadRunner API
+// RoadRunner API
 C_DECL_SPEC RRHandle                __stdcall   getRRInstance(void);
 C_DECL_SPEC char*                   __stdcall   getBuildDate(void);
 C_DECL_SPEC char*                   __stdcall   getCopyright(void);
@@ -61,7 +61,7 @@ C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder
 C_DECL_SPEC char*                   __stdcall   getTempFolder(void);
 C_DECL_SPEC RRCCode*               	__stdcall   getCCode(void);
 
-//Flags/Options
+// Flags/Options
 C_DECL_SPEC bool                    __stdcall   setComputeAndAssignConservationLaws(const bool& OnOrOff);
 
 // Error handling
@@ -71,6 +71,9 @@ C_DECL_SPEC char*                   __stdcall   getLastError();
 // SBML Methods
 C_DECL_SPEC bool                    __stdcall   loadSBML(const char* sbml);
 C_DECL_SPEC bool                    __stdcall   loadSBMLFromFile(const char* sbml);
+
+// SBML Utility Methods
+C_DECL_SPEC char* 				        	__stdcall   getParamPromotedSBML(const char* sArg);
 
 // Simulation Methods
 C_DECL_SPEC bool                    __stdcall   setTimeStart(double timeStart);
@@ -88,6 +91,7 @@ C_DECL_SPEC RRVectorHandle          __stdcall   computeSteadyStateValues();
 C_DECL_SPEC bool                    __stdcall   setSteadyStateSelectionList(char *);
 C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
 
+// Set and Get Family of Methods
 C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
 C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex (int index, double value);
@@ -104,11 +108,11 @@ C_DECL_SPEC RRMatrixHandle          __stdcall   getReducedJacobian(void);
 // Stoichiometry Methods
 C_DECL_SPEC RRMatrixHandle          __stdcall   getStoichiometryMatrix(void);
 
+// Initial Condition Methods
 C_DECL_SPEC bool                    __stdcall   reset();
 C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRVector* vec);
 C_DECL_SPEC RRVectorHandle          __stdcall   getFloatingSpeciesInitialConcentrations (void);
 
-C_DECL_SPEC char* 					__stdcall   getParamPromotedSBML(const char* sArg);
 // Reaction Rates
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
 C_DECL_SPEC double                  __stdcall   getReactionRate(int);
@@ -120,12 +124,11 @@ C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames();
 
 C_DECL_SPEC void                    __stdcall   evalModel();
 
-
+// MCA Methods
 C_DECL_SPEC double                  __stdcall   getCC(char* variable, char* parameter);
 C_DECL_SPEC double                  __stdcall   getEE(char* name, char* species);
 
-
-// get Number Family
+// Get Number Family
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
 C_DECL_SPEC int                     __stdcall   getNumberOfFloatingSpecies();
 C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameters();
@@ -133,7 +136,7 @@ C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameterNames(
 C_DECL_SPEC int                     __stdcall   getNumberOfDependentSpecies();
 C_DECL_SPEC int                     __stdcall   getNumberOfIndependentSpecies();
 
-// get Names Family
+// Get Names Family
 C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);
 C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();
