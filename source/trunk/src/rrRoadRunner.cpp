@@ -3009,6 +3009,7 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
         throw SBWApplicationException(emptyModelStr);
     }
 
+    int sanity = (mModel->getNumGlobalParameters() + *mModel->ctSize) ;
     if ((index >= 0) && (index < (mModel->getNumGlobalParameters() + *mModel->ctSize)))
     {
         int arraySize = *mModel->gpSize + *mModel->ctSize;
@@ -3019,10 +3020,10 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
             result[i] = mModel->gp[i];
         }
 
-        int index = 0;
-        for(int i = *mModel->gpSize + 1; i < arraySize; i++)
+        int tempIndex = 0;
+        for(int i = *mModel->gpSize; i < arraySize; i++)
         {
-            result[i] = mModel->gp[index++];
+            result[i] = mModel->ct[tempIndex++];
         }
 
 //        mModel->ct.CopyTo(result, *mModel->gpSize);

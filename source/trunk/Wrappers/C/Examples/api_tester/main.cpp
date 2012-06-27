@@ -90,6 +90,8 @@ int main(int argc, char* argv[])
 //    cout<<getBoundarySpeciesByIndex (0)<<endl;
     cout<<getFloatingSpeciesByIndex (0)<<endl;
     cout<<getGlobalParameterByIndex (0)<<endl;
+    cout<<getGlobalParameterByIndex (1)<<endl;
+    cout<<getGlobalParameterByIndex (2)<<endl;
 
     cout<<getNumberOfDependentSpecies()<<endl;
     cout<<getNumberOfIndependentSpecies()<<endl;
