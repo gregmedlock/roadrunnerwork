@@ -82,8 +82,9 @@ int main(int argc, char* argv[])
     if(doMore && args.CalculateSteadyState)
     {
        	cout<<"Calculating steady state: "<<endl;
-     	double ss = steadyState();
-        if(ss == -1)
+     	double ss;
+        bool success = steadyState(ss);
+        if(!success)
         {
             cerr<<"steadyState API function failed\n";
             cerr<<"API error was: "<<getLastError()<<endl;
@@ -91,14 +92,14 @@ int main(int argc, char* argv[])
         }
         else
         {
-
             //Get value for each specie?
             RRStringList* list = getSelectionList();
             for(int i = 1; i < list->Count; i++)   	//at index 0 is 'time'
             {
 
-                double value = getValue(list->String[i]);
-                if(value == -1)
+            	double value;
+                bool isSuccess = getValue(list->String[i], value);
+                if(!isSuccess)
                 {
                     cerr<<"getValue API function failed\n";
                     cerr<<"API error was: "<<getLastError()<<endl;

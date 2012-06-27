@@ -14,7 +14,7 @@ namespace rr_c_api
 extern char* gLastError;
 
 //static const char* ALLOCATE_API_ERROR_MSG = {"Please allocate a handle to the roadrunner API before calling any API function"};
-void SetAPIError(const string& err)
+void setError(const string& err)
 {
     if(gLastError)
     {

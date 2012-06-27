@@ -75,8 +75,9 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	double ssVal = steadyState();
-    if(ssVal == -1)
+	double ssVal;
+    bool success = steadyState(ssVal);
+    if(!success)
     {
 		cerr<<"Steady State call failed. Error was: "<<getLastError()<<endl;
     }
@@ -88,10 +89,14 @@ int main(int argc, char* argv[])
     RRStringListHandle list = getRatesOfChangeNames();
 
 //    cout<<getBoundarySpeciesByIndex (0)<<endl;
-    cout<<getFloatingSpeciesByIndex (0)<<endl;
-    cout<<getGlobalParameterByIndex (0)<<endl;
-    cout<<getGlobalParameterByIndex (1)<<endl;
-    cout<<getGlobalParameterByIndex (2)<<endl;
+	double value;
+    getFloatingSpeciesByIndex (0, value);
+    cout<<value<<endl;
+    getGlobalParameterByIndex (0, value);
+
+    cout<<value<<endl;
+    getGlobalParameterByIndex (2, value);
+    cout<<value<<endl;
 
     cout<<getNumberOfDependentSpecies()<<endl;
     cout<<getNumberOfIndependentSpecies()<<endl;

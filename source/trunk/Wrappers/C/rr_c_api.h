@@ -54,12 +54,12 @@ extern "C"
 #include "rr_c_types.h"
 
 // RoadRunner API
-C_DECL_SPEC RRHandle                __stdcall   getRRInstance(void);
-C_DECL_SPEC char*                   __stdcall   getBuildDate(void);
-C_DECL_SPEC char*                   __stdcall   getCopyright(void);
+C_DECL_SPEC RRHandle                __stdcall   getRRInstance();
+C_DECL_SPEC char*                   __stdcall   getBuildDate();
+C_DECL_SPEC char*                   __stdcall   getCopyright();
 C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder);
-C_DECL_SPEC char*                   __stdcall   getTempFolder(void);
-C_DECL_SPEC RRCCode*               	__stdcall   getCCode(void);
+C_DECL_SPEC char*                   __stdcall   getTempFolder();
+C_DECL_SPEC RRCCode*               	__stdcall   getCCode();
 
 // Flags/Options
 C_DECL_SPEC bool                    __stdcall   setComputeAndAssignConservationLaws(const bool& OnOrOff);
@@ -73,60 +73,60 @@ C_DECL_SPEC bool                    __stdcall   loadSBML(const char* sbml);
 C_DECL_SPEC bool                    __stdcall   loadSBMLFromFile(const char* sbml);
 
 // SBML Utility Methods
-C_DECL_SPEC char* 				        	__stdcall   getParamPromotedSBML(const char* sArg);
+C_DECL_SPEC char* 				    __stdcall   getParamPromotedSBML(const char* sArg);
 
 // Simulation Methods
-C_DECL_SPEC bool                    __stdcall   setTimeStart(double timeStart);
-C_DECL_SPEC bool                    __stdcall   setTimeEnd(double timeEnd);
-C_DECL_SPEC bool                    __stdcall   setNumPoints(int nrPoints);
+C_DECL_SPEC bool                    __stdcall   setTimeStart(const double& timeStart);
+C_DECL_SPEC bool                    __stdcall   setTimeEnd(const double& timeEnd);
+C_DECL_SPEC bool                    __stdcall   setNumPoints(const int& nrPoints);
 C_DECL_SPEC bool                    __stdcall   setSelectionList(const char* list);
 C_DECL_SPEC RRStringListHandle      __stdcall   getSelectionList();
-C_DECL_SPEC RRResultHandle          __stdcall   simulate(void);
+C_DECL_SPEC RRResultHandle          __stdcall   simulate();
 C_DECL_SPEC RRResultHandle          __stdcall   simulateEx(const double& timeStart, const double& timeEnd, const int& numberOfPoints);
-C_DECL_SPEC double                  __stdcall   oneStep(const double& currentTime, const double& stepSize);
+C_DECL_SPEC bool                  	__stdcall   oneStep(const double& currentTime, const double& stepSize, double& value);
 
 // Steady State Methods
-C_DECL_SPEC double                  __stdcall   steadyState();
+C_DECL_SPEC bool                    __stdcall   steadyState(double& value);
 C_DECL_SPEC RRVectorHandle          __stdcall   computeSteadyStateValues();
-C_DECL_SPEC bool                    __stdcall   setSteadyStateSelectionList(char *);
+C_DECL_SPEC bool                    __stdcall   setSteadyStateSelectionList(const char* list);
 C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
 
 // Set and Get Family of Methods
-C_DECL_SPEC double                  __stdcall   getValue(const char* speciesID);
+C_DECL_SPEC bool                  	__stdcall   getValue(const char* speciesID, double& value);
 C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
-C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex (int index, double value);
-C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesByIndex (int index, double value);
-C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex  (int index, double value);
-C_DECL_SPEC double                  __stdcall   getBoundarySpeciesByIndex (int index);
-C_DECL_SPEC double                  __stdcall   getFloatingSpeciesByIndex (int index);
-C_DECL_SPEC double                  __stdcall   getGlobalParameterByIndex (int index);
+C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex(const int& index, const double& value);
+C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesByIndex(const int& index, const double& value);
+C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex(const int& index, const double& value);
+C_DECL_SPEC bool                  	__stdcall   getBoundarySpeciesByIndex(const int& index, double& val);
+C_DECL_SPEC bool                    __stdcall   getFloatingSpeciesByIndex(const int& index, double& val);
+C_DECL_SPEC bool                  	__stdcall   getGlobalParameterByIndex(const int& index, double& val);
 
 // Jacobian Matrix Methods
-C_DECL_SPEC RRMatrixHandle          __stdcall   getFullJacobian(void);
-C_DECL_SPEC RRMatrixHandle          __stdcall   getReducedJacobian(void);
+C_DECL_SPEC RRMatrixHandle          __stdcall   getFullJacobian();
+C_DECL_SPEC RRMatrixHandle          __stdcall   getReducedJacobian();
 
 // Stoichiometry Methods
-C_DECL_SPEC RRMatrixHandle          __stdcall   getStoichiometryMatrix(void);
+C_DECL_SPEC RRMatrixHandle          __stdcall   getStoichiometryMatrix();
 
 // Initial Condition Methods
 C_DECL_SPEC bool                    __stdcall   reset();
-C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRVector* vec);
-C_DECL_SPEC RRVectorHandle          __stdcall   getFloatingSpeciesInitialConcentrations (void);
+C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (const RRVector* vec);
+C_DECL_SPEC RRVectorHandle          __stdcall   getFloatingSpeciesInitialConcentrations ();
 
 // Reaction Rates
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
-C_DECL_SPEC double                  __stdcall   getReactionRate(int);
+C_DECL_SPEC bool                  	__stdcall   getReactionRate(const int&, double& rate);
 C_DECL_SPEC RRVectorHandle          __stdcall   getReactionRates();
 
 // Rates of Change
 C_DECL_SPEC RRVectorHandle          __stdcall   getRatesOfChange();
 C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames();
 
-C_DECL_SPEC void                    __stdcall   evalModel();
+C_DECL_SPEC bool                    __stdcall   evalModel();
 
 // MCA Methods
-C_DECL_SPEC double                  __stdcall   getCC(char* variable, char* parameter);
-C_DECL_SPEC double                  __stdcall   getEE(char* name, char* species);
+C_DECL_SPEC bool                    __stdcall   getCC(const char* variable, const char* parameter, double& value);
+C_DECL_SPEC bool                    __stdcall   getEE(const char* name, const char* species, double& value);
 
 // Get Number Family
 C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
@@ -137,20 +137,20 @@ C_DECL_SPEC int                     __stdcall   getNumberOfDependentSpecies();
 C_DECL_SPEC int                     __stdcall   getNumberOfIndependentSpecies();
 
 // Get Names Family
-C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames(void);
+C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getGlobalParameterNames();
 C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();
 
 // Print/format functions
-C_DECL_SPEC char*                   __stdcall   getResultAsString(RRResultHandle result);
-C_DECL_SPEC char*                   __stdcall   getMatrixAsString(RRMatrixHandle mat);
-C_DECL_SPEC void                    __stdcall   printMatrix(RRMatrixHandle mat);
-C_DECL_SPEC void                    __stdcall   printVector(RRVectorHandle vec);
+C_DECL_SPEC char*                   __stdcall   getResultAsString(const RRResultHandle result);
+C_DECL_SPEC char*                   __stdcall   getMatrixAsString(const RRMatrixHandle mat);
+C_DECL_SPEC char*                   __stdcall   printMatrix(const RRMatrixHandle mat);
+C_DECL_SPEC char*                   __stdcall   printVector(const RRVectorHandle vec);
 
 // Free memory functions
-C_DECL_SPEC void                    __stdcall   freeRRInstance(RRHandle handle);
+C_DECL_SPEC bool                    __stdcall   freeRRInstance(RRHandle handle);
 C_DECL_SPEC bool                    __stdcall   freeResult(RRResultHandle handle);
 C_DECL_SPEC bool                    __stdcall   freeText(char* text);
 C_DECL_SPEC bool                    __stdcall   freeLabelStringList(RRLabelStringListHandle sl);

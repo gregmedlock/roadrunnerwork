@@ -63,7 +63,7 @@ static  rr::RoadRunner*     gRRHandle       = NULL;
 char*                       gLastError      = NULL;
 }
 
-char* __stdcall getBuildDate(void)
+char* __stdcall getBuildDate()
 {
     char* date = new char[strlen(__DATE__) + 1];
     strcpy(date, __DATE__);
@@ -84,7 +84,7 @@ RRHandle __stdcall getRRInstance()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
   	return NULL;
 }
@@ -96,7 +96,7 @@ char* __stdcall getCopyright()
         char* text = NULL;
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
         }
         else
         {
@@ -109,7 +109,7 @@ char* __stdcall getCopyright()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
@@ -121,7 +121,7 @@ bool __stdcall setComputeAndAssignConservationLaws(const bool& OnOrOff)
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
@@ -132,7 +132,7 @@ bool __stdcall setComputeAndAssignConservationLaws(const bool& OnOrOff)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
      }
 
     return false;
@@ -144,7 +144,7 @@ bool __stdcall setTempFolder(const char* folder)
     {
     	if(!gRRHandle)
     	{
-        	SetAPIError(ALLOCATE_API_ERROR_MSG);
+        	setError(ALLOCATE_API_ERROR_MSG);
         	return false;
     	}
 	    return gRRHandle->SetTempFileFolder(folder);
@@ -153,7 +153,7 @@ bool __stdcall setTempFolder(const char* folder)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
   	return false;
 }
@@ -164,7 +164,7 @@ char* __stdcall getTempFolder()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -176,7 +176,7 @@ char* __stdcall getTempFolder()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
@@ -187,13 +187,13 @@ bool __stdcall loadSBMLFromFile(const char* sbmlFileName)
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
         if(!gRRHandle->loadSBMLFromFile(sbmlFileName))
         {
-            SetAPIError("Failed to load SBML semantics");
+            setError("Failed to load SBML semantics");
             return false;
         }
         return true;
@@ -202,7 +202,7 @@ bool __stdcall loadSBMLFromFile(const char* sbmlFileName)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return false;
 }
@@ -213,13 +213,13 @@ bool __stdcall loadSBML(const char* sbml)
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
         if(!gRRHandle->loadSBML(sbml))
         {
-            SetAPIError("Failed to load SBML semantics");
+            setError("Failed to load SBML semantics");
             return false;
         }
         return true;
@@ -228,62 +228,63 @@ bool __stdcall loadSBML(const char* sbml)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
   	return false;
 }
 
-bool __stdcall setTimeStart(double timeStart)
+bool __stdcall setTimeStart(const double& timeStart)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
         gRRHandle->setTimeStart(timeStart);
-    	return false;
+    	return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
 
     }
 
     return false;
 }
 
-bool __stdcall setTimeEnd(double timeEnd)
+bool __stdcall setTimeEnd(const double& timeEnd)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
         gRRHandle->setTimeEnd(timeEnd);
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return false;
 }
 
-bool __stdcall setNumPoints(int nrPoints)
+bool __stdcall setNumPoints(const int& nrPoints)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
@@ -294,7 +295,7 @@ bool __stdcall setNumPoints(int nrPoints)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
   	return false;
 }
@@ -305,7 +306,7 @@ bool  __stdcall setSelectionList(const char* list)
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
@@ -317,7 +318,7 @@ bool  __stdcall setSelectionList(const char* list)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return false;
 }
@@ -328,7 +329,7 @@ RRStringListHandle __stdcall getSelectionList()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -354,18 +355,18 @@ RRStringListHandle __stdcall getSelectionList()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return NULL;
 }
 
-RRResultHandle __stdcall simulate(void)
+RRResultHandle __stdcall simulate()
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
@@ -405,7 +406,7 @@ RRResultHandle __stdcall simulate(void)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
@@ -423,18 +424,18 @@ RRResultHandle __stdcall simulateEx (const double& timeStart, const double& time
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
 
-RRStringListHandle __stdcall getReactionNames(void)
+RRStringListHandle __stdcall getReactionNames()
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -460,7 +461,7 @@ RRStringListHandle __stdcall getReactionNames(void)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
@@ -471,7 +472,7 @@ RRVectorHandle __stdcall getRatesOfChange()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -496,7 +497,7 @@ RRVectorHandle __stdcall getRatesOfChange()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
@@ -507,7 +508,7 @@ RRStringListHandle __stdcall getRatesOfChangeNames()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -533,29 +534,30 @@ RRStringListHandle __stdcall getRatesOfChangeNames()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
 
-double __stdcall getValue(const char* speciesID)
+bool __stdcall getValue(const char* speciesID, double& value)
 {
 	try
     {
     	if(!gRRHandle)
     	{
-        	SetAPIError(ALLOCATE_API_ERROR_MSG);
-        	return 0;
+        	setError(ALLOCATE_API_ERROR_MSG);
+        	return false;
     	}
-	    return gRRHandle->getValue(speciesID);
+	    value = gRRHandle->getValue(speciesID);
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-	return 0;	//todo: how to indicate error???
+	return false;	//todo: how to indicate error???
 }
 
 bool __stdcall setValue(const char* speciesID, const double& val)
@@ -564,7 +566,7 @@ bool __stdcall setValue(const char* speciesID, const double& val)
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 	    return gRRHandle->setValue(speciesID, val);
@@ -573,18 +575,18 @@ bool __stdcall setValue(const char* speciesID, const double& val)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return false;
 }
 
-RRMatrixHandle __stdcall getStoichiometryMatrix(void)
+RRMatrixHandle __stdcall getStoichiometryMatrix()
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -609,7 +611,7 @@ RRMatrixHandle __stdcall getStoichiometryMatrix(void)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return false;
 }
@@ -630,16 +632,17 @@ bool __stdcall reset()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
         gRRHandle->reset();
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 
     return false;
@@ -651,7 +654,7 @@ int __stdcall getNumberOfReactions()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return -1;
         }
 
@@ -661,29 +664,30 @@ int __stdcall getNumberOfReactions()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-	return false;
+	return -1;
 }
 
-double __stdcall getReactionRate(int rateNr)
+bool __stdcall getReactionRate(const int& rateNr, double& value)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
-            return -1;
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
         }
-        return gRRHandle->getReactionRate(rateNr);
+        value = gRRHandle->getReactionRate(rateNr);
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-  	return 0;
+  	return false;
 }
 
 RRVectorHandle __stdcall getReactionRates()
@@ -692,8 +696,8 @@ RRVectorHandle __stdcall getReactionRates()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
-            return false;
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
         }
         vector<double> vec =  gRRHandle->getReactionRates();
 
@@ -704,11 +708,10 @@ RRVectorHandle __stdcall getReactionRates()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
-
 
 int __stdcall getNumberOfBoundarySpecies()
 {
@@ -716,7 +719,7 @@ int __stdcall getNumberOfBoundarySpecies()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return -1;
         }
         return gRRHandle->getNumberOfBoundarySpecies();
@@ -725,7 +728,7 @@ int __stdcall getNumberOfBoundarySpecies()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
   	return -1;
 }
@@ -737,7 +740,7 @@ RRStringListHandle __stdcall getBoundarySpeciesNames()          // <- treat char
 
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -763,7 +766,7 @@ RRStringListHandle __stdcall getBoundarySpeciesNames()          // <- treat char
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
    	return NULL;
 }
@@ -774,7 +777,7 @@ int __stdcall getNumberOfFloatingSpecies()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return -1;
         }
         return gRRHandle->getNumberOfFloatingSpecies();
@@ -783,7 +786,7 @@ int __stdcall getNumberOfFloatingSpecies()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
    	return -1;
 }
@@ -794,7 +797,7 @@ RRStringListHandle __stdcall getFloatingSpeciesNames()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
@@ -821,7 +824,7 @@ RRStringListHandle __stdcall getFloatingSpeciesNames()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return false;
 }
@@ -832,8 +835,8 @@ int __stdcall getNumberOfGlobalParameters()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
-            return false;
+            setError(ALLOCATE_API_ERROR_MSG);
+            return -1;
         }
         return gRRHandle->getNumberOfGlobalParameters();
     }
@@ -841,7 +844,7 @@ int __stdcall getNumberOfGlobalParameters()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
    	return -1;
 }
@@ -852,8 +855,8 @@ RRStringListHandle __stdcall getGlobalParameterNames()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
-            return false;
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
         }
         StringList pNames = gRRHandle->getGlobalParameterNames();
 
@@ -877,7 +880,7 @@ RRStringListHandle __stdcall getGlobalParameterNames()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
    	return NULL;
 }
@@ -888,7 +891,7 @@ RRVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
@@ -901,7 +904,7 @@ RRVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
@@ -912,7 +915,7 @@ bool __stdcall setFloatingSpeciesByIndex (int index, double value)
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
@@ -923,7 +926,7 @@ bool __stdcall setFloatingSpeciesByIndex (int index, double value)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
   	return false;
 }
@@ -934,7 +937,7 @@ bool __stdcall setBoundarySpeciesByIndex (int index, double value)
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
@@ -945,10 +948,9 @@ bool __stdcall setBoundarySpeciesByIndex (int index, double value)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
   	return false;
-
 }
 
 
@@ -958,7 +960,7 @@ bool __stdcall setGlobalParameterByIndex(int index, double value)
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
@@ -969,7 +971,7 @@ bool __stdcall setGlobalParameterByIndex(int index, double value)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
   	return false;
 }
@@ -980,7 +982,7 @@ bool __stdcall setFloatingSpeciesInitialConcentrations(RRVector* vec)
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
         vector<double> aVec;
@@ -992,30 +994,31 @@ bool __stdcall setFloatingSpeciesInitialConcentrations(RRVector* vec)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
   	return false;
 }
 
-double __stdcall oneStep(const double& currentTime, const double& stepSize)
+bool __stdcall oneStep(const double& currentTime, const double& stepSize, double& value)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
-        return gRRHandle->oneStep(currentTime, stepSize);
+        value = gRRHandle->oneStep(currentTime, stepSize);
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-	return 0;
+	return false;
 }
 
 RRSymbolListsHandle __stdcall getAvailableSymbols()              // <- You'll have to decide what type to return
@@ -1024,7 +1027,7 @@ RRSymbolListsHandle __stdcall getAvailableSymbols()              // <- You'll ha
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -1058,116 +1061,119 @@ RRSymbolListsHandle __stdcall getAvailableSymbols()              // <- You'll ha
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
 
-double __stdcall getBoundarySpeciesByIndex (int index)
+bool __stdcall getBoundarySpeciesByIndex (const int& index, double& value)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
-        return gRRHandle->getBoundarySpeciesByIndex(index);
+        value = gRRHandle->getBoundarySpeciesByIndex(index);
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-  	return -1;  //Todo: return NaN??
+  	return false;
 }
 
-double __stdcall getFloatingSpeciesByIndex (int index)
+bool __stdcall getFloatingSpeciesByIndex (const int& index, double& value)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
-        return gRRHandle->getFloatingSpeciesByIndex(index);
+        value = gRRHandle->getFloatingSpeciesByIndex(index);
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-  	return -1;  //Todo: return NaN??
-
+  	return false;
 }
 
-double __stdcall getGlobalParameterByIndex (int index)
+bool __stdcall getGlobalParameterByIndex (const int& index, double& value)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
-        return gRRHandle->getGlobalParameterByIndex(index);
+        value = gRRHandle->getGlobalParameterByIndex(index);
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-  	return -1;  //Todo: return NaN?? throw??
-
+  	return false;
 }
 
-double __stdcall getCC(char* variable, char* parameter)
+bool __stdcall getCC(char* variable, char* parameter, double& value)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
-        return gRRHandle->getCC(variable, parameter);
+        value = gRRHandle->getCC(variable, parameter);
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-  	return -1;  //Todo: return NaN?? throw??
+  	return false;
 }
 
-double __stdcall getEE(char* name, char* species)
+bool __stdcall getEE(const char* name, const char* species, double& value)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
-        return gRRHandle->getEE(name, species);
+        value = gRRHandle->getEE(name, species);
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-  	return -1;  //Todo: return NaN?? throw??
+  	return false;
 }
 
 int __stdcall getNumberOfDependentSpecies()
@@ -1176,8 +1182,8 @@ int __stdcall getNumberOfDependentSpecies()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
-            return false;
+            setError(ALLOCATE_API_ERROR_MSG);
+            return -1;
         }
 
         return gRRHandle->getNumberOfDependentSpecies();
@@ -1186,9 +1192,9 @@ int __stdcall getNumberOfDependentSpecies()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-  	return -1;  //Todo: return NaN?? throw??
+  	return -1;
 }
 
 int __stdcall getNumberOfIndependentSpecies()
@@ -1197,8 +1203,8 @@ int __stdcall getNumberOfIndependentSpecies()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
-            return false;
+            setError(ALLOCATE_API_ERROR_MSG);
+            return -1;
         }
 
         return gRRHandle->getNumberOfIndependentSpecies();
@@ -1207,47 +1213,50 @@ int __stdcall getNumberOfIndependentSpecies()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-  	return -1;  //Todo: return NaN?? throw??
+  	return -1;
 }
 
-double __stdcall steadyState()
+bool __stdcall steadyState(double& value)
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
-            return -1;
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
         }
-	   	return gRRHandle->steadyState();
+	   	value = gRRHandle->steadyState();
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-  	return -1;
+  	return false;
 }
 
-void __stdcall evalModel()
+bool __stdcall evalModel()
 {
 	try
 	{
 		if(!gRRHandle)
 		{
-			SetAPIError(ALLOCATE_API_ERROR_MSG);
+			setError(ALLOCATE_API_ERROR_MSG);
 		}
 		gRRHandle->EvalModel();
+        return true;
 	}
 	catch(Exception& ex)
 	{
 		stringstream msg;
 		msg<<"RoadRunner exception: "<<ex.what()<<endl;
-		SetAPIError(msg.str());
+		setError(msg.str());
 	}
+    return false;
 }
 
 char* __stdcall getParamPromotedSBML(const char* sArg)
@@ -1256,8 +1265,8 @@ char* __stdcall getParamPromotedSBML(const char* sArg)
 	{
 		if(!gRRHandle)
 		{
-			SetAPIError(ALLOCATE_API_ERROR_MSG);
-			return false;
+			setError(ALLOCATE_API_ERROR_MSG);
+			return NULL;
 		}
 
 		string param =  gRRHandle->getParamPromotedSBML(sArg);
@@ -1269,10 +1278,9 @@ char* __stdcall getParamPromotedSBML(const char* sArg)
 	{
 		stringstream msg;
 		msg<<"RoadRunner exception: "<<ex.what()<<endl;
-		SetAPIError(msg.str());
+		setError(msg.str());
 	}
 	return NULL;
-
 }
 
 RRVectorHandle __stdcall computeSteadyStateValues()
@@ -1281,8 +1289,8 @@ RRVectorHandle __stdcall computeSteadyStateValues()
 	{
 		if(!gRRHandle)
 		{
-			SetAPIError(ALLOCATE_API_ERROR_MSG);
-			return false;
+			setError(ALLOCATE_API_ERROR_MSG);
+			return NULL;
 		}
 		vector<double> vec =  gRRHandle->computeSteadyStateValues();
 
@@ -1293,18 +1301,18 @@ RRVectorHandle __stdcall computeSteadyStateValues()
 	{
 		stringstream msg;
 		msg<<"RoadRunner exception: "<<ex.what()<<endl;
-		SetAPIError(msg.str());
+		setError(msg.str());
 	}
 	return NULL;
 }
 
-bool __stdcall setSteadyStateSelectionList(char* list)
+bool __stdcall setSteadyStateSelectionList(const char* list)
 {
 	try
 	{
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
 
@@ -1316,7 +1324,7 @@ bool __stdcall setSteadyStateSelectionList(char* list)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return false;
 }
@@ -1327,7 +1335,7 @@ RRStringListHandle __stdcall getSteadyStateSelectionList()
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -1354,19 +1362,18 @@ RRStringListHandle __stdcall getSteadyStateSelectionList()
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
 
-
-RRMatrixHandle __stdcall getFullJacobian(void)
+RRMatrixHandle __stdcall getFullJacobian()
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -1377,18 +1384,18 @@ RRMatrixHandle __stdcall getFullJacobian(void)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-	return false;
+	return NULL;
 }
 
-RRMatrixHandle __stdcall getReducedJacobian(void)
+RRMatrixHandle __stdcall getReducedJacobian()
 {
 	try
     {
         if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -1399,18 +1406,18 @@ RRMatrixHandle __stdcall getReducedJacobian(void)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
-	return false;
+	return NULL;
 }
 
-RRCCode* __stdcall getCCode(void)
+RRCCode* __stdcall getCCode()
 {
 	try
     {
     	if(!gRRHandle)
         {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
+            setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
 
@@ -1443,13 +1450,13 @@ RRCCode* __stdcall getCCode(void)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 	return NULL;
 }
 
 //Print functions ==========================================================
-char* __stdcall getResultAsString(RRResultHandle result)
+char* __stdcall getResultAsString(const RRResultHandle result)
 {
 	try
     {
@@ -1480,8 +1487,6 @@ char* __stdcall getResultAsString(RRResultHandle result)
             }
 	    	resStr <<"\n";
         }
-
-
 		string strTmp = resStr.str();
     	char* resultChar = new char[strTmp.size() + 1];
         strcpy(resultChar, strTmp.c_str());
@@ -1492,12 +1497,12 @@ char* __stdcall getResultAsString(RRResultHandle result)
     {
         stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return NULL;
 }
 
-char* __stdcall getMatrixAsString(RRMatrixHandle matrixHandle)
+char* __stdcall getMatrixAsString(const RRMatrixHandle matrixHandle)
 {
 	try
     {
@@ -1531,21 +1536,18 @@ char* __stdcall getMatrixAsString(RRMatrixHandle matrixHandle)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return NULL;
 }
 
-void __stdcall printMatrix(RRMatrixHandle matrixHandle)
+char* __stdcall printMatrix(const RRMatrixHandle matrixHandle)
 {
 	try
     {
-        gLog.SetCutOffLogLevel(lDebug2);
-
         if(!matrixHandle)
         {
-            Log(lInfo)<<"Null matrix in printMatrix...";
-            return;
+            return NULL;
         }
 
         RRMatrix& mat = *matrixHandle;
@@ -1565,25 +1567,27 @@ void __stdcall printMatrix(RRMatrixHandle matrixHandle)
             }
             ss<<endl;
         }
-        cout<<ss.str();
+        string msg(ss.str());
+        cout<<msg;
+        return createText(msg);
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
+    return NULL;
 }
 
-void __stdcall printVector(RRVectorHandle vecHandle)
+char* __stdcall printVector(RRVectorHandle vecHandle)
 {
 	try
     {
-        gLog.SetCutOffLogLevel(lDebug2);
         if(!vecHandle)
         {
-            Log(lInfo)<<"Null vector in printMatrix...";
-            return;
+            setError("Null vector in printMatrix...");
+            return NULL;
         }
 
         RRVector& vec = *vecHandle;
@@ -1600,31 +1604,36 @@ void __stdcall printVector(RRVectorHandle vecHandle)
             }
         }
         ss<<endl;
+
         cout<<ss.str();
+        return createText(ss.str());
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
+    return NULL;
 }
 
 //Free Functions =====================================================
-void __stdcall freeRRInstance(RRHandle handle)
+bool __stdcall freeRRInstance(RRHandle handle)
 {
 	try
     {
         delete gRRHandle;
         gRRHandle = NULL;
         handle = NULL;
+        return true;
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
+    return false;
 }
 
 bool __stdcall freeMatrix(RRMatrixHandle matrix)
@@ -1642,7 +1651,7 @@ bool __stdcall freeMatrix(RRMatrixHandle matrix)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
 
     return false;
@@ -1659,7 +1668,7 @@ bool __stdcall freeResult(RRResultHandle handle)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return false;
 }
@@ -1678,7 +1687,7 @@ bool __stdcall freeText(char* text)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return false;
 }
@@ -1694,7 +1703,7 @@ bool __stdcall freeStringList(RRStringListHandle sl)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return false;
 }
@@ -1710,7 +1719,7 @@ bool __stdcall freeLabelStringList(RRLabelStringListHandle sl)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return false;
 }
@@ -1729,7 +1738,7 @@ bool __stdcall freeVector(RRVectorHandle vector)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return false;
 }
@@ -1749,7 +1758,7 @@ bool __stdcall freeCCode(RRCCodeHandle code)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
+        setError(msg.str());
     }
     return false;
 }

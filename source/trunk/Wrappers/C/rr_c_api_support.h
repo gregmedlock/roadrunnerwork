@@ -15,7 +15,7 @@ namespace rr_c_api
 const char ALLOCATE_API_ERROR_MSG[] = {"Please allocate a handle to the roadrunner API before calling any API function"};
 
 //Internal prototypes
-void                SetAPIError(const string& err);
+void                setError(const string& err);
 bool                CopyRRVector(const RRVector* vec, vector<double>& aVec);
 RRVector*           createVectorFrom(const vector<double>& vec);
 char*               createText(const string& str);      //To be deleted by client using freeText
