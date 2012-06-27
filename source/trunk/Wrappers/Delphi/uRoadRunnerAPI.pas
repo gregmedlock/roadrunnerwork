@@ -89,12 +89,12 @@ type
 
   TListOfLabeledStringLists = array of TLabeledStringList;
 
-  TRRDataMatrix = record
+  TRRMatrix = record
     RSize : integer;
     CSize : integer;
     data : array of double;
   end;
-  PRRDataMatrixHandle = ^TRRDataMatrix;
+  PRRMatrixHandle = ^TRRMatrix;
 
   TRRCCodeAPI = record
     Header : PAnsiChar;
@@ -128,7 +128,7 @@ type
   TSetTimeEnd = TDoubleBoolFunc;
   TSetNumPoints = TIntBoolFunc;
   TSimulateEx = function (var timeStart : double; var timeEnd : double; var numberOfPoints : integer) : PRRResultHandle;
-  TGetStoichiometryMatrix = function : PRRDataMatrixHandle; stdcall;
+  TGetStoichiometryMatrix = function : PRRMatrixHandle; stdcall;
   TFreeRRResult = function (ptr : PRRResultHandle) : boolean; stdcall;
   TFreeRRInstance = procedure (instance : Pointer); stdcall;
 
@@ -138,7 +138,7 @@ type
   TGetReactionNames = TPointerVoidFunc;
   TReset = function : bool; stdcall;
   TFreeStringList = procedure (handle : Pointer); stdcall;
-  TFreeRRDataMatrix = function (matrix : PRRDataMatrixHandle) : boolean; stdcall;
+  TFreeRRMatrix = function (matrix : PRRMatrixHandle) : boolean; stdcall;
   TFreeRRDoubleVector = function (vector : PRRDoubleVectorHandle) : boolean ; stdcall;
   TOneStep = function (var currentTime : double; var stepSize : double) : double; stdcall;
   TSteadyState = function : double; stdcall;
@@ -177,12 +177,24 @@ function  getNumberOfReactions : integer;
 function  getNumberOfBoundarySpecies : integer;
 function  getNumberOfFloatingSpecies : integer;
 function  getNumberOfGlobalParameters : integer;
+
+function  setFloatingSpeciesByIndex (index : integer; value : double) : boolean;
+function  setBoundarySpeciesByIndex (index : integer; value : double) : boolean;
+//function  setGlobalParameterByIndex (index : integer; value : double) : boolean;
+
+function  getFloatingSpeciesByIndex (index : integer) : double;
+function  getBoundarySpeciesByIndex (index : integer) : double;
+function  getGlobalParameterByIndex (index : integer) : double;
+
+function  getNumberOfDependentSpecies : integer;
+function  getNumberOfIndependentSpecies : integer;
+
 function  steadyState : double;
 function  computeSteadyStateValues : TDoubleArray;
 
 function  getAvailableSymbols : TRRLIst;
 
-function setComputeAndAssignConservationLaws (value : boolean) : boolean;
+function  setComputeAndAssignConservationLaws (value : boolean) : boolean;
 
 procedure setRoadRunnerLibraryName (newLibName : AnsiString);
 function  loadRoadRunner (var errMsg : AnsiString) : boolean;
@@ -214,7 +226,7 @@ var DLLHandle : Cardinal;
 
     libGetRRInstance : TGetRRInstance;      //
     libFreeRRInstance : TFreeRRInstance;    //
-    libFreeRRResult : TFreeRRResult;        //
+    libFreeResult : TFreeRRResult;        //
 
     libSimulate : TPointerVoidFunc;         //
     libSimulateEx : TSimulateEx;            //
@@ -227,6 +239,18 @@ var DLLHandle : Cardinal;
     libGetNumberOfBoundarySpecies : TVoidIntFunc;//
     libGetNumberOfFloatingSpecies : TVoidIntFunc;//
     libGetNumberOfGlobalParameters : TVoidIntFunc;//
+
+    libSetFloatingSpeciesByIndex : function (index : integer; value : double) : boolean; stdcall;
+    libSetBoundarySpeciesByIndex : function (index : integer; value : double) : boolean; stdcall;
+    //libSetGlobalParameterByIndex : function (index : integer; value : double) : boolean; stdcall;
+
+    libGetGlobalParameterByIndex : function (index : integer) : double; stdcall;
+    //libGetFloatingSpeciesByIndex : function (index : integer) : double; stdcall;
+    //libGetBoundarySpeciesByIndex : function (index : integer) : double; stdcall;
+
+    libGetNumberOfDependentSpecies : function : integer; stdcall;
+    libGetNumberOfIndependentSpecies : function : integer; stdcall;
+
     libSteadyState : TSteadyState;
     libGetReactionRate : TIntDoubleFunc; //
     libOneStep : TOneStep;         //
@@ -242,7 +266,7 @@ var DLLHandle : Cardinal;
     libGetStoichiometryMatrix :  TGetStoichiometryMatrix;  //
 
     libFreeStringList : TFreeStringList;     //
-    libFreeRRDataMatrix : TFreeRRDataMatrix; //
+    libFreeMatrix : TFreeRRMatrix; //
     libFreeText : TCharBoolFunc;             //
     libFreeDoubleVector : TFreeRRDoubleVector; //
 
@@ -400,7 +424,7 @@ begin
          for j := 0 to nc - 1 do
              result[i+1,j+1] := RRResult^.data[i*nc + j];
   finally
-    libFreeRRResult (RRResult);
+    libFreeResult (RRResult);
   end;
 end;
 
@@ -419,7 +443,7 @@ begin
          for j := 0 to nc - 1 do
              result[i+1,j+1] := RRResult^.data[i*nc + j];
   finally
-    libFreeRRResult (RRResult);
+    libFreeResult (RRResult);
   end;
 end;
 
@@ -451,6 +475,7 @@ function getNumberOfBoundarySpecies : integer;
 begin
   result := libGetNumberOfBoundarySpecies;
 end;
+
 
 function getBoundarySpeciesNames : TStringList;
 var p : PRRStringList;
@@ -505,6 +530,52 @@ end;
 function getNumberOfGlobalParameters : integer;
 begin
   result := libGetNumberOfGlobalParameters;
+end;
+
+
+function setFloatingSpeciesByIndex (index : integer; value : double) : boolean;
+begin
+  result := libSetFloatingSpeciesByIndex (index, value);
+end;
+
+
+function setBoundarySpeciesByIndex (index : integer; value : double) : boolean;
+begin
+  result := libSetBoundarySpeciesByIndex (index, value);
+end;
+
+
+function setGlobalParameterByIndex (index : integer; value : double) : boolean;
+begin
+  //result := libSetBoundarySpeciesByIndex (index, value);
+end;
+
+function getFloatingSpeciesByIndex (index : integer) : double;
+begin
+  //result := libGetFloatingSpeciesByIndex (index);
+end;
+
+
+function getBoundarySpeciesByIndex (index : integer) : double;
+begin
+  //result := libGetBoundarySpeciesByIndex (index);
+end;
+
+
+function getGlobalParameterByIndex (index : integer) : double;
+begin
+  result := libGetGlobalParameterByIndex (index);
+end;
+
+
+function getNumberOfDependentSpecies : integer;
+begin
+  result := libGetNumberOfDependentSpecies;
+end;
+
+function getNumberOfIndependentSpecies : integer;
+begin
+  result := libGetNumberOfIndependentSpecies;
 end;
 
 
@@ -672,7 +743,7 @@ end;
 
 
 function getStoichiometryMatrix : TMatrix;
-var st : PRRDataMatrixHandle;
+var st : PRRMatrixHandle;
     nr, nc : integer;
     i, j : integer;
 begin
@@ -685,7 +756,7 @@ begin
         for j := 0 to nc - 1 do
             result[i+1,j+1] := st^.data[i*nc + j];
   finally
-    libFreeRRDataMatrix (st);
+    libFreeMatrix (st);
   end;
 end;
 
@@ -773,6 +844,7 @@ begin
    @libReset := GetProcAddress (dllHandle, PChar ('reset'));
    if not Assigned (libReset) then
       begin errMsg := 'Unable to locate reset'; result := false; exit; end;
+
    @libGetNumberOfReactions := GetProcAddress (dllHandle, PChar ('getNumberOfReactions'));
    if not Assigned (libGetNumberOfReactions) then
       begin errMsg := 'Unable to locate getNumberOfReactions'; result := false; exit; end;
@@ -785,6 +857,29 @@ begin
    @libGetNumberOfGlobalParameters := GetProcAddress (dllHandle, PChar ('getNumberOfGlobalParameters'));
    if not Assigned (libGetNumberOfGlobalParameters) then
       begin errMsg := 'Unable to locate getNumberOfGlobalParameters'; result := false; exit; end;
+   @libSetFloatingSpeciesByIndex := GetProcAddress (dllHandle, PChar ('setFloatingSpeciesByIndex'));
+   if not Assigned (libSetFloatingSpeciesByIndex) then
+      begin errMsg := 'Unable to locate setFloatingSpeciesByIndex'; result := false; exit; end;
+   @libSetBoundarySpeciesByIndex := GetProcAddress (dllHandle, PChar ('setBoundarySpeciesByIndex'));
+   if not Assigned (libSetBoundarySpeciesByIndex) then
+      begin errMsg := 'Unable to locate setBoundarySpeciesByIndex'; result := false; exit; end;
+   //@libSetGlobalParameterByIndex := GetProcAddress (dllHandle, PChar ('getGlobalParameterByIndex'));
+   //if not Assigned (libSetGlobalParameterByIndex) then
+   //   begin errMsg := 'Unable to locate getGlobalParameterByIndex'; result := false; exit; end;
+
+   @libGetGlobalParameterByIndex := GetProcAddress (dllHandle, PChar ('getGlobalParameterByIndex'));
+   if not Assigned (libGetGlobalParameterByIndex) then
+      begin errMsg := 'Unable to locate getGlobalParameterByIndex'; result := false; exit; end;
+
+   @libGetNumberOfDependentSpecies := GetProcAddress (dllHandle, PChar ('getNumberOfDependentSpecies'));
+   if not Assigned (libGetNumberOfDependentSpecies) then
+      begin errMsg := 'Unable to locate getNumberOfInDependentSpecies'; result := false; exit; end;
+   @libGetNumberOfIndependentSpecies := GetProcAddress (dllHandle, PChar ('getNumberOfIndependentSpecies'));
+   if not Assigned (libGetNumberOfIndependentSpecies) then
+      begin errMsg := 'Unable to locate getNumberOfIndependentSpecies'; result := false; exit; end;
+
+
+
    @libSteadyState := GetProcAddress (dllHandle, PChar ('steadyState'));
    if not Assigned (libSteadyState) then
       begin errMsg := 'Unable to locate steadyState'; result := false; exit; end;
@@ -822,12 +917,12 @@ begin
    if not Assigned (libGetStoichiometryMatrix) then
       begin errMsg := 'Unable to locate getStoichiometryMatrix'; result := false; exit; end;
 
-   @libFreeRRResult := GetProcAddress (dllHandle, PChar ('freeRRResult'));
-   if not Assigned (libFreeRRResult) then
-      begin errMsg := 'Unable to locate freeRRResult'; result := false; exit; end;
-   @libFreeRRDataMatrix := GetProcAddress (dllHandle, PChar ('freeRRDataMatrix'));
-   if not Assigned (libFreeRRDataMatrix) then
-      begin errMsg := 'Unable to locate freeRRDataMatrix'; result := false; exit; end;
+   @libFreeResult := GetProcAddress (dllHandle, PChar ('freeResult'));
+   if not Assigned (libFreeResult) then
+      begin errMsg := 'Unable to locate freeResult'; result := false; exit; end;
+   @libFreeMatrix := GetProcAddress (dllHandle, PChar ('freeMatrix'));
+   if not Assigned (libFreeMatrix) then
+      begin errMsg := 'Unable to locate freeMatrix'; result := false; exit; end;
    @libFreeText := GetProcAddress (dllHandle, PChar ('freeText'));
    if not Assigned (libFreeText) then
       begin errMsg := 'Unable to locate freeText'; result := false; exit; end;
