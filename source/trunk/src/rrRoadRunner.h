@@ -33,282 +33,284 @@ LIB_LA::DoubleMatrix            mult(LIB_LA::DoubleMatrix& m1, LIB_LA::DoubleMat
 
 class RR_DECLSPEC RoadRunner : public rrObject
 {
-    private:
-        const double                    DiffStepSize;
-        const string                    emptyModelStr;
-        const double                    STEADYSTATE_THRESHOLD;
-        SimulationData                  mSimulationData;
-        string                          mModelXMLFileName;
-        string                          mModelCode;
-        string                          mTempFileFolder;
-        SBMLModelSimulation            *mSimulation;
+	private:
+		const double                    DiffStepSize;
+		const string                    emptyModelStr;
+		const double                    STEADYSTATE_THRESHOLD;
+		SimulationData                  mSimulationData;
+		string                          mModelXMLFileName;
+		string                          mModelCode;
+		string                          mTempFileFolder;
+		SBMLModelSimulation            *mSimulation;
 
-        CvodeInterface                 *mCVode;
-        ISteadyStateSolver             *steadyStateSolver;
-        vector<TSelectionRecord>        selectionList;
-        ModelGenerator                 *mModelGenerator;    //Pointer to one of the below ones..
-        ModelGenerator                 *mCSharpGenerator;
-        ModelGenerator                 *mCGenerator;
+		CvodeInterface                 *mCVode;
+		ISteadyStateSolver             *steadyStateSolver;
+		vector<TSelectionRecord>        selectionList;
+		ModelGenerator                 *mModelGenerator;    //Pointer to one of the below ones..
+		ModelGenerator                 *mCSharpGenerator;
+		ModelGenerator                 *mCGenerator;
 
-        LIB_LA::DoubleMatrix           *_L;
-        LIB_LA::DoubleMatrix           *_L0;
-        LIB_LA::DoubleMatrix           *_N;
-        LIB_LA::DoubleMatrix           *_Nr;
+		LIB_LA::DoubleMatrix           *_L;
+		LIB_LA::DoubleMatrix           *_L0;
+		LIB_LA::DoubleMatrix           *_N;
+		LIB_LA::DoubleMatrix           *_Nr;
 
-        Compiler                        mCompiler;
-        HINSTANCE                       mModelDllHandle;
-        void                            AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime);
-        bool                            IsNleqAvailable();
-        void                            emptyModel();
-        double                          GetValueForRecord(const TSelectionRecord& record);
-        double                          GetNthSelectedOutput(const int& index, const double& dCurrentTime);
-        vector<double>                  BuildModelEvalArgument();
-        double                          getVariableValue(const TVariableType& variableType, const int& variableIndex);
-        void                            setParameterValue(const TParameterType& parameterType, const int& parameterIndex, const double& value);
-        double                          getParameterValue(const TParameterType& parameterType, const int& parameterIndex);
+		Compiler                        mCompiler;
+		HINSTANCE                       mModelDllHandle;
+		void                            AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime);
+		bool                            IsNleqAvailable();
+		void                            emptyModel();
+		double                          GetValueForRecord(const TSelectionRecord& record);
+		double                          GetNthSelectedOutput(const int& index, const double& dCurrentTime);
+		vector<double>                  BuildModelEvalArgument();
+		double                          getVariableValue(const TVariableType& variableType, const int& variableIndex);
+		void                            setParameterValue(const TParameterType& parameterType, const int& parameterIndex, const double& value);
+		double                          getParameterValue(const TParameterType& parameterType, const int& parameterIndex);
 
-        vector<TSelectionRecord>        mSteadyStateSelection;
-        vector<TSelectionRecord>        GetSteadyStateSelection(const StringList& newSelectionList);
-        StringList                      getParameterNames();
-        string                          GetDLLName();
+		vector<TSelectionRecord>        mSteadyStateSelection;
+		vector<TSelectionRecord>        GetSteadyStateSelection(const StringList& newSelectionList);
+		StringList                      getParameterNames();
+		string                          GetDLLName();
+		SimulationSettings              mSettings;
 
-        SimulationSettings              mSettings;
+	public:
+		// NOM
+		string                  		getParamPromotedSBML(const string& sArg);
 
-    public:
-        // Properties -----------------------------------------------------------------------------
-        bool                     		mComputeAndAssignConservationLaws;
+		// Properties -----------------------------------------------------------------------------
+		bool                     		mComputeAndAssignConservationLaws;
 		bool        					ComputeAndAssignConservationLaws();
 
-        bool                     		mConservedTotalChanged;
+		bool                     		mConservedTotalChanged;
 		//        static bool                   mReMultiplyCompartments;
-        double*                         mL;
-        double*                         mL0;
-        double*                         mN;
-        double*                         mNr;
-        bool                            modelLoaded;
-        string                          mCurrentSBML;
-        ModelFromC*                     mModel;
-        double                          mTimeStart;
-        double                          mTimeEnd;
-        int                             mNumPoints;
-        string                          NL;
-        StructAnalysis                  mStructAnalysis;                    //Object to facilitate calls to libStruct library
-        LibStructural                  *mLibStructInstance;
+		double*                         mL;
+		double*                         mL0;
+		double*                         mN;
+		double*                         mNr;
+		bool                            modelLoaded;
+		string                          mCurrentSBML;
+		ModelFromC*                     mModel;
+		double                          mTimeStart;
+		double                          mTimeEnd;
+		int                             mNumPoints;
+		string                          NL;
+		StructAnalysis                  mStructAnalysis;                    //Object to facilitate calls to libStruct library
+		LibStructural                  *mLibStructInstance;
 
-        CGenerator*						GetCGenerator();
-        CSharpGenerator*				GetCSharpGenerator();
-        //Functions --------------------------------------------------------------------
-                                        RoadRunner();
-        virtual                        ~RoadRunner();
-        bool                            CreateSelectionList();
-        bool                            SetTempFileFolder(const string& folder);
-        string                          GetTempFileFolder();
-        void                            PartOfSimulation(SBMLModelSimulation* simulation){mSimulation = simulation;}
-        bool                            GenerateModelCode(const string& sbml = string(""));
-        bool                            GenerateAndCompileModel();
-        bool                            CompileCurrentModel();
-        ModelFromC*                     CreateModel();
-        SimulationData                  GetSimulationResult();
-        ModelGenerator*                 GetCodeGenerator();
-        bool                            UseSimulationSettings(SimulationSettings& settings);
-        void                            Reset();
-        bool                            CreateModelSourceCode();
-        string                          GetModelSourceCode();
-        DoubleMatrix                    runSimulation();
-        bool                            InitializeModel();
-        bool                            Simulate();
-        bool                            SimulateSBMLFile(const string& fileName, const bool& useConservationLaws = true);
-        bool                            SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
-        bool                            LoadSBMLFromFile(const string& fileName);    //Just load the content of a sbml file
-        bool                            loadSBMLFromFile(const string& fileName);
-        bool                            loadSBML(const string& sbml);
-        string                          getSBML();
-        double                          getTimeStart();
-        double                          getTimeEnd();
-        int                             getNumPoints();
-        void                            setTimeStart(const double& startTime);
-        void                            setTimeEnd(const double& endTime);
-        void                            setNumPoints(const int& nummberOfPoints);
-        void                            reset();
-        void                            changeInitialConditions(const vector<double>& ic);
-        DoubleMatrix                    simulate();
-        vector<double>                  simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
-        vector<double>                  getReactionRates();
-        vector<double>                  getRatesOfChange();
-        StringList                      getSpeciesNames();
-        StringList                      getReactionNames();
+		CGenerator*						GetCGenerator();
+		CSharpGenerator*				GetCSharpGenerator();
+		//Functions --------------------------------------------------------------------
+										RoadRunner();
+		virtual                        ~RoadRunner();
+		bool                            CreateSelectionList();
+		bool                            SetTempFileFolder(const string& folder);
+		string                          GetTempFileFolder();
+		void                            PartOfSimulation(SBMLModelSimulation* simulation){mSimulation = simulation;}
+		bool                            GenerateModelCode(const string& sbml = string(""));
+		bool                            GenerateAndCompileModel();
+		bool                            CompileCurrentModel();
+		ModelFromC*                     CreateModel();
+		SimulationData                  GetSimulationResult();
+		ModelGenerator*                 GetCodeGenerator();
+		bool                            UseSimulationSettings(SimulationSettings& settings);
+		void                            Reset();
+		bool                            CreateModelSourceCode();
+		string                          GetModelSourceCode();
+		DoubleMatrix                    runSimulation();
+		bool                            InitializeModel();
+		bool                            Simulate();
+		bool                            SimulateSBMLFile(const string& fileName, const bool& useConservationLaws = true);
+		bool                            SimulateSBMLFile(const string& fileName, const bool& useConservationLaws, const double& startTime, const double& endTime, const int& numPoints);
+		bool                            LoadSBMLFromFile(const string& fileName);    //Just load the content of a sbml file
+		bool                            loadSBMLFromFile(const string& fileName);
+		bool                            loadSBML(const string& sbml);
+		string                          getSBML();
+		double                          getTimeStart();
+		double                          getTimeEnd();
+		int                             getNumPoints();
+		void                            setTimeStart(const double& startTime);
+		void                            setTimeEnd(const double& endTime);
+		void                            setNumPoints(const int& nummberOfPoints);
+		void                            reset();
+		void                            changeInitialConditions(const vector<double>& ic);
+		DoubleMatrix                    simulate();
+		vector<double>                  simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
+		vector<double>                  getReactionRates();
+		vector<double>                  getRatesOfChange();
+		StringList                      getSpeciesNames();
+		StringList                      getReactionNames();
 
-        // ---------------------------------------------------------------------
-        // Start of Level 2 API Methods
-        // ---------------------------------------------------------------------
-        bool                            UseKinsol;
-        string                          getCapabilities();
-        void                            setTolerances(const double& aTol, const double& rTol);
-        void                            setTolerances(const double& aTol, const double& rTol, const int& maxSteps);
-        void                            CorrectMaxStep();
-        void                            setCapabilities(const string& capsStr);
-        bool                            setValue(const string& sId, const double& dValue);
-        double                          getValue(const string& sId);
-        StringListContainer             getAvailableSymbols();
-        StringList                      getSelectionList();
-        void                            setSelectionList(const string& List);
-        void                            setSelectionList(const StringList& newSelectionList);
-        double                          oneStep(const double& currentTime, const double& stepSize);
-        double                          oneStep(const double& currentTime, const double& stepSize, const bool& reset);
+		// ---------------------------------------------------------------------
+		// Start of Level 2 API Methods
+		// ---------------------------------------------------------------------
+		bool                            UseKinsol;
+		string                          getCapabilities();
+		void                            setTolerances(const double& aTol, const double& rTol);
+		void                            setTolerances(const double& aTol, const double& rTol, const int& maxSteps);
+		void                            CorrectMaxStep();
+		void                            setCapabilities(const string& capsStr);
+		bool                            setValue(const string& sId, const double& dValue);
+		double                          getValue(const string& sId);
+		StringListContainer             getAvailableSymbols();
+		StringList                      getSelectionList();
+		void                            setSelectionList(const string& List);
+		void                            setSelectionList(const StringList& newSelectionList);
+		double                          oneStep(const double& currentTime, const double& stepSize);
+		double                          oneStep(const double& currentTime, const double& stepSize, const bool& reset);
 
-        // ---------------------------------------------------------------------
-        // Start of Level 3 API Methods
-        // ---------------------------------------------------------------------
-        double                          steadyState();
-        static void                     TestSettings();
+		// ---------------------------------------------------------------------
+		// Start of Level 3 API Methods
+		// ---------------------------------------------------------------------
+		double                          steadyState();
+		static void                     TestSettings();
 
-        LIB_LA::DoubleMatrix            getReducedJacobian();
-        LIB_LA::DoubleMatrix            getFullJacobian();
+		LIB_LA::DoubleMatrix            getReducedJacobian();
+		LIB_LA::DoubleMatrix            getFullJacobian();
 
-        // ---------------------------------------------------------------------
-        // Start of Level 4 API Methods
-        // ---------------------------------------------------------------------
-        double*                         getLinkMatrix();
-        double*                         getNrMatrix();
-        double*                         getL0Matrix();
-        DoubleMatrix                    getStoichiometryMatrix();
-        double*                         getConservationMatrix();
-        int                             getNumberOfDependentSpecies();
-        int                             getNumberOfIndependentSpecies();
+		// ---------------------------------------------------------------------
+		// Start of Level 4 API Methods
+		// ---------------------------------------------------------------------
+		double*                         getLinkMatrix();
+		double*                         getNrMatrix();
+		double*                         getL0Matrix();
+		DoubleMatrix                    getStoichiometryMatrix();
+		double*                         getConservationMatrix();
+		int                             getNumberOfDependentSpecies();
+		int                             getNumberOfIndependentSpecies();
 
-        /// <summary>
-        /// Fills the second argument with the Inverse of the first argument
-        /// </summary>
-        /// <param name="T2">The Matrix to calculate the Inverse for</param>
-        /// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
-        //static void                     GetInverse(Matrix T2, Matrix Inv);
+		/// <summary>
+		/// Fills the second argument with the Inverse of the first argument
+		/// </summary>
+		/// <param name="T2">The Matrix to calculate the Inverse for</param>
+		/// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
+		//static void                     GetInverse(Matrix T2, Matrix Inv);
 
-        void                            computeContinuation(const double& stepSize, const int& independentVariable, const string& parameterTypeStr);
-        StringList                      getFluxControlCoefficientNames();
-        StringList                      getConcentrationControlCoefficientNames();
-        StringList                      getUnscaledConcentrationControlCoefficientNames();
-        ArrayList                       getElasticityCoefficientNames();
-        ArrayList                       getUnscaledElasticityCoefficientNames();
-        StringList                      getEigenValueNames();
-        StringList                      getAvailableSteadyStateSymbols();
-        ArrayList                       getSteadyStateSelectionList();
-        void                            setSteadyStateSelectionList(const StringList& newSelectionList);
+		void                            computeContinuation(const double& stepSize, const int& independentVariable, const string& parameterTypeStr);
+		StringList                      getFluxControlCoefficientNames();
+		StringList                      getConcentrationControlCoefficientNames();
+		StringList                      getUnscaledConcentrationControlCoefficientNames();
+		ArrayList                       getElasticityCoefficientNames();
+		ArrayList                       getUnscaledElasticityCoefficientNames();
+		StringList                      getEigenValueNames();
+		StringList                      getAvailableSteadyStateSymbols();
+		ArrayList                       getSteadyStateSelectionList();
+		void                            setSteadyStateSelectionList(const StringList& newSelectionList);
 
-        double                          computeSteadyStateValue(const TSelectionRecord& record);
-        vector<double>                  computeSteadyStateValues();
-        vector<double>                  computeSteadyStateValues(const StringList& selection);
-        vector<double>                  computeSteadyStateValues(const vector<TSelectionRecord>& selection, const bool& computeSteadyState);
+		double                          computeSteadyStateValue(const TSelectionRecord& record);
+		vector<double>                  computeSteadyStateValues();
+		vector<double>                  computeSteadyStateValues(const StringList& selection);
+		vector<double>                  computeSteadyStateValues(const vector<TSelectionRecord>& selection, const bool& computeSteadyState);
 
-        double                          computeSteadyStateValue(const string& sId);
-        vector<double>                  getSelectedValues();
-        vector<string>                  getWarnings();
-        void                     		ReMultiplyCompartments(const bool& bValue);
-        void                     		ComputeAndAssignConservationLaws(const bool& bValue);
-        string                          getCSharpCode();
-        double*                         steadyStateParameterScan(const string& symbol, const double& startValue, const double& endValue, const double& stepSize);
-        string                          writeSBML();
-        int                             getNumberOfLocalParameters(const int& reactionId);
-        void                            setLocalParameterByIndex(const int& reactionId, const int index, const double& value);
-        double                          getLocalParameterByIndex(const int& reactionId, const int& index);
-        void                            setLocalParameterValues(const int& reactionId, const vector<double>& values);
-        vector<double>                  getLocalParameterValues(const int& reactionId);
-        StringList                      getLocalParameterNames(const int& reactionId);
-        StringList                      getAllLocalParameterTupleList();
-        int                             getNumberOfReactions();
-        double                          getReactionRate(const int& index);
-        double                          getRateOfChange(const int& index);
-        StringList                      getRateOfChangeNames();
-        vector<double>                  getRatesOfChangeEx(const vector<double>& values);
-        vector<double>                  getReactionRatesEx(const vector<double>& values);
-        vector<string>                  GetFloatingSpeciesNamesArray();
-        vector<string>                  GetGlobalParameterNamesArray();
-        int                             getNumberOfCompartments();
-        void                            setCompartmentByIndex(const int& index, const double& value);
-        double                          getCompartmentByIndex(const int& index);
-        void                            setCompartmentVolumes(const vector<double>& values);
-        StringList                      getCompartmentNames();
-        int                             getNumberOfBoundarySpecies();
-        void                            setBoundarySpeciesByIndex(const int& index, const double& value);
-        double                          getBoundarySpeciesByIndex(const int& index);
-        vector<double>                  getBoundarySpeciesConcentrations();
-        void                            setBoundarySpeciesConcentrations(const vector<double>& values);
-        StringList                      getBoundarySpeciesNames();
-        StringList                      getBoundarySpeciesAmountNames();
-        int                             getNumberOfFloatingSpecies();
-        void                            setFloatingSpeciesByIndex(const int& index, const double& value);
-        double                          getFloatingSpeciesByIndex(const int& index);
-        vector<double>                  getFloatingSpeciesConcentrations();
-        vector<double>                  getFloatingSpeciesInitialConcentrations();
-        void                            setFloatingSpeciesConcentrations(const vector<double>& values);
-        void                            setFloatingSpeciesInitialConcentrationByIndex(const int& index, const double& value);
-        void                            setFloatingSpeciesInitialConcentrations(const vector<double>& values);
-        StringList                      getFloatingSpeciesNames();
-        StringList                      getFloatingSpeciesInitialConditionNames();
-        StringList                      getFloatingSpeciesAmountNames();
-        int                             getNumberOfGlobalParameters();
-        void                            setGlobalParameterByIndex(const int& index, const double& value);
-        double                          getGlobalParameterByIndex(const int& index);
-        void                            setGlobalParameterValues(const vector<double>& values);
-        vector<double>                  getGlobalParameterValues();
-        StringList                      getGlobalParameterNames();
-        StringList                      getAllGlobalParameterTupleList();
-        void                            EvalModel();
-        string                          getName();
-        static string                   getVersion();
-        static string                   getAuthor();
-        static string                   getDescription();
-        static string                   getDisplayName();
-        static string                   getCopyright();
-        static string                   getURL();
+		double                          computeSteadyStateValue(const string& sId);
+		vector<double>                  getSelectedValues();
+		vector<string>                  getWarnings();
+		void                     		ReMultiplyCompartments(const bool& bValue);
+		void                     		ComputeAndAssignConservationLaws(const bool& bValue);
+		string                          getCSharpCode();
+		double*                         steadyStateParameterScan(const string& symbol, const double& startValue, const double& endValue, const double& stepSize);
+		string                          writeSBML();
+		int                             getNumberOfLocalParameters(const int& reactionId);
+		void                            setLocalParameterByIndex(const int& reactionId, const int index, const double& value);
+		double                          getLocalParameterByIndex(const int& reactionId, const int& index);
+		void                            setLocalParameterValues(const int& reactionId, const vector<double>& values);
+		vector<double>                  getLocalParameterValues(const int& reactionId);
+		StringList                      getLocalParameterNames(const int& reactionId);
+		StringList                      getAllLocalParameterTupleList();
+		int                             getNumberOfReactions();
+		double                          getReactionRate(const int& index);
+		double                          getRateOfChange(const int& index);
+		StringList                      getRateOfChangeNames();
+		vector<double>                  getRatesOfChangeEx(const vector<double>& values);
+		vector<double>                  getReactionRatesEx(const vector<double>& values);
+		vector<string>                  GetFloatingSpeciesNamesArray();
+		vector<string>                  GetGlobalParameterNamesArray();
+		int                             getNumberOfCompartments();
+		void                            setCompartmentByIndex(const int& index, const double& value);
+		double                          getCompartmentByIndex(const int& index);
+		void                            setCompartmentVolumes(const vector<double>& values);
+		StringList                      getCompartmentNames();
+		int                             getNumberOfBoundarySpecies();
+		void                            setBoundarySpeciesByIndex(const int& index, const double& value);
+		double                          getBoundarySpeciesByIndex(const int& index);
+		vector<double>                  getBoundarySpeciesConcentrations();
+		void                            setBoundarySpeciesConcentrations(const vector<double>& values);
+		StringList                      getBoundarySpeciesNames();
+		StringList                      getBoundarySpeciesAmountNames();
+		int                             getNumberOfFloatingSpecies();
+		void                            setFloatingSpeciesByIndex(const int& index, const double& value);
+		double                          getFloatingSpeciesByIndex(const int& index);
+		vector<double>                  getFloatingSpeciesConcentrations();
+		vector<double>                  getFloatingSpeciesInitialConcentrations();
+		void                            setFloatingSpeciesConcentrations(const vector<double>& values);
+		void                            setFloatingSpeciesInitialConcentrationByIndex(const int& index, const double& value);
+		void                            setFloatingSpeciesInitialConcentrations(const vector<double>& values);
+		StringList                      getFloatingSpeciesNames();
+		StringList                      getFloatingSpeciesInitialConditionNames();
+		StringList                      getFloatingSpeciesAmountNames();
+		int                             getNumberOfGlobalParameters();
+		void                            setGlobalParameterByIndex(const int& index, const double& value);
+		double                          getGlobalParameterByIndex(const int& index);
+		void                            setGlobalParameterValues(const vector<double>& values);
+		vector<double>                  getGlobalParameterValues();
+		StringList                      getGlobalParameterNames();
+		StringList                      getAllGlobalParameterTupleList();
+		void                            EvalModel();
+		string                          getName();
+		static string                   getVersion();
+		static string                   getAuthor();
+		static string                   getDescription();
+		static string                   getDisplayName();
+		static string                   getCopyright();
+		static string                   getURL();
 
-        static void                     Test();
-        static void                     PrintTout(const double& start, const double& end, const int& numPoints);
-        static void                     TestChange();
-        void                            DumpResults(TextWriter& writer, DoubleMatrix& data, const StringList& colLabels);
+		static void                     Test();
+		static void                     PrintTout(const double& start, const double& end, const int& numPoints);
+		static void                     TestChange();
+		void                            DumpResults(TextWriter& writer, DoubleMatrix& data, const StringList& colLabels);
 
 
-        //RoadRunner MCA functions......
+		//RoadRunner MCA functions......
 
-        //[Help("Get unscaled control coefficient with respect to a global parameter")]
-        double getuCC(const string& variableName, const string& parameterName);
+		//[Help("Get unscaled control coefficient with respect to a global parameter")]
+		double getuCC(const string& variableName, const string& parameterName);
 
-        //[Help("Get scaled control coefficient with respect to a global parameter")]
-        double getCC(const string& variableName, const string& parameterName);
+		//[Help("Get scaled control coefficient with respect to a global parameter")]
+		double getCC(const string& variableName, const string& parameterName);
 
-        //[Help("Get unscaled elasticity coefficient with respect to a global parameter or species")]
-        double getuEE(const string& reactionName, const string& parameterName);
+		//[Help("Get unscaled elasticity coefficient with respect to a global parameter or species")]
+		double getuEE(const string& reactionName, const string& parameterName);
 
-        //[Help("Get unscaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
-        double getuEE(const string& reactionName, const string& parameterName, bool computeSteadystate);
+		//[Help("Get unscaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
+		double getuEE(const string& reactionName, const string& parameterName, bool computeSteadystate);
 
-        //[Help("Get scaled elasticity coefficient with respect to a global parameter or species")]
-        double getEE(const string& reactionName, const string& parameterName);
+		//[Help("Get scaled elasticity coefficient with respect to a global parameter or species")]
+		double getEE(const string& reactionName, const string& parameterName);
 
-        //[Help("Get scaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
-        double getEE(const string& reactionName, const string& parameterName, bool computeSteadyState);
+		//[Help("Get scaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
+		double getEE(const string& reactionName, const string& parameterName, bool computeSteadyState);
 
-        // Get a single species elasticity value
-        // IMPORTANT:
-        // Assumes that the reaction rates have been precomputed at the operating point !!
-        double getUnscaledSpeciesElasticity(int reactionId, int speciesIndex);
+		// Get a single species elasticity value
+		// IMPORTANT:
+		// Assumes that the reaction rates have been precomputed at the operating point !!
+		double getUnscaledSpeciesElasticity(int reactionId, int speciesIndex);
 
-        //"Returns the elasticity of a given reaction to a given parameter. Parameters can be boundary species or global parameters"
-        double getUnScaledElasticity(const string& reactionName, const string& parameterName);
+		//"Returns the elasticity of a given reaction to a given parameter. Parameters can be boundary species or global parameters"
+		double getUnScaledElasticity(const string& reactionName, const string& parameterName);
 
-        //"Compute the unscaled species elasticity matrix at the current operating point")]
-        LIB_LA::DoubleMatrix getUnscaledElasticityMatrix();
+		//"Compute the unscaled species elasticity matrix at the current operating point")]
+		LIB_LA::DoubleMatrix getUnscaledElasticityMatrix();
 
-        //"Compute the unscaled elasticity matrix at the current operating point")]
-        double** getScaledElasticityMatrix();
+		//"Compute the unscaled elasticity matrix at the current operating point")]
+		double** getScaledElasticityMatrix();
 
-        //[Help("Compute the unscaled elasticity for a given reaction and given species")]
-        double getUnscaledFloatingSpeciesElasticity(const string& reactionName, const string& speciesName);
+		//[Help("Compute the unscaled elasticity for a given reaction and given species")]
+		double getUnscaledFloatingSpeciesElasticity(const string& reactionName, const string& speciesName);
 
-        //[Help("Compute the scaled elasticity for a given reaction and given species")]
-        double getScaledFloatingSpeciesElasticity(const string& reactionName, const string& speciesName);
+		//[Help("Compute the scaled elasticity for a given reaction and given species")]
+		double getScaledFloatingSpeciesElasticity(const string& reactionName, const string& speciesName);
 
-        // Changes a given parameter type by the given increment
-        void changeParameter(TParameterType parameterType, int reactionIndex, int parameterIndex, double originalValue, double increment);
+		// Changes a given parameter type by the given increment
+		void changeParameter(TParameterType parameterType, int reactionIndex, int parameterIndex, double originalValue, double increment);
         //[Help("Returns the unscaled elasticity for a named reaction with respect to a named parameter (local or global)"
         double getUnscaledParameterElasticity(const string& reactionName, const string& parameterName);
 
@@ -338,7 +340,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         //"Compute the value for a particular scaled concentration control coefficients with respect to a global or boundary species parameter"
         double getScaledConcentrationControlCoefficient(const string& speciesName, const string& parameterName);
 
-        //[Help("Compute the value for a particular unscaled flux control coefficients with respect to a local parameter")
+		//[Help("Compute the value for a particular unscaled flux control coefficients with respect to a local parameter")
         double getUnscaledFluxControlCoefficient(const string& fluxName, const string& localReactionName, const string& parameterName);
 
         //"Compute the value for a particular flux control coefficient, permitted parameters include global parameters, boundary conditions and conservation totals"

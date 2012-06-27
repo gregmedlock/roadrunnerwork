@@ -85,7 +85,6 @@ int main(int argc, char* argv[])
 	    cout<<"Steady state number: "<<ssVal<<endl;
     }
 
-
     RRStringListHandle list = getRatesOfChangeNames();
 
 //    cout<<getBoundarySpeciesByIndex (0)<<endl;
@@ -96,6 +95,8 @@ int main(int argc, char* argv[])
     cout<<getNumberOfIndependentSpecies()<<endl;
 
     RRVector* vec = getRatesOfChange();
+    cout<<getParamPromotedSBML(sbml.c_str());
+	evalModel();
 
 	///////////////////
     text = getCopyright();

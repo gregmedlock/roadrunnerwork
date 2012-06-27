@@ -108,6 +108,7 @@ C_DECL_SPEC bool                    __stdcall   reset();
 C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (RRVector* vec);
 C_DECL_SPEC RRVectorHandle          __stdcall   getFloatingSpeciesInitialConcentrations (void);
 
+C_DECL_SPEC char* 					__stdcall   getParamPromotedSBML(const char* sArg);
 // Reaction Rates
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
 C_DECL_SPEC double                  __stdcall   getReactionRate(int);

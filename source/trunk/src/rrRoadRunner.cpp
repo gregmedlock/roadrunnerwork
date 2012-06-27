@@ -95,80 +95,92 @@ CSharpGenerator* RoadRunner::GetCSharpGenerator()
 
 bool RoadRunner::SetTempFileFolder(const string& folder)
 {
-    if(FolderExists(folder))
-    {
-        mTempFileFolder = folder;
-        return true;
-    }
-    else
-    {
-        Log(lError)<<"The folder: "<<folder<<" don't exist...";
-        return false;
-    }
+	if(FolderExists(folder))
+	{
+		mTempFileFolder = folder;
+		return true;
+	}
+	else
+	{
+		Log(lError)<<"The folder: "<<folder<<" don't exist...";
+		return false;
+	}
 }
 
 string RoadRunner::GetTempFileFolder ()
 {
-    return mTempFileFolder;
+	return mTempFileFolder;
 }
 
 bool RoadRunner::CreateSelectionList()
 {
-    //read from settings the variables found in the amounts and concentrations lists
-    StringList theList;
-    TSelectionRecord record;
+	//read from settings the variables found in the amounts and concentrations lists
+	StringList theList;
+	TSelectionRecord record;
 
-    theList.Add("time");
-    for(int i = 0; i < mSettings.mAmount.size(); i++)
-    {
-        theList.Add("[" + mSettings.mAmount[i] + "]");        //In the setSelection list below, the [] selects the correct 'type'
-    }
+	theList.Add("time");
+	for(int i = 0; i < mSettings.mAmount.size(); i++)
+	{
+		theList.Add("[" + mSettings.mAmount[i] + "]");        //In the setSelection list below, the [] selects the correct 'type'
+	}
 
-    for(int i = 0; i < mSettings.mConcentration.size(); i++)
-    {
-        theList.Add(mSettings.mConcentration[i]);
-    }
+	for(int i = 0; i < mSettings.mConcentration.size(); i++)
+	{
+		theList.Add(mSettings.mConcentration[i]);
+	}
 
-    if(theList.size() < 2)
-    {
-        for(int i = 0; i < mSettings.mVariables.size(); i++)
-        {
-            theList.Add(mSettings.mVariables[i]);
-        }
-    }
+	if(theList.size() < 2)
+	{
+		for(int i = 0; i < mSettings.mVariables.size(); i++)
+		{
+			theList.Add(mSettings.mVariables[i]);
+		}
+	}
 
-    setSelectionList(theList);
+	setSelectionList(theList);
 
-    Log(lInfo)<<"The following is selected:";
-    for(int i = 0; i < selectionList.size(); i++)
-    {
-        Log(lInfo)<<selectionList[i];
-    }
+	Log(lInfo)<<"The following is selected:";
+	for(int i = 0; i < selectionList.size(); i++)
+	{
+		Log(lInfo)<<selectionList[i];
+	}
 
-    if(selectionList.size() < 2)
-    {
-        Log(lWarning)<<"You have not made a selection. No data is selected";
-        return false;
-    }
-    return true;
+	if(selectionList.size() < 2)
+	{
+		Log(lWarning)<<"You have not made a selection. No data is selected";
+		return false;
+	}
+	return true;
 }
 
 ModelGenerator* RoadRunner::GetCodeGenerator()
 {
-    return mModelGenerator;
+	return mModelGenerator;
+}
+
+//NOM exposure
+string RoadRunner::getParamPromotedSBML(const string& sArg)
+{
+	if(mModelGenerator)
+    {
+    	//This does not look very nice>>
+    	return mModelGenerator->mNOM.getParamPromotedSBML(sArg);
+    }
+
+    return "";
 }
 
 void RoadRunner::Reset()
 {
-    if(mModelGenerator)
-    {
-        mModelGenerator->Reset();
-    }
+	if(mModelGenerator)
+	{
+		mModelGenerator->Reset();
+	}
 }
 
 string RoadRunner::GetModelSourceCode()
 {
-    return mModelCode;
+	return mModelCode;
 }
 
 bool RoadRunner::InitializeModel()
@@ -180,7 +192,7 @@ bool RoadRunner::InitializeModel()
 
         if(!mModel)
         {
-            Log(lError)<<"Failed Creating Model";
+			Log(lError)<<"Failed Creating Model";
             return false ;
         }
     }
@@ -209,7 +221,7 @@ bool RoadRunner::InitializeModel()
         delete mCVode;
     }
     mCVode = new CvodeInterface(this, mModel);
-    mModel->AssignCVodeInterface(mCVode);
+	mModel->AssignCVodeInterface(mCVode);
 
     reset();
 
@@ -238,7 +250,7 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
     {
         case TSelectionType::clFloatingSpecies:
             dResult = mModel->getConcentration(record.index);
-        break;
+		break;
 
         case TSelectionType::clBoundarySpecies:
             dResult = mModel->bc[record.index];
@@ -267,7 +279,7 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
                     dResult = mModel->gp[record.index];
                 }
             }
-        break;
+		break;
 
         case TSelectionType::clFloatingAmount:
             dResult = mModel->amounts[record.index];
@@ -325,7 +337,7 @@ double RoadRunner::GetNthSelectedOutput(const int& index, const double& dCurrent
     }
     else
     {
-        return GetValueForRecord(record);
+		return GetValueForRecord(record);
     }
 }
 
@@ -383,7 +395,7 @@ DoubleMatrix RoadRunner::runSimulation()
     if (mCVode->HaveVariables())
     {
         int restartResult = mCVode->reStart(mTimeStart, mModel);
-        if (restartResult != 0)
+		if (restartResult != 0)
         {
             throw SBWApplicationException("Error in reStart call to CVODE");
         }
@@ -412,7 +424,7 @@ DoubleMatrix RoadRunner::runSimulation()
 void RoadRunner::DumpResults(TextWriter& writer, DoubleMatrix& data, const StringList& colLabels)
 {
     for (int i = 0; i < colLabels.Count(); i++)
-    {
+	{
         writer.Write(colLabels[i] + "\t");
     }
 
@@ -441,7 +453,7 @@ bool RoadRunner::Simulate()
 
     //Populate simulation result
     DoubleMatrix data;
-    data = simulate();
+	data = simulate();
 
     StringListContainer l = getAvailableSymbols();
     Log(lError)<<l;
@@ -470,7 +482,7 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 
     Log(lDebug5)<<"Loading SBML. SBML model code size: "<<sbml.size();
 
-    loadSBML(sbml);
+	loadSBML(sbml);
 
     DoubleMatrix data;
     data = simulate();
@@ -528,7 +540,7 @@ bool RoadRunner::LoadSBMLFromFile(const string& fileName) //Todo: Gotta make thi
 
 bool RoadRunner::loadSBMLFromFile(const string& fileName)
 {
-    ifstream ifs(fileName.c_str());
+	ifstream ifs(fileName.c_str());
     if(!ifs)
     {
         stringstream msg;
@@ -555,9 +567,9 @@ bool RoadRunner::loadSBML(const string& sbml)
         return false;
     }
 
-    // If the user loads the same model again, don't bother loading into NOM,
-    // just reset the initial conditions
-    if (modelLoaded && mModel != NULL && sbml == mCurrentSBML)
+	// If the user loads the same model again, don't bother loading into NOM,
+	// just reset the initial conditions
+	if (modelLoaded && mModel != NULL && sbml == mCurrentSBML)
     {
         return InitializeModel();
     }
@@ -570,8 +582,6 @@ bool RoadRunner::loadSBML(const string& sbml)
     }
 
     mCurrentSBML 	= sbml;
-
-
     string dllName  = GetDLLName();
 
      //Shall we compile model if it exists?

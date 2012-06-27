@@ -1232,33 +1232,76 @@ double __stdcall steadyState()
   	return -1;
 }
 
+void __stdcall evalModel()
+{
+	try
+	{
+		if(!gRRHandle)
+		{
+			SetAPIError(ALLOCATE_API_ERROR_MSG);
+		}
+		gRRHandle->EvalModel();
+	}
+	catch(Exception& ex)
+	{
+		stringstream msg;
+		msg<<"RoadRunner exception: "<<ex.what()<<endl;
+		SetAPIError(msg.str());
+	}
+}
+
+char* __stdcall getParamPromotedSBML(const char* sArg)
+{
+	try
+	{
+		if(!gRRHandle)
+		{
+			SetAPIError(ALLOCATE_API_ERROR_MSG);
+			return false;
+		}
+
+		string param =  gRRHandle->getParamPromotedSBML(sArg);
+
+		char* text = createText(param.c_str());
+		return text;
+	}
+	catch(Exception& ex)
+	{
+		stringstream msg;
+		msg<<"RoadRunner exception: "<<ex.what()<<endl;
+		SetAPIError(msg.str());
+	}
+	return NULL;
+
+}
+
 RRVectorHandle __stdcall computeSteadyStateValues()
 {
 	try
-    {
-        if(!gRRHandle)
-        {
-            SetAPIError(ALLOCATE_API_ERROR_MSG);
-            return false;
-        }
-        vector<double> vec =  gRRHandle->computeSteadyStateValues();
+	{
+		if(!gRRHandle)
+		{
+			SetAPIError(ALLOCATE_API_ERROR_MSG);
+			return false;
+		}
+		vector<double> vec =  gRRHandle->computeSteadyStateValues();
 
-        RRVector* aVec = createVectorFrom(vec);
-        return aVec;
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        SetAPIError(msg.str());
-    }
+		RRVector* aVec = createVectorFrom(vec);
+		return aVec;
+	}
+	catch(Exception& ex)
+	{
+		stringstream msg;
+		msg<<"RoadRunner exception: "<<ex.what()<<endl;
+		SetAPIError(msg.str());
+	}
 	return NULL;
 }
 
 bool __stdcall setSteadyStateSelectionList(char* list)
 {
 	try
-    {
+	{
         if(!gRRHandle)
         {
             SetAPIError(ALLOCATE_API_ERROR_MSG);
@@ -1490,6 +1533,7 @@ char* __stdcall getMatrixAsString(RRMatrixHandle matrixHandle)
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         SetAPIError(msg.str());
     }
+    return NULL;
 }
 
 void __stdcall printMatrix(RRMatrixHandle matrixHandle)

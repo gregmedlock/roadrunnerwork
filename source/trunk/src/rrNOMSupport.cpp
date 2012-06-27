@@ -2508,44 +2508,51 @@ int NOMSupport::getNumRules()
 //
 //        }
 //
-//        string NOMSupport::getParamPromotedSBML(string sArg)
-//        {
-//            SBMLDocument oSBMLDoc = NULL;
-//            Model oModel = NULL;
-//
-//            oSBMLDoc = libsbml::readSBMLFromString(sArg);
-//            try
-//            {
-//                if (oSBMLDoc.getLevel() == 1)
-//                    oSBMLDoc.setLevelAndVersion(2, 1);
-//                //oSBMLDoc.setLevelAndVersion(2, 1);
-//                oModel = oSBMLDoc.getModel();
-//
-//                if (oModel == NULL)
-//                {
-//                    throw Exception("SBML Validation failed");
-//                }
-//                else
-//                {
-//                    modifyKineticLaws(oSBMLDoc, oModel);
-//
-//                    changeTimeSymbol(oModel, "time");
-//
-//                    return libsbml::writeSBMLToString(oSBMLDoc);
-//                }
-//            }
-//            finally
-//            {
-//                GC.Collect();
-//                if (oSBMLDoc != NULL)
-//                    oSBMLDoc.Dispose();
-//            }
-//        }
-//
+string NOMSupport::getParamPromotedSBML(const string& sArg)
+{
+	SBMLDocument *oSBMLDoc = NULL;
+	Model *oModel = NULL;
+
+	oSBMLDoc = libsbml::readSBMLFromString(sArg.c_str());
+	try
+	{
+		if (oSBMLDoc->getLevel() == 1)
+		{
+			oSBMLDoc->setLevelAndVersion(2, 1);
+		}
+
+		//oSBMLDoc.setLevelAndVersion(2, 1);
+		oModel = oSBMLDoc->getModel();
+
+		if (oModel == NULL)
+		{
+			throw Exception("SBML Validation failed");
+		}
+		else
+		{
+			modifyKineticLaws(*oSBMLDoc, *oModel);
+			changeTimeSymbol(*oModel, "time");
+			return libsbml::writeSBMLToString(oSBMLDoc);
+		}
+	}
+	catch(const Exception &e)
+	{
+
+	}
+//    finally
+//	{
+//		GC.Collect();
+//		if (oSBMLDoc != NULL)
+//		{
+//			*oSBMLDoc.Dispose();
+//		}
+//	}
+}
+
 void NOMSupport::modifyKineticLawsForLocalParameters(KineticLaw& oLaw, const string& reactionId, Model& oModel)
 {
-    int numLocalParameters = (int)oLaw.getNumLocalParameters();
-    if (numLocalParameters > 0)
+	int numLocalParameters = (int)oLaw.getNumLocalParameters();
+	if (numLocalParameters > 0)
     {
         StringCollection oList;// = new StringCollection();
         for (int j = numLocalParameters; j > 0; j--)

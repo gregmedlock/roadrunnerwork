@@ -82,17 +82,20 @@ set_property(TARGET ${target}
                             ) 
 
 #libraries to link with our shared lib
+if(${MINGW})
+target_link_libraries (${target}    
+                                    libsbml
+                                    sundials_cvode
+                                    sundials_nvecserial
+                                    liblapack.dll.a
+)
+else()
 target_link_libraries (${target}    
                                     libsbml-static
                                     sundials_cvode
                                     sundials_nvecserial
                                     blas
                                     lapack
-                      )
-if(${MINGW})
-
-else()
-target_link_libraries (${target}
                                     libf2c
                       )
 endif()
