@@ -1807,83 +1807,100 @@ double RoadRunner::getVariableValue(const TVariableType& variableType, const int
 //        }
 //
 //        Help("Returns the Symbols of all Flux Control Coefficients.")
-//        ArrayList RoadRunner::getFluxControlCoefficientNames()
-//        {
-//            var oResult = new ArrayList();
-//            if (!modelLoaded) return oResult;
-//
-//            ArrayList oReactions = getReactionNames();
-//            ArrayList oParameters = mModelGenerator->getGlobalParameterList();
-//            ArrayList oBoundary = mModelGenerator->getBoundarySpeciesList();
-//            ArrayList oConservation = mModelGenerator->getConservationList();
-//
-//            foreach (string s in oReactions)
-//            {
-//                var oCCReaction = new ArrayList();
-//                var oInner = new ArrayList();
-//                oCCReaction.Add(s);
-//
-//                foreach (string sParameter in oParameters)
-//                {
-//                    oInner.Add("CC:" + s + "," + sParameter);
-//                }
-//
-//                foreach (string sBoundary in oBoundary)
-//                {
-//                    oInner.Add("CC:" + s + "," + sBoundary);
-//                }
-//
-//                foreach (string sConservation in oConservation)
-//                {
-//                    oInner.Add("CC:" + s + "," + sConservation);
-//                }
-//
-//                oCCReaction.Add(oInner);
-//                oResult.Add(oCCReaction);
-//            }
-//
-//            return oResult;
-//        }
-//
+ArrayList RoadRunner::getFluxControlCoefficientNames()
+{
+    ArrayList oResult;// = new ArrayList();
+    if (!modelLoaded)
+    {
+        return oResult;
+    }
+
+    StringList oReactions = getReactionNames();
+    StringList oParameters = mModelGenerator->getGlobalParameterList();
+    StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
+    StringList oConservation = mModelGenerator->getConservationList();
+
+//    foreach (string s in oReactions)
+    for(int i = 0; i < oReactions.Count(); i++)
+    {
+        string s = oReactions[i];
+
+        ArrayList oCCReaction;// = new ArrayList();
+        ArrayList oInner;// = new ArrayList();
+        oCCReaction.Add(s);
+
+        //foreach (string sParameter in oParameters)
+        for(int i = 0; i < oParameters.Count(); i++)
+        {
+            oInner.Add("CC:" + s + "," + oParameters[i]);
+        }
+
+//        foreach (string sBoundary in oBoundary)
+        for(int i = 0; i < oBoundary.Count(); i++)
+        {
+            oInner.Add("CC:" + s + "," + oBoundary[i]);
+        }
+
+//        foreach (string sConservation in oConservation)
+        for(int i = 0; i < oConservation.Count(); i++)
+        {
+            oInner.Add("CC:" + s + "," + oConservation[i]);
+        }
+
+        oCCReaction.Add(oInner);
+        oResult.Add(oCCReaction);
+    }
+
+    return oResult;
+}
+
 //        Help("Returns the Symbols of all Concentration Control Coefficients.")
-//        ArrayList RoadRunner::getConcentrationControlCoefficientNames()
-//        {
-//            var oResult = new ArrayList();
-//            if (!modelLoaded) return oResult;
-//
-//            ArrayList oFloating = getFloatingSpeciesNames();
-//            ArrayList oParameters = mModelGenerator->getGlobalParameterList();
-//            ArrayList oBoundary = mModelGenerator->getBoundarySpeciesList();
-//            ArrayList oConservation = mModelGenerator->getConservationList();
-//
-//            foreach (string s in oFloating)
-//            {
-//                var oCCFloating = new ArrayList();
-//                var oInner = new ArrayList();
-//                oCCFloating.Add(s);
-//
-//                foreach (string sParameter in oParameters)
-//                {
-//                    oInner.Add("CC:" + s + "," + sParameter);
-//                }
-//
-//                foreach (string sBoundary in oBoundary)
-//                {
-//                    oInner.Add("CC:" + s + "," + sBoundary);
-//                }
-//
-//                foreach (string sConservation in oConservation)
-//                {
-//                    oInner.Add("CC:" + s + "," + sConservation);
-//                }
-//
-//                oCCFloating.Add(oInner);
-//                oResult.Add(oCCFloating);
-//            }
-//
-//            return oResult;
-//        }
-//
+ArrayList RoadRunner::getConcentrationControlCoefficientNames()
+{
+    ArrayList oResult;// = new ArrayList();
+    if (!mModel)
+    {
+        return oResult;
+    }
+
+    StringList oFloating = getFloatingSpeciesNames();
+    StringList oParameters = mModelGenerator->getGlobalParameterList();
+    StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
+    StringList oConservation = mModelGenerator->getConservationList();
+
+//    foreach (string s in oFloating)
+    for(int i = 0; i < oFloating.Count(); i++)
+    {
+        string s = oFloating[i];
+        ArrayList oCCFloating;// = new ArrayList();
+        ArrayList oInner;// = new ArrayList();
+        oCCFloating.Add(s);
+
+//        foreach (string sParameter in oParameters)
+        for(int i = 0; i < oParameters.Count(); i++)
+        {
+            oInner.Add("CC:" + s + "," + oParameters[i]);
+        }
+
+        //foreach (string sBoundary in oBoundary)
+        for(int i = 0; i < oBoundary.Count(); i++)
+        {
+            oInner.Add("CC:" + s + "," + oBoundary[i]);
+        }
+
+        //foreach (string sConservation in oConservation)
+        for(int i = 0; i < oConservation.Count(); i++)
+        {
+            oInner.Add("CC:" + s + "," + oConservation[i]);
+        }
+
+        oCCFloating.Add(oInner);
+        oResult.Add(oCCFloating);
+    }
+
+    return oResult;
+}
+
 //        Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")
 //        ArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
 //        {
@@ -2650,24 +2667,26 @@ double RoadRunner::getReactionRate(const int& index)
 }
 //
 //        Help("Returns the rate of changes of a species by its index")
-//double RoadRunner::getRateOfChange(const int& index)
-//{
-//    if (!modelLoaded)
-//    {
-//        throw SBWApplicationException(emptyModelStr);
-//    }
-//
-//    if ((index >= 0) && (index < mModel->getNumTotalVariables()))
-//    {
-//        mModel->computeAllRatesOfChange();
-//        return mModel->dydt[index];
-//    }
-//    throw SBWApplicationException(Format("Index in getRateOfChange out of range: [{0}]", index));
-//}
+double RoadRunner::getRateOfChange(const int& index)
+{
+    if (!mModel)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    if ((index >= 0) && (index < mModel->getNumTotalVariables()))
+    {
+        mModel->computeAllRatesOfChange();
+        return mModel->dydt[index];
+    }
+
+    throw SBWApplicationException(Format("Index in getRateOfChange out of range: [{0}]", index));
+}
+
 //        Help("Returns the rates of changes given an array of new floating species concentrations")
 //        double[] RoadRunner::getRatesOfChangeEx(double[] values)
 //        {
-//            if (!modelLoaded)
+//            if (!mModel)
 //                throw SBWApplicationException(emptyModelStr);
 //            mModel->y = values;
 //            mModel->evalModel(0.0, BuildModelEvalArgument());
@@ -2677,7 +2696,7 @@ double RoadRunner::getReactionRate(const int& index)
 //        Help("Returns the rates of changes given an array of new floating species concentrations")
 //        double[] RoadRunner::getReactionRatesEx(double[] values)
 //        {
-//            if (!modelLoaded)
+//            if (!mModel)
 //                throw SBWApplicationException(emptyModelStr);
 //
 //            mModel->computeReactionRates(0.0, values);
@@ -2696,37 +2715,53 @@ double RoadRunner::getReactionRate(const int& index)
 //        }
 //
 //        Help("Get the number of compartments")
-//        int RoadRunner::getNumberOfCompartments()
-//        {
-//            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
-//            return mModel->getNumCompartments;
-//        }
-//
+int RoadRunner::getNumberOfCompartments()
+{
+    if (!mModel)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+    return mModel->getNumCompartments();
+}
+
 //        Help("Sets the value of a compartment by its index")
-//        void RoadRunner::setCompartmentByIndex(int index, double value)
-//        {
-//            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
-//
-//            if ((index >= 0) && (index < mModel->getNumCompartments))
-//                mModel->c[index] = value;
-//            else
-//                throw SBWApplicationException(String.Format("Index in getCompartmentByIndex out of range: [{0}]", index));
-//        }
-//
+void RoadRunner::setCompartmentByIndex(const int& index, const double& value)
+{
+    if (!mModel)
+    {
+         throw SBWApplicationException(emptyModelStr);
+    }
+
+    if ((index >= 0) && (index < mModel->getNumCompartments()))
+    {
+        mModel->c[index] = value;
+    }
+    else
+    {
+        throw SBWApplicationException(Format("Index in getCompartmentByIndex out of range: [{0}]", index));
+    }
+}
+
 //        Help("Returns the value of a compartment by its index")
-//        double RoadRunner::getCompartmentByIndex(int index)
-//        {
-//            if (!modelLoaded)
-//                throw SBWApplicationException(emptyModelStr);
-//            if ((index >= 0) && (index < mModel->getNumCompartments))
-//                return mModel->c[index];
-//            throw (new SBWApplicationException(String.Format("Index in getCompartmentByIndex out of range: [{0}]", index)));
-//        }
+double RoadRunner::getCompartmentByIndex(const int& index)
+{
+    if (!mModel)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    if ((index >= 0) && (index < mModel->getNumCompartments()))
+    {
+        return mModel->c[index];
+    }
+
+    throw SBWApplicationException(Format("Index in getCompartmentByIndex out of range: [{0}]", index));
+}
 //
 //        Help("Returns the value of a compartment by its index")
 //        void RoadRunner::setCompartmentVolumes(double[] values)
 //        {
-//            if (!modelLoaded)
+//            if (!mModel)
 //                throw SBWApplicationException(emptyModelStr);
 //            if (values.Length < mModel->getNumCompartments)
 //                mModel->c = values;
@@ -2737,7 +2772,7 @@ double RoadRunner::getReactionRate(const int& index)
 //        Help("Get the number of boundary species")
 int RoadRunner::getNumberOfBoundarySpecies()
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw Exception(emptyModelStr);
     }
@@ -2747,7 +2782,7 @@ int RoadRunner::getNumberOfBoundarySpecies()
 //        Help("Sets the value of a boundary species by its index")
 void RoadRunner::setBoundarySpeciesByIndex(const int& index, const double& value)
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw Exception(emptyModelStr);
     }
@@ -2765,7 +2800,7 @@ void RoadRunner::setBoundarySpeciesByIndex(const int& index, const double& value
 //        Help("Returns the value of a boundary species by its index")
 double RoadRunner::getBoundarySpeciesByIndex(const int& index)
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw Exception(emptyModelStr);
     }
@@ -2779,7 +2814,7 @@ double RoadRunner::getBoundarySpeciesByIndex(const int& index)
 //        Help("Returns an array of boundary species concentrations")
 //        double[] RoadRunner::getBoundarySpeciesConcentrations()
 //        {
-//            if (!modelLoaded)
+//            if (!mModel)
 //                throw SBWApplicationException(emptyModelStr);
 //            return mModel->bc;
 //        }
@@ -2787,7 +2822,7 @@ double RoadRunner::getBoundarySpeciesByIndex(const int& index)
 //        Help("Set the concentrations for all boundary species in the model")
 //        void RoadRunner::setBoundarySpeciesConcentrations(double[] values)
 //        {
-//            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
+//            if (!mModel) throw SBWApplicationException(emptyModelStr);
 //
 //            mModel->bc = values;
 //        }
@@ -2795,7 +2830,7 @@ double RoadRunner::getBoundarySpeciesByIndex(const int& index)
 //        Help("Gets the list of boundary species names")
 StringList RoadRunner::getBoundarySpeciesNames()
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -2819,7 +2854,7 @@ StringList RoadRunner::getBoundarySpeciesAmountNames()
 //        Help("Get the number of floating species")
 int RoadRunner::getNumberOfFloatingSpecies()
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -2830,7 +2865,7 @@ int RoadRunner::getNumberOfFloatingSpecies()
 //        Help("Sets the value of a floating species by its index")
 void RoadRunner::setFloatingSpeciesByIndex(const int& index, const double& value)
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -2852,7 +2887,7 @@ void RoadRunner::setFloatingSpeciesByIndex(const int& index, const double& value
 //        Help("Returns the value of a floating species by its index")
 double RoadRunner::getFloatingSpeciesByIndex(const int& index)
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -2867,7 +2902,7 @@ double RoadRunner::getFloatingSpeciesByIndex(const int& index)
 //        Help("Returns an array of floating species concentrations")
 //        double[] RoadRunner::getFloatingSpeciesConcentrations()
 //        {
-//            if (!modelLoaded)
+//            if (!mModel)
 //                throw SBWApplicationException(emptyModelStr);
 //
 //            mModel->convertToConcentrations();
@@ -2877,7 +2912,7 @@ double RoadRunner::getFloatingSpeciesByIndex(const int& index)
 //        Help("returns an array of floating species initial conditions")
 vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -2891,7 +2926,7 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 //        Help("Set the concentrations for all floating species in the model")
 //        void RoadRunner::setFloatingSpeciesConcentrations(double[] values)
 //        {
-//            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
+//            if (!mModel) throw SBWApplicationException(emptyModelStr);
 //
 //            mModel->y = values;
 //            // Update the amounts vector at the same time
@@ -2902,7 +2937,7 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 //        Help("Sets the value of a floating species by its index")
 //        void RoadRunner::setFloatingSpeciesInitialConcentrationByIndex(int index, double value)
 //        {
-//            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
+//            if (!mModel) throw SBWApplicationException(emptyModelStr);
 //
 //            if ((index >= 0) && (index < mModel->init_y.Length))
 //            {
@@ -2916,7 +2951,7 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 //        Help("Sets the initial conditions for all floating species in the model")
 //        void RoadRunner::setFloatingSpeciesInitialConcentrations(double[] values)
 //        {
-//            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
+//            if (!mModel) throw SBWApplicationException(emptyModelStr);
 //
 //            mModel->init_y = values;
 //            reset();
@@ -2927,7 +2962,7 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 //Help("Returns a list of floating species names")
 StringList RoadRunner::getFloatingSpeciesNames()
 {
-    if (!modelLoaded)
+    if (!mModel)
         throw SBWApplicationException(emptyModelStr);
 
     return mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
@@ -2936,7 +2971,7 @@ StringList RoadRunner::getFloatingSpeciesNames()
 //        Help("Returns a list of floating species initial condition names")
 StringList RoadRunner::getFloatingSpeciesInitialConditionNames()
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -2967,7 +3002,7 @@ StringList RoadRunner::getFloatingSpeciesAmountNames()
 //        Help("Get the number of global parameters")
 int RoadRunner::getNumberOfGlobalParameters()
 {
-    if (!modelLoaded) 
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -2977,7 +3012,7 @@ int RoadRunner::getNumberOfGlobalParameters()
 //        Help("Sets the value of a global parameter by its index")
 void RoadRunner::setGlobalParameterByIndex(const int& index, const double& value)
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -3004,7 +3039,7 @@ void RoadRunner::setGlobalParameterByIndex(const int& index, const double& value
 //        Help("Returns the value of a global parameter by its index")
 double RoadRunner::getGlobalParameterByIndex(const int& index)
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -3037,7 +3072,7 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
 //        Help("Set the values for all global parameters in the model")
 //        void RoadRunner::setGlobalParameterValues(double[] values)
 //        {
-//            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
+//            if (!mModel) throw SBWApplicationException(emptyModelStr);
 //            if (values.Length == mModel->gp.Length)
 //                mModel->gp = values;
 //            else
@@ -3058,7 +3093,7 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
 //        Help("Get the values for all global parameters in the model")
 //        double[] RoadRunner::getGlobalParameterValues()
 //        {
-//            if (!modelLoaded)
+//            if (!mModel)
 //                throw SBWApplicationException(emptyModelStr);
 //            if (mModel->ct.Length > 0)
 //            {
@@ -3073,7 +3108,7 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
 //        Help("Gets the list of parameter names")
 StringList RoadRunner::getGlobalParameterNames()
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -3083,7 +3118,7 @@ StringList RoadRunner::getGlobalParameterNames()
 //        Help("Returns a list of global parameter tuples: { {parameter Name, value},...")
 //        ArrayList RoadRunner::getAllGlobalParameterTupleList()
 //        {
-//            if (!modelLoaded)
+//            if (!mModel)
 //                throw SBWApplicationException(emptyModelStr);
 //
 //            var tupleList = new ArrayList();
@@ -3274,7 +3309,7 @@ double RoadRunner::getCC(const string& variableName, const string& parameterName
     int parameterIndex;
     //double originalParameterValue;
 
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -3380,7 +3415,7 @@ double RoadRunner::getUnscaledSpeciesElasticity(int reactionId, int speciesIndex
 //            )]
 //        double getUnScaledElasticity(string reactionName, string parameterName)
 //        {
-//            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
+//            if (!mModel) throw SBWApplicationException(emptyModelStr);
 //            double f1, f2, fi, fi2, fd, fd2;
 //            double hstep;
 //
@@ -3699,7 +3734,7 @@ LIB_LA::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
 //            double originalParameterValue;
 //            TParameterType parameterType;
 //
-//            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
+//            if (!mModel) throw SBWApplicationException(emptyModelStr);
 //            mModel->convertToConcentrations();
 //            mModel->computeReactionRates(mModel->GetTime(), mModel->y);
 //
@@ -4406,7 +4441,7 @@ string RoadRunner::getSBML()
 //        Help("Set the time start for the simulation")
 void RoadRunner::setTimeStart(const double& startTime)
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -4422,7 +4457,7 @@ void RoadRunner::setTimeStart(const double& startTime)
 //Help("Set the time end for the simulation")
 void RoadRunner::setTimeEnd(const double& endTime)
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -4451,7 +4486,7 @@ void RoadRunner::setNumPoints(const int& pts)
 //            )
 void RoadRunner::changeInitialConditions(const vector<double>& ic)
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -4475,7 +4510,7 @@ void RoadRunner::changeInitialConditions(const vector<double>& ic)
 //        {
 //            try
 //            {
-//                if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
+//                if (!mModel) throw SBWApplicationException(emptyModelStr);
 //
 //                reset(); // reset back to initial conditions
 //
@@ -4500,7 +4535,7 @@ void RoadRunner::changeInitialConditions(const vector<double>& ic)
 //        Help("Returns the current vector of reactions rates")
 vector<double> RoadRunner::getReactionRates()
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -4515,7 +4550,7 @@ vector<double> RoadRunner::getReactionRates()
 //        Help("Returns the current vector of rates of change")
 vector<double> RoadRunner::getRatesOfChange()
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -4532,7 +4567,7 @@ vector<double> RoadRunner::getRatesOfChange()
 //
 //        ArrayList RoadRunner::getSpeciesNames()
 //        {
-//            if (!modelLoaded)
+//            if (!mModel)
 //                throw SBWApplicationException(emptyModelStr);
 //
 //            return mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
@@ -4541,7 +4576,7 @@ vector<double> RoadRunner::getRatesOfChange()
 //        Help("Returns a list of reaction names")
 StringList RoadRunner::getReactionNames()
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
@@ -4618,7 +4653,7 @@ StringList RoadRunner::getReactionNames()
 //        Help("Sets the value of the given species or global parameter to the given value (not of local parameters)")
 bool RoadRunner::setValue(const string& sId, const double& dValue)
 {
-    if (!modelLoaded)
+    if (!mModel)
     {
         Log(lError)<<emptyModelStr;
         return false;
@@ -4678,7 +4713,7 @@ bool RoadRunner::setValue(const string& sId, const double& dValue)
 }
 //        void RoadRunner::setValue(string sId, double dValue)
 //        {
-//            if (!modelLoaded)
+//            if (!mModel)
 //                throw SBWApplicationException(emptyModelStr);
 //
 //
@@ -4733,7 +4768,7 @@ bool RoadRunner::setValue(const string& sId, const double& dValue)
 //        Help("Gets the Value of the given species or global parameter (not of local parameters)")
 double RoadRunner::getValue(const string& sId)
 {
-    if (!modelLoaded)
+    if (!mModel)
         throw SBWApplicationException(emptyModelStr);
 
     int nIndex = 0;
@@ -4823,7 +4858,7 @@ double RoadRunner::getValue(const string& sId)
 //        Help("Gets the Value of the given species or global parameter (not of local parameters)")
 //        double RoadRunner::getValue(string sId)
 //        {
-//            if (!modelLoaded)
+//            if (!mModel)
 //                throw SBWApplicationException(emptyModelStr);
 //
 //            int nIndex = 0;
@@ -4913,7 +4948,7 @@ StringListContainer RoadRunner::getAvailableSymbols()
 {
     StringListContainer oResult;
 
-    if (!modelLoaded)
+    if (!mModel)
     {
         return oResult;
     }

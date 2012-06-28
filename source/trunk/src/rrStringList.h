@@ -28,7 +28,7 @@ class RR_DECLSPEC StringList : public rrObject
 
         void                        Label(const string& lbl){mLabel = lbl;}
         void                        Add(const string& str);
-        string                      AsString(const string& delimiter = ",");
+        string                      AsString(const string& delimiter = ",") const;
         int                         size() const {return mStrings.size();}
         int                         Count() const {return mStrings.size();}
         void                        operator=(const StringList& rhs);

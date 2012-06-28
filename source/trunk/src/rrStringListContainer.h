@@ -29,15 +29,16 @@ class RR_DECLSPEC StringListContainer : public rrObject
         void                            Add(const StringList& coll);
         void                            Add(const string& coll);
         void                            Add(const int& coll);
-        int                             size() const ;
         int                             Count() const;
+        int                             ListCount() const;
+        int                             TotalCount() const;
         StringList&                     operator[](const int& index);
+        const StringList&               operator[](const int& index) const;
         vector<StringList>::iterator    begin();
         vector<StringList>::iterator    end();
 };
 
-ostream& operator<<(ostream& stream, StringListContainer& list);
-ostringstream& operator<<(ostringstream& stream, StringListContainer& list);
+ostream& operator<<(ostream& stream, const StringListContainer& list);
 
 typedef StringListContainer ArrayList; //ArrayList is C# name..
 typedef StringListContainer StringCollection;

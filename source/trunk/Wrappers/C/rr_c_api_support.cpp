@@ -83,4 +83,50 @@ void setError(const string& err)
     return true;
 }
 
+RRStringList* createList(const StringList& sList)
+{
+    if(!sList.Count())
+    {
+        return NULL;
+    }
+
+    RRStringList* list = new RRStringList;
+    list->Count = sList.size();
+
+    list->String = new char*[list->Count];
+
+    for(int i = 0; i < list->Count; i++)
+    {
+        list->String[i] = new char[sList[i].size()];
+        strcpy(list->String[i], sList[i].c_str());
+    }
+    return list;
+}
+
+RRStringList* createList(const ArrayList& arrList)
+{
+
+    if(!arrList.Count())
+    {
+        return NULL;
+    }
+
+    RRStringListHandle list = new RRStringList;
+    list->Count = arrList.TotalCount();
+    list->String = new char*[arrList.TotalCount()];
+
+    int itemCount = 0;
+    for(int i = 0; i < arrList.ListCount(); i++)
+    {
+        StringList subList = arrList[i];
+        for(int j = 0; j < subList.Count(); j++)
+        {
+            string item = subList[j].c_str();
+            list->String[itemCount] = new char[item.size()+1];
+            strcpy(list->String[itemCount++], item.c_str());
+        }
+    }
+    return list;
+}
+
 }

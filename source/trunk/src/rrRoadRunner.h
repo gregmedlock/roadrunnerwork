@@ -186,8 +186,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		//static void                     GetInverse(Matrix T2, Matrix Inv);
 
 		void                            computeContinuation(const double& stepSize, const int& independentVariable, const string& parameterTypeStr);
-		StringList                      getFluxControlCoefficientNames();
-		StringList                      getConcentrationControlCoefficientNames();
+		ArrayList                       getFluxControlCoefficientNames();
+		ArrayList                       getConcentrationControlCoefficientNames();
 		StringList                      getUnscaledConcentrationControlCoefficientNames();
 		ArrayList                       getElasticityCoefficientNames();
 		ArrayList                       getUnscaledElasticityCoefficientNames();

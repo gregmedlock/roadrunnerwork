@@ -35,7 +35,7 @@ StringList::StringList(const StringList& cp)
     mStrings = cp.mStrings;
 }
 
-string StringList::AsString(const string& delimiter)
+string StringList::AsString(const string& delimiter) const
 {
     stringstream names;
     for(int i = 0; i < mStrings.size(); i++)

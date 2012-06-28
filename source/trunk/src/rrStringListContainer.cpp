@@ -36,7 +36,18 @@ StringListContainer::StringListContainer(const StringList& cp)
 //
 //}
 
-int StringListContainer::size() const
+int StringListContainer::TotalCount() const
+{
+    //Returns the total count of all list items..
+    int cnt = 0;
+    for(int i = 0; i < Count(); i++)
+    {
+        cnt += mContainer[i].Count();
+    }
+    return cnt;
+}
+
+int StringListContainer::ListCount() const
 {
     return mContainer.size();
 }
@@ -47,6 +58,11 @@ int StringListContainer::Count() const
 }
 
 StringList& StringListContainer::operator[](const int& index)
+{
+    return mContainer[index];
+}
+
+const StringList& StringListContainer::operator[](const int& index) const
 {
     return mContainer[index];
 }
@@ -69,7 +85,7 @@ void StringListContainer::Add(const string& lbl, const StringListContainer& list
 
 void StringListContainer::Add(const StringListContainer& lists)
 {
-    for(int i = 0; i < lists.size(); i++)
+    for(int i = 0; i < lists.Count(); i++)
     {
         StringList aList;
         aList = lists.mContainer[i];    //Todo: lists[i] should work...
@@ -102,28 +118,16 @@ void StringListContainer::Add(const int& atPos)
 
 }
 
-//ostream& operator<<(ostream& stream, StringListContainer& list)
-//{
-//    vector<string>::iterator iter;
-//    int count = 0;
-//    for(iter = list.begin(); iter != list.end(); iter++)
-//    {
-//        stream<<"List Item "<<++count<<" : "<<(*iter)<<std::endl;
-//    }
-//    return stream;
-//}
-
-ostringstream& operator<<(ostringstream& stream, StringListContainer& list)
+ostream& operator<<(ostream& stream, const StringListContainer& list)
 {
     vector<StringList>::iterator iter;
-    int count = 0;
-    for(iter = list.begin(); iter != list.end(); iter++)
+    for(int  i = 0; i < list.Count(); i++)
     {
-        stream<<"Label: " <<(*iter).mLabel<<std::endl;
+        string item = list[i].AsString();
+        stream<<"List Item "<<i+1<<" : "<<item<<endl;
     }
     return stream;
 }
-
 
 }
 

@@ -53,6 +53,19 @@ extern "C"
 #include "rr_c_api_exporter.h"
 #include "rr_c_types.h"
 
+//The latest....
+C_DECL_SPEC RRStringListHandle      __stdcall   getEigenValueNames();
+C_DECL_SPEC RRStringListHandle      __stdcall   getFluxControlCoefficientNames();
+C_DECL_SPEC RRStringListHandle      __stdcall   getConcentrationControlCoefficientNames();
+C_DECL_SPEC RRStringListHandle      __stdcall   getElasticityNames();
+C_DECL_SPEC int                     __stdcall   getNumberOfCompartments ();
+C_DECL_SPEC bool                    __stdcall   getCompartmentByIndex (const int& index, double& value);
+C_DECL_SPEC bool                    __stdcall   setCompartmentByIndex (const int& index, const double& value);
+C_DECL_SPEC RRStringListHandle      __stdcall   getCompartmentNames();
+C_DECL_SPEC bool                    __stdcall   getRateOfChange(const int&, double& value) ;
+
+
+
 // RoadRunner API
 C_DECL_SPEC RRHandle                __stdcall   getRRInstance();
 C_DECL_SPEC char*                   __stdcall   getBuildDate();
@@ -146,10 +159,10 @@ C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();
 C_DECL_SPEC RRMatrixHandle          __stdcall   getScaledElasticityMatrix();
 
 // Print/format functions
-C_DECL_SPEC char*                   __stdcall   getResultAsString(const RRResultHandle result);
-C_DECL_SPEC char*                   __stdcall   getMatrixAsString(const RRMatrixHandle mat);
+C_DECL_SPEC char*                   __stdcall   printResult(const RRResultHandle result);
 C_DECL_SPEC char*                   __stdcall   printMatrix(const RRMatrixHandle mat);
 C_DECL_SPEC char*                   __stdcall   printVector(const RRVectorHandle vec);
+C_DECL_SPEC char*                   __stdcall   printStringList(const RRStringListHandle list);
 
 // Free memory functions
 C_DECL_SPEC bool                    __stdcall   freeRRInstance(RRHandle handle);

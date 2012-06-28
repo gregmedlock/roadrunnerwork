@@ -363,16 +363,7 @@ RRStringListHandle __stdcall getSelectionList()
             return NULL;
         }
 
-        RRStringListHandle list = new RRStringList;
-        list->Count = sNames.size();
-        list->String = new char*[list->Count];
-
-        for(int i = 0; i < list->Count; i++)
-        {
-            list->String[i] = new char[sNames[i].size()];
-            strcpy(list->String[i], sNames[i].c_str());
-        }
-        return list;
+        return createList(sNames);
     }
     catch(Exception& ex)
     {
@@ -469,16 +460,8 @@ RRStringListHandle __stdcall getReactionNames()
             return NULL;
         }
 
-        RRStringListHandle list = new RRStringList;
-        list->Count = rNames.size();
-        list->String = new char*[list->Count];
 
-        for(int i = 0; i < list->Count; i++)
-        {
-            list->String[i] = new char[rNames[i].size()];
-            strcpy(list->String[i], rNames[i].c_str());
-        }
-        return list;
+        return createList(rNames);
     }
     catch(Exception& ex)
     {
@@ -543,16 +526,7 @@ RRStringListHandle __stdcall getRatesOfChangeNames()
             return NULL;
         }
 
-        RRStringListHandle list = new RRStringList;
-        list->Count = rNames.size();
-        list->String = new char*[list->Count];
-
-        for(int i = 0; i < list->Count; i++)
-        {
-            list->String[i] = new char[rNames[i].size()];
-            strcpy(list->String[i], rNames[i].c_str());
-        }
-        return list;
+        return createList(rNames);
     }
     catch(Exception& ex)
     {
@@ -800,16 +774,7 @@ RRStringListHandle __stdcall getBoundarySpeciesNames()          // <- treat char
             return NULL;
         }
 
-        RRStringListHandle list = new RRStringList;
-        list->Count = bNames.size();
-        list->String = new char*[list->Count];
-
-        for(int i = 0; i < list->Count; i++)
-        {
-            list->String[i] = new char[bNames[i].size()];
-            strcpy(list->String[i], bNames[i].c_str());
-        }
-        return list;
+        return createList(bNames);
     }
     catch(Exception& ex)
     {
@@ -857,17 +822,7 @@ RRStringListHandle __stdcall getFloatingSpeciesNames()
             return NULL;
         }
 
-        RRStringListHandle list = new RRStringList;
-        list->Count = fNames.size();
-        list->String = new char*[list->Count];
-
-        for(int i = 0; i < list->Count; i++)
-        {
-            list->String[i] = new char[fNames[i].size()];
-            strcpy(list->String[i], fNames[i].c_str());
-        }
-
-        return list;
+        return createList(fNames);
     }
     catch(Exception& ex)
     {
@@ -914,16 +869,7 @@ RRStringListHandle __stdcall getGlobalParameterNames()
             return NULL;
         }
 
-        RRStringListHandle list = new RRStringList;
-        list->Count = pNames.size();
-        list->String = new char*[list->Count];
-
-        for(int i = 0; i < list->Count; i++)
-        {
-            list->String[i] = new char[pNames[i].size()];
-            strcpy(list->String[i], pNames[i].c_str());
-        }
-        return list;
+        return createList(pNames);
     }
     catch(Exception& ex)
     {
@@ -1395,17 +1341,7 @@ RRStringListHandle __stdcall getSteadyStateSelectionList()
             return NULL;
         }
 
-        RRStringListHandle list = new RRStringList;
-        list->Count = sNames.size();
-        list->String = new char*[list->Count];
-
-        for(int i = 0; i < list->Count; i++)
-        {
-            list->String[i] = new char[sNames[i].size()];
-            strcpy(list->String[i], sNames[i].AsString().c_str());
-        }
-
-        return list;
+        return createList(sNames);
     }
     catch(Exception& ex)
     {
@@ -1504,11 +1440,240 @@ RRCCode* __stdcall getCCode()
 	return NULL;
 }
 
-//Print functions ==========================================================
-char* __stdcall getResultAsString(const RRResultHandle result)
+//The latest..
+RRStringListHandle __stdcall getEigenValueNames()
 {
 	try
     {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        StringList aList = gRRHandle->getEigenValueNames();
+        return createList(aList);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+RRStringListHandle __stdcall getFluxControlCoefficientNames()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        return createList(gRRHandle->getFluxControlCoefficientNames());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+RRStringListHandle __stdcall getConcentrationControlCoefficientNames()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        return createList(gRRHandle->getConcentrationControlCoefficientNames());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+RRStringListHandle __stdcall getElasticityNames()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        return createList(gRRHandle->getElasticityCoefficientNames());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+int __stdcall getNumberOfCompartments()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        return gRRHandle->getNumberOfCompartments();
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return -1;
+}
+
+bool __stdcall getCompartmentByIndex(const int& index, double& value)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        value = gRRHandle->getCompartmentByIndex(index);
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return false;
+}
+
+bool __stdcall setCompartmentByIndex (const int& index, const double& value)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        gRRHandle->setCompartmentByIndex(index, value);
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return false;
+}
+
+RRStringListHandle __stdcall getCompartmentNames()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        return createList(gRRHandle->getCompartmentNames());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+bool __stdcall getRateOfChange(const int& index, double& value)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        value = gRRHandle->getRateOfChange(index);
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return false;
+}
+
+
+
+//Print functions ==========================================================
+char* __stdcall  printStringList(const RRStringListHandle list)
+{
+	try
+    {
+        if(!list)
+        {
+            return NULL;
+        }
+
+		stringstream resStr;
+		//RRResult is a 2D matrix, and column headers (strings)
+        //First header....
+	    for(int i = 0; i < list->Count; i++)
+        {
+        	resStr<<list->String[i];;
+            if(i < list->Count -1)
+            {
+            	resStr <<endl;
+            }
+        }
+
+		string strTmp = resStr.str();
+    	char* resultChar = new char[strTmp.size() + 1];
+        strcpy(resultChar, strTmp.c_str());
+        return resultChar;
+
+    }
+    catch(Exception& ex)
+    {
+        stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+char* __stdcall printResult(const RRResultHandle result)
+{
+
+	try
+    {
+        if(!result)
+        {
+            return NULL;
+        }
 		stringstream resStr;
 		//RRResult is a 2D matrix, and column headers (strings)
         //First header....

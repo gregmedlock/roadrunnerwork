@@ -107,8 +107,27 @@ int main(int argc, char* argv[])
 
     cout<<getSBML()<<endl;
 
-    cout<<printMatrix(getScaledElasticityMatrix());
+    cout<<printMatrix(getScaledElasticityMatrix());     //How to free, when doing something like this??
+    cout<<printStringList(getEigenValueNames());
 
+    cout<<printStringList(getFluxControlCoefficientNames())<<endl;
+    cout<<printStringList(getConcentrationControlCoefficientNames())<<endl;
+    cout<<printStringList(getElasticityNames())<<endl;
+
+    cout<<"Nr of Compartments: "<<getNumberOfCompartments()<<endl;
+    setCompartmentByIndex(0,456);
+    if(getCompartmentByIndex(0, value))
+    {
+        cout<<"compartmentVal: "<<value<<endl;
+    }
+    else
+    {
+        cout<<getLastError()<<endl;
+    }
+    cout<<printStringList(getCompartmentNames())<<endl;
+
+    getRateOfChange(10, value);
+    cout<<"Rate of change:"<<value<<endl;
 	///////////////////
     text = getCopyright();
     if(hasError())

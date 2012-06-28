@@ -930,7 +930,7 @@ int CSharpGenerator::ReadFloatingSpecies()
 
     for (int i = 0; i < reOrderedList.size(); i++)
     {
-        for (int j = 0; j < oFloatingSpecies.size(); j++)
+        for (int j = 0; j < oFloatingSpecies.Count(); j++)
         {
             StringList oTempList = oFloatingSpecies[j];
               if(reOrderedList[i] != (const string&) oTempList[0])
@@ -992,14 +992,14 @@ int CSharpGenerator::ReadFloatingSpecies()
           }
           //throw RRException("Reordered Species " + reOrderedList[i] + " not found.");
       }
-      return oFloatingSpecies.size();
+      return oFloatingSpecies.Count();
 }
 
 int CSharpGenerator::ReadBoundarySpecies()
 {
     int numBoundarySpecies;
     StringListContainer oBoundarySpecies = mNOM.getListOfBoundarySpecies();
-    numBoundarySpecies = oBoundarySpecies.size(); // sp1.size();
+    numBoundarySpecies = oBoundarySpecies.Count(); // sp1.size();
     for (int i = 0; i < numBoundarySpecies; i++)
     {
         StringList oTempList     = oBoundarySpecies[i];
@@ -2218,9 +2218,9 @@ void CSharpGenerator::WriteEventAssignments(CodeBuilder& sb, const int& numReact
             StringList oTemp;
             StringList oValue;
             int nCount = 0;
-            int numAssignments = ev.size() - 2;
+            int numAssignments = ev.Count() - 2;
             sb<<Format("\t\tdouble[] values = new double[ {0}];{1}", numAssignments, NL());
-            for (int j = 2; j < ev.size(); j++)
+            for (int j = 2; j < ev.Count(); j++)
             {
                 StringList asgn = (StringList) ev[j];
                 //string assignmentVar = substituteTerms(numReactions, "", (string)asgn[0]);
