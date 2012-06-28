@@ -88,14 +88,14 @@ int main(int argc, char* argv[])
 
     RRStringListHandle list = getRatesOfChangeNames();
 
-//    cout<<getBoundarySpeciesByIndex (0)<<endl;
+    //    cout<<getBoundarySpeciesByIndex (0)<<endl;
 	double value;
-    getFloatingSpeciesByIndex (0, value);
+    getFloatingSpeciesByIndex(0, value);
     cout<<value<<endl;
-    getGlobalParameterByIndex (0, value);
+    getGlobalParameterByIndex(0, value);
 
     cout<<value<<endl;
-    getGlobalParameterByIndex (2, value);
+    getGlobalParameterByIndex(2, value);
     cout<<value<<endl;
 
     cout<<getNumberOfDependentSpecies()<<endl;
@@ -104,6 +104,10 @@ int main(int argc, char* argv[])
     RRVector* vec = getRatesOfChange();
     cout<<getParamPromotedSBML(sbml.c_str());
 	evalModel();
+
+    cout<<getSBML()<<endl;
+
+    cout<<printMatrix(getScaledElasticityMatrix());
 
 	///////////////////
     text = getCopyright();

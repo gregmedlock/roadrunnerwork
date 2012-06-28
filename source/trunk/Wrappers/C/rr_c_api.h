@@ -74,6 +74,7 @@ C_DECL_SPEC bool                    __stdcall   loadSBMLFromFile(const char* sbm
 
 // SBML Utility Methods
 C_DECL_SPEC char* 				    __stdcall   getParamPromotedSBML(const char* sArg);
+C_DECL_SPEC char* 				    __stdcall   getSBML();
 
 // Simulation Methods
 C_DECL_SPEC bool                    __stdcall   setTimeStart(const double& timeStart);
@@ -142,6 +143,7 @@ C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getGlobalParameterNames();
 C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();
+C_DECL_SPEC RRMatrixHandle          __stdcall   getScaledElasticityMatrix();
 
 // Print/format functions
 C_DECL_SPEC char*                   __stdcall   getResultAsString(const RRResultHandle result);

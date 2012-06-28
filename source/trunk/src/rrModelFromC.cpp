@@ -53,7 +53,7 @@ void ModelFromC::AssignCVodeInterface(CvodeInterface* cvodeI)
 
 void ModelFromC::SetTime(double _time)
 {
-		*time = _time;
+    *time = _time;
 }
 
 double ModelFromC::GetTime()
@@ -696,7 +696,6 @@ void ModelFromC::computeRules(vector<double>& arr)
 }
 void ModelFromC::computeRules(double* y, int size)
 {
-
     if(!ccomputeRules)
     {
         Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
@@ -754,7 +753,6 @@ void ModelFromC::evalEvents(double timeIn, vector<double>& y)
     }
 
     cevalEvents(timeIn, amounts);
-
 }
 
 void ModelFromC::resetEvents()

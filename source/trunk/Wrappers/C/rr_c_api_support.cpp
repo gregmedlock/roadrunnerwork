@@ -32,7 +32,7 @@ void setError(const string& err)
     return newstr;
 }
 
-RRMatrix* createMatrixFrom(const LIB_LA::DoubleMatrix& mat)
+RRMatrix* createMatrix(const LIB_LA::DoubleMatrix& mat)
 {
     RRMatrixHandle matrix = new RRMatrix;
     matrix->RSize = mat.RSize();
@@ -50,7 +50,7 @@ void setError(const string& err)
     return matrix;
 }
 
-RRVector* createVectorFrom(const vector<double>& vec)
+RRVector* createVector(const vector<double>& vec)
 {
     RRVector* aVec = new RRVector;
     aVec->Size = vec.size();
@@ -66,22 +66,21 @@ void setError(const string& err)
     return aVec;
 }
 
-bool CopyRRVector(const RRVector* vec, vector<double>& aVec)
+bool copyVector(const RRVector* src, vector<double>& dest)
 {
-    if(!vec)
+    if(!src)
     {
         return false;
     }
 
-    aVec.resize(vec->Size);
+    dest.resize(src->Size);
 
-    for(int i = 0; i < vec->Size; i++)
+    for(int i = 0; i < src->Size; i++)
     {
-        aVec[i] = vec->Data[i];
+        dest[i] = src->Data[i];
     }
 
     return true;
 }
 
-
-}
+}

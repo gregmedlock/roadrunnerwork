@@ -3551,47 +3551,51 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 }
 
 //        [Help("Compute the unscaled elasticity matrix at the current operating point")]
-//        double[][] getScaledElasticityMatrix()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//                {
-//                    double[][] uelast = getUnscaledElasticityMatrix();
-//
-//                    var result = new double[uelast.Length][];
-//                    for (int i = 0; i < uelast.Length; i++)
-//                        result[i] = new double[uelast[0].Length];
-//
-//                    mModel->convertToConcentrations();
-//                    mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-//                    double[] rates = mModel->rates;
-//                    for (int i = 0; i < uelast.Length; i++)
-//                    {
-//                        // Rows are rates
-//                        if (rates[i] == 0)
-//                            throw SBWApplicationException("Unable to compute elasticity, reaction rate [" +
-//                                                              mModelGenerator->reactionList[i].name +
-//                                                              "] set to zero");
-//
-//                        for (int j = 0; j < uelast[0].Length; j++) // Columns are species
-//                            result[i][j] = uelast[i][j]*mModel->getConcentration(j)/rates[i];
-//                    }
-//                    return result;
-//                }
-//                else throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message());
-//            }
-//        }
-//
-//
+LIB_LA::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
+{
+    try
+    {
+        if (mModel)
+        {
+            LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
+
+            LIB_LA::DoubleMatrix result(uelast.CSize(), uelast.RSize());// = new double[uelast.Length][];
+            mModel->convertToConcentrations();
+            mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+            vector<double> rates;// = mModel->rates;
+            if(!CopyCArrayToStdVector(mModel->rates, rates, *mModel->ratesSize))
+            {
+                throw SBWApplicationException("Failed to copy model->rates");
+            }
+
+            for (int i = 0; i < uelast.CSize(); i++)
+            {
+                // Rows are rates
+                if (rates[i] == 0)
+                {
+                    throw
+                    SBWApplicationException("Unable to compute elasticity, reaction rate [" + mModelGenerator->reactionList[i].name + "] set to zero");
+                }
+
+                for (int j = 0; j < uelast.RSize(); j++) // Columns are species
+                {
+                    result[i][j] = uelast[i][j]*mModel->getConcentration(j)/rates[i];
+                }
+            }
+            return result;
+        }
+        else
+        {
+            throw SBWApplicationException(emptyModelStr);
+        }
+    }
+    catch (Exception e)
+    {
+        throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message());
+    }
+}
+
+
 //        [Help("Compute the unscaled elasticity for a given reaction and given species")]
 //        double getUnscaledFloatingSpeciesElasticity(string reactionName, string speciesName)
 //        {

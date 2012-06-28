@@ -301,7 +301,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		LIB_LA::DoubleMatrix getUnscaledElasticityMatrix();
 
 		//"Compute the unscaled elasticity matrix at the current operating point")]
-		double** getScaledElasticityMatrix();
+		LIB_LA::DoubleMatrix getScaledElasticityMatrix();
 
 		//[Help("Compute the unscaled elasticity for a given reaction and given species")]
 		double getUnscaledFloatingSpeciesElasticity(const string& reactionName, const string& speciesName);

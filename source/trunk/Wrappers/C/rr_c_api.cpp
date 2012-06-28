@@ -233,6 +233,29 @@ bool __stdcall loadSBML(const char* sbml)
   	return false;
 }
 
+char* __stdcall getSBML()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        string sbml = gRRHandle->getSBML();
+
+        return createText(sbml);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+  	return NULL;
+}
+
 bool __stdcall setTimeStart(const double& timeStart)
 {
 	try
@@ -502,6 +525,7 @@ RRVectorHandle __stdcall getRatesOfChange()
 	return NULL;
 }
 
+
 RRStringListHandle __stdcall getRatesOfChangeNames()
 {
 	try
@@ -560,6 +584,31 @@ bool __stdcall getValue(const char* speciesID, double& value)
 	return false;	//todo: how to indicate error???
 }
 
+RRMatrixHandle __stdcall getScaledElasticityMatrix()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        LIB_LA::DoubleMatrix tempMat = gRRHandle->getScaledElasticityMatrix();
+
+
+        RRMatrixHandle matrix = createMatrix(tempMat);
+	    return matrix;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+	return NULL;
+}
+
 bool __stdcall setValue(const char* speciesID, const double& val)
 {
 	try
@@ -577,7 +626,7 @@ bool __stdcall setValue(const char* speciesID, const double& val)
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
     }
-	return false;
+	return NULL;
 }
 
 RRMatrixHandle __stdcall getStoichiometryMatrix()
@@ -701,7 +750,7 @@ RRVectorHandle __stdcall getReactionRates()
         }
         vector<double> vec =  gRRHandle->getReactionRates();
 
-        RRVector* aVec = createVectorFrom(vec);
+        RRVector* aVec = createVector(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -897,7 +946,7 @@ RRVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
 
         vector<double> vec =  gRRHandle->getFloatingSpeciesInitialConcentrations();
 
-        RRVector* aVec = createVectorFrom(vec);
+        RRVector* aVec = createVector(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -985,9 +1034,9 @@ bool __stdcall setFloatingSpeciesInitialConcentrations(RRVector* vec)
             setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
-        vector<double> aVec;
-        CopyRRVector(vec, aVec);
-        gRRHandle->changeInitialConditions(aVec);
+        vector<double> tempVec;
+        copyVector(vec, tempVec);
+        gRRHandle->changeInitialConditions(tempVec);
         return true;
     }
     catch(Exception& ex)
@@ -1294,7 +1343,7 @@ RRVectorHandle __stdcall computeSteadyStateValues()
 		}
 		vector<double> vec =  gRRHandle->computeSteadyStateValues();
 
-		RRVector* aVec = createVectorFrom(vec);
+		RRVector* aVec = createVector(vec);
 		return aVec;
 	}
 	catch(Exception& ex)
@@ -1378,7 +1427,7 @@ RRMatrixHandle __stdcall getFullJacobian()
         }
 
         LIB_LA::DoubleMatrix tempMat = gRRHandle->getFullJacobian();
-        return createMatrixFrom(tempMat);
+        return createMatrix(tempMat);
     }
     catch(Exception& ex)
     {
@@ -1400,7 +1449,7 @@ RRMatrixHandle __stdcall getReducedJacobian()
         }
 
         LIB_LA::DoubleMatrix tempMat = gRRHandle->getReducedJacobian();
-        return createMatrixFrom(tempMat);
+        return createMatrix(tempMat);
     }
     catch(Exception& ex)
     {
