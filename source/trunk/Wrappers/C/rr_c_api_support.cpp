@@ -24,6 +24,14 @@ void setError(const string& err)
     strcpy(gLastError, err.c_str());
 }
 
+char* createText(const char* str)
+{
+    char* newstr = new char[strlen(str) + 1];
+
+    strcpy(newstr, str);
+    return newstr;
+}
+
 char* createText(const string& str)
 {
     char* newstr = new char[str.size() + 1];

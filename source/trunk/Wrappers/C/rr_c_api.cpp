@@ -78,7 +78,7 @@ int __stdcall getRevision()
 
 char* __stdcall getLatestLog()
 {
-    return NULL;
+    return createText(SVN_LASTLOG);
 }
 
 char* __stdcall getLatestCommitAuthor()
@@ -966,7 +966,6 @@ bool __stdcall setBoundarySpeciesByIndex (const int& index, const double& value)
     }
   	return false;
 }
-
 
 bool __stdcall setGlobalParameterByIndex(const int& index, const double& value)
 {

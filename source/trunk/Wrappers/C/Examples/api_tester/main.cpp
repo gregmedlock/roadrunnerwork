@@ -114,7 +114,7 @@ int main(int argc, char* argv[])
     cout<<printStringList(getConcentrationControlCoefficientNames())<<endl;
     cout<<printStringList(getElasticityNames())<<endl;
 
-    setBoundarySpeciesByIndex(0,34);
+//    setBoundarySpeciesByIndex(0,34);
     cout<<"Nr of Compartments: "<<getNumberOfCompartments()<<endl;
     setCompartmentByIndex(0,456);
     if(getCompartmentByIndex(0, value))
@@ -132,6 +132,7 @@ int main(int argc, char* argv[])
 
     cout<<"SVN revision: "<<getRevision()<<endl;
     cout<<getLatestCommitAuthor()<<endl;
+    cout<<getLatestLog()<<endl;
 	///////////////////
 
     text = getCopyright();

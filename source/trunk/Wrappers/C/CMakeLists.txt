@@ -42,16 +42,18 @@ IF(SUBVERSION_FOUND)
     MESSAGE("Last changed Author is ${rr_WC_LAST_CHANGED_AUTHOR}")
 
     SET(infoFile rr_svn_info)
-    FILE(WRITE ${infoFile}.txt 
+    STRING(REPLACE "\n" "\\n\\\n" svn_lastlog_with_slashes ${rr_LAST_CHANGED_LOG}) 
+    
+    FILE(WRITE ${infoFile}.h 
 "#ifndef ${infoFile}H
 #define ${infoFile}H
 const int SVN_VERSION =  ${rr_WC_REVISION};\n
 const char* SVN_LAST_COMMIT_AUTHOR =\"${rr_WC_LAST_CHANGED_AUTHOR}\";\n
+const char* SVN_LASTLOG =\"    ${svn_lastlog_with_slashes}\";\n
 #endif"
     )
-#const char* SVN_LASTLOG =\"    ${rr_LAST_CHANGED_LOG}\";\n
 
-    EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${infoFile}.txt ${infoFile}.h)
+#    EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${infoFile}.txt ${infoFile}.h)
 ENDIF(SUBVERSION_FOUND)
 
 

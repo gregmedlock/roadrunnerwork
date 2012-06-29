@@ -2514,39 +2514,24 @@ string NOMSupport::getParamPromotedSBML(const string& sArg)
 	Model *oModel = NULL;
 
 	oSBMLDoc = libsbml::readSBMLFromString(sArg.c_str());
-	try
-	{
-		if (oSBMLDoc->getLevel() == 1)
-		{
-			oSBMLDoc->setLevelAndVersion(2, 1);
-		}
+    if (oSBMLDoc->getLevel() == 1)
+    {
+        oSBMLDoc->setLevelAndVersion(2, 1);
+    }
 
-		//oSBMLDoc.setLevelAndVersion(2, 1);
-		oModel = oSBMLDoc->getModel();
+    //oSBMLDoc.setLevelAndVersion(2, 1);
+    oModel = oSBMLDoc->getModel();
 
-		if (oModel == NULL)
-		{
-			throw Exception("SBML Validation failed");
-		}
-		else
-		{
-			modifyKineticLaws(*oSBMLDoc, *oModel);
-			changeTimeSymbol(*oModel, "time");
-			return libsbml::writeSBMLToString(oSBMLDoc);
-		}
-	}
-	catch(const Exception &e)
-	{
-
-	}
-//    finally
-//	{
-//		GC.Collect();
-//		if (oSBMLDoc != NULL)
-//		{
-//			*oSBMLDoc.Dispose();
-//		}
-//	}
+    if (oModel == NULL)
+    {
+        throw Exception("SBML Validation failed");
+    }
+    else
+    {
+        modifyKineticLaws(*oSBMLDoc, *oModel);
+        changeTimeSymbol(*oModel, "time");
+        return libsbml::writeSBMLToString(oSBMLDoc);
+    }
 }
 
 void NOMSupport::modifyKineticLawsForLocalParameters(KineticLaw& oLaw, const string& reactionId, Model& oModel)
