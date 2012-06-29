@@ -54,6 +54,10 @@ extern "C"
 #include "rr_c_types.h"
 
 //The latest....
+C_DECL_SPEC int                     __stdcall   getRevision();
+C_DECL_SPEC char*                   __stdcall   getLatestLog();
+C_DECL_SPEC char*                   __stdcall   getLatestCommitAuthor();
+
 C_DECL_SPEC RRStringListHandle      __stdcall   getEigenValueNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getFluxControlCoefficientNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getConcentrationControlCoefficientNames();

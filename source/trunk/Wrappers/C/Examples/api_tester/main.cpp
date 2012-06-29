@@ -126,9 +126,13 @@ int main(int argc, char* argv[])
     }
     cout<<printStringList(getCompartmentNames())<<endl;
 
-    getRateOfChange(10, value);
+    getRateOfChange(0, value);
     cout<<"Rate of change:"<<value<<endl;
+
+    cout<<"SVN revision: "<<getRevision()<<endl;
+    cout<<getLatestCommitAuthor()<<endl;
 	///////////////////
+
     text = getCopyright();
     if(hasError())
     {

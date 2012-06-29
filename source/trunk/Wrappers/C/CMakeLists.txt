@@ -33,6 +33,26 @@ target_link_libraries (${target} lapack)
 target_link_libraries (${target} libf2c)
 endif()
 
+INCLUDE(FindSubversion)
+IF(SUBVERSION_FOUND)
+    Subversion_WC_INFO(${PROJECT_SOURCE_DIR} rr)
+    MESSAGE("Current revision is ${rr_WC_REVISION}")
+    Subversion_WC_LOG(${PROJECT_SOURCE_DIR} rr)
+    MESSAGE("Last changed log is ${rr_LAST_CHANGED_LOG}")
+    MESSAGE("Last changed Author is ${rr_WC_LAST_CHANGED_AUTHOR}")
+
+    SET(infoFile rr_svn_info)
+    FILE(WRITE ${infoFile}.txt 
+"#ifndef ${infoFile}H
+#define ${infoFile}H
+const int SVN_VERSION =  ${rr_WC_REVISION};\n
+const char* SVN_LAST_COMMIT_AUTHOR =\"${rr_WC_LAST_CHANGED_AUTHOR}\";\n
+#endif"
+    )
+#const char* SVN_LASTLOG =\"    ${rr_LAST_CHANGED_LOG}\";\n
+
+    EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${infoFile}.txt ${infoFile}.h)
+ENDIF(SUBVERSION_FOUND)
 
 
 add_subdirectory(Apps)

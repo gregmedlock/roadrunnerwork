@@ -52,6 +52,7 @@
 #include "rr_c_api.h"
 #include "rr_c_api_support.h"   //Support functions, not exposed as api functions and or data
 #include "rrException.h"
+#include "rr_svn_info.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -68,6 +69,23 @@ char* __stdcall getBuildDate()
     char* date = new char[strlen(__DATE__) + 1];
     strcpy(date, __DATE__);
     return date;
+}
+
+int __stdcall getRevision()
+{
+    return SVN_VERSION;
+}
+
+char* __stdcall getLatestLog()
+{
+    return NULL;
+}
+
+char* __stdcall getLatestCommitAuthor()
+{
+    char* text = new char[strlen(SVN_LAST_COMMIT_AUTHOR) + 1];
+    strcpy(text, SVN_LAST_COMMIT_AUTHOR);
+    return text;
 }
 
 RRHandle __stdcall getRRInstance()
@@ -88,6 +106,7 @@ RRHandle __stdcall getRRInstance()
     }
   	return NULL;
 }
+
 
 char* __stdcall getCopyright()
 {
