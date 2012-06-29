@@ -923,7 +923,7 @@ RRVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
 	return NULL;
 }
 
-bool __stdcall setFloatingSpeciesByIndex (int index, double value)
+bool __stdcall setFloatingSpeciesByIndex (const int& index, const double& value)
 {
 	try
     {
@@ -945,7 +945,7 @@ bool __stdcall setFloatingSpeciesByIndex (int index, double value)
   	return false;
 }
 
-bool __stdcall setBoundarySpeciesByIndex (int index, double value)
+bool __stdcall setBoundarySpeciesByIndex (const int& index, const double& value)
 {
 	try
     {
@@ -968,7 +968,7 @@ bool __stdcall setBoundarySpeciesByIndex (int index, double value)
 }
 
 
-bool __stdcall setGlobalParameterByIndex(int index, double value)
+bool __stdcall setGlobalParameterByIndex(const int& index, const double& value)
 {
 	try
     {

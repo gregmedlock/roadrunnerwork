@@ -114,6 +114,7 @@ int main(int argc, char* argv[])
     cout<<printStringList(getConcentrationControlCoefficientNames())<<endl;
     cout<<printStringList(getElasticityNames())<<endl;
 
+    setBoundarySpeciesByIndex(0,34);
     cout<<"Nr of Compartments: "<<getNumberOfCompartments()<<endl;
     setCompartmentByIndex(0,456);
     if(getCompartmentByIndex(0, value))
