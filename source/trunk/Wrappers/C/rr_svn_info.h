@@ -1,32 +1,16 @@
 #ifndef rr_svn_infoH
 #define rr_svn_infoH
-const int SVN_VERSION =  505;
+const int SVN_VERSION =  509;
 
 const char* SVN_LAST_COMMIT_AUTHOR ="tottek";
 
 const char* SVN_LASTLOG ="    ------------------------------------------------------------------------\n\
-r505 | tottek | 2012-06-28 14:11:49 -0700 (Thu, 28 Jun 2012) | 20 lines\n\
+r509 | tottek | 2012-06-29 10:38:05 -0700 (Fri, 29 Jun 2012) | 4 lines\n\
 \n\
-New release\n\
+Re-enabled three set api functions that got lost in the C api \n\
 \n\
-Removed ArrayList's size function. use Count()..\n\
+Updated release\n\
 \n\
-Added to API\n\
-getFluxcoefficientNames\n\
-getConcentrationControlCoefficientNames\n\
-getEigenValueNames()\n\
-getFluxControlCoefficientNames()\n\
-getConcentrationControlCoefficientNames()\n\
-getElasticityNames()\n\
-getNumberOfCompartments()\n\
-getCompartmentByIndex(const int& index, double& value)\n\
-setCompartmentByIndex (const int& index, const double& value)\n\
-getCompartmentNames()\n\
-getRateOfChange(const int& index, double& value)\n\
-printStringList(const RRStringListHandle list)\n\
-\n\
-\n\
- \n\
 ------------------------------------------------------------------------";
 
 #endif

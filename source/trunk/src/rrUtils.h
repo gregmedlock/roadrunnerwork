@@ -29,12 +29,17 @@ RR_DECLSPEC void            CreateTestSuiteFileNameParts(int caseNr, const strin
 RR_DECLSPEC string          GetTestSuiteSubFolderName(int caseNr);
 
 //CArray utilities
-RR_DECLSPEC bool            CopyCArrayToStdVector(int* src,     vector<int>& dest, int size);
-RR_DECLSPEC bool            CopyCArrayToStdVector(double* src,  vector<double>& dest, int size);
-RR_DECLSPEC bool            CopyCArrayToStdVector(bool* src,    vector<bool>& dest, int size);
-RR_DECLSPEC bool            CopyStdVectorToCArray(vector<double>& src, double* dest,  int size);
-RR_DECLSPEC bool            CopyStdVectorToCArray(vector<bool>&   src,  bool*  dest,  int size);
-RR_DECLSPEC double*         CreateCVectorFromStdVector(const vector<double>& vec);
+RR_DECLSPEC bool            CopyCArrayToStdVector(const int* src,     vector<int>& dest, int size);
+
+RR_DECLSPEC bool            CopyCArrayToStdVector(const double* src,  vector<double>& dest, int size);
+RR_DECLSPEC double*         CreateVector(const vector<double>& vec);
+
+RR_DECLSPEC vector<double>  CreateVector(const double* src, const int& size);
+
+RR_DECLSPEC bool            CopyCArrayToStdVector(const bool* src,    vector<bool>& dest, int size);
+RR_DECLSPEC bool            CopyStdVectorToCArray(const vector<double>& src, double* dest,  int size);
+RR_DECLSPEC bool            CopyStdVectorToCArray(const vector<bool>&   src,  bool*  dest,  int size);
+
 
 // DLL Functions
 RR_DECLSPEC HINSTANCE       LoadDLL(const string& dll);

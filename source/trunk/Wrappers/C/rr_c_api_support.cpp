@@ -58,6 +58,23 @@ void setError(const string& err)
     return matrix;
 }
 
+vector<double> createVector(const RRVector* vec)
+{
+    vector<double> aVec;
+    if(!vec)
+    {
+        return aVec;
+    }
+
+    aVec.resize(vec->Size);
+    for(int i = 0; i < aVec.size(); i++)
+    {
+        aVec[i] =  vec->Data[i];
+    }
+
+    return aVec;
+}
+
 RRVector* createVector(const vector<double>& vec)
 {
     RRVector* aVec = new RRVector;

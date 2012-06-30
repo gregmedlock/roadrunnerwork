@@ -244,8 +244,8 @@ class RR_DECLSPEC ModelFromC : public rrObject
 //        void                                  computeRules(vector<double>& _y);
 //        void                                  computeReactionRates(double time, vector<double>& y);
         void                                    computeAllRatesOfChange();
-        void                                    evalModel(double time, vector<double>& y);
-        void                                    evalEvents(double time, vector<double>& y);
+        void                                    evalModel(const double& time,  const vector<double>& y);
+        void                                    evalEvents(const double& time, const vector<double>& y);
         void                                    resetEvents();
 //        void                                  evalInitialAssignments();
         void                                    testConstraints();

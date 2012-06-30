@@ -107,7 +107,6 @@ RRHandle __stdcall getRRInstance()
   	return NULL;
 }
 
-
 char* __stdcall getCopyright()
 {
 	try
@@ -1458,7 +1457,184 @@ RRCCode* __stdcall getCCode()
 	return NULL;
 }
 
-//The latest..
+//The latest.. ////////////////////////////////////////
+
+bool __stdcall getScaledFloatingSpeciesElasticity(const char* reacName, const char* specName, double& value)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+        value = gRRHandle->getScaledFloatingSpeciesElasticity(reacName, specName);
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return false;
+}
+
+RRStringListHandle __stdcall getFloatingSpeciesInitialConditionNames()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        StringList aList = gRRHandle->getFloatingSpeciesInitialConditionNames();
+        return createList(aList);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+RRVectorHandle __stdcall getRatesOfChangeEx(const RRVectorHandle vec)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        vector<double> tempList = createVector(vec);
+        tempList = gRRHandle->getRatesOfChangeEx(tempList);
+        return createVector(tempList);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+RRVectorHandle __stdcall getReactionRatesEx(const RRVectorHandle vec)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        vector<double> tempList = createVector(vec);
+        tempList = gRRHandle->getReactionRatesEx(tempList);
+        return createVector(tempList);;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+RRStringListHandle __stdcall getElasticityCoefficientNames()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        ArrayList aList = gRRHandle->getElasticityCoefficientNames();
+        return createList(aList);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+RRStringListHandle __stdcall getRateOfChangeNames()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+        StringList aList = gRRHandle->getRateOfChangeNames();
+        return createList(aList);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return false;
+}
+
+bool __stdcall setCapabilities(const char* caps)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        if(!caps)
+        {
+            return false;
+        }
+        gRRHandle->setCapabilities(caps);
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return false;
+}
+
+char* __stdcall getCapabilities()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        return createText(gRRHandle->getCapabilities());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 RRStringListHandle __stdcall getEigenValueNames()
 {
 	try
@@ -1644,10 +1820,8 @@ bool __stdcall getRateOfChange(const int& index, double& value)
     return false;
 }
 
-
-
 //Print functions ==========================================================
-char* __stdcall  printStringList(const RRStringListHandle list)
+char* __stdcall  printList(const RRStringListHandle list)
 {
 	try
     {
@@ -1685,7 +1859,6 @@ char* __stdcall  printStringList(const RRStringListHandle list)
 
 char* __stdcall printResult(const RRResultHandle result)
 {
-
 	try
     {
         if(!result)

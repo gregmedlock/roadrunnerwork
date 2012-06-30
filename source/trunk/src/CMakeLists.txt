@@ -63,6 +63,7 @@ rrNLEQInterface.cpp
 rrLibStructSupport.cpp
 rrInteropUtils.cpp
 rrDLLEntry.cpp
+rrCapsSupport.cpp
 libstruct/lsComplex.cpp
 libstruct/lsLibla.cpp
 libstruct/lsLibstructural.cpp

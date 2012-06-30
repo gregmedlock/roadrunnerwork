@@ -108,11 +108,11 @@ int main(int argc, char* argv[])
     cout<<getSBML()<<endl;
 
     cout<<printMatrix(getScaledElasticityMatrix());     //How to free, when doing something like this??
-    cout<<printStringList(getEigenValueNames());
+    cout<<printList(getEigenValueNames());
 
-    cout<<printStringList(getFluxControlCoefficientNames())<<endl;
-    cout<<printStringList(getConcentrationControlCoefficientNames())<<endl;
-    cout<<printStringList(getElasticityNames())<<endl;
+    cout<<printList(getFluxControlCoefficientNames())<<endl;
+    cout<<printList(getConcentrationControlCoefficientNames())<<endl;
+    cout<<printList(getElasticityNames())<<endl;
 
 //    setBoundarySpeciesByIndex(0,34);
     cout<<"Nr of Compartments: "<<getNumberOfCompartments()<<endl;
@@ -125,7 +125,7 @@ int main(int argc, char* argv[])
     {
         cout<<getLastError()<<endl;
     }
-    cout<<printStringList(getCompartmentNames())<<endl;
+    cout<<printList(getCompartmentNames())<<endl;
 
     getRateOfChange(0, value);
     cout<<"Rate of change:"<<value<<endl;
@@ -133,8 +133,22 @@ int main(int argc, char* argv[])
     cout<<"SVN revision: "<<getRevision()<<endl;
     cout<<getLatestCommitAuthor()<<endl;
     cout<<getLatestLog()<<endl;
-	///////////////////
 
+//    if(!getScaledFloatingSpeciesElasticity("test", "test", value))
+//    {
+//        cout<<getLastError()<<endl;
+//    }
+//
+    cout<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
+    getRatesOfChangeEx (NULL);
+    getReactionRatesEx (NULL);
+    cout<<printList(getElasticityCoefficientNames())<<endl;
+    cout<<printList(getRateOfChangeNames())<<endl;
+    setCapabilities (NULL);
+    cout<<getCapabilities()<<endl;
+
+
+	///////////////////
     text = getCopyright();
     if(hasError())
     {

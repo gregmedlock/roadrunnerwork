@@ -53,6 +53,16 @@ extern "C"
 #include "rr_c_api_exporter.h"
 #include "rr_c_types.h"
 
+//The latest
+C_DECL_SPEC bool                    __stdcall   getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
+C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesInitialConditionNames();
+C_DECL_SPEC RRVectorHandle          __stdcall   getRatesOfChangeEx (const RRVectorHandle vec);
+C_DECL_SPEC RRVectorHandle          __stdcall   getReactionRatesEx (const RRVectorHandle vec);
+C_DECL_SPEC RRStringListHandle      __stdcall   getElasticityCoefficientNames();
+C_DECL_SPEC RRStringListHandle      __stdcall   getRateOfChangeNames();
+C_DECL_SPEC bool                    __stdcall   setCapabilities (const char* caps);
+C_DECL_SPEC char*                   __stdcall   getCapabilities();
+
 // Utility and informational methods
 C_DECL_SPEC int                     __stdcall   getRevision();
 C_DECL_SPEC char*                   __stdcall   getLatestLog();
@@ -163,7 +173,7 @@ C_DECL_SPEC bool                    __stdcall   getEE(const char* name, const ch
 C_DECL_SPEC char*                   __stdcall   printResult(const RRResultHandle result);
 C_DECL_SPEC char*                   __stdcall   printMatrix(const RRMatrixHandle mat);
 C_DECL_SPEC char*                   __stdcall   printVector(const RRVectorHandle vec);
-C_DECL_SPEC char*                   __stdcall   printStringList(const RRStringListHandle list);
+C_DECL_SPEC char*                   __stdcall   printList(const RRStringListHandle list);
 
 // Free memory functions
 C_DECL_SPEC bool                    __stdcall   freeRRInstance(RRHandle handle);

@@ -145,11 +145,11 @@ bool CreateFolder(const string& folder)
 }
 
 
-bool CopyStdVectorToCArray(vector<double>& src, double* dest,  int size)
+bool CopyStdVectorToCArray(const vector<double>& src, double* dest,  int size)
 {
-    if(!dest)
+    if(!dest || size > src.size())
     {
-        Log(lError)<<"Tried to copy to NULL vector";
+        Log(lError)<<"Tried to copy to NULL vector, or incompatible size of vectors";
         return false;
     }
 
@@ -158,26 +158,42 @@ bool CopyStdVectorToCArray(vector<double>& src, double* dest,  int size)
         dest[i] = src[i];
     }
     return true;
-
 }
 
-bool CopyStdVectorToCArray(vector<bool>&   src,  bool*  dest,  int size)
+bool CopyStdVectorToCArray(const vector<bool>&   src,  bool*  dest,  int size)
 {
-    if(!dest)
+    if(!dest || size > src.size())
     {
-        Log(lError)<<"Tried to copy to NULL vector";
+        Log(lError)<<"Tried to copy to NULL vector, or incompatible size of vectors";
         return false;
     }
+
 
     for(int i = 0; i < size; i++)
     {
         dest[i] = src[i];
     }
     return true;
-
 }
 
-bool CopyCArrayToStdVector(int* src, vector<int>& dest, int size)
+vector<double> CreateVector(const double* src, const int& size)
+{
+    vector<double> dest;
+    if(!src)
+    {
+        Log(lError)<<"Tried to copy from NULL vector";
+        return dest;
+    }
+
+    dest.resize(size);
+    for(int i = 0; i < size; i++)
+    {
+        dest[i] = src[i];
+    }
+    return dest;
+}
+
+bool CopyCArrayToStdVector(const int* src, vector<int>& dest, int size)
 {
     if(!src)
     {
@@ -193,7 +209,7 @@ bool CopyCArrayToStdVector(int* src, vector<int>& dest, int size)
     return true;
 }
 
-bool CopyCArrayToStdVector(double* src, vector<double>& dest, int size)
+bool CopyCArrayToStdVector(const double* src, vector<double>& dest, int size)
 {
     if(!src)
     {
@@ -209,7 +225,7 @@ bool CopyCArrayToStdVector(double* src, vector<double>& dest, int size)
     return true;
 }
 
-bool CopyCArrayToStdVector(bool* src, vector<bool>& dest, int size)
+bool CopyCArrayToStdVector(const bool* src, vector<bool>& dest, int size)
 {
     if(!src)
     {
@@ -225,7 +241,7 @@ bool CopyCArrayToStdVector(bool* src, vector<bool>& dest, int size)
     return true;
 }
 
-double*    CreateCVectorFromStdVector(const vector<double>& vec)
+double* CreateVector(const vector<double>& vec)
 {
     double* avec = new double[vec.size()];
     if(!avec)

@@ -2684,24 +2684,30 @@ double RoadRunner::getRateOfChange(const int& index)
 }
 
 //        Help("Returns the rates of changes given an array of new floating species concentrations")
-//        double[] RoadRunner::getRatesOfChangeEx(double[] values)
-//        {
-//            if (!mModel)
-//                throw SBWApplicationException(emptyModelStr);
-//            mModel->y = values;
-//            mModel->evalModel(0.0, BuildModelEvalArgument());
-//            return mModel->dydt;
-//        }
-//
+vector<double> RoadRunner::getRatesOfChangeEx(const vector<double>& values)
+{
+    if (!mModel)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    CopyStdVectorToCArray(values, mModel->y, *mModel->ySize);
+
+    mModel->evalModel(0.0, BuildModelEvalArgument());
+    return CreateVector(mModel->dydt, *mModel->dydtSize);
+}
+
 //        Help("Returns the rates of changes given an array of new floating species concentrations")
-//        double[] RoadRunner::getReactionRatesEx(double[] values)
-//        {
-//            if (!mModel)
-//                throw SBWApplicationException(emptyModelStr);
-//
-//            mModel->computeReactionRates(0.0, values);
-//            return mModel->rates;
-//        }
+vector<double> RoadRunner::getReactionRatesEx(const vector<double>& values)
+{
+    if (!mModel)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    mModel->computeReactionRates(0.0, CreateVector(values));
+    return CreateVector(mModel->rates, *mModel->ratesSize);
+}
 //
 //
 //        string[] RoadRunner::GetFloatingSpeciesNamesArray()
@@ -3666,42 +3672,40 @@ LIB_LA::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
 //        }
 //
 //        [Help("Compute the scaled elasticity for a given reaction and given species")]
-//        double getScaledFloatingSpeciesElasticity(string reactionName, string speciesName)
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//                {
-//                    int speciesIndex = 0;
-//                    int reactionIndex = 0;
-//
-//                    mModel->convertToConcentrations();
-//                    mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-//
-//                    if (!mModelGenerator->floatingSpeciesConcentrationList.find(speciesName, out speciesIndex))
-//                        throw SBWApplicationException(
-//                            "Internal Error: unable to locate species name while computing unscaled elasticity");
-//                    if (!mModelGenerator->reactionList.find(reactionName, out reactionIndex))
-//                        throw SBWApplicationException(
-//                            "Internal Error: unable to locate reaction name while computing unscaled elasticity");
-//
-//                    return getUnscaledSpeciesElasticity(reactionIndex, speciesIndex)*
-//                           mModel->getConcentration(speciesIndex)/mModel->rates[reactionIndex];
-//                    ;
-//                }
-//                else throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message());
-//            }
-//        }
-//
-//
+double RoadRunner::getScaledFloatingSpeciesElasticity(const string& reactionName, const string& speciesName)
+{
+    try
+    {
+        if (!mModel)
+        {
+            throw SBWApplicationException(emptyModelStr);
+        }
+        int speciesIndex = 0;
+        int reactionIndex = 0;
+
+        mModel->convertToConcentrations();
+        mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+
+        if (!mModelGenerator->floatingSpeciesConcentrationList.find(speciesName, speciesIndex))
+        {
+            throw SBWApplicationException("Internal Error: unable to locate species name while computing unscaled elasticity");
+        }
+        if (!mModelGenerator->reactionList.find(reactionName, reactionIndex))
+        {
+            throw SBWApplicationException("Internal Error: unable to locate reaction name while computing unscaled elasticity");
+        }
+
+        return getUnscaledSpeciesElasticity(reactionIndex, speciesIndex)*
+               mModel->getConcentration(speciesIndex)/mModel->rates[reactionIndex];
+
+    }
+    catch (const Exception& e)
+    {
+        throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message());
+    }
+}
+
+
 //        [Ignore]
 //        // Changes a given parameter type by the given increment
 //        void changeParameter(TParameterType parameterType, int reactionIndex, int parameterIndex,
@@ -4592,17 +4596,19 @@ StringList RoadRunner::getReactionNames()
 //        int RoadRunner::UseKinsol { get; set; }
 //
 //        Help("Get Simulator Capabilities")
-//        string RoadRunner::getCapabilities()
-//        {
-//            CapsSupport current = CapsSupport.CurrentSettings;
-//            current["integration"].Capabilities.Add(new CapsSupport.Capability
-//            {
-//                Name = "usekinsol", IntValue = UseKinsol, Hint = "Is KinSol used as steady state integrator", Type = "int"
-//            }
-//                );
+string RoadRunner::getCapabilities()
+{
+    string tmp("not implmemented");
+//    CapsSupport current = CapsSupport.CurrentSettings;
+//    current["integration"].Capabilities.Add(new CapsSupport.Capability
+//    {
+//        Name = "usekinsol", IntValue = UseKinsol, Hint = "Is KinSol used as steady state integrator", Type = "int"
+//    }
+//        );
 //
-//            return current.ToXml();
-//        }
+//    return current.ToXml();
+    return tmp;
+}
 //
 //        void RoadRunner::setTolerances(double aTol, double rTol)
 //        {
@@ -4624,32 +4630,33 @@ StringList RoadRunner::getReactionNames()
 //        }
 //
 //        Help("Set Simulator Capabilites")
-//        void RoadRunner::setCapabilities(string capsStr)
+void RoadRunner::setCapabilities(const string& capsStr)
+{
+//    var cs = new CapsSupport(capsStr);
+//    cs.Apply();
+//
+//    //CorrectMaxStep();
+//
+//    if (modelLoaded)
+//    {
+//        if(!mCVode)
 //        {
-//            var cs = new CapsSupport(capsStr);
-//            cs.Apply();
-//
-//            //CorrectMaxStep();
-//
-//            if (modelLoaded)
-//            {
-//                mCVode = new CvodeInterface(model);
-//                for (int i = 0; i < model.getNumIndependentVariables; i++)
-//                {
-//                    mCVode.setAbsTolerance(i, CvodeInterface.absTol);
-//                }
-//                mCVode.reStart(0.0, model);
-//            }
-//
-//            if (cs.HasSection("integration") && cs["integration"].HasCapability("usekinsol"))
-//            {
-//
-//                CapsSupport.Capability cap = cs["integration", "usekinsol"];
-//                UseKinsol = cap.IntValue;
-//            }
-//
+//            mCVode = new CvodeInterface(model);
 //        }
+//        for (int i = 0; i < model.getNumIndependentVariables; i++)
+//        {
+//            mCVode->setAbsTolerance(i, CvodeInterface->absTol);
+//        }
+//        mCVode->reStart(0.0, model);
+//    }
 //
+//    if (cs.HasSection("integration") && cs["integration"].HasCapability("usekinsol"))
+//    {
+//        CapsSupport.Capability cap = cs["integration", "usekinsol"];
+//        UseKinsol = cap.IntValue;
+//    }
+}
+
 //        Help("Sets the value of the given species or global parameter to the given value (not of local parameters)")
 bool RoadRunner::setValue(const string& sId, const double& dValue)
 {

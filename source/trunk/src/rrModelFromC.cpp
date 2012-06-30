@@ -625,7 +625,7 @@ void ModelFromC::AssignRates(vector<double>& _rates)
         return;
     }
 
-      double* rates = CreateCVectorFromStdVector(_rates);
+      double* rates = CreateVector(_rates);
 //    auto_ptr<double> rates(new double(_rates.size()));
 //    for(int i = 0; i < _rates.size(); i++)
 //    {
@@ -689,7 +689,7 @@ void ModelFromC::updateDependentSpeciesValues(double* y_vec)
 
 void ModelFromC::computeRules(vector<double>& arr)
 {
-    double* cArr = CreateCVectorFromStdVector(arr);
+    double* cArr = CreateVector(arr);
     computeRules(cArr, arr.size());
     delete [] cArr;
 
@@ -727,7 +727,7 @@ void ModelFromC::computeAllRatesOfChange()
     ccomputeAllRatesOfChange();
 }
 
-void ModelFromC::evalModel(double timein, vector<double>& y)
+void ModelFromC::evalModel(const double& timein, const vector<double>& y)
 {
     if(!cevalModel)
     {
@@ -744,7 +744,7 @@ void ModelFromC::evalModel(double timein, vector<double>& y)
     cevalModel(timein, amounts);
 }
 
-void ModelFromC::evalEvents(double timeIn, vector<double>& y)
+void ModelFromC::evalEvents(const double& timeIn, const vector<double>& y)
 {
     if(!cevalEvents)
     {

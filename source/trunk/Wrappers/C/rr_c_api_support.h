@@ -19,6 +19,7 @@ void                setError(const string& err);
 bool                copyVector(const RRVector* source, vector<double>& dest);
 
 RRVector*           createVector(const vector<double>& vec);
+vector<double>      createVector(const RRVector* vec);
 char*               createText(const char* str);        //To be deleted by client using freeText
 char*               createText(const string& str);      //To be deleted by client using freeText
 RRMatrix*           createMatrix(const LIB_LA::DoubleMatrix& mat);
