@@ -54,12 +54,6 @@ extern "C"
 #include "rr_c_types.h"
 
 //The latest
-C_DECL_SPEC bool                    __stdcall   getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
-C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesInitialConditionNames();
-C_DECL_SPEC RRVectorHandle          __stdcall   getRatesOfChangeEx (const RRVectorHandle vec);
-C_DECL_SPEC RRVectorHandle          __stdcall   getReactionRatesEx (const RRVectorHandle vec);
-C_DECL_SPEC RRStringListHandle      __stdcall   getElasticityCoefficientNames();
-C_DECL_SPEC RRStringListHandle      __stdcall   getRateOfChangeNames();
 C_DECL_SPEC bool                    __stdcall   setCapabilities (const char* caps);
 C_DECL_SPEC char*                   __stdcall   getCapabilities();
 
@@ -135,11 +129,13 @@ C_DECL_SPEC RRVectorHandle          __stdcall   getFloatingSpeciesInitialConcent
 C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
 C_DECL_SPEC bool                  	__stdcall   getReactionRate(const int&, double& rate);
 C_DECL_SPEC RRVectorHandle          __stdcall   getReactionRates();
+C_DECL_SPEC RRVectorHandle          __stdcall   getReactionRatesEx (const RRVectorHandle vec);
 
 // Rates of change
 C_DECL_SPEC RRVectorHandle          __stdcall   getRatesOfChange();
 C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames();
-C_DECL_SPEC bool                    __stdcall   getRateOfChange(const int&, double& value) ;
+C_DECL_SPEC bool                    __stdcall   getRateOfChange(const int&, double& value);
+C_DECL_SPEC RRVectorHandle          __stdcall   getRatesOfChangeEx (const RRVectorHandle vec);
 
 C_DECL_SPEC bool                    __stdcall   evalModel();
 
@@ -154,12 +150,14 @@ C_DECL_SPEC int                     __stdcall   getNumberOfIndependentSpecies();
 
 // Get names family
 C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames();
+C_DECL_SPEC RRStringListHandle      __stdcall   getRateOfChangeNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getGlobalParameterNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getCompartmentNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getEigenValueNames();
 C_DECL_SPEC RRStringListHandle      __stdcall   getElasticityNames();
+C_DECL_SPEC RRStringListHandle      __stdcall   getElasticityCoefficientNames();
 C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();
 
 // MCA methods
@@ -168,6 +166,8 @@ C_DECL_SPEC RRStringListHandle      __stdcall   getConcentrationControlCoefficie
 C_DECL_SPEC RRMatrixHandle          __stdcall   getScaledElasticityMatrix();
 C_DECL_SPEC bool                    __stdcall   getCC(const char* variable, const char* parameter, double& value);
 C_DECL_SPEC bool                    __stdcall   getEE(const char* name, const char* species, double& value);
+C_DECL_SPEC bool                    __stdcall   getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
+C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesInitialConditionNames();
 
 // Print/format functions
 C_DECL_SPEC char*                   __stdcall   printResult(const RRResultHandle result);
