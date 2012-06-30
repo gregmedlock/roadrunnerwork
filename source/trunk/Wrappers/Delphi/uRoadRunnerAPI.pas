@@ -133,7 +133,7 @@ type
   TFreeRRInstance = procedure (instance : Pointer); stdcall;
 
   TSetSelectionList = function (list : PAnsiChar) : bool; stdcall;
-  TGetValue = function (speciesId : PAnsiChar) : double; stdcall;
+  TGetValue = function (speciesId : PAnsiChar; var value : double) : boolean; stdcall;
   TSetValue = function (speciesId : PAnsiChar; var value : double) : bool; stdcall;
   TGetReactionNames = TPointerVoidFunc;
   TReset = function : bool; stdcall;
@@ -155,12 +155,14 @@ procedure freeRRInstance; overload;
 procedure freeRRInstance (myInstance : Pointer); overload;
 function  getLastError : AnsiString;
 function  getBuildDate : AnsiString;
+function  getRevision : integer;
 function  getCopyright : AnsiString;
 function  getTempFolder : AnsiString;
 function  getCCode : TRRCCode;
 
 function  loadSBML (sbmlStr : AnsiString) : boolean;
 function  loadSBMLFromFile (fileName : AnsiString) : boolean;
+function  getSBML : AnsiString;
 
 function  getValue (Id : AnsiString) : double;
 function  setValue (Id : AnsiString; value : double) : boolean;
@@ -169,19 +171,26 @@ function  simulate : TMatrix;
 function  simulateEx (timeStart: double; timeEnd : double; numberOfPoints : integer)  : TMatrix;
 function  oneStep (var currentTime : double; var stepSize : double) : double;
 function  setSelectionList (strList : TStringList) : boolean;
+function  getCapabilities : AnsiString;
+
+function  getCompartmentNames : TStringList;
 function  getReactionNames : TStringList;
 function  getBoundarySpeciesNames : TStringList;
 function  getFloatingSpeciesNames : TStringList;
 function  getGlobalParameterNames : TStringList;
+
 function  getNumberOfReactions : integer;
 function  getNumberOfBoundarySpecies : integer;
 function  getNumberOfFloatingSpecies : integer;
 function  getNumberOfGlobalParameters : integer;
+function  getNumberOfCompartments : integer;
 
+function  setCompartmentByIndex     (index : integer; value : double) : boolean;
 function  setFloatingSpeciesByIndex (index : integer; value : double) : boolean;
 function  setBoundarySpeciesByIndex (index : integer; value : double) : boolean;
-//function  setGlobalParameterByIndex (index : integer; value : double) : boolean;
+function  setGlobalParameterByIndex (index : integer; value : double) : boolean;
 
+function  getCompartmentByIndex     (index : integer) : double;
 function  getFloatingSpeciesByIndex (index : integer) : double;
 function  getBoundarySpeciesByIndex (index : integer) : double;
 function  getGlobalParameterByIndex (index : integer) : double;
@@ -213,57 +222,67 @@ var DLLHandle : Cardinal;
     libName : AnsiString = 'rr_c_API.dll';
     instance : Pointer = nil;
 
-    libLoadSBML : TCharBoolFunc;            //
-    libLoadSBMLFromFile : TCharBoolFunc;    //
+    libLoadSBML : TCharBoolFunc;
+    libLoadSBMLFromFile : TCharBoolFunc;
+    libGetSBML : TVoidCharFunc;
 
-    libHasError : TVoidBoolFunc;            //
-    libGetLastError : TVoidCharFunc;        //
+    libHasError : TVoidBoolFunc;
+    libGetLastError : TVoidCharFunc;
 
-    libGetBuildDate : TVoidCharFunc;        //
-    libGetCopyright : TGetCopyright;        //
+    libGetBuildDate : TVoidCharFunc;
+    libGetRevision : TVoidIntFunc;
+    libGetCopyright : TGetCopyright;
     libGetTempFolder : TVoidCharFunc;
     libGetCCode : TGetCCode;
 
-    libGetRRInstance : TGetRRInstance;      //
-    libFreeRRInstance : TFreeRRInstance;    //
-    libFreeResult : TFreeRRResult;        //
+    libGetRRInstance : TGetRRInstance;
+    libFreeRRInstance : TFreeRRInstance;
+    libFreeResult : TFreeRRResult;
 
-    libSimulate : TPointerVoidFunc;         //
-    libSimulateEx : TSimulateEx;            //
-    libGetValue : TGetValue;                //
-    libSetValue : TSetValue;                //
-    libSetSelectionList : TSetSelectionList;//
-    libGetReactionNames : TGetReactionNames;//
-    libReset : TReset;                      //
-    libGetNumberOfReactions : TVoidIntFunc; //
-    libGetNumberOfBoundarySpecies : TVoidIntFunc;//
-    libGetNumberOfFloatingSpecies : TVoidIntFunc;//
-    libGetNumberOfGlobalParameters : TVoidIntFunc;//
+    libSimulate : TPointerVoidFunc;
+    libSimulateEx : TSimulateEx;
+    libGetValue : TGetValue;
+    libSetValue : TSetValue;
+    libSetSelectionList : TSetSelectionList;
+    libGetReactionNames : TGetReactionNames;
+    libReset : TReset;
+    libGetCapabilities : TVoidCharFunc;
 
-    libSetFloatingSpeciesByIndex : function (index : integer; value : double) : boolean; stdcall;
-    libSetBoundarySpeciesByIndex : function (index : integer; value : double) : boolean; stdcall;
-    //libSetGlobalParameterByIndex : function (index : integer; value : double) : boolean; stdcall;
+    libGetNumberOfReactions : TVoidIntFunc;
+    libGetNumberOfBoundarySpecies : TVoidIntFunc;
+    libGetNumberOfFloatingSpecies : TVoidIntFunc;
+    libGetNumberOfGlobalParameters : TVoidIntFunc;
+    libGetNumberOfCompartments : TVoidIntFunc;
 
-    libGetGlobalParameterByIndex : function (index : integer) : double; stdcall;
-    //libGetFloatingSpeciesByIndex : function (index : integer) : double; stdcall;
-    //libGetBoundarySpeciesByIndex : function (index : integer) : double; stdcall;
+    libSetCompartmentByIndex     : function (var index : integer; var value : double) : boolean; stdcall;
+    libSetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+    libSetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+    libSetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+
+    libGetCompartmentByIndex     : function (var index : integer; var value : double) : boolean; stdcall;
+    libGetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+    libGetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+    libGetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
 
     libGetNumberOfDependentSpecies : function : integer; stdcall;
     libGetNumberOfIndependentSpecies : function : integer; stdcall;
 
     libSteadyState : TSteadyState;
-    libGetReactionRate : TIntDoubleFunc; //
-    libOneStep : TOneStep;         //
-    libGetBoundarySpeciesNames : TVoidStringListFunc; //
-    libGetFloatingSpeciesNames : TVoidStringListFunc; //
-    libGetGlobalParameterNames : TVoidStringListFunc; //
+    libGetReactionRate : TIntDoubleFunc;
+    libOneStep : TOneStep;
+
+    libGetCompartmentNames     : TVoidStringListFunc;
+    libGetBoundarySpeciesNames : TVoidStringListFunc;
+    libGetFloatingSpeciesNames : TVoidStringListFunc;
+    libGetGlobalParameterNames : TVoidStringListFunc;
+
     libSetSteadyStateSelectionList : TCharBoolFunc;
     libGetAvailableSymbols : TLibGetAvailableSymbols;
     libComputeSteadyStateValues : TlibComputeSteadyStateValues;
     libSetInitialConditions : TlibSetInitialConditions;
     libSetComputeAndAssignConservationLaws : TBoolBoolFunc;
 
-    libGetStoichiometryMatrix :  TGetStoichiometryMatrix;  //
+    libGetStoichiometryMatrix :  TGetStoichiometryMatrix;
 
     libFreeStringList : TFreeStringList;     //
     libFreeMatrix : TFreeRRMatrix; //
@@ -322,6 +341,12 @@ begin
 end;
 
 
+function getRevision : integer;
+begin
+  result := libGetRevision;
+end;
+
+
 function getCopyright : AnsiString;
 var p : PAnsiChar;
 begin
@@ -377,9 +402,16 @@ begin
 end;
 
 
+function getSBML : AnsiString;
+begin
+  result := libGetSBML;
+end;
+
+
 function getValue (Id : AnsiString) : double;
 begin
-  result := libGetValue (PAnsiChar (Id));
+  if not libGetValue (PAnsiChar (Id), result) then
+     raise Exception.Create ('Error in getVlaue');
 end;
 
 
@@ -392,6 +424,12 @@ end;
 function reset : boolean;
 begin
   result := libReset;
+end;
+
+
+function getCapabilities : AnsiString;
+begin
+  result := libGetCapabilities;
 end;
 
 
@@ -533,6 +571,29 @@ begin
 end;
 
 
+function getNumberOfCompartments : integer;
+begin
+  result := libGetNumberOfCompartments;
+end;
+
+
+function getCompartmentNames : TStringList;
+var pList : PRRStringList;
+begin
+  pList := libGetCompartmentNames;
+  try
+    result := getArrayOfStrings(pList);
+  finally
+    libFreeStringList (pList);
+  end;
+end;
+
+function setCompartmentByIndex (index : integer; value : double) : boolean;
+begin
+  result := libSetCompartmentByIndex (index, value);
+end;
+
+
 function setFloatingSpeciesByIndex (index : integer; value : double) : boolean;
 begin
   result := libSetFloatingSpeciesByIndex (index, value);
@@ -547,24 +608,35 @@ end;
 
 function setGlobalParameterByIndex (index : integer; value : double) : boolean;
 begin
-  //result := libSetBoundarySpeciesByIndex (index, value);
+  result := libSetGlobalParameterByIndex (index, value);
 end;
+
+
+function getCompartmentByIndex (index : integer) : double;
+begin
+  if not libGetCompartmentByIndex (index, result) then
+     raise Exception.Create ('Index out of range in getCompartmentByIndex');
+end;
+
 
 function getFloatingSpeciesByIndex (index : integer) : double;
 begin
-  //result := libGetFloatingSpeciesByIndex (index);
+  if not libGetFloatingSpeciesByIndex (index, result) then
+     raise Exception.Create ('Index out of range in getFloatingSpeciesByIndex');
 end;
 
 
 function getBoundarySpeciesByIndex (index : integer) : double;
 begin
-  //result := libGetBoundarySpeciesByIndex (index);
+  if not libGetBoundarySpeciesByIndex (index, result) then
+     raise Exception.Create ('Index out of range in getBoundarySpeciesByIndex');
 end;
 
 
 function getGlobalParameterByIndex (index : integer) : double;
 begin
-  result := libGetGlobalParameterByIndex (index);
+  if not libGetGlobalParameterByIndex (index, result) then
+     raise Exception.Create ('Index out of range in getGlobalParameterByIndex');
 end;
 
 
@@ -768,167 +840,99 @@ begin
   libName := newLibName;
 end;
 
+function loadSingleMethod (methodName : string) : Pointer;
+begin
+   result := GetProcAddress(dllHandle, PChar (methodName));
+   if not Assigned (result) then
+      raise Exception.Create ('Unable to locate ' + methodName);
+end;
 
 function loadMethods (var errMsg : AnsiString) : boolean;
 begin
    result := true;
-   @libGetBuildDate := GetProcAddress(dllHandle, PChar ('getBuildDate'));
-   if not Assigned (libGetBuildDate) then
-      begin errMsg := 'Unable to locate getBuildDate'; result := false; exit; end;
-   @libHasError := GetProcAddress(dllHandle, PChar ('hasError'));
-   if not Assigned (libHasError) then
-      begin errMsg := 'Unable to locate hasError'; result := false; exit; end;
-   @libGetLastError := GetProcAddress(dllHandle, PChar ('getLastError'));
-   if not Assigned (libGetLastError) then
-      begin errMsg := 'Unable to locate getLastError'; result := false; exit; end;
+   try
+   @libGetBuildDate  := loadSingleMethod ('getBuildDate');
+   @libGetRevision   := loadSingleMethod ('getRevision');
+   @libHasError      := loadSingleMethod ('hasError');
+   @libGetLastError  := loadSingleMethod ('getLastError');
+   @libGetRRInstance := loadSingleMethod ('getRRInstance');
 
-   @libGetRRInstance := GetProcAddress(dllHandle, PChar ('getRRInstance'));
-   if not Assigned (libGetRRInstance) then
-      begin errMsg := 'Unable to locate getRRInstance'; result := false; exit; end;
-   @libFreeRRInstance := GetProcAddress(dllHandle, PChar ('freeRRInstance'));
-   if not Assigned (libFreeRRInstance) then
-      begin errMsg := 'Unable to locate freeRRInstance'; result := false; exit; end;
+   @libGetCopyright  := loadSingleMethod ('getCopyright');
+   @libGetTempFolder := loadSingleMethod ('getTempFolder');
+   @libGetCCode := loadSingleMethod ('getCCode');
 
+   @libSetComputeAndAssignConservationLaws := loadSingleMethod ('setComputeAndAssignConservationLaws');
 
-   @libGetCopyright := GetProcAddress(dllHandle, PChar ('getCopyright'));
-   if not Assigned (libGetCopyright) then
-      begin errMsg := 'Unable to locate getCopyright'; result := false; exit; end;
-   @libGetTempFolder := GetProcAddress(dllHandle, PChar ('getTempFolder'));
-   if not Assigned (libGetTempFolder) then
-      begin errMsg := 'Unable to locate getTempFolder'; result := false; exit; end;
-   @libGetCCode := GetProcAddress(dllHandle, PChar ('getCCode'));
-   if not Assigned (libGetCCode) then
-      begin errMsg := 'Unable to locate getCCode'; result := false; exit; end;
+   @libLoadSBMLFromFile := loadSingleMethod ('loadSBMLFromFile');
+   @libLoadSBML := loadSingleMethod ('loadSBML');
+   @libGetSBML  := loadSingleMethod ('getSBML');
 
-   @libSetComputeAndAssignConservationLaws := GetProcAddress(dllHandle, PChar ('setComputeAndAssignConservationLaws'));
-   if not Assigned (libSetComputeAndAssignConservationLaws) then
-      begin errMsg := 'Unable to locate setComputeAndAssignConservationLaws'; result := false; exit; end;
+   @setTimeStart := loadSingleMethod ('setTimeStart');
+   @setTimeEnd   := loadSingleMethod ('setTimeEnd');
+   @setNumberOfPoints := loadSingleMethod ('setNumPoints');
+   @libSimulate  := loadSingleMethod ('simulate');
+   @libSimulateEx := loadSingleMethod ('simulateEx');
+   @libOneStep   := loadSingleMethod ('oneStep');
+   @libReset     := loadSingleMethod ('reset');
+   @libGetCapabilities := loadSingleMethod ('getCapabilities');
 
-   @libLoadSBMLFromFile := GetProcAddress (dllHandle, PChar ('loadSBMLFromFile'));
-   if not Assigned (libLoadSBMLFromFile) then
-      begin errMsg := 'Unable to locate loadSBMLFromFile'; result := false; exit; end;
-   @libLoadSBML := GetProcAddress (dllHandle, PChar ('loadSBML'));
-   if not Assigned (libLoadSBML) then
-      begin errMsg := 'Unable to locate loadSBML'; result := false; exit; end;
+   @libSetValue := loadSingleMethod ('setValue');
+   @libGetValue := loadSingleMethod ('getValue');
+   @libSetSelectionList := loadSingleMethod ('setSelectionList');
 
-   @setTimeStart := GetProcAddress (dllHandle, PChar ('setTimeStart'));
-   if not Assigned (setTimeStart) then
-      begin errMsg := 'Unable to locate setTimeStart'; result := false; exit; end;
-   @setTimeEnd := GetProcAddress (dllHandle, PChar ('setTimeEnd'));
-   if not Assigned (setTimeEnd) then
-      begin errMsg := 'Unable to locate setTimeEnd'; result := false; exit; end;
-   @setNumberOfPoints := GetProcAddress (dllHandle, PChar ('setNumPoints'));
-   if not Assigned (setNumberOfPoints) then
-      begin errMsg := 'Unable to locate setNumPoints'; result := false; exit; end;
-   @libSimulate := GetProcAddress (dllHandle, PChar ('simulate'));
-   if not Assigned (libSimulate) then
-      begin errMsg := 'Unable to locate simulate'; result := false; exit; end;
-   @libSimulateEx := GetProcAddress (dllHandle, PChar ('simulateEx'));
-   if not Assigned (libSimulateEx) then
-      begin errMsg := 'Unable to locate simulateEx'; result := false; exit; end;
-   @libSetValue := GetProcAddress (dllHandle, PChar ('setValue'));
-   if not Assigned (libSetValue) then
-      begin errMsg := 'Unable to locate setValue'; result := false; exit; end;
-   @libGetValue := GetProcAddress (dllHandle, PChar ('getValue'));
-   if not Assigned (libGetValue) then
-      begin errMsg := 'Unable to locate getValue'; result := false; exit; end;
-   @libSetSelectionList := GetProcAddress (dllHandle, PChar ('setSelectionList'));
-   if not Assigned (libSetSelectionList) then
-      begin errMsg := 'Unable to locate setSelectionList'; result := false; exit; end;
-   @libGetReactionNames := GetProcAddress (dllHandle, PChar ('getReactionNames'));
-   if not Assigned (libGetReactionNames) then
-      begin errMsg := 'Unable to locate getReactionNames'; result := false; exit; end;
-   @libFreeStringList := GetProcAddress (dllHandle, PChar ('freeStringList'));
-   if not Assigned (libFreeStringList) then
-      begin errMsg := 'Unable to locate freeStringList'; result := false; exit; end;
-   @libReset := GetProcAddress (dllHandle, PChar ('reset'));
-   if not Assigned (libReset) then
-      begin errMsg := 'Unable to locate reset'; result := false; exit; end;
+   @libGetNumberOfReactions        := loadSingleMethod ('getNumberOfReactions');
+   @libGetNumberOfBoundarySpecies  := loadSingleMethod ('getNumberOfBoundarySpecies');
+   @libGetNumberOfFloatingSpecies  := loadSingleMethod ('getNumberOfFloatingSpecies');
+   @libGetNumberOfGlobalParameters := loadSingleMethod ('getNumberOfGlobalParameters');
+   @libGetNumberOfCompartments     := loadSingleMethod ('getNumberOfCompartments');
 
-   @libGetNumberOfReactions := GetProcAddress (dllHandle, PChar ('getNumberOfReactions'));
-   if not Assigned (libGetNumberOfReactions) then
-      begin errMsg := 'Unable to locate getNumberOfReactions'; result := false; exit; end;
-   @libGetNumberOfBoundarySpecies := GetProcAddress (dllHandle, PChar ('getNumberOfBoundarySpecies'));
-   if not Assigned (libGetNumberOfBoundarySpecies) then
-      begin errMsg := 'Unable to locate getNumberOfBoundarySpecies'; result := false; exit; end;
-   @libGetNumberOfFloatingSpecies := GetProcAddress (dllHandle, PChar ('getNumberOfFloatingSpecies'));
-   if not Assigned (libGetNumberOfFloatingSpecies) then
-      begin errMsg := 'Unable to locate getNumberOfFloatingSpecies'; result := false; exit; end;
-   @libGetNumberOfGlobalParameters := GetProcAddress (dllHandle, PChar ('getNumberOfGlobalParameters'));
-   if not Assigned (libGetNumberOfGlobalParameters) then
-      begin errMsg := 'Unable to locate getNumberOfGlobalParameters'; result := false; exit; end;
-   @libSetFloatingSpeciesByIndex := GetProcAddress (dllHandle, PChar ('setFloatingSpeciesByIndex'));
-   if not Assigned (libSetFloatingSpeciesByIndex) then
-      begin errMsg := 'Unable to locate setFloatingSpeciesByIndex'; result := false; exit; end;
-   @libSetBoundarySpeciesByIndex := GetProcAddress (dllHandle, PChar ('setBoundarySpeciesByIndex'));
-   if not Assigned (libSetBoundarySpeciesByIndex) then
-      begin errMsg := 'Unable to locate setBoundarySpeciesByIndex'; result := false; exit; end;
-   //@libSetGlobalParameterByIndex := GetProcAddress (dllHandle, PChar ('getGlobalParameterByIndex'));
-   //if not Assigned (libSetGlobalParameterByIndex) then
-   //   begin errMsg := 'Unable to locate getGlobalParameterByIndex'; result := false; exit; end;
+   @libSetCompartmentByIndex       := loadSingleMethod ('setCompartmentByIndex');
+   @libSetFloatingSpeciesByIndex   := loadSingleMethod ('setFloatingSpeciesByIndex');
+   @libSetBoundarySpeciesByIndex   := loadSingleMethod ('setBoundarySpeciesByIndex');
+   @libSetGlobalParameterByIndex   := loadSingleMethod ('setGlobalParameterByIndex');
 
-   @libGetGlobalParameterByIndex := GetProcAddress (dllHandle, PChar ('getGlobalParameterByIndex'));
-   if not Assigned (libGetGlobalParameterByIndex) then
-      begin errMsg := 'Unable to locate getGlobalParameterByIndex'; result := false; exit; end;
+   @libGetCompartmentByIndex       := loadSingleMethod ('getCompartmentByIndex');
+   @libGetFloatingSpeciesByIndex   := loadSingleMethod ('getFloatingSpeciesByIndex');
+   @libGetBoundarySpeciesByIndex   := loadSingleMethod ('getBoundarySpeciesByIndex');
+   @libGetGlobalParameterByIndex   := loadSingleMethod ('getGlobalParameterByIndex');
 
-   @libGetNumberOfDependentSpecies := GetProcAddress (dllHandle, PChar ('getNumberOfDependentSpecies'));
-   if not Assigned (libGetNumberOfDependentSpecies) then
-      begin errMsg := 'Unable to locate getNumberOfInDependentSpecies'; result := false; exit; end;
-   @libGetNumberOfIndependentSpecies := GetProcAddress (dllHandle, PChar ('getNumberOfIndependentSpecies'));
-   if not Assigned (libGetNumberOfIndependentSpecies) then
-      begin errMsg := 'Unable to locate getNumberOfIndependentSpecies'; result := false; exit; end;
+   @libGetNumberOfDependentSpecies   := loadSingleMethod ('getNumberOfDependentSpecies');
+   @libGetNumberOfIndependentSpecies := loadSingleMethod ('getNumberOfIndependentSpecies');
+
+   @libSteadyState                  := loadSingleMethod ('steadyState');
+   @libComputeSteadyStateValues     := loadSingleMethod ('computeSteadyStateValues');
+   @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList');
+   @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList');
+
+   @libGetReactionRate := loadSingleMethod ('getReactionRate');
+
+   @libGetCompartmentNames      := loadSingleMethod ('getCompartmentNames');
+   @libGetReactionNames         := loadSingleMethod ('getReactionNames');
+   @libGetBoundarySpeciesNames  := loadSingleMethod ('getBoundarySpeciesNames');
+   @libGetFloatingSpeciesNames  := loadSingleMethod ('getFloatingSpeciesNames');
+   @libGetGlobalParameterNames  := loadSingleMethod ('getGlobalParameterNames');
+   @libGetAvailableSymbols      := loadSingleMethod ('getAvailableSymbols');
+
+   @libGetStoichiometryMatrix   := loadSingleMethod ('getStoichiometryMatrix');
+
+   @libFreeRRInstance := loadSingleMethod ('freeRRInstance');
+   @libFreeResult     := loadSingleMethod ('freeResult');
+   @libFreeMatrix     := loadSingleMethod ('freeMatrix');
+   @libFreeText       := loadSingleMethod ('freeText');
+   @libFreeStringList := loadSingleMethod ('freeStringList');
 
 
-
-   @libSteadyState := GetProcAddress (dllHandle, PChar ('steadyState'));
-   if not Assigned (libSteadyState) then
-      begin errMsg := 'Unable to locate steadyState'; result := false; exit; end;
-   @libComputeSteadyStateValues := GetProcAddress (dllHandle, PChar ('computeSteadyStateValues'));
-   if not Assigned (libComputeSteadyStateValues) then
-      begin errMsg := 'Unable to locate computeSteadyStateValues'; result := false; exit; end;
-   @libSetSteadyStateSelectionList := GetProcAddress (dllHandle, PChar ('setSteadyStateSelectionList'));
-   if not Assigned (libSetSteadyStateSelectionList) then
-      begin errMsg := 'Unable to locate setSteadyStateSelectionList'; result := false; exit; end;
-
-
-   @libGetReactionRate := GetProcAddress (dllHandle, PChar ('getReactionRate'));
-   if not Assigned (libGetReactionRate) then
-      begin errMsg := 'Unable to locate getReactionRate'; result := false; exit; end;
-   @libOneStep := GetProcAddress (dllHandle, PChar ('oneStep'));
-   if not Assigned (libOneStep) then
-      begin errMsg := 'Unable to locate oneStep'; result := false; exit; end;
-   @libGetBoundarySpeciesNames := GetProcAddress (dllHandle, PChar ('getBoundarySpeciesNames'));
-   if not Assigned (libGetBoundarySpeciesNames) then
-      begin errMsg := 'Unable to locate getBoundarySpeciesNames'; result := false; exit; end;
-   @libGetFloatingSpeciesNames := GetProcAddress (dllHandle, PChar ('getFloatingSpeciesNames'));
-   if not Assigned (libGetFloatingSpeciesNames) then
-      begin errMsg := 'Unable to locate getFloatingSpeciesNames'; result := false; exit; end;
-   @libGetGlobalParameterNames := GetProcAddress (dllHandle, PChar ('getGlobalParameterNames'));
-   if not Assigned (libGetGlobalParameterNames) then
-      begin errMsg := 'Unable to locate getGlobalParameterNames'; result := false; exit; end;
-   @libSetSteadyStateSelectionList := GetProcAddress (dllHandle, PChar ('setSteadyStateSelectionList'));
-   if not Assigned (libSetSteadyStateSelectionList) then
-      begin errMsg := 'Unable to locate setSteadyStateSelectionList'; result := false; exit; end;
-   @libGetAvailableSymbols := GetProcAddress (dllHandle, PChar ('getAvailableSymbols'));
-   if not Assigned (libGetAvailableSymbols) then
-      begin errMsg := 'Unable to locate getAvailableSymbols'; result := false; exit; end;
-
-   @libGetStoichiometryMatrix := GetProcAddress (dllHandle, PChar ('getStoichiometryMatrix'));
-   if not Assigned (libGetStoichiometryMatrix) then
-      begin errMsg := 'Unable to locate getStoichiometryMatrix'; result := false; exit; end;
-
-   @libFreeResult := GetProcAddress (dllHandle, PChar ('freeResult'));
-   if not Assigned (libFreeResult) then
-      begin errMsg := 'Unable to locate freeResult'; result := false; exit; end;
-   @libFreeMatrix := GetProcAddress (dllHandle, PChar ('freeMatrix'));
-   if not Assigned (libFreeMatrix) then
-      begin errMsg := 'Unable to locate freeMatrix'; result := false; exit; end;
-   @libFreeText := GetProcAddress (dllHandle, PChar ('freeText'));
-   if not Assigned (libFreeText) then
-      begin errMsg := 'Unable to locate freeText'; result := false; exit; end;
    //@libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeDoubleVector'));
    //if not Assigned (libFreeDoubleVector) then
    //   begin errMsg := 'Unable to locate freeDoubleVector'; result := false; exit; end;
+   except
+     on E: Exception do
+        begin
+        errMsg := e.message;
+        result := false;
+        exit;
+        end;
+   end;
 end;
 
 function loadRoadRunner (var errMsg : AnsiString) : boolean;
