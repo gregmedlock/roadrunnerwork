@@ -9,7 +9,6 @@ uses
 type
   TfrmMain = class(TForm)
     pnlBottm: TPanel;
-    lblProgress: TLabel;
     btnGetCopyright: TButton;
     btnLoadSBML: TButton;
     grid: TStringGrid;
@@ -36,11 +35,19 @@ type
     lblCommon: TLabel;
     edtCommonInteger: TEdit;
     Label2: TLabel;
-    btnDisplayModelSumamry: TButton;
+    btnDisplayModelSumamryByGetValue: TButton;
     Button1: TButton;
     btnGetGlobalParameterIndex: TButton;
     btnGetFloatingSpeciesByIndex: TButton;
     btnGetBoundarySpeciesByIndex: TButton;
+    edtProgress: TEdit;
+    btnGetSBML: TButton;
+    btnGetCompartmentVolumeByIndex: TButton;
+    btnSetCompartmentVolumeByIndex: TButton;
+    btnDisplayModelSumamryByGetIndex: TButton;
+    TabSheetCapabilities: TTabSheet;
+    btnGetCapabilities: TButton;
+    memoCapabilities: TMemo;
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetReactionNamesClick(Sender: TObject);
@@ -53,15 +60,25 @@ type
     procedure btnSimulateClick(Sender: TObject);
     procedure btnGetCodeClick(Sender: TObject);
     procedure btnSetFloatingSpeciesByIndexClick(Sender: TObject);
-    procedure btnDisplayModelSumamryClick(Sender: TObject);
+    procedure btnDisplayModelSumamryByGetValueClick(Sender: TObject);
     procedure btnSetBoundarySpeciesByIndexClick(Sender: TObject);
     procedure btnGetGlobalParameterIndexClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure btnGetFloatingSpeciesByIndexClick(Sender: TObject);
+    procedure btnGetBoundarySpeciesByIndexClick(Sender: TObject);
+    procedure btnGetSBMLClick(Sender: TObject);
+    procedure btnGetCompartmentVolumeByIndexClick(Sender: TObject);
+    procedure btnSetCompartmentVolumeByIndexClick(Sender: TObject);
+    procedure btnDisplayModelSumamryByGetIndexClick(Sender: TObject);
+    procedure btnGetCapabilitiesClick(Sender: TObject);
   private
     { Private declarations }
-    procedure generateSummaryOfModel;
+    procedure getSummaryOfModelByIndex;
+    procedure getSummaryOfModelByGetValue;
   public
     { Public declarations }
     rrInstance : Pointer;
+    loadedSBMLStr : AnsiString;
   end;
 
 var
@@ -73,6 +90,11 @@ implementation
 
 Uses uMatrix, uRRList;
 
+procedure TfrmMain.btnGetCapabilitiesClick(Sender: TObject);
+begin
+  memoCapabilities.Lines.Text := getCapabilities;
+end;
+
 procedure TfrmMain.btnGetCodeClick(Sender: TObject);
 var c : TRRCCode;
 begin
@@ -82,9 +104,19 @@ begin
   MemoHeader.text := StringReplace (c.Header, #10, #13#10, [rfReplaceAll]);
 end;
 
+procedure TfrmMain.btnGetCompartmentVolumeByIndexClick(Sender: TObject);
+begin
+  edtCommonFloat.Text := floattostr (getCompartmentByIndex((strtoint (edtCommonInteger.Text))));
+end;
+
 procedure TfrmMain.btnGetCopyrightClick(Sender: TObject);
 begin
-  lblProgress.caption := string (getCopyright);
+  edtProgress.text := string (getCopyright);
+end;
+
+procedure TfrmMain.btnGetFloatingSpeciesByIndexClick(Sender: TObject);
+begin
+  edtCommonFloat.Text := floattostr (getFloatingSpeciesByIndex((strtoint (edtCommonInteger.Text))));
 end;
 
 procedure TfrmMain.btnGetGlobalParameterIndexClick(Sender: TObject);
@@ -102,9 +134,18 @@ begin
   strList.Free;
 end;
 
-procedure TfrmMain.btnLoadSBMLClick(Sender: TObject);
+procedure TfrmMain.btnGetSBMLClick(Sender: TObject);
 var str : AnsiString;
-    m : TMatrix;
+begin
+  str := getSBML;
+  if str = loadedSBMLStr then
+     showmessage ('SBML Identical')
+  else
+     showmessage ('SBML not the same');
+end;
+
+procedure TfrmMain.btnLoadSBMLClick(Sender: TObject);
+var m : TMatrix;
     i, j : integer;
     list : TStringList;
 begin
@@ -112,10 +153,10 @@ begin
   setComputeAndAssignConservationLaws (chkConservationLaws.checked);
   lstSummary.Clear;
 
-  str := AnsiString (TFile.ReadAllText(edtModelName.text));
-  if not loadSBML(str) then
+  loadedSBMLStr := AnsiString (TFile.ReadAllText(edtModelName.text));
+  if not loadSBML(loadedSBMLStr) then
      begin
-     lblProgress.Caption := 'Failed to load SBML model';
+     edtProgress.text := 'Failed to load SBML model';
      exit;
      end;
 end;
@@ -130,6 +171,15 @@ begin
      showmessage ('No such boundary species');
 end;
 
+procedure TfrmMain.btnSetCompartmentVolumeByIndexClick(Sender: TObject);
+var value : double;
+    index : integer;
+begin
+  index := strtoint (edtCommonInteger.Text);
+  value := strtofloat (edtCommonFloat.Text);
+  setCompartmentByIndex(index, value);
+end;
+
 procedure TfrmMain.btnSetFloatingSpeciesByIndexClick(Sender: TObject);
 var value : double;
     index : integer;
@@ -139,11 +189,13 @@ begin
   setFloatingSpeciesByIndex(index, value);
 end;
 
-procedure TfrmMain.generateSummaryOfModel;
+
+procedure TfrmMain.getSummaryOfModelByIndex;
 var list: TStringList;
     i : integer;
 begin
   lstSummary.Clear;
+  lstSummary.Items.Add ('Number of Compartments: ' + inttostr (getNumberOfCompartments));
   lstSummary.Items.Add ('Number of Reactions: ' + inttostr (getNumberOfReactions));
   lstSummary.Items.Add ('Number of Boundary Species: ' + inttostr (getNumberOfBoundarySpecies));
   lstSummary.Items.Add ('Number of Floating Species: ' + inttostr (getNumberOfFloatingSpecies));
@@ -152,6 +204,61 @@ begin
 
   lstSummary.Items.Add ('GetNumber of Dependent Species: ' + inttostr (getNumberOfDependentSpecies));
   lstSummary.Items.Add ('GetNumber of Independent Species: ' + inttostr (getNumberOfInDependentSpecies));
+  lstSummary.Items.Add ('');
+
+
+  list := getCompartmentNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Compartment Name: ' + list[i] +  ' (' + floattostr (getCompartmentByIndex (i)) + ')');
+  list.Free;
+  lstSummary.Items.Add ('');
+
+  list := getReactionNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Reaction Name: ' + list[i]);
+  list.Free;
+  lstSummary.Items.Add ('');
+
+  list := getBoundarySpeciesNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Boundary Species Name: ' + list[i] + ' (' + floattostr (getBoundarySpeciesByIndex (i)) + ')');
+  if list.Count > 0 then lstSummary.Items.Add ('');
+  list.Free;
+
+  list := getFloatingSpeciesNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Floating Species Name: ' + list[i] + ' (' + floattostr (getFloatingSpeciesByIndex (i)) + ')');
+  list.Free;
+  lstSummary.Items.Add ('');
+
+  list := getGlobalParameterNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Global Parameter Name: ' + list[i] + ' (' + floattostr (getGlobalParameterByIndex (i)) + ')');
+  lstSummary.Items.Add ('');
+  list.Free;
+end;
+
+procedure TfrmMain.getSummaryOfModelByGetValue;
+var list: TStringList;
+    i : integer;
+begin
+  lstSummary.Clear;
+  lstSummary.Items.Add ('Number of Compartments: ' + inttostr (getNumberOfCompartments));
+  lstSummary.Items.Add ('Number of Reactions: ' + inttostr (getNumberOfReactions));
+  lstSummary.Items.Add ('Number of Boundary Species: ' + inttostr (getNumberOfBoundarySpecies));
+  lstSummary.Items.Add ('Number of Floating Species: ' + inttostr (getNumberOfFloatingSpecies));
+  lstSummary.Items.Add ('Number of Global Parameters: ' + inttostr (getNumberOfGlobalParameters));
+  lstSummary.Items.Add ('');
+
+  lstSummary.Items.Add ('GetNumber of Dependent Species: ' + inttostr (getNumberOfDependentSpecies));
+  lstSummary.Items.Add ('GetNumber of Independent Species: ' + inttostr (getNumberOfInDependentSpecies));
+  lstSummary.Items.Add ('');
+
+
+  list := getCompartmentNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Compartment Name: ' + list[i] +  ' (' + floattostr (getValue(list[i])) + ')');
+  list.Free;
   lstSummary.Items.Add ('');
 
   list := getReactionNames;
@@ -198,7 +305,7 @@ begin
           grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
   list.free;
 
-  generateSummaryOfModel;
+  getSummaryOfModelByGetValue;
 end;
 
 procedure TfrmMain.btnSteadyStateClick(Sender: TObject);
@@ -219,6 +326,16 @@ begin
   for i := 0 to fn.Count - 1 do
       lstSummary.Items.Add (fn[i] + ' = ' + floattostr (getValue(fn[i])));
   fn.free;
+end;
+
+procedure TfrmMain.Button1Click(Sender: TObject);
+var index : integer;
+    value : double;
+begin
+  index := strtoint (edtCommonInteger.Text);
+  value := strtofloat (edtCommonFloat.Text);
+  if not setGlobalParameterByIndex(index, value) then
+     showmessage ('No such global parameter');
 end;
 
 procedure TfrmMain.chkConservationLawsClick(Sender: TObject);
@@ -242,11 +359,11 @@ begin
   if loadRoadRunner (errMsg) then
      begin
      rrInstance := getRRInstance;
-     lblProgress.caption := 'RoadRunner Loaded: ' + 'Build Date: ' + getBuildDate;
+     edtProgress.text := 'RoadRunner Loaded: ' + 'Build Date: ' + getBuildDate + ', Revision: ' + inttostr (getRevision);
      lblTempFolder.Text := getTempFolder;
      end
   else
-     lblProgress.caption := 'Failed to load: ' + string (errMsg);
+     edtProgress.text := 'Failed to load: ' + string (errMsg);
 end;
 
 procedure TfrmMain.btnLoadTwoModelsClick(Sender: TObject);
@@ -260,7 +377,7 @@ begin
   if b then
      showmessage ('loadSBML successful (true)')
   else
-     showmessage ('Failed to loadSBML (false)');
+     showmessage ('Failed to load SBML (false)');
   if fileExists ('simple.xml') then
      begin
      str2 := AnsiString (TFile.ReadAllText('simple.xml'));
@@ -273,9 +390,14 @@ begin
 end;
 
 
-procedure TfrmMain.btnDisplayModelSumamryClick(Sender: TObject);
+procedure TfrmMain.btnDisplayModelSumamryByGetIndexClick(Sender: TObject);
 begin
-  generateSummaryOfModel;
+  getSummaryOfModelByIndex;
+end;
+
+procedure TfrmMain.btnDisplayModelSumamryByGetValueClick(Sender: TObject);
+begin
+  getSummaryOfModelByGetValue;
 end;
 
 procedure TfrmMain.btnGetAvailableSymbolsClick(Sender: TObject);
@@ -293,6 +415,11 @@ begin
              lstSummary.Items.Add (list[j].getString);
          end;
       end;
+end;
+
+procedure TfrmMain.btnGetBoundarySpeciesByIndexClick(Sender: TObject);
+begin
+  edtCommonFloat.Text := floattostr (getBoundarySpeciesByIndex((strtoint (edtCommonInteger.Text))));
 end;
 
 end.

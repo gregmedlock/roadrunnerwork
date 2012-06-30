@@ -41,28 +41,27 @@ object frmMain: TfrmMain
     Height = 41
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 522
-    ExplicitWidth = 907
-    object lblProgress: TLabel
-      Left = 8
-      Top = 16
-      Width = 13
-      Height = 13
-      Caption = 'Ok'
-    end
     object Label1: TLabel
-      Left = 417
+      Left = 487
       Top = 16
       Width = 66
       Height = 13
       Caption = 'Temp Folder: '
     end
     object lblTempFolder: TEdit
-      Left = 485
+      Left = 555
       Top = 13
       Width = 317
       Height = 21
       TabOrder = 0
+      Text = 'C:\'
+    end
+    object edtProgress: TEdit
+      Left = 8
+      Top = 12
+      Width = 409
+      Height = 21
+      TabOrder = 1
       Text = 'C:\'
     end
   end
@@ -94,8 +93,6 @@ object frmMain: TfrmMain
     DefaultColWidth = 84
     FixedCols = 0
     TabOrder = 3
-    ExplicitLeft = 485
-    ExplicitHeight = 522
   end
   object btnGetReactionNames: TButton
     Left = 328
@@ -178,10 +175,8 @@ object frmMain: TfrmMain
     ActivePage = TabSheet1
     Anchors = [akLeft, akTop, akBottom]
     TabOrder = 12
-    ExplicitHeight = 322
     object TabSheet1: TTabSheet
       Caption = 'List Box'
-      ExplicitHeight = 289
       object lstSummary: TListBox
         Left = 0
         Top = 0
@@ -190,13 +185,11 @@ object frmMain: TfrmMain
         Align = alClient
         ItemHeight = 13
         TabOrder = 0
-        ExplicitHeight = 289
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Source Code'
       ImageIndex = 1
-      ExplicitHeight = 289
       object MemoSource: TMemo
         Left = 0
         Top = 0
@@ -205,13 +198,11 @@ object frmMain: TfrmMain
         Align = alClient
         ScrollBars = ssBoth
         TabOrder = 0
-        ExplicitHeight = 289
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'Header File'
       ImageIndex = 2
-      ExplicitHeight = 289
       object memoHeader: TMemo
         Left = 0
         Top = 0
@@ -220,13 +211,28 @@ object frmMain: TfrmMain
         Align = alClient
         ScrollBars = ssBoth
         TabOrder = 0
-        ExplicitHeight = 289
+      end
+    end
+    object TabSheetCapabilities: TTabSheet
+      Caption = 'Capabilities'
+      ImageIndex = 3
+      object memoCapabilities: TMemo
+        Left = 0
+        Top = 0
+        Width = 463
+        Height = 304
+        Align = alClient
+        TabOrder = 0
+        ExplicitLeft = 112
+        ExplicitTop = 80
+        ExplicitWidth = 185
+        ExplicitHeight = 89
       end
     end
   end
   object btnSetFloatingSpeciesByIndex: TButton
     Left = 328
-    Top = 115
+    Top = 142
     Width = 151
     Height = 25
     Caption = 'Set Float Species Index'
@@ -235,7 +241,7 @@ object frmMain: TfrmMain
   end
   object btnSetBoundarySpeciesByIndex: TButton
     Left = 328
-    Top = 141
+    Top = 168
     Width = 151
     Height = 25
     Caption = 'Set Boundary Species Index'
@@ -246,7 +252,7 @@ object frmMain: TfrmMain
     Left = 8
     Top = 177
     Width = 121
-    Height = 22
+    Height = 21
     TabOrder = 15
     Text = '0.0'
   end
@@ -254,30 +260,32 @@ object frmMain: TfrmMain
     Left = 8
     Top = 133
     Width = 121
-    Height = 22
+    Height = 21
     TabOrder = 16
     Text = '0'
   end
-  object btnDisplayModelSumamry: TButton
+  object btnDisplayModelSumamryByGetValue: TButton
     Left = 135
     Top = 60
     Width = 121
-    Height = 25
-    Caption = 'Display Model Summary'
+    Height = 36
+    Caption = 'Display Model Summary by getValue'
     TabOrder = 17
-    OnClick = btnDisplayModelSumamryClick
+    WordWrap = True
+    OnClick = btnDisplayModelSumamryByGetValueClick
   end
   object Button1: TButton
     Left = 328
-    Top = 168
+    Top = 195
     Width = 151
     Height = 25
     Caption = 'Set Global Parameter Index'
     TabOrder = 18
+    OnClick = Button1Click
   end
   object btnGetGlobalParameterIndex: TButton
     Left = 485
-    Top = 61
+    Top = 88
     Width = 151
     Height = 25
     Caption = 'Get Global Parameter Index'
@@ -286,20 +294,66 @@ object frmMain: TfrmMain
   end
   object btnGetFloatingSpeciesByIndex: TButton
     Left = 485
-    Top = 8
-    Width = 151
-    Height = 25
-    Caption = 'Get Float Species Index'
-    Enabled = False
-    TabOrder = 20
-  end
-  object btnGetBoundarySpeciesByIndex: TButton
-    Left = 485
     Top = 35
     Width = 151
     Height = 25
+    Caption = 'Get Float Species Index'
+    TabOrder = 20
+    OnClick = btnGetFloatingSpeciesByIndexClick
+  end
+  object btnGetBoundarySpeciesByIndex: TButton
+    Left = 485
+    Top = 62
+    Width = 151
+    Height = 25
     Caption = 'Get Boundary Species Index'
-    Enabled = False
     TabOrder = 21
+    OnClick = btnGetBoundarySpeciesByIndexClick
+  end
+  object btnGetSBML: TButton
+    Left = 135
+    Top = 136
+    Width = 121
+    Height = 25
+    Caption = 'Get SBML and Compare'
+    TabOrder = 22
+    OnClick = btnGetSBMLClick
+  end
+  object btnGetCompartmentVolumeByIndex: TButton
+    Left = 485
+    Top = 8
+    Width = 151
+    Height = 25
+    Caption = 'Get Compartment Vol Index'
+    TabOrder = 23
+    OnClick = btnGetCompartmentVolumeByIndexClick
+  end
+  object btnSetCompartmentVolumeByIndex: TButton
+    Left = 328
+    Top = 115
+    Width = 151
+    Height = 25
+    Caption = 'Set Compartment by Index'
+    TabOrder = 24
+    OnClick = btnSetCompartmentVolumeByIndexClick
+  end
+  object btnDisplayModelSumamryByGetIndex: TButton
+    Left = 135
+    Top = 98
+    Width = 121
+    Height = 36
+    Caption = 'Display Model Summary by getIndex'
+    TabOrder = 25
+    WordWrap = True
+    OnClick = btnDisplayModelSumamryByGetIndexClick
+  end
+  object btnGetCapabilities: TButton
+    Left = 135
+    Top = 163
+    Width = 121
+    Height = 25
+    Caption = 'Get Capabilities'
+    TabOrder = 26
+    OnClick = btnGetCapabilitiesClick
   end
 end
