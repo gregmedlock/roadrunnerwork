@@ -94,22 +94,13 @@ object frmMain: TfrmMain
     FixedCols = 0
     TabOrder = 3
   end
-  object btnGetReactionNames: TButton
-    Left = 328
-    Top = 61
-    Width = 151
-    Height = 25
-    Caption = 'Get Reaction Names'
-    TabOrder = 4
-    OnClick = btnGetReactionNamesClick
-  end
   object btnGetAvailableSymbols: TButton
     Left = 328
-    Top = 88
+    Top = 62
     Width = 151
     Height = 25
     Caption = 'Get Available Symbols'
-    TabOrder = 5
+    TabOrder = 4
     OnClick = btnGetAvailableSymbolsClick
   end
   object btnSteadyState: TButton
@@ -118,7 +109,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 25
     Caption = 'Steady State'
-    TabOrder = 6
+    TabOrder = 5
     OnClick = btnSteadyStateClick
   end
   object edtModelName: TEdit
@@ -126,7 +117,7 @@ object frmMain: TfrmMain
     Top = 37
     Width = 121
     Height = 21
-    TabOrder = 7
+    TabOrder = 6
     Text = 'ss_MinusOneError.xml'
   end
   object btnLoadTwoModels: TButton
@@ -135,7 +126,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 25
     Caption = 'Load Two Models Test'
-    TabOrder = 8
+    TabOrder = 7
     OnClick = btnLoadTwoModelsClick
   end
   object chkConservationLaws: TCheckBox
@@ -146,7 +137,7 @@ object frmMain: TfrmMain
     Caption = 'Use Conservation Laws'
     Checked = True
     State = cbChecked
-    TabOrder = 9
+    TabOrder = 8
     OnClick = chkConservationLawsClick
   end
   object btnSimulate: TButton
@@ -155,7 +146,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 25
     Caption = 'Simulate'
-    TabOrder = 10
+    TabOrder = 9
     OnClick = btnSimulateClick
   end
   object btnGetCode: TButton
@@ -164,7 +155,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Get Generated Code'
-    TabOrder = 11
+    TabOrder = 10
     OnClick = btnGetCodeClick
   end
   object PageControl1: TPageControl
@@ -174,7 +165,7 @@ object frmMain: TfrmMain
     Height = 332
     ActivePage = TabSheet1
     Anchors = [akLeft, akTop, akBottom]
-    TabOrder = 12
+    TabOrder = 11
     object TabSheet1: TTabSheet
       Caption = 'List Box'
       object lstSummary: TListBox
@@ -223,29 +214,25 @@ object frmMain: TfrmMain
         Height = 304
         Align = alClient
         TabOrder = 0
-        ExplicitLeft = 112
-        ExplicitTop = 80
-        ExplicitWidth = 185
-        ExplicitHeight = 89
       end
     end
   end
   object btnSetFloatingSpeciesByIndex: TButton
     Left = 328
-    Top = 142
+    Top = 116
     Width = 151
     Height = 25
     Caption = 'Set Float Species Index'
-    TabOrder = 13
+    TabOrder = 12
     OnClick = btnSetFloatingSpeciesByIndexClick
   end
   object btnSetBoundarySpeciesByIndex: TButton
     Left = 328
-    Top = 168
+    Top = 142
     Width = 151
     Height = 25
     Caption = 'Set Boundary Species Index'
-    TabOrder = 14
+    TabOrder = 13
     OnClick = btnSetBoundarySpeciesByIndexClick
   end
   object edtCommonFloat: TEdit
@@ -253,7 +240,7 @@ object frmMain: TfrmMain
     Top = 177
     Width = 121
     Height = 21
-    TabOrder = 15
+    TabOrder = 14
     Text = '0.0'
   end
   object edtCommonInteger: TEdit
@@ -261,7 +248,7 @@ object frmMain: TfrmMain
     Top = 133
     Width = 121
     Height = 21
-    TabOrder = 16
+    TabOrder = 15
     Text = '0'
   end
   object btnDisplayModelSumamryByGetValue: TButton
@@ -270,17 +257,17 @@ object frmMain: TfrmMain
     Width = 121
     Height = 36
     Caption = 'Display Model Summary by getValue'
-    TabOrder = 17
+    TabOrder = 16
     WordWrap = True
     OnClick = btnDisplayModelSumamryByGetValueClick
   end
   object Button1: TButton
     Left = 328
-    Top = 195
+    Top = 169
     Width = 151
     Height = 25
     Caption = 'Set Global Parameter Index'
-    TabOrder = 18
+    TabOrder = 17
     OnClick = Button1Click
   end
   object btnGetGlobalParameterIndex: TButton
@@ -289,7 +276,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Get Global Parameter Index'
-    TabOrder = 19
+    TabOrder = 18
     OnClick = btnGetGlobalParameterIndexClick
   end
   object btnGetFloatingSpeciesByIndex: TButton
@@ -298,7 +285,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Get Float Species Index'
-    TabOrder = 20
+    TabOrder = 19
     OnClick = btnGetFloatingSpeciesByIndexClick
   end
   object btnGetBoundarySpeciesByIndex: TButton
@@ -307,7 +294,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Get Boundary Species Index'
-    TabOrder = 21
+    TabOrder = 20
     OnClick = btnGetBoundarySpeciesByIndexClick
   end
   object btnGetSBML: TButton
@@ -316,7 +303,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 25
     Caption = 'Get SBML and Compare'
-    TabOrder = 22
+    TabOrder = 21
     OnClick = btnGetSBMLClick
   end
   object btnGetCompartmentVolumeByIndex: TButton
@@ -325,16 +312,16 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Get Compartment Vol Index'
-    TabOrder = 23
+    TabOrder = 22
     OnClick = btnGetCompartmentVolumeByIndexClick
   end
   object btnSetCompartmentVolumeByIndex: TButton
     Left = 328
-    Top = 115
+    Top = 89
     Width = 151
     Height = 25
     Caption = 'Set Compartment by Index'
-    TabOrder = 24
+    TabOrder = 23
     OnClick = btnSetCompartmentVolumeByIndexClick
   end
   object btnDisplayModelSumamryByGetIndex: TButton
@@ -343,7 +330,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 36
     Caption = 'Display Model Summary by getIndex'
-    TabOrder = 25
+    TabOrder = 24
     WordWrap = True
     OnClick = btnDisplayModelSumamryByGetIndexClick
   end
@@ -353,7 +340,16 @@ object frmMain: TfrmMain
     Width = 121
     Height = 25
     Caption = 'Get Capabilities'
-    TabOrder = 26
+    TabOrder = 25
     OnClick = btnGetCapabilitiesClick
+  end
+  object btnEvalModel: TButton
+    Left = 135
+    Top = 201
+    Width = 121
+    Height = 25
+    Caption = 'Eval Model'
+    TabOrder = 26
+    OnClick = btnEvalModelClick
   end
 end

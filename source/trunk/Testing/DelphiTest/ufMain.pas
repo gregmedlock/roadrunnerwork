@@ -12,7 +12,6 @@ type
     btnGetCopyright: TButton;
     btnLoadSBML: TButton;
     grid: TStringGrid;
-    btnGetReactionNames: TButton;
     btnGetAvailableSymbols: TButton;
     btnSteadyState: TButton;
     edtModelName: TEdit;
@@ -48,9 +47,9 @@ type
     TabSheetCapabilities: TTabSheet;
     btnGetCapabilities: TButton;
     memoCapabilities: TMemo;
+    btnEvalModel: TButton;
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
-    procedure btnGetReactionNamesClick(Sender: TObject);
     procedure btnGetAvailableSymbolsClick(Sender: TObject);
     procedure btnSteadyStateClick(Sender: TObject);
     procedure btnLoadTwoModelsClick(Sender: TObject);
@@ -71,6 +70,7 @@ type
     procedure btnSetCompartmentVolumeByIndexClick(Sender: TObject);
     procedure btnDisplayModelSumamryByGetIndexClick(Sender: TObject);
     procedure btnGetCapabilitiesClick(Sender: TObject);
+    procedure btnEvalModelClick(Sender: TObject);
   private
     { Private declarations }
     procedure getSummaryOfModelByIndex;
@@ -122,16 +122,6 @@ end;
 procedure TfrmMain.btnGetGlobalParameterIndexClick(Sender: TObject);
 begin
   edtCommonFloat.Text := floattostr (getGlobalParameterByIndex((strtoint (edtCommonInteger.Text))));
-end;
-
-procedure TfrmMain.btnGetReactionNamesClick(Sender: TObject);
-var i : integer; strList : TStringList;
-begin
-  strList := getReactionNames;
-  lstSummary.Clear;
-  for i := 0 to strList.Count - 1 do
-      lstSummary.Items.Add (strList[i]);
-  strList.Free;
 end;
 
 procedure TfrmMain.btnGetSBMLClick(Sender: TObject);
@@ -193,6 +183,7 @@ end;
 procedure TfrmMain.getSummaryOfModelByIndex;
 var list: TStringList;
     i : integer;
+    d : TDoubleArray;
 begin
   lstSummary.Clear;
   lstSummary.Items.Add ('Number of Compartments: ' + inttostr (getNumberOfCompartments));
@@ -206,6 +197,7 @@ begin
   lstSummary.Items.Add ('GetNumber of Independent Species: ' + inttostr (getNumberOfInDependentSpecies));
   lstSummary.Items.Add ('');
 
+  //evalModel;  // <- should we need to do this?
 
   list := getCompartmentNames;
   for i := 0 to list.Count - 1 do
@@ -214,9 +206,11 @@ begin
   lstSummary.Items.Add ('');
 
   list := getReactionNames;
+  d := getReactionRates;
   for i := 0 to list.Count - 1 do
-      lstSummary.Items.Add ('Reaction Name: ' + list[i]);
+      lstSummary.Items.Add ('Reaction Name: ' + list[i] + '   Reaction Rate=' + floattostr (d[i]));
   list.Free;
+  setLength (d, 0);
   lstSummary.Items.Add ('');
 
   list := getBoundarySpeciesNames;
@@ -236,11 +230,18 @@ begin
       lstSummary.Items.Add ('Global Parameter Name: ' + list[i] + ' (' + floattostr (getGlobalParameterByIndex (i)) + ')');
   lstSummary.Items.Add ('');
   list.Free;
+
+  list := getRatesOfChangeNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Rates of Change Name: ' + list[i] + ' (' + floattostr (getValue(list[i])) + ')');
+  lstSummary.Items.Add ('');
+  list.Free;
 end;
 
 procedure TfrmMain.getSummaryOfModelByGetValue;
 var list: TStringList;
     i : integer;
+    d : TDoubleArray;
 begin
   lstSummary.Clear;
   lstSummary.Items.Add ('Number of Compartments: ' + inttostr (getNumberOfCompartments));
@@ -262,9 +263,11 @@ begin
   lstSummary.Items.Add ('');
 
   list := getReactionNames;
+  d := getReactionRates;
   for i := 0 to list.Count - 1 do
-      lstSummary.Items.Add ('Reaction Name: ' + list[i]);
+      lstSummary.Items.Add ('Reaction Name: ' + list[i] + '   Reaction Rate=' + floattostr (d[i]));
   list.Free;
+  setLength (d, 0);
   lstSummary.Items.Add ('');
 
   list := getBoundarySpeciesNames;
@@ -282,6 +285,12 @@ begin
   list := getGlobalParameterNames;
   for i := 0 to list.Count - 1 do
       lstSummary.Items.Add ('Global Parameter Name: ' + list[i] + ' (' + floattostr (getValue(list[i])) + ')');
+  lstSummary.Items.Add ('');
+  list.Free;
+
+  list := getRatesOfChangeNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Rates of Change Name: ' + list[i] + ' (' + floattostr (getValue(list[i])) + ')');
   lstSummary.Items.Add ('');
   list.Free;
 end;
@@ -398,6 +407,11 @@ end;
 procedure TfrmMain.btnDisplayModelSumamryByGetValueClick(Sender: TObject);
 begin
   getSummaryOfModelByGetValue;
+end;
+
+procedure TfrmMain.btnEvalModelClick(Sender: TObject);
+begin
+  evalModel();
 end;
 
 procedure TfrmMain.btnGetAvailableSymbolsClick(Sender: TObject);
