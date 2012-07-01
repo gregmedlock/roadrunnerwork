@@ -8,9 +8,10 @@
 #include "rr_c_api.h"
 //---------------------------------------------------------------------------
 #if defined(_MSC_VER)
-  #include <direct.h>
-  #define getcwd _getcwd
-  #define chdir  _chrdir
+	#include <direct.h>
+	#define getcwd _getcwd
+	#define chdir  _chrdir
+	#define MAXPATH _MAX_PATH
 #elif defined(__BORLANDC__)
   	#include <dir.h>
 #else
@@ -131,8 +132,8 @@ int main(int argc, char* argv[])
     cout<<"Rate of change:"<<value<<endl;
 
     cout<<"SVN revision: "<<getRevision()<<endl;
-    cout<<getLatestCommitAuthor()<<endl;
-    cout<<getLatestLog()<<endl;
+//    cout<<getLatestCommitAuthor()<<endl;
+//    cout<<getLatestLog()<<endl;
 
 //    if(!getScaledFloatingSpeciesElasticity("test", "test", value))
 //    {

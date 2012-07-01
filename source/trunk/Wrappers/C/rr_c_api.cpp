@@ -71,22 +71,22 @@ char* __stdcall getBuildDate()
     return date;
 }
 
-int __stdcall getRevision()
+char* __stdcall getRevision()
 {
-    return SVN_VERSION;
+    return createText(SVN_VERSION);
 }
 
-char* __stdcall getLatestLog()
-{
-    return createText(SVN_LASTLOG);
-}
+//char* __stdcall getLatestLog()
+//{
+//    return createText(SVN_LASTLOG);
+//}
 
-char* __stdcall getLatestCommitAuthor()
-{
-    char* text = new char[strlen(SVN_LAST_COMMIT_AUTHOR) + 1];
-    strcpy(text, SVN_LAST_COMMIT_AUTHOR);
-    return text;
-}
+//char* __stdcall getLatestCommitAuthor()
+//{
+//    char* text = new char[strlen(SVN_LAST_COMMIT_AUTHOR) + 1];
+//    strcpy(text, SVN_LAST_COMMIT_AUTHOR);
+//    return text;
+//}
 
 RRHandle __stdcall getRRInstance()
 {
@@ -1371,7 +1371,8 @@ RRStringListHandle __stdcall getSteadyStateSelectionList()
 
 RRMatrixHandle __stdcall getFullJacobian()
 {
-	try
+
+	try
     {
         if(!gRRHandle)
         {
@@ -1393,7 +1394,8 @@ RRMatrixHandle __stdcall getFullJacobian()
 
 RRMatrixHandle __stdcall getReducedJacobian()
 {
-	try
+
+	try
     {
         if(!gRRHandle)
         {

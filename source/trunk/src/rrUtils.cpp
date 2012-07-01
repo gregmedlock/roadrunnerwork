@@ -282,7 +282,7 @@ bool UnLoadDLL(HINSTANCE dllHandle)
     	return false;
     }
 
-	bool result = FreeLibrary(dllHandle);
+	BOOL result = FreeLibrary(dllHandle);
     if(result == false)
     {
         Log(lWarning) << "Failed to unload DLL library" << endl;

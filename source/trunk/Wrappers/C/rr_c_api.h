@@ -58,9 +58,9 @@ C_DECL_SPEC bool                    __stdcall   setCapabilities (const char* cap
 C_DECL_SPEC char*                   __stdcall   getCapabilities();
 
 // Utility and informational methods
-C_DECL_SPEC int                     __stdcall   getRevision();
-C_DECL_SPEC char*                   __stdcall   getLatestLog();
-C_DECL_SPEC char*                   __stdcall   getLatestCommitAuthor();
+C_DECL_SPEC char*                   __stdcall   getRevision();
+//C_DECL_SPEC char*                   __stdcall   getLatestLog();
+//C_DECL_SPEC char*                   __stdcall   getLatestCommitAuthor();
 C_DECL_SPEC char*                   __stdcall   getBuildDate();
 C_DECL_SPEC char*                   __stdcall   getCopyright();
 C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder);
