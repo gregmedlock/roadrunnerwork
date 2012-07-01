@@ -14,7 +14,6 @@ type
     grid: TStringGrid;
     btnGetAvailableSymbols: TButton;
     btnSteadyState: TButton;
-    edtModelName: TEdit;
     btnLoadTwoModels: TButton;
     Label1: TLabel;
     lblTempFolder: TEdit;
@@ -48,6 +47,9 @@ type
     btnGetCapabilities: TButton;
     memoCapabilities: TMemo;
     btnEvalModel: TButton;
+    btnGetFullMatrix: TButton;
+    btnGetReducedMatrix: TButton;
+    lstModelName: TListBox;
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetAvailableSymbolsClick(Sender: TObject);
@@ -71,6 +73,8 @@ type
     procedure btnDisplayModelSumamryByGetIndexClick(Sender: TObject);
     procedure btnGetCapabilitiesClick(Sender: TObject);
     procedure btnEvalModelClick(Sender: TObject);
+    procedure btnGetFullMatrixClick(Sender: TObject);
+    procedure btnGetReducedMatrixClick(Sender: TObject);
   private
     { Private declarations }
     procedure getSummaryOfModelByIndex;
@@ -119,9 +123,43 @@ begin
   edtCommonFloat.Text := floattostr (getFloatingSpeciesByIndex((strtoint (edtCommonInteger.Text))));
 end;
 
+procedure TfrmMain.btnGetFullMatrixClick(Sender: TObject);
+var m : TMatrix;
+    i, j : integer;
+begin
+  m := getFullJacobian;
+  for i := 0 to grid.RowCount - 1 do
+      for j := 0 to grid.ColCount - 1 do
+          grid.Cells [j, i] := '';
+
+  grid.ColCount := m.c + 1;
+  grid.RowCount := m.r + 1;
+  for i := 1 to m.r do
+      for j := 1 to m.c do
+          grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
+end;
+
+
 procedure TfrmMain.btnGetGlobalParameterIndexClick(Sender: TObject);
 begin
   edtCommonFloat.Text := floattostr (getGlobalParameterByIndex((strtoint (edtCommonInteger.Text))));
+end;
+
+
+procedure TfrmMain.btnGetReducedMatrixClick(Sender: TObject);
+var m : TMatrix;
+    i, j : integer;
+begin
+  m := getReducedJacobian;
+  for i := 0 to grid.RowCount - 1 do
+      for j := 0 to grid.ColCount - 1 do
+          grid.Cells [j, i] := '';
+
+  grid.ColCount := m.c + 1;
+  grid.RowCount := m.r + 1;
+  for i := 1 to m.r do
+      for j := 1 to m.c do
+          grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
 end;
 
 procedure TfrmMain.btnGetSBMLClick(Sender: TObject);
@@ -143,7 +181,7 @@ begin
   setComputeAndAssignConservationLaws (chkConservationLaws.checked);
   lstSummary.Clear;
 
-  loadedSBMLStr := AnsiString (TFile.ReadAllText(edtModelName.text));
+  loadedSBMLStr := AnsiString (TFile.ReadAllText(lstModelName.Items[lstModelName.ItemIndex]));
   if not loadSBML(loadedSBMLStr) then
      begin
      edtProgress.text := 'Failed to load SBML model';
@@ -236,6 +274,18 @@ begin
       lstSummary.Items.Add ('Rates of Change Name: ' + list[i] + ' (' + floattostr (getValue(list[i])) + ')');
   lstSummary.Items.Add ('');
   list.Free;
+
+  list := getEigenValueNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Eigenvalue Names: ' + list[i] + ' (' + floattostr (getValue(list[i])) + ')');
+  lstSummary.Items.Add ('');
+  list.Free;
+
+  list := getElasticityNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Elasticity Names: ' + list[i] + ' (' + floattostr (getValue(list[i])) + ')');
+  lstSummary.Items.Add ('');
+  list.Free;
 end;
 
 procedure TfrmMain.getSummaryOfModelByGetValue;
@@ -291,6 +341,18 @@ begin
   list := getRatesOfChangeNames;
   for i := 0 to list.Count - 1 do
       lstSummary.Items.Add ('Rates of Change Name: ' + list[i] + ' (' + floattostr (getValue(list[i])) + ')');
+  lstSummary.Items.Add ('');
+  list.Free;
+
+  list := getEigenValueNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Eigenvalue Names: ' + list[i] + ' (' + floattostr (getValue(list[i])) + ')');
+  lstSummary.Items.Add ('');
+  list.Free;
+
+  list := getElasticityNames;
+  for i := 0 to list.Count - 1 do
+      lstSummary.Items.Add ('Elasticity Names: ' + list[i] + ' (' + floattostr (getValue(list[i])) + ')');
   lstSummary.Items.Add ('');
   list.Free;
 end;
@@ -373,6 +435,7 @@ begin
      end
   else
      edtProgress.text := 'Failed to load: ' + string (errMsg);
+  lstModelName.ItemIndex := 0;
 end;
 
 procedure TfrmMain.btnLoadTwoModelsClick(Sender: TObject);

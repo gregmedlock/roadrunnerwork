@@ -22,14 +22,14 @@ object frmMain: TfrmMain
   TextHeight = 13
   object lblCommon: TLabel
     Left = 8
-    Top = 161
+    Top = 187
     Width = 76
     Height = 13
     Caption = 'Common double'
   end
   object Label2: TLabel
     Left = 8
-    Top = 117
+    Top = 143
     Width = 80
     Height = 13
     Caption = 'Common Integer'
@@ -105,28 +105,20 @@ object frmMain: TfrmMain
   end
   object btnSteadyState: TButton
     Left = 8
-    Top = 86
+    Top = 112
     Width = 121
     Height = 25
     Caption = 'Steady State'
     TabOrder = 5
     OnClick = btnSteadyStateClick
   end
-  object edtModelName: TEdit
-    Left = 8
-    Top = 37
-    Width = 121
-    Height = 21
-    TabOrder = 6
-    Text = 'ss_MinusOneError.xml'
-  end
   object btnLoadTwoModels: TButton
-    Left = 8
+    Left = 296
     Top = 201
     Width = 121
     Height = 25
     Caption = 'Load Two Models Test'
-    TabOrder = 7
+    TabOrder = 6
     OnClick = btnLoadTwoModelsClick
   end
   object chkConservationLaws: TCheckBox
@@ -137,16 +129,16 @@ object frmMain: TfrmMain
     Caption = 'Use Conservation Laws'
     Checked = True
     State = cbChecked
-    TabOrder = 8
+    TabOrder = 7
     OnClick = chkConservationLawsClick
   end
   object btnSimulate: TButton
     Left = 8
-    Top = 60
+    Top = 86
     Width = 121
     Height = 25
     Caption = 'Simulate'
-    TabOrder = 9
+    TabOrder = 8
     OnClick = btnSimulateClick
   end
   object btnGetCode: TButton
@@ -155,7 +147,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Get Generated Code'
-    TabOrder = 10
+    TabOrder = 9
     OnClick = btnGetCodeClick
   end
   object PageControl1: TPageControl
@@ -165,7 +157,7 @@ object frmMain: TfrmMain
     Height = 332
     ActivePage = TabSheet1
     Anchors = [akLeft, akTop, akBottom]
-    TabOrder = 11
+    TabOrder = 10
     object TabSheet1: TTabSheet
       Caption = 'List Box'
       object lstSummary: TListBox
@@ -223,7 +215,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Set Float Species Index'
-    TabOrder = 12
+    TabOrder = 11
     OnClick = btnSetFloatingSpeciesByIndexClick
   end
   object btnSetBoundarySpeciesByIndex: TButton
@@ -232,23 +224,23 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Set Boundary Species Index'
-    TabOrder = 13
+    TabOrder = 12
     OnClick = btnSetBoundarySpeciesByIndexClick
   end
   object edtCommonFloat: TEdit
     Left = 8
-    Top = 177
+    Top = 203
     Width = 121
     Height = 21
-    TabOrder = 14
+    TabOrder = 13
     Text = '0.0'
   end
   object edtCommonInteger: TEdit
     Left = 8
-    Top = 133
+    Top = 159
     Width = 121
     Height = 21
-    TabOrder = 15
+    TabOrder = 14
     Text = '0'
   end
   object btnDisplayModelSumamryByGetValue: TButton
@@ -257,7 +249,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 36
     Caption = 'Display Model Summary by getValue'
-    TabOrder = 16
+    TabOrder = 15
     WordWrap = True
     OnClick = btnDisplayModelSumamryByGetValueClick
   end
@@ -267,7 +259,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Set Global Parameter Index'
-    TabOrder = 17
+    TabOrder = 16
     OnClick = Button1Click
   end
   object btnGetGlobalParameterIndex: TButton
@@ -276,7 +268,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Get Global Parameter Index'
-    TabOrder = 18
+    TabOrder = 17
     OnClick = btnGetGlobalParameterIndexClick
   end
   object btnGetFloatingSpeciesByIndex: TButton
@@ -285,7 +277,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Get Float Species Index'
-    TabOrder = 19
+    TabOrder = 18
     OnClick = btnGetFloatingSpeciesByIndexClick
   end
   object btnGetBoundarySpeciesByIndex: TButton
@@ -294,7 +286,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Get Boundary Species Index'
-    TabOrder = 20
+    TabOrder = 19
     OnClick = btnGetBoundarySpeciesByIndexClick
   end
   object btnGetSBML: TButton
@@ -303,7 +295,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 25
     Caption = 'Get SBML and Compare'
-    TabOrder = 21
+    TabOrder = 20
     OnClick = btnGetSBMLClick
   end
   object btnGetCompartmentVolumeByIndex: TButton
@@ -312,7 +304,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Get Compartment Vol Index'
-    TabOrder = 22
+    TabOrder = 21
     OnClick = btnGetCompartmentVolumeByIndexClick
   end
   object btnSetCompartmentVolumeByIndex: TButton
@@ -321,7 +313,7 @@ object frmMain: TfrmMain
     Width = 151
     Height = 25
     Caption = 'Set Compartment by Index'
-    TabOrder = 23
+    TabOrder = 22
     OnClick = btnSetCompartmentVolumeByIndexClick
   end
   object btnDisplayModelSumamryByGetIndex: TButton
@@ -330,7 +322,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 36
     Caption = 'Display Model Summary by getIndex'
-    TabOrder = 24
+    TabOrder = 23
     WordWrap = True
     OnClick = btnDisplayModelSumamryByGetIndexClick
   end
@@ -340,7 +332,7 @@ object frmMain: TfrmMain
     Width = 121
     Height = 25
     Caption = 'Get Capabilities'
-    TabOrder = 25
+    TabOrder = 24
     OnClick = btnGetCapabilitiesClick
   end
   object btnEvalModel: TButton
@@ -349,7 +341,36 @@ object frmMain: TfrmMain
     Width = 121
     Height = 25
     Caption = 'Eval Model'
-    TabOrder = 26
+    TabOrder = 25
     OnClick = btnEvalModelClick
+  end
+  object btnGetFullMatrix: TButton
+    Left = 485
+    Top = 142
+    Width = 151
+    Height = 25
+    Caption = 'Get Full Jacobian'
+    TabOrder = 26
+    OnClick = btnGetFullMatrixClick
+  end
+  object btnGetReducedMatrix: TButton
+    Left = 485
+    Top = 169
+    Width = 151
+    Height = 25
+    Caption = 'Get Reduced Jacobian'
+    TabOrder = 27
+    OnClick = btnGetReducedMatrixClick
+  end
+  object lstModelName: TListBox
+    Left = 8
+    Top = 35
+    Width = 121
+    Height = 47
+    ItemHeight = 13
+    Items.Strings = (
+      'ss_MinusOneError.xml'
+      'ss_threeSpecies.xml')
+    TabOrder = 28
   end
 end
