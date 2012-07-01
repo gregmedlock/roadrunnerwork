@@ -3,7 +3,7 @@ object frmMain: TfrmMain
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Test uRoadRunnerAPI.pas'
-  ClientHeight = 611
+  ClientHeight = 708
   ClientWidth = 1068
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,7 +17,7 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   DesignSize = (
     1068
-    611)
+    708)
   PixelsPerInch = 96
   TextHeight = 13
   object lblCommon: TLabel
@@ -36,11 +36,12 @@ object frmMain: TfrmMain
   end
   object pnlBottm: TPanel
     Left = 0
-    Top = 570
+    Top = 667
     Width = 1068
     Height = 41
     Align = alBottom
     TabOrder = 0
+    ExplicitTop = 570
     object Label1: TLabel
       Left = 487
       Top = 16
@@ -87,12 +88,13 @@ object frmMain: TfrmMain
     Left = 646
     Top = 0
     Width = 422
-    Height = 570
+    Height = 667
     Align = alRight
     Anchors = [akLeft, akTop, akBottom]
     DefaultColWidth = 84
     FixedCols = 0
     TabOrder = 3
+    ExplicitHeight = 570
   end
   object btnGetAvailableSymbols: TButton
     Left = 328
@@ -113,9 +115,9 @@ object frmMain: TfrmMain
     OnClick = btnSteadyStateClick
   end
   object btnLoadTwoModels: TButton
-    Left = 296
-    Top = 201
-    Width = 121
+    Left = 328
+    Top = 200
+    Width = 151
     Height = 25
     Caption = 'Load Two Models Test'
     TabOrder = 6
@@ -154,58 +156,67 @@ object frmMain: TfrmMain
     Left = 8
     Top = 232
     Width = 471
-    Height = 332
+    Height = 429
     ActivePage = TabSheet1
     Anchors = [akLeft, akTop, akBottom]
     TabOrder = 10
+    ExplicitHeight = 332
     object TabSheet1: TTabSheet
       Caption = 'List Box'
+      ExplicitHeight = 304
       object lstSummary: TListBox
         Left = 0
         Top = 0
         Width = 463
-        Height = 304
+        Height = 401
         Align = alClient
         ItemHeight = 13
         TabOrder = 0
+        ExplicitHeight = 304
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Source Code'
       ImageIndex = 1
+      ExplicitHeight = 304
       object MemoSource: TMemo
         Left = 0
         Top = 0
         Width = 463
-        Height = 304
+        Height = 401
         Align = alClient
         ScrollBars = ssBoth
         TabOrder = 0
+        ExplicitHeight = 304
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'Header File'
       ImageIndex = 2
+      ExplicitHeight = 304
       object memoHeader: TMemo
         Left = 0
         Top = 0
         Width = 463
-        Height = 304
+        Height = 401
         Align = alClient
         ScrollBars = ssBoth
         TabOrder = 0
+        ExplicitHeight = 304
       end
     end
     object TabSheetCapabilities: TTabSheet
       Caption = 'Capabilities'
       ImageIndex = 3
+      ExplicitHeight = 304
       object memoCapabilities: TMemo
         Left = 0
         Top = 0
         Width = 463
-        Height = 304
+        Height = 401
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 304
       end
     end
   end
@@ -246,7 +257,7 @@ object frmMain: TfrmMain
   object btnDisplayModelSumamryByGetValue: TButton
     Left = 135
     Top = 60
-    Width = 121
+    Width = 130
     Height = 36
     Caption = 'Display Model Summary by getValue'
     TabOrder = 15
@@ -292,7 +303,7 @@ object frmMain: TfrmMain
   object btnGetSBML: TButton
     Left = 135
     Top = 136
-    Width = 121
+    Width = 130
     Height = 25
     Caption = 'Get SBML and Compare'
     TabOrder = 20
@@ -319,7 +330,7 @@ object frmMain: TfrmMain
   object btnDisplayModelSumamryByGetIndex: TButton
     Left = 135
     Top = 98
-    Width = 121
+    Width = 130
     Height = 36
     Caption = 'Display Model Summary by getIndex'
     TabOrder = 23
@@ -328,8 +339,8 @@ object frmMain: TfrmMain
   end
   object btnGetCapabilities: TButton
     Left = 135
-    Top = 163
-    Width = 121
+    Top = 167
+    Width = 130
     Height = 25
     Caption = 'Get Capabilities'
     TabOrder = 24
@@ -338,7 +349,7 @@ object frmMain: TfrmMain
   object btnEvalModel: TButton
     Left = 135
     Top = 201
-    Width = 121
+    Width = 130
     Height = 25
     Caption = 'Eval Model'
     TabOrder = 25

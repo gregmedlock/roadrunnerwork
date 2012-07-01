@@ -270,10 +270,13 @@ begin
   list.Free;
 
   list := getRatesOfChangeNames;
+  d := getRatesOfChange;
   for i := 0 to list.Count - 1 do
-      lstSummary.Items.Add ('Rates of Change Name: ' + list[i] + ' (' + floattostr (getValue(list[i])) + ')');
-  lstSummary.Items.Add ('');
+      lstSummary.Items.Add ('Rates of Change Name: ' + list[i] + ' (' + floattostr (d[i]) + ')');
   list.Free;
+  setLength (d, 0);
+  lstSummary.Items.Add ('');
+
 
   list := getEigenValueNames;
   for i := 0 to list.Count - 1 do
