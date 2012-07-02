@@ -106,43 +106,43 @@ type
   end;
   PRRCCodeHandle = ^TRRCCodeAPI;
 
-  TVoidCharFunc = function : PAnsiChar; stdcall;   //char* func(void)
-  TVoidBoolFunc = function : boolean; stdcall; // bool func (void);
-  TVoidIntFunc = function : integer; stdcall;
-  TVoidDoubleFunc = function : double; stdcall;
+  TVoidCharFunc = function : PAnsiChar; cdecl;   //char* func(void)
+  TVoidBoolFunc = function : boolean; cdecl; // bool func (void);
+  TVoidIntFunc = function : integer; cdecl;
+  TVoidDoubleFunc = function : double; cdecl;
 
-  TBoolBoolFunc = function (var value : boolean) : boolean; stdcall;
+  TBoolBoolFunc = function (var value : boolean) : boolean; cdecl;
 
-  TPointerVoidFunc = function : Pointer; stdcall; //void* func(void)
-  TCharBoolFunc = function (str : PAnsiChar) : bool; stdcall;  // bool func (char *)
-  TDoubleBoolFunc = function (value : double) : bool; stdcall; // bool func (double)
-  TIntBoolFunc = function (value : integer) : bool; stdcall;   // bool func (double)
-  TIntDoubleFunc = function (index : integer) : double; stdcall;
+  TPointerVoidFunc = function : Pointer; cdecl; //void* func(void)
+  TCharBoolFunc = function (str : PAnsiChar) : bool; cdecl;  // bool func (char *)
+  TDoubleBoolFunc = function (value : double) : bool; cdecl; // bool func (double)
+  TIntBoolFunc = function (value : integer) : bool; cdecl;   // bool func (double)
+  TIntDoubleFunc = function (index : integer) : double; cdecl;
 
-  TVoidStringListFunc = function() : PRRStringList; stdcall;
+  TVoidStringListFunc = function() : PRRStringList; cdecl;
 
   TGetCopyright = TVoidCharFunc;
   TGetRRInstance = TPointerVoidFunc;
-  TGetCCode = function : PRRCCodeHandle; stdcall;
+  TGetCCode = function : PRRCCodeHandle; cdecl;
   TSetTimeStart = TDoubleBoolFunc;
   TSetTimeEnd = TDoubleBoolFunc;
   TSetNumPoints = TIntBoolFunc;
   TSimulateEx = function (var timeStart : double; var timeEnd : double; var numberOfPoints : integer) : PRRResultHandle;
-  TGetStoichiometryMatrix = function : PRRMatrixHandle; stdcall;
-  TFreeRRResult = function (ptr : PRRResultHandle) : boolean; stdcall;
-  TFreeRRInstance = procedure (instance : Pointer); stdcall;
-  TVoidVectorFunc = function : PRRDoubleVectorHandle; stdcall;
+  TGetMatrix = function : PRRMatrixHandle; cdecl;
+  TFreeRRResult = function (ptr : PRRResultHandle) : boolean; cdecl;
+  TFreeRRInstance = procedure (instance : Pointer); cdecl;
+  TVoidVectorFunc = function : PRRDoubleVectorHandle; cdecl;
 
-  TSetSelectionList = function (list : PAnsiChar) : bool; stdcall;
-  TGetValue = function (speciesId : PAnsiChar; var value : double) : boolean; stdcall;
-  TSetValue = function (speciesId : PAnsiChar; var value : double) : bool; stdcall;
+  TSetSelectionList = function (list : PAnsiChar) : bool; cdecl;
+  TGetValue = function (speciesId : PAnsiChar; var value : double) : boolean; cdecl;
+  TSetValue = function (speciesId : PAnsiChar; var value : double) : bool; cdecl;
   TGetReactionNames = TPointerVoidFunc;
-  TReset = function : bool; stdcall;
-  TFreeStringList = procedure (handle : Pointer); stdcall;
-  TFreeRRMatrix = function (matrix : PRRMatrixHandle) : boolean; stdcall;
-  TFreeRRDoubleVector = function (vector : PRRDoubleVectorHandle) : boolean ; stdcall;
-  TOneStep = function (var currentTime : double; var stepSize : double) : double; stdcall;
-  TSteadyState = function (var value : double) : boolean; stdcall;
+  TReset = function : bool; cdecl;
+  TFreeStringList = procedure (handle : Pointer); cdecl;
+  TFreeRRMatrix = function (matrix : PRRMatrixHandle) : boolean; cdecl;
+  TFreeRRDoubleVector = function (vector : PRRDoubleVectorHandle) : boolean ; cdecl;
+  TOneStep = function (var currentTime : double; var stepSize : double) : double; cdecl;
+  TSteadyState = function (var value : double) : boolean; cdecl;
 
 var
    DLLLoaded : boolean;
@@ -176,6 +176,9 @@ function  getCapabilities : AnsiString;
 function  evalModel : boolean;
 function  getFullJacobian : TMatrix;
 function  getReducedJacobian : TMatrix;
+
+function  getStoichiometryMatrix : TMatrix;
+function  getLinkMatrix : TMatrix;
 
 function  getReactionRates : TDoubleArray;
 function  getRatesOfChange : TDoubleArray;
@@ -216,15 +219,15 @@ function  getAvailableSymbols : TRRLIst;
 function  setComputeAndAssignConservationLaws (value : boolean) : boolean;
 
 procedure setRoadRunnerLibraryName (newLibName : AnsiString);
-function  loadRoadRunner (var errMsg : AnsiString) : boolean;
+function  loadRoadRunner (var errMsg : AnsiString; methodList : TStringList) : boolean;
 procedure releaseRoadRunnerLibrary;
 
 
 implementation
 
 type
-  TLibGetAvailableSymbols = function : PRRLabeledSymbolLists; stdcall;
-  TlibSetInitialConditions = function (vec : PRRDoubleVectorHandle) : bool; stdcall;
+  TLibGetAvailableSymbols = function : PRRLabeledSymbolLists; cdecl;
+  TlibSetInitialConditions = function (vec : PRRDoubleVectorHandle) : bool; cdecl;
   TlibComputeSteadyStateValues = function : PRRDoubleVectorHandle;
 
 
@@ -267,18 +270,18 @@ var DLLHandle : Cardinal;
     libGetNumberOfGlobalParameters : TVoidIntFunc;
     libGetNumberOfCompartments : TVoidIntFunc;
 
-    libSetCompartmentByIndex     : function (var index : integer; var value : double) : boolean; stdcall;
-    libSetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
-    libSetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
-    libSetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+    libSetCompartmentByIndex     : function (var index : integer; var value : double) : boolean; cdecl;
+    libSetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; cdecl;
+    libSetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; cdecl;
+    libSetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; cdecl;
 
-    libGetCompartmentByIndex     : function (var index : integer; var value : double) : boolean; stdcall;
-    libGetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; stdcall;
-    libGetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
-    libGetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+    libGetCompartmentByIndex     : function (var index : integer; var value : double) : boolean; cdecl;
+    libGetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; cdecl;
+    libGetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; cdecl;
+    libGetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; cdecl;
 
-    libGetNumberOfDependentSpecies : function : integer; stdcall;
-    libGetNumberOfIndependentSpecies : function : integer; stdcall;
+    libGetNumberOfDependentSpecies : function : integer; cdecl;
+    libGetNumberOfIndependentSpecies : function : integer; cdecl;
 
     libSteadyState : TSteadyState;
     libGetReactionRate : TIntDoubleFunc;
@@ -300,7 +303,8 @@ var DLLHandle : Cardinal;
     libSetInitialConditions : TlibSetInitialConditions;
     libSetComputeAndAssignConservationLaws : TBoolBoolFunc;
 
-    libGetStoichiometryMatrix :  TGetStoichiometryMatrix;
+    libGetStoichiometryMatrix : TGetMatrix;
+    libGetLinkMatrix          : TGetMatrix;
 
     libFreeStringList : TFreeStringList;     //
     libFreeMatrix : TFreeRRMatrix; //
@@ -966,6 +970,24 @@ begin
 end;
 
 
+function getLinkMatrix : TMatrix;
+var st : PRRMatrixHandle;
+    nr, nc : integer;
+    i, j : integer;
+begin
+  st := libGetLinkMatrix;
+  try
+    nr := st^.RSize;
+    nc := st^.CSize;
+    result := TMatrix.Create (nr, nc);
+    for i := 0 to nr - 1 do
+        for j := 0 to nc - 1 do
+            result[i+1,j+1] := st^.data[i*nc + j];
+  finally
+    libFreeMatrix (st);
+  end;
+end;
+
 // ---------------------------------------------------------------------
 
 procedure setRoadRunnerLibraryName (newLibName : AnsiString);
@@ -973,96 +995,101 @@ begin
   libName := newLibName;
 end;
 
-function loadSingleMethod (methodName : string) : Pointer;
+function loadSingleMethod (methodName : string; var errMsg : AnsiString; var success : boolean; methodList : TStringList) : Pointer;
 begin
    result := GetProcAddress(dllHandle, PChar (methodName));
    if not Assigned (result) then
-      raise Exception.Create ('Unable to locate ' + methodName);
+      begin
+      methodList.Add (methodName + ': ****************** FAILED');
+      errMsg := 'Failed to load method: ' + methodName;
+      success := false;
+      end
+   else
+      methodList.Add (methodName + ': found');
 end;
 
-function loadMethods (var errMsg : AnsiString) : boolean;
+function loadMethods (var errMsg : AnsiString; methodList : TStringList) : boolean;
 begin
    result := true;
    try
-   @libGetBuildDate  := loadSingleMethod ('getBuildDate');
-   @libGetRevision   := loadSingleMethod ('getRevision');
-   @libHasError      := loadSingleMethod ('hasError');
-   @libGetLastError  := loadSingleMethod ('getLastError');
-   @libGetRRInstance := loadSingleMethod ('getRRInstance');
+   @libGetBuildDate  := loadSingleMethod ('getBuildDate', errMsg, result, methodList);
+   @libGetRevision   := loadSingleMethod ('getRevision', errMsg, result, methodList);
+   @libHasError      := loadSingleMethod ('hasError', errMsg, result, methodList);
+   @libGetLastError  := loadSingleMethod ('getLastError', errMsg, result, methodList);
+   @libGetRRInstance := loadSingleMethod ('getRRInstance', errMsg, result, methodList);
 
-   @libGetCopyright  := loadSingleMethod ('getCopyright');
-   @libGetTempFolder := loadSingleMethod ('getTempFolder');
-   @libGetCCode := loadSingleMethod ('getCCode');
+   @libGetCopyright  := loadSingleMethod ('getCopyright', errMsg, result, methodList);
+   @libGetTempFolder := loadSingleMethod ('getTempFolder', errMsg, result, methodList);
+   @libGetCCode      := loadSingleMethod ('getCCode', errMsg, result, methodList);
 
-   @libSetComputeAndAssignConservationLaws := loadSingleMethod ('setComputeAndAssignConservationLaws');
+   @libSetComputeAndAssignConservationLaws := loadSingleMethod ('setComputeAndAssignConservationLaws', errMsg, result, methodList);
 
-   @libLoadSBMLFromFile := loadSingleMethod ('loadSBMLFromFile');
-   @libLoadSBML := loadSingleMethod ('loadSBML');
-   @libGetSBML  := loadSingleMethod ('getSBML');
+   @libLoadSBMLFromFile := loadSingleMethod ('loadSBMLFromFile', errMsg, result, methodList);
+   @libLoadSBML := loadSingleMethod ('loadSBML', errMsg, result, methodList);
+   @libGetSBML  := loadSingleMethod ('getSBML', errMsg, result, methodList);
 
-   @setTimeStart := loadSingleMethod ('setTimeStart');
-   @setTimeEnd   := loadSingleMethod ('setTimeEnd');
-   @setNumberOfPoints := loadSingleMethod ('setNumPoints');
-   @libSimulate  := loadSingleMethod ('simulate');
-   @libSimulateEx := loadSingleMethod ('simulateEx');
-   @libOneStep   := loadSingleMethod ('oneStep');
-   @libReset     := loadSingleMethod ('reset');
-   @libGetCapabilities := loadSingleMethod ('getCapabilities');
-   @libEvalModel := loadSingleMethod ('evalModel');
-   @libGetFullJacobian := loadSingleMethod('getFullJacobian');
-   @libGetReducedJacobian := loadSingleMethod('getReducedJacobian');
+   @setTimeStart  := loadSingleMethod ('setTimeStart', errMsg, result, methodList);
+   @setTimeEnd    := loadSingleMethod ('setTimeEnd', errMsg, result, methodList);
+   @setNumberOfPoints := loadSingleMethod ('setNumPoints', errMsg, result, methodList);
+   @libSimulate   := loadSingleMethod ('simulate', errMsg, result, methodList);
+   @libSimulateEx := loadSingleMethod ('simulateEx', errMsg, result, methodList);
+   @libOneStep    := loadSingleMethod ('oneStep', errMsg, result, methodList);
+   @libReset      := loadSingleMethod ('reset', errMsg, result, methodList);
+   @libGetCapabilities := loadSingleMethod ('getCapabilities', errMsg, result, methodList);
+   @libEvalModel  := loadSingleMethod ('evalModel', errMsg, result, methodList);
+   @libGetFullJacobian := loadSingleMethod('getFullJacobian', errMsg, result, methodList);
+   @libGetReducedJacobian := loadSingleMethod('getReducedJacobian', errMsg, result, methodList);
 
-   @libSetValue := loadSingleMethod ('setValue');
-   @libGetValue := loadSingleMethod ('getValue');
-   @libSetSelectionList := loadSingleMethod ('setSelectionList');
+   @libSetValue     := loadSingleMethod ('setValue', errMsg, result, methodList);
+   @libGetValue     := loadSingleMethod ('getValue', errMsg, result, methodList);
+   @libSetSelectionList := loadSingleMethod ('setSelectionList', errMsg, result, methodList);
 
-   @libGetNumberOfReactions        := loadSingleMethod ('getNumberOfReactions');
-   @libGetNumberOfBoundarySpecies  := loadSingleMethod ('getNumberOfBoundarySpecies');
-   @libGetNumberOfFloatingSpecies  := loadSingleMethod ('getNumberOfFloatingSpecies');
-   @libGetNumberOfGlobalParameters := loadSingleMethod ('getNumberOfGlobalParameters');
-   @libGetNumberOfCompartments     := loadSingleMethod ('getNumberOfCompartments');
+   @libGetNumberOfReactions        := loadSingleMethod ('getNumberOfReactions', errMsg, result, methodList);
+   @libGetNumberOfBoundarySpecies  := loadSingleMethod ('getNumberOfBoundarySpecies', errMsg, result, methodList);
+   @libGetNumberOfFloatingSpecies  := loadSingleMethod ('getNumberOfFloatingSpecies', errMsg, result, methodList);
+   @libGetNumberOfGlobalParameters := loadSingleMethod ('getNumberOfGlobalParameters', errMsg, result, methodList);
+   @libGetNumberOfCompartments     := loadSingleMethod ('getNumberOfCompartments', errMsg, result, methodList);
 
-   @libSetCompartmentByIndex       := loadSingleMethod ('setCompartmentByIndex');
-   @libSetFloatingSpeciesByIndex   := loadSingleMethod ('setFloatingSpeciesByIndex');
-   @libSetBoundarySpeciesByIndex   := loadSingleMethod ('setBoundarySpeciesByIndex');
-   @libSetGlobalParameterByIndex   := loadSingleMethod ('setGlobalParameterByIndex');
+   @libSetCompartmentByIndex       := loadSingleMethod ('setCompartmentByIndex', errMsg, result, methodList);
+   @libSetFloatingSpeciesByIndex   := loadSingleMethod ('setFloatingSpeciesByIndex', errMsg, result, methodList);
+   @libSetBoundarySpeciesByIndex   := loadSingleMethod ('setBoundarySpeciesByIndex', errMsg, result, methodList);
+   @libSetGlobalParameterByIndex   := loadSingleMethod ('setGlobalParameterByIndex', errMsg, result, methodList);
 
-   @libGetCompartmentByIndex       := loadSingleMethod ('getCompartmentByIndex');
-   @libGetFloatingSpeciesByIndex   := loadSingleMethod ('getFloatingSpeciesByIndex');
-   @libGetBoundarySpeciesByIndex   := loadSingleMethod ('getBoundarySpeciesByIndex');
-   @libGetGlobalParameterByIndex   := loadSingleMethod ('getGlobalParameterByIndex');
+   @libGetCompartmentByIndex       := loadSingleMethod ('getCompartmentByIndex', errMsg, result, methodList);
+   @libGetFloatingSpeciesByIndex   := loadSingleMethod ('getFloatingSpeciesByIndex', errMsg, result, methodList);
+   @libGetBoundarySpeciesByIndex   := loadSingleMethod ('getBoundarySpeciesByIndex', errMsg, result, methodList);
+   @libGetGlobalParameterByIndex   := loadSingleMethod ('getGlobalParameterByIndex', errMsg, result, methodList);
 
-   @libGetNumberOfDependentSpecies   := loadSingleMethod ('getNumberOfDependentSpecies');
-   @libGetNumberOfIndependentSpecies := loadSingleMethod ('getNumberOfIndependentSpecies');
+   @libGetNumberOfDependentSpecies   := loadSingleMethod ('getNumberOfDependentSpecies', errMsg, result, methodList);
+   @libGetNumberOfIndependentSpecies := loadSingleMethod ('getNumberOfIndependentSpecies', errMsg, result, methodList);
 
-   @libSteadyState                  := loadSingleMethod ('steadyState');
-   @libComputeSteadyStateValues     := loadSingleMethod ('computeSteadyStateValues');
-   @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList');
-   @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList');
+   @libSteadyState                  := loadSingleMethod ('steadyState', errMsg, result, methodList);
+   @libComputeSteadyStateValues     := loadSingleMethod ('computeSteadyStateValues', errMsg, result, methodList);
+   @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList', errMsg, result, methodList);
+   @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList', errMsg, result, methodList);
 
-   @libGetReactionRate   := loadSingleMethod ('getReactionRate');
-   @libGetReactionRates  := loadSingleMethod ('getReactionRates');
-   @libGetRatesOfChange  := loadSingleMethod ('getRatesOfChange');
+   @libGetReactionRate   := loadSingleMethod ('getReactionRate', errMsg, result, methodList);
+   @libGetReactionRates  := loadSingleMethod ('getReactionRates', errMsg, result, methodList);
+   @libGetRatesOfChange  := loadSingleMethod ('getRatesOfChange', errMsg, result, methodList);
 
-   @libGetCompartmentNames      := loadSingleMethod ('getCompartmentNames');
-   @libGetReactionNames         := loadSingleMethod ('getReactionNames');
-   @libGetBoundarySpeciesNames  := loadSingleMethod ('getBoundarySpeciesNames');
-   @libGetFloatingSpeciesNames  := loadSingleMethod ('getFloatingSpeciesNames');
-   @libGetGlobalParameterNames  := loadSingleMethod ('getGlobalParameterNames');
-   @libGetRatesOfChangeNames    := loadSingleMethod ('getRatesOfChangeNames');
-   @libGetEigenValueNames       := loadSingleMethod ('getEigenValueNames');
-   @libGetElasticityNames       := loadSingleMethod ('getElasticityNames');
-   @libGetAvailableSymbols      := loadSingleMethod ('getAvailableSymbols');
+   @libGetCompartmentNames      := loadSingleMethod ('getCompartmentNames', errMsg, result, methodList);
+   @libGetReactionNames         := loadSingleMethod ('getReactionNames', errMsg, result, methodList);
+   @libGetBoundarySpeciesNames  := loadSingleMethod ('getBoundarySpeciesNames', errMsg, result, methodList);
+   @libGetFloatingSpeciesNames  := loadSingleMethod ('getFloatingSpeciesNames', errMsg, result, methodList);
+   @libGetGlobalParameterNames  := loadSingleMethod ('getGlobalParameterNames', errMsg, result, methodList);
+   @libGetRatesOfChangeNames    := loadSingleMethod ('getRatesOfChangeNames', errMsg, result, methodList);
+   @libGetEigenValueNames       := loadSingleMethod ('getEigenValueNames', errMsg, result, methodList);
+   @libGetElasticityNames       := loadSingleMethod ('getElasticityNames', errMsg, result, methodList);
+   @libGetAvailableSymbols      := loadSingleMethod ('getAvailableSymbols', errMsg, result, methodList);
 
-   @libGetStoichiometryMatrix   := loadSingleMethod ('getStoichiometryMatrix');
+   @libGetStoichiometryMatrix   := loadSingleMethod ('getStoichiometryMatrix', errMsg, result, methodList);
+   @libGetLinkMatrix            := loadSingleMethod ('getLinkMatrix', errMsg, result, methodList);
 
-   @libFreeRRInstance := loadSingleMethod ('freeRRInstance');
-   @libFreeResult     := loadSingleMethod ('freeResult');
-   @libFreeMatrix     := loadSingleMethod ('freeMatrix');
-   @libFreeText       := loadSingleMethod ('freeText');
-   @libFreeStringList := loadSingleMethod ('freeStringList');
-
-
+   @libFreeRRInstance := loadSingleMethod ('freeRRInstance', errMsg, result, methodList);
+   @libFreeResult     := loadSingleMethod ('freeResult', errMsg, result, methodList);
+   @libFreeMatrix     := loadSingleMethod ('freeMatrix', errMsg, result, methodList);
+   @libFreeText       := loadSingleMethod ('freeText', errMsg, result, methodList);
+   @libFreeStringList := loadSingleMethod ('freeStringList', errMsg, result, methodList);
    //@libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeDoubleVector'));
    //if not Assigned (libFreeDoubleVector) then
    //   begin errMsg := 'Unable to locate freeDoubleVector'; result := false; exit; end;
@@ -1076,7 +1103,7 @@ begin
    end;
 end;
 
-function loadRoadRunner (var errMsg : AnsiString) : boolean;
+function loadRoadRunner (var errMsg : AnsiString; methodList : TStringList) : boolean;
 var errStr : string;
     tempString: WideString;
     aString: PChar;
@@ -1089,7 +1116,7 @@ begin
 
      if DllHandle <> 0 then
          begin
-         if loadMethods (errMsg) then
+         if loadMethods (errMsg, methodList) then
             begin
             //instance := libGetRRInstance;
             DLLLoaded := True;

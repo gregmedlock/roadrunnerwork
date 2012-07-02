@@ -50,6 +50,8 @@ type
     btnGetFullMatrix: TButton;
     btnGetReducedMatrix: TButton;
     lstModelName: TListBox;
+    btnGetStoichMatrix: TButton;
+    btnGetLinkMatrix: TButton;
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetAvailableSymbolsClick(Sender: TObject);
@@ -75,6 +77,8 @@ type
     procedure btnEvalModelClick(Sender: TObject);
     procedure btnGetFullMatrixClick(Sender: TObject);
     procedure btnGetReducedMatrixClick(Sender: TObject);
+    procedure btnGetStoichMatrixClick(Sender: TObject);
+    procedure btnGetLinkMatrixClick(Sender: TObject);
   private
     { Private declarations }
     procedure getSummaryOfModelByIndex;
@@ -170,6 +174,22 @@ begin
      showmessage ('SBML Identical')
   else
      showmessage ('SBML not the same');
+end;
+
+procedure TfrmMain.btnGetStoichMatrixClick(Sender: TObject);
+var m : TMatrix;
+    i, j : integer;
+begin
+  m := getStoichiometryMatrix;
+  for i := 0 to grid.RowCount - 1 do
+      for j := 0 to grid.ColCount - 1 do
+          grid.Cells [j, i] := '';
+
+  grid.ColCount := m.c + 1;
+  grid.RowCount := m.r + 1;
+  for i := 1 to m.r do
+      for j := 1 to m.c do
+          grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
 end;
 
 procedure TfrmMain.btnLoadSBMLClick(Sender: TObject);
@@ -291,6 +311,23 @@ begin
   list.Free;
 end;
 
+procedure TfrmMain.btnGetLinkMatrixClick(Sender: TObject);
+var m : TMatrix;
+    i, j : integer;
+begin
+  m := getLinkMatrix;
+  for i := 0 to grid.RowCount - 1 do
+      for j := 0 to grid.ColCount - 1 do
+          grid.Cells [j, i] := '';
+
+  grid.ColCount := m.c + 1;
+  grid.RowCount := m.r + 1;
+  for i := 1 to m.r do
+      for j := 1 to m.c do
+          grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
+end;
+
+
 procedure TfrmMain.getSummaryOfModelByGetValue;
 var list: TStringList;
     i : integer;
@@ -362,24 +399,17 @@ end;
 
 
 procedure TfrmMain.btnSimulateClick(Sender: TObject);
-var list: TStringList;
-    i, j: integer;
+var i, j: integer;
     m : TMatrix;
 begin
-  list := TStringList.Create;
-  //list.Add ('time');
-  //list.Add ('Node0');
-  //list.Add ('Node1');
-  //setSelectionList (list);
   m := simulate();
   grid.ColCount := m.c + 1;
   grid.RowCount := m.r + 1;
   for i := 1 to m.r do
       for j := 1 to m.c do
           grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
-  list.free;
 
-  getSummaryOfModelByGetValue;
+  //getSummaryOfModelByGetValue;
 end;
 
 procedure TfrmMain.btnSteadyStateClick(Sender: TObject);
@@ -429,15 +459,23 @@ end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 var errMsg : AnsiString;
+    methodList : TStringList;
+    i : integer;
 begin
-  if loadRoadRunner (errMsg) then
+  methodList := TStringList.Create;
+  if loadRoadRunner (errMsg, methodList) then
      begin
      rrInstance := getRRInstance;
      edtProgress.text := 'RoadRunner Loaded: ' + 'Build Date: ' + getBuildDate + ', Revision: ' + inttostr (getRevision);
      lblTempFolder.Text := getTempFolder;
      end
   else
-     edtProgress.text := 'Failed to load: ' + string (errMsg);
+     begin
+     edtProgress.text := string (errMsg);
+     end;
+  for i := 0 to methodList.Count - 1 do
+      lstSummary.Items.Add (methodList[i]);
+  methodList.Free;
   lstModelName.ItemIndex := 0;
 end;
 

@@ -41,7 +41,6 @@ object frmMain: TfrmMain
     Height = 41
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 570
     object Label1: TLabel
       Left = 487
       Top = 16
@@ -94,7 +93,6 @@ object frmMain: TfrmMain
     DefaultColWidth = 84
     FixedCols = 0
     TabOrder = 3
-    ExplicitHeight = 570
   end
   object btnGetAvailableSymbols: TButton
     Left = 328
@@ -160,10 +158,8 @@ object frmMain: TfrmMain
     ActivePage = TabSheet1
     Anchors = [akLeft, akTop, akBottom]
     TabOrder = 10
-    ExplicitHeight = 332
     object TabSheet1: TTabSheet
       Caption = 'List Box'
-      ExplicitHeight = 304
       object lstSummary: TListBox
         Left = 0
         Top = 0
@@ -172,13 +168,11 @@ object frmMain: TfrmMain
         Align = alClient
         ItemHeight = 13
         TabOrder = 0
-        ExplicitHeight = 304
       end
     end
     object TabSheet2: TTabSheet
       Caption = 'Source Code'
       ImageIndex = 1
-      ExplicitHeight = 304
       object MemoSource: TMemo
         Left = 0
         Top = 0
@@ -187,13 +181,11 @@ object frmMain: TfrmMain
         Align = alClient
         ScrollBars = ssBoth
         TabOrder = 0
-        ExplicitHeight = 304
       end
     end
     object TabSheet3: TTabSheet
       Caption = 'Header File'
       ImageIndex = 2
-      ExplicitHeight = 304
       object memoHeader: TMemo
         Left = 0
         Top = 0
@@ -202,13 +194,11 @@ object frmMain: TfrmMain
         Align = alClient
         ScrollBars = ssBoth
         TabOrder = 0
-        ExplicitHeight = 304
       end
     end
     object TabSheetCapabilities: TTabSheet
       Caption = 'Capabilities'
       ImageIndex = 3
-      ExplicitHeight = 304
       object memoCapabilities: TMemo
         Left = 0
         Top = 0
@@ -216,7 +206,6 @@ object frmMain: TfrmMain
         Height = 401
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 304
       end
     end
   end
@@ -383,5 +372,23 @@ object frmMain: TfrmMain
       'ss_MinusOneError.xml'
       'ss_threeSpecies.xml')
     TabOrder = 28
+  end
+  object btnGetStoichMatrix: TButton
+    Left = 485
+    Top = 256
+    Width = 151
+    Height = 25
+    Caption = 'Get Stoichiometry Matrix'
+    TabOrder = 29
+    OnClick = btnGetStoichMatrixClick
+  end
+  object btnGetLinkMatrix: TButton
+    Left = 485
+    Top = 282
+    Width = 151
+    Height = 25
+    Caption = 'Get Link Matrix'
+    TabOrder = 30
+    OnClick = btnGetLinkMatrixClick
   end
 end
