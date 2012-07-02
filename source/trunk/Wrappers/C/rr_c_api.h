@@ -82,8 +82,8 @@ C_DECL_SPEC bool                    __stdcall   loadSBML(const char* sbml);
 C_DECL_SPEC bool                    __stdcall   loadSBMLFromFile(const char* sbml);
 
 // SBML utility methods
-C_DECL_SPEC char* 				          __stdcall   getParamPromotedSBML(const char* sArg);
-C_DECL_SPEC char* 				          __stdcall   getSBML();
+C_DECL_SPEC char* 				    __stdcall   getParamPromotedSBML(const char* sArg);
+C_DECL_SPEC char* 				    __stdcall   getSBML();
 
 // Simulation methods
 C_DECL_SPEC bool                    __stdcall   setTimeStart(const double& timeStart);
@@ -119,6 +119,7 @@ C_DECL_SPEC RRMatrixHandle          __stdcall   getReducedJacobian();
 
 // Stoichiometry methods
 C_DECL_SPEC RRMatrixHandle          __stdcall   getStoichiometryMatrix();
+C_DECL_SPEC RRMatrixHandle          __stdcall   getLinkMatrix();
 
 // Initial condition Methods
 C_DECL_SPEC bool                    __stdcall   reset();

@@ -131,6 +131,7 @@ type
   TGetStoichiometryMatrix = function : PRRMatrixHandle; stdcall;
   TFreeRRResult = function (ptr : PRRResultHandle) : boolean; stdcall;
   TFreeRRInstance = procedure (instance : Pointer); stdcall;
+  TVoidVectorFunc = function : PRRDoubleVectorHandle; stdcall;
 
   TSetSelectionList = function (list : PAnsiChar) : bool; stdcall;
   TGetValue = function (speciesId : PAnsiChar; var value : double) : boolean; stdcall;
@@ -141,7 +142,7 @@ type
   TFreeRRMatrix = function (matrix : PRRMatrixHandle) : boolean; stdcall;
   TFreeRRDoubleVector = function (vector : PRRDoubleVectorHandle) : boolean ; stdcall;
   TOneStep = function (var currentTime : double; var stepSize : double) : double; stdcall;
-  TSteadyState = function : double; stdcall;
+  TSteadyState = function (var value : double) : boolean; stdcall;
 
 var
    DLLLoaded : boolean;
@@ -172,12 +173,21 @@ function  simulateEx (timeStart: double; timeEnd : double; numberOfPoints : inte
 function  oneStep (var currentTime : double; var stepSize : double) : double;
 function  setSelectionList (strList : TStringList) : boolean;
 function  getCapabilities : AnsiString;
+function  evalModel : boolean;
+function  getFullJacobian : TMatrix;
+function  getReducedJacobian : TMatrix;
+
+function  getReactionRates : TDoubleArray;
+function  getRatesOfChange : TDoubleArray;
 
 function  getCompartmentNames : TStringList;
 function  getReactionNames : TStringList;
 function  getBoundarySpeciesNames : TStringList;
 function  getFloatingSpeciesNames : TStringList;
 function  getGlobalParameterNames : TStringList;
+function  getRatesOfChangeNames : TStringList;
+function  getEigenValueNames : TStringList;
+function  getElasticityNames : TStringList;
 
 function  getNumberOfReactions : integer;
 function  getNumberOfBoundarySpecies : integer;
@@ -247,6 +257,9 @@ var DLLHandle : Cardinal;
     libGetReactionNames : TGetReactionNames;
     libReset : TReset;
     libGetCapabilities : TVoidCharFunc;
+    libEvalModel : TVoidBoolFunc;
+    libGetFullJacobian : function : PRRMatrixHandle;
+    libGetReducedJacobian : function : PRRMatrixHandle;
 
     libGetNumberOfReactions : TVoidIntFunc;
     libGetNumberOfBoundarySpecies : TVoidIntFunc;
@@ -269,12 +282,17 @@ var DLLHandle : Cardinal;
 
     libSteadyState : TSteadyState;
     libGetReactionRate : TIntDoubleFunc;
+    libGetReactionRates : TVoidVectorFunc;
+    libGetRatesOfChange : TVoidVectorFunc;
     libOneStep : TOneStep;
 
     libGetCompartmentNames     : TVoidStringListFunc;
     libGetBoundarySpeciesNames : TVoidStringListFunc;
     libGetFloatingSpeciesNames : TVoidStringListFunc;
     libGetGlobalParameterNames : TVoidStringListFunc;
+    libGetRatesOfChangeNames   : TVoidStringListFunc;
+    libGetEigenValueNames      : TVoidStringListFunc;
+    libGetElasticityNames      : TVoidStringListFunc;
 
     libSetSteadyStateSelectionList : TCharBoolFunc;
     libGetAvailableSymbols : TLibGetAvailableSymbols;
@@ -311,6 +329,19 @@ begin
       result.Add (str);
       end;
 end;
+
+function loadIntoMatrix (matrix : PRRMatrixHandle) : TMatrix;
+var nr, nc : integer;
+    i, j : integer;
+begin
+  nr := matrix^.RSize;
+  nc := matrix^.CSize;
+  result := TMatrix.Create (nr, nc);
+  for i := 0 to nr - 1 do
+      for j := 0 to nc - 1 do
+          result[i+1,j+1] := matrix^.data[i*nc + j];
+end;
+
 
 // --------------------------------------------------------------
 // For doumentation, see the C API docs at:
@@ -430,6 +461,38 @@ end;
 function getCapabilities : AnsiString;
 begin
   result := libGetCapabilities;
+end;
+
+
+function evalModel : boolean;
+begin
+  result := libEvalModel;
+end;
+
+
+function getFullJacobian : TMatrix;
+var p : PRRMatrixHandle;
+begin
+  p := libGetFullJacobian;
+  if p = nil then
+     raise Exception.Create ('No Jacobian matrix');
+  try
+    result := loadIntoMatrix (p);
+  finally
+    libFreeMatrix (p);
+  end;
+end;
+
+
+function getReducedJacobian : TMatrix;
+var p : PRRMatrixHandle;
+begin
+  p := libGetReducedJacobian;
+  try
+    result := loadIntoMatrix (p);
+  finally
+    libFreeMatrix (p);
+  end;
 end;
 
 
@@ -558,6 +621,49 @@ begin
   end;
 end;
 
+function getRatesOfChangeNames : TStringList;
+var p : PRRStringList;
+begin
+  p := libGetRatesOfChangeNames;
+  try
+    if p = nil then
+       result := TStringList.Create
+    else
+       result := getArrayOfStrings (p);
+  finally
+    libFreeStringList (p);
+  end;
+end;
+
+
+function getEigenValueNames : TStringList;
+var p : PRRStringList;
+begin
+  p := libGetEigenValueNames;
+  try
+    if p = nil then
+       result := TStringList.Create
+    else
+       result := getArrayOfStrings (p);
+  finally
+    libFreeStringList (p);
+  end;
+end;
+
+
+function getElasticityNames : TStringList;
+var p : PRRStringList;
+begin
+  p := libGetElasticityNames;
+  try
+    if p = nil then
+       result := TStringList.Create
+    else
+       result := getArrayOfStrings (p);
+  finally
+    libFreeStringList (p);
+  end;
+end;
 
 function getNumberOfFloatingSpecies : integer;
 begin
@@ -652,8 +758,13 @@ end;
 
 
 function steadyState : double;
+var errMsg : AnsiString;
 begin
-  result := libSteadyState;
+  if not libSteadyState (result) then
+     begin
+     errMsg := getLastError;
+     raise Exception.Create (errMsg);
+     end;
 end;
 
 
@@ -662,9 +773,9 @@ var p : PRRDoubleVectorHandle; i : integer;
 begin
   p := libComputeSteadyStateValues;
   try
-    setLength (result, p^.count);
-    for i := 0 to p^.count - 1 do
-        result[i] := p^.data[i];
+    setLength (result, p.count);
+    for i := 0 to p.count - 1 do
+        result[i] := p.data[i];
   finally
     libFreeDoubleVector (p);
   end;
@@ -814,6 +925,28 @@ begin
 end;
 
 
+function getReactionRates : TDoubleArray;
+var p : PRRDoubleVectorHandle; i : integer;
+begin
+  p := libGetReactionRates;
+  setLength (result, p^.count);
+  for i := 0 to p^.count - 1 do
+      result[i] := p^.data[i];
+  //libFreeDoubleVector (p);
+end;
+
+
+function getRatesOfChange : TDoubleArray;
+var p : PRRDoubleVectorHandle; i : integer;
+begin
+  p := libGetRatesOfChange;
+  setLength (result, p^.count);
+  for i := 0 to p^.count - 1 do
+      result[i] := p^.data[i];
+  //libFreeDoubleVector (p);
+end;
+
+
 function getStoichiometryMatrix : TMatrix;
 var st : PRRMatrixHandle;
     nr, nc : integer;
@@ -875,6 +1008,9 @@ begin
    @libOneStep   := loadSingleMethod ('oneStep');
    @libReset     := loadSingleMethod ('reset');
    @libGetCapabilities := loadSingleMethod ('getCapabilities');
+   @libEvalModel := loadSingleMethod ('evalModel');
+   @libGetFullJacobian := loadSingleMethod('getFullJacobian');
+   @libGetReducedJacobian := loadSingleMethod('getReducedJacobian');
 
    @libSetValue := loadSingleMethod ('setValue');
    @libGetValue := loadSingleMethod ('getValue');
@@ -904,13 +1040,18 @@ begin
    @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList');
    @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList');
 
-   @libGetReactionRate := loadSingleMethod ('getReactionRate');
+   @libGetReactionRate   := loadSingleMethod ('getReactionRate');
+   @libGetReactionRates  := loadSingleMethod ('getReactionRates');
+   @libGetRatesOfChange  := loadSingleMethod ('getRatesOfChange');
 
    @libGetCompartmentNames      := loadSingleMethod ('getCompartmentNames');
    @libGetReactionNames         := loadSingleMethod ('getReactionNames');
    @libGetBoundarySpeciesNames  := loadSingleMethod ('getBoundarySpeciesNames');
    @libGetFloatingSpeciesNames  := loadSingleMethod ('getFloatingSpeciesNames');
    @libGetGlobalParameterNames  := loadSingleMethod ('getGlobalParameterNames');
+   @libGetRatesOfChangeNames    := loadSingleMethod ('getRatesOfChangeNames');
+   @libGetEigenValueNames       := loadSingleMethod ('getEigenValueNames');
+   @libGetElasticityNames       := loadSingleMethod ('getElasticityNames');
    @libGetAvailableSymbols      := loadSingleMethod ('getAvailableSymbols');
 
    @libGetStoichiometryMatrix   := loadSingleMethod ('getStoichiometryMatrix');
