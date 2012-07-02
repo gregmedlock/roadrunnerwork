@@ -13,4 +13,8 @@
 #endif
 #endif	//STATIC_RR_C_API
 
+#if defined(_WIN32)
+#define rrCallConv _cdecl
+#endif 
+
 #endif

@@ -55,7 +55,7 @@ relativeTolerance(defaultTolerance)
     if(!NLEQ1)
     {
     	Log(lError)<<"We failed to load the NLEQ function.";
-        return;
+        throw(RRException("Failed to load NLEQ function"));
     }
     this->model = _model;
 

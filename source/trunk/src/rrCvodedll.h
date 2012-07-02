@@ -7,9 +7,9 @@
 
 #ifdef WIN32
 #include <windows.h>
-#define STDCALL  __stdcall
+#define CALLCONV  __stdcall
 #else
-#define STDCALL
+#define CALLCONV
 #endif
 
 #define Ith(v,i)    NV_Ith_S(v,i-1)       /* Ith numbers components 1..NEQ */

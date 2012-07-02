@@ -64,31 +64,31 @@ static  rr::RoadRunner*     gRRHandle       = NULL;
 char*                       gLastError      = NULL;
 }
 
-char* __stdcall getBuildDate()
+char* rrCallConv getBuildDate()
 {
     char* date = new char[strlen(__DATE__) + 1];
     strcpy(date, __DATE__);
     return date;
 }
 
-char* __stdcall getRevision()
+char* rrCallConv getRevision()
 {
     return createText(SVN_VERSION);
 }
 
-//char* __stdcall getLatestLog()
+//char* rrCallConv getLatestLog()
 //{
 //    return createText(SVN_LASTLOG);
 //}
 
-//char* __stdcall getLatestCommitAuthor()
+//char* rrCallConv getLatestCommitAuthor()
 //{
 //    char* text = new char[strlen(SVN_LAST_COMMIT_AUTHOR) + 1];
 //    strcpy(text, SVN_LAST_COMMIT_AUTHOR);
 //    return text;
 //}
 
-RRHandle __stdcall getRRInstance()
+RRHandle rrCallConv getRRInstance()
 {
 	try
     {
@@ -107,7 +107,7 @@ RRHandle __stdcall getRRInstance()
   	return NULL;
 }
 
-char* __stdcall getCopyright()
+char* rrCallConv getCopyright()
 {
 	try
     {
@@ -133,7 +133,7 @@ char* __stdcall getCopyright()
 }
 
 //Flags and Options
-bool __stdcall setComputeAndAssignConservationLaws(const bool& OnOrOff)
+bool rrCallConv setComputeAndAssignConservationLaws(const bool& OnOrOff)
 {
 	try
     {
@@ -156,7 +156,7 @@ bool __stdcall setComputeAndAssignConservationLaws(const bool& OnOrOff)
     return false;
 }
 
-bool __stdcall setTempFolder(const char* folder)
+bool rrCallConv setTempFolder(const char* folder)
 {
 	try
     {
@@ -176,7 +176,7 @@ bool __stdcall setTempFolder(const char* folder)
   	return false;
 }
 
-char* __stdcall getTempFolder()
+char* rrCallConv getTempFolder()
 {
 	try
     {
@@ -199,7 +199,7 @@ char* __stdcall getTempFolder()
 	return NULL;
 }
 
-bool __stdcall loadSBMLFromFile(const char* sbmlFileName)
+bool rrCallConv loadSBMLFromFile(const char* sbmlFileName)
 {
 	try
     {
@@ -225,7 +225,7 @@ bool __stdcall loadSBMLFromFile(const char* sbmlFileName)
     return false;
 }
 
-bool __stdcall loadSBML(const char* sbml)
+bool rrCallConv loadSBML(const char* sbml)
 {
 	try
     {
@@ -251,7 +251,7 @@ bool __stdcall loadSBML(const char* sbml)
   	return false;
 }
 
-char* __stdcall getSBML()
+char* rrCallConv getSBML()
 {
 	try
     {
@@ -274,7 +274,7 @@ char* __stdcall getSBML()
   	return NULL;
 }
 
-bool __stdcall setTimeStart(const double& timeStart)
+bool rrCallConv setTimeStart(const double& timeStart)
 {
 	try
     {
@@ -297,7 +297,7 @@ bool __stdcall setTimeStart(const double& timeStart)
     return false;
 }
 
-bool __stdcall setTimeEnd(const double& timeEnd)
+bool rrCallConv setTimeEnd(const double& timeEnd)
 {
 	try
     {
@@ -319,7 +319,7 @@ bool __stdcall setTimeEnd(const double& timeEnd)
     return false;
 }
 
-bool __stdcall setNumPoints(const int& nrPoints)
+bool rrCallConv setNumPoints(const int& nrPoints)
 {
 	try
     {
@@ -341,7 +341,7 @@ bool __stdcall setNumPoints(const int& nrPoints)
   	return false;
 }
 
-bool  __stdcall setSelectionList(const char* list)
+bool  rrCallConv setSelectionList(const char* list)
 {
 	try
     {
@@ -364,7 +364,7 @@ bool  __stdcall setSelectionList(const char* list)
     return false;
 }
 
-RRStringListHandle __stdcall getSelectionList()
+RRStringListHandle rrCallConv getSelectionList()
 {
 	try
     {
@@ -392,7 +392,7 @@ RRStringListHandle __stdcall getSelectionList()
     return NULL;
 }
 
-RRResultHandle __stdcall simulate()
+RRResultHandle rrCallConv simulate()
 {
 	try
     {
@@ -443,7 +443,7 @@ RRResultHandle __stdcall simulate()
 	return NULL;
 }
 
-RRResultHandle __stdcall simulateEx (const double& timeStart, const double& timeEnd, const int& numberOfPoints)
+RRResultHandle rrCallConv simulateEx (const double& timeStart, const double& timeEnd, const int& numberOfPoints)
 {
 	try
     {
@@ -461,7 +461,7 @@ RRResultHandle __stdcall simulateEx (const double& timeStart, const double& time
 	return NULL;
 }
 
-RRStringListHandle __stdcall getReactionNames()
+RRStringListHandle rrCallConv getReactionNames()
 {
 	try
     {
@@ -490,7 +490,7 @@ RRStringListHandle __stdcall getReactionNames()
 	return NULL;
 }
 
-RRVectorHandle __stdcall getRatesOfChange()
+RRVectorHandle rrCallConv getRatesOfChange()
 {
 	try
     {
@@ -527,7 +527,7 @@ RRVectorHandle __stdcall getRatesOfChange()
 }
 
 
-RRStringListHandle __stdcall getRatesOfChangeNames()
+RRStringListHandle rrCallConv getRatesOfChangeNames()
 {
 	try
     {
@@ -555,7 +555,7 @@ RRStringListHandle __stdcall getRatesOfChangeNames()
 	return NULL;
 }
 
-bool __stdcall getValue(const char* speciesID, double& value)
+bool rrCallConv getValue(const char* speciesID, double& value)
 {
 	try
     {
@@ -576,7 +576,7 @@ bool __stdcall getValue(const char* speciesID, double& value)
 	return false;	//todo: how to indicate error???
 }
 
-RRMatrixHandle __stdcall getScaledElasticityMatrix()
+RRMatrixHandle rrCallConv getScaledElasticityMatrix()
 {
 	try
     {
@@ -601,7 +601,7 @@ RRMatrixHandle __stdcall getScaledElasticityMatrix()
 	return NULL;
 }
 
-bool __stdcall setValue(const char* speciesID, const double& val)
+bool rrCallConv setValue(const char* speciesID, const double& val)
 {
 	try
     {
@@ -621,7 +621,7 @@ bool __stdcall setValue(const char* speciesID, const double& val)
 	return NULL;
 }
 
-RRMatrixHandle __stdcall getStoichiometryMatrix()
+RRMatrixHandle rrCallConv getStoichiometryMatrix()
 {
 	try
     {
@@ -657,53 +657,17 @@ RRMatrixHandle __stdcall getStoichiometryMatrix()
 	return false;
 }
 
-RRMatrixHandle __stdcall getLinkMatrix()
-{
-	try
-    {
-        if(!gRRHandle)
-        {
-            setError(ALLOCATE_API_ERROR_MSG);
-            return NULL;
-        }
-        LIB_LA::DoubleMatrix tempMat = gRRHandle->getLinkMatrix();
-        
-		RRMatrixHandle matrix = new RRMatrix;
-        matrix->RSize = tempMat.RSize();
-        matrix->CSize = tempMat.CSize();
-        matrix->Data =  new double[tempMat.RSize()*tempMat.CSize()];
-
-        int index = 0;
-        for(rr::u_int row = 0; row < tempMat.RSize(); row++)
-        {
-            for(rr::u_int col = 0; col < tempMat.CSize(); col++)
-            {
-                matrix->Data[index++] = tempMat(row,col);
-            }
-        }
-	    return matrix;
-	}
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        setError(msg.str());
-    }
-	return false;
-}
-
-
-C_DECL_SPEC bool __stdcall hasError()
+C_DECL_SPEC bool rrCallConv hasError()
 {
     return (gLastError != NULL) ? true : false;
 }
 
-char* __stdcall getLastError()
+char* rrCallConv getLastError()
 {
     return gLastError;
 }
 
-bool __stdcall reset()
+bool rrCallConv reset()
 {
 	try
     {
@@ -725,7 +689,7 @@ bool __stdcall reset()
     return false;
 }
 
-int __stdcall getNumberOfReactions()
+int rrCallConv getNumberOfReactions()
 {
 	try
     {
@@ -746,7 +710,7 @@ int __stdcall getNumberOfReactions()
 	return -1;
 }
 
-bool __stdcall getReactionRate(const int& rateNr, double& value)
+bool rrCallConv getReactionRate(const int& rateNr, double& value)
 {
 	try
     {
@@ -767,7 +731,7 @@ bool __stdcall getReactionRate(const int& rateNr, double& value)
   	return false;
 }
 
-RRVectorHandle __stdcall getReactionRates()
+RRVectorHandle rrCallConv getReactionRates()
 {
 	try
     {
@@ -790,7 +754,7 @@ RRVectorHandle __stdcall getReactionRates()
 	return NULL;
 }
 
-int __stdcall getNumberOfBoundarySpecies()
+int rrCallConv getNumberOfBoundarySpecies()
 {
 	try
     {
@@ -810,7 +774,7 @@ int __stdcall getNumberOfBoundarySpecies()
   	return -1;
 }
 
-RRStringListHandle __stdcall getBoundarySpeciesNames()          // <- treat char* as you treat it in setSelectionList (char *)
+RRStringListHandle rrCallConv getBoundarySpeciesNames()          // <- treat char* as you treat it in setSelectionList (char *)
 {
 	try
     {
@@ -839,7 +803,7 @@ RRStringListHandle __stdcall getBoundarySpeciesNames()          // <- treat char
    	return NULL;
 }
 
-int __stdcall getNumberOfFloatingSpecies()
+int rrCallConv getNumberOfFloatingSpecies()
 {
 	try
     {
@@ -859,7 +823,7 @@ int __stdcall getNumberOfFloatingSpecies()
    	return -1;
 }
 
-RRStringListHandle __stdcall getFloatingSpeciesNames()
+RRStringListHandle rrCallConv getFloatingSpeciesNames()
 {
 	try
     {
@@ -887,7 +851,7 @@ RRStringListHandle __stdcall getFloatingSpeciesNames()
     return false;
 }
 
-int __stdcall getNumberOfGlobalParameters()
+int rrCallConv getNumberOfGlobalParameters()
 {
 	try
     {
@@ -907,7 +871,7 @@ int __stdcall getNumberOfGlobalParameters()
    	return -1;
 }
 
-RRStringListHandle __stdcall getGlobalParameterNames()
+RRStringListHandle rrCallConv getGlobalParameterNames()
 {
 	try
     {
@@ -934,7 +898,7 @@ RRStringListHandle __stdcall getGlobalParameterNames()
    	return NULL;
 }
 
-RRVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
+RRVectorHandle rrCallConv getFloatingSpeciesInitialConcentrations()
 {
 	try
     {
@@ -958,7 +922,7 @@ RRVectorHandle __stdcall getFloatingSpeciesInitialConcentrations()
 	return NULL;
 }
 
-bool __stdcall setFloatingSpeciesByIndex (const int& index, const double& value)
+bool rrCallConv setFloatingSpeciesByIndex (const int& index, const double& value)
 {
 	try
     {
@@ -980,7 +944,7 @@ bool __stdcall setFloatingSpeciesByIndex (const int& index, const double& value)
   	return false;
 }
 
-bool __stdcall setBoundarySpeciesByIndex (const int& index, const double& value)
+bool rrCallConv setBoundarySpeciesByIndex (const int& index, const double& value)
 {
 	try
     {
@@ -1002,7 +966,7 @@ bool __stdcall setBoundarySpeciesByIndex (const int& index, const double& value)
   	return false;
 }
 
-bool __stdcall setGlobalParameterByIndex(const int& index, const double& value)
+bool rrCallConv setGlobalParameterByIndex(const int& index, const double& value)
 {
 	try
     {
@@ -1024,7 +988,7 @@ bool __stdcall setGlobalParameterByIndex(const int& index, const double& value)
   	return false;
 }
 
-bool __stdcall setFloatingSpeciesInitialConcentrations(RRVector* vec)
+bool rrCallConv setFloatingSpeciesInitialConcentrations(RRVector* vec)
 {
 	try
     {
@@ -1047,7 +1011,7 @@ bool __stdcall setFloatingSpeciesInitialConcentrations(RRVector* vec)
   	return false;
 }
 
-bool __stdcall oneStep(const double& currentTime, const double& stepSize, double& value)
+bool rrCallConv oneStep(const double& currentTime, const double& stepSize, double& value)
 {
 	try
     {
@@ -1069,7 +1033,7 @@ bool __stdcall oneStep(const double& currentTime, const double& stepSize, double
 	return false;
 }
 
-RRSymbolListsHandle __stdcall getAvailableSymbols()              // <- You'll have to decide what type to return
+RRSymbolListsHandle rrCallConv getAvailableSymbols()              // <- You'll have to decide what type to return
 {
 	try
     {
@@ -1114,7 +1078,7 @@ RRSymbolListsHandle __stdcall getAvailableSymbols()              // <- You'll ha
 	return NULL;
 }
 
-bool __stdcall getBoundarySpeciesByIndex (const int& index, double& value)
+bool rrCallConv getBoundarySpeciesByIndex (const int& index, double& value)
 {
 	try
     {
@@ -1136,7 +1100,7 @@ bool __stdcall getBoundarySpeciesByIndex (const int& index, double& value)
   	return false;
 }
 
-bool __stdcall getFloatingSpeciesByIndex (const int& index, double& value)
+bool rrCallConv getFloatingSpeciesByIndex (const int& index, double& value)
 {
 	try
     {
@@ -1158,7 +1122,7 @@ bool __stdcall getFloatingSpeciesByIndex (const int& index, double& value)
   	return false;
 }
 
-bool __stdcall getGlobalParameterByIndex (const int& index, double& value)
+bool rrCallConv getGlobalParameterByIndex (const int& index, double& value)
 {
 	try
     {
@@ -1180,7 +1144,7 @@ bool __stdcall getGlobalParameterByIndex (const int& index, double& value)
   	return false;
 }
 
-bool __stdcall getCC(char* variable, char* parameter, double& value)
+bool rrCallConv getCC(char* variable, char* parameter, double& value)
 {
 	try
     {
@@ -1202,7 +1166,7 @@ bool __stdcall getCC(char* variable, char* parameter, double& value)
   	return false;
 }
 
-bool __stdcall getEE(const char* name, const char* species, double& value)
+bool rrCallConv getEE(const char* name, const char* species, double& value)
 {
 	try
     {
@@ -1224,7 +1188,7 @@ bool __stdcall getEE(const char* name, const char* species, double& value)
   	return false;
 }
 
-int __stdcall getNumberOfDependentSpecies()
+int rrCallConv getNumberOfDependentSpecies()
 {
 	try
     {
@@ -1245,7 +1209,7 @@ int __stdcall getNumberOfDependentSpecies()
   	return -1;
 }
 
-int __stdcall getNumberOfIndependentSpecies()
+int rrCallConv getNumberOfIndependentSpecies()
 {
 	try
     {
@@ -1266,7 +1230,7 @@ int __stdcall getNumberOfIndependentSpecies()
   	return -1;
 }
 
-bool __stdcall steadyState(double& value)
+bool rrCallConv steadyState(double& value)
 {
 	try
     {
@@ -1287,7 +1251,7 @@ bool __stdcall steadyState(double& value)
   	return false;
 }
 
-bool __stdcall evalModel()
+bool rrCallConv evalModel()
 {
 	try
 	{
@@ -1307,7 +1271,7 @@ bool __stdcall evalModel()
     return false;
 }
 
-char* __stdcall getParamPromotedSBML(const char* sArg)
+char* rrCallConv getParamPromotedSBML(const char* sArg)
 {
 	try
 	{
@@ -1331,7 +1295,7 @@ char* __stdcall getParamPromotedSBML(const char* sArg)
 	return NULL;
 }
 
-RRVectorHandle __stdcall computeSteadyStateValues()
+RRVectorHandle rrCallConv computeSteadyStateValues()
 {
 	try
 	{
@@ -1354,7 +1318,7 @@ RRVectorHandle __stdcall computeSteadyStateValues()
 	return NULL;
 }
 
-bool __stdcall setSteadyStateSelectionList(const char* list)
+bool rrCallConv setSteadyStateSelectionList(const char* list)
 {
 	try
 	{
@@ -1377,7 +1341,7 @@ bool __stdcall setSteadyStateSelectionList(const char* list)
 	return false;
 }
 
-RRStringListHandle __stdcall getSteadyStateSelectionList()
+RRStringListHandle rrCallConv getSteadyStateSelectionList()
 {
 	try
     {
@@ -1405,7 +1369,7 @@ RRStringListHandle __stdcall getSteadyStateSelectionList()
 	return NULL;
 }
 
-RRMatrixHandle __stdcall getFullJacobian()
+RRMatrixHandle rrCallConv getFullJacobian()
 {
 
 	try
@@ -1428,7 +1392,7 @@ RRMatrixHandle __stdcall getFullJacobian()
 	return NULL;
 }
 
-RRMatrixHandle __stdcall getReducedJacobian()
+RRMatrixHandle rrCallConv getReducedJacobian()
 {
 
 	try
@@ -1451,7 +1415,7 @@ RRMatrixHandle __stdcall getReducedJacobian()
 	return NULL;
 }
 
-RRCCode* __stdcall getCCode()
+RRCCode* rrCallConv getCCode()
 {
 	try
     {
@@ -1497,7 +1461,7 @@ RRCCode* __stdcall getCCode()
 
 //The latest.. ////////////////////////////////////////
 
-bool __stdcall getScaledFloatingSpeciesElasticity(const char* reacName, const char* specName, double& value)
+bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reacName, const char* specName, double& value)
 {
 	try
     {
@@ -1518,7 +1482,7 @@ bool __stdcall getScaledFloatingSpeciesElasticity(const char* reacName, const ch
     return false;
 }
 
-RRStringListHandle __stdcall getFloatingSpeciesInitialConditionNames()
+RRStringListHandle rrCallConv getFloatingSpeciesInitialConditionNames()
 {
 	try
     {
@@ -1539,7 +1503,7 @@ RRStringListHandle __stdcall getFloatingSpeciesInitialConditionNames()
     return NULL;
 }
 
-RRVectorHandle __stdcall getRatesOfChangeEx(const RRVectorHandle vec)
+RRVectorHandle rrCallConv getRatesOfChangeEx(const RRVectorHandle vec)
 {
 	try
     {
@@ -1561,7 +1525,7 @@ RRVectorHandle __stdcall getRatesOfChangeEx(const RRVectorHandle vec)
     return NULL;
 }
 
-RRVectorHandle __stdcall getReactionRatesEx(const RRVectorHandle vec)
+RRVectorHandle rrCallConv getReactionRatesEx(const RRVectorHandle vec)
 {
 	try
     {
@@ -1583,7 +1547,7 @@ RRVectorHandle __stdcall getReactionRatesEx(const RRVectorHandle vec)
     return NULL;
 }
 
-RRStringListHandle __stdcall getElasticityCoefficientNames()
+RRStringListHandle rrCallConv getElasticityCoefficientNames()
 {
 	try
     {
@@ -1604,7 +1568,7 @@ RRStringListHandle __stdcall getElasticityCoefficientNames()
     return NULL;
 }
 
-RRStringListHandle __stdcall getRateOfChangeNames()
+RRStringListHandle rrCallConv getRateOfChangeNames()
 {
 	try
     {
@@ -1625,7 +1589,7 @@ RRStringListHandle __stdcall getRateOfChangeNames()
     return false;
 }
 
-bool __stdcall setCapabilities(const char* caps)
+bool rrCallConv setCapabilities(const char* caps)
 {
 	try
     {
@@ -1651,7 +1615,7 @@ bool __stdcall setCapabilities(const char* caps)
     return false;
 }
 
-char* __stdcall getCapabilities()
+char* rrCallConv getCapabilities()
 {
 	try
     {
@@ -1673,7 +1637,7 @@ char* __stdcall getCapabilities()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-RRStringListHandle __stdcall getEigenValueNames()
+RRStringListHandle rrCallConv getEigenValueNames()
 {
 	try
     {
@@ -1694,7 +1658,7 @@ RRStringListHandle __stdcall getEigenValueNames()
     return NULL;
 }
 
-RRStringListHandle __stdcall getFluxControlCoefficientNames()
+RRStringListHandle rrCallConv getFluxControlCoefficientNames()
 {
 	try
     {
@@ -1715,7 +1679,7 @@ RRStringListHandle __stdcall getFluxControlCoefficientNames()
     return NULL;
 }
 
-RRStringListHandle __stdcall getConcentrationControlCoefficientNames()
+RRStringListHandle rrCallConv getConcentrationControlCoefficientNames()
 {
 	try
     {
@@ -1735,7 +1699,7 @@ RRStringListHandle __stdcall getConcentrationControlCoefficientNames()
     return NULL;
 }
 
-RRStringListHandle __stdcall getElasticityNames()
+RRStringListHandle rrCallConv getElasticityNames()
 {
 	try
     {
@@ -1755,7 +1719,7 @@ RRStringListHandle __stdcall getElasticityNames()
     return NULL;
 }
 
-int __stdcall getNumberOfCompartments()
+int rrCallConv getNumberOfCompartments()
 {
 	try
     {
@@ -1775,7 +1739,7 @@ int __stdcall getNumberOfCompartments()
     return -1;
 }
 
-bool __stdcall getCompartmentByIndex(const int& index, double& value)
+bool rrCallConv getCompartmentByIndex(const int& index, double& value)
 {
 	try
     {
@@ -1796,7 +1760,7 @@ bool __stdcall getCompartmentByIndex(const int& index, double& value)
     return false;
 }
 
-bool __stdcall setCompartmentByIndex (const int& index, const double& value)
+bool rrCallConv setCompartmentByIndex (const int& index, const double& value)
 {
 	try
     {
@@ -1817,7 +1781,7 @@ bool __stdcall setCompartmentByIndex (const int& index, const double& value)
     return false;
 }
 
-RRStringListHandle __stdcall getCompartmentNames()
+RRStringListHandle rrCallConv getCompartmentNames()
 {
 	try
     {
@@ -1837,7 +1801,7 @@ RRStringListHandle __stdcall getCompartmentNames()
     return NULL;
 }
 
-bool __stdcall getRateOfChange(const int& index, double& value)
+bool rrCallConv getRateOfChange(const int& index, double& value)
 {
 	try
     {
@@ -1859,7 +1823,7 @@ bool __stdcall getRateOfChange(const int& index, double& value)
 }
 
 //Print functions ==========================================================
-char* __stdcall  printList(const RRStringListHandle list)
+char* rrCallConv  printList(const RRStringListHandle list)
 {
 	try
     {
@@ -1895,7 +1859,7 @@ char* __stdcall  printList(const RRStringListHandle list)
     return NULL;
 }
 
-char* __stdcall printResult(const RRResultHandle result)
+char* rrCallConv printResult(const RRResultHandle result)
 {
 	try
     {
@@ -1945,7 +1909,7 @@ char* __stdcall printResult(const RRResultHandle result)
     return NULL;
 }
 
-char* __stdcall getMatrixAsString(const RRMatrixHandle matrixHandle)
+char* rrCallConv getMatrixAsString(const RRMatrixHandle matrixHandle)
 {
 	try
     {
@@ -1984,7 +1948,7 @@ char* __stdcall getMatrixAsString(const RRMatrixHandle matrixHandle)
     return NULL;
 }
 
-char* __stdcall printMatrix(const RRMatrixHandle matrixHandle)
+char* rrCallConv printMatrix(const RRMatrixHandle matrixHandle)
 {
 	try
     {
@@ -2023,7 +1987,7 @@ char* __stdcall printMatrix(const RRMatrixHandle matrixHandle)
     return NULL;
 }
 
-char* __stdcall printVector(RRVectorHandle vecHandle)
+char* rrCallConv printVector(RRVectorHandle vecHandle)
 {
 	try
     {
@@ -2061,7 +2025,7 @@ char* __stdcall printVector(RRVectorHandle vecHandle)
 }
 
 //Free Functions =====================================================
-bool __stdcall freeRRInstance(RRHandle handle)
+bool rrCallConv freeRRInstance(RRHandle handle)
 {
 	try
     {
@@ -2079,7 +2043,7 @@ bool __stdcall freeRRInstance(RRHandle handle)
     return false;
 }
 
-bool __stdcall freeMatrix(RRMatrixHandle matrix)
+bool rrCallConv freeMatrix(RRMatrixHandle matrix)
 {
 	try
     {
@@ -2100,7 +2064,7 @@ bool __stdcall freeMatrix(RRMatrixHandle matrix)
     return false;
 }
 
-bool __stdcall freeResult(RRResultHandle handle)
+bool rrCallConv freeResult(RRResultHandle handle)
 {
 	try
     {
@@ -2116,7 +2080,7 @@ bool __stdcall freeResult(RRResultHandle handle)
     return false;
 }
 
-bool __stdcall freeText(char* text)
+bool rrCallConv freeText(char* text)
 {
 	try
     {
@@ -2135,7 +2099,7 @@ bool __stdcall freeText(char* text)
     return false;
 }
 
-bool __stdcall freeStringList(RRStringListHandle sl)
+bool rrCallConv freeStringList(RRStringListHandle sl)
 {
 	try
     {
@@ -2151,7 +2115,7 @@ bool __stdcall freeStringList(RRStringListHandle sl)
     return false;
 }
 
-bool __stdcall freeLabelStringList(RRLabelStringListHandle sl)
+bool rrCallConv freeLabelStringList(RRLabelStringListHandle sl)
 {
 	try
     {
@@ -2167,7 +2131,7 @@ bool __stdcall freeLabelStringList(RRLabelStringListHandle sl)
     return false;
 }
 
-bool __stdcall freeVector(RRVectorHandle vector)
+bool rrCallConv freeVector(RRVectorHandle vector)
 {
 	try
     {
@@ -2186,7 +2150,7 @@ bool __stdcall freeVector(RRVectorHandle vector)
     return false;
 }
 
-bool __stdcall freeCCode(RRCCodeHandle code)
+bool rrCallConv freeCCode(RRCCodeHandle code)
 {
 	try
     {

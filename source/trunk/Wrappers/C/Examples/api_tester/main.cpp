@@ -146,7 +146,7 @@ int main(int argc, char* argv[])
     cout<<printList(getElasticityCoefficientNames())<<endl;
     cout<<printList(getRateOfChangeNames())<<endl;
     setCapabilities (NULL);
-    cout<<getCapabilities()<<endl;
+    //cout<<getCapabilities()<<endl;
 
 
 	///////////////////

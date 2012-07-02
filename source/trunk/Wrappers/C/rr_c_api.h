@@ -46,145 +46,144 @@
 extern "C"
 {
 #else
-#include <stdio.h>
-#include "rr_support/stdbool.h"
+//#include <stdio.h>
+//#include "rr_support/stdbool.h"
 #endif
 
 #include "rr_c_api_exporter.h"
 #include "rr_c_types.h"
 
 //The latest
-C_DECL_SPEC bool                    __stdcall   setCapabilities (const char* caps);
-C_DECL_SPEC char*                   __stdcall   getCapabilities();
+C_DECL_SPEC bool                    rrCallConv   setCapabilities (const char* caps);
+C_DECL_SPEC char*                   rrCallConv   getCapabilities();
 
 // Utility and informational methods
-C_DECL_SPEC char*                   __stdcall   getRevision();
-//C_DECL_SPEC char*                   __stdcall   getLatestLog();
-//C_DECL_SPEC char*                   __stdcall   getLatestCommitAuthor();
-C_DECL_SPEC char*                   __stdcall   getBuildDate();
-C_DECL_SPEC char*                   __stdcall   getCopyright();
-C_DECL_SPEC bool                    __stdcall   setTempFolder(const char* folder);
-C_DECL_SPEC char*                   __stdcall   getTempFolder();
+C_DECL_SPEC char*                   rrCallConv  getRevision();
+//C_DECL_SPEC char*                   rrCallConv   getLatestLog();
+//C_DECL_SPEC char*                   rrCallConv   getLatestCommitAuthor();
+C_DECL_SPEC char*                   rrCallConv  getBuildDate();
+C_DECL_SPEC char*                   rrCallConv  getCopyright();
+C_DECL_SPEC bool                    rrCallConv  setTempFolder(const char* folder);
+C_DECL_SPEC char*                   rrCallConv  getTempFolder();
 
 // Error handling
-C_DECL_SPEC bool                    __stdcall   hasError();
-C_DECL_SPEC char*                   __stdcall   getLastError();
+C_DECL_SPEC bool                    rrCallConv  hasError();
+C_DECL_SPEC char*                   rrCallConv  getLastError();
 
 // RoadRunner API
-C_DECL_SPEC RRHandle                __stdcall   getRRInstance();
-C_DECL_SPEC RRCCode*               	__stdcall   getCCode();
+C_DECL_SPEC RRHandle                rrCallConv   getRRInstance();
+C_DECL_SPEC RRCCode*               	rrCallConv   getCCode();
 
 // Flags/Options
-C_DECL_SPEC bool                    __stdcall   setComputeAndAssignConservationLaws(const bool& OnOrOff);
+C_DECL_SPEC bool                    rrCallConv   setComputeAndAssignConservationLaws(const bool& OnOrOff);
 
 // Load SBML methods
-C_DECL_SPEC bool                    __stdcall   loadSBML(const char* sbml);
-C_DECL_SPEC bool                    __stdcall   loadSBMLFromFile(const char* sbml);
+C_DECL_SPEC bool                    rrCallConv   loadSBML(const char* sbml);
+C_DECL_SPEC bool                    rrCallConv   loadSBMLFromFile(const char* sbml);
 
 // SBML utility methods
-C_DECL_SPEC char* 				    __stdcall   getParamPromotedSBML(const char* sArg);
-C_DECL_SPEC char* 				    __stdcall   getSBML();
+C_DECL_SPEC char* 				    rrCallConv   getParamPromotedSBML(const char* sArg);
+C_DECL_SPEC char* 				    rrCallConv   getSBML();
 
 // Simulation methods
-C_DECL_SPEC bool                    __stdcall   setTimeStart(const double& timeStart);
-C_DECL_SPEC bool                    __stdcall   setTimeEnd(const double& timeEnd);
-C_DECL_SPEC bool                    __stdcall   setNumPoints(const int& nrPoints);
-C_DECL_SPEC bool                    __stdcall   setSelectionList(const char* list);
-C_DECL_SPEC RRStringListHandle      __stdcall   getSelectionList();
-C_DECL_SPEC RRResultHandle          __stdcall   simulate();
-C_DECL_SPEC RRResultHandle          __stdcall   simulateEx(const double& timeStart, const double& timeEnd, const int& numberOfPoints);
-C_DECL_SPEC bool                  	__stdcall   oneStep(const double& currentTime, const double& stepSize, double& value);
+C_DECL_SPEC bool                    rrCallConv   setTimeStart(const double& timeStart);
+C_DECL_SPEC bool                    rrCallConv   setTimeEnd(const double& timeEnd);
+C_DECL_SPEC bool                    rrCallConv   setNumPoints(const int& nrPoints);
+C_DECL_SPEC bool                    rrCallConv   setSelectionList(const char* list);
+C_DECL_SPEC RRStringListHandle      rrCallConv   getSelectionList();
+C_DECL_SPEC RRResultHandle          rrCallConv   simulate();
+C_DECL_SPEC RRResultHandle          rrCallConv   simulateEx(const double& timeStart, const double& timeEnd, const int& numberOfPoints);
+C_DECL_SPEC bool                  	rrCallConv   oneStep(const double& currentTime, const double& stepSize, double& value);
 
 // Steady state methods
-C_DECL_SPEC bool                    __stdcall   steadyState(double& value);
-C_DECL_SPEC RRVectorHandle          __stdcall   computeSteadyStateValues();
-C_DECL_SPEC bool                    __stdcall   setSteadyStateSelectionList(const char* list);
-C_DECL_SPEC RRStringListHandle      __stdcall   getSteadyStateSelectionList();
+C_DECL_SPEC bool                    rrCallConv   steadyState(double& value);
+C_DECL_SPEC RRVectorHandle          rrCallConv   computeSteadyStateValues();
+C_DECL_SPEC bool                    rrCallConv   setSteadyStateSelectionList(const char* list);
+C_DECL_SPEC RRStringListHandle      rrCallConv   getSteadyStateSelectionList();
 
 // Set and get family of methods
-C_DECL_SPEC bool                  	__stdcall   getValue(const char* speciesID, double& value);
-C_DECL_SPEC bool                    __stdcall   setValue(const char* speciesId, const double& val);
-C_DECL_SPEC bool                    __stdcall   setBoundarySpeciesByIndex(const int& index, const double& value);
-C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesByIndex(const int& index, const double& value);
-C_DECL_SPEC bool                    __stdcall   setGlobalParameterByIndex(const int& index, const double& value);
-C_DECL_SPEC bool                  	__stdcall   getBoundarySpeciesByIndex(const int& index, double& val);
-C_DECL_SPEC bool                    __stdcall   getFloatingSpeciesByIndex(const int& index, double& val);
-C_DECL_SPEC bool                  	__stdcall   getGlobalParameterByIndex(const int& index, double& val);
-C_DECL_SPEC bool                    __stdcall   getCompartmentByIndex (const int& index, double& value);
-C_DECL_SPEC bool                    __stdcall   setCompartmentByIndex (const int& index, const double& value);
+C_DECL_SPEC bool        			rrCallConv   getValue(const char* speciesID, double& value);
+C_DECL_SPEC bool                    rrCallConv   setValue(const char* speciesId, const double& val);
+C_DECL_SPEC bool                    rrCallConv   setBoundarySpeciesByIndex(const int& index, const double& value);
+C_DECL_SPEC bool                    rrCallConv   setFloatingSpeciesByIndex(const int& index, const double& value);
+C_DECL_SPEC bool                    rrCallConv   setGlobalParameterByIndex(const int& index, const double& value);
+C_DECL_SPEC bool                  	rrCallConv   getBoundarySpeciesByIndex(const int& index, double& val);
+C_DECL_SPEC bool                    rrCallConv   getFloatingSpeciesByIndex(const int& index, double& val);
+C_DECL_SPEC bool                  	rrCallConv   getGlobalParameterByIndex(const int& index, double& val);
+C_DECL_SPEC bool                    rrCallConv   getCompartmentByIndex (const int& index, double& value);
+C_DECL_SPEC bool                    rrCallConv   setCompartmentByIndex (const int& index, const double& value);
 
 // Jacobian matrix methods
-C_DECL_SPEC RRMatrixHandle          __stdcall   getFullJacobian();
-C_DECL_SPEC RRMatrixHandle          __stdcall   getReducedJacobian();
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getFullJacobian();
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getReducedJacobian();
 
 // Stoichiometry methods
-C_DECL_SPEC RRMatrixHandle          __stdcall   getStoichiometryMatrix();
-C_DECL_SPEC RRMatrixHandle          __stdcall   getLinkMatrix();
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getStoichiometryMatrix();
 
 // Initial condition Methods
-C_DECL_SPEC bool                    __stdcall   reset();
-C_DECL_SPEC bool                    __stdcall   setFloatingSpeciesInitialConcentrations (const RRVector* vec);
-C_DECL_SPEC RRVectorHandle          __stdcall   getFloatingSpeciesInitialConcentrations ();
+C_DECL_SPEC bool                    rrCallConv   reset();
+C_DECL_SPEC bool                    rrCallConv   setFloatingSpeciesInitialConcentrations (const RRVector* vec);
+C_DECL_SPEC RRVectorHandle          rrCallConv   getFloatingSpeciesInitialConcentrations ();
 
 // Reaction rates
-C_DECL_SPEC int                     __stdcall   getNumberOfReactions();
-C_DECL_SPEC bool                  	__stdcall   getReactionRate(const int&, double& rate);
-C_DECL_SPEC RRVectorHandle          __stdcall   getReactionRates();
-C_DECL_SPEC RRVectorHandle          __stdcall   getReactionRatesEx (const RRVectorHandle vec);
+C_DECL_SPEC int                     rrCallConv   getNumberOfReactions();
+C_DECL_SPEC bool                  	rrCallConv   getReactionRate(const int&, double& rate);
+C_DECL_SPEC RRVectorHandle          rrCallConv   getReactionRates();
+C_DECL_SPEC RRVectorHandle          rrCallConv   getReactionRatesEx (const RRVectorHandle vec);
 
 // Rates of change
-C_DECL_SPEC RRVectorHandle          __stdcall   getRatesOfChange();
-C_DECL_SPEC RRStringListHandle      __stdcall   getRatesOfChangeNames();
-C_DECL_SPEC bool                    __stdcall   getRateOfChange(const int&, double& value);
-C_DECL_SPEC RRVectorHandle          __stdcall   getRatesOfChangeEx (const RRVectorHandle vec);
+C_DECL_SPEC RRVectorHandle          rrCallConv   getRatesOfChange();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getRatesOfChangeNames();
+C_DECL_SPEC bool                    rrCallConv   getRateOfChange(const int&, double& value);
+C_DECL_SPEC RRVectorHandle          rrCallConv   getRatesOfChangeEx (const RRVectorHandle vec);
 
-C_DECL_SPEC bool                    __stdcall   evalModel();
+C_DECL_SPEC bool                    rrCallConv   evalModel();
 
 // Get number family
-C_DECL_SPEC int                     __stdcall   getNumberOfCompartments ();
-C_DECL_SPEC int                     __stdcall   getNumberOfBoundarySpecies();
-C_DECL_SPEC int                     __stdcall   getNumberOfFloatingSpecies();
-C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameters();
-C_DECL_SPEC int                     __stdcall   getNumberOfGlobalParameterNames();
-C_DECL_SPEC int                     __stdcall   getNumberOfDependentSpecies();
-C_DECL_SPEC int                     __stdcall   getNumberOfIndependentSpecies();
+C_DECL_SPEC int                     rrCallConv   getNumberOfCompartments ();
+C_DECL_SPEC int                     rrCallConv   getNumberOfBoundarySpecies();
+C_DECL_SPEC int                     rrCallConv   getNumberOfFloatingSpecies();
+C_DECL_SPEC int                     rrCallConv   getNumberOfGlobalParameters();
+C_DECL_SPEC int                     rrCallConv   getNumberOfGlobalParameterNames();
+C_DECL_SPEC int                     rrCallConv   getNumberOfDependentSpecies();
+C_DECL_SPEC int                     rrCallConv   getNumberOfIndependentSpecies();
 
 // Get names family
-C_DECL_SPEC RRStringListHandle      __stdcall   getReactionNames();
-C_DECL_SPEC RRStringListHandle      __stdcall   getRateOfChangeNames();
-C_DECL_SPEC RRStringListHandle      __stdcall   getBoundarySpeciesNames();
-C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesNames();
-C_DECL_SPEC RRStringListHandle      __stdcall   getGlobalParameterNames();
-C_DECL_SPEC RRStringListHandle      __stdcall   getCompartmentNames();
-C_DECL_SPEC RRStringListHandle      __stdcall   getEigenValueNames();
-C_DECL_SPEC RRStringListHandle      __stdcall   getElasticityNames();
-C_DECL_SPEC RRStringListHandle      __stdcall   getElasticityCoefficientNames();
-C_DECL_SPEC RRSymbolListsHandle     __stdcall   getAvailableSymbols();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getReactionNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getRateOfChangeNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getBoundarySpeciesNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getFloatingSpeciesNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getGlobalParameterNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getCompartmentNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getEigenValueNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getElasticityNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getElasticityCoefficientNames();
+C_DECL_SPEC RRSymbolListsHandle     rrCallConv   getAvailableSymbols();
 
 // MCA methods
-C_DECL_SPEC RRStringListHandle      __stdcall   getFluxControlCoefficientNames();
-C_DECL_SPEC RRStringListHandle      __stdcall   getConcentrationControlCoefficientNames();
-C_DECL_SPEC RRMatrixHandle          __stdcall   getScaledElasticityMatrix();
-C_DECL_SPEC bool                    __stdcall   getCC(const char* variable, const char* parameter, double& value);
-C_DECL_SPEC bool                    __stdcall   getEE(const char* name, const char* species, double& value);
-C_DECL_SPEC bool                    __stdcall   getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
-C_DECL_SPEC RRStringListHandle      __stdcall   getFloatingSpeciesInitialConditionNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getFluxControlCoefficientNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getConcentrationControlCoefficientNames();
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getScaledElasticityMatrix();
+C_DECL_SPEC bool                    rrCallConv   getCC(const char* variable, const char* parameter, double& value);
+C_DECL_SPEC bool                    rrCallConv   getEE(const char* name, const char* species, double& value);
+C_DECL_SPEC bool                    rrCallConv   getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
+C_DECL_SPEC RRStringListHandle      rrCallConv   getFloatingSpeciesInitialConditionNames();
 
 // Print/format functions
-C_DECL_SPEC char*                   __stdcall   printResult(const RRResultHandle result);
-C_DECL_SPEC char*                   __stdcall   printMatrix(const RRMatrixHandle mat);
-C_DECL_SPEC char*                   __stdcall   printVector(const RRVectorHandle vec);
-C_DECL_SPEC char*                   __stdcall   printList(const RRStringListHandle list);
+C_DECL_SPEC char*                   rrCallConv   printResult(const RRResultHandle result);
+C_DECL_SPEC char*                   rrCallConv   printMatrix(const RRMatrixHandle mat);
+C_DECL_SPEC char*                   rrCallConv   printVector(const RRVectorHandle vec);
+C_DECL_SPEC char*                   rrCallConv   printList(const RRStringListHandle list);
 
 // Free memory functions
-C_DECL_SPEC bool                    __stdcall   freeRRInstance(RRHandle handle);
-C_DECL_SPEC bool                    __stdcall   freeResult(RRResultHandle handle);
-C_DECL_SPEC bool                    __stdcall   freeText(char* text);
-C_DECL_SPEC bool                    __stdcall   freeLabelStringList(RRLabelStringListHandle sl);
-C_DECL_SPEC bool                    __stdcall   freeStringList(RRStringListHandle sl);
-C_DECL_SPEC bool                    __stdcall   freeVector(RRVectorHandle vector);
-C_DECL_SPEC bool                    __stdcall   freeMatrix(RRMatrixHandle matrix);
-C_DECL_SPEC bool                    __stdcall   freeCCode(RRCCodeHandle code);
+C_DECL_SPEC bool                    rrCallConv   freeRRInstance(RRHandle handle);
+C_DECL_SPEC bool                    rrCallConv   freeResult(RRResultHandle handle);
+C_DECL_SPEC bool                    rrCallConv   freeText(char* text);
+C_DECL_SPEC bool                    rrCallConv   freeLabelStringList(RRLabelStringListHandle sl);
+C_DECL_SPEC bool                    rrCallConv   freeStringList(RRStringListHandle sl);
+C_DECL_SPEC bool                    rrCallConv   freeVector(RRVectorHandle vector);
+C_DECL_SPEC bool                    rrCallConv   freeMatrix(RRMatrixHandle matrix);
+C_DECL_SPEC bool                    rrCallConv   freeCCode(RRCCodeHandle code);
 
 #if defined( __cplusplus)
 }
