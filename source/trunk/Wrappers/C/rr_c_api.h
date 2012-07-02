@@ -119,6 +119,7 @@ C_DECL_SPEC RRMatrixHandle          rrCallConv   getReducedJacobian();
 
 // Stoichiometry methods
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getStoichiometryMatrix();
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getLinkMatrix();
 
 // Initial condition Methods
 C_DECL_SPEC bool                    rrCallConv   reset();

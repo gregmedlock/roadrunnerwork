@@ -13,8 +13,10 @@
 #endif
 #endif	//STATIC_RR_C_API
 
-#if defined(_WIN32)
+#if defined(_MSC_VER)
 #define rrCallConv _cdecl
-#endif 
+#else if defined(__CODEGEARC__)
+#define rrCallConv _stdcall
+#endif
 
 #endif
