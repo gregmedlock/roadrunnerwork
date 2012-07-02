@@ -24,26 +24,25 @@ void setError(const string& err)
     strcpy(gLastError, err.c_str());
 }
 
-char* createText(const char* str)
-{
-    char* newstr = new char[strlen(str) + 1];
+char* createText(const char* str)
+{
+    char* newstr = new char[strlen(str) + 1];
+    strcpy(newstr, str);
+    return newstr;
+}
 
-    strcpy(newstr, str);
-    return newstr;
-}
+char* createText(const string& str)
+{
+    char* newstr = new char[str.size() + 1];
+    strcpy(newstr, str.c_str());
+    return newstr;
+}
 
-char* createText(const string& str)
-{
-    char* newstr = new char[str.size() + 1];
+RRMatrix* createMatrix(const LIB_LA::DoubleMatrix& mat)
+{
+    RRMatrixHandle matrix = new RRMatrix;
 
-    strcpy(newstr, str.c_str());
-    return newstr;
-}
-
-RRMatrix* createMatrix(const LIB_LA::DoubleMatrix& mat)
-{
-    RRMatrixHandle matrix = new RRMatrix;
-    matrix->RSize = mat.RSize();
+    matrix->RSize = mat.RSize();
     matrix->CSize = mat.CSize();
     matrix->Data =  new double[mat.RSize()*mat.CSize()];
 
@@ -56,69 +55,72 @@ void setError(const string& err)
         }
     }
     return matrix;
-}
+}
 
-vector<double> createVector(const RRVector* vec)
-{
-    vector<double> aVec;
-    if(!vec)
-    {
-        return aVec;
-    }
+vector<double> createVector(const RRVector* vec)
+{
+    vector<double> aVec;
 
-    aVec.resize(vec->Size);
-    for(int i = 0; i < aVec.size(); i++)
-    {
-        aVec[i] =  vec->Data[i];
-    }
+    if(!vec)
+    {
+        return aVec;
+    }
 
-    return aVec;
-}
+    aVec.resize(vec->Size);
+    for(int i = 0; i < aVec.size(); i++)
+    {
+        aVec[i] =  vec->Data[i];
+    }
 
-RRVector* createVector(const vector<double>& vec)
-{
-    RRVector* aVec = new RRVector;
-    aVec->Size = vec.size();
-    if(aVec->Size)
-    {
-        aVec->Data = new double[aVec->Size];
-    }
-    for(int i = 0; i < aVec->Size; i++)
-    {
-        aVec->Data[i] =  vec[i];
-    }
+    return aVec;
+}
 
-    return aVec;
-}
+RRVector* createVector(const vector<double>& vec)
+{
+    RRVector* aVec = new RRVector;
+    aVec->Size = vec.size();
 
-bool copyVector(const RRVector* src, vector<double>& dest)
-{
-    if(!src)
-    {
-        return false;
-    }
+    if(aVec->Size)
+    {
+        aVec->Data = new double[aVec->Size];
+    }
 
-    dest.resize(src->Size);
+    for(int i = 0; i < aVec->Size; i++)
+    {
+        aVec->Data[i] =  vec[i];
+    }
 
-    for(int i = 0; i < src->Size; i++)
-    {
-        dest[i] = src->Data[i];
-    }
+    return aVec;
+}
 
-    return true;
-}
+bool copyVector(const RRVector* src, vector<double>& dest)
+{
+    if(!src)
+    {
+        return false;
+    }
 
-RRStringList* createList(const StringList& sList)
-{
-    if(!sList.Count())
-    {
-        return NULL;
-    }
+    dest.resize(src->Size);
 
-    RRStringList* list = new RRStringList;
-    list->Count = sList.size();
+    for(int i = 0; i < src->Size; i++)
+    {
+        dest[i] = src->Data[i];
+    }
 
-    list->String = new char*[list->Count];
+    return true;
+}
+
+RRStringList* createList(const StringList& sList)
+{
+    if(!sList.Count())
+    {
+        return NULL;
+    }
+
+    RRStringList* list = new RRStringList;
+    list->Count = sList.size();
+
+    list->String = new char*[list->Count];
 
     for(int i = 0; i < list->Count; i++)
     {
@@ -126,18 +128,19 @@ void setError(const string& err)
         strcpy(list->String[i], sList[i].c_str());
     }
     return list;
-}
+}
 
-RRStringList* createList(const ArrayList& arrList)
-{
+RRStringList* createList(const ArrayList& arrList)
+{
 
-    if(!arrList.Count())
-    {
-        return NULL;
-    }
+    if(!arrList.Count())
+    {
+        return NULL;
+    }
 
-    RRStringListHandle list = new RRStringList;
-    list->Count = arrList.TotalCount();
+    RRStringListHandle list = new RRStringList;
+
+    list->Count = arrList.TotalCount();
     list->String = new char*[arrList.TotalCount()];
 
     int itemCount = 0;
@@ -154,4 +157,4 @@ void setError(const string& err)
     return list;
 }
 
-}
+}

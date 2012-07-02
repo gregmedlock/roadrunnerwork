@@ -668,20 +668,23 @@ RRMatrixHandle rrCallConv getLinkMatrix()
         }
         LIB_LA::DoubleMatrix tempMat = gRRHandle->getLinkMatrix();
         
-		RRMatrixHandle matrix = new RRMatrix;
-        matrix->RSize = tempMat.RSize();
-        matrix->CSize = tempMat.CSize();
-        matrix->Data =  new double[tempMat.RSize()*tempMat.CSize()];
+		return createMatrix(tempMat);
 
-        int index = 0;
-        for(rr::u_int row = 0; row < tempMat.RSize(); row++)
-        {
-            for(rr::u_int col = 0; col < tempMat.CSize(); col++)
-            {
-                matrix->Data[index++] = tempMat(row,col);
-            }
-        }
-	    return matrix;
+		//RRMatrixHandle matrix = new RRMatrix;
+  //      
+		//matrix->RSize = tempMat.RSize();
+  //      matrix->CSize = tempMat.CSize();
+  //      matrix->Data =  new double[tempMat.RSize()*tempMat.CSize()];
+
+  //      int index = 0;
+  //      for(rr::u_int row = 0; row < tempMat.RSize(); row++)
+  //      {
+  //          for(rr::u_int col = 0; col < tempMat.CSize(); col++)
+  //          {
+  //              matrix->Data[index++] = tempMat(row,col);
+  //          }
+  //      }
+	 //   return matrix;
 	}
     catch(Exception& ex)
     {
