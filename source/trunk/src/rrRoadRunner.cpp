@@ -1584,6 +1584,21 @@ LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
 //        // Start of Level 4 API Methods
 //        // ---------------------------------------------------------------------
 //
+LIB_LA::DoubleMatrix RoadRunner::getLinkMatrix()
+{
+    try
+    {
+       if (modelLoaded)
+	   {
+           return *_L; 
+	   }
+       throw SBWApplicationException(emptyModelStr);
+    }
+    catch (Exception e)
+    {
+         throw SBWApplicationException("Unexpected error from getLMatrix()", e.Message());
+    }
+}
 //        Help("Returns the Link Matrix for the currently loaded model")
 //        double[][] RoadRunner::getLinkMatrix()
 //        {

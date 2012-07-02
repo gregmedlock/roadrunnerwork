@@ -170,7 +170,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		// ---------------------------------------------------------------------
 		// Start of Level 4 API Methods
 		// ---------------------------------------------------------------------
-		double*                         getLinkMatrix();
+		LIB_LA::DoubleMatrix            getLinkMatrix();
 		double*                         getNrMatrix();
 		double*                         getL0Matrix();
 		DoubleMatrix                    getStoichiometryMatrix();
