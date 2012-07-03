@@ -180,6 +180,7 @@ function  getReducedJacobian : TMatrix;
 function  getStoichiometryMatrix : TMatrix;
 function  getLinkMatrix : TMatrix;
 function  getNrMatrix : TMatrix;
+function  getConservationMatrix : TMatrix;
 
 function  getReactionRates : TDoubleArray;
 function  getRatesOfChange : TDoubleArray;
@@ -307,6 +308,7 @@ var DLLHandle : Cardinal;
     libGetStoichiometryMatrix : TGetMatrix;
     libGetLinkMatrix          : TGetMatrix;
     libGetNrMatrix            : TGetMatrix;
+    libGetConservationMatrix  : TGetMatrix;
 
     libFreeStringList : TFreeStringList;     //
     libFreeMatrix : TFreeRRMatrix; //
@@ -1009,6 +1011,25 @@ begin
   end;
 end;
 
+
+function getConservationMatrix : TMatrix;
+var st : PRRMatrixHandle;
+    nr, nc : integer;
+    i, j : integer;
+begin
+  st := libGetConservationMatrix;
+  try
+    nr := st^.RSize;
+    nc := st^.CSize;
+    result := TMatrix.Create (nr, nc);
+    for i := 0 to nr - 1 do
+        for j := 0 to nc - 1 do
+            result[i+1,j+1] := st^.data[i*nc + j];
+  finally
+    libFreeMatrix (st);
+  end;
+end;
+
 // ---------------------------------------------------------------------
 
 procedure setRoadRunnerLibraryName (newLibName : AnsiString);
@@ -1046,23 +1067,23 @@ begin
    @libSetComputeAndAssignConservationLaws := loadSingleMethod ('setComputeAndAssignConservationLaws', errMsg, result, methodList);
 
    @libLoadSBMLFromFile := loadSingleMethod ('loadSBMLFromFile', errMsg, result, methodList);
-   @libLoadSBML := loadSingleMethod ('loadSBML', errMsg, result, methodList);
-   @libGetSBML  := loadSingleMethod ('getSBML', errMsg, result, methodList);
+   @libLoadSBML         := loadSingleMethod ('loadSBML', errMsg, result, methodList);
+   @libGetSBML          := loadSingleMethod ('getSBML', errMsg, result, methodList);
 
-   @setTimeStart  := loadSingleMethod ('setTimeStart', errMsg, result, methodList);
-   @setTimeEnd    := loadSingleMethod ('setTimeEnd', errMsg, result, methodList);
+   @setTimeStart   := loadSingleMethod ('setTimeStart', errMsg, result, methodList);
+   @setTimeEnd     := loadSingleMethod ('setTimeEnd', errMsg, result, methodList);
    @setNumberOfPoints := loadSingleMethod ('setNumPoints', errMsg, result, methodList);
-   @libSimulate   := loadSingleMethod ('simulate', errMsg, result, methodList);
-   @libSimulateEx := loadSingleMethod ('simulateEx', errMsg, result, methodList);
-   @libOneStep    := loadSingleMethod ('oneStep', errMsg, result, methodList);
-   @libReset      := loadSingleMethod ('reset', errMsg, result, methodList);
+   @libSimulate    := loadSingleMethod ('simulate', errMsg, result, methodList);
+   @libSimulateEx  := loadSingleMethod ('simulateEx', errMsg, result, methodList);
+   @libOneStep     := loadSingleMethod ('oneStep', errMsg, result, methodList);
+   @libReset       := loadSingleMethod ('reset', errMsg, result, methodList);
    @libGetCapabilities := loadSingleMethod ('getCapabilities', errMsg, result, methodList);
-   @libEvalModel  := loadSingleMethod ('evalModel', errMsg, result, methodList);
+   @libEvalModel   := loadSingleMethod ('evalModel', errMsg, result, methodList);
    @libGetFullJacobian := loadSingleMethod('getFullJacobian', errMsg, result, methodList);
    @libGetReducedJacobian := loadSingleMethod('getReducedJacobian', errMsg, result, methodList);
 
-   @libSetValue     := loadSingleMethod ('setValue', errMsg, result, methodList);
-   @libGetValue     := loadSingleMethod ('getValue', errMsg, result, methodList);
+   @libSetValue       := loadSingleMethod ('setValue', errMsg, result, methodList);
+   @libGetValue       := loadSingleMethod ('getValue', errMsg, result, methodList);
    @libSetSelectionList := loadSingleMethod ('setSelectionList', errMsg, result, methodList);
 
    @libGetNumberOfReactions        := loadSingleMethod ('getNumberOfReactions', errMsg, result, methodList);
@@ -1089,9 +1110,9 @@ begin
    @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList', errMsg, result, methodList);
    @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList', errMsg, result, methodList);
 
-   @libGetReactionRate   := loadSingleMethod ('getReactionRate', errMsg, result, methodList);
-   @libGetReactionRates  := loadSingleMethod ('getReactionRates', errMsg, result, methodList);
-   @libGetRatesOfChange  := loadSingleMethod ('getRatesOfChange', errMsg, result, methodList);
+   @libGetReactionRate     := loadSingleMethod ('getReactionRate', errMsg, result, methodList);
+   @libGetReactionRates    := loadSingleMethod ('getReactionRates', errMsg, result, methodList);
+   @libGetRatesOfChange    := loadSingleMethod ('getRatesOfChange', errMsg, result, methodList);
 
    @libGetCompartmentNames      := loadSingleMethod ('getCompartmentNames', errMsg, result, methodList);
    @libGetReactionNames         := loadSingleMethod ('getReactionNames', errMsg, result, methodList);
@@ -1106,12 +1127,13 @@ begin
    @libGetStoichiometryMatrix   := loadSingleMethod ('getStoichiometryMatrix', errMsg, result, methodList);
    @libGetLinkMatrix            := loadSingleMethod ('getLinkMatrix', errMsg, result, methodList);
    @libGetNrMatrix              := loadSingleMethod ('getNrMatrix', errMsg, result, methodList);
+   @libGetConservationMatrix    := loadSingleMethod ('getConservationMatrix', errMsg, result, methodList);
 
-   @libFreeRRInstance := loadSingleMethod ('freeRRInstance', errMsg, result, methodList);
-   @libFreeResult     := loadSingleMethod ('freeResult', errMsg, result, methodList);
-   @libFreeMatrix     := loadSingleMethod ('freeMatrix', errMsg, result, methodList);
-   @libFreeText       := loadSingleMethod ('freeText', errMsg, result, methodList);
-   @libFreeStringList := loadSingleMethod ('freeStringList', errMsg, result, methodList);
+   @libFreeRRInstance   := loadSingleMethod ('freeRRInstance', errMsg, result, methodList);
+   @libFreeResult       := loadSingleMethod ('freeResult', errMsg, result, methodList);
+   @libFreeMatrix       := loadSingleMethod ('freeMatrix', errMsg, result, methodList);
+   @libFreeText         := loadSingleMethod ('freeText', errMsg, result, methodList);
+   @libFreeStringList   := loadSingleMethod ('freeStringList', errMsg, result, methodList);
    //@libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeDoubleVector'));
    //if not Assigned (libFreeDoubleVector) then
    //   begin errMsg := 'Unable to locate freeDoubleVector'; result := false; exit; end;
