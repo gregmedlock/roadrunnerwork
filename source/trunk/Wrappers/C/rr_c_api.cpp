@@ -1450,7 +1450,6 @@ RRStringListHandle rrCallConv getSteadyStateSelectionList()
 
 RRMatrixHandle rrCallConv getFullJacobian()
 {
-
 	try
     {
         if(!gRRHandle)
@@ -1473,7 +1472,6 @@ RRMatrixHandle rrCallConv getFullJacobian()
 
 RRMatrixHandle rrCallConv getReducedJacobian()
 {
-
 	try
     {
         if(!gRRHandle)

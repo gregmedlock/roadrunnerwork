@@ -130,15 +130,8 @@ int main(int argc, char* argv[])
     getRateOfChange(0, value);
     cout<<"Rate of change:"<<value<<endl;
 
-    cout<<"Version: "<<getVersion()<<endl;
-//    cout<<getLatestCommitAuthor()<<endl;
-//    cout<<getLatestLog()<<endl;
+    cout<<"API ersion: "<<getVersion()<<endl;
 
-//    if(!getScaledFloatingSpeciesElasticity("test", "test", value))
-//    {
-//        cout<<getLastError()<<endl;
-//    }
-//
     cout<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
     getRatesOfChangeEx (NULL);
     getReactionRatesEx (NULL);
@@ -147,6 +140,15 @@ int main(int argc, char* argv[])
     setCapabilities (NULL);
     //cout<<getCapabilities()<<endl;
 
+//    C_DECL_SPEC bool                    rrCallConv   getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
+    if(getScaledFloatingSpeciesElasticity("_J1", "S1", value))
+    {
+        cout<<"ScaledFloatingSpeciesElasticity "<<value<<endl;
+    }
+    else
+    {
+      cout<<getLastError()<<endl;
+    }
     RRVector* test = getReactionRates();
     cout<<printVector(test);
     freeVector(test);
