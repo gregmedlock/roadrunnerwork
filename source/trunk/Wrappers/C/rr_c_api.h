@@ -160,7 +160,6 @@ C_DECL_SPEC RRStringListHandle      rrCallConv   getFloatingSpeciesNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getGlobalParameterNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getCompartmentNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getEigenValueNames();
-C_DECL_SPEC RRStringListHandle      rrCallConv   getElasticityNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getElasticityCoefficientNames();
 C_DECL_SPEC RRSymbolListsHandle     rrCallConv   getAvailableSymbols();
 

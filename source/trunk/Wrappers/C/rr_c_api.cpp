@@ -1776,26 +1776,6 @@ RRStringListHandle rrCallConv getConcentrationControlCoefficientNames()
     return NULL;
 }
 
-RRStringListHandle rrCallConv getElasticityNames()
-{
-	try
-    {
-        if(!gRRHandle)
-        {
-            setError(ALLOCATE_API_ERROR_MSG);
-            return NULL;
-        }
-        return createList(gRRHandle->getElasticityCoefficientNames());
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        setError(msg.str());
-    }
-    return NULL;
-}
-
 int rrCallConv getNumberOfCompartments()
 {
 	try

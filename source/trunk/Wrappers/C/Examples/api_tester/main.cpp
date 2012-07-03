@@ -74,7 +74,6 @@ int main(int argc, char* argv[])
 	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
 	//cout<<sbml.c_str()<<endl;
-
 	if(!loadSBML(sbml.c_str()))
 	{
 		cerr<<"Failed loading SBML from file:"<<fileName<<endl;
@@ -204,9 +203,25 @@ int main(int argc, char* argv[])
     {
       cout<<getLastError()<<endl;
     }
+
+    cout<<"getFloatingSpeciesInitialConditionNames: "<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
+
     RRVector* test = getReactionRates();
     cout<<printVector(test);
+
+    for(int i = 0; i < test->Size; i++)
+    {
+        test->Data[i] = i;
+    }
+
+    test =  getReactionRatesEx(test);
+
+    cout<<printVector(test);
+
+    test = getRatesOfChangeEx(test);
+    cout<<printVector(test)<<endl;
     freeVector(test);
+
 
 	///////////////////
     text = getCopyright();

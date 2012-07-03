@@ -26,7 +26,6 @@ EXPORTS
     getEE                         = _getEE@12                           
     getEigenValueNames            = _getEigenValueNames@0               
     getElasticityCoefficientNames = _getElasticityCoefficientNames@0      
-    getElasticityNames            = _getElasticityNames@0               
     getFloatingSpeciesByIndex     = _getFloatingSpeciesByIndex@8        
     getFloatingSpeciesInitialConcentrations= _getFloatingSpeciesInitialConcentrations@0      
     getFloatingSpeciesInitialConditionNames= _getFloatingSpeciesInitialConditionNames@0      
