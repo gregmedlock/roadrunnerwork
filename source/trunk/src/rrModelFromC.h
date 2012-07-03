@@ -185,6 +185,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
         c_void                                  cInitializeRates;
         c_void                                  cInitializeRateRuleSymbols;
         c_void_int_double                       csetConcentration;
+		c_void_double_doubleStar                cComputeReactionRates;
 
         //Utility
         FARPROC                                  GetFunctionPtr(const string& function);
