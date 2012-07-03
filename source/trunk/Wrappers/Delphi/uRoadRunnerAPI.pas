@@ -106,43 +106,43 @@ type
   end;
   PRRCCodeHandle = ^TRRCCodeAPI;
 
-  TVoidCharFunc = function : PAnsiChar; cdecl;   //char* func(void)
-  TVoidBoolFunc = function : boolean; cdecl; // bool func (void);
-  TVoidIntFunc = function : integer; cdecl;
-  TVoidDoubleFunc = function : double; cdecl;
+  TVoidCharFunc = function : PAnsiChar; stdcall;   //char* func(void)
+  TVoidBoolFunc = function : boolean; stdcall; // bool func (void);
+  TVoidIntFunc = function : integer; stdcall;
+  TVoidDoubleFunc = function : double; stdcall;
 
-  TBoolBoolFunc = function (var value : boolean) : boolean; cdecl;
+  TBoolBoolFunc = function (var value : boolean) : boolean; stdcall;
 
-  TPointerVoidFunc = function : Pointer; cdecl; //void* func(void)
-  TCharBoolFunc = function (str : PAnsiChar) : bool; cdecl;  // bool func (char *)
-  TDoubleBoolFunc = function (value : double) : bool; cdecl; // bool func (double)
-  TIntBoolFunc = function (value : integer) : bool; cdecl;   // bool func (double)
-  TIntDoubleFunc = function (index : integer) : double; cdecl;
+  TPointerVoidFunc = function : Pointer; stdcall; //void* func(void)
+  TCharBoolFunc = function (str : PAnsiChar) : bool; stdcall;  // bool func (char *)
+  TDoubleBoolFunc = function (value : double) : bool; stdcall; // bool func (double)
+  TIntBoolFunc = function (value : integer) : bool; stdcall;   // bool func (double)
+  TIntDoubleFunc = function (index : integer) : double; stdcall;
 
-  TVoidStringListFunc = function() : PRRStringList; cdecl;
+  TVoidStringListFunc = function() : PRRStringList; stdcall;
 
   TGetCopyright = TVoidCharFunc;
   TGetRRInstance = TPointerVoidFunc;
-  TGetCCode = function : PRRCCodeHandle; cdecl;
+  TGetCCode = function : PRRCCodeHandle; stdcall;
   TSetTimeStart = TDoubleBoolFunc;
   TSetTimeEnd = TDoubleBoolFunc;
   TSetNumPoints = TIntBoolFunc;
   TSimulateEx = function (var timeStart : double; var timeEnd : double; var numberOfPoints : integer) : PRRResultHandle;
-  TGetMatrix = function : PRRMatrixHandle; cdecl;
-  TFreeRRResult = function (ptr : PRRResultHandle) : boolean; cdecl;
-  TFreeRRInstance = procedure (instance : Pointer); cdecl;
-  TVoidVectorFunc = function : PRRDoubleVectorHandle; cdecl;
+  TGetMatrix = function : PRRMatrixHandle; stdcall;
+  TFreeRRResult = function (ptr : PRRResultHandle) : boolean; stdcall;
+  TFreeRRInstance = procedure (instance : Pointer); stdcall;
+  TVoidVectorFunc = function : PRRDoubleVectorHandle; stdcall;
 
-  TSetSelectionList = function (list : PAnsiChar) : bool; cdecl;
-  TGetValue = function (speciesId : PAnsiChar; var value : double) : boolean; cdecl;
-  TSetValue = function (speciesId : PAnsiChar; var value : double) : bool; cdecl;
+  TSetSelectionList = function (list : PAnsiChar) : bool; stdcall;
+  TGetValue = function (speciesId : PAnsiChar; var value : double) : boolean; stdcall;
+  TSetValue = function (speciesId : PAnsiChar; var value : double) : bool; stdcall;
   TGetReactionNames = TPointerVoidFunc;
-  TReset = function : bool; cdecl;
-  TFreeStringList = procedure (handle : Pointer); cdecl;
-  TFreeRRMatrix = function (matrix : PRRMatrixHandle) : boolean; cdecl;
-  TFreeRRDoubleVector = function (vector : PRRDoubleVectorHandle) : boolean ; cdecl;
-  TOneStep = function (var currentTime : double; var stepSize : double) : double; cdecl;
-  TSteadyState = function (var value : double) : boolean; cdecl;
+  TReset = function : bool; stdcall;
+  TFreeStringList = procedure (handle : Pointer); stdcall;
+  TFreeRRMatrix = function (matrix : PRRMatrixHandle) : boolean; stdcall;
+  TFreeRRDoubleVector = function (vector : PRRDoubleVectorHandle) : boolean ; stdcall;
+  TOneStep = function (var currentTime : double; var stepSize : double) : double; stdcall;
+  TSteadyState = function (var value : double) : boolean; stdcall;
 
 var
    DLLLoaded : boolean;
@@ -228,8 +228,8 @@ procedure releaseRoadRunnerLibrary;
 implementation
 
 type
-  TLibGetAvailableSymbols = function : PRRLabeledSymbolLists; cdecl;
-  TlibSetInitialConditions = function (vec : PRRDoubleVectorHandle) : bool; cdecl;
+  TLibGetAvailableSymbols = function : PRRLabeledSymbolLists; stdcall;
+  TlibSetInitialConditions = function (vec : PRRDoubleVectorHandle) : bool; stdcall;
   TlibComputeSteadyStateValues = function : PRRDoubleVectorHandle;
 
 
@@ -272,18 +272,18 @@ var DLLHandle : Cardinal;
     libGetNumberOfGlobalParameters : TVoidIntFunc;
     libGetNumberOfCompartments : TVoidIntFunc;
 
-    libSetCompartmentByIndex     : function (var index : integer; var value : double) : boolean; cdecl;
-    libSetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; cdecl;
-    libSetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; cdecl;
-    libSetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; cdecl;
+    libSetCompartmentByIndex     : function (var index : integer; var value : double) : boolean; stdcall;
+    libSetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+    libSetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+    libSetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; stdcall;
 
-    libGetCompartmentByIndex     : function (var index : integer; var value : double) : boolean; cdecl;
-    libGetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; cdecl;
-    libGetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; cdecl;
-    libGetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; cdecl;
+    libGetCompartmentByIndex     : function (var index : integer; var value : double) : boolean; stdcall;
+    libGetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+    libGetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+    libGetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
 
-    libGetNumberOfDependentSpecies : function : integer; cdecl;
-    libGetNumberOfIndependentSpecies : function : integer; cdecl;
+    libGetNumberOfDependentSpecies : function : integer; stdcall;
+    libGetNumberOfIndependentSpecies : function : integer; stdcall;
 
     libSteadyState : TSteadyState;
     libGetReactionRate : TIntDoubleFunc;
@@ -954,7 +954,7 @@ begin
     for i := 0 to p^.count - 1 do
         result[i] := p^.data[i];
   finally
-    //libFreeDoubleVector (p);
+    libFreeDoubleVector (p);
   end;
 end;
 
@@ -973,7 +973,7 @@ begin
     for i := 0 to p^.count - 1 do
         result[i] := p^.data[i];
   finally
-    //libFreeDoubleVector (p);
+    libFreeDoubleVector (p);
   end;
 end;
 
@@ -1101,7 +1101,7 @@ begin
    result := true;
    try
    @libGetBuildDate  := loadSingleMethod ('getBuildDate', errMsg, result, methodList);
-   @libGetRevision   := loadSingleMethod ('getRevision', errMsg, result, methodList);
+   @libGetRevision   := loadSingleMethod ('getVersion', errMsg, result, methodList);
    @libHasError      := loadSingleMethod ('hasError', errMsg, result, methodList);
    @libGetLastError  := loadSingleMethod ('getLastError', errMsg, result, methodList);
    @libGetRRInstance := loadSingleMethod ('getRRInstance', errMsg, result, methodList);
@@ -1180,7 +1180,7 @@ begin
    @libFreeMatrix       := loadSingleMethod ('freeMatrix', errMsg, result, methodList);
    @libFreeText         := loadSingleMethod ('freeText', errMsg, result, methodList);
    @libFreeStringList   := loadSingleMethod ('freeStringList', errMsg, result, methodList);
-   //@libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeDoubleVector'));
+   @libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeDoubleVector'));
    //if not Assigned (libFreeDoubleVector) then
    //   begin errMsg := 'Unable to locate freeDoubleVector'; result := false; exit; end;
    except
