@@ -657,6 +657,42 @@ RRMatrixHandle rrCallConv getStoichiometryMatrix()
 	return false;
 }
 
+RRMatrixHandle rrCallConv getConservationMatrix()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        LIB_LA::DoubleMatrix tempMat = gRRHandle->getConservationMatrix();
+
+        RRMatrixHandle matrix = new RRMatrix;
+        matrix->RSize = tempMat.RSize();
+        matrix->CSize = tempMat.CSize();
+        matrix->Data =  new double[tempMat.RSize()*tempMat.CSize()];
+
+        int index = 0;
+        for(rr::u_int row = 0; row < tempMat.RSize(); row++)
+        {
+            for(rr::u_int col = 0; col < tempMat.CSize(); col++)
+            {
+                matrix->Data[index++] = tempMat(row,col);
+            }
+        }
+	    return matrix;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+	return false;
+}
+
 RRMatrixHandle rrCallConv getLinkMatrix()
 {
 	try
