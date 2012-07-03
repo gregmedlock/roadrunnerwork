@@ -147,6 +147,9 @@ int main(int argc, char* argv[])
     setCapabilities (NULL);
     //cout<<getCapabilities()<<endl;
 
+    RRVector* test = getReactionRates();
+    cout<<printVector(test);
+    freeVector(test);
 
 	///////////////////
     text = getCopyright();

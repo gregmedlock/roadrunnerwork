@@ -2090,8 +2090,6 @@ char* rrCallConv printVector(RRVectorHandle vecHandle)
             }
         }
         ss<<endl;
-
-        cout<<ss.str();
         return createText(ss.str());
     }
     catch(Exception& ex)
