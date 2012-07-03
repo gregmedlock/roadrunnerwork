@@ -1590,57 +1590,31 @@ LIB_LA::DoubleMatrix RoadRunner::getLinkMatrix()
     {
        if (modelLoaded)
 	   {
-           return *_L; 
+		   return *_L;
 	   }
        throw SBWApplicationException(emptyModelStr);
     }
     catch (Exception e)
     {
-         throw SBWApplicationException("Unexpected error from getLMatrix()", e.Message());
+         throw SBWApplicationException("Unexpected error from getLinkMatrix()", e.Message());
     }
 }
-//        Help("Returns the Link Matrix for the currently loaded model")
-//        double[][] RoadRunner::getLinkMatrix()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//
-//                    return _L; //StructAnalysis.getLinkMatrix();
-//
-//                throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from getLMatrix()", e.Message());
-//            }
-//        }
-//
-//        Help("Returns the reduced stoichiometry matrix (Nr) for the currently loaded model")
-//        double[][] RoadRunner::getNrMatrix()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//
-//                    return _Nr; //StructAnalysis.getNrMatrix();
-//
-//                throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from getNrMatrix()", e.Message());
-//            }
-//        }
-//
+
+LIB_LA::DoubleMatrix RoadRunner::getNrMatrix()
+{
+    try
+    {
+       if (modelLoaded)
+	   {
+		   return *_Nr;
+	   }
+       throw SBWApplicationException(emptyModelStr);
+    }
+    catch (Exception e)
+    {
+         throw SBWApplicationException("Unexpected error from getNrMatrix()", e.Message());
+    }
+}
 //        Help("Returns the L0 matrix for the currently loaded model")
 //        double[][] RoadRunner::getL0Matrix()
 //        {

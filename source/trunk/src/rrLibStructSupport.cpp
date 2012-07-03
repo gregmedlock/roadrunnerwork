@@ -617,7 +617,7 @@ void StructAnalysis::GetL0MatrixLabels(vector<string>& sRowLabels, vector<string
 ////        /// </summary>
 DoubleMatrix* StructAnalysis::GetLinkMatrix()
 {
-    return mInstance->getL0Matrix();
+	return mInstance->getLinkMatrix();
 }
 ////            IntPtr pointer; int nRows; int nCols;
 ////            if (LibStructural_getLinkMatrix(out pointer, out nRows, out nCols) < 0)
