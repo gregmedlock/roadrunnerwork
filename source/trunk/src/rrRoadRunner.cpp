@@ -18,6 +18,7 @@
 //---------------------------------------------------------------------------
 
 using namespace std;
+
 namespace rr
 {
 
@@ -305,7 +306,8 @@ double RoadRunner::GetValueForRecord(const TSelectionRecord& record)
             dResult = getuEE(record.p1, record.p2, false);
         break;
 
-        case TSelectionType::clEigenValue:    //Todo: Enable this..
+		// ********  Todo: Enable this.. ***********
+        case TSelectionType::clEigenValue:    
 //            vector< complex<double> >oComplex = LA.GetEigenValues(getReducedJacobian());
 //            if (oComplex.Length > record.index)
 //            {
@@ -924,7 +926,7 @@ StringList RoadRunner::getSelectionList()
     return oResult;
 }
 
-//        Help("Compute the steady state of the model, returns the sum of squares of the solution")
+// Help("Compute the steady state of the model, returns the sum of squares of the solution")
 double RoadRunner::steadyState()
 {
     if (!modelLoaded)
@@ -1010,7 +1012,7 @@ double RoadRunner::getParameterValue(const TParameterType& parameterType, const 
     }
 }
 
-//        Help("This method turns on / off the computation and adherence to conservation laws."
+// Help("This method turns on / off the computation and adherence to conservation laws."
 //              + "By default roadRunner will discover conservation cycles and reduce the model accordingly.")
 void RoadRunner::ComputeAndAssignConservationLaws(const bool& bValue)
 {
@@ -1023,7 +1025,7 @@ void RoadRunner::ComputeAndAssignConservationLaws(const bool& bValue)
     }
 }
 
-//        Help("Returns the names given to the rate of change of the floating species")
+// Help("Returns the names given to the rate of change of the floating species")
 StringList RoadRunner::getRateOfChangeNames()
 {
     if (!modelLoaded)
@@ -1039,7 +1041,7 @@ StringList RoadRunner::getRateOfChangeNames()
     return sp;
 }
 
-//        Help("Gets the list of compartment names")
+// Help("Gets the list of compartment names")
 StringList RoadRunner::getCompartmentNames()
 {
     if (!modelLoaded)
@@ -1219,7 +1221,7 @@ double RoadRunner::getuEE(const string& reactionName, const string& parameterNam
     }
 }
 
-//        Help("Updates the model based on all recent changes")
+// Help("Updates the model based on all recent changes")
 void RoadRunner::EvalModel()
 {
     if (!modelLoaded)
@@ -1237,7 +1239,7 @@ void RoadRunner::setSelectionList(const string& list)
     setSelectionList(aList);
 }
 
-//        Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
+// Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
 //              " time, species names, , volume, reaction rates and rates of change (speciesName')")
 void RoadRunner::setSelectionList(const StringList& newSelectionList)
 {
@@ -1372,7 +1374,7 @@ void RoadRunner::setSelectionList(const StringList& newSelectionList)
 }
 
 
-//        Help(
+// Help(
 //            "Carry out a single integration step using a stepsize as indicated in the method call (the intergrator is reset to take into account all variable changes). Arguments: double CurrentTime, double StepSize, Return Value: new CurrentTime."
 //            )
 double RoadRunner::oneStep(const double& currentTime, const double& stepSize)
@@ -1540,7 +1542,7 @@ LIB_LA::DoubleMatrix mult(LIB_LA::DoubleMatrix& m1, LIB_LA::DoubleMatrix& m2)
     throw Exception("Incompatible matrix operands to multiply");
 }
 
-//        Help("Compute the reduced Jacobian at the current operating point")
+// Help("Compute the reduced Jacobian at the current operating point")
 LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
 {
     try
@@ -1560,7 +1562,7 @@ LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
 }
 
 
-//        Help("Compute the full Jacobian at the current operating point")
+// Help("Compute the full Jacobian at the current operating point")
 LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
 {
     try
@@ -1580,10 +1582,10 @@ LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
 }
 
 
-//        // ---------------------------------------------------------------------
-//        // Start of Level 4 API Methods
-//        // ---------------------------------------------------------------------
-//
+// ---------------------------------------------------------------------
+// Start of Level 4 API Methods
+// ---------------------------------------------------------------------
+
 LIB_LA::DoubleMatrix RoadRunner::getLinkMatrix()
 {
     try
@@ -1615,29 +1617,25 @@ LIB_LA::DoubleMatrix RoadRunner::getNrMatrix()
          throw SBWApplicationException("Unexpected error from getNrMatrix()", e.Message());
     }
 }
-//        Help("Returns the L0 matrix for the currently loaded model")
-//        double[][] RoadRunner::getL0Matrix()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//
-//                    return _L0; // StructAnalysis.getL0Matrix();
-//
-//                throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from getL0Matrix()", e.Message());
-//            }
-//        }
-//
-//        Help("Returns the stoichiometry matrix for the currently loaded model")
-DoubleMatrix  RoadRunner::getStoichiometryMatrix()
+
+LIB_LA::DoubleMatrix RoadRunner::getL0Matrix()
+{
+    try
+    {
+       if (modelLoaded)
+	   {
+		   return *_L0;
+	   }
+       throw SBWApplicationException(emptyModelStr);
+    }
+    catch (Exception e)
+    {
+         throw SBWApplicationException("Unexpected error from getL0Matrix()", e.Message());
+    }
+}
+
+// Help("Returns the stoichiometry matrix for the currently loaded model")
+DoubleMatrix RoadRunner::getStoichiometryMatrix()
 {
     //Todo: Room to improve how matrices are handled across LibStruct/RoadRunner/C-API
     DoubleMatrix mat;
@@ -1671,28 +1669,39 @@ DoubleMatrix  RoadRunner::getStoichiometryMatrix()
         throw SBWApplicationException("Unexpected error from getReorderedStoichiometryMatrix()" + e.Message());
     }
 }
-//
-//        Help("Returns the conservation matrix (gamma) for the currently loaded model")
-//        double[][] RoadRunner::getConservationMatrix()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//                    return StructAnalysis.GetGammaMatrix();
-//                //return StructAnalysis.getConservationLawArray();
-//                throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from getConservationLawArray()", e.Message());
-//            }
-//        }
-//
-//        Help("Returns the number of dependent species in the model")
+
+DoubleMatrix RoadRunner::getConservationMatrix()
+{
+    DoubleMatrix mat;
+
+    try
+    {
+       if (modelLoaded)
+	   {
+		   LibStructural::DoubleMatrix* aMat = mStructAnalysis.GetInstance()->getGammaMatrix(); 
+            if (aMat)
+            {
+                mat.resize(aMat->numRows(), aMat->numCols());
+                for(int row = 0; row < mat.RSize(); row++)
+                {
+                    for(int col = 0; col < mat.CSize(); col++)
+                    {
+                        mat(row,col) = (*aMat)(row,col);
+                    }
+                }
+            }
+            return mat;
+
+	   }
+       throw SBWApplicationException(emptyModelStr);
+    }
+    catch (Exception e)
+    {
+         throw SBWApplicationException("Unexpected error from getConservationMatrix()", e.Message());
+    }
+}
+
+// Help("Returns the number of dependent species in the model")
 int RoadRunner::getNumberOfDependentSpecies()
 {
     try
@@ -1711,7 +1720,7 @@ int RoadRunner::getNumberOfDependentSpecies()
     }
 }
 
-//Help("Returns the number of independent species in the model")
+// Help("Returns the number of independent species in the model")
 int RoadRunner::getNumberOfIndependentSpecies()
 {
     try
@@ -1770,7 +1779,7 @@ double RoadRunner::getVariableValue(const TVariableType& variableType, const int
 //            }
 //        }
 //
-//        Help(
+// Help(
 //            "Derpar Continuation, stepSize = stepsize; independentVariable = index to parameter; parameterType = {'globalParameter', 'boundarySpecies'"
 //            )
 //        void RoadRunner::computeContinuation(double stepSize, int independentVariable, string parameterTypeStr)
@@ -1795,7 +1804,7 @@ double RoadRunner::getVariableValue(const TVariableType& variableType, const int
 //            }
 //        }
 //
-//        Help("Returns the Symbols of all Flux Control Coefficients.")
+//  Help("Returns the Symbols of all Flux Control Coefficients.")
 ArrayList RoadRunner::getFluxControlCoefficientNames()
 {
     ArrayList oResult;// = new ArrayList();
@@ -1843,7 +1852,7 @@ ArrayList RoadRunner::getFluxControlCoefficientNames()
     return oResult;
 }
 
-//        Help("Returns the Symbols of all Concentration Control Coefficients.")
+// Help("Returns the Symbols of all Concentration Control Coefficients.")
 ArrayList RoadRunner::getConcentrationControlCoefficientNames()
 {
     ArrayList oResult;// = new ArrayList();
@@ -1890,7 +1899,7 @@ ArrayList RoadRunner::getConcentrationControlCoefficientNames()
     return oResult;
 }
 
-//        Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")
+// Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")
 //        ArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
 //        {
 //            var oResult = new ArrayList();
@@ -1929,7 +1938,7 @@ ArrayList RoadRunner::getConcentrationControlCoefficientNames()
 //            return oResult;
 //        }
 //
-//        Help("Returns the Symbols of all Elasticity Coefficients.")
+// Help("Returns the Symbols of all Elasticity Coefficients.")
 ArrayList RoadRunner::getElasticityCoefficientNames()
 {
     ArrayList oResult;
@@ -1983,7 +1992,7 @@ ArrayList RoadRunner::getElasticityCoefficientNames()
     return oResult;
 }
 
-//        Help("Returns the Symbols of all Unscaled Elasticity Coefficients.")
+// Help("Returns the Symbols of all Unscaled Elasticity Coefficients.")
 ArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
 {
     ArrayList oResult;// = new ArrayList();
@@ -2041,7 +2050,7 @@ ArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
     return oResult;
 }
 
-//        Help("Returns the Symbols of all Floating Species Eigenvalues.")
+// Help("Returns the Symbols of all Floating Species Eigenvalues.")
 StringList RoadRunner::getEigenValueNames()
 {
     StringList result; //= new ArrayList();
@@ -2061,7 +2070,7 @@ StringList RoadRunner::getEigenValueNames()
     return result;
 }
 //
-//        Help(
+// Help(
 //            "Returns symbols of the currently loaded model, that can be used for steady state analysis. Format: array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }  or { { \"groupname\", { \"subgroup\", { \"item1\" ... } } } }."
 //            )
 //        ArrayList RoadRunner::getAvailableSteadyStateSymbols()
@@ -2093,7 +2102,7 @@ StringList RoadRunner::getEigenValueNames()
 //            return oResult;
 //        }
 //
-//        Help("Returns the selection list as returned by computeSteadyStateValues().")
+// Help("Returns the selection list as returned by computeSteadyStateValues().")
 ArrayList RoadRunner::getSteadyStateSelectionList()
 {
     if (!modelLoaded)
@@ -2299,7 +2308,7 @@ vector<TSelectionRecord> RoadRunner::GetSteadyStateSelection(const StringList& n
     return steadyStateSelection;
 }
 
-//        Help("sets the selection list as returned by computeSteadyStateValues().")
+// Help("sets the selection list as returned by computeSteadyStateValues().")
 void RoadRunner::setSteadyStateSelectionList(const StringList& newSelectionList)
 {
     if (!modelLoaded)
@@ -2311,7 +2320,7 @@ void RoadRunner::setSteadyStateSelectionList(const StringList& newSelectionList)
     mSteadyStateSelection = steadyStateSelection;
 }
 
-//        Help("performs steady state analysis, returning values as given by setSteadyStateSelectionList().")
+// Help("performs steady state analysis, returning values as given by setSteadyStateSelectionList().")
 vector<double> RoadRunner::computeSteadyStateValues()
 {
     if (!modelLoaded)
@@ -2337,7 +2346,7 @@ vector<double> RoadRunner::computeSteadyStateValues(const vector<TSelectionRecor
 
 }
 
-//        Help("performs steady state analysis, returning values as specified by the given selection list.")
+// Help("performs steady state analysis, returning values as specified by the given selection list.")
 //        double[] RoadRunner::computeSteadyStateValues(ArrayList oSelection)
 //        {
 //            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
@@ -2359,7 +2368,7 @@ double RoadRunner::computeSteadyStateValue(const TSelectionRecord& record)
     return GetValueForRecord(record);
 }
 
-//        Help("Returns the value of the given steady state identifier.")
+// Help("Returns the value of the given steady state identifier.")
 double RoadRunner::computeSteadyStateValue(const string& sId)
 {
     if (!modelLoaded)
@@ -2437,7 +2446,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
     }
 }
 
-//        Help("Returns the values selected with setSelectionList() for the current model time / timestep")
+// Help("Returns the values selected with setSelectionList() for the current model time / timestep")
 //        double[] RoadRunner::getSelectedValues()
 //        {
 //            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
@@ -2451,14 +2460,14 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //            return result;
 //        }
 //
-//        Help("Returns any warnings that occured during the loading of the SBML")
+// Help("Returns any warnings that occured during the loading of the SBML")
 //        string[] RoadRunner::getWarnings()
 //        {
 //            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
 //            return mModel->Warnings.ToArray();
 //        }
 //
-//        Help("When turned on, this method will cause rates, event assignments, rules and such to be multiplied " +
+// Help("When turned on, this method will cause rates, event assignments, rules and such to be multiplied " +
 //              "with the compartment volume, if species are defined as initialAmounts. By default this behavior is off.")
 //
 //        void RoadRunner::ReMultiplyCompartments(bool bValue)
@@ -2467,7 +2476,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //        }
 //
 //
-//        Help("Returns the current generated source code")
+// Help("Returns the current generated source code")
 //        string RoadRunner::getCSharpCode()
 //        {
 //            if (modelLoaded)
@@ -2478,7 +2487,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //            throw SBWApplicationException("Model has to be loaded first");
 //        }
 //
-//        Help(
+// Help(
 //            "Performs a steady state parameter scan with the given parameters returning all elments from the selectionList: (Format: symnbol, startValue, endValue, stepSize)"
 //            )
 //        double[][] RoadRunner::steadyStateParameterScan(string symbol, double startValue, double endValue, double stepSize)
@@ -2512,7 +2521,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //        }
 //
 //
-//        Help("Returns the SBML with the current parameterset")
+// Help("Returns the SBML with the current parameterset")
 //        string RoadRunner::writeSBML()
 //        {
 //            NOM.loadSBML(NOM.getParamPromotedSBML(mCurrentSBML));
@@ -2537,14 +2546,14 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //            return NOM.getSBML();
 //        }
 //
-//        Help("Get the number of local parameters for a given reaction")
+// Help("Get the number of local parameters for a given reaction")
 //        int RoadRunner::getNumberOfLocalParameters(int reactionId)
 //        {
 //            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
 //            return getNumberOfLocalParameters(reactionId);
 //        }
 //
-//        Help("Sets the value of a global parameter by its index")
+// Help("Sets the value of a global parameter by its index")
 //        void RoadRunner::setLocalParameterByIndex(int reactionId, int index, double value)
 //        {
 //            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
@@ -2556,7 +2565,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //                throw SBWApplicationException(string.Format("Index in setLocalParameterByIndex out of range: [{0}]", index));
 //        }
 //
-//        Help("Returns the value of a global parameter by its index")
+// Help("Returns the value of a global parameter by its index")
 //        double RoadRunner::getLocalParameterByIndex(int reactionId, int index)
 //        {
 //            if (!modelLoaded)
@@ -2569,7 +2578,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //            throw SBWApplicationException(String.Format("Index in getLocalParameterByIndex out of range: [{0}]", index));
 //        }
 //
-//        Help("Set the values for all global parameters in the model")
+// Help("Set the values for all global parameters in the model")
 //        void RoadRunner::setLocalParameterValues(int reactionId, double[] values)
 //        {
 //            if (!modelLoaded) throw SBWApplicationException(emptyModelStr);
@@ -2581,7 +2590,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //                throw SBWApplicationException(String.Format("Index in setLocalParameterValues out of range: [{0}]", reactionId));
 //        }
 //
-//        Help("Get the values for all global parameters in the model")
+// Help("Get the values for all global parameters in the model")
 //        double[] RoadRunner::getLocalParameterValues(int reactionId)
 //        {
 //            if (!modelLoaded)
@@ -2592,7 +2601,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //            throw SBWApplicationException(String.Format("Index in getLocalParameterValues out of range: [{0}]", reactionId));
 //        }
 //
-//        Help("Gets the list of parameter names")
+// Help("Gets the list of parameter names")
 //        ArrayList RoadRunner::getLocalParameterNames(int reactionId)
 //        {
 //            if (!modelLoaded)
@@ -2603,7 +2612,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //            throw (new SBWApplicationException("reaction Id out of range in call to getLocalParameterNames"));
 //        }
 //
-//        Help("Returns a list of global parameter tuples: { {parameter Name, value},...")
+// Help("Returns a list of global parameter tuples: { {parameter Name, value},...")
 //        ArrayList RoadRunner::getAllLocalParameterTupleList()
 //        {
 //            if (!modelLoaded)
@@ -2625,7 +2634,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //            return tupleList;
 //        }
 //
-//        Help("Get the number of reactions")
+// Help("Get the number of reactions")
 int RoadRunner::getNumberOfReactions()
 {
     if (!modelLoaded)
@@ -2635,7 +2644,7 @@ int RoadRunner::getNumberOfReactions()
     return mModel->getNumReactions();
 }
 
-//        Help("Returns the rate of a reaction by its index")
+// Help("Returns the rate of a reaction by its index")
 double RoadRunner::getReactionRate(const int& index)
 {
     if (!modelLoaded)
@@ -2654,8 +2663,8 @@ double RoadRunner::getReactionRate(const int& index)
         throw SBWApplicationException(Format("Index in getReactionRate out of range: [{0}]", index));
     }
 }
-//
-//        Help("Returns the rate of changes of a species by its index")
+
+// Help("Returns the rate of changes of a species by its index")
 double RoadRunner::getRateOfChange(const int& index)
 {
     if (!mModel)
@@ -2672,7 +2681,7 @@ double RoadRunner::getRateOfChange(const int& index)
     throw SBWApplicationException(Format("Index in getRateOfChange out of range: [{0}]", index));
 }
 
-//        Help("Returns the rates of changes given an array of new floating species concentrations")
+// Help("Returns the rates of changes given an array of new floating species concentrations")
 vector<double> RoadRunner::getRatesOfChangeEx(const vector<double>& values)
 {
     if (!mModel)
@@ -2686,7 +2695,7 @@ vector<double> RoadRunner::getRatesOfChangeEx(const vector<double>& values)
     return CreateVector(mModel->dydt, *mModel->dydtSize);
 }
 
-//        Help("Returns the rates of changes given an array of new floating species concentrations")
+// Help("Returns the rates of changes given an array of new floating species concentrations")
 vector<double> RoadRunner::getReactionRatesEx(const vector<double>& values)
 {
     if (!mModel)
@@ -2697,19 +2706,8 @@ vector<double> RoadRunner::getReactionRatesEx(const vector<double>& values)
     mModel->computeReactionRates(0.0, CreateVector(values));
     return CreateVector(mModel->rates, *mModel->ratesSize);
 }
-//
-//
-//        string[] RoadRunner::GetFloatingSpeciesNamesArray()
-//        {
-//            return (string[])getFloatingSpeciesNames().ToArray(typeof(string));
-//        }
-//
-//        string[] RoadRunner::GetGlobalParameterNamesArray()
-//        {
-//            return (string[])getGlobalParameterNames().ToArray(typeof(string));
-//        }
-//
-//        Help("Get the number of compartments")
+
+// Help("Get the number of compartments")
 int RoadRunner::getNumberOfCompartments()
 {
     if (!mModel)
@@ -2719,7 +2717,7 @@ int RoadRunner::getNumberOfCompartments()
     return mModel->getNumCompartments();
 }
 
-//        Help("Sets the value of a compartment by its index")
+// Help("Sets the value of a compartment by its index")
 void RoadRunner::setCompartmentByIndex(const int& index, const double& value)
 {
     if (!mModel)
@@ -2737,7 +2735,7 @@ void RoadRunner::setCompartmentByIndex(const int& index, const double& value)
     }
 }
 
-//        Help("Returns the value of a compartment by its index")
+// Help("Returns the value of a compartment by its index")
 double RoadRunner::getCompartmentByIndex(const int& index)
 {
     if (!mModel)
@@ -2753,7 +2751,7 @@ double RoadRunner::getCompartmentByIndex(const int& index)
     throw SBWApplicationException(Format("Index in getCompartmentByIndex out of range: [{0}]", index));
 }
 //
-//        Help("Returns the value of a compartment by its index")
+// Help("Returns the value of a compartment by its index")
 //        void RoadRunner::setCompartmentVolumes(double[] values)
 //        {
 //            if (!mModel)
@@ -2764,7 +2762,7 @@ double RoadRunner::getCompartmentByIndex(const int& index)
 //                throw (new SBWApplicationException(String.Format("Size of vector out not in range in setCompartmentValues: [{0}]", values.Length)));
 //        }
 //
-//        Help("Get the number of boundary species")
+// Help("Get the number of boundary species")
 int RoadRunner::getNumberOfBoundarySpecies()
 {
     if (!mModel)
@@ -2774,7 +2772,7 @@ int RoadRunner::getNumberOfBoundarySpecies()
     return mModel->getNumBoundarySpecies();
 }
 
-//        Help("Sets the value of a boundary species by its index")
+// Help("Sets the value of a boundary species by its index")
 void RoadRunner::setBoundarySpeciesByIndex(const int& index, const double& value)
 {
     if (!mModel)
@@ -2792,7 +2790,7 @@ void RoadRunner::setBoundarySpeciesByIndex(const int& index, const double& value
     }
 }
 
-//        Help("Returns the value of a boundary species by its index")
+// Help("Returns the value of a boundary species by its index")
 double RoadRunner::getBoundarySpeciesByIndex(const int& index)
 {
     if (!mModel)
@@ -2806,7 +2804,7 @@ double RoadRunner::getBoundarySpeciesByIndex(const int& index)
     throw Exception(Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
 }
 //
-//        Help("Returns an array of boundary species concentrations")
+// Help("Returns an array of boundary species concentrations")
 //        double[] RoadRunner::getBoundarySpeciesConcentrations()
 //        {
 //            if (!mModel)
@@ -2814,7 +2812,7 @@ double RoadRunner::getBoundarySpeciesByIndex(const int& index)
 //            return mModel->bc;
 //        }
 //
-//        Help("Set the concentrations for all boundary species in the model")
+// Help("Set the concentrations for all boundary species in the model")
 //        void RoadRunner::setBoundarySpeciesConcentrations(double[] values)
 //        {
 //            if (!mModel) throw SBWApplicationException(emptyModelStr);
@@ -2822,7 +2820,7 @@ double RoadRunner::getBoundarySpeciesByIndex(const int& index)
 //            mModel->bc = values;
 //        }
 //
-//        Help("Gets the list of boundary species names")
+// Help("Gets the list of boundary species names")
 StringList RoadRunner::getBoundarySpeciesNames()
 {
     if (!mModel)
@@ -2831,8 +2829,8 @@ StringList RoadRunner::getBoundarySpeciesNames()
     }
     return mModelGenerator->getBoundarySpeciesList();
 }
-//
-//        Help("Gets the list of boundary species amount names")
+
+// Help("Gets the list of boundary species amount names")
 StringList RoadRunner::getBoundarySpeciesAmountNames()
 {
     StringList result;// = new ArrayList();
@@ -2846,7 +2844,7 @@ StringList RoadRunner::getBoundarySpeciesAmountNames()
     return result;
 }
 
-//        Help("Get the number of floating species")
+// Help("Get the number of floating species")
 int RoadRunner::getNumberOfFloatingSpecies()
 {
     if (!mModel)
@@ -2857,7 +2855,7 @@ int RoadRunner::getNumberOfFloatingSpecies()
 }
 
 
-//        Help("Sets the value of a floating species by its index")
+// Help("Sets the value of a floating species by its index")
 void RoadRunner::setFloatingSpeciesByIndex(const int& index, const double& value)
 {
     if (!mModel)
@@ -2879,7 +2877,7 @@ void RoadRunner::setFloatingSpeciesByIndex(const int& index, const double& value
     }
 }
 
-//        Help("Returns the value of a floating species by its index")
+// Help("Returns the value of a floating species by its index")
 double RoadRunner::getFloatingSpeciesByIndex(const int& index)
 {
     if (!mModel)
@@ -2894,7 +2892,7 @@ double RoadRunner::getFloatingSpeciesByIndex(const int& index)
     throw SBWApplicationException(Format("Index in getFloatingSpeciesByIndex out of range: [{0}]", index));
 }
 
-//        Help("Returns an array of floating species concentrations")
+// Help("Returns an array of floating species concentrations")
 //        double[] RoadRunner::getFloatingSpeciesConcentrations()
 //        {
 //            if (!mModel)
@@ -2904,7 +2902,7 @@ double RoadRunner::getFloatingSpeciesByIndex(const int& index)
 //            return mModel->y;
 //        }
 //
-//        Help("returns an array of floating species initial conditions")
+// Help("returns an array of floating species initial conditions")
 vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 {
     if (!mModel)
@@ -2918,7 +2916,7 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 
 
 //        // This is a level 1 Method 1
-//        Help("Set the concentrations for all floating species in the model")
+// Help("Set the concentrations for all floating species in the model")
 //        void RoadRunner::setFloatingSpeciesConcentrations(double[] values)
 //        {
 //            if (!mModel) throw SBWApplicationException(emptyModelStr);
@@ -2929,7 +2927,7 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 //            if (!mConservedTotalChanged) mModel->computeConservedTotals();
 //        }
 //
-//        Help("Sets the value of a floating species by its index")
+// Help("Sets the value of a floating species by its index")
 //        void RoadRunner::setFloatingSpeciesInitialConcentrationByIndex(int index, double value)
 //        {
 //            if (!mModel) throw SBWApplicationException(emptyModelStr);
@@ -2943,7 +2941,7 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 //                throw SBWApplicationException(String.Format("Index in setFloatingSpeciesInitialConcentrationByIndex out of range: [{0}]", index));
 //        }
 //
-//        Help("Sets the initial conditions for all floating species in the model")
+// Help("Sets the initial conditions for all floating species in the model")
 //        void RoadRunner::setFloatingSpeciesInitialConcentrations(double[] values)
 //        {
 //            if (!mModel) throw SBWApplicationException(emptyModelStr);
@@ -2954,7 +2952,7 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 //
 //
 // This is a Level 1 method !
-//Help("Returns a list of floating species names")
+// Help("Returns a list of floating species names")
 StringList RoadRunner::getFloatingSpeciesNames()
 {
     if (!mModel)
@@ -2963,7 +2961,7 @@ StringList RoadRunner::getFloatingSpeciesNames()
     return mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
 }
 
-//        Help("Returns a list of floating species initial condition names")
+// Help("Returns a list of floating species initial condition names")
 StringList RoadRunner::getFloatingSpeciesInitialConditionNames()
 {
     if (!mModel)
@@ -2981,7 +2979,7 @@ StringList RoadRunner::getFloatingSpeciesInitialConditionNames()
 }
 //
 //
-//        Help("Returns the list of floating species amount names")
+// Help("Returns the list of floating species amount names")
 StringList RoadRunner::getFloatingSpeciesAmountNames()
 {
     StringList oResult;// = new ArrayList();
@@ -2994,7 +2992,7 @@ StringList RoadRunner::getFloatingSpeciesAmountNames()
     return oResult;
 }
 
-//        Help("Get the number of global parameters")
+// Help("Get the number of global parameters")
 int RoadRunner::getNumberOfGlobalParameters()
 {
     if (!mModel)
@@ -3004,7 +3002,7 @@ int RoadRunner::getNumberOfGlobalParameters()
     return mModelGenerator->getGlobalParameterList().Count();
 }
 
-//        Help("Sets the value of a global parameter by its index")
+// Help("Sets the value of a global parameter by its index")
 void RoadRunner::setGlobalParameterByIndex(const int& index, const double& value)
 {
     if (!mModel)
@@ -3031,7 +3029,7 @@ void RoadRunner::setGlobalParameterByIndex(const int& index, const double& value
     }
 }
 
-//        Help("Returns the value of a global parameter by its index")
+// Help("Returns the value of a global parameter by its index")
 double RoadRunner::getGlobalParameterByIndex(const int& index)
 {
     if (!mModel)
@@ -3064,7 +3062,7 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
     throw SBWApplicationException(Format("Index in getNumGlobalParameters out of range: [{0}]", index));
 }
 
-//        Help("Set the values for all global parameters in the model")
+// Help("Set the values for all global parameters in the model")
 //        void RoadRunner::setGlobalParameterValues(double[] values)
 //        {
 //            if (!mModel) throw SBWApplicationException(emptyModelStr);
@@ -3085,7 +3083,7 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
 //            }
 //        }
 //
-//        Help("Get the values for all global parameters in the model")
+// Help("Get the values for all global parameters in the model")
 //        double[] RoadRunner::getGlobalParameterValues()
 //        {
 //            if (!mModel)
@@ -3100,7 +3098,7 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
 //            return mModel->gp;
 //        }
 //
-//        Help("Gets the list of parameter names")
+// Help("Gets the list of parameter names")
 StringList RoadRunner::getGlobalParameterNames()
 {
     if (!mModel)
@@ -3110,7 +3108,7 @@ StringList RoadRunner::getGlobalParameterNames()
     return mModelGenerator->getGlobalParameterList();
 }
 //
-//        Help("Returns a list of global parameter tuples: { {parameter Name, value},...")
+// Help("Returns a list of global parameter tuples: { {parameter Name, value},...")
 //        ArrayList RoadRunner::getAllGlobalParameterTupleList()
 //        {
 //            if (!mModel)
@@ -3127,31 +3125,31 @@ StringList RoadRunner::getGlobalParameterNames()
 //        }
 //
 //
-//        Help("Returns the name of module")
+// Help("Returns the name of module")
 //        string RoadRunner::getName()
 //        {
 //            return "roadRunner";
 //        }
 //
-//        Help("Returns the version number of the module")
+// Help("Returns the version number of the module")
 //        string RoadRunner::getVersion()
 //        {
 //            return "2.0.1";
 //        }
 //
-//        Help("Returns the name of the module author")
+// Help("Returns the name of the module author")
 //        string RoadRunner::getAuthor()
 //        {
 //            return "H. M. Sauro and F. T. Bergmann";
 //        }
 //
-//        Help("Returns a description of the module")
+// Help("Returns a description of the module")
 //        string RoadRunner::getDescription()
 //        {
 //            return "Simulator API based on CVODE/NLEQ/CSharp implementation";
 //        }
 //
-//        Help("Returns the display name of the module")
+// Help("Returns the display name of the module")
 //        string RoadRunner::getDisplayName()
 //        {
 //            return "RoadRunner";
@@ -4407,31 +4405,31 @@ double RoadRunner::getScaledFloatingSpeciesElasticity(const string& reactionName
 //    //            }
 //    //        }
 //    //    }
-//        Help("Returns the initially loaded model as SBML")
+// Help("Returns the initially loaded model as SBML")
 string RoadRunner::getSBML()
 {
     return mCurrentSBML;
 }
 //
-//        Help("get the currently set time start")
+// Help("get the currently set time start")
 //        double RoadRunner::getmTimeStart()
 //        {
 //            return mTimeStart;
 //        }
 //
-//        Help("get the currently set time end")
+// Help("get the currently set time end")
 //        double RoadRunner::getTimeEnd()
 //        {
 //            return mTimeEnd;
 //        }
 //
-//        Help("get the currently set number of points")
+// Help("get the currently set number of points")
 //        int RoadRunner::getmNumPoints()
 //        {
 //            return mNumPoints;
 //        }
 //
-//        Help("Set the time start for the simulation")
+// Help("Set the time start for the simulation")
 void RoadRunner::setTimeStart(const double& startTime)
 {
     if (!mModel)
@@ -4474,7 +4472,7 @@ void RoadRunner::setNumPoints(const int& pts)
     mNumPoints = (pts <= 0) ? 1 : pts;
 }
 //
-//        Help(
+// Help(
 //            "Change the initial conditions to another concentration vector (changes only initial conditions for floating Species)"
 //            )
 void RoadRunner::changeInitialConditions(const vector<double>& ic)
@@ -4496,7 +4494,7 @@ void RoadRunner::changeInitialConditions(const vector<double>& ic)
     mModel->computeConservedTotals();
 }
 
-//        Help(
+// Help(
 //            "Extension method to simulate (time start, time end, number of points). This routine resets the model to its initial condition before running the simulation (unlike simulate())"
 //            )
 //        double[,] RoadRunner::simulateEx(double startTime, double endTime, int numberOfPoints)
@@ -4525,7 +4523,7 @@ void RoadRunner::changeInitialConditions(const vector<double>& ic)
 //            }
 //        }
 //
-//        Help("Returns the current vector of reactions rates")
+// Help("Returns the current vector of reactions rates")
 vector<double> RoadRunner::getReactionRates()
 {
     if (!mModel)
@@ -4540,7 +4538,7 @@ vector<double> RoadRunner::getReactionRates()
     return _rates;
 }
 
-//        Help("Returns the current vector of rates of change")
+// Help("Returns the current vector of rates of change")
 vector<double> RoadRunner::getRatesOfChange()
 {
     if (!mModel)
@@ -4555,7 +4553,7 @@ vector<double> RoadRunner::getRatesOfChange()
     return result;
 }
 
-//        Help(
+// Help(
 //            "Returns a list of floating species names: This method is deprecated, please use getFloatingSpeciesNames()")
 //
 //        ArrayList RoadRunner::getSpeciesNames()
@@ -4566,7 +4564,7 @@ vector<double> RoadRunner::getRatesOfChange()
 //            return mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
 //        }
 //
-//        Help("Returns a list of reaction names")
+// Help("Returns a list of reaction names")
 StringList RoadRunner::getReactionNames()
 {
     if (!mModel)
@@ -4584,7 +4582,7 @@ StringList RoadRunner::getReactionNames()
 //
 //        int RoadRunner::UseKinsol { get; set; }
 //
-//        Help("Get Simulator Capabilities")
+// Help("Get Simulator Capabilities")
 string RoadRunner::getCapabilities()
 {
     string tmp("not implmemented");
@@ -4618,7 +4616,7 @@ string RoadRunner::getCapabilities()
 //            CvodeInterface.MaxStep = maxStep;
 //        }
 //
-//        Help("Set Simulator Capabilites")
+// Help("Set Simulator Capabilites")
 void RoadRunner::setCapabilities(const string& capsStr)
 {
 //    var cs = new CapsSupport(capsStr);
@@ -4646,7 +4644,7 @@ void RoadRunner::setCapabilities(const string& capsStr)
 //    }
 }
 
-//        Help("Sets the value of the given species or global parameter to the given value (not of local parameters)")
+// Help("Sets the value of the given species or global parameter to the given value (not of local parameters)")
 bool RoadRunner::setValue(const string& sId, const double& dValue)
 {
     if (!mModel)
@@ -4761,7 +4759,7 @@ bool RoadRunner::setValue(const string& sId, const double& dValue)
 //
 
 
-//        Help("Gets the Value of the given species or global parameter (not of local parameters)")
+// Help("Gets the Value of the given species or global parameter (not of local parameters)")
 double RoadRunner::getValue(const string& sId)
 {
     if (!mModel)
@@ -4851,7 +4849,7 @@ double RoadRunner::getValue(const string& sId)
 
 
 //
-//        Help("Gets the Value of the given species or global parameter (not of local parameters)")
+// Help("Gets the Value of the given species or global parameter (not of local parameters)")
 //        double RoadRunner::getValue(string sId)
 //        {
 //            if (!mModel)
@@ -4936,7 +4934,7 @@ double RoadRunner::getValue(const string& sId)
 
 
 
-//        Help(
+// Help(
 //            "Returns symbols of the currently loaded model,
 //              that can be used for the selectionlist format array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }."
 //            )

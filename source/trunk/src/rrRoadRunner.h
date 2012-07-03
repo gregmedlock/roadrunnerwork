@@ -172,9 +172,9 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		// ---------------------------------------------------------------------
 		LIB_LA::DoubleMatrix            getLinkMatrix();
 		LIB_LA::DoubleMatrix            getNrMatrix();
-		double*                         getL0Matrix();
+		LIB_LA::DoubleMatrix            getL0Matrix();
 		DoubleMatrix                    getStoichiometryMatrix();
-		double*                         getConservationMatrix();
+		LIB_LA::DoubleMatrix            getConservationMatrix();
 		int                             getNumberOfDependentSpecies();
 		int                             getNumberOfIndependentSpecies();
 
