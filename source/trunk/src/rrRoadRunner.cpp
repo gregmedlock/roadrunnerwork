@@ -2637,7 +2637,6 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 // Help("Get the number of reactions")
 int RoadRunner::getNumberOfReactions()
 {
-		printf ("Stage c, modeloaded = %d\n", modelLoaded);
     if (!modelLoaded)
     {
         throw SBWApplicationException(emptyModelStr);
