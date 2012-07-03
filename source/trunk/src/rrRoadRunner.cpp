@@ -27,34 +27,34 @@ namespace rr
 //bool RoadRunner::mConservedTotalChanged             	= false;
 //bool RoadRunner::mReMultiplyCompartments             	= true;
 
-RoadRunner::RoadRunner()
-:
-emptyModelStr("A model needs to be loaded before one can use this method"),
-STEADYSTATE_THRESHOLD(1.E-2),
-mCVode(NULL),
-mL(NULL),
-mL0(NULL),
-mN(NULL),
-mNr(NULL),
-DiffStepSize(0.05),
-mTimeStart(0),
-mTimeEnd(10),
-mNumPoints(21),
-mCurrentSBML(""),
-mModel(NULL),
-mModelDllHandle(NULL),
-mSimulation(NULL),
-mModelXMLFileName("sbml_model"),
-UseKinsol(false),
-mComputeAndAssignConservationLaws(false),
-mConservedTotalChanged(false)
-{
-    Log(lDebug4)<<"In RoadRunner CTOR";
-    mCSharpGenerator    = new CSharpGenerator(this);
-    mCGenerator         = new CGenerator(this);//Todo: memoryleak
-    mModelGenerator     = mCGenerator;
-    mTempFileFolder     = GetUsersTempDataFolder();
-}
+RoadRunner::RoadRunner() :
+    emptyModelStr("A model needs to be loaded before one can use this method"),
+    STEADYSTATE_THRESHOLD(1.E-2),
+    mCVode(NULL),
+    mL(NULL),
+    mL0(NULL),
+    mN(NULL),
+    mNr(NULL),
+    DiffStepSize(0.05),
+    mTimeStart(0),
+    mTimeEnd(10),
+    mNumPoints(21),
+    mCurrentSBML(""),
+    modelLoaded (false),
+    mModel(NULL),
+    mModelDllHandle(NULL),
+    mSimulation(NULL),
+    mModelXMLFileName("sbml_model"),
+    UseKinsol(false),
+    mComputeAndAssignConservationLaws(false),
+    mConservedTotalChanged(false)
+    {
+     Log(lDebug4)<<"In RoadRunner CTOR";
+     mCSharpGenerator    = new CSharpGenerator(this);
+     mCGenerator         = new CGenerator(this);//Todo: memoryleak
+     mModelGenerator     = mCGenerator;
+     mTempFileFolder     = GetUsersTempDataFolder();
+    }
 
 RoadRunner::~RoadRunner()
 {
@@ -2637,6 +2637,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 // Help("Get the number of reactions")
 int RoadRunner::getNumberOfReactions()
 {
+		printf ("Stage c, modeloaded = %d\n", modelLoaded);
     if (!modelLoaded)
     {
         throw SBWApplicationException(emptyModelStr);
