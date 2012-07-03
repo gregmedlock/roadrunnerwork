@@ -58,7 +58,7 @@ C_DECL_SPEC bool                    rrCallConv   setCapabilities (const char* ca
 C_DECL_SPEC char*                   rrCallConv   getCapabilities();
 
 // Utility and informational methods
-C_DECL_SPEC char*                   rrCallConv  getRevision();
+C_DECL_SPEC char*                   rrCallConv  getVersion();
 //C_DECL_SPEC char*                   rrCallConv   getLatestLog();
 //C_DECL_SPEC char*                   rrCallConv   getLatestCommitAuthor();
 C_DECL_SPEC char*                   rrCallConv  getBuildDate();

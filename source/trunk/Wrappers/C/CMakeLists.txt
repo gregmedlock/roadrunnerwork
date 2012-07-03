@@ -17,6 +17,10 @@ set_property(   TARGET ${target}
 					      LIBLAX_STATIC
 )
 
+IF(${MSVC})
+SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKER_FLAGS} /DEF:${CMAKE_CURRENT_SOURCE_DIR}/c_api_vs.def")
+ENDIF()
+
 IF(${BORLAND})
 target_link_libraries (${target} libxml2_xe)
 ELSE()
@@ -41,13 +45,13 @@ endif()
 #    MESSAGE("Last changed log is ${rr_LAST_CHANGED_LOG}")
 #    MESSAGE("Last changed Author is ${rr_WC_LAST_CHANGED_AUTHOR}")
 #
-    SET(infoFile rr_svn_info)
+    SET(infoFile rr_version_info)
 #    STRING(REPLACE "\n" "\\n\\\n" svn_lastlog_with_slashes ${rr_LAST_CHANGED_LOG}) 
 #    
     FILE(WRITE ${infoFile}.h 
 "#ifndef ${infoFile}H
 #define ${infoFile}H
-const char* SVN_VERSION =  \"1.0.0.0\";\n
+const char* RR_VERSION =  \"${RR_VERSION}\";\n
 #endif"
     )
 #

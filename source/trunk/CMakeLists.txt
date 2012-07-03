@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 project(rr)
 
-SET(RR_MAJOR_VERSION 2012)
-SET(RR_MINOR_VERSION 5)
-SET(RR_BUILD_VERSION 31)
+SET(RR_MAJOR_VERSION 1)
+SET(RR_MINOR_VERSION 0)
+SET(RR_BUILD_VERSION 0)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
 #These will be the defaults ...
@@ -45,7 +45,6 @@ if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
   set(CLAPACK_BUILD_FOLDER ${RR_BUILDS_ROOT}/vs/clapack CACHE PATH "Directory containing clapack libraries" FORCE)
 endif()
 endif()
-
 
 OPTION (PYTHON_WRAPPER 			"Generate Python wrapper " 		    FALSE)
 OPTION (BUILD_C_API	 			"Create C API DLL" 					OFF)
@@ -105,7 +104,7 @@ link_directories(					${CLAPACK_BUILD_FOLDER}/SRC/Debug)
 link_directories(					${CLAPACK_BUILD_FOLDER}/BLAS/SRC/Debug)
 link_directories(					${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c/Debug)
 SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} /EHsc ")
-SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKR_FLAGS} ") #/FORCE:MULTIPLE")
+SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
 endif()
 
 #=== COMPILER FLAGS 

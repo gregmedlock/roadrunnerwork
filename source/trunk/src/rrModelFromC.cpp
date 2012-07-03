@@ -260,10 +260,6 @@ bool ModelFromC::SetupDLLData()
     {
         Log(lDebug)<<"Failed to assign to rateRulesSize";
     }
-//    else
-//    {
-//        rateRulesSize  = *ptr;
-//    }
 
     y  = (double*) GetProcAddress((HMODULE) mDLLHandle, "_y");
     if(!y)

@@ -1,5 +1,4 @@
 //---------------------------------------------------------------------------
-#pragma hdrstop
 #include <iostream>
 #include <string>
 #include <vector>
@@ -131,7 +130,7 @@ int main(int argc, char* argv[])
     getRateOfChange(0, value);
     cout<<"Rate of change:"<<value<<endl;
 
-    cout<<"SVN revision: "<<getRevision()<<endl;
+    cout<<"Version: "<<getVersion()<<endl;
 //    cout<<getLatestCommitAuthor()<<endl;
 //    cout<<getLatestLog()<<endl;
 

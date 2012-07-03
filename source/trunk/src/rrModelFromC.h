@@ -63,7 +63,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
         int*                                    init_ySize;
 
         double*                                 dydt;               //This is the "dydt" data in the DLL.
-        int*                                    dydtSize;           //This is the "dydt" data in the DLL.
+        int*                                    dydtSize;           //This is the "dydt" dataSize in the DLL.
 
         double*                                 amounts;            //This is the "amounts" data in the DLL.
         int*                                    amountsSize;

@@ -14,7 +14,7 @@
 #endif	//STATIC_RR_C_API
 
 #if defined(_MSC_VER)
-#define rrCallConv _cdecl
+#define rrCallConv _stdcall
 #else if defined(__CODEGEARC__)
 #define rrCallConv _stdcall
 #endif

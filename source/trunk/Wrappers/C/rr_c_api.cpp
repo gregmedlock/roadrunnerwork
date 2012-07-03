@@ -52,7 +52,7 @@
 #include "rr_c_api.h"
 #include "rr_c_api_support.h"   //Support functions, not exposed as api functions and or data
 #include "rrException.h"
-#include "rr_svn_info.h"
+#include "rr_version_info.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -71,9 +71,9 @@ char* rrCallConv getBuildDate()
     return date;
 }
 
-char* rrCallConv getRevision()
+char* rrCallConv getVersion()
 {
-    return createText(SVN_VERSION);
+    return createText(RR_VERSION);
 }
 
 //char* rrCallConv getLatestLog()
