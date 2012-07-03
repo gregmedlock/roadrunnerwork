@@ -52,6 +52,8 @@ type
     lstModelName: TListBox;
     btnGetStoichMatrix: TButton;
     btnGetLinkMatrix: TButton;
+    btnGetNrMatrix: TButton;
+    btnGetConservationMatrix: TButton;
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetAvailableSymbolsClick(Sender: TObject);
@@ -78,7 +80,9 @@ type
     procedure btnGetFullMatrixClick(Sender: TObject);
     procedure btnGetReducedMatrixClick(Sender: TObject);
     procedure btnGetStoichMatrixClick(Sender: TObject);
-    procedure btnGetLinkMatrixClick(Sender: TObject);
+    procedure btnGetLnkMatrixClick(Sender: TObject);
+    procedure btnGetNrMatrixClick(Sender: TObject);
+    procedure btnGetConservationMatrixClick(Sender: TObject);
   private
     { Private declarations }
     procedure getSummaryOfModelByIndex;
@@ -115,6 +119,22 @@ end;
 procedure TfrmMain.btnGetCompartmentVolumeByIndexClick(Sender: TObject);
 begin
   edtCommonFloat.Text := floattostr (getCompartmentByIndex((strtoint (edtCommonInteger.Text))));
+end;
+
+procedure TfrmMain.btnGetConservationMatrixClick(Sender: TObject);
+var m : TMatrix;
+    i, j : integer;
+begin
+  m := getConservationMatrix;
+  for i := 0 to grid.RowCount - 1 do
+      for j := 0 to grid.ColCount - 1 do
+          grid.Cells [j, i] := '';
+
+  grid.ColCount := m.c + 1;
+  grid.RowCount := m.r + 1;
+  for i := 1 to m.r do
+      for j := 1 to m.c do
+          grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
 end;
 
 procedure TfrmMain.btnGetCopyrightClick(Sender: TObject);
@@ -311,7 +331,7 @@ begin
   list.Free;
 end;
 
-procedure TfrmMain.btnGetLinkMatrixClick(Sender: TObject);
+procedure TfrmMain.btnGetLnkMatrixClick(Sender: TObject);
 var m : TMatrix;
     i, j : integer;
 begin
@@ -327,6 +347,22 @@ begin
           grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
 end;
 
+
+procedure TfrmMain.btnGetNrMatrixClick(Sender: TObject);
+var m : TMatrix;
+    i, j : integer;
+begin
+  m := getNrMatrix;
+  for i := 0 to grid.RowCount - 1 do
+      for j := 0 to grid.ColCount - 1 do
+          grid.Cells [j, i] := '';
+
+  grid.ColCount := m.c + 1;
+  grid.RowCount := m.r + 1;
+  for i := 1 to m.r do
+      for j := 1 to m.c do
+          grid.Cells [j-1, i] := Format ('%8.5g', [m[i,j]]);
+end;
 
 procedure TfrmMain.getSummaryOfModelByGetValue;
 var list: TStringList;

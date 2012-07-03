@@ -168,6 +168,8 @@ object frmMain: TfrmMain
         Align = alClient
         ItemHeight = 13
         TabOrder = 0
+        ExplicitLeft = 4
+        ExplicitTop = 4
       end
     end
     object TabSheet2: TTabSheet
@@ -369,7 +371,7 @@ object frmMain: TfrmMain
     Height = 47
     ItemHeight = 13
     Items.Strings = (
-      'ss_MinusOneError.xml'
+      'ss_SimpleConservedCycle.xml'
       'ss_threeSpecies.xml')
     TabOrder = 28
   end
@@ -389,6 +391,24 @@ object frmMain: TfrmMain
     Height = 25
     Caption = 'Get Link Matrix'
     TabOrder = 30
-    OnClick = btnGetLinkMatrixClick
+    OnClick = btnGetLnkMatrixClick
+  end
+  object btnGetNrMatrix: TButton
+    Left = 485
+    Top = 308
+    Width = 151
+    Height = 25
+    Caption = 'Get Nr Matrix'
+    TabOrder = 31
+    OnClick = btnGetNrMatrixClick
+  end
+  object btnGetConservationMatrix: TButton
+    Left = 485
+    Top = 335
+    Width = 151
+    Height = 25
+    Caption = 'Get Conservation Matrix'
+    TabOrder = 32
+    OnClick = btnGetConservationMatrixClick
   end
 end
