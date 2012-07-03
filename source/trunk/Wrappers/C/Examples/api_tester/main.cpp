@@ -20,6 +20,9 @@
 using namespace std;
 int main(int argc, char* argv[])
 {
+	printf ("\n    Start of run\n");
+	printf ("   ==============\n\n");
+
 	string modelsPath(".\\..\\Models");
 	if(argc > 1)
 	{
@@ -34,7 +37,7 @@ int main(int argc, char* argv[])
 	}
 	else
 	{
-		printf( "%s \nLength: %d\n", buffer, strlen(buffer) );
+		printf( "Current cwd = %s \nLength: %d\n", buffer, strlen(buffer) );
 		delete [] buffer;
 	}
 
@@ -55,7 +58,9 @@ int main(int argc, char* argv[])
 	}
 
     setTempFolder("c:\\rrTemp");
-	string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
+	//string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
+	//string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
+	string fileName = modelsPath + "\\ss_threestep.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
@@ -64,9 +69,11 @@ int main(int argc, char* argv[])
 		cerr<<msg.str();
 		return false;
 	}
-
+	cout << "\nRunning model: " << fileName << endl;
 	setComputeAndAssignConservationLaws(true);
 	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+
+	//cout<<sbml.c_str()<<endl;
 
 	if(!loadSBML(sbml.c_str()))
 	{
@@ -74,6 +81,42 @@ int main(int argc, char* argv[])
 		cerr<<"Last error was"<<getLastError()<<endl;
 		return -1;
 	}
+	int r = getNumberOfReactions();
+	int m = getNumberOfFloatingSpecies();
+	int b = getNumberOfBoundarySpecies();
+	int p = getNumberOfGlobalParameters();
+
+	printf ("Number of reactions = %d\n", r);
+	printf ("Number of floating species = %d\n", m);
+	printf ("Number of boundary species = %d\n\n", b);
+
+	if (m > 0) {
+	   printf ("Floating species names:\n");
+	   printf ("-----------------------\n");
+	   cout<<printList(getFloatingSpeciesNames())<<endl;
+	}
+
+	if (b > 0) {
+       printf ("\nBoundary species names:\n");
+	   printf ("-----------------------\n");
+	   cout<<printList(getBoundarySpeciesNames())<<endl;
+	}
+	printf ("\n");
+
+	if (p > 0) {
+       printf ("\nGlobal Parameter names:\n");
+	   printf ("-----------------------\n");
+	   cout<<printList(getGlobalParameterNames())<<endl;
+	}
+	printf ("\n");
+
+	if (p > 0) {
+       printf ("\nReaction names:\n");
+	   printf ("-----------------------\n");
+	   cout<<printList(getReactionNames())<<endl;
+	}
+	printf ("\n");
+
 
 	double ssVal;
     bool success = steadyState(ssVal);
@@ -83,9 +126,18 @@ int main(int argc, char* argv[])
     }
     else
     {
-	    cout<<"Steady state number: "<<ssVal<<endl;
+	    cout<<"Compute Steady state: sums of squares: "<<ssVal<<endl;
     }
 
+    cout<<"\nStoichiometry Matrix: "<<endl<<endl;
+	cout<printMatrix(getStoichiometryMatrix());
+	printf ("\n");
+
+	printf ("Full Jacobian Matrix\n");
+	if (printMatrix (getFullJacobian()))
+		printf ("ERROR in getFullJacobian\n");
+	cout<printMatrix (getFullJacobian());
+	printf ("Matrix Printed\n");
     RRStringListHandle list = getRatesOfChangeNames();
 
     //    cout<<getBoundarySpeciesByIndex (0)<<endl;
@@ -102,17 +154,20 @@ int main(int argc, char* argv[])
     cout<<getNumberOfIndependentSpecies()<<endl;
 
     RRVector* vec = getRatesOfChange();
-    cout<<getParamPromotedSBML(sbml.c_str());
+    //cout<<getParamPromotedSBML(sbml.c_str());
 	evalModel();
 
-    cout<<getSBML()<<endl;
+    //cout<<getSBML()<<endl;
 
-    cout<<printMatrix(getScaledElasticityMatrix());     //How to free, when doing something like this??
-    cout<<printList(getEigenValueNames());
+	cout<<"Link Matrix: "<<endl;
+	cout<printMatrix(getLinkMatrix());
 
-    cout<<printList(getFluxControlCoefficientNames())<<endl;
-    cout<<printList(getConcentrationControlCoefficientNames())<<endl;
-    cout<<printList(getElasticityNames())<<endl;
+    //cout<<printMatrix(getScaledElasticityMatrix());     //How to free, when doing something like this??
+    //cout<<printList(getEigenValueNames());
+
+    //cout<<printList(getFluxControlCoefficientNames())<<endl;
+    //cout<<printList(getConcentrationControlCoefficientNames())<<endl;
+    //cout<<printList(getElasticityNames())<<endl;
 
 //    setBoundarySpeciesByIndex(0,34);
     cout<<"Nr of Compartments: "<<getNumberOfCompartments()<<endl;
@@ -135,7 +190,7 @@ int main(int argc, char* argv[])
     cout<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
     getRatesOfChangeEx (NULL);
     getReactionRatesEx (NULL);
-    cout<<printList(getElasticityCoefficientNames())<<endl;
+    //cout<<printList(getElasticityCoefficientNames())<<endl;
     cout<<printList(getRateOfChangeNames())<<endl;
     setCapabilities (NULL);
     //cout<<getCapabilities()<<endl;
@@ -164,6 +219,7 @@ int main(int argc, char* argv[])
     cout<<text<<endl;
     freeText(text);
     freeRRInstance(rrHandle);
+	getchar();
     return 0;
 }
 
