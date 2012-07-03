@@ -122,7 +122,7 @@ void  ModelFromC::computeEventPriorites()                                {Log(lE
 //void  ModelFromC::convertToConcentrations() = 0;
 //void  ModelFromC::updateDependentSpeciesValues(vector<double>& _y)        {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::computeRules(vector<double>& _y)                        {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-void  ModelFromC::computeReactionRates(double time, double* y)            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::computeReactionRates(double time, double* y)            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::computeAllRatesOfChange()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::evalModel(double time, vector<double>& y)                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::evalEvents(double time, vector<double>& y){}
@@ -174,6 +174,7 @@ bool ModelFromC::SetupDLLFunctions()
     cInitializeRateRuleSymbols          = (c_void)                     GetFunctionPtr("InitializeRateRuleSymbols");
     cInitializeRates                    = (c_void)                     GetFunctionPtr("InitializeRates");
     csetConcentration                   = (c_void_int_double)          GetFunctionPtr("setConcentration");
+    cComputeReactionRates               = (c_void_double_doubleStar)   GetFunctionPtr("computeReactionRates");
     return true;
 }
 
@@ -518,6 +519,17 @@ void  ModelFromC::setConcentration(int index, double value)
     }
 
     csetConcentration(index, value);
+}
+
+void  ModelFromC::computeReactionRates (double time, double* y)
+{
+	if(!cComputeReactionRates)
+    {
+        Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+        return;
+    }
+
+	cComputeReactionRates (time, y);
 }
 
 vector<double> ModelFromC::GetCurrentValues()
