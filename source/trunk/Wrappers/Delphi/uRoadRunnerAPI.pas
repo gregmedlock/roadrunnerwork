@@ -179,6 +179,7 @@ function  getReducedJacobian : TMatrix;
 
 function  getStoichiometryMatrix : TMatrix;
 function  getLinkMatrix : TMatrix;
+function  getNrMatrix : TMatrix;
 
 function  getReactionRates : TDoubleArray;
 function  getRatesOfChange : TDoubleArray;
@@ -305,6 +306,7 @@ var DLLHandle : Cardinal;
 
     libGetStoichiometryMatrix : TGetMatrix;
     libGetLinkMatrix          : TGetMatrix;
+    libGetNrMatrix            : TGetMatrix;
 
     libFreeStringList : TFreeStringList;     //
     libFreeMatrix : TFreeRRMatrix; //
@@ -988,6 +990,25 @@ begin
   end;
 end;
 
+
+function getNrMatrix : TMatrix;
+var st : PRRMatrixHandle;
+    nr, nc : integer;
+    i, j : integer;
+begin
+  st := libGetNrMatrix;
+  try
+    nr := st^.RSize;
+    nc := st^.CSize;
+    result := TMatrix.Create (nr, nc);
+    for i := 0 to nr - 1 do
+        for j := 0 to nc - 1 do
+            result[i+1,j+1] := st^.data[i*nc + j];
+  finally
+    libFreeMatrix (st);
+  end;
+end;
+
 // ---------------------------------------------------------------------
 
 procedure setRoadRunnerLibraryName (newLibName : AnsiString);
@@ -1084,6 +1105,7 @@ begin
 
    @libGetStoichiometryMatrix   := loadSingleMethod ('getStoichiometryMatrix', errMsg, result, methodList);
    @libGetLinkMatrix            := loadSingleMethod ('getLinkMatrix', errMsg, result, methodList);
+   @libGetNrMatrix              := loadSingleMethod ('getNrMatrix', errMsg, result, methodList);
 
    @libFreeRRInstance := loadSingleMethod ('freeRRInstance', errMsg, result, methodList);
    @libFreeResult     := loadSingleMethod ('freeResult', errMsg, result, methodList);
