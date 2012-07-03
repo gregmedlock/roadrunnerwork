@@ -771,14 +771,13 @@ bool rrCallConv reset()
 
 int rrCallConv getNumberOfReactions()
 {
-	try
+ 	try
     {
         if(!gRRHandle)
         {
-            setError(ALLOCATE_API_ERROR_MSG);
-            return -1;
+           setError(ALLOCATE_API_ERROR_MSG);
+           return -1;
         }
-
         return gRRHandle->getNumberOfReactions();
     }
     catch(Exception& ex)

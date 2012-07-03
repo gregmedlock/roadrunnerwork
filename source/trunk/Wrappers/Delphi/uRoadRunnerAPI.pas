@@ -567,11 +567,14 @@ function getReactionNames : TStringList;
 var pList : PRRStringList;
 begin
   pList := libGetReactionNames;
-  try
-    result := getArrayOfStrings(pList);
-  finally
-    libFreeStringList (pList);
-  end;
+  if pList <> nil then
+     try
+       result := getArrayOfStrings(pList);
+     finally
+       libFreeStringList (pList);
+     end
+  else
+     result := TStringList.Create;
 end;
 
 
@@ -695,12 +698,16 @@ function getCompartmentNames : TStringList;
 var pList : PRRStringList;
 begin
   pList := libGetCompartmentNames;
-  try
-    result := getArrayOfStrings(pList);
-  finally
-    libFreeStringList (pList);
-  end;
+  if pList <> nil then
+     try
+       result := getArrayOfStrings(pList);
+     finally
+       libFreeStringList (pList);
+     end
+  else
+    result := TStringList.Create;
 end;
+
 
 function setCompartmentByIndex (index : integer; value : double) : boolean;
 begin
@@ -937,10 +944,18 @@ function getReactionRates : TDoubleArray;
 var p : PRRDoubleVectorHandle; i : integer;
 begin
   p := libGetReactionRates;
-  setLength (result, p^.count);
-  for i := 0 to p^.count - 1 do
-      result[i] := p^.data[i];
-  //libFreeDoubleVector (p);
+  try
+    if p = nil then
+       begin
+       setLength (result, 0);
+       exit;
+       end;
+    setLength (result, p^.count);
+    for i := 0 to p^.count - 1 do
+        result[i] := p^.data[i];
+  finally
+    //libFreeDoubleVector (p);
+  end;
 end;
 
 
@@ -948,10 +963,18 @@ function getRatesOfChange : TDoubleArray;
 var p : PRRDoubleVectorHandle; i : integer;
 begin
   p := libGetRatesOfChange;
-  setLength (result, p^.count);
-  for i := 0 to p^.count - 1 do
-      result[i] := p^.data[i];
-  //libFreeDoubleVector (p);
+  try
+    if p = nil then
+       begin
+       setLength (result, 0);
+       exit;
+       end;
+    setLength (result, p^.count);
+    for i := 0 to p^.count - 1 do
+        result[i] := p^.data[i];
+  finally
+    //libFreeDoubleVector (p);
+  end;
 end;
 
 
@@ -962,6 +985,11 @@ var st : PRRMatrixHandle;
 begin
   st := libGetStoichiometryMatrix;
   try
+    if st = nil then
+       begin
+       result := TMatrix.Create (0,0);
+       exit;
+       end;
     nr := st^.RSize;
     nc := st^.CSize;
     result := TMatrix.Create (nr, nc);
@@ -981,6 +1009,12 @@ var st : PRRMatrixHandle;
 begin
   st := libGetLinkMatrix;
   try
+    if st = nil then
+       begin
+       result := TMatrix.Create (0,0);
+       exit;
+       end;
+
     nr := st^.RSize;
     nc := st^.CSize;
     result := TMatrix.Create (nr, nc);
@@ -1000,6 +1034,12 @@ var st : PRRMatrixHandle;
 begin
   st := libGetNrMatrix;
   try
+    if st = nil then
+       begin
+       result := TMatrix.Create (0,0);
+       exit;
+       end;
+
     nr := st^.RSize;
     nc := st^.CSize;
     result := TMatrix.Create (nr, nc);
@@ -1019,6 +1059,12 @@ var st : PRRMatrixHandle;
 begin
   st := libGetConservationMatrix;
   try
+    if st = nil then
+       begin
+       result := TMatrix.Create (0,0);
+       exit;
+       end;
+
     nr := st^.RSize;
     nc := st^.CSize;
     result := TMatrix.Create (nr, nc);
