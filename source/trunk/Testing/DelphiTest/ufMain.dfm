@@ -114,7 +114,7 @@ object frmMain: TfrmMain
   end
   object btnLoadTwoModels: TButton
     Left = 328
-    Top = 200
+    Top = 196
     Width = 151
     Height = 25
     Caption = 'Load Two Models Test'
