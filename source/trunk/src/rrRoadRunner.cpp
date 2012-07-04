@@ -2503,21 +2503,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //            _ReMultiplyCompartments = bValue;
 //        }
 //
-//
-// Help("Returns the current generated source code")
-//        string RoadRunner::getCSharpCode()
-//        {
-//            if (modelLoaded)
-//            {
-//                return _sModelCode;
-//            }
-//
-//            throw SBWApplicationException("Model has to be loaded first");
-//        }
-//
-// Help(
-//            "Performs a steady state parameter scan with the given parameters returning all elments from the selectionList: (Format: symnbol, startValue, endValue, stepSize)"
-//            )
+// Help("Performs a steady state parameter scan with the given parameters returning all elments from the selectionList: (Format: symnbol, startValue, endValue, stepSize)")
 //        double[][] RoadRunner::steadyStateParameterScan(string symbol, double startValue, double endValue, double stepSize)
 //        {
 //            var results = new List<double[]>();
@@ -3152,39 +3138,12 @@ StringList RoadRunner::getGlobalParameterNames()
 //            return tupleList;
 //        }
 //
-//
-// Help("Returns the name of module")
-//        string RoadRunner::getName()
-//        {
-//            return "roadRunner";
-//        }
-//
-// Help("Returns the version number of the module")
-//        string RoadRunner::getVersion()
-//        {
-//            return "2.0.1";
-//        }
-//
-// Help("Returns the name of the module author")
-//        string RoadRunner::getAuthor()
-//        {
-//            return "H. M. Sauro and F. T. Bergmann";
-//        }
-//
 // Help("Returns a description of the module")
 //        string RoadRunner::getDescription()
 //        {
 //            return "Simulator API based on CVODE/NLEQ/CSharp implementation";
 //        }
 //
-// Help("Returns the display name of the module")
-//        string RoadRunner::getDisplayName()
-//        {
-//            return "RoadRunner";
-//        }
-//
-
-
 //       void RoadRunner::TestChange()
 //        {
 //            var sbml = File.ReadAllText(@"C:\Users\fbergmann\Desktop\testModel.xml");
@@ -4521,9 +4480,7 @@ void RoadRunner::changeInitialConditions(const vector<double>& ic)
     mModel->computeConservedTotals();
 }
 
-// Help(
-//            "Extension method to simulate (time start, time end, number of points). This routine resets the model to its initial condition before running the simulation (unlike simulate())"
-//            )
+// Help("Extension method to simulate (time start, time end, number of points). This routine resets the model to its initial condition before running the simulation (unlike simulate())"
 //        double[,] RoadRunner::simulateEx(double startTime, double endTime, int numberOfPoints)
 //        {
 //            try

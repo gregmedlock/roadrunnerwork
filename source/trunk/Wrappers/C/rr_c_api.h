@@ -168,6 +168,8 @@ C_DECL_SPEC RRSymbolListsHandle     rrCallConv   getAvailableSymbols();
 // MCA methods
 C_DECL_SPEC RRStringListHandle      rrCallConv   getFluxControlCoefficientNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getConcentrationControlCoefficientNames();
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getUnScaledElasticityMatrix();
+
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getScaledElasticityMatrix();
 C_DECL_SPEC bool                    rrCallConv   getCC(const char* variable, const char* parameter, double& value);
 C_DECL_SPEC bool                    rrCallConv   getEE(const char* name, const char* species, double& value);

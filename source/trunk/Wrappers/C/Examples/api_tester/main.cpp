@@ -191,6 +191,15 @@ int main(int argc, char* argv[])
 		printf ("%s", matStr);
 	printf ("\n\n");
 
+	printf ("Unscaled Elasticity Matrix:\n");
+	printf ("-------------------------\n\n");
+	matStr = printMatrix (getUnScaledElasticityMatrix());
+	if (!matStr)
+		printf ("ERROR in getUnScaledElasticityMatrix\n");
+	else
+		printf ("%s", matStr);
+	printf ("\n\n");
+	
 	printf ("Scaled Elasticity Matrix:\n");
 	printf ("-------------------------\n\n");
 	matStr = printMatrix (getScaledElasticityMatrix());

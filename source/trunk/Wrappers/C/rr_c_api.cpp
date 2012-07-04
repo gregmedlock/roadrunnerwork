@@ -576,6 +576,31 @@ bool rrCallConv getValue(const char* speciesID, double& value)
 	return false;	//todo: how to indicate error???
 }
 
+
+RRMatrixHandle rrCallConv getUnScaledElasticityMatrix()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+		LIB_LA::DoubleMatrix tempMat = gRRHandle->getUnscaledElasticityMatrix();
+
+        RRMatrixHandle matrix = createMatrix(tempMat);
+	    return matrix;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+	return NULL;
+}
+
 RRMatrixHandle rrCallConv getScaledElasticityMatrix()
 {
 	try
