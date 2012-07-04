@@ -2054,7 +2054,6 @@ char* rrCallConv printMatrix(const RRMatrixHandle matrixHandle)
             ss<<endl;
         }
         string msg(ss.str());
-        cout<<msg;
         return createText(msg);
     }
     catch(Exception& ex)
