@@ -84,10 +84,18 @@ int main(int argc, char* argv[])
 	int m = getNumberOfFloatingSpecies();
 	int b = getNumberOfBoundarySpecies();
 	int p = getNumberOfGlobalParameters();
+	int c = getNumberOfCompartments();
 
 	printf ("Number of reactions = %d\n", r);
 	printf ("Number of floating species = %d\n", m);
 	printf ("Number of boundary species = %d\n\n", b);
+	printf ("Number of compartments = %d\n\n", c);
+
+	if (m > 0) {
+	   printf ("Compartment names:\n");
+	   printf ("-----------------------\n");
+	   cout<<printList(getCompartmentNames())<<endl<<endl;
+	}
 
 	if (m > 0) {
 	   printf ("Floating species names:\n");
@@ -116,7 +124,6 @@ int main(int argc, char* argv[])
 	}
 	printf ("\n");
 
-
 	double ssVal;
     bool success = steadyState(ssVal);
     if(!success)
@@ -125,32 +132,47 @@ int main(int argc, char* argv[])
     }
     else
     {
-	    cout<<"Compute Steady state: sums of squares: "<<ssVal<<endl;
+	    cout<<"Compute Steady State: sums of squares: "<<ssVal<<endl;
     }
 
-    cout<<"\nStoichiometry Matrix: "<<endl<<endl;
+    cout<<"\nStoichiometry Matrix:"<<endl;
+	printf ("---------------------\n\n");
 	cout<printMatrix(getStoichiometryMatrix());
 	printf ("\n");
 
-	printf ("Full Jacobian Matrix\n");
-	if (printMatrix (getFullJacobian()))
+    cout<<"Number of independent species = "<<getNumberOfIndependentSpecies()<<endl;
+    cout<<"Number of dependent Species = "<<getNumberOfDependentSpecies()<<endl<<endl;
+ 
+	printf ("Link Matrix:\n");
+	printf ("------------\n\n");
+	cout<printMatrix(getLinkMatrix()); printf ("\n\n");
+
+	printf ("Nr Matrix:\n");
+	printf ("-----------\n\n");
+	cout<printMatrix(getNrMatrix()); printf ("\n\n");
+
+	printf ("L0 Matrix:\n");
+	printf ("-----------\n\n");
+	cout<printMatrix(getL0Matrix()); printf ("\n\n");
+
+	printf ("Full Jacobian Matrix:\n");
+	printf ("---------------------\n\n");
+	if (!printMatrix (getFullJacobian()))
 		printf ("ERROR in getFullJacobian\n");
-	cout<printMatrix (getFullJacobian());
-	printf ("Matrix Printed\n");
-    RRStringListHandle list = getRatesOfChangeNames();
+	printf ("\n");
 
-    //    cout<<getBoundarySpeciesByIndex (0)<<endl;
+	RRStringListHandle list = getRatesOfChangeNames();
+
+    //cout<<getBoundarySpeciesByIndex (0)<<endl;
 	double value;
-    getFloatingSpeciesByIndex(0, value);
-    cout<<value<<endl;
-    getGlobalParameterByIndex(0, value);
+    //getFloatingSpeciesByIndex(0, value);
+    //cout<<value<<endl;
+    //getGlobalParameterByIndex(0, value);
 
-    cout<<value<<endl;
-    getGlobalParameterByIndex(2, value);
-    cout<<value<<endl;
+    //cout<<value<<endl;
+    //getGlobalParameterByIndex(2, value);
+    //cout<<value<<endl;
 
-    cout<<getNumberOfDependentSpecies()<<endl;
-    cout<<getNumberOfIndependentSpecies()<<endl;
 
     RRVector* vec = getRatesOfChange();
     //cout<<getParamPromotedSBML(sbml.c_str());
@@ -158,11 +180,12 @@ int main(int argc, char* argv[])
 
     //cout<<getSBML()<<endl;
 
-	cout<<"Link Matrix: "<<endl;
-	cout<printMatrix(getLinkMatrix());
-
     //cout<<printMatrix(getScaledElasticityMatrix());     //How to free, when doing something like this??
     //cout<<printList(getEigenValueNames());
+
+    //cout<<printList(getFluxControlCoefficientNames())<<endl;
+    //cout<<printList(getConcentrationControlCoefficientNames())<<endl;
+    //cout<<printList(getElasticityNames())<<endl;
 
     //cout<<printList(getFluxControlCoefficientNames())<<endl;
     //cout<<printList(getConcentrationControlCoefficientNames())<<endl;
@@ -173,7 +196,7 @@ int main(int argc, char* argv[])
     setCompartmentByIndex(0,456);
     if(getCompartmentByIndex(0, value))
     {
-        cout<<"compartmentVal: "<<value<<endl;
+        cout<<"Compartment Volume: "<<value<<endl;
     }
     else
     {
@@ -184,7 +207,7 @@ int main(int argc, char* argv[])
     getRateOfChange(0, value);
     cout<<"Rate of change:"<<value<<endl;
 
-    cout<<"API ersion: "<<getVersion()<<endl;
+	cout<<"API Revision: "<<getRevision()<<endl;
 
     cout<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
     getRatesOfChangeEx (NULL);
