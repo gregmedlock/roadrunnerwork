@@ -3844,98 +3844,100 @@ double RoadRunner::getScaledFloatingSpeciesElasticity(const string& reactionName
 //
 //
 //        // Use the formula: ucc = -L Jac^-1 Nr
-//        [Help("Compute the matrix of unscaled concentration control coefficients")]
-//        double[][] getUnscaledConcentrationControlCoefficientMatrix()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//                {
-//                    Matrix uelast;
-//                    Matrix Nr;
-//                    Matrix LinkMatrix;
-//
-//                    setmTimeStart(0.0);
-//                    setTimeEnd(50.0);
-//                    setmNumPoints(1);
-//                    simulate();
-//                    if (steadyState() > STEADYSTATE_THRESHOLD)
-//                    {
-//                        if (steadyState() > 1E-2)
-//                            throw SBWApplicationException(
-//                                "Unable to locate steady state during frequency response computation");
-//                    }
-//
-//                    uelast = new Matrix(getUnscaledElasticityMatrix());
-//                    Nr = new Matrix(getNrMatrix());
-//                    LinkMatrix = new Matrix(getLinkMatrix());
-//
-//                    var Inv = new Matrix(Nr.nRows, LinkMatrix.nCols);
-//                    var T2 = new Matrix(Nr.nRows, LinkMatrix.nCols); // Stores -Jac  and (-Jac)^-1
-//                    var T3 = new Matrix(LinkMatrix.nRows, 1); // Stores (-Jac)^-1 . Nr
-//                    var T4 = new Matrix(Nr.nRows, Nr.nCols);
-//
-//                    // Compute the Jacobian first
-//                    var T1 = new Matrix(Nr.nRows, uelast.nCols);
-//                    T1.mult(Nr, uelast);
-//                    var Jac = new Matrix(Nr.nRows, LinkMatrix.nCols);
-//                    Jac.mult(T1, LinkMatrix);
-//                    T2.mult(Jac, -1.0); // Compute -Jac
-//
-//                    //ArrayList reactionNames = getReactionNames();
-//                    //ArrayList speciesNames = getSpeciesNames();
-//
-//                    //SBWComplex[][] T8 = SBW_CLAPACK.Zinverse(T2.data);  // Compute ( - Jac)^-1
-//                    //for (int i1 = 0; i1 < Inv.nRows; i1++)
-//                    //    for (int j1 = 0; j1 < Inv.nCols; j1++)
-//                    //    {
-//                    //        Inv[i1, j1].Real = T8[i1][j1].Real;
-//                    //        Inv[i1, j1].Imag = T8[i1][j1].Imag;
-//                    //    }
-//
-//
-//                    Complex[][] T8 = LA.GetInverse(ConvertComplex(T2.data));
-//                    for (int i1 = 0; i1 < Inv.nRows; i1++)
-//                        for (int j1 = 0; j1 < Inv.nCols; j1++)
-//                        {
-//                            Inv[i1, j1].Real = T8[i1][j1].Real;
-//                            Inv[i1, j1].Imag = T8[i1][j1].Imag;
-//                        }
-//
-//                    T3.mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
-//
-//                    // Finally include the dependent set as well.
-//                    T4.mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
-//                    return Matrix.convertToDouble(T4);
-//                }
-//                else throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException(
-//                    "Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message());
-//            }
-//        }
-//
-//        internal static Complex[][] ConvertComplex(SimpleComplex[][] oMatrix)
-//        {
-//            var oResult = new Complex[oMatrix.Length][];
-//            for (int i = 0; i < oMatrix.Length; i++)
-//            {
-//                oResult[i] = new Complex[oMatrix[i].Length];
-//                for (int j = 0; j < oMatrix[i].Length; j++)
-//                {
-//                    oResult[i][j] = new Complex();
-//                    oResult[i][j].Real = oMatrix[i][j].Real;
-//                    oResult[i][j].Imag = oMatrix[i][j].Imag;
-//                }
-//            }
-//            return oResult;
-//        }
+// [Help("Compute the matrix of unscaled concentration control coefficients")]
+LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatrix()
+{
+	try
+	{
+		if (modelLoaded)
+		{
+			ComplexMatrix Inv;
+			DoubleMatrix T1;
+			DoubleMatrix T2;
+			DoubleMatrix T3;
+			DoubleMatrix T4;
+			ComplexMatrix T8;
+			DoubleMatrix Jac;
+
+			setTimeStart(0.0);
+			setTimeEnd(50.0);
+			setNumPoints(1);
+			simulate();
+			if (steadyState() > STEADYSTATE_THRESHOLD)
+			{
+				if (steadyState() > 1E-2)
+					throw SBWApplicationException(
+					"Unable to locate steady state during frequency response computation");
+			}
+
+			LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
+			LIB_LA::DoubleMatrix Nr = getNrMatrix();
+			LIB_LA::DoubleMatrix LinkMatrix = getLinkMatrix();
+
+			Inv.resize (Nr.RSize(), LinkMatrix.CSize());
+			T2.resize (Nr.RSize(), LinkMatrix.CSize()); // Stores -Jac  and (-Jac)^-1
+			T3.resize (LinkMatrix.RSize(), 1); // Stores (-Jac)^-1 . Nr
+			T4.resize (Nr.RSize(), Nr.CSize());
+
+			// Compute the Jacobian first
+			T1.resize (Nr.RSize(), uelast.CSize());
+			T1 = mult(Nr, uelast);
+			Jac.resize (Nr.RSize(), LinkMatrix.CSize());
+			Jac = mult(T1, LinkMatrix);
+			// Compute -Jac
+			for (int i=0; i<Jac.RSize(); i++)
+				for (int j=0; i<Jac.CSize(); j++)
+					Jac[i][j] = -Jac[i][j];
+
+			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+			// Sauro: GetInverse needs to be implemented
+			//ComplexMatrix T8 = LIB_LA::GetInverse(ConvertComplex(T2.data));
+			for (int i1 = 0; i1 < Inv.RSize(); i1++)
+				for (int j1 = 0; j1 < Inv.CSize(); j1++)
+				{
+					Inv[i1][j1].Real = T8[i1][j1].Real;
+					Inv[i1][j1].Imag = T8[i1][j1].Imag;
+				}
+
+
+     			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+				// Sauro: mult which takes compelx matrix need to be implemented
+				//T3 = mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
+
+				// Finally include the dependent set as well.
+				T4 = mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
+    			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+				// Sauro: convertToDouble nees to be implemented
+				//return Matrix.convertToDouble(T4);
+		}
+		else throw SBWApplicationException(emptyModelStr);
+	}
+	catch (SBWException)
+	{
+		throw;
+	}
+	catch (Exception e)
+	{
+		throw SBWApplicationException(
+			"Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message());
+	}
+}
+
+LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
+{
+	ComplexMatrix oResult;
+	oResult.resize (oMatrix.RSize(), oMatrix.CSize()); //  = Complex[oMatrix.Length][];
+	for (int i = 0; i < oMatrix.RSize(); i++)
+	{
+		for (int j = 0; j < oMatrix.CSize(); j++)
+		{
+			//oResult[i][j] = new Complex();
+			oResult[i][j].Real = oMatrix[i][j].Real;
+			oResult[i][j].Imag = oMatrix[i][j].Imag;
+		}
+	}
+	return oResult;
+}
 //
 //        [Help("Compute the matrix of scaled concentration control coefficients")]
 //        double[][] getScaledConcentrationControlCoefficientMatrix()
@@ -3973,72 +3975,69 @@ double RoadRunner::getScaledFloatingSpeciesElasticity(const string& reactionName
 //
 //
 //        // Use the formula: ucc = elast CS + I
-//        [Help("Compute the matrix of unscaled flux control coefficients")]
-//        double[][] getUnscaledFluxControlCoefficientMatrix()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//                {
-//                    double[][] ucc = getUnscaledConcentrationControlCoefficientMatrix();
-//                    double[][] uee = getUnscaledElasticityMatrix();
-//                    var ucc_m = new Matrix(ucc);
-//                    var uee_m = new Matrix(uee);
-//
-//                    var T1 = new Matrix(uee_m.nRows, ucc_m.nCols);
-//                    T1.mult(uee_m, ucc_m);
-//                    Matrix T2 = Matrix.Identity(uee.Length);
-//                    T1.add(T2);
-//                    return Matrix.convertToDouble(T1);
-//                }
-//                else throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from getUnscaledFluxControlCoefficientMatrix()",
-//                                                  e.Message());
-//            }
-//        }
-//
-//
-//        [Help("Compute the matrix of scaled flux control coefficients")]
-//        double[][] getScaledFluxControlCoefficientMatrix()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//                {
-//                    double[][] ufcc = getUnscaledFluxControlCoefficientMatrix();
-//
-//                    if (ufcc.Length > 0)
-//                    {
-//                        mModel->convertToConcentrations();
-//                        mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-//                        for (int i = 0; i < ufcc.Length; i++)
-//                            for (int j = 0; j < ufcc[0].Length; j++)
-//                            {
-//                                ufcc[i][j] = ufcc[i][j]*mModel->rates[i]/mModel->rates[j];
-//                            }
-//                    }
-//                    return ufcc;
-//                }
-//                else throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (Exception e)
-//            {
-//                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-//                                                  e.Message());
-//            }
-//        }
-//
+// [Help("Compute the matrix of unscaled flux control coefficients")]
+/*LIB_LA::DoubleMatrix RoadRunner::getUnscaledFluxControlCoefficientMatrix()
+{
+	try
+	{
+		if (modelLoaded)
+		{
+			LIB_LA::DoubleMatrix ucc = getUnscaledConcentrationControlCoefficientMatrix();
+			LIB_LA::DoubleMatrix uee = getUnscaledElasticityMatrix();
+
+			var T1 = new Matrix(uee_m.nRows, ucc_m.nCols);
+			T1 = mult(uee, ucc);
+			Matrix T2 = Matrix.Identity(uee.Length);
+			T1.add(T2);
+			return Matrix.convertToDouble(T1);
+		}
+		else throw SBWApplicationException(emptyModelStr);
+	}
+	catch (SBWException)
+	{
+		throw;
+	}
+	catch (Exception e)
+	{
+		throw SBWApplicationException("Unexpected error from getUnscaledFluxControlCoefficientMatrix()",
+			e.Message());
+	}
+}*/
+
+// [Help("Compute the matrix of scaled flux control coefficients")]
+/*LIB_LA::DoubleMatrix RoadRunner::getScaledFluxControlCoefficientMatrix()
+{
+	try
+	{
+		if (modelLoaded)
+		{
+			double[][] ufcc = getUnscaledFluxControlCoefficientMatrix();
+
+			if (ufcc.Length > 0)
+			{
+				mModel->convertToConcentrations();
+				mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+				for (int i = 0; i < ufcc.Length; i++)
+					for (int j = 0; j < ufcc[0].Length; j++)
+					{
+						ufcc[i][j] = ufcc[i][j]*mModel->rates[i]/mModel->rates[j];
+					}
+			}
+			return ufcc;
+		}
+		else throw SBWApplicationException(emptyModelStr);
+	}
+	catch (SBWException)
+	{
+		throw;
+	}
+	catch (Exception e)
+	{
+		throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
+			e.Message());
+	}
+}*/
+
 //
 //        // ----------------------------------------------------------------------------------------------
 //

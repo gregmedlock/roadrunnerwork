@@ -176,6 +176,9 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		LIB_LA::DoubleMatrix            getL0Matrix();
 		DoubleMatrix                    getStoichiometryMatrix();
 		LIB_LA::DoubleMatrix            getConservationMatrix();
+		LIB_LA::DoubleMatrix            getUnscaledConcentrationControlCoefficientMatrix();
+        LIB_LA::DoubleMatrix            getUnscaledFluxControlCoefficientMatrix();
+        LIB_LA::DoubleMatrix            getScaledFluxControlCoefficientMatrix();
 		int                             getNumberOfDependentSpecies();
 		int                             getNumberOfIndependentSpecies();
 
@@ -269,6 +272,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		static void                     TestChange();
 		void                            DumpResults(TextWriter& writer, DoubleMatrix& data, const StringList& colLabels);
 
+       LIB_LA::ComplexMatrix            ConvertComplex(LIB_LA::ComplexMatrix oMatrix);
+
 
 		//RoadRunner MCA functions......
 
@@ -317,18 +322,18 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
         // Use the formula: ucc = -L Jac^-1 Nr
         //[Help("Compute the matrix of unscaled concentration control coefficients")]
-        double** getUnscaledConcentrationControlCoefficientMatrix();
+        //double** getUnscaledConcentrationControlCoefficientMatrix();
 //        static Complex[][] ConvertComplex(SimpleComplex[][] oMatrix);
 
         //[Help("Compute the matrix of scaled concentration control coefficients")]
-        double** getScaledConcentrationControlCoefficientMatrix();
+        //double** getScaledConcentrationControlCoefficientMatrix();
 
         // Use the formula: ucc = elast CS + I
         //[Help("Compute the matrix of unscaled flux control coefficients")]
-        double** getUnscaledFluxControlCoefficientMatrix();
+        //double** getUnscaledFluxControlCoefficientMatrix();
 
         //[Help("Compute the matrix of scaled flux control coefficients")]
-        double** getScaledFluxControlCoefficientMatrix();
+        //double** getScaledFluxControlCoefficientMatrix();
 
         //"Compute the value for a particular unscaled concentration control coefficients with respect to a local parameter"
         double getUnscaledConcentrationControlCoefficient(const string& speciesName, const string& localReactionName, const string& parameterName);
