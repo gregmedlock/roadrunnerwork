@@ -166,7 +166,9 @@ C_DECL_SPEC RRStringListHandle      rrCallConv   getElasticityCoefficientNames()
 C_DECL_SPEC RRSymbolListsHandle     rrCallConv   getAvailableSymbols();
 
 // MCA methods
+C_DECL_SPEC RRStringListHandle      rrCallConv   getUnscaledFluxControlCoefficientNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getFluxControlCoefficientNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv   getUnscaledConcentrationControlCoefficientNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getConcentrationControlCoefficientNames();
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getUnScaledElasticityMatrix();
 

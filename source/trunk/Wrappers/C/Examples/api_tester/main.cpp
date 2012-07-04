@@ -20,6 +20,8 @@
 using namespace std;
 int main(int argc, char* argv[])
 {
+	double value;
+
 	printf ("\n    Start of run\n");
 	printf ("   ==============\n\n");
 
@@ -59,8 +61,8 @@ int main(int argc, char* argv[])
 
     setTempFolder("c:\\rrTemp");
 	//string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
-	string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-	//string fileName = modelsPath + "\\ss_threestep.xml";
+	//string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
+	string fileName = modelsPath + "\\ss_threestep.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
@@ -93,14 +95,20 @@ int main(int argc, char* argv[])
 
 	if (m > 0) {
 	   printf ("Compartment names:\n");
-	   printf ("-----------------------\n");
+	   printf ("------------------\n");
 	   cout<<printList(getCompartmentNames())<<endl<<endl;
 	}
 
 	if (m > 0) {
 	   printf ("Floating species names:\n");
 	   printf ("-----------------------\n");
-	   cout<<printList(getFloatingSpeciesNames())<<endl;
+	   cout<<printList(getFloatingSpeciesNames())<<endl<<endl;
+	}
+
+	if (m > 0) {
+	   printf ("Initial Floating species names:\n");
+	   printf ("-------------------------------\n");
+	   cout<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
 	}
 
 	if (b > 0) {
@@ -117,10 +125,32 @@ int main(int argc, char* argv[])
 	}
 	printf ("\n");
 
-	if (p > 0) {
+	if (r > 0) {
        printf ("\nReaction names:\n");
-	   printf ("-----------------------\n");
+	   printf ("---------------\n");
 	   cout<<printList(getReactionNames())<<endl;
+	}
+	printf ("\n");
+
+	if (m> 0) {
+       printf ("\nRates of change names:\n");
+	   printf ("----------------------\n");
+	   cout<<printList(getRatesOfChangeNames())<<endl;
+	}
+	printf ("\n");
+
+
+	if (r > 0) {
+       printf ("\nUnscaled flux control coefficient names:\n");
+	   printf ("----------------------------------------\n");
+	   cout<<printList(getUnscaledFluxControlCoefficientNames())<<endl;
+	}
+	printf ("\n");
+
+	if (m > 0) {
+       printf ("\nUnscaled concentration control coefficient names:\n");
+	   printf ("-------------------------------------------------\n");
+	   cout<<printList(getUnscaledConcentrationControlCoefficientNames())<<endl;
 	}
 	printf ("\n");
 
@@ -209,11 +239,55 @@ int main(int argc, char* argv[])
 		printf ("%s", matStr);
 	printf ("\n\n");
 
+	printf ("Elasticity Coefficient, EE^(_J1)_S1\n");
+	getEE("_J1", "S1", value);
+	printf ("Elasticity = %f\n", value);
 
-	RRStringListHandle list = getRatesOfChangeNames();
+	printf ("Elasticity Coefficient, EE^(_J2)_S1\n");
+	getEE("_J2", "S1", value);
+	printf ("Elasticity = %f\n", value);
 
-    //cout<<getBoundarySpeciesByIndex (0)<<endl;
-	double value;
+	printf ("Elasticity Coefficient, EE^(_J2)_S2\n");
+	getEE("_J2", "S2", value);
+	printf ("Elasticity = %f\n", value);
+
+	printf ("Elasticity Coefficient, EE^(_J3)_S2\n");
+	getEE("_J3", "S2", value);
+	printf ("Elasticity = %f\n", value);
+
+	printf ("\n");
+	//printf ("Flux Control Coefficient, C^(_J1)_k1\n");
+	//double value;
+	//getCC("_J1", "k1", value);
+	//printf ("FCC = %f\n", value);
+
+	/*getGlobalParameterByIndex (0, value);
+	printf ("%f\n", value);
+	getGlobalParameterByIndex (1, value);
+	printf ("%f\n", value);
+	getGlobalParameterByIndex (2, value);
+	printf ("%f\n", value);
+	getGlobalParameterByIndex (3, value);
+	printf ("%f\n", value);*/
+
+	struct RRVector veca;
+	veca.Size = 3;
+	veca.Data = (double *) malloc (sizeof (double)*3);
+	veca.Data[0] = 1;
+	veca.Data[1] = 2;
+	veca.Data[2] = 3;
+
+	printf ("\nCall to getReactionRatesEx (S1=1, S2=2, S3=3):\n");
+	cout<<printVector (getReactionRatesEx (&veca))<<endl;
+
+	printf ("\nCall to getRatesOfChange (with S1=1, S2=2, S3=3):\n");
+	cout<<printVector (getRatesOfChange())<<endl;
+
+	printf ("\nCall to getRatesOfChangeEx (S1=1, S2=2, S3=3):\n");
+	cout<<printVector (getRatesOfChangeEx(&veca))<<endl;
+
+
+	//cout<<getBoundarySpeciesByIndex (0)<<endl;
     //getFloatingSpeciesByIndex(0, value);
     //cout<<value<<endl;
     //getGlobalParameterByIndex(0, value);

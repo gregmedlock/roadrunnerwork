@@ -1827,6 +1827,29 @@ RRStringListHandle rrCallConv getFluxControlCoefficientNames()
     return NULL;
 }
 
+
+RRStringListHandle rrCallConv getUnscaledFluxControlCoefficientNames()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        return createList(gRRHandle->getUnscaledFluxControlCoefficientNames());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+
 RRStringListHandle rrCallConv getConcentrationControlCoefficientNames()
 {
 	try
@@ -1837,6 +1860,26 @@ RRStringListHandle rrCallConv getConcentrationControlCoefficientNames()
             return NULL;
         }
         return createList(gRRHandle->getConcentrationControlCoefficientNames());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+RRStringListHandle rrCallConv getUnscaledConcentrationControlCoefficientNames()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        return createList(gRRHandle->getUnscaledConcentrationControlCoefficientNames());
     }
     catch(Exception& ex)
     {

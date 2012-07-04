@@ -1062,13 +1062,13 @@ StringList RoadRunner::getParameterNames()
     return sp;
 }
 
-//        [Help("Get scaled elasticity coefficient with respect to a global parameter or species")]
+// [Help("Get scaled elasticity coefficient with respect to a global parameter or species")]
 double RoadRunner::getEE(const string& reactionName, const string& parameterName)
 {
     return getEE(reactionName, parameterName, true);
 }
 
-//        [Help("Get scaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
+// [Help("Get scaled elasticity coefficient with respect to a global parameter or species. Optionally the model is brought to steady state after the computation.")]
 double RoadRunner::getEE(const string& reactionName, const string& parameterName, bool computeSteadyState)
 {
     TParameterType parameterType;
@@ -1880,6 +1880,51 @@ ArrayList RoadRunner::getFluxControlCoefficientNames()
     return oResult;
 }
 
+
+//  Help("Returns the Symbols of all Unscaled Flux Control Coefficients.")
+ArrayList RoadRunner::getUnscaledFluxControlCoefficientNames()
+{
+    ArrayList oResult;// = new ArrayList();
+    if (!modelLoaded)
+    {
+        return oResult;
+    }
+
+    StringList oReactions = getReactionNames();
+    StringList oParameters = mModelGenerator->getGlobalParameterList();
+    StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
+    StringList oConservation = mModelGenerator->getConservationList();
+
+    for(int i = 0; i < oReactions.Count(); i++)
+    {
+        string s = oReactions[i];
+
+        ArrayList oCCReaction;// = new ArrayList();
+        ArrayList oInner;// = new ArrayList();
+        oCCReaction.Add(s);
+
+        for(int i = 0; i < oParameters.Count(); i++)
+        {
+            oInner.Add("uCC:" + s + "," + oParameters[i]);
+        }
+
+        for(int i = 0; i < oBoundary.Count(); i++)
+        {
+            oInner.Add("uCC:" + s + "," + oBoundary[i]);
+        }
+
+        for(int i = 0; i < oConservation.Count(); i++)
+        {
+            oInner.Add("uCC:" + s + "," + oConservation[i]);
+        }
+
+        oCCReaction.Add(oInner);
+        oResult.Add(oCCReaction);
+    }
+
+    return oResult;
+}
+
 // Help("Returns the Symbols of all Concentration Control Coefficients.")
 ArrayList RoadRunner::getConcentrationControlCoefficientNames()
 {
@@ -1927,45 +1972,51 @@ ArrayList RoadRunner::getConcentrationControlCoefficientNames()
     return oResult;
 }
 
+
 // Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")
-//        ArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
-//        {
-//            var oResult = new ArrayList();
-//            if (!modelLoaded) return oResult;
-//
-//            ArrayList oFloating = getFloatingSpeciesNames();
-//            ArrayList oParameters = mModelGenerator->getGlobalParameterList();
-//            ArrayList oBoundary = mModelGenerator->getBoundarySpeciesList();
-//            ArrayList oConservation = mModelGenerator->getConservationList();
-//
-//            foreach (string s in oFloating)
-//            {
-//                var oCCFloating = new ArrayList();
-//                var oInner = new ArrayList();
-//                oCCFloating.Add(s);
-//
-//                foreach (string sParameter in oParameters)
-//                {
-//                    oInner.Add("uCC:" + s + "," + sParameter);
-//                }
-//
-//                foreach (string sBoundary in oBoundary)
-//                {
-//                    oInner.Add("uCC:" + s + "," + sBoundary);
-//                }
-//
-//                foreach (string sConservation in oConservation)
-//                {
-//                    oInner.Add("uCC:" + s + "," + sConservation);
-//                }
-//
-//                oCCFloating.Add(oInner);
-//                oResult.Add(oCCFloating);
-//            }
-//
-//            return oResult;
-//        }
-//
+ArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
+{
+    ArrayList oResult;// = new ArrayList();
+    if (!mModel)
+    {
+        return oResult;
+    }
+
+    StringList oFloating = getFloatingSpeciesNames();
+    StringList oParameters = mModelGenerator->getGlobalParameterList();
+    StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
+    StringList oConservation = mModelGenerator->getConservationList();
+
+    for(int i = 0; i < oFloating.Count(); i++)
+    {
+        string s = oFloating[i];
+        ArrayList oCCFloating;// = new ArrayList();
+        ArrayList oInner;// = new ArrayList();
+        oCCFloating.Add(s);
+
+        for(int i = 0; i < oParameters.Count(); i++)
+        {
+            oInner.Add("uCC:" + s + "," + oParameters[i]);
+        }
+
+        for(int i = 0; i < oBoundary.Count(); i++)
+        {
+            oInner.Add("uCC:" + s + "," + oBoundary[i]);
+        }
+
+        for(int i = 0; i < oConservation.Count(); i++)
+        {
+            oInner.Add("uCC:" + s + "," + oConservation[i]);
+        }
+
+        oCCFloating.Add(oInner);
+        oResult.Add(oCCFloating);
+    }
+
+    return oResult;
+}
+
+
 // Help("Returns the Symbols of all Elasticity Coefficients.")
 ArrayList RoadRunner::getElasticityCoefficientNames()
 {
@@ -4537,17 +4588,6 @@ vector<double> RoadRunner::getRatesOfChange()
     return result;
 }
 
-// Help(
-//            "Returns a list of floating species names: This method is deprecated, please use getFloatingSpeciesNames()")
-//
-//        ArrayList RoadRunner::getSpeciesNames()
-//        {
-//            if (!mModel)
-//                throw SBWApplicationException(emptyModelStr);
-//
-//            return mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
-//        }
-//
 // Help("Returns a list of reaction names")
 StringList RoadRunner::getReactionNames()
 {
@@ -4558,12 +4598,10 @@ StringList RoadRunner::getReactionNames()
 
     return mModelGenerator->getReactionNames();
 }
-//
-//
-//        // ---------------------------------------------------------------------
-//        // Start of Level 2 API Methods
-//        // ---------------------------------------------------------------------
-//
+
+// ---------------------------------------------------------------------
+// Start of Level 2 API Methods
+// ---------------------------------------------------------------------
 //        int RoadRunner::UseKinsol { get; set; }
 //
 // Help("Get Simulator Capabilities")
@@ -5209,12 +5247,12 @@ StringListContainer RoadRunner::getAvailableSymbols()
 
 string RoadRunner::getCopyright()
 {
-    return "(c) 2009 H. M. Sauro and F. T. Bergmann, BSD Licence";
+    return "(c) 2009-2012 HM. Sauro and FT. Bergmann, BSD Licence";
 }
 
 string RoadRunner::getURL()
 {
-    return "http://sys-bio.org";
+    return "http://www.sys-bio.org";
 }
 
 }//namespace rr

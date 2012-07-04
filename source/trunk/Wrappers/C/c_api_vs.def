@@ -88,4 +88,5 @@ EXPORTS
     setValue                      = _setValue@8                         
     simulate                      = _simulate@0                         
     simulateEx                    = _simulateEx@12                      
-    steadyState                   = _steadyState@4                      
+    steadyState                   = _steadyState@4   
+                       
