@@ -1561,6 +1561,34 @@ LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
     }
 }
 
+// Returns eigenvalues, first column real part, second column imaginary part
+// -------------------------------------------------------------------------
+LIB_LA::DoubleMatrix RoadRunner::getEigenvalues()
+{
+    try
+    {
+	  if (modelLoaded) 
+	  {
+        LIB_LA::DoubleMatrix result(getNumberOfIndependentSpecies() ,2);
+
+        LIB_LA::DoubleMatrix mat = getReducedJacobian();
+   
+        LibLA LA;
+
+        vector<Complex> oComplex = LA.getEigenValues(mat);
+        for (int i=0; i<oComplex.size(); i++) {
+	        result[i][0] = oComplex[i].Real;
+	        result[i][1] = oComplex[i].Imag;
+        }
+        return result; 
+	  }
+      throw SBWApplicationException(emptyModelStr);
+    }
+    catch (Exception e)
+    {
+        throw SBWApplicationException("Unexpected error from fullJacobian()", e.Message());
+    }
+}
 
 // Help("Compute the full Jacobian at the current operating point")
 LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()

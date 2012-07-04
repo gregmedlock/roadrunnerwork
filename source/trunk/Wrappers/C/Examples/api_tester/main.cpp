@@ -59,8 +59,8 @@ int main(int argc, char* argv[])
 
     setTempFolder("c:\\rrTemp");
 	//string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
-	//string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-	string fileName = modelsPath + "\\ss_threestep.xml";
+	string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
+	//string fileName = modelsPath + "\\ss_threestep.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
@@ -157,9 +157,48 @@ int main(int argc, char* argv[])
 
 	printf ("Full Jacobian Matrix:\n");
 	printf ("---------------------\n\n");
-	if (!printMatrix (getFullJacobian()))
+	char* matStr = printMatrix (getFullJacobian());
+	if (!matStr)
 		printf ("ERROR in getFullJacobian\n");
-	printf ("\n");
+	else
+		printf ("%s", matStr);
+	printf ("\n\n");
+
+	printf ("Reduced Jacobian Matrix:\n");
+	printf ("------------------------\n\n");
+	matStr = printMatrix (getReducedJacobian());
+	if (!matStr)
+		printf ("ERROR in getReducedJacobian\n");
+	else
+		printf ("%s", matStr);
+	printf ("\n\n");
+
+	printf ("Reduced Jacobian Matrix:\n");
+	printf ("------------------------\n\n");
+	matStr = printMatrix (getReducedJacobian());
+	if (!matStr)
+		printf ("ERROR in getReducedJacobian\n");
+	else
+		printf ("%s", matStr);
+	printf ("\n\n");
+
+	printf ("Eigenvalue Matrix (real/imag):\n");
+	printf ("----------------------------\n\n");
+	matStr = printMatrix (getEigenvalues());
+	if (!matStr)
+		printf ("ERROR in getEigenvalues\n");
+	else
+		printf ("%s", matStr);
+	printf ("\n\n");
+
+	printf ("Scaled Elasticity Matrix:\n");
+	printf ("-------------------------\n\n");
+	matStr = printMatrix (getScaledElasticityMatrix());
+	if (!matStr)
+		printf ("ERROR in getScaledElasticityMatrix\n");
+	else
+		printf ("%s", matStr);
+	printf ("\n\n");
 
 	RRStringListHandle list = getRatesOfChangeNames();
 

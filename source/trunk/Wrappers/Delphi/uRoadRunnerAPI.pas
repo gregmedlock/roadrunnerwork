@@ -1167,7 +1167,7 @@ begin
    @libGetGlobalParameterNames  := loadSingleMethod ('getGlobalParameterNames', errMsg, result, methodList);
    @libGetRatesOfChangeNames    := loadSingleMethod ('getRatesOfChangeNames', errMsg, result, methodList);
    @libGetEigenValueNames       := loadSingleMethod ('getEigenValueNames', errMsg, result, methodList);
-   @libGetElasticityNames       := loadSingleMethod ('getElasticityNames', errMsg, result, methodList);
+   @libGetElasticityNames       := loadSingleMethod ('getElasticityCoefficientNames', errMsg, result, methodList);
    @libGetAvailableSymbols      := loadSingleMethod ('getAvailableSymbols', errMsg, result, methodList);
 
    @libGetStoichiometryMatrix   := loadSingleMethod ('getStoichiometryMatrix', errMsg, result, methodList);
@@ -1180,15 +1180,7 @@ begin
    @libFreeMatrix       := loadSingleMethod ('freeMatrix', errMsg, result, methodList);
    @libFreeText         := loadSingleMethod ('freeText', errMsg, result, methodList);
    @libFreeStringList   := loadSingleMethod ('freeStringList', errMsg, result, methodList);
-<<<<<<< .mine
-<<<<<<< .mine
    @libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeVector'));
-=======
-   //@libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeDoubleVector'));
-=======
-   @libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeDoubleVector'));
->>>>>>> .r549
->>>>>>> .r537
    //if not Assigned (libFreeDoubleVector) then
    //   begin errMsg := 'Unable to locate freeDoubleVector'; result := false; exit; end;
    except

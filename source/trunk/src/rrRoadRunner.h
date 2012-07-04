@@ -166,6 +166,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 		LIB_LA::DoubleMatrix            getReducedJacobian();
 		LIB_LA::DoubleMatrix            getFullJacobian();
+		LIB_LA::DoubleMatrix            getEigenvalues();
 
 		// ---------------------------------------------------------------------
 		// Start of Level 4 API Methods
