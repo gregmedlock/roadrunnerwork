@@ -1518,7 +1518,7 @@ LIB_LA::DoubleMatrix mult(LIB_LA::DoubleMatrix& m1, LIB_LA::DoubleMatrix& m2)
 
     if (m1_nColumns == m2_nRows)
     {
-        result.resize(m2_nRows, m1_nColumns);
+        result.resize(m1_nRows, m2_nColumns);
         for (int row = 0; row < result.numRows(); row++)
         {
             for (int col = 0; col < m2_nColumns; col++)
