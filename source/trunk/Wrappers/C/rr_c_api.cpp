@@ -715,6 +715,28 @@ RRMatrixHandle rrCallConv getLinkMatrix()
 	return false;
 }
 
+RRMatrixHandle rrCallConv getL0Matrix()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        LIB_LA::DoubleMatrix tempMat = gRRHandle->getL0Matrix();
+        
+		return createMatrix(tempMat);
+	}
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+	return false;
+}
+
 RRMatrixHandle rrCallConv getNrMatrix()
 {
 	try
