@@ -137,7 +137,7 @@ int main(int argc, char* argv[])
 
     cout<<"\nStoichiometry Matrix:"<<endl;
 	printf ("---------------------\n\n");
-	cout<printMatrix(getStoichiometryMatrix());
+	cout<<printMatrix(getStoichiometryMatrix());
 	printf ("\n");
 
     cout<<"Number of independent species = "<<getNumberOfIndependentSpecies()<<endl;
@@ -145,15 +145,15 @@ int main(int argc, char* argv[])
  
 	printf ("Link Matrix:\n");
 	printf ("------------\n\n");
-	cout<printMatrix(getLinkMatrix()); printf ("\n\n");
+	cout<<printMatrix(getLinkMatrix()); printf ("\n\n");
 
 	printf ("Nr Matrix:\n");
 	printf ("-----------\n\n");
-	cout<printMatrix(getNrMatrix()); printf ("\n\n");
+	cout<<printMatrix(getNrMatrix()); printf ("\n\n");
 
 	printf ("L0 Matrix:\n");
 	printf ("-----------\n\n");
-	cout<printMatrix(getL0Matrix()); printf ("\n\n");
+	cout<<printMatrix(getL0Matrix()); printf ("\n\n");
 
 	printf ("Full Jacobian Matrix:\n");
 	printf ("---------------------\n\n");
@@ -207,7 +207,7 @@ int main(int argc, char* argv[])
     getRateOfChange(0, value);
     cout<<"Rate of change:"<<value<<endl;
 
-	cout<<"API Revision: "<<getRevision()<<endl;
+	cout<<"API Version: "<<getVersion()<<endl;
 
     cout<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
     getRatesOfChangeEx (NULL);
