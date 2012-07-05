@@ -7,6 +7,7 @@ feedback.xml
 test_1.xml 				
 ss_threestep.xml 	
 ss_TurnOnConservationAnalysis.xml 	
+ss_threeSpecies.xml
 )
 
 install(    FILES ${models}
