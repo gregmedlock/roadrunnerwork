@@ -15,10 +15,11 @@
 #include "rrStringUtils.h"
 #include "rrModelFromC.h"
 #include "rrSBMLModelSimulation.h"
+#include "libstruct/lsLA.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
-
+using namespace LIB_LA;
 namespace rr
 {
 
@@ -3106,7 +3107,7 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
         throw SBWApplicationException(emptyModelStr);
     }
 
-    int sanity = (mModel->getNumGlobalParameters() + *mModel->ctSize) ;
+//    int sanity = (mModel->getNumGlobalParameters() + *mModel->ctSize) ;
     if ((index >= 0) && (index < (mModel->getNumGlobalParameters() + *mModel->ctSize)))
     {
         int arraySize = *mModel->gpSize + *mModel->ctSize;
@@ -3125,7 +3126,6 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
 
 //        mModel->ct.CopyTo(result, *mModel->gpSize);
         return result[index];
-
     }
 
     throw SBWApplicationException(Format("Index in getNumGlobalParameters out of range: [{0}]", index));
@@ -3861,85 +3861,86 @@ double RoadRunner::getScaledFloatingSpeciesElasticity(const string& reactionName
 // [Help("Compute the matrix of unscaled concentration control coefficients")]
 LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatrix()
 {
-//	try
-//	{
-//		if (modelLoaded)
-//		{
-//			ComplexMatrix Inv;
-//			DoubleMatrix T1;
-//			DoubleMatrix T2;
-//			DoubleMatrix T3;
-//			DoubleMatrix T4;
-//			ComplexMatrix T8;
-//			DoubleMatrix Jac;
-//
-//			setTimeStart(0.0);
-//			setTimeEnd(50.0);
-//			setNumPoints(1);
-////	simulate();
-//			if (steadyState() > STEADYSTATE_THRESHOLD)
-//			{
-//				if (steadyState() > 1E-2)
-//					throw SBWApplicationException(
-//					"Unable to locate steady state during frequency response computation");
-//			}
-//
-//			LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
-//			LIB_LA::DoubleMatrix Nr = getNrMatrix();
-//			LIB_LA::DoubleMatrix LinkMatrix = getLinkMatrix();
-//
-//			Inv.resize (Nr.RSize(), LinkMatrix.CSize());
-//			T2.resize (Nr.RSize(), LinkMatrix.CSize()); // Stores -Jac  and (-Jac)^-1
-//			T3.resize (LinkMatrix.RSize(), 1); // Stores (-Jac)^-1 . Nr
-//			T4.resize (Nr.RSize(), Nr.CSize());
-//
-//			// Compute the Jacobian first
-//			T1.resize (Nr.RSize(), uelast.CSize());
-//			T1 = mult(Nr, uelast);
-//			Jac.resize (Nr.RSize(), LinkMatrix.CSize());
-//			Jac = mult(T1, LinkMatrix);
-//
-//			// Compute -Jac
-//			for (int i = 0; i < Jac.RSize(); i++)
-//            {
-//				for (int j = 0; i < Jac.CSize(); j++)
-//                {
-//					Jac[i][j] = -Jac[i][j];
-//                }
-//            }
-//
-//			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//			// Sauro: GetInverse needs to be implemented
-//			ComplexMatrix T8 = LIB_LA::GetInverse(ConvertComplex(T2.data));
+	try
+	{
+		if (!modelLoaded)
+		{
+            throw SBWApplicationException(emptyModelStr);
+        }
+
+        ComplexMatrix Inv;
+        DoubleMatrix T1;
+        DoubleMatrix T2;
+        DoubleMatrix T3;
+        DoubleMatrix T4;
+        //ComplexMatrix T8;
+        DoubleMatrix Jac;
+
+        setTimeStart(0.0);
+        setTimeEnd(50.0);
+        setNumPoints(1);
+//	simulate();
+        if (steadyState() > STEADYSTATE_THRESHOLD)
+        {
+            if (steadyState() > 1E-2)
+                throw SBWApplicationException(
+                "Unable to locate steady state during frequency response computation");
+        }
+
+        LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
+        LIB_LA::DoubleMatrix Nr = getNrMatrix();
+        LIB_LA::DoubleMatrix LinkMatrix = getLinkMatrix();
+
+        Inv.resize (Nr.RSize(), LinkMatrix.CSize());
+        T2.resize (Nr.RSize(), LinkMatrix.CSize()); // Stores -Jac  and (-Jac)^-1
+        T3.resize (LinkMatrix.RSize(), 1); // Stores (-Jac)^-1 . Nr
+        T4.resize (Nr.RSize(), Nr.CSize());
+
+        // Compute the Jacobian first
+        T1.resize (Nr.RSize(), uelast.CSize());
+        T1 = mult(Nr, uelast);
+        Jac.resize (Nr.RSize(), LinkMatrix.CSize());
+        Jac = mult(T1, LinkMatrix);
+
+        // Compute -Jac
+        for (int i = 0; i < Jac.RSize(); i++)
+        {
+            for (int j = 0; j < Jac.CSize(); j++)       //TK changed i -> j
+            {
+                Jac[i][j] = -Jac[i][j];
+            }
+        }
+
+        // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+        // Sauro: GetInverse needs to be implemented
+//        ComplexMatrix temp(T2);
+//        ComplexMatrix T8 = LIB_LA::GetInverse(temp);//ConvertComplex(T2.data));
 //			for (int i1 = 0; i1 < Inv.RSize(); i1++)
+//            {
 //				for (int j1 = 0; j1 < Inv.CSize(); j1++)
 //				{
 //					Inv[i1][j1].Real = T8[i1][j1].Real;
 //					Inv[i1][j1].Imag = T8[i1][j1].Imag;
 //				}
+//            }
 //
-//
-//     			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//				// Sauro: mult which takes compelx matrix need to be implemented
-//				//T3 = mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
-//
-//				// Finally include the dependent set as well.
-//				T4 = mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
-//    			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//				// Sauro: convertToDouble nees to be implemented
-//				//return Matrix.convertToDouble(T4);
-//		}
-//		else throw SBWApplicationException(emptyModelStr);
-//}
-//	catch (SBWException)
-//	{
-//		throw;
-//	}
-//	catch (Exception e)
-//	{
-//		throw SBWApplicationException(
-//			"Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message());
-//	}
+
+        // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+        // Sauro: mult which takes compelx matrix need to be implemented
+        //T3 = mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
+
+        // Finally include the dependent set as well.
+        T4 = mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
+        // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+        // Sauro: convertToDouble nees to be implemented
+        //return Matrix.convertToDouble(T4);    //T4 is already a 'real' matrix.
+//        return real(T4);
+    }
+	catch (const Exception& e)
+	{
+		throw SBWApplicationException(
+			"Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message());
+	}
 }
 
 //This just creates a copy?? remove and use = instead!?

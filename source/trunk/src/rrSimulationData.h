@@ -4,11 +4,12 @@
 #include <sstream>
 #include "rrObject.h"
 #include "rrStringList.h"
-#include "rrDoubleMatrix.h"
+#include "libstruct/lsMatrix.h"
 #include "rrExporter.h"
 namespace rr
 {
 
+using namespace LIB_LA;
 using std::ofstream;
 using std::stringstream;
 

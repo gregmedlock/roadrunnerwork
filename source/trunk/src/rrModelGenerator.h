@@ -10,11 +10,12 @@
 #include "rrLibStructSupport.h"
 #include "rrNOMSupport.h"
 #include "rrScanner.h"
+#include "libstruct/lsMatrix.h"
 
 using std::string;
 using std::vector;
 using std::list;
-
+using namespace LIB_LA;
 namespace rr
 {
 class RoadRunner;

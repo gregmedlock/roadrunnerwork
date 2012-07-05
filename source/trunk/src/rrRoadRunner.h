@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <string>
 #include "rrObject.h"
-#include "rrDoubleMatrix.h"
+#include "libstruct/lsMatrix.h"
 #include "rrTVariableType.h"
 #include "rrTParameterType.h"
 #include "rrCvodeInterface.h"

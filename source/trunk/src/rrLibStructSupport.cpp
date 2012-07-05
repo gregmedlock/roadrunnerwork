@@ -6,9 +6,8 @@
 #include "rrLibStructSupport.h"
 #include "rrException.h"
 #include "rrInteropUtils.h"
+
 //---------------------------------------------------------------------------
-
-
 
 namespace rr
 {
@@ -615,7 +614,7 @@ void StructAnalysis::GetL0MatrixLabels(vector<string>& sRowLabels, vector<string
 ////        /// <summary>
 ////        /// Get L matrix (link matrix)
 ////        /// </summary>
-DoubleMatrix* StructAnalysis::GetLinkMatrix()
+LIB_LA::DoubleMatrix* StructAnalysis::GetLinkMatrix()
 {
 	return mInstance->getLinkMatrix();
 }
@@ -1926,19 +1925,6 @@ string StructAnalysis::LoadSBML(const string& sbml)
 ////
 ////    } // class Conservation
 ////} // namespace libstructural
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }//namespace rr
