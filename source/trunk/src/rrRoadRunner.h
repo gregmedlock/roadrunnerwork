@@ -187,7 +187,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		/// </summary>
 		/// <param name="T2">The Matrix to calculate the Inverse for</param>
 		/// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
-		//static void                     GetInverse(Matrix T2, Matrix Inv);
+		void                            GetInverse(ComplexMatrix& T2, ComplexMatrix& Inv);
 
 		void                            computeContinuation(const double& stepSize, const int& independentVariable, const string& parameterTypeStr);
         ArrayList                       getUnscaledFluxControlCoefficientNames();

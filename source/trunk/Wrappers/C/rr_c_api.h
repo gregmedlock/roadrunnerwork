@@ -54,6 +54,7 @@ extern "C"
 #include "rr_c_types.h"
 
 //The latest
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getUnscaledConcentrationControlCoefficientMatrix();
 C_DECL_SPEC bool                    rrCallConv   setCapabilities (const char* caps);
 C_DECL_SPEC char*                   rrCallConv   getCapabilities();
 

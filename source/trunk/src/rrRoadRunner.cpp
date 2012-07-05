@@ -380,6 +380,10 @@ vector<double> RoadRunner::BuildModelEvalArgument()
 
 DoubleMatrix RoadRunner::runSimulation()
 {
+    if(mNumPoints == 1)
+    {
+        throw RRException("Division by zero in runSimulation");
+    }
     double hstep = (mTimeEnd - mTimeStart) / (mNumPoints - 1);
     int nrCols = selectionList.size();
     DoubleMatrix results(mNumPoints, nrCols);
@@ -1782,31 +1786,31 @@ double RoadRunner::getVariableValue(const TVariableType& variableType, const int
 }
 
 
-//        /// <summary>
-//        /// Fills the second argument with the Inverse of the first argument
-//        /// </summary>
-//        /// <param name="T2">The Matrix to calculate the Inverse for</param>
-//        /// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
-//        void RoadRunner::GetInverse(Matrix T2, Matrix Inv)
+/// <summary>
+/// Fills the second argument with the Inverse of the first argument
+/// </summary>
+/// <param name="T2">The Matrix to calculate the Inverse for</param>
+/// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
+void RoadRunner::GetInverse(ComplexMatrix& T2, ComplexMatrix& Inv)
+{
+    try
+    {
+//        ComplexMatrix T8 = LIB_LA::GetInverse(ConvertComplex(T2.data));
+//        for (int i1 = 0; i1 < Inv.nRows; i1++)
 //        {
-//            try
+//            for (int j1 = 0; j1 < Inv.nCols; j1++)
 //            {
-//                Complex[][] T8 = LA.GetInverse(ConvertComplex(T2.data));
-//                for (int i1 = 0; i1 < Inv.nRows; i1++)
-//                {
-//                    for (int j1 = 0; j1 < Inv.nCols; j1++)
-//                    {
-//                        Inv[i1, j1].Real = T8[i1][j1].Real;
-//                        Inv[i1, j1].Imag = T8[i1][j1].Imag;
-//                    }
-//                }
-//            }
-//            catch (Exception)
-//            {
-//                throw SBWApplicationException("Could not calculate the Inverse");
+//                Inv[i1, j1].Real = T8[i1][j1].Real;
+//                Inv[i1, j1].Imag = T8[i1][j1].Imag;
 //            }
 //        }
-//
+    }
+    catch (Exception)
+    {
+        throw SBWApplicationException("Could not calculate the Inverse");
+    }
+}
+
 // Help(
 //            "Derpar Continuation, stepSize = stepsize; independentVariable = index to parameter; parameterType = {'globalParameter', 'boundarySpecies'"
 //            )
@@ -3857,82 +3861,88 @@ double RoadRunner::getScaledFloatingSpeciesElasticity(const string& reactionName
 // [Help("Compute the matrix of unscaled concentration control coefficients")]
 LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatrix()
 {
-	try
-	{
-		if (modelLoaded)
-		{
-			ComplexMatrix Inv;
-			DoubleMatrix T1;
-			DoubleMatrix T2;
-			DoubleMatrix T3;
-			DoubleMatrix T4;
-			ComplexMatrix T8;
-			DoubleMatrix Jac;
-
-			setTimeStart(0.0);
-			setTimeEnd(50.0);
-			setNumPoints(1);
-			simulate();
-			if (steadyState() > STEADYSTATE_THRESHOLD)
-			{
-				if (steadyState() > 1E-2)
-					throw SBWApplicationException(
-					"Unable to locate steady state during frequency response computation");
-			}
-
-			LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
-			LIB_LA::DoubleMatrix Nr = getNrMatrix();
-			LIB_LA::DoubleMatrix LinkMatrix = getLinkMatrix();
-
-			Inv.resize (Nr.RSize(), LinkMatrix.CSize());
-			T2.resize (Nr.RSize(), LinkMatrix.CSize()); // Stores -Jac  and (-Jac)^-1
-			T3.resize (LinkMatrix.RSize(), 1); // Stores (-Jac)^-1 . Nr
-			T4.resize (Nr.RSize(), Nr.CSize());
-
-			// Compute the Jacobian first
-			T1.resize (Nr.RSize(), uelast.CSize());
-			T1 = mult(Nr, uelast);
-			Jac.resize (Nr.RSize(), LinkMatrix.CSize());
-			Jac = mult(T1, LinkMatrix);
-			// Compute -Jac
-			for (int i=0; i<Jac.RSize(); i++)
-				for (int j=0; i<Jac.CSize(); j++)
-					Jac[i][j] = -Jac[i][j];
-
-			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-			// Sauro: GetInverse needs to be implemented
-			//ComplexMatrix T8 = LIB_LA::GetInverse(ConvertComplex(T2.data));
-			for (int i1 = 0; i1 < Inv.RSize(); i1++)
-				for (int j1 = 0; j1 < Inv.CSize(); j1++)
-				{
-					Inv[i1][j1].Real = T8[i1][j1].Real;
-					Inv[i1][j1].Imag = T8[i1][j1].Imag;
-				}
-
-
-     			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-				// Sauro: mult which takes compelx matrix need to be implemented
-				//T3 = mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
-
-				// Finally include the dependent set as well.
-				T4 = mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
-    			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-				// Sauro: convertToDouble nees to be implemented
-				//return Matrix.convertToDouble(T4);
-		}
-		else throw SBWApplicationException(emptyModelStr);
-	}
-	catch (SBWException)
-	{
-		throw;
-	}
-	catch (Exception e)
-	{
-		throw SBWApplicationException(
-			"Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message());
-	}
+//	try
+//	{
+//		if (modelLoaded)
+//		{
+//			ComplexMatrix Inv;
+//			DoubleMatrix T1;
+//			DoubleMatrix T2;
+//			DoubleMatrix T3;
+//			DoubleMatrix T4;
+//			ComplexMatrix T8;
+//			DoubleMatrix Jac;
+//
+//			setTimeStart(0.0);
+//			setTimeEnd(50.0);
+//			setNumPoints(1);
+////	simulate();
+//			if (steadyState() > STEADYSTATE_THRESHOLD)
+//			{
+//				if (steadyState() > 1E-2)
+//					throw SBWApplicationException(
+//					"Unable to locate steady state during frequency response computation");
+//			}
+//
+//			LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
+//			LIB_LA::DoubleMatrix Nr = getNrMatrix();
+//			LIB_LA::DoubleMatrix LinkMatrix = getLinkMatrix();
+//
+//			Inv.resize (Nr.RSize(), LinkMatrix.CSize());
+//			T2.resize (Nr.RSize(), LinkMatrix.CSize()); // Stores -Jac  and (-Jac)^-1
+//			T3.resize (LinkMatrix.RSize(), 1); // Stores (-Jac)^-1 . Nr
+//			T4.resize (Nr.RSize(), Nr.CSize());
+//
+//			// Compute the Jacobian first
+//			T1.resize (Nr.RSize(), uelast.CSize());
+//			T1 = mult(Nr, uelast);
+//			Jac.resize (Nr.RSize(), LinkMatrix.CSize());
+//			Jac = mult(T1, LinkMatrix);
+//
+//			// Compute -Jac
+//			for (int i = 0; i < Jac.RSize(); i++)
+//            {
+//				for (int j = 0; i < Jac.CSize(); j++)
+//                {
+//					Jac[i][j] = -Jac[i][j];
+//                }
+//            }
+//
+//			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//			// Sauro: GetInverse needs to be implemented
+//			ComplexMatrix T8 = LIB_LA::GetInverse(ConvertComplex(T2.data));
+//			for (int i1 = 0; i1 < Inv.RSize(); i1++)
+//				for (int j1 = 0; j1 < Inv.CSize(); j1++)
+//				{
+//					Inv[i1][j1].Real = T8[i1][j1].Real;
+//					Inv[i1][j1].Imag = T8[i1][j1].Imag;
+//				}
+//
+//
+//     			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//				// Sauro: mult which takes compelx matrix need to be implemented
+//				//T3 = mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
+//
+//				// Finally include the dependent set as well.
+//				T4 = mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
+//    			// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+//				// Sauro: convertToDouble nees to be implemented
+//				//return Matrix.convertToDouble(T4);
+//		}
+//		else throw SBWApplicationException(emptyModelStr);
+//}
+//	catch (SBWException)
+//	{
+//		throw;
+//	}
+//	catch (Exception e)
+//	{
+//		throw SBWApplicationException(
+//			"Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message());
+//	}
 }
 
+//This just creates a copy?? remove and use = instead!?
 LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 {
 	ComplexMatrix oResult;

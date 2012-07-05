@@ -62,13 +62,11 @@ int main(int argc, char* argv[])
     setTempFolder("c:\\rrTemp");
 	//string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 	//string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-	string fileName = modelsPath + "\\ss_threestep.xml";
+	string fileName = modelsPath + "\\ss_threeSpecies.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
-		stringstream msg;
-		msg<<"Failed opening file: "<<fileName;
-		cerr<<msg.str();
+		cerr<<"Failed opening file: "<<fileName;
 		return false;
 	}
 	cout << "\nRunning model: " << fileName << endl;
@@ -239,6 +237,19 @@ int main(int argc, char* argv[])
 		printf ("%s", matStr);
 	printf ("\n\n");
 
+	printf (" ... :\n");
+	printf ("-------------------------\n\n");
+    setNumPoints(10);
+	matStr = printMatrix (getUnscaledConcentrationControlCoefficientMatrix());
+	if (!matStr)
+    {
+		printf ("ERROR in getScaledElasticityMatrix\n");
+        cerr<<getLastError()<<endl;
+    }
+	else
+		printf ("%s", matStr);
+	printf ("\n\n");
+
 	printf ("Elasticity Coefficient, EE^(_J1)_S1\n");
 	getEE("_J1", "S1", value);
 	printf ("Elasticity = %f\n", value);
@@ -306,11 +317,7 @@ int main(int argc, char* argv[])
     //cout<<printMatrix(getScaledElasticityMatrix());     //How to free, when doing something like this??
     //cout<<printList(getEigenValueNames());
 
-    //cout<<printList(getFluxControlCoefficientNames())<<endl;
-    //cout<<printList(getConcentrationControlCoefficientNames())<<endl;
-    //cout<<printList(getElasticityNames())<<endl;
-
-    //cout<<printList(getFluxControlCoefficientNames())<<endl;
+    cout<<printList(getFluxControlCoefficientNames())<<endl;
     //cout<<printList(getConcentrationControlCoefficientNames())<<endl;
     //cout<<printList(getElasticityNames())<<endl;
 
