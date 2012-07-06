@@ -127,7 +127,7 @@ type
   TSetTimeStart = TDoubleBoolFunc;
   TSetTimeEnd = TDoubleBoolFunc;
   TSetNumPoints = TIntBoolFunc;
-  TSimulateEx = function (var timeStart : double; var timeEnd : double; var numberOfPoints : integer) : PRRResultHandle;
+  TSimulateEx = function (var timeStart : double; var timeEnd : double; var numberOfPoints : integer) : PRRResultHandle; stdcall;
   TGetMatrix = function : PRRMatrixHandle; stdcall;
   TFreeRRResult = function (ptr : PRRResultHandle) : boolean; stdcall;
   TFreeRRInstance = procedure (instance : Pointer); stdcall;
@@ -525,6 +525,8 @@ var RRResult : PRRResultHandle;
     nr, nc : integer;
 begin
   RRResult := libSimulate;
+  if RRResult = nil then
+     raise Exception.Create (getLastError());
   try
      nr := RRResult^.RSize;
      nc := RRResult^.CSize;
@@ -544,6 +546,8 @@ var RRResult : PRRResultHandle;
     nr, nc : integer;
 begin
   RRResult := libSimulateEx (timeStart, timeEnd, numberOfPoints);
+  if RRResult = nil then
+     raise Exception.Create (getLastError());
   try
      nr := RRResult^.RSize;
      nc := RRResult^.CSize;
