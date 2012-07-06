@@ -458,7 +458,7 @@ bool RoadRunner::Simulate()
     if(!mModel)
     {
         Log(lError)<<"No model is loaded, can't simulate..";
-        return false;
+        throw(Exception("There is no model loaded, can't simulate"));
     }
 
     //Populate simulation result
