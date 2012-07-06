@@ -3767,12 +3767,12 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatri
         setTimeStart(0.0);
         setTimeEnd(50.0);
         setNumPoints(1);
-        simulate(); //This will crash, because numpoints == 1
+        simulate(); //This will crash, because numpoints == 1, not anymore, numPoints = 2 if numPoints <= 1
         if (steadyState() > STEADYSTATE_THRESHOLD)
         {
             if (steadyState() > 1E-2)
             {
-                throw SBWApplicationException("Unable to locate steady state during frequency response computation");
+                throw SBWApplicationException("Unable to locate steady state during control coefficient computation");
             }
         }
 
@@ -3784,40 +3784,18 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatri
         DoubleMatrix Jac = mult(T1, LinkMatrix);
 
         // Compute -Jac
-//        for (int i = 0; i < Jac.RSize(); i++)
-//        {
-//            for (int j = 0; j < Jac.CSize(); j++)       //TK changed i -> j
-//            {
-//                T2[i][j] = -Jac[i][j];      //Changed to T2
-//            }
-//        }
         DoubleMatrix T2 = Jac * (-1.0);
 
-        // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-        // Sauro: GetInverse needs to be implemented
         ComplexMatrix temp(T2); //Get a complex matrix from a double one. Imag part is zero
-        ComplexMatrix Inv = GetInverse(temp);//ConvertComplex(T2.data));
-//        ComplexMatrix Inv(T8);
-//		for (int i1 = 0; i1 < Inv.RSize(); i1++)
-//        {
-//            for (int j1 = 0; j1 < Inv.CSize(); j1++)
-//			{
-//				Inv[i1][j1].Real = T8[i1][j1].Real;
-//				Inv[i1][j1].Imag = T8[i1][j1].Imag;
-//			}
-//         }
+        ComplexMatrix Inv = GetInverse(temp);
 
         // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-        // Sauro: mult which takes compelx matrix need to be implemented
+        // Sauro: mult which takes complex matrix need to be implemented
         DoubleMatrix T3 = mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
 
         // Finally include the dependent set as well.
         DoubleMatrix T4 = mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
-
-        // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-        // Sauro: convertToDouble nees to be implemented
-        //return Matrix.convertToDouble(T4);    //T4 is already a 'real' matrix. ??
-        return T4;
+		return T4;
     }
 	catch (const Exception& e)
 	{
@@ -3834,48 +3812,47 @@ LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 	{
 		for (int j = 0; j < oMatrix.CSize(); j++)
 		{
-			//oResult[i][j] = new Complex();
 			oResult[i][j].Real = oMatrix[i][j].Real;
 			oResult[i][j].Imag = oMatrix[i][j].Imag;
 		}
 	}
 	return oResult;
 }
-//
-//        [Help("Compute the matrix of scaled concentration control coefficients")]
-//        double[][] getScaledConcentrationControlCoefficientMatrix()
-//        {
-//            try
-//            {
-//                if (modelLoaded)
-//                {
-//                    double[][] ucc = getUnscaledConcentrationControlCoefficientMatrix();
-//
-//                    if (ucc.Length > 0)
-//                    {
-//                        mModel->convertToConcentrations();
-//                        mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-//                        for (int i = 0; i < ucc.Length; i++)
-//                            for (int j = 0; j < ucc[0].Length; j++)
-//                            {
-//                                ucc[i][j] = ucc[i][j]*mModel->rates[j]/mModel->getConcentration(i);
-//                            }
-//                    }
-//                    return ucc;
-//                }
-//                else throw SBWApplicationException(emptyModelStr);
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (const Exception& e)
-//            {
-//                throw SBWApplicationException(
-//                    "Unexpected error from getScaledConcentrationControlCoefficientMatrix()", e.Message());
-//            }
-//        }
-//
+
+// [Help("Compute the matrix of scaled concentration control coefficients")]
+LIB_LA::DoubleMatrix RoadRunner::getScaledConcentrationControlCoefficientMatrix()
+{
+	try
+	{
+		if (modelLoaded)
+		{
+			DoubleMatrix ucc = getUnscaledConcentrationControlCoefficientMatrix();
+
+			if (ucc.size() > 0)
+			{
+				mModel->convertToConcentrations();
+				mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+				for (int i = 0; i < ucc.RSize(); i++)
+					for (int j = 0; j < ucc.CSize(); j++)
+					{
+						ucc[i][j] = ucc[i][j]*mModel->rates[j]/mModel->getConcentration(i);
+					}
+			}
+			return ucc;
+		}
+		else throw SBWApplicationException(emptyModelStr);
+	}
+	catch (SBWException)
+	{
+		throw;
+	}
+	catch (const Exception& e)
+	{
+		throw SBWApplicationException(
+			"Unexpected error from getScaledConcentrationControlCoefficientMatrix()", e.Message());
+	}
+}
+
 //
 //        // Use the formula: ucc = elast CS + I
 // [Help("Compute the matrix of unscaled flux control coefficients")]

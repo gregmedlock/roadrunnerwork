@@ -175,6 +175,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		DoubleMatrix                    getStoichiometryMatrix();
 		DoubleMatrix                    getConservationMatrix();
 		DoubleMatrix                    getUnscaledConcentrationControlCoefficientMatrix();
+		DoubleMatrix                    getScaledConcentrationControlCoefficientMatrix();
         DoubleMatrix                    getUnscaledFluxControlCoefficientMatrix();
         DoubleMatrix                    getScaledFluxControlCoefficientMatrix();
 		int                             getNumberOfDependentSpecies();

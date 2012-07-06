@@ -54,7 +54,6 @@ extern "C"
 #include "rr_c_types.h"
 
 //The latest
-C_DECL_SPEC RRMatrixHandle          rrCallConv   getUnscaledConcentrationControlCoefficientMatrix();
 C_DECL_SPEC bool                    rrCallConv   setCapabilities (const char* caps);
 C_DECL_SPEC char*                   rrCallConv   getCapabilities();
 
@@ -119,7 +118,6 @@ C_DECL_SPEC RRMatrixHandle          rrCallConv   getFullJacobian();
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getReducedJacobian();
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getEigenvalues();
 
-
 // Stoichiometry methods
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getStoichiometryMatrix();
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getLinkMatrix();
@@ -171,9 +169,12 @@ C_DECL_SPEC RRStringListHandle      rrCallConv   getUnscaledFluxControlCoefficie
 C_DECL_SPEC RRStringListHandle      rrCallConv   getFluxControlCoefficientNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getUnscaledConcentrationControlCoefficientNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getConcentrationControlCoefficientNames();
-C_DECL_SPEC RRMatrixHandle          rrCallConv   getUnScaledElasticityMatrix();
 
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getUnScaledElasticityMatrix();
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getScaledElasticityMatrix();
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getUnscaledConcentrationControlCoefficientMatrix();
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getScaledConcentrationControlCoefficientMatrix();
+
 C_DECL_SPEC bool                    rrCallConv   getCC(const char* variable, const char* parameter, double& value);
 C_DECL_SPEC bool                    rrCallConv   getEE(const char* name, const char* species, double& value);
 C_DECL_SPEC bool                    rrCallConv   getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);

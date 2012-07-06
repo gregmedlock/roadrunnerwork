@@ -251,6 +251,20 @@ int main(int argc, char* argv[])
     }
 	printf ("\n\n");
 
+	printf ("Scaled Concentration Control Coefficients Matrix:\n");
+	printf ("-------------------------------------------------\n\n");
+	matStr = printMatrix (getScaledConcentrationControlCoefficientMatrix());
+	if (!matStr)
+    {
+		printf ("ERROR in getScaledConcentrationControlCoefficientMatrix\n");
+        cerr<<getLastError()<<endl;
+    }
+	else
+    {
+		printf ("%s", matStr);
+    }
+	printf ("\n\n");
+
 	printf ("Elasticity Coefficient, EE^(_J1)_S1\n");
 	getEE("_J1", "S1", value);
 	printf ("Elasticity = %f\n", value);
