@@ -237,9 +237,8 @@ int main(int argc, char* argv[])
 		printf ("%s", matStr);
 	printf ("\n\n");
 
-	printf (" ... :\n");
-	printf ("-------------------------\n\n");
-    setNumPoints(10);
+	printf ("Unscaled Concentration Control Coefficients Matrix:\n");
+	printf ("---------------------------------------------------\n\n");
 	matStr = printMatrix (getUnscaledConcentrationControlCoefficientMatrix());
 	if (!matStr)
     {
