@@ -39,7 +39,7 @@ DLLEXPORT int STDCALL NLEQ1(integer *n, U_fp fcn, U_fp jac, doublereal *x,
 {
 	/* Initialized data */
 
-	static char prodct[8] = "NLEQ1   ";
+	static char prodct[8] = "NLEQ1  ";
 
 	/* Format strings */
 	static char fmt_10000[] = "(\002   N L E Q 1  *****  V e r s i o n "

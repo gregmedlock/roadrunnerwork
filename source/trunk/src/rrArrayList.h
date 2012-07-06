@@ -16,9 +16,13 @@ template <class T>
 class ArrayListItem
 {
     public:
-        ArrayListItem          *mPrevious;
-        list<ArrayListItem<T>* >     value;
-        ArrayListItem          *mNext;
+        ArrayListItem          			   *mPrevious;
+        T		     						value;
+        ArrayListItem          			   *mNext;
+        									ArrayListItem(const T& item)
+                                            {
+                                            	value = (item);
+                                            }
 };
 
 template <class T>
@@ -26,37 +30,66 @@ class ArrayList : public rrObject
 {
     //This list can only hold items of type T
     protected:
-        ArrayListItem<T>               *mPrevious;
-        list< ArrayListItem<T>* >      *mNext;
-        ArrayListItem<T>               *mCurrent;
+        ArrayListItem<T>               	   			*mPrevious;
+        ArrayListItem<T>		      	   			*mNext;
+        //ArrayListItem<T>               	   		*mCurrent;
+    public:
+        list< ArrayListItem<T>* >		   			mList;	//Contains current list items..
 
     public:
-                                        ArrayList();
+                                        			ArrayList();
+		mutable list< ArrayListItem<T>* >::const_iterator  		mIter;
+        ArrayListItem<T>*	 						GetFirst() {return mList.begin();}
+        ArrayListItem<T>*				   			GetLast()  {return mList.end();}
 //                                        ArrayList(const ArrayList& cp);
 //                                        ArrayList(const StringList& cp);
 //        void                            operator=(const ArrayList& rhs);
 //        void                            Add(const ArrayList<T>& list);
 //        void                            Clear();
 
-//        void                            Add(const T& item);
+		void                            Add(const T& item);
+        void							Add(const ArrayList<T>& subList);
 //        void                            Add(const string& listName, const StringList& coll);
 //        void                            Add(const StringList& coll);
 
 
-//        int                             Count() const;
-//        int                             ListCount() const;
-//        int                             TotalCount() const;
+        int                             Count() const;
 //        StringList&                     operator[](const int& index);
 //        const StringList&               operator[](const int& index) const;
 //        vector<StringList>::iterator    begin();
 //        vector<StringList>::iterator    end();
 };
 
-//ostream& operator<<(ostream& stream, const ArrayList& list);
+template<class T>
+ostream& operator<<(ostream& stream, ArrayList<T>& list);
 
 template<class T>
-ArrayList<T>::ArrayList()
+ArrayList<T>::ArrayList(){}
+
+template<class T>
+void ArrayList<T>::Add(const T& _item)
 {
+	ArrayListItem<T> *item = new ArrayListItem<T>(_item);
+    if(Count())
+    {
+    	//Get last item, not part of a sub list
+
+    	item->mPrevious = mList.back();
+        item->mNext = NULL;
+        item->mPrevious->mNext = item;
+    }
+    mList.push_back(item);
+}
+
+template<class T>
+void ArrayList<T>::Add(const ArrayList<T>& subList)
+{
+	subList.mIter = subList.mList.begin();
+    while(subList.mIter != subList.mList.end())
+    {
+    	mList.push_back(*(subList.mIter));
+        subList.mIter++;
+    }
 }
 
 //template<class T>
@@ -89,29 +122,11 @@ ArrayList<T>::ArrayList()
 //
 //}
 
-//template<class T>
-//int ArrayList::TotalCount() const
-//{
-//    //Returns the total count of all list items..
-//    int cnt = 0;
-//    for(int i = 0; i < Count(); i++)
-//    {
-//        cnt += mContainer[i].Count();
-//    }
-//    return cnt;
-//}
-
-//template<class T>
-//int ArrayList::ListCount() const
-//{
-//    return mContainer.size();
-//}
-//
-//template<class T>
-//int ArrayList::Count() const
-//{
-//    return mContainer.size();
-//}
+template<class T>
+int ArrayList<T>::Count() const
+{
+    return mList.size();
+}
 
 //template<class T>
 //StringList& ArrayList::operator[](const int& index)
@@ -160,13 +175,6 @@ ArrayList<T>::ArrayList()
 //    mContainer.push_back(list);
 //}
 
-//template<class T>
-//void ArrayList<T>::Add(const string& listName, const StringList& aList)
-//{
-//    StringList list(aList);
-//    list.Label(listName);
-//    mContainer.push_back(list);
-//}
 //
 //template<class T>
 //void ArrayList<T>::Add(const string& item)
@@ -183,16 +191,32 @@ ArrayList<T>::ArrayList()
 //
 //}
 
-//ostream& operator<<(ostream& stream, const ArrayList& list)
-//{
-//    vector<StringList>::iterator iter;
-//    for(int  i = 0; i < list.Count(); i++)
-//    {
-//        string item = list[i].AsString();
-//        stream<<"List Item "<<i+1<<" : "<<item<<endl;
-//    }
-//    return stream;
-//}
-//
+template<class T>
+ostream& operator<<(ostream& stream, ArrayList<T>& list)
+{
+    int i = 0;
+    for(list.mIter = list.mList.begin(); list.mIter != list.mList.end(); list.mIter++)
+    {
+        ArrayListItem<T>* item = (*list.mIter);
+        if(item->mPrevious == NULL)
+        {
+        	stream<<"{";
+        }
+
+        stream<<item->value;
+        if(item->mNext)
+        {
+        	stream<<",";
+        }
+        else
+        {
+        	stream<<"}";
+        }
+        i++;
+    }
+    stream<<endl;
+    return stream;
+}
+
 }
 #endif
