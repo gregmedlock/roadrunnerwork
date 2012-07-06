@@ -385,7 +385,10 @@ DoubleMatrix RoadRunner::runSimulation()
     {
         throw RRException("Division by zero in runSimulation");
     }
-    double hstep = (mTimeEnd - mTimeStart) / (mNumPoints - 1);
+    if (mNumPoints <= 1)
+		mNumPoints = 2;
+
+	double hstep = (mTimeEnd - mTimeStart) / (mNumPoints - 1);
     int nrCols = selectionList.size();
     DoubleMatrix results(mNumPoints, nrCols);
 
@@ -3749,7 +3752,7 @@ double RoadRunner::getScaledFloatingSpeciesElasticity(const string& reactionName
 //        }
 //
 //
-//        // Use the formula: ucc = -L Jac^-1 Nr
+// Use the formula: ucc = -L Jac^-1 Nr
 // [Help("Compute the matrix of unscaled concentration control coefficients")]
 LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatrix()
 {
@@ -3763,7 +3766,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatri
         setTimeStart(0.0);
         setTimeEnd(50.0);
         setNumPoints(1);
-        //	simulate(); //This will crash, because numpoints == 1
+        simulate(); //This will crash, because numpoints == 1
         if (steadyState() > STEADYSTATE_THRESHOLD)
         {
             if (steadyState() > 1E-2)
