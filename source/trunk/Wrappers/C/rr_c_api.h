@@ -94,6 +94,9 @@ C_DECL_SPEC RRStringListHandle      rrCallConv   getSelectionList();
 C_DECL_SPEC RRResultHandle          rrCallConv   simulate();
 C_DECL_SPEC RRResultHandle          rrCallConv   simulateEx(const double& timeStart, const double& timeEnd, const int& numberOfPoints);
 C_DECL_SPEC bool                  	rrCallConv   oneStep(const double& currentTime, const double& stepSize, double& value);
+C_DECL_SPEC bool                    rrCallConv   getTimeStart(double& timeStart);
+C_DECL_SPEC bool                    rrCallConv   getTimeEnd(double& timeEnd);
+C_DECL_SPEC bool                    rrCallConv   getNumPoints (int& numPoints);
 
 // Steady state methods
 C_DECL_SPEC bool                    rrCallConv   steadyState(double& value);

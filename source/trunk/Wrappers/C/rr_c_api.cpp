@@ -341,6 +341,75 @@ bool rrCallConv setNumPoints(const int& nrPoints)
   	return false;
 }
 
+bool rrCallConv getTimeStart(double& timeStart)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+		timeStart = gRRHandle->getTimeStart();
+		return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+  	return false;
+}
+
+
+bool rrCallConv getTimeEnd(double& timeEnd)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+		timeEnd = gRRHandle->getTimeEnd();
+		return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+  	return false;
+}
+
+
+bool rrCallConv getNumPoints(int& numPoints)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+		numPoints = gRRHandle->getNumPoints();
+		return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+  	return false;
+}
+
+
 bool  rrCallConv setSelectionList(const char* list)
 {
 	try

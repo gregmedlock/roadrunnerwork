@@ -4388,12 +4388,31 @@ void RoadRunner::setNumPoints(const int& pts)
         throw SBWApplicationException(emptyModelStr);
     }
 
-    mNumPoints = (pts <= 0) ? 1 : pts;
+    mNumPoints = (pts <= 0) ? 2 : pts;
 }
-//
+
+
+// [Help("get the currently set time start")]
+double RoadRunner::getTimeStart()
+{
+    return mTimeStart;
+}
+
+// [Help("get the currently set time end")]
+double RoadRunner::getTimeEnd()
+{
+   return mTimeEnd;
+}
+
+// [Help("get the currently set number of points")]
+int RoadRunner::getNumPoints()
+{
+   return mNumPoints;
+}
+
+
 // Help(
-//            "Change the initial conditions to another concentration vector (changes only initial conditions for floating Species)"
-//            )
+//            "Change the initial conditions to another concentration vector (changes only initial conditions for floating Species)")
 void RoadRunner::changeInitialConditions(const vector<double>& ic)
 {
     if (!mModel)
