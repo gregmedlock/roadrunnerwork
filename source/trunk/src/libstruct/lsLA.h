@@ -2,7 +2,9 @@
 #ifndef lsLAH
 #define lsLAH
 //---------------------------------------------------------------------------
+#include "lsLibutil.h"
 #include "lsMatrix.h"
+
 namespace LIB_LA
 {
 
@@ -45,29 +47,6 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">a square real matrix</param>
 //        public static Complex[] GetEigenValues(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr pointerReal; IntPtr pointerImag; int nLength;
-//            if (LibLA_getEigenValues(pointer, nRows, nCols, out pointerReal, out pointerImag, out nLength) < 0)
-//            {
-//                InteropUtil.FreePtrMatrix(pointer, nRows);
-//                throw new Exception("The eigenvalues could not be computed, only square matrices are supported.");
-//            } // if (LibLA_getEigenValues)
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            double[] realTemp = InteropUtil.GetDoubleArrayFromPtr(pointerReal, nLength);
-//            double[] imagTemp = InteropUtil.GetDoubleArrayFromPtr(pointerImag, nLength);
-//
-//            Complex[] oResult = new Complex[nLength];
-//            for (int i = 0; i < nLength; i++)
-//            {
-//                oResult[i] = new Complex(realTemp[i], imagTemp[i]);
-//            } // for (int)
-//            return oResult;
-//        } // GetEigenValues(oMatrix)
 //
 //        /// <summary>
 //        /// Calculates the eigen-values of a square complex matrix that has been split up
@@ -76,51 +55,11 @@ namespace LIB_LA
 //        /// <param name="oMatrixReal">real part of the complex matrix</param>
 //        /// <param name="oMatrixImag">imaginary part of the complex matrix</param>
 //        public static Complex[] GetEigenValues(double[][] oMatrixReal, double[][] oMatrixImag)
-//        {
-//            IntPtr pointerReal; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrixReal, out pointerReal, out nRows, out nCols);
-//            IntPtr pointerImag;
-//            InteropUtil.MapMatrixToPointer(oMatrixImag, out pointerImag, out nRows, out nCols);
-//
-//            IntPtr oReal; IntPtr oImag; int nLength;
-//            if (LibLA_ZgetEigenValues(pointerReal, pointerImag, nRows, nCols, out oReal, out oImag, out nLength) < 0)
-//            {
-//                InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//                InteropUtil.FreePtrMatrix(pointerImag, nRows);
-//                throw new Exception("The eigenvalues could not be computed, only square matrices are supported.");
-//            } // if (LibLA_ZgetEigenValues)
-//
-//            InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//            InteropUtil.FreePtrMatrix(pointerImag, nRows);
-//
-//            return InteropUtil.GetComplexArrayFromPtr(oReal, oImag, nLength);
-//        } // GetEigenValues(oMatrixReal, oMatrixImag)
-//
-//
 //        /// <summary>
 //        /// Calculates the eigen-values of a square complex matrix.
 //        /// </summary>
 //        /// <param name="oMatrix">the square complex matrix</param>
 //        public static Complex[] GetEigenValues(Complex[][] oMatrix)
-//        {
-//            double[][] oReal = new double[oMatrix.Length][];
-//            double[][] oImag = new double[oMatrix.Length][];
-//
-//            for (int i = 0; i < oMatrix.Length; i++)
-//            {
-//                oReal[i] = new double[oMatrix[i].Length];
-//                oImag[i] = new double[oMatrix[i].Length];
-//
-//                for (int j = 0; j < oMatrix[i].Length; j++)
-//                {
-//                    oReal[i][j] = oMatrix[i][j].Real;
-//                    oImag[i][j] = oMatrix[i][j].Imag;
-//                } // for (int)
-//            } // for (int)
-//
-//            return GetEigenValues(oReal, oImag);
-//        } // GetEigenValues(oMatrix)
-//
 //        /// <summary>
 //        /// <para>This method calculates the fully pivoted Gauss Jordan Form of the given matrix.
 //        /// Fully pivoted here means, that row as well as column swaps will be used. These
@@ -134,26 +73,6 @@ namespace LIB_LA
 //        /// <param name="rowPivots">a vector of row permutations</param>
 //        /// <param name="colPivots">a vector of column permutations</param>
 //        public static double[][] GetFullyPivotedGaussJordan(double[][] oMatrix, out int[] rowPivots, out int[] colPivots)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr pointerMatrix; int nMatrixRows; int nMatrixCols;
-//            IntPtr rowPivotArray; int nRowLength; IntPtr colPivotArray; int nColLength;
-//            LibLA_fullyPivotedGaussJordan(pointer, nRows, nCols,
-//                out pointerMatrix, out nMatrixRows, out nMatrixCols,
-//                out rowPivotArray, out nRowLength, out colPivotArray, out nColLength);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            rowPivots = InteropUtil.GetIntArrayFromPtr(rowPivotArray, nRowLength);
-//            colPivots = InteropUtil.GetIntArrayFromPtr(colPivotArray, nColLength);
-//
-//            return InteropUtil.GetDoubleMatrixFromPtr(pointerMatrix, nMatrixRows, nMatrixCols);
-//
-//        } // GetFullyPivotedGaussJordan(oMatrix, rowPivots, colPivots)
-//
-//
 //        /// <summary>
 //        /// This method calculates the fully pivoted Gauss Jordan Form of the given matrix.
 //        /// Fully pivoted here means, that row as well as column swaps will be used. These
@@ -162,12 +81,6 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">the matrix to be brought into (fully pivoted) Gauss Jordan Form</param>
 //        public static double[][] GetFullyPivotedGaussJordan(double[][] oMatrix)
-//        {
-//            int[] rowPivots; int[] colPivots;
-//            return GetFullyPivotedGaussJordan(oMatrix, out rowPivots, out colPivots);
-//        } // GetFullyPivotedGaussJordan(oMatrix)
-//
-//
 //        /// <summary>
 //        /// <para>This method calculates the Gauss Jordan or row echelon Form of the given matrix.
 //        /// Only that row swaps will be used. These permutations will be returned in the 'pivots'
@@ -179,21 +92,6 @@ namespace LIB_LA
 //        /// <param name="oMatrix">the matrix to be brought into Gauss Jordan Form</param>
 //        /// <param name="pivots">the vector of row permutations that have been used</param>
 //        public static double[][] GetGaussJordan(double[][] oMatrix, out int[] pivots)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr pointerMatrix; int nMatrixRows; int nMatrixCols; IntPtr pivotArray; int nLength;
-//            LibLA_gaussJordan(pointer, nRows, nCols, out pointerMatrix, out nMatrixRows, out nMatrixCols, out pivotArray, out nLength);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            pivots = InteropUtil.GetIntArrayFromPtr(pivotArray, nLength);
-//
-//            return InteropUtil.GetDoubleMatrixFromPtr(pointerMatrix, nMatrixRows, nMatrixCols);
-//
-//        } // GetGaussJordan(oMatrix, pivots)
-//
 //        ///<summary>
 //        /// This method calculates the Gauss Jordan or row echelon Form of the given matrix.
 //        /// Only that row swaps will be used. These permutations will not be returned by this method.
@@ -201,11 +99,6 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">the matrix to be brought into Gauss Jordan Form</param>
 //        public static double[][] GetGaussJordan(double[][] oMatrix)
-//        {
-//            int[] pivots;
-//            return GetGaussJordan(oMatrix, out pivots);
-//        } // GetGaussJordan(oMatrix)
-//
 //
 //        /// <summary>
 //        /// <para>This function calculates the inverse of a square complex matrix. Employing the CLAPACK
@@ -216,7 +109,7 @@ namespace LIB_LA
 //        ///
 //        /// </summary>
 //        /// <param name="oMatrix">a square complex matrix</param>
-    ComplexMatrix GetInverse(const ComplexMatrix& oMatrix);
+LIB_EXTERN ComplexMatrix GetInverse(const ComplexMatrix& oMatrix);
 //
 //        /// <summary>
 //        /// Calculates the eigen-vectors of a square real matrix.
@@ -232,24 +125,6 @@ namespace LIB_LA
 //        /// <param name="oMatrix">a real matrix</param>
 //        /// <returns>the complex eigenvectors of the matrix</returns>
 //        public static Complex[][] GetEigenVectors(double[][] oMatrix)
-//        {
-//            IntPtr pointerReal; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointerReal, out nRows, out nCols);
-//
-//            System.IntPtr outMatrixReal; System.IntPtr outMatrixImag; int outRows; int outCols;
-//            if (LibLA_getEigenVectors(pointerReal, nRows, nCols,
-//                out outMatrixReal, out outMatrixImag, out outRows, out outCols) < 0)
-//            {
-//                InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//                throw new Exception("The Eigen Vectors could not be computed.");
-//            }
-//
-//            InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//
-//            return InteropUtil.GetComplexMatrixFromPtr(outMatrixReal, outMatrixImag, outRows, outCols);
-//
-//        }
-//
 //        /// <summary>
 //        /// Factorizes the given matrix using SVD.
 //        ///
@@ -267,31 +142,6 @@ namespace LIB_LA
 //        /// <param name="singVals">(output) will be initialized with the min(M,N) singular values, returned in descending order </param>
 //        /// <param name="vMatrix">(output) will be initialized with the N by N orthogonal matrix V </param>
 //        public static void GetSVD(double[][] oMatrix, out double[][] uMatrix, out double[] singVals, out double[][] vMatrix)
-//        {
-//            IntPtr pointerReal; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointerReal, out nRows, out nCols);
-//
-//            IntPtr uMatrixPtr; int rowsU; int colsU;
-//            IntPtr singValsPtr; int length;
-//            IntPtr vMatrixPtr; int rowsV; int colsV;
-//
-//            if (LibLA_getSVD(pointerReal, nRows, nCols,
-//                out uMatrixPtr, out rowsU, out colsU,
-//                out singValsPtr, out length,
-//                out vMatrixPtr, out rowsV, out colsV) < 0)
-//            {
-//                InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//                throw new Exception("Error during singular value decomposition (SVD)");
-//            }
-//
-//            InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//
-//            uMatrix = InteropUtil.GetDoubleMatrixFromPtr(uMatrixPtr, rowsU, colsU);
-//            singVals = InteropUtil.GetDoubleArrayFromPtr(singValsPtr, length);
-//            vMatrix = InteropUtil.GetDoubleMatrixFromPtr(vMatrixPtr, rowsV, colsV);
-//
-//        }
-//
 //        /// <summary>
 //        /// Factorizes the given matrix using SVD.
 //        ///
@@ -309,13 +159,6 @@ namespace LIB_LA
 //        /// <param name="singVals">(output) will be initialized with the min(M,N) singular values, returned in descending order </param>
 //        /// <param name="vMatrix">(output) will be initialized with the N by N orthogonal matrix V </param>
 //        public static void GetSVD(Complex[][] oMatrix, out Complex[][] uMatrix, out double[] singVals, out Complex[][] vMatrix)
-//        {
-//            double[][] oMatrixReal; double[][] oMatrixImag;
-//            SplitComplexMatrix(oMatrix, out oMatrixReal, out oMatrixImag);
-//
-//            GetSVD(oMatrixReal, oMatrixImag, out uMatrix, out singVals, out vMatrix);
-//        }
-//
 //        /// <summary>
 //        /// Factorizes the given matrix using SVD.
 //        ///
@@ -334,35 +177,6 @@ namespace LIB_LA
 //        /// <param name="singVals">(output) will be initialized with the min(M,N) singular values, returned in descending order </param>
 //        /// <param name="vMatrix">(output) will be initialized with the N by N orthogonal matrix V </param>
 //        public static void GetSVD(double[][] oMatrixReal, double[][] oMatrixImag, out Complex[][] uMatrix, out double[] singVals, out Complex[][] vMatrix)
-//        {
-//            IntPtr pointerReal; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrixReal, out pointerReal, out nRows, out nCols);
-//            IntPtr pointerImag;
-//            InteropUtil.MapMatrixToPointer(oMatrixImag, out pointerImag, out nRows, out nCols);
-//
-//            IntPtr uMatrixPtrReal; IntPtr uMatrixPtrImag; int rowsU; int colsU;
-//            IntPtr singValsPtr; int length;
-//            IntPtr vMatrixPtrReal; IntPtr vMatrixPtrImag; int rowsV; int colsV;
-//
-//            if (LibLA_ZgetSVD(pointerReal, pointerImag, nRows, nCols,
-//                out uMatrixPtrReal, out uMatrixPtrImag, out rowsU, out colsU,
-//                out singValsPtr, out length,
-//                out vMatrixPtrReal, out vMatrixPtrImag, out rowsV, out colsV) < 0)
-//            {
-//                InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//                InteropUtil.FreePtrMatrix(pointerImag, nRows);
-//                throw new Exception("Error during singular value decomposition (SVD)");
-//            }
-//
-//            InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//            InteropUtil.FreePtrMatrix(pointerImag, nRows);
-//
-//            uMatrix = InteropUtil.GetComplexMatrixFromPtr(uMatrixPtrReal, uMatrixPtrImag, rowsU, colsU);
-//            singVals = InteropUtil.GetDoubleArrayFromPtr(singValsPtr, length);
-//            vMatrix = InteropUtil.GetComplexMatrixFromPtr(vMatrixPtrReal, vMatrixPtrImag, rowsV, colsV);
-//
-//        }
-//
 //        /// <summary>
 //        /// Calculates the eigen-vectors of a complex matrix (separated into real and imaginary parts).
 //        ///
@@ -377,12 +191,6 @@ namespace LIB_LA
 //        /// <param name="oMatrix">the complex matrix</param>
 //        /// <returns>the complex eigenvectors of the matrix</returns>
 //        public static Complex[][] GetEigenVectors(Complex[][] oMatrix)
-//        {
-//            double[][] real; double[][] complex;
-//            SplitComplexMatrix(oMatrix, out real, out complex);
-//            return GetEigenVectors(real, complex);
-//        }
-//
 //        /// <summary>
 //        /// Calculates the eigen-vectors of a complex matrix (separated into real and imaginary parts).
 //        ///
@@ -398,51 +206,13 @@ namespace LIB_LA
 //        /// <param name="oMatrixImag">the imaginary part of the matrix</param>
 //        /// <returns>the complex eigenvectors of the matrix</returns>
 //        public static Complex[][] GetEigenVectors(double[][] oMatrixReal, double[][] oMatrixImag)
-//        {
-//            IntPtr pointerReal; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrixReal, out pointerReal, out nRows, out nCols);
-//            IntPtr pointerImag;
-//            InteropUtil.MapMatrixToPointer(oMatrixImag, out pointerImag, out nRows, out nCols);
-//
-//            System.IntPtr outMatrixReal; System.IntPtr outMatrixImag; int outRows; int outCols;
-//            if (LibLA_ZgetEigenVectors(pointerReal, pointerImag, nRows, nCols,
-//                out outMatrixReal, out outMatrixImag, out outRows, out outCols) < 0)
-//            {
-//                InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//                InteropUtil.FreePtrMatrix(pointerImag, nRows);
-//                throw new Exception("The Eigen Vectors could not be computed.");
-//            }
-//
-//            InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//            InteropUtil.FreePtrMatrix(pointerImag, nRows);
-//
-//            return InteropUtil.GetComplexMatrixFromPtr(outMatrixReal, outMatrixImag, outRows, outCols);
-//
-//        }
-//
 //        /// <summary>
 //        /// Splits the given complex matrix into its real and imaginary matrix
 //        /// </summary>
 //        /// <param name="oMatrix">complex matrix</param>
 //        /// <param name="oReal">matrix holding the real part</param>
 //        /// <param name="oImag">matrix holding the imaginary part</param>
-//        private static void SplitComplexMatrix(Complex[][] oMatrix, out double[][] oReal, out double[][] oImag)
-//        {
-//            oReal = new double[oMatrix.Length][];
-//            oImag = new double[oMatrix.Length][];
-//
-//            for (int i = 0; i < oMatrix.Length; i++)
-//            {
-//                oReal[i] = new double[oMatrix[i].Length];
-//                oImag[i] = new double[oMatrix[i].Length];
-//
-//                for (int j = 0; j < oMatrix[i].Length; j++)
-//                {
-//                    oReal[i][j] = oMatrix[i][j].Real;
-//                    oImag[i][j] = oMatrix[i][j].Imag;
-//                } // for (int)
-//            } // for (int)
-//        }
+LIB_EXTERN void SplitComplexMatrix(const ComplexMatrix& oMatrix, DoubleMatrix& oReal, DoubleMatrix& oImag);
 //        /// <summary>
 //        /// <para>This function calculates the inverse of a square complex matrix. Employing the CLAPACK
 //        /// functions: zgetrf and zgetri. That is first the matrix will be factorized using LU
@@ -453,29 +223,8 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrixImag">The imaginary part of the matrix</param>
 //        /// <param name="oMatrixReal">The real part of the matrix</param>
-//        public static Complex[][] GetInverse(double[][] oMatrixReal, double[][] oMatrixImag)
-//        {
-//            IntPtr pointerReal; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrixReal, out pointerReal, out nRows, out nCols);
-//            IntPtr pointerImag;
-//            InteropUtil.MapMatrixToPointer(oMatrixImag, out pointerImag, out nRows, out nCols);
-//
-//            System.IntPtr outMatrixReal; System.IntPtr outMatrixImag; int outRows; int outCols;
-//            if (LibLA_Zinverse(pointerReal, pointerImag, nRows, nCols,
-//                out outMatrixReal, out outMatrixImag, out outRows, out outCols) < 0)
-//            {
-//                InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//                InteropUtil.FreePtrMatrix(pointerImag, nRows);
-//                throw new Exception("The Inverse could not be computed, only square matrices have an inverse.");
-//            } // if (LibLA_Zinverse)
-//
-//            InteropUtil.FreePtrMatrix(pointerReal, nRows);
-//            InteropUtil.FreePtrMatrix(pointerImag, nRows);
-//
-//            return InteropUtil.GetComplexMatrixFromPtr(outMatrixReal, outMatrixImag, outRows, outCols);
-//
-//        } // GetInverse(oMatrixReal, oMatrixImag)
-//
+//LIB_EXTERN ComplexMatrix GetInverse(const DoubleMatrix& oMatrixReal, const DoubleMatrix& oMatrixImag);
+
 //        /// <summary>
 //        /// <para>This function calculates the inverse of a square real matrix. Employing the CLAPACK
 //        /// functions: dgetrf and dgetri. That is first the matrix will be factorized using LU
@@ -486,23 +235,7 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">a square real matrix</param>
 //        public static double[][] GetInverse(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr pointerMatrix; int nMatrixRows; int nMatrixCols;
-//            if (LibLA_inverse(pointer, nRows, nCols, out pointerMatrix, out nMatrixRows, out nMatrixCols) < 0)
-//            {
-//                InteropUtil.FreePtrMatrix(pointer, nRows);
-//                throw new Exception("The Inverse could not be computed, only square matrices have an inverse.");
-//            } // if (LibLA_inverse)
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return InteropUtil.GetDoubleMatrixFromPtr(pointerMatrix, nMatrixRows, nMatrixCols);
-//
-//        } // GetInverse(oMatrix)
-//
+
 //        /// <summary>
 //        /// <para>This function calculates the left null space of a given real matrix. That is:</para>
 //        ///
@@ -513,19 +246,6 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">The real matrix for which to compute the left null space</param>
 //        public static double[][] GetLeftNullSpace(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr pointerMatrix; int nMatrixRows; int nMatrixCols;
-//            LibLA_leftNullspace(pointer, nRows, nCols, out pointerMatrix, out nMatrixRows, out nMatrixCols);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return InteropUtil.GetDoubleMatrixFromPtr(pointerMatrix, nMatrixRows, nMatrixCols);
-//
-//        } // GetLeftNullSpace(oMatrix)
-//
 //        /// <summary>
 //        /// <para>This function computes the LU factorization of the given real M-by-N matrix A
 //        /// using partial pivoting with row interchanges. This procedure is carried out by the LAPACK method dgetrf.</para>
@@ -535,27 +255,6 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">real M-by-N matrix</param>
 //        public static LUResult GetLU(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            System.IntPtr L; int nLRows; int nLCols;
-//            System.IntPtr U; int nURows; int nUCols;
-//            System.IntPtr P; int nPRows; int nPCols;int info;
-//
-//            LibLA_getLU(pointer, nRows, nCols,
-//                out L, out nLRows, out nLCols,
-//                out U, out nURows, out nUCols,
-//                out P, out nPRows, out nPCols,out info);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return new LUResult(info,
-//                InteropUtil.GetDoubleMatrixFromPtr(L, nLCols, nLCols),
-//                InteropUtil.GetDoubleMatrixFromPtr(U, nUCols, nUCols),
-//                InteropUtil.GetIntMatrixFromPtr(P, nPCols, nPCols)
-//                );
-//        } // GetLU(oMatrix)
 //
 //        /// <summary>
 //        /// <para>This function computes the LU factorization of the given real N-by-N matrix A
@@ -566,34 +265,6 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">real N-by-N matrix</param>
 //        public static LUResult GetLUWithPivoting(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            System.IntPtr L; int nLRows; int nLCols;
-//            System.IntPtr U; int nURows; int nUCols;
-//            System.IntPtr P; int nPRows; int nPCols;
-//            System.IntPtr Q; int nQRows; int nQCols; int info;
-//            if (LibLA_getLUwithFullPivoting(pointer, nRows, nCols,
-//                out L, out nLRows, out nLCols,
-//                out U, out nURows, out nUCols,
-//                out P, out nPRows, out nPCols,
-//                out Q, out nQRows, out nQCols, out info) < 0)
-//            {
-//                InteropUtil.FreePtrMatrix(pointer, nRows);
-//                throw new Exception("The LU factorization (with pivoting) could not be computed, only square matrices are supported.");
-//            } // if (LibLA_getLUwithFullPivoting)
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return new LUResult(info,
-//                InteropUtil.GetDoubleMatrixFromPtr(L, nLCols, nLCols),
-//                InteropUtil.GetDoubleMatrixFromPtr(U, nUCols, nUCols),
-//                InteropUtil.GetIntMatrixFromPtr(P, nPCols, nPCols),
-//                InteropUtil.GetIntMatrixFromPtr(Q, nQCols, nQCols)
-//                );
-//        } // GetLUWithPivoting(oMatrix)
-//
 //        /// <summary>
 //        /// <para>This function computes the QR factorization of the given real M-by-N
 //        /// matrix A. The LAPACK method DGEQRF is used followed by an
@@ -604,25 +275,7 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">real M-by-N matrix</param>
 //        public static QRResult GetQR(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr pointerQ; int nRowsQ; int nColsQ;
-//            IntPtr pointerR; int nRowsR; int nColsR;
-//
-//            LibLA_getQR(pointer, nRows, nCols,
-//                out pointerQ, out nRowsQ, out nColsQ,
-//                out pointerR, out nRowsR, out nColsR);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return new QRResult(
-//                InteropUtil.GetDoubleMatrixFromPtr(pointerQ, nRowsQ, nColsQ),
-//                InteropUtil.GetDoubleMatrixFromPtr(pointerR, nRowsR, nColsR));
-//
-//        } // GetQR(oMatrix)
-//
+
 //        /// <summary>
 //        /// <para>This function computes the QR factorization of the given real M-by-N matrix A
 //        /// with column pivoting. The LAPACK method dgeqp3 is
@@ -634,30 +287,6 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">real M-by-N matrix</param>
 //        public static QRResult GetQRWithPivot(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr pointerQ; int nRowsQ; int nColsQ;
-//            IntPtr pointerR; int nRowsR; int nColsR;
-//            IntPtr pointerP; int nRowsP; int nColsP;
-//
-//            LibLA_getQRWithPivot(pointer, nRows, nCols,
-//                out pointerQ, out nRowsQ, out nColsQ,
-//                out pointerR, out nRowsR, out nColsR,
-//                out pointerP, out nRowsP, out nColsP);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return new QRResult(
-//                InteropUtil.GetDoubleMatrixFromPtr(pointerQ, nRowsQ, nColsQ),
-//                InteropUtil.GetDoubleMatrixFromPtr(pointerR, nRowsR, nColsR),
-//                InteropUtil.GetDoubleMatrixFromPtr(pointerP, nRowsP, nColsP));
-//
-//        } // GetQRWithPivot(oMatrix)
-//
-//
-//
 //        /// <summary>
 //        /// <para>This method computes the rank of the given matrix. For this first the
 //        /// singular values of the matrix are calculated and then the rank is determined
@@ -667,21 +296,6 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">a real matrix</param>
 //        public static int GetRank(double[][] oMatrix)
-//        {
-//            int nResult = 0;
-//
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//            nResult = LibLA_getRank(pointer, nRows, nCols);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return nResult;
-//
-//        } // GetRank(oMatrix)
-//
-//
-//
 //        /// <summary>
 //        /// returns an estimate for the reciprocal of the condition of A in 1-norm using the LAPACK condition estimator.
 //        /// If A is well conditioned, getRCond(A) is near 1.0. If A is badly conditioned, getRCond(A) is near 0.0.
@@ -689,20 +303,6 @@ namespace LIB_LA
 //        /// <param name="oMatrix">a real matrix</param>
 //        /// <returns>reciprocal condition number estimate</returns>
 //        public static double GetRCond(double[][] oMatrix)
-//        {
-//            double nResult = 0.0;
-//
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//            nResult = LibLA_getRCond(pointer, nRows, nCols);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return nResult;
-//
-//        } // GetRCond(oMatrix)
-//
-//
 //        /// <summary>
 //        /// <para>This function calculates the right null space of a given real matrix. That is:</para>
 //        ///
@@ -722,19 +322,6 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">The real matrix for which to compute the right null space</param>
 //        public static double[][] GetRightNullSpace(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr pointerMatrix; int nMatrixRows; int nMatrixCols;
-//            LibLA_rightNullspace(pointer, nRows, nCols, out pointerMatrix, out nMatrixRows, out nMatrixCols);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return InteropUtil.GetDoubleMatrixFromPtr(pointerMatrix, nMatrixRows, nMatrixCols);
-//
-//        } // GetRightNullSpace(oMatrix)
-//
 //        /// <summary>
 //        /// <para>This function calculates the left null space of a given real matrix. That is:</para>
 //        ///
@@ -745,19 +332,6 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">The real matrix for which to compute the left null space</param>
 //        public static double[][] GetScaledLeftNullSpace(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr pointerMatrix; int nMatrixRows; int nMatrixCols;
-//            LibLA_scaledLeftNullspace(pointer, nRows, nCols, out pointerMatrix, out nMatrixRows, out nMatrixCols);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return InteropUtil.GetDoubleMatrixFromPtr(pointerMatrix, nMatrixRows, nMatrixCols);
-//
-//        } // GetScaledLeftNullSpace(oMatrix)
-//
 //        /// <summary>
 //        /// <para>This function calculates the right null space of a given real matrix. That is:</para>
 //        ///
@@ -778,36 +352,12 @@ namespace LIB_LA
 //        /// </summary>
 //        /// <param name="oMatrix">The real matrix for which to compute the right null space</param>
 //        public static double[][] GetScaledRightNullSpace(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr pointerMatrix; int nMatrixRows; int nMatrixCols;
-//            LibLA_scaledRightNullspace(pointer, nRows, nCols, out pointerMatrix, out nMatrixRows, out nMatrixCols);
-//
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return InteropUtil.GetDoubleMatrixFromPtr(pointerMatrix, nMatrixRows, nMatrixCols);
-//
-//        } // GetScaledRightNullSpace(oMatrix)
-//
 //        /// <summary>
 //        /// This method performs the Singular Value Decomposition of the given real matrix,
 //        /// returning only the singular values. For this the LAPACK method: dgesdd was used.
 //        /// </summary>
 //        /// <param name="oMatrix">a real matrix</param>
 //        public static double[] GetSingularValues(double[][] oMatrix)
-//        {
-//            IntPtr pointer; int nRows; int nCols;
-//            InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//            IntPtr singularVals; int nLength;
-//            LibLA_getSingularValsBySVD(pointer, nRows, nCols, out singularVals, out nLength);
-//            InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//            return InteropUtil.GetDoubleArrayFromPtr(singularVals, nLength);
-//        } // GetSingularValues(oMatrix)
-//
 //        /// <summary>
 //        /// This function returns the tolerance currently used by the library to determine what value
 //        /// is seen as zero. (Any value with absolute value smaller than this tolerance is seen as zero
@@ -824,18 +374,6 @@ namespace LIB_LA
 //        //    out System.IntPtr outMatrix, out int outRows, out int outCols);
 //
 //        //public static double[][] GetGaussJordan2(double[][] oMatrix)
-//        //{
-//        //    IntPtr pointer; int nRows; int nCols;
-//        //    InteropUtil.MapMatrixToPointer(oMatrix, out pointer, out nRows, out nCols);
-//
-//        //    IntPtr pointerMatrix; int nMatrixRows; int nMatrixCols;
-//        //    LibLA_gaussJordan2(pointer, nRows, nCols, out pointerMatrix, out nMatrixRows, out nMatrixCols);
-//
-//        //    InteropUtil.FreePtrMatrix(pointer, nRows);
-//
-//        //    return InteropUtil.GetDoubleMatrixFromPtr(pointerMatrix, nMatrixRows, nMatrixCols);
-//
-//        //}
 //
 //        /// <summary>
 //        /// Lib clapack _fully pivoted gauss jordan
@@ -1199,14 +737,14 @@ namespace LIB_LA
 
 
 
-}
+}//Namespace LIB_LA
 
 
 
 
 #endif
 
-// The Original C# code below is from file LA.cs, in folder C:\...\libstruct\LibStructuralCSharp\
+// The Original C# code below is from file LA.cs, in folder C:\...\libstruct\LibStructuralCSharp
 
 ////// Author: fbergmann
 ////// Project: LibStructuralCSharp

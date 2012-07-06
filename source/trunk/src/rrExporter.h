@@ -15,7 +15,7 @@
 
 
 #if defined (__MINGW32__)
-#undef RR_DECLSPEC2
+#undef RR_DECLSPEC
 #endif
 
 #if defined(_MSC_VER)

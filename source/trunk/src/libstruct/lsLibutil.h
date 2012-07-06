@@ -1,16 +1,22 @@
 #ifndef LIB_LA_LIB_UTIL_H
 #define LIB_LA_LIB_UTIL_H
 
-#ifdef WIN32
+#if defined( WIN32 )
+
+#if defined(STATIC_LIB_LA)
+#  define LIB_EXTERN
+#else
+
 #if defined(LIB_EXPORTS)
-#  define LIB_EXTERN __declspec(dllexport)
-#elif defined(NO_LIBSTRUCT_DLL)
-#  define LIB_EXTERN
+    #define LIB_EXTERN __declspec(dllexport)
 #else
-#  define LIB_EXTERN __declspec(dllimport)
+    #define LIB_EXTERN __declspec(dllimport)
 #endif
-#else
-#  define LIB_EXTERN
+
+#endif
+
+#else //WIN32
+    #define LIB_EXTERN
 #endif
 
 #if defined(__cplusplus)

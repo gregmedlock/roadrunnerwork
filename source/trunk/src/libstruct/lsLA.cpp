@@ -1,11 +1,12 @@
 //---------------------------------------------------------------------------
 
 #pragma hdrstop
-
+#include "lsLibla.h"
 #include "lsLA.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
 
+namespace LIB_LA
+{
 
 ////namespace libstructural
 ////{
@@ -211,24 +212,24 @@
 ////        } // GetGaussJordan(oMatrix)
 ////
 ////
-////        /// <summary>
-////        /// <para>This function calculates the inverse of a square complex matrix. Employing the CLAPACK
-////        /// functions: zgetrf and zgetri. That is first the matrix will be factorized using LU
-////        /// decomposition followed by the calculation of the inverse based on:</para>
-////        ///
-////        /// <pre>inv(A)*L = inv(U) for inv(A).</pre>
-////        ///
-////        /// </summary>
-////        /// <param name="oMatrix">a square complex matrix</param>
-////        public static Complex[][] GetInverse(Complex[][] oMatrix)
-////        {
-////            double[][] oReal; double[][] oImag;
-////
-////            SplitComplexMatrix(oMatrix, out oReal, out oImag);
-////
-////            return GetInverse(oReal, oImag);
-////        }
-////
+/// <summary>
+/// <para>This function calculates the inverse of a square complex matrix. Employing the CLAPACK
+/// functions: zgetrf and zgetri. That is first the matrix will be factorized using LU
+/// decomposition followed by the calculation of the inverse based on:</para>
+///
+/// <pre>inv(A)*L = inv(U) for inv(A).</pre>
+///
+/// </summary>
+/// <param name="oMatrix">a square complex matrix</param>
+ComplexMatrix GetInverse(const ComplexMatrix& oMatrix)
+{
+    ComplexMatrix *result = LIB_LA::Zinverse(oMatrix);
+    return *result;
+//    DoubleMatrix oReal, oImag;
+//    SplitComplexMatrix(oMatrix, oReal, oImag);
+//    return GetInverse(oReal, oImag);
+}
+
 ////        /// <summary>
 ////        /// Calculates the eigen-vectors of a square real matrix.
 ////        ///
@@ -437,23 +438,20 @@
 ////        /// <param name="oMatrix">complex matrix</param>
 ////        /// <param name="oReal">matrix holding the real part</param>
 ////        /// <param name="oImag">matrix holding the imaginary part</param>
-////        private static void SplitComplexMatrix(Complex[][] oMatrix, out double[][] oReal, out double[][] oImag)
-////        {
-////            oReal = new double[oMatrix.Length][];
-////            oImag = new double[oMatrix.Length][];
-////
-////            for (int i = 0; i < oMatrix.Length; i++)
-////            {
-////                oReal[i] = new double[oMatrix[i].Length];
-////                oImag[i] = new double[oMatrix[i].Length];
-////
-////                for (int j = 0; j < oMatrix[i].Length; j++)
-////                {
-////                    oReal[i][j] = oMatrix[i][j].Real;
-////                    oImag[i][j] = oMatrix[i][j].Imag;
-////                } // for (int)
-////            } // for (int)
-////        }
+void SplitComplexMatrix(const ComplexMatrix& oMatrix, DoubleMatrix& oReal, DoubleMatrix& oImag)
+{
+    oReal.resize(oMatrix.RSize(), oMatrix.CSize());
+    oImag.resize(oMatrix.RSize(), oMatrix.CSize());
+
+    for (unsigned int i = 0; i < oMatrix.RSize(); i++)
+    {
+        for (unsigned int j = 0; j < oMatrix.CSize(); j++)
+        {
+            oReal[i][j] = oMatrix[i][j].Real;
+            oImag[i][j] = oMatrix[i][j].Imag;
+        }
+    }
+}
 ////        /// <summary>
 ////        /// <para>This function calculates the inverse of a square complex matrix. Employing the CLAPACK
 ////        /// functions: zgetrf and zgetri. That is first the matrix will be factorized using LU
@@ -464,29 +462,31 @@
 ////        /// </summary>
 ////        /// <param name="oMatrixImag">The imaginary part of the matrix</param>
 ////        /// <param name="oMatrixReal">The real part of the matrix</param>
-////        public static Complex[][] GetInverse(double[][] oMatrixReal, double[][] oMatrixImag)
-////        {
-////            IntPtr pointerReal; int nRows; int nCols;
-////            InteropUtil.MapMatrixToPointer(oMatrixReal, out pointerReal, out nRows, out nCols);
-////            IntPtr pointerImag;
-////            InteropUtil.MapMatrixToPointer(oMatrixImag, out pointerImag, out nRows, out nCols);
-////
-////            System.IntPtr outMatrixReal; System.IntPtr outMatrixImag; int outRows; int outCols;
-////            if (LibLA_Zinverse(pointerReal, pointerImag, nRows, nCols,
-////                out outMatrixReal, out outMatrixImag, out outRows, out outCols) < 0)
-////            {
-////                InteropUtil.FreePtrMatrix(pointerReal, nRows);
-////                InteropUtil.FreePtrMatrix(pointerImag, nRows);
-////                throw new Exception("The Inverse could not be computed, only square matrices have an inverse.");
-////            } // if (LibLA_Zinverse)
-////
-////            InteropUtil.FreePtrMatrix(pointerReal, nRows);
-////            InteropUtil.FreePtrMatrix(pointerImag, nRows);
-////
-////            return InteropUtil.GetComplexMatrixFromPtr(outMatrixReal, outMatrixImag, outRows, outCols);
-////
-////        } // GetInverse(oMatrixReal, oMatrixImag)
-////
+//ComplexMatrix GetInverse(const DoubleMatrix& oMatrixReal, const DoubleMatrix&  oMatrixImag)
+//{
+//    IntPtr pointerReal;
+//    int nRows;
+//    int nCols;
+//
+//    InteropUtil.MapMatrixToPointer(oMatrixReal, out pointerReal, out nRows, out nCols);
+//    IntPtr pointerImag;
+//    InteropUtil.MapMatrixToPointer(oMatrixImag, out pointerImag, out nRows, out nCols);
+//
+//    System.IntPtr outMatrixReal; System.IntPtr outMatrixImag; int outRows; int outCols;
+//    if (LibLA_Zinverse(pointerReal, pointerImag, nRows, nCols, out outMatrixReal, out outMatrixImag, out outRows, out outCols) < 0)
+//    {
+//        InteropUtil.FreePtrMatrix(pointerReal, nRows);
+//        InteropUtil.FreePtrMatrix(pointerImag, nRows);
+//        throw Exception("The Inverse could not be computed, only square matrices have an inverse.");
+//    }
+//
+//    InteropUtil.FreePtrMatrix(pointerReal, nRows);
+//    InteropUtil.FreePtrMatrix(pointerImag, nRows);
+//
+//    return InteropUtil.GetComplexMatrixFromPtr(outMatrixReal, outMatrixImag, outRows, outCols);
+//
+//}
+
 ////        /// <summary>
 ////        /// <para>This function calculates the inverse of a square real matrix. Employing the CLAPACK
 ////        /// functions: dgetrf and dgetri. That is first the matrix will be factorized using LU
@@ -1206,3 +1206,5 @@
 ////
 ////    } // class Clapack
 ////} // namespace libstructural
+
+}//namespace LIB_LA

@@ -70,6 +70,7 @@ libstruct/lsLibstructural.cpp
 libstruct/lsMatrix.cpp
 libstruct/lsSBMLModel.cpp
 libstruct/lsUtil.cpp
+libstruct/lsLA.cpp
 )
 
 #Build both static and shared version
@@ -80,6 +81,7 @@ set_property(TARGET ${target}
                             EXPORT_RR 
                             LIBSBML_STATIC 
                             LIBLAX_STATIC 
+                            STATIC_LIB_LA
                             ) 
 
 #libraries to link with our shared lib
@@ -110,6 +112,7 @@ set_property(TARGET ${target}-static
                             STATIC_RR 
                             LIBSBML_STATIC
                             LIBLAX_STATIC 
+                            STATIC_LIB_LA
                             ) 
 
 if(${MINGW})

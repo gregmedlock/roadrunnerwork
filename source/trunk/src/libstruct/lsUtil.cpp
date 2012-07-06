@@ -174,8 +174,6 @@ double RoundToTolerance(double dValue, double dTolerance)
     return dValue;
 }
 
-
-
 void RoundMatrixToTolerance(DoubleMatrix& oMatrix, double dTolerance)
 {
     for (unsigned int i = 0; i < oMatrix.numRows(); i++)

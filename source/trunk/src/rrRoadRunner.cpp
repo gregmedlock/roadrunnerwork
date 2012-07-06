@@ -833,7 +833,7 @@ void RoadRunner::reset()
         {
             mModel->testConstraints();
         }
-        catch (Exception e)
+        catch (const Exception& e)
         {
             mModel->Warnings.push_back("Constraint Violated at time = 0\n" + e.Message());
             Log(lWarning)<<"Constraint Violated at time = 0\n"<<e.Message();
@@ -856,7 +856,7 @@ DoubleMatrix RoadRunner::simulate()
         }
         return runSimulation();
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from simulate(): " + e.Message());
     }
@@ -1220,7 +1220,7 @@ double RoadRunner::getuEE(const string& reactionName, const string& parameterNam
         }
         else throw SBWApplicationException(emptyModelStr);
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from getuEE ()" +  e.Message());
     }
@@ -1418,7 +1418,7 @@ double RoadRunner::oneStep(const double& currentTime, const double& stepSize, co
 //                } else throw SBWApplicationException (emptyModelStr);
 //            } catch (SBWApplicationException) {
 //                throw;
-//            } catch (Exception e) {
+//            } catch (const Exception& e) {
 //                throw SBWApplicationException ("Unexpected error from steadyState()", e.Message());
 //            }
 //        }*/
@@ -1439,113 +1439,6 @@ double RoadRunner::oneStep(const double& currentTime, const double& stepSize, co
 //        //    Debug.WriteLine(rr.getCapabilities());
 //
 //        //}
-//
-
-//
-//
-//        // ******************************************************************** }
-//        // Multiply matrix 'm1' by 'm2' to give result in Self                  }
-//        //                                                                      }
-//        // Usage:  A.mult (A1, A2); multiply A1 by A2 giving A                  }
-//        //                                                                      }
-//        // ******************************************************************** }
-//        double[][] mult(double[][] m1, double[][] m2)
-//        {
-//            int m1_nRows = m1.GetLength(0);
-//            int m2_nRows = m2.GetLength(0);
-//
-//            int m1_nColumns = 0;
-//            int m2_nColumns = 0;
-//
-//            if (m1_nRows > 0)
-//                m1_nColumns = m1[0].GetLength(0);
-//
-//            if (m2_nRows > 0)
-//                m2_nColumns = m2[0].GetLength(0);
-//
-//            if (m1.Length == 0)
-//                return m1;
-//            if (m2.Length == 0)
-//                return m2;
-//
-//            if (m1_nColumns == m2_nRows)
-//            {
-//                var result = new double[m1_nRows][];
-//                for (int i = 0; i < m1_nRows; i++) result[i] = new double[m2_nColumns];
-//
-//                for (int i = 0; i < result.GetLength(0); i++)
-//                    for (int j = 0; j < m2_nColumns; j++)
-//                    {
-//                        double sum = 0.0;
-//                        for (int k = 0; k < m1_nColumns; k++)
-//                            sum = sum + (m1[i][k] * m2[k][j]);
-//                        result[i][j] = sum;
-//                    }
-//                return result;
-//            }
-//
-//            if (m1_nRows == m2_nColumns)
-//            {
-//                return mult(m2, m1);
-//            }
-//
-//            throw SBWApplicationException("Incompatible matrix operands to multiply");
-//        }
-
-// ******************************************************************** }
-// Multiply matrix 'm1' by 'm2' - returns a DoubleMatrix
-//                                                                      }
-// Usage:  A = mult (A1, A2); multiply A1 by A2 giving A                  }
-//                                                                      }
-// ******************************************************************** }
-LIB_LA::DoubleMatrix mult(LIB_LA::DoubleMatrix& m1, LIB_LA::DoubleMatrix& m2)
-{
-    LIB_LA::DoubleMatrix result(0,0);
-
-    //  Check dimensions
-    int m1_nRows = m1.numRows();
-    int m2_nRows = m2.numRows();
-
-    int m1_nColumns = 0;
-    int m2_nColumns = 0;
-
-    m1_nColumns = m1.numCols();
-    m2_nColumns = m2.numCols();
-
-    if (m1.size() == 0)
-    {
-        return m1;
-    }
-    if (m2.size() == 0)
-    {
-        return m2;
-    }
-
-    if (m1_nColumns == m2_nRows)
-    {
-        result.resize(m1_nRows, m2_nColumns);
-        for (int row = 0; row < result.numRows(); row++)
-        {
-            for (int col = 0; col < m2_nColumns; col++)
-            {
-                double sum = 0.0;
-                for (int k = 0; k < m1_nColumns; k++)
-                {
-                    sum = sum + (m1[row][k] * m2[k][col]);
-                }
-                result[row][col] = sum;
-            }
-        }
-        return result;
-    }
-
-    if (m1_nRows == m2_nColumns)
-    {
-        return mult(m2, m1);
-    }
-
-    throw Exception("Incompatible matrix operands to multiply");
-}
 
 // Help("Compute the reduced Jacobian at the current operating point")
 LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
@@ -1560,7 +1453,7 @@ LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
         }
         throw SBWApplicationException(emptyModelStr);
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from fullJacobian()", e.Message());
     }
@@ -1572,24 +1465,23 @@ LIB_LA::DoubleMatrix RoadRunner::getEigenvalues()
 {
     try
     {
-	  if (modelLoaded) 
-	  {
-        LIB_LA::DoubleMatrix result(getNumberOfIndependentSpecies() ,2);
-
+	    if (!modelLoaded)
+	    {
+            throw SBWApplicationException(emptyModelStr);
+        }
+        LIB_LA::DoubleMatrix result(getNumberOfIndependentSpecies(), 2);
         LIB_LA::DoubleMatrix mat = getReducedJacobian();
-   
         LibLA LA;
 
         vector<Complex> oComplex = LA.getEigenValues(mat);
-        for (int i=0; i<oComplex.size(); i++) {
+        for (int i=0; i<oComplex.size(); i++)
+        {
 	        result[i][0] = oComplex[i].Real;
 	        result[i][1] = oComplex[i].Imag;
         }
-        return result; 
-	  }
-      throw SBWApplicationException(emptyModelStr);
+        return result;
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from fullJacobian()", e.Message());
     }
@@ -1608,7 +1500,7 @@ LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
         }
         throw SBWApplicationException(emptyModelStr);
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from fullJacobian()", e.Message());
     }
@@ -1629,7 +1521,7 @@ LIB_LA::DoubleMatrix RoadRunner::getLinkMatrix()
 	   }
        throw SBWApplicationException(emptyModelStr);
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
          throw SBWApplicationException("Unexpected error from getLinkMatrix()", e.Message());
     }
@@ -1645,7 +1537,7 @@ LIB_LA::DoubleMatrix RoadRunner::getNrMatrix()
 	   }
        throw SBWApplicationException(emptyModelStr);
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
          throw SBWApplicationException("Unexpected error from getNrMatrix()", e.Message());
     }
@@ -1661,7 +1553,7 @@ LIB_LA::DoubleMatrix RoadRunner::getL0Matrix()
 	   }
        throw SBWApplicationException(emptyModelStr);
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
          throw SBWApplicationException("Unexpected error from getL0Matrix()", e.Message());
     }
@@ -1697,7 +1589,7 @@ DoubleMatrix RoadRunner::getStoichiometryMatrix()
 
         throw SBWApplicationException(emptyModelStr);
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from getReorderedStoichiometryMatrix()" + e.Message());
     }
@@ -1728,7 +1620,7 @@ DoubleMatrix RoadRunner::getConservationMatrix()
 	   }
        throw SBWApplicationException(emptyModelStr);
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
          throw SBWApplicationException("Unexpected error from getConservationMatrix()", e.Message());
     }
@@ -1787,30 +1679,30 @@ double RoadRunner::getVariableValue(const TVariableType& variableType, const int
 }
 
 
-/// <summary>
-/// Fills the second argument with the Inverse of the first argument
-/// </summary>
-/// <param name="T2">The Matrix to calculate the Inverse for</param>
-/// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
-void RoadRunner::GetInverse(ComplexMatrix& T2, ComplexMatrix& Inv)
-{
-    try
-    {
-//        ComplexMatrix T8 = LIB_LA::GetInverse(ConvertComplex(T2.data));
-//        for (int i1 = 0; i1 < Inv.nRows; i1++)
-//        {
-//            for (int j1 = 0; j1 < Inv.nCols; j1++)
-//            {
-//                Inv[i1, j1].Real = T8[i1][j1].Real;
-//                Inv[i1, j1].Imag = T8[i1][j1].Imag;
-//            }
-//        }
-    }
-    catch (Exception)
-    {
-        throw SBWApplicationException("Could not calculate the Inverse");
-    }
-}
+///// <summary>
+///// Fills the second argument with the Inverse of the first argument
+///// </summary>
+///// <param name="T2">The Matrix to calculate the Inverse for</param>
+///// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
+//void RoadRunner::GetInverse(ComplexMatrix& T2, ComplexMatrix& Inv)
+//{
+//    try
+//    {
+////        ComplexMatrix T8 = LIB_LA::GetInverse(ConvertComplex(T2.data));
+////        for (int i1 = 0; i1 < Inv.nRows; i1++)
+////        {
+////            for (int j1 = 0; j1 < Inv.nCols; j1++)
+////            {
+////                Inv[i1, j1].Real = T8[i1][j1].Real;
+////                Inv[i1, j1].Imag = T8[i1][j1].Imag;
+////            }
+////        }
+//    }
+//    catch (Exception)
+//    {
+//        throw SBWApplicationException("Could not calculate the Inverse");
+//    }
+//}
 
 // Help(
 //            "Derpar Continuation, stepSize = stepsize; independentVariable = index to parameter; parameterType = {'globalParameter', 'boundarySpecies'"
@@ -3328,7 +3220,7 @@ double RoadRunner::getuCC(const string& variableName, const string& parameterNam
     {
         throw;
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from getuCC ()", e.Message());
     }
@@ -3614,7 +3506,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
             throw SBWApplicationException(emptyModelStr);
         }
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from unscaledElasticityMatrix()", e.Message());
     }
@@ -3659,7 +3551,7 @@ LIB_LA::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
             throw SBWApplicationException(emptyModelStr);
         }
     }
-    catch (Exception e)
+    catch (const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message());
     }
@@ -3694,7 +3586,7 @@ LIB_LA::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException("Unexpected error from scaledElasticityMatrix()", e.Message());
 //            }
@@ -3868,78 +3760,64 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatri
             throw SBWApplicationException(emptyModelStr);
         }
 
-        ComplexMatrix Inv;
-        DoubleMatrix T1;
-        DoubleMatrix T2;
-        DoubleMatrix T3;
-        DoubleMatrix T4;
-        //ComplexMatrix T8;
-        DoubleMatrix Jac;
-
         setTimeStart(0.0);
         setTimeEnd(50.0);
         setNumPoints(1);
-//	simulate();
+        //	simulate(); //This will crash, because numpoints == 1
         if (steadyState() > STEADYSTATE_THRESHOLD)
         {
             if (steadyState() > 1E-2)
-                throw SBWApplicationException(
-                "Unable to locate steady state during frequency response computation");
-        }
-
-        LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
-        LIB_LA::DoubleMatrix Nr = getNrMatrix();
-        LIB_LA::DoubleMatrix LinkMatrix = getLinkMatrix();
-
-        Inv.resize (Nr.RSize(), LinkMatrix.CSize());
-        T2.resize (Nr.RSize(), LinkMatrix.CSize()); // Stores -Jac  and (-Jac)^-1
-        T3.resize (LinkMatrix.RSize(), 1); // Stores (-Jac)^-1 . Nr
-        T4.resize (Nr.RSize(), Nr.CSize());
-
-        // Compute the Jacobian first
-        T1.resize (Nr.RSize(), uelast.CSize());
-        T1 = mult(Nr, uelast);
-        Jac.resize (Nr.RSize(), LinkMatrix.CSize());
-        Jac = mult(T1, LinkMatrix);
-
-        // Compute -Jac
-        for (int i = 0; i < Jac.RSize(); i++)
-        {
-            for (int j = 0; j < Jac.CSize(); j++)       //TK changed i -> j
             {
-                Jac[i][j] = -Jac[i][j];
+                throw SBWApplicationException("Unable to locate steady state during frequency response computation");
             }
         }
 
+        // Compute the Jacobian first
+        DoubleMatrix uelast     = getUnscaledElasticityMatrix();
+        DoubleMatrix Nr         = getNrMatrix();
+        DoubleMatrix T1 = mult(Nr, uelast);
+        DoubleMatrix LinkMatrix = getLinkMatrix();
+        DoubleMatrix Jac = mult(T1, LinkMatrix);
+
+        // Compute -Jac
+//        for (int i = 0; i < Jac.RSize(); i++)
+//        {
+//            for (int j = 0; j < Jac.CSize(); j++)       //TK changed i -> j
+//            {
+//                T2[i][j] = -Jac[i][j];      //Changed to T2
+//            }
+//        }
+        DoubleMatrix T2 = Jac * (-1.0);
+
         // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
         // Sauro: GetInverse needs to be implemented
-//        ComplexMatrix temp(T2);
-//        ComplexMatrix T8 = LIB_LA::GetInverse(temp);//ConvertComplex(T2.data));
-//			for (int i1 = 0; i1 < Inv.RSize(); i1++)
-//            {
-//				for (int j1 = 0; j1 < Inv.CSize(); j1++)
-//				{
-//					Inv[i1][j1].Real = T8[i1][j1].Real;
-//					Inv[i1][j1].Imag = T8[i1][j1].Imag;
-//				}
-//            }
-//
+        ComplexMatrix temp(T2); //Get a complex matrix from a double one. Imag part is zero
+        ComplexMatrix Inv = GetInverse(temp);//ConvertComplex(T2.data));
+//        ComplexMatrix Inv(T8);
+//		for (int i1 = 0; i1 < Inv.RSize(); i1++)
+//        {
+//            for (int j1 = 0; j1 < Inv.CSize(); j1++)
+//			{
+//				Inv[i1][j1].Real = T8[i1][j1].Real;
+//				Inv[i1][j1].Imag = T8[i1][j1].Imag;
+//			}
+//         }
 
         // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
         // Sauro: mult which takes compelx matrix need to be implemented
-        //T3 = mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
+        DoubleMatrix T3 = mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
 
         // Finally include the dependent set as well.
-        T4 = mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
+        DoubleMatrix T4 = mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
+
         // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
         // Sauro: convertToDouble nees to be implemented
-        //return Matrix.convertToDouble(T4);    //T4 is already a 'real' matrix.
-//        return real(T4);
+        //return Matrix.convertToDouble(T4);    //T4 is already a 'real' matrix. ??
+        return T4;
     }
 	catch (const Exception& e)
 	{
-		throw SBWApplicationException(
-			"Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message());
+		throw SBWApplicationException("Unexpected error from getUnscaledConcentrationControlCoefficientMatrix()", e.Message());
 	}
 }
 
@@ -3987,7 +3865,7 @@ LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException(
 //                    "Unexpected error from getScaledConcentrationControlCoefficientMatrix()", e.Message());
@@ -4018,7 +3896,7 @@ LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 	{
 		throw;
 	}
-	catch (Exception e)
+	catch (const Exception& e)
 	{
 		throw SBWApplicationException("Unexpected error from getUnscaledFluxControlCoefficientMatrix()",
 			e.Message());
@@ -4052,7 +3930,7 @@ LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 	{
 		throw;
 	}
-	catch (Exception e)
+	catch (const Exception& e)
 	{
 		throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
 			e.Message());
@@ -4140,7 +4018,7 @@ LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
 //                                                  e.Message());
@@ -4181,7 +4059,7 @@ LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
 //                                                  e.Message());
@@ -4275,7 +4153,7 @@ LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
 //                                                  e.Message());
@@ -4315,7 +4193,7 @@ LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
 //                                                  e.Message());
@@ -4406,7 +4284,7 @@ LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
 //                                                  e.Message());
@@ -4563,7 +4441,7 @@ void RoadRunner::changeInitialConditions(const vector<double>& ic)
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException("Unexpected error from simulateEx()", e.Message());
 //            }
@@ -5168,7 +5046,7 @@ StringListContainer RoadRunner::getAvailableSymbols()
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
 //                                                  e.Message());
@@ -5207,7 +5085,7 @@ StringListContainer RoadRunner::getAvailableSymbols()
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
 //                                                  e.Message());
@@ -5247,7 +5125,7 @@ StringListContainer RoadRunner::getAvailableSymbols()
 //            {
 //                throw;
 //            }
-//            catch (Exception e)
+//            catch (const Exception& e)
 //            {
 //                throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
 //                                                  e.Message());

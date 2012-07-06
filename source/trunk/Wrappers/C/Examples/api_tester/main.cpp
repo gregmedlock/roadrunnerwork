@@ -243,11 +243,13 @@ int main(int argc, char* argv[])
 	matStr = printMatrix (getUnscaledConcentrationControlCoefficientMatrix());
 	if (!matStr)
     {
-		printf ("ERROR in getScaledElasticityMatrix\n");
+		printf ("ERROR in getUnscaledConcentrationControlCoefficientMatrix\n");
         cerr<<getLastError()<<endl;
     }
 	else
+    {
 		printf ("%s", matStr);
+    }
 	printf ("\n\n");
 
 	printf ("Elasticity Coefficient, EE^(_J1)_S1\n");

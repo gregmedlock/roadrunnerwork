@@ -3,15 +3,12 @@
 #include <iosfwd>
 #include <ostream>
 #include "lsLibutil.h"
-#include "string.h"
-
+#include "lsComplex.h"
 
 using std::ostream;
 
 namespace LIB_LA
 {
-    struct Complex;
-
     /*! \class LIB_LA::Matrix
         \brief LIB_LA::Matrix is the matrix class used by LIB_LA::LibLA and LIB_STRUTURAL::LibStructural
 
@@ -28,14 +25,14 @@ class Matrix
         T*                          _Array;
 
     public:
-        /*! \brief the element type for this matrix, will be real, LIB_LA::Complex or integer. */
 
                                     //! Creates a new matrix with the given numbers of rows and columns
                                     Matrix(unsigned int rows = 0, unsigned int cols = 0);
 
                                     //! Copy constructors
-                                    Matrix(const Matrix <T> & src);
-
+                                    //Matrix(const Matrix< T > & src);
+                                    Matrix(const Matrix< double >& src);
+                                    Matrix(const Matrix< Complex>& src, bool real = true);
 
                                     //! Constructor taking a matrix mapped to a vector and reconstructing the 2D form
                                     Matrix( T* &oRawData, int nRows, int nCols, bool transpose = true);
@@ -52,6 +49,7 @@ class Matrix
         T*                          GetPointer();
         unsigned int                CSize() const;                      //! returns the number of columns
         unsigned int                RSize() const;
+        unsigned int                Length() const;
         // Matrix <T>&              operator + (const Matrix <T> & rhs);
         T*                          getArray();                         //! returns a pointer to the underlying 1D array
         T*                          getCopy(bool transpose = false);    //! returns a copy of the data, optionally transposing it
@@ -73,11 +71,10 @@ class Matrix
         bool                        Allocate(unsigned int rows, unsigned int cols);
 
                                     //! creates a new matrix holding the transpose
-        Matrix< T >*                getTranspose();
+        Matrix<T>*                  getTranspose();
 
                                     //! assignment operator
         Matrix<T>&                  operator = (const Matrix <T>& rhs);
-//        Matrix<T>&                  operator = (const Matrix<double>& rhs);
 
                                     //! scalar assignment operator
         Matrix<T>&                  operator = (const T & value);
@@ -102,14 +99,26 @@ class Matrix
 
                                     //! returns the selected matrix element (const)
         const T&                    operator()(const unsigned int & row, const unsigned int & col) const;
+
+        friend const Matrix<T>             operator*(const Matrix<T>& lhs, const double& rhs);
+//        friend const mtkMatrix<T>             operator*(const double& rVal, const mtkMatrix<T>& Rmat);
 };
 
 //! hide templates in signatures
-typedef Matrix< double >    DoubleMatrix;
-typedef Matrix< int >       IntMatrix;
-typedef Matrix< Complex >   ComplexMatrix;
+typedef Matrix< double >            DoubleMatrix;
+typedef Matrix< int >               IntMatrix;
+typedef Matrix< Complex >           ComplexMatrix;
 
-ostream& operator<<(ostream& stream, const DoubleMatrix& mat);
+
+//Utility Matrix functions
+LIB_EXTERN DoubleMatrix             real(const ComplexMatrix& m2);               //Return real part of complex matrix
+LIB_EXTERN DoubleMatrix             imag(const ComplexMatrix& m2);               //Return imag part of complex matrix
+LIB_EXTERN DoubleMatrix             mult(DoubleMatrix& m1, DoubleMatrix& m2);
+LIB_EXTERN DoubleMatrix             mult(ComplexMatrix& m1, DoubleMatrix& m2);
+LIB_EXTERN DoubleMatrix             mult(DoubleMatrix& m1, ComplexMatrix& m2);
+LIB_EXTERN ostream& operator<<(ostream& stream, const DoubleMatrix& mat);
+LIB_EXTERN ostream& operator<<(ostream& stream, const IntMatrix& mat);
+LIB_EXTERN ostream& operator<<(ostream& stream, const ComplexMatrix& mat);
 
 ///////////////////////////////////////
 
@@ -128,43 +137,153 @@ _Array(NULL)
     }
 }
 
+//We can have various init scenarios
 template<class T>
-Matrix<T>::Matrix(const Matrix <T> & src):
+inline Matrix<T>::Matrix(const Matrix<double> & src) 
+:
+_Rows(src.RSize()),
+_Cols(src.CSize()),
+_Array(NULL)
+{
+    if (_Rows && _Cols)
+    {
+        _Array = new T[_Rows * _Cols]; //Todo: memoryleak
+        //memcpy(_Array, src._Array, _Rows * _Cols * sizeof(double));
+    }
+}
+
+template<>
+inline Matrix<double>::Matrix(const Matrix<double> & src) 
+:
 _Rows(src._Rows),
 _Cols(src._Cols),
 _Array(NULL)
 {
-  if (_Rows && _Cols)
-  {
-      _Array = new T[_Rows * _Cols]; //Todo: memoryleak
-      memcpy(_Array, src._Array, _Rows * _Cols * sizeof(T));
-  }
+    if (_Rows && _Cols)
+    {
+        _Array = new double[_Rows * _Cols]; //Todo: memoryleak
+        memcpy(_Array, src._Array, _Rows * _Cols * sizeof(double));
+    }
 }
 
-template<class T>
-Matrix<T>::Matrix( T* &oRawData, int nRows, int nCols, bool transpose) :
-_Rows(nRows), _Cols(nCols), _Array(NULL)
+template<>
+inline Matrix<double>::Matrix(const Matrix<Complex> & src, bool copyReal) :
+_Rows(src.RSize()),
+_Cols(src.CSize()),
+_Array(NULL)
 {
-  if (_Rows && _Cols)
-  {
-      _Array = new T[_Rows * _Cols];
-      if (!transpose)
-        memcpy(_Array, oRawData, sizeof(T)*nRows*nCols);
-      else
-      {
-          for (unsigned int i = 0; i < _Rows; i++)
-          {
-              for (unsigned int j = 0; j < _Cols; j++)
-              {
-                  (*this)(i,j) = oRawData[i+_Rows*j];
-              }
-          }
-      }
-  }
+    if (_Rows && _Cols)
+    {
+        _Array = new double[_Rows * _Cols];
+    }
+
+    Matrix<double>& refMat = *this;
+    for(unsigned int r = 0; r < _Rows; r++)
+    {
+        for(unsigned int c = 0; c < _Cols; c++)
+        {
+            if(copyReal)
+            {
+                refMat(r,c) = real(src(r,c));
+            }
+            else
+            {
+                refMat(r,c) = imag(src(r,c));
+            }
+        }
+    }
 }
 
 template<class T>
-Matrix<T>::~Matrix()
+inline Matrix<T>::Matrix(const Matrix<Complex> & src, bool copyReal) :
+_Rows(src.RSize()),
+_Cols(src.CSize()),
+_Array(NULL)
+{
+    if (_Rows && _Cols)
+    {
+        _Array = new T[_Rows * _Cols];
+    }
+
+    Matrix<T>& refMat = *this;
+    for(unsigned int r = 0; r < _Rows; r++)
+    {
+        for(unsigned int c = 0; c < _Cols; c++)
+        {
+            //refMat(r,c) = src(r,c);
+        }
+    }
+}
+
+template<>
+inline Matrix<Complex>::Matrix(const Matrix<Complex> & src, bool copyReal) :
+_Rows(src.RSize()),
+_Cols(src.CSize()),
+_Array(NULL)
+{
+    if (_Rows && _Cols)
+    {
+        _Array = new Complex[_Rows * _Cols];
+    }
+
+    Matrix<Complex>& refMat = *this;
+    for(unsigned int r = 0; r < _Rows; r++)
+    {
+        for(unsigned int c = 0; c < _Cols; c++)
+        {
+            refMat(r,c) = src(r,c);
+        }
+    }
+}
+
+template<>
+inline Matrix< Complex >::Matrix(const Matrix<double> & src):
+_Rows(src.RSize()),
+_Cols(src.CSize()),
+_Array(NULL)
+{
+    if (_Rows && _Cols)
+    {
+        _Array = new Complex[_Rows * _Cols];
+        Matrix< Complex >& refMat = *this;
+        for(unsigned int r = 0; r < _Rows; r++)
+        {
+            for(unsigned int c = 0; c < _Cols; c++)
+            {
+                refMat(r,c) = src(r,c);
+            }
+        }
+    }
+}
+
+template<class T>
+inline Matrix<T>::Matrix( T* &oRawData, int nRows, int nCols, bool transpose) :
+    _Rows(nRows),
+    _Cols(nCols),
+    _Array(NULL)
+{
+    if (_Rows && _Cols)
+    {
+        _Array = new T[_Rows * _Cols];
+        if (!transpose)
+        {
+            memcpy(_Array, oRawData, sizeof(T)*nRows*nCols);
+        }
+        else
+        {
+            for (unsigned int i = 0; i < _Rows; i++)
+            {
+                for (unsigned int j = 0; j < _Cols; j++)
+                {
+                    (*this)(i,j) = oRawData[i+_Rows*j];
+                }
+          }
+        }
+    }
+}
+
+template<class T>
+inline Matrix<T>::~Matrix()
 {
   if (_Array)
   {
@@ -173,6 +292,11 @@ Matrix<T>::~Matrix()
   }
 }
 
+template<class T>
+inline unsigned int Matrix<T>::Length() const
+{
+    return _Rows*_Cols;
+}
 template<class T>
 T* Matrix<T>::GetPointer()
 {
@@ -210,7 +334,7 @@ Matrix<T>::Matrix( T** &oRawData, int nRows, int nCols) : _Array(NULL), _Rows(0)
 }
 
 template<class T>
-Matrix<T>::Matrix( const T** oRawData, int nRows, int nCols) : _Array(NULL), _Rows(0), _Cols(0)
+Matrix<T>::Matrix(const T** oRawData, int nRows, int nCols) : _Array(NULL), _Rows(0), _Cols(0)
 {
   initializeFromConst2DMatrix(oRawData, nRows, nCols);
 }
@@ -392,6 +516,20 @@ template<class T>
 const T& Matrix<T>::operator()(const unsigned int & row, const unsigned int & col) const
 {
     return *(_Array + row * _Cols + col);
+}
+
+template<class T>
+const Matrix<T> operator*(Matrix<T>& lhs, const double& rhs)
+{
+    Matrix<T> result(lhs.RSize(), lhs.CSize());
+    for(int i = 0; i < lhs.RSize(); i++)
+    {
+        for(int j = 0; j < lhs.CSize(); j++)
+        {
+            result(i,j) = lhs(i,j) * rhs;
+        }
+    }
+    return result;
 }
 
 }

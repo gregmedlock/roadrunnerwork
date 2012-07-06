@@ -22,7 +22,7 @@ for the computation of the row echelon or Gauss Jordan form of a matrix.
 
 #include <vector>
 #include "lsMatrix.h"
-#include "lsComplex.h"
+//#include "lsComplex.h"
 
 
 /*!    \namespace LIB_LA
@@ -81,14 +81,14 @@ namespace LIB_LA
 
     /*! \brief The LIB_LA::LibLA class represents the entry point to a variety of useful functionality operating on double and complex matrices.
 
-    The current scope of the library encompasses matrix factorizations (QR and LU factorization) 
-    as well as commonly needed matrix operations, such as calculating the inverse of a matrix, 
-    computing eigen values and singular values as well as the null space of a matrix 
-    (both left and right null space) along with a method for the computation of the row echelon or 
+    The current scope of the library encompasses matrix factorizations (QR and LU factorization)
+    as well as commonly needed matrix operations, such as calculating the inverse of a matrix,
+    computing eigen values and singular values as well as the null space of a matrix
+    (both left and right null space) along with a method for the computation of the row echelon or
     Gauss Jordan form of a matrix.
 
     */
-    class LibLA
+    class LibLA //It is confusing having a namespace named LIB_LA
     {
     public:
 
@@ -97,27 +97,28 @@ namespace LIB_LA
         See also LIB_LA::LibLA::setTolerance
         */
         LIB_EXTERN LibLA() : _Tolerance(1.0E-12) {}
+
         //! Provides access to a singleton of this class
-        LIB_EXTERN  static LibLA* getInstance();
+        LIB_EXTERN  static LibLA* getInstance();   //Todo: the only "data" is the Tolerance! Seems Meaningless...
 
         /*! \brief Returns the currently used tolerance
 
-        This function returns the tolerance currently used by the library to determine what value 
-        is considered as zero. Any value with absolute value smaller than this tolerance is considered zero 
-        and will be neglected. 
+        This function returns the tolerance currently used by the library to determine what value
+        is considered as zero. Any value with absolute value smaller than this tolerance is considered zero
+        and will be neglected.
         */
-        LIB_EXTERN double getTolerance() 
+        LIB_EXTERN double getTolerance()
         { return _Tolerance; }
         /*! \brief Set user specified tolerance
 
         This function sets the tolerance used by the library to determine what value
-        is considered as zero. Any value with absolute value smaller than this tolerance is considered as zero 
-        and will be neglected. 
+        is considered as zero. Any value with absolute value smaller than this tolerance is considered as zero
+        and will be neglected.
 
-        \param dTolerance Sets the tolerance used by the library to determine a 
+        \param dTolerance Sets the tolerance used by the library to determine a
         value close to zero
         */
-        LIB_EXTERN void setTolerance(double dTolerance) 
+        LIB_EXTERN void setTolerance(double dTolerance)
         { _Tolerance = dTolerance; }
 
         /*! \brief Calculates the eigen-values of a square real matrix.
@@ -144,9 +145,9 @@ namespace LIB_LA
         
         */
         LIB_EXTERN ComplexMatrix *getEigenVectors(DoubleMatrix &oMatrix);
-        /*! \brief Calculates the eigen-vectors of a square nonsymmetrix complex matrix. 
+        /*! \brief Calculates the eigen-vectors of a square nonsymmetrix complex matrix.
 
-        This function calculates the complex (right)eigenvectors of the given real matrix. The complex matrix 
+        This function calculates the complex (right)eigenvectors of the given real matrix. The complex matrix
         returned contains the eigenvectors in the columns, in the same order as LIB_LA::LibLA::ZgetEigenValues.
         The right eigenvector v(j) of A satisfies:
         \par
@@ -154,12 +155,12 @@ namespace LIB_LA
 
         \param oMatrix a complex matrix
         \return a matrix of LIB_LA::Complex numbers representing the eigen-vectors of the matrix
-        
+
         */
         LIB_EXTERN ComplexMatrix *ZgetEigenVectors(ComplexMatrix &oMatrix);
         /*! \brief Factorizes the given matrix using SVD
 
-        This function computes the singular value decomposition (SVD) of the given real matrix. 
+        This function computes the singular value decomposition (SVD) of the given real matrix.
 
 
         The SVD is written
@@ -177,7 +178,7 @@ namespace LIB_LA
         LIB_EXTERN void getSVD(DoubleMatrix &inputMatrix, DoubleMatrix* &outU, std::vector<double>* &outSingularVals, DoubleMatrix* &outV);
         /*! \brief Factorizes the given matrix using SVD
 
-        This function computes the singular value decomposition (SVD) of the given complex matrix. 
+        This function computes the singular value decomposition (SVD) of the given complex matrix.
 
 
         The SVD is written
@@ -198,7 +199,7 @@ namespace LIB_LA
         /*! \brief Calculates the eigen-values of a square complex matrix.
 
         This function calculates the complex eigenvalues of the given complex matrix. The input matrix
-        should be broken up into two matrices representing the real and imaginary parts respectively. 
+        should be broken up into two matrices representing the real and imaginary parts respectively.
 
 
         \param oMatrix a complex  matrix
@@ -206,7 +207,7 @@ namespace LIB_LA
         */
         LIB_EXTERN std::vector< Complex > ZgetEigenValues(ComplexMatrix &oMatrix);
 
-        /*!    \brief     This function computes the QR factorization of the given real M-by-N matrix A with column pivoting. 
+        /*!    \brief     This function computes the QR factorization of the given real M-by-N matrix A with column pivoting.
 
         The LAPACK method dgeqp3 is used followed by an orthonormalization of Q through the use of DORGQR.
 
@@ -216,15 +217,15 @@ namespace LIB_LA
         A = Q * R
 
 
-        \return This call yields a vector of matrices. These matrices are (in order): 
+        \return This call yields a vector of matrices. These matrices are (in order):
         \li Q an orthogonal matrix.
-        \li R an upper triangular matrix 
+        \li R an upper triangular matrix
         \li P a permutation matrix,
 
         \remarks free all matrices using 'delete'.
         */
         LIB_EXTERN std::vector< DoubleMatrix* > getQRWithPivot(DoubleMatrix &oMatrix);
-        /*!    \brief     This function computes the QR factorization of the given real M-by-N matrix A. 
+        /*!    \brief     This function computes the QR factorization of the given real M-by-N matrix A.
 
         The LAPACK method dgeqp3 is used followed by an orthonormalization of Q through the use of DORGQR.
 
@@ -235,14 +236,14 @@ namespace LIB_LA
 
         In order to also perform column pivoting use LIB_LA::LibLA::getQRWithPivot
 
-        \return This call yields a vector of matrices. These matrices are (in order): 
+        \return This call yields a vector of matrices. These matrices are (in order):
         \li Q an orthogonal matrix.
-        \li R an upper triangular matrix 
+        \li R an upper triangular matrix
 
         \remarks free all matrices using 'delete'.
         */
         LIB_EXTERN std::vector< DoubleMatrix* > getQR(DoubleMatrix &oMatrix);
-        /*! \brief     This method performs the Singular Value Decomposition of the given real matrix, returning only the singular values. 
+        /*! \brief     This method performs the Singular Value Decomposition of the given real matrix, returning only the singular values.
 
         This procedure is carried out by the LAPACK method dgesdd.
 
@@ -251,7 +252,7 @@ namespace LIB_LA
         \return a vector of (real) singular values
         */
         LIB_EXTERN std::vector< double > getSingularValsBySVD(DoubleMatrix &oMatrix);
-        /*! \brief This method computes the rank of the given matrix. 
+        /*! \brief This method computes the rank of the given matrix.
 
         The singular values of the matrix are calculated and the rank is determined by the number of non-zero values.
 
@@ -264,21 +265,21 @@ namespace LIB_LA
         LIB_EXTERN int getRank(DoubleMatrix &oMatrix);
 
 
-    
+
         /*! \brief  reciprocal condition number estimate
 
-         returns an estimate for the reciprocal of the condition of A in 1-norm using the LAPACK condition estimator. 
+         returns an estimate for the reciprocal of the condition of A in 1-norm using the LAPACK condition estimator.
          If A is well conditioned, getRCond(A) is near 1.0. If A is badly conditioned, getRCond(A) is near 0.0.
 
         */
         LIB_EXTERN double getRCond(DoubleMatrix &oMatrix);
 
 
-        /*! \brief This method calculates the Gauss Jordan or row echelon form of the given matrix. 
+        /*! \brief This method calculates the Gauss Jordan or row echelon form of the given matrix.
 
         Only row swaps are used. These permutations will be returned in the 'pivots' vector.
 
-        If no permutations have occurred this vector will be in ascending form [ 0, 1, 2, 3 ]; 
+        If no permutations have occurred this vector will be in ascending form [ 0, 1, 2, 3 ];
         However if say row one and three would be swapped this vector would look like: [ 0, 3, 2, 1 ];
 
         \return the pivots vector
@@ -286,9 +287,9 @@ namespace LIB_LA
         */
         LIB_EXTERN std::vector<int> gaussJordan(DoubleMatrix &oMatrix);
 
-        /*! \brief This method calculates the fully pivoted Gauss Jordan form of the given matrix. 
+        /*! \brief This method calculates the fully pivoted Gauss Jordan form of the given matrix.
 
-        Fully pivoted means, that rows as well as column swaps will be used. These permutations 
+        Fully pivoted means, that rows as well as column swaps will be used. These permutations
         are captured in the integer vectors rowPivots and colPivots.
 
         If no permutations have occurred those vectors will be in ascending form [ 0, 1, 2, 3 ]; 
@@ -348,7 +349,7 @@ namespace LIB_LA
 
         */
         LIB_EXTERN DoubleMatrix* getRightNullSpace(DoubleMatrix &oMatrix);
-        /*! \brief This function calculates the scaled right null space of a given real matrix. 
+        /*! \brief This function calculates the scaled right null space of a given real matrix.
 
         This function is equivalent to calling LIB_LA::LibLA::getRightNullSpace however the resulting
         matrix will be scaled (employing Gauss Jordan factorization) to yield whole numbered
@@ -358,7 +359,7 @@ namespace LIB_LA
         \return a matrix representing the scaled right null space
         */
         LIB_EXTERN DoubleMatrix* getScaledRightNullSpace(DoubleMatrix &oMatrix);
-        /*! \brief This function computes the LU factorization of the given real M-by-N matrix A 
+        /*! \brief This function computes the LU factorization of the given real M-by-N matrix A
 
         using partial pivoting with row interchanges. This procedure is carried out by the LAPACK method dgetrf .
         A is factorized into:
@@ -398,7 +399,7 @@ namespace LIB_LA
         This procedure is carried out by the LAPACK methods dgetrf and dgetri. This means that the matrix will be 
         factorized using LU decomposition first, followed by the calculation of the inverse based on:
 
-        \par 
+        \par
         inv(A)*L = inv(U) for inv(A).
         \param oMatrix a real matrix
         \return the inverse of the real matrix
@@ -418,27 +419,32 @@ namespace LIB_LA
         LIB_EXTERN ComplexMatrix* Zinverse (ComplexMatrix & oMatrix);
 
     private:
-        double _Tolerance;
-        static LibLA* _Instance;
+        double          _Tolerance;
+        static LibLA*   _Instance;
     };
 
-}
+//The above memberfunctions are "utility" functions. Better keep them out of a class interface
+
+const double gLapackTolerance = 1.0E-12;
+LIB_EXTERN ComplexMatrix* Zinverse (const ComplexMatrix& oMatrix);
+
+} //namespace LIB_LA
 #endif // __cplusplus
 
 
 BEGIN_C_DECLS;
 /*! \brief Returns the currently used tolerance
 
-This function returns the tolerance currently used by the library to determine what value 
-is considered as zero. Any value with absolute value smaller than this tolerance is considered zero 
-and will be neglected. 
+This function returns the tolerance currently used by the library to determine what value
+is considered as zero. Any value with absolute value smaller than this tolerance is considered zero
+and will be neglected.
 */
 LIB_EXTERN double LibLA_getTolerance();
 
 /*! \brief Set user specified tolerance
 
 This function sets the tolerance used by the library to determine what value 
-is considered as zero. Any value with absolute value smaller than this tolerance is considered as zero 
+is considered as zero. Any value with absolute value smaller than this tolerance is considered as zero
 and will be neglected. 
 
 \param value Sets the tolerance used by the library to determine a  value close to zero
@@ -518,7 +524,7 @@ an error occurred
 
 */
 LIB_EXTERN int LibLA_getQRWithPivot(double** inMatrix, int numRows, int numCols, 
-                                    double** *outQ, int *outQRows, int * outQCols, 
+                                    double** *outQ, int *outQRows, int * outQCols,
                                     double** *outR, int *outRRows, int * outRCols, 
                                     double** *outP, int *outPRows, int * outPCols);
 
@@ -718,7 +724,7 @@ LIB_EXTERN int LibLA_fullyPivotedGaussJordan(double** inMatrix, int numRows, int
 
 /*! \brief This function calculates the inverse of a square complex matrix. 
 
-This procedure is carried out by the LAPACK methods: zgetrf and zgetri. This means that the matrix will be 
+This procedure is carried out by the LAPACK methods: zgetrf and zgetri. This means that the matrix will be
 factorized using LU decomposition first, followed by the calculation of the inverse based on:
 
 \par 

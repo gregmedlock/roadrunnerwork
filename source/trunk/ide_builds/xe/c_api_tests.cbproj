@@ -22,6 +22,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<Defines>WIN32;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
@@ -69,10 +70,6 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\src\libstruct\lsLA.cpp">
-				<DependentOn>..\..\src\libstruct\lsLA.h</DependentOn>
-				<BuildOrder>2</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\Wrappers\C\Examples\api_tester\main.cpp">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>

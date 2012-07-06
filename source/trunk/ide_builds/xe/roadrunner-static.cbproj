@@ -72,6 +72,9 @@
 			<CppCompile Include="..\..\src\libstruct\lsComplex.cpp">
 				<BuildOrder>51</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\src\libstruct\lsLA.cpp">
+				<BuildOrder>64</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\src\libstruct\lsLibla.cpp">
 				<BuildOrder>52</BuildOrder>
 			</CppCompile>

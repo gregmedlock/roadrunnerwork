@@ -29,8 +29,6 @@ class ModelFromC;
 class CSharpGenerator;
 class CGenerator;
 
-LIB_LA::DoubleMatrix            mult(LIB_LA::DoubleMatrix& m1, LIB_LA::DoubleMatrix& m2);
-
 class RR_DECLSPEC RoadRunner : public rrObject
 {
 	private:
@@ -50,10 +48,10 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		ModelGenerator                 *mCSharpGenerator;
 		ModelGenerator                 *mCGenerator;
 
-		LIB_LA::DoubleMatrix           *_L;
-		LIB_LA::DoubleMatrix           *_L0;
-		LIB_LA::DoubleMatrix           *_N;
-		LIB_LA::DoubleMatrix           *_Nr;
+		DoubleMatrix                   *_L;
+		DoubleMatrix                   *_L0;
+		DoubleMatrix                   *_N;
+		DoubleMatrix                   *_Nr;
 
 		Compiler                        mCompiler;
 		HINSTANCE                       mModelDllHandle;
@@ -164,21 +162,21 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		double                          steadyState();
 		static void                     TestSettings();
 
-		LIB_LA::DoubleMatrix            getReducedJacobian();
-		LIB_LA::DoubleMatrix            getFullJacobian();
-		LIB_LA::DoubleMatrix            getEigenvalues();
+		DoubleMatrix                    getReducedJacobian();
+		DoubleMatrix                    getFullJacobian();
+		DoubleMatrix                    getEigenvalues();
 
 		// ---------------------------------------------------------------------
 		// Start of Level 4 API Methods
 		// ---------------------------------------------------------------------
-		LIB_LA::DoubleMatrix            getLinkMatrix();
-		LIB_LA::DoubleMatrix            getNrMatrix();
-		LIB_LA::DoubleMatrix            getL0Matrix();
+		DoubleMatrix                    getLinkMatrix();
+		DoubleMatrix                    getNrMatrix();
+		DoubleMatrix                    getL0Matrix();
 		DoubleMatrix                    getStoichiometryMatrix();
-		LIB_LA::DoubleMatrix            getConservationMatrix();
-		LIB_LA::DoubleMatrix            getUnscaledConcentrationControlCoefficientMatrix();
-        LIB_LA::DoubleMatrix            getUnscaledFluxControlCoefficientMatrix();
-        LIB_LA::DoubleMatrix            getScaledFluxControlCoefficientMatrix();
+		DoubleMatrix                    getConservationMatrix();
+		DoubleMatrix                    getUnscaledConcentrationControlCoefficientMatrix();
+        DoubleMatrix                    getUnscaledFluxControlCoefficientMatrix();
+        DoubleMatrix                    getScaledFluxControlCoefficientMatrix();
 		int                             getNumberOfDependentSpecies();
 		int                             getNumberOfIndependentSpecies();
 
@@ -187,7 +185,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		/// </summary>
 		/// <param name="T2">The Matrix to calculate the Inverse for</param>
 		/// <param name="Inv">will be overriden wiht the inverse of T2 (must already be allocated)</param>
-		void                            GetInverse(ComplexMatrix& T2, ComplexMatrix& Inv);
+//		void                            GetInverse( Matrix<Complex> & T2, Matrix<Complex>& Inv);
 
 		void                            computeContinuation(const double& stepSize, const int& independentVariable, const string& parameterTypeStr);
         ArrayList                       getUnscaledFluxControlCoefficientNames();

@@ -1007,7 +1007,7 @@ DoubleMatrix* LibLA::inverse(DoubleMatrix &oMatrix)
     oResultMatrix = new DoubleMatrix(A,numRows,numRows, true);
     Util::RoundMatrixToTolerance(*oResultMatrix, _Tolerance);
 
-    delete [] A; delete [] ipvt; delete [] work; 
+    delete [] A; delete [] ipvt; delete [] work;
 
     return oResultMatrix;
 }
@@ -1020,16 +1020,17 @@ ComplexMatrix* LibLA::Zinverse (ComplexMatrix &oMatrix)
 
     ComplexMatrix *oResultMatrix = NULL;
     integer numRows = oMatrix.numRows();
-    integer numCols = oMatrix.numCols();        
+    integer numCols = oMatrix.numCols();
 
     if (numRows != numCols)
-        throw new ApplicationException ("Input Matrix must be square", "Expecting a Square Matrix");
-
+    {
+        throw ApplicationException ("Input Matrix must be square", "Expecting a Square Matrix");
+    }
 
     doublecomplex* A = new doublecomplex[numRows*numRows];
-    for (int i=0; i<numRows; i++) 
+    for (int i=0; i<numRows; i++)
     {
-        for (int j=0; j<numRows; j++) 
+        for (int j=0; j<numRows; j++)
         {
             A[i+numRows*j].r = oMatrix(i,j).getReal();
             A[i+numRows*j].i = oMatrix(i,j).getImag();
@@ -1043,13 +1044,18 @@ ComplexMatrix* LibLA::Zinverse (ComplexMatrix &oMatrix)
     doublecomplex* work = new doublecomplex[numRows];    memset(work,0,sizeof(doublecomplex)*numRows);
 
     // Carry out LU Factorization
-    integer info; zgetrf_ (&numRows, &numRows, A, &numRows, ipvt, &info);
+    integer info;
+    zgetrf_ (&numRows, &numRows, A, &numRows, ipvt, &info);
 
-    if (info < 0) 
-        throw new ApplicationException("Error in dgetrf : LU Factorization", "Illegal Value");
+    if (info < 0)
+    {
+        throw ApplicationException("Error in dgetrf : LU Factorization", "Illegal Value");
+    }
 
-    if (info > 0) 
-        throw new ApplicationException("Exception in LIB_LA while computing Inverse", "Input Matrix is Sinuglar.");
+    if (info > 0)
+    {
+        throw ApplicationException("Exception in LIB_LA while computing Inverse", "Input Matrix is Sinuglar.");
+    }
 
     //Log(lDebug5) << "After dgetrf: \n";
     //Util::print(numRows, numRows, A);
@@ -1059,11 +1065,10 @@ ComplexMatrix* LibLA::Zinverse (ComplexMatrix &oMatrix)
     Log(lDebug5) << "After dgetri: \n";
     //Util::print(numRows, numRows, A);
 
-
     oResultMatrix = new ComplexMatrix(numRows,numRows);
-    for (int i=0; i<numRows; i++) 
+    for (int i=0; i<numRows; i++)
     {
-        for (int j=0; j<numRows; j++) 
+        for (int j=0; j<numRows; j++)
         {
             (*oResultMatrix )(i,j).Real = Util::RoundToTolerance( A[(i+numRows*j)].r, _Tolerance);
             (*oResultMatrix )(i,j).Imag = Util::RoundToTolerance( A[(i+numRows*j)].i, _Tolerance);
@@ -1071,8 +1076,80 @@ ComplexMatrix* LibLA::Zinverse (ComplexMatrix &oMatrix)
     }
 
     // free memory
-    delete [] A; delete [] ipvt; delete [] work; 
+    delete [] A;
+    delete [] ipvt;
+    delete [] work;
 
+    return oResultMatrix;
+}
+
+ComplexMatrix* LIB_LA::Zinverse (const ComplexMatrix &oMatrix)
+{
+    Log(lDebug5) << "======================================================" << endl;
+    Log(lDebug5) << "=== Zinverse " << endl;
+    Log(lDebug5) << "======================================================" << endl;
+
+    ComplexMatrix *oResultMatrix = NULL;
+    integer numRows = oMatrix.numRows();
+    integer numCols = oMatrix.numCols();
+
+    if (numRows != numCols)
+    {
+        throw ApplicationException ("Input Matrix must be square", "Expecting a Square Matrix");
+    }
+
+    doublecomplex* A = new doublecomplex[numRows*numRows];
+    for (int i=0; i<numRows; i++)
+    {
+        for (int j=0; j<numRows; j++)
+        {
+            A[i+numRows*j].r = oMatrix(i,j).getReal();
+            A[i+numRows*j].i = oMatrix(i,j).getImag();
+        }
+    }
+
+    //Log(lDebug5) << "Input Matrix 1D: \n";
+    //Util::print(numRows, numRows, A);
+
+    integer* ipvt = new integer[numRows];                memset(ipvt,0,sizeof(integer)*numRows);
+    doublecomplex* work = new doublecomplex[numRows];    memset(work,0,sizeof(doublecomplex)*numRows);
+
+    // Carry out LU Factorization
+    integer info;
+    zgetrf_ (&numRows, &numRows, A, &numRows, ipvt, &info);
+
+    if (info < 0)
+    {
+        throw ApplicationException("Error in dgetrf : LU Factorization", "Illegal Value");
+    }
+
+    if (info > 0)
+    {
+        throw ApplicationException("Exception in LIB_LA while computing Inverse", "Input Matrix is Sinuglar.");
+    }
+
+    //Log(lDebug5) << "After dgetrf: \n";
+    //Util::print(numRows, numRows, A);
+
+    zgetri_ (&numRows, A, &numRows, ipvt, work, &numRows, &info);
+
+    Log(lDebug5) << "After dgetri: \n";
+    //Util::print(numRows, numRows, A);
+
+    oResultMatrix = new ComplexMatrix(numRows,numRows);
+    for (int i=0; i<numRows; i++)
+    {
+        for (int j=0; j<numRows; j++)
+        {
+            (*oResultMatrix )(i,j).Real = Util::RoundToTolerance( A[(i+numRows*j)].r, gLapackTolerance);
+            (*oResultMatrix )(i,j).Imag = Util::RoundToTolerance( A[(i+numRows*j)].i, gLapackTolerance);
+        }
+    }
+
+    // free memory
+    delete [] A;
+    delete [] ipvt;
+    delete [] work;
     return oResultMatrix;
 }
 
@@ -1091,7 +1168,6 @@ LibLA* LibLA::_Instance = NULL;
 
 
 /// the C-API
-
 LIB_EXTERN double LibLA_getTolerance()
 {
     return LibLA::getInstance()->getTolerance();
