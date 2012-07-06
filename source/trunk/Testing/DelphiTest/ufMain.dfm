@@ -34,6 +34,27 @@ object frmMain: TfrmMain
     Height = 13
     Caption = 'Common Integer'
   end
+  object Label3: TLabel
+    Left = 504
+    Top = 424
+    Width = 53
+    Height = 13
+    Caption = 'Time Start:'
+  end
+  object Label4: TLabel
+    Left = 510
+    Top = 451
+    Width = 47
+    Height = 13
+    Caption = 'Time End:'
+  end
+  object Label5: TLabel
+    Left = 482
+    Top = 478
+    Width = 86
+    Height = 13
+    Caption = 'Number of Points:'
+  end
   object pnlBottm: TPanel
     Left = 0
     Top = 667
@@ -168,8 +189,6 @@ object frmMain: TfrmMain
         Align = alClient
         ItemHeight = 13
         TabOrder = 0
-        ExplicitLeft = 4
-        ExplicitTop = 4
       end
     end
     object TabSheet2: TTabSheet
@@ -410,5 +429,38 @@ object frmMain: TfrmMain
     Caption = 'Get Conservation Matrix'
     TabOrder = 32
     OnClick = btnGetConservationMatrixClick
+  end
+  object Button2: TButton
+    Left = 485
+    Top = 390
+    Width = 151
+    Height = 25
+    Caption = 'SimulateEx'
+    TabOrder = 33
+    OnClick = Button2Click
+  end
+  object edtTimeStart: TEdit
+    Left = 568
+    Top = 421
+    Width = 68
+    Height = 21
+    TabOrder = 34
+    Text = '0.0'
+  end
+  object edtTimeEnd: TEdit
+    Left = 568
+    Top = 448
+    Width = 68
+    Height = 21
+    TabOrder = 35
+    Text = '10.0'
+  end
+  object edtNumberOfPoints: TEdit
+    Left = 568
+    Top = 475
+    Width = 68
+    Height = 21
+    TabOrder = 36
+    Text = '10'
   end
 end
