@@ -3766,7 +3766,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatri
 
         setTimeStart(0.0);
         setTimeEnd(50.0);
-        setNumPoints(1);
+        setNumPoints(2);
         simulate(); //This will crash, because numpoints == 1, not anymore, numPoints = 2 if numPoints <= 1
         if (steadyState() > STEADYSTATE_THRESHOLD)
         {
@@ -3853,23 +3853,35 @@ LIB_LA::DoubleMatrix RoadRunner::getScaledConcentrationControlCoefficientMatrix(
 	}
 }
 
-//
-//        // Use the formula: ucc = elast CS + I
+
+			//// Create an identity matrix of size uee.RSize
+			//DoubleMatrix T2 (uee.RSize(), uee.RSize());
+			//for(int i=0; i<T2.RSize(); i++)
+   //             for(int j=0; j<T2.CSize(); j++) {
+   //                if (i == j)
+   //                  T2[j][j] = 1;
+   //                else
+   //                  T2[i][j] = 0;
+   //             }
+
+
+// Use the formula: ucc = elast CS + I
 // [Help("Compute the matrix of unscaled flux control coefficients")]
-/*LIB_LA::DoubleMatrix RoadRunner::getUnscaledFluxControlCoefficientMatrix()
+LIB_LA::DoubleMatrix RoadRunner::getUnscaledFluxControlCoefficientMatrix()
 {
 	try
 	{
 		if (modelLoaded)
 		{
-			LIB_LA::DoubleMatrix ucc = getUnscaledConcentrationControlCoefficientMatrix();
-			LIB_LA::DoubleMatrix uee = getUnscaledElasticityMatrix();
+			DoubleMatrix ucc = getUnscaledConcentrationControlCoefficientMatrix();
+			DoubleMatrix uee = getUnscaledElasticityMatrix();
 
-			var T1 = new Matrix(uee_m.nRows, ucc_m.nCols);
-			T1 = mult(uee, ucc);
-			Matrix T2 = Matrix.Identity(uee.Length);
-			T1.add(T2);
-			return Matrix.convertToDouble(T1);
+			DoubleMatrix T1 = mult(uee, ucc);
+			
+			// Add an identity matrix I to T1, that is add a 1 to every diagonal of T1
+			for (int i=0; i<T1.RSize(); i++)
+				T1[i][i] = T1[i][i] + 1;
+			return T1;//Matrix.convertToDouble(T1);
 		}
 		else throw SBWApplicationException(emptyModelStr);
 	}
@@ -3882,23 +3894,23 @@ LIB_LA::DoubleMatrix RoadRunner::getScaledConcentrationControlCoefficientMatrix(
 		throw SBWApplicationException("Unexpected error from getUnscaledFluxControlCoefficientMatrix()",
 			e.Message());
 	}
-}*/
+}
 
 // [Help("Compute the matrix of scaled flux control coefficients")]
-/*LIB_LA::DoubleMatrix RoadRunner::getScaledFluxControlCoefficientMatrix()
+LIB_LA::DoubleMatrix RoadRunner::getScaledFluxControlCoefficientMatrix()
 {
 	try
 	{
 		if (modelLoaded)
 		{
-			double[][] ufcc = getUnscaledFluxControlCoefficientMatrix();
+			DoubleMatrix ufcc = getUnscaledFluxControlCoefficientMatrix();
 
-			if (ufcc.Length > 0)
+			if (ufcc.RSize() > 0)
 			{
 				mModel->convertToConcentrations();
 				mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-				for (int i = 0; i < ufcc.Length; i++)
-					for (int j = 0; j < ufcc[0].Length; j++)
+				for (int i = 0; i < ufcc.RSize(); i++)
+					for (int j = 0; j < ufcc.CSize(); j++)
 					{
 						ufcc[i][j] = ufcc[i][j]*mModel->rates[i]/mModel->rates[j];
 					}
@@ -3916,7 +3928,7 @@ LIB_LA::DoubleMatrix RoadRunner::getScaledConcentrationControlCoefficientMatrix(
 		throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
 			e.Message());
 	}
-}*/
+}
 
 //
 //        // ----------------------------------------------------------------------------------------------

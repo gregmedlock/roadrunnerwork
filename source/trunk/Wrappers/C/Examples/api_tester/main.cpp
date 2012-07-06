@@ -265,6 +265,36 @@ int main(int argc, char* argv[])
     }
 	printf ("\n\n");
 
+	printf ("Unscaled Flux Control Coefficients Matrix:\n");
+	printf ("-----------------------------------------\n\n");
+	matStr = printMatrix (getUnscaledFluxControlCoefficientMatrix());
+	if (!matStr)
+    {
+		printf ("ERROR in getUnscaledFluxControlCoefficientMatrix\n");
+        cerr<<getLastError()<<endl;
+    }
+	else
+    {
+		printf ("%s", matStr);
+    }
+	printf ("\n\n");
+
+
+	printf ("Scaled Flux Control Coefficients Matrix:\n");
+	printf ("-----------------------------------------\n\n");
+	matStr = printMatrix (getScaledFluxControlCoefficientMatrix());
+	if (!matStr)
+    {
+		printf ("ERROR in getScaledFluxControlCoefficientMatrix\n");
+        cerr<<getLastError()<<endl;
+    }
+	else
+    {
+		printf ("%s", matStr);
+    }
+	printf ("\n\n");
+
+
 	printf ("Elasticity Coefficient, EE^(_J1)_S1\n");
 	getEE("_J1", "S1", value);
 	printf ("Elasticity = %f\n", value);

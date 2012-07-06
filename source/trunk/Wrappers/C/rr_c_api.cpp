@@ -1871,6 +1871,49 @@ RRMatrixHandle rrCallConv getScaledConcentrationControlCoefficientMatrix()
 }
 
 
+RRMatrixHandle rrCallConv getUnscaledFluxControlCoefficientMatrix()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        return createMatrix(gRRHandle->getUnscaledFluxControlCoefficientMatrix());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+
+RRMatrixHandle rrCallConv getScaledFluxControlCoefficientMatrix()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        return createMatrix(gRRHandle->getScaledFluxControlCoefficientMatrix());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
 RRStringListHandle rrCallConv getUnscaledFluxControlCoefficientNames()
 {
 	try
