@@ -36,21 +36,21 @@ object frmMain: TfrmMain
   end
   object Label3: TLabel
     Left = 504
-    Top = 424
+    Top = 447
     Width = 53
     Height = 13
     Caption = 'Time Start:'
   end
   object Label4: TLabel
     Left = 510
-    Top = 451
+    Top = 474
     Width = 47
     Height = 13
     Caption = 'Time End:'
   end
   object Label5: TLabel
     Left = 482
-    Top = 478
+    Top = 501
     Width = 86
     Height = 13
     Caption = 'Number of Points:'
@@ -423,7 +423,7 @@ object frmMain: TfrmMain
   end
   object btnGetConservationMatrix: TButton
     Left = 485
-    Top = 335
+    Top = 361
     Width = 151
     Height = 25
     Caption = 'Get Conservation Matrix'
@@ -432,7 +432,7 @@ object frmMain: TfrmMain
   end
   object Button2: TButton
     Left = 485
-    Top = 390
+    Top = 413
     Width = 151
     Height = 25
     Caption = 'SimulateEx'
@@ -441,7 +441,7 @@ object frmMain: TfrmMain
   end
   object edtTimeStart: TEdit
     Left = 568
-    Top = 421
+    Top = 444
     Width = 68
     Height = 21
     TabOrder = 34
@@ -449,7 +449,7 @@ object frmMain: TfrmMain
   end
   object edtTimeEnd: TEdit
     Left = 568
-    Top = 448
+    Top = 471
     Width = 68
     Height = 21
     TabOrder = 35
@@ -457,10 +457,19 @@ object frmMain: TfrmMain
   end
   object edtNumberOfPoints: TEdit
     Left = 568
-    Top = 475
+    Top = 498
     Width = 68
     Height = 21
     TabOrder = 36
     Text = '10'
+  end
+  object btnGetL0Matrix: TButton
+    Left = 485
+    Top = 334
+    Width = 151
+    Height = 25
+    Caption = 'Get L0 Matrix'
+    TabOrder = 37
+    OnClick = btnGetL0MatrixClick
   end
 end

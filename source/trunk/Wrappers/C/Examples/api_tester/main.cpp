@@ -294,6 +294,21 @@ int main(int argc, char* argv[])
     }
 	printf ("\n\n");
 
+	printf ("Flux Control Coefficient, CC^(_J1)_k1\n");
+	getCC("_J1", "k1", value);
+	printf ("Coefficient = %f\n", value);
+
+	printf ("Flux Control Coefficient, CC^(_J1)_k2\n");
+	getCC("_J1", "k2", value);
+	printf ("Coefficient = %f\n", value);
+
+	printf ("Flux Control Coefficient, CC^(_J1)_k3\n");
+	getCC("_J1", "k3", value);
+	printf ("Coefficient = %f\n", value);
+
+	printf ("Flux Control Coefficient, CC^(_J1)_k4\n");
+	getCC("_J1", "k4", value);
+	printf ("Coefficient = %f\n", value);
 
 	printf ("Elasticity Coefficient, EE^(_J1)_S1\n");
 	getEE("_J1", "S1", value);

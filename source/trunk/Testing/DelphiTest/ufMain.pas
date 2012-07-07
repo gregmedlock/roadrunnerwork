@@ -61,6 +61,7 @@ type
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
+    btnGetL0Matrix: TButton;
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetAvailableSymbolsClick(Sender: TObject);
@@ -91,6 +92,7 @@ type
     procedure btnGetNrMatrixClick(Sender: TObject);
     procedure btnGetConservationMatrixClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure btnGetL0MatrixClick(Sender: TObject);
   private
     { Private declarations }
     procedure getSummaryOfModelByIndex;
@@ -365,6 +367,24 @@ begin
   lstSummary.Items.Add('');
   list.Free;
 end;
+
+procedure TfrmMain.btnGetL0MatrixClick(Sender: TObject);
+var
+  m: TMatrix;
+  i, j: integer;
+begin
+  m := getL0Matrix;
+  for i := 0 to grid.RowCount - 1 do
+    for j := 0 to grid.ColCount - 1 do
+      grid.Cells[j, i] := '';
+
+  grid.ColCount := m.c + 1;
+  grid.RowCount := m.r + 1;
+  for i := 1 to m.r do
+    for j := 1 to m.c do
+      grid.Cells[j - 1, i] := Format('%8.5g', [m[i, j]]);
+end;
+
 
 procedure TfrmMain.btnGetLnkMatrixClick(Sender: TObject);
 var
