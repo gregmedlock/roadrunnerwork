@@ -23,6 +23,8 @@ EXPORTS
     getConcentrationControlCoefficientNames= _getConcentrationControlCoefficientNames@0      
     getConservationMatrix         = _getConservationMatrix@0            
     getCopyright                  = _getCopyright@0  
+    getuCC                        = _getCC@12
+    getuEE                        = _getEE@12                           
     getCC                         = _getCC@12
     getEE                         = _getEE@12                           
     getEigenValueNames            = _getEigenValueNames@0               

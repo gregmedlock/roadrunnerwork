@@ -1340,6 +1340,30 @@ bool rrCallConv getGlobalParameterByIndex (const int& index, double& value)
 }
 
 
+
+bool rrCallConv getuCC (const char* variable, const char* parameter, double& value)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        value = gRRHandle->getuCC(variable, parameter);
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+  	return false;
+}
+
+
 bool rrCallConv getCC (const char* variable, const char* parameter, double& value)
 {
 	try
@@ -1361,6 +1385,30 @@ bool rrCallConv getCC (const char* variable, const char* parameter, double& valu
     }
   	return false;
 }
+
+
+bool rrCallConv getuEE(const char* name, const char* species, double& value)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        value = gRRHandle->getuEE(name, species);
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+  	return false;
+}
+
 
 bool rrCallConv getEE(const char* name, const char* species, double& value)
 {
