@@ -180,6 +180,7 @@ function  getReducedJacobian : TMatrix;
 function  getStoichiometryMatrix : TMatrix;
 function  getLinkMatrix : TMatrix;
 function  getNrMatrix : TMatrix;
+function  getL0Matrix : TMatrix;
 function  getConservationMatrix : TMatrix;
 
 function  getReactionRates : TDoubleArray;
@@ -308,6 +309,7 @@ var DLLHandle : Cardinal;
     libGetStoichiometryMatrix : TGetMatrix;
     libGetLinkMatrix          : TGetMatrix;
     libGetNrMatrix            : TGetMatrix;
+    libGetL0Matrix            : TGetMatrix;
     libGetConservationMatrix  : TGetMatrix;
 
     libFreeStringList : TFreeStringList;     //
@@ -417,10 +419,12 @@ begin
   result.Source := p^.Source;
 end;
 
+
 function setComputeAndAssignConservationLaws (value : boolean) : boolean;
 begin
   result := libSetComputeAndAssignConservationLaws (value);
 end;
+
 
 function loadSBML (sbmlStr : AnsiString) : boolean;
 begin
@@ -1056,6 +1060,31 @@ begin
 end;
 
 
+function getL0Matrix : TMatrix;
+var st : PRRMatrixHandle;
+    nr, nc : integer;
+    i, j : integer;
+begin
+  st := libGetL0Matrix;
+  try
+    if st = nil then
+       begin
+       result := TMatrix.Create (0,0);
+       exit;
+       end;
+
+    nr := st^.RSize;
+    nc := st^.CSize;
+    result := TMatrix.Create (nr, nc);
+    for i := 0 to nr - 1 do
+        for j := 0 to nc - 1 do
+            result[i+1,j+1] := st^.data[i*nc + j];
+  finally
+    libFreeMatrix (st);
+  end;
+end;
+
+
 function getConservationMatrix : TMatrix;
 var st : PRRMatrixHandle;
     nr, nc : integer;
@@ -1142,27 +1171,27 @@ begin
    @libGetNumberOfGlobalParameters := loadSingleMethod ('getNumberOfGlobalParameters', errMsg, result, methodList);
    @libGetNumberOfCompartments     := loadSingleMethod ('getNumberOfCompartments', errMsg, result, methodList);
 
-   @libSetCompartmentByIndex       := loadSingleMethod ('setCompartmentByIndex', errMsg, result, methodList);
-   @libSetFloatingSpeciesByIndex   := loadSingleMethod ('setFloatingSpeciesByIndex', errMsg, result, methodList);
-   @libSetBoundarySpeciesByIndex   := loadSingleMethod ('setBoundarySpeciesByIndex', errMsg, result, methodList);
-   @libSetGlobalParameterByIndex   := loadSingleMethod ('setGlobalParameterByIndex', errMsg, result, methodList);
+   @libSetCompartmentByIndex        := loadSingleMethod ('setCompartmentByIndex', errMsg, result, methodList);
+   @libSetFloatingSpeciesByIndex    := loadSingleMethod ('setFloatingSpeciesByIndex', errMsg, result, methodList);
+   @libSetBoundarySpeciesByIndex    := loadSingleMethod ('setBoundarySpeciesByIndex', errMsg, result, methodList);
+   @libSetGlobalParameterByIndex    := loadSingleMethod ('setGlobalParameterByIndex', errMsg, result, methodList);
 
-   @libGetCompartmentByIndex       := loadSingleMethod ('getCompartmentByIndex', errMsg, result, methodList);
-   @libGetFloatingSpeciesByIndex   := loadSingleMethod ('getFloatingSpeciesByIndex', errMsg, result, methodList);
-   @libGetBoundarySpeciesByIndex   := loadSingleMethod ('getBoundarySpeciesByIndex', errMsg, result, methodList);
-   @libGetGlobalParameterByIndex   := loadSingleMethod ('getGlobalParameterByIndex', errMsg, result, methodList);
+   @libGetCompartmentByIndex        := loadSingleMethod ('getCompartmentByIndex', errMsg, result, methodList);
+   @libGetFloatingSpeciesByIndex    := loadSingleMethod ('getFloatingSpeciesByIndex', errMsg, result, methodList);
+   @libGetBoundarySpeciesByIndex    := loadSingleMethod ('getBoundarySpeciesByIndex', errMsg, result, methodList);
+   @libGetGlobalParameterByIndex    := loadSingleMethod ('getGlobalParameterByIndex', errMsg, result, methodList);
 
    @libGetNumberOfDependentSpecies   := loadSingleMethod ('getNumberOfDependentSpecies', errMsg, result, methodList);
    @libGetNumberOfIndependentSpecies := loadSingleMethod ('getNumberOfIndependentSpecies', errMsg, result, methodList);
 
-   @libSteadyState                  := loadSingleMethod ('steadyState', errMsg, result, methodList);
-   @libComputeSteadyStateValues     := loadSingleMethod ('computeSteadyStateValues', errMsg, result, methodList);
-   @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList', errMsg, result, methodList);
-   @libSetSteadyStateSelectionList  := loadSingleMethod ('setSteadyStateSelectionList', errMsg, result, methodList);
+   @libSteadyState                   := loadSingleMethod ('steadyState', errMsg, result, methodList);
+   @libComputeSteadyStateValues      := loadSingleMethod ('computeSteadyStateValues', errMsg, result, methodList);
+   @libSetSteadyStateSelectionList   := loadSingleMethod ('setSteadyStateSelectionList', errMsg, result, methodList);
+   @libSetSteadyStateSelectionList   := loadSingleMethod ('setSteadyStateSelectionList', errMsg, result, methodList);
 
-   @libGetReactionRate     := loadSingleMethod ('getReactionRate', errMsg, result, methodList);
-   @libGetReactionRates    := loadSingleMethod ('getReactionRates', errMsg, result, methodList);
-   @libGetRatesOfChange    := loadSingleMethod ('getRatesOfChange', errMsg, result, methodList);
+   @libGetReactionRate          := loadSingleMethod ('getReactionRate', errMsg, result, methodList);
+   @libGetReactionRates         := loadSingleMethod ('getReactionRates', errMsg, result, methodList);
+   @libGetRatesOfChange         := loadSingleMethod ('getRatesOfChange', errMsg, result, methodList);
 
    @libGetCompartmentNames      := loadSingleMethod ('getCompartmentNames', errMsg, result, methodList);
    @libGetReactionNames         := loadSingleMethod ('getReactionNames', errMsg, result, methodList);
@@ -1177,6 +1206,7 @@ begin
    @libGetStoichiometryMatrix   := loadSingleMethod ('getStoichiometryMatrix', errMsg, result, methodList);
    @libGetLinkMatrix            := loadSingleMethod ('getLinkMatrix', errMsg, result, methodList);
    @libGetNrMatrix              := loadSingleMethod ('getNrMatrix', errMsg, result, methodList);
+   @libGetL0Matrix              := loadSingleMethod ('getL0Matrix', errMsg, result, methodList);
    @libGetConservationMatrix    := loadSingleMethod ('getConservationMatrix', errMsg, result, methodList);
 
    @libFreeRRInstance   := loadSingleMethod ('freeRRInstance', errMsg, result, methodList);
