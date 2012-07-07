@@ -180,7 +180,7 @@ C_DECL_SPEC RRMatrixHandle          rrCallConv   getScaledConcentrationControlCo
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getUnscaledFluxControlCoefficientMatrix();
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getScaledFluxControlCoefficientMatrix();
 
-C_DECL_SPEC bool                    rrCallConv   getCC(const char* variable, const char* parameter, double& value);
+C_DECL_SPEC bool                    rrCallConv   getCC (const char* variable, const char* parameter, double& value);
 C_DECL_SPEC bool                    rrCallConv   getEE(const char* name, const char* species, double& value);
 C_DECL_SPEC bool                    rrCallConv   getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
 C_DECL_SPEC RRStringListHandle      rrCallConv   getFloatingSpeciesInitialConditionNames();

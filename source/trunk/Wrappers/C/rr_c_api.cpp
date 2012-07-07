@@ -1339,7 +1339,8 @@ bool rrCallConv getGlobalParameterByIndex (const int& index, double& value)
   	return false;
 }
 
-bool rrCallConv getCC(char* variable, char* parameter, double& value)
+
+bool rrCallConv getCC (const char* variable, const char* parameter, double& value)
 {
 	try
     {
