@@ -1,7 +1,7 @@
 LIBRARY     RR_C_API.DLL
 
 EXPORTS
-    getVersion                      = _getVersion@0
+    getVersion                    = _getVersion@0
     computeSteadyStateValues      = _computeSteadyStateValues@0         
     evalModel                     = _evalModel@0                        
     freeCCode                     = _freeCCode@4                        
@@ -22,7 +22,8 @@ EXPORTS
     getCompartmentNames           = _getCompartmentNames@0              
     getConcentrationControlCoefficientNames= _getConcentrationControlCoefficientNames@0      
     getConservationMatrix         = _getConservationMatrix@0            
-    getCopyright                  = _getCopyright@0                     
+    getCopyright                  = _getCopyright@0  
+    getCC                         = _getCC@12
     getEE                         = _getEE@12                           
     getEigenValueNames            = _getEigenValueNames@0               
     getElasticityCoefficientNames = _getElasticityCoefficientNames@0      
@@ -37,6 +38,7 @@ EXPORTS
     getLastError                  = _getLastError@0                     
     getLinkMatrix                 = _getLinkMatrix@0                    
     getNrMatrix                   = _getNrMatrix@0                      
+    getL0Matrix                   = _getL0Matrix@0                      
     getNumberOfBoundarySpecies    = _getNumberOfBoundarySpecies@0       
     getNumberOfCompartments       = _getNumberOfCompartments@0          
     getNumberOfDependentSpecies   = _getNumberOfDependentSpecies@0      
