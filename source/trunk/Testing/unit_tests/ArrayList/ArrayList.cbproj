@@ -73,13 +73,12 @@
 				<DependentOn>..\..\..\src\rrArrayList.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\..\src\rrObject.cpp">
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="C:\rrInstalls\xe\lib\roadrunner.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>1</BuildOrder>
-			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

@@ -21,10 +21,12 @@ class ArrayListItem : public rrObject
     public:
         T                                          *mValue;
         ArrayList< T >                             *mLinkedList;
-        								           	ArrayListItem(const T& item);
+        								           	ArrayListItem(const T& primitive);
+                                                    ArrayListItem(const ArrayListItem<T>& item);
         								           	ArrayListItem(ArrayList<T>* item);
+
                                                    ~ArrayListItem();
-        T                                           GetValue();
+        T                                           GetValue() const;
                                                     operator T();
 };
 
@@ -37,6 +39,7 @@ class ArrayList : public rrObject
 
     public:
                                         			ArrayList();
+                                        			ArrayList(const ArrayList& cpyMe);
                                         		   ~ArrayList();
 		mutable
         vector< ArrayListItem<T>* >::const_iterator mIter;
@@ -50,7 +53,9 @@ class ArrayList : public rrObject
 
         ArrayListItem<T>&                           operator[](const int& index);
         const ArrayListItem<T>&                     operator[](const int& index) const;
+        void                                        operator=(const ArrayList& rhs);
         string                                      AsString();
+
 };
 
 template<class T>
@@ -60,10 +65,19 @@ template<class T>
 ostream& operator<<(ostream& stream, ArrayListItem<T>& listItem);
 
 template<class T>
-ostream& operator<<(ostream& stream, ArrayListItem<T>* listItem);
+ArrayList<T>::ArrayList(){}
 
 template<class T>
-ArrayList<T>::ArrayList(){}
+ArrayList<T>::ArrayList(const ArrayList& copyMe)
+{
+    //Copy each item in copyMe
+    mList.resize(copyMe.Count());
+    for(int i = 0; i < copyMe.Count(); i++)
+    {
+        const ArrayListItem<T>& item = copyMe[i];
+        mList[i] = new ArrayListItem<T>(item);
+    }
+}
 
 template<class T>
 ArrayList<T>::~ArrayList()
@@ -72,6 +86,30 @@ ArrayList<T>::~ArrayList()
     {
         delete mList[i];
     }
+    mList.clear();
+}
+
+template<class T>
+void ArrayList<T>::operator=(const ArrayList& rhs)
+{
+    Clear();
+
+    //Deep copy..
+    for(int i = 0; i < rhs.Count(); i++)
+    {
+        ArrayListItem<T> *item = new ArrayListItem<T>(rhs[i]);
+        mList.push_back(item);
+    }
+}
+
+template<class T>
+void ArrayList<T>::Clear()
+{
+    for(int i = 0; i < Count(); i++)
+    {
+        delete mList[i];
+    }
+    mList.clear();
 }
 
 template<class T>
@@ -87,8 +125,11 @@ void ArrayList<T>::Add(const T& _item)
 template<class T>
 void ArrayList<T>::Add(ArrayList<T>& subList)
 {
-	ArrayListItem<T> *item = new ArrayListItem<T>(&subList);
-    mList.push_back(item);
+    ArrayListItem<T>* newSubList = new ArrayListItem<T>(&subList);
+
+    //Don't use push back
+    mList.resize(mList.size() + 1);
+    mList[mList.size() - 1] = newSubList;
 }
 
 template<class T>
@@ -112,6 +153,52 @@ string ArrayList<T>::AsString()
         }
     }
     return theList;
+}
+
+
+////////////////////////////////////////////////////////////////////////////
+template< class T >
+ArrayListItem<T>::ArrayListItem(const ArrayListItem<T>& item)
+{
+    mValue = new T(item.GetValue());
+
+    if(item.mLinkedList)
+    {
+        for(int i = 0; i < item.mLinkedList->Count(); i++)
+        {
+            mLinkedList = new ArrayList<T>(*item.mLinkedList);
+        }
+    }
+    else
+    {
+        mLinkedList = NULL;
+    }
+}
+
+template< class T >
+ArrayListItem<T>::ArrayListItem(const T& item)
+:
+mLinkedList(NULL)
+{
+    mValue = new T(item);
+}
+
+template< class T >
+ArrayListItem<T>::~ArrayListItem()
+{
+    delete mValue;
+    delete mLinkedList;
+}
+
+template< class T >
+ArrayListItem<T>::ArrayListItem(ArrayList<T>* item)
+:
+mValue(NULL)
+{
+    if(item)
+    {
+        mLinkedList = new ArrayList<T>(*item);
+    }
 }
 
 template<class T>
@@ -166,36 +253,10 @@ ostream& operator<<(ostream& stream, ArrayListItem<T>& listItem)
     return stream;
 }
 
-template<class T>
-ostream& operator<<(ostream& stream, ArrayListItem<T>* listItem)
+template <class T>
+T ArrayListItem<T>::GetValue() const
 {
-    if(listItem->mValue)
-    {
-        stream<<listItem->mValue;
-    }
-    return stream;
-}
-
-template< class T >
-ArrayListItem<T>::ArrayListItem(const T& item)
-:
-mLinkedList(NULL)
-{
-    mValue = new T(item);
-}
-
-template< class T >
-ArrayListItem<T>::~ArrayListItem()
-{
-    delete mValue;
-}
-
-template< class T >
-ArrayListItem<T>::ArrayListItem(ArrayList<T>* item)
-:
-mValue(NULL)
-{
-    mLinkedList = (item);
+    return *mValue;
 }
 
 template <>
