@@ -11,39 +11,24 @@ SET(RR_BUILDS_ROOT "C:/rrBuilds")
 SET(RR_INSTALLS_ROOT "C:/rrInstalls")
 
 if(${BORLAND})
-set(LIBSBML_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/xe CACHE PATH "Directory containing libsbml libraries.")
-if("${LIBSBML_INSTALL_FOLDER}" STREQUAL "")
-  set(LIBSBML_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/xe CACHE PATH "Directory containing libsbml libraries" FORCE)
-endif()
+set(FOLDER_POSTFIX "xe")
 else(${BORLAND})
-set(LIBSBML_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/vs CACHE PATH "Directory containing libsbml libraries.")
-if("${LIBSBML_INSTALL_FOLDER}" STREQUAL "")
-  set(LIBSBML_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/vs CACHE PATH "Directory containing libsbml libraries" FORCE)
-endif()
+set(FOLDER_POSTFIX "vs")
 endif()
 
-if(${BORLAND})
-set(CVODE_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/xe CACHE PATH "Directory containing cvode libraries.")
-if("${CVODE_INSTALL_FOLDER}" STREQUAL "")
-  set(CVODE_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/xe CACHE PATH "Directory containing cvode libraries" FORCE)
-endif()
-else(${BORLAND})
-set(CVODE_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/vs CACHE PATH "Directory containing cvode libraries.")
-if("${CVODE_INSTALL_FOLDER}" STREQUAL "")
-  set(CVODE_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/vs CACHE PATH "Directory containing cvode libraries" FORCE)
-endif()
+set(LIBSBML_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing libsbml libraries.")
+if("${LIBSBML_INSTALL_FOLDER}" STREQUAL "")
+  set(LIBSBML_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing libsbml libraries" FORCE)
 endif()
 
-if(${BORLAND})
-set(CLAPACK_BUILD_FOLDER ${RR_BUILDS_ROOT}/xe/clapack CACHE PATH "Directory containing clapack libraries.")
-if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
-  set(CLAPACK_BUILD_FOLDER ${RR_BUILDS_ROOT}/xe/clapack CACHE PATH "Directory containing clapack libraries" FORCE)
+set(CVODE_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing cvode libraries.")
+if("${CVODE_INSTALL_FOLDER}" STREQUAL "")
+  set(CVODE_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing cvode libraries" FORCE)
 endif()
-else(${BORLAND})
-set(CLAPACK_BUILD_FOLDER ${RR_BUILDS_ROOT}/vs/clapack CACHE PATH "Directory containing clapack libraries.")
+
+set(CLAPACK_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/clapack CACHE PATH "Directory containing clapack libraries.")
 if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
-  set(CLAPACK_BUILD_FOLDER ${RR_BUILDS_ROOT}/vs/clapack CACHE PATH "Directory containing clapack libraries" FORCE)
-endif()
+  set(CLAPACK_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/clapack CACHE PATH "Directory containing clapack libraries" FORCE)
 endif()
 
 OPTION (PYTHON_WRAPPER 			"Generate Python wrapper " 		    FALSE)
@@ -92,18 +77,19 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 include_directories(				${RR_ROOT}
 				                    ${THIRD_PARTY_FOLDER})
 
-link_directories(					${LIBRARY_OUTPUT_PATH})
-link_directories(					${LIBSBML_INSTALL_FOLDER}/lib)
-link_directories(					${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib)
-link_directories(					${CLAPACK_BUILD_FOLDER}/SRC)
-link_directories(					${CLAPACK_BUILD_FOLDER}/BLAS/SRC)
-link_directories(					${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c)
+link_directories(					${LIBRARY_OUTPUT_PATH}
+                                    ${LIBSBML_INSTALL_FOLDER}/lib
+                                    ${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib
+                                    ${CLAPACK_BUILD_FOLDER}/SRC
+                                    ${CLAPACK_BUILD_FOLDER}/BLAS/SRC
+                                    ${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c
+                 )
 
 if(${MSVC})
 add_definitions(-DCRT_NONSTDC_NO_DEPRECATE)
-link_directories(					${CLAPACK_BUILD_FOLDER}/SRC/Debug)
-link_directories(					${CLAPACK_BUILD_FOLDER}/BLAS/SRC/Debug)
-link_directories(					${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c/Debug)
+link_directories(					${CLAPACK_BUILD_FOLDER}/SRC/Debug
+                                    ${CLAPACK_BUILD_FOLDER}/BLAS/SRC/Debug
+                                    ${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c/Debug)
 SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} /EHsc ")
 SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
 endif()
@@ -115,11 +101,13 @@ endif()
 
 if(${BORLAND})
 link_directories(${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib)
-add_definitions(-DUSE_PCH) #Enable pre-compiled headers
-add_definitions(-H=${PROJECT_BINARY_DIR}/rr_pch.csm)
-add_definitions(-w-8012)  #Comparing signed /unsigned
-add_definitions(-w-8057)  #Parameter never used
-add_definitions(-w-8004)  #'var' is assigned a value that is never used
+add_definitions(
+                                -DUSE_PCH                   #Enable pre-compiled headers
+                                -H=${PROJECT_BINARY_DIR}/rr_pch.csm
+                                -w-8012                     #Comparing signed /unsigned
+                                -w-8057                     #Parameter never used
+                                -w-8004                     #'var' is assigned a value that is never used
+        )
 endif()
 
 #Common compiler definitions
