@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{E262B969-ABD6-4C83-B624-61A156F60C28}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -22,7 +22,7 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<FinalOutputDir>$(RR_INSTALLS)\bin</FinalOutputDir>
+			<FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
 			<OutputExt>exe</OutputExt>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>

@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{9C185F60-088A-4052-AEF8-4E8A36F8133F}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -29,16 +29,16 @@
 			<PackageImports>vclx.bpi;vcl.bpi;vclimg.bpi;dbrtl.bpi;Rave90VCL.bpi;bdertl.bpi;rtl.bpi;bcbie.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vcldb.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;inet.bpi;inetdb.bpi;webdsnap.bpi;websnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DbxClientDriver.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi</PackageImports>
 			<NoVCL>true</NoVCL>
 			<OutputExt>dll</OutputExt>
-			<IncludePath>..\..\src\nleq\;C:\roadrunnerwork\source\trunk\ide_builds\xe\;..\..\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\src\nleq\;C:\roadrunnerwork\source\trunk\ide_builds\xe\;$(RR_ROOT)\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
 			<_TCHARMapping>char</_TCHARMapping>
-			<BPILibOutputDir>$(RR_INSTALLS)\lib</BPILibOutputDir>
+			<BPILibOutputDir>$(RR_INSTALL)\lib</BPILibOutputDir>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
 			<IntermediateOutputDir>.\$(Config)\$(Platform)\nleq</IntermediateOutputDir>
-			<FinalOutputDir>$(RR_INSTALLS)\bin</FinalOutputDir>
+			<FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_OptimizeForSpeed>true</BCC_OptimizeForSpeed>
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>

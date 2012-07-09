@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{15A35B10-E1F3-471E-A8EA-86C0202E1251}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -23,7 +23,7 @@
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<Defines>STATIC_RR;$(Defines)</Defines>
-			<FinalOutputDir>$(RR_INSTALLS)\bin</FinalOutputDir>
+			<FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>

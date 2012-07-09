@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{1F9DCC19-3B4E-413B-ADBB-4728F5FF7AA4}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -27,7 +27,7 @@
 			<PackageImports>vclx.bpi;vcl.bpi;rtl.bpi;vclactnband.bpi;vclimg.bpi;VCLData.bpi;DuneComponents.bpi;TeePro915.bpi;TeeUI915.bpi;VCLCommonRTL.bpi;mtkCommonRTL.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;Tee915.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;bdertl.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;DbxClientDriver.bpi;dbexpress.bpi;AzureCloud.bpi;DbxCommonDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vclie.bpi;webdsnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;TeeTree2D15Tee9.bpi;bcbie.bpi;dbxcds.bpi;inetdb.bpi;websnap.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeeGL915.bpi;TeeDB915.bpi;GenesisVisualComponents.bpi</PackageImports>
 			<ProjectType>CppVCLApplication</ProjectType>
 			<OutputExt>exe</OutputExt>
-			<FinalOutputDir>$(RR_INSTALLS)\bin</FinalOutputDir>
+			<FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
