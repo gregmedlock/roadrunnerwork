@@ -1,14 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
 project(RoadRunner)
 
-#SET(RR_MAJOR_VERSION 2012)
-#SET(RR_MINOR_VERSION 5)
-#SET(RR_BUILD_VERSION 31)
-#SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
-#SET(RR_VERSION "")
-
+add_subdirectory(Models)
 add_subdirectory(source/trunk)
 
+
+#------ RELEASES FOLDER
 if(${BORLAND})
 set(RELEASE_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/releases/xe CACHE PATH "Directory containing roadrunner releases.")
 if("${RELEASE_FOLDER}" STREQUAL "")
@@ -20,7 +17,6 @@ if("${RELEASE_FOLDER}" STREQUAL "")
   set(RELEASE_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/releases/vs CACHE PATH "Directory containing roadrunner releases" FORCE)
 endif()
 endif()
-
 
 #================ CPACK =========================================================================
 #Create distribution Pack

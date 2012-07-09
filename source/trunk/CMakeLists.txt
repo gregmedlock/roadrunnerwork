@@ -56,7 +56,7 @@ set(BUILD_SHARED_LIBS 												ON)
 
 set(RR_ROOT 					${CMAKE_CURRENT_SOURCE_DIR})
 set(RR_SOURCE_ROOT 				${CMAKE_CURRENT_SOURCE_DIR}/src)
-set(THIRD_PARTY_FOLDER 			${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
+set(THIRD_PARTY_FOLDER 			${CMAKE_CURRENT_SOURCE_DIR}/../../ThirdParty)
 
 set(exe_path		 			${PROJECT_BINARY_DIR}/bin)
 set(lib_path		 			${PROJECT_BINARY_DIR}/lib)
@@ -89,8 +89,9 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 
-include_directories(				${RR_ROOT})
-include_directories(				${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
+include_directories(				${RR_ROOT}
+				                    ${THIRD_PARTY_FOLDER})
+
 link_directories(					${LIBRARY_OUTPUT_PATH})
 link_directories(					${LIBSBML_INSTALL_FOLDER}/lib)
 link_directories(					${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib)
@@ -136,18 +137,17 @@ add_subdirectory(src)
 add_subdirectory(apps)
 add_subdirectory(Wrappers)
 
-#======================= INSTALL ========================================================
+#======================= INSTALL ROADRUNNER and Dependencies ========================================================
 install (FILES src/rr_pch.h	DESTINATION include COMPONENT rr_core)
 
 if(${BUILD_EXAMPLES})
 add_subdirectory(Examples)
 endif()
 
-add_subdirectory(Models)
 install (FILES Readme.txt 		DESTINATION . 	COMPONENT info)
 install (FILES License.txt 		DESTINATION . 	COMPONENT info)
 
-#==== INSTALL SYSTEM FILES (COMPILER SPECIFICS) =================================================
+#==== SYSTEM FILES (COMPILER SPECIFICS) =================================================
 if(${BORLAND})
 set(CG_RUNTIMES		cc32110MT.dll)
 foreach(runtime ${CG_RUNTIMES})
@@ -155,22 +155,7 @@ install (FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/cg/xe/${runtime} DEST
 endforeach()
 endif()
 
-##=== SBML dependencies
-#set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
-#foreach(system_file ${SBML_DEPENDENCIES})
-#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/bin/${system_file}	DESTINATION bin COMPONENT c_api)
-#endforeach()
-#
-#set(SBML_DEPENDENCIES libxml2)
-#foreach(system_file ${SBML_DEPENDENCIES})
-#if(${BORLAND})
-#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/${system_file}_xe.lib	DESTINATION lib COMPONENT c_api)
-#else()
-#install (FILES ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib/${system_file}.lib	DESTINATION lib COMPONENT c_api)
-#endif()
-#endforeach()
-
-#=== INSTALL TCC ==================================================
+#=== TCC ==================================================
 FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/*.*)
 install (FILES 	${tcc} DESTINATION bin COMPONENT rr_core)
 
