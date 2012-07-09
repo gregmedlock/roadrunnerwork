@@ -28,6 +28,8 @@ class ArrayListItem : public rrObject
                                                    ~ArrayListItem();
         T                                           GetValue() const;
                                                     operator T();
+        bool                                        HasValue() const;
+        bool                                        HasList() const;
 };
 
 template <class T>
@@ -95,10 +97,13 @@ void ArrayList<T>::operator=(const ArrayList& rhs)
     Clear();
 
     //Deep copy..
+    int count = rhs.Count();
+    mList.resize(rhs.Count());
     for(int i = 0; i < rhs.Count(); i++)
     {
-        ArrayListItem<T> *item = new ArrayListItem<T>(rhs[i]);
-        mList.push_back(item);
+        const ArrayListItem<T>& copyItem = rhs[i];
+        ArrayListItem<T> *item = new ArrayListItem<T>(copyItem);
+        mList[i] = item;
     }
 }
 
@@ -160,17 +165,19 @@ string ArrayList<T>::AsString()
 template< class T >
 ArrayListItem<T>::ArrayListItem(const ArrayListItem<T>& item)
 {
-    mValue = new T(item.GetValue());
-
-    if(item.mLinkedList)
+    if(item.HasValue())
     {
-        for(int i = 0; i < item.mLinkedList->Count(); i++)
-        {
-            mLinkedList = new ArrayList<T>(*item.mLinkedList);
-        }
+        mValue = new T(item.GetValue());
+        mLinkedList = NULL;
+    }
+    else if (item.mLinkedList)
+    {
+        mLinkedList = new ArrayList<T>(*item.mLinkedList);
+        mValue = NULL;
     }
     else
     {
+        mValue = NULL;
         mLinkedList = NULL;
     }
 }
@@ -287,6 +294,18 @@ ArrayListItem<int>::operator int()
         return mLinkedList->operator [](0);
     }
     return -1;
+}
+
+template <class T>
+bool ArrayListItem<T>::HasValue() const
+{
+    return mValue == NULL ? false : true;
+}
+
+template <class T>
+bool ArrayListItem<T>::HasList() const
+{
+    return mLinkedList == NULL ? false : true;
 }
 
 }
