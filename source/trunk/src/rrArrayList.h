@@ -37,7 +37,7 @@ class ArrayList : public rrObject
 {
     protected:
     public:
-        vector< ArrayListItem<T>* >		   			mList;	//Contains current list items..
+        vector< ArrayListItem<T>* >		   			mList;	//Contains list items..
 
     public:
                                         			ArrayList();
@@ -45,8 +45,6 @@ class ArrayList : public rrObject
                                         		   ~ArrayList();
 		mutable
         vector< ArrayListItem<T>* >::const_iterator mIter;
-        ArrayListItem<T>*	 						GetFirst() {return mList.begin();}
-        ArrayListItem<T>*				   			GetLast()  {return mList.end();}
 
         int                                         Count() const;
         void                                        Clear();
@@ -57,7 +55,6 @@ class ArrayList : public rrObject
         const ArrayListItem<T>&                     operator[](const int& index) const;
         void                                        operator=(const ArrayList& rhs);
         string                                      AsString();
-
 };
 
 template<class T>
@@ -97,7 +94,6 @@ void ArrayList<T>::operator=(const ArrayList& rhs)
     Clear();
 
     //Deep copy..
-    int count = rhs.Count();
     mList.resize(rhs.Count());
     for(int i = 0; i < rhs.Count(); i++)
     {
@@ -205,6 +201,10 @@ mValue(NULL)
     if(item)
     {
         mLinkedList = new ArrayList<T>(*item);
+    }
+    else
+    {
+        mLinkedList = NULL;
     }
 }
 
