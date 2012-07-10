@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{50721052-18E6-4513-A5B5-73F9A661A054}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -32,8 +32,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\src\;C:\roadrunnerwork\source\trunk\Testing\unit_tests\ArrayList\;$(rr_src);$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\src\;C:\rrInstalls\xe\lib\;C:\roadrunnerwork\source\trunk\Testing\unit_tests\ArrayList\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\source\;C:\roadrunnerwork\source\trunk\Testing\unit_tests\ArrayList\;$(rr_source);$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\source\;R:\rrInstalls\xe\lib\;C:\roadrunnerwork\source\trunk\Testing\unit_tests\ArrayList\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -69,11 +69,11 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\..\src\rrArrayList.cpp">
-				<DependentOn>..\..\..\src\rrArrayList.h</DependentOn>
+			<CppCompile Include="..\..\..\source\rrArrayList.cpp">
+				<DependentOn>..\..\..\source\rrArrayList.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\src\rrObject.cpp">
+			<CppCompile Include="..\..\..\source\rrObject.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="main.cpp">

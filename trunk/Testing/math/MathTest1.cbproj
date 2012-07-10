@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{EFDC4456-B60F-496A-9443-F60359B5911C}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -31,8 +31,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\rr_support\;..\..\src;C:\rrw\Testing\math\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\installs\xe\lib\;..\..\src\rr_support\;C:\rrw\Testing\math\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\source\rr_support\;..\..\source;C:\rrw\Testing\math\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\installs\xe\lib\;..\..\source\rr_support\;C:\rrw\Testing\math\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -44,7 +44,7 @@
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
 			<FinalOutputDir>..\..\installs\xe\bin</FinalOutputDir>
-			<IncludePath>..\..\src;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\source;$(IncludePath)</IncludePath>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -61,7 +61,7 @@
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 		</PropertyGroup>
-		<PropertyGroup Condition="'$(Cfg_1)'!='' And '$(FileToCompile)'=='..\..\src\rr_support\rrSupport.c'">
+		<PropertyGroup Condition="'$(Cfg_1)'!='' And '$(FileToCompile)'=='..\..\source\rr_support\rrSupport.c'">
 			<BCC_CPPCompileAlways>true</BCC_CPPCompileAlways>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -73,7 +73,7 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\..\src\rr_support\rrSupport.c">
+			<CppCompile Include="..\..\source\rr_support\rrSupport.c">
 				<HasBuildEvent>true</HasBuildEvent>
 				<BuildOrder>1</BuildOrder>
 				<OptionOverrides>true</OptionOverrides>

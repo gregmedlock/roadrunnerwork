@@ -4,7 +4,6 @@ project(RoadRunner)
 add_subdirectory(Models)
 add_subdirectory(trunk)
 
-
 #------ RELEASES FOLDER
 if(${BORLAND})
 set(RELEASE_FOLDER ${CMAKE_CURRENT_SOURCE_DIR}/releases/xe CACHE PATH "Directory containing roadrunner releases.")

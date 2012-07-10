@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{CC80C752-5416-4F2C-A53C-BA03FD07D889}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -31,8 +31,8 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\cxx\Util\;..\..\src\cxx\Util\mtrand\;C:\RRW\Testing\Random\;C:\RRW\src\cxx\Util;C:\RRW\src\cxx;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\src\cxx\Util\;..\..\src\cxx\Util\mtrand\;C:\RRW\Testing\Random\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\source\cxx\Util\;..\..\source\cxx\Util\mtrand\;C:\RRW\Testing\Random\;C:\RRW\source\cxx\Util;C:\RRW\source\cxx;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\source\cxx\Util\;..\..\source\cxx\Util\mtrand\;C:\RRW\Testing\Random\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -64,11 +64,11 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\src\cxx\Util\mtrand\mtrand.cpp">
+			<CppCompile Include="..\..\source\cxx\Util\mtrand\mtrand.cpp">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\cxx\Util\rrRandom.cpp">
-				<DependentOn>..\..\src\cxx\Util\rrRandom.h</DependentOn>
+			<CppCompile Include="..\..\source\cxx\Util\rrRandom.cpp">
+				<DependentOn>..\..\source\cxx\Util\rrRandom.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="main.cpp">
