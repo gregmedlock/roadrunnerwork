@@ -5,9 +5,6 @@
 #include <list>
 #include "rrObject.h"
 #include "rrStringList.h"
-using std::list;
-using std::vector;
-using std::string;
 
 namespace rr
 {
@@ -44,7 +41,7 @@ class RRArrayList : public rrObject
                                         			RRArrayList(const RRArrayList& cpyMe);
                                         		   ~RRArrayList();
 		mutable
-        vector< RRArrayListItem<T>* >::const_iterator mIter;
+        typename vector< RRArrayListItem<T>* >::const_iterator mIter;
 
         int                                         Count() const;
         void                                        Clear();
@@ -57,11 +54,11 @@ class RRArrayList : public rrObject
         string                                      AsString();
 };
 
-template<class T>
-ostream& operator<<(ostream& stream, RRArrayList<T>& list);
-
-template<class T>
-ostream& operator<<(ostream& stream, RRArrayListItem<T>& listItem);
+//template<class T>
+//ostream& operator<<(ostream& stream, RRArrayList<T>& list);
+//
+//template<class T>
+//ostream& operator<<(ostream& stream, RRArrayListItem<T>& listItem);
 
 template<class T>
 RRArrayList<T>::RRArrayList(){}
@@ -122,16 +119,6 @@ void RRArrayList<T>::Add(const T& _item)
         mList.push_back(item);
     }
 }
-
-//template<>
-//void RRArrayList< std::string>::Add(const string& _item)
-//{
-//	RRArrayListItem<T> *item = new RRArrayListItem<T>(_item);
-//    if(item)
-//    {
-//        mList.push_back(item);
-//    }
-//}
 
 template<class T>
 void RRArrayList<T>::Add(RRArrayList<T>& subList)
@@ -260,34 +247,6 @@ ostream& operator<<(ostream& stream, RRArrayList<T>& list)
     return stream;
 }
 
-template<>
-ostream& operator<<(ostream& stream, RRArrayList<string>& list)
-{
-    int i = 0;
-   	stream<<"{";
-    for(list.mIter = list.mList.begin(); list.mIter != list.mList.end(); list.mIter++)
-    {
-        RRArrayListItem<string>* item = (*list.mIter);
-        if(item->mLinkedList != NULL)
-        {
-            stream<<*item->mLinkedList;
-        }
-
-        if(item->mValue)
-        {
-            stream<<"\""<< *item->mValue <<"\""; //Need to quote strings in order to separate them 'visually' on output, i.e. {S1, {CC:S1,k1, CC:S1,k2 becomes {"S1", {"CC:S1,k1", "CC:S1,k2
-        }
-
-        if(i < list.Count() -1)
-        {
-        	stream<<",";
-        }
-        i++;
-    }
-    stream<<"}";
-    return stream;
-}
-
 template<class T>
 ostream& operator<<(ostream& stream, RRArrayListItem<T>& listItem)
 {
@@ -304,35 +263,6 @@ T RRArrayListItem<T>::GetValue() const
     return *mValue;
 }
 
-template <>
-RRArrayListItem<string>::operator string()
-{
-    if(mValue)
-    {
-        return *mValue;
-    }
-
-    if(mLinkedList)
-    {
-        return mLinkedList->AsString();
-    }
-    return "";
-}
-
-template <>
-RRArrayListItem<int>::operator int()
-{
-    if(mValue)
-    {
-        return *mValue;
-    }
-
-    if(mLinkedList)
-    {
-        return mLinkedList->operator [](0);
-    }
-    return -1;
-}
 
 template <class T>
 bool RRArrayListItem<T>::HasValue() const
