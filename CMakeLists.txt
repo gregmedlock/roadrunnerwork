@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project(RoadRunner)
 
 add_subdirectory(Models)
-add_subdirectory(source/trunk)
+add_subdirectory(trunk/source)
 
 
 #------ RELEASES FOLDER
@@ -59,7 +59,7 @@ set(CPACK_COMPONENT_DELPHI_DESCRIPTION						"Installs RoadRunner Delphi Units")
 set(CPACK_COMPONENT_PYTHON_DESCRIPTION						"Installs RoadRunner Python Module")
 set(CPACK_COMPONENT_RR_DOCS_DESCRIPTION						"Installs RoadRunner Doxygen Documentation")
 
-set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/source/trunk/License.txt")
+set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/trunk/source/License.txt")
 set(CPACK_PACKAGE_VENDOR									"UW")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY						"rr library - headers, libraries and examples")
 set(CPACK_PACKAGE_VERSION_MAJOR								"${RR_MAJOR_VERSION}")
