@@ -1,6 +1,6 @@
 set(target get_c_code)
 
-set(rrSrc "../../../../src")
+set(rrSrc "../../../../source")
 add_executable( ${target} 
 main.cpp
 ${rrSrc}/rrFileLog.cpp

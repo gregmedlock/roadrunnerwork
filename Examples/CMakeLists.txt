@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 PROJECT(rrExamples)
-set(RR_INCLUDE_ROOT "../src")
+set(RR_INCLUDE_ROOT "../source")
 
 # rr Includes
 include_directories(${RR_INCLUDE_ROOT})
