@@ -10,7 +10,7 @@
 
 namespace rr
 {
-
+RRArrayList<string> aList;
 
 }
 

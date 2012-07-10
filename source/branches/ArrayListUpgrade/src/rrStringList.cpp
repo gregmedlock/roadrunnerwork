@@ -24,6 +24,11 @@ mStrings(strings)
 StringList::~StringList()
 {}
 
+void StringList::Label(const string& lbl)
+{
+    mLabel = lbl;
+}
+
 StringList::StringList(const string& str, const string& delimiter)
 {
     mStrings = SplitString(str, delimiter);
@@ -34,6 +39,32 @@ StringList::StringList(const StringList& cp)
     mLabel = cp.mLabel;
     mStrings = cp.mStrings;
 }
+
+vector<string>::iterator StringList::begin()
+{
+    return mStrings.begin();
+}
+
+vector<string>::iterator StringList::end()
+{
+    return mStrings.end();
+}
+
+string& StringList::operator[](const int& index)
+{
+    return mStrings[index];
+}
+
+string  StringList::operator[](const int& index) const
+{
+    return mStrings[index];
+}
+
+int StringList::Count() const
+{
+    return mStrings.size();
+}
+
 
 string StringList::AsString(const string& delimiter) const
 {
@@ -69,7 +100,7 @@ StringList StringList::operator-(const StringList& rhs)
 {
     StringList newList;
 
-    for(int i = 0; i < size(); i++)
+    for(int i = 0; i < Count(); i++)
     {
         string item = mStrings[i] + "-" + rhs[i];
         newList.Add(item);

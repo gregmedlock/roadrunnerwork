@@ -4,6 +4,7 @@
 #pragma hdrstop
 #include "rr_c_api.h"
 #include "rr_c_api_support.h"
+#include "rrUtils.h"
 //---------------------------------------------------------------------------
 #if defined (__CODEGEAR__)
 #pragma package(smart_init)
@@ -118,7 +119,7 @@ RRStringList* createList(const StringList& sList)
     }
 
     RRStringList* list = new RRStringList;
-    list->Count = sList.size();
+    list->Count = sList.Count();
 
     list->String = new char*[list->Count];
 
@@ -155,6 +156,39 @@ RRStringList* createList(const ArrayList& arrList)
         }
     }
     return list;
+}
+
+RRStringArrayList* createList(const RRArrayList<string>& aList)
+{
+    if(!aList.Count())
+    {
+        return NULL;
+    }
+
+    //Setup a RRStringArrayList structure from aList
+    RRStringArrayList* theList = new RRStringArrayList;
+
+    theList->ItemCount = aList.Count();
+    theList->Items = new RRStringArrayListItem[aList.Count()];
+    int itemCount = aList.Count();
+    for(int i = 0; i < itemCount; i++)
+    {
+        if(aList[i].HasValue())
+        {
+            theList->Items[i].SubList = NULL;
+            string item = aList[i].GetValue();
+            theList->Items[i].Item = new char[item.size() + 1];
+            strcpy(theList->Items[i].Item, item.c_str());
+        }
+        else
+        {
+            //Item is a sublist
+            theList->Items[i].Item = NULL;
+            RRStringArrayList* list = createList((*aList[i].mLinkedList));
+            theList->Items[i].SubList = list;
+        }
+    }
+    return theList;
 }
 
 }

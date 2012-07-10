@@ -33,5 +33,6 @@ void PendingAssignment::AssignToModel()
         ComputedValues = ComputeAssignment();
     PerformAssignment(ComputedValues);
 }
-
+int PendingAssignment::GetIndex(){return Index;}
+double PendingAssignment::GetTime(){return Time;}
 }

@@ -17,6 +17,7 @@
 #include "rrCompiler.h"
 #include "rrLibStructSupport.h"
 #include "libstruct/lsLibla.h"
+#include "rrArrayList.h"
 
 using std::string;
 using namespace LIB_LA;
@@ -192,7 +193,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         ArrayList                       getUnscaledFluxControlCoefficientNames();
 		ArrayList                       getFluxControlCoefficientNames();
         ArrayList                       getUnscaledConcentrationControlCoefficientNames();
-		ArrayList                       getConcentrationControlCoefficientNames();
+		RRArrayList<string>             getConcentrationControlCoefficientNames();
 		ArrayList                       getElasticityCoefficientNames();
 		ArrayList                       getUnscaledElasticityCoefficientNames();
 		StringList                      getEigenValueNames();

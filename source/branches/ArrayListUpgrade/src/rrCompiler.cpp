@@ -37,6 +37,7 @@ mSupportCodeFolder("../rr_support")
 
 Compiler::~Compiler(){}
 
+string Compiler::GetDLLName(){return mDLLFileName;}
 bool Compiler::CompileC_DLL(const string& sourceFileName)
 {
     //Now compile the code and load the resulting dll, and call an exported function in it...

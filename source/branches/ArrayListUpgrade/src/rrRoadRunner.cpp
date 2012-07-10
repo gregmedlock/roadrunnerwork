@@ -131,7 +131,7 @@ bool RoadRunner::CreateSelectionList()
 		theList.Add(mSettings.mConcentration[i]);
 	}
 
-	if(theList.size() < 2)
+	if(theList.Count() < 2)
 	{
 		for(int i = 0; i < mSettings.mVariables.size(); i++)
 		{
@@ -1043,7 +1043,7 @@ StringList RoadRunner::getRateOfChangeNames()
     }
 
     StringList sp = mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
-    for (int i = 0; i < sp.size(); i++)
+    for (int i = 0; i < sp.Count(); i++)
     {
         sp[i] = sp[i] + "'";
     }
@@ -1827,40 +1827,36 @@ ArrayList RoadRunner::getUnscaledFluxControlCoefficientNames()
 }
 
 // Help("Returns the Symbols of all Concentration Control Coefficients.")
-ArrayList RoadRunner::getConcentrationControlCoefficientNames()
+RRArrayList<string> RoadRunner::getConcentrationControlCoefficientNames()
 {
-    ArrayList oResult;// = new ArrayList();
+    RRArrayList<string> oResult;// = new ArrayList();
     if (!mModel)
     {
         return oResult;
     }
-
+    RRArrayList<string>     result;
     StringList oFloating = getFloatingSpeciesNames();
     StringList oParameters = mModelGenerator->getGlobalParameterList();
     StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
     StringList oConservation = mModelGenerator->getConservationList();
 
-//    foreach (string s in oFloating)
     for(int i = 0; i < oFloating.Count(); i++)
     {
         string s = oFloating[i];
-        ArrayList oCCFloating;// = new ArrayList();
-        ArrayList oInner;// = new ArrayList();
-        oCCFloating.Add(s);
+        RRArrayList<string> oCCFloating;
+        RRArrayList<string> oInner;
+        oCCFloating.Add(s );
 
-//        foreach (string sParameter in oParameters)
         for(int i = 0; i < oParameters.Count(); i++)
         {
             oInner.Add("CC:" + s + "," + oParameters[i]);
         }
 
-        //foreach (string sBoundary in oBoundary)
         for(int i = 0; i < oBoundary.Count(); i++)
         {
             oInner.Add("CC:" + s + "," + oBoundary[i]);
         }
 
-        //foreach (string sConservation in oConservation)
         for(int i = 0; i < oConservation.Count(); i++)
         {
             oInner.Add("CC:" + s + "," + oConservation[i]);
@@ -1933,7 +1929,7 @@ ArrayList RoadRunner::getElasticityCoefficientNames()
     StringList conservationNames    = mModelGenerator->getConservationList();
     StringList globalParameterNames = mModelGenerator->getGlobalParameterList();
 
-    for(int i = 0; i < reactionNames.size(); i++)
+    for(int i = 0; i < reactionNames.Count(); i++)
     {
         string aString = reactionNames[i];
 
@@ -1941,25 +1937,25 @@ ArrayList RoadRunner::getElasticityCoefficientNames()
         StringList oInner;
         oCCReaction.Add(aString);
 
-        for(int j = 0; j < floatingSpeciesNames.size(); j++)
+        for(int j = 0; j < floatingSpeciesNames.Count(); j++)
         {
             string variable = floatingSpeciesNames[j];
             oInner.Add(Format("EE:{0},{1}", aString, variable));
         }
 
-        for(int j = 0; j < boundarySpeciesNames.size(); j++)
+        for(int j = 0; j < boundarySpeciesNames.Count(); j++)
         {
             string variable = boundarySpeciesNames[j];
             oInner.Add(Format("EE:{0},{1}", aString, variable));
         }
 
-        for(int j = 0; j < globalParameterNames.size(); j++)
+        for(int j = 0; j < globalParameterNames.Count(); j++)
         {
             string variable = globalParameterNames[j];
             oInner.Add(Format("EE:{0},{1}", aString, variable));
         }
 
-        for(int j = 0; j < conservationNames.size(); j++)
+        for(int j = 0; j < conservationNames.Count(); j++)
         {
             string variable = conservationNames[j];
             oInner.Add(Format("EE:{0},{1}", aString, variable));
@@ -1988,7 +1984,7 @@ ArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
     StringList oConservation = mModelGenerator->getConservationList();
 
 //    foreach (string s in oReactions)
-    for(int i = 0; i < oReactions.size(); i++)
+    for(int i = 0; i < oReactions.Count(); i++)
     {
         string aString = oReactions[i];
         ArrayList oCCReaction;// = new ArrayList();
@@ -1996,28 +1992,28 @@ ArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
         oCCReaction.Add(aString);
 
 //        foreach (string variable in oFloating)
-        for(int j = 0; j < oFloating.size(); j++)
+        for(int j = 0; j < oFloating.Count(); j++)
         {
             string variable = oFloating[j];
             oInner.Add(Format("uEE:{0},{1}", aString, variable));
         }
 
 //        foreach (string variable in oBoundary)
-        for(int j = 0; j < oBoundary.size(); j++)
+        for(int j = 0; j < oBoundary.Count(); j++)
         {
             string variable = oBoundary[j];
             oInner.Add(Format("uEE:{0},{1}", aString, variable));
         }
 
 //        foreach (string variable in oGlobalParameters)
-        for(int j = 0; j < oGlobalParameters.size(); j++)
+        for(int j = 0; j < oGlobalParameters.Count(); j++)
         {
             string variable = oGlobalParameters[j];
             oInner.Add(Format("uEE:{0},{1}", aString, variable));
         }
 
 //        foreach (string variable in oConservation)
-        for(int j = 0; j < oConservation.size(); j++)
+        for(int j = 0; j < oConservation.Count(); j++)
         {
             string variable = oConservation[j];
             oInner.Add(Format("uEE:{0},{1}", aString, variable));
@@ -2042,7 +2038,7 @@ StringList RoadRunner::getEigenValueNames()
     StringList floating = mModelGenerator->getFloatingSpeciesConcentrationList();
 
     //foreach (string s in oFloating)
-    for(int i = 0; i < floating.size(); i++)
+    for(int i = 0; i < floating.Count(); i++)
     {
         result.Add("eigen_" + floating[i]);
     }
@@ -2169,7 +2165,7 @@ vector<TSelectionRecord> RoadRunner::GetSteadyStateSelection(const StringList& n
 {
     vector<TSelectionRecord> steadyStateSelection;// = new TSelectionRecord[newSelectionList.Count];
 
-	steadyStateSelection.resize(newSelectionList.size());
+	steadyStateSelection.resize(newSelectionList.Count());
     StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList bs = mModelGenerator->getBoundarySpeciesList();
     StringList rs = mModelGenerator->getReactionNames();
@@ -2951,7 +2947,7 @@ StringList RoadRunner::getFloatingSpeciesAmountNames()
     StringList oResult;// = new ArrayList();
     StringList list = getFloatingSpeciesNames();
 //    foreach (string s in getFloatingSpeciesNames()) oResult.Add(String.Format("[{0}]", s));
-    for(int i = 0; i < list.size(); i++)
+    for(int i = 0; i < list.Count(); i++)
     {
         oResult.push_back(Format("[{0}]", list[i]));
     }

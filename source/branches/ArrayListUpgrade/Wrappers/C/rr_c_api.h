@@ -171,7 +171,7 @@ C_DECL_SPEC RRSymbolListsHandle     rrCallConv   getAvailableSymbols();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getUnscaledFluxControlCoefficientNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getFluxControlCoefficientNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getUnscaledConcentrationControlCoefficientNames();
-C_DECL_SPEC RRStringListHandle      rrCallConv   getConcentrationControlCoefficientNames();
+C_DECL_SPEC RRStringArrayList*      rrCallConv   getConcentrationControlCoefficientNames();
 
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getUnScaledElasticityMatrix();
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getScaledElasticityMatrix();
@@ -192,6 +192,7 @@ C_DECL_SPEC char*                   rrCallConv   printResult(const RRResultHandl
 C_DECL_SPEC char*                   rrCallConv   printMatrix(const RRMatrixHandle mat);
 C_DECL_SPEC char*                   rrCallConv   printVector(const RRVectorHandle vec);
 C_DECL_SPEC char*                   rrCallConv   printList(const RRStringListHandle list);
+C_DECL_SPEC char*                   rrCallConv   printStringArrayList(const RRStringArrayList* list);
 
 // Free memory functions
 C_DECL_SPEC bool                    rrCallConv   freeRRInstance(RRHandle handle);
@@ -199,9 +200,11 @@ C_DECL_SPEC bool                    rrCallConv   freeResult(RRResultHandle handl
 C_DECL_SPEC bool                    rrCallConv   freeText(char* text);
 C_DECL_SPEC bool                    rrCallConv   freeLabelStringList(RRLabelStringListHandle sl);
 C_DECL_SPEC bool                    rrCallConv   freeStringList(RRStringListHandle sl);
+C_DECL_SPEC bool                    rrCallConv   freeStringArrayList(RRStringArrayListHandle sl);
 C_DECL_SPEC bool                    rrCallConv   freeVector(RRVectorHandle vector);
 C_DECL_SPEC bool                    rrCallConv   freeMatrix(RRMatrixHandle matrix);
 C_DECL_SPEC bool                    rrCallConv   freeCCode(RRCCodeHandle code);
+C_DECL_SPEC void                    rrCallConv   Pause();
 
 #if defined( __cplusplus)
 }
