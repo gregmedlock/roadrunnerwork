@@ -26,14 +26,13 @@ class RR_DECLSPEC StringList : public rrObject
                                     StringList(const StringList& cp);
                                    ~StringList();
 
-        void                        Label(const string& lbl){mLabel = lbl;}
+        void                        Label(const string& lbl);
         void                        Add(const string& str);
         string                      AsString(const string& delimiter = ",") const;
-        int                         size() const {return mStrings.size();}
-        int                         Count() const {return mStrings.size();}
+        int                         Count() const;
         void                        operator=(const StringList& rhs);
-        string&                     operator[](const int& index){return mStrings[index];}
-        string                      operator[](const int& index) const {return mStrings[index];}
+        string&                     operator[](const int& index);
+        string                      operator[](const int& index) const;
         StringList                  operator-(const StringList& rhs);
 
         int                         find(const string& item);
@@ -41,8 +40,8 @@ class RR_DECLSPEC StringList : public rrObject
         void                        empty(){mStrings.clear();}
         bool                        Contains(const string& item);
         void                        push_back(const string& item);
-        vector<string>::iterator    begin(){return mStrings.begin();}
-        vector<string>::iterator    end(){return mStrings.end();}
+        vector<string>::iterator    begin();
+        vector<string>::iterator    end();
         void                        PreFix(const string& fix);
         void                        PostFix(const string& fix);
 };

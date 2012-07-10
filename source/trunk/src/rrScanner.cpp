@@ -40,6 +40,11 @@ currentToken(CodeTypes::tEmptyToken)
     initScanner();
 }
 
+void Scanner::AssignStream(stringstream& str)
+{
+    pStream = &str;
+}
+
 void Scanner::initScanner()
 {
     char ch;

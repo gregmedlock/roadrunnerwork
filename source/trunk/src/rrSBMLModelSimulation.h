@@ -4,13 +4,12 @@
 #include <string>
 #include "rrObject.h"
 #include "rrStringUtils.h"
-#include "rrRoadRunner.h"
 #include "rrSimulationSettings.h"
 #include "rrSimulationData.h"
 
 namespace rr
 {
-
+class RoadRunner;
 class RR_DECLSPEC SBMLModelSimulation : public rrObject
 {
     protected:
@@ -54,7 +53,6 @@ class RR_DECLSPEC SBMLModelSimulation : public rrObject
         bool                    SetTimeEnd(const double& tEnd);
         bool                    SetNumberOfPoints(const int& pts);
         bool                    SetSelectionList(const string& list);
-
         bool                    LoadSBMLFromFile();                    //Use current file information to load sbml from file
 };
 

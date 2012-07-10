@@ -115,7 +115,7 @@ void SimulationData::SetData(const DoubleMatrix& theData)
 
 bool SimulationData::Check()
 {
-    if(mTheData.CSize() != mColumnNames.size())
+    if(mTheData.CSize() != mColumnNames.Count())
     {
         Log(lError)<<"Number of columns in simulation data is not equal to number of columns in column header!";
         return false;
@@ -149,10 +149,10 @@ ostream& operator << (ostream& ss, SimulationData& data)
     }
 
     //First create the header
-    for(u_int i = 0; i < data.mColumnNames.size(); i++)
+    for(u_int i = 0; i < data.mColumnNames.Count(); i++)
     {
         ss<<data.mColumnNames[i];
-        if(i < data.mColumnNames.size() - 1)
+        if(i < data.mColumnNames.Count() - 1)
         {
             ss << ",";
         }

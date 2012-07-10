@@ -739,7 +739,7 @@ void CSharpGenerator::SubstituteEquation(const string& reactionName, Scanner& s,
             bReplaced = true;
         }
         if (!bReplaced &&
-            (mfunctionParameters.size() != 0 && !mfunctionParameters.Contains(s.tokenString)))
+            (mfunctionParameters.Count() != 0 && !mfunctionParameters.Contains(s.tokenString)))
         {
             throw Exception("Token '" + s.tokenString + "' not recognized.");
         }
@@ -928,7 +928,7 @@ int CSharpGenerator::ReadFloatingSpecies()
 
     StringListContainer oFloatingSpecies = mNOM.getListOfFloatingSpecies();
 
-    for (int i = 0; i < reOrderedList.size(); i++)
+    for (int i = 0; i < reOrderedList.Count(); i++)
     {
         for (int j = 0; j < oFloatingSpecies.Count(); j++)
         {
@@ -1272,11 +1272,11 @@ void CSharpGenerator::WriteUserDefinedFunctions(CodeBuilder& sb)
             sb<<Format("\t// User defined function:  {0}{1}", sName, NL());
             sb<<Format("\tpublic double {0} (", sName);
 
-            for (int j = 0; j < oArguments.size(); j++)
+            for (int j = 0; j < oArguments.Count(); j++)
             {
                 sb<<Append("double " + (string)oArguments[j]);
                 mfunctionParameters.Add((string)oArguments[j]);
-                if (j < oArguments.size() - 1)
+                if (j < oArguments.Count() - 1)
                     sb<<Append(", ");
             }
             sb<<Append(")" + NL() + "\t{" + NL() + "\t\t return " +
@@ -2207,7 +2207,7 @@ void CSharpGenerator::WriteEventAssignments(CodeBuilder& sb, const int& numReact
             eventPersistentType.push_back(mNOM.GetModel()->getEvent(i)->getTrigger()->getPersistent());
 
             StringList event = ev[1];
-            int numItems = event.size();
+            int numItems = event.Count();
             string str = substituteTerms(numReactions, "", event[0]);
             delays.Add(str);
 
@@ -2251,7 +2251,7 @@ void CSharpGenerator::WriteEventAssignments(CodeBuilder& sb, const int& numReact
             sb<<Append("\t}" + NL());
             sb<<Format("\tpublic void performEventAssignment_{0} (double[] values) {{1}", i, NL());
 
-            for (int j = 0; j < oTemp.size(); j++)
+            for (int j = 0; j < oTemp.Count(); j++)
             {
                 sb<<Format("\t\t{0} = values[{1}];{2}", oTemp[j], j, NL());
                 string aStr = (string) oTemp[j];
@@ -2269,7 +2269,7 @@ void CSharpGenerator::WriteEventAssignments(CodeBuilder& sb, const int& numReact
     }
 
     sb<<Format("{0}{0}\tprivate void InitializeDelays() { {0}", NL());
-    for (int i = 0; i < delays.size(); i++)
+    for (int i = 0; i < delays.Count(); i++)
     {
         sb<<Format("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate { return {1}; } );{2}", i, delays[i], NL());
         sb<<Format("\t\t_eventType[{0}] = {1};{2}", i, ToString((eventType[i] ? true : false)), NL());

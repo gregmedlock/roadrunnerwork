@@ -7,6 +7,7 @@
 #include "rrLogger.h"
 #include "rrSBMLModelSimulation.h"
 #include "rrUtils.h"
+#include "rrRoadRunner.h"
 //---------------------------------------------------------------------------
 
 #if defined(__CODEGEARC__)

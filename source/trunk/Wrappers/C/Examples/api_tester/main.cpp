@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "rr_c_api.h"
+#include "rr_c_api_support.h"
 //---------------------------------------------------------------------------
 #if defined(_MSC_VER)
 	#include <direct.h>
@@ -18,6 +19,8 @@
 #endif
 
 using namespace std;
+using namespace rr_c_api;
+
 int main(int argc, char* argv[])
 {
 	double value;
@@ -378,7 +381,12 @@ int main(int argc, char* argv[])
     //cout<<printList(getEigenValueNames());
 
     cout<<printList(getFluxControlCoefficientNames())<<endl;
-    //cout<<printList(getConcentrationControlCoefficientNames())<<endl;
+
+    RRStringArrayList* list =getConcentrationControlCoefficientNames();
+    cout<<printStringArrayList(list)<<endl;
+    freeStringArrayList(list);
+
+
     //cout<<printList(getElasticityNames())<<endl;
 
 //    setBoundarySpeciesByIndex(0,34);
@@ -414,7 +422,7 @@ int main(int argc, char* argv[])
     }
     else
     {
-      cout<<getLastError()<<endl;
+        cout<<getLastError()<<endl;
     }
 
     cout<<"getFloatingSpeciesInitialConditionNames: "<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
@@ -447,7 +455,7 @@ int main(int argc, char* argv[])
     cout<<text<<endl;
     freeText(text);
     freeRRInstance(rrHandle);
-	getchar();
+	Pause();
     return 0;
 }
 

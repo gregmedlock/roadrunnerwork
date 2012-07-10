@@ -43,7 +43,7 @@ class RR_DECLSPEC Compiler : public rrObject
                                     Compiler();
                                    ~Compiler();
         bool                        Compile(const string& cmdLine);
-        string                      GetDLLName(){return mDLLFileName;}
+        string                      GetDLLName();
         bool                        SetIncludePath(const string& path);
         bool                        SetLibraryPath(const string& path);
         /// <summary>

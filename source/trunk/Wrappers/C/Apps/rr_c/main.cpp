@@ -132,7 +132,7 @@ int main(int argc, char* argv[])
 
     if(args.Pause)
     {
-        Pause();
+        rr::Pause();
     }
     return 0;
 }

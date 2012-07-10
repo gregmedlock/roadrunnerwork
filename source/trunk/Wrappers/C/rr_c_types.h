@@ -56,7 +56,7 @@ typedef struct RRVector
 {
     int             Size;
     double*         Data;
-} *RRVectorHandle ;
+} *RRVectorHandle;
 
 
 typedef struct RRLabelStringList
@@ -64,28 +64,28 @@ typedef struct RRLabelStringList
     int             Count;
     char*           Label;
     char**          String;
-} *RRLabelStringListHandle ;
+} *RRLabelStringListHandle;
 
 
 typedef struct RRStringList
 {
     int             Count;
     char**          String;
-} *RRStringListHandle ;
+} *RRStringListHandle;
 
 
 typedef struct RRSymbolLists
 {
     int                 NumberOfLists;
     RRLabelStringList*  List;
-} *RRSymbolListsHandle ;
+} *RRSymbolListsHandle;
 
 typedef struct RRMatrix
 {
     int             RSize;
     int             CSize;
     double*         Data;
-} *RRMatrixHandle ;
+} *RRMatrixHandle;
 
 typedef struct RRResult
 {
@@ -93,14 +93,30 @@ typedef struct RRResult
     int             CSize;
     double*         Data;
     char**          ColumnHeaders;
-} *RRResultHandle ;
+} *RRResultHandle;
 
 typedef struct RRCCode
 {
     char*   Header;
     char*   Source;
 
-} *RRCCodeHandle ;
+} *RRCCodeHandle;
+
+struct RRStringArrayList;
+
+typedef struct RRStringArrayListItem
+{
+    char*                       Item;
+    RRStringArrayList*          SubList;
+} *RRStringArrayListItemHandle;
+
+typedef struct RRStringArrayList
+{
+    int                         ItemCount;
+    RRStringArrayListItemHandle Items;
+
+}  *RRStringArrayListHandle;
+
 
 #if defined( __cplusplus)
 }

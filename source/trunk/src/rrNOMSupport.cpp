@@ -3303,7 +3303,7 @@ void NOMSupport::UpdateDependencies(const string& sbmlId)
     if (current.HasInitialAssignment())
     {
         StringList dependentSymbols = GetSymbols(current.mInitialAssignment);
-        for(int i = 0; i < dependentSymbols.size(); i++)
+        for(int i = 0; i < dependentSymbols.Count(); i++)
         {
             string dependency = dependentSymbols[i];
             if(dependency != current.mId)
@@ -3321,7 +3321,7 @@ void NOMSupport::UpdateDependencies(const string& sbmlId)
     if (current.HasRule())
     {
         StringList dependentSymbols = GetSymbols(current.mRule);
-        for(int i = 0; i < dependentSymbols.size(); i++)
+        for(int i = 0; i < dependentSymbols.Count(); i++)
         {
             string dependency = dependentSymbols[i];
             if(dependency != current.mId)

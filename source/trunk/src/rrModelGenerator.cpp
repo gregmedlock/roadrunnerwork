@@ -35,6 +35,13 @@ void ModelGenerator::SetXMLModelFileName(const string& name)
     mCurrentXMLModelFileName = name;
 }
 
+SymbolList& ModelGenerator::GetReactionList(){return reactionList;}
+
+SymbolList& ModelGenerator::GetFloatingSpeciesConcentrationList(){return floatingSpeciesConcentrationList;}
+SymbolList& ModelGenerator::GetBoundarySpeciesList(){return boundarySpeciesList;}
+SymbolList& ModelGenerator::GetGlobalParameterList(){return globalParameterList;}
+SymbolList& ModelGenerator::GetConservationList(){return conservationList;}
+bool  ModelGenerator::SaveSourceCodeToFolder(const string& folder){return false;}    //Save generated source code to folder..
 void ModelGenerator::Reset()
 {
     mNOM.Reset();

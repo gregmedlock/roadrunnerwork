@@ -2053,7 +2053,7 @@ RRStringListHandle rrCallConv getUnscaledFluxControlCoefficientNames()
     return NULL;
 }
 
-RRStringListHandle rrCallConv getConcentrationControlCoefficientNames()
+RRStringArrayList* rrCallConv getConcentrationControlCoefficientNames()
 {
 	try
     {
@@ -2062,7 +2062,8 @@ RRStringListHandle rrCallConv getConcentrationControlCoefficientNames()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        return createList(gRRHandle->getConcentrationControlCoefficientNames());
+        RRArrayList<string> list = gRRHandle->getConcentrationControlCoefficientNames();
+        return createList(list);
     }
     catch(Exception& ex)
     {
@@ -2218,6 +2219,52 @@ char* rrCallConv  printList(const RRStringListHandle list)
             }
         }
 
+		string strTmp = resStr.str();
+    	char* resultChar = new char[strTmp.size() + 1];
+        strcpy(resultChar, strTmp.c_str());
+        return resultChar;
+
+    }
+    catch(Exception& ex)
+    {
+        stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
+char* rrCallConv  printStringArrayList(const RRStringArrayList* list)
+{
+	try
+    {
+        if(!list)
+        {
+            return NULL;
+        }
+
+		stringstream resStr;
+		//list  is actually a nested list
+
+        resStr<<"{";
+	    for(int i = 0; i < list->ItemCount; i++)
+        {
+
+            if(list->Items[i].Item != NULL)
+            {
+                resStr<<"\""<<list->Items[i].Item<<"\"";
+                if(i < list->ItemCount -1)
+                {
+                    resStr<<",";
+                }
+
+            }
+            else
+            {
+                resStr<<printStringArrayList(list->Items[i].SubList);   //Recursive call..
+            }
+        }
+        resStr<<"}";
 		string strTmp = resStr.str();
     	char* resultChar = new char[strTmp.size() + 1];
         strcpy(resultChar, strTmp.c_str());
@@ -2540,3 +2587,45 @@ bool rrCallConv freeCCode(RRCCodeHandle code)
     }
     return false;
 }
+
+bool rrCallConv freeStringArrayList(RRStringArrayListHandle theList)
+{
+	try
+    {
+        if(!theList)
+        {
+            return true;
+        }
+
+        int itemCount = theList->ItemCount;
+        for(int i = 0; i < itemCount; i++)
+        {
+            if(theList->Items[i].Item != NULL)
+            {
+                delete [] theList->Items[i].Item ;
+            }
+            else
+            {
+                //Item is a sublist
+                freeStringArrayList(theList->Items[i].SubList);
+            }
+        }
+
+        delete [] theList->Items;
+    	delete theList;
+    	return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return false;
+}
+
+void rrCallConv  Pause()
+{
+    rr::Pause(true);
+}
+

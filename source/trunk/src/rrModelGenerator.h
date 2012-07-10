@@ -126,20 +126,20 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         SymbolList                          ModifiableSpeciesReferenceList;
 
         StringList                          getReactionNames();
-        SymbolList&                         GetReactionList(){return reactionList;}
+        SymbolList&                         GetReactionList();
 
         StringList                          getFloatingSpeciesConcentrationList();    //Just returns the names...!
-        SymbolList&                         GetFloatingSpeciesConcentrationList(){return floatingSpeciesConcentrationList;}
+        SymbolList&                         GetFloatingSpeciesConcentrationList();
 
         StringList                          getBoundarySpeciesList();
-        SymbolList&                         GetBoundarySpeciesList(){return boundarySpeciesList;}
-        SymbolList&                         GetGlobalParameterList(){return globalParameterList;}
-        SymbolList&                         GetConservationList(){return conservationList;}
+        SymbolList&                         GetBoundarySpeciesList();
+        SymbolList&                         GetGlobalParameterList();
+        SymbolList&                         GetConservationList();
         string                              WriteDouble(const double& value);
 
         // Generates the Model Code from theSBML string
         virtual string                      generateModelCode(const string& sbmlStr) = 0;    //Any decendant need to implement at least this one
-        virtual    bool                     SaveSourceCodeToFolder(const string& folder){return false;}    //Save generated source code to folder..
+        virtual    bool                     SaveSourceCodeToFolder(const string& folder);
         void                                SetXMLModelFileName(const string& name);
 };
 }//namespace rr

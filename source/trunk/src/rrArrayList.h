@@ -5,27 +5,24 @@
 #include <list>
 #include "rrObject.h"
 #include "rrStringList.h"
-using std::list;
-using std::vector;
-using std::string;
 
 namespace rr
 {
 
 template <class T>
-class ArrayList;
+class RRArrayList;
 
 template <class T>
-class ArrayListItem : public rrObject
+class RRArrayListItem : public rrObject
 {
     public:
         T                                          *mValue;
-        ArrayList< T >                             *mLinkedList;
-        								           	ArrayListItem(const T& primitive);
-                                                    ArrayListItem(const ArrayListItem<T>& item);
-        								           	ArrayListItem(ArrayList<T>* item);
+        RRArrayList< T >                           *mLinkedList;
+        								           	RRArrayListItem(const T& primitive);
+                                                    RRArrayListItem(const RRArrayListItem<T>& item);
+        								           	RRArrayListItem(RRArrayList<T>* item);
 
-                                                   ~ArrayListItem();
+                                                   ~RRArrayListItem();
         T                                           GetValue() const;
                                                     operator T();
         bool                                        HasValue() const;
@@ -33,53 +30,53 @@ class ArrayListItem : public rrObject
 };
 
 template <class T>
-class ArrayList : public rrObject
+class RRArrayList : public rrObject
 {
     protected:
     public:
-        vector< ArrayListItem<T>* >		   			mList;	//Contains list items..
+        vector< RRArrayListItem<T>* >		   	    mList;	//Contains list items..
 
     public:
-                                        			ArrayList();
-                                        			ArrayList(const ArrayList& cpyMe);
-                                        		   ~ArrayList();
+                                        			RRArrayList();
+                                        			RRArrayList(const RRArrayList& cpyMe);
+                                        		   ~RRArrayList();
 		mutable
-        vector< ArrayListItem<T>* >::const_iterator mIter;
+        typename vector< RRArrayListItem<T>* >::const_iterator mIter;
 
         int                                         Count() const;
         void                                        Clear();
 		void                                        Add(const T& item);
-        void							            Add(ArrayList<T>& subList);
+        void							            Add(RRArrayList<T>& subList);
 
-        ArrayListItem<T>&                           operator[](const int& index);
-        const ArrayListItem<T>&                     operator[](const int& index) const;
-        void                                        operator=(const ArrayList& rhs);
+        RRArrayListItem<T>&                         operator[](const int& index);
+        const RRArrayListItem<T>&                   operator[](const int& index) const;
+        void                                        operator=(const RRArrayList& rhs);
         string                                      AsString();
 };
 
-template<class T>
-ostream& operator<<(ostream& stream, ArrayList<T>& list);
+//template<class T>
+//ostream& operator<<(ostream& stream, RRArrayList<T>& list);
+//
+//template<class T>
+//ostream& operator<<(ostream& stream, RRArrayListItem<T>& listItem);
 
 template<class T>
-ostream& operator<<(ostream& stream, ArrayListItem<T>& listItem);
+RRArrayList<T>::RRArrayList(){}
 
 template<class T>
-ArrayList<T>::ArrayList(){}
-
-template<class T>
-ArrayList<T>::ArrayList(const ArrayList& copyMe)
+RRArrayList<T>::RRArrayList(const RRArrayList& copyMe)
 {
     //Copy each item in copyMe
     mList.resize(copyMe.Count());
     for(int i = 0; i < copyMe.Count(); i++)
     {
-        const ArrayListItem<T>& item = copyMe[i];
-        mList[i] = new ArrayListItem<T>(item);
+        const RRArrayListItem<T>& item = copyMe[i];
+        mList[i] = new RRArrayListItem<T>(item);
     }
 }
 
 template<class T>
-ArrayList<T>::~ArrayList()
+RRArrayList<T>::~RRArrayList()
 {
     for(int i = 0; i < Count(); i++)
     {
@@ -89,7 +86,7 @@ ArrayList<T>::~ArrayList()
 }
 
 template<class T>
-void ArrayList<T>::operator=(const ArrayList& rhs)
+void RRArrayList<T>::operator=(const RRArrayList& rhs)
 {
     Clear();
 
@@ -97,14 +94,14 @@ void ArrayList<T>::operator=(const ArrayList& rhs)
     mList.resize(rhs.Count());
     for(int i = 0; i < rhs.Count(); i++)
     {
-        const ArrayListItem<T>& copyItem = rhs[i];
-        ArrayListItem<T> *item = new ArrayListItem<T>(copyItem);
+        const RRArrayListItem<T>& copyItem = rhs[i];
+        RRArrayListItem<T> *item = new RRArrayListItem<T>(copyItem);
         mList[i] = item;
     }
 }
 
 template<class T>
-void ArrayList<T>::Clear()
+void RRArrayList<T>::Clear()
 {
     for(int i = 0; i < Count(); i++)
     {
@@ -114,9 +111,9 @@ void ArrayList<T>::Clear()
 }
 
 template<class T>
-void ArrayList<T>::Add(const T& _item)
+void RRArrayList<T>::Add(const T& _item)
 {
-	ArrayListItem<T> *item = new ArrayListItem<T>(_item);
+	RRArrayListItem<T> *item = new RRArrayListItem<T>(_item);
     if(item)
     {
         mList.push_back(item);
@@ -124,9 +121,9 @@ void ArrayList<T>::Add(const T& _item)
 }
 
 template<class T>
-void ArrayList<T>::Add(ArrayList<T>& subList)
+void RRArrayList<T>::Add(RRArrayList<T>& subList)
 {
-    ArrayListItem<T>* newSubList = new ArrayListItem<T>(&subList);
+    RRArrayListItem<T>* newSubList = new RRArrayListItem<T>(&subList);
 
     //Don't use push back
     mList.resize(mList.size() + 1);
@@ -134,13 +131,13 @@ void ArrayList<T>::Add(ArrayList<T>& subList)
 }
 
 template<class T>
-int ArrayList<T>::Count() const
+int RRArrayList<T>::Count() const
 {
     return mList.size();
 }
 
 template<class T>
-string ArrayList<T>::AsString()
+string RRArrayList<T>::AsString()
 {
     string theList;
     for(int i = 0; i < Count(); i++)
@@ -159,7 +156,7 @@ string ArrayList<T>::AsString()
 
 ////////////////////////////////////////////////////////////////////////////
 template< class T >
-ArrayListItem<T>::ArrayListItem(const ArrayListItem<T>& item)
+RRArrayListItem<T>::RRArrayListItem(const RRArrayListItem<T>& item)
 {
     if(item.HasValue())
     {
@@ -168,7 +165,7 @@ ArrayListItem<T>::ArrayListItem(const ArrayListItem<T>& item)
     }
     else if (item.mLinkedList)
     {
-        mLinkedList = new ArrayList<T>(*item.mLinkedList);
+        mLinkedList = new RRArrayList<T>(*item.mLinkedList);
         mValue = NULL;
     }
     else
@@ -179,7 +176,7 @@ ArrayListItem<T>::ArrayListItem(const ArrayListItem<T>& item)
 }
 
 template< class T >
-ArrayListItem<T>::ArrayListItem(const T& item)
+RRArrayListItem<T>::RRArrayListItem(const T& item)
 :
 mLinkedList(NULL)
 {
@@ -187,20 +184,20 @@ mLinkedList(NULL)
 }
 
 template< class T >
-ArrayListItem<T>::~ArrayListItem()
+RRArrayListItem<T>::~RRArrayListItem()
 {
     delete mValue;
     delete mLinkedList;
 }
 
 template< class T >
-ArrayListItem<T>::ArrayListItem(ArrayList<T>* item)
+RRArrayListItem<T>::RRArrayListItem(RRArrayList<T>* item)
 :
 mValue(NULL)
 {
     if(item)
     {
-        mLinkedList = new ArrayList<T>(*item);
+        mLinkedList = new RRArrayList<T>(*item);
     }
     else
     {
@@ -209,27 +206,27 @@ mValue(NULL)
 }
 
 template<class T>
-ArrayListItem<T>& ArrayList<T>::operator[](const int& index)
+RRArrayListItem<T>& RRArrayList<T>::operator[](const int& index)
 {
-    ArrayListItem<T> *item = mList[index];
+    RRArrayListItem<T> *item = mList[index];
     return *item;
 }
 
 template<class T>
-const ArrayListItem<T>&  ArrayList<T>::operator[](const int& index) const
+const RRArrayListItem<T>&  RRArrayList<T>::operator[](const int& index) const
 {
-    ArrayListItem<T> *item = mList[index];
+    RRArrayListItem<T> *item = mList[index];
     return *item;
 }
 
 template<class T>
-ostream& operator<<(ostream& stream, ArrayList<T>& list)
+ostream& operator<<(ostream& stream, RRArrayList<T>& list)
 {
     int i = 0;
    	stream<<"{";
     for(list.mIter = list.mList.begin(); list.mIter != list.mList.end(); list.mIter++)
     {
-        ArrayListItem<T>* item = (*list.mIter);
+        RRArrayListItem<T>* item = (*list.mIter);
         if(item->mLinkedList != NULL)
         {
             stream<<*item->mLinkedList;
@@ -251,7 +248,7 @@ ostream& operator<<(ostream& stream, ArrayList<T>& list)
 }
 
 template<class T>
-ostream& operator<<(ostream& stream, ArrayListItem<T>& listItem)
+ostream& operator<<(ostream& stream, RRArrayListItem<T>& listItem)
 {
     if(listItem.mValue)
     {
@@ -261,49 +258,20 @@ ostream& operator<<(ostream& stream, ArrayListItem<T>& listItem)
 }
 
 template <class T>
-T ArrayListItem<T>::GetValue() const
+T RRArrayListItem<T>::GetValue() const
 {
     return *mValue;
 }
 
-template <>
-ArrayListItem<string>::operator string()
-{
-    if(mValue)
-    {
-        return *mValue;
-    }
-
-    if(mLinkedList)
-    {
-        return mLinkedList->AsString();
-    }
-    return "";
-}
-
-template <>
-ArrayListItem<int>::operator int()
-{
-    if(mValue)
-    {
-        return *mValue;
-    }
-
-    if(mLinkedList)
-    {
-        return mLinkedList->operator [](0);
-    }
-    return -1;
-}
 
 template <class T>
-bool ArrayListItem<T>::HasValue() const
+bool RRArrayListItem<T>::HasValue() const
 {
     return mValue == NULL ? false : true;
 }
 
 template <class T>
-bool ArrayListItem<T>::HasList() const
+bool RRArrayListItem<T>::HasList() const
 {
     return mLinkedList == NULL ? false : true;
 }

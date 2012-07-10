@@ -547,12 +547,14 @@ void CGenerator::WriteUserDefinedFunctions(CodeBuilder& ignore)
             mSource<<Format("// User defined function:  {0}{1}", sName, NL());
             mSource<<Format("\t double {0} (", sName);
 
-            for (int j = 0; j < oArguments.size(); j++)
+            for (int j = 0; j < oArguments.Count(); j++)
             {
                 mSource<<Append("double " + (string)oArguments[j]);
                 mfunctionParameters.Add((string)oArguments[j]);
-                if (j < oArguments.size() - 1)
+                if (j < oArguments.Count() - 1)
+                {
                     mSource<<Append(", ");
+                }
             }
             mSource<<Append(")" + NL() + "\t{" + NL() + "\t\t return " +
                       convertUserFunctionExpression(sBody)
@@ -1440,7 +1442,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
             eventPersistentType.push_back(mNOM.GetModel()->getEvent(i)->getTrigger()->getPersistent());
 
             StringList event = ev[1];
-            int numItems = event.size();
+            int numItems = event.Count();
             string str = substituteTerms(numReactions, "", event[0]);
             delays.Add(str);
 
@@ -1494,7 +1496,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
             mSource<<Append("}" + NL());
             mSource<<Format("void performEventAssignment_{0}(double* values) \n{{1}", i, NL());
 
-            for (int j = 0; j < oTemp.size(); j++)
+            for (int j = 0; j < oTemp.Count(); j++)
             {
                 mSource<<Format("\t\t{0} = values[{1}];{2}", oTemp[j], j, NL());
                 string aStr = (string) oTemp[j];
@@ -1513,7 +1515,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
 
 
     //Have to create TEventDelegate functions here
-    for (int i = 0; i < delays.size(); i++)
+    for (int i = 0; i < delays.Count(); i++)
     {
         mSource<<"double GetEventDelay_"<<i<<"()\n{\treturn "<<delays[i]<<";\n}\n";
     }
@@ -1522,7 +1524,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
 
     //mSource<<tab<<"printf(\"At line %d in function %s \\n\",__LINE__, __FUNCTION__);"<<endl;
 
-    for (int i = 0; i < delays.size(); i++)
+    for (int i = 0; i < delays.Count(); i++)
     {
 //        mSource<<Format("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate { return {1}; } );{2}", i, delays[i], NL());
 
@@ -2285,7 +2287,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Code
             bReplaced = true;
         }
         if (!bReplaced &&
-            (mfunctionParameters.size() != 0 && !mfunctionParameters.Contains(s.tokenString)))
+            (mfunctionParameters.Count() != 0 && !mfunctionParameters.Contains(s.tokenString)))
         {
             throw Exception("Token '" + s.tokenString + "' not recognized.");
         }
@@ -2482,7 +2484,7 @@ int CGenerator::ReadFloatingSpecies()
 
     StringListContainer oFloatingSpecies = mNOM.getListOfFloatingSpecies();
 
-    for (int i = 0; i < reOrderedList.size(); i++)
+    for (int i = 0; i < reOrderedList.Count(); i++)
     {
         for (int j = 0; j < oFloatingSpecies.Count(); j++)
         {
