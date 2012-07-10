@@ -77,18 +77,20 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 include_directories(				${RR_ROOT}
 				                    ${THIRD_PARTY_FOLDER})
 
-link_directories(					${LIBRARY_OUTPUT_PATH}
+link_directories(				${LIBRARY_OUTPUT_PATH}
                                     ${LIBSBML_INSTALL_FOLDER}/lib
                                     ${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib
                                     ${CLAPACK_BUILD_FOLDER}/SRC
                                     ${CLAPACK_BUILD_FOLDER}/BLAS/SRC
                                     ${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c
+                                    ${CLAPACK_BUILD_FOLDER}/lib
                  )
 
 if(${MSVC})
 add_definitions(-DCRT_NONSTDC_NO_DEPRECATE)
 link_directories(					${CLAPACK_BUILD_FOLDER}/SRC/Debug
                                     ${CLAPACK_BUILD_FOLDER}/BLAS/SRC/Debug
+                                    ${CLAPACK_BUILD_FOLDER}/lib/Debug
                                     ${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c/Debug)
 SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} /EHsc ")
 SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
