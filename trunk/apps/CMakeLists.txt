@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
 PROJECT(Apps)
-set(RR_INCLUDE_ROOT "../src")
+set(RR_INCLUDE_ROOT "../source")
 
 # rr Includes
 include_directories(
@@ -23,8 +23,8 @@ foreach(app ${apps})
  	add_subdirectory(${app})
 	FILE (GLOB hdrs ${app}/*.h)
  	install (FILES ${hdrs} 						DESTINATION Examples/${app}	COMPONENT example_files)
-	FILE (GLOB src ${app}/*.cpp)
- 	install (FILES ${src} 						DESTINATION Examples/${app}	COMPONENT example_files)
+	FILE (GLOB source ${app}/*.cpp)
+ 	install (FILES ${source} 						DESTINATION Examples/${app}	COMPONENT example_files)
  	install (FILES ${app}/Readme.txt 			DESTINATION Examples/${app}	COMPONENT example_files)
  	install (FILES ${app}/CMakeLists.txt 		DESTINATION Examples/${app}	COMPONENT example_files)
 endforeach(app)

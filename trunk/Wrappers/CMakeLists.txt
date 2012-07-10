@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
 PROJECT(rrWrappers)
-set(RR_INCLUDE_ROOT "../src")
+set(RR_INCLUDE_ROOT "../source")
 
 # rr Includes
 include_directories(${RR_INCLUDE_ROOT})

@@ -17,7 +17,7 @@ IF( SWIG_FOUND )
     # set up SWIG
     INCLUDE_DIRECTORIES( 
         ${PYTHON_INCLUDE_PATH} 
-        "C:/rrSource/src/"
+        "C:/rrSource/source/"
        )
     INCLUDE( ${SWIG_USE_FILE} )
     SET( CMAKE_SWIG_FLAGS "" )

@@ -40,7 +40,7 @@ OPTION (INSTALL_STATIC_LIB		"Install RoadRunner static lib"		OFF)
 set(BUILD_SHARED_LIBS 												ON)
 
 set(RR_ROOT 					${CMAKE_CURRENT_SOURCE_DIR})
-set(RR_SOURCE_ROOT 				${CMAKE_CURRENT_SOURCE_DIR}/src)
+set(RR_SOURCE_ROOT 				${CMAKE_CURRENT_SOURCE_DIR}/source)
 set(THIRD_PARTY_FOLDER 			${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty)
 
 set(exe_path		 			${PROJECT_BINARY_DIR}/bin)
@@ -121,12 +121,12 @@ IF (BUILD_SHARED_LIBS)
 ENDIF (BUILD_SHARED_LIBS)
 
 #Source Code Folder
-add_subdirectory(src)
+add_subdirectory(source)
 add_subdirectory(apps)
 add_subdirectory(Wrappers)
 
 #======================= INSTALL ROADRUNNER and Dependencies ========================================================
-install (FILES src/rr_pch.h	DESTINATION include COMPONENT rr_core)
+install (FILES source/rr_pch.h	DESTINATION include COMPONENT rr_core)
 
 if(${BUILD_EXAMPLES})
 add_subdirectory(Examples)
