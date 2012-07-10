@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(RRThirdPartyBuild)
-
-#These will be the defaults ...
-SET(RR_BUILDS_ROOT "C:/rrBuilds")
-SET(RR_INSTALLS_ROOT "C:/rrInstalls")
+project(RRTPBuild)
 
 if(${BORLAND})
 set(FOLDER_POSTFIX "xe")
@@ -11,13 +7,7 @@ else(${BORLAND})
 set(FOLDER_POSTFIX "vs")
 endif()
 
-#Setup so that roadrunner is always built as a dll and linked statically with 'as much as possible'
-#set(BUILD_SHARED_LIBS 												ON)
-
 set(THIRD_PARTY_FOLDER 			${CMAKE_CURRENT_SOURCE_DIR})
-
-set(exe_path		 			${PROJECT_BINARY_DIR}/bin)
-set(lib_path		 			${PROJECT_BINARY_DIR}/lib)
 
 set(CMAKE_BUILD_TYPE "Debug" CACHE STRING
     "Choose the build type. The options are: None (CMAKE_CXX_FLAGS or
@@ -27,6 +17,9 @@ if("${CMAKE_BUILD_TYPE}" STREQUAL "")
   "Choose the build type. The options are: None (CMAKE_CXX_FLAGS or
   CMAKE_C_FLAGS are used), Debug, Release, RelWithDebInfo, MinSizeRel." FORCE)
 endif()
+
+set(exe_path		 			${PROJECT_BINARY_DIR}/bin)
+set(lib_path		 			${PROJECT_BINARY_DIR}/lib)
 
 IF(WIN32)
     IF(${MSVC})
@@ -47,16 +40,19 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 
+if(${BORLAND})
+include_directories(        #        ${THIRD_PARTY_FOLDER}/libsbml_xe
+                                    ${THIRD_PARTY_FOLDER}/libsbml_xe/src
+#                                    ${THIRD_PARTY_FOLDER}/libsbml_xe/src/sbml 
+)
+link_directories(${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib)
+else()
 include_directories(                ${THIRD_PARTY_FOLDER}/libsbml
                                     ${THIRD_PARTY_FOLDER}/libsbml/src
                                     ${THIRD_PARTY_FOLDER}/libsbml/src/sbml
-
-
-)
-
-link_directories(					
-                                    ${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib
-                 )
+                   )
+link_directories(					${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib)
+endif()
 
 if(${MSVC})
 #SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} /EHsc ")
@@ -69,25 +65,27 @@ SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} -std=gnu++0x")
 endif()
 
 if(${BORLAND})
-link_directories(${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib)
 add_definitions(
-                                -DUSE_PCH                   #Enable pre-compiled headers
-                                -H=${PROJECT_BINARY_DIR}/rr_pch.csm
+#                                -DUSE_PCH                   #Enable pre-compiled headers
+ #                               -H=${PROJECT_BINARY_DIR}/rr_tp_pch.csm
                                 -w-8012                     #Comparing signed /unsigned
                                 -w-8057                     #Parameter never used
                                 -w-8004                     #'var' is assigned a value that is never used
         )
 endif()
 
-#Source Code Folder
+#3rd party folder
+if(${BORLAND})
+add_subdirectory(libsbml_xe)
+else(${BORLAND})
 add_subdirectory(libsbml)
+endif()
+
 add_subdirectory(clapack/3.2.1)
 add_subdirectory(sundials)
 
-
 #set(LIBSBML_DEPENDENCY_DIR CACHE STRING "./libsbml_dependencies")
 #set(LIBXML_INCLUDE_DIR CACHE STRING "libsbml_dependencies/include/libxml")
-
 
 #==== SYSTEM FILES (COMPILER SPECIFICS) =================================================
 if(${BORLAND})

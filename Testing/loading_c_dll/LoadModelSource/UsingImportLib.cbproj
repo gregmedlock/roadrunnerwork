@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{1BD450E0-EE57-4CD7-A9B1-87897D721F74}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -31,7 +31,7 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\src\c_src;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\..\source\c_source;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>Debug\Win32\;C:\RRW\Testing\C-program\LoadModelSource\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>

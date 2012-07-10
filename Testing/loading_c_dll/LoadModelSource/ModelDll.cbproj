@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{8B339098-8C2D-46DA-B6A0-1AA9BCF80F8B}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -31,8 +31,8 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\src\c_src\;C:\DataOutput\00173\;..\..\..\src\c_src;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\..\src\c_src\;C:\DataOutput\00173\;..\..\rr_code_output\c_from_rr++\;C:\RRW\Testing\C-program\LoadModelSource\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\..\source\c_source\;C:\DataOutput\00173\;..\..\..\source\c_source;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\..\source\c_source\;C:\DataOutput\00173\;..\..\rr_code_output\c_from_rr++\;C:\RRW\Testing\C-program\LoadModelSource\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -67,7 +67,7 @@
 			<CppCompile Include="C:\DataOutput\00173\00173-sbml-l2v4.c">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\..\src\c_src\rrSupportFunctions.c">
+			<CppCompile Include="..\..\..\source\c_source\rrSupportFunctions.c">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="ModelDll.c">

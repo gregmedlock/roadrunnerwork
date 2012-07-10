@@ -33,8 +33,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\Wrappers\C\Apps\rr_c\;..\..\src\;..\..\Wrappers\C\Apps\;..\..\src;..\..\Wrappers\C;..\..\Wrappers\C\Examples\rr_c\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\Wrappers\C\Apps\rr_c\;..\..\src\;..\..\Wrappers\C\Apps\;C:\rrInstalls\xe\lib\;..\..\Wrappers\C\Examples\rr_c\;C:\roadrunnerwork\trunk\Wrappers\C\Examples\rr_c\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\Wrappers\C\Apps\rr_c\;..\..\source\;..\..\Wrappers\C\Apps\;..\..\source;..\..\Wrappers\C;..\..\Wrappers\C\Examples\rr_c\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\Wrappers\C\Apps\rr_c\;..\..\source\;..\..\Wrappers\C\Apps\;R:\rrInstalls\xe\lib\;..\..\Wrappers\C\Examples\rr_c\;C:\roadrunnerwork\trunk\Wrappers\C\Examples\rr_c\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -66,40 +66,40 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\src\rrFileLog.cpp">
-				<DependentOn>..\..\src\rrFileLog.h</DependentOn>
+			<CppCompile Include="..\..\source\rrFileLog.cpp">
+				<DependentOn>..\..\source\rrFileLog.h</DependentOn>
 				<BuildOrder>12</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrLog.cpp">
-				<DependentOn>..\..\src\rrLog.h</DependentOn>
+			<CppCompile Include="..\..\source\rrLog.cpp">
+				<DependentOn>..\..\source\rrLog.h</DependentOn>
 				<BuildOrder>5</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrLogFile.cpp">
-				<DependentOn>..\..\src\rrLogFile.h</DependentOn>
+			<CppCompile Include="..\..\source\rrLogFile.cpp">
+				<DependentOn>..\..\source\rrLogFile.h</DependentOn>
 				<BuildOrder>6</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrLoggerUtils.cpp">
-				<DependentOn>..\..\src\rrLoggerUtils.h</DependentOn>
+			<CppCompile Include="..\..\source\rrLoggerUtils.cpp">
+				<DependentOn>..\..\source\rrLoggerUtils.h</DependentOn>
 				<BuildOrder>7</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrLogLevel.cpp">
-				<DependentOn>..\..\src\rrLogLevel.h</DependentOn>
+			<CppCompile Include="..\..\source\rrLogLevel.cpp">
+				<DependentOn>..\..\source\rrLogLevel.h</DependentOn>
 				<BuildOrder>8</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrLogOutput.cpp">
-				<DependentOn>..\..\src\rrLogOutput.h</DependentOn>
+			<CppCompile Include="..\..\source\rrLogOutput.cpp">
+				<DependentOn>..\..\source\rrLogOutput.h</DependentOn>
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrObject.cpp">
-				<DependentOn>..\..\src\rrObject.h</DependentOn>
+			<CppCompile Include="..\..\source\rrObject.cpp">
+				<DependentOn>..\..\source\rrObject.h</DependentOn>
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrStringUtils.cpp">
-				<DependentOn>..\..\src\rrStringUtils.h</DependentOn>
+			<CppCompile Include="..\..\source\rrStringUtils.cpp">
+				<DependentOn>..\..\source\rrStringUtils.h</DependentOn>
 				<BuildOrder>10</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\rrUtils.cpp">
-				<DependentOn>..\..\src\rrUtils.h</DependentOn>
+			<CppCompile Include="..\..\source\rrUtils.cpp">
+				<DependentOn>..\..\source\rrUtils.h</DependentOn>
 				<BuildOrder>4</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\Wrappers\C\Apps\rr_c\Args.cpp">
@@ -112,7 +112,7 @@
 			<CppCompile Include="..\..\Wrappers\C\Apps\rr_c\main.cpp">
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="C:\rrInstalls\xe\lib\rr_c_api.lib">
+			<LibFiles Include="R:\rrInstalls\xe\lib\rr_c_api.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>1</BuildOrder>
 			</LibFiles>

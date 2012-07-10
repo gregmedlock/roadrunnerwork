@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{BB98A606-C02D-454F-B743-70C12C4C53CD}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -35,8 +35,8 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\src\;..\..\src\Util\;..\..\src;..\..\src\Logger;..\..\src\Scanner;..\..\src\LibStructSupport;..\..\src\libstruct;C:\rrInstalls\include;C:\rrInstalls\sundials\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\src\;..\..\src\Util\;..\..\src\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\src\cxx\Scanner\;..\..\src\cxx\;..\..\src\cxx\Logger\;..\..\src\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\;C:\rrThirdPartyInstalls\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\source\;..\..\source\Util\;..\..\source;..\..\source\Logger;..\..\source\Scanner;..\..\source\LibStructSupport;..\..\source\libstruct;R:\rrInstalls\include;R:\rrInstalls\sundials\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\source\;..\..\source\Util\;..\..\source\cxx\LibStructSupport\;..\..\ThirdParty\libstruct_xe\LibStructural\;..\..\source\cxx\Scanner\;..\..\source\cxx\;..\..\source\cxx\Logger\;..\..\source\cxx\Util\;..\..\ThirdParty\libstruct\LibStructural\;C:\RRTHIR~1\LIBSTR~2\lib\libstruct\lib\;..\..\build\link\;C:\RRW\Testing\loadSBML\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -136,7 +136,7 @@
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="DebugSourceDirs">C:\RRW\src\cxx</Parameters>
+						<Parameters Name="DebugSourceDirs">C:\RRW\source\cxx</Parameters>
 					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

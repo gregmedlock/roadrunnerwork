@@ -23,13 +23,13 @@
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
-			<ILINK_LibraryPath>C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;..\..\src\nleq\;C:\roadrunnerwork\source\trunk\ide_builds\xe\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>R:\rrBuilds\xe\ThirdParty\lib\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;..\..\source\nleq\;C:\roadrunnerwork\source\trunk\ide_builds\xe\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<ProjectType>CppDynamicLibrary</ProjectType>
 			<Defines>WIN32;$(Defines)</Defines>
 			<PackageImports>vclx.bpi;vcl.bpi;vclimg.bpi;dbrtl.bpi;Rave90VCL.bpi;bdertl.bpi;rtl.bpi;bcbie.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vcldb.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;inet.bpi;inetdb.bpi;webdsnap.bpi;websnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DbxClientDriver.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi</PackageImports>
 			<NoVCL>true</NoVCL>
 			<OutputExt>dll</OutputExt>
-			<IncludePath>..\..\src\nleq\;C:\roadrunnerwork\source\trunk\ide_builds\xe\;$(RR_ROOT)\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\source\nleq\;C:\roadrunnerwork\source\trunk\ide_builds\xe\;$(RR_ROOT)\trunk\ThirdParty\clapack\3.2.1\INCLUDE;$(IncludePath)</IncludePath>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
 			<_TCHARMapping>char</_TCHARMapping>
 			<BPILibOutputDir>$(RR_INSTALL)\lib</BPILibOutputDir>
@@ -67,30 +67,30 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\src\nleq\linalg_nleq1.c">
+			<CppCompile Include="..\..\source\nleq\linalg_nleq1.c">
 				<BuildOrder>7</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\nleq1.c">
+			<CppCompile Include="..\..\source\nleq\nleq1.c">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\rr_nleq_dll_entry.c">
+			<CppCompile Include="..\..\source\nleq\rr_nleq_dll_entry.c">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\wnorm.c">
+			<CppCompile Include="..\..\source\nleq\wnorm.c">
 				<BuildOrder>6</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\zibconst.c">
+			<CppCompile Include="..\..\source\nleq\zibconst.c">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\zibmon.c">
+			<CppCompile Include="..\..\source\nleq\zibmon.c">
 				<BuildOrder>3</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\src\nleq\zibsec.c">
+			<CppCompile Include="..\..\source\nleq\zibsec.c">
 				<BuildOrder>5</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\libf2c.lib">
+			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\libf2c.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>4</BuildOrder>
+				<BuildOrder>7</BuildOrder>
 			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>

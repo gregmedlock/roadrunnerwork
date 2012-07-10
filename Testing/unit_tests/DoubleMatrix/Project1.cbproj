@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{24681419-FA10-4CCA-93EB-90B521A6D35B}</ProjectGuid>
 			<ProjectVersion>13.4</ProjectVersion>
@@ -39,7 +39,7 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<PackageImports>bindcompfmx;fmx;rtl;dbrtl;IndySystem;DbxClientDriver;bindcomp;inetdb;DBXInterBaseDriver;xmlrtl;DbxCommonDriver;IndyProtocols;DBXMySQLDriver;dbxcds;soaprtl;bindengine;CustomIPTransport;dsnap;fmxase;IndyCore;inet;fmxobj;inetdbxpress;fmxdae;IPIndyImpl;dbexpress;$(PackageImports)</PackageImports>
 			<DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
-			<IncludePath>C:\rrw\Testing\unit_tests\DoubleMatrix\;$(rr_root)\src;$(rr_root)\src\Util;$(IncludePath)</IncludePath>
+			<IncludePath>C:\rrw\Testing\unit_tests\DoubleMatrix\;$(rr_root)\source;$(rr_root)\source\Util;$(IncludePath)</IncludePath>
 			<ProjectType>CppConsoleApplication</ProjectType>
 			<Manifest_File>None</Manifest_File>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -81,7 +81,7 @@
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
 			<BCC_AllCodeguardOptions>true</BCC_AllCodeguardOptions>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<Debugger_DebugSourcePath>C:\rrw\src\Util\;C:\rrw\xe_2\rr_lib\;C:\rrw\src\Logger\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
+			<Debugger_DebugSourcePath>C:\rrw\source\Util\;C:\rrw\xe_2\rr_lib\;C:\rrw\source\Logger\;$(Debugger_DebugSourcePath)</Debugger_DebugSourcePath>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 		</PropertyGroup>
