@@ -83,6 +83,7 @@ int main(int argc, char* argv[])
 		cerr<<"Last error was"<<getLastError()<<endl;
 		return -1;
 	}
+
 	int r = getNumberOfReactions();
 	int m = getNumberOfFloatingSpecies();
 	int b = getNumberOfBoundarySpecies();
@@ -144,14 +145,14 @@ int main(int argc, char* argv[])
 	if (r > 0) {
        printf ("\nUnscaled flux control coefficient names:\n");
 	   printf ("----------------------------------------\n");
-	   cout<<printList(getUnscaledFluxControlCoefficientNames())<<endl;
+	   cout<<printStringArrayList(getUnscaledFluxControlCoefficientNames())<<endl;
 	}
 	printf ("\n");
 
 	if (m > 0) {
        printf ("\nUnscaled concentration control coefficient names:\n");
 	   printf ("-------------------------------------------------\n");
-	   cout<<printList(getUnscaledConcentrationControlCoefficientNames())<<endl;
+	   cout<<printStringArrayList(getUnscaledConcentrationControlCoefficientNames())<<endl;
 	}
 	printf ("\n");
 
@@ -344,44 +345,71 @@ int main(int argc, char* argv[])
 	getGlobalParameterByIndex (3, value);
 	printf ("%f\n", value);*/
 
-	struct RRVector veca;
+	RRVector veca;
 	veca.Size = 3;
-	veca.Data = (double *) malloc (sizeof (double)*3);
-	veca.Data[0] = 1;
+	veca.Data = new double[3];
+   	veca.Data[0] = 1;
 	veca.Data[1] = 2;
 	veca.Data[2] = 3;
 
-	printf ("\nCall to getReactionRatesEx (S1=1, S2=2, S3=3):\n");
-	cout<<printVector (getReactionRatesEx (&veca))<<endl;
-
-	printf ("\nCall to getRatesOfChange (with S1=1, S2=2, S3=3):\n");
-	cout<<printVector (getRatesOfChange())<<endl;
+    cout<<"List of floating species: \n"<<printList(getFloatingSpeciesNames())<<endl;
 
 	printf ("\nCall to getRatesOfChangeEx (S1=1, S2=2, S3=3):\n");
 	cout<<printVector (getRatesOfChangeEx(&veca))<<endl;
 
 
+//	printf ("\nCall to getReactionRatesEx (S1=1, S2=2, S3=3):\n");
+//	cout<<printVector (getReactionRatesEx (&veca))<<endl;
+//
+//	printf ("\nCall to getRatesOfChange (with S1=1, S2=2, S3=3):\n");
+//	cout<<printVector (getRatesOfChange())<<endl;
+
+
+    RRVector* test = getReactionRates();
+    cout<<printVector(test);
+
+    setFloatingSpeciesByIndex(0,2);
+    setFloatingSpeciesByIndex(1,4);
+    setFloatingSpeciesByIndex(2,6);
+
+    test = getReactionRates();
+    cout<<printVector(test);
+
+    //Get value problem..
+    getValue("S1", value);
+    cout<<value<<endl;
+    getValue("S2", value);
+    cout<<value<<endl;
+    getValue("S3", value);
+    cout<<value<<endl;
+
+    getRatesOfChange();
+
+    getValue("S1", value);
+    cout<<value<<endl;
+    getValue("S2", value);
+    cout<<value<<endl;
+    getValue("S3", value);
+    cout<<value<<endl;
+
 	//cout<<getBoundarySpeciesByIndex (0)<<endl;
-    //getFloatingSpeciesByIndex(0, value);
-    //cout<<value<<endl;
     //getGlobalParameterByIndex(0, value);
 
     //cout<<value<<endl;
     //getGlobalParameterByIndex(2, value);
     //cout<<value<<endl;
 
-
-    RRVector* vec = getRatesOfChange();
     //cout<<getParamPromotedSBML(sbml.c_str());
-	evalModel();
+
 
     //cout<<getSBML()<<endl;
 
     //cout<<printMatrix(getScaledElasticityMatrix());     //How to free, when doing something like this??
     //cout<<printList(getEigenValueNames());
 
-    cout<<printList(getFluxControlCoefficientNames())<<endl;
+    cout<<"\n FluxControlCoeff ------\n"<<printStringArrayList(getFluxControlCoefficientNames())<<endl;
 
+    cout<<"\n Unscaled FluxControlCoeff ------\n"<<printStringArrayList(getUnscaledFluxControlCoefficientNames())<<endl;
     RRStringArrayList* list =getConcentrationControlCoefficientNames();
     cout<<printStringArrayList(list)<<endl;
     freeStringArrayList(list);
@@ -408,8 +436,8 @@ int main(int argc, char* argv[])
 	cout<<"API Version: "<<getVersion()<<endl;
 
     cout<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
-    getRatesOfChangeEx (NULL);
-    getReactionRatesEx (NULL);
+
+
     cout<<" ---- getElasticityCoefficientNames ---\n"<<printStringArrayList(getElasticityCoefficientNames())<<endl;
     cout<<printList(getRateOfChangeNames())<<endl;
     setCapabilities (NULL);
@@ -427,21 +455,7 @@ int main(int argc, char* argv[])
 
     cout<<"getFloatingSpeciesInitialConditionNames: "<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
 
-    RRVector* test = getReactionRates();
-    cout<<printVector(test);
 
-    for(int i = 0; i < test->Size; i++)
-    {
-        test->Data[i] = i;
-    }
-
-    test =  getReactionRatesEx(test);
-
-    cout<<printVector(test);
-
-    test = getRatesOfChangeEx(test);
-    cout<<printVector(test)<<endl;
-    freeVector(test);
 
 
 	///////////////////

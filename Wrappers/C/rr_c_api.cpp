@@ -1925,7 +1925,7 @@ RRStringListHandle rrCallConv getEigenValueNames()
     return NULL;
 }
 
-RRStringListHandle rrCallConv getFluxControlCoefficientNames()
+RRStringArrayListHandle rrCallConv getFluxControlCoefficientNames()
 {
 	try
     {
@@ -2033,7 +2033,7 @@ RRMatrixHandle rrCallConv getScaledFluxControlCoefficientMatrix()
     return NULL;
 }
 
-RRStringListHandle rrCallConv getUnscaledFluxControlCoefficientNames()
+RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficientNames()
 {
 	try
     {
@@ -2075,7 +2075,7 @@ RRStringArrayList* rrCallConv getConcentrationControlCoefficientNames()
     return NULL;
 }
 
-RRStringListHandle rrCallConv getUnscaledConcentrationControlCoefficientNames()
+RRStringArrayListHandle rrCallConv getUnscaledConcentrationControlCoefficientNames()
 {
 	try
     {
