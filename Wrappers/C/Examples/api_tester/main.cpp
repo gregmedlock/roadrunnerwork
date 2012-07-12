@@ -410,7 +410,7 @@ int main(int argc, char* argv[])
     cout<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
     getRatesOfChangeEx (NULL);
     getReactionRatesEx (NULL);
-    //cout<<printList(getElasticityCoefficientNames())<<endl;
+    cout<<" ---- getElasticityCoefficientNames ---\n"<<printStringArrayList(getElasticityCoefficientNames())<<endl;
     cout<<printList(getRateOfChangeNames())<<endl;
     setCapabilities (NULL);
     //cout<<getCapabilities()<<endl;
