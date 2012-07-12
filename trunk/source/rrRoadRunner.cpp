@@ -356,13 +356,14 @@ void RoadRunner::AddNthOutputToResult(DoubleMatrix& results, int nRow, double dC
 
 vector<double> RoadRunner::BuildModelEvalArgument()
 {
-    vector<double> dResult;// = new double[model.amounts.Length + model.rateRules.Length];
+    vector<double> dResult;
     dResult.resize((*mModel->amountsSize) + (*mModel->rateRulesSize) );
+
     vector<double> dCurrentRuleValues = mModel->GetCurrentValues();
 
-    dResult         = dCurrentRuleValues;//.CopyTo(dResult, 0);
+    dResult         = dCurrentRuleValues;
 
-    for(int i = 0; i < (*mModel->rateRulesSize); i++)
+    for(int i = 0; i < (*mModel->amountsSize); i++)
     {
         dResult.push_back(mModel->amounts[i]);
     }
@@ -1734,41 +1735,37 @@ double RoadRunner::getVariableValue(const TVariableType& variableType, const int
 //        }
 //
 //  Help("Returns the Symbols of all Flux Control Coefficients.")
-ArrayList RoadRunner::getFluxControlCoefficientNames()
+StringArrayList RoadRunner::getFluxControlCoefficientNames()
 {
-    ArrayList oResult;// = new ArrayList();
+    StringArrayList oResult;
     if (!modelLoaded)
     {
         return oResult;
     }
 
-    StringList oReactions = getReactionNames();
-    StringList oParameters = mModelGenerator->getGlobalParameterList();
-    StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
-    StringList oConservation = mModelGenerator->getConservationList();
+    StringList oReactions       = getReactionNames();
+    StringList oParameters      = mModelGenerator->getGlobalParameterList();
+    StringList oBoundary        = mModelGenerator->getBoundarySpeciesList();
+    StringList oConservation    = mModelGenerator->getConservationList();
 
-//    foreach (string s in oReactions)
     for(int i = 0; i < oReactions.Count(); i++)
     {
         string s = oReactions[i];
 
-        ArrayList oCCReaction;// = new ArrayList();
-        ArrayList oInner;// = new ArrayList();
+        StringArrayList oCCReaction;
+        StringArrayList oInner;
         oCCReaction.Add(s);
 
-        //foreach (string sParameter in oParameters)
         for(int i = 0; i < oParameters.Count(); i++)
         {
             oInner.Add("CC:" + s + "," + oParameters[i]);
         }
 
-//        foreach (string sBoundary in oBoundary)
         for(int i = 0; i < oBoundary.Count(); i++)
         {
             oInner.Add("CC:" + s + "," + oBoundary[i]);
         }
 
-//        foreach (string sConservation in oConservation)
         for(int i = 0; i < oConservation.Count(); i++)
         {
             oInner.Add("CC:" + s + "," + oConservation[i]);
@@ -1783,9 +1780,9 @@ ArrayList RoadRunner::getFluxControlCoefficientNames()
 
 
 //  Help("Returns the Symbols of all Unscaled Flux Control Coefficients.")
-ArrayList RoadRunner::getUnscaledFluxControlCoefficientNames()
+StringArrayList RoadRunner::getUnscaledFluxControlCoefficientNames()
 {
-    ArrayList oResult;// = new ArrayList();
+    StringArrayList oResult;// = new ArrayList();
     if (!modelLoaded)
     {
         return oResult;
@@ -1800,8 +1797,8 @@ ArrayList RoadRunner::getUnscaledFluxControlCoefficientNames()
     {
         string s = oReactions[i];
 
-        ArrayList oCCReaction;// = new ArrayList();
-        ArrayList oInner;// = new ArrayList();
+        StringArrayList oCCReaction;
+        StringArrayList oInner;
         oCCReaction.Add(s);
 
         for(int i = 0; i < oParameters.Count(); i++)
@@ -1871,24 +1868,24 @@ RRArrayList<string> RoadRunner::getConcentrationControlCoefficientNames()
 
 
 // Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")
-ArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
+StringArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
 {
-    ArrayList oResult;// = new ArrayList();
+    StringArrayList oResult;
     if (!mModel)
     {
         return oResult;
     }
 
-    StringList oFloating = getFloatingSpeciesNames();
-    StringList oParameters = mModelGenerator->getGlobalParameterList();
-    StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
-    StringList oConservation = mModelGenerator->getConservationList();
+    StringList oFloating        = getFloatingSpeciesNames();
+    StringList oParameters      = mModelGenerator->getGlobalParameterList();
+    StringList oBoundary        = mModelGenerator->getBoundarySpeciesList();
+    StringList oConservation    = mModelGenerator->getConservationList();
 
     for(int i = 0; i < oFloating.Count(); i++)
     {
         string s = oFloating[i];
-        ArrayList oCCFloating;// = new ArrayList();
-        ArrayList oInner;// = new ArrayList();
+        StringArrayList oCCFloating;
+        StringArrayList oInner;
         oCCFloating.Add(s);
 
         for(int i = 0; i < oParameters.Count(); i++)
@@ -2643,7 +2640,10 @@ vector<double> RoadRunner::getRatesOfChangeEx(const vector<double>& values)
 
     CopyStdVectorToCArray(values, mModel->y, *mModel->ySize);
 
-    mModel->evalModel(0.0, BuildModelEvalArgument());
+    vector<double> temp;
+
+    temp =  BuildModelEvalArgument();
+    mModel->evalModel(0.0, temp);
     return CreateVector(mModel->dydt, *mModel->dydtSize);
 }
 
@@ -4683,6 +4683,7 @@ double RoadRunner::getValue(const string& sId)
     {
         return mModel->bc[nIndex];
     }
+
     if (mModelGenerator->floatingSpeciesConcentrationList.find(sId, nIndex))
     {
         return mModel->y[nIndex];
@@ -4690,6 +4691,8 @@ double RoadRunner::getValue(const string& sId)
 
     if (mModelGenerator->floatingSpeciesConcentrationList.find(sId.substr(0, sId.size() - 1), nIndex))
     {
+        mModel->computeAllRatesOfChange();
+
         //fs[j] + "'" will be interpreted as rate of change
         return mModel->dydt[nIndex];
     }
