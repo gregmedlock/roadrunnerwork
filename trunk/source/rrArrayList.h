@@ -40,7 +40,7 @@ class RRArrayList : public rrObject
     public:
                                         			RRArrayList();
                                         			RRArrayList(const RRArrayList<T>& cpyMe);
-                                                    RRArrayList(const StringList& cp);
+                                                    //RRArrayList(const StringList& cp);
                                         		   ~RRArrayList();
 		mutable
         typename vector< RRArrayListItem<T>* >::const_iterator mIter;
@@ -147,14 +147,14 @@ void RRArrayList<T>::Add(const T& _item, const RRArrayList<T>& subList)
 }
 
 //Adding stringlists...
-template<>
-void RRArrayList<string>::Add(const StringList& lists)
+template<class T>
+void RRArrayList<T>::Add(const StringList& lists)
 {
 
 }
 
-template<>
-void RRArrayList<string>::Add(const string& lbl, const StringList& lists)
+template<class T>
+void RRArrayList<T>::Add(const string& lbl, const StringList& lists)
 {
 
 }
@@ -182,7 +182,6 @@ string RRArrayList<T>::AsString()
     }
     return theList;
 }
-
 
 ////////////////////////////////////////////////////////////////////////////
 template< class T >

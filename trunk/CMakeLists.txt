@@ -145,4 +145,18 @@ install (FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/cg/xe/${runtime} DEST
 endforeach()
 endif()
 
+#=== TCC ==================================================
+FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/*.*)
+install (FILES 	${tcc} DESTINATION bin COMPONENT rr_core)
 
+FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/lib/*.*)
+install (FILES 	${tcc} DESTINATION bin/lib COMPONENT rr_core)
+
+FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/*.*)
+install (FILES 	${tcc} DESTINATION bin/include COMPONENT rr_core)
+
+FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/sys/*.*)
+install (FILES 	${tcc} DESTINATION bin/include/sys COMPONENT rr_core)
+
+FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/winapi/*.*)
+install (FILES 	${tcc} DESTINATION bin/include/winapi COMPONENT rr_core)
