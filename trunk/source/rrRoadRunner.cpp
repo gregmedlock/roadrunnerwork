@@ -466,7 +466,7 @@ bool RoadRunner::Simulate()
     DoubleMatrix data;
 	data = simulate();
 
-    StringListContainer l = getAvailableSymbols();
+    StringArrayList l = getAvailableSymbols();
     Log(lError)<<l;
 
     StringList list = getSelectionList();
@@ -1834,18 +1834,18 @@ RRArrayList<string> RoadRunner::getConcentrationControlCoefficientNames()
     {
         return oResult;
     }
-    RRArrayList<string>     result;
-    StringList oFloating = getFloatingSpeciesNames();
-    StringList oParameters = mModelGenerator->getGlobalParameterList();
-    StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
-    StringList oConservation = mModelGenerator->getConservationList();
+
+    StringList oFloating        = getFloatingSpeciesNames();
+    StringList oParameters      = mModelGenerator->getGlobalParameterList();
+    StringList oBoundary        = mModelGenerator->getBoundarySpeciesList();
+    StringList oConservation    = mModelGenerator->getConservationList();
 
     for(int i = 0; i < oFloating.Count(); i++)
     {
         string s = oFloating[i];
         RRArrayList<string> oCCFloating;
         RRArrayList<string> oInner;
-        oCCFloating.Add(s );
+        oCCFloating.Add(s);
 
         for(int i = 0; i < oParameters.Count(); i++)
         {
@@ -1915,9 +1915,9 @@ ArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
 
 
 // Help("Returns the Symbols of all Elasticity Coefficients.")
-ArrayList RoadRunner::getElasticityCoefficientNames()
+StringArrayList RoadRunner::getElasticityCoefficientNames()
 {
-    ArrayList oResult;
+    StringArrayList oResult;
     if (!modelLoaded)
     {
         return oResult;
@@ -1931,34 +1931,29 @@ ArrayList RoadRunner::getElasticityCoefficientNames()
 
     for(int i = 0; i < reactionNames.Count(); i++)
     {
-        string aString = reactionNames[i];
-
-        ArrayList oCCReaction;
-        StringList oInner;
-        oCCReaction.Add(aString);
+        string reac_name = reactionNames[i];
+        StringArrayList oCCReaction;
+        oCCReaction.Add(reac_name);
+        StringArrayList oInner;
 
         for(int j = 0; j < floatingSpeciesNames.Count(); j++)
         {
-            string variable = floatingSpeciesNames[j];
-            oInner.Add(Format("EE:{0},{1}", aString, variable));
+            oInner.Add(Format("EE:{0},{1}", reac_name, floatingSpeciesNames[j]));
         }
 
         for(int j = 0; j < boundarySpeciesNames.Count(); j++)
         {
-            string variable = boundarySpeciesNames[j];
-            oInner.Add(Format("EE:{0},{1}", aString, variable));
+            oInner.Add(Format("EE:{0},{1}", reac_name, boundarySpeciesNames[j]));
         }
 
         for(int j = 0; j < globalParameterNames.Count(); j++)
         {
-            string variable = globalParameterNames[j];
-            oInner.Add(Format("EE:{0},{1}", aString, variable));
+            oInner.Add(Format("EE:{0},{1}", reac_name, globalParameterNames[j]));
         }
 
         for(int j = 0; j < conservationNames.Count(); j++)
         {
-            string variable = conservationNames[j];
-            oInner.Add(Format("EE:{0},{1}", aString, variable));
+            oInner.Add(Format("EE:{0},{1}", reac_name, conservationNames[j]));
         }
 
         oCCReaction.Add(oInner);
@@ -1969,9 +1964,9 @@ ArrayList RoadRunner::getElasticityCoefficientNames()
 }
 
 // Help("Returns the Symbols of all Unscaled Elasticity Coefficients.")
-ArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
+StringArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
 {
-    ArrayList oResult;// = new ArrayList();
+    StringArrayList oResult;
     if (!modelLoaded)
     {
         return oResult;
@@ -1983,40 +1978,35 @@ ArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
     StringList oGlobalParameters = mModelGenerator->getGlobalParameterList();
     StringList oConservation = mModelGenerator->getConservationList();
 
-//    foreach (string s in oReactions)
     for(int i = 0; i < oReactions.Count(); i++)
     {
-        string aString = oReactions[i];
-        ArrayList oCCReaction;// = new ArrayList();
-        StringList oInner;// = new ArrayList();
-        oCCReaction.Add(aString);
+        string reac_name = oReactions[i];
+        StringArrayList oCCReaction;
+        StringList oInner;
+        oCCReaction.Add(reac_name);
 
-//        foreach (string variable in oFloating)
         for(int j = 0; j < oFloating.Count(); j++)
         {
             string variable = oFloating[j];
-            oInner.Add(Format("uEE:{0},{1}", aString, variable));
+            oInner.Add(Format("uEE:{0},{1}", reac_name, variable));
         }
 
-//        foreach (string variable in oBoundary)
         for(int j = 0; j < oBoundary.Count(); j++)
         {
             string variable = oBoundary[j];
-            oInner.Add(Format("uEE:{0},{1}", aString, variable));
+            oInner.Add(Format("uEE:{0},{1}", reac_name, variable));
         }
 
-//        foreach (string variable in oGlobalParameters)
         for(int j = 0; j < oGlobalParameters.Count(); j++)
         {
             string variable = oGlobalParameters[j];
-            oInner.Add(Format("uEE:{0},{1}", aString, variable));
+            oInner.Add(Format("uEE:{0},{1}", reac_name, variable));
         }
 
-//        foreach (string variable in oConservation)
         for(int j = 0; j < oConservation.Count(); j++)
         {
             string variable = oConservation[j];
-            oInner.Add(Format("uEE:{0},{1}", aString, variable));
+            oInner.Add(Format("uEE:{0},{1}", reac_name, variable));
         }
 
         oCCReaction.Add(oInner);
@@ -4857,9 +4847,9 @@ double RoadRunner::getValue(const string& sId)
 //            "Returns symbols of the currently loaded model,
 //              that can be used for the selectionlist format array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }."
 //            )
-StringListContainer RoadRunner::getAvailableSymbols()
+StringArrayList RoadRunner::getAvailableSymbols()
 {
-    StringListContainer oResult;
+    StringArrayList oResult;
 
     if (!mModel)
     {

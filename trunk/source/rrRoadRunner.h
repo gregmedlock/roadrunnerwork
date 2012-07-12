@@ -150,7 +150,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		void                            setCapabilities(const string& capsStr);
 		bool                            setValue(const string& sId, const double& dValue);
 		double                          getValue(const string& sId);
-		StringListContainer             getAvailableSymbols();
+		StringArrayList                 getAvailableSymbols();
 		StringList                      getSelectionList();
 		void                            setSelectionList(const string& List);
 		void                            setSelectionList(const StringList& newSelectionList);
@@ -194,8 +194,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		ArrayList                       getFluxControlCoefficientNames();
         ArrayList                       getUnscaledConcentrationControlCoefficientNames();
 		RRArrayList<string>             getConcentrationControlCoefficientNames();
-		ArrayList                       getElasticityCoefficientNames();
-		ArrayList                       getUnscaledElasticityCoefficientNames();
+		StringArrayList                 getElasticityCoefficientNames();
+		StringArrayList                 getUnscaledElasticityCoefficientNames();
 		StringList                      getEigenValueNames();
 		StringList                      getAvailableSteadyStateSymbols();
 		ArrayList                       getSteadyStateSelectionList();

@@ -131,7 +131,7 @@ add_subdirectory(Wrappers)
 install (FILES source/rr_pch.h	DESTINATION include COMPONENT rr_core)
 
 if(${BUILD_EXAMPLES})
-add_subdirectory(Examples)
+add_subdirectory(examples)
 endif()
 
 install (FILES Readme.txt 		DESTINATION . 	COMPONENT info)

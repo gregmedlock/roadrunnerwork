@@ -1238,31 +1238,32 @@ RRSymbolListsHandle rrCallConv getAvailableSymbols()              // <- You'll h
             return NULL;
         }
 
-        StringListContainer slSymbols = gRRHandle->getAvailableSymbols();
-
-        RRSymbolListsHandle symbols = new RRSymbolLists;
-        symbols->NumberOfLists  = slSymbols.Count();
-        symbols->List           = new RRLabelStringList[slSymbols.Count()];
-
-        //Allocate and fill out lists
-        for(int listNr = 0; listNr < slSymbols.Count(); listNr++)
-        {
-            StringList aList = slSymbols[listNr];
-            symbols->List[listNr].Count = aList.Count();
-            symbols->List[listNr].Label = new char[aList.mLabel.size() + 1];
-            strcpy(symbols->List[listNr].Label, aList.mLabel.c_str());
-
-            if(aList.Count())
-            {
-                symbols->List[listNr].String = new char*[aList.Count()];
-                for(int itemNr = 0; itemNr < aList.Count(); itemNr++)
-                {
-                    symbols->List[listNr].String[itemNr] = new char[aList[itemNr].size() + 1];
-                    strcpy(symbols->List[listNr].String[itemNr], aList[itemNr].c_str());
-                }
-            }
-        }
-        return symbols;
+//        StringArrayList slSymbols = gRRHandle->getAvailableSymbols();
+//
+//        RRSymbolListsHandle symbols = new RRSymbolLists;
+//        symbols->NumberOfLists  = slSymbols.Count();
+//        symbols->List           = new RRLabelStringList[slSymbols.Count()];
+//
+//        //Allocate and fill out lists
+//        for(int listNr = 0; listNr < slSymbols.Count(); listNr++)
+//        {
+//            StringList aList = slSymbols[listNr];
+//            symbols->List[listNr].Count = aList.Count();
+//            symbols->List[listNr].Label = new char[aList.mLabel.size() + 1];
+//            strcpy(symbols->List[listNr].Label, aList.mLabel.c_str());
+//
+//            if(aList.Count())
+//            {
+//                symbols->List[listNr].String = new char*[aList.Count()];
+//                for(int itemNr = 0; itemNr < aList.Count(); itemNr++)
+//                {
+//                    symbols->List[listNr].String[itemNr] = new char[aList[itemNr].size() + 1];
+//                    strcpy(symbols->List[listNr].String[itemNr], aList[itemNr].c_str());
+//                }
+//            }
+//        }
+//        return symbols;
+        return NULL;
     }
     catch(Exception& ex)
     {
@@ -1813,7 +1814,7 @@ RRVectorHandle rrCallConv getReactionRatesEx(const RRVectorHandle vec)
     return NULL;
 }
 
-RRStringListHandle rrCallConv getElasticityCoefficientNames()
+RRStringArrayList* rrCallConv getElasticityCoefficientNames()
 {
 	try
     {
@@ -1822,7 +1823,8 @@ RRStringListHandle rrCallConv getElasticityCoefficientNames()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        ArrayList aList = gRRHandle->getElasticityCoefficientNames();
+        //RRArrayList<string> list = gRRHandle->getConcentrationControlCoefficientNames();
+        StringArrayList aList = gRRHandle->getElasticityCoefficientNames();
         return createList(aList);
     }
     catch(Exception& ex)
@@ -1902,7 +1904,6 @@ char* rrCallConv getCapabilities()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 RRStringListHandle rrCallConv getEigenValueNames()
 {
 	try

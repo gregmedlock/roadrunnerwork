@@ -164,14 +164,14 @@ C_DECL_SPEC RRStringListHandle      rrCallConv   getFloatingSpeciesNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getGlobalParameterNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getCompartmentNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getEigenValueNames();
-C_DECL_SPEC RRStringListHandle      rrCallConv   getElasticityCoefficientNames();
+C_DECL_SPEC RRStringArrayListHandle rrCallConv   getElasticityCoefficientNames();
 C_DECL_SPEC RRSymbolListsHandle     rrCallConv   getAvailableSymbols();
 
 // MCA methods
 C_DECL_SPEC RRStringListHandle      rrCallConv   getUnscaledFluxControlCoefficientNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getFluxControlCoefficientNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getUnscaledConcentrationControlCoefficientNames();
-C_DECL_SPEC RRStringArrayList*      rrCallConv   getConcentrationControlCoefficientNames();
+C_DECL_SPEC RRStringArrayListHandle rrCallConv   getConcentrationControlCoefficientNames();
 
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getUnScaledElasticityMatrix();
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getScaledElasticityMatrix();
