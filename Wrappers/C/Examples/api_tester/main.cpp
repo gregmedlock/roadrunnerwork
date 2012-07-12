@@ -401,7 +401,6 @@ int main(int argc, char* argv[])
 
     //cout<<getParamPromotedSBML(sbml.c_str());
 
-
     //cout<<getSBML()<<endl;
 
     //cout<<printMatrix(getScaledElasticityMatrix());     //How to free, when doing something like this??
