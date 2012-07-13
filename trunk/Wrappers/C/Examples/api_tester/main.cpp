@@ -84,6 +84,8 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
+    simulate();
+    getValue ("eigen_S1", value);
 	int r = getNumberOfReactions();
 	int m = getNumberOfFloatingSpecies();
 	int b = getNumberOfBoundarySpecies();
@@ -380,6 +382,9 @@ int main(int argc, char* argv[])
     cout<<printVector(test);
 
     //Get value problem..
+
+
+
     getValue("S1", value);
     cout<<value<<endl;
     getValue("S2", value);
