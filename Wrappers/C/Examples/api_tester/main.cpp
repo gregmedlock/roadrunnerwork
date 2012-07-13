@@ -84,8 +84,6 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-    simulate();
-    getValue ("eigen_S1", value);
 	int r = getNumberOfReactions();
 	int m = getNumberOfFloatingSpecies();
 	int b = getNumberOfBoundarySpecies();
@@ -464,7 +462,7 @@ int main(int argc, char* argv[])
     cout<<"getFloatingSpeciesInitialConditionNames: "<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
 
 
-
+    cout<<writeSBML();
 
 	///////////////////
     text = getCopyright();

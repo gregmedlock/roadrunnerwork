@@ -73,7 +73,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		SimulationSettings              mSettings;
 
 	public:
-		// NOM
 		string                  		getParamPromotedSBML(const string& sArg);
 
 		// Properties -----------------------------------------------------------------------------

@@ -58,6 +58,7 @@ C_DECL_SPEC bool                    rrCallConv   setCapabilities (const char* ca
 C_DECL_SPEC char*                   rrCallConv   getCapabilities();
 C_DECL_SPEC RRVectorHandle          rrCallConv   getFloatingSpeciesConcentrations();
 C_DECL_SPEC RRVectorHandle          rrCallConv   getGlobalParameterValues();
+C_DECL_SPEC char*                   rrCallConv   writeSBML();       //Current SBML
 
 // Utility and informational methods
 C_DECL_SPEC char*                   rrCallConv  getVersion();

@@ -2,6 +2,7 @@ LIBRARY     RR_C_API.DLL
 
 EXPORTS
     getVersion                                  = _getVersion@0
+    writeSBML                                   = _writeSBML@0
     computeSteadyStateValues                    = _computeSteadyStateValues@0         
     evalModel                                   = _evalModel@0                        
     freeCCode                                   = _freeCCode@4                        

@@ -203,7 +203,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         void                    setNotes(const string& sId, const string& sNotes);
         void                    setSBOTerm(const string& sId, const int& nSBOTerm);
         void                    setValue(const string& sId, const double& dValue);
-        void                    setValue(Model& model, const string& id, const double& value, const bool& throwIfNotFound);
+        void                    setValue(Model* model, const string& id, const double& value, const bool& throwIfNotFound);
         void                    TestASTTime();
 
         string                  getNthBoundarySpeciesCompartmentName(const int& nIndex);

@@ -2676,16 +2676,18 @@ void NOMSupport::ChangeParameterName(ASTNode& node, const string& sParameterName
 
 string NOMSupport::getSBML()
 {
-//    if (mModel == NULL)
+    if (mModel == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    //Todo: how to deal with parametersets...?
+    //    if (_ParameterSets != NULL && mModel != NULL)
 //    {
-//        throw Exception("You need to load the model first");
-//    }
-//
-//    if (_ParameterSets != NULL && mModel != NULL)
 //        _ParameterSets.AddToModel(mModel);
-//
-//    return libsbml::writeSBMLToString(mSBMLDoc);
-    return "";
+//    }
+
+    return libsbml::writeSBMLToString(mSBMLDoc);
 }
 
 //        int getSBOTerm(string sId)
@@ -3649,68 +3651,70 @@ void NOMSupport::loadSBML(const string& var0)
 //
 //        }
 //
-//        void NOMSupport::setValue(Model model, string id, double value, bool throwIfNotFound)
-//        {
-//            if (model == NULL)
-//            {
-//                throw Exception("You need to load the model first");
-//            }
-//
-//            libsbmlcs.Species oSpecies = model.getSpecies(id);
-//            if (oSpecies != NULL)
-//            {
-//                if (oSpecies.isSetInitialAmount())
-//                    oSpecies.setInitialAmount(value);
-//                else
-//                    oSpecies.setInitialConcentration(value);
-//                return;
-//            }
-//
-//            Compartment oCompartment = model.getCompartment(id);
-//            if (oCompartment != NULL)
-//            {
-//                oCompartment.setVolume(value); return;
-//            }
-//
-//            Parameter oParameter = model.getParameter(id);
-//            if (oParameter != NULL)
-//            {
-//                oParameter.setValue(value);
-//                return;
-//            }
-//
-//            for (int i = 0; i < mModel->getNumReactions(); i++)
-//            {
-//                var reaction = mModel->getReaction(i);
-//                for (int j = 0; j < reaction.getNumReactants(); j++)
-//                {
-//                    var reference = reaction.getReactant(j);
-//                    if (reference.isSetId() && reference.getId() == id)
-//                    {
-//                        reference.setStoichiometry(value);
-//                        return;
-//                    }
-//                }
-//                for (int j = 0; j < reaction.getNumProducts(); j++)
-//                {
-//                    var reference = reaction.getProduct(j);
-//                    if (reference.isSetId() && reference.getId() == id)
-//                    {
-//                        reference.setStoichiometry(value);
-//                        return;
-//                    }
-//                }
-//            }
-//
-//            if (throwIfNotFound)
-//                throw Exception(string.Format("Invalid string name. The id '{0}' does not exist in the model", id));
-//        }
-//
-//        void NOMSupport::setValue(string sId, double dValue)
-//        {
-//            setValue(mModel, sId, dValue, true);
-//        }
-//
+void NOMSupport::setValue(Model* model, const string& id, const double& value, const bool& throwIfNotFound)
+{
+    if (model == NULL)
+    {
+        throw Exception("You need to load the model first");
+    }
+
+    libsbml::Species* oSpecies = model->getSpecies(id);
+    if (oSpecies != NULL)
+    {
+        if (oSpecies->isSetInitialAmount())
+            oSpecies->setInitialAmount(value);
+        else
+            oSpecies->setInitialConcentration(value);
+        return;
+    }
+
+    Compartment* oCompartment = model->getCompartment(id);
+    if (oCompartment != NULL)
+    {
+        oCompartment->setVolume(value); return;
+    }
+
+    Parameter* oParameter = model->getParameter(id);
+    if (oParameter != NULL)
+    {
+        oParameter->setValue(value);
+        return;
+    }
+
+    for (int i = 0; i < mModel->getNumReactions(); i++)
+    {
+        Reaction* reaction = mModel->getReaction(i);
+        for (int j = 0; j < reaction->getNumReactants(); j++)
+        {
+            SpeciesReference* reference = reaction->getReactant(j);
+            if (reference->isSetId() && reference->getId() == id)
+            {
+                reference->setStoichiometry(value);
+                return;
+            }
+        }
+        for (int j = 0; j < reaction->getNumProducts(); j++)
+        {
+            SpeciesReference* reference = reaction->getProduct(j);
+            if (reference->isSetId() && reference->getId() == id)
+            {
+                reference->setStoichiometry(value);
+                return;
+            }
+        }
+    }
+
+    if (throwIfNotFound)
+    {
+        throw Exception(Format("Invalid string name. The id '{0}' does not exist in the model", id));
+    }
+}
+
+void NOMSupport::setValue(const string& sId, const double& dValue)
+{
+    setValue(mModel, sId, dValue, true);
+}
+
 string NOMSupport::validateSBML(const string& sModel)
 {
     SBMLDocument *oDoc = readSBMLFromString(sModel.c_str());

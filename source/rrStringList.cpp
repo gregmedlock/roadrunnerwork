@@ -60,7 +60,7 @@ string  StringList::operator[](const int& index) const
     return mStrings[index];
 }
 
-int StringList::Count() const
+unsigned int StringList::Count() const
 {
     return mStrings.size();
 }

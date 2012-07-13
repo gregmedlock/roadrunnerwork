@@ -16,30 +16,30 @@ class RR_DECLSPEC ModelState : public rrObject
 {
     protected:
     public:
-        //Todo:  Lot of stuff is wrong here..
-        vector<double>                    mBoundarySpeciesConcentrations;
-        vector<double>                    mCompartmentVolumes;
-        vector<double>                    mConservedTotals;
-        vector<double>                    mDyDt;
-        vector<double>                    mFloatingSpeciesConcentrations;
-        vector<double>                    mGlobalParameters;
+        //Todo:  Lot of stuff is wrong here.. ??
+        vector<double>                  mBoundarySpeciesConcentrations;
+        vector<double>                  mCompartmentVolumes;
+        vector<double>                  mConservedTotals;
+        vector<double>                  mDyDt;
+        vector<double>                  mFloatingSpeciesConcentrations;
+        vector<double>                  mGlobalParameters;
         vector<bool>                    mPreviousEventStatusArray;
-        vector<double>                    mRateRules;
-        vector<double>                    mRates;
-        vector<double>                    mModifiableSpeciesReferences;
-        double                            mTime;
-        vector<bool>                       mEventStatusArray;
-        vector<double>                    mEventTests;
+        vector<double>                  mRateRules;
+        vector<double>                  mRates;
+        vector<double>                  mModifiableSpeciesReferences;
+        double                          mTime;
+        vector<bool>                    mEventStatusArray;
+        vector<double>                  mEventTests;
 
-        void                             InitializeFromModel(ModelFromC& model);
+        void                            InitializeFromModel(ModelFromC& model);
 
     public:
                                         ModelState(ModelFromC& model);
-        void                             WriteTo(const string& fileName);
-        static ModelState                 ReadFrom(istream& stream);
-        static ModelState                 ReadFrom(const string& fileName);
-        void                             WriteTo(ostream& stream);
-        void                             AssignToModel(ModelFromC& model);
+        void                            WriteTo(const string& fileName);
+        static ModelState               ReadFrom(istream& stream);
+        static ModelState               ReadFrom(const string& fileName);
+        void                            WriteTo(ostream& stream);
+        void                            AssignToModel(ModelFromC& model);
 };
 
 }
