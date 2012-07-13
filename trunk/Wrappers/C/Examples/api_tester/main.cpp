@@ -364,7 +364,11 @@ int main(int argc, char* argv[])
 //	printf ("\nCall to getRatesOfChange (with S1=1, S2=2, S3=3):\n");
 //	cout<<printVector (getRatesOfChange())<<endl;
 
+//-------- The latest
 
+    cout<<printVector(getFloatingSpeciesConcentrations());
+    cout<<printVector(getGlobalParameterValues());
+    cout<<printStringArrayList(getAvailableSymbols());
     RRVector* test = getReactionRates();
     cout<<printVector(test);
 

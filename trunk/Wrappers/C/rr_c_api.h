@@ -56,6 +56,8 @@ extern "C"
 //The latest
 C_DECL_SPEC bool                    rrCallConv   setCapabilities (const char* caps);
 C_DECL_SPEC char*                   rrCallConv   getCapabilities();
+C_DECL_SPEC RRVectorHandle          rrCallConv   getFloatingSpeciesConcentrations();
+C_DECL_SPEC RRVectorHandle          rrCallConv   getGlobalParameterValues();
 
 // Utility and informational methods
 C_DECL_SPEC char*                   rrCallConv  getVersion();
@@ -165,7 +167,7 @@ C_DECL_SPEC RRStringListHandle      rrCallConv   getGlobalParameterNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getCompartmentNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getEigenValueNames();
 C_DECL_SPEC RRStringArrayListHandle rrCallConv   getElasticityCoefficientNames();
-C_DECL_SPEC RRSymbolListsHandle     rrCallConv   getAvailableSymbols();
+C_DECL_SPEC RRStringArrayListHandle rrCallConv   getAvailableSymbols();
 
 // MCA methods
 C_DECL_SPEC RRStringArrayListHandle rrCallConv   getUnscaledFluxControlCoefficientNames();

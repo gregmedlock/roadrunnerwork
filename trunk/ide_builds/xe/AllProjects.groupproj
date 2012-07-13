@@ -13,7 +13,7 @@
 				<Dependencies/>
 			</Projects>
 			<Projects Include="rr_c_api.cbproj">
-				<Dependencies/>
+				<Dependencies>roadrunner.cbproj;roadrunner-static.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="rr.cbproj">
 				<Dependencies/>
@@ -65,13 +65,13 @@
 		<Target Name="rr_nleq:Make">
 			<MSBuild Projects="rr_nleq.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="rr_c_api">
+		<Target Name="rr_c_api" DependsOnTargets="roadrunner;roadrunner-static">
 			<MSBuild Projects="rr_c_api.cbproj"/>
 		</Target>
-		<Target Name="rr_c_api:Clean">
+		<Target Name="rr_c_api:Clean" DependsOnTargets="roadrunner:Clean;roadrunner-static:Clean">
 			<MSBuild Projects="rr_c_api.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="rr_c_api:Make">
+		<Target Name="rr_c_api:Make" DependsOnTargets="roadrunner:Make;roadrunner-static:Make">
 			<MSBuild Projects="rr_c_api.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="rr">

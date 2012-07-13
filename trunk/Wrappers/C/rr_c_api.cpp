@@ -1093,6 +1093,29 @@ RRStringListHandle rrCallConv getGlobalParameterNames()
    	return NULL;
 }
 
+RRVectorHandle rrCallConv getFloatingSpeciesConcentrations()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        vector<double> vec =  gRRHandle->getFloatingSpeciesConcentrations();
+        RRVector* aVec = createVector(vec);
+        return aVec;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+	return NULL;
+}
+
 RRVectorHandle rrCallConv getFloatingSpeciesInitialConcentrations()
 {
 	try
@@ -1104,7 +1127,6 @@ RRVectorHandle rrCallConv getFloatingSpeciesInitialConcentrations()
         }
 
         vector<double> vec =  gRRHandle->getFloatingSpeciesInitialConcentrations();
-
         RRVector* aVec = createVector(vec);
         return aVec;
     }
@@ -1228,7 +1250,31 @@ bool rrCallConv oneStep(const double& currentTime, const double& stepSize, doubl
 	return false;
 }
 
-RRSymbolListsHandle rrCallConv getAvailableSymbols()              // <- You'll have to decide what type to return
+
+RRVectorHandle rrCallConv getGlobalParameterValues()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        vector<double> vec =  gRRHandle->getGlobalParameterValues();
+        RRVector* aVec = createVector(vec);
+        return aVec;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    	return NULL;
+    }
+}
+
+RRStringArrayListHandle rrCallConv getAvailableSymbols()
 {
 	try
     {
@@ -1238,40 +1284,16 @@ RRSymbolListsHandle rrCallConv getAvailableSymbols()              // <- You'll h
             return NULL;
         }
 
-//        StringArrayList slSymbols = gRRHandle->getAvailableSymbols();
-//
-//        RRSymbolListsHandle symbols = new RRSymbolLists;
-//        symbols->NumberOfLists  = slSymbols.Count();
-//        symbols->List           = new RRLabelStringList[slSymbols.Count()];
-//
-//        //Allocate and fill out lists
-//        for(int listNr = 0; listNr < slSymbols.Count(); listNr++)
-//        {
-//            StringList aList = slSymbols[listNr];
-//            symbols->List[listNr].Count = aList.Count();
-//            symbols->List[listNr].Label = new char[aList.mLabel.size() + 1];
-//            strcpy(symbols->List[listNr].Label, aList.mLabel.c_str());
-//
-//            if(aList.Count())
-//            {
-//                symbols->List[listNr].String = new char*[aList.Count()];
-//                for(int itemNr = 0; itemNr < aList.Count(); itemNr++)
-//                {
-//                    symbols->List[listNr].String[itemNr] = new char[aList[itemNr].size() + 1];
-//                    strcpy(symbols->List[listNr].String[itemNr], aList[itemNr].c_str());
-//                }
-//            }
-//        }
-//        return symbols;
-        return NULL;
+        StringArrayList slSymbols = gRRHandle->getAvailableSymbols();
+        return createList(slSymbols);
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
+    	return NULL;
     }
-	return NULL;
 }
 
 bool rrCallConv getBoundarySpeciesByIndex (const int& index, double& value)
