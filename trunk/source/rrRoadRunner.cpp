@@ -16,6 +16,7 @@
 #include "rrModelFromC.h"
 #include "rrSBMLModelSimulation.h"
 #include "libstruct/lsLA.h"
+#include "rrModelState.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -2472,30 +2473,42 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //
 //
 // Help("Returns the SBML with the current parameterset")
-//        string RoadRunner::writeSBML()
-//        {
-//            NOM.loadSBML(NOM.getParamPromotedSBML(mCurrentSBML));
-//            var state = new ModelState(model);
-//
-//            ArrayList array = getFloatingSpeciesNames();
-//            for (int i = 0; i < array.Count; i++)
-//                NOM.setValue((string)array[i], state.FloatingSpeciesConcentrations[i]);
-//
-//            array = getBoundarySpeciesNames();
-//            for (int i = 0; i < array.Count; i++)
-//                NOM.setValue((string)array[i], state.BoundarySpeciesConcentrations[i]);
-//
-//            array = getCompartmentNames();
-//            for (int i = 0; i < array.Count; i++)
-//                NOM.setValue((string)array[i], state.CompartmentVolumes[i]);
-//
-//            array = getGlobalParameterNames();
-//            for (int i = 0; i < Math.Min(array.Count, state.GlobalParameters.Length); i++)
-//                NOM.setValue((string)array[i], state.GlobalParameters[i]);
-//
-//            return NOM.getSBML();
-//        }
-//
+string RoadRunner::writeSBML()
+{
+    NOMSupport& NOM = mModelGenerator->mNOM;
+
+    NOM.loadSBML(NOM.getParamPromotedSBML(mCurrentSBML));
+
+    ModelState state(*mModel);
+//    var state = new ModelState(model); 
+
+    StringList array = getFloatingSpeciesNames();
+    for (int i = 0; i < array.Count(); i++)
+    {
+        NOM.setValue((string)array[i], state.mFloatingSpeciesConcentrations[i]);
+    }
+
+    array = getBoundarySpeciesNames();
+    for (int i = 0; i < array.Count(); i++)
+    {
+        NOM.setValue((string)array[i], state.mBoundarySpeciesConcentrations[i]);
+    }
+
+    array = getCompartmentNames();
+    for (int i = 0; i < array.Count(); i++)
+    {
+        NOM.setValue((string)array[i], state.mCompartmentVolumes[i]);
+    }
+
+    array = getGlobalParameterNames();
+    for (int i = 0; i < min(array.Count(), state.mGlobalParameters.size()); i++)
+    {
+        NOM.setValue((string)array[i], state.mGlobalParameters[i]);
+    }
+
+    return NOM.getSBML();
+}
+
 // Help("Get the number of local parameters for a given reaction")
 //        int RoadRunner::getNumberOfLocalParameters(int reactionId)
 //        {

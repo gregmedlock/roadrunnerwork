@@ -132,6 +132,32 @@ char* rrCallConv getCopyright()
 	return NULL;
 }
 
+char* rrCallConv writeSBML()
+{
+	try
+    {
+        char* text = NULL;
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+        }
+        else
+        {
+            string sbml = gRRHandle->writeSBML();
+            text = new char[sbml.size() + 1];
+            strcpy(text, sbml.c_str());
+        }
+        return text;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+	return NULL;
+}
+
 //Flags and Options
 bool rrCallConv setComputeAndAssignConservationLaws(const bool& OnOrOff)
 {
