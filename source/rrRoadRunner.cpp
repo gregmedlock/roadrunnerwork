@@ -1454,6 +1454,7 @@ LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
         {
             LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
             LIB_LA::DoubleMatrix I1 = mult((*_Nr), uelast);
+            _L = mStructAnalysis.GetLinkMatrix();
             return mult(I1, (*_L));
         }
         throw SBWApplicationException(emptyModelStr);
