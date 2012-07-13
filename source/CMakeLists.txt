@@ -141,7 +141,6 @@ endif()
 add_subdirectory(nleq)
 
 #--- INSTALL STUFF
-
 if(INSTALL_STATIC_LIB)
     install (   TARGETS ${target}-static	
                 DESTINATION lib 
@@ -149,7 +148,8 @@ if(INSTALL_STATIC_LIB)
 endif()
 
 #=== Targets
-install(    TARGETS ${target} 
+install(    
+            TARGETS ${target} 
             RUNTIME DESTINATION bin
             LIBRARY DESTINATION lib
             ARCHIVE DESTINATION lib
@@ -167,7 +167,8 @@ else()
 endif()
 
 if(INSTALL_STATIC_LIB)
-    install (   FILES ${staticLibrary}	
+    install (   
+    FILES ${staticLibrary}	
                 DESTINATION lib 
                 COMPONENT rr_core)
 endif()

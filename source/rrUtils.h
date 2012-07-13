@@ -34,6 +34,8 @@ RR_DECLSPEC bool            CopyCArrayToStdVector(const int* src,     vector<int
 RR_DECLSPEC bool            CopyCArrayToStdVector(const double* src,  vector<double>& dest, int size);
 RR_DECLSPEC double*         CreateVector(const vector<double>& vec);
 
+RR_DECLSPEC bool            CopyValues(vector<double>& dest, double* source, const int& nrVals, const int& startIndex);
+
 RR_DECLSPEC vector<double>  CreateVector(const double* src, const int& size);
 
 RR_DECLSPEC bool            CopyCArrayToStdVector(const bool* src,    vector<bool>& dest, int size);

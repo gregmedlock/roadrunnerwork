@@ -144,6 +144,21 @@ bool CreateFolder(const string& folder)
     return (res==0) ? true : false;
 }
 
+bool CopyValues(vector<double>& dest, double* source, const int& nrVals, const int& startIndex)
+{
+    if(!dest.size() || !source || startIndex > dest.size())
+    {
+        return false;
+    }
+
+    for(int i = startIndex; i < nrVals; i++)
+    {
+        dest[i] = source[i];
+    }
+
+    return true;
+
+}
 
 bool CopyStdVectorToCArray(const vector<double>& src, double* dest,  int size)
 {

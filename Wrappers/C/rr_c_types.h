@@ -1,4 +1,4 @@
-/** 
+/**
  * @file rr_c_types.h
  * @brief roadRunner C API 2012
  * @author Totte Karlsson & Herbert M Sauro
@@ -72,13 +72,6 @@ typedef struct RRStringList
     int             Count;
     char**          String;
 } *RRStringListHandle;
-
-
-typedef struct RRSymbolLists
-{
-    int                 NumberOfLists;
-    RRLabelStringList*  List;
-} *RRSymbolListsHandle;
 
 typedef struct RRMatrix
 {

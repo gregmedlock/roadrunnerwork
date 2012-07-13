@@ -2845,15 +2845,17 @@ double RoadRunner::getFloatingSpeciesByIndex(const int& index)
 }
 
 // Help("Returns an array of floating species concentrations")
-//        double[] RoadRunner::getFloatingSpeciesConcentrations()
-//        {
-//            if (!mModel)
-//                throw SBWApplicationException(emptyModelStr);
-//
-//            mModel->convertToConcentrations();
-//            return mModel->y;
-//        }
-//
+vector<double> RoadRunner::getFloatingSpeciesConcentrations()
+{
+    if (!mModel)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    mModel->convertToConcentrations();
+    return CreateVector(mModel->y, *mModel->ySize);
+}
+
 // Help("returns an array of floating species initial conditions")
 vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 {
@@ -3035,20 +3037,29 @@ double RoadRunner::getGlobalParameterByIndex(const int& index)
 //        }
 //
 // Help("Get the values for all global parameters in the model")
-//        double[] RoadRunner::getGlobalParameterValues()
-//        {
-//            if (!mModel)
-//                throw SBWApplicationException(emptyModelStr);
-//            if (mModel->ct.Length > 0)
-//            {
-//                var result = new double[mModel->gp.Length + mModel->ct.Length];
-//                mModel->gp.CopyTo(result, 0);
-//                mModel->ct.CopyTo(result, mModel->gp.Length);
-//                return result;
-//            }
-//            return mModel->gp;
-//        }
-//
+vector<double> RoadRunner::getGlobalParameterValues()
+{
+    if (!mModel)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    if (*mModel->ctSize > 0)
+    {
+        vector<double> result; //= new double[mModel->gp.Length + mModel->ct.Length];
+        result.resize(*mModel->gpSize + *mModel->ctSize);
+
+        //mModel->gp.CopyTo(result, 0);
+        CopyValues(result,mModel->gp, *mModel->gpSize, 0);
+
+        //mModel->ct.CopyTo(result, mModel->gp.Length);
+        CopyValues(result, mModel->ct, *mModel->ctSize, *mModel->gpSize);
+        return result;
+    }
+
+    return CreateVector(mModel->gp, *mModel->gpSize);
+}
+
 // Help("Gets the list of parameter names")
 StringList RoadRunner::getGlobalParameterNames()
 {
