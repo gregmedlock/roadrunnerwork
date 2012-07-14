@@ -143,6 +143,7 @@ type
   TFreeRRDoubleVector = function (vector : PRRDoubleVectorHandle) : boolean ; stdcall;
   TOneStep = function (var currentTime : double; var stepSize : double) : double; stdcall;
   TSteadyState = function (var value : double) : boolean; stdcall;
+  TGetMCA = function (variable : PAnsiChar; parameter : PAnsiChar; var value : double) : boolean; stdcall;
 
 var
    DLLLoaded : boolean;
@@ -216,6 +217,11 @@ function  getNumberOfIndependentSpecies : integer;
 
 function  steadyState : double;
 function  computeSteadyStateValues : TDoubleArray;
+
+function  getuCC (variable : AnsiString; parameter : AnsiString) : double;
+function  getCC (variable : AnsiString; parameter : AnsiString) : double;
+function  getuEE (variable : AnsiString; parameter : AnsiString) : double;
+function  getEE (variable : AnsiString; parameter : AnsiString) : double;
 
 function  getAvailableSymbols : TRRLIst;
 
@@ -311,6 +317,11 @@ var DLLHandle : Cardinal;
     libGetNrMatrix            : TGetMatrix;
     libGetL0Matrix            : TGetMatrix;
     libGetConservationMatrix  : TGetMatrix;
+
+    libgetuCC                 : TGetMCA;
+    libgetuEE                 : TGetMCA;
+    libgetCC                  : TGetMCA;
+    libgetEE                  : TGetMCA;
 
     libFreeStringList : TFreeStringList;     //
     libFreeMatrix : TFreeRRMatrix; //
@@ -819,6 +830,33 @@ begin
 end;
 
 
+function getuCC (variable : AnsiString; parameter : AnsiString) : double;
+begin
+  if not libgetuCC (PAnsiChar (variable), PAnsiChar (parameter), result) then
+     raise Exception.Create ('Error in getCC function');
+end;
+
+
+function getCC (variable : AnsiString; parameter : AnsiString) : double;
+begin
+  if not libgetCC (PAnsiChar (variable), PAnsiChar (parameter), result) then
+     raise Exception.Create ('Error in getCC function');
+end;
+
+
+function getuEE (variable : AnsiString; parameter : AnsiString) : double;
+begin
+  if not libgetuEE (PAnsiChar (variable), PAnsiChar (parameter), result) then
+     raise Exception.Create ('Error in getCC function');
+end;
+
+
+function getEE (variable : AnsiString; parameter : AnsiString) : double;
+begin
+  if not libgetEE (PAnsiChar (variable), PAnsiChar (parameter), result) then
+     raise Exception.Create ('Error in getCC function');
+end;
+
   {st := getFluxControlCoefficientNames();
   subList := TRRList.Create;
   subList.Add (TRRListItem.Create ('Flux Control Coefficients'));
@@ -1145,25 +1183,25 @@ begin
 
    @libSetComputeAndAssignConservationLaws := loadSingleMethod ('setComputeAndAssignConservationLaws', errMsg, result, methodList);
 
-   @libLoadSBMLFromFile := loadSingleMethod ('loadSBMLFromFile', errMsg, result, methodList);
-   @libLoadSBML         := loadSingleMethod ('loadSBML', errMsg, result, methodList);
-   @libGetSBML          := loadSingleMethod ('getSBML', errMsg, result, methodList);
+   @libLoadSBMLFromFile   := loadSingleMethod ('loadSBMLFromFile', errMsg, result, methodList);
+   @libLoadSBML           := loadSingleMethod ('loadSBML', errMsg, result, methodList);
+   @libGetSBML            := loadSingleMethod ('getSBML', errMsg, result, methodList);
 
-   @setTimeStart   := loadSingleMethod ('setTimeStart', errMsg, result, methodList);
-   @setTimeEnd     := loadSingleMethod ('setTimeEnd', errMsg, result, methodList);
-   @setNumberOfPoints := loadSingleMethod ('setNumPoints', errMsg, result, methodList);
-   @libSimulate    := loadSingleMethod ('simulate', errMsg, result, methodList);
-   @libSimulateEx  := loadSingleMethod ('simulateEx', errMsg, result, methodList);
-   @libOneStep     := loadSingleMethod ('oneStep', errMsg, result, methodList);
-   @libReset       := loadSingleMethod ('reset', errMsg, result, methodList);
-   @libGetCapabilities := loadSingleMethod ('getCapabilities', errMsg, result, methodList);
-   @libEvalModel   := loadSingleMethod ('evalModel', errMsg, result, methodList);
-   @libGetFullJacobian := loadSingleMethod('getFullJacobian', errMsg, result, methodList);
+   @setTimeStart          := loadSingleMethod ('setTimeStart', errMsg, result, methodList);
+   @setTimeEnd            := loadSingleMethod ('setTimeEnd', errMsg, result, methodList);
+   @setNumberOfPoints     := loadSingleMethod ('setNumPoints', errMsg, result, methodList);
+   @libSimulate           := loadSingleMethod ('simulate', errMsg, result, methodList);
+   @libSimulateEx         := loadSingleMethod ('simulateEx', errMsg, result, methodList);
+   @libOneStep            := loadSingleMethod ('oneStep', errMsg, result, methodList);
+   @libReset              := loadSingleMethod ('reset', errMsg, result, methodList);
+   @libGetCapabilities    := loadSingleMethod ('getCapabilities', errMsg, result, methodList);
+   @libEvalModel          := loadSingleMethod ('evalModel', errMsg, result, methodList);
+   @libGetFullJacobian    := loadSingleMethod('getFullJacobian', errMsg, result, methodList);
    @libGetReducedJacobian := loadSingleMethod('getReducedJacobian', errMsg, result, methodList);
 
-   @libSetValue       := loadSingleMethod ('setValue', errMsg, result, methodList);
-   @libGetValue       := loadSingleMethod ('getValue', errMsg, result, methodList);
-   @libSetSelectionList := loadSingleMethod ('setSelectionList', errMsg, result, methodList);
+   @libSetValue          := loadSingleMethod ('setValue', errMsg, result, methodList);
+   @libGetValue          := loadSingleMethod ('getValue', errMsg, result, methodList);
+   @libSetSelectionList  := loadSingleMethod ('setSelectionList', errMsg, result, methodList);
 
    @libGetNumberOfReactions        := loadSingleMethod ('getNumberOfReactions', errMsg, result, methodList);
    @libGetNumberOfBoundarySpecies  := loadSingleMethod ('getNumberOfBoundarySpecies', errMsg, result, methodList);
@@ -1171,15 +1209,15 @@ begin
    @libGetNumberOfGlobalParameters := loadSingleMethod ('getNumberOfGlobalParameters', errMsg, result, methodList);
    @libGetNumberOfCompartments     := loadSingleMethod ('getNumberOfCompartments', errMsg, result, methodList);
 
-   @libSetCompartmentByIndex        := loadSingleMethod ('setCompartmentByIndex', errMsg, result, methodList);
-   @libSetFloatingSpeciesByIndex    := loadSingleMethod ('setFloatingSpeciesByIndex', errMsg, result, methodList);
-   @libSetBoundarySpeciesByIndex    := loadSingleMethod ('setBoundarySpeciesByIndex', errMsg, result, methodList);
-   @libSetGlobalParameterByIndex    := loadSingleMethod ('setGlobalParameterByIndex', errMsg, result, methodList);
+   @libSetCompartmentByIndex         := loadSingleMethod ('setCompartmentByIndex', errMsg, result, methodList);
+   @libSetFloatingSpeciesByIndex     := loadSingleMethod ('setFloatingSpeciesByIndex', errMsg, result, methodList);
+   @libSetBoundarySpeciesByIndex     := loadSingleMethod ('setBoundarySpeciesByIndex', errMsg, result, methodList);
+   @libSetGlobalParameterByIndex     := loadSingleMethod ('setGlobalParameterByIndex', errMsg, result, methodList);
 
-   @libGetCompartmentByIndex        := loadSingleMethod ('getCompartmentByIndex', errMsg, result, methodList);
-   @libGetFloatingSpeciesByIndex    := loadSingleMethod ('getFloatingSpeciesByIndex', errMsg, result, methodList);
-   @libGetBoundarySpeciesByIndex    := loadSingleMethod ('getBoundarySpeciesByIndex', errMsg, result, methodList);
-   @libGetGlobalParameterByIndex    := loadSingleMethod ('getGlobalParameterByIndex', errMsg, result, methodList);
+   @libGetCompartmentByIndex         := loadSingleMethod ('getCompartmentByIndex', errMsg, result, methodList);
+   @libGetFloatingSpeciesByIndex     := loadSingleMethod ('getFloatingSpeciesByIndex', errMsg, result, methodList);
+   @libGetBoundarySpeciesByIndex     := loadSingleMethod ('getBoundarySpeciesByIndex', errMsg, result, methodList);
+   @libGetGlobalParameterByIndex     := loadSingleMethod ('getGlobalParameterByIndex', errMsg, result, methodList);
 
    @libGetNumberOfDependentSpecies   := loadSingleMethod ('getNumberOfDependentSpecies', errMsg, result, methodList);
    @libGetNumberOfIndependentSpecies := loadSingleMethod ('getNumberOfIndependentSpecies', errMsg, result, methodList);
@@ -1209,6 +1247,11 @@ begin
    @libGetL0Matrix              := loadSingleMethod ('getL0Matrix', errMsg, result, methodList);
    @libGetConservationMatrix    := loadSingleMethod ('getConservationMatrix', errMsg, result, methodList);
 
+   // MCA
+   @libgetuCC                   := loadSingleMethod ('getuCC', errMsg, result, methodList);
+   @libgetuEE                   := loadSingleMethod ('getuEE', errMsg, result, methodList);
+   @libgetCC                    := loadSingleMethod ('getCC', errMsg, result, methodList);
+   @libgetEE                    := loadSingleMethod ('getEE', errMsg, result, methodList);
    @libFreeRRInstance   := loadSingleMethod ('freeRRInstance', errMsg, result, methodList);
    @libFreeResult       := loadSingleMethod ('freeResult', errMsg, result, methodList);
    @libFreeMatrix       := loadSingleMethod ('freeMatrix', errMsg, result, methodList);
