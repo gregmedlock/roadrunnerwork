@@ -221,6 +221,14 @@ C_DECL_SPEC int                     rrCallConv  getMatrixNumRows (RRMatrixHandle
 C_DECL_SPEC int                     rrCallConv  getMatrixNumCols (RRMatrixHandle m);
 C_DECL_SPEC bool                    rrCallConv  getMatrixElement (RRMatrixHandle m, int r, int c, double& value);
 
+C_DECL_SPEC int                     rrCallConv  getResultNumRows (RRResultHandle result);
+C_DECL_SPEC int                     rrCallConv  getResultNumCols (RRResultHandle result);
+C_DECL_SPEC bool                    rrCallConv  getResultElement (RRResultHandle result, int r, int c, double& value);
+C_DECL_SPEC char*                   rrCallConv  getResultColumnLabel (RRResultHandle result, int column);
+
+C_DECL_SPEC char*                   rrCallConv  getCCodeHeader (RRCCodeHandle code);
+C_DECL_SPEC char*                   rrCallConv  getCCodeSource (RRCCodeHandle code);
+
 #if defined( __cplusplus)
 }
 #endif

@@ -17,7 +17,9 @@ EXPORTS
     getBoundarySpeciesByIndex                   = _getBoundarySpeciesByIndex@8        
     getBoundarySpeciesNames                     = _getBoundarySpeciesNames@0          
     getBuildDate                                = _getBuildDate@0                     
-    getCCode                                    = _getCCode@0                         
+    getCCode                                    = _getCCode@0  
+    getCCodeHeader                              = _getCCodeHeader@4
+    getCCodeSource                              = _getCCodeSource@4                 
     getCapabilities                             = _getCapabilities@0                  
     getCompartmentByIndex                       = _getCompartmentByIndex@8            
     getCompartmentNames                         = _getCompartmentNames@0              
@@ -65,7 +67,11 @@ EXPORTS
     getReactionRate                             = _getReactionRate@8                  
     getReactionRates                            = _getReactionRates@0                 
     getReactionRatesEx                          = _getReactionRatesEx@4               
-    getReducedJacobian                          = _getReducedJacobian@0               
+    getReducedJacobian                          = _getReducedJacobian@0    
+	getResultColumnLabel                        = _getResultColumnLabel@8
+    getResultElement                            = _getResultElement@16
+    getResultNumCols                            = _getResultNumCols@4
+    getResultNumRows                            = _getResultNumRows@4	           
     getSBML                                     = _getSBML@0                          
     getScaledElasticityMatrix                   = _getScaledElasticityMatrix@0        
     getScaledFloatingSpeciesElasticity          = _getScaledFloatingSpeciesElasticity@12      
