@@ -53,6 +53,8 @@ extern "C"
 #include "rr_c_api_exporter.h"
 #include "rr_c_types.h"
 
+C_DECL_SPEC bool                    rrCallConv   getMyValue (double& value);
+
 //The latest
 C_DECL_SPEC bool                    rrCallConv   setCapabilities (const char* caps);
 C_DECL_SPEC char*                   rrCallConv   getCapabilities();
@@ -208,6 +210,12 @@ C_DECL_SPEC bool                    rrCallConv   freeVector(RRVectorHandle vecto
 C_DECL_SPEC bool                    rrCallConv   freeMatrix(RRMatrixHandle matrix);
 C_DECL_SPEC bool                    rrCallConv   freeCCode(RRCCodeHandle code);
 C_DECL_SPEC void                    rrCallConv   Pause();
+
+// Helper Routines
+C_DECL_SPEC int                     rrCallConv  getVectorLength (RRVectorHandle vector);
+C_DECL_SPEC bool                    rrCallConv  getVectorElement (RRVectorHandle vector, int index, double& value);
+C_DECL_SPEC bool                    rrCallConv  setVectorElement (RRVectorHandle vector, int index, double value);
+
 
 #if defined( __cplusplus)
 }
