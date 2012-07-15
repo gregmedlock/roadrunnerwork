@@ -217,6 +217,10 @@ C_DECL_SPEC bool                    rrCallConv  setVectorElement (RRVectorHandle
 C_DECL_SPEC int                     rrCallConv  getStringListLength (RRStringListHandle stringList);
 C_DECL_SPEC char*                   rrCallConv  getStringListElement (RRStringListHandle stringList, int index);
 
+C_DECL_SPEC int                     rrCallConv  getMatrixNumRows (RRMatrixHandle m);
+C_DECL_SPEC int                     rrCallConv  getMatrixNumCols (RRMatrixHandle m);
+C_DECL_SPEC bool                    rrCallConv  getMatrixElement (RRMatrixHandle m, int r, int c, double& value);
+
 #if defined( __cplusplus)
 }
 #endif

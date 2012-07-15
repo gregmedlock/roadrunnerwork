@@ -43,7 +43,10 @@ EXPORTS
     getLastError                                = _getLastError@0                     
     getLinkMatrix                               = _getLinkMatrix@0                    
     getNrMatrix                                 = _getNrMatrix@0                      
-    getL0Matrix                                 = _getL0Matrix@0                      
+    getL0Matrix                                 = _getL0Matrix@0 
+	getMatrixNumCols                            = _getMatrixNumCols@4
+    getMatrixNumRows                            = _getMatrixNumRows@4      
+	getMatrixElement                            = _getMatrixElement@16               
     getNumberOfBoundarySpecies                  = _getNumberOfBoundarySpecies@0       
     getNumberOfCompartments                     = _getNumberOfCompartments@0          
     getNumberOfDependentSpecies                 = _getNumberOfDependentSpecies@0      
