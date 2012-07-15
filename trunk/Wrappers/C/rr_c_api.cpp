@@ -2678,11 +2678,6 @@ void rrCallConv Pause()
     rr::Pause(true);
 }
 
-bool  rrCallConv getMyValue (double& value)
-{
-	value = 3.1415;
-    return true;
-}
 
 int rrCallConv getVectorLength (RRVectorHandle vector)
 {
@@ -2711,4 +2706,22 @@ bool rrCallConv setVectorElement (RRVectorHandle vector, int index, double value
 		return false;
 	vector->Data[index] = value;
 	return true;
+}
+
+
+int rrCallConv getStringListLength (RRStringListHandle stringList)
+{
+	if (stringList == NULL)
+		return -1;
+	return stringList->Count;
+}
+
+
+char* rrCallConv getStringListElement (RRStringListHandle stringList, int index)
+{
+	if (stringList == NULL)
+		return NULL;
+	if ((index < 0) || (index >= stringList->Count))
+		return NULL;
+	return stringList->String[index];
 }
