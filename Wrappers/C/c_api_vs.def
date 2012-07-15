@@ -68,7 +68,9 @@ EXPORTS
     getScaledFloatingSpeciesElasticity          = _getScaledFloatingSpeciesElasticity@12      
     getSelectionList                            = _getSelectionList@0                 
     getSteadyStateSelectionList                 = _getSteadyStateSelectionList@0      
-    getStoichiometryMatrix                      = _getStoichiometryMatrix@0           
+    getStoichiometryMatrix                      = _getStoichiometryMatrix@0  
+	getStringListElement                        = _getStringListElement@8   
+	getStringListLength                         = _getStringListLength@4      
     getTempFolder                               = _getTempFolder@0                    
     getValue                                    = _getValue@8  
 	getVectorElement                            = _getVectorElement@12

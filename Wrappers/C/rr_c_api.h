@@ -53,8 +53,6 @@ extern "C"
 #include "rr_c_api_exporter.h"
 #include "rr_c_types.h"
 
-C_DECL_SPEC bool                    rrCallConv   getMyValue (double& value);
-
 //The latest
 C_DECL_SPEC bool                    rrCallConv   setCapabilities (const char* caps);
 C_DECL_SPEC char*                   rrCallConv   getCapabilities();
@@ -216,6 +214,8 @@ C_DECL_SPEC int                     rrCallConv  getVectorLength (RRVectorHandle 
 C_DECL_SPEC bool                    rrCallConv  getVectorElement (RRVectorHandle vector, int index, double& value);
 C_DECL_SPEC bool                    rrCallConv  setVectorElement (RRVectorHandle vector, int index, double value);
 
+C_DECL_SPEC int                     rrCallConv  getStringListLength (RRStringListHandle stringList);
+C_DECL_SPEC char*                   rrCallConv  getStringListElement (RRStringListHandle stringList, int index);
 
 #if defined( __cplusplus)
 }

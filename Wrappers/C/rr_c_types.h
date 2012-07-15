@@ -95,6 +95,7 @@ typedef struct RRCCode
 
 } *RRCCodeHandle;
 
+
 struct RRStringArrayList;
 
 typedef struct RRStringArrayListItem
@@ -102,6 +103,7 @@ typedef struct RRStringArrayListItem
     char*                       Item;
     RRStringArrayList*          SubList;
 } *RRStringArrayListItemHandle;
+
 
 typedef struct RRStringArrayList
 {
