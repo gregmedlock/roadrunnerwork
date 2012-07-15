@@ -2725,3 +2725,27 @@ char* rrCallConv getStringListElement (RRStringListHandle stringList, int index)
 		return NULL;
 	return stringList->String[index];
 }
+
+int rrCallConv  getMatrixNumRows (RRMatrixHandle m)
+{
+	if (m == NULL)
+		return -1;
+	return m->RSize;
+}
+
+int  rrCallConv  getMatrixNumCols (RRMatrixHandle m)
+{
+	if (m == NULL)
+		return -1;
+	return m->CSize;
+}
+
+bool rrCallConv getMatrixElement (RRMatrixHandle m, int r, int c, double& value)
+{
+	if (m == NULL)
+		return false;
+	if ((r < 0) || (c < 0) || (r >= m->RSize) || (c >= m->CSize))
+		return false;
+	value = m->Data[r*m->CSize + c];
+	return true;
+}
