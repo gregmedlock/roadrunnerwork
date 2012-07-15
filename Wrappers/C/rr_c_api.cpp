@@ -2749,3 +2749,53 @@ bool rrCallConv getMatrixElement (RRMatrixHandle m, int r, int c, double& value)
 	value = m->Data[r*m->CSize + c];
 	return true;
 }
+
+
+int rrCallConv  getResultNumRows (RRResultHandle result)
+{
+	if (result == NULL)
+		return -1;
+	return result->RSize;
+}
+
+int  rrCallConv  getResultNumCols (RRResultHandle result)
+{
+	if (result == NULL)
+		return -1;
+	return result->CSize;
+}
+
+bool  rrCallConv getResultElement (RRResultHandle result, int r, int c, double& value)
+{
+	if (result == NULL)
+		return false;
+	if ((r < 0) || (c < 0) || (r >= result->RSize) || (c >= result->CSize))
+		return false;
+	value = result->Data[r*result->CSize + c];
+	return true;
+}
+
+char*  rrCallConv  getResultColumnLabel (RRResultHandle result, int column)
+{
+	if (result == NULL)
+		return NULL;
+	if ((column < 0) || (column >= result->CSize))
+		return NULL;
+	return result->ColumnHeaders[column];
+}
+
+char* rrCallConv  getCCodeHeader (RRCCodeHandle code)
+{
+	if (code == NULL)
+		return NULL;
+	return code->Header;
+}
+
+char* rrCallConv  getCCodeSource (RRCCodeHandle code)
+{
+	if (code == NULL)
+		return NULL;
+	return code->Source;
+}
+
+
