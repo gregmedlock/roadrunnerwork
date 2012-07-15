@@ -2673,8 +2673,42 @@ bool rrCallConv freeStringArrayList(RRStringArrayListHandle theList)
     return false;
 }
 
-void rrCallConv  Pause()
+void rrCallConv Pause()
 {
     rr::Pause(true);
 }
 
+bool  rrCallConv getMyValue (double& value)
+{
+	value = 3.1415;
+    return true;
+}
+
+int rrCallConv getVectorLength (RRVectorHandle vector)
+{
+	if (vector == NULL)
+		return -1;
+	else
+		return vector->Size;
+}
+
+bool rrCallConv getVectorElement (RRVectorHandle vector, int index, double& value)
+{
+	if (vector == NULL)
+		return false;
+	if ((index < 0) || (index >= vector->Size))
+		return false;
+	value = vector->Data[index];
+	return true;
+}
+
+
+bool rrCallConv setVectorElement (RRVectorHandle vector, int index, double value)
+{
+	if (vector == NULL)
+		return false;
+	if ((index < 0) || (index >= vector->Size))
+		return false;
+	vector->Data[index] = value;
+	return true;
+}

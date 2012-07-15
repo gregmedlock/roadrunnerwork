@@ -70,7 +70,9 @@ EXPORTS
     getSteadyStateSelectionList                 = _getSteadyStateSelectionList@0      
     getStoichiometryMatrix                      = _getStoichiometryMatrix@0           
     getTempFolder                               = _getTempFolder@0                    
-    getValue                                    = _getValue@8                         
+    getValue                                    = _getValue@8  
+	getVectorElement                            = _getVectorElement@12
+	getVectorLength                             = _getVectorLength@4                       
     hasError                                    = _hasError@0                         
     loadSBML                                    = _loadSBML@4                         
     loadSBMLFromFile                            = _loadSBMLFromFile@4                 
@@ -92,7 +94,8 @@ EXPORTS
     setTempFolder                               = _setTempFolder@4                    
     setTimeEnd                                  = _setTimeEnd@4                       
     setTimeStart                                = _setTimeStart@4                     
-    setValue                                    = _setValue@8                         
+    setValue                                    = _setValue@8  
+	setVectorElement                            = _setVectorElement@16                       
     simulate                                    = _simulate@0                         
     simulateEx                                  = _simulateEx@12                      
     steadyState                                 = _steadyState@4   
