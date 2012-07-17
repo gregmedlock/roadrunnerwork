@@ -9,59 +9,11 @@
 namespace rr
 {
 
-ArrayListItemBase::~ArrayListItemBase()
-{}
 
-ArrayList2Item::ArrayList2Item()
-: mValue(NULL)
-{
-    mValue = new ArrayList2;
-}
-
-ArrayList2Item::~ArrayList2Item()
-{
-    delete mValue;
-}
-
-ArrayList2Item::ArrayList2Item(const ArrayList2Item& copyMe)
-{
-    this->mValue = new ArrayList2;
-    (*this->mValue) = (*copyMe.mValue);
-}
-
-ArrayList2Item& ArrayList2Item::operator=(const ArrayList2Item& list)
-{
-    (*this->mValue) = (*list.mValue);
-
-    return *this;
-}
-
-//ArrayList2Item::ArrayList2Item(const ArrayList2& list)
+//const ArrayListItemBase& ArrayList2Item::operator[](int pos) const
 //{
-//    mValue = new ArrayList2(list);
+//    return (*mValue)[pos];
 //}
-
-unsigned int ArrayList2Item::Count() const
-{
-    return (mValue) ? mValue->Count() : 0;
-}
-
-void ArrayList2::Clear()
-{
-    if(Count())
-    {
-        for(u_int i = 0; i < Count(); i++)
-        {
-            delete mList[i];
-        }
-        mList.clear();
-    }
-}
-
-const ArrayListItemBase& ArrayList2Item::operator[](int pos) const
-{
-    return (*mValue)[pos];
-}
 
 // ============= ArrayList2 ==========================
 ArrayList2::ArrayList2()
@@ -71,6 +23,41 @@ ArrayList2::ArrayList2()
 ArrayList2::~ArrayList2()
 {
     if(mList.size())
+    {
+        for(u_int i = 0; i < Count(); i++)
+        {
+            delete mList[i];
+        }
+        mList.clear();
+    }
+}
+
+void ArrayList2::Add(const string& lbl, const StringList& list)
+{
+    ArrayList2 temp;
+    temp.Add(lbl);
+    temp.Add(list);
+    Add(temp);
+}
+
+void ArrayList2::Add(const StringList& list)
+{
+    ArrayList2 temp;
+    for(int i = 0; i < list.Count(); i++)
+    {
+        temp.Add(list[i]);
+    }
+    Add(temp);
+}
+
+void ArrayList2::Add(const string& lbl, const StringArrayList& lists)
+{
+
+}
+
+void ArrayList2::Clear()
+{
+    if(Count())
     {
         for(u_int i = 0; i < Count(); i++)
         {

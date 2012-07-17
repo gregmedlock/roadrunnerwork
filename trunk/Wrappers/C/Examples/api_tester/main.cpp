@@ -368,7 +368,9 @@ int main(int argc, char* argv[])
 
     cout<<printVector(getFloatingSpeciesConcentrations());
     cout<<printVector(getGlobalParameterValues());
-    cout<<printStringArrayList(getAvailableSymbols());
+    cout<<"\n\n Symbols\n";
+    cout<<printArrayList(getAvailableSymbols());
+    cout<<"\n\n ================================\n";
     RRVector* test = getReactionRates();
     cout<<printVector(test);
 

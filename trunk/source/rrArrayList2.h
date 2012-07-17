@@ -5,10 +5,10 @@
 #include <list>
 #include <iostream>
 #include "rrArrayListItem.h"
+#include "rrArrayList.h"
 using namespace std;
 namespace rr
 {
-
 
 class RR_DECLSPEC ArrayList2 : public rrObject
 {
@@ -27,6 +27,12 @@ class RR_DECLSPEC ArrayList2 : public rrObject
 		void                                Add(const string& item);
         void							    Add(const ArrayList2& item);
         void							    Add(const ArrayListItem<ArrayList2Item>& item);
+
+        //String lists and obsolete StringArrayLists ...
+        void                                Add(const StringList& list);
+        void							    Add(const string& lbl, const StringList& lists);
+        void							    Add(const string& lbl, const StringArrayList& lists);
+
         const ArrayListItemBase&            operator[](int pos) const;
         void                                operator = (const ArrayList2& rhs);
 };

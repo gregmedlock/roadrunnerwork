@@ -1300,7 +1300,7 @@ RRVectorHandle rrCallConv getGlobalParameterValues()
     }
 }
 
-RRStringArrayListHandle rrCallConv getAvailableSymbols()
+RRArrayList2Handle rrCallConv getAvailableSymbols()
 {
 	try
     {
@@ -1310,7 +1310,9 @@ RRStringArrayListHandle rrCallConv getAvailableSymbols()
             return NULL;
         }
 
-        StringArrayList slSymbols = gRRHandle->getAvailableSymbols();
+
+        ArrayList2 slSymbols = gRRHandle->getAvailableSymbols();
+        slSymbols.Add(34.56);
         return createList(slSymbols);
     }
     catch(Exception& ex)
@@ -2247,7 +2249,70 @@ bool rrCallConv getRateOfChange(const int& index, double& value)
 }
 
 //Print functions ==========================================================
-char* rrCallConv  printList(const RRStringListHandle list)
+char* rrCallConv printArrayList(const RRArrayList2Handle list)
+{
+	try
+    {
+        if(!list)
+        {
+            return NULL;
+        }
+
+        //Types of list items
+        char*           cVal;
+        int*            intVal;
+        double*         dVal;
+        RRArrayList2*   lVal; 		//list is nested list
+
+		stringstream resStr;
+        resStr<<"{";
+	    for(int i = 0; i < list->ItemCount; i++)
+        {
+            switch(list->Items[i].ItemType)
+            {
+                case litString:
+                    cVal = (char *) list->Items[i].pValue;
+                    resStr<<"\""<< (cVal) <<"\"";
+                break;
+
+                case litInteger:
+                    intVal = (int *) list->Items[i].pValue;
+                    resStr<< (*intVal);
+                break;
+
+                case litDouble:
+                    dVal = (double *) list->Items[i].pValue;
+                    resStr<< (*dVal);
+                break;
+
+                case litArrayList:
+                    lVal = (RRArrayList2 *) list->Items[i].pValue;
+                    resStr<<printArrayList(lVal);
+                break;
+            }
+
+            if(i < list->ItemCount -1)
+            {
+                resStr<<",";
+            }
+        }
+        resStr<<"}";
+		string strTmp = resStr.str();
+    	char* resultChar = new char[strTmp.size() + 1];
+        strcpy(resultChar, strTmp.c_str());
+        return resultChar;
+
+    }
+    catch(Exception& ex)
+    {
+        stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+        return NULL;
+    }
+}
+
+char* rrCallConv printList(const RRStringListHandle list)
 {
 	try
     {

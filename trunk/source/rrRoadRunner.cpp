@@ -17,6 +17,7 @@
 #include "rrSBMLModelSimulation.h"
 #include "libstruct/lsLA.h"
 #include "rrModelState.h"
+#include "rrArrayList2.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -468,7 +469,7 @@ bool RoadRunner::Simulate()
     DoubleMatrix data;
 	data = simulate();
 
-    StringArrayList l = getAvailableSymbols();
+    ArrayList2 l = getAvailableSymbols();
     Log(lError)<<l;
 
     StringList list = getSelectionList();
@@ -4875,9 +4876,9 @@ double RoadRunner::getValue(const string& sId)
 //            "Returns symbols of the currently loaded model,
 //              that can be used for the selectionlist format array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }."
 //            )
-StringArrayList RoadRunner::getAvailableSymbols()
+ArrayList2 RoadRunner::getAvailableSymbols()
 {
-    StringArrayList oResult;
+    ArrayList2 oResult;
 
     if (!mModel)
     {
