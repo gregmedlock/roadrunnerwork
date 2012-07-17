@@ -29,7 +29,7 @@ class ArrayListItem : public ArrayListItemBase
 
         virtual                    ~ArrayListItem(){}
                                     operator T(){return mItemValue;}
-        virtual const char          operator[](const int& pos) const {}     //Make sense for string types
+        virtual const char          operator[](const int& pos) const {return '\0';}     //Make sense for string types
         ArrayListItem<T>&           operator=(const ArrayListItem<T>& rhs);
 };
 
