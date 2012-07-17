@@ -1,5 +1,4 @@
 //---------------------------------------------------------------------------
-
 #pragma hdrstop
 #include <iostream>
 #include "rrArrayList2.h"
@@ -10,8 +9,8 @@ using namespace rr;
 using namespace std;
 int main()
 {
-    ListItem<string> str1("34343");
-    ListItem<string> str2("12");
+    ArrayListItem<string> str1("34343");
+    ArrayListItem<string> str2("12");
 
     str2 = str1;
     cout<<str1[2];
@@ -33,19 +32,12 @@ int main()
     aList1.Add("sdfsdfd");
 
     cout<<"\n"<<aList1;
-//
-//    ArrayList2 aList3(aList1);
-//    cout<<"\n"<<aList3;
-//
-//    ArrayList2 aList4;
-//    aList4  = aList3;
-//    cout<<"\n"<<aList4;
 
     for(u_int i = 0; i < aList1.Count(); i++)
     {
         cout<<aList1[i]<<endl;
     }
-//
+
     return 0;
 }
 
