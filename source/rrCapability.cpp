@@ -10,7 +10,7 @@ namespace rr
 {
 
 
-Capability(const string& name, const string& value, const string& hint, const string& type)
+Capability::Capability(const string& name, const string& value, const string& hint, const string& type)
 {
     Hint = hint;
     Name = name;

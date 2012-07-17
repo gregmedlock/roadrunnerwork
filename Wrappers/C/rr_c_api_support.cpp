@@ -2,14 +2,17 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
+#include <string>
 #include "rr_c_api.h"
 #include "rr_c_api_support.h"
 #include "rrUtils.h"
+#include "rrArrayListItem.h"
 //---------------------------------------------------------------------------
 #if defined (__CODEGEAR__)
 #pragma package(smart_init)
 #endif
-
+using namespace std;
+using namespace rr;
 namespace rr_c_api
 {
 extern char* gLastError;
@@ -186,6 +189,57 @@ RRStringArrayList* createList(const RRArrayList<string>& aList)
             theList->Items[i].Item = NULL;
             RRStringArrayList* list = createList((*aList[i].mLinkedList));
             theList->Items[i].SubList = list;
+        }
+    }
+    return theList;
+}
+
+RRArrayList2* createList(const rr::ArrayList2& aList)
+{
+    if(!aList.Count())
+    {
+        return NULL;
+    }
+
+    //Setup a RRStringArrayList structure from aList
+    RRArrayList2* theList = new RRArrayList2;
+
+    theList->ItemCount = aList.Count();
+    theList->Items = new RRArrayList2Item[aList.Count()];
+    int itemCount = aList.Count();
+    for(int i = 0; i < itemCount; i++)
+    {
+        //Have to figure out subtype of item
+        ArrayListItemBase* ptr = const_cast<ArrayListItemBase*>(&aList[i]);
+        if(dynamic_cast<ArrayListItem<int>*>(ptr))
+        {
+            theList->Items[i].ItemType = litInteger;
+            int val = (int) *(dynamic_cast<ArrayListItem<int>*>(ptr));
+            theList->Items[i].pValue = (int*) new int[1];
+
+            *(int *) theList->Items[i].pValue =  val;
+        }
+        else if(dynamic_cast<ArrayListItem<double>*>(ptr))
+        {
+            theList->Items[i].ItemType = litDouble;
+            double val = (double) *(dynamic_cast<ArrayListItem<double>*>(ptr));
+            theList->Items[i].pValue = (double *) new double[1];
+            *(double* )theList->Items[i].pValue = val;
+        }
+        else if(dynamic_cast<ArrayListItem<string>*>(ptr))
+        {
+            ArrayListItem<string>* listItem = dynamic_cast<ArrayListItem<string>*>(ptr);
+            string item = (string) *(dynamic_cast<ArrayListItem<string>*>(ptr));
+            theList->Items[i].pValue = (char *) new char[item.size() + 1];
+            strcpy( (char *)theList->Items[i].pValue, item.c_str());
+            theList->Items[i].ItemType = litString;
+        }
+        else if(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr))
+        {
+            ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
+            ArrayList2Item list = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));
+            theList->Items[i].pValue = (RRArrayList2*) createList(*(list.mValue));
+            theList->Items[i].ItemType = litArrayList;
         }
     }
     return theList;

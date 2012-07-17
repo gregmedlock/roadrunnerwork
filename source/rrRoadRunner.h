@@ -18,6 +18,7 @@
 #include "rrLibStructSupport.h"
 #include "libstruct/lsLibla.h"
 #include "rrArrayList.h"
+#include "rrArrayList2.h"
 
 using std::string;
 using namespace LIB_LA;
@@ -149,7 +150,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		void                            setCapabilities(const string& capsStr);
 		bool                            setValue(const string& sId, const double& dValue);
 		double                          getValue(const string& sId);
-		StringArrayList                 getAvailableSymbols();
+		ArrayList2                      getAvailableSymbols();
 		StringList                      getSelectionList();
 		void                            setSelectionList(const string& List);
 		void                            setSelectionList(const StringList& newSelectionList);

@@ -108,6 +108,14 @@
 			<CppCompile Include="..\..\source\mtrand\mtrand.cpp">
 				<BuildOrder>65</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\source\rrArrayList2.cpp">
+				<DependentOn>..\..\source\rrArrayList2.h</DependentOn>
+				<BuildOrder>68</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\source\rrArrayListItem.cpp">
+				<DependentOn>..\..\source\rrArrayListItem.h</DependentOn>
+				<BuildOrder>69</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\source\rrCapsSupport.cpp">
 				<BuildOrder>67</BuildOrder>
 			</CppCompile>

@@ -170,7 +170,7 @@ C_DECL_SPEC RRStringListHandle      rrCallConv   getFloatingSpeciesNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getGlobalParameterNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getCompartmentNames();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getEigenValueNames();
-C_DECL_SPEC RRStringArrayListHandle rrCallConv   getAvailableSymbols();
+C_DECL_SPEC RRArrayList2Handle      rrCallConv   getAvailableSymbols();
 
 // MCA methods
 C_DECL_SPEC RRStringArrayListHandle rrCallConv   getElasticityCoefficientNames();
@@ -198,6 +198,7 @@ C_DECL_SPEC char*                   rrCallConv   printMatrix(const RRMatrixHandl
 C_DECL_SPEC char*                   rrCallConv   printVector(const RRVectorHandle vec);
 C_DECL_SPEC char*                   rrCallConv   printList(const RRStringListHandle list);
 C_DECL_SPEC char*                   rrCallConv   printStringArrayList(const RRStringArrayList* list);
+C_DECL_SPEC char*                   rrCallConv   printArrayList(const RRArrayList2Handle list);
 
 // Free memory functions
 C_DECL_SPEC bool                    rrCallConv   freeRRInstance(RRHandle handle);

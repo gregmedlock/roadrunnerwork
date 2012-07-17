@@ -7,6 +7,7 @@
 #include "rrStringList.h"
 #include "rrStringListContainer.h"
 #include "rrArrayList.h"
+#include "rrArrayList2.h"
 #include "rrUtils.h"
 #include "rr_c_types.h"
 //---------------------------------------------------------------------------
@@ -34,7 +35,7 @@ RRMatrix*           createMatrix(const LIB_LA::DoubleMatrix& mat);
 RRStringList*       createList(const rr::StringList& aList);
 RRStringList*       createList(const rr::ArrayList& aList);
 RRStringArrayList*  createList(const rr::RRArrayList<string>& aList);
-
+RRArrayList2*       createList(const rr::ArrayList2& aList);
 
 }
 

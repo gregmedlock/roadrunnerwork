@@ -51,18 +51,6 @@ unsigned int ArrayList2Item::Count() const
     return (mValue) ? mValue->Count() : 0;
 }
 
-void ArrayList2::Clear()
-{
-    if(Count())
-    {
-        for(u_int i = 0; i < Count(); i++)
-        {
-            delete mList[i];
-        }
-        mList.clear();
-    }
-}
-
 const ArrayListItemBase& ArrayList2Item::operator[](int pos) const
 {
     return (*mValue)[pos];
@@ -95,8 +83,6 @@ ostream& operator<<(ostream& stream, const ArrayListItemBase& item)
     return stream;
 }
 
-
-
 ostream& operator<<(ostream& stream, const ArrayList2Item& item)
 {
     stream<<"{";
@@ -115,3 +101,8 @@ ostream& operator<<(ostream& stream, const ArrayList2Item& item)
 
 
 }
+
+
+
+
+

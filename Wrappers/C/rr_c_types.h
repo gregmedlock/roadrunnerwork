@@ -112,6 +112,25 @@ typedef struct RRStringArrayList
 
 }  *RRStringArrayListHandle;
 
+enum ListItemType {litString, litInteger, litDouble,   litArrayList};
+
+// The above enums correspond to the currently supported types in an RRArrayList2
+// char, int, double, RRArrayList2
+// The void pointer pValue need to be casted to corresponding type to retrieve its value
+
+struct RRArrayList2;
+typedef struct RRArrayList2Item
+{
+    ListItemType                ItemType;
+    void*                       pValue;
+} *RRArrayList2ItemHandle;
+
+
+typedef struct RRArrayList2
+{
+    int                         ItemCount;
+    RRArrayList2ItemHandle      Items;
+}  *RRArrayList2Handle;
 
 #if defined( __cplusplus)
 }
