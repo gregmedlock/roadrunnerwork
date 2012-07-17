@@ -68,6 +68,10 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="..\..\source\rrCapability.cpp">
+				<DependentOn>..\..\source\rrCapability.h</DependentOn>
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\Wrappers\C\Examples\api_tester\main.cpp">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>

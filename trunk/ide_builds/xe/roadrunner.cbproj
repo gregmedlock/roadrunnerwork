@@ -108,6 +108,9 @@
 			<CppCompile Include="..\..\source\mtrand\mtrand.cpp">
 				<BuildOrder>65</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\source\rrCapsSupport.cpp">
+				<BuildOrder>67</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\source\rrCGenerator.cpp">
 				<DependentOn>..\..\source\rrCGenerator.h</DependentOn>
 				<BuildOrder>60</BuildOrder>

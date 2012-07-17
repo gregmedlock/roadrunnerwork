@@ -2,7 +2,7 @@
 
 #pragma hdrstop
 #include <iostream>
-#include "rrArrayList.h"
+#include "rrArrayList2.h"
 //---------------------------------------------------------------------------
 #pragma argsused
 
@@ -10,32 +10,42 @@ using namespace rr;
 using namespace std;
 int main()
 {
-    ArrayList<string> list2;// = new ArrayList<string>;
-    ArrayList<string> list1;// = new ArrayList<string>;
+    ListItem<string> str1("34343");
+    ListItem<string> str2("12");
 
-    ArrayList<string> list3;
+    str2 = str1;
+    cout<<str1[2];
+    cout<<str2;
 
-    list1.Add("item1");
+    ArrayList2 aList1;
+    ArrayList2 aList2;
 
-    list2.Add("item1a");
-    list2.Add("item1b");
+    double test = 2;
+    aList1.Add(test);
+    aList1.Add("tests");
+    aList2.Add(34);
+    aList2.Add("in me");
+    aList1.Add(aList2);
+    aList1.Add(str1);
+    cout<<aList1;
 
-    list1.Add(list2);
-    list1.Add("item2");
-    list1.Add("3");
-    list1.Add("test");
+    aList1.Add(1234);
+    aList1.Add("sdfsdfd");
 
-    cout<<"List 1"<<endl<<list1;
+    cout<<"\n"<<aList1;
+//
+//    ArrayList2 aList3(aList1);
+//    cout<<"\n"<<aList3;
+//
+//    ArrayList2 aList4;
+//    aList4  = aList3;
+//    cout<<"\n"<<aList4;
 
-    cout<<endl<<"=========="<<endl;
-    for(int i = 0; i < list1.Count(); i++)
+    for(u_int i = 0; i < aList1.Count(); i++)
     {
-        string item = list1[i];
-        cout<<"Item "<<i<<": "<<item<<endl;
+        cout<<aList1[i]<<endl;
     }
-
-    list3 = list1;
-    cout<<"list 3:"<<endl<<list3<<endl;
+//
     return 0;
 }
 
