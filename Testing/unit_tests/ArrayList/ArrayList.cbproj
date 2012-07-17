@@ -1,4 +1,4 @@
-	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{50721052-18E6-4513-A5B5-73F9A661A054}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -22,6 +22,10 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
+			<BCC_AllCodeguardOptions>true</BCC_AllCodeguardOptions>
+			<BCC_MonitorThis>true</BCC_MonitorThis>
+			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
@@ -32,7 +36,7 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\..\source\;$(RR_ROOT)\source\trunk\Testing\unit_tests\ArrayList\;$(rr_source);$(IncludePath)</IncludePath>
+			<IncludePath>..\..\..\source\;R:\roadrunnerwork\trunk\source;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\..\source\;R:\rrInstalls\xe\lib\;$(RR_ROOT)\source\trunk\Testing\unit_tests\ArrayList\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -69,8 +73,8 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\..\source\rrArrayList.cpp">
-				<DependentOn>..\..\..\source\rrArrayList.h</DependentOn>
+			<CppCompile Include="..\..\..\source\rrArrayList2.cpp">
+				<DependentOn>..\..\..\source\rrArrayList2.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\..\source\rrObject.cpp">
