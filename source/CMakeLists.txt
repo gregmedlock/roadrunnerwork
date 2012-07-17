@@ -12,6 +12,8 @@ ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
 )
 
 set(rrSources 
+rrArrayList2
+rrArrayListItem
 rrException.cpp
 rrFileLog.cpp
 rrGetOptions.cpp
@@ -201,12 +203,12 @@ foreach(subfolder ${subfolders})
 endforeach(subfolder)
 
 #=== dependencies
-set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
-foreach(system_file ${SBML_DEPENDENCIES})
-install (FILES ${THIRD_PARTY_FOLDER}/runtime_dependencies/${system_file}	
-                DESTINATION bin 
-                COMPONENT rr_core)
-endforeach()
+#set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
+#foreach(system_file ${SBML_DEPENDENCIES})
+#install (FILES ${THIRD_PARTY_FOLDER}/runtime_dependencies/${system_file}	
+#                DESTINATION bin 
+#                COMPONENT rr_core)
+#endforeach()
 
 #=== Install support code for on the fly compilation
 FILE(GLOB rr_support rr_support/*.*)

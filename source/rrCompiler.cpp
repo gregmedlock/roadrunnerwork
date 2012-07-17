@@ -32,7 +32,6 @@ mSupportCodeFolder("../rr_support")
     mIncludePaths.push_back("./include");
     mLibraryPaths.push_back(".");
     mLibraryPaths.push_back("./lib");
-
 }
 
 Compiler::~Compiler(){}
