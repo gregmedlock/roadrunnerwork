@@ -53,6 +53,7 @@
 #include "rr_c_api_support.h"   //Support functions, not exposed as api functions and or data
 #include "rrException.h"
 #include "rr_version_info.h"
+#include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -63,6 +64,103 @@ namespace rr_c_api
 static  rr::RoadRunner*     gRRHandle       = NULL;
 char*                       gLastError      = NULL;
 }
+
+
+bool rrCallConv enableLogging()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+		//LogLevel logLevel(lDebug4);
+		string logFile = JoinPath(getTempFolder(), "RoadRunner.log") ;
+        gLog.Init("", lDebug4, unique_ptr<LogFile>(new LogFile(logFile.c_str())));
+
+        char* buffer = new char[1024];
+        // Get the current working directory:
+        if( (buffer = _getcwd( buffer, MAXPATH )) == NULL )
+        {
+            perror( "getcwd error" );
+        }
+        else
+        {
+            printf( "Current cwd = %s \nLength: %d\n", buffer, strlen(buffer) );
+            Log(lInfo)<<"Current working folder is :"<<buffer;
+            delete [] buffer;
+        }
+
+    	return true;
+    }
+    catch(const Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+  	    return false;
+    }
+}
+
+bool rrCallConv  setLogLevel(const int& lvl)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+        }
+    	return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+  	    return false;
+    }
+}
+
+bool rrCallConv  getLogLevel(int& lvl)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+        }
+    	return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+  	    return false;
+    }
+}
+
+char* rrCallConv  getLogFileName()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+        }
+    	return NULL;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+  	    return NULL;
+    }
+}
+
 
 char* rrCallConv getBuildDate()
 {
@@ -75,18 +173,6 @@ char* rrCallConv getVersion()
 {
     return createText(RR_VERSION);
 }
-
-//char* rrCallConv getLatestLog()
-//{
-//    return createText(SVN_LASTLOG);
-//}
-
-//char* rrCallConv getLatestCommitAuthor()
-//{
-//    char* text = new char[strlen(SVN_LAST_COMMIT_AUTHOR) + 1];
-//    strcpy(text, SVN_LAST_COMMIT_AUTHOR);
-//    return text;
-//}
 
 RRHandle rrCallConv getRRInstance()
 {

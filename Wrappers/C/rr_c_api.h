@@ -53,13 +53,32 @@ extern "C"
 #include "rr_c_api_exporter.h"
 #include "rr_c_types.h"
 
-//The latest
-C_DECL_SPEC char*                   rrCallConv   writeSBML();       //Current SBML
+
+//Temporary here... remove when the python stuff is working..
+#if defined(_MSC_VER)
+	#include <direct.h>
+	#define getcwd _getcwd
+	#define chdir  _chrdir
+	#define MAXPATH _MAX_PATH
+#elif defined(__BORLANDC__)
+  	#include <dir.h>
+#else
+#include <unistd.h>
+#endif
+
+
+//  The latest
+C_DECL_SPEC char*                   rrCallConv  writeSBML();       //Current SBML
 
 // Utility and informational methods
 C_DECL_SPEC char*                   rrCallConv  getVersion();
-//C_DECL_SPEC char*                   rrCallConv   getLatestLog();
-//C_DECL_SPEC char*                   rrCallConv   getLatestCommitAuthor();
+
+// Logging
+C_DECL_SPEC bool                    rrCallConv  enableLogging();
+C_DECL_SPEC bool                    rrCallConv  setLogLevel(const int& lvl);
+C_DECL_SPEC bool                    rrCallConv  getLogLevel(int& lvl);
+C_DECL_SPEC char*                   rrCallConv  getLogFileName();
+
 C_DECL_SPEC char*                   rrCallConv  getBuildDate();
 C_DECL_SPEC char*                   rrCallConv  getCopyright();
 C_DECL_SPEC bool                    rrCallConv  setTempFolder(const char* folder);

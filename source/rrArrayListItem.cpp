@@ -6,8 +6,6 @@
 #include "rrArrayList2.h"
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
-
 namespace rr
 {
 
