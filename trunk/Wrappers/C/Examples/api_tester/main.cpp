@@ -53,7 +53,8 @@ int main(int argc, char* argv[])
     {
         cout<<"No handle...";
     }
-
+    setTempFolder("c:\\rrTemp");
+    enableLogging();
 	char* text = getBuildDate();
 
 	if(text)
@@ -62,7 +63,7 @@ int main(int argc, char* argv[])
 		freeText(text);
 	}
 
-    setTempFolder("c:\\rrTemp");
+
 	//string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 	//string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
 	string fileName = modelsPath + "\\ss_threeSpecies.xml";
