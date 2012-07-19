@@ -6,7 +6,7 @@ print "=========================="
 import sys
 import os
 from ctypes import *
-os.environ['PATH'] =  "c:\\RoadRunner\\bin" + ';' + os.environ['PATH']
+os.environ['PATH'] =  "c:\\roadRunner\\bin" + ';' + os.environ['PATH']
 handle = WinDLL ("c:\\RoadRunner\\bin\\rr_c_api.dll")
 
 
@@ -208,7 +208,6 @@ def enableLogging():
 rr = handle.getRRInstance()
 print getCopyright()
 
-handle.enableLogging()
 rrINSTALLfolder = "C:\\RoadRunner"
 modelfolder = rrINSTALLfolder + "\\Models"
 rrbin = rrINSTALLfolder + "\\bin"
@@ -219,8 +218,8 @@ print os.getcwd()
 
 tempfolder = "C:\\rrTemp"
 handle.setTempFolder(tempfolder)
+handle.enableLogging()
 print handle.getTempFolder()
-
 
 sbmlstr = open(rrmodel, 'r').read()
 #print "Load SBML", loadSBML (sbmlstr)
@@ -239,17 +238,17 @@ print
 print printResult (result)
 
 #handle.getMyValue.restype = c_bool
-x = c_double()
-x.value = 0.0
+#x = c_double()
+#x.value = 0.0
 #handle.getMyValue (byref(x))
 #print x.value
 
-v = handle.getRatesOfChange()
-print handle.getVectorLength (v)
-handle.setVectorElement (v, 0, x)
-x.value = x.value + 1
-handle.setVectorElement (v, 1, x)
-x.value = x.value + 1
-handle.setVectorElement (v, 2, x)
+#v = handle.getRatesOfChange()
+#print handle.getVectorLength (v)
+#handle.setVectorElement (v, 0, x)
+#x.value = x.value + 1
+#handle.setVectorElement (v, 1, x)
+#x.value = x.value + 1
+#handle.setVectorElement (v, 2, x)
 
-sl = handle.getRatesOfChangeNames()
+#sl = handle.getRatesOfChangeNames()
