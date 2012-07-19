@@ -6,8 +6,8 @@ print "=========================="
 import sys
 import os
 from ctypes import *
-os.environ['PATH'] =  "c:\\roadRunner\\bin" + ';' + os.environ['PATH']
-handle = WinDLL ("c:\\roadRunner\\bin\\rr_c_api.dll")
+os.environ['PATH'] =  "c:\\RoadRunner\\bin" + ';' + os.environ['PATH']
+handle = WinDLL ("c:\\RoadRunner\\bin\\rr_c_api.dll")
 
 
 #=======================rr_c_api=======================#
@@ -209,15 +209,15 @@ rr = handle.getRRInstance()
 print getCopyright()
 
 handle.enableLogging()
-rrINSTALLfolder = "C:\\rrINSTALL"
-modelfolder = "C:\\Visual Studio 2010\\Projects\\Models"
-rrbin = rrINSTALLfolder + "\\vs\\bin"
+rrINSTALLfolder = "C:\\RoadRunner"
+modelfolder = rrINSTALLfolder + "\\Models"
+rrbin = rrINSTALLfolder + "\\bin"
 model = '\\feedback.xml'
 rrmodel = modelfolder + model
 os.chdir (rrbin)
 print os.getcwd()
 
-tempfolder = "C:\\rrINSTALL\\vs"
+tempfolder = "C:\\rrTemp"
 handle.setTempFolder(tempfolder)
 print handle.getTempFolder()
 
