@@ -22,7 +22,7 @@ endif()
 include (InstallRequiredSystemLibraries)
 
 #COMPONENTS OF THE INSTALL
-set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models delphi python rr_docs)
+set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models Delphi Python rr_docs)
 
 
 #set(CPACK_COMPONENT_RR_CORE_GROUP							"Core")
