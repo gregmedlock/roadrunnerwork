@@ -139,9 +139,27 @@ install(FILES Readme.txt License.txt
 if(${BORLAND})
 set(CG_RUNTIMES		cc32110MT.dll)
 foreach(runtime ${CG_RUNTIMES})
-install (FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/cg/xe/${runtime} DESTINATION bin COMPONENT rr_core)
+install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/cg/xe/${runtime} 
+            DESTINATION bin COMPONENT rr_core)
 endforeach()
 endif()
+
+if(${MSVC})
+    set(VS_RUNTIMES msvcp100d.dll MSVCRT.DLL)
+    foreach(runtime ${VS_RUNTIMES})
+    install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/vs/${runtime} 
+                DESTINATION bin 
+                COMPONENT rr_core)
+    endforeach()
+endif()
+
+#=== Other ThirdParties
+    set(RUNTIMES libxml2.DLL iconv.dll)
+    foreach(runtime ${RUNTIMES})
+    install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/${runtime} 
+                DESTINATION bin 
+                COMPONENT rr_core)
+    endforeach()
 
 #=== TCC ==================================================
 FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/*.*)
