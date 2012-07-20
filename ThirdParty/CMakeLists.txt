@@ -1,10 +1,30 @@
 cmake_minimum_required(VERSION 2.8)
-project(RRTPBuild)
+project(RRThirdPartyBuild)
+
+#----- ThirdParties
+#pre set option
+set(WITH_BZIP2          OFF CACHE BOOL "test")
+set(WITH_SWIG           OFF CACHE BOOL "test")
+set(WITH_ZLIB           OFF CACHE BOOL "test")
+set(WITH_CPP_NAMESPACE  ON  CACHE BOOL "test")
+
+set(BUILD_CVODES        OFF CACHE BOOL "")
+set(BUILD_IDA           OFF CACHE BOOL "")
+set(BUILD_IDAS          OFF CACHE BOOL "")
+set(BUILD_KINSOL        OFF CACHE BOOL "")
 
 if(${BORLAND})
 set(FOLDER_POSTFIX "xe")
-else(${BORLAND})
+set(LIBXML_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libsbml_xe/dependencies/include/" CACHE string "test")
+set(LIBXML_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/libsbml_xe/dependencies/lib/libxml2_xe.lib" CACHE string "test")
+endif(${BORLAND})
+
+if(${MSVC})
 set(FOLDER_POSTFIX "vs")
+set(LIBXML_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libsbml_dependencies/include/" CACHE string "test")
+set(LIBXML_LIBRARY "${CMAKE_CURRENT_SOURCE_DIR}/libsbml_dependencies/lib/libxml2.lib" CACHE string "test")
+
+
 endif()
 
 set(THIRD_PARTY_FOLDER 			${CMAKE_CURRENT_SOURCE_DIR})
@@ -41,10 +61,10 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 
 if(${BORLAND})
-include_directories(        #        ${THIRD_PARTY_FOLDER}/libsbml_xe
+include_directories(        
                                     ${THIRD_PARTY_FOLDER}/libsbml_xe/src
-#                                    ${THIRD_PARTY_FOLDER}/libsbml_xe/src/sbml 
 )
+
 link_directories(${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib)
 else()
 include_directories(                ${THIRD_PARTY_FOLDER}/libsbml
@@ -57,6 +77,13 @@ endif()
 if(${MSVC})
 #SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} /EHsc ")
 #SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
+add_definitions(
+-D_CRT_SECURE_NO_WARNINGS 
+-D_CRT_NONSTDC_NO_DEPRECATE
+"-wd4244"
+"-wd4554" #use paranthesis to clarify precedence
+
+)
 endif()
 
 #=== COMPILER FLAGS 
@@ -67,7 +94,7 @@ endif()
 if(${BORLAND})
 add_definitions(
 #                                -DUSE_PCH                   #Enable pre-compiled headers
- #                               -H=${PROJECT_BINARY_DIR}/rr_tp_pch.csm
+#                                -H=${PROJECT_BINARY_DIR}/rr_tp_pch.csm
                                 -w-8012                     #Comparing signed /unsigned
                                 -w-8057                     #Parameter never used
                                 -w-8004                     #'var' is assigned a value that is never used

@@ -1,31 +1,26 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
 PROJECT(rrWrappers)
-set(RR_INCLUDE_ROOT "../source")
+#set(RR_INCLUDE_ROOT ${CMAKE_CURRENT_SOURCE_FOLDER"../source")
 
-# rr Includes
-include_directories(${RR_INCLUDE_ROOT})
-include_directories(${LIBSBML_INSTALL_FOLDER}/include)
-include_directories(${LIBSBML_INSTALL_FOLDER}/include/sbml)
-include_directories(${CVODE_INSTALL_FOLDER}/include)
-include_directories(${CVODE_INSTALL_FOLDER}/include/cvode)
-
-if(${MSVC})
-endif(${MSVC})
-
-if(BUILD_C_API)
-set(wrapper "C")
- add_subdirectory(${wrapper})
- install (FILES ${wrapper}/Readme.txt 			DESTINATION Examples/${wrapper}	COMPONENT c_wrapper)
- install (FILES ${wrapper}/CMakeLists.txt 		DESTINATION Examples/${wrapper}	COMPONENT c_wrapper)
+if(WRAP_TO_C)
+set(wrappers "C")
 endif()
 
-IF( PYTHON_WRAPPER )
-set(wrapper "Python")
-    add_subdirectory( ${wrapper} )
- 	install (FILES ${wrapper}/Readme.txt 			DESTINATION Examples/${wrapper}	COMPONENT python_wrapper)
- 	install (FILES ${wrapper}/CMakeLists.txt 		DESTINATION Examples/${wrapper}	COMPONENT python_wrapper)
-ENDIF()
 
-add_subdirectory(Delphi)
-install (FILES Readme.txt 			DESTINATION Examples COMPONENT wrappers)
-install (FILES CMakeLists.txt 		DESTINATION Examples COMPONENT wrappers)
+if(WRAP_TO_DELPHI)
+set(wrappers ${wrappers} "Delphi")
+endif()
+
+if(WRAP_TO_PYTHON)
+set(wrappers ${wrappers} "Python")
+endif()
+
+foreach(wrapper ${wrappers})
+    add_subdirectory(${wrapper})
+ 	install(
+                FILES ${wrapper}/Readme.txt ${wrapper}/CMakeLists.txt 		
+                DESTINATION ${wrapper}	
+                COMPONENT ${wrapper}
+           )
+endforeach()
+
