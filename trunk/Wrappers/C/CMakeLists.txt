@@ -1,7 +1,11 @@
 set(target rr_c_api)
 
 set(C_API_INCLUDE_ROOT "${RR_ROOT}/Wrappers/C")
-include_directories(${C_API_INCLUDE_ROOT})
+
+include_directories(    ${C_API_INCLUDE_ROOT}
+                        ${RR_ROOT}/source
+                        ${THIRD_PARTY_INSTALL_FOLDER}/include
+)
 
 add_library(${target} SHARED
 rr_c_api.cpp
@@ -17,24 +21,24 @@ set_property(   TARGET ${target}
 					      LIBLAX_STATIC
 )
 
-IF(${MSVC})
-SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKER_FLAGS} \"/DEF:${CMAKE_CURRENT_SOURCE_DIR}/c_api_vs.def\"")
-ENDIF()
+if(${MSVC})
+set (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKER_FLAGS} \"/DEF:${CMAKE_CURRENT_SOURCE_DIR}/c_api_vs.def\"")
+endif()
 
-IF(${BORLAND})
+if(${BORLAND})
 target_link_libraries (${target} libxml2_xe)
-ELSE()
+else()
 target_link_libraries (${target} libxml2)
-ENDIF()
+endif()
 
 #Link C_api dll statically to roadrunner and libsbml
 if(${MINGW})
 target_link_libraries (${target} roadrunner)
 else()
-target_link_libraries (${target} roadrunner-static)
-target_link_libraries (${target} blas)
-target_link_libraries (${target} lapack)
-target_link_libraries (${target} libf2c)
+target_link_libraries (${target} roadrunner-static
+                       ${target} blas
+                       ${target} lapack
+                       ${target} libf2c)
 endif()
 
 #INCLUDE(FindSubversion)
@@ -63,28 +67,22 @@ add_subdirectory(Apps)
 add_subdirectory(Examples)
 
 #=============== INSTALL =====================
-install (   FILES ${target}.h 					
-            DESTINATION include/c_api  	
-            COMPONENT c_api)
+install(   FILES ${target}.h rr_c_types.h 				 					
+           DESTINATION include/c_api  	
+           COMPONENT c_api)
 
-install (   FILES rr_c_types.h 				
-            DESTINATION include/c_api  
-            COMPONENT c_api)
+install(   
+           TARGETS ${target}
+           RUNTIME DESTINATION bin
+           LIBRARY DESTINATION lib
+           ARCHIVE DESTINATION lib
+           COMPONENT c_api)
 
-install (   
-            TARGETS ${target}
-            RUNTIME DESTINATION bin
-            LIBRARY DESTINATION lib
-            ARCHIVE DESTINATION lib
-            COMPONENT c_api)
+install(   FILES ${lib_path}/${target}.lib	
+           DESTINATION lib 			
+           COMPONENT c_api)
 
-install (   FILES ${lib_path}/${target}.lib	
-            DESTINATION lib 			
-            COMPONENT c_api)
+install(   FILES ${exe_path}/${target}.dll	
+           DESTINATION bin 			
+           COMPONENT c_api)
 
-install (   FILES ${exe_path}/${target}.dll	
-            DESTINATION bin 			
-            COMPONENT c_api)
-
-
-#set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)

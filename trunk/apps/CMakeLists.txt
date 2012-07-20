@@ -7,9 +7,9 @@ include_directories(
 ${RR_INCLUDE_ROOT}
 ${RR_INCLUDE_ROOT}/libstruct
 ${RR_INCLUDE_ROOT}/rr_support
-${LIBSBML_INSTALL_FOLDER}/include
-${LIBSBML_INSTALL_FOLDER}/include/sbml
-${CVODE_INSTALL_FOLDER}/include/cvode
+${THIRD_PARTY_INSTALL_FOLDER}/include
+${THIRD_PARTY_INSTALL_FOLDER}/include/sbml
+${THIRD_PARTY_INSTALL_FOLDER}/include/cvode
 ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
 )
 

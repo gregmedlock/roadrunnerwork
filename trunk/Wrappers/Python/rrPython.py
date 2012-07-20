@@ -218,7 +218,7 @@ print os.getcwd()
 
 tempfolder = "C:\\rrTemp"
 handle.setTempFolder(tempfolder)
-handle.enableLogging()
+#handle.enableLogging()
 print handle.getTempFolder()
 
 sbmlstr = open(rrmodel, 'r').read()

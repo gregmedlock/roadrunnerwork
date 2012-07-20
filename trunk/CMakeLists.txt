@@ -16,24 +16,20 @@ else(${BORLAND})
 set(FOLDER_POSTFIX "vs")
 endif()
 
-set(LIBSBML_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing libsbml libraries.")
-if("${LIBSBML_INSTALL_FOLDER}" STREQUAL "")
-  set(LIBSBML_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing libsbml libraries" FORCE)
+set(THIRD_PARTY_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing ThirdParty libraries.")
+if("${THIRD_PARTY_INSTALL_FOLDER}" STREQUAL "")
+  set(THIRD_PARTY_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing ThirdParty libraries" FORCE)
 endif()
 
-set(CVODE_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing cvode libraries.")
-if("${CVODE_INSTALL_FOLDER}" STREQUAL "")
-  set(CVODE_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing cvode libraries" FORCE)
+set(THIRD_PARTY_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/ThirdParty CACHE PATH "Directory containing ThirdParty build.")
+if("${THIRD_PARTY_BUILD_FOLDER}" STREQUAL "")
+  set(THIRD_PARTY_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/ThirdParty CACHE PATH "Directory containing ThirdParty build" FORCE)
 endif()
 
-set(CLAPACK_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/clapack CACHE PATH "Directory containing clapack libraries.")
-if("${CLAPACK_BUILD_FOLDER}" STREQUAL "")
-  set(CLAPACK_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/clapack CACHE PATH "Directory containing clapack libraries" FORCE)
-endif()
-
-OPTION (PYTHON_WRAPPER 			"Generate Python wrapper " 		    FALSE)
-OPTION (BUILD_C_API	 			"Create C API DLL" 					OFF)
-OPTION (BUILD_EXAMPLES			"Build and install Examples"		OFF)
+OPTION (WRAP_TO_PYTHON 			"Generate Python wrapper" 		    ON)
+OPTION (WRAP_TO_DELPHI 			"Generate/Install Delphi wrapper "  ON)
+OPTION (WRAP_TO_C	 			"Create C API DLL" 					ON)
+OPTION (BUILD_EXAMPLES			"Build and install Examples"		ON)
 OPTION (INSTALL_STATIC_LIB		"Install RoadRunner static lib"		OFF)
 
 #Setup so that roadrunner is always built as a dll and linked statically with 'as much as possible'
@@ -68,7 +64,6 @@ IF(WIN32)
    # Linux
     ENDIF(${MSVC})
 ENDIF(WIN32)
-MESSAGE( STATUS "CMAKE_BUILD_TYPE: " ${CMAKE_BUILD_TYPE} )
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
@@ -77,21 +72,18 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 include_directories(				${RR_ROOT}
 				                    ${THIRD_PARTY_FOLDER})
 
-link_directories(				${LIBRARY_OUTPUT_PATH}
-                                    ${LIBSBML_INSTALL_FOLDER}/lib
-                                    ${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib
-                                    ${CLAPACK_BUILD_FOLDER}/SRC
-                                    ${CLAPACK_BUILD_FOLDER}/BLAS/SRC
-                                    ${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c
-                                    ${CLAPACK_BUILD_FOLDER}/lib
+link_directories(				    ${LIBRARY_OUTPUT_PATH}
+                                    ${THIRD_PARTY_INSTALL_FOLDER}/lib
+                                    ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib
+                                    ${THIRD_PARTY_BUILD_FOLDER}/lib
                  )
 
 if(${MSVC})
 add_definitions(-DCRT_NONSTDC_NO_DEPRECATE)
-link_directories(					${CLAPACK_BUILD_FOLDER}/SRC/Debug
-                                    ${CLAPACK_BUILD_FOLDER}/BLAS/SRC/Debug
-                                    ${CLAPACK_BUILD_FOLDER}/lib/Debug
-                                    ${CLAPACK_BUILD_FOLDER}/F2CLIBS/libf2c/Debug)
+link_directories(					${THIRD_PARTY_BUILD_FOLDER}/SRC/Debug
+                                    ${THIRD_PARTY_BUILD_FOLDER}/BLAS/SRC/Debug
+                                    ${THIRD_PARTY_BUILD_FOLDER}/lib/Debug
+                                    ${THIRD_PARTY_BUILD_FOLDER}/F2CLIBS/libf2c/Debug)
 SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} /EHsc ")
 SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
 endif()
@@ -113,8 +105,10 @@ add_definitions(
 endif()
 
 #Common compiler definitions
-add_definitions(-DLIBSBML_USE_CPP_NAMESPACE) 
-add_definitions(-DNO_LIBSTRUCT_DLL) 
+add_definitions(
+                    -DLIBSBML_USE_CPP_NAMESPACE 
+                    -DNO_LIBSTRUCT_DLL
+) 
 
 # Allow the developer to select if Dynamic or Static libraries are built
 SET (LIB_TYPE STATIC)
@@ -125,17 +119,21 @@ ENDIF (BUILD_SHARED_LIBS)
 #Source Code Folder
 add_subdirectory(source)
 add_subdirectory(apps)
-add_subdirectory(Wrappers)
+add_subdirectory(Wrappers) 
 
 #======================= INSTALL ROADRUNNER ========================================================
-install (FILES source/rr_pch.h	DESTINATION include COMPONENT rr_core)
+install(FILES source/rr_pch.h	
+        DESTINATION include 
+        COMPONENT rr_core)
 
 if(${BUILD_EXAMPLES})
 add_subdirectory(examples)
 endif()
 
-install (FILES Readme.txt 		DESTINATION . 	COMPONENT info)
-install (FILES License.txt 		DESTINATION . 	COMPONENT info)
+install(FILES Readme.txt License.txt	
+        DESTINATION . 	
+        COMPONENT info
+        )
 
 #==== SYSTEM FILES (COMPILER SPECIFICS) =================================================
 if(${BORLAND})

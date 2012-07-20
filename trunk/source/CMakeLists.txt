@@ -5,9 +5,9 @@ set(target roadrunner)
 include_directories(
 . 
 ./libstruct
-${LIBSBML_INSTALL_FOLDER}/include
-${LIBSBML_INSTALL_FOLDER}/include/sbml
-${CVODE_INSTALL_FOLDER}/include/cvode
+${THIRD_PARTY_INSTALL_FOLDER}/include
+${THIRD_PARTY_INSTALL_FOLDER}/include/sbml
+${THIRD_PARTY_INSTALL_FOLDER}/include/cvode
 ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
 )
 
