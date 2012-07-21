@@ -145,7 +145,7 @@ endforeach()
 endif()
 
 if(${MSVC})
-    set(VS_RUNTIMES msvcp100d.dll MSVCRT.DLL)
+    set(VS_RUNTIMES MSVCRT.DLL)
     foreach(runtime ${VS_RUNTIMES})
     install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/vs/${runtime} 
                 DESTINATION bin 
@@ -154,7 +154,7 @@ if(${MSVC})
 endif()
 
 #=== Other ThirdParties
-    set(RUNTIMES libxml2.DLL iconv.dll)
+    set(RUNTIMES libxml2.DLL iconv.dll zlib1.dll)
     foreach(runtime ${RUNTIMES})
     install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/${runtime} 
                 DESTINATION bin 
