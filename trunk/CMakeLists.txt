@@ -145,7 +145,7 @@ endforeach()
 endif()
 
 if(${MSVC})
-    set(VS_RUNTIMES MSVCRT.DLL)
+    set(VS_RUNTIMES MSVCRT.DLL msvcp100d.dll msvcr100d.dll)   #These indicate that Debug libs are linked.. should not be..
     foreach(runtime ${VS_RUNTIMES})
     install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/vs/${runtime} 
                 DESTINATION bin 
