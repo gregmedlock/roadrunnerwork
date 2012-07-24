@@ -1,92 +1,37 @@
-#include <stdio.h>
-#include <libxml/parser.h>
-#include <libxml/tree.h>
+#include <iostream>
+#include "pugi/pugixml.hpp"
 
-int main(int argc, char **argv)
+
+
+using namespace pugi;
+using namespace std;
+int main()
 {
-    xmlDocPtr doc = NULL;       /* document pointer */
-    xmlNodePtr root_node = NULL, node = NULL, node1 = NULL;/* node pointers */
-    xmlDtdPtr dtd = NULL;       /* DTD pointer */
-    char buff[256];
-    int i, j;
+    xml_document doc;
 
-    /*
-     * Creates a new document, a node and set it as a root node
-     */
-    doc = xmlNewDoc(BAD_CAST "1.0");
-    root_node = xmlNewNode(NULL, BAD_CAST "root");
-    xmlDocSetRootElement(doc, root_node);
+    // get a test document
+    doc.load("<project><name>test</name><version>1.1</version><public>yes</public></project>");
 
-//    /*
-//     * Creates a DTD declaration. Isn't mandatory.
-//     */
-//    dtd = xmlCreateIntSubset(doc, BAD_CAST "root", NULL, BAD_CAST "tree2.dtd");
+    xml_node project = doc.child("project");
 
-    /*
-     * xmlNewChild() creates a new node, which is "attached" as child node
-     * of root_node node.
-     */
-    xmlNewChild(root_node, NULL, BAD_CAST "node1", BAD_CAST "content of node 1");
+    //[code_text_access
+    cout << "Project name: " << project.child("name").text().get() << std::endl;
+    cout << "Project version: " << project.child("version").text().as_double() << std::endl;
+    cout << "Project visibility: " << (project.child("public").text().as_bool(/* def= */ true) ? "public" : "private") << std::endl;
+    cout << "Project description: " << project.child("description").text().get() << std::endl;
+    //]
 
-    /*
-     * The same as above, but the new child node doesn't have a content
-     */
-    xmlNewChild(root_node, NULL, BAD_CAST "node2", NULL);
+    cout << endl;
 
-    /*
-     * xmlNewProp() creates attributes, which is "attached" to an node.
-     * It returns xmlAttrPtr, which isn't used here.
-     */
-    node =
-        xmlNewChild(root_node, NULL, BAD_CAST "node3",
-                    BAD_CAST "this node has attributes");
-    xmlNewProp(node, BAD_CAST "attribute", BAD_CAST "yes");
-    xmlNewProp(node, BAD_CAST "foo", BAD_CAST "bar");
+    //[code_text_modify
+    // change project version
+    project.child("version").text() = 1.2;
 
-    /*
-     * Here goes another way to create nodes. xmlNewNode() and xmlNewText
-     * creates a node and a text node separately. They are "attached"
-     * by xmlAddChild()
-     */
-    node = xmlNewNode(NULL, BAD_CAST "node4");
-    node1 = xmlNewText(BAD_CAST
-                   "other way to create content (which is also a node)");
-    xmlAddChild(node, node1);
-    xmlAddChild(root_node, node);
+    // add description element and set the contents
+    // note that we do not have to explicitly add the node_pcdata child
+    project.append_child("description").text().set("a test project");
+    //]
 
-    /*
-     * A simple loop that "automates" nodes creation
-     */
-    for (i = 5; i < 7; i++)
-    {
-        sprintf(buff, "node%d", i);
-        node = xmlNewChild(root_node, NULL, BAD_CAST buff, NULL);
-        for (j = 1; j < 4; j++)
-        {
-            sprintf(buff, "node%d%d", i, j);
-            node1 = xmlNewChild(node, NULL, BAD_CAST buff, NULL);
-            xmlNewProp(node1, BAD_CAST "odd", BAD_CAST((j % 2) ? "no" : "yes"));
-        }
-    }
-
-    /*
-     * Dumping document to stdio or file
-     */
-    xmlSaveFormatFileEnc(argc > 1 ? argv[1] : "-", doc, "UTF-8", 1);
-
-    /*free the document */
-    xmlFreeDoc(doc);
-
-    /*
-     *Free the global variables that may
-     *have been allocated by the parser.
-     */
-    xmlCleanupParser();
-
-    /*
-     * this is to debug memory for regression tests
-     */
-    xmlMemoryDump();
-    return(0);
+    doc.save(cout);
 }
 
