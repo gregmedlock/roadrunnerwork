@@ -32,7 +32,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\ThirdParty\pugi\src\;R:\roadrunnerwork\trunk\Testing\xml\;P:\mtk\Components\vtk\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\ThirdParty\pugi\src\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;R:\roadrunnerwork\trunk\Testing\xml\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>R:\rrInstalls\xe\lib\;..\..\ThirdParty\pugi\src\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;R:\roadrunnerwork\trunk\Testing\xml\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -43,13 +43,17 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BCC_AllCodeguardOptions>true</BCC_AllCodeguardOptions>
+			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
+			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<IncludePath>$(RR_ROOT)\trunk\source;$(RR_INSTALL)\include;$(IncludePath)</IncludePath>
+			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;$(Defines)</Defines>
+			<Defines>_DEBUG;PUGI_STATIC;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -69,9 +73,10 @@
 			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\ThirdParty\pugi\src\pugixml.cpp">
+			<LibFiles Include="R:\rrInstalls\xe\lib\pugixml-static.lib">
+				<IgnorePath>true</IgnorePath>
 				<BuildOrder>1</BuildOrder>
-			</CppCompile>
+			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

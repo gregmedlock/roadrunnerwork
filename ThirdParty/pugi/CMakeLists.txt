@@ -2,25 +2,33 @@ project(pugixml)
 
 cmake_minimum_required(VERSION 2.6)
 #set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared instead of static library")
+set(target pugixml)
 
 set(HEADERS src/pugixml.hpp src/pugiconfig.hpp)
 set(SOURCES ${HEADERS} src/pugixml.cpp)
 
-add_library(pugixml         SHARED ${SOURCES})
-add_library(pugixml-static  STATIC ${SOURCES})
+add_library(${target}         SHARED ${SOURCES})
 
-set_target_properties(pugixml PROPERTIES 
-                        VERSION 1.2 SOVERSION 1.2)
-set_target_properties(pugixml-static PROPERTIES VERSION 1.2 SOVERSION 1.2)
+set_property(TARGET         ${target}  
+             PROPERTY    COMPILE_DEFINITIONS 
+                         PUGI_DLL 
+            ) 
 
-install(TARGETS pugixml 
+add_library(${target}-static  STATIC ${SOURCES})
+set_property(TARGET         ${target}-static  
+             PROPERTY    COMPILE_DEFINITIONS 
+                         PUGI_STATIC 
+            ) 
+
+install(FILES ${HEADERS} 
+        DESTINATION include/pugi)
+
+install(TARGETS ${target} 
         LIBRARY DESTINATION lib 
         ARCHIVE DESTINATION lib
         RUNTIME DESTINATION bin)
 
-install(TARGETS pugixml-static 
+install(TARGETS ${target}-static 
         LIBRARY DESTINATION lib 
         ARCHIVE DESTINATION lib)
 
-install(FILES ${HEADERS} 
-        DESTINATION include/pugi)
