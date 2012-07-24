@@ -32,6 +32,17 @@
 // #define PUGIXML_FUNCTION __fastcall // to set calling conventions to all public functions to fastcall
 // In absence of PUGIXML_CLASS/PUGIXML_FUNCTION definitions PUGIXML_API is used instead
 
+#if !defined(PUGI_STATIC)
+
+#if defined(PUGI_DLL)
+#define PUGIXML_API __declspec(dllexport)
+#define PUGIXML_CLASS __declspec(dllexport)
+#define PUGIXML_FUNCTION __declspec(dllexport)
+#else
+#define PUGIXML_API __declspec(dllimport)
+#endif
+
+#endif
 // Uncomment this to switch to header-only version
 // #define PUGIXML_HEADER_ONLY
 // #include "pugixml.cpp"
