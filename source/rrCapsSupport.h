@@ -1,50 +1,55 @@
 #ifndef rrCapsSupportH
 #define rrCapsSupportH
+#include <vector>
 #include "rrObject.h"
+#include "rrCapability.h"
 //---------------------------------------------------------------------------
 
+using std::vector;
 namespace rr
 {
 
+class CapabilitiesSection;
+class RoadRunner;
+
 class RR_DECLSPEC CapsSupport : public rrObject
 {
-//        public static CapsSupport CurrentSettings
+    protected:
+        string                          mName;
+        string                          mDescription;
+        vector<CapabilitiesSection>     mCapabilitiesSections;
+        RoadRunner                     *mRoadRunner;
+    public:
+                                        CapsSupport(RoadRunner* rr = NULL);
+        void                            Add(const CapabilitiesSection& section);
+};
+
+class RR_DECLSPEC CapabilitiesSection
+{
+    protected:
+        string                          mName;
+        string                          mMethod;
+        string                          mDescr;
+        vector<AbstractCapability>      mCapabilities;
+
+    public:
+                                        CapabilitiesSection(const string& name, const string& method, const string& descr);
+        void                            Add(const AbstractCapability& me);
+//    public Section(XmlElement section) : this()
+//    {
+//        Name = section.GetAttribute("name");
+//        Method = section.GetAttribute("method");
+//        Description = section.GetAttribute("description");
+//
+//        XmlNodeList capNodeList = section.ChildNodes;
+//
+//        for (int k = 0; k < capNodeList.Count; k++)
 //        {
-//            get
-//            {
-//                var result = new CapsSupport("RoadRunner", "Settings For RoadRunner");
-//                var integration = new Section { Name = "integration", Method = "CVODE", Description = "CVODE Integrator",
-//                    Capabilities = new List<Capability>( new Capability[] {
-//                        new Capability("BDFOrder", CvodeInterface.MaxBDFOrder, "Maximum order for BDF Method"),
-//                        new Capability("AdamsOrder", CvodeInterface.MaxAdamsOrder, "Maximum order for Adams Method"),
-//                        new Capability("rtol", CvodeInterface.relTol, "Relative Tolerance"),
-//                        new Capability("atol", CvodeInterface.absTol, "Absolute Tolerance"),
-//                        new Capability("maxsteps", CvodeInterface.MaxNumSteps, "Maximum number of internal stepsc"),
-//                        new Capability("initstep", CvodeInterface.InitStep, "the initial step size"),
-//                        new Capability("minstep", CvodeInterface.MinStep, "specifies a lower bound on the magnitude of the step size."),
-//                        new Capability("maxstep", CvodeInterface.MaxStep, "specifies an upper bound on the magnitude of the step size."),
-//                        new Capability("conservation", RoadRunner._bComputeAndAssignConservationLaws, "enables (=1) or disables (=0) the conservation analysis of models for timecourse simulations.")
-//                     })
-//                };
-//                result.Add(integration);
-//
-//                var steady = new Section
-//                {
-//                    Name = "SteadyState",
-//                    Method = "NLEQ2",
-//                    Description = "NLEQ2 Steady State Solver",
-//                    Capabilities = new List<Capability>( new Capability[] {
-//                        new Capability("MaxIterations", NLEQInterface.maxIterations, "Maximum number of newton iterations"),
-//                        new Capability("relativeTolerance", NLEQInterface.relativeTolerance, "Relative precision of solution components"),
-//                     })
-//                };
-//                result.Add(steady);
-//
-//
-//                return result;
-//            }
+//            Capabilities.Add(new Capability(capNodeList[k]));
 //        }
-//
+//    }
+};
+
 //        public List<Section> SectionList {get; set; }
 //
 //        public void Add(CapsSupport.Section section)
@@ -187,8 +192,7 @@ class RR_DECLSPEC CapsSupport : public rrObject
 //            return null;
 //        }
 //
-//        public string Name { get; set; }
-//        public string Description { get; set; }
+
 //
 //        public void loadCapsString(string capsStr)
 //        {
@@ -238,90 +242,9 @@ class RR_DECLSPEC CapsSupport : public rrObject
 //        }
 //
 //
-//        public class Section
-//        {
-//            public Section()
-//            {
-//                Capabilities = new List<Capability>();
-//            }
-//
-//            public Section(XmlElement section) : this()
-//            {
-//                Name = section.GetAttribute("name");
-//                Method = section.GetAttribute("method");
-//                Description = section.GetAttribute("description");
-//
-//                XmlNodeList capNodeList = section.ChildNodes;
-//
-//                for (int k = 0; k < capNodeList.Count; k++)
-//                {
-//                    Capabilities.Add(new Capability(capNodeList[k]));
-//                }
-//            }
-//
-//            public List<Capability> Capabilities { get; set; }
-//            public string Description { get; set; }
-//            public string Method { get; set; }
-//            public string Name { get; set; }
-//
-//            public Capability this[int index]
-//            {
-//                get
-//                {
-//                    return Capabilities[index];
-//                }
-//                set
-//                {
-//                    Capabilities[index] = value;
-//                }
-//            }
-//
-//            public int IndexOf(string parameter)
-//            {
-//                for (int i = 0; i < Capabilities.Count; i++)
-//                    if (Capabilities[i].Name == parameter)
-//                        return i;
-//                return -1;
-//            }
-//
-//            public void WriteTo(XmlWriter writer)
-//            {
-//                writer.WriteStartElement("section");
-//                writer.WriteAttributeString("name", Name);
-//                writer.WriteAttributeString("method", Method);
-//                writer.WriteAttributeString("description", Description);
-//
-//                foreach (var item in Capabilities)
-//                {
-//                    item.WriteTo(writer);
-//                }
-//
-//                writer.WriteEndElement();
-//            }
-//            public bool HasCapability (string parameter)
-//            {
-//                    return IndexOf(parameter) >= 0;
-//            }
-//
-//            public Capability this[string parameter]
-//            {
-//                get
-//                {
-//                    if (HasCapability(parameter))
-//                        return this[IndexOf(parameter)];
-//                    return new Capability();
-//                }
-//                set
-//                {
-//                    if (HasCapability(parameter))
-//                	    this[IndexOf(parameter)] = value;
-//                }
-//            }
-//        }
-//    }
-//}
-};
-}
+
+
+}//namespace
 #endif
 
 ////using System;

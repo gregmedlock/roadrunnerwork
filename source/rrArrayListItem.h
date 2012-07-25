@@ -39,12 +39,6 @@ ArrayListItem<T>::ArrayListItem(const T& val)
 mItemValue(val)
 {}
 
-template<>
-const char ArrayListItem<string>::operator[](const int& pos) const
-{
-    return (char) mItemValue[pos];
-}
-
 template<class T>
 ArrayListItem<T>& ArrayListItem<T>::operator=(const ArrayListItem<T>& rhs)
 {

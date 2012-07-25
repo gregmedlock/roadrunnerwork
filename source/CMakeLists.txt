@@ -218,5 +218,5 @@ install(FILES ${rr_support}
 
 #=== MISC
 if(${BORLAND})
-	set_property(DIRECTORY 		PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
+	set_property(DIRECTORY 	PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
 endif(${BORLAND})

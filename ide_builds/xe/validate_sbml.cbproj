@@ -1,4 +1,4 @@
-	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{510D6EA1-6D3D-4AF5-9F40-3DC0BE91F4A2}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -89,10 +89,6 @@
 			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_cvode.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>6</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_kinsol.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>7</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_nvecserial.lib">
 				<IgnorePath>true</IgnorePath>

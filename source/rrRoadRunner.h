@@ -19,7 +19,7 @@
 #include "libstruct/lsLibla.h"
 #include "rrArrayList.h"
 #include "rrArrayList2.h"
-
+#include "rrXMLDocument.h"
 using std::string;
 using namespace LIB_LA;
 
@@ -30,6 +30,8 @@ class SBMLModelSimulation;
 class ModelFromC;
 class CSharpGenerator;
 class CGenerator;
+
+
 
 class RR_DECLSPEC RoadRunner : public rrObject
 {
@@ -54,6 +56,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		DoubleMatrix                   *_L0;
 		DoubleMatrix                   *_N;
 		DoubleMatrix                   *_Nr;
+
+        rrXMLDoc                        mCapabilities;
 
 		Compiler                        mCompiler;
 		HINSTANCE                       mModelDllHandle;
@@ -101,11 +105,13 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		//Functions --------------------------------------------------------------------
 										RoadRunner();
 		virtual                        ~RoadRunner();
+        CvodeInterface*                 GetCVodeInterface();
+        NLEQInterface*                  GetNLEQInterface();
 		bool                            CreateSelectionList();
 		bool                            SetTempFileFolder(const string& folder);
 		string                          GetTempFileFolder();
 		void                            PartOfSimulation(SBMLModelSimulation* simulation){mSimulation = simulation;}
-		bool                            GenerateModelCode(const string& sbml = string(""));
+		bool                            GenerateModelCode(const string& sbml);
 		bool                            GenerateAndCompileModel();
 		bool                            CompileCurrentModel();
 		ModelFromC*                     CreateModel();
@@ -143,7 +149,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		// Start of Level 2 API Methods
 		// ---------------------------------------------------------------------
 		bool                            UseKinsol;
-		string                          getCapabilities();
+		rrXMLDoc&                       getCapabilities();
 		void                            setTolerances(const double& aTol, const double& rTol);
 		void                            setTolerances(const double& aTol, const double& rTol, const int& maxSteps);
 		void                            CorrectMaxStep();
