@@ -35,6 +35,7 @@ RoadRunner::RoadRunner() :
     emptyModelStr("A model needs to be loaded before one can use this method"),
     STEADYSTATE_THRESHOLD(1.E-2),
     mCVode(NULL),
+    steadyStateSolver(NULL),
     mL(NULL),
     mL0(NULL),
     mN(NULL),
@@ -76,11 +77,19 @@ RoadRunner::~RoadRunner()
 
 CvodeInterface* RoadRunner::GetCVodeInterface()
 {
+    if(!mCVode)
+    {
+        mCVode = new CvodeInterface(this, mModel);
+    }
     return mCVode;
 }
 
 NLEQInterface* RoadRunner::GetNLEQInterface()
 {
+    if(!steadyStateSolver)
+    {
+        steadyStateSolver = new NLEQInterface(mModel);
+    }
     return dynamic_cast<NLEQInterface*>(steadyStateSolver);
 }
 
@@ -4527,17 +4536,8 @@ StringList RoadRunner::getReactionNames()
 // Start of Level 2 API Methods
 // ---------------------------------------------------------------------
 // Help("Get Simulator Capabilities")
-rrXMLDoc& RoadRunner::getCapabilities()
+string RoadRunner::getCapabilities()
 {
-    mCapabilities.reset();
-    mCapabilities.load("<project><name>test</name><version>1.1</version><public>yes</public></project>");
-
-    rrXMLNode project = mCapabilities.child("project");
-
-
-     // add description element and set the contents
-    // note that we do not have to explicitly add the node_pcdata child
-    project.append_child("description").text().set("a test project");
 
     CapsSupport current = CapsSupport(this);//.CurrentSettings;
 //    current["integration"].Capabilities.Add(new CapsSupport.Capability
@@ -4547,7 +4547,7 @@ rrXMLDoc& RoadRunner::getCapabilities()
 //        );
 //
 //    return current.ToXml();
-    return mCapabilities;
+    return current.AsString();
 }
 //
 //        void RoadRunner::setTolerances(double aTol, double rTol)

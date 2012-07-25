@@ -126,6 +126,10 @@
 				<DependentOn>..\..\source\rrArrayListItem.h</DependentOn>
 				<BuildOrder>67</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\source\rrCapability.cpp">
+				<DependentOn>..\..\source\rrCapability.h</DependentOn>
+				<BuildOrder>69</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\source\rrCapsSupport.cpp">
 				<DependentOn>..\..\source\rrCapsSupport.h</DependentOn>
 				<BuildOrder>68</BuildOrder>
