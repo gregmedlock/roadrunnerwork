@@ -9,6 +9,7 @@
 namespace rr
 {
 
+
 ArrayListItemBase::~ArrayListItemBase()
 {}
 
@@ -79,6 +80,13 @@ ostream& operator<<(ostream& stream, const ArrayListItemBase& item)
         stream<<"Stream operator not implemented for this type";
     }
     return stream;
+}
+
+
+template<>
+const char ArrayListItem<string>::operator[](const int& pos) const
+{
+    return (char) mItemValue[pos];
 }
 
 ostream& operator<<(ostream& stream, const ArrayList2Item& item)

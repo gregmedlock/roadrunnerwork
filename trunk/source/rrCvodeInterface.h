@@ -53,6 +53,14 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         void                        HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound);
 
     public:
+                                    // -------------------------------------------------------------------------
+                                    // Constructor
+                                    // Model contains all the symbol tables associated with the model
+                                    // ev is the model function
+                                    // -------------------------------------------------------------------------
+                                    CvodeInterface(RoadRunner* rr, ModelFromC* oModel);
+                                   ~CvodeInterface();
+
         void                        AssignResultsToModel();
         static int                  mCount;
         static int                  mRootCount;
@@ -76,13 +84,6 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         static double               lastTimeValue;
 
 
-                                    // -------------------------------------------------------------------------
-                                    // Constructor
-                                    // Model contains all the symbol tables associated with the model
-                                    // ev is the model function
-                                    // -------------------------------------------------------------------------
-                                    CvodeInterface(RoadRunner* rr, ModelFromC* oModel);
-                                   ~CvodeInterface();
 
         void                        TestRootsAtInitialTime();
 

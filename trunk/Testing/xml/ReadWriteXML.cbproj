@@ -31,8 +31,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\ThirdParty\pugi\src\;R:\roadrunnerwork\trunk\Testing\xml\;P:\mtk\Components\vtk\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>R:\rrInstalls\xe\lib\;..\..\ThirdParty\pugi\src\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;R:\roadrunnerwork\trunk\Testing\xml\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\source\;..\..\ThirdParty\pugi\src\;R:\roadrunnerwork\trunk\Testing\xml\;P:\mtk\Components\vtk\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\source\;R:\rrBuilds\xe\ThirdParty\lib\;R:\rrInstalls\xe\lib\;..\..\ThirdParty\pugi\src\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;R:\roadrunnerwork\trunk\Testing\xml\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -43,7 +43,6 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<BCC_AllCodeguardOptions>true</BCC_AllCodeguardOptions>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<IncludePath>$(RR_ROOT)\trunk\source;$(RR_INSTALL)\include;$(IncludePath)</IncludePath>
@@ -53,7 +52,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;PUGI_STATIC;$(Defines)</Defines>
+			<Defines>_DEBUG;PUGI_STATIC;STATIC_RR;STATIC_LIB_LA;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -70,12 +69,48 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="..\..\source\rrXMLDocument.cpp">
+				<DependentOn>..\..\source\rrXMLDocument.h</DependentOn>
+				<BuildOrder>10</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
+			<LibFiles Include="..\..\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>9</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\blas.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>6</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>7</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>8</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xe\lib\libsbml-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>8</BuildOrder>
+			</LibFiles>
 			<LibFiles Include="R:\rrInstalls\xe\lib\pugixml-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>1</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xe\lib\roadrunner-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>2</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>4</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_nvecserial.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>5</BuildOrder>
 			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>

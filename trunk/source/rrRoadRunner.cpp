@@ -18,6 +18,7 @@
 #include "libstruct/lsLA.h"
 #include "rrModelState.h"
 #include "rrArrayList2.h"
+#include "rrCapsSupport.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -71,6 +72,16 @@ RoadRunner::~RoadRunner()
         //Unload the DLL
         FreeLibrary(mModelDllHandle);
     }
+}
+
+CvodeInterface* RoadRunner::GetCVodeInterface()
+{
+    return mCVode;
+}
+
+NLEQInterface* RoadRunner::GetNLEQInterface()
+{
+    return dynamic_cast<NLEQInterface*>(steadyStateSolver);
 }
 
 bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
@@ -713,7 +724,7 @@ bool RoadRunner::CompileCurrentModel()
 bool RoadRunner::GenerateAndCompileModel()
 {
 
-    if(!GenerateModelCode())
+    if(!GenerateModelCode(""))
     {
         Log(lError)<<"Failed generating model from SBML";
         return false;
@@ -4515,13 +4526,20 @@ StringList RoadRunner::getReactionNames()
 // ---------------------------------------------------------------------
 // Start of Level 2 API Methods
 // ---------------------------------------------------------------------
-//        int RoadRunner::UseKinsol { get; set; }
-//
 // Help("Get Simulator Capabilities")
-string RoadRunner::getCapabilities()
+rrXMLDoc& RoadRunner::getCapabilities()
 {
-    string tmp("not implmemented");
-//    CapsSupport current = CapsSupport.CurrentSettings;
+    mCapabilities.reset();
+    mCapabilities.load("<project><name>test</name><version>1.1</version><public>yes</public></project>");
+
+    rrXMLNode project = mCapabilities.child("project");
+
+
+     // add description element and set the contents
+    // note that we do not have to explicitly add the node_pcdata child
+    project.append_child("description").text().set("a test project");
+
+    CapsSupport current = CapsSupport(this);//.CurrentSettings;
 //    current["integration"].Capabilities.Add(new CapsSupport.Capability
 //    {
 //        Name = "usekinsol", IntValue = UseKinsol, Hint = "Is KinSol used as steady state integrator", Type = "int"
@@ -4529,7 +4547,7 @@ string RoadRunner::getCapabilities()
 //        );
 //
 //    return current.ToXml();
-    return tmp;
+    return mCapabilities;
 }
 //
 //        void RoadRunner::setTolerances(double aTol, double rTol)

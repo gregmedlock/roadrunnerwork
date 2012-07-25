@@ -117,7 +117,7 @@ bool SBMLModelSimulation::GenerateModelCode()
     {
         return false;
     }
-    return mEngine->GenerateModelCode();
+    return mEngine->GenerateModelCode("");
 }
 
 bool SBMLModelSimulation::CompileModel()

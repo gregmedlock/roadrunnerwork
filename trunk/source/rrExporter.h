@@ -3,6 +3,7 @@
 
 #if defined(STATIC_RR)
     #define RR_DECLSPEC
+    #define STATIC_LIB_LA
 #else
 
 #if defined(EXPORT_RR)

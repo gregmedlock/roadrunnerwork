@@ -127,10 +127,6 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>5</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_kinsol.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>6</BuildOrder>
-			</LibFiles>
 			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_nvecserial.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>4</BuildOrder>
