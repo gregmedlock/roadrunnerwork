@@ -19,22 +19,30 @@ class RR_DECLSPEC CapsSupport : public rrObject
         string                          mDescription;
         vector<CapabilitiesSection>     mCapabilitiesSections;
         RoadRunner                     *mRoadRunner;
+
     public:
                                         CapsSupport(RoadRunner* rr = NULL);
         void                            Add(const CapabilitiesSection& section);
+        string                          AsString();
+        u_int                           SectionCount();
 };
 
 class RR_DECLSPEC CapabilitiesSection
 {
     protected:
-        string                          mName;
-        string                          mMethod;
-        string                          mDescr;
-        vector<AbstractCapability>      mCapabilities;
+        string                              mName;
+        string                              mMethod;
+        string                              mDescription;
+        vector<const Capability*>   mCapabilities;
 
     public:
-                                        CapabilitiesSection(const string& name, const string& method, const string& descr);
-        void                            Add(const AbstractCapability& me);
+                                            CapabilitiesSection(const string& name, const string& method, const string& descr);
+                                            CapabilitiesSection(const CapabilitiesSection& fromMe);
+        void                                Add(const Capability* me);
+        string                              AsString();
+        u_int                               Count();
+        const Capability&           operator[](const int& i) const {return *(mCapabilities[i]);}
+
 //    public Section(XmlElement section) : this()
 //    {
 //        Name = section.GetAttribute("name");

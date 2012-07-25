@@ -1,5 +1,6 @@
 #include <iostream>
 #include "rrXMLDocument.h"
+#include "rrStringUtils.h"
 #include "rrRoadRunner.h"
 
 
@@ -10,15 +11,16 @@ int main()
 {
     RoadRunner rr;
 
-    rrXMLDoc& doc = rr.getCapabilities();
+    rr.loadSBMLFromFile("../Models/test_1.xml");
+    string doc = rr.getCapabilities();
 
-//    doc.append_child();
-     //doc.append_child(cap.root());
 
-    stringstream xml;
-    doc.save(xml);
+    cout<<doc;
 
-    cout<<xml.str();
+//    stringstream xml;
+//    doc.save(xml);
+//
+//    cout<<xml.str();
 }
 
 

@@ -2,41 +2,61 @@
 #ifndef rrCapabilityH
 #define rrCapabilityH
 #include "rrObject.h"
+#include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 namespace rr
 {
-class AbstractCapability : public rrObject
-{
-    public:
-        string          mSection;
 
-
-};
-
-template<class T>
-class Capability : public AbstractCapability
+class RR_DECLSPEC Capability : public rrObject
 {
     protected:
-        string      Hint;
-        string      Name;
-//        string      Type;
-        T           Value;
+        virtual string                      ValueAsString() const = 0;
+
 
     public:
-        /// <summary>
-        /// Initializes a new instance of the Capability class.
-        /// </summary>
-        Capability(const string& name, const T& value, const string& hint);//, const string& type);
+        string                              mName;
+        string                              mHint;
+                                            Capability(const string& name, const string& hint);
+        virtual                            ~Capability(){}
+        friend ostream&                     operator<<(ostream& stream, const Capability& outMe);
+
+        string                              AsString() const;
+        string                              GetType()  const;
 };
 
-template<class T>
-Capability<T>::Capability(const string& name, const T& value, const string& hint)
-:
-Name(name),
-Hint(hint),
-Value(value)
-{
 
+template<class T>
+class CapabilityType: public Capability
+{
+    protected:
+        T                                   mValue;
+        virtual string                      ValueAsString() const;
+
+
+    public:
+                                            /// <summary>
+                                            /// Initializes a new instance of the Capability class.
+                                            /// </summary>
+                                            CapabilityType(const string& name, const T& value, const string& hint);//, const string& type);
+};
+
+ostream&  operator<<(ostream& stream, const Capability& outMe)
+{
+    stream<<outMe.AsString();   //virtual friend idiom
+    return stream;
+}
+
+template<class T>
+CapabilityType<T>::CapabilityType(const string& name, const T& value, const string& hint)
+:
+Capability(name, hint),
+mValue(value)
+{}
+
+template<class T>
+string CapabilityType<T>::ValueAsString() const
+{
+    return ToString(mValue);
 }
 
 }

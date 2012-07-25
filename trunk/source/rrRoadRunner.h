@@ -57,7 +57,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		DoubleMatrix                   *_N;
 		DoubleMatrix                   *_Nr;
 
-        rrXMLDoc                        mCapabilities;
+//        rrXMLDoc                        mCapabilities;
 
 		Compiler                        mCompiler;
 		HINSTANCE                       mModelDllHandle;
@@ -149,7 +149,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		// Start of Level 2 API Methods
 		// ---------------------------------------------------------------------
 		bool                            UseKinsol;
-		rrXMLDoc&                       getCapabilities();
+		string                          getCapabilities();
 		void                            setTolerances(const double& aTol, const double& rTol);
 		void                            setTolerances(const double& aTol, const double& rTol, const int& maxSteps);
 		void                            CorrectMaxStep();
