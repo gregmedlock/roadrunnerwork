@@ -1,8 +1,6 @@
 # Files sbml_model.c sbml_model.def sbml_model.dll sbml_model.h -- delete and simulation
 # does not work. located in C:\Users\Greg Medlock\AppData\Local\Temp
 
-print "Load roadRunner via ctypes"
-print "=========================="
 import sys
 import os
 from ctypes import *
@@ -77,6 +75,8 @@ def getLastError():
 handle.setComputeAndAssignConservationLaws.restype = c_bool
 
 def setComputeAndAssignConservationLaws(OnOrOff):
+#    value = c_bool
+#    if handle.setComputeAndAssignConservationLaws (OnOrOff)
     return handle.setComputeAndAssignConservationLaws(OnOrOff)
 
 #Load SBML methods
@@ -134,18 +134,18 @@ def setNumPoints(nrPoints):
 def setSelectionList(list):
     return handle.setSelectionList(list)
 
-def oneStep (currentTime, stepSize, value):                             #test this
-    value = c_double()
-    if handle.oneStep (currentTime, stepSize, byref(value)) == True:
-        return value.value;
-    else:
-        raise RuntimeError('Index out of range')
+#def oneStep (currentTime, stepSize):                             #test this
+#    value = c_double()
+#    if handle.oneStep (currentTime, stepSize) == True:
+#        return value.value;
+#    else:
+#        raise RuntimeError('Index out of range')
 
-def getTimeStart():
-    return handle.getTimeStart()
+def getTimeStart(timeStart):
+    return handle.getTimeStart(timeStart)
 
-def getTimeEnd():
-    return handle.getTimeEnd()
+def getTimeEnd(timeEnd):
+    return handle.getTimeEnd(timeEnd)
 
 def getNumPoints():
     return handle.getNumPoints()
@@ -427,15 +427,15 @@ def setVectorElement(vector, index, value):
     else:
         raise RuntimeError('Index out of range')
 
-def getStringListLength(stringList):
-    return handle.getStringListLength(stringList)
+def getStringListLength():
+    return handle.getStringListLength()
 
-def setVectorElement(stringList, index):
-    value = c_int()
-    if handle.setVectorElement(stringList, index, value,  byref(value)) == True:
-        return value.value;
-    else:
-        raise RuntimeError('Index out of range')
+#def setVectorElement(stringList, index):
+#    value = c_int()
+#    if handle.setVectorElement(stringList, index, value,  byref(value)) == True:
+#        return value.value;
+#    else:
+#        raise RuntimeError('Index out of range')
 
 
 
@@ -496,4 +496,3 @@ def getResultElement (m, i, j):
 
 
 #=======================================================#
-
