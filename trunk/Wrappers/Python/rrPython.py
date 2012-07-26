@@ -131,8 +131,8 @@ def setTimeEnd(timeEnd):
 def setNumPoints(nrPoints):
     return handle.setNumPoints(byref (c_int(nrPoints)))
 
-def setSelectionList(list):
-    return handle.setSelectionList(list)
+def setSelectionList(lst):
+    return handle.setSelectionList(lst)
 
 #def oneStep (currentTime, stepSize):                             #test this
 #    value = c_double()
