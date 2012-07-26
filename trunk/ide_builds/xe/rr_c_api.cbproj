@@ -96,6 +96,10 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>7</BuildOrder>
 			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xe\lib\pugixml-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>11</BuildOrder>
+			</LibFiles>
 			<LibFiles Include="R:\rrInstalls\xe\lib\roadrunner-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>10</BuildOrder>

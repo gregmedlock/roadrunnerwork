@@ -28,7 +28,7 @@ class RR_DECLSPEC CapsSupport : public rrObject
         u_int                           Count();
 };
 
-}//namespace
+}
 #endif
 
 ////using System;

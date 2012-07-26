@@ -2,6 +2,7 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
+#include "rrLogger.h"
 #include "rrRoadRunner.h"
 #include "rrCapsSupport.h"
 #include "rrCVodeInterface.h"
@@ -46,6 +47,11 @@ mRoadRunner(rr)
         steady.Add(new CapabilityType<int>("MaxIterations", solver->maxIterations, "Maximum number of newton iterations"));
         steady.Add(new CapabilityType<double>("relativeTolerance", solver->relativeTolerance, "Relative precision of solution components"));
         Add(steady);
+    }
+
+    if(!Count())
+    {
+        Log(lInfo)<<"A model has not been loaded, so  capabilities are not available.";
     }
 }
 

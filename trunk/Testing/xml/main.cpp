@@ -9,19 +9,11 @@ using namespace std;
 using namespace rr;
 int main()
 {
-
-
     RoadRunner rr;
-
     rr.loadSBMLFromFile("../Models/test_1.xml");
     string aDoc = rr.getCapabilities();
 
     cout<<aDoc;
-
-//    stringstream xml;
-//    doc.save(xml);
-//
-//    cout<<xml.str();
 }
 
 
