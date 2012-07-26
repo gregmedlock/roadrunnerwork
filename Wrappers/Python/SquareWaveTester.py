@@ -18,6 +18,8 @@ os.chdir (rrbin)
 sbmlstr = open(rrmodel, 'r').read()
 print "Load SBML", rrPython.loadSBML(sbmlstr)
 
+rrPython.setSelectionList([time, S1, J0])
+
 print "Set Time Start", rrPython.setTimeStart (0.0)
 print "Set Time End" , rrPython.setTimeEnd (40.0)
 print "Set Number of Points", rrPython.setNumPoints (200)
