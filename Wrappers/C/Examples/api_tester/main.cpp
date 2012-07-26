@@ -450,7 +450,7 @@ int main(int argc, char* argv[])
     cout<<" ---- getElasticityCoefficientNames ---\n"<<printStringArrayList(getElasticityCoefficientNames())<<endl;
     cout<<printList(getRateOfChangeNames())<<endl;
     setCapabilities (NULL);
-    //cout<<getCapabilities()<<endl;
+    cout<<getCapabilities()<<endl;
 
 //    C_DECL_SPEC bool                    rrCallConv   getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
     if(getScaledFloatingSpeciesElasticity("_J1", "S1", value))

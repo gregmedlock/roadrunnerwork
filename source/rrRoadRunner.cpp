@@ -53,13 +53,13 @@ RoadRunner::RoadRunner() :
     UseKinsol(false),
     mComputeAndAssignConservationLaws(false),
     mConservedTotalChanged(false)
-    {
+{
      Log(lDebug4)<<"In RoadRunner CTOR";
      mCSharpGenerator    = new CSharpGenerator(this);
      mCGenerator         = new CGenerator(this);//Todo: memoryleak
      mModelGenerator     = mCGenerator;
      mTempFileFolder     = GetUsersTempDataFolder();
-    }
+}
 
 RoadRunner::~RoadRunner()
 {
@@ -77,7 +77,7 @@ RoadRunner::~RoadRunner()
 
 CvodeInterface* RoadRunner::GetCVodeInterface()
 {
-    if(!mCVode)
+    if(!mCVode && mModel != NULL)
     {
         mCVode = new CvodeInterface(this, mModel);
     }
@@ -86,7 +86,7 @@ CvodeInterface* RoadRunner::GetCVodeInterface()
 
 NLEQInterface* RoadRunner::GetNLEQInterface()
 {
-    if(!steadyStateSolver)
+    if(!steadyStateSolver && mModel != NULL)
     {
         steadyStateSolver = new NLEQInterface(mModel);
     }
