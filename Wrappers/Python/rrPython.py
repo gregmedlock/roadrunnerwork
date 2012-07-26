@@ -1,5 +1,5 @@
-# Files sbml_model.c sbml_model.def sbml_model.dll sbml_model.h -- delete and simulation
-# does not work. located in C:\Users\Greg Medlock\AppData\Local\Temp
+# Place this script in your ...Python27\\Lib  directory so that it can be
+# imported with just "import rrPython" in test scripts.
 
 import sys
 import os
