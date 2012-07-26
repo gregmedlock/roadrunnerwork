@@ -46,8 +46,8 @@ double              RR_DECLSPEC ToDouble(const string& str);
 
 string              RR_DECLSPEC ToString(const bool& b);
 string              RR_DECLSPEC ToString(const double& d, const string& format = "%f");
-string              RR_DECLSPEC ToString(const unsigned int n, const int nBase=10);
-string              RR_DECLSPEC ToString(const int n, const int nBase=10);
+string              RR_DECLSPEC ToString(const unsigned int& n, const string& format = "%d", const int nBase=10);
+string              RR_DECLSPEC ToString(const int& n, const string& format = "%d", const int nBase=10);
 string              RR_DECLSPEC ToString(const long n, const int nBase=10);
 string              RR_DECLSPEC ToString(const unsigned long n, const int nBase=10);
 string              RR_DECLSPEC ToString(const unsigned short n, const int nBase=10);

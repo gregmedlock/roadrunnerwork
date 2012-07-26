@@ -4538,16 +4538,8 @@ StringList RoadRunner::getReactionNames()
 // Help("Get Simulator Capabilities")
 string RoadRunner::getCapabilities()
 {
-
-    CapsSupport current = CapsSupport(this);//.CurrentSettings;
-//    current["integration"].Capabilities.Add(new CapsSupport.Capability
-//    {
-//        Name = "usekinsol", IntValue = UseKinsol, Hint = "Is KinSol used as steady state integrator", Type = "int"
-//    }
-//        );
-//
-//    return current.ToXml();
-    return current.AsString();
+    CapsSupport current = CapsSupport(this);
+    return current.AsXMLString();
 }
 //
 //        void RoadRunner::setTolerances(double aTol, double rTol)
@@ -4569,6 +4561,7 @@ string RoadRunner::getCapabilities()
 //            CvodeInterface.MaxStep = maxStep;
 //        }
 //
+
 // Help("Set Simulator Capabilites")
 void RoadRunner::setCapabilities(const string& capsStr)
 {

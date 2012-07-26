@@ -603,7 +603,43 @@ string ToString(const double& val, const string& format)
     return string(sBuffer);
 }
 
-string ToString(const unsigned int n, const int nBase)
+//string ToString(const int& val)
+//{
+//    char sBuffer[256];
+//    sprintf(sBuffer, format.c_str(), val);
+//    return string(sBuffer);
+//}
+
+string ToString(const unsigned int& n, const string& format, const int nBase)
+{
+    char sBuffer[256];
+    if (nBase == 16)
+    {
+        sprintf(sBuffer, "%X", n);
+        return string("0x") + string(sBuffer);
+    }
+    else if(nBase == 2)
+    {
+        string tmp = "";
+        int k = n;
+        for (int i=0; i<8; i++)
+        {
+            if ((k & 0x80) != 0)
+                tmp += "1";
+            else
+                tmp += "0";
+            k = k<<1;
+        }
+        return "0b" + tmp;
+    }
+    else
+    {
+        sprintf(sBuffer, "%d", n);
+        return string(sBuffer);
+    }
+}
+
+string ToString(const int& n, const string& format, const int nBase)
 {
     char sBuffer[256];
     if (nBase == 16)

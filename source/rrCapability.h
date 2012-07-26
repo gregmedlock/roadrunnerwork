@@ -10,7 +10,7 @@ namespace rr
 class RR_DECLSPEC Capability : public rrObject
 {
     protected:
-        virtual string                      ValueAsString() const = 0;
+        virtual string                      GetValueAsString() const = 0;
 
 
     public:
@@ -21,7 +21,10 @@ class RR_DECLSPEC Capability : public rrObject
         friend ostream&                     operator<<(ostream& stream, const Capability& outMe);
 
         string                              AsString() const;
-        string                              GetType()  const;
+        string                              GetType() const;
+        string                              GetName() const;
+        string                              GetHint() const;
+        string                              GetValue() const;
 };
 
 
@@ -30,7 +33,7 @@ class CapabilityType: public Capability
 {
     protected:
         T                                   mValue;
-        virtual string                      ValueAsString() const;
+        virtual string                      GetValueAsString() const;
 
 
     public:
@@ -54,7 +57,7 @@ mValue(value)
 {}
 
 template<class T>
-string CapabilityType<T>::ValueAsString() const
+string CapabilityType<T>::GetValueAsString() const
 {
     return ToString(mValue);
 }

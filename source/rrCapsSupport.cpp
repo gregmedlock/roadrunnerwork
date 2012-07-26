@@ -57,15 +57,39 @@ void CapsSupport::Add(const CapabilitiesSection& section)
     mCapabilitiesSections.push_back(section);
 }
 
-string CapsSupport::AsString()
+string CapsSupport::AsXMLString()
 {
-    string caps;
+    //Create XML
+    rrXMLDoc doc;
+    xml_node mainNode = doc.append_child("caps");
+    mainNode.append_attribute("name") = mName.c_str();
+    mainNode.append_attribute("description") = mDescription.c_str();
+
+    //Add sections
     for(int i = 0; i < SectionCount(); i++)
     {
-        CapabilitiesSection& aSec = mCapabilitiesSections[i];
-        caps += aSec.AsString();
+        CapabilitiesSection& section = mCapabilitiesSections[i];
+
+        pugi::xml_node section_node = mainNode.append_child("section");
+        section_node.append_attribute("name") = section.GetName().c_str();
+        section_node.append_attribute("method") = section.GetMethod().c_str();
+        section_node.append_attribute("description") = section.GetDescription().c_str();
+
+        //Add capabilites within each section
+        for(int j = 0; j < section.Count(); j++)
+        {
+            Capability* cap = const_cast<Capability*>(&(section[j]));
+            pugi::xml_node cap_node = mainNode.append_child("cap");
+            cap_node.append_attribute("name") = cap->GetName().c_str();
+            cap_node.append_attribute("value") = cap->GetValue().c_str();
+            cap_node.append_attribute("hint") = cap->GetHint().c_str();
+            cap_node.append_attribute("type") = cap->GetType().c_str();
+        }
     }
-    return caps;
+
+    stringstream xmlS;
+    doc.print(xmlS,"  ", format_indent);
+    return xmlS.str();
 }
 
 //Capabilities section
@@ -84,8 +108,26 @@ mMethod(from.mMethod),
 mDescription(from.mDescription),
 mCapabilities(from.mCapabilities)
 {
+}
 
+const Capability& CapabilitiesSection::operator[](const int& i) const
+{
+    return *(mCapabilities[i]);
+}
 
+string CapabilitiesSection::GetName()
+{
+    return mName;
+}
+
+string CapabilitiesSection::GetDescription()
+{
+    return mDescription;
+}
+
+string CapabilitiesSection::GetMethod()
+{
+    return mMethod;
 }
 
 u_int CapabilitiesSection::Count()
@@ -112,3 +154,4 @@ string CapabilitiesSection::AsString()
     return caps.str();
 }
 }
+
