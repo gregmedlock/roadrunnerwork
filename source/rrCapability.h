@@ -1,4 +1,3 @@
-//---------------------------------------------------------------------------
 #ifndef rrCapabilityH
 #define rrCapabilityH
 #include "rrObject.h"
@@ -11,7 +10,6 @@ class RR_DECLSPEC Capability : public rrObject
 {
     protected:
         virtual string                      GetValueAsString() const = 0;
-
 
     public:
         string                              mName;
@@ -27,7 +25,6 @@ class RR_DECLSPEC Capability : public rrObject
         string                              GetValue() const;
 };
 
-
 template<class T>
 class CapabilityType: public Capability
 {
@@ -42,12 +39,6 @@ class CapabilityType: public Capability
                                             /// </summary>
                                             CapabilityType(const string& name, const T& value, const string& hint);//, const string& type);
 };
-
-ostream&  operator<<(ostream& stream, const Capability& outMe)
-{
-    stream<<outMe.AsString();   //virtual friend idiom
-    return stream;
-}
 
 template<class T>
 CapabilityType<T>::CapabilityType(const string& name, const T& value, const string& hint)
