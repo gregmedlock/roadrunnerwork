@@ -5,6 +5,7 @@
 #include "rrRoadRunner.h"
 #include "rrCapsSupport.h"
 #include "rrCVodeInterface.h"
+#include "rrCapabilitiesSection.h"
 //---------------------------------------------------------------------------
 
 namespace rr
@@ -31,7 +32,8 @@ mRoadRunner(rr)
         integration.Add(new CapabilityType<double>( "minstep",      cvode->MinStep,         "specifies a lower bound on the magnitude of the step size."));
         integration.Add(new CapabilityType<double>( "maxstep",      cvode->MaxStep,         "specifies an upper bound on the magnitude of the step size."));
         integration.Add(new CapabilityType<bool>(   "conservation", mRoadRunner->mComputeAndAssignConservationLaws,
-                                                                                "enables (=1) or disables (=0) the conservation analysis of models for timecourse simulations."));
+                                                                                            "enables (=true) or disables (=false) the conservation analysis \
+                                                                                            of models for timecourse simulations."));
 
         //Add section to Capablities
         Add(integration);
@@ -47,7 +49,7 @@ mRoadRunner(rr)
     }
 }
 
-u_int CapsSupport::SectionCount()
+u_int CapsSupport::Count()
 {
     return mCapabilitiesSections.size();
 }
@@ -66,7 +68,7 @@ string CapsSupport::AsXMLString()
     mainNode.append_attribute("description") = mDescription.c_str();
 
     //Add sections
-    for(int i = 0; i < SectionCount(); i++)
+    for(int i = 0; i < Count(); i++)
     {
         CapabilitiesSection& section = mCapabilitiesSections[i];
 
@@ -92,23 +94,6 @@ string CapsSupport::AsXMLString()
     return xmlS.str();
 }
 
-//Capabilities section
-CapabilitiesSection::CapabilitiesSection(const string& name, const string& method, const string& description)
-:
-mName(name),
-mMethod(method),
-mDescription(description)
-{
-}
-
-CapabilitiesSection::CapabilitiesSection(const CapabilitiesSection& from)
-:
-mName(from.mName),
-mMethod(from.mMethod),
-mDescription(from.mDescription),
-mCapabilities(from.mCapabilities)
-{
-}
 
 const Capability& CapabilitiesSection::operator[](const int& i) const
 {

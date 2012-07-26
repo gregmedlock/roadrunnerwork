@@ -15,9 +15,7 @@ Capability::Capability(const string& name, const string& hint)
 :
 mName(name),
 mHint(hint)
-{
-
-}
+{}
 
 string Capability::GetName() const
 {
@@ -70,26 +68,22 @@ string Capability::GetType() const
     return val;
 }
 
+ostream&  operator<<(ostream& stream, const Capability& outMe)
+{
+    stream<<outMe.AsString();   //virtual friend idiom
+    return stream;
+}
+
 template<>
 string CapabilityType<double>::GetValueAsString() const
 {
-    string fmt("");
-//    if(mValue < 1e-3)
-    {
-        fmt = "%g";
-    }
-    return ToString(mValue, fmt);
+    return ToString(mValue);
 }
 
 template<>
 string CapabilityType<int>::GetValueAsString() const
 {
-    string fmt("");
-//    if(mValue < 1e-3)
-    {
-        fmt = "%g";
-    }
-    return ToString(mValue, fmt);
+    return ToString(mValue);
 }
 
 }

@@ -69,6 +69,10 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<CppCompile Include="..\..\source\rrCapabilitiesSection.cpp">
+				<DependentOn>..\..\source\rrCapabilitiesSection.h</DependentOn>
+				<BuildOrder>11</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\source\rrXMLDocument.cpp">
 				<DependentOn>..\..\source\rrXMLDocument.h</DependentOn>
 				<BuildOrder>10</BuildOrder>
