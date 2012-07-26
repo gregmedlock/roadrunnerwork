@@ -23,7 +23,7 @@ class RR_DECLSPEC CapsSupport : public rrObject
     public:
                                         CapsSupport(RoadRunner* rr = NULL);
         void                            Add(const CapabilitiesSection& section);
-        string                          AsString();
+        string                          AsXMLString();
         u_int                           SectionCount();
 };
 
@@ -33,7 +33,7 @@ class RR_DECLSPEC CapabilitiesSection
         string                              mName;
         string                              mMethod;
         string                              mDescription;
-        vector<const Capability*>   mCapabilities;
+        vector<const Capability*>           mCapabilities;
 
     public:
                                             CapabilitiesSection(const string& name, const string& method, const string& descr);
@@ -41,7 +41,10 @@ class RR_DECLSPEC CapabilitiesSection
         void                                Add(const Capability* me);
         string                              AsString();
         u_int                               Count();
-        const Capability&           operator[](const int& i) const {return *(mCapabilities[i]);}
+        const Capability&                   operator[](const int& i) const;
+        string                              GetName();
+        string                              GetDescription();
+        string                              GetMethod();
 
 //    public Section(XmlElement section) : this()
 //    {

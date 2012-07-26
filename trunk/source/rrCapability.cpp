@@ -19,12 +19,27 @@ mHint(hint)
 
 }
 
+string Capability::GetName() const
+{
+    return mName;
+}
+
+string Capability::GetHint() const
+{
+    return mHint;
+}
+
+string Capability::GetValue() const
+{
+    return GetValueAsString();
+}
+
 string Capability::AsString() const
 {
     stringstream val;
 
     val<<"Name: "<<mName<<endl;
-    val<<"Value: "<<ValueAsString()<<endl;
+    val<<"Value: "<<GetValueAsString()<<endl;
     val<<"HInt: "<<mHint<<endl;
     val<<"Type: "<<GetType()<<endl;
     return val.str();
@@ -55,5 +70,26 @@ string Capability::GetType() const
     return val;
 }
 
+template<>
+string CapabilityType<double>::GetValueAsString() const
+{
+    string fmt("");
+//    if(mValue < 1e-3)
+    {
+        fmt = "%g";
+    }
+    return ToString(mValue, fmt);
+}
+
+template<>
+string CapabilityType<int>::GetValueAsString() const
+{
+    string fmt("");
+//    if(mValue < 1e-3)
+    {
+        fmt = "%g";
+    }
+    return ToString(mValue, fmt);
+}
 
 }
