@@ -5,7 +5,7 @@
 #include <sstream>
 #include "rrCapability.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
+
 
 
 namespace rr
@@ -15,6 +15,9 @@ Capability::Capability(const string& name, const string& hint)
 :
 mName(name),
 mHint(hint)
+{}
+
+Capability::~Capability()
 {}
 
 string Capability::GetName() const

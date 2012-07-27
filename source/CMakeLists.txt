@@ -12,6 +12,8 @@ ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
 )
 
 set(rrSources 
+rrCapability.cpp
+rrCapabilitiesSection.cpp
 rrArrayList2
 rrArrayListItem
 rrException.cpp
@@ -84,6 +86,7 @@ set_property(TARGET ${target}
                             LIBSBML_STATIC 
                             LIBLAX_STATIC 
                             STATIC_LIB_LA
+                            PUGI_STATIC
                             ) 
 
 #libraries to link with our shared lib
@@ -102,6 +105,7 @@ target_link_libraries (${target}
                                     blas
                                     lapack
                                     libf2c
+                                    pugi-static
                       )
 endif()
 
@@ -115,6 +119,7 @@ set_property(TARGET ${target}-static
                             LIBSBML_STATIC
                             LIBLAX_STATIC 
                             STATIC_LIB_LA
+							PUGI_STATIC
                             ) 
 
 if(${MINGW})
@@ -128,6 +133,7 @@ target_link_libraries (${target}-static
                            blas
                            lapack
                            #libf2c
+						   pugi-static
                       )
 endif()
 

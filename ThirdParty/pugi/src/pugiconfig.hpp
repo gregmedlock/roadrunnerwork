@@ -32,7 +32,10 @@
 // #define PUGIXML_FUNCTION __fastcall // to set calling conventions to all public functions to fastcall
 // In absence of PUGIXML_CLASS/PUGIXML_FUNCTION definitions PUGIXML_API is used instead
 
-#if !defined(PUGI_STATIC)
+#if defined(PUGI_STATIC)
+#define PUGIXML_API 
+
+#else
 
 #if defined(PUGI_DLL)
 #define PUGIXML_API __declspec(dllexport)
