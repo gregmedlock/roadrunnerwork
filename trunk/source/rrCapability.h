@@ -15,7 +15,7 @@ class RR_DECLSPEC Capability : public rrObject
         string                              mName;
         string                              mHint;
                                             Capability(const string& name, const string& hint);
-        virtual                            ~Capability(){}
+        virtual                            ~Capability();
         friend ostream&                     operator<<(ostream& stream, const Capability& outMe);
 
         string                              AsString() const;
@@ -53,5 +53,13 @@ string CapabilityType<T>::GetValueAsString() const
     return ToString(mValue);
 }
 
+#if defined(_MSVC)
+template<>
+string CapabilityType<int>::GetValueAsString() const;
+
+template<>
+string CapabilityType<double>::GetValueAsString() const;
+
+#endif
 }
 #endif

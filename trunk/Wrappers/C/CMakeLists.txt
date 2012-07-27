@@ -19,6 +19,7 @@ set_property(   TARGET ${target}
                           STATIC_RR             #when linking with static lib, no declspec shuld be present..
                           LIBSBML_STATIC
 					      LIBLAX_STATIC
+                          PUGI_STATIC
 )
 
 if(${MSVC})
@@ -38,7 +39,9 @@ else()
 target_link_libraries (${target} roadrunner-static
                        ${target} blas
                        ${target} lapack
-                       ${target} libf2c)
+                       ${target} libf2c
+                       ${target} pugi-static
+                       )
 endif()
 
 #INCLUDE(FindSubversion)
