@@ -365,6 +365,7 @@ int main(int argc, char* argv[])
 //	printf ("\nCall to getRatesOfChange (with S1=1, S2=2, S3=3):\n");
 //	cout<<printVector (getRatesOfChange())<<endl;
 
+    setSelectionList("S1 S2");
 //-------- The latest
 
     cout<<printVector(getFloatingSpeciesConcentrations());
