@@ -8,6 +8,7 @@ test_1.xml
 ss_threestep.xml 	
 ss_TurnOnConservationAnalysis.xml 	
 ss_threeSpecies.xml
+squareWaveModel.xml
 )
 
 install(    FILES ${models}

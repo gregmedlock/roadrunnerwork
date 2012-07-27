@@ -11,14 +11,14 @@ print rrPython.getCopyright()
 rrINSTALLfolder = "C:\\RoadRunner"
 modelfolder = rrINSTALLfolder + "\\Models"
 rrbin = rrINSTALLfolder + "\\bin"
-model = "\\squareWaveModel.xml"
+model = "\\test_1.xml"
 rrmodel = modelfolder + model
 os.chdir (rrbin)
 
 sbmlstr = open(rrmodel, 'r').read()
 print "Load SBML", rrPython.loadSBML(sbmlstr)
-
-rrPython.setSelectionList(['time', 'S1', 'J0'])
+selectionList = "S1 S2"
+rrPython.setSelectionList(selectionList)
 
 print "Set Time Start", rrPython.setTimeStart (0.0)
 print "Set Time End" , rrPython.setTimeEnd (40.0)
@@ -30,6 +30,7 @@ ResultWrite = rrPython.printResult (result)
 p = open('C:\\RoadRunner\\Models\\SquareWaveResults.csv','w')
 p.write(ResultWrite)
 p.close()
+print "Done..."
 
 #    ---   Code for plotting using matplotlib and NumPy, not yet working  --- #
 
