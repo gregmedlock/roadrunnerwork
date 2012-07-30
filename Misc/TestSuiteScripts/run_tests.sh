@@ -1,0 +1,51 @@
+#! /usr/bin/bash
+
+dataFolder="/cygdrive/r/DataOutput/"
+tmpFolder="/cygdrive/r/rrTemp"
+logFile="testLog.txt"
+logTable="testLogTable.txt"
+failed="failedTests.txt"
+simulator="/cygdrive/r/rrInstalls/xe/bin/rr_ts.exe"
+start=$1
+end=$2
+
+#empty files
+echo "" > $logFile
+echo "" > $logTable
+echo "" > $failed
+
+excludeTest="1 2 3"
+
+#Remove previous data files
+find $dataFolder -name '*l2v4.csv' -exec rm -fv {} \;
+
+for ((i=$start; i<=$end; i++ ));
+do
+	echo "Running $i" ;
+	echo $i >> $logFile;
+#	$simulator -n$i -v0 >> $logFile &
+	$simulator -n$i -vError >> $logFile
+	echo "Next" >> $logFile;
+    #sleep .15
+done
+
+echo "Waiting for background jobs to finish..."
+#wait
+
+##Creeate a table
+#
+#make_table -f$logFile -o$logTable -w"Next"
+##filter failed ones
+#
+#cat $logTable | grep "failed" > $failed
+#
+
+#Copy files and zip them up
+dataFiles="dataFiles.txt"
+find $dataFolder  -name '*l2v4.csv' > $dataFiles
+cygpath -d `cat dataFiles.txt` > $dataFiles
+zipFile="data_`date +"%m%d%Y"`.zip"
+rm -v $zipFile
+../zipper/7za a $zipFile `cat $dataFiles`
+echo "Done"
+
