@@ -249,14 +249,14 @@ bool RoadRunner::InitializeModel()
 
     reset();
 
-    // Construct default selection list
-    selectionList.resize(mModel->getNumTotalVariables() + 1); // + 1 to include time
-    selectionList[0].selectionType = clTime;
-    for (int i = 1; i < mModel->getNumTotalVariables() + 1; i++)
-    {
-        selectionList[i].index = i - 1;
-        selectionList[i].selectionType = clFloatingSpecies;
-    }
+ //   // Construct default selection list
+//    selectionList.resize(mModel->getNumTotalVariables() + 1); // + 1 to include time
+//    selectionList[0].selectionType = clTime;
+//    for (int i = 1; i < mModel->getNumTotalVariables() + 1; i++)
+//    {
+//        selectionList[i].index = i - 1;
+//        selectionList[i].selectionType = clFloatingSpecies;
+//    }
 
     return true;
 }
@@ -493,7 +493,7 @@ bool RoadRunner::Simulate()
     Log(lError)<<l;
 
     StringList list = getSelectionList();
-
+    Log(lError)<<list;
     mSimulationData.SetColumnNames(list);
     mSimulationData.SetData(data);
     return true;
@@ -1403,6 +1403,7 @@ void RoadRunner::setSelectionList(const StringList& newSelectionList)
 //        }
 
     }
+    int size = selectionList.size();
 }
 
 

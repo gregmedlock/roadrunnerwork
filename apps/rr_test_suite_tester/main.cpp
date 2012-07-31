@@ -79,7 +79,7 @@ int main(int argc, char * argv[])
     }
 
     gLog.SetCutOffLogLevel(paras.CurrentLogLevel);
-    string dataOutputFolder("C:\\DataOutput");
+    string dataOutputFolder("R:\\DataOutput");
     string dummy;
     string logFileName;
 
@@ -107,7 +107,7 @@ int main(int argc, char * argv[])
         simulation.UseEngine(rr);
 
         //Read SBML models.....
-        string modelFilePath("C:\\SBMLTestCases\\all");
+        string modelFilePath("R:\\SBMLTestCases\\all");
         string modelFileName;
 
         simulation.SetCaseNumber(paras.CaseNumber);
@@ -162,6 +162,7 @@ int main(int argc, char * argv[])
         }
 
 //        rr->ComputeAndAssignConservationLaws(true);
+//        simulation.SetSelectionList("time S1 S2");
         //Then Simulate model
         if(!simulation.Simulate())
         {
