@@ -169,10 +169,10 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
     try
     {
         while (s.token() != CodeTypes::tEndOfStreamToken)
-           {
+        {
             SubstituteToken(reactionName, bFixAmounts, s, sb);
             s.nextToken();
-           }
+        }
     }
     catch (const Exception& e)
     {

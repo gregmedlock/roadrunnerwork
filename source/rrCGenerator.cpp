@@ -2090,7 +2090,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Code
     }
     else if(theToken == "sin")
     {
-        mSource<<Append("sin");
+        mSource<<Append("spf_sin");
     }
     else if(theToken == "cos")
     {

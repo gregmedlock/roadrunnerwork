@@ -387,6 +387,7 @@ vector<double> RoadRunner::BuildModelEvalArgument()
 
     for(int i = 0; i < (*mModel->amountsSize); i++)
     {
+
         dResult.push_back(mModel->amounts[i]);
     }
 
@@ -405,12 +406,9 @@ vector<double> RoadRunner::BuildModelEvalArgument()
 DoubleMatrix RoadRunner::runSimulation()
 {
     if (mNumPoints <= 1)
-		mNumPoints = 2;
-
-	//if(mNumPoints == 1)
-    //{
-    //    throw RRException("Division by zero in runSimulation");
-    //}
+    {
+        mNumPoints = 2;
+    }
 
 	double hstep = (mTimeEnd - mTimeStart) / (mNumPoints - 1);
     int nrCols = selectionList.size();
