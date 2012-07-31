@@ -16,10 +16,10 @@
 				<Dependencies>roadrunner.cbproj;roadrunner-static.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="rr.cbproj">
-				<Dependencies/>
+				<Dependencies>roadrunner.cbproj;roadrunner-static.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="rr_ts.cbproj">
-				<Dependencies/>
+				<Dependencies>roadrunner.cbproj;roadrunner-static.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="rr_c.cbproj">
 				<Dependencies/>
@@ -74,22 +74,22 @@
 		<Target Name="rr_c_api:Make" DependsOnTargets="roadrunner:Make;roadrunner-static:Make">
 			<MSBuild Projects="rr_c_api.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="rr">
+		<Target Name="rr" DependsOnTargets="roadrunner;roadrunner-static">
 			<MSBuild Projects="rr.cbproj"/>
 		</Target>
-		<Target Name="rr:Clean">
+		<Target Name="rr:Clean" DependsOnTargets="roadrunner:Clean;roadrunner-static:Clean">
 			<MSBuild Projects="rr.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="rr:Make">
+		<Target Name="rr:Make" DependsOnTargets="roadrunner:Make;roadrunner-static:Make">
 			<MSBuild Projects="rr.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="rr_ts">
+		<Target Name="rr_ts" DependsOnTargets="roadrunner;roadrunner-static">
 			<MSBuild Projects="rr_ts.cbproj"/>
 		</Target>
-		<Target Name="rr_ts:Clean">
+		<Target Name="rr_ts:Clean" DependsOnTargets="roadrunner:Clean;roadrunner-static:Clean">
 			<MSBuild Projects="rr_ts.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="rr_ts:Make">
+		<Target Name="rr_ts:Make" DependsOnTargets="roadrunner:Make;roadrunner-static:Make">
 			<MSBuild Projects="rr_ts.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="rr_c">

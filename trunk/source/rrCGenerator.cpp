@@ -2627,13 +2627,13 @@ void CGenerator::WriteInitFunction(CodeBuilder& ignore, CodeBuilder& source)
 
     //The following is from the constructor..
     source<<"\t"<<Append("numIndependentVariables = " ,     mNumIndependentSpecies, ";" , NL());
-    source<<"\t"<<Append("numDependentVariables = " ,         mNumDependentSpecies , ";" , NL());
-    source<<"\t"<<Append("numTotalVariables = " ,             mNumFloatingSpecies , ";" , NL());
-    source<<"\t"<<Append("numBoundaryVariables = " ,         mNumBoundarySpecies , ";" , NL());
+    source<<"\t"<<Append("numDependentVariables = " ,       mNumDependentSpecies , ";" , NL());
+    source<<"\t"<<Append("numTotalVariables = " ,           mNumFloatingSpecies , ";" , NL());
+    source<<"\t"<<Append("numBoundaryVariables = " ,        mNumBoundarySpecies , ";" , NL());
     source<<"\t"<<Append("numGlobalParameters = " ,         globalParameterList.size() , ";" , NL());
     source<<"\t"<<Append("numCompartments = " ,             compartmentList.size() , ";" , NL());
-    source<<"\t"<<Append("numReactions = " ,                 reactionList.size() , ";" , NL());
-    source<<"\t"<<Append("numEvents = " ,                     mNumEvents , ";" , NL());
+    source<<"\t"<<Append("numReactions = " ,                reactionList.size() , ";" , NL());
+    source<<"\t"<<Append("numEvents = " ,                   mNumEvents , ";" , NL());
 
     source<<tab<<    "mModelName = (char*) malloc(sizeof(char)*"<<strlen(mModelName.c_str()) + 1<<");" <<endl;
        source<<tab<<    "strcpy(mModelName,\""<<mModelName<<"\");"<<endl;

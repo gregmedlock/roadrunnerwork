@@ -18,19 +18,13 @@
 			<CfgParent>Base</CfgParent>
 			<Base>true</Base>
 		</PropertyGroup>
-		<PropertyGroup Condition="'$(Platform)'=='Win32' and '$(Cfg_1)'=='true' or '$(Cfg_1_Win32)'!=''">
-			<Cfg_1_Win32>true</Cfg_1_Win32>
-			<CfgParent>Cfg_1</CfgParent>
-			<Cfg_1>true</Cfg_1>
-			<Base>true</Base>
-		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
 			<Cfg_2>true</Cfg_2>
 			<CfgParent>Base</CfgParent>
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<FinalOutputDir>$(RR_ROOT)\installs\xe\bin\</FinalOutputDir>
+			<FinalOutputDir>R:\rrInstalls\xe\bin\</FinalOutputDir>
 			<LinkPackageStatics>vcl.lib;mtkCommonRTL.lib</LinkPackageStatics>
 			<Manifest_File>None</Manifest_File>
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
@@ -81,9 +75,6 @@
 			<TASM_Debugging>Full</TASM_Debugging>
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
 			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-		</PropertyGroup>
-		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-			<FinalOutputDir>$(RR_INSTALL)\bin\</FinalOutputDir>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
 			<Defines>NDEBUG;$(Defines)</Defines>
@@ -185,10 +176,9 @@
 					</ProjectProperties>
 					<Parameters>
 						<Parameters Name="DebugSourceDirs">C:\RRW\source</Parameters>
-						<Parameters Name="RunParams">-n41 -vDebug3 -tC:\\RRTemp -dc:\\RRDataOutput</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-n374 -p -vDebug</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-n7 -t&quot;R:\rrTemp&quot; -d&quot;R:\DataOutput&quot;</Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

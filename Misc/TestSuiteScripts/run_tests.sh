@@ -1,11 +1,13 @@
 #! /usr/bin/bash
 
 dataFolder="/cygdrive/r/DataOutput/"
-tmpFolder="/cygdrive/r/rrTemp"
-logFile="testLog.txt"
-logTable="testLogTable.txt"
-failed="failedTests.txt"
-simulator="/cygdrive/r/rrInstalls/xe/bin/rr_ts.exe"
+tempFolder="/cygdrive/r/rrTemp"
+logFile=$tempFoler"/testLog.txt"
+logTable=$tempFolder"/testLogTable.txt"
+failed=$tempFolder"/failedTests.txt"
+binFolder="/cygdrive/r/rrInstalls/xe/bin/"
+simulator=$binFolder"/rr_ts.exe"
+zipper="/cygdrive/r/roadrunnerwork/Misc/zipper/7za.exe"
 start=$1
 end=$2
 
@@ -15,6 +17,10 @@ echo "" > $logTable
 echo "" > $failed
 
 excludeTest="1 2 3"
+
+cd $binFolder
+
+echo "Current working folder is"`pwd`
 
 #Remove previous data files
 find $dataFolder -name '*l2v4.csv' -exec rm -fv {} \;
@@ -46,6 +52,6 @@ find $dataFolder  -name '*l2v4.csv' > $dataFiles
 cygpath -d `cat dataFiles.txt` > $dataFiles
 zipFile="data_`date +"%m%d%Y"`.zip"
 rm -v $zipFile
-../zipper/7za a $zipFile `cat $dataFiles`
+$zipper a $zipFile `cat $dataFiles`
 echo "Done"
 
