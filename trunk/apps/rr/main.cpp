@@ -143,7 +143,7 @@ int main(int argc, char * argv[])
             simulation.SetSelectionList(args.SelectionList);
         }
 
-//        rr->ComputeAndAssignConservationLaws(false);
+        rr->ComputeAndAssignConservationLaws(false);
 
         //Then Simulate model
         if(doContinue && !simulation.Simulate())
