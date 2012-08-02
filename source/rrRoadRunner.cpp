@@ -161,6 +161,17 @@ bool RoadRunner::CreateSelectionList()
 		}
 	}
 
+    if(theList.Count() < 2)
+    {
+        //AutoSelect
+                //Get All floating species
+       StringList oFloating  = getFloatingSpeciesNames();
+       for(int i = 0; i < oFloating.Count(); i++)
+       {
+            theList.Add(oFloating[i]);
+       }
+
+    }
 	setSelectionList(theList);
 
 	Log(lInfo)<<"The following is selected:";
@@ -172,6 +183,8 @@ bool RoadRunner::CreateSelectionList()
 	if(selectionList.size() < 2)
 	{
 		Log(lWarning)<<"You have not made a selection. No data is selected";
+
+
 		return false;
 	}
 	return true;
@@ -475,7 +488,7 @@ void RoadRunner::DumpResults(TextWriter& writer, DoubleMatrix& data, const Strin
 
 bool RoadRunner::Simulate()
 {
-    ComputeAndAssignConservationLaws(false);
+//    ComputeAndAssignConservationLaws(false);
 
     if(!mModel)
     {

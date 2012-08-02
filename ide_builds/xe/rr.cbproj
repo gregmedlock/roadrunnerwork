@@ -97,7 +97,6 @@
 				<BuildOrder>10</BuildOrder>
 			</CppCompile>
 			<None Include="..\..\Testing\squareWave\cSharpOutput.cs">
-				<ContainerId>Header</ContainerId>
 				<BuildOrder>10</BuildOrder>
 			</None>
 			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\blas.lib">
@@ -189,7 +188,7 @@
 						<Parameters Name="RunParams">-n41 -vDebug3 -tC:\\RRTemp -dc:\\RRDataOutput</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-s5 -e15 -p -vInfo -m&quot;../Models/squareWaveModel_B.xml&quot; -t&quot;r:\rrTemp&quot; -d&quot;.&quot; -l&quot;S1 X1&quot;</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-s5 -e15 -p -vInfo -m&quot;../Models/twoNodesSimpleName.xml&quot; -t&quot;r:\rrTemp&quot; -d&quot;.&quot; </Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

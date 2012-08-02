@@ -380,7 +380,7 @@ double spf_piecewise(int nrOfArgs, ...)
 
 double spf_sin(double a)
 {
-    return (a/100.);
+    return sin(a);
 }
 
 double sec(double a)
@@ -525,12 +525,17 @@ double cosTable[] = {
 // i.e. lets a+b = 18.22
 // then a = 10, b = 8.22
 
-double myFastSin ( double angle )
-{
-    static double holyConstant = 0.017453292519943295769236907684886;
-    int a = angle * 0.1;
-    double b = angle – 10 * a;
 
-    return sinTable[a] * cosTable[int(b)] + b * holyConstant * sinTable[9-a];
+double myFastSin(double angle)
+{
+    int aVal;
+    double bVal;
+
+    aVal = angle * 0.1;
+    bVal = angle - (10.0 * aVal);
+
+//    return sinTable[aVal] * cosTable[int(bVal)] + bVal * holyConstant * sinTable[9-aVal];
+    return -1;//sin(angle);//sinTable[aVal]*cosTable[(int)bVal] + bVal*holyConstant*sinTable[9-aVal];
+//    return 0;
 }
 

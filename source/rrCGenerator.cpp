@@ -110,8 +110,8 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     mModelName = mNOM.getModelName();
     if(!mModelName.size())
     {
-        Log(lError)<<"Model name is empty! Exiting...";
-        return "";
+        Log(lWarning)<<"Model name is empty. ModelName is assigned 'NameNotSet'.";
+        mModelName = "NameNotSet";
     }
 
     Log(lInfo)<<"Processing model: "<<mModelName;

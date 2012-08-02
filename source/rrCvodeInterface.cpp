@@ -135,7 +135,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
     }
 
     stringstream msg;
-    msg<<left<<setw(20)<<""<<ToString(CvodeInterface::mCount);
+    msg<<left<<setw(20)<<"Count = "<<(CvodeInterface::mCount)<<"\t";
 
     for (u_int i = 0; i < dCVodeArgument.size(); i++)
     {
@@ -151,7 +151,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
         dCVodeArgument.push_back(model->dydt[i]);
     }
 
-    msg<<"\t"<<CvodeInterface::mCount << "\t" ;
+    msg<<"\tcount = "<<CvodeInterface::mCount << "\t" ;
     for (u_int i = 0; i < dCVodeArgument.size(); i++)
     {
         msg<<setw(20)<<left<<setprecision(4)<<dCVodeArgument[i];
