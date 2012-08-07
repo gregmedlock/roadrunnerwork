@@ -1,5 +1,3 @@
-//---------------------------------------------------------------------------
-
 #ifndef MainFormH
 #define MainFormH
 //---------------------------------------------------------------------------
@@ -18,7 +16,14 @@
 #include <ExtCtrls.hpp>
 #include "TFileSelectionFrame.h"
 #include "mtkIniParameters.h"
-#include "mtkLogger.h"
+#include <Menus.hpp>
+#include "rrLogFileReader.h"
+#include <ToolWin.hpp>
+#include <CheckLst.hpp>
+namespace rr
+{
+class RoadRunner;
+}
 //---------------------------------------------------------------------------
 class TMForm : public TForm
 {
@@ -31,38 +36,67 @@ __published:	// IDE-managed Components
     TButton *Button1;
     TMemo *mLogMemo;
     TChart *Chart1;
-    TActionList *ActionList1;
-    TGroupBox *GroupBox2;
+    TActionList *RRActions;
     TButton *Button2;
-    TButton *Button3;
     TAction *CompileA;
     TGroupBox *GroupBox3;
-    mtkFloatLabeledEdit *mtkFloatLabeledEdit1;
-    mtkFloatLabeledEdit *mtkFloatLabeledEdit2;
-    mtkIntLabeledEdit *mtkIntLabeledEdit1;
+    mtkFloatLabeledEdit *mStartTimeE;
+    mtkFloatLabeledEdit *mEndTimeE;
+    mtkIntLabeledEdit *mNrOfSimulationPointsE;
     mtkIniFileC *mIniFileC;
     TFileSelectionFrame *TFileSelectionFrame1;
     TComboBox *modelFoldersCB;
     TTimer *startupTimer;
     TAction *selectModelsFolder;
     TAction *LoadFromTreeViewA;
+    TSplitter *Splitter1;
+    TSplitter *Splitter2;
+    TPopupMenu *TVPopupMenu;
+    TAction *logModelFileA;
+    TMenuItem *LogModelFile1;
+    TAction *LoadModelA;
+    TMenuItem *Load1;
+    TToolBar *ToolBar1;
+    TPanel *Panel3;
+    TToolButton *ToolButton1;
+    TActionList *MiscActions;
+    TAction *ClearMemoA;
+    TPopupMenu *MemoPopup;
+    TMenuItem *Clear1;
+    TAction *SimulateA;
+    TSplitter *Splitter3;
+    TAction *loadAvailableSymbolsA;
+    TCheckListBox *SelList;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
-    void __fastcall Button2Click(TObject *Sender);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
     void __fastcall modelFoldersCBSelect(TObject *Sender);
     void __fastcall selectModelsFolderExecute(TObject *Sender);
     void __fastcall LoadFromTreeViewAExecute(TObject *Sender);
+    void __fastcall logModelFileAExecute(TObject *Sender);
+    void __fastcall LoadModelAExecute(TObject *Sender);
+    void __fastcall ClearMemoAExecute(TObject *Sender);
+    void __fastcall SimulateAExecute(TObject *Sender);
+    void __fastcall loadAvailableSymbolsAExecute(TObject *Sender);
 
 private:	// User declarations
     mtkIniParameters            mGeneralParas;
+
+    mtkIniParameter<int>        mSelectionListHeight;
     mtkIniParameters            mModelFolders;
     mtkIniParameter<string>     mCurrentModelsFolder;
+    mtkIniParameter<string>     mTempDataFolder;
+    mtkIniParameter<string>     mRRLogFileName;
 
+    void            __fastcall  SetupINIParameters();
+    rr::RoadRunner             *mRR;                //RoadRunner instance
+    rr::LogFileReader           mLogFileSniffer;
 
 public:		// User declarations
-        __fastcall              TMForm(TComponent* Owner);
-        __fastcall             ~TMForm();
+                    __fastcall  TMForm(TComponent* Owner);
+                    __fastcall ~TMForm();
+        void        __fastcall  LogMessage();
+        string                 *mLogString;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TMForm *MForm;

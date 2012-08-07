@@ -63,6 +63,7 @@ class RR_DECLSPEC ArrayList2Item  : public rrObject
                                            ~ArrayList2Item();
         unsigned int                        Count() const;
         const ArrayListItemBase&            operator[](int pos) const;
+        ArrayListItemBase&                  operator[](int pos);
 };
 
 ostream& operator<<(ostream& stream, const ArrayList2Item& item);

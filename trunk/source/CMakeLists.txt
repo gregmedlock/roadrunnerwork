@@ -204,7 +204,7 @@ set(subfolders
 foreach(subfolder ${subfolders})
     FILE (GLOB headers ${subfolder}/*.h)
     install (   FILES ${headers}			 		
-                DESTINATION include/rr 
+                DESTINATION include/rr/${subfolder} 
                 COMPONENT rr_core)
 endforeach(subfolder)
 

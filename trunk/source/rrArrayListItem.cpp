@@ -9,7 +9,6 @@
 namespace rr
 {
 
-
 ArrayListItemBase::~ArrayListItemBase()
 {}
 
@@ -55,6 +54,11 @@ const ArrayListItemBase& ArrayList2Item::operator[](int pos) const
     return (*mValue)[pos];
 }
 
+ArrayListItemBase& ArrayList2Item::operator[](int pos)
+{
+    return (*mValue)[pos];
+}
+
 ostream& operator<<(ostream& stream, const ArrayListItemBase& item)
 {
     //Have to figure out subtype of item
@@ -82,7 +86,6 @@ ostream& operator<<(ostream& stream, const ArrayListItemBase& item)
     return stream;
 }
 
-
 template<>
 const char ArrayListItem<string>::operator[](const int& pos) const
 {
@@ -104,7 +107,6 @@ ostream& operator<<(ostream& stream, const ArrayList2Item& item)
     stream<<"}";
     return stream;
 }
-
 
 }
 

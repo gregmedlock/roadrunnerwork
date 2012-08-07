@@ -5,6 +5,9 @@
 #include "MainForm.h"
 #include "mtkFileUtils.h"
 #include "mtkStringUtils.h"
+#include "rrRoadRunner.h"
+#include "rrLogger.h"
+#include "rrException.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "Chart"
@@ -18,20 +21,65 @@
 TMForm *MForm;
 //---------------------------------------------------------------------------
 using namespace mtk;
-
+using namespace rr;
 __fastcall TMForm::TMForm(TComponent* Owner)
-    : TForm(Owner)
+    : TForm(Owner),
+    mLogFileSniffer("", this),
+    mLogString(NULL)
 {
     LogOutput::mLogToConsole = (false);
-    LogOutput::SetLogMemo(mLogMemo);
-    LogOutput::mLogToMemo = true;
+    gLog.SetCutOffLogLevel(rr::lDebug1);
+    mTempDataFolder = "R:\\rrTemp";
+
+    //This is roadrunners logger
+    mRRLogFileName = JoinPath(mTempDataFolder, "RoadRunnerUI.log");
+    gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(mRRLogFileName )));
+
+    //Setup a logfile sniffer and propagate logs to memo...
+    mLogFileSniffer.SetFileName(mRRLogFileName);
+    mLogFileSniffer.Start();
+    SetupINIParameters();
+	TFileSelectionFrame1->TreeView1->OnDblClick =  LoadFromTreeViewAExecute;
+	TFileSelectionFrame1->TreeView1->PopupMenu  =  TVPopupMenu;
+
+    TFileSelectionFrame1->FSToolBar->Visible = false;
+    startupTimer->Enabled = true;
+    mRR = new RoadRunner;
+}
+
+__fastcall TMForm::~TMForm()
+{
+    mSelectionListHeight = SelList->Height;
+    mGeneralParas.Write();
+    mModelFolders.Write();
+    mIniFileC->Save();
+    delete mRR;
+    mLogFileSniffer.ShutDown();
+}
+
+void __fastcall TMForm::SetupINIParameters()
+{
     mIniFileC->Init();
-    mModelFolders.SetIniFile(mIniFileC->GetFile());
+
+    //General Parameters
+    mGeneralParas.SetIniSection("GENERAL");
+    mGeneralParas.SetIniFile(mIniFileC->GetFile());
+    mGeneralParas.Insert( &mStartTimeE->SetupIni("START_TIME", 0));
+    mGeneralParas.Insert( &mEndTimeE->SetupIni("END_TIME", 40));
+    mGeneralParas.Insert( &mNrOfSimulationPointsE->SetupIni("NR_OF_SIMULATION_POINTS", 100));
+    mGeneralParas.Insert( &mSelectionListHeight.Setup("SEL_LB_HEIGHT", 30));
+
+
     mModelFolders.SetIniSection("MODEL_FOLDERS");
+    mModelFolders.SetIniFile(mIniFileC->GetFile());
 
     mIniFileC->Load();
+    mGeneralParas.Read();
+
+
     mModelFolders.Read();
-    Log(lInfo)<<"Reading settings..";
+
+    Log(rr::lInfo)<<"Reading settings..";
     mtkIniSection* folders = mIniFileC->GetSection("MODEL_FOLDERS");
     if(folders)
     {
@@ -39,23 +87,28 @@ __fastcall TMForm::TMForm(TComponent* Owner)
         for(int i = 0; i < folders->KeyCount(); i++)
         {
             mtkIniKey* aKey = folders->mKeys[i];
-            Log(lInfo)<<*aKey;
+            Log(rr::lInfo)<<*aKey;
             modelFoldersCB->Items->Add(aKey->mValue.c_str());
         }
     }
 
-	TFileSelectionFrame1->TreeView1->OnDblClick =  LoadFromTreeViewAExecute;
-//	TFileSelectionFrame1->TreeView1->PopupMenu  =  PopupMenu2;
-
-    startupTimer->Enabled = true;
+    //Update UI
+    mStartTimeE->Update();
+    mEndTimeE->Update();
+    mNrOfSimulationPointsE->Update();
+    SelList->Height = mSelectionListHeight;
 }
 
-__fastcall TMForm::~TMForm()
+void __fastcall TMForm::LogMessage()
 {
-    mModelFolders.Write();
-    mIniFileC->Save();
+    if(mLogString)
+    {
+        mLogMemo->Lines->Add(mLogString->c_str());
+        delete mLogString;
+        // Signal to the data sink thread that we can now accept another message...
+        mLogString = NULL;
+    }
 }
-
 //---------------------------------------------------------------------------
 void __fastcall TMForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
@@ -63,11 +116,6 @@ void __fastcall TMForm::FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shif
     {
         Close();
     }
-}
-
-void __fastcall TMForm::Button2Click(TObject *Sender)
-{
-    Log(lInfo)<<"Hello";
 }
 
 void __fastcall TMForm::startupTimerTimer(TObject *Sender)
@@ -86,7 +134,7 @@ void __fastcall TMForm::startupTimerTimer(TObject *Sender)
 
 void __fastcall TMForm::modelFoldersCBChange(TObject *Sender)
 {
-    Log(lInfo)<<"Model folder is changing..";
+    Log(rr::lInfo)<<"Model folder is changing..";
 }
 //---------------------------------------------------------------------------
 
@@ -97,7 +145,7 @@ void __fastcall TMForm::modelFoldersCBSelect(TObject *Sender)
         mCurrentModelsFolder = ToSTDString(modelFoldersCB->Text);
         TFileSelectionFrame1->RemoveMonitoredFolders();
 
-        Log(lInfo)<<"Model folder: "<<mCurrentModelsFolder<<" is selected..";
+        Log(rr::lInfo)<<"Model folder: "<<mCurrentModelsFolder<<" is selected..";
         TFileSelectionFrame1->MonitorFolder(mCurrentModelsFolder, "*.xml");
     	TFileSelectionFrame1->ReScanDataFolderAExecute(NULL);
     }
@@ -110,7 +158,7 @@ void __fastcall TMForm::selectModelsFolderExecute(TObject *Sender)
 
     if(folder.Length())
     {
-        Log(lInfo)<<"Selected folder "<<ToSTDString(folder.c_str());
+        Log(rr::lInfo)<<"Selected folder "<<ToSTDString(folder.c_str());
         string fldr = ToSTDString(folder);
         fldr = RemoveTrailingSeparator(fldr, "\\");
         fldr = RemoveTrailingSeparator(fldr, "\\");
@@ -125,6 +173,13 @@ void __fastcall TMForm::selectModelsFolderExecute(TObject *Sender)
                 modelFoldersCB->Items->Add(mCurrentModelsFolder.c_str());
                 modelFoldersCB->ItemIndex = modelFoldersCB->Items->IndexOf(folder);
                 mtkIniSection* folders = mIniFileC->GetSection("MODEL_FOLDERS");
+                if(!folders)
+                {
+                    if(mIniFileC->CreateSection("MODEL_FOLDERS"))
+                    {
+                        folders = mIniFileC->GetSection("MODEL_FOLDERS");
+                    }
+                }
                 if(folders)
                 {
                     string  keyName = "Item" + mtk::ToString(folders->KeyCount() + 1);
@@ -137,11 +192,102 @@ void __fastcall TMForm::selectModelsFolderExecute(TObject *Sender)
 
 void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
 {
+    ClearMemoA->Execute();
     string fName = TFileSelectionFrame1->GetSelectedFileInTree();
     if(fName.size())
     {
-        Log(lInfo)<<"Loading model: "<<  fName;
+        Log(rr::lInfo)<<"Loading model: "<<  fName;
+
+        try
+        {
+            if(mRR)
+            {
+                delete mRR;
+                mRR = new RoadRunner;
+            }
+
+            if(mRR->loadSBMLFromFile(fName))
+            {
+                Log(rr::lInfo)<<"Loaded model with no exception";
+
+                loadAvailableSymbolsA->Execute();
+                //Enable simulate action
+                SimulateA->Enabled = true;
+            }
+            else
+            {
+                Log(rr::lInfo)<<"There was problems loading model from file: "<<fName;
+                SimulateA->Enabled = false;
+            }
+        }
+        catch(const rr::Exception& ex)
+        {
+            Log(rr::lInfo)<<"RoadRunner Exception :"<<ex.what();
+            SimulateA->Enabled = false;
+        }
     }
 }
+
+void __fastcall TMForm::logModelFileAExecute(TObject *Sender)
+{
+    string fName = TFileSelectionFrame1->GetSelectedFileInTree();
+    if(fName.size())
+    {
+        Log(rr::lInfo)<<"Model File: "<<  fName;
+        if(!FileExists(fName))
+        {
+            return;
+        }
+
+        ifstream aFile(fName.c_str());
+        string  str((std::istreambuf_iterator<char>(aFile)), std::istreambuf_iterator<char>());
+
+        vector<string> strings = SplitString(str,"\n");
+        for(int i = 0; i < strings.size(); i++)
+        {
+            Log(rr::lInfo)<<strings[i];
+        }
+    }
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMForm::LoadModelAExecute(TObject *Sender)
+{
+    LoadFromTreeViewAExecute(Sender);
+}
+
+void __fastcall TMForm::ClearMemoAExecute(TObject *Sender)
+{
+    mLogMemo->Clear();
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMForm::SimulateAExecute(TObject *Sender)
+{
+    if(mRR)
+    {
+        DoubleMatrix result = mRR->simulateEx(0,5, 100);
+    }
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMForm::loadAvailableSymbolsAExecute(TObject *Sender)
+{
+    if(mRR)
+    {
+        SelList->Clear();
+        ArrayList2 symbols = mRR->getAvailableSymbols();
+        StringList fs = symbols.GetSubList("Floating Species");
+//        StringList fs = symbols.GetSubList("Floating Species");
+        Log(rr::lInfo)<<fs;
+        //Add floating species to list box
+        for(int i = 0; i < fs.Count(); i++)
+        {
+            SelList->Items->Add(fs[i].c_str());
+        }
+
+    }
+}
+
 
 

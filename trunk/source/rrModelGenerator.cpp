@@ -46,6 +46,7 @@ void ModelGenerator::Reset()
 {
     mNOM.Reset();
     mStructAnalysis.Reset();
+//    floatingSpeciesConcentrationList.Clear();
 }
 
 int ModelGenerator::NumAdditionalRates()
