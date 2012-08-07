@@ -139,7 +139,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		void                            reset();
 		void                            changeInitialConditions(const vector<double>& ic);
 		DoubleMatrix                    simulate();
-		vector<double>                  simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
+		DoubleMatrix                    simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints);
 		vector<double>                  getReactionRates();
 		vector<double>                  getRatesOfChange();
 		StringList                      getSpeciesNames();
@@ -267,12 +267,12 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		StringList                      getAllGlobalParameterTupleList();
 		void                            EvalModel();
 		string                          getName();
-		static string                   getVersion();
-		static string                   getAuthor();
-		static string                   getDescription();
-		static string                   getDisplayName();
-		static string                   getCopyright();
-		static string                   getURL();
+		string                          getVersion();
+		string                          getAuthor();
+		string                          getDescription();
+		string                          getDisplayName();
+		string                          getCopyright();
+		string                          getURL();
 
 		static void                     Test();
 		static void                     PrintTout(const double& start, const double& end, const int& numPoints);

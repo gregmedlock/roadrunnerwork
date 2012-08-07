@@ -22,17 +22,6 @@ mFILEHandle(fopen(name.c_str(), "w"))
     }
 }
 
-//LogFile::LogFile(const char* name)
-//:
-//mFileName(name),
-//mFILEHandle(fopen(name, "w"))
-//{
-//    if (!mFILEHandle)
-//    {
-//        throw std::runtime_error("File Open failure");
-//    }
-//}
-
 LogFile::~LogFile()
 {
     fclose(mFILEHandle);

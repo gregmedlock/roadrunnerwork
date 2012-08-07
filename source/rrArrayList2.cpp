@@ -4,16 +4,11 @@
 #pragma hdrstop
 #include <sstream>
 #include "rrArrayList2.h"
+#include "rrLogger.h"
 //---------------------------------------------------------------------------
 
 namespace rr
 {
-
-
-//const ArrayListItemBase& ArrayList2Item::operator[](int pos) const
-//{
-//    return (*mValue)[pos];
-//}
 
 // ============= ArrayList2 ==========================
 ArrayList2::ArrayList2()
@@ -53,6 +48,51 @@ void ArrayList2::Add(const StringList& list)
 void ArrayList2::Add(const string& lbl, const StringArrayList& lists)
 {
 
+}
+
+StringList ArrayList2::GetSubList(const string& lName)
+{
+    //Look for list whose first item is lName
+    StringList aList;
+    for(u_int i = 0; i < Count(); i++)
+    {
+        ArrayListItemBase* listPtr = const_cast<ArrayListItemBase*>(mList[i]);
+
+        //Check for a list of list
+        if(dynamic_cast< ArrayListItem<ArrayList2Item> *>(listPtr))
+        {
+            ArrayList2Item  list = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(listPtr));
+            if(list.Count())
+            {
+                ArrayListItemBase* anItem = &list[0];
+                if(dynamic_cast<ArrayListItem<string>*>(anItem))
+                {
+                    string str = (string) *dynamic_cast<ArrayListItem<string>*>(anItem);
+
+                    if(str == lName && list.Count() > 1)
+                    {
+                        ArrayListItemBase* anItem = &list[1];
+                        if(dynamic_cast< ArrayListItem<ArrayList2Item> *>(anItem))
+                        {
+                            //This is the sublist of strings..
+                            ArrayList2Item  list = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(anItem));
+                            for(int i = 0; i < list.Count(); i++)
+                            {
+                                ArrayListItemBase* anItem = &list[i];
+                                if(dynamic_cast<ArrayListItem<string>*>(anItem))
+                                {
+                                    string str = (string) *dynamic_cast<ArrayListItem<string>*>(anItem);
+                                    aList.Add(str);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    return aList;
 }
 
 void ArrayList2::Clear()
@@ -166,6 +206,11 @@ void ArrayList2::Add(const ArrayList2& item)
 }
 
 const ArrayListItemBase& ArrayList2::operator[](int pos) const
+{
+    return *mList[pos];
+}
+
+ArrayListItemBase& ArrayList2::operator[](int pos)
 {
     return *mList[pos];
 }

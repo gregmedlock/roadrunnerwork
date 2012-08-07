@@ -34,11 +34,13 @@ class RR_DECLSPEC ArrayList2 : public rrObject
         void                                Add(const string& lbl, const StringArrayList& lists);
 
         const ArrayListItemBase&            operator[](int pos) const;
+        ArrayListItemBase&                  operator[](int pos);
         void                                operator = (const ArrayList2& rhs);
+        StringList                          GetSubList(const string& lName);
 };
 
 
-ostream& operator<<(ostream& stream, const ArrayList2& list);
+RR_DECLSPEC ostream& operator<<(ostream& stream, const ArrayList2& list);
 
 }
 #endif

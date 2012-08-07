@@ -448,20 +448,23 @@ DoubleMatrix RoadRunner::runSimulation()
 
     double tout = mTimeStart;
 
-    //The simulation is done here..
+    //The simulation is executed right here..
     Log(lDebug)<<"Will run the OneStep function "<<mNumPoints<<" times";
     for (int i = 1; i < mNumPoints; i++)
     {
-        Log(lDebug)<<"Step "<<i;
+        Log(lDebug3)<<"Step "<<i;
         mCVode->OneStep(tout, hstep);
         tout = mTimeStart + i * hstep;
         AddNthOutputToResult(results, i, tout);
     }
-
+    Log(lDebug)<<"Simulation done..";
     Log(lDebug2)<<"Result: (point, time, value)";
-    for (int i = 0; i < mNumPoints; i++)
+    if(results.size())
     {
-        Log(lDebug2)<<i<<tab<<results(i,0)<<tab<<setprecision(16)<<results(i,1);
+        for (int i = 0; i < mNumPoints; i++)
+        {
+            Log(lDebug2)<<i<<tab<<results(i,0)<<tab<<setprecision(16)<<results(i,1);
+        }
     }
     return results;
 }
@@ -642,6 +645,7 @@ bool RoadRunner::loadSBML(const string& sbml)
     {
         if(!GenerateAndCompileModel())
         {
+            Log(lError)<<"Failed to generate and compile model";
             return false;
         }
     }
@@ -897,6 +901,34 @@ DoubleMatrix RoadRunner::simulate()
     catch (const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from simulate(): " + e.Message());
+    }
+}
+
+// Help("Extension method to simulate (time start, time end, number of points). This routine resets the model to its initial condition before running the simulation (unlike simulate())"
+DoubleMatrix RoadRunner::simulateEx(const double& startTime, const double& endTime, const int& numberOfPoints)
+{
+    try
+    {
+        if (!mModel)
+        {
+            throw SBWApplicationException(emptyModelStr);
+        }
+
+        reset(); // reset back to initial conditions
+
+        if (endTime < 0 || startTime < 0 || numberOfPoints <= 0 || endTime <= startTime)
+        {
+            throw SBWApplicationException("Illegal input to simulateEx");
+        }
+
+        mTimeEnd = endTime;
+        mTimeStart = startTime;
+        mNumPoints = numberOfPoints;
+        return runSimulation();
+    }
+    catch (const Exception& e)
+    {
+        throw SBWApplicationException("Unexpected error from simulateEx()", e.Message());
     }
 }
 
@@ -2853,7 +2885,6 @@ int RoadRunner::getNumberOfFloatingSpecies()
     return mModel->getNumTotalVariables();
 }
 
-
 // Help("Sets the value of a floating species by its index")
 void RoadRunner::setFloatingSpeciesByIndex(const int& index, const double& value)
 {
@@ -2915,7 +2946,6 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
     return initYs;
 }
 
-
 //        // This is a level 1 Method 1
 // Help("Set the concentrations for all floating species in the model")
 //        void RoadRunner::setFloatingSpeciesConcentrations(double[] values)
@@ -2957,7 +2987,9 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 StringList RoadRunner::getFloatingSpeciesNames()
 {
     if (!mModel)
+    {
         throw SBWApplicationException(emptyModelStr);
+    }
 
     return mModelGenerator->getFloatingSpeciesConcentrationList(); // Reordered list
 }
@@ -2978,8 +3010,7 @@ StringList RoadRunner::getFloatingSpeciesInitialConditionNames()
     }
     return result;
 }
-//
-//
+
 // Help("Returns the list of floating species amount names")
 StringList RoadRunner::getFloatingSpeciesAmountNames()
 {
@@ -3134,10 +3165,10 @@ StringList RoadRunner::getGlobalParameterNames()
 //        }
 //
 // Help("Returns a description of the module")
-//        string RoadRunner::getDescription()
-//        {
-//            return "Simulator API based on CVODE/NLEQ/CSharp implementation";
-//        }
+string RoadRunner::getDescription()
+{
+    return "Simulator API based on CVODE/NLEQ/C++ implementation";
+}
 //
 //       void RoadRunner::TestChange()
 //        {
@@ -4476,33 +4507,6 @@ void RoadRunner::changeInitialConditions(const vector<double>& ic)
     mModel->computeConservedTotals();
 }
 
-// Help("Extension method to simulate (time start, time end, number of points). This routine resets the model to its initial condition before running the simulation (unlike simulate())"
-//        double[,] RoadRunner::simulateEx(double startTime, double endTime, int numberOfPoints)
-//        {
-//            try
-//            {
-//                if (!mModel) throw SBWApplicationException(emptyModelStr);
-//
-//                reset(); // reset back to initial conditions
-//
-//                if (endTime < 0 || startTime < 0 || numberOfPoints <= 0 || endTime <= startTime)
-//                    throw SBWApplicationException("Illegal input to simulateEx");
-//
-//                this.mTimeEnd = endTime;
-//                this.mTimeStart = startTime;
-//                mNumPoints = numberOfPoints;
-//                return runSimulation();
-//            }
-//            catch (SBWException)
-//            {
-//                throw;
-//            }
-//            catch (const Exception& e)
-//            {
-//                throw SBWApplicationException("Unexpected error from simulateEx()", e.Message());
-//            }
-//        }
-//
 // Help("Returns the current vector of reactions rates")
 vector<double> RoadRunner::getReactionRates()
 {

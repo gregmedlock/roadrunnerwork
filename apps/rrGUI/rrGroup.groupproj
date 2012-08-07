@@ -3,11 +3,11 @@
 			<ProjectGuid>{73B5E766-376E-484C-963B-44AB8EF2B960}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
-			<Projects Include="P:\mtk\build\XE_IDE\DuneComponents.cbproj">
+			<Projects Include="..\..\ide_builds\xe\roadrunner.cbproj">
 				<Dependencies/>
 			</Projects>
 			<Projects Include="rrGUI.cbproj">
-				<Dependencies>P:\mtk\build\XE_IDE\DuneComponents.cbproj</Dependencies>
+				<Dependencies>..\..\ide_builds\xe\roadrunner.cbproj</Dependencies>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -17,32 +17,32 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
-		<Target Name="DuneComponents">
-			<MSBuild Projects="P:\mtk\build\XE_IDE\DuneComponents.cbproj"/>
+		<Target Name="roadrunner">
+			<MSBuild Projects="..\..\ide_builds\xe\roadrunner.cbproj"/>
 		</Target>
-		<Target Name="DuneComponents:Clean">
-			<MSBuild Projects="P:\mtk\build\XE_IDE\DuneComponents.cbproj" Targets="Clean"/>
+		<Target Name="roadrunner:Clean">
+			<MSBuild Projects="..\..\ide_builds\xe\roadrunner.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="DuneComponents:Make">
-			<MSBuild Projects="P:\mtk\build\XE_IDE\DuneComponents.cbproj" Targets="Make"/>
+		<Target Name="roadrunner:Make">
+			<MSBuild Projects="..\..\ide_builds\xe\roadrunner.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="rrGUI" DependsOnTargets="DuneComponents">
+		<Target Name="rrGUI" DependsOnTargets="roadrunner">
 			<MSBuild Projects="rrGUI.cbproj"/>
 		</Target>
-		<Target Name="rrGUI:Clean" DependsOnTargets="DuneComponents:Clean">
+		<Target Name="rrGUI:Clean" DependsOnTargets="roadrunner:Clean">
 			<MSBuild Projects="rrGUI.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="rrGUI:Make" DependsOnTargets="DuneComponents:Make">
+		<Target Name="rrGUI:Make" DependsOnTargets="roadrunner:Make">
 			<MSBuild Projects="rrGUI.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="DuneComponents;rrGUI"/>
+			<CallTarget Targets="roadrunner;rrGUI"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="DuneComponents:Clean;rrGUI:Clean"/>
+			<CallTarget Targets="roadrunner:Clean;rrGUI:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="DuneComponents:Make;rrGUI:Make"/>
+			<CallTarget Targets="roadrunner:Make;rrGUI:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

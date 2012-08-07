@@ -4,8 +4,8 @@
 #pragma hdrstop
 #include <tchar.h>
 //---------------------------------------------------------------------------
-USEFORM("P:\mtk\Components\Dune\TFileSelectionFrame.cpp", FileSelectionFrame); /* TFrame: File Type */
 USEFORM("MainForm.cpp", MForm);
+USEFORM("P:\mtk\Components\Dune\TFileSelectionFrame.cpp", FileSelectionFrame); /* TFrame: File Type */
 //---------------------------------------------------------------------------
 WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
