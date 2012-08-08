@@ -18,14 +18,15 @@ namespace rr
 {
 ModelGenerator::ModelGenerator(RoadRunner* rr)
 :
-mStructAnalysis(),
+//mStructAnalysis(),
 STR_DoubleFormat("%.19G"),
 STR_FixAmountCompartments("*"),
 mCurrentXMLModelFileName("sbml_model"),
 mRR(rr)
 {
+    mLibStruct = LibStructural::getInstance();
     mNOM.Reset();
-    mStructAnalysis.Reset();
+    mLibStruct->Reset();
 }
 
 ModelGenerator::~ModelGenerator(){}
@@ -45,7 +46,7 @@ bool  ModelGenerator::SaveSourceCodeToFolder(const string& folder){return false;
 void ModelGenerator::Reset()
 {
     mNOM.Reset();
-    mStructAnalysis.Reset();
+    mLibStruct->Reset();
 //    floatingSpeciesConcentrationList.Clear();
 }
 
@@ -191,9 +192,9 @@ LIB_LA::DoubleMatrix* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
         {
             vector<string> RowLabels;
             vector<string> ColumnLabels; //Todo: Filling these out here is meaningless?
-            L0 = mStructAnalysis.GetL0Matrix(RowLabels, ColumnLabels);
-            nrRows = RowLabels.size();
-            nrCols = ColumnLabels.size();
+            L0 = mLibStruct->getL0Matrix();//(RowLabels, ColumnLabels);
+            nrRows = L0->RSize();//.size();
+            nrCols = L0->CSize();//.size();
         }
         else
         {
@@ -201,10 +202,11 @@ LIB_LA::DoubleMatrix* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
             nrRows = nrCols = 1;
         }
     }
-    catch (Exception)
+    catch (const Exception& e)
     {
         nrRows = nrCols = 0;
         L0 = NULL;
+        throw Exception(e.Message());
     }
     return L0;
 }

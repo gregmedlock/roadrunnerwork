@@ -1167,429 +1167,429 @@ LibLA* LibLA::getInstance()
 LibLA* LibLA::_Instance = NULL;
 
 
-/// the C-API
-LIB_EXTERN double LibLA_getTolerance()
-{
-    return LibLA::getInstance()->getTolerance();
-}
-
-LIB_EXTERN void LibLA_setTolerance(const double value)
-{
-    LibLA::getInstance()->setTolerance(value);
-}
-
-LIB_EXTERN int LibLA_getEigenValues(double** inMatrix, int numRows, int numCols, 
-                                    double* *outReal, double * *outImag, int *outLength)
-{
-    try
-    {
-        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-        vector< Complex > oVector = LibLA::getInstance()->getEigenValues( oMatrix );
-
-        Util::CopyComplexVector(oVector, *outReal, *outImag, *outLength);
-
-        return 0;
-    }
-    catch(...)
-    {
-        return -1;
-    }
-}
-
-LIB_EXTERN int LibLA_ZgetEigenValues(double** inMatrixReal, double** inMatrixImag, int numRows, int numCols, 
-                                     double* *outReal, double * *outImag, int *outLength)
-{
-    try
-    {
-        ComplexMatrix oMatrix(numRows, numCols);
-
-        for (int i = 0; i < numRows; i++)
-        {
-            for (int j = 0; j < numCols; j++)
-            {                
-                oMatrix(i,j).set( inMatrixReal[i][j],inMatrixImag[i][j]);
-            }
-        }
-
-        vector< Complex > oVector = LibLA::getInstance()->ZgetEigenValues( oMatrix );
-
-        Util::CopyComplexVector(oVector, *outReal, *outImag, *outLength);
-
-        oVector.clear();
-        return 0;
-    }
-    catch(...)
-    {
-        return -1;
-    }
-}
-
-LIB_EXTERN int LibLA_getQRWithPivot(double** inMatrix, int numRows, int numCols, 
-                                    double** *outQ, int *outQRows, int * outQCols, 
-                                    double** *outR, int *outRRows, int * outRCols, 
-                                    double** *outP, int *outPRows, int * outPCols)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    vector< DoubleMatrix * > oVector = LibLA::getInstance()->getQRWithPivot( oMatrix );
-
-    Util::CopyMatrix(*oVector[0], *outQ, *outQRows, *outQCols); delete oVector[0];
-    Util::CopyMatrix(*oVector[1], *outR, *outRRows, *outRCols); delete oVector[1];
-    Util::CopyMatrix(*oVector[2], *outP, *outPRows, *outPCols); delete oVector[2];
-
-
-    return 0;
-}
-
-LIB_EXTERN int LibLA_getQR(double** inMatrix, int numRows, int numCols, 
-                           double** *outQ, int *outQRows, int * outQCols, 
-                           double** *outR, int *outRRows, int * outRCols)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    vector< DoubleMatrix * > oVector = LibLA::getInstance()->getQR( oMatrix );
-
-    Util::CopyMatrix(*oVector[0], *outQ, *outQRows, *outQCols); delete oVector[0];
-    Util::CopyMatrix(*oVector[1], *outR, *outRRows, *outRCols); delete oVector[1];
-
-    return 0;
-}
-
-LIB_EXTERN int LibLA_getSingularValsBySVD(double** inMatrix, int numRows, int numCols, 
-                                          double* *outSingularVals, int *outLength)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    vector< double > oVector = LibLA::getInstance()->getSingularValsBySVD( oMatrix );
-
-    Util::CopyDoubleVector(oVector, *outSingularVals, *outLength);
-
-    return 0;
-}
-
-LIB_EXTERN int LibLA_getLUwithFullPivoting(double** inMatrix, int numRows, int numCols, 
-                                           double** *outL, int *outLRows, int * outLCols, 
-                                           double** *outU, int *outURows, int * outUCols, 
-                                           int** *outP, int *outPRows, int * outPCols, 
-                                           int** *outQ, int *outQRows, int * outQCols, 
-                                           int *info)
-{
-
-    try
-    {
-        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-        LU_Result* oResult = LibLA::getInstance()->getLUwithFullPivoting( oMatrix );
-
-        Util::CopyMatrix(*(oResult->L), *outL, *outLRows, *outLCols);
-        Util::CopyMatrix(*(oResult->U), *outU, *outURows, *outUCols);
-        Util::CopyMatrix(*(oResult->P), *outP, *outPRows, *outPCols);
-        Util::CopyMatrix(*(oResult->Q), *outQ, *outQRows, *outQCols);
-
-        *info = oResult->nInfo;
-
-        delete oResult;
-
-        return 0;
-    }
-    catch(...)
-    {
-        return -1;
-    }
-}
-
-LIB_EXTERN int LibLA_getLU(double** inMatrix, int numRows, int numCols, 
-                           double** *outL, int *outLRows, int * outLCols, 
-                           double** *outU, int *outURows, int * outUCols, 
-                           int** *outP, int *outPRows, int * outPCols,                                          
-                           int *info)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    LU_Result* oResult = LibLA::getInstance()->getLU( oMatrix );
-
-    Util::CopyMatrix(*(oResult->L), *outL, *outLRows, *outLCols);
-    Util::CopyMatrix(*(oResult->U), *outU, *outURows, *outUCols);
-    Util::CopyMatrix(*(oResult->P), *outP, *outPRows, *outPCols);
-
-    *info = oResult->nInfo;
-
-    delete oResult;
-    return 0;
-}
-
-LIB_EXTERN int LibLA_inverse(double** inMatrix, int numRows, int numCols, 
-                             double** *outMatrix, int *outRows, int *outCols)
-{
-
-    try
-    {
-        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-        DoubleMatrix *oResult = LibLA::getInstance()->inverse( oMatrix );
-
-        Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
-
-        return 0;
-    }
-    catch (...)
-    {
-        return -1;
-    }
-}
-
-
-LIB_EXTERN int LibLA_leftNullspace(double** inMatrix, int numRows, int numCols, 
-                                   double** *outMatrix, int *outRows, int *outCols)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    DoubleMatrix *oResult = LibLA::getInstance()->getLeftNullSpace( oMatrix );
-
-    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
-
-    return 0;
-}
-LIB_EXTERN int LibLA_rightNullspace(double** inMatrix, int numRows, int numCols, 
-                                    double** *outMatrix, int *outRows, int *outCols)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    DoubleMatrix *oResult = LibLA::getInstance()->getRightNullSpace( oMatrix );
-
-    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
-
-    return 0;
-}
-
-LIB_EXTERN int LibLA_scaledLeftNullspace(double** inMatrix, int numRows, int numCols, 
-                                         double** *outMatrix, int *outRows, int *outCols)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    DoubleMatrix *oResult = LibLA::getInstance()->getScaledLeftNullSpace( oMatrix );
-
-    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
-
-    return 0;
-}
-LIB_EXTERN int LibLA_scaledRightNullspace(double** inMatrix, int numRows, int numCols, 
-                                          double** *outMatrix, int *outRows, int *outCols)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    DoubleMatrix *oResult = LibLA::getInstance()->getScaledRightNullSpace( oMatrix );
-
-    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
-
-    return 0;
-}
-
-LIB_EXTERN int LibLA_getRank(double** inMatrix, int numRows, int numCols)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    int nRank = LibLA::getInstance()->getRank( oMatrix );
-    return nRank;
-}
-
-
-LIB_EXTERN double LibLA_getRCond(double** inMatrix, int numRows, int numCols)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    double dRcond = LibLA::getInstance()->getRCond( oMatrix );
-    return dRcond;
-}
-
-
-LIB_EXTERN int LibLA_Zinverse(double** inMatrixReal, double **inMatrixImag, int numRows, int numCols, 
-                              double** *outMatrixReal, double ** *outMatrixImag, int *outRows, int *outCols)
-{
-    try
-    {
-        ComplexMatrix oMatrix(numRows, numCols);
-
-        for (int i = 0; i < numRows; i++)
-        {
-            for (int j = 0; j < numCols; j++)
-            {
-                oMatrix(i,j).set(inMatrixReal[i][j],inMatrixImag[i][j]);                
-            }
-        }
-
-        ComplexMatrix *oResult = LibLA::getInstance()->Zinverse( oMatrix );
-        Util::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
-
-        return 0;
-    }
-    catch(...)
-    {
-        return -1;
-    }
-}
-
-LIB_EXTERN void LibLA_freeVector(void* vector)
-{
-    if (vector) free(vector);
-}
-
-LIB_EXTERN void LibLA_freeMatrix(void** matrix, int numRows)
-{
-    for (int i = 0; i < numRows; i++)
-    {
-        if (matrix[i]) free(matrix[i]);
-    }
-    free(matrix);
-}
-
-
-
-LIB_EXTERN int LibLA_gaussJordan(double** inMatrix, int numRows, int numCols, 
-                                 double** *outMatrix, int *outRows, int *outCols, int* *oPivots, int *nLength)
-{
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    vector<int> oPivotVec  = Util::GaussJordan(oMatrix, LibLA::getInstance()->getTolerance());
-    Util::CopyMatrix(oMatrix, *outMatrix, *outRows, *outCols);
-
-    Util::CopyIntVector(oPivotVec, *oPivots, *nLength);
-    return 0;
-}
-
-std::vector<int> LibLA::gaussJordan(DoubleMatrix &oMatrix)
-{
-    return Util::GaussJordan(oMatrix, _Tolerance);
-}
-
-
-//LIB_EXTERN int LibLA_gaussJordan2(double** inMatrix, int numRows, int numCols, 
-//                                  double** *outMatrix, int *outRows, int *outCols)
+///// the C-API
+//LIB_EXTERN double LibLA_getTolerance()
+//{
+//    return LibLA::getInstance()->getTolerance();
+//}
+//
+//LIB_EXTERN void LibLA_setTolerance(const double value)
+//{
+//    LibLA::getInstance()->setTolerance(value);
+//}
+//
+//LIB_EXTERN int LibLA_getEigenValues(double** inMatrix, int numRows, int numCols,
+//                                    double* *outReal, double * *outImag, int *outLength)
+//{
+//    try
+//    {
+//        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//        vector< Complex > oVector = LibLA::getInstance()->getEigenValues( oMatrix );
+//
+//        Util::CopyComplexVector(oVector, *outReal, *outImag, *outLength);
+//
+//        return 0;
+//    }
+//    catch(...)
+//    {
+//        return -1;
+//    }
+//}
+//
+//LIB_EXTERN int LibLA_ZgetEigenValues(double** inMatrixReal, double** inMatrixImag, int numRows, int numCols,
+//                                     double* *outReal, double * *outImag, int *outLength)
+//{
+//    try
+//    {
+//        ComplexMatrix oMatrix(numRows, numCols);
+//
+//        for (int i = 0; i < numRows; i++)
+//        {
+//            for (int j = 0; j < numCols; j++)
+//            {
+//                oMatrix(i,j).set( inMatrixReal[i][j],inMatrixImag[i][j]);
+//            }
+//        }
+//
+//        vector< Complex > oVector = LibLA::getInstance()->ZgetEigenValues( oMatrix );
+//
+//        Util::CopyComplexVector(oVector, *outReal, *outImag, *outLength);
+//
+//        oVector.clear();
+//        return 0;
+//    }
+//    catch(...)
+//    {
+//        return -1;
+//    }
+//}
+//
+//LIB_EXTERN int LibLA_getQRWithPivot(double** inMatrix, int numRows, int numCols,
+//                                    double** *outQ, int *outQRows, int * outQCols,
+//                                    double** *outR, int *outRRows, int * outRCols,
+//                                    double** *outP, int *outPRows, int * outPCols)
 //{
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-//    Util::gaussJordan(oMatrix, LibLA::getInstance()->getTolerance());
-//    Util::CopyMatrix(oMatrix, outMatrix, outRows, outCols);
+//    vector< DoubleMatrix * > oVector = LibLA::getInstance()->getQRWithPivot( oMatrix );
+//
+//    Util::CopyMatrix(*oVector[0], *outQ, *outQRows, *outQCols); delete oVector[0];
+//    Util::CopyMatrix(*oVector[1], *outR, *outRRows, *outRCols); delete oVector[1];
+//    Util::CopyMatrix(*oVector[2], *outP, *outPRows, *outPCols); delete oVector[2];
+//
+//
 //    return 0;
 //}
-
-
-void LibLA::fullyPivotedGaussJordan(DoubleMatrix &oMatrix, vector<int> &rowPivots, vector<int> &colPivots)
-{
-    return Util::FullyPivotedGaussJordan(oMatrix, _Tolerance, rowPivots, colPivots);
-}
-
-
-LIB_EXTERN int LibLA_fullyPivotedGaussJordan(double** inMatrix, int numRows, int numCols, 
-                                             double** *outMatrix, int *outRows, int *outCols, 
-                                             int* *oRowPivots, int *nRowLength, 
-                                             int* *oColPivots, int *nColLength)
-{
-
-    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-    vector< int > vecRowPivots;  vector< int> vecColPivots;
-    Util::FullyPivotedGaussJordan(oMatrix, LibLA::getInstance()->getTolerance(), vecRowPivots, vecColPivots);
-
-    Util::CopyMatrix(oMatrix, *outMatrix, *outRows, *outCols);
-
-    Util::CopyIntVector(vecRowPivots, *oRowPivots, *nRowLength);
-    Util::CopyIntVector(vecColPivots, *oColPivots, *nColLength);
-
-    return 0;
-
-}
-
-
-LIB_EXTERN int LibLA_getEigenVectors(double** inMatrix, int numRows, int numCols, 
-                                     double** *outMatrixReal, double** *outMatrixImag, int *outRows, int *outCols)
-{
-
-    try
-    {
-        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-        ComplexMatrix *oResult = LibLA::getInstance()->getEigenVectors( oMatrix );
-
-        Util::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
-
-        return 0;
-    }
-    catch (...)
-    {
-        return -1;
-    }
-}
-
-LIB_EXTERN int LibLA_ZgetEigenVectors(double** inMatrixReal,   double **  inMatrixImag, int numRows, int numCols, 
-                                      double** *outMatrixReal, double** *outMatrixImag, int *outRows, int *outCols)
-{
-    try
-    {
-        ComplexMatrix oMatrix(numRows, numCols);
-
-        for (int i = 0; i < numRows; i++)
-        {
-            for (int j = 0; j < numCols; j++)
-            {
-                oMatrix(i,j).set(inMatrixReal[i][j],inMatrixImag[i][j]);                
-            }
-        }
-
-        ComplexMatrix *oResult = LibLA::getInstance()->ZgetEigenVectors( oMatrix );
-        Util::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
-
-        return 0;
-    }
-    catch(...)
-    {
-        return -1;
-    }
-}
-
-LIB_EXTERN int LibLA_getSVD(double** inMatrix, int numRows, int numCols, 
-                            double** *outU, int *outRowsU, int *outColsU, 
-                            double* *outSingVals, int *outLength, 
-                            double** *outV, int *outRowsV, int *outColsV)
-{
-    try
-    {
-        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-        
-        DoubleMatrix*   matrixU  = NULL; 
-        vector<double>* singVals = NULL; 
-        DoubleMatrix*   matrixV  = NULL;
-        
-        LibLA::getInstance()->getSVD(oMatrix, matrixU, singVals, matrixV);
-
-        Util::CopyMatrix(*matrixU, *outU, *outRowsU, *outColsU); delete matrixU;
-        Util::CopyDoubleVector(*singVals, *outSingVals, *outLength); delete singVals;
-        Util::CopyMatrix(*matrixV, *outV, *outRowsV, *outColsV); delete matrixV;
-
-        return 0;
-    }
-    catch(...)
-    {
-        return -1;
-    }
-    
-}
-
-LIB_EXTERN int LibLA_ZgetSVD(double** inMatrixReal, double** inMatrixImag, int numRows, int numCols, 
-                             double** *outUReal, double** *outUImag, int *outRowsU, int *outColsU, 
-                             double* *outSingVals, int *outLength, 
-                             double** *outVReal, double** *outVImag, int *outRowsV, int *outColsV)
-{
-    try
-    {
-        ComplexMatrix oMatrix(numRows, numCols);
-
-        for (int i = 0; i < numRows; i++)
-        {
-            for (int j = 0; j < numCols; j++)
-            {
-                oMatrix(i,j).set(inMatrixReal[i][j],inMatrixImag[i][j]);                
-            }
-        }
-
-        ComplexMatrix *matrixU = NULL; vector<double>* singVals= NULL; ComplexMatrix *matrixV= NULL;
-        
-        LibLA::getInstance()->ZgetSVD(oMatrix, matrixU, singVals, matrixV);
-
-        Util::CopyMatrix(*matrixU, *outUReal, *outUImag, *outRowsU, *outColsU); delete matrixU;
-        Util::CopyDoubleVector(*singVals, *outSingVals, *outLength); delete singVals;
-        Util::CopyMatrix(*matrixV, *outVReal, *outVImag, *outRowsV, *outColsV); delete matrixV;
-    
-        return 0;
-    }
-    catch(...)
-    {
-        return -1;
-    }
-}
+//
+//LIB_EXTERN int LibLA_getQR(double** inMatrix, int numRows, int numCols,
+//                           double** *outQ, int *outQRows, int * outQCols,
+//                           double** *outR, int *outRRows, int * outRCols)
+//{
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    vector< DoubleMatrix * > oVector = LibLA::getInstance()->getQR( oMatrix );
+//
+//    Util::CopyMatrix(*oVector[0], *outQ, *outQRows, *outQCols); delete oVector[0];
+//    Util::CopyMatrix(*oVector[1], *outR, *outRRows, *outRCols); delete oVector[1];
+//
+//    return 0;
+//}
+//
+//LIB_EXTERN int LibLA_getSingularValsBySVD(double** inMatrix, int numRows, int numCols,
+//                                          double* *outSingularVals, int *outLength)
+//{
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    vector< double > oVector = LibLA::getInstance()->getSingularValsBySVD( oMatrix );
+//
+//    Util::CopyDoubleVector(oVector, *outSingularVals, *outLength);
+//
+//    return 0;
+//}
+//
+//LIB_EXTERN int LibLA_getLUwithFullPivoting(double** inMatrix, int numRows, int numCols,
+//                                           double** *outL, int *outLRows, int * outLCols,
+//                                           double** *outU, int *outURows, int * outUCols,
+//                                           int** *outP, int *outPRows, int * outPCols,
+//                                           int** *outQ, int *outQRows, int * outQCols,
+//                                           int *info)
+//{
+//
+//    try
+//    {
+//        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//        LU_Result* oResult = LibLA::getInstance()->getLUwithFullPivoting( oMatrix );
+//
+//        Util::CopyMatrix(*(oResult->L), *outL, *outLRows, *outLCols);
+//        Util::CopyMatrix(*(oResult->U), *outU, *outURows, *outUCols);
+//        Util::CopyMatrix(*(oResult->P), *outP, *outPRows, *outPCols);
+//        Util::CopyMatrix(*(oResult->Q), *outQ, *outQRows, *outQCols);
+//
+//        *info = oResult->nInfo;
+//
+//        delete oResult;
+//
+//        return 0;
+//    }
+//    catch(...)
+//    {
+//        return -1;
+//    }
+//}
+//
+//LIB_EXTERN int LibLA_getLU(double** inMatrix, int numRows, int numCols,
+//                           double** *outL, int *outLRows, int * outLCols,
+//                           double** *outU, int *outURows, int * outUCols,
+//                           int** *outP, int *outPRows, int * outPCols,
+//                           int *info)
+//{
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    LU_Result* oResult = LibLA::getInstance()->getLU( oMatrix );
+//
+//    Util::CopyMatrix(*(oResult->L), *outL, *outLRows, *outLCols);
+//    Util::CopyMatrix(*(oResult->U), *outU, *outURows, *outUCols);
+//    Util::CopyMatrix(*(oResult->P), *outP, *outPRows, *outPCols);
+//
+//    *info = oResult->nInfo;
+//
+//    delete oResult;
+//    return 0;
+//}
+//
+//LIB_EXTERN int LibLA_inverse(double** inMatrix, int numRows, int numCols,
+//                             double** *outMatrix, int *outRows, int *outCols)
+//{
+//
+//    try
+//    {
+//        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//        DoubleMatrix *oResult = LibLA::getInstance()->inverse( oMatrix );
+//
+//        Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+//
+//        return 0;
+//    }
+//    catch (...)
+//    {
+//        return -1;
+//    }
+//}
+//
+//
+//LIB_EXTERN int LibLA_leftNullspace(double** inMatrix, int numRows, int numCols,
+//                                   double** *outMatrix, int *outRows, int *outCols)
+//{
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    DoubleMatrix *oResult = LibLA::getInstance()->getLeftNullSpace( oMatrix );
+//
+//    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+//
+//    return 0;
+//}
+//LIB_EXTERN int LibLA_rightNullspace(double** inMatrix, int numRows, int numCols,
+//                                    double** *outMatrix, int *outRows, int *outCols)
+//{
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    DoubleMatrix *oResult = LibLA::getInstance()->getRightNullSpace( oMatrix );
+//
+//    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+//
+//    return 0;
+//}
+//
+//LIB_EXTERN int LibLA_scaledLeftNullspace(double** inMatrix, int numRows, int numCols,
+//                                         double** *outMatrix, int *outRows, int *outCols)
+//{
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    DoubleMatrix *oResult = LibLA::getInstance()->getScaledLeftNullSpace( oMatrix );
+//
+//    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+//
+//    return 0;
+//}
+//LIB_EXTERN int LibLA_scaledRightNullspace(double** inMatrix, int numRows, int numCols,
+//                                          double** *outMatrix, int *outRows, int *outCols)
+//{
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    DoubleMatrix *oResult = LibLA::getInstance()->getScaledRightNullSpace( oMatrix );
+//
+//    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+//
+//    return 0;
+//}
+//
+//LIB_EXTERN int LibLA_getRank(double** inMatrix, int numRows, int numCols)
+//{
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    int nRank = LibLA::getInstance()->getRank( oMatrix );
+//    return nRank;
+//}
+//
+//
+//LIB_EXTERN double LibLA_getRCond(double** inMatrix, int numRows, int numCols)
+//{
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    double dRcond = LibLA::getInstance()->getRCond( oMatrix );
+//    return dRcond;
+//}
+//
+//
+//LIB_EXTERN int LibLA_Zinverse(double** inMatrixReal, double **inMatrixImag, int numRows, int numCols,
+//                              double** *outMatrixReal, double ** *outMatrixImag, int *outRows, int *outCols)
+//{
+//    try
+//    {
+//        ComplexMatrix oMatrix(numRows, numCols);
+//
+//        for (int i = 0; i < numRows; i++)
+//        {
+//            for (int j = 0; j < numCols; j++)
+//            {
+//                oMatrix(i,j).set(inMatrixReal[i][j],inMatrixImag[i][j]);
+//            }
+//        }
+//
+//        ComplexMatrix *oResult = LibLA::getInstance()->Zinverse( oMatrix );
+//        Util::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
+//
+//        return 0;
+//    }
+//    catch(...)
+//    {
+//        return -1;
+//    }
+//}
+//
+//LIB_EXTERN void LibLA_freeVector(void* vector)
+//{
+//    if (vector) free(vector);
+//}
+//
+//LIB_EXTERN void LibLA_freeMatrix(void** matrix, int numRows)
+//{
+//    for (int i = 0; i < numRows; i++)
+//    {
+//        if (matrix[i]) free(matrix[i]);
+//    }
+//    free(matrix);
+//}
+//
+//
+//
+//LIB_EXTERN int LibLA_gaussJordan(double** inMatrix, int numRows, int numCols,
+//                                 double** *outMatrix, int *outRows, int *outCols, int* *oPivots, int *nLength)
+//{
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    vector<int> oPivotVec  = Util::GaussJordan(oMatrix, LibLA::getInstance()->getTolerance());
+//    Util::CopyMatrix(oMatrix, *outMatrix, *outRows, *outCols);
+//
+//    Util::CopyIntVector(oPivotVec, *oPivots, *nLength);
+//    return 0;
+//}
+//
+//std::vector<int> LibLA::gaussJordan(DoubleMatrix &oMatrix)
+//{
+//    return Util::GaussJordan(oMatrix, _Tolerance);
+//}
+//
+//
+////LIB_EXTERN int LibLA_gaussJordan2(double** inMatrix, int numRows, int numCols,
+////                                  double** *outMatrix, int *outRows, int *outCols)
+////{
+////    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+////    Util::gaussJordan(oMatrix, LibLA::getInstance()->getTolerance());
+////    Util::CopyMatrix(oMatrix, outMatrix, outRows, outCols);
+////    return 0;
+////}
+//
+//
+//void LibLA::fullyPivotedGaussJordan(DoubleMatrix &oMatrix, vector<int> &rowPivots, vector<int> &colPivots)
+//{
+//    return Util::FullyPivotedGaussJordan(oMatrix, _Tolerance, rowPivots, colPivots);
+//}
+//
+//
+//LIB_EXTERN int LibLA_fullyPivotedGaussJordan(double** inMatrix, int numRows, int numCols,
+//                                             double** *outMatrix, int *outRows, int *outCols,
+//                                             int* *oRowPivots, int *nRowLength,
+//                                             int* *oColPivots, int *nColLength)
+//{
+//
+//    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//    vector< int > vecRowPivots;  vector< int> vecColPivots;
+//    Util::FullyPivotedGaussJordan(oMatrix, LibLA::getInstance()->getTolerance(), vecRowPivots, vecColPivots);
+//
+//    Util::CopyMatrix(oMatrix, *outMatrix, *outRows, *outCols);
+//
+//    Util::CopyIntVector(vecRowPivots, *oRowPivots, *nRowLength);
+//    Util::CopyIntVector(vecColPivots, *oColPivots, *nColLength);
+//
+//    return 0;
+//
+//}
+//
+//
+//LIB_EXTERN int LibLA_getEigenVectors(double** inMatrix, int numRows, int numCols,
+//                                     double** *outMatrixReal, double** *outMatrixImag, int *outRows, int *outCols)
+//{
+//
+//    try
+//    {
+//        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//        ComplexMatrix *oResult = LibLA::getInstance()->getEigenVectors( oMatrix );
+//
+//        Util::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
+//
+//        return 0;
+//    }
+//    catch (...)
+//    {
+//        return -1;
+//    }
+//}
+//
+//LIB_EXTERN int LibLA_ZgetEigenVectors(double** inMatrixReal,   double **  inMatrixImag, int numRows, int numCols,
+//                                      double** *outMatrixReal, double** *outMatrixImag, int *outRows, int *outCols)
+//{
+//    try
+//    {
+//        ComplexMatrix oMatrix(numRows, numCols);
+//
+//        for (int i = 0; i < numRows; i++)
+//        {
+//            for (int j = 0; j < numCols; j++)
+//            {
+//                oMatrix(i,j).set(inMatrixReal[i][j],inMatrixImag[i][j]);
+//            }
+//        }
+//
+//        ComplexMatrix *oResult = LibLA::getInstance()->ZgetEigenVectors( oMatrix );
+//        Util::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
+//
+//        return 0;
+//    }
+//    catch(...)
+//    {
+//        return -1;
+//    }
+//}
+//
+//LIB_EXTERN int LibLA_getSVD(double** inMatrix, int numRows, int numCols,
+//                            double** *outU, int *outRowsU, int *outColsU,
+//                            double* *outSingVals, int *outLength,
+//                            double** *outV, int *outRowsV, int *outColsV)
+//{
+//    try
+//    {
+//        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
+//
+//        DoubleMatrix*   matrixU  = NULL;
+//        vector<double>* singVals = NULL;
+//        DoubleMatrix*   matrixV  = NULL;
+//
+//        LibLA::getInstance()->getSVD(oMatrix, matrixU, singVals, matrixV);
+//
+//        Util::CopyMatrix(*matrixU, *outU, *outRowsU, *outColsU); delete matrixU;
+//        Util::CopyDoubleVector(*singVals, *outSingVals, *outLength); delete singVals;
+//        Util::CopyMatrix(*matrixV, *outV, *outRowsV, *outColsV); delete matrixV;
+//
+//        return 0;
+//    }
+//    catch(...)
+//    {
+//        return -1;
+//    }
+//
+//}
+//
+//LIB_EXTERN int LibLA_ZgetSVD(double** inMatrixReal, double** inMatrixImag, int numRows, int numCols,
+//                             double** *outUReal, double** *outUImag, int *outRowsU, int *outColsU,
+//                             double* *outSingVals, int *outLength,
+//                             double** *outVReal, double** *outVImag, int *outRowsV, int *outColsV)
+//{
+//    try
+//    {
+//        ComplexMatrix oMatrix(numRows, numCols);
+//
+//        for (int i = 0; i < numRows; i++)
+//        {
+//            for (int j = 0; j < numCols; j++)
+//            {
+//                oMatrix(i,j).set(inMatrixReal[i][j],inMatrixImag[i][j]);
+//            }
+//        }
+//
+//        ComplexMatrix *matrixU = NULL; vector<double>* singVals= NULL; ComplexMatrix *matrixV= NULL;
+//
+//        LibLA::getInstance()->ZgetSVD(oMatrix, matrixU, singVals, matrixV);
+//
+//        Util::CopyMatrix(*matrixU, *outUReal, *outUImag, *outRowsU, *outColsU); delete matrixU;
+//        Util::CopyDoubleVector(*singVals, *outSingVals, *outLength); delete singVals;
+//        Util::CopyMatrix(*matrixV, *outVReal, *outVImag, *outRowsV, *outColsV); delete matrixV;
+//
+//        return 0;
+//    }
+//    catch(...)
+//    {
+//        return -1;
+//    }
+//}
 
 

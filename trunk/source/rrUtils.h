@@ -18,6 +18,9 @@ RR_DECLSPEC bool            IsNaN(const double& aNum);
 RR_DECLSPEC bool            IsNullOrEmpty(const string& str);    //Can't be null, but empty
 RR_DECLSPEC void            Pause(bool doIt = true);
 
+//String utilities
+RR_DECLSPEC string          RemoveTrailingSeparator(const string& fldr, const string& sep ="\\");
+
 //File  Utilities
 RR_DECLSPEC bool            FileExists(const string& fileN);
 RR_DECLSPEC bool            FolderExists(const string& folderN);

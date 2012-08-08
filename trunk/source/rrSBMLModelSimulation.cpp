@@ -42,8 +42,6 @@ void SBMLModelSimulation::CompileIfDllExists(const bool& doIt)
     mCompileIfDllExists = doIt;
 }
 
-
-
 bool SBMLModelSimulation::SetModelFilePath(const string& path)
 {
     mModelFilePath = path;

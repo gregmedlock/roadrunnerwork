@@ -25,16 +25,16 @@
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<Defines>LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
-			<LinkPackageStatics>Tee915.lib;vclimg.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib</LinkPackageStatics>
+			<LinkPackageStatics>Tee915.lib;vclimg.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib;TeePro915.lib;TeeUI915.lib</LinkPackageStatics>
 			<OutputExt>exe</OutputExt>
 			<LinkPackageImports>rtl.bpi;vcl.bpi;DuneComponents.bpi</LinkPackageImports>
 			<PackageImports>vcl.bpi;rtl.bpi;DuneComponents.bpi</PackageImports>
 			<ProjectType>CppVCLApplication</ProjectType>
-			<AllPackageLibs>rtl.lib;vcl.lib;Tee915.lib;vclimg.lib;DuneComponents.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib</AllPackageLibs>
+			<AllPackageLibs>rtl.lib;vcl.lib;Tee915.lib;vclimg.lib;DuneComponents.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib;TeePro915.lib;TeeUI915.lib</AllPackageLibs>
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>p:\mtk\Lib\Common\;P:\mtk\Components\Dune\;R:\roadrunnerwork\trunk\apps\rrGUI\;$(RR_INSTALL)\include\rr;$(RR_INSTALL)\include;$(IncludePath)</IncludePath>
+			<IncludePath>p:\mtk\Lib\Common\;P:\mtk\Components\Dune\;R:\roadrunnerwork\trunk\apps\rrGUI\;$(RR_ROOT)\trunk\source;$(RR_INSTALL)\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>R:\rrBuilds\xe\ThirdParty\lib\;R:\rrInstalls\xe\lib\;p:\mtk\Lib\Common\;P:\mtk\Components\Dune\;R:\roadrunnerwork\trunk\apps\rrGUI\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>

@@ -27,32 +27,31 @@ class RR_DECLSPEC SimulationData : public rrObject
     public:
                                 SimulationData();
                                 SimulationData(const StringList& colNames, const DoubleMatrix& theData);
-        StringList              GetColumnNames();
-        string                  GetColumnNamesAsString();
+        StringList              GetColumnNames() const;
+        string                  GetColumnNamesAsString() const;
         void                    Allocate(const int& cSize, const int& rSize);
         void                    SetTimeDataPrecision(const int& prec);
         void                    SetDataPrecision(const int& prec);
         void                    SetColumnNames(const StringList& colNames);
         void                    SetNrOfCols(const int& cols);
-        int                     GetNrOfCols();
-        int                     GetNrOfRows();
+        int                     GetNrOfCols() const;
+        int                     GetNrOfRows() const;
         void                    SetData(const DoubleMatrix& theData);
         bool                    Load(const string& fileName);
         bool                    WriteTo(const string& fileName);
 
-RR_DECLSPEC        friend std::ostream&    operator << (std::ostream& ss, SimulationData& data);
-        bool                    Check();    //Check if containst proper data
 
+        bool                    Check() const;    //Check if containst proper data
+RR_DECLSPEC    friend std::ostream&    operator << (std::ostream& ss, const SimulationData& data);
         double&                 operator() (const unsigned& row, const unsigned& col);
         double                  operator() (const unsigned& row, const unsigned& col) const;
         void                    SetName(const string& name);
-        string                  GetName();
-        pair<int,int>           Dimension();
-
-};
+        string                  GetName() const;
+        pair<int,int>           Dimension() const;
+};
 
 //This function is not class member, so need to export separately
-RR_DECLSPEC    std::ostream&         operator << (std::ostream& ss, SimulationData& data);
+
 }
 
 

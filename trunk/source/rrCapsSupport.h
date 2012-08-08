@@ -2,7 +2,6 @@
 #define rrCapsSupportH
 #include <vector>
 #include "rrObject.h"
-#include "rrCapability.h"
 #include "rrCapabilitiesSection.h"
 //---------------------------------------------------------------------------
 
