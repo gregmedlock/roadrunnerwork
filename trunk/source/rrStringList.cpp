@@ -65,14 +65,13 @@ unsigned int StringList::Count() const
     return mStrings.size();
 }
 
-
 string StringList::AsString(const string& delimiter) const
 {
     stringstream names;
     for(int i = 0; i < mStrings.size(); i++)
     {
         names<<mStrings[i];
-        if( i < mStrings.size() + 1)
+        if( i < mStrings.size() - 1)
         {
             names<<delimiter;
         }
@@ -109,6 +108,15 @@ StringList StringList::operator-(const StringList& rhs)
     return newList;
 }
 
+void StringList::InsertAt(const int& index, const string& item)
+{
+    mLI = mStrings.begin() + index;
+    if(mLI != mStrings.end())
+    {
+        mStrings.insert(mLI, item);
+    }
+}
+
 void StringList::Add(const string& str)
 {
     mStrings.push_back(str);
@@ -139,17 +147,14 @@ void StringList::operator=(const StringList& rhs)
     mStrings = rhs.mStrings;
 }
 
-ostream& operator<<(ostream& stream, StringList& list)
+ostream& operator<<(ostream& stream, const StringList& list)
 {
-    vector<string>::iterator iter;
-    int count = 0;
-    for(iter = list.begin(); iter != list.end(); iter++)
+    for(int i = 0; i < list.Count(); i++)
     {
-        stream<<"List Item "<<++count<<" : "<<(*iter)<<std::endl;
+        stream<<list[i]<<std::endl;
     }
     return stream;
 }
-
 
 } //namespace rr
 

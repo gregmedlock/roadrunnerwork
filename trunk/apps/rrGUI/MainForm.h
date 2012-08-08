@@ -23,6 +23,8 @@
 #include "Series.hpp"
 #include "TeeComma.hpp"
 #include "TeeEdit.hpp"
+#include "rrStringList.h"
+#include "TeeTools.hpp"
 namespace rr
 {
 class RoadRunner;
@@ -35,6 +37,7 @@ template <class T>
 class Matrix;
 }
 
+using namespace rr;
 //---------------------------------------------------------------------------
 class TMForm : public TForm
 {
@@ -95,6 +98,8 @@ __published:	// IDE-managed Components
     void __fastcall SimulateAExecute(TObject *Sender);
     void __fastcall loadAvailableSymbolsAExecute(TObject *Sender);
     void __fastcall ChartEditor2Click(TObject *Sender);
+    void __fastcall SelListClick(TObject *Sender);
+
 
 private:	// User declarations
     mtkIniParameters            mGeneralParas;
@@ -109,6 +114,10 @@ private:	// User declarations
 
     void            __fastcall  SetupINIParameters();
     void                        Plot(const rr::SimulationData& result);
+    void                        EnableDisableSimulation(bool enable);
+    void            __fastcall  CheckUI();
+    StringList                  GetCheckedSpecies();
+    TColor                      GetColor(int i);
 
 public:		// User declarations
                     __fastcall  TMForm(TComponent* Owner);

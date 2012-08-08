@@ -83,6 +83,10 @@
 				<DependentOn>MainForm.h</DependentOn>
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="MainMisc.cpp">
+				<DependentOn>MainMisc.h</DependentOn>
+				<BuildOrder>13</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="rrGUI.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>

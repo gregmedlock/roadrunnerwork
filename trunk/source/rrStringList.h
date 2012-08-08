@@ -27,6 +27,7 @@ class RR_DECLSPEC StringList : public rrObject
                                    ~StringList();
 
         void                        Label(const string& lbl);
+        void                        InsertAt(const int& index, const string& item);
         void                        Add(const string& str);
         string                      AsString(const string& delimiter = ",") const;
         unsigned int                Count() const;
@@ -44,9 +45,10 @@ class RR_DECLSPEC StringList : public rrObject
         vector<string>::iterator    end();
         void                        PreFix(const string& fix);
         void                        PostFix(const string& fix);
+RR_DECLSPEC friend ostream&         operator<<(ostream& stream, const StringList& list);
 };
 
-RR_DECLSPEC ostream&             operator<<(ostream& stream, StringList& list);
+
 
 }
 #endif
