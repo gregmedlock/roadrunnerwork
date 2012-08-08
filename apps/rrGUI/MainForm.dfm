@@ -97,7 +97,7 @@ object MForm: TMForm
       object mStartTimeE: mtkFloatLabeledEdit
         Left = 15
         Top = 40
-        Width = 74
+        Width = 50
         Height = 21
         EditLabel.Width = 49
         EditLabel.Height = 13
@@ -109,7 +109,7 @@ object MForm: TMForm
       object mEndTimeE: mtkFloatLabeledEdit
         Left = 15
         Top = 80
-        Width = 74
+        Width = 50
         Height = 21
         EditLabel.Width = 43
         EditLabel.Height = 13
@@ -121,7 +121,7 @@ object MForm: TMForm
       object mNrOfSimulationPointsE: mtkIntLabeledEdit
         Left = 111
         Top = 41
-        Width = 74
+        Width = 57
         Height = 21
         EditLabel.Width = 56
         EditLabel.Height = 13
@@ -147,6 +147,7 @@ object MForm: TMForm
       Align = alBottom
       ItemHeight = 13
       TabOrder = 3
+      OnClick = SelListClick
     end
   end
   object StatusBar1: TStatusBar
@@ -179,30 +180,74 @@ object MForm: TMForm
       Top = 1
       Width = 1001
       Height = 386
-      Border.Color = clNavy
-      Border.Visible = True
-      BorderRound = 10
-      Gradient.EndColor = clGray
+      Border.Color = 9423874
+      Border.Width = 7
+      Gradient.MidColor = clNone
+      Legend.Alignment = laBottom
       Legend.Brush.Gradient.Direction = gdTopBottom
-      Legend.Brush.Gradient.EndColor = clYellow
-      Legend.Brush.Gradient.StartColor = clWhite
-      Legend.Brush.Gradient.Visible = True
+      Legend.Brush.Gradient.EndColor = 13556735
+      Legend.Brush.Gradient.MidColor = 14739177
+      Legend.Brush.Gradient.StartColor = 16774122
+      Legend.ColorWidth = 40
+      Legend.CustomPosition = True
+      Legend.DividingLines.Color = clSilver
+      Legend.Font.Color = 6553600
+      Legend.Frame.Color = clGray
+      Legend.Left = 701
+      Legend.LeftPercent = 70
+      Legend.LegendStyle = lsSeries
+      Legend.PositionUnits = muPercent
+      Legend.ResizeChart = False
+      Legend.Shadow.Color = 13421772
+      Legend.Shadow.Visible = False
+      Legend.Symbol.Shadow.Visible = False
+      Legend.Symbol.Width = 40
       Legend.Title.Text.Strings = (
         '')
+      Legend.Top = 19
+      Legend.TopPercent = 5
+      Legend.TopPos = 5
+      Title.Brush.Gradient.MidColor = clNone
+      Title.Color = clBlack
+      Title.Frame.Color = 10083835
+      Title.Frame.Width = 2
+      Title.Shadow.HorizSize = 4
+      Title.Shadow.Transparency = 70
+      Title.Shadow.VertSize = 4
       Title.Text.Strings = (
         'TChart')
       Title.Visible = False
+      BottomAxis.Grid.Visible = False
+      BottomAxis.MinorGrid.Color = 15066597
+      BottomAxis.Title.Caption = 'Time'
+      BottomAxis.Title.Font.Height = -19
+      BottomAxis.Title.Font.Name = 'Arial Rounded MT Bold'
+      LeftAxis.Grid.Visible = False
+      LeftAxis.Title.Caption = 'Species Concentrations'
+      LeftAxis.Title.Font.Height = -19
+      LeftAxis.Title.Font.Name = 'Arial Rounded MT Bold'
+      LeftAxis.Title.ShapeStyle = fosRoundRectangle
+      Shadow.Color = clBlack
+      Shadow.Visible = False
+      TopAxis.MinorGrid.Color = 15066597
       View3D = False
+      Zoom.Animated = True
+      Zoom.Pen.Color = clRed
       Align = alClient
-      BevelOuter = bvNone
-      Color = 8421440
+      Color = clWhite
       PopupMenu = ChartPopup
       TabOrder = 0
-      ColorPaletteIndex = 2
+      ExplicitLeft = 5
+      ExplicitTop = -1
+      ColorPaletteIndex = 15
       object Series1: TLineSeries
         Marks.Arrow.Visible = True
         Marks.Callout.Brush.Color = clBlack
         Marks.Callout.Arrow.Visible = True
+        Marks.Frame.Color = clGray
+        Marks.Shadow.Color = 13421772
+        Marks.Shadow.HorizSize = 2
+        Marks.Shadow.VertSize = 2
         Marks.Visible = False
         LinePen.Color = 4210816
         LinePen.Width = 3
@@ -227,9 +272,9 @@ object MForm: TMForm
       TabOrder = 1
       object mLogMemo: TMemo
         Left = 1
-        Top = 63
+        Top = 58
         Width = 999
-        Height = 214
+        Height = 219
         Align = alClient
         PopupMenu = MemoPopup
         ReadOnly = True
@@ -240,7 +285,7 @@ object MForm: TMForm
         Left = 1
         Top = 1
         Width = 999
-        Height = 29
+        Height = 24
         ButtonHeight = 21
         ButtonWidth = 32
         Caption = 'ToolBar1'
@@ -262,7 +307,7 @@ object MForm: TMForm
       end
       object TeeCommander1: TTeeCommander
         Left = 1
-        Top = 30
+        Top = 25
         Width = 999
         Height = 33
         Align = alTop
@@ -317,8 +362,8 @@ object MForm: TMForm
     Top = 512
   end
   object TVPopupMenu: TPopupMenu
-    Left = 128
-    Top = 528
+    Left = 144
+    Top = 520
     object Load1: TMenuItem
       Action = LoadModelA
     end

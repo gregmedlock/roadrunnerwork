@@ -1344,9 +1344,19 @@ void RoadRunner::setSelectionList(const string& list)
 
 // Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
 //              " time, species names, , volume, reaction rates and rates of change (speciesName')")
-void RoadRunner::setSelectionList(const StringList& newSelectionList)
+void RoadRunner::setSelectionList(const StringList& _selList)
 {
-    selectionList.resize(newSelectionList.Count());// = new TSelectionRecord[newSelectionList.Count()];
+    StringList newSelectionList(_selList);
+
+    //Make sure time is the first 'selection'. If not, add it
+    if(newSelectionList.Count() && newSelectionList[0] != "time")
+    {
+        newSelectionList.InsertAt(0, "time");
+    }
+
+    selectionList.clear();
+    selectionList.resize(newSelectionList.Count());
+
     StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList bs = mModelGenerator->getBoundarySpeciesList();
     //ArrayList rs = mModelGenerator->getReactionNames();
@@ -1359,14 +1369,14 @@ void RoadRunner::setSelectionList(const StringList& newSelectionList)
         // Check for species
         for (int j = 0; j < fs.Count(); j++)
         {
-            if ((string)newSelectionList[i] == (string)fs[j])
+            if (newSelectionList[i] == (string)fs[j])
             {
                 selectionList[i].index = j;
                 selectionList[i].selectionType = TSelectionType::clFloatingSpecies;
                 break;
             }
 
-            if ((string)newSelectionList[i] == "[" + (string)fs[j] + "]")
+            if (newSelectionList[i] == "[" + (string)fs[j] + "]")
             {
                 selectionList[i].index = j;
                 selectionList[i].selectionType = TSelectionType::clFloatingAmount;
@@ -1374,7 +1384,7 @@ void RoadRunner::setSelectionList(const StringList& newSelectionList)
             }
 
             // Check for species rate of change
-            if ((string)newSelectionList[i] == (string)fs[j] + "'")
+            if (newSelectionList[i] == (string)fs[j] + "'")
             {
                 selectionList[i].index = j;
                 selectionList[i].selectionType = TSelectionType::clRateOfChange;
@@ -1400,7 +1410,7 @@ void RoadRunner::setSelectionList(const StringList& newSelectionList)
         }
 
 
-        if ((string)newSelectionList[i] == "time")
+        if (newSelectionList[i] == "time")
         {
             selectionList[i].selectionType = TSelectionType::clTime;
         }
@@ -1474,7 +1484,6 @@ void RoadRunner::setSelectionList(const StringList& newSelectionList)
 //        }
 
     }
-    int size = selectionList.size();
 }
 
 
