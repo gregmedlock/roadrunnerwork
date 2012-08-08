@@ -2,7 +2,7 @@ object MForm: TMForm
   Left = 0
   Top = 0
   Caption = 'RoadRunner UI'
-  ClientHeight = 688
+  ClientHeight = 699
   ClientWidth = 1220
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,22 +19,13 @@ object MForm: TMForm
     Left = 0
     Top = 0
     Width = 217
-    Height = 669
+    Height = 680
     Align = alLeft
     TabOrder = 0
-    object Splitter1: TSplitter
-      Left = 1
-      Top = 568
-      Width = 215
-      Height = 3
-      Cursor = crVSplit
-      Align = alBottom
-      ExplicitLeft = -17
-      ExplicitTop = 637
-    end
+    ExplicitHeight = 669
     object Splitter3: TSplitter
       Left = 1
-      Top = 450
+      Top = 429
       Width = 215
       Height = 3
       Cursor = crVSplit
@@ -86,87 +77,129 @@ object MForm: TMForm
         OnSelect = modelFoldersCBSelect
       end
     end
-    object GroupBox3: TGroupBox
-      Left = 1
-      Top = 453
-      Width = 215
-      Height = 115
-      Align = alBottom
-      Caption = 'Settings'
-      TabOrder = 1
-      object mStartTimeE: mtkFloatLabeledEdit
-        Left = 15
-        Top = 40
-        Width = 50
-        Height = 21
-        EditLabel.Width = 49
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Start Time'
-        Enabled = False
-        TabOrder = 0
-        Text = '0.00'
-      end
-      object mEndTimeE: mtkFloatLabeledEdit
-        Left = 15
-        Top = 80
-        Width = 50
-        Height = 21
-        EditLabel.Width = 43
-        EditLabel.Height = 13
-        EditLabel.Caption = 'End Time'
-        Enabled = False
-        TabOrder = 1
-        Text = '0.00'
-      end
-      object mNrOfSimulationPointsE: mtkIntLabeledEdit
-        Left = 111
-        Top = 41
-        Width = 57
-        Height = 21
-        EditLabel.Width = 56
-        EditLabel.Height = 13
-        EditLabel.Caption = 'Nr of Points'
-        Enabled = False
-        TabOrder = 2
-        Text = '0'
-      end
-    end
     object TFileSelectionFrame1: TFileSelectionFrame
       Left = 1
       Top = 129
       Width = 215
-      Height = 321
+      Height = 300
       Align = alClient
-      TabOrder = 2
+      TabOrder = 1
+      ExplicitHeight = 321
     end
-    object SelList: TCheckListBox
+    object Panel4: TPanel
       Left = 1
-      Top = 571
+      Top = 432
       Width = 215
-      Height = 97
+      Height = 247
       Align = alBottom
-      ItemHeight = 13
-      TabOrder = 3
-      OnClick = SelListClick
+      TabOrder = 2
+      ExplicitTop = 429
+      object GroupBox3: TGroupBox
+        Left = 1
+        Top = 1
+        Width = 213
+        Height = 64
+        Align = alTop
+        Caption = 'Simulation Settings'
+        TabOrder = 0
+        object mNrOfSimulationPointsE: mtkIntLabeledEdit
+          Left = 139
+          Top = 35
+          Width = 57
+          Height = 21
+          EditLabel.Width = 56
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Nr of Points'
+          Enabled = False
+          TabOrder = 0
+          Text = '0'
+        end
+        object mStartTimeE: mtkFloatLabeledEdit
+          Left = 7
+          Top = 35
+          Width = 50
+          Height = 21
+          EditLabel.Width = 49
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Start Time'
+          Enabled = False
+          TabOrder = 1
+          Text = '0.00'
+        end
+        object mEndTimeE: mtkFloatLabeledEdit
+          Left = 71
+          Top = 35
+          Width = 50
+          Height = 21
+          EditLabel.Width = 43
+          EditLabel.Height = 13
+          EditLabel.Caption = 'End Time'
+          Enabled = False
+          TabOrder = 2
+          Text = '0.00'
+        end
+      end
+      object Panel5: TPanel
+        Left = 1
+        Top = 65
+        Width = 213
+        Height = 181
+        Align = alClient
+        TabOrder = 1
+        ExplicitTop = 120
+        ExplicitHeight = 126
+        object SelList: TCheckListBox
+          Left = 1
+          Top = 1
+          Width = 79
+          Height = 179
+          Align = alClient
+          ItemHeight = 13
+          TabOrder = 0
+          OnClick = SelListClick
+          ExplicitWidth = 95
+          ExplicitHeight = 139
+        end
+        object GroupBox2: TGroupBox
+          Left = 80
+          Top = 1
+          Width = 132
+          Height = 179
+          Align = alRight
+          Caption = 'Model'
+          TabOrder = 1
+          ExplicitHeight = 139
+          object Button2: TButton
+            Left = 24
+            Top = 136
+            Width = 75
+            Height = 25
+            Action = UnLoadModelA
+            TabOrder = 0
+          end
+        end
+      end
     end
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 669
+    Top = 680
     Width = 1220
     Height = 19
     Panels = <>
+    ExplicitTop = 669
   end
   object Panel2: TPanel
     Left = 217
     Top = 0
     Width = 1003
-    Height = 669
+    Height = 680
     Align = alClient
     TabOrder = 2
+    ExplicitHeight = 669
     object Splitter2: TSplitter
       Left = 1
-      Top = 387
+      Top = 398
       Width = 1001
       Height = 3
       Cursor = crVSplit
@@ -179,7 +212,7 @@ object MForm: TMForm
       Left = 1
       Top = 1
       Width = 1001
-      Height = 386
+      Height = 397
       Border.Color = 9423874
       Border.Width = 7
       Gradient.MidColor = clNone
@@ -204,7 +237,7 @@ object MForm: TMForm
       Legend.Symbol.Width = 40
       Legend.Title.Text.Strings = (
         '')
-      Legend.Top = 19
+      Legend.Top = 20
       Legend.TopPercent = 5
       Legend.TopPos = 5
       Title.Brush.Gradient.MidColor = clNone
@@ -239,6 +272,7 @@ object MForm: TMForm
       TabOrder = 0
       ExplicitLeft = 5
       ExplicitTop = -1
+      ExplicitHeight = 386
       ColorPaletteIndex = 15
       object Series1: TLineSeries
         Marks.Arrow.Visible = True
@@ -264,55 +298,47 @@ object MForm: TMForm
     end
     object Panel3: TPanel
       Left = 1
-      Top = 390
+      Top = 401
       Width = 1001
       Height = 278
       Align = alBottom
       Caption = 'Panel3'
       TabOrder = 1
+      ExplicitTop = 390
       object mLogMemo: TMemo
         Left = 1
-        Top = 58
+        Top = 22
         Width = 999
-        Height = 219
+        Height = 255
         Align = alClient
         PopupMenu = MemoPopup
         ReadOnly = True
         ScrollBars = ssBoth
         TabOrder = 0
+        ExplicitTop = 58
+        ExplicitHeight = 219
       end
       object ToolBar1: TToolBar
         Left = 1
         Top = 1
         Width = 999
-        Height = 24
+        Height = 21
+        AutoSize = True
         ButtonHeight = 21
-        ButtonWidth = 32
+        ButtonWidth = 47
         Caption = 'ToolBar1'
         ShowCaptions = True
         TabOrder = 1
-        object ToolButton1: TToolButton
+        object ToolButton2: TToolButton
           Left = 0
+          Top = 0
+          Action = SimulateA
+        end
+        object ToolButton1: TToolButton
+          Left = 47
           Top = 0
           Action = ClearMemoA
         end
-        object Button2: TButton
-          Left = 32
-          Top = 0
-          Width = 94
-          Height = 21
-          Action = SimulateA
-          TabOrder = 0
-        end
-      end
-      object TeeCommander1: TTeeCommander
-        Left = 1
-        Top = 25
-        Width = 999
-        Height = 33
-        Align = alTop
-        ParentShowHint = False
-        TabOrder = 2
       end
     end
   end
@@ -347,6 +373,10 @@ object MForm: TMForm
       Caption = 'loadAvailableSymbolsA'
       OnExecute = loadAvailableSymbolsAExecute
     end
+    object UnLoadModelA: TAction
+      Caption = 'Unload'
+      OnExecute = UnLoadModelAExecute
+    end
   end
   object mIniFileC: mtkIniFileC
     IniFileName = 'RR.ini'
@@ -362,8 +392,8 @@ object MForm: TMForm
     Top = 512
   end
   object TVPopupMenu: TPopupMenu
-    Left = 144
-    Top = 520
+    Left = 112
+    Top = 208
     object Load1: TMenuItem
       Action = LoadModelA
     end

@@ -57,7 +57,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		DoubleMatrix                   *_Nr;
 
 		Compiler                        mCompiler;
-		HINSTANCE                       mModelDllHandle;
 		void                            AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime);
         bool                            PopulateResult();
 		bool                            IsNleqAvailable();
@@ -88,7 +87,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		double*                         mL0;
 		double*                         mN;
 		double*                         mNr;
-		bool                            modelLoaded;
+//		bool                            modelLoaded;
+		HINSTANCE                       mModelDLL;
 		string                          mCurrentSBML;
 		ModelFromC*                     mModel;
 		double                          mTimeStart;
@@ -101,9 +101,12 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		CGenerator*						GetCGenerator();
 		CSharpGenerator*				GetCSharpGenerator();
 		//Functions --------------------------------------------------------------------
+
 										RoadRunner();
 		virtual                        ~RoadRunner();
         string                          GetModelName();
+        bool                            unLoadModel();
+        bool                            unLoadModelDLL();
         CvodeInterface*                 GetCVodeInterface();
         NLEQInterface*                  GetNLEQInterface();
 		int                             CreateSelectionList();
