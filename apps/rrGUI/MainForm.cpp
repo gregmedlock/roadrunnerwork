@@ -21,6 +21,7 @@
 #pragma link "TeeComma"
 #pragma link "TeeEdit"
 #pragma link "TeeTools"
+#pragma link "mtkSTDStringEdit"
 #pragma resource "*.dfm"
 TMForm *MForm;
 //---------------------------------------------------------------------------
@@ -47,7 +48,7 @@ __fastcall TMForm::TMForm(TComponent* Owner)
 	TFileSelectionFrame1->TreeView1->PopupMenu  =  TVPopupMenu;
 
     TFileSelectionFrame1->FSToolBar->Visible = false;
-
+    TFileSelectionFrame1->TreeView1->ShowRoot = false;
     startupTimer->Enabled = true;
 
     //Setup road runner
@@ -80,7 +81,8 @@ void __fastcall TMForm::modelFoldersCBSelect(TObject *Sender)
         TFileSelectionFrame1->RemoveMonitoredFolders();
 
         Log(rr::lInfo)<<"Model folder: "<<mCurrentModelsFolder<<" is selected..";
-        TFileSelectionFrame1->MonitorFolder(mCurrentModelsFolder, "*.xml");
+
+        TFileSelectionFrame1->MonitorFolder(mCurrentModelsFolder, filterEdit->GetString());
     	TFileSelectionFrame1->ReScanDataFolderAExecute(NULL);
     }
 }
@@ -156,6 +158,7 @@ void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
             {
                 Log(rr::lInfo)<<"Loaded model with no exception";
                 loadAvailableSymbolsA->Execute();
+                Log(rr::lInfo)<<mRR->getAvailableSymbols();
 
                 //Enable simulate action
                 SimulateA->Enabled = true;
@@ -237,16 +240,24 @@ void __fastcall TMForm::loadAvailableSymbolsAExecute(TObject *Sender)
     {
         SelList->Clear();
         ArrayList2 symbols = mRR->getAvailableSymbols();
-        StringList fs = symbols.GetSubList("Floating Species");
-        Log(rr::lInfo)<<fs;
 
-        //Add floating species to list box
-        for(int i = 0; i < fs.Count(); i++)
-        {
-            SelList->Items->Add(fs[i].c_str());
-            SelList->Checked[i] = true;
-        }
+        StringList fs = symbols.GetSubList("Floating Species");
+        StringList bs = symbols.GetSubList("Boundary Species");
+        AddItemsToListBox(fs);
+        AddItemsToListBox(bs);
         CheckUI();
+    }
+}
+
+void TMForm::AddItemsToListBox(const StringList& items)
+{
+    Log(rr::lInfo)<<items;
+
+    //Add floating species to list box
+    for(int i = 0; i < items.Count(); i++)
+    {
+        SelList->Items->Add(items[i].c_str());
+        SelList->Checked[i] = true;
     }
 }
 
@@ -334,6 +345,21 @@ void __fastcall TMForm::UnLoadModelAExecute(TObject *Sender)
     }
 
     mRR->unLoadModel();
+}
+
+
+void __fastcall TMForm::filterEditKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
+{
+    if(Key == VK_RETURN)
+    {
+        modelFoldersCBSelect(NULL);
+    }
+}
+
+
+void __fastcall TMForm::Button4Click(TObject *Sender)
+{
+    TFileSelectionFrame1->TreeView1->ShowRoot = !TFileSelectionFrame1->TreeView1->ShowRoot;
 }
 
 

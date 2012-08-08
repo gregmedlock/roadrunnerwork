@@ -270,7 +270,7 @@ bool SBMLModelSimulation::LoadSBMLFromFile()                    //Use current fi
     {
         return false;
     }
-    bool val = mEngine->LoadSBMLFromFile(GetModelsFullFilePath());
+    bool val = mEngine->loadSBMLFromFile(GetModelsFullFilePath());
     return val;
 }
 

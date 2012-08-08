@@ -25,6 +25,9 @@
 #include "TeeEdit.hpp"
 #include "rrStringList.h"
 #include "TeeTools.hpp"
+#include "mtkSTDStringEdit.h"
+#include "rrSimulationSettings.h"
+
 namespace rr
 {
 class RoadRunner;
@@ -90,6 +93,12 @@ __published:	// IDE-managed Components
     TAction *UnLoadModelA;
     TButton *Button3;
     TLabel *mModelNameLbl;
+    TPageControl *PageControl1;
+    TTabSheet *TabSheet1;
+    TTabSheet *TabSheet2;
+    mtkSTDStringEdit *filterEdit;
+    TButton *Button4;
+    TButton *Button5;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -104,6 +113,9 @@ __published:	// IDE-managed Components
     void __fastcall ChartEditor2Click(TObject *Sender);
     void __fastcall SelListClick(TObject *Sender);
     void __fastcall UnLoadModelAExecute(TObject *Sender);
+    void __fastcall filterEditKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+    void __fastcall Button4Click(TObject *Sender);
+
 
 
 private:	// User declarations
@@ -123,6 +135,8 @@ private:	// User declarations
     void            __fastcall  CheckUI();
     StringList                  GetCheckedSpecies();
     TColor                      GetColor(int i);
+    void                        AddItemsToListBox(const StringList& items);
+    SimulationSettings          mSettings;
 
 public:		// User declarations
                     __fastcall  TMForm(TComponent* Owner);

@@ -23,6 +23,7 @@ class RR_DECLSPEC SimulationSettings : public rrObject
         vector<string>          mVariables;
         vector<string>          mAmount;
         vector<string>          mConcentration;
+        bool                    LoadFromFile(const string& fName);
 };
 
 
