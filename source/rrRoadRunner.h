@@ -15,14 +15,13 @@
 #include "rrSimulationData.h"
 #include "rrSimulationSettings.h"
 #include "rrCompiler.h"
-#include "rrLibStructSupport.h"
-#include "libstruct/lsLibla.h"
+#include "libstruct/lsLibStructural.h"
 #include "rrArrayList.h"
 #include "rrArrayList2.h"
 #include "rrXMLDocument.h"
 using std::string;
 using namespace LIB_LA;
-
+using namespace LIB_STRUCTURAL;
 namespace rr
 {
 class ModelGenerator;
@@ -31,14 +30,13 @@ class ModelFromC;
 class CSharpGenerator;
 class CGenerator;
 
-
-
 class RR_DECLSPEC RoadRunner : public rrObject
 {
 	private:
 		const double                    DiffStepSize;
 		const string                    emptyModelStr;
 		const double                    STEADYSTATE_THRESHOLD;
+        DoubleMatrix                    mRawSimulationData;
 		SimulationData                  mSimulationData;
 		string                          mModelXMLFileName;
 		string                          mModelCode;
@@ -48,6 +46,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		CvodeInterface                 *mCVode;
 		ISteadyStateSolver             *steadyStateSolver;
 		vector<TSelectionRecord>        selectionList;
+        int                             CreateDefaultSelectionList();
 		ModelGenerator                 *mModelGenerator;    //Pointer to one of the below ones..
 		ModelGenerator                 *mCSharpGenerator;
 		ModelGenerator                 *mCGenerator;
@@ -57,11 +56,10 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		DoubleMatrix                   *_N;
 		DoubleMatrix                   *_Nr;
 
-//        rrXMLDoc                        mCapabilities;
-
 		Compiler                        mCompiler;
 		HINSTANCE                       mModelDllHandle;
 		void                            AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime);
+        bool                            PopulateResult();
 		bool                            IsNleqAvailable();
 		void                            emptyModel();
 		double                          GetValueForRecord(const TSelectionRecord& record);
@@ -97,17 +95,18 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		double                          mTimeEnd;
 		int                             mNumPoints;
 		string                          NL;
-		StructAnalysis                  mStructAnalysis;                    //Object to facilitate calls to libStruct library
-		LibStructural                  *mLibStructInstance;
+//		StructAnalysis                  mStructAnalysis;                    //Object to facilitate calls to libStruct library
+		LibStructural                  *mLS;                                //Handle to libstruct library
 
 		CGenerator*						GetCGenerator();
 		CSharpGenerator*				GetCSharpGenerator();
 		//Functions --------------------------------------------------------------------
 										RoadRunner();
 		virtual                        ~RoadRunner();
+        string                          GetModelName();
         CvodeInterface*                 GetCVodeInterface();
         NLEQInterface*                  GetNLEQInterface();
-		bool                            CreateSelectionList();
+		int                             CreateSelectionList();
 		bool                            SetTempFileFolder(const string& folder);
 		string                          GetTempFileFolder();
 		void                            PartOfSimulation(SBMLModelSimulation* simulation){mSimulation = simulation;}

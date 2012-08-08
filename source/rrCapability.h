@@ -53,7 +53,7 @@ string CapabilityType<T>::GetValueAsString() const
     return ToString(mValue);
 }
 
-#if defined(_MSVC)
+#if defined(_MSC_VER)
 template<>
 string CapabilityType<int>::GetValueAsString() const;
 

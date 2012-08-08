@@ -2,8 +2,8 @@ object MForm: TMForm
   Left = 0
   Top = 0
   Caption = 'RoadRunner UI'
-  ClientHeight = 728
-  ClientWidth = 1217
+  ClientHeight = 688
+  ClientWidth = 1220
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,12 +19,12 @@ object MForm: TMForm
     Left = 0
     Top = 0
     Width = 217
-    Height = 709
+    Height = 669
     Align = alLeft
     TabOrder = 0
     object Splitter1: TSplitter
       Left = 1
-      Top = 608
+      Top = 568
       Width = 215
       Height = 3
       Cursor = crVSplit
@@ -34,7 +34,7 @@ object MForm: TMForm
     end
     object Splitter3: TSplitter
       Left = 1
-      Top = 490
+      Top = 450
       Width = 215
       Height = 3
       Cursor = crVSplit
@@ -88,13 +88,12 @@ object MForm: TMForm
     end
     object GroupBox3: TGroupBox
       Left = 1
-      Top = 493
+      Top = 453
       Width = 215
       Height = 115
       Align = alBottom
       Caption = 'Settings'
       TabOrder = 1
-      ExplicitTop = 456
       object mStartTimeE: mtkFloatLabeledEdit
         Left = 15
         Top = 40
@@ -136,42 +135,38 @@ object MForm: TMForm
       Left = 1
       Top = 129
       Width = 215
-      Height = 361
+      Height = 321
       Align = alClient
       TabOrder = 2
-      ExplicitHeight = 324
     end
     object SelList: TCheckListBox
       Left = 1
-      Top = 611
+      Top = 571
       Width = 215
       Height = 97
       Align = alBottom
       ItemHeight = 13
       TabOrder = 3
-      ExplicitLeft = 32
-      ExplicitTop = 648
-      ExplicitWidth = 121
     end
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 709
-    Width = 1217
+    Top = 669
+    Width = 1220
     Height = 19
     Panels = <>
   end
   object Panel2: TPanel
     Left = 217
     Top = 0
-    Width = 1000
-    Height = 709
+    Width = 1003
+    Height = 669
     Align = alClient
     TabOrder = 2
     object Splitter2: TSplitter
       Left = 1
-      Top = 341
-      Width = 998
+      Top = 387
+      Width = 1001
       Height = 3
       Cursor = crVSplit
       Align = alBottom
@@ -182,38 +177,59 @@ object MForm: TMForm
     object Chart1: TChart
       Left = 1
       Top = 1
-      Width = 998
-      Height = 340
+      Width = 1001
+      Height = 386
       Border.Color = clNavy
       Border.Visible = True
       BorderRound = 10
       Gradient.EndColor = clGray
-      Gradient.Visible = True
       Legend.Brush.Gradient.Direction = gdTopBottom
       Legend.Brush.Gradient.EndColor = clYellow
       Legend.Brush.Gradient.StartColor = clWhite
       Legend.Brush.Gradient.Visible = True
+      Legend.Title.Text.Strings = (
+        '')
       Title.Text.Strings = (
         'TChart')
+      Title.Visible = False
       View3D = False
       Align = alClient
       BevelOuter = bvNone
+      Color = 8421440
+      PopupMenu = ChartPopup
       TabOrder = 0
-      ColorPaletteIndex = 13
+      ColorPaletteIndex = 2
+      object Series1: TLineSeries
+        Marks.Arrow.Visible = True
+        Marks.Callout.Brush.Color = clBlack
+        Marks.Callout.Arrow.Visible = True
+        Marks.Visible = False
+        LinePen.Color = 4210816
+        LinePen.Width = 3
+        Pointer.Brush.Gradient.EndColor = 10593629
+        Pointer.Gradient.EndColor = 10593629
+        Pointer.InflateMargins = True
+        Pointer.Style = psRectangle
+        Pointer.Visible = False
+        XValues.Name = 'X'
+        XValues.Order = loAscending
+        YValues.Name = 'Y'
+        YValues.Order = loNone
+      end
     end
     object Panel3: TPanel
       Left = 1
-      Top = 344
-      Width = 998
-      Height = 364
+      Top = 390
+      Width = 1001
+      Height = 278
       Align = alBottom
       Caption = 'Panel3'
       TabOrder = 1
       object mLogMemo: TMemo
         Left = 1
-        Top = 30
-        Width = 996
-        Height = 333
+        Top = 63
+        Width = 999
+        Height = 214
         Align = alClient
         PopupMenu = MemoPopup
         ReadOnly = True
@@ -223,7 +239,7 @@ object MForm: TMForm
       object ToolBar1: TToolBar
         Left = 1
         Top = 1
-        Width = 996
+        Width = 999
         Height = 29
         ButtonHeight = 21
         ButtonWidth = 32
@@ -244,11 +260,20 @@ object MForm: TMForm
           TabOrder = 0
         end
       end
+      object TeeCommander1: TTeeCommander
+        Left = 1
+        Top = 30
+        Width = 999
+        Height = 33
+        Align = alTop
+        ParentShowHint = False
+        TabOrder = 2
+      end
     end
   end
   object RRActions: TActionList
-    Left = 320
-    Top = 464
+    Left = 528
+    Top = 512
     object CompileA: TAction
       Caption = 'CompileA'
     end
@@ -288,8 +313,8 @@ object MForm: TMForm
     Enabled = False
     Interval = 100
     OnTimer = startupTimerTimer
-    Left = 528
-    Top = 344
+    Left = 712
+    Top = 512
   end
   object TVPopupMenu: TPopupMenu
     Left = 128
@@ -302,18 +327,35 @@ object MForm: TMForm
     end
   end
   object MiscActions: TActionList
-    Left = 592
-    Top = 496
+    Left = 584
+    Top = 512
     object ClearMemoA: TAction
       Caption = 'Clear'
       OnExecute = ClearMemoAExecute
     end
   end
   object MemoPopup: TPopupMenu
-    Left = 808
-    Top = 480
+    Left = 648
+    Top = 512
     object Clear1: TMenuItem
       Action = ClearMemoA
+    end
+  end
+  object ChartEditor1: TChartEditor
+    Chart = Chart1
+    GalleryHeight = 0
+    GalleryWidth = 0
+    Height = 0
+    Width = 0
+    Left = 384
+    Top = 112
+  end
+  object ChartPopup: TPopupMenu
+    Left = 552
+    Top = 144
+    object ChartEditor2: TMenuItem
+      Caption = 'ChartEditor'
+      OnClick = ChartEditor2Click
     end
   end
 end

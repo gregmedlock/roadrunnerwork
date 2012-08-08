@@ -7,6 +7,7 @@
 #include "rrCapsSupport.h"
 #include "rrCVodeInterface.h"
 #include "rrCapabilitiesSection.h"
+#include "rrCapability.h"
 //---------------------------------------------------------------------------
 
 namespace rr

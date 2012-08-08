@@ -7,15 +7,16 @@
 #include "rrStringList.h"
 #include "rrSymbolList.h"
 #include "rrCodeBuilder.h"
-#include "rrLibStructSupport.h"
 #include "rrNOMSupport.h"
 #include "rrScanner.h"
 #include "libstruct/lsMatrix.h"
+#include "libstruct/lsLibStructural.h"
 
 using std::string;
 using std::vector;
 using std::list;
 using namespace LIB_LA;
+using namespace LIB_STRUCTURAL;
 namespace rr
 {
 class RoadRunner;
@@ -43,7 +44,8 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         StringList                          dependentSpeciesList;
         StringList                          independentSpeciesList;
         int                                 mNumModifiableSpeciesReferences;
-        StructAnalysis                      mStructAnalysis;                    //Object to facilitate calls to libStruct library
+//        StructAnalysis                      mStructAnalysis;                   //Object to facilitate calls to libStruct library
+		LibStructural                      *mLibStruct;                          //Handle to libstruct library
         NOMSupport                          mNOM;                                //Object that provide some wrappers and new "NOM" functions
         IntStringHashTable                  mMapRateRule;
         SymbolList                          boundarySpeciesList;

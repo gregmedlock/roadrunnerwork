@@ -99,8 +99,9 @@ class Matrix
 
                                     //! returns the selected matrix element (const)
         const T&                    operator()(const unsigned int & row, const unsigned int & col) const;
+        const T&                    Element(const unsigned int & row, const unsigned int & col) const;
 
-        friend const Matrix<T>             operator*(const Matrix<T>& lhs, const double& rhs);
+        friend const Matrix<T>      operator*(const Matrix<T>& lhs, const double& rhs);
 //        friend const mtkMatrix<T>             operator*(const double& rVal, const mtkMatrix<T>& Rmat);
 };
 
@@ -514,6 +515,12 @@ T& Matrix<T>::operator()(const unsigned int & row, const unsigned int & col)
 
 template<class T>
 const T& Matrix<T>::operator()(const unsigned int & row, const unsigned int & col) const
+{
+    return *(_Array + row * _Cols + col);
+}
+
+template<class T>
+const T& Matrix<T>::Element(const unsigned int & row, const unsigned int & col) const
 {
     return *(_Array + row * _Cols + col);
 }

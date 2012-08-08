@@ -16,6 +16,7 @@
 #include "rrModelFromC.h"
 #include "rrSBMLModelSimulation.h"
 #include "libstruct/lsLA.h"
+#include "libstruct/lsLibla.h"
 #include "rrModelState.h"
 #include "rrArrayList2.h"
 #include "rrCapsSupport.h"
@@ -23,6 +24,7 @@
 
 using namespace std;
 using namespace LIB_LA;
+
 namespace rr
 {
 
@@ -54,6 +56,7 @@ RoadRunner::RoadRunner() :
     mComputeAndAssignConservationLaws(false),
     mConservedTotalChanged(false)
 {
+     mLS = LibStructural::getInstance();
      Log(lDebug4)<<"In RoadRunner CTOR";
      mCSharpGenerator    = new CSharpGenerator(this);
      mCGenerator         = new CGenerator(this);//Todo: memoryleak
@@ -131,12 +134,33 @@ bool RoadRunner::SetTempFileFolder(const string& folder)
 	}
 }
 
-string RoadRunner::GetTempFileFolder ()
+string RoadRunner::GetTempFileFolder()
 {
 	return mTempFileFolder;
 }
 
-bool RoadRunner::CreateSelectionList()
+int RoadRunner::CreateDefaultSelectionList()
+{
+	StringList theList;
+    StringList oFloating  = getFloatingSpeciesNames();
+
+	theList.Add("time");
+    for(int i = 0; i < oFloating.Count(); i++)
+    {
+        theList.Add(oFloating[i]);
+    }
+
+    setSelectionList(theList);
+
+	Log(lInfo)<<"The following is selected:";
+	for(int i = 0; i < selectionList.size(); i++)
+	{
+		Log(lInfo)<<selectionList[i];
+	}
+    return selectionList.size();
+}
+
+int RoadRunner::CreateSelectionList()
 {
 	//read from settings the variables found in the amounts and concentrations lists
 	StringList theList;
@@ -164,14 +188,14 @@ bool RoadRunner::CreateSelectionList()
     if(theList.Count() < 2)
     {
         //AutoSelect
-                //Get All floating species
+        //Get All floating species
        StringList oFloating  = getFloatingSpeciesNames();
        for(int i = 0; i < oFloating.Count(); i++)
        {
             theList.Add(oFloating[i]);
        }
-
     }
+
 	setSelectionList(theList);
 
 	Log(lInfo)<<"The following is selected:";
@@ -183,11 +207,9 @@ bool RoadRunner::CreateSelectionList()
 	if(selectionList.size() < 2)
 	{
 		Log(lWarning)<<"You have not made a selection. No data is selected";
-
-
-		return false;
+		return 0;
 	}
-	return true;
+	return selectionList.size();
 }
 
 ModelGenerator* RoadRunner::GetCodeGenerator()
@@ -385,7 +407,7 @@ void RoadRunner::AddNthOutputToResult(DoubleMatrix& results, int nRow, double dC
     {
         double out =  GetNthSelectedOutput(j, dCurrentTime);
         results(nRow,j) = out;
-        Log(lDebug)<<"Adding result to row\t"<<nRow<<" : "<<out;
+        Log(lDebug3)<<"Adding result to row\t"<<nRow<<" : "<<out;
     }
 }
 
@@ -425,6 +447,11 @@ DoubleMatrix RoadRunner::runSimulation()
 
 	double hstep = (mTimeEnd - mTimeStart) / (mNumPoints - 1);
     int nrCols = selectionList.size();
+    if(!nrCols)
+    {
+        nrCols = CreateDefaultSelectionList();
+    }
+
     DoubleMatrix results(mNumPoints, nrCols);
 
     if(!mModel)
@@ -499,17 +526,19 @@ bool RoadRunner::Simulate()
         throw(Exception("There is no model loaded, can't simulate"));
     }
 
+	mRawSimulationData = simulate();
+
     //Populate simulation result
-    DoubleMatrix data;
-	data = simulate();
+    PopulateResult();
+    return true;
+}
 
+bool RoadRunner::PopulateResult()
+{
     ArrayList2 l = getAvailableSymbols();
-    Log(lError)<<l;
-
     StringList list = getSelectionList();
-    Log(lError)<<list;
     mSimulationData.SetColumnNames(list);
-    mSimulationData.SetData(data);
+    mSimulationData.SetData(mRawSimulationData);
     return true;
 }
 
@@ -532,13 +561,12 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 
 	loadSBML(sbml);
 
-    DoubleMatrix data;
-    data = simulate();
+    mRawSimulationData = simulate();
 
     StringList list = getSelectionList();
 
     TextWriter writer(cout);
-    DumpResults(writer, data, list);
+    DumpResults(writer, mRawSimulationData, list);
     return true;
 }
 
@@ -664,12 +692,10 @@ bool RoadRunner::loadSBML(const string& sbml)
         return false;
     }
 
-    mLibStructInstance = mStructAnalysis.GetInstance();
-
-    _L  = mStructAnalysis.GetLinkMatrix();
-    _L0 = mStructAnalysis.GetL0Matrix();
-    _N  = mStructAnalysis.GetReorderedStoichiometryMatrix();
-    _Nr = mLibStructInstance->getNrMatrix();
+    _L  = mLS->getLinkMatrix();
+    _L0 = mLS->getL0Matrix();
+    _N  = mLS->getReorderedStoichiometryMatrix();
+    _Nr = mLS->getNrMatrix();
     return true;
 }
 
@@ -924,7 +950,9 @@ DoubleMatrix RoadRunner::simulateEx(const double& startTime, const double& endTi
         mTimeEnd = endTime;
         mTimeStart = startTime;
         mNumPoints = numberOfPoints;
-        return runSimulation();
+        mRawSimulationData =runSimulation();
+        PopulateResult();
+        return mRawSimulationData;
     }
     catch (const Exception& e)
     {
@@ -1520,7 +1548,7 @@ LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
         {
             LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
             LIB_LA::DoubleMatrix I1 = mult((*_Nr), uelast);
-            _L = mStructAnalysis.GetLinkMatrix();
+            _L = mLS->getLinkMatrix();
             return mult(I1, (*_L));
         }
         throw SBWApplicationException(emptyModelStr);
@@ -1641,7 +1669,7 @@ DoubleMatrix RoadRunner::getStoichiometryMatrix()
     {
         if (modelLoaded)
         {
-            LibStructural::DoubleMatrix* aMat = mStructAnalysis.GetInstance()->getStoichiometryMatrix();
+            LibStructural::DoubleMatrix* aMat = mLS->getStoichiometryMatrix();
 
             if(aMat)
             {
@@ -1675,7 +1703,7 @@ DoubleMatrix RoadRunner::getConservationMatrix()
     {
        if (modelLoaded)
 	   {
-		   LibStructural::DoubleMatrix* aMat = mStructAnalysis.GetInstance()->getGammaMatrix(); 
+		   LibStructural::DoubleMatrix* aMat = mLS->getGammaMatrix();
             if (aMat)
             {
                 mat.resize(aMat->numRows(), aMat->numCols());
@@ -1705,7 +1733,8 @@ int RoadRunner::getNumberOfDependentSpecies()
     {
         if (modelLoaded)
         {
-            return mStructAnalysis.GetInstance()->getNumDepSpecies();
+            //return mStructAnalysis.GetInstance()->getNumDepSpecies();
+            return mLS->getNumDepSpecies();
         }
 
         throw SBWApplicationException(emptyModelStr);
@@ -1724,7 +1753,7 @@ int RoadRunner::getNumberOfIndependentSpecies()
     {
         if (modelLoaded)
         {
-            return mStructAnalysis.GetInstance()->getNumIndSpecies();
+            return mLS->getNumIndSpecies();
         }
         //return StructAnalysis.getNumIndSpecies();
         throw SBWApplicationException(emptyModelStr);
@@ -2537,6 +2566,11 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
 //        }
 //
 //
+string RoadRunner::GetModelName()
+{
+    return mModelGenerator->mNOM.getModelName();
+}
+
 // Help("Returns the SBML with the current parameterset")
 string RoadRunner::writeSBML()
 {

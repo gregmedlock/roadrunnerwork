@@ -1,13 +1,15 @@
-#ifdef MTK_PCH
-#include "mtk_pch.h"
+#ifdef USE_PCH
+#include "rr_pch.h"
 #endif
 #pragma hdrstop
 #include "MainForm.h"
-#include "mtkFileUtils.h"
-#include "mtkStringUtils.h"
+//#include "mtkFileUtils.h"
+//#include "mtkStringUtils.h"
 #include "rrRoadRunner.h"
 #include "rrLogger.h"
 #include "rrException.h"
+#include "rrStringUtils.h"
+#include "rrUtils.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "Chart"
@@ -17,11 +19,14 @@
 #pragma link "TeEngine"
 #pragma link "TeeProcs"
 #pragma link "TFileSelectionFrame"
+#pragma link "Series"
+#pragma link "TeeComma"
+#pragma link "TeeEdit"
 #pragma resource "*.dfm"
 TMForm *MForm;
 //---------------------------------------------------------------------------
-using namespace mtk;
 using namespace rr;
+
 __fastcall TMForm::TMForm(TComponent* Owner)
     : TForm(Owner),
     mLogFileSniffer("", this),
@@ -32,7 +37,7 @@ __fastcall TMForm::TMForm(TComponent* Owner)
     mTempDataFolder = "R:\\rrTemp";
 
     //This is roadrunners logger
-    mRRLogFileName = JoinPath(mTempDataFolder, "RoadRunnerUI.log");
+    mRRLogFileName = rr::JoinPath(mTempDataFolder, "RoadRunnerUI.log");
     gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(mRRLogFileName )));
 
     //Setup a logfile sniffer and propagate logs to memo...
@@ -162,7 +167,7 @@ void __fastcall TMForm::selectModelsFolderExecute(TObject *Sender)
         string fldr = ToSTDString(folder);
         fldr = RemoveTrailingSeparator(fldr, "\\");
         fldr = RemoveTrailingSeparator(fldr, "\\");
-        if(FolderExists(fldr))
+        if(rr::FolderExists(fldr))
         {
             mCurrentModelsFolder = ToSTDString(fldr.c_str());
 
@@ -200,9 +205,9 @@ void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
 
         try
         {
-            if(mRR)
+            if(!mRR)
             {
-                delete mRR;
+                //delete mRR;
                 mRR = new RoadRunner;
             }
 
@@ -234,7 +239,7 @@ void __fastcall TMForm::logModelFileAExecute(TObject *Sender)
     if(fName.size())
     {
         Log(rr::lInfo)<<"Model File: "<<  fName;
-        if(!FileExists(fName))
+        if(!rr::FileExists(fName))
         {
             return;
         }
@@ -242,7 +247,7 @@ void __fastcall TMForm::logModelFileAExecute(TObject *Sender)
         ifstream aFile(fName.c_str());
         string  str((std::istreambuf_iterator<char>(aFile)), std::istreambuf_iterator<char>());
 
-        vector<string> strings = SplitString(str,"\n");
+        vector<string> strings = rr::SplitString(str,"\n");
         for(int i = 0; i < strings.size(); i++)
         {
             Log(rr::lInfo)<<strings[i];
@@ -266,7 +271,20 @@ void __fastcall TMForm::SimulateAExecute(TObject *Sender)
 {
     if(mRR)
     {
-        DoubleMatrix result = mRR->simulateEx(0,5, 100);
+        //Setup selection list
+        mRR->simulateEx(0,5, 100);
+        SimulationData data = mRR->GetSimulationResult();
+
+        string resultFileName( rr::JoinPath(mRR->GetTempFileFolder(), mRR->GetModelName()));
+        resultFileName = ChangeFileExtensionTo(resultFileName, ".csv");
+
+        Log(rr::lInfo)<<"Saving result to file: "<<resultFileName;
+
+        ofstream fs(resultFileName.c_str());
+        fs << data;
+        fs.close();
+
+        Plot(data);
     }
 }
 
@@ -284,10 +302,43 @@ void __fastcall TMForm::loadAvailableSymbolsAExecute(TObject *Sender)
         for(int i = 0; i < fs.Count(); i++)
         {
             SelList->Items->Add(fs[i].c_str());
+            SelList->Checked[i] = true;
         }
-
     }
 }
 
+void TMForm::Plot(const rr::SimulationData& result)
+{
+    Chart1->RemoveAllSeries();
 
+    //Fill out data for all series
+    Log(rr::lInfo)<<"Simulation Result"<<result;
+    int nrOfSeries = result.GetNrOfCols() -1; //First one is time
+    StringList colNames = result.GetColumnNames();
+    vector<TLineSeries*> series;
+    for(int i = 0; i < nrOfSeries; i++)
+    {
+        TLineSeries* aSeries = new TLineSeries(Chart1);
+        aSeries->Title = colNames[i+1].c_str();
+        series.push_back(aSeries);
+        Chart1->AddSeries(aSeries);
+    }
+
+    for(int j = 0; j < result.GetNrOfRows(); j++)
+    {
+        double xVal = result(j,0);
+        for(int i = 0; i < nrOfSeries; i++)
+        {
+            series[i]->AddXY(xVal, result(j, i+1), "");
+        }
+    }
+
+
+}
+
+void __fastcall TMForm::ChartEditor2Click(TObject *Sender)
+{
+    ChartEditor1->Execute();
+}
+//---------------------------------------------------------------------------
 

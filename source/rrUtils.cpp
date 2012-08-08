@@ -41,6 +41,7 @@ string GetUsersTempDataFolder()
     }
     return string(lpTempPathBuffer);
 }
+
 string GetFileContent(const string& fName)
 {
 	string content;
@@ -74,6 +75,21 @@ std::size_t IndexOf(std::vector<std::string>& vec, const std::string& elem )
 {
     int index = distance(vec.begin(), find(vec.begin(), vec.end(), elem));
     return index;
+}
+
+// String utils
+string RemoveTrailingSeparator(const string& _folder, const string& sep)
+{
+    if((_folder.size() > 0) && (sep.size() > 0) && (_folder[_folder.size() -1] == sep[0]))
+    {
+        const int endOfPathIndex = _folder.rfind(sep, _folder.size());
+        string folder = _folder.substr(0, endOfPathIndex);
+        return folder;
+    }
+    else
+    {
+        return _folder;
+    }
 }
 
 bool IsNaN(const double& aNum)

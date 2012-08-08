@@ -64,7 +64,7 @@ rrToken.cpp
 rrCVodeInterface.cpp
 rrCvodedll.cpp
 rrNLEQInterface.cpp
-rrLibStructSupport.cpp
+#rrLibStructSupport.cpp
 rrInteropUtils.cpp
 rrDLLEntry.cpp
 rrCapsSupport.cpp
@@ -85,7 +85,7 @@ set_property(TARGET ${target}
                             EXPORT_RR 
                             LIBSBML_STATIC 
                             LIBLAX_STATIC 
-                            STATIC_LIB_LA
+                            LIBSTRUCT_STATIC
                             PUGI_STATIC
                             ) 
 
@@ -118,7 +118,7 @@ set_property(TARGET ${target}-static
                             STATIC_RR 
                             LIBSBML_STATIC
                             LIBLAX_STATIC 
-                            STATIC_LIB_LA
+                            LIBSTRUCT_STATIC
 							PUGI_STATIC
                             ) 
 

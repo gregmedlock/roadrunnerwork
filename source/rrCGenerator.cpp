@@ -131,12 +131,16 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     mfunctionNames.empty();
     mfunctionParameters.empty();
 
-    LibStructural* instance = LibStructural::getInstance();
+    LibStructural* libStruct = LibStructural::getInstance();
     string msg;
     try
     {
         Log(lDebug3)<<"Loading sbml into StructAnalysis";
-        msg = mStructAnalysis.LoadSBML(sASCII);
+        if(!libStruct)
+        {
+            throw;
+        }
+        msg = libStruct->loadSBML(sASCII);
         if(!msg.size())
         {
             Log(lError)<<"Failed loading sbml into StructAnalysis";
@@ -152,14 +156,16 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 
     if (mRR && mRR->mComputeAndAssignConservationLaws)
     {
-        mNumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
-        independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
-        dependentSpeciesList   = mStructAnalysis.GetDependentSpeciesIds();
+        mNumIndependentSpecies = libStruct->getNumIndSpecies();
+        independentSpeciesList = libStruct->getIndependentSpecies();
+//        independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
+        dependentSpeciesList   = libStruct->getDependentSpecies();
+//        dependentSpeciesList   = mStructAnalysis.GetDependentSpeciesIds();
     }
     else
     {
-        mNumIndependentSpecies = mStructAnalysis.GetNumSpecies();
-        independentSpeciesList = mStructAnalysis.GetSpeciesIds();
+        mNumIndependentSpecies = mLibStruct->getNumSpecies();
+        independentSpeciesList = mLibStruct->getSpecies();
     }
 
     // Load the compartment array (name and value)
@@ -398,7 +404,7 @@ void CGenerator::WriteComputeConservedTotals(CodeBuilder& ignore, const int& num
     if (numDependentSpecies > 0)
     {
         string factor;
-        LIB_LA::DoubleMatrix *gamma = mStructAnalysis.GetGammaMatrix();
+        LIB_LA::DoubleMatrix *gamma = mLibStruct->getGammaMatrix();
 
 //        double* matPtr =
 //        DoubleMatrix gamma(matPtr, numDependentSpecies, numFloatingSpecies);
@@ -2475,11 +2481,11 @@ int CGenerator::ReadFloatingSpecies()
     StringList reOrderedList;
     if (mRR && mRR->RoadRunner::mComputeAndAssignConservationLaws)
     {
-       reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
+       reOrderedList = mLibStruct->getReorderedSpecies();
     }
     else
     {
-        reOrderedList = mStructAnalysis.GetSpeciesIds();
+        reOrderedList = mLibStruct->getSpecies();
     }
 
     StringListContainer oFloatingSpecies = mNOM.getListOfFloatingSpecies();

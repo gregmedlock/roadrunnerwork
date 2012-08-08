@@ -193,10 +193,6 @@
 				<DependentOn>..\..\source\rrInteropUtils.h</DependentOn>
 				<BuildOrder>44</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\source\rrLibStructSupport.cpp">
-				<DependentOn>..\..\source\rrLibStructSupport.h</DependentOn>
-				<BuildOrder>43</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\source\rrLog.cpp">
 				<DependentOn>..\..\source\rrLog.h</DependentOn>
 				<BuildOrder>19</BuildOrder>

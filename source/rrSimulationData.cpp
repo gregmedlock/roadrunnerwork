@@ -6,39 +6,29 @@
 #include "rrLogger.h"
 #include "rrSimulationData.h"
 //---------------------------------------------------------------------------
-#if defined(__CODEGEARC__)
-    #pragma package(smart_init)
-#endif
-
-
 using namespace std;
 
 namespace rr
 {
 
-
 SimulationData::SimulationData()
 :
 mTimePrecision(6),
 mDataPrecision(16)
-{
-
-}
+{}
 
 SimulationData::SimulationData(const StringList& colNames, const DoubleMatrix& theData)
 :
 mColumnNames(colNames),
 mTheData(theData)
-{
+{}
 
-}
-
-int SimulationData::GetNrOfCols()
+int SimulationData::GetNrOfCols() const
 {
     return mTheData.CSize();
 }
 
-int SimulationData::GetNrOfRows()
+int SimulationData::GetNrOfRows() const
 {
     return mTheData.RSize();
 }
@@ -49,17 +39,17 @@ void SimulationData::SetName(const string& name)
 //    mTheData.SetNamePointer(&mName);
 }
 
-StringList SimulationData::GetColumnNames()
+StringList SimulationData::GetColumnNames() const
 {
     return mColumnNames;
 }
 
-pair<int,int> SimulationData::Dimension()
+pair<int,int> SimulationData::Dimension() const
 {
     return pair<int,int>(mTheData.RSize(), mTheData.CSize());
 }
 
-string SimulationData::GetName()
+string SimulationData::GetName() const
 {
     return mName;
 }
@@ -74,7 +64,7 @@ void SimulationData::SetDataPrecision(const int& prec)
     mDataPrecision = prec;
 }
 
-string SimulationData::GetColumnNamesAsString()
+string SimulationData::GetColumnNamesAsString() const
 {
     return mColumnNames.AsString();
 }
@@ -113,7 +103,7 @@ void SimulationData::SetData(const DoubleMatrix& theData)
     Check();
 }
 
-bool SimulationData::Check()
+bool SimulationData::Check() const
 {
     if(mTheData.CSize() != mColumnNames.Count())
     {
@@ -128,18 +118,12 @@ bool SimulationData::Load(const string& fileName)
     return false;
 }
 
-////When comparing to a reference
-//bool SimulationData::LoadReference(const string& fileName)
-//{
-//    return false;
-//}
-
 bool SimulationData::WriteTo(const string& fileName)
 {
     return false;
 }
 
-ostream& operator << (ostream& ss, SimulationData& data)
+ostream& operator << (ostream& ss, const SimulationData& data)
 {
     //Check that the dimensions of col header and data is ok
     if(!data.Check())
@@ -189,4 +173,4 @@ ostream& operator << (ostream& ss, SimulationData& data)
     return ss;
 }
 
-}//end of namespace
+}//namespace

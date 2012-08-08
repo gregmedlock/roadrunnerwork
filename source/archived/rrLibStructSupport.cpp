@@ -35,7 +35,7 @@ void StructAnalysis::Reset()
     }
 }
 
-int    StructAnalysis::GetNumIndependentSpecies()
+int StructAnalysis::GetNumIndependentSpecies()
 {
     return LibStructural_getNumIndSpecies();
 }

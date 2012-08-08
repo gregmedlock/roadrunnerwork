@@ -76,7 +76,7 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
     try
     {
         Log(lDebug)<<"Loading sbml into StructAnalysis";
-        msg = mStructAnalysis.LoadSBML(sASCII);
+        msg = mLibStruct->loadSBML(sASCII);
         if(!msg.size())
         {
             Log(lError)<<"Failed loading sbml into StructAnalysis";
@@ -92,14 +92,14 @@ string CSharpGenerator::generateModelCode(const string& sbmlStr)
 
     if (mRR != NULL && mRR->ComputeAndAssignConservationLaws())
     {
-        mNumIndependentSpecies = mStructAnalysis.GetNumIndependentSpecies();
-        independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
-        dependentSpeciesList   = mStructAnalysis.GetDependentSpeciesIds();
+        mNumIndependentSpecies = mLibStruct->getNumIndSpecies();
+        independentSpeciesList = mLibStruct->getIndependentSpecies();
+        dependentSpeciesList   = mLibStruct->getDependentSpecies();
     }
     else
     {
-        mNumIndependentSpecies = mStructAnalysis.GetNumSpecies();
-        independentSpeciesList = mStructAnalysis.GetSpeciesIds();
+        mNumIndependentSpecies = mLibStruct->getNumSpecies();
+        independentSpeciesList = mLibStruct->getSpecies();
     }
 
     sb<<Append("//************************************************************************** " + NL());
@@ -919,11 +919,11 @@ int CSharpGenerator::ReadFloatingSpecies()
     StringList reOrderedList;
     if (mRR && mRR->mComputeAndAssignConservationLaws)
     {
-       reOrderedList = mStructAnalysis.GetReorderedSpeciesIds();
+       reOrderedList = mLibStruct->getReorderedSpecies();
     }
     else
     {
-        reOrderedList = mStructAnalysis.GetSpeciesIds();
+        reOrderedList = mLibStruct->getSpecies();
     }
 
     StringListContainer oFloatingSpecies = mNOM.getListOfFloatingSpecies();
@@ -1126,7 +1126,7 @@ void CSharpGenerator::WriteComputeConservedTotals(CodeBuilder& sb, const int& nu
     if (numDependentSpecies > 0)
     {
         string factor;
-        LIB_LA::DoubleMatrix* gamma = mStructAnalysis.GetGammaMatrix();
+        LIB_LA::DoubleMatrix* gamma = mLibStruct->getGammaMatrix();
 
 //        DoubleMatrix gamma(matPtr, numDependentSpecies, numFloatingSpecies);
         for (int i = 0; i < numDependentSpecies; i++)

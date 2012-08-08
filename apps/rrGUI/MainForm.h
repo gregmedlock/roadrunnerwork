@@ -20,10 +20,21 @@
 #include "rrLogFileReader.h"
 #include <ToolWin.hpp>
 #include <CheckLst.hpp>
+#include "Series.hpp"
+#include "TeeComma.hpp"
+#include "TeeEdit.hpp"
 namespace rr
 {
 class RoadRunner;
+class SimulationData;
 }
+
+namespace LIB_LA
+{
+template <class T>
+class Matrix;
+}
+
 //---------------------------------------------------------------------------
 class TMForm : public TForm
 {
@@ -67,6 +78,11 @@ __published:	// IDE-managed Components
     TSplitter *Splitter3;
     TAction *loadAvailableSymbolsA;
     TCheckListBox *SelList;
+    TLineSeries *Series1;
+    TTeeCommander *TeeCommander1;
+    TChartEditor *ChartEditor1;
+    TPopupMenu *ChartPopup;
+    TMenuItem *ChartEditor2;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -78,6 +94,7 @@ __published:	// IDE-managed Components
     void __fastcall ClearMemoAExecute(TObject *Sender);
     void __fastcall SimulateAExecute(TObject *Sender);
     void __fastcall loadAvailableSymbolsAExecute(TObject *Sender);
+    void __fastcall ChartEditor2Click(TObject *Sender);
 
 private:	// User declarations
     mtkIniParameters            mGeneralParas;
@@ -87,16 +104,18 @@ private:	// User declarations
     mtkIniParameter<string>     mCurrentModelsFolder;
     mtkIniParameter<string>     mTempDataFolder;
     mtkIniParameter<string>     mRRLogFileName;
-
-    void            __fastcall  SetupINIParameters();
     rr::RoadRunner             *mRR;                //RoadRunner instance
     rr::LogFileReader           mLogFileSniffer;
+
+    void            __fastcall  SetupINIParameters();
+    void                        Plot(const rr::SimulationData& result);
 
 public:		// User declarations
                     __fastcall  TMForm(TComponent* Owner);
                     __fastcall ~TMForm();
-        void        __fastcall  LogMessage();
-        string                 *mLogString;
+    void            __fastcall  LogMessage();
+    string                     *mLogString;
+
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TMForm *MForm;
