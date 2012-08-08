@@ -51,7 +51,6 @@ __published:	// IDE-managed Components
     TMemo *mLogMemo;
     TChart *Chart1;
     TActionList *RRActions;
-    TButton *Button2;
     TAction *CompileA;
     TGroupBox *GroupBox3;
     mtkFloatLabeledEdit *mStartTimeE;
@@ -63,7 +62,6 @@ __published:	// IDE-managed Components
     TTimer *startupTimer;
     TAction *selectModelsFolder;
     TAction *LoadFromTreeViewA;
-    TSplitter *Splitter1;
     TSplitter *Splitter2;
     TPopupMenu *TVPopupMenu;
     TAction *logModelFileA;
@@ -82,10 +80,15 @@ __published:	// IDE-managed Components
     TAction *loadAvailableSymbolsA;
     TCheckListBox *SelList;
     TLineSeries *Series1;
-    TTeeCommander *TeeCommander1;
     TChartEditor *ChartEditor1;
     TPopupMenu *ChartPopup;
     TMenuItem *ChartEditor2;
+    TToolButton *ToolButton2;
+    TGroupBox *GroupBox2;
+    TPanel *Panel4;
+    TPanel *Panel5;
+    TButton *Button2;
+    TAction *UnLoadModelA;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -99,6 +102,7 @@ __published:	// IDE-managed Components
     void __fastcall loadAvailableSymbolsAExecute(TObject *Sender);
     void __fastcall ChartEditor2Click(TObject *Sender);
     void __fastcall SelListClick(TObject *Sender);
+    void __fastcall UnLoadModelAExecute(TObject *Sender);
 
 
 private:	// User declarations

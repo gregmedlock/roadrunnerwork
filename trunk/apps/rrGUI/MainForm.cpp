@@ -182,7 +182,11 @@ void __fastcall TMForm::ClearMemoAExecute(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TMForm::SimulateAExecute(TObject *Sender)
 {
-    if(mRR)
+    if(!mRR)
+    {
+        return;
+    }
+    try
     {
         //Setup selection list
         StringList list = GetCheckedSpecies();
@@ -202,6 +206,10 @@ void __fastcall TMForm::SimulateAExecute(TObject *Sender)
         fs << data;
         fs.close();
         Plot(data);
+    }
+    catch(const rr::Exception& e)
+    {
+        Log(rr::lInfo)<<"RoadRunner exception: "<<e.what();
     }
 }
 
@@ -313,6 +321,18 @@ void TMForm::EnableDisableSimulation(bool enableDisable)
 void __fastcall TMForm::SelListClick(TObject *Sender)
 {
     CheckUI();
+}
+
+
+
+void __fastcall TMForm::UnLoadModelAExecute(TObject *Sender)
+{
+    if(!mRR)
+    {
+        return;
+    }
+
+    mRR->unLoadModel();
 }
 
 
