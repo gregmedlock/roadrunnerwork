@@ -594,26 +594,6 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
     return false;
 }
 
-bool RoadRunner::LoadSBMLFromFile(const string& fileName) //Todo: Gotta make this obsolete
-{
-    ifstream ifs(fileName.c_str());
-    if(!ifs)
-    {
-        stringstream msg;
-        msg<<"Failed opening file: "<<fileName;
-        return false;
-    }
-
-    std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
-
-    Log(lDebug5)<<"Read SBML content from file:\n "<<sbml \
-                << "\n============ End of SBML "<<endl;
-
-    mModelXMLFileName = fileName;
-    mCurrentSBML = sbml;
-    return true;
-}
-
 bool RoadRunner::loadSBMLFromFile(const string& fileName)
 {
 	ifstream ifs(fileName.c_str());

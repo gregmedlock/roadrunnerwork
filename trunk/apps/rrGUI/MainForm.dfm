@@ -22,7 +22,6 @@ object MForm: TMForm
     Height = 680
     Align = alLeft
     TabOrder = 0
-    ExplicitHeight = 669
     object Splitter3: TSplitter
       Left = 1
       Top = 429
@@ -39,42 +38,51 @@ object MForm: TMForm
       Width = 215
       Height = 128
       Align = alTop
-      Caption = 'Settings'
+      Caption = 'Model Selection'
       TabOrder = 0
-      object RadioGroup1: TRadioGroup
-        Left = 3
-        Top = 16
-        Width = 94
-        Height = 49
-        Caption = 'Model Compiler'
-        Columns = 2
-        ItemIndex = 0
-        Items.Strings = (
-          'tcc'
-          'bcc')
-        TabOrder = 0
-      end
       object Button1: TButton
         Left = 174
-        Top = 94
+        Top = 21
         Width = 23
         Height = 25
         Action = selectModelsFolder
-        TabOrder = 1
+        TabOrder = 0
       end
       object modelFoldersCB: TComboBox
-        Left = 3
-        Top = 96
-        Width = 165
+        Left = 8
+        Top = 23
+        Width = 160
         Height = 21
         AutoComplete = False
         AutoCloseUp = True
         Style = csDropDownList
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 2
+        TabOrder = 1
         OnChange = modelFoldersCBChange
         OnSelect = modelFoldersCBSelect
+      end
+      object filterEdit: mtkSTDStringEdit
+        Left = 8
+        Top = 64
+        Width = 121
+        Height = 21
+        EditLabel.Width = 24
+        EditLabel.Height = 13
+        EditLabel.Caption = 'Filter'
+        TabOrder = 2
+        Text = '*.xml'
+        OnKeyDown = filterEditKeyDown
+        Value = '*.xml'
+      end
+      object Button4: TButton
+        Left = 8
+        Top = 97
+        Width = 75
+        Height = 25
+        Caption = 'Button4'
+        TabOrder = 3
+        OnClick = Button4Click
       end
     end
     object TFileSelectionFrame1: TFileSelectionFrame
@@ -84,7 +92,6 @@ object MForm: TMForm
       Height = 300
       Align = alClient
       TabOrder = 1
-      ExplicitHeight = 321
     end
     object Panel4: TPanel
       Left = 1
@@ -93,7 +100,6 @@ object MForm: TMForm
       Height = 247
       Align = alBottom
       TabOrder = 2
-      ExplicitTop = 429
       object GroupBox3: TGroupBox
         Left = 1
         Top = 1
@@ -146,8 +152,6 @@ object MForm: TMForm
         Height = 181
         Align = alClient
         TabOrder = 1
-        ExplicitTop = 120
-        ExplicitHeight = 126
         object SelList: TCheckListBox
           Left = 1
           Top = 1
@@ -157,8 +161,6 @@ object MForm: TMForm
           ItemHeight = 13
           TabOrder = 0
           OnClick = SelListClick
-          ExplicitWidth = 95
-          ExplicitHeight = 139
         end
         object GroupBox2: TGroupBox
           Left = 80
@@ -168,7 +170,6 @@ object MForm: TMForm
           Align = alRight
           Caption = 'Model'
           TabOrder = 1
-          ExplicitHeight = 139
           object mModelNameLbl: TLabel
             Left = 24
             Top = 16
@@ -192,6 +193,14 @@ object MForm: TMForm
             Action = SimulateA
             TabOrder = 1
           end
+          object Button5: TButton
+            Left = 24
+            Top = 35
+            Width = 75
+            Height = 25
+            Action = LoadFromTreeViewA
+            TabOrder = 2
+          end
         end
       end
     end
@@ -202,7 +211,6 @@ object MForm: TMForm
     Width = 1220
     Height = 19
     Panels = <>
-    ExplicitTop = 669
   end
   object Panel2: TPanel
     Left = 217
@@ -211,26 +219,23 @@ object MForm: TMForm
     Height = 680
     Align = alClient
     TabOrder = 2
-    ExplicitHeight = 669
     object Splitter2: TSplitter
       Left = 1
-      Top = 398
+      Top = 426
       Width = 1001
       Height = 3
       Cursor = crVSplit
       Align = alBottom
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 470
+      ExplicitLeft = 17
+      ExplicitTop = 452
     end
     object Chart1: TChart
       Left = 1
       Top = 1
       Width = 1001
-      Height = 397
+      Height = 425
       Border.Color = 9423874
       Border.Width = 7
-      Gradient.MidColor = clNone
       Legend.Alignment = laBottom
       Legend.Brush.Gradient.Direction = gdTopBottom
       Legend.Brush.Gradient.EndColor = 13556735
@@ -252,10 +257,9 @@ object MForm: TMForm
       Legend.Symbol.Width = 40
       Legend.Title.Text.Strings = (
         '')
-      Legend.Top = 20
+      Legend.Top = 21
       Legend.TopPercent = 5
       Legend.TopPos = 5
-      Title.Brush.Gradient.MidColor = clNone
       Title.Color = clBlack
       Title.Frame.Color = 10083835
       Title.Frame.Width = 2
@@ -285,9 +289,6 @@ object MForm: TMForm
       Color = clWhite
       PopupMenu = ChartPopup
       TabOrder = 0
-      ExplicitLeft = 5
-      ExplicitTop = -1
-      ExplicitHeight = 386
       ColorPaletteIndex = 15
       object Series1: TLineSeries
         Marks.Arrow.Visible = True
@@ -311,43 +312,69 @@ object MForm: TMForm
         YValues.Order = loNone
       end
     end
-    object Panel3: TPanel
+    object PageControl1: TPageControl
       Left = 1
-      Top = 401
+      Top = 429
       Width = 1001
-      Height = 278
+      Height = 250
+      ActivePage = TabSheet2
       Align = alBottom
-      Caption = 'Panel3'
       TabOrder = 1
-      ExplicitTop = 390
-      object mLogMemo: TMemo
-        Left = 1
-        Top = 22
-        Width = 999
-        Height = 255
-        Align = alClient
-        PopupMenu = MemoPopup
-        ReadOnly = True
-        ScrollBars = ssBoth
-        TabOrder = 0
-        ExplicitTop = 58
-        ExplicitHeight = 219
-      end
-      object ToolBar1: TToolBar
-        Left = 1
-        Top = 1
-        Width = 999
-        Height = 21
-        AutoSize = True
-        ButtonHeight = 21
-        ButtonWidth = 32
-        Caption = 'ToolBar1'
-        ShowCaptions = True
-        TabOrder = 1
-        object ToolButton1: TToolButton
+      object TabSheet1: TTabSheet
+        Caption = 'Log'
+        object Panel3: TPanel
           Left = 0
           Top = 0
-          Action = ClearMemoA
+          Width = 993
+          Height = 222
+          Align = alClient
+          Caption = 'Panel3'
+          TabOrder = 0
+          object mLogMemo: TMemo
+            Left = 1
+            Top = 22
+            Width = 991
+            Height = 199
+            Align = alClient
+            PopupMenu = MemoPopup
+            ReadOnly = True
+            ScrollBars = ssBoth
+            TabOrder = 0
+          end
+          object ToolBar1: TToolBar
+            Left = 1
+            Top = 1
+            Width = 991
+            Height = 21
+            AutoSize = True
+            ButtonHeight = 21
+            ButtonWidth = 32
+            Caption = 'ToolBar1'
+            ShowCaptions = True
+            TabOrder = 1
+            object ToolButton1: TToolButton
+              Left = 0
+              Top = 0
+              Action = ClearMemoA
+            end
+          end
+        end
+      end
+      object TabSheet2: TTabSheet
+        Caption = 'Settings'
+        ImageIndex = 1
+        object RadioGroup1: TRadioGroup
+          Left = 3
+          Top = 16
+          Width = 94
+          Height = 49
+          Caption = 'Model Compiler'
+          Columns = 2
+          ItemIndex = 0
+          Items.Strings = (
+            'tcc'
+            'bcc')
+          TabOrder = 0
         end
       end
     end
