@@ -630,8 +630,7 @@ bool RoadRunner::loadSBMLFromFile(const string& fileName)
                 << "\n============ End of SBML "<<endl;
 
     mModelXMLFileName = fileName;
-    mCurrentSBML = sbml;
-    return loadSBML(mCurrentSBML);
+    return loadSBML(sbml);
 }
 
 bool RoadRunner::loadSBML(const string& sbml)
@@ -647,6 +646,7 @@ bool RoadRunner::loadSBML(const string& sbml)
 	// just reset the initial conditions
 	if (mModelDLL != NULL && mModel != NULL && sbml == mCurrentSBML)
     {
+        mCurrentSBML = sbml;
         return InitializeModel();
     }
 
