@@ -159,6 +159,7 @@ void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
 
                 //Enable simulate action
                 SimulateA->Enabled = true;
+                mModelNameLbl->Caption = mRR->GetModelName().c_str();
             }
             else
             {

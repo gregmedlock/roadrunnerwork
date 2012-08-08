@@ -83,12 +83,13 @@ __published:	// IDE-managed Components
     TChartEditor *ChartEditor1;
     TPopupMenu *ChartPopup;
     TMenuItem *ChartEditor2;
-    TToolButton *ToolButton2;
     TGroupBox *GroupBox2;
     TPanel *Panel4;
     TPanel *Panel5;
     TButton *Button2;
     TAction *UnLoadModelA;
+    TButton *Button3;
+    TLabel *mModelNameLbl;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);

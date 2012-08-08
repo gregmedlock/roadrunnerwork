@@ -169,6 +169,13 @@ object MForm: TMForm
           Caption = 'Model'
           TabOrder = 1
           ExplicitHeight = 139
+          object mModelNameLbl: TLabel
+            Left = 24
+            Top = 16
+            Width = 58
+            Height = 13
+            Caption = 'Model Name'
+          end
           object Button2: TButton
             Left = 24
             Top = 136
@@ -176,6 +183,14 @@ object MForm: TMForm
             Height = 25
             Action = UnLoadModelA
             TabOrder = 0
+          end
+          object Button3: TButton
+            Left = 24
+            Top = 96
+            Width = 75
+            Height = 25
+            Action = SimulateA
+            TabOrder = 1
           end
         end
       end
@@ -325,17 +340,12 @@ object MForm: TMForm
         Height = 21
         AutoSize = True
         ButtonHeight = 21
-        ButtonWidth = 47
+        ButtonWidth = 32
         Caption = 'ToolBar1'
         ShowCaptions = True
         TabOrder = 1
-        object ToolButton2: TToolButton
-          Left = 0
-          Top = 0
-          Action = SimulateA
-        end
         object ToolButton1: TToolButton
-          Left = 47
+          Left = 0
           Top = 0
           Action = ClearMemoA
         end
