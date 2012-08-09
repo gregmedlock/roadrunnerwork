@@ -246,8 +246,9 @@ object MForm: TMForm
       Legend.DividingLines.Color = clSilver
       Legend.Font.Color = 6553600
       Legend.Frame.Color = clGray
-      Legend.Left = 701
-      Legend.LeftPercent = 70
+      Legend.Frame.Visible = False
+      Legend.Left = 50
+      Legend.LeftPercent = 5
       Legend.LegendStyle = lsSeries
       Legend.PositionUnits = muPercent
       Legend.ResizeChart = False
@@ -257,8 +258,8 @@ object MForm: TMForm
       Legend.Symbol.Width = 40
       Legend.Title.Text.Strings = (
         '')
-      Legend.Top = 21
-      Legend.TopPercent = 5
+      Legend.Top = 382
+      Legend.TopPercent = 90
       Legend.TopPos = 5
       Title.Color = clBlack
       Title.Frame.Color = 10083835
@@ -348,7 +349,7 @@ object MForm: TMForm
             Height = 21
             AutoSize = True
             ButtonHeight = 21
-            ButtonWidth = 32
+            ButtonWidth = 50
             Caption = 'ToolBar1'
             ShowCaptions = True
             TabOrder = 1
@@ -357,13 +358,18 @@ object MForm: TMForm
               Top = 0
               Action = ClearMemoA
             end
+            object ToolButton2: TToolButton
+              Left = 50
+              Top = 0
+              Action = LogCurrentDataA
+            end
           end
         end
       end
       object TabSheet2: TTabSheet
         Caption = 'Settings'
         ImageIndex = 1
-        object RadioGroup1: TRadioGroup
+        object CompilerRG: TRadioGroup
           Left = 3
           Top = 16
           Width = 94
@@ -375,6 +381,14 @@ object MForm: TMForm
             'tcc'
             'bcc')
           TabOrder = 0
+        end
+        object ConservationAnalysisCB: TCheckBox
+          Left = 3
+          Top = 80
+          Width = 126
+          Height = 17
+          Caption = 'ConservationAnalysis'
+          TabOrder = 1
         end
       end
     end
@@ -413,6 +427,10 @@ object MForm: TMForm
     object UnLoadModelA: TAction
       Caption = 'Unload'
       OnExecute = UnLoadModelAExecute
+    end
+    object LogCurrentDataA: TAction
+      Caption = 'Log Data'
+      OnExecute = LogCurrentDataAExecute
     end
   end
   object mIniFileC: mtkIniFileC

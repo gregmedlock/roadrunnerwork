@@ -48,7 +48,7 @@ __published:	// IDE-managed Components
     TPanel *Panel1;
     TPanel *Panel2;
     TStatusBar *StatusBar1;
-    TRadioGroup *RadioGroup1;
+    TRadioGroup *CompilerRG;
     TGroupBox *GroupBox1;
     TButton *Button1;
     TMemo *mLogMemo;
@@ -99,6 +99,9 @@ __published:	// IDE-managed Components
     mtkSTDStringEdit *filterEdit;
     TButton *Button4;
     TButton *Button5;
+    TToolButton *ToolButton2;
+    TAction *LogCurrentDataA;
+    TCheckBox *ConservationAnalysisCB;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -115,6 +118,7 @@ __published:	// IDE-managed Components
     void __fastcall UnLoadModelAExecute(TObject *Sender);
     void __fastcall filterEditKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall Button4Click(TObject *Sender);
+    void __fastcall LogCurrentDataAExecute(TObject *Sender);
 
 
 
@@ -122,10 +126,12 @@ private:	// User declarations
     mtkIniParameters            mGeneralParas;
 
     mtkIniParameter<int>        mSelectionListHeight;
+    mtkIniParameter<string>     mCompiler;
     mtkIniParameters            mModelFolders;
     mtkIniParameter<string>     mCurrentModelsFolder;
     mtkIniParameter<string>     mTempDataFolder;
     mtkIniParameter<string>     mRRLogFileName;
+    mtkIniParameter<bool>       mConservationAnalysis;
     rr::RoadRunner             *mRR;                //RoadRunner instance
     rr::LogFileReader           mLogFileSniffer;
 
@@ -137,6 +143,7 @@ private:	// User declarations
     TColor                      GetColor(int i);
     void                        AddItemsToListBox(const StringList& items);
     SimulationSettings          mSettings;
+    string                      GetCompiler();//What is set in the RadioGroup
 
 public:		// User declarations
                     __fastcall  TMForm(TComponent* Owner);

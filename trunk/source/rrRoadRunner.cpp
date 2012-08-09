@@ -33,7 +33,7 @@ namespace rr
 //bool RoadRunner::mConservedTotalChanged             	= false;
 //bool RoadRunner::mReMultiplyCompartments             	= true;
 
-RoadRunner::RoadRunner() :
+RoadRunner::RoadRunner(const string& compiler) :
     emptyModelStr("A model needs to be loaded before one can use this method"),
     STEADYSTATE_THRESHOLD(1.E-2),
     mCVode(NULL),
@@ -47,14 +47,14 @@ RoadRunner::RoadRunner() :
     mTimeEnd(10),
     mNumPoints(21),
     mCurrentSBML(""),
-//    modelLoaded (false),
     mModel(NULL),
     mModelDLL(NULL),
     mSimulation(NULL),
     mModelXMLFileName("sbml_model"),
     UseKinsol(false),
     mComputeAndAssignConservationLaws(false),
-    mConservedTotalChanged(false)
+    mConservedTotalChanged(false),
+    mCompiler(compiler)
 {
      mLS = LibStructural::getInstance();
      Log(lDebug4)<<"In RoadRunner CTOR";
@@ -85,6 +85,11 @@ CvodeInterface* RoadRunner::GetCVodeInterface()
         mCVode = new CvodeInterface(this, mModel);
     }
     return mCVode;
+}
+
+bool RoadRunner::setCompiler(const string& compiler)
+{
+    mCompiler.SetCompiler(compiler);
 }
 
 NLEQInterface* RoadRunner::GetNLEQInterface()
@@ -955,10 +960,10 @@ DoubleMatrix RoadRunner::simulateEx(const double& startTime, const double& endTi
             throw SBWApplicationException("Illegal input to simulateEx");
         }
 
-        mTimeEnd = endTime;
-        mTimeStart = startTime;
-        mNumPoints = numberOfPoints;
-        mRawSimulationData =runSimulation();
+        mTimeEnd            = endTime;
+        mTimeStart          = startTime;
+        mNumPoints          = numberOfPoints;
+        mRawSimulationData  = runSimulation();
         PopulateResult();
         return mRawSimulationData;
     }

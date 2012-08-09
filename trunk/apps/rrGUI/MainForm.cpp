@@ -58,6 +58,17 @@ __fastcall TMForm::TMForm(TComponent* Owner)
 
 __fastcall TMForm::~TMForm()
 {
+    if(CompilerRG->ItemIndex == 0)
+    {
+        mCompiler = "tcc";
+    }
+    else if(CompilerRG->ItemIndex == 1)
+    {
+        mCompiler = "bcc";
+    }
+
+    mConservationAnalysis = ConservationAnalysisCB->Checked ? "true" : "false";
+
     mSelectionListHeight = SelList->Height;
     mGeneralParas.Write();
     mModelFolders.Write();
@@ -66,6 +77,18 @@ __fastcall TMForm::~TMForm()
     mLogFileSniffer.ShutDown();
 }
 
+string TMForm::GetCompiler()
+{
+    if(CompilerRG->ItemIndex == 0)
+    {
+        mCompiler = "tcc";
+    }
+    else if(CompilerRG->ItemIndex == 1)
+    {
+        mCompiler = "bcc";
+    }
+    return mCompiler;
+}
 //---------------------------------------------------------------------------
 void __fastcall TMForm::modelFoldersCBChange(TObject *Sender)
 {
@@ -154,6 +177,8 @@ void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
                 mRR = new RoadRunner;
             }
 
+            mRR->setCompiler(GetCompiler());
+
             if(mRR->loadSBMLFromFile(fName))
             {
                 Log(rr::lInfo)<<"Loaded model with no exception";
@@ -198,6 +223,10 @@ void __fastcall TMForm::SimulateAExecute(TObject *Sender)
         mRR->setSelectionList(selected);
 
         Log(rr::lInfo)<<"Currently selected species: "<<mRR->getSelectionList().AsString();
+
+        mRR->setCompiler(GetCompiler());
+        mRR->ComputeAndAssignConservationLaws(ConservationAnalysisCB->Checked);
+
         mRR->simulateEx(mStartTimeE->GetValue(), *mEndTimeE, mNrOfSimulationPointsE->GetValue());
         SimulationData data = mRR->GetSimulationResult();
 
@@ -284,11 +313,14 @@ void TMForm::Plot(const rr::SimulationData& result)
     for(int j = 0; j < result.GetNrOfRows(); j++)
     {
         double xVal = result(j,0);
+
         for(int i = 0; i < nrOfSeries; i++)
         {
-            series[i]->AddXY(xVal, result(j, i+1), "");
+            double yData = result(j, i+1);
+            series[i]->AddXY(xVal, yData);
         }
     }
+    Chart1->Update();
 }
 
 void __fastcall TMForm::ChartEditor2Click(TObject *Sender)
@@ -335,8 +367,6 @@ void __fastcall TMForm::SelListClick(TObject *Sender)
     CheckUI();
 }
 
-
-
 void __fastcall TMForm::UnLoadModelAExecute(TObject *Sender)
 {
     if(!mRR)
@@ -347,7 +377,6 @@ void __fastcall TMForm::UnLoadModelAExecute(TObject *Sender)
     mRR->unLoadModel();
 }
 
-
 void __fastcall TMForm::filterEditKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
 {
     if(Key == VK_RETURN)
@@ -356,10 +385,20 @@ void __fastcall TMForm::filterEditKeyDown(TObject *Sender, WORD &Key, TShiftStat
     }
 }
 
-
 void __fastcall TMForm::Button4Click(TObject *Sender)
 {
     TFileSelectionFrame1->TreeView1->ShowRoot = !TFileSelectionFrame1->TreeView1->ShowRoot;
 }
 
+
+
+void __fastcall TMForm::LogCurrentDataAExecute(TObject *Sender)
+{
+    if(mRR)
+    {
+        SimulationData data = mRR->GetSimulationResult();
+        Log(rr::lInfo)<<data;
+    }
+}
+//---------------------------------------------------------------------------
 

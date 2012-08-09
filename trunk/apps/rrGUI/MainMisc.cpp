@@ -20,6 +20,8 @@ void __fastcall TMForm::SetupINIParameters()
     mGeneralParas.Insert( &mEndTimeE->SetupIni("END_TIME", 40));
     mGeneralParas.Insert( &mNrOfSimulationPointsE->SetupIni("NR_OF_SIMULATION_POINTS", 100));
     mGeneralParas.Insert( &mSelectionListHeight.Setup("SEL_LB_HEIGHT", 30));
+    mGeneralParas.Insert( &mCompiler.Setup("MODEL_COMPILER", "tcc"));
+    mGeneralParas.Insert( &mConservationAnalysis.Setup("CONSERVATION_ANALYSIS", "false"));
 
     mModelFolders.SetIniSection("MODEL_FOLDERS");
     mModelFolders.SetIniFile(mIniFileC->GetFile());
@@ -46,6 +48,17 @@ void __fastcall TMForm::SetupINIParameters()
     mEndTimeE->Update();
     mNrOfSimulationPointsE->Update();
     SelList->Height = mSelectionListHeight;
+
+    if(mCompiler == "tcc")
+    {
+        CompilerRG->ItemIndex = 0;
+    }
+    else if(mCompiler == "bcc")
+    {
+        CompilerRG->ItemIndex = 1;
+    }
+
+    ConservationAnalysisCB->Checked = mConservationAnalysis == "true" ? true : false;
 }
 
 void __fastcall TMForm::LogMessage()
