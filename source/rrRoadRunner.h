@@ -87,7 +87,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		double*                         mL0;
 		double*                         mN;
 		double*                         mNr;
-//		bool                            modelLoaded;
+
 		HINSTANCE                       mModelDLL;
 		string                          mCurrentSBML;
 		ModelFromC*                     mModel;
@@ -95,15 +95,15 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		double                          mTimeEnd;
 		int                             mNumPoints;
 		string                          NL;
-//		StructAnalysis                  mStructAnalysis;                    //Object to facilitate calls to libStruct library
 		LibStructural                  *mLS;                                //Handle to libstruct library
 
 		CGenerator*						GetCGenerator();
 		CSharpGenerator*				GetCSharpGenerator();
 		//Functions --------------------------------------------------------------------
 
-										RoadRunner();
+										RoadRunner(const string& compiler="tcc");
 		virtual                        ~RoadRunner();
+        bool                            setCompiler(const string& compiler);
         string                          GetModelName();
         bool                            unLoadModel();
         bool                            unLoadModelDLL();

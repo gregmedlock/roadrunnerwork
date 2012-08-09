@@ -18,62 +18,29 @@ namespace rr
 
 class RR_DECLSPEC Compiler : public rrObject
 {
-    private:
-//        static vector<string>     m_oAssemblies;
-//        static vector<string>     m_sCompileErrors;
-
-//        vector<string>             m_oProxies;
-//         void                     Compile(const string& source);
-//         rrObject*                 Compile2(const string& source, const string& sClassName);
+    protected:
+        vector<string>              mCompilerOutput;
         HINSTANCE                   mDLLHandle;
         string                      mDLLFileName;    //With path
         vector<string>              mIncludePaths;
         vector<string>              mLibraryPaths;
         string                      mSupportCodeFolder;
         string                      mCompiler;
-        string                      CreateCompilerCommand(const string& compiler, const string& sourceFileName);
+        string                      CreateCompilerCommand(const string& sourceFileName);
+        bool                        SetupCompilerEnvironment();
 
     public:
-        /// <summary>
-        /// the execute method takes a stringcollection of wrapper classes,
-        /// compiles them and executes methods on the classes
-        /// </summary>
-        /// <param name="source"></param>
-//        void                     Execute(const string& source);
-                                    Compiler();
+                                    Compiler(const string& compiler="tcc");
                                    ~Compiler();
         bool                        Compile(const string& cmdLine);
         string                      GetDLLName();
         bool                        SetIncludePath(const string& path);
         bool                        SetLibraryPath(const string& path);
-        /// <summary>
-        /// the execute method takes a stringcollection of wrapper classes,
-        /// compiles them and executes methods on the classes
-        /// </summary>
-        /// <param name="oProxyCode"></param>
         void                        Execute(StringList& oProxyCode);
-        static rrObject             getInstance(const string& source, const string& sClassName);
-        static rrObject*            getInstance(const string& source, const string& sClassName, const string& sLocation);
         bool                        CompileC_DLL(const string& cSource);
-
-        /// <summary>
-        /// adds an assembly to the assembly list ... this list will be needed
-        /// to add references to that assemblies for the newly compiled class
-        /// </summary>
-        /// <param name="sAssembly"></param>
-//        static void             addAssembly(const string& sAssembly);
-
-        /// <summary>
-        /// sets the list of proxies. This is a list of strings representing Namespace
-        /// and classname of the newly generated classes ... this will be used to create
-        /// instances later on
-        /// </summary>
-        /// <param name="oProxies"></param>
-  //      void addProxy(StringList oProxies);
-
-        static string               getLastErrors();
-
-}; //class compiler
+        string                      getCompilerMessages();
+        bool                        SetCompiler(const string& compiler);
+};
 
 } //namespace rr
 
