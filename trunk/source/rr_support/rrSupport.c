@@ -98,35 +98,35 @@ double spf_pow(double base, double exp)
 
 //---------------------------------------------------------------------------
 // Boolean functions for event handling" + NL());
-double spf_gt(double a, double b)
+bool spf_gt(double a, double b)
 {
-    return (a > b ? 1.0 : 0.0);
+    return (a > b ? true : false);
 }
 
-double spf_lt(double a, double b)
+bool spf_lt(double a, double b)
 {
 //    printf("in %f less than %f", a, b);
-    return (a <= b ? 1.0 : 0.0);
+    return (a <= b ? true : false);
 }
 
-double spf_geq(double a, double b)
+bool spf_geq(double a, double b)
 {
-    return (a >= b ? 1.0 : 0.0);
+    return (a >= b ? true : false);
 }
 
-double spf_leq(double a, double b)
+bool spf_leq(double a, double b)
 {
-    return (a <= b ? 1.0 : 0.0);
+    return (a <= b ? true : false);
 }
 
-double spf_eq(double a, double b)
+bool spf_eq(double a, double b)
 {
-    return (a == b ? 1.0 : 0.0);
+    return (a == b ? true : false);
 }
 
-double spf_neq(double a, double b)
+bool spf_neq(double a, double b)
 {
-    return (a != b ? 1.0 : 0.0);
+    return (a != b ? true : false);
 }
 
 double spf_and(int nrOfArguments, ...)
@@ -301,15 +301,19 @@ double spf_not(double a)
 //        }
 
 
+int    spf_ceil(double a)
+{
+    return (int) ceil(a);
+}
+
 int spf_factorial(int a)
 {
-    static int b;
-    b = a;
-    if (b < 2)
+
+    if (a <= 0 )
     {
         return 1;
     }
-    return b * spf_factorial(b - 1);
+    return a * spf_factorial(a - 1);
 }
 
 double spf_log(double a)

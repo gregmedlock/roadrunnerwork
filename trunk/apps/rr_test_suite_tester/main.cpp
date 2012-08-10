@@ -47,7 +47,7 @@ int main(int argc, char * argv[])
         switch (c)
         {
             case ('n'): paras.CaseNumber                    = ToInt(optarg);                break;
-            case ('v'): paras.CurrentLogLevel               = StringToLogLevel(optarg);     break;
+            case ('v'): paras.CurrentLogLevel               = GetLogLevel(optarg);          break;
             case ('c'): paras.OnlyCompile                   = true;                         break;
             case ('p'): paras.Pause                         = true;                         break;
             case ('t'): paras.TempDataFolder                = optarg;                       break;

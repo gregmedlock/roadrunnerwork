@@ -189,7 +189,7 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
     {
         switch (c)
         {
-            case ('v'): args.CurrentLogLevel                       = StringToLogLevel(optarg);     break;
+            case ('v'): args.CurrentLogLevel                = GetLogLevel(optarg);     break;
             case ('c'): args.OnlyCompile                    = true;                         break;
             case ('p'): args.Pause                          = true;                         break;
             case ('t'): args.TempDataFolder                 = optarg;                       break;

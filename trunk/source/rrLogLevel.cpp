@@ -13,7 +13,7 @@ namespace rr
 using namespace std;
 int GetHighestLogLevel(){return lAny;}
 
-LogLevel StringToLogLevel(const string& lvl)
+LogLevel GetLogLevel(const string& lvl)
 {
     string level = ToUpperCase(lvl);
     if (level == "ANY")           return lAny;
@@ -49,7 +49,7 @@ string LogLevelToString(const LogLevel& level)
     }
 }
 
-LogLevel IntToLogLevel(const int& level)
+LogLevel GetLogLevel(const int& level)
 {
     switch (level)
     {

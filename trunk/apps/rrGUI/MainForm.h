@@ -27,7 +27,7 @@
 #include "TeeTools.hpp"
 #include "mtkSTDStringEdit.h"
 #include "rrSimulationSettings.h"
-
+#include "rrLogLevel.h"
 namespace rr
 {
 class RoadRunner;
@@ -89,7 +89,6 @@ __published:	// IDE-managed Components
     TGroupBox *GroupBox2;
     TPanel *Panel4;
     TPanel *Panel5;
-    TButton *Button2;
     TAction *UnLoadModelA;
     TButton *Button3;
     TLabel *mModelNameLbl;
@@ -98,10 +97,12 @@ __published:	// IDE-managed Components
     TTabSheet *TabSheet2;
     mtkSTDStringEdit *filterEdit;
     TButton *Button4;
-    TButton *Button5;
+    TButton *loadUnloadBtn;
     TToolButton *ToolButton2;
     TAction *LogCurrentDataA;
     TCheckBox *ConservationAnalysisCB;
+    TComboBox *LogLevelCB;
+    TLabel *Label1;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -119,6 +120,9 @@ __published:	// IDE-managed Components
     void __fastcall filterEditKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall Button4Click(TObject *Sender);
     void __fastcall LogCurrentDataAExecute(TObject *Sender);
+    void __fastcall LoadModelAUpdate(TObject *Sender);
+    void __fastcall TFileSelectionFrame1TreeView1Click(TObject *Sender);
+    void __fastcall LogLevelCBChange(TObject *Sender);
 
 
 
@@ -126,7 +130,9 @@ private:	// User declarations
     mtkIniParameters            mGeneralParas;
 
     mtkIniParameter<int>        mSelectionListHeight;
-    mtkIniParameter<string>     mCompiler;
+    mtkIniParameter<int>            mPageControlHeight;
+    mtkIniParameter<mtkLogLevel>   mLogLevel;
+    mtkIniParameter<string>         mCompiler;
     mtkIniParameter<string>     mCurrentModelsFolder;
     mtkIniParameter<string>     mCurrentModelFileName;
     mtkIniParameter<string>     mTempDataFolder;
