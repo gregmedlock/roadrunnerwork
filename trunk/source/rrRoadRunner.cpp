@@ -800,13 +800,20 @@ bool RoadRunner::GenerateAndCompileModel()
         UnLoadDLL(mModelDLL);
     }
 
+    string dllName  = GetDLLName();
+    //Remove DLL
+    if(FileExists(dllName) == true && remove(dllName.c_str()) != 0)
+    {
+        Log(lError)<<"Failed removing dll: "<<dllName;
+        return false;
+    }
+
     if(!CompileCurrentModel())
     {
         Log(lError)<<"Failed compiling model";
         return false;
     }
 
-    string dllName  = GetDLLName();
     //Load the DLL
     mModelDLL = LoadDLL(dllName);
 

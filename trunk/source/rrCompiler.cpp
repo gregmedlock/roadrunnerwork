@@ -132,9 +132,9 @@ string Compiler::CreateCompilerCommand(const string& sourceFileName)
     else if(mCompiler == "bcc")
     {
         exeCmd<<"bcc32 -WD ";
-        exeCmd<<" -e"<<mDLLFileName<<" -vu +r:\\roadrunnerwork\\trunk\\source\\rr_support\\bcc.cfg " \
+        exeCmd<<" -e"<<mDLLFileName<<" -vu +r:\\rrInstalls\\xe\\rr_support\\bcc.cfg " \
         <<sourceFileName \
-        <<" r:\\roadrunnerwork\\trunk\\source\\rr_support\\rrSupport.c";
+        <<" r:\\rrInstalls\\xe\\rr_support\\rrSupport.c";
 
     }
     return exeCmd.str();

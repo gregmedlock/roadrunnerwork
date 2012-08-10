@@ -167,6 +167,7 @@ void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
     string fName = TFileSelectionFrame1->GetSelectedFileInTree();
     if(fName.size())
     {
+        mCurrentModelFileName = fName;
         Log(rr::lInfo)<<"Loading model: "<<  fName;
 
         try
@@ -229,12 +230,9 @@ void __fastcall TMForm::SimulateAExecute(TObject *Sender)
 
         mRR->simulateEx(mStartTimeE->GetValue(), *mEndTimeE, mNrOfSimulationPointsE->GetValue());
         SimulationData data = mRR->GetSimulationResult();
-
-        string resultFileName( rr::JoinPath(mRR->GetTempFileFolder(), mRR->GetModelName()));
+        string resultFileName(rr::JoinPath(mRR->GetTempFileFolder(), mRR->GetModelName()));
         resultFileName = ChangeFileExtensionTo(resultFileName, ".csv");
-
-        Log(rr::lInfo)<<"Saving result to file: "<<resultFileName;
-
+        Log(rr::lInfo)<<"Saving result to file: "<<resultFileName;
         ofstream fs(resultFileName.c_str());
         fs << data;
         fs.close();
@@ -389,8 +387,6 @@ void __fastcall TMForm::Button4Click(TObject *Sender)
 {
     TFileSelectionFrame1->TreeView1->ShowRoot = !TFileSelectionFrame1->TreeView1->ShowRoot;
 }
-
-
 
 void __fastcall TMForm::LogCurrentDataAExecute(TObject *Sender)
 {
