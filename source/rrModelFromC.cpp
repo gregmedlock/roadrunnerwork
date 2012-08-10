@@ -633,15 +633,15 @@ void ModelFromC::AssignRates(vector<double>& _rates)
         return;
     }
 
-      double* rates = CreateVector(_rates);
+      double* local_rates = CreateVector(_rates);
 //    auto_ptr<double> rates(new double(_rates.size()));
 //    for(int i = 0; i < _rates.size(); i++)
 //    {
 //        (rates).get()[i] = _rates[i];
 //    }
 
-    cAssignRates_b(rates);
-    delete [] rates;
+    cAssignRates_b(local_rates);
+    delete [] local_rates;
 }
 
 void ModelFromC::computeConservedTotals()
@@ -750,6 +750,7 @@ void ModelFromC::evalModel(const double& timein, const vector<double>& y)
     }
 
     cevalModel(timein, amounts);
+    //rates[0] = 45;
 }
 
 void ModelFromC::evalEvents(const double& timeIn, const vector<double>& y)

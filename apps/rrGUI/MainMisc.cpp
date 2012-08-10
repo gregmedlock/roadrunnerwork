@@ -6,6 +6,7 @@
 #include "rrUtils.h"
 #include "MainForm.h"
 #include "rrStringUtils.h"
+#include "mtkTreeComponentUtils.h"
 #pragma package(smart_init)
 
 using namespace rr;
@@ -22,6 +23,8 @@ void __fastcall TMForm::SetupINIParameters()
     mGeneralParas.Insert( &mSelectionListHeight.Setup("SEL_LB_HEIGHT", 30));
     mGeneralParas.Insert( &mCompiler.Setup("MODEL_COMPILER", "tcc"));
     mGeneralParas.Insert( &mConservationAnalysis.Setup("CONSERVATION_ANALYSIS", "false"));
+    mGeneralParas.Insert( &mCurrentModelsFolder.Setup("MODEL_FOLDER", ""));
+    mGeneralParas.Insert( &mCurrentModelFileName.Setup("MODEL_FILE_NAME", ""));
 
     mModelFolders.SetIniSection("MODEL_FOLDERS");
     mModelFolders.SetIniFile(mIniFileC->GetFile());
@@ -42,7 +45,13 @@ void __fastcall TMForm::SetupINIParameters()
             modelFoldersCB->Items->Add(aKey->mValue.c_str());
         }
     }
+    //Select 'current' model folder
+    int index = modelFoldersCB->Items->IndexOf(mCurrentModelsFolder.c_str());
 
+    if(index != -1)
+    {
+        modelFoldersCB->ItemIndex = index;
+    }
     //Update UI
     mStartTimeE->Update();
     mEndTimeE->Update();
@@ -84,12 +93,13 @@ void __fastcall TMForm::startupTimerTimer(TObject *Sender)
 {
     startupTimer->Enabled = false;
     //Select  models folder
-    modelFoldersCB->ItemIndex = 0;
+    modelFoldersCBSelect(NULL);
 
-    if( modelFoldersCB->ItemIndex > -1 && modelFoldersCB->ItemIndex <= modelFoldersCB->Items->Count)
+    TTreeNode* aNode = FindTreeNodeBasedOnLabel(TFileSelectionFrame1->TreeView1->Items, rr::ExtractFileName(mCurrentModelFileName).c_str());
+
+    if(aNode)
     {
-        mCurrentModelsFolder = ToSTDString(modelFoldersCB->Items[modelFoldersCB->ItemIndex].Text);
-        modelFoldersCBSelect(NULL);
+        aNode->Selected = true;
     }
 }
 

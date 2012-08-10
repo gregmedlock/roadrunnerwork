@@ -1135,9 +1135,9 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
 
 void CGenerator::WriteComputeReactionRates(CodeBuilder& ignore, const int& numReactions)
 {
-    mHeader.AddFunctionExport("void", "computeReactionRates(double time, double y[])");
+    mHeader.AddFunctionExport("void", "computeReactionRates(double time, double *y)");
     mSource<<Append("// Compute the reaction rates" + NL());
-    mSource<<"void computeReactionRates(double time, double y[])\n{";    //Todo: what is time doing here?
+    mSource<<"void computeReactionRates(double time, double *y)\n{";    //Todo: what is time doing here?
 
 
     for (int i = 0; i < numReactions; i++)
@@ -1184,8 +1184,8 @@ void CGenerator::WriteComputeReactionRates(CodeBuilder& ignore, const int& numRe
             ConvertFunctionCallToUseVarArgsSyntax("spf_piecewise", expression);
         }
 
-        expression = RemoveChars(expression, "\t ");
-        mSource<<expression;
+        expression = RemoveChars(expression, "\t \n");
+        mSource<<"\n\t"<<expression<<"\n";
     }
 
     mSource<<Format("}{0}{0}", NL());
@@ -1194,8 +1194,8 @@ void CGenerator::WriteComputeReactionRates(CodeBuilder& ignore, const int& numRe
 void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, const int& numFloatingSpecies)
 {
     mSource<<Append("//Event handling function" + NL());
-    mHeader.AddFunctionExport("void", "evalEvents(double timeIn, double oAmounts[])");
-    mSource<<Append("void evalEvents(double timeIn, double oAmounts[])" + NL());
+    mHeader.AddFunctionExport("void", "evalEvents(double timeIn, double *oAmounts)");
+    mSource<<Append("void evalEvents(double timeIn, double *oAmounts)" + NL());
     mSource<<Append("{" + NL());
 //    mSource<<Append("\tprintf(\"In Eval events\\n\");\n\n");
 
@@ -1777,7 +1777,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "ceil")
                     {
-                        mSource<<Append("ceil");
+                        mSource<<Append("spf_ceil");
                     }
                     else if(theToken == "factorial")
                     {
@@ -2076,7 +2076,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Code
     }
     else if(theToken == "ceil")
     {
-        mSource<<Append("ceil");
+        mSource<<Append("spf_ceil");
     }
     else if(theToken == "factorial")
     {

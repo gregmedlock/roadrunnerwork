@@ -127,11 +127,13 @@ private:	// User declarations
 
     mtkIniParameter<int>        mSelectionListHeight;
     mtkIniParameter<string>     mCompiler;
-    mtkIniParameters            mModelFolders;
     mtkIniParameter<string>     mCurrentModelsFolder;
+    mtkIniParameter<string>     mCurrentModelFileName;
     mtkIniParameter<string>     mTempDataFolder;
     mtkIniParameter<string>     mRRLogFileName;
     mtkIniParameter<bool>       mConservationAnalysis;
+
+    mtkIniParameters            mModelFolders;
     rr::RoadRunner             *mRR;                //RoadRunner instance
     rr::LogFileReader           mLogFileSniffer;
 
