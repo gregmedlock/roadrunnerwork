@@ -20,12 +20,14 @@ void __fastcall TMForm::SetupINIParameters()
     mGeneralParas.Insert( &mStartTimeE->SetupIni("START_TIME", 0));
     mGeneralParas.Insert( &mEndTimeE->SetupIni("END_TIME", 40));
     mGeneralParas.Insert( &mNrOfSimulationPointsE->SetupIni("NR_OF_SIMULATION_POINTS", 100));
+
+    mGeneralParas.Insert( &mPageControlHeight.Setup("LOWER_PAGE_CONTROL_HEIGHT", 300));
     mGeneralParas.Insert( &mSelectionListHeight.Setup("SEL_LB_HEIGHT", 30));
     mGeneralParas.Insert( &mCompiler.Setup("MODEL_COMPILER", "tcc"));
     mGeneralParas.Insert( &mConservationAnalysis.Setup("CONSERVATION_ANALYSIS", "false"));
     mGeneralParas.Insert( &mCurrentModelsFolder.Setup("MODEL_FOLDER", ""));
     mGeneralParas.Insert( &mCurrentModelFileName.Setup("MODEL_FILE_NAME", ""));
-
+    mGeneralParas.Insert( &mLogLevel.Setup("LOG_LEVEL", rr::lInfo));
     mModelFolders.SetIniSection("MODEL_FOLDERS");
     mModelFolders.SetIniFile(mIniFileC->GetFile());
 
@@ -57,7 +59,8 @@ void __fastcall TMForm::SetupINIParameters()
     mEndTimeE->Update();
     mNrOfSimulationPointsE->Update();
     SelList->Height = mSelectionListHeight;
-
+    PageControl1->Height = mPageControlHeight;
+    LogLevelCB->ItemIndex = mLogLevel;
     if(mCompiler == "tcc")
     {
         CompilerRG->ItemIndex = 0;

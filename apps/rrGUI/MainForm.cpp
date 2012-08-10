@@ -33,7 +33,7 @@ __fastcall TMForm::TMForm(TComponent* Owner)
     mLogString(NULL)
 {
     LogOutput::mLogToConsole = (false);
-    gLog.SetCutOffLogLevel(rr::lDebug1);
+    gLog.SetCutOffLogLevel(rr::lDebug5);
     mTempDataFolder = "R:\\rrTemp";
 
     //This is roadrunners logger
@@ -44,6 +44,9 @@ __fastcall TMForm::TMForm(TComponent* Owner)
     mLogFileSniffer.SetFileName(mRRLogFileName);
     mLogFileSniffer.Start();
     SetupINIParameters();
+
+    gLog.SetCutOffLogLevel(mLogLevel.GetValue());
+    TFileSelectionFrame1->TreeView1->OnClick = TFileSelectionFrame1TreeView1Click;
 	TFileSelectionFrame1->TreeView1->OnDblClick =  LoadFromTreeViewAExecute;
 	TFileSelectionFrame1->TreeView1->PopupMenu  =  TVPopupMenu;
 
@@ -66,6 +69,9 @@ __fastcall TMForm::~TMForm()
     {
         mCompiler = "bcc";
     }
+
+    mLogLevel.SetValue(GetLogLevel(LogLevelCB->ItemIndex));
+    mPageControlHeight = PageControl1->Height;
 
     mConservationAnalysis = ConservationAnalysisCB->Checked ? "true" : "false";
 
@@ -159,6 +165,21 @@ void __fastcall TMForm::selectModelsFolderExecute(TObject *Sender)
 void __fastcall TMForm::LoadModelAExecute(TObject *Sender)
 {
     LoadFromTreeViewAExecute(Sender);
+    LoadModelA->Update();
+}
+
+void __fastcall TMForm::TFileSelectionFrame1TreeView1Click(TObject *Sender)
+{
+    //If a valid model file is selected, enable Load action
+    string fName = TFileSelectionFrame1->GetSelectedFileInTree();
+    if(rr::FileExists(fName))
+    {
+        LoadModelA->Enabled = true;
+    }
+    else
+    {
+        LoadModelA->Enabled = false;
+    }
 }
 
 void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
@@ -365,6 +386,23 @@ void __fastcall TMForm::SelListClick(TObject *Sender)
     CheckUI();
 }
 
+void __fastcall TMForm::LoadModelAUpdate(TObject *Sender)
+{
+    if(mRR && mRR->isModelLoaded())
+    {
+        LoadModelA->Enabled = false;
+        UnLoadModelA->Enabled = true;
+        loadUnloadBtn->Action = UnLoadModelA;
+    }
+    else
+    {
+        UnLoadModelA->Enabled = false;
+        loadUnloadBtn->Action = LoadModelA;
+        //Check if there is a valid selection in the tree list
+        TFileSelectionFrame1TreeView1Click(NULL);
+    }
+}
+
 void __fastcall TMForm::UnLoadModelAExecute(TObject *Sender)
 {
     if(!mRR)
@@ -373,6 +411,7 @@ void __fastcall TMForm::UnLoadModelAExecute(TObject *Sender)
     }
 
     mRR->unLoadModel();
+    LoadModelA->Update();
 }
 
 void __fastcall TMForm::filterEditKeyDown(TObject *Sender, WORD &Key, TShiftState Shift)
@@ -396,5 +435,10 @@ void __fastcall TMForm::LogCurrentDataAExecute(TObject *Sender)
         Log(rr::lInfo)<<data;
     }
 }
-//---------------------------------------------------------------------------
+
+void __fastcall TMForm::LogLevelCBChange(TObject *Sender)
+{
+    gLog.SetCutOffLogLevel(GetLogLevel(LogLevelCB->ItemIndex));
+}
+
 

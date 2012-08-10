@@ -30,9 +30,20 @@ PendingAssignment::PendingAssignment(
 void PendingAssignment::AssignToModel()
 {
     if (!UseValuesFromTriggerTime)
+    {
         ComputedValues = ComputeAssignment();
+    }
     PerformAssignment(ComputedValues);
 }
-int PendingAssignment::GetIndex(){return Index;}
-double PendingAssignment::GetTime(){return Time;}
+
+int PendingAssignment::GetIndex()
+{
+    return Index;
+}
+
+double PendingAssignment::GetTime()
+{
+    return Time;
+}
+
 }

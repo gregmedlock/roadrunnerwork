@@ -103,6 +103,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 										RoadRunner(const string& compiler="tcc");
 		virtual                        ~RoadRunner();
+        bool                            isModelLoaded();
         bool                            setCompiler(const string& compiler);
         string                          GetModelName();
         bool                            unLoadModel();

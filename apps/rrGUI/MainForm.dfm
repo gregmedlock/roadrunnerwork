@@ -80,9 +80,8 @@ object MForm: TMForm
         Top = 97
         Width = 75
         Height = 25
-        Caption = 'Button4'
+        Action = LoadFromTreeViewA
         TabOrder = 3
-        OnClick = Button4Click
       end
     end
     object TFileSelectionFrame1: TFileSelectionFrame
@@ -177,29 +176,49 @@ object MForm: TMForm
             Height = 13
             Caption = 'Model Name'
           end
-          object Button2: TButton
+          object Label1: TLabel
+            Left = 24
+            Top = 77
+            Width = 42
+            Height = 13
+            Caption = 'Log level'
+          end
+          object Button3: TButton
             Left = 24
             Top = 136
             Width = 75
             Height = 25
-            Action = UnLoadModelA
+            Action = SimulateA
             TabOrder = 0
           end
-          object Button3: TButton
-            Left = 24
-            Top = 96
-            Width = 75
-            Height = 25
-            Action = SimulateA
-            TabOrder = 1
-          end
-          object Button5: TButton
+          object loadUnloadBtn: TButton
             Left = 24
             Top = 35
             Width = 75
             Height = 25
-            Action = LoadFromTreeViewA
+            Action = LoadModelA
+            TabOrder = 1
+          end
+          object LogLevelCB: TComboBox
+            Left = 24
+            Top = 96
+            Width = 73
+            Height = 21
+            ItemIndex = 0
             TabOrder = 2
+            Text = 'ERRORS'
+            OnChange = LogLevelCBChange
+            Items.Strings = (
+              'ERRORS'
+              'WARNINGS'
+              'INFO'
+              'DEBUG'
+              'DEBUG1'
+              'DEBUG2'
+              'DEBUG3'
+              'DEBUG4'
+              'DEBUG5'
+              '')
           end
         end
       end
@@ -318,7 +337,7 @@ object MForm: TMForm
       Top = 429
       Width = 1001
       Height = 250
-      ActivePage = TabSheet2
+      ActivePage = TabSheet1
       Align = alBottom
       TabOrder = 1
       object TabSheet1: TTabSheet
@@ -413,7 +432,9 @@ object MForm: TMForm
     end
     object LoadModelA: TAction
       Caption = 'Load'
+      Enabled = False
       OnExecute = LoadModelAExecute
+      OnUpdate = LoadModelAUpdate
     end
     object SimulateA: TAction
       Caption = 'Simulate'
@@ -426,6 +447,7 @@ object MForm: TMForm
     end
     object UnLoadModelA: TAction
       Caption = 'Unload'
+      Enabled = False
       OnExecute = UnLoadModelAExecute
     end
     object LogCurrentDataA: TAction

@@ -157,7 +157,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
         msg<<setw(20)<<left<<setprecision(4)<<dCVodeArgument[i];
     }
 
-    Log(lDebug3)<<msg.str();
+    Log(lDebug4)<<msg.str();
 
     for (int i = 0; i < min((int) dCVodeArgument.size(), n); i++)
     {
@@ -1102,23 +1102,26 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
             {
                 //Todo: enable this...
                 //Contains(timeEnd + eventDelay)
-                if (find(assignmentTimes.begin(), assignmentTimes.end(), timeEnd + eventDelay) != assignmentTimes.end())
+                if (find(assignmentTimes.begin(), assignmentTimes.end(), timeEnd + eventDelay) == assignmentTimes.end())
                 {
                     assignmentTimes.push_back(timeEnd + eventDelay);
                 }
 
-//
-//                var pending = new PendingAssignment(
-//                                                            timeEnd + eventDelay,
-//                                                            model->computeEventAssignments[currentEvent],
-//                                                            model->performEventAssignments[currentEvent],
-//                                                            model->eventType[currentEvent], currentEvent);
-//
+
+                PendingAssignment *pending = new PendingAssignment(  timeEnd + eventDelay,
+                                                                    model->computeEventAssignments[currentEvent],
+                                                                    model->performEventAssignments[currentEvent],
+                                                                    model->eventType[currentEvent],
+                                                                    currentEvent);
+
+                if (model->eventType[currentEvent] && preComputedAssignments.count(currentEvent) == 1)
 //                if (model->eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
-//                    pending.ComputedValues = preComputedAssignments[currentEvent];
-//
-//                assignments.Add(pending);
-//                model->eventStatusArray[currentEvent] = false;
+                {
+                    pending->ComputedValues = preComputedAssignments[currentEvent];
+                }
+
+                assignments.push_back(*pending);
+                model->eventStatusArray[currentEvent] = false;
                 firedEvents.erase(firedEvents.begin() + i);
                 break;
             }

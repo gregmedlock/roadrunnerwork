@@ -101,6 +101,11 @@ NLEQInterface* RoadRunner::GetNLEQInterface()
     return dynamic_cast<NLEQInterface*>(steadyStateSolver);
 }
 
+bool RoadRunner::isModelLoaded()
+{
+    return mModel ? true : false;
+}
+
 bool RoadRunner::UseSimulationSettings(SimulationSettings& settings)
 {
     mSettings   = settings;
@@ -756,7 +761,6 @@ bool RoadRunner::CompileCurrentModel()
     return true;
 }
 
-
 bool RoadRunner::unLoadModel()
 {
     if(mModel)
@@ -974,7 +978,7 @@ DoubleMatrix RoadRunner::simulateEx(const double& startTime, const double& endTi
         PopulateResult();
         return mRawSimulationData;
     }
-    catch (const Exception& e)
+    catch(const Exception& e)
     {
         throw SBWApplicationException("Unexpected error from simulateEx()", e.Message());
     }
@@ -1059,14 +1063,14 @@ double RoadRunner::steadyState()
 
     if (UseKinsol)
     {
-//            steadyStateSolver = new KinSolveInterface(mModel);
+            //steadyStateSolver = NULL;//new KinSolveInterface(mModel);
+            Log(lError)<<"Kinsol solver is not enabled...";
+            return -1;
     }
     else
     {
         steadyStateSolver = new NLEQInterface(mModel);
     }
-
-    //oneStep(0.0,0.05);
 
     //Get a std vector for the solver
     vector<double> someAmounts;
@@ -1144,7 +1148,6 @@ void RoadRunner::ComputeAndAssignConservationLaws(const bool& bValue)
     {
         //We need no recompile the model if this flag changes..
         GenerateAndCompileModel();
-
     }
 }
 
@@ -1173,7 +1176,6 @@ StringList RoadRunner::getCompartmentNames()
     }
     return mModelGenerator->getCompartmentList();
 }
-
 
 StringList RoadRunner::getParameterNames()
 {
