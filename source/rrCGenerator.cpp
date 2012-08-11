@@ -1752,7 +1752,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                 case CodeTypes::tWordToken:
                     if(theToken == "pow")
                     {
-                        mSource<<Append("pow");
+                        mSource<<Append("spf_pow");
                     }
                     else if(theToken == "sqrt")
                     {
