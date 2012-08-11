@@ -1100,13 +1100,10 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
             }
             else
             {
-                //Todo: enable this...
-                //Contains(timeEnd + eventDelay)
                 if (find(assignmentTimes.begin(), assignmentTimes.end(), timeEnd + eventDelay) == assignmentTimes.end())
                 {
                     assignmentTimes.push_back(timeEnd + eventDelay);
                 }
-
 
                 PendingAssignment *pending = new PendingAssignment(  timeEnd + eventDelay,
                                                                     model->computeEventAssignments[currentEvent],
@@ -1115,7 +1112,6 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
                                                                     currentEvent);
 
                 if (model->eventType[currentEvent] && preComputedAssignments.count(currentEvent) == 1)
-//                if (model->eventType[currentEvent] && preComputedAssignments.ContainsKey(currentEvent))
                 {
                     pending->ComputedValues = preComputedAssignments[currentEvent];
                 }
@@ -1155,7 +1151,6 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
     sort(assignmentTimes.begin(), assignmentTimes.end());
 }
 
-
 void CvodeInterface::AssignResultsToModel()
 {
     model->updateDependentSpeciesValues(model->y);
@@ -1178,6 +1173,23 @@ void CvodeInterface::AssignResultsToModel()
     model->AssignRates(dTemp);
     model->computeAllRatesOfChange();
 }
+
+////        private void AssignResultsToModel()
+////        {
+////            model.updateDependentSpeciesValues(model.y);
+////            var dTemp = new double[numAdditionalRules];
+////            for (int i = 0; i < numAdditionalRules; i++)
+////            {
+////                dTemp[i] = Cvode_GetVector(_amounts, i);
+////            }
+////            for (int i = 0; i < numIndependentVariables; i++)
+////                model.amounts[i] = Cvode_GetVector(_amounts, i + numAdditionalRules);
+////
+////            model.computeRules(BuildEvalArgument());
+////            model.AssignRates(dTemp);
+////            model.computeAllRatesOfChange();
+////        }
+
 
 // Restart the simulation using a different initial condition
 void CvodeInterface::AssignNewVector(ModelFromC *oModel, bool bAssignNewTolerances)
@@ -1271,14 +1283,6 @@ int CvodeInterface::reStart(double timeStart, ModelFromC* model)
 ////        }
 ////
 
-////        internal double[] BuildEvalArgument()
-////        {
-////            var dResult = new double[model.amounts.Length + model.rateRules.Length];
-////            double[] dCurrentValues = model.GetCurrentValues();
-////            dCurrentValues.CopyTo(dResult, 0);
-////            model.amounts.CopyTo(dResult, model.rateRules.Length);
-////            return dResult;
-////        }
 
 
 vector<double> BuildEvalArgument(ModelFromC* model)
@@ -1293,16 +1297,31 @@ vector<double> BuildEvalArgument(ModelFromC* model)
     return dResult;
 }
 
+////        internal double[] BuildEvalArgument()
+////        {
+////            var dResult = new double[model.amounts.Length + model.rateRules.Length];
+////            double[] dCurrentValues = model.GetCurrentValues();
+////            dCurrentValues.CopyTo(dResult, 0);
+////            model.amounts.CopyTo(dResult, model.rateRules.Length);
+////            return dResult;
+////        }
+
 vector<double> CvodeInterface::BuildEvalArgument()
 {
     vector<double> dResult;
+    dResult.resize(*model->amountsSize + *model->rateRulesSize);
+
     vector<double> dCurrentValues = model->GetCurrentValues();
-    dResult = dCurrentValues;
-//    dResult.insert(dResult.end(), model->amounts.begin(), model->amounts.end());
-    for(int i = 0; i < model->getNumIndependentVariables(); i++)
+    for(int i = 0; i < dCurrentValues.size(); i++)
     {
-        dResult.push_back(model->amounts[i]);
+        dResult[i] = dCurrentValues[i];
     }
+
+    for(int i = 0; i < *model->amountsSize; i++)
+    {
+        dResult[i + *model->rateRulesSize] = model->amounts[i];
+    }
+
     Log(lDebug4)<<"Size of dResult in BuildEvalArgument: "<<dResult.size();
     return dResult;
 }

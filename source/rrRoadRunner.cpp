@@ -1381,24 +1381,29 @@ void RoadRunner::setSelectionList(const StringList& _selList)
 
     StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList bs = mModelGenerator->getBoundarySpeciesList();
-    //ArrayList rs = mModelGenerator->getReactionNames();
+    StringList rs = mModelGenerator->getReactionNames();
     StringList vol = mModelGenerator->getCompartmentList();
     StringList gp = mModelGenerator->getGlobalParameterList();
-//    var sr = mModelGenerator->ModifiableSpeciesReferenceList;
+//    StringList sr = mModelGenerator->ModifiableSpeciesReferenceList;
 
     for (int i = 0; i < newSelectionList.Count(); i++)
     {
+        if (newSelectionList[i] == "time")
+        {
+            selectionList[i].selectionType = TSelectionType::clTime;
+        }
+
         // Check for species
         for (int j = 0; j < fs.Count(); j++)
         {
-            if (newSelectionList[i] == (string)fs[j])
+            if (newSelectionList[i] == fs[j])
             {
                 selectionList[i].index = j;
                 selectionList[i].selectionType = TSelectionType::clFloatingSpecies;
                 break;
             }
 
-            if (newSelectionList[i] == "[" + (string)fs[j] + "]")
+            if (newSelectionList[i] == "[" + fs[j] + "]")
             {
                 selectionList[i].index = j;
                 selectionList[i].selectionType = TSelectionType::clFloatingAmount;
@@ -1406,7 +1411,7 @@ void RoadRunner::setSelectionList(const StringList& _selList)
             }
 
             // Check for species rate of change
-            if (newSelectionList[i] == (string)fs[j] + "'")
+            if (newSelectionList[i] == fs[j] + "'")
             {
                 selectionList[i].index = j;
                 selectionList[i].selectionType = TSelectionType::clRateOfChange;
@@ -1417,13 +1422,13 @@ void RoadRunner::setSelectionList(const StringList& _selList)
         // Check fgr boundary species
         for (int j = 0; j < bs.Count(); j++)
         {
-            if ((string)newSelectionList[i] == (string)bs[j])
+            if (newSelectionList[i] == bs[j])
             {
                 selectionList[i].index = j;
                 selectionList[i].selectionType = TSelectionType::clBoundarySpecies;
                 break;
             }
-            if ((string)newSelectionList[i] == "[" + (string)bs[j] + "]")
+            if (newSelectionList[i] == "[" + bs[j] + "]")
             {
                 selectionList[i].index = j;
                 selectionList[i].selectionType = TSelectionType::clBoundaryAmount;
@@ -1431,38 +1436,38 @@ void RoadRunner::setSelectionList(const StringList& _selList)
             }
         }
 
-
-        if (newSelectionList[i] == "time")
+        for (int j = 0; j < rs.Count(); j++)
         {
-            selectionList[i].selectionType = TSelectionType::clTime;
+            // Check for reaction rate
+            if (newSelectionList[i] == rs[j])
+            {
+                selectionList[i].index = j;
+                selectionList[i].selectionType = TSelectionType::clFlux;
+                break;
+            }
         }
 
-//        for (int j = 0; j < rs.Count(); j++)
-//        {
-//            // Check for reaction rate
-//            if ((string)newSelectionList[i] == (string)rs[j])
-//            {
-//                selectionList[i].index = j;
-//                selectionList[i].selectionType = TSelectionType::clFlux;
-//                break;
-//            }
-//        }
-//
-//        for (int j = 0; j < vol.Count(); j++)
-//        {
-//            // Check for volume
-//            if ((string)newSelectionList[i] == (string)vol[j])
-//            {
-//                selectionList[i].index = j;
-//                selectionList[i].selectionType = TSelectionType::clVolume;
-//                break;
-//            }
-//        }
+        for (int j = 0; j < vol.Count(); j++)
+        {
+            // Check for volume
+            if (newSelectionList[i] == vol[j])
+            {
+                selectionList[i].index = j;
+                selectionList[i].selectionType = TSelectionType::clVolume;
+                break;
+            }
+
+            if (newSelectionList[i] == "[" + vol[j] + "]")
+            {
+                selectionList[i].index = j;
+                selectionList[i].selectionType = TSelectionType::clVolume;
+                break;
+            }
+        }
 
         for (int j = 0; j < gp.Count(); j++)
         {
-            // Check for volume
-            if ((string)newSelectionList[i] == (string)gp[j])
+            if (newSelectionList[i] == gp[j])
             {
                 selectionList[i].index = j;
                 selectionList[i].selectionType = TSelectionType::clParameter;

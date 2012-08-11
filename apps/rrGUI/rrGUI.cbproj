@@ -30,7 +30,7 @@
 			<LinkPackageImports>rtl.bpi;vcl.bpi;DuneComponents.bpi</LinkPackageImports>
 			<PackageImports>vcl.bpi;rtl.bpi;DuneComponents.bpi</PackageImports>
 			<ProjectType>CppVCLApplication</ProjectType>
-			<AllPackageLibs>rtl.lib;vcl.lib;Tee915.lib;vclimg.lib;DuneComponents.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib;TeePro915.lib;TeeUI915.lib</AllPackageLibs>
+			<AllPackageLibs>rtl.lib;vcl.lib;Tee915.lib;vclimg.lib;DuneComponents.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib;TeePro915.lib;TeeUI915.lib;vclie.lib</AllPackageLibs>
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>

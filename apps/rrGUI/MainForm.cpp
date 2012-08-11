@@ -73,7 +73,7 @@ __fastcall TMForm::~TMForm()
     mLogLevel.SetValue(GetLogLevel(LogLevelCB->ItemIndex));
     mPageControlHeight = PageControl1->Height;
 
-    mConservationAnalysis = ConservationAnalysisCB->Checked ? "true" : "false";
+    mConservationAnalysis = ConservationAnalysisCB->Checked ? true : false;
 
     mSelectionListHeight = SelList->Height;
     mGeneralParas.Write();
@@ -175,11 +175,13 @@ void __fastcall TMForm::TFileSelectionFrame1TreeView1Click(TObject *Sender)
     if(rr::FileExists(fName))
     {
         LoadModelA->Enabled = true;
+        UpdateTestSuiteInfo();
     }
     else
     {
         LoadModelA->Enabled = false;
     }
+
 }
 
 void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
@@ -200,6 +202,8 @@ void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
             }
 
             mRR->setCompiler(GetCompiler());
+
+            mRR->ComputeAndAssignConservationLaws(ConservationAnalysisCB->Checked);
 
             if(mRR->loadSBMLFromFile(fName))
             {
@@ -289,10 +293,12 @@ void __fastcall TMForm::loadAvailableSymbolsAExecute(TObject *Sender)
         SelList->Clear();
         ArrayList2 symbols = mRR->getAvailableSymbols();
 
-        StringList fs = symbols.GetSubList("Floating Species");
-        StringList bs = symbols.GetSubList("Boundary Species");
+        StringList fs       = symbols.GetSubList("Floating Species");
+        StringList bs       = symbols.GetSubList("Boundary Species");
+        StringList vols     = symbols.GetSubList("Volumes");
         AddItemsToListBox(fs);
         AddItemsToListBox(bs);
+        AddItemsToListBox(vols);
         CheckUI();
     }
 }
@@ -399,7 +405,7 @@ void __fastcall TMForm::LoadModelAUpdate(TObject *Sender)
         UnLoadModelA->Enabled = false;
         loadUnloadBtn->Action = LoadModelA;
         //Check if there is a valid selection in the tree list
-        TFileSelectionFrame1TreeView1Click(NULL);
+        //TFileSelectionFrame1TreeView1Click(NULL);
     }
 }
 
@@ -441,4 +447,32 @@ void __fastcall TMForm::LogLevelCBChange(TObject *Sender)
     gLog.SetCutOffLogLevel(GetLogLevel(LogLevelCB->ItemIndex));
 }
 
+void __fastcall TMForm::UpdateTestSuiteInfo()
+{
+    string file =  TFileSelectionFrame1->GetSelectedFileInTree();
+    string path =  rr::ExtractFilePath(file);
+    vector<string> dirs = rr::SplitString(path,"\\");
+
+    if(dirs.size())
+    {
+        string caseNr = dirs[dirs.size() -1];
+        string htmlDoc = rr::JoinPath(path, (caseNr + "-model.html"));
+        if(rr::FileExists(htmlDoc))
+        {
+            //If this is a testsuite folder.. show the http
+            WebBrowser1->Navigate(htmlDoc.c_str());
+        }
+
+        string tsPic = rr::JoinPath(path, (caseNr + "-plot.jpg"));
+        //Picture..
+        testSuitePic->Picture->LoadFromFile(tsPic.c_str());
+    }
+    else
+    {
+        //Disable.....
+    }
+
+
+}
+//---------------------------------------------------------------------------
 

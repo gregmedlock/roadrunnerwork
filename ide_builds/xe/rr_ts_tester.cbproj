@@ -178,7 +178,7 @@
 						<Parameters Name="DebugSourceDirs">C:\RRW\source</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-n71 -t&quot;R:\rrTemp&quot; -d&quot;R:\DataOutput&quot;</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-n29 -t&quot;R:\rrTemp&quot; -d&quot;R:\DataOutput&quot;</Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

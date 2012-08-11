@@ -28,6 +28,9 @@
 #include "mtkSTDStringEdit.h"
 #include "rrSimulationSettings.h"
 #include "rrLogLevel.h"
+#include <jpeg.hpp>
+#include <OleCtrls.hpp>
+#include <SHDocVw.hpp>
 namespace rr
 {
 class RoadRunner;
@@ -103,6 +106,15 @@ __published:	// IDE-managed Components
     TCheckBox *ConservationAnalysisCB;
     TComboBox *LogLevelCB;
     TLabel *Label1;
+    TTabSheet *TabSheet3;
+    TImage *testSuitePic;
+    TGroupBox *GroupBox4;
+    TWebBrowser *WebBrowser1;
+    TButton *Button2;
+    TPageControl *PageControl2;
+    TTabSheet *TabSheet4;
+    TTabSheet *TabSheet5;
+    TSplitter *Splitter1;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -124,13 +136,12 @@ __published:	// IDE-managed Components
     void __fastcall TFileSelectionFrame1TreeView1Click(TObject *Sender);
     void __fastcall LogLevelCBChange(TObject *Sender);
 
-
-
 private:	// User declarations
     mtkIniParameters            mGeneralParas;
 
     mtkIniParameter<int>        mSelectionListHeight;
-    mtkIniParameter<int>            mPageControlHeight;
+    mtkIniParameter<int>        mPageControlHeight;
+
     mtkIniParameter<mtkLogLevel>   mLogLevel;
     mtkIniParameter<string>         mCompiler;
     mtkIniParameter<string>     mCurrentModelsFolder;
@@ -152,7 +163,7 @@ private:	// User declarations
     void                        AddItemsToListBox(const StringList& items);
     SimulationSettings          mSettings;
     string                      GetCompiler();//What is set in the RadioGroup
-
+    void            __fastcall  UpdateTestSuiteInfo();
 public:		// User declarations
                     __fastcall  TMForm(TComponent* Owner);
                     __fastcall ~TMForm();

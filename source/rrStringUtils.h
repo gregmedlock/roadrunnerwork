@@ -24,8 +24,6 @@ string              RR_DECLSPEC NL();
 string              RR_DECLSPEC ExtractFilePath(const string& fileN);
 string              RR_DECLSPEC ExtractFileName(const string& fileN);
 
-//string              RR_DECLSPEC GetPathNoFileName(const string& fName);
-//string              RR_DECLSPEC GetFileNameNoPath(const string& fName);
 string              RR_DECLSPEC ChangeFileExtensionTo(const string& theFileName, const string& newExtension);
 
 string              RR_DECLSPEC Trim(const string& str);
