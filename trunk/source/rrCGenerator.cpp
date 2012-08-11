@@ -158,9 +158,7 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     {
         mNumIndependentSpecies = libStruct->getNumIndSpecies();
         independentSpeciesList = libStruct->getIndependentSpecies();
-//        independentSpeciesList = mStructAnalysis.GetIndependentSpeciesIds();
         dependentSpeciesList   = libStruct->getDependentSpecies();
-//        dependentSpeciesList   = mStructAnalysis.GetDependentSpeciesIds();
     }
     else
     {
@@ -218,9 +216,8 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     // Get the L0 matrix
     int nrRows;
     int nrCols;
-    LIB_LA::DoubleMatrix* aL0 = InitializeL0(nrRows, nrCols);     //Todo: What is this doing? answer.. it is used below..
-//    DoubleMatrix L0(aL0, nrRows, nrCols);         //How many rows and cols?? We need to know that in order to use the matrix properly!
 
+    LIB_LA::DoubleMatrix* aL0 = InitializeL0(nrRows, nrCols);     //Todo: What is this doing? answer.. it is used below..
     WriteUpdateDependentSpecies(ignore, mNumIndependentSpecies, mNumDependentSpecies, *aL0);
     int numOfRules = WriteComputeRules(ignore, mNumReactions);
 
@@ -269,32 +266,32 @@ void CGenerator::WriteOutVariables(CodeBuilder& ignore)
 {
     mHeader.FormatVariable("D_S char*",                              "mModelName");
     mHeader.FormatVariable("D_S char**",                             "mWarnings");
-    mHeader.FormatArray("D_S double",                                "_gp",                     mNumGlobalParameters +
-                                                                                   mTotalLocalParmeters,                         "Vector containing all the global parameters in the System  ");
+    mHeader.FormatArray("D_S double",                                "_gp",                             mNumGlobalParameters +
+                                                                                                        mTotalLocalParmeters,                       "Vector containing all the global parameters in the System  ");
 
     if(mNumModifiableSpeciesReferences)
     {
-        mHeader.FormatArray("D_S double",                             "_sr",                     mNumModifiableSpeciesReferences,             "Vector containing all the modifiable species references  ");
+        mHeader.FormatArray("D_S double",                            "_sr",                             mNumModifiableSpeciesReferences,            "Vector containing all the modifiable species references  ");
     }
 
     //Arrays
-    mHeader.FormatArray("D_S double*",                                 "_lp",                    mNumReactions,                                 "Vector containing all the local parameters in the System  ");
-    mHeader.FormatArray("D_S double",                                 "_y",                     floatingSpeciesConcentrationList.size(),    "Vector containing the concentrations of all floating species");
-    mHeader.FormatArray("D_S double",                                "_init_y",                 floatingSpeciesConcentrationList.Count(),     "Vector containing the initial concentrations of all floating species");
-    mHeader.FormatArray("D_S double",                                "_amounts",             floatingSpeciesConcentrationList.size(),      "Vector containing the amounts of all floating species ");
-    mHeader.FormatArray("D_S double",                                "_bc",                    mNumBoundarySpecies,                         "Vector containing all the boundary species concentration values");
-    mHeader.FormatArray("D_S double",                                "_c",                    mNumCompartments                         ,      "Vector containing all the compartment values   ");
-    mHeader.FormatArray("D_S double",                                "_dydt",                 floatingSpeciesConcentrationList.size() ,      "Vector containing rates of changes of all species   ");
-    mHeader.FormatArray("D_S double",                                "_rates",                mNumReactions                             ,     "Vector containing the rate laws of all reactions    ");
-    mHeader.FormatArray("D_S double",                                "_ct",                    mNumDependentSpecies                     ,      "Vector containing values of all conserved sums      ");
-    mHeader.FormatArray("D_S double",                                "mEventTests",            mNumEvents                                 ,     "Vector containing results of any event tests        ");
+    mHeader.FormatArray("D_S double*",                               "_lp",                             mNumReactions,                              "Vector containing all the local parameters in the System  ");
+    mHeader.FormatArray("D_S double",                                "_y",                              floatingSpeciesConcentrationList.size(),    "Vector containing the concentrations of all floating species");
+    mHeader.FormatArray("D_S double",                                "_init_y",                         floatingSpeciesConcentrationList.Count(),   "Vector containing the initial concentrations of all floating species");
+    mHeader.FormatArray("D_S double",                                "_amounts",                        floatingSpeciesConcentrationList.size(),    "Vector containing the amounts of all floating species ");
+    mHeader.FormatArray("D_S double",                                "_bc",                             mNumBoundarySpecies,                        "Vector containing all the boundary species concentration values");
+    mHeader.FormatArray("D_S double",                                "_c",                              mNumCompartments                         ,  "Vector containing all the compartment values   ");
+    mHeader.FormatArray("D_S double",                                "_dydt",                           floatingSpeciesConcentrationList.size() ,   "Vector containing rates of changes of all species   ");
+    mHeader.FormatArray("D_S double",                                "_rates",                          mNumReactions                             , "Vector containing the rate laws of all reactions    ");
+    mHeader.FormatArray("D_S double",                                "_ct",                             mNumDependentSpecies                     ,  "Vector containing values of all conserved sums      ");
+    mHeader.FormatArray("D_S double",                                "mEventTests",                     mNumEvents                                 ,"Vector containing results of any event tests        ");
 
     mHeader<<"\ttypedef double (*TEventDelayDelegate)();"<<endl;
-    mHeader.FormatArray("TEventDelayDelegate",                    "mEventDelay",            mNumEvents                                 ,     "Array of trigger function pointers");
-    mHeader.AddFunctionExport("TEventDelayDelegate*",           "GetEventDelays()");
-    mHeader.FormatArray("bool",                                      "_eventType",            mNumEvents                                ,     "Array holding the status whether events are useValuesFromTriggerTime or not");
-    mHeader.FormatArray("bool",                                      "_eventPersistentType", mNumEvents                                ,     "Array holding the status whether events are persitstent or not");
-    mHeader.FormatVariable("D_S double",                              "mTime");
+    mHeader.FormatArray("TEventDelayDelegate",                          "mEventDelay",                        mNumEvents                                 ,"Array of trigger function pointers");
+    mHeader.AddFunctionExport("TEventDelayDelegate*",                   "GetEventDelays()");
+    mHeader.FormatArray("bool",                                         "_eventType",                      mNumEvents                                , "Array holding the status whether events are useValuesFromTriggerTime or not");
+    mHeader.FormatArray("bool",                                         "_eventPersistentType",            mNumEvents                                , "Array holding the status whether events are persitstent or not");
+    mHeader.FormatVariable("D_S double",                                "mTime");
     mHeader.FormatVariable("D_S int",                                  "numIndependentVariables");
     mHeader.FormatVariable("D_S int",                                  "numDependentVariables");
     mHeader.FormatVariable("D_S int",                                  "numTotalVariables");
@@ -466,69 +463,67 @@ void CGenerator::WriteUpdateDependentSpecies(CodeBuilder& ignore, const int& num
     mSource<<Append("// Uses the equation: Sd = C + L0*Si" + NL());
     mSource<<"void updateDependentSpeciesValues(double* y)\n{";
 
+    // Use the equation: Sd = C + L0*Si to compute dependent concentrations
+
     if (numDependentSpecies > 0)
     {
-        // Use the equation: Sd = C + L0*Si to compute dependent concentrations
-        if (numDependentSpecies > 0)
+        for (int i = 0; i < numDependentSpecies; i++)
         {
-            for (int i = 0; i < numDependentSpecies; i++)
+            mSource<<Format("\n\t_y[{0}] = ", (i + numIndependentSpecies));
+            mSource<<Format("(_ct[{0}]", i);
+            string cLeftName =
+                convertCompartmentToC(
+                    floatingSpeciesConcentrationList[i + numIndependentSpecies].compartmentName);
+
+            for (int j = 0; j < numIndependentSpecies; j++)
             {
-                mSource<<Format("\n\t_y[{0}] = ", (i + numIndependentSpecies));
-                mSource<<Format("(_ct[{0}]", i);
-                string cLeftName =
-                    convertCompartmentToC(
-                        floatingSpeciesConcentrationList[i + numIndependentSpecies].compartmentName);
+                string yName = Format("y[{0}]", j);
+                string cName = convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName);
+                double* mat = L0.GetPointer();
+                double matElementValue = L0(i,j);
 
-                for (int j = 0; j < numIndependentSpecies; j++)
+                if (L0(i,j) > 0) // In C# code there is no checking for index out of bound..
                 {
-                    string yName = Format("y[{0}]", j);
-                    string cName = convertCompartmentToC(floatingSpeciesConcentrationList[j].compartmentName);
-                    double* mat = L0.GetPointer();
-                    double matElementValue = L0(i,j);
-
-                    if (L0(i,j) > 0) // In C# code there is no checking for index out of bound..
+                    if (L0(i,j) == 1)
                     {
-                        if (L0(i,j) == 1)
-                        {
-                            mSource<<Format(" + {0}\t{1}{2}{3}{0}\t",
-                                "",
-                                yName,
-                                STR_FixAmountCompartments,
-                                cName);
-                        }
-                        else
-                        {
-                            mSource<<Format("{0} + (double){1}{2}{3}{2}{4}",
-                                "",
-                                WriteDouble(L0(i,j)),
-                                STR_FixAmountCompartments,
-                                yName,
-                                cName);
-                        }
+                        mSource<<Format(" + {0}\t{1}{2}{3}{0}\t",
+                            "",
+                            yName,
+                            STR_FixAmountCompartments,
+                            cName);
                     }
-                    else if (L0(i,j) < 0)
+                    else
                     {
-                        if (L0(i,j) == -1)
-                        {
-                            mSource<<Format("{0} - {1}{2}{3}",
-                                "",
-                                yName,
-                                STR_FixAmountCompartments,
-                                cName);
-                        }
-                        else
-                        {
-                            mSource<<Format("{0} - (double){1}{2}{3}{2}{4}",
-                                "",
-                                WriteDouble(fabsl(L0(i,j))),
-                                STR_FixAmountCompartments,
-                                yName,
-                                cName);
-                        }
+                        mSource<<Format("{0} + (double){1}{2}{3}{2}{4}",
+                            "",
+                            WriteDouble(L0(i,j)),
+                            STR_FixAmountCompartments,
+                            yName,
+                            cName);
                     }
                 }
-                mSource<<Format(") / {0};{1}", cLeftName, NL());
+                else if (L0(i,j) < 0)
+                {
+                    if (L0(i,j) == -1)
+                    {
+                        mSource<<Format("{0} - {1}{2}{3}",
+                            "",
+                            yName,
+                            STR_FixAmountCompartments,
+                            cName);
+                    }
+                    else
+                    {
+                        mSource<<Format("{0} - (double){1}{2}{3}{2}{4}",
+                            "",
+                            WriteDouble(fabsl(L0(i,j))),
+                            STR_FixAmountCompartments,
+                            yName,
+                            cName);
+                    }
+                }
             }
+            mSource<<Format(") / {0};{1}", cLeftName, NL());
         }
     }
     mSource<<Format("}{0}{0}", NL());
@@ -1044,7 +1039,7 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
 
                 if (mNOM.IsCompartment(varName))
                 {
-                    mSource<<Append("\nconvertToConcentrations();");
+                    mSource<<Append("\n\tconvertToConcentrations();\n");
                 }
             }
         }
