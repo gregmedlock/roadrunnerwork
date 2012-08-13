@@ -135,7 +135,6 @@ double spf_and(int nrOfArguments, ...)
     int i;
     va_list listPointer;
 
-    // Currently, listPointer is UNINITIALIZED, however,
 
     // make listPointer point to the first argument in the list
     va_start(listPointer, nrOfArguments);
@@ -350,7 +349,37 @@ double spf_root(double a, double b)
 
 double spf_piecewise(int nrOfArgs, ...)
 {
-    return -1;    //Todo: implement this one
+    int i;
+    double result = 0.0;
+    double nextArg;
+    va_list listPointer;
+
+    // make listPointer point to the first argument in the list
+    va_start(listPointer, nrOfArgs);
+    for(i = 0; i < nrOfArgs - 1; i= i + 2)
+    {
+        // Get an argument.  Must know the type of the arg to retrieve
+        // it from the va_list.
+        result  = (double) va_arg(listPointer, double);
+        printf( "The %d:th arg is %f\n", i, result );
+        nextArg = (double) va_arg(listPointer, double);
+        printf( "The %d:th arg is %f\n", i + 1, nextArg );
+        if(nextArg == 1.0)
+        {
+            va_end( listPointer );            
+            printf( "Returning result %f\n",  result );
+            return result;
+        }
+    }
+   
+    //Get last argument (this works only if nrOfArgs are odd..)
+    //Todo: rewrite this
+
+    result = (double) va_arg(listPointer, double);
+    va_end( listPointer );       
+    printf( "Returning result outside loop%f\n",  result );
+
+    return result;
 }
 //        double _piecewise(params object[] args)
 //        {

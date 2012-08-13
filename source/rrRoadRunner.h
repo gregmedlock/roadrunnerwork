@@ -48,8 +48,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		vector<TSelectionRecord>        selectionList;
         int                             CreateDefaultSelectionList();
 		ModelGenerator                 *mModelGenerator;    //Pointer to one of the below ones..
-		ModelGenerator                 *mCSharpGenerator;
-		ModelGenerator                 *mCGenerator;
+		CSharpGenerator                *mCSharpGenerator;
+		CGenerator                     *mCGenerator;
 
 		DoubleMatrix                   *_L;
 		DoubleMatrix                   *_L0;
@@ -124,6 +124,9 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		void                            Reset();
 		bool                            CreateModelSourceCode();
 		string                          GetModelSourceCode();
+		string                          getCHeaderCode();
+		string                          getCSourceCode();
+		string                          getCSharpCode();
 		DoubleMatrix                    runSimulation();
 		bool                            InitializeModel();
 		bool                            Simulate();
@@ -219,7 +222,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		vector<string>                  getWarnings();
 		void                     		ReMultiplyCompartments(const bool& bValue);
 		void                     		ComputeAndAssignConservationLaws(const bool& bValue);
-		string                          getCSharpCode();
 		double*                         steadyStateParameterScan(const string& symbol, const double& startValue, const double& endValue, const double& stepSize);
 		string                          writeSBML();
 		int                             getNumberOfLocalParameters(const int& reactionId);
@@ -4850,4 +4852,3 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 ////
 ////
 ////}
-

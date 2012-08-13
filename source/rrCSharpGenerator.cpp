@@ -30,6 +30,11 @@ ModelGenerator(rr)
 
 CSharpGenerator::~CSharpGenerator(){}
 
+string CSharpGenerator::getSourceCode()
+{
+    return mSource.ToString();
+}
+
 // Generates the Model Code from the SBML string
 string CSharpGenerator::generateModelCode(const string& sbmlStr)
 {

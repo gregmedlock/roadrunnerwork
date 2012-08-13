@@ -201,11 +201,9 @@ class RR_DECLSPEC ModelFromC : public rrObject
         //Inherited functions
         void                                    setCompartmentVolumes();
         int                                     getNumLocalParameters(int reactionId);
-           void                                 computeRules(vector<double>& _y);
-           void                                 computeRules(double* ay, int size);
-
+        void                                    computeRules(vector<double>& _y);
+        void                                    computeRules(double* ay, int size);
         void                                    initializeInitialConditions();
-
         void                                    setParameterValues();
         void                                    setBoundaryConditions();
         void                                    setInitialConditions();
