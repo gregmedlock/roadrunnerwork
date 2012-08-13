@@ -69,14 +69,11 @@ def getLastError():
     return handle.getLastError()
 
 #RoadRunner API
-#helper functions
 
 #Flags/Options
 handle.setComputeAndAssignConservationLaws.restype = c_bool
 
 def setComputeAndAssignConservationLaws(OnOrOff):
-#    value = c_bool
-#    if handle.setComputeAndAssignConservationLaws (OnOrOff)
     return handle.setComputeAndAssignConservationLaws(OnOrOff)
 
 #Load SBML methods
@@ -114,9 +111,6 @@ handle.setTimeStart.restype = c_bool
 handle.setTimeEnd.restype = c_bool
 handle.setNumPoints.restype = c_bool
 handle.setSelectionList.restype = c_bool
-#helper function
-#helper function
-#helper function
 handle.oneStep.restype = c_bool
 handle.getTimeStart.restype = c_bool
 handle.getTimeEnd.restype = c_bool
@@ -142,13 +136,6 @@ def simulate():
 
 def simulateEx(timeStart,timeEnd,numberOfPoints):
     return handle.printResult(handle.simulateEx(timeStart,timeEnd,numberOfPoints))
-
-#def setSelectionList(list):
-#    value = c_char_p()
-#    if handle.getResultElement (list, byref(value)) == True:
-#        return value.value;
-#    else:
-#        raise RuntimeError('Index out of range')
 
 #def oneStep (currentTime, stepSize):                             #test this
 #    value = c_double()
@@ -446,7 +433,7 @@ def getuEE(name, species, value):                         #test this
     else:
         raise RuntimeError('Index out of range')
 
-def getgetScaledFloatingSpeciesElasticity(reactionName, speciesName, value):                         #test this
+def getScaledFloatingSpeciesElasticity(reactionName, speciesName, value):                         #test this
     value = c_double()
     if handle.getScaledFloatingSpeciesElasticity(reactionName, speciesName, value,  byref(value)) == True:
         return value.value;
@@ -590,53 +577,6 @@ def getCCodeHeader():
 
 def getCCodeSource():
     return handle.getCCodeSource()
-
-
-#def setVectorElement(stringList, index):
-#    value = c_int()
-#    if handle.setVectorElement(stringList, index, value,  byref(value)) == True:
-#        return value.value;
-#    else:
-#        raise RuntimeError('Index out of range')
-
-
-
-
-
-
-
-def getCopyright():
-    return handle.getCopyright()
-
-def loadSBML (sbmlstr):
-    return handle.loadSBML (sbmlstr)
-
-def printResult (result):
-    return handle.printResult (result)
-
-def setTimeStart (timeStart):
-    arg = byref (c_double(timeStart))
-    return handle.setTimeStart (arg)
-
-def setTimeEnd (timeEnd):
-    return handle.setTimeEnd (byref (c_double(timeEnd)))
-
-def setNumPoints (numPoints):
-    return handle.setNumPoints (byref (c_int(numPoints)))
-
-def getMatrixElement (m, i, j):
-    value = c_double()
-    if handle.getMatrixElement (m, i, j, byref(value)) == True:
-        return value.value;
-    else:
-        raise RuntimeError('Index out of range')
-
-#def getRElementesult (m, i, j):
-#    value = c_double()
-#    if handle.getResultElement (m, i, j, byref(value)) == True:
-#        return value.value;
-#    else:
-#        raise RuntimeError('Index out of range')
 
 def setTempFolder(tempfolder):
     return handle.setTempFolder(tempfolder)
