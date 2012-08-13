@@ -3,12 +3,12 @@
 #include "rrCExporter.h"
 
 // Boolean functions for event handling" + NL());
-bool spf_gt(double a, double b);
-bool spf_lt(double a, double b);
-bool spf_geq(double a, double b);
-bool spf_leq(double a, double b);
-bool spf_eq(double a, double b);
-bool spf_neq(double a, double b);
+double spf_gt(double a, double b);
+double spf_lt(double a, double b);
+double spf_geq(double a, double b);
+double spf_leq(double a, double b);
+double spf_eq(double a, double b);
+double spf_neq(double a, double b);
 double spf_and(int numArgs, ...);
 double spf_or(int numArgs, ...);
 double spf_xor(int numArgs, ...);
