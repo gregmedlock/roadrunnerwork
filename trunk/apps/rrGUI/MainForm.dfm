@@ -338,7 +338,7 @@ object MForm: TMForm
       Top = 465
       Width = 1007
       Height = 250
-      ActivePage = TabSheet2
+      ActivePage = TabSheet1
       Align = alBottom
       TabOrder = 1
       object TabSheet1: TTabSheet
@@ -369,7 +369,7 @@ object MForm: TMForm
             Height = 21
             AutoSize = True
             ButtonHeight = 21
-            ButtonWidth = 50
+            ButtonWidth = 62
             Caption = 'ToolBar1'
             ShowCaptions = True
             TabOrder = 1
@@ -379,9 +379,14 @@ object MForm: TMForm
               Action = ClearMemoA
             end
             object ToolButton2: TToolButton
-              Left = 50
+              Left = 62
               Top = 0
               Action = LogCurrentDataA
+            end
+            object ToolButton3: TToolButton
+              Left = 124
+              Top = 0
+              Action = LogCCodeA
             end
           end
         end
@@ -1415,6 +1420,10 @@ object MForm: TMForm
     object LogCurrentDataA: TAction
       Caption = 'Log Data'
       OnExecute = LogCurrentDataAExecute
+    end
+    object LogCCodeA: TAction
+      Caption = 'Log C Code'
+      OnExecute = LogCCodeAExecute
     end
   end
   object mIniFileC: mtkIniFileC

@@ -57,6 +57,7 @@ class RR_DECLSPEC CSharpGenerator : public ModelGenerator
         // Generates the Model Code from the SBML string
         string                              generateModelCode(const string& sbmlStr);
         bool                                SaveSourceCodeToFolder(const string& folder);
+        string                              getSourceCode();
 };
 
 }

@@ -115,6 +115,8 @@ __published:	// IDE-managed Components
     TTabSheet *TabSheet4;
     TTabSheet *TabSheet5;
     TSplitter *Splitter1;
+    TToolButton *ToolButton3;
+    TAction *LogCCodeA;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -135,6 +137,7 @@ __published:	// IDE-managed Components
     void __fastcall LoadModelAUpdate(TObject *Sender);
     void __fastcall TFileSelectionFrame1TreeView1Click(TObject *Sender);
     void __fastcall LogLevelCBChange(TObject *Sender);
+    void __fastcall LogCCodeAExecute(TObject *Sender);
 
 private:	// User declarations
     mtkIniParameters            mGeneralParas;

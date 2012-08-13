@@ -252,6 +252,33 @@ string RoadRunner::GetModelSourceCode()
 	return mModelCode;
 }
 
+string RoadRunner::getCSharpCode()
+{
+    if(mCSharpGenerator)
+    {
+        return mCSharpGenerator->getSourceCode();
+    }
+    return "";
+}
+
+string RoadRunner::getCHeaderCode()
+{
+    if(mCGenerator)
+    {
+        return mCGenerator->GetHeaderCode();
+    }
+    return "";
+}
+
+string RoadRunner::getCSourceCode()
+{
+    if(mCGenerator)
+    {
+        return mCGenerator->GetSourceCode();
+    }
+    return "";
+}
+
 bool RoadRunner::InitializeModel()
 {
     if(!mModel)

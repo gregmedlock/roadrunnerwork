@@ -151,11 +151,11 @@ bool TestSuiteModelSimulation::SaveAllData()
                     StringList ref_cnames =  mReferenceData.GetColumnNames();
                     ref_cnames.PostFix("_ref");
                     fs << ref_cnames.AsString();
-
+                    fs << ",";
                     StringList res_cnames =  mResultData.GetColumnNames();
                     res_cnames.PostFix("_rr");
                     fs << res_cnames.AsString();
-
+                    fs << ",";
                     StringList err_names = ref_cnames - res_cnames;
                     fs << err_names.AsString();
                 }

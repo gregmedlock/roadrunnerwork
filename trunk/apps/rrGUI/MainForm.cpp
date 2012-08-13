@@ -181,7 +181,6 @@ void __fastcall TMForm::TFileSelectionFrame1TreeView1Click(TObject *Sender)
     {
         LoadModelA->Enabled = false;
     }
-
 }
 
 void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
@@ -296,9 +295,12 @@ void __fastcall TMForm::loadAvailableSymbolsAExecute(TObject *Sender)
         StringList fs       = symbols.GetSubList("Floating Species");
         StringList bs       = symbols.GetSubList("Boundary Species");
         StringList vols     = symbols.GetSubList("Volumes");
+        StringList gp       = symbols.GetSubList("Global Parameters");
+
         AddItemsToListBox(fs);
         AddItemsToListBox(bs);
         AddItemsToListBox(vols);
+        AddItemsToListBox(gp);
         CheckUI();
     }
 }
@@ -457,22 +459,48 @@ void __fastcall TMForm::UpdateTestSuiteInfo()
     {
         string caseNr = dirs[dirs.size() -1];
         string htmlDoc = rr::JoinPath(path, (caseNr + "-model.html"));
-        if(rr::FileExists(htmlDoc))
+        if(rr::FileExists(htmlDoc)) //This is a test suite folder
         {
             //If this is a testsuite folder.. show the http
             WebBrowser1->Navigate(htmlDoc.c_str());
-        }
+            string modelFile = rr::JoinPath(path, (caseNr + "-plot.jpg"));
+            //Picture..
+            if(rr::FileExists(modelFile))
+            {
+                testSuitePic->Picture->LoadFromFile(modelFile.c_str());
+            }
 
-        string tsPic = rr::JoinPath(path, (caseNr + "-plot.jpg"));
-        //Picture..
-        testSuitePic->Picture->LoadFromFile(tsPic.c_str());
+            //Open and load settings
+            modelFile = rr::JoinPath(path, (caseNr + "-settings.txt"));
+            if(rr::FileExists(modelFile))
+            {
+                vector<string> fContent = GetLinesInFile(modelFile);
+                Log(rr::lInfo)<<"Model Settings:\n"<<fContent;
+
+            }
+        }
     }
     else
     {
         //Disable.....
     }
-
-
 }
-//---------------------------------------------------------------------------
+
+
+void __fastcall TMForm::LogCCodeAExecute(TObject *Sender)
+{
+    string cCode;
+    if(mRR && mRR->isModelLoaded())
+    {
+        cCode = mRR->getCSourceCode();
+        vector<string> lines(rr::SplitString(cCode, "\n"));
+        for(int i = 0; i < lines.size(); i++)
+        {
+            string aLine = lines[i];
+            Log(rr::lInfo)<<aLine;
+        }
+
+    }
+}
+
 

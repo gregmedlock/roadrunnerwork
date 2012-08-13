@@ -161,6 +161,7 @@ int main(int argc, char * argv[])
             Log(lError)<<"Failed loading SBML model settings";
         }
 
+        rr->ComputeAndAssignConservationLaws(false);
 //        rr->ComputeAndAssignConservationLaws(true);
 //        simulation.SetSelectionList("time S1 S2");
         //Then Simulate model
