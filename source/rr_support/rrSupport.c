@@ -98,35 +98,35 @@ double spf_pow(double base, double exp)
 
 //---------------------------------------------------------------------------
 // Boolean functions for event handling" + NL());
-bool spf_gt(double a, double b)
+double spf_gt(double a, double b)
 {
-    return (a > b ? true : false);
+    return (a > b ? 1.0 : 0.0);
 }
 
-bool spf_lt(double a, double b)
+double spf_lt(double a, double b)
 {
 //    printf("in %f less than %f", a, b);
-    return (a <= b ? true : false);
+    return (a <= b ? 1.0 : 0.0);
 }
 
-bool spf_geq(double a, double b)
+double spf_geq(double a, double b)
 {
-    return (a >= b ? true : false);
+    return (a >= b ? 1.0 : 0.0);
 }
 
-bool spf_leq(double a, double b)
+double spf_leq(double a, double b)
 {
-    return (a <= b ? true : false);
+    return (a <= b ? 1.0 : 0.0);
 }
 
-bool spf_eq(double a, double b)
+double spf_eq(double a, double b)
 {
-    return (a == b ? true : false);
+    return (a == b ? 1.0 : 0.0);
 }
 
-bool spf_neq(double a, double b)
+double spf_neq(double a, double b)
 {
-    return (a != b ? true : false);
+    return (a != b ? 1.0 : 0.0);
 }
 
 double spf_and(int nrOfArguments, ...)
@@ -361,13 +361,13 @@ double spf_piecewise(int nrOfArgs, ...)
         // Get an argument.  Must know the type of the arg to retrieve
         // it from the va_list.
         result  = (double) va_arg(listPointer, double);
-        printf( "The %d:th arg is %f\n", i, result );
+/*        printf( "The %d:th arg is %f\n", i, result );*/
         nextArg = (double) va_arg(listPointer, double);
-        printf( "The %d:th arg is %f\n", i + 1, nextArg );
+/*        printf( "The %d:th arg is %f\n", i + 1, nextArg );*/
         if(nextArg == 1.0)
         {
             va_end( listPointer );            
-            printf( "Returning result %f\n",  result );
+/*            printf( "Returning result %f\n",  result );*/
             return result;
         }
     }
@@ -377,7 +377,7 @@ double spf_piecewise(int nrOfArgs, ...)
 
     result = (double) va_arg(listPointer, double);
     va_end( listPointer );       
-    printf( "Returning result outside loop%f\n",  result );
+/*    printf( "Returning result outside loop%f\n",  result );*/
 
     return result;
 }

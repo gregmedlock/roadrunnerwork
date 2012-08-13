@@ -365,9 +365,9 @@
 		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
 		<PropertyGroup Condition="'$(FileToCompile)'==''">
 			<PostBuildEvent><![CDATA[copy $(RR_ROOT)\trunk\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib $(RR_INSTALL)\lib\libxml2_xe.lib
-copy $(RR_ROOT)\trunk\ThirdParty\libsbml_xe\dependencies\bin\libxml2.dll $(RR_INSTALL)\bin\libxml2.dll
-copy $(RR_ROOT)\trunk\ThirdParty\libsbml_xe\dependencies\bin\iconv.dll $(RR_INSTALL)\bin\iconv.dll
-copy $(RR_ROOT)\trunk\ThirdParty\libsbml_xe\dependencies\bin\zlib1.dll $(RR_INSTALL)\bin\zlib1.dll]]></PostBuildEvent>
+copy  $(RR_ROOT)\trunk\ThirdParty\libsbml_xe\dependencies\bin\libxml2.dll $(RR_INSTALL)\bin\libxml2.dll
+copy  $(RR_ROOT)\trunk\ThirdParty\libsbml_xe\dependencies\bin\iconv.dll $(RR_INSTALL)\bin\iconv.dll
+copy  $(RR_ROOT)\trunk\ThirdParty\libsbml_xe\dependencies\bin\zlib1.dll $(RR_INSTALL)\bin\zlib1.dll]]></PostBuildEvent>
 		</PropertyGroup>
 		<ProjectExtensions>
 			<Borland.Personality>CPlusPlusBuilder.Personality.12</Borland.Personality>
