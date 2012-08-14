@@ -307,7 +307,7 @@ double spf_ceil(double a)
 
 double spf_floor(double a)
 {
-    return  (double)a floor(a);
+    return  (double) floor(a);
 }
 
 int spf_factorial(int a)
