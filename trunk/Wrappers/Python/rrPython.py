@@ -145,20 +145,36 @@ def simulateEx(timeStart,timeEnd,numberOfPoints):
 #        raise RuntimeError('Index out of range')
 
 def getTimeStart():
-    return handle.getTimeStart()
+    value = c_double()
+    if handle.getTimeStart(byref(value)) == True:
+        return value.value
+    else:
+        return ('Index out of Range')
 
-def getTimeEnd(timeEnd):
-    return handle.getTimeEnd(timeEnd)
+def getTimeEnd():
+    value = c_double()
+    if handle.getTimeEnd(byref(value)) == True:
+        return value.value
+    else:
+        return ('Index out of Range')
 
-def getNumPoints(numPoints):
-    return handle.getNumPoints(numPoints)
+def getNumPoints():
+    value = c_int()
+    if handle.getNumPoints(byref(value)) == True:
+        return value.value
+    else:
+        return ('Index out of Range')
 
 #Steady state methods
 handle.steadyState.restype = c_bool
 handle.setSteadyStateSelectionList.restype = c_bool
 
 def steadyState():
-    return handle.steadyState()
+    value = c_int()
+    if handle.steadyState(byref(value)) == True:
+        return value.value
+    else:
+        return ('Index out of Range')
 
 def computeSteadyStateValues():
     return handle.printVector(handle.computeSteadyStateValues())
@@ -198,32 +214,46 @@ def getFloatingSpeciesConcentrations():
 def getGlobalParameterValues():
     return handle.printVector(handle.getGlobalParameterValues())
 
-def setBoundarySpeciesByIndex(index, value):                             #test this
+def setBoundarySpeciesByIndex(index):                             #test this
     value = c_double()
-    if handle.setBoundarySpeciesByIndex(index, value, byref(value)) == True:
+    if handle.setBoundarySpeciesByIndex(index, byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
-def setFloatingSpeciesByIndex(index, value):                             #test this
+def setFloatingSpeciesByIndex(index):                             #test this
     value = c_double()
-    if handle.setFloatingSpeciesByIndex(index, value, byref(value)) == True:
+    if handle.setFloatingSpeciesByIndex(index, byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
-def setGlobalParameterByIndex(index, value):                             #test this
+def setGlobalParameterByIndex(index):                             #test this
     value = c_double()
-    if handle.setGlobalParameterByIndex(index, value, byref(value)) == True:
+    if handle.setGlobalParameterByIndex(index, byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
 def getBoundarySpeciesByIndex(index):                             #test this
-    return handle.getBoundarySpeciesByIndex(index)
+    value = c_double()
+    if handle.getBoundarySpeciesByIndex(index, byref(value)) == True:
+        return value.value;
+    else:
+        raise RuntimeError('Index out of range')
+
+#def getBoundarySpeciesByIndex(index):                             #test this
+#    return handle.getBoundarySpeciesByIndex(index)
 
 def getFloatingSpeciesByIndex(index):                             #test this
-    return handle.getFloatingSpeciesByIndex(index)
+    value = c_double()
+    if handle.getFloatingSpeciesByIndex(index, byref(value)) == True:
+        return value.value;
+    else:
+        raise RuntimeError('Index out of range')
+
+#def getFloatingSpeciesByIndex(index):                             #test this
+#    return handle.getFloatingSpeciesByIndex(index)
 
 def getGlobalParameterByIndex(index):                             #test this
     return handle.getGlobalParameterByIndex(index)
@@ -267,10 +297,13 @@ def getConservationMatrix():
 
 #Initial condition methods
 handle.reset.restype = c_bool
-#handle.setFloatingSpeciesInitialConcentrations.restype = c_bool <----Not working
+#handle.setFloatingSpeciesInitialConcentrations.restype = c_bool
 
 def reset():
     return handle.reset()
+
+#def setFloatingSpeciesInitialConcentration(vec):
+#    return handle.setFloatingSpeciesInitialConcentration(vec)
 
 def getFloatingSpeciesInitialConcentrations():
     return handle.printVector(handle.getFloatingSpeciesInitialConcentrations())
@@ -285,8 +318,12 @@ handle.getReactionRate.restype = c_bool
 def getNumberOfReactions():
     return handle.getNumberOfReactions()
 
-def getReactionRate():                                 #test this
-    return handle.getReactionRate()
+def getReactionRate():
+    value = c_double()
+    if handle.getReactionRate(byref(value)) == True:
+        return value.value
+    else:
+        raise RuntimeError('Index out of Range')                                 #test this
 
 def getReactionRates():
     return handle.printVector(handle.getReactionRates())
