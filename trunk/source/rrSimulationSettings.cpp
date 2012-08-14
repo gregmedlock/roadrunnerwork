@@ -22,6 +22,15 @@ mAbsolute(1.e-7),
 mRelative(1.e-4)
 {}
 
+void SimulationSettings::ClearSettings()
+{
+    mSteps      = 0;
+    mStartTime  = 0;
+    mDuration   = 0;
+    mVariables.clear();
+    mAmount.clear();
+    mConcentration.clear();
+}
 
 bool SimulationSettings::LoadFromFile(const string& _FName)
 {
@@ -34,6 +43,7 @@ bool SimulationSettings::LoadFromFile(const string& _FName)
     }
     else
     {
+        ClearSettings();
         map<string, string> settings;
         map<string, string>::iterator it;
         //Read each line in the settings file

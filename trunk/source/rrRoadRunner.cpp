@@ -172,28 +172,8 @@ int RoadRunner::CreateDefaultSelectionList()
 
 int RoadRunner::CreateSelectionList()
 {
-	//read from settings the variables found in the amounts and concentrations lists
-	StringList theList;
-	TSelectionRecord record;
 
-	theList.Add("time");
-	for(int i = 0; i < mSettings.mAmount.size(); i++)
-	{
-		theList.Add("[" + mSettings.mAmount[i] + "]");        //In the setSelection list below, the [] selects the correct 'type'
-	}
-
-	for(int i = 0; i < mSettings.mConcentration.size(); i++)
-	{
-		theList.Add(mSettings.mConcentration[i]);
-	}
-
-	if(theList.Count() < 2)
-	{
-		for(int i = 0; i < mSettings.mVariables.size(); i++)
-		{
-			theList.Add(mSettings.mVariables[i]);
-		}
-	}
+	StringList theList = GetSelectionListFromSettings(mSettings);
 
     if(theList.Count() < 2)
     {

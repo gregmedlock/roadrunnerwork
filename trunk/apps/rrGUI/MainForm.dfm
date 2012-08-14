@@ -84,7 +84,7 @@ object MForm: TMForm
         TabOrder = 3
       end
     end
-    object TFileSelectionFrame1: TFileSelectionFrame
+    object FSF: TFileSelectionFrame
       Left = 1
       Top = 129
       Width = 215
@@ -338,15 +338,11 @@ object MForm: TMForm
       Top = 465
       Width = 1007
       Height = 250
-      ActivePage = TabSheet1
+      ActivePage = TabSheet3
       Align = alBottom
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'Log'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Panel3: TPanel
           Left = 0
           Top = 0
@@ -398,10 +394,6 @@ object MForm: TMForm
       object TabSheet2: TTabSheet
         Caption = 'Settings'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object CompilerRG: TRadioGroup
           Left = 3
           Top = 16
@@ -427,10 +419,6 @@ object MForm: TMForm
       object TabSheet3: TTabSheet
         Caption = 'Test Suite'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Button2: TButton
           Left = 408
           Top = 112
@@ -449,10 +437,6 @@ object MForm: TMForm
           TabOrder = 1
           object TabSheet4: TTabSheet
             Caption = 'General'
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object testSuitePic: TImage
               Left = 676
               Top = 0
@@ -1390,10 +1374,6 @@ object MForm: TMForm
           object TabSheet5: TTabSheet
             Caption = 'TabSheet5'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
           end
         end
       end

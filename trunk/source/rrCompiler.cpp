@@ -164,13 +164,14 @@ bool Compiler::Compile(const string& cmdLine)
     }
 
     //open the output file on the server's tmp folder (for that test will be on the C:/ root)
-    string compilerTempFile(gLog.GetLogFileName());
+    string tmpPath = ExtractFilePath(gLog.GetLogFileName());
+    string compilerTempFile(JoinPath(tmpPath,"compilerOutput.log"));
 
     HANDLE out;
     if((out=CreateFile(     compilerTempFile.c_str(),
                             GENERIC_WRITE|GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,
                             &sao,
-                            OPEN_EXISTING,//CREATE_ALWAYS,
+                            CREATE_ALWAYS,
                             FILE_ATTRIBUTE_NORMAL,
                             NULL))==INVALID_HANDLE_VALUE)
     {
@@ -221,10 +222,13 @@ bool Compiler::Compile(const string& cmdLine)
     CloseHandle(pi.hThread);
     CloseHandle(out);
 
-//    //Read the log file and log it
-//    vector<string> fContent = SplitString(GetFileContent(compilerTempFile.c_str()),"\n");
-//    Log(lInfo)<<"Compiler output";
-//    Log(lInfo)<<fContent;
+    //Read the log file and log it
+    vector<string> fContent = SplitString(GetFileContent(compilerTempFile.c_str()),"\n");
+    Log(lInfo)<<"Compiler output";
+    for(int i = 0; i < fContent.size();i++)
+    {
+        Log(lInfo)<<fContent<<endl;
+    }
     return true;
 }
 

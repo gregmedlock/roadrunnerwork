@@ -11,6 +11,8 @@ namespace rr
 
 class RR_DECLSPEC SimulationSettings : public rrObject
 {
+    protected:
+        void                    ClearSettings();
     public:
                                 SimulationSettings();
 
