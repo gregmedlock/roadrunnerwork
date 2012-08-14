@@ -47,12 +47,12 @@ __fastcall TMForm::TMForm(TComponent* Owner)
     SetupINIParameters();
 
     gLog.SetCutOffLogLevel(mLogLevel.GetValue());
-    TFileSelectionFrame1->TreeView1->OnClick = TFileSelectionFrame1TreeView1Click;
-	TFileSelectionFrame1->TreeView1->OnDblClick =  LoadFromTreeViewAExecute;
-	TFileSelectionFrame1->TreeView1->PopupMenu  =  TVPopupMenu;
+    FSF->TreeView1->OnClick     =   FSFTreeView1Click;
+	FSF->TreeView1->OnDblClick  =  LoadFromTreeViewAExecute;
+	FSF->TreeView1->PopupMenu   =  TVPopupMenu;
 
-    TFileSelectionFrame1->FSToolBar->Visible = false;
-    TFileSelectionFrame1->TreeView1->ShowRoot = false;
+    FSF->FSToolBar->Visible = false;
+    FSF->TreeView1->ShowRoot = false;
     startupTimer->Enabled = true;
 
     //Setup road runner
@@ -108,12 +108,12 @@ void __fastcall TMForm::modelFoldersCBSelect(TObject *Sender)
     if(modelFoldersCB->ItemIndex > -1 && modelFoldersCB->ItemIndex <= modelFoldersCB->Items->Count)
     {
         mCurrentModelsFolder = ToSTDString(modelFoldersCB->Text);
-        TFileSelectionFrame1->RemoveMonitoredFolders();
+        FSF->RemoveMonitoredFolders();
 
         Log(rr::lInfo)<<"Model folder: "<<mCurrentModelsFolder<<" is selected..";
 
-        TFileSelectionFrame1->MonitorFolder(mCurrentModelsFolder, filterEdit->GetString());
-    	TFileSelectionFrame1->ReScanDataFolderAExecute(NULL);
+        FSF->MonitorFolder(mCurrentModelsFolder, filterEdit->GetString());
+    	FSF->ReScanDataFolderAExecute(NULL);
     }
 }
 
@@ -169,10 +169,10 @@ void __fastcall TMForm::LoadModelAExecute(TObject *Sender)
     LoadModelA->Update();
 }
 
-void __fastcall TMForm::TFileSelectionFrame1TreeView1Click(TObject *Sender)
+void __fastcall TMForm::FSFTreeView1Click(TObject *Sender)
 {
     //If a valid model file is selected, enable Load action
-    string fName = TFileSelectionFrame1->GetSelectedFileInTree();
+    string fName = FSF->GetSelectedFileInTree();
     if(rr::FileExists(fName))
     {
         LoadModelA->Enabled = true;
@@ -187,7 +187,7 @@ void __fastcall TMForm::TFileSelectionFrame1TreeView1Click(TObject *Sender)
 void __fastcall TMForm::LoadFromTreeViewAExecute(TObject *Sender)
 {
     ClearMemoA->Execute();
-    string fName = TFileSelectionFrame1->GetSelectedFileInTree();
+    string fName = FSF->GetSelectedFileInTree();
     if(fName.size())
     {
         mCurrentModelFileName = fName;
@@ -243,17 +243,20 @@ void __fastcall TMForm::SimulateAExecute(TObject *Sender)
     }
     try
     {
-        //Setup selection list
-        StringList list = GetCheckedSpecies();
-        string selected = list.AsString();
-        mRR->setSelectionList(selected);
+        {
+            //Setup selection list
+            StringList list = GetCheckedSpecies();
+            string selected = list.AsString();
+            mRR->setSelectionList(selected);
+        }
+
 
         Log(rr::lInfo)<<"Currently selected species: "<<mRR->getSelectionList().AsString();
 
         mRR->setCompiler(GetCompiler());
         mRR->ComputeAndAssignConservationLaws(ConservationAnalysisCB->Checked);
-
         mRR->simulateEx(mStartTimeE->GetValue(), *mEndTimeE, mNrOfSimulationPointsE->GetValue());
+
         SimulationData data = mRR->GetSimulationResult();
         string resultFileName(rr::JoinPath(mRR->GetTempFileFolder(), mRR->GetModelName()));
         resultFileName = ChangeFileExtensionTo(resultFileName, ".csv");
@@ -291,19 +294,55 @@ void __fastcall TMForm::loadAvailableSymbolsAExecute(TObject *Sender)
     if(mRR)
     {
         SelList->Clear();
-        ArrayList2 symbols = mRR->getAvailableSymbols();
+        string settingsFile = GetSettingsFile();
+        if(settingsFile.size())
+        {
+            if(mSettings.LoadFromFile(settingsFile))
+            {
+                mStartTimeE->SetNumber(mSettings.mStartTime);
+                mEndTimeE->SetNumber(mSettings.mEndTime);
+                mNrOfSimulationPointsE->SetNumber(mSettings.mSteps);
+                StringList symbols = GetSelectionListFromSettings(mSettings);
+                AddItemsToListBox(symbols);
+            }
 
-        StringList fs       = symbols.GetSubList("Floating Species");
-        StringList bs       = symbols.GetSubList("Boundary Species");
-        StringList vols     = symbols.GetSubList("Volumes");
-        StringList gp       = symbols.GetSubList("Global Parameters");
+        }
+        else
+        {
 
-        AddItemsToListBox(fs);
-        AddItemsToListBox(bs);
-        AddItemsToListBox(vols);
-        AddItemsToListBox(gp);
+            ArrayList2 symbols = mRR->getAvailableSymbols();
+            StringList fs       = symbols.GetSubList("Floating Species");
+            StringList bs       = symbols.GetSubList("Boundary Species");
+            StringList vols     = symbols.GetSubList("Volumes");
+            StringList gp       = symbols.GetSubList("Global Parameters");
+            AddItemsToListBox(fs);
+            AddItemsToListBox(bs);
+            AddItemsToListBox(vols);
+            AddItemsToListBox(gp);
+        }
         CheckUI();
     }
+}
+
+string TMForm::GetSettingsFile()
+{
+    string file =  FSF->GetSelectedFileInTree();
+    string path =  rr::ExtractFilePath(file);
+    vector<string> dirs = rr::SplitString(path,"\\");
+
+    if(dirs.size())
+    {
+        string caseNr = dirs[dirs.size() -1];
+        string setFile = rr::JoinPath(path, (caseNr + "-settings.txt"));
+        return setFile;
+    }
+    return "";
+}
+
+string TMForm::GetCurrentModelPath()
+{
+    string file =  FSF->GetSelectedFileInTree();
+    return  rr::ExtractFilePath(file);
 }
 
 void TMForm::AddItemsToListBox(const StringList& items)
@@ -408,7 +447,7 @@ void __fastcall TMForm::LoadModelAUpdate(TObject *Sender)
         UnLoadModelA->Enabled = false;
         loadUnloadBtn->Action = LoadModelA;
         //Check if there is a valid selection in the tree list
-        //TFileSelectionFrame1TreeView1Click(NULL);
+        //FSFTreeView1Click(NULL);
     }
 }
 
@@ -433,7 +472,7 @@ void __fastcall TMForm::filterEditKeyDown(TObject *Sender, WORD &Key, TShiftStat
 
 void __fastcall TMForm::Button4Click(TObject *Sender)
 {
-    TFileSelectionFrame1->TreeView1->ShowRoot = !TFileSelectionFrame1->TreeView1->ShowRoot;
+    FSF->TreeView1->ShowRoot = !FSF->TreeView1->ShowRoot;
 }
 
 void __fastcall TMForm::LogCurrentDataAExecute(TObject *Sender)
@@ -452,7 +491,7 @@ void __fastcall TMForm::LogLevelCBChange(TObject *Sender)
 
 void __fastcall TMForm::UpdateTestSuiteInfo()
 {
-    string file =  TFileSelectionFrame1->GetSelectedFileInTree();
+    string file =  FSF->GetSelectedFileInTree();
     string path =  rr::ExtractFilePath(file);
     vector<string> dirs = rr::SplitString(path,"\\");
 
@@ -464,26 +503,28 @@ void __fastcall TMForm::UpdateTestSuiteInfo()
         {
             //If this is a testsuite folder.. show the http
             WebBrowser1->Navigate(htmlDoc.c_str());
-            string modelFile = rr::JoinPath(path, (caseNr + "-plot.jpg"));
+            string aFile = rr::JoinPath(path, (caseNr + "-plot.jpg"));
             //Picture..
-            if(rr::FileExists(modelFile))
+            if(rr::FileExists(aFile))
             {
-                testSuitePic->Picture->LoadFromFile(modelFile.c_str());
+                testSuitePic->Picture->LoadFromFile(aFile.c_str());
             }
 
             //Open and load settings
-            modelFile = rr::JoinPath(path, (caseNr + "-settings.txt"));
-            if(rr::FileExists(modelFile))
+            aFile = rr::JoinPath(path, (caseNr + "-settings.txt"));
+            if(rr::FileExists(aFile))
             {
-                vector<string> fContent = GetLinesInFile(modelFile);
+                vector<string> fContent = GetLinesInFile(aFile);
                 Log(rr::lInfo)<<"Model Settings:\n"<<fContent;
 
             }
         }
-    }
-    else
-    {
-        //Disable.....
+        else
+        {
+            //Disable.....
+
+        }
+
     }
 }
 

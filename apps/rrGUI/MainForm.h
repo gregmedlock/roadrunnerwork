@@ -63,7 +63,7 @@ __published:	// IDE-managed Components
     mtkFloatLabeledEdit *mEndTimeE;
     mtkIntLabeledEdit *mNrOfSimulationPointsE;
     mtkIniFileC *mIniFileC;
-    TFileSelectionFrame *TFileSelectionFrame1;
+    TFileSelectionFrame *FSF;
     TComboBox *modelFoldersCB;
     TTimer *startupTimer;
     TAction *selectModelsFolder;
@@ -135,7 +135,7 @@ __published:	// IDE-managed Components
     void __fastcall Button4Click(TObject *Sender);
     void __fastcall LogCurrentDataAExecute(TObject *Sender);
     void __fastcall LoadModelAUpdate(TObject *Sender);
-    void __fastcall TFileSelectionFrame1TreeView1Click(TObject *Sender);
+    void __fastcall FSFTreeView1Click(TObject *Sender);
     void __fastcall LogLevelCBChange(TObject *Sender);
     void __fastcall LogCCodeAExecute(TObject *Sender);
 
@@ -167,6 +167,9 @@ private:	// User declarations
     SimulationSettings          mSettings;
     string                      GetCompiler();//What is set in the RadioGroup
     void            __fastcall  UpdateTestSuiteInfo();
+    string                      GetCurrentModelPath();
+    string                      GetSettingsFile();
+
 public:		// User declarations
                     __fastcall  TMForm(TComponent* Owner);
                     __fastcall ~TMForm();

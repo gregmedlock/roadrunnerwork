@@ -4,11 +4,11 @@
 #pragma hdrstop
 #include <windows.h>
 #include <io.h>
+
 #if defined(BORLANDC)
 #include <dir.h>
 #else
 #include <direct.h>
-
 #endif
 
 #include <algorithm>
@@ -19,6 +19,7 @@
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 #include "rrLogger.h"
+#include "rrMisc.h"
 //---------------------------------------------------------------------------
 using namespace std;
 namespace rr
@@ -50,6 +51,7 @@ string GetFileContent(const string& fName)
     for(int i = 0; i < lines.size(); i++)
     {
         content += lines[i];
+        content += "\n";
     }
 
     return content;
@@ -288,6 +290,35 @@ double* CreateVector(const vector<double>& vec)
     return avec;
 }
 
+
+StringList GetSelectionListFromSettings(const SimulationSettings& settings)
+{
+	//read from settings the variables found in the amounts and concentrations lists
+	StringList theList;
+	TSelectionRecord record;
+
+	theList.Add("time");
+	for(int i = 0; i < settings.mAmount.size(); i++)
+	{
+		theList.Add("[" + settings.mAmount[i] + "]");        //In the setSelection list below, the [] selects the correct 'type'
+	}
+
+	for(int i = 0; i < settings.mConcentration.size(); i++)
+	{
+		theList.Add(settings.mConcentration[i]);
+	}
+
+	if(theList.Count() < 2)
+	{
+		for(int i = 0; i < settings.mVariables.size(); i++)
+		{
+			theList.Add(settings.mVariables[i]);
+		}
+	}
+
+    return theList;
+}
+
 HINSTANCE LoadDLL(const string& dll)
 {
     HINSTANCE hLib = LoadLibraryA(dll.c_str());
@@ -334,6 +365,8 @@ FARPROC GetFunctionPtr(const string& funcName, HINSTANCE DLLHandle)
     Log(lDebug3)<<"Loaded function " << funcName;
     return handle;
 }
+
+
 
 
 }//end of namespace

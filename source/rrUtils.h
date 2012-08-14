@@ -6,7 +6,8 @@
 #include <vector>
 #include <string>
 #include "rrExporter.h"
-
+#include "rrStringList.h"
+#include "rrSimulationSettings.h"
 using std::vector;
 using std::string;
 namespace rr
@@ -45,6 +46,8 @@ RR_DECLSPEC bool            CopyCArrayToStdVector(const bool* src,    vector<boo
 RR_DECLSPEC bool            CopyStdVectorToCArray(const vector<double>& src, double* dest,  int size);
 RR_DECLSPEC bool            CopyStdVectorToCArray(const vector<bool>&   src,  bool*  dest,  int size);
 
+//SelectionList
+RR_DECLSPEC StringList      GetSelectionListFromSettings(const SimulationSettings& settings);
 
 // DLL Functions
 RR_DECLSPEC HINSTANCE       LoadDLL(const string& dll);

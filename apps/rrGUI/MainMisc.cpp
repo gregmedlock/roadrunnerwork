@@ -98,7 +98,7 @@ void __fastcall TMForm::startupTimerTimer(TObject *Sender)
     //Select  models folder
     modelFoldersCBSelect(NULL);
 
-    TTreeNode* aNode = FindTreeNodeBasedOnLabel(TFileSelectionFrame1->TreeView1->Items, rr::ExtractFileName(mCurrentModelFileName).c_str());
+    TTreeNode* aNode = FindTreeNodeBasedOnLabel(FSF->TreeView1->Items, rr::ExtractFileName(mCurrentModelFileName).c_str());
 
     if(aNode)
     {
@@ -108,7 +108,7 @@ void __fastcall TMForm::startupTimerTimer(TObject *Sender)
 
 void __fastcall TMForm::logModelFileAExecute(TObject *Sender)
 {
-    string fName = TFileSelectionFrame1->GetSelectedFileInTree();
+    string fName = FSF->GetSelectedFileInTree();
     if(fName.size())
     {
         Log(rr::lInfo)<<"Model File: "<<fName;
@@ -133,8 +133,8 @@ TColor TMForm::GetColor(int i)
     switch(i)
     {
         case 0: return clRed;
-        case 1: return clBlue;
-        case 2: return clGreen;
+        case 1: return clGreen;
+        case 2: return clBlue;
         case 3: return clPurple;
         case 4: return clOlive;
         case 5: return clCream;

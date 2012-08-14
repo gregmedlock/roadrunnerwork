@@ -124,36 +124,36 @@ int main(int argc, char * argv[])
             goto end;
         }
 
-        if(!simulation.GenerateModelCode())
-        {
-            Log(lError)<<"Failed loading SBML model";
-            goto end;
-        }
-
-        if(!simulation.CompileModel())
-        {
-                Log(lError)<<"Failed compiling SBML model:" <<paras.CaseNumber;
-            goto end;
-        }
-
-        if(paras.OnlyCompile)
-        {
-            goto end;
-        }
-
-        if(!simulation.CreateModel())
-        {
-            Log(lError)<<"Failed creating Model";
-            goto end;
-        }
-
-        //First load the model
-        if(!simulation.InitializeModel())
-        {
-            Log(lError)<<"Failed initializing SBML model";
-            goto end;
-        }
-
+//        if(!simulation.GenerateModelCode())
+//        {
+//            Log(lError)<<"Failed loading SBML model";
+//            goto end;
+//        }
+//
+//        if(!simulation.CompileModel())
+//        {
+//                Log(lError)<<"Failed compiling SBML model:" <<paras.CaseNumber;
+//            goto end;
+//        }
+//
+//        if(paras.OnlyCompile)
+//        {
+//            goto end;
+//        }
+//
+//        if(!simulation.CreateModel())
+//        {
+//            Log(lError)<<"Failed creating Model";
+//            goto end;
+//        }
+//
+//        //First load the model
+//        if(!simulation.InitializeModel())
+//        {
+//            Log(lError)<<"Failed initializing SBML model";
+//            goto end;
+//        }
+//
         //Then read settings file if it exists..
         string settingsOveride("");//C:\\rrw\\Models\\settings_override.txt");
         if(!simulation.LoadSettings(settingsOveride))    //set selection list here!
