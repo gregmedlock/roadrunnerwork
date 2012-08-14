@@ -89,7 +89,7 @@ CvodeInterface* RoadRunner::GetCVodeInterface()
 
 bool RoadRunner::setCompiler(const string& compiler)
 {
-    mCompiler.SetCompiler(compiler);
+    return mCompiler.SetCompiler(compiler);
 }
 
 NLEQInterface* RoadRunner::GetNLEQInterface()

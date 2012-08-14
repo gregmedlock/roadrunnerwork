@@ -14,11 +14,12 @@ double spf_or(int numArgs, ...);
 double spf_xor(int numArgs, ...);
 
 //D_S double     spf_not(double a);
-////D_S bool     spf_not(bool a);
-////D_S double     spf_xor(params double[] a);
-////D_S bool     spf_xor(params bool[] a);
+//D_S bool     spf_not(bool a);
+//D_S double     spf_xor(params double[] a);
+//D_S bool     spf_xor(params bool[] a);
 double spf_pow(double a, double b);
-int    spf_ceil(double a);
+double spf_ceil(double a);
+double spf_floor(double a);
 int    spf_factorial(int a);
 double spf_log(double a);
 double spf_log10(double a);
@@ -146,7 +147,6 @@ double arctanh(double a);
 //const double LN10                  = 2.30258509299404568401799145468; /* ln(10) */
 //const double LN2                   = 0.69314718055994530941723212146; /* ln(2) */
 //const double LNPI                  = 1.14472988584940017414342735135; /* ln(pi) */
-static double holyConstant = 0.017453292519943295769236907684886;
 #endif
 
 
