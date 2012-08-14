@@ -33,6 +33,7 @@ Compiler::~Compiler(){}
 bool Compiler::SetCompiler(const string& compiler)
 {
     mCompiler = compiler;
+	return true;
 }
 
 string Compiler::GetDLLName()
@@ -52,6 +53,7 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 
     string exeCmd = CreateCompilerCommand(sourceFileName);
 
+    //exeCmd += " > compileLog.log";
     Log(lDebug2)<<"Compiling model..";
     Log(lInfo)<<"\nExecuting: "<<exeCmd;
 
@@ -67,6 +69,8 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 
 bool Compiler::SetupCompilerEnvironment()
 {
+    mIncludePaths.clear();
+    mLibraryPaths.clear();
     if(mCompiler == "tcc")
     {
         mIncludePaths.push_back(".");
@@ -99,7 +103,7 @@ string Compiler::CreateCompilerCommand(const string& sourceFileName)
         <<sourceFileName<<" " \
         <<JoinPath(mSupportCodeFolder, "rrSupport.c");
 
-        if(gLog.GetLogLevel() == lDebug1)
+//        if(gLog.GetLogLevel() == lDebug1)
         {
             exeCmd<<" -v";
         }
@@ -144,6 +148,11 @@ bool Compiler::Compile(const string& cmdLine)
 {
     STARTUPINFO         si;
     PROCESS_INFORMATION pi;
+    SECURITY_ATTRIBUTES sap,sat,sao;
+    //sec attributes for the output file
+    sao.nLength=sizeof(SECURITY_ATTRIBUTES);
+    sao.lpSecurityDescriptor=NULL;
+    sao.bInheritHandle=1;
 
     ZeroMemory( &si, sizeof(si) );
     si.cb = sizeof(si);
@@ -154,13 +163,45 @@ bool Compiler::Compile(const string& cmdLine)
         return false;
     }
 
+    //open the output file on the server's tmp folder (for that test will be on the C:/ root)
+    string compilerTempFile(gLog.GetLogFileName());
+
+    HANDLE out;
+    if((out=CreateFile(     compilerTempFile.c_str(),
+                            GENERIC_WRITE|GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,
+                            &sao,
+                            OPEN_EXISTING,//CREATE_ALWAYS,
+                            FILE_ATTRIBUTE_NORMAL,
+                            NULL))==INVALID_HANDLE_VALUE)
+    {
+        Log(lError)<<"Failed creating logFiel for compiler output";
+        return false;
+    }
+
+    SetFilePointer( out, 0, NULL, FILE_END); //set pointer position to end file
+
+    //init the STARTUPINFO struct
+    si.dwFlags=STARTF_USESTDHANDLES;
+    si.hStdOutput = out;
+    si.hStdError = out;
+
+    //proc sec attributes
+    sap.nLength=sizeof(SECURITY_ATTRIBUTES);
+    sap.lpSecurityDescriptor=NULL;
+    sap.bInheritHandle=1;
+
+    //thread sec attributes
+    sat.nLength=sizeof(SECURITY_ATTRIBUTES);
+    sat.lpSecurityDescriptor=NULL;
+    sat.bInheritHandle=1;
+
     // Start the child process.
     if( !CreateProcessA(
         NULL,                           // No module name (use command line)
         (char*) cmdLine.c_str(),        // Command line
-        NULL,                           // Process handle not inheritable
-        NULL,                           // Thread handle not inheritable
-        FALSE,                          // Set handle inheritance to FALSE
+        &sap,                           // Process handle not inheritable
+        &sat,                           // Thread handle not inheritable
+        TRUE,                          // Set handle inheritance
         CREATE_NO_WINDOW,               // Creation flags
         NULL,                           // Use parent's environment block
         NULL,                           // Use parent's starting directory
@@ -178,6 +219,12 @@ bool Compiler::Compile(const string& cmdLine)
     // Close process and thread handles.
     CloseHandle(pi.hProcess);
     CloseHandle(pi.hThread);
+    CloseHandle(out);
+
+//    //Read the log file and log it
+//    vector<string> fContent = SplitString(GetFileContent(compilerTempFile.c_str()),"\n");
+//    Log(lInfo)<<"Compiler output";
+//    Log(lInfo)<<fContent;
     return true;
 }
 

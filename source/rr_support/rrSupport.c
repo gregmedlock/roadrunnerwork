@@ -300,9 +300,14 @@ double spf_not(double a)
 //        }
 
 
-int    spf_ceil(double a)
+double spf_ceil(double a)
 {
-    return (int) ceil(a);
+    return (double) ceil(a);
+}
+
+double spf_floor(double a)
+{
+    return  (double)a floor(a);
 }
 
 int spf_factorial(int a)
@@ -413,6 +418,7 @@ double spf_piecewise(int nrOfArgs, ...)
 
 double spf_sin(double a)
 {
+//    return myFastSin(a);
     return sin(a);
 }
 
@@ -563,12 +569,13 @@ double myFastSin(double angle)
 {
     int aVal;
     double bVal;
+    static double holyConstant = 0.017453292519943295769236907684886;
 
     aVal = angle * 0.1;
     bVal = angle - (10.0 * aVal);
 
-//    return sinTable[aVal] * cosTable[int(bVal)] + bVal * holyConstant * sinTable[9-aVal];
-    return -1;//sin(angle);//sinTable[aVal]*cosTable[(int)bVal] + bVal*holyConstant*sinTable[9-aVal];
+    return sinTable[aVal]* cosTable[ spf_ceil(bVal)] + bVal * holyConstant * sinTable[9-aVal];
+//    return -1;//sin(angle);//sinTable[aVal]*cosTable[(int)bVal] + bVal*holyConstant*sinTable[9-aVal];
 //    return 0;
 }
 

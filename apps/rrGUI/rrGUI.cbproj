@@ -25,7 +25,7 @@
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<Defines>LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<FinalOutputDir>$(RR_INSTALL)\bin</FinalOutputDir>
-			<LinkPackageStatics>Tee915.lib;vclimg.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib;TeePro915.lib;TeeUI915.lib</LinkPackageStatics>
+			<LinkPackageStatics>Tee915.lib;vclimg.lib;mtkCommonRTL.lib;VCLCommonRTL.lib;vclactnband.lib;vclx.lib;TeePro915.lib;TeeUI915.lib;vclie.lib</LinkPackageStatics>
 			<OutputExt>exe</OutputExt>
 			<LinkPackageImports>rtl.bpi;vcl.bpi;DuneComponents.bpi</LinkPackageImports>
 			<PackageImports>vcl.bpi;rtl.bpi;DuneComponents.bpi</PackageImports>

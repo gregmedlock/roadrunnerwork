@@ -43,6 +43,7 @@ class RR_DECLSPEC FileLog : public rrObject
         bool                    mLogToServer;
         string                  GetLogFileName();
         int                     GetNrOfInstances();
+        FILE*                   GetLogFileHandle();
 };
 
 RR_DECLSPEC extern FileLog gLog;

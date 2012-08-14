@@ -64,11 +64,6 @@ void LogFileReader::Worker()
 
                     TThread::Synchronize(NULL, mMainForm->LogMessage);
                 }
-//                if(mIPCClient.PipeMessage(data) == false)
-//                {
-//                    Log(lError) << "Unable to access server application." << endl;
-//                    mIsTimeToDie = true;
-//                }
             }
             delete [] data;
 
@@ -79,7 +74,6 @@ void LogFileReader::Worker()
         }
         pos = mFS.tellg();
         Sleep(100);
-
 	}
 
     mIsRunning = false;

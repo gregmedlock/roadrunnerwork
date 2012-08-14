@@ -33,6 +33,7 @@ __fastcall TMForm::TMForm(TComponent* Owner)
     mLogString(NULL)
 {
     LogOutput::mLogToConsole = (false);
+    LogOutput::mShowLogLevel = true;
     gLog.SetCutOffLogLevel(rr::lDebug5);
     mTempDataFolder = "R:\\rrTemp";
 
