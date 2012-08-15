@@ -117,6 +117,9 @@ __published:	// IDE-managed Components
     TSplitter *Splitter1;
     TToolButton *ToolButton3;
     TAction *LogCCodeA;
+    TPopupMenu *DropBoxPopup;
+    TAction *RemoveCurrentModelFolderItemA;
+    TMenuItem *Remove1;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -138,6 +141,9 @@ __published:	// IDE-managed Components
     void __fastcall FSFTreeView1Click(TObject *Sender);
     void __fastcall LogLevelCBChange(TObject *Sender);
     void __fastcall LogCCodeAExecute(TObject *Sender);
+    void __fastcall RemoveCurrentModelFolderItemAExecute(TObject *Sender);
+    void __fastcall modelFoldersCBContextPopup(TObject *Sender, TPoint &MousePos,
+          bool &Handled);
 
 private:	// User declarations
     mtkIniParameters            mGeneralParas;
