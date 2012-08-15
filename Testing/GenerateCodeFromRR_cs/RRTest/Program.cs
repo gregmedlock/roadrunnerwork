@@ -15,15 +15,15 @@ namespace RRTest
 		static void Main(string[] args)
 		{
 			RoadRunner rr = new RoadRunner();
-			string modelsRootPath = "C:\\rrw\\Models";
-			string caseList = modelsRootPath + "\\list_of_test_cases_l2v4.txt";
+			string modelsRootPath = "R:\\SBMLTestCases";
+			string caseList = modelsRootPath + "\\xmlfileList.txt";
 
 			string[] models = System.IO.File.ReadAllLines(caseList);
 
 			int i = 0;
 			foreach(string model in models)			
 			{
-				models[i++] = modelsRootPath +"\\" + model;				
+				models[i++] = modelsRootPath +"\\all\\" + model;				
 			}
 
 			foreach (string model in models)

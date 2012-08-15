@@ -530,7 +530,6 @@ void __fastcall TMForm::UpdateTestSuiteInfo()
     }
 }
 
-
 void __fastcall TMForm::LogCCodeAExecute(TObject *Sender)
 {
     string cCode;
@@ -543,21 +542,19 @@ void __fastcall TMForm::LogCCodeAExecute(TObject *Sender)
             string aLine = lines[i];
             Log(rr::lInfo)<<aLine;
         }
-
     }
 }
-
 
 void __fastcall TMForm::RemoveCurrentModelFolderItemAExecute(TObject *Sender)
 {
     modelFoldersCB->Items->Delete(modelFoldersCB->ItemIndex);
 }
-//---------------------------------------------------------------------------
 
+//---------------------------------------------------------------------------
 void __fastcall TMForm::modelFoldersCBContextPopup(TObject *Sender, TPoint &MousePos,
           bool &Handled)
 {
     DropBoxPopup->Popup(0,0);
 }
-//---------------------------------------------------------------------------
+
 

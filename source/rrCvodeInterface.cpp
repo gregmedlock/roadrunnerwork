@@ -227,7 +227,7 @@ void EventFcn(double time, cvode_precision* y, cvode_precision* gdot, void* fdat
 
 bool CvodeInterface::HaveVariables()
 {
-    return (numAdditionalRules + numIndependentVariables > 0);
+    return (numAdditionalRules + numIndependentVariables > 0) ? true : false;
 }
 
 void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
@@ -265,7 +265,6 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
 
             fileHandle = fileOpen(tempPathstring + cvodeLogFile + ToString(errorFileCounter) + ".txt");
             SetErrFile(cvodeMem, fileHandle);
-//            errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, modelDelegate, 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
             errCode = AllocateCvodeMem(cvodeMem, allocatedMemory, ModelFcn, (cvode_precision) 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
 
             if (errCode < 0)
@@ -275,7 +274,6 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
 
             if (oModel->getNumEvents() > 0)
             {
-                //errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
                 errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), EventFcn, gdata);
             }
 
@@ -302,7 +300,6 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
             fileHandle = fileOpen(tempPathstring + cvodeLogFile + ToString(errorFileCounter) + ".txt");
             SetErrFile(cvodeMem, fileHandle);
 
-//            errCode = AllocateCvodeMem(cvodeMem, allocated, modelDelegate, 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
             errCode = AllocateCvodeMem(cvodeMem, allocated, ModelFcn, 0.0, (N_Vector) _amounts, relTol, (N_Vector) abstolArray);
             if (errCode < 0)
             {
@@ -312,6 +309,7 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
             if (oModel->getNumEvents() > 0)
             {
                 //errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
+                Log(lWarning)<<"Original code, CVRootInit not executed...";
             }
 
             errCode = CvDense(cvodeMem, allocated); // int = size of systems
@@ -680,8 +678,6 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
                 nextTargetEndTime = assignmentTimes[0];
                 assignmentTimes.erase(assignmentTimes.begin());
             }
-
-            //RR_DECLSPEC int          Run_Cvode (void *cvode_mem, double tout, N_Vector y, double *t, char *ErrMsg);
 
             int nResult = Run_Cvode(cvodeMem, nextTargetEndTime,  _amounts, &timeEnd);//, err); // t = double *
 
@@ -1173,23 +1169,6 @@ void CvodeInterface::AssignResultsToModel()
     model->AssignRates(dTemp);
     model->computeAllRatesOfChange();
 }
-
-////        private void AssignResultsToModel()
-////        {
-////            model.updateDependentSpeciesValues(model.y);
-////            var dTemp = new double[numAdditionalRules];
-////            for (int i = 0; i < numAdditionalRules; i++)
-////            {
-////                dTemp[i] = Cvode_GetVector(_amounts, i);
-////            }
-////            for (int i = 0; i < numIndependentVariables; i++)
-////                model.amounts[i] = Cvode_GetVector(_amounts, i + numAdditionalRules);
-////
-////            model.computeRules(BuildEvalArgument());
-////            model.AssignRates(dTemp);
-////            model.computeAllRatesOfChange();
-////        }
-
 
 // Restart the simulation using a different initial condition
 void CvodeInterface::AssignNewVector(ModelFromC *oModel, bool bAssignNewTolerances)
