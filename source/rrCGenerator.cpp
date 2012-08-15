@@ -1481,7 +1481,6 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
         mSource<<Append("\t" + NL());
     }
 
-
     //Have to create TEventDelegate functions here
     for (int i = 0; i < delays.Count(); i++)
     {
@@ -1490,14 +1489,9 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
 
     mSource<<"void InitializeDelays()\n{\n";
 
-    //mSource<<tab<<"printf(\"At line %d in function %s \\n\",__LINE__, __FUNCTION__);"<<endl;
-
     for (int i = 0; i < delays.Count(); i++)
     {
-//        mSource<<Format("\t\t_eventDelay[{0}] = new TEventDelayDelegate(delegate { return {1}; } );{2}", i, delays[i], NL());
-
-
-         mSource<<Format("\t\tmEventDelay[{0}] = (TEventDelayDelegate) malloc(sizeof(TEventDelayDelegate) * 1);{2}", i, delays[i], NL());
+        mSource<<Format("\t\tmEventDelay[{0}] = (TEventDelayDelegate) malloc(sizeof(TEventDelayDelegate) * 1);{2}", i, delays[i], NL());
 
         //Inititialize
         mSource<<Format("\t\tmEventDelay[{0}] = GetEventDelay_{0};\n", i);
@@ -1506,7 +1500,8 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
     }
     mSource<<"}\n\n";
 
-    mSource<<"void computeEventPriorites()\n{";
+    mHeader.AddFunctionExport("void", "computeEventPriorities()");
+    mSource<<"void computeEventPriorities()\n{";
     for (int i = 0; i < numEvents; i++)
     {
         Event* current = mNOM.GetModel()->getEvent(i);
@@ -1518,7 +1513,6 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
         }
         else
         {
-//            mSource<<"\n"<<Format("\t_eventPriorities[{0}] = 0f;{1}", i, NL());
             mSource<<"\n"<<Format("\t_eventPriorities[{0}] = 0;{1}", i, NL());
         }
     }

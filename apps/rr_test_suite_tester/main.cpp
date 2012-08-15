@@ -79,7 +79,7 @@ int main(int argc, char * argv[])
         throw(rr::Exception("Bad model"));
     }
 
-    gLog.SetCutOffLogLevel(lDebug3);//paras.CurrentLogLevel);
+    gLog.SetCutOffLogLevel(paras.CurrentLogLevel);
     string dataOutputFolder("R:\\DataOutput");
     string dummy;
     string logFileName;

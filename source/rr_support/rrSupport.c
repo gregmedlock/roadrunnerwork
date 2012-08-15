@@ -50,6 +50,16 @@ double IntPower(double x, int y)
     }
 }
 
+double spf_abs(double x)
+{
+    if(x < 0)
+    {
+        return -x;
+    }
+	
+    return x;
+}
+
 double MyPower(double base, double exponent)
 {
     double result;
