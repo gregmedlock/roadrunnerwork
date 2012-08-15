@@ -1763,7 +1763,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "abs")
                     {
-                        mSource<<Append("abs");
+                        mSource<<Append("spf_abs");
                     }
                     else if(theToken == "asin")
                     {
@@ -2054,7 +2054,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Code
     }
     else if(theToken == "abs")
     {
-        mSource<<Append("abs");
+        mSource<<Append("spf_abs");
     }
     else if(theToken == "sin")
     {
