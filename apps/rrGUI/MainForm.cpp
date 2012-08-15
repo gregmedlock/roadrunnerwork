@@ -548,3 +548,16 @@ void __fastcall TMForm::LogCCodeAExecute(TObject *Sender)
 }
 
 
+void __fastcall TMForm::RemoveCurrentModelFolderItemAExecute(TObject *Sender)
+{
+    modelFoldersCB->Items->Delete(modelFoldersCB->ItemIndex);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMForm::modelFoldersCBContextPopup(TObject *Sender, TPoint &MousePos,
+          bool &Handled)
+{
+    DropBoxPopup->Popup(0,0);
+}
+//---------------------------------------------------------------------------
+
