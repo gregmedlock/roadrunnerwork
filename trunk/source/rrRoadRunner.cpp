@@ -300,16 +300,6 @@ bool RoadRunner::InitializeModel()
 	mModel->AssignCVodeInterface(mCVode);
 
     reset();
-
- //   // Construct default selection list
-//    selectionList.resize(mModel->getNumTotalVariables() + 1); // + 1 to include time
-//    selectionList[0].selectionType = clTime;
-//    for (int i = 1; i < mModel->getNumTotalVariables() + 1; i++)
-//    {
-//        selectionList[i].index = i - 1;
-//        selectionList[i].selectionType = clFloatingSpecies;
-//    }
-
     return true;
 }
 
@@ -435,12 +425,14 @@ vector<double> RoadRunner::BuildModelEvalArgument()
 
     vector<double> dCurrentRuleValues = mModel->GetCurrentValues();
 
-    dResult         = dCurrentRuleValues;
+    for(int i = 0; i < (*mModel->rateRulesSize); i++)
+    {
+        dResult[i] = dCurrentRuleValues[i];
+    }
 
     for(int i = 0; i < (*mModel->amountsSize); i++)
     {
-
-        dResult.push_back(mModel->amounts[i]);
+        dResult[i + (*mModel->rateRulesSize)] = mModel->amounts[i];
     }
 
     return dResult;
@@ -543,7 +535,7 @@ bool RoadRunner::Simulate()
         throw(Exception("There is no model loaded, can't simulate"));
     }
 
-	mRawSimulationData = simulate();
+ 	mRawSimulationData = simulate();
 
     //Populate simulation result
     PopulateResult();

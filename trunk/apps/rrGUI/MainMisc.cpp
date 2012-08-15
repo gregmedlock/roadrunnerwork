@@ -48,11 +48,18 @@ void __fastcall TMForm::SetupINIParameters()
         }
     }
     //Select 'current' model folder
-    int index = modelFoldersCB->Items->IndexOf(mCurrentModelsFolder.c_str());
+    int index = modelFoldersCB->Items->IndexOf(mCurrentModelsFolder.GetValueAsString().c_str());
 
     if(index != -1)
     {
         modelFoldersCB->ItemIndex = index;
+    }
+    else
+    {
+        if (modelFoldersCB->Items->Count)
+        {
+            modelFoldersCB->ItemIndex = 0;
+        }
     }
     //Update UI
     mStartTimeE->Update();

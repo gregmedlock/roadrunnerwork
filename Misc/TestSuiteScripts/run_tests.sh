@@ -8,6 +8,7 @@ failed=$tempFolder"/failedTests.txt"
 binFolder="/cygdrive/r/rrInstalls/xe/bin/"
 simulator=$binFolder"/rr_ts_tester.exe"
 zipper="/cygdrive/r/roadrunnerwork/Misc/zipper/7za.exe"
+ModelsDir="R://SBML_l2v4"
 start=$1
 end=$2
 
@@ -29,8 +30,8 @@ for ((i=$start; i<=$end; i++ ));
 do
 	echo "Running $i" ;
 	echo $i >> $logFile;
-#	$simulator -n$i -v0 >> $logFile &
-	$simulator -n$i -vError >> $logFile
+#    echo "$simulator -n$i -v0 >> $logFile "
+	$simulator -m$ModelsDir -n$i -vError >> $logFile
 	echo "Next" >> $logFile;
     #sleep .15
 done

@@ -19,7 +19,6 @@
 #include "rrCGenerator.h"
 //---------------------------------------------------------------------------
 
-
 using namespace std;
 using namespace LIB_STRUCTURAL;
 
@@ -57,38 +56,6 @@ string CGenerator::GetSourceCodeFileName()
     return mSourceCodeFileName;
 }
 
-bool CGenerator::SaveSourceCodeToFolder(const string& folder)
-{
-    string fName = ExtractFileName(mCurrentXMLModelFileName);
-    mHeaderCodeFileName = JoinPath(folder, fName);
-    mHeaderCodeFileName = ChangeFileExtensionTo(mHeaderCodeFileName, ".h");
-
-    ofstream outFile(mHeaderCodeFileName.c_str());
-    if(!outFile)
-    {
-        throw(Exception("Failed to open file:" + mHeaderCodeFileName));
-    }
-
-    outFile<<GetHeaderCode();
-    Log(lDebug3)<<"Wrote header to file: "<<mHeaderCodeFileName;
-    outFile.close();
-
-    mSourceCodeFileName = ChangeFileExtensionTo(mHeaderCodeFileName, ".c");
-    outFile.open(mSourceCodeFileName.c_str());
-
-    //We don't know the name of the file until here..
-    //Write an include statement to it..
-    vector<string> fNameParts = SplitString(mSourceCodeFileName,"\\");
-    string headerFName = fNameParts[fNameParts.size() - 1];
-
-    headerFName = ChangeFileExtensionTo(headerFName, ".h");
-    outFile<<"#include \""<<ExtractFileName(headerFName)<<"\"\n"<<endl;
-    outFile<<GetSourceCode();
-    outFile.close();
-    Log(lDebug3)<<"Wrote source code to file: "<<mSourceCodeFileName;
-
-    return true;
-}
 
 // Generates the Model Code from the SBML string
 string CGenerator::generateModelCode(const string& sbmlStr)
@@ -167,11 +134,11 @@ string CGenerator::generateModelCode(const string& sbmlStr)
     }
 
     // Load the compartment array (name and value)
-    mNumCompartments         = ReadCompartments();
+    mNumCompartments            = ReadCompartments();
 
     // Read FloatingSpecies
-    mNumFloatingSpecies     = ReadFloatingSpecies();
-    mNumDependentSpecies     = mNumFloatingSpecies - mNumIndependentSpecies;
+    mNumFloatingSpecies         = ReadFloatingSpecies();
+    mNumDependentSpecies        = mNumFloatingSpecies - mNumIndependentSpecies;
 
     // Load the boundary species array (name and value)
     mNumBoundarySpecies     = ReadBoundarySpecies();
@@ -302,10 +269,10 @@ void CGenerator::WriteOutVariables(CodeBuilder& ignore)
     mHeader.FormatVariable("D_S int",                                  "numRules");
     mHeader.FormatVariable("D_S int",                                  "numEvents");
 
-    mHeader.FormatArray("D_S char*",                                   "variableTable",                 floatingSpeciesConcentrationList.size());
-    mHeader.FormatArray("D_S char*",                                   "boundaryTable",                 boundarySpeciesList.size());
-    mHeader.FormatArray("D_S char*",                                   "globalParameterTable",         globalParameterList.size());
-    mHeader.FormatArray("D_S int",                                    "localParameterDimensions",     mNumReactions );
+    mHeader.FormatArray("D_S char*",                                    "variableTable",                floatingSpeciesConcentrationList.size());
+    mHeader.FormatArray("D_S char*",                                    "boundaryTable",                boundarySpeciesList.size());
+    mHeader.FormatArray("D_S char*",                                    "globalParameterTable",         globalParameterList.size());
+    mHeader.FormatArray("D_S int",                                      "localParameterDimensions",     mNumReactions );
 
     mHeader<<"\ntypedef void __cdecl (*TEventAssignmentDelegate)();"<<endl;
     mHeader.FormatVariable("D_S TEventAssignmentDelegate*",            "_eventAssignments","");
@@ -1768,7 +1735,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "floor")
                     {
-                        mSource<<Append("floor");
+                        mSource<<Append("spf_floor");
                     }
                     else if(theToken == "ceil")
                     {
@@ -2067,7 +2034,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Code
     }
     else if(theToken == "floor")
     {
-        mSource<<Append("floor");
+        mSource<<Append("spf_floor");
     }
     else if(theToken == "ceil")
     {
@@ -2692,5 +2659,40 @@ void CGenerator::WriteInitFunction(CodeBuilder& ignore, CodeBuilder& source)
     source.TLine("return mModelName;");
     source<<"}"                                         <<endl;
 }
+
+bool CGenerator::SaveSourceCodeToFolder(const string& folder)
+{
+    string fName = ExtractFileName(mCurrentXMLModelFileName);
+    mHeaderCodeFileName = JoinPath(folder, fName);
+    mHeaderCodeFileName = ChangeFileExtensionTo(mHeaderCodeFileName, ".h");
+
+    ofstream outFile(mHeaderCodeFileName.c_str());
+    if(!outFile)
+    {
+        throw(Exception("Failed to open file:" + mHeaderCodeFileName));
+    }
+
+    outFile<<GetHeaderCode();
+    Log(lDebug3)<<"Wrote header to file: "<<mHeaderCodeFileName;
+    outFile.close();
+
+    mSourceCodeFileName = ChangeFileExtensionTo(mHeaderCodeFileName, ".c");
+    outFile.open(mSourceCodeFileName.c_str());
+
+    //We don't know the name of the file until here..
+    //Write an include statement to it..
+    vector<string> fNameParts = SplitString(mSourceCodeFileName,"\\");
+    string headerFName = fNameParts[fNameParts.size() - 1];
+
+    headerFName = ChangeFileExtensionTo(headerFName, ".h");
+    outFile<<"#include \""<<ExtractFileName(headerFName)<<"\"\n"<<endl;
+    outFile<<GetSourceCode();
+    outFile.close();
+    Log(lDebug3)<<"Wrote source code to file: "<<mSourceCodeFileName;
+
+    return true;
+}
+
+
 }//Namespace
 
