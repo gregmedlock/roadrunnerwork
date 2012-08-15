@@ -143,7 +143,7 @@ void __fastcall TMForm::selectModelsFolderExecute(TObject *Sender)
     int indx = modelFoldersCB->Items->IndexOf(folder) ;
     if(indx == -1)
     {
-        modelFoldersCB->Items->Add(mCurrentModelsFolder.c_str());
+        modelFoldersCB->Items->Add(mCurrentModelsFolder.GetValueAsString().c_str());
         modelFoldersCB->ItemIndex = modelFoldersCB->Items->IndexOf(folder);
         mtkIniSection* folders = mIniFileC->GetSection("MODEL_FOLDERS");
         if(!folders)
@@ -295,7 +295,7 @@ void __fastcall TMForm::loadAvailableSymbolsAExecute(TObject *Sender)
     {
         SelList->Clear();
         string settingsFile = GetSettingsFile();
-        if(settingsFile.size())
+        if(FileExists(settingsFile))
         {
             if(mSettings.LoadFromFile(settingsFile))
             {
@@ -315,10 +315,12 @@ void __fastcall TMForm::loadAvailableSymbolsAExecute(TObject *Sender)
             StringList bs       = symbols.GetSubList("Boundary Species");
             StringList vols     = symbols.GetSubList("Volumes");
             StringList gp       = symbols.GetSubList("Global Parameters");
+            StringList fluxes   = symbols.GetSubList("Fluxes");
             AddItemsToListBox(fs);
             AddItemsToListBox(bs);
             AddItemsToListBox(vols);
             AddItemsToListBox(gp);
+            AddItemsToListBox(fluxes);
         }
         CheckUI();
     }

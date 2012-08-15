@@ -18,18 +18,19 @@ class Args
         virtual                        ~Args(){}
         int                             CaseNumber;
         double                          ErrorThreshold;
-        LogLevel                        CurrentLogLevel;    //option v:
-        string                          ModelFileName;      //option m:
-        string                          DataOutputFolder;   //option d:
-        string                          TempDataFolder;     //option t:
-        bool                            Pause;              //option p
-        bool                            OnlyCompile;        //option c
-        bool                            UseOSTempFolder;    //option u
-        double                          StartTime;          //option s
+        LogLevel                        CurrentLogLevel;        //option v:
+        string                          ModelFileName;          //option m:
+        string                          DataOutputFolder;       //option d:
+        string                          TempDataFolder;         //option t:
+        string                          TestSuiteModelsPath;    //option m:
+        bool                            Pause;                  //option p
+        bool                            OnlyCompile;            //option c
+        bool                            UseOSTempFolder;        //option u
+        double                          StartTime;              //option s
         double                          Duration;
-        double                          EndTime;            //option e
-        int                             Steps;              //option z
-        string                          SelectionList;      //option l:
+        double                          EndTime;                //option e
+        int                             Steps;                  //option z
+        string                          SelectionList;          //option l:
 };
 
 #endif

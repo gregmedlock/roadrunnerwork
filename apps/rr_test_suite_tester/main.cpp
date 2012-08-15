@@ -42,7 +42,7 @@ int main(int argc, char * argv[])
 
     Args paras;
     char c;
-    while ((c = GetOptions(argc, argv, ("cpv:n:d:t:"))) != -1)
+    while ((c = GetOptions(argc, argv, ("cpv:n:d:t:m:"))) != -1)
     {
         switch (c)
         {
@@ -52,6 +52,7 @@ int main(int argc, char * argv[])
             case ('p'): paras.Pause                         = true;                         break;
             case ('t'): paras.TempDataFolder                = optarg;                       break;
             case ('d'): paras.DataOutputFolder              = optarg;                       break;
+            case ('m'): paras.TestSuiteModelsPath           = optarg;                       break;
             case ('?'):
             {
                     cout<<Usage(argv[0])<<endl;
@@ -78,7 +79,7 @@ int main(int argc, char * argv[])
         throw(rr::Exception("Bad model"));
     }
 
-    gLog.SetCutOffLogLevel(paras.CurrentLogLevel);
+    gLog.SetCutOffLogLevel(lDebug3);//paras.CurrentLogLevel);
     string dataOutputFolder("R:\\DataOutput");
     string dummy;
     string logFileName;
@@ -104,10 +105,11 @@ int main(int argc, char * argv[])
         //dataOutputFolder += dummy;
         rr = new RoadRunner();
         rr->Reset();
+        rr->setCompiler("tcc");
         simulation.UseEngine(rr);
 
         //Read SBML models.....
-        string modelFilePath("R:\\SBMLTestCases\\all");
+        string modelFilePath(paras.TestSuiteModelsPath);
         string modelFileName;
 
         simulation.SetCaseNumber(paras.CaseNumber);
@@ -124,36 +126,6 @@ int main(int argc, char * argv[])
             goto end;
         }
 
-//        if(!simulation.GenerateModelCode())
-//        {
-//            Log(lError)<<"Failed loading SBML model";
-//            goto end;
-//        }
-//
-//        if(!simulation.CompileModel())
-//        {
-//                Log(lError)<<"Failed compiling SBML model:" <<paras.CaseNumber;
-//            goto end;
-//        }
-//
-//        if(paras.OnlyCompile)
-//        {
-//            goto end;
-//        }
-//
-//        if(!simulation.CreateModel())
-//        {
-//            Log(lError)<<"Failed creating Model";
-//            goto end;
-//        }
-//
-//        //First load the model
-//        if(!simulation.InitializeModel())
-//        {
-//            Log(lError)<<"Failed initializing SBML model";
-//            goto end;
-//        }
-//
         //Then read settings file if it exists..
         string settingsOveride("");//C:\\rrw\\Models\\settings_override.txt");
         if(!simulation.LoadSettings(settingsOveride))    //set selection list here!
@@ -162,8 +134,7 @@ int main(int argc, char * argv[])
         }
 
         rr->ComputeAndAssignConservationLaws(false);
-//        rr->ComputeAndAssignConservationLaws(true);
-//        simulation.SetSelectionList("time S1 S2");
+
         //Then Simulate model
         if(!simulation.Simulate())
         {
@@ -187,7 +158,7 @@ int main(int argc, char * argv[])
         //Check error data.. if an error in the set is larger than threshold, signal an error
         if(simulation.GetSimulationError() > paras.ErrorThreshold)
         {
-            Log(lError)<<"********** Error larger than "<<paras.ErrorThreshold;
+            Log(lError)<<"********** Error was "<<simulation.GetSimulationError()<<"<< which is larger than "<<paras.ErrorThreshold;
         }
         else
         {

@@ -336,9 +336,9 @@ bool SBMLModelSimulation::Simulate()
 
 bool SBMLModelSimulation::SaveResult()
 {
-    string resultFileName(JoinPath(mDataOutputFolder, mModelFileName));
-    resultFileName = ChangeFileExtensionTo(resultFileName, ".csv");
 
+    string resultFileName(JoinPath(mDataOutputFolder, "rr_" + mModelFileName));
+    resultFileName = ChangeFileExtensionTo(resultFileName, ".csv");
     Log(lInfo)<<"Saving result to file: "<<resultFileName;
     SimulationData resultData = mEngine->GetSimulationResult();
 

@@ -16,10 +16,10 @@
 				<Dependencies>roadrunner.cbproj;roadrunner-static.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="rr.cbproj">
-				<Dependencies>roadrunner.cbproj;roadrunner-static.cbproj</Dependencies>
+				<Dependencies>roadrunner-static.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="rr_ts_tester.cbproj">
-				<Dependencies>roadrunner.cbproj;roadrunner-static.cbproj</Dependencies>
+				<Dependencies>roadrunner-static.cbproj</Dependencies>
 			</Projects>
 			<Projects Include="rr_c.cbproj">
 				<Dependencies/>
@@ -74,22 +74,22 @@
 		<Target Name="rr_c_api:Make" DependsOnTargets="roadrunner:Make;roadrunner-static:Make">
 			<MSBuild Projects="rr_c_api.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="rr" DependsOnTargets="roadrunner;roadrunner-static">
+		<Target Name="rr" DependsOnTargets="roadrunner-static">
 			<MSBuild Projects="rr.cbproj"/>
 		</Target>
-		<Target Name="rr:Clean" DependsOnTargets="roadrunner:Clean;roadrunner-static:Clean">
+		<Target Name="rr:Clean" DependsOnTargets="roadrunner-static:Clean">
 			<MSBuild Projects="rr.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="rr:Make" DependsOnTargets="roadrunner:Make;roadrunner-static:Make">
+		<Target Name="rr:Make" DependsOnTargets="roadrunner-static:Make">
 			<MSBuild Projects="rr.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="rr_ts_tester" DependsOnTargets="roadrunner;roadrunner-static">
+		<Target Name="rr_ts_tester" DependsOnTargets="roadrunner-static">
 			<MSBuild Projects="rr_ts_tester.cbproj"/>
 		</Target>
-		<Target Name="rr_ts_tester:Clean" DependsOnTargets="roadrunner:Clean;roadrunner-static:Clean">
+		<Target Name="rr_ts_tester:Clean" DependsOnTargets="roadrunner-static:Clean">
 			<MSBuild Projects="rr_ts_tester.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="rr_ts_tester:Make" DependsOnTargets="roadrunner:Make;roadrunner-static:Make">
+		<Target Name="rr_ts_tester:Make" DependsOnTargets="roadrunner-static:Make">
 			<MSBuild Projects="rr_ts_tester.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="rr_c">
