@@ -275,6 +275,7 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
             if (oModel->getNumEvents() > 0)
             {
                 errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), EventFcn, gdata);
+                Log(lDebug2)<<"CVRootInit executed.....";
             }
 
             errCode = CvDense(cvodeMem, allocatedMemory); // int = size of systems
@@ -308,8 +309,8 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
 
             if (oModel->getNumEvents() > 0)
             {
-                //errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), eventDelegate, gdata);
-                Log(lWarning)<<"Original code, CVRootInit not executed...";
+                errCode = CVRootInit(cvodeMem, oModel->getNumEvents(), EventFcn, gdata);
+                Log(lDebug2)<<"CVRootInit executed.....";
             }
 
             errCode = CvDense(cvodeMem, allocated); // int = size of systems

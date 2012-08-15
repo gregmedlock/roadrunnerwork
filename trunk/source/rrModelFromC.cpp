@@ -116,7 +116,7 @@ int ModelFromC::getNumEvents()
 //void  ModelFromC::AssignRates()                                            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::AssignRates(vector<double>& rates)                    {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::computeConservedTotals()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-void  ModelFromC::computeEventPriorites()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
+//void  ModelFromC::computeEventPriorites()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 
 //void  ModelFromC::convertToAmounts()                                    {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
 //void  ModelFromC::convertToConcentrations() = 0;
@@ -175,6 +175,7 @@ bool ModelFromC::SetupDLLFunctions()
     cInitializeRates                    = (c_void)                     GetFunctionPtr("InitializeRates");
     csetConcentration                   = (c_void_int_double)          GetFunctionPtr("setConcentration");
     cComputeReactionRates               = (c_void_double_doubleStar)   GetFunctionPtr("computeReactionRates");
+    ccomputeEventPriorities             = (c_void)                     GetFunctionPtr("computeEventPriorities");
     return true;
 }
 
@@ -192,7 +193,6 @@ bool ModelFromC::SetupDLLData()
         Log(lError)<<"Failed to InitModel in "<<__FUNCTION__;
         return false;
     }
-
 
     char* modelName = cGetModelName();
     if(modelName)
@@ -654,7 +654,17 @@ void ModelFromC::computeConservedTotals()
     ccomputeConservedTotals();
 }
 
-//void ModelFromC::computeEventPriorites(){}
+void ModelFromC::computeEventPriorites()
+{
+    if(!ccomputeEventPriorities)
+    {
+        Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
+        return;
+    }
+    ccomputeEventPriorities();
+}
+
+
 //void ModelFromC::setConcentration(int index, double value){}
 void ModelFromC::convertToAmounts()
 {

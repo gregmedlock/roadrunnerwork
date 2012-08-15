@@ -17,6 +17,7 @@ double spf_xor(int numArgs, ...);
 //D_S bool     spf_not(bool a);
 //D_S double     spf_xor(params double[] a);
 //D_S bool     spf_xor(params bool[] a);
+double spf_abs(double s);
 double spf_pow(double a, double b);
 double spf_ceil(double a);
 double spf_floor(double a);
