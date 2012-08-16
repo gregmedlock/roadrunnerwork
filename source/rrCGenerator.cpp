@@ -524,8 +524,30 @@ void CGenerator::WriteUserDefinedFunctions(CodeBuilder& ignore)
                     mSource<<Append(", ");
                 }
             }
+            string userFunc = convertUserFunctionExpression(sBody);
+
+            if(userFunc.find("spf_piecewise") != string::npos)
+            {
+                ConvertFunctionCallToUseVarArgsSyntax("spf_piecewise", userFunc);
+            }
+
+            if(userFunc.find("spf_and") != string::npos)
+            {
+                ConvertFunctionCallToUseVarArgsSyntax("spf_and", userFunc);
+            }
+
+            if(userFunc.find("spf_or") != string::npos)
+            {
+                ConvertFunctionCallToUseVarArgsSyntax("spf_or", userFunc);
+            }
+
+            if(userFunc.find("spf_xor") != string::npos)
+            {
+                ConvertFunctionCallToUseVarArgsSyntax("spf_xor", userFunc);
+            }
+
             mSource<<Append(")" + NL() + "\t{" + NL() + "\t\t return " +
-                      convertUserFunctionExpression(sBody)
+                      userFunc
                       + ";" + NL() + "\t}" + NL() + NL());
         }
         catch (const Exception& ex)
@@ -973,8 +995,12 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
             }
 
             // Run the equation through MathML to carry out any conversions (eg ^ to Pow)
-            string rightSideMathml     = mNOM.convertStringToMathML(rightSide);
-            rightSideRule             = mNOM.convertMathMLToString(rightSideMathml);
+            if(rightSide.size())
+            {
+                string rightSideMathml    = mNOM.convertStringToMathML(rightSide);
+                rightSideRule             = mNOM.convertMathMLToString(rightSideMathml);
+            }
+
             if (leftSideRule.size())
             {
                 mSource<<Append(leftSideRule + " = ");
@@ -1187,7 +1213,11 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
         eventString = substituteTerms(0, "", eventString);
         eventString = ReplaceWord("time", "mTime", eventString);
         mSource<<"\t_previousEventStatusArray[" << i << "] = mEventStatusArray[" << i << "];" << NL();
-        mSource<<Append("\tif (" + eventString + " == true) {" + NL());
+
+
+        ConvertFunctionCallToUseVarArgsSyntax("spf_and", eventString);
+
+        mSource<<Append("\tif (" + eventString + " == 1.0) {" + NL());
 //        mSource<<Append("\t printf(\"Time for lt true: %f\n\", timeIn);\n");
         mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = true;" + NL());
         mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = 1;" + NL());
@@ -1857,12 +1887,10 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     }
                     else if(theToken == "true")
                     {
-                               //mSource<<Append("true");
                         mSource<<Append("1.0");
                     }
                     else if(theToken == "false")
                     {
-                               //mSource<<Append("false");
                         mSource<<Append("0.0");
                     }
                     else if(theToken == "gt")
@@ -1999,11 +2027,7 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                s.nextToken();
         }
     }
-    catch (SBWApplicationException)
-    {
-       throw;
-    }
-    catch (Exception e)
+    catch (const Exception& e)
     {
        throw new SBWApplicationException(e.Message());
     }
@@ -2016,7 +2040,6 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Code
     if(theToken == "pow")
     {
         mSource<<Append("spf_pow");
-        //mSource<<Append("");
     }
     else if(theToken == "sqrt")
     {

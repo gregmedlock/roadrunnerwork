@@ -189,7 +189,7 @@ class RR_DECLSPEC ModelFromC : public rrObject
         c_void                                  ccomputeEventPriorities;
 
         //Utility
-        FARPROC                                  GetFunctionPtr(const string& function);
+        FARPROC                                 GetFunctionPtr(const string& function);
 
     public:
                                                 ModelFromC(CGenerator* generator, HINSTANCE dllHandle = NULL);
