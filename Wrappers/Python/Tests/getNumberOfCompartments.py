@@ -5,11 +5,15 @@ os.chdir('C:\\RoadRunner\\bin')
 
 function = 'getNumberOfCompartments'
 
-comps = rrPython.getNumberOfCompartments()
-if str(comps) is not False:
-    result = 'True'
-else:
+try:
+    num = rrPython.getNumberOfCompartments()
+    if str(num) is not False:
+        result = 'True'
+    else:
+        result = 'False'
+except:
     result = 'False'
+
 
 PythonTestResults = open('C:\\RoadRunner\\PythonTestResults.csv','a')
 writer = csv.writer(PythonTestResults)

@@ -3,11 +3,12 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getConcentrationControlCoefficientNames'
+function = 'setNumPoints'
+rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
 try:
-    names = rrPython.getConcentrationControlCoefficientNames()
-    if str(names) is not False:
+    points = rrPython.setNumPoints(10)
+    if str(points) is not False:
         result = 'True'
     else:
         result = 'False'

@@ -3,11 +3,11 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getConcentrationControlCoefficientNames'
+function = 'getParamPromotedSBML'
 
 try:
-    names = rrPython.getConcentrationControlCoefficientNames()
-    if str(names) is not False:
+    SBML = rrPython.getParamPromotedSBML()
+    if str(sbml) is not False:
         result = 'True'
     else:
         result = 'False'

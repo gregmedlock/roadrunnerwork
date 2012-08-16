@@ -5,11 +5,15 @@ os.chdir('C:\\RoadRunner\\bin')
 
 function = 'getNumberOfFloatingSpecies'
 
-specs = rrPython.getNumberOfFloatingSpecies()
-if str(specs) is not False:
-    result = 'True'
-else:
+try:
+    num = rrPython.getNumberOfFloatingSpecies()
+    if str(num) is not False:
+        result = 'True'
+    else:
+        result = 'False'
+except:
     result = 'False'
+
 
 PythonTestResults = open('C:\\RoadRunner\\PythonTestResults.csv','a')
 writer = csv.writer(PythonTestResults)

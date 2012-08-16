@@ -5,11 +5,15 @@ os.chdir('C:\\RoadRunner\\bin')
 
 function = 'getCapabilities'
 
-caps = rrPython.getCapabilities()
-if str(caps) is not False:
-    result = 'True'
-else:
+try:
+    caps = rrPython.getCapabilities()
+    if str(caps) is not False:
+        result = 'True'
+    else:
+        result = 'False'
+except:
     result = 'False'
+
 
 PythonTestResults = open('C:\\RoadRunner\\PythonTestResults.csv','a')
 writer = csv.writer(PythonTestResults)

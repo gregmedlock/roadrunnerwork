@@ -3,11 +3,11 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getConcentrationControlCoefficientNames'
+function = 'getRRInstance'
 
 try:
-    names = rrPython.getConcentrationControlCoefficientNames()
-    if str(names) is not False:
+    instance = rrPython.getRRInstance()
+    if str(instance) is not False:
         result = 'True'
     else:
         result = 'False'

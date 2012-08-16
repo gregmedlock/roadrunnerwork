@@ -3,11 +3,11 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getConcentrationControlCoefficientNames'
+function = 'setCapabilities'
 
 try:
-    names = rrPython.getConcentrationControlCoefficientNames()
-    if str(names) is not False:
+    caps = rrPython.setCapabilities('aaa')
+    if str(caps) is not False:
         result = 'True'
     else:
         result = 'False'

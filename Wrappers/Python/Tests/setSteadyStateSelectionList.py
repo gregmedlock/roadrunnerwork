@@ -3,11 +3,12 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getConcentrationControlCoefficientNames'
+function = 'setSteadyStateSelectionList'
+rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
 try:
-    names = rrPython.getConcentrationControlCoefficientNames()
-    if str(names) is not False:
+    list = rrPython.setSteadyStateSelectionList('S1')
+    if str(list) is not False:
         result = 'True'
     else:
         result = 'False'

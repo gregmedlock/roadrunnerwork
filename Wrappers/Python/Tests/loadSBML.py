@@ -3,11 +3,13 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getConcentrationControlCoefficientNames'
+function = 'loadSBML'
+file = open('C:\\RoadRunner\\Models\\feedback.xml','r').read()
+rrPython.loadSBML(file)
 
 try:
-    names = rrPython.getConcentrationControlCoefficientNames()
-    if str(names) is not False:
+    sbml = rrPython.loadSBML()
+    if str(sbml) is not False:
         result = 'True'
     else:
         result = 'False'

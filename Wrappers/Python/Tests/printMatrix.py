@@ -3,11 +3,12 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getConcentrationControlCoefficientNames'
+function = 'printMatrix'
+rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
 try:
-    names = rrPython.getConcentrationControlCoefficientNames()
-    if str(names) is not False:
+    matrix = rrPython.printMatrix(rrPython.handle.getLinkMatrix())
+    if str(matrix) is not False:
         result = 'True'
     else:
         result = 'False'

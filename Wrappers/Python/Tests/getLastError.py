@@ -5,11 +5,15 @@ os.chdir('C:\\RoadRunner\\bin')
 
 function = 'getLastError'
 
-error = rrPython.getLastError()
-if str(error) is not False:
-    result = 'True'
-else:
+try:
+    error = rrPython.getLastError()
+    if str(error) is not False:
+        result = 'True'
+    else:
+        result = 'False'
+except:
     result = 'False'
+
 
 PythonTestResults = open('C:\\RoadRunner\\PythonTestResults.csv','a')
 writer = csv.writer(PythonTestResults)
