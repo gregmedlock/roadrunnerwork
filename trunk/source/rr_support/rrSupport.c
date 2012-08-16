@@ -5,6 +5,7 @@
 #include "rrSupport.h"
 
 #define IS_ODD(n)  ((n) & 1)
+
 double myFastSin ( double angle );
 
 double trunc(double d)
@@ -106,6 +107,11 @@ double spf_pow(double base, double exp)
     }
 }
 
+double spf_exp(double num)
+{
+	return exp(num);
+}
+
 //---------------------------------------------------------------------------
 // Boolean functions for event handling" + NL());
 double spf_gt(double a, double b)
@@ -145,6 +151,7 @@ double spf_and(int nrOfArguments, ...)
     int i;
     va_list listPointer;
 
+    printf( "Number of args in spf_and: %d", nrOfArguments );
 
     // make listPointer point to the first argument in the list
     va_start(listPointer, nrOfArguments);
@@ -156,7 +163,7 @@ double spf_and(int nrOfArguments, ...)
         double arg = va_arg(listPointer, double);
 
         printf( "The %dth arg is %f\n", i, arg );
-        if(arg != 1.0)
+        if(arg == 0.0)
         {
             result = 0.0;
             break;
@@ -191,39 +198,6 @@ double spf_or(int nrOfArguments, ...)
     return result;
 }
 
-//        bool _xor(params bool[] a)
-//        {
-//            bool result = false;
-//            for (int i = 0; i < a.Length; i++)
-//            {
-//                if (i == 0)
-//                {
-//                    result = a[i];
-//                }
-//                else
-//                {
-//                    result ^= a[i];
-//                }
-//            }
-//            return result;
-//        }
-
-//        public static double _xor(params double[] a)
-//        {
-//            bool result = false;
-//            for (int i = 0; i < a.Length; i++)
-//            {
-//                if (i == 0)
-//                {
-//                    result = (a[i] == 1.0);
-//                }
-//                else
-//                {
-//                    result ^= (a[i] == 1.0);
-//                }
-//            }
-//            return (result ? 1.0 : 0.0);
-//        }
 
 double spf_xor(int nrOfArguments, ...)
 {
@@ -253,62 +227,10 @@ double spf_xor(int nrOfArguments, ...)
     return (result ? 1.0 : 0.0);
 }
 
-//double spf_and(double val1, double val2)
-//{
-////    foreach (double b in a)
-////        if (b != 1.0) return 0.0;
-////    return 1.0;
-//}
-
-//        bool _and(params bool[] a)
-//        {
-//            bool result = true;
-//            foreach (bool b in a)
-//                result &= b;
-//            return result;
-//        }
-
-//        double _or(params double[] a)
-//        {
-//            foreach (double b in a)
-//                if (b == 1.0) return 1.0;
-//            return 0.0;
-//        }
-//
-//        bool _or(params bool[] a)
-//        {
-//            bool result = false;
-//            foreach (bool b in a)
-//                result |= b;
-//            return result;
-//        }
-
 double spf_not(double a)
 {
     return (a == 1.0 ? 0.0 : 1.0);
 }
-
-//bool _not(bool a)
-//{
-//    return ! a;
-//}
-//        double _xor(params double[] a)
-//        {
-//            bool result = false;
-//            for (int i = 0; i < a.Length; i++)
-//            {
-//                if (i == 0)
-//                {
-//                    result = (a[i] == 1.0);
-//                }
-//                else
-//                {
-//                    result ^= (a[i] == 1.0);
-//                }
-//            }
-//            return (result ? 1.0 : 0.0);
-//        }
-
 
 double spf_ceil(double a)
 {
@@ -368,6 +290,7 @@ double spf_piecewise(int nrOfArgs, ...)
     double result = 0.0;
     double nextArg;
     va_list listPointer;
+/*    printf( "Nr of args to piecewise: %d\n", nrOfArgs);*/
 
     // make listPointer point to the first argument in the list
     va_start(listPointer, nrOfArgs);
@@ -432,92 +355,106 @@ double spf_sin(double a)
     return sin(a);
 }
 
+double spf_sec(double a)
+{
+    return 1./cos(a);
+}
+
 double sec(double a)
 {
-    return sec(a);
+    return 1./cos(a);
 }
 
 //// Cotangent
 double cot(double a)
 {
-    return -1;
+    return 1./tan(a);
 }
 //
 //// Inverse cotangent
 double arccot(double a)
 {
-    return -1;
+    double result;
+    if(a == 0.0)
+    {
+        result = PI/2.;
+    }
+    else
+    {
+        result = atan(1. / a);
+    }
+    return result;
 }
 
 //// Inverse cotangent - ratio numerator and denominator provided
 double arccot2(double a, double b)
 {
-    return -1;
+    return 0;
 }
 
 //// Inverse secant
 double asec(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Cosecant
 double csc(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Inverse cosecant
 double acsc(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Hyperbolic secant of a double number
 double sech(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Inverse hyperbolic secant of a double number
 double asech(double a)
 {
-    return -1;
+    return 0;
 }
 
 double arcsech(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Hyperbolic cosecant of a double number
 double csch(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Inverse hyperbolic cosecant of a double number
 double arccsc(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Inverse hyperbolic cosecant of a double number
 double arccsch(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Hyperbolic cotangent of a double number
 double coth(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Inverse hyperbolic cotangent of a double number
 double arccoth(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Inverse hyperbolic functions
@@ -525,19 +462,19 @@ double arccoth(double a)
 //// Inverse hyperbolic sine of a double number
 double arcsinh(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Inverse hyperbolic cosine of a double number
 double arccosh(double a)
 {
-    return -1;
+    return 0;
 }
 
 //// Inverse hyperbolic tangent of a double number
 double arctanh(double a)
 {
-    return -1;
+    return 0;
 }
 
 

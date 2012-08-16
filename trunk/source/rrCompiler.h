@@ -24,8 +24,10 @@ class RR_DECLSPEC Compiler : public rrObject
         string                      mDLLFileName;    //With path
         vector<string>              mIncludePaths;
         vector<string>              mLibraryPaths;
+        vector<string>              mCompilerFlags;
         string                      mSupportCodeFolder;
-        string                      mCompiler;
+        string                      mCompilerName;
+        string                      mCompilerExe;
         string                      CreateCompilerCommand(const string& sourceFileName);
         bool                        SetupCompilerEnvironment();
 

@@ -2,6 +2,16 @@
 #define rrSupportH
 #include "rrCExporter.h"
 
+#ifndef E
+//const double  E     =  2.71828182845904523536028747135;
+#define E 2.71
+#endif
+#ifndef PI
+#define PI 3.1415
+#endif
+
+//const double  PI    =  3.14159265358979323846264338327;
+
 // Boolean functions for event handling" + NL());
 double spf_gt(double a, double b);
 double spf_lt(double a, double b);
@@ -18,6 +28,7 @@ double spf_xor(int numArgs, ...);
 //D_S double     spf_xor(params double[] a);
 //D_S bool     spf_xor(params bool[] a);
 double spf_abs(double s);
+double spf_exp(double a);
 double spf_pow(double a, double b);
 double spf_ceil(double a);
 double spf_floor(double a);
@@ -138,7 +149,6 @@ double arctanh(double a);
 //const double SQRT2                 = 1.41421356237309504880168872421; /* sqrt(2) */
 //const double SQRT1_2               = 0.70710678118654752440084436210; /* sqrt(1/2) */
 //const double SQRT3                 = 1.73205080756887729352744634151; /* sqrt(3) */
-//const double PI                    = 3.14159265358979323846264338327;
 //const double PI_BY_2               = 1.57079632679489661923132169164; /* pi/2 */
 //const double PI_BY_4               = 0.78539816339744830966156608458; /* pi/4 */
 //const double SQRTPI                = 1.77245385090551602729816748334; /* sqrt(pi) */
@@ -150,180 +160,4 @@ double arctanh(double a);
 //const double LNPI                  = 1.14472988584940017414342735135; /* ln(pi) */
 #endif
 
-
-//using System;
-//
-//namespace LibRoadRunner
-//{
-//    public class supportFunctions
-//    {
-//        // Boolean functions for event handling" + NL());
-//        public static double _gt(double a, double b)
-//        {
-//            return (a > b ? 1.0 : 0.0);
-//        }
-//
-//        public static double _lt(double a, double b)
-//        {
-//            return (a < b ? 1.0 : 0.0);
-//        }
-//
-//        public static double _geq(double a, double b)
-//        {
-//            return (a >= b ? 1.0 : 0.0);
-//        }
-//
-//        public static double _leq(double a, double b)
-//        {
-//            return (a <= b ? 1.0 : 0.0);
-//        }
-//
-//        public static double _eq(double a, double b)
-//        {
-//            return (a == b ? 1.0 : 0.0);
-//        }
-//
-//        public static double _neq(double a, double b)
-//        {
-//            return (a != b ? 1.0 : 0.0);
-//        }
-//
-//        public static double _and(params double[] a)
-//        {
-//            foreach (double b in a)
-//                if (b != 1.0) return 0.0;
-//            return 1.0;
-//        }
-//
-//        public static bool _and(params bool[] a)
-//        {
-//            bool result = true;
-//            foreach (bool b in a)
-//                result &= b;
-//            return result;
-//        }
-//
-//        public static double _or(params double[] a)
-//        {
-//            foreach (double b in a)
-//                if (b == 1.0) return 1.0;
-//            return 0.0;
-//        }
-//
-//        public static bool _or(params bool[] a)
-//        {
-//            bool result = false;
-//            foreach (bool b in a)
-//                result |= b;
-//            return result;
-//        }
-//
-//        public static double _not(double a)
-//        {
-//            return (a == 1.0 ? 0.0 : 1.0);
-//        }
-//
-//        public static bool _not(bool a)
-//        {
-//            return ! a;
-//        }
-//
-//        public static double _xor(params double[] a)
-//        {
-//            bool result = false;
-//            for (int i = 0; i < a.Length; i++)
-//            {
-//                if (i == 0)
-//                {
-//                    result = (a[i] == 1.0);
-//                }
-//                else
-//                {
-//                    result ^= (a[i] == 1.0);
-//                }
-//            }
-//            return (result ? 1.0 : 0.0);
-//        }
-//
-//        public static bool _xor(params bool[] a)
-//        {
-//            bool result = false;
-//            for (int i = 0; i < a.Length; i++)
-//            {
-//                if (i == 0)
-//                {
-//                    result = a[i];
-//                }
-//                else
-//                {
-//                    result ^= a[i];
-//                }
-//            }
-//            return result;
-//        }
-//
-//        public static double _factorial(double a)
-//        {
-//            var b = (int) a;
-//            if (b < 2)
-//                return 1.0;
-//            return b*_factorial(b - 1);
-//        }
-//
-//        public static double _log(double a)
-//        {
-//            return Math.Log(a);
-//        }
-//
-//        public static double _log(double a, double b)
-//        {
-//            return Math.Log(b, a);
-//        }
-//
-//        public static double _delay(double a, double b)
-//        {
-//            return a;
-//        }
-//
-//        public static double _root(double a, double b)
-//        {
-//            try
-//            {
-//                return Math.Pow(b, 1.0/a);
-//            }
-//            catch
-//            {
-//                return 1.0;
-//            }
-//        }
-//
-//        public static double _piecewise(params object[] args)
-//        {
-//            try
-//            {
-//                for (int i = 0; i < args.Length - 1; i = i + 2)
-//                {
-//                    //bool bTest = (bool) args[i+1];
-//                    try
-//                    {
-//                        var bTest = (double) args[i + 1];
-//                        if (bTest == 1.0)
-//                            return (double) args[i];
-//                    }
-//                    catch
-//                    {
-//                        var bTest = (bool) args[i + 1];
-//                        if (bTest) return (double) args[i];
-//                    }
-//                }
-//                return (double) args[args.Length - 1];
-//            }
-//            catch (Exception)
-//            {
-//                throw new ArgumentException("Invalid arguments for piecewise.");
-//            }
-//        }
-//    }
-//}
-//
 

@@ -70,7 +70,9 @@ int main(int argc, char * argv[])
     }
 
     string excludedCases("rrExcludedTestCases.txt");
-    vector<string> exclude(GetLinesInFile(excludedCases));
+
+    vector<string> exclude;
+    exclude = GetLinesInFile(excludedCases);
 
     vector<int> cant_simulate; //Theese are cases rr don't support (yet)
 
@@ -146,13 +148,13 @@ int main(int argc, char * argv[])
         simulation.SetModelFilePath(modelFilePath);
         simulation.SetModelFileName(modelFileName);
         simulation.CompileIfDllExists(true);
+        simulation.CopyFilesToOutputFolder();
 
         if(!simulation.LoadSBMLFromFile())
         {
             Log(lError)<<"Failed loading SBML model";
             goto end;
         }
-
         //Then read settings file if it exists..
         string settingsOveride("");//C:\\rrw\\Models\\settings_override.txt");
         if(!simulation.LoadSettings(settingsOveride))    //set selection list here!
@@ -195,7 +197,7 @@ int main(int argc, char * argv[])
         simulation.SaveAllData();
         simulation.SaveModelAsXML(dataOutputFolder);
 
-    }
+     }
     catch(rr::Exception& ex)
     {
         Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;

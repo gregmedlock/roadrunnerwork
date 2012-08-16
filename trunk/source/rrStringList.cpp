@@ -137,9 +137,24 @@ int StringList::IndexOf(const string& item)
     return rr::IndexOf(mStrings, item);
 }
 
-bool StringList::Contains(const string& item)
+bool StringList::Contains(const string& item) const
 {
     return std::find(mStrings.begin(), mStrings.end(), item) != mStrings.end() ? true : false;
+}
+
+bool StringList::DontContain(const string& item) const
+{
+    return !Contains(item);
+}
+
+void StringList::clear()
+{
+    mStrings.clear();
+}
+
+void StringList::empty()
+{
+    mStrings.clear();
 }
 
 void StringList::operator=(const StringList& rhs)
@@ -155,6 +170,7 @@ ostream& operator<<(ostream& stream, const StringList& list)
     }
     return stream;
 }
+
 
 } //namespace rr
 

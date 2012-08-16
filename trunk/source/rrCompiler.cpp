@@ -22,7 +22,7 @@ namespace rr
 Compiler::Compiler(const string& compiler)
 :
 mDLLHandle(NULL),
-mCompiler(compiler),
+mCompilerName(compiler),
 mSupportCodeFolder("../rr_support")
 {
     Log(lDebug5)<<"In Compiler CTOR";
@@ -32,7 +32,7 @@ Compiler::~Compiler(){}
 
 bool Compiler::SetCompiler(const string& compiler)
 {
-    mCompiler = compiler;
+    mCompilerName = compiler;
 	return true;
 }
 
@@ -71,55 +71,53 @@ bool Compiler::SetupCompilerEnvironment()
 {
     mIncludePaths.clear();
     mLibraryPaths.clear();
-    if(mCompiler == "tcc")
+    mCompilerFlags.clear();
+    if(mCompilerName == "tcc")
     {
+        mCompilerExe = "./../compilers/tcc/tcc.exe";
         mIncludePaths.push_back(".");
-        mIncludePaths.push_back("./include");
+        mIncludePaths.push_back("./../compilers/tcc/include");
         mLibraryPaths.push_back(".");
-        mLibraryPaths.push_back("./lib");
+        mLibraryPaths.push_back("./../compilers/tcc/lib");
 
+        mCompilerFlags.push_back("-g");         //-g adds runtime debug information
+        mCompilerFlags.push_back("-shared");
+        mCompilerFlags.push_back("-rdynamic");  //-rdynamic : Export global symbols to the dynamic linker
+                                                //-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied.
+
+        //LogLevel                              //-v is for verbose
+        switch(gLog.GetLogLevel())
+        {
+            case lDebug1:   mCompilerFlags.push_back("-v");           break;
+            case lDebug2:   mCompilerFlags.push_back("-vv");           break;
+            case lDebug3:   mCompilerFlags.push_back("-vvv");           break;
+        }
     }
-    else if(mCompiler == "bcc")
+    else if(mCompilerName == "bcc")
     {
 
     }
 
     mIncludePaths.push_back(mSupportCodeFolder);
-
     return true;
 }
 
 string Compiler::CreateCompilerCommand(const string& sourceFileName)
 {
     stringstream exeCmd;
-    if(mCompiler == "tcc")
+    if(mCompilerName == "tcc")
     {
-        //-g adds runtime debug information
-        //-v is for verbose
-        //-rdynamic : Export global symbols to the dynamic linker
-        //-b : Generate additional support code to check memory allocations and array/pointer bounds. `-g' is implied.
-
-        exeCmd<<"tcc -g -shared -rdynamic " \
-        <<sourceFileName<<" " \
+        exeCmd<<mCompilerExe;
+        //Add compiler flags
+        for(int i = 0; i < mCompilerFlags.size(); i++)
+        {
+            exeCmd<<" "<<mCompilerFlags[i];
+        }
+        exeCmd<<" "<<sourceFileName<<" " \
         <<JoinPath(mSupportCodeFolder, "rrSupport.c");
 
-//        if(gLog.GetLogLevel() == lDebug1)
-        {
-            exeCmd<<" -v";
-        }
 
-        if(gLog.GetLogLevel() == lDebug2)
-        {
-            exeCmd<<" -vv";
-        }
-
-        if(gLog.GetLogLevel() == lDebug3)
-        {
-            exeCmd<<" -vvv";
-        }
-
-        exeCmd<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL ";//
-        //   <<" -DDEBUG_SPF "
+        exeCmd<<" -o"<<mDLLFileName<<" -DBUILD_MODEL_DLL ";
 
         //Add include paths
         for(int i = 0; i < mIncludePaths.size(); i++)
@@ -133,9 +131,9 @@ string Compiler::CreateCompilerCommand(const string& sourceFileName)
             exeCmd<<"-L"<<mLibraryPaths[i]<<" " ;
         }
     }
-    else if(mCompiler == "bcc")
+    else if(mCompilerName == "bcc")
     {
-        exeCmd<<"bcc32 -WD ";
+        exeCmd<<"bcc32 -WD -DBUILD_MODEL_DLL ";
         exeCmd<<" -e"<<mDLLFileName<<" -vu +r:\\rrInstalls\\xe\\rr_support\\bcc.cfg " \
         <<sourceFileName \
         <<" r:\\rrInstalls\\xe\\rr_support\\rrSupport.c";
@@ -223,12 +221,11 @@ bool Compiler::Compile(const string& cmdLine)
     CloseHandle(out);
 
     //Read the log file and log it
-    vector<string> fContent = SplitString(GetFileContent(compilerTempFile.c_str()),"\n");
+
+    string log = GetFileContent(compilerTempFile.c_str());
     Log(lInfo)<<"Compiler output";
-    for(int i = 0; i < fContent.size();i++)
-    {
-        Log(lInfo)<<fContent<<endl;
-    }
+    Log(lInfo)<<log<<endl;
+
     return true;
 }
 

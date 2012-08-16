@@ -210,7 +210,7 @@ void CGenerator::WriteClassHeader(CodeBuilder& ignore)
     mHeader<<"#include <stdio.h>"<<endl;
     mHeader<<"#include <stdbool.h>"<<endl;
     mHeader<<"#include \"rrCExporter.h\"\t             //Export Stuff."<<endl;
-    mHeader<<"#include \"rrSupport.h\"\t     //Supportfunctions for event handling.."<<endl;
+
 
     mHeader<<Append("//************************************************************************** " + NL());
     mHeader<<"//Number of floating species: "<<floatingSpeciesConcentrationList.size()<<endl;
@@ -225,8 +225,9 @@ void CGenerator::WriteClassHeader(CodeBuilder& ignore)
 //    mHeader<<Append("{" + NL());
 
     //Header of the source file...
+    mSource<<"#include <math.h>"<<endl;
     mSource<<"#include <stdio.h>"<<endl;
-
+    mSource<<"#include \"rrSupport.h\"\t     //Supportfunctions for event handling.."<<endl;
 }
 
 void CGenerator::WriteOutVariables(CodeBuilder& ignore)
@@ -298,10 +299,11 @@ void CGenerator::WriteComputeAllRatesOfChange(CodeBuilder& ignore, const int& nu
        mHeader.AddFunctionExport("void", "computeAllRatesOfChange()");
     mSource<<Append("//Uses the equation: dSd/dt = L0 dSi/dt" + NL());
     mSource<<"void computeAllRatesOfChange()\n{";
-    mSource<<tab<<"int i;\n";
     mSource<<"\n#if defined(DEBUG_C_DLL)\n";
     mSource.TLine("printf(\"In function computeAllRatesOfChange()\\n\"); ");
-    mSource<<"#endif";
+    mSource<<"#endif\n";
+
+    mSource<<tab<<"int i;\n";
 //    mSource<<"\n\t//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );\n";
     mSource<<"\n\tdouble* dTemp = (double*) malloc( sizeof(double)* (_amountsSize + _rateRulesSize) );\n"; //Todo: Check this
 
@@ -1429,7 +1431,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
     {
         //Get array of pointers functions
         mSource<<("TEventAssignmentDelegate* Get_eventAssignments() \n{\n\treturn _eventAssignments;\n}\n\n");
-           mSource<<("TPerformEventAssignmentDelegate* Get_performEventAssignments() \n{\n\treturn _performEventAssignments;\n}\n\n");
+        mSource<<("TPerformEventAssignmentDelegate* Get_performEventAssignments() \n{\n\treturn _performEventAssignments;\n}\n\n");
         mSource<<("TComputeEventAssignmentDelegate* Get_computeEventAssignments() \n{\n\treturn _computeEventAssignments;\n}\n\n");
         mSource<<("TEventDelayDelegate* GetEventDelays() \n{\n\treturn mEventDelay;\n}\n\n");
         mSource<<Append("// Event assignments" + NL());
@@ -1459,7 +1461,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
             StringList oValue;
             int nCount = 0;
             int numAssignments = ev.Count() - 2;
-            mSource<<"\n\tprintf(\"In computeEventAssignment_ \\n\");\n\n";
+//            mSource<<"\n\tprintf(\"In computeEventAssignment_ \\n\");\n\n";
             mSource<<Format("\t\tdouble* values = (double*) malloc(sizeof(double)*{0});{1}", numAssignments, NL());
             for (int j = 2; j < ev.Count(); j++)
             {
@@ -2067,7 +2069,7 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Code
     }
     else if(theToken == "exp")
     {
-        mSource<<Append("exp");
+        mSource<<Append("spf_exp");
     }
     else if(theToken == "abs")
     {
@@ -2383,13 +2385,13 @@ void CGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, S
             mSource<<Format(" = {0}\t", NL());
             break;
       case CodeTypes::tTimeWord1:
-            mSource<<Append("time");
+            mSource<<Append("mTime");
             break;
         case CodeTypes::tTimeWord2:
-            mSource<<Append("time");
+            mSource<<Append("mTime");
             break;
         case CodeTypes::tTimeWord3:
-            mSource<<Append("time");
+            mSource<<Append("mTime");
             break;
         case CodeTypes::tAndToken:
             mSource<<Format("{0}spf_and", NL());
@@ -2623,6 +2625,7 @@ void CGenerator::WriteInitFunction(CodeBuilder& ignore, CodeBuilder& source)
     source<<tab<<    "mModelName = (char*) malloc(sizeof(char)*"<<strlen(mModelName.c_str()) + 1<<");" <<endl;
        source<<tab<<    "strcpy(mModelName,\""<<mModelName<<"\");"<<endl;
 
+    source<<"\t"<<Append("setCompartmentVolumes();" , NL());
     source<<"\t"<<Append("InitializeDelays();" , NL());
 
     // Declare any eventAssignment delegates

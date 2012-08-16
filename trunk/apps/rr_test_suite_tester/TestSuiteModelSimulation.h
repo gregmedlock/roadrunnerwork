@@ -32,6 +32,7 @@ class TestSuiteModelSimulation : public SBMLModelSimulation
         bool                    SaveAllData();
         double                  GetSimulationError();
         bool                    LoadSettings(const string& fName = "");
+        bool                    CopyFilesToOutputFolder();
 
 };
 

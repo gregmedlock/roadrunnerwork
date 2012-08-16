@@ -28,10 +28,10 @@ for ((i=$start; i<=$end; i++ ));
 do
 	echo "Running $i" ;
 	echo $i >> $logFile;
-    $simulator -m$ModelsDir -n$i -vError >> $logFile &
-#    $simulator -m$ModelsDir -n$i -vError >> $logFile
+#    $simulator -m$ModelsDir -n$i -vError >> $logFile &
+    $simulator -m$ModelsDir -n$i -vError >> $logFile
 	echo "Next" >> $logFile;
-    sleep .015
+#    sleep .0015
 done
 
 echo "Waiting for background jobs to finish..."
