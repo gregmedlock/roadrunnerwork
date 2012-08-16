@@ -5,14 +5,11 @@
 #include <iomanip>
 #include <map>
 #include <math.h>
+#include <sstream>
 #include "rrLogger.h"
 #include "TestSuiteModelSimulation.h"
 #include "rrUtils.h"
 //---------------------------------------------------------------------------
-
-#if defined(__CODEGEARC__)
-    #pragma package(smart_init)
-#endif
 
 namespace rr
 {
@@ -37,15 +34,27 @@ void TestSuiteModelSimulation::SetCaseNumber(int cNr)
     mCurrentCaseNumber = cNr;
 }
 
+bool TestSuiteModelSimulation::CopyFilesToOutputFolder()
+{
+    if(!mModelSettingsFileName.size())
+    {
+        mModelSettingsFileName = JoinPath(mModelFilePath, GetSettingsFileNameForCase(mCurrentCaseNumber));
+    }
+
+    string fName = ExtractFileName(mModelSettingsFileName);
+    fName = JoinPath(mDataOutputFolder, fName);
+    CopyFileA(mModelSettingsFileName.c_str(), fName.c_str(), false);
+}
+
 bool TestSuiteModelSimulation::LoadSettings(const string& settingsFName)
 {
-    string fName(settingsFName);
+    mModelSettingsFileName = (settingsFName);
 
-    if(!fName.size())
+    if(!mModelSettingsFileName.size())
     {
-        fName = JoinPath(mModelFilePath, GetSettingsFileNameForCase(mCurrentCaseNumber));
+        mModelSettingsFileName = JoinPath(mModelFilePath, GetSettingsFileNameForCase(mCurrentCaseNumber));
     }
-    return SBMLModelSimulation::LoadSettings(fName);
+    return SBMLModelSimulation::LoadSettings(mModelSettingsFileName);
 }
 
 bool TestSuiteModelSimulation::LoadReferenceData()
@@ -214,9 +223,10 @@ bool TestSuiteModelSimulation::SaveAllData()
 string TestSuiteModelSimulation::GetSettingsFileNameForCase(int caseNr)
 {
     stringstream name;
-    name<<setfill('0')<<setw(5)<<caseNr<<"-settings.txt";        //create the "00023" subfolder format
-
-    return name.str();
+    name<<setfill('0')<<setw(5)<<caseNr;
+    name<<string("-settings.txt");        //create the "00023" subfolder format
+    string theName = name.str();
+    return theName;
 }
 
 string TestSuiteModelSimulation::GetReferenceDataFileNameForCase(int caseNr)

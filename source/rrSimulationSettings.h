@@ -1,7 +1,7 @@
 #ifndef rrSimulationSettingsH
 #define rrSimulationSettingsH
-#include <vector>
 #include "rrObject.h"
+#include "rrStringList.h"
 //---------------------------------------------------------------------------
 
 using std::vector;
@@ -22,9 +22,9 @@ class RR_DECLSPEC SimulationSettings : public rrObject
         double                  mEndTime;
         double                  mAbsolute;
         double                  mRelative;
-        vector<string>          mVariables;
-        vector<string>          mAmount;
-        vector<string>          mConcentration;
+        StringList              mVariables;
+        StringList              mAmount;
+        StringList              mConcentration;
         bool                    LoadFromFile(const string& fName);
 };
 

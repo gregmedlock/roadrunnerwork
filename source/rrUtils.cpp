@@ -64,7 +64,7 @@ vector<string> GetLinesInFile(const string& fName)
     ifstream ifs(fName.c_str());
     if(!ifs)
     {
-        Log(lWarning)<<"Failed opening file: "<<fName;
+        Log(lError)<<"Failed opening file: "<<fName;
         return lines;
     }
 
@@ -297,25 +297,37 @@ StringList GetSelectionListFromSettings(const SimulationSettings& settings)
 	StringList theList;
 	TSelectionRecord record;
 
-	theList.Add("time");
-	for(int i = 0; i < settings.mAmount.size(); i++)
+    int nrOfVars = settings.mVariables.Count();
+
+	for(int i = 0; i < settings.mAmount.Count(); i++)
 	{
 		theList.Add("[" + settings.mAmount[i] + "]");        //In the setSelection list below, the [] selects the correct 'type'
 	}
 
-	for(int i = 0; i < settings.mConcentration.size(); i++)
+	for(int i = 0; i < settings.mConcentration.Count(); i++)
 	{
 		theList.Add(settings.mConcentration[i]);
 	}
 
-	if(theList.Count() < 2)
+    //We may have variables
+    //A variable 'exists' only in "variables", not in the amount or concentration section
+    int currCount = theList.Count();
+	if( nrOfVars > currCount)
 	{
-		for(int i = 0; i < settings.mVariables.size(); i++)
-		{
-			theList.Add(settings.mVariables[i]);
-		}
-	}
+        //Look for a variable that is not in the list
 
+        for(int i = 0; i < settings.mVariables.Count(); i++)
+		{
+            string aVar = settings.mVariables[i];
+            if(settings.mAmount.DontContain(aVar) && settings.mConcentration.DontContain(aVar))
+            {
+			    theList.Add(settings.mVariables[i]);
+            }
+
+        }
+    }
+
+  	theList.InsertAt(0, "time");
     return theList;
 }
 

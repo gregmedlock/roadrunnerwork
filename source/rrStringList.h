@@ -38,8 +38,10 @@ class RR_DECLSPEC StringList : public rrObject
 
         int                         find(const string& item);
         int                         IndexOf(const string& item);
-        void                        empty(){mStrings.clear();}
-        bool                        Contains(const string& item);
+        void                        clear();
+        void                        empty();
+        bool                        Contains(const string& item) const;
+        bool                        DontContain(const string& item) const;
         void                        push_back(const string& item);
         vector<string>::iterator    begin();
         vector<string>::iterator    end();
