@@ -180,7 +180,7 @@ double spf_or(int nrOfArguments, ...)
         // it from the va_list.
         double arg = va_arg( listPointer, double);
 
-        printf("The %dth arg is %f\n", i, arg);
+/*        printf("The %dth arg is %f\n", i, arg);*/
         if(arg == 1.0)
         {
             result = 1.0;
@@ -238,7 +238,7 @@ double spf_xor(int nrOfArguments, ...)
         // the type of the arg to retrieve
         // it from the va_list.
         double arg = va_arg( listPointer, double);
-        printf( "    The %dth arg is %f\n", i, arg );
+/*        printf( "    The %dth arg is %f\n", i, arg );*/
 
           if(i == 0)
           {

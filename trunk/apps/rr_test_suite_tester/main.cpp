@@ -69,25 +69,52 @@ int main(int argc, char * argv[])
         }
     }
 
-    vector<int> exceptions;
+    string excludedCases("rrExcludedTestCases.txt");
+    vector<string> exclude(GetLinesInFile(excludedCases));
+
+    vector<int> cant_simulate; //Theese are cases rr don't support (yet)
+
+    for(int i = 0; i< exclude.size(); i++)
+    {
+        string nr = exclude[i];
+        int i = ToInt(nr);
+        if(i > 0)
+        {
+            cant_simulate.push_back(i);
+        }
+        else
+        {
+            Log(lError)<<"Bad line in file "<<excludedCases;
+        }
+    }
+    vector<int> exceptions;     //Theese are cases currently having problems..
     exceptions.push_back(374);
     exceptions.push_back(748);
+    exceptions.push_back(961);    //Weird assignments...
+    exceptions.push_back(966); //This one takes really long tim..
+    RoadRunner *rrI = NULL;     //The roadrunner instance
 
-    if(std::find(exceptions.begin(), exceptions.end(), paras.CaseNumber) != exceptions.end())
-    {
-        //Don't simulate this one..
-        throw(rr::Exception("Bad model"));
-    }
-
-    gLog.SetCutOffLogLevel(paras.CurrentLogLevel);
-    string dataOutputFolder("R:\\DataOutput");
-    string dummy;
-    string logFileName;
-
-    CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
-    RoadRunner *rr = NULL;
     try
     {
+        if(std::find(exceptions.begin(), exceptions.end(), paras.CaseNumber) != exceptions.end())
+        {
+            //Don't simulate this one..
+            throw(rr::Exception("This model has problems.. excluded"));
+        }
+
+         if(std::find(cant_simulate.begin(), cant_simulate.end(), paras.CaseNumber) != cant_simulate.end())
+        {
+            //Don't simulate this one..
+            throw(rr::Exception("This model is not suppoprted by rr... excluded"));
+        }
+
+        gLog.SetCutOffLogLevel(paras.CurrentLogLevel);
+        string dataOutputFolder("R:\\DataOutput");
+        string dummy;
+        string logFileName;
+
+        CreateTestSuiteFileNameParts(paras.CaseNumber, ".log", dummy, logFileName);
+
         //Create subfolder for data output
         dataOutputFolder = JoinPath(dataOutputFolder, GetTestSuiteSubFolderName(paras.CaseNumber));
 
@@ -99,14 +126,14 @@ int main(int argc, char * argv[])
         gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
         Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
 
-        Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+        Log(lShowAlways)<<"Current Log level is:" <<LogLevelToString(gLog.GetLogLevel());
         TestSuiteModelSimulation simulation(dataOutputFolder);
 
         //dataOutputFolder += dummy;
-        rr = new RoadRunner();
-        rr->Reset();
-        rr->setCompiler("tcc");
-        simulation.UseEngine(rr);
+        rrI = new RoadRunner();
+        rrI->Reset();
+        rrI->setCompiler("tcc");
+        simulation.UseEngine(rrI);
 
         //Read SBML models.....
         string modelFilePath(paras.TestSuiteModelsPath);
@@ -133,7 +160,7 @@ int main(int argc, char * argv[])
             Log(lError)<<"Failed loading SBML model settings";
         }
 
-        rr->ComputeAndAssignConservationLaws(false);
+        rrI->ComputeAndAssignConservationLaws(false);
 
         //Then Simulate model
         if(!simulation.Simulate())
@@ -175,7 +202,7 @@ int main(int argc, char * argv[])
     }
 
     end:    //I have not used a label in 15 years!
-    delete rr;
+    delete rrI;
     Log(lInfo)<<"Done";
     if(paras.Pause)
     {

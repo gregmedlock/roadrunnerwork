@@ -527,8 +527,6 @@ void RoadRunner::DumpResults(TextWriter& writer, DoubleMatrix& data, const Strin
 
 bool RoadRunner::Simulate()
 {
-//    ComputeAndAssignConservationLaws(false);
-
     if(!mModel)
     {
         Log(lError)<<"No model is loaded, can't simulate..";

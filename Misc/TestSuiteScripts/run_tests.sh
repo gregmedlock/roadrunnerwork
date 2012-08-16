@@ -2,7 +2,7 @@
 
 dataFolder="/cygdrive/r/DataOutput/"
 tempFolder="/cygdrive/r/rrTemp"
-logFile=$tempFoler"/testLog.txt"
+logFile=$tempFolder"/testLog.txt"
 logTable=$tempFolder"/testLogTable.txt"
 failed=$tempFolder"/failedTests.txt"
 binFolder="/cygdrive/r/rrInstalls/xe/bin/"
@@ -17,8 +17,6 @@ echo "" > $logFile
 echo "" > $logTable
 echo "" > $failed
 
-excludeTest="1 2 3"
-
 cd $binFolder
 
 echo "Current working folder is"`pwd`
@@ -30,16 +28,16 @@ for ((i=$start; i<=$end; i++ ));
 do
 	echo "Running $i" ;
 	echo $i >> $logFile;
-#    echo "$simulator -n$i -v0 >> $logFile "
-	$simulator -m$ModelsDir -n$i -vError >> $logFile
+    $simulator -m$ModelsDir -n$i -vError >> $logFile &
+#    $simulator -m$ModelsDir -n$i -vError >> $logFile
 	echo "Next" >> $logFile;
-    #sleep .15
+    sleep .015
 done
 
 echo "Waiting for background jobs to finish..."
-#wait
+wait
 
-##Creeate a table
+##Create a table
 #
 #make_table -f$logFile -o$logTable -w"Next"
 ##filter failed ones

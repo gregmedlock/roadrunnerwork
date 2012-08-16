@@ -107,32 +107,6 @@ int ModelFromC::getNumEvents()
     return *numEvents;
 }
 
-//Virtual functions that should(?) be implemented in decendant..
-//void  IModel::initializeInitialConditions(){}
-//void  ModelFromC::setInitialConditions()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::setParameterValues()                                    {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::setBoundaryConditions()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::InitializeRates()                                        {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::AssignRates()                                            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::AssignRates(vector<double>& rates)                    {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::computeConservedTotals()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::computeEventPriorites()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-
-//void  ModelFromC::convertToAmounts()                                    {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::convertToConcentrations() = 0;
-//void  ModelFromC::updateDependentSpeciesValues(vector<double>& _y)        {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::computeRules(vector<double>& _y)                        {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::computeReactionRates(double time, double* y)            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::computeAllRatesOfChange()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::evalModel(double time, vector<double>& y)                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::evalEvents(double time, vector<double>& y){}
-//void  ModelFromC::resetEvents()                                            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::evalInitialAssignments()                                {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::testConstraints()                                        {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-//void  ModelFromC::InitializeRateRuleSymbols()                            {Log(lError) << "Called un implemented function "<<__FUNCTION__<<" in ModelFromC!!";}
-
-/////////////////// END OF USED TO BE IN IModel
-
 double ModelFromC::GetAmounts(const int& i)
 {
     return (amounts ) ? amounts[i] : -1;
@@ -573,7 +547,6 @@ int ModelFromC::getNumLocalParameters(int reactionId)
     return cgetNumLocalParameters(reactionId);
 }
 
-//////Virtual functions that should be implemented in decendant..
 void ModelFromC::initializeInitialConditions()
 {
     if(!cinitializeInitialConditions)
@@ -633,12 +606,7 @@ void ModelFromC::AssignRates(vector<double>& _rates)
         return;
     }
 
-      double* local_rates = CreateVector(_rates);
-//    auto_ptr<double> rates(new double(_rates.size()));
-//    for(int i = 0; i < _rates.size(); i++)
-//    {
-//        (rates).get()[i] = _rates[i];
-//    }
+    double* local_rates = CreateVector(_rates);
 
     cAssignRates_b(local_rates);
     delete [] local_rates;
@@ -664,8 +632,6 @@ void ModelFromC::computeEventPriorites()
     ccomputeEventPriorities();
 }
 
-
-//void ModelFromC::setConcentration(int index, double value){}
 void ModelFromC::convertToAmounts()
 {
     if(!cconvertToAmounts)
@@ -694,15 +660,7 @@ void ModelFromC::updateDependentSpeciesValues(double* y_vec)
         return;
     }
 
-//    int size = size;
-//    double* y_vec = new double[y.size()];
-//    for(int i = 0; i < y.size(); i++)
-//    {
-//        y_vec[i] = y[i];
-//    }
-
     cupdateDependentSpeciesValues(y_vec);
-//    delete [] y_vec;
 }
 
 void ModelFromC::computeRules(vector<double>& arr)
@@ -760,7 +718,6 @@ void ModelFromC::evalModel(const double& timein, const vector<double>& y)
     }
 
     cevalModel(timein, amounts);
-    //rates[0] = 45;
 }
 
 void ModelFromC::evalEvents(const double& timeIn, const vector<double>& y)
@@ -818,4 +775,4 @@ void ModelFromC::InitializeRateRuleSymbols()
     cInitializeRateRuleSymbols();
 }
 
-}//Namespace rr
+} //Namespace rr
