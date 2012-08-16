@@ -5,11 +5,15 @@ os.chdir('C:\\RoadRunner\\bin')
 
 function = 'getFluxControlCoefficientNames'
 
-names = rrPython.getFluxControlCoefficientNames()
-if str(names) is not False:
-    result = 'True'
-else:
+try:
+    names = rrPython.getFluxControlCoefficientNames()
+    if str(names) is not False:
+        result = 'True'
+    else:
+        result = 'False'
+except:
     result = 'False'
+
 
 PythonTestResults = open('C:\\RoadRunner\\PythonTestResults.csv','a')
 writer = csv.writer(PythonTestResults)

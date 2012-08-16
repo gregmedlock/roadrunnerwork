@@ -3,11 +3,11 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getConcentrationControlCoefficientNames'
+function = 'getTempFolder'
 
 try:
-    names = rrPython.getConcentrationControlCoefficientNames()
-    if str(names) is not False:
+    folder = rrPython.getTempFolder()
+    if str(folder) is not False:
         result = 'True'
     else:
         result = 'False'

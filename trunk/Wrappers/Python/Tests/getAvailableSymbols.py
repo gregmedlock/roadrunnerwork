@@ -5,10 +5,13 @@ os.chdir('C:\\RoadRunner\\bin')
 
 function = 'getAvailableSymbols'
 
-symbols = rrPython.getAvailableSymbols()
-if len(symbols) >= 1:
-    result = 'True'
-else:
+try:
+    sym = rrPython.getAvailableSymbols()
+    if str(sym) is not False:
+        result = 'True'
+    else:
+        result = 'False'
+except:
     result = 'False'
 
 PythonTestResults = open('C:\\RoadRunner\\PythonTestResults.csv','a')

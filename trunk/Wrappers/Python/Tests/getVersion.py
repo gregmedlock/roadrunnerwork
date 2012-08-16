@@ -5,11 +5,15 @@ os.chdir('C:\\RoadRunner\\bin')
 
 function = 'getVersion'
 
-version = rrPython.getVersion()
-if str(version) is not False:
-    result = 'True'
-else:
+try:
+    version = rrPython.getVersion()
+    if str(version) is not False:
+        result = 'True'
+    else:
+        result = 'False'
+except:
     result = 'False'
+
 
 PythonTestResults = open('C:\\RoadRunner\\PythonTestResults.csv','a')
 writer = csv.writer(PythonTestResults)

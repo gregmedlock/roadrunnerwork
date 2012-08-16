@@ -5,11 +5,15 @@ os.chdir('C:\\RoadRunner\\bin')
 
 function = 'getCopyright'
 
-copyright = rrPython.getCopyright()
-if str(copyright) is not False:
-    result = 'True'
-else:
+try:
+    copyright = rrPython.getCopyright()
+    if str(copyright) is not False:
+        result = 'True'
+    else:
+        result = 'False'
+except:
     result = 'False'
+
 
 PythonTestResults = open('C:\\RoadRunner\\PythonTestResults.csv','a')
 writer = csv.writer(PythonTestResults)

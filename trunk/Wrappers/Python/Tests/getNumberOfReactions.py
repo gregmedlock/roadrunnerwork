@@ -3,11 +3,10 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getConcentrationControlCoefficientNames'
-
+function = 'getNumberOfReactions'
 try:
-    names = rrPython.getConcentrationControlCoefficientNames()
-    if str(names) is not False:
+    num = rrPython.getNumberOfReactions()
+    if str(num) is not False:
         result = 'True'
     else:
         result = 'False'
