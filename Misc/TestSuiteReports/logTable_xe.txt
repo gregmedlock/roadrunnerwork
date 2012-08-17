@@ -1,0 +1,1068 @@
+Case 1 PASS Largest error was: 8.88178e-16  real	0m0.177s user	0m0.030s sys	0m0.000s
+Case 2 PASS Largest error was: 8.88178e-16  real	0m0.185s user	0m0.015s sys	0m0.000s
+Case 3 PASS Largest error was: 8.88178e-16  real	0m0.177s user	0m0.015s sys	0m0.015s
+Case 4 PASS Largest error was: 2.75855e-11  real	0m0.188s user	0m0.000s sys	0m0.015s
+Case 5 PASS Largest error was: 8.88178e-16  real	0m0.175s user	0m0.000s sys	0m0.015s
+Case 6 PASS Largest error was: 8.88178e-16  real	0m0.214s user	0m0.015s sys	0m0.015s
+Case 7 PASS Largest error was: 1.77636e-15  real	0m0.166s user	0m0.015s sys	0m0.015s
+Case 8 PASS Largest error was: 7.56339e-15  real	0m0.167s user	0m0.015s sys	0m0.015s
+Case 9 PASS Largest error was: 8.88178e-16  real	0m0.138s user	0m0.000s sys	0m0.015s
+Case 10 PASS Largest error was: 7.90528e-12  real	0m0.200s user	0m0.000s sys	0m0.000s
+Case 11 PASS Largest error was: 3.55271e-15  real	0m0.200s user	0m0.015s sys	0m0.015s
+Case 12 PASS Largest error was: 1.77636e-15  real	0m0.360s user	0m0.015s sys	0m0.015s
+Case 13 PASS Largest error was: 8.88178e-16  real	0m0.173s user	0m0.000s sys	0m0.000s
+Case 14 PASS Largest error was: 2.58127e-12  real	0m0.237s user	0m0.015s sys	0m0.000s
+Case 15 PASS Largest error was: 4.22925e-12  real	0m0.201s user	0m0.015s sys	0m0.000s
+Case 16 PASS Largest error was: 2.66575e-11  real	0m0.197s user	0m0.015s sys	0m0.015s
+Case 17 PASS Largest error was: 1.73238e-10  real	0m0.305s user	0m0.015s sys	0m0.000s
+Case 18 PASS Largest error was: 2.00732e-13  real	0m0.293s user	0m0.030s sys	0m0.000s
+Case 19 PASS Largest error was: 1.05208e-14  real	0m0.348s user	0m0.000s sys	0m0.015s
+Case 20 PASS Largest error was: 3.82029e-14  real	0m0.363s user	0m0.015s sys	0m0.000s
+Case 21 PASS Largest error was: 1.12805e-12  real	0m0.272s user	0m0.015s sys	0m0.000s
+Case 22 PASS Largest error was: 2.04267e-11  real	0m0.253s user	0m0.000s sys	0m0.015s
+Case 23 PASS Largest error was: 1.91393e-08  real	0m0.261s user	0m0.000s sys	0m0.015s
+Case 24 PASS Largest error was: 5.80048e-18  real	0m0.287s user	0m0.000s sys	0m0.015s
+Case 25 PASS Largest error was: 8.88178e-16  real	0m0.585s user	0m0.015s sys	0m0.000s
+Case 26 PASS Largest error was: 3.00715e-08  real	0m0.306s user	0m0.000s sys	0m0.015s
+Case 27 PASS Largest error was: 4.25089e-10  real	0m0.216s user	0m0.000s sys	0m0.015s
+Case 28 PASS Largest error was: 1.41664e-13  real	0m0.159s user	0m0.015s sys	0m0.000s
+Case 29 PASS Largest error was: 2.22045e-16  real	0m0.133s user	0m0.015s sys	0m0.000s
+Case 30 PASS Largest error was: 2.22045e-16  real	0m0.132s user	0m0.015s sys	0m0.000s
+Case 31 PASS Largest error was: 2.84217e-14  real	0m0.133s user	0m0.000s sys	0m0.015s
+Case 32 PASS Largest error was: 8.88178e-16  real	0m0.184s user	0m0.000s sys	0m0.015s
+Case 33 PASS Largest error was: 6.62591e-10  real	0m0.259s user	0m0.015s sys	0m0.015s
+Case 34 PASS Largest error was: 1.92521e-12  real	0m0.208s user	0m0.015s sys	0m0.015s
+Case 35 PASS Largest error was: 4.22925e-12  real	0m0.207s user	0m0.000s sys	0m0.015s
+Case 36 PASS Largest error was: 4.85723e-16  real	0m0.214s user	0m0.015s sys	0m0.000s
+Case 37 PASS Largest error was: 4.82947e-15  real	0m0.293s user	0m0.000s sys	0m0.016s
+Case 38 PASS Largest error was: 2.44655e-08  real	0m0.217s user	0m0.000s sys	0m0.015s
+Case 39 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.000s
+Case 40 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 41 PASS Largest error was: 1.92628e-07  real	0m0.256s user	0m0.000s sys	0m0.016s
+Case 42 PASS Largest error was: 8.88178e-16  real	0m0.230s user	0m0.000s sys	0m0.015s
+Case 43 PASS Largest error was: 3.08065e-11  real	0m0.404s user	0m0.015s sys	0m0.000s
+Case 44 PASS Largest error was: 4.22297e-11  real	0m0.222s user	0m0.015s sys	0m0.000s
+Case 45 PASS Largest error was: 4.3715e-15  real	0m0.187s user	0m0.015s sys	0m0.000s
+Case 46 PASS Largest error was: 1.92521e-12  real	0m0.194s user	0m0.015s sys	0m0.000s
+Case 47 PASS Largest error was: 4.22925e-12  real	0m0.194s user	0m0.000s sys	0m0.015s
+Case 48 PASS Largest error was: 8.88178e-16  real	0m0.178s user	0m0.000s sys	0m0.015s
+Case 49 PASS Largest error was: 7.74293e-10  real	0m0.326s user	0m0.015s sys	0m0.000s
+Case 50 PASS Largest error was: 4.22394e-13  real	0m0.475s user	0m0.015s sys	0m0.000s
+Case 51 PASS Largest error was: 1.32864e-07  real	0m0.223s user	0m0.000s sys	0m0.015s
+Case 52 PASS Largest error was: 1.68621e-07  real	0m0.227s user	0m0.015s sys	0m0.015s
+Case 53 PASS Largest error was: 2.31942e-07  real	0m0.220s user	0m0.000s sys	0m0.015s
+Case 54 PASS Largest error was: 4.0928e-09  real	0m0.236s user	0m0.000s sys	0m0.016s
+Case 55 PASS Largest error was: 7.79663e-09  real	0m0.332s user	0m0.015s sys	0m0.000s
+Case 56 PASS Largest error was: 2.03799e-08  real	0m0.238s user	0m0.000s sys	0m0.000s
+Case 57 PASS Largest error was: 1.2458e-15  real	0m0.236s user	0m0.015s sys	0m0.000s
+Case 58 PASS Largest error was: 1.2458e-15  real	0m0.211s user	0m0.000s sys	0m0.015s
+Case 59 PASS Largest error was: 1.4744e-11  real	0m0.221s user	0m0.015s sys	0m0.000s
+Case 60 PASS Largest error was: 3.37324e-11  real	0m0.187s user	0m0.015s sys	0m0.015s
+Case 61 PASS Largest error was: 6.99756e-12  real	0m0.191s user	0m0.000s sys	0m0.015s
+Case 62 PASS Largest error was: 6.20118e-15  real	0m0.225s user	0m0.015s sys	0m0.000s
+Case 63 PASS Largest error was: 4.87141e-06  real	0m0.961s user	0m0.000s sys	0m0.015s
+Case 64 PASS Largest error was: 4.3806e-09  real	0m0.228s user	0m0.015s sys	0m0.000s
+Case 65 PASS Largest error was: 6.20115e-15  real	0m0.215s user	0m0.015s sys	0m0.015s
+Case 66 PASS Largest error was: 6.3222e-15  real	0m0.218s user	0m0.000s sys	0m0.015s
+Case 67 PASS Largest error was: 2.57218e-09  real	0m0.249s user	0m0.030s sys	0m0.000s
+Case 68 PASS Largest error was: 4.998e-06  real	0m0.251s user	0m0.000s sys	0m0.015s
+Case 69 PASS Largest error was: 1.46896e-10  real	0m0.249s user	0m0.015s sys	0m0.000s
+Case 70 PASS Largest error was: 1.96496e-10  real	0m0.199s user	0m0.000s sys	0m0.015s
+Case 71 PASS Largest error was: 2.37487e-08  real	0m0.245s user	0m0.000s sys	0m0.015s
+Case 72 PASS Largest error was: 5.63603e-08  real	0m0.253s user	0m0.000s sys	0m0.015s
+Case 73 PASS Largest error was: 1.85096e-07  real	0m0.270s user	0m0.000s sys	0m0.016s
+Case 74 PASS Largest error was: 2.07073e-07  real	0m0.229s user	0m0.015s sys	0m0.000s
+Case 75 PASS Largest error was: 1.31366e-07  real	0m0.765s user	0m0.000s sys	0m0.015s
+Case 76 PASS Largest error was: 1.55931e-09  real	0m0.281s user	0m0.000s sys	0m0.015s
+Case 77 PASS Largest error was: 1.14907e-07  real	0m0.229s user	0m0.000s sys	0m0.015s
+Case 78 PASS Largest error was: 9.02235e-09  real	0m0.219s user	0m0.015s sys	0m0.000s
+Case 79 PASS Largest error was: 2.80359e-13  real	0m0.261s user	0m0.000s sys	0m0.015s
+Case 80 PASS Largest error was: 8.11151e-12  real	0m0.541s user	0m0.015s sys	0m0.000s
+Case 81 PASS Largest error was: 4.94198e-06  real	0m0.285s user	0m0.015s sys	0m0.015s
+Case 82 PASS Largest error was: 3.4374e-12  real	0m0.225s user	0m0.015s sys	0m0.000s
+Case 83 PASS Largest error was: 4.88661e-06  real	0m0.252s user	0m0.000s sys	0m0.015s
+Case 84 PASS Largest error was: 3.70875e-08  real	0m0.216s user	0m0.015s sys	0m0.000s
+Case 85 PASS Largest error was: 4.46001e-15  real	0m0.225s user	0m0.015s sys	0m0.000s
+Case 86 PASS Largest error was: 1.19738e-07  real	0m0.378s user	0m0.015s sys	0m0.015s
+Case 87 PASS Largest error was: 2.44655e-08  real	0m0.240s user	0m0.015s sys	0m0.015s
+Case 88 PASS Largest error was: 3.09554e-08  real	0m0.200s user	0m0.015s sys	0m0.000s
+Case 89 PASS Largest error was: 1.50758e-13  real	0m0.211s user	0m0.000s sys	0m0.015s
+Case 90 PASS Largest error was: 1.50758e-13  real	0m0.245s user	0m0.000s sys	0m0.015s
+Case 91 PASS Largest error was: 1.50758e-13  real	0m0.238s user	0m0.000s sys	0m0.015s
+Case 92 PASS Largest error was: 1.00371e-12  real	0m0.263s user	0m0.015s sys	0m0.000s
+Case 93 PASS Largest error was: 1.00371e-12  real	0m0.381s user	0m0.015s sys	0m0.000s
+Case 94 PASS Largest error was: 1.00371e-12  real	0m0.366s user	0m0.015s sys	0m0.015s
+Case 95 PASS Largest error was: 3.02692e-12  real	0m0.195s user	0m0.015s sys	0m0.000s
+Case 96 PASS Largest error was: 3.02692e-12  real	0m0.234s user	0m0.000s sys	0m0.015s
+Case 97 PASS Largest error was: 3.02692e-12  real	0m0.192s user	0m0.000s sys	0m0.000s
+Case 98 PASS Largest error was: 1.92521e-12  real	0m0.206s user	0m0.000s sys	0m0.015s
+Case 99 PASS Largest error was: 1.92521e-12  real	0m0.236s user	0m0.015s sys	0m0.000s
+Case 100 PASS Largest error was: 1.92521e-12  real	0m0.197s user	0m0.000s sys	0m0.015s
+Case 101 PASS Largest error was: 1.1341e-12  real	0m0.223s user	0m0.015s sys	0m0.015s
+Case 102 PASS Largest error was: 4.22394e-13  real	0m0.217s user	0m0.000s sys	0m0.031s
+Case 103 PASS Largest error was: 4.22394e-13  real	0m0.298s user	0m0.000s sys	0m0.015s
+Case 104 PASS Largest error was: 1.32864e-07  real	0m0.425s user	0m0.031s sys	0m0.000s
+Case 105 PASS Largest error was: 1.68621e-07  real	0m0.853s user	0m0.000s sys	0m0.015s
+Case 106 PASS Largest error was: 2.31942e-07  real	0m0.464s user	0m0.015s sys	0m0.000s
+Case 107 PASS Largest error was: 2.87309e-08  real	0m0.500s user	0m0.000s sys	0m0.015s
+Case 108 PASS Largest error was: 1.81791e-13  real	0m0.778s user	0m0.015s sys	0m0.000s
+Case 109 PASS Largest error was: 8.7097e-13  real	0m0.711s user	0m0.015s sys	0m0.015s
+Case 110 PASS Largest error was: 4.0928e-09  real	0m0.451s user	0m0.000s sys	0m0.015s
+Case 111 PASS Largest error was: 7.79663e-09  real	0m0.440s user	0m0.015s sys	0m0.000s
+Case 112 PASS Largest error was: 2.03799e-08  real	0m0.839s user	0m0.015s sys	0m0.015s
+Case 113 PASS Largest error was: 3.77175e-09  real	0m0.280s user	0m0.000s sys	0m0.015s
+Case 114 PASS Largest error was: 8.04016e-11  real	0m0.300s user	0m0.015s sys	0m0.000s
+Case 115 PASS Largest error was: 6.20118e-15  real	0m0.349s user	0m0.000s sys	0m0.016s
+Case 116 PASS Largest error was: 5.13212e-11  real	0m0.467s user	0m0.000s sys	0m0.015s
+Case 117 PASS Largest error was: 2.04405e-11  real	0m0.796s user	0m0.015s sys	0m0.000s
+Case 118 PASS Largest error was: 1.77636e-15  real	0m0.342s user	0m0.000s sys	0m0.015s
+Case 119 PASS Largest error was: 4.87141e-06  real	0m0.382s user	0m0.000s sys	0m0.015s
+Case 120 PASS Largest error was: 4.3806e-09  real	0m0.742s user	0m0.000s sys	0m0.015s
+Case 121 PASS Largest error was: 6.20115e-15  real	0m0.816s user	0m0.000s sys	0m0.015s
+Case 122 PASS Largest error was: 6.17094e-12  real	0m0.883s user	0m0.000s sys	0m0.015s
+Case 123 PASS Largest error was: 6.3222e-15  real	0m0.663s user	0m0.000s sys	0m0.016s
+Case 124 PASS Largest error was: 2.57192e-09  real	0m0.398s user	0m0.000s sys	0m0.016s
+Case 125 PASS Largest error was: 5.7343e-11  real	0m0.607s user	0m0.015s sys	0m0.000s
+Case 126 PASS Largest error was: 5.20742e-12  real	0m0.660s user	0m0.015s sys	0m0.000s
+Case 127 PASS Largest error was: 2.67666e-11  real	0m0.300s user	0m0.015s sys	0m0.000s
+Case 128 PASS Largest error was: 1.64555e-12  real	0m0.291s user	0m0.015s sys	0m0.000s
+Case 129 PASS Largest error was: 6.07186e-08  real	0m0.637s user	0m0.015s sys	0m0.000s
+Case 130 PASS Largest error was: 8.6293e-13  real	0m0.479s user	0m0.000s sys	0m0.015s
+Case 131 PASS Largest error was: 1.97685e-11  real	0m0.284s user	0m0.015s sys	0m0.015s
+Case 132 PASS Largest error was: 1.85036e-14  real	0m0.316s user	0m0.015s sys	0m0.015s
+Case 133 PASS Largest error was: 1.85036e-14  real	0m0.805s user	0m0.015s sys	0m0.015s
+Case 134 PASS Largest error was: 1.09788e-10  real	0m0.464s user	0m0.015s sys	0m0.000s
+Case 135 PASS Largest error was: 2.31304e-11  real	0m0.251s user	0m0.000s sys	0m0.015s
+Case 136 PASS Largest error was: 4.99862e-06  real	0m0.314s user	0m0.015s sys	0m0.000s
+Case 137 PASS Largest error was: 2.44655e-08  real	0m0.801s user	0m0.000s sys	0m0.015s
+Case 138 PASS Largest error was: 2.44655e-08  real	0m0.241s user	0m0.000s sys	0m0.015s
+Case 139 PASS Largest error was: 1.93585e-08  real	0m0.229s user	0m0.000s sys	0m0.015s
+Case 140 PASS Largest error was: 1.93585e-08  real	0m0.274s user	0m0.015s sys	0m0.015s
+Case 141 PASS Largest error was: 1.93585e-08  real	0m0.308s user	0m0.015s sys	0m0.000s
+Case 142 PASS Largest error was: 1.00718e-13  real	0m0.283s user	0m0.000s sys	0m0.016s
+Case 143 PASS Largest error was: 1.00718e-13  real	0m0.266s user	0m0.015s sys	0m0.000s
+Case 144 PASS Largest error was: 1.00718e-13  real	0m0.227s user	0m0.015s sys	0m0.000s
+Case 145 PASS Largest error was: 8.35748e-11  real	0m0.202s user	0m0.015s sys	0m0.015s
+Case 146 PASS Largest error was: 8.35748e-11  real	0m0.197s user	0m0.015s sys	0m0.000s
+Case 147 PASS Largest error was: 8.35748e-11  real	0m0.261s user	0m0.015s sys	0m0.000s
+Case 148 PASS Largest error was: 1.15657e-09  real	0m0.268s user	0m0.015s sys	0m0.015s
+Case 149 PASS Largest error was: 1.15657e-09  real	0m0.540s user	0m0.000s sys	0m0.015s
+Case 150 PASS Largest error was: 1.15657e-09  real	0m0.269s user	0m0.015s sys	0m0.015s
+Case 151 PASS Largest error was: 1.50758e-13  real	0m0.326s user	0m0.000s sys	0m0.015s
+Case 152 PASS Largest error was: 2.44655e-08  real	0m0.205s user	0m0.015s sys	0m0.000s
+Case 153 PASS Largest error was: 1.51695e-11  real	0m0.223s user	0m0.000s sys	0m0.015s
+Case 154 PASS Largest error was: 2.03129e-10  real	0m0.194s user	0m0.000s sys	0m0.016s
+Case 155 PASS Largest error was: 1.51695e-11  real	0m0.305s user	0m0.015s sys	0m0.000s
+Case 156 PASS Largest error was: 2.01153e-10  real	0m0.598s user	0m0.000s sys	0m0.016s
+Case 157 PASS Largest error was: 1.14617e-09  real	0m0.232s user	0m0.000s sys	0m0.015s
+Case 158 PASS Largest error was: 3.06289e-09  real	0m0.322s user	0m0.000s sys	0m0.031s
+Case 159 PASS Largest error was: 1.29116e-13  real	0m0.225s user	0m0.015s sys	0m0.000s
+Case 160 PASS Largest error was: 2.10816e-08  real	0m0.280s user	0m0.015s sys	0m0.015s
+Case 161 PASS Largest error was: 3.20514e-10  real	0m0.175s user	0m0.000s sys	0m0.015s
+Case 162 PASS Largest error was: 3.20514e-10  real	0m0.183s user	0m0.015s sys	0m0.015s
+Case 163 PASS Largest error was: 1.81602e-10  real	0m0.249s user	0m0.015s sys	0m0.000s
+Case 164 PASS Largest error was: 8.88178e-16  real	0m0.173s user	0m0.000s sys	0m0.015s
+Case 165 PASS Largest error was: 1.0675e-10  real	0m0.272s user	0m0.000s sys	0m0.016s
+Case 166 PASS Largest error was: 4.22297e-11  real	0m0.207s user	0m0.000s sys	0m0.016s
+Case 167 PASS Largest error was: 4.498e-11  real	0m0.314s user	0m0.000s sys	0m0.015s
+Case 168 PASS Largest error was: 1.01091e-13  real	0m0.522s user	0m0.015s sys	0m0.000s
+Case 169 PASS Largest error was: 3.82029e-14  real	0m0.263s user	0m0.000s sys	0m0.015s
+Case 170 PASS Largest error was: 2.28123e-12  real	0m0.188s user	0m0.000s sys	0m0.015s
+Case 171 PASS Largest error was: 5.32575e-10  real	0m0.180s user	0m0.000s sys	0m0.015s
+Case 172 FAIL 53 points failed  real	0m0.219s user	0m0.000s sys	0m0.015s
+Case 173 PASS Largest error was: 1.41664e-13  real	0m0.158s user	0m0.000s sys	0m0.015s
+Case 174 PASS Largest error was: 2.22045e-16  real	0m0.139s user	0m0.015s sys	0m0.000s
+Case 175 PASS Largest error was: 1.24345e-14  real	0m0.361s user	0m0.000s sys	0m0.000s
+Case 176 PASS Largest error was: 2.70987e-09  real	0m0.221s user	0m0.015s sys	0m0.000s
+Case 177 PASS Largest error was: 4.38682e-09  real	0m0.267s user	0m0.015s sys	0m0.015s
+Case 178 PASS Largest error was: 7.74293e-10  real	0m0.262s user	0m0.000s sys	0m0.031s
+Case 179 PASS Largest error was: 4.94682e-10  real	0m0.220s user	0m0.015s sys	0m0.000s
+Case 180 PASS Largest error was: 1.18909e-08  real	0m0.195s user	0m0.015s sys	0m0.000s
+Case 181 PASS Largest error was: 2.44655e-08  real	0m0.186s user	0m0.015s sys	0m0.000s
+Case 182 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 183 PASS Largest error was: 6.52108e-09  real	0m0.544s user	0m0.015s sys	0m0.015s
+Case 184 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.016s
+Case 185 PASS Largest error was: 2.46035e-08  real	0m0.262s user	0m0.000s sys	0m0.015s
+Case 186 PASS Largest error was: 2.74177e-13  real	0m0.278s user	0m0.000s sys	0m0.015s
+Case 187 PASS Largest error was: 7.98425e-12  real	0m0.215s user	0m0.015s sys	0m0.015s
+Case 188 PASS Largest error was: 2.29672e-13  real	0m0.333s user	0m0.000s sys	0m0.015s
+Case 189 PASS Largest error was: 3.89877e-13  real	0m0.263s user	0m0.000s sys	0m0.015s
+Case 190 PASS Largest error was: 1.24345e-14  real	0m0.138s user	0m0.000s sys	0m0.015s
+Case 191 PASS Largest error was: 2.75595e-07  real	0m0.224s user	0m0.015s sys	0m0.000s
+Case 192 PASS Largest error was: 2.07856e-07  real	0m0.222s user	0m0.015s sys	0m0.000s
+Case 193 PASS Largest error was: 1.08325e-07  real	0m0.211s user	0m0.030s sys	0m0.000s
+Case 194 PASS Largest error was: 9.44778e-08  real	0m0.230s user	0m0.015s sys	0m0.015s
+Case 195 PASS Largest error was: 2.40693e-08  real	0m0.275s user	0m0.000s sys	0m0.015s
+Case 196 PASS Largest error was: 1.61382e-12  real	0m0.178s user	0m0.000s sys	0m0.015s
+Case 197 PASS Largest error was: 7.39409e-13  real	0m0.330s user	0m0.015s sys	0m0.000s
+Case 198 PASS Largest error was: 6.8171e-07  real	0m0.366s user	0m0.000s sys	0m0.015s
+Case 199 PASS Largest error was: 2.75595e-07  real	0m0.218s user	0m0.000s sys	0m0.015s
+Case 200 PASS Largest error was: 1.87594e-07  real	0m0.224s user	0m0.000s sys	0m0.016s
+Case 201 PASS Largest error was: 1.4395e-07  real	0m0.246s user	0m0.000s sys	0m0.015s
+Case 202 PASS Largest error was: 1.82061e-15  real	0m0.180s user	0m0.000s sys	0m0.015s
+Case 203 PASS Largest error was: 1.85332e-15  real	0m0.181s user	0m0.015s sys	0m0.015s
+Case 204 PASS Largest error was: 1.00518e-14  real	0m0.298s user	0m0.015s sys	0m0.000s
+Case 205 PASS Largest error was: 1.6094e-14  real	0m0.189s user	0m0.000s sys	0m0.015s
+Case 206 PASS Largest error was: 1.91613e-12  real	0m0.177s user	0m0.000s sys	0m0.015s
+Case 207 PASS Largest error was: 2.04852e-09  real	0m0.190s user	0m0.000s sys	0m0.015s
+Case 208 PASS Largest error was: 5.12146e-12  real	0m0.184s user	0m0.000s sys	0m0.015s
+Case 209 PASS Largest error was: 8.76626e-10  real	0m0.199s user	0m0.015s sys	0m0.015s
+Case 210 PASS Largest error was: 2.4223e-12  real	0m0.257s user	0m0.000s sys	0m0.015s
+Case 211 PASS Largest error was: 1.11022e-16  real	0m0.140s user	0m0.000s sys	0m0.015s
+Case 212 PASS Largest error was: 1.73681e-11  real	0m0.276s user	0m0.015s sys	0m0.000s
+Case 213 PASS Largest error was: 1.11022e-16  real	0m0.136s user	0m0.015s sys	0m0.000s
+Case 214 PASS Largest error was: 2.33174e-11  real	0m0.188s user	0m0.000s sys	0m0.016s
+Case 215 PASS Largest error was: 1.0759e-10  real	0m0.166s user	0m0.015s sys	0m0.000s
+Case 216 PASS Largest error was: 3.04804e-10  real	0m0.169s user	0m0.000s sys	0m0.015s
+Case 217 PASS Largest error was: 1.61624e-13  real	0m0.250s user	0m0.000s sys	0m0.015s
+Case 218 PASS Largest error was: 6.76103e-11  real	0m0.322s user	0m0.000s sys	0m0.016s
+Case 219 PASS Largest error was: 2.67396e-13  real	0m0.196s user	0m0.015s sys	0m0.000s
+Case 220 PASS Largest error was: 9.09045e-13  real	0m0.196s user	0m0.031s sys	0m0.000s
+Case 221 PASS Largest error was: 8.79146e-13  real	0m0.195s user	0m0.015s sys	0m0.015s
+Case 222 PASS Largest error was: 3.28303e-13  real	0m0.192s user	0m0.015s sys	0m0.000s
+Case 223 PASS Largest error was: 4.88661e-12  real	0m0.165s user	0m0.015s sys	0m0.015s
+Case 224 PASS Largest error was: 2.77417e-09  real	0m0.234s user	0m0.015s sys	0m0.000s
+Case 225 PASS Largest error was: 7.09921e-11  real	0m0.243s user	0m0.000s sys	0m0.015s
+Case 226 PASS Largest error was: 5.55112e-17  real	0m0.220s user	0m0.031s sys	0m0.000s
+Case 227 PASS Largest error was: 4.78371e-12  real	0m0.154s user	0m0.000s sys	0m0.015s
+Case 228 PASS Largest error was: 5.55112e-17  real	0m0.485s user	0m0.015s sys	0m0.000s
+Case 229 PASS Largest error was: 5.41146e-06  real	0m0.224s user	0m0.015s sys	0m0.015s
+Case 230 PASS Largest error was: 2.35521e-09  real	0m0.207s user	0m0.000s sys	0m0.015s
+Case 231 PASS Largest error was: 4.99612e-06  real	0m0.158s user	0m0.000s sys	0m0.015s
+Case 232 PASS Largest error was: 4.57402e-06  real	0m0.189s user	0m0.000s sys	0m0.016s
+Case 233 PASS Largest error was: 5.1382e-13  real	0m0.210s user	0m0.015s sys	0m0.000s
+Case 234 PASS Largest error was: 5.18829e-12  real	0m0.212s user	0m0.000s sys	0m0.015s
+Case 235 PASS Largest error was: 3.92777e-10  real	0m0.282s user	0m0.000s sys	0m0.000s
+Case 236 PASS Largest error was: 3.12339e-11  real	0m0.208s user	0m0.000s sys	0m0.015s
+Case 237 PASS Largest error was: 2.92412e-12  real	0m0.193s user	0m0.015s sys	0m0.000s
+Case 238 PASS Largest error was: 1.11022e-16  real	0m0.144s user	0m0.015s sys	0m0.000s
+Case 239 PASS Largest error was: 1.19616e-08  real	0m0.169s user	0m0.030s sys	0m0.000s
+Case 240 PASS Largest error was: 4.98876e-12  real	0m0.178s user	0m0.000s sys	0m0.031s
+Case 241 PASS Largest error was: 2.22045e-16  real	0m0.158s user	0m0.000s sys	0m0.016s
+Case 242 PASS Largest error was: 4.97508e-12  real	0m0.167s user	0m0.015s sys	0m0.000s
+Case 243 PASS Largest error was: 1.26224e-08  real	0m0.232s user	0m0.015s sys	0m0.000s
+Case 244 PASS Largest error was: 2.71323e-09  real	0m0.509s user	0m0.030s sys	0m0.000s
+Case 245 PASS Largest error was: 1.13616e-08  real	0m0.338s user	0m0.015s sys	0m0.000s
+Case 246 PASS Largest error was: 4.93916e-06  real	0m0.251s user	0m0.000s sys	0m0.015s
+Case 247 PASS Largest error was: 3.13441e-09  real	0m0.190s user	0m0.000s sys	0m0.016s
+Case 248 PASS Largest error was: 1.85768e-07  real	0m0.189s user	0m0.000s sys	0m0.015s
+Case 249 PASS Largest error was: 1.35566e-11  real	0m0.232s user	0m0.015s sys	0m0.000s
+Case 250 PASS Largest error was: 1.59553e-15  real	0m0.198s user	0m0.015s sys	0m0.000s
+Case 251 PASS Largest error was: 4.36518e-08  real	0m0.223s user	0m0.000s sys	0m0.015s
+Case 252 PASS Largest error was: 2.84692e-12  real	0m0.277s user	0m0.000s sys	0m0.015s
+Case 253 PASS Largest error was: 6.20115e-15  real	0m0.217s user	0m0.030s sys	0m0.000s
+Case 254 PASS Largest error was: 2.83715e-08  real	0m0.250s user	0m0.000s sys	0m0.015s
+Case 255 PASS Largest error was: 2.71608e-12  real	0m0.220s user	0m0.000s sys	0m0.016s
+Case 256 PASS Largest error was: 4.93317e-15  real	0m0.221s user	0m0.015s sys	0m0.000s
+Case 257 PASS Largest error was: 3.84842e-08  real	0m0.217s user	0m0.015s sys	0m0.015s
+Case 258 PASS Largest error was: 2.11608e-12  real	0m0.251s user	0m0.000s sys	0m0.015s
+Case 259 PASS Largest error was: 6.11135e-15  real	0m0.244s user	0m0.000s sys	0m0.015s
+Case 260 PASS Largest error was: 5.20742e-12  real	0m0.196s user	0m0.000s sys	0m0.031s
+Case 261 PASS Largest error was: 1.57401e-11  real	0m0.193s user	0m0.015s sys	0m0.000s
+Case 262 PASS Largest error was: 1.9646e-12  real	0m0.191s user	0m0.015s sys	0m0.000s
+Case 263 PASS Largest error was: 1.67138e-12  real	0m0.239s user	0m0.015s sys	0m0.000s
+Case 264 PASS Largest error was: 2.79592e-11  real	0m0.202s user	0m0.000s sys	0m0.015s
+Case 265 PASS Largest error was: 2.19295e-10  real	0m0.365s user	0m0.000s sys	0m0.015s
+Case 266 PASS Largest error was: 3.13807e-15  real	0m0.204s user	0m0.000s sys	0m0.000s
+Case 267 PASS Largest error was: 3.67721e-15  real	0m0.222s user	0m0.000s sys	0m0.015s
+Case 268 PASS Largest error was: 3.13823e-15  real	0m0.234s user	0m0.000s sys	0m0.015s
+Case 269 PASS Largest error was: 1.41664e-13  real	0m0.163s user	0m0.015s sys	0m0.015s
+Case 270 PASS Largest error was: 2.07856e-07  real	0m0.221s user	0m0.015s sys	0m0.000s
+Case 271 PASS Largest error was: 3.55271e-15  real	0m0.148s user	0m0.015s sys	0m0.000s
+Case 272 PASS Largest error was: 2.75595e-07  real	0m0.229s user	0m0.015s sys	0m0.015s
+Case 273 PASS Largest error was: 1.08325e-07  real	0m0.384s user	0m0.000s sys	0m0.015s
+Case 274 PASS Largest error was: 9.44778e-08  real	0m0.217s user	0m0.000s sys	0m0.015s
+Case 275 PASS Largest error was: 4.8726e-07  real	0m0.205s user	0m0.015s sys	0m0.000s
+Case 276 PASS Largest error was: 6.81637e-07  real	0m0.234s user	0m0.015s sys	0m0.015s
+Case 277 PASS Largest error was: 2.75595e-07  real	0m0.226s user	0m0.000s sys	0m0.015s
+Case 278 PASS Largest error was: 1.87594e-07  real	0m0.229s user	0m0.015s sys	0m0.015s
+Case 279 PASS Largest error was: 1.4395e-07  real	0m0.244s user	0m0.000s sys	0m0.015s
+Case 280 PASS Largest error was: 1.37836e-08  real	0m0.462s user	0m0.000s sys	0m0.015s
+Case 281 PASS Largest error was: 1.35525e-18  real	0m0.193s user	0m0.015s sys	0m0.015s
+Case 282 PASS Largest error was: 1.93505e-15  real	0m0.186s user	0m0.015s sys	0m0.000s
+Case 283 PASS Largest error was: 8.88178e-16  real	0m0.176s user	0m0.000s sys	0m0.016s
+Case 284 PASS Largest error was: 5.96361e-10  real	0m0.226s user	0m0.000s sys	0m0.015s
+Case 285 PASS Largest error was: 2.66282e-13  real	0m0.211s user	0m0.000s sys	0m0.015s
+Case 286 PASS Largest error was: 4.09277e-09  real	0m0.464s user	0m0.030s sys	0m0.000s
+Case 287 PASS Largest error was: 1.20785e-08  real	0m0.264s user	0m0.000s sys	0m0.015s
+Case 288 PASS Largest error was: 1.85768e-08  real	0m0.225s user	0m0.015s sys	0m0.000s
+Case 289 PASS Largest error was: 4.06711e-09  real	0m0.258s user	0m0.015s sys	0m0.000s
+Case 290 PASS Largest error was: 4.06707e-09  real	0m0.278s user	0m0.000s sys	0m0.016s
+Case 291 PASS Largest error was: 6.27195e-09  real	0m0.320s user	0m0.015s sys	0m0.015s
+Case 292 PASS Largest error was: 1.1171e-08  real	0m0.300s user	0m0.015s sys	0m0.000s
+Case 293 PASS Largest error was: 2.22282e-08  real	0m0.217s user	0m0.015s sys	0m0.000s
+Case 294 PASS Largest error was: 1.93133e-08  real	0m0.213s user	0m0.000s sys	0m0.015s
+Case 295 PASS Largest error was: 9.67675e-09  real	0m0.198s user	0m0.000s sys	0m0.031s
+Case 296 PASS Largest error was: 1.5108e-13  real	0m0.234s user	0m0.000s sys	0m0.015s
+Case 297 PASS Largest error was: 9.68461e-11  real	0m0.192s user	0m0.015s sys	0m0.000s
+Case 298 PASS Largest error was: 8.88178e-16  real	0m0.149s user	0m0.015s sys	0m0.015s
+Case 299 PASS Largest error was: 1.4979e-13  real	0m0.212s user	0m0.015s sys	0m0.015s
+Case 300 PASS Largest error was: 8.71814e-13  real	0m0.213s user	0m0.000s sys	0m0.015s
+Case 301 PASS Largest error was: 5.9646e-13  real	0m0.273s user	0m0.000s sys	0m0.015s
+Case 302 PASS Largest error was: 5.9646e-13  real	0m0.428s user	0m0.000s sys	0m0.015s
+Case 303 PASS Largest error was: 8.88178e-16  real	0m0.158s user	0m0.000s sys	0m0.015s
+Case 304 PASS Largest error was: 8.88178e-16  real	0m0.146s user	0m0.000s sys	0m0.016s
+Case 305 PASS Largest error was: 9.22344e-11  real	0m0.190s user	0m0.000s sys	0m0.015s
+Case 306 PASS Largest error was: 1.94984e-13  real	0m0.212s user	0m0.000s sys	0m0.015s
+Case 307 PASS Largest error was: 2.22045e-16  real	0m0.168s user	0m0.000s sys	0m0.015s
+Case 308 PASS Largest error was: 1.36894e-13  real	0m0.246s user	0m0.015s sys	0m0.000s
+Case 309 PASS Largest error was: 3.56878e-10  real	0m0.207s user	0m0.000s sys	0m0.015s
+Case 310 PASS Largest error was: 1.03611e-07  real	0m0.220s user	0m0.000s sys	0m0.015s
+Case 311 PASS Largest error was: 1.35164e-07  real	0m0.218s user	0m0.015s sys	0m0.015s
+Case 312 PASS Largest error was: 1.35164e-07  real	0m0.242s user	0m0.000s sys	0m0.015s
+Case 313 PASS Largest error was: 2.89717e-07  real	0m0.246s user	0m0.015s sys	0m0.000s
+Case 314 PASS Largest error was: 1.76666e-07  real	0m0.236s user	0m0.000s sys	0m0.015s
+Case 315 PASS Largest error was: 1.84508e-08  real	0m0.263s user	0m0.000s sys	0m0.015s
+Case 316 PASS Largest error was: 3.20764e-07  real	0m0.311s user	0m0.000s sys	0m0.015s
+Case 317 PASS Largest error was: 3.15697e-07  real	0m0.223s user	0m0.000s sys	0m0.015s
+Case 318 PASS Largest error was: 3.15697e-07  real	0m0.219s user	0m0.015s sys	0m0.000s
+Case 319 PASS Largest error was: 4.97631e-06  real	0m0.229s user	0m0.015s sys	0m0.000s
+Case 320 PASS Largest error was: 4.70464e-06  real	0m0.215s user	0m0.015s sys	0m0.000s
+Case 321 PASS Largest error was: 4.96295e-06  real	0m0.218s user	0m0.000s sys	0m0.015s
+Case 322 PASS Largest error was: 5.12678e-11  real	0m0.263s user	0m0.015s sys	0m0.000s
+Case 323 PASS Largest error was: 4.19947e-13  real	0m0.734s user	0m0.000s sys	0m0.015s
+Case 324 PASS Largest error was: 5.12934e-11  real	0m0.382s user	0m0.000s sys	0m0.015s
+Case 325 PASS Largest error was: 4.91229e-06  real	0m0.232s user	0m0.000s sys	0m0.000s
+Case 326 PASS Largest error was: 4.86293e-06  real	0m0.206s user	0m0.015s sys	0m0.000s
+Case 327 PASS Largest error was: 4.88661e-06  real	0m0.317s user	0m0.015s sys	0m0.000s
+Case 328 PASS Largest error was: 3.60299e-07  real	0m0.234s user	0m0.015s sys	0m0.000s
+Case 329 PASS Largest error was: 9.6722e-08  real	0m0.217s user	0m0.000s sys	0m0.000s
+Case 330 PASS Largest error was: 2.0428e-09  real	0m0.235s user	0m0.015s sys	0m0.000s
+Case 331 PASS Largest error was: 3.11928e-09  real	0m0.284s user	0m0.000s sys	0m0.015s
+Case 332 PASS Largest error was: 3.24141e-15  real	0m0.229s user	0m0.000s sys	0m0.015s
+Case 333 PASS Largest error was: 4.85333e-08  real	0m0.228s user	0m0.015s sys	0m0.000s
+Case 334 PASS Largest error was: 2.16823e-12  real	0m0.465s user	0m0.000s sys	0m0.000s
+Case 335 PASS Largest error was: 8.88178e-16  real	0m0.147s user	0m0.015s sys	0m0.015s
+Case 336 PASS Largest error was: 1.19423e-09  real	0m0.195s user	0m0.015s sys	0m0.000s
+Case 337 FAIL 51 points failed  real	0m0.187s user	0m0.000s sys	0m0.015s
+Case 338 PASS Largest error was: 4.95619e-12  real	0m0.182s user	0m0.015s sys	0m0.000s
+Case 339 PASS Largest error was: 3.3099e-15  real	0m0.200s user	0m0.000s sys	0m0.015s
+Case 340 FAIL 51 points failed  real	0m0.208s user	0m0.015s sys	0m0.000s
+Case 341 FAIL 100 points failed  real	0m0.191s user	0m0.000s sys	0m0.015s
+Case 342 FAIL 51 points failed  real	0m0.311s user	0m0.000s sys	0m0.016s
+Case 343 PASS Largest error was: 1.77636e-15  real	0m0.241s user	0m0.015s sys	0m0.000s
+Case 344 FAIL 51 points failed  real	0m0.426s user	0m0.000s sys	0m0.015s
+Case 345 FAIL 51 points failed  real	0m0.287s user	0m0.000s sys	0m0.000s
+Case 346 FAIL 48 points failed  real	0m0.163s user	0m0.000s sys	0m0.016s
+Case 347 FAIL 100 points failed  real	0m0.184s user	0m0.000s sys	0m0.015s
+Case 348 PASS Largest error was: 2.55331e-08  real	0m0.226s user	0m0.015s sys	0m0.000s
+Case 349 PASS Largest error was: 1.21401e-07  real	0m0.234s user	0m0.000s sys	0m0.015s
+Case 350 PASS Largest error was: 4.24135e-08  real	0m0.294s user	0m0.015s sys	0m0.000s
+Case 351 PASS Largest error was: 8.23806e-11  real	0m0.285s user	0m0.000s sys	0m0.015s
+Case 352 PASS Largest error was: 9.56439e-10  real	0m0.291s user	0m0.015s sys	0m0.015s
+Case 353 PASS Largest error was: 5.39543e-09  real	0m0.248s user	0m0.015s sys	0m0.000s
+Case 354 PASS Largest error was: 4.94559e-09  real	0m0.200s user	0m0.015s sys	0m0.000s
+Case 355 PASS Largest error was: 6.71228e-09  real	0m0.532s user	0m0.016s sys	0m0.015s
+Case 356 PASS Largest error was: 4.36994e-08  real	0m0.243s user	0m0.000s sys	0m0.015s
+Case 357 PASS Largest error was: 3.81656e-08  real	0m0.238s user	0m0.000s sys	0m0.015s
+Case 358 PASS Largest error was: 1.02597e-07  real	0m0.274s user	0m0.000s sys	0m0.015s
+Case 359 PASS Largest error was: 1.22204e-08  real	0m0.271s user	0m0.015s sys	0m0.015s
+Case 360 PASS Largest error was: 2.07535e-08  real	0m0.271s user	0m0.000s sys	0m0.015s
+Case 361 PASS Largest error was: 3.35734e-09  real	0m0.491s user	0m0.015s sys	0m0.015s
+Case 362 PASS Largest error was: 2.46715e-08  real	0m0.217s user	0m0.015s sys	0m0.015s
+Case 363 PASS Largest error was: 5.48589e-09  real	0m0.272s user	0m0.015s sys	0m0.000s
+Case 364 PASS Largest error was: 4.36255e-09  real	0m0.220s user	0m0.015s sys	0m0.015s
+Case 365 PASS Largest error was: 1.95092e-09  real	0m0.218s user	0m0.000s sys	0m0.015s
+Case 366 PASS Largest error was: 6.20494e-09  real	0m0.265s user	0m0.000s sys	0m0.015s
+Case 367 PASS Largest error was: 4.95045e-09  real	0m0.255s user	0m0.031s sys	0m0.000s
+Case 368 PASS Largest error was: 1.46956e-08  real	0m0.213s user	0m0.000s sys	0m0.031s
+Case 369 PASS Largest error was: 3.76549e-08  real	0m0.320s user	0m0.015s sys	0m0.000s
+Case 370 PASS Largest error was: 2.67395e-07  real	0m0.229s user	0m0.000s sys	0m0.015s
+Case 371 PASS Largest error was: 1.58535e-07  real	0m0.248s user	0m0.015s sys	0m0.015s
+Case 372 PASS Largest error was: 3.63665e-11  real	0m0.400s user	0m0.015s sys	0m0.015s
+Case 373 PASS Largest error was: 2.98483e-08  real	0m0.410s user	0m0.015s sys	0m0.000s
+Case 374 RoadRunner exception occured: This model has problems
+real	0m0.034s user	0m0.000s sys	0m0.015s
+Case 375 PASS Largest error was: 1.5519e-08  real	0m0.206s user	0m0.000s sys	0m0.016s
+Case 376 PASS Largest error was: 1.06184e-08  real	0m0.217s user	0m0.000s sys	0m0.015s
+Case 377 PASS Largest error was: 3.49676e-08  real	0m0.198s user	0m0.015s sys	0m0.015s
+Case 378 PASS Largest error was: 9.93434e-09  real	0m0.222s user	0m0.000s sys	0m0.015s
+Case 379 PASS Largest error was: 1.06184e-08  real	0m0.221s user	0m0.015s sys	0m0.000s
+Case 380 PASS Largest error was: 4.4928e-08  real	0m0.223s user	0m0.000s sys	0m0.015s
+Case 381 PASS Largest error was: 2.17512e-08  real	0m0.238s user	0m0.000s sys	0m0.000s
+Case 382 PASS Largest error was: 3.37753e-08  real	0m0.376s user	0m0.015s sys	0m0.000s
+Case 383 PASS Largest error was: 1.10693e-07  real	0m0.198s user	0m0.000s sys	0m0.015s
+Case 384 PASS Largest error was: 6.12248e-13  real	0m0.322s user	0m0.000s sys	0m0.015s
+Case 385 PASS Largest error was: 6.96101e-11  real	0m0.257s user	0m0.015s sys	0m0.000s
+Case 386 PASS Largest error was: 5.96774e-10  real	0m0.327s user	0m0.000s sys	0m0.015s
+Case 387 PASS Largest error was: 4.09129e-09  real	0m0.299s user	0m0.015s sys	0m0.000s
+Case 388 PASS Largest error was: 4.09129e-09  real	0m0.234s user	0m0.031s sys	0m0.000s
+Case 389 PASS Largest error was: 1.01849e-08  real	0m0.216s user	0m0.015s sys	0m0.015s
+Case 390 PASS Largest error was: 6.54411e-09  real	0m0.395s user	0m0.000s sys	0m0.015s
+Case 391 PASS Largest error was: 6.08361e-12  real	0m0.274s user	0m0.000s sys	0m0.031s
+Case 392 PASS Largest error was: 8.23805e-11  real	0m0.271s user	0m0.015s sys	0m0.015s
+Case 393 PASS Largest error was: 1.54426e-07  real	0m0.491s user	0m0.031s sys	0m0.000s
+Case 394 PASS Largest error was: 1.54426e-07  real	0m0.232s user	0m0.015s sys	0m0.000s
+Case 395 PASS Largest error was: 4.60086e-08  real	0m0.233s user	0m0.000s sys	0m0.015s
+Case 396 FAIL 111 points failed  real	0m0.220s user	0m0.015s sys	0m0.000s
+Case 397 FAIL 133 points failed  real	0m0.239s user	0m0.015s sys	0m0.000s
+Case 398 FAIL 131 points failed  real	0m0.261s user	0m0.015s sys	0m0.000s
+Case 399 PASS Largest error was: 3.63291e-08  real	0m0.237s user	0m0.000s sys	0m0.015s
+Case 400 PASS Largest error was: 6.52734e-08  real	0m0.527s user	0m0.000s sys	0m0.016s
+Case 401 PASS Largest error was: 1.38206e-07  real	0m0.252s user	0m0.015s sys	0m0.015s
+Case 402 FAIL 129 points failed  real	0m0.307s user	0m0.015s sys	0m0.000s
+Case 403 FAIL 52 points failed  real	0m0.212s user	0m0.000s sys	0m0.015s
+Case 404 FAIL 101 points failed  real	0m0.213s user	0m0.000s sys	0m0.016s
+Case 405 PASS Largest error was: 4.57362e-09  real	0m0.591s user	0m0.000s sys	0m0.015s
+Case 406 PASS Largest error was: 4.84471e-08  real	0m0.287s user	0m0.000s sys	0m0.015s
+Case 407 PASS Largest error was: 7.86582e-08  real	0m0.285s user	0m0.015s sys	0m0.000s
+Case 408 PASS Largest error was: 5.17028e-10  real	0m0.274s user	0m0.000s sys	0m0.015s
+Case 409 PASS Largest error was: 8.47083e-07  real	0m0.308s user	0m0.000s sys	0m0.015s
+Case 410 PASS Largest error was: 5.81945e-06  real	0m0.365s user	0m0.015s sys	0m0.000s
+Case 411 PASS Largest error was: 4.01922e-09  real	0m0.274s user	0m0.000s sys	0m0.015s
+Case 412 PASS Largest error was: 4.01922e-09  real	0m0.265s user	0m0.015s sys	0m0.000s
+Case 413 PASS Largest error was: 2.98693e-08  real	0m0.311s user	0m0.015s sys	0m0.000s
+Case 414 PASS Largest error was: 2.62378e-08  real	0m0.316s user	0m0.000s sys	0m0.015s
+Case 415 PASS Largest error was: 1.34848e-07  real	0m0.263s user	0m0.000s sys	0m0.015s
+Case 416 PASS Largest error was: 2.80582e-08  real	0m0.298s user	0m0.015s sys	0m0.000s
+Case 417 PASS Largest error was: 4.09352e-09  real	0m0.242s user	0m0.015s sys	0m0.015s
+Case 418 PASS Largest error was: 4.63543e-09  real	0m0.267s user	0m0.000s sys	0m0.015s
+Case 419 PASS Largest error was: 2.20249e-08  real	0m0.260s user	0m0.015s sys	0m0.000s
+Case 420 PASS Largest error was: 2.87148e-09  real	0m0.238s user	0m0.000s sys	0m0.016s
+Case 421 PASS Largest error was: 4.36816e-09  real	0m0.240s user	0m0.000s sys	0m0.015s
+Case 422 PASS Largest error was: 6.46821e-09  real	0m0.242s user	0m0.000s sys	0m0.015s
+Case 423 PASS Largest error was: 1.3087e-08  real	0m0.312s user	0m0.000s sys	0m0.015s
+Case 424 PASS Largest error was: 7.91009e-09  real	0m0.271s user	0m0.000s sys	0m0.016s
+Case 425 PASS Largest error was: 4.77725e-09  real	0m0.263s user	0m0.000s sys	0m0.015s
+Case 426 PASS Largest error was: 6.28659e-05  real	0m0.383s user	0m0.000s sys	0m0.015s
+Case 427 PASS Largest error was: 0.000289244  real	0m0.280s user	0m0.015s sys	0m0.000s
+Case 428 PASS Largest error was: 5.68807e-06  real	0m0.299s user	0m0.015s sys	0m0.000s
+Case 429 PASS Largest error was: 1.08775e-06  real	0m0.721s user	0m0.015s sys	0m0.015s
+Case 430 PASS Largest error was: 4.08229e-07  real	0m0.458s user	0m0.030s sys	0m0.000s
+Case 431 PASS Largest error was: 1.57294e-05  real	0m0.395s user	0m0.015s sys	0m0.000s
+Case 432 PASS Largest error was: 2.66586e-08  real	0m0.266s user	0m0.015s sys	0m0.000s
+Case 433 PASS Largest error was: 6.81929e-09  real	0m0.237s user	0m0.015s sys	0m0.015s
+Case 434 PASS Largest error was: 9.77457e-09  real	0m0.224s user	0m0.015s sys	0m0.015s
+Case 435 PASS Largest error was: 1.69786e-08  real	0m0.245s user	0m0.015s sys	0m0.000s
+Case 436 PASS Largest error was: 5.45507e-09  real	0m0.355s user	0m0.000s sys	0m0.015s
+Case 437 PASS Largest error was: 4.41843e-08  real	0m0.244s user	0m0.015s sys	0m0.015s
+Case 438 PASS Largest error was: 5.05745e-08  real	0m0.263s user	0m0.015s sys	0m0.000s
+Case 439 PASS Largest error was: 9.70356e-08  real	0m0.258s user	0m0.000s sys	0m0.015s
+Case 440 PASS Largest error was: 4.95789e-08  real	0m0.232s user	0m0.015s sys	0m0.015s
+Case 441 PASS Largest error was: 3.80471e-09  real	0m0.383s user	0m0.000s sys	0m0.015s
+Case 442 PASS Largest error was: 8.64659e-12  real	0m0.316s user	0m0.000s sys	0m0.000s
+Case 443 PASS Largest error was: 8.30974e-11  real	0m0.316s user	0m0.000s sys	0m0.015s
+Case 444 PASS Largest error was: 3.59593e-08  real	0m0.257s user	0m0.030s sys	0m0.000s
+Case 445 PASS Largest error was: 1.22742e-08  real	0m0.264s user	0m0.015s sys	0m0.015s
+Case 446 PASS Largest error was: 1.26367e-08  real	0m0.321s user	0m0.000s sys	0m0.015s
+Case 447 PASS Largest error was: 1.35147e-09  real	0m0.348s user	0m0.000s sys	0m0.015s
+Case 448 PASS Largest error was: 1.3275e-08  real	0m0.330s user	0m0.000s sys	0m0.015s
+Case 449 PASS Largest error was: 1.01205e-11  real	0m0.333s user	0m0.000s sys	0m0.016s
+Case 450 PASS Largest error was: 3.36577e-07  real	0m0.320s user	0m0.000s sys	0m0.015s
+Case 451 PASS Largest error was: 2.07741e-07  real	0m0.944s user	0m0.015s sys	0m0.000s
+Case 452 PASS Largest error was: 1.14307e-07  real	0m0.272s user	0m0.000s sys	0m0.015s
+Case 453 FAIL 50 points failed  real	0m0.232s user	0m0.000s sys	0m0.015s
+Case 454 FAIL 90 points failed  real	0m0.307s user	0m0.000s sys	0m0.015s
+Case 455 FAIL 51 points failed  real	0m0.560s user	0m0.031s sys	0m0.000s
+Case 456 PASS Largest error was: 0.000742783  real	0m0.369s user	0m0.000s sys	0m0.016s
+Case 457 PASS Largest error was: 1.6872e-05  real	0m0.315s user	0m0.000s sys	0m0.015s
+Case 458 PASS Largest error was: 3.22091e-05  real	0m0.324s user	0m0.000s sys	0m0.016s
+Case 459 FAIL 66 points failed  real	0m0.309s user	0m0.000s sys	0m0.031s
+Case 460 FAIL 53 points failed  real	0m0.371s user	0m0.000s sys	0m0.015s
+Case 461 FAIL 63 points failed  real	0m0.340s user	0m0.000s sys	0m0.015s
+Case 462 PASS Largest error was: 3.29752e-12  real	0m0.187s user	0m0.015s sys	0m0.015s
+Case 463 PASS Largest error was: 5.36173e-09  real	0m0.189s user	0m0.000s sys	0m0.000s
+Case 464 PASS Largest error was: 8.88178e-16  real	0m0.149s user	0m0.000s sys	0m0.016s
+Case 465 PASS Largest error was: 1.10698e-10  real	0m0.200s user	0m0.000s sys	0m0.015s
+Case 466 PASS Largest error was: 4.22394e-13  real	0m0.220s user	0m0.015s sys	0m0.015s
+Case 467 PASS Largest error was: 2.92132e-10  real	0m0.708s user	0m0.015s sys	0m0.000s
+Case 468 PASS Largest error was: 3.47194e-15  real	0m0.397s user	0m0.000s sys	0m0.015s
+Case 469 PASS Largest error was: 4.99862e-06  real	0m0.242s user	0m0.000s sys	0m0.015s
+Case 470 PASS Largest error was: 4.99862e-06  real	0m0.269s user	0m0.015s sys	0m0.015s
+Case 471 PASS Largest error was: 4.99862e-06  real	0m0.350s user	0m0.015s sys	0m0.000s
+Case 472 PASS Largest error was: 4.99862e-06  real	0m0.565s user	0m0.000s sys	0m0.015s
+Case 473 PASS Largest error was: 4.99862e-06  real	0m0.201s user	0m0.000s sys	0m0.015s
+Case 474 PASS Largest error was: 1.22673e-10  real	0m0.205s user	0m0.030s sys	0m0.015s
+Case 475 PASS Largest error was: 2.22503e-12  real	0m0.210s user	0m0.015s sys	0m0.015s
+Case 476 PASS Largest error was: 7.64044e-10  real	0m0.212s user	0m0.015s sys	0m0.015s
+Case 477 PASS Largest error was: 3.08065e-11  real	0m0.214s user	0m0.031s sys	0m0.000s
+Case 478 PASS Largest error was: 1.10698e-10  real	0m0.652s user	0m0.015s sys	0m0.000s
+Case 479 PASS Largest error was: 1.92521e-12  real	0m0.203s user	0m0.015s sys	0m0.000s
+Case 480 PASS Largest error was: 7.74293e-10  real	0m0.249s user	0m0.000s sys	0m0.015s
+Case 481 PASS Largest error was: 3.08065e-11  real	0m0.256s user	0m0.000s sys	0m0.015s
+Case 482 PASS Largest error was: 1.10698e-10  real	0m0.463s user	0m0.000s sys	0m0.015s
+Case 483 PASS Largest error was: 3.61533e-12  real	0m0.370s user	0m0.015s sys	0m0.015s
+Case 484 PASS Largest error was: 7.44912e-10  real	0m0.326s user	0m0.000s sys	0m0.015s
+Case 485 PASS Largest error was: 3.09253e-11  real	0m0.271s user	0m0.000s sys	0m0.015s
+Case 486 PASS Largest error was: 3.92896e-09  real	0m0.227s user	0m0.015s sys	0m0.015s
+Case 487 PASS Largest error was: 3.92896e-09  real	0m0.342s user	0m0.031s sys	0m0.000s
+Case 488 PASS Largest error was: 3.92896e-09  real	0m0.250s user	0m0.015s sys	0m0.016s
+Case 489 PASS Largest error was: 1.22673e-10  real	0m0.349s user	0m0.031s sys	0m0.000s
+Case 490 PASS Largest error was: 2.22503e-12  real	0m0.335s user	0m0.015s sys	0m0.015s
+Case 491 PASS Largest error was: 7.64044e-10  real	0m0.209s user	0m0.000s sys	0m0.015s
+Case 492 PASS Largest error was: 1.71688e-07  real	0m0.175s user	0m0.015s sys	0m0.000s
+Case 493 PASS Largest error was: 5.63318e-09  real	0m0.180s user	0m0.015s sys	0m0.015s
+Case 494 PASS Largest error was: 1.71688e-07  real	0m0.170s user	0m0.015s sys	0m0.000s
+Case 495 PASS Largest error was: 3.15501e-13  real	0m0.209s user	0m0.000s sys	0m0.015s
+Case 496 PASS Largest error was: 2.10552e-09  real	0m0.451s user	0m0.015s sys	0m0.015s
+Case 497 PASS Largest error was: 3.97e-11  real	0m0.688s user	0m0.000s sys	0m0.015s
+Case 498 PASS Largest error was: 5.68434e-14  real	0m0.359s user	0m0.015s sys	0m0.000s
+Case 499 PASS Largest error was: 5.68434e-14  real	0m0.221s user	0m0.000s sys	0m0.015s
+Case 500 PASS Largest error was: 5.68434e-14  real	0m0.180s user	0m0.000s sys	0m0.015s
+Case 501 PASS Largest error was: 7.88905e-11  real	0m0.249s user	0m0.000s sys	0m0.015s
+Case 502 PASS Largest error was: 6.99267e-10  real	0m0.189s user	0m0.015s sys	0m0.000s
+Case 503 PASS Largest error was: 7.91633e-12  real	0m0.187s user	0m0.000s sys	0m0.015s
+Case 504 PASS Largest error was: 2.11072e-09  real	0m0.384s user	0m0.000s sys	0m0.015s
+Case 505 PASS Largest error was: 2.08862e-11  real	0m0.224s user	0m0.000s sys	0m0.015s
+Case 506 PASS Largest error was: 2.35896e-10  real	0m0.230s user	0m0.000s sys	0m0.015s
+Case 507 PASS Largest error was: 9.12012e-08  real	0m0.197s user	0m0.000s sys	0m0.015s
+Case 508 PASS Largest error was: 9.12012e-08  real	0m0.661s user	0m0.015s sys	0m0.000s
+Case 509 PASS Largest error was: 9.12012e-08  real	0m0.414s user	0m0.015s sys	0m0.000s
+Case 510 PASS Largest error was: 4.95895e-06  real	0m0.441s user	0m0.000s sys	0m0.015s
+Case 511 PASS Largest error was: 4.95895e-06  real	0m0.198s user	0m0.015s sys	0m0.000s
+Case 512 PASS Largest error was: 4.95895e-06  real	0m0.208s user	0m0.000s sys	0m0.015s
+Case 513 PASS Largest error was: 1.55831e-12  real	0m0.274s user	0m0.000s sys	0m0.015s
+Case 514 PASS Largest error was: 8.91178e-10  real	0m0.229s user	0m0.000s sys	0m0.016s
+Case 515 PASS Largest error was: 2.09494e-11  real	0m0.229s user	0m0.000s sys	0m0.015s
+Case 516 PASS Largest error was: 4.95895e-06  real	0m0.296s user	0m0.015s sys	0m0.015s
+Case 517 PASS Largest error was: 4.95895e-06  real	0m0.256s user	0m0.031s sys	0m0.000s
+Case 518 PASS Largest error was: 4.95895e-06  real	0m0.243s user	0m0.000s sys	0m0.015s
+Case 519 PASS Largest error was: 2.48553e-10  real	0m0.354s user	0m0.000s sys	0m0.015s
+Case 520 PASS Largest error was: 2.34752e-12  real	0m0.489s user	0m0.015s sys	0m0.000s
+Case 521 PASS Largest error was: 1.39614e-09  real	0m0.419s user	0m0.015s sys	0m0.000s
+Case 522 PASS Largest error was: 2.72086e-11  real	0m0.247s user	0m0.000s sys	0m0.015s
+Case 523 PASS Largest error was: 1.22673e-10  real	0m0.201s user	0m0.000s sys	0m0.015s
+Case 524 PASS Largest error was: 2.22503e-12  real	0m0.201s user	0m0.015s sys	0m0.000s
+Case 525 PASS Largest error was: 1.94749e-08  real	0m0.356s user	0m0.000s sys	0m0.015s
+Case 526 PASS Largest error was: 1.94749e-08  real	0m0.287s user	0m0.030s sys	0m0.000s
+Case 527 PASS Largest error was: 1.94749e-08  real	0m0.185s user	0m0.030s sys	0m0.000s
+Case 528 PASS Largest error was: 1.94749e-08  real	0m0.190s user	0m0.000s sys	0m0.015s
+Case 529 PASS Largest error was: 2.19459e-11  real	0m0.217s user	0m0.000s sys	0m0.015s
+Case 530 PASS Largest error was: 4.99862e-06  real	0m0.191s user	0m0.015s sys	0m0.015s
+Case 531 RoadRunner exception occured: This model is not supported by rr
+real	0m0.031s user	0m0.015s sys	0m0.000s
+Case 532 PASS Largest error was: 1.4282e-11  real	0m0.328s user	0m0.000s sys	0m0.031s
+Case 533 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 534 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.000s sys	0m0.015s
+Case 535 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.015s
+Case 536 RoadRunner exception occured: This model is not supported by rr
+real	0m0.031s user	0m0.000s sys	0m0.015s
+Case 537 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 538 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.016s
+Case 539 PASS Largest error was: 2.94549e-08  real	0m0.581s user	0m0.000s sys	0m0.015s
+Case 540 PASS Largest error was: 2.87227e-15  real	0m0.221s user	0m0.000s sys	0m0.030s
+Case 541 PASS Largest error was: 2.97559e-08  real	0m0.210s user	0m0.015s sys	0m0.000s
+Case 542 PASS Largest error was: 3.09389e-08  real	0m0.220s user	0m0.015s sys	0m0.015s
+Case 543 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.000s sys	0m0.015s
+Case 544 PASS Largest error was: 4.36867e-12  real	0m0.347s user	0m0.015s sys	0m0.015s
+Case 545 PASS Largest error was: 7.0385e-13  real	0m0.679s user	0m0.000s sys	0m0.015s
+Case 546 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.015s sys	0m0.015s
+Case 547 PASS Largest error was: 2.0816e-08  real	0m0.218s user	0m0.000s sys	0m0.015s
+Case 548 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 549 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.015s
+Case 550 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 551 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.000s sys	0m0.015s
+Case 552 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.015s
+Case 553 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 554 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 555 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.015s sys	0m0.000s
+Case 556 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.015s sys	0m0.000s
+Case 557 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.015s sys	0m0.015s
+Case 558 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.000s
+Case 559 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.000s
+Case 560 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.000s
+Case 561 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.015s
+Case 562 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.000s sys	0m0.015s
+Case 563 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.016s
+Case 564 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 565 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.000s sys	0m0.031s
+Case 566 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.000s sys	0m0.015s
+Case 567 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.000s sys	0m0.015s
+Case 568 PASS Largest error was: 1.4282e-11  real	0m0.192s user	0m0.000s sys	0m0.015s
+Case 569 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 570 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.000s
+Case 571 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.030s sys	0m0.000s
+Case 572 PASS Largest error was: 1.4282e-11  real	0m0.189s user	0m0.000s sys	0m0.015s
+Case 573 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 574 PASS Largest error was: 1.42875e-11  real	0m0.184s user	0m0.000s sys	0m0.015s
+Case 575 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 576 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.000s sys	0m0.015s
+Case 577 PASS Largest error was: 1.88262e-09  real	0m0.281s user	0m0.030s sys	0m0.000s
+Case 578 PASS Largest error was: 8.5519e-10  real	0m0.207s user	0m0.000s sys	0m0.015s
+Case 579 PASS Largest error was: 8.88178e-16  real	0m0.160s user	0m0.000s sys	0m0.015s
+Case 580 PASS Largest error was: 2.0868e-11  real	0m0.216s user	0m0.000s sys	0m0.015s
+Case 581 PASS Largest error was: 5.45861e-10  real	0m0.217s user	0m0.015s sys	0m0.000s
+Case 582 PASS Largest error was: 3.32619e-11  real	0m0.263s user	0m0.015s sys	0m0.000s
+Case 583 PASS Largest error was: 5.16414e-13  real	0m0.260s user	0m0.000s sys	0m0.015s
+Case 584 PASS Largest error was: 1.07225e-14  real	0m0.440s user	0m0.030s sys	0m0.000s
+Case 585 PASS Largest error was: 4.60632e-13  real	0m0.292s user	0m0.000s sys	0m0.015s
+Case 586 PASS Largest error was: 3.78404e-08  real	0m0.189s user	0m0.015s sys	0m0.000s
+Case 587 PASS Largest error was: 2.8031e-13  real	0m0.309s user	0m0.000s sys	0m0.015s
+Case 588 PASS Largest error was: 9.44292e-09  real	0m0.242s user	0m0.000s sys	0m0.015s
+Case 589 PASS Largest error was: 3.20514e-10  real	0m0.209s user	0m0.000s sys	0m0.016s
+Case 590 PASS Largest error was: 1.92521e-12  real	0m0.218s user	0m0.000s sys	0m0.016s
+Case 591 PASS Largest error was: 5.39573e-12  real	0m0.524s user	0m0.015s sys	0m0.000s
+Case 592 PASS Largest error was: 2.70987e-09  real	0m0.261s user	0m0.030s sys	0m0.000s
+Case 593 PASS Largest error was: 1.20276e-10  real	0m0.252s user	0m0.000s sys	0m0.015s
+Case 594 PASS Largest error was: 4.22394e-13  real	0m0.308s user	0m0.015s sys	0m0.015s
+Case 595 PASS Largest error was: 1.1663e-14  real	0m0.226s user	0m0.000s sys	0m0.015s
+Case 596 PASS Largest error was: 1.58663e-12  real	0m0.355s user	0m0.015s sys	0m0.000s
+Case 597 PASS Largest error was: 9.91757e-10  real	0m0.288s user	0m0.015s sys	0m0.000s
+Case 598 PASS Largest error was: 4.89651e-06  real	0m0.233s user	0m0.031s sys	0m0.000s
+Case 599 PASS Largest error was: 4.3806e-09  real	0m0.263s user	0m0.000s sys	0m0.016s
+Case 600 PASS Largest error was: 6.20115e-15  real	0m0.234s user	0m0.031s sys	0m0.000s
+Case 601 PASS Largest error was: 4.88661e-06  real	0m0.229s user	0m0.000s sys	0m0.016s
+Case 602 PASS Largest error was: 2.82355e-11  real	0m0.251s user	0m0.015s sys	0m0.000s
+Case 603 PASS Largest error was: 9.44292e-09  real	0m0.575s user	0m0.000s sys	0m0.015s
+Case 604 PASS Largest error was: 2.87384e-11  real	0m0.371s user	0m0.015s sys	0m0.015s
+Case 605 PASS Largest error was: 1.02293e-09  real	0m0.255s user	0m0.000s sys	0m0.015s
+Case 606 PASS Largest error was: 9.4796e-12  real	0m0.265s user	0m0.015s sys	0m0.000s
+Case 607 PASS Largest error was: 9.81274e-14  real	0m0.262s user	0m0.000s sys	0m0.015s
+Case 608 PASS Largest error was: 2.34045e-08  real	0m0.448s user	0m0.015s sys	0m0.000s
+Case 609 PASS Largest error was: 1.95859e-11  real	0m0.257s user	0m0.000s sys	0m0.000s
+Case 610 PASS Largest error was: 1.1712e-13  real	0m0.237s user	0m0.000s sys	0m0.015s
+Case 611 PASS Largest error was: 2.12631e-08  real	0m0.240s user	0m0.015s sys	0m0.016s
+Case 612 PASS Largest error was: 1.4918e-13  real	0m0.225s user	0m0.000s sys	0m0.016s
+Case 613 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 614 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 615 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.015s
+Case 616 PASS Largest error was: 7.88633e-09  real	0m0.209s user	0m0.015s sys	0m0.000s
+Case 617 PASS Largest error was: 7.97907e-09  real	0m0.272s user	0m0.000s sys	0m0.015s
+Case 618 PASS Largest error was: 7.1737e-10  real	0m0.426s user	0m0.000s sys	0m0.015s
+Case 619 PASS Largest error was: 2.80202e-08  real	0m0.336s user	0m0.000s sys	0m0.015s
+Case 620 PASS Largest error was: 6.43705e-08  real	0m0.315s user	0m0.015s sys	0m0.015s
+Case 621 PASS Largest error was: 6.52651e-08  real	0m0.405s user	0m0.000s sys	0m0.015s
+Case 622 PASS Largest error was: 1.62687e-08  real	0m0.522s user	0m0.000s sys	0m0.015s
+Case 623 PASS Largest error was: 6.3965e-08  real	0m0.455s user	0m0.000s sys	0m0.015s
+Case 624 PASS Largest error was: 6.25934e-08  real	0m0.480s user	0m0.015s sys	0m0.015s
+Case 625 PASS Largest error was: 1.00371e-12  real	0m0.225s user	0m0.000s sys	0m0.015s
+Case 626 PASS Largest error was: 3.54963e-13  real	0m0.257s user	0m0.015s sys	0m0.000s
+Case 627 PASS Largest error was: 1.00371e-12  real	0m0.213s user	0m0.000s sys	0m0.015s
+Case 628 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 629 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 630 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 631 PASS Largest error was: 7.88634e-09  real	0m0.214s user	0m0.015s sys	0m0.000s
+Case 632 PASS Largest error was: 7.97907e-09  real	0m0.196s user	0m0.000s sys	0m0.015s
+Case 633 PASS Largest error was: 7.17372e-10  real	0m0.250s user	0m0.000s sys	0m0.015s
+Case 634 PASS Largest error was: 2.80202e-08  real	0m0.320s user	0m0.000s sys	0m0.016s
+Case 635 PASS Largest error was: 2.80202e-08  real	0m0.326s user	0m0.015s sys	0m0.000s
+Case 636 PASS Largest error was: 6.52651e-08  real	0m0.583s user	0m0.000s sys	0m0.015s
+Case 637 PASS Largest error was: 1.62687e-08  real	0m0.344s user	0m0.000s sys	0m0.015s
+Case 638 PASS Largest error was: 6.3965e-08  real	0m0.424s user	0m0.000s sys	0m0.016s
+Case 639 PASS Largest error was: 6.25934e-08  real	0m0.460s user	0m0.015s sys	0m0.000s
+Case 640 PASS Largest error was: 4.88979e-06  real	0m0.408s user	0m0.000s sys	0m0.015s
+Case 641 PASS Largest error was: 4.94198e-06  real	0m0.425s user	0m0.015s sys	0m0.015s
+Case 642 PASS Largest error was: 4.88979e-06  real	0m0.251s user	0m0.000s sys	0m0.015s
+Case 643 PASS Largest error was: 1.00371e-12  real	0m0.216s user	0m0.000s sys	0m0.016s
+Case 644 PASS Largest error was: 3.54963e-13  real	0m0.229s user	0m0.000s sys	0m0.015s
+Case 645 PASS Largest error was: 9.99804e-13  real	0m0.249s user	0m0.015s sys	0m0.000s
+Case 646 PASS Largest error was: 3.7596e-08  real	0m0.541s user	0m0.000s sys	0m0.015s
+Case 647 PASS Largest error was: 6.80924e-09  real	0m0.299s user	0m0.030s sys	0m0.000s
+Case 648 PASS Largest error was: 2.12034e-08  real	0m0.248s user	0m0.015s sys	0m0.000s
+Case 649 PASS Largest error was: 3.96362e-08  real	0m0.245s user	0m0.015s sys	0m0.000s
+Case 650 PASS Largest error was: 1.00128e-08  real	0m0.312s user	0m0.000s sys	0m0.015s
+Case 651 PASS Largest error was: 1.44376e-08  real	0m0.723s user	0m0.015s sys	0m0.000s
+Case 652 PASS Largest error was: 1.0543e-12  real	0m0.343s user	0m0.000s sys	0m0.015s
+Case 653 PASS Largest error was: 6.57294e-13  real	0m0.294s user	0m0.000s sys	0m0.015s
+Case 654 PASS Largest error was: 1.30053e-12  real	0m0.318s user	0m0.000s sys	0m0.015s
+Case 655 PASS Largest error was: 2.25258e-13  real	0m0.285s user	0m0.000s sys	0m0.015s
+Case 656 PASS Largest error was: 7.00138e-13  real	0m0.353s user	0m0.000s sys	0m0.015s
+Case 657 PASS Largest error was: 4.6778e-13  real	0m0.265s user	0m0.031s sys	0m0.000s
+Case 658 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 659 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.000s
+Case 660 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 661 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.000s sys	0m0.015s
+Case 662 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.015s sys	0m0.000s
+Case 663 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.000s sys	0m0.015s
+Case 664 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.031s
+Case 665 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.030s sys	0m0.000s
+Case 666 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.000s sys	0m0.015s
+Case 667 PASS Largest error was: 2.01976e-07  real	0m0.246s user	0m0.000s sys	0m0.015s
+Case 668 PASS Largest error was: 1.67301e-09  real	0m0.281s user	0m0.000s sys	0m0.015s
+Case 669 PASS Largest error was: 1.67635e-08  real	0m0.293s user	0m0.000s sys	0m0.015s
+Case 670 PASS Largest error was: 1.73349e-14  real	0m0.282s user	0m0.000s sys	0m0.015s
+Case 671 PASS Largest error was: 1.43139e-14  real	0m0.253s user	0m0.000s sys	0m0.016s
+Case 672 PASS Largest error was: 1.75301e-14  real	0m0.216s user	0m0.015s sys	0m0.000s
+Case 673 RoadRunner exception occured: This model is not supported by rr
+real	0m0.031s user	0m0.000s sys	0m0.015s
+Case 674 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.030s sys	0m0.000s
+Case 675 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 676 PASS Largest error was: 3.25794e-08  real	0m0.188s user	0m0.015s sys	0m0.000s
+Case 677 PASS Largest error was: 1.12894e-08  real	0m0.216s user	0m0.015s sys	0m0.000s
+Case 678 PASS Largest error was: 6.58025e-08  real	0m0.273s user	0m0.000s sys	0m0.016s
+Case 679 PASS Largest error was: 8.58522e-08  real	0m0.392s user	0m0.000s sys	0m0.015s
+Case 680 PASS Largest error was: 1.06659e-07  real	0m0.254s user	0m0.015s sys	0m0.000s
+Case 681 PASS Largest error was: 1.72615e-07  real	0m0.314s user	0m0.015s sys	0m0.000s
+Case 682 PASS Largest error was: 3.6888e-05  real	0m0.321s user	0m0.000s sys	0m0.015s
+Case 683 PASS Largest error was: 8.69877e-07  real	0m0.373s user	0m0.015s sys	0m0.000s
+Case 684 PASS Largest error was: 2.19591e-05  real	0m0.481s user	0m0.000s sys	0m0.015s
+Case 685 PASS Largest error was: 1.0522e-08  real	0m0.330s user	0m0.000s sys	0m0.015s
+Case 686 PASS Largest error was: 1.77641e-14  real	0m0.303s user	0m0.015s sys	0m0.000s
+Case 687 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.000s
+Case 688 PASS Largest error was: 2.4317e-08  real	0m0.255s user	0m0.015s sys	0m0.015s
+Case 689 PASS Largest error was: 2.80204e-08  real	0m0.416s user	0m0.015s sys	0m0.015s
+Case 690 PASS Largest error was: 2.33612e-08  real	0m0.370s user	0m0.015s sys	0m0.000s
+Case 691 PASS Largest error was: 2.4869e-14  real	0m0.171s user	0m0.000s sys	0m0.000s
+Case 692 PASS Largest error was: 1.03585e-08  real	0m0.260s user	0m0.015s sys	0m0.000s
+Case 693 PASS Largest error was: 1.00532e-13  real	0m0.261s user	0m0.015s sys	0m0.000s
+Case 694 PASS Largest error was: 1.00371e-12  real	0m0.267s user	0m0.000s sys	0m0.015s
+Case 695 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.015s sys	0m0.000s
+Case 696 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.000s
+Case 697 PASS Largest error was: 8.88178e-16  real	0m0.281s user	0m0.000s sys	0m0.015s
+Case 698 PASS Largest error was: 7.97907e-09  real	0m0.246s user	0m0.000s sys	0m0.015s
+Case 699 PASS Largest error was: 1.06581e-14  real	0m0.163s user	0m0.000s sys	0m0.015s
+Case 700 PASS Largest error was: 2.80202e-08  real	0m0.309s user	0m0.000s sys	0m0.015s
+Case 701 PASS Largest error was: 5.32907e-15  real	0m0.161s user	0m0.015s sys	0m0.000s
+Case 702 PASS Largest error was: 1.62687e-08  real	0m0.250s user	0m0.015s sys	0m0.015s
+Case 703 PASS Largest error was: 2.80359e-13  real	0m0.265s user	0m0.000s sys	0m0.015s
+Case 704 PASS Largest error was: 1.00371e-12  real	0m0.212s user	0m0.015s sys	0m0.015s
+Case 705 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.000s sys	0m0.015s
+Case 706 PASS Largest error was: 7.97907e-09  real	0m0.572s user	0m0.015s sys	0m0.000s
+Case 707 PASS Largest error was: 6.43705e-08  real	0m0.459s user	0m0.015s sys	0m0.000s
+Case 708 PASS Largest error was: 6.25934e-08  real	0m0.456s user	0m0.000s sys	0m0.015s
+Case 709 PASS Largest error was: 4.88661e-06  real	0m0.321s user	0m0.015s sys	0m0.000s
+Case 710 PASS Largest error was: 4.94198e-06  real	0m0.424s user	0m0.000s sys	0m0.015s
+Case 711 PASS Largest error was: 4.13628e-13  real	0m0.308s user	0m0.031s sys	0m0.000s
+Case 712 PASS Largest error was: 1.7181e-08  real	0m0.276s user	0m0.000s sys	0m0.015s
+Case 713 PASS Largest error was: 1.77636e-15  real	0m0.324s user	0m0.000s sys	0m0.015s
+Case 714 PASS Largest error was: 8.49694e-08  real	0m0.249s user	0m0.000s sys	0m0.015s
+Case 715 PASS Largest error was: 1.77642e-14  real	0m0.218s user	0m0.000s sys	0m0.031s
+Case 716 PASS Largest error was: 1.77645e-14  real	0m0.395s user	0m0.015s sys	0m0.000s
+Case 717 PASS Largest error was: 3.30048e-08  real	0m0.368s user	0m0.015s sys	0m0.000s
+Case 718 PASS Largest error was: 3.38714e-12  real	0m0.242s user	0m0.015s sys	0m0.015s
+Case 719 PASS Largest error was: 8.02315e-08  real	0m0.220s user	0m0.015s sys	0m0.015s
+Case 720 PASS Largest error was: 7.18558e-15  real	0m0.228s user	0m0.000s sys	0m0.015s
+Case 721 PASS Largest error was: 1.04591e-12  real	0m0.256s user	0m0.000s sys	0m0.046s
+Case 722 PASS Largest error was: 4.51186e-08  real	0m0.774s user	0m0.015s sys	0m0.000s
+Case 723 PASS Largest error was: 7.09376e-08  real	0m0.322s user	0m0.030s sys	0m0.000s
+Case 724 PASS Largest error was: 2.23444e-08  real	0m0.351s user	0m0.000s sys	0m0.015s
+Case 725 PASS Largest error was: 4.34127e-11  real	0m0.294s user	0m0.000s sys	0m0.015s
+Case 726 PASS Largest error was: 1.17769e-07  real	0m0.575s user	0m0.030s sys	0m0.000s
+Case 727 PASS Largest error was: 3.26808e-15  real	0m0.234s user	0m0.000s sys	0m0.016s
+Case 728 PASS Largest error was: 1.00371e-12  real	0m0.218s user	0m0.015s sys	0m0.000s
+Case 729 PASS Largest error was: 1.19993e-07  real	0m0.254s user	0m0.000s sys	0m0.000s
+Case 730 PASS Largest error was: 1.44376e-08  real	0m0.292s user	0m0.000s sys	0m0.015s
+Case 731 PASS Largest error was: 1.00128e-08  real	0m0.303s user	0m0.000s sys	0m0.015s
+Case 732 PASS Largest error was: 1.73696e-08  real	0m0.304s user	0m0.000s sys	0m0.015s
+Case 733 PASS Largest error was: 5.86257e-15  real	0m0.230s user	0m0.000s sys	0m0.016s
+Case 734 PASS Largest error was: 9.09708e-13  real	0m0.331s user	0m0.000s sys	0m0.015s
+Case 735 PASS Largest error was: 1.57841e-08  real	0m0.351s user	0m0.015s sys	0m0.000s
+Case 736 PASS Largest error was: 3.20598e-08  real	0m0.336s user	0m0.031s sys	0m0.000s
+Case 737 PASS Largest error was: 2.44412e-08  real	0m0.536s user	0m0.030s sys	0m0.000s
+Case 738 PASS Largest error was: 2.82369e-11  real	0m0.562s user	0m0.015s sys	0m0.000s
+Case 739 PASS Largest error was: 8.24019e-12  real	0m0.379s user	0m0.000s sys	0m0.015s
+Case 740 PASS Largest error was: 4.81103e-12  real	0m0.303s user	0m0.000s sys	0m0.015s
+Case 741 PASS Largest error was: 6.3014e-15  real	0m0.221s user	0m0.000s sys	0m0.015s
+Case 742 PASS Largest error was: 3.65512e-09  real	0m0.395s user	0m0.015s sys	0m0.000s
+Case 743 PASS Largest error was: 2.34525e-08  real	0m0.247s user	0m0.000s sys	0m0.030s
+Case 744 PASS Largest error was: 1.10567e-07  real	0m0.267s user	0m0.031s sys	0m0.000s
+Case 745 PASS Largest error was: 9.28715e-08  real	0m0.308s user	0m0.000s sys	0m0.015s
+Case 746 PASS Largest error was: 1.48732e-09  real	0m0.275s user	0m0.015s sys	0m0.015s
+Case 747 PASS Largest error was: 9.71886e-12  real	0m0.305s user	0m0.015s sys	0m0.015s
+Case 748 RoadRunner exception occured: This model has problems
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 749 PASS Largest error was: 6.43705e-08  real	0m0.439s user	0m0.000s sys	0m0.015s
+Case 750 PASS Largest error was: 6.52651e-08  real	0m0.718s user	0m0.000s sys	0m0.015s
+Case 751 PASS Largest error was: 7.04915e-09  real	0m0.330s user	0m0.015s sys	0m0.000s
+Case 752 PASS Largest error was: 2.7948e-08  real	0m0.344s user	0m0.015s sys	0m0.000s
+Case 753 PASS Largest error was: 1.55104e-08  real	0m0.925s user	0m0.015s sys	0m0.000s
+Case 754 PASS Largest error was: 4.94559e-09  real	0m0.544s user	0m0.030s sys	0m0.000s
+Case 755 PASS Largest error was: 4.94559e-09  real	0m0.212s user	0m0.000s sys	0m0.015s
+Case 756 PASS Largest error was: 4.94559e-09  real	0m0.295s user	0m0.000s sys	0m0.015s
+Case 757 PASS Largest error was: 2.67237e-08  real	0m0.271s user	0m0.015s sys	0m0.000s
+Case 758 PASS Largest error was: 2.67237e-08  real	0m0.272s user	0m0.015s sys	0m0.000s
+Case 759 PASS Largest error was: 2.66707e-08  real	0m0.292s user	0m0.015s sys	0m0.000s
+Case 760 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.016s
+Case 761 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 762 RoadRunner exception occured: This model is not supported by rr
+real	0m0.034s user	0m0.015s sys	0m0.015s
+Case 763 PASS Largest error was: 1.18781e-08  real	0m0.295s user	0m0.015s sys	0m0.000s
+Case 764 PASS Largest error was: 2.13704e-08  real	0m0.353s user	0m0.015s sys	0m0.015s
+Case 765 PASS Largest error was: 1.05474e-07  real	0m0.302s user	0m0.015s sys	0m0.000s
+Case 766 PASS Largest error was: 3.50852e-11  real	0m0.399s user	0m0.015s sys	0m0.000s
+Case 767 PASS Largest error was: 5.57109e-09  real	0m0.456s user	0m0.000s sys	0m0.015s
+Case 768 PASS Largest error was: 8.91519e-12  real	0m0.412s user	0m0.031s sys	0m0.000s
+Case 769 PASS Largest error was: 6.3965e-08  real	0m0.415s user	0m0.000s sys	0m0.015s
+Case 770 PASS Largest error was: 6.25935e-08  real	0m0.553s user	0m0.015s sys	0m0.015s
+Case 771 PASS Largest error was: 1.26367e-08  real	0m0.265s user	0m0.030s sys	0m0.000s
+Case 772 PASS Largest error was: 1.26367e-08  real	0m0.262s user	0m0.000s sys	0m0.015s
+Case 773 PASS Largest error was: 1.13694e-08  real	0m0.290s user	0m0.031s sys	0m0.000s
+Case 774 PASS Largest error was: 9.04945e-08  real	0m0.542s user	0m0.030s sys	0m0.000s
+Case 775 PASS Largest error was: 5.8272e-10  real	0m0.291s user	0m0.000s sys	0m0.015s
+Case 776 PASS Largest error was: 1.22996e-07  real	0m0.308s user	0m0.000s sys	0m0.015s
+Case 777 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.030s sys	0m0.000s
+Case 778 RoadRunner exception occured: This model is not supported by rr
+real	0m0.035s user	0m0.000s sys	0m0.015s
+Case 779 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.016s
+Case 780 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 781 PASS Largest error was: 1.94749e-08  real	0m0.189s user	0m0.000s sys	0m0.015s
+Case 782 PASS Largest error was: 9.13889e-08  real	0m0.227s user	0m0.000s sys	0m0.016s
+Case 783 PASS Largest error was: 8.1642e-09  real	0m0.520s user	0m0.000s sys	0m0.015s
+Case 784 PASS Largest error was: 1.21639e-10  real	0m0.430s user	0m0.000s sys	0m0.015s
+Case 785 PASS Largest error was: 3.00021e-11  real	0m0.339s user	0m0.000s sys	0m0.015s
+Case 786 PASS Largest error was: 7.74297e-10  real	0m0.205s user	0m0.030s sys	0m0.000s
+Case 787 PASS Largest error was: 7.87775e-09  real	0m0.208s user	0m0.000s sys	0m0.015s
+Case 788 PASS Largest error was: 8.13066e-10  real	0m0.482s user	0m0.000s sys	0m0.015s
+Case 789 PASS Largest error was: 2.55331e-08  real	0m0.343s user	0m0.015s sys	0m0.000s
+Case 790 PASS Largest error was: 2.55331e-08  real	0m0.225s user	0m0.015s sys	0m0.000s
+Case 791 PASS Largest error was: 1.83744e-08  real	0m0.258s user	0m0.000s sys	0m0.015s
+Case 792 PASS Largest error was: 1.94749e-08  real	0m0.193s user	0m0.030s sys	0m0.000s
+Case 793 PASS Largest error was: 8.1642e-09  real	0m0.199s user	0m0.015s sys	0m0.000s
+Case 794 PASS Largest error was: 9.13889e-08  real	0m0.190s user	0m0.015s sys	0m0.000s
+Case 795 PASS Largest error was: 9.13889e-08  real	0m0.609s user	0m0.000s sys	0m0.015s
+Case 796 PASS Largest error was: 1.94749e-08  real	0m0.382s user	0m0.015s sys	0m0.015s
+Case 797 PASS Largest error was: 1.7632e-10  real	0m0.284s user	0m0.015s sys	0m0.015s
+Case 798 PASS Largest error was: 2.22503e-12  real	0m0.220s user	0m0.015s sys	0m0.000s
+Case 799 PASS Largest error was: 2.44333e-11  real	0m0.289s user	0m0.015s sys	0m0.000s
+Case 800 PASS Largest error was: 8.74525e-10  real	0m0.652s user	0m0.000s sys	0m0.015s
+Case 801 PASS Largest error was: 1.77636e-15  real	0m0.324s user	0m0.015s sys	0m0.000s
+Case 802 PASS Largest error was: 4.81601e-07  real	0m0.358s user	0m0.000s sys	0m0.015s
+Case 803 PASS Largest error was: 4.82005e-07  real	0m0.324s user	0m0.015s sys	0m0.000s
+Case 804 PASS Largest error was: 2.10977e-09  real	0m0.262s user	0m0.000s sys	0m0.015s
+Case 805 PASS Largest error was: 4.94826e-07  real	0m0.438s user	0m0.015s sys	0m0.015s
+Case 806 PASS Largest error was: 1.21892e-09  real	0m0.230s user	0m0.015s sys	0m0.000s
+Case 807 PASS Largest error was: 7.76486e-10  real	0m0.283s user	0m0.015s sys	0m0.000s
+Case 808 PASS Largest error was: 7.99575e-10  real	0m0.275s user	0m0.015s sys	0m0.015s
+Case 809 PASS Largest error was: 2.87013e-08  real	0m0.326s user	0m0.015s sys	0m0.000s
+Case 810 PASS Largest error was: 1.71692e-09  real	0m0.583s user	0m0.015s sys	0m0.000s
+Case 811 PASS Largest error was: 4.54157e-09  real	0m0.333s user	0m0.000s sys	0m0.015s
+Case 812 PASS Largest error was: 8.25597e-08  real	0m0.299s user	0m0.000s sys	0m0.015s
+Case 813 PASS Largest error was: 2.75378e-08  real	0m0.336s user	0m0.000s sys	0m0.016s
+Case 814 PASS Largest error was: 7.2461e-08  real	0m0.214s user	0m0.000s sys	0m0.015s
+Case 815 PASS Largest error was: 2.27283e-08  real	0m0.523s user	0m0.000s sys	0m0.031s
+Case 816 PASS Largest error was: 1.70425e-09  real	0m0.228s user	0m0.015s sys	0m0.015s
+Case 817 PASS Largest error was: 9.62761e-09  real	0m0.319s user	0m0.030s sys	0m0.000s
+Case 818 PASS Largest error was: 7.11616e-09  real	0m0.229s user	0m0.030s sys	0m0.000s
+Case 819 PASS Largest error was: 1.08709e-08  real	0m0.217s user	0m0.000s sys	0m0.015s
+Case 820 PASS Largest error was: 2.20841e-08  real	0m0.193s user	0m0.015s sys	0m0.000s
+Case 821 PASS Largest error was: 1.16013e-08  real	0m0.206s user	0m0.000s sys	0m0.015s
+Case 822 PASS Largest error was: 2.07763e-09  real	0m0.212s user	0m0.000s sys	0m0.016s
+Case 823 PASS Largest error was: 2.06775e-08  real	0m0.214s user	0m0.000s sys	0m0.015s
+Case 824 PASS Largest error was: 5.34194e-08  real	0m0.208s user	0m0.015s sys	0m0.000s
+Case 825 PASS Largest error was: 2.44205e-09  real	0m0.230s user	0m0.015s sys	0m0.000s
+Case 826 PASS Largest error was: 1.25852e-08  real	0m0.214s user	0m0.015s sys	0m0.000s
+Case 827 PASS Largest error was: 4.58752e-08  real	0m0.205s user	0m0.000s sys	0m0.015s
+Case 828 PASS Largest error was: 2.44205e-09  real	0m0.248s user	0m0.015s sys	0m0.015s
+Case 829 PASS Largest error was: 1.31325e-08  real	0m0.307s user	0m0.015s sys	0m0.000s
+Case 830 PASS Largest error was: 3.18291e-08  real	0m0.474s user	0m0.015s sys	0m0.000s
+Case 831 PASS Largest error was: 2.72932e-08  real	0m0.243s user	0m0.015s sys	0m0.000s
+Case 832 PASS Largest error was: 1.74576e-08  real	0m0.221s user	0m0.030s sys	0m0.000s
+Case 833 PASS Largest error was: 1.69195e-09  real	0m0.240s user	0m0.015s sys	0m0.000s
+Case 834 PASS Largest error was: 8.10061e-09  real	0m0.222s user	0m0.015s sys	0m0.000s
+Case 835 PASS Largest error was: 1.71692e-09  real	0m0.281s user	0m0.000s sys	0m0.015s
+Case 836 PASS Largest error was: 1.70424e-09  real	0m0.233s user	0m0.000s sys	0m0.015s
+Case 837 PASS Largest error was: 1.71692e-09  real	0m0.226s user	0m0.000s sys	0m0.015s
+Case 838 PASS Largest error was: 9.53292e-09  real	0m0.240s user	0m0.000s sys	0m0.031s
+Case 839 PASS Largest error was: 9.53292e-09  real	0m0.230s user	0m0.000s sys	0m0.015s
+Case 840 PASS Largest error was: 4.54156e-09  real	0m0.236s user	0m0.015s sys	0m0.000s
+Case 841 PASS Largest error was: 4.54153e-09  real	0m0.278s user	0m0.000s sys	0m0.015s
+Case 842 PASS Largest error was: 4.54153e-09  real	0m0.420s user	0m0.015s sys	0m0.000s
+Case 843 PASS Largest error was: 4.54153e-09  real	0m0.325s user	0m0.000s sys	0m0.015s
+Case 844 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 845 PASS Largest error was: 4.77141e-08  real	0m0.229s user	0m0.015s sys	0m0.000s
+Case 846 PASS Largest error was: 2.76864e-08  real	0m0.306s user	0m0.015s sys	0m0.015s
+Case 847 PASS Largest error was: 3.00706e-08  real	0m0.326s user	0m0.015s sys	0m0.000s
+Case 848 PASS Largest error was: 2.864e-08  real	0m0.223s user	0m0.015s sys	0m0.000s
+Case 849 PASS Largest error was: 5.19824e-06  real	0m0.445s user	0m0.000s sys	0m0.016s
+Case 850 PASS Largest error was: 1.56061e-08  real	0m0.280s user	0m0.000s sys	0m0.015s
+Case 851 PASS Largest error was: 2.57276e-12  real	0m0.204s user	0m0.000s sys	0m0.000s
+Case 852 PASS Largest error was: 1.15861e-14  real	0m0.281s user	0m0.015s sys	0m0.015s
+Case 853 PASS Largest error was: 4.04801e-09  real	0m0.530s user	0m0.015s sys	0m0.000s
+Case 854 PASS Largest error was: 2.29358e-09  real	0m0.547s user	0m0.000s sys	0m0.015s
+Case 855 PASS Largest error was: 1.26456e-13  real	0m0.323s user	0m0.030s sys	0m0.000s
+Case 856 PASS Largest error was: 1.73084e-11  real	0m0.320s user	0m0.000s sys	0m0.015s
+Case 857 PASS Largest error was: 2.07658e-12  real	0m0.210s user	0m0.000s sys	0m0.046s
+Case 858 PASS Largest error was: 1.81371e-10  real	0m0.297s user	0m0.000s sys	0m0.015s
+Case 859 PASS Largest error was: 1.10726e-07  real	0m0.488s user	0m0.015s sys	0m0.000s
+Case 860 PASS Largest error was: 2.29641e-11  real	0m0.332s user	0m0.015s sys	0m0.015s
+Case 861 PASS Largest error was: 1.12133e-12  real	0m0.344s user	0m0.031s sys	0m0.000s
+Case 862 PASS Largest error was: 1.72828e-11  real	0m0.295s user	0m0.000s sys	0m0.016s
+Case 863 PASS Largest error was: 2.57572e-14  real	0m0.148s user	0m0.031s sys	0m0.000s
+Case 864 PASS Largest error was: 2.70461e-13  real	0m0.250s user	0m0.030s sys	0m0.000s
+Case 865 PASS Largest error was: 8.71194e-11  real	0m0.633s user	0m0.000s sys	0m0.015s
+Case 866 PASS Largest error was: 2.51103e-12  real	0m0.182s user	0m0.000s sys	0m0.015s
+Case 867 PASS Largest error was: 3.20687e-11  real	0m0.449s user	0m0.015s sys	0m0.015s
+Case 868 PASS Largest error was: 1.50904e-08  real	0m0.288s user	0m0.000s sys	0m0.015s
+Case 869 PASS Largest error was: 3.14711e-09  real	0m0.239s user	0m0.000s sys	0m0.000s
+Case 870 RoadRunner exception occured: This model is not supported by rr
+real	0m0.036s user	0m0.000s sys	0m0.015s
+Case 871 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 872 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.000s
+Case 873 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.015s
+Case 874 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 875 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.000s
+Case 876 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 877 PASS Largest error was: 3.52169e-11  real	0m0.193s user	0m0.000s sys	0m0.000s
+Case 878 PASS Largest error was: 3.02397e-10  real	0m0.220s user	0m0.000s sys	0m0.031s
+Case 879 PASS Largest error was: 1.77636e-15  real	0m0.274s user	0m0.015s sys	0m0.000s
+Case 880 PASS Largest error was: 1.89351e-08  real	0m0.243s user	0m0.015s sys	0m0.000s
+Case 881 PASS Largest error was: 3.47589e-08  real	0m0.211s user	0m0.000s sys	0m0.015s
+Case 882 PASS Largest error was: 4.43432e-11  real	0m0.278s user	0m0.015s sys	0m0.015s
+Case 883 PASS Largest error was: 7.04916e-09  real	0m0.223s user	0m0.000s sys	0m0.015s
+Case 884 PASS Largest error was: 1.68052e-07  real	0m0.241s user	0m0.000s sys	0m0.015s
+Case 885 PASS Largest error was: 9.18307e-10  real	0m0.267s user	0m0.015s sys	0m0.015s
+Case 886 PASS Largest error was: 4.95548e-09  real	0m0.264s user	0m0.015s sys	0m0.000s
+Case 887 PASS Largest error was: 0.000387043  real	0m0.243s user	0m0.000s sys	0m0.015s
+Case 888 PASS Largest error was: 3.96054e-08  real	0m0.228s user	0m0.015s sys	0m0.000s
+Case 889 PASS Largest error was: 3.37702e-13  real	0m0.479s user	0m0.015s sys	0m0.000s
+Case 890 PASS Largest error was: 3.34462e-08  real	0m0.364s user	0m0.000s sys	0m0.015s
+Case 891 PASS Largest error was: 2.57276e-12  real	0m0.198s user	0m0.000s sys	0m0.015s
+Case 892 FAIL 87 points failed  real	0m0.205s user	0m0.015s sys	0m0.000s
+Case 893 PASS Largest error was: 5.54223e-13  real	0m0.248s user	0m0.015s sys	0m0.015s
+Case 894 PASS Largest error was: 8.77563e-09  real	0m0.247s user	0m0.000s sys	0m0.015s
+Case 895 PASS Largest error was: 5.55185e-14  real	0m0.865s user	0m0.015s sys	0m0.000s
+Case 896 PASS Largest error was: 4.04801e-09  real	0m0.314s user	0m0.000s sys	0m0.031s
+Case 897 PASS Largest error was: 1.15527e-15  real	0m0.288s user	0m0.015s sys	0m0.000s
+Case 898 PASS Largest error was: 8.54862e-11  real	0m0.232s user	0m0.015s sys	0m0.000s
+Case 899 PASS Largest error was: 4.94077e-13  real	0m0.350s user	0m0.000s sys	0m0.015s
+Case 900 PASS Largest error was: 2.15041e-11  real	0m0.572s user	0m0.015s sys	0m0.000s
+Case 901 PASS Largest error was: 4.82059e-06  real	0m0.170s user	0m0.015s sys	0m0.000s
+Case 902 PASS Largest error was: 4.83405e-07  real	0m0.156s user	0m0.000s sys	0m0.015s
+Case 903 PASS Largest error was: 4.89904e-06  real	0m0.222s user	0m0.000s sys	0m0.015s
+Case 904 PASS Largest error was: 4.78717e-06  real	0m0.165s user	0m0.015s sys	0m0.000s
+Case 905 PASS Largest error was: 4.55954e-10  real	0m0.149s user	0m0.015s sys	0m0.000s
+Case 906 PASS Largest error was: 3.39187e-09  real	0m0.452s user	0m0.000s sys	0m0.015s
+Case 907 PASS Largest error was: 1.97337e-06  real	0m0.391s user	0m0.015s sys	0m0.000s
+Case 908 PASS Largest error was: 4.95156e-06  real	0m0.192s user	0m0.015s sys	0m0.000s
+Case 909 PASS Largest error was: 4.94434e-08  real	0m0.228s user	0m0.015s sys	0m0.000s
+Case 910 PASS Largest error was: 4.94129e-08  real	0m0.171s user	0m0.000s sys	0m0.015s
+Case 911 PASS Largest error was: 4.90412e-06  real	0m0.153s user	0m0.000s sys	0m0.015s
+Case 912 PASS Largest error was: 4.72662e-06  real	0m0.150s user	0m0.000s sys	0m0.015s
+Case 913 PASS Largest error was: 4.70225e-06  real	0m0.257s user	0m0.030s sys	0m0.000s
+Case 914 PASS Largest error was: 4.95629e-06  real	0m0.455s user	0m0.015s sys	0m0.000s
+Case 915 PASS Largest error was: 4.89471e-07  real	0m0.151s user	0m0.000s sys	0m0.015s
+Case 916 PASS Largest error was: 6.75854e-06  real	0m0.156s user	0m0.031s sys	0m0.000s
+Case 917 PASS Largest error was: 4.93123e-05  real	0m0.164s user	0m0.000s sys	0m0.015s
+Case 918 PASS Largest error was: 4.25632e-05  real	0m0.186s user	0m0.000s sys	0m0.015s
+Case 919 PASS Largest error was: 4.89852e-05  real	0m0.163s user	0m0.000s sys	0m0.015s
+Case 920 PASS Largest error was: 1.11022e-16  real	0m0.130s user	0m0.000s sys	0m0.015s
+Case 921 PASS Largest error was: 1.11022e-16  real	0m0.131s user	0m0.015s sys	0m0.000s
+Case 922 PASS Largest error was: 1.11022e-16  real	0m0.298s user	0m0.015s sys	0m0.000s
+Case 923 PASS Largest error was: 1.11022e-16  real	0m0.299s user	0m0.000s sys	0m0.015s
+Case 924 PASS Largest error was: 1.11022e-16  real	0m0.320s user	0m0.000s sys	0m0.016s
+Case 925 PASS Largest error was: 1.11022e-16  real	0m0.132s user	0m0.000s sys	0m0.015s
+Case 926 PASS Largest error was: 2.42698e-07  real	0m0.159s user	0m0.000s sys	0m0.015s
+Case 927 PASS Largest error was: 3.62286e-08  real	0m0.194s user	0m0.015s sys	0m0.000s
+Case 928 PASS Largest error was: 8.88178e-16  real	0m0.289s user	0m0.000s sys	0m0.015s
+Case 929 PASS Largest error was: 8.88178e-16  real	0m0.607s user	0m0.015s sys	0m0.000s
+Case 930 PASS Largest error was: 2.22045e-16  real	0m0.302s user	0m0.000s sys	0m0.015s
+Case 931 FAIL 78 points failed  real	0m0.216s user	0m0.015s sys	0m0.000s
+Case 932 PASS Largest error was: 4.10367e-08  real	0m0.280s user	0m0.000s sys	0m0.015s
+Case 933 PASS Largest error was: 2.37487e-08  real	0m0.231s user	0m0.015s sys	0m0.000s
+Case 934 FAIL 52 points failed  real	0m0.166s user	0m0.015s sys	0m0.000s
+Case 935 PASS Largest error was: 2.22045e-16  real	0m0.360s user	0m0.000s sys	0m0.015s
+Case 936 FAIL 194 points failed  real	0m0.201s user	0m0.015s sys	0m0.015s
+Case 937 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.000s sys	0m0.016s
+Case 938 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 939 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.000s sys	0m0.015s
+Case 940 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 941 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 942 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.015s sys	0m0.000s
+Case 943 RoadRunner exception occured: This model is not supported by rr
+real	0m0.033s user	0m0.000s sys	0m0.015s
+Case 944 PASS Largest error was: 4.13842e-07  real	0m0.253s user	0m0.000s sys	0m0.016s
+Case 945 FAIL 130 points failed  real	0m0.239s user	0m0.000s sys	0m0.015s
+Case 946 PASS Largest error was: 3.74709e-06  real	0m0.289s user	0m0.000s sys	0m0.015s
+Case 947 FAIL 130 points failed  real	0m0.718s user	0m0.000s sys	0m0.015s
+Case 948 PASS Largest error was: 3.75009e-07  real	0m0.737s user	0m0.031s sys	0m0.000s
+Case 949 PASS Largest error was: 1.11022e-16  real	0m0.218s user	0m0.000s sys	0m0.015s
+Case 950  real	0m0.041s user	0m0.000s sys	0m0.015s
+Case 951 PASS Largest error was: +INF  real	0m0.627s user	0m0.000s sys	0m0.015s
+Case 952 PASS Largest error was: 4.99502e-09  real	0m4.176s user	0m0.000s sys	0m0.015s
+Case 953 PASS Largest error was: 4.99502e-09  real	0m3.921s user	0m0.000s sys	0m0.015s
+Case 954 PASS Largest error was: 4.76828e-10  real	0m0.303s user	0m0.000s sys	0m0.015s
+Case 955 FAIL 1 points failed  real	0m0.301s user	0m0.015s sys	0m0.000s
+Case 956 PASS Largest error was: 4.76828e-10  real	0m0.305s user	0m0.000s sys	0m0.015s
+Case 957  real	0m0.158s user	0m0.000s sys	0m0.015s
+Case 958  real	0m0.179s user	0m0.000s sys	0m0.015s
+Case 959 FAIL 171 points failed  real	0m0.380s user	0m0.000s sys	0m0.015s
+Case 960 PASS Largest error was: 1.28221e+08  real	0m0.166s user	0m0.000s sys	0m0.015s
+Case 961 RoadRunner exception occured: This model has problems
+real	0m0.032s user	0m0.031s sys	0m0.000s
+Case 962 FAIL 11 points failed  real	0m4.538s user	0m0.015s sys	0m0.015s
+Case 963 FAIL 1999 points failed  real	0m0.866s user	0m0.000s sys	0m0.015s
+Case 964 PASS Largest error was: 4.99502e-09  real	0m4.546s user	0m0.000s sys	0m0.015s
+Case 965 PASS Largest error was: 4.99502e-09  real	0m4.832s user	0m0.015s sys	0m0.000s
+Case 966 RoadRunner exception occured: This model has problems
+real	0m0.032s user	0m0.015s sys	0m0.015s
+Case 967 FAIL 202 points failed  real	0m0.560s user	0m0.000s sys	0m0.015s
+Case 968 PASS Largest error was: 1.42109e-14  real	0m0.170s user	0m0.015s sys	0m0.000s
+Case 969 PASS Largest error was: 1.42109e-14  real	0m0.235s user	0m0.015s sys	0m0.000s
+Case 970 PASS Largest error was: 1.42109e-14  real	0m0.161s user	0m0.000s sys	0m0.030s
+Case 971 PASS Largest error was: 1.42109e-14  real	0m0.149s user	0m0.000s sys	0m0.015s
+Case 972 PASS Largest error was: 5.32907e-15  real	0m0.166s user	0m0.015s sys	0m0.000s
+Case 973 PASS Largest error was: 4.44089e-14  real	0m0.175s user	0m0.000s sys	0m0.015s
+Case 974 PASS Largest error was: 5.32907e-15  real	0m0.161s user	0m0.015s sys	0m0.015s
+Case 975 PASS Largest error was: 4.95487e-10  real	0m0.264s user	0m0.015s sys	0m0.015s
+Case 976 PASS Largest error was: 4.94469e-10  real	0m0.361s user	0m0.015s sys	0m0.000s
+Case 977 PASS Largest error was: 5.00315e-10  real	0m0.324s user	0m0.030s sys	0m0.000s
+Case 978 RoadRunner exception occured: This model is not supported by rr
+real	0m0.032s user	0m0.015s sys	0m0.000s
+Case 979 PASS Largest error was: 2.22045e-16  real	0m0.222s user	0m0.015s sys	0m0.000s
+Case 980 PASS Largest error was: 2.22045e-16  real	0m0.219s user	0m0.000s sys	0m0.015s
