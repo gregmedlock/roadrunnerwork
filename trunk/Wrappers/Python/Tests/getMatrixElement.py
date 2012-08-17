@@ -3,12 +3,14 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getAvailableSymbols'
+function = 'getMatrixElement'
 rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
+rrPython.simulate()
+
 
 try:
-    syms = rrPython.getAvailableSymbols()
-    if str(syms) is not False:
+    element = rrPython.getMatrixElement(1,1,1)
+    if str(element) is not False:
         result = 'True'
     else:
         result = 'False'

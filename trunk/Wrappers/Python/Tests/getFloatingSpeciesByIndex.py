@@ -3,12 +3,14 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getAvailableSymbols'
+function = 'getFloatingSpeciesByIndex'
 rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
+index = 1
+
 try:
-    syms = rrPython.getAvailableSymbols()
-    if str(syms) is not False:
+    specs = rrPython.getFloatingSpeciesByIndex(index)
+    if str(specs) is not False:
         result = 'True'
     else:
         result = 'False'
