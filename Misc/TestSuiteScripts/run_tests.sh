@@ -9,8 +9,8 @@ reportFolder="/cygdrive/r/roadrunnerwork/Misc/TestSuiteReports"
 tempFolder="/cygdrive/r/RRTesting"
 dataOutputRoot=$tempFolder"/DataOutput/"$compiler
 logFile=$tempFolder/"testLog_$compiler.txt"
-logTable=$reportFolder"/logTable_$compiler.txt"
-failed=$reportFolder"/failedTests_$compiler.txt"
+logTable=$reportFolder"/logTable_$compiler.csv"
+failed=$reportFolder"/failedTests_$compiler.csv"
 binFolder="/cygdrive/r/rrInstalls/"$compiler"/bin/"
 simulator=$binFolder"/rr_ts_tester.exe"
 zipper="/cygdrive/r/roadrunnerwork/Misc/zipper/7za.exe"
@@ -33,9 +33,10 @@ echo
 for ((i=$start; i<=$end; i++ ));
 do
 	echo "Running $i" ;
-	echo "Case "$i >> $logFile;
+	echo "Case_"$i >> $logFile;
     winPath=`cygpath -w $dataOutputRoot`
-    (time $simulator -m$ModelsDir -n$i -d$winPath -vError) >> $logFile 2>&1 
+    #(time $simulator -m$ModelsDir -n$i -d$winPath -vError) >> $logFile 2>&1 
+    $simulator -m$ModelsDir -n$i -d$winPath -vError >> $logFile  
 #    sleep .0015
     echo "Done" >> $logFile #This is used as a separator for the make_table app
 done
@@ -44,12 +45,12 @@ echo "Waiting for background jobs to finish..."
 wait
 
 ##Create a table for the result
-echo "Making result table: $logTable"
+echo "Making result csv table: $logTable"
 
-make_table -f`cygpath -w $logFile` -w"Done" > $logTable 
+make_table -c -f`cygpath -w $logFile` -w"Done" > $logTable 
 
 #filter failed ones
-cat $logTable | grep "FAIL" > $failed
+cat $logTable | grep "FAIL," > $failed
 
 cd $tempFolder
 #echo "Current folder is"`pwd`

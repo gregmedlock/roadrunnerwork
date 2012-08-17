@@ -101,13 +101,13 @@ int main(int argc, char * argv[])
         if(std::find(exceptions.begin(), exceptions.end(), paras.CaseNumber) != exceptions.end())
         {
             //Don't simulate this one..
-            throw(rr::Exception("This model has problems"));
+            throw(rr::Exception("KNOWN_PROBLEM"));
         }
 
          if(std::find(cant_simulate.begin(), cant_simulate.end(), paras.CaseNumber) != cant_simulate.end())
         {
             //Don't simulate this one..
-            throw(rr::Exception("This model is not supported by rr"));
+            throw(rr::Exception("NOT_SUPPORTED"));
         }
 
         gLog.SetCutOffLogLevel(paras.CurrentLogLevel);
@@ -187,20 +187,30 @@ int main(int argc, char * argv[])
         //Check error data.. if an error in the set is larger than threshold, signal an error
         if(!simulation.Pass())
         {
-            Log(lError)<<"FAIL "<<simulation.NrOfFailingPoints()<<" points failed";
+            Log(lError)<<"FAIL "<<"FAILING_POINTS "<<simulation.NrOfFailingPoints()<<" LARGEST_ERROR "<<simulation.LargestError()<<" SUPPORTED TRUE"<<" EXCEPTION_MSG NONE";
         }
         else
         {
-            Log(lError)<<"PASS Largest error was: "<<simulation.LargestError();
+            Log(lError)<<"PASS "<<"FAILING_POINTS "<<simulation.NrOfFailingPoints()<<" LARGEST_ERROR "<<simulation.LargestError()<<" SUPPORTED TRUE"<<" EXCEPTION_MSG NONE";
         }
 
         simulation.SaveAllData();
         simulation.SaveModelAsXML(dataOutputFolder);
-
      }
     catch(rr::Exception& ex)
     {
-        Log(lError)<<"RoadRunner exception occured: "<<ex.what();
+        string error = ex.what();
+
+        if(error.find("NOT_SUPPORTED") != string::npos)
+        {
+            Log(lError)<<"FAIL "<<"FAILING_POINTS "<<0<<" LARGEST_ERROR "<<1<<" SUPPORTED FALSE"<<" EXCEPTION_MSG "<<ex.what();
+        }
+
+        if(error.find("KNOWN_PROBLEM") != string::npos)
+        {
+            Log(lError)<<"FAIL "<<"FAILING_POINTS "<<0<<" LARGEST_ERROR "<<1<<" SUPPORTED TRUE"<<" EXCEPTION_MSG "<<ex.what();
+        }
+
     }
 
     end:
