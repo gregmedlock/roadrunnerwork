@@ -79,10 +79,10 @@ int main(int argc, char * argv[])
     for(int i = 0; i< exclude.size(); i++)
     {
         string nr = exclude[i];
-        int i = ToInt(nr);
-        if(i > 0)
+        int j = ToInt(nr);
+        if(j > 0)
         {
-            cant_simulate.push_back(i);
+            cant_simulate.push_back(j);
         }
         else
         {
@@ -111,7 +111,7 @@ int main(int argc, char * argv[])
         }
 
         gLog.SetCutOffLogLevel(paras.CurrentLogLevel);
-        string dataOutputFolder("R:\\DataOutput");
+        string dataOutputFolder(paras.DataOutputFolder);
         string dummy;
         string logFileName;
 
@@ -126,9 +126,9 @@ int main(int argc, char * argv[])
         }
 
         gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
-        Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
+        Log(lDebug)<<"Logs are going to "<<gLog.GetLogFileName();
 
-        Log(lShowAlways)<<"Current Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+        Log(lDebug)<<"Current Log level is:" <<LogLevelToString(gLog.GetLogLevel());
         TestSuiteModelSimulation simulation(dataOutputFolder);
 
         //dataOutputFolder += dummy;
@@ -187,11 +187,11 @@ int main(int argc, char * argv[])
         //Check error data.. if an error in the set is larger than threshold, signal an error
         if(simulation.GetSimulationError() > paras.ErrorThreshold)
         {
-            Log(lError)<<"********** Error was "<<simulation.GetSimulationError()<<"<< which is larger than "<<paras.ErrorThreshold;
+            Log(lError)<<"FAIL Error: "<<simulation.GetSimulationError();
         }
         else
         {
-            Log(lError)<<"Passed Test: "<<paras.CaseNumber<<" Largest error was: "<<simulation.GetSimulationError();
+            Log(lError)<<"PASSED Error: "<<simulation.GetSimulationError();
         }
 
         simulation.SaveAllData();
@@ -203,7 +203,7 @@ int main(int argc, char * argv[])
         Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
     }
 
-    end:    //I have not used a label in 15 years!
+    end:
     delete rrI;
     Log(lInfo)<<"Done";
     if(paras.Pause)

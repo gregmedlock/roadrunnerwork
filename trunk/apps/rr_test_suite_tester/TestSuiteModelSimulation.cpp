@@ -43,7 +43,7 @@ bool TestSuiteModelSimulation::CopyFilesToOutputFolder()
 
     string fName = ExtractFileName(mModelSettingsFileName);
     fName = JoinPath(mDataOutputFolder, fName);
-    CopyFileA(mModelSettingsFileName.c_str(), fName.c_str(), false);
+	return CopyFileA(mModelSettingsFileName.c_str(), fName.c_str(), false) == TRUE ? true : false;
 }
 
 bool TestSuiteModelSimulation::LoadSettings(const string& settingsFName)
