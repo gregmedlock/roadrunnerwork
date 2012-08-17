@@ -3,12 +3,12 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getAvailableSymbols'
+function = 'computeSteadyStateValues'
 rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
 try:
-    syms = rrPython.getAvailableSymbols()
-    if str(syms) is not False:
+    vals = rrPython.computeSteadyStateValues()
+    if str(vals) is not False:
         result = 'True'
     else:
         result = 'False'

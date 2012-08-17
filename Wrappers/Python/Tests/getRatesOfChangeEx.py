@@ -3,12 +3,15 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getAvailableSymbols'
+function = 'getRatesOfChangeEx'
 rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
+rrPython.simulate()
+
+SpeciesArray = [1.0,.9,.8,.6]
 
 try:
-    syms = rrPython.getAvailableSymbols()
-    if str(syms) is not False:
+    rates = rrPython.getRatesOfChangeEx(SpeciesArray)
+    if str(rates) is not False:
         result = 'True'
     else:
         result = 'False'

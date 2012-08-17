@@ -3,12 +3,14 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getAvailableSymbols'
+function = 'setBoundarySpeciesByIndex'
 rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
+index = 1
+value = 1.0
 try:
-    syms = rrPython.getAvailableSymbols()
-    if str(syms) is not False:
+    specs = rrPython.setBoundarySpeciesByIndex(index, value)
+    if str(specs) is not False:
         result = 'True'
     else:
         result = 'False'

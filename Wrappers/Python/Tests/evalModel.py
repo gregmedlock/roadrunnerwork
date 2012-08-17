@@ -3,12 +3,12 @@ import os
 import csv
 os.chdir('C:\\RoadRunner\\bin')
 
-function = 'getAvailableSymbols'
+function = 'evalModel'
 rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
 try:
-    syms = rrPython.getAvailableSymbols()
-    if str(syms) is not False:
+    evaluate = rrPython.evalModel()
+    if str(evaluate) is not False:
         result = 'True'
     else:
         result = 'False'
