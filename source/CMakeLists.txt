@@ -182,14 +182,14 @@ if(INSTALL_STATIC_LIB)
 endif()
 
 #=== Shared target
-    install (   FILES ${linkLibrary}	
-                DESTINATION lib 
-                COMPONENT rr_core)
-
-    install (   FILES ${sharedLibrary}	
-                DESTINATION bin 
-                COMPONENT rr_core)
-
+#    install (   FILES ${linkLibrary}	
+#                DESTINATION lib 
+#                COMPONENT rr_core)
+#
+#    install (   FILES ${sharedLibrary}	
+#                DESTINATION bin 
+#                COMPONENT rr_core)
+#
 
 
 #=== HEADERS

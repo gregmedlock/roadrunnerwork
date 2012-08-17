@@ -17,4 +17,10 @@ target_link_libraries (${target} libsbml)
 
 set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
 
-install (TARGETS ${target} 		DESTINATION bin COMPONENT apps)
+install (TARGETS ${target} 		
+        DESTINATION bin 
+        COMPONENT apps)
+
+install (   FILES rrExcludedTestCases.txt	
+            DESTINATION bin 
+            COMPONENT apps)

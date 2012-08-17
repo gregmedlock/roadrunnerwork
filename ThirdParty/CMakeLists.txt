@@ -114,6 +114,10 @@ install (FILES
             COMPONENT rr_core)
 endforeach()
 endif()
+install (FILES 
+            ${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib/libxml2_xe.lib 
+            DESTINATION lib 
+            COMPONENT rr_core)
 
 #=== TCC ==================================================
 FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/*.*)
