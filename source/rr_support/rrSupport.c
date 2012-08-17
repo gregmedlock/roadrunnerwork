@@ -151,7 +151,7 @@ double spf_and(int nrOfArguments, ...)
     int i;
     va_list listPointer;
 
-    printf( "Number of args in spf_and: %d", nrOfArguments );
+/*    printf( "Number of args in spf_and: %d", nrOfArguments );*/
 
     // make listPointer point to the first argument in the list
     va_start(listPointer, nrOfArguments);
@@ -162,7 +162,7 @@ double spf_and(int nrOfArguments, ...)
         // it from the va_list.
         double arg = va_arg(listPointer, double);
 
-        printf( "The %dth arg is %f\n", i, arg );
+/*        printf( "The %dth arg is %f\n", i, arg );*/
         if(arg == 0.0)
         {
             result = 0.0;

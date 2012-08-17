@@ -18,7 +18,7 @@ TestSuiteModelSimulation::TestSuiteModelSimulation(const string& dataOutputFolde
 :
 SBMLModelSimulation(dataOutputFolder, dataOutputFolder),
 mCurrentCaseNumber(-1),
-mSimulationError(0)            //No error if not calculated..
+mNrOfFailingPoints(0)
 {
     //make sure the output folder exists..
     mResultData.SetName("ResultData");
@@ -97,19 +97,33 @@ bool TestSuiteModelSimulation::LoadReferenceData()
     return true;
 }
 
+bool TestSuiteModelSimulation::Pass()
+{
+    return mNrOfFailingPoints > 0 ? false : true;
+}
+
+int TestSuiteModelSimulation::NrOfFailingPoints()
+{
+    return mNrOfFailingPoints;
+}
+
+double TestSuiteModelSimulation::LargestError()
+{
+    return mLargestError;
+}
+
 bool TestSuiteModelSimulation::CreateErrorData()
 {
-
     mResultData = GetResult();
     //Check that result data and reference data has the same dimensions
     if(mResultData.GetNrOfCols() != mReferenceData.GetNrOfCols() || mResultData.GetNrOfRows() != mReferenceData.GetNrOfRows())
     {
+        mNrOfFailingPoints = mResultData.GetNrOfRows();
         return false;
     }
 
     mErrorData.Allocate(mResultData.GetNrOfRows(), mResultData.GetNrOfCols());
-
-
+    mLargestError = 0;
     for(int row = 0; row < mResultData.GetNrOfRows(); row++)
     {
         for(int col = 0; col < mResultData.GetNrOfCols(); col++)
@@ -117,9 +131,14 @@ bool TestSuiteModelSimulation::CreateErrorData()
             double error = fabsl(mResultData(row, col) - mReferenceData(row,col));
             mErrorData(row, col) = error;
 
-            if(error > mSimulationError)
+            if(error > mSettings.mAbsolute + mSettings.mRelative*fabs(mReferenceData(row,col)))
             {
-                mSimulationError = error;
+                mNrOfFailingPoints++;;
+            }
+
+            if(error > mLargestError)
+            {
+                mLargestError = error;
             }
         }
     }
@@ -235,10 +254,6 @@ string TestSuiteModelSimulation::GetReferenceDataFileNameForCase(int caseNr)
     name<<setfill('0')<<setw(5)<<caseNr<<"-results.csv";
     return name.str();
 
-}
-double TestSuiteModelSimulation::GetSimulationError()
-{
-    return mSimulationError;
 }
 
 } //end of namespace

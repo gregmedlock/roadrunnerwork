@@ -101,13 +101,13 @@ int main(int argc, char * argv[])
         if(std::find(exceptions.begin(), exceptions.end(), paras.CaseNumber) != exceptions.end())
         {
             //Don't simulate this one..
-            throw(rr::Exception("This model has problems.. excluded"));
+            throw(rr::Exception("This model has problems"));
         }
 
          if(std::find(cant_simulate.begin(), cant_simulate.end(), paras.CaseNumber) != cant_simulate.end())
         {
             //Don't simulate this one..
-            throw(rr::Exception("This model is not suppoprted by rr... excluded"));
+            throw(rr::Exception("This model is not supported by rr"));
         }
 
         gLog.SetCutOffLogLevel(paras.CurrentLogLevel);
@@ -185,13 +185,13 @@ int main(int argc, char * argv[])
         simulation.CreateErrorData();
 
         //Check error data.. if an error in the set is larger than threshold, signal an error
-        if(simulation.GetSimulationError() > paras.ErrorThreshold)
+        if(!simulation.Pass())
         {
-            Log(lError)<<"FAIL Error: "<<simulation.GetSimulationError();
+            Log(lError)<<"FAIL "<<simulation.NrOfFailingPoints()<<" points failed";
         }
         else
         {
-            Log(lError)<<"PASSED Error: "<<simulation.GetSimulationError();
+            Log(lError)<<"PASS Largest error was: "<<simulation.LargestError();
         }
 
         simulation.SaveAllData();
@@ -200,7 +200,7 @@ int main(int argc, char * argv[])
      }
     catch(rr::Exception& ex)
     {
-        Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
+        Log(lError)<<"RoadRunner exception occured: "<<ex.what();
     }
 
     end:
