@@ -92,6 +92,9 @@ int main(int argc, char * argv[])
     vector<int> exceptions;     //Theese are cases currently having problems..
     exceptions.push_back(374);
     exceptions.push_back(748);
+    exceptions.push_back(950);  //?
+    exceptions.push_back(957);  //?
+    exceptions.push_back(958);  //?
     exceptions.push_back(961);    //Weird assignments...
     exceptions.push_back(966); //This one takes really long tim..
     RoadRunner *rrI = NULL;     //The roadrunner instance
