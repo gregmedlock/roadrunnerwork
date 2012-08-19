@@ -4,6 +4,8 @@
 #pragma hdrstop
 #include <iomanip>
 #include "rrLogger.h"
+#include "rrUtils.h"
+#include "rrStringUtils.h"
 #include "rrSimulationData.h"
 //---------------------------------------------------------------------------
 using namespace std;
@@ -113,9 +115,35 @@ bool SimulationData::Check() const
     return true;
 }
 
-bool SimulationData::Load(const string& fileName)
+bool SimulationData::Load(const string& fName)
 {
-    return false;
+    if(!FileExists(fName))
+    {
+        return false;
+    }
+
+    vector<string> lines = GetLinesInFile(fName.c_str());
+    if(!lines.size())
+    {
+        Log(lError)<<"Failed reading/opening file "<<fName;
+        return false;
+    }
+
+    mColumnNames = StringList(lines[0]);
+    Log(lInfo)<<mColumnNames;
+
+    mTheData.resize(lines.size() -1, mColumnNames.Count());
+
+    for(int i = 0; i < mTheData.RSize(); i++)
+    {
+        StringList aLine(lines[i+1]);
+        for(int j = 0; j < aLine.Count(); j++)
+        {
+            mTheData(i,j) = ToDouble(aLine[j]);
+        }
+    }
+
+    return true;
 }
 
 bool SimulationData::WriteTo(const string& fileName)

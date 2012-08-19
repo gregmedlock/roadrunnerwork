@@ -339,11 +339,15 @@ object MForm: TMForm
       Top = 465
       Width = 1007
       Height = 250
-      ActivePage = TabSheet3
+      ActivePage = TabSheet1
       Align = alBottom
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'Log'
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Panel3: TPanel
           Left = 0
           Top = 0
@@ -395,6 +399,10 @@ object MForm: TMForm
       object TabSheet2: TTabSheet
         Caption = 'Settings'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object CompilerRG: TRadioGroup
           Left = 3
           Top = 16
@@ -420,6 +428,10 @@ object MForm: TMForm
       object TabSheet3: TTabSheet
         Caption = 'Test Suite'
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Button2: TButton
           Left = 408
           Top = 112
@@ -438,11 +450,15 @@ object MForm: TMForm
           TabOrder = 1
           object TabSheet4: TTabSheet
             Caption = 'General'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object testSuitePic: TImage
               Left = 676
-              Top = 0
+              Top = 29
               Width = 315
-              Height = 194
+              Height = 165
               Align = alClient
               IncrementalDisplay = True
               Picture.Data = {
@@ -1337,21 +1353,23 @@ object MForm: TMForm
                 8A0028A28A0028A28A0028A28A0028A28A0028A28A0028A28A00FFD9}
               Stretch = True
               ExplicitLeft = 608
+              ExplicitTop = 0
               ExplicitWidth = 383
+              ExplicitHeight = 194
             end
             object Splitter1: TSplitter
               Left = 673
-              Top = 0
-              Height = 194
+              Top = 29
+              Height = 165
               ExplicitLeft = 560
               ExplicitTop = 40
               ExplicitHeight = 100
             end
             object GroupBox4: TGroupBox
               Left = 0
-              Top = 0
+              Top = 29
               Width = 673
-              Height = 194
+              Height = 165
               Align = alLeft
               Caption = 'Model Info'
               TabOrder = 0
@@ -1359,22 +1377,40 @@ object MForm: TMForm
                 Left = 2
                 Top = 15
                 Width = 669
-                Height = 177
+                Height = 148
                 Align = alClient
                 TabOrder = 0
                 ExplicitWidth = 524
+                ExplicitHeight = 177
                 ControlData = {
-                  4C000000254500004B1200000000000000000000000000000000000000000000
+                  4C000000254500004C0F00000000000000000000000000000000000000000000
                   000000004C000000000000000000000001000000E0D057007335CF11AE690800
                   2B2E126208000000000000004C0000000114020000000000C000000000000046
                   8000000000000000000000000000000000000000000000000000000000000000
                   00000000000000000100000000000000000000000000000000000000}
               end
             end
+            object ToolBar2: TToolBar
+              Left = 0
+              Top = 0
+              Width = 991
+              Height = 29
+              Caption = 'ToolBar2'
+              TabOrder = 1
+              object ToolButton4: TToolButton
+                Left = 0
+                Top = 0
+                Action = PlotTestTestSuiteData
+              end
+            end
           end
           object TabSheet5: TTabSheet
             Caption = 'TabSheet5'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
           end
         end
       end
@@ -1491,6 +1527,14 @@ object MForm: TMForm
     Top = 80
     object Remove1: TMenuItem
       Action = RemoveCurrentModelFolderItemA
+    end
+  end
+  object TestSuiteActions: TActionList
+    Left = 432
+    Top = 512
+    object PlotTestTestSuiteData: TAction
+      Caption = 'PlotTestTestSuiteData'
+      OnExecute = PlotTestTestSuiteDataExecute
     end
   end
 end

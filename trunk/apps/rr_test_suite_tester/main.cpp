@@ -89,14 +89,15 @@ int main(int argc, char * argv[])
             Log(lError)<<"Bad line in file "<<excludedCases;
         }
     }
-    vector<int> exceptions;     //Theese are cases currently having problems..
-    exceptions.push_back(374);
-    exceptions.push_back(748);
-    exceptions.push_back(950);  //?
-    exceptions.push_back(957);  //?
-    exceptions.push_back(958);  //?
-    exceptions.push_back(961);    //Weird assignments...
-    exceptions.push_back(966); //This one takes really long tim..
+    //The followoing are cases currently having problems. Some do in fact pass the test, but takes very long to run
+    vector<int> exceptions;
+//    exceptions.push_back(374);  //
+//    exceptions.push_back(748);  // Do pass but takes long to run
+//    exceptions.push_back(950);  //?
+//    exceptions.push_back(957);  //?
+//    exceptions.push_back(958);  //?
+//    exceptions.push_back(961);    //Weird assignments...
+//    exceptions.push_back(966); //This one takes really long tim..
     RoadRunner *rrI = NULL;     //The roadrunner instance
 
     try
@@ -175,7 +176,7 @@ int main(int argc, char * argv[])
         }
 
         //Write result
-        if(!simulation.SaveResult())
+         if(!simulation.SaveResult())
         {
             //Failed to save data
         }

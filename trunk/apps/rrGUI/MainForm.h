@@ -120,6 +120,10 @@ __published:	// IDE-managed Components
     TPopupMenu *DropBoxPopup;
     TAction *RemoveCurrentModelFolderItemA;
     TMenuItem *Remove1;
+    TToolBar *ToolBar2;
+    TToolButton *ToolButton4;
+    TActionList *TestSuiteActions;
+    TAction *PlotTestTestSuiteData;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -144,6 +148,7 @@ __published:	// IDE-managed Components
     void __fastcall RemoveCurrentModelFolderItemAExecute(TObject *Sender);
     void __fastcall modelFoldersCBContextPopup(TObject *Sender, TPoint &MousePos,
           bool &Handled);
+    void __fastcall PlotTestTestSuiteDataExecute(TObject *Sender);
 
 private:	// User declarations
     mtkIniParameters            mGeneralParas;
