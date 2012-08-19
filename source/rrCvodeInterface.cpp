@@ -25,13 +25,14 @@ namespace rr
 vector<double> BuildEvalArgument(ModelFromC* model);
 
 //Static stuff...
-double      CvodeInterface::lastTimeValue = 0;
-int         CvodeInterface::mOneStepCount = 0;
+//double      CvodeInterface::lastTimeValue = 0;
+//int         CvodeInterface::mOneStepCount = 0;
 int         CvodeInterface::mCount = 0;
 int         CvodeInterface::mRootCount = 0;
 int         CvodeInterface::errorFileCounter = 0;
 string      CvodeInterface::tempPathstring = "c:\\";
 ModelFromC* CvodeInterface::model = NULL;
+
 // -------------------------------------------------------------------------
 // Constructor
 // Model contains all the symbol tables associated with the model
@@ -45,7 +46,7 @@ CvodeInterface::CvodeInterface(RoadRunner* rr, ModelFromC *aModel)
 defaultReltol(1E-15),
 defaultAbsTol(1E-20),
 defaultMaxNumSteps(10000),
-//gdata(NULL),
+gdata(NULL),
 _amounts(NULL),
 cvodeLogFile("cvodeLogFile"),
 followEvents(true),
@@ -188,7 +189,8 @@ void EventFcn(double time, cvode_precision* y, cvode_precision* gdot, void* fdat
         gdot[i] = model->eventTests[i];
     }
 
-    Log(lDebug5)<<"Rootfunction Out: t="<<time<<" ("<< CvodeInterface::mRootCount <<"): ";
+    Log(lDebug3)<<"S1 Value"<<model->amounts[0];
+    Log(lDebug3)<<"Rootfunction Out: t="<<time<<" ("<< CvodeInterface::mRootCount <<"): ";
     for (int i = 0; i < *model->eventTestsSize; i++)
     {
         Log(lDebug3)<<ToString(model->eventTests[i])<<" p="<<model->previousEventStatusArray[i]<<" c="<<ToString(model->eventStatusArray[i])<<", ";
@@ -684,12 +686,14 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
 
             if (nResult == CV_ROOT_RETURN && followEvents)
             {
-                Log(lDebug3)<<("---------------------------------------------------");
-                Log(lDebug3)<<"--- E V E N T      ( " << mOneStepCount << " ) ";
-                Log(lDebug3)<<("---------------------------------------------------");
+                Log(lDebug1)<<("---------------------------------------------------");
+                Log(lDebug1)<<"--- E V E N T      ( " << mOneStepCount << " ) ";
+                Log(lDebug1)<<("---------------------------------------------------");
 
-                //bool tooCloseToStart = Math.Abs(timeEnd - timeStart) > absTol;
+//                bool tooCloseToStart = Math.Abs(timeEnd - timeStart) > absTol;
+//                bool tooCloseToStart = fabsl(timeEnd - timeStart) > absTol;
                 bool tooCloseToStart = fabs(timeEnd - lastEvent) > relTol;
+
                 strikes = (tooCloseToStart) ? 3 : strikes--;
 
                 if (tooCloseToStart || strikes > 0)
@@ -738,6 +742,112 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
     }
 }
 
+////        public double OneStep(double timeStart, double hstep)
+////        {
+////#if (PRINT_DEBUG)
+////                    System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+////                    System.Diagnostics.Debug.WriteLine("--- O N E     S T E P      ( " + nOneStepCount + " ) ");
+////                    System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+////#endif
+////            nOneStepCount++;
+////            nCount = 0;
+////
+////            double timeEnd = 0.0;
+////            double tout = timeStart + hstep;
+////            int strikes = 3;
+////            try
+////            {
+////                // here we stop for a too small timestep ... this seems troublesome to me ...
+////                while (tout - timeEnd > 1E-16)
+////                {
+////                    if (hstep < 1E-16) return tout;
+////
+////                    // here we bail in case we have no ODEs set up with CVODE ... though we should
+////                    // still at least evaluate the model function
+////                    if (!HaveVariables && model.getNumEvents == 0)
+////                    {
+////                        model.convertToAmounts();
+////                        model.evalModel(tout, BuildEvalArgument());
+////                        return tout;
+////                    }
+////
+////
+////                    if (lastTimeValue > timeStart)
+////                        reStart(timeStart, model);
+////
+////                    double nextTargetEndTime = tout;
+////                    if (assignmentTimes.Count > 0 && assignmentTimes[0] < nextTargetEndTime)
+////                    {
+////                        nextTargetEndTime = assignmentTimes[0];
+////                        assignmentTimes.RemoveAt(0);
+////                    }
+////
+////                    int nResult = RunCvode(cvodeMem, nextTargetEndTime, _amounts, ref timeEnd); // t = double *
+////
+////                    if (nResult == CV_ROOT_RETURN && followEvents)
+////                    {
+////#if (PRINT_DEBUG)
+////                                System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+////                                System.Diagnostics.Debug.WriteLine("--- E V E N T      ( " + nOneStepCount + " ) ");
+////                                System.Diagnostics.Debug.WriteLine("---------------------------------------------------");
+////#endif
+////
+////                        //bool tooCloseToStart = Math.Abs(timeEnd - timeStart) > absTol;
+////                        bool tooCloseToStart = Math.Abs(timeEnd - lastEvent) > relTol;
+////                        if (tooCloseToStart)
+////                            strikes = 3;
+////                        else
+////                            strikes--;
+////
+////                        if (tooCloseToStart || strikes > 0)
+////                        {
+////                            HandleRootsFound(ref timeEnd, tout);
+////                            reStart(timeEnd, model);
+////                            lastEvent = timeEnd;
+////                        }
+////                    }
+////                    else if (nResult == CV_SUCCESS || !followEvents)
+////                    {
+////                        //model.resetEvents();
+////                        model.time = tout;
+////                        AssignResultsToModel();
+////                    }
+////                    else
+////                    {
+////                        HandleCVODEError(nResult);
+////                    }
+////
+////                    lastTimeValue = timeEnd;
+////
+////                    try
+////                    {
+////                        model.testConstraints();
+////                    }
+////                    catch (Exception e)
+////                    {
+////                        model.Warnings.Add("Constraint Violated at time = " + timeEnd + "\n" +
+////                                                             e.Message);
+////                    }
+////
+////                    AssignPendingEvents(timeEnd, tout);
+////
+////                    if (tout - timeEnd > 1E-16)
+////                        timeStart = timeEnd;
+////                }
+////                return (timeEnd);
+////            }
+////            catch (NullReferenceException ex)
+////            {
+////                throw new SBWApplicationException("Internal error, please reload the model", ex.StackTrace);
+////            }
+////            catch (Exception)
+////            {
+////                InitializeCVODEInterface(model);
+////                throw;
+////            }
+////        }
+
+
 void CvodeInterface::AssignPendingEvents(const double& timeEnd, const double& tout)
 {
     for (int i = assignments.size() - 1; i >= 0; i--)
@@ -763,10 +873,10 @@ void CvodeInterface::AssignPendingEvents(const double& timeEnd, const double& to
     }
 }
 
-vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& handledEvents)
-{
-    return RetestEvents(timeEnd, handledEvents, false);
-}
+//vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& handledEvents)
+//{
+//    return RetestEvents(timeEnd, handledEvents, false);
+//}
 
 vector<int> CvodeInterface::RetestEvents(const double& timeEnd, const vector<int>& handledEvents, vector<int>& removeEvents)
 {
@@ -1042,7 +1152,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
             }
         }
     }
-    vector<int> handled;// = new List<int>();
+    vector<int> handled;
     while (firedEvents.size() > 0)
     {
         SortEventsByPriority(firedEvents);
@@ -1156,6 +1266,7 @@ void CvodeInterface::AssignResultsToModel()
     for (int i = 0; i < numAdditionalRules; i++)
     {
         dTemp[i] = Cvode_GetVector((_generic_N_Vector*) _amounts, i);
+        model->amounts[i] = dTemp[i];
     }
 
     for (int i = 0; i < numIndependentVariables; i++) //
@@ -1256,7 +1367,7 @@ int CvodeInterface::reStart(double timeStart, ModelFromC* model)
 
     return (CVReInit(cvodeMem, timeStart, _amounts, relTol, abstolArray));
 }
-////
+
 ////        double CvodeInterface::getValue(int index)
 ////        {
 ////            return (Cvode_GetVector(_amounts, index + numAdditionalRules));
@@ -1267,14 +1378,31 @@ int CvodeInterface::reStart(double timeStart, ModelFromC* model)
 
 vector<double> BuildEvalArgument(ModelFromC* model)
 {
+//    vector<double> dResult;
+//    dResult = model->GetCurrentValues();
+//    for(int i = 0; i < model->getNumIndependentVariables(); i++)
+//    {
+//        dResult.push_back(model->amounts[i]);
+//    }
+//    Log(lDebug4)<<"Size of dResult in BuildEvalArgument: "<<dResult.size();
+//    return dResult;
     vector<double> dResult;
-    dResult = model->GetCurrentValues();
-    for(int i = 0; i < model->getNumIndependentVariables(); i++)
+    dResult.resize(*model->amountsSize + *model->rateRulesSize);
+
+    vector<double> dCurrentValues = model->GetCurrentValues();
+    for(int i = 0; i < dCurrentValues.size(); i++)
     {
-        dResult.push_back(model->amounts[i]);
+        dResult[i] = dCurrentValues[i];
     }
+
+    for(int i = 0; i < *model->amountsSize; i++)
+    {
+        dResult[i + *model->rateRulesSize] = model->amounts[i];
+    }
+
     Log(lDebug4)<<"Size of dResult in BuildEvalArgument: "<<dResult.size();
     return dResult;
+
 }
 
 ////        internal double[] BuildEvalArgument()

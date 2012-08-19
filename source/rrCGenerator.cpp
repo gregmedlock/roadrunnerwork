@@ -299,9 +299,9 @@ void CGenerator::WriteComputeAllRatesOfChange(CodeBuilder& ignore, const int& nu
        mHeader.AddFunctionExport("void", "computeAllRatesOfChange()");
     mSource<<Append("//Uses the equation: dSd/dt = L0 dSi/dt" + NL());
     mSource<<"void computeAllRatesOfChange()\n{";
-    mSource<<"\n#if defined(DEBUG_C_DLL)\n";
-    mSource.TLine("printf(\"In function computeAllRatesOfChange()\\n\"); ");
-    mSource<<"#endif\n";
+//    mSource<<"\n#if defined(DEBUG_C_DLL)\n";
+//    mSource.TLine("printf(\"In function computeAllRatesOfChange()\\n\"); ");
+//    mSource<<"#endif\n";
 
     mSource<<tab<<"int i;\n";
 //    mSource<<"\n\t//double* dTemp = (double*) malloc( sizeof(double)* (amounts.Length + rateRules.Length) );\n";
@@ -312,7 +312,7 @@ void CGenerator::WriteComputeAllRatesOfChange(CodeBuilder& ignore, const int& nu
         mSource<<Format("\tdTemp[{0}] = {1};{2}", i, mMapRateRule[i], NL());
     }
 
-    mSource<<tab<<"\tfor(i = 0; i < _amountsSize; i++)\n";
+    mSource<<tab<<"for(i = 0; i < _amountsSize; i++)\n";
     mSource<<tab<<"{\n"<<tab<<tab<<"dTemp[i + _rateRulesSize] = _amounts[i];\n\t}";
     mSource<<Append("\n\t//amounts.CopyTo(dTemp, rateRules.Length); " + NL());
 
@@ -827,22 +827,22 @@ string CGenerator::FindSymbol(const string& varName)
       int index = 0;
       if (floatingSpeciesConcentrationList.find(varName, index))
       {
-          return Format("\t\t_y[{0}]", index);
+          return Format("_y[{0}]", index);
       }
       else if (globalParameterList.find(varName, index))
       {
-          return Format("\t\t_gp[{0}]", index);
+          return Format("_gp[{0}]", index);
       }
       else if (boundarySpeciesList.find(varName, index))
       {
-          return Format("\t\t_bc[{0}]", index);
+          return Format("_bc[{0}]", index);
       }
       else if (compartmentList.find(varName, index))
       {
-          return Format("\t\t_c[{0}]", index);
+          return Format("_c[{0}]", index);
       }
       else if (ModifiableSpeciesReferenceList.find(varName, index))
-          return Format("\t\t_sr[{0}]", index);
+          return Format("_sr[{0}]", index);
 
       else
           throw Exception(Format("Unable to locate lefthand side symbol in assignment[{0}]", varName));
@@ -1193,7 +1193,7 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
     {
         for (int i = 0; i < NumAdditionalRates(); i++)
         {
-            mSource<<(string) mMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
+            mSource<<tab<<(string) mMapRateRule[i] << " = oAmounts[" << i << "];" << NL();
         }
         for (int i = 0; i < numFloatingSpecies; i++)
         {
@@ -1202,7 +1202,7 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
         }
     }
 
-    mSource<<Append("\tmTime = timeIn;  // Don't remove" + NL());
+    mSource<<Append("\tmTime = timeIn;" + NL());
     mSource<<Append("\tupdateDependentSpeciesValues(_y);" + NL());
     mSource<<Append("\tcomputeRules(_y);" + NL());
 

@@ -34,7 +34,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         int                         numIndependentVariables;
         N_Vector                    gdata;
         int*                        _rootsFound;
-        N_Vector                    _amounts;         //IntPtr                         _amounts;
+        N_Vector                    _amounts;
         N_Vector                    abstolArray;
         string                      cvodeLogFile;
         void*                       cvodeMem;
@@ -62,9 +62,9 @@ class RR_DECLSPEC CvodeInterface : public rrObject
                                    ~CvodeInterface();
 
         void                        AssignResultsToModel();
-        static int                  mCount;
-        static int                  mRootCount;
-        static int                  mOneStepCount;
+        static int                         mCount;
+        static int                         mRootCount;
+        int                         mOneStepCount;
 
         static ModelFromC          *model;
         RoadRunner				   *mRR;
@@ -81,10 +81,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         double                      relTol;// = defaultReltol;
         double                      absTol;// = defaultAbsTol;
         int                         errCode;
-        static double               lastTimeValue;
-
-
-
+        double                      lastTimeValue;
         void                        TestRootsAtInitialTime();
 
         //public delegate void TCallBackModelFcn(int n, double time, IntPtr y, IntPtr ydot, IntPtr fdata);

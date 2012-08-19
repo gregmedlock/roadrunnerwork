@@ -250,7 +250,6 @@ void __fastcall TMForm::SimulateAExecute(TObject *Sender)
             mRR->setSelectionList(selected);
         }
 
-
         Log(rr::lInfo)<<"Currently selected species: "<<mRR->getSelectionList().AsString();
 
         mRR->setCompiler(GetCompiler());
@@ -301,7 +300,7 @@ void __fastcall TMForm::loadAvailableSymbolsAExecute(TObject *Sender)
             {
                 mStartTimeE->SetNumber(mSettings.mStartTime);
                 mEndTimeE->SetNumber(mSettings.mEndTime);
-                mNrOfSimulationPointsE->SetNumber(mSettings.mSteps);
+                mNrOfSimulationPointsE->SetNumber(mSettings.mSteps + 1);
                 StringList symbols = GetSelectionListFromSettings(mSettings);
                 AddItemsToListBox(symbols);
             }
@@ -372,7 +371,6 @@ void TMForm::Plot(const rr::SimulationData& result)
     {
         TLineSeries* aSeries = new TLineSeries(Chart1);
         aSeries->Title = colNames[i+1].c_str();
-
         aSeries->Color = GetColor(i);
         aSeries->LinePen->Width = 3;
         series.push_back(aSeries);
@@ -390,6 +388,53 @@ void TMForm::Plot(const rr::SimulationData& result)
         }
     }
     Chart1->Update();
+}
+
+void __fastcall TMForm::PlotTestTestSuiteDataExecute(TObject *Sender)
+{
+    //Read the test suite data
+    string file =  FSF->GetSelectedFileInTree();
+    string path =  rr::ExtractFilePath(file);
+    vector<string> dirs = rr::SplitString(path,"\\");
+    string tsDataFile;
+    if(dirs.size())
+    {
+        string caseNr = dirs[dirs.size() -1];
+        tsDataFile = rr::JoinPath(path, (caseNr + "-results.csv"));
+    }
+
+    SimulationData result;
+    if(!result.Load(tsDataFile))
+    {
+        return;
+    }
+
+    //Fill out data for all series
+    int nrOfSeries = result.GetNrOfCols() -1; //First one is time
+    StringList colNames = result.GetColumnNames();
+    vector<TLineSeries*> series;
+    for(int i = 0; i < nrOfSeries; i++)
+    {
+        TLineSeries* aSeries = new TLineSeries(Chart1);
+        aSeries->Title = colNames[i+1].c_str();
+        aSeries->Color = clGray;
+        aSeries->LinePen->Width = 1;
+        series.push_back(aSeries);
+        Chart1->AddSeries(aSeries);
+    }
+
+    for(int j = 0; j < result.GetNrOfRows(); j++)
+    {
+        double xVal = result(j,0);
+
+        for(int i = 0; i < nrOfSeries; i++)
+        {
+            double yData = result(j, i+1);
+            series[i]->AddXY(xVal, yData);
+        }
+    }
+    Chart1->Update();
+
 }
 
 void __fastcall TMForm::ChartEditor2Click(TObject *Sender)
@@ -518,29 +563,26 @@ void __fastcall TMForm::UpdateTestSuiteInfo()
             {
                 vector<string> fContent = GetLinesInFile(aFile);
                 Log(rr::lInfo)<<"Model Settings:\n"<<fContent;
-
             }
         }
         else
         {
             //Disable.....
-
         }
-
     }
 }
 
 void __fastcall TMForm::LogCCodeAExecute(TObject *Sender)
 {
     string cCode;
-    if(mRR && mRR->isModelLoaded())
+    if(mRR)
     {
         cCode = mRR->getCSourceCode();
         vector<string> lines(rr::SplitString(cCode, "\n"));
         for(int i = 0; i < lines.size(); i++)
         {
             string aLine = lines[i];
-            Log(rr::lInfo)<<aLine;
+            Log(rr::lInfo)<<i<<": "<<aLine;
         }
     }
 }
@@ -557,4 +599,6 @@ void __fastcall TMForm::modelFoldersCBContextPopup(TObject *Sender, TPoint &Mous
     DropBoxPopup->Popup(0,0);
 }
 
+
+//---------------------------------------------------------------------------
 
