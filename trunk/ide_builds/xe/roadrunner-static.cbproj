@@ -29,7 +29,7 @@
 			<ProjectType>CppStaticLibrary</ProjectType>
 			<OutputExt>lib</OutputExt>
 			<FinalOutputDir>$(RR_INSTALL)\lib</FinalOutputDir>
-			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
+			<AllPackageLibs>rtl.lib;vcl.lib;mtkCommonRTL.lib</AllPackageLibs>
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
@@ -287,6 +287,9 @@
 			<CppCompile Include="..\..\source\rrSimulationSettings.cpp">
 				<DependentOn>..\..\source\rrSimulationSettings.h</DependentOn>
 				<BuildOrder>39</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\source\rrStopWatch.cpp">
+				<BuildOrder>70</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrStreamWriter.cpp">
 				<DependentOn>..\..\source\rrStreamWriter.h</DependentOn>

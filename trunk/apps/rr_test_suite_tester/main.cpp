@@ -24,6 +24,7 @@
 #include "TestSuiteModelSimulation.h"
 #include "rrGetOptions.h"
 #include "Args.h"
+#include "rrStopWatch.h"
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace rr;
@@ -99,7 +100,7 @@ int main(int argc, char * argv[])
 //    exceptions.push_back(961);    //Weird assignments...
 //    exceptions.push_back(966); //This one takes really long tim..
     RoadRunner *rrI = NULL;     //The roadrunner instance
-
+    StopWatch sWatch;
     try
     {
         if(std::find(exceptions.begin(), exceptions.end(), paras.CaseNumber) != exceptions.end())
@@ -135,6 +136,8 @@ int main(int argc, char * argv[])
         Log(lDebug)<<"Current Log level is:" <<LogLevelToString(gLog.GetLogLevel());
         TestSuiteModelSimulation simulation(dataOutputFolder);
 
+
+        sWatch.Start();
         //dataOutputFolder += dummy;
         rrI = new RoadRunner();
         rrI->Reset();
@@ -191,15 +194,16 @@ int main(int argc, char * argv[])
         //Check error data.. if an error in the set is larger than threshold, signal an error
         if(!simulation.Pass())
         {
-            Log(lError)<<"FAIL "<<"FAILING_POINTS "<<simulation.NrOfFailingPoints()<<" LARGEST_ERROR "<<simulation.LargestError()<<" SUPPORTED TRUE"<<" EXCEPTION_MSG NONE";
+            Log(lError)<<"FAIL "<<"FAILING_POINTS "<<simulation.NrOfFailingPoints()<<" LARGEST_ERROR "<<simulation.LargestError()<<" SUPPORTED TRUE"<<" EXCEPTION_MSG NONE"<<" Time "<<sWatch.GetTime();;
         }
         else
         {
-            Log(lError)<<"PASS "<<"FAILING_POINTS "<<simulation.NrOfFailingPoints()<<" LARGEST_ERROR "<<simulation.LargestError()<<" SUPPORTED TRUE"<<" EXCEPTION_MSG NONE";
+            Log(lError)<<"PASS "<<"FAILING_POINTS "<<simulation.NrOfFailingPoints()<<" LARGEST_ERROR "<<simulation.LargestError()<<" SUPPORTED TRUE"<<" EXCEPTION_MSG NONE"<<" Time "<<sWatch.GetTime();;
         }
 
         simulation.SaveAllData();
         simulation.SaveModelAsXML(dataOutputFolder);
+        sWatch.Stop();
      }
     catch(rr::Exception& ex)
     {
@@ -207,18 +211,19 @@ int main(int argc, char * argv[])
 
         if(error.find("NOT_SUPPORTED") != string::npos)
         {
-            Log(lError)<<"FAIL "<<"FAILING_POINTS "<<0<<" LARGEST_ERROR "<<1<<" SUPPORTED FALSE"<<" EXCEPTION_MSG "<<ex.what();
+            Log(lError)<<"FAIL "<<"FAILING_POINTS "<<0<<" LARGEST_ERROR "<<1<<" SUPPORTED FALSE"<<" EXCEPTION_MSG "<<ex.what()<<" Time "<<sWatch.GetTime();
         }
 
         if(error.find("KNOWN_PROBLEM") != string::npos)
         {
-            Log(lError)<<"FAIL "<<"FAILING_POINTS "<<0<<" LARGEST_ERROR "<<1<<" SUPPORTED TRUE"<<" EXCEPTION_MSG "<<ex.what();
+            Log(lError)<<"FAIL "<<"FAILING_POINTS "<<0<<" LARGEST_ERROR "<<1<<" SUPPORTED TRUE"<<" EXCEPTION_MSG "<<ex.what()<<" Time "<<sWatch.GetTime();
         }
 
     }
 
     end:
     delete rrI;
+
     Log(lInfo)<<"Done";
     if(paras.Pause)
     {
