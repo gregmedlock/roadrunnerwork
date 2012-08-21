@@ -16,7 +16,7 @@ zibmon.c
 zibsec.c
 )
 
-add_library(${target} 	SHARED ${sources})
+add_library(${target} SHARED ${sources})
 
 set_property(TARGET ${target}  
                 PROPERTY    COMPILE_DEFINITIONS 
@@ -35,13 +35,13 @@ endif()
 
 #--- INSTALL STUFF
 
-#=== Targets
-install(    TARGETS ${target} 
-            RUNTIME DESTINATION bin
-            LIBRARY DESTINATION lib
-            ARCHIVE DESTINATION lib
-            COMPONENT rr_core
-)            
+#=== Targets (This don't seem to install the dll..!
+#install(    TARGETS ${target} 
+#            RUNTIME DESTINATION bin
+#            LIBRARY DESTINATION lib
+#            ARCHIVE DESTINATION lib
+#            COMPONENT rr_core
+#)            
 
 if(${MINGW})
     SET(linkLibrary ${lib_path}/lib${target}.dll.a)
@@ -51,15 +51,15 @@ else()
     SET(sharedLibrary ${exe_path}/${target}.dll)
 endif()
 
-
 #=== Shared target
+    install (   FILES ${sharedLibrary}	
+                DESTINATION bin 
+                COMPONENT rr_core)
+
     install (   FILES ${linkLibrary}	
                 DESTINATION lib 
                 COMPONENT rr_core)
 
-    install (   FILES ${sharedLibrary}	
-                DESTINATION bin 
-                COMPONENT rr_core)
 
 #=== HEADERS
 set(subfolders 

@@ -119,20 +119,4 @@ install (FILES
             DESTINATION lib 
             COMPONENT rr_core)
 
-#=== TCC ==================================================
-FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/*.*)
-install (FILES 	${tcc} DESTINATION compilers/tcc COMPONENT rr_core)
-
-FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/lib/*.*)
-install (FILES 	${tcc} DESTINATION compilers/tcc/lib COMPONENT rr_core)
-
-FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/*.*)
-install (FILES 	${tcc} DESTINATION compilers/tcc/include COMPONENT rr_core)
-
-FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/sys/*.*)
-install (FILES 	${tcc} DESTINATION compilers/tcc/include/sys COMPONENT rr_core)
-
-FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/winapi/*.*)
-install (FILES 	${tcc} DESTINATION compilers/tcc/include/winapi COMPONENT rr_core)
-
 

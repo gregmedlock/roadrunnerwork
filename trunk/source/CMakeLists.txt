@@ -68,6 +68,7 @@ rrNLEQInterface.cpp
 rrInteropUtils.cpp
 rrDLLEntry.cpp
 rrCapsSupport.cpp
+rrStopWatch.cpp
 libstruct/lsComplex.cpp
 libstruct/lsLibla.cpp
 libstruct/lsLibstructural.cpp
@@ -80,6 +81,7 @@ libstruct/lsLA.cpp
 #Build both static and shared version
 #Link with static libs
 add_library(${target} 	SHARED ${rrSources})
+
 set_property(TARGET ${target}  
                 PROPERTY    COMPILE_DEFINITIONS 
                             EXPORT_RR 
@@ -124,7 +126,6 @@ set_property(TARGET ${target}-static
 
 if(${MINGW})
 #can't build static at the moment..
-
 else()
 target_link_libraries (${target}-static 
                            libsbml-static
@@ -148,6 +149,7 @@ endif()
 
 add_subdirectory(nleq)
 
+if(${INSTALL_CXX_API})
 #--- INSTALL STUFF
 if(INSTALL_STATIC_LIB)
     install (   TARGETS ${target}-static	
@@ -155,41 +157,31 @@ if(INSTALL_STATIC_LIB)
                 COMPONENT rr_core)
 endif()
 
-#=== Targets
-install(    
-            TARGETS ${target} 
-            RUNTIME DESTINATION bin
-            LIBRARY DESTINATION lib
-            ARCHIVE DESTINATION lib
-            COMPONENT rr_core
-)            
+#=== Targets -- does not seem to work..
+#install(    
+#            TARGETS ${target} 
+#            RUNTIME DESTINATION bin
+#            LIBRARY DESTINATION lib
+#            ARCHIVE DESTINATION lib
+#            COMPONENT rr_core
+#)            
 
 if(${MINGW})
     SET(linkLibrary ${lib_path}/lib${target}.dll.a)
     SET(sharedLibrary ${exe_path}/lib${target}.dll)
-    SET(staticLibrary ${lib_path}/lib${target}-static.a)
 else()
     SET(linkLibrary ${lib_path}/${target}.lib)
     SET(sharedLibrary ${exe_path}/${target}.dll)
-    SET(staticLibrary ${lib_path}/${target}-static.lib)
-endif()
-
-if(INSTALL_STATIC_LIB)
-    install (   
-    FILES ${staticLibrary}	
-                DESTINATION lib 
-                COMPONENT rr_core)
 endif()
 
 #=== Shared target
-#    install (   FILES ${linkLibrary}	
-#                DESTINATION lib 
-#                COMPONENT rr_core)
-#
-#    install (   FILES ${sharedLibrary}	
-#                DESTINATION bin 
-#                COMPONENT rr_core)
-#
+    install (   FILES ${sharedLibrary}	
+                DESTINATION bin 
+                COMPONENT rr_core)
+
+    install (   FILES ${linkLibrary}	
+                DESTINATION lib 
+                COMPONENT rr_core)
 
 
 #=== HEADERS
@@ -200,13 +192,13 @@ set(subfolders
 ./mtrand
 )
 
-
 foreach(subfolder ${subfolders})
     FILE (GLOB headers ${subfolder}/*.h)
     install (   FILES ${headers}			 		
                 DESTINATION include/rr/${subfolder} 
                 COMPONENT rr_core)
 endforeach(subfolder)
+endif() #Install CXX API
 
 #=== dependencies
 #set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
@@ -221,8 +213,3 @@ FILE(GLOB rr_support rr_support/*.*)
 install(FILES ${rr_support} 
                 DESTINATION rr_support
                 COMPONENT rr_core) 
-
-#=== MISC
-if(${BORLAND})
-	set_property(DIRECTORY 	PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
-endif(${BORLAND})

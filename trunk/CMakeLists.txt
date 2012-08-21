@@ -1,14 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 project(rr)
 
-SET(RR_MAJOR_VERSION 2012)
-SET(RR_MINOR_VERSION 5)
-SET(RR_BUILD_VERSION 31)
-SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
 #These will be the defaults ...
-SET(RR_BUILDS_ROOT "C:/rrBuilds")
-SET(RR_INSTALLS_ROOT "C:/rrInstalls")
+SET(RR_BUILDS_ROOT      "C:/rrBuilds")
+SET(RR_INSTALLS_ROOT    "C:/rrInstalls")
 
 if(${BORLAND})
 set(FOLDER_POSTFIX "xe")
@@ -26,10 +22,12 @@ if("${THIRD_PARTY_BUILD_FOLDER}" STREQUAL "")
   set(THIRD_PARTY_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/ThirdParty CACHE PATH "Directory containing ThirdParty build" FORCE)
 endif()
 
-OPTION (WRAP_TO_PYTHON 			"Generate Python wrapper" 		    ON)
-OPTION (WRAP_TO_DELPHI 			"Generate/Install Delphi wrapper "  ON)
-OPTION (WRAP_TO_C	 			"Create C API DLL" 					ON)
-OPTION (BUILD_EXAMPLES			"Build and install Examples"		ON)
+OPTION (INSTALL_CXX_API 		"Package c++ api" 	        	    ON)
+OPTION (INSTALL_PYTHON 			"Package Python wrapper" 		    ON)
+OPTION (INSTALL_DELPHI  		"Package Delphi wrapper "           OFF)
+OPTION (INSTALL_C_API	 		"Generate and Package C API" 		ON)
+OPTION (INSTALL_APPS	    	"Build and install Apps"	    	OFF)
+OPTION (INSTALL_EXAMPLES		"Build and install Examples"		OFF)
 OPTION (INSTALL_STATIC_LIB		"Install RoadRunner static lib"		OFF)
 
 #Setup so that roadrunner is always built as a dll and linked statically with 'as much as possible'
@@ -116,19 +114,30 @@ IF (BUILD_SHARED_LIBS)
   SET (LIB_TYPE SHARED)
 ENDIF (BUILD_SHARED_LIBS)
 
+#How do we move forward from this folder? Moving on to subfolders
 #Source Code Folder
-add_subdirectory(source)
-add_subdirectory(apps)
-add_subdirectory(Wrappers) 
+add_subdirectory(source)        # We alway have to build the roadrunner core
 
+if(INSTALL_CXX_API)
+
+if(INSTALL_APPS)
+add_subdirectory(apps)
+endif()
+
+if(INSTALL_EXAMPLES)
+add_subdirectory(examples)
+endif()
+
+endif()
+
+add_subdirectory(Wrappers)
 #======================= INSTALL ROADRUNNER ========================================================
+if(INSTALL_CXX_API)
 install(FILES source/rr_pch.h	
         DESTINATION include 
         COMPONENT rr_core)
-
-if(${BUILD_EXAMPLES})
-add_subdirectory(examples)
 endif()
+
 
 install(FILES Readme.txt License.txt	
         DESTINATION . 	
@@ -163,16 +172,17 @@ endif()
 
 #=== TCC ==================================================
 FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/*.*)
-install (FILES 	${tcc} DESTINATION bin COMPONENT rr_core)
+install (FILES 	${tcc} DESTINATION compilers/tcc COMPONENT rr_core)
 
 FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/lib/*.*)
-install (FILES 	${tcc} DESTINATION bin/lib COMPONENT rr_core)
+install (FILES 	${tcc} DESTINATION compilers/tcc/lib COMPONENT rr_core)
 
 FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/*.*)
-install (FILES 	${tcc} DESTINATION bin/include COMPONENT rr_core)
+install (FILES 	${tcc} DESTINATION compilers/tcc/include COMPONENT rr_core)
 
 FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/sys/*.*)
-install (FILES 	${tcc} DESTINATION bin/include/sys COMPONENT rr_core)
+install (FILES 	${tcc} DESTINATION compilers/tcc/include/sys COMPONENT rr_core)
 
 FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/winapi/*.*)
-install (FILES 	${tcc} DESTINATION bin/include/winapi COMPONENT rr_core)
+install (FILES 	${tcc} DESTINATION compilers/tcc/include/winapi COMPONENT rr_core)
+

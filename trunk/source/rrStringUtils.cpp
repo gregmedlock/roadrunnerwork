@@ -226,14 +226,12 @@ string ExtractFilePath(const string& fileN)
 
 string ChangeFileExtensionTo(const string& _fName, const string& newExtension)
 {
-
     //Be aware of the case
     //".\\fName"
     //where  the . is not part of the filename
     string path = ExtractFilePath(_fName);
     string fName = ExtractFileName(_fName);
     //First create the file name, remove current extension if it exists
-
 
     if(fName.find_last_of('.') != string::npos)
     {

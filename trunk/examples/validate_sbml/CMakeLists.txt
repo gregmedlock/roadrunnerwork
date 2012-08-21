@@ -2,10 +2,14 @@ cmake_minimum_required(VERSION 2.8)
 
 set(target validate_sbml)
 
-add_executable(		   ${target} main.cpp util.c)
+add_executable(${target} 
+main.cpp 
+Args.cpp
+)
 
 #link with shared roadrunner
-target_link_libraries (${target} libsbml)
+target_link_libraries (${target} roadrunner)
+#target_link_libraries (${target} libsbml)
 #
 
 install (   TARGETS ${target} 		
