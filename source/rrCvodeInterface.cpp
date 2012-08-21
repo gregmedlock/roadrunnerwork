@@ -1,4 +1,4 @@
-﻿#ifdef USE_PCH
+#ifdef USE_PCH
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
@@ -577,7 +577,7 @@ void CvodeInterface::InitializeCVODEInterface(ModelFromC *oModel)
 ////            oErrorCodes[10] = new CvodeErrorCodes(-10, "The right-hand side function had repetead recoverable errors.");
 ////            oErrorCodes[11] = new CvodeErrorCodes(-11,
 ////                                                  "The right-hand side function had a recoverable error, but no recovery is possible.");
-////            oErrorCodes[12] = new CvodeErrorCodes(-12, "The root�nding function failed in an unrecoverable manner.");
+////            oErrorCodes[12] = new CvodeErrorCodes(-12, "The rootfinding function failed in an unrecoverable manner.");
 ////            oErrorCodes[13] = new CvodeErrorCodes(-13, "");
 ////            oErrorCodes[14] = new CvodeErrorCodes(-14, "");
 ////            oErrorCodes[15] = new CvodeErrorCodes(-15, "");
@@ -1228,8 +1228,6 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
                 firedEvents.erase(firedEvents.begin() + i);
                 break;
             }
-
-            Log(lDebug)<<"time: "<<model->time<<" Event "<<(i + 1); //Unreachable....
         }
     }
 

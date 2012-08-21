@@ -1,207 +1,92 @@
-/**
- * @file    validateSBML.cpp
- * @brief   Validates an SBML file against the appropriate schema
- * @author  Sarah Keating
- * @author  Ben Bornstein
- * @author  Michael Hucka
- * @author  Akiya Jouraku
- *
- *
- * This file is part of libSBML.  Please visit http://sbml.org for more
- * information about SBML, and the latest version of libSBML.
- */
-
-
 #include <iostream>
-#include <sstream>
-
-#include "sbml/SBMLTypes.h"
-#include "util.h"
-
-
+#include <fstream>
+#include <string>
+#include <iomanip>
+#include "rrLog.h"
+#include "rrStringUtils.h"
+#include "rrRoadRunner.h"
+#include "rrException.h"
+#include "rrGetOptions.h"
+#include "Args.h"
+//---------------------------------------------------------------------------
 using namespace std;
-LIBSBML_CPP_NAMESPACE_USE
+using namespace rr;
 
-bool validateSBML(const string& filename, bool enableUnitCheck=true);
-
-const string usage = "Usage: validateSBML [-u] filename [...]\n"
-                     " -u : disable unit consistency check";
-
-int main (int argc, char* argv[])
+void ProcessCommandLineArguments(int argc, char* argv[], Args& args);
+int main(int argc, char * argv[])
 {
-  bool enableUnitCheck = true;
-
-  if (argc < 2)
-  {
-    cout << usage << endl;
-    return 1;
-  }
-  else if (argc == 2)
-  {
-    if ( string("-u") == string(argv[1]) )
+    try
     {
-      cout << usage << endl;
-      return 1;
+        LogOutput::mLogToConsole = true;
+
+        if(argc < 2)
+        {
+            cout<<Usage(argv[0])<<endl;
+            exit(0);
+        }
+
+        Args args;
+        ProcessCommandLineArguments(argc, argv, args);
+
+        gLog.SetCutOffLogLevel(args.CurrentLogLevel);
+
+        RoadRunner *rr = NULL;
+
+
+        gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(args.TempDataFolder, "RoadRunner.log") )));
+
+        Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
+        Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+
+        rr = new RoadRunner();
+        rr->Reset();
+
+        //The following will load and compile and simulate the sbml model in the file
+        if(!args.ModelFileName.size())
+        {
+            Log(lInfo)<<"Please supply a sbml model file name, using option -m<modelfilename>";
+        }
+         
+        if(rr->loadSBMLFromFile(args.ModelFileName))
+        {
+            Log(lInfo)<<"The model was loaded into roadrunner succesfully..";
+        }
+
+        Log(lInfo)<<"RoadRunner is exiting...";
+
+        delete rr;
     }
-  }
-
-  int  argIndex = 1;
-
-  if ( string("-u") == string(argv[1]) )
-  {
-    enableUnitCheck = false;
-    ++argIndex;
-  }
-
-  int numInvalidFiles = 0;
-
-  for (int i=argIndex; i < argc; i++)
-  {
-    if (!validateSBML(argv[i], enableUnitCheck))
-      ++numInvalidFiles;
-
-    cout << "---------------------------------------------------------------------------\n";
-  }
-
-  int numFiles = (enableUnitCheck) ? argc - 1 : argc - 2;
-
-  cout << "Validated " << numFiles << " files, " << (numFiles - numInvalidFiles) << " valid files, "
-       << numInvalidFiles << " invalid files" << endl;
-  if (!enableUnitCheck)
-    cout << "(Unit consistency checks skipped)" << endl;
-
-  return numInvalidFiles;
+    catch(rr::Exception& ex)
+    {
+        Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
+    }
+    return 0;
 }
 
-
-bool validateSBML(const string& filename, bool enableUnitCheck)
+void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
 {
-  SBMLDocument* document;
-  SBMLReader reader;
-  unsigned long long start, stop;
-
-  start    = getCurrentMillis();
-  document = reader.readSBML(filename);
-  stop     = getCurrentMillis();
-
-  double     timeRead = (double)(stop - start);
-  unsigned int errors = document->getNumErrors();
-  bool  seriousErrors = false;
-
-  unsigned int numReadErrors   = 0;
-  unsigned int numReadWarnings = 0;
-  string       errMsgRead      = "";
-
-  if (errors > 0)
-  {
-    for (unsigned int i = 0; i < errors; i++)
+    char c;
+    while ((c = GetOptions(argc, argv, ("cpufv:n:d:t:l:m:s:e:z:"))) != -1)
     {
-      if (document->getError(i)->isFatal() || document->getError(i)->isError())
-      {
-        seriousErrors = true;
-	++numReadErrors;
-        break;
-      }
-      else
-        ++numReadWarnings;
-    }
-
-    ostringstream oss;
-    document->printErrors(oss);
-    errMsgRead = oss.str();
-  }
-
-  // If serious errors are encountered while reading an SBML document, it
-  // does not make sense to go on and do full consistency checking because
-  // the model may be nonsense in the first place.
-
-  unsigned int numCCErrors   = 0;
-  unsigned int numCCWarnings = 0;
-  string       errMsgCC      = "";
-  bool   skipCC = false;
-  double timeCC = 0.0;
-  bool  isValid = true;
-
-  if (seriousErrors)
-  {
-    skipCC = true;
-    isValid = false;
-    errMsgRead += "Further consistency checking and validation aborted.";
-  }
-  else
-  {
-    unsigned int failures = 0;
-
-    document->setConsistencyChecks(LIBSBML_CAT_UNITS_CONSISTENCY, enableUnitCheck);
-
-    start    = getCurrentMillis();
-    failures = document->checkConsistency();
-    stop     = getCurrentMillis();
-    timeCC   = (double)(stop - start);
-
-    if (failures > 0)
-    {
-
-      for (unsigned int i = 0; i < failures; i++)
-      {
-        if (document->getError(i)->isFatal() || document->getError(i)->isError())
+        switch (c)
         {
-          ++numCCErrors;
-	  isValid = false;
+            case ('v'): args.CurrentLogLevel                = GetLogLevel(optarg);     break;
+            case ('t'): args.TempDataFolder                 = optarg;                       break;
+            case ('m'): args.ModelFileName                  = optarg;                       break;
+            case ('u'): args.UseOSTempFolder                = true;                         break;
+            case ('?'):
+            {
+                    cout<<Usage(argv[0])<<endl;
+            }
+            default:
+            {
+                string str = argv[optind-1];
+                if(str != "-?")
+                {
+                    cout<<"*** Illegal option:\t"<<argv[optind-1]<<" ***\n"<<endl;
+                }
+                exit(-1);
+            }
         }
-        else
-          ++numCCWarnings;
-      }
-
-      ostringstream oss;
-      document->printErrors(oss);
-      errMsgCC = oss.str();
-
     }
-  }
-
-  //
-  // Print Results
-  //
-  cout << "                 filename : " << filename << endl;
-  cout << "         file size (byte) : " << getFileSize(filename.c_str()) << endl;
-  cout << "           read time (ms) : " << timeRead << endl;
-
-  if (!skipCC)
-  {
-    cout << "        c-check time (ms) : " << timeCC << endl;
-  }
-  else
-  {
-    cout << "        c-check time (ms) : skipped" << endl;
-  }
-
-  cout << "      validation error(s) : " << numReadErrors  + numCCErrors << endl;
-  if (!skipCC)
-    cout << "    (consistency error(s)): " << numCCErrors << endl;
-  else
-    cout << "    (consistency error(s)): skipped" << endl;
-
-  cout << "    validation warning(s) : " << numReadWarnings + numCCWarnings << endl;
-  if (!skipCC)
-    cout << "  (consistency warning(s)): " << numCCWarnings << endl;
-  else
-    cout << "  (consistency warning(s)): skipped" << endl;
-
-  if ( !errMsgRead.empty() || !errMsgCC.empty() )
-  {
-    cout << "\n===== validation error/warning messages =====\n";
-    if (!errMsgRead.empty())
-      cout << errMsgRead << endl;
-
-    if (!errMsgCC.empty())
-    {
-      cout << "\n*** consistency check ***\n";
-      cout << errMsgCC << endl;
-    }
-  }
-
-  delete document;
-
-  return (isValid) ? true: false;
 }
