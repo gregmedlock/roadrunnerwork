@@ -7,7 +7,7 @@ cd r:\rrBuilds\xe\cxx_api
 make clean
 make install package
 
-cd r:\rrBuilds\xe\rr_full
+cd r:\rrBuilds\xe\full
 make clean
 make install package
 
