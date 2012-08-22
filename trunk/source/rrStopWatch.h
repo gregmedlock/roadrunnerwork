@@ -1,7 +1,7 @@
 #ifndef rrStopWatchH
 #define rrStopWatchH
 //---------------------------------------------------------------------------
-#include <time.h>
+#include <ctime>
 #include "rrObject.h"
 
 namespace rr
@@ -10,8 +10,8 @@ namespace rr
 class RR_DECLSPEC StopWatch : public rrObject
 {
     private:
-        std::clock_t 		mStartTime;
-        std::clock_t 		mTotalTime;
+        clock_t     		mStartTime;
+        clock_t 	    	mTotalTime;
         bool 				mIsRunning;
 
     public:
