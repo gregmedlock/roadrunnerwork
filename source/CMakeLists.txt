@@ -69,6 +69,7 @@ rrInteropUtils.cpp
 rrDLLEntry.cpp
 rrCapsSupport.cpp
 rrStopWatch.cpp
+rrTestSuiteModelSimulation.cpp
 libstruct/lsComplex.cpp
 libstruct/lsLibla.cpp
 libstruct/lsLibstructural.cpp

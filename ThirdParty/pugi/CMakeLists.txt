@@ -1,13 +1,12 @@
+cmake_minimum_required(VERSION 2.6)
 project(pugixml)
 
-cmake_minimum_required(VERSION 2.6)
-#set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build shared instead of static library")
 set(target pugi)
 
 set(HEADERS src/pugixml.hpp src/pugiconfig.hpp)
 set(SOURCES ${HEADERS} src/pugixml.cpp)
 
-add_library(${target}         SHARED ${SOURCES})
+add_library(${target}  SHARED ${SOURCES})
 
 set_property(TARGET         ${target}  
              PROPERTY    COMPILE_DEFINITIONS 

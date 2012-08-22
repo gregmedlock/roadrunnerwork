@@ -4,7 +4,6 @@ set(target rr_ts_tester)
 add_executable(		   ${target} 
 main.cpp 
 Args.cpp
-TestSuiteModelSimulation.cpp
 )
 
 #IF(BUILD_SHARED_LIBS) 

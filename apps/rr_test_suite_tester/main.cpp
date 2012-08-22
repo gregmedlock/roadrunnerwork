@@ -21,7 +21,7 @@
 #include "rrException.h"
 #include "rrUtils.h"
 #include "rrStringUtils.h"
-#include "TestSuiteModelSimulation.h"
+#include "rrTestSuiteModelSimulation.h"
 #include "rrGetOptions.h"
 #include "Args.h"
 #include "rrStopWatch.h"

@@ -7,7 +7,7 @@
 #include <math.h>
 #include <sstream>
 #include "rrLogger.h"
-#include "TestSuiteModelSimulation.h"
+#include "rrTestSuiteModelSimulation.h"
 #include "rrUtils.h"
 //---------------------------------------------------------------------------
 
