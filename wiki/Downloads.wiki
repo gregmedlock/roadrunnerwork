@@ -1,8 +1,8 @@
 #summary Download a RoadRunner Release
 #labels Featured
 
-= Introduction =
-RoadRunner is distributed as
+= Downloads =
+RoadRunner is distributed as 
 
 1) C++ API: This distribution contains all you need if you are to use roadrunner in a C++ environment.
 
@@ -20,7 +20,7 @@ The "official" releases are being built using Visual Studio 2010, but other rele
   * Download RoadRunner FULL installer:[http://roadrunnerwork.googlecode.com/svn/releases/vs/rr_full-vs_2010.exe rr_full-vs_2010.exe]
 
 ==CodeGear XE Releases==
-  * Download C++        API installer: [http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_cxx_api-cg_xe.exe rr_cxx_api-vs_2010.exe]
-  * Download C          API installer: [http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_c_api-cg_xe.exe rr_c_api-vs_2010.exe]
-  * Download Python     API installer: [http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_python-cg_xe.exe rr_python-vs_2010.exe]
-  * Download RoadRunner FULL installer:[http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_full-cg_xe.exe rr_full-vs_2010.exe]
+  * Download C++        API installer: [http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_cxx_api-cg_xe.exe rr_cxx_api-cg_xe.exe]
+  * Download C          API installer: [http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_c_api-cg_xe.exe rr_c_api-cg_xe.exe]
+  * Download Python     API installer: [http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_python-cg_xe.exe rr_python-cg_xe.exe]
+  * Download RoadRunner FULL installer:[http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_full-cg_xe.exe rr_full-cg_xe.exe]
