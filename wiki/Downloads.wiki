@@ -1,4 +1,5 @@
 #summary Download a RoadRunner Release
+#labels Featured
 
 = Introduction =
 RoadRunner is distributed as
