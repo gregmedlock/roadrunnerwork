@@ -12,7 +12,7 @@
 
 4) FULL: This distribution is containing all of the above.
 
-The "official" releases are being built using Visual Studio 2010, but other releases using other compilers are available too, e.g. CodeGear XE and (later on) MingW
+The "official" releases are being built using Visual Studio 2010, but other releases using other compilers are available too, e.g. !CodeGear XE and (later on) !MinGW
 
 ||*Description*||*Download Link*||
 ||  C++        API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/rr_cxx_api-vs_2010.exe rr_cxx_api-vs_2010.exe]||
