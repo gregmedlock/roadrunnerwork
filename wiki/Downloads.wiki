@@ -1,0 +1,28 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+RoadRunner is distributed in the following packages
+1) C++ API: A distribution that contains all you need if you are to use roadrunner in a C++ environment.
+
+2) C API:  A distribution that contains all you need if you are to use roadrunner in a C environment.
+
+3) Python API:A distribution that contains all you need if you are to use roadrunner in a Python environment.
+
+4) FULL: A distribution containing all of the above.
+
+The "official" releases are being built using Visual Studio 2010, but other releases using other copilers are available too, e.g. CodeGear XE and (soon) MingW
+
+Download C++        API installer: rr_cxx_api-vs_2010.exe
+Download C          API installer: rr_c_api-vs_2010.exe
+Download Python     API installer: rr_python-vs_2010.exe
+Download RoadRunner FULL installer: rr_full-vs_2010.exe
+
+
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
