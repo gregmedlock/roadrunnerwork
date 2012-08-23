@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 
     string settingsFile;
     stringstream ss;
-    
+
 	bool doMore = true;	//set to false to move to end
 
     cout<<"======== RoadRunner C API Client==================\n";
@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
 
 	if(!aHandle)
     {
+        cerr<<"Failed getting a handle to RoadRunner";
     	doMore = false;
     }
 

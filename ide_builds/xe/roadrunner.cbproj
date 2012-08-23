@@ -298,6 +298,9 @@
 			<CppCompile Include="..\..\source\rrSymbolList.cpp">
 				<BuildOrder>50</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\source\rrTestSuiteModelSimulation.cpp">
+				<BuildOrder>72</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\source\rrTextWriter.cpp">
 				<DependentOn>..\..\source\rrTextWriter.h</DependentOn>
 				<BuildOrder>55</BuildOrder>

@@ -108,26 +108,6 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>10</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\libsbml-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>4</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\libxml2_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>5</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\roadrunner-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>7</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>7</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_nvecserial.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>3</BuildOrder>
-			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

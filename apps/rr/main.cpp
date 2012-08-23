@@ -33,6 +33,7 @@ int main(int argc, char * argv[])
 {
     string settingsFile;
     bool doContinue = true;
+    Args args;
     try
     {
         LogOutput::mLogToConsole = true;
@@ -43,7 +44,7 @@ int main(int argc, char * argv[])
             exit(0);
         }
 
-        Args args;
+     
         ProcessCommandLineArguments(argc, argv, args);
 
         gLog.SetCutOffLogLevel(args.CurrentLogLevel);
@@ -67,9 +68,8 @@ int main(int argc, char * argv[])
             gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(args.TempDataFolder, "RoadRunner.log") )));
         }
 
-        Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
-
-        Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+        Log(lInfo)<<"Logs are going to "<<gLog.GetLogFileName();
+        Log(lInfo)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
         SBMLModelSimulation simulation(args.DataOutputFolder, args.TempDataFolder);
 
         rr = new RoadRunner();
@@ -95,55 +95,63 @@ int main(int argc, char * argv[])
             Log(lError)<<"Failed loading SBML model";
             doContinue = false;
         }
-        Log(lInfo)<<"SBML semantics was loaded from file: "<<simulation.GetModelsFullFilePath();
-        if(doContinue && !simulation.GenerateModelCode())
-        {
-            Log(lError)<<"Failed loading SBML model";
-            doContinue = false;
-        }
 
-        if(doContinue && !simulation.CompileModel())
-        {
-            Log(lError)<<"Failed compiling SBML model:" <<args.ModelFileName;
-            doContinue = false;
-        }
+		if(doContinue)
+		{
+			Log(lInfo)<<"SBML semantics was loaded from file: "<<simulation.GetModelsFullFilePath();
+		}
 
-        if(doContinue && args.OnlyCompile)
-        {
-            doContinue = false;
-        }
+        //if(doContinue && !simulation.GenerateModelCode())
+        //{
+        //    Log(lError)<<"Failed loading SBML model";
+        //    doContinue = false;
+        //}
 
-        if(doContinue && !simulation.CreateModel())
-        {
-            Log(lError)<<"Failed creating Model";
-            doContinue = false;
-        }
+        //if(doContinue && !simulation.CompileModel())
+        //{
+        //    Log(lError)<<"Failed compiling SBML model:" <<args.ModelFileName;
+        //    doContinue = false;
+        //}
 
-        //First load the model
-        if(doContinue && !simulation.InitializeModel())
-        {
-            Log(lError)<<"Failed initializing SBML model";
-            doContinue = false;
-        }
+        //if(doContinue && args.OnlyCompile)
+        //{
+        //    doContinue = false;
+        //}
+
+        //if(doContinue && !simulation.CreateModel())
+        //{
+        //    Log(lError)<<"Failed creating Model";
+        //    doContinue = false;
+        //}
+
+        ////First load the model
+        //if(doContinue && !simulation.InitializeModel())
+        //{
+        //    Log(lError)<<"Failed initializing SBML model";
+        //    doContinue = false;
+        //}
 
         //Then read settings file if it exists..
-        if(settingsFile.size())
-        {
-            if(!simulation.LoadSettings(settingsFile))    //set selection list here!
-            {
-                Log(lError)<<"Failed loading SBML model settings";
-                doContinue = false;
-            }
-        }
-        else //Read from commandline
-        {
-            simulation.SetTimeStart(args.StartTime);
-            simulation.SetTimeEnd(args.EndTime);
-            simulation.SetNumberOfPoints(args.Steps);
-            simulation.SetSelectionList(args.SelectionList);
-        }
+		if(doContinue)
+		{
+			if(settingsFile.size())
+			{
+				if(!simulation.LoadSettings(settingsFile))    //set selection list here!
+				{
+					Log(lError)<<"Failed loading SBML model settings";
+					doContinue = false;
+				}
+			}
+			else //Read from command line
+			{
+				simulation.SetTimeStart(args.StartTime);
+				simulation.SetTimeEnd(args.EndTime);
+				simulation.SetNumberOfPoints(args.Steps);
+				simulation.SetSelectionList(args.SelectionList);
+			}
 
-        rr->ComputeAndAssignConservationLaws(false);
+			rr->ComputeAndAssignConservationLaws(false);
+		}
 
         //Then Simulate model
         if(doContinue && !simulation.Simulate())
@@ -151,34 +159,37 @@ int main(int argc, char * argv[])
             Log(lError)<<"Failed running simulation";
             throw("Failed running simulation");
         }
-
-        if(args.SaveResultToFile)
-        {
-            //Write result
-            if(!simulation.SaveResult())
-            {
-                //Failed to save data
-            }
-        }
-        else
-        {
-            //Write to std out
-            SimulationData result = simulation.GetResult();
-            Log(lShowAlways)<<result;
-        }
-
-        Log(lInfo)<<"RoadRunner is exiting...";
-        if(args.Pause)
-        {
-            Pause();
-        }
+		
+		if(doContinue)
+		{
+			if(args.SaveResultToFile)
+			{
+				//Write result
+				if(!simulation.SaveResult())
+				{
+					//Failed to save data
+				}
+			}
+			else
+			{
+				//Write to std out
+				SimulationData result = simulation.GetResult();
+				Log(lShowAlways)<<result;
+			}
+		}       
 
         delete rr;
     }
     catch(rr::Exception& ex)
     {
-        Log(lError)<<"RoadRunner exception occured: "<<ex.what()<<endl;
+        Log(lError)<<"RoadRunner exception occurred: "<<ex.what()<<endl;
     }
+	
+	Log(lInfo)<<"RoadRunner is exiting...";
+	if(args.Pause)
+	{
+		Pause();
+	}
     return 0;
 }
 

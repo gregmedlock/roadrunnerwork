@@ -55,7 +55,7 @@ bool Compiler::CompileC_DLL(const string& sourceFileName)
 
     //exeCmd += " > compileLog.log";
     Log(lDebug2)<<"Compiling model..";
-    Log(lInfo)<<"\nExecuting: "<<exeCmd;
+    Log(lDebug)<<"\nExecuting compile command: "<<exeCmd;
 
     if(!Compile(exeCmd))
     {
@@ -88,9 +88,9 @@ bool Compiler::SetupCompilerEnvironment()
         //LogLevel                              //-v is for verbose
         switch(gLog.GetLogLevel())
         {
-            case lDebug1:   mCompilerFlags.push_back("-v");           break;
-            case lDebug2:   mCompilerFlags.push_back("-vv");           break;
-            case lDebug3:   mCompilerFlags.push_back("-vvv");           break;
+            case lInfo:		mCompilerFlags.push_back("-v");           break;
+            case lDebug:   mCompilerFlags.push_back("-vv");           break;
+            case lDebug1:   mCompilerFlags.push_back("-vvv");           break;
         }
     }
     else if(mCompilerName == "bcc")
@@ -173,7 +173,7 @@ bool Compiler::Compile(const string& cmdLine)
                             FILE_ATTRIBUTE_NORMAL,
                             NULL))==INVALID_HANDLE_VALUE)
     {
-        Log(lError)<<"Failed creating logFiel for compiler output";
+        Log(lError)<<"Failed creating logFile for compiler output";
         return false;
     }
 
@@ -221,10 +221,8 @@ bool Compiler::Compile(const string& cmdLine)
     CloseHandle(out);
 
     //Read the log file and log it
-
     string log = GetFileContent(compilerTempFile.c_str());
-    Log(lInfo)<<"Compiler output";
-    Log(lInfo)<<log<<endl;
+    Log(lDebug)<<"Compiler output: "<<log<<endl;
 
     return true;
 }
