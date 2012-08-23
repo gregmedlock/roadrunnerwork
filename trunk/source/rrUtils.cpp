@@ -38,7 +38,7 @@ string GetUsersTempDataFolder()
     }
     else
     {
-        Log(lInfo)<<"Users temporary files folder is: "<<string(lpTempPathBuffer);
+        Log(lDebug3)<<"Users temporary files folder is: "<<string(lpTempPathBuffer);
     }
     return string(lpTempPathBuffer);
 }

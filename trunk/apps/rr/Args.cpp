@@ -21,7 +21,9 @@ TempDataFolder("."),
 StartTime(0),
 Duration(5),
 EndTime(StartTime + Duration),
-Steps(50)
+Steps(50),
+SaveResultToFile(false),
+SelectionList("")
 {}
 
 //        LogLevel                        LogLevel;           //option v:

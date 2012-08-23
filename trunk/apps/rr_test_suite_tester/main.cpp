@@ -49,7 +49,6 @@ int main(int argc, char * argv[])
         {
             case ('n'): paras.CaseNumber                    = ToInt(optarg);                break;
             case ('v'): paras.CurrentLogLevel               = GetLogLevel(optarg);          break;
-            case ('c'): paras.OnlyCompile                   = true;                         break;
             case ('p'): paras.Pause                         = true;                         break;
             case ('t'): paras.TempDataFolder                = optarg;                       break;
             case ('d'): paras.DataOutputFolder              = optarg;                       break;
@@ -240,6 +239,7 @@ string Usage(const string& prg)
     usage<<left;
     usage<<setfill('.');
     usage<<setw(25)<<"-n\"number\" "    <<" TestSuite number\n";
+    usage<<setw(25)<<"-m\"path\" "    	<<" Path to TestSuite models\n";
     usage<<setw(25)<<"-v"                <<" Verbose mode. Ouputs information during program execution\n";
     usage<<setw(25)<<"-? "               <<" Shows the help screen.\n\n";
 

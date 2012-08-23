@@ -24,7 +24,7 @@
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<Defines>EXPORT_RR_C_API;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
-			<ILINK_LibraryPath>R:\rrBuilds\xe\ThirdParty\lib\;C:\RoadRunner\lib\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\..\Wrappers\C\;R:\rrInstalls\xe\lib\;..\..\Wrappers\C\;C:\rrw\ide_buil..\rr-c\rr_c_api\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>R:\rrInstalls\xeDebug\lib\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;R:\rrBuilds\xe\ThirdParty\lib\;C:\RoadRunner\lib\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\..\Wrappers\C\;R:\rrInstalls\xe\lib\;..\..\Wrappers\C\;C:\rrw\ide_buil..\rr-c\rr_c_api\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<NoVCL>true</NoVCL>
 			<PackageImports>vclx.bpi;vcl.bpi;VclSmp.bpi;rtl.bpi;vclimg.bpi;bcbie.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;svnui.bpi;svn.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;bdertl.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;inet.bpi;inetdb.bpi;webdsnap.bpi;websnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;DbxCommonDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbexpress.bpi;dbxcds.bpi;TeeTree2D15Tee9.bpi;DbxClientDriver.bpi;AzureCloud.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi</PackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>
@@ -66,6 +66,10 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="..\..\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>11</BuildOrder>
+			</LibFiles>
 			<CppCompile Include="..\..\Wrappers\C\rr_c_api.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
@@ -88,29 +92,25 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>10</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\libsbml-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>10</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\libxml2_xe.lib">
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\libsbml-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>7</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\pugixml-static.lib">
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\pugi-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>11</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\roadrunner-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>10</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_cvode.lib">
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\roadrunner-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>8</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_nvecserial.lib">
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\sundials_cvode.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>9</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\sundials_nvecserial.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>10</BuildOrder>
 			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>

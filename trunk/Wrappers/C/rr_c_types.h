@@ -50,7 +50,7 @@ extern "C"
 #include "rr_support/stdbool.h"
 #endif
                                     /*Hand the client a HANDLE, i.e. ptr to structure */
-typedef void*                       RRHandle;
+typedef void* RRHandle;
 
 typedef struct RRVector
 {

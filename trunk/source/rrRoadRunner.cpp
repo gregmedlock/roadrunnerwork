@@ -162,10 +162,10 @@ int RoadRunner::CreateDefaultSelectionList()
 
     setSelectionList(theList);
 
-	Log(lInfo)<<"The following is selected:";
+	Log(lDebug)<<"The following is selected:";
 	for(int i = 0; i < selectionList.size(); i++)
 	{
-		Log(lInfo)<<selectionList[i];
+		Log(lDebug)<<selectionList[i];
 	}
     return selectionList.size();
 }
@@ -188,10 +188,10 @@ int RoadRunner::CreateSelectionList()
 
 	setSelectionList(theList);
 
-	Log(lInfo)<<"The following is selected:";
+	Log(lDebug)<<"The following is selected:";
 	for(int i = 0; i < selectionList.size(); i++)
 	{
-		Log(lInfo)<<selectionList[i];
+		Log(lDebug)<<selectionList[i];
 	}
 
 	if(selectionList.size() < 2)
@@ -753,8 +753,8 @@ bool RoadRunner::CompileCurrentModel()
         Log(lError)<<"Model failed compilation";
         return false;
     }
-    Log(lDebug)<<"Model compiled succesfully. ";
-    Log(lInfo)<<mCompiler.GetDLLName()<<" was created";
+    Log(lDebug)<<"Model compiled successfully. ";
+    Log(lDebug)<<mCompiler.GetDLLName()<<" was created";
     return true;
 }
 
@@ -827,7 +827,7 @@ bool RoadRunner::GenerateAndCompileModel()
         return false;
     }
 
-    //Finally intitilaize the model..
+    //Finally initialize the model..
     if(!InitializeModel())
     {
         Log(lError)<<"Failed Initializing Model";

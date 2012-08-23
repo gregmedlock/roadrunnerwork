@@ -36,7 +36,6 @@ class RR_DECLSPEC TestSuiteModelSimulation : public SBMLModelSimulation
         double                  LargestError();
         bool                    Pass();
         int                     NrOfFailingPoints();
-
 };
 
 }

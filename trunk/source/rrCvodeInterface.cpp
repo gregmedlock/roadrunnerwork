@@ -17,11 +17,12 @@
 #include "rrCvodeInterface.h"
 #include "rrCvodeDll.h"
 #include "rrUtils.h"
-
 //---------------------------------------------------------------------------
+
 using namespace std;
 namespace rr
 {
+//helper function for call back functions..
 vector<double> BuildEvalArgument(ModelFromC* model);
 
 //Static stuff...
@@ -38,13 +39,10 @@ ModelFromC* CvodeInterface::model = NULL;
 // Model contains all the symbol tables associated with the model
 // ev is the model function
 // -------------------------------------------------------------------------
-
-CvodeInterface::CvodeInterface(RoadRunner* rr, ModelFromC *aModel)
+CvodeInterface::CvodeInterface(RoadRunner* rr, ModelFromC *aModel, const double& _absTol, const double& _relTol)
 :
-//defaultReltol(1E-12),
-//defaultAbsTol(1E-16),
-defaultReltol(1E-15),
-defaultAbsTol(1E-20),
+defaultReltol(_relTol),
+defaultAbsTol(_absTol),
 defaultMaxNumSteps(10000),
 gdata(NULL),
 _amounts(NULL),
@@ -59,8 +57,8 @@ InitStep(0.0),
 MinStep(0.0),
 MaxStep(0.0),
 MaxNumSteps(defaultMaxNumSteps),
-relTol(defaultReltol),
-absTol(defaultAbsTol),
+relTol(_relTol),
+absTol(_absTol),
 //errorFileCounter,
 //_rootsFound),
 abstolArray(NULL),
@@ -69,10 +67,6 @@ fileHandle(NULL),
 mRR(rr),
 cvodeMem(NULL)
 {
-    //relTol = 1.e-4;
-    //absTol = 1.(defaultReltol),
-//    absTol(defaultAbsTol)
-
     InitializeCVODEInterface(aModel);
 }
 
@@ -617,20 +611,8 @@ void CvodeInterface::HandleCVODEError(int errCode)
         {
             fileClose(fileHandle);
         }
-        fileHandle = newHandle;
 
-        try
-        {
-//            msg = File.ReadAllText(errorFile);    //Todo: enable this..
-//            File.Delete(errorFile);
-        }
-        catch (Exception)
-        {
-            // actually we don't need this error message any more ...
-            // the error code will automatically be converted by the erroCodes list
-            // hence if we can't read the log file there is no reason to worry the user.
-            //msg = " Unknown Error from CVODE (ff)";
-        }
+        fileHandle = newHandle;
 
         //throw CvodeException("Error in RunCVode: " + errorCodes[-errCode].msg + msg);
         Log(lError)<<"Error in RunCVode: "<<errCode<<msg;
@@ -1363,7 +1345,7 @@ int CvodeInterface::reStart(double timeStart, ModelFromC* model)
     SetMinStep(cvodeMem, MinStep);
     SetMaxStep(cvodeMem, MaxStep);
 
-    return (CVReInit(cvodeMem, timeStart, _amounts, relTol, abstolArray));
+    return CVReInit(cvodeMem, timeStart, _amounts, relTol, abstolArray);
 }
 
 ////        double CvodeInterface::getValue(int index)
