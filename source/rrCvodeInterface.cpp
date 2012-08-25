@@ -17,6 +17,7 @@
 #include "rrCvodeInterface.h"
 #include "rrCvodeDll.h"
 #include "rrUtils.h"
+#include "rrEvent.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
@@ -952,31 +953,52 @@ void CvodeInterface::RemovePendingAssignmentForIndex(const int& eventIndex)
     }
 }
 
-void CvodeInterface::SortEventsByPriority(vector<int>& firedEvents)
+void CvodeInterface::SortEventsByPriority(vector<Event>& firedEvents)
 {
     if ((firedEvents.size() > 1))
     {
-        model->computeEventPriorites();
-        //Todo: do the sorting...
-//        firedEvents.Sort(new Comparison<int>((index1, index2) =>
-//                                                 {
-//                                                     double priority1 = model->eventPriorities[index1];
-//                                                     double priority2 = model->eventPriorities[index2];
-//
-//                                                     // random toss in case we have same priorites
-//                                                     if (priority1 == priority2 && priority1 != 0 &&
-//                                                         index1 != index2)
-//                                                     {
-//                                                         if (Random.NextDouble() > 0.5)
-//                                                             return -1;
-//                                                         else
-//                                                             return 1;
-//                                                     }
-//
-//                                                     return -1 * priority1.CompareTo(priority2);
-//                                                 }));
+		Log(lDebug3)<<"Sorting event priorities";
+        for(int i = 0; i < firedEvents.size(); i++)
+        {
+        	firedEvents[i].SetPriority(model->eventPriorities[firedEvents[i].GetID()]);
+        	Log(lDebug3)<<firedEvents[i];
+        }
+        sort(firedEvents.begin(), firedEvents.end(), SortEvent());
+
+		Log(lDebug3)<<"After sorting event priorities";
+        for(int i = 0; i < firedEvents.size(); i++)
+        {
+        	Log(lDebug3)<<firedEvents[i];
+        }
     }
 }
+
+
+////        private void SortEventsByPriority(List<int> firedEvents)
+////        {
+////            if ((firedEvents.Count > 1))
+////            {
+////                model.computeEventPriorites();
+////                firedEvents.Sort(new Comparison<int>((index1, index2) =>
+////                                                         {
+////                                                             double priority1 = model.eventPriorities[index1];
+////                                                             double priority2 = model.eventPriorities[index2];
+////
+////                                                             // random toss in case we have same priorites
+////                                                             if (priority1 == priority2 && priority1 != 0 &&
+////                                                                 index1 != index2)
+////                                                             {
+////                                                                 if (Random.NextDouble() > 0.5)
+////                                                                     return -1;
+////                                                                 else
+////                                                                     return 1;
+////                                                             }
+////
+////                                                             return -1 * priority1.CompareTo(priority2);
+////                                                         }));
+////            }
+////        }
+
 
 ////        private void HandleRootsForTime(double timeEnd, int[] rootsFound)
 ////        {
@@ -1108,9 +1130,10 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
     vector<double> args = BuildEvalArgument();
     model->evalEvents(timeEnd, args);
 
-    vector<int> firedEvents;
+    vector<Event> firedEvents;
     map<int, double* > preComputedAssignments;
 
+//    model->computeEventPriorites();
     for (int i = 0; i < model->getNumEvents(); i++)
     {
         // We only fire an event if we transition from false to true
@@ -1119,6 +1142,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
             if (model->eventStatusArray[i])
             {
                 firedEvents.push_back(i);
+//                firedEvents[i].SetPriority(model->eventPriorities[i]);
                 if (model->eventType[i])
                 {
                     preComputedAssignments[i] = model->computeEventAssignments[i]();
@@ -1134,21 +1158,22 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
             }
         }
     }
+
     vector<int> handled;
     while (firedEvents.size() > 0)
     {
+        model->computeEventPriorites();
         SortEventsByPriority(firedEvents);
         // Call event assignment if the eventstatus flag for the particular event is false
         for (u_int i = 0; i < firedEvents.size(); i++)
         {
-            int currentEvent = firedEvents[i];
+            int currentEvent = firedEvents[i].GetID();
             // We only fire an event if we transition from false to true
 
             model->previousEventStatusArray[currentEvent] = model->eventStatusArray[currentEvent];
             double eventDelay = model->eventDelays[currentEvent]();
             if (eventDelay == 0)
             {
-
                 if (model->eventType[currentEvent] && preComputedAssignments.count(currentEvent) > 0)
                 {
                     model->performEventAssignments[currentEvent](preComputedAssignments[currentEvent]);
@@ -1174,6 +1199,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
                 }
 
                 model->eventStatusArray[currentEvent] = false;
+                Log(lDebug3)<<"Fired Event with ID:"<<currentEvent;
                 firedEvents.erase(firedEvents.begin() + i);
 
                 for (int i = 0; i < removeEvents.size(); i++)
@@ -1358,14 +1384,6 @@ int CvodeInterface::reStart(double timeStart, ModelFromC* model)
 
 vector<double> BuildEvalArgument(ModelFromC* model)
 {
-//    vector<double> dResult;
-//    dResult = model->GetCurrentValues();
-//    for(int i = 0; i < model->getNumIndependentVariables(); i++)
-//    {
-//        dResult.push_back(model->amounts[i]);
-//    }
-//    Log(lDebug4)<<"Size of dResult in BuildEvalArgument: "<<dResult.size();
-//    return dResult;
     vector<double> dResult;
     dResult.resize(*model->amountsSize + *model->rateRulesSize);
 

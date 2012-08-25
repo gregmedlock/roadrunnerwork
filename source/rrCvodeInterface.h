@@ -6,11 +6,15 @@
 #include "rrPendingAssignment.h"
 #include "cvode/cvode.h"            //For IDE development, you may need to define RR_INSTALL_FOLDER
 #include "rrCvodedll.h"
+
 using std::string;
 
-class ModelFromC;
+
 namespace rr
 {
+
+class ModelFromC;
+class Event;
 typedef long* IntPtr;
 typedef void* CVodeMemPtr;
 
@@ -49,7 +53,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents);
         void                        HandleRootsFound(double &timeEnd, const double& tout);
         void                        RemovePendingAssignmentForIndex(const int& eventIndex);
-        void                        SortEventsByPriority(vector<int>& firedEvents);
+        void                        SortEventsByPriority(vector<Event>& firedEvents);
         void                        HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound);
 
     public:
@@ -62,8 +66,8 @@ class RR_DECLSPEC CvodeInterface : public rrObject
                                    ~CvodeInterface();
 
         void                        AssignResultsToModel();
-        static int                         mCount;
-        static int                         mRootCount;
+        static int                  mCount;
+        static int                  mRootCount;
         int                         mOneStepCount;
 
         static ModelFromC          *model;

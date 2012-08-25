@@ -93,7 +93,9 @@ class RR_DECLSPEC ModelFromC : public rrObject
 
         double*                                 eventTests;
         int*                                    eventTestsSize;
-//        vector<double>                        eventPriorities;
+
+        double* 		                        eventPriorities;		//Array of event priorities. Has size numEvents
+
         TEventDelayDelegate*                    eventDelays;
         bool*                                   eventType;
         int*                                    eventTypeSize;

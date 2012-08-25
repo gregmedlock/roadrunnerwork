@@ -755,16 +755,16 @@ int CompareNoCase(const string& str1, const string& str2)
 
 string Append(const string& str)
 {
-    stringstream ss;
-    ss<<str;
-    return ss.str();
+    //stringstream ss;
+    //ss<<str;
+    return str;
 }
 
 string Append(const int& str)
 {
     stringstream ss;
     ss<<str;
-       return ss.str();
+    return ss.str();
 }
 
 

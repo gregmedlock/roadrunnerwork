@@ -11,5 +11,9 @@ namespace rr
 {
 Random::Random() {}
 
+double Random::NextDouble() const
+{
+	return mRand();
+}
 }
 

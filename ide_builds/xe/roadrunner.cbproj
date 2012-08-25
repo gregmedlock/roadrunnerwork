@@ -153,6 +153,9 @@
 			<CppCompile Include="..\..\source\rrDLLEntry.cpp">
 				<BuildOrder>71</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\source\rrEvent.cpp">
+				<BuildOrder>72</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\source\rrException.cpp">
 				<DependentOn>..\..\source\rrException.h</DependentOn>
 				<BuildOrder>18</BuildOrder>

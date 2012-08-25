@@ -232,64 +232,64 @@ void CGenerator::WriteClassHeader(CodeBuilder& ignore)
 
 void CGenerator::WriteOutVariables(CodeBuilder& ignore)
 {
-    mHeader.FormatVariable("D_S char*",                              "mModelName");
-    mHeader.FormatVariable("D_S char**",                             "mWarnings");
-    mHeader.FormatArray("D_S double",                                "_gp",                             mNumGlobalParameters +
-                                                                                                        mTotalLocalParmeters,                       "Vector containing all the global parameters in the System  ");
+    mHeader.FormatVariable("D_S char*",                   			"mModelName");
+    mHeader.FormatVariable("D_S char**",                            "mWarnings");
+    mHeader.FormatArray("D_S double",                               "_gp",                             mNumGlobalParameters +
+                                                                                                    mTotalLocalParmeters,                       "Vector containing all the global parameters in the System  ");
 
     if(mNumModifiableSpeciesReferences)
     {
-        mHeader.FormatArray("D_S double",                            "_sr",                             mNumModifiableSpeciesReferences,            "Vector containing all the modifiable species references  ");
+        mHeader.FormatArray("D_S double",                           "_sr",                             mNumModifiableSpeciesReferences,            "Vector containing all the modifiable species references  ");
     }
 
     //Arrays
-    mHeader.FormatArray("D_S double*",                               "_lp",                             mNumReactions,                              "Vector containing all the local parameters in the System  ");
-    mHeader.FormatArray("D_S double",                                "_y",                              floatingSpeciesConcentrationList.size(),    "Vector containing the concentrations of all floating species");
-    mHeader.FormatArray("D_S double",                                "_init_y",                         floatingSpeciesConcentrationList.Count(),   "Vector containing the initial concentrations of all floating species");
-    mHeader.FormatArray("D_S double",                                "_amounts",                        floatingSpeciesConcentrationList.size(),    "Vector containing the amounts of all floating species ");
-    mHeader.FormatArray("D_S double",                                "_bc",                             mNumBoundarySpecies,                        "Vector containing all the boundary species concentration values");
-    mHeader.FormatArray("D_S double",                                "_c",                              mNumCompartments                         ,  "Vector containing all the compartment values   ");
-    mHeader.FormatArray("D_S double",                                "_dydt",                           floatingSpeciesConcentrationList.size() ,   "Vector containing rates of changes of all species   ");
-    mHeader.FormatArray("D_S double",                                "_rates",                          mNumReactions                             , "Vector containing the rate laws of all reactions    ");
-    mHeader.FormatArray("D_S double",                                "_ct",                             mNumDependentSpecies                     ,  "Vector containing values of all conserved sums      ");
-    mHeader.FormatArray("D_S double",                                "mEventTests",                     mNumEvents                                 ,"Vector containing results of any event tests        ");
+    mHeader.FormatArray("D_S double*",                              "_lp",                             mNumReactions,                              "Vector containing all the local parameters in the System  ");
+    mHeader.FormatArray("D_S double",                               "_y",                              floatingSpeciesConcentrationList.size(),    "Vector containing the concentrations of all floating species");
+    mHeader.FormatArray("D_S double",                               "_init_y",                         floatingSpeciesConcentrationList.Count(),   "Vector containing the initial concentrations of all floating species");
+    mHeader.FormatArray("D_S double",                               "_amounts",                        floatingSpeciesConcentrationList.size(),    "Vector containing the amounts of all floating species ");
+    mHeader.FormatArray("D_S double",                               "_bc",                             mNumBoundarySpecies,                        "Vector containing all the boundary species concentration values");
+    mHeader.FormatArray("D_S double",                               "_c",                              mNumCompartments                         ,  "Vector containing all the compartment values   ");
+    mHeader.FormatArray("D_S double",                               "_dydt",                           floatingSpeciesConcentrationList.size() ,   "Vector containing rates of changes of all species   ");
+    mHeader.FormatArray("D_S double",                               "_rates",                          mNumReactions                             , "Vector containing the rate laws of all reactions    ");
+    mHeader.FormatArray("D_S double",                               "_ct",                             mNumDependentSpecies                     ,  "Vector containing values of all conserved sums      ");
+    mHeader.FormatArray("D_S double",                               "mEventTests",                     mNumEvents                                 ,"Vector containing results of any event tests        ");
 
     mHeader<<"\ttypedef double (*TEventDelayDelegate)();"<<endl;
-    mHeader.FormatArray("TEventDelayDelegate",                          "mEventDelay",                        mNumEvents                                 ,"Array of trigger function pointers");
-    mHeader.AddFunctionExport("TEventDelayDelegate*",                   "GetEventDelays()");
-    mHeader.FormatArray("bool",                                         "_eventType",                      mNumEvents                                , "Array holding the status whether events are useValuesFromTriggerTime or not");
-    mHeader.FormatArray("bool",                                         "_eventPersistentType",            mNumEvents                                , "Array holding the status whether events are persitstent or not");
-    mHeader.FormatVariable("D_S double",                                "mTime");
-    mHeader.FormatVariable("D_S int",                                  "numIndependentVariables");
-    mHeader.FormatVariable("D_S int",                                  "numDependentVariables");
-    mHeader.FormatVariable("D_S int",                                  "numTotalVariables");
-    mHeader.FormatVariable("D_S int",                                  "numBoundaryVariables");
-    mHeader.FormatVariable("D_S int",                                  "numGlobalParameters");
-    mHeader.FormatVariable("D_S int",                                  "numCompartments");
-    mHeader.FormatVariable("D_S int",                                  "numReactions");
-    mHeader.FormatVariable("D_S int",                                  "numRules");
-    mHeader.FormatVariable("D_S int",                                  "numEvents");
+    mHeader.FormatArray("TEventDelayDelegate",                      "mEventDelay",                        mNumEvents                                 ,"Array of trigger function pointers");
+    mHeader.AddFunctionExport("TEventDelayDelegate*",               "GetEventDelays()");
+    mHeader.FormatArray("bool",                                     "_eventType",                      mNumEvents                                , "Array holding the status whether events are useValuesFromTriggerTime or not");
+    mHeader.FormatArray("bool",                                     "_eventPersistentType",            mNumEvents                                , "Array holding the status whether events are persitstent or not");
+    mHeader.FormatVariable("D_S double",                    		"mTime");
+    mHeader.FormatVariable("D_S int",                               "numIndependentVariables");
+    mHeader.FormatVariable("D_S int",                               "numDependentVariables");
+    mHeader.FormatVariable("D_S int",                               "numTotalVariables");
+    mHeader.FormatVariable("D_S int",                               "numBoundaryVariables");
+    mHeader.FormatVariable("D_S int",                               "numGlobalParameters");
+    mHeader.FormatVariable("D_S int",                               "numCompartments");
+    mHeader.FormatVariable("D_S int",                               "numReactions");
+    mHeader.FormatVariable("D_S int",                               "numRules");
+    mHeader.FormatVariable("D_S int",                               "numEvents");
 
-    mHeader.FormatArray("D_S char*",                                    "variableTable",                floatingSpeciesConcentrationList.size());
-    mHeader.FormatArray("D_S char*",                                    "boundaryTable",                boundarySpeciesList.size());
-    mHeader.FormatArray("D_S char*",                                    "globalParameterTable",         globalParameterList.size());
-    mHeader.FormatArray("D_S int",                                      "localParameterDimensions",     mNumReactions );
+    mHeader.FormatArray("D_S char*",                                "variableTable",                floatingSpeciesConcentrationList.size());
+    mHeader.FormatArray("D_S char*",                                "boundaryTable",                boundarySpeciesList.size());
+    mHeader.FormatArray("D_S char*",                                "globalParameterTable",         globalParameterList.size());
+    mHeader.FormatArray("D_S int",                                  "localParameterDimensions",     mNumReactions );
 
     mHeader<<"\ntypedef void __cdecl (*TEventAssignmentDelegate)();"<<endl;
-    mHeader.FormatVariable("D_S TEventAssignmentDelegate*",            "_eventAssignments","");
-    mHeader.AddFunctionExport("TEventAssignmentDelegate*",           "Get_eventAssignments()");
-    mHeader.FormatVariable("D_S double*",                               "_eventPriorities");
+    mHeader.FormatVariable("D_S TEventAssignmentDelegate*",         "_eventAssignments","");
+    mHeader.AddFunctionExport("TEventAssignmentDelegate*",          "Get_eventAssignments()");
+    mHeader.FormatArray("D_S double",                               "_eventPriorities", mNumEvents);
 
     mHeader<<"\ntypedef double* (*TComputeEventAssignmentDelegate)();"<<endl;
-    mHeader.AddFunctionExport("TComputeEventAssignmentDelegate*",           "Get_computeEventAssignments()");
-    mHeader.FormatVariable("D_S TComputeEventAssignmentDelegate*",    "_computeEventAssignments");
+    mHeader.AddFunctionExport("TComputeEventAssignmentDelegate*",   "Get_computeEventAssignments()");
+    mHeader.FormatVariable("D_S TComputeEventAssignmentDelegate*",  "_computeEventAssignments");
 
     mHeader<<"\ntypedef void (*TPerformEventAssignmentDelegate)();"<<endl;
-    mHeader.FormatVariable("D_S TPerformEventAssignmentDelegate*",    "_performEventAssignments");
-    mHeader.AddFunctionExport("TPerformEventAssignmentDelegate*",           "Get_performEventAssignments()");
+    mHeader.FormatVariable("D_S TPerformEventAssignmentDelegate*",  "_performEventAssignments");
+    mHeader.AddFunctionExport("TPerformEventAssignmentDelegate*",   "Get_performEventAssignments()");
 
-    mHeader.FormatArray("D_S bool",                                    "mEventStatusArray",             mNumEvents);
-    mHeader.FormatArray("D_S bool",                                    "_previousEventStatusArray",     mNumEvents);
+    mHeader.FormatArray("D_S bool",                                 "mEventStatusArray",             mNumEvents);
+    mHeader.FormatArray("D_S bool",                                 "_previousEventStatusArray",     mNumEvents);
 }
 
 
@@ -574,7 +574,7 @@ void CGenerator::WriteResetEvents(CodeBuilder& ignore, const int& numEvents)
               mSource<<"\n";
           }
       }
-      mSource<<Format("}{0}{0}", NL());
+      mSource<<Format("}{0}", NL());
 }
 
 void CGenerator::WriteSetConcentration(CodeBuilder& ignore)
@@ -794,7 +794,7 @@ void CGenerator::WriteAccessors(CodeBuilder& ignore)
 //
     mHeader.AddFunctionExport("int", "getNumLocalParameters(int reactionId)");
     mSource<<"int getNumLocalParameters(int reactionId)\n{\n\t";
-    mSource<<"return localParameterDimensions[reactionId];\n}\n";
+    mSource<<"return localParameterDimensions[reactionId];\n}\n\n";
 //    sb<<Append("\tpublic int getNumLocalParameters(int reactionId)" + NL());
 //    sb<<Append("\t{" + NL());
 //    sb<<Append("\t\treturn localParameterDimensions[reactionId];" + NL());
@@ -870,7 +870,7 @@ void CGenerator::WriteEvalInitialAssignments(CodeBuilder& ignore, const int& num
 {
     mHeader.AddFunctionExport("void", "evalInitialAssignments()");
     mSource<<Append("void evalInitialAssignments()" + NL());
-    mSource<<Append("{");
+    mSource<<Append("{\n");
 
     int numInitialAssignments = mNOM.getNumInitialAssignments();
 
@@ -949,7 +949,7 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
     int numOfRules = mNOM.getNumRules();
 
     mHeader.AddFunctionExport("void", "computeRules(double* y)");
-    mSource<<"void computeRules(double* y)\n{";
+    mSource<<"void computeRules(double* y)\n{\n";
 
     for (int i = 0; i < numOfRules; i++)
     {
@@ -962,7 +962,7 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
             // We only support assignment and ode rules at the moment
             string eqnRule = mNOM.getNthRule(i);
             RRRule aRule(eqnRule, ruleType);
-            string varName         = Trim(aRule.GetLHS());
+            string varName       = Trim(aRule.GetLHS());
             string rightSide     = Trim(aRule.GetRHS());
 
             bool isRateRule = false;
@@ -1005,7 +1005,7 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
 
             if (leftSideRule.size())
             {
-                mSource<<Append(leftSideRule + " = ");
+                mSource<<tab<<Append(leftSideRule + " = ");
                 int speciesIndex;
                 bool isSpecies = floatingSpeciesConcentrationList.find(varName, speciesIndex);
 
@@ -1028,6 +1028,12 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
                     {
                         string temp   = Format("{0};{1}", substituteTerms(numReactions, "", rightSideRule), NL());
                         temp = ReplaceWord("time", "mTime", temp);
+
+                        if(temp.find("spf_piecewise") != string::npos)
+            			{
+                			ConvertFunctionCallToUseVarArgsSyntax("spf_piecewise", temp);
+            			}
+                        temp = RemoveNewLines(temp);
                         mSource<<temp;
                     }
                 }
@@ -1044,7 +1050,7 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
         }
     }
 
-    mSource<<Append("}" + NL() + NL());
+    mSource<<Append("\n}" + NL() + NL());
 
     mHeader.FormatArray("D_S double", "_rateRules", numRateRules, "Vector containing values of additional rate rules"); //Todo: why is t his here in nowhere?
 //    mHeader<<"D_S int _rateRulesSize="<<numRateRules<<";           // Number of rateRules   \n"; //Todo: why is this here in nowhere?
@@ -1187,7 +1193,6 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
     mHeader.AddFunctionExport("void", "evalEvents(double timeIn, double *oAmounts)");
     mSource<<Append("void evalEvents(double timeIn, double *oAmounts)" + NL());
     mSource<<Append("{" + NL());
-//    mSource<<Append("\tprintf(\"In Eval events\\n\");\n\n");
 
     if (numEvents > 0)
     {
@@ -1218,16 +1223,16 @@ void CGenerator::WriteEvalEvents(CodeBuilder& ignore, const int& numEvents, cons
 
 
         ConvertFunctionCallToUseVarArgsSyntax("spf_and", eventString);
-
-        mSource<<Append("\tif (" + eventString + " == 1.0) {" + NL());
+        eventString = RemoveNewLines(eventString);
+        mSource<<Append("\tif (" + eventString + " == 1.0)\n\t{" + NL());
 //        mSource<<Append("\t printf(\"Time for lt true: %f\n\", timeIn);\n");
-        mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = true;" + NL());
-        mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = 1;" + NL());
-        mSource<<Append("\n\t} else {" + NL());
+        mSource<<Append("\t\tmEventStatusArray[" + ToString(i) + "] = true;" + NL());
+        mSource<<Append("\t\tmEventTests[" + ToString(i) + "] = 1;" + NL());
+        mSource<<Append("\n\t}\n\telse\n\t{\n");
 //         mSource<<Append("\t printf(\"Time for lt false: %f\n\", timeIn);\n");
-        mSource<<Append("\t\t     mEventStatusArray[" + ToString(i) + "] = false;" + NL());
-        mSource<<Append("\t\t     mEventTests[" + ToString(i) + "] = -1;" + NL());
-        mSource<<Append("\t\t}" + NL());
+        mSource<<Append("\t\tmEventStatusArray[" + ToString(i) + "] = false;" + NL());
+        mSource<<Append("\t\tmEventTests[" + ToString(i) + "] = -1;" + NL());
+        mSource<<Append("\t}" + NL());
     }
     mSource<<Append("}" + NL() + NL());
 }
@@ -1251,16 +1256,16 @@ void CGenerator::WriteEvalModel(CodeBuilder& ignore, const int& numReactions, co
     }
 
     mSource<<Append(NL());
-    mSource<<Append("\t\tconvertToAmounts();" + NL());
-    mSource<<Append("\t\tmTime = timein;  // Don't remove" + NL());
-    mSource<<Append("\t\tupdateDependentSpeciesValues (_y);" + NL());
+    mSource<<Append("\tconvertToAmounts();" + NL());
+    mSource<<Append("\tmTime = timein;  // Don't remove" + NL());
+    mSource<<Append("\tupdateDependentSpeciesValues (_y);" + NL());
 
     if (numOfRules > 0)
     {
-        mSource<<Append("\t\tcomputeRules (_y);" + NL());
+        mSource<<Append("\tcomputeRules (_y);" + NL());
     }
 
-    mSource<<Append("\t\tcomputeReactionRates (mTime, _y);" + NL());
+    mSource<<Append("\tcomputeReactionRates (mTime, _y);" + NL());
 
     // Write out the ODE equations
     string stoich;
@@ -1414,7 +1419,7 @@ void CGenerator::WriteEvalModel(CodeBuilder& ignore, const int& numReactions, co
         // in the model function from overriding it. I think this is expected behavior.
         if (!floatingSpeciesConcentrationList[i].rateRule)
         {
-            mSource<<"\t\t_dydt[" << i << "] =" << final << ";" << NL();
+            mSource<<"\t_dydt[" << i << "] =" << final << ";" << NL();
         }
     }
 
@@ -1516,24 +1521,25 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
     //Have to create TEventDelegate functions here
     for (int i = 0; i < delays.Count(); i++)
     {
-        mSource<<"double GetEventDelay_"<<i<<"()\n{\treturn "<<delays[i]<<";\n}\n";
+        mSource<<"double GetEventDelay_"<<i<<"()\n{\n\treturn "<<delays[i]<<";\n}\n\n";
     }
 
     mSource<<"void InitializeDelays()\n{\n";
 
     for (int i = 0; i < delays.Count(); i++)
     {
-        mSource<<Format("\t\tmEventDelay[{0}] = (TEventDelayDelegate) malloc(sizeof(TEventDelayDelegate) * 1);{2}", i, delays[i], NL());
+        mSource<<Format("\tmEventDelay[{0}] = (TEventDelayDelegate) malloc(sizeof(TEventDelayDelegate) * 1);{2}", i, delays[i], NL());
 
         //Inititialize
-        mSource<<Format("\t\tmEventDelay[{0}] = GetEventDelay_{0};\n", i);
-        mSource<<Format("\t\t_eventType[{0}] = {1};{2}", i, ToString((eventType[i] ? true : false)), NL());
-        mSource<<Format("\t\t_eventPersistentType[{0}] = {1};{2}", i, (eventPersistentType[i] ? "true" : "false"), NL());
+        mSource<<Format("\tmEventDelay[{0}] = GetEventDelay_{0};\n", i);
+        mSource<<Format("\t_eventType[{0}] = {1};{2}", i, ToString((eventType[i] ? true : false)), NL());
+        mSource<<Format("\t_eventPersistentType[{0}] = {1};{2}", i, (eventPersistentType[i] ? "true" : "false"), NL());
     }
     mSource<<"}\n\n";
 
     mHeader.AddFunctionExport("void", "computeEventPriorities()");
     mSource<<"void computeEventPriorities()\n{";
+//    mSource<<"\n\t"<<"printf(\"In computeEventPriorities\");\n";
     for (int i = 0; i < numEvents; i++)
     {
         Event* current = mNOM.GetModel()->getEvent(i);
@@ -1542,6 +1548,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
         {
             string priority = SBML_formulaToString(current->getPriority()->getMath());
             mSource<<"\n"<<Format("\t_eventPriorities[{0}] = {1};{2}", i, substituteTerms(numReactions, "", priority), NL());
+
         }
         else
         {
@@ -1614,7 +1621,7 @@ void CGenerator::WriteSetCompartmentVolumes(CodeBuilder& ignore)
 void CGenerator::WriteSetBoundaryConditions(CodeBuilder& ignore)
 {
     mHeader.AddFunctionExport("void", "setBoundaryConditions()");
-    mSource<<"void setBoundaryConditions()\n{";
+    mSource<<"void setBoundaryConditions()\n{\n";
 
     for (int i = 0; i < boundarySpeciesList.size(); i++)
     {
@@ -2632,7 +2639,7 @@ void CGenerator::WriteInitFunction(CodeBuilder& ignore, CodeBuilder& source)
     if (mNumEvents > 0)
     {
         source<<Append("\t_eventAssignments = (TEventAssignmentDelegate*) malloc(sizeof(TEventAssignmentDelegate)*numEvents);" , NL());
-        source<<Append("\t_eventPriorities = (double*) malloc(sizeof(double)* numEvents);" , NL());
+//        source<<Append("\t_eventPriorities = (double*) malloc(sizeof(double)* numEvents);" , NL());
 
 //        source<<Append("\t\t_computeEventAssignments= new TComputeEventAssignmentDelegate[numEvents];" , NL());
         source<<Append("\t_computeEventAssignments = (TComputeEventAssignmentDelegate*) malloc(sizeof(TComputeEventAssignmentDelegate)*numEvents);" , NL());

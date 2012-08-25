@@ -1,4 +1,4 @@
-	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{15A35B10-E1F3-471E-A8EA-86C0202E1251}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -34,7 +34,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\Wrappers\C\Apps\rr_c\;..\..\source\;..\..\Wrappers\C\Apps\;..\..\source;..\..\Wrappers\C;..\..\Wrappers\C\Examples\rr_c\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\Wrappers\C\Apps\rr_c\;..\..\source\;..\..\Wrappers\C\Apps\;R:\rrInstalls\xe\lib\;..\..\Wrappers\C\Examples\rr_c\;$(RR_ROOT)\trunk\Wrappers\C\Examples\rr_c\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>R:\rrInstalls\xeDebug\lib\;..\..\Wrappers\C\Apps\rr_c\;..\..\source\;..\..\Wrappers\C\Apps\;R:\rrInstalls\xe\lib\;..\..\Wrappers\C\Examples\rr_c\;$(RR_ROOT)\trunk\Wrappers\C\Examples\rr_c\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -112,9 +112,9 @@
 			<CppCompile Include="..\..\Wrappers\C\Apps\rr_c\main.cpp">
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="R:\rrInstalls\xe\lib\rr_c_api.lib">
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\rr_c_api.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>1</BuildOrder>
+				<BuildOrder>12</BuildOrder>
 			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>

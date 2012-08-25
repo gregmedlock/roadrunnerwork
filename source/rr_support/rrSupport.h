@@ -2,15 +2,10 @@
 #define rrSupportH
 #include "rrCExporter.h"
 
-#ifndef E
-//const double  E     =  2.71828182845904523536028747135;
-#define E 2.71
+#ifndef MATH_CONSTANTS
+#define E 2.71828182845904523536028747135
+#define PI 3.14159265358979323846264338327
 #endif
-#ifndef PI
-#define PI 3.1415
-#endif
-
-//const double  PI    =  3.14159265358979323846264338327;
 
 // Boolean functions for event handling" + NL());
 double spf_gt(double a, double b);

@@ -622,7 +622,7 @@ bool RoadRunner::loadSBMLFromFile(const string& fileName)
 
 bool RoadRunner::loadSBML(const string& sbml)
 {
-    Log(lDebug4)<<"Loading SBML into simulator";
+    Log(lInfo)<<"Loading SBML into simulator";
     if (!sbml.size())
     {
         Log(lError)<<"No SBML content..!";
