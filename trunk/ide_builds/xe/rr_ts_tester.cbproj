@@ -191,7 +191,7 @@
 						<Parameters Name="DebugSourceDirs">C:\RRW\source</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-m&quot;R:\\SBML_l2v4&quot; -n1 -t&quot;R:\rrTemp&quot; -d&quot;R:\RRTesting\DataOutput\xe&quot; -p -vInfo</Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-m&quot;R:\\SBML_l2v4&quot; -n936 -t&quot;R:\rrTemp&quot; -d&quot;R:\RRTesting\DataOutput\xe&quot; -p -vDebug3</Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

@@ -339,6 +339,13 @@ bool ModelFromC::SetupDLLData()
         srSize = &mDummyInt;
     }
 
+    eventPriorities   = (double*) GetProcAddress((HMODULE) mDLLHandle, "_eventPriorities");
+    if(!eventPriorities)
+    {
+        Log(lDebug)<<"Failed to assign to eventPriorities";
+        eventPriorities = NULL;
+    }
+
     eventStatusArray   = (bool*) GetProcAddress((HMODULE) mDLLHandle, "mEventStatusArray");
     if(!eventStatusArray)
     {
@@ -443,7 +450,6 @@ bool ModelFromC::SetupDLLData()
         performEventAssignments = Get_performEventAssignments();
     }
 
-
     c_GetEventDelayDelegatesStar     GetEventDelays;
     GetEventDelays  = (c_GetEventDelayDelegatesStar) GetProcAddress((HMODULE) mDLLHandle, "GetEventDelays");
     if(!GetEventDelays)
@@ -454,6 +460,8 @@ bool ModelFromC::SetupDLLData()
     {
         eventDelays = GetEventDelays();
     }
+
+
     return true;
 }
 

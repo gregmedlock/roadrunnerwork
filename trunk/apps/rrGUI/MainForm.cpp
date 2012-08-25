@@ -258,7 +258,7 @@ void __fastcall TMForm::SimulateAExecute(TObject *Sender)
 
         SimulationData data = mRR->GetSimulationResult();
         string resultFileName(rr::JoinPath(mRR->GetTempFileFolder(), mRR->GetModelName()));
-        resultFileName = ChangeFileExtensionTo(resultFileName, ".csv");
+        resultFileName = rr::ChangeFileExtensionTo(resultFileName, ".csv");
         Log(rr::lInfo)<<"Saving result to file: "<<resultFileName;
         ofstream fs(resultFileName.c_str());
         fs << data;
@@ -419,6 +419,7 @@ void __fastcall TMForm::PlotTestTestSuiteDataExecute(TObject *Sender)
         aSeries->Title = colNames[i+1].c_str();
         aSeries->Color = clGray;
         aSeries->LinePen->Width = 1;
+        aSeries->Pointer->Visible = true;
         series.push_back(aSeries);
         Chart1->AddSeries(aSeries);
     }

@@ -91,10 +91,8 @@ int main(int argc, char * argv[])
     }
     //The followoing are cases currently having problems. Some do in fact pass the test, but takes very long to run
     vector<int> exceptions;
-//    exceptions.push_back(374);  //
-//    exceptions.push_back(748);  // Do pass but takes long to run
-//    exceptions.push_back(950);  //?
-//    exceptions.push_back(957);  //?
+    exceptions.push_back(748);  // Do pass but takes long to run
+
 //    exceptions.push_back(958);  //?
 //    exceptions.push_back(961);    //Weird assignments...
 //    exceptions.push_back(966); //This one takes really long tim..

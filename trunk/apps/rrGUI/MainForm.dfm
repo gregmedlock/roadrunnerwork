@@ -323,8 +323,8 @@ object MForm: TMForm
         Marks.Visible = False
         LinePen.Color = 4210816
         LinePen.Width = 3
-        Pointer.Brush.Gradient.EndColor = 10593629
-        Pointer.Gradient.EndColor = 10593629
+        Pointer.Brush.Gradient.EndColor = 7028779
+        Pointer.Gradient.EndColor = 7028779
         Pointer.InflateMargins = True
         Pointer.Style = psRectangle
         Pointer.Visible = False
@@ -344,10 +344,6 @@ object MForm: TMForm
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'Log'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Panel3: TPanel
           Left = 0
           Top = 0
@@ -399,10 +395,6 @@ object MForm: TMForm
       object TabSheet2: TTabSheet
         Caption = 'Settings'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object CompilerRG: TRadioGroup
           Left = 3
           Top = 16
@@ -428,10 +420,6 @@ object MForm: TMForm
       object TabSheet3: TTabSheet
         Caption = 'Test Suite'
         ImageIndex = 2
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object Button2: TButton
           Left = 408
           Top = 112
@@ -450,10 +438,6 @@ object MForm: TMForm
           TabOrder = 1
           object TabSheet4: TTabSheet
             Caption = 'General'
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
             object testSuitePic: TImage
               Left = 676
               Top = 29
@@ -1407,10 +1391,6 @@ object MForm: TMForm
           object TabSheet5: TTabSheet
             Caption = 'TabSheet5'
             ImageIndex = 1
-            ExplicitLeft = 0
-            ExplicitTop = 0
-            ExplicitWidth = 0
-            ExplicitHeight = 0
           end
         end
       end

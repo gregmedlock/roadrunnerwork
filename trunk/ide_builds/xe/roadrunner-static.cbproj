@@ -169,6 +169,9 @@
 				<DependentOn>..\..\source\rrCvodeInterface.h</DependentOn>
 				<BuildOrder>60</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\source\rrEvent.cpp">
+				<BuildOrder>72</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\source\rrException.cpp">
 				<DependentOn>..\..\source\rrException.h</DependentOn>
 				<BuildOrder>14</BuildOrder>

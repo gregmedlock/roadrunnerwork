@@ -14,8 +14,8 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
          Application->Initialize();
          Application->MainFormOnTaskBar = true;
          Application->CreateForm(__classid(TMForm), &MForm);
-         Application->CreateForm(__classid(TFileSelectionFrame), &FileSelectionFrame);
-         Application->Run();
+		Application->CreateForm(__classid(TFileSelectionFrame), &FileSelectionFrame);
+		Application->Run();
     }
     catch (Exception &exception)
     {

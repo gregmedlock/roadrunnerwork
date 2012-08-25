@@ -66,7 +66,7 @@ public:
 // 2007-02-11: made the destructor virtual; thanks "double more" for pointing this out
   virtual ~MTRand_int32() {} // destructor
 protected: // used by derived classes, otherwise not accessible; use the ()-operator
-  unsigned long rand_int32(); // generate 32 bit random integer
+  unsigned long rand_int32() const; // generate 32 bit random integer
 private:
   static const int n;//
   static const int m;//= 624, m = 397; // compile time constants
@@ -75,20 +75,20 @@ private:
   static int p; // position in state array
   static bool init; // true if init function is called
 // private functions used to generate the pseudo random numbers
-  unsigned long twiddle(unsigned long, unsigned long); // used by gen_state()
-  void gen_state(); // generate new state
+  unsigned long twiddle(unsigned long, unsigned long) const; // used by gen_state()
+  void gen_state() const; // generate new state
 // make copy constructor and assignment operator unavailable, they don't make sense
   MTRand_int32(const MTRand_int32&); // copy constructor not defined
   void operator=(const MTRand_int32&); // assignment operator not defined
 };
 
 // inline for speed, must therefore reside in header file
-inline unsigned long MTRand_int32::twiddle(unsigned long u, unsigned long v) {
+inline unsigned long MTRand_int32::twiddle(unsigned long u, unsigned long v) const {
   return (((u & 0x80000000UL) | (v & 0x7FFFFFFFUL)) >> 1)
     ^ ((v & 1UL) ? 0x9908B0DFUL : 0x0UL);
 }
 
-inline unsigned long MTRand_int32::rand_int32() { // generate 32 bit random int
+inline unsigned long MTRand_int32::rand_int32() const { // generate 32 bit random int
   if (p == n) gen_state(); // new state vector needed
 // gen_state() is split off to be non-inline, because it is only called once
 // in every 624 calls and otherwise irand() would become too big to get inlined
@@ -106,7 +106,7 @@ public:
   MTRand(unsigned long seed) : MTRand_int32(seed) {}
   MTRand(const unsigned long* seed, int size) : MTRand_int32(seed, size) {}
   ~MTRand() {}
-  double operator()() {
+  double operator()() const {
     return static_cast<double>(rand_int32()) * (1. / 4294967296.); } // divided by 2^32
 private:
   MTRand(const MTRand&); // copy constructor not defined

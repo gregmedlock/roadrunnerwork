@@ -50,7 +50,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\Testing\squareWave\;..\..\source\;..\..\source\libstruct;..\..\apps\rr\;$(RR_INSTALL)\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\Testing\squareWave\;R:\rrBuilds\xe\ThirdParty\lib\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;R:\rrInstalls\xe\lib\;..\..\source\;..\..\releases\xe\shared\link\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\installs\xe\lib\;..\..\Examples\rr\;..\..\releases\xe\link\;..\..\installs\xe\bin\;..\..\Apps\rr\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>R:\rrInstalls\xeDebug\lib\;..\..\Testing\squareWave\;R:\rrBuilds\xe\ThirdParty\lib\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;R:\rrInstalls\xe\lib\;..\..\source\;..\..\releases\xe\shared\link\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\installs\xe\lib\;..\..\Examples\rr\;..\..\releases\xe\link\;..\..\installs\xe\bin\;..\..\Apps\rr\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
@@ -107,6 +107,26 @@
 			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\libf2c.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>10</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\libsbml-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>8</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\libxml2_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>9</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\roadrunner.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>5</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>6</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xeDebug\lib\sundials_nvecserial.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>7</BuildOrder>
 			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
