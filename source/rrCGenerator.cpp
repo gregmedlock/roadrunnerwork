@@ -945,6 +945,7 @@ void CGenerator::WriteEvalInitialAssignments(CodeBuilder& ignore, const int& num
 int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
 {
     IntStringHashTable mapVariables;
+    mapVariables.clear();
     int numRateRules = 0;
     int numOfRules = mNOM.getNumRules();
 
@@ -1088,10 +1089,13 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
         }
 
         string varName = (string) mapVariables[i];
-        double value = mNOM.getValue(varName);
-        if (!IsNaN(value))
+        if(varName.size())
         {
-            mSource<<tab<<mMapRateRule[i] << " = " << ToString(value, STR_DoubleFormat) << ";" << NL();
+        	double value = mNOM.getValue(varName);
+	        if (!IsNaN(value))
+    	    {
+        	    mSource<<tab<<mMapRateRule[i] << " = " << ToString(value, STR_DoubleFormat) << ";" << NL();
+        	}
         }
     }
 

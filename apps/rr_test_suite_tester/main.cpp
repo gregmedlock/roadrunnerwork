@@ -167,7 +167,7 @@ int main(int argc, char * argv[])
         rrI->ComputeAndAssignConservationLaws(false);
 
         //Then Simulate model
-        if(!simulation.Simulate())
+         if(!simulation.Simulate())
         {
             Log(lError)<<"Failed running simulation";
             throw("Failed running simulation");
