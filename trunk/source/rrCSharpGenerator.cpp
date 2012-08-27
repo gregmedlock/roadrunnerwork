@@ -1776,7 +1776,7 @@ void CSharpGenerator::WriteEvalInitialAssignments(CodeBuilder& sb, const int& nu
     }
     for (int i = 0; i < mNOM.GetModel()->getNumEvents(); i++)
     {
-        Event *current = mNOM.GetModel()->getEvent(i);
+        libsbml::Event *current = mNOM.GetModel()->getEvent(i);
         string initialTriggerValue = ToString(current->getTrigger()->getInitialValue());//.ToString().ToLowerInvariant();
         sb<<Append("\t\t_eventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
         sb<<Append("\t\t_previousEventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
@@ -2285,7 +2285,7 @@ void CSharpGenerator::WriteEventAssignments(CodeBuilder& sb, const int& numReact
     sb<<Format("{0}{0}\tpublic void computeEventPriorites() { {0}", NL());
     for (int i = 0; i < numEvents; i++)
     {
-        Event* current = mNOM.GetModel()->getEvent(i);
+        libsbml::Event* current = mNOM.GetModel()->getEvent(i);
 
         if (current->isSetPriority() && current->getPriority()->isSetMath())
         {

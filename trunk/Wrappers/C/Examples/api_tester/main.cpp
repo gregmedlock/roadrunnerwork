@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
 	if(!loadSBML(sbml.c_str()))
 	{
 		cerr<<"Failed loading SBML from file:"<<fileName<<endl;
-		cerr<<"Last error was"<<getLastError()<<endl;
+		cerr<<"Last error was: "<<getLastError()<<endl;
 		return -1;
 	}
 

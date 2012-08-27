@@ -20,8 +20,9 @@ namespace rr_c_api
 using rr::StringList;
 using rr::ArrayList;
 using rr::RRArrayList;
+
 //Error/Warning Messages
-const char ALLOCATE_API_ERROR_MSG[] = {"Please allocate a handle to the roadrunner API before calling any API function"};
+extern char* ALLOCATE_API_ERROR_MSG;
 
 //Internal prototypes (not exported)
 void                setError(const string& err);

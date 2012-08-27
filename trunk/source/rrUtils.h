@@ -12,6 +12,8 @@ using std::vector;
 using std::string;
 namespace rr
 {
+extern char* WinPathSeparator;
+extern char* LinuxPathSeparator;
 
 //Misc.
 RR_DECLSPEC std::size_t     IndexOf(std::vector<std::string>& vec, const std::string& elem );
@@ -20,7 +22,7 @@ RR_DECLSPEC bool            IsNullOrEmpty(const string& str);    //Can't be null
 RR_DECLSPEC void            Pause(bool doIt = true);
 
 //String utilities
-RR_DECLSPEC string          RemoveTrailingSeparator(const string& fldr, const string& sep ="\\");
+RR_DECLSPEC string          RemoveTrailingSeparator(const string& fldr, const string& sep = WinPathSeparator);//"\\");
 
 //File  Utilities
 RR_DECLSPEC bool            FileExists(const string& fileN);
