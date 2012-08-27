@@ -20,7 +20,7 @@ class RR_DECLSPEC StringSymbolHashTable : public rrObject, public map<string, SB
     public:
         StringSymbolHashTable(){}
         map<string, SBMLSymbol>::iterator     mIter;
-        bool                                    ContainsKey(const string& aKey);
+        bool                                  ContainsKey(const string& aKey);
 };
 
 ostream& operator<<(ostream& stream, StringSymbolHashTable& hash);

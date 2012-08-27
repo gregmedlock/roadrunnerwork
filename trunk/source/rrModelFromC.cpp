@@ -720,12 +720,17 @@ void ModelFromC::evalModel(const double& timein, const vector<double>& y)
     }
 
     //copy y values to amounts
-    for(u_int i = 0; i < y.size(); i++)
-    {
-        amounts[i] = y[i];
-    }
+//    for(u_int i = 0; i < y.size(); i++)
+//    {
+//        amounts[i] = y[i];
+//    }
+//
+//    cevalModel(timein, amounts);
 
-    cevalModel(timein, amounts);
+	double *oAmounts = CreateVector(y);
+    cevalModel(timein, oAmounts);
+    delete [] oAmounts;
+
 }
 
 void ModelFromC::evalEvents(const double& timeIn, const vector<double>& y)
@@ -735,8 +740,11 @@ void ModelFromC::evalEvents(const double& timeIn, const vector<double>& y)
         Log(lError)<<"Tried to call NULL function in "<<__FUNCTION__;
         return;
     }
+	double *oAmounts = CreateVector(y);
+    cevalEvents(timeIn, oAmounts);
+    delete [] oAmounts;
 
-    cevalEvents(timeIn, amounts);
+//    cevalEvents(timeIn, amounts);
 }
 
 void ModelFromC::resetEvents()

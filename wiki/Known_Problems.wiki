@@ -1,43 +1,45 @@
 #summary Known Problems with Road Runner Versions
 
-= Version 1.0 =
+= RoadRunner++ Version 1.0 =
 
 =libSBML Test Suite Failing Tests=
 The table below shows tests that 'should' be passing, but for various reasons fails.
-Tests beyond case 980 was not checkled
+Tests beyond case 980 was not checked
+||*Count*||*Case Number*||*Problem Description*||*Additional Info*||
+||1 ||424||The event is not executed||An event with a delay||
+||2 ||935||Proper event not executed||
+||3 ||950||Handling of infinity constants, +/-INF and NAN||
+||4 ||951||Handling of infinity constants, +/-INF and NAN||
+||5 ||952||Event stuff including 'persistent'||
+||6 ||955||Various mathematical constructs||
+||7 ||957||Various mathematical constructs||
+||8 ||958||Various mathematical constructs||
+||9 ||959||Various mathematical constructs||
+||10||961||Avogadros constant test||
+||11||962||Random testing of events||
+||12||963||Event triggering ||
+||13||964||Random triggering||
+||14||965||Similar too 952||
+||15||966||Similar too 952||
+||16||967||Random triggering||
+||17||978||Some event triggering (12 events)||
+  
+In the table above, the following (83) failing and not supported tests, are not included:
+ 39, 40,182,184,531,533,534,535,536,537,538,543,546,548,549,
+550,551,552,553,554,555,556,557,558,559,560,561,562,563,564,
+565,566,567,569,570,571,573,575,576,613,614,615,628,629,630,
+658,659,660,661,662,663,664,665,666,673,674,675,687,695,696,
+705,760,761,762,777,778,779,780,844,870,871,872,873,874,875,
+876,937,938,939,940,941,942,943
+
+==Recently Fixed Tests==
 ||*Case Number*||*Problem Description*||*Additional Info*||
 ||337||Wrong initial concentration for S2||
 ||340||Wrong initial concentration for a specie||
 ||341||Wrong initial concentration for a specie||
 ||342||Wrong initial concentration for a specie||
 ||344||Wrong initial concentration for a specie||
-||345||Wrong initial concentration a specie||
-||346||Wrong initial concentration a specie||
+||345||Wrong initial concentration for a specie||
+||346||Wrong initial concentration for a specie||
 ||347||Problem not defined||
-||424||The event is not executed||An event with a delay||
-||950||Handling of infinity constants, +/-INF and NAN||
-||951||Handling of infinity constants, +/-INF and NAN||
-||952||Event stuff including 'presistent'||
-||955||Various mathematical constructs||
-||957||Various mathematical constructs||
-||958||Various mathematical constructs||
-||959||Various mathematical constructs||
-||961||Avogadros constant test||
-||962||Random testing of events||
-||963||Event triggering ||
-||964||Random triggering||
-||965||Similar too 952||
-||966||Similar too 952||
-||967||Random triggereing||
-||978||Some event triggering (12 events)||
-
-In the table above, the following (83) failing tests are not included:
-39,40,182,184,531,533,534,535,536,537,538,543,546,548,549,550,
-551,552,553,554,555,556,557,558,559,560,561,562,563,564,565,
-566,567,569,570,571,573,575,576,613,614,615,628,629,630,658,
-659,660,661,662,663,664,665,666,673,674,675,687,695,696,705,
-760,761,762,777,778,779,780,844,870,871,872,873,874,875,876,
-937,938,939,940,941,942,943
-
-The above tests are currently not supported by !RoadRunner
 

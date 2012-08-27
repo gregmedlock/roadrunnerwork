@@ -884,7 +884,7 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& han
 
 vector<int> CvodeInterface::RetestEvents(const double& timeEnd, const vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents)
 {
-    vector<int> result;// = new vector<int>();
+    vector<int> result;
 //     vector<int> removeEvents;// = new vector<int>();    //Todo: this code was like this originally.. which removeEvents to use???
 
     if (mRR && !mRR->mConservedTotalChanged)
@@ -923,6 +923,36 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, const vector<int
     delete oldState;
     return result;
 }
+
+////        private List<int> RetestEvents(double timeEnd, List<int> handledEvents, bool assignOldState, out List<int> removeEvents)
+////        {
+////            var result = new List<int>();
+////            removeEvents = new List<int>();
+////
+////            if (!RoadRunner._bConservedTotalChanged) model.computeConservedTotals();
+////            model.convertToAmounts();
+////            model.evalModel(timeEnd, BuildEvalArgument());
+////
+////            var oldState = new ModelState(model);
+////            model.evalEvents(timeEnd, BuildEvalArgument());
+////
+////            for (int i = 0; i < model.getNumEvents; i++)
+////            {
+////                if (model.eventStatusArray[i] == true && oldState.EventStatusArray[i] == false && !handledEvents.Contains(i))
+////                    result.Add(i);
+////                if (model.eventStatusArray[i] == false && oldState.EventStatusArray[i] == true && !model.eventPersistentType[i])
+////                {
+////                    removeEvents.Add(i);
+////                }
+////            }
+////            if (assignOldState)
+////                oldState.AssignToModel(model);
+////
+////            return result;
+////        }
+////
+////
+
 
 void CvodeInterface::HandleRootsFound(double &timeEnd, const double& tout)
 {
@@ -1375,7 +1405,6 @@ void CvodeInterface::setAbsTolerance(int index, double dValue)
 
 int CvodeInterface::reStart(double timeStart, ModelFromC* model)
 {
-	//mOneStepCount = 0;
     AssignNewVector(model);
     SetInitStep(cvodeMem, InitStep);
     SetMinStep(cvodeMem, MinStep);

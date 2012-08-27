@@ -22,7 +22,7 @@ using rr::ArrayList;
 using rr::RRArrayList;
 
 //Error/Warning Messages
-extern char* ALLOCATE_API_ERROR_MSG;
+extern const char* ALLOCATE_API_ERROR_MSG;
 
 //Internal prototypes (not exported)
 void                setError(const string& err);
