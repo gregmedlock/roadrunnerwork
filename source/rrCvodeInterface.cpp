@@ -28,7 +28,6 @@ vector<double> BuildEvalArgument(ModelFromC* model);
 
 //Static stuff...
 //double      CvodeInterface::lastTimeValue = 0;
-//int         CvodeInterface::mOneStepCount = 0;
 int         CvodeInterface::mCount = 0;
 int         CvodeInterface::mRootCount = 0;
 int         CvodeInterface::errorFileCounter = 0;
@@ -66,7 +65,11 @@ abstolArray(NULL),
 fileHandle(NULL),
 //modelDelegate(&CvodeInterface::ModelFcn)
 mRR(rr),
-cvodeMem(NULL)
+cvodeMem(NULL),
+mOneStepCount(0),
+lastTimeValue(0),
+lastEvent(0)
+
 {
     InitializeCVODEInterface(aModel);
 }
@@ -677,7 +680,14 @@ double CvodeInterface::OneStep(double timeStart, double hstep)
 //                bool tooCloseToStart = fabsl(timeEnd - timeStart) > absTol;
                 bool tooCloseToStart = fabs(timeEnd - lastEvent) > relTol;
 
-                strikes = (tooCloseToStart) ? 3 : strikes--;
+                if(tooCloseToStart)
+                {
+                	strikes =  3;
+                }
+                else
+                {
+                	strikes--;
+                }
 
                 if (tooCloseToStart || strikes > 0)
                 {
@@ -1365,12 +1375,11 @@ void CvodeInterface::setAbsTolerance(int index, double dValue)
 
 int CvodeInterface::reStart(double timeStart, ModelFromC* model)
 {
+	//mOneStepCount = 0;
     AssignNewVector(model);
-
     SetInitStep(cvodeMem, InitStep);
     SetMinStep(cvodeMem, MinStep);
     SetMaxStep(cvodeMem, MaxStep);
-
     return CVReInit(cvodeMem, timeStart, _amounts, relTol, abstolArray);
 }
 

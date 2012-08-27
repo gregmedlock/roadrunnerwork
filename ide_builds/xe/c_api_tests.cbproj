@@ -127,7 +127,7 @@
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="RunParams">R:\\rrInstalls\xe\Models</Parameters>
+						<Parameters Name="RunParams">R:\\rrInstalls\xeDebug\Models</Parameters>
 					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

@@ -934,7 +934,7 @@ void CGenerator::WriteEvalInitialAssignments(CodeBuilder& ignore, const int& num
     }
     for (int i = 0; i < mNOM.GetModel()->getNumEvents(); i++)
     {
-        Event *current = mNOM.GetModel()->getEvent(i);
+        libsbml::Event *current = mNOM.GetModel()->getEvent(i);
         string initialTriggerValue = ToString(current->getTrigger()->getInitialValue());//.ToString().ToLowerInvariant();
         mSource<<Append("\tmEventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
         mSource<<Append("\t_previousEventStatusArray[" + ToString(i) + "] = " + initialTriggerValue + ";" + NL());
@@ -1542,7 +1542,7 @@ void CGenerator::WriteEventAssignments(CodeBuilder& ignore, const int& numReacti
 //    mSource<<"\n\t"<<"printf(\"In computeEventPriorities\");\n";
     for (int i = 0; i < numEvents; i++)
     {
-        Event* current = mNOM.GetModel()->getEvent(i);
+        libsbml::Event* current = mNOM.GetModel()->getEvent(i);
 
         if (current->isSetPriority() && current->getPriority()->isSetMath())
         {
