@@ -14,20 +14,26 @@ using namespace std;
 using namespace rr;
 int main()
 {
-    strstream outPut;
+//    strstream outPut;
+//
+//    outPut.precision(5);
+//    outPut.setf(ios::left);
+//	//cout<<outPut.str()<<endl;
+//
+//    //Test and function
+//    cout<<" And is "<< ToString( spf_and(3, (double) 1, (double) 0, (double) 1) )<<endl;
+//
+//    //Power function
+//    double base = 25;
+//    double exp = -1;
+//    cout<<base<<" to the power of "<<exp<<" = "<<spf_pow(base, exp)<<endl;
+//    cout<<"CG: "<<base<<" to the power of "<<exp<<" = "<<pow(base, exp)<<endl;
 
-    outPut.precision(5);
-    outPut.setf(ios::left);
-//cout<<outPut.str()<<endl;
-
-    //Test and function
-    cout<<" And is "<< ToString( spf_and(3, (double) 1, (double) 0, (double) 1) )<<endl;
-
-    //Power function
-    double base = 25;
-    double exp = -1;
-    cout<<base<<" to the power of "<<exp<<" = "<<spf_pow(base, exp)<<endl;
-    cout<<"CG: "<<base<<" to the power of "<<exp<<" = "<<pow(base, exp)<<endl;
+    double val =.0000000001;
+    char sBuffer[256];
+    sprintf(sBuffer, "%G", val);
+    string str = string(sBuffer);
+    cout<<"A double: "<<str;
     //////////////////////////////////////////////////
     cout<<"Hit any key to exit...";
     cin.ignore(0,'\n');

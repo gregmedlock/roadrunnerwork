@@ -422,7 +422,7 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
 
                    case CodeTypes::tDoubleToken:
                        sb<<Append(WriteDouble(s.tokenDouble));
-                       break;
+                   break;
                    case CodeTypes::tIntToken:
                     sb<<Append((int) s.tokenInteger);
                        break;
@@ -968,7 +968,7 @@ int CSharpGenerator::ReadFloatingSpecies()
               }
 
               stringstream formula;
-              formula<<ToString(dValue,STR_DoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
+              formula<<ToString(dValue, mDoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
 
               symbol = new Symbol(reOrderedList[i],
                   dValue / dVolume,
@@ -1038,7 +1038,7 @@ int CSharpGenerator::ReadBoundarySpecies()
                 }
             }
             stringstream formula;
-            formula<<ToString(dValue, STR_DoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
+            formula<<ToString(dValue, mDoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
             symbol = new Symbol(sName,
                                 dValue / dVolume,
                                 compartmentName,
@@ -1906,7 +1906,7 @@ int CSharpGenerator::WriteComputeRules(CodeBuilder& sb, const int& numReactions)
         double value = mNOM.getValue(varName);
         if (!IsNaN(value))
         {
-            sb<< mMapRateRule[i] << " = " << ToString(value, STR_DoubleFormat) << ";" << NL();
+            sb<< mMapRateRule[i] << " = " << ToString(value, mDoubleFormat) << ";" << NL();
         }
     }
 

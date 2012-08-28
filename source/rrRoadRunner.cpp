@@ -410,12 +410,14 @@ double RoadRunner::GetNthSelectedOutput(const int& index, const double& dCurrent
 
 void RoadRunner::AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime)
 {
+	stringstream msg;
     for (u_int j = 0; j < selectionList.size(); j++)
     {
         double out =  GetNthSelectedOutput(j, dCurrentTime);
         results(nRow,j) = out;
-        Log(lDebug3)<<"Adding result to row\t"<<nRow<<" : "<<out;
+        msg<<tab<<out;
     }
+    Log(lDebug1)<<"Added result row\t"<<nRow<<" : "<<msg.str();
 }
 
 vector<double> RoadRunner::BuildModelEvalArgument()
