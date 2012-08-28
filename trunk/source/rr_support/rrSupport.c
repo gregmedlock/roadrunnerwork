@@ -514,15 +514,15 @@ double cosTable[] = {
 
 double myFastSin(double angle)
 {
-    int aVal;
-    double bVal;
-    static double holyConstant = 0.017453292519943295769236907684886;
-
-    aVal = angle * 0.1;
-    bVal = angle - (10.0 * aVal);
-
-    return sinTable[aVal]* cosTable[ spf_ceil(bVal)] + bVal * holyConstant * sinTable[9-aVal];
+//    int aVal;
+//    double bVal;
+//    static double holyConstant = 0.017453292519943295769236907684886;
+//
+//    aVal = angle * 0.1;
+//    bVal = angle - (10.0 * aVal);
+//
+//    return sinTable[aVal]* cosTable[ spf_ceil(bVal)] + bVal * holyConstant * sinTable[9-aVal];
 //    return -1;//sin(angle);//sinTable[aVal]*cosTable[(int)bVal] + bVal*holyConstant*sinTable[9-aVal];
-//    return 0;
+    return 0;
 }
 

@@ -1094,7 +1094,7 @@ int CGenerator::WriteComputeRules(CodeBuilder& ignore, const int& numReactions)
         	double value = mNOM.getValue(varName);
 	        if (!IsNaN(value))
     	    {
-        	    mSource<<tab<<mMapRateRule[i] << " = " << ToString(value, STR_DoubleFormat) << ";" << NL();
+        	    mSource<<tab<<mMapRateRule[i] << " = " << ToString(value, mDoubleFormat) << ";" << NL();
         	}
         }
     }
@@ -2363,7 +2363,7 @@ void CGenerator::SubstituteToken(const string& reactionName, bool bFixAmounts, S
             break;
 
         case CodeTypes::tDoubleToken:
-            mSource<<Append("(double)" + WriteDouble(s.tokenDouble));
+            mSource<<Append("(double) " + WriteDouble(s.tokenDouble));
             break;
         case CodeTypes::tIntToken:
             mSource<<Append("(double)" + WriteDouble((double)s.tokenInteger));
@@ -2517,7 +2517,7 @@ int CGenerator::ReadFloatingSpecies()
               }
 
               stringstream formula;
-              formula<<ToString(dValue,STR_DoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
+              formula<<ToString(dValue,mDoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
 
               symbol = new Symbol(reOrderedList[i],
                   dValue / dVolume,
@@ -2589,7 +2589,7 @@ int CGenerator::ReadBoundarySpecies()
                 }
             }
             stringstream formula;
-            formula<<ToString(dValue, STR_DoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
+            formula<<ToString(dValue, mDoubleFormat)<<"/ _c["<<nCompartmentIndex<<"]";
             symbol = new Symbol(sName,
                                 dValue / dVolume,
                                 compartmentName,

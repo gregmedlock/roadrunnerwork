@@ -123,37 +123,9 @@ class RR_DECLSPEC ModelFromC : public rrObject
         virtual int                             getNumReactions();
         virtual int                             getNumRules();
         virtual int                             getNumEvents();
-//        virtual void                          initializeInitialConditions() = 0;
-//        virtual void                          setInitialConditions();
-//        virtual void                          setParameterValues();
-//        virtual void                          setBoundaryConditions();
-//        virtual void                          InitializeRates();
-//        virtual void                          AssignRates();
-//        virtual void                          AssignRates(vector<double>& rates);
-//        virtual void                          computeConservedTotals();
         virtual void                            computeEventPriorites();
         virtual void                            setConcentration(int index, double value);
-//        virtual void                          convertToAmounts();
-//        virtual void                          convertToConcentrations() = 0;
-//        virtual void                          updateDependentSpeciesValues(vector<double>& _y);
-//        virtual void                          computeRules(vector<double>& _y);
         virtual void                            computeReactionRates(double time, double* y);
-//        virtual void                          computeAllRatesOfChange();
-//        virtual void                          evalModel(double time, vector<double>& y);
-//        virtual void                          evalEvents(double time, vector<double>& y) = 0;
-//        virtual void                          resetEvents();
-//        virtual void                          evalInitialAssignments();
-//        virtual void                          testConstraints();
-//        virtual void                          InitializeRateRuleSymbols();
-//
-//        //Pure virtuals - force implementation...
-//        virtual void                          setCompartmentVolumes() = 0;
-//        virtual vector<double>                GetCurrentValues() = 0 ;
-//        virtual double                        getConcentration(int index) = 0;
-//        virtual int                           getNumLocalParameters(int reactionId) = 0;         // Level 2 support
-//
-//        virtual vector<double>                GetdYdT() = 0;
-
 
     public:
         CGenerator*                             mCodeGenerator;    //There are some arrays returned that we don't know the size of..!
@@ -219,37 +191,15 @@ class RR_DECLSPEC ModelFromC : public rrObject
         //Access dll data
         vector<double>                          GetCurrentValues();
         double                                  GetAmounts(const int& i);
-//        vector<double>                        GetdYdT();
-
-//        int                                   getNumIndependentVariables();
-//        int                                   getNumDependentVariables();
-//        int                                   getNumTotalVariables();
-//        int                                   getNumBoundarySpecies();
-//        int                                   getNumGlobalParameters();
-//        int                                   getNumCompartments();
-//        int                                   getNumReactions();
-//        int                                   getNumRules();
-//        int                                   getNumEvents();
-//        void                                  initializeInitialConditions();
-//        void                                  setInitialConditions();
-//        void                                  setParameterValues();
-//        void                                  setBoundaryConditions();
         void                                    InitializeRates();
         void                                    AssignRates();
         void                                    AssignRates(vector<double>& rates);
-//        void                                  computeConservedTotals();
-//        void                                  computeEventPriorites();
-//        void                                  setConcentration(int index, double value);
-//        void                                  convertToAmounts();
         void                                    convertToConcentrations();
         void                                    updateDependentSpeciesValues(double* _y);
-//        void                                  computeRules(vector<double>& _y);
-//        void                                  computeReactionRates(double time, vector<double>& y);
         void                                    computeAllRatesOfChange();
         void                                    evalModel(const double& time,  const vector<double>& y);
         void                                    evalEvents(const double& time, const vector<double>& y);
         void                                    resetEvents();
-//        void                                  evalInitialAssignments();
         void                                    testConstraints();
         void                                    InitializeRateRuleSymbols();
 };

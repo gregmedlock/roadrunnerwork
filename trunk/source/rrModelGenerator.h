@@ -25,7 +25,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 {
     public:
     	RoadRunner*							mRR;
-        const string                        STR_DoubleFormat;
+        const string                        mDoubleFormat;
         const string                        STR_FixAmountCompartments;
         string                              mCurrentXMLModelFileName;
         vector<int>                         mLocalParameterDimensions;
@@ -137,7 +137,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         SymbolList&                         GetBoundarySpeciesList();
         SymbolList&                         GetGlobalParameterList();
         SymbolList&                         GetConservationList();
-        string                              WriteDouble(const double& value);
+        string                              WriteDouble(const double& value, const string& format = "%G");
 
         // Generates the Model Code from theSBML string
         virtual string                      generateModelCode(const string& sbmlStr) = 0;    //Any decendant need to implement at least this one

@@ -18,8 +18,7 @@ namespace rr
 {
 ModelGenerator::ModelGenerator(RoadRunner* rr)
 :
-//mStructAnalysis(),
-STR_DoubleFormat("%.19G"),
+mDoubleFormat("%.19G"),
 STR_FixAmountCompartments("*"),
 mCurrentXMLModelFileName("sbml_model"),
 mRR(rr)
@@ -304,9 +303,9 @@ Symbol* ModelGenerator::GetSpecies(const string& id)
     return NULL;
 }
 
-string ModelGenerator::WriteDouble(const double& value)
+string ModelGenerator::WriteDouble(const double& value, const string& format)
 {
-    return ToString(value, STR_DoubleFormat);
+    return ToString(value, format);
 }
 
 int ModelGenerator::ReadCompartments()
