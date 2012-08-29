@@ -6,8 +6,8 @@ os.chdir('C:\\RoadRunner\\bin')
 function = 'getCompartmentByIndex'
 rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
-index = 1
-value = 1.0
+index = 0
+
 try:
     specs = rrPython.getCompartmentByIndex(index)
     if str(specs) is not False:
