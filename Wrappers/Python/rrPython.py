@@ -41,7 +41,11 @@ def setLogLevel(lvl):
     return handle.setTimeEnd (byref (c_double(lvl)))
 
 def getLogLevel():
-    return handle.getLogLevel()
+    value = c_int
+    if handle.getLogLevel(byref(value)) == True:
+        return value.value
+    else:
+        raise RuntimeError('Index out of range')
 
 def getLogFileName():
     return handle.getLogFileName()
@@ -69,6 +73,8 @@ def getLastError():
     return handle.getLastError()
 
 #RoadRunner API
+
+#########################################################################################################################
 
 #Flags/Options
 handle.setComputeAndAssignConservationLaws.restype = c_bool
@@ -129,17 +135,35 @@ def setSelectionList(list):
     return handle.setSelectionList(list)
 
 def getSelectionList():
-    return handle.printList(handle.getSelectionList())
+    value = handle.getSelectionList()
+    result = handle.printList(value)
+    handle.freeStringList(value)
+    return result
 
 def simulate():
-    return handle.printResult(handle.simulate())
+    value = handle.simulate()
+    result = handle.printResult(value)
+    handle.freeResult(value)
+    return result
+
+#psimulate = POINTER(simulate())
+#simulate, send results to array, free memory
 
 def simulateEx(timeStart,timeEnd,numberOfPoints):
-    return handle.printResult(handle.simulateEx(timeStart,timeEnd,numberOfPoints))
+    startValue = c_double(timeStart)
+    endValue = c_double(timeEnd)
+    pointsValue = c_int(numberOfPoints)
+    simulation = handle.simulateEx(byref(startValue),byref(endValue),byref(pointsValue))
+    result = handle.printResult(simulation)
+    handle.freeResult(simulation)
+    return result;
+
 
 #def oneStep (currentTime, stepSize):                             #test this
+#    curtime = c_double(currentTime)
+#    stepValue = c_double(stepSize)
 #    value = c_double()
-#    if handle.oneStep (currentTime, stepSize) == True:
+#    if handle.oneStep(byref(curtime), byref(stepSize), byref(value)) == True:
 #        return value.value;
 #    else:
 #        raise RuntimeError('Index out of range')
@@ -177,13 +201,19 @@ def steadyState():
         return ('Index out of Range')
 
 def computeSteadyStateValues():
-    return handle.printVector(handle.computeSteadyStateValues())
+    values = handle.computeSteadyStateValues()
+    result = handle.printVector(values)
+    handle.freeVector(values)
+    return result
 
 def setSteadyStateSelectionList(list):
     return handle.setSteadyStateSelectionList(list)
 
 def getSteadyStateSelectionList():
-    return handle.printList(handle.getSteadyStateSelectionList())
+    values = handle.getSteadyStateSelectionList()
+    result = handle.printList(values)
+    handle.freeStringList(values)
+    return result
 
 
 #Set and get family of methods
@@ -198,72 +228,93 @@ handle.getGlobalParameterByIndex.restype = c_bool
 handle.getCompartmentByIndex.restype = c_bool
 handle.setCompartmentByIndex.restype = c_bool
 
-def getValue(speciesID):                             #test this
-    return handle.getValue(speciesID)
-
-def setValue(speciesID, value):                             #test this
+def getValue(speciesID):
     value = c_double()
-    if handle.setValue (speciesID, value, byref(value)) == True:
+    if handle.getValue(speciesID, byref(value)) == True:
+        return value.value
+    else:
+        raise RuntimeError('Index out of Range')                             #test this
+
+def setValue(speciesID, val):                             #test this
+    value = c_double(val)
+    if handle.setValue(speciesID, byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
 def getFloatingSpeciesConcentrations():
-    return handle.printVector(handle.getFloatingSpeciesConcentrations())
+    values = handle.getFloatingSpeciesConcentrations()
+    result = handle.printVector(values)
+    handle.freeVector(values)
+    return result
 
 def getGlobalParameterValues():
-    return handle.printVector(handle.getGlobalParameterValues())
+    values = handle.getGlobalParameterValues()
+    result = handle.printVector(values)
+    handle.freeVector(values)
+    return result
 
-def setBoundarySpeciesByIndex(index):                             #test this
-    value = c_double()
-    if handle.setBoundarySpeciesByIndex(index, byref(value)) == True:
+def setBoundarySpeciesByIndex(index, val):                             #test this
+    value = c_double(val)
+    ivalue = c_int(index)
+    if handle.setBoundarySpeciesByIndex(byref(ivalue), byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
-def setFloatingSpeciesByIndex(index):                             #test this
-    value = c_double()
-    if handle.setFloatingSpeciesByIndex(index, byref(value)) == True:
+def setFloatingSpeciesByIndex(index, val):                             #test this
+    value = c_double(val)
+    ivalue = c_int(index)
+    if handle.setFloatingSpeciesByIndex(byref(ivalue), byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
-def setGlobalParameterByIndex(index):                             #test this
-    value = c_double()
-    if handle.setGlobalParameterByIndex(index, byref(value)) == True:
+def setGlobalParameterByIndex(index, val):                             #test this
+    value = c_double(val)
+    ivalue = c_int(index)
+    if handle.setGlobalParameterByIndex(byref(ivalue), byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
 def getBoundarySpeciesByIndex(index):                             #test this
     value = c_double()
-    if handle.getBoundarySpeciesByIndex(index, byref(value)) == True:
+    ivalue = c_int(index)
+    if handle.getBoundarySpeciesByIndex(byref(ivalue), byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
-
-#def getBoundarySpeciesByIndex(index):                             #test this
-#    return handle.getBoundarySpeciesByIndex(index)
 
 def getFloatingSpeciesByIndex(index):                             #test this
     value = c_double()
-    if handle.getFloatingSpeciesByIndex(index, byref(value)) == True:
+    ivalue = c_int(index)
+    if handle.getFloatingSpeciesByIndex(byref(ivalue), byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
-#def getFloatingSpeciesByIndex(index):                             #test this
-#    return handle.getFloatingSpeciesByIndex(index)
 
-def getGlobalParameterByIndex(index):                             #test this
-    return handle.getGlobalParameterByIndex(index)
+def getGlobalParameterByIndex(index):
+    value = c_double()
+    ivalue = c_int(index)
+    if handle.getGlobalParameterByIndex(byref(ivalue), byref(value)) == True:
+        return value.value;
+    else:
+        raise RuntimeError('Index out of Range')
 
-def getCompartmentByIndex(index):                             #test this
-    return handle.getCompartmentByIndex(index)
+def getCompartmentByIndex(index):
+    value = c_double()
+    ivalue = c_int(index)
+    if handle.getCompartmentByIndex(byref(ivalue), byref(value)) == True:
+        return value.value;
+    else:
+        raise RuntimeError('Index out of Range')
 
 def setCompartmentByIndex(index, val):                         #test this
-    value = c_double()
-    if handle.setCompartmentByIndex(index, value, byref(value)) == True:
+    value = c_double(val)
+    ivalue = c_int(index)
+    if handle.setCompartmentByIndex(byref(ivalue), byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
@@ -271,29 +322,53 @@ def setCompartmentByIndex(index, val):                         #test this
 
 #Jacobian matrix methods
 def getFullJacobian():
-    return handle.printMatrix(handle.getFullJacobian())
+    values = handle.getFullJacobian()
+    result = handle.printMatrix(values)
+    handle.freeMatrix(values)
+    return result
 
 def getReducedJacobian():
-    return handle.printMatrix(handle.getReducedJacobian())
+    values = handle.getReducedJacobian()
+    result = handle.printMatrix(values)
+    handle.freeMatrix(values)
+    return result
 
 def getEigenvalues():
-    return handle.printMatrix(handle.getEigenvalues())
+    values = handle.getEigenvalues()
+    result = handle.printMatrix(values)
+    handle.freeMatrix(values)
+    return result
 
 #Stoichiometry methods
 def getStoichiometryMatrix():
-    return handle.printMatrix(handle.getStoichiometryMatrix())
+    values = handle.getStoichimetryMatrix()
+    result = handle.printMatrix(values)
+    handle.freeMatrix(values)
+    return result
 
 def getLinkMatrix():
-    return handle.printMatrix(handle.getLinkMatrix())
+    values = handle.getLinkMatrix()
+    result = handle.printMatrix(values)
+    handle.freeMatrix(values)
+    return result
 
 def getNrMatrix():
-    return handle.printMatrix(handle.getNrMatrix())
+    values = handle.getNrMatrix()
+    result = handle.printMatrix(values)
+    handle.freeMatrix(values)
+    return result
 
 def getL0Matrix():
-    return handle.printMatrix(handle.getL0Matrix())
+    values = handle.getL0Matrix()
+    result = handle.printMatrix(values)
+    handle.freeMatrix(values)
+    return result
 
 def getConservationMatrix():
-    return handle.printMatrix(handle.getConservationMatrix())
+    values = handle.getConservationMatrix()
+    result = handle.printMatrix(values)
+    handle.freeMatrix(values)
+    return result
 
 #Initial condition methods
 handle.reset.restype = c_bool
@@ -306,10 +381,16 @@ def reset():
 #    return handle.setFloatingSpeciesInitialConcentration(vec)
 
 def getFloatingSpeciesInitialConcentrations():
-    return handle.printVector(handle.getFloatingSpeciesInitialConcentrations())
+    values = handle.getFloatingSpeciesInitialConcentrations()
+    result = handle.printVector(values)
+    handle.freeVector(values)
+    return result
 
 def getFloatingSpeciesInitialConditionNames():
-    return handle.printList(handle.getFloatingSpeciesInitialConditionNames())
+    values = handle.getFloatingSpeciesInitialConditionNames()
+    result = handle.printVector(values)
+    handle.freeVector(values)
+    return result
 
 #Reaction rates
 handle.getNumberOfReactions.restype = c_int
@@ -326,7 +407,10 @@ def getReactionRate():
         raise RuntimeError('Index out of Range')                                 #test this
 
 def getReactionRates():
-    return handle.printVector(handle.getReactionRates())
+    values = handle.getReactionRates()
+    result = handle.printVector(values)
+    handle.freeVector(values)
+    return result
 
 def getReactionRatesEx(vec):                            #TEST
     return handle.printVector(handle.getReactionRatesEx(vec))
@@ -336,16 +420,25 @@ handle.getRateOfChange.restype = c_bool
 handle.evalModel.restype = c_bool
 
 def getRatesOfChange():
-    return handle.printVector(handle.getRatesOfChange())
+    values = handle.getRatesOfChange()
+    result = handle.printVector(values)
+    handle.freeVector(values)
+    return result
 
 def getRatesOfChangeNames():
-    return handle.printList(handle.getRatesOfChangeNames())
+    values = handle.getRatesOfChangeNames()
+    result = handle.printList(values)
+    handle.freeStringList(values)
+    return result
 
 def getRateOfChange():
     return handle.getRateOfChange()
 
-def getRatesOfChangeEx(vec):
-    return handle.printVector(handle.getRatesOfChangeEx(vec))
+def getRatesOfChangeEx(vec):                     #TEST
+    values = handle.getRatesOfChangEx()
+    result = handle.printVector(values)
+    handle.freeVector(values)
+    return result
 
 def evalModel():
     return handle.evalModel()
@@ -378,63 +471,123 @@ def getNumberOfIndependentSpecies():
 
 #Get names family
 def getReactionNames():
-    return handle.printList(handle.getReactionNames())
+    values = handle.getReactionNames()
+    result = handle.printList(values)
+    handle.freeStringList(values)
+    return result
 
 def getRateOfChangeNames():
-    return handle.printList(handle.getRateOfChangeNames())
+    values = handle.getRateOfChangeNames()
+    result = handle.printList(values)
+    handle.freeStringList(values)
+    return result
 
 def getBoundarySpeciesNames():
-    return handle.printList(handle.getBoundarySpeciesNames())
+    values = handle.getBoundarySpeciesNames()
+    result = handle.printList(values)
+    handle.freeStringList(values)
+    return result
 
 def getFloatingSpeciesNames():
-    return handle.printList(handle.getFloatingSpeciesNames())
+    values = handle.getFloatingSpeciesNames()
+    result = handle.printList(values)
+    handle.freeStringList(values)
+    return result
 
 def getGlobalParameterNames():
-    return handle.printList(handle.getGlobalParameterNames())
+    values = handle.getGlobalParameterNames()
+    result = handle.printList(values)
+    handle.freeStringList(values)
+    return result
 
 def getCompartmentNames():
-    return handle.printList(handle.getCompartmentNames())
+    values = handle.getCompartmentNames()
+    result = handle.printList(values)
+    handle.freeStringList(values)
+    return result
 
 def getEigenValueNames():
-    return handle.printList(handle.getEigenValueNames())
+    values = handle.getEigenValueNames()
+    result = handle.printList(values)
+    handle.freeStringList(values)
+    return result
 
-def getAvailableSymbols():
-    return handle.printList(handle.getAvailableSymbols())
+def getAvailableSymbols():                              #FIX
+    value = c_char_p()
+    if handle.printArrayList(handle.getAvailableSymbols(byref(value))) == True:
+        return value.value
+    else:
+        raise RuntimeError('Index out of range')
+#    return handle.printArrayList(handle.getAvailableSymbols())
 
 #Get MCA methods
 
 def getElasticityCoefficientNames():
-    return handle.printStringArrayList(handle.getElasticityCoefficientNames())
+    value = handle.getElasticityCoefficientNames()
+    result = handle.printStringArrayList(value)
+    handle.freeStringArrayList(value)
+    return result
 
 def getUnscaledFluxControlCoefficientNames():
-    return handle.printStringArrayList(handle.getUnscaledFluxControlCoefficientNames())
+    value = handle.getUnscaledFluxControlCoefficientNames()
+    result = handle.printStringArrayList(value)
+    handle.freeStringArrayList(value)
+    return result
 
 def getFluxControlCoefficientNames():
-    return handle.printStringArrayList(handle.getFluxControlCoefficientNames())
+    value = handle.getFluxControlCoefficientNames()
+    result = handle.printStringArrayList(value)
+    handle.freeStringArrayList(value)
+    return result
 
 def getUnscaledConcentrationControlCoefficientNames():
-    return handle.printStringArrayList(handle.getUnscaledConcentrationControlCoefficientNames())
+    value = handle.getUnscaledConcentrationCoefficientNames()
+    result = handle.printStringArrayList(value)
+    handle.freeStringArrayList(value)
+    return result
 
 def getConcentrationControlCoefficientNames():
-    return handle.printStringArrayList(handle.getConcentrationControlCoefficientNames())
+    value = handle.getConcentrationControlCoefficientNames()
+    result = handle.printStringArrayList(value)
+    handle.freeStringArrayList(value)
+    return result
 
 def getUnScaledElasticityMatrix():
-    return handle.printMatrix(handle.getUnScaledElasticityMatrix())
+    value = handle.getUnscaledElasticityMatrix()
+    result = handle.printMatrix(value)
+    handle.freeMatrix(value)
+    return result
 
 def getScaledElasticityMatrix():
-    return handle.printMatrix(handle.getScaledElasticityMatrix())
+    value = handle.getScaledElasticityMatrix()
+    result = handle.printMatrix(value)
+    handle.freeMatrix(value)
+    return result
 
 def getUnscaledConcentrationControlCoefficientMatrix():
-    return handle.printMatrix(handle.getUnscaledConcentrationControlCoefficientMatrix())
+    value = handle.getUnscaledConcentrationControlCoefficientMatrix()
+    result = handle.printMatrix(value)
+    handle.freeMatrix(value)
+    return result
 
 def getScaledConcentrationControlCoefficientMatrix():
-    return handle.printMatrix(handle.getScaledConcentrationControlCoefficientMatrix())
+    value = handle.getScaledConcentrationControlCoefficientMatrix()
+    result = handle.printMatrix(value)
+    handle.freeMatrix(value)
+    return result
 
 def getUnscaledFluxControlCoefficientMatrix():
-    return handle.printMatrix(handle.getUnscaledFluxControlCoefficientMatrix())
+    value = handle.getUnscaledFluxControlCoefficientMatrix()
+    result = handle.printMatrix(value)
+    handle.freeMatrix(value)
+    return result
 
 def getScaledFluxControlCoefficientMatrix():
-    return handle.printMatrix(handle.getScaledFluxControlCoefficientMatrix())
+    value = handle.getScaledFluxControlCoefficientMatrix()
+    result = handle.printMatrix(value)
+    handle.freeMatrix(value)
+    return result
+
 #MCA methods
 handle.getuCC.restype = c_bool
 handle.getCC.restype = c_bool
@@ -442,9 +595,11 @@ handle.getEE.restype = c_bool
 handle.getuEE.restype = c_bool
 handle.getScaledFloatingSpeciesElasticity.restype = c_bool
 
-def getuCC(variable, parameter, value):                         #test this
+def getuCC(variable, parameter):                         #test this
+    variable = c_char_p()
+    parameter = c_char_p()
     value = c_double()
-    if handle.getuCC(variable, parameter, value, byref(value)) == True:
+    if handle.getuCC(byref(variable), byref(parameter), byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
@@ -503,43 +658,8 @@ def printStringArrayList(list):
 #    return handle.printArrayList(list)
 
 #Free memory functions
-handle.freeRRInstance.restype = c_bool
-handle.freeResult.restype = c_bool
-handle.freeText.restype = c_bool
-handle.freeLabelStringList.restype = c_bool
-handle.freeStringList.restype = c_bool
-handle.freeStringArrayList.restype = c_bool
-handle.freeVector.restype = c_bool
-handle.freeMatrix.restype = c_bool
-handle.freeCCode.restype = c_bool
+
 handle.Pause.restype = None
-
-def freeRRInstance(handle):
-    return handle.freeRRInstance(handle)
-
-def freeResult(handle):
-    return handle.freeResult(handle)
-
-def freeText(text):
-    return handle.freeText(text)
-
-def freeLabelStringList(sl):
-    return handle.freeLabelStringList(sl)
-
-def freeStringList(sl):
-    return handle.freeStringList(sl)
-
-def freeStringArrayList(sl):
-    return handle.freeStringArrayList(sl)
-
-def freeVector(vector):
-    return handle.freeVector(vector)
-
-def freeMatrix(matrix):
-    return handle.freeMatrix(matrix)
-
-def freeCCode(code):
-    return handle.freeCCode(code)
 
 def Pause():
     return handle.Pause()
@@ -585,13 +705,21 @@ def getStringListElement(stringList, index):
         raise RuntimeError("Index out of range")
 
 def getMatrixNumRows():
-    return handle.getMatrixNumRows()
+    value = c_int
+    if handle.getMatrixNumRows(byref(value)) == True:
+        return value.value
+    else:
+        raise RuntimeError('Index out of range')
+
 
 def getMatrixNumCols():
     return handle.getMatrixNumCols()
 
 def getMatrixElement (m, i, j):
     value = c_double()
+    m = c_int
+    i = c_int
+    j = c_int
     if handle.getMatrixElement (m, i, j, byref(value)) == True:
         return value.value;
     else:
