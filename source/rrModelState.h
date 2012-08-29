@@ -17,6 +17,7 @@ class RR_DECLSPEC ModelState : public rrObject
     protected:
     public:
         //Todo:  Lot of stuff is wrong here.. ??
+        double                          mTime;
         vector<double>                  mBoundarySpeciesConcentrations;
         vector<double>                  mCompartmentVolumes;
         vector<double>                  mConservedTotals;
@@ -27,7 +28,6 @@ class RR_DECLSPEC ModelState : public rrObject
         vector<double>                  mRateRules;
         vector<double>                  mRates;
         vector<double>                  mModifiableSpeciesReferences;
-        double                          mTime;
         vector<bool>                    mEventStatusArray;
         vector<double>                  mEventTests;
 

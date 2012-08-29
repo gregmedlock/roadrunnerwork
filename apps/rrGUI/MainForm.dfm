@@ -279,9 +279,10 @@ object MForm: TMForm
       Legend.Symbol.Width = 40
       Legend.Title.Text.Strings = (
         '')
-      Legend.Top = 438
-      Legend.TopPercent = 95
+      Legend.Top = 392
+      Legend.TopPercent = 85
       Legend.TopPos = 5
+      Legend.Transparent = True
       Title.Color = clBlack
       Title.Frame.Color = 10083835
       Title.Frame.Width = 2
