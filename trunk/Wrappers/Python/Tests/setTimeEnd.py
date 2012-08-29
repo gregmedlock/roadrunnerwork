@@ -7,7 +7,7 @@ function = 'setTimeEnd'
 rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
 try:
-    end = rrPython.setTimeEnd(10.0)
+    end = rrPython.setTimeEnd(5.0)
     if str(end) is not False:
         result = 'True'
     else:
