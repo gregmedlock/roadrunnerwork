@@ -6,7 +6,7 @@ os.chdir('C:\\RoadRunner\\bin')
 function = 'getFloatingSpeciesByIndex'
 rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
-index = 1
+index = 0
 
 try:
     specs = rrPython.getFloatingSpeciesByIndex(index)
