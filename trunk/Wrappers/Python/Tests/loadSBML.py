@@ -5,10 +5,10 @@ os.chdir('C:\\RoadRunner\\bin')
 
 function = 'loadSBML'
 file = open('C:\\RoadRunner\\Models\\feedback.xml','r').read()
-rrPython.loadSBML(file)
+#rrPython.loadSBML(file)
 
 try:
-    sbml = rrPython.loadSBML()
+    sbml = rrPython.loadSBML(file)
     if str(sbml) is not False:
         result = 'True'
     else:
