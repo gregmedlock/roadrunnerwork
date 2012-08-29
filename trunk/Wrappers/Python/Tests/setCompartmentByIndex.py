@@ -6,7 +6,7 @@ os.chdir('C:\\RoadRunner\\bin')
 function = 'setCompartmentByIndex'
 rrPython.loadSBMLFromFile('C:\\RoadRunner\\Models\\feedback.xml')
 
-index = 1
+index = 0
 value = 1.0
 try:
     specs = rrPython.setCompartmentByIndex(index, value)
