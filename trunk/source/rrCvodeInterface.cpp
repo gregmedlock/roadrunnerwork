@@ -885,7 +885,7 @@ vector<int> CvodeInterface::RetestEvents(const double& timeEnd, vector<int>& han
 vector<int> CvodeInterface::RetestEvents(const double& timeEnd, const vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents)
 {
     vector<int> result;
-//     vector<int> removeEvents;// = new vector<int>();    //Todo: this code was like this originally.. which removeEvents to use???
+//    vector<int> removeEvents;// = new vector<int>();    //Todo: this code was like this originally.. which removeEvents to use???
 
     if (mRR && !mRR->mConservedTotalChanged)
     {
@@ -1003,7 +1003,7 @@ void CvodeInterface::SortEventsByPriority(vector<Event>& firedEvents)
         	firedEvents[i].SetPriority(model->eventPriorities[firedEvents[i].GetID()]);
         	Log(lDebug3)<<firedEvents[i];
         }
-        sort(firedEvents.begin(), firedEvents.end(), SortEvent());
+        sort(firedEvents.begin(), firedEvents.end(), SortByPriority());
 
 		Log(lDebug3)<<"After sorting event priorities";
         for(int i = 0; i < firedEvents.size(); i++)
@@ -1013,6 +1013,37 @@ void CvodeInterface::SortEventsByPriority(vector<Event>& firedEvents)
     }
 }
 
+void CvodeInterface::SortEventsByPriority(vector<int>& firedEvents)
+{
+    if ((firedEvents.size() > 1))
+    {
+		model->computeEventPriorites();
+        vector<Event> dummy;
+        for(int i = 0; i < firedEvents.size(); i++)
+        {
+        	dummy.push_back(firedEvents[i]);
+        }
+
+		Log(lDebug3)<<"Sorting event priorities";
+        for(int i = 0; i < firedEvents.size(); i++)
+        {
+        	dummy[i].SetPriority(model->eventPriorities[dummy[i].GetID()]);
+        	Log(lDebug3)<<dummy[i];
+        }
+        sort(dummy.begin(), dummy.end(), SortByPriority());
+
+        for(int i = 0; i < firedEvents.size(); i++)
+        {
+        	firedEvents[i] = dummy[i].GetID();
+        }
+
+		Log(lDebug3)<<"After sorting event priorities";
+        for(int i = 0; i < firedEvents.size(); i++)
+        {
+        	Log(lDebug3)<<firedEvents[i];
+        }
+    }
+}
 
 ////        private void SortEventsByPriority(List<int> firedEvents)
 ////        {
@@ -1170,11 +1201,11 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
     vector<double> args = BuildEvalArgument();
     model->evalEvents(timeEnd, args);
 
-    vector<Event> firedEvents;
+//    vector<Event> firedEvents;
+    vector<int> firedEvents;
     map<int, double* > preComputedAssignments;
 
-//    model->computeEventPriorites();
-    for (int i = 0; i < model->getNumEvents(); i++)
+	for (int i = 0; i < model->getNumEvents(); i++)
     {
         // We only fire an event if we transition from false to true
         if (rootsFound[i] == 1)
@@ -1182,7 +1213,6 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
             if (model->eventStatusArray[i])
             {
                 firedEvents.push_back(i);
-//                firedEvents[i].SetPriority(model->eventPriorities[i]);
                 if (model->eventType[i])
                 {
                     preComputedAssignments[i] = model->computeEventAssignments[i]();
@@ -1202,14 +1232,13 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
     vector<int> handled;
     while (firedEvents.size() > 0)
     {
-        model->computeEventPriorites();
         SortEventsByPriority(firedEvents);
         // Call event assignment if the eventstatus flag for the particular event is false
         for (u_int i = 0; i < firedEvents.size(); i++)
         {
-            int currentEvent = firedEvents[i].GetID();
-            // We only fire an event if we transition from false to true
+            int currentEvent = firedEvents[i];//.GetID();
 
+            // We only fire an event if we transition from false to true
             model->previousEventStatusArray[currentEvent] = model->eventStatusArray[currentEvent];
             double eventDelay = model->eventDelays[currentEvent]();
             if (eventDelay == 0)
@@ -1248,6 +1277,7 @@ void CvodeInterface::HandleRootsForTime(const double& timeEnd, vector<int>& root
                     if (find(firedEvents.begin(), firedEvents.end(), item) != firedEvents.end())
                     {
                         firedEvents.erase(find(firedEvents.begin(), firedEvents.end(), item));
+                        RemovePendingAssignmentForIndex(item);
                     }
                 }
 

@@ -28,7 +28,7 @@ class RR_DECLSPEC Event : public rrObject
         friend ostream&         operator<<(ostream& str, const Event& event);
 };
 
-struct RR_DECLSPEC SortEvent
+struct RR_DECLSPEC SortByPriority
 {
 	bool operator()( const Event& lx, const Event& rx ) const
     {

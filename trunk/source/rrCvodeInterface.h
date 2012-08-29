@@ -53,6 +53,7 @@ class RR_DECLSPEC CvodeInterface : public rrObject
         vector<int>                 RetestEvents(const double& timeEnd, const vector<int>& handledEvents, const bool& assignOldState, vector<int>& removeEvents);
         void                        HandleRootsFound(double &timeEnd, const double& tout);
         void                        RemovePendingAssignmentForIndex(const int& eventIndex);
+        void                        SortEventsByPriority(vector<int>& firedEvents);
         void                        SortEventsByPriority(vector<Event>& firedEvents);
         void                        HandleRootsForTime(const double& timeEnd, vector<int>& rootsFound);
 
