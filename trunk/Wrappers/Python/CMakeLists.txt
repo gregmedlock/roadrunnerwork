@@ -4,7 +4,7 @@ PROJECT(rrWrappers)
 #=============== INSTALL =====================
 
 install(   
-            FILES rrPython.py SquareWaveTester.py
+            FILES rrPython.py 
             DESTINATION Python  	
             COMPONENT Python
        )
