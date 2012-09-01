@@ -1,17 +1,15 @@
-#pragma hdrstop
+//#pragma hdrstop
 #include <windows.h>
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <tchar.h>
-
+#include <iomanip>
 #if defined(__CODEGEARC__)
 #include <dir.h>
 #else
 #include <direct.h>
 #endif
-
-#include <iomanip>
 
 #include "rrUtils.h"
 #include "rrStringUtils.h"
@@ -35,12 +33,27 @@ int main(int argc, char* argv[])
 
 	bool doMore = true;	//set to false to move to end
 
-    cout<<"======== RoadRunner C API Client==================\n";
+
+    cout<<"======== RoadRunner C API Client ==================\n";
     RRHandle aHandle  = getRRInstance();
 
 	if(!aHandle)
     {
         cerr<<"Failed getting a handle to RoadRunner";
+    	doMore = false;
+    }
+
+    setTempFolder(args.TempDataFolder.c_str());
+
+    if(!setLogLevel(args.CurrentLogLevel))
+    {
+        cerr<<"Failed setting log RoadRunner Log level";
+    	doMore = false;
+    }
+
+    if(!enableLogging())
+    {
+        cerr<<"Failed setting log RoadRunner Log level";
     	doMore = false;
     }
 
@@ -50,13 +63,6 @@ int main(int argc, char* argv[])
 		cout<<"Build date: "<<text<<endl;
 		freeText(text);
 	}
-
-    if(args.UseOSTempFolder)
-    {
-        args.TempDataFolder = "C:\\temp";
-    }
-
-    setTempFolder(args.TempDataFolder.c_str());
 
     if(!FileExists(args.ModelFileName))
     {
@@ -75,7 +81,7 @@ int main(int argc, char* argv[])
     	if(!loadSBML(GetFileContent(args.ModelFileName).c_str()))
 	    {
     	    char* error = getLastError();
-        	cerr<<error<<endl;
+        	cerr<<"\n"<<error<<endl;
 	        doMore = false;;
     	}
     }
@@ -95,9 +101,12 @@ int main(int argc, char* argv[])
         {
             //Get value for each specie?
             RRStringList* list = getSelectionList();
+            if(list == NULL)
+            {
+		        cerr<<"SelectionList is empty. Exiting\n";
+            }
             for(int i = 1; i < list->Count; i++)   	//at index 0 is 'time'
             {
-
             	double value;
                 bool isSuccess = getValue(list->String[i], value);
                 if(!isSuccess)
@@ -111,19 +120,58 @@ int main(int argc, char* argv[])
         }
     }
 
+	RRResultHandle result;
 	if(doMore)
     {
 	    setTimeStart(args.StartTime);
     	setTimeEnd(args.EndTime);
 	    setNumPoints(args.Steps);
     	setSelectionList(args.SelectionList.c_str());
+		cout<<"Roadrunner is about to simulate model";
+        RRStringListHandle list =  getSelectionList();
+
+        if(list)
+        {
+	        cout<<"\nThe following is selected: "<<printList(list);
+			result = simulate();
+        }
+        else
+        {
+			cout<<"SelectionList problem: List is empty";
+        }
+
     }
+
+
+	if(doMore && result)
+	{
+		if(!args.SaveResultToFile)	
+		{
+			cout<<printResult(result);	
+		}
+		else
+		{
+			
+			string outPutFName = JoinPath(args.DataOutputFolder, ExtractFileName(args.ModelFileName));
+			outPutFName = ChangeFileExtensionTo(outPutFName, ".csv");
+			ofstream fOut(outPutFName.c_str());
+			if(!fOut)
+			{
+				cerr<<"Failed opening file "<<outPutFName<<" for writing.";
+			}
+			else
+			{
+				fOut<<printResult(result);	
+			}
+		}				
+	}
+
 
     text = getCopyright();
     if(hasError())
     {
         char* error = getLastError();
-        cout<<error<<endl;
+        cout<<"\nThe latest error in RoadRunner was: \n"<<error<<endl;
     }
 
     cout<<text<<endl;
@@ -141,23 +189,22 @@ int main(int argc, char* argv[])
 void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
 {
     char c;
-    while ((c = GetOptions(argc, argv, ("cpuxyv:n:d:t:l:m:s:e:z:"))) != -1)
+    while ((c = GetOptions(argc, argv, ("cfpxyv:n:d:t:l:m:s:e:z:"))) != -1)
     {
         switch (c)
         {
-            case ('v'): args.CurrentLogLevel                        = GetLogLevel(optarg);     break;
-            case ('c'): args.OnlyCompile                            = true;                         break;
+            case ('v'): args.CurrentLogLevel                        = GetLogLevel(optarg);    	 	break;
             case ('p'): args.Pause                                  = true;                         break;
             case ('t'): args.TempDataFolder                         = optarg;                       break;
             case ('d'): args.DataOutputFolder                       = optarg;                       break;
+			case ('f'): args.SaveResultToFile                       = true;                         break;
             case ('m'): args.ModelFileName                          = optarg;                       break;
-            case ('u'): args.UseOSTempFolder                        = true;                         break;
             case ('l'): args.SelectionList                          = optarg;                       break;
             case ('s'): args.StartTime                              = ToDouble(optarg);             break;
             case ('e'): args.EndTime                                = ToDouble(optarg);             break;
             case ('z'): args.Steps                                  = ToInt(optarg);                break;
             case ('x'): args.CalculateSteadyState                   = true;                			break;
-            case ('y'): args.ComputeAndAssignConservationLaws  		= false;                			break;
+            case ('y'): args.ComputeAndAssignConservationLaws  		= false;                  		break;
             case ('?'):
             {
                     cout<<Usage(argv[0])<<endl;

@@ -168,7 +168,7 @@
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="RunParams">-p -m./../Models/ss_TurnOnConservationAnalysis.xml -x -t&quot;c:/rrTemp&quot; -p</Parameters>
+						<Parameters Name="RunParams">-p -m./../Models/squareWaveModel.xml -t&quot;r:/rrTemp&quot; -l&quot;Time S1 S2&quot; -v&quot;Info&quot;</Parameters>
 					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

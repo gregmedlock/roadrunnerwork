@@ -53,8 +53,6 @@ extern "C"
 #include "rr_c_api_exporter.h"
 #include "rr_c_types.h"
 
-
-//Temporary here... remove when the python stuff is working..
 #if defined(_MSC_VER)
 	#include <direct.h>
 	#define getcwd _getcwd
@@ -76,6 +74,7 @@ C_DECL_SPEC char*                   rrCallConv  getVersion();
 // Logging
 C_DECL_SPEC bool                    rrCallConv  enableLogging();
 C_DECL_SPEC bool                    rrCallConv  setLogLevel(const int& lvl);
+C_DECL_SPEC bool                    rrCallConv  setLogLevelFromString(const char* lvl);
 C_DECL_SPEC bool                    rrCallConv  getLogLevel(int& lvl);
 C_DECL_SPEC char*                   rrCallConv  getLogFileName();
 

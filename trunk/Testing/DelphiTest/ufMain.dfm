@@ -76,6 +76,7 @@ object frmMain: TfrmMain
       Height = 21
       TabOrder = 0
       Text = 'C:\'
+      OnKeyDown = lblTempFolderKeyDown
     end
     object edtProgress: TEdit
       Left = 8

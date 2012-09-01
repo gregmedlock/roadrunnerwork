@@ -8,6 +8,7 @@
 #include "rrStringUtils.h"
 #include "rrStringList.h"
 #include "rrUtils.h"
+#include "rrException.h"
 //---------------------------------------------------------------------------
 
 namespace rr
@@ -52,11 +53,26 @@ vector<string>::iterator StringList::end()
 
 string& StringList::operator[](const int& index)
 {
+	if(index > Count() -1 )
+    {
+    	stringstream msg;
+        msg<<"index ("<<index<<") out of bounds in StringList with count "<<Count();
+
+    	throw(RRException(msg.str()));
+    }
     return mStrings[index];
 }
 
 string  StringList::operator[](const int& index) const
 {
+	if(index > Count() -1 )
+    {
+    	stringstream msg;
+        msg<<"index ("<<index<<") out of bounds in StringList with count "<<Count();
+
+    	throw(RRException(msg.str()));
+    }
+
     return mStrings[index];
 }
 

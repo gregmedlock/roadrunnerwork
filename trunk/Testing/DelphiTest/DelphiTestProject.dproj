@@ -30,7 +30,7 @@
 			<DCC_ExeOutput>.\$(Config)\$(Platform)</DCC_ExeOutput>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<DCC_ExeOutput>C:\RoadRunner\bin\</DCC_ExeOutput>
+			<DCC_ExeOutput>R:\rrInstalls\vs\debug\bin\</DCC_ExeOutput>
 			<DCC_MapFile>3</DCC_MapFile>
 			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
 			<DCC_Optimize>false</DCC_Optimize>

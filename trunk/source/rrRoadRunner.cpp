@@ -535,20 +535,35 @@ bool RoadRunner::Simulate()
         throw(Exception("There is no model loaded, can't simulate"));
     }
 
- 	mRawSimulationData = simulate();
+	try
+    {
+ 		mRawSimulationData = simulate();
 
-    //Populate simulation result
-    PopulateResult();
-    return true;
+    	//Populate simulation result
+    	PopulateResult();
+	    return true;
+    }
+    catch(const RRException& e)
+    {
+    	Log(lError)<<"Problem in roadRunners Simulate function: "<<e.what();
+        throw(e);
+    }
 }
 
 bool RoadRunner::PopulateResult()
 {
-    ArrayList2 l = getAvailableSymbols();
-    StringList list = getSelectionList();
-    mSimulationData.SetColumnNames(list);
-    mSimulationData.SetData(mRawSimulationData);
-    return true;
+	try
+    {
+    	ArrayList2 l 	= getAvailableSymbols();
+    	StringList list = getSelectionList();
+    	mSimulationData.SetColumnNames(list);
+    	mSimulationData.SetData(mRawSimulationData);
+    	return true;
+    }
+    catch(const RRException& e)
+    {
+    	throw(e);
+    }
 }
 
 bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws)
@@ -674,12 +689,15 @@ bool RoadRunner::loadSBML(const string& sbml)
         return false;
     }
 
-    //Finally intitilaize the model..
+    //Finally intitilize the model..
     if(!InitializeModel())
     {
         Log(lError)<<"Failed Initializing C Model";
         return false;
     }
+
+    //Set default selection list
+    setSelectionList("");
 
     _L  = mLS->getLinkMatrix();
     _L0 = mLS->getL0Matrix();
@@ -1360,7 +1378,15 @@ void RoadRunner::EvalModel()
 void RoadRunner::setSelectionList(const string& list)
 {
     StringList aList(list,", ");
-    setSelectionList(aList);
+    if(!aList.Count())
+    {
+    	Log(lWarning)<<"User tried to set an empty selection list. A default selection list will be created";
+        CreateSelectionList();
+    }
+    else
+    {
+    	setSelectionList(aList);
+    }
 }
 
 // Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
