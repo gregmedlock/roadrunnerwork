@@ -70,7 +70,7 @@ add_subdirectory(Apps)
 add_subdirectory(Examples)
 
 #=============== INSTALL =====================
-install(   FILES ${target}.h rr_c_types.h 				 					
+install(   FILES ${target}.h rr_c_types.h rr_c_api_exporter.h				 					
            DESTINATION include/c_api  	
            COMPONENT c_api)
 

@@ -93,6 +93,8 @@ type
     procedure btnGetConservationMatrixClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure btnGetL0MatrixClick(Sender: TObject);
+    procedure lblTempFolderKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
     procedure getSummaryOfModelByIndex;
@@ -366,6 +368,16 @@ begin
       floattostr(getValue(list[i])) + ')');
   lstSummary.Items.Add('');
   list.Free;
+end;
+
+procedure TfrmMain.lblTempFolderKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    if(Key = VK_RETURN) then
+    begin
+        //set temp folder from edit text...
+    end;
+
 end;
 
 procedure TfrmMain.btnGetL0MatrixClick(Sender: TObject);

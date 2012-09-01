@@ -8,6 +8,7 @@
 #include "rr_c_api.h"
 #include "rrUtils.h"
 #include "rrStringUtils.h"
+#include "rrException.h"
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace rr;
@@ -15,6 +16,9 @@ using namespace rr;
 int main()
 {
     RRHandle rrHandle = NULL;
+
+    try
+    {
     rrHandle =  getRRInstance();
 
     if(!rrHandle)
@@ -32,7 +36,9 @@ int main()
 	}
 
     setTempFolder("C:\\rrTemp");
-	string fileName = "..\\Models\\feedback.xml";
+    string fileName;
+	fileName = "..\\Models\\ss_threespecies.xml";
+
 	string sbml = GetFileContent(fileName.c_str());
 
     //To get the CCode, the CCode needs to be generated
@@ -44,10 +50,11 @@ int main()
 
     RRResult* result1 = simulate();
 
-    string str = getResultAsString(result1);
+    string str = printResult(result1);
     cout<<str;
 
-  	fileName = "..\\Models\\test_1.xml";
+
+  	fileName = "..\\Models\\squareWaveModel.xml";
 	sbml = GetFileContent(fileName.c_str());
 
     //To get the CCode, the CCode needs to be generated
@@ -57,25 +64,38 @@ int main()
         cerr<<"Last error: "<<getLastError()<<endl;
     }
 
+
     RRResult* result2 = simulate();
 
-    cout<<getResultAsString(result2);
-
+    if(result2)
+    {
+    	cout<<printResult(result2);
+    }
+    else
+    {
+    	cout<<"There was a problem";
+    }
 
 	///// Cleanup
 
-
-    text = getCopyright();
     if(hasError())
     {
         char* error = getLastError();
         cout<<error<<endl;
     }
 
+    text = getCopyright();
     cout<<text<<endl;
 
     freeText(text);
     freeRRInstance(rrHandle);
+
+    }
+   	catch(rr::Exception& ex)
+	{
+        cerr<<"RoadRunner exception occurred: "<<ex.what()<<endl;
+    }
+
     return 0;
 }
 

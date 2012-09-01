@@ -65,7 +65,6 @@ static  rr::RoadRunner*     gRRHandle       = NULL;
 char*                       gLastError      = NULL;
 }
 
-
 bool rrCallConv enableLogging()
 {
 	try
@@ -78,7 +77,7 @@ bool rrCallConv enableLogging()
 
 		//LogLevel logLevel(lDebug4);
 		string logFile = JoinPath(getTempFolder(), "RoadRunner.log") ;
-        gLog.Init("", lDebug4, unique_ptr<LogFile>(new LogFile(logFile.c_str())));
+        gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(logFile.c_str())));
 
         char* buffer = new char[1024];
         // Get the current working directory:
@@ -104,7 +103,7 @@ bool rrCallConv enableLogging()
     }
 }
 
-bool rrCallConv  setLogLevel(const int& lvl)
+bool rrCallConv setLogLevel(const int& lvl)
 {
 	try
     {
@@ -112,6 +111,28 @@ bool rrCallConv  setLogLevel(const int& lvl)
         {
             setError(ALLOCATE_API_ERROR_MSG);
         }
+		gLog.SetCutOffLogLevel(GetLogLevel(lvl));
+    	return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+  	    return false;
+    }
+}
+
+bool rrCallConv setLogLevelFromString(const char* _lvl)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+        }
+        LogLevel lvl = GetLogLevel(_lvl);
+		gLog.SetCutOffLogLevel(lvl);
     	return true;
     }
     catch(Exception& ex)
