@@ -541,17 +541,12 @@ end;
 
 
 function setSelectionList (strList : TStringList) : boolean;
-var pList : PArrayOfAnsiCharArray;
-    list : TArrayOfAnsiCharArray;
-    i, j : integer; l : integer;
-    ch : AnsiChar; p : PAnsiCharArray;
-    selectionList : AnsiString;
+var i : integer; selectionList : AnsiString;
 begin
-  setLength (list, strList.Count);
-  selectionList := strList[0];
   for i := 1 to strList.Count - 1 do
       selectionList := selectionList + ',' + strList[i];
-  libSetSelectionList (PAnsiChar (selectionList));
+  if not libSetSelectionList (PAnsiChar (selectionList)) then
+     raise Exception.Create ('Error calling setSelectionList');
 end;
 
 
