@@ -124,9 +124,9 @@ type
   TGetCopyright = TVoidCharFunc;
   TGetRRInstance = TPointerVoidFunc;
   TGetCCode = function : PRRCCodeHandle; stdcall;
-  TSetTimeStart = TDoubleBoolFunc;
-  TSetTimeEnd = TDoubleBoolFunc;
-  TSetNumPoints = TIntBoolFunc;
+  TSetTimeStart = function (var value : double) : bool; stdcall;
+  TSetTimeEnd = function (var value : double) : bool; stdcall;
+  TSetNumPoints = function (var value : integer) : bool; stdcall;
   TSimulateEx = function (var timeStart : double; var timeEnd : double; var numberOfPoints : integer) : PRRResultHandle; stdcall;
   TGetMatrix = function : PRRMatrixHandle; stdcall;
   TFreeRRResult = function (ptr : PRRResultHandle) : boolean; stdcall;
@@ -147,9 +147,6 @@ type
 
 var
    DLLLoaded : boolean;
-   setTimeStart : TSetTimeStart;
-   setTimeEnd : TSetTimeEnd;
-   setNumberOfPoints : TSetNumPoints;
 
 function  hasError : boolean;
 function  getRRInstance : Pointer;
@@ -158,8 +155,23 @@ procedure freeRRInstance (myInstance : Pointer); overload;
 function  getLastError : AnsiString;
 function  getBuildDate : AnsiString;
 function  getRevision : integer;
+
+
+{$REGION 'Documentation'}
+///	<summary>
+///	  Get copyright string
+///	</summary>
+///	<returns>
+///	  Copyright string
+///	</returns>
+{$ENDREGION}
 function  getCopyright : AnsiString;
 function  getTempFolder : AnsiString;
+{$REGION 'Documentation'}
+///	<summary>
+///	  Returns the generated C Code for the model
+///	</summary>
+{$ENDREGION}
 function  getCCode : TRRCCode;
 
 function  loadSBML (sbmlStr : AnsiString) : boolean;
@@ -169,6 +181,11 @@ function  getSBML : AnsiString;
 function  getValue (Id : AnsiString) : double;
 function  setValue (Id : AnsiString; value : double) : boolean;
 function  reset : boolean;
+
+procedure setTimeStart (value : double);
+procedure setTimeEnd (value : double);
+procedure setNumberOfPoints (value : integer);
+
 function  simulate : TMatrix;
 function  simulateEx (timeStart: double; timeEnd : double; numberOfPoints : integer)  : TMatrix;
 function  oneStep (var currentTime : double; var stepSize : double) : double;
@@ -272,6 +289,10 @@ var DLLHandle : Cardinal;
     libEvalModel : TVoidBoolFunc;
     libGetFullJacobian : function : PRRMatrixHandle;
     libGetReducedJacobian : function : PRRMatrixHandle;
+
+    libSetTimeStart : TSetTimeStart;
+    libSetTimeEnd : TSetTimeEnd;
+    libSetNumberOfPoints : TSetNumPoints;
 
     libGetNumberOfReactions : TVoidIntFunc;
     libGetNumberOfBoundarySpecies : TVoidIntFunc;
@@ -534,6 +555,28 @@ begin
 end;
 
 
+procedure setTimeStart (value : double);
+begin
+  if not libSetTimeStart (value) then
+     raise Exception.Create ('Error while calling setTimeStart');
+end;
+
+
+procedure setTimeEnd (value : double);
+begin
+  if not libSetTimeEnd (value) then
+     raise Exception.Create ('Error while calling setTimeEnd');
+end;
+
+
+procedure setNumberOfPoints (value : integer);
+begin
+  if not libSetNumberOfPoints (value) then
+     raise Exception.Create ('Error while calling setNumberOfPoints');
+end;
+
+
+
 function simulate : TMatrix;
 var RRResult : PRRResultHandle;
     i, j : integer;
@@ -622,7 +665,7 @@ begin
   end;
 end;
 
-function  getFloatingSpeciesNames : TStringList;
+function getFloatingSpeciesNames : TStringList;
 var p : PRRStringList;
 begin
   p := libGetFloatingSpeciesNames;
@@ -1187,9 +1230,9 @@ begin
    @libLoadSBML           := loadSingleMethod ('loadSBML', errMsg, result, methodList);
    @libGetSBML            := loadSingleMethod ('getSBML', errMsg, result, methodList);
 
-   @setTimeStart          := loadSingleMethod ('setTimeStart', errMsg, result, methodList);
-   @setTimeEnd            := loadSingleMethod ('setTimeEnd', errMsg, result, methodList);
-   @setNumberOfPoints     := loadSingleMethod ('setNumPoints', errMsg, result, methodList);
+   @libSetTimeStart          := loadSingleMethod ('setTimeStart', errMsg, result, methodList);
+   @libSetTimeEnd            := loadSingleMethod ('setTimeEnd', errMsg, result, methodList);
+   @libSetNumberOfPoints     := loadSingleMethod ('setNumPoints', errMsg, result, methodList);
    @libSimulate           := loadSingleMethod ('simulate', errMsg, result, methodList);
    @libSimulateEx         := loadSingleMethod ('simulateEx', errMsg, result, methodList);
    @libOneStep            := loadSingleMethod ('oneStep', errMsg, result, methodList);
