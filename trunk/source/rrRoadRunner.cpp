@@ -178,6 +178,7 @@ int RoadRunner::CreateSelectionList()
     if(theList.Count() < 2)
     {
         //AutoSelect
+        theList.Add("Time");
         //Get All floating species
        StringList oFloating  = getFloatingSpeciesNames();
        for(int i = 0; i < oFloating.Count(); i++)
@@ -1395,11 +1396,6 @@ void RoadRunner::setSelectionList(const StringList& _selList)
 {
     StringList newSelectionList(_selList);
 
-    //Make sure time is the first 'selection'. If not, add it
-    if(newSelectionList.Count() && newSelectionList[0] != "time")
-    {
-        newSelectionList.InsertAt(0, "time");
-    }
 
     selectionList.clear();
     selectionList.resize(newSelectionList.Count());
@@ -1413,7 +1409,7 @@ void RoadRunner::setSelectionList(const StringList& _selList)
 
     for (int i = 0; i < newSelectionList.Count(); i++)
     {
-        if (newSelectionList[i] == "time")
+        if (ToUpper(newSelectionList[i]) == ToUpper("time"))
         {
             selectionList[i].selectionType = TSelectionType::clTime;
         }
