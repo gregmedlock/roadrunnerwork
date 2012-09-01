@@ -26,6 +26,10 @@ int main()
         cout<<"No handle...";
     }
 
+    setTempFolder("R:\\rrTemp");
+	setLogLevelFromString("Debug1");
+    enableLogging();
+
 	char* text;
 	text = getBuildDate();
 
@@ -35,9 +39,8 @@ int main()
 		freeText(text);
 	}
 
-    setTempFolder("C:\\rrTemp");
     string fileName;
-	fileName = "..\\Models\\ss_threespecies.xml";
+	fileName = "..\\Models\\ss_feedback.xml";
 
 	string sbml = GetFileContent(fileName.c_str());
 
@@ -48,11 +51,10 @@ int main()
         cerr<<"Last error: "<<getLastError()<<endl;
     }
 
+    setSelectionList("time,S1 Time,S2");
     RRResult* result1 = simulate();
-
     string str = printResult(result1);
     cout<<str;
-
 
   	fileName = "..\\Models\\squareWaveModel.xml";
 	sbml = GetFileContent(fileName.c_str());
@@ -64,9 +66,7 @@ int main()
         cerr<<"Last error: "<<getLastError()<<endl;
     }
 
-
     RRResult* result2 = simulate();
-
     if(result2)
     {
     	cout<<printResult(result2);
@@ -77,7 +77,6 @@ int main()
     }
 
 	///// Cleanup
-
     if(hasError())
     {
         char* error = getLastError();

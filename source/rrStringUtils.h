@@ -21,6 +21,10 @@ int                 RR_DECLSPEC GetNumberOfFunctionArguments(const string& expre
 string              RR_DECLSPEC tabs(const int& nr);
 string              RR_DECLSPEC NL();
 
+string				RR_DECLSPEC ToUpperOrLowerCase(const string& inStr, int (*func)(int));
+string 				RR_DECLSPEC ToUpper(const string& str);
+string 				RR_DECLSPEC ToLower(const string& str);
+
 string              RR_DECLSPEC ExtractFilePath(const string& fileN);
 string              RR_DECLSPEC ExtractFileName(const string& fileN);
 
@@ -82,7 +86,6 @@ string              RR_DECLSPEC Append(const string& s1, const string& s2);
 string              RR_DECLSPEC Append(const string& s1, const string& s2, const string& s3);
 string              RR_DECLSPEC Append(const string& s1, const unsigned int& s2, const string& s3);
 string              RR_DECLSPEC Append(const string& s1, const unsigned int& s2, const string& s3, const string& s4);
-
 
 string              RR_DECLSPEC Substitute(const string& src, const string& thisOne, const string& withThisOne, const int& howMany = -1);
 string              RR_DECLSPEC Substitute(const string& src, const string& thisOne, const int& withThisOne, const int& howMany = -1);

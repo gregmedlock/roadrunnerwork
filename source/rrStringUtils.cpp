@@ -48,7 +48,6 @@ bool ConvertFunctionCallToUseVarArgsSyntax(const string& funcName, string& expre
     return true;
 }
 
-
 string RemoveChars(const string& str, const string& chars)
 {
     string result(str);
