@@ -35,6 +35,18 @@ interface
 
 Uses SysUtils, Classes, Windows, uMatrix, Generics.Collections, IOUtils, uRRList;
 
+{
+C_DECL_SPEC bool                    rrCallConv  setLogLevelFromString(const char* lvl);
+C_DECL_SPEC bool                    rrCallConv  getLogLevel(int& lvl);
+C_DECL_SPEC char*                   rrCallConv  getLogFileName();
+
+C_DECL_SPEC char*                   rrCallConv  getBuildDate();
+C_DECL_SPEC char*                   rrCallConv  getCopyright();
+C_DECL_SPEC bool                    rrCallConv  setTempFolder(const char* folder);
+C_DECL_SPEC char*                   rrCallConv  getTempFolder();
+}
+
+
 type
   TAnsiCharArray = array[0..20000] of AnsiChar;
   PAnsiCharArray = ^TAnsiCharArray;
@@ -117,6 +129,7 @@ type
   TCharBoolFunc = function (str : PAnsiChar) : bool; stdcall;  // bool func (char *)
   TDoubleBoolFunc = function (value : double) : bool; stdcall; // bool func (double)
   TIntBoolFunc = function (value : integer) : bool; stdcall;   // bool func (double)
+  TVarIntBoolFunc = function (var value : integer) : bool; stdcall;   // bool func (double)
   TIntDoubleFunc = function (index : integer) : double; stdcall;
 
   TVoidStringListFunc = function() : PRRStringList; stdcall;
@@ -147,6 +160,7 @@ type
 
 var
    DLLLoaded : boolean;
+   selectionList : AnsiString;
 
 function  hasError : boolean;
 function  getRRInstance : Pointer;
@@ -167,6 +181,11 @@ function  getRevision : integer;
 {$ENDREGION}
 function  getCopyright : AnsiString;
 function  getTempFolder : AnsiString;
+function  enableLogging : boolean;
+function  setLogLevel (debugLevel : integer) : boolean;
+function  setLogLevelFromString (debugLevel : AnsiString) : boolean;
+function  setTempFolder (name : AnsiString) : boolean;
+
 {$REGION 'Documentation'}
 ///	<summary>
 ///	  Returns the generated C Code for the model
@@ -267,6 +286,10 @@ var DLLHandle : Cardinal;
 
     libHasError : TVoidBoolFunc;
     libGetLastError : TVoidCharFunc;
+    libEnableLogging : TVoidBoolFunc;
+    libSetLogLevel : TVarIntBoolFunc;
+    libSetLogLevelFromString : function (value : PAnsiChar) : bool; stdcall;
+    libSetTempFolder : function (folder : PAnsiChar) : bool; stdcall;
 
     libGetBuildDate : TVoidCharFunc;
     libGetRevision : TVoidIntFunc;
@@ -443,6 +466,29 @@ begin
   result := libGetLastError;
 end;
 
+function enableLogging : boolean;
+begin
+  result := libEnableLogging;
+end;
+
+function setLogLevel (debugLevel : integer) : boolean;
+begin
+  result := libSetLogLevel (debugLevel);
+end;
+
+
+function setLogLevelFromString (debugLevel : AnsiString) : boolean;
+begin
+   result := libSetLogLevelFromString (PAnsiChar (debugLevel));
+end;
+
+
+function setTempFolder (name : AnsiString) : boolean;
+begin
+  result := libSetTempFolder (PAnsiChar (name));
+end;
+
+
 function getCCode : TRRCCode;
 var p : PRRCCodeHandle;
 begin
@@ -541,10 +587,14 @@ end;
 
 
 function setSelectionList (strList : TStringList) : boolean;
-var i : integer; selectionList : AnsiString;
+var i : integer;
 begin
+  if strList.Count = 0 then
+     exit;
+
+  selectionList := strList[0];
   for i := 1 to strList.Count - 1 do
-      selectionList := selectionList + ',' + strList[i];
+      selectionList := selectionList + ' ' + strList[i];
   if not libSetSelectionList (PAnsiChar (selectionList)) then
      raise Exception.Create ('Error calling setSelectionList');
 end;
@@ -1213,11 +1263,18 @@ begin
    @libGetRevision   := loadSingleMethod ('getVersion', errMsg, result, methodList);
    @libHasError      := loadSingleMethod ('hasError', errMsg, result, methodList);
    @libGetLastError  := loadSingleMethod ('getLastError', errMsg, result, methodList);
-   @libGetRRInstance := loadSingleMethod ('getRRInstance', errMsg, result, methodList);
 
-   @libGetCopyright  := loadSingleMethod ('getCopyright', errMsg, result, methodList);
+   @libSetLogLevel   := loadSingleMethod ('_setLogLevel@4', errMsg, result, methodList);
+   @libEnableLogging := loadSingleMethod ('_enableLogging@0', errMsg, result, methodList);
+   @libSetLogLevelFromString := loadSingleMethod ('_setLogLevelFromString@4', errMsg, result, methodList);
+
+   @libSetTempFolder := loadSingleMethod ('_setTempFolder@4', errMsg, result, methodList);
    @libGetTempFolder := loadSingleMethod ('getTempFolder', errMsg, result, methodList);
+
    @libGetCCode      := loadSingleMethod ('getCCode', errMsg, result, methodList);
+   @libGetCopyright  := loadSingleMethod ('getCopyright', errMsg, result, methodList);
+
+   @libGetRRInstance := loadSingleMethod ('getRRInstance', errMsg, result, methodList);
 
    @libSetComputeAndAssignConservationLaws := loadSingleMethod ('setComputeAndAssignConservationLaws', errMsg, result, methodList);
 
