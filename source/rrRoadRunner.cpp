@@ -2928,7 +2928,7 @@ vector<double> RoadRunner::getBoundarySpeciesConcentrations()
     }
 
     mModel->convertToConcentrations();
-	return CreateVector(mModel->bc, *mModel->ySize);
+	return CreateVector(mModel->bc, *mModel->bcSize);
 }
 
 //
