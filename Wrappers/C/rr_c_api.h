@@ -144,7 +144,7 @@ C_DECL_SPEC bool                    rrCallConv   setCompartmentByIndex (const in
 // Jacobian matrix methods
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getFullJacobian();
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getReducedJacobian();
-C_DECL_SPEC RRMatrixHandle          rrCallConv   getEigenvalues();
+C_DECL_SPEC RRMatrixHandle          rrCallConv   getEigenValues();
 
 // Stoichiometry methods
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getStoichiometryMatrix();

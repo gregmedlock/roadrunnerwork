@@ -1362,7 +1362,7 @@ bool rrCallConv setGlobalParameterByIndex(const int& index, const double& value)
   	return false;
 }
 
-bool rrCallConv setFloatingSpeciesInitialConcentrations(RRVector* vec)
+bool rrCallConv setFloatingSpeciesInitialConcentrations(const RRVector* vec)
 {
 	try
     {
@@ -1840,7 +1840,7 @@ RRMatrixHandle rrCallConv getReducedJacobian()
 }
 
 
-RRMatrixHandle rrCallConv getEigenvalues()
+RRMatrixHandle rrCallConv getEigenValues()
 {
 	try
     {

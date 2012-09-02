@@ -217,9 +217,9 @@ int main(int argc, char* argv[])
 
 	printf ("Eigenvalue Matrix (real/imag):\n");
 	printf ("----------------------------\n\n");
-	matStr = printMatrix (getEigenvalues());
+	matStr = printMatrix (getEigenValues());
 	if (!matStr)
-		printf ("ERROR in getEigenvalues\n");
+		printf ("ERROR in getEigenValues\n");
 	else
 		printf ("%s", matStr);
 	printf ("\n\n");
