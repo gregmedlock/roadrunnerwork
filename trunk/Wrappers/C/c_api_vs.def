@@ -1,6 +1,11 @@
 LIBRARY     RR_C_API.DLL
 
 EXPORTS
+    enableLogging                               = _enableLogging@0
+    setLogLevel                                 = _setLogLevel@4
+    setLogLevelFromString                       = _setLogLevel@4
+    getLogLevel                                 = _getLogLevel@4
+    getLogFileName                              = _getLogFileName@0
     getVersion                                  = _getVersion@0
     writeSBML                                   = _writeSBML@0
     computeSteadyStateValues                    = _computeSteadyStateValues@0         
