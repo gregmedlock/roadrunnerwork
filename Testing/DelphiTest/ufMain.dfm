@@ -22,14 +22,14 @@ object frmMain: TfrmMain
   TextHeight = 13
   object lblCommon: TLabel
     Left = 8
-    Top = 187
+    Top = 204
     Width = 76
     Height = 13
     Caption = 'Common double'
   end
   object Label2: TLabel
     Left = 8
-    Top = 143
+    Top = 160
     Width = 80
     Height = 13
     Caption = 'Common Integer'
@@ -62,6 +62,9 @@ object frmMain: TfrmMain
     Height = 41
     Align = alBottom
     TabOrder = 0
+    DesignSize = (
+      1068
+      41)
     object Label1: TLabel
       Left = 487
       Top = 16
@@ -86,6 +89,16 @@ object frmMain: TfrmMain
       TabOrder = 1
       Text = 'C:\'
     end
+    object btnCopygrid: TButton
+      Left = 912
+      Top = 9
+      Width = 139
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = 'Copy Grid to Clipboard'
+      TabOrder = 2
+      OnClick = btnCopygridClick
+    end
   end
   object btnGetCopyright: TButton
     Left = 328
@@ -98,7 +111,7 @@ object frmMain: TfrmMain
   end
   object btnLoadSBML: TButton
     Left = 8
-    Top = 8
+    Top = 77
     Width = 121
     Height = 25
     Caption = 'Load SBML'
@@ -127,7 +140,7 @@ object frmMain: TfrmMain
   end
   object btnSteadyState: TButton
     Left = 8
-    Top = 112
+    Top = 129
     Width = 121
     Height = 25
     Caption = 'Steady State'
@@ -144,9 +157,9 @@ object frmMain: TfrmMain
     OnClick = btnLoadTwoModelsClick
   end
   object chkConservationLaws: TCheckBox
-    Left = 135
-    Top = 16
-    Width = 153
+    Left = 183
+    Top = 9
+    Width = 139
     Height = 17
     Caption = 'Use Conservation Laws'
     Checked = True
@@ -156,7 +169,7 @@ object frmMain: TfrmMain
   end
   object btnSimulate: TButton
     Left = 8
-    Top = 86
+    Top = 103
     Width = 121
     Height = 25
     Caption = 'Simulate'
@@ -174,9 +187,9 @@ object frmMain: TfrmMain
   end
   object PageControl1: TPageControl
     Left = 8
-    Top = 232
+    Top = 256
     Width = 471
-    Height = 429
+    Height = 405
     ActivePage = TabSheet1
     Anchors = [akLeft, akTop, akBottom]
     TabOrder = 10
@@ -186,7 +199,7 @@ object frmMain: TfrmMain
         Left = 0
         Top = 0
         Width = 463
-        Height = 401
+        Height = 377
         Align = alClient
         ItemHeight = 13
         TabOrder = 0
@@ -199,7 +212,7 @@ object frmMain: TfrmMain
         Left = 0
         Top = 0
         Width = 463
-        Height = 401
+        Height = 377
         Align = alClient
         ScrollBars = ssBoth
         TabOrder = 0
@@ -212,7 +225,7 @@ object frmMain: TfrmMain
         Left = 0
         Top = 0
         Width = 463
-        Height = 401
+        Height = 377
         Align = alClient
         ScrollBars = ssBoth
         TabOrder = 0
@@ -225,7 +238,7 @@ object frmMain: TfrmMain
         Left = 0
         Top = 0
         Width = 463
-        Height = 401
+        Height = 377
         Align = alClient
         TabOrder = 0
       end
@@ -251,7 +264,7 @@ object frmMain: TfrmMain
   end
   object edtCommonFloat: TEdit
     Left = 8
-    Top = 203
+    Top = 220
     Width = 121
     Height = 21
     TabOrder = 13
@@ -259,7 +272,7 @@ object frmMain: TfrmMain
   end
   object edtCommonInteger: TEdit
     Left = 8
-    Top = 159
+    Top = 176
     Width = 121
     Height = 21
     TabOrder = 14
@@ -267,7 +280,7 @@ object frmMain: TfrmMain
   end
   object btnDisplayModelSumamryByGetValue: TButton
     Left = 135
-    Top = 60
+    Top = 77
     Width = 130
     Height = 36
     Caption = 'Display Model Summary by getValue'
@@ -313,7 +326,7 @@ object frmMain: TfrmMain
   end
   object btnGetSBML: TButton
     Left = 135
-    Top = 136
+    Top = 153
     Width = 130
     Height = 25
     Caption = 'Get SBML and Compare'
@@ -340,7 +353,7 @@ object frmMain: TfrmMain
   end
   object btnDisplayModelSumamryByGetIndex: TButton
     Left = 135
-    Top = 98
+    Top = 115
     Width = 130
     Height = 36
     Caption = 'Display Model Summary by getIndex'
@@ -350,7 +363,7 @@ object frmMain: TfrmMain
   end
   object btnGetCapabilities: TButton
     Left = 135
-    Top = 167
+    Top = 184
     Width = 130
     Height = 25
     Caption = 'Get Capabilities'
@@ -359,7 +372,7 @@ object frmMain: TfrmMain
   end
   object btnEvalModel: TButton
     Left = 135
-    Top = 201
+    Top = 218
     Width = 130
     Height = 25
     Caption = 'Eval Model'
@@ -386,13 +399,17 @@ object frmMain: TfrmMain
   end
   object lstModelName: TListBox
     Left = 8
-    Top = 35
-    Width = 121
-    Height = 47
+    Top = 7
+    Width = 169
+    Height = 64
     ItemHeight = 13
     Items.Strings = (
+      '_test.xml'
       'ss_SimpleConservedCycle.xml'
-      'ss_threeSpecies.xml')
+      'ss_threeSpecies.xml'
+      'feedback.xml'
+      'squareWaveModel.xml'
+      'oneNodeSimple.xml')
     TabOrder = 28
   end
   object btnGetStoichMatrix: TButton
