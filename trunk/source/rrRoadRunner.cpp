@@ -2643,13 +2643,13 @@ string RoadRunner::writeSBML()
     return NOM.getSBML();
 }
 
-// Help("Get the number of local parameters for a given reaction")
-//        int RoadRunner::getNumberOfLocalParameters(int reactionId)
-//        {
-//            if (!mModel) throw SBWApplicationException(emptyModelStr);
-//            return getNumberOfLocalParameters(reactionId);
-//        }
-//
+// Get the number of local parameters for a given reaction
+int RoadRunner::getNumberOfLocalParameters(const int& reactionId)
+{
+     if (!mModel) throw SBWApplicationException(emptyModelStr);
+        return getNumberOfLocalParameters(reactionId);
+}
+
 // Help("Sets the value of a global parameter by its index")
 //        void RoadRunner::setLocalParameterByIndex(int reactionId, int index, double value)
 //        {
@@ -2662,6 +2662,21 @@ string RoadRunner::writeSBML()
 //                throw SBWApplicationException(string.Format("Index in setLocalParameterByIndex out of range: [{0}]", index));
 //        }
 //
+// Returns the value of a global parameter by its index
+// ***** SHOULD WE SUPPORT LOCAL PARAMETERS? ******** (Sept 2, 2012, HMS
+double RoadRunner::getLocalParameterByIndex	(const int& reactionId, const int& index)
+{
+    if (!mModel)
+       throw SBWApplicationException(emptyModelStr);
+
+    //if ((reactionId >= 0) && (reactionId < mModel->getNumReactions()) &&
+    //    (index >= 0) && (index < mModel->getNumLocalParameters(reactionId)))
+    //return mModel->lp[reactionId][index];
+
+     throw SBWApplicationException(Format("Index in getLocalParameterByIndex out of range: [{0}]", index));
+}
+ 
+
 // Help("Returns the value of a global parameter by its index")
 //        double RoadRunner::getLocalParameterByIndex(int reactionId, int index)
 //        {
