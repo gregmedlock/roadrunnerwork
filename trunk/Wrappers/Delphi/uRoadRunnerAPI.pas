@@ -200,6 +200,7 @@ function  getSBML : AnsiString;
 function  getValue (Id : AnsiString) : double;
 function  setValue (Id : AnsiString; value : double) : boolean;
 function  reset : boolean;
+function  setFloatingSpeciesInitialConcentrations (value : TDoubleArray) : boolean;
 
 procedure setTimeStart (value : double);
 procedure setTimeEnd (value : double);
@@ -209,7 +210,9 @@ function  simulate : TMatrix;
 function  simulateEx (timeStart: double; timeEnd : double; numberOfPoints : integer)  : TMatrix;
 function  oneStep (var currentTime : double; var stepSize : double) : double;
 function  setSelectionList (strList : TStringList) : boolean;
+function  setCapabilities (str : AnsiString) : boolean;
 function  getCapabilities : AnsiString;
+
 function  evalModel : boolean;
 function  getFullJacobian : TMatrix;
 function  getReducedJacobian : TMatrix;
@@ -311,7 +314,9 @@ var DLLHandle : Cardinal;
     libSetSelectionList : TSetSelectionList;
     libGetReactionNames : TGetReactionNames;
     libReset : TReset;
+    libSetFloatingSpeciesInitialConcentrations : function (value : Pointer) : boolean; stdcall;
     libGetCapabilities : TVoidCharFunc;
+    libSetCapabilities : TCharBoolFunc;
     libEvalModel : TVoidBoolFunc;
     libGetFullJacobian : function : PRRMatrixHandle;
     libGetReducedJacobian : function : PRRMatrixHandle;
@@ -372,6 +377,8 @@ var DLLHandle : Cardinal;
     libgetuEE                 : TGetMCA;
     libgetCC                  : TGetMCA;
     libgetEE                  : TGetMCA;
+
+    libCreateVector : function (size : integer) : PRRDoubleVectorHandle;
 
     libFreeStringList : TFreeStringList;     //
     libFreeMatrix : TFreeRRMatrix; //
@@ -553,10 +560,25 @@ begin
   result := libReset;
 end;
 
+function setFloatingSpeciesInitialConcentrations (value : TDoubleArray) : boolean;
+var p : PRRDoubleVectorHandle;  i : integer;
+begin
+ p := libCreateVector (length (value));
+ for i := 0 to length (value) - 1 do
+     p^.data[i] := value[i];
+ result := libSetFloatingSpeciesInitialConcentrations (p);
+ libFreeDoubleVector (p);
+end;
 
 function getCapabilities : AnsiString;
 begin
   result := libGetCapabilities;
+end;
+
+
+function setCapabilities (str : AnsiString) : boolean;
+begin
+  result := libSetCapabilities (PAnsiChar (str));
 end;
 
 
@@ -1325,6 +1347,9 @@ begin
    @libOneStep            := loadSingleMethod ('oneStep', errMsg, result, methodList);
    @libReset              := loadSingleMethod ('reset', errMsg, result, methodList);
    @libGetCapabilities    := loadSingleMethod ('getCapabilities', errMsg, result, methodList);
+   @libSetCapabilities    := loadSingleMethod ('setCapabilities', errMsg, result, methodList);
+   @libSetFloatingSpeciesInitialConcentrations := loadSingleMethod ('setFloatingSpeciesInitialConcentrations', errMsg, result, methodList);
+
    @libEvalModel          := loadSingleMethod ('evalModel', errMsg, result, methodList);
    @libGetFullJacobian    := loadSingleMethod('getFullJacobian', errMsg, result, methodList);
    @libGetReducedJacobian := loadSingleMethod('getReducedJacobian', errMsg, result, methodList);
@@ -1385,12 +1410,16 @@ begin
    @libgetuEE                   := loadSingleMethod ('getuEE', errMsg, result, methodList);
    @libgetCC                    := loadSingleMethod ('getCC', errMsg, result, methodList);
    @libgetEE                    := loadSingleMethod ('getEE', errMsg, result, methodList);
+
+
    @libFreeRRInstance   := loadSingleMethod ('freeRRInstance', errMsg, result, methodList);
    @libFreeResult       := loadSingleMethod ('freeResult', errMsg, result, methodList);
    @libFreeMatrix       := loadSingleMethod ('freeMatrix', errMsg, result, methodList);
    @libFreeText         := loadSingleMethod ('freeText', errMsg, result, methodList);
    @libFreeStringList   := loadSingleMethod ('freeStringList', errMsg, result, methodList);
    @libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeVector'));
+
+   @libCreateVector     := loadSingleMethod ('_createVector@4', errMsg, result, methodList);
    //if not Assigned (libFreeDoubleVector) then
    //   begin errMsg := 'Unable to locate freeDoubleVector'; result := false; exit; end;
    except
