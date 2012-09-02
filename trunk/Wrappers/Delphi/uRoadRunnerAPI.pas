@@ -1365,7 +1365,7 @@ begin
    @libReset              := loadSingleMethod ('reset', errMsg, result, methodList);
    @libGetCapabilities    := loadSingleMethod ('getCapabilities', errMsg, result, methodList);
    @libSetCapabilities    := loadSingleMethod ('setCapabilities', errMsg, result, methodList);
-   @libSetFloatingSpeciesInitialConcentrations := loadSingleMethod ('setFloatingSpeciesInitialConcentrations', errMsg, result, methodList);
+   @libSetFloatingSpeciesInitialConcentrations := loadSingleMethod ('_setFloatingSpeciesInitialConcentrations@4', errMsg, result, methodList);
 
    @libEvalModel          := loadSingleMethod ('evalModel', errMsg, result, methodList);
    @libGetFullJacobian    := loadSingleMethod('getFullJacobian', errMsg, result, methodList);
@@ -1428,7 +1428,7 @@ begin
    @libgetCC                    := loadSingleMethod ('getCC', errMsg, result, methodList);
    @libgetEE                    := loadSingleMethod ('getEE', errMsg, result, methodList);
 
-   @libGetEigenValues            := loadSingleMethod ('getEigenValues', errMsg, result, methodList);
+   @libGetEigenValues            := loadSingleMethod ('_getEigenValues@0', errMsg, result, methodList);
 
 
    @libFreeRRInstance   := loadSingleMethod ('freeRRInstance', errMsg, result, methodList);
@@ -1438,7 +1438,7 @@ begin
    @libFreeStringList   := loadSingleMethod ('freeStringList', errMsg, result, methodList);
    @libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeVector'));
 
-   @libCreateVector     := loadSingleMethod ('_createVector@4', errMsg, result, methodList);
+   @libCreateVector     := loadSingleMethod ('_createVectorAPI@4', errMsg, result, methodList);
    //if not Assigned (libFreeDoubleVector) then
    //   begin errMsg := 'Unable to locate freeDoubleVector'; result := false; exit; end;
    except
