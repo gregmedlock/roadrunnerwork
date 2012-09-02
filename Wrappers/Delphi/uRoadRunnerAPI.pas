@@ -249,6 +249,7 @@ function  getBoundarySpeciesByIndex (index : integer) : double;
 function  getGlobalParameterByIndex (index : integer) : double;
 
 function  getFloatingSpeciesConcentrations : TDoubleArray;
+function  getBoundarySpeciesConcentrations : TDoubleArray;
 
 function  getNumberOfDependentSpecies : integer;
 function  getNumberOfIndependentSpecies : integer;
@@ -336,6 +337,7 @@ var DLLHandle : Cardinal;
     libGetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
 
     libGetFloatingSpeciesConcentrations : function : PRRDoubleVectorHandle; stdcall;
+    libGetBoundarySpeciesConcentrations : function : PRRDoubleVectorHandle; stdcall;
 
     libGetNumberOfDependentSpecies : function : integer; stdcall;
     libGetNumberOfIndependentSpecies : function : integer; stdcall;
@@ -748,9 +750,27 @@ function getFloatingSpeciesConcentrations : TDoubleArray;
 var p : PRRDoubleVectorHandle; i : integer;
 begin
   p := libGetFloatingSpeciesConcentrations;
-  setLength (result, p^.count);
-  for i := 0 to p^.count - 1 do
-      result[i] := p^.data[i];
+  try
+    setLength (result, p^.count);
+    for i := 0 to p^.count - 1 do
+        result[i] := p^.data[i];
+  finally
+    libFreeDoubleVector (p);
+  end;
+end;
+
+
+function getBoundarySpeciesConcentrations : TDoubleArray;
+var p : PRRDoubleVectorHandle; i : integer;
+begin
+  p := libGetBoundarySpeciesConcentrations;
+  try
+    setLength (result, p^.count);
+    for i := 0 to p^.count - 1 do
+        result[i] := p^.data[i];
+  finally
+    libFreeDoubleVector (p);
+  end;
 end;
 
 
@@ -1329,7 +1349,8 @@ begin
    @libGetBoundarySpeciesByIndex     := loadSingleMethod ('getBoundarySpeciesByIndex', errMsg, result, methodList);
    @libGetGlobalParameterByIndex     := loadSingleMethod ('getGlobalParameterByIndex', errMsg, result, methodList);
 
-   @libGetFloatingSpeciesConcentrations := loadSingleMethod ('libGetFloatingSpeciesConcentrations', errMsg, result, methodList);
+   @libGetFloatingSpeciesConcentrations := loadSingleMethod ('getFloatingSpeciesConcentrations', errMsg, result, methodList);
+   @libGetBoundarySpeciesConcentrations := loadSingleMethod ('_getBoundarySpeciesConcentrations@0', errMsg, result, methodList);
 
    @libGetNumberOfDependentSpecies   := loadSingleMethod ('getNumberOfDependentSpecies', errMsg, result, methodList);
    @libGetNumberOfIndependentSpecies := loadSingleMethod ('getNumberOfIndependentSpecies', errMsg, result, methodList);
