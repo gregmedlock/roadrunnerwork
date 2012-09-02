@@ -1179,7 +1179,12 @@ void CGenerator::WriteComputeReactionRates(CodeBuilder& ignore, const int& numRe
             ConvertFunctionCallToUseVarArgsSyntax("spf_xor", expression);
         }
 
-        if(expression.find("spf_piecewise") != string::npos)
+        if(expression.find("spf_squarewave") != string::npos)
+        {
+            ConvertFunctionCallToUseVarArgsSyntax("spf_squarewave", expression);
+        }
+
+		if(expression.find("spf_piecewise") != string::npos)
         {
             ConvertFunctionCallToUseVarArgsSyntax("spf_piecewise", expression);
         }
@@ -1950,6 +1955,10 @@ string CGenerator::convertUserFunctionExpression(const string& equation)
                     {
                         mSource<<Append("spf_root");
                     }
+					else if (theToken == "squarewave")
+					{
+						mSource<<Append("spf_squarewave");
+					}
                     else if(theToken == "piecewise")
                     {
                         mSource<<Append("spf_piecewise");
@@ -2256,6 +2265,10 @@ void CGenerator::SubstituteEquation(const string& reactionName, Scanner& s, Code
     {
         mSource<<Append("spf_root");
     }
+	else if(theToken == "squarewave")
+	{
+		mSource<<Append("spf_squarewave");
+	}
     else if(theToken == "piecewise")
     {
         mSource<<Append("spf_piecewise");

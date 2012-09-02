@@ -178,7 +178,6 @@ int RoadRunner::CreateSelectionList()
     if(theList.Count() < 2)
     {
         //AutoSelect
-        theList.Add("Time");
         //Get All floating species
        StringList oFloating  = getFloatingSpeciesNames();
        for(int i = 0; i < oFloating.Count(); i++)
@@ -536,35 +535,20 @@ bool RoadRunner::Simulate()
         throw(Exception("There is no model loaded, can't simulate"));
     }
 
-	try
-    {
- 		mRawSimulationData = simulate();
+ 	mRawSimulationData = simulate();
 
-    	//Populate simulation result
-    	PopulateResult();
-	    return true;
-    }
-    catch(const RRException& e)
-    {
-    	Log(lError)<<"Problem in roadRunners Simulate function: "<<e.what();
-        throw(e);
-    }
+    //Populate simulation result
+    PopulateResult();
+    return true;
 }
 
 bool RoadRunner::PopulateResult()
 {
-	try
-    {
-    	ArrayList2 l 	= getAvailableSymbols();
-    	StringList list = getSelectionList();
-    	mSimulationData.SetColumnNames(list);
-    	mSimulationData.SetData(mRawSimulationData);
-    	return true;
-    }
-    catch(const RRException& e)
-    {
-    	throw(e);
-    }
+    ArrayList2 l = getAvailableSymbols();
+    StringList list = getSelectionList();
+    mSimulationData.SetColumnNames(list);
+    mSimulationData.SetData(mRawSimulationData);
+    return true;
 }
 
 bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConservationLaws)
@@ -690,15 +674,12 @@ bool RoadRunner::loadSBML(const string& sbml)
         return false;
     }
 
-    //Finally intitilize the model..
+    //Finally intitilaize the model..
     if(!InitializeModel())
     {
         Log(lError)<<"Failed Initializing C Model";
         return false;
     }
-
-    //Set default selection list
-    setSelectionList("");
 
     _L  = mLS->getLinkMatrix();
     _L0 = mLS->getL0Matrix();
@@ -1379,15 +1360,7 @@ void RoadRunner::EvalModel()
 void RoadRunner::setSelectionList(const string& list)
 {
     StringList aList(list,", ");
-    if(!aList.Count())
-    {
-    	Log(lWarning)<<"User tried to set an empty selection list. A default selection list will be created";
-        CreateSelectionList();
-    }
-    else
-    {
-    	setSelectionList(aList);
-    }
+    setSelectionList(aList);
 }
 
 // Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
@@ -1396,6 +1369,11 @@ void RoadRunner::setSelectionList(const StringList& _selList)
 {
     StringList newSelectionList(_selList);
 
+    //Make sure time is the first 'selection'. If not, add it
+    if(newSelectionList.Count() && newSelectionList[0] != "time")
+    {
+        newSelectionList.InsertAt(0, "time");
+    }
 
     selectionList.clear();
     selectionList.resize(newSelectionList.Count());
@@ -1409,7 +1387,7 @@ void RoadRunner::setSelectionList(const StringList& _selList)
 
     for (int i = 0; i < newSelectionList.Count(); i++)
     {
-        if (ToUpper(newSelectionList[i]) == ToUpper("time"))
+        if (newSelectionList[i] == "time")
         {
             selectionList[i].selectionType = TSelectionType::clTime;
         }
@@ -2925,6 +2903,19 @@ double RoadRunner::getBoundarySpeciesByIndex(const int& index)
     }
     throw Exception(Format("Index in getBoundarySpeciesByIndex out of range: [{0}]", index));
 }
+
+// Help("Returns an array of boundary species concentrations")
+vector<double> RoadRunner::getBoundarySpeciesConcentrations()
+{
+    if (!mModel)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    mModel->convertToConcentrations();
+	return CreateVector(mModel->bc, *mModel->ySize);
+}
+
 //
 // Help("Returns an array of boundary species concentrations")
 //        double[] RoadRunner::getBoundarySpeciesConcentrations()
@@ -2934,6 +2925,7 @@ double RoadRunner::getBoundarySpeciesByIndex(const int& index)
 //            return mModel->bc;
 //        }
 //
+
 // Help("Set the concentrations for all boundary species in the model")
 //        void RoadRunner::setBoundarySpeciesConcentrations(double[] values)
 //        {

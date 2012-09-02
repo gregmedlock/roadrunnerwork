@@ -129,6 +129,7 @@ C_DECL_SPEC RRStringListHandle      rrCallConv   getSteadyStateSelectionList();
 C_DECL_SPEC bool        			rrCallConv   getValue(const char* speciesID, double& value);
 C_DECL_SPEC bool                    rrCallConv   setValue(const char* speciesId, const double& val);
 C_DECL_SPEC RRVectorHandle          rrCallConv   getFloatingSpeciesConcentrations();
+C_DECL_SPEC RRVectorHandle          rrCallConv   getBoundarySpeciesConcentrations();
 C_DECL_SPEC RRVectorHandle          rrCallConv   getGlobalParameterValues();
 
 C_DECL_SPEC bool                    rrCallConv   setBoundarySpeciesByIndex(const int& index, const double& value);

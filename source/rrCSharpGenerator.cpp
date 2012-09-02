@@ -405,6 +405,10 @@ string CSharpGenerator::convertUserFunctionExpression(const string& equation)
                     {
                         sb<<Append("supportFunctions._root");
                     }
+                   else if(theToken == "squarewave")
+                    {
+                        sb<<Append("supportFunctions._squarewave");
+                    }
                     else if(theToken == "piecewise")
                     {
                         sb<<Append("supportFunctions._piecewise");
@@ -714,6 +718,10 @@ void CSharpGenerator::SubstituteEquation(const string& reactionName, Scanner& s,
     else if(theToken == "root")
     {
         sb<<Append("supportFunctions._root");
+    }
+    else if(theToken == "squarewave")
+    {
+        sb<<Append("supportFunctions._squarewave");
     }
     else if(theToken == "piecewise")
     {
