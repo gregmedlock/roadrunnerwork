@@ -208,6 +208,10 @@ object frmMain: TfrmMain
     object TabSheet2: TTabSheet
       Caption = 'Source Code'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object MemoSource: TMemo
         Left = 0
         Top = 0
@@ -221,6 +225,10 @@ object frmMain: TfrmMain
     object TabSheet3: TTabSheet
       Caption = 'Header File'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object memoHeader: TMemo
         Left = 0
         Top = 0
@@ -234,6 +242,10 @@ object frmMain: TfrmMain
     object TabSheetCapabilities: TTabSheet
       Caption = 'Capabilities'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object memoCapabilities: TMemo
         Left = 0
         Top = 0

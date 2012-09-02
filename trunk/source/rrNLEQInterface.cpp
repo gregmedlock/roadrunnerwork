@@ -50,7 +50,7 @@ relativeTolerance(defaultTolerance)
     }
 
     //Load the NLEQ1 function
-    NLEQ1 = (cNLEQ1) GetFunctionPtr("NLEQ1", mDLLInstance);
+    NLEQ1 = (cNLEQ1) GetFunctionPtr("_NLEQ1@48", mDLLInstance);//, mDLLInstance);
 
     if(!NLEQ1)
     {

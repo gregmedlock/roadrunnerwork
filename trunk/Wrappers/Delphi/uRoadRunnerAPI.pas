@@ -248,6 +248,8 @@ function  getFloatingSpeciesByIndex (index : integer) : double;
 function  getBoundarySpeciesByIndex (index : integer) : double;
 function  getGlobalParameterByIndex (index : integer) : double;
 
+function  getFloatingSpeciesConcentrations : TDoubleArray;
+
 function  getNumberOfDependentSpecies : integer;
 function  getNumberOfIndependentSpecies : integer;
 
@@ -259,7 +261,7 @@ function  getCC (variable : AnsiString; parameter : AnsiString) : double;
 function  getuEE (variable : AnsiString; parameter : AnsiString) : double;
 function  getEE (variable : AnsiString; parameter : AnsiString) : double;
 
-function  getAvailableSymbols : TRRLIst;
+function  getAvailableSymbols : TRRList;
 
 function  setComputeAndAssignConservationLaws (value : boolean) : boolean;
 
@@ -332,6 +334,8 @@ var DLLHandle : Cardinal;
     libGetGlobalParameterByIndex : function (var index : integer; var value : double) : boolean; stdcall;
     libGetFloatingSpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
     libGetBoundarySpeciesByIndex : function (var index : integer; var value : double) : boolean; stdcall;
+
+    libGetFloatingSpeciesConcentrations : function : PRRDoubleVectorHandle; stdcall;
 
     libGetNumberOfDependentSpecies : function : integer; stdcall;
     libGetNumberOfIndependentSpecies : function : integer; stdcall;
@@ -738,6 +742,17 @@ begin
     libFreeStringList (p);
   end;
 end;
+
+
+function getFloatingSpeciesConcentrations : TDoubleArray;
+var p : PRRDoubleVectorHandle; i : integer;
+begin
+  p := libGetFloatingSpeciesConcentrations;
+  setLength (result, p^.count);
+  for i := 0 to p^.count - 1 do
+      result[i] := p^.data[i];
+end;
+
 
 function getRatesOfChangeNames : TStringList;
 var p : PRRStringList;
@@ -1313,6 +1328,8 @@ begin
    @libGetFloatingSpeciesByIndex     := loadSingleMethod ('getFloatingSpeciesByIndex', errMsg, result, methodList);
    @libGetBoundarySpeciesByIndex     := loadSingleMethod ('getBoundarySpeciesByIndex', errMsg, result, methodList);
    @libGetGlobalParameterByIndex     := loadSingleMethod ('getGlobalParameterByIndex', errMsg, result, methodList);
+
+   @libGetFloatingSpeciesConcentrations := loadSingleMethod ('libGetFloatingSpeciesConcentrations', errMsg, result, methodList);
 
    @libGetNumberOfDependentSpecies   := loadSingleMethod ('getNumberOfDependentSpecies', errMsg, result, methodList);
    @libGetNumberOfIndependentSpecies := loadSingleMethod ('getNumberOfIndependentSpecies', errMsg, result, methodList);

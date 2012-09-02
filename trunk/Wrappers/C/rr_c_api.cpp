@@ -1249,6 +1249,30 @@ RRVectorHandle rrCallConv getFloatingSpeciesConcentrations()
 	return NULL;
 }
 
+RRVectorHandle rrCallConv getBoundarySpeciesConcentrations()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+
+        vector<double> vec =  gRRHandle->getBoundarySpeciesConcentrations();
+        RRVector* aVec = createVector(vec);
+        return aVec;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+	return NULL;
+}
+
+
 RRVectorHandle rrCallConv getFloatingSpeciesInitialConcentrations()
 {
 	try

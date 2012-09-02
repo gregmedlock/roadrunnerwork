@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, uRoadRunnerAPI, ExtCtrls, IOUtils, Grids, ComCtrls;
+  Dialogs, StdCtrls, uRoadRunnerAPI, ExtCtrls, IOUtils, Grids, ComCtrls,
+  Clipbrd;
 
 type
   TfrmMain = class(TForm)
@@ -62,6 +63,7 @@ type
     Label4: TLabel;
     Label5: TLabel;
     btnGetL0Matrix: TButton;
+    btnCopygrid: TButton;
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetAvailableSymbolsClick(Sender: TObject);
@@ -93,6 +95,7 @@ type
     procedure btnGetConservationMatrixClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure btnGetL0MatrixClick(Sender: TObject);
+    procedure btnCopygridClick(Sender: TObject);
     procedure lblTempFolderKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
   private
@@ -241,8 +244,7 @@ begin
   setComputeAndAssignConservationLaws(chkConservationLaws.checked);
   lstSummary.Clear;
 
-  loadedSBMLStr :=
-    AnsiString(TFile.ReadAllText(lstModelName.Items[lstModelName.ItemIndex]));
+  loadedSBMLStr := AnsiString(TFile.ReadAllText(lstModelName.Items[lstModelName.ItemIndex]));
   if not loadSBML(loadedSBMLStr) then
   begin
     edtProgress.text := 'Failed to load SBML model';
@@ -529,8 +531,6 @@ begin
     for i := 1 to m.r do
       for j := 1 to m.c do
         grid.Cells[j - 1, i] := Format('%8.5g', [m[i, j]]);
-
-    //getSummaryOfModelByGetValue;
   finally
     m.free;
   end;
@@ -572,8 +572,13 @@ procedure TfrmMain.Button2Click(Sender: TObject);
 var
   i, j: integer;
   m: TMatrix;
+  s : TStringList;
 begin
   try
+    s := TStringList.Create;
+    s.Add ('S1');
+    s.Add ('S2');
+    setSelectionList (s);
     m := simulateEx(strtofloat(edtTimeStart.Text),
       strtofloat(edtTimeEnd.Text), strtoint(edtNumberOfPoints.Text));
     try
@@ -629,6 +634,10 @@ begin
     lstSummary.Items.Add(methodList[i]);
   methodList.Free;
   lstModelName.ItemIndex := 0;
+
+  setTempFolder('C:\\rrTemp');
+  setLogLevel(5);
+  enableLogging();
 end;
 
 procedure TfrmMain.btnLoadTwoModelsClick(Sender: TObject);
@@ -653,6 +662,22 @@ begin
   end
   else
     showmessage('Failed to find file');
+end;
+
+procedure TfrmMain.btnCopygridClick(Sender: TObject);
+var
+   str : string;
+   C, R : Integer;
+begin
+  str := '';
+  for R := 0 to Grid.RowCount - 1 do begin
+    for C := 0 to Grid.ColCount - 1 do begin
+      str := str + Grid.Cells[C, R];
+      if C < Grid.ColCount - 1 then str := str + #9;
+    end;
+    if R < Grid.RowCount - 1 then str := str + #13#10;
+  end;
+  Clipboard.AsText := str;
 end;
 
 procedure TfrmMain.btnDisplayModelSumamryByGetIndexClick(Sender: TObject);
