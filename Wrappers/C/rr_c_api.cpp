@@ -2875,6 +2875,14 @@ void rrCallConv Pause()
 }
 
 
+RRVectorHandle createVector (int size)
+{
+   RRVectorHandle list = new RRVector;
+   list->Size = size;
+   list->Data = new double[list->Size];
+   return list;
+}
+
 int rrCallConv getVectorLength (RRVectorHandle vector)
 {
 	if (vector == NULL)
