@@ -232,7 +232,7 @@ C_DECL_SPEC bool                    rrCallConv   freeCCode(RRCCodeHandle code);
 C_DECL_SPEC void                    rrCallConv   Pause();
 
 // Helper Routines
-C_DECL_SPEC int                     rrCallConv  createVEctor (int size);
+C_DECL_SPEC RRVectorHandle          rrCallConv  createVectorAPI (int size);
 
 C_DECL_SPEC int                     rrCallConv  getVectorLength (RRVectorHandle vector);
 C_DECL_SPEC bool                    rrCallConv  getVectorElement (RRVectorHandle vector, int index, double& value);
