@@ -2875,7 +2875,7 @@ void rrCallConv Pause()
 }
 
 
-RRVectorHandle createVector (int size)
+RRVectorHandle rrCallConv createVectorAPI (int size)
 {
    RRVectorHandle list = new RRVector;
    list->Size = size;

@@ -259,6 +259,7 @@ function  getNumberOfIndependentSpecies : integer;
 
 function  steadyState : double;
 function  computeSteadyStateValues : TDoubleArray;
+function  getEigenValues : TMatrix;
 
 function  getuCC (variable : AnsiString; parameter : AnsiString) : double;
 function  getCC (variable : AnsiString; parameter : AnsiString) : double;
@@ -377,6 +378,7 @@ var DLLHandle : Cardinal;
     libgetuEE                 : TGetMCA;
     libgetCC                  : TGetMCA;
     libgetEE                  : TGetMCA;
+    libGetEigenValues         : TGetMatrix;
 
     libCreateVector : function (size : integer) : PRRDoubleVectorHandle;
 
@@ -960,6 +962,21 @@ begin
   end;
 end;
 
+function getEigenValues : TMatrix;
+var p : PRRMatrixHandle;
+begin
+  p := libGetEigenValues;
+  if p = nil then
+     raise Exception.Create ('No Eigenvalue matrix');
+  try
+    result := loadIntoMatrix (p);
+  finally
+    libFreeMatrix (p);
+  end;
+
+end;
+
+
 function setSteadyStateSelectionList (strList : TStringList) : boolean;
 var i : integer;
     str : AnsiString;
@@ -1410,6 +1427,8 @@ begin
    @libgetuEE                   := loadSingleMethod ('getuEE', errMsg, result, methodList);
    @libgetCC                    := loadSingleMethod ('getCC', errMsg, result, methodList);
    @libgetEE                    := loadSingleMethod ('getEE', errMsg, result, methodList);
+
+   @libGetEigenValues            := loadSingleMethod ('getEigenValues', errMsg, result, methodList);
 
 
    @libFreeRRInstance   := loadSingleMethod ('freeRRInstance', errMsg, result, methodList);
