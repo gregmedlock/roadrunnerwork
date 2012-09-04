@@ -8,8 +8,8 @@
 
 The API documentation for RoadRunners various API's are available below
 
-[http://roadrunnerwork.googlecode.com/svn/docs/c_api/html/index.html C API]
+[http://roadrunnerwork.googlecode.com/svn/documents/c_api/html/index.html C API]
 
-[http://roadrunnerwork.googlecode.com/svn/docs/python_api/html/index.html Python API]
+[http://roadrunnerwork.googlecode.com/svn/documents/python_api/html/index.html Python API]
 
-[http://roadrunnerwork.googlecode.com/svn/docs/cpp_api/html/index.html C++ API]
+[http://roadrunnerwork.googlecode.com/svn/documents/cpp_api/html/index.html C++ API]
