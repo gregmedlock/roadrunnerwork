@@ -50,31 +50,25 @@ for path, dirs, files in os.walk(os.getcwd()):
         curtime = ['time']
 
         species = curtime + varlist
-
-        i=0
-        pattern = re.compile('[\W_]+')
-        for species[i] in species:
-            species[i] = pattern.sub('',species[i])#removes non-alphanumeric characters from all variables names
-            i+=1
+        #i=0
+        #pattern = re.compile('[\W_]+')
+        #for species[i] in species:
+        #    species[i] = pattern.sub('',species[i])#removes non-alphanumeric characters from all variables names. Probably no longer needed.
+        #    i+=1
 
         species = str(species).strip("[]")
         species = species.replace("'", "")
-        species = species.replace(",", "")
+        species = species.replace(" ", "")
         rrPython.setSelectionList(species)
         #rrPython.ComputeAndAssignConservationLaws(0)
         k = rrPython.simulate()
         kk = []
-        #if k == None:
-        #    k = ''
-        #else:
-        #    k = k
-        #if k == None:
-        #    kk = []
-        #else:
-        #    kk = k.split('\n')
         kk = k.split('\n')
-        #iterate = 0
 
+############The block of code below was used to multiply values by the compartment
+############volume to get results in moles instead of concentration where needed
+
+        #iterate = 0
         #if concheck == 1:
         #    for iterate in range(len(kk)):
         #        iterate2 = 1
@@ -89,6 +83,9 @@ for path, dirs, files in os.walk(os.getcwd()):
 #                kk[iterate] = kkelement
 #                iterate +=1
 
+
+#############
+#############
         p = open('C:/Pyfiles/sbml.csv','w')
         writer = csv.writer(p, delimiter = '\n')
         writer.writerows([kk])
@@ -98,7 +95,8 @@ for path, dirs, files in os.walk(os.getcwd()):
         w = q[:-4] + ic[-1][25:]
         os.rename('C:/Pyfiles/sbml.csv',w)
         concheck = 0
+        list.list
         kk = []
         k = ''
-
+        list.list
 
