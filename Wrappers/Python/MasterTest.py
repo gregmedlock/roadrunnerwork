@@ -1,4 +1,8 @@
-location = 'C:\\cRoadRunner\\Wrappers\\Python\\Tests\\'
+import os
+
+location = os.path.join(os.path.dirname(__file__), 'Tests\\')
+
+#location = 'Tests\\'
 
 execfile(location + 'getVersion.py')
 execfile(location + 'writeSBML.py')
