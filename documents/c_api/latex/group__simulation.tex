@@ -1,0 +1,150 @@
+\hypertarget{group__simulation}{
+\section{\-Time-\/course simulation}
+\label{group__simulation}\index{\-Time-\/course simulation@{\-Time-\/course simulation}}
+}
+
+
+\-Deterministic, stochastic, and hybrid simulation algorithms.  
+
+
+\subsection*{\-Read models}
+\begin{DoxyCompactItemize}
+\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga1a636a76ad610d99fe1c780bb3d9296d}{set\-Time\-Start} (const double \&time\-Start)
+\begin{DoxyCompactList}\small\item\em \-Set the time start for a simulation. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga1313e21d622cd846bdd75071e965eb6c}{set\-Time\-End} (const double \&time\-End)
+\begin{DoxyCompactList}\small\item\em \-Set the time end for a simulation. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga448ead53bb8913de664cc8ad675b4197}{set\-Num\-Points} (const int \&nr\-Points)
+\begin{DoxyCompactList}\small\item\em \-Set the number of points to generate in a simulation. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga6465c94b6dfed39a6ef614bd0a68cb9b}{set\-Selection\-List} (const char $\ast$list)
+\begin{DoxyCompactList}\small\item\em \-Set the selection list for output from \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or simulate\-Ex() \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} \*
+rr\-Call\-Conv \hyperlink{group__loadsave_ga1db0b86ed7fd0d6e19f8df85b7577253}{get\-Selection\-List} ()
+\begin{DoxyCompactList}\small\item\em \-Get the current selection list for \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or simulate\-Ex() \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{struct_r_r_result}{\-R\-R\-Result\-Handle} \*
+rr\-Call\-Conv \hyperlink{group__loadsave_ga9f0555c11716daec2336d54d13facc57}{simulate} ()
+\begin{DoxyCompactList}\small\item\em \-Carry out a time-\/course simulation, use set\-Time\-Start etc to set characteristics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Deterministic, stochastic, and hybrid simulation algorithms. 
+
+\subsection{\-Function \-Documentation}
+\hypertarget{group__loadsave_ga1db0b86ed7fd0d6e19f8df85b7577253}{
+\index{\-Time-\/course simulation@{\-Time-\/course simulation}!get\-Selection\-List@{get\-Selection\-List}}
+\index{get\-Selection\-List@{get\-Selection\-List}!Time-course simulation@{\-Time-\/course simulation}}
+\subsubsection[{get\-Selection\-List}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-String\-List\-Handle} rr\-Call\-Conv get\-Selection\-List (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{group__loadsave_ga1db0b86ed7fd0d6e19f8df85b7577253}
+
+
+\-Get the current selection list for \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or simulate\-Ex() 
+
+\begin{DoxyReturn}{\-Returns}
+char$\ast$ \-A list of symbol names indicating the current selection list 
+\end{DoxyReturn}
+\hypertarget{group__loadsave_ga448ead53bb8913de664cc8ad675b4197}{
+\index{\-Time-\/course simulation@{\-Time-\/course simulation}!set\-Num\-Points@{set\-Num\-Points}}
+\index{set\-Num\-Points@{set\-Num\-Points}!Time-course simulation@{\-Time-\/course simulation}}
+\subsubsection[{set\-Num\-Points}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv set\-Num\-Points (
+\begin{DoxyParamCaption}
+\item[{const int \&}]{nr\-Points}
+\end{DoxyParamCaption}
+)}}
+\label{group__loadsave_ga448ead53bb8913de664cc8ad675b4197}
+
+
+\-Set the number of points to generate in a simulation. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em const} & int\& \-Number of points to generate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+bool \-Returns \-True if sucessful 
+\end{DoxyReturn}
+\hypertarget{group__loadsave_ga6465c94b6dfed39a6ef614bd0a68cb9b}{
+\index{\-Time-\/course simulation@{\-Time-\/course simulation}!set\-Selection\-List@{set\-Selection\-List}}
+\index{set\-Selection\-List@{set\-Selection\-List}!Time-course simulation@{\-Time-\/course simulation}}
+\subsubsection[{set\-Selection\-List}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv set\-Selection\-List (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{list}
+\end{DoxyParamCaption}
+)}}
+\label{group__loadsave_ga6465c94b6dfed39a6ef614bd0a68cb9b}
+
+
+\-Set the selection list for output from \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or simulate\-Ex() 
+
+\-Example\-: set\-Selection\-List (\char`\"{}\-Time, S1, J1, J2\char`\"{})
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em const} & char$\ast$ \-A string of names separated by spaces or comma characters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+bool \-Returns \-True if sucessful 
+\end{DoxyReturn}
+\hypertarget{group__loadsave_ga1313e21d622cd846bdd75071e965eb6c}{
+\index{\-Time-\/course simulation@{\-Time-\/course simulation}!set\-Time\-End@{set\-Time\-End}}
+\index{set\-Time\-End@{set\-Time\-End}!Time-course simulation@{\-Time-\/course simulation}}
+\subsubsection[{set\-Time\-End}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv set\-Time\-End (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{time\-End}
+\end{DoxyParamCaption}
+)}}
+\label{group__loadsave_ga1313e21d622cd846bdd75071e965eb6c}
+
+
+\-Set the time end for a simulation. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em const} & double\& time start \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+bool \-Returns \-True if sucessful 
+\end{DoxyReturn}
+\hypertarget{group__loadsave_ga1a636a76ad610d99fe1c780bb3d9296d}{
+\index{\-Time-\/course simulation@{\-Time-\/course simulation}!set\-Time\-Start@{set\-Time\-Start}}
+\index{set\-Time\-Start@{set\-Time\-Start}!Time-course simulation@{\-Time-\/course simulation}}
+\subsubsection[{set\-Time\-Start}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv set\-Time\-Start (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{time\-Start}
+\end{DoxyParamCaption}
+)}}
+\label{group__loadsave_ga1a636a76ad610d99fe1c780bb3d9296d}
+
+
+\-Set the time start for a simulation. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em const} & double\& time start \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+bool \-Returns \-True if sucessful 
+\end{DoxyReturn}
+\hypertarget{group__loadsave_ga9f0555c11716daec2336d54d13facc57}{
+\index{\-Time-\/course simulation@{\-Time-\/course simulation}!simulate@{simulate}}
+\index{simulate@{simulate}!Time-course simulation@{\-Time-\/course simulation}}
+\subsubsection[{simulate}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-Result\-Handle} rr\-Call\-Conv simulate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{group__loadsave_ga9f0555c11716daec2336d54d13facc57}
+
+
+\-Carry out a time-\/course simulation, use set\-Time\-Start etc to set characteristics. 
+
+\begin{DoxyReturn}{\-Returns}
+\-R\-R\-Result\-Handle \-Returns an array containing the results of the simulation 
+\end{DoxyReturn}

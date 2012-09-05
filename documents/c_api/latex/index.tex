@@ -1,0 +1,47 @@
+\hypertarget{index_intro_sec}{}\section{\-Introduction}\label{index_intro_sec}
+\-Road\-Runner is a high performance and portable simulation engine for systems and synthetic biology. \-To run a simple \-S\-B\-M\-L model and generate time series data we would call\-:
+
+
+\begin{DoxyCode}
+ RRResultHandle output;
+
+ loadSBMLFromFile ("mymodel.xml");
+
+ output = simulate (0, 10, 100);
+\end{DoxyCode}
+
+
+\-More complex example\-:
+
+
+\begin{DoxyCode}
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include "rr_c_api.h"
+
+ int main(int nargs, char** argv)
+ {
+        RRResultHandle efm, output, params;
+
+        if (nargs < 2)
+        {
+            m1 = model1();
+        }
+        else
+        {
+            printf("loading model file %s\n", argv[1]);
+            loadSBMLFromFile(argv[1]);
+        }
+
+
+        output = simualte (0, 100, 1000);  // start, end, num. points
+        printf("output.tab has %i rows and %i columns\n", output->RSize, output
+      ->RCols);
+        printResult (output);
+        freeREsult (output);
+
+        return 0;
+ }
+\end{DoxyCode}
+ \hypertarget{index_install_sec}{}\section{\-Installation}\label{index_install_sec}
+\-Installation documentation is provided in the main google code page. 
