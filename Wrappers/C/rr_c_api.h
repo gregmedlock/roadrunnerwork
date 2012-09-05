@@ -444,6 +444,7 @@ C_DECL_SPEC bool                    rrCallConv   freeText(char* text);
 C_DECL_SPEC bool                    rrCallConv   freeLabelStringList(RRLabelStringListHandle sl);
 C_DECL_SPEC bool                    rrCallConv   freeStringList(RRStringListHandle sl);
 C_DECL_SPEC bool                    rrCallConv   freeStringArrayList(RRStringArrayListHandle sl);
+C_DECL_SPEC bool 					rrCallConv 	 freeArrayList(RRArrayList2Handle theList);
 C_DECL_SPEC bool                    rrCallConv   freeVector(RRVectorHandle vector);
 C_DECL_SPEC bool                    rrCallConv   freeMatrix(RRMatrixHandle matrix);
 C_DECL_SPEC bool                    rrCallConv   freeCCode(RRCCodeHandle code);
