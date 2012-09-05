@@ -7,7 +7,6 @@
 #include "rrLogFile.h"
 //---------------------------------------------------------------------------
 
-
 namespace rr
 {
 using std::fstream;

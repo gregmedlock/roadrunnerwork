@@ -33,7 +33,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\source\libstruct\;..\..\source\;..\..\Wrappers\C\Examples\api_tester\;..\..\Wrappers\C\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>R:\rrInstalls\xeDebug\lib\;..\..\source\libstruct\;..\..\source\;..\..\Wrappers\C\Examples\api_tester\;R:\rrInstalls\xe\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>R:\rrInstalls\xe\full-debug\lib\;..\..\source\libstruct\;..\..\source\;..\..\Wrappers\C\Examples\api_tester\;R:\rrInstalls\xe\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -71,7 +71,7 @@
 			<CppCompile Include="..\..\Wrappers\C\Examples\api_tester\main.cpp">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="R:\rrInstalls\xeDebug\lib\rr_c_api.lib">
+			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\rr_c_api.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>1</BuildOrder>
 			</LibFiles>
@@ -127,7 +127,7 @@
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="RunParams">R:\\rrInstalls\xeDebug\Models</Parameters>
+						<Parameters Name="RunParams">R:\\rrInstalls\xe\full-debug\Models</Parameters>
 					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

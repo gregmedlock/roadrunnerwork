@@ -34,12 +34,16 @@ class RR_DECLSPEC Logger : public LogContainer<LogOutput>
 {
 };
 
-#define DEBUG
-#ifdef DEBUG
+#ifndef NO_LOGGER
 #define Log(level) \
     if (level > rr::GetHighestLogLevel()) { ; }\
     else if (level > gLog.GetLogLevel()) { ; } \
     else Logger().Get(level)
+#else
+#define Log(level) \
+    if (true) {  }\
+    else \
+    Logger().Get(level)
 #endif
 
 
