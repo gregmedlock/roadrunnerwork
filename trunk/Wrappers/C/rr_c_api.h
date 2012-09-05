@@ -188,6 +188,7 @@ C_DECL_SPEC bool                    rrCallConv   setComputeAndAssignConservation
 /*!
  \brief Create a model from an SBML string
  \param char* sbml string
+ \return bool Returns true if sucessful
  \ingroup loadsave
 */
 C_DECL_SPEC bool  rrCallConv   loadSBML(const char* sbml);
@@ -195,6 +196,7 @@ C_DECL_SPEC bool  rrCallConv   loadSBML(const char* sbml);
 /*!
  \brief Create a model from a SBML file
  \param char* file name 
+ \return bool Returns true if sucessful
  \ingroup loadsave
 */
 C_DECL_SPEC bool rrCallConv   loadSBMLFromFile(const char* sbml);
@@ -207,12 +209,56 @@ C_DECL_SPEC char* 				    rrCallConv   getSBML();
 C_DECL_SPEC bool                    rrCallConv   setCapabilities (const char* caps);
 C_DECL_SPEC char*                   rrCallConv   getCapabilities();
 
-// Simulation methods
+/*!
+ \brief Set the time start for a simulation
+ \param const double& time start
+ \return bool Returns True if sucessful
+ \ingroup simulation
+*/
 C_DECL_SPEC bool                    rrCallConv   setTimeStart(const double& timeStart);
+
+/*!
+ \brief Set the time end for a simulation
+ \param const double& time start
+ \return bool Returns True if sucessful
+ \ingroup simulation
+*/
 C_DECL_SPEC bool                    rrCallConv   setTimeEnd(const double& timeEnd);
+
+/*!
+ \brief Set the number of points to generate in a simulation
+ \param const int& Number of points to generate
+ \return bool Returns True if sucessful
+ \ingroup simulation
+*/
 C_DECL_SPEC bool                    rrCallConv   setNumPoints(const int& nrPoints);
+
+/*!
+ \brief Set the selection list for output from simulate() or simulateEx()
+
+ Example: setSelectionList ("Time, S1, J1, J2")
+
+ \param const char* A string of names separated by spaces or comma characters
+ \return bool Returns True if sucessful
+ \ingroup simulation
+*/
 C_DECL_SPEC bool                    rrCallConv   setSelectionList(const char* list);
+
+/*!
+ \brief Get the current selection list for simulate() or simulateEx()
+
+ \return char* A list of symbol names indicating the current selection list
+ \ingroup simulation
+*/
 C_DECL_SPEC RRStringListHandle      rrCallConv   getSelectionList();
+
+/*!
+ \brief Carry out a time-course simulation, use setTimeStart etc to set
+ characteristics
+
+ \return RRResultHandle Returns an array containing the results of the simulation
+ \ingroup simulation
+*/
 C_DECL_SPEC RRResultHandle          rrCallConv   simulate();
 C_DECL_SPEC RRResultHandle          rrCallConv   simulateEx(const double& timeStart, const double& timeEnd, const int& numberOfPoints);
 C_DECL_SPEC bool                  	rrCallConv   oneStep(const double& currentTime, const double& stepSize, double& value);
