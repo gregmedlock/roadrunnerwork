@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,7 +102,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a>  </div>
   <div class="headertitle">
 <div class="title">rr::StringList Class Reference</div>  </div>
 </div><!--header-->
@@ -122,26 +123,28 @@ Inheritance diagram for rr::StringList:</div>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a306a0596088cdf35986f293445b4b1cb">StringList</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#abb21df90980fe0a517fa0e6c946264fb">StringList</a> (const string &amp;str, const string &amp;delimiter)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#ab5910ef7db3d11cb060a1f47ed2a67b8">StringList</a> (const string &amp;str, const string &amp;delimiter=&quot;,&quot;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a6caba551d7c334d733f61b5f1e47bb6f">StringList</a> (const vector&lt; string &gt; &amp;strings)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a741a25dfad12e837f3e118bda67e237e">StringList</a> (const <a class="el" href="classrr_1_1_string_list.html">StringList</a> &amp;cp)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a85899b6d4645208142b34ad35cdde67b">~StringList</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a0ea85ab6f989557c4d5aa04d93de76da">Label</a> (const string &amp;lbl)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a2099abbe95f64c677e8711ffaf2d47de">InsertAt</a> (const int &amp;index, const string &amp;item)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a0ac2a0c241b3db29dad8273a8f556fc5">Add</a> (const string &amp;str)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a35279ce7a292d68114f3d72044356be0">AsString</a> (const string &amp;delimiter=&quot;,&quot;)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a8e94a69bd66491d85772d61ca99026bb">size</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#aa32b6ed798cabef5ae054b664019887e">Count</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#ad4aa9ba0d9a72493e64c8d77209ac313">AsString</a> (const string &amp;delimiter=&quot;,&quot;) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a7bdc8932c782485cfef8887a9a18ea7a">Count</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a5100c9ea8a65c677a251112e6f0fd563">operator=</a> (const <a class="el" href="classrr_1_1_string_list.html">StringList</a> &amp;rhs)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a9b8a087b64ab9eb48aca065bbcd7d0fa">operator[]</a> (const int &amp;index)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a0606a8473b3a05b25e302510fd1be475">operator[]</a> (const int &amp;index)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a4278ab1039f2e76aa364197534e34fd9">operator[]</a> (const int &amp;index) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#aec22d26cfade4c47a66867b14c43b4ea">operator-</a> (const <a class="el" href="classrr_1_1_string_list.html">StringList</a> &amp;rhs)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a6642377e415c4218c484477c7515f6af">find</a> (const string &amp;item)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a21b0b3dd79311d9a74d786949cbc1588">IndexOf</a> (const string &amp;item)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a79fc50e1b6690f184de58f214cbf6f78">clear</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#aa1b1d825f59cd09ca90261e2c2f1022b">empty</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#ac7088988810c1375b4f6415258ad33af">Contains</a> (const string &amp;item)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#abac92430d69df1320f6ac68eeade24fa">Contains</a> (const string &amp;item) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a3612b0a5471bc8110acbc49003c96f60">DontContain</a> (const string &amp;item) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#afc6ba97b887a3c307918276583450113">push_back</a> (const string &amp;item)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#ae15a477a400a6728adb094d689cda46d">begin</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#abc97838ce3ba566649a717e67e85bba8">end</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a3b492fbf5e1076ebce8ec4177ef7ec83">begin</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#adf565dd692b81e372ee9ea5606e7714b">end</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a425c774d96157e7b88b295881ab2fdd8">PreFix</a> (const string &amp;fix)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#adac9b93ac0b8ef8261180a8839a5da2f">PostFix</a> (const string &amp;fix)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
@@ -151,6 +154,9 @@ Public Attributes</h2></td></tr>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a77fbf5ded294145b45422782d4ccab07">mStrings</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;::iterator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#a599cb59468528bbf0456b68cbdb1e848">mLI</a></td></tr>
+<tr><td colspan="2"><h2><a name="friends"></a>
+Friends</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> friend ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_string_list.html#aa3ce47607ddae8b81ab08d118918a5fc">operator&lt;&lt;</a> (ostream &amp;stream, const <a class="el" href="classrr_1_1_string_list.html">StringList</a> &amp;list)</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a306a0596088cdf35986f293445b4b1cb"></a><!-- doxytag: member="rr::StringList::StringList" ref="a306a0596088cdf35986f293445b4b1cb" args="()" -->
@@ -169,7 +175,7 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abb21df90980fe0a517fa0e6c946264fb"></a><!-- doxytag: member="rr::StringList::StringList" ref="abb21df90980fe0a517fa0e6c946264fb" args="(const string &amp;str, const string &amp;delimiter)" -->
+<a class="anchor" id="ab5910ef7db3d11cb060a1f47ed2a67b8"></a><!-- doxytag: member="rr::StringList::StringList" ref="ab5910ef7db3d11cb060a1f47ed2a67b8" args="(const string &amp;str, const string &amp;delimiter=&quot;,&quot;)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -183,7 +189,7 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>delimiter</em>&#160;</td>
+          <td class="paramname"><em>delimiter</em> = <code>&quot;,&quot;</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -264,15 +270,31 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a35279ce7a292d68114f3d72044356be0"></a><!-- doxytag: member="rr::StringList::AsString" ref="a35279ce7a292d68114f3d72044356be0" args="(const string &amp;delimiter=&quot;,&quot;)" -->
+<a class="anchor" id="ad4aa9ba0d9a72493e64c8d77209ac313"></a><!-- doxytag: member="rr::StringList::AsString" ref="ad4aa9ba0d9a72493e64c8d77209ac313" args="(const string &amp;delimiter=&quot;,&quot;) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string <a class="el" href="classrr_1_1_string_list.html#a35279ce7a292d68114f3d72044356be0">rr::StringList::AsString</a> </td>
+          <td class="memname">string <a class="el" href="classrr_1_1_string_list.html#ad4aa9ba0d9a72493e64c8d77209ac313">rr::StringList::AsString</a> </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>delimiter</em> = <code>&quot;,&quot;</code></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3b492fbf5e1076ebce8ec4177ef7ec83"></a><!-- doxytag: member="rr::StringList::begin" ref="a3b492fbf5e1076ebce8ec4177ef7ec83" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; string &gt;::iterator <a class="el" href="classrr_1_1_string_list.html#a3b492fbf5e1076ebce8ec4177ef7ec83">rr::StringList::begin</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -281,15 +303,15 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae15a477a400a6728adb094d689cda46d"></a><!-- doxytag: member="rr::StringList::begin" ref="ae15a477a400a6728adb094d689cda46d" args="()" -->
+<a class="anchor" id="a79fc50e1b6690f184de58f214cbf6f78"></a><!-- doxytag: member="rr::StringList::clear" ref="a79fc50e1b6690f184de58f214cbf6f78" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;string&gt;::iterator <a class="el" href="classrr_1_1_string_list.html#ae15a477a400a6728adb094d689cda46d">rr::StringList::begin</a> </td>
+          <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_string_list.html#a79fc50e1b6690f184de58f214cbf6f78">rr::StringList::clear</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -297,16 +319,16 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac7088988810c1375b4f6415258ad33af"></a><!-- doxytag: member="rr::StringList::Contains" ref="ac7088988810c1375b4f6415258ad33af" args="(const string &amp;item)" -->
+<a class="anchor" id="abac92430d69df1320f6ac68eeade24fa"></a><!-- doxytag: member="rr::StringList::Contains" ref="abac92430d69df1320f6ac68eeade24fa" args="(const string &amp;item) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_string_list.html#ac7088988810c1375b4f6415258ad33af">rr::StringList::Contains</a> </td>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_string_list.html#abac92430d69df1320f6ac68eeade24fa">rr::StringList::Contains</a> </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>item</em></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div>
@@ -314,15 +336,32 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa32b6ed798cabef5ae054b664019887e"></a><!-- doxytag: member="rr::StringList::Count" ref="aa32b6ed798cabef5ae054b664019887e" args="() const " -->
+<a class="anchor" id="a7bdc8932c782485cfef8887a9a18ea7a"></a><!-- doxytag: member="rr::StringList::Count" ref="a7bdc8932c782485cfef8887a9a18ea7a" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classrr_1_1_string_list.html#aa32b6ed798cabef5ae054b664019887e">rr::StringList::Count</a> </td>
+          <td class="memname">unsigned int <a class="el" href="classrr_1_1_string_list.html#a7bdc8932c782485cfef8887a9a18ea7a">rr::StringList::Count</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const<code> [inline]</code></td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3612b0a5471bc8110acbc49003c96f60"></a><!-- doxytag: member="rr::StringList::DontContain" ref="a3612b0a5471bc8110acbc49003c96f60" args="(const string &amp;item) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_string_list.html#a3612b0a5471bc8110acbc49003c96f60">rr::StringList::DontContain</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div>
@@ -338,7 +377,7 @@ Protected Attributes</h2></td></tr>
           <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_string_list.html#aa1b1d825f59cd09ca90261e2c2f1022b">rr::StringList::empty</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -346,15 +385,15 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abc97838ce3ba566649a717e67e85bba8"></a><!-- doxytag: member="rr::StringList::end" ref="abc97838ce3ba566649a717e67e85bba8" args="()" -->
+<a class="anchor" id="adf565dd692b81e372ee9ea5606e7714b"></a><!-- doxytag: member="rr::StringList::end" ref="adf565dd692b81e372ee9ea5606e7714b" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;string&gt;::iterator <a class="el" href="classrr_1_1_string_list.html#abc97838ce3ba566649a717e67e85bba8">rr::StringList::end</a> </td>
+          <td class="memname">vector&lt; string &gt;::iterator <a class="el" href="classrr_1_1_string_list.html#adf565dd692b81e372ee9ea5606e7714b">rr::StringList::end</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -396,6 +435,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a2099abbe95f64c677e8711ffaf2d47de"></a><!-- doxytag: member="rr::StringList::InsertAt" ref="a2099abbe95f64c677e8711ffaf2d47de" args="(const int &amp;index, const string &amp;item)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_string_list.html#a2099abbe95f64c677e8711ffaf2d47de">rr::StringList::InsertAt</a> </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>item</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a0ea85ab6f989557c4d5aa04d93de76da"></a><!-- doxytag: member="rr::StringList::Label" ref="a0ea85ab6f989557c4d5aa04d93de76da" args="(const string &amp;lbl)" -->
 <div class="memitem">
 <div class="memproto">
@@ -405,7 +471,7 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>lbl</em></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -447,16 +513,16 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a9b8a087b64ab9eb48aca065bbcd7d0fa"></a><!-- doxytag: member="rr::StringList::operator[]" ref="a9b8a087b64ab9eb48aca065bbcd7d0fa" args="(const int &amp;index)" -->
+<a class="anchor" id="a0606a8473b3a05b25e302510fd1be475"></a><!-- doxytag: member="rr::StringList::operator[]" ref="a0606a8473b3a05b25e302510fd1be475" args="(const int &amp;index)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string&amp; rr::StringList::operator[] </td>
+          <td class="memname">string &amp; rr::StringList::operator[] </td>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -473,7 +539,7 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const int &amp;&#160;</td>
           <td class="paramname"><em>index</em></td><td>)</td>
-          <td> const<code> [inline]</code></td>
+          <td> const</td>
         </tr>
       </table>
 </div>
@@ -532,15 +598,27 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8e94a69bd66491d85772d61ca99026bb"></a><!-- doxytag: member="rr::StringList::size" ref="a8e94a69bd66491d85772d61ca99026bb" args="() const " -->
+<hr/><h2>Friends And Related Function Documentation</h2>
+<a class="anchor" id="aa3ce47607ddae8b81ab08d118918a5fc"></a><!-- doxytag: member="rr::StringList::operator&lt;&lt;" ref="aa3ce47607ddae8b81ab08d118918a5fc" args="(ostream &amp;stream, const StringList &amp;list)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classrr_1_1_string_list.html#a8e94a69bd66491d85772d61ca99026bb">rr::StringList::size</a> </td>
+          <td class="memname"><a class="el" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> friend ostream&amp; operator&lt;&lt; </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [inline]</code></td>
+          <td class="paramtype">ostream &amp;&#160;</td>
+          <td class="paramname"><em>stream</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classrr_1_1_string_list.html">StringList</a> &amp;&#160;</td>
+          <td class="paramname"><em>list</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [friend]</code></td>
         </tr>
       </table>
 </div>
@@ -589,8 +667,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/roadrunnerwork/source/trunk/src/<a class="el" href="rr_string_list_8h_source.html">rrStringList.h</a></li>
-<li>C:/roadrunnerwork/source/trunk/src/<a class="el" href="rr_string_list_8cpp.html">rrStringList.cpp</a></li>
+<li>R:/roadrunnerwork/trunk/source/<a class="el" href="rr_string_list_8h_source.html">rrStringList.h</a></li>
+<li>R:/roadrunnerwork/trunk/source/<a class="el" href="rr_string_list_8cpp.html">rrStringList.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- window showing the filter options -->
@@ -598,7 +676,7 @@ Protected Attributes</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -610,7 +688,7 @@ Protected Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:27:02 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:59 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

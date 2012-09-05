@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>RoadRunner C++ API: C:/roadrunnerwork/source/trunk/src/rrNLEQInterface.h Source File</title>
+<title>RoadRunner C++ API: R:/roadrunnerwork/trunk/source/rrNLEQInterface.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -78,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">C:/roadrunnerwork/source/trunk/src/rrNLEQInterface.h</div>  </div>
+<div class="title">R:/roadrunnerwork/trunk/source/rrNLEQInterface.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="rr_n_l_e_q_interface_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef rrNLEQInterfaceH</span>
@@ -86,159 +86,106 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#include &lt;vector&gt;</span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &quot;<a class="code" href="rr_object_8h.html">rrObject.h</a>&quot;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &quot;<a class="code" href="rr_model_from_c_8h.html">rrModelFromC.h</a>&quot;</span>
-<a name="l00006"></a>00006 <span class="keyword">using</span> std::vector;
-<a name="l00007"></a>00007 <span class="comment">//class IModel;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="rr_steady_state_solver_8h.html">rrSteadyStateSolver.h</a>&quot;</span>
+<a name="l00007"></a>00007 <span class="keyword">using</span> std::vector;
 <a name="l00008"></a>00008 
 <a name="l00009"></a>00009 <span class="keyword">namespace </span>rr
 <a name="l00010"></a>00010 {
-<a name="l00011"></a><a class="code" href="classrr_1_1_i_steady_state_solver.html">00011</a>     <span class="keyword">class </span><a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> <a class="code" href="classrr_1_1_i_steady_state_solver.html">ISteadyStateSolver</a> : <span class="keyword">public</span> <a class="code" href="classrr_1_1rr_object.html">rrObject</a>
-<a name="l00012"></a>00012     {
-<a name="l00018"></a>00018         <span class="keyword">public</span>:
-<a name="l00019"></a>00019             <span class="keyword">virtual</span> <span class="keywordtype">double</span> solve(<span class="keyword">const</span> vector&lt;double&gt;&amp; yin) = 0;
-<a name="l00020"></a>00020     };
-<a name="l00021"></a>00021 
-<a name="l00022"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html">00022</a>     <span class="keyword">class </span><a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> <a class="code" href="classrr_1_1_n_l_e_q_interface.html">NLEQInterface</a> : <span class="keyword">public</span> <a class="code" href="classrr_1_1_i_steady_state_solver.html">ISteadyStateSolver</a>
-<a name="l00023"></a>00023     {
-<a name="l00024"></a>00024         <span class="keyword">protected</span>:
-<a name="l00025"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#adf83f83411d53eb0ec65d25064e08db9">00025</a>             <span class="keywordtype">int</span>             <a class="code" href="classrr_1_1_n_l_e_q_interface.html#adf83f83411d53eb0ec65d25064e08db9">nOpts</a>;
-<a name="l00026"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a829266688cf555a58d301d371b622e72">00026</a>             vector&lt;int&gt;     <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a829266688cf555a58d301d371b622e72">IWK</a>;
-<a name="l00027"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#ab081225f9535073da7a2e2d6891ed387">00027</a>             <span class="keywordtype">int</span>             <a class="code" href="classrr_1_1_n_l_e_q_interface.html#ab081225f9535073da7a2e2d6891ed387">LIWK</a>;
-<a name="l00028"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#af20e6922cde3ff4d8e585e9b9d07cb0e">00028</a>             <span class="keywordtype">int</span>             <a class="code" href="classrr_1_1_n_l_e_q_interface.html#af20e6922cde3ff4d8e585e9b9d07cb0e">LWRK</a>;
-<a name="l00029"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a59ea8ba1b9c0b78afd31c6c21988594b">00029</a>             vector&lt;double&gt;     <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a59ea8ba1b9c0b78afd31c6c21988594b">RWK</a>;
-<a name="l00030"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a4215f7043b3146e812dc9d8fbeae23c3">00030</a>             vector&lt;double&gt;     <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a4215f7043b3146e812dc9d8fbeae23c3">XScal</a>;
-<a name="l00031"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a992229d9cd18d9585d8e05ad3911bf39">00031</a>             <span class="keywordtype">int</span>             <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a992229d9cd18d9585d8e05ad3911bf39">ierr</a>;
-<a name="l00032"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#ade488f05e9c9c8c5c6ca18b35b7dd254">00032</a>             vector&lt;int&gt;     <a class="code" href="classrr_1_1_n_l_e_q_interface.html#ade488f05e9c9c8c5c6ca18b35b7dd254">iopt</a>;    <span class="comment">// = new int[nOpts];</span>
-<a name="l00033"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a53f49f781209aa8545737fb42b9a3e3c">00033</a>             <a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a>            *<a class="code" href="classrr_1_1_n_l_e_q_interface.html#a53f49f781209aa8545737fb42b9a3e3c">model</a>;     <span class="comment">// Model generated from the SBML</span>
-<a name="l00034"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#aba43881d62227b08a69a45d2d6bf3b85">00034</a>             <span class="keywordtype">int</span>             <a class="code" href="classrr_1_1_n_l_e_q_interface.html#aba43881d62227b08a69a45d2d6bf3b85">n</a>;
-<a name="l00035"></a>00035 
-<a name="l00036"></a>00036 <span class="comment">//        /// &lt;summary&gt;</span>
-<a name="l00037"></a>00037 <span class="comment">//        /// This function test Nleq by running it to see whether it would be working.</span>
-<a name="l00038"></a>00038 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00039"></a>00039 <span class="comment">//        private NLEQInterface()    //</span>
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041 <span class="comment">//        /// &lt;summary&gt;</span>
-<a name="l00042"></a>00042 <span class="comment">//        /// This is the function that&#39;s called by NLEQ</span>
-<a name="l00043"></a>00043 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00044"></a>00044 <span class="comment">//        /// &lt;param name=&quot;nx&quot;&gt;&lt;/param&gt;</span>
-<a name="l00045"></a>00045 <span class="comment">//        /// &lt;param name=&quot;y&quot;&gt;&lt;/param&gt;</span>
-<a name="l00046"></a>00046 <span class="comment">//        /// &lt;param name=&quot;fval&quot;&gt;&lt;/param&gt;</span>
-<a name="l00047"></a>00047 <span class="comment">//        /// &lt;param name=&quot;pErr&quot;&gt;&lt;/param&gt;</span>
-<a name="l00048"></a>00048 <span class="comment">//        private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)</span>
-<a name="l00049"></a>00049         <span class="keywordtype">void</span> ThrowErrorForStatus();
-<a name="l00050"></a>00050 
-<a name="l00051"></a>00051     <span class="keyword">public</span>:
-<a name="l00052"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a84f880a1a7ee2dc76cf665b251d06fdd">00052</a>         <span class="keywordtype">bool</span>                         <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a84f880a1a7ee2dc76cf665b251d06fdd">IsAvailable</a>;
-<a name="l00053"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a855a5538f4709400eb809b1b8f068e3e">00053</a>                                     <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a855a5538f4709400eb809b1b8f068e3e">NLEQInterface</a>(<a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a> *_model = NULL){}
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055 <span class="comment">//        static TCallBackModelFcn fcn;</span>
-<a name="l00056"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#ae341a135cbd8c70c3c5862e1d9351d82">00056</a>         <span class="keywordtype">double</span>                         <a class="code" href="classrr_1_1_n_l_e_q_interface.html#ae341a135cbd8c70c3c5862e1d9351d82">defaultTolerance</a>;
-<a name="l00057"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a8c2610b7a0258a7424130208a7731c41">00057</a>         <span class="keywordtype">int</span>                         <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a8c2610b7a0258a7424130208a7731c41">defaultMaxInterations</a>;
-<a name="l00058"></a>00058 <span class="comment">//        delegate void TCallBackModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr);</span>
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 <span class="comment">//        /// &lt;summary&gt;</span>
-<a name="l00061"></a>00061 <span class="comment">//        /// Creates a new Instance of NLEQ for the given Model</span>
-<a name="l00062"></a>00062 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00063"></a>00063 <span class="comment">//        /// &lt;param name=&quot;model&quot;&gt;the model to create NLEQ for&lt;/param&gt;</span>
-<a name="l00064"></a>00064 
-<a name="l00065"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a0597b41c2f1643c2012d45b6f1dc4a05">00065</a>           <span class="keywordtype">double</span>                         <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a0597b41c2f1643c2012d45b6f1dc4a05">relativeTolerance</a>;
-<a name="l00066"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a0b32efd816be125548f9f7de2a3c9ec0">00066</a>         <span class="keywordtype">int</span>                         <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a0b32efd816be125548f9f7de2a3c9ec0">maxIterations</a>;
-<a name="l00067"></a>00067 <span class="comment">//</span>
-<a name="l00068"></a>00068 <span class="comment">//        // NLEQ2 seems to have problems with some models so we drop back to NLEQ1 for now.</span>
-<a name="l00069"></a>00069 <span class="comment">//</span>
-<a name="l00070"></a>00070 <span class="comment">//        //        [DllImport (&quot;nleq2&quot;, EntryPoint=&quot;NLEQ2&quot;, ExactSpelling=false,</span>
-<a name="l00071"></a>00071 <span class="comment">//        //             CharSet=CharSet.Unicode, SetLastError=true, CallingConvention=CallingConvention.Cdecl</span>
-<a name="l00072"></a>00072 <span class="comment">//        //             )]</span>
-<a name="l00073"></a>00073 <span class="comment">//        [DllImport(&quot;NleqLib&quot;, EntryPoint = &quot;NLEQ1&quot;)]</span>
-<a name="l00074"></a>00074 <span class="comment">//        //         NLEQ is a FORTRAN routine, therefore everything must be a reference</span>
-<a name="l00075"></a>00075 <span class="comment">//        static extern IntPtr NLEQ1(</span>
-<a name="l00076"></a>00076 <span class="comment">//            ref int n,</span>
-<a name="l00077"></a>00077 <span class="comment">//            TCallBackModelFcn fcn,</span>
-<a name="l00078"></a>00078 <span class="comment">//            [In, Out] double[,] Jacobian,</span>
-<a name="l00079"></a>00079 <span class="comment">//            [In, Out] double[] x,</span>
-<a name="l00080"></a>00080 <span class="comment">//            [In, Out] double[] xscal,</span>
-<a name="l00081"></a>00081 <span class="comment">//            ref double rtol,</span>
-<a name="l00082"></a>00082 <span class="comment">//            [In, Out] int[] iopt,</span>
-<a name="l00083"></a>00083 <span class="comment">//            ref int ierr,</span>
-<a name="l00084"></a>00084 <span class="comment">//            ref int LIWK,</span>
-<a name="l00085"></a>00085 <span class="comment">//            [In, Out] int[] IWK,</span>
-<a name="l00086"></a>00086 <span class="comment">//            ref int LRWK,</span>
-<a name="l00087"></a>00087 <span class="comment">//            [In, Out] double[] RWK);</span>
-<a name="l00088"></a>00088 <span class="comment">//</span>
-<a name="l00089"></a>00089 <span class="comment">//        //                [DllImport (&quot;nleq2&quot;, EntryPoint=&quot;NLEQ2&quot;)                     ]</span>
-<a name="l00090"></a>00090 <span class="comment">//        ////         NLEQ is a FORTRAN routine, therefore everything must be a reference</span>
-<a name="l00091"></a>00091 <span class="comment">//        //        public static extern IntPtr NLEQ2(</span>
-<a name="l00092"></a>00092 <span class="comment">//        //            ref int n,</span>
-<a name="l00093"></a>00093 <span class="comment">//        //            TCallBackModelFcn fcn,</span>
-<a name="l00094"></a>00094 <span class="comment">//        //            [In, Out] double[,] Jacobian,</span>
-<a name="l00095"></a>00095 <span class="comment">//        //            [In, Out] double[] x,</span>
-<a name="l00096"></a>00096 <span class="comment">//        //            [In, Out] double[] xscal,</span>
-<a name="l00097"></a>00097 <span class="comment">//        //            ref double rtol,</span>
-<a name="l00098"></a>00098 <span class="comment">//        //            [In, Out] int[] iopt,</span>
-<a name="l00099"></a>00099 <span class="comment">//        //            ref int ierr,</span>
-<a name="l00100"></a>00100 <span class="comment">//        //            ref int LIWK,</span>
-<a name="l00101"></a>00101 <span class="comment">//        //            [In, Out] int[] IWK,</span>
-<a name="l00102"></a>00102 <span class="comment">//        //            ref int LRWK,</span>
-<a name="l00103"></a>00103 <span class="comment">//        //            [In, Out] double[] RWK);</span>
-<a name="l00104"></a>00104 <span class="comment">//</span>
-<a name="l00105"></a>00105 <span class="comment">//</span>
-<a name="l00106"></a>00106 <span class="comment">//        /// &lt;summary&gt;</span>
-<a name="l00107"></a>00107 <span class="comment">//        /// Sets the Scaling Factors</span>
-<a name="l00108"></a>00108 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00109"></a>00109 <span class="comment">//        /// &lt;param name=&quot;sx&quot;&gt;Array of Scaling factors&lt;/param&gt;</span>
-<a name="l00110"></a>00110         <span class="keywordtype">void</span> setScalingFactors(vector&lt;double&gt;&amp; sx);
-<a name="l00111"></a>00111 <span class="comment">//</span>
-<a name="l00112"></a>00112 <span class="comment">//        /// &lt;summary&gt;</span>
-<a name="l00113"></a>00113 <span class="comment">//        /// Returns the Number of Newton Iterations</span>
-<a name="l00114"></a>00114 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00115"></a>00115 <span class="comment">//        /// &lt;returns&gt;the Number of Newton Iterations&lt;/returns&gt;</span>
-<a name="l00116"></a>00116         <span class="keywordtype">int</span> getNumberOfNewtonIterations();
-<a name="l00117"></a>00117 <span class="comment">//</span>
-<a name="l00118"></a>00118 <span class="comment">//        /// &lt;summary&gt;</span>
-<a name="l00119"></a>00119 <span class="comment">//        /// Returns the Number of Corrector steps</span>
-<a name="l00120"></a>00120 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00121"></a>00121 <span class="comment">//        /// &lt;returns&gt;Returns the Number of Corrector steps&lt;/returns&gt;</span>
-<a name="l00122"></a>00122         <span class="keywordtype">int</span> getNumberOfCorrectorSteps();
-<a name="l00123"></a>00123 <span class="comment">//</span>
-<a name="l00124"></a>00124 <span class="comment">//        /// &lt;summary&gt;</span>
-<a name="l00125"></a>00125 <span class="comment">//        /// Returns the Number of Model Evaluations</span>
-<a name="l00126"></a>00126 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00127"></a>00127 <span class="comment">//        /// &lt;returns&gt;the Number of Model Evaluations&lt;/returns&gt;</span>
-<a name="l00128"></a>00128         <span class="keywordtype">int</span> getNumberOfModelEvaluations();
-<a name="l00129"></a>00129 <span class="comment">//</span>
-<a name="l00130"></a>00130 <span class="comment">//        /// &lt;summary&gt;</span>
-<a name="l00131"></a>00131 <span class="comment">//        /// Returns the Number Of Jacobian Evaluations</span>
-<a name="l00132"></a>00132 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00133"></a>00133 <span class="comment">//        /// &lt;returns&gt;the Number Of Jacobian Evaluations&lt;/returns&gt;</span>
-<a name="l00134"></a>00134         <span class="keywordtype">int</span> getNumberOfJacobianEvaluations();
-<a name="l00135"></a>00135 <span class="comment">//</span>
-<a name="l00136"></a>00136 <span class="comment">//        /// &lt;summary&gt;</span>
-<a name="l00137"></a>00137 <span class="comment">//        /// Returns the Number of Model Evaluations For Jacobian</span>
-<a name="l00138"></a>00138 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00139"></a>00139 <span class="comment">//        /// &lt;returns&gt;the Number of Model Evaluations For Jacobian&lt;/returns&gt;</span>
-<a name="l00140"></a>00140         <span class="keywordtype">int</span> getNumberOfModelEvaluationsForJacobian();
-<a name="l00141"></a>00141         <span class="keywordtype">void</span> Test(<span class="keywordtype">string</span> fileName);
-<a name="l00142"></a>00142 <span class="comment">//</span>
-<a name="l00143"></a>00143 <span class="comment">//        /// &lt;summary&gt;</span>
-<a name="l00144"></a>00144 <span class="comment">//        /// Thea actual solver rourine making the call to NLEQ1</span>
-<a name="l00145"></a>00145 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00146"></a>00146 <span class="comment">//        /// &lt;param name=&quot;yin&quot;&gt;Array of Model variables&lt;/param&gt;</span>
-<a name="l00147"></a>00147 <span class="comment">//        /// &lt;returns&gt;sums of squares &lt;/returns&gt;</span>
-<a name="l00148"></a>00148         <span class="keywordtype">double</span> solve(<span class="keyword">const</span> vector&lt;double&gt;&amp; yin);
-<a name="l00149"></a>00149         <span class="keywordtype">double</span> ComputeSumsOfSquares();
-<a name="l00150"></a>00150 
-<a name="l00151"></a>00151     }; <span class="comment">//class NLEQ interface</span>
-<a name="l00152"></a>00152 }<span class="comment">//namespace rr</span>
-<a name="l00153"></a>00153 
-<a name="l00154"></a>00154 <span class="preprocessor">#endif</span>
-<a name="l00155"></a>00155 <span class="preprocessor"></span>
-<a name="l00597"></a>00597 
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="comment">//int NLEQModelFcn(...);</span>
+<a name="l00013"></a><a class="code" href="namespacerr.html#aafb15b97135c463fca48b8d37701ff7e">00013</a> <span class="keyword">typedef</span> <a class="code" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>            (*<a class="code" href="namespacerr.html#aafb15b97135c463fca48b8d37701ff7e">c_ModelFcn</a>)(<span class="keywordtype">long</span>&amp;, <span class="keywordtype">double</span>*, <span class="keywordtype">double</span>*, <span class="keywordtype">long</span>&amp;);
+<a name="l00014"></a><a class="code" href="namespacerr.html#a4e143117727f1966c74fb711c9b84b28">00014</a> <span class="keyword">typedef</span> int             (*<a class="code" href="namespacerr.html#a4e143117727f1966c74fb711c9b84b28">U_fp</a>)();
+<a name="l00015"></a><a class="code" href="namespacerr.html#a75acf4b84850fab27abb5d4f1a5e9ab0">00015</a> <span class="keyword">typedef</span> int             (__stdcall *<a class="code" href="namespacerr.html#a75acf4b84850fab27abb5d4f1a5e9ab0">cNLEQ1</a>)(<span class="keywordtype">long</span> <span class="keywordtype">int</span>*,
+<a name="l00016"></a>00016                                                                 <a class="code" href="namespacerr.html#aafb15b97135c463fca48b8d37701ff7e">c_ModelFcn</a>,
+<a name="l00017"></a>00017                                                                 <a class="code" href="namespacerr.html#aafb15b97135c463fca48b8d37701ff7e">c_ModelFcn</a>,
+<a name="l00018"></a>00018                                 <span class="keywordtype">double</span>*,
+<a name="l00019"></a>00019                                 <span class="keywordtype">double</span>*,
+<a name="l00020"></a>00020                                 <span class="keywordtype">double</span>*,
+<a name="l00021"></a>00021                                 <span class="keywordtype">long</span> <span class="keywordtype">int</span>*,
+<a name="l00022"></a>00022                                 <span class="keywordtype">long</span> <span class="keywordtype">int</span>*,
+<a name="l00023"></a>00023                                 <span class="keywordtype">long</span> <span class="keywordtype">int</span>*,
+<a name="l00024"></a>00024                                 <span class="keywordtype">long</span> <span class="keywordtype">int</span>*,
+<a name="l00025"></a>00025                                 <span class="keywordtype">long</span> <span class="keywordtype">int</span>*,
+<a name="l00026"></a>00026                                 <span class="keywordtype">double</span>*);
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028 <span class="keywordtype">void</span> <a class="code" href="namespacerr.html#aec9bd6de8cb1b63cfddc0b812b7f5478">ModelFcn</a>(<span class="keywordtype">long</span>&amp; nx, <span class="keywordtype">double</span>* y, <span class="keywordtype">double</span>* fval, <span class="keywordtype">long</span>&amp; pErr);
+<a name="l00029"></a>00029 
+<a name="l00030"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html">00030</a> <span class="keyword">class </span><a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> <a class="code" href="classrr_1_1_n_l_e_q_interface.html">NLEQInterface</a> : <span class="keyword">public</span> <a class="code" href="classrr_1_1_i_steady_state_solver.html">ISteadyStateSolver</a>
+<a name="l00031"></a>00031 {
+<a name="l00032"></a>00032     <span class="keyword">protected</span>:
+<a name="l00033"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#adf83f83411d53eb0ec65d25064e08db9">00033</a>         <span class="keywordtype">int</span>                             <a class="code" href="classrr_1_1_n_l_e_q_interface.html#adf83f83411d53eb0ec65d25064e08db9">nOpts</a>;
+<a name="l00034"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a7d0b0e2e041cfaa8afe77e5f8d0a3607">00034</a>         <span class="keywordtype">long</span>                           *<a class="code" href="classrr_1_1_n_l_e_q_interface.html#a7d0b0e2e041cfaa8afe77e5f8d0a3607">IWK</a>;
+<a name="l00035"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#ae69330b036297e0f5ccf61219e07b379">00035</a>         <span class="keywordtype">long</span>                            <a class="code" href="classrr_1_1_n_l_e_q_interface.html#ae69330b036297e0f5ccf61219e07b379">LIWK</a>;
+<a name="l00036"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a3314b09b0df301af2b176e9abce3d2ea">00036</a>         <span class="keywordtype">long</span>                            <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a3314b09b0df301af2b176e9abce3d2ea">LWRK</a>;
+<a name="l00037"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#ac7f2f7e282e7d3bfb822ec67598198ec">00037</a>         <span class="keywordtype">double</span>                         *<a class="code" href="classrr_1_1_n_l_e_q_interface.html#ac7f2f7e282e7d3bfb822ec67598198ec">RWK</a>;
+<a name="l00038"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a639269affe3567137e4d3e9bc4467759">00038</a>         <span class="keywordtype">double</span>                         *<a class="code" href="classrr_1_1_n_l_e_q_interface.html#a639269affe3567137e4d3e9bc4467759">XScal</a>;
+<a name="l00039"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#aa065269a751c100e5cd10c59f0864bfc">00039</a>         <span class="keywordtype">long</span>                            <a class="code" href="classrr_1_1_n_l_e_q_interface.html#aa065269a751c100e5cd10c59f0864bfc">ierr</a>;
+<a name="l00040"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a0092be35bc61903897ad475eec8401b5">00040</a>         <span class="keywordtype">long</span>                           *<a class="code" href="classrr_1_1_n_l_e_q_interface.html#a0092be35bc61903897ad475eec8401b5">iopt</a>;
+<a name="l00041"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a9fd441104e6590aab907a9db046ffcd6">00041</a>         <span class="keyword">static</span> <a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a>              *<a class="code" href="classrr_1_1_n_l_e_q_interface.html#a9fd441104e6590aab907a9db046ffcd6">model</a>;     <span class="comment">// Model generated from the SBML</span>
+<a name="l00042"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#afbf62076fcc443da566f3ab6a2fedac4">00042</a>         <span class="keyword">static</span> <span class="keywordtype">long</span>                     <a class="code" href="classrr_1_1_n_l_e_q_interface.html#afbf62076fcc443da566f3ab6a2fedac4">n</a>;
+<a name="l00043"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a2ac6d5daddd87280610e4942a31f9b4b">00043</a>                 <span class="keywordtype">string</span>                                                  <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a2ac6d5daddd87280610e4942a31f9b4b">mNLEQDLLName</a>;
+<a name="l00044"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a7af88276659b3df35b2a88f7b125d957">00044</a>         HINSTANCE                                               <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a7af88276659b3df35b2a88f7b125d957">mDLLInstance</a>;
+<a name="l00045"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#ac28c337631579dd12a5b63ef0ec9e903">00045</a>             <a class="code" href="namespacerr.html#a75acf4b84850fab27abb5d4f1a5e9ab0">cNLEQ1</a>                                              <a class="code" href="classrr_1_1_n_l_e_q_interface.html#ac28c337631579dd12a5b63ef0ec9e903">NLEQ1</a>;
+<a name="l00046"></a>00046                                          <span class="comment">//tk made this a non class member, &#39;standalone&#39; function</span>
+<a name="l00047"></a>00047                                         <span class="comment">//  private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)</span>
+<a name="l00048"></a>00048     <span class="keyword">public</span>:
+<a name="l00049"></a>00049         <span class="keywordtype">bool</span>                            IsAvailable();
+<a name="l00050"></a>00050         <span class="keyword">static</span> <a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a>*              GetModel();
+<a name="l00051"></a>00051         <span class="keyword">static</span> <span class="keywordtype">long</span>                                             GetN();        
+<a name="l00052"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a8c2610b7a0258a7424130208a7731c41">00052</a>         <span class="keywordtype">int</span>                             <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a8c2610b7a0258a7424130208a7731c41">defaultMaxInterations</a>;
+<a name="l00053"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a0b32efd816be125548f9f7de2a3c9ec0">00053</a>         <span class="keywordtype">int</span>                             <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a0b32efd816be125548f9f7de2a3c9ec0">maxIterations</a>;
+<a name="l00054"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#ae341a135cbd8c70c3c5862e1d9351d82">00054</a>         <span class="keywordtype">double</span>                          <a class="code" href="classrr_1_1_n_l_e_q_interface.html#ae341a135cbd8c70c3c5862e1d9351d82">defaultTolerance</a>;
+<a name="l00055"></a><a class="code" href="classrr_1_1_n_l_e_q_interface.html#a0597b41c2f1643c2012d45b6f1dc4a05">00055</a>         <span class="keywordtype">double</span>                          <a class="code" href="classrr_1_1_n_l_e_q_interface.html#a0597b41c2f1643c2012d45b6f1dc4a05">relativeTolerance</a>;
+<a name="l00056"></a>00056 
+<a name="l00061"></a>00061                                         <a class="code" href="classrr_1_1_n_l_e_q_interface.html">NLEQInterface</a>(<a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a> *_model = NULL);
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064                                         <span class="comment">//        [DllImport(&quot;NleqLib&quot;, EntryPoint = &quot;NLEQ1&quot;)]</span>
+<a name="l00065"></a>00065                                         <span class="comment">//        //         NLEQ is a FORTRAN routine, therefore everything must be a reference</span>
+<a name="l00066"></a>00066                                         <span class="comment">//        static extern IntPtr NLEQ1(</span>
+<a name="l00067"></a>00067                                         <span class="comment">//            ref int n,</span>
+<a name="l00068"></a>00068                                         <span class="comment">//            TCallBackModelFcn fcn,</span>
+<a name="l00069"></a>00069                                         <span class="comment">//            [In, Out] double[,] Jacobian,</span>
+<a name="l00070"></a>00070                                         <span class="comment">//            [In, Out] double[] x,</span>
+<a name="l00071"></a>00071                                         <span class="comment">//            [In, Out] double[] xscal,</span>
+<a name="l00072"></a>00072                                         <span class="comment">//            ref double rtol,</span>
+<a name="l00073"></a>00073                                         <span class="comment">//            [In, Out] int[] iopt,</span>
+<a name="l00074"></a>00074                                         <span class="comment">//            ref int ierr,</span>
+<a name="l00075"></a>00075                                         <span class="comment">//            ref int LIWK,</span>
+<a name="l00076"></a>00076                                         <span class="comment">//            [In, Out] int[] IWK,</span>
+<a name="l00077"></a>00077                                         <span class="comment">//            ref int LRWK,</span>
+<a name="l00078"></a>00078                                         <span class="comment">//            [In, Out] double[] RWK);</span>
+<a name="l00079"></a>00079                                         <span class="comment">//</span>
+<a name="l00080"></a>00080 
+<a name="l00085"></a>00085         <span class="keywordtype">void</span>                            setScalingFactors(<span class="keyword">const</span> vector&lt;double&gt;&amp; sx);
+<a name="l00086"></a>00086 
+<a name="l00091"></a>00091         <span class="keywordtype">int</span>                             getNumberOfNewtonIterations();
+<a name="l00092"></a>00092 
+<a name="l00097"></a>00097         <span class="keywordtype">int</span>                             getNumberOfCorrectorSteps();
+<a name="l00098"></a>00098 
+<a name="l00103"></a>00103         <span class="keywordtype">int</span>                             getNumberOfModelEvaluations();
+<a name="l00104"></a>00104 
+<a name="l00109"></a>00109         <span class="keywordtype">int</span>                             getNumberOfJacobianEvaluations();
+<a name="l00110"></a>00110 
+<a name="l00115"></a>00115         <span class="keywordtype">int</span>                             getNumberOfModelEvaluationsForJacobian();
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117         <span class="keywordtype">bool</span>                            Test(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; fileName);
+<a name="l00118"></a>00118 
+<a name="l00124"></a>00124         <span class="keywordtype">double</span>                          solve(<span class="keyword">const</span> vector&lt;double&gt;&amp; yin);
+<a name="l00125"></a>00125         <span class="keywordtype">double</span>                          ComputeSumsOfSquares();
+<a name="l00126"></a>00126     }; <span class="comment">//class NLEQ interface</span>
+<a name="l00127"></a>00127 }<span class="comment">//namespace rr</span>
+<a name="l00128"></a>00128 
+<a name="l00129"></a>00129 <span class="preprocessor">#endif</span>
+<a name="l00130"></a>00130 <span class="preprocessor"></span>
+<a name="l00572"></a>00572 
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -250,7 +197,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:26:59 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

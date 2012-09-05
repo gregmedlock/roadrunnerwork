@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -101,7 +101,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">rr::Compiler Class Reference</div>  </div>
 </div><!--header-->
@@ -123,48 +124,49 @@ Inheritance diagram for rr::Compiler:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#a20f62820e0479050650d55cfe79205c1">Compiler</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">the execute method takes a stringcollection of wrapper classes, compiles them and executes methods on the classes  <a href="#a20f62820e0479050650d55cfe79205c1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#adb9a366bb36ea5de8d6e2aa9fd469b1b">Compiler</a> (const string &amp;compiler=&quot;tcc&quot;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#a59a4e6810abb0deaff8f2c77f4526cd3">~Compiler</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#a85b2fe701808bf3e262c2ff6ccef06aa">Compile</a> (const string &amp;cmdLine)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#ae46d62cd452c12b1867f7f4bf73ebded">GetDLLName</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#a2896cab2b494453ddbd18c557c91b1bd">SetIncludePath</a> (const string &amp;path)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#ac25c28592f61b4bf89a4badf9302ed4f">SetLibraryPath</a> (const string &amp;path)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#ac6fd5e66fefadcd1fe8f040e24b68b53">Execute</a> (<a class="el" href="classrr_1_1_string_list.html">StringList</a> &amp;oProxyCode)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">the execute method takes a stringcollection of wrapper classes, compiles them and executes methods on the classes  <a href="#ac6fd5e66fefadcd1fe8f040e24b68b53"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#a32a6580c32fc0491b1cad733d13b38a2">CompileC_DLL</a> (const string &amp;cSource)</td></tr>
-<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrr_1_1rr_object.html">rrObject</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#abbcd43a74d53b84c87abded983e2819b">getInstance</a> (const string &amp;source, const string &amp;sClassName)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrr_1_1rr_object.html">rrObject</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#ae69585bbf5e764b8d99e4d4a3a955b20">getInstance</a> (const string &amp;source, const string &amp;sClassName, const string &amp;sLocation)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">the execute method takes a stringcollection of wrapper classes, compiles them and executes methods on the classes  <a href="#ae69585bbf5e764b8d99e4d4a3a955b20"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#ad8644801d0b8fbb33ae721fba14eaabc">getLastErrors</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">adds an assembly to the assembly list ... this list will be needed to add references to that assemblies for the newly compiled class  <a href="#ad8644801d0b8fbb33ae721fba14eaabc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#acbe0d3eb24a5c3407eecbeb39bc6b1a0">getCompilerMessages</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#a7e4223c8ca09c3c065aa890191c06016">SetCompiler</a> (const string &amp;compiler)</td></tr>
+<tr><td colspan="2"><h2><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#ad62adf9f4d10d7721beca9b80bb47fa4">CreateCompilerCommand</a> (const string &amp;sourceFileName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#ad2a2d8a7ec052a0fd42dac65250acf4e">SetupCompilerEnvironment</a> ()</td></tr>
+<tr><td colspan="2"><h2><a name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#a0ad9f1546ba7b95ecc4422a9b6252258">mCompilerOutput</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">HINSTANCE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#a331a3cc9c898434fe458519d4db8c9ff">mDLLHandle</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#aa77938fd09340d40ecbd35265303fd2d">mDLLFileName</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#af8acc6ab9f809446d03c5111d7e72d35">mIncludePaths</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#abf62e63cfa03f9d5e89e3cb237927d38">mLibraryPaths</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#afec0616e190850ed8262e15a835aad6d">mCompilerFlags</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#a28750f5598427a6306794f3937bed4b7">mSupportCodeFolder</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#ae040fafb42ed9265ede32e71a22447f3">mCompilerName</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_compiler.html#a39474540f5de5b3cff074dd0516a1d9e">mCompilerExe</a></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>the Compile class was written out of the idea to generate wrapper classes in memory at runtime and then compile them ... </p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a20f62820e0479050650d55cfe79205c1"></a><!-- doxytag: member="rr::Compiler::Compiler" ref="a20f62820e0479050650d55cfe79205c1" args="()" -->
+<a class="anchor" id="adb9a366bb36ea5de8d6e2aa9fd469b1b"></a><!-- doxytag: member="rr::Compiler::Compiler" ref="adb9a366bb36ea5de8d6e2aa9fd469b1b" args="(const string &amp;compiler=&quot;tcc&quot;)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrr_1_1_compiler.html#a20f62820e0479050650d55cfe79205c1">rr::Compiler::Compiler</a> </td>
+          <td class="memname"><a class="el" href="classrr_1_1_compiler.html#adb9a366bb36ea5de8d6e2aa9fd469b1b">rr::Compiler::Compiler</a> </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>compiler</em> = <code>&quot;tcc&quot;</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-<p>the execute method takes a stringcollection of wrapper classes, compiles them and executes methods on the classes </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">source</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -219,6 +221,23 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad62adf9f4d10d7721beca9b80bb47fa4"></a><!-- doxytag: member="rr::Compiler::CreateCompilerCommand" ref="ad62adf9f4d10d7721beca9b80bb47fa4" args="(const string &amp;sourceFileName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_compiler.html#ad62adf9f4d10d7721beca9b80bb47fa4">rr::Compiler::CreateCompilerCommand</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>sourceFileName</em></td><td>)</td>
+          <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac6fd5e66fefadcd1fe8f040e24b68b53"></a><!-- doxytag: member="rr::Compiler::Execute" ref="ac6fd5e66fefadcd1fe8f040e24b68b53" args="(StringList &amp;oProxyCode)" -->
 <div class="memitem">
 <div class="memproto">
@@ -234,13 +253,21 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>the execute method takes a stringcollection of wrapper classes, compiles them and executes methods on the classes </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">oProxyCode</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
+</div>
+</div>
+<a class="anchor" id="acbe0d3eb24a5c3407eecbeb39bc6b1a0"></a><!-- doxytag: member="rr::Compiler::getCompilerMessages" ref="acbe0d3eb24a5c3407eecbeb39bc6b1a0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_compiler.html#acbe0d3eb24a5c3407eecbeb39bc6b1a0">rr::Compiler::getCompilerMessages</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
 
 </div>
 </div>
@@ -252,7 +279,7 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">string <a class="el" href="classrr_1_1_compiler.html#ae46d62cd452c12b1867f7f4bf73ebded">rr::Compiler::GetDLLName</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -260,102 +287,20 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abbcd43a74d53b84c87abded983e2819b"></a><!-- doxytag: member="rr::Compiler::getInstance" ref="abbcd43a74d53b84c87abded983e2819b" args="(const string &amp;source, const string &amp;sClassName)" -->
+<a class="anchor" id="a7e4223c8ca09c3c065aa890191c06016"></a><!-- doxytag: member="rr::Compiler::SetCompiler" ref="a7e4223c8ca09c3c065aa890191c06016" args="(const string &amp;compiler)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classrr_1_1rr_object.html">rrObject</a> <a class="el" href="classrr_1_1_compiler.html#abbcd43a74d53b84c87abded983e2819b">rr::Compiler::getInstance</a> </td>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_compiler.html#a7e4223c8ca09c3c065aa890191c06016">rr::Compiler::SetCompiler</a> </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>source</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>compiler</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>sClassName</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae69585bbf5e764b8d99e4d4a3a955b20"></a><!-- doxytag: member="rr::Compiler::getInstance" ref="ae69585bbf5e764b8d99e4d4a3a955b20" args="(const string &amp;source, const string &amp;sClassName, const string &amp;sLocation)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classrr_1_1rr_object.html">rrObject</a> * <a class="el" href="classrr_1_1_compiler.html#abbcd43a74d53b84c87abded983e2819b">rr::Compiler::getInstance</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>source</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>sClassName</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>sLocation</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>the execute method takes a stringcollection of wrapper classes, compiles them and executes methods on the classes </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">oProxyCode</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a class="anchor" id="ad8644801d0b8fbb33ae721fba14eaabc"></a><!-- doxytag: member="rr::Compiler::getLastErrors" ref="ad8644801d0b8fbb33ae721fba14eaabc" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">static string <a class="el" href="classrr_1_1_compiler.html#ad8644801d0b8fbb33ae721fba14eaabc">rr::Compiler::getLastErrors</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [static]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>adds an assembly to the assembly list ... this list will be needed to add references to that assemblies for the newly compiled class </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sAssembly</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-<p>sets the list of proxies. This is a list of strings representing Namespace and classname of the newly generated classes ... this will be used to create instances later on</p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">oProxies</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -393,9 +338,143 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad2a2d8a7ec052a0fd42dac65250acf4e"></a><!-- doxytag: member="rr::Compiler::SetupCompilerEnvironment" ref="ad2a2d8a7ec052a0fd42dac65250acf4e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_compiler.html#ad2a2d8a7ec052a0fd42dac65250acf4e">rr::Compiler::SetupCompilerEnvironment</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<hr/><h2>Member Data Documentation</h2>
+<a class="anchor" id="a39474540f5de5b3cff074dd0516a1d9e"></a><!-- doxytag: member="rr::Compiler::mCompilerExe" ref="a39474540f5de5b3cff074dd0516a1d9e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_compiler.html#a39474540f5de5b3cff074dd0516a1d9e">rr::Compiler::mCompilerExe</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afec0616e190850ed8262e15a835aad6d"></a><!-- doxytag: member="rr::Compiler::mCompilerFlags" ref="afec0616e190850ed8262e15a835aad6d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;string&gt; <a class="el" href="classrr_1_1_compiler.html#afec0616e190850ed8262e15a835aad6d">rr::Compiler::mCompilerFlags</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae040fafb42ed9265ede32e71a22447f3"></a><!-- doxytag: member="rr::Compiler::mCompilerName" ref="ae040fafb42ed9265ede32e71a22447f3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_compiler.html#ae040fafb42ed9265ede32e71a22447f3">rr::Compiler::mCompilerName</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a0ad9f1546ba7b95ecc4422a9b6252258"></a><!-- doxytag: member="rr::Compiler::mCompilerOutput" ref="a0ad9f1546ba7b95ecc4422a9b6252258" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;string&gt; <a class="el" href="classrr_1_1_compiler.html#a0ad9f1546ba7b95ecc4422a9b6252258">rr::Compiler::mCompilerOutput</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa77938fd09340d40ecbd35265303fd2d"></a><!-- doxytag: member="rr::Compiler::mDLLFileName" ref="aa77938fd09340d40ecbd35265303fd2d" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_compiler.html#aa77938fd09340d40ecbd35265303fd2d">rr::Compiler::mDLLFileName</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a331a3cc9c898434fe458519d4db8c9ff"></a><!-- doxytag: member="rr::Compiler::mDLLHandle" ref="a331a3cc9c898434fe458519d4db8c9ff" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HINSTANCE <a class="el" href="classrr_1_1_compiler.html#a331a3cc9c898434fe458519d4db8c9ff">rr::Compiler::mDLLHandle</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af8acc6ab9f809446d03c5111d7e72d35"></a><!-- doxytag: member="rr::Compiler::mIncludePaths" ref="af8acc6ab9f809446d03c5111d7e72d35" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;string&gt; <a class="el" href="classrr_1_1_compiler.html#af8acc6ab9f809446d03c5111d7e72d35">rr::Compiler::mIncludePaths</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abf62e63cfa03f9d5e89e3cb237927d38"></a><!-- doxytag: member="rr::Compiler::mLibraryPaths" ref="abf62e63cfa03f9d5e89e3cb237927d38" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;string&gt; <a class="el" href="classrr_1_1_compiler.html#abf62e63cfa03f9d5e89e3cb237927d38">rr::Compiler::mLibraryPaths</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a28750f5598427a6306794f3937bed4b7"></a><!-- doxytag: member="rr::Compiler::mSupportCodeFolder" ref="a28750f5598427a6306794f3937bed4b7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_compiler.html#a28750f5598427a6306794f3937bed4b7">rr::Compiler::mSupportCodeFolder</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/roadrunnerwork/source/trunk/src/<a class="el" href="rr_compiler_8h_source.html">rrCompiler.h</a></li>
-<li>C:/roadrunnerwork/source/trunk/src/<a class="el" href="rr_compiler_8cpp.html">rrCompiler.cpp</a></li>
+<li>R:/roadrunnerwork/trunk/source/<a class="el" href="rr_compiler_8h_source.html">rrCompiler.h</a></li>
+<li>R:/roadrunnerwork/trunk/source/<a class="el" href="rr_compiler_8cpp.html">rrCompiler.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- window showing the filter options -->
@@ -403,7 +482,7 @@ Static Public Member Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -415,7 +494,7 @@ Static Public Member Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:27:02 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:59 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>RoadRunner C++ API: C:/roadrunnerwork/source/trunk/src/mtrand/mtrand.h Source File</title>
+<title>RoadRunner C++ API: R:/roadrunnerwork/trunk/source/mtrand/mtrand.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -78,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">C:/roadrunnerwork/source/trunk/src/mtrand/mtrand.h</div>  </div>
+<div class="title">R:/roadrunnerwork/trunk/source/mtrand/mtrand.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="mtrand_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// mtrand.h</span>
@@ -128,123 +128,125 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00045"></a>00045 <span class="preprocessor">#ifndef MTRAND_H</span>
 <a name="l00046"></a>00046 <span class="preprocessor"></span><span class="preprocessor">#define MTRAND_H</span>
 <a name="l00047"></a>00047 <span class="preprocessor"></span>
-<a name="l00048"></a>00048 <span class="preprocessor">#include &quot;<a class="code" href="rr_exporter_8h.html">rrExporter.h</a>&quot;</span>
+<a name="l00048"></a>00048 <span class="preprocessor">#include &quot;<a class="code" href="rr_object_8h.html">rrObject.h</a>&quot;</span>
 <a name="l00049"></a>00049 
-<a name="l00050"></a><a class="code" href="class_m_t_rand__int32.html">00050</a> <span class="keyword">class </span><a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a>  <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a> 
-<a name="l00051"></a>00051 { <span class="comment">// Mersenne Twister random number generator</span>
-<a name="l00052"></a>00052 <span class="keyword">public</span>:
-<a name="l00053"></a>00053 <span class="comment">// default constructor: uses default seed only if this is the first instance</span>
-<a name="l00054"></a><a class="code" href="class_m_t_rand__int32.html#a034f223c086f5368bd220b02f2cc12a8">00054</a>   <a class="code" href="class_m_t_rand__int32.html#a034f223c086f5368bd220b02f2cc12a8">MTRand_int32</a>() { <span class="keywordflow">if</span> (!init) seed(5489UL); init = <span class="keyword">true</span>; }
-<a name="l00055"></a>00055 <span class="comment">// constructor with 32 bit int as seed</span>
-<a name="l00056"></a><a class="code" href="class_m_t_rand__int32.html#ad30f7c63a6f1fb3c3b76b8ce6ffa0206">00056</a>   <a class="code" href="class_m_t_rand__int32.html#ad30f7c63a6f1fb3c3b76b8ce6ffa0206">MTRand_int32</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> s) { seed(s); init = <span class="keyword">true</span>; }
-<a name="l00057"></a>00057 <span class="comment">// constructor with array of size 32 bit ints as seed</span>
-<a name="l00058"></a><a class="code" href="class_m_t_rand__int32.html#a19acddb3910a7282517b2ffc398b92b4">00058</a>   <a class="code" href="class_m_t_rand__int32.html#a19acddb3910a7282517b2ffc398b92b4">MTRand_int32</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>* array, <span class="keywordtype">int</span> size) { seed(array, size); init = <span class="keyword">true</span>; }
-<a name="l00059"></a>00059 <span class="comment">// the two seed functions</span>
-<a name="l00060"></a>00060   <span class="keywordtype">void</span> seed(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>); <span class="comment">// seed with 32 bit integer</span>
-<a name="l00061"></a>00061   <span class="keywordtype">void</span> seed(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>*, <span class="keywordtype">int</span> size); <span class="comment">// seed with array</span>
-<a name="l00062"></a>00062 <span class="comment">// overload operator() to make this a generator (functor)</span>
-<a name="l00063"></a><a class="code" href="class_m_t_rand__int32.html#ad7fe22190d0411c6dac8e6f471633aa4">00063</a>   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_m_t_rand__int32.html#ad7fe22190d0411c6dac8e6f471633aa4">operator()</a>() { <span class="keywordflow">return</span> rand_int32(); }
-<a name="l00064"></a>00064 <span class="comment">// 2007-02-11: made the destructor virtual; thanks &quot;double more&quot; for pointing this out</span>
-<a name="l00065"></a><a class="code" href="class_m_t_rand__int32.html#a364900abea0758d070ce89922159923a">00065</a>   <span class="keyword">virtual</span> <a class="code" href="class_m_t_rand__int32.html#a364900abea0758d070ce89922159923a">~MTRand_int32</a>() {} <span class="comment">// destructor</span>
-<a name="l00066"></a>00066 <span class="keyword">protected</span>: <span class="comment">// used by derived classes, otherwise not accessible; use the ()-operator</span>
-<a name="l00067"></a>00067   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> rand_int32(); <span class="comment">// generate 32 bit random integer</span>
-<a name="l00068"></a>00068 <span class="keyword">private</span>:
-<a name="l00069"></a>00069   <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> n;<span class="comment">//</span>
-<a name="l00070"></a>00070   <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> m;<span class="comment">//= 624, m = 397; // compile time constants</span>
-<a name="l00071"></a>00071 <span class="comment">// the variables below are static (no duplicates can exist)</span>
-<a name="l00072"></a>00072   <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> state[]; <span class="comment">// state vector array</span>
-<a name="l00073"></a>00073   <span class="keyword">static</span> <span class="keywordtype">int</span> p; <span class="comment">// position in state array</span>
-<a name="l00074"></a>00074   <span class="keyword">static</span> <span class="keywordtype">bool</span> init; <span class="comment">// true if init function is called</span>
-<a name="l00075"></a>00075 <span class="comment">// private functions used to generate the pseudo random numbers</span>
-<a name="l00076"></a>00076   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> twiddle(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>); <span class="comment">// used by gen_state()</span>
-<a name="l00077"></a>00077   <span class="keywordtype">void</span> gen_state(); <span class="comment">// generate new state</span>
-<a name="l00078"></a>00078 <span class="comment">// make copy constructor and assignment operator unavailable, they don&#39;t make sense</span>
-<a name="l00079"></a>00079   <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>&amp;); <span class="comment">// copy constructor not defined</span>
-<a name="l00080"></a>00080   <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>&amp;); <span class="comment">// assignment operator not defined</span>
-<a name="l00081"></a>00081 };
-<a name="l00082"></a>00082 
-<a name="l00083"></a>00083 <span class="comment">// inline for speed, must therefore reside in header file</span>
-<a name="l00084"></a>00084 <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> MTRand_int32::twiddle(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> u, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> v) {
-<a name="l00085"></a>00085   <span class="keywordflow">return</span> (((u &amp; 0x80000000UL) | (v &amp; 0x7FFFFFFFUL)) &gt;&gt; 1)
-<a name="l00086"></a>00086     ^ ((v &amp; 1UL) ? 0x9908B0DFUL : 0x0UL);
-<a name="l00087"></a>00087 }
-<a name="l00088"></a>00088 
-<a name="l00089"></a><a class="code" href="class_m_t_rand__int32.html#abacdfa346255baeac69d29bb57f29b22">00089</a> <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_m_t_rand__int32.html#abacdfa346255baeac69d29bb57f29b22">MTRand_int32::rand_int32</a>() { <span class="comment">// generate 32 bit random int</span>
-<a name="l00090"></a>00090   <span class="keywordflow">if</span> (p == n) gen_state(); <span class="comment">// new state vector needed</span>
-<a name="l00091"></a>00091 <span class="comment">// gen_state() is split off to be non-inline, because it is only called once</span>
-<a name="l00092"></a>00092 <span class="comment">// in every 624 calls and otherwise irand() would become too big to get inlined</span>
-<a name="l00093"></a>00093   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> x = state[p++];
-<a name="l00094"></a>00094   x ^= (x &gt;&gt; 11);
-<a name="l00095"></a>00095   x ^= (x &lt;&lt; 7) &amp; 0x9D2C5680UL;
-<a name="l00096"></a>00096   x ^= (x &lt;&lt; 15) &amp; 0xEFC60000UL;
-<a name="l00097"></a>00097   <span class="keywordflow">return</span> x ^ (x &gt;&gt; 18);
-<a name="l00098"></a>00098 }
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100 <span class="comment">// generates double floating point numbers in the half-open interval [0, 1)</span>
-<a name="l00101"></a><a class="code" href="class_m_t_rand.html">00101</a> <span class="keyword">class </span><a class="code" href="class_m_t_rand.html">MTRand</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a> {
-<a name="l00102"></a>00102 <span class="keyword">public</span>:
-<a name="l00103"></a><a class="code" href="class_m_t_rand.html#a265dc65546e26073c0d5f8787b045a1d">00103</a>   <a class="code" href="class_m_t_rand.html#a265dc65546e26073c0d5f8787b045a1d">MTRand</a>() : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>() {}
-<a name="l00104"></a><a class="code" href="class_m_t_rand.html#a2c88736896bcbdb54bcdd7a0026720d5">00104</a>   <a class="code" href="class_m_t_rand.html#a2c88736896bcbdb54bcdd7a0026720d5">MTRand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_m_t_rand__int32.html#a0c57076fe30358e0700a7ce1baa0ea27">seed</a>) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed) {}
-<a name="l00105"></a><a class="code" href="class_m_t_rand.html#a6075a3beacdfb8e4cf48d9fb56cc193a">00105</a>   <a class="code" href="class_m_t_rand.html#a6075a3beacdfb8e4cf48d9fb56cc193a">MTRand</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>* <a class="code" href="class_m_t_rand__int32.html#a0c57076fe30358e0700a7ce1baa0ea27">seed</a>, <span class="keywordtype">int</span> size) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed, size) {}
-<a name="l00106"></a><a class="code" href="class_m_t_rand.html#a8c276546a41ae350dc9efc5e9c10a261">00106</a>   <a class="code" href="class_m_t_rand.html#a8c276546a41ae350dc9efc5e9c10a261">~MTRand</a>() {}
-<a name="l00107"></a><a class="code" href="class_m_t_rand.html#abbb87a08d622d58fdee0eea4cb5471a0">00107</a>   <span class="keywordtype">double</span> <a class="code" href="class_m_t_rand.html#abbb87a08d622d58fdee0eea4cb5471a0">operator()</a>() {
-<a name="l00108"></a>00108     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(<a class="code" href="class_m_t_rand__int32.html#abacdfa346255baeac69d29bb57f29b22">rand_int32</a>()) * (1. / 4294967296.); } <span class="comment">// divided by 2^32</span>
-<a name="l00109"></a>00109 <span class="keyword">private</span>:
-<a name="l00110"></a>00110   <a class="code" href="class_m_t_rand.html#a265dc65546e26073c0d5f8787b045a1d">MTRand</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_rand.html">MTRand</a>&amp;); <span class="comment">// copy constructor not defined</span>
-<a name="l00111"></a>00111   <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_m_t_rand.html">MTRand</a>&amp;); <span class="comment">// assignment operator not defined</span>
-<a name="l00112"></a>00112 };
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114 <span class="comment">// generates double floating point numbers in the closed interval [0, 1]</span>
-<a name="l00115"></a><a class="code" href="class_m_t_rand__closed.html">00115</a> <span class="keyword">class </span><a class="code" href="class_m_t_rand__closed.html">MTRand_closed</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a> {
-<a name="l00116"></a>00116 <span class="keyword">public</span>:
-<a name="l00117"></a><a class="code" href="class_m_t_rand__closed.html#a09b3b21b3cb35d04f2b6c290a817b2e8">00117</a>   <a class="code" href="class_m_t_rand__closed.html#a09b3b21b3cb35d04f2b6c290a817b2e8">MTRand_closed</a>() : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>() {}
-<a name="l00118"></a><a class="code" href="class_m_t_rand__closed.html#ad5dc83250b16f22d4693a18b51816271">00118</a>   <a class="code" href="class_m_t_rand__closed.html#ad5dc83250b16f22d4693a18b51816271">MTRand_closed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_m_t_rand__int32.html#a0c57076fe30358e0700a7ce1baa0ea27">seed</a>) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed) {}
-<a name="l00119"></a><a class="code" href="class_m_t_rand__closed.html#a37e322f97253b7013823a267bcfe82d1">00119</a>   <a class="code" href="class_m_t_rand__closed.html#a37e322f97253b7013823a267bcfe82d1">MTRand_closed</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>* <a class="code" href="class_m_t_rand__int32.html#a0c57076fe30358e0700a7ce1baa0ea27">seed</a>, <span class="keywordtype">int</span> size) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed, size) {}
-<a name="l00120"></a><a class="code" href="class_m_t_rand__closed.html#a46567ee841b5f54b305ac051ac837a8c">00120</a>   <a class="code" href="class_m_t_rand__closed.html#a46567ee841b5f54b305ac051ac837a8c">~MTRand_closed</a>() {}
-<a name="l00121"></a><a class="code" href="class_m_t_rand__closed.html#ad0c535263b63c95029523183f672f62d">00121</a>   <span class="keywordtype">double</span> <a class="code" href="class_m_t_rand__closed.html#ad0c535263b63c95029523183f672f62d">operator()</a>() {
-<a name="l00122"></a>00122     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(<a class="code" href="class_m_t_rand__int32.html#abacdfa346255baeac69d29bb57f29b22">rand_int32</a>()) * (1. / 4294967295.); } <span class="comment">// divided by 2^32 - 1</span>
-<a name="l00123"></a>00123 <span class="keyword">private</span>:
-<a name="l00124"></a>00124   <a class="code" href="class_m_t_rand__closed.html#a09b3b21b3cb35d04f2b6c290a817b2e8">MTRand_closed</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__closed.html">MTRand_closed</a>&amp;); <span class="comment">// copy constructor not defined</span>
-<a name="l00125"></a>00125   <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__closed.html">MTRand_closed</a>&amp;); <span class="comment">// assignment operator not defined</span>
-<a name="l00126"></a>00126 };
-<a name="l00127"></a>00127 
-<a name="l00128"></a>00128 <span class="comment">// generates double floating point numbers in the open interval (0, 1)</span>
-<a name="l00129"></a><a class="code" href="class_m_t_rand__open.html">00129</a> <span class="keyword">class </span><a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> <a class="code" href="class_m_t_rand__open.html">MTRand_open</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a> {
-<a name="l00130"></a>00130 <span class="keyword">public</span>:
-<a name="l00131"></a><a class="code" href="class_m_t_rand__open.html#a58140b54564be39382da163954177389">00131</a>   <a class="code" href="class_m_t_rand__open.html#a58140b54564be39382da163954177389">MTRand_open</a>() : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>() {}
-<a name="l00132"></a><a class="code" href="class_m_t_rand__open.html#a1f55ebc1052f5343f8d6e08a752ef957">00132</a>   <a class="code" href="class_m_t_rand__open.html#a1f55ebc1052f5343f8d6e08a752ef957">MTRand_open</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed) {}
-<a name="l00133"></a><a class="code" href="class_m_t_rand__open.html#a0216992f4dfa5acf22ee8c585eeac488">00133</a>   <a class="code" href="class_m_t_rand__open.html#a0216992f4dfa5acf22ee8c585eeac488">MTRand_open</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>* seed, <span class="keywordtype">int</span> size) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed, size) {}
-<a name="l00134"></a><a class="code" href="class_m_t_rand__open.html#a4f4774b5d9b79972dedaec984b248581">00134</a>   <a class="code" href="class_m_t_rand__open.html#a4f4774b5d9b79972dedaec984b248581">~MTRand_open</a>() {}
-<a name="l00135"></a><a class="code" href="class_m_t_rand__open.html#ac408aa400ca59fc2afc888d88f98d807">00135</a>   <span class="keywordtype">double</span> <a class="code" href="class_m_t_rand__open.html#ac408aa400ca59fc2afc888d88f98d807">operator()</a>() {
-<a name="l00136"></a>00136     <span class="keywordflow">return</span> (static_cast&lt;double&gt;(<a class="code" href="class_m_t_rand__int32.html#abacdfa346255baeac69d29bb57f29b22">rand_int32</a>()) + .5) * (1. / 4294967296.); } <span class="comment">// divided by 2^32</span>
-<a name="l00137"></a>00137 <span class="keyword">private</span>:
-<a name="l00138"></a>00138   <a class="code" href="class_m_t_rand__open.html">MTRand_open</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__open.html">MTRand_open</a>&amp;); <span class="comment">// copy constructor not defined</span>
-<a name="l00139"></a>00139   <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__open.html">MTRand_open</a>&amp;); <span class="comment">// assignment operator not defined</span>
-<a name="l00140"></a>00140 };
-<a name="l00141"></a>00141 
-<a name="l00142"></a>00142 <span class="comment">// generates 53 bit resolution doubles in the half-open interval [0, 1)</span>
-<a name="l00143"></a><a class="code" href="class_m_t_rand53.html">00143</a> <span class="keyword">class </span><a class="code" href="class_m_t_rand53.html">MTRand53</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a> {
-<a name="l00144"></a>00144 <span class="keyword">public</span>:
-<a name="l00145"></a><a class="code" href="class_m_t_rand53.html#a24711c9e6e5ee72715f34515d1f1939a">00145</a>   <a class="code" href="class_m_t_rand53.html#a24711c9e6e5ee72715f34515d1f1939a">MTRand53</a>() : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>() {}
-<a name="l00146"></a><a class="code" href="class_m_t_rand53.html#ad800887e15d4095f22facdb67f270c5e">00146</a>   <a class="code" href="class_m_t_rand53.html#ad800887e15d4095f22facdb67f270c5e">MTRand53</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_m_t_rand__int32.html#a0c57076fe30358e0700a7ce1baa0ea27">seed</a>) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed) {}
-<a name="l00147"></a><a class="code" href="class_m_t_rand53.html#ac77b190d3ac27adea2d2c6c2ce2347c3">00147</a>   <a class="code" href="class_m_t_rand53.html#ac77b190d3ac27adea2d2c6c2ce2347c3">MTRand53</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>* <a class="code" href="class_m_t_rand__int32.html#a0c57076fe30358e0700a7ce1baa0ea27">seed</a>, <span class="keywordtype">int</span> size) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed, size) {}
-<a name="l00148"></a><a class="code" href="class_m_t_rand53.html#a947a6a7afd0c8a17612cda3faa705a75">00148</a>   <a class="code" href="class_m_t_rand53.html#a947a6a7afd0c8a17612cda3faa705a75">~MTRand53</a>() {}
-<a name="l00149"></a><a class="code" href="class_m_t_rand53.html#ab6657cb5349f39bc4553d3a970458b45">00149</a>   <span class="keywordtype">double</span> <a class="code" href="class_m_t_rand53.html#ab6657cb5349f39bc4553d3a970458b45">operator()</a>() {
-<a name="l00150"></a>00150     <span class="keywordflow">return</span> (static_cast&lt;double&gt;(<a class="code" href="class_m_t_rand__int32.html#abacdfa346255baeac69d29bb57f29b22">rand_int32</a>() &gt;&gt; 5) * 67108864. + 
-<a name="l00151"></a>00151       static_cast&lt;double&gt;(<a class="code" href="class_m_t_rand__int32.html#abacdfa346255baeac69d29bb57f29b22">rand_int32</a>() &gt;&gt; 6)) * (1. / 9007199254740992.); }
-<a name="l00152"></a>00152 <span class="keyword">private</span>:
-<a name="l00153"></a>00153   <a class="code" href="class_m_t_rand53.html#a24711c9e6e5ee72715f34515d1f1939a">MTRand53</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_rand53.html">MTRand53</a>&amp;); <span class="comment">// copy constructor not defined</span>
-<a name="l00154"></a>00154   <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_m_t_rand53.html">MTRand53</a>&amp;); <span class="comment">// assignment operator not defined</span>
-<a name="l00155"></a>00155 };
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157 <span class="preprocessor">#endif // MTRAND_H</span>
+<a name="l00050"></a>00050 <span class="keyword">using namespace </span>rr;
+<a name="l00051"></a>00051 
+<a name="l00052"></a><a class="code" href="class_m_t_rand__int32.html">00052</a> <span class="keyword">class </span><a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a>  <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a> : <span class="keyword">public</span> <a class="code" href="classrr_1_1rr_object.html">rrObject</a>
+<a name="l00053"></a>00053 { <span class="comment">// Mersenne Twister random number generator</span>
+<a name="l00054"></a>00054 <span class="keyword">public</span>:
+<a name="l00055"></a>00055 <span class="comment">// default constructor: uses default seed only if this is the first instance</span>
+<a name="l00056"></a><a class="code" href="class_m_t_rand__int32.html#a034f223c086f5368bd220b02f2cc12a8">00056</a>   <a class="code" href="class_m_t_rand__int32.html#a034f223c086f5368bd220b02f2cc12a8">MTRand_int32</a>() { <span class="keywordflow">if</span> (!init) seed(5489UL); init = <span class="keyword">true</span>; }
+<a name="l00057"></a>00057 <span class="comment">// constructor with 32 bit int as seed</span>
+<a name="l00058"></a><a class="code" href="class_m_t_rand__int32.html#ad30f7c63a6f1fb3c3b76b8ce6ffa0206">00058</a>   <a class="code" href="class_m_t_rand__int32.html#ad30f7c63a6f1fb3c3b76b8ce6ffa0206">MTRand_int32</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> s) { seed(s); init = <span class="keyword">true</span>; }
+<a name="l00059"></a>00059 <span class="comment">// constructor with array of size 32 bit ints as seed</span>
+<a name="l00060"></a><a class="code" href="class_m_t_rand__int32.html#a19acddb3910a7282517b2ffc398b92b4">00060</a>   <a class="code" href="class_m_t_rand__int32.html#a19acddb3910a7282517b2ffc398b92b4">MTRand_int32</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>* array, <span class="keywordtype">int</span> size) { seed(array, size); init = <span class="keyword">true</span>; }
+<a name="l00061"></a>00061 <span class="comment">// the two seed functions</span>
+<a name="l00062"></a>00062   <span class="keywordtype">void</span> seed(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>); <span class="comment">// seed with 32 bit integer</span>
+<a name="l00063"></a>00063   <span class="keywordtype">void</span> seed(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>*, <span class="keywordtype">int</span> size); <span class="comment">// seed with array</span>
+<a name="l00064"></a>00064 <span class="comment">// overload operator() to make this a generator (functor)</span>
+<a name="l00065"></a><a class="code" href="class_m_t_rand__int32.html#ad7fe22190d0411c6dac8e6f471633aa4">00065</a>   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_m_t_rand__int32.html#ad7fe22190d0411c6dac8e6f471633aa4">operator()</a>() { <span class="keywordflow">return</span> rand_int32(); }
+<a name="l00066"></a>00066 <span class="comment">// 2007-02-11: made the destructor virtual; thanks &quot;double more&quot; for pointing this out</span>
+<a name="l00067"></a><a class="code" href="class_m_t_rand__int32.html#a364900abea0758d070ce89922159923a">00067</a>   <span class="keyword">virtual</span> <a class="code" href="class_m_t_rand__int32.html#a364900abea0758d070ce89922159923a">~MTRand_int32</a>() {} <span class="comment">// destructor</span>
+<a name="l00068"></a>00068 <span class="keyword">protected</span>: <span class="comment">// used by derived classes, otherwise not accessible; use the ()-operator</span>
+<a name="l00069"></a>00069   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> rand_int32() <span class="keyword">const</span>; <span class="comment">// generate 32 bit random integer</span>
+<a name="l00070"></a>00070 <span class="keyword">private</span>:
+<a name="l00071"></a>00071   <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> n;<span class="comment">//</span>
+<a name="l00072"></a>00072   <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> m;<span class="comment">//= 624, m = 397; // compile time constants</span>
+<a name="l00073"></a>00073 <span class="comment">// the variables below are static (no duplicates can exist)</span>
+<a name="l00074"></a>00074   <span class="keyword">static</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> state[]; <span class="comment">// state vector array</span>
+<a name="l00075"></a>00075   <span class="keyword">static</span> <span class="keywordtype">int</span> p; <span class="comment">// position in state array</span>
+<a name="l00076"></a>00076   <span class="keyword">static</span> <span class="keywordtype">bool</span> init; <span class="comment">// true if init function is called</span>
+<a name="l00077"></a>00077 <span class="comment">// private functions used to generate the pseudo random numbers</span>
+<a name="l00078"></a>00078   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> twiddle(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>) <span class="keyword">const</span>; <span class="comment">// used by gen_state()</span>
+<a name="l00079"></a>00079   <span class="keywordtype">void</span> gen_state() <span class="keyword">const</span>; <span class="comment">// generate new state</span>
+<a name="l00080"></a>00080 <span class="comment">// make copy constructor and assignment operator unavailable, they don&#39;t make sense</span>
+<a name="l00081"></a>00081   <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>&amp;); <span class="comment">// copy constructor not defined</span>
+<a name="l00082"></a>00082   <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>&amp;); <span class="comment">// assignment operator not defined</span>
+<a name="l00083"></a>00083 };
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 <span class="comment">// inline for speed, must therefore reside in header file</span>
+<a name="l00086"></a>00086 <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> MTRand_int32::twiddle(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> u, <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> v)<span class="keyword"> const </span>{
+<a name="l00087"></a>00087   <span class="keywordflow">return</span> (((u &amp; 0x80000000UL) | (v &amp; 0x7FFFFFFFUL)) &gt;&gt; 1)
+<a name="l00088"></a>00088     ^ ((v &amp; 1UL) ? 0x9908B0DFUL : 0x0UL);
+<a name="l00089"></a>00089 }
+<a name="l00090"></a>00090 
+<a name="l00091"></a><a class="code" href="class_m_t_rand__int32.html#a6cbf65d75b33eec4dea19c1c5add070c">00091</a> <span class="keyword">inline</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <a class="code" href="class_m_t_rand__int32.html#a6cbf65d75b33eec4dea19c1c5add070c">MTRand_int32::rand_int32</a>()<span class="keyword"> const </span>{ <span class="comment">// generate 32 bit random int</span>
+<a name="l00092"></a>00092   <span class="keywordflow">if</span> (p == n) gen_state(); <span class="comment">// new state vector needed</span>
+<a name="l00093"></a>00093 <span class="comment">// gen_state() is split off to be non-inline, because it is only called once</span>
+<a name="l00094"></a>00094 <span class="comment">// in every 624 calls and otherwise irand() would become too big to get inlined</span>
+<a name="l00095"></a>00095   <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> x = state[p++];
+<a name="l00096"></a>00096   x ^= (x &gt;&gt; 11);
+<a name="l00097"></a>00097   x ^= (x &lt;&lt; 7) &amp; 0x9D2C5680UL;
+<a name="l00098"></a>00098   x ^= (x &lt;&lt; 15) &amp; 0xEFC60000UL;
+<a name="l00099"></a>00099   <span class="keywordflow">return</span> x ^ (x &gt;&gt; 18);
+<a name="l00100"></a>00100 }
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102 <span class="comment">// generates double floating point numbers in the half-open interval [0, 1)</span>
+<a name="l00103"></a><a class="code" href="class_m_t_rand.html">00103</a> <span class="keyword">class </span><a class="code" href="class_m_t_rand.html">MTRand</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a> {
+<a name="l00104"></a>00104 <span class="keyword">public</span>:
+<a name="l00105"></a><a class="code" href="class_m_t_rand.html#a265dc65546e26073c0d5f8787b045a1d">00105</a>   <a class="code" href="class_m_t_rand.html#a265dc65546e26073c0d5f8787b045a1d">MTRand</a>() : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>() {}
+<a name="l00106"></a><a class="code" href="class_m_t_rand.html#a2c88736896bcbdb54bcdd7a0026720d5">00106</a>   <a class="code" href="class_m_t_rand.html#a2c88736896bcbdb54bcdd7a0026720d5">MTRand</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed) {}
+<a name="l00107"></a><a class="code" href="class_m_t_rand.html#a6075a3beacdfb8e4cf48d9fb56cc193a">00107</a>   <a class="code" href="class_m_t_rand.html#a6075a3beacdfb8e4cf48d9fb56cc193a">MTRand</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>* seed, <span class="keywordtype">int</span> size) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed, size) {}
+<a name="l00108"></a><a class="code" href="class_m_t_rand.html#a8c276546a41ae350dc9efc5e9c10a261">00108</a>   <a class="code" href="class_m_t_rand.html#a8c276546a41ae350dc9efc5e9c10a261">~MTRand</a>() {}
+<a name="l00109"></a><a class="code" href="class_m_t_rand.html#a8d92545698956db432a8ccb57e56eb83">00109</a>   <span class="keywordtype">double</span> <a class="code" href="class_m_t_rand.html#a8d92545698956db432a8ccb57e56eb83">operator()</a>()<span class="keyword"> const </span>{
+<a name="l00110"></a>00110     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(rand_int32()) * (1. / 4294967296.); } <span class="comment">// divided by 2^32</span>
+<a name="l00111"></a>00111 <span class="keyword">private</span>:
+<a name="l00112"></a>00112   <a class="code" href="class_m_t_rand.html">MTRand</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_rand.html">MTRand</a>&amp;); <span class="comment">// copy constructor not defined</span>
+<a name="l00113"></a>00113   <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_m_t_rand.html">MTRand</a>&amp;); <span class="comment">// assignment operator not defined</span>
+<a name="l00114"></a>00114 };
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116 <span class="comment">// generates double floating point numbers in the closed interval [0, 1]</span>
+<a name="l00117"></a><a class="code" href="class_m_t_rand__closed.html">00117</a> <span class="keyword">class </span><a class="code" href="class_m_t_rand__closed.html">MTRand_closed</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a> {
+<a name="l00118"></a>00118 <span class="keyword">public</span>:
+<a name="l00119"></a><a class="code" href="class_m_t_rand__closed.html#a09b3b21b3cb35d04f2b6c290a817b2e8">00119</a>   <a class="code" href="class_m_t_rand__closed.html#a09b3b21b3cb35d04f2b6c290a817b2e8">MTRand_closed</a>() : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>() {}
+<a name="l00120"></a><a class="code" href="class_m_t_rand__closed.html#ad5dc83250b16f22d4693a18b51816271">00120</a>   <a class="code" href="class_m_t_rand__closed.html#ad5dc83250b16f22d4693a18b51816271">MTRand_closed</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed) {}
+<a name="l00121"></a><a class="code" href="class_m_t_rand__closed.html#a37e322f97253b7013823a267bcfe82d1">00121</a>   <a class="code" href="class_m_t_rand__closed.html#a37e322f97253b7013823a267bcfe82d1">MTRand_closed</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>* seed, <span class="keywordtype">int</span> size) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed, size) {}
+<a name="l00122"></a><a class="code" href="class_m_t_rand__closed.html#a46567ee841b5f54b305ac051ac837a8c">00122</a>   <a class="code" href="class_m_t_rand__closed.html#a46567ee841b5f54b305ac051ac837a8c">~MTRand_closed</a>() {}
+<a name="l00123"></a><a class="code" href="class_m_t_rand__closed.html#ad0c535263b63c95029523183f672f62d">00123</a>   <span class="keywordtype">double</span> <a class="code" href="class_m_t_rand__closed.html#ad0c535263b63c95029523183f672f62d">operator()</a>() {
+<a name="l00124"></a>00124     <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(rand_int32()) * (1. / 4294967295.); } <span class="comment">// divided by 2^32 - 1</span>
+<a name="l00125"></a>00125 <span class="keyword">private</span>:
+<a name="l00126"></a>00126   <a class="code" href="class_m_t_rand__closed.html">MTRand_closed</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__closed.html">MTRand_closed</a>&amp;); <span class="comment">// copy constructor not defined</span>
+<a name="l00127"></a>00127   <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__closed.html">MTRand_closed</a>&amp;); <span class="comment">// assignment operator not defined</span>
+<a name="l00128"></a>00128 };
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130 <span class="comment">// generates double floating point numbers in the open interval (0, 1)</span>
+<a name="l00131"></a><a class="code" href="class_m_t_rand__open.html">00131</a> <span class="keyword">class </span><a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> <a class="code" href="class_m_t_rand__open.html">MTRand_open</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a> {
+<a name="l00132"></a>00132 <span class="keyword">public</span>:
+<a name="l00133"></a><a class="code" href="class_m_t_rand__open.html#a58140b54564be39382da163954177389">00133</a>   <a class="code" href="class_m_t_rand__open.html#a58140b54564be39382da163954177389">MTRand_open</a>() : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>() {}
+<a name="l00134"></a><a class="code" href="class_m_t_rand__open.html#a1f55ebc1052f5343f8d6e08a752ef957">00134</a>   <a class="code" href="class_m_t_rand__open.html#a1f55ebc1052f5343f8d6e08a752ef957">MTRand_open</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed) {}
+<a name="l00135"></a><a class="code" href="class_m_t_rand__open.html#a0216992f4dfa5acf22ee8c585eeac488">00135</a>   <a class="code" href="class_m_t_rand__open.html#a0216992f4dfa5acf22ee8c585eeac488">MTRand_open</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>* seed, <span class="keywordtype">int</span> size) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed, size) {}
+<a name="l00136"></a><a class="code" href="class_m_t_rand__open.html#a4f4774b5d9b79972dedaec984b248581">00136</a>   <a class="code" href="class_m_t_rand__open.html#a4f4774b5d9b79972dedaec984b248581">~MTRand_open</a>() {}
+<a name="l00137"></a><a class="code" href="class_m_t_rand__open.html#ac408aa400ca59fc2afc888d88f98d807">00137</a>   <span class="keywordtype">double</span> <a class="code" href="class_m_t_rand__open.html#ac408aa400ca59fc2afc888d88f98d807">operator()</a>() {
+<a name="l00138"></a>00138     <span class="keywordflow">return</span> (static_cast&lt;double&gt;(rand_int32()) + .5) * (1. / 4294967296.); } <span class="comment">// divided by 2^32</span>
+<a name="l00139"></a>00139 <span class="keyword">private</span>:
+<a name="l00140"></a>00140   <a class="code" href="class_m_t_rand__open.html">MTRand_open</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__open.html">MTRand_open</a>&amp;); <span class="comment">// copy constructor not defined</span>
+<a name="l00141"></a>00141   <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_m_t_rand__open.html">MTRand_open</a>&amp;); <span class="comment">// assignment operator not defined</span>
+<a name="l00142"></a>00142 };
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144 <span class="comment">// generates 53 bit resolution doubles in the half-open interval [0, 1)</span>
+<a name="l00145"></a><a class="code" href="class_m_t_rand53.html">00145</a> <span class="keyword">class </span><a class="code" href="class_m_t_rand53.html">MTRand53</a> : <span class="keyword">public</span> <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a> {
+<a name="l00146"></a>00146 <span class="keyword">public</span>:
+<a name="l00147"></a><a class="code" href="class_m_t_rand53.html#a24711c9e6e5ee72715f34515d1f1939a">00147</a>   <a class="code" href="class_m_t_rand53.html#a24711c9e6e5ee72715f34515d1f1939a">MTRand53</a>() : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>() {}
+<a name="l00148"></a><a class="code" href="class_m_t_rand53.html#ad800887e15d4095f22facdb67f270c5e">00148</a>   <a class="code" href="class_m_t_rand53.html#ad800887e15d4095f22facdb67f270c5e">MTRand53</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> seed) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed) {}
+<a name="l00149"></a><a class="code" href="class_m_t_rand53.html#ac77b190d3ac27adea2d2c6c2ce2347c3">00149</a>   <a class="code" href="class_m_t_rand53.html#ac77b190d3ac27adea2d2c6c2ce2347c3">MTRand53</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span>* seed, <span class="keywordtype">int</span> size) : <a class="code" href="class_m_t_rand__int32.html">MTRand_int32</a>(seed, size) {}
+<a name="l00150"></a><a class="code" href="class_m_t_rand53.html#a947a6a7afd0c8a17612cda3faa705a75">00150</a>   <a class="code" href="class_m_t_rand53.html#a947a6a7afd0c8a17612cda3faa705a75">~MTRand53</a>() {}
+<a name="l00151"></a><a class="code" href="class_m_t_rand53.html#ab6657cb5349f39bc4553d3a970458b45">00151</a>   <span class="keywordtype">double</span> <a class="code" href="class_m_t_rand53.html#ab6657cb5349f39bc4553d3a970458b45">operator()</a>() {
+<a name="l00152"></a>00152     <span class="keywordflow">return</span> (static_cast&lt;double&gt;(rand_int32() &gt;&gt; 5) * 67108864. + 
+<a name="l00153"></a>00153       static_cast&lt;double&gt;(rand_int32() &gt;&gt; 6)) * (1. / 9007199254740992.); }
+<a name="l00154"></a>00154 <span class="keyword">private</span>:
+<a name="l00155"></a>00155   <a class="code" href="class_m_t_rand53.html">MTRand53</a>(<span class="keyword">const</span> <a class="code" href="class_m_t_rand53.html">MTRand53</a>&amp;); <span class="comment">// copy constructor not defined</span>
+<a name="l00156"></a>00156   <span class="keywordtype">void</span> operator=(<span class="keyword">const</span> <a class="code" href="class_m_t_rand53.html">MTRand53</a>&amp;); <span class="comment">// assignment operator not defined</span>
+<a name="l00157"></a>00157 };
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159 <span class="preprocessor">#endif // MTRAND_H</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -256,7 +258,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:26:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

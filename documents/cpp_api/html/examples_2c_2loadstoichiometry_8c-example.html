@@ -75,6 +75,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">examples/c/loadstoichiometry.c</div>  </div>
 </div><!--header-->
 <div class="contents">
+<p>Load a new stoichiometry matrix.Loads the stoichiometry matrix into the library. To analyze the stoichiometry call one of the following:</p>
+<ul>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#ab30c20e197779c422408ad1d984ecacb">LibStructural_analyzeWithQR</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#aa2ddbc9cf81c6463ca3f1a618f95ab1f">LibStructural_analyzeWithLU</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a8ee18560a26a2da838a64fd18c7f4ba6">LibStructural_analyzeWithLUandRunTests</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a4a89c80f07420d0794868b9a0addf312">LibStructural_analyzeWithFullyPivotedLU</a> or </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a79080ec9e2388f040fa048560eef96db">LibStructural_analyzeWithFullyPivotedLUwithTests</a></li>
+</ul>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>if matrix labels are needed it is recommended to call <a class="el" href="ls_c___a_p_i_8cpp.html#a6384d1b8a4583755e9ae1b14b2d8abb5">LibStructural_loadSpecies</a> and <a class="el" href="ls_c___a_p_i_8cpp.html#a5ae9a073f68d458e037aa65dfbc0d6ee">LibStructural_loadReactionNames</a> after a call to this function.</dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">oMatrix</td><td>a pointer to a double** matrix </td></tr>
+    <tr><td class="paramname">nRows</td><td>the number of rows of the matrix </td></tr>
+    <tr><td class="paramname">nCols</td><td>the number of columns of the matrix</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case an error occurred</dd></dl>
 <p>This is an example of how to load a (unlabeled) stoichiometry matrix and read test details.</p>
 <div class="fragment"><pre class="fragment"></pre></div> </div><!-- contents -->
 </div><!-- contents -->
@@ -83,7 +101,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -95,7 +113,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:26:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

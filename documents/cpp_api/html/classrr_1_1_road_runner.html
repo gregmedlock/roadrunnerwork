@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,8 +102,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
+<a href="#pub-attribs">Public Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">rr::RoadRunner Class Reference</div>  </div>
 </div><!--header-->
@@ -122,12 +121,24 @@ Inheritance diagram for rr::RoadRunner:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a52d67f80d5c556199b8b4131d9364e43">RoadRunner</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7b4c55a9f9a700b4ef389c42a0daead9">getParamPromotedSBML</a> (const string &amp;sArg)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#afad7e0551ce828639bc39d9508ee1c2a">ComputeAndAssignConservationLaws</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_c_generator.html">CGenerator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a45f0fe4299da29596c08cc20520f76bd">GetCGenerator</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_c_sharp_generator.html">CSharpGenerator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ab0cc81e21fc4cc41481c7ff6e40e4885">GetCSharpGenerator</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a9d522231bf7b5c193fd1fa71de1542b8">RoadRunner</a> (const string &amp;compiler=&quot;tcc&quot;)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a102e7c27e29219ae56e48ffd607fd621">~RoadRunner</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a95e7cb673105c44869ec9049faec2a49">CreateSelectionList</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aecea2dbffc17d0322b00e18f126058b5">isModelLoaded</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a290e3b93a3e8ab1785b5d57066280c66">setCompiler</a> (const string &amp;compiler)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a834abdba61819711ad86d8b69e6c0327">GetModelName</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad19a3a222b25a0751ae8e968eec5eb45">unLoadModel</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a9b8952e721ddb2c2eb8401ab11603de7">unLoadModelDLL</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_cvode_interface.html">CvodeInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a453515dcbb556f07adb6141c9963c86b">GetCVodeInterface</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_n_l_e_q_interface.html">NLEQInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a97364a2e40672e7d1c79dfe54fe8d7d2">GetNLEQInterface</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a5aac8d0d8a679a7a66e3612302c441c6">CreateSelectionList</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a4ec4867d9fe9f51b8858300f98244427">SetTempFileFolder</a> (const string &amp;folder)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a68aee20fd004c1d0f487c6cad45d6430">GetTempFileFolder</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ac51a2e4923db73a5ecdd29d5b1c62811">PartOfSimulation</a> (<a class="el" href="classrr_1_1_s_b_m_l_model_simulation.html">SBMLModelSimulation</a> *simulation)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#afc881634986ea2fa2feed0deda4025fb">GenerateModelCode</a> (const string &amp;sbml=string(&quot;&quot;))</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad4cfbb767a1a6a83ba187efbd752fba6">GenerateModelCode</a> (const string &amp;sbml)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7e05b57e2e79baf7e6dc4fed392690af">GenerateAndCompileModel</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a2e35852e58093387ce456e89e55862b1">CompileCurrentModel</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a5ab956e89a59dbfe3252459141c16886">CreateModel</a> ()</td></tr>
@@ -137,12 +148,14 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a4f0fefe6141bab5ef22bd06e00e75669">Reset</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a8767763f337d104d5e43900e98ddbad6">CreateModelSourceCode</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a9b3da89ed95f0a352799289aa44c3fd5">GetModelSourceCode</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a9447f8cc55d8cf7c17a16284c9e03c4a">getCHeaderCode</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a293d9cbf4f3ab3be563fab029ce35de6">getCSourceCode</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a1194306f6a334f51ad376a1c726e3e44">getCSharpCode</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aff05c5f845dd0b3fe76155c3dafa1a04">runSimulation</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a1517529629cda23f87070ad4715ed6f6">InitializeModel</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aa48896189611a029902043a421f5d087">Simulate</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a96305850b030885867be20e485744c8b">SimulateSBMLFile</a> (const string &amp;fileName, const <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;useConservationLaws=<a class="el" href="stdbool_8h.html#a41f9c5fb8b08eb5dc3edce4dcb37fee7">true</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a9729b5ed39c7551bb44923629f533be4">SimulateSBMLFile</a> (const string &amp;fileName, const <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;useConservationLaws, const double &amp;startTime, const double &amp;endTime, const int &amp;numPoints)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a838305c8385d522dd0ae03f2e9294f15">LoadSBMLFromFile</a> (const string &amp;fileName)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#affe11ad3821885ecd1129677fb123650">loadSBMLFromFile</a> (const string &amp;fileName)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a6aeb6ad33818b4fecd2ffbbc2c0c2386">loadSBML</a> (const string &amp;sbml)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ab46780863292ac487f9e32ebefd8e788">getSBML</a> ()</td></tr>
@@ -155,9 +168,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae4b0eaa39fd37737e5f5fd7f7741e06c">reset</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7b7bbbc0af5a83fd1b471c1125054a46">changeInitialConditions</a> (const vector&lt; double &gt; &amp;ic)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a228f3399572223cea12d5616017eaf8d">simulate</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aa4e4cd75c9bf7a05c21a4320ab854994">simulateEx</a> (const double &amp;startTime, const double &amp;endTime, const int &amp;numberOfPoints)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad8b5aceac8bd7b34784084e48b122ef3">getReactionRates</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a2d8d546750c512ef809b358f65cd203e">getRatesOfChange</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#acbbf9a0e3fcd1e95d98107d85e23c543">simulateEx</a> (const double &amp;startTime, const double &amp;endTime, const int &amp;numberOfPoints)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7a0ea3394f25af5a84117c9ea8361dbd">getReactionRates</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a0bb915c515c4590da76e38a1346f0ed3">getRatesOfChange</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aef0af99c9f2e320448feed5969b3fd1b">getSpeciesNames</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aa776756a72e4273d7480e8b90b89500a">getReactionNames</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad0aa081c117ee996bf4856f3082d47d5">getCapabilities</a> ()</td></tr>
@@ -167,32 +180,38 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ab2113f5953251b58527914692150fb39">setCapabilities</a> (const string &amp;capsStr)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a85fbbe58dcd6ad95b387900ccfb633f4">setValue</a> (const string &amp;sId, const double &amp;dValue)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a38d518185201cbae08850ff8dba47a7a">getValue</a> (const string &amp;sId)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list_container.html">StringListContainer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ab58d0e71522520b94c88eef0f8930527">getAvailableSymbols</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_array_list2.html">ArrayList2</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#abbd731ac4c3758183509dc2d635e093c">getAvailableSymbols</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aa6693a7dd13b6336b6d5e52ddc81e6d4">getSelectionList</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae8d6b2c05de89b827b8c8a155e2ede27">setSelectionList</a> (const string &amp;List)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae5d425246029aeb4cbdd21aefa386280">setSelectionList</a> (const <a class="el" href="classrr_1_1_string_list.html">StringList</a> &amp;newSelectionList)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a000c48eaf1f4744ce4aea0a2cdc73a2e">oneStep</a> (const double &amp;currentTime, const double &amp;stepSize)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#af1dbc2e48be394b3f54a35e6c077adc2">oneStep</a> (const double &amp;currentTime, const double &amp;stepSize, const <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;<a class="el" href="classrr_1_1_road_runner.html#ae4b0eaa39fd37737e5f5fd7f7741e06c">reset</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a53b8b7426d67ec2c15ed2b19785253e4">steadyState</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">LIB_LA::DoubleMatrix&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a254c5364864b6a0bd23f33fdb15d34fc">getReducedJacobian</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7b1319e6d5f8f133ac14ded9fc7546d6">getFullJacobian</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7495df324321de361fd3b789be77da01">getLinkMatrix</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a14bc76ad167748099f08e32c3235c3a0">getNrMatrix</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae5d011f8c5db881d704317eef80e35b9">getL0Matrix</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a254c5364864b6a0bd23f33fdb15d34fc">getReducedJacobian</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a11b7a9a2212edbb3ec5b58ed3277658b">getFullJacobian</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aea3502f347c5718774dd038c6e70e0d2">getEigenvalues</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a147cba09cb808a1129daa9b25ef3ebca">getLinkMatrix</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a71a648cf7934a232133accd40ef7e3e6">getNrMatrix</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a8a61b7a1c9ff3143056d602a47e988e1">getL0Matrix</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae14f16f6d85d11d051b58643961cbc78">getStoichiometryMatrix</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a5410a56c9d55a8d72b52bd28b5065f8d">getConservationMatrix</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a6fa2cd47bfc3c40d74e775029dab6d4e">getConservationMatrix</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a31e647466453d97ba2efb053a1f8ea7c">getUnscaledConcentrationControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae8ece5f2c43e271b87faabe6dfbdb394">getScaledConcentrationControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a8d89a2b5fa5b1eddd743c45b8416e92d">getUnscaledFluxControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a15c6929347bf90a42c528a189492e832">getScaledFluxControlCoefficientMatrix</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a78708a8b3088ada0b5d7b2630a24904e">getNumberOfDependentSpecies</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a0cbcdf248d716058325e50adf9239d4d">getNumberOfIndependentSpecies</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a0cb17f1d7ac8e03566004134f8aa3fec">computeContinuation</a> (const double &amp;stepSize, const int &amp;independentVariable, const string &amp;parameterTypeStr)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Fills the second argument with the Inverse of the first argument.  <a href="#a0cb17f1d7ac8e03566004134f8aa3fec"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#af5ba09ae3dd8ef661f61414cb4b7eae2">getFluxControlCoefficientNames</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a60d63187df0f009b2a5652bfc2d64737">getConcentrationControlCoefficientNames</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aadabf87663d8c8874c072bf5a4037824">getUnscaledConcentrationControlCoefficientNames</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a97ed2a22c68e34403a80b3622559e4ec">ArrayList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad5dff1ce59f80d86d93a5a619ed147a3">getElasticityCoefficientNames</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a97ed2a22c68e34403a80b3622559e4ec">ArrayList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a877601f8dd90ab497c91fd4cf1c2a22d">getUnscaledElasticityCoefficientNames</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#af87e9dd1cab982e35cadf36f11f6b853">getUnscaledFluxControlCoefficientNames</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a11e55d337d2928e7c134fe942427cd9f">getFluxControlCoefficientNames</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aff3d44147d9d068c9f9f2a9c8ae959b9">getUnscaledConcentrationControlCoefficientNames</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a4a3b601b1e5e6057a7e8b636c4cc8e81">getConcentrationControlCoefficientNames</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a92c46599a04ada94d4c11a8f53a51394">getElasticityCoefficientNames</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#adeb1ec00ddb9c0d804414117dd3f8dfb">getUnscaledElasticityCoefficientNames</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#afb58197fcbb5ec16c85360900dfdd5b1">getEigenValueNames</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad44940053b1c4724bfa2c3ca033b0e8e">getAvailableSteadyStateSymbols</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ab48106389287e3e7b552f4c763ef40dc">getSteadyStateSelectionList</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a97ed2a22c68e34403a80b3622559e4ec">ArrayList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aeb19392ded4e29dce61e2dc354b5d61b">getSteadyStateSelectionList</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad9a79005f6b4294659e6a82f53170972">setSteadyStateSelectionList</a> (const <a class="el" href="classrr_1_1_string_list.html">StringList</a> &amp;newSelectionList)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae3b8adba8a0be92b87bb4e82ea988943">computeSteadyStateValue</a> (const <a class="el" href="classrr_1_1_t_selection_record.html">TSelectionRecord</a> &amp;record)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ab8cc67d7107205fe8e5f253bccbb208b">computeSteadyStateValues</a> ()</td></tr>
@@ -201,7 +220,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#af78fc7cfb5af07915af7d673d04096de">computeSteadyStateValue</a> (const string &amp;sId)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aedf0d27a1db568a5fc1b59f436930117">getSelectedValues</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a88707d1428414b8e066b47e4f483a42f">getWarnings</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a1194306f6a334f51ad376a1c726e3e44">getCSharpCode</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#abdec2b175ec1061a24f162cb066eea5d">ReMultiplyCompartments</a> (const <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;bValue)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a3f93c30e40821790fbb1ea685ee55357">ComputeAndAssignConservationLaws</a> (const <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;bValue)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ab564e44c12abf762539cf5106dd984aa">steadyStateParameterScan</a> (const string &amp;symbol, const double &amp;startValue, const double &amp;endValue, const double &amp;stepSize)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a2a2507cc2964f8aef0d200c5841bc218">writeSBML</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a4bd83516546694f86bf9a5c9615a93ef">getNumberOfLocalParameters</a> (const int &amp;reactionId)</td></tr>
@@ -215,8 +235,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a9284f10d515b8ef441473b5c14f5920e">getReactionRate</a> (const int &amp;index)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a67736588f72a8fb4f429368716acda93">getRateOfChange</a> (const int &amp;index)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a5343e266c4dce6ebefd012c68f0eb670">getRateOfChangeNames</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a49b643c9a3e7c06f599fed318f9acebf">getRatesOfChangeEx</a> (const vector&lt; double &gt; &amp;values)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a4cf3e2cacbd7c61f40dda5bb679be39a">getReactionRatesEx</a> (const vector&lt; double &gt; &amp;values)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a9498a09a05b5b8a91980da615cfdc7ee">getRatesOfChangeEx</a> (const vector&lt; double &gt; &amp;values)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad6ed3fb37d90ff28718300428d76c7b8">getReactionRatesEx</a> (const vector&lt; double &gt; &amp;values)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#abbe82dd47373344f36f87521d0b1e2c3">GetFloatingSpeciesNamesArray</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">vector&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad35d386ca1f5bcf412451c8c8b60b570">GetGlobalParameterNamesArray</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a2f26307521e9930a85ed5c44bae67cfa">getNumberOfCompartments</a> ()</td></tr>
@@ -227,15 +247,15 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a54a9d80927c998e0981a2deac0671758">getNumberOfBoundarySpecies</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#af8d2ff8ebf2c85f918cc2888ac68f479">setBoundarySpeciesByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#afc7498e1fe7098233c87f4427e74509b">getBoundarySpeciesByIndex</a> (const int &amp;index)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a12b0f8f528290a3c1a9304c0409146f9">getBoundarySpeciesConcentrations</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aa8b3a8ad7d52eb86a9a6b5970510e569">getBoundarySpeciesConcentrations</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a21929991bf6be9ac18f9493c9cc1f350">setBoundarySpeciesConcentrations</a> (const vector&lt; double &gt; &amp;values)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a476d11adc03225548e3ce15dc560b7bd">getBoundarySpeciesNames</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a1478f6c7ac250122cd95b0ff83f0120d">getBoundarySpeciesAmountNames</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#af2467ad14443e89ac9a1ed98481093c3">getNumberOfFloatingSpecies</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ab06b478ffc51b1c0bad9926ae1840ab9">setFloatingSpeciesByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a6c15d6020db73f2cba5cc048360222cd">getFloatingSpeciesByIndex</a> (const int &amp;index)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#af3fbabeae81ed1a0c33ee78cf718ea77">getFloatingSpeciesConcentrations</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae1acabf30f4faa1a8ba235632c87a2bf">getFloatingSpeciesInitialConcentrations</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a8bfb3b2b523a9448617b99568e4af757">getFloatingSpeciesConcentrations</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae123a31ab81aa07d8e67f385608fb8da">getFloatingSpeciesInitialConcentrations</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae5fcca0bd662ec74c043a45b6b447d87">setFloatingSpeciesConcentrations</a> (const vector&lt; double &gt; &amp;values)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a08176e93872548591ce96b2f9c20dc74">setFloatingSpeciesInitialConcentrationByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aab8fc5d7fd881910e99c79f0bd46adbe">setFloatingSpeciesInitialConcentrations</a> (const vector&lt; double &gt; &amp;values)</td></tr>
@@ -246,55 +266,75 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#af8ef514007e266af36f56eb680996373">setGlobalParameterByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a241c4374d564427ef61df52862136574">getGlobalParameterByIndex</a> (const int &amp;index)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a6c4c18876e0a83c7495dbd8f04be5268">setGlobalParameterValues</a> (const vector&lt; double &gt; &amp;values)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae7490da1f0b9eadde331ee7d88c2dfaa">getGlobalParameterValues</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad3c1380f0ac290590534899d4c9478a4">getGlobalParameterValues</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ab8209bf9a3d6ef6f85533ae9647ec642">getGlobalParameterNames</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_string_list.html">StringList</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a6ff25beffd6fa3decfca23851b6e5e22">getAllGlobalParameterTupleList</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a410dceab6277c10e0c76404cb49da6e9">EvalModel</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a3cacc1bcee5587089b6ef8dbc83b3099">getName</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a248d078936a41d47c8de44ac829389f4">getVersion</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#af5ba5340fe6917a214202e4e82ed7d15">getAuthor</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a9bf1606b85834634646042f54f9a7e3d">getDescription</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a8e2088a5031cf38c47418f22eeaa7b5b">getDisplayName</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a4b773957d863f152b5744904e5229ca6">getCopyright</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7a750c9292493d4e36af7eb25a810e2e">getURL</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a4161af12a6fe777d3ae9595597b44850">DumpResults</a> (<a class="el" href="classrr_1_1_text_writer.html">TextWriter</a> &amp;writer, <a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a> &amp;data, const <a class="el" href="classrr_1_1_string_list.html">StringList</a> &amp;colLabels)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_l_i_b___l_a.html#ad29166d2600f1e7150a48b9064788ebd">LIB_LA::ComplexMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a9fc30477a8102b9ba166d84d71e0972c">ConvertComplex</a> (<a class="el" href="namespace_l_i_b___l_a.html#ad29166d2600f1e7150a48b9064788ebd">LIB_LA::ComplexMatrix</a> oMatrix)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a58a18e0b9f6fced58e332a55991ba550">getuCC</a> (const string &amp;variableName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a887d24bb39ae6de724d4e8c872d38439">getCC</a> (const string &amp;variableName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7e64402f8acb91a9180d5052f7cfe0ac">getuEE</a> (const string &amp;reactionName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a6baa03ef417c18f444fe1e9c06273ec4">getuEE</a> (const string &amp;reactionName, const string &amp;parameterName, <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> computeSteadystate)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a8c577f6bf8d26c5cc8ab0ece10f501ba">getEE</a> (const string &amp;reactionName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a010a2746402601139cd0b1beace8a2b8">getEE</a> (const string &amp;reactionName, const string &amp;parameterName, <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> computeSteadyState)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a5856b94d04fadfb190b407b126382503">getUnscaledSpeciesElasticity</a> (int reactionId, int speciesIndex)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad5de5ad422993fce040637baa7fb1dc2">getUnScaledElasticity</a> (const string &amp;reactionName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a97706a4e2ed3192980e44f1420e68fa9">getUnscaledElasticityMatrix</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aa3b4bb06a9126d315a06dbb575bf8456">getScaledElasticityMatrix</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#abe90424067cd7aabfa30f7593fc99066">getUnscaledFloatingSpeciesElasticity</a> (const string &amp;reactionName, const string &amp;speciesName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#adf62d781edfc6d96bec16b0344dbd7cb">getScaledFloatingSpeciesElasticity</a> (const string &amp;reactionName, const string &amp;speciesName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a1734005819835fd0e95b2ca6a6532e9b">changeParameter</a> (<a class="el" href="namespacerr.html#a1431d8ac2632dd393545dcc16d14785f">TParameterType</a> parameterType, int reactionIndex, int parameterIndex, double originalValue, double increment)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ac755535bf3a1aedfbe9714bcacccc2e3">getUnscaledParameterElasticity</a> (const string &amp;reactionName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7f44916c1c0057796236904fb64f7fc5">getUnscaledConcentrationControlCoefficient</a> (const string &amp;speciesName, const string &amp;localReactionName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae83587a93790585aaf9c1b4e03d435ee">getScaledConcentrationControlCoefficient</a> (const string &amp;speciesName, const string &amp;localReactionName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ac5cbb96b54691b025c0e648e54a3b044">getUnscaledConcentrationControlCoefficient</a> (const string &amp;speciesName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae5d5b612ba8f4d6572ae5fb715ca8b2b">getScaledConcentrationControlCoefficient</a> (const string &amp;speciesName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a909d55aa65c48e2b2b542dd2d0926aed">getUnscaledFluxControlCoefficient</a> (const string &amp;fluxName, const string &amp;localReactionName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a08b9a02d0b24994280266b81fcf3b722">getUnscaledFluxControlCoefficient</a> (const string &amp;reactionName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a4f5292b56156d8e4c9ac3cec3e7250ad">getScaledFluxControlCoefficient</a> (const string &amp;reactionName, const string &amp;localReactionName, const string &amp;parameterName)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a3481a29c563c48156ed377314d6a13b0">getScaledFluxControlCoefficient</a> (const string &amp;reactionName, const string &amp;parameterName)</td></tr>
 <tr><td colspan="2"><h2><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a9ca00b6eeb566e629f2e4575315a1f8e">TestSettings</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a73efb0b20a2ef892f4a90f0ea4191801">ReMultiplyCompartments</a> (const <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;bValue)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a3f93c30e40821790fbb1ea685ee55357">ComputeAndAssignConservationLaws</a> (const <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;bValue)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a484786318f8e262593128562d3fddd3d">getVersion</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a0cfa7960524b1b5d4313499252fd1fad">getAuthor</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#adc17e925187997608b1ef76489d48a1f">getDescription</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aee62e0769e092adc1d34c5a7ee5d2f90">getDisplayName</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a4b773957d863f152b5744904e5229ca6">getCopyright</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7a750c9292493d4e36af7eb25a810e2e">getURL</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a0586ec044934250df117b0a6d1e7ccf6">Test</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a39b9d67f4a759c6c337aefe56d80feb6">PrintTout</a> (const double &amp;start, const double &amp;end, const int &amp;numPoints)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ab5cb5b5f1610c126188a89f1f8460c82">TestChange</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae81fc4dff30eede9111e23be09e3544f">mComputeAndAssignConservationLaws</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a95b9ded2bc99a08f7ab3aeb24aa8dfcd">mConservedTotalChanged</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a7e0b9b152f23e4562aac46c1280dec3b">mL</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#aefbc558e2c72b53546a171ea27a5936a">mL0</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a8056df498118a03cb7034a5f1f406acb">mN</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a1631c029e24741f5a1f8596ffaa55c8f">mNr</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#abc8acb69f5e6e19fc6a440538ca72f97">modelLoaded</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">HINSTANCE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ad6c8b2636ce10400c705d506ea51b0cb">mModelDLL</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a432adaefc8a10caba3f4e47836459b19">mCurrentSBML</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#af0413ff8f1710757ac8a7bcbf494ea07">mModel</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a2e3f15be1708eebd8bf2a53a23d7a929">mTimeStart</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a2b0aa3897107aa2fd07f3083c1718899">mTimeEnd</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a1f1a134e350f4c614d1aef30985c1e66">mNumPoints</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a26fcc607b6239a5d0ba256bc46a40e81">NL</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_struct_analysis.html">StructAnalysis</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a877915da43c1510241b25ddb42c377ed">mStructAnalysis</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a97c79f82342790410bd924f9266f94df">UseKinsol</a></td></tr>
-<tr><td colspan="2"><h2><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#ae81fc4dff30eede9111e23be09e3544f">mComputeAndAssignConservationLaws</a> = <a class="el" href="stdbool_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a95b9ded2bc99a08f7ab3aeb24aa8dfcd">mConservedTotalChanged</a> = <a class="el" href="stdbool_8h.html#a65e9886d74aaee76545e83dd09011727">false</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_l_i_b___s_t_r_u_c_t_u_r_a_l_1_1_lib_structural.html">LibStructural</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a78f9abb3d8fe780b9139df99d27b4284">mLS</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_road_runner.html#a2b43e3cde1b5eb977e9f8d8c4350d4f3">UseKinsol</a></td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a52d67f80d5c556199b8b4131d9364e43"></a><!-- doxytag: member="rr::RoadRunner::RoadRunner" ref="a52d67f80d5c556199b8b4131d9364e43" args="()" -->
+<a class="anchor" id="a9d522231bf7b5c193fd1fa71de1542b8"></a><!-- doxytag: member="rr::RoadRunner::RoadRunner" ref="a9d522231bf7b5c193fd1fa71de1542b8" args="(const string &amp;compiler=&quot;tcc&quot;)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrr_1_1_road_runner.html#a52d67f80d5c556199b8b4131d9364e43">rr::RoadRunner::RoadRunner</a> </td>
+          <td class="memname"><a class="el" href="classrr_1_1_road_runner.html#a9d522231bf7b5c193fd1fa71de1542b8">rr::RoadRunner::RoadRunner</a> </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>compiler</em> = <code>&quot;tcc&quot;</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -337,6 +377,51 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a1734005819835fd0e95b2ca6a6532e9b"></a><!-- doxytag: member="rr::RoadRunner::changeParameter" ref="a1734005819835fd0e95b2ca6a6532e9b" args="(TParameterType parameterType, int reactionIndex, int parameterIndex, double originalValue, double increment)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_road_runner.html#a1734005819835fd0e95b2ca6a6532e9b">rr::RoadRunner::changeParameter</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacerr.html#a1431d8ac2632dd393545dcc16d14785f">TParameterType</a>&#160;</td>
+          <td class="paramname"><em>parameterType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>reactionIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>parameterIndex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>originalValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>increment</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a2e35852e58093387ce456e89e55862b1"></a><!-- doxytag: member="rr::RoadRunner::CompileCurrentModel" ref="a2e35852e58093387ce456e89e55862b1" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -353,16 +438,32 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="afad7e0551ce828639bc39d9508ee1c2a"></a><!-- doxytag: member="rr::RoadRunner::ComputeAndAssignConservationLaws" ref="afad7e0551ce828639bc39d9508ee1c2a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#afad7e0551ce828639bc39d9508ee1c2a">rr::RoadRunner::ComputeAndAssignConservationLaws</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a3f93c30e40821790fbb1ea685ee55357"></a><!-- doxytag: member="rr::RoadRunner::ComputeAndAssignConservationLaws" ref="a3f93c30e40821790fbb1ea685ee55357" args="(const bool &amp;bValue)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_road_runner.html#a3f93c30e40821790fbb1ea685ee55357">rr::RoadRunner::ComputeAndAssignConservationLaws</a> </td>
+          <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_road_runner.html#afad7e0551ce828639bc39d9508ee1c2a">rr::RoadRunner::ComputeAndAssignConservationLaws</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;&#160;</td>
           <td class="paramname"><em>bValue</em></td><td>)</td>
-          <td><code> [static]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -506,6 +607,23 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a9fc30477a8102b9ba166d84d71e0972c"></a><!-- doxytag: member="rr::RoadRunner::ConvertComplex" ref="a9fc30477a8102b9ba166d84d71e0972c" args="(LIB_LA::ComplexMatrix oMatrix)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#ad29166d2600f1e7150a48b9064788ebd">LIB_LA::ComplexMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a9fc30477a8102b9ba166d84d71e0972c">rr::RoadRunner::ConvertComplex</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_l_i_b___l_a.html#ad29166d2600f1e7150a48b9064788ebd">LIB_LA::ComplexMatrix</a>&#160;</td>
+          <td class="paramname"><em>oMatrix</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ac9d4640da3ada04f7bcf5e736fcd57e1"></a><!-- doxytag: member="rr::RoadRunner::CorrectMaxStep" ref="ac9d4640da3ada04f7bcf5e736fcd57e1" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -554,12 +672,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a95e7cb673105c44869ec9049faec2a49"></a><!-- doxytag: member="rr::RoadRunner::CreateSelectionList" ref="a95e7cb673105c44869ec9049faec2a49" args="()" -->
+<a class="anchor" id="a5aac8d0d8a679a7a66e3612302c441c6"></a><!-- doxytag: member="rr::RoadRunner::CreateSelectionList" ref="a5aac8d0d8a679a7a66e3612302c441c6" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#a95e7cb673105c44869ec9049faec2a49">rr::RoadRunner::CreateSelectionList</a> </td>
+          <td class="memname">int <a class="el" href="classrr_1_1_road_runner.html#a5aac8d0d8a679a7a66e3612302c441c6">rr::RoadRunner::CreateSelectionList</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -635,15 +753,15 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="afc881634986ea2fa2feed0deda4025fb"></a><!-- doxytag: member="rr::RoadRunner::GenerateModelCode" ref="afc881634986ea2fa2feed0deda4025fb" args="(const string &amp;sbml=string(&quot;&quot;))" -->
+<a class="anchor" id="ad4cfbb767a1a6a83ba187efbd752fba6"></a><!-- doxytag: member="rr::RoadRunner::GenerateModelCode" ref="ad4cfbb767a1a6a83ba187efbd752fba6" args="(const string &amp;sbml)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#afc881634986ea2fa2feed0deda4025fb">rr::RoadRunner::GenerateModelCode</a> </td>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#ad4cfbb767a1a6a83ba187efbd752fba6">rr::RoadRunner::GenerateModelCode</a> </td>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>sbml</em> = <code>string(&quot;&quot;)</code></td><td>)</td>
+          <td class="paramname"><em>sbml</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -684,15 +802,15 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0cfa7960524b1b5d4313499252fd1fad"></a><!-- doxytag: member="rr::RoadRunner::getAuthor" ref="a0cfa7960524b1b5d4313499252fd1fad" args="()" -->
+<a class="anchor" id="af5ba5340fe6917a214202e4e82ed7d15"></a><!-- doxytag: member="rr::RoadRunner::getAuthor" ref="af5ba5340fe6917a214202e4e82ed7d15" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static string <a class="el" href="classrr_1_1_road_runner.html#a0cfa7960524b1b5d4313499252fd1fad">rr::RoadRunner::getAuthor</a> </td>
+          <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#af5ba5340fe6917a214202e4e82ed7d15">rr::RoadRunner::getAuthor</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [static]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -716,12 +834,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab58d0e71522520b94c88eef0f8930527"></a><!-- doxytag: member="rr::RoadRunner::getAvailableSymbols" ref="ab58d0e71522520b94c88eef0f8930527" args="()" -->
+<a class="anchor" id="abbd731ac4c3758183509dc2d635e093c"></a><!-- doxytag: member="rr::RoadRunner::getAvailableSymbols" ref="abbd731ac4c3758183509dc2d635e093c" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrr_1_1_string_list_container.html">StringListContainer</a> <a class="el" href="classrr_1_1_road_runner.html#ab58d0e71522520b94c88eef0f8930527">rr::RoadRunner::getAvailableSymbols</a> </td>
+          <td class="memname"><a class="el" href="classrr_1_1_array_list2.html">ArrayList2</a> <a class="el" href="classrr_1_1_road_runner.html#abbd731ac4c3758183509dc2d635e093c">rr::RoadRunner::getAvailableSymbols</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -765,12 +883,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a12b0f8f528290a3c1a9304c0409146f9"></a><!-- doxytag: member="rr::RoadRunner::getBoundarySpeciesConcentrations" ref="a12b0f8f528290a3c1a9304c0409146f9" args="()" -->
+<a class="anchor" id="aa8b3a8ad7d52eb86a9a6b5970510e569"></a><!-- doxytag: member="rr::RoadRunner::getBoundarySpeciesConcentrations" ref="aa8b3a8ad7d52eb86a9a6b5970510e569" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_road_runner.html#a12b0f8f528290a3c1a9304c0409146f9">rr::RoadRunner::getBoundarySpeciesConcentrations</a> </td>
+          <td class="memname">vector&lt; double &gt; <a class="el" href="classrr_1_1_road_runner.html#aa8b3a8ad7d52eb86a9a6b5970510e569">rr::RoadRunner::getBoundarySpeciesConcentrations</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -803,6 +921,65 @@ Static Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#ad0aa081c117ee996bf4856f3082d47d5">rr::RoadRunner::getCapabilities</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a887d24bb39ae6de724d4e8c872d38439"></a><!-- doxytag: member="rr::RoadRunner::getCC" ref="a887d24bb39ae6de724d4e8c872d38439" args="(const string &amp;variableName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a887d24bb39ae6de724d4e8c872d38439">rr::RoadRunner::getCC</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>variableName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a45f0fe4299da29596c08cc20520f76bd"></a><!-- doxytag: member="rr::RoadRunner::GetCGenerator" ref="a45f0fe4299da29596c08cc20520f76bd" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrr_1_1_c_generator.html">CGenerator</a> * <a class="el" href="classrr_1_1_road_runner.html#a45f0fe4299da29596c08cc20520f76bd">rr::RoadRunner::GetCGenerator</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9447f8cc55d8cf7c17a16284c9e03c4a"></a><!-- doxytag: member="rr::RoadRunner::getCHeaderCode" ref="a9447f8cc55d8cf7c17a16284c9e03c4a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#a9447f8cc55d8cf7c17a16284c9e03c4a">rr::RoadRunner::getCHeaderCode</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -862,12 +1039,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a60d63187df0f009b2a5652bfc2d64737"></a><!-- doxytag: member="rr::RoadRunner::getConcentrationControlCoefficientNames" ref="a60d63187df0f009b2a5652bfc2d64737" args="()" -->
+<a class="anchor" id="a4a3b601b1e5e6057a7e8b636c4cc8e81"></a><!-- doxytag: member="rr::RoadRunner::getConcentrationControlCoefficientNames" ref="a4a3b601b1e5e6057a7e8b636c4cc8e81" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrr_1_1_string_list.html">StringList</a> <a class="el" href="classrr_1_1_road_runner.html#a60d63187df0f009b2a5652bfc2d64737">rr::RoadRunner::getConcentrationControlCoefficientNames</a> </td>
+          <td class="memname"><a class="el" href="classrr_1_1_r_r_array_list.html">RRArrayList</a>&lt; string &gt; <a class="el" href="classrr_1_1_road_runner.html#a4a3b601b1e5e6057a7e8b636c4cc8e81">rr::RoadRunner::getConcentrationControlCoefficientNames</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -878,12 +1055,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a5410a56c9d55a8d72b52bd28b5065f8d"></a><!-- doxytag: member="rr::RoadRunner::getConservationMatrix" ref="a5410a56c9d55a8d72b52bd28b5065f8d" args="()" -->
+<a class="anchor" id="a6fa2cd47bfc3c40d74e775029dab6d4e"></a><!-- doxytag: member="rr::RoadRunner::getConservationMatrix" ref="a6fa2cd47bfc3c40d74e775029dab6d4e" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double* <a class="el" href="classrr_1_1_road_runner.html#a5410a56c9d55a8d72b52bd28b5065f8d">rr::RoadRunner::getConservationMatrix</a> </td>
+          <td class="memname"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a6fa2cd47bfc3c40d74e775029dab6d4e">rr::RoadRunner::getConservationMatrix</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -902,7 +1079,7 @@ Static Public Attributes</h2></td></tr>
           <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#a4b773957d863f152b5744904e5229ca6">rr::RoadRunner::getCopyright</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [static]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -926,15 +1103,15 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="adc17e925187997608b1ef76489d48a1f"></a><!-- doxytag: member="rr::RoadRunner::getDescription" ref="adc17e925187997608b1ef76489d48a1f" args="()" -->
+<a class="anchor" id="ab0cc81e21fc4cc41481c7ff6e40e4885"></a><!-- doxytag: member="rr::RoadRunner::GetCSharpGenerator" ref="ab0cc81e21fc4cc41481c7ff6e40e4885" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static string <a class="el" href="classrr_1_1_road_runner.html#adc17e925187997608b1ef76489d48a1f">rr::RoadRunner::getDescription</a> </td>
+          <td class="memname"><a class="el" href="classrr_1_1_c_sharp_generator.html">CSharpGenerator</a> * <a class="el" href="classrr_1_1_road_runner.html#ab0cc81e21fc4cc41481c7ff6e40e4885">rr::RoadRunner::GetCSharpGenerator</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [static]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -942,15 +1119,123 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aee62e0769e092adc1d34c5a7ee5d2f90"></a><!-- doxytag: member="rr::RoadRunner::getDisplayName" ref="aee62e0769e092adc1d34c5a7ee5d2f90" args="()" -->
+<a class="anchor" id="a293d9cbf4f3ab3be563fab029ce35de6"></a><!-- doxytag: member="rr::RoadRunner::getCSourceCode" ref="a293d9cbf4f3ab3be563fab029ce35de6" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static string <a class="el" href="classrr_1_1_road_runner.html#aee62e0769e092adc1d34c5a7ee5d2f90">rr::RoadRunner::getDisplayName</a> </td>
+          <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#a293d9cbf4f3ab3be563fab029ce35de6">rr::RoadRunner::getCSourceCode</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [static]</code></td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a453515dcbb556f07adb6141c9963c86b"></a><!-- doxytag: member="rr::RoadRunner::GetCVodeInterface" ref="a453515dcbb556f07adb6141c9963c86b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrr_1_1_cvode_interface.html">CvodeInterface</a> * <a class="el" href="classrr_1_1_road_runner.html#a453515dcbb556f07adb6141c9963c86b">rr::RoadRunner::GetCVodeInterface</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9bf1606b85834634646042f54f9a7e3d"></a><!-- doxytag: member="rr::RoadRunner::getDescription" ref="a9bf1606b85834634646042f54f9a7e3d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#a9bf1606b85834634646042f54f9a7e3d">rr::RoadRunner::getDescription</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8e2088a5031cf38c47418f22eeaa7b5b"></a><!-- doxytag: member="rr::RoadRunner::getDisplayName" ref="a8e2088a5031cf38c47418f22eeaa7b5b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#a8e2088a5031cf38c47418f22eeaa7b5b">rr::RoadRunner::getDisplayName</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8c577f6bf8d26c5cc8ab0ece10f501ba"></a><!-- doxytag: member="rr::RoadRunner::getEE" ref="a8c577f6bf8d26c5cc8ab0ece10f501ba" args="(const string &amp;reactionName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a8c577f6bf8d26c5cc8ab0ece10f501ba">rr::RoadRunner::getEE</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a010a2746402601139cd0b1beace8a2b8"></a><!-- doxytag: member="rr::RoadRunner::getEE" ref="a010a2746402601139cd0b1beace8a2b8" args="(const string &amp;reactionName, const string &amp;parameterName, bool computeSteadyState)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a8c577f6bf8d26c5cc8ab0ece10f501ba">rr::RoadRunner::getEE</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>computeSteadyState</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -974,12 +1259,28 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad5dff1ce59f80d86d93a5a619ed147a3"></a><!-- doxytag: member="rr::RoadRunner::getElasticityCoefficientNames" ref="ad5dff1ce59f80d86d93a5a619ed147a3" args="()" -->
+<a class="anchor" id="aea3502f347c5718774dd038c6e70e0d2"></a><!-- doxytag: member="rr::RoadRunner::getEigenvalues" ref="aea3502f347c5718774dd038c6e70e0d2" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacerr.html#a97ed2a22c68e34403a80b3622559e4ec">ArrayList</a> <a class="el" href="classrr_1_1_road_runner.html#ad5dff1ce59f80d86d93a5a619ed147a3">rr::RoadRunner::getElasticityCoefficientNames</a> </td>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#aea3502f347c5718774dd038c6e70e0d2">rr::RoadRunner::getEigenvalues</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a92c46599a04ada94d4c11a8f53a51394"></a><!-- doxytag: member="rr::RoadRunner::getElasticityCoefficientNames" ref="a92c46599a04ada94d4c11a8f53a51394" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a> <a class="el" href="classrr_1_1_road_runner.html#a92c46599a04ada94d4c11a8f53a51394">rr::RoadRunner::getElasticityCoefficientNames</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1023,12 +1324,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af3fbabeae81ed1a0c33ee78cf718ea77"></a><!-- doxytag: member="rr::RoadRunner::getFloatingSpeciesConcentrations" ref="af3fbabeae81ed1a0c33ee78cf718ea77" args="()" -->
+<a class="anchor" id="a8bfb3b2b523a9448617b99568e4af757"></a><!-- doxytag: member="rr::RoadRunner::getFloatingSpeciesConcentrations" ref="a8bfb3b2b523a9448617b99568e4af757" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_road_runner.html#af3fbabeae81ed1a0c33ee78cf718ea77">rr::RoadRunner::getFloatingSpeciesConcentrations</a> </td>
+          <td class="memname">vector&lt; double &gt; <a class="el" href="classrr_1_1_road_runner.html#a8bfb3b2b523a9448617b99568e4af757">rr::RoadRunner::getFloatingSpeciesConcentrations</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1039,12 +1340,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae1acabf30f4faa1a8ba235632c87a2bf"></a><!-- doxytag: member="rr::RoadRunner::getFloatingSpeciesInitialConcentrations" ref="ae1acabf30f4faa1a8ba235632c87a2bf" args="()" -->
+<a class="anchor" id="ae123a31ab81aa07d8e67f385608fb8da"></a><!-- doxytag: member="rr::RoadRunner::getFloatingSpeciesInitialConcentrations" ref="ae123a31ab81aa07d8e67f385608fb8da" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_road_runner.html#ae1acabf30f4faa1a8ba235632c87a2bf">rr::RoadRunner::getFloatingSpeciesInitialConcentrations</a> </td>
+          <td class="memname">vector&lt; double &gt; <a class="el" href="classrr_1_1_road_runner.html#ae123a31ab81aa07d8e67f385608fb8da">rr::RoadRunner::getFloatingSpeciesInitialConcentrations</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1103,12 +1404,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af5ba09ae3dd8ef661f61414cb4b7eae2"></a><!-- doxytag: member="rr::RoadRunner::getFluxControlCoefficientNames" ref="af5ba09ae3dd8ef661f61414cb4b7eae2" args="()" -->
+<a class="anchor" id="a11e55d337d2928e7c134fe942427cd9f"></a><!-- doxytag: member="rr::RoadRunner::getFluxControlCoefficientNames" ref="a11e55d337d2928e7c134fe942427cd9f" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrr_1_1_string_list.html">StringList</a> <a class="el" href="classrr_1_1_road_runner.html#af5ba09ae3dd8ef661f61414cb4b7eae2">rr::RoadRunner::getFluxControlCoefficientNames</a> </td>
+          <td class="memname"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a> <a class="el" href="classrr_1_1_road_runner.html#a11e55d337d2928e7c134fe942427cd9f">rr::RoadRunner::getFluxControlCoefficientNames</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1119,12 +1420,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7b1319e6d5f8f133ac14ded9fc7546d6"></a><!-- doxytag: member="rr::RoadRunner::getFullJacobian" ref="a7b1319e6d5f8f133ac14ded9fc7546d6" args="()" -->
+<a class="anchor" id="a11b7a9a2212edbb3ec5b58ed3277658b"></a><!-- doxytag: member="rr::RoadRunner::getFullJacobian" ref="a11b7a9a2212edbb3ec5b58ed3277658b" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double* <a class="el" href="classrr_1_1_road_runner.html#a7b1319e6d5f8f133ac14ded9fc7546d6">rr::RoadRunner::getFullJacobian</a> </td>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a11b7a9a2212edbb3ec5b58ed3277658b">rr::RoadRunner::getFullJacobian</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1184,12 +1485,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae7490da1f0b9eadde331ee7d88c2dfaa"></a><!-- doxytag: member="rr::RoadRunner::getGlobalParameterValues" ref="ae7490da1f0b9eadde331ee7d88c2dfaa" args="()" -->
+<a class="anchor" id="ad3c1380f0ac290590534899d4c9478a4"></a><!-- doxytag: member="rr::RoadRunner::getGlobalParameterValues" ref="ad3c1380f0ac290590534899d4c9478a4" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_road_runner.html#ae7490da1f0b9eadde331ee7d88c2dfaa">rr::RoadRunner::getGlobalParameterValues</a> </td>
+          <td class="memname">vector&lt; double &gt; <a class="el" href="classrr_1_1_road_runner.html#ad3c1380f0ac290590534899d4c9478a4">rr::RoadRunner::getGlobalParameterValues</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1200,12 +1501,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae5d011f8c5db881d704317eef80e35b9"></a><!-- doxytag: member="rr::RoadRunner::getL0Matrix" ref="ae5d011f8c5db881d704317eef80e35b9" args="()" -->
+<a class="anchor" id="a8a61b7a1c9ff3143056d602a47e988e1"></a><!-- doxytag: member="rr::RoadRunner::getL0Matrix" ref="a8a61b7a1c9ff3143056d602a47e988e1" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double* <a class="el" href="classrr_1_1_road_runner.html#ae5d011f8c5db881d704317eef80e35b9">rr::RoadRunner::getL0Matrix</a> </td>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a8a61b7a1c9ff3143056d602a47e988e1">rr::RoadRunner::getL0Matrix</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1216,12 +1517,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7495df324321de361fd3b789be77da01"></a><!-- doxytag: member="rr::RoadRunner::getLinkMatrix" ref="a7495df324321de361fd3b789be77da01" args="()" -->
+<a class="anchor" id="a147cba09cb808a1129daa9b25ef3ebca"></a><!-- doxytag: member="rr::RoadRunner::getLinkMatrix" ref="a147cba09cb808a1129daa9b25ef3ebca" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double* <a class="el" href="classrr_1_1_road_runner.html#a7495df324321de361fd3b789be77da01">rr::RoadRunner::getLinkMatrix</a> </td>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a147cba09cb808a1129daa9b25ef3ebca">rr::RoadRunner::getLinkMatrix</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1293,6 +1594,22 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a834abdba61819711ad86d8b69e6c0327"></a><!-- doxytag: member="rr::RoadRunner::GetModelName" ref="a834abdba61819711ad86d8b69e6c0327" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#a834abdba61819711ad86d8b69e6c0327">rr::RoadRunner::GetModelName</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a9b3da89ed95f0a352799289aa44c3fd5"></a><!-- doxytag: member="rr::RoadRunner::GetModelSourceCode" ref="a9b3da89ed95f0a352799289aa44c3fd5" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -1325,12 +1642,28 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a14bc76ad167748099f08e32c3235c3a0"></a><!-- doxytag: member="rr::RoadRunner::getNrMatrix" ref="a14bc76ad167748099f08e32c3235c3a0" args="()" -->
+<a class="anchor" id="a97364a2e40672e7d1c79dfe54fe8d7d2"></a><!-- doxytag: member="rr::RoadRunner::GetNLEQInterface" ref="a97364a2e40672e7d1c79dfe54fe8d7d2" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">double* <a class="el" href="classrr_1_1_road_runner.html#a14bc76ad167748099f08e32c3235c3a0">rr::RoadRunner::getNrMatrix</a> </td>
+          <td class="memname"><a class="el" href="classrr_1_1_n_l_e_q_interface.html">NLEQInterface</a> * <a class="el" href="classrr_1_1_road_runner.html#a97364a2e40672e7d1c79dfe54fe8d7d2">rr::RoadRunner::GetNLEQInterface</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a71a648cf7934a232133accd40ef7e3e6"></a><!-- doxytag: member="rr::RoadRunner::getNrMatrix" ref="a71a648cf7934a232133accd40ef7e3e6" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a71a648cf7934a232133accd40ef7e3e6">rr::RoadRunner::getNrMatrix</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1486,6 +1819,23 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a7b4c55a9f9a700b4ef389c42a0daead9"></a><!-- doxytag: member="rr::RoadRunner::getParamPromotedSBML" ref="a7b4c55a9f9a700b4ef389c42a0daead9" args="(const string &amp;sArg)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#a7b4c55a9f9a700b4ef389c42a0daead9">rr::RoadRunner::getParamPromotedSBML</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>sArg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a67736588f72a8fb4f429368716acda93"></a><!-- doxytag: member="rr::RoadRunner::getRateOfChange" ref="a67736588f72a8fb4f429368716acda93" args="(const int &amp;index)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1519,12 +1869,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2d8d546750c512ef809b358f65cd203e"></a><!-- doxytag: member="rr::RoadRunner::getRatesOfChange" ref="a2d8d546750c512ef809b358f65cd203e" args="()" -->
+<a class="anchor" id="a0bb915c515c4590da76e38a1346f0ed3"></a><!-- doxytag: member="rr::RoadRunner::getRatesOfChange" ref="a0bb915c515c4590da76e38a1346f0ed3" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_road_runner.html#a2d8d546750c512ef809b358f65cd203e">rr::RoadRunner::getRatesOfChange</a> </td>
+          <td class="memname">vector&lt; double &gt; <a class="el" href="classrr_1_1_road_runner.html#a0bb915c515c4590da76e38a1346f0ed3">rr::RoadRunner::getRatesOfChange</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1535,12 +1885,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a49b643c9a3e7c06f599fed318f9acebf"></a><!-- doxytag: member="rr::RoadRunner::getRatesOfChangeEx" ref="a49b643c9a3e7c06f599fed318f9acebf" args="(const vector&lt; double &gt; &amp;values)" -->
+<a class="anchor" id="a9498a09a05b5b8a91980da615cfdc7ee"></a><!-- doxytag: member="rr::RoadRunner::getRatesOfChangeEx" ref="a9498a09a05b5b8a91980da615cfdc7ee" args="(const vector&lt; double &gt; &amp;values)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_road_runner.html#a49b643c9a3e7c06f599fed318f9acebf">rr::RoadRunner::getRatesOfChangeEx</a> </td>
+          <td class="memname">vector&lt; double &gt; <a class="el" href="classrr_1_1_road_runner.html#a9498a09a05b5b8a91980da615cfdc7ee">rr::RoadRunner::getRatesOfChangeEx</a> </td>
           <td>(</td>
           <td class="paramtype">const vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>values</em></td><td>)</td>
@@ -1585,12 +1935,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad8b5aceac8bd7b34784084e48b122ef3"></a><!-- doxytag: member="rr::RoadRunner::getReactionRates" ref="ad8b5aceac8bd7b34784084e48b122ef3" args="()" -->
+<a class="anchor" id="a7a0ea3394f25af5a84117c9ea8361dbd"></a><!-- doxytag: member="rr::RoadRunner::getReactionRates" ref="a7a0ea3394f25af5a84117c9ea8361dbd" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_road_runner.html#ad8b5aceac8bd7b34784084e48b122ef3">rr::RoadRunner::getReactionRates</a> </td>
+          <td class="memname">vector&lt; double &gt; <a class="el" href="classrr_1_1_road_runner.html#a7a0ea3394f25af5a84117c9ea8361dbd">rr::RoadRunner::getReactionRates</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1601,12 +1951,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4cf3e2cacbd7c61f40dda5bb679be39a"></a><!-- doxytag: member="rr::RoadRunner::getReactionRatesEx" ref="a4cf3e2cacbd7c61f40dda5bb679be39a" args="(const vector&lt; double &gt; &amp;values)" -->
+<a class="anchor" id="ad6ed3fb37d90ff28718300428d76c7b8"></a><!-- doxytag: member="rr::RoadRunner::getReactionRatesEx" ref="ad6ed3fb37d90ff28718300428d76c7b8" args="(const vector&lt; double &gt; &amp;values)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_road_runner.html#a4cf3e2cacbd7c61f40dda5bb679be39a">rr::RoadRunner::getReactionRatesEx</a> </td>
+          <td class="memname">vector&lt; double &gt; <a class="el" href="classrr_1_1_road_runner.html#ad6ed3fb37d90ff28718300428d76c7b8">rr::RoadRunner::getReactionRatesEx</a> </td>
           <td>(</td>
           <td class="paramtype">const vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>values</em></td><td>)</td>
@@ -1623,7 +1973,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">LIB_LA::DoubleMatrix <a class="el" href="classrr_1_1_road_runner.html#a254c5364864b6a0bd23f33fdb15d34fc">rr::RoadRunner::getReducedJacobian</a> </td>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a254c5364864b6a0bd23f33fdb15d34fc">rr::RoadRunner::getReducedJacobian</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1640,6 +1990,201 @@ Static Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#ab46780863292ac487f9e32ebefd8e788">rr::RoadRunner::getSBML</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae83587a93790585aaf9c1b4e03d435ee"></a><!-- doxytag: member="rr::RoadRunner::getScaledConcentrationControlCoefficient" ref="ae83587a93790585aaf9c1b4e03d435ee" args="(const string &amp;speciesName, const string &amp;localReactionName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#ae83587a93790585aaf9c1b4e03d435ee">rr::RoadRunner::getScaledConcentrationControlCoefficient</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>speciesName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>localReactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae5d5b612ba8f4d6572ae5fb715ca8b2b"></a><!-- doxytag: member="rr::RoadRunner::getScaledConcentrationControlCoefficient" ref="ae5d5b612ba8f4d6572ae5fb715ca8b2b" args="(const string &amp;speciesName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#ae83587a93790585aaf9c1b4e03d435ee">rr::RoadRunner::getScaledConcentrationControlCoefficient</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>speciesName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae8ece5f2c43e271b87faabe6dfbdb394"></a><!-- doxytag: member="rr::RoadRunner::getScaledConcentrationControlCoefficientMatrix" ref="ae8ece5f2c43e271b87faabe6dfbdb394" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#ae8ece5f2c43e271b87faabe6dfbdb394">rr::RoadRunner::getScaledConcentrationControlCoefficientMatrix</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa3b4bb06a9126d315a06dbb575bf8456"></a><!-- doxytag: member="rr::RoadRunner::getScaledElasticityMatrix" ref="aa3b4bb06a9126d315a06dbb575bf8456" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#aa3b4bb06a9126d315a06dbb575bf8456">rr::RoadRunner::getScaledElasticityMatrix</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adf62d781edfc6d96bec16b0344dbd7cb"></a><!-- doxytag: member="rr::RoadRunner::getScaledFloatingSpeciesElasticity" ref="adf62d781edfc6d96bec16b0344dbd7cb" args="(const string &amp;reactionName, const string &amp;speciesName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#adf62d781edfc6d96bec16b0344dbd7cb">rr::RoadRunner::getScaledFloatingSpeciesElasticity</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>speciesName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a4f5292b56156d8e4c9ac3cec3e7250ad"></a><!-- doxytag: member="rr::RoadRunner::getScaledFluxControlCoefficient" ref="a4f5292b56156d8e4c9ac3cec3e7250ad" args="(const string &amp;reactionName, const string &amp;localReactionName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a4f5292b56156d8e4c9ac3cec3e7250ad">rr::RoadRunner::getScaledFluxControlCoefficient</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>localReactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a3481a29c563c48156ed377314d6a13b0"></a><!-- doxytag: member="rr::RoadRunner::getScaledFluxControlCoefficient" ref="a3481a29c563c48156ed377314d6a13b0" args="(const string &amp;reactionName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a4f5292b56156d8e4c9ac3cec3e7250ad">rr::RoadRunner::getScaledFluxControlCoefficient</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a15c6929347bf90a42c528a189492e832"></a><!-- doxytag: member="rr::RoadRunner::getScaledFluxControlCoefficientMatrix" ref="a15c6929347bf90a42c528a189492e832" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a15c6929347bf90a42c528a189492e832">rr::RoadRunner::getScaledFluxControlCoefficientMatrix</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1714,12 +2259,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab48106389287e3e7b552f4c763ef40dc"></a><!-- doxytag: member="rr::RoadRunner::getSteadyStateSelectionList" ref="ab48106389287e3e7b552f4c763ef40dc" args="()" -->
+<a class="anchor" id="aeb19392ded4e29dce61e2dc354b5d61b"></a><!-- doxytag: member="rr::RoadRunner::getSteadyStateSelectionList" ref="aeb19392ded4e29dce61e2dc354b5d61b" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrr_1_1_string_list.html">StringList</a> <a class="el" href="classrr_1_1_road_runner.html#ab48106389287e3e7b552f4c763ef40dc">rr::RoadRunner::getSteadyStateSelectionList</a> </td>
+          <td class="memname"><a class="el" href="namespacerr.html#a97ed2a22c68e34403a80b3622559e4ec">ArrayList</a> <a class="el" href="classrr_1_1_road_runner.html#aeb19392ded4e29dce61e2dc354b5d61b">rr::RoadRunner::getSteadyStateSelectionList</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1736,6 +2281,22 @@ Static Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#ae14f16f6d85d11d051b58643961cbc78">rr::RoadRunner::getStoichiometryMatrix</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a68aee20fd004c1d0f487c6cad45d6430"></a><!-- doxytag: member="rr::RoadRunner::GetTempFileFolder" ref="a68aee20fd004c1d0f487c6cad45d6430" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#a68aee20fd004c1d0f487c6cad45d6430">rr::RoadRunner::GetTempFileFolder</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1778,12 +2339,159 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aadabf87663d8c8874c072bf5a4037824"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledConcentrationControlCoefficientNames" ref="aadabf87663d8c8874c072bf5a4037824" args="()" -->
+<a class="anchor" id="a58a18e0b9f6fced58e332a55991ba550"></a><!-- doxytag: member="rr::RoadRunner::getuCC" ref="a58a18e0b9f6fced58e332a55991ba550" args="(const string &amp;variableName, const string &amp;parameterName)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrr_1_1_string_list.html">StringList</a> <a class="el" href="classrr_1_1_road_runner.html#aadabf87663d8c8874c072bf5a4037824">rr::RoadRunner::getUnscaledConcentrationControlCoefficientNames</a> </td>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a58a18e0b9f6fced58e332a55991ba550">rr::RoadRunner::getuCC</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>variableName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7e64402f8acb91a9180d5052f7cfe0ac"></a><!-- doxytag: member="rr::RoadRunner::getuEE" ref="a7e64402f8acb91a9180d5052f7cfe0ac" args="(const string &amp;reactionName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a7e64402f8acb91a9180d5052f7cfe0ac">rr::RoadRunner::getuEE</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a6baa03ef417c18f444fe1e9c06273ec4"></a><!-- doxytag: member="rr::RoadRunner::getuEE" ref="a6baa03ef417c18f444fe1e9c06273ec4" args="(const string &amp;reactionName, const string &amp;parameterName, bool computeSteadystate)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a7e64402f8acb91a9180d5052f7cfe0ac">rr::RoadRunner::getuEE</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td>
+          <td class="paramname"><em>computeSteadystate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a7f44916c1c0057796236904fb64f7fc5"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledConcentrationControlCoefficient" ref="a7f44916c1c0057796236904fb64f7fc5" args="(const string &amp;speciesName, const string &amp;localReactionName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a7f44916c1c0057796236904fb64f7fc5">rr::RoadRunner::getUnscaledConcentrationControlCoefficient</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>speciesName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>localReactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac5cbb96b54691b025c0e648e54a3b044"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledConcentrationControlCoefficient" ref="ac5cbb96b54691b025c0e648e54a3b044" args="(const string &amp;speciesName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a7f44916c1c0057796236904fb64f7fc5">rr::RoadRunner::getUnscaledConcentrationControlCoefficient</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>speciesName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a31e647466453d97ba2efb053a1f8ea7c"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledConcentrationControlCoefficientMatrix" ref="a31e647466453d97ba2efb053a1f8ea7c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a31e647466453d97ba2efb053a1f8ea7c">rr::RoadRunner::getUnscaledConcentrationControlCoefficientMatrix</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -1794,15 +2502,247 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a877601f8dd90ab497c91fd4cf1c2a22d"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledElasticityCoefficientNames" ref="a877601f8dd90ab497c91fd4cf1c2a22d" args="()" -->
+<a class="anchor" id="aff3d44147d9d068c9f9f2a9c8ae959b9"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledConcentrationControlCoefficientNames" ref="aff3d44147d9d068c9f9f2a9c8ae959b9" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacerr.html#a97ed2a22c68e34403a80b3622559e4ec">ArrayList</a> <a class="el" href="classrr_1_1_road_runner.html#a877601f8dd90ab497c91fd4cf1c2a22d">rr::RoadRunner::getUnscaledElasticityCoefficientNames</a> </td>
+          <td class="memname"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a> <a class="el" href="classrr_1_1_road_runner.html#aff3d44147d9d068c9f9f2a9c8ae959b9">rr::RoadRunner::getUnscaledConcentrationControlCoefficientNames</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad5de5ad422993fce040637baa7fb1dc2"></a><!-- doxytag: member="rr::RoadRunner::getUnScaledElasticity" ref="ad5de5ad422993fce040637baa7fb1dc2" args="(const string &amp;reactionName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#ad5de5ad422993fce040637baa7fb1dc2">rr::RoadRunner::getUnScaledElasticity</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="adeb1ec00ddb9c0d804414117dd3f8dfb"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledElasticityCoefficientNames" ref="adeb1ec00ddb9c0d804414117dd3f8dfb" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a> <a class="el" href="classrr_1_1_road_runner.html#adeb1ec00ddb9c0d804414117dd3f8dfb">rr::RoadRunner::getUnscaledElasticityCoefficientNames</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a97706a4e2ed3192980e44f1420e68fa9"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledElasticityMatrix" ref="a97706a4e2ed3192980e44f1420e68fa9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a97706a4e2ed3192980e44f1420e68fa9">rr::RoadRunner::getUnscaledElasticityMatrix</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="abe90424067cd7aabfa30f7593fc99066"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledFloatingSpeciesElasticity" ref="abe90424067cd7aabfa30f7593fc99066" args="(const string &amp;reactionName, const string &amp;speciesName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#abe90424067cd7aabfa30f7593fc99066">rr::RoadRunner::getUnscaledFloatingSpeciesElasticity</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>speciesName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a909d55aa65c48e2b2b542dd2d0926aed"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledFluxControlCoefficient" ref="a909d55aa65c48e2b2b542dd2d0926aed" args="(const string &amp;fluxName, const string &amp;localReactionName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a909d55aa65c48e2b2b542dd2d0926aed">rr::RoadRunner::getUnscaledFluxControlCoefficient</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>fluxName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>localReactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a08b9a02d0b24994280266b81fcf3b722"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledFluxControlCoefficient" ref="a08b9a02d0b24994280266b81fcf3b722" args="(const string &amp;reactionName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a909d55aa65c48e2b2b542dd2d0926aed">rr::RoadRunner::getUnscaledFluxControlCoefficient</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8d89a2b5fa5b1eddd743c45b8416e92d"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledFluxControlCoefficientMatrix" ref="a8d89a2b5fa5b1eddd743c45b8416e92d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespace_l_i_b___l_a.html#a0b3302c81a5eaa7711b918fc8f4d37e5">LIB_LA::DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#a8d89a2b5fa5b1eddd743c45b8416e92d">rr::RoadRunner::getUnscaledFluxControlCoefficientMatrix</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="af87e9dd1cab982e35cadf36f11f6b853"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledFluxControlCoefficientNames" ref="af87e9dd1cab982e35cadf36f11f6b853" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerr.html#afc8fa6e3efe836a401628d353f4e4253">StringArrayList</a> <a class="el" href="classrr_1_1_road_runner.html#af87e9dd1cab982e35cadf36f11f6b853">rr::RoadRunner::getUnscaledFluxControlCoefficientNames</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac755535bf3a1aedfbe9714bcacccc2e3"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledParameterElasticity" ref="ac755535bf3a1aedfbe9714bcacccc2e3" args="(const string &amp;reactionName, const string &amp;parameterName)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#ac755535bf3a1aedfbe9714bcacccc2e3">rr::RoadRunner::getUnscaledParameterElasticity</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>reactionName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>parameterName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a5856b94d04fadfb190b407b126382503"></a><!-- doxytag: member="rr::RoadRunner::getUnscaledSpeciesElasticity" ref="a5856b94d04fadfb190b407b126382503" args="(int reactionId, int speciesIndex)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double <a class="el" href="classrr_1_1_road_runner.html#a5856b94d04fadfb190b407b126382503">rr::RoadRunner::getUnscaledSpeciesElasticity</a> </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>reactionId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>speciesIndex</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
@@ -1818,7 +2758,7 @@ Static Public Attributes</h2></td></tr>
           <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#a7a750c9292493d4e36af7eb25a810e2e">rr::RoadRunner::getURL</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [static]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -1843,15 +2783,15 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a484786318f8e262593128562d3fddd3d"></a><!-- doxytag: member="rr::RoadRunner::getVersion" ref="a484786318f8e262593128562d3fddd3d" args="()" -->
+<a class="anchor" id="a248d078936a41d47c8de44ac829389f4"></a><!-- doxytag: member="rr::RoadRunner::getVersion" ref="a248d078936a41d47c8de44ac829389f4" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static string <a class="el" href="classrr_1_1_road_runner.html#a484786318f8e262593128562d3fddd3d">rr::RoadRunner::getVersion</a> </td>
+          <td class="memname">string <a class="el" href="classrr_1_1_road_runner.html#a248d078936a41d47c8de44ac829389f4">rr::RoadRunner::getVersion</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [static]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -1891,6 +2831,22 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aecea2dbffc17d0322b00e18f126058b5"></a><!-- doxytag: member="rr::RoadRunner::isModelLoaded" ref="aecea2dbffc17d0322b00e18f126058b5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#aecea2dbffc17d0322b00e18f126058b5">rr::RoadRunner::isModelLoaded</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a6aeb6ad33818b4fecd2ffbbc2c0c2386"></a><!-- doxytag: member="rr::RoadRunner::loadSBML" ref="a6aeb6ad33818b4fecd2ffbbc2c0c2386" args="(const string &amp;sbml)" -->
 <div class="memitem">
 <div class="memproto">
@@ -1900,23 +2856,6 @@ Static Public Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>sbml</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a838305c8385d522dd0ae03f2e9294f15"></a><!-- doxytag: member="rr::RoadRunner::LoadSBMLFromFile" ref="a838305c8385d522dd0ae03f2e9294f15" args="(const string &amp;fileName)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#a838305c8385d522dd0ae03f2e9294f15">rr::RoadRunner::LoadSBMLFromFile</a> </td>
-          <td>(</td>
-          <td class="paramtype">const string &amp;&#160;</td>
-          <td class="paramname"><em>fileName</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -2052,16 +2991,16 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a73efb0b20a2ef892f4a90f0ea4191801"></a><!-- doxytag: member="rr::RoadRunner::ReMultiplyCompartments" ref="a73efb0b20a2ef892f4a90f0ea4191801" args="(const bool &amp;bValue)" -->
+<a class="anchor" id="abdec2b175ec1061a24f162cb066eea5d"></a><!-- doxytag: member="rr::RoadRunner::ReMultiplyCompartments" ref="abdec2b175ec1061a24f162cb066eea5d" args="(const bool &amp;bValue)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_road_runner.html#a73efb0b20a2ef892f4a90f0ea4191801">rr::RoadRunner::ReMultiplyCompartments</a> </td>
+          <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_road_runner.html#abdec2b175ec1061a24f162cb066eea5d">rr::RoadRunner::ReMultiplyCompartments</a> </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> &amp;&#160;</td>
           <td class="paramname"><em>bValue</em></td><td>)</td>
-          <td><code> [static]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
@@ -2214,6 +3153,23 @@ Static Public Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype">const vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>values</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a290e3b93a3e8ab1785b5d57066280c66"></a><!-- doxytag: member="rr::RoadRunner::setCompiler" ref="a290e3b93a3e8ab1785b5d57066280c66" args="(const string &amp;compiler)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#a290e3b93a3e8ab1785b5d57066280c66">rr::RoadRunner::setCompiler</a> </td>
+          <td>(</td>
+          <td class="paramtype">const string &amp;&#160;</td>
+          <td class="paramname"><em>compiler</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -2652,12 +3608,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aa4e4cd75c9bf7a05c21a4320ab854994"></a><!-- doxytag: member="rr::RoadRunner::simulateEx" ref="aa4e4cd75c9bf7a05c21a4320ab854994" args="(const double &amp;startTime, const double &amp;endTime, const int &amp;numberOfPoints)" -->
+<a class="anchor" id="acbbf9a0e3fcd1e95d98107d85e23c543"></a><!-- doxytag: member="rr::RoadRunner::simulateEx" ref="acbbf9a0e3fcd1e95d98107d85e23c543" args="(const double &amp;startTime, const double &amp;endTime, const int &amp;numberOfPoints)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_road_runner.html#aa4e4cd75c9bf7a05c21a4320ab854994">rr::RoadRunner::simulateEx</a> </td>
+          <td class="memname"><a class="el" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a> <a class="el" href="classrr_1_1_road_runner.html#acbbf9a0e3fcd1e95d98107d85e23c543">rr::RoadRunner::simulateEx</a> </td>
           <td>(</td>
           <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>startTime</em>, </td>
@@ -2860,6 +3816,38 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ad19a3a222b25a0751ae8e968eec5eb45"></a><!-- doxytag: member="rr::RoadRunner::unLoadModel" ref="ad19a3a222b25a0751ae8e968eec5eb45" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#ad19a3a222b25a0751ae8e968eec5eb45">rr::RoadRunner::unLoadModel</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9b8952e721ddb2c2eb8401ab11603de7"></a><!-- doxytag: member="rr::RoadRunner::unLoadModelDLL" ref="a9b8952e721ddb2c2eb8401ab11603de7" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#a9b8952e721ddb2c2eb8401ab11603de7">rr::RoadRunner::unLoadModelDLL</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="aaddb1cbf0e868449c67aba1a53d249e6"></a><!-- doxytag: member="rr::RoadRunner::UseSimulationSettings" ref="aaddb1cbf0e868449c67aba1a53d249e6" args="(SimulationSettings &amp;settings)" -->
 <div class="memitem">
 <div class="memproto">
@@ -2899,7 +3887,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#ae81fc4dff30eede9111e23be09e3544f">rr::RoadRunner::mComputeAndAssignConservationLaws</a> = <a class="el" href="stdbool_8h.html#a65e9886d74aaee76545e83dd09011727">false</a><code> [static]</code></td>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#ae81fc4dff30eede9111e23be09e3544f">rr::RoadRunner::mComputeAndAssignConservationLaws</a></td>
         </tr>
       </table>
 </div>
@@ -2912,7 +3900,7 @@ Static Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#a95b9ded2bc99a08f7ab3aeb24aa8dfcd">rr::RoadRunner::mConservedTotalChanged</a> = <a class="el" href="stdbool_8h.html#a65e9886d74aaee76545e83dd09011727">false</a><code> [static]</code></td>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#a95b9ded2bc99a08f7ab3aeb24aa8dfcd">rr::RoadRunner::mConservedTotalChanged</a></td>
         </tr>
       </table>
 </div>
@@ -2959,12 +3947,38 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a78f9abb3d8fe780b9139df99d27b4284"></a><!-- doxytag: member="rr::RoadRunner::mLS" ref="a78f9abb3d8fe780b9139df99d27b4284" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_l_i_b___s_t_r_u_c_t_u_r_a_l_1_1_lib_structural.html">LibStructural</a>* <a class="el" href="classrr_1_1_road_runner.html#a78f9abb3d8fe780b9139df99d27b4284">rr::RoadRunner::mLS</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="af0413ff8f1710757ac8a7bcbf494ea07"></a><!-- doxytag: member="rr::RoadRunner::mModel" ref="af0413ff8f1710757ac8a7bcbf494ea07" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a>* <a class="el" href="classrr_1_1_road_runner.html#af0413ff8f1710757ac8a7bcbf494ea07">rr::RoadRunner::mModel</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ad6c8b2636ce10400c705d506ea51b0cb"></a><!-- doxytag: member="rr::RoadRunner::mModelDLL" ref="ad6c8b2636ce10400c705d506ea51b0cb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">HINSTANCE <a class="el" href="classrr_1_1_road_runner.html#ad6c8b2636ce10400c705d506ea51b0cb">rr::RoadRunner::mModelDLL</a></td>
         </tr>
       </table>
 </div>
@@ -3011,32 +4025,6 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abc8acb69f5e6e19fc6a440538ca72f97"></a><!-- doxytag: member="rr::RoadRunner::modelLoaded" ref="abc8acb69f5e6e19fc6a440538ca72f97" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#abc8acb69f5e6e19fc6a440538ca72f97">rr::RoadRunner::modelLoaded</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a877915da43c1510241b25ddb42c377ed"></a><!-- doxytag: member="rr::RoadRunner::mStructAnalysis" ref="a877915da43c1510241b25ddb42c377ed" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classrr_1_1_struct_analysis.html">StructAnalysis</a> <a class="el" href="classrr_1_1_road_runner.html#a877915da43c1510241b25ddb42c377ed">rr::RoadRunner::mStructAnalysis</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a2b0aa3897107aa2fd07f3083c1718899"></a><!-- doxytag: member="rr::RoadRunner::mTimeEnd" ref="a2b0aa3897107aa2fd07f3083c1718899" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -3076,12 +4064,12 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a97c79f82342790410bd924f9266f94df"></a><!-- doxytag: member="rr::RoadRunner::UseKinsol" ref="a97c79f82342790410bd924f9266f94df" args="" -->
+<a class="anchor" id="a2b43e3cde1b5eb977e9f8d8c4350d4f3"></a><!-- doxytag: member="rr::RoadRunner::UseKinsol" ref="a2b43e3cde1b5eb977e9f8d8c4350d4f3" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classrr_1_1_road_runner.html#a97c79f82342790410bd924f9266f94df">rr::RoadRunner::UseKinsol</a></td>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_road_runner.html#a2b43e3cde1b5eb977e9f8d8c4350d4f3">rr::RoadRunner::UseKinsol</a></td>
         </tr>
       </table>
 </div>
@@ -3090,8 +4078,8 @@ Static Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/roadrunnerwork/source/trunk/src/<a class="el" href="rr_road_runner_8h_source.html">rrRoadRunner.h</a></li>
-<li>C:/roadrunnerwork/source/trunk/src/<a class="el" href="rr_road_runner_8cpp.html">rrRoadRunner.cpp</a></li>
+<li>R:/roadrunnerwork/trunk/source/<a class="el" href="rr_road_runner_8h_source.html">rrRoadRunner.h</a></li>
+<li>R:/roadrunnerwork/trunk/source/<a class="el" href="rr_road_runner_8cpp.html">rrRoadRunner.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- window showing the filter options -->
@@ -3099,7 +4087,7 @@ Static Public Attributes</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -3111,7 +4099,7 @@ Static Public Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:27:02 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:59 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>RoadRunner C++ API: C:/roadrunnerwork/source/trunk/src/rrModelFromC.h Source File</title>
+<title>RoadRunner C++ API: R:/roadrunnerwork/trunk/source/rrModelFromC.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -78,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">C:/roadrunnerwork/source/trunk/src/rrModelFromC.h</div>  </div>
+<div class="title">R:/roadrunnerwork/trunk/source/rrModelFromC.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="rr_model_from_c_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef rrModelFromCH</span>
@@ -136,19 +136,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00053"></a><a class="code" href="classrr_1_1_model_from_c.html#ad614c5604f81520b3938a2cdbc06fbca">00053</a>         <a class="code" href="classrr_1_1_cvode_interface.html">CvodeInterface</a>*                         <a class="code" href="classrr_1_1_model_from_c.html#ad614c5604f81520b3938a2cdbc06fbca">mCvodeInterface</a>;
 <a name="l00054"></a>00054         <span class="keywordtype">void</span>                                    AssignCVodeInterface(<a class="code" href="classrr_1_1_cvode_interface.html">CvodeInterface</a>* cvodeI);
 <a name="l00055"></a><a class="code" href="classrr_1_1_model_from_c.html#a9bde627156618cbecad887e742979f7e">00055</a>         <span class="keywordtype">double</span>                                  *<a class="code" href="classrr_1_1_model_from_c.html#a9bde627156618cbecad887e742979f7e">time</a>;
-<a name="l00056"></a><a class="code" href="classrr_1_1_model_from_c.html#a844413615ce490a5bd5bbfb1117633df">00056</a>         <span class="keywordtype">void</span>                                    <a class="code" href="classrr_1_1_model_from_c.html#a844413615ce490a5bd5bbfb1117633df">SetTime</a>(<span class="keywordtype">double</span> _time){*time = _time;}
-<a name="l00057"></a><a class="code" href="classrr_1_1_model_from_c.html#aadcef2ea581b1f2e1c6b9cbda9dd3766">00057</a>         <span class="keywordtype">double</span>                                  <a class="code" href="classrr_1_1_model_from_c.html#aadcef2ea581b1f2e1c6b9cbda9dd3766">GetTime</a>(){<span class="keywordflow">return</span> *time;}
+<a name="l00056"></a>00056         <span class="keywordtype">void</span>                                    SetTime(<span class="keywordtype">double</span> _time);
+<a name="l00057"></a>00057         <span class="keywordtype">double</span>                                  GetTime();
 <a name="l00058"></a>00058 
-<a name="l00059"></a><a class="code" href="classrr_1_1_model_from_c.html#ad1f9eee6787d69606b0f5f71422fd4bd">00059</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#ad1f9eee6787d69606b0f5f71422fd4bd">y</a>;             <span class="comment">//Corresponds to y in IModel</span>
-<a name="l00060"></a><a class="code" href="classrr_1_1_model_from_c.html#a9fc89630fa6d6d3ec5fde9b2adf0c32c">00060</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a9fc89630fa6d6d3ec5fde9b2adf0c32c">ySize</a>;             <span class="comment">//Corresponds to y in IModel</span>
+<a name="l00059"></a><a class="code" href="classrr_1_1_model_from_c.html#ad1f9eee6787d69606b0f5f71422fd4bd">00059</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#ad1f9eee6787d69606b0f5f71422fd4bd">y</a>;                  <span class="comment">//Corresponds to y in IModel</span>
+<a name="l00060"></a><a class="code" href="classrr_1_1_model_from_c.html#a9fc89630fa6d6d3ec5fde9b2adf0c32c">00060</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a9fc89630fa6d6d3ec5fde9b2adf0c32c">ySize</a>;              <span class="comment">//Corresponds to y in IModel</span>
 <a name="l00061"></a>00061 
 <a name="l00062"></a><a class="code" href="classrr_1_1_model_from_c.html#a4dfb04850bf3082d7fd2594014b35f7b">00062</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#a4dfb04850bf3082d7fd2594014b35f7b">init_y</a>;
 <a name="l00063"></a><a class="code" href="classrr_1_1_model_from_c.html#a9ca0347a14845f6f82e7593a535b3754">00063</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a9ca0347a14845f6f82e7593a535b3754">init_ySize</a>;
 <a name="l00064"></a>00064 
 <a name="l00065"></a><a class="code" href="classrr_1_1_model_from_c.html#af93fdd55ea4e7b0b2142b1518426beae">00065</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#af93fdd55ea4e7b0b2142b1518426beae">dydt</a>;               <span class="comment">//This is the &quot;dydt&quot; data in the DLL.</span>
-<a name="l00066"></a><a class="code" href="classrr_1_1_model_from_c.html#ae6410422013292448fe48092b7ea6e70">00066</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#ae6410422013292448fe48092b7ea6e70">dydtSize</a>;               <span class="comment">//This is the &quot;dydt&quot; data in the DLL.</span>
+<a name="l00066"></a><a class="code" href="classrr_1_1_model_from_c.html#ae6410422013292448fe48092b7ea6e70">00066</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#ae6410422013292448fe48092b7ea6e70">dydtSize</a>;           <span class="comment">//This is the &quot;dydt&quot; dataSize in the DLL.</span>
 <a name="l00067"></a>00067 
-<a name="l00068"></a><a class="code" href="classrr_1_1_model_from_c.html#ae6a0f8a14dc150cbbaae5366046424c9">00068</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#ae6a0f8a14dc150cbbaae5366046424c9">amounts</a>;        <span class="comment">//This is the &quot;amounts&quot; data in the DLL.</span>
+<a name="l00068"></a><a class="code" href="classrr_1_1_model_from_c.html#ae6a0f8a14dc150cbbaae5366046424c9">00068</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#ae6a0f8a14dc150cbbaae5366046424c9">amounts</a>;            <span class="comment">//This is the &quot;amounts&quot; data in the DLL.</span>
 <a name="l00069"></a><a class="code" href="classrr_1_1_model_from_c.html#a3b23642fc0223d76ede39883c3c95da6">00069</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a3b23642fc0223d76ede39883c3c95da6">amountsSize</a>;
 <a name="l00070"></a>00070 
 <a name="l00071"></a><a class="code" href="classrr_1_1_model_from_c.html#acd541bbfa54a0151d9d0fdd65a9c0a53">00071</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#acd541bbfa54a0151d9d0fdd65a9c0a53">bc</a>;
@@ -160,183 +160,183 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00077"></a><a class="code" href="classrr_1_1_model_from_c.html#a85c9e8bb5ec19bd8c19e576b64a2dfc3">00077</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#a85c9e8bb5ec19bd8c19e576b64a2dfc3">gp</a>;
 <a name="l00078"></a><a class="code" href="classrr_1_1_model_from_c.html#a46ca6002abca8942af52c7f803b9a544">00078</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a46ca6002abca8942af52c7f803b9a544">gpSize</a>;
 <a name="l00079"></a>00079 
-<a name="l00080"></a>00080 <span class="comment">//        vector&lt;double&gt;                        lp ;            //Local parameters</span>
+<a name="l00080"></a>00080 <span class="comment">//        vector&lt;double&gt;                        lp ;                //Local parameters</span>
 <a name="l00081"></a>00081 
-<a name="l00082"></a><a class="code" href="classrr_1_1_model_from_c.html#abe6bbf64f48787304f5a43c94825ecf4">00082</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#abe6bbf64f48787304f5a43c94825ecf4">c</a>;                <span class="comment">//Compartment volumes</span>
-<a name="l00083"></a><a class="code" href="classrr_1_1_model_from_c.html#a58ba50c645b3c777533f454221098f12">00083</a>         <span class="keywordtype">int</span>*                                                                    <a class="code" href="classrr_1_1_model_from_c.html#a58ba50c645b3c777533f454221098f12">cSize</a>;                <span class="comment">//Compartment volumes</span>
+<a name="l00082"></a><a class="code" href="classrr_1_1_model_from_c.html#abe6bbf64f48787304f5a43c94825ecf4">00082</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#abe6bbf64f48787304f5a43c94825ecf4">c</a>;                  <span class="comment">//Compartment volumes</span>
+<a name="l00083"></a><a class="code" href="classrr_1_1_model_from_c.html#a58ba50c645b3c777533f454221098f12">00083</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a58ba50c645b3c777533f454221098f12">cSize</a>;              <span class="comment">//Compartment volumes</span>
 <a name="l00084"></a>00084 
 <a name="l00085"></a><a class="code" href="classrr_1_1_model_from_c.html#a80a651c58989356a1a0a03e77537cf7d">00085</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#a80a651c58989356a1a0a03e77537cf7d">rates</a>;
 <a name="l00086"></a><a class="code" href="classrr_1_1_model_from_c.html#a26272c674443bc6edac9f82c117b139c">00086</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a26272c674443bc6edac9f82c117b139c">ratesSize</a>;
 <a name="l00087"></a>00087 
-<a name="l00088"></a><a class="code" href="classrr_1_1_model_from_c.html#ae82c24231ba320c4a8537224b0f0e0f7">00088</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#ae82c24231ba320c4a8537224b0f0e0f7">ct</a>;             <span class="comment">//Conservation totals</span>
-<a name="l00089"></a><a class="code" href="classrr_1_1_model_from_c.html#a38226538c62644f4ae31d7179885beb8">00089</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a38226538c62644f4ae31d7179885beb8">ctSize</a>;            <span class="comment">//Conservation totals</span>
+<a name="l00088"></a><a class="code" href="classrr_1_1_model_from_c.html#ae82c24231ba320c4a8537224b0f0e0f7">00088</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#ae82c24231ba320c4a8537224b0f0e0f7">ct</a>;                 <span class="comment">//Conservation totals</span>
+<a name="l00089"></a><a class="code" href="classrr_1_1_model_from_c.html#a38226538c62644f4ae31d7179885beb8">00089</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a38226538c62644f4ae31d7179885beb8">ctSize</a>;             <span class="comment">//Conservation totals</span>
 <a name="l00090"></a>00090 
-<a name="l00091"></a><a class="code" href="classrr_1_1_model_from_c.html#aecc1d4c413f533b1a4620bbd5b173a87">00091</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#aecc1d4c413f533b1a4620bbd5b173a87">rateRules</a>;        <span class="comment">//additional rateRules</span>
-<a name="l00092"></a><a class="code" href="classrr_1_1_model_from_c.html#a7483f6a5e5da29253df2ba3679ec40fa">00092</a>         <span class="keywordtype">int</span>                                     <a class="code" href="classrr_1_1_model_from_c.html#a7483f6a5e5da29253df2ba3679ec40fa">rateRulesSize</a>;    <span class="comment">//additional rateRules</span>
+<a name="l00091"></a><a class="code" href="classrr_1_1_model_from_c.html#aecc1d4c413f533b1a4620bbd5b173a87">00091</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#aecc1d4c413f533b1a4620bbd5b173a87">rateRules</a>;          <span class="comment">//additional rateRules</span>
+<a name="l00092"></a><a class="code" href="classrr_1_1_model_from_c.html#acf85d28a330e5cb1ce4bbb6b3f1fd754">00092</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#acf85d28a330e5cb1ce4bbb6b3f1fd754">rateRulesSize</a>;      <span class="comment">//additional rateRules</span>
 <a name="l00093"></a>00093 
 <a name="l00094"></a><a class="code" href="classrr_1_1_model_from_c.html#aff58bf80e0b8124a8e8331db56cc99e3">00094</a>         <span class="keywordtype">double</span>*                                 <a class="code" href="classrr_1_1_model_from_c.html#aff58bf80e0b8124a8e8331db56cc99e3">eventTests</a>;
 <a name="l00095"></a><a class="code" href="classrr_1_1_model_from_c.html#a01c5a4f0a25718977cd1103faec39294">00095</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a01c5a4f0a25718977cd1103faec39294">eventTestsSize</a>;
-<a name="l00096"></a>00096 <span class="comment">//        vector&lt;double&gt;                        eventPriorities;</span>
-<a name="l00097"></a><a class="code" href="classrr_1_1_model_from_c.html#a555c0d3c68e9c6f3f4362f627ad6237c">00097</a>         <a class="code" href="namespacerr.html#a91b5e79985a91c01aad34517123829aa">TEventDelayDelegate</a>*                    <a class="code" href="classrr_1_1_model_from_c.html#a555c0d3c68e9c6f3f4362f627ad6237c">eventDelays</a>;        <span class="comment">//</span>
-<a name="l00098"></a><a class="code" href="classrr_1_1_model_from_c.html#ad999f45a7127bf6c44edd38226bb2fbd">00098</a>         <span class="keywordtype">bool</span>*                                   <a class="code" href="classrr_1_1_model_from_c.html#ad999f45a7127bf6c44edd38226bb2fbd">eventType</a>;
-<a name="l00099"></a><a class="code" href="classrr_1_1_model_from_c.html#abeee84a9db67311b4945b1e8e13219b8">00099</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#abeee84a9db67311b4945b1e8e13219b8">eventTypeSize</a>;
-<a name="l00100"></a><a class="code" href="classrr_1_1_model_from_c.html#af3d1af7d13b77848783f59a61c8c6171">00100</a>         <span class="keywordtype">bool</span>*                                   <a class="code" href="classrr_1_1_model_from_c.html#af3d1af7d13b77848783f59a61c8c6171">eventPersistentType</a>;
-<a name="l00101"></a><a class="code" href="classrr_1_1_model_from_c.html#a44cb3977393da9e19d9ce7573d3564b4">00101</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a44cb3977393da9e19d9ce7573d3564b4">eventPersistentTypeSize</a>;
-<a name="l00102"></a><a class="code" href="classrr_1_1_model_from_c.html#a6beb4d9b2f3df043897b70cec130bf11">00102</a>         <span class="keywordtype">bool</span>*                                   <a class="code" href="classrr_1_1_model_from_c.html#a6beb4d9b2f3df043897b70cec130bf11">eventStatusArray</a>;
-<a name="l00103"></a><a class="code" href="classrr_1_1_model_from_c.html#ada6cd2299b499a7ac2794084a7acfecf">00103</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#ada6cd2299b499a7ac2794084a7acfecf">eventStatusArraySize</a>;
-<a name="l00104"></a><a class="code" href="classrr_1_1_model_from_c.html#a67c288aaaf29c50d1b25e218bbef2651">00104</a>         <span class="keywordtype">bool</span>*                                   <a class="code" href="classrr_1_1_model_from_c.html#a67c288aaaf29c50d1b25e218bbef2651">previousEventStatusArray</a>;
-<a name="l00105"></a><a class="code" href="classrr_1_1_model_from_c.html#ad462dba66ec09f79fb4d1a4c71d8cf20">00105</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#ad462dba66ec09f79fb4d1a4c71d8cf20">previousEventStatusArraySize</a>;
-<a name="l00106"></a>00106 
-<a name="l00107"></a><a class="code" href="classrr_1_1_model_from_c.html#a936c81bd9f65691150b38dca0c2d76e5">00107</a>         <a class="code" href="namespacerr.html#adf0d2294974ba6acbe83be4edd5627b4">TEventAssignmentDelegate</a>*               <a class="code" href="classrr_1_1_model_from_c.html#a936c81bd9f65691150b38dca0c2d76e5">eventAssignments</a>;
-<a name="l00108"></a><a class="code" href="classrr_1_1_model_from_c.html#a828ba90b0f8bfcaa51161914b0227b8a">00108</a>         <a class="code" href="namespacerr.html#a34d062aed6f306966826a6511a7006af">TComputeEventAssignmentDelegate</a>*        <a class="code" href="classrr_1_1_model_from_c.html#a828ba90b0f8bfcaa51161914b0227b8a">computeEventAssignments</a>;
-<a name="l00109"></a><a class="code" href="classrr_1_1_model_from_c.html#af03a86718dba70903719e65296985e18">00109</a>         <a class="code" href="namespacerr.html#ae6d5b6c2861722520b14c50271242490">TPerformEventAssignmentDelegate</a>*        <a class="code" href="classrr_1_1_model_from_c.html#af03a86718dba70903719e65296985e18">performEventAssignments</a>;
-<a name="l00110"></a>00110 
-<a name="l00111"></a>00111         <span class="comment">// CTOR</span>
-<a name="l00112"></a>00112                                                 <a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a>();
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114         <span class="comment">// Virtual functions --------------------------------------------------------</span>
-<a name="l00115"></a>00115         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumIndependentVariables();
-<a name="l00116"></a>00116         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumDependentVariables();
-<a name="l00117"></a>00117         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumTotalVariables();
-<a name="l00118"></a>00118         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumBoundarySpecies();
-<a name="l00119"></a>00119         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumGlobalParameters();
-<a name="l00120"></a>00120         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumCompartments();
-<a name="l00121"></a>00121         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumReactions();
-<a name="l00122"></a>00122         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumRules();
-<a name="l00123"></a>00123         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumEvents();
-<a name="l00124"></a>00124 <span class="comment">//        virtual void                          initializeInitialConditions() = 0;</span>
-<a name="l00125"></a>00125 <span class="comment">//        virtual void                          setInitialConditions();</span>
-<a name="l00126"></a>00126 <span class="comment">//        virtual void                          setParameterValues();</span>
-<a name="l00127"></a>00127 <span class="comment">//        virtual void                          setBoundaryConditions();</span>
-<a name="l00128"></a>00128 <span class="comment">//        virtual void                          InitializeRates();</span>
-<a name="l00129"></a>00129 <span class="comment">//        virtual void                          AssignRates();</span>
-<a name="l00130"></a>00130 <span class="comment">//        virtual void                          AssignRates(vector&lt;double&gt;&amp; rates);</span>
-<a name="l00131"></a>00131 <span class="comment">//        virtual void                          computeConservedTotals();</span>
-<a name="l00132"></a>00132         <span class="keyword">virtual</span> <span class="keywordtype">void</span>                            computeEventPriorites();
-<a name="l00133"></a>00133         <span class="keyword">virtual</span> <span class="keywordtype">void</span>                            setConcentration(<span class="keywordtype">int</span> index, <span class="keywordtype">double</span> value);
-<a name="l00134"></a>00134 <span class="comment">//        virtual void                          convertToAmounts();</span>
-<a name="l00135"></a>00135 <span class="comment">//        virtual void                          convertToConcentrations() = 0;</span>
-<a name="l00136"></a>00136 <span class="comment">//        virtual void                          updateDependentSpeciesValues(vector&lt;double&gt;&amp; _y);</span>
-<a name="l00137"></a>00137 <span class="comment">//        virtual void                          computeRules(vector&lt;double&gt;&amp; _y);</span>
-<a name="l00138"></a>00138         <span class="keyword">virtual</span> <span class="keywordtype">void</span>                            computeReactionRates(<span class="keywordtype">double</span> time, <span class="keywordtype">double</span>* y);
-<a name="l00139"></a>00139 <span class="comment">//        virtual void                          computeAllRatesOfChange();</span>
-<a name="l00140"></a>00140 <span class="comment">//        virtual void                          evalModel(double time, vector&lt;double&gt;&amp; y);</span>
-<a name="l00141"></a>00141 <span class="comment">//        virtual void                          evalEvents(double time, vector&lt;double&gt;&amp; y) = 0;</span>
-<a name="l00142"></a>00142 <span class="comment">//        virtual void                          resetEvents();</span>
-<a name="l00143"></a>00143 <span class="comment">//        virtual void                          evalInitialAssignments();</span>
-<a name="l00144"></a>00144 <span class="comment">//        virtual void                          testConstraints();</span>
-<a name="l00145"></a>00145 <span class="comment">//        virtual void                          InitializeRateRuleSymbols();</span>
-<a name="l00146"></a>00146 <span class="comment">//</span>
-<a name="l00147"></a>00147 <span class="comment">//        //Pure virtuals - force implementation...</span>
-<a name="l00148"></a>00148 <span class="comment">//        virtual void                          setCompartmentVolumes() = 0;</span>
-<a name="l00149"></a>00149 <span class="comment">//        virtual vector&lt;double&gt;                GetCurrentValues() = 0 ;</span>
-<a name="l00150"></a>00150 <span class="comment">//        virtual double                        getConcentration(int index) = 0;</span>
-<a name="l00151"></a>00151 <span class="comment">//        virtual int                           getNumLocalParameters(int reactionId) = 0;         // Level 2 support</span>
-<a name="l00152"></a>00152 <span class="comment">//</span>
-<a name="l00153"></a>00153 <span class="comment">//        virtual vector&lt;double&gt;                GetdYdT() = 0;</span>
-<a name="l00154"></a>00154 
-<a name="l00155"></a>00155 
-<a name="l00156"></a>00156     <span class="keyword">public</span>:
-<a name="l00157"></a><a class="code" href="classrr_1_1_model_from_c.html#a9d7566627c05459636cf90c245b51c28">00157</a>         <a class="code" href="classrr_1_1_c_generator.html">CGenerator</a>*                             <a class="code" href="classrr_1_1_model_from_c.html#a9d7566627c05459636cf90c245b51c28">mCodeGenerator</a>;    <span class="comment">//There are some arrays returned that we don&#39;t know the size of..!</span>
-<a name="l00158"></a><a class="code" href="classrr_1_1_model_from_c.html#ad800df634657ee3a2d1fbdb6c8322d3e">00158</a>         <span class="keywordtype">bool</span>                                    <a class="code" href="classrr_1_1_model_from_c.html#ad800df634657ee3a2d1fbdb6c8322d3e">mIsInitialized</a>;    <span class="comment">//If all functions are found properly in the dll, this one is true</span>
-<a name="l00159"></a><a class="code" href="classrr_1_1_model_from_c.html#ab962fd7cafe667ec602f9668bad7a227">00159</a>         HINSTANCE                               <a class="code" href="classrr_1_1_model_from_c.html#ab962fd7cafe667ec602f9668bad7a227">mDLLHandle</a>;
-<a name="l00160"></a>00160 
-<a name="l00161"></a>00161         <span class="comment">//Function pointers...</span>
-<a name="l00162"></a><a class="code" href="classrr_1_1_model_from_c.html#a14496238588f614710eb89ac919c7062">00162</a>         <a class="code" href="namespacerr.html#aa29e9ac2321ef6c57c157f8d5b3a9d9d">c_int</a>                                   <a class="code" href="classrr_1_1_model_from_c.html#a14496238588f614710eb89ac919c7062">cInitModel</a>;
-<a name="l00163"></a><a class="code" href="classrr_1_1_model_from_c.html#a87f2f6b6d8aa34ee68573896d52ff593">00163</a>         <a class="code" href="namespacerr.html#ac87acad06770040153870647289949f5">c_charStar</a>                              <a class="code" href="classrr_1_1_model_from_c.html#a87f2f6b6d8aa34ee68573896d52ff593">cGetModelName</a>;
-<a name="l00164"></a><a class="code" href="classrr_1_1_model_from_c.html#a513b26ff3220cb2fe2d02f40d2cc5b05">00164</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a513b26ff3220cb2fe2d02f40d2cc5b05">cinitializeInitialConditions</a>;
-<a name="l00165"></a><a class="code" href="classrr_1_1_model_from_c.html#a54236ec9adc3ab76e05d4ba11b362001">00165</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a54236ec9adc3ab76e05d4ba11b362001">csetParameterValues</a>;
-<a name="l00166"></a><a class="code" href="classrr_1_1_model_from_c.html#a8ee4fdaacf8ec96bd457ce01823a1144">00166</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a8ee4fdaacf8ec96bd457ce01823a1144">csetCompartmentVolumes</a>;
-<a name="l00167"></a><a class="code" href="classrr_1_1_model_from_c.html#a9f0b9a7d734b432e379852996b1f76e9">00167</a>         <a class="code" href="namespacerr.html#a769f2e2af676714987677469871478ce">c_int_int</a>                               <a class="code" href="classrr_1_1_model_from_c.html#a9f0b9a7d734b432e379852996b1f76e9">cgetNumLocalParameters</a>;
-<a name="l00168"></a><a class="code" href="classrr_1_1_model_from_c.html#a932475e6d9d5c4a86b534eb018ec6b91">00168</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a932475e6d9d5c4a86b534eb018ec6b91">csetBoundaryConditions</a>;
-<a name="l00169"></a><a class="code" href="classrr_1_1_model_from_c.html#a0303cd7ffac755b56e9799a3b5c59378">00169</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a0303cd7ffac755b56e9799a3b5c59378">csetInitialConditions</a>;
-<a name="l00170"></a><a class="code" href="classrr_1_1_model_from_c.html#a56a0916333fd2f288698908efe21306e">00170</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a56a0916333fd2f288698908efe21306e">cevalInitialAssignments</a>;
-<a name="l00171"></a><a class="code" href="classrr_1_1_model_from_c.html#ab7e82542d76506dd0fc2bbbdf26d1551">00171</a>         <a class="code" href="namespacerr.html#ac51a4b08726f1d5793f579ef9d49be2c">c_void_doubleStar</a>                       <a class="code" href="classrr_1_1_model_from_c.html#ab7e82542d76506dd0fc2bbbdf26d1551">cupdateDependentSpeciesValues</a>;
-<a name="l00172"></a><a class="code" href="classrr_1_1_model_from_c.html#a3dbf205b057d6b94da22ca1df9c6843b">00172</a>         <a class="code" href="namespacerr.html#ac51a4b08726f1d5793f579ef9d49be2c">c_void_doubleStar</a>                       <a class="code" href="classrr_1_1_model_from_c.html#a3dbf205b057d6b94da22ca1df9c6843b">ccomputeRules</a>;
-<a name="l00173"></a><a class="code" href="classrr_1_1_model_from_c.html#acee1a64fa284417a2242eb6a19099c63">00173</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#acee1a64fa284417a2242eb6a19099c63">cconvertToAmounts</a>;
-<a name="l00174"></a><a class="code" href="classrr_1_1_model_from_c.html#aa9cbab0af42dfd2dd673c4317acaf658">00174</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#aa9cbab0af42dfd2dd673c4317acaf658">ccomputeConservedTotals</a>;
-<a name="l00175"></a><a class="code" href="classrr_1_1_model_from_c.html#a2de0ad9699c33c1da87b8ea726014c63">00175</a>         <a class="code" href="namespacerr.html#ad104ee504e0d7dfd313ea091d16c59c2">c_double_int</a>                            <a class="code" href="classrr_1_1_model_from_c.html#a2de0ad9699c33c1da87b8ea726014c63">cgetConcentration</a>;
-<a name="l00176"></a><a class="code" href="classrr_1_1_model_from_c.html#aa6de909ca5b1d616a7de2d5a41b543aa">00176</a>         <a class="code" href="namespacerr.html#a734c85f905e3960c08920beee119b89d">c_doubleStar</a>                            <a class="code" href="classrr_1_1_model_from_c.html#aa6de909ca5b1d616a7de2d5a41b543aa">cGetCurrentValues</a>;
-<a name="l00177"></a><a class="code" href="classrr_1_1_model_from_c.html#a4c16831616f950f4a1cd7e79062705a9">00177</a>         <a class="code" href="namespacerr.html#a323fa6501ec88d88768ffda474a646df">c_void_double_doubleStar</a>                <a class="code" href="classrr_1_1_model_from_c.html#a4c16831616f950f4a1cd7e79062705a9">cevalModel</a>;
-<a name="l00178"></a><a class="code" href="classrr_1_1_model_from_c.html#ab6a2c712db7f4b0ddd57350e149c1f93">00178</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#ab6a2c712db7f4b0ddd57350e149c1f93">cconvertToConcentrations</a>;
-<a name="l00179"></a><a class="code" href="classrr_1_1_model_from_c.html#ade9c2e0f249520a1d06999539c70c156">00179</a>         <a class="code" href="namespacerr.html#a323fa6501ec88d88768ffda474a646df">c_void_double_doubleStar</a>                <a class="code" href="classrr_1_1_model_from_c.html#ade9c2e0f249520a1d06999539c70c156">cevalEvents</a>;
-<a name="l00180"></a><a class="code" href="classrr_1_1_model_from_c.html#a3e5892018d0a25adb96547e6a3e25791">00180</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a3e5892018d0a25adb96547e6a3e25791">ccomputeAllRatesOfChange</a>;
-<a name="l00181"></a><a class="code" href="classrr_1_1_model_from_c.html#ac7ff0921a6cec0af3b92a403acc10f83">00181</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#ac7ff0921a6cec0af3b92a403acc10f83">cAssignRates_a</a>;
-<a name="l00182"></a><a class="code" href="classrr_1_1_model_from_c.html#adbe9f9f73d802700bf39655237e0aaa6">00182</a>         <a class="code" href="namespacerr.html#ac51a4b08726f1d5793f579ef9d49be2c">c_void_doubleStar</a>                       <a class="code" href="classrr_1_1_model_from_c.html#adbe9f9f73d802700bf39655237e0aaa6">cAssignRates_b</a>;
-<a name="l00183"></a><a class="code" href="classrr_1_1_model_from_c.html#a82f30b06b5457fe4d0b482b3db0ca142">00183</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a82f30b06b5457fe4d0b482b3db0ca142">ctestConstraints</a>;
-<a name="l00184"></a><a class="code" href="classrr_1_1_model_from_c.html#a92980120cd83244cb47b76772765e321">00184</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a92980120cd83244cb47b76772765e321">cresetEvents</a>;
-<a name="l00185"></a><a class="code" href="classrr_1_1_model_from_c.html#a47340b5c3df27f8e6fc2996df5a261a8">00185</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a47340b5c3df27f8e6fc2996df5a261a8">cInitializeRates</a>;
-<a name="l00186"></a><a class="code" href="classrr_1_1_model_from_c.html#a61f715d3269f7011fe2efdd6662e0e24">00186</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a61f715d3269f7011fe2efdd6662e0e24">cInitializeRateRuleSymbols</a>;
-<a name="l00187"></a><a class="code" href="classrr_1_1_model_from_c.html#a759c8e408d2c0df97e208d2e3a8015f0">00187</a>         <a class="code" href="namespacerr.html#a6f76c44b1ccf03862cd4586eb8480411">c_void_int_double</a>                       <a class="code" href="classrr_1_1_model_from_c.html#a759c8e408d2c0df97e208d2e3a8015f0">csetConcentration</a>;
-<a name="l00188"></a>00188 
-<a name="l00189"></a>00189         <span class="comment">//Utility</span>
-<a name="l00190"></a>00190         FARPROC                                  GetFunctionPtr(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keyword">function</span>);
-<a name="l00191"></a>00191 
-<a name="l00192"></a>00192     <span class="keyword">public</span>:
-<a name="l00193"></a>00193                                                 <a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a>(<a class="code" href="classrr_1_1_c_generator.html">CGenerator</a>* generator, HINSTANCE dllHandle = NULL);
-<a name="l00194"></a>00194                                                ~<a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a>();
-<a name="l00195"></a>00195         <span class="comment">//Non inherited</span>
-<a name="l00196"></a>00196         <span class="keywordtype">bool</span>                                    SetupDLLData();
-<a name="l00197"></a>00197         <span class="keywordtype">bool</span>                                    SetupDLLFunctions();
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199         <span class="comment">//The following functions C equivalent may need to be in the DLL</span>
-<a name="l00200"></a>00200         <span class="comment">//Inherited functions</span>
-<a name="l00201"></a>00201         <span class="keywordtype">void</span>                                    setCompartmentVolumes();
-<a name="l00202"></a>00202         <span class="keywordtype">int</span>                                     getNumLocalParameters(<span class="keywordtype">int</span> reactionId);
-<a name="l00203"></a>00203            <span class="keywordtype">void</span>                                 computeRules(vector&lt;double&gt;&amp; _y);
-<a name="l00204"></a>00204            <span class="keywordtype">void</span>                                 computeRules(<span class="keywordtype">double</span>* ay, <span class="keywordtype">int</span> size);
-<a name="l00205"></a>00205 
-<a name="l00206"></a>00206         <span class="keywordtype">void</span>                                    initializeInitialConditions();
-<a name="l00207"></a>00207 
-<a name="l00208"></a>00208         <span class="keywordtype">void</span>                                    setParameterValues();
-<a name="l00209"></a>00209         <span class="keywordtype">void</span>                                    setBoundaryConditions();
-<a name="l00210"></a>00210         <span class="keywordtype">void</span>                                    setInitialConditions();
-<a name="l00211"></a>00211         <span class="keywordtype">void</span>                                    evalInitialAssignments();
+<a name="l00096"></a>00096 
+<a name="l00097"></a><a class="code" href="classrr_1_1_model_from_c.html#a3fc9be900150ea3e2e519bf471b7a18b">00097</a>         <span class="keywordtype">double</span>*                                         <a class="code" href="classrr_1_1_model_from_c.html#a3fc9be900150ea3e2e519bf471b7a18b">eventPriorities</a>;                <span class="comment">//Array of event priorities. Has size numEvents</span>
+<a name="l00098"></a>00098 
+<a name="l00099"></a><a class="code" href="classrr_1_1_model_from_c.html#a555c0d3c68e9c6f3f4362f627ad6237c">00099</a>         <a class="code" href="namespacerr.html#a91b5e79985a91c01aad34517123829aa">TEventDelayDelegate</a>*                    <a class="code" href="classrr_1_1_model_from_c.html#a555c0d3c68e9c6f3f4362f627ad6237c">eventDelays</a>;
+<a name="l00100"></a><a class="code" href="classrr_1_1_model_from_c.html#ad999f45a7127bf6c44edd38226bb2fbd">00100</a>         <span class="keywordtype">bool</span>*                                   <a class="code" href="classrr_1_1_model_from_c.html#ad999f45a7127bf6c44edd38226bb2fbd">eventType</a>;
+<a name="l00101"></a><a class="code" href="classrr_1_1_model_from_c.html#abeee84a9db67311b4945b1e8e13219b8">00101</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#abeee84a9db67311b4945b1e8e13219b8">eventTypeSize</a>;
+<a name="l00102"></a><a class="code" href="classrr_1_1_model_from_c.html#af3d1af7d13b77848783f59a61c8c6171">00102</a>         <span class="keywordtype">bool</span>*                                   <a class="code" href="classrr_1_1_model_from_c.html#af3d1af7d13b77848783f59a61c8c6171">eventPersistentType</a>;
+<a name="l00103"></a><a class="code" href="classrr_1_1_model_from_c.html#a44cb3977393da9e19d9ce7573d3564b4">00103</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#a44cb3977393da9e19d9ce7573d3564b4">eventPersistentTypeSize</a>;
+<a name="l00104"></a><a class="code" href="classrr_1_1_model_from_c.html#a6beb4d9b2f3df043897b70cec130bf11">00104</a>         <span class="keywordtype">bool</span>*                                   <a class="code" href="classrr_1_1_model_from_c.html#a6beb4d9b2f3df043897b70cec130bf11">eventStatusArray</a>;
+<a name="l00105"></a><a class="code" href="classrr_1_1_model_from_c.html#ada6cd2299b499a7ac2794084a7acfecf">00105</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#ada6cd2299b499a7ac2794084a7acfecf">eventStatusArraySize</a>;
+<a name="l00106"></a><a class="code" href="classrr_1_1_model_from_c.html#a67c288aaaf29c50d1b25e218bbef2651">00106</a>         <span class="keywordtype">bool</span>*                                   <a class="code" href="classrr_1_1_model_from_c.html#a67c288aaaf29c50d1b25e218bbef2651">previousEventStatusArray</a>;
+<a name="l00107"></a><a class="code" href="classrr_1_1_model_from_c.html#ad462dba66ec09f79fb4d1a4c71d8cf20">00107</a>         <span class="keywordtype">int</span>*                                    <a class="code" href="classrr_1_1_model_from_c.html#ad462dba66ec09f79fb4d1a4c71d8cf20">previousEventStatusArraySize</a>;
+<a name="l00108"></a>00108 
+<a name="l00109"></a><a class="code" href="classrr_1_1_model_from_c.html#a936c81bd9f65691150b38dca0c2d76e5">00109</a>         <a class="code" href="namespacerr.html#adf0d2294974ba6acbe83be4edd5627b4">TEventAssignmentDelegate</a>*               <a class="code" href="classrr_1_1_model_from_c.html#a936c81bd9f65691150b38dca0c2d76e5">eventAssignments</a>;
+<a name="l00110"></a><a class="code" href="classrr_1_1_model_from_c.html#a828ba90b0f8bfcaa51161914b0227b8a">00110</a>         <a class="code" href="namespacerr.html#a34d062aed6f306966826a6511a7006af">TComputeEventAssignmentDelegate</a>*        <a class="code" href="classrr_1_1_model_from_c.html#a828ba90b0f8bfcaa51161914b0227b8a">computeEventAssignments</a>;
+<a name="l00111"></a><a class="code" href="classrr_1_1_model_from_c.html#af03a86718dba70903719e65296985e18">00111</a>         <a class="code" href="namespacerr.html#ae6d5b6c2861722520b14c50271242490">TPerformEventAssignmentDelegate</a>*        <a class="code" href="classrr_1_1_model_from_c.html#af03a86718dba70903719e65296985e18">performEventAssignments</a>;
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113         <span class="comment">// CTOR</span>
+<a name="l00114"></a>00114                                                 <a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a>();
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116         <span class="comment">// Virtual functions --------------------------------------------------------</span>
+<a name="l00117"></a>00117         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumIndependentVariables();
+<a name="l00118"></a>00118         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumDependentVariables();
+<a name="l00119"></a>00119         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumTotalVariables();
+<a name="l00120"></a>00120         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumBoundarySpecies();
+<a name="l00121"></a>00121         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumGlobalParameters();
+<a name="l00122"></a>00122         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumCompartments();
+<a name="l00123"></a>00123         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumReactions();
+<a name="l00124"></a>00124         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumRules();
+<a name="l00125"></a>00125         <span class="keyword">virtual</span> <span class="keywordtype">int</span>                             getNumEvents();
+<a name="l00126"></a>00126         <span class="keyword">virtual</span> <span class="keywordtype">void</span>                            computeEventPriorites();
+<a name="l00127"></a>00127         <span class="keyword">virtual</span> <span class="keywordtype">void</span>                            setConcentration(<span class="keywordtype">int</span> index, <span class="keywordtype">double</span> value);
+<a name="l00128"></a>00128         <span class="keyword">virtual</span> <span class="keywordtype">void</span>                            computeReactionRates(<span class="keywordtype">double</span> time, <span class="keywordtype">double</span>* y);
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130     <span class="keyword">public</span>:
+<a name="l00131"></a><a class="code" href="classrr_1_1_model_from_c.html#a9d7566627c05459636cf90c245b51c28">00131</a>         <a class="code" href="classrr_1_1_c_generator.html">CGenerator</a>*                             <a class="code" href="classrr_1_1_model_from_c.html#a9d7566627c05459636cf90c245b51c28">mCodeGenerator</a>;    <span class="comment">//There are some arrays returned that we don&#39;t know the size of..!</span>
+<a name="l00132"></a><a class="code" href="classrr_1_1_model_from_c.html#ad800df634657ee3a2d1fbdb6c8322d3e">00132</a>         <span class="keywordtype">bool</span>                                    <a class="code" href="classrr_1_1_model_from_c.html#ad800df634657ee3a2d1fbdb6c8322d3e">mIsInitialized</a>;    <span class="comment">//If all functions are found properly in the dll, this one is true</span>
+<a name="l00133"></a><a class="code" href="classrr_1_1_model_from_c.html#ab962fd7cafe667ec602f9668bad7a227">00133</a>         HINSTANCE                               <a class="code" href="classrr_1_1_model_from_c.html#ab962fd7cafe667ec602f9668bad7a227">mDLLHandle</a>;
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135         <span class="comment">//Function pointers...</span>
+<a name="l00136"></a><a class="code" href="classrr_1_1_model_from_c.html#a14496238588f614710eb89ac919c7062">00136</a>         <a class="code" href="namespacerr.html#aa29e9ac2321ef6c57c157f8d5b3a9d9d">c_int</a>                                   <a class="code" href="classrr_1_1_model_from_c.html#a14496238588f614710eb89ac919c7062">cInitModel</a>;
+<a name="l00137"></a><a class="code" href="classrr_1_1_model_from_c.html#a87f2f6b6d8aa34ee68573896d52ff593">00137</a>         <a class="code" href="namespacerr.html#ac87acad06770040153870647289949f5">c_charStar</a>                              <a class="code" href="classrr_1_1_model_from_c.html#a87f2f6b6d8aa34ee68573896d52ff593">cGetModelName</a>;
+<a name="l00138"></a><a class="code" href="classrr_1_1_model_from_c.html#a513b26ff3220cb2fe2d02f40d2cc5b05">00138</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a513b26ff3220cb2fe2d02f40d2cc5b05">cinitializeInitialConditions</a>;
+<a name="l00139"></a><a class="code" href="classrr_1_1_model_from_c.html#a54236ec9adc3ab76e05d4ba11b362001">00139</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a54236ec9adc3ab76e05d4ba11b362001">csetParameterValues</a>;
+<a name="l00140"></a><a class="code" href="classrr_1_1_model_from_c.html#a8ee4fdaacf8ec96bd457ce01823a1144">00140</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a8ee4fdaacf8ec96bd457ce01823a1144">csetCompartmentVolumes</a>;
+<a name="l00141"></a><a class="code" href="classrr_1_1_model_from_c.html#a9f0b9a7d734b432e379852996b1f76e9">00141</a>         <a class="code" href="namespacerr.html#a769f2e2af676714987677469871478ce">c_int_int</a>                               <a class="code" href="classrr_1_1_model_from_c.html#a9f0b9a7d734b432e379852996b1f76e9">cgetNumLocalParameters</a>;
+<a name="l00142"></a><a class="code" href="classrr_1_1_model_from_c.html#a932475e6d9d5c4a86b534eb018ec6b91">00142</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a932475e6d9d5c4a86b534eb018ec6b91">csetBoundaryConditions</a>;
+<a name="l00143"></a><a class="code" href="classrr_1_1_model_from_c.html#a0303cd7ffac755b56e9799a3b5c59378">00143</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a0303cd7ffac755b56e9799a3b5c59378">csetInitialConditions</a>;
+<a name="l00144"></a><a class="code" href="classrr_1_1_model_from_c.html#a56a0916333fd2f288698908efe21306e">00144</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a56a0916333fd2f288698908efe21306e">cevalInitialAssignments</a>;
+<a name="l00145"></a><a class="code" href="classrr_1_1_model_from_c.html#ab7e82542d76506dd0fc2bbbdf26d1551">00145</a>         <a class="code" href="namespacerr.html#ac51a4b08726f1d5793f579ef9d49be2c">c_void_doubleStar</a>                       <a class="code" href="classrr_1_1_model_from_c.html#ab7e82542d76506dd0fc2bbbdf26d1551">cupdateDependentSpeciesValues</a>;
+<a name="l00146"></a><a class="code" href="classrr_1_1_model_from_c.html#a3dbf205b057d6b94da22ca1df9c6843b">00146</a>         <a class="code" href="namespacerr.html#ac51a4b08726f1d5793f579ef9d49be2c">c_void_doubleStar</a>                       <a class="code" href="classrr_1_1_model_from_c.html#a3dbf205b057d6b94da22ca1df9c6843b">ccomputeRules</a>;
+<a name="l00147"></a><a class="code" href="classrr_1_1_model_from_c.html#acee1a64fa284417a2242eb6a19099c63">00147</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#acee1a64fa284417a2242eb6a19099c63">cconvertToAmounts</a>;
+<a name="l00148"></a><a class="code" href="classrr_1_1_model_from_c.html#aa9cbab0af42dfd2dd673c4317acaf658">00148</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#aa9cbab0af42dfd2dd673c4317acaf658">ccomputeConservedTotals</a>;
+<a name="l00149"></a><a class="code" href="classrr_1_1_model_from_c.html#a2de0ad9699c33c1da87b8ea726014c63">00149</a>         <a class="code" href="namespacerr.html#ad104ee504e0d7dfd313ea091d16c59c2">c_double_int</a>                            <a class="code" href="classrr_1_1_model_from_c.html#a2de0ad9699c33c1da87b8ea726014c63">cgetConcentration</a>;
+<a name="l00150"></a><a class="code" href="classrr_1_1_model_from_c.html#aa6de909ca5b1d616a7de2d5a41b543aa">00150</a>         <a class="code" href="namespacerr.html#a734c85f905e3960c08920beee119b89d">c_doubleStar</a>                            <a class="code" href="classrr_1_1_model_from_c.html#aa6de909ca5b1d616a7de2d5a41b543aa">cGetCurrentValues</a>;
+<a name="l00151"></a><a class="code" href="classrr_1_1_model_from_c.html#a4c16831616f950f4a1cd7e79062705a9">00151</a>         <a class="code" href="namespacerr.html#a323fa6501ec88d88768ffda474a646df">c_void_double_doubleStar</a>                <a class="code" href="classrr_1_1_model_from_c.html#a4c16831616f950f4a1cd7e79062705a9">cevalModel</a>;
+<a name="l00152"></a><a class="code" href="classrr_1_1_model_from_c.html#ab6a2c712db7f4b0ddd57350e149c1f93">00152</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#ab6a2c712db7f4b0ddd57350e149c1f93">cconvertToConcentrations</a>;
+<a name="l00153"></a><a class="code" href="classrr_1_1_model_from_c.html#ade9c2e0f249520a1d06999539c70c156">00153</a>         <a class="code" href="namespacerr.html#a323fa6501ec88d88768ffda474a646df">c_void_double_doubleStar</a>                <a class="code" href="classrr_1_1_model_from_c.html#ade9c2e0f249520a1d06999539c70c156">cevalEvents</a>;
+<a name="l00154"></a><a class="code" href="classrr_1_1_model_from_c.html#a3e5892018d0a25adb96547e6a3e25791">00154</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a3e5892018d0a25adb96547e6a3e25791">ccomputeAllRatesOfChange</a>;
+<a name="l00155"></a><a class="code" href="classrr_1_1_model_from_c.html#ac7ff0921a6cec0af3b92a403acc10f83">00155</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#ac7ff0921a6cec0af3b92a403acc10f83">cAssignRates_a</a>;
+<a name="l00156"></a><a class="code" href="classrr_1_1_model_from_c.html#adbe9f9f73d802700bf39655237e0aaa6">00156</a>         <a class="code" href="namespacerr.html#ac51a4b08726f1d5793f579ef9d49be2c">c_void_doubleStar</a>                       <a class="code" href="classrr_1_1_model_from_c.html#adbe9f9f73d802700bf39655237e0aaa6">cAssignRates_b</a>;
+<a name="l00157"></a><a class="code" href="classrr_1_1_model_from_c.html#a82f30b06b5457fe4d0b482b3db0ca142">00157</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a82f30b06b5457fe4d0b482b3db0ca142">ctestConstraints</a>;
+<a name="l00158"></a><a class="code" href="classrr_1_1_model_from_c.html#a92980120cd83244cb47b76772765e321">00158</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a92980120cd83244cb47b76772765e321">cresetEvents</a>;
+<a name="l00159"></a><a class="code" href="classrr_1_1_model_from_c.html#a47340b5c3df27f8e6fc2996df5a261a8">00159</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a47340b5c3df27f8e6fc2996df5a261a8">cInitializeRates</a>;
+<a name="l00160"></a><a class="code" href="classrr_1_1_model_from_c.html#a61f715d3269f7011fe2efdd6662e0e24">00160</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#a61f715d3269f7011fe2efdd6662e0e24">cInitializeRateRuleSymbols</a>;
+<a name="l00161"></a><a class="code" href="classrr_1_1_model_from_c.html#a759c8e408d2c0df97e208d2e3a8015f0">00161</a>         <a class="code" href="namespacerr.html#a6f76c44b1ccf03862cd4586eb8480411">c_void_int_double</a>                       <a class="code" href="classrr_1_1_model_from_c.html#a759c8e408d2c0df97e208d2e3a8015f0">csetConcentration</a>;
+<a name="l00162"></a><a class="code" href="classrr_1_1_model_from_c.html#a3c9e74a0457bc524c4f708f5674fef87">00162</a>                 <a class="code" href="namespacerr.html#a323fa6501ec88d88768ffda474a646df">c_void_double_doubleStar</a>                <a class="code" href="classrr_1_1_model_from_c.html#a3c9e74a0457bc524c4f708f5674fef87">cComputeReactionRates</a>;
+<a name="l00163"></a><a class="code" href="classrr_1_1_model_from_c.html#af48b0d488d3a547b037869875fd43381">00163</a>         c_void                                  <a class="code" href="classrr_1_1_model_from_c.html#af48b0d488d3a547b037869875fd43381">ccomputeEventPriorities</a>;
+<a name="l00164"></a>00164 
+<a name="l00165"></a>00165         <span class="comment">//Utility</span>
+<a name="l00166"></a>00166         FARPROC                                 <a class="code" href="namespacerr.html#a65754d9b302735e31d5e5bcf9a72e117">GetFunctionPtr</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; <span class="keyword">function</span>);
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168     <span class="keyword">public</span>:
+<a name="l00169"></a>00169                                                 <a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a>(<a class="code" href="classrr_1_1_c_generator.html">CGenerator</a>* generator, HINSTANCE dllHandle = NULL);
+<a name="l00170"></a>00170                                                ~<a class="code" href="classrr_1_1_model_from_c.html">ModelFromC</a>();
+<a name="l00171"></a>00171         <span class="comment">//Non inherited</span>
+<a name="l00172"></a>00172         <span class="keywordtype">bool</span>                                    SetupDLLData();
+<a name="l00173"></a>00173         <span class="keywordtype">bool</span>                                    SetupDLLFunctions();
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175         <span class="comment">//The following functions C equivalent may need to be in the DLL</span>
+<a name="l00176"></a>00176         <span class="comment">//Inherited functions</span>
+<a name="l00177"></a>00177         <span class="keywordtype">void</span>                                    setCompartmentVolumes();
+<a name="l00178"></a>00178         <span class="keywordtype">int</span>                                     getNumLocalParameters(<span class="keywordtype">int</span> reactionId);
+<a name="l00179"></a>00179         <span class="keywordtype">void</span>                                    computeRules(vector&lt;double&gt;&amp; _y);
+<a name="l00180"></a>00180         <span class="keywordtype">void</span>                                    computeRules(<span class="keywordtype">double</span>* ay, <span class="keywordtype">int</span> size);
+<a name="l00181"></a>00181         <span class="keywordtype">void</span>                                    initializeInitialConditions();
+<a name="l00182"></a>00182         <span class="keywordtype">void</span>                                    setParameterValues();
+<a name="l00183"></a>00183         <span class="keywordtype">void</span>                                    setBoundaryConditions();
+<a name="l00184"></a>00184         <span class="keywordtype">void</span>                                    setInitialConditions();
+<a name="l00185"></a>00185         <span class="keywordtype">void</span>                                    evalInitialAssignments();
+<a name="l00186"></a>00186 
+<a name="l00187"></a>00187         <span class="keywordtype">void</span>                                    convertToAmounts();
+<a name="l00188"></a>00188         <span class="keywordtype">void</span>                                    computeConservedTotals();
+<a name="l00189"></a>00189         <span class="keywordtype">double</span>                                  getConcentration(<span class="keywordtype">int</span> index);
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191         <span class="comment">//Access dll data</span>
+<a name="l00192"></a>00192         vector&lt;double&gt;                          GetCurrentValues();
+<a name="l00193"></a>00193         <span class="keywordtype">double</span>                                  GetAmounts(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; i);
+<a name="l00194"></a>00194         <span class="keywordtype">void</span>                                    InitializeRates();
+<a name="l00195"></a>00195         <span class="keywordtype">void</span>                                    AssignRates();
+<a name="l00196"></a>00196         <span class="keywordtype">void</span>                                    AssignRates(vector&lt;double&gt;&amp; rates);
+<a name="l00197"></a>00197         <span class="keywordtype">void</span>                                    convertToConcentrations();
+<a name="l00198"></a>00198         <span class="keywordtype">void</span>                                    updateDependentSpeciesValues(<span class="keywordtype">double</span>* _y);
+<a name="l00199"></a>00199         <span class="keywordtype">void</span>                                    computeAllRatesOfChange();
+<a name="l00200"></a>00200         <span class="keywordtype">void</span>                                    evalModel(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time,  <span class="keyword">const</span> vector&lt;double&gt;&amp; y);
+<a name="l00201"></a>00201         <span class="keywordtype">void</span>                                    evalEvents(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; time, <span class="keyword">const</span> vector&lt;double&gt;&amp; y);
+<a name="l00202"></a>00202         <span class="keywordtype">void</span>                                    resetEvents();
+<a name="l00203"></a>00203         <span class="keywordtype">void</span>                                    testConstraints();
+<a name="l00204"></a>00204         <span class="keywordtype">void</span>                                    InitializeRateRuleSymbols();
+<a name="l00205"></a>00205 };
+<a name="l00206"></a>00206 }
+<a name="l00207"></a>00207 <span class="preprocessor">#endif</span>
+<a name="l00208"></a>00208 <span class="preprocessor"></span>
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210 
+<a name="l00211"></a>00211 
 <a name="l00212"></a>00212 
-<a name="l00213"></a>00213         <span class="keywordtype">void</span>                                    convertToAmounts();
-<a name="l00214"></a>00214         <span class="keywordtype">void</span>                                    computeConservedTotals();
-<a name="l00215"></a>00215         <span class="keywordtype">double</span>                                  getConcentration(<span class="keywordtype">int</span> index);
+<a name="l00213"></a>00213 
+<a name="l00214"></a>00214 
+<a name="l00215"></a>00215 
 <a name="l00216"></a>00216 
-<a name="l00217"></a>00217         <span class="comment">//Access dll data</span>
-<a name="l00218"></a>00218         vector&lt;double&gt;                          GetCurrentValues();
-<a name="l00219"></a>00219         <span class="keywordtype">double</span>                                  GetAmounts(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; i);
-<a name="l00220"></a>00220 <span class="comment">//        vector&lt;double&gt;                        GetdYdT();</span>
+<a name="l00217"></a>00217 
+<a name="l00218"></a>00218 
+<a name="l00219"></a>00219 
+<a name="l00220"></a>00220 
 <a name="l00221"></a>00221 
-<a name="l00222"></a>00222 <span class="comment">//        int                                   getNumIndependentVariables();</span>
-<a name="l00223"></a>00223 <span class="comment">//        int                                   getNumDependentVariables();</span>
-<a name="l00224"></a>00224 <span class="comment">//        int                                   getNumTotalVariables();</span>
-<a name="l00225"></a>00225 <span class="comment">//        int                                   getNumBoundarySpecies();</span>
-<a name="l00226"></a>00226 <span class="comment">//        int                                   getNumGlobalParameters();</span>
-<a name="l00227"></a>00227 <span class="comment">//        int                                   getNumCompartments();</span>
-<a name="l00228"></a>00228 <span class="comment">//        int                                   getNumReactions();</span>
-<a name="l00229"></a>00229 <span class="comment">//        int                                   getNumRules();</span>
-<a name="l00230"></a>00230 <span class="comment">//        int                                   getNumEvents();</span>
-<a name="l00231"></a>00231 <span class="comment">//        void                                  initializeInitialConditions();</span>
-<a name="l00232"></a>00232 <span class="comment">//        void                                  setInitialConditions();</span>
-<a name="l00233"></a>00233 <span class="comment">//        void                                  setParameterValues();</span>
-<a name="l00234"></a>00234 <span class="comment">//        void                                  setBoundaryConditions();</span>
-<a name="l00235"></a>00235         <span class="keywordtype">void</span>                                    InitializeRates();
-<a name="l00236"></a>00236         <span class="keywordtype">void</span>                                    AssignRates();
-<a name="l00237"></a>00237         <span class="keywordtype">void</span>                                    AssignRates(vector&lt;double&gt;&amp; rates);
-<a name="l00238"></a>00238 <span class="comment">//        void                                  computeConservedTotals();</span>
-<a name="l00239"></a>00239 <span class="comment">//        void                                  computeEventPriorites();</span>
-<a name="l00240"></a>00240 <span class="comment">//        void                                  setConcentration(int index, double value);</span>
-<a name="l00241"></a>00241 <span class="comment">//        void                                  convertToAmounts();</span>
-<a name="l00242"></a>00242         <span class="keywordtype">void</span>                                    convertToConcentrations();
-<a name="l00243"></a>00243         <span class="keywordtype">void</span>                                    updateDependentSpeciesValues(<span class="keywordtype">double</span>* _y);
-<a name="l00244"></a>00244 <span class="comment">//        void                                  computeRules(vector&lt;double&gt;&amp; _y);</span>
-<a name="l00245"></a>00245 <span class="comment">//        void                                  computeReactionRates(double time, vector&lt;double&gt;&amp; y);</span>
-<a name="l00246"></a>00246         <span class="keywordtype">void</span>                                    computeAllRatesOfChange();
-<a name="l00247"></a>00247         <span class="keywordtype">void</span>                                    evalModel(<span class="keywordtype">double</span> time, vector&lt;double&gt;&amp; y);
-<a name="l00248"></a>00248         <span class="keywordtype">void</span>                                    evalEvents(<span class="keywordtype">double</span> time, vector&lt;double&gt;&amp; y);
-<a name="l00249"></a>00249         <span class="keywordtype">void</span>                                    resetEvents();
-<a name="l00250"></a>00250 <span class="comment">//        void                                  evalInitialAssignments();</span>
-<a name="l00251"></a>00251         <span class="keywordtype">void</span>                                    testConstraints();
-<a name="l00252"></a>00252         <span class="keywordtype">void</span>                                    InitializeRateRuleSymbols();
-<a name="l00253"></a>00253 };
-<a name="l00254"></a>00254 }
-<a name="l00255"></a>00255 <span class="preprocessor">#endif</span>
-<a name="l00256"></a>00256 <span class="preprocessor"></span>
+<a name="l00222"></a>00222 
+<a name="l00223"></a>00223 
+<a name="l00224"></a>00224 
+<a name="l00225"></a>00225 
+<a name="l00226"></a>00226 
+<a name="l00227"></a>00227 
+<a name="l00228"></a>00228 
+<a name="l00229"></a>00229 
+<a name="l00230"></a>00230 
+<a name="l00231"></a>00231 
+<a name="l00232"></a>00232 
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234 
+<a name="l00235"></a>00235 
+<a name="l00236"></a>00236 
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239 
+<a name="l00240"></a>00240 
+<a name="l00241"></a>00241 
+<a name="l00242"></a>00242 
+<a name="l00243"></a>00243 
+<a name="l00244"></a>00244 
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246 
+<a name="l00247"></a>00247 
+<a name="l00248"></a>00248 
+<a name="l00249"></a>00249 
+<a name="l00250"></a>00250 
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252 
+<a name="l00253"></a>00253 
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255 
+<a name="l00256"></a>00256 
 <a name="l00257"></a>00257 
 <a name="l00258"></a>00258 
 <a name="l00259"></a>00259 
@@ -1356,14 +1356,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01273"></a>01273 
 <a name="l01274"></a>01274 
 <a name="l01275"></a>01275 
-<a name="l01276"></a>01276 
+<a name="l01276"></a><a class="code" href="rr_model_from_c_8h.html#a5f49b9d16307204ced88cf631c9fb810">01276</a> 
 <a name="l01277"></a>01277 
 <a name="l01278"></a>01278 
 <a name="l01279"></a>01279 
 <a name="l01280"></a>01280 
 <a name="l01281"></a>01281 
 <a name="l01282"></a>01282 
-<a name="l01283"></a>01283 
+<a name="l01283"></a><a class="code" href="rr_model_from_c_8h.html#a7846ae26d37ff51daa2c762e828a9182">01283</a> 
 <a name="l01284"></a>01284 
 <a name="l01285"></a>01285 
 <a name="l01286"></a>01286 
@@ -1404,14 +1404,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01321"></a>01321 
 <a name="l01322"></a>01322 
 <a name="l01323"></a>01323 
-<a name="l01324"></a><a class="code" href="rr_model_from_c_8h.html#a5f49b9d16307204ced88cf631c9fb810">01324</a> 
+<a name="l01324"></a>01324 
 <a name="l01325"></a>01325 
 <a name="l01326"></a>01326 
 <a name="l01327"></a>01327 
 <a name="l01328"></a>01328 
 <a name="l01329"></a>01329 
 <a name="l01330"></a>01330 
-<a name="l01331"></a><a class="code" href="rr_model_from_c_8h.html#a7846ae26d37ff51daa2c762e828a9182">01331</a> 
+<a name="l01331"></a><a class="code" href="rr_model_from_c_8h.html#ad65c1929e3095709dff27fbab726c2bb">01331</a> 
 <a name="l01332"></a>01332 
 <a name="l01333"></a>01333 
 <a name="l01334"></a>01334 
@@ -1459,7 +1459,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01376"></a>01376 
 <a name="l01377"></a>01377 
 <a name="l01378"></a>01378 
-<a name="l01379"></a><a class="code" href="rr_model_from_c_8h.html#ad65c1929e3095709dff27fbab726c2bb">01379</a> 
+<a name="l01379"></a>01379 
 <a name="l01380"></a>01380 
 <a name="l01381"></a>01381 
 <a name="l01382"></a>01382 
@@ -1901,7 +1901,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01818"></a>01818 
 <a name="l01819"></a>01819 
 <a name="l01820"></a>01820 
-<a name="l01821"></a>01821 
+<a name="l01821"></a><a class="code" href="rr_model_from_c_8h.html#a71103b150d2b39eb17b898f0881208b8">01821</a> 
 <a name="l01822"></a>01822 
 <a name="l01823"></a>01823 
 <a name="l01824"></a>01824 
@@ -1922,7 +1922,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01839"></a>01839 
 <a name="l01840"></a>01840 
 <a name="l01841"></a>01841 
-<a name="l01842"></a>01842 
+<a name="l01842"></a><a class="code" href="rr_model_from_c_8h.html#a657008346ee5e382c90c51cc6a90c8e1">01842</a> 
 <a name="l01843"></a>01843 
 <a name="l01844"></a>01844 
 <a name="l01845"></a>01845 
@@ -1949,7 +1949,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01866"></a>01866 
 <a name="l01867"></a>01867 
 <a name="l01868"></a>01868 
-<a name="l01869"></a><a class="code" href="rr_model_from_c_8h.html#a71103b150d2b39eb17b898f0881208b8">01869</a> 
+<a name="l01869"></a>01869 
 <a name="l01870"></a>01870 
 <a name="l01871"></a>01871 
 <a name="l01872"></a>01872 
@@ -1970,7 +1970,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01887"></a>01887 
 <a name="l01888"></a>01888 
 <a name="l01889"></a>01889 
-<a name="l01890"></a><a class="code" href="rr_model_from_c_8h.html#a657008346ee5e382c90c51cc6a90c8e1">01890</a> 
+<a name="l01890"></a>01890 
 <a name="l01891"></a>01891 
 <a name="l01892"></a>01892 
 <a name="l01893"></a>01893 
@@ -2030,9 +2030,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01947"></a>01947 
 <a name="l01948"></a>01948 
 <a name="l01949"></a>01949 
-<a name="l01950"></a>01950 
+<a name="l01950"></a><a class="code" href="rr_model_from_c_8h.html#a0cac940e8d3f64024ff22a3606a74232">01950</a> 
 <a name="l01951"></a>01951 
-<a name="l01952"></a>01952 
+<a name="l01952"></a><a class="code" href="rr_model_from_c_8h.html#a0e28d3ee7b749aec211457496b8f3a55">01952</a> 
 <a name="l01953"></a>01953 
 <a name="l01954"></a>01954 
 <a name="l01955"></a>01955 
@@ -2078,9 +2078,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01995"></a>01995 
 <a name="l01996"></a>01996 
 <a name="l01997"></a>01997 
-<a name="l01998"></a><a class="code" href="rr_model_from_c_8h.html#a0cac940e8d3f64024ff22a3606a74232">01998</a> 
+<a name="l01998"></a>01998 
 <a name="l01999"></a>01999 
-<a name="l02000"></a><a class="code" href="rr_model_from_c_8h.html#a0e28d3ee7b749aec211457496b8f3a55">02000</a> 
+<a name="l02000"></a>02000 
 <a name="l02001"></a>02001 
 <a name="l02002"></a>02002 
 <a name="l02003"></a>02003 
@@ -2293,7 +2293,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l02210"></a>02210 
 <a name="l02211"></a>02211 
 <a name="l02212"></a>02212 
-<a name="l02213"></a>02213 
+<a name="l02213"></a><a class="code" href="rr_model_from_c_8h.html#a0e0fe3657977f9f360a30dc5b0556744">02213</a> 
 <a name="l02214"></a>02214 
 <a name="l02215"></a>02215 
 <a name="l02216"></a>02216 
@@ -2341,7 +2341,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l02258"></a>02258 
 <a name="l02259"></a>02259 
 <a name="l02260"></a>02260 
-<a name="l02261"></a><a class="code" href="rr_model_from_c_8h.html#a0e0fe3657977f9f360a30dc5b0556744">02261</a> 
+<a name="l02261"></a>02261 
 <a name="l02262"></a>02262 
 <a name="l02263"></a>02263 
 <a name="l02264"></a>02264 
@@ -2369,7 +2369,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l02286"></a>02286 
 <a name="l02287"></a>02287 
 <a name="l02288"></a>02288 
-<a name="l02289"></a>02289 
+<a name="l02289"></a><a class="code" href="rr_model_from_c_8h.html#a63017a27dfe1bb78ba1668da4a930973">02289</a> 
 <a name="l02290"></a>02290 
 <a name="l02291"></a>02291 
 <a name="l02292"></a>02292 
@@ -2417,7 +2417,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l02334"></a>02334 
 <a name="l02335"></a>02335 
 <a name="l02336"></a>02336 
-<a name="l02337"></a><a class="code" href="rr_model_from_c_8h.html#a63017a27dfe1bb78ba1668da4a930973">02337</a> 
+<a name="l02337"></a>02337 
 <a name="l02338"></a>02338 
 <a name="l02339"></a>02339 
 <a name="l02340"></a>02340 
@@ -2916,61 +2916,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l02833"></a>02833 
 <a name="l02834"></a>02834 
 <a name="l02835"></a>02835 
-<a name="l02836"></a>02836 
-<a name="l02837"></a>02837 
-<a name="l02838"></a>02838 
-<a name="l02839"></a>02839 
-<a name="l02840"></a>02840 
-<a name="l02841"></a>02841 
-<a name="l02842"></a>02842 
-<a name="l02843"></a>02843 
-<a name="l02844"></a>02844 
-<a name="l02845"></a>02845 
-<a name="l02846"></a>02846 
-<a name="l02847"></a>02847 
-<a name="l02848"></a>02848 
-<a name="l02849"></a>02849 
-<a name="l02850"></a>02850 
-<a name="l02851"></a>02851 
-<a name="l02852"></a>02852 
-<a name="l02853"></a>02853 
-<a name="l02854"></a>02854 
-<a name="l02855"></a>02855 
-<a name="l02856"></a>02856 
-<a name="l02857"></a>02857 
-<a name="l02858"></a>02858 
-<a name="l02859"></a>02859 
-<a name="l02860"></a>02860 
-<a name="l02861"></a>02861 
-<a name="l02862"></a>02862 
-<a name="l02863"></a>02863 
-<a name="l02864"></a>02864 
-<a name="l02865"></a>02865 
-<a name="l02866"></a>02866 
-<a name="l02867"></a>02867 
-<a name="l02868"></a>02868 
-<a name="l02869"></a>02869 
-<a name="l02870"></a>02870 
-<a name="l02871"></a>02871 
-<a name="l02872"></a>02872 
-<a name="l02873"></a>02873 
-<a name="l02874"></a>02874 
-<a name="l02875"></a>02875 
-<a name="l02876"></a>02876 
-<a name="l02877"></a>02877 
-<a name="l02878"></a>02878 
-<a name="l02879"></a>02879 
-<a name="l02880"></a>02880 
-<a name="l02881"></a>02881 
-<a name="l02882"></a>02882 
-<a name="l02883"></a>02883 
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -2982,7 +2934,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:26:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

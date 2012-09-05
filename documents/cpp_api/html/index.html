@@ -75,7 +75,617 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Structural Analysis Library </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><dl class="user"><dt><b></b></dt><dd>This document describes the application programming interface (API) of LibLA and LibStructural an open source (BSD) library for computing structural characteristics of cellular networks. </dd></dl>
+<div class="textblock"><p>Load species names and initial values.This function should be used whenever labeled matrices are important as these labels will be used in labeling the structural matrices. This function sets the species names (ids). It is also possible to provide an initial condition for each of the species. This will be used when calculating the conserved sums.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">speciesNames</td><td>an array of strings of species names with length nLength </td></tr>
+    <tr><td class="paramname">speciesValues</td><td>an array of real numbers of species concentrations corresponding to the speciesName with the same index </td></tr>
+    <tr><td class="paramname">nLength</td><td>number of elements in speciesNames and speciesValues</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case an error occurred</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>This method should only be called after <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a></dd></dl>
+<p>Load reaction names.</p>
+<p>This function should be used whenever labeled matrices are important as these labels will be used in labeling the structural matrices. This function sets the reaction names (ids).</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reactionNames</td><td>an array of strings of reaction names with length nLength </td></tr>
+    <tr><td class="paramname">nLength</td><td>number of elements in reactionNames</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case an error occurred</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>This method should only be called after <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a></dd></dl>
+<p>Load a SBML model. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sSBML</td><td>the SBML string to load into the library </td></tr>
+    <tr><td class="paramname">outMessage</td><td>a pointer to a string that the library can use to provide information about the loaded SBML </td></tr>
+    <tr><td class="paramname">nLength</td><td>is the length of the above message</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case an error occurred (invalid SBML)</dd></dl>
+<p>Load a SBML model from the specified file. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sFileName</td><td>the full path to the SBML file to be loaded. </td></tr>
+    <tr><td class="paramname">outMessage</td><td>a pointer to a string that the library can use to provide information about the loaded SBML </td></tr>
+    <tr><td class="paramname">nLength</td><td>is the length of the above message</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To avoid unintentional errors be sure to pass in the full path to the SBML file.</dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case an error occurred (invalid SBML, file not readable ...).</dd></dl>
+<p>Load an SBML model into the library and carry out tests using the internal test suite. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sSBML</td><td>the SBML string to load into the library </td></tr>
+    <tr><td class="paramname">outMessage</td><td>a pointer to a string that contains information about the loaded model as well as the test results of the internal test suite. </td></tr>
+    <tr><td class="paramname">nLength</td><td>is the length of the above message</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case an error occurred (invalid SBML)</dd></dl>
+<p>Uses QR factorization for structural analysis</p>
+<p>This method performs the actual analysis of the stoichiometry matrix (loaded either via <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#a203e8047e0455f344b0a7a2b2d6b94fc">LibStructural_loadSBML</a>. Only after one of the analysis methods below has been called are the structural matrices (L0, K0...) available.</p>
+<ul>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#ab30c20e197779c422408ad1d984ecacb">LibStructural_analyzeWithQR</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#aa2ddbc9cf81c6463ca3f1a618f95ab1f">LibStructural_analyzeWithLU</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a8ee18560a26a2da838a64fd18c7f4ba6">LibStructural_analyzeWithLUandRunTests</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a4a89c80f07420d0794868b9a0addf312">LibStructural_analyzeWithFullyPivotedLU</a> or </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a79080ec9e2388f040fa048560eef96db">LibStructural_analyzeWithFullyPivotedLUwithTests</a></li>
+</ul>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>This is the prefered method for structural analysis.</dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMessage</td><td>a pointer to a string where status information of the analysis will be returned. </td></tr>
+    <tr><td class="paramname">nLength</td><td>the length of the message.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand see <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#a203e8047e0455f344b0a7a2b2d6b94fc">LibStructural_loadSBML</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#adb53d32786a2d681a33d31bcde58e778">LibStructural_loadSBMLFromFile</a></dd></dl>
+<p>Uses LU Decomposition for structural analysis</p>
+<p>This method performs the actual analysis of the stoichiometry matrix (loaded either via <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#a203e8047e0455f344b0a7a2b2d6b94fc">LibStructural_loadSBML</a>. Only after one of the analysis methods below has been called are the structural matrices (L0, K0...) available.</p>
+<ul>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#ab30c20e197779c422408ad1d984ecacb">LibStructural_analyzeWithQR</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#aa2ddbc9cf81c6463ca3f1a618f95ab1f">LibStructural_analyzeWithLU</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a8ee18560a26a2da838a64fd18c7f4ba6">LibStructural_analyzeWithLUandRunTests</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a4a89c80f07420d0794868b9a0addf312">LibStructural_analyzeWithFullyPivotedLU</a> or </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a79080ec9e2388f040fa048560eef96db">LibStructural_analyzeWithFullyPivotedLUwithTests</a></li>
+</ul>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMessage</td><td>a pointer to a string where status information of the analysis will be returned. </td></tr>
+    <tr><td class="paramname">nLength</td><td>the length of the message. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand see <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#a203e8047e0455f344b0a7a2b2d6b94fc">LibStructural_loadSBML</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#adb53d32786a2d681a33d31bcde58e778">LibStructural_loadSBMLFromFile</a></dd></dl>
+<p>Uses LU Decomposition for structural analysis</p>
+<p>This method performs the actual analysis of the stoichiometry matrix (loaded either via <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#a203e8047e0455f344b0a7a2b2d6b94fc">LibStructural_loadSBML</a>. Only after one of the analysis methods below has been called are the structural matrices (L0, K0...) available.</p>
+<ul>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#ab30c20e197779c422408ad1d984ecacb">LibStructural_analyzeWithQR</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#aa2ddbc9cf81c6463ca3f1a618f95ab1f">LibStructural_analyzeWithLU</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a8ee18560a26a2da838a64fd18c7f4ba6">LibStructural_analyzeWithLUandRunTests</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a4a89c80f07420d0794868b9a0addf312">LibStructural_analyzeWithFullyPivotedLU</a> or </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a79080ec9e2388f040fa048560eef96db">LibStructural_analyzeWithFullyPivotedLUwithTests</a></li>
+</ul>
+<p>This method additionally performs the integrated test suite and returns those results.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMessage</td><td>a pointer to a string where status information of the analysis will be returned. </td></tr>
+    <tr><td class="paramname">nLength</td><td>the length of the message.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand see <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#a203e8047e0455f344b0a7a2b2d6b94fc">LibStructural_loadSBML</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#adb53d32786a2d681a33d31bcde58e778">LibStructural_loadSBMLFromFile</a></dd></dl>
+<p>Uses fully pivoted LU decomposition for structural analysis.</p>
+<p>This method performs the actual analysis of the stoichiometry matrix (loaded either via <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#a203e8047e0455f344b0a7a2b2d6b94fc">LibStructural_loadSBML</a>. Only after one of the analysis methods below has been called are the structural matrices (L0, K0...) available.</p>
+<ul>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#ab30c20e197779c422408ad1d984ecacb">LibStructural_analyzeWithQR</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#aa2ddbc9cf81c6463ca3f1a618f95ab1f">LibStructural_analyzeWithLU</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a8ee18560a26a2da838a64fd18c7f4ba6">LibStructural_analyzeWithLUandRunTests</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a4a89c80f07420d0794868b9a0addf312">LibStructural_analyzeWithFullyPivotedLU</a> or </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a79080ec9e2388f040fa048560eef96db">LibStructural_analyzeWithFullyPivotedLUwithTests</a></li>
+</ul>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>Unlike the other methods, this method handles only square stoichiometry matrices. This method was only included for backward compatibility use <a class="el" href="ls_c___a_p_i_8cpp.html#ab30c20e197779c422408ad1d984ecacb">LibStructural_analyzeWithQR</a></dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMessage</td><td>a pointer to a string where status information of the analysis will be returned. </td></tr>
+    <tr><td class="paramname">nLength</td><td>the length of the message.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand. See <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#a203e8047e0455f344b0a7a2b2d6b94fc">LibStructural_loadSBML</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#adb53d32786a2d681a33d31bcde58e778">LibStructural_loadSBMLFromFile</a></dd></dl>
+<p>Uses fully pivoted LU decomposition for structural analysis</p>
+<p>This method performs the actual analysis of the stoichiometry matrix (loaded either via <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#a203e8047e0455f344b0a7a2b2d6b94fc">LibStructural_loadSBML</a>. Only after one of the analysis methods below has been called are the structural matrices (L0, K0...) available.</p>
+<ul>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#ab30c20e197779c422408ad1d984ecacb">LibStructural_analyzeWithQR</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#aa2ddbc9cf81c6463ca3f1a618f95ab1f">LibStructural_analyzeWithLU</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a8ee18560a26a2da838a64fd18c7f4ba6">LibStructural_analyzeWithLUandRunTests</a>, </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a4a89c80f07420d0794868b9a0addf312">LibStructural_analyzeWithFullyPivotedLU</a> or </li>
+<li><a class="el" href="ls_c___a_p_i_8cpp.html#a79080ec9e2388f040fa048560eef96db">LibStructural_analyzeWithFullyPivotedLUwithTests</a></li>
+</ul>
+<p>This method additionally performs the integrated test suite and returns those results.</p>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>Unlike the other methods, this method handles only square stoichiometry matrices. For non-square matrices use a method like <a class="el" href="ls_c___a_p_i_8cpp.html#ab30c20e197779c422408ad1d984ecacb">LibStructural_analyzeWithQR</a>.</dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMessage</td><td>a pointer to a string where status information of the analysis will be returned. </td></tr>
+    <tr><td class="paramname">nLength</td><td>the length of the message.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand see <a class="el" href="ls_c___a_p_i_8cpp.html#a10ea13522e980431beae1764a6292695">LibStructural_loadStoichiometryMatrix</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#a203e8047e0455f344b0a7a2b2d6b94fc">LibStructural_loadSBML</a> or <a class="el" href="ls_c___a_p_i_8cpp.html#adb53d32786a2d681a33d31bcde58e778">LibStructural_loadSBMLFromFile</a></dd></dl>
+<p>Returns the L0 Matrix.</p>
+<p>L0 is defined such that L0 Nr = N0. L0 forms part of the link matrix, L. N0 is the set of linear dependent rows from the lower portion of the reordered stoichiometry matrix.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods have been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the L0 Matrix row and column labels.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the Nr Matrix. The rows of the Nr matrix will be linearly independent. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the Nr Matrix row and column labels.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the Nr Matrix repartitioned into NIC (independent columns) and NDC (dependent columns).</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the Nr Matrix row and column labels (repartitioned into NIC and NDC).</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the NIC Matrix (the set of linearly independent columns of Nr)</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the NIC Matrix row and column labels.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the NDC Matrix (the set of linearly dependent columns of Nr).</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the NDC Matrix row and column labels.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the N0 Matrix.</p>
+<p>The N0 matrix is the set of linearly dependent rows of N where L0 Nr = N0.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the N0 Matrix row and column labels.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns L, the Link Matrix, left nullspace (aka nullspace of the transpose Nr).</p>
+<p>L will have the structure, [I L0]', such that L Nr = N</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the row and column labels for the Link Matrix, L</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the K0 Matrix.</p>
+<p>K0 is defined such that K0 = -(NIC)^-1 NDC, or equivalently, [NDC NIC][I K0]' = 0 where [NDC NIC] = Nr</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the K0 Matrix row and column labels.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the K matrix (right nullspace of Nr) The K matrix has the structure, [I K0]'</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the K matrix row and column labels.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns Gamma, the conservation law array.</p>
+<p>Each row represents a single conservation law where the column indicate the participating molecular species. The number of rows is therefore equal to the number of conservation laws. Columns are ordered according to the rows in the reordered stoichiometry matrix, see ::LibStructural_getReorderedSpeciesId and <a class="el" href="ls_c___a_p_i_8cpp.html#a549bf0180838a9aba744c79e079548b9">LibStructural_getReorderedStoichiometryMatrix</a>.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the row and column labels for Gamma, the conservation law array.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the original, unaltered stoichiometry matrix. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the row and column labels for the original and unaltered stoichiometry matrix.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the fully reordered stoichiometry matrix (row and column reordered stoichiometry matrix)</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the reordered stoichiometry matrix (row reordered stoichiometry matrix, columns are not reordered!)</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMatrix</td><td>a pointer to a double array that holds the output </td></tr>
+    <tr><td class="paramname">outRows</td><td>will be overwritten with the number of rows </td></tr>
+    <tr><td class="paramname">outCols</td><td>will be overwritten with the number of columns.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the returned matrix call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outMatrix and outRows as parameter.</dd></dl>
+<p>Returns the row and column labels for the fully reordered stoichiometry matrix (row and column reordered stoichiometry matrix)</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the row and column labels for the reordered stoichiometry matrix (row reordered stoichiometry matrix)</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outRowLabels</td><td>a pointer to a string array where the row labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outRowCount</td><td>after the call this variable will hold the number of row labels returned. </td></tr>
+    <tr><td class="paramname">outColLabels</td><td>a pointer to a string array where the column labels will be allocated and written. </td></tr>
+    <tr><td class="paramname">outColCount</td><td>after the call this variable will hold the number of column labels returned.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>To free the string arrays (outRowLabels and outColLabels) call <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the string array and its corresponding length (outRowCount or outColCount)</dd></dl>
+<p>Returns the reordered list of molecular species. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outArray</td><td>pointer to string array that will be allocated and filled with the species Ids </td></tr>
+    <tr><td class="paramname">outLength</td><td>the number of species</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outArray using <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outLength parameter</dd></dl>
+<p>Returns the unordered list of species Ids </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outArray</td><td>pointer to string array that will be allocated and filled with the species Ids </td></tr>
+    <tr><td class="paramname">outLength</td><td>the number of species </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outArray using <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outLength parameter</dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Returns the reordered list of reactions Ids. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outArray</td><td>pointer to string array that will be allocated and filled with the reordered reaction Ids </td></tr>
+    <tr><td class="paramname">outLength</td><td>the number of species </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outArray using <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outLength parameter</dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Returns the list of independent species ids. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outArray</td><td>pointer to string array that will be allocated and filled with the independent species Ids </td></tr>
+    <tr><td class="paramname">outLength</td><td>the number of independent species </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outArray using <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outLength parameter</dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Returns the list of dependent species Ids. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outArray</td><td>pointer to string array that will be allocated and filled with the dependent species Ids </td></tr>
+    <tr><td class="paramname">outLength</td><td>the number of dependent species </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outArray using <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outLength parameter </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Returns the list of independent reaction ids. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outArray</td><td>pointer to string array that will be allocated and filled with the independent reaction Ids </td></tr>
+    <tr><td class="paramname">outLength</td><td>the number of independent reaction </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outArray using <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outLength parameter</dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Returns the list of dependent reaction Ids. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outArray</td><td>pointer to string array that will be allocated and filled with the dependent reaction Ids </td></tr>
+    <tr><td class="paramname">outLength</td><td>the number of dependent reactions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outArray using <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outLength parameter </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Returns the list of unordered Reactions. Returns the original list of reactions in the same order as when it was loaded. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outArray</td><td>pointer to string array that will be allocated and filled with the reaction Ids </td></tr>
+    <tr><td class="paramname">outLength</td><td>the number of reactions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outArray using <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outLength parameter </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Returns algebraic expressions for the conservation laws. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outArray</td><td>pointer to string array that will be allocated and filled </td></tr>
+    <tr><td class="paramname">outLength</td><td>the number of conservation laws </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outArray using <a class="el" href="ls_c___a_p_i_8cpp.html#a4581d7a641190be6fc77b67b5825615d">LibStructural_freeMatrix</a> with the outLength parameter </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Returns the number of conservation laws. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>the number of conservation laws</dd></dl>
+<p>Returns values for conservation laws using the current initial conditions</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outArray</td><td>will be allocated and filled with a double vector of all conserved sums </td></tr>
+    <tr><td class="paramname">outLength</td><td>is the number of conserved sums </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outArray using <a class="el" href="ls_c___a_p_i_8cpp.html#a94f4548ce92f8b94220d6b90a48008d1">LibStructural_freeVector</a></dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Returns the initial conditions used in the model. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outVariableNames</td><td>a string vector of all species Ids </td></tr>
+    <tr><td class="paramname">outValues</td><td>a double vector of corresponding initial conditions </td></tr>
+    <tr><td class="paramname">outLength</td><td>number of elements in outVariableNames and outValues (number of species)</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Validates structural matrices.</p>
+<p>Calling this method will run the internal test suite against the structural matrices those tests include:<br/>
+</p>
+<ul>
+<li>Test 1 : Gamma*N = 0 (Zero matrix) </li>
+<li>Test 2 : Rank(N) using SVD (5) is same as m0 (5) </li>
+<li>Test 3 : Rank(NR) using SVD (5) is same as m0 (5) </li>
+<li>Test 4 : Rank(NR) using QR (5) is same as m0 (5) </li>
+<li>Test 5 : L0 obtained with QR matches Q21*inv(Q11) </li>
+<li>Test 6 : N*K = 0 (Zero matrix)</li>
+</ul>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outResults</td><td>an integer vector, each element represents the result for one of the above tests (the 0th element representing the test result for test1), if the test passed the value is 1 and 0 otherwise. </td></tr>
+    <tr><td class="paramname">outLength</td><td>number of tests</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outResults using <a class="el" href="ls_c___a_p_i_8cpp.html#a94f4548ce92f8b94220d6b90a48008d1">LibStructural_freeVector</a></dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Return Details about validation tests. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMessage</td><td>a pointer to a string where status information of the analysis will be returned. </td></tr>
+    <tr><td class="paramname">nLength</td><td>the length of the message. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outMessage using <a class="el" href="ls_c___a_p_i_8cpp.html#a94f4548ce92f8b94220d6b90a48008d1">LibStructural_freeVector</a></dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Returns the name of the model.</p>
+<p>Returns the name of the model if SBML model has Name-tag, otherwise it returns the SBML id. If only a stoichiometry matrix was loaded 'untitled' will be returned.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outMessage</td><td>a pointer to a string where status information of the analysis will be returned. </td></tr>
+    <tr><td class="paramname">nLength</td><td>the length of the message. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="remark"><dt><b>Remarks:</b></dt><dd>free outMessage using <a class="el" href="ls_c___a_p_i_8cpp.html#a94f4548ce92f8b94220d6b90a48008d1">LibStructural_freeVector</a></dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The return value will be zero (0) when successful, and negative (-1) in case no stoichiometry matrix was loaded beforehand or none of the analysis methods has been called yet.</dd></dl>
+<p>Set user specified tolerance</p>
+<p>This function sets the tolerance used by the library to determine what value is considered as zero. Any value with absolute value smaller than this tolerance is considered as zero and will be neglected.</p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dTolerance</td><td>Sets the tolerance used by the library to determine a value close to zero</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Get user specified tolerance</p>
+<p>This function gets the tolerance used by the library to determine what value is considered as zero. Any value with absolute value smaller than this tolerance is considered as zero and will be neglected.</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>the tolerance used by the library to determine a value close to zero</dd></dl>
+<dl class="user"><dt><b></b></dt><dd>This document describes the application programming interface (API) of LibLA and LibStructural an open source (BSD) library for computing structural characteristics of cellular networks. </dd></dl>
 <dl class="user"><dt><b></b></dt><dd>LibLA is a linear algebra library derives much of its functionality from the standard CLAPACK library with additional linear algebra functions not directly supported by CLAPACK. The libStructural library supports a range of methods for the structural analysis of cellular networks (derived either from SBML or stoichiometry matrices) and utilizes LibLA for some of its internal computations. </dd></dl>
 <dl class="user"><dt><b>Installing</b></dt><dd>To make the Structural Analysis Library easily accessible we have created binary installers for Windows as wel as OS X (version 10.4 and above). We also habe a source distribution, complete with Visual Studio, XCode, Scons and Qt project files that allow to build the library on Windows, Linux and OS X. For detailed instructions on how to build the library see the file INSTALL included with the source distribution. </dd></dl>
 <dl class="user"><dt><b>Dependencies</b></dt><dd>These libraries depend on two third-party libraries, LAPACK and libSBML. Both are provided with the binary installation where necessary. </dd></dl>
@@ -105,7 +715,7 @@ Ravishankar Rao Vallabhajosyula (developed a previous version of the sructural a
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -117,7 +727,7 @@ Ravishankar Rao Vallabhajosyula (developed a previous version of the sructural a
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:27:03 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:59 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>RoadRunner C++ API: C:/roadrunnerwork/source/trunk/src/rrCGenerator.h Source File</title>
+<title>RoadRunner C++ API: R:/roadrunnerwork/trunk/source/rrCGenerator.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -78,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">C:/roadrunnerwork/source/trunk/src/rrCGenerator.h</div>  </div>
+<div class="title">R:/roadrunnerwork/trunk/source/rrCGenerator.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="rr_c_generator_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef rrCGeneratorH</span>
@@ -111,9 +111,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00028"></a>00028         <span class="keywordtype">void</span>                                SubstituteToken(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; reactionName, <span class="keywordtype">bool</span> bFixAmounts, <a class="code" href="classrr_1_1_scanner.html">Scanner</a>&amp; s, <a class="code" href="classrr_1_1_code_builder.html">CodeBuilder</a>&amp; sb);
 <a name="l00029"></a>00029         <span class="keywordtype">string</span>                              FindSymbol(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; varName);
 <a name="l00030"></a>00030         <span class="keywordtype">void</span>                                WriteOutSymbolTables(<a class="code" href="classrr_1_1_code_builder.html">CodeBuilder</a>&amp; sb);
-<a name="l00031"></a>00031         <span class="keywordtype">void</span>                                WriteComputeAllRatesOfChange(<a class="code" href="classrr_1_1_code_builder.html">CodeBuilder</a>&amp; sb, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numIndependentSpecies, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numDependentSpecies, <a class="code" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&amp; L0);
+<a name="l00031"></a>00031         <span class="keywordtype">void</span>                                WriteComputeAllRatesOfChange(<a class="code" href="classrr_1_1_code_builder.html">CodeBuilder</a>&amp; sb, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numIndependentSpecies, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numDependentSpecies, <a class="code" href="class_l_i_b___l_a_1_1_matrix.html" title="LIB_LA::Matrix is the matrix class used by LIB_LA::LibLA and LIB_STRUTURAL::LibStructural.">DoubleMatrix</a>&amp; L0);
 <a name="l00032"></a>00032         <span class="keywordtype">void</span>                                WriteComputeConservedTotals(<a class="code" href="classrr_1_1_code_builder.html">CodeBuilder</a>&amp; sb, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numFloatingSpecies, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numDependentSpecies);
-<a name="l00033"></a>00033         <span class="keywordtype">void</span>                                WriteUpdateDependentSpecies(<a class="code" href="classrr_1_1_code_builder.html">CodeBuilder</a>&amp; sb, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numIndependentSpecies, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numDependentSpecies, <a class="code" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">DoubleMatrix</a>&amp; L0);
+<a name="l00033"></a>00033         <span class="keywordtype">void</span>                                WriteUpdateDependentSpecies(<a class="code" href="classrr_1_1_code_builder.html">CodeBuilder</a>&amp; sb, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numIndependentSpecies, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numDependentSpecies, <a class="code" href="class_l_i_b___l_a_1_1_matrix.html" title="LIB_LA::Matrix is the matrix class used by LIB_LA::LibLA and LIB_STRUTURAL::LibStructural.">DoubleMatrix</a>&amp; L0);
 <a name="l00034"></a>00034         <span class="keywordtype">void</span>                                WriteUserDefinedFunctions(<a class="code" href="classrr_1_1_code_builder.html">CodeBuilder</a>&amp; sb);
 <a name="l00035"></a>00035         <span class="keywordtype">void</span>                                WriteResetEvents(<a class="code" href="classrr_1_1_code_builder.html">CodeBuilder</a>&amp; sb, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numEvents);
 <a name="l00036"></a>00036         <span class="keywordtype">void</span>                                WriteSetConcentration(<a class="code" href="classrr_1_1_code_builder.html">CodeBuilder</a>&amp; sb);
@@ -139,7 +139,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00056"></a>00056         <span class="keywordtype">int</span>                                 ReadBoundarySpecies();
 <a name="l00057"></a>00057 
 <a name="l00058"></a>00058     <span class="keyword">public</span>:
-<a name="l00059"></a>00059                                             <a class="code" href="classrr_1_1_c_generator.html">CGenerator</a>();
+<a name="l00059"></a>00059                                             <a class="code" href="classrr_1_1_c_generator.html">CGenerator</a>(<a class="code" href="classrr_1_1_road_runner.html">RoadRunner</a>* rr);
 <a name="l00060"></a>00060         <span class="keyword">virtual</span>                             ~<a class="code" href="classrr_1_1_c_generator.html">CGenerator</a>();
 <a name="l00061"></a>00061 
 <a name="l00062"></a>00062         <span class="comment">// Generates the Model Code from th e SBML string</span>
@@ -164,7 +164,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -176,7 +176,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:26:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>RoadRunner C++ API: C:/roadrunnerwork/source/trunk/src/rrObject.h Source File</title>
+<title>RoadRunner C++ API: R:/roadrunnerwork/trunk/source/rrObject.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -78,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">C:/roadrunnerwork/source/trunk/src/rrObject.h</div>  </div>
+<div class="title">R:/roadrunnerwork/trunk/source/rrObject.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="rr_object_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef rrObjectH</span>
@@ -89,36 +89,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00006"></a>00006 
 <a name="l00007"></a>00007 <span class="keyword">namespace </span>rr
 <a name="l00008"></a>00008 {
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="keyword">using namespace </span>std;
-<a name="l00011"></a>00011 
-<a name="l00012"></a><a class="code" href="namespacerr.html#a7cbea4bab8d253482c225185be5ae2ab">00012</a> <span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="namespacerr.html#a7cbea4bab8d253482c225185be5ae2ab">tab</a> = <span class="charliteral">&#39;\t&#39;</span>;
-<a name="l00013"></a><a class="code" href="namespacerr.html#a2f22df52beab4b09418ce2a7966f5838a786262f2c9a0943562a639053a786afb">00013</a> <span class="keyword">enum</span> <a class="code" href="namespacerr.html#a2f22df52beab4b09418ce2a7966f5838">SBMLType</a> {<a class="code" href="namespacerr.html#a2f22df52beab4b09418ce2a7966f5838ab6b42795286e312b309617aab1edf045">stCompartment</a> = 0, <a class="code" href="namespacerr.html#a2f22df52beab4b09418ce2a7966f5838a786262f2c9a0943562a639053a786afb">stSpecies</a>, <a class="code" href="namespacerr.html#a2f22df52beab4b09418ce2a7966f5838a9bf69ba641af67fd22d8a4d811278aa9">stParameter</a>};    <span class="comment">//Species clashes with class Species, prefix enums with st, for SbmlType</span>
-<a name="l00014"></a><a class="code" href="namespacerr.html#a4949e13eb1f671588350f2925e667472">00014</a> <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="namespacerr.html#a4949e13eb1f671588350f2925e667472">MAX_MODULE</a> = 512;
+<a name="l00009"></a>00009 <span class="keyword">using namespace </span>std;
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="comment">// Enums...</span>
+<a name="l00012"></a><a class="code" href="namespacerr.html#a2f22df52beab4b09418ce2a7966f5838a786262f2c9a0943562a639053a786afb">00012</a> <span class="keyword">enum</span> <a class="code" href="namespacerr.html#a2f22df52beab4b09418ce2a7966f5838">SBMLType</a> {<a class="code" href="namespacerr.html#a2f22df52beab4b09418ce2a7966f5838ab6b42795286e312b309617aab1edf045">stCompartment</a> = 0, <a class="code" href="namespacerr.html#a2f22df52beab4b09418ce2a7966f5838a786262f2c9a0943562a639053a786afb">stSpecies</a>, <a class="code" href="namespacerr.html#a2f22df52beab4b09418ce2a7966f5838a9bf69ba641af67fd22d8a4d811278aa9">stParameter</a>};    <span class="comment">//Species clashes with class Species, prefix enums with st, for SbmlType</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 <span class="comment">// Typedefs</span>
 <a name="l00015"></a><a class="code" href="namespacerr.html#aa23208dc66b6657730f85e79f39d2c82">00015</a> <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespacerr.html#aa23208dc66b6657730f85e79f39d2c82">u_int</a>;
-<a name="l00016"></a>00016 
-<a name="l00017"></a><a class="code" href="namespacerr.html#a16dca8dc76d20318b2b936c0aa1fb049">00017</a> <span class="keyword">const</span> <span class="keywordtype">double</span> <a class="code" href="namespacerr.html#a16dca8dc76d20318b2b936c0aa1fb049">DoubleNaN</a> = std::numeric_limits&lt;double&gt;::quiet_NaN() ;
-<a name="l00018"></a><a class="code" href="namespacerr.html#ab0f43da2c399199e85373966e6ea1090">00018</a> <span class="keyword">const</span> <span class="keywordtype">float</span>  <a class="code" href="namespacerr.html#ab0f43da2c399199e85373966e6ea1090">FloatNaN</a>  = std::numeric_limits&lt;float&gt;::quiet_NaN() ;
-<a name="l00019"></a>00019 
-<a name="l00020"></a>00020 <span class="comment">//Have all RoadRunner classes descending from rrObject</span>
-<a name="l00021"></a><a class="code" href="classrr_1_1rr_object.html">00021</a> <span class="keyword">class </span><a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> <a class="code" href="classrr_1_1rr_object.html">rrObject</a>
-<a name="l00022"></a>00022 {
-<a name="l00023"></a>00023     <span class="keyword">protected</span>:
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025     <span class="keyword">public</span>:
-<a name="l00026"></a>00026                         <a class="code" href="classrr_1_1rr_object.html">rrObject</a>();
-<a name="l00027"></a>00027         <span class="keyword">virtual</span>        ~<a class="code" href="classrr_1_1rr_object.html">rrObject</a>();
-<a name="l00028"></a>00028 };
-<a name="l00029"></a>00029 
-<a name="l00030"></a>00030 }
-<a name="l00031"></a>00031 <span class="preprocessor">#endif</span>
+<a name="l00016"></a>00016 <span class="keyword">typedef</span> <span class="keywordtype">long</span>*   <a class="code" href="namespacerr.html#a68aca7c19215d5e22bf84c73d3c15be0">IntPtr</a>;
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="comment">// Constants</span>
+<a name="l00019"></a><a class="code" href="namespacerr.html#a7cbea4bab8d253482c225185be5ae2ab">00019</a> <span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="namespacerr.html#a7cbea4bab8d253482c225185be5ae2ab">tab</a> = <span class="charliteral">&#39;\t&#39;</span>;
+<a name="l00020"></a><a class="code" href="namespacerr.html#a16dca8dc76d20318b2b936c0aa1fb049">00020</a> <span class="keyword">const</span> <span class="keywordtype">double</span>    <a class="code" href="namespacerr.html#a16dca8dc76d20318b2b936c0aa1fb049">DoubleNaN</a>   = std::numeric_limits&lt;double&gt;::quiet_NaN() ;
+<a name="l00021"></a><a class="code" href="namespacerr.html#ab0f43da2c399199e85373966e6ea1090">00021</a> <span class="keyword">const</span> <span class="keywordtype">float</span>     <a class="code" href="namespacerr.html#ab0f43da2c399199e85373966e6ea1090">FloatNaN</a>    = std::numeric_limits&lt;float&gt;::quiet_NaN() ;
+<a name="l00022"></a><a class="code" href="namespacerr.html#a4949e13eb1f671588350f2925e667472">00022</a> <span class="keyword">const</span> <span class="keywordtype">int</span>       <a class="code" href="namespacerr.html#a4949e13eb1f671588350f2925e667472">MAX_MODULE</a>  = 512;
+<a name="l00023"></a>00023 
+<a name="l00024"></a>00024 <span class="comment">//Have all RoadRunner classes descending from a rrObject</span>
+<a name="l00025"></a><a class="code" href="classrr_1_1rr_object.html">00025</a> <span class="keyword">class </span><a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> <a class="code" href="classrr_1_1rr_object.html">rrObject</a>
+<a name="l00026"></a>00026 {
+<a name="l00027"></a>00027     <span class="keyword">protected</span>:
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029     <span class="keyword">public</span>:
+<a name="l00030"></a>00030                         <a class="code" href="classrr_1_1rr_object.html">rrObject</a>();
+<a name="l00031"></a>00031         <span class="keyword">virtual</span>        ~<a class="code" href="classrr_1_1rr_object.html">rrObject</a>();
+<a name="l00032"></a>00032 };
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034 }
+<a name="l00035"></a>00035 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -130,7 +134,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:26:59 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

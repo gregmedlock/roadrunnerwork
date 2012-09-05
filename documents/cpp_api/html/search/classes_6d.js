@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['matrix',['Matrix',['../class_l_i_b___l_a_1_1_matrix.html',1,'LIB_LA']]],
+  ['matrix',['Matrix',['../class_lib_road_runner_1_1_util_1_1_unused_1_1_matrix.html',1,'LibRoadRunner::Util::Unused']]],
   ['modelfromc',['ModelFromC',['../classrr_1_1_model_from_c.html',1,'rr']]],
   ['modelgenerator',['ModelGenerator',['../classrr_1_1_model_generator.html',1,'rr']]],
   ['modelstate',['ModelState',['../classrr_1_1_model_state.html',1,'rr']]],

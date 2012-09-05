@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['n',['n',['../classrr_1_1_n_l_e_q_interface.html#aba43881d62227b08a69a45d2d6bf3b85',1,'rr::NLEQInterface']]],
-  ['name',['name',['../classrr_1_1_symbol.html#a5f7de6b7c858536fbbf7aed3b6ade86f',1,'rr::Symbol']]],
+  ['n',['n',['../classrr_1_1_n_l_e_q_interface.html#afbf62076fcc443da566f3ab6a2fedac4',1,'rr::NLEQInterface']]],
+  ['name',['name',['../class_lib_road_runner_1_1_util_1_1_unused_1_1_matrix.html#ae78fe7585a9fdecaabebfef0dbf95758',1,'LibRoadRunner::Util::Unused::Matrix.name()'],['../classrr_1_1_symbol.html#a5f7de6b7c858536fbbf7aed3b6ade86f',1,'rr::Symbol::name()']]],
   ['nl',['NL',['../classrr_1_1_road_runner.html#a26fcc607b6239a5d0ba256bc46a40e81',1,'rr::RoadRunner']]],
+  ['nleq1',['NLEQ1',['../classrr_1_1_n_l_e_q_interface.html#ac28c337631579dd12a5b63ef0ec9e903',1,'rr::NLEQInterface']]],
   ['nopts',['nOpts',['../classrr_1_1_n_l_e_q_interface.html#adf83f83411d53eb0ec65d25064e08db9',1,'rr::NLEQInterface']]],
   ['numboundaryvariables',['numBoundaryVariables',['../classrr_1_1_i_model.html#a28d4191e1190723a641720ac40a314d4',1,'rr::IModel::numBoundaryVariables()'],['../classrr_1_1_model_from_c.html#a62d45c7d9d65c914f3c1c452f3410ce8',1,'rr::ModelFromC::numBoundaryVariables()']]],
   ['numcompartments',['numCompartments',['../classrr_1_1_i_model.html#ab8c98ecab939938a1a48f774edea0eae',1,'rr::IModel::numCompartments()'],['../classrr_1_1_model_from_c.html#afac5a285dee213ad39853c8ef14a3489',1,'rr::ModelFromC::numCompartments()']]],

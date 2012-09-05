@@ -82,7 +82,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -101,9 +101,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">rr::NLEQInterface Class Reference</div>  </div>
 </div><!--header-->
@@ -122,39 +123,52 @@ Inheritance diagram for rr::NLEQInterface:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ad773abe6402ce86c3c4779d8906356d7">IsAvailable</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a855a5538f4709400eb809b1b8f068e3e">NLEQInterface</a> (<a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a> *_model=NULL)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a3717bccab5c9272777393b7bbd7c466b">setScalingFactors</a> (vector&lt; double &gt; &amp;sx)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new Instance of NLEQ for the given Model.  <a href="#a855a5538f4709400eb809b1b8f068e3e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a182947058d6ed7035c185dbd499ee08a">setScalingFactors</a> (const vector&lt; double &gt; &amp;sx)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Scaling Factors.  <a href="#a182947058d6ed7035c185dbd499ee08a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#aee7e693b99b20a84a14d342629053051">getNumberOfNewtonIterations</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Number of Newton Iterations.  <a href="#aee7e693b99b20a84a14d342629053051"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a5ba8c79471a791dca1b116ec529913bc">getNumberOfCorrectorSteps</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Number of Corrector steps.  <a href="#a5ba8c79471a791dca1b116ec529913bc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ae3f28f9d17564e83bc7768606f242143">getNumberOfModelEvaluations</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Number of Model Evaluations.  <a href="#ae3f28f9d17564e83bc7768606f242143"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a6af8655893eb352e23b6fdff80492b30">getNumberOfJacobianEvaluations</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Number Of Jacobian Evaluations.  <a href="#a6af8655893eb352e23b6fdff80492b30"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a63627b1654fe7d0c5f924e25a8df11eb">getNumberOfModelEvaluationsForJacobian</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a0037b6604807a4ce9f832c40a81b1ce7">Test</a> (string fileName)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the Number of Model Evaluations For Jacobian.  <a href="#a63627b1654fe7d0c5f924e25a8df11eb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a1fc6160cd75570ecf17de69396a78e7a">Test</a> (const string &amp;fileName)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ac98c14afc9ab9498d3b69094ae14c6f7">solve</a> (const vector&lt; double &gt; &amp;yin)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a new Instance of NLEQ for the given Model.  <a href="#ac98c14afc9ab9498d3b69094ae14c6f7"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Thea actual solver rourine making the call to NLEQ1.  <a href="#ac98c14afc9ab9498d3b69094ae14c6f7"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a7c4fbaa15646e5052ada46c1d1fee61e">ComputeSumsOfSquares</a> ()</td></tr>
+<tr><td colspan="2"><h2><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#aa28a4db7852adfab7f7016440fac0643">GetModel</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ac0317c008d1c57442d69e54031bdd2cc">GetN</a> ()</td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a84f880a1a7ee2dc76cf665b251d06fdd">IsAvailable</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ae341a135cbd8c70c3c5862e1d9351d82">defaultTolerance</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a8c2610b7a0258a7424130208a7731c41">defaultMaxInterations</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a0597b41c2f1643c2012d45b6f1dc4a05">relativeTolerance</a></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a0b32efd816be125548f9f7de2a3c9ec0">maxIterations</a></td></tr>
-<tr><td colspan="2"><h2><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#aa3eb50b26748f14c2f061a1904c39a27">ThrowErrorForStatus</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ae341a135cbd8c70c3c5862e1d9351d82">defaultTolerance</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a0597b41c2f1643c2012d45b6f1dc4a05">relativeTolerance</a></td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#adf83f83411d53eb0ec65d25064e08db9">nOpts</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a829266688cf555a58d301d371b622e72">IWK</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ab081225f9535073da7a2e2d6891ed387">LIWK</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#af20e6922cde3ff4d8e585e9b9d07cb0e">LWRK</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a59ea8ba1b9c0b78afd31c6c21988594b">RWK</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a4215f7043b3146e812dc9d8fbeae23c3">XScal</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a992229d9cd18d9585d8e05ad3911bf39">ierr</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ade488f05e9c9c8c5c6ca18b35b7dd254">iopt</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a53f49f781209aa8545737fb42b9a3e3c">model</a></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#aba43881d62227b08a69a45d2d6bf3b85">n</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">long *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a7d0b0e2e041cfaa8afe77e5f8d0a3607">IWK</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ae69330b036297e0f5ccf61219e07b379">LIWK</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a3314b09b0df301af2b176e9abce3d2ea">LWRK</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ac7f2f7e282e7d3bfb822ec67598198ec">RWK</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a639269affe3567137e4d3e9bc4467759">XScal</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#aa065269a751c100e5cd10c59f0864bfc">ierr</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">long *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a0092be35bc61903897ad475eec8401b5">iopt</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a2ac6d5daddd87280610e4942a31f9b4b">mNLEQDLLName</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">HINSTANCE&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a7af88276659b3df35b2a88f7b125d957">mDLLInstance</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacerr.html#a75acf4b84850fab27abb5d4f1a5e9ab0">cNLEQ1</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#ac28c337631579dd12a5b63ef0ec9e903">NLEQ1</a></td></tr>
+<tr><td colspan="2"><h2><a name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#a9fd441104e6590aab907a9db046ffcd6">model</a> = NULL</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classrr_1_1_n_l_e_q_interface.html#afbf62076fcc443da566f3ab6a2fedac4">n</a> = 0</td></tr>
 </table>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a855a5538f4709400eb809b1b8f068e3e"></a><!-- doxytag: member="rr::NLEQInterface::NLEQInterface" ref="a855a5538f4709400eb809b1b8f068e3e" args="(ModelFromC *_model=NULL)" -->
@@ -166,11 +180,19 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a> *&#160;</td>
           <td class="paramname"><em>_model</em> = <code>NULL</code></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Creates a new Instance of NLEQ for the given Model. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">model</td><td>the model to create NLEQ for</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -184,6 +206,38 @@ Protected Attributes</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa28a4db7852adfab7f7016440fac0643"></a><!-- doxytag: member="rr::NLEQInterface::GetModel" ref="aa28a4db7852adfab7f7016440fac0643" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a> * <a class="el" href="classrr_1_1_n_l_e_q_interface.html#aa28a4db7852adfab7f7016440fac0643">rr::NLEQInterface::GetModel</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [static]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac0317c008d1c57442d69e54031bdd2cc"></a><!-- doxytag: member="rr::NLEQInterface::GetN" ref="ac0317c008d1c57442d69e54031bdd2cc" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long <a class="el" href="classrr_1_1_n_l_e_q_interface.html#ac0317c008d1c57442d69e54031bdd2cc">rr::NLEQInterface::GetN</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [static]</code></td>
         </tr>
       </table>
 </div>
@@ -205,6 +259,9 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Returns the Number of Corrector steps. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns the Number of Corrector steps</dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a6af8655893eb352e23b6fdff80492b30"></a><!-- doxytag: member="rr::NLEQInterface::getNumberOfJacobianEvaluations" ref="a6af8655893eb352e23b6fdff80492b30" args="()" -->
@@ -220,6 +277,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Returns the Number Of Jacobian Evaluations. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>the Number Of Jacobian Evaluations</dd></dl>
 
 </div>
 </div>
@@ -237,6 +297,9 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Returns the Number of Model Evaluations. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>the Number of Model Evaluations</dd></dl>
+
 </div>
 </div>
 <a class="anchor" id="a63627b1654fe7d0c5f924e25a8df11eb"></a><!-- doxytag: member="rr::NLEQInterface::getNumberOfModelEvaluationsForJacobian" ref="a63627b1654fe7d0c5f924e25a8df11eb" args="()" -->
@@ -252,6 +315,9 @@ Protected Attributes</h2></td></tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Returns the Number of Model Evaluations For Jacobian. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>the Number of Model Evaluations For Jacobian</dd></dl>
 
 </div>
 </div>
@@ -269,22 +335,49 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
+<p>Returns the Number of Newton Iterations. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>the Number of Newton Iterations</dd></dl>
+
 </div>
 </div>
-<a class="anchor" id="a3717bccab5c9272777393b7bbd7c466b"></a><!-- doxytag: member="rr::NLEQInterface::setScalingFactors" ref="a3717bccab5c9272777393b7bbd7c466b" args="(vector&lt; double &gt; &amp;sx)" -->
+<a class="anchor" id="ad773abe6402ce86c3c4779d8906356d7"></a><!-- doxytag: member="rr::NLEQInterface::IsAvailable" ref="ad773abe6402ce86c3c4779d8906356d7" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a3717bccab5c9272777393b7bbd7c466b">rr::NLEQInterface::setScalingFactors</a> </td>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_n_l_e_q_interface.html#ad773abe6402ce86c3c4779d8906356d7">rr::NLEQInterface::IsAvailable</a> </td>
           <td>(</td>
-          <td class="paramtype">vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a182947058d6ed7035c185dbd499ee08a"></a><!-- doxytag: member="rr::NLEQInterface::setScalingFactors" ref="a182947058d6ed7035c185dbd499ee08a" args="(const vector&lt; double &gt; &amp;sx)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a182947058d6ed7035c185dbd499ee08a">rr::NLEQInterface::setScalingFactors</a> </td>
+          <td>(</td>
+          <td class="paramtype">const vector&lt; double &gt; &amp;&#160;</td>
           <td class="paramname"><em>sx</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
+
+<p>Sets the Scaling Factors. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sx</td><td>Array of Scaling factors</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -303,44 +396,29 @@ Protected Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Creates a new Instance of NLEQ for the given Model. </p>
+<p>Thea actual solver rourine making the call to NLEQ1. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">model</td><td>the model to create NLEQ for</td></tr>
+    <tr><td class="paramname">yin</td><td>Array of Model variables</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>sums of squares </dd></dl>
 
 <p>Implements <a class="el" href="classrr_1_1_i_steady_state_solver.html#a9c7629e2e6655008097081a55f14e594">rr::ISteadyStateSolver</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a0037b6604807a4ce9f832c40a81b1ce7"></a><!-- doxytag: member="rr::NLEQInterface::Test" ref="a0037b6604807a4ce9f832c40a81b1ce7" args="(string fileName)" -->
+<a class="anchor" id="a1fc6160cd75570ecf17de69396a78e7a"></a><!-- doxytag: member="rr::NLEQInterface::Test" ref="a1fc6160cd75570ecf17de69396a78e7a" args="(const string &amp;fileName)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a0037b6604807a4ce9f832c40a81b1ce7">rr::NLEQInterface::Test</a> </td>
+          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a1fc6160cd75570ecf17de69396a78e7a">rr::NLEQInterface::Test</a> </td>
           <td>(</td>
-          <td class="paramtype">string&#160;</td>
+          <td class="paramtype">const string &amp;&#160;</td>
           <td class="paramname"><em>fileName</em></td><td>)</td>
           <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="aa3eb50b26748f14c2f061a1904c39a27"></a><!-- doxytag: member="rr::NLEQInterface::ThrowErrorForStatus" ref="aa3eb50b26748f14c2f061a1904c39a27" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespacerr.html#a45d98892baea0f21fcbdc3f35f14bb0a">void</a> <a class="el" href="classrr_1_1_n_l_e_q_interface.html#aa3eb50b26748f14c2f061a1904c39a27">rr::NLEQInterface::ThrowErrorForStatus</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -375,12 +453,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a992229d9cd18d9585d8e05ad3911bf39"></a><!-- doxytag: member="rr::NLEQInterface::ierr" ref="a992229d9cd18d9585d8e05ad3911bf39" args="" -->
+<a class="anchor" id="aa065269a751c100e5cd10c59f0864bfc"></a><!-- doxytag: member="rr::NLEQInterface::ierr" ref="aa065269a751c100e5cd10c59f0864bfc" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a992229d9cd18d9585d8e05ad3911bf39">rr::NLEQInterface::ierr</a><code> [protected]</code></td>
+          <td class="memname">long <a class="el" href="classrr_1_1_n_l_e_q_interface.html#aa065269a751c100e5cd10c59f0864bfc">rr::NLEQInterface::ierr</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -388,12 +466,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ade488f05e9c9c8c5c6ca18b35b7dd254"></a><!-- doxytag: member="rr::NLEQInterface::iopt" ref="ade488f05e9c9c8c5c6ca18b35b7dd254" args="" -->
+<a class="anchor" id="a0092be35bc61903897ad475eec8401b5"></a><!-- doxytag: member="rr::NLEQInterface::iopt" ref="a0092be35bc61903897ad475eec8401b5" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;int&gt; <a class="el" href="classrr_1_1_n_l_e_q_interface.html#ade488f05e9c9c8c5c6ca18b35b7dd254">rr::NLEQInterface::iopt</a><code> [protected]</code></td>
+          <td class="memname">long* <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a0092be35bc61903897ad475eec8401b5">rr::NLEQInterface::iopt</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -401,12 +479,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a84f880a1a7ee2dc76cf665b251d06fdd"></a><!-- doxytag: member="rr::NLEQInterface::IsAvailable" ref="a84f880a1a7ee2dc76cf665b251d06fdd" args="" -->
+<a class="anchor" id="a7d0b0e2e041cfaa8afe77e5f8d0a3607"></a><!-- doxytag: member="rr::NLEQInterface::IWK" ref="a7d0b0e2e041cfaa8afe77e5f8d0a3607" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="stdbool_8h.html#abb452686968e48b67397da5f97445f5b">bool</a> <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a84f880a1a7ee2dc76cf665b251d06fdd">rr::NLEQInterface::IsAvailable</a></td>
+          <td class="memname">long* <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a7d0b0e2e041cfaa8afe77e5f8d0a3607">rr::NLEQInterface::IWK</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -414,12 +492,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a829266688cf555a58d301d371b622e72"></a><!-- doxytag: member="rr::NLEQInterface::IWK" ref="a829266688cf555a58d301d371b622e72" args="" -->
+<a class="anchor" id="ae69330b036297e0f5ccf61219e07b379"></a><!-- doxytag: member="rr::NLEQInterface::LIWK" ref="ae69330b036297e0f5ccf61219e07b379" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;int&gt; <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a829266688cf555a58d301d371b622e72">rr::NLEQInterface::IWK</a><code> [protected]</code></td>
+          <td class="memname">long <a class="el" href="classrr_1_1_n_l_e_q_interface.html#ae69330b036297e0f5ccf61219e07b379">rr::NLEQInterface::LIWK</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -427,25 +505,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ab081225f9535073da7a2e2d6891ed387"></a><!-- doxytag: member="rr::NLEQInterface::LIWK" ref="ab081225f9535073da7a2e2d6891ed387" args="" -->
+<a class="anchor" id="a3314b09b0df301af2b176e9abce3d2ea"></a><!-- doxytag: member="rr::NLEQInterface::LWRK" ref="a3314b09b0df301af2b176e9abce3d2ea" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classrr_1_1_n_l_e_q_interface.html#ab081225f9535073da7a2e2d6891ed387">rr::NLEQInterface::LIWK</a><code> [protected]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="af20e6922cde3ff4d8e585e9b9d07cb0e"></a><!-- doxytag: member="rr::NLEQInterface::LWRK" ref="af20e6922cde3ff4d8e585e9b9d07cb0e" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int <a class="el" href="classrr_1_1_n_l_e_q_interface.html#af20e6922cde3ff4d8e585e9b9d07cb0e">rr::NLEQInterface::LWRK</a><code> [protected]</code></td>
+          <td class="memname">long <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a3314b09b0df301af2b176e9abce3d2ea">rr::NLEQInterface::LWRK</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -466,12 +531,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a53f49f781209aa8545737fb42b9a3e3c"></a><!-- doxytag: member="rr::NLEQInterface::model" ref="a53f49f781209aa8545737fb42b9a3e3c" args="" -->
+<a class="anchor" id="a7af88276659b3df35b2a88f7b125d957"></a><!-- doxytag: member="rr::NLEQInterface::mDLLInstance" ref="a7af88276659b3df35b2a88f7b125d957" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a>* <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a53f49f781209aa8545737fb42b9a3e3c">rr::NLEQInterface::model</a><code> [protected]</code></td>
+          <td class="memname">HINSTANCE <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a7af88276659b3df35b2a88f7b125d957">rr::NLEQInterface::mDLLInstance</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -479,12 +544,51 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aba43881d62227b08a69a45d2d6bf3b85"></a><!-- doxytag: member="rr::NLEQInterface::n" ref="aba43881d62227b08a69a45d2d6bf3b85" args="" -->
+<a class="anchor" id="a2ac6d5daddd87280610e4942a31f9b4b"></a><!-- doxytag: member="rr::NLEQInterface::mNLEQDLLName" ref="a2ac6d5daddd87280610e4942a31f9b4b" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int <a class="el" href="classrr_1_1_n_l_e_q_interface.html#aba43881d62227b08a69a45d2d6bf3b85">rr::NLEQInterface::n</a><code> [protected]</code></td>
+          <td class="memname">string <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a2ac6d5daddd87280610e4942a31f9b4b">rr::NLEQInterface::mNLEQDLLName</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a9fd441104e6590aab907a9db046ffcd6"></a><!-- doxytag: member="rr::NLEQInterface::model" ref="a9fd441104e6590aab907a9db046ffcd6" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classrr_1_1_model_from_c.html">ModelFromC</a> * <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a9fd441104e6590aab907a9db046ffcd6">rr::NLEQInterface::model</a> = NULL<code> [static, protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afbf62076fcc443da566f3ab6a2fedac4"></a><!-- doxytag: member="rr::NLEQInterface::n" ref="afbf62076fcc443da566f3ab6a2fedac4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long <a class="el" href="classrr_1_1_n_l_e_q_interface.html#afbf62076fcc443da566f3ab6a2fedac4">rr::NLEQInterface::n</a> = 0<code> [static, protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ac28c337631579dd12a5b63ef0ec9e903"></a><!-- doxytag: member="rr::NLEQInterface::NLEQ1" ref="ac28c337631579dd12a5b63ef0ec9e903" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacerr.html#a75acf4b84850fab27abb5d4f1a5e9ab0">cNLEQ1</a> <a class="el" href="classrr_1_1_n_l_e_q_interface.html#ac28c337631579dd12a5b63ef0ec9e903">rr::NLEQInterface::NLEQ1</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -518,12 +622,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a59ea8ba1b9c0b78afd31c6c21988594b"></a><!-- doxytag: member="rr::NLEQInterface::RWK" ref="a59ea8ba1b9c0b78afd31c6c21988594b" args="" -->
+<a class="anchor" id="ac7f2f7e282e7d3bfb822ec67598198ec"></a><!-- doxytag: member="rr::NLEQInterface::RWK" ref="ac7f2f7e282e7d3bfb822ec67598198ec" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a59ea8ba1b9c0b78afd31c6c21988594b">rr::NLEQInterface::RWK</a><code> [protected]</code></td>
+          <td class="memname">double* <a class="el" href="classrr_1_1_n_l_e_q_interface.html#ac7f2f7e282e7d3bfb822ec67598198ec">rr::NLEQInterface::RWK</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -531,12 +635,12 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a4215f7043b3146e812dc9d8fbeae23c3"></a><!-- doxytag: member="rr::NLEQInterface::XScal" ref="a4215f7043b3146e812dc9d8fbeae23c3" args="" -->
+<a class="anchor" id="a639269affe3567137e4d3e9bc4467759"></a><!-- doxytag: member="rr::NLEQInterface::XScal" ref="a639269affe3567137e4d3e9bc4467759" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vector&lt;double&gt; <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a4215f7043b3146e812dc9d8fbeae23c3">rr::NLEQInterface::XScal</a><code> [protected]</code></td>
+          <td class="memname">double* <a class="el" href="classrr_1_1_n_l_e_q_interface.html#a639269affe3567137e4d3e9bc4467759">rr::NLEQInterface::XScal</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
@@ -545,8 +649,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>C:/roadrunnerwork/source/trunk/src/<a class="el" href="rr_n_l_e_q_interface_8h_source.html">rrNLEQInterface.h</a></li>
-<li>C:/roadrunnerwork/source/trunk/src/<a class="el" href="rr_n_l_e_q_interface_8cpp.html">rrNLEQInterface.cpp</a></li>
+<li>R:/roadrunnerwork/trunk/source/<a class="el" href="rr_n_l_e_q_interface_8h_source.html">rrNLEQInterface.h</a></li>
+<li>R:/roadrunnerwork/trunk/source/<a class="el" href="rr_n_l_e_q_interface_8cpp.html">rrNLEQInterface.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- window showing the filter options -->
@@ -554,7 +658,7 @@ Protected Attributes</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -566,7 +670,7 @@ Protected Attributes</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:27:02 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:59 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

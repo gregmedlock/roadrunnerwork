@@ -10,6 +10,8 @@ var searchData=
   ['scannerexception',['ScannerException',['../classrr_1_1_scanner_exception.html',1,'rr']]],
   ['simulationdata',['SimulationData',['../classrr_1_1_simulation_data.html',1,'rr']]],
   ['simulationsettings',['SimulationSettings',['../classrr_1_1_simulation_settings.html',1,'rr']]],
+  ['sortbypriority',['SortByPriority',['../structrr_1_1_sort_by_priority.html',1,'rr']]],
+  ['stopwatch',['StopWatch',['../classrr_1_1_stop_watch.html',1,'rr']]],
   ['streamwriter',['StreamWriter',['../classrr_1_1_stream_writer.html',1,'rr']]],
   ['stringbuilder',['StringBuilder',['../classrr_1_1_string_builder.html',1,'rr']]],
   ['stringlist',['StringList',['../classrr_1_1_string_list.html',1,'rr']]],

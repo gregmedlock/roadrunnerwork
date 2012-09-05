@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>RoadRunner C++ API: C:/roadrunnerwork/source/trunk/src/rrInteropUtils.h Source File</title>
+<title>RoadRunner C++ API: R:/roadrunnerwork/trunk/source/rrInteropUtils.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -78,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">C:/roadrunnerwork/source/trunk/src/rrInteropUtils.h</div>  </div>
+<div class="title">R:/roadrunnerwork/trunk/source/rrInteropUtils.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="rr_interop_utils_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef rrInteropUtilsH</span>
@@ -86,11 +86,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00003"></a>00003 <span class="preprocessor"></span><span class="preprocessor">#include &lt;vector&gt;</span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &lt;string&gt;</span>
 <a name="l00005"></a>00005 <span class="preprocessor">#include &quot;<a class="code" href="rr_exporter_8h.html">rrExporter.h</a>&quot;</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="matrix_8h.html">matrix.h</a>&quot;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="ls_matrix_8h.html">lsMatrix.h</a>&quot;</span>
 <a name="l00007"></a>00007 <span class="keyword">using</span> std::string;
 <a name="l00008"></a>00008 <span class="keyword">using</span> std::vector;
 <a name="l00009"></a>00009 
-<a name="l00010"></a><a class="code" href="rr_interop_utils_8h.html#ad1b397419ef6cd283a3db4bbc4906426">00010</a> <span class="keyword">typedef</span> <span class="keywordtype">long</span>* <a class="code" href="namespacerr.html#a26f5291bcac97ecb10e8413932a3c6bc">IntPtr</a>;
+<a name="l00010"></a><a class="code" href="rr_interop_utils_8h.html#ad1b397419ef6cd283a3db4bbc4906426">00010</a> <span class="keyword">typedef</span> <span class="keywordtype">long</span>* <a class="code" href="rr_lib_struct_support_8h.html#ad1b397419ef6cd283a3db4bbc4906426">IntPtr</a>;
 <a name="l00011"></a>00011 <span class="keyword">namespace </span>rr
 <a name="l00012"></a>00012 {
 <a name="l00013"></a>00013 
@@ -131,7 +131,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00048"></a>00048 <span class="comment">//        /// &lt;/summary&gt;</span>
 <a name="l00049"></a>00049 <span class="comment">//        internal static double[] GetDoubleArrayFromPtrLA(IntPtr pointer, int nLength)</span>
 <a name="l00050"></a>00050 
-<a name="l00054"></a>00054 <a class="code" href="namespacerr.html#a3f210438bb4840f0136a706ed7f56909">LIB_LA::DoubleMatrix</a> <a class="code" href="namespacerr.html#a6d2dd446170b63db852bb7ad9da715ff" title="Get double matrix from ptr.">GetDoubleMatrixFromPtr</a>(<a class="code" href="rr_interop_utils_8h.html#ad1b397419ef6cd283a3db4bbc4906426">IntPtr</a> pointer, <span class="keywordtype">int</span> nRows, <span class="keywordtype">int</span> nCols);
+<a name="l00054"></a>00054 <a class="code" href="class_l_i_b___l_a_1_1_matrix.html" title="LIB_LA::Matrix is the matrix class used by LIB_LA::LibLA and LIB_STRUTURAL::LibStructural.">LIB_LA::DoubleMatrix</a> <a class="code" href="namespacerr.html#a6d2dd446170b63db852bb7ad9da715ff" title="Get double matrix from ptr.">GetDoubleMatrixFromPtr</a>(<a class="code" href="rr_lib_struct_support_8h.html#ad1b397419ef6cd283a3db4bbc4906426">IntPtr</a> pointer, <span class="keywordtype">int</span> nRows, <span class="keywordtype">int</span> nCols);
 <a name="l00055"></a>00055 
 <a name="l00056"></a>00056 <span class="comment">//        /// &lt;summary&gt;</span>
 <a name="l00057"></a>00057 <span class="comment">//        /// Get double matrix from ptr</span>
@@ -161,7 +161,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00081"></a>00081 <span class="comment">//        /// &lt;summary&gt;</span>
 <a name="l00082"></a>00082 <span class="comment">//        /// Get string array from ptr</span>
 <a name="l00083"></a>00083 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00084"></a>00084 vector&lt;string&gt; <a class="code" href="namespacerr.html#a74d7a9312408f3746134205b9c1429ac" title="Get string array from ptr.">GetStringArrayFromPtr</a>(<a class="code" href="rr_interop_utils_8h.html#ad1b397419ef6cd283a3db4bbc4906426">IntPtr</a> &amp;pointer, <span class="keywordtype">int</span> nLength);
+<a name="l00084"></a>00084 vector&lt;string&gt; <a class="code" href="namespacerr.html#a74d7a9312408f3746134205b9c1429ac" title="Get string array from ptr.">GetStringArrayFromPtr</a>(<a class="code" href="rr_lib_struct_support_8h.html#ad1b397419ef6cd283a3db4bbc4906426">IntPtr</a> &amp;pointer, <span class="keywordtype">int</span> nLength);
 <a name="l00085"></a>00085 
 <a name="l00086"></a>00086 <span class="comment">//        /// &lt;summary&gt;</span>
 <a name="l00087"></a>00087 <span class="comment">//        /// Get string array from ptr</span>
@@ -171,7 +171,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00091"></a>00091 <span class="comment">//        /// &lt;summary&gt;</span>
 <a name="l00092"></a>00092 <span class="comment">//        /// Get string from ptr</span>
 <a name="l00093"></a>00093 <span class="comment">//        /// &lt;/summary&gt;</span>
-<a name="l00094"></a>00094 <a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> <span class="keywordtype">string</span> <a class="code" href="namespacerr.html#a7ea620eae104e9612f14dc902953c4ae" title="Get string from ptr.">GetStringFromPtr</a>(<a class="code" href="rr_interop_utils_8h.html#ad1b397419ef6cd283a3db4bbc4906426">IntPtr</a> &amp;pointer, <span class="keywordtype">int</span> nLength);
+<a name="l00094"></a>00094 <a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> <span class="keywordtype">string</span> <a class="code" href="namespacerr.html#a7ea620eae104e9612f14dc902953c4ae" title="Get string from ptr.">GetStringFromPtr</a>(<a class="code" href="rr_lib_struct_support_8h.html#ad1b397419ef6cd283a3db4bbc4906426">IntPtr</a> &amp;pointer, <span class="keywordtype">int</span> nLength);
 <a name="l00095"></a>00095 
 <a name="l00096"></a>00096 <span class="comment">//        /// &lt;summary&gt;</span>
 <a name="l00097"></a>00097 <span class="comment">//        /// Get string from ptr</span>
@@ -215,7 +215,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -227,7 +227,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:26:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

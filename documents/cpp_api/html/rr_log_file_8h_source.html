@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>RoadRunner C++ API: C:/roadrunnerwork/source/trunk/src/rrLogFile.h Source File</title>
+<title>RoadRunner C++ API: R:/roadrunnerwork/trunk/source/rrLogFile.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -78,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">C:/roadrunnerwork/source/trunk/src/rrLogFile.h</div>  </div>
+<div class="title">R:/roadrunnerwork/trunk/source/rrLogFile.h</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="rr_log_file_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef rrLogFileH</span>
@@ -99,28 +99,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00016"></a><a class="code" href="classrr_1_1_log_file.html">00016</a> <span class="keyword">class </span><a class="code" href="rr_exporter_8h.html#a95838c08bddd3334fa2dd38154b0b8f5">RR_DECLSPEC</a> <a class="code" href="classrr_1_1_log_file.html">LogFile</a> : <span class="keyword">public</span> <a class="code" href="classrr_1_1rr_object.html">rrObject</a>
 <a name="l00017"></a>00017 {
 <a name="l00018"></a>00018     <span class="keyword">private</span>:
-<a name="l00019"></a>00019                                 <span class="comment">// prevent copying and assignmen</span>
+<a name="l00019"></a>00019                                 <span class="comment">// prevent copying and assignment</span>
 <a name="l00020"></a>00020                                 <a class="code" href="classrr_1_1_log_file.html">LogFile</a>(<span class="keyword">const</span> <a class="code" href="classrr_1_1_log_file.html">LogFile</a>&amp; logFile);
 <a name="l00021"></a>00021                                 <a class="code" href="classrr_1_1_log_file.html">LogFile</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classrr_1_1_log_file.html">LogFile</a>&amp;);
 <a name="l00022"></a>00022         <span class="keywordtype">string</span>                  mFileName;
 <a name="l00023"></a>00023 
 <a name="l00024"></a>00024     <span class="keyword">public</span>:
-<a name="l00025"></a>00025 <span class="comment">//                                LogFile(const char* fName);</span>
-<a name="l00026"></a>00026                                 <a class="code" href="classrr_1_1_log_file.html">LogFile</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; fName);
-<a name="l00027"></a>00027                                ~<a class="code" href="classrr_1_1_log_file.html">LogFile</a>();
-<a name="l00028"></a><a class="code" href="classrr_1_1_log_file.html#a83381fc8a435088d5f837214eedd36b9">00028</a>         FILE*                   <a class="code" href="classrr_1_1_log_file.html#a83381fc8a435088d5f837214eedd36b9">mFILEHandle</a>;
-<a name="l00029"></a><a class="code" href="classrr_1_1_log_file.html#ae2ddd949913ab1766ded7b93dbebfde8">00029</a>         <span class="keywordtype">string</span>                  <a class="code" href="classrr_1_1_log_file.html#ae2ddd949913ab1766ded7b93dbebfde8">GetFileName</a>(){<span class="keywordflow">return</span> mFileName;}
-<a name="l00030"></a>00030 };
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 }
-<a name="l00033"></a>00033 <span class="preprocessor">#endif</span>
+<a name="l00025"></a>00025                                 <a class="code" href="classrr_1_1_log_file.html">LogFile</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; fName);
+<a name="l00026"></a>00026                                ~<a class="code" href="classrr_1_1_log_file.html">LogFile</a>();
+<a name="l00027"></a><a class="code" href="classrr_1_1_log_file.html#a83381fc8a435088d5f837214eedd36b9">00027</a>         FILE*                   <a class="code" href="classrr_1_1_log_file.html#a83381fc8a435088d5f837214eedd36b9">mFILEHandle</a>;
+<a name="l00028"></a><a class="code" href="classrr_1_1_log_file.html#ae2ddd949913ab1766ded7b93dbebfde8">00028</a>         <span class="keywordtype">string</span>                  <a class="code" href="classrr_1_1_log_file.html#ae2ddd949913ab1766ded7b93dbebfde8">GetFileName</a>(){<span class="keywordflow">return</span> mFileName;}
+<a name="l00029"></a>00029 };
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031 }
+<a name="l00032"></a>00032 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Defines</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(8)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(9)"><span class="SelectionMark">&#160;</span>Properties</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(10)"><span class="SelectionMark">&#160;</span>Friends</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(11)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -132,7 +131,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jun 11 2012 13:26:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 11:46:58 for RoadRunner C++ API by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>
