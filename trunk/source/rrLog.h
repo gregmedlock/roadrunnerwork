@@ -34,13 +34,13 @@ class RR_DECLSPEC Logger : public LogContainer<LogOutput>
 {
 };
 
-
-
-
+#define DEBUG
+#ifdef DEBUG
 #define Log(level) \
     if (level > rr::GetHighestLogLevel()) { ; }\
     else if (level > gLog.GetLogLevel()) { ; } \
     else Logger().Get(level)
+#endif
 
 
 }//Namespace rr

@@ -658,6 +658,7 @@ var RRResult : PRRResultHandle;
     nr, nc : integer;
 begin
   RRResult := libSimulate;
+
   if RRResult = nil then
      raise Exception.Create (getLastError());
   try
