@@ -95,6 +95,9 @@
  \defgroup state Current state of system
  \brief Compute derivatives, fluxes, and other values of the system at the current state
 
+ \derfgroup steadystate
+ \brief Compute and obtain basic information about the steady state
+
  \defgroup reaction Reaction group
  \brief Get information about reaction rates
 
@@ -260,14 +263,82 @@ C_DECL_SPEC RRStringListHandle      rrCallConv   getSelectionList();
  \ingroup simulation
 */
 C_DECL_SPEC RRResultHandle          rrCallConv   simulate();
+
+/*!
+ \brief Carry out a time-course simulation based on the given arguments
+
+ Example: m = simulateEx (0, 25, 200);
+
+ \return RRResultHandle Returns an array containing the results of the simulation
+ \ingroup simulation
+*/
 C_DECL_SPEC RRResultHandle          rrCallConv   simulateEx(const double& timeStart, const double& timeEnd, const int& numberOfPoints);
+
+/*!
+ \brief Carry out a one step integration of the model
+
+ Example: status = OneStep (&currentTime, &timeStep, &newTimeStep);
+
+ \param double* currentTime The current time in the simulation
+ \param double* stepSize The step size to use in the integration
+ \param double* The new time (currentTime + stepSize)
+ \return Returns True if successful
+ \ingroup simulation
+*/
 C_DECL_SPEC bool                  	rrCallConv   oneStep(const double& currentTime, const double& stepSize, double& value);
+
+/*!
+ \brief Get the value of the current time start
+
+ Example: status = getTimeStart (&timeStart);
+
+ \param double* timeStart The current value for the time start
+ \return Returns True if successful
+ \ingroup simulation
+*/
 C_DECL_SPEC bool                    rrCallConv   getTimeStart(double& timeStart);
+
+/*!
+ \brief Get the value of the current time end
+
+ Example: status = getTimeStart (&timeEnd);
+
+ \param double* timeStart The current value for the time end
+ \return Returns True if successful
+ \ingroup simulation
+*/
 C_DECL_SPEC bool                    rrCallConv   getTimeEnd(double& timeEnd);
+
+/*!
+ \brief Get the value of the current number of points
+
+ Example: status = getNumPoints (&numberOfPoints);
+
+ \param int* numPoints The current value for the number of points
+ \return Returns True if successful
+ \ingroup simulation
+*/
 C_DECL_SPEC bool                    rrCallConv   getNumPoints (int& numPoints);
 
-// Steady state methods
+/*!
+ \brief Get the value of the current number of points
+
+ Example: status = steadyState (&closenessToSteadyState);
+
+ \param double* value This value is set during the call and indicates how close the solution is to the steady state. The smaller the value the better.
+ \return Returns True if successful
+ \ingroup steadystate
+*/
 C_DECL_SPEC bool                    rrCallConv   steadyState(double& value);
+
+/*!
+ \brief A convenient method for returning a vector of the steady state species concentrations
+
+ Example: RRVectorHandle values = computeSteadyStateValues ();
+
+ \return Returns the vector of steady state values or nil if an error occured
+ \ingroup steadystate
+*/
 C_DECL_SPEC RRVectorHandle          rrCallConv   computeSteadyStateValues();
 C_DECL_SPEC bool                    rrCallConv   setSteadyStateSelectionList(const char* list);
 C_DECL_SPEC RRStringListHandle      rrCallConv   getSteadyStateSelectionList();
