@@ -406,11 +406,15 @@ end;
 
 
 procedure TBaseMatrix.CreateNameLists (ri, ci : integer);
-var i : integer;
+var i : integer; str : string;
 begin
   FRowNames := TStringList.Create; FColumnNames := TStringList.Create;
   // Build some dummy names, Zero Index entries are dummy entries
-  for i := 0 to ri do FRowNames.add ('R' + inttostr (i));
+  for i := 0 to ri do
+      begin
+      str := 'R' + inttostr (i);
+      FRowNames.add (str);
+      end;
   for i := 0 to ci do FColumnNames.add ('C' + inttostr (i));
 end;
 

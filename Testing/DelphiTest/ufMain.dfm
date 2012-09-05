@@ -55,6 +55,20 @@ object frmMain: TfrmMain
     Height = 13
     Caption = 'Number of Points:'
   end
+  object Label6: TLabel
+    Left = 256
+    Top = 40
+    Width = 16
+    Height = 13
+    Caption = '0.0'
+  end
+  object Label7: TLabel
+    Left = 183
+    Top = 40
+    Width = 69
+    Height = 13
+    Caption = 'Memory Used:'
+  end
   object pnlBottm: TPanel
     Left = 0
     Top = 667
@@ -208,10 +222,6 @@ object frmMain: TfrmMain
     object TabSheet2: TTabSheet
       Caption = 'Source Code'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object MemoSource: TMemo
         Left = 0
         Top = 0
@@ -225,10 +235,6 @@ object frmMain: TfrmMain
     object TabSheet3: TTabSheet
       Caption = 'Header File'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object memoHeader: TMemo
         Left = 0
         Top = 0
@@ -242,10 +248,6 @@ object frmMain: TfrmMain
     object TabSheetCapabilities: TTabSheet
       Caption = 'Capabilities'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object memoCapabilities: TMemo
         Left = 0
         Top = 0

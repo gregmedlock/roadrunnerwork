@@ -64,6 +64,8 @@ type
     Label5: TLabel;
     btnGetL0Matrix: TButton;
     btnCopygrid: TButton;
+    Label6: TLabel;
+    Label7: TLabel;
     procedure btnGetCopyrightClick(Sender: TObject);
     procedure btnLoadSBMLClick(Sender: TObject);
     procedure btnGetAvailableSymbolsClick(Sender: TObject);
@@ -116,6 +118,19 @@ implementation
 {$R *.dfm}
 
 uses uMatrix, uRRList;
+
+function MemoryUsed: integer;
+var
+    st: TMemoryManagerState;
+    sb: TSmallBlockTypeState;
+begin
+    GetMemoryManagerState(st);
+    result := st.TotalAllocatedMediumBlockSize + st.TotalAllocatedLargeBlockSize;
+    for sb in st.SmallBlockTypeStates do begin
+        result := result + sb.UseableBlockSize * sb.AllocatedBlockCount;
+    end;
+end;
+
 
 procedure TfrmMain.btnGetCapabilitiesClick(Sender: TObject);
 begin
@@ -250,6 +265,7 @@ begin
     edtProgress.text := 'Failed to load SBML model';
     exit;
   end;
+  label6.caption := inttostr (MemoryUsed);
 end;
 
 procedure TfrmMain.btnSetBoundarySpeciesByIndexClick(Sender: TObject);
@@ -525,6 +541,7 @@ var
   m: TMatrix;
 begin
   m := simulate();
+  label6.caption := inttostr (MemoryUsed);
   try
     grid.ColCount := m.c + 1;
     grid.RowCount := m.r + 1;
