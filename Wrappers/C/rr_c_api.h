@@ -94,9 +94,26 @@ C_DECL_SPEC RRCCode*               	rrCallConv   getCCode();
 // Flags/Options
 C_DECL_SPEC bool                    rrCallConv   setComputeAndAssignConservationLaws(const bool& OnOrOff);
 
-// Load SBML methods
-C_DECL_SPEC bool                    rrCallConv   loadSBML(const char* sbml);
-C_DECL_SPEC bool                    rrCallConv   loadSBMLFromFile(const char* sbml);
+// -----------------------------------------------------------------------
+/** \} */
+/**
+  * @name Read models
+  */
+/** \{ */
+
+/*!
+ \brief Create a model from an SBML string
+ \param char* sbml string
+ \ingroup loadsave
+*/
+C_DECL_SPEC bool  rrCallConv   loadSBML(const char* sbml);
+
+/*!
+ \brief Create a model from a SBML file
+ \param char* file name 
+ \ingroup loadsave
+*/
+C_DECL_SPEC bool rrCallConv   loadSBMLFromFile(const char* sbml);
 
 // SBML utility methods
 C_DECL_SPEC char* 				    rrCallConv   getParamPromotedSBML(const char* sArg);
