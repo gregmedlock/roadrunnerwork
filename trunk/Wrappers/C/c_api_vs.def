@@ -10,6 +10,7 @@ EXPORTS
     writeSBML                                   = _writeSBML@0
     computeSteadyStateValues                    = _computeSteadyStateValues@0         
     evalModel                                   = _evalModel@0                        
+    freeArrayList                               = _freeArrayList@4                        
     freeCCode                                   = _freeCCode@4                        
     freeLabelStringList                         = _freeLabelStringList@4              
     freeMatrix                                  = _freeMatrix@4                       

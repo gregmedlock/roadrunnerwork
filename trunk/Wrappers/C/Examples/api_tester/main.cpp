@@ -66,8 +66,8 @@ int main(int argc, char* argv[])
 
 	//string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 	//string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-	//string fileName = modelsPath + "\\ss_threeSpecies.xml";
-	string fileName = "ss_threeSpecies.xml";
+	string fileName = modelsPath + "\\ss_threeSpecies.xml";
+	//string fileName = "ss_threeSpecies.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
@@ -372,7 +372,9 @@ int main(int argc, char* argv[])
     cout<<printVector(getFloatingSpeciesConcentrations());
     cout<<printVector(getGlobalParameterValues());
     cout<<"\n\n Symbols\n";
-    cout<<printArrayList(getAvailableSymbols());
+    RRArrayList2* symHandle = getAvailableSymbols();
+    cout<<printArrayList(symHandle);
+    freeArrayList(symHandle);
     cout<<"\n\n ================================\n";
     RRVector* test = getReactionRates();
     cout<<printVector(test);

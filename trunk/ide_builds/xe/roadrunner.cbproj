@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{8708D8F2-E671-4837-BD8C-BC7D269B101F}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -22,11 +22,11 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<BPILibOutputDir>$(RR_INSTALL)\lib</BPILibOutputDir>
+			<BPILibOutputDir>$(RR_DEBUG_INSTALL)\lib</BPILibOutputDir>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<FinalOutputDir>$(RR_INSTALL)\bin\</FinalOutputDir>
+			<FinalOutputDir>$(RR_DEBUG_INSTALL)\bin\</FinalOutputDir>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
 			<Defines>EXPORT_RR;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;LIBSTRUCT_STATIC;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
@@ -38,7 +38,7 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\ThirdParty\pugi\src\;..\..\source\nleq\;..\..\source\;..\..\source\libstruct\;..\..\source\mtrand\;$(RR_INSTALL)\include;$(RR_ROOT)\trunk\ThirdParty\clapack\3.2.1\include;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\ThirdParty\pugi\src\;..\..\source\nleq\;..\..\source\;..\..\source\libstruct\;..\..\source\mtrand\;$(RR_DEBUG_INSTALL)\include;$(RR_ROOT)\trunk\ThirdParty\clapack\3.2.1\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\ThirdParty\pugi\src\;R:\rrBuilds\xe\ThirdParty\lib\;R:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;R:\rrBuilds\xe\clapack\SRC\;..\..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\nleq\;C:\rrBuilds\xe\clapack\SRC\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;R:\rrInstalls\xe\lib\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrInstal..\lib\;C:\rrBuil..\clapack\SRC\;C:\rrBuil..\clapack\F2CLIBS\libf2c\;C:\rrBuil..\clapack\BLAS\SRC\;..\..\buil..\clapack\F2CLIBS\libf2c\;..\..\buil..\clapack\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\buil..\clapack\BLAS\SRC\;..\..\source\libstruct\;..\..\source\mtrand\;..\..\source\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\;..\..\instal..\lib\;..\..\source\;..\..\source\;..\..\source\Util\;..\..\source\Logger\;..\..\source\libstruct\;..\..\source\Util\mtrand\;..\..\source\;..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>

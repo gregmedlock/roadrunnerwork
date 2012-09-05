@@ -2869,11 +2869,47 @@ bool rrCallConv freeStringArrayList(RRStringArrayListHandle theList)
     return false;
 }
 
+bool rrCallConv freeArrayList(RRArrayList2Handle theList)
+{
+	try
+    {
+        if(!theList)
+        {
+            return true;
+        }
+
+        int itemCount = theList->ItemCount;
+        for(int i = 0; i < itemCount; i++)
+        {
+//            if(theList->Items[i].Item != NULL)
+//            {
+//                delete [] theList->Items[i].Item ;
+//            }
+//            else
+//            {
+//                //Item is a sublist
+//                freeStringArrayList(theList->Items[i].SubList);
+//            }
+        }
+
+        //delete [] theList->Items;
+    	//delete theList;
+    	return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return false;
+}
+
+///////////////////////////////////////////////////////////
 void rrCallConv Pause()
 {
     rr::Pause(true);
 }
-
 
 RRVectorHandle rrCallConv createVectorAPI (int size)
 {
@@ -2901,7 +2937,6 @@ bool rrCallConv getVectorElement (RRVectorHandle vector, int index, double& valu
 	return true;
 }
 
-
 bool rrCallConv setVectorElement (RRVectorHandle vector, int index, double value)
 {
 	if (vector == NULL)
@@ -2912,14 +2947,12 @@ bool rrCallConv setVectorElement (RRVectorHandle vector, int index, double value
 	return true;
 }
 
-
 int rrCallConv getStringListLength (RRStringListHandle stringList)
 {
 	if (stringList == NULL)
 		return -1;
 	return stringList->Count;
 }
-
 
 char* rrCallConv getStringListElement (RRStringListHandle stringList, int index)
 {
@@ -2930,14 +2963,14 @@ char* rrCallConv getStringListElement (RRStringListHandle stringList, int index)
 	return stringList->String[index];
 }
 
-int rrCallConv  getMatrixNumRows (RRMatrixHandle m)
+int rrCallConv getMatrixNumRows (RRMatrixHandle m)
 {
 	if (m == NULL)
 		return -1;
 	return m->RSize;
 }
 
-int  rrCallConv  getMatrixNumCols (RRMatrixHandle m)
+int  rrCallConv getMatrixNumCols (RRMatrixHandle m)
 {
 	if (m == NULL)
 		return -1;
@@ -2953,7 +2986,6 @@ bool rrCallConv getMatrixElement (RRMatrixHandle m, int r, int c, double& value)
 	value = m->Data[r*m->CSize + c];
 	return true;
 }
-
 
 int rrCallConv  getResultNumRows (RRResultHandle result)
 {
@@ -2979,7 +3011,7 @@ bool  rrCallConv getResultElement (RRResultHandle result, int r, int c, double& 
 	return true;
 }
 
-char*  rrCallConv  getResultColumnLabel (RRResultHandle result, int column)
+char*  rrCallConv getResultColumnLabel (RRResultHandle result, int column)
 {
 	if (result == NULL)
 		return NULL;
