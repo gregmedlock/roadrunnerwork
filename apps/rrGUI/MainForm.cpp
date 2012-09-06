@@ -9,7 +9,7 @@
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 #include "mtkStopWatch.h"
-#include <sys/timeb.h>
+
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "Chart"
@@ -641,36 +641,24 @@ void __fastcall TMForm::FormClose(TObject *Sender, TCloseAction &Action)
 {
 	FileSelectionFrame->ClearTree();
 }
+
 //---------------------------------------------------------------------------
-
-int getMilliCount(){
-	timeb tb;
-	ftime(&tb);
-	int nCount = tb.millitm + (tb.time & 0xfffff) * 1000;
-	return nCount;
-}
-
-int getMilliSpan(int nTimeStart){
-	int nSpan = getMilliCount() - nTimeStart;
-	if(nSpan < 0)
-		nSpan += 0x100000 * 1000;
-	return nSpan;
-}
-
 void __fastcall TMForm::Button5Click(TObject *Sender)
 {
 	int average = 0;
 
+    mtkStopWatch sw;
     for(int i = 0; i < runCount->GetNumber(); i++)
     {
-    	int start = getMilliCount();
-		mRR->simulateEx(mStartTimeE->GetValue(), *mEndTimeE, mNrOfSimulationPointsE->GetValue());
-		int milliSecondsElapsed = getMilliSpan(start);
+    	sw.Start();
+		mRR->simulateEx(mStartTimeE->GetValue(), mEndTimeE->GetValue(), mNrOfSimulationPointsE->GetValue());
+		int milliSecondsElapsed = sw.Stop();
+
         average += milliSecondsElapsed;
     	stringstream msg;
     	msg<<"Time for run "<<i<<": "<<fixed<<setprecision(15)<<milliSecondsElapsed<<" average: "<<(double) average/ (i + 1);
     	runCountMemo->Lines->Add(msg.str().c_str());
     }
 }
-//---------------------------------------------------------------------------
+
 

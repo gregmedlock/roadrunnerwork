@@ -47,6 +47,8 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<FinalOutputDir>$(RR_DEBUG_INSTALL)\bin</FinalOutputDir>
+			<IncludePath>$(RR_DEBUG_INSTALL)\include;$(IncludePath)</IncludePath>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -105,8 +107,8 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>7</BuildOrder>
 			</LibFiles>
-			<FormResources Include="MainForm.dfm"/>
 			<FormResources Include="P:\mtk\Components\Dune\TFileSelectionFrame.dfm"/>
+			<FormResources Include="MainForm.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
