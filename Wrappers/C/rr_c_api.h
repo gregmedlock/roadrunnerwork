@@ -339,7 +339,9 @@ C_DECL_SPEC bool                    rrCallConv   steadyState(double& value);
  \ingroup steadystate
 */
 C_DECL_SPEC RRVectorHandle          rrCallConv   computeSteadyStateValues();
+
 C_DECL_SPEC bool                    rrCallConv   setSteadyStateSelectionList(const char* list);
+
 C_DECL_SPEC RRStringListHandle      rrCallConv   getSteadyStateSelectionList();
 
 // Set and get family of methods
@@ -371,12 +373,29 @@ C_DECL_SPEC RRMatrixHandle          rrCallConv   getL0Matrix();
 C_DECL_SPEC RRMatrixHandle          rrCallConv   getConservationMatrix();
 
 // Initial condition Methods
+/*!
+ \brief Reset all floating species concentrations to their intial conditions
+
+ Example: status = reset ();
+
+ \return Returns True if successful
+ \ingroup simulation
+*/
 C_DECL_SPEC bool                    rrCallConv   reset();
 C_DECL_SPEC bool                    rrCallConv   setFloatingSpeciesInitialConcentrations (const RRVector* vec);
 C_DECL_SPEC RRVectorHandle          rrCallConv   getFloatingSpeciesInitialConcentrations ();
 C_DECL_SPEC RRStringListHandle      rrCallConv   getFloatingSpeciesInitialConditionNames();
 
 // Reaction rates
+// Initial condition Methods
+/*!
+ \brief Obtain the number of reactions in the loaded model
+
+ Example: number = getNumberOfReactions ();
+
+ \return Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions
+ \ingroup state
+*/
 C_DECL_SPEC int                     rrCallConv   getNumberOfReactions();
 C_DECL_SPEC bool                  	rrCallConv   getReactionRate(const int&, double& rate);
 C_DECL_SPEC RRVectorHandle          rrCallConv   getReactionRates();
