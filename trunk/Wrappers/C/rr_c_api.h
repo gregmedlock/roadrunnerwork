@@ -114,10 +114,10 @@
  \brief Get information about rates of change
 
  \defgroup boundary Boundary species group
- \brief Get information about reaction rates
+ \brief Get information about boundary species
 
  \defgroup floating Floating species group
- \brief Get information about reaction rates
+ \brief Get information about floating species
 
  \defgroup parameters Parameter group
  \brief set and get global and local parameters
@@ -176,7 +176,7 @@ extern "C"
  \return char* verison - Returns null if it fails, otherwise it returns the version number of the library
  \ingroup utility
 */
-C_DECL_SPEC char*                   rrCallConv  getVersion();
+C_DECL_SPEC char* rrCallConv getVersion();
 
 /*!
  \brief Retrieve the current build date of the library
@@ -344,7 +344,7 @@ C_DECL_SPEC bool rrCallConv freeRRInstance(RRHandle handle);
 // -----------------------------------------------------------------------
 
 // Flags/Options
-C_DECL_SPEC bool                    rrCallConv   setComputeAndAssignConservationLaws(const bool& OnOrOff);
+C_DECL_SPEC bool rrCallConv setComputeAndAssignConservationLaws(const bool& OnOrOff);
 
 // -----------------------------------------------------------------------
 /** \} */
@@ -530,7 +530,7 @@ C_DECL_SPEC bool rrCallConv steadyState(double& value);
  \return Returns the vector of steady state values or null if an error occured
  \ingroup steadystate
 */
-C_DECL_SPEC RRVectorHandle rrCallConv   computeSteadyStateValues();
+C_DECL_SPEC RRVectorHandle rrCallConv computeSteadyStateValues();
 
 C_DECL_SPEC bool                    rrCallConv   setSteadyStateSelectionList(const char* list);
 
@@ -547,18 +547,122 @@ C_DECL_SPEC RRStringListHandle      rrCallConv   getSteadyStateSelectionList();
 // Set and get family of methods
 C_DECL_SPEC bool        			rrCallConv   getValue(const char* speciesID, double& value);
 C_DECL_SPEC bool                    rrCallConv   setValue(const char* speciesId, const double& val);
-C_DECL_SPEC RRVectorHandle          rrCallConv   getFloatingSpeciesConcentrations();
-C_DECL_SPEC RRVectorHandle          rrCallConv   getBoundarySpeciesConcentrations();
-C_DECL_SPEC RRVectorHandle          rrCallConv   getGlobalParameterValues();
 
-C_DECL_SPEC bool                    rrCallConv   setBoundarySpeciesByIndex(const int& index, const double& value);
-C_DECL_SPEC bool                    rrCallConv   setFloatingSpeciesByIndex(const int& index, const double& value);
-C_DECL_SPEC bool                    rrCallConv   setGlobalParameterByIndex(const int& index, const double& value);
-C_DECL_SPEC bool                  	rrCallConv   getBoundarySpeciesByIndex(const int& index, double& val);
-C_DECL_SPEC bool                    rrCallConv   getFloatingSpeciesByIndex(const int& index, double& val);
-C_DECL_SPEC bool                  	rrCallConv   getGlobalParameterByIndex(const int& index, double& val);
-C_DECL_SPEC bool                    rrCallConv   getCompartmentByIndex (const int& index, double& value);
-C_DECL_SPEC bool                    rrCallConv   setCompartmentByIndex (const int& index, const double& value);
+
+/*!
+ \brief Retrieve in a vector the concentrations for all the floating species
+
+ Example: RRVectorHandle values = getFloatingSpeciesConcentrations ();
+
+ \return Returns the vector of flaoting species concentrations or null if an error occured
+ \ingroup floating
+*/
+C_DECL_SPEC RRVectorHandle rrCallConv getFloatingSpeciesConcentrations();
+
+
+/*!
+ \brief Retrieve in a vector the concentrations for all the boundary species
+
+ Example: RRVectorHandle values = getBoundarySpeciesConcentrations ();
+
+ \return Returns the vector of boundary species concentrations or null if an error occured
+ \ingroup boundary
+*/
+C_DECL_SPEC RRVectorHandle rrCallConv getBoundarySpeciesConcentrations();
+
+// --------------------------------------------------------------------------------
+// Get and Set Routines
+// --------------------------------------------------------------------------------
+
+/*!
+ \brief Retrieve in a vector the values for all the lgobal parameter values
+
+ Example: RRVectorHandle values = getGlobalParameterValues ();
+
+ \return Returns the vector of global parameter values or null if an error occured
+ \ingroup parameters
+*/
+C_DECL_SPEC RRVectorHandle rrCallConv getGlobalParameterValues();
+
+/*!
+ \brief Set the concentration for a particular boundary species. 
+
+ \param int* index - The index to the boundary species (corresponds to position in getBoundarySpeciesNames())
+ \param double* value - The concentration of the species to set
+ \return bool status - Returns true if successful
+ \ingroup boundary
+*/
+C_DECL_SPEC bool rrCallConv setBoundarySpeciesByIndex(const int& index, const double& value);
+
+/*!
+ \brief Set the concentration for a particular floating species. 
+
+ \param int* index - The index to the floating species (corresponds to position in getFloatingSpeciesNames())
+ \param double* value - The concentration of the species to set
+ \return bool status - Returns true if successful
+ \ingroup floating
+*/
+C_DECL_SPEC bool rrCallConv setFloatingSpeciesByIndex(const int& index, const double& value);
+
+/*!
+ \brief Set the value for a particular global parameter
+
+ \param int* index - The index to the global parameter
+ \param double* value - The value of the parameter to set
+ \return bool status - Returns true if successful
+ \ingroup parameters
+*/
+C_DECL_SPEC bool rrCallConv setGlobalParameterByIndex(const int& index, const double& value);
+
+
+/*!
+ \brief Retrieve the concentration for a particular floating species. 
+
+ \param int* index - The index to the boundary species (corresponds to position in getBoundarySpeciesNames())
+ \param double* value - The value returned by the method
+ \return bool status - Returns true if successful
+ \ingroup boundary
+*/
+C_DECL_SPEC bool rrCallConv getBoundarySpeciesByIndex(const int& index, double& val);
+
+/*!
+ \brief Retrieve the concentration for a particular floating species. 
+
+ \param int* index - The index to the floating species (corresponds to position in getFloatingSpeciesNames())
+ \param double* value - The value returned by the method
+ \return bool status - Returns true if successful
+ \ingroup floating
+*/
+C_DECL_SPEC bool rrCallConv getFloatingSpeciesByIndex(const int& index, double& val);
+
+/*!
+ \brief Retrieve the global parameter value 
+ \param int* index - The index to the global parameter (corresponds to position in getGlboalParametersNames())
+ \param double* value - The value returned by the method
+ \return bool status - Returns true if successful
+ \ingroup floating
+*/
+C_DECL_SPEC bool rrCallConv getGlobalParameterByIndex(const int& index, double& val);
+
+/*!
+ \brief Retrieve the compartment volume for a particular compartment. 
+
+ \param int* index - The index to the compartment (corresponds to position in getCompartmentNames())
+ \param double* value - The value returned by the method
+ \return bool status - Returns true if successful
+ \ingroup compartment
+*/
+C_DECL_SPEC bool rrCallConv getCompartmentByIndex (const int& index, double& value);
+
+/*!
+ \brief Set the volume for a particular compartment
+
+ \param int* index - The index to the compartment (corresponds to position in getCompartmentNames())
+ \param double* value - The volume of the compartment to set
+ \return bool status - Returns true if successful
+ \ingroup parameters
+*/
+C_DECL_SPEC bool rrCallConv setCompartmentByIndex (const int& index, const double& value);
 
 // -----------------------------------------------------------------------
 /** \} */
@@ -653,12 +757,47 @@ C_DECL_SPEC bool                    rrCallConv   evalModel();
 // -----------------------------------------------------------------------
 
 // Get number family
-C_DECL_SPEC int                     rrCallConv   getNumberOfCompartments ();
-C_DECL_SPEC int                     rrCallConv   getNumberOfBoundarySpecies();
-C_DECL_SPEC int                     rrCallConv   getNumberOfFloatingSpecies();
-C_DECL_SPEC int                     rrCallConv   getNumberOfGlobalParameters();
-C_DECL_SPEC int                     rrCallConv   getNumberOfDependentSpecies();
-C_DECL_SPEC int                     rrCallConv   getNumberOfIndependentSpecies();
+/*!
+ \brief Returns the number of compartments in the model
+ \ingroup compartment
+*/
+C_DECL_SPEC int rrCallConv getNumberOfCompartments ();
+
+
+/*!
+ \brief Returns the number of boundary species in the model
+ \ingroup boundary
+*/
+C_C_DECL_SPEC int rrCallConv getNumberOfBoundarySpecies();
+
+
+/*!
+ \brief Returns the number of floating species in the model
+ \ingroup floating
+*/
+C_C_DECL_SPEC int rrCallConv getNumberOfFloatingSpecies();
+
+
+/*!
+ \brief Returns the number of global parameters in the model
+ \ingroup parameters
+*/
+C_C_DECL_SPEC int rrCallConv getNumberOfGlobalParameters();
+
+
+/*!
+ \brief Returns the number of dependent species in the model
+ \ingroup floating
+*/
+C_C_DECL_SPEC int rrCallConv getNumberOfDependentSpecies();
+
+
+// Get number family
+/*!
+ \brief Returns the number of independent species in the model
+ \ingroup floating
+*/
+C_C_DECL_SPEC int rrCallConv getNumberOfIndependentSpecies();
 
 // -----------------------------------------------------------------------
 /** \} */
