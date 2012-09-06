@@ -20,51 +20,30 @@ road\-Runner \-C \-A\-P\-I 2012
 \subsection*{\-Functions}
 \begin{DoxyCompactItemize}
 \item 
-bool rr\-Call\-Conv \hyperlink{rr__c__api_8cpp_ae64ff5ddcd794d51fcbe69030ff4bd5c}{enable\-Logging} ()
-\item 
-\hypertarget{rr__c__api_8cpp_a8758e290cb7701ab02a247385335afbd}{
-bool rr\-Call\-Conv {\bfseries set\-Log\-Level} (const char $\ast$\-\_\-lvl)}
-\label{rr__c__api_8cpp_a8758e290cb7701ab02a247385335afbd}
-
-\item 
-\hypertarget{rr__c__api_8cpp_a72092a55e46840ec9ca3767931157831}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-Log\-Level} ()}
-\label{rr__c__api_8cpp_a72092a55e46840ec9ca3767931157831}
-
-\item 
-\hypertarget{rr__c__api_8cpp_ae00b5aaba1d1a85a7177e35898a99fa0}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-Log\-File\-Name} ()}
-\label{rr__c__api_8cpp_ae00b5aaba1d1a85a7177e35898a99fa0}
-
-\item 
-\hypertarget{rr__c__api_8cpp_a38b10f0910877c3112474d7974709f10}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-Build\-Date} ()}
-\label{rr__c__api_8cpp_a38b10f0910877c3112474d7974709f10}
-
-\item 
+bool rr\-Call\-Conv \hyperlink{group__errorfunctions_ga420ec462ff4ab4bb98f9a1bd8f39434b}{enable\-Logging} ()
+\begin{DoxyCompactList}\small\item\em \-Enable logging. \end{DoxyCompactList}\item 
+bool rr\-Call\-Conv \hyperlink{group__errorfunctions_ga59c256885fce7df1e4d6d5f0c5554bab}{set\-Log\-Level} (const char $\ast$\-\_\-lvl)
+\begin{DoxyCompactList}\small\item\em \-Set the logging status level. \end{DoxyCompactList}\item 
+char $\ast$rr\-Call\-Conv \hyperlink{group__errorfunctions_ga77071837a73206d3e27220f3dff96ad4}{get\-Log\-Level} ()
+\begin{DoxyCompactList}\small\item\em \-Get the logging status level as a pointer to a string. \end{DoxyCompactList}\item 
+char $\ast$rr\-Call\-Conv \hyperlink{group__errorfunctions_ga9e5c453651f5a3743e9bc10f0e81be66}{get\-Log\-File\-Name} ()
+\begin{DoxyCompactList}\small\item\em \-Get the logging status level as a pointer to a string. \end{DoxyCompactList}\item 
+char $\ast$rr\-Call\-Conv \hyperlink{group__utility_ga3d14f41e1a100776f91d8574e8aab58b}{get\-Build\-Date} ()
+\begin{DoxyCompactList}\small\item\em \-Retrieve the current build date of the library. \end{DoxyCompactList}\item 
 char $\ast$rr\-Call\-Conv \hyperlink{group__utility_ga1a2869b18d14e4d398c6a0e0402615d9}{get\-Version} ()
 \begin{DoxyCompactList}\small\item\em \-Retrieve the current version number of the library. \end{DoxyCompactList}\item 
 \-R\-R\-Handle rr\-Call\-Conv \hyperlink{group__initialization_gab5d1a179f93b94c8ddefa909131b3f11}{get\-R\-R\-Instance} ()
 \begin{DoxyCompactList}\small\item\em \-Initialize the road\-Runner library and return an instance. \end{DoxyCompactList}\item 
-\hypertarget{rr__c__api_8cpp_a769fc79cb5653f931eaab8c9b9178b5e}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-Copyright} ()}
-\label{rr__c__api_8cpp_a769fc79cb5653f931eaab8c9b9178b5e}
-
-\item 
+char $\ast$rr\-Call\-Conv \hyperlink{group__utility_gab4695b0f4b2ef3b91f545302de0337a2}{get\-Copyright} ()
+\begin{DoxyCompactList}\small\item\em \-Retrieve the current copyright notice for the library. \end{DoxyCompactList}\item 
 char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_ga7d683d70e6966107f81a3e8c547bcd76}{write\-S\-B\-M\-L} ()
 \begin{DoxyCompactList}\small\item\em \-Retrive the current state of the model in the form of an \-S\-B\-M\-L string. \end{DoxyCompactList}\item 
 bool rr\-Call\-Conv \hyperlink{rr__c__api_8cpp_a60a2c1825b2da9e8f33357a07cb756aa}{set\-Compute\-And\-Assign\-Conservation\-Laws} (const bool \&\-On\-Or\-Off)
 \item 
-\hypertarget{rr__c__api_8cpp_a5898648f17f72e5a741a86a8093cdc40}{
-bool rr\-Call\-Conv {\bfseries set\-Temp\-Folder} (const char $\ast$folder)}
-\label{rr__c__api_8cpp_a5898648f17f72e5a741a86a8093cdc40}
-
-\item 
-\hypertarget{rr__c__api_8cpp_ac03e7524e23df77a5cb0061e41684642}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-Temp\-Folder} ()}
-\label{rr__c__api_8cpp_ac03e7524e23df77a5cb0061e41684642}
-
-\item 
+bool rr\-Call\-Conv \hyperlink{group__utility_ga957837fdd4683d56ef29c56ad701a0ba}{set\-Temp\-Folder} (const char $\ast$folder)
+\begin{DoxyCompactList}\small\item\em \-S\-Et the temporary folder. \end{DoxyCompactList}\item 
+char $\ast$rr\-Call\-Conv \hyperlink{group__utility_gad8e35b98b406e9c998e33ec21248da8a}{get\-Temp\-Folder} ()
+\begin{DoxyCompactList}\small\item\em \-Retrieve the current temporary folder path. \end{DoxyCompactList}\item 
 bool rr\-Call\-Conv \hyperlink{group__loadsave_ga3147e10d84bddb6435bee4b1db0514bf}{load\-S\-B\-M\-L\-From\-File} (const char $\ast$sbml\-File\-Name)
 \begin{DoxyCompactList}\small\item\em \-Create a model from a \-S\-B\-M\-L file. \end{DoxyCompactList}\item 
 bool rr\-Call\-Conv \hyperlink{group__loadsave_ga4105f02dfdb959175f30cecebfb1c081}{load\-S\-B\-M\-L} (const char $\ast$sbml)
@@ -142,16 +121,10 @@ bool rr\-Call\-Conv {\bfseries set\-Value} (const char $\ast$species\-I\-D, cons
 \label{rr__c__api_8cpp_ab28801d5095c1b9e4f8c45c52efe1dde}
 
 \item 
-\hypertarget{rr__c__api_8cpp_a1066caa37a0d7dca6146efd756d058c8}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries has\-Error} ()}
-\label{rr__c__api_8cpp_a1066caa37a0d7dca6146efd756d058c8}
-
-\item 
-\hypertarget{rr__c__api_8cpp_aed11ca5b3d2ffcc6e944c5b4b83ec85f}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-Last\-Error} ()}
-\label{rr__c__api_8cpp_aed11ca5b3d2ffcc6e944c5b4b83ec85f}
-
-\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__errorfunctions_ga1066caa37a0d7dca6146efd756d058c8}{has\-Error} ()
+\begin{DoxyCompactList}\small\item\em \-Check if there is an error string to retrieve. \end{DoxyCompactList}\item 
+char $\ast$rr\-Call\-Conv \hyperlink{group__errorfunctions_ga34d1ec9db4032749cde607b4f403f2b9}{get\-Last\-Error} ()
+\begin{DoxyCompactList}\small\item\em \-Retrieve the currnt error string. \end{DoxyCompactList}\item 
 bool rr\-Call\-Conv \hyperlink{group__simulation_ga07dfaf16ab38015aab6b400665ace2b2}{reset} ()
 \begin{DoxyCompactList}\small\item\em \-Reset all floating species concentrations to their intial conditions. \end{DoxyCompactList}\item 
 int rr\-Call\-Conv \hyperlink{group__state_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
@@ -324,11 +297,8 @@ bool rr\-Call\-Conv {\bfseries set\-Steady\-State\-Selection\-List} (const char 
 \label{rr__c__api_8cpp_a7d1dc1f725e9018a3fbd3a676cd2aa2e}
 
 \item 
-\hypertarget{rr__c__api_8cpp_ad514f2406933c50c877e8bd609ea67b1}{
-\hyperlink{struct_r_r_c_code}{\-R\-R\-C\-Code} $\ast$rr\-Call\-Conv {\bfseries get\-C\-Code} ()}
-\label{rr__c__api_8cpp_ad514f2406933c50c877e8bd609ea67b1}
-
-\item 
+\hyperlink{struct_r_r_c_code}{\-R\-R\-C\-Code} $\ast$rr\-Call\-Conv \hyperlink{group__utility_gaef1b097cc2ad79dfc83e0d049846f87f}{get\-C\-Code} ()
+\begin{DoxyCompactList}\small\item\em \-Retrieve a pointer to the \-C code structure, \hyperlink{struct_r_r_c_code}{\-R\-R\-C\-Code}. \end{DoxyCompactList}\item 
 \hypertarget{rr__c__api_8cpp_a5ac008a2fdf314f45d3262051b279573}{
 bool rr\-Call\-Conv {\bfseries get\-Scaled\-Floating\-Species\-Elasticity} (const char $\ast$reac\-Name, const char $\ast$spec\-Name, double \&value)}
 \label{rr__c__api_8cpp_a5ac008a2fdf314f45d3262051b279573}
@@ -608,17 +578,8 @@ redistribute any piece of this software without proper attribution;
 \-Example\-: \-R\-R\-Vector\-Handle values = compute\-Steady\-State\-Values ();
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns the vector of steady state values or nil if an error occured 
+\-Returns the vector of steady state values or null if an error occured 
 \end{DoxyReturn}
-\hypertarget{rr__c__api_8cpp_ae64ff5ddcd794d51fcbe69030ff4bd5c}{
-\index{rr\-\_\-c\-\_\-api.\-cpp@{rr\-\_\-c\-\_\-api.\-cpp}!enable\-Logging@{enable\-Logging}}
-\index{enable\-Logging@{enable\-Logging}!rr_c_api.cpp@{rr\-\_\-c\-\_\-api.\-cpp}}
-\subsubsection[{enable\-Logging}]{\setlength{\rightskip}{0pt plus 5cm}bool rr\-Call\-Conv enable\-Logging (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{rr__c__api_8cpp_ae64ff5ddcd794d51fcbe69030ff4bd5c}
 \hypertarget{rr__c__api_8cpp_a8a98df91a3b072fa1af8e03afe406a22}{
 \index{rr\-\_\-c\-\_\-api.\-cpp@{rr\-\_\-c\-\_\-api.\-cpp}!free\-Result@{free\-Result}}
 \index{free\-Result@{free\-Result}!rr_c_api.cpp@{rr\-\_\-c\-\_\-api.\-cpp}}

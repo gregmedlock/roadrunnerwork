@@ -27,15 +27,15 @@
  
         if (!loadSBMLFromFile(argv[1])) {
            printf ("Error while loading SBML file\n");
-           printf ("Error message: %s\n, getLastError());
+           printf ("Error message: %s\n", getLastError());
            exit();
         }
                    
-        RRResultHandle output = simulate (0, 100, 1000);  // start, end, num.
-       points
+        RRResultHandle output = simulate (0, 100, 1000);  // start time, end
+       time, and number of points
         
-        printf("Output table has %i rows and %i columns\n", output->RSize,
-       output->RCols);
+        printf("Output table has %i rows and %i columns\n", output->RSize, 
+      output->RCols);
         printResult (output);
         
         freeResult (output);

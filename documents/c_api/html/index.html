@@ -94,20 +94,20 @@ Introduction</h2>
  
         <span class="keywordflow">if</span> (!<a class="code" href="group__loadsave.html#ga3147e10d84bddb6435bee4b1db0514bf" title="Create a model from a SBML file.">loadSBMLFromFile</a>(argv[1])) {
            printf (<span class="stringliteral">&quot;Error while loading SBML file\n&quot;</span>);
-           printf (<span class="stringliteral">&quot;Error message: %s\n, getLastError());</span>
-<span class="stringliteral">           exit();</span>
-<span class="stringliteral">        }</span>
-<span class="stringliteral">                   </span>
-<span class="stringliteral">        RRResultHandle output = simulate (0, 100, 1000);  // start, end, num. points</span>
-<span class="stringliteral">        </span>
-<span class="stringliteral">        printf(&quot;</span>Output table has %i rows and %i columns\n<span class="stringliteral">&quot;, output-&gt;RSize, output-&gt;RCols);</span>
-<span class="stringliteral">        printResult (output);</span>
-<span class="stringliteral">        </span>
-<span class="stringliteral">        freeResult (output);</span>
-<span class="stringliteral">        freeRrInstance (rrInstance)</span>
-<span class="stringliteral"></span>
-<span class="stringliteral">        return 0;</span>
-<span class="stringliteral"> }</span>
+           printf (<span class="stringliteral">&quot;Error message: %s\n&quot;</span>, <a class="code" href="group__errorfunctions.html#ga34d1ec9db4032749cde607b4f403f2b9" title="Retrieve the currnt error string.">getLastError</a>());
+           exit();
+        }
+                   
+        <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> output = <a class="code" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate</a> (0, 100, 1000);  <span class="comment">// start time, end time, and number of points</span>
+        
+        printf(<span class="stringliteral">&quot;Output table has %i rows and %i columns\n&quot;</span>, output-&gt;<a class="code" href="struct_r_r_result.html#a4d8512c879223c0e0d1522dae38e7819">RSize</a>, output-&gt;RCols);
+        printResult (output);
+        
+        <a class="code" href="rr__c__api_8cpp.html#a8a98df91a3b072fa1af8e03afe406a22">freeResult</a> (output);
+        freeRrInstance (rrInstance)
+
+        return 0;
+ }
 </pre></div> <h2><a class="anchor" id="install_sec"></a>
 Installation</h2>
 <p>Installation documentation is provided in the main google code page. </p>
@@ -129,7 +129,7 @@ Installation</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 5 2012 21:28:56 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 11:17:16 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
