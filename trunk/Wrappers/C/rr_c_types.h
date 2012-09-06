@@ -101,7 +101,7 @@ typedef struct RRResult
 
 
 /*!@struct*/ 
-/*!@brief Convenient Structure for storing the header and main body source for the generate simulation C code */ 
+/*!@brief Convenient structure for storing the header and main body source for the generate simulation C code */ 
 typedef struct RRCCode
 {
     char*   Header;  /*!< Head file *.h */
@@ -147,7 +147,7 @@ typedef struct RRArrayList2Item
 
 
 /*!@struct*/ 
-/*!@brief A list type */ 
+/*!@brief A list type, stores int, double, strings and lists */ 
 typedef struct RRArrayList2
 {
     int                         ItemCount;  /*!< The number elements in this list */

@@ -124,6 +124,9 @@
 
  \defgroup matrix Stoichiometry analysis
  \brief Linear algebra based methods for analyzing a reaction network
+
+ \defgroup helperRoutines Helper Routines
+ \brief Helper routines for acessing the various C API types, eg lists and arrays
 */
 
 #ifndef rrC_APIH
@@ -468,26 +471,164 @@ C_DECL_SPEC bool                    rrCallConv   freeMatrix(RRMatrixHandle matri
 C_DECL_SPEC bool                    rrCallConv   freeCCode(RRCCodeHandle code);
 C_DECL_SPEC void                    rrCallConv   Pause();
 
-// Helper Routines
+
+// Helper Methods
+/*!
+ \brief Get the number of elements in a vector type
+
+ Example: count = getVectorLength (myVector);
+
+ \param RRVectorHandle vector A pointer to the vector variable type
+ \return Returns -1 if it fails, otherwise returns the number of elements in the vector
+ \ingroup helpRoutines
+*/
+C_DECL_SPEC int                     rrCallConv  getVectorLength (RRVectorHandle vector);
+
+/*!
+ \brief Create a new vector with a given size
+
+ Example: myVector = createVectorAPI (10);
+
+ \param int size The number of element in the new vector
+ \return Returns nil if it fails, otherwise returns a pointer to the new vector
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC RRVectorHandle          rrCallConv  createVectorAPI (int size);
 
-C_DECL_SPEC int                     rrCallConv  getVectorLength (RRVectorHandle vector);
+/*!
+ \brief Get a particular element from a vector
+
+ Example: status = getVectorElement (myVector, 10, &value);
+
+ \param RRVectorHandle vector A pointer to the vector variable type
+ \param int index An integer indicating the ith element to retrieve (indexing is from zero)
+ \param double* value A pointer to the retrieved double value
+ \return Returns True if succesful
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv  getVectorElement (RRVectorHandle vector, int index, double& value);
+
+
+/*!
+ \brief Get a particular element from a vector
+
+ Example: status = setVectorElement (myVector, 10, 3.1415);
+
+ \param RRVectorHandle vector A pointer to the vector variable type
+ \param int index An integer indicating the ith element to set (indexing is from zero)
+ \param double value The value to store in the vector at the indexth position
+ \return Returns True if succesful
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv  setVectorElement (RRVectorHandle vector, int index, double value);
 
 C_DECL_SPEC int                     rrCallConv  getStringListLength (RRStringListHandle stringList);
 C_DECL_SPEC char*                   rrCallConv  getStringListElement (RRStringListHandle stringList, int index);
 
+/*!
+ \brief Retrieve the number of rows in the given matrix
+
+ Example: nRows = getMatrixNumRows (m);
+
+ \param RRMatrixHandle m A pointer to a matrix type variable
+ \return Returns -1 if fails, otherwise returns the number of rows
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC int                     rrCallConv  getMatrixNumRows (RRMatrixHandle m);
+
+/*!
+ \brief Retrieve the number of columns in the given matrix
+
+ Example: nRows = getMatrixNumCols (m);
+
+ \param RRMatrixHandle m A pointer to a matrix type variable
+ \return Returns -1 if fails, otherwise returns the number of columns
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC int                     rrCallConv  getMatrixNumCols (RRMatrixHandle m);
+
+/*!
+ \brief Retrieves an element at a given row and column from a matrix type variable
+
+ Example: status = getMatrixElement (m, 2, 4, &value);
+
+ \param RRMatrixHandle m A pointer to a matrix type variable
+ \param int r The row index to the matrix
+ \param int c The column index to the matrix
+ \paramt double* The retrieved value from the matrix
+ \return \return Returns True if succesful
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv  getMatrixElement (RRMatrixHandle m, int r, int c, double& value);
 
+/*!
+ \brief Retrieve the number of rows in the given result data
+
+ Example: nRows = getResultNumRows (result);
+
+ \param RRResultHandle result A pointer to a result type variable
+ \return Returns -1 if fails, otherwise returns the number of rows
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC int                     rrCallConv  getResultNumRows (RRResultHandle result);
+
+/*!
+ \brief Retrieve the number of columns in the given result data
+
+ Example: nRows = getResultNumCols (result);
+
+ \param RRResultHandle result A pointer to a result type variable
+ \return Returns -1 if fails, otherwise returns the number of columns
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC int                     rrCallConv  getResultNumCols (RRResultHandle result);
+
+/*!
+ \brief Retrieves an element at a given row and column from a result type variable
+
+ Example: status = getResultElement (result, 2, 4, &value);
+
+ \param RRResultHandle m A pointer to a result type variable
+ \param int r The row index to the result data
+ \param int c The column index to the result data
+ \paramt double* The retrieved value from the result data
+ \return \return Returns True if succesful
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv  getResultElement (RRResultHandle result, int r, int c, double& value);
+
+/*!
+ \brief Retrieves an element at a given row and column from a result type variable
+
+ Example: str = getResultColumnLabel (result, 2, 4);
+
+ \param RRResultHandle result A pointer to a result type variable
+ \param int column The column index for the result data (indexing from zero)
+ \return \return Returns nil if fails, otherwise returns a pointer to the string column label
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC char*                   rrCallConv  getResultColumnLabel (RRResultHandle result, int column);
 
+/*!
+ \brief Retrieve the header file for the current model (if applicable)
+
+ Example: header = getCCodeHeader (code);
+
+ \param RRCCodeHandle header A pointer to a string that stores the header code
+  \return Returns True if succesful
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC char*                   rrCallConv  getCCodeHeader (RRCCodeHandle code);
+
+/*!
+ \brief Retrieve the main source file for the current model (if applicable)
+
+ Example: source = getCCodeSource (code);
+
+ \param RRCCodeHandle header A pointer to a string that stores the main source code
+ \return Returns True if succesful
+ \ingroup helpRoutines
+*/
 C_DECL_SPEC char*                   rrCallConv  getCCodeSource (RRCCodeHandle code);
 
 #if defined( __cplusplus)
