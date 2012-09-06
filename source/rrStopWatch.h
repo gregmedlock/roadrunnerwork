@@ -1,7 +1,6 @@
 #ifndef rrStopWatchH
 #define rrStopWatchH
 //---------------------------------------------------------------------------
-#include <ctime>
 #include "rrObject.h"
 
 namespace rr
@@ -10,15 +9,17 @@ namespace rr
 class RR_DECLSPEC StopWatch : public rrObject
 {
     private:
-        clock_t     		mStartTime;
-        clock_t 	    	mTotalTime;
+        int			 		mStartTime;			//Ticks...
+        int			 		mTotalTime;
         bool 				mIsRunning;
+        int					GetMilliSecondCount();
+        int					GetMilliSecondSpan();
 
     public:
         					StopWatch();
         				   ~StopWatch();
-        void 				Start();
-        void 				Stop();
+        int 				Start();
+        int 				Stop();
         double 				GetTime();
 };
 }

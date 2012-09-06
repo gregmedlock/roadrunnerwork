@@ -6,7 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <tchar.h>
+#include <iomanip>
 
 #if defined(__CODEGEARC__)
 #include <dir.h>
@@ -14,7 +14,6 @@
 #include <direct.h>
 #endif
 
-#include <iomanip>
 #include "rrLog.h"
 #include "rrRoadRunner.h"
 #include "rrCGenerator.h"
@@ -24,6 +23,7 @@
 #include "rrSBMLModelSimulation.h"
 #include "rrGetOptions.h"
 #include "Args.h"
+#include "rrStopWatch.h"
 //---------------------------------------------------------------------------
 using namespace std;
 using namespace rr;
@@ -31,9 +31,9 @@ using namespace rr;
 void ProcessCommandLineArguments(int argc, char* argv[], Args& args);
 int main(int argc, char * argv[])
 {
-    string settingsFile;
     bool doContinue = true;
     Args args;
+    StopWatch sw;
     try
     {
         LogOutput::mLogToConsole = true;
@@ -44,7 +44,6 @@ int main(int argc, char * argv[])
             exit(0);
         }
 
-     
         ProcessCommandLineArguments(argc, argv, args);
 
         gLog.SetCutOffLogLevel(args.CurrentLogLevel);
@@ -70,11 +69,10 @@ int main(int argc, char * argv[])
 
         Log(lInfo)<<"Logs are going to "<<gLog.GetLogFileName();
         Log(lInfo)<<"Log level is:" <<GetLogLevelAsString(gLog.GetLogLevel());
-        SBMLModelSimulation simulation(args.DataOutputFolder, args.TempDataFolder);
 
         rr = new RoadRunner();
         rr->Reset();
-        simulation.UseEngine(rr);
+
 
         //The following will load and compile and simulate the sbml model in the file
         if(!args.ModelFileName.size())
@@ -83,70 +81,41 @@ int main(int argc, char * argv[])
             doContinue = false;
         }
 
-        if(doContinue && !simulation.SetModelFileName(args.ModelFileName))
-        {
-            Log(lInfo)<<"Bad model file";
-            doContinue = false;
-        }
-
-        simulation.CompileIfDllExists(true);
-        if(doContinue && !simulation.LoadSBMLFromFile())
+        sw.Start();
+        if(doContinue && !rr->loadSBMLFromFile(args.ModelFileName))
         {
             Log(lError)<<"Failed loading SBML model";
             doContinue = false;
         }
+        sw.Stop();
 
+		Log(lInfo)<<"It took "<< sw.GetTime() << " ms to load and create SBML model";
 		if(doContinue)
 		{
-			Log(lInfo)<<"SBML semantics was loaded from file: "<<simulation.GetModelsFullFilePath();
+			Log(lInfo)<<"SBML semantics was loaded from file: "<<rr->GetModelName();
 		}
 
         //Then read settings file if it exists..
 		if(doContinue)
 		{
-			if(settingsFile.size())
-			{
-				if(!simulation.LoadSettings(settingsFile))    //set selection list here!
-				{
-					Log(lError)<<"Failed loading SBML model settings";
-					doContinue = false;
-				}
-			}
-			else //Read from command line
-			{
-				simulation.SetTimeStart(args.StartTime);
-				simulation.SetTimeEnd(args.EndTime);
-				simulation.SetNumberOfPoints(args.Steps);
-				simulation.SetSelectionList(args.SelectionList);
-			}
-
+            rr->setTimeStart(args.StartTime);
+            rr->setTimeEnd(args.EndTime);
+            rr->setNumPoints(args.Steps);
+            rr->setSelectionList(args.SelectionList);
 			rr->ComputeAndAssignConservationLaws(false);
 		}
 
         //Then Simulate model
-        if(doContinue && !simulation.Simulate())
+
+        sw.Start();
+        rr->simulate();
+        sw.Stop();
+        Log(lInfo)<<"It took "<< sw.GetTime() << " ms";
+        if(doContinue && !rr->GetSimulationResult().GetNrOfRows() > 1)
         {
-            Log(lError)<<"Failed running simulation";
+            Log(lError)<<"Failed getting a result from simulation";
             throw("Failed running simulation");
         }
-		
-		if(doContinue)
-		{
-			if(args.SaveResultToFile)
-			{
-				//Write result
-				if(!simulation.SaveResult())
-				{
-					//Failed to save data
-				}
-			}
-			else
-			{
-				//Write to std out
-				SimulationData result = simulation.GetResult();
-				Log(lShowAlways)<<result;
-			}
-		}       
 
         delete rr;
     }
@@ -154,7 +123,7 @@ int main(int argc, char * argv[])
     {
         Log(lError)<<"RoadRunner exception occurred: "<<ex.what()<<endl;
     }
-	
+
 	Log(lInfo)<<"RoadRunner is exiting...";
 	if(args.Pause)
 	{

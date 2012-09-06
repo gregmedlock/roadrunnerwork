@@ -49,8 +49,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\source\;..\..\source\libstruct;..\..\apps\rr\;$(RR_DEBUG_INSTALL)\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>R:\rrInstalls\xe\full-debug\lib\;..\..\Testing\squareWave\;R:\rrBuilds\xe\ThirdParty\lib\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;R:\rrInstalls\xe\lib\;..\..\source\;..\..\releases\xe\shared\link\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\installs\xe\lib\;..\..\Examples\rr\;..\..\releases\xe\link\;..\..\installs\xe\bin\;..\..\Apps\rr\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>p:\mtk\Lib\Common\;..\..\apps\rr_performance_tester\;..\..\Testing\squareWave\;..\..\source\;..\..\source\libstruct;..\..\apps\rr\;$(RR_DEBUG_INSTALL)\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>p:\mtk\Lib\Common\;..\..\apps\rr_performance_tester\;R:\rrInstalls\xe\full-debug\lib\;..\..\Testing\squareWave\;R:\rrBuilds\xe\ThirdParty\lib\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;R:\rrInstalls\xe\lib\;..\..\source\;..\..\releases\xe\shared\link\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\installs\xe\lib\;..\..\Examples\rr\;..\..\releases\xe\link\;..\..\installs\xe\bin\;..\..\Apps\rr\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
@@ -90,10 +90,14 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\apps\rr\Args.cpp">
+			<CppCompile Include="..\..\apps\rr_performance_tester\Args.cpp">
+				<BuildOrder>8</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\apps\rr_performance_tester\main.cpp">
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\apps\rr\main.cpp">
+			<CppCompile Include="..\..\source\rrStopWatch.cpp">
+				<DependentOn>..\..\source\rrStopWatch.h</DependentOn>
 				<BuildOrder>10</BuildOrder>
 			</CppCompile>
 			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\blas.lib">
@@ -185,7 +189,7 @@
 						<Parameters Name="RunParams">-n41 -vDebug3 -tC:\\RRTemp -dc:\\RRDataOutput</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-s5 -e15 -p -vInfo -m&quot;../Models/twoNodesSimpleName.xml&quot; -t&quot;r:\rrTemp&quot; -d&quot;r:\rrTemp&quot; </Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-s0 -e2 -z1000 -p -vInfo -m&quot;../Models/BorisEJB.xml&quot; -t&quot;r:\rrTemp&quot; -d&quot;r:\rrTemp&quot; </Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>
