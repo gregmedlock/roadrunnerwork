@@ -7,18 +7,35 @@
 \-Compute derivatives, fluxes, and other values of the system at the current state.  
 
 
-\subsection*{\-Read models}
+\subsection*{\-Retrieve reaction rate information}
 \begin{DoxyCompactItemize}
 \item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
-\begin{DoxyCompactList}\small\item\em \-Obtain the number of reactions in the loaded model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__state_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
+\begin{DoxyCompactList}\small\item\em \-Obtain the number of reactions in the loaded model. \end{DoxyCompactList}\item 
+\hypertarget{group__state_ga0a7be404315c6001627ee26e738e11e2}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Reaction\-Rate} (const int \&, double \&rate)}
+\label{group__state_ga0a7be404315c6001627ee26e738e11e2}
+
+\item 
+\hypertarget{group__state_ga86d544bcf3eeaa4698a60123a3da69aa}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
+rr\-Call\-Conv {\bfseries get\-Reaction\-Rates} ()}
+\label{group__state_ga86d544bcf3eeaa4698a60123a3da69aa}
+
+\item 
+\hypertarget{group__state_gaa03d9414ddeb177a76365dd5b2d0042e}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
+rr\-Call\-Conv {\bfseries get\-Reaction\-Rates\-Ex} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)}
+\label{group__state_gaa03d9414ddeb177a76365dd5b2d0042e}
+
+\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
 \-Compute derivatives, fluxes, and other values of the system at the current state. steadystate \-Compute and obtain basic information about the steady state 
 
 \subsection{\-Function \-Documentation}
-\hypertarget{group__loadsave_gae25399f84ff2d1fda619358a1af9a1b5}{
+\hypertarget{group__state_gae25399f84ff2d1fda619358a1af9a1b5}{
 \index{\-Current state of system@{\-Current state of system}!get\-Number\-Of\-Reactions@{get\-Number\-Of\-Reactions}}
 \index{get\-Number\-Of\-Reactions@{get\-Number\-Of\-Reactions}!Current state of system@{\-Current state of system}}
 \subsubsection[{get\-Number\-Of\-Reactions}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv get\-Number\-Of\-Reactions (
@@ -26,7 +43,7 @@
 {}
 \end{DoxyParamCaption}
 )}}
-\label{group__loadsave_gae25399f84ff2d1fda619358a1af9a1b5}
+\label{group__state_gae25399f84ff2d1fda619358a1af9a1b5}
 
 
 \-Obtain the number of reactions in the loaded model. 

@@ -7,7 +7,7 @@
 \-Deterministic, stochastic, and hybrid simulation algorithms.  
 
 
-\subsection*{\-Read models}
+\subsection*{\-Read and \-Write models}
 \begin{DoxyCompactItemize}
 \item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga1a636a76ad610d99fe1c780bb3d9296d}{set\-Time\-Start} (const double \&time\-Start)
@@ -34,9 +34,29 @@ rr\-Call\-Conv \hyperlink{group__loadsave_ga9b87919e79f6eb0d7c77c3daa08d6baf}{si
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga451e7ecddd0431316048a332410b0600}{get\-Time\-End} (double \&time\-End)
 \begin{DoxyCompactList}\small\item\em \-Get the value of the current time end. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_gacd9cb734773710f640742a9f040dccc5}{get\-Num\-Points} (int \&num\-Points)
-\begin{DoxyCompactList}\small\item\em \-Get the value of the current number of points. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga07dfaf16ab38015aab6b400665ace2b2}{reset} ()
-\begin{DoxyCompactList}\small\item\em \-Reset all floating species concentrations to their intial conditions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Get the value of the current number of points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{\-Initial condition methods}
+\begin{DoxyCompactItemize}
+\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__simulation_ga07dfaf16ab38015aab6b400665ace2b2}{reset} ()
+\begin{DoxyCompactList}\small\item\em \-Reset all floating species concentrations to their intial conditions. \end{DoxyCompactList}\item 
+\hypertarget{group__simulation_ga338d8b7e0648b293a134e69bd7862dc6}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Floating\-Species\-Initial\-Concentrations} (const \hyperlink{struct_r_r_vector}{\-R\-R\-Vector} $\ast$vec)}
+\label{group__simulation_ga338d8b7e0648b293a134e69bd7862dc6}
+
+\item 
+\hypertarget{group__simulation_ga6458f13569fc543075b559978f4f83ac}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
+rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Initial\-Concentrations} ()}
+\label{group__simulation_ga6458f13569fc543075b559978f4f83ac}
+
+\item 
+\hypertarget{group__simulation_ga4b87e338bfb9d788c31987f8154818f6}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
+rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Initial\-Condition\-Names} ()}
+\label{group__simulation_ga4b87e338bfb9d788c31987f8154818f6}
+
+\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
@@ -157,7 +177,7 @@ char$\ast$ \-A list of symbol names indicating the current selection list
 \begin{DoxyReturn}{\-Returns}
 \-Returns \-True if successful 
 \end{DoxyReturn}
-\hypertarget{group__loadsave_ga07dfaf16ab38015aab6b400665ace2b2}{
+\hypertarget{group__simulation_ga07dfaf16ab38015aab6b400665ace2b2}{
 \index{\-Time-\/course simulation@{\-Time-\/course simulation}!reset@{reset}}
 \index{reset@{reset}!Time-course simulation@{\-Time-\/course simulation}}
 \subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv reset (
@@ -165,7 +185,7 @@ char$\ast$ \-A list of symbol names indicating the current selection list
 {}
 \end{DoxyParamCaption}
 )}}
-\label{group__loadsave_ga07dfaf16ab38015aab6b400665ace2b2}
+\label{group__simulation_ga07dfaf16ab38015aab6b400665ace2b2}
 
 
 \-Reset all floating species concentrations to their intial conditions. 

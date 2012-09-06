@@ -21,24 +21,25 @@
 
  int main(int nargs, char** argv)
  {
-        RRResultHandle efm, output, params;
+        RRHandle rrInstance = getRRInstance();
 
-        if (nargs < 2)
-        {
-            m1 = model1();
+        printf("loading model file %s\n", argv[1]);
+ 
+        if (!loadSBMLFromFile(argv[1])) {
+           printf ("Error while loading SBML file\n");
+           printf ("Error message: %s\n, getLastError());
+           exit();
         }
-        else
-        {
-            printf("loading model file %s\n", argv[1]);
-            loadSBMLFromFile(argv[1]);
-        }
-
-
-        output = simualte (0, 100, 1000);  // start, end, num. points
-        printf("output.tab has %i rows and %i columns\n", output->RSize, output
-      ->RCols);
+                   
+        RRResultHandle output = simulate (0, 100, 1000);  // start, end, num.
+       points
+        
+        printf("Output table has %i rows and %i columns\n", output->RSize,
+       output->RCols);
         printResult (output);
-        freeREsult (output);
+        
+        freeResult (output);
+        freeRrInstance (rrInstance)
 
         return 0;
  }

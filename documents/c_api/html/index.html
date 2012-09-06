@@ -88,26 +88,26 @@ Introduction</h2>
 
  <span class="keywordtype">int</span> main(<span class="keywordtype">int</span> nargs, <span class="keywordtype">char</span>** argv)
  {
-        <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> efm, output, params;
+        RRHandle rrInstance = <a class="code" href="group__initialization.html#gab5d1a179f93b94c8ddefa909131b3f11" title="Initialize the roadRunner library and return an instance.">getRRInstance</a>();
 
-        <span class="keywordflow">if</span> (nargs &lt; 2)
-        {
-            m1 = model1();
-        }
-        <span class="keywordflow">else</span>
-        {
-            printf(<span class="stringliteral">&quot;loading model file %s\n&quot;</span>, argv[1]);
-            <a class="code" href="group__loadsave.html#ga3147e10d84bddb6435bee4b1db0514bf" title="Create a model from a SBML file.">loadSBMLFromFile</a>(argv[1]);
-        }
-
-
-        output = simualte (0, 100, 1000);  <span class="comment">// start, end, num. points</span>
-        printf(<span class="stringliteral">&quot;output.tab has %i rows and %i columns\n&quot;</span>, output-&gt;<a class="code" href="struct_r_r_result.html#a4d8512c879223c0e0d1522dae38e7819">RSize</a>, output-&gt;RCols);
-        printResult (output);
-        freeREsult (output);
-
-        <span class="keywordflow">return</span> 0;
- }
+        printf(<span class="stringliteral">&quot;loading model file %s\n&quot;</span>, argv[1]);
+ 
+        <span class="keywordflow">if</span> (!<a class="code" href="group__loadsave.html#ga3147e10d84bddb6435bee4b1db0514bf" title="Create a model from a SBML file.">loadSBMLFromFile</a>(argv[1])) {
+           printf (<span class="stringliteral">&quot;Error while loading SBML file\n&quot;</span>);
+           printf (<span class="stringliteral">&quot;Error message: %s\n, getLastError());</span>
+<span class="stringliteral">           exit();</span>
+<span class="stringliteral">        }</span>
+<span class="stringliteral">                   </span>
+<span class="stringliteral">        RRResultHandle output = simulate (0, 100, 1000);  // start, end, num. points</span>
+<span class="stringliteral">        </span>
+<span class="stringliteral">        printf(&quot;</span>Output table has %i rows and %i columns\n<span class="stringliteral">&quot;, output-&gt;RSize, output-&gt;RCols);</span>
+<span class="stringliteral">        printResult (output);</span>
+<span class="stringliteral">        </span>
+<span class="stringliteral">        freeResult (output);</span>
+<span class="stringliteral">        freeRrInstance (rrInstance)</span>
+<span class="stringliteral"></span>
+<span class="stringliteral">        return 0;</span>
+<span class="stringliteral"> }</span>
 </pre></div> <h2><a class="anchor" id="install_sec"></a>
 Installation</h2>
 <p>Installation documentation is provided in the main google code page. </p>
@@ -129,7 +129,7 @@ Installation</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 5 2012 19:02:24 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 21:28:56 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

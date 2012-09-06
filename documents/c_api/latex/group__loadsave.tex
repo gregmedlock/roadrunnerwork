@@ -7,21 +7,20 @@
 \-Read and write models to files or strings. \-Support for \-S\-B\-M\-L formats.  
 
 
-\subsection*{\-Read models}
+\subsection*{\-Read and \-Write models}
 \begin{DoxyCompactItemize}
 \item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga4105f02dfdb959175f30cecebfb1c081}{load\-S\-B\-M\-L} (const char $\ast$sbml)
 \begin{DoxyCompactList}\small\item\em \-Create a model from an \-S\-B\-M\-L string. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga3147e10d84bddb6435bee4b1db0514bf}{load\-S\-B\-M\-L\-From\-File} (const char $\ast$sbml)
 \begin{DoxyCompactList}\small\item\em \-Create a model from a \-S\-B\-M\-L file. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_ga7d683d70e6966107f81a3e8c547bcd76}{write\-S\-B\-M\-L} ()
+\begin{DoxyCompactList}\small\item\em \-Retrive the current state of the model in the form of an \-S\-B\-M\-L string. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_ga05a79ded419b52fa2965fce1700c0e82}{get\-S\-B\-M\-L} ()
+\begin{DoxyCompactList}\small\item\em \-Retrieve the last \-S\-B\-M\-L model that was loaded. \end{DoxyCompactList}\item 
 \hypertarget{group__loadsave_ga4add8092e50aedd665cd073133838620}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-Param\-Promoted\-S\-B\-M\-L} (const char $\ast$s\-Arg)}
 \label{group__loadsave_ga4add8092e50aedd665cd073133838620}
-
-\item 
-\hypertarget{group__loadsave_ga05a79ded419b52fa2965fce1700c0e82}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-S\-B\-M\-L} ()}
-\label{group__loadsave_ga05a79ded419b52fa2965fce1700c0e82}
 
 \item 
 \hypertarget{group__loadsave_ga320ffeeba3e5505371b52ce61715bf82}{
@@ -58,690 +57,13 @@ rr\-Call\-Conv \hyperlink{group__loadsave_ga9b87919e79f6eb0d7c77c3daa08d6baf}{si
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga451e7ecddd0431316048a332410b0600}{get\-Time\-End} (double \&time\-End)
 \begin{DoxyCompactList}\small\item\em \-Get the value of the current time end. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_gacd9cb734773710f640742a9f040dccc5}{get\-Num\-Points} (int \&num\-Points)
-\begin{DoxyCompactList}\small\item\em \-Get the value of the current number of points. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga0edd5f5a66884e0767d855d639cb45c0}{steady\-State} (double \&value)
-\begin{DoxyCompactList}\small\item\em \-Get the value of the current number of points. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv \hyperlink{group__loadsave_ga95269e5d546721d19139d746d5ac8358}{compute\-Steady\-State\-Values} ()
-\begin{DoxyCompactList}\small\item\em \-A convenient method for returning a vector of the steady state species concentrations. \end{DoxyCompactList}\item 
-\hypertarget{group__loadsave_ga397a988c31c2010d9f2752080afa8dad}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Steady\-State\-Selection\-List} (const char $\ast$list)}
-\label{group__loadsave_ga397a988c31c2010d9f2752080afa8dad}
-
-\item 
-\hypertarget{group__loadsave_ga29b3868509ef2c09e4bbf0b11b731443}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Steady\-State\-Selection\-List} ()}
-\label{group__loadsave_ga29b3868509ef2c09e4bbf0b11b731443}
-
-\item 
-\hypertarget{group__loadsave_ga8c67bc930b33926bccb3c9f810dc2825}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Value} (const char $\ast$species\-I\-D, double \&value)}
-\label{group__loadsave_ga8c67bc930b33926bccb3c9f810dc2825}
-
-\item 
-\hypertarget{group__loadsave_ga8663bcca2b00ef20c13841ca9fc9f56c}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Value} (const char $\ast$species\-Id, const double \&val)}
-\label{group__loadsave_ga8663bcca2b00ef20c13841ca9fc9f56c}
-
-\item 
-\hypertarget{group__loadsave_ga0db8fe5f89985f27ea4ddb3c595b16fd}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Concentrations} ()}
-\label{group__loadsave_ga0db8fe5f89985f27ea4ddb3c595b16fd}
-
-\item 
-\hypertarget{group__loadsave_gaae9b6b75211923bcf6f7196fe707c631}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Boundary\-Species\-Concentrations} ()}
-\label{group__loadsave_gaae9b6b75211923bcf6f7196fe707c631}
-
-\item 
-\hypertarget{group__loadsave_gaf4be0a5e72db408248569a1d3e28c1f0}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Global\-Parameter\-Values} ()}
-\label{group__loadsave_gaf4be0a5e72db408248569a1d3e28c1f0}
-
-\item 
-\hypertarget{group__loadsave_gabb6764fa48d0b3f2ca3b38e391479347}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Boundary\-Species\-By\-Index} (const int \&index, const double \&value)}
-\label{group__loadsave_gabb6764fa48d0b3f2ca3b38e391479347}
-
-\item 
-\hypertarget{group__loadsave_gaf4a5a4d9b1ecf60d4b98189b4bcf2543}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Floating\-Species\-By\-Index} (const int \&index, const double \&value)}
-\label{group__loadsave_gaf4a5a4d9b1ecf60d4b98189b4bcf2543}
-
-\item 
-\hypertarget{group__loadsave_ga65d9546856e5526fc403539903039f8e}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Global\-Parameter\-By\-Index} (const int \&index, const double \&value)}
-\label{group__loadsave_ga65d9546856e5526fc403539903039f8e}
-
-\item 
-\hypertarget{group__loadsave_gaccee3467307dbcedd031c1dc2cf57606}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Boundary\-Species\-By\-Index} (const int \&index, double \&val)}
-\label{group__loadsave_gaccee3467307dbcedd031c1dc2cf57606}
-
-\item 
-\hypertarget{group__loadsave_gab73fad6a1dfdb2b2d393964354d94c69}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Floating\-Species\-By\-Index} (const int \&index, double \&val)}
-\label{group__loadsave_gab73fad6a1dfdb2b2d393964354d94c69}
-
-\item 
-\hypertarget{group__loadsave_ga1aae76d21a054da6ed6cc734ad10287a}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Global\-Parameter\-By\-Index} (const int \&index, double \&val)}
-\label{group__loadsave_ga1aae76d21a054da6ed6cc734ad10287a}
-
-\item 
-\hypertarget{group__loadsave_ga5241b915cff8bcabba3024c33fb4e336}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Compartment\-By\-Index} (const int \&index, double \&value)}
-\label{group__loadsave_ga5241b915cff8bcabba3024c33fb4e336}
-
-\item 
-\hypertarget{group__loadsave_gadb238a943d93bc9548bf5c3cd452e9bb}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Compartment\-By\-Index} (const int \&index, const double \&value)}
-\label{group__loadsave_gadb238a943d93bc9548bf5c3cd452e9bb}
-
-\item 
-\hypertarget{group__loadsave_ga228e8431e466bf7e5987c1179dcbbbd8}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Full\-Jacobian} ()}
-\label{group__loadsave_ga228e8431e466bf7e5987c1179dcbbbd8}
-
-\item 
-\hypertarget{group__loadsave_ga503c810c1be94e486441eeea88163a18}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Reduced\-Jacobian} ()}
-\label{group__loadsave_ga503c810c1be94e486441eeea88163a18}
-
-\item 
-\hypertarget{group__loadsave_ga7c7c6eb0e77711983254488895f24b81}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Eigen\-Values} ()}
-\label{group__loadsave_ga7c7c6eb0e77711983254488895f24b81}
-
-\item 
-\hypertarget{group__loadsave_gad361175745409d5b6670b8a8996a6d59}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Stoichiometry\-Matrix} ()}
-\label{group__loadsave_gad361175745409d5b6670b8a8996a6d59}
-
-\item 
-\hypertarget{group__loadsave_gae8e8c6ede9f60e33dcdc190c061ce3f8}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Link\-Matrix} ()}
-\label{group__loadsave_gae8e8c6ede9f60e33dcdc190c061ce3f8}
-
-\item 
-\hypertarget{group__loadsave_ga57b4c651ecffb52d28886ce9e3b6e6ed}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Nr\-Matrix} ()}
-\label{group__loadsave_ga57b4c651ecffb52d28886ce9e3b6e6ed}
-
-\item 
-\hypertarget{group__loadsave_ga587ae0ec7e6e7f8b2576bacf700eedcd}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-L0\-Matrix} ()}
-\label{group__loadsave_ga587ae0ec7e6e7f8b2576bacf700eedcd}
-
-\item 
-\hypertarget{group__loadsave_gafd1bcae76af0d5d6ccf7af7bd098de23}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Conservation\-Matrix} ()}
-\label{group__loadsave_gafd1bcae76af0d5d6ccf7af7bd098de23}
-
-\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga07dfaf16ab38015aab6b400665ace2b2}{reset} ()
-\begin{DoxyCompactList}\small\item\em \-Reset all floating species concentrations to their intial conditions. \end{DoxyCompactList}\item 
-\hypertarget{group__loadsave_ga338d8b7e0648b293a134e69bd7862dc6}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Floating\-Species\-Initial\-Concentrations} (const \hyperlink{struct_r_r_vector}{\-R\-R\-Vector} $\ast$vec)}
-\label{group__loadsave_ga338d8b7e0648b293a134e69bd7862dc6}
-
-\item 
-\hypertarget{group__loadsave_ga6458f13569fc543075b559978f4f83ac}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Initial\-Concentrations} ()}
-\label{group__loadsave_ga6458f13569fc543075b559978f4f83ac}
-
-\item 
-\hypertarget{group__loadsave_ga4b87e338bfb9d788c31987f8154818f6}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Initial\-Condition\-Names} ()}
-\label{group__loadsave_ga4b87e338bfb9d788c31987f8154818f6}
-
-\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
-\begin{DoxyCompactList}\small\item\em \-Obtain the number of reactions in the loaded model. \end{DoxyCompactList}\item 
-\hypertarget{group__loadsave_ga0a7be404315c6001627ee26e738e11e2}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Reaction\-Rate} (const int \&, double \&rate)}
-\label{group__loadsave_ga0a7be404315c6001627ee26e738e11e2}
-
-\item 
-\hypertarget{group__loadsave_ga86d544bcf3eeaa4698a60123a3da69aa}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Reaction\-Rates} ()}
-\label{group__loadsave_ga86d544bcf3eeaa4698a60123a3da69aa}
-
-\item 
-\hypertarget{group__loadsave_gaa03d9414ddeb177a76365dd5b2d0042e}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Reaction\-Rates\-Ex} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)}
-\label{group__loadsave_gaa03d9414ddeb177a76365dd5b2d0042e}
-
-\item 
-\hypertarget{group__loadsave_gabbe129bee63761f7b0f98f060b86067b}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change} ()}
-\label{group__loadsave_gabbe129bee63761f7b0f98f060b86067b}
-
-\item 
-\hypertarget{group__loadsave_gaf9d5b185617519ceff1a018d9009c0fd}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change\-Names} ()}
-\label{group__loadsave_gaf9d5b185617519ceff1a018d9009c0fd}
-
-\item 
-\hypertarget{group__loadsave_gaad38321993112e230f7fccd96345de6c}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Rate\-Of\-Change} (const int \&, double \&value)}
-\label{group__loadsave_gaad38321993112e230f7fccd96345de6c}
-
-\item 
-\hypertarget{group__loadsave_gacfae48e32754e7678b8bb003df93ef53}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change\-Ex} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)}
-\label{group__loadsave_gacfae48e32754e7678b8bb003df93ef53}
-
-\item 
-\hypertarget{group__loadsave_ga3fbb7c2fab261f25a3871f1caf398ff1}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries eval\-Model} ()}
-\label{group__loadsave_ga3fbb7c2fab261f25a3871f1caf398ff1}
-
-\item 
-\hypertarget{group__loadsave_ga5ea2479b882549edd4fb75397ca38f52}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Compartments} ()}
-\label{group__loadsave_ga5ea2479b882549edd4fb75397ca38f52}
-
-\item 
-\hypertarget{group__loadsave_ga17c851dfb27b9697ff286cc57d4cd10d}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Boundary\-Species} ()}
-\label{group__loadsave_ga17c851dfb27b9697ff286cc57d4cd10d}
-
-\item 
-\hypertarget{group__loadsave_ga9a96b81c58073caff01ea2c9e0f5e119}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Floating\-Species} ()}
-\label{group__loadsave_ga9a96b81c58073caff01ea2c9e0f5e119}
-
-\item 
-\hypertarget{group__loadsave_ga2f33a70dfd6c68fb585cf5d1a9c1339c}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Global\-Parameters} ()}
-\label{group__loadsave_ga2f33a70dfd6c68fb585cf5d1a9c1339c}
-
-\item 
-\hypertarget{group__loadsave_ga7d573d16a02b3bf4361c00065f624e0b}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Dependent\-Species} ()}
-\label{group__loadsave_ga7d573d16a02b3bf4361c00065f624e0b}
-
-\item 
-\hypertarget{group__loadsave_ga29811c87b0f144e506c93373418fbe8b}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Independent\-Species} ()}
-\label{group__loadsave_ga29811c87b0f144e506c93373418fbe8b}
-
-\item 
-\hypertarget{group__loadsave_gafe6030585929ca78c5ce6d3944b11a1a}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Reaction\-Names} ()}
-\label{group__loadsave_gafe6030585929ca78c5ce6d3944b11a1a}
-
-\item 
-\hypertarget{group__loadsave_ga1b676408037364f621f5bcb49a0f1474}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Rate\-Of\-Change\-Names} ()}
-\label{group__loadsave_ga1b676408037364f621f5bcb49a0f1474}
-
-\item 
-\hypertarget{group__loadsave_gac0cfb68966bfb2656477f643a7f6494d}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Boundary\-Species\-Names} ()}
-\label{group__loadsave_gac0cfb68966bfb2656477f643a7f6494d}
-
-\item 
-\hypertarget{group__loadsave_ga468d9d0cc8489ae85f4fd78d9fab343e}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Names} ()}
-\label{group__loadsave_ga468d9d0cc8489ae85f4fd78d9fab343e}
-
-\item 
-\hypertarget{group__loadsave_gabb7dd0b1f55a9f1c5ded728aa202027e}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Global\-Parameter\-Names} ()}
-\label{group__loadsave_gabb7dd0b1f55a9f1c5ded728aa202027e}
-
-\item 
-\hypertarget{group__loadsave_gafe31d3b684c51fb829c1770898bc1e5d}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Compartment\-Names} ()}
-\label{group__loadsave_gafe31d3b684c51fb829c1770898bc1e5d}
-
-\item 
-\hypertarget{group__loadsave_ga313f81d4fae0ece305eb1246543bcdc3}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Eigen\-Value\-Names} ()}
-\label{group__loadsave_ga313f81d4fae0ece305eb1246543bcdc3}
-
-\item 
-\hypertarget{group__loadsave_gaa06a430f57d4df400e58fd954766901c}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a21a10f01ac4fd34c61e7e7d12af9891d}{\-R\-R\-Array\-List2\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Available\-Symbols} ()}
-\label{group__loadsave_gaa06a430f57d4df400e58fd954766901c}
-
-\item 
-\hypertarget{group__loadsave_ga35b2d80dfae3ffba81a45a485e30b22e}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
-\hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Elasticity\-Coefficient\-Names} ()}
-\label{group__loadsave_ga35b2d80dfae3ffba81a45a485e30b22e}
-
-\item 
-\hypertarget{group__loadsave_ga9451fdf700b80288c0d664193eef4421}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
-\hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Unscaled\-Flux\-Control\-Coefficient\-Names} ()}
-\label{group__loadsave_ga9451fdf700b80288c0d664193eef4421}
-
-\item 
-\hypertarget{group__loadsave_ga5d72e660bc33c6cbb93aadd603015563}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
-\hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Flux\-Control\-Coefficient\-Names} ()}
-\label{group__loadsave_ga5d72e660bc33c6cbb93aadd603015563}
-
-\item 
-\hypertarget{group__loadsave_ga4cd50e9e57140cb5fd69483bc6b0656e}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
-\hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Unscaled\-Concentration\-Control\-Coefficient\-Names} ()}
-\label{group__loadsave_ga4cd50e9e57140cb5fd69483bc6b0656e}
-
-\item 
-\hypertarget{group__loadsave_gac65874848b588a8c87ac04705eb88cbc}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
-\hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Concentration\-Control\-Coefficient\-Names} ()}
-\label{group__loadsave_gac65874848b588a8c87ac04705eb88cbc}
-
-\item 
-\hypertarget{group__loadsave_ga82cf39ff64eb0446c9f5a2e772283323}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Un\-Scaled\-Elasticity\-Matrix} ()}
-\label{group__loadsave_ga82cf39ff64eb0446c9f5a2e772283323}
-
-\item 
-\hypertarget{group__loadsave_gaf8431784ec5c2ce1d0416606056f3d44}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Scaled\-Elasticity\-Matrix} ()}
-\label{group__loadsave_gaf8431784ec5c2ce1d0416606056f3d44}
-
-\item 
-\hypertarget{group__loadsave_ga418c0108d37bc4f35a55291ca85e0a3f}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Unscaled\-Concentration\-Control\-Coefficient\-Matrix} ()}
-\label{group__loadsave_ga418c0108d37bc4f35a55291ca85e0a3f}
-
-\item 
-\hypertarget{group__loadsave_gad28644ca7615c71725056028a0a048ba}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Scaled\-Concentration\-Control\-Coefficient\-Matrix} ()}
-\label{group__loadsave_gad28644ca7615c71725056028a0a048ba}
-
-\item 
-\hypertarget{group__loadsave_ga4b464166bb67773916067bc7e190a338}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Unscaled\-Flux\-Control\-Coefficient\-Matrix} ()}
-\label{group__loadsave_ga4b464166bb67773916067bc7e190a338}
-
-\item 
-\hypertarget{group__loadsave_gad63647a85b299d463b1e4cd5671d0881}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Scaled\-Flux\-Control\-Coefficient\-Matrix} ()}
-\label{group__loadsave_gad63647a85b299d463b1e4cd5671d0881}
-
-\item 
-\hypertarget{group__loadsave_ga6655b7aebdc9e6fad4e7a54e3de9195d}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries getu\-C\-C} (const char $\ast$variable, const char $\ast$parameter, double \&value)}
-\label{group__loadsave_ga6655b7aebdc9e6fad4e7a54e3de9195d}
-
-\item 
-\hypertarget{group__loadsave_ga49c703842a069c37fa472f2740dd514b}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-C\-C} (const char $\ast$variable, const char $\ast$parameter, double \&value)}
-\label{group__loadsave_ga49c703842a069c37fa472f2740dd514b}
-
-\item 
-\hypertarget{group__loadsave_ga761a98e3635d75c8505f516a0b2384b1}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-E\-E} (const char $\ast$name, const char $\ast$species, double \&value)}
-\label{group__loadsave_ga761a98e3635d75c8505f516a0b2384b1}
-
-\item 
-\hypertarget{group__loadsave_gadf71d426da852cdf931022fa56a3acb0}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries getu\-E\-E} (const char $\ast$name, const char $\ast$species, double \&value)}
-\label{group__loadsave_gadf71d426da852cdf931022fa56a3acb0}
-
-\item 
-\hypertarget{group__loadsave_ga8f7a0a9f82d038a325c5e38f7596a0d1}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Scaled\-Floating\-Species\-Elasticity} (const char $\ast$reaction\-Name, const char $\ast$species\-Name, double \&value)}
-\label{group__loadsave_ga8f7a0a9f82d038a325c5e38f7596a0d1}
-
-\item 
-\hypertarget{group__loadsave_ga40c29c6c6773091005de86df2b8a7b6b}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-Result} (const \hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)}
-\label{group__loadsave_ga40c29c6c6773091005de86df2b8a7b6b}
-
-\item 
-\hypertarget{group__loadsave_ga61de73039780b4036d73922a1560f5e8}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-Matrix} (const \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} mat)}
-\label{group__loadsave_ga61de73039780b4036d73922a1560f5e8}
-
-\item 
-\hypertarget{group__loadsave_ga577d45215017692493baa428444f1f57}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-Vector} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)}
-\label{group__loadsave_ga577d45215017692493baa428444f1f57}
-
-\item 
-\hypertarget{group__loadsave_ga344136d920ad8cafbb0a1801cf045c07}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-String\-List} (const \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} list)}
-\label{group__loadsave_ga344136d920ad8cafbb0a1801cf045c07}
-
-\item 
-\hypertarget{group__loadsave_ga6fe9d99e416f3a8791b0d80226a74099}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-String\-Array\-List} (const \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List} $\ast$list)}
-\label{group__loadsave_ga6fe9d99e416f3a8791b0d80226a74099}
-
-\item 
-\hypertarget{group__loadsave_ga01ee2cd3cf82cfd67149944282eafbb6}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-Array\-List} (const \hyperlink{rr__c__types_8h_a21a10f01ac4fd34c61e7e7d12af9891d}{\-R\-R\-Array\-List2\-Handle} list)}
-\label{group__loadsave_ga01ee2cd3cf82cfd67149944282eafbb6}
-
-\item 
-\hypertarget{group__loadsave_ga59ccea13a522b2ce61220cff4ea761c2}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-R\-R\-Instance} (\-R\-R\-Handle handle)}
-\label{group__loadsave_ga59ccea13a522b2ce61220cff4ea761c2}
-
-\item 
-\hypertarget{group__loadsave_ga7a1fb56bd09bb535af7b6f3bc51c89b5}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Result} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} handle)}
-\label{group__loadsave_ga7a1fb56bd09bb535af7b6f3bc51c89b5}
-
-\item 
-\hypertarget{group__loadsave_ga1001b1dab86472f6db5bcbe724c41631}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Text} (char $\ast$text)}
-\label{group__loadsave_ga1001b1dab86472f6db5bcbe724c41631}
-
-\item 
-\hypertarget{group__loadsave_gadca4757725ec2e3d8251a001fde8028b}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Label\-String\-List} (\hyperlink{struct_r_r_label_string_list}{\-R\-R\-Label\-String\-List\-Handle} sl)}
-\label{group__loadsave_gadca4757725ec2e3d8251a001fde8028b}
-
-\item 
-\hypertarget{group__loadsave_ga63aea4cfe3b5262e67d50f3227153a16}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-String\-List} (\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} sl)}
-\label{group__loadsave_ga63aea4cfe3b5262e67d50f3227153a16}
-
-\item 
-\hypertarget{group__loadsave_gacca647731a9241ab1f517d569271688b}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-String\-Array\-List} (\hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} sl)}
-\label{group__loadsave_gacca647731a9241ab1f517d569271688b}
-
-\item 
-\hypertarget{group__loadsave_ga8d0882fc56ccdc67b489cdcb82522ac6}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Array\-List} (\hyperlink{rr__c__types_8h_a21a10f01ac4fd34c61e7e7d12af9891d}{\-R\-R\-Array\-List2\-Handle} the\-List)}
-\label{group__loadsave_ga8d0882fc56ccdc67b489cdcb82522ac6}
-
-\item 
-\hypertarget{group__loadsave_ga11dddcdb661f8e82a2f87ecb24ab8968}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Vector} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector)}
-\label{group__loadsave_ga11dddcdb661f8e82a2f87ecb24ab8968}
-
-\item 
-\hypertarget{group__loadsave_gabbbbce24954114b22b13337ccaf63529}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Matrix} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} matrix)}
-\label{group__loadsave_gabbbbce24954114b22b13337ccaf63529}
-
-\item 
-\hypertarget{group__loadsave_ga79f31e58a4a2d24d2f604f4369b6c64f}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-C\-Code} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)}
-\label{group__loadsave_ga79f31e58a4a2d24d2f604f4369b6c64f}
-
-\item 
-\hypertarget{group__loadsave_ga5945592b2369af769505a47463be2a43}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C void rr\-Call\-Conv {\bfseries \-Pause} ()}
-\label{group__loadsave_ga5945592b2369af769505a47463be2a43}
-
-\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_ga0c42e94111a64ea70824f92d8c1b564d}{get\-Vector\-Length} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector)
-\begin{DoxyCompactList}\small\item\em \-Get the number of elements in a vector type. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv \hyperlink{group__loadsave_ga27e208d44bda0c744c9df5906b51cf09}{create\-Vector\-A\-P\-I} (int size)
-\begin{DoxyCompactList}\small\item\em \-Create a new vector with a given size. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_gaf06c28a1e29d86f3fd3e6112eb7c85e8}{get\-Vector\-Element} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector, int index, double \&value)
-\begin{DoxyCompactList}\small\item\em \-Get a particular element from a vector. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga77eaf0d0f88175ce4e2e8ca57ff9d859}{set\-Vector\-Element} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector, int index, double value)
-\begin{DoxyCompactList}\small\item\em \-Get a particular element from a vector. \end{DoxyCompactList}\item 
-\hypertarget{group__loadsave_ga451b4f6fe1d5aaabfdd11acb44f124bb}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-String\-List\-Length} (\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} string\-List)}
-\label{group__loadsave_ga451b4f6fe1d5aaabfdd11acb44f124bb}
-
-\item 
-\hypertarget{group__loadsave_gac305395b75de8e66270d552492ff7df0}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-String\-List\-Element} (\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} string\-List, int index)}
-\label{group__loadsave_gac305395b75de8e66270d552492ff7df0}
-
-\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_gad5a3803c72d8f27bf2dad72b25226675}{get\-Matrix\-Num\-Rows} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m)
-\begin{DoxyCompactList}\small\item\em \-Retrieve the number of rows in the given matrix. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_ga46eae843e223f83e00b07fe7563a1c91}{get\-Matrix\-Num\-Cols} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m)
-\begin{DoxyCompactList}\small\item\em \-Retrieve the number of columns in the given matrix. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_gac4bd2fdc7fd7d3a1f52ef59975952dad}{get\-Matrix\-Element} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m, int r, int c, double \&value)
-\begin{DoxyCompactList}\small\item\em \-Retrieves an element at a given row and column from a matrix type variable. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_ga45793ae8175e37d42bb0fed8629cedb3}{get\-Result\-Num\-Rows} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)
-\begin{DoxyCompactList}\small\item\em \-Retrieve the number of rows in the given result data. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_gac8e0a87e6231d8f5828b679116b2d6a7}{get\-Result\-Num\-Cols} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)
-\begin{DoxyCompactList}\small\item\em \-Retrieve the number of columns in the given result data. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_gab8f77529dcd45bef9ebe627b88831d52}{get\-Result\-Element} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result, int r, int c, double \&value)
-\begin{DoxyCompactList}\small\item\em \-Retrieves an element at a given row and column from a result type variable. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_ga9ddbfbe25f45e7232d0526bf51147fd3}{get\-Result\-Column\-Label} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result, int column)
-\begin{DoxyCompactList}\small\item\em \-Retrieves an element at a given row and column from a result type variable. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_ga071cb3c138a8aaf96992daec8fd6a7c2}{get\-C\-Code\-Header} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)
-\begin{DoxyCompactList}\small\item\em \-Retrieve the header file for the current model (if applicable) \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_gabb964f1aad030deee67c313d9bdf3520}{get\-C\-Code\-Source} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)
-\begin{DoxyCompactList}\small\item\em \-Retrieve the main source file for the current model (if applicable) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Get the value of the current number of points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
 \-Read and write models to files or strings. \-Support for \-S\-B\-M\-L formats. 
 
 \subsection{\-Function \-Documentation}
-\hypertarget{group__loadsave_ga95269e5d546721d19139d746d5ac8358}{
-\index{\-Read and Write models@{\-Read and Write models}!compute\-Steady\-State\-Values@{compute\-Steady\-State\-Values}}
-\index{compute\-Steady\-State\-Values@{compute\-Steady\-State\-Values}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{compute\-Steady\-State\-Values}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-Vector\-Handle} rr\-Call\-Conv compute\-Steady\-State\-Values (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_ga95269e5d546721d19139d746d5ac8358}
-
-
-\-A convenient method for returning a vector of the steady state species concentrations. 
-
-\-Example\-: \-R\-R\-Vector\-Handle values = compute\-Steady\-State\-Values ();
-
-\begin{DoxyReturn}{\-Returns}
-\-Returns the vector of steady state values or nil if an error occured 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_ga27e208d44bda0c744c9df5906b51cf09}{
-\index{\-Read and Write models@{\-Read and Write models}!create\-Vector\-A\-P\-I@{create\-Vector\-A\-P\-I}}
-\index{create\-Vector\-A\-P\-I@{create\-Vector\-A\-P\-I}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{create\-Vector\-A\-P\-I}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-Vector\-Handle} rr\-Call\-Conv create\-Vector\-A\-P\-I (
-\begin{DoxyParamCaption}
-\item[{int}]{size}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_ga27e208d44bda0c744c9df5906b51cf09}
-
-
-\-Create a new vector with a given size. 
-
-\-Example\-: my\-Vector = create\-Vector\-A\-P\-I (10);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em int} & size \-The number of element in the new vector \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns nil if it fails, otherwise returns a pointer to the new vector 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_ga071cb3c138a8aaf96992daec8fd6a7c2}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-C\-Code\-Header@{get\-C\-Code\-Header}}
-\index{get\-C\-Code\-Header@{get\-C\-Code\-Header}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-C\-Code\-Header}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char$\ast$ rr\-Call\-Conv get\-C\-Code\-Header (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-C\-Code\-Handle}}]{code}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_ga071cb3c138a8aaf96992daec8fd6a7c2}
-
-
-\-Retrieve the header file for the current model (if applicable) 
-
-\-Example\-: header = get\-C\-Code\-Header (code);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-C\-Code\-Handle} & header \-A pointer to a string that stores the header code \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns \-True if succesful 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_gabb964f1aad030deee67c313d9bdf3520}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-C\-Code\-Source@{get\-C\-Code\-Source}}
-\index{get\-C\-Code\-Source@{get\-C\-Code\-Source}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-C\-Code\-Source}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char$\ast$ rr\-Call\-Conv get\-C\-Code\-Source (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-C\-Code\-Handle}}]{code}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_gabb964f1aad030deee67c313d9bdf3520}
-
-
-\-Retrieve the main source file for the current model (if applicable) 
-
-\-Example\-: source = get\-C\-Code\-Source (code);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-C\-Code\-Handle} & header \-A pointer to a string that stores the main source code \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns \-True if succesful 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_gac4bd2fdc7fd7d3a1f52ef59975952dad}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-Matrix\-Element@{get\-Matrix\-Element}}
-\index{get\-Matrix\-Element@{get\-Matrix\-Element}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-Matrix\-Element}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv get\-Matrix\-Element (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-Matrix\-Handle}}]{m, }
-\item[{int}]{r, }
-\item[{int}]{c, }
-\item[{double \&}]{value}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_gac4bd2fdc7fd7d3a1f52ef59975952dad}
-
-
-\-Retrieves an element at a given row and column from a matrix type variable. 
-
-\-Example\-: status = get\-Matrix\-Element (m, 2, 4, \&value);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Matrix\-Handle} & m \-A pointer to a matrix type variable \\
-\hline
-{\em int} & r \-The row index to the matrix \\
-\hline
-{\em int} & c \-The column index to the matrix  double$\ast$ \-The retrieved value from the matrix \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-
-
-\-Returns \-True if succesful 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_ga46eae843e223f83e00b07fe7563a1c91}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-Matrix\-Num\-Cols@{get\-Matrix\-Num\-Cols}}
-\index{get\-Matrix\-Num\-Cols@{get\-Matrix\-Num\-Cols}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-Matrix\-Num\-Cols}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv get\-Matrix\-Num\-Cols (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-Matrix\-Handle}}]{m}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_ga46eae843e223f83e00b07fe7563a1c91}
-
-
-\-Retrieve the number of columns in the given matrix. 
-
-\-Example\-: n\-Rows = get\-Matrix\-Num\-Cols (m);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Matrix\-Handle} & m \-A pointer to a matrix type variable \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns -\/1 if fails, otherwise returns the number of columns 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_gad5a3803c72d8f27bf2dad72b25226675}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-Matrix\-Num\-Rows@{get\-Matrix\-Num\-Rows}}
-\index{get\-Matrix\-Num\-Rows@{get\-Matrix\-Num\-Rows}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-Matrix\-Num\-Rows}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv get\-Matrix\-Num\-Rows (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-Matrix\-Handle}}]{m}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_gad5a3803c72d8f27bf2dad72b25226675}
-
-
-\-Retrieve the number of rows in the given matrix. 
-
-\-Example\-: n\-Rows = get\-Matrix\-Num\-Rows (m);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Matrix\-Handle} & m \-A pointer to a matrix type variable \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns -\/1 if fails, otherwise returns the number of rows 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_gae25399f84ff2d1fda619358a1af9a1b5}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-Number\-Of\-Reactions@{get\-Number\-Of\-Reactions}}
-\index{get\-Number\-Of\-Reactions@{get\-Number\-Of\-Reactions}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-Number\-Of\-Reactions}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv get\-Number\-Of\-Reactions (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_gae25399f84ff2d1fda619358a1af9a1b5}
-
-
-\-Obtain the number of reactions in the loaded model. 
-
-\-Example\-: number = get\-Number\-Of\-Reactions ();
-
-\begin{DoxyReturn}{\-Returns}
-\-Returns -\/1 if it fails, if succesful it return 0 or more, indicating the number of reactions 
-\end{DoxyReturn}
 \hypertarget{group__loadsave_gacd9cb734773710f640742a9f040dccc5}{
 \index{\-Read and Write models@{\-Read and Write models}!get\-Num\-Points@{get\-Num\-Points}}
 \index{get\-Num\-Points@{get\-Num\-Points}!Read and Write models@{\-Read and Write models}}
@@ -765,111 +87,21 @@ rr\-Call\-Conv \hyperlink{group__loadsave_ga27e208d44bda0c744c9df5906b51cf09}{cr
 \begin{DoxyReturn}{\-Returns}
 \-Returns \-True if successful 
 \end{DoxyReturn}
-\hypertarget{group__loadsave_ga9ddbfbe25f45e7232d0526bf51147fd3}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-Result\-Column\-Label@{get\-Result\-Column\-Label}}
-\index{get\-Result\-Column\-Label@{get\-Result\-Column\-Label}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-Result\-Column\-Label}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char$\ast$ rr\-Call\-Conv get\-Result\-Column\-Label (
+\hypertarget{group__loadsave_ga05a79ded419b52fa2965fce1700c0e82}{
+\index{\-Read and Write models@{\-Read and Write models}!get\-S\-B\-M\-L@{get\-S\-B\-M\-L}}
+\index{get\-S\-B\-M\-L@{get\-S\-B\-M\-L}!Read and Write models@{\-Read and Write models}}
+\subsubsection[{get\-S\-B\-M\-L}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char$\ast$ rr\-Call\-Conv get\-S\-B\-M\-L (
 \begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-Result\-Handle}}]{result, }
-\item[{int}]{column}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{group__loadsave_ga9ddbfbe25f45e7232d0526bf51147fd3}
+\label{group__loadsave_ga05a79ded419b52fa2965fce1700c0e82}
 
 
-\-Retrieves an element at a given row and column from a result type variable. 
+\-Retrieve the last \-S\-B\-M\-L model that was loaded. 
 
-\-Example\-: str = get\-Result\-Column\-Label (result, 2, 4);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Result\-Handle} & result \-A pointer to a result type variable \\
-\hline
-{\em int} & column \-The column index for the result data (indexing from zero) \\
-\hline
-\end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-
-
-\-Returns nil if fails, otherwise returns a pointer to the string column label 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_gab8f77529dcd45bef9ebe627b88831d52}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-Result\-Element@{get\-Result\-Element}}
-\index{get\-Result\-Element@{get\-Result\-Element}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-Result\-Element}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv get\-Result\-Element (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-Result\-Handle}}]{result, }
-\item[{int}]{r, }
-\item[{int}]{c, }
-\item[{double \&}]{value}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_gab8f77529dcd45bef9ebe627b88831d52}
-
-
-\-Retrieves an element at a given row and column from a result type variable. 
-
-\-Example\-: status = get\-Result\-Element (result, 2, 4, \&value);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Result\-Handle} & m \-A pointer to a result type variable \\
-\hline
-{\em int} & r \-The row index to the result data \\
-\hline
-{\em int} & c \-The column index to the result data  double$\ast$ \-The retrieved value from the result data \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-
-
-\-Returns \-True if succesful 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_gac8e0a87e6231d8f5828b679116b2d6a7}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-Result\-Num\-Cols@{get\-Result\-Num\-Cols}}
-\index{get\-Result\-Num\-Cols@{get\-Result\-Num\-Cols}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-Result\-Num\-Cols}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv get\-Result\-Num\-Cols (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-Result\-Handle}}]{result}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_gac8e0a87e6231d8f5828b679116b2d6a7}
-
-
-\-Retrieve the number of columns in the given result data. 
-
-\-Example\-: n\-Rows = get\-Result\-Num\-Cols (result);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Result\-Handle} & result \-A pointer to a result type variable \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns -\/1 if fails, otherwise returns the number of columns 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_ga45793ae8175e37d42bb0fed8629cedb3}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-Result\-Num\-Rows@{get\-Result\-Num\-Rows}}
-\index{get\-Result\-Num\-Rows@{get\-Result\-Num\-Rows}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-Result\-Num\-Rows}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv get\-Result\-Num\-Rows (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-Result\-Handle}}]{result}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_ga45793ae8175e37d42bb0fed8629cedb3}
-
-
-\-Retrieve the number of rows in the given result data. 
-
-\-Example\-: n\-Rows = get\-Result\-Num\-Rows (result);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Result\-Handle} & result \-A pointer to a result type variable \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns -\/1 if fails, otherwise returns the number of rows 
+char$\ast$ \-Returns nil is the call fails, otherwise returns a pointer to the \-S\-B\-M\-L string 
 \end{DoxyReturn}
 \hypertarget{group__loadsave_ga1db0b86ed7fd0d6e19f8df85b7577253}{
 \index{\-Read and Write models@{\-Read and Write models}!get\-Selection\-List@{get\-Selection\-List}}
@@ -932,58 +164,6 @@ char$\ast$ \-A list of symbol names indicating the current selection list
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
 \-Returns \-True if successful 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_gaf06c28a1e29d86f3fd3e6112eb7c85e8}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-Vector\-Element@{get\-Vector\-Element}}
-\index{get\-Vector\-Element@{get\-Vector\-Element}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-Vector\-Element}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv get\-Vector\-Element (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-Vector\-Handle}}]{vector, }
-\item[{int}]{index, }
-\item[{double \&}]{value}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_gaf06c28a1e29d86f3fd3e6112eb7c85e8}
-
-
-\-Get a particular element from a vector. 
-
-\-Example\-: status = get\-Vector\-Element (my\-Vector, 10, \&value);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Vector\-Handle} & vector \-A pointer to the vector variable type \\
-\hline
-{\em int} & index \-An integer indicating the ith element to retrieve (indexing is from zero) \\
-\hline
-{\em double$\ast$} & value \-A pointer to the retrieved double value \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns \-True if succesful 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_ga0c42e94111a64ea70824f92d8c1b564d}{
-\index{\-Read and Write models@{\-Read and Write models}!get\-Vector\-Length@{get\-Vector\-Length}}
-\index{get\-Vector\-Length@{get\-Vector\-Length}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{get\-Vector\-Length}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv get\-Vector\-Length (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-Vector\-Handle}}]{vector}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_ga0c42e94111a64ea70824f92d8c1b564d}
-
-
-\-Get the number of elements in a vector type. 
-
-\-Example\-: count = get\-Vector\-Length (my\-Vector);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Vector\-Handle} & vector \-A pointer to the vector variable type \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns -\/1 if it fails, otherwise returns the number of elements in the vector 
 \end{DoxyReturn}
 \hypertarget{group__loadsave_ga4105f02dfdb959175f30cecebfb1c081}{
 \index{\-Read and Write models@{\-Read and Write models}!load\-S\-B\-M\-L@{load\-S\-B\-M\-L}}
@@ -1053,24 +233,6 @@ bool \-Returns true if sucessful
 {\em double$\ast$} & \-The new time (current\-Time + step\-Size) \\
 \hline
 \end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns \-True if successful 
-\end{DoxyReturn}
-\hypertarget{group__loadsave_ga07dfaf16ab38015aab6b400665ace2b2}{
-\index{\-Read and Write models@{\-Read and Write models}!reset@{reset}}
-\index{reset@{reset}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv reset (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_ga07dfaf16ab38015aab6b400665ace2b2}
-
-
-\-Reset all floating species concentrations to their intial conditions. 
-
-\-Example\-: status = reset ();
-
 \begin{DoxyReturn}{\-Returns}
 \-Returns \-True if successful 
 \end{DoxyReturn}
@@ -1160,35 +322,6 @@ bool \-Returns \-True if sucessful
 \begin{DoxyReturn}{\-Returns}
 bool \-Returns \-True if sucessful 
 \end{DoxyReturn}
-\hypertarget{group__loadsave_ga77eaf0d0f88175ce4e2e8ca57ff9d859}{
-\index{\-Read and Write models@{\-Read and Write models}!set\-Vector\-Element@{set\-Vector\-Element}}
-\index{set\-Vector\-Element@{set\-Vector\-Element}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{set\-Vector\-Element}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv set\-Vector\-Element (
-\begin{DoxyParamCaption}
-\item[{{\bf \-R\-R\-Vector\-Handle}}]{vector, }
-\item[{int}]{index, }
-\item[{double}]{value}
-\end{DoxyParamCaption}
-)}}
-\label{group__loadsave_ga77eaf0d0f88175ce4e2e8ca57ff9d859}
-
-
-\-Get a particular element from a vector. 
-
-\-Example\-: status = set\-Vector\-Element (my\-Vector, 10, 3.\-1415);
-
-
-\begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Vector\-Handle} & vector \-A pointer to the vector variable type \\
-\hline
-{\em int} & index \-An integer indicating the ith element to set (indexing is from zero) \\
-\hline
-{\em double} & value \-The value to store in the vector at the indexth position \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{\-Returns}
-\-Returns \-True if succesful 
-\end{DoxyReturn}
 \hypertarget{group__loadsave_ga9f0555c11716daec2336d54d13facc57}{
 \index{\-Read and Write models@{\-Read and Write models}!simulate@{simulate}}
 \index{simulate@{simulate}!Read and Write models@{\-Read and Write models}}
@@ -1225,26 +358,24 @@ bool \-Returns \-True if sucessful
 \begin{DoxyReturn}{\-Returns}
 \-R\-R\-Result\-Handle \-Returns an array containing the results of the simulation 
 \end{DoxyReturn}
-\hypertarget{group__loadsave_ga0edd5f5a66884e0767d855d639cb45c0}{
-\index{\-Read and Write models@{\-Read and Write models}!steady\-State@{steady\-State}}
-\index{steady\-State@{steady\-State}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{steady\-State}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv steady\-State (
+\hypertarget{group__loadsave_ga7d683d70e6966107f81a3e8c547bcd76}{
+\index{\-Read and Write models@{\-Read and Write models}!write\-S\-B\-M\-L@{write\-S\-B\-M\-L}}
+\index{write\-S\-B\-M\-L@{write\-S\-B\-M\-L}!Read and Write models@{\-Read and Write models}}
+\subsubsection[{write\-S\-B\-M\-L}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char$\ast$ rr\-Call\-Conv write\-S\-B\-M\-L (
 \begin{DoxyParamCaption}
-\item[{double \&}]{value}
+{}
 \end{DoxyParamCaption}
 )}}
-\label{group__loadsave_ga0edd5f5a66884e0767d855d639cb45c0}
+\label{group__loadsave_ga7d683d70e6966107f81a3e8c547bcd76}
 
 
-\-Get the value of the current number of points. 
-
-\-Example\-: status = steady\-State (\&closeness\-To\-Steady\-State);
+\-Retrive the current state of the model in the form of an \-S\-B\-M\-L string. 
 
 
 \begin{DoxyParams}{\-Parameters}
-{\em double$\ast$} & value \-This value is set during the call and indicates how close the solution is to the steady state. \-The smaller the value the better. \\
+{\em char$\ast$} & file name \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-\-Returns \-True if successful 
+bool \-Returns nil is the call fails, otherwise returns a pointer to the \-S\-B\-M\-L string 
 \end{DoxyReturn}

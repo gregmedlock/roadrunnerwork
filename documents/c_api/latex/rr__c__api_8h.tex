@@ -11,22 +11,41 @@ road\-Runner \-C \-A\-P\-I 2012
 {\ttfamily \#include \char`\"{}rr\-\_\-c\-\_\-types.\-h\char`\"{}}\*
 {\ttfamily \#include $<$unistd.\-h$>$}\*
 \subsection*{\-Functions}
+\begin{Indent}\paragraph*{\-Utility routines}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{rr__c__api_8h_a7d683d70e6966107f81a3e8c547bcd76}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries write\-S\-B\-M\-L} ()}
-\label{rr__c__api_8h_a7d683d70e6966107f81a3e8c547bcd76}
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__utility_ga1a2869b18d14e4d398c6a0e0402615d9}{get\-Version} ()
+\begin{DoxyCompactList}\small\item\em \-Retrieve the current version number of the library. \end{DoxyCompactList}\item 
+\hypertarget{group__utility_ga3d14f41e1a100776f91d8574e8aab58b}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-Build\-Date} ()}
+\label{group__utility_ga3d14f41e1a100776f91d8574e8aab58b}
 
 \item 
-\hypertarget{rr__c__api_8h_a1a2869b18d14e4d398c6a0e0402615d9}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-Version} ()}
-\label{rr__c__api_8h_a1a2869b18d14e4d398c6a0e0402615d9}
+\hypertarget{group__utility_gab4695b0f4b2ef3b91f545302de0337a2}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-Copyright} ()}
+\label{group__utility_gab4695b0f4b2ef3b91f545302de0337a2}
 
 \item 
-\hypertarget{rr__c__api_8h_a420ec462ff4ab4bb98f9a1bd8f39434b}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries enable\-Logging} ()}
-\label{rr__c__api_8h_a420ec462ff4ab4bb98f9a1bd8f39434b}
+\hypertarget{group__utility_ga957837fdd4683d56ef29c56ad701a0ba}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Temp\-Folder} (const char $\ast$folder)}
+\label{group__utility_ga957837fdd4683d56ef29c56ad701a0ba}
 
+\item 
+\hypertarget{group__utility_gad8e35b98b406e9c998e33ec21248da8a}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-Temp\-Folder} ()}
+\label{group__utility_gad8e35b98b406e9c998e33ec21248da8a}
+
+\item 
+\hypertarget{group__utility_gaef1b097cc2ad79dfc83e0d049846f87f}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{struct_r_r_c_code}{\-R\-R\-C\-Code} $\ast$rr\-Call\-Conv {\bfseries get\-C\-Code} ()}
+\label{group__utility_gaef1b097cc2ad79dfc83e0d049846f87f}
+
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Error handling and informational methods}
+\begin{DoxyCompactItemize}
+\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{rr__c__api_8h_a420ec462ff4ab4bb98f9a1bd8f39434b}{enable\-Logging} ()
 \item 
 \hypertarget{rr__c__api_8h_a59c256885fce7df1e4d6d5f0c5554bab}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Log\-Level} (const char $\ast$lvl)}
@@ -43,26 +62,6 @@ road\-Runner \-C \-A\-P\-I 2012
 \label{rr__c__api_8h_a9e5c453651f5a3743e9bc10f0e81be66}
 
 \item 
-\hypertarget{rr__c__api_8h_a3d14f41e1a100776f91d8574e8aab58b}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-Build\-Date} ()}
-\label{rr__c__api_8h_a3d14f41e1a100776f91d8574e8aab58b}
-
-\item 
-\hypertarget{rr__c__api_8h_ab4695b0f4b2ef3b91f545302de0337a2}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-Copyright} ()}
-\label{rr__c__api_8h_ab4695b0f4b2ef3b91f545302de0337a2}
-
-\item 
-\hypertarget{rr__c__api_8h_a957837fdd4683d56ef29c56ad701a0ba}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Temp\-Folder} (const char $\ast$folder)}
-\label{rr__c__api_8h_a957837fdd4683d56ef29c56ad701a0ba}
-
-\item 
-\hypertarget{rr__c__api_8h_ad8e35b98b406e9c998e33ec21248da8a}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-Temp\-Folder} ()}
-\label{rr__c__api_8h_ad8e35b98b406e9c998e33ec21248da8a}
-
-\item 
 \hypertarget{rr__c__api_8h_a1066caa37a0d7dca6146efd756d058c8}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries has\-Error} ()}
 \label{rr__c__api_8h_a1066caa37a0d7dca6146efd756d058c8}
@@ -72,37 +71,36 @@ road\-Runner \-C \-A\-P\-I 2012
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-Last\-Error} ()}
 \label{rr__c__api_8h_a34d1ec9db4032749cde607b4f403f2b9}
 
-\item 
-\hypertarget{rr__c__api_8h_ab5d1a179f93b94c8ddefa909131b3f11}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \-R\-R\-Handle rr\-Call\-Conv {\bfseries get\-R\-R\-Instance} ()}
-\label{rr__c__api_8h_ab5d1a179f93b94c8ddefa909131b3f11}
-
-\item 
-\hypertarget{rr__c__api_8h_aef1b097cc2ad79dfc83e0d049846f87f}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{struct_r_r_c_code}{\-R\-R\-C\-Code} $\ast$rr\-Call\-Conv {\bfseries get\-C\-Code} ()}
-\label{rr__c__api_8h_aef1b097cc2ad79dfc83e0d049846f87f}
-
-\item 
-\hypertarget{rr__c__api_8h_a9667953f8a21dc8034258b60acc860d5}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Compute\-And\-Assign\-Conservation\-Laws} (const bool \&\-On\-Or\-Off)}
-\label{rr__c__api_8h_a9667953f8a21dc8034258b60acc860d5}
-
 \end{DoxyCompactItemize}
-\begin{Indent}\paragraph*{\-Read models}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Library initialization and termination routines}
+\begin{DoxyCompactItemize}
+\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \-R\-R\-Handle rr\-Call\-Conv \hyperlink{group__initialization_gab5d1a179f93b94c8ddefa909131b3f11}{get\-R\-R\-Instance} ()
+\begin{DoxyCompactList}\small\item\em \-Initialize the road\-Runner library and return an instance. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__initialization_ga59ccea13a522b2ce61220cff4ea761c2}{free\-R\-R\-Instance} (\-R\-R\-Handle handle)
+\begin{DoxyCompactList}\small\item\em \-Free the road\-Runner instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Flags and options}
+\begin{DoxyCompactItemize}
+\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{rr__c__api_8h_a9667953f8a21dc8034258b60acc860d5}{set\-Compute\-And\-Assign\-Conservation\-Laws} (const bool \&\-On\-Or\-Off)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Read and \-Write models}
 \begin{DoxyCompactItemize}
 \item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga4105f02dfdb959175f30cecebfb1c081}{load\-S\-B\-M\-L} (const char $\ast$sbml)
 \begin{DoxyCompactList}\small\item\em \-Create a model from an \-S\-B\-M\-L string. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga3147e10d84bddb6435bee4b1db0514bf}{load\-S\-B\-M\-L\-From\-File} (const char $\ast$sbml)
 \begin{DoxyCompactList}\small\item\em \-Create a model from a \-S\-B\-M\-L file. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_ga7d683d70e6966107f81a3e8c547bcd76}{write\-S\-B\-M\-L} ()
+\begin{DoxyCompactList}\small\item\em \-Retrive the current state of the model in the form of an \-S\-B\-M\-L string. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_ga05a79ded419b52fa2965fce1700c0e82}{get\-S\-B\-M\-L} ()
+\begin{DoxyCompactList}\small\item\em \-Retrieve the last \-S\-B\-M\-L model that was loaded. \end{DoxyCompactList}\item 
 \hypertarget{group__loadsave_ga4add8092e50aedd665cd073133838620}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-Param\-Promoted\-S\-B\-M\-L} (const char $\ast$s\-Arg)}
 \label{group__loadsave_ga4add8092e50aedd665cd073133838620}
-
-\item 
-\hypertarget{group__loadsave_ga05a79ded419b52fa2965fce1700c0e82}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-S\-B\-M\-L} ()}
-\label{group__loadsave_ga05a79ded419b52fa2965fce1700c0e82}
 
 \item 
 \hypertarget{group__loadsave_ga320ffeeba3e5505371b52ce61715bf82}{
@@ -139,500 +137,514 @@ rr\-Call\-Conv \hyperlink{group__loadsave_ga9b87919e79f6eb0d7c77c3daa08d6baf}{si
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga451e7ecddd0431316048a332410b0600}{get\-Time\-End} (double \&time\-End)
 \begin{DoxyCompactList}\small\item\em \-Get the value of the current time end. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_gacd9cb734773710f640742a9f040dccc5}{get\-Num\-Points} (int \&num\-Points)
-\begin{DoxyCompactList}\small\item\em \-Get the value of the current number of points. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga0edd5f5a66884e0767d855d639cb45c0}{steady\-State} (double \&value)
-\begin{DoxyCompactList}\small\item\em \-Get the value of the current number of points. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Get the value of the current number of points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Steady \-State \-Methods}
+\begin{DoxyCompactItemize}
+\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{rr__c__api_8h_a0edd5f5a66884e0767d855d639cb45c0}{steady\-State} (double \&value)
+\begin{DoxyCompactList}\small\item\em \-Compute the steady state of the current model. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv \hyperlink{group__loadsave_ga95269e5d546721d19139d746d5ac8358}{compute\-Steady\-State\-Values} ()
+rr\-Call\-Conv \hyperlink{rr__c__api_8h_a95269e5d546721d19139d746d5ac8358}{compute\-Steady\-State\-Values} ()
 \begin{DoxyCompactList}\small\item\em \-A convenient method for returning a vector of the steady state species concentrations. \end{DoxyCompactList}\item 
-\hypertarget{group__loadsave_ga397a988c31c2010d9f2752080afa8dad}{
+\hypertarget{rr__c__api_8h_a397a988c31c2010d9f2752080afa8dad}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Steady\-State\-Selection\-List} (const char $\ast$list)}
-\label{group__loadsave_ga397a988c31c2010d9f2752080afa8dad}
+\label{rr__c__api_8h_a397a988c31c2010d9f2752080afa8dad}
 
 \item 
-\hypertarget{group__loadsave_ga29b3868509ef2c09e4bbf0b11b731443}{
+\hypertarget{rr__c__api_8h_a29b3868509ef2c09e4bbf0b11b731443}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Steady\-State\-Selection\-List} ()}
-\label{group__loadsave_ga29b3868509ef2c09e4bbf0b11b731443}
+\label{rr__c__api_8h_a29b3868509ef2c09e4bbf0b11b731443}
 
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Get and set values from the model}
+\begin{DoxyCompactItemize}
 \item 
-\hypertarget{group__loadsave_ga8c67bc930b33926bccb3c9f810dc2825}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Value} (const char $\ast$species\-I\-D, double \&value)}
-\label{group__loadsave_ga8c67bc930b33926bccb3c9f810dc2825}
-
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{rr__c__api_8h_a8c67bc930b33926bccb3c9f810dc2825}{get\-Value} (const char $\ast$species\-I\-D, double \&value)
 \item 
-\hypertarget{group__loadsave_ga8663bcca2b00ef20c13841ca9fc9f56c}{
+\hypertarget{rr__c__api_8h_a8663bcca2b00ef20c13841ca9fc9f56c}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Value} (const char $\ast$species\-Id, const double \&val)}
-\label{group__loadsave_ga8663bcca2b00ef20c13841ca9fc9f56c}
+\label{rr__c__api_8h_a8663bcca2b00ef20c13841ca9fc9f56c}
 
 \item 
-\hypertarget{group__loadsave_ga0db8fe5f89985f27ea4ddb3c595b16fd}{
+\hypertarget{rr__c__api_8h_a0db8fe5f89985f27ea4ddb3c595b16fd}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Concentrations} ()}
-\label{group__loadsave_ga0db8fe5f89985f27ea4ddb3c595b16fd}
+\label{rr__c__api_8h_a0db8fe5f89985f27ea4ddb3c595b16fd}
 
 \item 
-\hypertarget{group__loadsave_gaae9b6b75211923bcf6f7196fe707c631}{
+\hypertarget{rr__c__api_8h_aae9b6b75211923bcf6f7196fe707c631}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Boundary\-Species\-Concentrations} ()}
-\label{group__loadsave_gaae9b6b75211923bcf6f7196fe707c631}
+\label{rr__c__api_8h_aae9b6b75211923bcf6f7196fe707c631}
 
 \item 
-\hypertarget{group__loadsave_gaf4be0a5e72db408248569a1d3e28c1f0}{
+\hypertarget{rr__c__api_8h_af4be0a5e72db408248569a1d3e28c1f0}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Global\-Parameter\-Values} ()}
-\label{group__loadsave_gaf4be0a5e72db408248569a1d3e28c1f0}
+\label{rr__c__api_8h_af4be0a5e72db408248569a1d3e28c1f0}
 
 \item 
-\hypertarget{group__loadsave_gabb6764fa48d0b3f2ca3b38e391479347}{
+\hypertarget{rr__c__api_8h_abb6764fa48d0b3f2ca3b38e391479347}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Boundary\-Species\-By\-Index} (const int \&index, const double \&value)}
-\label{group__loadsave_gabb6764fa48d0b3f2ca3b38e391479347}
+\label{rr__c__api_8h_abb6764fa48d0b3f2ca3b38e391479347}
 
 \item 
-\hypertarget{group__loadsave_gaf4a5a4d9b1ecf60d4b98189b4bcf2543}{
+\hypertarget{rr__c__api_8h_af4a5a4d9b1ecf60d4b98189b4bcf2543}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Floating\-Species\-By\-Index} (const int \&index, const double \&value)}
-\label{group__loadsave_gaf4a5a4d9b1ecf60d4b98189b4bcf2543}
+\label{rr__c__api_8h_af4a5a4d9b1ecf60d4b98189b4bcf2543}
 
 \item 
-\hypertarget{group__loadsave_ga65d9546856e5526fc403539903039f8e}{
+\hypertarget{rr__c__api_8h_a65d9546856e5526fc403539903039f8e}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Global\-Parameter\-By\-Index} (const int \&index, const double \&value)}
-\label{group__loadsave_ga65d9546856e5526fc403539903039f8e}
+\label{rr__c__api_8h_a65d9546856e5526fc403539903039f8e}
 
 \item 
-\hypertarget{group__loadsave_gaccee3467307dbcedd031c1dc2cf57606}{
+\hypertarget{rr__c__api_8h_accee3467307dbcedd031c1dc2cf57606}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Boundary\-Species\-By\-Index} (const int \&index, double \&val)}
-\label{group__loadsave_gaccee3467307dbcedd031c1dc2cf57606}
+\label{rr__c__api_8h_accee3467307dbcedd031c1dc2cf57606}
 
 \item 
-\hypertarget{group__loadsave_gab73fad6a1dfdb2b2d393964354d94c69}{
+\hypertarget{rr__c__api_8h_ab73fad6a1dfdb2b2d393964354d94c69}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Floating\-Species\-By\-Index} (const int \&index, double \&val)}
-\label{group__loadsave_gab73fad6a1dfdb2b2d393964354d94c69}
+\label{rr__c__api_8h_ab73fad6a1dfdb2b2d393964354d94c69}
 
 \item 
-\hypertarget{group__loadsave_ga1aae76d21a054da6ed6cc734ad10287a}{
+\hypertarget{rr__c__api_8h_a1aae76d21a054da6ed6cc734ad10287a}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Global\-Parameter\-By\-Index} (const int \&index, double \&val)}
-\label{group__loadsave_ga1aae76d21a054da6ed6cc734ad10287a}
+\label{rr__c__api_8h_a1aae76d21a054da6ed6cc734ad10287a}
 
 \item 
-\hypertarget{group__loadsave_ga5241b915cff8bcabba3024c33fb4e336}{
+\hypertarget{rr__c__api_8h_a5241b915cff8bcabba3024c33fb4e336}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Compartment\-By\-Index} (const int \&index, double \&value)}
-\label{group__loadsave_ga5241b915cff8bcabba3024c33fb4e336}
+\label{rr__c__api_8h_a5241b915cff8bcabba3024c33fb4e336}
 
 \item 
-\hypertarget{group__loadsave_gadb238a943d93bc9548bf5c3cd452e9bb}{
+\hypertarget{rr__c__api_8h_adb238a943d93bc9548bf5c3cd452e9bb}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Compartment\-By\-Index} (const int \&index, const double \&value)}
-\label{group__loadsave_gadb238a943d93bc9548bf5c3cd452e9bb}
+\label{rr__c__api_8h_adb238a943d93bc9548bf5c3cd452e9bb}
 
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Retrieve matrix properties from the model}
+\begin{DoxyCompactItemize}
 \item 
-\hypertarget{group__loadsave_ga228e8431e466bf7e5987c1179dcbbbd8}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Full\-Jacobian} ()}
-\label{group__loadsave_ga228e8431e466bf7e5987c1179dcbbbd8}
-
+rr\-Call\-Conv \hyperlink{rr__c__api_8h_a228e8431e466bf7e5987c1179dcbbbd8}{get\-Full\-Jacobian} ()
 \item 
-\hypertarget{group__loadsave_ga503c810c1be94e486441eeea88163a18}{
+\hypertarget{rr__c__api_8h_a503c810c1be94e486441eeea88163a18}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Reduced\-Jacobian} ()}
-\label{group__loadsave_ga503c810c1be94e486441eeea88163a18}
+\label{rr__c__api_8h_a503c810c1be94e486441eeea88163a18}
 
 \item 
-\hypertarget{group__loadsave_ga7c7c6eb0e77711983254488895f24b81}{
+\hypertarget{rr__c__api_8h_a7c7c6eb0e77711983254488895f24b81}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Eigen\-Values} ()}
-\label{group__loadsave_ga7c7c6eb0e77711983254488895f24b81}
+\label{rr__c__api_8h_a7c7c6eb0e77711983254488895f24b81}
 
 \item 
-\hypertarget{group__loadsave_gad361175745409d5b6670b8a8996a6d59}{
+\hypertarget{rr__c__api_8h_ad361175745409d5b6670b8a8996a6d59}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Stoichiometry\-Matrix} ()}
-\label{group__loadsave_gad361175745409d5b6670b8a8996a6d59}
+\label{rr__c__api_8h_ad361175745409d5b6670b8a8996a6d59}
 
 \item 
-\hypertarget{group__loadsave_gae8e8c6ede9f60e33dcdc190c061ce3f8}{
+\hypertarget{rr__c__api_8h_ae8e8c6ede9f60e33dcdc190c061ce3f8}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Link\-Matrix} ()}
-\label{group__loadsave_gae8e8c6ede9f60e33dcdc190c061ce3f8}
+\label{rr__c__api_8h_ae8e8c6ede9f60e33dcdc190c061ce3f8}
 
 \item 
-\hypertarget{group__loadsave_ga57b4c651ecffb52d28886ce9e3b6e6ed}{
+\hypertarget{rr__c__api_8h_a57b4c651ecffb52d28886ce9e3b6e6ed}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Nr\-Matrix} ()}
-\label{group__loadsave_ga57b4c651ecffb52d28886ce9e3b6e6ed}
+\label{rr__c__api_8h_a57b4c651ecffb52d28886ce9e3b6e6ed}
 
 \item 
-\hypertarget{group__loadsave_ga587ae0ec7e6e7f8b2576bacf700eedcd}{
+\hypertarget{rr__c__api_8h_a587ae0ec7e6e7f8b2576bacf700eedcd}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-L0\-Matrix} ()}
-\label{group__loadsave_ga587ae0ec7e6e7f8b2576bacf700eedcd}
+\label{rr__c__api_8h_a587ae0ec7e6e7f8b2576bacf700eedcd}
 
 \item 
-\hypertarget{group__loadsave_gafd1bcae76af0d5d6ccf7af7bd098de23}{
+\hypertarget{rr__c__api_8h_afd1bcae76af0d5d6ccf7af7bd098de23}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Conservation\-Matrix} ()}
-\label{group__loadsave_gafd1bcae76af0d5d6ccf7af7bd098de23}
+\label{rr__c__api_8h_afd1bcae76af0d5d6ccf7af7bd098de23}
 
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Initial condition methods}
+\begin{DoxyCompactItemize}
 \item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga07dfaf16ab38015aab6b400665ace2b2}{reset} ()
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__simulation_ga07dfaf16ab38015aab6b400665ace2b2}{reset} ()
 \begin{DoxyCompactList}\small\item\em \-Reset all floating species concentrations to their intial conditions. \end{DoxyCompactList}\item 
-\hypertarget{group__loadsave_ga338d8b7e0648b293a134e69bd7862dc6}{
+\hypertarget{group__simulation_ga338d8b7e0648b293a134e69bd7862dc6}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries set\-Floating\-Species\-Initial\-Concentrations} (const \hyperlink{struct_r_r_vector}{\-R\-R\-Vector} $\ast$vec)}
-\label{group__loadsave_ga338d8b7e0648b293a134e69bd7862dc6}
+\label{group__simulation_ga338d8b7e0648b293a134e69bd7862dc6}
 
 \item 
-\hypertarget{group__loadsave_ga6458f13569fc543075b559978f4f83ac}{
+\hypertarget{group__simulation_ga6458f13569fc543075b559978f4f83ac}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Initial\-Concentrations} ()}
-\label{group__loadsave_ga6458f13569fc543075b559978f4f83ac}
+\label{group__simulation_ga6458f13569fc543075b559978f4f83ac}
 
 \item 
-\hypertarget{group__loadsave_ga4b87e338bfb9d788c31987f8154818f6}{
+\hypertarget{group__simulation_ga4b87e338bfb9d788c31987f8154818f6}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Initial\-Condition\-Names} ()}
-\label{group__loadsave_ga4b87e338bfb9d788c31987f8154818f6}
+\label{group__simulation_ga4b87e338bfb9d788c31987f8154818f6}
 
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Retrieve reaction rate information}
+\begin{DoxyCompactItemize}
 \item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__state_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
 \begin{DoxyCompactList}\small\item\em \-Obtain the number of reactions in the loaded model. \end{DoxyCompactList}\item 
-\hypertarget{group__loadsave_ga0a7be404315c6001627ee26e738e11e2}{
+\hypertarget{group__state_ga0a7be404315c6001627ee26e738e11e2}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Reaction\-Rate} (const int \&, double \&rate)}
-\label{group__loadsave_ga0a7be404315c6001627ee26e738e11e2}
+\label{group__state_ga0a7be404315c6001627ee26e738e11e2}
 
 \item 
-\hypertarget{group__loadsave_ga86d544bcf3eeaa4698a60123a3da69aa}{
+\hypertarget{group__state_ga86d544bcf3eeaa4698a60123a3da69aa}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Reaction\-Rates} ()}
-\label{group__loadsave_ga86d544bcf3eeaa4698a60123a3da69aa}
+\label{group__state_ga86d544bcf3eeaa4698a60123a3da69aa}
 
 \item 
-\hypertarget{group__loadsave_gaa03d9414ddeb177a76365dd5b2d0042e}{
+\hypertarget{group__state_gaa03d9414ddeb177a76365dd5b2d0042e}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Reaction\-Rates\-Ex} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)}
-\label{group__loadsave_gaa03d9414ddeb177a76365dd5b2d0042e}
+\label{group__state_gaa03d9414ddeb177a76365dd5b2d0042e}
 
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Retrieve rates of change information}
+\begin{DoxyCompactItemize}
 \item 
-\hypertarget{group__loadsave_gabbe129bee63761f7b0f98f060b86067b}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change} ()}
-\label{group__loadsave_gabbe129bee63761f7b0f98f060b86067b}
-
+rr\-Call\-Conv \hyperlink{rr__c__api_8h_abbe129bee63761f7b0f98f060b86067b}{get\-Rates\-Of\-Change} ()
 \item 
-\hypertarget{group__loadsave_gaf9d5b185617519ceff1a018d9009c0fd}{
+\hypertarget{rr__c__api_8h_af9d5b185617519ceff1a018d9009c0fd}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change\-Names} ()}
-\label{group__loadsave_gaf9d5b185617519ceff1a018d9009c0fd}
+\label{rr__c__api_8h_af9d5b185617519ceff1a018d9009c0fd}
 
 \item 
-\hypertarget{group__loadsave_gaad38321993112e230f7fccd96345de6c}{
+\hypertarget{rr__c__api_8h_aad38321993112e230f7fccd96345de6c}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Rate\-Of\-Change} (const int \&, double \&value)}
-\label{group__loadsave_gaad38321993112e230f7fccd96345de6c}
+\label{rr__c__api_8h_aad38321993112e230f7fccd96345de6c}
 
 \item 
-\hypertarget{group__loadsave_gacfae48e32754e7678b8bb003df93ef53}{
+\hypertarget{rr__c__api_8h_acfae48e32754e7678b8bb003df93ef53}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change\-Ex} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)}
-\label{group__loadsave_gacfae48e32754e7678b8bb003df93ef53}
+\label{rr__c__api_8h_acfae48e32754e7678b8bb003df93ef53}
 
 \item 
-\hypertarget{group__loadsave_ga3fbb7c2fab261f25a3871f1caf398ff1}{
+\hypertarget{rr__c__api_8h_a3fbb7c2fab261f25a3871f1caf398ff1}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries eval\-Model} ()}
-\label{group__loadsave_ga3fbb7c2fab261f25a3871f1caf398ff1}
+\label{rr__c__api_8h_a3fbb7c2fab261f25a3871f1caf398ff1}
 
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Retrieve various dimensions form the model}
+\begin{DoxyCompactItemize}
 \item 
-\hypertarget{group__loadsave_ga5ea2479b882549edd4fb75397ca38f52}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Compartments} ()}
-\label{group__loadsave_ga5ea2479b882549edd4fb75397ca38f52}
-
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{rr__c__api_8h_a5ea2479b882549edd4fb75397ca38f52}{get\-Number\-Of\-Compartments} ()
 \item 
-\hypertarget{group__loadsave_ga17c851dfb27b9697ff286cc57d4cd10d}{
+\hypertarget{rr__c__api_8h_a17c851dfb27b9697ff286cc57d4cd10d}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Boundary\-Species} ()}
-\label{group__loadsave_ga17c851dfb27b9697ff286cc57d4cd10d}
+\label{rr__c__api_8h_a17c851dfb27b9697ff286cc57d4cd10d}
 
 \item 
-\hypertarget{group__loadsave_ga9a96b81c58073caff01ea2c9e0f5e119}{
+\hypertarget{rr__c__api_8h_a9a96b81c58073caff01ea2c9e0f5e119}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Floating\-Species} ()}
-\label{group__loadsave_ga9a96b81c58073caff01ea2c9e0f5e119}
+\label{rr__c__api_8h_a9a96b81c58073caff01ea2c9e0f5e119}
 
 \item 
-\hypertarget{group__loadsave_ga2f33a70dfd6c68fb585cf5d1a9c1339c}{
+\hypertarget{rr__c__api_8h_a2f33a70dfd6c68fb585cf5d1a9c1339c}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Global\-Parameters} ()}
-\label{group__loadsave_ga2f33a70dfd6c68fb585cf5d1a9c1339c}
+\label{rr__c__api_8h_a2f33a70dfd6c68fb585cf5d1a9c1339c}
 
 \item 
-\hypertarget{group__loadsave_ga7d573d16a02b3bf4361c00065f624e0b}{
+\hypertarget{rr__c__api_8h_a7d573d16a02b3bf4361c00065f624e0b}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Dependent\-Species} ()}
-\label{group__loadsave_ga7d573d16a02b3bf4361c00065f624e0b}
+\label{rr__c__api_8h_a7d573d16a02b3bf4361c00065f624e0b}
 
 \item 
-\hypertarget{group__loadsave_ga29811c87b0f144e506c93373418fbe8b}{
+\hypertarget{rr__c__api_8h_a29811c87b0f144e506c93373418fbe8b}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Independent\-Species} ()}
-\label{group__loadsave_ga29811c87b0f144e506c93373418fbe8b}
+\label{rr__c__api_8h_a29811c87b0f144e506c93373418fbe8b}
 
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Retrieve various names from the model}
+\begin{DoxyCompactItemize}
 \item 
-\hypertarget{group__loadsave_gafe6030585929ca78c5ce6d3944b11a1a}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Reaction\-Names} ()}
-\label{group__loadsave_gafe6030585929ca78c5ce6d3944b11a1a}
-
+rr\-Call\-Conv \hyperlink{rr__c__api_8h_afe6030585929ca78c5ce6d3944b11a1a}{get\-Reaction\-Names} ()
 \item 
-\hypertarget{group__loadsave_ga1b676408037364f621f5bcb49a0f1474}{
+\hypertarget{rr__c__api_8h_a1b676408037364f621f5bcb49a0f1474}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Rate\-Of\-Change\-Names} ()}
-\label{group__loadsave_ga1b676408037364f621f5bcb49a0f1474}
+\label{rr__c__api_8h_a1b676408037364f621f5bcb49a0f1474}
 
 \item 
-\hypertarget{group__loadsave_gac0cfb68966bfb2656477f643a7f6494d}{
+\hypertarget{rr__c__api_8h_ac0cfb68966bfb2656477f643a7f6494d}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Boundary\-Species\-Names} ()}
-\label{group__loadsave_gac0cfb68966bfb2656477f643a7f6494d}
+\label{rr__c__api_8h_ac0cfb68966bfb2656477f643a7f6494d}
 
 \item 
-\hypertarget{group__loadsave_ga468d9d0cc8489ae85f4fd78d9fab343e}{
+\hypertarget{rr__c__api_8h_a468d9d0cc8489ae85f4fd78d9fab343e}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Names} ()}
-\label{group__loadsave_ga468d9d0cc8489ae85f4fd78d9fab343e}
+\label{rr__c__api_8h_a468d9d0cc8489ae85f4fd78d9fab343e}
 
 \item 
-\hypertarget{group__loadsave_gabb7dd0b1f55a9f1c5ded728aa202027e}{
+\hypertarget{rr__c__api_8h_abb7dd0b1f55a9f1c5ded728aa202027e}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Global\-Parameter\-Names} ()}
-\label{group__loadsave_gabb7dd0b1f55a9f1c5ded728aa202027e}
+\label{rr__c__api_8h_abb7dd0b1f55a9f1c5ded728aa202027e}
 
 \item 
-\hypertarget{group__loadsave_gafe31d3b684c51fb829c1770898bc1e5d}{
+\hypertarget{rr__c__api_8h_afe31d3b684c51fb829c1770898bc1e5d}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Compartment\-Names} ()}
-\label{group__loadsave_gafe31d3b684c51fb829c1770898bc1e5d}
+\label{rr__c__api_8h_afe31d3b684c51fb829c1770898bc1e5d}
 
 \item 
-\hypertarget{group__loadsave_ga313f81d4fae0ece305eb1246543bcdc3}{
+\hypertarget{rr__c__api_8h_a313f81d4fae0ece305eb1246543bcdc3}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Eigen\-Value\-Names} ()}
-\label{group__loadsave_ga313f81d4fae0ece305eb1246543bcdc3}
+\label{rr__c__api_8h_a313f81d4fae0ece305eb1246543bcdc3}
 
 \item 
-\hypertarget{group__loadsave_gaa06a430f57d4df400e58fd954766901c}{
+\hypertarget{rr__c__api_8h_aa06a430f57d4df400e58fd954766901c}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a21a10f01ac4fd34c61e7e7d12af9891d}{\-R\-R\-Array\-List2\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Available\-Symbols} ()}
-\label{group__loadsave_gaa06a430f57d4df400e58fd954766901c}
+\label{rr__c__api_8h_aa06a430f57d4df400e58fd954766901c}
 
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Retrieve metabolic control analysis values}
+\begin{DoxyCompactItemize}
 \item 
-\hypertarget{group__loadsave_ga35b2d80dfae3ffba81a45a485e30b22e}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
 \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Elasticity\-Coefficient\-Names} ()}
-\label{group__loadsave_ga35b2d80dfae3ffba81a45a485e30b22e}
-
+rr\-Call\-Conv \hyperlink{rr__c__api_8h_a35b2d80dfae3ffba81a45a485e30b22e}{get\-Elasticity\-Coefficient\-Names} ()
 \item 
-\hypertarget{group__loadsave_ga9451fdf700b80288c0d664193eef4421}{
+\hypertarget{rr__c__api_8h_a9451fdf700b80288c0d664193eef4421}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
 \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Unscaled\-Flux\-Control\-Coefficient\-Names} ()}
-\label{group__loadsave_ga9451fdf700b80288c0d664193eef4421}
+\label{rr__c__api_8h_a9451fdf700b80288c0d664193eef4421}
 
 \item 
-\hypertarget{group__loadsave_ga5d72e660bc33c6cbb93aadd603015563}{
+\hypertarget{rr__c__api_8h_a5d72e660bc33c6cbb93aadd603015563}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
 \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Flux\-Control\-Coefficient\-Names} ()}
-\label{group__loadsave_ga5d72e660bc33c6cbb93aadd603015563}
+\label{rr__c__api_8h_a5d72e660bc33c6cbb93aadd603015563}
 
 \item 
-\hypertarget{group__loadsave_ga4cd50e9e57140cb5fd69483bc6b0656e}{
+\hypertarget{rr__c__api_8h_a4cd50e9e57140cb5fd69483bc6b0656e}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
 \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Unscaled\-Concentration\-Control\-Coefficient\-Names} ()}
-\label{group__loadsave_ga4cd50e9e57140cb5fd69483bc6b0656e}
+\label{rr__c__api_8h_a4cd50e9e57140cb5fd69483bc6b0656e}
 
 \item 
-\hypertarget{group__loadsave_gac65874848b588a8c87ac04705eb88cbc}{
+\hypertarget{rr__c__api_8h_ac65874848b588a8c87ac04705eb88cbc}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
 \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Concentration\-Control\-Coefficient\-Names} ()}
-\label{group__loadsave_gac65874848b588a8c87ac04705eb88cbc}
+\label{rr__c__api_8h_ac65874848b588a8c87ac04705eb88cbc}
 
 \item 
-\hypertarget{group__loadsave_ga82cf39ff64eb0446c9f5a2e772283323}{
+\hypertarget{rr__c__api_8h_a82cf39ff64eb0446c9f5a2e772283323}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Un\-Scaled\-Elasticity\-Matrix} ()}
-\label{group__loadsave_ga82cf39ff64eb0446c9f5a2e772283323}
+\label{rr__c__api_8h_a82cf39ff64eb0446c9f5a2e772283323}
 
 \item 
-\hypertarget{group__loadsave_gaf8431784ec5c2ce1d0416606056f3d44}{
+\hypertarget{rr__c__api_8h_af8431784ec5c2ce1d0416606056f3d44}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Scaled\-Elasticity\-Matrix} ()}
-\label{group__loadsave_gaf8431784ec5c2ce1d0416606056f3d44}
+\label{rr__c__api_8h_af8431784ec5c2ce1d0416606056f3d44}
 
 \item 
-\hypertarget{group__loadsave_ga418c0108d37bc4f35a55291ca85e0a3f}{
+\hypertarget{rr__c__api_8h_a418c0108d37bc4f35a55291ca85e0a3f}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Unscaled\-Concentration\-Control\-Coefficient\-Matrix} ()}
-\label{group__loadsave_ga418c0108d37bc4f35a55291ca85e0a3f}
+\label{rr__c__api_8h_a418c0108d37bc4f35a55291ca85e0a3f}
 
 \item 
-\hypertarget{group__loadsave_gad28644ca7615c71725056028a0a048ba}{
+\hypertarget{rr__c__api_8h_ad28644ca7615c71725056028a0a048ba}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Scaled\-Concentration\-Control\-Coefficient\-Matrix} ()}
-\label{group__loadsave_gad28644ca7615c71725056028a0a048ba}
+\label{rr__c__api_8h_ad28644ca7615c71725056028a0a048ba}
 
 \item 
-\hypertarget{group__loadsave_ga4b464166bb67773916067bc7e190a338}{
+\hypertarget{rr__c__api_8h_a4b464166bb67773916067bc7e190a338}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Unscaled\-Flux\-Control\-Coefficient\-Matrix} ()}
-\label{group__loadsave_ga4b464166bb67773916067bc7e190a338}
+\label{rr__c__api_8h_a4b464166bb67773916067bc7e190a338}
 
 \item 
-\hypertarget{group__loadsave_gad63647a85b299d463b1e4cd5671d0881}{
+\hypertarget{rr__c__api_8h_ad63647a85b299d463b1e4cd5671d0881}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} \*
 rr\-Call\-Conv {\bfseries get\-Scaled\-Flux\-Control\-Coefficient\-Matrix} ()}
-\label{group__loadsave_gad63647a85b299d463b1e4cd5671d0881}
+\label{rr__c__api_8h_ad63647a85b299d463b1e4cd5671d0881}
 
 \item 
-\hypertarget{group__loadsave_ga6655b7aebdc9e6fad4e7a54e3de9195d}{
+\hypertarget{rr__c__api_8h_a6655b7aebdc9e6fad4e7a54e3de9195d}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries getu\-C\-C} (const char $\ast$variable, const char $\ast$parameter, double \&value)}
-\label{group__loadsave_ga6655b7aebdc9e6fad4e7a54e3de9195d}
+\label{rr__c__api_8h_a6655b7aebdc9e6fad4e7a54e3de9195d}
 
 \item 
-\hypertarget{group__loadsave_ga49c703842a069c37fa472f2740dd514b}{
+\hypertarget{rr__c__api_8h_a49c703842a069c37fa472f2740dd514b}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-C\-C} (const char $\ast$variable, const char $\ast$parameter, double \&value)}
-\label{group__loadsave_ga49c703842a069c37fa472f2740dd514b}
+\label{rr__c__api_8h_a49c703842a069c37fa472f2740dd514b}
 
 \item 
-\hypertarget{group__loadsave_ga761a98e3635d75c8505f516a0b2384b1}{
+\hypertarget{rr__c__api_8h_a761a98e3635d75c8505f516a0b2384b1}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-E\-E} (const char $\ast$name, const char $\ast$species, double \&value)}
-\label{group__loadsave_ga761a98e3635d75c8505f516a0b2384b1}
+\label{rr__c__api_8h_a761a98e3635d75c8505f516a0b2384b1}
 
 \item 
-\hypertarget{group__loadsave_gadf71d426da852cdf931022fa56a3acb0}{
+\hypertarget{rr__c__api_8h_adf71d426da852cdf931022fa56a3acb0}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries getu\-E\-E} (const char $\ast$name, const char $\ast$species, double \&value)}
-\label{group__loadsave_gadf71d426da852cdf931022fa56a3acb0}
+\label{rr__c__api_8h_adf71d426da852cdf931022fa56a3acb0}
 
 \item 
-\hypertarget{group__loadsave_ga8f7a0a9f82d038a325c5e38f7596a0d1}{
+\hypertarget{rr__c__api_8h_a8f7a0a9f82d038a325c5e38f7596a0d1}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Scaled\-Floating\-Species\-Elasticity} (const char $\ast$reaction\-Name, const char $\ast$species\-Name, double \&value)}
-\label{group__loadsave_ga8f7a0a9f82d038a325c5e38f7596a0d1}
+\label{rr__c__api_8h_a8f7a0a9f82d038a325c5e38f7596a0d1}
 
 \item 
-\hypertarget{group__loadsave_ga40c29c6c6773091005de86df2b8a7b6b}{
+\hypertarget{rr__c__api_8h_a40c29c6c6773091005de86df2b8a7b6b}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-Result} (const \hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)}
-\label{group__loadsave_ga40c29c6c6773091005de86df2b8a7b6b}
+\label{rr__c__api_8h_a40c29c6c6773091005de86df2b8a7b6b}
 
 \item 
-\hypertarget{group__loadsave_ga61de73039780b4036d73922a1560f5e8}{
+\hypertarget{rr__c__api_8h_a61de73039780b4036d73922a1560f5e8}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-Matrix} (const \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} mat)}
-\label{group__loadsave_ga61de73039780b4036d73922a1560f5e8}
+\label{rr__c__api_8h_a61de73039780b4036d73922a1560f5e8}
 
 \item 
-\hypertarget{group__loadsave_ga577d45215017692493baa428444f1f57}{
+\hypertarget{rr__c__api_8h_a577d45215017692493baa428444f1f57}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-Vector} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)}
-\label{group__loadsave_ga577d45215017692493baa428444f1f57}
+\label{rr__c__api_8h_a577d45215017692493baa428444f1f57}
 
 \item 
-\hypertarget{group__loadsave_ga344136d920ad8cafbb0a1801cf045c07}{
+\hypertarget{rr__c__api_8h_a344136d920ad8cafbb0a1801cf045c07}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-String\-List} (const \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} list)}
-\label{group__loadsave_ga344136d920ad8cafbb0a1801cf045c07}
+\label{rr__c__api_8h_a344136d920ad8cafbb0a1801cf045c07}
 
 \item 
-\hypertarget{group__loadsave_ga6fe9d99e416f3a8791b0d80226a74099}{
+\hypertarget{rr__c__api_8h_a6fe9d99e416f3a8791b0d80226a74099}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-String\-Array\-List} (const \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List} $\ast$list)}
-\label{group__loadsave_ga6fe9d99e416f3a8791b0d80226a74099}
+\label{rr__c__api_8h_a6fe9d99e416f3a8791b0d80226a74099}
 
 \item 
-\hypertarget{group__loadsave_ga01ee2cd3cf82cfd67149944282eafbb6}{
+\hypertarget{rr__c__api_8h_a01ee2cd3cf82cfd67149944282eafbb6}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries print\-Array\-List} (const \hyperlink{rr__c__types_8h_a21a10f01ac4fd34c61e7e7d12af9891d}{\-R\-R\-Array\-List2\-Handle} list)}
-\label{group__loadsave_ga01ee2cd3cf82cfd67149944282eafbb6}
+\label{rr__c__api_8h_a01ee2cd3cf82cfd67149944282eafbb6}
 
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\paragraph*{\-Free resources methods}
+\begin{DoxyCompactItemize}
 \item 
-\hypertarget{group__loadsave_ga59ccea13a522b2ce61220cff4ea761c2}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-R\-R\-Instance} (\-R\-R\-Handle handle)}
-\label{group__loadsave_ga59ccea13a522b2ce61220cff4ea761c2}
-
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{rr__c__api_8h_a7a1fb56bd09bb535af7b6f3bc51c89b5}{free\-Result} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} handle)
 \item 
-\hypertarget{group__loadsave_ga7a1fb56bd09bb535af7b6f3bc51c89b5}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Result} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} handle)}
-\label{group__loadsave_ga7a1fb56bd09bb535af7b6f3bc51c89b5}
-
-\item 
-\hypertarget{group__loadsave_ga1001b1dab86472f6db5bcbe724c41631}{
+\hypertarget{rr__c__api_8h_a1001b1dab86472f6db5bcbe724c41631}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Text} (char $\ast$text)}
-\label{group__loadsave_ga1001b1dab86472f6db5bcbe724c41631}
+\label{rr__c__api_8h_a1001b1dab86472f6db5bcbe724c41631}
 
 \item 
-\hypertarget{group__loadsave_gadca4757725ec2e3d8251a001fde8028b}{
+\hypertarget{rr__c__api_8h_adca4757725ec2e3d8251a001fde8028b}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Label\-String\-List} (\hyperlink{struct_r_r_label_string_list}{\-R\-R\-Label\-String\-List\-Handle} sl)}
-\label{group__loadsave_gadca4757725ec2e3d8251a001fde8028b}
+\label{rr__c__api_8h_adca4757725ec2e3d8251a001fde8028b}
 
 \item 
-\hypertarget{group__loadsave_ga63aea4cfe3b5262e67d50f3227153a16}{
+\hypertarget{rr__c__api_8h_a63aea4cfe3b5262e67d50f3227153a16}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-String\-List} (\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} sl)}
-\label{group__loadsave_ga63aea4cfe3b5262e67d50f3227153a16}
+\label{rr__c__api_8h_a63aea4cfe3b5262e67d50f3227153a16}
 
 \item 
-\hypertarget{group__loadsave_gacca647731a9241ab1f517d569271688b}{
+\hypertarget{rr__c__api_8h_acca647731a9241ab1f517d569271688b}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-String\-Array\-List} (\hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List\-Handle} sl)}
-\label{group__loadsave_gacca647731a9241ab1f517d569271688b}
+\label{rr__c__api_8h_acca647731a9241ab1f517d569271688b}
 
 \item 
-\hypertarget{group__loadsave_ga8d0882fc56ccdc67b489cdcb82522ac6}{
+\hypertarget{rr__c__api_8h_a8d0882fc56ccdc67b489cdcb82522ac6}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Array\-List} (\hyperlink{rr__c__types_8h_a21a10f01ac4fd34c61e7e7d12af9891d}{\-R\-R\-Array\-List2\-Handle} the\-List)}
-\label{group__loadsave_ga8d0882fc56ccdc67b489cdcb82522ac6}
+\label{rr__c__api_8h_a8d0882fc56ccdc67b489cdcb82522ac6}
 
 \item 
-\hypertarget{group__loadsave_ga11dddcdb661f8e82a2f87ecb24ab8968}{
+\hypertarget{rr__c__api_8h_a11dddcdb661f8e82a2f87ecb24ab8968}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Vector} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector)}
-\label{group__loadsave_ga11dddcdb661f8e82a2f87ecb24ab8968}
+\label{rr__c__api_8h_a11dddcdb661f8e82a2f87ecb24ab8968}
 
 \item 
-\hypertarget{group__loadsave_gabbbbce24954114b22b13337ccaf63529}{
+\hypertarget{rr__c__api_8h_abbbbce24954114b22b13337ccaf63529}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-Matrix} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} matrix)}
-\label{group__loadsave_gabbbbce24954114b22b13337ccaf63529}
+\label{rr__c__api_8h_abbbbce24954114b22b13337ccaf63529}
 
 \item 
-\hypertarget{group__loadsave_ga79f31e58a4a2d24d2f604f4369b6c64f}{
+\hypertarget{rr__c__api_8h_a79f31e58a4a2d24d2f604f4369b6c64f}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries free\-C\-Code} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)}
-\label{group__loadsave_ga79f31e58a4a2d24d2f604f4369b6c64f}
+\label{rr__c__api_8h_a79f31e58a4a2d24d2f604f4369b6c64f}
 
 \item 
-\hypertarget{group__loadsave_ga5945592b2369af769505a47463be2a43}{
+\hypertarget{rr__c__api_8h_a5945592b2369af769505a47463be2a43}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C void rr\-Call\-Conv {\bfseries \-Pause} ()}
-\label{group__loadsave_ga5945592b2369af769505a47463be2a43}
+\label{rr__c__api_8h_a5945592b2369af769505a47463be2a43}
 
 \item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_ga0c42e94111a64ea70824f92d8c1b564d}{get\-Vector\-Length} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__helper_routines_ga0c42e94111a64ea70824f92d8c1b564d}{get\-Vector\-Length} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector)
 \begin{DoxyCompactList}\small\item\em \-Get the number of elements in a vector type. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv \hyperlink{group__loadsave_ga27e208d44bda0c744c9df5906b51cf09}{create\-Vector\-A\-P\-I} (int size)
+rr\-Call\-Conv \hyperlink{group__helper_routines_ga27e208d44bda0c744c9df5906b51cf09}{create\-Vector\-A\-P\-I} (int size)
 \begin{DoxyCompactList}\small\item\em \-Create a new vector with a given size. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_gaf06c28a1e29d86f3fd3e6112eb7c85e8}{get\-Vector\-Element} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector, int index, double \&value)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__helper_routines_gaf06c28a1e29d86f3fd3e6112eb7c85e8}{get\-Vector\-Element} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector, int index, double \&value)
 \begin{DoxyCompactList}\small\item\em \-Get a particular element from a vector. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga77eaf0d0f88175ce4e2e8ca57ff9d859}{set\-Vector\-Element} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector, int index, double value)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__helper_routines_ga77eaf0d0f88175ce4e2e8ca57ff9d859}{set\-Vector\-Element} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector, int index, double value)
 \begin{DoxyCompactList}\small\item\em \-Get a particular element from a vector. \end{DoxyCompactList}\item 
-\hypertarget{group__loadsave_ga451b4f6fe1d5aaabfdd11acb44f124bb}{
+\hypertarget{rr__c__api_8h_a451b4f6fe1d5aaabfdd11acb44f124bb}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv {\bfseries get\-String\-List\-Length} (\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} string\-List)}
-\label{group__loadsave_ga451b4f6fe1d5aaabfdd11acb44f124bb}
+\label{rr__c__api_8h_a451b4f6fe1d5aaabfdd11acb44f124bb}
 
 \item 
-\hypertarget{group__loadsave_gac305395b75de8e66270d552492ff7df0}{
+\hypertarget{rr__c__api_8h_ac305395b75de8e66270d552492ff7df0}{
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv {\bfseries get\-String\-List\-Element} (\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} string\-List, int index)}
-\label{group__loadsave_gac305395b75de8e66270d552492ff7df0}
+\label{rr__c__api_8h_ac305395b75de8e66270d552492ff7df0}
 
 \item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_gad5a3803c72d8f27bf2dad72b25226675}{get\-Matrix\-Num\-Rows} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__helper_routines_gad5a3803c72d8f27bf2dad72b25226675}{get\-Matrix\-Num\-Rows} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m)
 \begin{DoxyCompactList}\small\item\em \-Retrieve the number of rows in the given matrix. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_ga46eae843e223f83e00b07fe7563a1c91}{get\-Matrix\-Num\-Cols} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__helper_routines_ga46eae843e223f83e00b07fe7563a1c91}{get\-Matrix\-Num\-Cols} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m)
 \begin{DoxyCompactList}\small\item\em \-Retrieve the number of columns in the given matrix. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_gac4bd2fdc7fd7d3a1f52ef59975952dad}{get\-Matrix\-Element} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m, int r, int c, double \&value)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__helper_routines_gac4bd2fdc7fd7d3a1f52ef59975952dad}{get\-Matrix\-Element} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m, int r, int c, double \&value)
 \begin{DoxyCompactList}\small\item\em \-Retrieves an element at a given row and column from a matrix type variable. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_ga45793ae8175e37d42bb0fed8629cedb3}{get\-Result\-Num\-Rows} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__helper_routines_ga45793ae8175e37d42bb0fed8629cedb3}{get\-Result\-Num\-Rows} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)
 \begin{DoxyCompactList}\small\item\em \-Retrieve the number of rows in the given result data. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__loadsave_gac8e0a87e6231d8f5828b679116b2d6a7}{get\-Result\-Num\-Cols} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__helper_routines_gac8e0a87e6231d8f5828b679116b2d6a7}{get\-Result\-Num\-Cols} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)
 \begin{DoxyCompactList}\small\item\em \-Retrieve the number of columns in the given result data. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_gab8f77529dcd45bef9ebe627b88831d52}{get\-Result\-Element} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result, int r, int c, double \&value)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__helper_routines_gab8f77529dcd45bef9ebe627b88831d52}{get\-Result\-Element} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result, int r, int c, double \&value)
 \begin{DoxyCompactList}\small\item\em \-Retrieves an element at a given row and column from a result type variable. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_ga9ddbfbe25f45e7232d0526bf51147fd3}{get\-Result\-Column\-Label} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result, int column)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__helper_routines_ga9ddbfbe25f45e7232d0526bf51147fd3}{get\-Result\-Column\-Label} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result, int column)
 \begin{DoxyCompactList}\small\item\em \-Retrieves an element at a given row and column from a result type variable. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_ga071cb3c138a8aaf96992daec8fd6a7c2}{get\-C\-Code\-Header} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__helper_routines_ga071cb3c138a8aaf96992daec8fd6a7c2}{get\-C\-Code\-Header} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)
 \begin{DoxyCompactList}\small\item\em \-Retrieve the header file for the current model (if applicable) \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_gabb964f1aad030deee67c313d9bdf3520}{get\-C\-Code\-Source} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__helper_routines_gabb964f1aad030deee67c313d9bdf3520}{get\-C\-Code\-Source} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)
 \begin{DoxyCompactList}\small\item\em \-Retrieve the main source file for the current model (if applicable) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \end{Indent}
 
@@ -664,3 +676,128 @@ $<$-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\
 \-Y\-O\-U \-C\-A\-N\-N\-O\-T\-:
 
 redistribute any piece of this software without proper attribution; 
+
+\subsection{\-Function \-Documentation}
+\hypertarget{rr__c__api_8h_a95269e5d546721d19139d746d5ac8358}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!compute\-Steady\-State\-Values@{compute\-Steady\-State\-Values}}
+\index{compute\-Steady\-State\-Values@{compute\-Steady\-State\-Values}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{compute\-Steady\-State\-Values}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-Vector\-Handle} rr\-Call\-Conv compute\-Steady\-State\-Values (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_a95269e5d546721d19139d746d5ac8358}
+
+
+\-A convenient method for returning a vector of the steady state species concentrations. 
+
+\-Example\-: \-R\-R\-Vector\-Handle values = compute\-Steady\-State\-Values ();
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns the vector of steady state values or nil if an error occured 
+\end{DoxyReturn}
+\hypertarget{rr__c__api_8h_a420ec462ff4ab4bb98f9a1bd8f39434b}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!enable\-Logging@{enable\-Logging}}
+\index{enable\-Logging@{enable\-Logging}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{enable\-Logging}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv enable\-Logging (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_a420ec462ff4ab4bb98f9a1bd8f39434b}
+\hypertarget{rr__c__api_8h_a7a1fb56bd09bb535af7b6f3bc51c89b5}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!free\-Result@{free\-Result}}
+\index{free\-Result@{free\-Result}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{free\-Result}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv free\-Result (
+\begin{DoxyParamCaption}
+\item[{{\bf \-R\-R\-Result\-Handle}}]{handle}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_a7a1fb56bd09bb535af7b6f3bc51c89b5}
+\hypertarget{rr__c__api_8h_a35b2d80dfae3ffba81a45a485e30b22e}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!get\-Elasticity\-Coefficient\-Names@{get\-Elasticity\-Coefficient\-Names}}
+\index{get\-Elasticity\-Coefficient\-Names@{get\-Elasticity\-Coefficient\-Names}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{get\-Elasticity\-Coefficient\-Names}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-String\-Array\-List\-Handle} rr\-Call\-Conv get\-Elasticity\-Coefficient\-Names (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_a35b2d80dfae3ffba81a45a485e30b22e}
+\hypertarget{rr__c__api_8h_a228e8431e466bf7e5987c1179dcbbbd8}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!get\-Full\-Jacobian@{get\-Full\-Jacobian}}
+\index{get\-Full\-Jacobian@{get\-Full\-Jacobian}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{get\-Full\-Jacobian}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-Matrix\-Handle} rr\-Call\-Conv get\-Full\-Jacobian (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_a228e8431e466bf7e5987c1179dcbbbd8}
+\hypertarget{rr__c__api_8h_a5ea2479b882549edd4fb75397ca38f52}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!get\-Number\-Of\-Compartments@{get\-Number\-Of\-Compartments}}
+\index{get\-Number\-Of\-Compartments@{get\-Number\-Of\-Compartments}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{get\-Number\-Of\-Compartments}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv get\-Number\-Of\-Compartments (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_a5ea2479b882549edd4fb75397ca38f52}
+\hypertarget{rr__c__api_8h_abbe129bee63761f7b0f98f060b86067b}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!get\-Rates\-Of\-Change@{get\-Rates\-Of\-Change}}
+\index{get\-Rates\-Of\-Change@{get\-Rates\-Of\-Change}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{get\-Rates\-Of\-Change}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-Vector\-Handle} rr\-Call\-Conv get\-Rates\-Of\-Change (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_abbe129bee63761f7b0f98f060b86067b}
+\hypertarget{rr__c__api_8h_afe6030585929ca78c5ce6d3944b11a1a}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!get\-Reaction\-Names@{get\-Reaction\-Names}}
+\index{get\-Reaction\-Names@{get\-Reaction\-Names}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{get\-Reaction\-Names}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-String\-List\-Handle} rr\-Call\-Conv get\-Reaction\-Names (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_afe6030585929ca78c5ce6d3944b11a1a}
+\hypertarget{rr__c__api_8h_a8c67bc930b33926bccb3c9f810dc2825}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!get\-Value@{get\-Value}}
+\index{get\-Value@{get\-Value}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{get\-Value}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv get\-Value (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{species\-I\-D, }
+\item[{double \&}]{value}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_a8c67bc930b33926bccb3c9f810dc2825}
+\hypertarget{rr__c__api_8h_a9667953f8a21dc8034258b60acc860d5}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!set\-Compute\-And\-Assign\-Conservation\-Laws@{set\-Compute\-And\-Assign\-Conservation\-Laws}}
+\index{set\-Compute\-And\-Assign\-Conservation\-Laws@{set\-Compute\-And\-Assign\-Conservation\-Laws}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{set\-Compute\-And\-Assign\-Conservation\-Laws}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv set\-Compute\-And\-Assign\-Conservation\-Laws (
+\begin{DoxyParamCaption}
+\item[{const bool \&}]{\-On\-Or\-Off}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_a9667953f8a21dc8034258b60acc860d5}
+\hypertarget{rr__c__api_8h_a0edd5f5a66884e0767d855d639cb45c0}{
+\index{rr\-\_\-c\-\_\-api.\-h@{rr\-\_\-c\-\_\-api.\-h}!steady\-State@{steady\-State}}
+\index{steady\-State@{steady\-State}!rr_c_api.h@{rr\-\_\-c\-\_\-api.\-h}}
+\subsubsection[{steady\-State}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv steady\-State (
+\begin{DoxyParamCaption}
+\item[{double \&}]{value}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8h_a0edd5f5a66884e0767d855d639cb45c0}
+
+
+\-Compute the steady state of the current model. 
+
+\-Example\-: status = steady\-State (\&closeness\-To\-Steady\-State);
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em double$\ast$} & value \-This value is set during the call and indicates how close the solution is to the steady state. \-The smaller the value the better. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Returns \-True if successful 
+\end{DoxyReturn}
