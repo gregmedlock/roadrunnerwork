@@ -28,6 +28,7 @@ class RR_DECLSPEC LogContainer : public rrObject
                                     LogContainer();
         virtual                    ~LogContainer();
         std::ostringstream&         Get(const LogLevel& level);
+        string						GetCurrentLogLevel();
 };
 
 class RR_DECLSPEC Logger : public LogContainer<LogOutput>

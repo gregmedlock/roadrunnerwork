@@ -69,7 +69,7 @@ int main(int argc, char * argv[])
         }
 
         Log(lInfo)<<"Logs are going to "<<gLog.GetLogFileName();
-        Log(lInfo)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+        Log(lInfo)<<"Log level is:" <<GetLogLevelAsString(gLog.GetLogLevel());
         SBMLModelSimulation simulation(args.DataOutputFolder, args.TempDataFolder);
 
         rr = new RoadRunner();

@@ -3,8 +3,7 @@ LIBRARY     RR_C_API.DLL
 EXPORTS
     enableLogging                               = _enableLogging@0
     setLogLevel                                 = _setLogLevel@4
-    setLogLevelFromString                       = _setLogLevelFromString@4
-    getLogLevel                                 = _getLogLevel@4
+    getLogLevel                                 = _getLogLevel@0
     getLogFileName                              = _getLogFileName@0
     getVersion                                  = _getVersion@0
     writeSBML                                   = _writeSBML@0
@@ -94,7 +93,7 @@ EXPORTS
     loadSBML                                    = _loadSBML@4                         
     loadSBMLFromFile                            = _loadSBMLFromFile@4                 
     oneStep                                     = _oneStep@12                         
-    printList                                   = _printList@4                        
+    printStringList                             = _printStringList@4                        
     printMatrix                                 = _printMatrix@4                      
     printResult                                 = _printResult@4                      
     printVector                                 = _printVector@4                      

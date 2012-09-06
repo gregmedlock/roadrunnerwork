@@ -5,7 +5,7 @@ start=$1
 end=$2
 compiler=$3
 
-reportFolder="/cygdrive/r/roadrunnerwork/Misc/TestSuiteReports"
+reportFolder="/cygdrive/r/roadrunnerwork/miscellaneous/TestSuiteReports"
 tempFolder="/cygdrive/r/RRTesting"
 dataOutputRoot=$tempFolder"/DataOutput/"$compiler
 logFile=$tempFolder/"testLog_$compiler.txt"
@@ -13,7 +13,7 @@ logTable=$reportFolder"/logTable_$compiler.csv"
 failed=$reportFolder"/failedTests_$compiler.csv"
 binFolder="/cygdrive/r/rrInstalls/"$compiler"/full/bin/"
 simulator=$binFolder"/rr_ts_tester.exe"
-zipper="/cygdrive/r/roadrunnerwork/Misc/zipper/7za.exe"
+zipper="/cygdrive/r/roadrunnerwork/miscellaneous/zipper/7za.exe"
 ModelsDir="R://SBML_l2v4"
 
 #empty files
@@ -44,7 +44,7 @@ done
 echo "Waiting for background jobs to finish..."
 wait
 
-##Create a table for the result
+#Create a table for the result
 echo "Making result csv table: $logTable"
 
 make_table -c -f`cygpath -w $logFile` -w"Done" > $logTable 

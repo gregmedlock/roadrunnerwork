@@ -47,9 +47,14 @@ std::ostringstream& LogContainer<LogOutput>::Get(const LogLevel& level)
 
     if(LogOutput::mShowLogLevel)
     {
-         mOutputStream << LogLevelToString(level) << ": "; //Next comes the log message
+         mOutputStream << GetLogLevelAsString(level) << ": "; //Next comes the log message
     }
     return mOutputStream;
 }
 
+template <>
+string LogContainer<LogOutput>::GetCurrentLogLevel()
+{
+	return GetLogLevelAsString(mCurrentLogLevel);
+}
 }

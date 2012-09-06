@@ -30,7 +30,7 @@ LogLevel GetLogLevel(const string& lvl)
     return lAny;
 }
 
-string LogLevelToString(const LogLevel& level)
+string GetLogLevelAsString(const LogLevel& level)
 {
     switch (level)
     {

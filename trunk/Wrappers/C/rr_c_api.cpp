@@ -103,27 +103,7 @@ bool rrCallConv enableLogging()
     }
 }
 
-bool rrCallConv setLogLevel(const int& lvl)
-{
-	try
-    {
-        if(!gRRHandle)
-        {
-            setError(ALLOCATE_API_ERROR_MSG);
-        }
-		gLog.SetCutOffLogLevel(GetLogLevel(lvl));
-    	return true;
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        setError(msg.str());
-  	    return false;
-    }
-}
-
-bool rrCallConv setLogLevelFromString(const char* _lvl)
+bool rrCallConv setLogLevel(const char* _lvl)
 {
 	try
     {
@@ -144,7 +124,7 @@ bool rrCallConv setLogLevelFromString(const char* _lvl)
     }
 }
 
-bool rrCallConv  getLogLevel(int& lvl)
+char* rrCallConv getLogLevel()
 {
 	try
     {
@@ -152,7 +132,10 @@ bool rrCallConv  getLogLevel(int& lvl)
         {
             setError(ALLOCATE_API_ERROR_MSG);
         }
-    	return true;
+
+        string level = gLog.GetCurrentLogLevel();
+        char* lvl = createText(level.c_str());
+    	return lvl;
     }
     catch(Exception& ex)
     {
@@ -163,7 +146,7 @@ bool rrCallConv  getLogLevel(int& lvl)
     }
 }
 
-char* rrCallConv  getLogFileName()
+char* rrCallConv getLogFileName()
 {
 	try
     {
@@ -171,6 +154,8 @@ char* rrCallConv  getLogFileName()
         {
             setError(ALLOCATE_API_ERROR_MSG);
         }
+
+
     	return NULL;
     }
     catch(Exception& ex)
@@ -2443,7 +2428,7 @@ char* rrCallConv printArrayList(const RRArrayList2Handle list)
     }
 }
 
-char* rrCallConv printList(const RRStringListHandle list)
+char* rrCallConv printStringList(const RRStringListHandle list)
 {
 	try
     {
@@ -2453,14 +2438,12 @@ char* rrCallConv printList(const RRStringListHandle list)
         }
 
 		stringstream resStr;
-		//RRResult is a 2D matrix, and column headers (strings)
-        //First header....
 	    for(int i = 0; i < list->Count; i++)
         {
         	resStr<<list->String[i];;
             if(i < list->Count -1)
             {
-            	resStr <<endl;
+            	resStr <<" ";//endl;
             }
         }
 

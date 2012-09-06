@@ -100,46 +100,46 @@ int main(int argc, char* argv[])
 	if (m > 0) {
 	   printf ("Compartment names:\n");
 	   printf ("------------------\n");
-	   cout<<printList(getCompartmentNames())<<endl<<endl;
+	   cout<<printStringList(getCompartmentNames())<<endl<<endl;
 	}
 
 	if (m > 0) {
 	   printf ("Floating species names:\n");
 	   printf ("-----------------------\n");
-	   cout<<printList(getFloatingSpeciesNames())<<endl<<endl;
+	   cout<<printStringList(getFloatingSpeciesNames())<<endl<<endl;
 	}
 
 	if (m > 0) {
 	   printf ("Initial Floating species names:\n");
 	   printf ("-------------------------------\n");
-	   cout<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
+	   cout<<printStringList(getFloatingSpeciesInitialConditionNames())<<endl;
 	}
 
 	if (b > 0) {
        printf ("\nBoundary species names:\n");
 	   printf ("-----------------------\n");
-	   cout<<printList(getBoundarySpeciesNames())<<endl;
+	   cout<<printStringList(getBoundarySpeciesNames())<<endl;
 	}
 	printf ("\n");
 
 	if (p > 0) {
        printf ("\nGlobal Parameter names:\n");
 	   printf ("-----------------------\n");
-	   cout<<printList(getGlobalParameterNames())<<endl;
+	   cout<<printStringList(getGlobalParameterNames())<<endl;
 	}
 	printf ("\n");
 
 	if (r > 0) {
        printf ("\nReaction names:\n");
 	   printf ("---------------\n");
-	   cout<<printList(getReactionNames())<<endl;
+	   cout<<printStringList(getReactionNames())<<endl;
 	}
 	printf ("\n");
 
 	if (m> 0) {
        printf ("\nRates of change names:\n");
 	   printf ("----------------------\n");
-	   cout<<printList(getRatesOfChangeNames())<<endl;
+	   cout<<printStringList(getRatesOfChangeNames())<<endl;
 	}
 	printf ("\n");
 
@@ -354,7 +354,7 @@ int main(int argc, char* argv[])
 	veca.Data[1] = 2;
 	veca.Data[2] = 3;
 
-    cout<<"List of floating species: \n"<<printList(getFloatingSpeciesNames())<<endl;
+    cout<<"List of floating species: \n"<<printStringList(getFloatingSpeciesNames())<<endl;
 
 	printf ("\nCall to getRatesOfChangeEx (S1=1, S2=2, S3=3):\n");
 	cout<<printVector (getRatesOfChangeEx(&veca))<<endl;
@@ -418,7 +418,7 @@ int main(int argc, char* argv[])
     //cout<<getSBML()<<endl;
 
     //cout<<printMatrix(getScaledElasticityMatrix());     //How to free, when doing something like this??
-    //cout<<printList(getEigenValueNames());
+    //cout<<printStringList(getEigenValueNames());
 
     cout<<"\n FluxControlCoeff ------\n"<<printStringArrayList(getFluxControlCoefficientNames())<<endl;
 
@@ -428,7 +428,7 @@ int main(int argc, char* argv[])
     freeStringArrayList(list);
 
 
-    //cout<<printList(getElasticityNames())<<endl;
+    //cout<<printStringList(getElasticityNames())<<endl;
 
 //    setBoundarySpeciesByIndex(0,34);
     cout<<"Nr of Compartments: "<<getNumberOfCompartments()<<endl;
@@ -441,18 +441,18 @@ int main(int argc, char* argv[])
     {
         cout<<getLastError()<<endl;
     }
-    cout<<printList(getCompartmentNames())<<endl;
+    cout<<printStringList(getCompartmentNames())<<endl;
 
     getRateOfChange(0, value);
     cout<<"Rate of change:"<<value<<endl;
 
 	cout<<"API Version: "<<getVersion()<<endl;
 
-    cout<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
+    cout<<printStringList(getFloatingSpeciesInitialConditionNames())<<endl;
 
 
     cout<<" ---- getElasticityCoefficientNames ---\n"<<printStringArrayList(getElasticityCoefficientNames())<<endl;
-    cout<<printList(getRateOfChangeNames())<<endl;
+    cout<<printStringList(getRateOfChangeNames())<<endl;
     setCapabilities (NULL);
     cout<<getCapabilities()<<endl;
 
@@ -466,7 +466,7 @@ int main(int argc, char* argv[])
         cout<<getLastError()<<endl;
     }
 
-    cout<<"getFloatingSpeciesInitialConditionNames: "<<printList(getFloatingSpeciesInitialConditionNames())<<endl;
+    cout<<"getFloatingSpeciesInitialConditionNames: "<<printStringList(getFloatingSpeciesInitialConditionNames())<<endl;
 
 
     cout<<writeSBML();

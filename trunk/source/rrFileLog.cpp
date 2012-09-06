@@ -60,6 +60,11 @@ LogLevel FileLog::GetLogLevel()
     return mLogLevel;
 }
 
+string FileLog::GetCurrentLogLevel()
+{
+	return GetLogLevelAsString(mLogLevel);
+}
+
 void FileLog::SetCutOffLogLevel(const LogLevel& lvl)
 {
     mLogLevel = lvl;

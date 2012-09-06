@@ -27,7 +27,7 @@ enum  LogLevel
 RR_DECLSPEC string   ToUpperCase(const string& inStr);
 RR_DECLSPEC int      GetHighestLogLevel();
 RR_DECLSPEC LogLevel GetLogLevel(const string& level);
-RR_DECLSPEC string   LogLevelToString(const LogLevel& level);
+RR_DECLSPEC string   GetLogLevelAsString(const LogLevel& level);
 RR_DECLSPEC LogLevel GetLogLevel(const int& lvl);
 
 }
