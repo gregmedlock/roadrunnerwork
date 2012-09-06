@@ -480,7 +480,7 @@ C_DECL_SPEC void                    rrCallConv   Pause();
 
  \param RRVectorHandle vector A pointer to the vector variable type
  \return Returns -1 if it fails, otherwise returns the number of elements in the vector
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC int                     rrCallConv  getVectorLength (RRVectorHandle vector);
 
@@ -491,7 +491,7 @@ C_DECL_SPEC int                     rrCallConv  getVectorLength (RRVectorHandle 
 
  \param int size The number of element in the new vector
  \return Returns nil if it fails, otherwise returns a pointer to the new vector
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC RRVectorHandle          rrCallConv  createVectorAPI (int size);
 
@@ -504,7 +504,7 @@ C_DECL_SPEC RRVectorHandle          rrCallConv  createVectorAPI (int size);
  \param int index An integer indicating the ith element to retrieve (indexing is from zero)
  \param double* value A pointer to the retrieved double value
  \return Returns True if succesful
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC bool                    rrCallConv  getVectorElement (RRVectorHandle vector, int index, double& value);
 
@@ -518,7 +518,7 @@ C_DECL_SPEC bool                    rrCallConv  getVectorElement (RRVectorHandle
  \param int index An integer indicating the ith element to set (indexing is from zero)
  \param double value The value to store in the vector at the indexth position
  \return Returns True if succesful
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC bool                    rrCallConv  setVectorElement (RRVectorHandle vector, int index, double value);
 
@@ -532,7 +532,7 @@ C_DECL_SPEC char*                   rrCallConv  getStringListElement (RRStringLi
 
  \param RRMatrixHandle m A pointer to a matrix type variable
  \return Returns -1 if fails, otherwise returns the number of rows
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC int                     rrCallConv  getMatrixNumRows (RRMatrixHandle m);
 
@@ -543,7 +543,7 @@ C_DECL_SPEC int                     rrCallConv  getMatrixNumRows (RRMatrixHandle
 
  \param RRMatrixHandle m A pointer to a matrix type variable
  \return Returns -1 if fails, otherwise returns the number of columns
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC int                     rrCallConv  getMatrixNumCols (RRMatrixHandle m);
 
@@ -557,7 +557,7 @@ C_DECL_SPEC int                     rrCallConv  getMatrixNumCols (RRMatrixHandle
  \param int c The column index to the matrix
  \paramt double* The retrieved value from the matrix
  \return \return Returns True if succesful
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC bool                    rrCallConv  getMatrixElement (RRMatrixHandle m, int r, int c, double& value);
 
@@ -568,7 +568,7 @@ C_DECL_SPEC bool                    rrCallConv  getMatrixElement (RRMatrixHandle
 
  \param RRResultHandle result A pointer to a result type variable
  \return Returns -1 if fails, otherwise returns the number of rows
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC int                     rrCallConv  getResultNumRows (RRResultHandle result);
 
@@ -579,7 +579,7 @@ C_DECL_SPEC int                     rrCallConv  getResultNumRows (RRResultHandle
 
  \param RRResultHandle result A pointer to a result type variable
  \return Returns -1 if fails, otherwise returns the number of columns
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC int                     rrCallConv  getResultNumCols (RRResultHandle result);
 
@@ -593,7 +593,7 @@ C_DECL_SPEC int                     rrCallConv  getResultNumCols (RRResultHandle
  \param int c The column index to the result data
  \paramt double* The retrieved value from the result data
  \return \return Returns True if succesful
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC bool                    rrCallConv  getResultElement (RRResultHandle result, int r, int c, double& value);
 
@@ -605,7 +605,7 @@ C_DECL_SPEC bool                    rrCallConv  getResultElement (RRResultHandle
  \param RRResultHandle result A pointer to a result type variable
  \param int column The column index for the result data (indexing from zero)
  \return \return Returns nil if fails, otherwise returns a pointer to the string column label
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC char*                   rrCallConv  getResultColumnLabel (RRResultHandle result, int column);
 
@@ -616,7 +616,7 @@ C_DECL_SPEC char*                   rrCallConv  getResultColumnLabel (RRResultHa
 
  \param RRCCodeHandle header A pointer to a string that stores the header code
   \return Returns True if succesful
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC char*                   rrCallConv  getCCodeHeader (RRCCodeHandle code);
 
@@ -627,7 +627,7 @@ C_DECL_SPEC char*                   rrCallConv  getCCodeHeader (RRCCodeHandle co
 
  \param RRCCodeHandle header A pointer to a string that stores the main source code
  \return Returns True if succesful
- \ingroup helpRoutines
+ \ingroup helperRoutines
 */
 C_DECL_SPEC char*                   rrCallConv  getCCodeSource (RRCCodeHandle code);
 
