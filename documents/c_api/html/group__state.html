@@ -76,14 +76,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Compute derivatives, fluxes, and other values of the system at the current state.  
 <a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="member-group"></a>
+Read models</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#gae25399f84ff2d1fda619358a1af9a1b5">getNumberOfReactions</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the number of reactions in the loaded model.  <a href="#gae25399f84ff2d1fda619358a1af9a1b5"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Compute derivatives, fluxes, and other values of the system at the current state. </p>
+<p>steadystate Compute and obtain basic information about the steady state </p>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="gae25399f84ff2d1fda619358a1af9a1b5"></a><!-- doxytag: member="rr_c_api.h::getNumberOfReactions" ref="gae25399f84ff2d1fda619358a1af9a1b5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC int rrCallConv getNumberOfReactions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the number of reactions in the loaded model. </p>
+<p>Example: number = getNumberOfReactions ();</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions </dd></dl>
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -95,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 5 2012 09:03:58 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 18:33:23 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

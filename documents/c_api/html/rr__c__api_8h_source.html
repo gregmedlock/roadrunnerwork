@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>cRoadRunner: rr_c_api.h Source File</title>
+<title>cRoadRunner: C:/Users/hsauro/Documents/Visual Studio 2010/Projects/cRoadRunnerPlusRelease/trunk/Wrappers/C/rr_c_api.h Source File</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -75,234 +75,242 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">rr_c_api.h</div>  </div>
+<div class="title">C:/Users/hsauro/Documents/Visual Studio 2010/Projects/cRoadRunnerPlusRelease/trunk/Wrappers/C/rr_c_api.h</div>  </div>
 </div>
 <div class="contents">
 <a href="rr__c__api_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00126"></a>00126 <span class="preprocessor">#ifndef rrC_APIH</span>
-<a name="l00127"></a>00127 <span class="preprocessor"></span><span class="preprocessor">#define rrC_APIH</span>
-<a name="l00128"></a>00128 <span class="preprocessor"></span>
-<a name="l00129"></a>00129 <span class="preprocessor">#if defined(__cplusplus)</span>
-<a name="l00130"></a>00130 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span>
-<a name="l00131"></a>00131 {
-<a name="l00132"></a>00132 <span class="preprocessor">#else</span>
-<a name="l00133"></a>00133 <span class="preprocessor"></span><span class="comment">//#include &lt;stdio.h&gt;</span>
-<a name="l00134"></a>00134 <span class="comment">//#include &quot;rr_support/stdbool.h&quot;</span>
-<a name="l00135"></a>00135 <span class="preprocessor">#endif</span>
-<a name="l00136"></a>00136 <span class="preprocessor"></span>
-<a name="l00137"></a>00137 <span class="preprocessor">#include &quot;rr_c_api_exporter.h&quot;</span>
-<a name="l00138"></a>00138 <span class="preprocessor">#include &quot;<a class="code" href="rr__c__types_8h.html" title="roadRunner C API 2012">rr_c_types.h</a>&quot;</span>
-<a name="l00139"></a>00139 
-<a name="l00140"></a>00140 <span class="preprocessor">#if defined(_MSC_VER)</span>
-<a name="l00141"></a>00141 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;direct.h&gt;</span>
-<a name="l00142"></a>00142 <span class="preprocessor">        #define getcwd _getcwd</span>
-<a name="l00143"></a>00143 <span class="preprocessor"></span><span class="preprocessor">        #define chdir  _chrdir</span>
-<a name="l00144"></a>00144 <span class="preprocessor"></span><span class="preprocessor">        #define MAXPATH _MAX_PATH</span>
-<a name="l00145"></a>00145 <span class="preprocessor"></span><span class="preprocessor">#elif defined(__BORLANDC__)</span>
-<a name="l00146"></a>00146 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;dir.h&gt;</span>
-<a name="l00147"></a>00147 <span class="preprocessor">#else</span>
-<a name="l00148"></a>00148 <span class="preprocessor"></span><span class="preprocessor">#include &lt;unistd.h&gt;</span>
-<a name="l00149"></a>00149 <span class="preprocessor">#endif</span>
-<a name="l00150"></a>00150 <span class="preprocessor"></span>
-<a name="l00151"></a>00151 
-<a name="l00152"></a>00152 <span class="comment">//  The latest</span>
-<a name="l00153"></a>00153 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  writeSBML();       <span class="comment">//Current SBML</span>
+<a name="l00129"></a>00129 <span class="preprocessor">#ifndef rrC_APIH</span>
+<a name="l00130"></a>00130 <span class="preprocessor"></span><span class="preprocessor">#define rrC_APIH</span>
+<a name="l00131"></a>00131 <span class="preprocessor"></span>
+<a name="l00132"></a>00132 <span class="preprocessor">#if defined(__cplusplus)</span>
+<a name="l00133"></a>00133 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span>
+<a name="l00134"></a>00134 {
+<a name="l00135"></a>00135 <span class="preprocessor">#else</span>
+<a name="l00136"></a>00136 <span class="preprocessor"></span><span class="comment">//#include &lt;stdio.h&gt;</span>
+<a name="l00137"></a>00137 <span class="comment">//#include &quot;rr_support/stdbool.h&quot;</span>
+<a name="l00138"></a>00138 <span class="preprocessor">#endif</span>
+<a name="l00139"></a>00139 <span class="preprocessor"></span>
+<a name="l00140"></a>00140 <span class="preprocessor">#include &quot;rr_c_api_exporter.h&quot;</span>
+<a name="l00141"></a>00141 <span class="preprocessor">#include &quot;<a class="code" href="rr__c__types_8h.html" title="roadRunner C API 2012">rr_c_types.h</a>&quot;</span>
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143 <span class="preprocessor">#if defined(_MSC_VER)</span>
+<a name="l00144"></a>00144 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;direct.h&gt;</span>
+<a name="l00145"></a>00145 <span class="preprocessor">        #define getcwd _getcwd</span>
+<a name="l00146"></a>00146 <span class="preprocessor"></span><span class="preprocessor">        #define chdir  _chrdir</span>
+<a name="l00147"></a>00147 <span class="preprocessor"></span><span class="preprocessor">        #define MAXPATH _MAX_PATH</span>
+<a name="l00148"></a>00148 <span class="preprocessor"></span><span class="preprocessor">#elif defined(__BORLANDC__)</span>
+<a name="l00149"></a>00149 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;dir.h&gt;</span>
+<a name="l00150"></a>00150 <span class="preprocessor">#else</span>
+<a name="l00151"></a>00151 <span class="preprocessor"></span><span class="preprocessor">#include &lt;unistd.h&gt;</span>
+<a name="l00152"></a>00152 <span class="preprocessor">#endif</span>
+<a name="l00153"></a>00153 <span class="preprocessor"></span>
 <a name="l00154"></a>00154 
-<a name="l00155"></a>00155 <span class="comment">// Utility and informational methods</span>
-<a name="l00156"></a>00156 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getVersion();
+<a name="l00155"></a>00155 <span class="comment">//  The latest</span>
+<a name="l00156"></a>00156 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  writeSBML();       <span class="comment">//Current SBML</span>
 <a name="l00157"></a>00157 
-<a name="l00158"></a>00158 <span class="comment">// Logging</span>
-<a name="l00159"></a>00159 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  enableLogging();
-<a name="l00160"></a>00160 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  setLogLevel(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; lvl);
-<a name="l00161"></a>00161 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  setLogLevelFromString(<span class="keyword">const</span> <span class="keywordtype">char</span>* lvl);
-<a name="l00162"></a>00162 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  getLogLevel(<span class="keywordtype">int</span>&amp; lvl);
-<a name="l00163"></a>00163 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getLogFileName();
-<a name="l00164"></a>00164 
-<a name="l00165"></a>00165 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getBuildDate();
-<a name="l00166"></a>00166 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getCopyright();
-<a name="l00167"></a>00167 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  setTempFolder(<span class="keyword">const</span> <span class="keywordtype">char</span>* folder);
-<a name="l00168"></a>00168 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getTempFolder();
-<a name="l00169"></a>00169 
-<a name="l00170"></a>00170 <span class="comment">// Error handling</span>
-<a name="l00171"></a>00171 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  hasError();
-<a name="l00172"></a>00172 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getLastError();
-<a name="l00173"></a>00173 
-<a name="l00174"></a>00174 <span class="comment">// RoadRunner API</span>
-<a name="l00175"></a>00175 C_DECL_SPEC RRHandle                rrCallConv   getRRInstance();
-<a name="l00176"></a>00176 C_DECL_SPEC <a class="code" href="struct_r_r_c_code.html">RRCCode</a>*                    rrCallConv   getCCode();
-<a name="l00177"></a>00177 
-<a name="l00178"></a>00178 <span class="comment">// Flags/Options</span>
-<a name="l00179"></a>00179 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setComputeAndAssignConservationLaws(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; OnOrOff);
-<a name="l00180"></a>00180 
-<a name="l00181"></a>00181 <span class="comment">// -----------------------------------------------------------------------</span>
-<a name="l00194"></a>00194 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">bool</span>  rrCallConv   <a class="code" href="group__loadsave.html#ga4105f02dfdb959175f30cecebfb1c081" title="Create a model from an SBML string.">loadSBML</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sbml);
-<a name="l00195"></a>00195 
-<a name="l00202"></a>00202 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv   <a class="code" href="group__loadsave.html#ga3147e10d84bddb6435bee4b1db0514bf" title="Create a model from a SBML file.">loadSBMLFromFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sbml);
-<a name="l00203"></a>00203 
-<a name="l00204"></a>00204 <span class="comment">// SBML utility methods</span>
-<a name="l00205"></a>00205 C_DECL_SPEC <span class="keywordtype">char</span>*                                   rrCallConv   getParamPromotedSBML(<span class="keyword">const</span> <span class="keywordtype">char</span>* sArg);
-<a name="l00206"></a>00206 C_DECL_SPEC <span class="keywordtype">char</span>*                                   rrCallConv   getSBML();
-<a name="l00207"></a>00207 
-<a name="l00208"></a>00208 <span class="comment">// Get and set capability routines</span>
-<a name="l00209"></a>00209 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setCapabilities (<span class="keyword">const</span> <span class="keywordtype">char</span>* caps);
-<a name="l00210"></a>00210 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   getCapabilities();
-<a name="l00211"></a>00211 
-<a name="l00218"></a>00218 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga1a636a76ad610d99fe1c780bb3d9296d" title="Set the time start for a simulation.">setTimeStart</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeStart);
-<a name="l00219"></a>00219 
-<a name="l00226"></a>00226 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga1313e21d622cd846bdd75071e965eb6c" title="Set the time end for a simulation.">setTimeEnd</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeEnd);
-<a name="l00227"></a>00227 
-<a name="l00234"></a>00234 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga448ead53bb8913de664cc8ad675b4197" title="Set the number of points to generate in a simulation.">setNumPoints</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrPoints);
-<a name="l00235"></a>00235 
-<a name="l00245"></a>00245 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga6465c94b6dfed39a6ef614bd0a68cb9b" title="Set the selection list for output from simulate() or simulateEx()">setSelectionList</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* list);
-<a name="l00246"></a>00246 
-<a name="l00253"></a>00253 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   <a class="code" href="group__simulation.html#ga1db0b86ed7fd0d6e19f8df85b7577253" title="Get the current selection list for simulate() or simulateEx()">getSelectionList</a>();
-<a name="l00254"></a>00254 
-<a name="l00262"></a>00262 C_DECL_SPEC <a class="code" href="struct_r_r_result.html">RRResultHandle</a>          rrCallConv   <a class="code" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate</a>();
-<a name="l00263"></a>00263 C_DECL_SPEC <a class="code" href="struct_r_r_result.html">RRResultHandle</a>          rrCallConv   simulateEx(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeStart, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeEnd, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numberOfPoints);
-<a name="l00264"></a>00264 C_DECL_SPEC <span class="keywordtype">bool</span>                        rrCallConv   oneStep(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; currentTime, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; stepSize, <span class="keywordtype">double</span>&amp; value);
-<a name="l00265"></a>00265 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getTimeStart(<span class="keywordtype">double</span>&amp; timeStart);
-<a name="l00266"></a>00266 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getTimeEnd(<span class="keywordtype">double</span>&amp; timeEnd);
-<a name="l00267"></a>00267 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getNumPoints (<span class="keywordtype">int</span>&amp; numPoints);
-<a name="l00268"></a>00268 
-<a name="l00269"></a>00269 <span class="comment">// Steady state methods</span>
-<a name="l00270"></a>00270 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   steadyState(<span class="keywordtype">double</span>&amp; value);
-<a name="l00271"></a>00271 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a>          rrCallConv   computeSteadyStateValues();
-<a name="l00272"></a>00272 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setSteadyStateSelectionList(<span class="keyword">const</span> <span class="keywordtype">char</span>* list);
-<a name="l00273"></a>00273 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   getSteadyStateSelectionList();
-<a name="l00274"></a>00274 
-<a name="l00275"></a>00275 <span class="comment">// Set and get family of methods</span>
-<a name="l00276"></a>00276 C_DECL_SPEC <span class="keywordtype">bool</span>                                rrCallConv   getValue(<span class="keyword">const</span> <span class="keywordtype">char</span>* speciesID, <span class="keywordtype">double</span>&amp; value);
-<a name="l00277"></a>00277 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setValue(<span class="keyword">const</span> <span class="keywordtype">char</span>* speciesId, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; val);
-<a name="l00278"></a>00278 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a>          rrCallConv   getFloatingSpeciesConcentrations();
-<a name="l00279"></a>00279 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a>          rrCallConv   getBoundarySpeciesConcentrations();
-<a name="l00280"></a>00280 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a>          rrCallConv   getGlobalParameterValues();
-<a name="l00281"></a>00281 
-<a name="l00282"></a>00282 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setBoundarySpeciesByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
-<a name="l00283"></a>00283 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setFloatingSpeciesByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
-<a name="l00284"></a>00284 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setGlobalParameterByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
-<a name="l00285"></a>00285 C_DECL_SPEC <span class="keywordtype">bool</span>                        rrCallConv   getBoundarySpeciesByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
-<a name="l00286"></a>00286 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getFloatingSpeciesByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
-<a name="l00287"></a>00287 C_DECL_SPEC <span class="keywordtype">bool</span>                        rrCallConv   getGlobalParameterByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
-<a name="l00288"></a>00288 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getCompartmentByIndex (<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; value);
-<a name="l00289"></a>00289 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setCompartmentByIndex (<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
-<a name="l00290"></a>00290 
-<a name="l00291"></a>00291 <span class="comment">// Jacobian matrix methods</span>
-<a name="l00292"></a>00292 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getFullJacobian();
-<a name="l00293"></a>00293 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getReducedJacobian();
-<a name="l00294"></a>00294 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getEigenValues();
-<a name="l00295"></a>00295 
-<a name="l00296"></a>00296 <span class="comment">// Stoichiometry methods</span>
-<a name="l00297"></a>00297 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getStoichiometryMatrix();
-<a name="l00298"></a>00298 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getLinkMatrix();
-<a name="l00299"></a>00299 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getNrMatrix();
-<a name="l00300"></a>00300 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getL0Matrix();
-<a name="l00301"></a>00301 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getConservationMatrix();
-<a name="l00302"></a>00302 
-<a name="l00303"></a>00303 <span class="comment">// Initial condition Methods</span>
-<a name="l00304"></a>00304 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   reset();
-<a name="l00305"></a>00305 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setFloatingSpeciesInitialConcentrations (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html">RRVector</a>* vec);
-<a name="l00306"></a>00306 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a>          rrCallConv   getFloatingSpeciesInitialConcentrations ();
-<a name="l00307"></a>00307 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   getFloatingSpeciesInitialConditionNames();
-<a name="l00308"></a>00308 
-<a name="l00309"></a>00309 <span class="comment">// Reaction rates</span>
-<a name="l00310"></a>00310 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfReactions();
-<a name="l00311"></a>00311 C_DECL_SPEC <span class="keywordtype">bool</span>                        rrCallConv   getReactionRate(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp;, <span class="keywordtype">double</span>&amp; rate);
-<a name="l00312"></a>00312 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a>          rrCallConv   getReactionRates();
-<a name="l00313"></a>00313 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a>          rrCallConv   getReactionRatesEx (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a> vec);
-<a name="l00314"></a>00314 
-<a name="l00315"></a>00315 <span class="comment">// Rates of change</span>
-<a name="l00316"></a>00316 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a>          rrCallConv   getRatesOfChange();
-<a name="l00317"></a>00317 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   getRatesOfChangeNames();
-<a name="l00318"></a>00318 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getRateOfChange(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp;, <span class="keywordtype">double</span>&amp; value);
-<a name="l00319"></a>00319 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a>          rrCallConv   getRatesOfChangeEx (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a> vec);
-<a name="l00320"></a>00320 
-<a name="l00321"></a>00321 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   evalModel();
-<a name="l00322"></a>00322 
-<a name="l00323"></a>00323 <span class="comment">// Get number family</span>
-<a name="l00324"></a>00324 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfCompartments ();
-<a name="l00325"></a>00325 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfBoundarySpecies();
-<a name="l00326"></a>00326 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfFloatingSpecies();
-<a name="l00327"></a>00327 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfGlobalParameters();
-<a name="l00328"></a>00328 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfDependentSpecies();
-<a name="l00329"></a>00329 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfIndependentSpecies();
-<a name="l00330"></a>00330 
-<a name="l00331"></a>00331 <span class="comment">// Get names family</span>
-<a name="l00332"></a>00332 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   getReactionNames();
-<a name="l00333"></a>00333 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   getRateOfChangeNames();
-<a name="l00334"></a>00334 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   getBoundarySpeciesNames();
-<a name="l00335"></a>00335 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   getFloatingSpeciesNames();
-<a name="l00336"></a>00336 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   getGlobalParameterNames();
-<a name="l00337"></a>00337 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   getCompartmentNames();
-<a name="l00338"></a>00338 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a>      rrCallConv   getEigenValueNames();
-<a name="l00339"></a>00339 C_DECL_SPEC <a class="code" href="struct_r_r_array_list2.html">RRArrayList2Handle</a>      rrCallConv   getAvailableSymbols();
-<a name="l00340"></a>00340 
-<a name="l00341"></a>00341 <span class="comment">// MCA methods</span>
-<a name="l00342"></a>00342 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv   getElasticityCoefficientNames();
-<a name="l00343"></a>00343 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv   getUnscaledFluxControlCoefficientNames();
-<a name="l00344"></a>00344 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv   getFluxControlCoefficientNames();
-<a name="l00345"></a>00345 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv   getUnscaledConcentrationControlCoefficientNames();
-<a name="l00346"></a>00346 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv   getConcentrationControlCoefficientNames();
-<a name="l00347"></a>00347 
-<a name="l00348"></a>00348 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getUnScaledElasticityMatrix();
-<a name="l00349"></a>00349 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getScaledElasticityMatrix();
-<a name="l00350"></a>00350 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getUnscaledConcentrationControlCoefficientMatrix();
-<a name="l00351"></a>00351 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getScaledConcentrationControlCoefficientMatrix();
-<a name="l00352"></a>00352 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getUnscaledFluxControlCoefficientMatrix();
-<a name="l00353"></a>00353 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a>          rrCallConv   getScaledFluxControlCoefficientMatrix();
-<a name="l00354"></a>00354 
-<a name="l00355"></a>00355 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getuCC (<span class="keyword">const</span> <span class="keywordtype">char</span>* variable, <span class="keyword">const</span> <span class="keywordtype">char</span>* parameter, <span class="keywordtype">double</span>&amp; value);
-<a name="l00356"></a>00356 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getCC (<span class="keyword">const</span> <span class="keywordtype">char</span>* variable, <span class="keyword">const</span> <span class="keywordtype">char</span>* parameter, <span class="keywordtype">double</span>&amp; value);
-<a name="l00357"></a>00357 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getEE(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* species, <span class="keywordtype">double</span>&amp; value);
-<a name="l00358"></a>00358 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getuEE(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* species, <span class="keywordtype">double</span>&amp; value);
-<a name="l00359"></a>00359 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getScaledFloatingSpeciesElasticity(<span class="keyword">const</span> <span class="keywordtype">char</span>* reactionName, <span class="keyword">const</span> <span class="keywordtype">char</span>* speciesName, <span class="keywordtype">double</span>&amp; value);
-<a name="l00360"></a>00360 
-<a name="l00361"></a>00361 <span class="comment">// Print/format functions</span>
-<a name="l00362"></a>00362 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printResult(<span class="keyword">const</span> <a class="code" href="struct_r_r_result.html">RRResultHandle</a> result);
-<a name="l00363"></a>00363 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printMatrix(<span class="keyword">const</span> <a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a> mat);
-<a name="l00364"></a>00364 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printVector(<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a> vec);
-<a name="l00365"></a>00365 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printList(<span class="keyword">const</span> <a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a> list);
-<a name="l00366"></a>00366 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printStringArrayList(<span class="keyword">const</span> <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayList</a>* list);
-<a name="l00367"></a>00367 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printArrayList(<span class="keyword">const</span> <a class="code" href="struct_r_r_array_list2.html">RRArrayList2Handle</a> list);
-<a name="l00368"></a>00368 
-<a name="l00369"></a>00369 <span class="comment">// Free memory functions</span>
-<a name="l00370"></a>00370 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeRRInstance(RRHandle handle);
-<a name="l00371"></a>00371 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeResult(<a class="code" href="struct_r_r_result.html">RRResultHandle</a> handle);
-<a name="l00372"></a>00372 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeText(<span class="keywordtype">char</span>* text);
-<a name="l00373"></a>00373 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeLabelStringList(<a class="code" href="struct_r_r_label_string_list.html">RRLabelStringListHandle</a> sl);
-<a name="l00374"></a>00374 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeStringList(<a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a> sl);
-<a name="l00375"></a>00375 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeStringArrayList(<a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> sl);
-<a name="l00376"></a>00376 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeVector(<a class="code" href="struct_r_r_vector.html">RRVectorHandle</a> vector);
-<a name="l00377"></a>00377 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeMatrix(<a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a> matrix);
-<a name="l00378"></a>00378 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeCCode(<a class="code" href="struct_r_r_c_code.html">RRCCodeHandle</a> code);
-<a name="l00379"></a>00379 C_DECL_SPEC <span class="keywordtype">void</span>                    rrCallConv   Pause();
-<a name="l00380"></a>00380 
-<a name="l00381"></a>00381 <span class="comment">// Helper Routines</span>
-<a name="l00382"></a>00382 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html">RRVectorHandle</a>          rrCallConv  createVectorAPI (<span class="keywordtype">int</span> size);
-<a name="l00383"></a>00383 
-<a name="l00384"></a>00384 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getVectorLength (<a class="code" href="struct_r_r_vector.html">RRVectorHandle</a> vector);
-<a name="l00385"></a>00385 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  getVectorElement (<a class="code" href="struct_r_r_vector.html">RRVectorHandle</a> vector, <span class="keywordtype">int</span> index, <span class="keywordtype">double</span>&amp; value);
-<a name="l00386"></a>00386 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  setVectorElement (<a class="code" href="struct_r_r_vector.html">RRVectorHandle</a> vector, <span class="keywordtype">int</span> index, <span class="keywordtype">double</span> value);
-<a name="l00387"></a>00387 
-<a name="l00388"></a>00388 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getStringListLength (<a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a> stringList);
-<a name="l00389"></a>00389 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getStringListElement (<a class="code" href="struct_r_r_string_list.html">RRStringListHandle</a> stringList, <span class="keywordtype">int</span> index);
-<a name="l00390"></a>00390 
-<a name="l00391"></a>00391 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getMatrixNumRows (<a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a> m);
-<a name="l00392"></a>00392 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getMatrixNumCols (<a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a> m);
-<a name="l00393"></a>00393 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  getMatrixElement (<a class="code" href="struct_r_r_matrix.html">RRMatrixHandle</a> m, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span>&amp; value);
-<a name="l00394"></a>00394 
-<a name="l00395"></a>00395 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getResultNumRows (<a class="code" href="struct_r_r_result.html">RRResultHandle</a> result);
-<a name="l00396"></a>00396 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getResultNumCols (<a class="code" href="struct_r_r_result.html">RRResultHandle</a> result);
-<a name="l00397"></a>00397 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  getResultElement (<a class="code" href="struct_r_r_result.html">RRResultHandle</a> result, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span>&amp; value);
-<a name="l00398"></a>00398 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getResultColumnLabel (<a class="code" href="struct_r_r_result.html">RRResultHandle</a> result, <span class="keywordtype">int</span> column);
-<a name="l00399"></a>00399 
-<a name="l00400"></a>00400 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getCCodeHeader (<a class="code" href="struct_r_r_c_code.html">RRCCodeHandle</a> code);
-<a name="l00401"></a>00401 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getCCodeSource (<a class="code" href="struct_r_r_c_code.html">RRCCodeHandle</a> code);
-<a name="l00402"></a>00402 
-<a name="l00403"></a>00403 <span class="preprocessor">#if defined( __cplusplus)</span>
-<a name="l00404"></a>00404 <span class="preprocessor"></span>}
-<a name="l00405"></a>00405 <span class="preprocessor">#endif</span>
-<a name="l00406"></a>00406 <span class="preprocessor"></span>
-<a name="l00407"></a>00407 <span class="preprocessor">#endif</span>
+<a name="l00158"></a>00158 <span class="comment">// Utility and informational methods</span>
+<a name="l00159"></a>00159 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getVersion();
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161 <span class="comment">// Logging</span>
+<a name="l00162"></a>00162 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  enableLogging();
+<a name="l00163"></a>00163 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  setLogLevel(<span class="keyword">const</span> <span class="keywordtype">char</span>* lvl);
+<a name="l00164"></a>00164 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getLogLevel();
+<a name="l00165"></a>00165 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getLogFileName();
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getBuildDate();
+<a name="l00168"></a>00168 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getCopyright();
+<a name="l00169"></a>00169 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  setTempFolder(<span class="keyword">const</span> <span class="keywordtype">char</span>* folder);
+<a name="l00170"></a>00170 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getTempFolder();
+<a name="l00171"></a>00171 
+<a name="l00172"></a>00172 <span class="comment">// Error handling</span>
+<a name="l00173"></a>00173 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  hasError();
+<a name="l00174"></a>00174 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getLastError();
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176 <span class="comment">// RoadRunner API</span>
+<a name="l00177"></a>00177 C_DECL_SPEC RRHandle                rrCallConv   getRRInstance();
+<a name="l00178"></a>00178 C_DECL_SPEC <a class="code" href="struct_r_r_c_code.html" title="Convenient Structure for storing the header and main body source for the generate simulation C code...">RRCCode</a>*                    rrCallConv   getCCode();
+<a name="l00179"></a>00179 
+<a name="l00180"></a>00180 <span class="comment">// Flags/Options</span>
+<a name="l00181"></a>00181 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setComputeAndAssignConservationLaws(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; OnOrOff);
+<a name="l00182"></a>00182 
+<a name="l00183"></a>00183 <span class="comment">// -----------------------------------------------------------------------</span>
+<a name="l00196"></a>00196 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">bool</span>  rrCallConv   <a class="code" href="group__loadsave.html#ga4105f02dfdb959175f30cecebfb1c081" title="Create a model from an SBML string.">loadSBML</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sbml);
+<a name="l00197"></a>00197 
+<a name="l00204"></a>00204 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv   <a class="code" href="group__loadsave.html#ga3147e10d84bddb6435bee4b1db0514bf" title="Create a model from a SBML file.">loadSBMLFromFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sbml);
+<a name="l00205"></a>00205 
+<a name="l00206"></a>00206 <span class="comment">// SBML utility methods</span>
+<a name="l00207"></a>00207 C_DECL_SPEC <span class="keywordtype">char</span>*                                   rrCallConv   getParamPromotedSBML(<span class="keyword">const</span> <span class="keywordtype">char</span>* sArg);
+<a name="l00208"></a>00208 C_DECL_SPEC <span class="keywordtype">char</span>*                                   rrCallConv   getSBML();
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210 <span class="comment">// Get and set capability routines</span>
+<a name="l00211"></a>00211 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setCapabilities (<span class="keyword">const</span> <span class="keywordtype">char</span>* caps);
+<a name="l00212"></a>00212 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   getCapabilities();
+<a name="l00213"></a>00213 
+<a name="l00220"></a>00220 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga1a636a76ad610d99fe1c780bb3d9296d" title="Set the time start for a simulation.">setTimeStart</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeStart);
+<a name="l00221"></a>00221 
+<a name="l00228"></a>00228 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga1313e21d622cd846bdd75071e965eb6c" title="Set the time end for a simulation.">setTimeEnd</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeEnd);
+<a name="l00229"></a>00229 
+<a name="l00236"></a>00236 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga448ead53bb8913de664cc8ad675b4197" title="Set the number of points to generate in a simulation.">setNumPoints</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrPoints);
+<a name="l00237"></a>00237 
+<a name="l00247"></a>00247 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga6465c94b6dfed39a6ef614bd0a68cb9b" title="Set the selection list for output from simulate() or simulateEx()">setSelectionList</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* list);
+<a name="l00248"></a>00248 
+<a name="l00255"></a>00255 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   <a class="code" href="group__simulation.html#ga1db0b86ed7fd0d6e19f8df85b7577253" title="Get the current selection list for simulate() or simulateEx()">getSelectionList</a>();
+<a name="l00256"></a>00256 
+<a name="l00264"></a>00264 C_DECL_SPEC <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a>          rrCallConv   <a class="code" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate</a>();
+<a name="l00265"></a>00265 
+<a name="l00274"></a>00274 C_DECL_SPEC <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a>          rrCallConv   <a class="code" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeStart, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeEnd, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numberOfPoints);
+<a name="l00275"></a>00275 
+<a name="l00287"></a>00287 C_DECL_SPEC <span class="keywordtype">bool</span>                        rrCallConv   <a class="code" href="group__simulation.html#ga190fff177accdfbc9c192c4993807e2e" title="Carry out a one step integration of the model.">oneStep</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; currentTime, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; stepSize, <span class="keywordtype">double</span>&amp; value);
+<a name="l00288"></a>00288 
+<a name="l00298"></a>00298 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga18b4fbd0dc5aa3f25d58367a406f425c" title="Get the value of the current time start.">getTimeStart</a>(<span class="keywordtype">double</span>&amp; timeStart);
+<a name="l00299"></a>00299 
+<a name="l00309"></a>00309 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga451e7ecddd0431316048a332410b0600" title="Get the value of the current time end.">getTimeEnd</a>(<span class="keywordtype">double</span>&amp; timeEnd);
+<a name="l00310"></a>00310 
+<a name="l00320"></a>00320 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#gacd9cb734773710f640742a9f040dccc5" title="Get the value of the current number of points.">getNumPoints</a> (<span class="keywordtype">int</span>&amp; numPoints);
+<a name="l00321"></a>00321 
+<a name="l00331"></a>00331 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="rr__c__api_8cpp.html#aa51ba22ca904260718b81ac2ded66d28" title="Get the value of the current number of points.">steadyState</a>(<span class="keywordtype">double</span>&amp; value);
+<a name="l00332"></a>00332 
+<a name="l00341"></a>00341 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv   <a class="code" href="rr__c__api_8cpp.html#acf80de2b00a22da5a784d55fa4af16d3" title="A convenient method for returning a vector of the steady state species concentrations.">computeSteadyStateValues</a>();
+<a name="l00342"></a>00342 
+<a name="l00343"></a>00343 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setSteadyStateSelectionList(<span class="keyword">const</span> <span class="keywordtype">char</span>* list);
+<a name="l00344"></a>00344 
+<a name="l00345"></a>00345 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   getSteadyStateSelectionList();
+<a name="l00346"></a>00346 
+<a name="l00347"></a>00347 <span class="comment">// Set and get family of methods</span>
+<a name="l00348"></a>00348 C_DECL_SPEC <span class="keywordtype">bool</span>                                rrCallConv   getValue(<span class="keyword">const</span> <span class="keywordtype">char</span>* speciesID, <span class="keywordtype">double</span>&amp; value);
+<a name="l00349"></a>00349 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setValue(<span class="keyword">const</span> <span class="keywordtype">char</span>* speciesId, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; val);
+<a name="l00350"></a>00350 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv   getFloatingSpeciesConcentrations();
+<a name="l00351"></a>00351 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv   getBoundarySpeciesConcentrations();
+<a name="l00352"></a>00352 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv   getGlobalParameterValues();
+<a name="l00353"></a>00353 
+<a name="l00354"></a>00354 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setBoundarySpeciesByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
+<a name="l00355"></a>00355 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setFloatingSpeciesByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
+<a name="l00356"></a>00356 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setGlobalParameterByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
+<a name="l00357"></a>00357 C_DECL_SPEC <span class="keywordtype">bool</span>                        rrCallConv   getBoundarySpeciesByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
+<a name="l00358"></a>00358 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getFloatingSpeciesByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
+<a name="l00359"></a>00359 C_DECL_SPEC <span class="keywordtype">bool</span>                        rrCallConv   getGlobalParameterByIndex(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
+<a name="l00360"></a>00360 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getCompartmentByIndex (<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; value);
+<a name="l00361"></a>00361 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setCompartmentByIndex (<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
+<a name="l00362"></a>00362 
+<a name="l00363"></a>00363 <span class="comment">// Jacobian matrix methods</span>
+<a name="l00364"></a>00364 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getFullJacobian();
+<a name="l00365"></a>00365 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getReducedJacobian();
+<a name="l00366"></a>00366 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getEigenValues();
+<a name="l00367"></a>00367 
+<a name="l00368"></a>00368 <span class="comment">// Stoichiometry methods</span>
+<a name="l00369"></a>00369 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getStoichiometryMatrix();
+<a name="l00370"></a>00370 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getLinkMatrix();
+<a name="l00371"></a>00371 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getNrMatrix();
+<a name="l00372"></a>00372 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getL0Matrix();
+<a name="l00373"></a>00373 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getConservationMatrix();
+<a name="l00374"></a>00374 
+<a name="l00375"></a>00375 <span class="comment">// Initial condition Methods</span>
+<a name="l00384"></a>00384 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__simulation.html#ga07dfaf16ab38015aab6b400665ace2b2" title="Reset all floating species concentrations to their intial conditions.">reset</a>();
+<a name="l00385"></a>00385 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   setFloatingSpeciesInitialConcentrations (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVector</a>* vec);
+<a name="l00386"></a>00386 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv   getFloatingSpeciesInitialConcentrations ();
+<a name="l00387"></a>00387 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   getFloatingSpeciesInitialConditionNames();
+<a name="l00388"></a>00388 
+<a name="l00389"></a>00389 <span class="comment">// Reaction rates</span>
+<a name="l00390"></a>00390 <span class="comment">// Initial condition Methods</span>
+<a name="l00399"></a>00399 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   <a class="code" href="group__state.html#gae25399f84ff2d1fda619358a1af9a1b5" title="Obtain the number of reactions in the loaded model.">getNumberOfReactions</a>();
+<a name="l00400"></a>00400 C_DECL_SPEC <span class="keywordtype">bool</span>                        rrCallConv   getReactionRate(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp;, <span class="keywordtype">double</span>&amp; rate);
+<a name="l00401"></a>00401 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv   getReactionRates();
+<a name="l00402"></a>00402 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv   getReactionRatesEx (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vec);
+<a name="l00403"></a>00403 
+<a name="l00404"></a>00404 <span class="comment">// Rates of change</span>
+<a name="l00405"></a>00405 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv   getRatesOfChange();
+<a name="l00406"></a>00406 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   getRatesOfChangeNames();
+<a name="l00407"></a>00407 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getRateOfChange(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp;, <span class="keywordtype">double</span>&amp; value);
+<a name="l00408"></a>00408 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv   getRatesOfChangeEx (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vec);
+<a name="l00409"></a>00409 
+<a name="l00410"></a>00410 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   evalModel();
+<a name="l00411"></a>00411 
+<a name="l00412"></a>00412 <span class="comment">// Get number family</span>
+<a name="l00413"></a>00413 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfCompartments ();
+<a name="l00414"></a>00414 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfBoundarySpecies();
+<a name="l00415"></a>00415 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfFloatingSpecies();
+<a name="l00416"></a>00416 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfGlobalParameters();
+<a name="l00417"></a>00417 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfDependentSpecies();
+<a name="l00418"></a>00418 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv   getNumberOfIndependentSpecies();
+<a name="l00419"></a>00419 
+<a name="l00420"></a>00420 <span class="comment">// Get names family</span>
+<a name="l00421"></a>00421 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   getReactionNames();
+<a name="l00422"></a>00422 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   getRateOfChangeNames();
+<a name="l00423"></a>00423 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   getBoundarySpeciesNames();
+<a name="l00424"></a>00424 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   getFloatingSpeciesNames();
+<a name="l00425"></a>00425 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   getGlobalParameterNames();
+<a name="l00426"></a>00426 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   getCompartmentNames();
+<a name="l00427"></a>00427 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   getEigenValueNames();
+<a name="l00428"></a>00428 C_DECL_SPEC <a class="code" href="struct_r_r_array_list2.html" title="A list type.">RRArrayList2Handle</a>      rrCallConv   getAvailableSymbols();
+<a name="l00429"></a>00429 
+<a name="l00430"></a>00430 <span class="comment">// MCA methods</span>
+<a name="l00431"></a>00431 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv   getElasticityCoefficientNames();
+<a name="l00432"></a>00432 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv   getUnscaledFluxControlCoefficientNames();
+<a name="l00433"></a>00433 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv   getFluxControlCoefficientNames();
+<a name="l00434"></a>00434 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv   getUnscaledConcentrationControlCoefficientNames();
+<a name="l00435"></a>00435 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv   getConcentrationControlCoefficientNames();
+<a name="l00436"></a>00436 
+<a name="l00437"></a>00437 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getUnScaledElasticityMatrix();
+<a name="l00438"></a>00438 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getScaledElasticityMatrix();
+<a name="l00439"></a>00439 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getUnscaledConcentrationControlCoefficientMatrix();
+<a name="l00440"></a>00440 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getScaledConcentrationControlCoefficientMatrix();
+<a name="l00441"></a>00441 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getUnscaledFluxControlCoefficientMatrix();
+<a name="l00442"></a>00442 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>          rrCallConv   getScaledFluxControlCoefficientMatrix();
+<a name="l00443"></a>00443 
+<a name="l00444"></a>00444 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getuCC (<span class="keyword">const</span> <span class="keywordtype">char</span>* variable, <span class="keyword">const</span> <span class="keywordtype">char</span>* parameter, <span class="keywordtype">double</span>&amp; value);
+<a name="l00445"></a>00445 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getCC (<span class="keyword">const</span> <span class="keywordtype">char</span>* variable, <span class="keyword">const</span> <span class="keywordtype">char</span>* parameter, <span class="keywordtype">double</span>&amp; value);
+<a name="l00446"></a>00446 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getEE(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* species, <span class="keywordtype">double</span>&amp; value);
+<a name="l00447"></a>00447 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getuEE(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* species, <span class="keywordtype">double</span>&amp; value);
+<a name="l00448"></a>00448 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   getScaledFloatingSpeciesElasticity(<span class="keyword">const</span> <span class="keywordtype">char</span>* reactionName, <span class="keyword">const</span> <span class="keywordtype">char</span>* speciesName, <span class="keywordtype">double</span>&amp; value);
+<a name="l00449"></a>00449 
+<a name="l00450"></a>00450 <span class="comment">// Print/format functions</span>
+<a name="l00451"></a>00451 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printResult(<span class="keyword">const</span> <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result);
+<a name="l00452"></a>00452 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printMatrix(<span class="keyword">const</span> <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> mat);
+<a name="l00453"></a>00453 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printVector(<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vec);
+<a name="l00454"></a>00454 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printStringList(<span class="keyword">const</span> <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> list);
+<a name="l00455"></a>00455 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printStringArrayList(<span class="keyword">const</span> <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayList</a>* list);
+<a name="l00456"></a>00456 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printArrayList(<span class="keyword">const</span> <a class="code" href="struct_r_r_array_list2.html" title="A list type.">RRArrayList2Handle</a> list);
+<a name="l00457"></a>00457 
+<a name="l00458"></a>00458 <span class="comment">// Free memory functions</span>
+<a name="l00459"></a>00459 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeRRInstance(RRHandle handle);
+<a name="l00460"></a>00460 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeResult(<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> handle);
+<a name="l00461"></a>00461 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeText(<span class="keywordtype">char</span>* text);
+<a name="l00462"></a>00462 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeLabelStringList(<a class="code" href="struct_r_r_label_string_list.html">RRLabelStringListHandle</a> sl);
+<a name="l00463"></a>00463 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeStringList(<a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> sl);
+<a name="l00464"></a>00464 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeStringArrayList(<a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> sl);
+<a name="l00465"></a>00465 C_DECL_SPEC <span class="keywordtype">bool</span>                                        rrCallConv       freeArrayList(<a class="code" href="struct_r_r_array_list2.html" title="A list type.">RRArrayList2Handle</a> theList);
+<a name="l00466"></a>00466 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeVector(<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector);
+<a name="l00467"></a>00467 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeMatrix(<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> matrix);
+<a name="l00468"></a>00468 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeCCode(<a class="code" href="struct_r_r_c_code.html" title="Convenient Structure for storing the header and main body source for the generate simulation C code...">RRCCodeHandle</a> code);
+<a name="l00469"></a>00469 C_DECL_SPEC <span class="keywordtype">void</span>                    rrCallConv   Pause();
+<a name="l00470"></a>00470 
+<a name="l00471"></a>00471 <span class="comment">// Helper Routines</span>
+<a name="l00472"></a>00472 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv  createVectorAPI (<span class="keywordtype">int</span> size);
+<a name="l00473"></a>00473 
+<a name="l00474"></a>00474 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getVectorLength (<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector);
+<a name="l00475"></a>00475 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  getVectorElement (<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector, <span class="keywordtype">int</span> index, <span class="keywordtype">double</span>&amp; value);
+<a name="l00476"></a>00476 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  setVectorElement (<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector, <span class="keywordtype">int</span> index, <span class="keywordtype">double</span> value);
+<a name="l00477"></a>00477 
+<a name="l00478"></a>00478 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getStringListLength (<a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> stringList);
+<a name="l00479"></a>00479 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getStringListElement (<a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> stringList, <span class="keywordtype">int</span> index);
+<a name="l00480"></a>00480 
+<a name="l00481"></a>00481 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getMatrixNumRows (<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> m);
+<a name="l00482"></a>00482 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getMatrixNumCols (<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> m);
+<a name="l00483"></a>00483 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  getMatrixElement (<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> m, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span>&amp; value);
+<a name="l00484"></a>00484 
+<a name="l00485"></a>00485 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getResultNumRows (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result);
+<a name="l00486"></a>00486 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getResultNumCols (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result);
+<a name="l00487"></a>00487 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv  getResultElement (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span>&amp; value);
+<a name="l00488"></a>00488 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getResultColumnLabel (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result, <span class="keywordtype">int</span> column);
+<a name="l00489"></a>00489 
+<a name="l00490"></a>00490 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getCCodeHeader (<a class="code" href="struct_r_r_c_code.html" title="Convenient Structure for storing the header and main body source for the generate simulation C code...">RRCCodeHandle</a> code);
+<a name="l00491"></a>00491 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getCCodeSource (<a class="code" href="struct_r_r_c_code.html" title="Convenient Structure for storing the header and main body source for the generate simulation C code...">RRCCodeHandle</a> code);
+<a name="l00492"></a>00492 
+<a name="l00493"></a>00493 <span class="preprocessor">#if defined( __cplusplus)</span>
+<a name="l00494"></a>00494 <span class="preprocessor"></span>}
+<a name="l00495"></a>00495 <span class="preprocessor">#endif</span>
+<a name="l00496"></a>00496 <span class="preprocessor"></span>
+<a name="l00497"></a>00497 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -310,7 +318,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -322,7 +330,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 5 2012 09:03:58 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 18:33:23 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -86,23 +86,63 @@ Read models</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga448ead53bb8913de664cc8ad675b4197">setNumPoints</a> (const int &amp;nrPoints)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the number of points to generate in a simulation.  <a href="#ga448ead53bb8913de664cc8ad675b4197"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga6465c94b6dfed39a6ef614bd0a68cb9b">setSelectionList</a> (const char *list)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the selection list for output from <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or simulateEx()  <a href="#ga6465c94b6dfed39a6ef614bd0a68cb9b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="struct_r_r_string_list.html">RRStringListHandle</a> <br class="typebreak"/>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the selection list for output from <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or <a class="el" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx()</a>  <a href="#ga6465c94b6dfed39a6ef614bd0a68cb9b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga1db0b86ed7fd0d6e19f8df85b7577253">getSelectionList</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current selection list for <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or simulateEx()  <a href="#ga1db0b86ed7fd0d6e19f8df85b7577253"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="struct_r_r_result.html">RRResultHandle</a> <br class="typebreak"/>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current selection list for <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or <a class="el" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx()</a>  <a href="#ga1db0b86ed7fd0d6e19f8df85b7577253"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga9f0555c11716daec2336d54d13facc57">simulate</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out a time-course simulation, use setTimeStart etc to set characteristics.  <a href="#ga9f0555c11716daec2336d54d13facc57"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga9b87919e79f6eb0d7c77c3daa08d6baf">simulateEx</a> (const double &amp;timeStart, const double &amp;timeEnd, const int &amp;numberOfPoints)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out a time-course simulation based on the given arguments.  <a href="#ga9b87919e79f6eb0d7c77c3daa08d6baf"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga190fff177accdfbc9c192c4993807e2e">oneStep</a> (const double &amp;currentTime, const double &amp;stepSize, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out a one step integration of the model.  <a href="#ga190fff177accdfbc9c192c4993807e2e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga18b4fbd0dc5aa3f25d58367a406f425c">getTimeStart</a> (double &amp;timeStart)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the current time start.  <a href="#ga18b4fbd0dc5aa3f25d58367a406f425c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga451e7ecddd0431316048a332410b0600">getTimeEnd</a> (double &amp;timeEnd)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the current time end.  <a href="#ga451e7ecddd0431316048a332410b0600"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#gacd9cb734773710f640742a9f040dccc5">getNumPoints</a> (int &amp;numPoints)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the current number of points.  <a href="#gacd9cb734773710f640742a9f040dccc5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga07dfaf16ab38015aab6b400665ace2b2">reset</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all floating species concentrations to their intial conditions.  <a href="#ga07dfaf16ab38015aab6b400665ace2b2"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Deterministic, stochastic, and hybrid simulation algorithms. </p>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="gacd9cb734773710f640742a9f040dccc5"></a><!-- doxytag: member="rr_c_api.h::getNumPoints" ref="gacd9cb734773710f640742a9f040dccc5" args="(int &amp;numPoints)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv getNumPoints </td>
+          <td>(</td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>numPoints</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the value of the current number of points. </p>
+<p>Example: status = getNumPoints (&amp;numberOfPoints);</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int*</td><td>numPoints The current value for the number of points </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga1db0b86ed7fd0d6e19f8df85b7577253"></a><!-- doxytag: member="rr_c_api.h::getSelectionList" ref="ga1db0b86ed7fd0d6e19f8df85b7577253" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">C_DECL_SPEC <a class="el" href="struct_r_r_string_list.html">RRStringListHandle</a> rrCallConv getSelectionList </td>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getSelectionList </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -111,8 +151,127 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Get the current selection list for <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or simulateEx() </p>
+<p>Get the current selection list for <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or <a class="el" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx()</a> </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>char* A list of symbol names indicating the current selection list </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga451e7ecddd0431316048a332410b0600"></a><!-- doxytag: member="rr_c_api.h::getTimeEnd" ref="ga451e7ecddd0431316048a332410b0600" args="(double &amp;timeEnd)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv getTimeEnd </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>timeEnd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the value of the current time end. </p>
+<p>Example: status = getTimeStart (&amp;timeEnd);</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">double*</td><td>timeStart The current value for the time end </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga18b4fbd0dc5aa3f25d58367a406f425c"></a><!-- doxytag: member="rr_c_api.h::getTimeStart" ref="ga18b4fbd0dc5aa3f25d58367a406f425c" args="(double &amp;timeStart)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv getTimeStart </td>
+          <td>(</td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>timeStart</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the value of the current time start. </p>
+<p>Example: status = getTimeStart (&amp;timeStart);</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">double*</td><td>timeStart The current value for the time start </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga190fff177accdfbc9c192c4993807e2e"></a><!-- doxytag: member="rr_c_api.h::oneStep" ref="ga190fff177accdfbc9c192c4993807e2e" args="(const double &amp;currentTime, const double &amp;stepSize, double &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv oneStep </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>currentTime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>stepSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Carry out a one step integration of the model. </p>
+<p>Example: status = OneStep (&amp;currentTime, &amp;timeStep, &amp;newTimeStep);</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">double*</td><td>currentTime The current time in the simulation </td></tr>
+    <tr><td class="paramname">double*</td><td>stepSize The step size to use in the integration </td></tr>
+    <tr><td class="paramname">double*</td><td>The new time (currentTime + stepSize) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga07dfaf16ab38015aab6b400665ace2b2"></a><!-- doxytag: member="rr_c_api.h::reset" ref="ga07dfaf16ab38015aab6b400665ace2b2" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Reset all floating species concentrations to their intial conditions. </p>
+<p>Example: status = reset ();</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
 
 </div>
 </div>
@@ -157,7 +316,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Set the selection list for output from <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or simulateEx() </p>
+<p>Set the selection list for output from <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or <a class="el" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx()</a> </p>
 <p>Example: setSelectionList ("Time, S1, J1, J2")</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -226,7 +385,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">C_DECL_SPEC <a class="el" href="struct_r_r_result.html">RRResultHandle</a> rrCallConv simulate </td>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> rrCallConv simulate </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -240,13 +399,50 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 </div>
 </div>
+<a class="anchor" id="ga9b87919e79f6eb0d7c77c3daa08d6baf"></a><!-- doxytag: member="rr_c_api.h::simulateEx" ref="ga9b87919e79f6eb0d7c77c3daa08d6baf" args="(const double &amp;timeStart, const double &amp;timeEnd, const int &amp;numberOfPoints)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> rrCallConv simulateEx </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>timeStart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>timeEnd</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numberOfPoints</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Carry out a time-course simulation based on the given arguments. </p>
+<p>Example: m = simulateEx (0, 25, 200);</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>RRResultHandle Returns an array containing the results of the simulation </dd></dl>
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -258,7 +454,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 5 2012 09:03:58 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 18:33:23 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

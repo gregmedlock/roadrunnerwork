@@ -71,6 +71,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
+      <li><a href="functions.html"><span>Data&#160;Fields</span></a></li>
     </ul>
   </div>
 </div>
@@ -81,20 +82,80 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">RRResult Struct Reference</div>  </div>
 </div>
 <div class="contents">
-<!-- doxytag: class="RRResult" --><table class="memberdecls">
+<!-- doxytag: class="RRResult" -->
+<p>Structure for the result type from the simulate calls.  
+ <a href="struct_r_r_result.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="rr__c__types_8h_source.html">rr_c_types.h</a>&gt;</code></p>
+<table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d8512c879223c0e0d1522dae38e7819"></a><!-- doxytag: member="RRResult::RSize" ref="a4d8512c879223c0e0d1522dae38e7819" args="" -->
-int&#160;</td><td class="memItemRight" valign="bottom"><b>RSize</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a17c9a5894aa9cb3789346dcaa9c370bb"></a><!-- doxytag: member="RRResult::CSize" ref="a17c9a5894aa9cb3789346dcaa9c370bb" args="" -->
-int&#160;</td><td class="memItemRight" valign="bottom"><b>CSize</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c5cbda3aa940f4b0d6e8a1679307dfc"></a><!-- doxytag: member="RRResult::Data" ref="a7c5cbda3aa940f4b0d6e8a1679307dfc" args="" -->
-double *&#160;</td><td class="memItemRight" valign="bottom"><b>Data</b></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab339159e5604808f92fe793f4f43da03"></a><!-- doxytag: member="RRResult::ColumnHeaders" ref="ab339159e5604808f92fe793f4f43da03" args="" -->
-char **&#160;</td><td class="memItemRight" valign="bottom"><b>ColumnHeaders</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_r_result.html#a4d8512c879223c0e0d1522dae38e7819">RSize</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_r_result.html#a17c9a5894aa9cb3789346dcaa9c370bb">CSize</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_r_result.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">Data</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">char **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_r_r_result.html#ab339159e5604808f92fe793f4f43da03">ColumnHeaders</a></td></tr>
 </table>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>Structure for the result type from the simulate calls. </p>
+</div><hr/><h2>Field Documentation</h2>
+<a class="anchor" id="ab339159e5604808f92fe793f4f43da03"></a><!-- doxytag: member="RRResult::ColumnHeaders" ref="ab339159e5604808f92fe793f4f43da03" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** <a class="el" href="struct_r_r_result.html#ab339159e5604808f92fe793f4f43da03">ColumnHeaders</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Pointer to an array of column header strings </p>
+
+</div>
+</div>
+<a class="anchor" id="a17c9a5894aa9cb3789346dcaa9c370bb"></a><!-- doxytag: member="RRResult::CSize" ref="a17c9a5894aa9cb3789346dcaa9c370bb" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="struct_r_r_result.html#a17c9a5894aa9cb3789346dcaa9c370bb">CSize</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The number of columns in the result matrix </p>
+
+</div>
+</div>
+<a class="anchor" id="a7c5cbda3aa940f4b0d6e8a1679307dfc"></a><!-- doxytag: member="RRResult::Data" ref="a7c5cbda3aa940f4b0d6e8a1679307dfc" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double* <a class="el" href="struct_r_r_result.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">Data</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>A pointer to the data stored in the matrix. Access an element using Data[i*CSize + j] </p>
+
+</div>
+</div>
+<a class="anchor" id="a4d8512c879223c0e0d1522dae38e7819"></a><!-- doxytag: member="RRResult::RSize" ref="a4d8512c879223c0e0d1522dae38e7819" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="struct_r_r_result.html#a4d8512c879223c0e0d1522dae38e7819">RSize</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>The number of rows in the result matrix </p>
+
+</div>
+</div>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li><a class="el" href="rr__c__types_8h_source.html">rr_c_types.h</a></li>
+<li>C:/Users/hsauro/Documents/Visual Studio 2010/Projects/cRoadRunnerPlusRelease/trunk/Wrappers/C/<a class="el" href="rr__c__types_8h_source.html">rr_c_types.h</a></li>
 </ul>
 </div>
 <!-- window showing the filter options -->
@@ -102,7 +163,7 @@ char **&#160;</td><td class="memItemRight" valign="bottom"><b>ColumnHeaders</b><
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -114,7 +175,7 @@ char **&#160;</td><td class="memItemRight" valign="bottom"><b>ColumnHeaders</b><
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Sep 5 2012 09:03:58 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Sep 5 2012 18:33:23 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

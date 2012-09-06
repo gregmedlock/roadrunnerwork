@@ -1,6 +1,6 @@
 \hypertarget{rr__c__api_8cpp}{
-\section{rr\-\_\-c\-\_\-api.cpp \-File \-Reference}
-\label{rr__c__api_8cpp}\index{rr\-\_\-c\-\_\-api.\-cpp@{rr\-\_\-c\-\_\-api.\-cpp}}
+\section{\-C\-:/\-Users/hsauro/\-Documents/\-Visual \-Studio 2010/\-Projects/c\-Road\-Runner\-Plus\-Release/trunk/\-Wrappers/\-C/rr\-\_\-c\-\_\-api.cpp \-File \-Reference}
+\label{rr__c__api_8cpp}\index{\-C\-:/\-Users/hsauro/\-Documents/\-Visual Studio 2010/\-Projects/c\-Road\-Runner\-Plus\-Release/trunk/\-Wrappers/\-C/rr\-\_\-c\-\_\-api.\-cpp@{\-C\-:/\-Users/hsauro/\-Documents/\-Visual Studio 2010/\-Projects/c\-Road\-Runner\-Plus\-Release/trunk/\-Wrappers/\-C/rr\-\_\-c\-\_\-api.\-cpp}}
 }
 
 
@@ -25,19 +25,14 @@ bool rr\-Call\-Conv {\bfseries enable\-Logging} ()}
 \label{rr__c__api_8cpp_ae64ff5ddcd794d51fcbe69030ff4bd5c}
 
 \item 
-\hypertarget{rr__c__api_8cpp_aa7361471a8509ca80c47b30668d16d0e}{
-bool rr\-Call\-Conv {\bfseries set\-Log\-Level} (const int \&lvl)}
-\label{rr__c__api_8cpp_aa7361471a8509ca80c47b30668d16d0e}
+\hypertarget{rr__c__api_8cpp_a8758e290cb7701ab02a247385335afbd}{
+bool rr\-Call\-Conv {\bfseries set\-Log\-Level} (const char $\ast$\-\_\-lvl)}
+\label{rr__c__api_8cpp_a8758e290cb7701ab02a247385335afbd}
 
 \item 
-\hypertarget{rr__c__api_8cpp_a18992075272f6656aa9602305ef871d2}{
-bool rr\-Call\-Conv {\bfseries set\-Log\-Level\-From\-String} (const char $\ast$\-\_\-lvl)}
-\label{rr__c__api_8cpp_a18992075272f6656aa9602305ef871d2}
-
-\item 
-\hypertarget{rr__c__api_8cpp_a3f584ae2e77ac7a7c0e0262989082118}{
-bool rr\-Call\-Conv {\bfseries get\-Log\-Level} (int \&lvl)}
-\label{rr__c__api_8cpp_a3f584ae2e77ac7a7c0e0262989082118}
+\hypertarget{rr__c__api_8cpp_a72092a55e46840ec9ca3767931157831}{
+char $\ast$rr\-Call\-Conv {\bfseries get\-Log\-Level} ()}
+\label{rr__c__api_8cpp_a72092a55e46840ec9ca3767931157831}
 
 \item 
 \hypertarget{rr__c__api_8cpp_ae00b5aaba1d1a85a7177e35898a99fa0}{
@@ -100,44 +95,32 @@ bool rr\-Call\-Conv \hyperlink{group__simulation_ga1313e21d622cd846bdd75071e965e
 \begin{DoxyCompactList}\small\item\em \-Set the time end for a simulation. \end{DoxyCompactList}\item 
 bool rr\-Call\-Conv \hyperlink{group__simulation_ga448ead53bb8913de664cc8ad675b4197}{set\-Num\-Points} (const int \&nr\-Points)
 \begin{DoxyCompactList}\small\item\em \-Set the number of points to generate in a simulation. \end{DoxyCompactList}\item 
-\hypertarget{rr__c__api_8cpp_aff3e1ed6e79cf8b195690a3627ca886f}{
-bool rr\-Call\-Conv {\bfseries get\-Time\-Start} (double \&time\-Start)}
-\label{rr__c__api_8cpp_aff3e1ed6e79cf8b195690a3627ca886f}
-
-\item 
-\hypertarget{rr__c__api_8cpp_a501b9d8dc614daf07592359200a7651e}{
-bool rr\-Call\-Conv {\bfseries get\-Time\-End} (double \&time\-End)}
-\label{rr__c__api_8cpp_a501b9d8dc614daf07592359200a7651e}
-
-\item 
-\hypertarget{rr__c__api_8cpp_aebff067e28e82a21c005d739fa3f9633}{
-bool rr\-Call\-Conv {\bfseries get\-Num\-Points} (int \&num\-Points)}
-\label{rr__c__api_8cpp_aebff067e28e82a21c005d739fa3f9633}
-
-\item 
+bool rr\-Call\-Conv \hyperlink{group__simulation_ga18b4fbd0dc5aa3f25d58367a406f425c}{get\-Time\-Start} (double \&time\-Start)
+\begin{DoxyCompactList}\small\item\em \-Get the value of the current time start. \end{DoxyCompactList}\item 
+bool rr\-Call\-Conv \hyperlink{group__simulation_ga451e7ecddd0431316048a332410b0600}{get\-Time\-End} (double \&time\-End)
+\begin{DoxyCompactList}\small\item\em \-Get the value of the current time end. \end{DoxyCompactList}\item 
+bool rr\-Call\-Conv \hyperlink{group__simulation_gacd9cb734773710f640742a9f040dccc5}{get\-Num\-Points} (int \&num\-Points)
+\begin{DoxyCompactList}\small\item\em \-Get the value of the current number of points. \end{DoxyCompactList}\item 
 bool rr\-Call\-Conv \hyperlink{group__simulation_ga6465c94b6dfed39a6ef614bd0a68cb9b}{set\-Selection\-List} (const char $\ast$list)
-\begin{DoxyCompactList}\small\item\em \-Set the selection list for output from \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or simulate\-Ex() \end{DoxyCompactList}\item 
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv \hyperlink{group__simulation_ga1db0b86ed7fd0d6e19f8df85b7577253}{get\-Selection\-List} ()
-\begin{DoxyCompactList}\small\item\em \-Get the current selection list for \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or simulate\-Ex() \end{DoxyCompactList}\item 
-\hyperlink{struct_r_r_result}{\-R\-R\-Result\-Handle} rr\-Call\-Conv \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate} ()
+\begin{DoxyCompactList}\small\item\em \-Set the selection list for output from \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{simulate\-Ex()} \end{DoxyCompactList}\item 
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv \hyperlink{group__simulation_ga1db0b86ed7fd0d6e19f8df85b7577253}{get\-Selection\-List} ()
+\begin{DoxyCompactList}\small\item\em \-Get the current selection list for \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{simulate\-Ex()} \end{DoxyCompactList}\item 
+\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} rr\-Call\-Conv \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate} ()
 \begin{DoxyCompactList}\small\item\em \-Carry out a time-\/course simulation, use set\-Time\-Start etc to set characteristics. \end{DoxyCompactList}\item 
-\hypertarget{rr__c__api_8cpp_a971c13da0f30e213a856a3d1815bc46f}{
-\hyperlink{struct_r_r_result}{\-R\-R\-Result\-Handle} rr\-Call\-Conv {\bfseries simulate\-Ex} (const double \&time\-Start, const double \&time\-End, const int \&number\-Of\-Points)}
-\label{rr__c__api_8cpp_a971c13da0f30e213a856a3d1815bc46f}
-
-\item 
+\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{simulate\-Ex} (const double \&time\-Start, const double \&time\-End, const int \&number\-Of\-Points)
+\begin{DoxyCompactList}\small\item\em \-Carry out a time-\/course simulation based on the given arguments. \end{DoxyCompactList}\item 
 \hypertarget{rr__c__api_8cpp_ae477af0850ffcc5ecfec69fc86878c3e}{
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Reaction\-Names} ()}
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Reaction\-Names} ()}
 \label{rr__c__api_8cpp_ae477af0850ffcc5ecfec69fc86878c3e}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a9863b43a97bf7f77f545469e5a5d3203}{
-\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change} ()}
+\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change} ()}
 \label{rr__c__api_8cpp_a9863b43a97bf7f77f545469e5a5d3203}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a799007760d23bf52e8eeda2700adec69}{
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change\-Names} ()}
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change\-Names} ()}
 \label{rr__c__api_8cpp_a799007760d23bf52e8eeda2700adec69}
 
 \item 
@@ -147,12 +130,12 @@ bool rr\-Call\-Conv {\bfseries get\-Value} (const char $\ast$species\-I\-D, doub
 
 \item 
 \hypertarget{rr__c__api_8cpp_a6ba17009f2105ecb952c626c269a5d91}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Un\-Scaled\-Elasticity\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Un\-Scaled\-Elasticity\-Matrix} ()}
 \label{rr__c__api_8cpp_a6ba17009f2105ecb952c626c269a5d91}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a7a34d11371d4922bc70a85a7d3f28ff7}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Scaled\-Elasticity\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Scaled\-Elasticity\-Matrix} ()}
 \label{rr__c__api_8cpp_a7a34d11371d4922bc70a85a7d3f28ff7}
 
 \item 
@@ -162,27 +145,27 @@ bool rr\-Call\-Conv {\bfseries set\-Value} (const char $\ast$species\-I\-D, cons
 
 \item 
 \hypertarget{rr__c__api_8cpp_aa632a4a6c53e798e32b57d0c59d55e41}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Stoichiometry\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Stoichiometry\-Matrix} ()}
 \label{rr__c__api_8cpp_aa632a4a6c53e798e32b57d0c59d55e41}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a25d93927f309eae67e04cd958c6689c3}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Conservation\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Conservation\-Matrix} ()}
 \label{rr__c__api_8cpp_a25d93927f309eae67e04cd958c6689c3}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a9e16540c8f6591a9ee187aa59d2b4858}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Link\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Link\-Matrix} ()}
 \label{rr__c__api_8cpp_a9e16540c8f6591a9ee187aa59d2b4858}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a7c123eac51f2c5e36a52fe1fbf4cb164}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-L0\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-L0\-Matrix} ()}
 \label{rr__c__api_8cpp_a7c123eac51f2c5e36a52fe1fbf4cb164}
 
 \item 
 \hypertarget{rr__c__api_8cpp_ab28801d5095c1b9e4f8c45c52efe1dde}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Nr\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Nr\-Matrix} ()}
 \label{rr__c__api_8cpp_ab28801d5095c1b9e4f8c45c52efe1dde}
 
 \item 
@@ -196,23 +179,17 @@ char $\ast$rr\-Call\-Conv {\bfseries get\-Last\-Error} ()}
 \label{rr__c__api_8cpp_aed11ca5b3d2ffcc6e944c5b4b83ec85f}
 
 \item 
-\hypertarget{rr__c__api_8cpp_a1b2443b96e7e35496832775cedaf633f}{
-bool rr\-Call\-Conv {\bfseries reset} ()}
-\label{rr__c__api_8cpp_a1b2443b96e7e35496832775cedaf633f}
-
-\item 
-\hypertarget{rr__c__api_8cpp_ab3e4c69812d394b4fbc8602e403753f6}{
-int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Reactions} ()}
-\label{rr__c__api_8cpp_ab3e4c69812d394b4fbc8602e403753f6}
-
-\item 
+bool rr\-Call\-Conv \hyperlink{group__simulation_ga07dfaf16ab38015aab6b400665ace2b2}{reset} ()
+\begin{DoxyCompactList}\small\item\em \-Reset all floating species concentrations to their intial conditions. \end{DoxyCompactList}\item 
+int rr\-Call\-Conv \hyperlink{group__state_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
+\begin{DoxyCompactList}\small\item\em \-Obtain the number of reactions in the loaded model. \end{DoxyCompactList}\item 
 \hypertarget{rr__c__api_8cpp_a34aa5ee5d65218fcae2d7740dd8c1afc}{
 bool rr\-Call\-Conv {\bfseries get\-Reaction\-Rate} (const int \&rate\-Nr, double \&value)}
 \label{rr__c__api_8cpp_a34aa5ee5d65218fcae2d7740dd8c1afc}
 
 \item 
 \hypertarget{rr__c__api_8cpp_ac6baa5083d5e92164bf30cd10c3e62d5}{
-\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Reaction\-Rates} ()}
+\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Reaction\-Rates} ()}
 \label{rr__c__api_8cpp_ac6baa5083d5e92164bf30cd10c3e62d5}
 
 \item 
@@ -222,7 +199,7 @@ int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Boundary\-Species} ()}
 
 \item 
 \hypertarget{rr__c__api_8cpp_afa6c810a7f7754d71b95b462896c79c8}{
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Boundary\-Species\-Names} ()}
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Boundary\-Species\-Names} ()}
 \label{rr__c__api_8cpp_afa6c810a7f7754d71b95b462896c79c8}
 
 \item 
@@ -232,7 +209,7 @@ int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Floating\-Species} ()}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a8e909908668d111f9c3ce6d37d50a2fa}{
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Names} ()}
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Names} ()}
 \label{rr__c__api_8cpp_a8e909908668d111f9c3ce6d37d50a2fa}
 
 \item 
@@ -242,22 +219,22 @@ int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Global\-Parameters} ()}
 
 \item 
 \hypertarget{rr__c__api_8cpp_afabc302c65386ba0a547069125f2ae97}{
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Global\-Parameter\-Names} ()}
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Global\-Parameter\-Names} ()}
 \label{rr__c__api_8cpp_afabc302c65386ba0a547069125f2ae97}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a813af7b3fae24bcf977f89254831365e}{
-\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Concentrations} ()}
+\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Concentrations} ()}
 \label{rr__c__api_8cpp_a813af7b3fae24bcf977f89254831365e}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a8c0ab8c2fdc7adab238e77e6f916c64f}{
-\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Boundary\-Species\-Concentrations} ()}
+\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Boundary\-Species\-Concentrations} ()}
 \label{rr__c__api_8cpp_a8c0ab8c2fdc7adab238e77e6f916c64f}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a9d779bd8ed4135e086402d898081e608}{
-\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Initial\-Concentrations} ()}
+\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Initial\-Concentrations} ()}
 \label{rr__c__api_8cpp_a9d779bd8ed4135e086402d898081e608}
 
 \item 
@@ -281,18 +258,15 @@ bool rr\-Call\-Conv {\bfseries set\-Floating\-Species\-Initial\-Concentrations} 
 \label{rr__c__api_8cpp_ae9f3d152f1d29ed66c0ff868a24e26c5}
 
 \item 
-\hypertarget{rr__c__api_8cpp_a4f964c62227305dea6ca507b697d18ff}{
-bool rr\-Call\-Conv {\bfseries one\-Step} (const double \&current\-Time, const double \&step\-Size, double \&value)}
-\label{rr__c__api_8cpp_a4f964c62227305dea6ca507b697d18ff}
-
-\item 
+bool rr\-Call\-Conv \hyperlink{group__simulation_ga190fff177accdfbc9c192c4993807e2e}{one\-Step} (const double \&current\-Time, const double \&step\-Size, double \&value)
+\begin{DoxyCompactList}\small\item\em \-Carry out a one step integration of the model. \end{DoxyCompactList}\item 
 \hypertarget{rr__c__api_8cpp_ac5507d3939b233c737e28dd3eb076b10}{
-\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Global\-Parameter\-Values} ()}
+\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Global\-Parameter\-Values} ()}
 \label{rr__c__api_8cpp_ac5507d3939b233c737e28dd3eb076b10}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a62bb67226ac0983aa98f5ae2b6e39221}{
-\hyperlink{struct_r_r_array_list2}{\-R\-R\-Array\-List2\-Handle} rr\-Call\-Conv {\bfseries get\-Available\-Symbols} ()}
+\hyperlink{rr__c__types_8h_a21a10f01ac4fd34c61e7e7d12af9891d}{\-R\-R\-Array\-List2\-Handle} rr\-Call\-Conv {\bfseries get\-Available\-Symbols} ()}
 \label{rr__c__api_8cpp_a62bb67226ac0983aa98f5ae2b6e39221}
 
 \item 
@@ -341,11 +315,8 @@ int rr\-Call\-Conv {\bfseries get\-Number\-Of\-Independent\-Species} ()}
 \label{rr__c__api_8cpp_afd904ec6605b0fa942dd51f4f931dcbb}
 
 \item 
-\hypertarget{rr__c__api_8cpp_aa51ba22ca904260718b81ac2ded66d28}{
-bool rr\-Call\-Conv {\bfseries steady\-State} (double \&value)}
-\label{rr__c__api_8cpp_aa51ba22ca904260718b81ac2ded66d28}
-
-\item 
+bool rr\-Call\-Conv \hyperlink{rr__c__api_8cpp_aa51ba22ca904260718b81ac2ded66d28}{steady\-State} (double \&value)
+\begin{DoxyCompactList}\small\item\em \-Get the value of the current number of points. \end{DoxyCompactList}\item 
 \hypertarget{rr__c__api_8cpp_afb7fb0d6642f64eaef5a01bd232fb8eb}{
 bool rr\-Call\-Conv {\bfseries eval\-Model} ()}
 \label{rr__c__api_8cpp_afb7fb0d6642f64eaef5a01bd232fb8eb}
@@ -356,33 +327,30 @@ char $\ast$rr\-Call\-Conv {\bfseries get\-Param\-Promoted\-S\-B\-M\-L} (const ch
 \label{rr__c__api_8cpp_ac423e463cb9f7f1220fe40f0f39bac20}
 
 \item 
-\hypertarget{rr__c__api_8cpp_acf80de2b00a22da5a784d55fa4af16d3}{
-\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries compute\-Steady\-State\-Values} ()}
-\label{rr__c__api_8cpp_acf80de2b00a22da5a784d55fa4af16d3}
-
-\item 
+\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv \hyperlink{rr__c__api_8cpp_acf80de2b00a22da5a784d55fa4af16d3}{compute\-Steady\-State\-Values} ()
+\begin{DoxyCompactList}\small\item\em \-A convenient method for returning a vector of the steady state species concentrations. \end{DoxyCompactList}\item 
 \hypertarget{rr__c__api_8cpp_a98839913bdb2b401bf9d9280ca772662}{
 bool rr\-Call\-Conv {\bfseries set\-Steady\-State\-Selection\-List} (const char $\ast$list)}
 \label{rr__c__api_8cpp_a98839913bdb2b401bf9d9280ca772662}
 
 \item 
 \hypertarget{rr__c__api_8cpp_ac2ad7c34e5d4c3eb18505f500e9e8dd2}{
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Steady\-State\-Selection\-List} ()}
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Steady\-State\-Selection\-List} ()}
 \label{rr__c__api_8cpp_ac2ad7c34e5d4c3eb18505f500e9e8dd2}
 
 \item 
 \hypertarget{rr__c__api_8cpp_ade9b2f20e0e1abd2c510a7c237ecc231}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Full\-Jacobian} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Full\-Jacobian} ()}
 \label{rr__c__api_8cpp_ade9b2f20e0e1abd2c510a7c237ecc231}
 
 \item 
 \hypertarget{rr__c__api_8cpp_aa7bc84bbd19968cb3934971cc22e7de9}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Reduced\-Jacobian} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Reduced\-Jacobian} ()}
 \label{rr__c__api_8cpp_aa7bc84bbd19968cb3934971cc22e7de9}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a7d1dc1f725e9018a3fbd3a676cd2aa2e}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Eigen\-Values} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Eigen\-Values} ()}
 \label{rr__c__api_8cpp_a7d1dc1f725e9018a3fbd3a676cd2aa2e}
 
 \item 
@@ -397,17 +365,17 @@ bool rr\-Call\-Conv {\bfseries get\-Scaled\-Floating\-Species\-Elasticity} (cons
 
 \item 
 \hypertarget{rr__c__api_8cpp_a378d2ce03d6a250c756eebf4af08ee70}{
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Initial\-Condition\-Names} ()}
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Floating\-Species\-Initial\-Condition\-Names} ()}
 \label{rr__c__api_8cpp_a378d2ce03d6a250c756eebf4af08ee70}
 
 \item 
 \hypertarget{rr__c__api_8cpp_ad1fdbf26b95c79ad919a037828506936}{
-\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change\-Ex} (const \hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} vec)}
+\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Rates\-Of\-Change\-Ex} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)}
 \label{rr__c__api_8cpp_ad1fdbf26b95c79ad919a037828506936}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a92f510f517fc8819c1626acc439f62f8}{
-\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Reaction\-Rates\-Ex} (const \hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} vec)}
+\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries get\-Reaction\-Rates\-Ex} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)}
 \label{rr__c__api_8cpp_a92f510f517fc8819c1626acc439f62f8}
 
 \item 
@@ -417,7 +385,7 @@ bool rr\-Call\-Conv {\bfseries get\-Scaled\-Floating\-Species\-Elasticity} (cons
 
 \item 
 \hypertarget{rr__c__api_8cpp_a0292c6ab30a61bb0dd7bd205a0d9c3c0}{
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Rate\-Of\-Change\-Names} ()}
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Rate\-Of\-Change\-Names} ()}
 \label{rr__c__api_8cpp_a0292c6ab30a61bb0dd7bd205a0d9c3c0}
 
 \item 
@@ -432,7 +400,7 @@ char $\ast$rr\-Call\-Conv {\bfseries get\-Capabilities} ()}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a2d8d226eebecf5a4783a5c38e680e06c}{
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Eigen\-Value\-Names} ()}
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Eigen\-Value\-Names} ()}
 \label{rr__c__api_8cpp_a2d8d226eebecf5a4783a5c38e680e06c}
 
 \item 
@@ -442,22 +410,22 @@ char $\ast$rr\-Call\-Conv {\bfseries get\-Capabilities} ()}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a7181c8093e9c541eff7c2ebfb1a7005c}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Unscaled\-Concentration\-Control\-Coefficient\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Unscaled\-Concentration\-Control\-Coefficient\-Matrix} ()}
 \label{rr__c__api_8cpp_a7181c8093e9c541eff7c2ebfb1a7005c}
 
 \item 
 \hypertarget{rr__c__api_8cpp_ad0b967d8f42d5c22add85b5ec239cf40}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Scaled\-Concentration\-Control\-Coefficient\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Scaled\-Concentration\-Control\-Coefficient\-Matrix} ()}
 \label{rr__c__api_8cpp_ad0b967d8f42d5c22add85b5ec239cf40}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a3e6c4e16a3e912371064d4d0f2ff7f66}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Unscaled\-Flux\-Control\-Coefficient\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Unscaled\-Flux\-Control\-Coefficient\-Matrix} ()}
 \label{rr__c__api_8cpp_a3e6c4e16a3e912371064d4d0f2ff7f66}
 
 \item 
 \hypertarget{rr__c__api_8cpp_ae8cf52b57fe81d92ea23a0106da04d44}{
-\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Scaled\-Flux\-Control\-Coefficient\-Matrix} ()}
+\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} rr\-Call\-Conv {\bfseries get\-Scaled\-Flux\-Control\-Coefficient\-Matrix} ()}
 \label{rr__c__api_8cpp_ae8cf52b57fe81d92ea23a0106da04d44}
 
 \item 
@@ -492,7 +460,7 @@ bool rr\-Call\-Conv {\bfseries set\-Compartment\-By\-Index} (const int \&index, 
 
 \item 
 \hypertarget{rr__c__api_8cpp_ad6aa19a51c57b8c5e8f4ccbc88ae8faf}{
-\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Compartment\-Names} ()}
+\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} rr\-Call\-Conv {\bfseries get\-Compartment\-Names} ()}
 \label{rr__c__api_8cpp_ad6aa19a51c57b8c5e8f4ccbc88ae8faf}
 
 \item 
@@ -502,13 +470,13 @@ bool rr\-Call\-Conv {\bfseries get\-Rate\-Of\-Change} (const int \&index, double
 
 \item 
 \hypertarget{rr__c__api_8cpp_a6fe231100339ef0e3c816987e7d89e70}{
-char $\ast$rr\-Call\-Conv {\bfseries print\-Array\-List} (const \hyperlink{struct_r_r_array_list2}{\-R\-R\-Array\-List2\-Handle} list)}
+char $\ast$rr\-Call\-Conv {\bfseries print\-Array\-List} (const \hyperlink{rr__c__types_8h_a21a10f01ac4fd34c61e7e7d12af9891d}{\-R\-R\-Array\-List2\-Handle} list)}
 \label{rr__c__api_8cpp_a6fe231100339ef0e3c816987e7d89e70}
 
 \item 
-\hypertarget{rr__c__api_8cpp_ac8e76de694ffdd68c73fa824bf3c7e42}{
-char $\ast$rr\-Call\-Conv {\bfseries print\-List} (const \hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} list)}
-\label{rr__c__api_8cpp_ac8e76de694ffdd68c73fa824bf3c7e42}
+\hypertarget{rr__c__api_8cpp_a66c2c151c553f62bafd8c282eb20d056}{
+char $\ast$rr\-Call\-Conv {\bfseries print\-String\-List} (const \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} list)}
+\label{rr__c__api_8cpp_a66c2c151c553f62bafd8c282eb20d056}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a7e489e850335f7c142102590a05fb71e}{
@@ -517,22 +485,22 @@ char $\ast$rr\-Call\-Conv {\bfseries print\-String\-Array\-List} (const \hyperli
 
 \item 
 \hypertarget{rr__c__api_8cpp_a094c44fd0998ce2d4fd07b942ae8cbec}{
-char $\ast$rr\-Call\-Conv {\bfseries print\-Result} (const \hyperlink{struct_r_r_result}{\-R\-R\-Result\-Handle} result)}
+char $\ast$rr\-Call\-Conv {\bfseries print\-Result} (const \hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)}
 \label{rr__c__api_8cpp_a094c44fd0998ce2d4fd07b942ae8cbec}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a399804f781f08c81c3bcf2360f4d3588}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-Matrix\-As\-String} (const \hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} matrix\-Handle)}
+char $\ast$rr\-Call\-Conv {\bfseries get\-Matrix\-As\-String} (const \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} matrix\-Handle)}
 \label{rr__c__api_8cpp_a399804f781f08c81c3bcf2360f4d3588}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a8b32961358339f86ddbea6e16212c9fd}{
-char $\ast$rr\-Call\-Conv {\bfseries print\-Matrix} (const \hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} matrix\-Handle)}
+char $\ast$rr\-Call\-Conv {\bfseries print\-Matrix} (const \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} matrix\-Handle)}
 \label{rr__c__api_8cpp_a8b32961358339f86ddbea6e16212c9fd}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a0fffcb349b180e0dba1bc4dfee60c6a2}{
-char $\ast$rr\-Call\-Conv {\bfseries print\-Vector} (\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} vec\-Handle)}
+char $\ast$rr\-Call\-Conv {\bfseries print\-Vector} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec\-Handle)}
 \label{rr__c__api_8cpp_a0fffcb349b180e0dba1bc4dfee60c6a2}
 
 \item 
@@ -542,12 +510,12 @@ bool rr\-Call\-Conv {\bfseries free\-R\-R\-Instance} (\-R\-R\-Handle handle)}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a281c58b33a457660dec1a4b8cc4cbcd6}{
-bool rr\-Call\-Conv {\bfseries free\-Matrix} (\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} matrix)}
+bool rr\-Call\-Conv {\bfseries free\-Matrix} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} matrix)}
 \label{rr__c__api_8cpp_a281c58b33a457660dec1a4b8cc4cbcd6}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a8a98df91a3b072fa1af8e03afe406a22}{
-bool rr\-Call\-Conv {\bfseries free\-Result} (\hyperlink{struct_r_r_result}{\-R\-R\-Result\-Handle} handle)}
+bool rr\-Call\-Conv {\bfseries free\-Result} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} handle)}
 \label{rr__c__api_8cpp_a8a98df91a3b072fa1af8e03afe406a22}
 
 \item 
@@ -557,7 +525,7 @@ bool rr\-Call\-Conv {\bfseries free\-Text} (char $\ast$text)}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a7061c4088f21f2a76d8749f7a7f7a330}{
-bool rr\-Call\-Conv {\bfseries free\-String\-List} (\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} sl)}
+bool rr\-Call\-Conv {\bfseries free\-String\-List} (\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} sl)}
 \label{rr__c__api_8cpp_a7061c4088f21f2a76d8749f7a7f7a330}
 
 \item 
@@ -567,12 +535,12 @@ bool rr\-Call\-Conv {\bfseries free\-Label\-String\-List} (\hyperlink{struct_r_r
 
 \item 
 \hypertarget{rr__c__api_8cpp_acc02ce0656abd21218c5e0013358aa82}{
-bool rr\-Call\-Conv {\bfseries free\-Vector} (\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} vector)}
+bool rr\-Call\-Conv {\bfseries free\-Vector} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector)}
 \label{rr__c__api_8cpp_acc02ce0656abd21218c5e0013358aa82}
 
 \item 
 \hypertarget{rr__c__api_8cpp_ab18593cd23825238027db9d353965443}{
-bool rr\-Call\-Conv {\bfseries free\-C\-Code} (\hyperlink{struct_r_r_c_code}{\-R\-R\-C\-Code\-Handle} code)}
+bool rr\-Call\-Conv {\bfseries free\-C\-Code} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)}
 \label{rr__c__api_8cpp_ab18593cd23825238027db9d353965443}
 
 \item 
@@ -581,83 +549,88 @@ bool rr\-Call\-Conv {\bfseries free\-String\-Array\-List} (\hyperlink{struct_r_r
 \label{rr__c__api_8cpp_a98e2527fe73f6998d4111dd293cf39f0}
 
 \item 
+\hypertarget{rr__c__api_8cpp_a1b79ca09996f2ea42b6f541ec3ac906e}{
+bool rr\-Call\-Conv {\bfseries free\-Array\-List} (\hyperlink{rr__c__types_8h_a21a10f01ac4fd34c61e7e7d12af9891d}{\-R\-R\-Array\-List2\-Handle} the\-List)}
+\label{rr__c__api_8cpp_a1b79ca09996f2ea42b6f541ec3ac906e}
+
+\item 
 \hypertarget{rr__c__api_8cpp_af06b14742e7849a33612aa34560d551d}{
 void rr\-Call\-Conv {\bfseries \-Pause} ()}
 \label{rr__c__api_8cpp_af06b14742e7849a33612aa34560d551d}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a77b085bfafcdb68e464cb805c2b0f56c}{
-\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries create\-Vector\-A\-P\-I} (int size)}
+\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} rr\-Call\-Conv {\bfseries create\-Vector\-A\-P\-I} (int size)}
 \label{rr__c__api_8cpp_a77b085bfafcdb68e464cb805c2b0f56c}
 
 \item 
 \hypertarget{rr__c__api_8cpp_af013dfbc4eaa7ea40acaae496ffa68d1}{
-int rr\-Call\-Conv {\bfseries get\-Vector\-Length} (\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} vector)}
+int rr\-Call\-Conv {\bfseries get\-Vector\-Length} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector)}
 \label{rr__c__api_8cpp_af013dfbc4eaa7ea40acaae496ffa68d1}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a5e00f4171064fcca4dd4ad59513bc20d}{
-bool rr\-Call\-Conv {\bfseries get\-Vector\-Element} (\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} vector, int index, double \&value)}
+bool rr\-Call\-Conv {\bfseries get\-Vector\-Element} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector, int index, double \&value)}
 \label{rr__c__api_8cpp_a5e00f4171064fcca4dd4ad59513bc20d}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a2df9b412dac0aa2119f87b05ef822442}{
-bool rr\-Call\-Conv {\bfseries set\-Vector\-Element} (\hyperlink{struct_r_r_vector}{\-R\-R\-Vector\-Handle} vector, int index, double value)}
+bool rr\-Call\-Conv {\bfseries set\-Vector\-Element} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vector, int index, double value)}
 \label{rr__c__api_8cpp_a2df9b412dac0aa2119f87b05ef822442}
 
 \item 
 \hypertarget{rr__c__api_8cpp_ab9fc360e06df3b339cbcad724ac48621}{
-int rr\-Call\-Conv {\bfseries get\-String\-List\-Length} (\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} string\-List)}
+int rr\-Call\-Conv {\bfseries get\-String\-List\-Length} (\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} string\-List)}
 \label{rr__c__api_8cpp_ab9fc360e06df3b339cbcad724ac48621}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a3804e966c72d064d98fffdd3306981d2}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-String\-List\-Element} (\hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List\-Handle} string\-List, int index)}
+char $\ast$rr\-Call\-Conv {\bfseries get\-String\-List\-Element} (\hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} string\-List, int index)}
 \label{rr__c__api_8cpp_a3804e966c72d064d98fffdd3306981d2}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a2a96f8f001bed37321356fd33df6f6b3}{
-int rr\-Call\-Conv {\bfseries get\-Matrix\-Num\-Rows} (\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} m)}
+int rr\-Call\-Conv {\bfseries get\-Matrix\-Num\-Rows} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m)}
 \label{rr__c__api_8cpp_a2a96f8f001bed37321356fd33df6f6b3}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a980d1cb5da5fe4bb52dcd16a2a6e011f}{
-int rr\-Call\-Conv {\bfseries get\-Matrix\-Num\-Cols} (\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} m)}
+int rr\-Call\-Conv {\bfseries get\-Matrix\-Num\-Cols} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m)}
 \label{rr__c__api_8cpp_a980d1cb5da5fe4bb52dcd16a2a6e011f}
 
 \item 
 \hypertarget{rr__c__api_8cpp_aa6c5bb61e5d379c060bb9b59e43a87aa}{
-bool rr\-Call\-Conv {\bfseries get\-Matrix\-Element} (\hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix\-Handle} m, int r, int c, double \&value)}
+bool rr\-Call\-Conv {\bfseries get\-Matrix\-Element} (\hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} m, int r, int c, double \&value)}
 \label{rr__c__api_8cpp_aa6c5bb61e5d379c060bb9b59e43a87aa}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a0a29d0188c6548bc05b9dfeb0d8d77c0}{
-int rr\-Call\-Conv {\bfseries get\-Result\-Num\-Rows} (\hyperlink{struct_r_r_result}{\-R\-R\-Result\-Handle} result)}
+int rr\-Call\-Conv {\bfseries get\-Result\-Num\-Rows} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)}
 \label{rr__c__api_8cpp_a0a29d0188c6548bc05b9dfeb0d8d77c0}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a89e6b0805171b48f302a14a4eb49e2b4}{
-int rr\-Call\-Conv {\bfseries get\-Result\-Num\-Cols} (\hyperlink{struct_r_r_result}{\-R\-R\-Result\-Handle} result)}
+int rr\-Call\-Conv {\bfseries get\-Result\-Num\-Cols} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)}
 \label{rr__c__api_8cpp_a89e6b0805171b48f302a14a4eb49e2b4}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a3b780a3fbf975ee0ce341461259adb22}{
-bool rr\-Call\-Conv {\bfseries get\-Result\-Element} (\hyperlink{struct_r_r_result}{\-R\-R\-Result\-Handle} result, int r, int c, double \&value)}
+bool rr\-Call\-Conv {\bfseries get\-Result\-Element} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result, int r, int c, double \&value)}
 \label{rr__c__api_8cpp_a3b780a3fbf975ee0ce341461259adb22}
 
 \item 
 \hypertarget{rr__c__api_8cpp_aa33f9e215fea6d109161ff6f206d940b}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-Result\-Column\-Label} (\hyperlink{struct_r_r_result}{\-R\-R\-Result\-Handle} result, int column)}
+char $\ast$rr\-Call\-Conv {\bfseries get\-Result\-Column\-Label} (\hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result, int column)}
 \label{rr__c__api_8cpp_aa33f9e215fea6d109161ff6f206d940b}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a410608d13508d461f687c7afeb12be19}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-C\-Code\-Header} (\hyperlink{struct_r_r_c_code}{\-R\-R\-C\-Code\-Handle} code)}
+char $\ast$rr\-Call\-Conv {\bfseries get\-C\-Code\-Header} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)}
 \label{rr__c__api_8cpp_a410608d13508d461f687c7afeb12be19}
 
 \item 
 \hypertarget{rr__c__api_8cpp_a517ac51c869654bed801ac91a2a05c56}{
-char $\ast$rr\-Call\-Conv {\bfseries get\-C\-Code\-Source} (\hyperlink{struct_r_r_c_code}{\-R\-R\-C\-Code\-Handle} code)}
+char $\ast$rr\-Call\-Conv {\bfseries get\-C\-Code\-Source} (\hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle} code)}
 \label{rr__c__api_8cpp_a517ac51c869654bed801ac91a2a05c56}
 
 \end{DoxyCompactItemize}
@@ -698,3 +671,46 @@ $<$-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\
 \-Y\-O\-U \-C\-A\-N\-N\-O\-T\-:
 
 redistribute any piece of this software without proper attribution; 
+
+\subsection{\-Function \-Documentation}
+\hypertarget{rr__c__api_8cpp_acf80de2b00a22da5a784d55fa4af16d3}{
+\index{rr\-\_\-c\-\_\-api.\-cpp@{rr\-\_\-c\-\_\-api.\-cpp}!compute\-Steady\-State\-Values@{compute\-Steady\-State\-Values}}
+\index{compute\-Steady\-State\-Values@{compute\-Steady\-State\-Values}!rr_c_api.cpp@{rr\-\_\-c\-\_\-api.\-cpp}}
+\subsubsection[{compute\-Steady\-State\-Values}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-R\-R\-Vector\-Handle} rr\-Call\-Conv compute\-Steady\-State\-Values (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8cpp_acf80de2b00a22da5a784d55fa4af16d3}
+
+
+\-A convenient method for returning a vector of the steady state species concentrations. 
+
+\-Example\-: \-R\-R\-Vector\-Handle values = compute\-Steady\-State\-Values ();
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns the vector of steady state values or nil if an error occured 
+\end{DoxyReturn}
+\hypertarget{rr__c__api_8cpp_aa51ba22ca904260718b81ac2ded66d28}{
+\index{rr\-\_\-c\-\_\-api.\-cpp@{rr\-\_\-c\-\_\-api.\-cpp}!steady\-State@{steady\-State}}
+\index{steady\-State@{steady\-State}!rr_c_api.cpp@{rr\-\_\-c\-\_\-api.\-cpp}}
+\subsubsection[{steady\-State}]{\setlength{\rightskip}{0pt plus 5cm}bool rr\-Call\-Conv steady\-State (
+\begin{DoxyParamCaption}
+\item[{double \&}]{value}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8cpp_aa51ba22ca904260718b81ac2ded66d28}
+
+
+\-Get the value of the current number of points. 
+
+\-Example\-: status = steady\-State (\&closeness\-To\-Steady\-State);
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em double$\ast$} & value \-This value is set during the call and indicates how close the solution is to the steady state. \-The smaller the value the better. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Returns \-True if successful 
+\end{DoxyReturn}
