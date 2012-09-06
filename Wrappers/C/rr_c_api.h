@@ -768,28 +768,28 @@ C_DECL_SPEC int rrCallConv getNumberOfCompartments ();
  \brief Returns the number of boundary species in the model
  \ingroup boundary
 */
-C_C_DECL_SPEC int rrCallConv getNumberOfBoundarySpecies();
+C_DECL_SPEC int rrCallConv getNumberOfBoundarySpecies();
 
 
 /*!
  \brief Returns the number of floating species in the model
  \ingroup floating
 */
-C_C_DECL_SPEC int rrCallConv getNumberOfFloatingSpecies();
+C_DECL_SPEC int rrCallConv getNumberOfFloatingSpecies();
 
 
 /*!
  \brief Returns the number of global parameters in the model
  \ingroup parameters
 */
-C_C_DECL_SPEC int rrCallConv getNumberOfGlobalParameters();
+C_DECL_SPEC int rrCallConv getNumberOfGlobalParameters();
 
 
 /*!
  \brief Returns the number of dependent species in the model
  \ingroup floating
 */
-C_C_DECL_SPEC int rrCallConv getNumberOfDependentSpecies();
+C_DECL_SPEC int rrCallConv getNumberOfDependentSpecies();
 
 
 // Get number family
@@ -797,7 +797,7 @@ C_C_DECL_SPEC int rrCallConv getNumberOfDependentSpecies();
  \brief Returns the number of independent species in the model
  \ingroup floating
 */
-C_C_DECL_SPEC int rrCallConv getNumberOfIndependentSpecies();
+C_DECL_SPEC int rrCallConv getNumberOfIndependentSpecies();
 
 // -----------------------------------------------------------------------
 /** \} */
