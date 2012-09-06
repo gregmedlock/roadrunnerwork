@@ -52,10 +52,12 @@ extern "C"
                                     /*Hand the client a HANDLE, i.e. ptr to structure */
 typedef void* RRHandle;
 
+/*!@struct*/ 
+/*!@brief Vector Structure */ 
 typedef struct RRVector
 {
-    int             Size;
-    double*         Data;
+    int             Size;  /*!< The number of elements in the vector */
+    double*         Data;  /*!< Point to an array of vector items */
 } *RRVectorHandle;
 
 
