@@ -768,7 +768,7 @@ C_DECL_SPEC char* rrCallConv  getResultColumnLabel (RRResultHandle result, int c
 
  Example: header = getCCodeHeader (code);
 
- \param RRCCodeHandle header A pointer to a string that stores the header code
+  \param RRCCodeHandle code - A pointer to a string that stores the header code
   \return Returns True if succesful
  \ingroup helperRoutines
 */
@@ -779,7 +779,7 @@ C_DECL_SPEC char* rrCallConv  getCCodeHeader (RRCCodeHandle code);
 
  Example: source = getCCodeSource (code);
 
- \param RRCCodeHandle header A pointer to a string that stores the main source code
+ \param RRCCodeHandle code - A pointer to a string that stores the main source code
  \return Returns True if succesful
  \ingroup helperRoutines
 */
