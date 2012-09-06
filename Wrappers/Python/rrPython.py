@@ -1,10 +1,6 @@
-# Place this script in your ...Python27\\Lib  directory so that it can be
-# imported with just "import rrPython" in test scripts.
-
-"""@package rrPython
-This module allows access to the rr_c_api.dll from python
-
-"""
+##@package rrPython
+#
+#This module allows access to the rr_c_api.dll from python"""
 
 import sys
 import os
@@ -20,14 +16,15 @@ rr = handle.getRRInstance()
 #Latest
 handle.writeSBML.restype = c_char_p
 
+##Returns the SBML with the current parameterset
 def writeSBML():
     return handle.writeSBML()
 
 #Utility and informational methods
 handle.getVersion.restype = c_char_p
 
+##Returns the version of the C API
 def getVersion():
-    """Returns the version of the C API"""
     return handle.getVersion()
 
 #Logging
@@ -40,8 +37,8 @@ handle.getCopyright.restype = c_char_p
 handle.setTempFolder.restype = c_bool
 handle.getTempFolder.restype = c_char_p
 
+##Allows a log file to be written
 def enableLogging():
-    """Allows a log file to be written"""
     return handle.enableLogging()
 
 def setLogLevel(lvl):
@@ -54,37 +51,39 @@ def getLogLevel():
     else:
         raise RuntimeError('Index out of range')
 
+##Returns the name of the log file
 def getLogFileName():
-    """Returns the name of the log file"""
     return handle.getLogFileName()
 
+##Returns the date of the installed C API
 def getBuildDate():
-    """Returns the date of the installed C API"""
     return handle.getBuildDate()
 
+##Returns the copyright date
 def getCopyright():
-    """Returns the copyright date"""
     return handle.getCopyright()
 
+##Sets the write location for the temporary file
+#
+#Takes a string as an argument
 def setTempFolder(folder):
-    """Sets the write location for the temporary file
-
-    Takes a string as an argument"""
     return handle.setTempFolder(folder)
 
+##Returns the full path of the temporary folder
 def getTempFolder():
-    """Returns the full path of the temporary folder"""
     return handle.getTempFolder()
 
 #Error Handling
 handle.hasError.restype = c_bool
 handle.getLastError.restype = c_char_p
 
+##
+#
 def hasError():
     return handle.hasError()
 
+##Returns the last error
 def getLastError():
-    """Returns the last error"""
     return handle.getLastError()
 
 #RoadRunner API
@@ -94,50 +93,50 @@ def getLastError():
 #Flags/Options
 handle.setComputeAndAssignConservationLaws.restype = c_bool
 
+##Turns on/off conservation laws
+#
+#Takes a 1 (on) or 0 (off) as an argument
 def setComputeAndAssignConservationLaws(OnOrOff):
-    """Turns on/off conservation laws
-
-    Takes a 1 (on) or 0 (off) as an argument"""
     return handle.setComputeAndAssignConservationLaws(OnOrOff)
 
 #Load SBML methods
 handle.loadSBML.restype = c_bool
 handle.loadSBMLFromFile.restype = c_bool
 
+##Loads SBML model from a string
+#
+#Takes a string as an argument
 def loadSBML(sbml):
-    """Loads SBML model from a string
-
-    Takes a string as an argument"""
     return handle.loadSBML(sbml)
 
+##Loads SBML model from a file
+#
+#Takes a string as an argument
 def loadSBMLFromFile(sbml):
-    """Loads SBML model from a file
-
-    Takes a string as an argument"""
     return handle.loadSBMLFromFile(sbml)
 
 #SBML utility methods
 handle.getParamPromotedSBML.restype = c_char_p
 handle.getSBML.restype = c_char_p
 
+##Returns the SBML with the current parameterset
 def getParamPromotedSBML(sArg):
-    """Returns the SBML with the current parameterset"""
     return handle.getParamPromotedSBML(sArg)
 
+##Returns the SBML model that is currently loaded
 def getSBML():
-    """Returns the SBML model that is currently loaded"""
     return handle.getSBML()
 
 #Get and set capability routines
 handle.setCapabilities.restype = c_bool
 handle.getCapabilities.restype = c_char_p
 
+##Sets simulator capabilities
 def setCapabilities(caps):
-    """Sets simulator capabilities"""
     return handle.setCapabilities(caps)
 
+##Returns simulator capabilities
 def getCapabilities():
-    """Returns simulator capabilities"""                      #not yet implemented
     return handle.getCapabilities()
 
 #Simulation Methods
@@ -150,53 +149,50 @@ handle.getTimeStart.restype = c_bool
 handle.getTimeEnd.restype = c_bool
 handle.getNumPoints.restype = c_bool
 
+##Sets the start time for the simulation
+#
+#Takes a double as an argument
 def setTimeStart(timeStart):
-    """Sets the start time for the simulation
-
-    Takes a double as an argument"""
     return handle.setTimeStart (byref (c_double(timeStart)))
 
+##Sets the end time for the simulation
+#
+#Takes a double as an argument
 def setTimeEnd(timeEnd):
-    """Sets the end time for the simulation
-
-    Takes a double as an argument"""
     return handle.setTimeEnd (byref (c_double(timeEnd)))
 
+##Sets the number of points for the simulation
+#
+#Takes an int as an argument
 def setNumPoints(numPoints):
-    """Sets the number of points for the simulation
-
-    Takes an int as an argument"""
     return handle.setNumPoints(byref (c_int(numPoints)))
 
+##Sets the list of variables returned by simulate()
+#
+#Available symbols for setSelectionList can be found by using getAvailableSymbols() after loading a model
+#
+#Takes a string with variable names separated by a space or a comma as an argument
 def setSelectionList(list):
-    """Sets the list of variables returned by simulate()
-
-    Available symbols for setSelectionList can be found by using getAvailableSymbols() after loading a model
-
-    Takes a string with variable names separated by a space or a comma as an argument"""
     return handle.setSelectionList(list)
 
+##Returns the list of variables returned by simulate()
 def getSelectionList():
-    """Returns the list of variables returned by simulate()"""
     value = handle.getSelectionList()
     result = handle.printList(value)
     handle.freeStringList(value)
     return result
 
+##Simulates the model that is currently loaded and returns values for variables as chosen with setSelectionList()
 def simulate():
-    """Simulates the model that is currently loaded and returns values for variables as chosen with setSelectionList()"""
     value = handle.simulate()
     result = handle.printResult(value)
     handle.freeResult(value)
     return result
 
-#psimulate = POINTER(simulate())
-#simulate, send results to array, free memory
-
+##Simulates a reaction in a given period and with a given number of points
+#
+#Takes (double,double,int) as an argument for timeStart, timeEnd, and numberOfPoints, respectively
 def simulateEx(timeStart,timeEnd,numberOfPoints):
-    """Simulates a reaction in a given period and with a given number of points
-
-    Takes (double,double,int) as an argument for timeStart, timeEnd, and numberOfPoints, respectively"""
     startValue = c_double(timeStart)
     endValue = c_double(timeEnd)
     pointsValue = c_int(numberOfPoints)
@@ -205,34 +201,36 @@ def simulateEx(timeStart,timeEnd,numberOfPoints):
     handle.freeResult(simulation)
     return result;
 
+##Carry out a single integration step using a stepsize as indicated in the method call (the intergrator is reset to take into account all variable changes). Arguments: double CurrentTime, double StepSize, Return Value: new CurrentTime.
+#
+#Takes (double, double) as an argument
+def oneStep (currentTime, stepSize):                             #test this
+    curtime = c_double(currentTime)
+    stepValue = c_double(stepSize)
+    value = c_double()
+    if handle.oneStep(byref(curtime), byref(stepSize), byref(value)) == True:
+        return value.value;
+    else:
+        raise RuntimeError('Index out of range')
 
-#def oneStep (currentTime, stepSize):                             #test this
-#    curtime = c_double(currentTime)
-#    stepValue = c_double(stepSize)
-#    value = c_double()
-#    if handle.oneStep(byref(curtime), byref(stepSize), byref(value)) == True:
-#        return value.value;
-#    else:
-#        raise RuntimeError('Index out of range')
-
+##Returns the simulation start time
 def getTimeStart():
-    """Returns the simulation start time"""
     value = c_double()
     if handle.getTimeStart(byref(value)) == True:
         return value.value
     else:
         return ('Index out of Range')
 
+##Returns the simulation end time
 def getTimeEnd():
-    """Returns the simulation end time"""
     value = c_double()
     if handle.getTimeEnd(byref(value)) == True:
         return value.value
     else:
         return ('Index out of Range')
 
+##Returns the number of points in the simulation
 def getNumPoints():
-    """Returns the number of points in the simulation"""
     value = c_int()
     if handle.getNumPoints(byref(value)) == True:
         return value.value
@@ -243,29 +241,29 @@ def getNumPoints():
 handle.steadyState.restype = c_bool
 handle.setSteadyStateSelectionList.restype = c_bool
 
+##Computes the steady state of the loaded model and returns the sum of squares of the solution
 def steadyState():
-    """Computes the steady state of the loaded model and returns the sum of squares of the solution"""
     value = c_int()
     if handle.steadyState(byref(value)) == True:
         return value.value
     else:
         return ('Index out of Range')
 
+##Computes and returns the steady state solution of the loaded model
 def computeSteadyStateValues():
-    """Computes and returns the steady state solution of the loaded model"""
     values = handle.computeSteadyStateValues()
     result = handle.printVector(values)
     handle.freeVector(values)
     return result
 
+##Sets the variables returned by steadyState() and computeSteadyStateValues()
+#
+#Takes a string with variables separated by a space or a comma as an argument
 def setSteadyStateSelectionList(list):
-    """Sets the variables returned by steadyState() and computeSteadyStateValues()
-
-    Takes a string with variables separated by a space or a comma as an argument"""
     return handle.setSteadyStateSelectionList(list)
 
+##Returned the variables returned by steadyState() and computeSteadyStateValues()
 def getSteadyStateSelectionList():
-    """Returned the variables returned by steadyState() and computeSteadyStateValues()"""
     values = handle.getSteadyStateSelectionList()
     result = handle.printList(values)
     handle.freeStringList(values)
@@ -284,44 +282,44 @@ handle.getGlobalParameterByIndex.restype = c_bool
 handle.getCompartmentByIndex.restype = c_bool
 handle.setCompartmentByIndex.restype = c_bool
 
+##Returns the current value for a single species in loaded model
+#
+#Takes a string as an argument
 def getValue(speciesID):
-    """Returns the current value for a single species in loaded model
-
-    Takes a string as an argument"""
     value = c_double()
     if handle.getValue(speciesID, byref(value)) == True:
         return value.value
     else:
         raise RuntimeError('Index out of Range')
 
+##Sets the value of a single species
+#
+#Takes (string, double) as an argument for speciesID and value, respectively
 def setValue(speciesID, val):
-    """Sets the value of a single species
-
-    Takes (string, double) as an argument for speciesID and value, respectively"""
     value = c_double(val)
     if handle.setValue(speciesID, byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
+##Returns the concentration of all floating species
 def getFloatingSpeciesConcentrations():
-    """Returns the concentration of all floating species"""
     values = handle.getFloatingSpeciesConcentrations()
     result = handle.printVector(values)
     handle.freeVector(values)
     return result
 
+##Returns the value of all global parameters
 def getGlobalParameterValues():
-    """Returns the value of all global parameters"""
     values = handle.getGlobalParameterValues()
     result = handle.printVector(values)
     handle.freeVector(values)
     return result
 
+##Sets the value of a boundary species by its index. species are indexed starting at 0.
+#
+#Takes (int, double) as an argument for index and value, respectively
 def setBoundarySpeciesByIndex(index, val):
-    """Sets the value of a boundary species by its index. species are indexed starting at 0.
-
-    Takes (int, double) as an argument for index and value, respectively"""                             #test this
     value = c_double(val)
     ivalue = c_int(index)
     if handle.setBoundarySpeciesByIndex(byref(ivalue), byref(value)) == True:
@@ -329,10 +327,10 @@ def setBoundarySpeciesByIndex(index, val):
     else:
         raise RuntimeError('Index out of range')
 
+##Sets the value of a floating species by its index. species are indexed starting at 0.
+#
+#Takes (int, double) as an argument for index and value, respectively
 def setFloatingSpeciesByIndex(index, val):
-    """Sets the value of a floating species by its index. species are indexed starting at 0.
-
-    Takes (int, double) as an argument for index and value, respectively"""                             #test this
     value = c_double(val)
     ivalue = c_int(index)
     if handle.setFloatingSpeciesByIndex(byref(ivalue), byref(value)) == True:
@@ -340,10 +338,10 @@ def setFloatingSpeciesByIndex(index, val):
     else:
         raise RuntimeError('Index out of range')
 
+##Sets the value of a global parameter by its index. global parameters are indexed starting at 0.
+#
+#Takes (int, double) as an argument for index and value, respectively
 def setGlobalParameterByIndex(index, val):
-    """Sets the value of a global parameter by its index. global parameters are indexed starting at 0.
-
-    Takes (int, double) as an argument for index and value, respectively"""                             #test this
     value = c_double(val)
     ivalue = c_int(index)
     if handle.setGlobalParameterByIndex(byref(ivalue), byref(value)) == True:
@@ -351,10 +349,10 @@ def setGlobalParameterByIndex(index, val):
     else:
         raise RuntimeError('Index out of range')
 
+##Returns the value of a boundary species by its index. Boundary species are indexed starting at 0.
+#
+#Takes an integer as an argument
 def getBoundarySpeciesByIndex(index):
-    """Returns the value of a boundary species by its index. Boundary species are indexed starting at 0.
-
-    Takes an integer as an argument"""                             #test this
     value = c_double()
     ivalue = c_int(index)
     if handle.getBoundarySpeciesByIndex(byref(ivalue), byref(value)) == True:
@@ -362,10 +360,10 @@ def getBoundarySpeciesByIndex(index):
     else:
         raise RuntimeError('Index out of range')
 
+##Returns the value of a floating species by its index. Floating species are indexed starting at 0.
+#
+#Takes an integer as an argument
 def getFloatingSpeciesByIndex(index):
-    """Returns the value of a floating species by its index. Floating species are indexed starting at 0.
-
-    Takes an integer as an argument"""                             #test this
     value = c_double()
     ivalue = c_int(index)
     if handle.getFloatingSpeciesByIndex(byref(ivalue), byref(value)) == True:
@@ -373,11 +371,10 @@ def getFloatingSpeciesByIndex(index):
     else:
         raise RuntimeError('Index out of range')
 
-
+##Returns the value of a global parameter by its index. Global parameters are indexed starting at 0.
+#
+#Takes an integer as an argument
 def getGlobalParameterByIndex(index):
-    """Returns the value of a global parameter by its index. Global parameters are indexed starting at 0.
-
-    Takes an integer as an argument"""
     value = c_double()
     ivalue = c_int(index)
     if handle.getGlobalParameterByIndex(byref(ivalue), byref(value)) == True:
@@ -385,10 +382,10 @@ def getGlobalParameterByIndex(index):
     else:
         raise RuntimeError('Index out of Range')
 
+##Returns the volume of a compartment by its index. Compartments are indexed starting at 0.
+#
+#Takes an integer as an argument
 def getCompartmentByIndex(index):
-    """Returns the volume of a compartment by its index. Compartments are indexed starting at 0.
-
-    Takes an integer as an argument"""
     value = c_double()
     ivalue = c_int(index)
     if handle.getCompartmentByIndex(byref(ivalue), byref(value)) == True:
@@ -396,10 +393,10 @@ def getCompartmentByIndex(index):
     else:
         raise RuntimeError('Index out of Range')
 
+##Sets the volume of a compartment by its index. Compartments are indexed starting at 0.
+#
+#Takes (int, double) as an argument for index and value, respectively
 def setCompartmentByIndex(index, val):
-    """Sets the volume of a compartment by its index. Compartments are indexed starting at 0.
-
-    Takes (int, double) as an argument for index and value, respectively"""                         #test this
     value = c_double(val)
     ivalue = c_int(index)
     if handle.setCompartmentByIndex(byref(ivalue), byref(value)) == True:
@@ -409,58 +406,58 @@ def setCompartmentByIndex(index, val):
 
 
 #Jacobian matrix methods
+##Compute the full Jacobian at the current operating point
 def getFullJacobian():
-    """Compute the full Jacobian at the current operating point"""
     values = handle.getFullJacobian()
     result = handle.printMatrix(values)
     handle.freeMatrix(values)
     return result
 
+##Compute the reduced Jacobian at the current operating point
 def getReducedJacobian():
-    """Compute the reduced Jacobian at the current operating point"""
     values = handle.getReducedJacobian()
     result = handle.printMatrix(values)
     handle.freeMatrix(values)
     return result
 
+##Compute the eigenvalues at the current operating point
 def getEigenvalues():
-    """Compute the eigenvalues at the current operating point"""
     values = handle.getEigenvalues()
     result = handle.printMatrix(values)
     handle.freeMatrix(values)
     return result
 
 #Stoichiometry methods
+##Returns the stoichiometry matrix for the currently loaded model
 def getStoichiometryMatrix():
-    """Returns the stoichiometry matrix for the currently loaded model"""
     values = handle.getStoichimetryMatrix()
     result = handle.printMatrix(values)
     handle.freeMatrix(values)
     return result
 
+##Returns the link matrix for the currently loaded model
 def getLinkMatrix():
-    """Returns the link matrix for the currently loaded model"""
     values = handle.getLinkMatrix()
     result = handle.printMatrix(values)
     handle.freeMatrix(values)
     return result
 
+##Returns the reduced stoichiometry matrix for the currently loaded model
 def getNrMatrix():
-    """Returns the reduced stoichiometry matrix for the currently loaded model"""
     values = handle.getNrMatrix()
     result = handle.printMatrix(values)
     handle.freeMatrix(values)
     return result
 
+##Returns the L0 matrix for the currently loaded model
 def getL0Matrix():
-    """Returns the L0 matrix for the currently loaded model"""
     values = handle.getL0Matrix()
     result = handle.printMatrix(values)
     handle.freeMatrix(values)
     return result
 
+##Returns the conservation matrix (gamma) for the currently loaded model
 def getConservationMatrix():
-    """Returns the conservation matrix (gamma) for the currently loaded model"""
     values = handle.getConservationMatrix()
     result = handle.printMatrix(values)
     handle.freeMatrix(values)
@@ -470,22 +467,22 @@ def getConservationMatrix():
 handle.reset.restype = c_bool
 #handle.setFloatingSpeciesInitialConcentrations.restype = c_bool
 
+##resets the simulator to the initial conditions specified in the loaded SBML model
 def reset():
-    """resets the simulator to the initial conditions specified in the loaded SBML model"""
     return handle.reset()
 
-#def setFloatingSpeciesInitialConcentration(vec):
+#def setFloatingSpeciesInitialConcentration(vec):                                        #FIX THIS
 #    return handle.setFloatingSpeciesInitialConcentration(vec)
 
+##Returns a string with initial floating species concentrations
 def getFloatingSpeciesInitialConcentrations():
-    """Returns a string with initial floating species concentrations"""
     values = handle.getFloatingSpeciesInitialConcentrations()
     result = handle.printVector(values)
     handle.freeVector(values)
     return result
 
+##Returns a string with floating species initial condition names
 def getFloatingSpeciesInitialConditionNames():
-    """Returns a string with floating species initial condition names"""
     values = handle.getFloatingSpeciesInitialConditionNames()
     result = handle.printVector(values)
     handle.freeVector(values)
@@ -495,60 +492,60 @@ def getFloatingSpeciesInitialConditionNames():
 handle.getNumberOfReactions.restype = c_int
 handle.getReactionRate.restype = c_bool
 
+##Get the number of reactions
 def getNumberOfReactions():
-    """Get the number of reactions"""
     return handle.getNumberOfReactions()
 
+##Returns the reaction rate by index
 def getReactionRate(index):
-    """Returns the reaction rate by index"""
     value = c_int(index)
     if handle.getReactionRate(byref(value)) == True:
         return value.value
     else:
         raise RuntimeError('Index out of Range')                                 #test this
 
+##Returns a vector with the current reaction rates
 def getReactionRates():
-    """Returns a vector with the current reaction rates"""
     values = handle.getReactionRates()
     result = handle.printVector(values)
     handle.freeVector(values)
     return result
 
+##Returns the rates of change given an array of new floating species concentrations
 def getReactionRatesEx(vec):                                                        #FIX THIS
-    """Returns the rates of change given an array of new floating species concentrations"""
     return handle.printVector(handle.getReactionRatesEx(vec))
 
 #Rates of change
 handle.getRateOfChange.restype = c_bool
 handle.evalModel.restype = c_bool
 
+##Returns the current vector of rates of change
 def getRatesOfChange():
-    """Returns the current vector of rates of change"""
     values = handle.getRatesOfChange()
     result = handle.printVector(values)
     handle.freeVector(values)
     return result
 
+##Returns the names given to the rate of change of the floating species
 def getRateOfChangeNames():
-    """Returns the names given to the rate of change of the floating species"""
     values = handle.getRatesOfChangeNames()
     result = handle.printList(values)
     handle.freeStringList(values)
     return result
 
+##Returns the rate of change of a species by its index
 def getRateOfChange():                                                 #FIX THIS
-    """Returns the rate of change of a species by its index"""
     return handle.getRateOfChange()
 
-def getRatesOfChangeEx(vec):
-    """Returns the rates of changes given an array of new floating species concentrations"""                     #TEST
+##Returns the rates of changes given an array of new floating species concentrations
+def getRatesOfChangeEx(vec):                                          #TEST
     values = handle.getRatesOfChangEx()
     result = handle.printVector(values)
     handle.freeVector(values)
     return result
 
+##Updates the model based on all recent changes
 def evalModel():
-    """Updates the model based on all recent changes"""
     return handle.evalModel()
 
 #Get number family
@@ -559,161 +556,160 @@ handle.getNumberOfGlobalParameters.restype = c_int
 handle.getNumberOfDependentSpecies.restype = c_int
 handle.getNumberOfIndependentSpecies.restype = c_int
 
+##Get the number of compartments
 def getNumberOfCompartments():
-    """Get the number of compartments"""
     return handle.getNumberOfCompartments()
 
+##Get the number of boundary species
 def getNumberOfBoundarySpecies():
-    """Get the number of boundary species"""
     return handle.getNumberOfBoundarySpecies()
 
+##Get the number of floating species
 def getNumberOfFloatingSpecies():
-    """Get the number of floating species"""
     return handle.getNumberOfFloatingSpecies()
 
+##Get the number of global parameters
 def getNumberOfGlobalParameters():
-    """Get the number of global parameters"""
     return handle.getNumberOfGlobalParameters()
 
+##Get the number of dependent species
 def getNumberOfDependentSpecies():
-    """Get the number of dependent species"""
     return handle.getNumberOfDependentSpecies()
 
+##Get the number of independent species
 def getNumberOfIndependentSpecies():
-    """Get the number of independent species"""
     return handle.getNumberOfIndependentSpecies()
 
 #Get names family
+##Returns a list of reaction names
 def getReactionNames():
-    """Returns a list of reaction names"""
     values = handle.getReactionNames()
     result = handle.printList(values)
     handle.freeStringList(values)
     return result
 
+##Returns the names given to the rate of change of the floating species
 def getRateOfChangeNames():
-    """Returns the names given to the rate of change of the floating species"""
     values = handle.getRateOfChangeNames()
     result = handle.printList(values)
     handle.freeStringList(values)
     return result
 
+##Gets the list of boundary species names
 def getBoundarySpeciesNames():
-    """Gets the list of boundary species names"""
     values = handle.getBoundarySpeciesNames()
     result = handle.printList(values)
     handle.freeStringList(values)
     return result
 
+##Gets the list of floating species names
 def getFloatingSpeciesNames():
-    """Gets the list of floating species names"""
     values = handle.getFloatingSpeciesNames()
     result = handle.printList(values)
     handle.freeStringList(values)
     return result
 
+##Gets the list of global parameter names
 def getGlobalParameterNames():
-    """Gets the list of global parameter names"""
     values = handle.getGlobalParameterNames()
     result = handle.printList(values)
     handle.freeStringList(values)
     return result
 
-
+##Gets the list of compartment names
 def getCompartmentNames():
-    """Gets the list of compartment names"""
     values = handle.getCompartmentNames()
     result = handle.printList(values)
     handle.freeStringList(values)
     return result
 
+##Returns the symbols of all floating species eigenvalues
 def getEigenValueNames():
-    """Returns the symbols of all floating species eigenvalues"""
     values = handle.getEigenValueNames()
     result = handle.printList(values)
     handle.freeStringList(values)
     return result
 
-def getAvailableSymbols():
-    """Returns symbols of the currently loaded model that can be used for the selectionlist format array of arrays"""                              #FIX
+##Returns symbols of the currently loaded model that can be used for the selectionlist format array of arrays
+def getAvailableSymbols():                              #FIX
     value = handle.getAvailableSymbols()
     result = handle.printArrayList(value)
     return result
 
 #Get MCA methods
 
+##Returns the symbols of all elasticity coefficients
 def getElasticityCoefficientNames():
-    """Returns the symbols of all elasticity coefficients"""
     value = handle.getElasticityCoefficientNames()
     result = handle.printStringArrayList(value)
     handle.freeStringArrayList(value)
     return result
 
+##Returns the symbols of all unscaled flux control coefficients
 def getUnscaledFluxControlCoefficientNames():
-    """Returns the symbols of all unscaled flux control coefficients"""
     value = handle.getUnscaledFluxControlCoefficientNames()
     result = handle.printStringArrayList(value)
     handle.freeStringArrayList(value)
     return result
 
+##Returns the symbols of all flux control coefficients
 def getFluxControlCoefficientNames():
-    """Returns the symbols of all flux control coefficients"""
     value = handle.getFluxControlCoefficientNames()
     result = handle.printStringArrayList(value)
     handle.freeStringArrayList(value)
     return result
 
+##Returns the symbols of all unscaled concentration control coefficients
 def getUnscaledConcentrationControlCoefficientNames():
-    """Returns the symbols of all unscaled concentration control coefficients"""
     value = handle.getUnscaledConcentrationCoefficientNames()
     result = handle.printStringArrayList(value)
     handle.freeStringArrayList(value)
     return result
 
+##Returns the symbols of all concentration control coefficients
 def getConcentrationControlCoefficientNames():
-    """Returns the symbols of all concentration control coefficients"""
     value = handle.getConcentrationControlCoefficientNames()
     result = handle.printStringArrayList(value)
     handle.freeStringArrayList(value)
     return result
 
+##Compute the unscaled species elasticity matrix at the current operating point
 def getUnScaledElasticityMatrix():
-    """Compute the unscaled species elasticity matrix at the current operating point"""
     value = handle.getUnscaledElasticityMatrix()
     result = handle.printMatrix(value)
     handle.freeMatrix(value)
     return result
 
+##Compute the scaled elasticity matrix at the current operating point
 def getScaledElasticityMatrix():
-    """Compute the scaled elasticity matrix at the current operating point"""
     value = handle.getScaledElasticityMatrix()
     result = handle.printMatrix(value)
     handle.freeMatrix(value)
     return result
 
+##Compute the matrix of unscaled concentration control coefficients
 def getUnscaledConcentrationControlCoefficientMatrix():
-    """Compute the matrix of unscaled concentration control coefficients"""
     value = handle.getUnscaledConcentrationControlCoefficientMatrix()
     result = handle.printMatrix(value)
     handle.freeMatrix(value)
     return result
 
+##Compute the matrix of unscaled concentration control coefficients
 def getScaledConcentrationControlCoefficientMatrix():
-    """Compute the matrix of unscaled concentration control coefficients"""
     value = handle.getScaledConcentrationControlCoefficientMatrix()
     result = handle.printMatrix(value)
     handle.freeMatrix(value)
     return result
 
+##Compute the matrix of unscaled flux control coefficients
 def getUnscaledFluxControlCoefficientMatrix():
-    """Compute the matrix of unscaled flux control coefficients"""
     value = handle.getUnscaledFluxControlCoefficientMatrix()
     result = handle.printMatrix(value)
     handle.freeMatrix(value)
     return result
 
+##Compute the matrix of scaled flux control coefficients
 def getScaledFluxControlCoefficientMatrix():
-    """Compute the matrix of scaled flux control coefficients"""
     value = handle.getScaledFluxControlCoefficientMatrix()
     result = handle.printMatrix(value)
     handle.freeMatrix(value)
@@ -726,10 +722,10 @@ handle.getEE.restype = c_bool
 handle.getuEE.restype = c_bool
 handle.getScaledFloatingSpeciesElasticity.restype = c_bool
 
+##Get unscaled control coefficient with respect to a global parameter
+#
+#Takes (variableName, parameterName) as an argument, where both arguments are strings
 def getuCC(variable, parameter):
-    """Get unscaled control coefficient with respect to a global parameter
-
-    Takes (variableName, parameterName) as an argument, where both arguments are strings"""
     variable = c_char_p()
     parameter = c_char_p()
     value = c_double()
@@ -738,45 +734,46 @@ def getuCC(variable, parameter):
     else:
         raise RuntimeError('Index out of range')
 
+##Get scaled control coefficient with respect to a global parameter
+#
+#Takes (variableName, parameterName) as an argument, where both arguments are strings
 def getCC(variable, parameter, value):
-    """Get scaled control coefficient with respect to a global parameter
-
-    Takes (variableName, parameterName) as an argument, where both arguments are strings"""
     value = c_double()
     if handle.getCC(variable, parameter, value,  byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
+##Get scaled elasticity coefficient with respect to a global parameter or species
+#
+#Takes (reactionName, parameterName) as an argument, where both arguments are strings
 def getEE(name, species, value):
-    """Get scaled elasticity coefficient with respect to a global parameter or species
-
-    Takes (reactionName, parameterName) as an argument, where both arguments are strings"""
     value = c_double()
     if handle.getEE(name, species, value,  byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
+##Get unscaled elasticity coefficient with respect to a global parameter or species
+#
+#Takes (reactionName, parameterName) as an argument, where both arguments are strings
 def getuEE(name, species, value):
-    """Get unscaled elasticity coefficient with respect to a global parameter or species
-
-    Takes (reactionName, parameterName) as an argument, where both arguments are strings"""
     value = c_double()
     if handle.getuEE(name, species, value,  byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
 
+##Compute the scaled elasticity for a given reaction and given species
+#
+#Takes (reactionName, parameterName) as an argument, where both arguments are strings
 def getScaledFloatingSpeciesElasticity(reactionName, speciesName, value):
-    """Compute the scaled elasticity for a given reaction and given species
-
-    Takes (reactionName, parameterName) as an argument, where both arguments are strings"""
     value = c_double()
     if handle.getScaledFloatingSpeciesElasticity(reactionName, speciesName, value,  byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
+
 #Print/format functions
 handle.printResult.restype = c_char_p
 handle.printMatrix.restype = c_char_p
