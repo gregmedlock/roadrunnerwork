@@ -5,12 +5,12 @@
 import sys
 import os
 from ctypes import *
-os.environ['PATH'] =  "c:\\RoadRunner\\bin" + ';' + "c:\\Python27" + ';' + os.environ['PATH']
-handle = WinDLL ("c:\\RoadRunner\\bin\\rr_c_api.dll")
+rrInstallFolder = "r:\\rrInstalls\\vs\\full"
+os.environ['PATH'] =  rrInstallFolder + ';' + "c:\\Python27" + ';' + os.environ['PATH']
+handle = WinDLL (rrInstallFolder + "\\bin\\rr_c_api.dll")
 
 
 #=======================rr_c_api=======================#
-
 rr = handle.getRRInstance()
 
 #Latest
@@ -30,7 +30,7 @@ def getVersion():
 #Logging
 handle.enableLogging.restype = c_bool
 handle.setLogLevel.restype = c_bool
-handle.getLogLevel.restype = c_bool
+handle.getLogLevel.restype = c_char_p
 handle.getLogFileName.restype = c_char_p
 handle.getBuildDate.restype = c_char_p
 handle.getCopyright.restype = c_char_p
@@ -42,14 +42,10 @@ def enableLogging():
     return handle.enableLogging()
 
 def setLogLevel(lvl):
-    return handle.setTimeEnd (byref (c_double(lvl)))
+    return handle.setLogLevel(lvl)
 
 def getLogLevel():
-    value = c_int
-    if handle.getLogLevel(byref(value)) == True:
-        return value.value
-    else:
-        raise RuntimeError('Index out of range')
+    return handle.getLogLevel()
 
 ##Returns the name of the log file
 def getLogFileName():
@@ -178,7 +174,7 @@ def setSelectionList(list):
 ##Returns the list of variables returned by simulate()
 def getSelectionList():
     value = handle.getSelectionList()
-    result = handle.printList(value)
+    result = handle.printStringList(value)
     handle.freeStringList(value)
     return result
 
@@ -265,7 +261,7 @@ def setSteadyStateSelectionList(list):
 ##Returned the variables returned by steadyState() and computeSteadyStateValues()
 def getSteadyStateSelectionList():
     values = handle.getSteadyStateSelectionList()
-    result = handle.printList(values)
+    result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
@@ -529,7 +525,7 @@ def getRatesOfChange():
 ##Returns the names given to the rate of change of the floating species
 def getRateOfChangeNames():
     values = handle.getRatesOfChangeNames()
-    result = handle.printList(values)
+    result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
@@ -584,49 +580,49 @@ def getNumberOfIndependentSpecies():
 ##Returns a list of reaction names
 def getReactionNames():
     values = handle.getReactionNames()
-    result = handle.printList(values)
+    result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
 ##Returns the names given to the rate of change of the floating species
 def getRateOfChangeNames():
     values = handle.getRateOfChangeNames()
-    result = handle.printList(values)
+    result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
 ##Gets the list of boundary species names
 def getBoundarySpeciesNames():
     values = handle.getBoundarySpeciesNames()
-    result = handle.printList(values)
+    result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
 ##Gets the list of floating species names
 def getFloatingSpeciesNames():
     values = handle.getFloatingSpeciesNames()
-    result = handle.printList(values)
+    result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
 ##Gets the list of global parameter names
 def getGlobalParameterNames():
     values = handle.getGlobalParameterNames()
-    result = handle.printList(values)
+    result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
 ##Gets the list of compartment names
 def getCompartmentNames():
     values = handle.getCompartmentNames()
-    result = handle.printList(values)
+    result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
 ##Returns the symbols of all floating species eigenvalues
 def getEigenValueNames():
     values = handle.getEigenValueNames()
-    result = handle.printList(values)
+    result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
@@ -778,7 +774,7 @@ def getScaledFloatingSpeciesElasticity(reactionName, speciesName, value):
 handle.printResult.restype = c_char_p
 handle.printMatrix.restype = c_char_p
 handle.printVector.restype = c_char_p
-handle.printList.restype = c_char_p
+handle.printStringList.restype = c_char_p
 handle.printStringArrayList.restype = c_char_p
 #handle.printArrayList.restype = c_char_p
 
@@ -791,8 +787,8 @@ def printMatrix(mat):
 def printVector(vec):
     return handle.printVector(vec)
 
-def printList(list):
-    return handle.printList(list)
+def printStringList(list):
+    return handle.printStringList(list)
 
 def printStringArrayList(list):
     return handle.printStringArrayList(list)
