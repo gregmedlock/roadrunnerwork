@@ -84,17 +84,21 @@ typedef struct RRMatrix
 {
     int             RSize;  /*!< The number of rows in the matrix */
     int             CSize;  /*!< The number of columns in the matrix */
-    double*         Data;   /*!< Items in the matrix stored as a linear array. Acess an element using Data[i*CSize + j], 
+    double*         Data;   /*!< Items in the matrix stored as a linear array. Access an element using Data[i*CSize + j], 
 							  where i,j represent the row and column numberof the element. Indexing is from zero */
 } *RRMatrixHandle;
 
+
+/*!@struct*/ 
+/*!@brief Structure for the result type from the simulate calls */ 
 typedef struct RRResult
 {
-    int             RSize;
-    int             CSize;
-    double*         Data;
-    char**          ColumnHeaders;
+    int             RSize;  /*!< The number of rows in the result matrix */
+    int             CSize;  /*!< The number of columns in the result matrix */
+    double*         Data;   /*!< A pointer to the data stored in the matrix. Access an element using Data[i*CSize + j] */
+    char**          ColumnHeaders;   /*!< Pointer to an array of column header strings */
 } *RRResultHandle;
+
 
 /*!@struct*/ 
 /*!@brief Convenient Structure for storing the header and main body source for the generate simulation C code */ 
@@ -122,6 +126,9 @@ typedef struct RRStringArrayList
 
 }  *RRStringArrayListHandle;
 
+
+/*!@enum*/ 
+/*!@brief The list type supports strings, integers, double and lists */ 
 enum ListItemType {litString, litInteger, litDouble,   litArrayList};
 
 // The above enums correspond to the currently supported types in an RRArrayList2
@@ -129,17 +136,22 @@ enum ListItemType {litString, litInteger, litDouble,   litArrayList};
 // The void pointer pValue need to be casted to corresponding type to retrieve its value
 
 struct RRArrayList2;
+
+/*!@struct*/ 
+/*!@brief A single list element type */ 
 typedef struct RRArrayList2Item
 {
-    ListItemType                ItemType;
-    void*                       pValue;
+    ListItemType                ItemType;  /*!< The type of the item in this list element */
+    void*                       pValue;    /*!< A pointer to the list element */
 } *RRArrayList2ItemHandle;
 
 
+/*!@struct*/ 
+/*!@brief A list type */ 
 typedef struct RRArrayList2
 {
-    int                         ItemCount;
-    RRArrayList2ItemHandle      Items;
+    int                         ItemCount;  /*!< The number elements in this list */
+    RRArrayList2ItemHandle      Items;      /*!< A pointer to an array of list items */
 }  *RRArrayList2Handle;
 
 
