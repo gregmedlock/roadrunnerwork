@@ -1,9 +1,6 @@
 import rrPython
-import os
 import timeit
 import cmd
-
-os.chdir("C:\\RoadRunner\\bin")
 
 modelPath = raw_input('Model location: (C:\\RoadRunner\\Models\\feedback.xml, etc.)')
 
