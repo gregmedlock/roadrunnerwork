@@ -19,7 +19,6 @@ class RR_DECLSPEC LogOutput : public rrObject
         static bool             mShowLogPrefix;
         static bool             mShowLogLevel;
         static bool             mUseLogTabs;
-//        static bool             mLogToMemo;
         static bool             mLogToConsole;
         static bool             mDoLogging;
         static void             Output(const string& msg, const LogLevel& lvl);

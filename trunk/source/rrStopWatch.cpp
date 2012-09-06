@@ -2,6 +2,7 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
+#include <sys/timeb.h>
 #include "rrLogger.h"
 #include "rrStopWatch.h"
 //---------------------------------------------------------------------------
@@ -10,40 +11,57 @@ namespace rr
 {
 StopWatch::StopWatch()
 :
-mStartTime(std::clock()), //mStartTime counting time
-mIsRunning(true)
+mIsRunning(false)
 {
+	Start();
 }
 
 StopWatch::~StopWatch()
+{}
+
+int StopWatch::Start()
 {
-//    mTotalTime = clock() - mStartTime; //get elapsed time
-//    Log(lDebug4)<<"total of ticks for this activity: "<<mTotalTime<<endl;
-//    Log(lDebug4)<<"in seconds: "<<double(mTotalTime)/CLOCKS_PER_SEC<<endl;
+	timeb tb;
+	ftime(&tb);
+	mStartTime = tb.millitm + (tb.time & 0xfffff) * 1000;
+    mIsRunning = true;
+    return mStartTime;
 }
 
-void StopWatch::Start()
+int StopWatch::GetMilliSecondCount()
 {
-    mStartTime = std::clock();
-    mIsRunning = true;
+	timeb tb;
+	ftime(&tb);
+	return tb.millitm + (tb.time & 0xfffff) * 1000;
 }
-void StopWatch::Stop()
+
+int StopWatch::GetMilliSecondSpan()
 {
-     mTotalTime = clock() - mStartTime; //get elapsed time
-     mIsRunning = false;
-     mStartTime = 0;
+	int nSpan = GetMilliSecondCount() - mStartTime;
+	if(nSpan < 0)
+    {
+		nSpan += 0x100000 * 1000;
+    }
+	return nSpan;
+}
+
+int StopWatch::Stop()
+{
+    mTotalTime = GetMilliSecondSpan();
+    mIsRunning = false;
+    mStartTime = 0;
+    return mTotalTime;
 }
 
 double StopWatch::GetTime()
 {
     if(mIsRunning)
     {
-        return (clock() - mStartTime) /CLOCKS_PER_SEC;; //get elapsed time
+        return GetMilliSecondSpan();
     }
     else
     {
-        return double(mTotalTime)/CLOCKS_PER_SEC;
+        return mTotalTime;
     }
 }
-
 }

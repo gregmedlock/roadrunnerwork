@@ -7,16 +7,15 @@
 #include "rrLogOutput.h"
 //---------------------------------------------------------------------------
 
-
 namespace rr
 {
 
-bool                  LogOutput::mDoLogging        = true;
-bool                  LogOutput::mLogToConsole     = false;
-bool                  LogOutput::mShowLogTime     = false;
-bool                  LogOutput::mShowLogPrefix    = false;
-bool                  LogOutput::mShowLogLevel    = false;
-bool                  LogOutput::mUseLogTabs        = false;
+bool LogOutput::mDoLogging      = true;
+bool LogOutput::mLogToConsole   = false;
+bool LogOutput::mShowLogTime    = false;
+bool LogOutput::mShowLogPrefix  = false;
+bool LogOutput::mShowLogLevel   = false;
+bool LogOutput::mUseLogTabs     = false;
 
 LogOutput::LogOutput(){}
 
