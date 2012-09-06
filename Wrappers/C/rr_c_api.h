@@ -64,23 +64,23 @@
 
  int main(int nargs, char** argv)
  {
- 		RRHandle rrInstance = getRRInstance();
+        RRHandle rrInstance = getRRInstance();
 
         printf("loading model file %s\n", argv[1]);
  
         if (!loadSBMLFromFile(argv[1])) {
-		   printf ("Error while loading SBML file\n");
+           printf ("Error while loading SBML file\n");
 		   printf ("Error message: %s\n, getLastError());
-		   exit();
-		}
+           exit();
+        }
 		   
         RRResultHandle output = simulate (0, 100, 1000);  // start, end, num. points
         
-		printf("Output table has %i rows and %i columns\n", output->RSize, output->RCols);
+        printf("Output table has %i rows and %i columns\n", output->RSize, output->RCols);
         printResult (output);
         
-		freeResult (output);
-		freeRrInstance (rrInstance)
+        freeResult (output);
+        freeRrInstance (rrInstance)
 
         return 0;
  }
