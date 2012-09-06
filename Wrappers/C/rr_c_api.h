@@ -70,7 +70,7 @@
  
         if (!loadSBMLFromFile(argv[1])) {
            printf ("Error while loading SBML file\n");
-		   printf ("Error message: %s\n, getLastError());
+           printf ("Error message: %s\n, getLastError());
            exit();
         }
 		   
