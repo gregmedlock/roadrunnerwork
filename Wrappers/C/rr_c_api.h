@@ -39,7 +39,6 @@
  * redistribute any piece of this software without proper attribution;
 */
 
-<<<<<<< .mine
 /*! \mainpage cRoadRunner Library
  *
  * \section intro_sec Introduction
@@ -137,105 +136,6 @@
 
  \defgroup helperRoutines Helper Routines
  \brief Helper routines for acessing the various C API types, eg lists and arrays
-=======
-/*! \mainpage cRoadRunner Library
- *
- * \section intro_sec Introduction
- *
- * RoadRunner is a high performance and portable simulation engine 
- * for systems and synthetic biology. To run a simple SBML model 
- * and generate time series data we would call:
- *
- \code
- RRResultHandle output;
-
- loadSBMLFromFile ("mymodel.xml");
-
- output = simulate (0, 10, 100);
- \endcode
-
- More complex example:
-
- \code
- #include <stdlib.h>
- #include <stdio.h>
- #include "rr_c_api.h"
-
- int main(int nargs, char** argv)
- {
-        RRHandle rrInstance = getRRInstance();
-
-        printf("loading model file %s\n", argv[1]);
- 
-        if (!loadSBMLFromFile(argv[1])) {
-           printf ("Error while loading SBML file\n");
-           printf ("Error message: %s\n", getLastError());
-           exit();
-        }
-		   
-        RRResultHandle output = simulate (0, 100, 1000);  // start time, end time, and number of points
-        
-        printf("Output table has %i rows and %i columns\n", output->RSize, output->RCols);
-        printResult (output);
-        
-        freeResult (output);
-        freeRrInstance (rrInstance)
-
-        return 0;
- }
- \endcode
- * \section install_sec Installation
- *
- * Installation documentation is provided in the main google code page.
-
- \defgroup initialization Library initialization and termination methods
- \brief Initailize library and terminate linbrary instance
-
- \defgroup loadsave Read and Write models
- \brief Read and write models to files or strings. Support for SBML formats.
-
- \defgroup utility Utility functions
- \brief Various miscellaneous routines that return useful inforamtion about the library
-
- \defgroup errorfunctions Error handling functions
- \brief Error handlining routines
-
- \defgroup state Current state of system
- \brief Compute derivatives, fluxes, and other values of the system at the current state
-
- \derfgroup steadystate
- \brief Compute and obtain basic information about the steady state
-
- \defgroup reaction Reaction group
- \brief Get information about reaction rates
-
- \defgroup rateOfChange Rates of change group
- \brief Get information about rates of change
-
- \defgroup boundary Boundary species group
- \brief Get information about boundary species
-
- \defgroup floating Floating species group
- \brief Get information about floating species
-
- \defgroup parameters Parameter group
- \brief set and get global and local parameters
-
- \defgroup compartment Compartment group
- \brief set and get information on compartments
-
- \defgroup simulation Time-course simulation
- \brief Deterministic, stochastic, and hybrid simulation algorithms
-
- \defgroup mca Metabolic Control Analysis
- \brief Calculate control coefficients and sensitivities
-
- \defgroup matrix Stoichiometry analysis
- \brief Linear algebra based methods for analyzing a reaction network
-
- \defgroup helperRoutines Helper Routines
- \brief Helper routines for acessing the various C API types, eg lists and arrays
->>>>>>> .r825
 */
 
 #ifndef rrC_APIH
@@ -636,17 +536,7 @@ C_DECL_SPEC bool                    rrCallConv   setSteadyStateSelectionList(con
 
 C_DECL_SPEC RRStringListHandle      rrCallConv   getSteadyStateSelectionList();
 
-<<<<<<< .mine
-=======
-// -----------------------------------------------------------------------
-/** \} */
-/**
-  * @name Get and set values from the model
-  */
-/** \{ */
-// -----------------------------------------------------------------------
 
->>>>>>> .r825
 // Set and get family of methods
 C_DECL_SPEC bool        			rrCallConv   getValue(const char* speciesID, double& value);
 C_DECL_SPEC bool                    rrCallConv   setValue(const char* speciesId, const double& val);
@@ -757,7 +647,7 @@ C_DECL_SPEC bool rrCallConv getGlobalParameterByIndex(const int& index, double& 
 */
 C_DECL_SPEC bool rrCallConv getCompartmentByIndex (const int& index, double& value);
 
-<<<<<<< .mine
+
 /*!
  \brief Set the volume for a particular compartment
 
@@ -765,19 +655,10 @@ C_DECL_SPEC bool rrCallConv getCompartmentByIndex (const int& index, double& val
  \param double* value - The volume of the compartment to set
  \return bool status - Returns true if successful
  \ingroup compartment
-=======
-/*!
- \brief Set the volume for a particular compartment
 
- \param int* index - The index to the compartment (corresponds to position in getCompartmentNames())
- \param double* value - The volume of the compartment to set
- \return bool status - Returns true if successful
- \ingroup parameters
->>>>>>> .r825
 */
 C_DECL_SPEC bool rrCallConv setCompartmentByIndex (const int& index, const double& value);
 
-<<<<<<< .mine
 /*!
  \brief Retreive the full Jacobian for the current model
 
@@ -785,15 +666,6 @@ C_DECL_SPEC bool rrCallConv setCompartmentByIndex (const int& index, const doubl
  \ingroup Stoich
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv   getFullJacobian();
-=======
-// -----------------------------------------------------------------------
->>>>>>> .r825
-/** \} */
-/**
-  * @name Retrieve matrix properties from the model
-  */
-/** \{ */
-// -----------------------------------------------------------------------
 
 /*!
  \brief Retreive the reduced Jacobian for the current model
@@ -829,7 +701,6 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getStoichiometryMatrix();
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getLinkMatrix();
 
-<<<<<<< .mine
 /*!
  \brief Retreive the reduced stoichiometry matrix for the current model
 
@@ -837,15 +708,6 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getLinkMatrix();
  \ingroup Stoich
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getNrMatrix();
-=======
-// -----------------------------------------------------------------------
->>>>>>> .r825
-/** \} */
-/**
-  * @name Initial condition methods
-  */
-/** \{ */
-// -----------------------------------------------------------------------
 
 /*!
  \brief Retreive the L9 matrix for the current model
@@ -875,19 +737,10 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getConservationMatrix();
 */
 C_DECL_SPEC bool rrCallConv   reset();
 
-<<<<<<< .mine
 C_DECL_SPEC bool                    rrCallConv setFloatingSpeciesInitialConcentrations (const RRVector* vec);
 C_DECL_SPEC RRVectorHandle          rrCallConv getFloatingSpeciesInitialConcentrations ();
 C_DECL_SPEC RRStringListHandle      rrCallConv getFloatingSpeciesInitialConditionNames();
-=======
-// -----------------------------------------------------------------------
->>>>>>> .r825
-/** \} */
-/**
-  * @name Retrieve reaction rate information
-  */
-/** \{ */
-// -----------------------------------------------------------------------
+
 
 // Reaction rates
 // Initial condition Methods
@@ -906,17 +759,6 @@ C_DECL_SPEC bool                  	rrCallConv getReactionRate(const int&, double
 C_DECL_SPEC RRVectorHandle          rrCallConv getReactionRates();
 C_DECL_SPEC RRVectorHandle          rrCallConv getReactionRatesEx (const RRVectorHandle vec);
 
-<<<<<<< .mine
-=======
-// -----------------------------------------------------------------------
-/** \} */
-/**
-  * @name Retrieve rates of change information
-  */
-/** \{ */
-// -----------------------------------------------------------------------
-
->>>>>>> .r825
 // Rates of change
 /*!
  \brief Retrieve the vector of rates of change
@@ -938,7 +780,7 @@ C_DECL_SPEC RRVectorHandle  rrCallConv getRatesOfChange();
 */
 C_DECL_SPEC RRStringListHandle rrCallConv getRatesOfChangeNames();
 
-<<<<<<< .mine
+
 /*!
  \brief Retrieve the rate of change for a given floating species
 
@@ -948,15 +790,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getRatesOfChangeNames();
  \ingroup rateOfChange
 */
 C_DECL_SPEC bool rrCallConv getRateOfChange(const int&, double& value);
-=======
-// -----------------------------------------------------------------------
->>>>>>> .r825
-/** \} */
-/**
-  * @name Retrieve various dimensions form the model
-  */
-/** \{ */
-// -----------------------------------------------------------------------
+
 
 /*!
  \brief Retrieve the vector of rates of change given a vector of floating species concentrations
@@ -1021,20 +855,8 @@ C_DECL_SPEC int rrCallConv getNumberOfDependentSpecies();
 */
 C_DECL_SPEC int rrCallConv getNumberOfIndependentSpecies();
 
-<<<<<<< .mine
-=======
-// -----------------------------------------------------------------------
-/** \} */
-/**
-  * @name Retrieve various names from the model
-  */
-/** \{ */
-// -----------------------------------------------------------------------
-
->>>>>>> .r825
 // Get names family
 
-<<<<<<< .mine
 /*!
  \brief Obtain the list of reaction Ids
 
@@ -1042,15 +864,6 @@ C_DECL_SPEC int rrCallConv getNumberOfIndependentSpecies();
  \ingroup compartment
 */
 C_DECL_SPEC RRStringListHandle rrCallConv getReactionNames();
-=======
-// -----------------------------------------------------------------------
->>>>>>> .r825
-/** \} */
-/**
-  * @name Retrieve metabolic control analysis values
-  */
-/** \{ */
-// -----------------------------------------------------------------------
 
 
 /*!
@@ -1221,17 +1034,6 @@ C_DECL_SPEC char*                   rrCallConv   printStringList(const RRStringL
 C_DECL_SPEC char*                   rrCallConv   printStringArrayList(const RRStringArrayList* list);
 C_DECL_SPEC char*                   rrCallConv   printArrayList(const RRArrayList2Handle list);
 
-<<<<<<< .mine
-=======
-// -----------------------------------------------------------------------
-/** \} */
-/**
-  * @name Free resources methods
-  */
-/** \{ */
-// -----------------------------------------------------------------------
-
->>>>>>> .r825
 // Free memory functions
 C_DECL_SPEC bool                    rrCallConv   freeResult(RRResultHandle handle);
 C_DECL_SPEC bool                    rrCallConv   freeText(char* text);
