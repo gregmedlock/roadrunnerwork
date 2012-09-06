@@ -2343,6 +2343,27 @@ RRStringListHandle rrCallConv getCompartmentNames()
     return NULL;
 }
 
+
+RRStringListHandle rrCallConv getCompartment()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+        return createList(gRRHandle->getCompartmentNames());
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+    return NULL;
+}
+
 bool rrCallConv getRateOfChange(const int& index, double& value)
 {
 	try
