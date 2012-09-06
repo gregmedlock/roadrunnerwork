@@ -1399,7 +1399,7 @@ void RoadRunner::setSelectionList(const StringList& _selList)
 
             if (newSelectionList[i] == "[" + fs[j] + "]")
             {
-               	selectionList.push_back(TSelectionRecord(j, clFloatingSpecies));
+               	selectionList.push_back(TSelectionRecord(j, clFloatingAmount));
                 break;
             }
 

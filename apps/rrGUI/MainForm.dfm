@@ -12,6 +12,8 @@ object MForm: TMForm
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
+  OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
@@ -340,7 +342,7 @@ object MForm: TMForm
       Top = 465
       Width = 1007
       Height = 250
-      ActivePage = TabSheet1
+      ActivePage = TabSheet6
       Align = alBottom
       TabOrder = 1
       object TabSheet1: TTabSheet
@@ -1395,6 +1397,40 @@ object MForm: TMForm
           end
         end
       end
+      object TabSheet6: TTabSheet
+        Caption = 'Other Tests'
+        ImageIndex = 3
+        object runCount: mtkIntLabeledEdit
+          Left = 16
+          Top = 32
+          Width = 65
+          Height = 21
+          EditLabel.Width = 51
+          EditLabel.Height = 13
+          EditLabel.Caption = 'Run Count'
+          TabOrder = 0
+          Text = '0'
+        end
+        object Button5: TButton
+          Left = 104
+          Top = 32
+          Width = 75
+          Height = 25
+          Caption = 'Button5'
+          TabOrder = 1
+          OnClick = Button5Click
+        end
+        object runCountMemo: TMemo
+          Left = 208
+          Top = 0
+          Width = 791
+          Height = 222
+          Align = alRight
+          Lines.Strings = (
+            'runCountMemo')
+          TabOrder = 2
+        end
+      end
     end
   end
   object RRActions: TActionList
@@ -1517,5 +1553,12 @@ object MForm: TMForm
       Caption = 'PlotTestTestSuiteData'
       OnExecute = PlotTestTestSuiteDataExecute
     end
+  end
+  object ShutDownTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = ShutDownTimerTimer
+    Left = 896
+    Top = 560
   end
 end

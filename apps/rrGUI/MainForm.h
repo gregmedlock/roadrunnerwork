@@ -124,6 +124,11 @@ __published:	// IDE-managed Components
     TToolButton *ToolButton4;
     TActionList *TestSuiteActions;
     TAction *PlotTestTestSuiteData;
+	TTimer *ShutDownTimer;
+	TTabSheet *TabSheet6;
+	mtkIntLabeledEdit *runCount;
+	TButton *Button5;
+	TMemo *runCountMemo;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -149,6 +154,10 @@ __published:	// IDE-managed Components
     void __fastcall modelFoldersCBContextPopup(TObject *Sender, TPoint &MousePos,
           bool &Handled);
     void __fastcall PlotTestTestSuiteDataExecute(TObject *Sender);
+	void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
+	void __fastcall ShutDownTimerTimer(TObject *Sender);
+	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+	void __fastcall Button5Click(TObject *Sender);
 
 private:	// User declarations
     mtkIniParameters            mGeneralParas;
