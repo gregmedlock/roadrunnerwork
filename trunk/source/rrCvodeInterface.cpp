@@ -124,7 +124,6 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
     ModelFromC *model = CvodeInterface::model;
     ModelState oldState(*model);
 
-
     int size = *model->amountsSize + (*model->rateRulesSize);
     vector<double> dCVodeArgument(size);
 
@@ -138,7 +137,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
 
     for (u_int i = 0; i < dCVodeArgument.size(); i++)
     {
-        msg<<left<<setw(20)<<setprecision(4)<<dCVodeArgument[i];
+        //msg<<left<<setw(20)<<setprecision(4)<<dCVodeArgument[i];
     }
 
     model->evalModel(time, dCVodeArgument);
@@ -153,7 +152,7 @@ void ModelFcn(int n, double time, cvode_precision* y, cvode_precision* ydot, voi
     msg<<"\tcount = "<<CvodeInterface::mCount << "\t" ;
     for (u_int i = 0; i < dCVodeArgument.size(); i++)
     {
-        msg<<setw(20)<<left<<setprecision(4)<<dCVodeArgument[i];
+        //msg<<setw(20)<<left<<setprecision(4)<<dCVodeArgument[i];
     }
 
     Log(lDebug4)<<msg.str();

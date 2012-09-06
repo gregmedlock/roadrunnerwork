@@ -49,36 +49,6 @@ void ModelState::AssignToModel(ModelFromC& model)
     model.SetTime(mTime);
 }
 
-//        public void WriteTo(string fileName)
-//        {
-//            var stream = new FileStream(fileName, FileMode.Create);
-//            WriteTo(stream);
-//        }
-//
-//        public static ModelState ReadFrom(Stream stream)
-//        {
-//            var formatter = new BinaryFormatter();
-//            var state = (ModelState) formatter.Deserialize(stream);
-//            stream.Close();
-//            return state;
-//        }
-//
-//        public static ModelState ReadFrom(string fileName)
-//        {
-//            var stream = new FileStream(fileName, FileMode.Open);
-//            return ReadFrom(stream);
-//        }
-//
-//        public void WriteTo(Stream stream)
-//        {
-//            var formatter = new BinaryFormatter();
-//            formatter.Serialize(stream, this);
-//            stream.Flush();
-//            stream.Close();
-//        }
-//
-
-
 }
 
 

@@ -8,6 +8,8 @@
 #include "rrException.h"
 #include "rrStringUtils.h"
 #include "rrUtils.h"
+#include "mtkStopWatch.h"
+#include <sys/timeb.h>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "Chart"
@@ -62,6 +64,9 @@ __fastcall TMForm::TMForm(TComponent* Owner)
 
 __fastcall TMForm::~TMForm()
 {
+
+	//FSF->TreeView1->Selected
+
     if(CompilerRG->ItemIndex == 0)
     {
         mCompiler = "tcc";
@@ -81,7 +86,7 @@ __fastcall TMForm::~TMForm()
     mModelFolders.Write();
     mIniFileC->Save();
     delete mRR;
-    mLogFileSniffer.ShutDown();
+
 }
 
 string TMForm::GetCompiler()
@@ -309,12 +314,15 @@ void __fastcall TMForm::loadAvailableSymbolsAExecute(TObject *Sender)
         else
         {
 
+        	SelList->Items->Add("Time");
+	        SelList->Checked[0] = true;
             ArrayList2 symbols = mRR->getAvailableSymbols();
             StringList fs       = symbols.GetSubList("Floating Species");
             StringList bs       = symbols.GetSubList("Boundary Species");
             StringList vols     = symbols.GetSubList("Volumes");
             StringList gp       = symbols.GetSubList("Global Parameters");
             StringList fluxes   = symbols.GetSubList("Fluxes");
+
             AddItemsToListBox(fs);
             AddItemsToListBox(bs);
             AddItemsToListBox(vols);
@@ -350,7 +358,6 @@ void TMForm::AddItemsToListBox(const StringList& items)
 {
     Log(rr::lInfo)<<items;
 
-    //Add floating species to list box
     for(int i = 0; i < items.Count(); i++)
     {
         SelList->Items->Add(items[i].c_str());
@@ -601,5 +608,69 @@ void __fastcall TMForm::modelFoldersCBContextPopup(TObject *Sender, TPoint &Mous
 }
 
 
+//---------------------------------------------------------------------------
+
+void __fastcall TMForm::FormCloseQuery(TObject *Sender, bool &CanClose)
+{
+	if(mLogFileSniffer.IsAlive())
+    {
+    	CanClose = false;
+    }
+
+    if(!CanClose)
+    {
+		ShutDownTimer->Enabled = true;
+    }
+}
+
+//---------------------------------------------------------------------------
+void __fastcall TMForm::ShutDownTimerTimer(TObject *Sender)
+{
+	ShutDownTimer->Enabled = false;
+
+	if(mLogFileSniffer.IsAlive())
+    {
+    	mLogFileSniffer.ShutDown();
+    }
+
+    Close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMForm::FormClose(TObject *Sender, TCloseAction &Action)
+{
+	FileSelectionFrame->ClearTree();
+}
+//---------------------------------------------------------------------------
+
+int getMilliCount(){
+	timeb tb;
+	ftime(&tb);
+	int nCount = tb.millitm + (tb.time & 0xfffff) * 1000;
+	return nCount;
+}
+
+int getMilliSpan(int nTimeStart){
+	int nSpan = getMilliCount() - nTimeStart;
+	if(nSpan < 0)
+		nSpan += 0x100000 * 1000;
+	return nSpan;
+}
+
+void __fastcall TMForm::Button5Click(TObject *Sender)
+{
+	int average = 0;
+
+    for(int i = 0; i < runCount->GetNumber(); i++)
+    {
+    	int start = getMilliCount();
+		mRR->simulateEx(mStartTimeE->GetValue(), *mEndTimeE, mNrOfSimulationPointsE->GetValue());
+		int milliSecondsElapsed = getMilliSpan(start);
+        average += milliSecondsElapsed;
+    	stringstream msg;
+    	msg<<"Time for run "<<i<<": "<<fixed<<setprecision(15)<<milliSecondsElapsed<<" average: "<<(double) average/ (i + 1);
+    	runCountMemo->Lines->Add(msg.str().c_str());
+    }
+}
 //---------------------------------------------------------------------------
 
