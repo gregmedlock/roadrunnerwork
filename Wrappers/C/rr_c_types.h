@@ -53,11 +53,11 @@ extern "C"
 typedef void* RRHandle;
 
 /*!@struct*/ 
-/*!@brief Vector Structure */ 
+/*!@brief Structure for a simple vector of doubles */ 
 typedef struct RRVector
 {
     int             Size;  /*!< The number of elements in the vector */
-    double*         Data;  /*!< Point to an array of vector items */
+    double*         Data;  /*!< Points to an array of double items */
 } *RRVectorHandle;
 
 
@@ -69,17 +69,23 @@ typedef struct RRLabelStringList
 } *RRLabelStringListHandle;
 
 
+/*!@struct*/ 
+/*!@brief Structure for a simple vector of strings */ 
 typedef struct RRStringList
 {
-    int             Count;
-    char**          String;
+    int             Count;  /*!< The number of elements in the string array */
+    char**          String; /*!< Points to an array of string items */
 } *RRStringListHandle;
 
+
+/*!@struct*/ 
+/*!@brief Structure for a simple Matrix type */ 
 typedef struct RRMatrix
 {
-    int             RSize;
-    int             CSize;
-    double*         Data;
+    int             RSize;  /*!< The number of rows in the matrix */
+    int             CSize;  /*!< The number of columns in the matrix */
+    double*         Data;   /*!< Items in the matrix stored as a linear array. Acess an element using Data[i*CSize + j], 
+							  where i,j represent the row and column numberof the element. Indexing is from zero */
 } *RRMatrixHandle;
 
 typedef struct RRResult
@@ -90,10 +96,12 @@ typedef struct RRResult
     char**          ColumnHeaders;
 } *RRResultHandle;
 
+/*!@struct*/ 
+/*!@brief Convenient Structure for storing the header and main body source for the generate simulation C code */ 
 typedef struct RRCCode
 {
-    char*   Header;
-    char*   Source;
+    char*   Header;  /*!< Head file *.h */
+    char*   Source;  /*!< Main source code, *.c */
 
 } *RRCCodeHandle;
 
@@ -133,6 +141,7 @@ typedef struct RRArrayList2
     int                         ItemCount;
     RRArrayList2ItemHandle      Items;
 }  *RRArrayList2Handle;
+
 
 #if defined( __cplusplus)
 }
