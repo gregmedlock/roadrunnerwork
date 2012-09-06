@@ -70,11 +70,11 @@
  
         if (!loadSBMLFromFile(argv[1])) {
            printf ("Error while loading SBML file\n");
-           printf ("Error message: %s\n, getLastError());
+           printf ("Error message: %s\n", getLastError());
            exit();
         }
 		   
-        RRResultHandle output = simulate (0, 100, 1000);  // start, end, num. points
+        RRResultHandle output = simulate (0, 100, 1000);  // start time, end time, and number of points
         
         printf("Output table has %i rows and %i columns\n", output->RSize, output->RCols);
         printResult (output);
@@ -173,16 +173,59 @@ extern "C"
 
 /*!
  \brief Retrieve the current version number of the library
- \return char* verison Returns nil is it fails, otherwise it returns the version number of the library
+ \return char* verison - Returns null if it fails, otherwise it returns the version number of the library
  \ingroup utility
 */
 C_DECL_SPEC char*                   rrCallConv  getVersion();
 
-C_DECL_SPEC char*                   rrCallConv  getBuildDate();
-C_DECL_SPEC char*                   rrCallConv  getCopyright();
-C_DECL_SPEC bool                    rrCallConv  setTempFolder(const char* folder);
-C_DECL_SPEC char*                   rrCallConv  getTempFolder();
-C_DECL_SPEC RRCCode*               	rrCallConv  getCCode();
+/*!
+ \brief Retrieve the current build date of the library
+ \return char* buildDate - Returns null if it fails, otherwise it returns the build date
+ \ingroup utility
+*/
+C_DECL_SPEC char*  rrCallConv getBuildDate();
+
+/*!
+ \brief Retrieve the current copyright notice for the library
+ \return char* copyRight - Returns null if it fails, otherwise it returns the copyright string
+ \ingroup utility
+*/
+C_DECL_SPEC char*  rrCallConv getCopyright();
+
+/*!
+ \brief SEt the temporary folder
+
+ When cRoadRunner is run in C generation mode its uses a temporary folder to store the 
+ generate C source code. This method can be used to set the temporary folder path if necessary.
+
+ \return bool status - Returns true if succesful
+ \ingroup utility
+*/
+C_DECL_SPEC bool rrCallConv setTempFolder(const char* folder);
+
+/*!
+ \brief Retrieve the current temporary folder path
+
+ When cRoadRunner is run in C generation mode its uses a temporary folder to store the 
+ generate C source code. This method can be used to get the current value
+ for the the temporary folder path.
+
+ \return char* path - Returns null if it fails, otherwise it returns the path
+ \ingroup utility
+*/
+C_DECL_SPEC char* rrCallConv getTempFolder();
+
+/*!
+ \brief Retrieve a pointer to the C code structure, RRCCode
+
+ When cRoadRunner is run in C generation mode its uses a temporary folder to store the 
+ generate C source code. This method can be used to obtain the header and main source
+ code after a model has been loaded. 
+
+ \return char* path - Returns null if it fails, otherwise it returns a pointer to the RRCode structure
+ \ingroup utility
+*/
+C_DECL_SPEC RRCCode* rrCallConv getCCode();
 
 
 // -----------------------------------------------------------------------
@@ -194,14 +237,81 @@ C_DECL_SPEC RRCCode*               	rrCallConv  getCCode();
 // -----------------------------------------------------------------------
 
 // Logging
-C_DECL_SPEC bool                    rrCallConv  enableLogging();
-C_DECL_SPEC bool                    rrCallConv  setLogLevel(const char* lvl);
-C_DECL_SPEC char*                   rrCallConv  getLogLevel();
-C_DECL_SPEC char*                   rrCallConv  getLogFileName();
 
-// Error handling
-C_DECL_SPEC bool                    rrCallConv  hasError();
-C_DECL_SPEC char*                   rrCallConv  getLastError();
+/*!
+ \brief Enable logging
+
+ \return bool status - Ruturns true if succesful
+ \ingroup errorfunctions
+*/
+C_DECL_SPEC bool rrCallConv enableLogging();
+
+/*!
+ \brief Set the logging status level
+
+ The logging level is determined by the following strings
+ 
+ "ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1",
+ "DEBUG", "INFO", "WARNING", "ERROR"
+
+ Example: setLogLevel ("DEBUG4")
+
+ \param char* level - Pointer to the logging level string. 
+ \return bool status - Ruturns true if succesful
+ \ingroup errorfunctions
+*/
+C_DECL_SPEC bool rrCallConv setLogLevel(const char* lvl);
+
+/*!
+ \brief Get the logging status level as a pointer to a string
+
+ The logging level can be one of the following strings
+ 
+ "ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1",
+ "DEBUG", "INFO", "WARNING", "ERROR"
+
+ Example: str = getLogLevel ()
+
+ \return char* level - Returns null is it fails else returns a pointer to the logging string
+ \ingroup errorfunctions
+*/
+C_DECL_SPEC char* rrCallConv getLogLevel();
+
+/*!
+ \brief Get the logging status level as a pointer to a string
+
+ The logging level can be one of the following strings
+ 
+ "ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1",
+ "DEBUG", "INFO", "WARNING", "ERROR"
+
+ Example: str = getLogFileName ()
+
+ \return char* level - Returns null is it fails else returns the full path to the logging file name
+ \ingroup errorfunctions
+*/
+C_DECL_SPEC char* rrCallConv getLogFileName();
+
+/*!
+ \brief Check if there is an error string to retrieve
+
+ Example: status = hasError ()
+
+ \return bool status - Returns true if there is an error waiting to be retrieved
+ \ingroup errorfunctions
+*/
+C_DECL_SPEC bool rrCallConv hasError();
+
+/*!
+ \brief Retrieve the currnt error string
+
+ Example: str = getLastError ()
+
+ \return char* errStrings - Return nukll if fails, otherwise returns a pointer to the error string
+ \ingroup errorfunctions
+*/
+C_DECL_SPEC char* rrCallConv getLastError();
+
 
 // -----------------------------------------------------------------------
 /** \} */
@@ -213,7 +323,7 @@ C_DECL_SPEC char*                   rrCallConv  getLastError();
 
 /*!
  \brief Initialize the roadRunner library and return an instance
- \return RRHandle instance Returns an instance of the library, returns nil if it fails
+ \return RRHandle instance Returns an instance of the library, returns null if it fails
  \ingroup initialization
 */
 C_DECL_SPEC RRHandle rrCallConv getRRInstance();
@@ -263,14 +373,14 @@ C_DECL_SPEC bool rrCallConv loadSBMLFromFile(const char* sbml);
 /*!
  \brief Retrive the current state of the model in the form of an SBML string
  \param char* file name 
- \return bool Returns nil is the call fails, otherwise returns a pointer to the SBML string
+ \return bool Returns null is the call fails, otherwise returns a pointer to the SBML string
  \ingroup loadsave
 */
 C_DECL_SPEC char* rrCallConv writeSBML();      
 
 /*!
  \brief Retrieve the last SBML model that was loaded
- \return char* Returns nil is the call fails, otherwise returns a pointer to the SBML string
+ \return char* Returns null is the call fails, otherwise returns a pointer to the SBML string
  \ingroup loadsave
 */
 C_DECL_SPEC char* rrCallConv getSBML();
@@ -417,7 +527,7 @@ C_DECL_SPEC bool rrCallConv steadyState(double& value);
 
  Example: RRVectorHandle values = computeSteadyStateValues ();
 
- \return Returns the vector of steady state values or nil if an error occured
+ \return Returns the vector of steady state values or null if an error occured
  \ingroup steadystate
 */
 C_DECL_SPEC RRVectorHandle rrCallConv   computeSteadyStateValues();
@@ -643,7 +753,7 @@ C_DECL_SPEC int rrCallConv  getVectorLength (RRVectorHandle vector);
  Example: myVector = createVectorAPI (10);
 
  \param int size The number of element in the new vector
- \return Returns nil if it fails, otherwise returns a pointer to the new vector
+ \return Returns null if it fails, otherwise returns a pointer to the new vector
  \ingroup helperRoutines
 */
 C_DECL_SPEC RRVectorHandle rrCallConv  createVectorAPI (int size);
@@ -759,7 +869,7 @@ C_DECL_SPEC bool rrCallConv  getResultElement (RRResultHandle result, int r, int
  \param RRResultHandle result -  A pointer to a result type variable
  \param int r - The row index for the result data (indexing from zero)
  \param int c - The column index for the result data (indexing from zero)
- \return Returns nil if fails, otherwise returns a pointer to the string column label
+ \return Returns null if fails, otherwise returns a pointer to the string column label
  \ingroup helperRoutines
 */
 C_DECL_SPEC char* rrCallConv  getResultColumnLabel (RRResultHandle result, int column);
