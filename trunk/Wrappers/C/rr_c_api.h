@@ -64,23 +64,23 @@
 
  int main(int nargs, char** argv)
  {
-        RRResultHandle efm, output, params;
+ 		RRHandle rrInstance = getRRInstance();
 
-        if (nargs < 2)
-        {
-            m1 = model1();
-        }
-        else
-        {
-            printf("loading model file %s\n", argv[1]);
-            loadSBMLFromFile(argv[1]);
-        }
-
-
-        output = simualte (0, 100, 1000);  // start, end, num. points
-        printf("output.tab has %i rows and %i columns\n", output->RSize, output->RCols);
+        printf("loading model file %s\n", argv[1]);
+ 
+        if (!loadSBMLFromFile(argv[1])) {
+		   printf ("Error while loading SBML file\n");
+		   printf ("Error message: %s\n, getLastError());
+		   exit();
+		}
+		   
+        RRResultHandle output = simulate (0, 100, 1000);  // start, end, num. points
+        
+		printf("Output table has %i rows and %i columns\n", output->RSize, output->RCols);
         printResult (output);
-        freeREsult (output);
+        
+		freeResult (output);
+		freeRrInstance (rrInstance)
 
         return 0;
  }
@@ -182,7 +182,7 @@ C_DECL_SPEC char*                   rrCallConv  getBuildDate();
 C_DECL_SPEC char*                   rrCallConv  getCopyright();
 C_DECL_SPEC bool                    rrCallConv  setTempFolder(const char* folder);
 C_DECL_SPEC char*                   rrCallConv  getTempFolder();
-C_DECL_SPEC RRCCode*               	rrCallConv   getCCode();
+C_DECL_SPEC RRCCode*               	rrCallConv  getCCode();
 
 
 // -----------------------------------------------------------------------
@@ -667,9 +667,9 @@ C_DECL_SPEC bool rrCallConv  getVectorElement (RRVectorHandle vector, int index,
 
  Example: status = setVectorElement (myVector, 10, 3.1415);
 
- \param RRVectorHandle vector A pointer to the vector variable type
- \param int index An integer indicating the ith element to set (indexing is from zero)
- \param double value The value to store in the vector at the indexth position
+ \param RRVectorHandle vector - A pointer to the vector variable type
+ \param int index - An integer indicating the ith element to set (indexing is from zero)
+ \param double value - The value to store in the vector at the indexth position
  \return Returns True if succesful
  \ingroup helperRoutines
 */
@@ -684,7 +684,7 @@ C_DECL_SPEC char*                   rrCallConv  getStringListElement (RRStringLi
 
  Example: nRows = getMatrixNumRows (m);
 
- \param RRMatrixHandle m A pointer to a matrix type variable
+ \param RRMatrixHandle m - A pointer to a matrix type variable
  \return Returns -1 if fails, otherwise returns the number of rows
  \ingroup helperRoutines
 */
@@ -695,7 +695,7 @@ C_DECL_SPEC int rrCallConv  getMatrixNumRows (RRMatrixHandle m);
 
  Example: nRows = getMatrixNumCols (m);
 
- \param RRMatrixHandle m A pointer to a matrix type variable
+ \param RRMatrixHandle m - A pointer to a matrix type variable
  \return Returns -1 if fails, otherwise returns the number of columns
  \ingroup helperRoutines
 */
@@ -707,10 +707,10 @@ C_DECL_SPEC int rrCallConv  getMatrixNumCols (RRMatrixHandle m);
  Example: status = getMatrixElement (m, 2, 4, &value);
 
  \param RRMatrixHandle m A pointer to a matrix type variable
- \param int r The row index to the matrix
- \param int c The column index to the matrix
- \paramt double* The retrieved value from the matrix
- \return \return Returns True if succesful
+ \param int r - The row index to the matrix
+ \param int c - The column index to the matrix
+ \param double* value - The retrieved value from the matrix
+ \return Returns True if succesful
  \ingroup helperRoutines
 */
 C_DECL_SPEC bool rrCallConv  getMatrixElement (RRMatrixHandle m, int r, int c, double& value);
@@ -720,7 +720,7 @@ C_DECL_SPEC bool rrCallConv  getMatrixElement (RRMatrixHandle m, int r, int c, d
 
  Example: nRows = getResultNumRows (result);
 
- \param RRResultHandle result A pointer to a result type variable
+ \param RRResultHandle result - A pointer to a result type variable
  \return Returns -1 if fails, otherwise returns the number of rows
  \ingroup helperRoutines
 */
@@ -731,7 +731,7 @@ C_DECL_SPEC int rrCallConv  getResultNumRows (RRResultHandle result);
 
  Example: nRows = getResultNumCols (result);
 
- \param RRResultHandle result A pointer to a result type variable
+ \param RRResultHandle result - A pointer to a result type variable
  \return Returns -1 if fails, otherwise returns the number of columns
  \ingroup helperRoutines
 */
@@ -742,11 +742,11 @@ C_DECL_SPEC int rrCallConv  getResultNumCols (RRResultHandle result);
 
  Example: status = getResultElement (result, 2, 4, &value);
 
- \param RRResultHandle m A pointer to a result type variable
- \param int r The row index to the result data
- \param int c The column index to the result data
- \paramt double* The retrieved value from the result data
- \return \return Returns True if succesful
+ \param RRResultHandle result - A pointer to a result type variable
+ \param int r -The row index to the result data
+ \param int c - The column index to the result data
+ \paramt double* value - The retrieved value from the result data
+ \return - Returns True if succesful
  \ingroup helperRoutines
 */
 C_DECL_SPEC bool rrCallConv  getResultElement (RRResultHandle result, int r, int c, double& value);
@@ -756,9 +756,10 @@ C_DECL_SPEC bool rrCallConv  getResultElement (RRResultHandle result, int r, int
 
  Example: str = getResultColumnLabel (result, 2, 4);
 
- \param RRResultHandle result A pointer to a result type variable
- \param int column The column index for the result data (indexing from zero)
- \return \return Returns nil if fails, otherwise returns a pointer to the string column label
+ \param RRResultHandle result -  A pointer to a result type variable
+ \param int r - The row index for the result data (indexing from zero)
+ \param int c - The column index for the result data (indexing from zero)
+ \return Returns nil if fails, otherwise returns a pointer to the string column label
  \ingroup helperRoutines
 */
 C_DECL_SPEC char* rrCallConv  getResultColumnLabel (RRResultHandle result, int column);
