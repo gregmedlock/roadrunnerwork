@@ -8,12 +8,12 @@
 namespace rr
 {
 
-TSelectionRecord::TSelectionRecord()
+TSelectionRecord::TSelectionRecord(const int& _index, const TSelectionType _type, const string& _p1, const string _p2)
 :
-index(0),
-p1(""),
-p2(""),
-selectionType(clUnknown)
+index(_index),
+p1(_p1),
+p2(_p2),
+selectionType(_type)
 {}
 
 ostream& operator<< (ostream& stream, const TSelectionRecord& rec)

@@ -160,9 +160,8 @@ C_DECL_SPEC char*                   rrCallConv  getVersion();
 
 // Logging
 C_DECL_SPEC bool                    rrCallConv  enableLogging();
-C_DECL_SPEC bool                    rrCallConv  setLogLevel(const int& lvl);
-C_DECL_SPEC bool                    rrCallConv  setLogLevelFromString(const char* lvl);
-C_DECL_SPEC bool                    rrCallConv  getLogLevel(int& lvl);
+C_DECL_SPEC bool                    rrCallConv  setLogLevel(const char* lvl);
+C_DECL_SPEC char*                   rrCallConv  getLogLevel();
 C_DECL_SPEC char*                   rrCallConv  getLogFileName();
 
 C_DECL_SPEC char*                   rrCallConv  getBuildDate();
@@ -433,7 +432,7 @@ C_DECL_SPEC bool                    rrCallConv   getScaledFloatingSpeciesElastic
 C_DECL_SPEC char*                   rrCallConv   printResult(const RRResultHandle result);
 C_DECL_SPEC char*                   rrCallConv   printMatrix(const RRMatrixHandle mat);
 C_DECL_SPEC char*                   rrCallConv   printVector(const RRVectorHandle vec);
-C_DECL_SPEC char*                   rrCallConv   printList(const RRStringListHandle list);
+C_DECL_SPEC char*                   rrCallConv   printStringList(const RRStringListHandle list);
 C_DECL_SPEC char*                   rrCallConv   printStringArrayList(const RRStringArrayList* list);
 C_DECL_SPEC char*                   rrCallConv   printArrayList(const RRArrayList2Handle list);
 

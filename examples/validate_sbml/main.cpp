@@ -36,7 +36,7 @@ int main(int argc, char * argv[])
         gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(args.TempDataFolder, "RoadRunner.log") )));
 
         Log(lShowAlways)<<"Logs are going to "<<gLog.GetLogFileName();
-        Log(lShowAlways)<<"Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+        Log(lShowAlways)<<"Log level is:" <<gLog.GetCurrentLogLevel();
 
         rr = new RoadRunner();
         rr->Reset();

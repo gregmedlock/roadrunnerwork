@@ -178,6 +178,8 @@ int RoadRunner::CreateSelectionList()
     if(theList.Count() < 2)
     {
         //AutoSelect
+        theList.Add("Time");
+
         //Get All floating species
        StringList oFloating  = getFloatingSpeciesNames();
        for(int i = 0; i < oFloating.Count(); i++)
@@ -1369,14 +1371,8 @@ void RoadRunner::setSelectionList(const StringList& _selList)
 {
     StringList newSelectionList(_selList);
 
-    //Make sure time is the first 'selection'. If not, add it
-    if(newSelectionList.Count() && newSelectionList[0] != "time")
-    {
-        newSelectionList.InsertAt(0, "time");
-    }
 
     selectionList.clear();
-    selectionList.resize(newSelectionList.Count());
 
     StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList bs = mModelGenerator->getBoundarySpeciesList();
@@ -1385,11 +1381,11 @@ void RoadRunner::setSelectionList(const StringList& _selList)
     StringList gp = mModelGenerator->getGlobalParameterList();
 //    StringList sr = mModelGenerator->ModifiableSpeciesReferenceList;
 
-    for (int i = 0; i < newSelectionList.Count(); i++)
+    for (int i = 0; i < _selList.Count(); i++)
     {
-        if (newSelectionList[i] == "time")
+    	if (ToUpper(newSelectionList[i]) == ToUpper("time"))
         {
-            selectionList[i].selectionType = TSelectionType::clTime;
+        	selectionList.push_back(TSelectionRecord(0, clTime));
         }
 
         // Check for species
@@ -1397,23 +1393,20 @@ void RoadRunner::setSelectionList(const StringList& _selList)
         {
             if (newSelectionList[i] == fs[j])
             {
-                selectionList[i].index = j;
-                selectionList[i].selectionType = TSelectionType::clFloatingSpecies;
+               	selectionList.push_back(TSelectionRecord(j, TSelectionType::clFloatingSpecies));
                 break;
             }
 
             if (newSelectionList[i] == "[" + fs[j] + "]")
             {
-                selectionList[i].index = j;
-                selectionList[i].selectionType = TSelectionType::clFloatingAmount;
+               	selectionList.push_back(TSelectionRecord(j, clFloatingSpecies));
                 break;
             }
 
             // Check for species rate of change
             if (newSelectionList[i] == fs[j] + "'")
             {
-                selectionList[i].index = j;
-                selectionList[i].selectionType = TSelectionType::clRateOfChange;
+                selectionList.push_back(TSelectionRecord(j, clRateOfChange));
                 break;
             }
         }
@@ -1423,14 +1416,12 @@ void RoadRunner::setSelectionList(const StringList& _selList)
         {
             if (newSelectionList[i] == bs[j])
             {
-                selectionList[i].index = j;
-                selectionList[i].selectionType = TSelectionType::clBoundarySpecies;
+                selectionList.push_back(TSelectionRecord(j, clBoundarySpecies));
                 break;
             }
             if (newSelectionList[i] == "[" + bs[j] + "]")
             {
-                selectionList[i].index = j;
-                selectionList[i].selectionType = TSelectionType::clBoundaryAmount;
+                selectionList.push_back(TSelectionRecord(j, clBoundaryAmount));
                 break;
             }
         }
@@ -1440,8 +1431,7 @@ void RoadRunner::setSelectionList(const StringList& _selList)
             // Check for reaction rate
             if (newSelectionList[i] == rs[j])
             {
-                selectionList[i].index = j;
-                selectionList[i].selectionType = TSelectionType::clFlux;
+                selectionList.push_back(TSelectionRecord(j, clFlux));
                 break;
             }
         }
@@ -1451,15 +1441,13 @@ void RoadRunner::setSelectionList(const StringList& _selList)
             // Check for volume
             if (newSelectionList[i] == vol[j])
             {
-                selectionList[i].index = j;
-                selectionList[i].selectionType = TSelectionType::clVolume;
+                selectionList.push_back(TSelectionRecord(j, clVolume));
                 break;
             }
 
             if (newSelectionList[i] == "[" + vol[j] + "]")
             {
-                selectionList[i].index = j;
-                selectionList[i].selectionType = TSelectionType::clVolume;
+                selectionList.push_back(TSelectionRecord(j, clVolume));
                 break;
             }
         }
@@ -1468,8 +1456,7 @@ void RoadRunner::setSelectionList(const StringList& _selList)
         {
             if (newSelectionList[i] == gp[j])
             {
-                selectionList[i].index = j;
-                selectionList[i].selectionType = TSelectionType::clParameter;
+                selectionList.push_back(TSelectionRecord(j, clParameter));
                 break;
             }
         }

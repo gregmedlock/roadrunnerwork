@@ -128,7 +128,7 @@ int main(int argc, char * argv[])
         gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(JoinPath(dataOutputFolder, logFileName))));
         Log(lDebug)<<"Logs are going to "<<gLog.GetLogFileName();
 
-        Log(lDebug)<<"Current Log level is:" <<LogLevelToString(gLog.GetLogLevel());
+        Log(lDebug)<<"Current Log level is:" <<gLog.GetCurrentLogLevel();
         TestSuiteModelSimulation simulation(dataOutputFolder);
 
 

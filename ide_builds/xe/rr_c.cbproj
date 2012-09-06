@@ -1,4 +1,4 @@
-	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{15A35B10-E1F3-471E-A8EA-86C0202E1251}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -168,7 +168,7 @@
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="RunParams">-p -m./../Models/squareWaveModel.xml -t&quot;r:/rrTemp&quot; -l&quot;Time S1 S2&quot; -v&quot;Info&quot;</Parameters>
+						<Parameters Name="RunParams">-p -m./../Models/squareWaveModel.xml -t&quot;r:/rrTemp&quot; -l&quot;S1 J0&quot; -v&quot;Debug&quot;</Parameters>
 					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

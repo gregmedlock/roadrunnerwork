@@ -45,11 +45,13 @@ int main(int argc, char* argv[])
 
     setTempFolder(args.TempDataFolder.c_str());
 
-    if(!setLogLevel(args.CurrentLogLevel))
+    if(!setLogLevel(GetLogLevelAsString(args.CurrentLogLevel).c_str()) )
     {
         cerr<<"Failed setting log RoadRunner Log level";
     	doMore = false;
     }
+
+    cout<<"Currrent Log Level: "<<getLogLevel();
 
     if(!enableLogging())
     {
@@ -127,21 +129,20 @@ int main(int argc, char* argv[])
     	setTimeEnd(args.EndTime);
 	    setNumPoints(args.Steps);
     	setSelectionList(args.SelectionList.c_str());
-		cout<<"Roadrunner is about to simulate model";
+		cout<<"Roadrunner is about to simulate model\n";
         RRStringListHandle list =  getSelectionList();
 
         if(list)
         {
-	        cout<<"\nThe following is selected: "<<printList(list);
-			result = simulate();
+	        cout<<"\nThe following is selected: "<<printStringList(list)<<endl;
         }
         else
         {
-			cout<<"SelectionList problem: List is empty";
+			cout<<"SelectionList list is empty. Default list will be selected during simulation\n";
         }
 
+        result = simulate();
     }
-
 
 	if(doMore && result)
 	{
@@ -157,11 +158,12 @@ int main(int argc, char* argv[])
 			ofstream fOut(outPutFName.c_str());
 			if(!fOut)
 			{
-				cerr<<"Failed opening file "<<outPutFName<<" for writing.";
+				cerr<<"Failed opening file: "<<outPutFName<<" for writing.";
 			}
 			else
 			{
-				fOut<<printResult(result);	
+				cout<<"Saving data to file: "<<outPutFName<<"\n";
+				fOut<<printResult(result);
 			}
 		}				
 	}
