@@ -352,7 +352,7 @@ C_DECL_SPEC bool rrCallConv loadSBMLFromFile(const char* fileName);
   \return Returns null is the call fails, otherwise returns a pointer to the SBML string
  \ingroup loadsave
 */
-C_DECL_SPEC char* rrCallConv writeSBML();      
+C_DECL_SPEC char* rrCallConv getCurrentSBML();      
 
 /*!
  \brief Retrieve the last SBML model that was loaded
