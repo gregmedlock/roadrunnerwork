@@ -113,8 +113,8 @@ def loadSBML(sbml):
 ##Loads SBML model from a file
 #
 #Takes a string as an argument
-def loadSBMLFromFile(sbml):
-    return handle.loadSBMLFromFile(sbml)
+def loadSBMLFromFile(fileName):
+    return handle.loadSBMLFromFile(fileName)
 
 #SBML utility methods
 handle.getParamPromotedSBML.restype = c_char_p
