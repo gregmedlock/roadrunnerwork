@@ -9,7 +9,7 @@ EXPORTS
     getCurrentSBML                              = _getCurrentSBML@0
     computeSteadyStateValues                    = _computeSteadyStateValues@0         
     evalModel                                   = _evalModel@0                        
-    freeArrayList                               = _freeArrayList@4                        
+    freeArrayList                               = _freeList@4                        
     freeCCode                                   = _freeCCode@4                        
     freeMatrix                                  = _freeMatrix@4                       
     freeRRInstance                              = _freeRRInstance@4                   

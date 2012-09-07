@@ -372,9 +372,9 @@ int main(int argc, char* argv[])
     cout<<vectorToString(getFloatingSpeciesConcentrations());
     cout<<vectorToString(getGlobalParameterValues());
     cout<<"\n\n Symbols\n";
-    cRRArrayList* symHandle = getAvailableSymbols();
+    cRRList* symHandle = getAvailableSymbols();
     cout<<listToString(symHandle);
-    freeArrayList(symHandle);
+    freeList(symHandle);
     cout<<"\n\n ================================\n";
     RRVector* test = getReactionRates();
     cout<<vectorToString(test);

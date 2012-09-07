@@ -43,16 +43,18 @@
  *
  * \section intro_sec Introduction
  *
- * RoadRunner is a high performance and portable simulation engine 
+ * RoadRunner is a SBML compliant high performance and portable simulation engine 
  * for systems and synthetic biology. To run a simple SBML model 
  * and generate time series data we would call:
  *
  \code
- RRResultHandle output;
+ RRResultHandle result;
 
- loadSBMLFromFile ("mymodel.xml");
+ if (!loadSBMLFromFile ("mymodel.xml"))
+    exit;
 
- output = simulate (0, 10, 100);
+ result = simulate (0, 10, 100);
+ printf (resultToString (output)
  \endcode
 
  More complex example:
@@ -80,7 +82,7 @@
         printResult (output);
         
         freeResult (output);
-        freeRrInstance (rrInstance)
+        freeRRInstance (rrInstance)
 
         return 0;
  }
@@ -119,7 +121,7 @@
  \defgroup floating Floating species group
  \brief Get information about floating species
 
- \defgroup initialConditions Initial consitions group
+ \defgroup initialConditions Initial conditions group
  \brief Set or get initial conditions
  
  \defgroup parameters Parameter group
@@ -1005,7 +1007,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getEigenValueIds();
  \return Returns -1 if it fails, if succesful it returns a pointer to a RRArrayListHandle struct
  \ingroup state
 */
-C_DECL_SPEC cRRArrayListHandle rrCallConv getAvailableSymbols();
+C_DECL_SPEC cRRListHandle rrCallConv getAvailableSymbols();
 
 // MCA methods
 /*!
@@ -1203,11 +1205,11 @@ C_DECL_SPEC char* rrCallConv printStringArrayList(const RRStringArrayList* list)
  \return Returns list as a character string
  \ingroup toString
 */
-C_DECL_SPEC char* rrCallConv listToString(const cRRArrayListHandle list);
+C_DECL_SPEC char* rrCallConv listToString(const cRRListHandle list);
 
 // Free memory functions
 /*!
- \brief Free the result from simulate and simulateEx
+ \brief Free the result struct returned by simulate() and simulateEx()
  \ingroup freeRoutines
 */
 C_DECL_SPEC bool rrCallConv freeResult(RRResultHandle handle);
@@ -1232,10 +1234,10 @@ C_DECL_SPEC bool rrCallConv freeStringList(RRStringListHandle sl);
 C_DECL_SPEC bool rrCallConv freeStringArrayList(RRStringArrayListHandle sl);
 
 /*!
- \brief Free RRArrayListHandle structures
+ \brief Free RRListHandle structures
  \ingroup freeRoutines
 */
-C_DECL_SPEC bool rrCallConv freeArrayList(cRRArrayListHandle theList);
+C_DECL_SPEC bool rrCallConv freeList(cRRListHandle theList);
 
 /*!
  \brief Free RRVectorHandle structures
