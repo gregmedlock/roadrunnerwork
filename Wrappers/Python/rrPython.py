@@ -5,7 +5,7 @@
 import sys
 import os
 from ctypes import *
-rrInstallFolder = os.path.abspath(os.path.join(os.path.dirname(rrPython.__file__), '..', 'bin'))
+rrInstallFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'bin'))
 os.environ['PATH'] = rrInstallFolder + ';' + "c:\\Python27" + ';' + os.environ['PATH']
 handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
 
@@ -296,10 +296,10 @@ def getValue(symbolName):
 ##Sets the value of a single species
 #
 #Takes (string, double) as an argument for symbolName and value, respectively
-def setValue(symbolName, val):
-    value = c_double(val)
-    if handle.setValue(symbolName, byref(value)) == True:
-        return value.value;
+def setValue(symbolName, value):
+    data = c_double(value)
+    if handle.setValue(symbolName, byref(data)) == True:
+        return data.data;
     else:
         raise RuntimeError('Index out of range')
 
