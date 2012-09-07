@@ -10,6 +10,19 @@ rrInstallFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 
 os.environ['PATH'] = rrInstallFolder + ';' + "c:\\Python27" + ';' + os.environ['PATH']
 handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
 
+##\mainpage notitle
+#\section Introduction
+#RoadRunner is a high performance and portable simulation engine for systems and synthetic biology. To run a simple SBML model and generate time series data we would call:
+#
+#@code
+#
+#import rrPython
+#
+#rrPython.loadSBMLFromFile('C:\\Models\\mymodel.xml')
+#
+#rrPython.simulate()
+#@endcode
+
 
 #=======================rr_c_api=======================#
 rr = handle.getRRInstance()
