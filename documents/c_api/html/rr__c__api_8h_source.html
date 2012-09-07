@@ -79,345 +79,352 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <a href="rr__c__api_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
-<a name="l00141"></a>00141 <span class="preprocessor">#ifndef rrC_APIH</span>
-<a name="l00142"></a>00142 <span class="preprocessor"></span><span class="preprocessor">#define rrC_APIH</span>
-<a name="l00143"></a>00143 <span class="preprocessor"></span>
-<a name="l00144"></a>00144 <span class="preprocessor">#if defined(__cplusplus)</span>
-<a name="l00145"></a>00145 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span>
-<a name="l00146"></a>00146 {
-<a name="l00147"></a>00147 <span class="preprocessor">#else</span>
-<a name="l00148"></a>00148 <span class="preprocessor"></span><span class="comment">//#include &lt;stdio.h&gt;</span>
-<a name="l00149"></a>00149 <span class="comment">//#include &quot;rr_support/stdbool.h&quot;</span>
-<a name="l00150"></a>00150 <span class="preprocessor">#endif</span>
-<a name="l00151"></a>00151 <span class="preprocessor"></span>
-<a name="l00152"></a>00152 <span class="preprocessor">#include &quot;<a class="code" href="rr__c__api__exporter_8h.html">rr_c_api_exporter.h</a>&quot;</span>
-<a name="l00153"></a>00153 <span class="preprocessor">#include &quot;<a class="code" href="rr__c__types_8h.html" title="roadRunner C API 2012">rr_c_types.h</a>&quot;</span>
-<a name="l00154"></a>00154 
-<a name="l00155"></a>00155 <span class="preprocessor">#if defined(_MSC_VER)</span>
-<a name="l00156"></a>00156 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;direct.h&gt;</span>
-<a name="l00157"></a>00157 <span class="preprocessor">        #define getcwd _getcwd</span>
-<a name="l00158"></a>00158 <span class="preprocessor"></span><span class="preprocessor">        #define chdir  _chrdir</span>
-<a name="l00159"></a>00159 <span class="preprocessor"></span><span class="preprocessor">        #define MAXPATH _MAX_PATH</span>
-<a name="l00160"></a>00160 <span class="preprocessor"></span><span class="preprocessor">#elif defined(__BORLANDC__)</span>
-<a name="l00161"></a>00161 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;dir.h&gt;</span>
-<a name="l00162"></a>00162 <span class="preprocessor">#else</span>
-<a name="l00163"></a>00163 <span class="preprocessor"></span><span class="preprocessor">#include &lt;unistd.h&gt;</span>
-<a name="l00164"></a>00164 <span class="preprocessor">#endif</span>
-<a name="l00165"></a>00165 <span class="preprocessor"></span>
-<a name="l00166"></a>00166 <span class="comment">// -----------------------------------------------------------------------</span>
-<a name="l00172"></a>00172 <span class="comment"></span><span class="comment">// -----------------------------------------------------------------------</span>
-<a name="l00173"></a>00173 
-<a name="l00179"></a>00179 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__utility.html#ga1a2869b18d14e4d398c6a0e0402615d9" title="Retrieve the current version number of the library.">getVersion</a>();
-<a name="l00180"></a>00180 
-<a name="l00186"></a>00186 C_DECL_SPEC <span class="keywordtype">char</span>*  rrCallConv <a class="code" href="group__utility.html#ga3d14f41e1a100776f91d8574e8aab58b" title="Retrieve the current build date of the library.">getBuildDate</a>();
-<a name="l00187"></a>00187 
-<a name="l00193"></a>00193 C_DECL_SPEC <span class="keywordtype">char</span>*  rrCallConv <a class="code" href="group__utility.html#gab4695b0f4b2ef3b91f545302de0337a2" title="Retrieve the current copyright notice for the library.">getCopyright</a>();
-<a name="l00194"></a>00194 
-<a name="l00204"></a>00204 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__utility.html#ga957837fdd4683d56ef29c56ad701a0ba" title="SEt the temporary folder.">setTempFolder</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* folder);
-<a name="l00205"></a>00205 
-<a name="l00216"></a>00216 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__utility.html#gad8e35b98b406e9c998e33ec21248da8a" title="Retrieve the current temporary folder path.">getTempFolder</a>();
-<a name="l00217"></a>00217 
-<a name="l00228"></a>00228 C_DECL_SPEC <a class="code" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCode</a>* rrCallConv <a class="code" href="group__utility.html#gaef1b097cc2ad79dfc83e0d049846f87f" title="Retrieve a pointer to the C code structure, RRCCode.">getCCode</a>();
-<a name="l00229"></a>00229 
-<a name="l00230"></a>00230 
-<a name="l00231"></a>00231 <span class="comment">// Logging</span>
-<a name="l00232"></a>00232 
-<a name="l00239"></a>00239 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__errorfunctions.html#ga420ec462ff4ab4bb98f9a1bd8f39434b" title="Enable logging.">enableLogging</a>();
-<a name="l00240"></a>00240 
-<a name="l00255"></a>00255 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__errorfunctions.html#ga59c256885fce7df1e4d6d5f0c5554bab" title="Set the logging status level.">setLogLevel</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* lvl);
-<a name="l00256"></a>00256 
-<a name="l00270"></a>00270 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__errorfunctions.html#ga77071837a73206d3e27220f3dff96ad4" title="Get the logging status level as a pointer to a string.">getLogLevel</a>();
-<a name="l00271"></a>00271 
-<a name="l00285"></a>00285 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__errorfunctions.html#ga9e5c453651f5a3743e9bc10f0e81be66" title="Get the logging status level as a pointer to a string.">getLogFileName</a>();
-<a name="l00286"></a>00286 
-<a name="l00295"></a>00295 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__errorfunctions.html#ga1066caa37a0d7dca6146efd756d058c8" title="Check if there is an error string to retrieve.">hasError</a>();
-<a name="l00296"></a>00296 
-<a name="l00305"></a>00305 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__errorfunctions.html#ga34d1ec9db4032749cde607b4f403f2b9" title="Retrieve the currnt error string.">getLastError</a>();
-<a name="l00306"></a>00306 
-<a name="l00307"></a>00307 
-<a name="l00313"></a>00313 C_DECL_SPEC RRHandle rrCallConv <a class="code" href="group__initialization.html#gab5d1a179f93b94c8ddefa909131b3f11" title="Initialize the roadRunner library and return an instance.">getRRInstance</a>();
-<a name="l00314"></a>00314 
-<a name="l00320"></a>00320 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__initialization.html#ga59ccea13a522b2ce61220cff4ea761c2" title="Free the roadRunner instance.">freeRRInstance</a>(RRHandle handle);
-<a name="l00321"></a>00321 
-<a name="l00322"></a>00322 
-<a name="l00323"></a>00323 <span class="comment">// Flags/Options</span>
-<a name="l00324"></a>00324 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv setComputeAndAssignConservationLaws(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; OnOrOff);
+<a name="l00145"></a>00145 <span class="preprocessor">#ifndef rrC_APIH</span>
+<a name="l00146"></a>00146 <span class="preprocessor"></span><span class="preprocessor">#define rrC_APIH</span>
+<a name="l00147"></a>00147 <span class="preprocessor"></span>
+<a name="l00148"></a>00148 <span class="preprocessor">#if defined(__cplusplus)</span>
+<a name="l00149"></a>00149 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span>
+<a name="l00150"></a>00150 {
+<a name="l00151"></a>00151 <span class="preprocessor">#else</span>
+<a name="l00152"></a>00152 <span class="preprocessor"></span><span class="comment">//#include &lt;stdio.h&gt;</span>
+<a name="l00153"></a>00153 <span class="comment">//#include &quot;rr_support/stdbool.h&quot;</span>
+<a name="l00154"></a>00154 <span class="preprocessor">#endif</span>
+<a name="l00155"></a>00155 <span class="preprocessor"></span>
+<a name="l00156"></a>00156 <span class="preprocessor">#include &quot;<a class="code" href="rr__c__api__exporter_8h.html">rr_c_api_exporter.h</a>&quot;</span>
+<a name="l00157"></a>00157 <span class="preprocessor">#include &quot;<a class="code" href="rr__c__types_8h.html" title="roadRunner C API 2012">rr_c_types.h</a>&quot;</span>
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159 <span class="preprocessor">#if defined(_MSC_VER)</span>
+<a name="l00160"></a>00160 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;direct.h&gt;</span>
+<a name="l00161"></a>00161 <span class="preprocessor">        #define getcwd _getcwd</span>
+<a name="l00162"></a>00162 <span class="preprocessor"></span><span class="preprocessor">        #define chdir  _chrdir</span>
+<a name="l00163"></a>00163 <span class="preprocessor"></span><span class="preprocessor">        #define MAXPATH _MAX_PATH</span>
+<a name="l00164"></a>00164 <span class="preprocessor"></span><span class="preprocessor">#elif defined(__BORLANDC__)</span>
+<a name="l00165"></a>00165 <span class="preprocessor"></span><span class="preprocessor">        #include &lt;dir.h&gt;</span>
+<a name="l00166"></a>00166 <span class="preprocessor">#else</span>
+<a name="l00167"></a>00167 <span class="preprocessor"></span><span class="preprocessor">#include &lt;unistd.h&gt;</span>
+<a name="l00168"></a>00168 <span class="preprocessor">#endif</span>
+<a name="l00169"></a>00169 <span class="preprocessor"></span>
+<a name="l00170"></a>00170 <span class="comment">// -----------------------------------------------------------------------</span>
+<a name="l00176"></a>00176 <span class="comment"></span><span class="comment">// -----------------------------------------------------------------------</span>
+<a name="l00177"></a>00177 
+<a name="l00183"></a>00183 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__utility.html#ga1a2869b18d14e4d398c6a0e0402615d9" title="Retrieve the current version number of the library.">getVersion</a>();
+<a name="l00184"></a>00184 
+<a name="l00190"></a>00190 C_DECL_SPEC <span class="keywordtype">char</span>*  rrCallConv <a class="code" href="group__utility.html#ga3d14f41e1a100776f91d8574e8aab58b" title="Retrieve the current build date of the library.">getBuildDate</a>();
+<a name="l00191"></a>00191 
+<a name="l00197"></a>00197 C_DECL_SPEC <span class="keywordtype">char</span>*  rrCallConv <a class="code" href="group__utility.html#gab4695b0f4b2ef3b91f545302de0337a2" title="Retrieve the current copyright notice for the library.">getCopyright</a>();
+<a name="l00198"></a>00198 
+<a name="l00208"></a>00208 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__utility.html#ga957837fdd4683d56ef29c56ad701a0ba" title="SEt the temporary folder.">setTempFolder</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* folder);
+<a name="l00209"></a>00209 
+<a name="l00220"></a>00220 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__utility.html#gad8e35b98b406e9c998e33ec21248da8a" title="Retrieve the current temporary folder path.">getTempFolder</a>();
+<a name="l00221"></a>00221 
+<a name="l00232"></a>00232 C_DECL_SPEC <a class="code" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCode</a>* rrCallConv <a class="code" href="group__utility.html#gaef1b097cc2ad79dfc83e0d049846f87f" title="Retrieve a pointer to the C code structure, RRCCode.">getCCode</a>();
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234 
+<a name="l00235"></a>00235 <span class="comment">// Logging</span>
+<a name="l00236"></a>00236 
+<a name="l00243"></a>00243 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__errorfunctions.html#ga420ec462ff4ab4bb98f9a1bd8f39434b" title="Enable logging.">enableLogging</a>();
+<a name="l00244"></a>00244 
+<a name="l00259"></a>00259 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__errorfunctions.html#ga59c256885fce7df1e4d6d5f0c5554bab" title="Set the logging status level.">setLogLevel</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* lvl);
+<a name="l00260"></a>00260 
+<a name="l00274"></a>00274 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__errorfunctions.html#ga77071837a73206d3e27220f3dff96ad4" title="Get the logging status level as a pointer to a string.">getLogLevel</a>();
+<a name="l00275"></a>00275 
+<a name="l00289"></a>00289 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__errorfunctions.html#ga9e5c453651f5a3743e9bc10f0e81be66" title="Get the logging status level as a pointer to a string.">getLogFileName</a>();
+<a name="l00290"></a>00290 
+<a name="l00299"></a>00299 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__errorfunctions.html#ga1066caa37a0d7dca6146efd756d058c8" title="Check if there is an error string to retrieve.">hasError</a>();
+<a name="l00300"></a>00300 
+<a name="l00309"></a>00309 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__errorfunctions.html#ga34d1ec9db4032749cde607b4f403f2b9" title="Retrieve the currnt error string.">getLastError</a>();
+<a name="l00310"></a>00310 
+<a name="l00311"></a>00311 
+<a name="l00317"></a>00317 C_DECL_SPEC RRHandle rrCallConv <a class="code" href="group__initialization.html#gab5d1a179f93b94c8ddefa909131b3f11" title="Initialize the roadRunner library and return an instance.">getRRInstance</a>();
+<a name="l00318"></a>00318 
+<a name="l00324"></a>00324 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__initialization.html#ga59ccea13a522b2ce61220cff4ea761c2" title="Free the roadRunner instance.">freeRRInstance</a>(RRHandle handle);
 <a name="l00325"></a>00325 
-<a name="l00326"></a>00326 <span class="comment">// -----------------------------------------------------------------------</span>
-<a name="l00327"></a>00327 <span class="comment">// Read and Write models</span>
-<a name="l00328"></a>00328 <span class="comment">// -----------------------------------------------------------------------</span>
+<a name="l00326"></a>00326 
+<a name="l00327"></a>00327 <span class="comment">// Flags/Options</span>
+<a name="l00328"></a>00328 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv setComputeAndAssignConservationLaws(<span class="keyword">const</span> <span class="keywordtype">bool</span>&amp; OnOrOff);
 <a name="l00329"></a>00329 
-<a name="l00336"></a>00336 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__loadsave.html#ga4105f02dfdb959175f30cecebfb1c081" title="Create a model from an SBML string.">loadSBML</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sbml);
-<a name="l00337"></a>00337 
-<a name="l00344"></a>00344 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__loadsave.html#ga3147e10d84bddb6435bee4b1db0514bf" title="Create a model from a SBML file.">loadSBMLFromFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sbml);
-<a name="l00345"></a>00345 
-<a name="l00351"></a>00351 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__loadsave.html#ga7d683d70e6966107f81a3e8c547bcd76" title="Retrieve the current state of the model in the form of an SBML string.">writeSBML</a>();      
-<a name="l00352"></a>00352 
-<a name="l00358"></a>00358 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__loadsave.html#ga05a79ded419b52fa2965fce1700c0e82" title="Retrieve the last SBML model that was loaded.">getSBML</a>();
-<a name="l00359"></a>00359 
-<a name="l00360"></a>00360 
-<a name="l00361"></a>00361 <span class="comment">// -------------------------------------------------------------------------</span>
-<a name="l00362"></a>00362 <span class="comment">// SBML utility methods</span>
-<a name="l00363"></a>00363 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv getParamPromotedSBML(<span class="keyword">const</span> <span class="keywordtype">char</span>* sArg);
+<a name="l00330"></a>00330 <span class="comment">// -----------------------------------------------------------------------</span>
+<a name="l00331"></a>00331 <span class="comment">// Read and Write models</span>
+<a name="l00332"></a>00332 <span class="comment">// -----------------------------------------------------------------------</span>
+<a name="l00333"></a>00333 
+<a name="l00340"></a>00340 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__loadsave.html#ga4105f02dfdb959175f30cecebfb1c081" title="Create a model from an SBML string.">loadSBML</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sbml);
+<a name="l00341"></a>00341 
+<a name="l00348"></a>00348 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__loadsave.html#ga3147e10d84bddb6435bee4b1db0514bf" title="Create a model from a SBML file.">loadSBMLFromFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* sbml);
+<a name="l00349"></a>00349 
+<a name="l00355"></a>00355 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__loadsave.html#ga7d683d70e6966107f81a3e8c547bcd76" title="Retrieve the current state of the model in the form of an SBML string.">writeSBML</a>();      
+<a name="l00356"></a>00356 
+<a name="l00362"></a>00362 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__loadsave.html#ga05a79ded419b52fa2965fce1700c0e82" title="Retrieve the last SBML model that was loaded.">getSBML</a>();
+<a name="l00363"></a>00363 
 <a name="l00364"></a>00364 
-<a name="l00371"></a>00371 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga320ffeeba3e5505371b52ce61715bf82" title="Set the simulator&#39;s capabilities.">setCapabilities</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* caps);
-<a name="l00372"></a>00372 
-<a name="l00373"></a>00373 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__simulation.html#gaecce7b3dda3548fbe579922aadf25610" title="Get the simulator&#39;s capabilities.">getCapabilities</a>();
-<a name="l00379"></a>00379 
-<a name="l00386"></a>00386 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga1a636a76ad610d99fe1c780bb3d9296d" title="Set the time start for a simulation.">setTimeStart</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeStart);
-<a name="l00387"></a>00387 
-<a name="l00394"></a>00394 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga1313e21d622cd846bdd75071e965eb6c" title="Set the time end for a simulation.">setTimeEnd</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeEnd);
-<a name="l00395"></a>00395 
-<a name="l00402"></a>00402 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga448ead53bb8913de664cc8ad675b4197" title="Set the number of points to generate in a simulation.">setNumPoints</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrPoints);
-<a name="l00403"></a>00403 
-<a name="l00413"></a>00413 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga6465c94b6dfed39a6ef614bd0a68cb9b" title="Set the selection list for output from simulate() or simulateEx()">setSelectionList</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* list);
-<a name="l00414"></a>00414 
-<a name="l00421"></a>00421 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__simulation.html#ga1db0b86ed7fd0d6e19f8df85b7577253" title="Get the current selection list for simulate() or simulateEx()">getSelectionList</a>();
-<a name="l00422"></a>00422 
-<a name="l00430"></a>00430 C_DECL_SPEC <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> rrCallConv <a class="code" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate</a>();
-<a name="l00431"></a>00431 
-<a name="l00440"></a>00440 C_DECL_SPEC <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> rrCallConv <a class="code" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeStart, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeEnd, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numberOfPoints);
-<a name="l00441"></a>00441 
-<a name="l00453"></a>00453 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga190fff177accdfbc9c192c4993807e2e" title="Carry out a one step integration of the model.">oneStep</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; currentTime, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; stepSize, <span class="keywordtype">double</span>&amp; value);
-<a name="l00454"></a>00454 
-<a name="l00464"></a>00464 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga18b4fbd0dc5aa3f25d58367a406f425c" title="Get the value of the current time start.">getTimeStart</a>(<span class="keywordtype">double</span>&amp; timeStart);
-<a name="l00465"></a>00465 
-<a name="l00475"></a>00475 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga451e7ecddd0431316048a332410b0600" title="Get the value of the current time end.">getTimeEnd</a>(<span class="keywordtype">double</span>&amp; timeEnd);
-<a name="l00476"></a>00476 
-<a name="l00486"></a>00486 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#gacd9cb734773710f640742a9f040dccc5" title="Get the value of the current number of points.">getNumPoints</a> (<span class="keywordtype">int</span>&amp; numPoints);
-<a name="l00487"></a>00487 
-<a name="l00488"></a>00488 
-<a name="l00498"></a>00498 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="rr__c__api_8cpp.html#aa51ba22ca904260718b81ac2ded66d28" title="Compute the steady state of the current model.">steadyState</a>(<span class="keywordtype">double</span>&amp; value);
-<a name="l00499"></a>00499 
-<a name="l00508"></a>00508 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="rr__c__api_8cpp.html#acf80de2b00a22da5a784d55fa4af16d3" title="A convenient method for returning a vector of the steady state species concentrations.">computeSteadyStateValues</a>();
-<a name="l00509"></a>00509 
-<a name="l00517"></a>00517 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="rr__c__api_8cpp.html#a98839913bdb2b401bf9d9280ca772662" title="Set the selection list of the steady state analysis.">setSteadyStateSelectionList</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* list);
-<a name="l00518"></a>00518 
-<a name="l00519"></a>00519 
-<a name="l00526"></a>00526 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv   <a class="code" href="rr__c__api_8cpp.html#ac2ad7c34e5d4c3eb18505f500e9e8dd2" title="Get the selection list for the steady state analysis.">getSteadyStateSelectionList</a>();
-<a name="l00527"></a>00527 
-<a name="l00528"></a>00528 
-<a name="l00529"></a>00529 <span class="comment">// Set and get family of methods</span>
-<a name="l00534"></a>00534 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">bool</span>                                rrCallConv   <a class="code" href="group__state.html#ga8c67bc930b33926bccb3c9f810dc2825" title="TO BE DONE.">getValue</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* speciesID, <span class="keywordtype">double</span>&amp; value);
-<a name="l00535"></a>00535 
-<a name="l00536"></a>00536 
-<a name="l00541"></a>00541 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__state.html#ga8663bcca2b00ef20c13841ca9fc9f56c" title="TO BE DONE.">setValue</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* speciesId, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; val);
-<a name="l00542"></a>00542 
-<a name="l00543"></a>00543 
-<a name="l00552"></a>00552 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__floating.html#ga0db8fe5f89985f27ea4ddb3c595b16fd" title="Retrieve in a vector the concentrations for all the floating species.">getFloatingSpeciesConcentrations</a>();
-<a name="l00553"></a>00553 
-<a name="l00554"></a>00554 
-<a name="l00563"></a>00563 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__boundary.html#gaae9b6b75211923bcf6f7196fe707c631" title="Retrieve in a vector the concentrations for all the boundary species.">getBoundarySpeciesConcentrations</a>();
-<a name="l00564"></a>00564 
-<a name="l00565"></a>00565 <span class="comment">// --------------------------------------------------------------------------------</span>
-<a name="l00566"></a>00566 <span class="comment">// Get and Set Routines</span>
-<a name="l00567"></a>00567 <span class="comment">// --------------------------------------------------------------------------------</span>
+<a name="l00365"></a>00365 <span class="comment">// -------------------------------------------------------------------------</span>
+<a name="l00366"></a>00366 <span class="comment">// SBML utility methods</span>
+<a name="l00367"></a>00367 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv getParamPromotedSBML(<span class="keyword">const</span> <span class="keywordtype">char</span>* sArg);
+<a name="l00368"></a>00368 
+<a name="l00375"></a>00375 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga320ffeeba3e5505371b52ce61715bf82" title="Set the simulator&#39;s capabilities.">setCapabilities</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* caps);
+<a name="l00376"></a>00376 
+<a name="l00377"></a>00377 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv <a class="code" href="group__simulation.html#gaecce7b3dda3548fbe579922aadf25610" title="Get the simulator&#39;s capabilities.">getCapabilities</a>();
+<a name="l00383"></a>00383 
+<a name="l00390"></a>00390 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga1a636a76ad610d99fe1c780bb3d9296d" title="Set the time start for a simulation.">setTimeStart</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeStart);
+<a name="l00391"></a>00391 
+<a name="l00398"></a>00398 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga1313e21d622cd846bdd75071e965eb6c" title="Set the time end for a simulation.">setTimeEnd</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeEnd);
+<a name="l00399"></a>00399 
+<a name="l00406"></a>00406 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga448ead53bb8913de664cc8ad675b4197" title="Set the number of points to generate in a simulation.">setNumPoints</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; nrPoints);
+<a name="l00407"></a>00407 
+<a name="l00417"></a>00417 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga6465c94b6dfed39a6ef614bd0a68cb9b" title="Set the selection list for output from simulate() or simulateEx()">setSelectionList</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* list);
+<a name="l00418"></a>00418 
+<a name="l00425"></a>00425 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__simulation.html#ga1db0b86ed7fd0d6e19f8df85b7577253" title="Get the current selection list for simulate() or simulateEx()">getSelectionList</a>();
+<a name="l00426"></a>00426 
+<a name="l00434"></a>00434 C_DECL_SPEC <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> rrCallConv <a class="code" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate</a>();
+<a name="l00435"></a>00435 
+<a name="l00444"></a>00444 C_DECL_SPEC <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> rrCallConv <a class="code" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeStart, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; timeEnd, <span class="keyword">const</span> <span class="keywordtype">int</span>&amp; numberOfPoints);
+<a name="l00445"></a>00445 
+<a name="l00457"></a>00457 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga190fff177accdfbc9c192c4993807e2e" title="Carry out a one step integration of the model.">oneStep</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; currentTime, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; stepSize, <span class="keywordtype">double</span>&amp; value);
+<a name="l00458"></a>00458 
+<a name="l00468"></a>00468 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga18b4fbd0dc5aa3f25d58367a406f425c" title="Get the value of the current time start.">getTimeStart</a>(<span class="keywordtype">double</span>&amp; timeStart);
+<a name="l00469"></a>00469 
+<a name="l00479"></a>00479 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#ga451e7ecddd0431316048a332410b0600" title="Get the value of the current time end.">getTimeEnd</a>(<span class="keywordtype">double</span>&amp; timeEnd);
+<a name="l00480"></a>00480 
+<a name="l00490"></a>00490 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__simulation.html#gacd9cb734773710f640742a9f040dccc5" title="Get the value of the current number of points.">getNumPoints</a> (<span class="keywordtype">int</span>&amp; numPoints);
+<a name="l00491"></a>00491 
+<a name="l00492"></a>00492 
+<a name="l00502"></a>00502 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__steadystate.html#ga0edd5f5a66884e0767d855d639cb45c0" title="Compute the steady state of the current model.">steadyState</a>(<span class="keywordtype">double</span>&amp; value);
+<a name="l00503"></a>00503 
+<a name="l00512"></a>00512 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__steadystate.html#ga95269e5d546721d19139d746d5ac8358" title="A convenient method for returning a vector of the steady state species concentrations.">computeSteadyStateValues</a>();
+<a name="l00513"></a>00513 
+<a name="l00521"></a>00521 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__steadystate.html#ga397a988c31c2010d9f2752080afa8dad" title="Set the selection list of the steady state analysis.">setSteadyStateSelectionList</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* list);
+<a name="l00522"></a>00522 
+<a name="l00523"></a>00523 
+<a name="l00530"></a>00530 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__steadystate.html#ga29b3868509ef2c09e4bbf0b11b731443" title="Get the selection list for the steady state analysis.">getSteadyStateSelectionList</a>();
+<a name="l00531"></a>00531 
+<a name="l00532"></a>00532 
+<a name="l00543"></a>00543 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__state.html#ga8c67bc930b33926bccb3c9f810dc2825" title="Get the value for a given symbol, use getAvailableSymbols() for a list of symbols.">getValue</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* speciesID, <span class="keywordtype">double</span>&amp; value);
+<a name="l00544"></a>00544 
+<a name="l00545"></a>00545 
+<a name="l00556"></a>00556 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__state.html#ga8663bcca2b00ef20c13841ca9fc9f56c" title="Set the value for a given symbol, use getAvailableSymbols() for a list of symbols.">setValue</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* speciesId, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; val);
+<a name="l00557"></a>00557 
+<a name="l00558"></a>00558 
+<a name="l00567"></a>00567 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__floating.html#ga0db8fe5f89985f27ea4ddb3c595b16fd" title="Retrieve in a vector the concentrations for all the floating species.">getFloatingSpeciesConcentrations</a>();
 <a name="l00568"></a>00568 
-<a name="l00577"></a>00577 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__parameters.html#gaf4be0a5e72db408248569a1d3e28c1f0" title="Retrieve in a vector the values for all the lgobal parameter values.">getGlobalParameterValues</a>();
-<a name="l00578"></a>00578 
-<a name="l00587"></a>00587 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__boundary.html#gabb6764fa48d0b3f2ca3b38e391479347" title="Set the concentration for a particular boundary species.">setBoundarySpeciesByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
-<a name="l00588"></a>00588 
-<a name="l00597"></a>00597 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__floating.html#gaf4a5a4d9b1ecf60d4b98189b4bcf2543" title="Set the concentration for a particular floating species.">setFloatingSpeciesByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
-<a name="l00598"></a>00598 
-<a name="l00607"></a>00607 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__parameters.html#ga65d9546856e5526fc403539903039f8e" title="Set the value for a particular global parameter.">setGlobalParameterByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
-<a name="l00608"></a>00608 
-<a name="l00609"></a>00609 
-<a name="l00618"></a>00618 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__boundary.html#gaccee3467307dbcedd031c1dc2cf57606" title="Retrieve the concentration for a particular floating species.">getBoundarySpeciesByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
-<a name="l00619"></a>00619 
-<a name="l00628"></a>00628 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__floating.html#gab73fad6a1dfdb2b2d393964354d94c69" title="Retrieve the concentration for a particular floating species.">getFloatingSpeciesByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
-<a name="l00629"></a>00629 
-<a name="l00637"></a>00637 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__floating.html#ga1aae76d21a054da6ed6cc734ad10287a" title="Retrieve the global parameter value.">getGlobalParameterByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
-<a name="l00638"></a>00638 
-<a name="l00647"></a>00647 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__compartment.html#ga5241b915cff8bcabba3024c33fb4e336" title="Retrieve the compartment volume for a particular compartment.">getCompartmentByIndex</a> (<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; value);
-<a name="l00648"></a>00648 
-<a name="l00649"></a>00649 
-<a name="l00659"></a>00659 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__compartment.html#gadb238a943d93bc9548bf5c3cd452e9bb" title="Set the volume for a particular compartment.">setCompartmentByIndex</a> (<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
-<a name="l00660"></a>00660 
-<a name="l00667"></a>00667 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv   <a class="code" href="group___stoich.html#ga228e8431e466bf7e5987c1179dcbbbd8" title="Retreive the full Jacobian for the current model.">getFullJacobian</a>();
-<a name="l00668"></a>00668 
-<a name="l00675"></a>00675 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#ga503c810c1be94e486441eeea88163a18" title="Retreive the reduced Jacobian for the current model.">getReducedJacobian</a>();
-<a name="l00676"></a>00676 
-<a name="l00684"></a>00684 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#ga7c7c6eb0e77711983254488895f24b81" title="Retreive the eigenvalue matrix for the current model.">getEigenValues</a>();
-<a name="l00685"></a>00685 
-<a name="l00686"></a>00686 <span class="comment">// Stoichiometry methods</span>
-<a name="l00693"></a>00693 <span class="comment"></span>C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#gad361175745409d5b6670b8a8996a6d59" title="Retreive the stoichiometry matrix for the current model.">getStoichiometryMatrix</a>();
-<a name="l00694"></a>00694 
-<a name="l00701"></a>00701 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#gae8e8c6ede9f60e33dcdc190c061ce3f8" title="Retreive the Link matrix for the current model.">getLinkMatrix</a>();
-<a name="l00702"></a>00702 
-<a name="l00709"></a>00709 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#ga57b4c651ecffb52d28886ce9e3b6e6ed" title="Retreive the reduced stoichiometry matrix for the current model.">getNrMatrix</a>();
-<a name="l00710"></a>00710 
-<a name="l00717"></a>00717 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#ga587ae0ec7e6e7f8b2576bacf700eedcd" title="Retreive the L9 matrix for the current model.">getL0Matrix</a>();
-<a name="l00718"></a>00718 
-<a name="l00725"></a>00725 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#gafd1bcae76af0d5d6ccf7af7bd098de23" title="Retreive the conservation matrix for the current model.">getConservationMatrix</a>();
-<a name="l00726"></a>00726 
-<a name="l00727"></a>00727 
-<a name="l00728"></a>00728 <span class="comment">// Initial condition Methods</span>
-<a name="l00737"></a>00737 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv   <a class="code" href="group__simulation.html#ga07dfaf16ab38015aab6b400665ace2b2" title="Reset all floating species concentrations to their intial conditions.">reset</a>();
-<a name="l00738"></a>00738 
-<a name="l00739"></a>00739 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv setFloatingSpeciesInitialConcentrations (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVector</a>* vec);
-<a name="l00740"></a>00740 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv getFloatingSpeciesInitialConcentrations ();
-<a name="l00741"></a>00741 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv getFloatingSpeciesInitialConditionNames();
+<a name="l00569"></a>00569 
+<a name="l00578"></a>00578 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__boundary.html#gaae9b6b75211923bcf6f7196fe707c631" title="Retrieve in a vector the concentrations for all the boundary species.">getBoundarySpeciesConcentrations</a>();
+<a name="l00579"></a>00579 
+<a name="l00580"></a>00580 <span class="comment">// --------------------------------------------------------------------------------</span>
+<a name="l00581"></a>00581 <span class="comment">// Get and Set Routines</span>
+<a name="l00582"></a>00582 <span class="comment">// --------------------------------------------------------------------------------</span>
+<a name="l00583"></a>00583 
+<a name="l00592"></a>00592 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__parameters.html#gaf4be0a5e72db408248569a1d3e28c1f0" title="Retrieve in a vector the values for all the lgobal parameter values.">getGlobalParameterValues</a>();
+<a name="l00593"></a>00593 
+<a name="l00602"></a>00602 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__boundary.html#gabb6764fa48d0b3f2ca3b38e391479347" title="Set the concentration for a particular boundary species.">setBoundarySpeciesByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
+<a name="l00603"></a>00603 
+<a name="l00612"></a>00612 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__floating.html#gaf4a5a4d9b1ecf60d4b98189b4bcf2543" title="Set the concentration for a particular floating species.">setFloatingSpeciesByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
+<a name="l00613"></a>00613 
+<a name="l00622"></a>00622 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__parameters.html#ga65d9546856e5526fc403539903039f8e" title="Set the value for a particular global parameter.">setGlobalParameterByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
+<a name="l00623"></a>00623 
+<a name="l00624"></a>00624 
+<a name="l00633"></a>00633 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__boundary.html#gaccee3467307dbcedd031c1dc2cf57606" title="Retrieve the concentration for a particular floating species.">getBoundarySpeciesByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
+<a name="l00634"></a>00634 
+<a name="l00643"></a>00643 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__floating.html#gab73fad6a1dfdb2b2d393964354d94c69" title="Retrieve the concentration for a particular floating species.">getFloatingSpeciesByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
+<a name="l00644"></a>00644 
+<a name="l00652"></a>00652 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__floating.html#ga1aae76d21a054da6ed6cc734ad10287a" title="Retrieve the global parameter value.">getGlobalParameterByIndex</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; val);
+<a name="l00653"></a>00653 
+<a name="l00662"></a>00662 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__compartment.html#ga5241b915cff8bcabba3024c33fb4e336" title="Retrieve the compartment volume for a particular compartment.">getCompartmentByIndex</a> (<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; value);
+<a name="l00663"></a>00663 
+<a name="l00664"></a>00664 
+<a name="l00674"></a>00674 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__compartment.html#gadb238a943d93bc9548bf5c3cd452e9bb" title="Set the volume for a particular compartment.">setCompartmentByIndex</a> (<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keyword">const</span> <span class="keywordtype">double</span>&amp; value);
+<a name="l00675"></a>00675 
+<a name="l00682"></a>00682 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv   <a class="code" href="group___stoich.html#ga228e8431e466bf7e5987c1179dcbbbd8" title="Retrieve the full Jacobian for the current model.">getFullJacobian</a>();
+<a name="l00683"></a>00683 
+<a name="l00690"></a>00690 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#ga503c810c1be94e486441eeea88163a18" title="Retreive the reduced Jacobian for the current model.">getReducedJacobian</a>();
+<a name="l00691"></a>00691 
+<a name="l00699"></a>00699 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#ga7c7c6eb0e77711983254488895f24b81" title="Retreive the eigenvalue matrix for the current model.">getEigenValues</a>();
+<a name="l00700"></a>00700 
+<a name="l00701"></a>00701 <span class="comment">// Stoichiometry methods</span>
+<a name="l00708"></a>00708 <span class="comment"></span>C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#gad361175745409d5b6670b8a8996a6d59" title="Retreive the stoichiometry matrix for the current model.">getStoichiometryMatrix</a>();
+<a name="l00709"></a>00709 
+<a name="l00716"></a>00716 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#gae8e8c6ede9f60e33dcdc190c061ce3f8" title="Retreive the Link matrix for the current model.">getLinkMatrix</a>();
+<a name="l00717"></a>00717 
+<a name="l00724"></a>00724 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#ga57b4c651ecffb52d28886ce9e3b6e6ed" title="Retrieve the reduced stoichiometry matrix for the current model.">getNrMatrix</a>();
+<a name="l00725"></a>00725 
+<a name="l00732"></a>00732 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#ga587ae0ec7e6e7f8b2576bacf700eedcd" title="Retrieve the L9 matrix for the current model.">getL0Matrix</a>();
+<a name="l00733"></a>00733 
+<a name="l00740"></a>00740 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group___stoich.html#gafd1bcae76af0d5d6ccf7af7bd098de23" title="Retrieve the conservation matrix for the current model.">getConservationMatrix</a>();
+<a name="l00741"></a>00741 
 <a name="l00742"></a>00742 
-<a name="l00743"></a>00743 
-<a name="l00744"></a>00744 <span class="comment">// Reaction rates</span>
-<a name="l00745"></a>00745 <span class="comment">// Initial condition Methods</span>
-<a name="l00754"></a>00754 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__state.html#gae25399f84ff2d1fda619358a1af9a1b5" title="Obtain the number of reactions in the loaded model.">getNumberOfReactions</a>();
-<a name="l00755"></a>00755 
-<a name="l00756"></a>00756 
-<a name="l00765"></a>00765 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__reaction.html#ga0a7be404315c6001627ee26e738e11e2" title="Retrieve a give reaction as indicated by the index parameter.">getReactionRate</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp;, <span class="keywordtype">double</span>&amp; rate);
-<a name="l00766"></a>00766 
-<a name="l00767"></a>00767 
-<a name="l00774"></a>00774 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__reaction.html#ga86d544bcf3eeaa4698a60123a3da69aa" title="Retrieve a vector of current reaction rates.">getReactionRates</a>();
-<a name="l00775"></a>00775 
-<a name="l00776"></a>00776 
-<a name="l00784"></a>00784 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__reaction.html#gaa03d9414ddeb177a76365dd5b2d0042e" title="Retrieve a vector of reactionb rates given a vector of species concentrations.">getReactionRatesEx</a> (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vec);
-<a name="l00785"></a>00785 
-<a name="l00786"></a>00786 
-<a name="l00795"></a>00795 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>  rrCallConv <a class="code" href="group__rate_of_change.html#gabbe129bee63761f7b0f98f060b86067b" title="Retrieve the vector of rates of change.">getRatesOfChange</a>();
-<a name="l00796"></a>00796 
-<a name="l00805"></a>00805 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__rate_of_change.html#gaf9d5b185617519ceff1a018d9009c0fd" title="Retrieve the string list of rates of change names.">getRatesOfChangeNames</a>();
-<a name="l00806"></a>00806 
-<a name="l00807"></a>00807 
-<a name="l00816"></a>00816 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__rate_of_change.html#gaad38321993112e230f7fccd96345de6c" title="Retrieve the rate of change for a given floating species.">getRateOfChange</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp;, <span class="keywordtype">double</span>&amp; value);
-<a name="l00817"></a>00817 
-<a name="l00818"></a>00818 
-<a name="l00827"></a>00827 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__rate_of_change.html#gacfae48e32754e7678b8bb003df93ef53" title="Retrieve the vector of rates of change given a vector of floating species concentrations.">getRatesOfChangeEx</a> (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vec);
-<a name="l00828"></a>00828 
-<a name="l00829"></a>00829 
-<a name="l00836"></a>00836 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__state.html#ga3fbb7c2fab261f25a3871f1caf398ff1" title="Evaluate the current models, that it update all assignments and rates of change.">evalModel</a>();
-<a name="l00837"></a>00837 
-<a name="l00838"></a>00838 
-<a name="l00839"></a>00839 <span class="comment">// Get number family</span>
-<a name="l00844"></a>00844 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__compartment.html#ga5ea2479b882549edd4fb75397ca38f52" title="Returns the number of compartments in the model.">getNumberOfCompartments</a> ();
-<a name="l00845"></a>00845 
-<a name="l00846"></a>00846 
-<a name="l00851"></a>00851 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__boundary.html#ga17c851dfb27b9697ff286cc57d4cd10d" title="Returns the number of boundary species in the model.">getNumberOfBoundarySpecies</a>();
+<a name="l00743"></a>00743 <span class="comment">// Initial condition Methods</span>
+<a name="l00752"></a>00752 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv   <a class="code" href="group__simulation.html#ga07dfaf16ab38015aab6b400665ace2b2" title="Reset all floating species concentrations to their intial conditions.">reset</a>();
+<a name="l00753"></a>00753 
+<a name="l00754"></a>00754 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv setFloatingSpeciesInitialConcentrations (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVector</a>* vec);
+<a name="l00755"></a>00755 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>          rrCallConv getFloatingSpeciesInitialConcentrations ();
+<a name="l00756"></a>00756 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a>      rrCallConv getFloatingSpeciesInitialConditionNames();
+<a name="l00757"></a>00757 
+<a name="l00758"></a>00758 
+<a name="l00759"></a>00759 <span class="comment">// Reaction rates</span>
+<a name="l00760"></a>00760 <span class="comment">// Initial condition Methods</span>
+<a name="l00769"></a>00769 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__state.html#gae25399f84ff2d1fda619358a1af9a1b5" title="Obtain the number of reactions in the loaded model.">getNumberOfReactions</a>();
+<a name="l00770"></a>00770 
+<a name="l00771"></a>00771 
+<a name="l00780"></a>00780 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__reaction.html#gaa2ec2c989a20e15b0fb5cb45b3af2837" title="Retrieve a give reaction as indicated by the index parameter.">getReactionRate</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp; index, <span class="keywordtype">double</span>&amp; rate);
+<a name="l00781"></a>00781 
+<a name="l00782"></a>00782 
+<a name="l00789"></a>00789 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__reaction.html#ga86d544bcf3eeaa4698a60123a3da69aa" title="Retrieve a vector of current reaction rates.">getReactionRates</a>();
+<a name="l00790"></a>00790 
+<a name="l00791"></a>00791 
+<a name="l00799"></a>00799 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__reaction.html#gaa03d9414ddeb177a76365dd5b2d0042e" title="Retrieve a vector of reactionb rates given a vector of species concentrations.">getReactionRatesEx</a> (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vec);
+<a name="l00800"></a>00800 
+<a name="l00801"></a>00801 
+<a name="l00810"></a>00810 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>  rrCallConv <a class="code" href="group__rate_of_change.html#gabbe129bee63761f7b0f98f060b86067b" title="Retrieve the vector of rates of change.">getRatesOfChange</a>();
+<a name="l00811"></a>00811 
+<a name="l00820"></a>00820 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__rate_of_change.html#gaf9d5b185617519ceff1a018d9009c0fd" title="Retrieve the string list of rates of change names.">getRatesOfChangeNames</a>();
+<a name="l00821"></a>00821 
+<a name="l00822"></a>00822 
+<a name="l00831"></a>00831 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__rate_of_change.html#gaad38321993112e230f7fccd96345de6c" title="Retrieve the rate of change for a given floating species.">getRateOfChange</a>(<span class="keyword">const</span> <span class="keywordtype">int</span>&amp;, <span class="keywordtype">double</span>&amp; value);
+<a name="l00832"></a>00832 
+<a name="l00833"></a>00833 
+<a name="l00842"></a>00842 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__rate_of_change.html#gacfae48e32754e7678b8bb003df93ef53" title="Retrieve the vector of rates of change given a vector of floating species concentrations.">getRatesOfChangeEx</a> (<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vec);
+<a name="l00843"></a>00843 
+<a name="l00850"></a>00850 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__state.html#ga3fbb7c2fab261f25a3871f1caf398ff1" title="Evaluate the current models, that it update all assignments and rates of change.">evalModel</a>();
+<a name="l00851"></a>00851 
 <a name="l00852"></a>00852 
-<a name="l00853"></a>00853 
-<a name="l00858"></a>00858 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__floating.html#ga9a96b81c58073caff01ea2c9e0f5e119" title="Returns the number of floating species in the model.">getNumberOfFloatingSpecies</a>();
+<a name="l00853"></a>00853 <span class="comment">// Get number family</span>
+<a name="l00858"></a>00858 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__compartment.html#ga5ea2479b882549edd4fb75397ca38f52" title="Returns the number of compartments in the model.">getNumberOfCompartments</a> ();
 <a name="l00859"></a>00859 
 <a name="l00860"></a>00860 
-<a name="l00865"></a>00865 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__parameters.html#ga2f33a70dfd6c68fb585cf5d1a9c1339c" title="Returns the number of global parameters in the model.">getNumberOfGlobalParameters</a>();
+<a name="l00865"></a>00865 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__boundary.html#ga17c851dfb27b9697ff286cc57d4cd10d" title="Returns the number of boundary species in the model.">getNumberOfBoundarySpecies</a>();
 <a name="l00866"></a>00866 
 <a name="l00867"></a>00867 
-<a name="l00872"></a>00872 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__floating.html#ga7d573d16a02b3bf4361c00065f624e0b" title="Returns the number of dependent species in the model.">getNumberOfDependentSpecies</a>();
+<a name="l00872"></a>00872 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__floating.html#ga9a96b81c58073caff01ea2c9e0f5e119" title="Returns the number of floating species in the model.">getNumberOfFloatingSpecies</a>();
 <a name="l00873"></a>00873 
 <a name="l00874"></a>00874 
-<a name="l00875"></a>00875 <span class="comment">// Get number family</span>
-<a name="l00880"></a>00880 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__floating.html#ga29811c87b0f144e506c93373418fbe8b" title="Returns the number of independent species in the model.">getNumberOfIndependentSpecies</a>();
+<a name="l00879"></a>00879 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__parameters.html#ga2f33a70dfd6c68fb585cf5d1a9c1339c" title="Returns the number of global parameters in the model.">getNumberOfGlobalParameters</a>();
+<a name="l00880"></a>00880 
 <a name="l00881"></a>00881 
-<a name="l00882"></a>00882 <span class="comment">// Get names family</span>
-<a name="l00883"></a>00883 
-<a name="l00890"></a>00890 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__compartment.html#gafe6030585929ca78c5ce6d3944b11a1a" title="Obtain the list of reaction Ids.">getReactionNames</a>();
-<a name="l00891"></a>00891 
-<a name="l00892"></a>00892 
-<a name="l00899"></a>00899 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__compartment.html#ga1b676408037364f621f5bcb49a0f1474" title="Obtain the list of rate of change names.">getRateOfChangeNames</a>();
-<a name="l00900"></a>00900 
-<a name="l00907"></a>00907 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__boundary.html#gac0cfb68966bfb2656477f643a7f6494d" title="Obtain the list of boundary species Ids.">getBoundarySpeciesNames</a>();
-<a name="l00908"></a>00908 
-<a name="l00915"></a>00915 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__floating.html#ga468d9d0cc8489ae85f4fd78d9fab343e" title="Obtain the list of floating species Id.">getFloatingSpeciesNames</a>();
-<a name="l00916"></a>00916 
-<a name="l00923"></a>00923 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__parameters.html#gabb7dd0b1f55a9f1c5ded728aa202027e" title="Obtain the list of global parameter names.">getGlobalParameterNames</a>();
-<a name="l00924"></a>00924 
-<a name="l00933"></a>00933 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__compartment.html#gafe31d3b684c51fb829c1770898bc1e5d" title="Obtain the list of compartment Ids.">getCompartmentNames</a>();
-<a name="l00934"></a>00934 
-<a name="l00941"></a>00941 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__state.html#ga313f81d4fae0ece305eb1246543bcdc3" title="Obtain the list of eigenvalue names.">getEigenValueNames</a>();
-<a name="l00942"></a>00942 
-<a name="l00949"></a>00949 C_DECL_SPEC <a class="code" href="struct_r_r_array_list2.html" title="A list type, stores int, double, strings and lists.">RRArrayList2Handle</a> rrCallConv <a class="code" href="group__state.html#gaa06a430f57d4df400e58fd954766901c" title="Obtain the list of al avialable symbols.">getAvailableSymbols</a>();
-<a name="l00950"></a>00950 
-<a name="l00951"></a>00951 <span class="comment">// MCA methods</span>
-<a name="l00958"></a>00958 <span class="comment"></span>C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv <a class="code" href="group__mca.html#ga35b2d80dfae3ffba81a45a485e30b22e" title="Obtain the list of elasticity coefficient names.">getElasticityCoefficientNames</a>();
-<a name="l00959"></a>00959 
-<a name="l00966"></a>00966 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv <a class="code" href="group__mca.html#ga9451fdf700b80288c0d664193eef4421" title="Obtain the list of unscaled flux control coefficient names.">getUnscaledFluxControlCoefficientNames</a>();
-<a name="l00967"></a>00967 
-<a name="l00974"></a>00974 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv <a class="code" href="group__mca.html#ga5d72e660bc33c6cbb93aadd603015563" title="Obtain the list of flux control coefficient names.">getFluxControlCoefficientNames</a>();
-<a name="l00975"></a>00975 
-<a name="l00982"></a>00982 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv <a class="code" href="group__mca.html#ga4cd50e9e57140cb5fd69483bc6b0656e" title="Obtain the list of unscaled concentration control coefficient names.">getUnscaledConcentrationControlCoefficientNames</a>();
-<a name="l00983"></a>00983 
-<a name="l00990"></a>00990 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv <a class="code" href="group__mca.html#gac65874848b588a8c87ac04705eb88cbc" title="Obtain the list of concentration coefficient names.">getConcentrationControlCoefficientNames</a>();
-<a name="l00991"></a>00991 
-<a name="l00999"></a>00999 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#ga82cf39ff64eb0446c9f5a2e772283323" title="Retreive the unscaled elasticity matrix for the current model.">getUnScaledElasticityMatrix</a>();
-<a name="l01000"></a>01000 
-<a name="l01008"></a>01008 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#gaf8431784ec5c2ce1d0416606056f3d44" title="Retreive the scaled elasticity matrix for the current model.">getScaledElasticityMatrix</a>();
-<a name="l01009"></a>01009 
-<a name="l01017"></a>01017 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#ga418c0108d37bc4f35a55291ca85e0a3f" title="Retreive the matrix of unscaled concentration control coefficients for the current model...">getUnscaledConcentrationControlCoefficientMatrix</a>();
-<a name="l01018"></a>01018 
-<a name="l01019"></a>01019 
-<a name="l01027"></a>01027 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#gad28644ca7615c71725056028a0a048ba" title="Retreive the matrix of scaled concentration control coefficients for the current model.">getScaledConcentrationControlCoefficientMatrix</a>();
-<a name="l01028"></a>01028 
-<a name="l01036"></a>01036 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#ga4b464166bb67773916067bc7e190a338" title="Retreive the matrix of unscaled flux control coefficients for the current model.">getUnscaledFluxControlCoefficientMatrix</a>();
-<a name="l01037"></a>01037 
-<a name="l01045"></a>01045 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#gad63647a85b299d463b1e4cd5671d0881" title="Retreive the matrix of scaled flux control coefficients for the current model.">getScaledFluxControlCoefficientMatrix</a>();
-<a name="l01046"></a>01046 
-<a name="l01056"></a>01056 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__mca.html#ga6655b7aebdc9e6fad4e7a54e3de9195d" title="Retireve a single unscaled control coefficient.">getuCC</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* variable, <span class="keyword">const</span> <span class="keywordtype">char</span>* parameter, <span class="keywordtype">double</span>&amp; value);
-<a name="l01057"></a>01057 
-<a name="l01067"></a>01067 C_DECL_SPEC <span class="keywordtype">bool</span>  rrCallConv <a class="code" href="group__mca.html#ga49c703842a069c37fa472f2740dd514b" title="Retireve a single control coefficient.">getCC</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* variable, <span class="keyword">const</span> <span class="keywordtype">char</span>* parameter, <span class="keywordtype">double</span>&amp; value);
-<a name="l01068"></a>01068 
-<a name="l01078"></a>01078 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__mca.html#ga761a98e3635d75c8505f516a0b2384b1" title="Retireve a single elasticity coefficient.">getEE</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* species, <span class="keywordtype">double</span>&amp; value);
-<a name="l01079"></a>01079 
-<a name="l01089"></a>01089 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__mca.html#gadf71d426da852cdf931022fa56a3acb0" title="Retireve a single unscaled elasticity coefficient.">getuEE</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* species, <span class="keywordtype">double</span>&amp; value);
-<a name="l01090"></a>01090 
-<a name="l01091"></a>01091 <span class="comment">// What&#39;s this, not sure if we need it?</span>
-<a name="l01092"></a>01092 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv getScaledFloatingSpeciesElasticity(<span class="keyword">const</span> <span class="keywordtype">char</span>* reactionName, <span class="keyword">const</span> <span class="keywordtype">char</span>* speciesName, <span class="keywordtype">double</span>&amp; value);
+<a name="l00886"></a>00886 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__floating.html#ga7d573d16a02b3bf4361c00065f624e0b" title="Returns the number of dependent species in the model.">getNumberOfDependentSpecies</a>();
+<a name="l00887"></a>00887 
+<a name="l00888"></a>00888 
+<a name="l00889"></a>00889 <span class="comment">// Get number family</span>
+<a name="l00894"></a>00894 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__floating.html#ga29811c87b0f144e506c93373418fbe8b" title="Returns the number of independent species in the model.">getNumberOfIndependentSpecies</a>();
+<a name="l00895"></a>00895 
+<a name="l00896"></a>00896 <span class="comment">// Get names family</span>
+<a name="l00897"></a>00897 
+<a name="l00904"></a>00904 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__compartment.html#gafe6030585929ca78c5ce6d3944b11a1a" title="Obtain the list of reaction Ids.">getReactionNames</a>();
+<a name="l00905"></a>00905 
+<a name="l00906"></a>00906 
+<a name="l00913"></a>00913 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__compartment.html#ga1b676408037364f621f5bcb49a0f1474" title="Obtain the list of rate of change names.">getRateOfChangeNames</a>();
+<a name="l00914"></a>00914 
+<a name="l00921"></a>00921 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__boundary.html#gac0cfb68966bfb2656477f643a7f6494d" title="Obtain the list of boundary species Ids.">getBoundarySpeciesNames</a>();
+<a name="l00922"></a>00922 
+<a name="l00929"></a>00929 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__floating.html#ga468d9d0cc8489ae85f4fd78d9fab343e" title="Obtain the list of floating species Id.">getFloatingSpeciesNames</a>();
+<a name="l00930"></a>00930 
+<a name="l00937"></a>00937 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__parameters.html#gabb7dd0b1f55a9f1c5ded728aa202027e" title="Obtain the list of global parameter names.">getGlobalParameterNames</a>();
+<a name="l00938"></a>00938 
+<a name="l00947"></a>00947 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__compartment.html#gafe31d3b684c51fb829c1770898bc1e5d" title="Obtain the list of compartment Ids.">getCompartmentNames</a>();
+<a name="l00948"></a>00948 
+<a name="l00955"></a>00955 C_DECL_SPEC <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> rrCallConv <a class="code" href="group__state.html#ga313f81d4fae0ece305eb1246543bcdc3" title="Obtain the list of eigenvalue names.">getEigenValueNames</a>();
+<a name="l00956"></a>00956 
+<a name="l00963"></a>00963 C_DECL_SPEC <a class="code" href="struct_r_r_array_list2.html" title="A list type, stores int, double, strings and lists.">RRArrayList2Handle</a> rrCallConv <a class="code" href="group__state.html#gaa06a430f57d4df400e58fd954766901c" title="Obtain the list of al avialable symbols.">getAvailableSymbols</a>();
+<a name="l00964"></a>00964 
+<a name="l00965"></a>00965 <span class="comment">// MCA methods</span>
+<a name="l00972"></a>00972 <span class="comment"></span>C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv <a class="code" href="group__mca.html#ga35b2d80dfae3ffba81a45a485e30b22e" title="Obtain the list of elasticity coefficient names.">getElasticityCoefficientNames</a>();
+<a name="l00973"></a>00973 
+<a name="l00980"></a>00980 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv <a class="code" href="group__mca.html#ga9451fdf700b80288c0d664193eef4421" title="Obtain the list of unscaled flux control coefficient names.">getUnscaledFluxControlCoefficientNames</a>();
+<a name="l00981"></a>00981 
+<a name="l00988"></a>00988 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv <a class="code" href="group__mca.html#ga5d72e660bc33c6cbb93aadd603015563" title="Obtain the list of flux control coefficient names.">getFluxControlCoefficientNames</a>();
+<a name="l00989"></a>00989 
+<a name="l00996"></a>00996 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv <a class="code" href="group__mca.html#ga4cd50e9e57140cb5fd69483bc6b0656e" title="Obtain the list of unscaled concentration control coefficient names.">getUnscaledConcentrationControlCoefficientNames</a>();
+<a name="l00997"></a>00997 
+<a name="l01004"></a>01004 C_DECL_SPEC <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv <a class="code" href="group__mca.html#gac65874848b588a8c87ac04705eb88cbc" title="Obtain the list of concentration coefficient names.">getConcentrationControlCoefficientNames</a>();
+<a name="l01005"></a>01005 
+<a name="l01013"></a>01013 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#ga82cf39ff64eb0446c9f5a2e772283323" title="Retrieve the unscaled elasticity matrix for the current model.">getUnScaledElasticityMatrix</a>();
+<a name="l01014"></a>01014 
+<a name="l01022"></a>01022 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#gaf8431784ec5c2ce1d0416606056f3d44" title="Retrieve the scaled elasticity matrix for the current model.">getScaledElasticityMatrix</a>();
+<a name="l01023"></a>01023 
+<a name="l01031"></a>01031 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#ga418c0108d37bc4f35a55291ca85e0a3f" title="Retrieve the matrix of unscaled concentration control coefficients for the current model...">getUnscaledConcentrationControlCoefficientMatrix</a>();
+<a name="l01032"></a>01032 
+<a name="l01033"></a>01033 
+<a name="l01041"></a>01041 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#gad28644ca7615c71725056028a0a048ba" title="Retrieve the matrix of scaled concentration control coefficients for the current model.">getScaledConcentrationControlCoefficientMatrix</a>();
+<a name="l01042"></a>01042 
+<a name="l01050"></a>01050 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#ga4b464166bb67773916067bc7e190a338" title="Retrieve the matrix of unscaled flux control coefficients for the current model.">getUnscaledFluxControlCoefficientMatrix</a>();
+<a name="l01051"></a>01051 
+<a name="l01059"></a>01059 C_DECL_SPEC <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> rrCallConv <a class="code" href="group__mca.html#gad63647a85b299d463b1e4cd5671d0881" title="Retrieve the matrix of scaled flux control coefficients for the current model.">getScaledFluxControlCoefficientMatrix</a>();
+<a name="l01060"></a>01060 
+<a name="l01070"></a>01070 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__mca.html#ga6655b7aebdc9e6fad4e7a54e3de9195d" title="Retireve a single unscaled control coefficient.">getuCC</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* variable, <span class="keyword">const</span> <span class="keywordtype">char</span>* parameter, <span class="keywordtype">double</span>&amp; value);
+<a name="l01071"></a>01071 
+<a name="l01081"></a>01081 C_DECL_SPEC <span class="keywordtype">bool</span>  rrCallConv <a class="code" href="group__mca.html#ga49c703842a069c37fa472f2740dd514b" title="Retireve a single control coefficient.">getCC</a> (<span class="keyword">const</span> <span class="keywordtype">char</span>* variable, <span class="keyword">const</span> <span class="keywordtype">char</span>* parameter, <span class="keywordtype">double</span>&amp; value);
+<a name="l01082"></a>01082 
+<a name="l01092"></a>01092 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__mca.html#ga761a98e3635d75c8505f516a0b2384b1" title="Retireve a single elasticity coefficient.">getEE</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* species, <span class="keywordtype">double</span>&amp; value);
 <a name="l01093"></a>01093 
-<a name="l01094"></a>01094 <span class="comment">// Print/format functions</span>
-<a name="l01095"></a>01095 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printResult(<span class="keyword">const</span> <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result);
-<a name="l01096"></a>01096 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printMatrix(<span class="keyword">const</span> <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> mat);
-<a name="l01097"></a>01097 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printVector(<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vec);
-<a name="l01098"></a>01098 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printStringList(<span class="keyword">const</span> <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> list);
-<a name="l01099"></a>01099 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printStringArrayList(<span class="keyword">const</span> <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayList</a>* list);
-<a name="l01100"></a>01100 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printArrayList(<span class="keyword">const</span> <a class="code" href="struct_r_r_array_list2.html" title="A list type, stores int, double, strings and lists.">RRArrayList2Handle</a> list);
-<a name="l01101"></a>01101 
-<a name="l01102"></a>01102 <span class="comment">// Free memory functions</span>
-<a name="l01103"></a>01103 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeResult(<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> handle);
-<a name="l01104"></a>01104 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeText(<span class="keywordtype">char</span>* text);
-<a name="l01105"></a>01105 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeLabelStringList(<a class="code" href="struct_r_r_label_string_list.html">RRLabelStringListHandle</a> sl);
-<a name="l01106"></a>01106 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeStringList(<a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> sl);
-<a name="l01107"></a>01107 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeStringArrayList(<a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> sl);
-<a name="l01108"></a>01108 C_DECL_SPEC <span class="keywordtype">bool</span>                                        rrCallConv       freeArrayList(<a class="code" href="struct_r_r_array_list2.html" title="A list type, stores int, double, strings and lists.">RRArrayList2Handle</a> theList);
-<a name="l01109"></a>01109 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeVector(<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector);
-<a name="l01110"></a>01110 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeMatrix(<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> matrix);
-<a name="l01111"></a>01111 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   freeCCode(<a class="code" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCodeHandle</a> code);
-<a name="l01112"></a>01112 C_DECL_SPEC <span class="keywordtype">void</span>                    rrCallConv   Pause();
-<a name="l01113"></a>01113 
-<a name="l01114"></a>01114 
-<a name="l01115"></a>01115 <span class="comment">// Helper Methods</span>
-<a name="l01125"></a>01125 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__helper_routines.html#ga0c42e94111a64ea70824f92d8c1b564d" title="Get the number of elements in a vector type.">getVectorLength</a> (<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector);
-<a name="l01126"></a>01126 
-<a name="l01136"></a>01136 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__helper_routines.html#ga27e208d44bda0c744c9df5906b51cf09" title="Create a new vector with a given size.">createVectorAPI</a> (<span class="keywordtype">int</span> size);
-<a name="l01137"></a>01137 
-<a name="l01149"></a>01149 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__helper_routines.html#gaf06c28a1e29d86f3fd3e6112eb7c85e8" title="Get a particular element from a vector.">getVectorElement</a> (<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector, <span class="keywordtype">int</span> index, <span class="keywordtype">double</span>&amp; value);
-<a name="l01150"></a>01150 
-<a name="l01151"></a>01151 
-<a name="l01163"></a>01163 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__helper_routines.html#ga77eaf0d0f88175ce4e2e8ca57ff9d859" title="Get a particular element from a vector.">setVectorElement</a> (<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector, <span class="keywordtype">int</span> index, <span class="keywordtype">double</span> value);
+<a name="l01103"></a>01103 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__mca.html#gadf71d426da852cdf931022fa56a3acb0" title="Retireve a single unscaled elasticity coefficient.">getuEE</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* name, <span class="keyword">const</span> <span class="keywordtype">char</span>* species, <span class="keywordtype">double</span>&amp; value);
+<a name="l01104"></a>01104 
+<a name="l01105"></a>01105 <span class="comment">// What&#39;s this, not sure if we need it?</span>
+<a name="l01106"></a>01106 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv getScaledFloatingSpeciesElasticity(<span class="keyword">const</span> <span class="keywordtype">char</span>* reactionName, <span class="keyword">const</span> <span class="keywordtype">char</span>* speciesName, <span class="keywordtype">double</span>&amp; value);
+<a name="l01107"></a>01107 
+<a name="l01108"></a>01108 <span class="comment">// Print/format functions</span>
+<a name="l01109"></a>01109 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printResult(<span class="keyword">const</span> <a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result);
+<a name="l01110"></a>01110 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printMatrix(<span class="keyword">const</span> <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> mat);
+<a name="l01111"></a>01111 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printVector(<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vec);
+<a name="l01112"></a>01112 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printStringList(<span class="keyword">const</span> <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> list);
+<a name="l01113"></a>01113 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printStringArrayList(<span class="keyword">const</span> <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayList</a>* list);
+<a name="l01114"></a>01114 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv   printArrayList(<span class="keyword">const</span> <a class="code" href="struct_r_r_array_list2.html" title="A list type, stores int, double, strings and lists.">RRArrayList2Handle</a> list);
+<a name="l01115"></a>01115 
+<a name="l01116"></a>01116 <span class="comment">// Free memory functions</span>
+<a name="l01121"></a>01121 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__free_routines.html#ga7a1fb56bd09bb535af7b6f3bc51c89b5" title="Free the result from simulate and simulateEx.">freeResult</a>(<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> handle);
+<a name="l01122"></a>01122 
+<a name="l01127"></a>01127 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__free_routines.html#ga1001b1dab86472f6db5bcbe724c41631" title="Free char* generated by library routines.">freeText</a>(<span class="keywordtype">char</span>* text);
+<a name="l01128"></a>01128 
+<a name="l01133"></a>01133 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__free_routines.html#gadca4757725ec2e3d8251a001fde8028b" title="Free RRLabelStringListHandle structures.">freeLabelStringList</a>(<a class="code" href="struct_r_r_label_string_list.html">RRLabelStringListHandle</a> sl);
+<a name="l01134"></a>01134 
+<a name="l01139"></a>01139 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__free_routines.html#ga63aea4cfe3b5262e67d50f3227153a16" title="Free RRStringListHandle structures.">freeStringList</a>(<a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> sl);
+<a name="l01140"></a>01140 
+<a name="l01145"></a>01145 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__free_routines.html#gacca647731a9241ab1f517d569271688b" title="Free RRStringArrayListHandle structures.">freeStringArrayList</a>(<a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> sl);
+<a name="l01146"></a>01146 
+<a name="l01151"></a>01151 C_DECL_SPEC <span class="keywordtype">bool</span>                                        rrCallConv       <a class="code" href="group__free_routines.html#ga8d0882fc56ccdc67b489cdcb82522ac6" title="Free RRArrayList2Handle structures.">freeArrayList</a>(<a class="code" href="struct_r_r_array_list2.html" title="A list type, stores int, double, strings and lists.">RRArrayList2Handle</a> theList);
+<a name="l01152"></a>01152 
+<a name="l01157"></a>01157 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__free_routines.html#ga11dddcdb661f8e82a2f87ecb24ab8968" title="Free RRVectorHandle structures.">freeVector</a>(<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector);
+<a name="l01158"></a>01158 
+<a name="l01163"></a>01163 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__free_routines.html#gabbbbce24954114b22b13337ccaf63529" title="Free RRMatrixHandle structures.">freeMatrix</a>(<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> matrix);
 <a name="l01164"></a>01164 
-<a name="l01165"></a>01165 
-<a name="l01166"></a>01166 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getStringListLength (<a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> stringList);
-<a name="l01167"></a>01167 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getStringListElement (<a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> stringList, <span class="keywordtype">int</span> index);
-<a name="l01168"></a>01168 
-<a name="l01178"></a>01178 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv  <a class="code" href="group__helper_routines.html#gad5a3803c72d8f27bf2dad72b25226675" title="Retrieve the number of rows in the given matrix.">getMatrixNumRows</a> (<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> m);
-<a name="l01179"></a>01179 
-<a name="l01189"></a>01189 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv  <a class="code" href="group__helper_routines.html#ga46eae843e223f83e00b07fe7563a1c91" title="Retrieve the number of columns in the given matrix.">getMatrixNumCols</a> (<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> m);
-<a name="l01190"></a>01190 
-<a name="l01203"></a>01203 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv  <a class="code" href="group__helper_routines.html#gac4bd2fdc7fd7d3a1f52ef59975952dad" title="Retrieves an element at a given row and column from a matrix type variable.">getMatrixElement</a> (<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> m, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span>&amp; value);
-<a name="l01204"></a>01204 
-<a name="l01214"></a>01214 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv  <a class="code" href="group__helper_routines.html#ga45793ae8175e37d42bb0fed8629cedb3" title="Retrieve the number of rows in the given result data.">getResultNumRows</a> (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result);
-<a name="l01215"></a>01215 
-<a name="l01225"></a>01225 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv  <a class="code" href="group__helper_routines.html#gac8e0a87e6231d8f5828b679116b2d6a7" title="Retrieve the number of columns in the given result data.">getResultNumCols</a> (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result);
-<a name="l01226"></a>01226 
-<a name="l01239"></a>01239 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv  <a class="code" href="group__helper_routines.html#gab8f77529dcd45bef9ebe627b88831d52" title="Retrieves an element at a given row and column from a result type variable.">getResultElement</a> (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span>&amp; value);
-<a name="l01240"></a>01240 
-<a name="l01252"></a>01252 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv  <a class="code" href="group__helper_routines.html#ga9ddbfbe25f45e7232d0526bf51147fd3" title="Retrieves an element at a given row and column from a result type variable.">getResultColumnLabel</a> (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result, <span class="keywordtype">int</span> column);
-<a name="l01253"></a>01253 
-<a name="l01263"></a>01263 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv  <a class="code" href="group__helper_routines.html#ga071cb3c138a8aaf96992daec8fd6a7c2" title="Retrieve the header file for the current model (if applicable)">getCCodeHeader</a> (<a class="code" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCodeHandle</a> code);
-<a name="l01264"></a>01264 
-<a name="l01274"></a>01274 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv  <a class="code" href="group__helper_routines.html#gabb964f1aad030deee67c313d9bdf3520" title="Retrieve the main source file for the current model (if applicable)">getCCodeSource</a> (<a class="code" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCodeHandle</a> code);
-<a name="l01275"></a>01275 
-<a name="l01276"></a>01276 <span class="preprocessor">#if defined( __cplusplus)</span>
-<a name="l01277"></a>01277 <span class="preprocessor"></span>}
-<a name="l01278"></a>01278 <span class="preprocessor">#endif</span>
-<a name="l01279"></a>01279 <span class="preprocessor"></span>
-<a name="l01280"></a>01280 <span class="preprocessor">#endif</span>
+<a name="l01169"></a>01169 C_DECL_SPEC <span class="keywordtype">bool</span>                    rrCallConv   <a class="code" href="group__free_routines.html#ga79f31e58a4a2d24d2f604f4369b6c64f" title="Free RRCCodeHandle structures.">freeCCode</a>(<a class="code" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCodeHandle</a> code);
+<a name="l01170"></a>01170 
+<a name="l01171"></a>01171 C_DECL_SPEC <span class="keywordtype">void</span>                    rrCallConv   Pause();
+<a name="l01172"></a>01172 
+<a name="l01173"></a>01173 
+<a name="l01174"></a>01174 <span class="comment">// Helper Methods</span>
+<a name="l01184"></a>01184 <span class="comment"></span>C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__helper_routines.html#ga0c42e94111a64ea70824f92d8c1b564d" title="Get the number of elements in a vector type.">getVectorLength</a> (<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector);
+<a name="l01185"></a>01185 
+<a name="l01195"></a>01195 C_DECL_SPEC <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> rrCallConv <a class="code" href="group__helper_routines.html#ga27e208d44bda0c744c9df5906b51cf09" title="Create a new vector with a given size.">createVectorAPI</a> (<span class="keywordtype">int</span> size);
+<a name="l01196"></a>01196 
+<a name="l01208"></a>01208 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__helper_routines.html#gaf06c28a1e29d86f3fd3e6112eb7c85e8" title="Get a particular element from a vector.">getVectorElement</a> (<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector, <span class="keywordtype">int</span> index, <span class="keywordtype">double</span>&amp; value);
+<a name="l01209"></a>01209 
+<a name="l01210"></a>01210 
+<a name="l01222"></a>01222 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__helper_routines.html#ga77eaf0d0f88175ce4e2e8ca57ff9d859" title="Get a particular element from a vector.">setVectorElement</a> (<a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> vector, <span class="keywordtype">int</span> index, <span class="keywordtype">double</span> value);
+<a name="l01223"></a>01223 
+<a name="l01224"></a>01224 
+<a name="l01225"></a>01225 C_DECL_SPEC <span class="keywordtype">int</span>                     rrCallConv  getStringListLength (<a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> stringList);
+<a name="l01226"></a>01226 C_DECL_SPEC <span class="keywordtype">char</span>*                   rrCallConv  getStringListElement (<a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringListHandle</a> stringList, <span class="keywordtype">int</span> index);
+<a name="l01227"></a>01227 
+<a name="l01237"></a>01237 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__helper_routines.html#gad5a3803c72d8f27bf2dad72b25226675" title="Retrieve the number of rows in the given matrix.">getMatrixNumRows</a> (<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> m);
+<a name="l01238"></a>01238 
+<a name="l01248"></a>01248 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv  <a class="code" href="group__helper_routines.html#ga46eae843e223f83e00b07fe7563a1c91" title="Retrieve the number of columns in the given matrix.">getMatrixNumCols</a> (<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> m);
+<a name="l01249"></a>01249 
+<a name="l01262"></a>01262 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv  <a class="code" href="group__helper_routines.html#gac4bd2fdc7fd7d3a1f52ef59975952dad" title="Retrieves an element at a given row and column from a matrix type variable.">getMatrixElement</a> (<a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a> m, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span>&amp; value);
+<a name="l01263"></a>01263 
+<a name="l01273"></a>01273 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv  <a class="code" href="group__helper_routines.html#ga45793ae8175e37d42bb0fed8629cedb3" title="Retrieve the number of rows in the given result data.">getResultNumRows</a> (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result);
+<a name="l01274"></a>01274 
+<a name="l01284"></a>01284 C_DECL_SPEC <span class="keywordtype">int</span> rrCallConv  <a class="code" href="group__helper_routines.html#gac8e0a87e6231d8f5828b679116b2d6a7" title="Retrieve the number of columns in the given result data.">getResultNumCols</a> (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result);
+<a name="l01285"></a>01285 
+<a name="l01298"></a>01298 C_DECL_SPEC <span class="keywordtype">bool</span> rrCallConv  <a class="code" href="group__helper_routines.html#gab8f77529dcd45bef9ebe627b88831d52" title="Retrieves an element at a given row and column from a result type variable.">getResultElement</a> (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result, <span class="keywordtype">int</span> r, <span class="keywordtype">int</span> c, <span class="keywordtype">double</span>&amp; value);
+<a name="l01299"></a>01299 
+<a name="l01310"></a>01310 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv  <a class="code" href="group__helper_routines.html#ga9ddbfbe25f45e7232d0526bf51147fd3" title="Retrieves an element at a given row and column from a result type variable.">getResultColumnLabel</a> (<a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResultHandle</a> result, <span class="keywordtype">int</span> column);
+<a name="l01311"></a>01311 
+<a name="l01321"></a>01321 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv  <a class="code" href="group__helper_routines.html#ga071cb3c138a8aaf96992daec8fd6a7c2" title="Retrieve the header file for the current model (if applicable)">getCCodeHeader</a> (<a class="code" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCodeHandle</a> code);
+<a name="l01322"></a>01322 
+<a name="l01332"></a>01332 C_DECL_SPEC <span class="keywordtype">char</span>* rrCallConv  <a class="code" href="group__helper_routines.html#gabb964f1aad030deee67c313d9bdf3520" title="Retrieve the main source file for the current model (if applicable)">getCCodeSource</a> (<a class="code" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCodeHandle</a> code);
+<a name="l01333"></a>01333 
+<a name="l01334"></a>01334 <span class="preprocessor">#if defined( __cplusplus)</span>
+<a name="l01335"></a>01335 <span class="preprocessor"></span>}
+<a name="l01336"></a>01336 <span class="preprocessor">#endif</span>
+<a name="l01337"></a>01337 <span class="preprocessor"></span>
+<a name="l01338"></a>01338 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -437,7 +444,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:55:37 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

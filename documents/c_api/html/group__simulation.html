@@ -152,11 +152,11 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <p>Example: status = getNumPoints (&amp;numberOfPoints);</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">int*</td><td>numPoints The current value for the number of points </td></tr>
+    <tr><td class="paramname">numPoints</td><td>The current value for the number of points </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if successful </dd></dl>
 
 </div>
 </div>
@@ -195,14 +195,14 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Get the value of the current time end. </p>
-<p>Example: status = getTimeStart (&amp;timeEnd);</p>
+<p>Example: status = getTimeEnd (&amp;timeEnd);</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">double*</td><td>timeStart The current value for the time end </td></tr>
+    <tr><td class="paramname">timeEnd</td><td>The current value for the time end </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if successful </dd></dl>
 
 </div>
 </div>
@@ -270,7 +270,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">currentTime</td><td>The current time in the simulation </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">stepSize</td><td>The step size to use in the integration </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname"></td><td>new time (currentTime + stepSize) </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">value</td><td>The new time (currentTime + stepSize) </td></tr>
   </table>
   </dd>
 </dl>
@@ -294,7 +294,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 <p>Reset all floating species concentrations to their intial conditions. </p>
 <p>Example: status = reset ();</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if successful </dd></dl>
 
 </div>
 </div>
@@ -320,7 +320,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>True if sucessful </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if sucessful </dd></dl>
 
 </div>
 </div>
@@ -342,11 +342,11 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <p>Set the number of points to generate in a simulation. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">const</td><td>int&amp; Number of points to generate </td></tr>
+    <tr><td class="paramname">nrPoints</td><td>Number of points to generate </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>bool Returns True if sucessful </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if sucessful </dd></dl>
 
 </div>
 </div>
@@ -373,7 +373,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if sucessful </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if sucessful </dd></dl>
 
 </div>
 </div>
@@ -399,7 +399,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if sucessful </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if sucessful </dd></dl>
 
 </div>
 </div>
@@ -481,7 +481,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 <p>Carry out a time-course simulation based on the given arguments. </p>
 <p>Example: m = simulateEx (0, 25, 200);</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>RRResultHandle Returns an array containing the results of the simulation </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns an array containing the results of the simulation </dd></dl>
 
 </div>
 </div>
@@ -503,7 +503,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:55:37 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

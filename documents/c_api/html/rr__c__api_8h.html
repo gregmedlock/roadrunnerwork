@@ -170,12 +170,10 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga29b3868509ef2c09e4bbf0b11b731443">getSteadyStateSelectionList</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the selection list for the steady state analysis.  <a href="group__utility.html#ga29b3868509ef2c09e4bbf0b11b731443"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8c67bc930b33926bccb3c9f810dc2825"></a><!-- doxytag: member="rr_c_api.h::getValue" ref="ga8c67bc930b33926bccb3c9f810dc2825" args="(const char *speciesID, double &amp;value)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga8c67bc930b33926bccb3c9f810dc2825">getValue</a> (const char *speciesID, double &amp;value)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">TO BE DONE. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8663bcca2b00ef20c13841ca9fc9f56c"></a><!-- doxytag: member="rr_c_api.h::setValue" ref="ga8663bcca2b00ef20c13841ca9fc9f56c" args="(const char *speciesId, const double &amp;val)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga8663bcca2b00ef20c13841ca9fc9f56c">setValue</a> (const char *speciesId, const double &amp;val)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">TO BE DONE. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga8c67bc930b33926bccb3c9f810dc2825">getValue</a> (const char *speciesID, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for a given symbol, use <a class="el" href="group__state.html#gaa06a430f57d4df400e58fd954766901c" title="Obtain the list of al avialable symbols.">getAvailableSymbols()</a> for a list of symbols.  <a href="group__utility.html#ga8c67bc930b33926bccb3c9f810dc2825"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga8663bcca2b00ef20c13841ca9fc9f56c">setValue</a> (const char *speciesId, const double &amp;val)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value for a given symbol, use <a class="el" href="group__state.html#gaa06a430f57d4df400e58fd954766901c" title="Obtain the list of al avialable symbols.">getAvailableSymbols()</a> for a list of symbols.  <a href="group__utility.html#ga8663bcca2b00ef20c13841ca9fc9f56c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga0db8fe5f89985f27ea4ddb3c595b16fd">getFloatingSpeciesConcentrations</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve in a vector the concentrations for all the floating species.  <a href="group__utility.html#ga0db8fe5f89985f27ea4ddb3c595b16fd"></a><br/></td></tr>
@@ -203,7 +201,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the volume for a particular compartment.  <a href="group__utility.html#gadb238a943d93bc9548bf5c3cd452e9bb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga228e8431e466bf7e5987c1179dcbbbd8">getFullJacobian</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the full Jacobian for the current model.  <a href="group__utility.html#ga228e8431e466bf7e5987c1179dcbbbd8"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the full Jacobian for the current model.  <a href="group__utility.html#ga228e8431e466bf7e5987c1179dcbbbd8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga503c810c1be94e486441eeea88163a18">getReducedJacobian</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the reduced Jacobian for the current model.  <a href="group__utility.html#ga503c810c1be94e486441eeea88163a18"></a><br/></td></tr>
@@ -218,13 +216,13 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the Link matrix for the current model.  <a href="group__utility.html#gae8e8c6ede9f60e33dcdc190c061ce3f8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga57b4c651ecffb52d28886ce9e3b6e6ed">getNrMatrix</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the reduced stoichiometry matrix for the current model.  <a href="group__utility.html#ga57b4c651ecffb52d28886ce9e3b6e6ed"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the reduced stoichiometry matrix for the current model.  <a href="group__utility.html#ga57b4c651ecffb52d28886ce9e3b6e6ed"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga587ae0ec7e6e7f8b2576bacf700eedcd">getL0Matrix</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the L9 matrix for the current model.  <a href="group__utility.html#ga587ae0ec7e6e7f8b2576bacf700eedcd"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the L9 matrix for the current model.  <a href="group__utility.html#ga587ae0ec7e6e7f8b2576bacf700eedcd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gafd1bcae76af0d5d6ccf7af7bd098de23">getConservationMatrix</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the conservation matrix for the current model.  <a href="group__utility.html#gafd1bcae76af0d5d6ccf7af7bd098de23"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the conservation matrix for the current model.  <a href="group__utility.html#gafd1bcae76af0d5d6ccf7af7bd098de23"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga07dfaf16ab38015aab6b400665ace2b2">reset</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all floating species concentrations to their intial conditions.  <a href="group__utility.html#ga07dfaf16ab38015aab6b400665ace2b2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga338d8b7e0648b293a134e69bd7862dc6"></a><!-- doxytag: member="rr_c_api.h::setFloatingSpeciesInitialConcentrations" ref="ga338d8b7e0648b293a134e69bd7862dc6" args="(const RRVector *vec)" -->
@@ -237,8 +235,8 @@ C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c2
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getFloatingSpeciesInitialConditionNames</b> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gae25399f84ff2d1fda619358a1af9a1b5">getNumberOfReactions</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the number of reactions in the loaded model.  <a href="group__utility.html#gae25399f84ff2d1fda619358a1af9a1b5"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga0a7be404315c6001627ee26e738e11e2">getReactionRate</a> (const int &amp;, double &amp;rate)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a give reaction as indicated by the index parameter.  <a href="group__utility.html#ga0a7be404315c6001627ee26e738e11e2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaa2ec2c989a20e15b0fb5cb45b3af2837">getReactionRate</a> (const int &amp;index, double &amp;rate)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a give reaction as indicated by the index parameter.  <a href="group__utility.html#gaa2ec2c989a20e15b0fb5cb45b3af2837"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga86d544bcf3eeaa4698a60123a3da69aa">getReactionRates</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a vector of current reaction rates.  <a href="group__utility.html#ga86d544bcf3eeaa4698a60123a3da69aa"></a><br/></td></tr>
@@ -322,22 +320,22 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of concentration coefficient names.  <a href="group__utility.html#gac65874848b588a8c87ac04705eb88cbc"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga82cf39ff64eb0446c9f5a2e772283323">getUnScaledElasticityMatrix</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the unscaled elasticity matrix for the current model.  <a href="group__utility.html#ga82cf39ff64eb0446c9f5a2e772283323"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the unscaled elasticity matrix for the current model.  <a href="group__utility.html#ga82cf39ff64eb0446c9f5a2e772283323"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaf8431784ec5c2ce1d0416606056f3d44">getScaledElasticityMatrix</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the scaled elasticity matrix for the current model.  <a href="group__utility.html#gaf8431784ec5c2ce1d0416606056f3d44"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the scaled elasticity matrix for the current model.  <a href="group__utility.html#gaf8431784ec5c2ce1d0416606056f3d44"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga418c0108d37bc4f35a55291ca85e0a3f">getUnscaledConcentrationControlCoefficientMatrix</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of unscaled concentration control coefficients for the current model.  <a href="group__utility.html#ga418c0108d37bc4f35a55291ca85e0a3f"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the matrix of unscaled concentration control coefficients for the current model.  <a href="group__utility.html#ga418c0108d37bc4f35a55291ca85e0a3f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gad28644ca7615c71725056028a0a048ba">getScaledConcentrationControlCoefficientMatrix</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of scaled concentration control coefficients for the current model.  <a href="group__utility.html#gad28644ca7615c71725056028a0a048ba"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the matrix of scaled concentration control coefficients for the current model.  <a href="group__utility.html#gad28644ca7615c71725056028a0a048ba"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga4b464166bb67773916067bc7e190a338">getUnscaledFluxControlCoefficientMatrix</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of unscaled flux control coefficients for the current model.  <a href="group__utility.html#ga4b464166bb67773916067bc7e190a338"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the matrix of unscaled flux control coefficients for the current model.  <a href="group__utility.html#ga4b464166bb67773916067bc7e190a338"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gad63647a85b299d463b1e4cd5671d0881">getScaledFluxControlCoefficientMatrix</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of scaled flux control coefficients for the current model.  <a href="group__utility.html#gad63647a85b299d463b1e4cd5671d0881"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the matrix of scaled flux control coefficients for the current model.  <a href="group__utility.html#gad63647a85b299d463b1e4cd5671d0881"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga6655b7aebdc9e6fad4e7a54e3de9195d">getuCC</a> (const char *variable, const char *parameter, double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single unscaled control coefficient.  <a href="group__utility.html#ga6655b7aebdc9e6fad4e7a54e3de9195d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga49c703842a069c37fa472f2740dd514b">getCC</a> (const char *variable, const char *parameter, double &amp;value)</td></tr>
@@ -361,23 +359,32 @@ C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom">
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga01ee2cd3cf82cfd67149944282eafbb6"></a><!-- doxytag: member="rr_c_api.h::printArrayList" ref="ga01ee2cd3cf82cfd67149944282eafbb6" args="(const RRArrayList2Handle list)" -->
 C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>printArrayList</b> (const <a class="el" href="rr__c__types_8h.html#a21a10f01ac4fd34c61e7e7d12af9891d">RRArrayList2Handle</a> list)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7a1fb56bd09bb535af7b6f3bc51c89b5"></a><!-- doxytag: member="rr_c_api.h::freeResult" ref="ga7a1fb56bd09bb535af7b6f3bc51c89b5" args="(RRResultHandle handle)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeResult</b> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> handle)</td></tr>
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga7a1fb56bd09bb535af7b6f3bc51c89b5">freeResult</a> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> handle)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the result from simulate and simulateEx. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga1001b1dab86472f6db5bcbe724c41631"></a><!-- doxytag: member="rr_c_api.h::freeText" ref="ga1001b1dab86472f6db5bcbe724c41631" args="(char *text)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeText</b> (char *text)</td></tr>
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga1001b1dab86472f6db5bcbe724c41631">freeText</a> (char *text)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free char* generated by library routines. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gadca4757725ec2e3d8251a001fde8028b"></a><!-- doxytag: member="rr_c_api.h::freeLabelStringList" ref="gadca4757725ec2e3d8251a001fde8028b" args="(RRLabelStringListHandle sl)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeLabelStringList</b> (<a class="el" href="struct_r_r_label_string_list.html">RRLabelStringListHandle</a> sl)</td></tr>
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gadca4757725ec2e3d8251a001fde8028b">freeLabelStringList</a> (<a class="el" href="struct_r_r_label_string_list.html">RRLabelStringListHandle</a> sl)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free RRLabelStringListHandle structures. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga63aea4cfe3b5262e67d50f3227153a16"></a><!-- doxytag: member="rr_c_api.h::freeStringList" ref="ga63aea4cfe3b5262e67d50f3227153a16" args="(RRStringListHandle sl)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeStringList</b> (<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> sl)</td></tr>
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga63aea4cfe3b5262e67d50f3227153a16">freeStringList</a> (<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> sl)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free RRStringListHandle structures. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gacca647731a9241ab1f517d569271688b"></a><!-- doxytag: member="rr_c_api.h::freeStringArrayList" ref="gacca647731a9241ab1f517d569271688b" args="(RRStringArrayListHandle sl)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeStringArrayList</b> (<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> sl)</td></tr>
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gacca647731a9241ab1f517d569271688b">freeStringArrayList</a> (<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> sl)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free RRStringArrayListHandle structures. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8d0882fc56ccdc67b489cdcb82522ac6"></a><!-- doxytag: member="rr_c_api.h::freeArrayList" ref="ga8d0882fc56ccdc67b489cdcb82522ac6" args="(RRArrayList2Handle theList)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeArrayList</b> (<a class="el" href="rr__c__types_8h.html#a21a10f01ac4fd34c61e7e7d12af9891d">RRArrayList2Handle</a> theList)</td></tr>
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga8d0882fc56ccdc67b489cdcb82522ac6">freeArrayList</a> (<a class="el" href="rr__c__types_8h.html#a21a10f01ac4fd34c61e7e7d12af9891d">RRArrayList2Handle</a> theList)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free RRArrayList2Handle structures. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga11dddcdb661f8e82a2f87ecb24ab8968"></a><!-- doxytag: member="rr_c_api.h::freeVector" ref="ga11dddcdb661f8e82a2f87ecb24ab8968" args="(RRVectorHandle vector)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeVector</b> (<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vector)</td></tr>
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga11dddcdb661f8e82a2f87ecb24ab8968">freeVector</a> (<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vector)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free RRVectorHandle structures. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gabbbbce24954114b22b13337ccaf63529"></a><!-- doxytag: member="rr_c_api.h::freeMatrix" ref="gabbbbce24954114b22b13337ccaf63529" args="(RRMatrixHandle matrix)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeMatrix</b> (<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> matrix)</td></tr>
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gabbbbce24954114b22b13337ccaf63529">freeMatrix</a> (<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> matrix)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free RRMatrixHandle structures. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga79f31e58a4a2d24d2f604f4369b6c64f"></a><!-- doxytag: member="rr_c_api.h::freeCCode" ref="ga79f31e58a4a2d24d2f604f4369b6c64f" args="(RRCCodeHandle code)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeCCode</b> (<a class="el" href="rr__c__types_8h.html#aaaa74f20722a48f3ae9ed5bdbb6c8a86">RRCCodeHandle</a> code)</td></tr>
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga79f31e58a4a2d24d2f604f4369b6c64f">freeCCode</a> (<a class="el" href="rr__c__types_8h.html#aaaa74f20722a48f3ae9ed5bdbb6c8a86">RRCCodeHandle</a> code)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free RRCCodeHandle structures. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5945592b2369af769505a47463be2a43"></a><!-- doxytag: member="rr_c_api.h::Pause" ref="ga5945592b2369af769505a47463be2a43" args="()" -->
 C_DECL_SPEC void rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>Pause</b> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga0c42e94111a64ea70824f92d8c1b564d">getVectorLength</a> (<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vector)</td></tr>
@@ -445,7 +452,7 @@ C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom">
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:55:37 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -80,11 +80,11 @@ rr\-Call\-Conv \hyperlink{group__utility_ga9b87919e79f6eb0d7c77c3daa08d6baf}{sim
 
 
 \begin{DoxyParams}{\-Parameters}
-{\em int$\ast$} & num\-Points \-The current value for the number of points \\
+{\em num\-Points} & \-The current value for the number of points \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-\-Returns \-True if successful 
+\-Returns true if successful 
 \end{DoxyReturn}
 \hypertarget{group__utility_ga1db0b86ed7fd0d6e19f8df85b7577253}{
 \index{\-Time-\/course simulation@{\-Time-\/course simulation}!get\-Selection\-List@{get\-Selection\-List}}
@@ -115,15 +115,15 @@ rr\-Call\-Conv \hyperlink{group__utility_ga9b87919e79f6eb0d7c77c3daa08d6baf}{sim
 
 \-Get the value of the current time end. 
 
-\-Example\-: status = get\-Time\-Start (\&time\-End);
+\-Example\-: status = get\-Time\-End (\&time\-End);
 
 
 \begin{DoxyParams}{\-Parameters}
-{\em double$\ast$} & time\-Start \-The current value for the time end \\
+{\em time\-End} & \-The current value for the time end \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-\-Returns \-True if successful 
+\-Returns true if successful 
 \end{DoxyReturn}
 \hypertarget{group__utility_ga18b4fbd0dc5aa3f25d58367a406f425c}{
 \index{\-Time-\/course simulation@{\-Time-\/course simulation}!get\-Time\-Start@{get\-Time\-Start}}
@@ -171,7 +171,7 @@ rr\-Call\-Conv \hyperlink{group__utility_ga9b87919e79f6eb0d7c77c3daa08d6baf}{sim
 \hline
 \mbox{\tt in}  & {\em step\-Size} & \-The step size to use in the integration \\
 \hline
-\mbox{\tt in}  & {\em } & new time (current\-Time + step\-Size) \\
+\mbox{\tt in}  & {\em value} & \-The new time (current\-Time + step\-Size) \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
@@ -193,7 +193,7 @@ rr\-Call\-Conv \hyperlink{group__utility_ga9b87919e79f6eb0d7c77c3daa08d6baf}{sim
 \-Example\-: status = reset ();
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns \-True if successful 
+\-Returns true if successful 
 \end{DoxyReturn}
 \hypertarget{group__utility_ga320ffeeba3e5505371b52ce61715bf82}{
 \index{\-Time-\/course simulation@{\-Time-\/course simulation}!set\-Capabilities@{set\-Capabilities}}
@@ -214,7 +214,7 @@ rr\-Call\-Conv \hyperlink{group__utility_ga9b87919e79f6eb0d7c77c3daa08d6baf}{sim
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-\-True if sucessful 
+\-Returns true if sucessful 
 \end{DoxyReturn}
 \hypertarget{group__utility_ga448ead53bb8913de664cc8ad675b4197}{
 \index{\-Time-\/course simulation@{\-Time-\/course simulation}!set\-Num\-Points@{set\-Num\-Points}}
@@ -231,11 +231,11 @@ rr\-Call\-Conv \hyperlink{group__utility_ga9b87919e79f6eb0d7c77c3daa08d6baf}{sim
 
 
 \begin{DoxyParams}{\-Parameters}
-{\em const} & int\& \-Number of points to generate \\
+{\em nr\-Points} & \-Number of points to generate \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-bool \-Returns \-True if sucessful 
+\-Returns true if sucessful 
 \end{DoxyReturn}
 \hypertarget{group__utility_ga6465c94b6dfed39a6ef614bd0a68cb9b}{
 \index{\-Time-\/course simulation@{\-Time-\/course simulation}!set\-Selection\-List@{set\-Selection\-List}}
@@ -258,7 +258,7 @@ bool \-Returns \-True if sucessful
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-\-Returns \-True if sucessful 
+\-Returns true if sucessful 
 \end{DoxyReturn}
 \hypertarget{group__utility_ga1313e21d622cd846bdd75071e965eb6c}{
 \index{\-Time-\/course simulation@{\-Time-\/course simulation}!set\-Time\-End@{set\-Time\-End}}
@@ -279,7 +279,7 @@ bool \-Returns \-True if sucessful
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-\-Returns \-True if sucessful 
+\-Returns true if sucessful 
 \end{DoxyReturn}
 \hypertarget{group__utility_ga1a636a76ad610d99fe1c780bb3d9296d}{
 \index{\-Time-\/course simulation@{\-Time-\/course simulation}!set\-Time\-Start@{set\-Time\-Start}}
@@ -336,5 +336,5 @@ bool \-Returns \-True if sucessful
 \-Example\-: m = simulate\-Ex (0, 25, 200);
 
 \begin{DoxyReturn}{\-Returns}
-\-R\-R\-Result\-Handle \-Returns an array containing the results of the simulation 
+\-Returns an array containing the results of the simulation 
 \end{DoxyReturn}

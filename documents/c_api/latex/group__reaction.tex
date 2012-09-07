@@ -10,7 +10,7 @@
 \subsection*{\-Utility routines}
 \begin{DoxyCompactItemize}
 \item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga0a7be404315c6001627ee26e738e11e2}{get\-Reaction\-Rate} (const int \&, double \&rate)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_gaa2ec2c989a20e15b0fb5cb45b3af2837}{get\-Reaction\-Rate} (const int \&index, double \&rate)
 \begin{DoxyCompactList}\small\item\em \-Retrieve a give reaction as indicated by the index parameter. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv \hyperlink{group__utility_ga86d544bcf3eeaa4698a60123a3da69aa}{get\-Reaction\-Rates} ()
@@ -24,29 +24,29 @@ rr\-Call\-Conv \hyperlink{group__utility_gaa03d9414ddeb177a76365dd5b2d0042e}{get
 \-Get information about reaction rates. 
 
 \subsection{\-Function \-Documentation}
-\hypertarget{group__utility_ga0a7be404315c6001627ee26e738e11e2}{
+\hypertarget{group__utility_gaa2ec2c989a20e15b0fb5cb45b3af2837}{
 \index{\-Reaction group@{\-Reaction group}!get\-Reaction\-Rate@{get\-Reaction\-Rate}}
 \index{get\-Reaction\-Rate@{get\-Reaction\-Rate}!Reaction group@{\-Reaction group}}
 \subsubsection[{get\-Reaction\-Rate}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv get\-Reaction\-Rate (
 \begin{DoxyParamCaption}
-\item[{const int \&}]{, }
+\item[{const int \&}]{index, }
 \item[{double \&}]{rate}
 \end{DoxyParamCaption}
 )}}
-\label{group__utility_ga0a7be404315c6001627ee26e738e11e2}
+\label{group__utility_gaa2ec2c989a20e15b0fb5cb45b3af2837}
 
 
 \-Retrieve a give reaction as indicated by the index parameter. 
 
 
 \begin{DoxyParams}{\-Parameters}
-{\em int$\ast$} & index -\/ \-The index is used to specif which reaction rate to retrieve \\
+{\em index} & -\/ \-The index is used to specif which reaction rate to retrieve \\
 \hline
-{\em double$\ast$} & rate -\/ \-The reaction rate is returned in the rate argument \\
+{\em rate} & -\/ \-The reaction rate is returned in the rate argument \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-bool status -\/ \-Returns false if it fails 
+\-Returns false if it fails 
 \end{DoxyReturn}
 \hypertarget{group__utility_ga86d544bcf3eeaa4698a60123a3da69aa}{
 \index{\-Reaction group@{\-Reaction group}!get\-Reaction\-Rates@{get\-Reaction\-Rates}}
@@ -62,7 +62,7 @@ bool status -\/ \-Returns false if it fails
 \-Retrieve a vector of current reaction rates. 
 
 \begin{DoxyReturn}{\-Returns}
-\-R\-R\-Vector\-Handle v\-Reaction\-Rates -\/ \-Returns null if it fails, otherwise it returns a vector of reaction rates 
+\-Returns null if it fails, otherwise it returns a vector of reaction rates 
 \end{DoxyReturn}
 \hypertarget{group__utility_gaa03d9414ddeb177a76365dd5b2d0042e}{
 \index{\-Reaction group@{\-Reaction group}!get\-Reaction\-Rates\-Ex@{get\-Reaction\-Rates\-Ex}}
@@ -79,9 +79,9 @@ bool status -\/ \-Returns false if it fails
 
 
 \begin{DoxyParams}{\-Parameters}
-{\em \-R\-R\-Vector\-Handle} & species -\/ \-The vector of floating species concentrations \\
+{\em vec} & \-The vector of floating species concentrations \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-\-R\-R\-Vector\-Handle v\-Reaction\-Rates -\/ \-Returns null if it fails otherwise it returns a vector of reaction rates 
+\-Returns null if it fails otherwise it returns a vector of reaction rates 
 \end{DoxyReturn}

@@ -10,16 +10,10 @@
 \subsection*{\-Utility routines}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{group__utility_ga8c67bc930b33926bccb3c9f810dc2825}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga8c67bc930b33926bccb3c9f810dc2825}{get\-Value} (const char $\ast$species\-I\-D, double \&value)}
-\label{group__utility_ga8c67bc930b33926bccb3c9f810dc2825}
-
-\begin{DoxyCompactList}\small\item\em \-T\-O \-B\-E \-D\-O\-N\-E. \end{DoxyCompactList}\item 
-\hypertarget{group__utility_ga8663bcca2b00ef20c13841ca9fc9f56c}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga8663bcca2b00ef20c13841ca9fc9f56c}{set\-Value} (const char $\ast$species\-Id, const double \&val)}
-\label{group__utility_ga8663bcca2b00ef20c13841ca9fc9f56c}
-
-\begin{DoxyCompactList}\small\item\em \-T\-O \-B\-E \-D\-O\-N\-E. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga8c67bc930b33926bccb3c9f810dc2825}{get\-Value} (const char $\ast$species\-I\-D, double \&value)
+\begin{DoxyCompactList}\small\item\em \-Get the value for a given symbol, use \hyperlink{group__state_gaa06a430f57d4df400e58fd954766901c}{get\-Available\-Symbols()} for a list of symbols. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga8663bcca2b00ef20c13841ca9fc9f56c}{set\-Value} (const char $\ast$species\-Id, const double \&val)
+\begin{DoxyCompactList}\small\item\em \-Set the value for a given symbol, use \hyperlink{group__state_gaa06a430f57d4df400e58fd954766901c}{get\-Available\-Symbols()} for a list of symbols. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__utility_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
 \begin{DoxyCompactList}\small\item\em \-Obtain the number of reactions in the loaded model. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga3fbb7c2fab261f25a3871f1caf398ff1}{eval\-Model} ()
@@ -33,7 +27,7 @@ rr\-Call\-Conv \hyperlink{group__utility_gaa06a430f57d4df400e58fd954766901c}{get
 
 
 \subsection{\-Detailed \-Description}
-\-Compute derivatives, fluxes, and other values of the system at the current state. steadystate \-Compute and obtain basic information about the steady state 
+\-Compute derivatives, fluxes, and other values of the system at the current state. 
 
 \subsection{\-Function \-Documentation}
 \hypertarget{group__utility_ga3fbb7c2fab261f25a3871f1caf398ff1}{
@@ -50,7 +44,7 @@ rr\-Call\-Conv \hyperlink{group__utility_gaa06a430f57d4df400e58fd954766901c}{get
 \-Evaluate the current models, that it update all assignments and rates of change. 
 
 \begin{DoxyReturn}{\-Returns}
-bool status -\/ \-Returns false if it fails 
+\-Returns false if it fails 
 \end{DoxyReturn}
 \hypertarget{group__utility_gaa06a430f57d4df400e58fd954766901c}{
 \index{\-Current state of system@{\-Current state of system}!get\-Available\-Symbols@{get\-Available\-Symbols}}
@@ -100,5 +94,57 @@ bool status -\/ \-Returns false if it fails
 \-Example\-: number = get\-Number\-Of\-Reactions ();
 
 \begin{DoxyReturn}{\-Returns}
-int value -\/ \-Returns -\/1 if it fails, if succesful it return 0 or more, indicating the number of reactions 
+\-Returns -\/1 if it fails, if succesful it return 0 or more, indicating the number of reactions 
+\end{DoxyReturn}
+\hypertarget{group__utility_ga8c67bc930b33926bccb3c9f810dc2825}{
+\index{\-Current state of system@{\-Current state of system}!get\-Value@{get\-Value}}
+\index{get\-Value@{get\-Value}!Current state of system@{\-Current state of system}}
+\subsubsection[{get\-Value}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv get\-Value (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{species\-I\-D, }
+\item[{double \&}]{value}
+\end{DoxyParamCaption}
+)}}
+\label{group__utility_ga8c67bc930b33926bccb3c9f810dc2825}
+
+
+\-Get the value for a given symbol, use \hyperlink{group__state_gaa06a430f57d4df400e58fd954766901c}{get\-Available\-Symbols()} for a list of symbols. 
+
+\-Example\-: status = get\-Value (\char`\"{}\-S1\char`\"{}, \&value)
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em species\-I\-D} & \-The symbol that we wish to obtain the value for \\
+\hline
+{\em value} & \-The value that will be retrievd \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Returns true if succesful 
+\end{DoxyReturn}
+\hypertarget{group__utility_ga8663bcca2b00ef20c13841ca9fc9f56c}{
+\index{\-Current state of system@{\-Current state of system}!set\-Value@{set\-Value}}
+\index{set\-Value@{set\-Value}!Current state of system@{\-Current state of system}}
+\subsubsection[{set\-Value}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv set\-Value (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{species\-Id, }
+\item[{const double \&}]{val}
+\end{DoxyParamCaption}
+)}}
+\label{group__utility_ga8663bcca2b00ef20c13841ca9fc9f56c}
+
+
+\-Set the value for a given symbol, use \hyperlink{group__state_gaa06a430f57d4df400e58fd954766901c}{get\-Available\-Symbols()} for a list of symbols. 
+
+\-Example\-: status = set\-Value (\char`\"{}\-S1\char`\"{}, 0.\-5)
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em species\-Id} & \-The symbol that we wish to set the value \\
+\hline
+{\em val} & \-The value that will be set to the symbol \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{\-Returns}
+\-Returns true if succesful 
 \end{DoxyReturn}
