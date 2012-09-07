@@ -298,9 +298,9 @@ def getValue(symbolName):
 #
 #Takes (string, double) as an argument for symbolName and value, respectively
 def setValue(symbolName, value):
-    data = c_double(value)
-    if handle.setValue(symbolName, byref(data)) == True:
-        return data.data;
+    value = c_double(value)
+    if handle.setValue(symbolName, byref(value)) == True:
+        return value.value;
     else:
         raise RuntimeError('Index out of range')
 
@@ -321,8 +321,8 @@ def getGlobalParameterValues():
 ##Sets the value of a boundary species by its index. species are indexed starting at 0.
 #
 #Takes (int, double) as an argument for index and value, respectively
-def setBoundarySpeciesByIndex(index, val):
-    value = c_double(val)
+def setBoundarySpeciesByIndex(index, value):
+    value = c_double(value)
     ivalue = c_int(index)
     if handle.setBoundarySpeciesByIndex(byref(ivalue), byref(value)) == True:
         return value.value;
@@ -332,8 +332,8 @@ def setBoundarySpeciesByIndex(index, val):
 ##Sets the value of a floating species by its index. species are indexed starting at 0.
 #
 #Takes (int, double) as an argument for index and value, respectively
-def setFloatingSpeciesByIndex(index, val):
-    value = c_double(val)
+def setFloatingSpeciesByIndex(index, value):
+    value = c_double(value)
     ivalue = c_int(index)
     if handle.setFloatingSpeciesByIndex(byref(ivalue), byref(value)) == True:
         return value.value;
@@ -343,8 +343,8 @@ def setFloatingSpeciesByIndex(index, val):
 ##Sets the value of a global parameter by its index. global parameters are indexed starting at 0.
 #
 #Takes (int, double) as an argument for index and value, respectively
-def setGlobalParameterByIndex(index, val):
-    value = c_double(val)
+def setGlobalParameterByIndex(index, value):
+    value = c_double(value)
     ivalue = c_int(index)
     if handle.setGlobalParameterByIndex(byref(ivalue), byref(value)) == True:
         return value.value;
@@ -398,8 +398,8 @@ def getCompartmentByIndex(index):
 ##Sets the volume of a compartment by its index. Compartments are indexed starting at 0.
 #
 #Takes (int, double) as an argument for index and value, respectively
-def setCompartmentByIndex(index, val):
-    value = c_double(val)
+def setCompartmentByIndex(index, value):
+    value = c_double(value)
     ivalue = c_int(index)
     if handle.setCompartmentByIndex(byref(ivalue), byref(value)) == True:
         return value.value;
