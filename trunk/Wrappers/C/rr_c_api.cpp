@@ -1416,7 +1416,7 @@ RRVectorHandle rrCallConv getGlobalParameterValues()
     }
 }
 
-RRArrayList2Handle rrCallConv getAvailableSymbols()
+cRRArrayListHandle rrCallConv getAvailableSymbols()
 {
 	try
     {
@@ -2386,7 +2386,7 @@ bool rrCallConv getRateOfChange(const int& index, double& value)
 }
 
 //Print functions ==========================================================
-char* rrCallConv printArrayList(const RRArrayList2Handle list)
+char* rrCallConv printArrayList(const cRRArrayListHandle list)
 {
 	try
     {
@@ -2399,7 +2399,7 @@ char* rrCallConv printArrayList(const RRArrayList2Handle list)
         char*           cVal;
         int*            intVal;
         double*         dVal;
-        RRArrayList2*   lVal; 		//list is nested list
+       cRRArrayList*    lVal; 		//list is nested list
 
 		stringstream resStr;
         resStr<<"{";
@@ -2423,7 +2423,7 @@ char* rrCallConv printArrayList(const RRArrayList2Handle list)
                 break;
 
                 case litArrayList:
-                    lVal = (RRArrayList2 *) list->Items[i].pValue;
+                    lVal = (cRRArrayList *) list->Items[i].pValue;
                     resStr<<printArrayList(lVal);
                 break;
             }
@@ -2873,7 +2873,7 @@ bool rrCallConv freeStringArrayList(RRStringArrayListHandle theList)
     return false;
 }
 
-bool rrCallConv freeArrayList(RRArrayList2Handle theList)
+bool rrCallConv freeArrayList(cRRArrayListHandle theList)
 {
 	try
     {

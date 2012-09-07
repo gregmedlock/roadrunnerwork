@@ -957,10 +957,10 @@ C_DECL_SPEC RRStringListHandle rrCallConv getEigenValueIds();
 /*!
  \brief Obtain the list of al avialable symbols
 
-  \return Returns -1 if it fails, if succesful it returns a pointer to a RRArrayList2Handle struct
+ \return Returns -1 if it fails, if succesful it returns a pointer to a RRArrayListHandle struct
  \ingroup state
 */
-C_DECL_SPEC RRArrayList2Handle rrCallConv getAvailableSymbols();
+C_DECL_SPEC cRRArrayListHandle rrCallConv getAvailableSymbols();
 
 // MCA methods
 /*!
@@ -1111,7 +1111,7 @@ C_DECL_SPEC char*                   rrCallConv   printMatrix(const RRMatrixHandl
 C_DECL_SPEC char*                   rrCallConv   printVector(const RRVectorHandle vec);
 C_DECL_SPEC char*                   rrCallConv   printStringList(const RRStringListHandle list);
 C_DECL_SPEC char*                   rrCallConv   printStringArrayList(const RRStringArrayList* list);
-C_DECL_SPEC char*                   rrCallConv   printArrayList(const RRArrayList2Handle list);
+C_DECL_SPEC char*                   rrCallConv   printArrayList(const cRRArrayListHandle list);
 
 // Free memory functions
 /*!
@@ -1145,10 +1145,10 @@ C_DECL_SPEC bool                    rrCallConv   freeStringList(RRStringListHand
 C_DECL_SPEC bool                    rrCallConv   freeStringArrayList(RRStringArrayListHandle sl);
 
 /*!
- \brief Free RRArrayList2Handle structures
+ \brief Free RRArrayListHandle structures
  \ingroup freeRoutines
 */
-C_DECL_SPEC bool 					rrCallConv 	 freeArrayList(RRArrayList2Handle theList);
+C_DECL_SPEC bool 					rrCallConv 	 freeArrayList(cRRArrayListHandle theList);
 
 /*!
  \brief Free RRVectorHandle structures
