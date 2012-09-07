@@ -653,7 +653,7 @@ begin
   lstModelName.ItemIndex := 0;
 
   setTempFolder('C:\\rrTemp');
-  setLogLevel(5);
+  setLogLevel('info');
   enableLogging();
 end;
 

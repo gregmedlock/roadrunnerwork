@@ -125,30 +125,30 @@ typedef struct RRStringArrayList
 
 /*!@enum*/ 
 /*!@brief The list type supports strings, integers, double and lists */ 
-enum ListItemType {litString, litInteger, litDouble,   litArrayList};
+enum ListItemType {litString, litInteger, litDouble, litArrayList};
 
 // The above enums correspond to the currently supported types in an RRArrayList
 // char, int, double, RRArrayList
 // The void pointer pValue need to be casted to corresponding type to retrieve its value
 
-struct cRRArrayList;
+struct cRRList;
 
 /*!@struct*/ 
 /*!@brief A single list element type */ 
-typedef struct cRRArrayListItem
+typedef struct cRRListItem
 {
     ListItemType                ItemType;  /*!< The type of the item in this list element */
     void*                       pValue;    /*!< A pointer to the list element */
-} *cRRArrayListItemHandle;                 /*!< Pointer to cRRArrayListItemHandle struct */
+} *cRRListItemHandle;                 /*!< Pointer to cRRArrayListItemHandle struct */
 
 
 /*!@struct*/ 
 /*!@brief A list type, stores int, double, strings and lists */ 
-typedef struct cRRArrayList
+typedef struct cRRList
 {
-    int                        Count;  /*!< The number elements in this list */
-    cRRArrayListItemHandle     Items;  /*!< A pointer to an array of list items */
-}  *cRRArrayListHandle;                /*!< Pointer to cRRArrayListHandle struct */
+    int                   Count;  /*!< The number elements in this list */
+    cRRListItemHandle     Items;  /*!< A pointer to an array of list items */
+}  *cRRListHandle;                /*!< Pointer to cRRArrayListHandle struct */
 
 
 #if defined( __cplusplus)

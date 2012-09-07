@@ -161,6 +161,8 @@ type
 var
    DLLLoaded : boolean;
    selectionList : AnsiString;
+   loggingEnabled : boolean = false;
+   loggingTmpFileName : AnsiString = '';
 
 function  hasError : boolean;
 function  getRRInstance : Pointer;
@@ -182,8 +184,8 @@ function  getRevision : integer;
 function  getCopyright : AnsiString;
 function  getTempFolder : AnsiString;
 function  enableLogging : boolean;
-function  setLogLevel (debugLevel : integer) : boolean;
-function  setLogLevelFromString (debugLevel : AnsiString) : boolean;
+function  setLogLevel (debugLevel : AnsiString) : boolean;
+//function  setLogLevelFromString (debugLevel : AnsiString) : boolean;
 function  setTempFolder (name : AnsiString) : boolean;
 
 {$REGION 'Documentation'}
@@ -294,8 +296,8 @@ var DLLHandle : Cardinal;
     libHasError : TVoidBoolFunc;
     libGetLastError : TVoidCharFunc;
     libEnableLogging : TVoidBoolFunc;
-    libSetLogLevel : TVarIntBoolFunc;
-    libSetLogLevelFromString : function (value : PAnsiChar) : bool; stdcall;
+    libSetLogLevel : TCharBoolFunc;
+    //libSetLogLevelFromString : function (value : PAnsiChar) : bool; stdcall;
     libSetTempFolder : function (folder : PAnsiChar) : bool; stdcall;
 
     libGetBuildDate : TVoidCharFunc;
@@ -484,17 +486,12 @@ end;
 function enableLogging : boolean;
 begin
   result := libEnableLogging;
+  loggingEnabled := true;
 end;
 
-function setLogLevel (debugLevel : integer) : boolean;
+function setLogLevel (debugLevel : AnsiString) : boolean;
 begin
-  result := libSetLogLevel (debugLevel);
-end;
-
-
-function setLogLevelFromString (debugLevel : AnsiString) : boolean;
-begin
-   result := libSetLogLevelFromString (PAnsiChar (debugLevel));
+  result := libSetLogLevel (PAnsiChar (debugLevel));
 end;
 
 
@@ -1341,7 +1338,6 @@ begin
 
    @libSetLogLevel   := loadSingleMethod ('_setLogLevel@4', errMsg, result, methodList);
    @libEnableLogging := loadSingleMethod ('_enableLogging@0', errMsg, result, methodList);
-   @libSetLogLevelFromString := loadSingleMethod ('_setLogLevelFromString@4', errMsg, result, methodList);
 
    @libSetTempFolder := loadSingleMethod ('_setTempFolder@4', errMsg, result, methodList);
    @libGetTempFolder := loadSingleMethod ('getTempFolder', errMsg, result, methodList);

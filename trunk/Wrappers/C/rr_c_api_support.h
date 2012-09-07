@@ -36,7 +36,7 @@ RRMatrix*           createMatrix(const LIB_LA::DoubleMatrix& mat);
 RRStringList*       createList(const rr::StringList& aList);
 RRStringList*       createList(const rr::ArrayList& aList);
 RRStringArrayList*  createList(const rr::RRArrayList<string>& aList);
-cRRArrayList*       createList(const rr::ArrayList2& aList);
+cRRList*            createList(const rr::ArrayList2& aList);
 
 }
 

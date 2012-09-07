@@ -195,7 +195,7 @@ RRStringArrayList* createList(const RRArrayList<string>& aList)
     return theList;
 }
 
-cRRArrayList* createList(const rr::ArrayList2& aList)
+cRRList* createList(const rr::ArrayList2& aList)
 {
     if(!aList.Count())
     {
@@ -203,10 +203,10 @@ cRRArrayList* createList(const rr::ArrayList2& aList)
     }
 
     //Setup a RRStringArrayList structure from aList
-    cRRArrayList* theList = new cRRArrayList;
+    cRRList* theList = new cRRList;
 
     theList->Count = aList.Count();
-    theList->Items = new cRRArrayListItem[aList.Count()];
+    theList->Items = new cRRListItem[aList.Count()];
     int itemCount = aList.Count();
     for(int i = 0; i < itemCount; i++)
     {
@@ -239,7 +239,7 @@ cRRArrayList* createList(const rr::ArrayList2& aList)
         {
             ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
             ArrayList2Item list = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));
-            theList->Items[i].pValue = (cRRArrayList*) createList(*(list.mValue));
+            theList->Items[i].pValue = (cRRList*) createList(*(list.mValue));
             theList->Items[i].ItemType = litArrayList;
         }
     }
