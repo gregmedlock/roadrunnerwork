@@ -540,7 +540,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getSteadyStateSelectionList();
  \return Returns true if succesful
  \ingroup state
 */
-C_DECL_SPEC bool rrCallConv getValue(const char* speciesID, double& value);
+C_DECL_SPEC bool rrCallConv getValue(const char* symbolId, double& value);
 
 
 /*!

@@ -742,7 +742,7 @@ RRStringListHandle rrCallConv getRatesOfChangeNames()
 	return NULL;
 }
 
-bool rrCallConv getValue(const char* speciesID, double& value)
+bool rrCallConv getValue(const char* symbolId, double& value)
 {
 	try
     {
@@ -751,7 +751,7 @@ bool rrCallConv getValue(const char* speciesID, double& value)
         	setError(ALLOCATE_API_ERROR_MSG);
         	return false;
     	}
-	    value = gRRHandle->getValue(speciesID);
+	    value = gRRHandle->getValue(symbolId);
         return true;
     }
     catch(Exception& ex)
