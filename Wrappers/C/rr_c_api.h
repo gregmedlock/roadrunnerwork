@@ -104,7 +104,7 @@
  \defgroup state Current state of system
  \brief Compute derivatives, fluxes, and other values of the system at the current state
 
- \derfgroup steadystate
+ \defgroup steadystate Steady State Routines
  \brief Compute and obtain basic information about the steady state
 
  \defgroup reaction Reaction group
@@ -123,7 +123,7 @@
  \brief Set and get global and local parameters
 
  \defgroup compartment Compartment group
- \brief <b> Set and Get information on compartments
+ \brief Set and Get information on compartments
 
  \defgroup simulation Time-course simulation
  \brief Deterministic, stochastic, and hybrid simulation algorithms
@@ -136,6 +136,10 @@
 
  \defgroup helperRoutines Helper Routines
  \brief Helper routines for acessing the various C API types, eg lists and arrays
+
+ \defgroup freeRoutines Free memory routines
+ \brief Routines that should be used to free various data structures generated during the course of using the library
+
 */
 
 #ifndef rrC_APIH
@@ -222,7 +226,7 @@ C_DECL_SPEC char* rrCallConv getTempFolder();
  generate C source code. This method can be used to obtain the header and main source
  code after a model has been loaded. 
 
- \return char* path - Returns null if it fails, otherwise it returns a pointer to the RRCode structure
+ \return Returns null if it fails, otherwise it returns a pointer to the RRCode structure
  \ingroup utility
 */
 C_DECL_SPEC RRCCode* rrCallConv getCCode();
@@ -248,7 +252,7 @@ C_DECL_SPEC bool rrCallConv enableLogging();
 
  Example: setLogLevel ("DEBUG4")
 
- \param char* level - Pointer to the logging level string. 
+ \param lvl Pointer to the logging level string. 
  \return Ruturns true if succesful
  \ingroup errorfunctions
 */
@@ -289,7 +293,7 @@ C_DECL_SPEC char* rrCallConv getLogFileName();
 
  Example: status = hasError ()
 
- \return bool status - Returns true if there is an error waiting to be retrieved
+ \return status - Returns true if there is an error waiting to be retrieved
  \ingroup errorfunctions
 */
 C_DECL_SPEC bool rrCallConv hasError();
@@ -314,7 +318,7 @@ C_DECL_SPEC RRHandle rrCallConv getRRInstance();
 
 /*!
  \brief Free the roadRunner instance 
- \param RRHandle instance Free the roadRunner instance given in the argument
+ \param handle Free the roadRunner instance given in the argument
  \ingroup initialization
 */
 C_DECL_SPEC bool rrCallConv freeRRInstance(RRHandle handle);
@@ -337,8 +341,8 @@ C_DECL_SPEC bool rrCallConv loadSBML(const char* sbml);
 
 /*!
  \brief Create a model from a SBML file
- \param char* file name 
- \return bool Returns true if sucessful
+ \param sbml file name 
+ \return Returns true if sucessful
  \ingroup loadsave
 */
 C_DECL_SPEC bool rrCallConv loadSBMLFromFile(const char* sbml);
@@ -365,7 +369,7 @@ C_DECL_SPEC char* rrCallConv getParamPromotedSBML(const char* sArg);
 /*!
  \brief Set the simulator's capabilities
  \param[out] caps An XML string that specifies the simulators capabilities
- \return True if sucessful
+ \return Returns true if sucessful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv setCapabilities (const char* caps);
@@ -388,15 +392,15 @@ C_DECL_SPEC bool rrCallConv setTimeStart(const double& timeStart);
 /*!
  \brief Set the time end for a simulation
  \param timeEnd
- \return Returns True if sucessful
+ \return Returns true if sucessful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv setTimeEnd(const double& timeEnd);
 
 /*!
  \brief Set the number of points to generate in a simulation
- \param const int& Number of points to generate
- \return bool Returns True if sucessful
+ \param nrPoints Number of points to generate
+ \return Returns true if sucessful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv setNumPoints(const int& nrPoints);
@@ -407,7 +411,7 @@ C_DECL_SPEC bool rrCallConv setNumPoints(const int& nrPoints);
  Example: setSelectionList ("Time, S1, J1, J2")
 
  \param list A string of names separated by spaces or comma characters
- \return Returns True if sucessful
+ \return Returns true if sucessful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv setSelectionList(const char* list);
@@ -434,7 +438,7 @@ C_DECL_SPEC RRResultHandle rrCallConv simulate();
 
  Example: m = simulateEx (0, 25, 200);
 
- \return RRResultHandle Returns an array containing the results of the simulation
+ \return Returns an array containing the results of the simulation
  \ingroup simulation
 */
 C_DECL_SPEC RRResultHandle rrCallConv simulateEx(const double& timeStart, const double& timeEnd, const int& numberOfPoints);
@@ -446,7 +450,7 @@ C_DECL_SPEC RRResultHandle rrCallConv simulateEx(const double& timeStart, const 
 
  \param[in] currentTime The current time in the simulation
  \param[in] stepSize The step size to use in the integration
- \param[in]The new time (currentTime + stepSize)
+ \param[in] value The new time (currentTime + stepSize)
  \return Returns true if successful
  \ingroup simulation
 */
@@ -466,10 +470,10 @@ C_DECL_SPEC bool rrCallConv getTimeStart(double& timeStart);
 /*!
  \brief Get the value of the current time end
 
- Example: status = getTimeStart (&timeEnd);
+ Example: status = getTimeEnd (&timeEnd);
 
- \param double* timeStart The current value for the time end
- \return Returns True if successful
+ \param timeEnd The current value for the time end
+ \return Returns true if successful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv getTimeEnd(double& timeEnd);
@@ -479,8 +483,8 @@ C_DECL_SPEC bool rrCallConv getTimeEnd(double& timeEnd);
 
  Example: status = getNumPoints (&numberOfPoints);
 
- \param int* numPoints The current value for the number of points
- \return Returns True if successful
+ \param numPoints The current value for the number of points
+ \return Returns true if successful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv getNumPoints (int& numPoints);
@@ -491,8 +495,8 @@ C_DECL_SPEC bool rrCallConv getNumPoints (int& numPoints);
 
  Example: status = steadyState (&closenessToSteadyState);
 
- \param double* value This value is set during the call and indicates how close the solution is to the steady state. The smaller the value the better.
- \return Returns True if successful
+ \param value This value is set during the call and indicates how close the solution is to the steady state. The smaller the value the better.
+ \return Returns true if successful
  \ingroup steadystate
 */
 C_DECL_SPEC bool rrCallConv steadyState(double& value);
@@ -523,22 +527,33 @@ C_DECL_SPEC bool rrCallConv setSteadyStateSelectionList(const char* list);
  \return Returns null if it fails, otherwise it returns a list of strings representing symbols in the selection list
  \ingroup steadystate
 */
-C_DECL_SPEC RRStringListHandle      rrCallConv   getSteadyStateSelectionList();
-
-
-// Set and get family of methods
-/*!
- \brief TO BE DONE
- \ingroup state
-*/
-C_DECL_SPEC bool        			rrCallConv   getValue(const char* speciesID, double& value);
+C_DECL_SPEC RRStringListHandle rrCallConv getSteadyStateSelectionList();
 
 
 /*!
- \brief TO BE DONE
+ \brief Get the value for a given symbol, use getAvailableSymbols() for a list of symbols
+
+ Example: status = getValue ("S1", &value)
+
+ \param speciesID The symbol that we wish to obtain the value for
+ \param value The value that will be retrievd
+ \return Returns true if succesful
  \ingroup state
 */
-C_DECL_SPEC bool                    rrCallConv   setValue(const char* speciesId, const double& val);
+C_DECL_SPEC bool rrCallConv getValue(const char* speciesID, double& value);
+
+
+/*!
+ \brief Set the value for a given symbol, use getAvailableSymbols() for a list of symbols
+
+ Example: status = setValue ("S1", 0.5)
+
+ \param speciesId The symbol that we wish to set the value
+ \param val The value that will be set to the symbol
+ \return Returns true if succesful
+ \ingroup state
+*/
+C_DECL_SPEC bool rrCallConv setValue(const char* speciesId, const double& val);
 
 
 /*!
@@ -579,9 +594,9 @@ C_DECL_SPEC RRVectorHandle rrCallConv getGlobalParameterValues();
 /*!
  \brief Set the concentration for a particular boundary species. 
 
- \param int* index - The index to the boundary species (corresponds to position in getBoundarySpeciesNames())
- \param double* value - The concentration of the species to set
- \return bool status - Returns true if successful
+ \param index The index to the boundary species (corresponds to position in getBoundarySpeciesNames())
+ \param value The concentration of the species to set
+ \return Returns true if successful
  \ingroup boundary
 */
 C_DECL_SPEC bool rrCallConv setBoundarySpeciesByIndex(const int& index, const double& value);
@@ -589,9 +604,9 @@ C_DECL_SPEC bool rrCallConv setBoundarySpeciesByIndex(const int& index, const do
 /*!
  \brief Set the concentration for a particular floating species. 
 
- \param int* index - The index to the floating species (corresponds to position in getFloatingSpeciesNames())
- \param double* value - The concentration of the species to set
- \return bool status - Returns true if successful
+ \param index The index to the floating species (corresponds to position in getFloatingSpeciesNames())
+ \param value The concentration of the species to set
+ \return Returns true if successful
  \ingroup floating
 */
 C_DECL_SPEC bool rrCallConv setFloatingSpeciesByIndex(const int& index, const double& value);
@@ -599,9 +614,9 @@ C_DECL_SPEC bool rrCallConv setFloatingSpeciesByIndex(const int& index, const do
 /*!
  \brief Set the value for a particular global parameter
 
- \param int* index - The index to the global parameter
- \param double* value - The value of the parameter to set
- \return bool status - Returns true if successful
+ \param index The index to the global parameter
+ \param value The value of the parameter to set
+ \return Returns true if successful
  \ingroup parameters
 */
 C_DECL_SPEC bool rrCallConv setGlobalParameterByIndex(const int& index, const double& value);
@@ -610,9 +625,9 @@ C_DECL_SPEC bool rrCallConv setGlobalParameterByIndex(const int& index, const do
 /*!
  \brief Retrieve the concentration for a particular floating species. 
 
- \param int* index - The index to the boundary species (corresponds to position in getBoundarySpeciesNames())
- \param double* value - The value returned by the method
- \return bool status - Returns true if successful
+ \param index The index to the boundary species (corresponds to position in getBoundarySpeciesNames())
+ \param val The value returned by the method
+ \return Returns true if successful
  \ingroup boundary
 */
 C_DECL_SPEC bool rrCallConv getBoundarySpeciesByIndex(const int& index, double& val);
@@ -620,18 +635,18 @@ C_DECL_SPEC bool rrCallConv getBoundarySpeciesByIndex(const int& index, double& 
 /*!
  \brief Retrieve the concentration for a particular floating species. 
 
- \param int* index - The index to the floating species (corresponds to position in getFloatingSpeciesNames())
- \param double* value - The value returned by the method
- \return bool status - Returns true if successful
+ \param index The index to the floating species (corresponds to position in getFloatingSpeciesNames())
+ \param val The value returned by the method
+ \return Returns true if successful
  \ingroup floating
 */
 C_DECL_SPEC bool rrCallConv getFloatingSpeciesByIndex(const int& index, double& val);
 
 /*!
  \brief Retrieve the global parameter value 
- \param int* index - The index to the global parameter (corresponds to position in getGlboalParametersNames())
- \param double* value - The value returned by the method
- \return bool status - Returns true if successful
+ \param index The index to the global parameter (corresponds to position in getGlboalParametersNames())
+ \param val The value returned by the method
+ \return Returns true if successful
  \ingroup floating
 */
 C_DECL_SPEC bool rrCallConv getGlobalParameterByIndex(const int& index, double& val);
@@ -639,9 +654,9 @@ C_DECL_SPEC bool rrCallConv getGlobalParameterByIndex(const int& index, double& 
 /*!
  \brief Retrieve the compartment volume for a particular compartment. 
 
- \param int* index - The index to the compartment (corresponds to position in getCompartmentNames())
- \param double* value - The value returned by the method
- \return bool status - Returns true if successful
+ \param index The index to the compartment (corresponds to position in getCompartmentNames())
+ \param value The value returned by the method
+ \return Returns true if successful
  \ingroup compartment
 */
 C_DECL_SPEC bool rrCallConv getCompartmentByIndex (const int& index, double& value);
@@ -650,18 +665,18 @@ C_DECL_SPEC bool rrCallConv getCompartmentByIndex (const int& index, double& val
 /*!
  \brief Set the volume for a particular compartment
 
- \param int* index - The index to the compartment (corresponds to position in getCompartmentNames())
- \param double* value - The volume of the compartment to set
- \return bool status - Returns true if successful
+ \param index The index to the compartment (corresponds to position in getCompartmentNames())
+ \param value The volume of the compartment to set
+ \return Returns true if successful
  \ingroup compartment
 
 */
 C_DECL_SPEC bool rrCallConv setCompartmentByIndex (const int& index, const double& value);
 
 /*!
- \brief Retreive the full Jacobian for the current model
+ \brief Retrieve the full Jacobian for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns the full Jacobian matrix 
+ \return Returns null if it fails, otherwise returns the full Jacobian matrix 
  \ingroup Stoich
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv   getFullJacobian();
@@ -669,7 +684,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv   getFullJacobian();
 /*!
  \brief Retreive the reduced Jacobian for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns the reduced Jacobian matrix 
+ \return Returns null if it fails, otherwise returns the reduced Jacobian matrix 
  \ingroup Stoich
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getReducedJacobian();
@@ -677,7 +692,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getReducedJacobian();
 /*!
  \brief Retreive the eigenvalue matrix for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns a matrix of eigenvalues.
+ \return Returns null if it fails, otherwise returns a matrix of eigenvalues.
  The first column will contain the real values and the second column the imaginary values
  \ingroup Stoich
 */
@@ -687,7 +702,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getEigenValues();
 /*!
  \brief Retreive the stoichiometry matrix for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns the stoichiometry matrix.
+ \return Returns null if it fails, otherwise returns the stoichiometry matrix.
  \ingroup Stoich
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getStoichiometryMatrix();
@@ -695,31 +710,31 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getStoichiometryMatrix();
 /*!
  \brief Retreive the Link matrix for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns the Link matrix.
+ \return Returns null if it fails, otherwise returns the Link matrix.
  \ingroup Stoich
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getLinkMatrix();
 
 /*!
- \brief Retreive the reduced stoichiometry matrix for the current model
+ \brief Retrieve the reduced stoichiometry matrix for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns reduced stoichiometry matrix
+ \return Returns null if it fails, otherwise returns reduced stoichiometry matrix
  \ingroup Stoich
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getNrMatrix();
 
 /*!
- \brief Retreive the L9 matrix for the current model
+ \brief Retrieve the L9 matrix for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns the L0 matrix.
+ \return Returns null if it fails, otherwise returns the L0 matrix.
  \ingroup Stoich
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getL0Matrix();
 
 /*!
- \brief Retreive the conservation matrix for the current model
+ \brief Retrieve the conservation matrix for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns the conservation matrix.
+ \return Returns null if it fails, otherwise returns the conservation matrix.
  \ingroup Stoich
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getConservationMatrix();
@@ -731,7 +746,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getConservationMatrix();
 
  Example: status = reset ();
 
- \return Returns True if successful
+ \return Returns true if successful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv   reset();
@@ -748,7 +763,7 @@ C_DECL_SPEC RRStringListHandle      rrCallConv getFloatingSpeciesInitialConditio
 
  Example: number = getNumberOfReactions ();
 
- \return int value - Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions
+ \return Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions
  \ingroup state
 */
 C_DECL_SPEC int rrCallConv getNumberOfReactions();
@@ -757,18 +772,18 @@ C_DECL_SPEC int rrCallConv getNumberOfReactions();
 /*!
  \brief Retrieve a give reaction as indicated by the index parameter
 
- \param int* index - The index is used to specif which reaction rate to retrieve
- \param double* rate - The reaction rate is returned in the rate argument
- \return bool status - Returns false if it fails
+ \param index - The index is used to specif which reaction rate to retrieve
+ \param rate - The reaction rate is returned in the rate argument
+ \return Returns false if it fails
  \ingroup reaction
 */
-C_DECL_SPEC bool rrCallConv getReactionRate(const int&, double& rate);
+C_DECL_SPEC bool rrCallConv getReactionRate(const int& index, double& rate);
 
 
 /*!
  \brief Retrieve a vector of current reaction rates
 
- \return RRVectorHandle vReactionRates - Returns null if it fails, otherwise it returns a vector of reaction rates
+ \return Returns null if it fails, otherwise it returns a vector of reaction rates
  \ingroup reaction
 */
 C_DECL_SPEC RRVectorHandle rrCallConv getReactionRates();
@@ -777,8 +792,8 @@ C_DECL_SPEC RRVectorHandle rrCallConv getReactionRates();
 /*!
  \brief Retrieve a vector of reactionb rates given a vector of species concentrations
 
- \param RRVectorHandle species - The vector of floating species concentrations
- \return RRVectorHandle vReactionRates - Returns null if it fails otherwise it returns a vector of reaction rates
+ \param vec The vector of floating species concentrations
+ \return Returns null if it fails otherwise it returns a vector of reaction rates
  \ingroup reaction
 */
 C_DECL_SPEC RRVectorHandle rrCallConv getReactionRatesEx (const RRVectorHandle vec);
@@ -826,11 +841,10 @@ C_DECL_SPEC bool rrCallConv getRateOfChange(const int&, double& value);
 */
 C_DECL_SPEC RRVectorHandle rrCallConv getRatesOfChangeEx (const RRVectorHandle vec);
 
-
 /*!
  \brief Evaluate the current models, that it update all assignments and rates of change
 
- \return bool status - Returns false if it fails
+ \return Returns false if it fails
  \ingroup state
 */
 C_DECL_SPEC bool rrCallConv evalModel();
@@ -990,27 +1004,27 @@ C_DECL_SPEC RRStringArrayListHandle rrCallConv getUnscaledConcentrationControlCo
 C_DECL_SPEC RRStringArrayListHandle rrCallConv getConcentrationControlCoefficientNames();
 
 /*!
- \brief Retreive the unscaled elasticity matrix for the current model
+ \brief Retrieve the unscaled elasticity matrix for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns a matrix of unscaled elasticities
+ \return Returns nil if it fails, otherwise returns a matrix of unscaled elasticities
  The first column will contain the real values and the second column the imaginary values
  \ingroup mca
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getUnScaledElasticityMatrix();
 
 /*!
- \brief Retreive the scaled elasticity matrix for the current model
+ \brief Retrieve the scaled elasticity matrix for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns a matrix of scaled elasticities.
+ \return Returns null if it fails, otherwise returns a matrix of scaled elasticities.
  The first column will contain the real values and the second column the imaginary values
  \ingroup mca
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getScaledElasticityMatrix();
 
 /*!
- \brief Retreive the matrix of unscaled concentration control coefficients for the current model
+ \brief Retrieve the matrix of unscaled concentration control coefficients for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns a matrix of unscaled concentration control coefficients 
+ \return Returns null if it fails, otherwise returns a matrix of unscaled concentration control coefficients 
  The first column will contain the real values and the second column the imaginary values
  \ingroup mca
 */
@@ -1018,7 +1032,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getUnscaledConcentrationControlCoefficient
 
 
 /*!
- \brief Retreive the matrix of scaled concentration control coefficients for the current model
+ \brief Retrieve the matrix of scaled concentration control coefficients for the current model
 
  \return Returns null if it fails, otherwise returns a matrix of scaled concentration control coefficients 
  The first column will contain the real values and the second column the imaginary values
@@ -1027,7 +1041,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getUnscaledConcentrationControlCoefficient
 C_DECL_SPEC RRMatrixHandle rrCallConv getScaledConcentrationControlCoefficientMatrix();
 
 /*!
- \brief Retreive the matrix of unscaled flux control coefficients for the current model
+ \brief Retrieve the matrix of unscaled flux control coefficients for the current model
 
  \return Returns null if it fails, otherwise returns a matrix of unscaled flux control coefficients 
  The first column will contain the real values and the second column the imaginary values
@@ -1036,7 +1050,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getScaledConcentrationControlCoefficientMa
 C_DECL_SPEC RRMatrixHandle rrCallConv getUnscaledFluxControlCoefficientMatrix();
 
 /*!
- \brief Retreive the matrix of scaled flux control coefficients for the current model
+ \brief Retrieve the matrix of scaled flux control coefficients for the current model
 
  \return Returns null if it fails, otherwise returns a matrix of scaled flux control coefficients 
  The first column will contain the real values and the second column the imaginary values
@@ -1069,8 +1083,8 @@ C_DECL_SPEC bool  rrCallConv getCC (const char* variable, const char* parameter,
 /*!
  \brief Retireve a single elasticity coefficient
 
- \param[in] variable This is the reaction variable for the elasticity
- \param[in] parameter This is the independent parameter, for example a floating of boundary species
+ \param[in] name This is the reaction variable for the elasticity
+ \param[in] species This is the independent parameter, for example a floating of boundary species
  \param[out] value This is the value of the elasticity coefficient returns to the caller
  \return Returns true if successful
  \ingroup mca
@@ -1080,8 +1094,8 @@ C_DECL_SPEC bool rrCallConv getEE(const char* name, const char* species, double&
 /*!
  \brief Retireve a single unscaled elasticity coefficient
 
- \param[in] variable This is the reaction variable for the unscaled elasticity
- \param[in] parameter This is the independent parameter, for example a floating of boundary species
+ \param[in] name This is the reaction variable for the unscaled elasticity
+ \param[in] species This is the independent parameter, for example a floating of boundary species
  \param[out] value This is the value of the unscaled elasticity coefficient returns to the caller
  \return Returns true if successful
  \ingroup mca
@@ -1100,15 +1114,60 @@ C_DECL_SPEC char*                   rrCallConv   printStringArrayList(const RRSt
 C_DECL_SPEC char*                   rrCallConv   printArrayList(const RRArrayList2Handle list);
 
 // Free memory functions
+/*!
+ \brief Free the result from simulate and simulateEx
+ \ingroup freeRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv   freeResult(RRResultHandle handle);
+
+/*!
+ \brief Free char* generated by library routines
+ \ingroup freeRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv   freeText(char* text);
+
+/*!
+ \brief Free RRLabelStringListHandle structures
+ \ingroup freeRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv   freeLabelStringList(RRLabelStringListHandle sl);
+
+/*!
+ \brief Free RRStringListHandle structures
+ \ingroup freeRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv   freeStringList(RRStringListHandle sl);
+
+/*!
+ \brief Free RRStringArrayListHandle structures
+ \ingroup freeRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv   freeStringArrayList(RRStringArrayListHandle sl);
+
+/*!
+ \brief Free RRArrayList2Handle structures
+ \ingroup freeRoutines
+*/
 C_DECL_SPEC bool 					rrCallConv 	 freeArrayList(RRArrayList2Handle theList);
+
+/*!
+ \brief Free RRVectorHandle structures
+ \ingroup freeRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv   freeVector(RRVectorHandle vector);
+
+/*!
+ \brief Free RRMatrixHandle structures
+ \ingroup freeRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv   freeMatrix(RRMatrixHandle matrix);
+
+/*!
+ \brief Free RRCCodeHandle structures
+ \ingroup freeRoutines
+*/
 C_DECL_SPEC bool                    rrCallConv   freeCCode(RRCCodeHandle code);
+
 C_DECL_SPEC void                    rrCallConv   Pause();
 
 
@@ -1118,7 +1177,7 @@ C_DECL_SPEC void                    rrCallConv   Pause();
 
  Example: count = getVectorLength (myVector);
 
- \param RRVectorHandle vector A pointer to the vector variable type
+ \param vector A pointer to the vector variable type
  \return Returns -1 if it fails, otherwise returns the number of elements in the vector
  \ingroup helperRoutines
 */
@@ -1129,7 +1188,7 @@ C_DECL_SPEC int rrCallConv getVectorLength (RRVectorHandle vector);
 
  Example: myVector = createVectorAPI (10);
 
- \param int size The number of element in the new vector
+ \param size The number of element in the new vector
  \return Returns null if it fails, otherwise returns a pointer to the new vector
  \ingroup helperRoutines
 */
@@ -1140,10 +1199,10 @@ C_DECL_SPEC RRVectorHandle rrCallConv createVectorAPI (int size);
 
  Example: status = getVectorElement (myVector, 10, &value);
 
- \param RRVectorHandle vector A pointer to the vector variable type
- \param int index An integer indicating the ith element to retrieve (indexing is from zero)
- \param double* value A pointer to the retrieved double value
- \return Returns True if succesful
+ \param vector A pointer to the vector variable type
+ \param index An integer indicating the ith element to retrieve (indexing is from zero)
+ \param value A pointer to the retrieved double value
+ \return Returns true if succesful
  \ingroup helperRoutines
 */
 C_DECL_SPEC bool rrCallConv getVectorElement (RRVectorHandle vector, int index, double& value);
@@ -1154,10 +1213,10 @@ C_DECL_SPEC bool rrCallConv getVectorElement (RRVectorHandle vector, int index, 
 
  Example: status = setVectorElement (myVector, 10, 3.1415);
 
- \param RRVectorHandle vector - A pointer to the vector variable type
- \param int index - An integer indicating the ith element to set (indexing is from zero)
- \param double value - The value to store in the vector at the indexth position
- \return Returns True if succesful
+ \param vector A pointer to the vector variable type
+ \param index An integer indicating the ith element to set (indexing is from zero)
+ \param value The value to store in the vector at the indexth position
+ \return Returns true if succesful
  \ingroup helperRoutines
 */
 C_DECL_SPEC bool rrCallConv setVectorElement (RRVectorHandle vector, int index, double value);
@@ -1171,18 +1230,18 @@ C_DECL_SPEC char*                   rrCallConv  getStringListElement (RRStringLi
 
  Example: nRows = getMatrixNumRows (m);
 
- \param RRMatrixHandle m - A pointer to a matrix type variable
+ \param m A pointer to a matrix type variable
  \return Returns -1 if fails, otherwise returns the number of rows
  \ingroup helperRoutines
 */
-C_DECL_SPEC int rrCallConv  getMatrixNumRows (RRMatrixHandle m);
+C_DECL_SPEC int rrCallConv getMatrixNumRows (RRMatrixHandle m);
 
 /*!
  \brief Retrieve the number of columns in the given matrix
 
  Example: nRows = getMatrixNumCols (m);
 
- \param RRMatrixHandle m - A pointer to a matrix type variable
+ \param m A pointer to a matrix type variable
  \return Returns -1 if fails, otherwise returns the number of columns
  \ingroup helperRoutines
 */
@@ -1193,10 +1252,10 @@ C_DECL_SPEC int rrCallConv  getMatrixNumCols (RRMatrixHandle m);
 
  Example: status = getMatrixElement (m, 2, 4, &value);
 
- \param RRMatrixHandle m A pointer to a matrix type variable
- \param int r - The row index to the matrix
- \param int c - The column index to the matrix
- \param double* value - The retrieved value from the matrix
+ \param m A pointer to a matrix type variable
+ \param r - The row index to the matrix
+ \param c - The column index to the matrix
+ \param value - The retrieved value from the matrix
  \return Returns True if succesful
  \ingroup helperRoutines
 */
@@ -1207,7 +1266,7 @@ C_DECL_SPEC bool rrCallConv  getMatrixElement (RRMatrixHandle m, int r, int c, d
 
  Example: nRows = getResultNumRows (result);
 
- \param RRResultHandle result - A pointer to a result type variable
+ \param result A pointer to a result type variable
  \return Returns -1 if fails, otherwise returns the number of rows
  \ingroup helperRoutines
 */
@@ -1218,7 +1277,7 @@ C_DECL_SPEC int rrCallConv  getResultNumRows (RRResultHandle result);
 
  Example: nRows = getResultNumCols (result);
 
- \param RRResultHandle result - A pointer to a result type variable
+ \param result A pointer to a result type variable
  \return Returns -1 if fails, otherwise returns the number of columns
  \ingroup helperRoutines
 */
@@ -1229,11 +1288,11 @@ C_DECL_SPEC int rrCallConv  getResultNumCols (RRResultHandle result);
 
  Example: status = getResultElement (result, 2, 4, &value);
 
- \param RRResultHandle result - A pointer to a result type variable
- \param int r -The row index to the result data
- \param int c - The column index to the result data
- \paramt double* value - The retrieved value from the result data
- \return - Returns True if succesful
+ \param result A pointer to a result type variable
+ \param r -The row index to the result data
+ \param c - The column index to the result data
+ \param value - The retrieved value from the result data
+ \return Returns true if succesful
  \ingroup helperRoutines
 */
 C_DECL_SPEC bool rrCallConv  getResultElement (RRResultHandle result, int r, int c, double& value);
@@ -1243,9 +1302,8 @@ C_DECL_SPEC bool rrCallConv  getResultElement (RRResultHandle result, int r, int
 
  Example: str = getResultColumnLabel (result, 2, 4);
 
- \param RRResultHandle result -  A pointer to a result type variable
- \param int r - The row index for the result data (indexing from zero)
- \param int c - The column index for the result data (indexing from zero)
+ \param result A pointer to a result type variable
+ \param column - The column index for the result data (indexing from zero)
  \return Returns null if fails, otherwise returns a pointer to the string column label
  \ingroup helperRoutines
 */
@@ -1256,8 +1314,8 @@ C_DECL_SPEC char* rrCallConv  getResultColumnLabel (RRResultHandle result, int c
 
  Example: header = getCCodeHeader (code);
 
-  \param RRCCodeHandle code - A pointer to a string that stores the header code
-  \return Returns True if succesful
+  \param code A pointer to a string that stores the header code
+  \return Returns true if succesful
  \ingroup helperRoutines
 */
 C_DECL_SPEC char* rrCallConv  getCCodeHeader (RRCCodeHandle code);
@@ -1267,8 +1325,8 @@ C_DECL_SPEC char* rrCallConv  getCCodeHeader (RRCCodeHandle code);
 
  Example: source = getCCodeSource (code);
 
- \param RRCCodeHandle code - A pointer to a string that stores the main source code
- \return Returns True if succesful
+ \param code A pointer to a string that stores the main source code
+ \return Returns true if succesful
  \ingroup helperRoutines
 */
 C_DECL_SPEC char* rrCallConv  getCCodeSource (RRCCodeHandle code);
