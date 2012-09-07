@@ -64,16 +64,6 @@ typedef struct RRVector
 } *RRVectorHandle;          /*!< Pointer to RRVectorHandle struct */
 
 /*!@struct*/ 
-/*!@brief Structure that stores a list of strings with a label */ 
-typedef struct RRLabelStringList
-{
-    int             Count;  /*!< Number of element in the label string list */
-    char*           Label;  /*!< Label associated with string list */
-    char**          String; /*!< List of strings */
-} *RRLabelStringListHandle; /*!< Pointer to RRLabelStringList struct */
-
-
-/*!@struct*/ 
 /*!@brief Structure for a simple vector of strings */ 
 typedef struct RRStringList
 {
