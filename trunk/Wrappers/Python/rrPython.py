@@ -1,4 +1,4 @@
-##@package rrPython
+##@Module rrPython
 #
 #This module allows access to the rr_c_api.dll from python"""
 
@@ -23,11 +23,14 @@ def writeSBML():
 
 #Utility and informational methods
 handle.getVersion.restype = c_char_p
+#\addtogroup group Utility and Informational Methods
+#@{
 
 ##Returns the version of the C API
-#\addtogroup Utility and Informational Methods
 def getVersion():
     return handle.getVersion()
+
+##@}
 
 #Logging
 handle.enableLogging.restype = c_bool
@@ -39,15 +42,18 @@ handle.getCopyright.restype = c_char_p
 handle.setTempFolder.restype = c_bool
 handle.getTempFolder.restype = c_char_p
 
-##Allows a log file to be written
-#\addtogroup Logging
+##\addtogroup Logging
 #@{
+
+##Allows a log file to be written
 def enableLogging():
     return handle.enableLogging()
 
+##Sets the log level. Available levels are  "ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1", "DEBUG", "INFO", "WARNING", and "ERROR"
 def setLogLevel(lvl):
     return handle.setLogLevel(lvl)
 
+##Returns the log level
 def getLogLevel():
     return handle.getLogLevel()
 
@@ -79,6 +85,9 @@ def getTempFolder():
 handle.hasError.restype = c_bool
 handle.getLastError.restype = c_char_p
 
+##\addtogroup Error Handling
+#@{
+
 ##
 #
 def hasError():
@@ -88,6 +97,8 @@ def hasError():
 def getLastError():
     return handle.getLastError()
 
+##@}
+
 #RoadRunner API
 
 #########################################################################################################################
@@ -95,15 +106,23 @@ def getLastError():
 #Flags/Options
 handle.setComputeAndAssignConservationLaws.restype = c_bool
 
+##\addtogroup Flags and Options
+#@{
+
 ##Turns on/off conservation laws
 #
 #Takes a 1 (on) or 0 (off) as an argument
 def setComputeAndAssignConservationLaws(OnOrOff):
     return handle.setComputeAndAssignConservationLaws(OnOrOff)
 
+##@}
+
 #Load SBML methods
 handle.loadSBML.restype = c_bool
 handle.loadSBMLFromFile.restype = c_bool
+
+##\addtogroup Load SBML Methods
+#@{
 
 ##Loads SBML model from a string
 #
@@ -117,9 +136,14 @@ def loadSBML(sbml):
 def loadSBMLFromFile(fileName):
     return handle.loadSBMLFromFile(fileName)
 
+##@}
+
 #SBML utility methods
 handle.getParamPromotedSBML.restype = c_char_p
 handle.getSBML.restype = c_char_p
+
+##\addtogroup SBML Utility Methods
+#@{
 
 ##Returns the SBML with the current parameterset
 def getParamPromotedSBML(sArg):
@@ -129,9 +153,14 @@ def getParamPromotedSBML(sArg):
 def getSBML():
     return handle.getSBML()
 
+##@}
+
 #Get and set capability routines
 handle.setCapabilities.restype = c_bool
 handle.getCapabilities.restype = c_char_p
+
+##\addtogroup Get and Set Capability Routines
+#@{
 
 ##Sets simulator capabilities
 def setCapabilities(caps):
@@ -140,6 +169,8 @@ def setCapabilities(caps):
 ##Returns simulator capabilities
 def getCapabilities():
     return handle.getCapabilities()
+
+##@}
 
 #Simulation Methods
 handle.setTimeStart.restype = c_bool
@@ -150,6 +181,9 @@ handle.oneStep.restype = c_bool
 handle.getTimeStart.restype = c_bool
 handle.getTimeEnd.restype = c_bool
 handle.getNumPoints.restype = c_bool
+
+##\addtogroup Simulation Methods
+#@{
 
 ##Sets the start time for the simulation
 #
@@ -239,9 +273,14 @@ def getNumPoints():
     else:
         return ('Index out of Range')
 
+##@}
+
 #Steady state methods
 handle.steadyState.restype = c_bool
 handle.setSteadyStateSelectionList.restype = c_bool
+
+##\addtogroup Steady State Methods
+#@{
 
 ##Computes the steady state of the loaded model and returns the sum of squares of the solution
 def steadyState():
@@ -271,6 +310,7 @@ def getSteadyStateSelectionList():
     handle.freeStringList(values)
     return result
 
+##@}
 
 #Set and get family of methods
 handle.getValue.restype = c_bool
@@ -283,6 +323,9 @@ handle.getFloatingSpeciesByIndex.restype = c_bool
 handle.getGlobalParameterByIndex.restype = c_bool
 handle.getCompartmentByIndex.restype = c_bool
 handle.setCompartmentByIndex.restype = c_bool
+
+##\addtogroup Set and Get Family of Methods
+#@{
 
 ##Returns the current value for a single species in loaded model
 #
@@ -406,8 +449,13 @@ def setCompartmentByIndex(index, value):
     else:
         raise RuntimeError('Index out of range')
 
+##@}
 
 #Jacobian matrix methods
+
+##\addtogroup Jacobian Matrix Methods
+#@{
+
 ##Compute the full Jacobian at the current operating point
 def getFullJacobian():
     values = handle.getFullJacobian()
@@ -429,7 +477,13 @@ def getEigenvalues():
     handle.freeMatrix(values)
     return result
 
+##@}
+
 #Stoichiometry methods
+
+##\addtogroup Stoichiometry Methods
+#@{
+
 ##Returns the stoichiometry matrix for the currently loaded model
 def getStoichiometryMatrix():
     values = handle.getStoichimetryMatrix()
@@ -465,9 +519,14 @@ def getConservationMatrix():
     handle.freeMatrix(values)
     return result
 
+##@}
+
 #Initial condition methods
 handle.reset.restype = c_bool
 #handle.setFloatingSpeciesInitialConcentrations.restype = c_bool
+
+##\addtogroup Initial Condition Methods
+#@{
 
 ##resets the simulator to the initial conditions specified in the loaded SBML model
 def reset():
@@ -490,9 +549,14 @@ def getFloatingSpeciesInitialConditionIds():
     handle.freeVector(values)
     return result
 
+##@}
+
 #Reaction rates
 handle.getNumberOfReactions.restype = c_int
 handle.getReactionRate.restype = c_bool
+
+##\addtogroup Reaction Rates
+#@{
 
 ##Get the number of reactions
 def getNumberOfReactions():
@@ -517,9 +581,14 @@ def getReactionRates():
 def getReactionRatesEx(vec):                                                        #FIX THIS
     return handle.printVector(handle.getReactionRatesEx(vec))
 
+##@}
+
 #Rates of change
 handle.getRateOfChange.restype = c_bool
 handle.evalModel.restype = c_bool
+
+##\addtogroup Rates of Change
+#@{
 
 ##Returns the current vector of rates of change
 def getRatesOfChange():
@@ -550,6 +619,8 @@ def getRatesOfChangeEx(vec):                                          #TEST
 def evalModel():
     return handle.evalModel()
 
+##@}
+
 #Get number family
 handle.getNumberOfCompartments.restype = c_int
 handle.getNumberOfBoundarySpecies.restype = c_int
@@ -557,6 +628,9 @@ handle.getNumberOfFloatingSpecies.restype = c_int
 handle.getNumberOfGlobalParameters.restype = c_int
 handle.getNumberOfDependentSpecies.restype = c_int
 handle.getNumberOfIndependentSpecies.restype = c_int
+
+##\addtogroup Get Number Family
+#@{
 
 ##Get the number of compartments
 def getNumberOfCompartments():
@@ -582,7 +656,13 @@ def getNumberOfDependentSpecies():
 def getNumberOfIndependentSpecies():
     return handle.getNumberOfIndependentSpecies()
 
+##@}
+
 #Get Ids family
+
+##\addtogroup Get Ids Family
+#@{
+
 ##Returns a list of reaction Ids
 def getReactionIds():
     values = handle.getReactionIds()
@@ -638,7 +718,12 @@ def getAvailableSymbols():                              #FIX
     result = handle.printArrayList(value)
     return result
 
+##@}
+
 #Get MCA methods
+
+##\addtogroup Get MCA Methods
+#@{
 
 ##Returns the symbols of all elasticity coefficients
 def getElasticityCoefficientIds():
@@ -717,12 +802,17 @@ def getScaledFluxControlCoefficientMatrix():
     handle.freeMatrix(value)
     return result
 
+##@}
+
 #MCA methods
 handle.getuCC.restype = c_bool
 handle.getCC.restype = c_bool
 handle.getEE.restype = c_bool
 handle.getuEE.restype = c_bool
 handle.getScaledFloatingSpeciesElasticity.restype = c_bool
+
+##\addtogroup MCA Methods
+#@{
 
 ##Get unscaled control coefficient with respect to a global parameter
 #
@@ -775,6 +865,8 @@ def getScaledFloatingSpeciesElasticity(reactionName, speciesName, value):
         return value.value;
     else:
         raise RuntimeError('Index out of range')
+
+##@}
 
 #Print/format functions
 handle.printResult.restype = c_char_p
@@ -887,18 +979,6 @@ def getCCodeHeader():
 
 def getCCodeSource():
     return handle.getCCodeSource()
-
-def setTempFolder(tempfolder):
-    """Sets the path for temporary files"""
-    return handle.setTempFolder(tempfolder)
-
-def getTempFolder():
-    """Returns the path for temporary files"""
-    return handle.getTempFolder()
-
-def enableLogging():
-    """Enables logging"""
-    return handle.enableLogging()
 
 def getResultElement (m, i, j):
     value = c_double()
