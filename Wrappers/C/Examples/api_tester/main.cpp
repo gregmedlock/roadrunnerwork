@@ -469,7 +469,7 @@ int main(int argc, char* argv[])
     cout<<"getFloatingSpeciesInitialConditionNames: "<<printStringList(getFloatingSpeciesInitialConditionIds())<<endl;
 
 
-    cout<<writeSBML();
+    cout<<getCurrentSBML();
 
 	///////////////////
     text = getCopyright();

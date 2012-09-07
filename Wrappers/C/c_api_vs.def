@@ -6,7 +6,7 @@ EXPORTS
     getLogLevel                                 = _getLogLevel@0
     getLogFileName                              = _getLogFileName@0
     getVersion                                  = _getVersion@0
-    writeSBML                                   = _writeSBML@0
+    getCurrentSBML                              = _getCurrentSBML@0
     computeSteadyStateValues                    = _computeSteadyStateValues@0         
     evalModel                                   = _evalModel@0                        
     freeArrayList                               = _freeArrayList@4                        

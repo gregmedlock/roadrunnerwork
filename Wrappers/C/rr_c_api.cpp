@@ -224,7 +224,7 @@ char* rrCallConv getCopyright()
 	return NULL;
 }
 
-char* rrCallConv writeSBML()
+char* rrCallConv getCurrentSBML()
 {
 	try
     {
