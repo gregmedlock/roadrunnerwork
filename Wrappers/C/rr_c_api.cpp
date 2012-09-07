@@ -695,10 +695,10 @@ RRVectorHandle rrCallConv getRatesOfChange()
         }
 
         RRVector* list = new RRVector;
-        list->Size = rates.size();
-        list->Data = new double[list->Size];
+        list->Count = rates.size();
+        list->Data = new double[list->Count];
 
-        for(int i = 0; i < list->Size; i++)
+        for(int i = 0; i < list->Count; i++)
         {
             list->Data[i] = rates[i];
             return list;
@@ -2403,7 +2403,7 @@ char* rrCallConv printArrayList(const cRRArrayListHandle list)
 
 		stringstream resStr;
         resStr<<"{";
-	    for(int i = 0; i < list->ItemCount; i++)
+	    for(int i = 0; i < list->Count; i++)
         {
             switch(list->Items[i].ItemType)
             {
@@ -2428,7 +2428,7 @@ char* rrCallConv printArrayList(const cRRArrayListHandle list)
                 break;
             }
 
-            if(i < list->ItemCount -1)
+            if(i < list->Count -1)
             {
                 resStr<<",";
             }
@@ -2496,13 +2496,13 @@ char* rrCallConv  printStringArrayList(const RRStringArrayList* list)
 		//list  is actually a nested list
 
         resStr<<"{";
-	    for(int i = 0; i < list->ItemCount; i++)
+	    for(int i = 0; i < list->Count; i++)
         {
 
             if(list->Items[i].Item != NULL)
             {
                 resStr<<"\""<<list->Items[i].Item<<"\"";
-                if(i < list->ItemCount -1)
+                if(i < list->Count -1)
                 {
                     resStr<<",";
                 }
@@ -2669,12 +2669,12 @@ char* rrCallConv printVector(RRVectorHandle vecHandle)
         RRVector& vec = *vecHandle;
 
         stringstream ss;
-        ss<<"vector dimension: "<<vec.Size<<" \n";
+        ss<<"vector dimension: "<<vec.Count<<" \n";
 
-        for(int index = 0; index < vec.Size; index++)
+        for(int index = 0; index < vec.Count; index++)
         {
             ss<<vec.Data[index];
-            if(index < vec.Size + 1)
+            if(index < vec.Count + 1)
             {
                 ss<<"\t";
             }
@@ -2846,7 +2846,7 @@ bool rrCallConv freeStringArrayList(RRStringArrayListHandle theList)
             return true;
         }
 
-        int itemCount = theList->ItemCount;
+        int itemCount = theList->Count;
         for(int i = 0; i < itemCount; i++)
         {
             if(theList->Items[i].Item != NULL)
@@ -2882,7 +2882,7 @@ bool rrCallConv freeArrayList(cRRArrayListHandle theList)
             return true;
         }
 
-        int itemCount = theList->ItemCount;
+        int itemCount = theList->Count;
         for(int i = 0; i < itemCount; i++)
         {
 //            if(theList->Items[i].Item != NULL)
@@ -2918,8 +2918,8 @@ void rrCallConv Pause()
 RRVectorHandle rrCallConv createVector (int size)
 {
    RRVectorHandle list = new RRVector;
-   list->Size = size;
-   list->Data = new double[list->Size];
+   list->Count = size;
+   list->Data = new double[list->Count];
    return list;
 }
 
@@ -2928,14 +2928,14 @@ int rrCallConv getVectorLength (RRVectorHandle vector)
 	if (vector == NULL)
 		return -1;
 	else
-		return vector->Size;
+		return vector->Count;
 }
 
 bool rrCallConv getVectorElement (RRVectorHandle vector, int index, double& value)
 {
 	if (vector == NULL)
 		return false;
-	if ((index < 0) || (index >= vector->Size))
+	if ((index < 0) || (index >= vector->Count))
 		return false;
 	value = vector->Data[index];
 	return true;
@@ -2945,7 +2945,7 @@ bool rrCallConv setVectorElement (RRVectorHandle vector, int index, double value
 {
 	if (vector == NULL)
 		return false;
-	if ((index < 0) || (index >= vector->Size))
+	if ((index < 0) || (index >= vector->Count))
 		return false;
 	vector->Data[index] = value;
 	return true;
