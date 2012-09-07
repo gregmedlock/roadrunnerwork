@@ -813,7 +813,7 @@ RRMatrixHandle rrCallConv getScaledElasticityMatrix()
 	return NULL;
 }
 
-bool rrCallConv setValue(const char* symbolId, const double& val)
+bool rrCallConv setValue(const char* symbolId, const double& value)
 {
 	try
     {
@@ -822,7 +822,7 @@ bool rrCallConv setValue(const char* symbolId, const double& val)
             setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
-	    return gRRHandle->setValue(symbolId, val);
+	    return gRRHandle->setValue(symbolId, value);
     }
     catch(Exception& ex)
     {
