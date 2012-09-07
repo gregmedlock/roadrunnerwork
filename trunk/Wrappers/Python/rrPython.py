@@ -5,9 +5,9 @@
 import sys
 import os
 from ctypes import *
-rrInstallFolder = "r:\\rrInstalls\\vs\\full"
+rrInstallFolder = "C:\\RoadRunner\\bin"
 os.environ['PATH'] =  rrInstallFolder + ';' + "c:\\Python27" + ';' + os.environ['PATH']
-handle = WinDLL (rrInstallFolder + "\\bin\\rr_c_api.dll")
+handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
 
 
 #=======================rr_c_api=======================#
@@ -24,6 +24,7 @@ def writeSBML():
 handle.getVersion.restype = c_char_p
 
 ##Returns the version of the C API
+#\addtogroup Utility and Informational Methods
 def getVersion():
     return handle.getVersion()
 
@@ -38,6 +39,8 @@ handle.setTempFolder.restype = c_bool
 handle.getTempFolder.restype = c_char_p
 
 ##Allows a log file to be written
+#\addtogroup Logging
+#@{
 def enableLogging():
     return handle.enableLogging()
 
@@ -68,6 +71,8 @@ def setTempFolder(folder):
 ##Returns the full path of the temporary folder
 def getTempFolder():
     return handle.getTempFolder()
+
+##@}
 
 #Error Handling
 handle.hasError.restype = c_bool
@@ -281,19 +286,19 @@ handle.setCompartmentByIndex.restype = c_bool
 ##Returns the current value for a single species in loaded model
 #
 #Takes a string as an argument
-def getValue(speciesID):
+def getValue(symbolName):
     value = c_double()
-    if handle.getValue(speciesID, byref(value)) == True:
+    if handle.getValue(symbolName, byref(value)) == True:
         return value.value
     else:
         raise RuntimeError('Index out of Range')
 
 ##Sets the value of a single species
 #
-#Takes (string, double) as an argument for speciesID and value, respectively
-def setValue(speciesID, val):
+#Takes (string, double) as an argument for symbolName and value, respectively
+def setValue(symbolName, val):
     value = c_double(val)
-    if handle.setValue(speciesID, byref(value)) == True:
+    if handle.setValue(symbolName, byref(value)) == True:
         return value.value;
     else:
         raise RuntimeError('Index out of range')
