@@ -62,7 +62,7 @@ RRMatrix* createMatrix(const LIB_LA::DoubleMatrix& mat)
     return matrix;
 }
 
-vector<double> createVector(const RRVector* vec)
+vector<double> createVectorFromRRVector(const RRVector* vec)
 {
     vector<double> aVec;
 
@@ -80,7 +80,7 @@ vector<double> createVector(const RRVector* vec)
     return aVec;
 }
 
-RRVector* createVector(const vector<double>& vec)
+RRVector* createVectorFromVector_double(const vector<double>& vec)
 {
     RRVector* aVec = new RRVector;
     aVec->Size = vec.size();

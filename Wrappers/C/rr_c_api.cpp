@@ -1055,7 +1055,7 @@ RRVectorHandle rrCallConv getReactionRates()
         }
         vector<double> vec =  gRRHandle->getReactionRates();
 
-        RRVector* aVec = createVector(vec);
+        RRVector* aVec = createVectorFromVector_double(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -1222,7 +1222,7 @@ RRVectorHandle rrCallConv getFloatingSpeciesConcentrations()
         }
 
         vector<double> vec =  gRRHandle->getFloatingSpeciesConcentrations();
-        RRVector* aVec = createVector(vec);
+        RRVector* aVec = createVectorFromVector_double(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -1245,7 +1245,7 @@ RRVectorHandle rrCallConv getBoundarySpeciesConcentrations()
         }
 
         vector<double> vec =  gRRHandle->getBoundarySpeciesConcentrations();
-        RRVector* aVec = createVector(vec);
+        RRVector* aVec = createVectorFromVector_double(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -1269,7 +1269,7 @@ RRVectorHandle rrCallConv getFloatingSpeciesInitialConcentrations()
         }
 
         vector<double> vec =  gRRHandle->getFloatingSpeciesInitialConcentrations();
-        RRVector* aVec = createVector(vec);
+        RRVector* aVec = createVectorFromVector_double(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -1404,7 +1404,7 @@ RRVectorHandle rrCallConv getGlobalParameterValues()
         }
 
         vector<double> vec =  gRRHandle->getGlobalParameterValues();
-        RRVector* aVec = createVector(vec);
+        RRVector* aVec = createVectorFromVector_double(vec);
         return aVec;
     }
     catch(Exception& ex)
@@ -1717,7 +1717,7 @@ RRVectorHandle rrCallConv computeSteadyStateValues()
 		}
 		vector<double> vec =  gRRHandle->computeSteadyStateValues();
 
-		RRVector* aVec = createVector(vec);
+		RRVector* aVec = createVectorFromVector_double(vec);
 		return aVec;
 	}
 	catch(Exception& ex)
@@ -1945,9 +1945,9 @@ RRVectorHandle rrCallConv getRatesOfChangeEx(const RRVectorHandle vec)
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        vector<double> tempList = createVector(vec);
+        vector<double> tempList = createVectorFromRRVector(vec);
         tempList = gRRHandle->getRatesOfChangeEx(tempList);
-        return createVector(tempList);
+        return createVectorFromVector_double (tempList);
     }
     catch(Exception& ex)
     {
@@ -1967,9 +1967,9 @@ RRVectorHandle rrCallConv getReactionRatesEx(const RRVectorHandle vec)
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        vector<double> tempList = createVector(vec);
+        vector<double> tempList = createVectorFromRRVector(vec);
         tempList = gRRHandle->getReactionRatesEx(tempList);
-        return createVector(tempList);;
+        return createVectorFromVector_double(tempList);;
     }
     catch(Exception& ex)
     {
@@ -2915,7 +2915,7 @@ void rrCallConv Pause()
     rr::Pause(true);
 }
 
-RRVectorHandle rrCallConv createVectorAPI (int size)
+RRVectorHandle rrCallConv createVector (int size)
 {
    RRVectorHandle list = new RRVector;
    list->Size = size;
