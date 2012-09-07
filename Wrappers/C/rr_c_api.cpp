@@ -1892,9 +1892,8 @@ RRCCode* rrCallConv getCCode()
 	return NULL;
 }
 
-//The latest.. ////////////////////////////////////////
 
-bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reacName, const char* specName, double& value)
+bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reactionId, const char* speciesId, double& value)
 {
 	try
     {
@@ -1903,7 +1902,7 @@ bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reacName, const c
             setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
-        value = gRRHandle->getScaledFloatingSpeciesElasticity(reacName, specName);
+        value = gRRHandle->getScaledFloatingSpeciesElasticity(reactionId, speciesId);
         return true;
     }
     catch(Exception& ex)

@@ -119,6 +119,9 @@
  \defgroup floating Floating species group
  \brief Get information about floating species
 
+ \defgroup initialConditions Initial consitions group
+ \brief Set or get initial conditions
+ 
  \defgroup parameters Parameter group
  \brief Set and get global and local parameters
 
@@ -136,6 +139,9 @@
 
  \defgroup helperRoutines Helper Routines
  \brief Helper routines for acessing the various C API types, eg lists and arrays
+
+ \defgroup print Print Routines
+ \brief Render various result data types as strings
 
  \defgroup freeRoutines Free memory routines
  \brief Routines that should be used to free various data structures generated during the course of using the library
@@ -691,7 +697,7 @@ C_DECL_SPEC bool rrCallConv setCompartmentByIndex (const int& index, const doubl
  \return Returns null if it fails, otherwise returns the full Jacobian matrix 
  \ingroup Stoich
 */
-C_DECL_SPEC RRMatrixHandle rrCallConv   getFullJacobian();
+C_DECL_SPEC RRMatrixHandle rrCallConv getFullJacobian();
 
 /*!
  \brief Retreive the reduced Jacobian for the current model
@@ -761,11 +767,38 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getConservationMatrix();
  \return Returns true if successful
  \ingroup simulation
 */
-C_DECL_SPEC bool rrCallConv   reset();
+C_DECL_SPEC bool rrCallConv reset();
 
-C_DECL_SPEC bool                    rrCallConv setFloatingSpeciesInitialConcentrations (const RRVector* vec);
-C_DECL_SPEC RRVectorHandle          rrCallConv getFloatingSpeciesInitialConcentrations ();
-C_DECL_SPEC RRStringListHandle      rrCallConv getFloatingSpeciesInitialConditionIds();
+/*!
+ \brief Set the initial floating species concentrations
+
+ Example: status = setFloatingSpeciesInitialConcentrations (vec);
+
+ \param vec A vector of species concentrations: order given by getFloatingSpeciesIds()
+ \return Returns true if successful
+ \ingroup initialConditions
+*/
+C_DECL_SPEC bool rrCallConv setFloatingSpeciesInitialConcentrations (const RRVector* vec);
+
+/*!
+ \brief Get the initial floating species concentrations
+
+ Example: vec = getFloatingSpeciesInitialConcentrations ();
+
+ \return Returns null if it fails otherwise returns a vector containing the initial conditions
+ \ingroup initialConditions
+*/
+C_DECL_SPEC RRVectorHandle rrCallConv getFloatingSpeciesInitialConcentrations ();
+
+/*!
+ \brief Get the initial floating species Ids
+
+ Example: vec = getFloatingSpeciesInitialConditionIds ();
+
+ \return Returns null if it fails otherwise returns a vector containing names of the floating species
+ \ingroup initialConditions
+*/
+C_DECL_SPEC RRStringListHandle rrCallConv getFloatingSpeciesInitialConditionIds();
 
 
 // Reaction rates
@@ -1028,10 +1061,22 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getUnScaledElasticityMatrix();
  \brief Retrieve the scaled elasticity matrix for the current model
 
  \return Returns null if it fails, otherwise returns a matrix of scaled elasticities.
- The first column will contain the real values and the second column the imaginary values
+ TO DO: The first column will contain the real values and the second column the imaginary values
  \ingroup mca
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getScaledElasticityMatrix();
+
+
+/*!
+ \brief Retrieve the scaled elasticity matrix for the current model
+
+ \param reactionId The reaction Id for computing the elasticity
+ \param speciesId The floating species to compute the elasticity for
+ \param value The return value for the elasticity
+ \return Returns null if it fails, otherwise returns a particular scaled elasticity
+ \ingroup mca
+*/
+C_DECL_SPEC bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reactionId, const char* speciesId, double& value);
 
 /*!
  \brief Retrieve the matrix of unscaled concentration control coefficients for the current model
@@ -1118,12 +1163,47 @@ C_DECL_SPEC bool rrCallConv getuEE(const char* name, const char* species, double
 C_DECL_SPEC bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
 
 // Print/format functions
-C_DECL_SPEC char*                   rrCallConv   printResult(const RRResultHandle result);
-C_DECL_SPEC char*                   rrCallConv   printMatrix(const RRMatrixHandle mat);
-C_DECL_SPEC char*                   rrCallConv   printVector(const RRVectorHandle vec);
-C_DECL_SPEC char*                   rrCallConv   printStringList(const RRStringListHandle list);
-C_DECL_SPEC char*                   rrCallConv   printStringArrayList(const RRStringArrayList* list);
-C_DECL_SPEC char*                   rrCallConv   printArrayList(const cRRArrayListHandle list);
+/*!
+ \brief Returns a result struct in string form.
+ \return Returns result struct as a character string
+ \ingroup print
+*/
+C_DECL_SPEC char* rrCallConv printResult(const RRResultHandle result);
+
+/*!
+ \brief Returns a matrix in string form.
+ \return Returns matrix as a character string
+ \ingroup print
+*/
+C_DECL_SPEC char*                   rrCallConv printMatrix(const RRMatrixHandle mat);
+
+/*!
+ \brief Returns a vector in string form.
+ \return Returns vector as a character string
+ \ingroup print
+*/
+C_DECL_SPEC char*                   rrCallConv printVector(const RRVectorHandle vec);
+
+/*!
+ \brief Returns a string list in string form.
+ \return Returns string list as a character string
+ \ingroup print
+*/
+C_DECL_SPEC char*                   rrCallConv printStringList(const RRStringListHandle list);
+
+/*!
+ \brief Returns a string array in string form.
+ \return Returns string array as a character string
+ \ingroup print
+*/
+C_DECL_SPEC char*                   rrCallConv printStringArrayList(const RRStringArrayList* list);
+
+/*!
+ \brief Returns a list in string form.
+ \return Returns list as a character string
+ \ingroup print
+*/
+C_DECL_SPEC char*                   rrCallConv printArrayList(const cRRArrayListHandle list);
 
 // Free memory functions
 /*!
@@ -1160,27 +1240,31 @@ C_DECL_SPEC bool                    rrCallConv   freeStringArrayList(RRStringArr
  \brief Free RRArrayListHandle structures
  \ingroup freeRoutines
 */
-C_DECL_SPEC bool 					rrCallConv 	 freeArrayList(cRRArrayListHandle theList);
+C_DECL_SPEC bool rrCallConv freeArrayList(cRRArrayListHandle theList);
 
 /*!
  \brief Free RRVectorHandle structures
  \ingroup freeRoutines
 */
-C_DECL_SPEC bool                    rrCallConv   freeVector(RRVectorHandle vector);
+C_DECL_SPEC bool rrCallConv freeVector(RRVectorHandle vector);
 
 /*!
  \brief Free RRMatrixHandle structures
  \ingroup freeRoutines
 */
-C_DECL_SPEC bool                    rrCallConv   freeMatrix(RRMatrixHandle matrix);
+C_DECL_SPEC bool rrCallConv freeMatrix(RRMatrixHandle matrix);
 
 /*!
  \brief Free RRCCodeHandle structures
  \ingroup freeRoutines
 */
-C_DECL_SPEC bool                    rrCallConv   freeCCode(RRCCodeHandle code);
+C_DECL_SPEC bool rrCallConv freeCCode(RRCCodeHandle code);
 
-C_DECL_SPEC void                    rrCallConv   Pause();
+/*!
+ \brief Pause
+ \return void
+*/
+C_DECL_SPEC void rrCallConv Pause();
 
 
 // Helper Methods
@@ -1233,8 +1317,21 @@ C_DECL_SPEC bool rrCallConv getVectorElement (RRVectorHandle vector, int index, 
 */
 C_DECL_SPEC bool rrCallConv setVectorElement (RRVectorHandle vector, int index, double value);
 
+/*!
+ \brief To be deprecated
 
+ \param stringList
+ \return Deprecated
+*/
 C_DECL_SPEC int                     rrCallConv  getStringListLength (RRStringListHandle stringList);
+
+/*!
+ \brief To be deprecated
+
+ \param stringList
+ \param index
+ \return Deprecated
+*/
 C_DECL_SPEC char*                   rrCallConv  getStringListElement (RRStringListHandle stringList, int index);
 
 /*!
