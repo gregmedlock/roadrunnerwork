@@ -347,6 +347,10 @@ object MForm: TMForm
       TabOrder = 1
       object TabSheet1: TTabSheet
         Caption = 'Log'
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Panel3: TPanel
           Left = 0
           Top = 0
@@ -398,6 +402,10 @@ object MForm: TMForm
       object TabSheet2: TTabSheet
         Caption = 'Settings'
         ImageIndex = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object CompilerRG: TRadioGroup
           Left = 3
           Top = 16
@@ -423,6 +431,10 @@ object MForm: TMForm
       object TabSheet3: TTabSheet
         Caption = 'Test Suite'
         ImageIndex = 2
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object Button2: TButton
           Left = 408
           Top = 112
@@ -441,6 +453,10 @@ object MForm: TMForm
           TabOrder = 1
           object TabSheet4: TTabSheet
             Caption = 'General'
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
             object testSuitePic: TImage
               Left = 676
               Top = 29
@@ -1394,32 +1410,20 @@ object MForm: TMForm
           object TabSheet5: TTabSheet
             Caption = 'TabSheet5'
             ImageIndex = 1
+            ExplicitLeft = 0
+            ExplicitTop = 0
+            ExplicitWidth = 0
+            ExplicitHeight = 0
           end
         end
       end
       object TabSheet6: TTabSheet
         Caption = 'Other Tests'
         ImageIndex = 3
-        object runCount: mtkIntLabeledEdit
-          Left = 16
-          Top = 32
-          Width = 65
-          Height = 21
-          EditLabel.Width = 51
-          EditLabel.Height = 13
-          EditLabel.Caption = 'Run Count'
-          TabOrder = 0
-          Text = '0'
-        end
-        object Button5: TButton
-          Left = 104
-          Top = 32
-          Width = 75
-          Height = 25
-          Caption = 'Button5'
-          TabOrder = 1
-          OnClick = Button5Click
-        end
+        ExplicitLeft = 3
+        ExplicitTop = 23
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object runCountMemo: TMemo
           Left = 208
           Top = 0
@@ -1428,7 +1432,52 @@ object MForm: TMForm
           Align = alRight
           Lines.Strings = (
             'runCountMemo')
+          TabOrder = 0
+        end
+        object GroupBox5: TGroupBox
+          Left = 0
+          Top = 0
+          Width = 161
+          Height = 65
+          Caption = 'Timeit'
+          TabOrder = 1
+          object Button5: TButton
+            Left = 72
+            Top = 24
+            Width = 75
+            Height = 25
+            Caption = 'Run'
+            TabOrder = 0
+            OnClick = Button5Click
+          end
+          object runCount: mtkIntLabeledEdit
+            Left = 16
+            Top = 32
+            Width = 41
+            Height = 21
+            EditLabel.Width = 51
+            EditLabel.Height = 13
+            EditLabel.Caption = 'Run Count'
+            TabOrder = 1
+            Text = '10'
+          end
+        end
+        object GroupBox6: TGroupBox
+          Left = 3
+          Top = 88
+          Width = 158
+          Height = 73
+          Caption = 'Memory in a thread'
           TabOrder = 2
+          object RunThreadBtn: TButton
+            Left = 64
+            Top = 24
+            Width = 75
+            Height = 25
+            Caption = 'Run'
+            TabOrder = 0
+            OnClick = RunThreadBtnClick
+          end
         end
       end
     end
@@ -1560,5 +1609,11 @@ object MForm: TMForm
     OnTimer = ShutDownTimerTimer
     Left = 896
     Top = 560
+  end
+  object CheckThreadTimer: TTimer
+    Interval = 500
+    OnTimer = CheckThreadTimerTimer
+    Left = 400
+    Top = 600
   end
 end

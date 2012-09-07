@@ -2342,29 +2342,6 @@ RRStringListHandle rrCallConv getCompartmentIds()
     return NULL;
 }
 
-
-/* Appears to be a duplicate
-RRStringListHandle rrCallConv getCompartmentIds()
-{
-	try
-    {
-        if(!gRRHandle)
-        {
-            setError(ALLOCATE_API_ERROR_MSG);
-            return NULL;
-        }
-        return createList(gRRHandle->getCompartmentIds());
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        setError(msg.str());
-    }
-    return NULL;
-}*/
-
-
 bool rrCallConv getRateOfChange(const int& index, double& value)
 {
 	try
@@ -2574,45 +2551,6 @@ char* rrCallConv resultToString(const RRResultHandle result)
     catch(Exception& ex)
     {
         stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        setError(msg.str());
-    }
-    return NULL;
-}
-
-char* rrCallConv getMatrixAsString(const RRMatrixHandle matrixHandle)
-{
-	try
-    {
-        stringstream ss;
-        if(!matrixHandle)
-        {
-            ss<<"Null matrix in printMatrix...";
-
-            return createText(ss.str());
-        }
-
-        RRMatrix& mat = *matrixHandle;
-        ss<<"matrix dimension: "<<mat.RSize<<"x"<<mat.CSize<<" --\n";
-
-        int index = 0;
-        for(int row = 0; row < mat.RSize; row++)
-        {
-            for(int col = 0; col < mat.CSize; col++)
-            {
-                ss<<mat.Data[index++];
-                if(col < mat.CSize + 1)
-                {
-                    ss<<"\t";
-                }
-            }
-            ss<<endl;
-        }
-        return createText(ss.str());
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
     }

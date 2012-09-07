@@ -28,8 +28,8 @@ void LogFileReader::SetFileName(const string& fName)
 
 void LogFileReader::Worker()
 {
-	mIsFinished = false;
     mIsRunning = true;
+	mIsFinished = false;
 
     //First advance to end
     if(!mFS.is_open())
@@ -61,7 +61,6 @@ void LogFileReader::Worker()
                         ;
                     }
                     mMainForm->mLogString = new string(data);
-
                     TThread::Synchronize(NULL, mMainForm->LogMessage);
                 }
             }
