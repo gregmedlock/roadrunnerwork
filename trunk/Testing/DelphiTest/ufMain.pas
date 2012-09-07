@@ -326,14 +326,14 @@ begin
 
   //evalModel;  // <- should we need to do this?
 
-  list := getCompartmentNames;
+  list := getCompartmentIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Compartment Name: ' + list[i] + ' (' +
       floattostr(getCompartmentByIndex(i)) + ')');
   list.Free;
   lstSummary.Items.Add('');
 
-  list := getReactionNames;
+  list := getReactionIds;
   d := getReactionRates;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Reaction Name: ' + list[i] + '   Reaction Rate=' +
@@ -342,7 +342,7 @@ begin
   setLength(d, 0);
   lstSummary.Items.Add('');
 
-  list := getBoundarySpeciesNames;
+  list := getBoundarySpeciesIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Boundary Species Name: ' + list[i] + ' (' +
       floattostr(getBoundarySpeciesByIndex(i)) + ')');
@@ -350,21 +350,21 @@ begin
     lstSummary.Items.Add('');
   list.Free;
 
-  list := getFloatingSpeciesNames;
+  list := getFloatingSpeciesIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Floating Species Name: ' + list[i] + ' (' +
       floattostr(getFloatingSpeciesByIndex(i)) + ')');
   list.Free;
   lstSummary.Items.Add('');
 
-  list := getGlobalParameterNames;
+  list := getGlobalParameterIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Global Parameter Name: ' + list[i] + ' (' +
       floattostr(getGlobalParameterByIndex(i)) + ')');
   lstSummary.Items.Add('');
   list.Free;
 
-  list := getRatesOfChangeNames;
+  list := getRatesOfChangeIds;
   d := getRatesOfChange;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Rates of Change Name: ' + list[i] + ' (' +
@@ -373,14 +373,14 @@ begin
   setLength(d, 0);
   lstSummary.Items.Add('');
 
-  list := getEigenValueNames;
+  list := getEigenValueIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Eigenvalue Names: ' + list[i] + ' (' +
       floattostr(getValue(list[i])) + ')');
   lstSummary.Items.Add('');
   list.Free;
 
-  list := getElasticityNames;
+  list := getElasticityIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Elasticity Names: ' + list[i] + ' (' +
       floattostr(getValue(list[i])) + ')');
@@ -475,14 +475,14 @@ begin
     inttostr(getNumberOfInDependentSpecies));
   lstSummary.Items.Add('');
 
-  list := getCompartmentNames;
+  list := getCompartmentIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Compartment Name: ' + list[i] + ' (' +
       floattostr(getValue(list[i])) + ')');
   list.Free;
   lstSummary.Items.Add('');
 
-  list := getReactionNames;
+  list := getReactionIds;
   d := getReactionRates;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Reaction Name: ' + list[i] + '   Reaction Rate=' +
@@ -491,7 +491,7 @@ begin
   setLength(d, 0);
   lstSummary.Items.Add('');
 
-  list := getBoundarySpeciesNames;
+  list := getBoundarySpeciesIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Boundary Species Name: ' + list[i] + ' (' +
       floattostr(getValue(list[i])) + ')');
@@ -499,35 +499,35 @@ begin
     lstSummary.Items.Add('');
   list.Free;
 
-  list := getFloatingSpeciesNames;
+  list := getFloatingSpeciesIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Floating Species Name: ' + list[i] + ' (' +
       floattostr(getValue(list[i])) + ')');
   list.Free;
   lstSummary.Items.Add('');
 
-  list := getGlobalParameterNames;
+  list := getGlobalParameterIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Global Parameter Name: ' + list[i] + ' (' +
       floattostr(getValue(list[i])) + ')');
   lstSummary.Items.Add('');
   list.Free;
 
-  list := getRatesOfChangeNames;
+  list := getRatesOfChangeIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Rates of Change Name: ' + list[i] + ' (' +
       floattostr(getValue(list[i])) + ')');
   lstSummary.Items.Add('');
   list.Free;
 
-  list := getEigenValueNames;
+  list := getEigenValueIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Eigenvalue Names: ' + list[i] + ' (' +
       floattostr(getValue(list[i])) + ')');
   lstSummary.Items.Add('');
   list.Free;
 
-  list := getElasticityNames;
+  list := getElasticityIds;
   for i := 0 to list.Count - 1 do
     lstSummary.Items.Add('Elasticity Names: ' + list[i] + ' (' +
       floattostr(getValue(list[i])) + ')');
@@ -568,7 +568,7 @@ begin
     lstSummary.Items.Add(getLastError);
   lstSummary.Items.Add('');
   lstSummary.Items.Add('Species Concentrations:');
-  fn := getFloatingSpeciesNames;
+  fn := getFloatingSpeciesIds;
   for i := 0 to fn.Count - 1 do
     lstSummary.Items.Add(fn[i] + ' = ' + floattostr(getValue(fn[i])));
   fn.free;

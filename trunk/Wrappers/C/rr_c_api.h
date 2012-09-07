@@ -341,11 +341,11 @@ C_DECL_SPEC bool rrCallConv loadSBML(const char* sbml);
 
 /*!
  \brief Create a model from a SBML file
- \param sbml file name 
+ \param fileName file name 
  \return Returns true if sucessful
  \ingroup loadsave
 */
-C_DECL_SPEC bool rrCallConv loadSBMLFromFile(const char* sbml);
+C_DECL_SPEC bool rrCallConv loadSBMLFromFile(const char* fileName);
 
 /*!
  \brief Retrieve the <b>current state</b> of the model in the form of an SBML string
@@ -535,7 +535,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getSteadyStateSelectionList();
 
  Example: status = getValue ("S1", &value)
 
- \param speciesID The symbol that we wish to obtain the value for
+ \param symbolId The symbol that we wish to obtain the value for
  \param value The value that will be retrievd
  \return Returns true if succesful
  \ingroup state
@@ -548,7 +548,7 @@ C_DECL_SPEC bool rrCallConv getValue(const char* symbolId, double& value);
 
  Example: status = setValue ("S1", 0.5)
 
- \param speciesId The symbol that we wish to set the value
+ \param symbolId The symbol that we wish to set the value
  \param value The value that will be set to the symbol
  \return Returns true if succesful
  \ingroup state
