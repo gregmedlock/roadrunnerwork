@@ -2387,7 +2387,7 @@ bool rrCallConv getRateOfChange(const int& index, double& value)
 }
 
 //Print functions ==========================================================
-char* rrCallConv printArrayList(const cRRArrayListHandle list)
+char* rrCallConv listToString(const cRRArrayListHandle list)
 {
 	try
     {
@@ -2425,7 +2425,7 @@ char* rrCallConv printArrayList(const cRRArrayListHandle list)
 
                 case litArrayList:
                     lVal = (cRRArrayList *) list->Items[i].pValue;
-                    resStr<<printArrayList(lVal);
+                    resStr<<listToString(lVal);
                 break;
             }
 
@@ -2530,7 +2530,7 @@ char* rrCallConv  printStringArrayList(const RRStringArrayList* list)
     return NULL;
 }
 
-char* rrCallConv printResult(const RRResultHandle result)
+char* rrCallConv resultToString(const RRResultHandle result)
 {
 	try
     {
@@ -2619,7 +2619,7 @@ char* rrCallConv getMatrixAsString(const RRMatrixHandle matrixHandle)
     return NULL;
 }
 
-char* rrCallConv printMatrix(const RRMatrixHandle matrixHandle)
+char* rrCallConv matrixToString(const RRMatrixHandle matrixHandle)
 {
 	try
     {
@@ -2657,7 +2657,7 @@ char* rrCallConv printMatrix(const RRMatrixHandle matrixHandle)
     return NULL;
 }
 
-char* rrCallConv printVector(RRVectorHandle vecHandle)
+char* rrCallConv vectorToString(RRVectorHandle vecHandle)
 {
 	try
     {

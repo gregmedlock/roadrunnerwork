@@ -94,9 +94,10 @@ EXPORTS
     loadSBMLFromFile                            = _loadSBMLFromFile@4                 
     oneStep                                     = _oneStep@12                         
     printStringList                             = _printStringList@4                        
-    printMatrix                                 = _printMatrix@4                      
-    printResult                                 = _printResult@4                      
-    printVector                                 = _printVector@4                      
+    matrixToString                              = _matrixToString@4                      
+    resultToString                              = _resultToString@4                      
+    vectorToString                              = _vectorToString@4  
+	listToString                                = _listToString@4                    
     reset                                       = _reset@0                            
     setBoundarySpeciesByIndex                   = _setBoundarySpeciesByIndex@8        
     setCapabilities                             = _setCapabilities@4                  

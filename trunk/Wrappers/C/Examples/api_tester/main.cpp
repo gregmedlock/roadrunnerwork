@@ -171,7 +171,7 @@ int main(int argc, char* argv[])
 
     cout<<"\nStoichiometry Matrix:"<<endl;
 	printf ("---------------------\n\n");
-	cout<<printMatrix(getStoichiometryMatrix());
+	cout<<matrixToString(getStoichiometryMatrix());
 	printf ("\n");
 
     cout<<"Number of independent species = "<<getNumberOfIndependentSpecies()<<endl;
@@ -179,19 +179,19 @@ int main(int argc, char* argv[])
  
 	printf ("Link Matrix:\n");
 	printf ("------------\n\n");
-	cout<<printMatrix(getLinkMatrix()); printf ("\n\n");
+	cout<<matrixToString(getLinkMatrix()); printf ("\n\n");
 
 	printf ("Nr Matrix:\n");
 	printf ("-----------\n\n");
-	cout<<printMatrix(getNrMatrix()); printf ("\n\n");
+	cout<<matrixToString(getNrMatrix()); printf ("\n\n");
 
 	printf ("L0 Matrix:\n");
 	printf ("-----------\n\n");
-	cout<<printMatrix(getL0Matrix()); printf ("\n\n");
+	cout<<matrixToString(getL0Matrix()); printf ("\n\n");
 
 	printf ("Full Jacobian Matrix:\n");
 	printf ("---------------------\n\n");
-	char* matStr = printMatrix (getFullJacobian());
+	char* matStr = matrixToString (getFullJacobian());
 	if (!matStr)
 		printf ("ERROR in getFullJacobian\n");
 	else
@@ -200,7 +200,7 @@ int main(int argc, char* argv[])
 
 	printf ("Reduced Jacobian Matrix:\n");
 	printf ("------------------------\n\n");
-	matStr = printMatrix (getReducedJacobian());
+	matStr = matrixToString (getReducedJacobian());
 	if (!matStr)
 		printf ("ERROR in getReducedJacobian\n");
 	else
@@ -209,7 +209,7 @@ int main(int argc, char* argv[])
 
 	printf ("Reduced Jacobian Matrix:\n");
 	printf ("------------------------\n\n");
-	matStr = printMatrix (getReducedJacobian());
+	matStr = matrixToString (getReducedJacobian());
 	if (!matStr)
 		printf ("ERROR in getReducedJacobian\n");
 	else
@@ -218,7 +218,7 @@ int main(int argc, char* argv[])
 
 	printf ("Eigenvalue Matrix (real/imag):\n");
 	printf ("----------------------------\n\n");
-	matStr = printMatrix (getEigenValues());
+	matStr = matrixToString (getEigenValues());
 	if (!matStr)
 		printf ("ERROR in getEigenValues\n");
 	else
@@ -227,7 +227,7 @@ int main(int argc, char* argv[])
 
 	printf ("Unscaled Elasticity Matrix:\n");
 	printf ("-------------------------\n\n");
-	matStr = printMatrix (getUnScaledElasticityMatrix());
+	matStr = matrixToString (getUnScaledElasticityMatrix());
 	if (!matStr)
 		printf ("ERROR in getUnScaledElasticityMatrix\n");
 	else
@@ -236,7 +236,7 @@ int main(int argc, char* argv[])
 	
 	printf ("Scaled Elasticity Matrix:\n");
 	printf ("-------------------------\n\n");
-	matStr = printMatrix (getScaledElasticityMatrix());
+	matStr = matrixToString (getScaledElasticityMatrix());
 	if (!matStr)
 		printf ("ERROR in getScaledElasticityMatrix\n");
 	else
@@ -245,7 +245,7 @@ int main(int argc, char* argv[])
 
 	printf ("Unscaled Concentration Control Coefficients Matrix:\n");
 	printf ("---------------------------------------------------\n\n");
-	matStr = printMatrix (getUnscaledConcentrationControlCoefficientMatrix());
+	matStr = matrixToString (getUnscaledConcentrationControlCoefficientMatrix());
 	if (!matStr)
     {
 		printf ("ERROR in getUnscaledConcentrationControlCoefficientMatrix\n");
@@ -259,7 +259,7 @@ int main(int argc, char* argv[])
 
 	printf ("Scaled Concentration Control Coefficients Matrix:\n");
 	printf ("-------------------------------------------------\n\n");
-	matStr = printMatrix (getScaledConcentrationControlCoefficientMatrix());
+	matStr = matrixToString (getScaledConcentrationControlCoefficientMatrix());
 	if (!matStr)
     {
 		printf ("ERROR in getScaledConcentrationControlCoefficientMatrix\n");
@@ -273,7 +273,7 @@ int main(int argc, char* argv[])
 
 	printf ("Unscaled Flux Control Coefficients Matrix:\n");
 	printf ("-----------------------------------------\n\n");
-	matStr = printMatrix (getUnscaledFluxControlCoefficientMatrix());
+	matStr = matrixToString (getUnscaledFluxControlCoefficientMatrix());
 	if (!matStr)
     {
 		printf ("ERROR in getUnscaledFluxControlCoefficientMatrix\n");
@@ -288,7 +288,7 @@ int main(int argc, char* argv[])
 
 	printf ("Scaled Flux Control Coefficients Matrix:\n");
 	printf ("-----------------------------------------\n\n");
-	matStr = printMatrix (getScaledFluxControlCoefficientMatrix());
+	matStr = matrixToString (getScaledFluxControlCoefficientMatrix());
 	if (!matStr)
     {
 		printf ("ERROR in getScaledFluxControlCoefficientMatrix\n");
@@ -357,7 +357,7 @@ int main(int argc, char* argv[])
     cout<<"List of floating species: \n"<<printStringList(getFloatingSpeciesIds())<<endl;
 
 	printf ("\nCall to getRatesOfChangeEx (S1=1, S2=2, S3=3):\n");
-	cout<<printVector (getRatesOfChangeEx(&veca))<<endl;
+	cout<<vectorToString (getRatesOfChangeEx(&veca))<<endl;
 
 
 //	printf ("\nCall to getReactionRatesEx (S1=1, S2=2, S3=3):\n");
@@ -369,22 +369,22 @@ int main(int argc, char* argv[])
     setSelectionList("S1 S2");
 //-------- The latest
 
-    cout<<printVector(getFloatingSpeciesConcentrations());
-    cout<<printVector(getGlobalParameterValues());
+    cout<<vectorToString(getFloatingSpeciesConcentrations());
+    cout<<vectorToString(getGlobalParameterValues());
     cout<<"\n\n Symbols\n";
     cRRArrayList* symHandle = getAvailableSymbols();
-    cout<<printArrayList(symHandle);
+    cout<<listToString(symHandle);
     freeArrayList(symHandle);
     cout<<"\n\n ================================\n";
     RRVector* test = getReactionRates();
-    cout<<printVector(test);
+    cout<<vectorToString(test);
 
     setFloatingSpeciesByIndex(0,2);
     setFloatingSpeciesByIndex(1,4);
     setFloatingSpeciesByIndex(2,6);
 
     test = getReactionRates();
-    cout<<printVector(test);
+    cout<<vectorToString(test);
 
     //Get value problem..
 
