@@ -5,8 +5,8 @@
 import sys
 import os
 from ctypes import *
-rrInstallFolder = "C:\\RoadRunner\\bin"
-os.environ['PATH'] =  rrInstallFolder + ';' + "c:\\Python27" + ';' + os.environ['PATH']
+rrInstallFolder = os.path.abspath(os.path.join(os.path.dirname(rrPython.__file__), '..', 'bin'))
+os.environ['PATH'] = rrInstallFolder + ';' + "c:\\Python27" + ';' + os.environ['PATH']
 handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
 
 
