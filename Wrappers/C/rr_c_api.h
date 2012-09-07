@@ -549,11 +549,11 @@ C_DECL_SPEC bool rrCallConv getValue(const char* symbolId, double& value);
  Example: status = setValue ("S1", 0.5)
 
  \param speciesId The symbol that we wish to set the value
- \param val The value that will be set to the symbol
+ \param value The value that will be set to the symbol
  \return Returns true if succesful
  \ingroup state
 */
-C_DECL_SPEC bool rrCallConv setValue(const char* symbolId, const double& val);
+C_DECL_SPEC bool rrCallConv setValue(const char* symbolId, const double& value);
 
 
 /*!
@@ -626,30 +626,30 @@ C_DECL_SPEC bool rrCallConv setGlobalParameterByIndex(const int& index, const do
  \brief Retrieve the concentration for a particular floating species. 
 
  \param index The index to the boundary species (corresponds to position in getBoundarySpeciesNames())
- \param val The value returned by the method
+ \param value The value returned by the method
  \return Returns true if successful
  \ingroup boundary
 */
-C_DECL_SPEC bool rrCallConv getBoundarySpeciesByIndex(const int& index, double& val);
+C_DECL_SPEC bool rrCallConv getBoundarySpeciesByIndex(const int& index, double& value);
 
 /*!
  \brief Retrieve the concentration for a particular floating species. 
 
  \param index The index to the floating species (corresponds to position in getFloatingSpeciesNames())
- \param val The value returned by the method
+ \param value The value returned by the method
  \return Returns true if successful
  \ingroup floating
 */
-C_DECL_SPEC bool rrCallConv getFloatingSpeciesByIndex(const int& index, double& val);
+C_DECL_SPEC bool rrCallConv getFloatingSpeciesByIndex(const int& index, double& value);
 
 /*!
  \brief Retrieve the global parameter value 
  \param index The index to the global parameter (corresponds to position in getGlboalParametersNames())
- \param val The value returned by the method
+ \param value The value returned by the method
  \return Returns true if successful
  \ingroup floating
 */
-C_DECL_SPEC bool rrCallConv getGlobalParameterByIndex(const int& index, double& val);
+C_DECL_SPEC bool rrCallConv getGlobalParameterByIndex(const int& index, double& value);
 
 /*!
  \brief Retrieve the compartment volume for a particular compartment. 
