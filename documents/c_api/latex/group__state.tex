@@ -7,35 +7,84 @@
 \-Compute derivatives, fluxes, and other values of the system at the current state.  
 
 
-\subsection*{\-Retrieve reaction rate information}
+\subsection*{\-Utility routines}
 \begin{DoxyCompactItemize}
 \item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__state_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
+\hypertarget{group__utility_ga8c67bc930b33926bccb3c9f810dc2825}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga8c67bc930b33926bccb3c9f810dc2825}{get\-Value} (const char $\ast$species\-I\-D, double \&value)}
+\label{group__utility_ga8c67bc930b33926bccb3c9f810dc2825}
+
+\begin{DoxyCompactList}\small\item\em \-T\-O \-B\-E \-D\-O\-N\-E. \end{DoxyCompactList}\item 
+\hypertarget{group__utility_ga8663bcca2b00ef20c13841ca9fc9f56c}{
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga8663bcca2b00ef20c13841ca9fc9f56c}{set\-Value} (const char $\ast$species\-Id, const double \&val)}
+\label{group__utility_ga8663bcca2b00ef20c13841ca9fc9f56c}
+
+\begin{DoxyCompactList}\small\item\em \-T\-O \-B\-E \-D\-O\-N\-E. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__utility_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
 \begin{DoxyCompactList}\small\item\em \-Obtain the number of reactions in the loaded model. \end{DoxyCompactList}\item 
-\hypertarget{group__state_ga0a7be404315c6001627ee26e738e11e2}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv {\bfseries get\-Reaction\-Rate} (const int \&, double \&rate)}
-\label{group__state_ga0a7be404315c6001627ee26e738e11e2}
-
-\item 
-\hypertarget{group__state_ga86d544bcf3eeaa4698a60123a3da69aa}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Reaction\-Rates} ()}
-\label{group__state_ga86d544bcf3eeaa4698a60123a3da69aa}
-
-\item 
-\hypertarget{group__state_gaa03d9414ddeb177a76365dd5b2d0042e}{
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
-rr\-Call\-Conv {\bfseries get\-Reaction\-Rates\-Ex} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)}
-\label{group__state_gaa03d9414ddeb177a76365dd5b2d0042e}
-
-\end{DoxyCompactItemize}
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga3fbb7c2fab261f25a3871f1caf398ff1}{eval\-Model} ()
+\begin{DoxyCompactList}\small\item\em \-Evaluate the current models, that it update all assignments and rates of change. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} \*
+rr\-Call\-Conv \hyperlink{group__utility_ga313f81d4fae0ece305eb1246543bcdc3}{get\-Eigen\-Value\-Names} ()
+\begin{DoxyCompactList}\small\item\em \-Obtain the list of eigenvalue names. \end{DoxyCompactList}\item 
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a21a10f01ac4fd34c61e7e7d12af9891d}{\-R\-R\-Array\-List2\-Handle} \*
+rr\-Call\-Conv \hyperlink{group__utility_gaa06a430f57d4df400e58fd954766901c}{get\-Available\-Symbols} ()
+\begin{DoxyCompactList}\small\item\em \-Obtain the list of al avialable symbols. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
 \-Compute derivatives, fluxes, and other values of the system at the current state. steadystate \-Compute and obtain basic information about the steady state 
 
 \subsection{\-Function \-Documentation}
-\hypertarget{group__state_gae25399f84ff2d1fda619358a1af9a1b5}{
+\hypertarget{group__utility_ga3fbb7c2fab261f25a3871f1caf398ff1}{
+\index{\-Current state of system@{\-Current state of system}!eval\-Model@{eval\-Model}}
+\index{eval\-Model@{eval\-Model}!Current state of system@{\-Current state of system}}
+\subsubsection[{eval\-Model}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv eval\-Model (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{group__utility_ga3fbb7c2fab261f25a3871f1caf398ff1}
+
+
+\-Evaluate the current models, that it update all assignments and rates of change. 
+
+\begin{DoxyReturn}{\-Returns}
+bool status -\/ \-Returns false if it fails 
+\end{DoxyReturn}
+\hypertarget{group__utility_gaa06a430f57d4df400e58fd954766901c}{
+\index{\-Current state of system@{\-Current state of system}!get\-Available\-Symbols@{get\-Available\-Symbols}}
+\index{get\-Available\-Symbols@{get\-Available\-Symbols}!Current state of system@{\-Current state of system}}
+\subsubsection[{get\-Available\-Symbols}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-Array\-List2\-Handle} rr\-Call\-Conv get\-Available\-Symbols (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{group__utility_gaa06a430f57d4df400e58fd954766901c}
+
+
+\-Obtain the list of al avialable symbols. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns -\/1 if it fails, if succesful it returns a pointer to a \-R\-R\-Array\-List2\-Handle struct 
+\end{DoxyReturn}
+\hypertarget{group__utility_ga313f81d4fae0ece305eb1246543bcdc3}{
+\index{\-Current state of system@{\-Current state of system}!get\-Eigen\-Value\-Names@{get\-Eigen\-Value\-Names}}
+\index{get\-Eigen\-Value\-Names@{get\-Eigen\-Value\-Names}!Current state of system@{\-Current state of system}}
+\subsubsection[{get\-Eigen\-Value\-Names}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C {\bf \-R\-R\-String\-List\-Handle} rr\-Call\-Conv get\-Eigen\-Value\-Names (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{group__utility_ga313f81d4fae0ece305eb1246543bcdc3}
+
+
+\-Obtain the list of eigenvalue names. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns -\/1 if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\end{DoxyReturn}
+\hypertarget{group__utility_gae25399f84ff2d1fda619358a1af9a1b5}{
 \index{\-Current state of system@{\-Current state of system}!get\-Number\-Of\-Reactions@{get\-Number\-Of\-Reactions}}
 \index{get\-Number\-Of\-Reactions@{get\-Number\-Of\-Reactions}!Current state of system@{\-Current state of system}}
 \subsubsection[{get\-Number\-Of\-Reactions}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv get\-Number\-Of\-Reactions (
@@ -43,7 +92,7 @@ rr\-Call\-Conv {\bfseries get\-Reaction\-Rates\-Ex} (const \hyperlink{rr__c__typ
 {}
 \end{DoxyParamCaption}
 )}}
-\label{group__state_gae25399f84ff2d1fda619358a1af9a1b5}
+\label{group__utility_gae25399f84ff2d1fda619358a1af9a1b5}
 
 
 \-Obtain the number of reactions in the loaded model. 
@@ -51,5 +100,5 @@ rr\-Call\-Conv {\bfseries get\-Reaction\-Rates\-Ex} (const \hyperlink{rr__c__typ
 \-Example\-: number = get\-Number\-Of\-Reactions ();
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns -\/1 if it fails, if succesful it return 0 or more, indicating the number of reactions 
+int value -\/ \-Returns -\/1 if it fails, if succesful it return 0 or more, indicating the number of reactions 
 \end{DoxyReturn}

@@ -76,7 +76,103 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Get information about reaction rates.  
 <a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="member-group"></a>
+Utility routines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga0a7be404315c6001627ee26e738e11e2">getReactionRate</a> (const int &amp;, double &amp;rate)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a give reaction as indicated by the index parameter.  <a href="#ga0a7be404315c6001627ee26e738e11e2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga86d544bcf3eeaa4698a60123a3da69aa">getReactionRates</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a vector of current reaction rates.  <a href="#ga86d544bcf3eeaa4698a60123a3da69aa"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaa03d9414ddeb177a76365dd5b2d0042e">getReactionRatesEx</a> (const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vec)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a vector of reactionb rates given a vector of species concentrations.  <a href="#gaa03d9414ddeb177a76365dd5b2d0042e"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Get information about reaction rates. </p>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="ga0a7be404315c6001627ee26e738e11e2"></a><!-- doxytag: member="rr_c_api.h::getReactionRate" ref="ga0a7be404315c6001627ee26e738e11e2" args="(const int &amp;, double &amp;rate)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv getReactionRate </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>rate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve a give reaction as indicated by the index parameter. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int*</td><td>index - The index is used to specif which reaction rate to retrieve </td></tr>
+    <tr><td class="paramname">double*</td><td>rate - The reaction rate is returned in the rate argument </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>bool status - Returns false if it fails </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga86d544bcf3eeaa4698a60123a3da69aa"></a><!-- doxytag: member="rr_c_api.h::getReactionRates" ref="ga86d544bcf3eeaa4698a60123a3da69aa" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv getReactionRates </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve a vector of current reaction rates. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>RRVectorHandle vReactionRates - Returns null if it fails, otherwise it returns a vector of reaction rates </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaa03d9414ddeb177a76365dd5b2d0042e"></a><!-- doxytag: member="rr_c_api.h::getReactionRatesEx" ref="gaa03d9414ddeb177a76365dd5b2d0042e" args="(const RRVectorHandle vec)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv getReactionRatesEx </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a>&#160;</td>
+          <td class="paramname"><em>vec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve a vector of reactionb rates given a vector of species concentrations. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">RRVectorHandle</td><td>species - The vector of floating species concentrations </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>RRVectorHandle vReactionRates - Returns null if it fails otherwise it returns a vector of reaction rates </dd></dl>
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -95,7 +191,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 11:17:16 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

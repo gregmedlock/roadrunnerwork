@@ -78,77 +78,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="member-group"></a>
-Read and Write models</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga4105f02dfdb959175f30cecebfb1c081">loadSBML</a> (const char *sbml)</td></tr>
+Utility routines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga4105f02dfdb959175f30cecebfb1c081">loadSBML</a> (const char *sbml)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a model from an SBML string.  <a href="#ga4105f02dfdb959175f30cecebfb1c081"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga3147e10d84bddb6435bee4b1db0514bf">loadSBMLFromFile</a> (const char *sbml)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga3147e10d84bddb6435bee4b1db0514bf">loadSBMLFromFile</a> (const char *sbml)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a model from a SBML file.  <a href="#ga3147e10d84bddb6435bee4b1db0514bf"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga7d683d70e6966107f81a3e8c547bcd76">writeSBML</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrive the current state of the model in the form of an SBML string.  <a href="#ga7d683d70e6966107f81a3e8c547bcd76"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga05a79ded419b52fa2965fce1700c0e82">getSBML</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga7d683d70e6966107f81a3e8c547bcd76">writeSBML</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the <b>current state</b> of the model in the form of an SBML string.  <a href="#ga7d683d70e6966107f81a3e8c547bcd76"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga05a79ded419b52fa2965fce1700c0e82">getSBML</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the last SBML model that was loaded.  <a href="#ga05a79ded419b52fa2965fce1700c0e82"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga4add8092e50aedd665cd073133838620"></a><!-- doxytag: member="loadsave::getParamPromotedSBML" ref="ga4add8092e50aedd665cd073133838620" args="(const char *sArg)" -->
-C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getParamPromotedSBML</b> (const char *sArg)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga320ffeeba3e5505371b52ce61715bf82"></a><!-- doxytag: member="loadsave::setCapabilities" ref="ga320ffeeba3e5505371b52ce61715bf82" args="(const char *caps)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setCapabilities</b> (const char *caps)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaecce7b3dda3548fbe579922aadf25610"></a><!-- doxytag: member="loadsave::getCapabilities" ref="gaecce7b3dda3548fbe579922aadf25610" args="()" -->
-C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getCapabilities</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga1a636a76ad610d99fe1c780bb3d9296d">setTimeStart</a> (const double &amp;timeStart)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the time start for a simulation.  <a href="#ga1a636a76ad610d99fe1c780bb3d9296d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga1313e21d622cd846bdd75071e965eb6c">setTimeEnd</a> (const double &amp;timeEnd)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the time end for a simulation.  <a href="#ga1313e21d622cd846bdd75071e965eb6c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga448ead53bb8913de664cc8ad675b4197">setNumPoints</a> (const int &amp;nrPoints)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the number of points to generate in a simulation.  <a href="#ga448ead53bb8913de664cc8ad675b4197"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga6465c94b6dfed39a6ef614bd0a68cb9b">setSelectionList</a> (const char *list)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the selection list for output from <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or <a class="el" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx()</a>  <a href="#ga6465c94b6dfed39a6ef614bd0a68cb9b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga1db0b86ed7fd0d6e19f8df85b7577253">getSelectionList</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current selection list for <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or <a class="el" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx()</a>  <a href="#ga1db0b86ed7fd0d6e19f8df85b7577253"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga9f0555c11716daec2336d54d13facc57">simulate</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out a time-course simulation, use setTimeStart etc to set characteristics.  <a href="#ga9f0555c11716daec2336d54d13facc57"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga9b87919e79f6eb0d7c77c3daa08d6baf">simulateEx</a> (const double &amp;timeStart, const double &amp;timeEnd, const int &amp;numberOfPoints)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out a time-course simulation based on the given arguments.  <a href="#ga9b87919e79f6eb0d7c77c3daa08d6baf"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga190fff177accdfbc9c192c4993807e2e">oneStep</a> (const double &amp;currentTime, const double &amp;stepSize, double &amp;value)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out a one step integration of the model.  <a href="#ga190fff177accdfbc9c192c4993807e2e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga18b4fbd0dc5aa3f25d58367a406f425c">getTimeStart</a> (double &amp;timeStart)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the current time start.  <a href="#ga18b4fbd0dc5aa3f25d58367a406f425c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga451e7ecddd0431316048a332410b0600">getTimeEnd</a> (double &amp;timeEnd)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the current time end.  <a href="#ga451e7ecddd0431316048a332410b0600"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#gacd9cb734773710f640742a9f040dccc5">getNumPoints</a> (int &amp;numPoints)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value of the current number of points.  <a href="#gacd9cb734773710f640742a9f040dccc5"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Read and write models to files or strings. Support for SBML formats. </p>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="gacd9cb734773710f640742a9f040dccc5"></a><!-- doxytag: member="rr_c_api.h::getNumPoints" ref="gacd9cb734773710f640742a9f040dccc5" args="(int &amp;numPoints)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC bool rrCallConv getNumPoints </td>
-          <td>(</td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>numPoints</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the value of the current number of points. </p>
-<p>Example: status = getNumPoints (&amp;numberOfPoints);</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">int*</td><td>numPoints The current value for the number of points </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="ga05a79ded419b52fa2965fce1700c0e82"></a><!-- doxytag: member="rr_c_api.h::getSBML" ref="ga05a79ded419b52fa2965fce1700c0e82" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -164,80 +106,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retrieve the last SBML model that was loaded. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>char* Returns null is the call fails, otherwise returns a pointer to the SBML string </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga1db0b86ed7fd0d6e19f8df85b7577253"></a><!-- doxytag: member="rr_c_api.h::getSelectionList" ref="ga1db0b86ed7fd0d6e19f8df85b7577253" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getSelectionList </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the current selection list for <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or <a class="el" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx()</a> </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>char* A list of symbol names indicating the current selection list </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga451e7ecddd0431316048a332410b0600"></a><!-- doxytag: member="rr_c_api.h::getTimeEnd" ref="ga451e7ecddd0431316048a332410b0600" args="(double &amp;timeEnd)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC bool rrCallConv getTimeEnd </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>timeEnd</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the value of the current time end. </p>
-<p>Example: status = getTimeStart (&amp;timeEnd);</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">double*</td><td>timeStart The current value for the time end </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga18b4fbd0dc5aa3f25d58367a406f425c"></a><!-- doxytag: member="rr_c_api.h::getTimeStart" ref="ga18b4fbd0dc5aa3f25d58367a406f425c" args="(double &amp;timeStart)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC bool rrCallConv getTimeStart </td>
-          <td>(</td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>timeStart</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the value of the current time start. </p>
-<p>Example: status = getTimeStart (&amp;timeStart);</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">double*</td><td>timeStart The current value for the time start </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null is the call fails, otherwise returns a pointer to the SBML string </dd></dl>
 
 </div>
 </div>
@@ -259,11 +128,11 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <p>Create a model from an SBML string. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">char*</td><td>sbml string </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sbml</td><td>string </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>bool Returns true if sucessful </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if sucessful </dd></dl>
 
 </div>
 </div>
@@ -293,212 +162,6 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 </div>
 </div>
-<a class="anchor" id="ga190fff177accdfbc9c192c4993807e2e"></a><!-- doxytag: member="rr_c_api.h::oneStep" ref="ga190fff177accdfbc9c192c4993807e2e" args="(const double &amp;currentTime, const double &amp;stepSize, double &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC bool rrCallConv oneStep </td>
-          <td>(</td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>currentTime</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>stepSize</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Carry out a one step integration of the model. </p>
-<p>Example: status = OneStep (&amp;currentTime, &amp;timeStep, &amp;newTimeStep);</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">double*</td><td>currentTime The current time in the simulation </td></tr>
-    <tr><td class="paramname">double*</td><td>stepSize The step size to use in the integration </td></tr>
-    <tr><td class="paramname">double*</td><td>The new time (currentTime + stepSize) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns True if successful </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga448ead53bb8913de664cc8ad675b4197"></a><!-- doxytag: member="rr_c_api.h::setNumPoints" ref="ga448ead53bb8913de664cc8ad675b4197" args="(const int &amp;nrPoints)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC bool rrCallConv setNumPoints </td>
-          <td>(</td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>nrPoints</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Set the number of points to generate in a simulation. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">const</td><td>int&amp; Number of points to generate </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>bool Returns True if sucessful </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga6465c94b6dfed39a6ef614bd0a68cb9b"></a><!-- doxytag: member="rr_c_api.h::setSelectionList" ref="ga6465c94b6dfed39a6ef614bd0a68cb9b" args="(const char *list)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC bool rrCallConv setSelectionList </td>
-          <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>list</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Set the selection list for output from <a class="el" href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">simulate()</a> or <a class="el" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf" title="Carry out a time-course simulation based on the given arguments.">simulateEx()</a> </p>
-<p>Example: setSelectionList ("Time, S1, J1, J2")</p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">const</td><td>char* A string of names separated by spaces or comma characters </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>bool Returns True if sucessful </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga1313e21d622cd846bdd75071e965eb6c"></a><!-- doxytag: member="rr_c_api.h::setTimeEnd" ref="ga1313e21d622cd846bdd75071e965eb6c" args="(const double &amp;timeEnd)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC bool rrCallConv setTimeEnd </td>
-          <td>(</td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>timeEnd</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Set the time end for a simulation. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">const</td><td>double&amp; time start </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>bool Returns True if sucessful </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga1a636a76ad610d99fe1c780bb3d9296d"></a><!-- doxytag: member="rr_c_api.h::setTimeStart" ref="ga1a636a76ad610d99fe1c780bb3d9296d" args="(const double &amp;timeStart)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC bool rrCallConv setTimeStart </td>
-          <td>(</td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>timeStart</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Set the time start for a simulation. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">const</td><td>double&amp; time start </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>bool Returns True if sucessful </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga9f0555c11716daec2336d54d13facc57"></a><!-- doxytag: member="rr_c_api.h::simulate" ref="ga9f0555c11716daec2336d54d13facc57" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> rrCallConv simulate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Carry out a time-course simulation, use setTimeStart etc to set characteristics. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>RRResultHandle Returns an array containing the results of the simulation </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga9b87919e79f6eb0d7c77c3daa08d6baf"></a><!-- doxytag: member="rr_c_api.h::simulateEx" ref="ga9b87919e79f6eb0d7c77c3daa08d6baf" args="(const double &amp;timeStart, const double &amp;timeEnd, const int &amp;numberOfPoints)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> rrCallConv simulateEx </td>
-          <td>(</td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>timeStart</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>timeEnd</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>numberOfPoints</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Carry out a time-course simulation based on the given arguments. </p>
-<p>Example: m = simulateEx (0, 25, 200);</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>RRResultHandle Returns an array containing the results of the simulation </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="ga7d683d70e6966107f81a3e8c547bcd76"></a><!-- doxytag: member="rr_c_api.h::writeSBML" ref="ga7d683d70e6966107f81a3e8c547bcd76" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -513,14 +176,8 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Retrive the current state of the model in the form of an SBML string. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">char*</td><td>file name </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>bool Returns null is the call fails, otherwise returns a pointer to the SBML string </dd></dl>
+<p>Retrieve the <b>current state</b> of the model in the form of an SBML string. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null is the call fails, otherwise returns a pointer to the SBML string </dd></dl>
 
 </div>
 </div>
@@ -542,7 +199,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 11:17:16 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -74,9 +74,102 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 
-<p>set and get global and local parameters  
+<p>Set and get global and local parameters.  
 <a href="#details">More...</a></p>
-<p>set and get global and local parameters </p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="member-group"></a>
+Utility routines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaf4be0a5e72db408248569a1d3e28c1f0">getGlobalParameterValues</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve in a vector the values for all the lgobal parameter values.  <a href="#gaf4be0a5e72db408248569a1d3e28c1f0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga65d9546856e5526fc403539903039f8e">setGlobalParameterByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value for a particular global parameter.  <a href="#ga65d9546856e5526fc403539903039f8e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2f33a70dfd6c68fb585cf5d1a9c1339c"></a><!-- doxytag: member="parameters::getNumberOfGlobalParameters" ref="ga2f33a70dfd6c68fb585cf5d1a9c1339c" args="()" -->
+C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga2f33a70dfd6c68fb585cf5d1a9c1339c">getNumberOfGlobalParameters</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of global parameters in the model. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gabb7dd0b1f55a9f1c5ded728aa202027e">getGlobalParameterNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of global parameter names.  <a href="#gabb7dd0b1f55a9f1c5ded728aa202027e"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<p>Set and get global and local parameters. </p>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="gabb7dd0b1f55a9f1c5ded728aa202027e"></a><!-- doxytag: member="rr_c_api.h::getGlobalParameterNames" ref="gabb7dd0b1f55a9f1c5ded728aa202027e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getGlobalParameterNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of global parameter names. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaf4be0a5e72db408248569a1d3e28c1f0"></a><!-- doxytag: member="rr_c_api.h::getGlobalParameterValues" ref="gaf4be0a5e72db408248569a1d3e28c1f0" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv getGlobalParameterValues </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve in a vector the values for all the lgobal parameter values. </p>
+<p>Example: RRVectorHandle values = getGlobalParameterValues ();</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns the vector of global parameter values or null if an error occured </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga65d9546856e5526fc403539903039f8e"></a><!-- doxytag: member="rr_c_api.h::setGlobalParameterByIndex" ref="ga65d9546856e5526fc403539903039f8e" args="(const int &amp;index, const double &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv setGlobalParameterByIndex </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the value for a particular global parameter. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int*</td><td>index - The index to the global parameter </td></tr>
+    <tr><td class="paramname">double*</td><td>value - The value of the parameter to set </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>bool status - Returns true if successful </dd></dl>
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -95,7 +188,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 11:17:16 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

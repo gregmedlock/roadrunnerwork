@@ -103,7 +103,7 @@ Introduction</h2>
         printf(<span class="stringliteral">&quot;Output table has %i rows and %i columns\n&quot;</span>, output-&gt;<a class="code" href="struct_r_r_result.html#a4d8512c879223c0e0d1522dae38e7819">RSize</a>, output-&gt;RCols);
         printResult (output);
         
-        <a class="code" href="rr__c__api_8cpp.html#a8a98df91a3b072fa1af8e03afe406a22">freeResult</a> (output);
+        freeResult (output);
         freeRrInstance (rrInstance)
 
         return 0;
@@ -129,7 +129,7 @@ Installation</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 11:17:16 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

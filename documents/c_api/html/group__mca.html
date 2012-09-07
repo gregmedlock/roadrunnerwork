@@ -76,7 +76,444 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Calculate control coefficients and sensitivities.  
 <a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="member-group"></a>
+Utility routines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <br class="typebreak"/>
+<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga35b2d80dfae3ffba81a45a485e30b22e">getElasticityCoefficientNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of elasticity coefficient names.  <a href="#ga35b2d80dfae3ffba81a45a485e30b22e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <br class="typebreak"/>
+<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga9451fdf700b80288c0d664193eef4421">getUnscaledFluxControlCoefficientNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of unscaled flux control coefficient names.  <a href="#ga9451fdf700b80288c0d664193eef4421"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <br class="typebreak"/>
+<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga5d72e660bc33c6cbb93aadd603015563">getFluxControlCoefficientNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of flux control coefficient names.  <a href="#ga5d72e660bc33c6cbb93aadd603015563"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <br class="typebreak"/>
+<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga4cd50e9e57140cb5fd69483bc6b0656e">getUnscaledConcentrationControlCoefficientNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of unscaled concentration control coefficient names.  <a href="#ga4cd50e9e57140cb5fd69483bc6b0656e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <br class="typebreak"/>
+<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gac65874848b588a8c87ac04705eb88cbc">getConcentrationControlCoefficientNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of concentration coefficient names.  <a href="#gac65874848b588a8c87ac04705eb88cbc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga82cf39ff64eb0446c9f5a2e772283323">getUnScaledElasticityMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the unscaled elasticity matrix for the current model.  <a href="#ga82cf39ff64eb0446c9f5a2e772283323"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaf8431784ec5c2ce1d0416606056f3d44">getScaledElasticityMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the scaled elasticity matrix for the current model.  <a href="#gaf8431784ec5c2ce1d0416606056f3d44"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga418c0108d37bc4f35a55291ca85e0a3f">getUnscaledConcentrationControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of unscaled concentration control coefficients for the current model.  <a href="#ga418c0108d37bc4f35a55291ca85e0a3f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gad28644ca7615c71725056028a0a048ba">getScaledConcentrationControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of scaled concentration control coefficients for the current model.  <a href="#gad28644ca7615c71725056028a0a048ba"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga4b464166bb67773916067bc7e190a338">getUnscaledFluxControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of unscaled flux control coefficients for the current model.  <a href="#ga4b464166bb67773916067bc7e190a338"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gad63647a85b299d463b1e4cd5671d0881">getScaledFluxControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of scaled flux control coefficients for the current model.  <a href="#gad63647a85b299d463b1e4cd5671d0881"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga6655b7aebdc9e6fad4e7a54e3de9195d">getuCC</a> (const char *variable, const char *parameter, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single unscaled control coefficient.  <a href="#ga6655b7aebdc9e6fad4e7a54e3de9195d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga49c703842a069c37fa472f2740dd514b">getCC</a> (const char *variable, const char *parameter, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single control coefficient.  <a href="#ga49c703842a069c37fa472f2740dd514b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga761a98e3635d75c8505f516a0b2384b1">getEE</a> (const char *name, const char *species, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single elasticity coefficient.  <a href="#ga761a98e3635d75c8505f516a0b2384b1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gadf71d426da852cdf931022fa56a3acb0">getuEE</a> (const char *name, const char *species, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single unscaled elasticity coefficient.  <a href="#gadf71d426da852cdf931022fa56a3acb0"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Calculate control coefficients and sensitivities. </p>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="ga49c703842a069c37fa472f2740dd514b"></a><!-- doxytag: member="rr_c_api.h::getCC" ref="ga49c703842a069c37fa472f2740dd514b" args="(const char *variable, const char *parameter, double &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv getCC </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>variable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>parameter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retireve a single control coefficient. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">variable</td><td>This is the dependent variable of the coefficient, for example a flux or species concentration </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">parameter</td><td>This is the independent parameter, for example a kinetic constant or boundary species </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">value</td><td>This is the value of the control coefficeint returns to the caller </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if successful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gac65874848b588a8c87ac04705eb88cbc"></a><!-- doxytag: member="rr_c_api.h::getConcentrationControlCoefficientNames" ref="gac65874848b588a8c87ac04705eb88cbc" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv getConcentrationControlCoefficientNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of concentration coefficient names. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga761a98e3635d75c8505f516a0b2384b1"></a><!-- doxytag: member="rr_c_api.h::getEE" ref="ga761a98e3635d75c8505f516a0b2384b1" args="(const char *name, const char *species, double &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv getEE </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retireve a single elasticity coefficient. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">variable</td><td>This is the reaction variable for the elasticity </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">parameter</td><td>This is the independent parameter, for example a floating of boundary species </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">value</td><td>This is the value of the elasticity coefficient returns to the caller </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if successful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga35b2d80dfae3ffba81a45a485e30b22e"></a><!-- doxytag: member="rr_c_api.h::getElasticityCoefficientNames" ref="ga35b2d80dfae3ffba81a45a485e30b22e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv getElasticityCoefficientNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of elasticity coefficient names. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga5d72e660bc33c6cbb93aadd603015563"></a><!-- doxytag: member="rr_c_api.h::getFluxControlCoefficientNames" ref="ga5d72e660bc33c6cbb93aadd603015563" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv getFluxControlCoefficientNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of flux control coefficient names. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gad28644ca7615c71725056028a0a048ba"></a><!-- doxytag: member="rr_c_api.h::getScaledConcentrationControlCoefficientMatrix" ref="gad28644ca7615c71725056028a0a048ba" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv getScaledConcentrationControlCoefficientMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retreive the matrix of scaled concentration control coefficients for the current model. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of scaled concentration control coefficients The first column will contain the real values and the second column the imaginary values </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaf8431784ec5c2ce1d0416606056f3d44"></a><!-- doxytag: member="rr_c_api.h::getScaledElasticityMatrix" ref="gaf8431784ec5c2ce1d0416606056f3d44" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv getScaledElasticityMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retreive the scaled elasticity matrix for the current model. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>RRMatrixHandle matrix - Returns nil if it fails, otherwise returns a matrix of scaled elasticities. The first column will contain the real values and the second column the imaginary values </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gad63647a85b299d463b1e4cd5671d0881"></a><!-- doxytag: member="rr_c_api.h::getScaledFluxControlCoefficientMatrix" ref="gad63647a85b299d463b1e4cd5671d0881" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv getScaledFluxControlCoefficientMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retreive the matrix of scaled flux control coefficients for the current model. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of scaled flux control coefficients The first column will contain the real values and the second column the imaginary values </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga6655b7aebdc9e6fad4e7a54e3de9195d"></a><!-- doxytag: member="rr_c_api.h::getuCC" ref="ga6655b7aebdc9e6fad4e7a54e3de9195d" args="(const char *variable, const char *parameter, double &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv getuCC </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>variable</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>parameter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retireve a single unscaled control coefficient. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">variable</td><td>This is the dependent variable of the coefficient, for example a flux or species concentration </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">parameter</td><td>This is the independent parameter, for example a kinetic constant or boundary species </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">value</td><td>This is the value of the unscaled control coefficeint returns to the caller </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if successful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gadf71d426da852cdf931022fa56a3acb0"></a><!-- doxytag: member="rr_c_api.h::getuEE" ref="gadf71d426da852cdf931022fa56a3acb0" args="(const char *name, const char *species, double &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv getuEE </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>species</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retireve a single unscaled elasticity coefficient. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">variable</td><td>This is the reaction variable for the unscaled elasticity </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">parameter</td><td>This is the independent parameter, for example a floating of boundary species </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">value</td><td>This is the value of the unscaled elasticity coefficient returns to the caller </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if successful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga418c0108d37bc4f35a55291ca85e0a3f"></a><!-- doxytag: member="rr_c_api.h::getUnscaledConcentrationControlCoefficientMatrix" ref="ga418c0108d37bc4f35a55291ca85e0a3f" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv getUnscaledConcentrationControlCoefficientMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retreive the matrix of unscaled concentration control coefficients for the current model. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>RRMatrixHandle matrix - Returns nil if it fails, otherwise returns a matrix of unscaled concentration control coefficients The first column will contain the real values and the second column the imaginary values </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga4cd50e9e57140cb5fd69483bc6b0656e"></a><!-- doxytag: member="rr_c_api.h::getUnscaledConcentrationControlCoefficientNames" ref="ga4cd50e9e57140cb5fd69483bc6b0656e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv getUnscaledConcentrationControlCoefficientNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of unscaled concentration control coefficient names. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga82cf39ff64eb0446c9f5a2e772283323"></a><!-- doxytag: member="rr_c_api.h::getUnScaledElasticityMatrix" ref="ga82cf39ff64eb0446c9f5a2e772283323" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv getUnScaledElasticityMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retreive the unscaled elasticity matrix for the current model. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>RRMatrixHandle matrix - Returns nil if it fails, otherwise returns a matrix of unscaled elasticities The first column will contain the real values and the second column the imaginary values </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga4b464166bb67773916067bc7e190a338"></a><!-- doxytag: member="rr_c_api.h::getUnscaledFluxControlCoefficientMatrix" ref="ga4b464166bb67773916067bc7e190a338" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv getUnscaledFluxControlCoefficientMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retreive the matrix of unscaled flux control coefficients for the current model. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of unscaled flux control coefficients The first column will contain the real values and the second column the imaginary values </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga9451fdf700b80288c0d664193eef4421"></a><!-- doxytag: member="rr_c_api.h::getUnscaledFluxControlCoefficientNames" ref="ga9451fdf700b80288c0d664193eef4421" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv getUnscaledFluxControlCoefficientNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of unscaled flux control coefficient names. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -95,7 +532,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 11:17:16 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

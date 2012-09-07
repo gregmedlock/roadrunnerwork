@@ -74,9 +74,163 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 
-<p>set and get information on compartments  
+<p><b> Set and Get information on compartments </b> 
 <a href="#details">More...</a></p>
-<p>set and get information on compartments </p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="member-group"></a>
+Utility routines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga5241b915cff8bcabba3024c33fb4e336">getCompartmentByIndex</a> (const int &amp;index, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the compartment volume for a particular compartment.  <a href="#ga5241b915cff8bcabba3024c33fb4e336"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gadb238a943d93bc9548bf5c3cd452e9bb">setCompartmentByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the volume for a particular compartment.  <a href="#gadb238a943d93bc9548bf5c3cd452e9bb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5ea2479b882549edd4fb75397ca38f52"></a><!-- doxytag: member="compartment::getNumberOfCompartments" ref="ga5ea2479b882549edd4fb75397ca38f52" args="()" -->
+C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga5ea2479b882549edd4fb75397ca38f52">getNumberOfCompartments</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of compartments in the model. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gafe6030585929ca78c5ce6d3944b11a1a">getReactionNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of reaction Ids.  <a href="#gafe6030585929ca78c5ce6d3944b11a1a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga1b676408037364f621f5bcb49a0f1474">getRateOfChangeNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of rate of change names.  <a href="#ga1b676408037364f621f5bcb49a0f1474"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gafe31d3b684c51fb829c1770898bc1e5d">getCompartmentNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of compartment Ids.  <a href="#gafe31d3b684c51fb829c1770898bc1e5d"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
+<p><b> Set and Get information on compartments </b></p>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="ga5241b915cff8bcabba3024c33fb4e336"></a><!-- doxytag: member="rr_c_api.h::getCompartmentByIndex" ref="ga5241b915cff8bcabba3024c33fb4e336" args="(const int &amp;index, double &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv getCompartmentByIndex </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the compartment volume for a particular compartment. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int*</td><td>index - The index to the compartment (corresponds to position in <a class="el" href="group__compartment.html#gafe31d3b684c51fb829c1770898bc1e5d" title="Obtain the list of compartment Ids.">getCompartmentNames()</a>) </td></tr>
+    <tr><td class="paramname">double*</td><td>value - The value returned by the method </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>bool status - Returns true if successful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gafe31d3b684c51fb829c1770898bc1e5d"></a><!-- doxytag: member="rr_c_api.h::getCompartmentNames" ref="gafe31d3b684c51fb829c1770898bc1e5d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getCompartmentNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of compartment Ids. </p>
+<p>Example: str = getCompartmentIds ();</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns -1 if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga1b676408037364f621f5bcb49a0f1474"></a><!-- doxytag: member="rr_c_api.h::getRateOfChangeNames" ref="ga1b676408037364f621f5bcb49a0f1474" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getRateOfChangeNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of rate of change names. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gafe6030585929ca78c5ce6d3944b11a1a"></a><!-- doxytag: member="rr_c_api.h::getReactionNames" ref="gafe6030585929ca78c5ce6d3944b11a1a" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getReactionNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of reaction Ids. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gadb238a943d93bc9548bf5c3cd452e9bb"></a><!-- doxytag: member="rr_c_api.h::setCompartmentByIndex" ref="gadb238a943d93bc9548bf5c3cd452e9bb" args="(const int &amp;index, const double &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv setCompartmentByIndex </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the volume for a particular compartment. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int*</td><td>index - The index to the compartment (corresponds to position in <a class="el" href="group__compartment.html#gafe31d3b684c51fb829c1770898bc1e5d" title="Obtain the list of compartment Ids.">getCompartmentNames()</a>) </td></tr>
+    <tr><td class="paramname">double*</td><td>value - The volume of the compartment to set </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>bool status - Returns true if successful </dd></dl>
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -95,7 +249,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 11:17:16 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

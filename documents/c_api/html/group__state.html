@@ -78,22 +78,85 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="member-group"></a>
-Retrieve reaction rate information</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#gae25399f84ff2d1fda619358a1af9a1b5">getNumberOfReactions</a> ()</td></tr>
+Utility routines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8c67bc930b33926bccb3c9f810dc2825"></a><!-- doxytag: member="state::getValue" ref="ga8c67bc930b33926bccb3c9f810dc2825" args="(const char *speciesID, double &amp;value)" -->
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga8c67bc930b33926bccb3c9f810dc2825">getValue</a> (const char *speciesID, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">TO BE DONE. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8663bcca2b00ef20c13841ca9fc9f56c"></a><!-- doxytag: member="state::setValue" ref="ga8663bcca2b00ef20c13841ca9fc9f56c" args="(const char *speciesId, const double &amp;val)" -->
+C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga8663bcca2b00ef20c13841ca9fc9f56c">setValue</a> (const char *speciesId, const double &amp;val)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">TO BE DONE. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gae25399f84ff2d1fda619358a1af9a1b5">getNumberOfReactions</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the number of reactions in the loaded model.  <a href="#gae25399f84ff2d1fda619358a1af9a1b5"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga0a7be404315c6001627ee26e738e11e2"></a><!-- doxytag: member="state::getReactionRate" ref="ga0a7be404315c6001627ee26e738e11e2" args="(const int &amp;, double &amp;rate)" -->
-C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getReactionRate</b> (const int &amp;, double &amp;rate)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga86d544bcf3eeaa4698a60123a3da69aa"></a><!-- doxytag: member="state::getReactionRates" ref="ga86d544bcf3eeaa4698a60123a3da69aa" args="()" -->
-C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getReactionRates</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaa03d9414ddeb177a76365dd5b2d0042e"></a><!-- doxytag: member="state::getReactionRatesEx" ref="gaa03d9414ddeb177a76365dd5b2d0042e" args="(const RRVectorHandle vec)" -->
-C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getReactionRatesEx</b> (const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vec)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga3fbb7c2fab261f25a3871f1caf398ff1">evalModel</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the current models, that it update all assignments and rates of change.  <a href="#ga3fbb7c2fab261f25a3871f1caf398ff1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga313f81d4fae0ece305eb1246543bcdc3">getEigenValueNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of eigenvalue names.  <a href="#ga313f81d4fae0ece305eb1246543bcdc3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a21a10f01ac4fd34c61e7e7d12af9891d">RRArrayList2Handle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaa06a430f57d4df400e58fd954766901c">getAvailableSymbols</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of al avialable symbols.  <a href="#gaa06a430f57d4df400e58fd954766901c"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Compute derivatives, fluxes, and other values of the system at the current state. </p>
 <p>steadystate Compute and obtain basic information about the steady state </p>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="ga3fbb7c2fab261f25a3871f1caf398ff1"></a><!-- doxytag: member="rr_c_api.h::evalModel" ref="ga3fbb7c2fab261f25a3871f1caf398ff1" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv evalModel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Evaluate the current models, that it update all assignments and rates of change. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>bool status - Returns false if it fails </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaa06a430f57d4df400e58fd954766901c"></a><!-- doxytag: member="rr_c_api.h::getAvailableSymbols" ref="gaa06a430f57d4df400e58fd954766901c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a21a10f01ac4fd34c61e7e7d12af9891d">RRArrayList2Handle</a> rrCallConv getAvailableSymbols </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of al avialable symbols. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns -1 if it fails, if succesful it returns a pointer to a RRArrayList2Handle struct </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga313f81d4fae0ece305eb1246543bcdc3"></a><!-- doxytag: member="rr_c_api.h::getEigenValueNames" ref="ga313f81d4fae0ece305eb1246543bcdc3" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getEigenValueNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Obtain the list of eigenvalue names. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns -1 if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="gae25399f84ff2d1fda619358a1af9a1b5"></a><!-- doxytag: member="rr_c_api.h::getNumberOfReactions" ref="gae25399f84ff2d1fda619358a1af9a1b5" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -110,7 +173,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getReactionRate
 
 <p>Obtain the number of reactions in the loaded model. </p>
 <p>Example: number = getNumberOfReactions ();</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>int value - Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions </dd></dl>
 
 </div>
 </div>
@@ -132,7 +195,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getReactionRate
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 11:17:16 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

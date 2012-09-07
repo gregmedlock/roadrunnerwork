@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>cRoadRunner: C:/Users/hsauro/Documents/Visual Studio 2010/Projects/cRoadRunnerPlusRelease/trunk/Wrappers/C/rr_c_api.cpp File Reference</title>
+<title>cRoadRunner: C:/Users/hsauro/Documents/Visual Studio 2010/Projects/cRoadRunner/Wrappers/C/rr_c_api.cpp File Reference</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -79,7 +79,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">C:/Users/hsauro/Documents/Visual Studio 2010/Projects/cRoadRunnerPlusRelease/trunk/Wrappers/C/rr_c_api.cpp File Reference</div>  </div>
+<div class="title">C:/Users/hsauro/Documents/Visual Studio 2010/Projects/cRoadRunner/Wrappers/C/rr_c_api.cpp File Reference</div>  </div>
 </div>
 <div class="contents">
 
@@ -115,8 +115,9 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gab4695b0f4b2ef3b91f545302de0337a2">getCopyright</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current copyright notice for the library.  <a href="group__utility.html#gab4695b0f4b2ef3b91f545302de0337a2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga7d683d70e6966107f81a3e8c547bcd76">writeSBML</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrive the current state of the model in the form of an SBML string.  <a href="group__loadsave.html#ga7d683d70e6966107f81a3e8c547bcd76"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#a60a2c1825b2da9e8f33357a07cb756aa">setComputeAndAssignConservationLaws</a> (const bool &amp;OnOrOff)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the <b>current state</b> of the model in the form of an SBML string.  <a href="group__loadsave.html#ga7d683d70e6966107f81a3e8c547bcd76"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a60a2c1825b2da9e8f33357a07cb756aa"></a><!-- doxytag: member="rr_c_api.cpp::setComputeAndAssignConservationLaws" ref="a60a2c1825b2da9e8f33357a07cb756aa" args="(const bool &amp;OnOrOff)" -->
+bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setComputeAndAssignConservationLaws</b> (const bool &amp;OnOrOff)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga957837fdd4683d56ef29c56ad701a0ba">setTempFolder</a> (const char *folder)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">SEt the temporary folder.  <a href="group__utility.html#ga957837fdd4683d56ef29c56ad701a0ba"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gad8e35b98b406e9c998e33ec21248da8a">getTempFolder</a> ()</td></tr>
@@ -147,27 +148,32 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out a time-course simulation, use setTimeStart etc to set characteristics.  <a href="group__simulation.html#ga9f0555c11716daec2336d54d13facc57"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf">simulateEx</a> (const double &amp;timeStart, const double &amp;timeEnd, const int &amp;numberOfPoints)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out a time-course simulation based on the given arguments.  <a href="group__simulation.html#ga9b87919e79f6eb0d7c77c3daa08d6baf"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#ae477af0850ffcc5ecfec69fc86878c3e">getReactionNames</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#a9863b43a97bf7f77f545469e5a5d3203">getRatesOfChange</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a799007760d23bf52e8eeda2700adec69"></a><!-- doxytag: member="rr_c_api.cpp::getRatesOfChangeNames" ref="a799007760d23bf52e8eeda2700adec69" args="()" -->
-<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getRatesOfChangeNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#afb12aaba0b161b696da6bfb5e5b92770">getValue</a> (const char *speciesID, double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ba17009f2105ecb952c626c269a5d91"></a><!-- doxytag: member="rr_c_api.cpp::getUnScaledElasticityMatrix" ref="a6ba17009f2105ecb952c626c269a5d91" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getUnScaledElasticityMatrix</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a34d11371d4922bc70a85a7d3f28ff7"></a><!-- doxytag: member="rr_c_api.cpp::getScaledElasticityMatrix" ref="a7a34d11371d4922bc70a85a7d3f28ff7" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getScaledElasticityMatrix</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa89e05b6859c6c75c7911136c0b87363"></a><!-- doxytag: member="rr_c_api.cpp::setValue" ref="aa89e05b6859c6c75c7911136c0b87363" args="(const char *speciesID, const double &amp;val)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setValue</b> (const char *speciesID, const double &amp;val)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa632a4a6c53e798e32b57d0c59d55e41"></a><!-- doxytag: member="rr_c_api.cpp::getStoichiometryMatrix" ref="aa632a4a6c53e798e32b57d0c59d55e41" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getStoichiometryMatrix</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a25d93927f309eae67e04cd958c6689c3"></a><!-- doxytag: member="rr_c_api.cpp::getConservationMatrix" ref="a25d93927f309eae67e04cd958c6689c3" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getConservationMatrix</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e16540c8f6591a9ee187aa59d2b4858"></a><!-- doxytag: member="rr_c_api.cpp::getLinkMatrix" ref="a9e16540c8f6591a9ee187aa59d2b4858" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getLinkMatrix</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7c123eac51f2c5e36a52fe1fbf4cb164"></a><!-- doxytag: member="rr_c_api.cpp::getL0Matrix" ref="a7c123eac51f2c5e36a52fe1fbf4cb164" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getL0Matrix</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab28801d5095c1b9e4f8c45c52efe1dde"></a><!-- doxytag: member="rr_c_api.cpp::getNrMatrix" ref="ab28801d5095c1b9e4f8c45c52efe1dde" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getNrMatrix</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__compartment.html#gafe6030585929ca78c5ce6d3944b11a1a">getReactionNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of reaction Ids.  <a href="group__compartment.html#gafe6030585929ca78c5ce6d3944b11a1a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rate_of_change.html#gabbe129bee63761f7b0f98f060b86067b">getRatesOfChange</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the vector of rates of change.  <a href="group__rate_of_change.html#gabbe129bee63761f7b0f98f060b86067b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rate_of_change.html#gaf9d5b185617519ceff1a018d9009c0fd">getRatesOfChangeNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the string list of rates of change names.  <a href="group__rate_of_change.html#gaf9d5b185617519ceff1a018d9009c0fd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8c67bc930b33926bccb3c9f810dc2825"></a><!-- doxytag: member="rr_c_api.cpp::getValue" ref="ga8c67bc930b33926bccb3c9f810dc2825" args="(const char *speciesID, double &amp;value)" -->
+bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#ga8c67bc930b33926bccb3c9f810dc2825">getValue</a> (const char *speciesID, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">TO BE DONE. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga82cf39ff64eb0446c9f5a2e772283323">getUnScaledElasticityMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the unscaled elasticity matrix for the current model.  <a href="group__mca.html#ga82cf39ff64eb0446c9f5a2e772283323"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#gaf8431784ec5c2ce1d0416606056f3d44">getScaledElasticityMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the scaled elasticity matrix for the current model.  <a href="group__mca.html#gaf8431784ec5c2ce1d0416606056f3d44"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga8663bcca2b00ef20c13841ca9fc9f56c"></a><!-- doxytag: member="rr_c_api.cpp::setValue" ref="ga8663bcca2b00ef20c13841ca9fc9f56c" args="(const char *speciesID, const double &amp;val)" -->
+bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#ga8663bcca2b00ef20c13841ca9fc9f56c">setValue</a> (const char *speciesID, const double &amp;val)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">TO BE DONE. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___stoich.html#gad361175745409d5b6670b8a8996a6d59">getStoichiometryMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the stoichiometry matrix for the current model.  <a href="group___stoich.html#gad361175745409d5b6670b8a8996a6d59"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___stoich.html#gafd1bcae76af0d5d6ccf7af7bd098de23">getConservationMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the conservation matrix for the current model.  <a href="group___stoich.html#gafd1bcae76af0d5d6ccf7af7bd098de23"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___stoich.html#gae8e8c6ede9f60e33dcdc190c061ce3f8">getLinkMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the Link matrix for the current model.  <a href="group___stoich.html#gae8e8c6ede9f60e33dcdc190c061ce3f8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___stoich.html#ga587ae0ec7e6e7f8b2576bacf700eedcd">getL0Matrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the L9 matrix for the current model.  <a href="group___stoich.html#ga587ae0ec7e6e7f8b2576bacf700eedcd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___stoich.html#ga57b4c651ecffb52d28886ce9e3b6e6ed">getNrMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the reduced stoichiometry matrix for the current model.  <a href="group___stoich.html#ga57b4c651ecffb52d28886ce9e3b6e6ed"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga1066caa37a0d7dca6146efd756d058c8">hasError</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if there is an error string to retrieve.  <a href="group__errorfunctions.html#ga1066caa37a0d7dca6146efd756d058c8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga34d1ec9db4032749cde607b4f403f2b9">getLastError</a> ()</td></tr>
@@ -176,121 +182,132 @@ bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setValue</
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset all floating species concentrations to their intial conditions.  <a href="group__simulation.html#ga07dfaf16ab38015aab6b400665ace2b2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#gae25399f84ff2d1fda619358a1af9a1b5">getNumberOfReactions</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the number of reactions in the loaded model.  <a href="group__state.html#gae25399f84ff2d1fda619358a1af9a1b5"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a34aa5ee5d65218fcae2d7740dd8c1afc"></a><!-- doxytag: member="rr_c_api.cpp::getReactionRate" ref="a34aa5ee5d65218fcae2d7740dd8c1afc" args="(const int &amp;rateNr, double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getReactionRate</b> (const int &amp;rateNr, double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac6baa5083d5e92164bf30cd10c3e62d5"></a><!-- doxytag: member="rr_c_api.cpp::getReactionRates" ref="ac6baa5083d5e92164bf30cd10c3e62d5" args="()" -->
-<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getReactionRates</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0367d11dffa1f79be0143b45ba33c5c6"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfBoundarySpecies" ref="a0367d11dffa1f79be0143b45ba33c5c6" args="()" -->
-int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfBoundarySpecies</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afa6c810a7f7754d71b95b462896c79c8"></a><!-- doxytag: member="rr_c_api.cpp::getBoundarySpeciesNames" ref="afa6c810a7f7754d71b95b462896c79c8" args="()" -->
-<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getBoundarySpeciesNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86ea8d1933981940348379fcbdd54998"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfFloatingSpecies" ref="a86ea8d1933981940348379fcbdd54998" args="()" -->
-int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfFloatingSpecies</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8e909908668d111f9c3ce6d37d50a2fa"></a><!-- doxytag: member="rr_c_api.cpp::getFloatingSpeciesNames" ref="a8e909908668d111f9c3ce6d37d50a2fa" args="()" -->
-<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getFloatingSpeciesNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a64a51854287d0566f2138175aea33972"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfGlobalParameters" ref="a64a51854287d0566f2138175aea33972" args="()" -->
-int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfGlobalParameters</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afabc302c65386ba0a547069125f2ae97"></a><!-- doxytag: member="rr_c_api.cpp::getGlobalParameterNames" ref="afabc302c65386ba0a547069125f2ae97" args="()" -->
-<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getGlobalParameterNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a813af7b3fae24bcf977f89254831365e"></a><!-- doxytag: member="rr_c_api.cpp::getFloatingSpeciesConcentrations" ref="a813af7b3fae24bcf977f89254831365e" args="()" -->
-<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getFloatingSpeciesConcentrations</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8c0ab8c2fdc7adab238e77e6f916c64f"></a><!-- doxytag: member="rr_c_api.cpp::getBoundarySpeciesConcentrations" ref="a8c0ab8c2fdc7adab238e77e6f916c64f" args="()" -->
-<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getBoundarySpeciesConcentrations</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#ga0a7be404315c6001627ee26e738e11e2">getReactionRate</a> (const int &amp;rateNr, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a give reaction as indicated by the index parameter.  <a href="group__reaction.html#ga0a7be404315c6001627ee26e738e11e2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#ga86d544bcf3eeaa4698a60123a3da69aa">getReactionRates</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a vector of current reaction rates.  <a href="group__reaction.html#ga86d544bcf3eeaa4698a60123a3da69aa"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga17c851dfb27b9697ff286cc57d4cd10d"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfBoundarySpecies" ref="ga17c851dfb27b9697ff286cc57d4cd10d" args="()" -->
+int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__boundary.html#ga17c851dfb27b9697ff286cc57d4cd10d">getNumberOfBoundarySpecies</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of boundary species in the model. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__boundary.html#gac0cfb68966bfb2656477f643a7f6494d">getBoundarySpeciesNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of boundary species Ids.  <a href="group__boundary.html#gac0cfb68966bfb2656477f643a7f6494d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga9a96b81c58073caff01ea2c9e0f5e119"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfFloatingSpecies" ref="ga9a96b81c58073caff01ea2c9e0f5e119" args="()" -->
+int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__floating.html#ga9a96b81c58073caff01ea2c9e0f5e119">getNumberOfFloatingSpecies</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of floating species in the model. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__floating.html#ga468d9d0cc8489ae85f4fd78d9fab343e">getFloatingSpeciesNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of floating species Id.  <a href="group__floating.html#ga468d9d0cc8489ae85f4fd78d9fab343e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2f33a70dfd6c68fb585cf5d1a9c1339c"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfGlobalParameters" ref="ga2f33a70dfd6c68fb585cf5d1a9c1339c" args="()" -->
+int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parameters.html#ga2f33a70dfd6c68fb585cf5d1a9c1339c">getNumberOfGlobalParameters</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of global parameters in the model. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parameters.html#gabb7dd0b1f55a9f1c5ded728aa202027e">getGlobalParameterNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of global parameter names.  <a href="group__parameters.html#gabb7dd0b1f55a9f1c5ded728aa202027e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__floating.html#ga0db8fe5f89985f27ea4ddb3c595b16fd">getFloatingSpeciesConcentrations</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve in a vector the concentrations for all the floating species.  <a href="group__floating.html#ga0db8fe5f89985f27ea4ddb3c595b16fd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__boundary.html#gaae9b6b75211923bcf6f7196fe707c631">getBoundarySpeciesConcentrations</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve in a vector the concentrations for all the boundary species.  <a href="group__boundary.html#gaae9b6b75211923bcf6f7196fe707c631"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9d779bd8ed4135e086402d898081e608"></a><!-- doxytag: member="rr_c_api.cpp::getFloatingSpeciesInitialConcentrations" ref="a9d779bd8ed4135e086402d898081e608" args="()" -->
 <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getFloatingSpeciesInitialConcentrations</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16b4f9a9297d5542ddaa550dfd17513b"></a><!-- doxytag: member="rr_c_api.cpp::setFloatingSpeciesByIndex" ref="a16b4f9a9297d5542ddaa550dfd17513b" args="(const int &amp;index, const double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setFloatingSpeciesByIndex</b> (const int &amp;index, const double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8ffad797d70bcff66fd692d6d27f32f"></a><!-- doxytag: member="rr_c_api.cpp::setBoundarySpeciesByIndex" ref="ad8ffad797d70bcff66fd692d6d27f32f" args="(const int &amp;index, const double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setBoundarySpeciesByIndex</b> (const int &amp;index, const double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a90e8a297b0f0772136baeafa8373730a"></a><!-- doxytag: member="rr_c_api.cpp::setGlobalParameterByIndex" ref="a90e8a297b0f0772136baeafa8373730a" args="(const int &amp;index, const double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setGlobalParameterByIndex</b> (const int &amp;index, const double &amp;value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__floating.html#gaf4a5a4d9b1ecf60d4b98189b4bcf2543">setFloatingSpeciesByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the concentration for a particular floating species.  <a href="group__floating.html#gaf4a5a4d9b1ecf60d4b98189b4bcf2543"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__boundary.html#gabb6764fa48d0b3f2ca3b38e391479347">setBoundarySpeciesByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the concentration for a particular boundary species.  <a href="group__boundary.html#gabb6764fa48d0b3f2ca3b38e391479347"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parameters.html#ga65d9546856e5526fc403539903039f8e">setGlobalParameterByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value for a particular global parameter.  <a href="group__parameters.html#ga65d9546856e5526fc403539903039f8e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9f3d152f1d29ed66c0ff868a24e26c5"></a><!-- doxytag: member="rr_c_api.cpp::setFloatingSpeciesInitialConcentrations" ref="ae9f3d152f1d29ed66c0ff868a24e26c5" args="(const RRVector *vec)" -->
 bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setFloatingSpeciesInitialConcentrations</b> (const <a class="el" href="struct_r_r_vector.html">RRVector</a> *vec)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__simulation.html#ga190fff177accdfbc9c192c4993807e2e">oneStep</a> (const double &amp;currentTime, const double &amp;stepSize, double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Carry out a one step integration of the model.  <a href="group__simulation.html#ga190fff177accdfbc9c192c4993807e2e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5507d3939b233c737e28dd3eb076b10"></a><!-- doxytag: member="rr_c_api.cpp::getGlobalParameterValues" ref="ac5507d3939b233c737e28dd3eb076b10" args="()" -->
-<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getGlobalParameterValues</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a62bb67226ac0983aa98f5ae2b6e39221"></a><!-- doxytag: member="rr_c_api.cpp::getAvailableSymbols" ref="a62bb67226ac0983aa98f5ae2b6e39221" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a21a10f01ac4fd34c61e7e7d12af9891d">RRArrayList2Handle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getAvailableSymbols</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9cc6ef8f8c81fa522acdaae8fb692dd1"></a><!-- doxytag: member="rr_c_api.cpp::getBoundarySpeciesByIndex" ref="a9cc6ef8f8c81fa522acdaae8fb692dd1" args="(const int &amp;index, double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getBoundarySpeciesByIndex</b> (const int &amp;index, double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a239da499733254efffe97f19df387220"></a><!-- doxytag: member="rr_c_api.cpp::getFloatingSpeciesByIndex" ref="a239da499733254efffe97f19df387220" args="(const int &amp;index, double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getFloatingSpeciesByIndex</b> (const int &amp;index, double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5666c2b4b85e47d4a0361f309712020"></a><!-- doxytag: member="rr_c_api.cpp::getGlobalParameterByIndex" ref="ac5666c2b4b85e47d4a0361f309712020" args="(const int &amp;index, double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getGlobalParameterByIndex</b> (const int &amp;index, double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1b0ceb1b58ea7aed3431291e022e550a"></a><!-- doxytag: member="rr_c_api.cpp::getuCC" ref="a1b0ceb1b58ea7aed3431291e022e550a" args="(const char *variable, const char *parameter, double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getuCC</b> (const char *variable, const char *parameter, double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a817c4cd83841036772b9cfb64dc87b1a"></a><!-- doxytag: member="rr_c_api.cpp::getCC" ref="a817c4cd83841036772b9cfb64dc87b1a" args="(const char *variable, const char *parameter, double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getCC</b> (const char *variable, const char *parameter, double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aafb12206fd88dced9a829f93afc700c1"></a><!-- doxytag: member="rr_c_api.cpp::getuEE" ref="aafb12206fd88dced9a829f93afc700c1" args="(const char *name, const char *species, double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getuEE</b> (const char *name, const char *species, double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a439c3f790f5cb6cafd841219b29be73e"></a><!-- doxytag: member="rr_c_api.cpp::getEE" ref="a439c3f790f5cb6cafd841219b29be73e" args="(const char *name, const char *species, double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getEE</b> (const char *name, const char *species, double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a93f2ed2e10a81bdb92180e1a1e53c2fa"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfDependentSpecies" ref="a93f2ed2e10a81bdb92180e1a1e53c2fa" args="()" -->
-int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfDependentSpecies</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afd904ec6605b0fa942dd51f4f931dcbb"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfIndependentSpecies" ref="afd904ec6605b0fa942dd51f4f931dcbb" args="()" -->
-int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getNumberOfIndependentSpecies</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parameters.html#gaf4be0a5e72db408248569a1d3e28c1f0">getGlobalParameterValues</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve in a vector the values for all the lgobal parameter values.  <a href="group__parameters.html#gaf4be0a5e72db408248569a1d3e28c1f0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a21a10f01ac4fd34c61e7e7d12af9891d">RRArrayList2Handle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#gaa06a430f57d4df400e58fd954766901c">getAvailableSymbols</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of al avialable symbols.  <a href="group__state.html#gaa06a430f57d4df400e58fd954766901c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__boundary.html#gaccee3467307dbcedd031c1dc2cf57606">getBoundarySpeciesByIndex</a> (const int &amp;index, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the concentration for a particular floating species.  <a href="group__boundary.html#gaccee3467307dbcedd031c1dc2cf57606"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__floating.html#gab73fad6a1dfdb2b2d393964354d94c69">getFloatingSpeciesByIndex</a> (const int &amp;index, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the concentration for a particular floating species.  <a href="group__floating.html#gab73fad6a1dfdb2b2d393964354d94c69"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__floating.html#ga1aae76d21a054da6ed6cc734ad10287a">getGlobalParameterByIndex</a> (const int &amp;index, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the global parameter value.  <a href="group__floating.html#ga1aae76d21a054da6ed6cc734ad10287a"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga6655b7aebdc9e6fad4e7a54e3de9195d">getuCC</a> (const char *variable, const char *parameter, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single unscaled control coefficient.  <a href="group__mca.html#ga6655b7aebdc9e6fad4e7a54e3de9195d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga49c703842a069c37fa472f2740dd514b">getCC</a> (const char *variable, const char *parameter, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single control coefficient.  <a href="group__mca.html#ga49c703842a069c37fa472f2740dd514b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#gadf71d426da852cdf931022fa56a3acb0">getuEE</a> (const char *name, const char *species, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single unscaled elasticity coefficient.  <a href="group__mca.html#gadf71d426da852cdf931022fa56a3acb0"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga761a98e3635d75c8505f516a0b2384b1">getEE</a> (const char *name, const char *species, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single elasticity coefficient.  <a href="group__mca.html#ga761a98e3635d75c8505f516a0b2384b1"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga7d573d16a02b3bf4361c00065f624e0b"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfDependentSpecies" ref="ga7d573d16a02b3bf4361c00065f624e0b" args="()" -->
+int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__floating.html#ga7d573d16a02b3bf4361c00065f624e0b">getNumberOfDependentSpecies</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of dependent species in the model. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga29811c87b0f144e506c93373418fbe8b"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfIndependentSpecies" ref="ga29811c87b0f144e506c93373418fbe8b" args="()" -->
+int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__floating.html#ga29811c87b0f144e506c93373418fbe8b">getNumberOfIndependentSpecies</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of independent species in the model. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#aa51ba22ca904260718b81ac2ded66d28">steadyState</a> (double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the steady state of the current model.  <a href="#aa51ba22ca904260718b81ac2ded66d28"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afb7fb0d6642f64eaef5a01bd232fb8eb"></a><!-- doxytag: member="rr_c_api.cpp::evalModel" ref="afb7fb0d6642f64eaef5a01bd232fb8eb" args="()" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>evalModel</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#ga3fbb7c2fab261f25a3871f1caf398ff1">evalModel</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the current models, that it update all assignments and rates of change.  <a href="group__state.html#ga3fbb7c2fab261f25a3871f1caf398ff1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac423e463cb9f7f1220fe40f0f39bac20"></a><!-- doxytag: member="rr_c_api.cpp::getParamPromotedSBML" ref="ac423e463cb9f7f1220fe40f0f39bac20" args="(const char *sArg)" -->
 char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getParamPromotedSBML</b> (const char *sArg)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#acf80de2b00a22da5a784d55fa4af16d3">computeSteadyStateValues</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A convenient method for returning a vector of the steady state species concentrations.  <a href="#acf80de2b00a22da5a784d55fa4af16d3"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a98839913bdb2b401bf9d9280ca772662"></a><!-- doxytag: member="rr_c_api.cpp::setSteadyStateSelectionList" ref="a98839913bdb2b401bf9d9280ca772662" args="(const char *list)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setSteadyStateSelectionList</b> (const char *list)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac2ad7c34e5d4c3eb18505f500e9e8dd2"></a><!-- doxytag: member="rr_c_api.cpp::getSteadyStateSelectionList" ref="ac2ad7c34e5d4c3eb18505f500e9e8dd2" args="()" -->
-<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getSteadyStateSelectionList</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#ade9b2f20e0e1abd2c510a7c237ecc231">getFullJacobian</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7bc84bbd19968cb3934971cc22e7de9"></a><!-- doxytag: member="rr_c_api.cpp::getReducedJacobian" ref="aa7bc84bbd19968cb3934971cc22e7de9" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getReducedJacobian</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7d1dc1f725e9018a3fbd3a676cd2aa2e"></a><!-- doxytag: member="rr_c_api.cpp::getEigenValues" ref="a7d1dc1f725e9018a3fbd3a676cd2aa2e" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getEigenValues</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#a98839913bdb2b401bf9d9280ca772662">setSteadyStateSelectionList</a> (const char *list)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the selection list of the steady state analysis.  <a href="#a98839913bdb2b401bf9d9280ca772662"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#ac2ad7c34e5d4c3eb18505f500e9e8dd2">getSteadyStateSelectionList</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the selection list for the steady state analysis.  <a href="#ac2ad7c34e5d4c3eb18505f500e9e8dd2"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___stoich.html#ga228e8431e466bf7e5987c1179dcbbbd8">getFullJacobian</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the full Jacobian for the current model.  <a href="group___stoich.html#ga228e8431e466bf7e5987c1179dcbbbd8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___stoich.html#ga503c810c1be94e486441eeea88163a18">getReducedJacobian</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the reduced Jacobian for the current model.  <a href="group___stoich.html#ga503c810c1be94e486441eeea88163a18"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___stoich.html#ga7c7c6eb0e77711983254488895f24b81">getEigenValues</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the eigenvalue matrix for the current model.  <a href="group___stoich.html#ga7c7c6eb0e77711983254488895f24b81"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_r_c_code.html">RRCCode</a> *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaef1b097cc2ad79dfc83e0d049846f87f">getCCode</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a pointer to the C code structure, <a class="el" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCode</a>.  <a href="group__utility.html#gaef1b097cc2ad79dfc83e0d049846f87f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ac008a2fdf314f45d3262051b279573"></a><!-- doxytag: member="rr_c_api.cpp::getScaledFloatingSpeciesElasticity" ref="a5ac008a2fdf314f45d3262051b279573" args="(const char *reacName, const char *specName, double &amp;value)" -->
 bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getScaledFloatingSpeciesElasticity</b> (const char *reacName, const char *specName, double &amp;value)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a378d2ce03d6a250c756eebf4af08ee70"></a><!-- doxytag: member="rr_c_api.cpp::getFloatingSpeciesInitialConditionNames" ref="a378d2ce03d6a250c756eebf4af08ee70" args="()" -->
 <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getFloatingSpeciesInitialConditionNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad1fdbf26b95c79ad919a037828506936"></a><!-- doxytag: member="rr_c_api.cpp::getRatesOfChangeEx" ref="ad1fdbf26b95c79ad919a037828506936" args="(const RRVectorHandle vec)" -->
-<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getRatesOfChangeEx</b> (const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vec)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a92f510f517fc8819c1626acc439f62f8"></a><!-- doxytag: member="rr_c_api.cpp::getReactionRatesEx" ref="a92f510f517fc8819c1626acc439f62f8" args="(const RRVectorHandle vec)" -->
-<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getReactionRatesEx</b> (const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vec)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_r_string_array_list.html">RRStringArrayList</a> *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#abc100675c16806d852a58e23b4271c97">getElasticityCoefficientNames</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0292c6ab30a61bb0dd7bd205a0d9c3c0"></a><!-- doxytag: member="rr_c_api.cpp::getRateOfChangeNames" ref="a0292c6ab30a61bb0dd7bd205a0d9c3c0" args="()" -->
-<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getRateOfChangeNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e83e187511737da6577c0ff7fd18fb5"></a><!-- doxytag: member="rr_c_api.cpp::setCapabilities" ref="a3e83e187511737da6577c0ff7fd18fb5" args="(const char *caps)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setCapabilities</b> (const char *caps)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e72567122db7795779e6cfb8fc03c2c"></a><!-- doxytag: member="rr_c_api.cpp::getCapabilities" ref="a7e72567122db7795779e6cfb8fc03c2c" args="()" -->
-char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getCapabilities</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2d8d226eebecf5a4783a5c38e680e06c"></a><!-- doxytag: member="rr_c_api.cpp::getEigenValueNames" ref="a2d8d226eebecf5a4783a5c38e680e06c" args="()" -->
-<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getEigenValueNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a461dcd14d7d8c3525570d9b7573c19d4"></a><!-- doxytag: member="rr_c_api.cpp::getFluxControlCoefficientNames" ref="a461dcd14d7d8c3525570d9b7573c19d4" args="()" -->
-<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getFluxControlCoefficientNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7181c8093e9c541eff7c2ebfb1a7005c"></a><!-- doxytag: member="rr_c_api.cpp::getUnscaledConcentrationControlCoefficientMatrix" ref="a7181c8093e9c541eff7c2ebfb1a7005c" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getUnscaledConcentrationControlCoefficientMatrix</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0b967d8f42d5c22add85b5ec239cf40"></a><!-- doxytag: member="rr_c_api.cpp::getScaledConcentrationControlCoefficientMatrix" ref="ad0b967d8f42d5c22add85b5ec239cf40" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getScaledConcentrationControlCoefficientMatrix</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3e6c4e16a3e912371064d4d0f2ff7f66"></a><!-- doxytag: member="rr_c_api.cpp::getUnscaledFluxControlCoefficientMatrix" ref="a3e6c4e16a3e912371064d4d0f2ff7f66" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getUnscaledFluxControlCoefficientMatrix</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae8cf52b57fe81d92ea23a0106da04d44"></a><!-- doxytag: member="rr_c_api.cpp::getScaledFluxControlCoefficientMatrix" ref="ae8cf52b57fe81d92ea23a0106da04d44" args="()" -->
-<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getScaledFluxControlCoefficientMatrix</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade4121d819d4f0aafc53c9fabd275aed"></a><!-- doxytag: member="rr_c_api.cpp::getUnscaledFluxControlCoefficientNames" ref="ade4121d819d4f0aafc53c9fabd275aed" args="()" -->
-<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getUnscaledFluxControlCoefficientNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad5a4223c938b2c58dbe3a15632a719f3"></a><!-- doxytag: member="rr_c_api.cpp::getConcentrationControlCoefficientNames" ref="ad5a4223c938b2c58dbe3a15632a719f3" args="()" -->
-<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayList</a> *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getConcentrationControlCoefficientNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aff5fffda50e9755a0e56bba4c4f95dca"></a><!-- doxytag: member="rr_c_api.cpp::getUnscaledConcentrationControlCoefficientNames" ref="aff5fffda50e9755a0e56bba4c4f95dca" args="()" -->
-<a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getUnscaledConcentrationControlCoefficientNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#a1b8154ce8df243a0fd344b9d5e699e9e">getNumberOfCompartments</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad79e3bb753c130b7424c548047108b3"></a><!-- doxytag: member="rr_c_api.cpp::getCompartmentByIndex" ref="aad79e3bb753c130b7424c548047108b3" args="(const int &amp;index, double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getCompartmentByIndex</b> (const int &amp;index, double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a43f73e945ca03abc05fe9d8e2277c00d"></a><!-- doxytag: member="rr_c_api.cpp::setCompartmentByIndex" ref="a43f73e945ca03abc05fe9d8e2277c00d" args="(const int &amp;index, const double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>setCompartmentByIndex</b> (const int &amp;index, const double &amp;value)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad6aa19a51c57b8c5e8f4ccbc88ae8faf"></a><!-- doxytag: member="rr_c_api.cpp::getCompartmentNames" ref="ad6aa19a51c57b8c5e8f4ccbc88ae8faf" args="()" -->
-<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getCompartmentNames</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1152b2556f54e692a2e24cff50259335"></a><!-- doxytag: member="rr_c_api.cpp::getRateOfChange" ref="a1152b2556f54e692a2e24cff50259335" args="(const int &amp;index, double &amp;value)" -->
-bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getRateOfChange</b> (const int &amp;index, double &amp;value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rate_of_change.html#gacfae48e32754e7678b8bb003df93ef53">getRatesOfChangeEx</a> (const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vec)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the vector of rates of change given a vector of floating species concentrations.  <a href="group__rate_of_change.html#gacfae48e32754e7678b8bb003df93ef53"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#gaa03d9414ddeb177a76365dd5b2d0042e">getReactionRatesEx</a> (const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vec)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a vector of reactionb rates given a vector of species concentrations.  <a href="group__reaction.html#gaa03d9414ddeb177a76365dd5b2d0042e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_r_string_array_list.html">RRStringArrayList</a> *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga35b2d80dfae3ffba81a45a485e30b22e">getElasticityCoefficientNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of elasticity coefficient names.  <a href="group__mca.html#ga35b2d80dfae3ffba81a45a485e30b22e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__compartment.html#ga1b676408037364f621f5bcb49a0f1474">getRateOfChangeNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of rate of change names.  <a href="group__compartment.html#ga1b676408037364f621f5bcb49a0f1474"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__simulation.html#ga320ffeeba3e5505371b52ce61715bf82">setCapabilities</a> (const char *caps)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the simulator's capabilities.  <a href="group__simulation.html#ga320ffeeba3e5505371b52ce61715bf82"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__simulation.html#gaecce7b3dda3548fbe579922aadf25610">getCapabilities</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the simulator's capabilities.  <a href="group__simulation.html#gaecce7b3dda3548fbe579922aadf25610"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#ga313f81d4fae0ece305eb1246543bcdc3">getEigenValueNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of eigenvalue names.  <a href="group__state.html#ga313f81d4fae0ece305eb1246543bcdc3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga5d72e660bc33c6cbb93aadd603015563">getFluxControlCoefficientNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of flux control coefficient names.  <a href="group__mca.html#ga5d72e660bc33c6cbb93aadd603015563"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga418c0108d37bc4f35a55291ca85e0a3f">getUnscaledConcentrationControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of unscaled concentration control coefficients for the current model.  <a href="group__mca.html#ga418c0108d37bc4f35a55291ca85e0a3f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#gad28644ca7615c71725056028a0a048ba">getScaledConcentrationControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of scaled concentration control coefficients for the current model.  <a href="group__mca.html#gad28644ca7615c71725056028a0a048ba"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga4b464166bb67773916067bc7e190a338">getUnscaledFluxControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of unscaled flux control coefficients for the current model.  <a href="group__mca.html#ga4b464166bb67773916067bc7e190a338"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#gad63647a85b299d463b1e4cd5671d0881">getScaledFluxControlCoefficientMatrix</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retreive the matrix of scaled flux control coefficients for the current model.  <a href="group__mca.html#gad63647a85b299d463b1e4cd5671d0881"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga9451fdf700b80288c0d664193eef4421">getUnscaledFluxControlCoefficientNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of unscaled flux control coefficient names.  <a href="group__mca.html#ga9451fdf700b80288c0d664193eef4421"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_r_string_array_list.html">RRStringArrayList</a> *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#gac65874848b588a8c87ac04705eb88cbc">getConcentrationControlCoefficientNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of concentration coefficient names.  <a href="group__mca.html#gac65874848b588a8c87ac04705eb88cbc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga4cd50e9e57140cb5fd69483bc6b0656e">getUnscaledConcentrationControlCoefficientNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of unscaled concentration control coefficient names.  <a href="group__mca.html#ga4cd50e9e57140cb5fd69483bc6b0656e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5ea2479b882549edd4fb75397ca38f52"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfCompartments" ref="ga5ea2479b882549edd4fb75397ca38f52" args="()" -->
+int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__compartment.html#ga5ea2479b882549edd4fb75397ca38f52">getNumberOfCompartments</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of compartments in the model. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__compartment.html#ga5241b915cff8bcabba3024c33fb4e336">getCompartmentByIndex</a> (const int &amp;index, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the compartment volume for a particular compartment.  <a href="group__compartment.html#ga5241b915cff8bcabba3024c33fb4e336"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__compartment.html#gadb238a943d93bc9548bf5c3cd452e9bb">setCompartmentByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the volume for a particular compartment.  <a href="group__compartment.html#gadb238a943d93bc9548bf5c3cd452e9bb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__compartment.html#gafe31d3b684c51fb829c1770898bc1e5d">getCompartmentNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of compartment Ids.  <a href="group__compartment.html#gafe31d3b684c51fb829c1770898bc1e5d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aed23bc95ffcb7170d0ba6ad287c5b74d"></a><!-- doxytag: member="rr_c_api.cpp::getCompartment" ref="aed23bc95ffcb7170d0ba6ad287c5b74d" args="()" -->
+<a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>getCompartment</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rate_of_change.html#gaad38321993112e230f7fccd96345de6c">getRateOfChange</a> (const int &amp;index, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the rate of change for a given floating species.  <a href="group__rate_of_change.html#gaad38321993112e230f7fccd96345de6c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6fe231100339ef0e3c816987e7d89e70"></a><!-- doxytag: member="rr_c_api.cpp::printArrayList" ref="a6fe231100339ef0e3c816987e7d89e70" args="(const RRArrayList2Handle list)" -->
 char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>printArrayList</b> (const <a class="el" href="rr__c__types_8h.html#a21a10f01ac4fd34c61e7e7d12af9891d">RRArrayList2Handle</a> list)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a66c2c151c553f62bafd8c282eb20d056"></a><!-- doxytag: member="rr_c_api.cpp::printStringList" ref="a66c2c151c553f62bafd8c282eb20d056" args="(const RRStringListHandle list)" -->
@@ -309,7 +326,8 @@ char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>printVect
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the roadRunner instance.  <a href="group__initialization.html#ga59ccea13a522b2ce61220cff4ea761c2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a281c58b33a457660dec1a4b8cc4cbcd6"></a><!-- doxytag: member="rr_c_api.cpp::freeMatrix" ref="a281c58b33a457660dec1a4b8cc4cbcd6" args="(RRMatrixHandle matrix)" -->
 bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeMatrix</b> (<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> matrix)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8cpp.html#a8a98df91a3b072fa1af8e03afe406a22">freeResult</a> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> handle)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8a98df91a3b072fa1af8e03afe406a22"></a><!-- doxytag: member="rr_c_api.cpp::freeResult" ref="a8a98df91a3b072fa1af8e03afe406a22" args="(RRResultHandle handle)" -->
+bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeResult</b> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> handle)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4b192000f29860000dc7db19bbcdf9c1"></a><!-- doxytag: member="rr_c_api.cpp::freeText" ref="a4b192000f29860000dc7db19bbcdf9c1" args="(char *text)" -->
 bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>freeText</b> (char *text)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7061c4088f21f2a76d8749f7a7f7a330"></a><!-- doxytag: member="rr_c_api.cpp::freeStringList" ref="a7061c4088f21f2a76d8749f7a7f7a330" args="(RRStringListHandle sl)" -->
@@ -397,29 +415,12 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>gLastError</b> = NU
 
 </div>
 </div>
-<a class="anchor" id="a8a98df91a3b072fa1af8e03afe406a22"></a><!-- doxytag: member="rr_c_api.cpp::freeResult" ref="a8a98df91a3b072fa1af8e03afe406a22" args="(RRResultHandle handle)" -->
+<a class="anchor" id="ac2ad7c34e5d4c3eb18505f500e9e8dd2"></a><!-- doxytag: member="rr_c_api.cpp::getSteadyStateSelectionList" ref="ac2ad7c34e5d4c3eb18505f500e9e8dd2" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool rrCallConv freeResult </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a>&#160;</td>
-          <td class="paramname"><em>handle</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="abc100675c16806d852a58e23b4271c97"></a><!-- doxytag: member="rr_c_api.cpp::getElasticityCoefficientNames" ref="abc100675c16806d852a58e23b4271c97" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_r_r_string_array_list.html">RRStringArrayList</a>* rrCallConv getElasticityCoefficientNames </td>
+          <td class="memname"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getSteadyStateSelectionList </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -428,113 +429,34 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>gLastError</b> = NU
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="ade9b2f20e0e1abd2c510a7c237ecc231"></a><!-- doxytag: member="rr_c_api.cpp::getFullJacobian" ref="ade9b2f20e0e1abd2c510a7c237ecc231" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> rrCallConv getFullJacobian </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Get the selection list for the steady state analysis. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise it returns a list of strings representing symbols in the selection list </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a1b8154ce8df243a0fd344b9d5e699e9e"></a><!-- doxytag: member="rr_c_api.cpp::getNumberOfCompartments" ref="a1b8154ce8df243a0fd344b9d5e699e9e" args="()" -->
+<a class="anchor" id="a98839913bdb2b401bf9d9280ca772662"></a><!-- doxytag: member="rr_c_api.cpp::setSteadyStateSelectionList" ref="a98839913bdb2b401bf9d9280ca772662" args="(const char *list)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int rrCallConv getNumberOfCompartments </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a9863b43a97bf7f77f545469e5a5d3203"></a><!-- doxytag: member="rr_c_api.cpp::getRatesOfChange" ref="a9863b43a97bf7f77f545469e5a5d3203" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv getRatesOfChange </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="ae477af0850ffcc5ecfec69fc86878c3e"></a><!-- doxytag: member="rr_c_api.cpp::getReactionNames" ref="ae477af0850ffcc5ecfec69fc86878c3e" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getReactionNames </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="afb12aaba0b161b696da6bfb5e5b92770"></a><!-- doxytag: member="rr_c_api.cpp::getValue" ref="afb12aaba0b161b696da6bfb5e5b92770" args="(const char *speciesID, double &amp;value)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool rrCallConv getValue </td>
+          <td class="memname">bool rrCallConv setSteadyStateSelectionList </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>speciesID</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>list</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-</div>
-</div>
-<a class="anchor" id="a60a2c1825b2da9e8f33357a07cb756aa"></a><!-- doxytag: member="rr_c_api.cpp::setComputeAndAssignConservationLaws" ref="a60a2c1825b2da9e8f33357a07cb756aa" args="(const bool &amp;OnOrOff)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool rrCallConv setComputeAndAssignConservationLaws </td>
-          <td>(</td>
-          <td class="paramtype">const bool &amp;&#160;</td>
-          <td class="paramname"><em>OnOrOff</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
+<p>Set the selection list of the steady state analysis. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">list</td><td>The string argument should be a space separated list of symbols in the selection list </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if successful </dd></dl>
 
 </div>
 </div>
@@ -583,7 +505,7 @@ char *&#160;</td><td class="memItemRight" valign="bottom"><b>gLastError</b> = NU
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 11:17:16 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

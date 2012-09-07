@@ -76,7 +76,116 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>Get information about rates of change.  
 <a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr><td colspan="2"><h2><a name="member-group"></a>
+Utility routines</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gabbe129bee63761f7b0f98f060b86067b">getRatesOfChange</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the vector of rates of change.  <a href="#gabbe129bee63761f7b0f98f060b86067b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaf9d5b185617519ceff1a018d9009c0fd">getRatesOfChangeNames</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the string list of rates of change names.  <a href="#gaf9d5b185617519ceff1a018d9009c0fd"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaad38321993112e230f7fccd96345de6c">getRateOfChange</a> (const int &amp;, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the rate of change for a given floating species.  <a href="#gaad38321993112e230f7fccd96345de6c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gacfae48e32754e7678b8bb003df93ef53">getRatesOfChangeEx</a> (const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vec)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the vector of rates of change given a vector of floating species concentrations.  <a href="#gacfae48e32754e7678b8bb003df93ef53"></a><br/></td></tr>
+</table>
+<hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Get information about rates of change. </p>
+<hr/><h2>Function Documentation</h2>
+<a class="anchor" id="gaad38321993112e230f7fccd96345de6c"></a><!-- doxytag: member="rr_c_api.h::getRateOfChange" ref="gaad38321993112e230f7fccd96345de6c" args="(const int &amp;, double &amp;value)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv getRateOfChange </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double &amp;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the rate of change for a given floating species. </p>
+<p>Example: status = getRateOfChange (&amp;index, &amp;value);</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns false if it fails, otherwise value contains the rate of change. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gabbe129bee63761f7b0f98f060b86067b"></a><!-- doxytag: member="rr_c_api.h::getRatesOfChange" ref="gabbe129bee63761f7b0f98f060b86067b" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv getRatesOfChange </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the vector of rates of change. </p>
+<p>Example: values = getRatesOfChange ();</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a vector of rates of change values </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gacfae48e32754e7678b8bb003df93ef53"></a><!-- doxytag: member="rr_c_api.h::getRatesOfChangeEx" ref="gacfae48e32754e7678b8bb003df93ef53" args="(const RRVectorHandle vec)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> rrCallConv getRatesOfChangeEx </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a>&#160;</td>
+          <td class="paramname"><em>vec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the vector of rates of change given a vector of floating species concentrations. </p>
+<p>Example: values = getRatesOfChangeEx (vector);</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gaf9d5b185617519ceff1a018d9009c0fd"></a><!-- doxytag: member="rr_c_api.h::getRatesOfChangeNames" ref="gaf9d5b185617519ceff1a018d9009c0fd" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getRatesOfChangeNames </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the string list of rates of change names. </p>
+<p>Example: names = getRatesOfChangeNames ();</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a list of rates of change names </dd></dl>
+
+</div>
+</div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -95,7 +204,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 11:17:16 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2012 21:09:36 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
