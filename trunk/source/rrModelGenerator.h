@@ -127,10 +127,10 @@ class RR_DECLSPEC ModelGenerator : public rrObject
 
         SymbolList                          ModifiableSpeciesReferenceList;
 
-        StringList                          getReactionNames();
+        StringList                          getReactionIds();
         SymbolList&                         GetReactionList();
 
-        StringList                          getFloatingSpeciesConcentrationList();    //Just returns the names...!
+        StringList                          getFloatingSpeciesConcentrationList();    //Just returns the Ids...!
         SymbolList&                         GetFloatingSpeciesConcentrationList();
 
         StringList                          getBoundarySpeciesList();

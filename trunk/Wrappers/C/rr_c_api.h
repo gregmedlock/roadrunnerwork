@@ -410,7 +410,7 @@ C_DECL_SPEC bool rrCallConv setNumPoints(const int& nrPoints);
 
  Example: setSelectionList ("Time, S1, J1, J2")
 
- \param list A string of names separated by spaces or comma characters
+ \param list A string of Ids separated by spaces or comma characters
  \return Returns true if sucessful
  \ingroup simulation
 */
@@ -419,7 +419,7 @@ C_DECL_SPEC bool rrCallConv setSelectionList(const char* list);
 /*!
  \brief Get the current selection list for simulate() or simulateEx()
 
- \return A list of symbol names indicating the current selection list
+ \return A list of symbol Ids indicating the current selection list
  \ingroup simulation
 */
 C_DECL_SPEC RRStringListHandle rrCallConv getSelectionList();
@@ -594,7 +594,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv getGlobalParameterValues();
 /*!
  \brief Set the concentration for a particular boundary species. 
 
- \param index The index to the boundary species (corresponds to position in getBoundarySpeciesNames())
+ \param index The index to the boundary species (corresponds to position in getBoundarySpeciesIds())
  \param value The concentration of the species to set
  \return Returns true if successful
  \ingroup boundary
@@ -604,7 +604,7 @@ C_DECL_SPEC bool rrCallConv setBoundarySpeciesByIndex(const int& index, const do
 /*!
  \brief Set the concentration for a particular floating species. 
 
- \param index The index to the floating species (corresponds to position in getFloatingSpeciesNames())
+ \param index The index to the floating species (corresponds to position in getFloatingSpeciesIds())
  \param value The concentration of the species to set
  \return Returns true if successful
  \ingroup floating
@@ -625,7 +625,7 @@ C_DECL_SPEC bool rrCallConv setGlobalParameterByIndex(const int& index, const do
 /*!
  \brief Retrieve the concentration for a particular floating species. 
 
- \param index The index to the boundary species (corresponds to position in getBoundarySpeciesNames())
+ \param index The index to the boundary species (corresponds to position in getBoundarySpeciesIds())
  \param value The value returned by the method
  \return Returns true if successful
  \ingroup boundary
@@ -635,7 +635,7 @@ C_DECL_SPEC bool rrCallConv getBoundarySpeciesByIndex(const int& index, double& 
 /*!
  \brief Retrieve the concentration for a particular floating species. 
 
- \param index The index to the floating species (corresponds to position in getFloatingSpeciesNames())
+ \param index The index to the floating species (corresponds to position in getFloatingSpeciesIds())
  \param value The value returned by the method
  \return Returns true if successful
  \ingroup floating
@@ -644,7 +644,7 @@ C_DECL_SPEC bool rrCallConv getFloatingSpeciesByIndex(const int& index, double& 
 
 /*!
  \brief Retrieve the global parameter value 
- \param index The index to the global parameter (corresponds to position in getGlboalParametersNames())
+ \param index The index to the global parameter (corresponds to position in getGlboalParametersIds())
  \param value The value returned by the method
  \return Returns true if successful
  \ingroup floating
@@ -654,7 +654,7 @@ C_DECL_SPEC bool rrCallConv getGlobalParameterByIndex(const int& index, double& 
 /*!
  \brief Retrieve the compartment volume for a particular compartment. 
 
- \param index The index to the compartment (corresponds to position in getCompartmentNames())
+ \param index The index to the compartment (corresponds to position in getCompartmentIds())
  \param value The value returned by the method
  \return Returns true if successful
  \ingroup compartment
@@ -665,7 +665,7 @@ C_DECL_SPEC bool rrCallConv getCompartmentByIndex (const int& index, double& val
 /*!
  \brief Set the volume for a particular compartment
 
- \param index The index to the compartment (corresponds to position in getCompartmentNames())
+ \param index The index to the compartment (corresponds to position in getCompartmentIds())
  \param value The volume of the compartment to set
  \return Returns true if successful
  \ingroup compartment
@@ -753,7 +753,7 @@ C_DECL_SPEC bool rrCallConv   reset();
 
 C_DECL_SPEC bool                    rrCallConv setFloatingSpeciesInitialConcentrations (const RRVector* vec);
 C_DECL_SPEC RRVectorHandle          rrCallConv getFloatingSpeciesInitialConcentrations ();
-C_DECL_SPEC RRStringListHandle      rrCallConv getFloatingSpeciesInitialConditionNames();
+C_DECL_SPEC RRStringListHandle      rrCallConv getFloatingSpeciesInitialConditionIds();
 
 
 // Reaction rates
@@ -810,14 +810,14 @@ C_DECL_SPEC RRVectorHandle rrCallConv getReactionRatesEx (const RRVectorHandle v
 C_DECL_SPEC RRVectorHandle  rrCallConv getRatesOfChange();
 
 /*!
- \brief Retrieve the string list of rates of change names
+ \brief Retrieve the string list of rates of change Ids
 
- Example: names = getRatesOfChangeNames ();
+ Example: Ids = getRatesOfChangeIds ();
 
- \return Returns null if it fails, otherwise returns a list of rates of change names
+ \return Returns null if it fails, otherwise returns a list of rates of change Ids
  \ingroup rateOfChange
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getRatesOfChangeNames();
+C_DECL_SPEC RRStringListHandle rrCallConv getRatesOfChangeIds();
 
 
 /*!
@@ -893,7 +893,7 @@ C_DECL_SPEC int rrCallConv getNumberOfDependentSpecies();
 */
 C_DECL_SPEC int rrCallConv getNumberOfIndependentSpecies();
 
-// Get names family
+// Get Ids family
 
 /*!
  \brief Obtain the list of reaction Ids
@@ -901,16 +901,16 @@ C_DECL_SPEC int rrCallConv getNumberOfIndependentSpecies();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup compartment
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getReactionNames();
+C_DECL_SPEC RRStringListHandle rrCallConv getReactionIds();
 
 
 /*!
- \brief Obtain the list of rate of change names
+ \brief Obtain the list of rate of change Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup compartment
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getRateOfChangeNames();
+C_DECL_SPEC RRStringListHandle rrCallConv getRateOfChangeIds();
 
 /*!
  \brief Obtain the list of boundary species Ids
@@ -918,7 +918,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getRateOfChangeNames();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup boundary
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getBoundarySpeciesNames();
+C_DECL_SPEC RRStringListHandle rrCallConv getBoundarySpeciesIds();
 
 /*!
  \brief Obtain the list of floating species Id
@@ -926,15 +926,15 @@ C_DECL_SPEC RRStringListHandle rrCallConv getBoundarySpeciesNames();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup floating
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getFloatingSpeciesNames();
+C_DECL_SPEC RRStringListHandle rrCallConv getFloatingSpeciesIds();
 
 /*!
- \brief Obtain the list of global parameter names
+ \brief Obtain the list of global parameter Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup parameters
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getGlobalParameterNames();
+C_DECL_SPEC RRStringListHandle rrCallConv getGlobalParameterIds();
 
 /*!
  \brief Obtain the list of compartment Ids
@@ -944,15 +944,15 @@ C_DECL_SPEC RRStringListHandle rrCallConv getGlobalParameterNames();
  \return Returns -1 if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup compartment
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getCompartmentNames();
+C_DECL_SPEC RRStringListHandle rrCallConv getCompartmentIds();
 
 /*!
- \brief Obtain the list of eigenvalue names
+ \brief Obtain the list of eigenvalue Ids
 
  \return Returns -1 if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup state
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getEigenValueNames();
+C_DECL_SPEC RRStringListHandle rrCallConv getEigenValueIds();
 
 /*!
  \brief Obtain the list of al avialable symbols
@@ -964,44 +964,44 @@ C_DECL_SPEC RRArrayList2Handle rrCallConv getAvailableSymbols();
 
 // MCA methods
 /*!
- \brief Obtain the list of elasticity coefficient names
+ \brief Obtain the list of elasticity coefficient Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca 
 */
-C_DECL_SPEC RRStringArrayListHandle rrCallConv getElasticityCoefficientNames();
+C_DECL_SPEC RRStringArrayListHandle rrCallConv getElasticityCoefficientIds();
 
 /*!
- \brief Obtain the list of unscaled flux control coefficient names
+ \brief Obtain the list of unscaled flux control coefficient Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca
 */
-C_DECL_SPEC RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficientNames();
+C_DECL_SPEC RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficientIds();
 
 /*!
- \brief Obtain the list of flux control coefficient names
+ \brief Obtain the list of flux control coefficient Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca 
 */
-C_DECL_SPEC RRStringArrayListHandle rrCallConv getFluxControlCoefficientNames();
+C_DECL_SPEC RRStringArrayListHandle rrCallConv getFluxControlCoefficientIds();
 
 /*!
- \brief Obtain the list of unscaled concentration control coefficient names
+ \brief Obtain the list of unscaled concentration control coefficient Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca 
 */
-C_DECL_SPEC RRStringArrayListHandle rrCallConv getUnscaledConcentrationControlCoefficientNames();
+C_DECL_SPEC RRStringArrayListHandle rrCallConv getUnscaledConcentrationControlCoefficientIds();
 
 /*!
- \brief Obtain the list of concentration coefficient names
+ \brief Obtain the list of concentration coefficient Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca 
 */
-C_DECL_SPEC RRStringArrayListHandle rrCallConv getConcentrationControlCoefficientNames();
+C_DECL_SPEC RRStringArrayListHandle rrCallConv getConcentrationControlCoefficientIds();
 
 /*!
  \brief Retrieve the unscaled elasticity matrix for the current model

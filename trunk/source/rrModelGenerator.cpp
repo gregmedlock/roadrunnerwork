@@ -385,7 +385,7 @@ int ModelGenerator::ReadModifiableSpeciesReferences()
     return ModifiableSpeciesReferenceList.size();
 }
 
-StringList ModelGenerator::getReactionNames()
+StringList ModelGenerator::getReactionIds()
 {
     StringList tmp;// = new ArrayList();
     for (int i = 0; i < reactionList.size(); i++)
