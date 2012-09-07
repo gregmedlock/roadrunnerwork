@@ -63,9 +63,9 @@ typedef struct RRVector
 
 typedef struct RRLabelStringList
 {
-    int             Count;
-    char*           Label;
-    char**          String;
+    int             Count;  /*!< Number of element in the label string list */
+    char*           Label;  /*!< Label associated with string list */
+    char**          String; /*!< List of strings */
 } *RRLabelStringListHandle;
 
 
