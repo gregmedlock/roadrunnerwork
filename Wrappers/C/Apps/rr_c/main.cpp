@@ -148,7 +148,7 @@ int main(int argc, char* argv[])
 	{
 		if(!args.SaveResultToFile)	
 		{
-			cout<<printResult(result);	
+			cout<<resultToString(result);	
 		}
 		else
 		{
@@ -163,7 +163,7 @@ int main(int argc, char* argv[])
 			else
 			{
 				cout<<"Saving data to file: "<<outPutFName<<"\n";
-				fOut<<printResult(result);
+				fOut<<resultToString(result);
 			}
 		}				
 	}

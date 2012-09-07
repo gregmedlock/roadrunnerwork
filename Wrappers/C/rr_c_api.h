@@ -140,7 +140,7 @@
  \defgroup helperRoutines Helper Routines
  \brief Helper routines for acessing the various C API types, eg lists and arrays
 
- \defgroup print Print Routines
+ \defgroup toString Print Routines
  \brief Render various result data types as strings
 
  \defgroup freeRoutines Free memory routines
@@ -1168,42 +1168,42 @@ C_DECL_SPEC bool rrCallConv getScaledFloatingSpeciesElasticity(const char* react
  \return Returns result struct as a character string
  \ingroup print
 */
-C_DECL_SPEC char* rrCallConv printResult(const RRResultHandle result);
+C_DECL_SPEC char* rrCallConv resultToString(const RRResultHandle result);
 
 /*!
  \brief Returns a matrix in string form.
  \return Returns matrix as a character string
- \ingroup print
+ \ingroup toString
 */
-C_DECL_SPEC char*                   rrCallConv printMatrix(const RRMatrixHandle mat);
+C_DECL_SPEC char* rrCallConv matrixToString (const RRMatrixHandle mat);
 
 /*!
  \brief Returns a vector in string form.
  \return Returns vector as a character string
- \ingroup print
+ \ingroup toString
 */
-C_DECL_SPEC char*                   rrCallConv printVector(const RRVectorHandle vec);
+C_DECL_SPEC char* rrCallConv vectorToString(const RRVectorHandle vec);
 
 /*!
  \brief Returns a string list in string form.
  \return Returns string list as a character string
- \ingroup print
+ \ingroup toString
 */
-C_DECL_SPEC char*                   rrCallConv printStringList(const RRStringListHandle list);
+C_DECL_SPEC char* rrCallConv printStringList(const RRStringListHandle list);
 
 /*!
  \brief Returns a string array in string form.
  \return Returns string array as a character string
- \ingroup print
+ \ingroup toString
 */
-C_DECL_SPEC char*                   rrCallConv printStringArrayList(const RRStringArrayList* list);
+C_DECL_SPEC char* rrCallConv printStringArrayList(const RRStringArrayList* list);
 
 /*!
  \brief Returns a list in string form.
  \return Returns list as a character string
- \ingroup print
+ \ingroup toString
 */
-C_DECL_SPEC char*                   rrCallConv printArrayList(const cRRArrayListHandle list);
+C_DECL_SPEC char* rrCallConv listToString(const cRRArrayListHandle list);
 
 // Free memory functions
 /*!
