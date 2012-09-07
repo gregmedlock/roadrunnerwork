@@ -236,22 +236,22 @@ bool rr\-Call\-Conv \hyperlink{group__compartment_gadb238a943d93bc9548bf5c3cd452
 \begin{DoxyCompactList}\small\item\em \-Obtain the list of compartment \-Ids. \end{DoxyCompactList}\item 
 bool rr\-Call\-Conv \hyperlink{group__rate_of_change_gaad38321993112e230f7fccd96345de6c}{get\-Rate\-Of\-Change} (const int \&index, double \&value)
 \begin{DoxyCompactList}\small\item\em \-Retrieve the rate of change for a given floating species. \end{DoxyCompactList}\item 
-char $\ast$rr\-Call\-Conv \hyperlink{group__print_gace17afdb04162bb042c3e19e565f42cd}{print\-Array\-List} (const \hyperlink{rr__c__types_8h_a27e4a0c963507a3736c4944c0d17d254}{c\-R\-R\-Array\-List\-Handle} list)
+char $\ast$rr\-Call\-Conv \hyperlink{group__to_string_ga5c6d2a57248f80ed60df4130a80eacc6}{list\-To\-String} (const \hyperlink{rr__c__types_8h_a27e4a0c963507a3736c4944c0d17d254}{c\-R\-R\-Array\-List\-Handle} list)
 \begin{DoxyCompactList}\small\item\em \-Returns a list in string form. \end{DoxyCompactList}\item 
-char $\ast$rr\-Call\-Conv \hyperlink{group__print_ga344136d920ad8cafbb0a1801cf045c07}{print\-String\-List} (const \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} list)
+char $\ast$rr\-Call\-Conv \hyperlink{group__to_string_ga344136d920ad8cafbb0a1801cf045c07}{print\-String\-List} (const \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle} list)
 \begin{DoxyCompactList}\small\item\em \-Returns a string list in string form. \end{DoxyCompactList}\item 
-char $\ast$rr\-Call\-Conv \hyperlink{group__print_ga6fe9d99e416f3a8791b0d80226a74099}{print\-String\-Array\-List} (const \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List} $\ast$list)
+char $\ast$rr\-Call\-Conv \hyperlink{group__to_string_ga6fe9d99e416f3a8791b0d80226a74099}{print\-String\-Array\-List} (const \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List} $\ast$list)
 \begin{DoxyCompactList}\small\item\em \-Returns a string array in string form. \end{DoxyCompactList}\item 
-char $\ast$rr\-Call\-Conv \hyperlink{group__print_ga40c29c6c6773091005de86df2b8a7b6b}{print\-Result} (const \hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)
+char $\ast$rr\-Call\-Conv \hyperlink{rr__c__api_8cpp_afca6046e21cedfa56bbeb6bd326b95e5}{result\-To\-String} (const \hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} result)
 \begin{DoxyCompactList}\small\item\em \-Returns a result struct in string form. \end{DoxyCompactList}\item 
 \hypertarget{rr__c__api_8cpp_a399804f781f08c81c3bcf2360f4d3588}{
 char $\ast$rr\-Call\-Conv {\bfseries get\-Matrix\-As\-String} (const \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} matrix\-Handle)}
 \label{rr__c__api_8cpp_a399804f781f08c81c3bcf2360f4d3588}
 
 \item 
-char $\ast$rr\-Call\-Conv \hyperlink{group__print_ga61de73039780b4036d73922a1560f5e8}{print\-Matrix} (const \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} matrix\-Handle)
+char $\ast$rr\-Call\-Conv \hyperlink{group__to_string_ga8602c6521f43a51b5bba6c6f559132ed}{matrix\-To\-String} (const \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle} matrix\-Handle)
 \begin{DoxyCompactList}\small\item\em \-Returns a matrix in string form. \end{DoxyCompactList}\item 
-char $\ast$rr\-Call\-Conv \hyperlink{group__print_ga577d45215017692493baa428444f1f57}{print\-Vector} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec\-Handle)
+char $\ast$rr\-Call\-Conv \hyperlink{group__to_string_ga84b6c0919b5012f40f6680ea2c63c5c8}{vector\-To\-String} (\hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec\-Handle)
 \begin{DoxyCompactList}\small\item\em \-Returns a vector in string form. \end{DoxyCompactList}\item 
 bool rr\-Call\-Conv \hyperlink{group__initialization_ga59ccea13a522b2ce61220cff4ea761c2}{free\-R\-R\-Instance} (\hyperlink{rr__c__types_8h_a1d68f0592372208fa5a5f2799ea4b3ae}{\-R\-R\-Handle} handle)
 \begin{DoxyCompactList}\small\item\em \-Free the road\-Runner instance. \end{DoxyCompactList}\item 
@@ -458,4 +458,20 @@ redistribute any piece of this software without proper attribution;
 
 \begin{DoxyReturn}{\-Returns}
 void 
+\end{DoxyReturn}
+\hypertarget{rr__c__api_8cpp_afca6046e21cedfa56bbeb6bd326b95e5}{
+\index{rr\-\_\-c\-\_\-api.\-cpp@{rr\-\_\-c\-\_\-api.\-cpp}!result\-To\-String@{result\-To\-String}}
+\index{result\-To\-String@{result\-To\-String}!rr_c_api.cpp@{rr\-\_\-c\-\_\-api.\-cpp}}
+\subsubsection[{result\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ rr\-Call\-Conv result\-To\-String (
+\begin{DoxyParamCaption}
+\item[{const {\bf \-R\-R\-Result\-Handle}}]{result}
+\end{DoxyParamCaption}
+)}}
+\label{rr__c__api_8cpp_afca6046e21cedfa56bbeb6bd326b95e5}
+
+
+\-Returns a result struct in string form. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns result struct as a character string 
 \end{DoxyReturn}
