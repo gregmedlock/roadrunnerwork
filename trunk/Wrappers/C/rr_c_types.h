@@ -56,7 +56,7 @@ typedef void* RRHandle;
 /*!@brief Structure for a simple vector of doubles */ 
 typedef struct RRVector
 {
-    int             Size;  /*!< The number of elements in the vector */
+    int             Count;  /*!< The number of elements in the vector */
     double*         Data;  /*!< Points to an array of double items */
 } *RRVectorHandle;
 
@@ -121,7 +121,7 @@ typedef struct RRStringArrayListItem
 
 typedef struct RRStringArrayList
 {
-    int                         ItemCount;
+    int                         Count;
     RRStringArrayListItemHandle Items;
 
 }  *RRStringArrayListHandle;
@@ -150,8 +150,8 @@ typedef struct cRRArrayListItem
 /*!@brief A list type, stores int, double, strings and lists */ 
 typedef struct cRRArrayList
 {
-    int                        ItemCount;  /*!< The number elements in this list */
-    cRRArrayListItemHandle     Items;      /*!< A pointer to an array of list items */
+    int                        Count;  /*!< The number elements in this list */
+    cRRArrayListItemHandle     Items;  /*!< A pointer to an array of list items */
 }  *cRRArrayListHandle;
 
 

@@ -71,7 +71,7 @@ vector<double> createVectorFromRRVector(const RRVector* vec)
         return aVec;
     }
 
-    aVec.resize(vec->Size);
+    aVec.resize(vec->Count);
     for(int i = 0; i < aVec.size(); i++)
     {
         aVec[i] =  vec->Data[i];
@@ -83,14 +83,14 @@ vector<double> createVectorFromRRVector(const RRVector* vec)
 RRVector* createVectorFromVector_double(const vector<double>& vec)
 {
     RRVector* aVec = new RRVector;
-    aVec->Size = vec.size();
+    aVec->Count = vec.size();
 
-    if(aVec->Size)
+    if(aVec->Count)
     {
-        aVec->Data = new double[aVec->Size];
+        aVec->Data = new double[aVec->Count];
     }
 
-    for(int i = 0; i < aVec->Size; i++)
+    for(int i = 0; i < aVec->Count; i++)
     {
         aVec->Data[i] =  vec[i];
     }
@@ -105,9 +105,9 @@ bool copyVector(const RRVector* src, vector<double>& dest)
         return false;
     }
 
-    dest.resize(src->Size);
+    dest.resize(src->Count);
 
-    for(int i = 0; i < src->Size; i++)
+    for(int i = 0; i < src->Count; i++)
     {
         dest[i] = src->Data[i];
     }
@@ -172,7 +172,7 @@ RRStringArrayList* createList(const RRArrayList<string>& aList)
     //Setup a RRStringArrayList structure from aList
     RRStringArrayList* theList = new RRStringArrayList;
 
-    theList->ItemCount = aList.Count();
+    theList->Count = aList.Count();
     theList->Items = new RRStringArrayListItem[aList.Count()];
     int itemCount = aList.Count();
     for(int i = 0; i < itemCount; i++)
@@ -205,7 +205,7 @@ cRRArrayList* createList(const rr::ArrayList2& aList)
     //Setup a RRStringArrayList structure from aList
     cRRArrayList* theList = new cRRArrayList;
 
-    theList->ItemCount = aList.Count();
+    theList->Count = aList.Count();
     theList->Items = new cRRArrayListItem[aList.Count()];
     int itemCount = aList.Count();
     for(int i = 0; i < itemCount; i++)

@@ -348,7 +348,7 @@ int main(int argc, char* argv[])
 	printf ("%f\n", value);*/
 
 	RRVector veca;
-	veca.Size = 3;
+	veca.Count = 3;
 	veca.Data = new double[3];
    	veca.Data[0] = 1;
 	veca.Data[1] = 2;
