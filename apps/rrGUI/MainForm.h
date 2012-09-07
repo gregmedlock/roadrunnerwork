@@ -31,10 +31,12 @@
 #include <jpeg.hpp>
 #include <OleCtrls.hpp>
 #include <SHDocVw.hpp>
+#include "rrSimulateThread.h"
 namespace rr
 {
 class RoadRunner;
 class SimulationData;
+
 }
 
 namespace LIB_LA
@@ -129,6 +131,10 @@ __published:	// IDE-managed Components
 	mtkIntLabeledEdit *runCount;
 	TButton *Button5;
 	TMemo *runCountMemo;
+	TGroupBox *GroupBox5;
+	TGroupBox *GroupBox6;
+	TButton *RunThreadBtn;
+	TTimer *CheckThreadTimer;
     void __fastcall FormKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
     void __fastcall startupTimerTimer(TObject *Sender);
     void __fastcall modelFoldersCBChange(TObject *Sender);
@@ -158,43 +164,49 @@ __published:	// IDE-managed Components
 	void __fastcall ShutDownTimerTimer(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall Button5Click(TObject *Sender);
+	void __fastcall CheckThreadTimerTimer(TObject *Sender);
+	void __fastcall RunThreadBtnClick(TObject *Sender);
 
 private:	// User declarations
-    mtkIniParameters            mGeneralParas;
+    mtkIniParameters            	mGeneralParas;
 
-    mtkIniParameter<int>        mSelectionListHeight;
-    mtkIniParameter<int>        mPageControlHeight;
+    mtkIniParameter<int>        	mSelectionListHeight;
+    mtkIniParameter<int>        	mPageControlHeight;
 
-    mtkIniParameter<mtkLogLevel>   mLogLevel;
-    mtkIniParameter<string>         mCompiler;
-    mtkIniParameter<string>     mCurrentModelsFolder;
-    mtkIniParameter<string>     mCurrentModelFileName;
-    mtkIniParameter<string>     mTempDataFolder;
-    mtkIniParameter<string>     mRRLogFileName;
-    mtkIniParameter<bool>       mConservationAnalysis;
+    mtkIniParameter<mtkLogLevel>   	mLogLevel;
+    mtkIniParameter<string>     	mCompiler;
+    mtkIniParameter<string>     	mCurrentModelsFolder;
+    mtkIniParameter<string>     	mCurrentModelFileName;
+    mtkIniParameter<string>     	mTempDataFolder;
+    mtkIniParameter<string>     	mRRLogFileName;
+    mtkIniParameter<bool>       	mConservationAnalysis;
 
-    mtkIniParameters            mModelFolders;
-    rr::RoadRunner             *mRR;                //RoadRunner instance
-    rr::LogFileReader           mLogFileSniffer;
+    mtkIniParameters            	mModelFolders;
+    rr::RoadRunner             	   *mRR;                //RoadRunner instance
+    rr::LogFileReader           	mLogFileSniffer;
 
-    void            __fastcall  SetupINIParameters();
-    void                        Plot(const rr::SimulationData& result);
-    void                        EnableDisableSimulation(bool enable);
-    void            __fastcall  CheckUI();
-    StringList                  GetCheckedSpecies();
-    TColor                      GetColor(int i);
-    void                        AddItemsToListBox(const StringList& items);
-    SimulationSettings          mSettings;
-    string                      GetCompiler();//What is set in the RadioGroup
-    void            __fastcall  UpdateTestSuiteInfo();
-    string                      GetCurrentModelPath();
-    string                      GetSettingsFile();
+    void            	__fastcall  SetupINIParameters();
+    void                        	Plot(const rr::SimulationData& result);
+    void                        	EnableDisableSimulation(bool enable);
+    void            	__fastcall  CheckUI();
+    StringList                      GetCheckedSpecies();
+    TColor                          GetColor(int i);
+    void                            AddItemsToListBox(const StringList& items);
+    SimulationSettings              mSettings;
+    string                          GetCompiler();//What is set in the RadioGroup
+    void            	__fastcall  UpdateTestSuiteInfo();
+    string                          GetCurrentModelPath();
+    string                          GetSettingsFile();
+    SimulateThread			        mSimulateThread;
+	SimulationData 				   *mData;				//The data is created by the thread and consumed by the UI
+    friend SimulateThread;
+    void            __fastcall    	PlotFromThread();
 
 public:		// User declarations
-                    __fastcall  TMForm(TComponent* Owner);
-                    __fastcall ~TMForm();
-    void            __fastcall  LogMessage();
-    string                     *mLogString;
+                    __fastcall      TMForm(TComponent* Owner);
+                    __fastcall 	   ~TMForm();
+    void            __fastcall      LogMessage();
+    string                         *mLogString;
 
 };
 //---------------------------------------------------------------------------

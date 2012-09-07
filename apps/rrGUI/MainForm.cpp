@@ -9,7 +9,7 @@
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 #include "mtkStopWatch.h"
-
+#include "rrSimulateThread.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma link "Chart"
@@ -32,7 +32,8 @@ using namespace rr;
 __fastcall TMForm::TMForm(TComponent* Owner)
     : TForm(Owner),
     mLogFileSniffer("", this),
-    mLogString(NULL)
+    mLogString(NULL),
+    mSimulateThread(NULL, this)
 {
     LogOutput::mLogToConsole = (false);
     LogOutput::mShowLogLevel = true;
@@ -60,6 +61,8 @@ __fastcall TMForm::TMForm(TComponent* Owner)
     //Setup road runner
     mRR = new RoadRunner;
     mRR->SetTempFileFolder(mTempDataFolder);
+
+    mSimulateThread.AssignRRInstance(mRR);
 }
 
 __fastcall TMForm::~TMForm()
@@ -365,6 +368,19 @@ void TMForm::AddItemsToListBox(const StringList& items)
     }
 }
 
+void __fastcall TMForm::PlotFromThread()
+{
+	if(mData)
+    {
+		Plot(*mData);
+        delete mData;
+        mData = NULL;
+    }
+    else
+    {
+    	Log(rr::lWarning)<<"Tried to plot NULL data";
+    }
+}
 void TMForm::Plot(const rr::SimulationData& result)
 {
     Chart1->RemoveAllSeries();
@@ -661,4 +677,31 @@ void __fastcall TMForm::Button5Click(TObject *Sender)
     }
 }
 
+
+
+void __fastcall TMForm::CheckThreadTimerTimer(TObject *Sender)
+{
+	if(mSimulateThread.IsRunning())
+    {
+    	RunThreadBtn->Caption = "Stop";
+    }	
+    else
+    {
+    	RunThreadBtn->Caption = "Run";
+    }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMForm::RunThreadBtnClick(TObject *Sender)
+{
+	if(mSimulateThread.IsRunning())
+    {
+    	mSimulateThread.ShutDown();
+    }
+    else
+    {
+		mSimulateThread.Run();
+    }
+}
+//---------------------------------------------------------------------------
 

@@ -34,7 +34,7 @@
 			<_TCHARMapping>wchar_t</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>R:\rrInstalls\xe\rr_support\;p:\mtk\Lib\Common\;P:\mtk\Components\Dune\;R:\roadrunnerwork\trunk\apps\rrGUI\;$(RR_ROOT)\trunk\source;$(RR_INSTALL)\include;$(IncludePath)</IncludePath>
+			<IncludePath>p:\mtk\Lib\Common\;P:\mtk\Components\Dune\;R:\roadrunnerwork\trunk\apps\rrGUI\;$(RR_ROOT)\trunk\source;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>R:\rrInstalls\xe\full-debug\lib\;R:\rrInstalls\xeDebug\lib\;R:\rrInstalls\xe\rr_support\;R:\rrBuilds\xe\ThirdParty\lib\;R:\rrInstalls\xe\lib\;p:\mtk\Lib\Common\;P:\mtk\Components\Dune\;R:\roadrunnerwork\trunk\apps\rrGUI\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -102,6 +102,10 @@
 			<CppCompile Include="rrLogFileReader.cpp">
 				<DependentOn>rrLogFileReader.h</DependentOn>
 				<BuildOrder>12</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="rrSimulateThread.cpp">
+				<DependentOn>rrSimulateThread.h</DependentOn>
+				<BuildOrder>9</BuildOrder>
 			</CppCompile>
 			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\roadrunner.lib">
 				<IgnorePath>true</IgnorePath>
