@@ -172,7 +172,7 @@ def setNumPoints(numPoints):
 #
 #Available symbols for setSelectionList can be found by using getAvailableSymbols() after loading a model
 #
-#Takes a string with variable names separated by a space or a comma as an argument
+#Takes a string with variable Ids separated by a space or a comma as an argument
 def setSelectionList(list):
     return handle.setSelectionList(list)
 
@@ -482,9 +482,9 @@ def getFloatingSpeciesInitialConcentrations():
     handle.freeVector(values)
     return result
 
-##Returns a string with floating species initial condition names
-def getFloatingSpeciesInitialConditionNames():
-    values = handle.getFloatingSpeciesInitialConditionNames()
+##Returns a string with floating species initial condition Ids
+def getFloatingSpeciesInitialConditionIds():
+    values = handle.getFloatingSpeciesInitialConditionIds()
     result = handle.printVector(values)
     handle.freeVector(values)
     return result
@@ -527,9 +527,9 @@ def getRatesOfChange():
     handle.freeVector(values)
     return result
 
-##Returns the names given to the rate of change of the floating species
-def getRateOfChangeNames():
-    values = handle.getRatesOfChangeNames()
+##Returns the Ids given to the rate of change of the floating species
+def getRateOfChangeIds():
+    values = handle.getRatesOfChangeIds()
     result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
@@ -581,52 +581,52 @@ def getNumberOfDependentSpecies():
 def getNumberOfIndependentSpecies():
     return handle.getNumberOfIndependentSpecies()
 
-#Get names family
-##Returns a list of reaction names
-def getReactionNames():
-    values = handle.getReactionNames()
+#Get Ids family
+##Returns a list of reaction Ids
+def getReactionIds():
+    values = handle.getReactionIds()
     result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
-##Returns the names given to the rate of change of the floating species
-def getRateOfChangeNames():
-    values = handle.getRateOfChangeNames()
+##Returns the Ids given to the rate of change of the floating species
+def getRateOfChangeIds():
+    values = handle.getRateOfChangeIds()
     result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
-##Gets the list of boundary species names
-def getBoundarySpeciesNames():
-    values = handle.getBoundarySpeciesNames()
+##Gets the list of boundary species Ids
+def getBoundarySpeciesIds():
+    values = handle.getBoundarySpeciesIds()
     result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
-##Gets the list of floating species names
-def getFloatingSpeciesNames():
-    values = handle.getFloatingSpeciesNames()
+##Gets the list of floating species Ids
+def getFloatingSpeciesIds():
+    values = handle.getFloatingSpeciesIds()
     result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
-##Gets the list of global parameter names
-def getGlobalParameterNames():
-    values = handle.getGlobalParameterNames()
+##Gets the list of global parameter Ids
+def getGlobalParameterIds():
+    values = handle.getGlobalParameterIds()
     result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
-##Gets the list of compartment names
-def getCompartmentNames():
-    values = handle.getCompartmentNames()
+##Gets the list of compartment Ids
+def getCompartmentIds():
+    values = handle.getCompartmentIds()
     result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
 
 ##Returns the symbols of all floating species eigenvalues
-def getEigenValueNames():
-    values = handle.getEigenValueNames()
+def getEigenValueIds():
+    values = handle.getEigenValueIds()
     result = handle.printStringList(values)
     handle.freeStringList(values)
     return result
@@ -640,36 +640,36 @@ def getAvailableSymbols():                              #FIX
 #Get MCA methods
 
 ##Returns the symbols of all elasticity coefficients
-def getElasticityCoefficientNames():
-    value = handle.getElasticityCoefficientNames()
+def getElasticityCoefficientIds():
+    value = handle.getElasticityCoefficientIds()
     result = handle.printStringArrayList(value)
     handle.freeStringArrayList(value)
     return result
 
 ##Returns the symbols of all unscaled flux control coefficients
-def getUnscaledFluxControlCoefficientNames():
-    value = handle.getUnscaledFluxControlCoefficientNames()
+def getUnscaledFluxControlCoefficientIds():
+    value = handle.getUnscaledFluxControlCoefficientIds()
     result = handle.printStringArrayList(value)
     handle.freeStringArrayList(value)
     return result
 
 ##Returns the symbols of all flux control coefficients
-def getFluxControlCoefficientNames():
-    value = handle.getFluxControlCoefficientNames()
+def getFluxControlCoefficientIds():
+    value = handle.getFluxControlCoefficientIds()
     result = handle.printStringArrayList(value)
     handle.freeStringArrayList(value)
     return result
 
 ##Returns the symbols of all unscaled concentration control coefficients
-def getUnscaledConcentrationControlCoefficientNames():
-    value = handle.getUnscaledConcentrationCoefficientNames()
+def getUnscaledConcentrationControlCoefficientIds():
+    value = handle.getUnscaledConcentrationCoefficientIds()
     result = handle.printStringArrayList(value)
     handle.freeStringArrayList(value)
     return result
 
 ##Returns the symbols of all concentration control coefficients
-def getConcentrationControlCoefficientNames():
-    value = handle.getConcentrationControlCoefficientNames()
+def getConcentrationControlCoefficientIds():
+    value = handle.getConcentrationControlCoefficientIds()
     result = handle.printStringArrayList(value)
     handle.freeStringArrayList(value)
     return result
