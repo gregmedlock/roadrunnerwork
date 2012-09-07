@@ -2344,7 +2344,8 @@ RRStringListHandle rrCallConv getCompartmentIds()
 }
 
 
-RRStringListHandle rrCallConv getCompartment()
+/* Appears to be a duplicate
+RRStringListHandle rrCallConv getCompartmentIds()
 {
 	try
     {
@@ -2362,7 +2363,8 @@ RRStringListHandle rrCallConv getCompartment()
         setError(msg.str());
     }
     return NULL;
-}
+}*/
+
 
 bool rrCallConv getRateOfChange(const int& index, double& value)
 {
@@ -2804,7 +2806,7 @@ bool rrCallConv freeVector(RRVectorHandle vector)
     {
         if(vector)
         {
-            delete [] vector->Data;
+    	   delete [] vector->Data;
         }
         return true;
     }

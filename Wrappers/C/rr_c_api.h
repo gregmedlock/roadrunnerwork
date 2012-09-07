@@ -325,6 +325,12 @@ C_DECL_SPEC bool rrCallConv freeRRInstance(RRHandle handle);
 
 
 // Flags/Options
+/*!
+ \brief Enable or disable conservation analysis
+ \param OnOrOff Set true to switch on conservation analysis
+ \return Returns true if successful
+ \ingroup initialization
+*/
 C_DECL_SPEC bool rrCallConv setComputeAndAssignConservationLaws(const bool& OnOrOff);
 
 // -----------------------------------------------------------------------
@@ -364,6 +370,12 @@ C_DECL_SPEC char* rrCallConv getSBML();
 
 // -------------------------------------------------------------------------
 // SBML utility methods
+/*!
+ \brief Promote any local parameters to global status
+ \param sArg points to the SBML model to promote
+ \return Returns null if it fails otherwise it returns the promoted SBML string
+ \ingroup sbml
+*/
 C_DECL_SPEC char* rrCallConv getParamPromotedSBML(const char* sArg);
 
 /*!
@@ -1186,13 +1198,13 @@ C_DECL_SPEC int rrCallConv getVectorLength (RRVectorHandle vector);
 /*!
  \brief Create a new vector with a given size
 
- Example: myVector = createVectorAPI (10);
+ Example: myVector = createVector (10);
 
  \param size The number of element in the new vector
  \return Returns null if it fails, otherwise returns a pointer to the new vector
  \ingroup helperRoutines
 */
-C_DECL_SPEC RRVectorHandle rrCallConv createVectorAPI (int size);
+C_DECL_SPEC RRVectorHandle rrCallConv createVector (int size);
 
 /*!
  \brief Get a particular element from a vector
