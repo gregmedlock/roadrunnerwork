@@ -149,7 +149,7 @@ type
   TSetSelectionList = function (list : PAnsiChar) : bool; stdcall;
   TGetValue = function (speciesId : PAnsiChar; var value : double) : boolean; stdcall;
   TSetValue = function (speciesId : PAnsiChar; var value : double) : bool; stdcall;
-  TGetReactionNames = TPointerVoidFunc;
+  TGetReactionIds = TPointerVoidFunc;
   TReset = function : bool; stdcall;
   TFreeStringList = procedure (handle : Pointer); stdcall;
   TFreeRRMatrix = function (matrix : PRRMatrixHandle) : boolean; stdcall;
@@ -226,14 +226,14 @@ function  getConservationMatrix : TMatrix;
 function  getReactionRates : TDoubleArray;
 function  getRatesOfChange : TDoubleArray;
 
-function  getCompartmentNames : TStringList;
-function  getReactionNames : TStringList;
-function  getBoundarySpeciesNames : TStringList;
-function  getFloatingSpeciesNames : TStringList;
-function  getGlobalParameterNames : TStringList;
-function  getRatesOfChangeNames : TStringList;
-function  getEigenValueNames : TStringList;
-function  getElasticityNames : TStringList;
+function  getCompartmentIds : TStringList;
+function  getReactionIds : TStringList;
+function  getBoundarySpeciesIds : TStringList;
+function  getFloatingSpeciesIds : TStringList;
+function  getGlobalParameterIds : TStringList;
+function  getRatesOfChangeIds : TStringList;
+function  getEigenValueIds : TStringList;
+function  getElasticityIds : TStringList;
 
 function  getNumberOfReactions : integer;
 function  getNumberOfBoundarySpecies : integer;
@@ -313,7 +313,7 @@ var DLLHandle : Cardinal;
     libGetValue : TGetValue;
     libSetValue : TSetValue;
     libSetSelectionList : TSetSelectionList;
-    libGetReactionNames : TGetReactionNames;
+    libGetReactionIds : TGetReactionIds;
     libReset : TReset;
     libSetFloatingSpeciesInitialConcentrations : function (value : Pointer) : boolean; stdcall;
     libGetCapabilities : TVoidCharFunc;
@@ -354,13 +354,13 @@ var DLLHandle : Cardinal;
     libGetRatesOfChange : TVoidVectorFunc;
     libOneStep : TOneStep;
 
-    libGetCompartmentNames     : TVoidStringListFunc;
-    libGetBoundarySpeciesNames : TVoidStringListFunc;
-    libGetFloatingSpeciesNames : TVoidStringListFunc;
-    libGetGlobalParameterNames : TVoidStringListFunc;
-    libGetRatesOfChangeNames   : TVoidStringListFunc;
-    libGetEigenValueNames      : TVoidStringListFunc;
-    libGetElasticityNames      : TVoidStringListFunc;
+    libGetCompartmentIds     : TVoidStringListFunc;
+    libGetBoundarySpeciesIds : TVoidStringListFunc;
+    libGetFloatingSpeciesIds : TVoidStringListFunc;
+    libGetGlobalParameterIds : TVoidStringListFunc;
+    libGetRatesOfChangeIds   : TVoidStringListFunc;
+    libGetEigenValueIds      : TVoidStringListFunc;
+    libGetElasticityIds      : TVoidStringListFunc;
 
     libSetSteadyStateSelectionList : TCharBoolFunc;
     libGetAvailableSymbols : TLibGetAvailableSymbols;
@@ -701,10 +701,10 @@ begin
 end;
 
 
-function getReactionNames : TStringList;
+function getReactionIds : TStringList;
 var pList : PRRStringList;
 begin
-  pList := libGetReactionNames;
+  pList := libGetReactionIds;
   if pList <> nil then
      try
        result := getArrayOfStrings(pList);
@@ -727,10 +727,10 @@ begin
 end;
 
 
-function getBoundarySpeciesNames : TStringList;
+function getBoundarySpeciesIds : TStringList;
 var p : PRRStringList;
 begin
-  p := libGetBoundarySpeciesNames;
+  p := libGetBoundarySpeciesIds;
   try
     if p = nil then
        result := TStringList.Create
@@ -741,10 +741,10 @@ begin
   end;
 end;
 
-function getFloatingSpeciesNames : TStringList;
+function getFloatingSpeciesIds : TStringList;
 var p : PRRStringList;
 begin
-  p := libGetFloatingSpeciesNames;
+  p := libGetFloatingSpeciesIds;
   try
     if p = nil then
        result := TStringList.Create
@@ -756,10 +756,10 @@ begin
 end;
 
 
-function getGlobalParameterNames : TStringList;
+function getGlobalParameterIds : TStringList;
 var p : PRRStringList;
 begin
-  p := libGetGlobalParameterNames;
+  p := libGetGlobalParameterIds;
   try
     if p = nil then
        result := TStringList.Create
@@ -799,10 +799,10 @@ begin
 end;
 
 
-function getRatesOfChangeNames : TStringList;
+function getRatesOfChangeIds : TStringList;
 var p : PRRStringList;
 begin
-  p := libGetRatesOfChangeNames;
+  p := libGetRatesOfChangeIds;
   try
     if p = nil then
        result := TStringList.Create
@@ -814,10 +814,10 @@ begin
 end;
 
 
-function getEigenValueNames : TStringList;
+function getEigenValueIds : TStringList;
 var p : PRRStringList;
 begin
-  p := libGetEigenValueNames;
+  p := libGetEigenValueIds;
   try
     if p = nil then
        result := TStringList.Create
@@ -829,10 +829,10 @@ begin
 end;
 
 
-function getElasticityNames : TStringList;
+function getElasticityIds : TStringList;
 var p : PRRStringList;
 begin
-  p := libGetElasticityNames;
+  p := libGetElasticityIds;
   try
     if p = nil then
        result := TStringList.Create
@@ -861,10 +861,10 @@ begin
 end;
 
 
-function getCompartmentNames : TStringList;
+function getCompartmentIds : TStringList;
 var pList : PRRStringList;
 begin
-  pList := libGetCompartmentNames;
+  pList := libGetCompartmentIds;
   if pList <> nil then
      try
        result := getArrayOfStrings(pList);
@@ -1020,7 +1020,7 @@ begin
      raise Exception.Create ('Error in getCC function');
 end;
 
-  {st := getFluxControlCoefficientNames();
+  {st := getFluxControlCoefficientIds();
   subList := TRRList.Create;
   subList.Add (TRRListItem.Create ('Flux Control Coefficients'));
   for i := 0 to st.Count - 1 do
@@ -1028,7 +1028,7 @@ end;
   result.Add (TRRListItem.Create (subList));
   st.Free;}
 
-  {st := getUnscaledConcentrationControlCoefficientNames();
+  {st := getUnscaledConcentrationControlCoefficientIds();
   subList := TRRList.Create;
   subList.Add (TRRListItem.Create ('Unscaled Concentration Control Coefficients'));
   for i := 0 to st.Count - 1 do
@@ -1049,13 +1049,13 @@ begin
 
   subList := TRRList.Create;
   subList.Add (TRRListItem.Create ('Floating Species'));
-  st := getFloatingSpeciesNames();
+  st := getFloatingSpeciesIds();
   for i := 0 to st.Count - 1 do
       subList.Add (TRRListItem.Create (st[i]));
   result.Add (TRRListItem.Create (subList));
   st.Free;
 
-  st := getBoundarySpeciesNames();
+  st := getBoundarySpeciesIds();
   subList := TRRList.Create;
   subList.Add (TRRListItem.Create ('Boundary Species'));
   for i := 0 to st.Count - 1 do
@@ -1063,29 +1063,29 @@ begin
   result.Add (TRRListItem.Create (subList));
   st.Free;
 
-  {st := getFloatingSpeciesAmountNames();
+  {st := getFloatingSpeciesAmountIds();
   subList := TRRList.Create;
   for i := 0 to st.Count - 1 do
       subList.Add (TRRListItem.Create (st[i]));
   result.Add (TRRListItem.Create (subList));
   st.Free;}
 
-  {st := getBoundarySpeciesAmountNames();
+  {st := getBoundarySpeciesAmountIds();
   subList := TRRList.Create;
   for i := 0 to st.Count - 1 do
       subList.Add (TRRListItem.Create (st[i]));
   lresultist.Add (TRRListItem.Create (subList));
   st.Free;}
 
-  st := getGlobalParameterNames();
+  st := getGlobalParameterIds();
   subList := TRRList.Create;
-  subList.Add (TRRListItem.Create ('Global Parameter Names'));
+  subList.Add (TRRListItem.Create ('Global Parameter Ids'));
   for i := 0 to st.Count - 1 do
       subList.Add (TRRListItem.Create (st[i]));
   result.Add (TRRListItem.Create (subList));
   st.Free;
 
-  {st := getCompartmentNames();
+  {st := getCompartmentIds();
   subList := TRRList.Create;
   subList.Add (TRRListItem.Create ('Compartments'));
   for i := 0 to st.Count - 1 do
@@ -1093,23 +1093,23 @@ begin
   result.Add (TRRListItem.Create (subList));
   st.Free;}
 
-  st := getReactionNames();
+  st := getReactionIds();
   subList := TRRList.Create;
-  subList.Add (TRRListItem.Create ('Reaction Names'));
+  subList.Add (TRRListItem.Create ('Reaction Ids'));
   for i := 0 to st.Count - 1 do
       subList.Add (TRRListItem.Create (st[i]));
   result.Add (TRRListItem.Create (subList));
   st.Free;
 
-  {st := getRatesOfChangeNames();
+  {st := getRatesOfChangeIds();
   subList := TRRList.Create;
-  subList.Add (TRRListItem.Create ('Rate of Change Names'));
+  subList.Add (TRRListItem.Create ('Rate of Change Ids'));
   for i := 0 to st.Count - 1 do
       subList.Add (TRRListItem.Create (st[i]));
   result.Add (TRRListItem.Create (subList));
   st.Free;}
 
-  {st := getElasticityCoefficientNames();
+  {st := getElasticityCoefficientIds();
   subList := TRRList.Create;
   subList.Add (TRRListItem.Create ('Elasticity Coefficients'));
   for i := 0 to st.Count - 1 do
@@ -1117,7 +1117,7 @@ begin
   result.Add (TRRListItem.Create (subList));
   st.Free;}
 
-  {st := getUnscaledElasticityCoefficientNames();
+  {st := getUnscaledElasticityCoefficientIds();
   subList := TRRList.Create;
   subList.Add (TRRListItem.Create ('Unscaled Elasticity Coefficients'));
   for i := 0 to st.Count - 1 do
@@ -1125,7 +1125,7 @@ begin
   result.Add (TRRListItem.Create (subList));
   st.Free;}
 
-  {st := getEigenValueNames();
+  {st := getEigenValueIds();
   subList := TRRList.Create;
   subList.Add (TRRListItem.Create ('Eigenvalues'));
   for i := 0 to st.Count - 1 do
@@ -1407,14 +1407,14 @@ begin
    @libGetReactionRates         := loadSingleMethod ('getReactionRates', errMsg, result, methodList);
    @libGetRatesOfChange         := loadSingleMethod ('getRatesOfChange', errMsg, result, methodList);
 
-   @libGetCompartmentNames      := loadSingleMethod ('getCompartmentNames', errMsg, result, methodList);
-   @libGetReactionNames         := loadSingleMethod ('getReactionNames', errMsg, result, methodList);
-   @libGetBoundarySpeciesNames  := loadSingleMethod ('getBoundarySpeciesNames', errMsg, result, methodList);
-   @libGetFloatingSpeciesNames  := loadSingleMethod ('getFloatingSpeciesNames', errMsg, result, methodList);
-   @libGetGlobalParameterNames  := loadSingleMethod ('getGlobalParameterNames', errMsg, result, methodList);
-   @libGetRatesOfChangeNames    := loadSingleMethod ('getRatesOfChangeNames', errMsg, result, methodList);
-   @libGetEigenValueNames       := loadSingleMethod ('getEigenValueNames', errMsg, result, methodList);
-   @libGetElasticityNames       := loadSingleMethod ('getElasticityCoefficientNames', errMsg, result, methodList);
+   @libGetCompartmentIds      := loadSingleMethod ('getCompartmentIds', errMsg, result, methodList);
+   @libGetReactionIds         := loadSingleMethod ('getReactionIds', errMsg, result, methodList);
+   @libGetBoundarySpeciesIds  := loadSingleMethod ('getBoundarySpeciesIds', errMsg, result, methodList);
+   @libGetFloatingSpeciesIds  := loadSingleMethod ('getFloatingSpeciesIds', errMsg, result, methodList);
+   @libGetGlobalParameterIds  := loadSingleMethod ('getGlobalParameterIds', errMsg, result, methodList);
+   @libGetRatesOfChangeIds    := loadSingleMethod ('getRatesOfChangeIds', errMsg, result, methodList);
+   @libGetEigenValueIds       := loadSingleMethod ('getEigenValueIds', errMsg, result, methodList);
+   @libGetElasticityIds       := loadSingleMethod ('getElasticityCoefficientIds', errMsg, result, methodList);
    @libGetAvailableSymbols      := loadSingleMethod ('getAvailableSymbols', errMsg, result, methodList);
 
    @libGetStoichiometryMatrix   := loadSingleMethod ('getStoichiometryMatrix', errMsg, result, methodList);

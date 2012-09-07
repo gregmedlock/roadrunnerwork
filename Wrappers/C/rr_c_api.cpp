@@ -317,7 +317,7 @@ char* rrCallConv getTempFolder()
 	return NULL;
 }
 
-bool rrCallConv loadSBMLFromFile(const char* sbmlFileName)
+bool rrCallConv loadSBMLFromFile(const char* fileName)
 {
 	try
     {
@@ -327,7 +327,7 @@ bool rrCallConv loadSBMLFromFile(const char* sbmlFileName)
             return false;
         }
 
-        if(!gRRHandle->loadSBMLFromFile(sbmlFileName))
+        if(!gRRHandle->loadSBMLFromFile(fileName))
         {
             setError("Failed to load SBML semantics");
             return false;
