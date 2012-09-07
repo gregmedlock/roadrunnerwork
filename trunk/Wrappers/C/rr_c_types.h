@@ -50,15 +50,18 @@ extern "C"
 #include "rr_support/stdbool.h"
 #endif
                                     /*Hand the client a HANDLE, i.e. ptr to structure */
-typedef void* RRHandle;
+
+
+/*!@brief Void pointer to RRHandle */ 
+typedef void* RRHandle; /*! Void pointer to RRHandle *>
 
 /*!@struct*/ 
 /*!@brief Structure for a simple vector of doubles */ 
 typedef struct RRVector
 {
     int             Count;  /*!< The number of elements in the vector */
-    double*         Data;  /*!< Points to an array of double items */
-} *RRVectorHandle;
+    double*         Data;   /*!< Points to an array of double items */
+} *RRVectorHandle;          /*!< Pointer to RRVectorHandle struct */
 
 
 typedef struct RRLabelStringList
@@ -66,7 +69,7 @@ typedef struct RRLabelStringList
     int             Count;  /*!< Number of element in the label string list */
     char*           Label;  /*!< Label associated with string list */
     char**          String; /*!< List of strings */
-} *RRLabelStringListHandle;
+} *RRLabelStringListHandle; /*!< Pointer to RRLabelStringList struct */
 
 
 /*!@struct*/ 
@@ -75,7 +78,7 @@ typedef struct RRStringList
 {
     int             Count;  /*!< The number of elements in the string array */
     char**          String; /*!< Points to an array of string items */
-} *RRStringListHandle;
+} *RRStringListHandle;      /*!< Pointer to RRStringListHandle struct */
 
 
 /*!@struct*/ 
@@ -86,7 +89,7 @@ typedef struct RRMatrix
     int             CSize;  /*!< The number of columns in the matrix */
     double*         Data;   /*!< Items in the matrix stored as a linear array. Access an element using Data[i*CSize + j], 
 							  where i,j represent the row and column numberof the element. Indexing is from zero */
-} *RRMatrixHandle;
+} *RRMatrixHandle;          /*!< Pointer to RRMatrixHandle struct */
 
 
 /*!@struct*/ 
@@ -97,7 +100,7 @@ typedef struct RRResult
     int             CSize;  /*!< The number of columns in the result matrix */
     double*         Data;   /*!< A pointer to the data stored in the matrix. Access an element using Data[i*CSize + j] */
     char**          ColumnHeaders;   /*!< Pointer to an array of column header strings */
-} *RRResultHandle;
+} *RRResultHandle;          /*!< Pointer to RRResultHandle struct */
 
 
 /*!@struct*/ 
@@ -107,25 +110,27 @@ typedef struct RRCCode
     char*   Header;  /*!< Head file *.h */
     char*   Source;  /*!< Main source code, *.c */
 
-} *RRCCodeHandle;
+} *RRCCodeHandle;    /*!< Pointer to RRCCodeHandle struct */
 
 
 struct RRStringArrayList;
 
+/*!@struct*/ 
+/*!@brief To be deprecated */ 
 typedef struct RRStringArrayListItem
 {
-    char*                       Item;
-    RRStringArrayList*          SubList;
-} *RRStringArrayListItemHandle;
+    char*                       Item;    /*!< To be deprecated */
+    RRStringArrayList*          SubList; /*!< To be deprecated */ 
+} *RRStringArrayListItemHandle;          /*!< Pointer to RRStringArrayListItemHandle struct */
 
-
+/*!@struct*/ 
+/*!@brief To be deprecated */ 
 typedef struct RRStringArrayList
 {
-    int                         Count;
-    RRStringArrayListItemHandle Items;
+    int                         Count; /*!< To be deprecated */
+    RRStringArrayListItemHandle Items; /*!< To be deprecated */
 
-}  *RRStringArrayListHandle;
-
+}  *RRStringArrayListHandle;          /*!< Pointer to RRStringArrayListHandle struct */
 
 /*!@enum*/ 
 /*!@brief The list type supports strings, integers, double and lists */ 
@@ -143,7 +148,7 @@ typedef struct cRRArrayListItem
 {
     ListItemType                ItemType;  /*!< The type of the item in this list element */
     void*                       pValue;    /*!< A pointer to the list element */
-} *cRRArrayListItemHandle;
+} *cRRArrayListItemHandle;                 /*!< Pointer to cRRArrayListItemHandle struct */
 
 
 /*!@struct*/ 
@@ -152,7 +157,7 @@ typedef struct cRRArrayList
 {
     int                        Count;  /*!< The number elements in this list */
     cRRArrayListItemHandle     Items;  /*!< A pointer to an array of list items */
-}  *cRRArrayListHandle;
+}  *cRRArrayListHandle;                /*!< Pointer to cRRArrayListHandle struct */
 
 
 #if defined( __cplusplus)
