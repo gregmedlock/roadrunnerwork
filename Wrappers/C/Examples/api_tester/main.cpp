@@ -372,7 +372,7 @@ int main(int argc, char* argv[])
     cout<<printVector(getFloatingSpeciesConcentrations());
     cout<<printVector(getGlobalParameterValues());
     cout<<"\n\n Symbols\n";
-    RRArrayList2* symHandle = getAvailableSymbols();
+    cRRArrayList* symHandle = getAvailableSymbols();
     cout<<printArrayList(symHandle);
     freeArrayList(symHandle);
     cout<<"\n\n ================================\n";
