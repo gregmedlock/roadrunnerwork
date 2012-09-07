@@ -2783,22 +2783,6 @@ bool rrCallConv freeStringList(RRStringListHandle sl)
     return false;
 }
 
-bool rrCallConv freeLabelStringList(RRLabelStringListHandle sl)
-{
-	try
-    {
-        delete sl;
-        return true;
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        setError(msg.str());
-    }
-    return false;
-}
-
 bool rrCallConv freeVector(RRVectorHandle vector)
 {
 	try
