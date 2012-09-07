@@ -120,7 +120,7 @@
  \brief Get information about floating species
 
  \defgroup parameters Parameter group
- \brief set and get global and local parameters
+ \brief Set and get global and local parameters
 
  \defgroup compartment Compartment group
  \brief <b> Set and Get information on compartments
@@ -180,14 +180,14 @@ C_DECL_SPEC char* rrCallConv getVersion();
 
 /*!
  \brief Retrieve the current build date of the library
- \return char* buildDate - Returns null if it fails, otherwise it returns the build date
+ \return Returns null if it fails, otherwise it returns the build date
  \ingroup utility
 */
 C_DECL_SPEC char*  rrCallConv getBuildDate();
 
 /*!
  \brief Retrieve the current copyright notice for the library
- \return char* copyRight - Returns null if it fails, otherwise it returns the copyright string
+ \return Returns null if it fails, otherwise it returns the copyright string
  \ingroup utility
 */
 C_DECL_SPEC char*  rrCallConv getCopyright();
@@ -198,7 +198,7 @@ C_DECL_SPEC char*  rrCallConv getCopyright();
  When cRoadRunner is run in C generation mode its uses a temporary folder to store the 
  generate C source code. This method can be used to set the temporary folder path if necessary.
 
- \return bool status - Returns true if succesful
+ \return Returns true if succesful
  \ingroup utility
 */
 C_DECL_SPEC bool rrCallConv setTempFolder(const char* folder);
@@ -210,7 +210,7 @@ C_DECL_SPEC bool rrCallConv setTempFolder(const char* folder);
  generate C source code. This method can be used to get the current value
  for the the temporary folder path.
 
- \return char* path - Returns null if it fails, otherwise it returns the path
+ \return Returns null if it fails, otherwise it returns the path
  \ingroup utility
 */
 C_DECL_SPEC char* rrCallConv getTempFolder();
@@ -228,20 +228,12 @@ C_DECL_SPEC char* rrCallConv getTempFolder();
 C_DECL_SPEC RRCCode* rrCallConv getCCode();
 
 
-// -----------------------------------------------------------------------
-/** \} */
-/**
-  * @name Error handling and informational methods
-  */
-/** \{ */
-// -----------------------------------------------------------------------
-
 // Logging
 
 /*!
  \brief Enable logging
 
- \return bool status - Ruturns true if succesful
+ \return Returns true if succesful
  \ingroup errorfunctions
 */
 C_DECL_SPEC bool rrCallConv enableLogging();
@@ -257,7 +249,7 @@ C_DECL_SPEC bool rrCallConv enableLogging();
  Example: setLogLevel ("DEBUG4")
 
  \param char* level - Pointer to the logging level string. 
- \return bool status - Ruturns true if succesful
+ \return Ruturns true if succesful
  \ingroup errorfunctions
 */
 C_DECL_SPEC bool rrCallConv setLogLevel(const char* lvl);
@@ -272,7 +264,7 @@ C_DECL_SPEC bool rrCallConv setLogLevel(const char* lvl);
 
  Example: str = getLogLevel ()
 
- \return char* level - Returns null is it fails else returns a pointer to the logging string
+ \return Returns null is it fails else returns a pointer to the logging string
  \ingroup errorfunctions
 */
 C_DECL_SPEC char* rrCallConv getLogLevel();
@@ -287,7 +279,7 @@ C_DECL_SPEC char* rrCallConv getLogLevel();
 
  Example: str = getLogFileName ()
 
- \return char* level - Returns null is it fails else returns the full path to the logging file name
+ \return Returns null is it fails else returns the full path to the logging file name
  \ingroup errorfunctions
 */
 C_DECL_SPEC char* rrCallConv getLogFileName();
@@ -307,23 +299,15 @@ C_DECL_SPEC bool rrCallConv hasError();
 
  Example: str = getLastError ()
 
- \return char* errStrings - Return nukll if fails, otherwise returns a pointer to the error string
+ \return Return null if fails, otherwise returns a pointer to the error string
  \ingroup errorfunctions
 */
 C_DECL_SPEC char* rrCallConv getLastError();
 
 
-// -----------------------------------------------------------------------
-/** \} */
-/**
-  * @name Library initialization and termination routines
-  */
-/** \{ */
-// -----------------------------------------------------------------------
-
 /*!
  \brief Initialize the roadRunner library and return an instance
- \return RRHandle instance Returns an instance of the library, returns null if it fails
+ \return Returns an instance of the library, returns null if it fails
  \ingroup initialization
 */
 C_DECL_SPEC RRHandle rrCallConv getRRInstance();
@@ -335,29 +319,18 @@ C_DECL_SPEC RRHandle rrCallConv getRRInstance();
 */
 C_DECL_SPEC bool rrCallConv freeRRInstance(RRHandle handle);
 
-// -----------------------------------------------------------------------
-/** \} */
-/**
-  * @name Flags and options
-  */
-/** \{ */
-// -----------------------------------------------------------------------
 
 // Flags/Options
 C_DECL_SPEC bool rrCallConv setComputeAndAssignConservationLaws(const bool& OnOrOff);
 
 // -----------------------------------------------------------------------
-/** \} */
-/**
-  * @name Read and Write models
-  */
-/** \{ */
+// Read and Write models
 // -----------------------------------------------------------------------
 
 /*!
  \brief Create a model from an SBML string
- \param char* sbml string
- \return bool Returns true if sucessful
+ \param[in] sbml string
+ \return Returns true if sucessful
  \ingroup loadsave
 */
 C_DECL_SPEC bool rrCallConv loadSBML(const char* sbml);
@@ -371,16 +344,15 @@ C_DECL_SPEC bool rrCallConv loadSBML(const char* sbml);
 C_DECL_SPEC bool rrCallConv loadSBMLFromFile(const char* sbml);
 
 /*!
- \brief Retrive the current state of the model in the form of an SBML string
- \param char* file name 
- \return bool Returns null is the call fails, otherwise returns a pointer to the SBML string
+ \brief Retrieve the <b>current state</b> of the model in the form of an SBML string
+  \return Returns null is the call fails, otherwise returns a pointer to the SBML string
  \ingroup loadsave
 */
 C_DECL_SPEC char* rrCallConv writeSBML();      
 
 /*!
  \brief Retrieve the last SBML model that was loaded
- \return char* Returns null is the call fails, otherwise returns a pointer to the SBML string
+ \return Returns null is the call fails, otherwise returns a pointer to the SBML string
  \ingroup loadsave
 */
 C_DECL_SPEC char* rrCallConv getSBML();
@@ -388,24 +360,35 @@ C_DECL_SPEC char* rrCallConv getSBML();
 
 // -------------------------------------------------------------------------
 // SBML utility methods
-C_DECL_SPEC char* 				    rrCallConv   getParamPromotedSBML(const char* sArg);
+C_DECL_SPEC char* rrCallConv getParamPromotedSBML(const char* sArg);
 
-// Get and set capability routines
-C_DECL_SPEC bool                    rrCallConv   setCapabilities (const char* caps);
-C_DECL_SPEC char*                   rrCallConv   getCapabilities();
+/*!
+ \brief Set the simulator's capabilities
+ \param[out] caps An XML string that specifies the simulators capabilities
+ \return True if sucessful
+ \ingroup simulation
+*/
+C_DECL_SPEC bool rrCallConv setCapabilities (const char* caps);
+
+
+/*!
+ \brief Get the simulator's capabilities
+ \return Returns null if it fails, otherwise it returns the simulator's capabilities in the form of an XML string
+ \ingroup simulation
+*/C_DECL_SPEC char* rrCallConv getCapabilities();
 
 /*!
  \brief Set the time start for a simulation
- \param const double& time start
- \return bool Returns True if sucessful
+ \param  timeStart
+ \return Returns True if sucessful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv setTimeStart(const double& timeStart);
 
 /*!
  \brief Set the time end for a simulation
- \param const double& time start
- \return bool Returns True if sucessful
+ \param timeEnd
+ \return Returns True if sucessful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv setTimeEnd(const double& timeEnd);
@@ -423,8 +406,8 @@ C_DECL_SPEC bool rrCallConv setNumPoints(const int& nrPoints);
 
  Example: setSelectionList ("Time, S1, J1, J2")
 
- \param const char* A string of names separated by spaces or comma characters
- \return bool Returns True if sucessful
+ \param list A string of names separated by spaces or comma characters
+ \return Returns True if sucessful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv setSelectionList(const char* list);
@@ -432,7 +415,7 @@ C_DECL_SPEC bool rrCallConv setSelectionList(const char* list);
 /*!
  \brief Get the current selection list for simulate() or simulateEx()
 
- \return char* A list of symbol names indicating the current selection list
+ \return A list of symbol names indicating the current selection list
  \ingroup simulation
 */
 C_DECL_SPEC RRStringListHandle rrCallConv getSelectionList();
@@ -441,7 +424,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getSelectionList();
  \brief Carry out a time-course simulation, use setTimeStart etc to set
  characteristics
 
- \return RRResultHandle Returns an array containing the results of the simulation
+ \return Returns an array containing the results of the simulation
  \ingroup simulation
 */
 C_DECL_SPEC RRResultHandle rrCallConv simulate();
@@ -461,10 +444,10 @@ C_DECL_SPEC RRResultHandle rrCallConv simulateEx(const double& timeStart, const 
 
  Example: status = OneStep (&currentTime, &timeStep, &newTimeStep);
 
- \param double* currentTime The current time in the simulation
- \param double* stepSize The step size to use in the integration
- \param double* The new time (currentTime + stepSize)
- \return Returns True if successful
+ \param[in] currentTime The current time in the simulation
+ \param[in] stepSize The step size to use in the integration
+ \param[in]The new time (currentTime + stepSize)
+ \return Returns true if successful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv oneStep(const double& currentTime, const double& stepSize, double& value);
@@ -474,8 +457,8 @@ C_DECL_SPEC bool rrCallConv oneStep(const double& currentTime, const double& ste
 
  Example: status = getTimeStart (&timeStart);
 
- \param double* timeStart The current value for the time start
- \return Returns True if successful
+ \param[out] timeStart The current value for the time start
+ \return Returns true if successful
  \ingroup simulation
 */
 C_DECL_SPEC bool rrCallConv getTimeStart(double& timeStart);
@@ -503,14 +486,6 @@ C_DECL_SPEC bool rrCallConv getTimeEnd(double& timeEnd);
 C_DECL_SPEC bool rrCallConv getNumPoints (int& numPoints);
 
 
-// -----------------------------------------------------------------------
-/** \} */
-/**
-  * @name Steady State Methods
-  */
-/** \{ */
-// -----------------------------------------------------------------------
-
 /*!
  \brief Compute the steady state of the current model
 
@@ -532,13 +507,37 @@ C_DECL_SPEC bool rrCallConv steadyState(double& value);
 */
 C_DECL_SPEC RRVectorHandle rrCallConv computeSteadyStateValues();
 
-C_DECL_SPEC bool                    rrCallConv   setSteadyStateSelectionList(const char* list);
+/*!
+ \brief Set the selection list of the steady state analysis
 
+ \param[in] list The string argument should be a space separated list of symbols in the selection list
+ \return Returns true if successful
+ \ingroup steadystate
+*/
+C_DECL_SPEC bool rrCallConv setSteadyStateSelectionList(const char* list);
+
+
+/*!
+ \brief Get the selection list for the steady state analysis
+
+ \return Returns null if it fails, otherwise it returns a list of strings representing symbols in the selection list
+ \ingroup steadystate
+*/
 C_DECL_SPEC RRStringListHandle      rrCallConv   getSteadyStateSelectionList();
 
 
 // Set and get family of methods
+/*!
+ \brief TO BE DONE
+ \ingroup state
+*/
 C_DECL_SPEC bool        			rrCallConv   getValue(const char* speciesID, double& value);
+
+
+/*!
+ \brief TO BE DONE
+ \ingroup state
+*/
 C_DECL_SPEC bool                    rrCallConv   setValue(const char* speciesId, const double& val);
 
 
@@ -749,17 +748,42 @@ C_DECL_SPEC RRStringListHandle      rrCallConv getFloatingSpeciesInitialConditio
 
  Example: number = getNumberOfReactions ();
 
- \return Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions
+ \return int value - Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions
  \ingroup state
 */
-C_DECL_SPEC int  rrCallConv   getNumberOfReactions();
+C_DECL_SPEC int rrCallConv getNumberOfReactions();
 
 
-C_DECL_SPEC bool                  	rrCallConv getReactionRate(const int&, double& rate);
-C_DECL_SPEC RRVectorHandle          rrCallConv getReactionRates();
-C_DECL_SPEC RRVectorHandle          rrCallConv getReactionRatesEx (const RRVectorHandle vec);
+/*!
+ \brief Retrieve a give reaction as indicated by the index parameter
 
-// Rates of change
+ \param int* index - The index is used to specif which reaction rate to retrieve
+ \param double* rate - The reaction rate is returned in the rate argument
+ \return bool status - Returns false if it fails
+ \ingroup reaction
+*/
+C_DECL_SPEC bool rrCallConv getReactionRate(const int&, double& rate);
+
+
+/*!
+ \brief Retrieve a vector of current reaction rates
+
+ \return RRVectorHandle vReactionRates - Returns null if it fails, otherwise it returns a vector of reaction rates
+ \ingroup reaction
+*/
+C_DECL_SPEC RRVectorHandle rrCallConv getReactionRates();
+
+
+/*!
+ \brief Retrieve a vector of reactionb rates given a vector of species concentrations
+
+ \param RRVectorHandle species - The vector of floating species concentrations
+ \return RRVectorHandle vReactionRates - Returns null if it fails otherwise it returns a vector of reaction rates
+ \ingroup reaction
+*/
+C_DECL_SPEC RRVectorHandle rrCallConv getReactionRatesEx (const RRVectorHandle vec);
+
+
 /*!
  \brief Retrieve the vector of rates of change
 
@@ -996,7 +1020,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getUnscaledConcentrationControlCoefficient
 /*!
  \brief Retreive the matrix of scaled concentration control coefficients for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns a matrix of scaled concentration control coefficients 
+ \return Returns null if it fails, otherwise returns a matrix of scaled concentration control coefficients 
  The first column will contain the real values and the second column the imaginary values
  \ingroup mca
 */
@@ -1005,7 +1029,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getScaledConcentrationControlCoefficientMa
 /*!
  \brief Retreive the matrix of unscaled flux control coefficients for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns a matrix of unscaled flux control coefficients 
+ \return Returns null if it fails, otherwise returns a matrix of unscaled flux control coefficients 
  The first column will contain the real values and the second column the imaginary values
  \ingroup mca
 */
@@ -1014,17 +1038,58 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getUnscaledFluxControlCoefficientMatrix();
 /*!
  \brief Retreive the matrix of scaled flux control coefficients for the current model
 
- \return RRMatrixHandle matrix - Returns nil if it fails, otherwise returns a matrix of scaled flux control coefficients 
+ \return Returns null if it fails, otherwise returns a matrix of scaled flux control coefficients 
  The first column will contain the real values and the second column the imaginary values
  \ingroup mca
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getScaledFluxControlCoefficientMatrix();
 
-C_DECL_SPEC bool                    rrCallConv   getuCC (const char* variable, const char* parameter, double& value);
-C_DECL_SPEC bool                    rrCallConv   getCC (const char* variable, const char* parameter, double& value);
-C_DECL_SPEC bool                    rrCallConv   getEE(const char* name, const char* species, double& value);
-C_DECL_SPEC bool                    rrCallConv   getuEE(const char* name, const char* species, double& value);
-C_DECL_SPEC bool                    rrCallConv   getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
+/*!
+ \brief Retireve a single unscaled control coefficient
+
+ \param[in] variable This is the dependent variable of the coefficient, for example a flux or species concentration
+ \param[in] parameter This is the independent parameter, for example a kinetic constant or boundary species
+ \param[out] value This is the value of the unscaled control coefficeint returns to the caller
+ \return Returns true if successful
+ \ingroup mca
+*/
+C_DECL_SPEC bool rrCallConv getuCC (const char* variable, const char* parameter, double& value);
+
+/*!
+ \brief Retireve a single control coefficient
+
+ \param[in] variable This is the dependent variable of the coefficient, for example a flux or species concentration
+ \param[in] parameter This is the independent parameter, for example a kinetic constant or boundary species
+ \param[out] value This is the value of the control coefficeint returns to the caller
+ \return Returns true if successful
+ \ingroup mca
+*/
+C_DECL_SPEC bool  rrCallConv getCC (const char* variable, const char* parameter, double& value);
+
+/*!
+ \brief Retireve a single elasticity coefficient
+
+ \param[in] variable This is the reaction variable for the elasticity
+ \param[in] parameter This is the independent parameter, for example a floating of boundary species
+ \param[out] value This is the value of the elasticity coefficient returns to the caller
+ \return Returns true if successful
+ \ingroup mca
+*/
+C_DECL_SPEC bool rrCallConv getEE(const char* name, const char* species, double& value);
+
+/*!
+ \brief Retireve a single unscaled elasticity coefficient
+
+ \param[in] variable This is the reaction variable for the unscaled elasticity
+ \param[in] parameter This is the independent parameter, for example a floating of boundary species
+ \param[out] value This is the value of the unscaled elasticity coefficient returns to the caller
+ \return Returns true if successful
+ \ingroup mca
+*/
+C_DECL_SPEC bool rrCallConv getuEE(const char* name, const char* species, double& value);
+
+// What's this, not sure if we need it?
+C_DECL_SPEC bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
 
 // Print/format functions
 C_DECL_SPEC char*                   rrCallConv   printResult(const RRResultHandle result);
@@ -1057,7 +1122,7 @@ C_DECL_SPEC void                    rrCallConv   Pause();
  \return Returns -1 if it fails, otherwise returns the number of elements in the vector
  \ingroup helperRoutines
 */
-C_DECL_SPEC int rrCallConv  getVectorLength (RRVectorHandle vector);
+C_DECL_SPEC int rrCallConv getVectorLength (RRVectorHandle vector);
 
 /*!
  \brief Create a new vector with a given size
@@ -1068,7 +1133,7 @@ C_DECL_SPEC int rrCallConv  getVectorLength (RRVectorHandle vector);
  \return Returns null if it fails, otherwise returns a pointer to the new vector
  \ingroup helperRoutines
 */
-C_DECL_SPEC RRVectorHandle rrCallConv  createVectorAPI (int size);
+C_DECL_SPEC RRVectorHandle rrCallConv createVectorAPI (int size);
 
 /*!
  \brief Get a particular element from a vector
@@ -1081,7 +1146,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv  createVectorAPI (int size);
  \return Returns True if succesful
  \ingroup helperRoutines
 */
-C_DECL_SPEC bool rrCallConv  getVectorElement (RRVectorHandle vector, int index, double& value);
+C_DECL_SPEC bool rrCallConv getVectorElement (RRVectorHandle vector, int index, double& value);
 
 
 /*!
@@ -1095,7 +1160,7 @@ C_DECL_SPEC bool rrCallConv  getVectorElement (RRVectorHandle vector, int index,
  \return Returns True if succesful
  \ingroup helperRoutines
 */
-C_DECL_SPEC bool rrCallConv  setVectorElement (RRVectorHandle vector, int index, double value);
+C_DECL_SPEC bool rrCallConv setVectorElement (RRVectorHandle vector, int index, double value);
 
 
 C_DECL_SPEC int                     rrCallConv  getStringListLength (RRStringListHandle stringList);
