@@ -11,6 +11,7 @@
 /** \brief A reference to __declspec(dllexport) */
 #define C_DECL_SPEC __declspec(dllexport)
 #else
+/** \brief A reference to __declspec(dllexport) */
 #define C_DECL_SPEC __declspec(dllimport)
 #endif
 #endif	//STATIC_RR_C_API

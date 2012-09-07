@@ -63,7 +63,8 @@ typedef struct RRVector
     double*         Data;   /*!< Points to an array of double items */
 } *RRVectorHandle;          /*!< Pointer to RRVectorHandle struct */
 
-
+/*!@struct*/ 
+/*!@brief Structure that stores a list of strings with a label */ 
 typedef struct RRLabelStringList
 {
     int             Count;  /*!< Number of element in the label string list */
