@@ -81,16 +81,35 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Utility routines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga4105f02dfdb959175f30cecebfb1c081">loadSBML</a> (const char *sbml)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a model from an SBML string.  <a href="#ga4105f02dfdb959175f30cecebfb1c081"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga3147e10d84bddb6435bee4b1db0514bf">loadSBMLFromFile</a> (const char *sbml)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a model from a SBML file.  <a href="#ga3147e10d84bddb6435bee4b1db0514bf"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga7d683d70e6966107f81a3e8c547bcd76">writeSBML</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the <b>current state</b> of the model in the form of an SBML string.  <a href="#ga7d683d70e6966107f81a3e8c547bcd76"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gae4aa1daa0773e256698353861e3d1ef3">loadSBMLFromFile</a> (const char *fileName)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a model from a SBML file.  <a href="#gae4aa1daa0773e256698353861e3d1ef3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gade5df220f410e86123128a2b617b6ec5">getCurrentSBML</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the <b>current state</b> of the model in the form of an SBML string.  <a href="#gade5df220f410e86123128a2b617b6ec5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga05a79ded419b52fa2965fce1700c0e82">getSBML</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the last SBML model that was loaded.  <a href="#ga05a79ded419b52fa2965fce1700c0e82"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Read and write models to files or strings. Support for SBML formats. </p>
 <hr/><h2>Function Documentation</h2>
+<a class="anchor" id="gade5df220f410e86123128a2b617b6ec5"></a><!-- doxytag: member="rr_c_api.h::getCurrentSBML" ref="gade5df220f410e86123128a2b617b6ec5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC char* rrCallConv getCurrentSBML </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the <b>current state</b> of the model in the form of an SBML string. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null is the call fails, otherwise returns a pointer to the SBML string </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga05a79ded419b52fa2965fce1700c0e82"></a><!-- doxytag: member="rr_c_api.h::getSBML" ref="ga05a79ded419b52fa2965fce1700c0e82" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -136,7 +155,7 @@ Utility routines</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ga3147e10d84bddb6435bee4b1db0514bf"></a><!-- doxytag: member="rr_c_api.h::loadSBMLFromFile" ref="ga3147e10d84bddb6435bee4b1db0514bf" args="(const char *sbml)" -->
+<a class="anchor" id="gae4aa1daa0773e256698353861e3d1ef3"></a><!-- doxytag: member="rr_c_api.h::loadSBMLFromFile" ref="gae4aa1daa0773e256698353861e3d1ef3" args="(const char *fileName)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -144,7 +163,7 @@ Utility routines</h2></td></tr>
           <td class="memname">C_DECL_SPEC bool rrCallConv loadSBMLFromFile </td>
           <td>(</td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>sbml</em></td><td>)</td>
+          <td class="paramname"><em>fileName</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -154,30 +173,11 @@ Utility routines</h2></td></tr>
 <p>Create a model from a SBML file. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">sbml</td><td>file name </td></tr>
+    <tr><td class="paramname">fileName</td><td>file name </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if sucessful </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ga7d683d70e6966107f81a3e8c547bcd76"></a><!-- doxytag: member="rr_c_api.h::writeSBML" ref="ga7d683d70e6966107f81a3e8c547bcd76" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">C_DECL_SPEC char* rrCallConv writeSBML </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Retrieve the <b>current state</b> of the model in the form of an SBML string. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null is the call fails, otherwise returns a pointer to the SBML string </dd></dl>
 
 </div>
 </div>
@@ -187,7 +187,7 @@ Utility routines</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -199,7 +199,7 @@ Utility routines</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 21:55:37 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Sep 7 2012 10:23:13 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

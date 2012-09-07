@@ -84,19 +84,19 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve in a vector the concentrations for all the boundary species.  <a href="#gaae9b6b75211923bcf6f7196fe707c631"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gabb6764fa48d0b3f2ca3b38e391479347">setBoundarySpeciesByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the concentration for a particular boundary species.  <a href="#gabb6764fa48d0b3f2ca3b38e391479347"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaccee3467307dbcedd031c1dc2cf57606">getBoundarySpeciesByIndex</a> (const int &amp;index, double &amp;val)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the concentration for a particular floating species.  <a href="#gaccee3467307dbcedd031c1dc2cf57606"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaad04359bcaa998547d71b4cdd337796e">getBoundarySpeciesByIndex</a> (const int &amp;index, double &amp;value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the concentration for a particular floating species.  <a href="#gaad04359bcaa998547d71b4cdd337796e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga17c851dfb27b9697ff286cc57d4cd10d"></a><!-- doxytag: member="boundary::getNumberOfBoundarySpecies" ref="ga17c851dfb27b9697ff286cc57d4cd10d" args="()" -->
 C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga17c851dfb27b9697ff286cc57d4cd10d">getNumberOfBoundarySpecies</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of boundary species in the model. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gac0cfb68966bfb2656477f643a7f6494d">getBoundarySpeciesNames</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of boundary species Ids.  <a href="#gac0cfb68966bfb2656477f643a7f6494d"></a><br/></td></tr>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gab8b92e5ea70327dbf73d0bfc2e437bd8">getBoundarySpeciesIds</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of boundary species Ids.  <a href="#gab8b92e5ea70327dbf73d0bfc2e437bd8"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Get information about boundary species. </p>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="gaccee3467307dbcedd031c1dc2cf57606"></a><!-- doxytag: member="rr_c_api.h::getBoundarySpeciesByIndex" ref="gaccee3467307dbcedd031c1dc2cf57606" args="(const int &amp;index, double &amp;val)" -->
+<a class="anchor" id="gaad04359bcaa998547d71b4cdd337796e"></a><!-- doxytag: member="rr_c_api.h::getBoundarySpeciesByIndex" ref="gaad04359bcaa998547d71b4cdd337796e" args="(const int &amp;index, double &amp;value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -110,7 +110,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>val</em>&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -124,8 +124,8 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <p>Retrieve the concentration for a particular floating species. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>The index to the boundary species (corresponds to position in <a class="el" href="group__boundary.html#gac0cfb68966bfb2656477f643a7f6494d" title="Obtain the list of boundary species Ids.">getBoundarySpeciesNames()</a>) </td></tr>
-    <tr><td class="paramname">val</td><td>The value returned by the method </td></tr>
+    <tr><td class="paramname">index</td><td>The index to the boundary species (corresponds to position in <a class="el" href="group__boundary.html#gab8b92e5ea70327dbf73d0bfc2e437bd8" title="Obtain the list of boundary species Ids.">getBoundarySpeciesIds()</a>) </td></tr>
+    <tr><td class="paramname">value</td><td>The value returned by the method </td></tr>
   </table>
   </dd>
 </dl>
@@ -153,12 +153,12 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 </div>
 </div>
-<a class="anchor" id="gac0cfb68966bfb2656477f643a7f6494d"></a><!-- doxytag: member="rr_c_api.h::getBoundarySpeciesNames" ref="gac0cfb68966bfb2656477f643a7f6494d" args="()" -->
+<a class="anchor" id="gab8b92e5ea70327dbf73d0bfc2e437bd8"></a><!-- doxytag: member="rr_c_api.h::getBoundarySpeciesIds" ref="gab8b92e5ea70327dbf73d0bfc2e437bd8" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getBoundarySpeciesNames </td>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getBoundarySpeciesIds </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -200,7 +200,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <p>Set the concentration for a particular boundary species. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>The index to the boundary species (corresponds to position in <a class="el" href="group__boundary.html#gac0cfb68966bfb2656477f643a7f6494d" title="Obtain the list of boundary species Ids.">getBoundarySpeciesNames()</a>) </td></tr>
+    <tr><td class="paramname">index</td><td>The index to the boundary species (corresponds to position in <a class="el" href="group__boundary.html#gab8b92e5ea70327dbf73d0bfc2e437bd8" title="Obtain the list of boundary species Ids.">getBoundarySpeciesIds()</a>) </td></tr>
     <tr><td class="paramname">value</td><td>The concentration of the species to set </td></tr>
   </table>
   </dd>
@@ -215,7 +215,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -227,7 +227,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 21:55:37 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Sep 7 2012 10:23:14 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

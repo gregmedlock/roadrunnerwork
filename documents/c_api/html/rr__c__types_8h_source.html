@@ -90,107 +90,53 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00050"></a>00050 <span class="preprocessor">#include &quot;rr_support/stdbool.h&quot;</span>
 <a name="l00051"></a>00051 <span class="preprocessor">#endif</span>
 <a name="l00052"></a>00052 <span class="preprocessor"></span>                                    <span class="comment">/*Hand the client a HANDLE, i.e. ptr to structure */</span>
-<a name="l00053"></a>00053 <span class="keyword">typedef</span> <span class="keywordtype">void</span>* RRHandle;
+<a name="l00053"></a>00053 
 <a name="l00054"></a>00054 
-<a name="l00057"></a><a class="code" href="struct_r_r_vector.html">00057</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVector</a>
-<a name="l00058"></a>00058 {
-<a name="l00059"></a><a class="code" href="struct_r_r_vector.html#af06eb7b9b70be91dadd4f12ebcaed796">00059</a>     <span class="keywordtype">int</span>             <a class="code" href="struct_r_r_vector.html#af06eb7b9b70be91dadd4f12ebcaed796">Size</a>;  
-<a name="l00060"></a><a class="code" href="struct_r_r_vector.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">00060</a>     <span class="keywordtype">double</span>*         <a class="code" href="struct_r_r_vector.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">Data</a>;  
-<a name="l00061"></a>00061 } *<a class="code" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e" title="Structure for a simple vector of doubles.">RRVectorHandle</a>;
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063 
-<a name="l00064"></a><a class="code" href="struct_r_r_label_string_list.html">00064</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_r_r_label_string_list.html">RRLabelStringList</a>
-<a name="l00065"></a>00065 {
-<a name="l00066"></a><a class="code" href="struct_r_r_label_string_list.html#aad462966ed963f892117056de1eba502">00066</a>     <span class="keywordtype">int</span>             <a class="code" href="struct_r_r_label_string_list.html#aad462966ed963f892117056de1eba502">Count</a>;  
-<a name="l00067"></a><a class="code" href="struct_r_r_label_string_list.html#af91fd2b26f73a15052d23933bee0ed5a">00067</a>     <span class="keywordtype">char</span>*           <a class="code" href="struct_r_r_label_string_list.html#af91fd2b26f73a15052d23933bee0ed5a">Label</a>;  
-<a name="l00068"></a><a class="code" href="struct_r_r_label_string_list.html#acdbc34377baf3e52d9044aada0f2f511">00068</a>     <span class="keywordtype">char</span>**          <a class="code" href="struct_r_r_label_string_list.html#acdbc34377baf3e52d9044aada0f2f511">String</a>; 
-<a name="l00069"></a>00069 } *<a class="code" href="struct_r_r_label_string_list.html">RRLabelStringListHandle</a>;
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071 
-<a name="l00074"></a><a class="code" href="struct_r_r_string_list.html">00074</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringList</a>
-<a name="l00075"></a>00075 {
-<a name="l00076"></a><a class="code" href="struct_r_r_string_list.html#aad462966ed963f892117056de1eba502">00076</a>     <span class="keywordtype">int</span>             <a class="code" href="struct_r_r_string_list.html#aad462966ed963f892117056de1eba502">Count</a>;  
-<a name="l00077"></a><a class="code" href="struct_r_r_string_list.html#acdbc34377baf3e52d9044aada0f2f511">00077</a>     <span class="keywordtype">char</span>**          <a class="code" href="struct_r_r_string_list.html#acdbc34377baf3e52d9044aada0f2f511">String</a>; 
-<a name="l00078"></a>00078 } *<a class="code" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21" title="Structure for a simple vector of strings.">RRStringListHandle</a>;
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080 
-<a name="l00083"></a><a class="code" href="struct_r_r_matrix.html">00083</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrix</a>
-<a name="l00084"></a>00084 {
-<a name="l00085"></a><a class="code" href="struct_r_r_matrix.html#a4d8512c879223c0e0d1522dae38e7819">00085</a>     <span class="keywordtype">int</span>             <a class="code" href="struct_r_r_matrix.html#a4d8512c879223c0e0d1522dae38e7819">RSize</a>;  
-<a name="l00086"></a><a class="code" href="struct_r_r_matrix.html#a17c9a5894aa9cb3789346dcaa9c370bb">00086</a>     <span class="keywordtype">int</span>             <a class="code" href="struct_r_r_matrix.html#a17c9a5894aa9cb3789346dcaa9c370bb">CSize</a>;  
-<a name="l00087"></a><a class="code" href="struct_r_r_matrix.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">00087</a>     <span class="keywordtype">double</span>*         <a class="code" href="struct_r_r_matrix.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">Data</a>;   
-<a name="l00089"></a>00089 } *<a class="code" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da" title="Structure for a simple Matrix type.">RRMatrixHandle</a>;
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091 
-<a name="l00094"></a><a class="code" href="struct_r_r_result.html">00094</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_r_r_result.html" title="Structure for the result type from the simulate calls.">RRResult</a>
-<a name="l00095"></a>00095 {
-<a name="l00096"></a><a class="code" href="struct_r_r_result.html#a4d8512c879223c0e0d1522dae38e7819">00096</a>     <span class="keywordtype">int</span>             <a class="code" href="struct_r_r_result.html#a4d8512c879223c0e0d1522dae38e7819">RSize</a>;  
-<a name="l00097"></a><a class="code" href="struct_r_r_result.html#a17c9a5894aa9cb3789346dcaa9c370bb">00097</a>     <span class="keywordtype">int</span>             <a class="code" href="struct_r_r_result.html#a17c9a5894aa9cb3789346dcaa9c370bb">CSize</a>;  
-<a name="l00098"></a><a class="code" href="struct_r_r_result.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">00098</a>     <span class="keywordtype">double</span>*         <a class="code" href="struct_r_r_result.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">Data</a>;   
-<a name="l00099"></a><a class="code" href="struct_r_r_result.html#ab339159e5604808f92fe793f4f43da03">00099</a>     <span class="keywordtype">char</span>**          <a class="code" href="struct_r_r_result.html#ab339159e5604808f92fe793f4f43da03">ColumnHeaders</a>;   
-<a name="l00100"></a>00100 } *<a class="code" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51" title="Structure for the result type from the simulate calls.">RRResultHandle</a>;
-<a name="l00101"></a>00101 
-<a name="l00102"></a>00102 
-<a name="l00105"></a><a class="code" href="struct_r_r_c_code.html">00105</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCode</a>
-<a name="l00106"></a>00106 {
-<a name="l00107"></a><a class="code" href="struct_r_r_c_code.html#a129503fa396e877e8400bb7cdc9774b5">00107</a>     <span class="keywordtype">char</span>*   <a class="code" href="struct_r_r_c_code.html#a129503fa396e877e8400bb7cdc9774b5">Header</a>;  
-<a name="l00108"></a><a class="code" href="struct_r_r_c_code.html#a23fa2e731d8e1576c9095868b9651305">00108</a>     <span class="keywordtype">char</span>*   <a class="code" href="struct_r_r_c_code.html#a23fa2e731d8e1576c9095868b9651305">Source</a>;  
-<a name="l00110"></a>00110 } *<a class="code" href="rr__c__types_8h.html#aaaa74f20722a48f3ae9ed5bdbb6c8a86" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCodeHandle</a>;
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113 <span class="keyword">struct </span><a class="code" href="struct_r_r_string_array_list.html">RRStringArrayList</a>;
+<a name="l00056"></a><a class="code" href="rr__c__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">00056</a> <span class="keyword">typedef</span> <span class="keywordtype">void</span>* <a class="code" href="rr__c__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae" title="Void pointer to RRHandle.">RRHandle</a>; 
+<a name="l00060"></a><a class="code" href="struct_r_r_vector.html">00060</a> 
+<a name="l00063"></a><a class="code" href="struct_r_r_vector.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">00063</a> 
+<a name="l00064"></a>00064 
+<a name="l00068"></a><a class="code" href="struct_r_r_label_string_list.html">00068</a> 
+<a name="l00071"></a><a class="code" href="struct_r_r_label_string_list.html#af91fd2b26f73a15052d23933bee0ed5a">00071</a> 
+<a name="l00072"></a><a class="code" href="struct_r_r_label_string_list.html#acdbc34377baf3e52d9044aada0f2f511">00072</a> 
+<a name="l00073"></a>00073 
+<a name="l00078"></a><a class="code" href="struct_r_r_string_list.html">00078</a> 
+<a name="l00081"></a><a class="code" href="struct_r_r_string_list.html#acdbc34377baf3e52d9044aada0f2f511">00081</a> 
+<a name="l00082"></a>00082 
+<a name="l00087"></a><a class="code" href="struct_r_r_matrix.html">00087</a> 
+<a name="l00090"></a><a class="code" href="struct_r_r_matrix.html#a17c9a5894aa9cb3789346dcaa9c370bb">00090</a> 
+<a name="l00091"></a><a class="code" href="struct_r_r_matrix.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">00091</a> 
+<a name="l00093"></a>00093 
+<a name="l00098"></a><a class="code" href="struct_r_r_result.html">00098</a> 
+<a name="l00101"></a><a class="code" href="struct_r_r_result.html#a17c9a5894aa9cb3789346dcaa9c370bb">00101</a> 
+<a name="l00102"></a><a class="code" href="struct_r_r_result.html#a7c5cbda3aa940f4b0d6e8a1679307dfc">00102</a> 
+<a name="l00103"></a><a class="code" href="struct_r_r_result.html#ab339159e5604808f92fe793f4f43da03">00103</a> 
+<a name="l00104"></a>00104 
+<a name="l00109"></a><a class="code" href="struct_r_r_c_code.html">00109</a> 
+<a name="l00112"></a><a class="code" href="struct_r_r_c_code.html#a23fa2e731d8e1576c9095868b9651305">00112</a> 
 <a name="l00114"></a>00114 
-<a name="l00115"></a><a class="code" href="struct_r_r_string_array_list_item.html">00115</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_r_r_string_array_list_item.html">RRStringArrayListItem</a>
-<a name="l00116"></a>00116 {
-<a name="l00117"></a>00117     <span class="keywordtype">char</span>*                       Item;
-<a name="l00118"></a>00118     <a class="code" href="struct_r_r_string_array_list.html">RRStringArrayList</a>*          SubList;
-<a name="l00119"></a>00119 } *<a class="code" href="struct_r_r_string_array_list_item.html">RRStringArrayListItemHandle</a>;
-<a name="l00120"></a>00120 
-<a name="l00121"></a>00121 
-<a name="l00122"></a><a class="code" href="struct_r_r_string_array_list.html">00122</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_r_r_string_array_list.html">RRStringArrayList</a>
-<a name="l00123"></a>00123 {
-<a name="l00124"></a>00124     <span class="keywordtype">int</span>                         ItemCount;
-<a name="l00125"></a>00125     <a class="code" href="struct_r_r_string_array_list_item.html">RRStringArrayListItemHandle</a> Items;
-<a name="l00126"></a>00126 
-<a name="l00127"></a>00127 }  *<a class="code" href="struct_r_r_string_array_list.html">RRStringArrayListHandle</a>;
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129 
-<a name="l00132"></a><a class="code" href="rr__c__types_8h.html#ab99437ab2e88aa90b7ebb8add042b25e">00132</a> <span class="keyword">enum</span> <a class="code" href="rr__c__types_8h.html#ab99437ab2e88aa90b7ebb8add042b25e" title="The list type supports strings, integers, double and lists.">ListItemType</a> {litString, litInteger, litDouble,   litArrayList};
-<a name="l00133"></a>00133 
-<a name="l00134"></a>00134 <span class="comment">// The above enums correspond to the currently supported types in an RRArrayList2</span>
-<a name="l00135"></a>00135 <span class="comment">// char, int, double, RRArrayList2</span>
-<a name="l00136"></a>00136 <span class="comment">// The void pointer pValue need to be casted to corresponding type to retrieve its value</span>
-<a name="l00137"></a>00137 
-<a name="l00138"></a>00138 <span class="keyword">struct </span><a class="code" href="struct_r_r_array_list2.html" title="A list type, stores int, double, strings and lists.">RRArrayList2</a>;
-<a name="l00139"></a>00139 
-<a name="l00142"></a><a class="code" href="struct_r_r_array_list2_item.html">00142</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_r_r_array_list2_item.html" title="A single list element type.">RRArrayList2Item</a>
-<a name="l00143"></a>00143 {
-<a name="l00144"></a><a class="code" href="struct_r_r_array_list2_item.html#af69273b36c37b84e5c91a0c9d1af3a15">00144</a>     <a class="code" href="rr__c__types_8h.html#ab99437ab2e88aa90b7ebb8add042b25e" title="The list type supports strings, integers, double and lists.">ListItemType</a>                <a class="code" href="struct_r_r_array_list2_item.html#af69273b36c37b84e5c91a0c9d1af3a15">ItemType</a>;  
-<a name="l00145"></a><a class="code" href="struct_r_r_array_list2_item.html#a63ad54c993b6ca0d76f718dc1a1164c3">00145</a>     <span class="keywordtype">void</span>*                       <a class="code" href="struct_r_r_array_list2_item.html#a63ad54c993b6ca0d76f718dc1a1164c3">pValue</a>;    
-<a name="l00146"></a>00146 } *<a class="code" href="rr__c__types_8h.html#a98a79f5d723f2b60fd6db9c3c6dfa20a" title="A single list element type.">RRArrayList2ItemHandle</a>;
-<a name="l00147"></a>00147 
-<a name="l00148"></a>00148 
-<a name="l00151"></a><a class="code" href="struct_r_r_array_list2.html">00151</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="struct_r_r_array_list2.html" title="A list type, stores int, double, strings and lists.">RRArrayList2</a>
-<a name="l00152"></a>00152 {
-<a name="l00153"></a><a class="code" href="struct_r_r_array_list2.html#ab970c710c7f3897df3c63f76dc5a0793">00153</a>     <span class="keywordtype">int</span>                         <a class="code" href="struct_r_r_array_list2.html#ab970c710c7f3897df3c63f76dc5a0793">ItemCount</a>;  
-<a name="l00154"></a><a class="code" href="struct_r_r_array_list2.html#aff798cb8027dcb29fd09e5396f8428fe">00154</a>     <a class="code" href="struct_r_r_array_list2_item.html" title="A single list element type.">RRArrayList2ItemHandle</a>      <a class="code" href="struct_r_r_array_list2.html#aff798cb8027dcb29fd09e5396f8428fe">Items</a>;      
-<a name="l00155"></a>00155 }  *<a class="code" href="rr__c__types_8h.html#a21a10f01ac4fd34c61e7e7d12af9891d" title="A list type, stores int, double, strings and lists.">RRArrayList2Handle</a>;
-<a name="l00156"></a>00156 
-<a name="l00157"></a>00157 
-<a name="l00158"></a>00158 <span class="preprocessor">#if defined( __cplusplus)</span>
-<a name="l00159"></a>00159 <span class="preprocessor"></span>}
-<a name="l00160"></a>00160 <span class="preprocessor">#endif</span>
-<a name="l00161"></a>00161 <span class="preprocessor"></span>
-<a name="l00162"></a>00162 
-<a name="l00163"></a>00163 <span class="preprocessor">#endif</span>
-</pre></div></div>
+<a name="l00117"></a>00117 
+<a name="l00121"></a><a class="code" href="struct_r_r_string_array_list_item.html">00121</a> 
+<a name="l00124"></a><a class="code" href="struct_r_r_string_array_list_item.html#a933c5818b994da50f225a40b967fb661">00124</a> 
+<a name="l00125"></a>00125 
+<a name="l00129"></a><a class="code" href="struct_r_r_string_array_list.html">00129</a> 
+<a name="l00132"></a><a class="code" href="struct_r_r_string_array_list.html#a0ef0ac4d72f04a061dc23decb55cb2ae">00132</a> 
+<a name="l00134"></a>00134 
+<a name="l00138"></a><a class="code" href="rr__c__types_8h.html#ab99437ab2e88aa90b7ebb8add042b25e">00138</a> 
+<a name="l00148"></a><a class="code" href="structc_r_r_array_list_item.html">00148</a> 
+<a name="l00151"></a><a class="code" href="structc_r_r_array_list_item.html#a63ad54c993b6ca0d76f718dc1a1164c3">00151</a> 
+<a name="l00152"></a>00152 
+<a name="l00157"></a><a class="code" href="structc_r_r_array_list.html">00157</a> 
+<a name="l00160"></a><a class="code" href="structc_r_r_array_list.html#a7010853a6e1f52ac7b6c9f58510d36d3">00160</a> 
+<a name="l00161"></a>00161 
+<a name="l00164"></a>00164 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Defines</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -202,7 +148,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2012 21:55:37 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Sep 7 2012 10:23:13 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

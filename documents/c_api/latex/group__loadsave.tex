@@ -12,9 +12,9 @@
 \item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga4105f02dfdb959175f30cecebfb1c081}{load\-S\-B\-M\-L} (const char $\ast$sbml)
 \begin{DoxyCompactList}\small\item\em \-Create a model from an \-S\-B\-M\-L string. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_ga3147e10d84bddb6435bee4b1db0514bf}{load\-S\-B\-M\-L\-From\-File} (const char $\ast$sbml)
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__utility_gae4aa1daa0773e256698353861e3d1ef3}{load\-S\-B\-M\-L\-From\-File} (const char $\ast$file\-Name)
 \begin{DoxyCompactList}\small\item\em \-Create a model from a \-S\-B\-M\-L file. \end{DoxyCompactList}\item 
-\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__utility_ga7d683d70e6966107f81a3e8c547bcd76}{write\-S\-B\-M\-L} ()
+\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__utility_gade5df220f410e86123128a2b617b6ec5}{get\-Current\-S\-B\-M\-L} ()
 \begin{DoxyCompactList}\small\item\em \-Retrieve the {\bfseries current state} of the model in the form of an \-S\-B\-M\-L string. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__utility_ga05a79ded419b52fa2965fce1700c0e82}{get\-S\-B\-M\-L} ()
 \begin{DoxyCompactList}\small\item\em \-Retrieve the last \-S\-B\-M\-L model that was loaded. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -24,6 +24,22 @@
 \-Read and write models to files or strings. \-Support for \-S\-B\-M\-L formats. 
 
 \subsection{\-Function \-Documentation}
+\hypertarget{group__utility_gade5df220f410e86123128a2b617b6ec5}{
+\index{\-Read and Write models@{\-Read and Write models}!get\-Current\-S\-B\-M\-L@{get\-Current\-S\-B\-M\-L}}
+\index{get\-Current\-S\-B\-M\-L@{get\-Current\-S\-B\-M\-L}!Read and Write models@{\-Read and Write models}}
+\subsubsection[{get\-Current\-S\-B\-M\-L}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char$\ast$ rr\-Call\-Conv get\-Current\-S\-B\-M\-L (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{group__utility_gade5df220f410e86123128a2b617b6ec5}
+
+
+\-Retrieve the {\bfseries current state} of the model in the form of an \-S\-B\-M\-L string. 
+
+\begin{DoxyReturn}{\-Returns}
+\-Returns null is the call fails, otherwise returns a pointer to the \-S\-B\-M\-L string 
+\end{DoxyReturn}
 \hypertarget{group__utility_ga05a79ded419b52fa2965fce1700c0e82}{
 \index{\-Read and Write models@{\-Read and Write models}!get\-S\-B\-M\-L@{get\-S\-B\-M\-L}}
 \index{get\-S\-B\-M\-L@{get\-S\-B\-M\-L}!Read and Write models@{\-Read and Write models}}
@@ -61,40 +77,24 @@
 \begin{DoxyReturn}{\-Returns}
 \-Returns true if sucessful 
 \end{DoxyReturn}
-\hypertarget{group__utility_ga3147e10d84bddb6435bee4b1db0514bf}{
+\hypertarget{group__utility_gae4aa1daa0773e256698353861e3d1ef3}{
 \index{\-Read and Write models@{\-Read and Write models}!load\-S\-B\-M\-L\-From\-File@{load\-S\-B\-M\-L\-From\-File}}
 \index{load\-S\-B\-M\-L\-From\-File@{load\-S\-B\-M\-L\-From\-File}!Read and Write models@{\-Read and Write models}}
 \subsubsection[{load\-S\-B\-M\-L\-From\-File}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv load\-S\-B\-M\-L\-From\-File (
 \begin{DoxyParamCaption}
-\item[{const char $\ast$}]{sbml}
+\item[{const char $\ast$}]{file\-Name}
 \end{DoxyParamCaption}
 )}}
-\label{group__utility_ga3147e10d84bddb6435bee4b1db0514bf}
+\label{group__utility_gae4aa1daa0773e256698353861e3d1ef3}
 
 
 \-Create a model from a \-S\-B\-M\-L file. 
 
 
 \begin{DoxyParams}{\-Parameters}
-{\em sbml} & file name \\
+{\em file\-Name} & file name \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
 \-Returns true if sucessful 
-\end{DoxyReturn}
-\hypertarget{group__utility_ga7d683d70e6966107f81a3e8c547bcd76}{
-\index{\-Read and Write models@{\-Read and Write models}!write\-S\-B\-M\-L@{write\-S\-B\-M\-L}}
-\index{write\-S\-B\-M\-L@{write\-S\-B\-M\-L}!Read and Write models@{\-Read and Write models}}
-\subsubsection[{write\-S\-B\-M\-L}]{\setlength{\rightskip}{0pt plus 5cm}\-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char$\ast$ rr\-Call\-Conv write\-S\-B\-M\-L (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}}
-\label{group__utility_ga7d683d70e6966107f81a3e8c547bcd76}
-
-
-\-Retrieve the {\bfseries current state} of the model in the form of an \-S\-B\-M\-L string. 
-
-\begin{DoxyReturn}{\-Returns}
-\-Returns null is the call fails, otherwise returns a pointer to the \-S\-B\-M\-L string 
 \end{DoxyReturn}
