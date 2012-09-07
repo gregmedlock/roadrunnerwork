@@ -648,7 +648,7 @@ RRResultHandle rrCallConv simulateEx (const double& timeStart, const double& tim
 	return NULL;
 }
 
-RRStringListHandle rrCallConv getReactionNames()
+RRStringListHandle rrCallConv getReactionIds()
 {
 	try
     {
@@ -658,7 +658,7 @@ RRStringListHandle rrCallConv getReactionNames()
             return NULL;
         }
 
-        StringList rNames = gRRHandle->getReactionNames();
+        StringList rNames = gRRHandle->getReactionIds();
 
         if(!rNames.Count())
         {
@@ -714,7 +714,7 @@ RRVectorHandle rrCallConv getRatesOfChange()
 }
 
 
-RRStringListHandle rrCallConv getRatesOfChangeNames()
+RRStringListHandle rrCallConv getRatesOfChangeIds()
 {
 	try
     {
@@ -724,7 +724,7 @@ RRStringListHandle rrCallConv getRatesOfChangeNames()
             return NULL;
         }
 
-        StringList rNames = gRRHandle->getRateOfChangeNames();
+        StringList rNames = gRRHandle->getRateOfChangeIds();
 
         if(!rNames.Count())
         {
@@ -1087,7 +1087,7 @@ int rrCallConv getNumberOfBoundarySpecies()
   	return -1;
 }
 
-RRStringListHandle rrCallConv getBoundarySpeciesNames()          // <- treat char* as you treat it in setSelectionList (char *)
+RRStringListHandle rrCallConv getBoundarySpeciesIds()         
 {
 	try
     {
@@ -1098,7 +1098,7 @@ RRStringListHandle rrCallConv getBoundarySpeciesNames()          // <- treat cha
             return NULL;
         }
 
-        StringList bNames = gRRHandle->getBoundarySpeciesNames();
+        StringList bNames = gRRHandle->getBoundarySpeciesIds();
 
         if(!bNames.Count())
         {
@@ -1136,7 +1136,7 @@ int rrCallConv getNumberOfFloatingSpecies()
    	return -1;
 }
 
-RRStringListHandle rrCallConv getFloatingSpeciesNames()
+RRStringListHandle rrCallConv getFloatingSpeciesIds()
 {
 	try
     {
@@ -1146,7 +1146,7 @@ RRStringListHandle rrCallConv getFloatingSpeciesNames()
             return false;
         }
 
-        StringList fNames = gRRHandle->getFloatingSpeciesNames();
+        StringList fNames = gRRHandle->getFloatingSpeciesIds();
 
         if(!fNames.Count())
         {
@@ -1184,7 +1184,7 @@ int rrCallConv getNumberOfGlobalParameters()
    	return -1;
 }
 
-RRStringListHandle rrCallConv getGlobalParameterNames()
+RRStringListHandle rrCallConv getGlobalParameterIds()
 {
 	try
     {
@@ -1193,7 +1193,7 @@ RRStringListHandle rrCallConv getGlobalParameterNames()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        StringList pNames = gRRHandle->getGlobalParameterNames();
+        StringList pNames = gRRHandle->getGlobalParameterIds();
 
         if(!pNames.Count())
         {
@@ -1915,7 +1915,7 @@ bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reacName, const c
     return false;
 }
 
-RRStringListHandle rrCallConv getFloatingSpeciesInitialConditionNames()
+RRStringListHandle rrCallConv getFloatingSpeciesInitialConditionIds()
 {
 	try
     {
@@ -1924,7 +1924,7 @@ RRStringListHandle rrCallConv getFloatingSpeciesInitialConditionNames()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        StringList aList = gRRHandle->getFloatingSpeciesInitialConditionNames();
+        StringList aList = gRRHandle->getFloatingSpeciesInitialConditionIds();
         return createList(aList);
     }
     catch(Exception& ex)
@@ -1980,7 +1980,7 @@ RRVectorHandle rrCallConv getReactionRatesEx(const RRVectorHandle vec)
     return NULL;
 }
 
-RRStringArrayList* rrCallConv getElasticityCoefficientNames()
+RRStringArrayList* rrCallConv getElasticityCoefficientIds()
 {
 	try
     {
@@ -1989,8 +1989,8 @@ RRStringArrayList* rrCallConv getElasticityCoefficientNames()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        //RRArrayList<string> list = gRRHandle->getConcentrationControlCoefficientNames();
-        StringArrayList aList = gRRHandle->getElasticityCoefficientNames();
+        //RRArrayList<string> list = gRRHandle->getConcentrationControlCoefficientIds();
+        StringArrayList aList = gRRHandle->getElasticityCoefficientIds();
         return createList(aList);
     }
     catch(Exception& ex)
@@ -2002,7 +2002,7 @@ RRStringArrayList* rrCallConv getElasticityCoefficientNames()
     return NULL;
 }
 
-RRStringListHandle rrCallConv getRateOfChangeNames()
+RRStringListHandle rrCallConv getRateOfChangeIds()
 {
 	try
     {
@@ -2011,7 +2011,7 @@ RRStringListHandle rrCallConv getRateOfChangeNames()
             setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
-        StringList aList = gRRHandle->getRateOfChangeNames();
+        StringList aList = gRRHandle->getRateOfChangeIds();
         return createList(aList);
     }
     catch(Exception& ex)
@@ -2070,7 +2070,7 @@ char* rrCallConv getCapabilities()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-RRStringListHandle rrCallConv getEigenValueNames()
+RRStringListHandle rrCallConv getEigenValueIds()
 {
 	try
     {
@@ -2079,7 +2079,7 @@ RRStringListHandle rrCallConv getEigenValueNames()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        StringList aList = gRRHandle->getEigenValueNames();
+        StringList aList = gRRHandle->getEigenValueIds();
         return createList(aList);
     }
     catch(Exception& ex)
@@ -2091,7 +2091,7 @@ RRStringListHandle rrCallConv getEigenValueNames()
     return NULL;
 }
 
-RRStringArrayListHandle rrCallConv getFluxControlCoefficientNames()
+RRStringArrayListHandle rrCallConv getFluxControlCoefficientIds()
 {
 	try
     {
@@ -2101,7 +2101,7 @@ RRStringArrayListHandle rrCallConv getFluxControlCoefficientNames()
             return NULL;
         }
 
-        return createList(gRRHandle->getFluxControlCoefficientNames());
+        return createList(gRRHandle->getFluxControlCoefficientIds());
     }
     catch(Exception& ex)
     {
@@ -2199,7 +2199,7 @@ RRMatrixHandle rrCallConv getScaledFluxControlCoefficientMatrix()
     return NULL;
 }
 
-RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficientNames()
+RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficientIds()
 {
 	try
     {
@@ -2209,7 +2209,7 @@ RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficientNames()
             return NULL;
         }
 
-        return createList(gRRHandle->getUnscaledFluxControlCoefficientNames());
+        return createList(gRRHandle->getUnscaledFluxControlCoefficientIds());
     }
     catch(Exception& ex)
     {
@@ -2220,7 +2220,7 @@ RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficientNames()
     return NULL;
 }
 
-RRStringArrayList* rrCallConv getConcentrationControlCoefficientNames()
+RRStringArrayList* rrCallConv getConcentrationControlCoefficientIds()
 {
 	try
     {
@@ -2229,7 +2229,7 @@ RRStringArrayList* rrCallConv getConcentrationControlCoefficientNames()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        RRArrayList<string> list = gRRHandle->getConcentrationControlCoefficientNames();
+        RRArrayList<string> list = gRRHandle->getConcentrationControlCoefficientIds();
         return createList(list);
     }
     catch(Exception& ex)
@@ -2241,7 +2241,7 @@ RRStringArrayList* rrCallConv getConcentrationControlCoefficientNames()
     return NULL;
 }
 
-RRStringArrayListHandle rrCallConv getUnscaledConcentrationControlCoefficientNames()
+RRStringArrayListHandle rrCallConv getUnscaledConcentrationControlCoefficientIds()
 {
 	try
     {
@@ -2250,7 +2250,7 @@ RRStringArrayListHandle rrCallConv getUnscaledConcentrationControlCoefficientNam
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        return createList(gRRHandle->getUnscaledConcentrationControlCoefficientNames());
+        return createList(gRRHandle->getUnscaledConcentrationControlCoefficientIds());
     }
     catch(Exception& ex)
     {
@@ -2323,7 +2323,7 @@ bool rrCallConv setCompartmentByIndex (const int& index, const double& value)
     return false;
 }
 
-RRStringListHandle rrCallConv getCompartmentNames()
+RRStringListHandle rrCallConv getCompartmentIds()
 {
 	try
     {
@@ -2332,7 +2332,7 @@ RRStringListHandle rrCallConv getCompartmentNames()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        return createList(gRRHandle->getCompartmentNames());
+        return createList(gRRHandle->getCompartmentIds());
     }
     catch(Exception& ex)
     {
@@ -2353,7 +2353,7 @@ RRStringListHandle rrCallConv getCompartment()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        return createList(gRRHandle->getCompartmentNames());
+        return createList(gRRHandle->getCompartmentIds());
     }
     catch(Exception& ex)
     {

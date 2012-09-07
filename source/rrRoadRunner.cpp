@@ -152,7 +152,7 @@ string RoadRunner::GetTempFileFolder()
 int RoadRunner::CreateDefaultSelectionList()
 {
 	StringList theList;
-    StringList oFloating  = getFloatingSpeciesNames();
+    StringList oFloating  = getFloatingSpeciesIds();
 
 	theList.Add("time");
     for(int i = 0; i < oFloating.Count(); i++)
@@ -181,7 +181,7 @@ int RoadRunner::CreateSelectionList()
         theList.Add("Time");
 
         //Get All floating species
-       StringList oFloating  = getFloatingSpeciesNames();
+       StringList oFloating  = getFloatingSpeciesIds();
        for(int i = 0; i < oFloating.Count(); i++)
        {
             theList.Add(oFloating[i]);
@@ -998,10 +998,10 @@ StringList RoadRunner::getSelectionList()
 
     StringList oFloating    = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList oBoundary    = mModelGenerator->getBoundarySpeciesList();
-    StringList oFluxes      = mModelGenerator->getReactionNames();
+    StringList oFluxes      = mModelGenerator->getReactionIds();
     StringList oVolumes     = mModelGenerator->getCompartmentList();
-    StringList oRates       = getRateOfChangeNames();
-    StringList oParameters  = getParameterNames();
+    StringList oRates       = getRateOfChangeIds();
+    StringList oParameters  = getParameterIds();
 
     vector<TSelectionRecord>::iterator iter;
     int size = selectionList.size();
@@ -1153,7 +1153,7 @@ void RoadRunner::ComputeAndAssignConservationLaws(const bool& bValue)
 }
 
 // Help("Returns the names given to the rate of change of the floating species")
-StringList RoadRunner::getRateOfChangeNames()
+StringList RoadRunner::getRateOfChangeIds()
 {
     if (!mModel)
     {
@@ -1169,7 +1169,7 @@ StringList RoadRunner::getRateOfChangeNames()
 }
 
 // Help("Gets the list of compartment names")
-StringList RoadRunner::getCompartmentNames()
+StringList RoadRunner::getCompartmentIds()
 {
     if (!mModel)
     {
@@ -1178,7 +1178,7 @@ StringList RoadRunner::getCompartmentNames()
     return mModelGenerator->getCompartmentList();
 }
 
-StringList RoadRunner::getParameterNames()
+StringList RoadRunner::getParameterIds()
 {
     if (!mModel)
     {
@@ -1376,7 +1376,7 @@ void RoadRunner::setSelectionList(const StringList& _selList)
 
     StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList bs = mModelGenerator->getBoundarySpeciesList();
-    StringList rs = mModelGenerator->getReactionNames();
+    StringList rs = mModelGenerator->getReactionIds();
     StringList vol = mModelGenerator->getCompartmentList();
     StringList gp = mModelGenerator->getGlobalParameterList();
 //    StringList sr = mModelGenerator->ModifiableSpeciesReferenceList;
@@ -1853,7 +1853,7 @@ double RoadRunner::getVariableValue(const TVariableType& variableType, const int
 //        }
 //
 //  Help("Returns the Symbols of all Flux Control Coefficients.")
-StringArrayList RoadRunner::getFluxControlCoefficientNames()
+StringArrayList RoadRunner::getFluxControlCoefficientIds()
 {
     StringArrayList oResult;
     if (!mModel)
@@ -1861,7 +1861,7 @@ StringArrayList RoadRunner::getFluxControlCoefficientNames()
         return oResult;
     }
 
-    StringList oReactions       = getReactionNames();
+    StringList oReactions       = getReactionIds();
     StringList oParameters      = mModelGenerator->getGlobalParameterList();
     StringList oBoundary        = mModelGenerator->getBoundarySpeciesList();
     StringList oConservation    = mModelGenerator->getConservationList();
@@ -1898,7 +1898,7 @@ StringArrayList RoadRunner::getFluxControlCoefficientNames()
 
 
 //  Help("Returns the Symbols of all Unscaled Flux Control Coefficients.")
-StringArrayList RoadRunner::getUnscaledFluxControlCoefficientNames()
+StringArrayList RoadRunner::getUnscaledFluxControlCoefficientIds()
 {
     StringArrayList oResult;// = new ArrayList();
     if (!mModel)
@@ -1906,7 +1906,7 @@ StringArrayList RoadRunner::getUnscaledFluxControlCoefficientNames()
         return oResult;
     }
 
-    StringList oReactions = getReactionNames();
+    StringList oReactions = getReactionIds();
     StringList oParameters = mModelGenerator->getGlobalParameterList();
     StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
     StringList oConservation = mModelGenerator->getConservationList();
@@ -1942,7 +1942,7 @@ StringArrayList RoadRunner::getUnscaledFluxControlCoefficientNames()
 }
 
 // Help("Returns the Symbols of all Concentration Control Coefficients.")
-RRArrayList<string> RoadRunner::getConcentrationControlCoefficientNames()
+RRArrayList<string> RoadRunner::getConcentrationControlCoefficientIds()
 {
     RRArrayList<string> oResult;// = new ArrayList();
     if (!mModel)
@@ -1950,7 +1950,7 @@ RRArrayList<string> RoadRunner::getConcentrationControlCoefficientNames()
         return oResult;
     }
 
-    StringList oFloating        = getFloatingSpeciesNames();
+    StringList oFloating        = getFloatingSpeciesIds();
     StringList oParameters      = mModelGenerator->getGlobalParameterList();
     StringList oBoundary        = mModelGenerator->getBoundarySpeciesList();
     StringList oConservation    = mModelGenerator->getConservationList();
@@ -1986,7 +1986,7 @@ RRArrayList<string> RoadRunner::getConcentrationControlCoefficientNames()
 
 
 // Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")
-StringArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
+StringArrayList RoadRunner::getUnscaledConcentrationControlCoefficientIds()
 {
     StringArrayList oResult;
     if (!mModel)
@@ -1994,7 +1994,7 @@ StringArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
         return oResult;
     }
 
-    StringList oFloating        = getFloatingSpeciesNames();
+    StringList oFloating        = getFloatingSpeciesIds();
     StringList oParameters      = mModelGenerator->getGlobalParameterList();
     StringList oBoundary        = mModelGenerator->getBoundarySpeciesList();
     StringList oConservation    = mModelGenerator->getConservationList();
@@ -2030,7 +2030,7 @@ StringArrayList RoadRunner::getUnscaledConcentrationControlCoefficientNames()
 
 
 // Help("Returns the Symbols of all Elasticity Coefficients.")
-StringArrayList RoadRunner::getElasticityCoefficientNames()
+StringArrayList RoadRunner::getElasticityCoefficientIds()
 {
     StringArrayList oResult;
     if (!mModel)
@@ -2038,7 +2038,7 @@ StringArrayList RoadRunner::getElasticityCoefficientNames()
         return oResult;
     }
 
-    StringList reactionNames        = getReactionNames();
+    StringList reactionNames        = getReactionIds();
     StringList floatingSpeciesNames = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList boundarySpeciesNames = mModelGenerator->getBoundarySpeciesList();
     StringList conservationNames    = mModelGenerator->getConservationList();
@@ -2079,7 +2079,7 @@ StringArrayList RoadRunner::getElasticityCoefficientNames()
 }
 
 // Help("Returns the Symbols of all Unscaled Elasticity Coefficients.")
-StringArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
+StringArrayList RoadRunner::getUnscaledElasticityCoefficientIds()
 {
     StringArrayList oResult;
     if (!mModel)
@@ -2087,7 +2087,7 @@ StringArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
         return oResult;
     }
 
-    StringList oReactions( getReactionNames() );
+    StringList oReactions( getReactionIds() );
     StringList oFloating = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList oBoundary = mModelGenerator->getBoundarySpeciesList();
     StringList oGlobalParameters = mModelGenerator->getGlobalParameterList();
@@ -2132,7 +2132,7 @@ StringArrayList RoadRunner::getUnscaledElasticityCoefficientNames()
 }
 
 // Help("Returns the Symbols of all Floating Species Eigenvalues.")
-StringList RoadRunner::getEigenValueNames()
+StringList RoadRunner::getEigenValueIds()
 {
     StringList result; //= new ArrayList();
     if (!mModel)
@@ -2159,26 +2159,26 @@ StringList RoadRunner::getEigenValueNames()
 //            var oResult = new ArrayList();
 //            if (!mModel) return oResult;
 //
-//            oResult.Add(new ArrayList(new object[] { "Floating Species", getFloatingSpeciesNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Boundary Species", getBoundarySpeciesNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Floating Species (amount)", getFloatingSpeciesAmountNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Boundary Species (amount)", getBoundarySpeciesAmountNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Global Parameters", getParameterNames() }));
+//            oResult.Add(new ArrayList(new object[] { "Floating Species", getFloatingSpeciesIds() }));
+//            oResult.Add(new ArrayList(new object[] { "Boundary Species", getBoundarySpeciesIds() }));
+//            oResult.Add(new ArrayList(new object[] { "Floating Species (amount)", getFloatingSpeciesAmountIds() }));
+//            oResult.Add(new ArrayList(new object[] { "Boundary Species (amount)", getBoundarySpeciesAmountIds() }));
+//            oResult.Add(new ArrayList(new object[] { "Global Parameters", getParameterIds() }));
 //            oResult.Add(new ArrayList(new object[] { "Volumes", mModelGenerator->getCompartmentList() }));
-//            oResult.Add(new ArrayList(new object[] { "Fluxes", getReactionNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Flux Control Coefficients", getFluxControlCoefficientNames() }));
+//            oResult.Add(new ArrayList(new object[] { "Fluxes", getReactionIds() }));
+//            oResult.Add(new ArrayList(new object[] { "Flux Control Coefficients", getFluxControlCoefficientIds() }));
 //            oResult.Add(
-//                new ArrayList(new object[] { "Concentration Control Coefficients", getConcentrationControlCoefficientNames() }));
+//                new ArrayList(new object[] { "Concentration Control Coefficients", getConcentrationControlCoefficientIds() }));
 //            oResult.Add(
 //                new ArrayList(new object[
 //                                  {
 //                                      "Unscaled Concentration Control Coefficients",
-//                                      getUnscaledConcentrationControlCoefficientNames()
+//                                      getUnscaledConcentrationControlCoefficientIds()
 //                                  }));
-//            oResult.Add(new ArrayList(new object[] { "Elasticity Coefficients", getElasticityCoefficientNames() }));
+//            oResult.Add(new ArrayList(new object[] { "Elasticity Coefficients", getElasticityCoefficientIds() }));
 //            oResult.Add(
-//                new ArrayList(new object[] { "Unscaled Elasticity Coefficients", getUnscaledElasticityCoefficientNames() }));
-//            oResult.Add(new ArrayList(new object[] { "Eigenvalues", getEigenValueNames() }));
+//                new ArrayList(new object[] { "Unscaled Elasticity Coefficients", getUnscaledElasticityCoefficientIds() }));
+//            oResult.Add(new ArrayList(new object[] { "Eigenvalues", getEigenValueIds() }));
 //
 //            return oResult;
 //        }
@@ -2194,7 +2194,7 @@ ArrayList RoadRunner::getSteadyStateSelectionList()
 //    if (mSteadyStateSelection == null)
     {
         // default should be species only ...
-        ArrayList floatingSpecies = getFloatingSpeciesNames();
+        ArrayList floatingSpecies = getFloatingSpeciesIds();
         mSteadyStateSelection.resize(floatingSpecies.Count());// = new TSelectionRecord[floatingSpecies.Count];
         for (int i = 0; i < floatingSpecies.Count(); i++)
         {
@@ -2208,10 +2208,10 @@ ArrayList RoadRunner::getSteadyStateSelectionList()
 
     ArrayList oFloating     = mModelGenerator->getFloatingSpeciesConcentrationList();
     ArrayList oBoundary     = mModelGenerator->getBoundarySpeciesList();
-    ArrayList oFluxes       = mModelGenerator->getReactionNames();
+    ArrayList oFluxes       = mModelGenerator->getReactionIds();
     ArrayList oVolumes      = mModelGenerator->getCompartmentList();
-    ArrayList oRates        = getRateOfChangeNames();
-    ArrayList oParameters   = getParameterNames();
+    ArrayList oRates        = getRateOfChangeIds();
+    ArrayList oParameters   = getParameterIds();
 
     ArrayList result;// = new ArrayList();
 //    foreach (var record in mSteadyStateSelection)
@@ -2273,7 +2273,7 @@ vector<TSelectionRecord> RoadRunner::GetSteadyStateSelection(const StringList& n
 	steadyStateSelection.resize(newSelectionList.Count());
     StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList bs = mModelGenerator->getBoundarySpeciesList();
-    StringList rs = mModelGenerator->getReactionNames();
+    StringList rs = mModelGenerator->getReactionIds();
     StringList vol = mModelGenerator->getCompartmentList();
     StringList gp = mModelGenerator->getGlobalParameterList();
 
@@ -2603,25 +2603,25 @@ string RoadRunner::writeSBML()
     ModelState state(*mModel);
 //    var state = new ModelState(model); 
 
-    StringList array = getFloatingSpeciesNames();
+    StringList array = getFloatingSpeciesIds();
     for (int i = 0; i < array.Count(); i++)
     {
         NOM.setValue((string)array[i], state.mFloatingSpeciesConcentrations[i]);
     }
 
-    array = getBoundarySpeciesNames();
+    array = getBoundarySpeciesIds();
     for (int i = 0; i < array.Count(); i++)
     {
         NOM.setValue((string)array[i], state.mBoundarySpeciesConcentrations[i]);
     }
 
-    array = getCompartmentNames();
+    array = getCompartmentIds();
     for (int i = 0; i < array.Count(); i++)
     {
         NOM.setValue((string)array[i], state.mCompartmentVolumes[i]);
     }
 
-    array = getGlobalParameterNames();
+    array = getGlobalParameterIds();
     for (int i = 0; i < min(array.Count(), state.mGlobalParameters.size()); i++)
     {
         NOM.setValue((string)array[i], state.mGlobalParameters[i]);
@@ -2937,7 +2937,7 @@ vector<double> RoadRunner::getBoundarySpeciesConcentrations()
 //        }
 //
 // Help("Gets the list of boundary species names")
-StringList RoadRunner::getBoundarySpeciesNames()
+StringList RoadRunner::getBoundarySpeciesIds()
 {
     if (!mModel)
     {
@@ -2947,11 +2947,11 @@ StringList RoadRunner::getBoundarySpeciesNames()
 }
 
 // Help("Gets the list of boundary species amount names")
-StringList RoadRunner::getBoundarySpeciesAmountNames()
+StringList RoadRunner::getBoundarySpeciesAmountIds()
 {
     StringList result;// = new ArrayList();
-    StringList list = getBoundarySpeciesNames();
-//    foreach (string s in getBoundarySpeciesNames()) oResult.Add("[" + s + "]");
+    StringList list = getBoundarySpeciesIds();
+//    foreach (string s in getBoundarySpeciesIds()) oResult.Add("[" + s + "]");
     for(int item = 0; item < list.Count(); item++)// (object item in floatingSpeciesNames)
     {
         result.Add(Format("[{0}]", list[item]));
@@ -3069,7 +3069,7 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
 //
 // This is a Level 1 method !
 // Help("Returns a list of floating species names")
-StringList RoadRunner::getFloatingSpeciesNames()
+StringList RoadRunner::getFloatingSpeciesIds()
 {
     if (!mModel)
     {
@@ -3080,7 +3080,7 @@ StringList RoadRunner::getFloatingSpeciesNames()
 }
 
 // Help("Returns a list of floating species initial condition names")
-StringList RoadRunner::getFloatingSpeciesInitialConditionNames()
+StringList RoadRunner::getFloatingSpeciesInitialConditionIds()
 {
     if (!mModel)
     {
@@ -3097,11 +3097,11 @@ StringList RoadRunner::getFloatingSpeciesInitialConditionNames()
 }
 
 // Help("Returns the list of floating species amount names")
-StringList RoadRunner::getFloatingSpeciesAmountNames()
+StringList RoadRunner::getFloatingSpeciesAmountIds()
 {
     StringList oResult;// = new ArrayList();
-    StringList list = getFloatingSpeciesNames();
-//    foreach (string s in getFloatingSpeciesNames()) oResult.Add(String.Format("[{0}]", s));
+    StringList list = getFloatingSpeciesIds();
+//    foreach (string s in getFloatingSpeciesIds()) oResult.Add(String.Format("[{0}]", s));
     for(int i = 0; i < list.Count(); i++)
     {
         oResult.push_back(Format("[{0}]", list[i]));
@@ -3224,7 +3224,7 @@ vector<double> RoadRunner::getGlobalParameterValues()
 }
 
 // Help("Gets the list of parameter names")
-StringList RoadRunner::getGlobalParameterNames()
+StringList RoadRunner::getGlobalParameterIds()
 {
     if (!mModel)
     {
@@ -4623,14 +4623,14 @@ vector<double> RoadRunner::getRatesOfChange()
 }
 
 // Help("Returns a list of reaction names")
-StringList RoadRunner::getReactionNames()
+StringList RoadRunner::getReactionIds()
 {
     if (!mModel)
     {
         throw SBWApplicationException(emptyModelStr);
     }
 
-    return mModelGenerator->getReactionNames();
+    return mModelGenerator->getReactionIds();
 }
 
 // ---------------------------------------------------------------------
@@ -4739,7 +4739,7 @@ bool RoadRunner::setValue(const string& sId, const double& dValue)
     }
 
     StringList initialConditions;
-    initialConditions = getFloatingSpeciesInitialConditionNames();
+    initialConditions = getFloatingSpeciesInitialConditionIds();
 
     if (initialConditions.Contains(sId))
     {
@@ -4790,7 +4790,7 @@ bool RoadRunner::setValue(const string& sId, const double& dValue)
 //            }
 //
 //            var initialConditions =
-//                new List<string>((string[])getFloatingSpeciesInitialConditionNames().ToArray(typeof(string)));
+//                new List<string>((string[])getFloatingSpeciesInitialConditionIds().ToArray(typeof(string)));
 //            if (initialConditions.Contains(sId))
 //            {
 //                int index = initialConditions.IndexOf(sId);
@@ -4849,7 +4849,7 @@ double RoadRunner::getValue(const string& sId)
         return mModel->ct[nIndex];
     }
 
-    StringList initialConditions = getFloatingSpeciesInitialConditionNames();
+    StringList initialConditions = getFloatingSpeciesInitialConditionIds();
     if (initialConditions.Contains(sId))
     {
         int index = initialConditions.IndexOf(sId);
@@ -4941,7 +4941,7 @@ double RoadRunner::getValue(const string& sId)
 //            }
 //
 //            var initialConditions =
-//                new List<string>((string[])getFloatingSpeciesInitialConditionNames().ToArray(typeof(string)));
+//                new List<string>((string[])getFloatingSpeciesInitialConditionIds().ToArray(typeof(string)));
 //            if (initialConditions.Contains(sId))
 //            {
 //                int index = initialConditions.IndexOf(sId);
@@ -4997,17 +4997,17 @@ ArrayList2 RoadRunner::getAvailableSymbols()
         return oResult;
     }
 
-    oResult.Add("Floating Species",                 getFloatingSpeciesNames() );
-    oResult.Add("Boundary Species",                 getBoundarySpeciesNames() );
-    oResult.Add("Floating Species (amount)",        getFloatingSpeciesAmountNames() );
-    oResult.Add("Boundary Species (amount)",        getBoundarySpeciesAmountNames() );
-    oResult.Add("Global Parameters",                getParameterNames() );
-    oResult.Add("Fluxes",                           getReactionNames() );
-    oResult.Add("Rates of Change",                  getRateOfChangeNames() );
+    oResult.Add("Floating Species",                 getFloatingSpeciesIds() );
+    oResult.Add("Boundary Species",                 getBoundarySpeciesIds() );
+    oResult.Add("Floating Species (amount)",        getFloatingSpeciesAmountIds() );
+    oResult.Add("Boundary Species (amount)",        getBoundarySpeciesAmountIds() );
+    oResult.Add("Global Parameters",                getParameterIds() );
+    oResult.Add("Fluxes",                           getReactionIds() );
+    oResult.Add("Rates of Change",                  getRateOfChangeIds() );
     oResult.Add("Volumes",                          mModelGenerator->getCompartmentList() );
-    oResult.Add("Elasticity Coefficients",          getElasticityCoefficientNames() );
-    oResult.Add("Unscaled Elasticity Coefficients", getUnscaledElasticityCoefficientNames() );
-    oResult.Add("Eigenvalues",                      getEigenValueNames() );
+    oResult.Add("Elasticity Coefficients",          getElasticityCoefficientIds() );
+    oResult.Add("Unscaled Elasticity Coefficients", getUnscaledElasticityCoefficientIds() );
+    oResult.Add("Eigenvalues",                      getEigenValueIds() );
     return oResult;
 }
 
