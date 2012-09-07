@@ -553,7 +553,7 @@ C_DECL_SPEC bool rrCallConv getValue(const char* speciesID, double& value);
  \return Returns true if succesful
  \ingroup state
 */
-C_DECL_SPEC bool rrCallConv setValue(const char* speciesId, const double& val);
+C_DECL_SPEC bool rrCallConv setValue(const char* symbolId, const double& val);
 
 
 /*!
