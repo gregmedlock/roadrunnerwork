@@ -151,7 +151,10 @@ cRRList* createList(const ArrayList& arrList)
    for(int i = 0; i < itemCount; i++)
     {
         // Have to figure out subtype of item
+		// ----------------------------------------------------------------------
+		// TOTTE: THIS NEEDS FIXING AND I DON"T KNOW HOW TO DO IT
         ArrayListItemBase* ptr = const_cast<ArrayListItemBase*>(&arrList[i]);
+		// ----------------------------------------------------------------------
         if(dynamic_cast<ArrayListItem<int>*>(ptr))
         {
             list->Items[i].ItemType = litInteger;
