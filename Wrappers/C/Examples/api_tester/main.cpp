@@ -31,21 +31,21 @@ int main(int argc, char* argv[])
 	// Test list type
 	printf ("Tesing list type\n");
 
-	cRRListHandle myList = createList();
+	cRRListHandle myList = createRRList();
 	
 	// First construct [5, 3.1415]
-	cRRListItemHandle myItem = createIntegerItem (myList, 5);
+	cRRListItemHandle myItem = createIntegerItem (5);
 	addItem (myList, &myItem);
-	myItem = createDoubleItem (myList, 3.1415);
+	myItem = createDoubleItem (3.1415);
 	addItem (myList, &myItem);
 
 	// Next construct [5, 3.1415, [2.7182, "Hello"]]
-	myItem = createListItem (myList, createList());
+	myItem = createListItem (createRRList());
     addItem (myList, &myItem);
-	cRRListItemHandle newItem = createDoubleItem (myList, 2.7182);
+	cRRListItemHandle newItem = createDoubleItem (2.7182);
 	addItem (getList (myItem), &newItem);
 
-	newItem = createStringItem (myList, "Hello");
+	newItem = createStringItem ("Hello");
 	addItem (getList (myItem), &newItem);
 
 	if (isListItemInteger (myList->myItems[0]))
@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 	printf (listToString (myList));
 	printf ("\n\n");
 		
-	freeList (myList);
+	freeRRList (myList);
 
 	printf ("Hit any key to continue\n");
 	getchar ();
@@ -417,7 +417,7 @@ int main(int argc, char* argv[])
     cout<<"\n\n Symbols\n";
     cRRList* symHandle = getAvailableSymbols();
     cout<<listToString(symHandle);
-    freeList(symHandle);
+    freeRRList(symHandle);
     cout<<"\n\n ================================\n";
     RRVector* test = getReactionRates();
     cout<<vectorToString(test);

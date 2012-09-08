@@ -2932,7 +2932,7 @@ char*  rrCallConv getResultColumnLabel (RRResultHandle result, int column)
 	return result->ColumnHeaders[column];
 }
 
-char* rrCallConv  getCCodeHeader (RRCCodeHandle code)
+char* rrCallConv getCCodeHeader (RRCCodeHandle code)
 {
 	if (code == NULL)
 		return NULL;
@@ -2951,45 +2951,45 @@ char* rrCallConv getCCodeSource (RRCCodeHandle code)
 // List Routines
 // -------------------------------------------------------------------
 
-cRRListHandle rrCallConv createList () {
+cRRListHandle rrCallConv createRRList () {
 	cRRListHandle list = (cRRListHandle) malloc (sizeof (cRRList));
 	list->Count = 0;
 	list->myItems = NULL;
 	return list;
 }
 
-void rrCallConv freeList (cRRListHandle list)  {
+void rrCallConv freeRRList (cRRListHandle list)  {
 	for (int i=0; i<list->Count; i++) {
 		if (list->myItems[i]->ItemType == litList) {
-			freeList (list->myItems[i]->data.lValue);
+			freeRRList (list->myItems[i]->data.lValue);
 		} else {
 			free (list->myItems[i]);  // What about freeing char*?????
 		}
 	}
 }
 
-cRRListItemHandle rrCallConv createIntegerItem (cRRListHandle list, int value) {
+cRRListItemHandle rrCallConv createIntegerItem (int value) {
 	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
 	item->ItemType = litInteger;
 	item->data.iValue = value;
 	return item;
 }
 
-cRRListItemHandle rrCallConv createDoubleItem (cRRListHandle list, double value) {
+cRRListItemHandle rrCallConv createDoubleItem (double value) {
 	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
 	item->ItemType = litDouble;
 	item->data.dValue = value;
 	return item;
 }
 
-cRRListItemHandle rrCallConv createStringItem (cRRListHandle list, char* value) {
+cRRListItemHandle rrCallConv createStringItem (char* value) {
 	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
 	item->ItemType = litString;
 	item->data.sValue = value;
 	return item;
 }
 
-cRRListItemHandle rrCallConv createListItem (cRRListHandle list, cRRList* value) {
+cRRListItemHandle rrCallConv createListItem (cRRList* value) {
 	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
 	item->ItemType = litList;
 	item->data.lValue = value;

@@ -238,11 +238,10 @@ cRRList* createList(const rr::ArrayList2& aList)
         return NULL;
     }
 
-    //Setup a RRStringArrayList structure from aList
-    cRRList* theList = new cRRList;
+    cRRListItemHandle myItem;
+	// Setup a RRStringArrayList structure from aList
+ 	cRRListHandle theList = createRRList();
 
-    theList->Count = aList.Count();
-    theList->Items = new cRRListItem[aList.Count()];
     int itemCount = aList.Count();
     for(int i = 0; i < itemCount; i++)
     {
@@ -250,33 +249,36 @@ cRRList* createList(const rr::ArrayList2& aList)
         ArrayListItemBase* ptr = const_cast<ArrayListItemBase*>(&aList[i]);
         if(dynamic_cast<ArrayListItem<int>*>(ptr))
         {
-            theList->Items[i].ItemType = litInteger;
             int val = (int) *(dynamic_cast<ArrayListItem<int>*>(ptr));
-            theList->Items[i].pValue = (int*) new int[1];
-
-            *(int *) theList->Items[i].pValue =  val;
+            myItem = createIntegerItem (val);
+			addItem (theList, &myItem);
         }
         else if(dynamic_cast<ArrayListItem<double>*>(ptr))
         {
-            theList->Items[i].ItemType = litDouble;
-            double val = (double) *(dynamic_cast<ArrayListItem<double>*>(ptr));
-            theList->Items[i].pValue = (double *) new double[1];
-            *(double* )theList->Items[i].pValue = val;
+            double val = (int) *(dynamic_cast<ArrayListItem<double>*>(ptr));
+            myItem = createDoubleItem (val);
+			addItem (theList, &myItem);
         }
         else if(dynamic_cast<ArrayListItem<string>*>(ptr))
         {
-            ArrayListItem<string>* listItem = dynamic_cast<ArrayListItem<string>*>(ptr);
             string item = (string) *(dynamic_cast<ArrayListItem<string>*>(ptr));
-            theList->Items[i].pValue = (char *) new char[item.size() + 1];
-            strcpy( (char *)theList->Items[i].pValue, item.c_str());
-            theList->Items[i].ItemType = litString;
+            char*str = (char *) new char[item.size() + 1];
+            strcpy (str, item.c_str());
+			myItem = createStringItem (str);
+          
         }
         else if(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr))
         {
             ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
             ArrayList2Item list = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));
-            theList->Items[i].pValue = (cRRList*) createList(*(list.mValue));
-            theList->Items[i].ItemType = litList;
+            
+            // TOTTE WHAT ARGUMENT DO I PUT HERE. I ASSUME YOUR ARRAYLIST2 
+			// CONTAINS LISTS THAT ARE OF TYPE ARRAYTYPE2?
+			// !!!!!!!!!!!     cRRListHandle myList = createList (listItem);
+			//                                                    ^^^^^^^^
+			//cRRListItemHandle myListItem = createListItem (myList);
+			//addItem (theList, &myListItem);
+		
         }
     }
     return theList;
