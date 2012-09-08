@@ -1439,14 +1439,14 @@ C_DECL_SPEC char* rrCallConv getCCodeSource (RRCCodeHandle code);
 
 
 // List support routines
-C_DECL_SPEC cRRListHandle rrCallConv createList ();
+C_DECL_SPEC cRRListHandle rrCallConv createRRList ();
 
-C_DECL_SPEC void rrCallConv freeList (cRRListHandle list);
+C_DECL_SPEC void rrCallConv freeRRList (cRRListHandle list);
 
-C_DECL_SPEC cRRListItemHandle rrCallConv createIntegerItem (cRRListHandle list, int value);
-C_DECL_SPEC cRRListItemHandle rrCallConv createDoubleItem  (cRRListHandle list, double value);
-C_DECL_SPEC cRRListItemHandle rrCallConv createStringItem  (cRRListHandle list, char* value);
-C_DECL_SPEC cRRListItemHandle rrCallConv createListItem    (cRRListHandle list, cRRList* value);
+C_DECL_SPEC cRRListItemHandle rrCallConv createIntegerItem (int value);
+C_DECL_SPEC cRRListItemHandle rrCallConv createDoubleItem  (double value);
+C_DECL_SPEC cRRListItemHandle rrCallConv createStringItem  (char* value);
+C_DECL_SPEC cRRListItemHandle rrCallConv createListItem    (cRRList* value);
 
 // Add item and return index of item
 C_DECL_SPEC int rrCallConv addItem (cRRListHandle list, cRRListItemHandle *item);

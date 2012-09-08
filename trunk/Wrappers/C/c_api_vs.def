@@ -9,7 +9,7 @@ EXPORTS
     getCurrentSBML                              = _getCurrentSBML@0
     computeSteadyStateValues                    = _computeSteadyStateValues@0         
     evalModel                                   = _evalModel@0                        
-    freeArrayList                               = _freeList@4                        
+    freeList                                    = _freeRRList@4                        
     freeCCode                                   = _freeCCode@4                        
     freeMatrix                                  = _freeMatrix@4                       
     freeRRInstance                              = _freeRRInstance@4                   
@@ -94,11 +94,11 @@ EXPORTS
     resultToString                              = _resultToString@4                      
     vectorToString                              = _vectorToString@4  
 	listToString                                = _listToString@4                    
-    createList                                  = _createList@0
-	createIntegerItem                           = _createIntegerItem@8
-	createDoubleItem                            = _createDoubleItem@12
-	createStringItem                            = _createStringItem@8
-	createListItem                              = _createListItem@8
+    createRRList                                = _createRRList@0
+	createIntegerItem                           = _createIntegerItem@4
+	createDoubleItem                            = _createDoubleItem@8
+	createStringItem                            = _createStringItem@4
+	createListItem                              = _createListItem@4
 	addItem                                     = _addItem@8
     getListItem                                 = _getListItem@8
 	isListItemInteger                           = _isListItemInteger@4
