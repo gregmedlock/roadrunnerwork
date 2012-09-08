@@ -28,6 +28,46 @@ int main(int argc, char* argv[])
 	printf ("\n    Start of run\n");
 	printf ("   ==============\n\n");
 
+	// Test list type
+	printf ("Tesing list type\n");
+
+	cRRListHandle myList = createList();
+	
+	// First construct [5, 3.1415]
+	cRRListItemHandle myItem = createIntegerItem (myList, 5);
+	addItem (myList, &myItem);
+	myItem = createDoubleItem (myList, 3.1415);
+	addItem (myList, &myItem);
+
+	// Next construct [5, 3.1415, [2.7182, "Hello"]]
+	myItem = createListItem (myList, createList());
+    addItem (myList, &myItem);
+	cRRListItemHandle newItem = createDoubleItem (myList, 2.7182);
+	addItem (getList (myItem), &newItem);
+
+	newItem = createStringItem (myList, "Hello");
+	addItem (getList (myItem), &newItem);
+
+	if (isListItemInteger (myList->myItems[0]))
+		printf ("Yes\n");
+
+	int length = getListLength (myList);
+	myItem = getListItem (myList, 0);
+	myItem = getListItem (myList, 1);
+
+	if (isListItem (getListItem (myList, 0), litInteger))
+		printf ("Yes it is an integer\n");
+
+	printf ("List:\n");
+	printf (listToString (myList));
+	printf ("\n\n");
+		
+	freeList (myList);
+
+	printf ("Hit any key to continue\n");
+	getchar ();
+	exit;
+
 	string modelsPath(".\\..\\Models");
 	if(argc > 1)
 	{
@@ -482,7 +522,7 @@ int main(int argc, char* argv[])
     cout<<text<<endl;
     freeText(text);
     freeRRInstance(rrHandle);
-	Pause();
+	//Pause();
     return 0;
 }
 

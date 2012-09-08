@@ -282,36 +282,6 @@ cRRList* createList(const rr::ArrayList2& aList)
     return theList;
 }
 
-cRRListHandle createList () {
-	return (cRRListHandle) malloc (sizeof (cRRList));
-}
 
-cRRListItemHandle addItem (cRRListHandle list, int value) {
-	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
-	item->ItemType = litInteger;
-	item->data.iValue = value;
-	return item;
-}
-
-cRRListItemHandle addItem (cRRListHandle list, double value) {
-	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
-	item->ItemType = litDouble;
-	item->data.dValue = value;
-	return item;
-}
-
-cRRListItemHandle addItem (cRRListHandle list, char* value) {
-	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
-	item->ItemType = litString;
-	item->data.sValue = value;
-	return item;
-}
-
-cRRListItemHandle addItem (cRRListHandle list, cRRList* value) {
-	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
-	item->ItemType = litList;
-	item->data.lValue = value;
-	return item;
-}
 
 }
