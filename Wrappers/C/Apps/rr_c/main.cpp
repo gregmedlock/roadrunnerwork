@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
         else
         {
             //Get value for each specie?
-            RRStringList* list = getSelectionList();
+            RRStringArray* list = getSelectionList();
             if(list == NULL)
             {
 		        cerr<<"SelectionList is empty. Exiting\n";
@@ -130,11 +130,11 @@ int main(int argc, char* argv[])
 	    setNumPoints(args.Steps);
     	setSelectionList(args.SelectionList.c_str());
 		cout<<"Roadrunner is about to simulate model\n";
-        RRStringListHandle list =  getSelectionList();
+        RRStringArrayHandle list =  getSelectionList();
 
         if(list)
         {
-	        cout<<"\nThe following is selected: "<<printStringList(list)<<endl;
+	        cout<<"\nThe following is selected: "<<stringArrayToString(list)<<endl;
         }
         else
         {

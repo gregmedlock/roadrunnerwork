@@ -551,7 +551,7 @@ bool  rrCallConv setSelectionList(const char* list)
     return false;
 }
 
-RRStringListHandle rrCallConv getSelectionList()
+RRStringArrayHandle rrCallConv getSelectionList()
 {
 	try
     {
@@ -648,7 +648,7 @@ RRResultHandle rrCallConv simulateEx (const double& timeStart, const double& tim
 	return NULL;
 }
 
-RRStringListHandle rrCallConv getReactionIds()
+RRStringArrayHandle rrCallConv getReactionIds()
 {
 	try
     {
@@ -714,7 +714,7 @@ RRVectorHandle rrCallConv getRatesOfChange()
 }
 
 
-RRStringListHandle rrCallConv getRatesOfChangeIds()
+RRStringArrayHandle rrCallConv getRatesOfChangeIds()
 {
 	try
     {
@@ -1087,7 +1087,7 @@ int rrCallConv getNumberOfBoundarySpecies()
   	return -1;
 }
 
-RRStringListHandle rrCallConv getBoundarySpeciesIds()         
+RRStringArrayHandle rrCallConv getBoundarySpeciesIds()         
 {
 	try
     {
@@ -1136,7 +1136,7 @@ int rrCallConv getNumberOfFloatingSpecies()
    	return -1;
 }
 
-RRStringListHandle rrCallConv getFloatingSpeciesIds()
+RRStringArrayHandle rrCallConv getFloatingSpeciesIds()
 {
 	try
     {
@@ -1184,7 +1184,7 @@ int rrCallConv getNumberOfGlobalParameters()
    	return -1;
 }
 
-RRStringListHandle rrCallConv getGlobalParameterIds()
+RRStringArrayHandle rrCallConv getGlobalParameterIds()
 {
 	try
     {
@@ -1752,7 +1752,7 @@ bool rrCallConv setSteadyStateSelectionList(const char* list)
 	return false;
 }
 
-RRStringListHandle rrCallConv getSteadyStateSelectionList()
+cRRListHandle rrCallConv getSteadyStateSelectionList()
 {
 	try
     {
@@ -1914,7 +1914,7 @@ bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reactionId, const
     return false;
 }
 
-RRStringListHandle rrCallConv getFloatingSpeciesInitialConditionIds()
+RRStringArrayHandle rrCallConv getFloatingSpeciesInitialConditionIds()
 {
 	try
     {
@@ -1979,7 +1979,7 @@ RRVectorHandle rrCallConv getReactionRatesEx(const RRVectorHandle vec)
     return NULL;
 }
 
-RRStringArrayList* rrCallConv getElasticityCoefficientIds()
+RRStringArray* rrCallConv getElasticityCoefficientIds()
 {
 	try
     {
@@ -2001,7 +2001,7 @@ RRStringArrayList* rrCallConv getElasticityCoefficientIds()
     return NULL;
 }
 
-RRStringListHandle rrCallConv getRateOfChangeIds()
+RRStringArrayHandle rrCallConv getRateOfChangeIds()
 {
 	try
     {
@@ -2069,7 +2069,7 @@ char* rrCallConv getCapabilities()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-RRStringListHandle rrCallConv getEigenValueIds()
+RRStringArrayHandle rrCallConv getEigenValueIds()
 {
 	try
     {
@@ -2090,7 +2090,7 @@ RRStringListHandle rrCallConv getEigenValueIds()
     return NULL;
 }
 
-RRStringArrayListHandle rrCallConv getFluxControlCoefficientIds()
+RRStringArrayHandle rrCallConv getFluxControlCoefficientIds()
 {
 	try
     {
@@ -2198,7 +2198,7 @@ RRMatrixHandle rrCallConv getScaledFluxControlCoefficientMatrix()
     return NULL;
 }
 
-RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficientIds()
+RRStringArrayHandle rrCallConv getUnscaledFluxControlCoefficientIds()
 {
 	try
     {
@@ -2219,7 +2219,7 @@ RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficientIds()
     return NULL;
 }
 
-RRStringArrayList* rrCallConv getConcentrationControlCoefficientIds()
+RRStringArray* rrCallConv getConcentrationControlCoefficientIds()
 {
 	try
     {
@@ -2240,7 +2240,7 @@ RRStringArrayList* rrCallConv getConcentrationControlCoefficientIds()
     return NULL;
 }
 
-RRStringArrayListHandle rrCallConv getUnscaledConcentrationControlCoefficientIds()
+RRStringArrayHandle rrCallConv getUnscaledConcentrationControlCoefficientIds()
 {
 	try
     {
@@ -2322,7 +2322,7 @@ bool rrCallConv setCompartmentByIndex (const int& index, const double& value)
     return false;
 }
 
-RRStringListHandle rrCallConv getCompartmentIds()
+RRStringArrayHandle rrCallConv getCompartmentIds()
 {
 	try
     {
@@ -2400,7 +2400,7 @@ char* rrCallConv listToString(const cRRListHandle list)
                     resStr<< (*dVal);
                 break;
 
-                case litArrayList:
+                case litList:
                     lVal = (cRRList *) list->Items[i].pValue;
                     resStr<<listToString(lVal);
                 break;
@@ -2427,7 +2427,7 @@ char* rrCallConv listToString(const cRRListHandle list)
     }
 }
 
-char* rrCallConv printStringList(const RRStringListHandle list)
+char* rrCallConv stringArrayToString (const RRStringArrayHandle list)
 {
 	try
     {
@@ -2461,51 +2461,51 @@ char* rrCallConv printStringList(const RRStringListHandle list)
     return NULL;
 }
 
-char* rrCallConv  printStringArrayList(const RRStringArrayList* list)
-{
-	try
-    {
-        if(!list)
-        {
-            return NULL;
-        }
-
-		stringstream resStr;
-		//list  is actually a nested list
-
-        resStr<<"{";
-	    for(int i = 0; i < list->Count; i++)
-        {
-
-            if(list->Items[i].Item != NULL)
-            {
-                resStr<<"\""<<list->Items[i].Item<<"\"";
-                if(i < list->Count -1)
-                {
-                    resStr<<",";
-                }
-
-            }
-            else
-            {
-                resStr<<printStringArrayList(list->Items[i].SubList);   //Recursive call..
-            }
-        }
-        resStr<<"}";
-		string strTmp = resStr.str();
-    	char* resultChar = new char[strTmp.size() + 1];
-        strcpy(resultChar, strTmp.c_str());
-        return resultChar;
-
-    }
-    catch(Exception& ex)
-    {
-        stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        setError(msg.str());
-    }
-    return NULL;
-}
+//char* rrCallConv  printStringArrayList(const RRStringArrayList* list)
+//{
+//	try
+//    {
+//        if(!list)
+//        {
+//            return NULL;
+//        }
+//
+//		stringstream resStr;
+//		//list  is actually a nested list
+//
+//        resStr<<"{";
+//	    for(int i = 0; i < list->Count; i++)
+//        {
+//
+//            if(list->Items[i].Item != NULL)
+//            {
+//                resStr<<"\""<<list->Items[i].Item<<"\"";
+//                if(i < list->Count -1)
+//                {
+//                    resStr<<",";
+//                }
+//
+//            }
+//            else
+//            {
+//                resStr<<printStringArrayList(list->Items[i].SubList);   //Recursive call..
+//            }
+//        }
+//        resStr<<"}";
+//		string strTmp = resStr.str();
+//    	char* resultChar = new char[strTmp.size() + 1];
+//        strcpy(resultChar, strTmp.c_str());
+//        return resultChar;
+//
+//    }
+//    catch(Exception& ex)
+//    {
+//        stringstream msg;
+//    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+//        setError(msg.str());
+//    }
+//    return NULL;
+//}
 
 char* rrCallConv resultToString(const RRResultHandle result)
 {
@@ -2705,7 +2705,8 @@ bool rrCallConv freeText(char* text)
     return false;
 }
 
-bool rrCallConv freeStringList(RRStringListHandle sl)
+
+bool rrCallConv freeStringArray(RRStringArrayHandle sl)
 {
 	try
     {
@@ -2720,6 +2721,7 @@ bool rrCallConv freeStringList(RRStringListHandle sl)
     }
     return false;
 }
+
 
 bool rrCallConv freeVector(RRVectorHandle vector)
 {
@@ -2760,41 +2762,41 @@ bool rrCallConv freeCCode(RRCCodeHandle code)
     return false;
 }
 
-bool rrCallConv freeStringArrayList(RRStringArrayListHandle theList)
-{
-	try
-    {
-        if(!theList)
-        {
-            return true;
-        }
-
-        int itemCount = theList->Count;
-        for(int i = 0; i < itemCount; i++)
-        {
-            if(theList->Items[i].Item != NULL)
-            {
-                delete [] theList->Items[i].Item ;
-            }
-            else
-            {
-                //Item is a sublist
-                freeStringArrayList(theList->Items[i].SubList);
-            }
-        }
-
-        delete [] theList->Items;
-    	delete theList;
-    	return true;
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        setError(msg.str());
-    }
-    return false;
-}
+//bool rrCallConv freeStringArrayList(RRStringArrayListHandle theList)
+//{
+//	try
+//    {
+//        if(!theList)
+//        {
+//            return true;
+//        }
+//
+//        int itemCount = theList->Count;
+//        for(int i = 0; i < itemCount; i++)
+//        {
+//            if(theList->Items[i].Item != NULL)
+//            {
+//                delete [] theList->Items[i].Item ;
+//            }
+//            else
+//            {
+//                //Item is a sublist
+//                freeStringArrayList(theList->Items[i].SubList);
+//            }
+//        }
+//
+//        delete [] theList->Items;
+//    	delete theList;
+//    	return true;
+//    }
+//    catch(Exception& ex)
+//    {
+//    	stringstream msg;
+//    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+//        setError(msg.str());
+//    }
+//    return false;
+//}
 
 bool rrCallConv freeList(cRRListHandle theList)
 {
@@ -2808,19 +2810,15 @@ bool rrCallConv freeList(cRRListHandle theList)
         int itemCount = theList->Count;
         for(int i = 0; i < itemCount; i++)
         {
-//            if(theList->Items[i].Item != NULL)
-//            {
-//                delete [] theList->Items[i].Item ;
-//            }
-//            else
-//            {
-//                //Item is a sublist
-//                freeStringArrayList(theList->Items[i].SubList);
-//            }
+			if(theList->Items[i].ItemType = litString)
+			{
+				  delete [] theList->Items[i].pValue;
+            }  
+			if(theList->Items[i].ItemType = litList)
+			{
+				freeList ((cRRList *) theList->Items[i].pValue);
+			}          
         }
-
-        //delete [] theList->Items;
-    	//delete theList;
     	return true;
     }
     catch(Exception& ex)
@@ -2874,21 +2872,6 @@ bool rrCallConv setVectorElement (RRVectorHandle vector, int index, double value
 	return true;
 }
 
-int rrCallConv getStringListLength (RRStringListHandle stringList)
-{
-	if (stringList == NULL)
-		return -1;
-	return stringList->Count;
-}
-
-char* rrCallConv getStringListElement (RRStringListHandle stringList, int index)
-{
-	if (stringList == NULL)
-		return NULL;
-	if ((index < 0) || (index >= stringList->Count))
-		return NULL;
-	return stringList->String[index];
-}
 
 int rrCallConv getMatrixNumRows (RRMatrixHandle m)
 {

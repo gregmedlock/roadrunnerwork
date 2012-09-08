@@ -92,7 +92,7 @@ EXPORTS
     loadSBML                                    = _loadSBML@4                         
     loadSBMLFromFile                            = _loadSBMLFromFile@4                 
     oneStep                                     = _oneStep@12                         
-    printStringList                             = _printStringList@4                        
+    stringArrayToString                         = _stringArrayToString@4                        
     matrixToString                              = _matrixToString@4                      
     resultToString                              = _resultToString@4                      
     vectorToString                              = _vectorToString@4  

@@ -442,7 +442,7 @@ C_DECL_SPEC bool rrCallConv setSelectionList(const char* list);
  \return A list of symbol Ids indicating the current selection list
  \ingroup simulation
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getSelectionList();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getSelectionList();
 
 /*!
  \brief Carry out a time-course simulation, use setTimeStart etc to set
@@ -547,7 +547,7 @@ C_DECL_SPEC bool rrCallConv setSteadyStateSelectionList(const char* list);
  \return Returns null if it fails, otherwise it returns a list of strings representing symbols in the selection list
  \ingroup steadystate
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getSteadyStateSelectionList();
+C_DECL_SPEC cRRListHandle rrCallConv getSteadyStateSelectionList();
 
 
 /*!
@@ -800,7 +800,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv getFloatingSpeciesInitialConcentrations ()
  \return Returns null if it fails otherwise returns a vector containing names of the floating species
  \ingroup initialConditions
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getFloatingSpeciesInitialConditionIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getFloatingSpeciesInitialConditionIds();
 
 
 // Reaction rates
@@ -854,7 +854,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv getReactionRatesEx (const RRVectorHandle v
  \return Returns null if it fails, otherwise returns a vector of rates of change values
  \ingroup rateOfChange
 */
-C_DECL_SPEC RRVectorHandle  rrCallConv getRatesOfChange();
+C_DECL_SPEC RRVectorHandle rrCallConv getRatesOfChange();
 
 /*!
  \brief Retrieve the string list of rates of change Ids
@@ -864,7 +864,7 @@ C_DECL_SPEC RRVectorHandle  rrCallConv getRatesOfChange();
  \return Returns null if it fails, otherwise returns a list of rates of change Ids
  \ingroup rateOfChange
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getRatesOfChangeIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getRatesOfChangeIds();
 
 
 /*!
@@ -948,7 +948,7 @@ C_DECL_SPEC int rrCallConv getNumberOfIndependentSpecies();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup compartment
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getReactionIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getReactionIds();
 
 
 /*!
@@ -957,7 +957,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getReactionIds();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup compartment
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getRateOfChangeIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getRateOfChangeIds();
 
 /*!
  \brief Obtain the list of boundary species Ids
@@ -965,7 +965,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getRateOfChangeIds();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup boundary
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getBoundarySpeciesIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getBoundarySpeciesIds();
 
 /*!
  \brief Obtain the list of floating species Id
@@ -973,7 +973,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getBoundarySpeciesIds();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup floating
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getFloatingSpeciesIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getFloatingSpeciesIds();
 
 /*!
  \brief Obtain the list of global parameter Ids
@@ -981,7 +981,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getFloatingSpeciesIds();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup parameters
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getGlobalParameterIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getGlobalParameterIds();
 
 /*!
  \brief Obtain the list of compartment Ids
@@ -991,7 +991,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getGlobalParameterIds();
  \return Returns -1 if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup compartment
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getCompartmentIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getCompartmentIds();
 
 /*!
  \brief Obtain the list of eigenvalue Ids
@@ -999,7 +999,7 @@ C_DECL_SPEC RRStringListHandle rrCallConv getCompartmentIds();
  \return Returns -1 if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup state
 */
-C_DECL_SPEC RRStringListHandle rrCallConv getEigenValueIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getEigenValueIds();
 
 /*!
  \brief Obtain the list of al avialable symbols
@@ -1016,7 +1016,7 @@ C_DECL_SPEC cRRListHandle rrCallConv getAvailableSymbols();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca 
 */
-C_DECL_SPEC RRStringArrayListHandle rrCallConv getElasticityCoefficientIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getElasticityCoefficientIds();
 
 /*!
  \brief Obtain the list of unscaled flux control coefficient Ids
@@ -1024,7 +1024,7 @@ C_DECL_SPEC RRStringArrayListHandle rrCallConv getElasticityCoefficientIds();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca
 */
-C_DECL_SPEC RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficientIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getUnscaledFluxControlCoefficientIds();
 
 /*!
  \brief Obtain the list of flux control coefficient Ids
@@ -1032,7 +1032,7 @@ C_DECL_SPEC RRStringArrayListHandle rrCallConv getUnscaledFluxControlCoefficient
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca 
 */
-C_DECL_SPEC RRStringArrayListHandle rrCallConv getFluxControlCoefficientIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getFluxControlCoefficientIds();
 
 /*!
  \brief Obtain the list of unscaled concentration control coefficient Ids
@@ -1040,7 +1040,7 @@ C_DECL_SPEC RRStringArrayListHandle rrCallConv getFluxControlCoefficientIds();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca 
 */
-C_DECL_SPEC RRStringArrayListHandle rrCallConv getUnscaledConcentrationControlCoefficientIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getUnscaledConcentrationControlCoefficientIds();
 
 /*!
  \brief Obtain the list of concentration coefficient Ids
@@ -1048,7 +1048,7 @@ C_DECL_SPEC RRStringArrayListHandle rrCallConv getUnscaledConcentrationControlCo
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca 
 */
-C_DECL_SPEC RRStringArrayListHandle rrCallConv getConcentrationControlCoefficientIds();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getConcentrationControlCoefficientIds();
 
 /*!
  \brief Retrieve the unscaled elasticity matrix for the current model
@@ -1191,14 +1191,14 @@ C_DECL_SPEC char* rrCallConv vectorToString(const RRVectorHandle vec);
  \return Returns string list as a character string
  \ingroup toString
 */
-C_DECL_SPEC char* rrCallConv printStringList(const RRStringListHandle list);
+C_DECL_SPEC char* rrCallConv stringArrayToString(const RRStringArrayHandle list);
 
 /*!
  \brief Returns a string array in string form.
  \return Returns string array as a character string
  \ingroup toString
 */
-C_DECL_SPEC char* rrCallConv printStringArrayList(const RRStringArrayList* list);
+//C_DECL_SPEC char* rrCallConv printStringArrayList(const RRStringArrayList* list);
 
 /*!
  \brief Returns a list in string form.
@@ -1225,13 +1225,13 @@ C_DECL_SPEC bool rrCallConv freeText(char* text);
  \brief Free RRStringListHandle structures
  \ingroup freeRoutines
 */
-C_DECL_SPEC bool rrCallConv freeStringList(RRStringListHandle sl);
+//C_DECL_SPEC bool rrCallConv freeStringList(RRStringListHandle sl);
 
 /*!
- \brief Free RRStringArrayListHandle structures
+ \brief Free RRStringArrayHandle structures
  \ingroup freeRoutines
 */
-C_DECL_SPEC bool rrCallConv freeStringArrayList(RRStringArrayListHandle sl);
+C_DECL_SPEC bool rrCallConv freeStringArray(RRStringArrayHandle sl);
 
 /*!
  \brief Free RRListHandle structures
@@ -1320,7 +1320,7 @@ C_DECL_SPEC bool rrCallConv setVectorElement (RRVectorHandle vector, int index, 
  \param stringList
  \return Deprecated
 */
-C_DECL_SPEC int                     rrCallConv  getStringListLength (RRStringListHandle stringList);
+//C_DECL_SPEC int                     rrCallConv  getStringListLength (RRStringListHandle stringList);
 
 /*!
  \brief To be deprecated
@@ -1329,7 +1329,7 @@ C_DECL_SPEC int                     rrCallConv  getStringListLength (RRStringLis
  \param index
  \return Deprecated
 */
-C_DECL_SPEC char*                   rrCallConv  getStringListElement (RRStringListHandle stringList, int index);
+//C_DECL_SPEC char*                   rrCallConv  getStringListElement (RRStringListHandle stringList, int index);
 
 /*!
  \brief Retrieve the number of rows in the given matrix

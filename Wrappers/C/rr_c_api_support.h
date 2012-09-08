@@ -33,9 +33,11 @@ vector<double>      createVectorFromRRVector(const RRVector* vec);
 char*               createText(const char* str);        //To be deleted by client using freeText
 char*               createText(const string& str);      //To be deleted by client using freeText
 RRMatrix*           createMatrix(const LIB_LA::DoubleMatrix& mat);
-RRStringList*       createList(const rr::StringList& aList);
-RRStringList*       createList(const rr::ArrayList& aList);
-RRStringArrayList*  createList(const rr::RRArrayList<string>& aList);
+RRStringArrayHandle createList(const rr::StringList& aList);
+//RRStringList*       createList(const rr::ArrayList& aList);
+cRRList*            createList(const ArrayList& arrList);
+//RRStringArrayList*  createList(const rr::RRArrayList<string>& aList);
+RRStringArrayHandle createList(const RRArrayList<string>& aList);
 cRRList*            createList(const rr::ArrayList2& aList);
 
 }
