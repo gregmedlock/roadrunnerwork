@@ -38,7 +38,14 @@ RRStringArrayHandle createList(const rr::StringList& aList);
 cRRList*            createList(const ArrayList& arrList);
 //RRStringArrayList*  createList(const rr::RRArrayList<string>& aList);
 RRStringArrayHandle createList(const RRArrayList<string>& aList);
-cRRList*            createList(const rr::ArrayList2& aList);
+//cRRList*            createList(const rr::ArrayList2& aList);
+
+// List support routines
+cRRList* createList ();
+cRRListItemHandle addItem (cRRListHandle list, int value);
+cRRListItemHandle addItem (cRRListHandle list, double value);
+cRRListItemHandle addItem (cRRListHandle list, char* value);
+cRRListItemHandle addItem (cRRListHandle list, cRRList* value);
 
 }
 
