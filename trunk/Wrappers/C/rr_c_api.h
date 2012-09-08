@@ -1464,7 +1464,7 @@ C_DECL_SPEC bool rrCallConv isListItem (cRRListItemHandle item, ListItemType ite
 // Returns the length of the list
 C_DECL_SPEC int rrCallConv getListLength (cRRListHandle myList);
 
-// Returns NULL if item isn't a list, otherwise it returns a list
+// Returns NULL if item isn't a list, otherwise it returns a list from the item
 C_DECL_SPEC cRRListHandle rrCallConv getList (cRRListItemHandle item);
 
 #if defined( __cplusplus)

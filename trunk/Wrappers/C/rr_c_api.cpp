@@ -3036,6 +3036,9 @@ bool rrCallConv isListItemList (cRRListItemHandle item) {
 	   return false;
 }
 cRRListItemHandle rrCallConv getListItem (cRRListHandle list, int index) {
+	if (index >= list->Count)
+		return NULL;
+
 	return (list->myItems[index]); 
 }
 

@@ -54,11 +54,15 @@ int main(int argc, char* argv[])
 	int length = getListLength (myList);
 	myItem = getListItem (myList, 0);
 	myItem = getListItem (myList, 1);
+	myItem = getListItem (myList, 2);
+	myItem = getListItem (myList, 3);
+	if (myItem == NULL)
+		printf ("Index overflow in getListItem\n");
 
-	if (isListItem (getListItem (myList, 0), litInteger))
+	if (isListItem (getListItem (myList, 1), litInteger))
 		printf ("Yes it is an integer\n");
 
-	printf ("List:\n");
+	printf ("\nList:\n");
 	printf (listToString (myList));
 	printf ("\n\n");
 		
@@ -66,7 +70,6 @@ int main(int argc, char* argv[])
 
 	printf ("Hit any key to continue\n");
 	getchar ();
-	exit;
 
 	string modelsPath(".\\..\\Models");
 	if(argc > 1)
