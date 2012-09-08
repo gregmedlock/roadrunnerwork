@@ -1429,7 +1429,8 @@ cRRListHandle rrCallConv getAvailableSymbols()
 
         ArrayList2 slSymbols = gRRHandle->getAvailableSymbols();
         slSymbols.Add(34.56);
-        return createList(slSymbols);
+        // ******* HMS TO BE PUT BACK IN LATER
+		//return createList(slSymbols);
     }
     catch(Exception& ex)
     {
@@ -1769,7 +1770,8 @@ cRRListHandle rrCallConv getSteadyStateSelectionList()
             return NULL;
         }
 
-        return createList(sNames);
+		// ********** HMS TO BE ADDED BACK LATER
+        //return createList(sNames);
     }
     catch(Exception& ex)
     {

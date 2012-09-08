@@ -1351,7 +1351,7 @@ C_DECL_SPEC int rrCallConv getMatrixNumRows (RRMatrixHandle m);
  \return Returns -1 if fails, otherwise returns the number of columns
  \ingroup helperRoutines
 */
-C_DECL_SPEC int rrCallConv  getMatrixNumCols (RRMatrixHandle m);
+C_DECL_SPEC int rrCallConv getMatrixNumCols (RRMatrixHandle m);
 
 /*!
  \brief Retrieves an element at a given row and column from a matrix type variable
@@ -1365,7 +1365,7 @@ C_DECL_SPEC int rrCallConv  getMatrixNumCols (RRMatrixHandle m);
  \return Returns True if succesful
  \ingroup helperRoutines
 */
-C_DECL_SPEC bool rrCallConv  getMatrixElement (RRMatrixHandle m, int r, int c, double& value);
+C_DECL_SPEC bool rrCallConv getMatrixElement (RRMatrixHandle m, int r, int c, double& value);
 
 /*!
  \brief Retrieve the number of rows in the given result data
@@ -1376,7 +1376,7 @@ C_DECL_SPEC bool rrCallConv  getMatrixElement (RRMatrixHandle m, int r, int c, d
  \return Returns -1 if fails, otherwise returns the number of rows
  \ingroup helperRoutines
 */
-C_DECL_SPEC int rrCallConv  getResultNumRows (RRResultHandle result);
+C_DECL_SPEC int rrCallConv getResultNumRows (RRResultHandle result);
 
 /*!
  \brief Retrieve the number of columns in the given result data
@@ -1387,7 +1387,7 @@ C_DECL_SPEC int rrCallConv  getResultNumRows (RRResultHandle result);
  \return Returns -1 if fails, otherwise returns the number of columns
  \ingroup helperRoutines
 */
-C_DECL_SPEC int rrCallConv  getResultNumCols (RRResultHandle result);
+C_DECL_SPEC int rrCallConv getResultNumCols (RRResultHandle result);
 
 /*!
  \brief Retrieves an element at a given row and column from a result type variable
@@ -1401,7 +1401,7 @@ C_DECL_SPEC int rrCallConv  getResultNumCols (RRResultHandle result);
  \return Returns true if succesful
  \ingroup helperRoutines
 */
-C_DECL_SPEC bool rrCallConv  getResultElement (RRResultHandle result, int r, int c, double& value);
+C_DECL_SPEC bool rrCallConv getResultElement (RRResultHandle result, int r, int c, double& value);
 
 /*!
  \brief Retrieves an element at a given row and column from a result type variable
@@ -1413,7 +1413,7 @@ C_DECL_SPEC bool rrCallConv  getResultElement (RRResultHandle result, int r, int
  \return Returns null if fails, otherwise returns a pointer to the string column label
  \ingroup helperRoutines
 */
-C_DECL_SPEC char* rrCallConv  getResultColumnLabel (RRResultHandle result, int column);
+C_DECL_SPEC char* rrCallConv getResultColumnLabel (RRResultHandle result, int column);
 
 /*!
  \brief Retrieve the header file for the current model (if applicable)
@@ -1424,7 +1424,7 @@ C_DECL_SPEC char* rrCallConv  getResultColumnLabel (RRResultHandle result, int c
   \return Returns true if succesful
  \ingroup helperRoutines
 */
-C_DECL_SPEC char* rrCallConv  getCCodeHeader (RRCCodeHandle code);
+C_DECL_SPEC char* rrCallConv getCCodeHeader (RRCCodeHandle code);
 
 /*!
  \brief Retrieve the main source file for the current model (if applicable)
@@ -1435,7 +1435,7 @@ C_DECL_SPEC char* rrCallConv  getCCodeHeader (RRCCodeHandle code);
  \return Returns true if succesful
  \ingroup helperRoutines
 */
-C_DECL_SPEC char* rrCallConv  getCCodeSource (RRCCodeHandle code);
+C_DECL_SPEC char* rrCallConv getCCodeSource (RRCCodeHandle code);
 
 #if defined( __cplusplus)
 }

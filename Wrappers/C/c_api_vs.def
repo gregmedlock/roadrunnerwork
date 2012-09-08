@@ -14,7 +14,6 @@ EXPORTS
     freeMatrix                                  = _freeMatrix@4                       
     freeRRInstance                              = _freeRRInstance@4                   
     freeResult                                  = _freeResult@4                       
-    freeStringList                              = _freeStringList@4                   
     freeText                                    = _freeText@4                         
     freeVector                                  = _freeVector@4                       
 	getAvailableSymbols                         = _getAvailableSymbols@0              
@@ -82,8 +81,6 @@ EXPORTS
     getSelectionList                            = _getSelectionList@0                 
     getSteadyStateSelectionList                 = _getSteadyStateSelectionList@0      
     getStoichiometryMatrix                      = _getStoichiometryMatrix@0  
-	getStringListElement                        = _getStringListElement@8   
-	getStringListLength                         = _getStringListLength@4      
     getTempFolder                               = _getTempFolder@0                    
     getValue                                    = _getValue@8  
 	getVectorElement                            = _getVectorElement@12

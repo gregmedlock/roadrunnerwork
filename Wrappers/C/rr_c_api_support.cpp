@@ -135,44 +135,44 @@ RRStringArrayHandle createList(const StringList& sList)
     return list;
 }
 
-cRRList* createList(const ArrayList& arrList)
-{
-    if(!arrList.Count())
-    {
-        return NULL;
-    }
-
-    cRRListHandle list = new cRRList;
-
-    list->Count = arrList.Count();
-    list->Items = new cRRListItem[arrList.Count()];
-    int itemCount = arrList.Count();
-
-   for(int i = 0; i < itemCount; i++)
-    {
-        // Have to figure out subtype of item
-		// ----------------------------------------------------------------------
-		// TOTTE: THIS NEEDS FIXING AND I DON"T KNOW HOW TO DO IT
-        ArrayListItemBase* ptr = const_cast<ArrayListItemBase*>(&arrList[i]);
-		// ----------------------------------------------------------------------
-        if(dynamic_cast<ArrayListItem<int>*>(ptr))
-        {
-            list->Items[i].ItemType = litInteger;
-            int val = (int) *(dynamic_cast<ArrayListItem<int>*>(ptr));
-            list->Items[i].pValue = (int*) new int[1];
-
-            *(int *) list->Items[i].pValue =  val;
-        }
-         else if(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr))
-        {
-            ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
-            ArrayList2Item mlist = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));
-            list->Items[i].pValue = (cRRList*) createList(*(mlist.mValue));
-            list->Items[i].ItemType = litList;
-        }
-    }
-    return list;
-}
+//cRRList* createList(const ArrayList& arrList)
+//{
+//    if(!arrList.Count())
+//    {
+//        return NULL;
+//    }
+//
+//    cRRListHandle list = new cRRList;
+//
+//    list->Count = arrList.Count();
+//    list->Items = new cRRListItem[arrList.Count()];
+//    int itemCount = arrList.Count();
+//
+//   for(int i = 0; i < itemCount; i++)
+//    {
+//        // Have to figure out subtype of item
+//		// ----------------------------------------------------------------------
+//		// TOTTE: THIS NEEDS FIXING AND I DON"T KNOW HOW TO DO IT
+//        ArrayListItemBase* ptr = const_cast<ArrayListItemBase*>(&arrList[i]);
+//		// ----------------------------------------------------------------------
+//        if(dynamic_cast<ArrayListItem<int>*>(ptr))
+//        {
+//            list->Items[i].ItemType = litInteger;
+//            int val = (int) *(dynamic_cast<ArrayListItem<int>*>(ptr));
+//            list->Items[i].pValue = (int*) new int[1];
+//
+//            *(int *) list->Items[i].pValue =  val;
+//        }
+//         else if(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr))
+//        {
+//            ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
+//            ArrayList2Item mlist = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));
+//            list->Items[i].pValue = (cRRList*) createList(*(mlist.mValue));
+//            list->Items[i].ItemType = litList;
+//        }
+//    }
+//    return list;
+//}
 
 
 RRStringArray* createList(const RRArrayList<string>& aList)
@@ -280,6 +280,38 @@ cRRList* createList(const rr::ArrayList2& aList)
         }
     }
     return theList;
+}
+
+cRRListHandle createList () {
+	return (cRRListHandle) malloc (sizeof (cRRList));
+}
+
+cRRListItemHandle addItem (cRRListHandle list, int value) {
+	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
+	item->ItemType = litInteger;
+	item->data.iValue = value;
+	return item;
+}
+
+cRRListItemHandle addItem (cRRListHandle list, double value) {
+	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
+	item->ItemType = litDouble;
+	item->data.dValue = value;
+	return item;
+}
+
+cRRListItemHandle addItem (cRRListHandle list, char* value) {
+	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
+	item->ItemType = litString;
+	item->data.sValue = value;
+	return item;
+}
+
+cRRListItemHandle addItem (cRRListHandle list, cRRList* value) {
+	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
+	item->ItemType = litList;
+	item->data.lValue = value;
+	return item;
 }
 
 }
