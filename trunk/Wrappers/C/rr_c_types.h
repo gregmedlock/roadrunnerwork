@@ -134,6 +134,7 @@ typedef struct cRRList
 {
     int                   Count;  /*!< The number elements in this list */
     cRRListItemHandle     Items;  /*!< A pointer to an array of list items */
+    cRRListItemHandle    *myItems;  /*!< A pointer to a list of items */
 }  *cRRListHandle;                /*!< Pointer to cRRArrayListHandle struct */
 
 

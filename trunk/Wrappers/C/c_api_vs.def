@@ -94,7 +94,22 @@ EXPORTS
     resultToString                              = _resultToString@4                      
     vectorToString                              = _vectorToString@4  
 	listToString                                = _listToString@4                    
-    reset                                       = _reset@0                            
+    createList                                  = _createList@0
+	createIntegerItem                           = _createIntegerItem@8
+	createDoubleItem                            = _createDoubleItem@12
+	createStringItem                            = _createStringItem@8
+	createListItem                              = _createListItem@8
+	addItem                                     = _addItem@8
+    getListItem                                 = _getListItem@8
+	isListItemInteger                           = _isListItemInteger@4
+	isListItemDouble                            = _isListItemDouble@4
+	isListItemString                            = _isListItemString@4
+	isListItemList                              = _isListItemList@4
+
+    getListLength                               = _getListLength@4
+	getList                                     = _getList@4
+
+	reset                                       = _reset@0                            
     setBoundarySpeciesByIndex                   = _setBoundarySpeciesByIndex@8        
     setCapabilities                             = _setCapabilities@4                  
     setCompartmentByIndex                       = _setCompartmentByIndex@8            
