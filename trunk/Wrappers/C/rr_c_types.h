@@ -65,12 +65,11 @@ typedef struct RRVector
 
 /*!@struct*/ 
 /*!@brief Structure for a simple vector of strings */ 
-typedef struct RRStringList
+typedef struct RRStringArray
 {
     int             Count;  /*!< The number of elements in the string array */
     char**          String; /*!< Points to an array of string items */
-} *RRStringListHandle;      /*!< Pointer to RRStringListHandle struct */
-
+} *RRStringArrayHandle;      /*!< Pointer to RRStringListHandle struct */
 
 /*!@struct*/ 
 /*!@brief Structure for a simple Matrix type */ 
@@ -104,28 +103,9 @@ typedef struct RRCCode
 } *RRCCodeHandle;    /*!< Pointer to RRCCodeHandle struct */
 
 
-struct RRStringArrayList;
-
-/*!@struct*/ 
-/*!@brief To be deprecated */ 
-typedef struct RRStringArrayListItem
-{
-    char*                       Item;    /*!< To be deprecated */
-    RRStringArrayList*          SubList; /*!< To be deprecated */ 
-} *RRStringArrayListItemHandle;          /*!< Pointer to RRStringArrayListItemHandle struct */
-
-/*!@struct*/ 
-/*!@brief To be deprecated */ 
-typedef struct RRStringArrayList
-{
-    int                         Count; /*!< To be deprecated */
-    RRStringArrayListItemHandle Items; /*!< To be deprecated */
-
-}  *RRStringArrayListHandle;          /*!< Pointer to RRStringArrayListHandle struct */
-
 /*!@enum*/ 
 /*!@brief The list type supports strings, integers, double and lists */ 
-enum ListItemType {litString, litInteger, litDouble, litArrayList};
+enum ListItemType {litString, litInteger, litDouble, litList};
 
 // The above enums correspond to the currently supported types in an RRArrayList
 // char, int, double, RRArrayList

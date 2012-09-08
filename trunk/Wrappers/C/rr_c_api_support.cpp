@@ -115,14 +115,14 @@ bool copyVector(const RRVector* src, vector<double>& dest)
     return true;
 }
 
-RRStringList* createList(const StringList& sList)
+RRStringArrayHandle createList(const StringList& sList)
 {
     if(!sList.Count())
     {
         return NULL;
     }
 
-    RRStringList* list = new RRStringList;
+    RRStringArray* list = new RRStringArray;
     list->Count = sList.Count();
 
     list->String = new char*[list->Count];
@@ -135,34 +135,44 @@ RRStringList* createList(const StringList& sList)
     return list;
 }
 
-RRStringList* createList(const ArrayList& arrList)
+cRRList* createList(const ArrayList& arrList)
 {
-
     if(!arrList.Count())
     {
         return NULL;
     }
 
-    RRStringListHandle list = new RRStringList;
+    cRRListHandle list = new cRRList;
 
-    list->Count = arrList.TotalCount();
-    list->String = new char*[arrList.TotalCount()];
+    list->Count = arrList.Count();
+    list->Items = new cRRListItem[arrList.Count()];
+    int itemCount = arrList.Count();
 
-    int itemCount = 0;
-    for(int i = 0; i < arrList.ListCount(); i++)
+   for(int i = 0; i < itemCount; i++)
     {
-        StringList subList = arrList[i];
-        for(int j = 0; j < subList.Count(); j++)
+        // Have to figure out subtype of item
+        ArrayListItemBase* ptr = const_cast<ArrayListItemBase*>(&arrList[i]);
+        if(dynamic_cast<ArrayListItem<int>*>(ptr))
         {
-            string item = subList[j].c_str();
-            list->String[itemCount] = new char[item.size()+1];
-            strcpy(list->String[itemCount++], item.c_str());
+            list->Items[i].ItemType = litInteger;
+            int val = (int) *(dynamic_cast<ArrayListItem<int>*>(ptr));
+            list->Items[i].pValue = (int*) new int[1];
+
+            *(int *) list->Items[i].pValue =  val;
+        }
+         else if(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr))
+        {
+            ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
+            ArrayList2Item mlist = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));
+            list->Items[i].pValue = (cRRList*) createList(*(mlist.mValue));
+            list->Items[i].ItemType = litList;
         }
     }
     return list;
 }
 
-RRStringArrayList* createList(const RRArrayList<string>& aList)
+
+RRStringArray* createList(const RRArrayList<string>& aList)
 {
     if(!aList.Count())
     {
@@ -170,30 +180,53 @@ RRStringArrayList* createList(const RRArrayList<string>& aList)
     }
 
     //Setup a RRStringArrayList structure from aList
-    RRStringArrayList* theList = new RRStringArrayList;
+    RRStringArray* theList = new RRStringArray;
 
     theList->Count = aList.Count();
-    theList->Items = new RRStringArrayListItem[aList.Count()];
+	theList->String = (char**) malloc (sizeof(char*) * aList.Count());
     int itemCount = aList.Count();
     for(int i = 0; i < itemCount; i++)
     {
-        if(aList[i].HasValue())
-        {
-            theList->Items[i].SubList = NULL;
-            string item = aList[i].GetValue();
-            theList->Items[i].Item = new char[item.size() + 1];
-            strcpy(theList->Items[i].Item, item.c_str());
-        }
-        else
-        {
-            //Item is a sublist
-            theList->Items[i].Item = NULL;
-            RRStringArrayList* list = createList((*aList[i].mLinkedList));
-            theList->Items[i].SubList = list;
-        }
+        string item = aList[i].GetValue();
+        theList->String[i] = new char[item.size() + 1];
+        strcpy(theList->String[i], item.c_str());
     }
     return theList;
 }
+
+
+//RRStringArrayList* createList(const RRArrayList<string>& aList)
+//{
+//    if(!aList.Count())
+//    {
+//        return NULL;
+//    }
+//
+//    //Setup a RRStringArrayList structure from aList
+//    RRStringArrayList* theList = new RRStringArrayList;
+//
+//    theList->Count = aList.Count();
+//    theList->Items = new RRStringArrayListItem[aList.Count()];
+//    int itemCount = aList.Count();
+//    for(int i = 0; i < itemCount; i++)
+//    {
+//        if(aList[i].HasValue())
+//        {
+//            theList->Items[i].SubList = NULL;
+//            string item = aList[i].GetValue();
+//            theList->Items[i].Item = new char[item.size() + 1];
+//            strcpy(theList->Items[i].Item, item.c_str());
+//        }
+//        else
+//        {
+//            //Item is a sublist
+//            theList->Items[i].Item = NULL;
+//            RRStringArrayList* list = createList((*aList[i].mLinkedList));
+//            theList->Items[i].SubList = list;
+//        }
+//    }
+//    return theList;
+//}
 
 cRRList* createList(const rr::ArrayList2& aList)
 {
@@ -240,7 +273,7 @@ cRRList* createList(const rr::ArrayList2& aList)
             ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
             ArrayList2Item list = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));
             theList->Items[i].pValue = (cRRList*) createList(*(list.mValue));
-            theList->Items[i].ItemType = litArrayList;
+            theList->Items[i].ItemType = litList;
         }
     }
     return theList;
