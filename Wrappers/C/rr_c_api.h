@@ -1164,6 +1164,16 @@ C_DECL_SPEC bool rrCallConv getuEE(const char* name, const char* species, double
 // What's this, not sure if we need it?
 C_DECL_SPEC bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
 
+
+
+// NOM lib forwarded functions
+/*!
+ \brief Returns the number of rules, in the current model
+ \return Returns an integer larger or equal to 0 if succesful, or -1 on failure
+ \ingroup NOM functions
+*/
+C_DECL_SPEC int rrCallConv getNumberOfRules();
+
 // Print/format functions
 /*!
  \brief Returns a result struct in string form.
@@ -1446,13 +1456,12 @@ C_DECL_SPEC char* rrCallConv getCCodeSource (RRCCodeHandle code);
  \return Returns null if fails, otherwise returns a pointer to a string containing the file name
  \ingroup helperRoutines
 */
-C_DECL_SPEC char* rrCallConv getCSourceFileName();
+C_DECL_SPEC char*             rrCallConv getCSourceFileName();
 
 // List support routines
-C_DECL_SPEC cRRListHandle rrCallConv createRRList ();
+C_DECL_SPEC cRRListHandle 	  rrCallConv createRRList ();
 
-C_DECL_SPEC void rrCallConv freeRRList (cRRListHandle list);
-
+C_DECL_SPEC void 			  rrCallConv freeRRList (cRRListHandle list);
 C_DECL_SPEC cRRListItemHandle rrCallConv createIntegerItem (int value);
 C_DECL_SPEC cRRListItemHandle rrCallConv createDoubleItem  (double value);
 C_DECL_SPEC cRRListItemHandle rrCallConv createStringItem  (char* value);

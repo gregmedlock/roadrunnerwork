@@ -118,11 +118,12 @@ struct cRRList;
 typedef struct cRRListItem
 {
     ListItemType                ItemType;  /*!< The type of the item in this list element */
-    union {
-       int iValue;
-	   double dValue;
-	   char* sValue;
-	   cRRList* lValue;
+    union
+    {
+       int 	     iValue;
+	   double    dValue;
+	   char*     sValue;
+	   cRRList*  lValue;
 	} data;
 	void*                       pValue;    /*!< A pointer to the list element */
 } *cRRListItemHandle;                 /*!< Pointer to cRRArrayListItemHandle struct */

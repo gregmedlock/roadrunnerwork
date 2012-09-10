@@ -24,24 +24,11 @@ namespace rr
 using namespace libsbml;
 class RR_DECLSPEC NOMSupport : public rrObject
 {
-    //The C# SBMLSupport.cs have two static objects, SBMLDocument and Model, created when NOM reads SBML..
-    //        Model*                   *model;        //Tie to mModel in constructor
-    //        static SBMLDocument _oDoc;
-    //        static Model _oModel;
-    //        ParameterSets _ParameterSets;
-
-    //        StringList Namespaces
-    //        Model Model
-    //        Model SbmlModel
-    //        ParameterSets ParameterSets;
-    //        SBMLDocument SbmlDocument
-    //        static SBMLDocument Document
-
     protected:
 
-        SBMLDocument           *mSBMLDoc;                 //Correspond to C# _oDoc
-        Model                  *mModel;                    //Correspond to C# _oModel
-        const string            STR_DoubleFormat;    // = "G"; //"G17";
+        SBMLDocument           *mSBMLDoc;
+        Model                  *mModel;
+        const string            STR_DoubleFormat;
         StringSymbolHashTable   mSymbolTable;
 
         ArrayList               returnUnitDefinition(UnitDefinition oDefinition);
