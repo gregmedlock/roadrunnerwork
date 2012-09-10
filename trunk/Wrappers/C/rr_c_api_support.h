@@ -39,6 +39,8 @@ cRRList*            createList(const ArrayList& arrList);
 //RRStringArrayList*  createList(const rr::RRArrayList<string>& aList);
 RRStringArrayHandle createList(const RRArrayList<string>& aList);
 //cRRList*            createList(const rr::ArrayList2& aList);
+cRRList* createList(const rr::ArrayList2& aList);
+
 
 }
 

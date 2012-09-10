@@ -271,13 +271,15 @@ cRRList* createList(const rr::ArrayList2& aList)
         {
             ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
             ArrayList2Item list = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));
+           // ArrayList2 list2 = (ArrayList2) *(dynamic_cast<ArrayListItem<ArrayList2>*>(ptr));
             
+
             // TOTTE WHAT ARGUMENT DO I PUT HERE. I ASSUME YOUR ARRAYLIST2 
 			// CONTAINS LISTS THAT ARE OF TYPE ARRAYTYPE2?
-			// !!!!!!!!!!!     cRRListHandle myList = createList (listItem);
+			cRRListHandle myList = createList (*(list.mValue));
 			//                                                    ^^^^^^^^
-			//cRRListItemHandle myListItem = createListItem (myList);
-			//addItem (theList, &myListItem);
+			cRRListItemHandle myListItem = createListItem (myList);
+			addItem (theList, &myListItem);
 		
         }
     }
