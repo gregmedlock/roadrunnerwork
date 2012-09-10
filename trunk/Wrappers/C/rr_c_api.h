@@ -1438,6 +1438,16 @@ C_DECL_SPEC char* rrCallConv getCCodeHeader (RRCCodeHandle code);
 C_DECL_SPEC char* rrCallConv getCCodeSource (RRCCodeHandle code);
 
 
+/*!
+ \brief Retrieve the name of model source file for the current model (if applicable)
+
+ Example: fileName = getCSourceFileName();
+
+ \return Returns null if fails, otherwise returns a pointer to a string containing the file name
+ \ingroup helperRoutines
+*/
+C_DECL_SPEC char* rrCallConv getCSourceFileName();
+
 // List support routines
 C_DECL_SPEC cRRListHandle rrCallConv createRRList ();
 

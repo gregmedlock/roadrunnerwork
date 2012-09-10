@@ -1849,6 +1849,43 @@ RRMatrixHandle rrCallConv getEigenValues()
 	return NULL;
 }
 
+char* rrCallConv getCSourceFileName()
+{
+	try
+    {
+    	if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        CGenerator* generator = gRRHandle->GetCGenerator();
+        if(!generator)
+        {
+            return NULL;
+        }
+
+        char* fName;
+        string fNameS = generator->GetSourceCodeFileName();
+
+        fNameS = ExtractFileNameNoExtension(fNameS);
+
+        if(fNameS.size())
+        {
+            fName = new char[fNameS.size() + 1];
+            strcpy(fName, fNameS.c_str());
+
+        }
+		return fName;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+		return NULL;
+    }
+}
 
 RRCCode* rrCallConv getCCode()
 {
@@ -2815,11 +2852,11 @@ bool rrCallConv freeCCode(RRCCodeHandle code)
 //			if(theList->Items[i].ItemType = litString)
 //			{
 //				  delete [] theList->Items[i].pValue;
-//            }  
+//            }
 //			if(theList->Items[i].ItemType = litList)
 //			{
 //				freeList ((cRRList *) theList->Items[i].pValue);
-//			}          
+//			}
 //        }
 //    	return true;
 //    }
@@ -2873,7 +2910,6 @@ bool rrCallConv setVectorElement (RRVectorHandle vector, int index, double value
 	vector->Data[index] = value;
 	return true;
 }
-
 
 int rrCallConv getMatrixNumRows (RRMatrixHandle m)
 {
@@ -2932,14 +2968,14 @@ char*  rrCallConv getResultColumnLabel (RRResultHandle result, int column)
 	return result->ColumnHeaders[column];
 }
 
-char* rrCallConv getCCodeHeader (RRCCodeHandle code)
+char* rrCallConv getCCodeHeader(RRCCodeHandle code)
 {
 	if (code == NULL)
 		return NULL;
 	return code->Header;
 }
 
-char* rrCallConv getCCodeSource (RRCCodeHandle code)
+char* rrCallConv getCCodeSource(RRCCodeHandle code)
 {
 	if (code == NULL)
 		return NULL;

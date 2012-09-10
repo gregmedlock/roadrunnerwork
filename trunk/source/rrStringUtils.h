@@ -27,6 +27,7 @@ string 				RR_DECLSPEC ToLower(const string& str);
 
 string              RR_DECLSPEC ExtractFilePath(const string& fileN);
 string              RR_DECLSPEC ExtractFileName(const string& fileN);
+string              RR_DECLSPEC ExtractFileNameNoExtension(const string& fileN);
 
 string              RR_DECLSPEC ChangeFileExtensionTo(const string& theFileName, const string& newExtension);
 
