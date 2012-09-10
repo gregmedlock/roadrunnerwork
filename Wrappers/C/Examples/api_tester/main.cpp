@@ -129,6 +129,15 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
+    char* cFileName = getCSourceFileName();
+
+    if(cFileName)
+    {
+    	cout<<"\n C Source File Name: "<<cFileName;
+    }
+
+    freeText(cFileName);
+
 	int r = getNumberOfReactions();
 	int m = getNumberOfFloatingSpecies();
 	int b = getNumberOfBoundarySpecies();

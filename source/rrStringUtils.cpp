@@ -178,6 +178,21 @@ string ExtractFileName(const string& fileN)
     return fileN; //There was no path in present..
 }
 
+string ExtractFileNameNoExtension(const string& fileN)
+{
+    string fName;
+    if(fileN.find_last_of( '\\' ) != std::string::npos)
+    {
+        fName = fileN.substr(fileN.find_last_of( '\\' )+ 1, fileN.size());
+    }
+    else if(fileN.find_last_of( '/' ) != std::string::npos)
+    {
+        fName = fileN.substr(fileN.find_last_of( '/' ) + 1, fileN.size());
+    }
+
+	return ChangeFileExtensionTo(fName, "");
+}
+
 string ExtractFilePath(const string& fileN)
 {
     string path;
@@ -241,6 +256,10 @@ string ChangeFileExtensionTo(const string& _fName, const string& newExtension)
     if(newExtension[0] == '.')
     {
         fName = fName + newExtension;
+    }
+    else if(newExtension.size() == 0)	//No extension
+    {
+    	return fName;
     }
     else
     {
