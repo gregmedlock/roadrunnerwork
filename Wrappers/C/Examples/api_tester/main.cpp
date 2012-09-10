@@ -6,6 +6,7 @@
 #include <sstream>
 #include "rr_c_api.h"
 #include "rr_c_api_support.h"
+#include "rrArrayList2.h"
 //---------------------------------------------------------------------------
 #if defined(_MSC_VER)
 	#include <direct.h>
@@ -66,6 +67,7 @@ int main(int argc, char* argv[])
 	printf (listToString (myList));
 	printf ("\n\n");
 
+	
 	freeRRList (myList);
 
 //	Pause();
@@ -105,10 +107,11 @@ int main(int argc, char* argv[])
 		freeText(text);
 	}
 
-
+	//string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
+	//string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
+	//string fileName = modelsPath + "\\ss_threeSpecies.xml";
+	string fileName = "ss_threeSpecies.xml";
 	string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
-//	string fileName = modelsPath + "\\ss_threeSpecies.xml";
-	//string fileName = "ss_threeSpecies.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
@@ -126,6 +129,17 @@ int main(int argc, char* argv[])
 		cerr<<"Last error was: "<<getLastError()<<endl;
 		return -1;
 	}
+
+	rr::ArrayList2 x1;
+	rr::ArrayList2 x2;
+
+	x1.Add (2.3);
+	x1.Add (5);
+	x1.Add (5.6);
+
+	//cRRListHandle sList = getAvailableSymbols ();
+	printf (listToString (createList (x1)));
+
 
     char* cFileName = getCSourceFileName();
     if(cFileName)
