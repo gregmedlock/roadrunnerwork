@@ -65,11 +65,10 @@ int main(int argc, char* argv[])
 	printf ("\nList:\n");
 	printf (listToString (myList));
 	printf ("\n\n");
-		
+
 	freeRRList (myList);
 
-	printf ("Hit any key to continue\n");
-	getchar ();
+//	Pause();
 
 	string modelsPath(".\\..\\Models");
 	if(argc > 1)
@@ -107,9 +106,8 @@ int main(int argc, char* argv[])
 	}
 
 
-	//string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
-	//string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-	string fileName = modelsPath + "\\ss_threeSpecies.xml";
+	string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
+//	string fileName = modelsPath + "\\ss_threeSpecies.xml";
 	//string fileName = "ss_threeSpecies.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
@@ -130,14 +128,14 @@ int main(int argc, char* argv[])
 	}
 
     char* cFileName = getCSourceFileName();
-
     if(cFileName)
     {
-    	cout<<"\n C Source File Name: "<<cFileName;
+    	cout<<"\n C File Name: "<<cFileName<<"\n";
     }
 
     freeText(cFileName);
 
+    cout<<"Number of rules: "<<getNumberOfRules()<<"\n";
 	int r = getNumberOfReactions();
 	int m = getNumberOfFloatingSpecies();
 	int b = getNumberOfBoundarySpecies();
@@ -199,7 +197,8 @@ int main(int argc, char* argv[])
 	if (r > 0) {
        printf ("\nUnscaled flux control coefficient names:\n");
 	   printf ("----------------------------------------\n");
-	   cout<<stringArrayToString(getUnscaledFluxControlCoefficientIds())<<endl;
+	   RRStringArrayHandle stringArray = getUnscaledFluxControlCoefficientIds();
+	   cout<<stringArrayToString(stringArray)<<endl;
 	}
 	printf ("\n");
 

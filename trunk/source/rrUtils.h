@@ -19,7 +19,7 @@ extern char* LinuxPathSeparator;
 RR_DECLSPEC std::size_t     IndexOf(std::vector<std::string>& vec, const std::string& elem );
 RR_DECLSPEC bool            IsNaN(const double& aNum);
 RR_DECLSPEC bool            IsNullOrEmpty(const string& str);    //Can't be null, but empty
-RR_DECLSPEC void            Pause(bool doIt = true);
+RR_DECLSPEC void            Pause(bool doIt = true, const string& msg = "");
 
 //String utilities
 RR_DECLSPEC string          RemoveTrailingSeparator(const string& fldr, const string& sep = WinPathSeparator);//"\\");

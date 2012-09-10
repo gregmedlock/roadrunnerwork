@@ -24,7 +24,8 @@ class RoadRunner;
 class RR_DECLSPEC ModelGenerator : public rrObject
 {
     public:
-    	RoadRunner*							mRR;
+//    	RoadRunner*							mRR;
+        bool								mComputeAndAssignConsevationLaws;
         const string                        mDoubleFormat;
         const string                        STR_FixAmountCompartments;
         string                              mCurrentXMLModelFileName;
@@ -44,9 +45,8 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         StringList                          dependentSpeciesList;
         StringList                          independentSpeciesList;
         int                                 mNumModifiableSpeciesReferences;
-//        StructAnalysis                      mStructAnalysis;                   //Object to facilitate calls to libStruct library
 		LibStructural                      *mLibStruct;                          //Handle to libstruct library
-        NOMSupport                          mNOM;                                //Object that provide some wrappers and new "NOM" functions
+        NOMSupport&                         mNOM;                                //Object that provide some wrappers and new "NOM" functions.
         IntStringHashTable                  mMapRateRule;
         SymbolList                          boundarySpeciesList;
         SymbolList                          compartmentList;
@@ -113,7 +113,8 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         int                                 ReadModifiableSpeciesReferences();
 
     public:
-                                            ModelGenerator(RoadRunner* rr);
+//                                            ModelGenerator(RoadRunner* rr);
+                                            ModelGenerator(NOMSupport& nom);
         virtual                             ~ModelGenerator();
         void                                Reset();
         int                                 GetNumberOfReactions();
@@ -140,7 +141,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         string                              WriteDouble(const double& value, const string& format = "%G");
 
         // Generates the Model Code from theSBML string
-        virtual string                      generateModelCode(const string& sbmlStr) = 0;    //Any decendant need to implement at least this one
+        virtual string                      generateModelCode(const string& sbmlStr, const bool& _computeAndAssignConsevationLaws) = 0;    //Any decendant need to implement at least this one
         virtual    bool                     SaveSourceCodeToFolder(const string& folder);
         void                                SetXMLModelFileName(const string& name);
 };

@@ -16,12 +16,15 @@ using namespace std;
 
 namespace rr
 {
-ModelGenerator::ModelGenerator(RoadRunner* rr)
+//ModelGenerator::ModelGenerator(RoadRunner* rr)
+ModelGenerator::ModelGenerator(NOMSupport& nom)
 :
 mDoubleFormat("%.19G"),
 STR_FixAmountCompartments("*"),
 mCurrentXMLModelFileName("sbml_model"),
-mRR(rr)
+//mRR(rr)
+mNOM(nom),
+mComputeAndAssignConsevationLaws(false)
 {
     mLibStruct = LibStructural::getInstance();
     mNOM.Reset();

@@ -106,17 +106,23 @@ bool IsNullOrEmpty(const string& str)
     return !str.size();
 }
 
-void Pause(bool doIt)
+void Pause(bool doIt, const string& msg)
 {
     if(!doIt)
     {
         return;
     }
 
-    cout<<"Hit any key to exit...";
+    if(msg.size() == 0)
+    {
+    	cout<<"Hit any key to exit...";
+    }
+    else
+    {
+    	cout<<msg;
+    }
     cin.ignore(0,'\n');
     getch();
-    cout<<"\nExiting....\n";
 }
 
 bool FileExists(const string& fName)

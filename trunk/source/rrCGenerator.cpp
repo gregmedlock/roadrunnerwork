@@ -24,9 +24,10 @@ using namespace LIB_STRUCTURAL;
 
 namespace rr
 {
-CGenerator::CGenerator(RoadRunner* rr)
+//CGenerator::CGenerator(RoadRunner* rr)
+CGenerator::CGenerator(NOMSupport& nom)
 :
-ModelGenerator(rr)
+ModelGenerator(nom)
 {}
 
 CGenerator::~CGenerator(){}
@@ -58,8 +59,9 @@ string CGenerator::GetSourceCodeFileName()
 
 
 // Generates the Model Code from the SBML string
-string CGenerator::generateModelCode(const string& sbmlStr)
+string CGenerator::generateModelCode(const string& sbmlStr, const bool& _computeAndAssignConsevationLaws)
 {
+	mComputeAndAssignConsevationLaws  = _computeAndAssignConsevationLaws;
     Log(lDebug4)<<"Entering CGenerators generateModelCode(string) function";
     StringList  Warnings;
     CodeBuilder ignore;     //The Write functions below are inherited with a CodeBuilder in the
@@ -121,7 +123,8 @@ string CGenerator::generateModelCode(const string& sbmlStr)
 
     Log(lDebug3)<<"Message from StructAnalysis.LoadSBML function\n"<<msg;
 
-    if (mRR && mRR->mComputeAndAssignConservationLaws)
+    //if (mRR && mRR->mComputeAndAssignConservationLaws)
+	if(mComputeAndAssignConsevationLaws)
     {
         mNumIndependentSpecies = libStruct->getNumIndSpecies();
         independentSpeciesList = libStruct->getIndependentSpecies();
@@ -2484,7 +2487,8 @@ int CGenerator::ReadFloatingSpecies()
 {
     // Load a reordered list into the variable list.
     StringList reOrderedList;
-    if (mRR && mRR->RoadRunner::mComputeAndAssignConservationLaws)
+    //if (mRR && mRR->RoadRunner::mComputeAndAssignConservationLaws)
+	if(mComputeAndAssignConsevationLaws)
     {
        reOrderedList = mLibStruct->getReorderedSpecies();
     }

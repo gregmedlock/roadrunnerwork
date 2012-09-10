@@ -11,10 +11,6 @@ using std::string;
 
 namespace rr
 {
-    /// <summary>
-    /// the Compile class was written out of the idea to generate wrapper
-    /// classes in memory at runtime and then compile them ...
-    /// </summary>
 
 class RR_DECLSPEC Compiler : public rrObject
 {

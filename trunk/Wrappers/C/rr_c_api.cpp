@@ -1931,6 +1931,32 @@ RRCCode* rrCallConv getCCode()
 	return NULL;
 }
 
+//NOM forwarded functions
+int rrCallConv getNumberOfRules()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return -1;
+        }
+        if(!gRRHandle->getNOM())
+        {
+            Log(lWarning)<<"NOM is not allocated.";
+        	return -1;
+        }
+        int value = gRRHandle->getNOM()->getNumRules();
+        return value;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+	    return -1;
+    }
+}
 
 bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reactionId, const char* speciesId, double& value)
 {
@@ -2246,8 +2272,8 @@ RRStringArrayHandle rrCallConv getUnscaledFluxControlCoefficientIds()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-
-        return createList(gRRHandle->getUnscaledFluxControlCoefficientIds());
+		StringArrayList arrList = gRRHandle->getUnscaledFluxControlCoefficientIds();
+        return createList(arrList);
     }
     catch(Exception& ex)
     {
@@ -2870,10 +2896,10 @@ bool rrCallConv freeCCode(RRCCodeHandle code)
 //}
 //
 /////////////////////////////////////////////////////////////
-//void rrCallConv Pause()
-//{
-//    rr::Pause(true);
-//}
+void rrCallConv Pause()
+{
+    rr::Pause(true, "Hit any key to continue..\n");
+}
 
 RRVectorHandle rrCallConv createVector (int size)
 {
@@ -2949,12 +2975,18 @@ int  rrCallConv  getResultNumCols (RRResultHandle result)
 	return result->CSize;
 }
 
-bool  rrCallConv getResultElement (RRResultHandle result, int r, int c, double& value)
+bool  rrCallConv getResultElement(RRResultHandle result, int r, int c, double& value)
 {
 	if (result == NULL)
+    {
 		return false;
+    }
+
 	if ((r < 0) || (c < 0) || (r >= result->RSize) || (c >= result->CSize))
+    {
 		return false;
+    }
+
 	value = result->Data[r*result->CSize + c];
 	return true;
 }
@@ -2962,7 +2994,10 @@ bool  rrCallConv getResultElement (RRResultHandle result, int r, int c, double& 
 char*  rrCallConv getResultColumnLabel (RRResultHandle result, int column)
 {
 	if (result == NULL)
+    {
 		return NULL;
+    }
+
 	if ((column < 0) || (column >= result->CSize))
 		return NULL;
 	return result->ColumnHeaders[column];
@@ -2971,61 +3006,74 @@ char*  rrCallConv getResultColumnLabel (RRResultHandle result, int column)
 char* rrCallConv getCCodeHeader(RRCCodeHandle code)
 {
 	if (code == NULL)
+    {
 		return NULL;
+    }
 	return code->Header;
 }
 
 char* rrCallConv getCCodeSource(RRCCodeHandle code)
 {
 	if (code == NULL)
+    {
 		return NULL;
+    }
 	return code->Source;
 }
-
 
 // -------------------------------------------------------------------
 // List Routines
 // -------------------------------------------------------------------
 
-cRRListHandle rrCallConv createRRList () {
+cRRListHandle rrCallConv createRRList()
+{
 	cRRListHandle list = (cRRListHandle) malloc (sizeof (cRRList));
 	list->Count = 0;
 	list->myItems = NULL;
 	return list;
 }
 
-void rrCallConv freeRRList (cRRListHandle list)  {
-	for (int i=0; i<list->Count; i++) {
-		if (list->myItems[i]->ItemType == litList) {
+void rrCallConv freeRRList (cRRListHandle list)
+{
+	for (int i = 0; i < list->Count; i++)
+    {
+		if (list->myItems[i]->ItemType == litList)
+        {
 			freeRRList (list->myItems[i]->data.lValue);
-		} else {
+		}
+        else
+        {
 			free (list->myItems[i]);  // What about freeing char*?????
 		}
 	}
 }
 
-cRRListItemHandle rrCallConv createIntegerItem (int value) {
+cRRListItemHandle rrCallConv createIntegerItem (int value)
+{
 	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
 	item->ItemType = litInteger;
 	item->data.iValue = value;
 	return item;
 }
 
-cRRListItemHandle rrCallConv createDoubleItem (double value) {
+cRRListItemHandle rrCallConv createDoubleItem (double value)
+{
 	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
 	item->ItemType = litDouble;
 	item->data.dValue = value;
 	return item;
 }
 
-cRRListItemHandle rrCallConv createStringItem (char* value) {
+cRRListItemHandle rrCallConv createStringItem (char* value)
+{
 	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
 	item->ItemType = litString;
 	item->data.sValue = value;
 	return item;
 }
 
-cRRListItemHandle rrCallConv createListItem (cRRList* value) {
+cRRListItemHandle rrCallConv createListItem (cRRList* value)
+{
 	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
 	item->ItemType = litList;
 	item->data.lValue = value;
@@ -3034,7 +3082,8 @@ cRRListItemHandle rrCallConv createListItem (cRRList* value) {
 
 // Add an item to a given list, returns the index to
 // the item in the list. Returns -1 if it fails.
-int rrCallConv addItem (cRRListHandle list, cRRListItemHandle *item) {
+int rrCallConv addItem (cRRListHandle list, cRRListItemHandle *item)
+{
 	int n = list->Count;
 	cRRListItemHandle *items = (cRRListItemHandle *) realloc (list->myItems, (sizeof (cRRListItemHandle *)*(n + 1)));
 	list->Count = n+1;
@@ -3043,62 +3092,68 @@ int rrCallConv addItem (cRRListHandle list, cRRListItemHandle *item) {
 	return n;
 }
 
-bool rrCallConv isListItemInteger (cRRListItemHandle item) {
-	if (item->ItemType == litInteger) 
-		return true;
-	else
-	   return false;
+bool rrCallConv isListItemInteger (cRRListItemHandle item)
+{
+	return (item->ItemType == litInteger) ? true : false;
 }
 
-
-bool rrCallConv isListItemDouble (cRRListItemHandle item) {
-	if (item->ItemType == litDouble) 
-		return true;
-	else
-	   return false;
+bool rrCallConv isListItemDouble (cRRListItemHandle item)
+{
+	return (item->ItemType == litDouble) ? true : false;
 }
 
-bool rrCallConv isListItemString (cRRListItemHandle item) {
-	if (item->ItemType == litString) 
-		return true;
-	else
-	   return false;
+bool rrCallConv isListItemString (cRRListItemHandle item)
+{
+	return (item->ItemType == litString) ? true : false;
 }
 
-bool rrCallConv isListItemList (cRRListItemHandle item) {
-	if (item->ItemType == litList) 
-		return true;
-	else
-	   return false;
+bool rrCallConv isListItemList (cRRListItemHandle item)
+{
+	return (item->ItemType == litList) ? true : false;
 }
-cRRListItemHandle rrCallConv getListItem (cRRListHandle list, int index) {
+
+cRRListItemHandle rrCallConv getListItem (cRRListHandle list, int index)
+{
 	if (index >= list->Count)
+    {
 		return NULL;
+    }
 
-	return (list->myItems[index]); 
+	return (list->myItems[index]);
 }
 
-
-bool rrCallConv isListItem (cRRListItemHandle item, ListItemType itemType) {
+bool rrCallConv isListItem (cRRListItemHandle item, ListItemType itemType)
+{
 	if (item->ItemType == itemType)
+    {
 		return true;
+    }
 	else
+    {
 		return false;
+    }
 }
 
-int rrCallConv getListLength (cRRListHandle myList) {
+int rrCallConv getListLength (cRRListHandle myList)
+{
 	return myList->Count;
 }
 
 
-cRRListHandle rrCallConv getList (cRRListItemHandle item) {
-	if (item->ItemType == litList) 
+cRRListHandle rrCallConv getList (cRRListItemHandle item)
+{
+	if (item->ItemType == litList)
+    {
 	   return (cRRListHandle) item->data.lValue;
+    }
 	else
+    {
 	   return NULL;
+    }
 }
 
-char* rrCallConv listToString (cRRListHandle list) {
+char* rrCallConv listToString (cRRListHandle list)
+{
 	try
     {
         if(!list)

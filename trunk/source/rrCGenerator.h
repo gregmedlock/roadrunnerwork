@@ -56,11 +56,12 @@ class RR_DECLSPEC CGenerator : public ModelGenerator
         int                                 ReadBoundarySpecies();
 
     public:
-                                            CGenerator(RoadRunner* rr);
+//                                            CGenerator(RoadRunner* rr);
+                                            CGenerator(NOMSupport& nom);
         virtual                             ~CGenerator();
 
         // Generates the Model Code from th e SBML string
-        string                              generateModelCode(const string& sbmlStr);
+        string                              generateModelCode(const string& sbmlStr, const bool& _computeAndAssignConsevationLaws = false);
 
         //C Specifics..
         void                                WriteInitFunction(CodeBuilder& sbh, CodeBuilder& sbc);

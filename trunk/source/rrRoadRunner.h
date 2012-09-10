@@ -19,6 +19,7 @@
 #include "rrArrayList.h"
 #include "rrArrayList2.h"
 #include "rrXMLDocument.h"
+#include "rrNOMSupport.h"
 using std::string;
 using namespace LIB_LA;
 using namespace LIB_STRUCTURAL;
@@ -73,10 +74,10 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		StringList                      getParameterIds();
 		string                          GetDLLName();
 		SimulationSettings              mSettings;
-
+		NOMSupport						mNOM;
 	public:
 		string                  		getParamPromotedSBML(const string& sArg);
-
+        NOMSupport*						getNOM();
 		// Properties -----------------------------------------------------------------------------
 		bool                     		mComputeAndAssignConservationLaws;
 		bool        					ComputeAndAssignConservationLaws();

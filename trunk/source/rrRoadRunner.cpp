@@ -58,8 +58,11 @@ RoadRunner::RoadRunner(const string& compiler) :
 {
      mLS = LibStructural::getInstance();
      Log(lDebug4)<<"In RoadRunner CTOR";
-     mCSharpGenerator    = new CSharpGenerator(this);
-     mCGenerator         = new CGenerator(this);//Todo: memoryleak
+//     mCSharpGenerator    = new CSharpGenerator(this);
+//     mCGenerator         = new CGenerator(this);//Todo: memoryleak
+     mCSharpGenerator    = new CSharpGenerator(mNOM);
+     mCGenerator         = new CGenerator(mNOM);//Todo: memoryleak
+
      mModelGenerator     = mCGenerator;
      mTempFileFolder     = GetUsersTempDataFolder();
 }
@@ -76,6 +79,11 @@ RoadRunner::~RoadRunner()
         //Unload the DLL
         FreeLibrary(mModelDLL);
     }
+}
+
+NOMSupport* RoadRunner::getNOM()
+{
+	return &mNOM;
 }
 
 CvodeInterface* RoadRunner::GetCVodeInterface()
@@ -722,7 +730,7 @@ bool RoadRunner::GenerateModelCode(const string& sbml)
         srcCodeFolder = mTempFileFolder;
     }
 
-    mModelCode = mModelGenerator->generateModelCode(mCurrentSBML);
+    mModelCode = mModelGenerator->generateModelCode(mCurrentSBML, ComputeAndAssignConservationLaws());
 
     if(!mModelCode.size())
     {

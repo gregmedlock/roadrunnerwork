@@ -51,11 +51,12 @@ class RR_DECLSPEC CSharpGenerator : public ModelGenerator
         int              					ReadBoundarySpecies();
 
     public:
-                                            CSharpGenerator(RoadRunner* rr);
+//                                            CSharpGenerator(RoadRunner* rr);
+                                            CSharpGenerator(NOMSupport& nom);
         virtual                            ~CSharpGenerator();
 
         // Generates the Model Code from the SBML string
-        string                              generateModelCode(const string& sbmlStr);
+        string                              generateModelCode(const string& sbmlStr, const bool& computeAndAssignConsevationLaws = false);
         bool                                SaveSourceCodeToFolder(const string& folder);
         string                              getSourceCode();
 };
