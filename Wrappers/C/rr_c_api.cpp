@@ -1430,7 +1430,7 @@ cRRListHandle rrCallConv getAvailableSymbols()
         slSymbols.Add(34.56);
         
 		// ******* HMS TO BE PUT BACK IN LATER
-		//return createList(slSymbols);
+		return createList(slSymbols);
     }
     catch(Exception& ex)
     {
