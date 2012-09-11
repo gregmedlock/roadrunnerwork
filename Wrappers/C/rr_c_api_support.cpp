@@ -18,7 +18,6 @@ namespace rr_c_api
 extern char* gLastError;
 const char* ALLOCATE_API_ERROR_MSG = "Please allocate a handle to the roadrunner API before calling any API function";
 
-//static const char* ALLOCATE_API_ERROR_MSG = {"Please allocate a handle to the roadrunner API before calling any API function"};
 void setError(const string& err)
 {
     if(gLastError)
@@ -135,112 +134,53 @@ RRStringArrayHandle createList(const StringList& sList)
     return list;
 }
 
-//cRRList* createList(const ArrayList& arrList)
-//{
-//    if(!arrList.Count())
-//    {
-//        return NULL;
-//    }
-//
-//    cRRListHandle list = new cRRList;
-//
-//    list->Count = arrList.Count();
-//    list->Items = new cRRListItem[arrList.Count()];
-//    int itemCount = arrList.Count();
-//
-//   for(int i = 0; i < itemCount; i++)
-//    {
-//        // Have to figure out subtype of item
-//		// ----------------------------------------------------------------------
-//		// TOTTE: THIS NEEDS FIXING AND I DON"T KNOW HOW TO DO IT
-//        ArrayListItemBase* ptr = const_cast<ArrayListItemBase*>(&arrList[i]);
-//		// ----------------------------------------------------------------------
-//        if(dynamic_cast<ArrayListItem<int>*>(ptr))
-//        {
-//            list->Items[i].ItemType = litInteger;
-//            int val = (int) *(dynamic_cast<ArrayListItem<int>*>(ptr));
-//            list->Items[i].pValue = (int*) new int[1];
-//
-//            *(int *) list->Items[i].pValue =  val;
-//        }
-//         else if(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr))
-//        {
-//            ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
-//            ArrayList2Item mlist = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));
-//            list->Items[i].pValue = (cRRList*) createList(*(mlist.mValue));
-//            list->Items[i].ItemType = litList;
-//        }
-//    }
-//    return list;
-//}
-
-
-RRStringArray* createList(const RRArrayList<string>& aList)
+RRList* createList(const RRArrayList<string>& aList)
 {
     if(!aList.Count())
     {
         return NULL;
     }
 
-    //Setup a RRStringArrayList structure from aList
-    RRStringArray* theList = new RRStringArray;
+    RRListItemHandle myItem;
+	// Setup a RRStringArrayList structure from aList
+ 	RRListHandle theList = createRRList();
 
-    theList->Count = aList.Count();
-	theList->String = (char**) malloc (sizeof(char*) * aList.Count());
     int itemCount = aList.Count();
     for(int i = 0; i < itemCount; i++)
     {
-        string item = aList[i].GetValue();
-        theList->String[i] = new char[item.size() + 1];
-        strcpy(theList->String[i], item.c_str());
+        //Have to figure out subtype of item
+        RRArrayListItem<string>* ptr = const_cast<RRArrayListItem<string>*>(&aList[i]);
+        if(ptr->mValue)
+        {
+            string item =  *ptr->mValue;
+            char* str = (char *) new char[item.size() + 1];
+            strcpy(str, item.c_str());
+			myItem = createStringItem (str);
+   			addItem (theList, &myItem);
+        }
+        else if(ptr->mLinkedList)
+        {
+            //ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
+			RRListHandle myList = createList (*(ptr->mLinkedList));
+
+			RRListItemHandle myListItem = createListItem (myList);
+			addItem (theList, &myListItem);
+
+        }
     }
     return theList;
 }
 
-
-//RRStringArrayList* createList(const RRArrayList<string>& aList)
-//{
-//    if(!aList.Count())
-//    {
-//        return NULL;
-//    }
-//
-//    //Setup a RRStringArrayList structure from aList
-//    RRStringArrayList* theList = new RRStringArrayList;
-//
-//    theList->Count = aList.Count();
-//    theList->Items = new RRStringArrayListItem[aList.Count()];
-//    int itemCount = aList.Count();
-//    for(int i = 0; i < itemCount; i++)
-//    {
-//        if(aList[i].HasValue())
-//        {
-//            theList->Items[i].SubList = NULL;
-//            string item = aList[i].GetValue();
-//            theList->Items[i].Item = new char[item.size() + 1];
-//            strcpy(theList->Items[i].Item, item.c_str());
-//        }
-//        else
-//        {
-//            //Item is a sublist
-//            theList->Items[i].Item = NULL;
-//            RRStringArrayList* list = createList((*aList[i].mLinkedList));
-//            theList->Items[i].SubList = list;
-//        }
-//    }
-//    return theList;
-//}
-
-cRRList* createList(const rr::ArrayList2& aList)
+RRList* createList(const rr::ArrayList2& aList)
 {
     if(!aList.Count())
     {
         return NULL;
     }
 
-    cRRListItemHandle myItem;
+    RRListItemHandle myItem;
 	// Setup a RRStringArrayList structure from aList
- 	cRRListHandle theList = createRRList();
+ 	RRListHandle theList = createRRList();
 
     int itemCount = aList.Count();
     for(int i = 0; i < itemCount; i++)
@@ -255,7 +195,7 @@ cRRList* createList(const rr::ArrayList2& aList)
         }
         else if(dynamic_cast<ArrayListItem<double>*>(ptr))
         {
-            double val = (int) *(dynamic_cast<ArrayListItem<double>*>(ptr));
+            double val = (double) *(dynamic_cast<ArrayListItem<double>*>(ptr));
             myItem = createDoubleItem (val);
 			addItem (theList, &myItem);
         }
@@ -265,27 +205,20 @@ cRRList* createList(const rr::ArrayList2& aList)
             char*str = (char *) new char[item.size() + 1];
             strcpy (str, item.c_str());
 			myItem = createStringItem (str);
-          
+   			addItem (theList, &myItem);
         }
         else if(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr))
         {
-            ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
             ArrayList2Item list = (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));
-           // ArrayList2 list2 = (ArrayList2) *(dynamic_cast<ArrayListItem<ArrayList2>*>(ptr));
-            
 
-            // TOTTE WHAT ARGUMENT DO I PUT HERE. I ASSUME YOUR ARRAYLIST2 
-			// CONTAINS LISTS THAT ARE OF TYPE ARRAYTYPE2?
-			cRRListHandle myList = createList (*(list.mValue));
-			//                                                    ^^^^^^^^
-			cRRListItemHandle myListItem = createListItem (myList);
+			RRListHandle myList = createList (*(list.mValue));
+
+			RRListItemHandle myListItem = createListItem (myList);
 			addItem (theList, &myListItem);
-		
+
         }
     }
     return theList;
 }
-
-
 
 }

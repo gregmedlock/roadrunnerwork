@@ -547,7 +547,7 @@ C_DECL_SPEC bool rrCallConv setSteadyStateSelectionList(const char* list);
  \return Returns null if it fails, otherwise it returns a list of strings representing symbols in the selection list
  \ingroup steadystate
 */
-C_DECL_SPEC cRRListHandle rrCallConv getSteadyStateSelectionList();
+C_DECL_SPEC RRListHandle rrCallConv getSteadyStateSelectionList();
 
 
 /*!
@@ -1007,7 +1007,7 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getEigenValueIds();
  \return Returns -1 if it fails, if succesful it returns a pointer to a RRArrayListHandle struct
  \ingroup state
 */
-C_DECL_SPEC cRRListHandle rrCallConv getAvailableSymbols();
+C_DECL_SPEC RRListHandle rrCallConv getAvailableSymbols();
 
 // MCA methods
 /*!
@@ -1016,7 +1016,7 @@ C_DECL_SPEC cRRListHandle rrCallConv getAvailableSymbols();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca 
 */
-C_DECL_SPEC RRStringArrayHandle rrCallConv getElasticityCoefficientIds();
+C_DECL_SPEC RRListHandle rrCallConv getElasticityCoefficientIds();
 
 /*!
  \brief Obtain the list of unscaled flux control coefficient Ids
@@ -1024,23 +1024,23 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getElasticityCoefficientIds();
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca
 */
-C_DECL_SPEC RRStringArrayHandle rrCallConv getUnscaledFluxControlCoefficientIds();
+C_DECL_SPEC RRListHandle rrCallConv getUnscaledFluxControlCoefficientIds();
 
 /*!
  \brief Obtain the list of flux control coefficient Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
- \ingroup mca 
+ \ingroup mca
 */
-C_DECL_SPEC RRStringArrayHandle rrCallConv getFluxControlCoefficientIds();
+C_DECL_SPEC RRListHandle rrCallConv getFluxControlCoefficientIds();
 
 /*!
  \brief Obtain the list of unscaled concentration control coefficient Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
- \ingroup mca 
+ \ingroup mca
 */
-C_DECL_SPEC RRStringArrayHandle rrCallConv getUnscaledConcentrationControlCoefficientIds();
+C_DECL_SPEC RRListHandle rrCallConv getUnscaledConcentrationControlCoefficientIds();
 
 /*!
  \brief Obtain the list of concentration coefficient Ids
@@ -1048,7 +1048,7 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getUnscaledConcentrationControlCoeffi
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
  \ingroup mca 
 */
-C_DECL_SPEC RRStringArrayHandle rrCallConv getConcentrationControlCoefficientIds();
+C_DECL_SPEC RRListHandle rrCallConv getConcentrationControlCoefficientIds();
 
 /*!
  \brief Retrieve the unscaled elasticity matrix for the current model
@@ -1215,7 +1215,7 @@ C_DECL_SPEC char* rrCallConv stringArrayToString(const RRStringArrayHandle list)
  \return Returns list as a character string
  \ingroup toString
 */
-C_DECL_SPEC char* rrCallConv listToString(const cRRListHandle list);
+C_DECL_SPEC char* rrCallConv listToString(const RRListHandle list);
 
 // Free memory functions
 /*!
@@ -1247,7 +1247,7 @@ C_DECL_SPEC bool rrCallConv freeStringArray(RRStringArrayHandle sl);
  \brief Free RRListHandle structures
  \ingroup freeRoutines
 */
-//C_DECL_SPEC bool rrCallConv freeList(cRRListHandle theList);
+//C_DECL_SPEC bool rrCallConv freeList(RRListHandle theList);
 
 /*!
  \brief Free RRVectorHandle structures
@@ -1459,32 +1459,32 @@ C_DECL_SPEC char* rrCallConv getCCodeSource (RRCCodeHandle code);
 C_DECL_SPEC char*             rrCallConv getCSourceFileName();
 
 // List support routines
-C_DECL_SPEC cRRListHandle 	  rrCallConv createRRList ();
+C_DECL_SPEC RRListHandle 	  rrCallConv createRRList ();
 
-C_DECL_SPEC void 			  rrCallConv freeRRList (cRRListHandle list);
-C_DECL_SPEC cRRListItemHandle rrCallConv createIntegerItem (int value);
-C_DECL_SPEC cRRListItemHandle rrCallConv createDoubleItem  (double value);
-C_DECL_SPEC cRRListItemHandle rrCallConv createStringItem  (char* value);
-C_DECL_SPEC cRRListItemHandle rrCallConv createListItem    (cRRList* value);
+C_DECL_SPEC void 			  rrCallConv freeRRList (RRListHandle list);
+C_DECL_SPEC RRListItemHandle rrCallConv createIntegerItem (int value);
+C_DECL_SPEC RRListItemHandle rrCallConv createDoubleItem  (double value);
+C_DECL_SPEC RRListItemHandle rrCallConv createStringItem  (char* value);
+C_DECL_SPEC RRListItemHandle rrCallConv createListItem    (RRList* value);
 
 // Add item and return index of item
-C_DECL_SPEC int rrCallConv addItem (cRRListHandle list, cRRListItemHandle *item);
+C_DECL_SPEC int rrCallConv addItem (RRListHandle list, RRListItemHandle *item);
 
 // Returns the index^th item from the list
-C_DECL_SPEC cRRListItemHandle rrCallConv getListItem (cRRListHandle list, int index);
+C_DECL_SPEC RRListItemHandle rrCallConv getListItem (RRListHandle list, int index);
 
-C_DECL_SPEC bool rrCallConv isListItemInteger (cRRListItemHandle item);
-C_DECL_SPEC bool rrCallConv isListItemDouble  (cRRListItemHandle item);
-C_DECL_SPEC bool rrCallConv isListItemString  (cRRListItemHandle item);
-C_DECL_SPEC bool rrCallConv isListItemList    (cRRListItemHandle item);
+C_DECL_SPEC bool rrCallConv isListItemInteger (RRListItemHandle item);
+C_DECL_SPEC bool rrCallConv isListItemDouble  (RRListItemHandle item);
+C_DECL_SPEC bool rrCallConv isListItemString  (RRListItemHandle item);
+C_DECL_SPEC bool rrCallConv isListItemList    (RRListItemHandle item);
 
-C_DECL_SPEC bool rrCallConv isListItem (cRRListItemHandle item, ListItemType itemType);
+C_DECL_SPEC bool rrCallConv isListItem (RRListItemHandle item, ListItemType itemType);
 
 // Returns the length of the list
-C_DECL_SPEC int rrCallConv getListLength (cRRListHandle myList);
+C_DECL_SPEC int rrCallConv getListLength (RRListHandle myList);
 
 // Returns NULL if item isn't a list, otherwise it returns a list from the item
-C_DECL_SPEC cRRListHandle rrCallConv getList (cRRListItemHandle item);
+C_DECL_SPEC RRListHandle rrCallConv getList (RRListItemHandle item);
 
 #if defined( __cplusplus)
 }

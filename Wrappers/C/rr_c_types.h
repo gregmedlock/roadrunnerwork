@@ -2,11 +2,11 @@
  * @file rr_c_types.h
  * @brief roadRunner C API 2012
  * @author Totte Karlsson & Herbert M Sauro
- * 
+ *
  * <--------------------------------------------------------------
- * This file is part of cRoadRunner. 
+ * This file is part of cRoadRunner.
  * See http://code.google.com/p/roadrunnerwork/ for more details.
- * 
+ *
  * Copyright (C) 2012
  *   University of Washington, Seattle, WA, USA
  *
@@ -49,41 +49,38 @@ extern "C"
 #include <stdio.h>
 #include "rr_support/stdbool.h"
 #endif
-                                    /*Hand the client a HANDLE, i.e. ptr to structure */
 
-
-/*!@brief Void pointer to RRHandle */ 
+/*!@brief Void pointer to RRHandle */
 typedef void* RRHandle; /*! Void pointer to RRHandle *>
 
-/*!@struct*/ 
-/*!@brief Structure for a simple vector of doubles */ 
+/*!@struct*/
+/*!@brief Structure for a simple vector of doubles */
 typedef struct RRVector
 {
     int             Count;  /*!< The number of elements in the vector */
     double*         Data;   /*!< Points to an array of double items */
 } *RRVectorHandle;          /*!< Pointer to RRVectorHandle struct */
 
-/*!@struct*/ 
-/*!@brief Structure for a simple vector of strings */ 
+/*!@struct*/
+/*!@brief Structure for a simple vector of strings */
 typedef struct RRStringArray
 {
     int             Count;  /*!< The number of elements in the string array */
     char**          String; /*!< Points to an array of string items */
 } *RRStringArrayHandle;      /*!< Pointer to RRStringListHandle struct */
 
-/*!@struct*/ 
-/*!@brief Structure for a simple Matrix type */ 
+/*!@struct*/
+/*!@brief Structure for a simple Matrix type */
 typedef struct RRMatrix
 {
     int             RSize;  /*!< The number of rows in the matrix */
     int             CSize;  /*!< The number of columns in the matrix */
-    double*         Data;   /*!< Items in the matrix stored as a linear array. Access an element using Data[i*CSize + j], 
+    double*         Data;   /*!< Items in the matrix stored as a linear array. Access an element using Data[i*CSize + j],
 							  where i,j represent the row and column numberof the element. Indexing is from zero */
 } *RRMatrixHandle;          /*!< Pointer to RRMatrixHandle struct */
 
-
-/*!@struct*/ 
-/*!@brief Structure for the result type from the simulate calls */ 
+/*!@struct*/
+/*!@brief Structure for the result type from the simulate calls */
 typedef struct RRResult
 {
     int             RSize;  /*!< The number of rows in the result matrix */
@@ -92,51 +89,47 @@ typedef struct RRResult
     char**          ColumnHeaders;   /*!< Pointer to an array of column header strings */
 } *RRResultHandle;          /*!< Pointer to RRResultHandle struct */
 
-
-/*!@struct*/ 
-/*!@brief Convenient structure for storing the header and main body source for the generate simulation C code */ 
+/*!@struct*/
+/*!@brief Convenient structure for storing the header and main body source for the generate simulation C code */
 typedef struct RRCCode
 {
-    char*   Header;  /*!< Head file *.h */
+    char*   Header;  /*!< Header file *.h */
     char*   Source;  /*!< Main source code, *.c */
 
 } *RRCCodeHandle;    /*!< Pointer to RRCCodeHandle struct */
 
-
-/*!@enum*/ 
-/*!@brief The list type supports strings, integers, double and lists */ 
+/*!@enum*/
+/*!@brief The list type supports strings, integers, double and lists */
 enum ListItemType {litString, litInteger, litDouble, litList};
 
 // The above enums correspond to the currently supported types in an RRArrayList
 // char, int, double, RRArrayList
 // The void pointer pValue need to be casted to corresponding type to retrieve its value
 
-struct cRRList;
 
-/*!@struct*/ 
-/*!@brief A single list element type */ 
-typedef struct cRRListItem
+struct RRList;	//Forward declaration for RRListItem
+/*!@struct*/
+/*!@brief A single list element type */
+typedef struct RRListItem
 {
-    ListItemType                ItemType;  /*!< The type of the item in this list element */
+    ListItemType ItemType;  			/*!< The type of the item in this list element */
     union
     {
        int 	     iValue;
 	   double    dValue;
 	   char*     sValue;
-	   cRRList*  lValue;
+	   RRList*  lValue;
 	} data;
-	void*                       pValue;    /*!< A pointer to the list element */
-} *cRRListItemHandle;                 /*!< Pointer to cRRArrayListItemHandle struct */
+} *RRListItemHandle;                 	/*!< Pointer to cRRArrayListItemHandle struct */
 
 
-/*!@struct*/ 
-/*!@brief A list type, stores int, double, strings and lists */ 
-typedef struct cRRList
+/*!@struct*/
+/*!@brief A list type, stores int, double, strings and lists */
+typedef struct RRList
 {
     int                   Count;  /*!< The number elements in this list */
-    cRRListItemHandle     Items;  /*!< A pointer to an array of list items */
-    cRRListItemHandle    *myItems;  /*!< A pointer to a list of items */
-}  *cRRListHandle;                /*!< Pointer to cRRArrayListHandle struct */
+    RRListItemHandle    *Items;  /*!< A pointer to a list of items */
+}  *RRListHandle;                /*!< Pointer to cRRArrayListHandle struct */
 
 
 #if defined( __cplusplus)

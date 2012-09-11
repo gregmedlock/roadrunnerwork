@@ -40,7 +40,6 @@ class RRArrayList : public rrObject
     public:
                                         			RRArrayList();
                                         			RRArrayList(const RRArrayList<T>& cpyMe);
-                                                    //RRArrayList(const StringList& cp);
                                         		   ~RRArrayList();
 		mutable
         typename vector< RRArrayListItem<T>* >::const_iterator mIter;
@@ -63,8 +62,6 @@ class RRArrayList : public rrObject
 };
 
 typedef RRArrayList<string> StringArrayList;
-//typedef RRArrayList<string> ArrayList;
-//typedef RRArrayList<string> StringCollection;
 
 template<class T>
 RRArrayList<T>::RRArrayList(){}
@@ -268,6 +265,35 @@ ostream& operator<<(ostream& stream, RRArrayList<T>& list)
     stream<<"}";
     return stream;
 }
+
+template<>
+ostream& operator<<(ostream& stream, RRArrayList<string>& list)
+{
+    int i = 0;
+   	stream<<"{";
+    for(list.mIter = list.mList.begin(); list.mIter != list.mList.end(); list.mIter++)
+    {
+        RRArrayListItem<string>* item = (*list.mIter);
+        if(item->mLinkedList != NULL)
+        {
+            stream<<*item->mLinkedList;
+        }
+
+        if(item->mValue)
+        {
+            stream<<"\""<< *item->mValue <<"\""; //Need to quote strings in order to separate them 'visually' on output, i.e. {S1, {CC:S1,k1, CC:S1,k2 becomes {"S1", {"CC:S1,k1", "CC:S1,k2
+        }
+
+        if(i < list.Count() -1)
+        {
+        	stream<<",";
+        }
+        i++;
+    }
+    stream<<"}";
+    return stream;
+}
+
 
 template<class T>
 ostream& operator<<(ostream& stream, RRArrayListItem<T>& listItem)
