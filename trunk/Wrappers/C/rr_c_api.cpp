@@ -759,8 +759,8 @@ bool rrCallConv getValue(const char* symbolId, double& value)
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
+		return false;
     }
-	return false;	//todo: how to indicate error???
 }
 
 
@@ -1388,10 +1388,9 @@ bool rrCallConv oneStep(const double& currentTime, const double& stepSize, doubl
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
+		return false;
     }
-	return false;
 }
-
 
 RRVectorHandle rrCallConv getGlobalParameterValues()
 {
@@ -1416,7 +1415,7 @@ RRVectorHandle rrCallConv getGlobalParameterValues()
     }
 }
 
-cRRListHandle rrCallConv getAvailableSymbols()
+RRListHandle rrCallConv getAvailableSymbols()
 {
 	try
     {
@@ -1427,9 +1426,6 @@ cRRListHandle rrCallConv getAvailableSymbols()
         }
 
         ArrayList2 slSymbols = gRRHandle->getAvailableSymbols();
-        slSymbols.Add(34.56);
-        
-		// ******* HMS TO BE PUT BACK IN LATER
 		return createList(slSymbols);
     }
     catch(Exception& ex)
@@ -1753,7 +1749,7 @@ bool rrCallConv setSteadyStateSelectionList(const char* list)
 	return false;
 }
 
-cRRListHandle rrCallConv getSteadyStateSelectionList()
+RRListHandle rrCallConv getSteadyStateSelectionList()
 {
 	try
     {
@@ -2044,7 +2040,7 @@ RRVectorHandle rrCallConv getReactionRatesEx(const RRVectorHandle vec)
     return NULL;
 }
 
-RRStringArray* rrCallConv getElasticityCoefficientIds()
+RRList* rrCallConv getElasticityCoefficientIds()
 {
 	try
     {
@@ -2053,7 +2049,6 @@ RRStringArray* rrCallConv getElasticityCoefficientIds()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        //RRArrayList<string> list = gRRHandle->getConcentrationControlCoefficientIds();
         StringArrayList aList = gRRHandle->getElasticityCoefficientIds();
         return createList(aList);
     }
@@ -2155,7 +2150,7 @@ RRStringArrayHandle rrCallConv getEigenValueIds()
     return NULL;
 }
 
-RRStringArrayHandle rrCallConv getFluxControlCoefficientIds()
+RRListHandle rrCallConv getFluxControlCoefficientIds()
 {
 	try
     {
@@ -2263,7 +2258,7 @@ RRMatrixHandle rrCallConv getScaledFluxControlCoefficientMatrix()
     return NULL;
 }
 
-RRStringArrayHandle rrCallConv getUnscaledFluxControlCoefficientIds()
+RRListHandle rrCallConv getUnscaledFluxControlCoefficientIds()
 {
 	try
     {
@@ -2284,7 +2279,7 @@ RRStringArrayHandle rrCallConv getUnscaledFluxControlCoefficientIds()
     return NULL;
 }
 
-RRStringArray* rrCallConv getConcentrationControlCoefficientIds()
+RRList* rrCallConv getConcentrationControlCoefficientIds()
 {
 	try
     {
@@ -2305,7 +2300,7 @@ RRStringArray* rrCallConv getConcentrationControlCoefficientIds()
     return NULL;
 }
 
-RRStringArrayHandle rrCallConv getUnscaledConcentrationControlCoefficientIds()
+RRListHandle rrCallConv getUnscaledConcentrationControlCoefficientIds()
 {
 	try
     {
@@ -2429,68 +2424,6 @@ bool rrCallConv getRateOfChange(const int& index, double& value)
 }
 
 //Print functions ==========================================================
-//char* rrCallConv listToString(const cRRListHandle list)
-//{
-//	try
-//    {
-//        if(!list)
-//        {
-//            return NULL;
-//        }
-//
-//        //Types of list items
-//        char*           cVal;
-//        int*            intVal;
-//        double*         dVal;
-//        cRRList*        lVal; 		//list is nested list
-//
-//		stringstream resStr;
-//        resStr<<"{";
-//	    for(int i = 0; i < list->Count; i++)
-//        {
-//            switch(list->Items[i].ItemType)
-//            {
-//                case litString:
-//                    cVal = (char *) list->Items[i].pValue;
-//                    resStr<<"\""<< (cVal) <<"\"";
-//                break;
-//
-//                case litInteger:
-//                    intVal = (int *) list->Items[i].pValue;
-//                    resStr<< (*intVal);
-//                break;
-//
-//                case litDouble:
-//                    dVal = (double *) list->Items[i].pValue;
-//                    resStr<< (*dVal);
-//                break;
-//
-//                case litList:
-//                    lVal = (cRRList *) list->Items[i].pValue;
-//                    resStr<<listToString(lVal);
-//                break;
-//            }
-//
-//            if(i < list->Count -1)
-//            {
-//                resStr<<",";
-//            }
-//        }
-//        resStr<<"}";
-//		string strTmp = resStr.str();
-//    	char* resultChar = new char[strTmp.size() + 1];
-//        strcpy(resultChar, strTmp.c_str());
-//        return resultChar;
-//
-//    }
-//    catch(Exception& ex)
-//    {
-//        stringstream msg;
-//    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-//        setError(msg.str());
-//        return NULL;
-//    }
-//}
 
 char* rrCallConv stringArrayToString (const RRStringArrayHandle list)
 {
@@ -2526,51 +2459,6 @@ char* rrCallConv stringArrayToString (const RRStringArrayHandle list)
     return NULL;
 }
 
-//char* rrCallConv  printStringArrayList(const RRStringArrayList* list)
-//{
-//	try
-//    {
-//        if(!list)
-//        {
-//            return NULL;
-//        }
-//
-//		stringstream resStr;
-//		//list  is actually a nested list
-//
-//        resStr<<"{";
-//	    for(int i = 0; i < list->Count; i++)
-//        {
-//
-//            if(list->Items[i].Item != NULL)
-//            {
-//                resStr<<"\""<<list->Items[i].Item<<"\"";
-//                if(i < list->Count -1)
-//                {
-//                    resStr<<",";
-//                }
-//
-//            }
-//            else
-//            {
-//                resStr<<printStringArrayList(list->Items[i].SubList);   //Recursive call..
-//            }
-//        }
-//        resStr<<"}";
-//		string strTmp = resStr.str();
-//    	char* resultChar = new char[strTmp.size() + 1];
-//        strcpy(resultChar, strTmp.c_str());
-//        return resultChar;
-//
-//    }
-//    catch(Exception& ex)
-//    {
-//        stringstream msg;
-//    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-//        setError(msg.str());
-//    }
-//    return NULL;
-//}
 
 char* rrCallConv resultToString(const RRResultHandle result)
 {
@@ -2827,74 +2715,6 @@ bool rrCallConv freeCCode(RRCCodeHandle code)
     return false;
 }
 
-//bool rrCallConv freeStringArrayList(RRStringArrayListHandle theList)
-//{
-//	try
-//    {
-//        if(!theList)
-//        {
-//            return true;
-//        }
-//
-//        int itemCount = theList->Count;
-//        for(int i = 0; i < itemCount; i++)
-//        {
-//            if(theList->Items[i].Item != NULL)
-//            {
-//                delete [] theList->Items[i].Item ;
-//            }
-//            else
-//            {
-//                //Item is a sublist
-//                freeStringArrayList(theList->Items[i].SubList);
-//            }
-//        }
-//
-//        delete [] theList->Items;
-//    	delete theList;
-//    	return true;
-//    }
-//    catch(Exception& ex)
-//    {
-//    	stringstream msg;
-//    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-//        setError(msg.str());
-//    }
-//    return false;
-//}
-
-//bool rrCallConv freeList(cRRListHandle theList)
-//{
-//	try
-//    {
-//        if(!theList)
-//        {
-//            return true;
-//        }
-//
-//        int itemCount = theList->Count;
-//        for(int i = 0; i < itemCount; i++)
-//        {
-//			if(theList->Items[i].ItemType = litString)
-//			{
-//				  delete [] theList->Items[i].pValue;
-//            }
-//			if(theList->Items[i].ItemType = litList)
-//			{
-//				freeList ((cRRList *) theList->Items[i].pValue);
-//			}
-//        }
-//    	return true;
-//    }
-//    catch(Exception& ex)
-//    {
-//    	stringstream msg;
-//    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-//        setError(msg.str());
-//    }
-//    return false;
-//}
-//
 /////////////////////////////////////////////////////////////
 void rrCallConv Pause()
 {
@@ -3025,56 +2845,62 @@ char* rrCallConv getCCodeSource(RRCCodeHandle code)
 // List Routines
 // -------------------------------------------------------------------
 
-cRRListHandle rrCallConv createRRList()
+RRListHandle rrCallConv createRRList()
 {
-	cRRListHandle list = (cRRListHandle) malloc (sizeof (cRRList));
+	RRListHandle list = new RRList;
 	list->Count = 0;
-	list->myItems = NULL;
+	list->Items = NULL;
 	return list;
 }
 
-void rrCallConv freeRRList (cRRListHandle list)
+void rrCallConv freeRRList (RRListHandle theList)
 {
-	for (int i = 0; i < list->Count; i++)
+	if(!theList)
     {
-		if (list->myItems[i]->ItemType == litList)
+    	return;
+    }
+    int itemCount = theList->Count;
+    for(int i = 0; i < itemCount; i++)
+    {
+        if(theList->Items[i]->ItemType == litString)
         {
-			freeRRList (list->myItems[i]->data.lValue);
-		}
-        else
+              delete [] theList->Items[i]->data.sValue;
+        }
+        if(theList->Items[i]->ItemType == litList)
         {
-			free (list->myItems[i]);  // What about freeing char*?????
-		}
-	}
+            freeRRList ((RRList *) theList->Items[i]->data.lValue);
+        }
+    }
 }
 
-cRRListItemHandle rrCallConv createIntegerItem (int value)
+RRListItemHandle rrCallConv createIntegerItem (int value)
 {
-	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
+	RRListItemHandle item =  new RRListItem;
 	item->ItemType = litInteger;
 	item->data.iValue = value;
 	return item;
 }
 
-cRRListItemHandle rrCallConv createDoubleItem (double value)
+RRListItemHandle rrCallConv createDoubleItem (double value)
 {
-	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
+	RRListItemHandle item = new RRListItem;
 	item->ItemType = litDouble;
 	item->data.dValue = value;
 	return item;
 }
 
-cRRListItemHandle rrCallConv createStringItem (char* value)
+RRListItemHandle rrCallConv createStringItem (char* value)
 {
-	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
+	RRListItemHandle item = new RRListItem;
 	item->ItemType = litString;
-	item->data.sValue = value;
+	item->data.sValue = new char[strlen(value) + 1];
+	strcpy(item->data.sValue, value);
 	return item;
 }
 
-cRRListItemHandle rrCallConv createListItem (cRRList* value)
+RRListItemHandle rrCallConv createListItem (RRList* value)
 {
-	cRRListItemHandle item = (cRRListItemHandle) malloc (sizeof (cRRListItem));
+	RRListItemHandle item = new RRListItem;
 	item->ItemType = litList;
 	item->data.lValue = value;
 	return item;
@@ -3082,47 +2908,47 @@ cRRListItemHandle rrCallConv createListItem (cRRList* value)
 
 // Add an item to a given list, returns the index to
 // the item in the list. Returns -1 if it fails.
-int rrCallConv addItem (cRRListHandle list, cRRListItemHandle *item)
+int rrCallConv addItem (RRListHandle list, RRListItemHandle *item)
 {
 	int n = list->Count;
-	cRRListItemHandle *items = (cRRListItemHandle *) realloc (list->myItems, (sizeof (cRRListItemHandle *)*(n + 1)));
+	RRListItemHandle *items = (RRListItemHandle *) realloc (list->Items, (sizeof (RRListItemHandle *)*(n + 1)));
 	list->Count = n+1;
-	list->myItems = (cRRListItemHandle *) items;
-	list->myItems[n] = *item;
+	list->Items = (RRListItemHandle *) items;
+	list->Items[n] = *item;
 	return n;
 }
 
-bool rrCallConv isListItemInteger (cRRListItemHandle item)
+bool rrCallConv isListItemInteger (RRListItemHandle item)
 {
 	return (item->ItemType == litInteger) ? true : false;
 }
 
-bool rrCallConv isListItemDouble (cRRListItemHandle item)
+bool rrCallConv isListItemDouble (RRListItemHandle item)
 {
 	return (item->ItemType == litDouble) ? true : false;
 }
 
-bool rrCallConv isListItemString (cRRListItemHandle item)
+bool rrCallConv isListItemString (RRListItemHandle item)
 {
 	return (item->ItemType == litString) ? true : false;
 }
 
-bool rrCallConv isListItemList (cRRListItemHandle item)
+bool rrCallConv isListItemList (RRListItemHandle item)
 {
 	return (item->ItemType == litList) ? true : false;
 }
 
-cRRListItemHandle rrCallConv getListItem (cRRListHandle list, int index)
+RRListItemHandle rrCallConv getListItem (RRListHandle list, int index)
 {
 	if (index >= list->Count)
     {
 		return NULL;
     }
 
-	return (list->myItems[index]);
+	return (list->Items[index]);
 }
 
-bool rrCallConv isListItem (cRRListItemHandle item, ListItemType itemType)
+bool rrCallConv isListItem (RRListItemHandle item, ListItemType itemType)
 {
 	if (item->ItemType == itemType)
     {
@@ -3134,17 +2960,17 @@ bool rrCallConv isListItem (cRRListItemHandle item, ListItemType itemType)
     }
 }
 
-int rrCallConv getListLength (cRRListHandle myList)
+int rrCallConv getListLength (RRListHandle myList)
 {
 	return myList->Count;
 }
 
 
-cRRListHandle rrCallConv getList (cRRListItemHandle item)
+RRListHandle rrCallConv getList (RRListItemHandle item)
 {
 	if (item->ItemType == litList)
     {
-	   return (cRRListHandle) item->data.lValue;
+	   return item->data.lValue;
     }
 	else
     {
@@ -3152,7 +2978,7 @@ cRRListHandle rrCallConv getList (cRRListItemHandle item)
     }
 }
 
-char* rrCallConv listToString (cRRListHandle list)
+char* rrCallConv listToString (RRListHandle list)
 {
 	try
     {
@@ -3165,32 +2991,43 @@ char* rrCallConv listToString (cRRListHandle list)
         char*           cVal;
         int             intVal;
         double          dVal;
-        cRRList*        lVal; 		//list is nested list
-
+        RRList*        lVal; 		//list is nested list
 		stringstream resStr;
         resStr<<"{";
 	    for(int i = 0; i < list->Count; i++)
         {
-			switch(list->myItems[i]->ItemType)
+			switch(list->Items[i]->ItemType)
             {
                 case litString:
-					cVal = list->myItems[i]->data.sValue;
-                    resStr<<"\""<< (cVal) <<"\"";
+					cVal = list->Items[i]->data.sValue;
+                    resStr<<"\"";
+                    if(cVal)
+                    {
+                    	resStr<<cVal;
+                    }
+                    resStr<<"\"";
                 break;
 
                 case litInteger:
-					intVal = list->myItems[i]->data.iValue;
+					intVal = list->Items[i]->data.iValue;
                     resStr<< (intVal);
                 break;
 
                 case litDouble:
-					dVal =  list->myItems[i]->data.dValue;
+					dVal =  list->Items[i]->data.dValue;
                     resStr<< (dVal);
                 break;
 
                 case litList:
-					lVal = list->myItems[i]->data.lValue;
-                    resStr<<listToString(lVal);
+					lVal = list->Items[i]->data.lValue;
+                    if(lVal)
+                    {
+                    	resStr<<listToString(lVal);
+                    }
+                    else
+                    {
+						resStr<<"{}";
+                    }
                 break;
             }
 

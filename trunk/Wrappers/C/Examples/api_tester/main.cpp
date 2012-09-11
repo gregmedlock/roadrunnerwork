@@ -32,10 +32,10 @@ int main(int argc, char* argv[])
 	// Test list type
 	printf ("Tesing list type\n");
 
-	cRRListHandle myList = createRRList();
+	RRListHandle myList = createRRList();
 	
 	// First construct [5, 3.1415]
-	cRRListItemHandle myItem = createIntegerItem (5);
+	RRListItemHandle myItem = createIntegerItem (5);
 	addItem (myList, &myItem);
 	myItem = createDoubleItem (3.1415);
 	addItem (myList, &myItem);
@@ -43,13 +43,13 @@ int main(int argc, char* argv[])
 	// Next construct [5, 3.1415, [2.7182, "Hello"]]
 	myItem = createListItem (createRRList());
     addItem (myList, &myItem);
-	cRRListItemHandle newItem = createDoubleItem (2.7182);
+	RRListItemHandle newItem = createDoubleItem (2.7182);
 	addItem (getList (myItem), &newItem);
 
 	newItem = createStringItem ("Hello");
 	addItem (getList (myItem), &newItem);
 
-	if (isListItemInteger (myList->myItems[0]))
+	if (isListItemInteger (myList->Items[0]))
 		printf ("Yes\n");
 
 	int length = getListLength (myList);
@@ -110,7 +110,7 @@ int main(int argc, char* argv[])
 	//string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 	//string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
 	//string fileName = modelsPath + "\\ss_threeSpecies.xml";
-	string fileName = "ss_threeSpecies.xml";
+//	string fileName = "ss_threeSpecies.xml";
 	string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
@@ -130,15 +130,8 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	rr::ArrayList2 x1;
-	rr::ArrayList2 x2;
-
-	x1.Add (2.3);
-	x1.Add (5);
-	x1.Add (5.6);
-
-	//cRRListHandle sList = getAvailableSymbols ();
-	printf (listToString (createList (x1)));
+	RRListHandle sList = getAvailableSymbols();
+    cout<<"Symbols: "<<listToString(sList);
 
 
     char* cFileName = getCSourceFileName();
@@ -211,15 +204,15 @@ int main(int argc, char* argv[])
 	if (r > 0) {
        printf ("\nUnscaled flux control coefficient names:\n");
 	   printf ("----------------------------------------\n");
-	   RRStringArrayHandle stringArray = getUnscaledFluxControlCoefficientIds();
-	   cout<<stringArrayToString(stringArray)<<endl;
+	   RRListHandle stringArray = getUnscaledFluxControlCoefficientIds();
+	   cout<<listToString(stringArray)<<endl;
 	}
 	printf ("\n");
 
 	if (m > 0) {
        printf ("\nUnscaled concentration control coefficient names:\n");
 	   printf ("-------------------------------------------------\n");
-	   cout<<stringArrayToString(getUnscaledConcentrationControlCoefficientIds())<<endl;
+	   cout<<listToString(getUnscaledConcentrationControlCoefficientIds())<<endl;
 	}
 	printf ("\n");
 
@@ -433,13 +426,13 @@ int main(int argc, char* argv[])
 
     setSelectionList("S1 S2");
 //-------- The latest
-
     cout<<vectorToString(getFloatingSpeciesConcentrations());
     cout<<vectorToString(getGlobalParameterValues());
     cout<<"\n\n Symbols\n";
-    cRRList* symHandle = getAvailableSymbols();
+    RRList* symHandle = getAvailableSymbols();
     cout<<listToString(symHandle);
     freeRRList(symHandle);
+
     cout<<"\n\n ================================\n";
     RRVector* test = getReactionRates();
     cout<<vectorToString(test);
@@ -485,12 +478,12 @@ int main(int argc, char* argv[])
     //cout<<printMatrix(getScaledElasticityMatrix());     //How to free, when doing something like this??
     //cout<<printStringList(getEigenValueNames());
 
-    cout<<"\n FluxControlCoeff ------\n"<<stringArrayToString(getFluxControlCoefficientIds())<<endl;
+    cout<<"\n FluxControlCoeff ------\n"<<listToString(getFluxControlCoefficientIds())<<endl;
 
-    cout<<"\n Unscaled FluxControlCoeff ------\n"<<stringArrayToString(getUnscaledFluxControlCoefficientIds())<<endl;
-    RRStringArray* list =getConcentrationControlCoefficientIds();
-    cout<<stringArrayToString(list)<<endl;
-    freeStringArray(list);
+    cout<<"\n Unscaled FluxControlCoeff ------\n"<<listToString(getUnscaledFluxControlCoefficientIds())<<endl;
+    RRList* list =getConcentrationControlCoefficientIds();
+    cout<<listToString(list)<<endl;
+    //freeList(list);
 
 
     //cout<<printStringList(getElasticityNames())<<endl;
@@ -516,7 +509,7 @@ int main(int argc, char* argv[])
     cout<<stringArrayToString(getFloatingSpeciesInitialConditionIds())<<endl;
 
 
-    cout<<" ---- getElasticityCoefficientNames ---\n"<<stringArrayToString(getElasticityCoefficientIds())<<endl;
+    cout<<" ---- getElasticityCoefficientNames ---\n"<<listToString(getElasticityCoefficientIds())<<endl;
     cout<<stringArrayToString(getRateOfChangeIds())<<endl;
     setCapabilities (NULL);
     cout<<getCapabilities()<<endl;

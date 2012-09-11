@@ -1,4 +1,4 @@
-	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{19B14E68-A4E6-4320-A0D8-4A70903120AE}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -33,7 +33,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\source\libstruct\;..\..\source\;..\..\Wrappers\C\Examples\api_tester\;..\..\Wrappers\C\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>R:\rrInstalls\xe\full-debug\lib\;..\..\source\libstruct\;..\..\source\;..\..\Wrappers\C\Examples\api_tester\;R:\rrInstalls\xe\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\Wrappers\C\;R:\rrInstalls\xe\full-debug\lib\;..\..\source\libstruct\;..\..\source\;..\..\Wrappers\C\Examples\api_tester\;R:\rrInstalls\xe\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -71,6 +71,14 @@
 			<CppCompile Include="..\..\Wrappers\C\Examples\api_tester\main.cpp">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\Wrappers\C\rr_c_api_support.cpp">
+				<DependentOn>..\..\Wrappers\C\rr_c_api_support.h</DependentOn>
+				<BuildOrder>3</BuildOrder>
+			</CppCompile>
+			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\roadrunner-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>2</BuildOrder>
+			</LibFiles>
 			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\rr_c_api.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>1</BuildOrder>
