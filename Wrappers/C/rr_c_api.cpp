@@ -959,7 +959,7 @@ RRMatrixHandle rrCallConv getNrMatrix()
             return NULL;
         }
         LIB_LA::DoubleMatrix tempMat = gRRHandle->getNrMatrix();
-        
+
 		return createMatrix(tempMat);
 	}
     catch(Exception& ex)
@@ -2844,7 +2844,6 @@ char* rrCallConv getCCodeSource(RRCCodeHandle code)
 // -------------------------------------------------------------------
 // List Routines
 // -------------------------------------------------------------------
-
 RRListHandle rrCallConv createRRList()
 {
 	RRListHandle list = new RRList;
@@ -2870,7 +2869,11 @@ void rrCallConv freeRRList (RRListHandle theList)
         {
             freeRRList ((RRList *) theList->Items[i]->data.lValue);
         }
+        delete theList->Items[i];
     }
+	delete [] theList->Items;
+    delete theList;
+    theList = NULL;
 }
 
 RRListItemHandle rrCallConv createIntegerItem (int value)
@@ -2911,10 +2914,26 @@ RRListItemHandle rrCallConv createListItem (RRList* value)
 int rrCallConv addItem (RRListHandle list, RRListItemHandle *item)
 {
 	int n = list->Count;
-	RRListItemHandle *items = (RRListItemHandle *) realloc (list->Items, (sizeof (RRListItemHandle *)*(n + 1)));
+
+	RRListItemHandle *newItems = new RRListItemHandle [n+1];
+    if(!newItems)
+    {
+    	setError("Failed allocating memory in addItem()");
+    	return -1;
+    }
+
+    for(int i = 0; i < n; i++)
+    {
+    	newItems[i] = list->Items[i];
+    }
+
+    newItems[n] = *item;
+    RRListItemHandle *oldItems = list->Items;
+    list->Items = newItems;
+
+    delete [] oldItems;
+
 	list->Count = n+1;
-	list->Items = (RRListItemHandle *) items;
-	list->Items[n] = *item;
 	return n;
 }
 
@@ -2950,21 +2969,13 @@ RRListItemHandle rrCallConv getListItem (RRListHandle list, int index)
 
 bool rrCallConv isListItem (RRListItemHandle item, ListItemType itemType)
 {
-	if (item->ItemType == itemType)
-    {
-		return true;
-    }
-	else
-    {
-		return false;
-    }
+	return  (item->ItemType == itemType) ? true : false;
 }
 
 int rrCallConv getListLength (RRListHandle myList)
 {
 	return myList->Count;
 }
-
 
 RRListHandle rrCallConv getList (RRListItemHandle item)
 {
@@ -3022,7 +3033,9 @@ char* rrCallConv listToString (RRListHandle list)
 					lVal = list->Items[i]->data.lValue;
                     if(lVal)
                     {
-                    	resStr<<listToString(lVal);
+                    	char* text = listToString(lVal);
+                    	resStr<<text;
+                        freeText(text);
                     }
                     else
                     {
@@ -3051,3 +3064,4 @@ char* rrCallConv listToString (RRListHandle list)
         return NULL;
     }
 }
+

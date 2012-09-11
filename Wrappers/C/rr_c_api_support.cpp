@@ -3,6 +3,8 @@
 #endif
 #pragma hdrstop
 #include <string>
+#include <sstream>
+#include "rrException.h"
 #include "rr_c_api.h"
 #include "rr_c_api_support.h"
 #include "rrUtils.h"
@@ -22,7 +24,7 @@ void setError(const string& err)
 {
     if(gLastError)
     {
-        delete gLastError;
+        delete [] gLastError;
     }
     gLastError = new char[err.size() + 1];
     strcpy(gLastError, err.c_str());
@@ -221,4 +223,6 @@ RRList* createList(const rr::ArrayList2& aList)
     return theList;
 }
 
+
 }
+
