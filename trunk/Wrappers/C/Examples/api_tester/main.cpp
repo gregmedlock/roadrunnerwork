@@ -4,9 +4,9 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <stdio.h>
 #include "rr_c_api.h"
 #include "rr_c_api_support.h"
-#include "rrArrayList2.h"
 //---------------------------------------------------------------------------
 #if defined(_MSC_VER)
 	#include <direct.h>
@@ -24,8 +24,6 @@ using namespace rr_c_api;
 
 int main(int argc, char* argv[])
 {
-	double value;
-
 	printf ("\n    Start of run\n");
 	printf ("   ==============\n\n");
 
@@ -33,7 +31,7 @@ int main(int argc, char* argv[])
 	printf ("Tesing list type\n");
 
 	RRListHandle myList = createRRList();
-	
+
 	// First construct [5, 3.1415]
 	RRListItemHandle myItem = createIntegerItem (5);
 	addItem (myList, &myItem);
@@ -64,13 +62,12 @@ int main(int argc, char* argv[])
 		printf ("Yes it is an integer\n");
 
 	printf ("\nList:\n");
-	printf (listToString (myList));
+
+    char* text = listToString (myList);
+	printf (text);
+    freeText(text);
 	printf ("\n\n");
-
-	
 	freeRRList (myList);
-
-//	Pause();
 
 	string modelsPath(".\\..\\Models");
 	if(argc > 1)
@@ -99,7 +96,7 @@ int main(int argc, char* argv[])
     }
     setTempFolder("c:\\rrTemp");
     enableLogging();
-	char* text = getBuildDate();
+	text = getBuildDate();
 
 	if(text)
 	{
@@ -234,7 +231,7 @@ int main(int argc, char* argv[])
 
     cout<<"Number of independent species = "<<getNumberOfIndependentSpecies()<<endl;
     cout<<"Number of dependent Species = "<<getNumberOfDependentSpecies()<<endl<<endl;
- 
+
 	printf ("Link Matrix:\n");
 	printf ("------------\n\n");
 	cout<<matrixToString(getLinkMatrix()); printf ("\n\n");
@@ -291,7 +288,7 @@ int main(int argc, char* argv[])
 	else
 		printf ("%s", matStr);
 	printf ("\n\n");
-	
+
 	printf ("Scaled Elasticity Matrix:\n");
 	printf ("-------------------------\n\n");
 	matStr = matrixToString (getScaledElasticityMatrix());
@@ -358,6 +355,7 @@ int main(int argc, char* argv[])
     }
 	printf ("\n\n");
 
+	double value;
 	printf ("Flux Control Coefficient, CC^(_J1)_k1\n");
 	getCC("_J1", "k1", value);
 	printf ("Coefficient = %f\n", value);
@@ -540,7 +538,7 @@ int main(int argc, char* argv[])
     cout<<text<<endl;
     freeText(text);
     freeRRInstance(rrHandle);
-	//Pause();
+
     return 0;
 }
 

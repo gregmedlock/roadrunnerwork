@@ -44,6 +44,7 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<BCC_AllCodeguardOptions>true</BCC_AllCodeguardOptions>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
@@ -73,15 +74,11 @@
 			</CppCompile>
 			<CppCompile Include="..\..\Wrappers\C\rr_c_api_support.cpp">
 				<DependentOn>..\..\Wrappers\C\rr_c_api_support.h</DependentOn>
-				<BuildOrder>3</BuildOrder>
-			</CppCompile>
-			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\roadrunner-static.lib">
-				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
-			</LibFiles>
+			</CppCompile>
 			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\rr_c_api.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>1</BuildOrder>
+				<BuildOrder>2</BuildOrder>
 			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
