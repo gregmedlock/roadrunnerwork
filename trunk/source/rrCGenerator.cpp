@@ -192,6 +192,7 @@ string CGenerator::generateModelCode(const string& sbmlStr, const bool& _compute
     int numOfRules = WriteComputeRules(ignore, mNumReactions);
 
     WriteComputeAllRatesOfChange(ignore, mNumIndependentSpecies, mNumDependentSpecies, *aL0);
+	delete aL0;
     WriteComputeReactionRates(ignore, mNumReactions);
     WriteEvalModel(ignore, mNumReactions, mNumIndependentSpecies, mNumFloatingSpecies, numOfRules);
     WriteEvalEvents(ignore, mNumEvents, mNumFloatingSpecies);

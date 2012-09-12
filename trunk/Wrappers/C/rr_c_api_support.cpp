@@ -204,7 +204,7 @@ RRList* createList(const rr::ArrayList2& aList)
         else if(dynamic_cast<ArrayListItem<string>*>(ptr))
         {
             string item = (string) *(dynamic_cast<ArrayListItem<string>*>(ptr));
-            char*str = (char *) new char[item.size() + 1];
+            char* str = (char *) new char[item.size() + 1];
             strcpy (str, item.c_str());
 			myItem = createStringItem (str);
    			addItem (theList, &myItem);
@@ -217,7 +217,6 @@ RRList* createList(const rr::ArrayList2& aList)
 
 			RRListItemHandle myListItem = createListItem (myList);
 			addItem (theList, &myListItem);
-
         }
     }
     return theList;

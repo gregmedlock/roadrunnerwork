@@ -3,6 +3,7 @@
 #endif
 #pragma hdrstop
 #include <sstream>
+#include "rrArrayList.h"
 #include "rrArrayList2.h"
 #include "rrLogger.h"
 //---------------------------------------------------------------------------
