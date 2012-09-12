@@ -76,7 +76,9 @@ bool rrCallConv enableLogging()
         }
 
 		//LogLevel logLevel(lDebug4);
-		string logFile = JoinPath(getTempFolder(), "RoadRunner.log") ;
+        char* tempFolder = getTempFolder();
+		string logFile = JoinPath(tempFolder, "RoadRunner.log") ;
+        freeText(tempFolder);
         gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile(logFile.c_str())));
 
         char* buffer = new char[1024];

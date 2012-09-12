@@ -79,6 +79,8 @@ RoadRunner::~RoadRunner()
         //Unload the DLL
         FreeLibrary(mModelDLL);
     }
+    delete _L0;
+    delete mLS;
 }
 
 NOMSupport* RoadRunner::getNOM()
@@ -1578,6 +1580,10 @@ LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
         {
             LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
             LIB_LA::DoubleMatrix I1 = mult((*_Nr), uelast);
+            if(_L)
+            {
+            	delete _L;
+            }
             _L = mLS->getLinkMatrix();
             return mult(I1, (*_L));
         }

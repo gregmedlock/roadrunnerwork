@@ -36,7 +36,12 @@ LibStructural* LibStructural::_Instance = NULL;
 LibStructural::~LibStructural()
 {
     //How to cleanup static ...?
+
     Reset();
+    delete _L;
+    delete _L0;
+//    delete _N;
+    delete _Nr;
 }
 
 void LibStructural::Reset()
@@ -89,14 +94,8 @@ string LibStructural::loadSBML(string sSBML)
     _Model = new SBMLmodel(sSBML); //Todo: memoryleak
 
     string msg = "";
-    msg = analyzeWithQR();
 
-//    std::map<int, std::string>::iterator iter = _speciesIndexList.begin();
-//    for(iter = _speciesIndexList.begin(); iter != _speciesIndexList.end(); iter++)
-//    {
-//        cout<<(*iter).first<<(*iter).second<<endl;
-//    }
-
+    msg = analyzeWithQR();	//Todo: memoryleaks!
     return msg;
 }
 
@@ -522,7 +521,7 @@ string LibStructural::analyzeWithQR()
     }
     else
     {
-        vector< DoubleMatrix*> oQRResult = LibLA::getInstance()->getQRWithPivot(*_NmatT);
+        vector< DoubleMatrix*> oQRResult = LibLA::getInstance()->getQRWithPivot(*_NmatT);  //Todo: delete instance somewhere!
         DoubleMatrix *Q = oQRResult[0];
         DoubleMatrix *R = oQRResult[1];
         DoubleMatrix *P = oQRResult[2];
@@ -1118,7 +1117,7 @@ LibStructural::DoubleMatrix* LibStructural::getL0Matrix()
 {
     if ( (_NumRows == _NumIndependent) || (_NumRows == 0) || _L0 == NULL)
     {
-        return new DoubleMatrix();
+        return new DoubleMatrix();	//Todo: Client has to delete this.. MemoryLeak
     }
     else if (_NumCols == 0 || zero_nmat)
     {
