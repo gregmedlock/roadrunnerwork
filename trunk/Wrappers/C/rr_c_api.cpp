@@ -1370,6 +1370,58 @@ bool rrCallConv setFloatingSpeciesInitialConcentrations(const RRVector* vec)
   	return false;
 }
 
+
+
+bool rrCallConv setFloatingSpeciesConcentrations(const RRVector* vec)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+        vector<double> tempVec;
+        copyVector(vec, tempVec);
+        gRRHandle->setFloatingSpeciesConcentrations(tempVec);
+
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+  	return false;
+}
+
+
+bool rrCallConv setBoundarySpeciesConcentrations(const RRVector* vec)
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return false;
+        }
+        vector<double> tempVec;
+        copyVector(vec, tempVec);
+        gRRHandle->setBoundarySpeciesConcentrations(tempVec);
+
+        return true;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+  	return false;
+}
+
+
 bool rrCallConv oneStep(const double& currentTime, const double& stepSize, double& value)
 {
 	try
