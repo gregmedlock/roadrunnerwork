@@ -1064,8 +1064,8 @@ def Pause():
 handle.getVectorLength.restype = c_int
 handle.getVectorElement.restype = c_bool
 handle.setVectorElement.restype = c_bool
-handle.getStringListLength.restype = c_int
-handle.getStringListElement.restype = c_char_p
+#handle.getStringListLength.restype = c_int
+#handle.getStringListElement.restype = c_char_p
 handle.getMatrixNumRows.restype = c_int
 handle.getMatrixNumCols.restype = c_int
 handle.getMatrixElement.restype = c_bool
@@ -1089,15 +1089,15 @@ def setVectorElement(vector, index, value):
     else:
         raise RuntimeError('Index out of range')
 
-def getStringListLength(stringList):
-    return handle.getStringListLength(stringList)
+#def getStringListLength(stringList):
+#    return handle.getStringListLength(stringList)
 
-def getStringListElement(stringList, index):
-    value = c_int()
-    if handle.getStringListElement(stringList, index, byref(value)) == True:
-        return value.value
-    else:
-        raise RuntimeError("Index out of range")
+#def getStringListElement(stringList, index):
+#    value = c_int()
+#    if handle.getStringListElement(stringList, index, byref(value)) == True:
+#        return value.value
+#    else:
+#        raise RuntimeError("Index out of range")
 
 def getMatrixNumRows():
     value = c_int
