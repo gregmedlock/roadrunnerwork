@@ -22,6 +22,7 @@
 using namespace std;
 using namespace rr_c_api;
 
+void printMatrix(char* msg1, RRMatrixHandle mat);
 int main(int argc, char* argv[])
 {
 	printf ("\n    Start of run\n");
@@ -96,6 +97,14 @@ int main(int argc, char* argv[])
     }
     setTempFolder("c:\\rrTemp");
     enableLogging();
+
+	text = getLogFileName();
+    if(text)
+	{
+		cout<<"Log File Name: "<<text<<endl;
+		freeText(text);
+	}
+
 	text = getBuildDate();
 
 	if(text)
@@ -104,11 +113,13 @@ int main(int argc, char* argv[])
 		freeText(text);
 	}
 
-	//string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
-	//string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-	//string fileName = modelsPath + "\\ss_threeSpecies.xml";
-//	string fileName = "ss_threeSpecies.xml";
-	string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
+//	   string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
+//	   string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
+//	   string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
+	 string fileName = modelsPath + "\\ss_threeSpecies.xml";
+//	 string fileName = modelsPath + "\\boundary.xml";
+
+
 	ifstream ifs(fileName.c_str());
 	if(!ifs)
 	{
@@ -116,10 +127,9 @@ int main(int argc, char* argv[])
 		return false;
 	}
 	cout << "\nRunning model: " << fileName << endl;
-	setComputeAndAssignConservationLaws(true);
+	setComputeAndAssignConservationLaws(false);
 	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
-	//cout<<sbml.c_str()<<endl;
 	if(!loadSBML(sbml.c_str()))
 	{
 		cerr<<"Failed loading SBML from file:"<<fileName<<endl;
@@ -214,146 +224,33 @@ int main(int argc, char* argv[])
 	printf ("\n");
 
 	double ssVal;
-    bool success = steadyState(ssVal);
-    if(!success)
-    {
-		cerr<<"Steady State call failed. Error was: "<<getLastError()<<endl;
-    }
-    else
-    {
-	    cout<<"Compute Steady State: sums of squares: "<<ssVal<<endl;
-    }
+//    bool success = steadyState(ssVal);
+//    if(!success)
+//    {
+//		cerr<<"Steady State call failed. Error was: "<<getLastError()<<endl;
+//    }
+//    else
+//    {
+//	    cout<<"Compute Steady State: sums of squares: "<<ssVal<<endl;
+//    }
 
-    cout<<"\nStoichiometry Matrix:"<<endl;
-	printf ("---------------------\n\n");
-	cout<<matrixToString(getStoichiometryMatrix());
-	printf ("\n");
+    printMatrix("Stoichiometry Matrix", getStoichiometryMatrix());
 
     cout<<"Number of independent species = "<<getNumberOfIndependentSpecies()<<endl;
     cout<<"Number of dependent Species = "<<getNumberOfDependentSpecies()<<endl<<endl;
 
-	printf ("Link Matrix:\n");
-	printf ("------------\n\n");
-	cout<<matrixToString(getLinkMatrix()); printf ("\n\n");
-
-	printf ("Nr Matrix:\n");
-	printf ("-----------\n\n");
-	cout<<matrixToString(getNrMatrix()); printf ("\n\n");
-
-	printf ("L0 Matrix:\n");
-	printf ("-----------\n\n");
-	cout<<matrixToString(getL0Matrix()); printf ("\n\n");
-
-	printf ("Full Jacobian Matrix:\n");
-	printf ("---------------------\n\n");
-	char* matStr = matrixToString (getFullJacobian());
-	if (!matStr)
-		printf ("ERROR in getFullJacobian\n");
-	else
-		printf ("%s", matStr);
-	printf ("\n\n");
-
-	printf ("Reduced Jacobian Matrix:\n");
-	printf ("------------------------\n\n");
-	matStr = matrixToString (getReducedJacobian());
-	if (!matStr)
-		printf ("ERROR in getReducedJacobian\n");
-	else
-		printf ("%s", matStr);
-	printf ("\n\n");
-
-	printf ("Reduced Jacobian Matrix:\n");
-	printf ("------------------------\n\n");
-	matStr = matrixToString (getReducedJacobian());
-	if (!matStr)
-		printf ("ERROR in getReducedJacobian\n");
-	else
-		printf ("%s", matStr);
-	printf ("\n\n");
-
-	printf ("Eigenvalue Matrix (real/imag):\n");
-	printf ("----------------------------\n\n");
-	matStr = matrixToString (getEigenValues());
-	if (!matStr)
-		printf ("ERROR in getEigenValues\n");
-	else
-		printf ("%s", matStr);
-	printf ("\n\n");
-
-	printf ("Unscaled Elasticity Matrix:\n");
-	printf ("-------------------------\n\n");
-	matStr = matrixToString (getUnScaledElasticityMatrix());
-	if (!matStr)
-		printf ("ERROR in getUnScaledElasticityMatrix\n");
-	else
-		printf ("%s", matStr);
-	printf ("\n\n");
-
-	printf ("Scaled Elasticity Matrix:\n");
-	printf ("-------------------------\n\n");
-	matStr = matrixToString (getScaledElasticityMatrix());
-	if (!matStr)
-		printf ("ERROR in getScaledElasticityMatrix\n");
-	else
-		printf ("%s", matStr);
-	printf ("\n\n");
-
-	printf ("Unscaled Concentration Control Coefficients Matrix:\n");
-	printf ("---------------------------------------------------\n\n");
-	matStr = matrixToString (getUnscaledConcentrationControlCoefficientMatrix());
-	if (!matStr)
-    {
-		printf ("ERROR in getUnscaledConcentrationControlCoefficientMatrix\n");
-        cerr<<getLastError()<<endl;
-    }
-	else
-    {
-		printf ("%s", matStr);
-    }
-	printf ("\n\n");
-
-	printf ("Scaled Concentration Control Coefficients Matrix:\n");
-	printf ("-------------------------------------------------\n\n");
-	matStr = matrixToString (getScaledConcentrationControlCoefficientMatrix());
-	if (!matStr)
-    {
-		printf ("ERROR in getScaledConcentrationControlCoefficientMatrix\n");
-        cerr<<getLastError()<<endl;
-    }
-	else
-    {
-		printf ("%s", matStr);
-    }
-	printf ("\n\n");
-
-	printf ("Unscaled Flux Control Coefficients Matrix:\n");
-	printf ("-----------------------------------------\n\n");
-	matStr = matrixToString (getUnscaledFluxControlCoefficientMatrix());
-	if (!matStr)
-    {
-		printf ("ERROR in getUnscaledFluxControlCoefficientMatrix\n");
-        cerr<<getLastError()<<endl;
-    }
-	else
-    {
-		printf ("%s", matStr);
-    }
-	printf ("\n\n");
-
-
-	printf ("Scaled Flux Control Coefficients Matrix:\n");
-	printf ("-----------------------------------------\n\n");
-	matStr = matrixToString (getScaledFluxControlCoefficientMatrix());
-	if (!matStr)
-    {
-		printf ("ERROR in getScaledFluxControlCoefficientMatrix\n");
-        cerr<<getLastError()<<endl;
-    }
-	else
-    {
-		printf ("%s", matStr);
-    }
-	printf ("\n\n");
+    printMatrix("Link Matrix", getLinkMatrix());
+	printMatrix("Nr Matrix", getNrMatrix());
+	printMatrix("L0 Matrix", getL0Matrix());
+	printMatrix("Full Jacobian Matrix", getFullJacobian());
+	printMatrix("Reduced Jacobian Matrix:", getReducedJacobian());
+    printMatrix("Eigenvalue Matrix (real/imag)", getEigenValues());
+	printMatrix("Unscaled Elasticity Matrix:", getUnScaledElasticityMatrix());
+    printMatrix("Scaled Elasticity Matrix:", getScaledElasticityMatrix());
+	printMatrix("Unscaled Concentration Control Coefficients Matrix", getUnscaledConcentrationControlCoefficientMatrix());
+	printMatrix("Scaled Concentration Control Coefficients Matrix:", getScaledConcentrationControlCoefficientMatrix());
+	printMatrix("Unscaled Flux Control Coefficients Matrix", getUnscaledFluxControlCoefficientMatrix());
+	printMatrix("Scaled Flux Control Coefficients Matrix", getScaledFluxControlCoefficientMatrix());
 
 	double value;
 	printf ("Flux Control Coefficient, CC^(_J1)_k1\n");
@@ -415,7 +312,6 @@ int main(int argc, char* argv[])
 	printf ("\nCall to getRatesOfChangeEx (S1=1, S2=2, S3=3):\n");
 	cout<<vectorToString (getRatesOfChangeEx(&veca))<<endl;
 
-
 //	printf ("\nCall to getReactionRatesEx (S1=1, S2=2, S3=3):\n");
 //	cout<<printVector (getReactionRatesEx (&veca))<<endl;
 //
@@ -443,9 +339,6 @@ int main(int argc, char* argv[])
     cout<<vectorToString(test);
 
     //Get value problem..
-
-
-
     getValue("S1", value);
     cout<<value<<endl;
     getValue("S2", value);
@@ -526,7 +419,6 @@ int main(int argc, char* argv[])
 
 
     cout<<getCurrentSBML();
-
 	///////////////////
     text = getCopyright();
     if(hasError())
@@ -538,7 +430,21 @@ int main(int argc, char* argv[])
     cout<<text<<endl;
     freeText(text);
     freeRRInstance(rrHandle);
-
     return 0;
 }
 
+void printMatrix(char* msg1, RRMatrixHandle mat)
+{
+	cout<<msg1<<"\n";
+	cout<<("------------\n\n");
+    char *text = matrixToString(mat);
+    if(text)
+    {
+		cout<<text<<"\n\n";
+        freeText(text);
+    }
+    else
+    {
+    	cout<<"NULL\n\n";
+    }
+}

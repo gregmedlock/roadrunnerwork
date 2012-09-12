@@ -44,20 +44,33 @@ char* createText(const string& str)
     return newstr;
 }
 
-RRMatrix* createMatrix(const LIB_LA::DoubleMatrix& mat)
+RRMatrix* createMatrix(const LIB_LA::DoubleMatrix* mat)
 {
+	if(!mat)
+    {
+    	return NULL;
+    }
     RRMatrixHandle matrix = new RRMatrix;
 
-    matrix->RSize = mat.RSize();
-    matrix->CSize = mat.CSize();
-    matrix->Data =  new double[mat.RSize()*mat.CSize()];
+    matrix->RSize = mat->RSize();
+    matrix->CSize = mat->CSize();
+    int dim =  matrix->RSize * matrix->CSize;
+    if(dim)
+    {
+    	matrix->Data =  new double[mat->RSize()*mat->CSize()];
+    }
+    else
+    {
+    	delete matrix;
+        return NULL;
+    }
 
     int index = 0;
-    for(rr::u_int row = 0; row < mat.RSize(); row++)
+    for(rr::u_int row = 0; row < mat->RSize(); row++)
     {
-        for(rr::u_int col = 0; col < mat.CSize(); col++)
+        for(rr::u_int col = 0; col < mat->CSize(); col++)
         {
-            matrix->Data[index++] = mat(row,col);
+            matrix->Data[index++] = (*mat)(row,col);
         }
     }
     return matrix;

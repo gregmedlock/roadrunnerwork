@@ -325,6 +325,20 @@ bool ModelFromC::SetupDLLData()
         Log(lDebug)<<"Failed to assign to bcSize";
     }
 
+    lp       = (double*) GetProcAddress((HMODULE) mDLLHandle, "_lp");
+    if(!lp)
+    {
+        Log(lDebug)<<"Failed to assign to lp";
+        lp = mDummyDoubleArray;
+    }
+
+    lpSize       = (int*) GetProcAddress((HMODULE) mDLLHandle, "_lpSize");
+    if(!srSize)
+    {
+        Log(lDebug)<<"Failed to assign to lpSize";
+        lpSize = &mDummyInt;
+    }
+
     sr       = (double*) GetProcAddress((HMODULE) mDLLHandle, "_sr");
     if(!sr)
     {

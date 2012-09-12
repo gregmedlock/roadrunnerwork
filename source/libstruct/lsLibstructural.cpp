@@ -473,7 +473,8 @@ void  LibStructural::BuildStoichiometryMatrixFromModel(LIB_STRUCTURAL::SBMLmodel
 {
     _NumRows = numFloating;    
     _NumCols = numReactions;
-    DELETE_IF_NON_NULL(_Nmat); _Nmat = new DoubleMatrix(numFloating, numReactions);
+    DELETE_IF_NON_NULL(_Nmat);
+    _Nmat = new DoubleMatrix(numFloating, numReactions);	//Todo: a matrix is created with zeros columns.. casues problems later on!
 
     for (int i = 0; i < numReactions; i++)
     {
@@ -590,7 +591,8 @@ string LibStructural::analyzeWithQR()
 
 void LibStructural::reorderNmatrix()
 {
-    DELETE_IF_NON_NULL(_Nmat); _Nmat = new DoubleMatrix(_NumRows, _NumCols);
+    DELETE_IF_NON_NULL(_Nmat);
+    _Nmat = new DoubleMatrix(_NumRows, _NumCols);
     for (int i=0; i<_NumRows; i++)
     {
         for (int j=0; j<_NumCols; j++)
