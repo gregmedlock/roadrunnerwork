@@ -156,9 +156,7 @@ char* rrCallConv getLogFileName()
         {
             setError(ALLOCATE_API_ERROR_MSG);
         }
-
-
-    	return NULL;
+    	return createText(gLog.GetLogFileName().c_str());
     }
     catch(Exception& ex)
     {
