@@ -20,7 +20,7 @@ unit uRoadRunnerAPI;
    company internal, or commercial purposes;
 
    You CAN use the software in packages or distributions that you create.
-
+                     f
    You SHOULD include a copy of the license in any redistribution you may make;
 
    You are NOT required include the source of software, or of any modifications you may
@@ -33,7 +33,8 @@ unit uRoadRunnerAPI;
 
 interface
 
-Uses SysUtils, Classes, Windows, uMatrix, Generics.Collections, IOUtils, uRRList;
+Uses SysUtils, Classes, Windows, uMatrix, Generics.Collections, IOUtils, uRRList,
+     uRRTypes, uSBWArray, uTypes;
 
 {
 C_DECL_SPEC bool                    rrCallConv  setLogLevelFromString(const char* lvl);
@@ -52,7 +53,6 @@ type
   PAnsiCharArray = ^TAnsiCharArray;
   TArrayOfAnsiCharArray = array of PAnsiCharArray;
   PArrayOfAnsiCharArray = ^TArrayOfAnsiCharArray;
-  TDoubleArray = array of double;
 
   TArrayOfPAnsiCharArray = array of PAnsiCharArray;
 
@@ -208,7 +208,8 @@ procedure setTimeStart (value : double);
 procedure setTimeEnd (value : double);
 procedure setNumberOfPoints (value : integer);
 
-function  simulate : TMatrix;
+function  simulate : T2DDoubleArray;
+function  mSimulate : TMatrix;
 function  simulateEx (timeStart: double; timeEnd : double; numberOfPoints : integer)  : TMatrix;
 function  oneStep (var currentTime : double; var stepSize : double) : double;
 function  setSelectionList (strList : TStringList) : boolean;
@@ -216,14 +217,14 @@ function  setCapabilities (str : AnsiString) : boolean;
 function  getCapabilities : AnsiString;
 
 function  evalModel : boolean;
-function  getFullJacobian : TMatrix;
-function  getReducedJacobian : TMatrix;
+function  getFullJacobian : T2DDoubleArray;
+function  getReducedJacobian : T2DDoubleArray;
 
-function  getStoichiometryMatrix : TMatrix;
-function  getLinkMatrix : TMatrix;
-function  getNrMatrix : TMatrix;
-function  getL0Matrix : TMatrix;
-function  getConservationMatrix : TMatrix;
+function  getStoichiometryMatrix : T2DDoubleArray;
+function  getLinkMatrix : T2DDoubleArray;
+function  getNrMatrix : T2DDoubleArray;
+function  getL0Matrix : T2DDoubleArray;
+function  getConservationMatrix : T2DDoubleArray;
 
 function  getReactionRates : TDoubleArray;
 function  getRatesOfChange : TDoubleArray;
@@ -347,6 +348,9 @@ var DLLHandle : Cardinal;
     libGetFloatingSpeciesConcentrations : function : PRRDoubleVectorHandle; stdcall;
     libGetBoundarySpeciesConcentrations : function : PRRDoubleVectorHandle; stdcall;
 
+    libSetFloatingSpeciesConcentrations : function (PRRDoubleVectorHandle) : boolean; stdcall;
+    libsetBoundarySpeciesConcentrations : function (PRRDoubleVectorHandle) : boolean; stdcall;
+
     libGetNumberOfDependentSpecies : function : integer; stdcall;
     libGetNumberOfIndependentSpecies : function : integer; stdcall;
 
@@ -424,6 +428,18 @@ begin
           result[i+1,j+1] := matrix^.data[i*nc + j];
 end;
 
+
+function loadInTo2DArray (matrix : PRRMatrixHandle) : T2DDoubleArray;
+var nr, nc : integer;
+    i, j : integer;
+begin
+  nr := matrix^.RSize;
+  nc := matrix^.CSize;
+  setLength (result, nr, nc);
+  for i := 0 to nr - 1 do
+      for j := 0 to nc - 1 do
+          result[i,j] := matrix^.data[i*nc + j];
+end;
 
 // --------------------------------------------------------------
 // For doumentation, see the C API docs at:
@@ -587,26 +603,26 @@ begin
 end;
 
 
-function getFullJacobian : TMatrix;
+function getFullJacobian : T2DDoubleArray;
 var p : PRRMatrixHandle;
 begin
   p := libGetFullJacobian;
   if p = nil then
      raise Exception.Create ('No Jacobian matrix');
   try
-    result := loadIntoMatrix (p);
+    result := loadInTo2DArray (p);
   finally
     libFreeMatrix (p);
   end;
 end;
 
 
-function getReducedJacobian : TMatrix;
+function getReducedJacobian : T2DDoubleArray;
 var p : PRRMatrixHandle;
 begin
   p := libGetReducedJacobian;
   try
-    result := loadIntoMatrix (p);
+    result := loadInTo2DArray (p);
   finally
     libFreeMatrix (p);
   end;
@@ -649,7 +665,29 @@ end;
 
 
 
-function simulate : TMatrix;
+function simulate : T2DDoubleArray;
+var RRResult : PRRResultHandle;
+    i, j : integer;
+    nr, nc : integer;
+begin
+  RRResult := libSimulate;
+
+  if RRResult = nil then
+     raise Exception.Create (getLastError());
+  try
+     nr := RRResult^.RSize;
+     nc := RRResult^.CSize;
+     setLength (result, nr, nc);
+     for i := 0 to nr - 1 do
+         for j := 0 to nc - 1 do
+             result[i,j] := RRResult^.data[i*nc + j];
+  finally
+    libFreeResult (RRResult);
+  end;
+end;
+
+
+function mSimulate : TMatrix;
 var RRResult : PRRResultHandle;
     i, j : integer;
     nr, nc : integer;
@@ -1184,7 +1222,7 @@ begin
 end;
 
 
-function getStoichiometryMatrix : TMatrix;
+function getStoichiometryMatrix : T2DDoubleArray;
 var st : PRRMatrixHandle;
     nr, nc : integer;
     i, j : integer;
@@ -1193,22 +1231,18 @@ begin
   try
     if st = nil then
        begin
-       result := TMatrix.Create (0,0);
+       setLength (result, 0, 0);
        exit;
        end;
-    nr := st^.RSize;
-    nc := st^.CSize;
-    result := TMatrix.Create (nr, nc);
-    for i := 0 to nr - 1 do
-        for j := 0 to nc - 1 do
-            result[i+1,j+1] := st^.data[i*nc + j];
+
+    result := loadInTo2DArray(st);
   finally
     libFreeMatrix (st);
   end;
 end;
 
 
-function getLinkMatrix : TMatrix;
+function getLinkMatrix : T2DDoubleArray;
 var st : PRRMatrixHandle;
     nr, nc : integer;
     i, j : integer;
@@ -1217,23 +1251,18 @@ begin
   try
     if st = nil then
        begin
-       result := TMatrix.Create (0,0);
+       setLength (result, 0, 0);
        exit;
        end;
 
-    nr := st^.RSize;
-    nc := st^.CSize;
-    result := TMatrix.Create (nr, nc);
-    for i := 0 to nr - 1 do
-        for j := 0 to nc - 1 do
-            result[i+1,j+1] := st^.data[i*nc + j];
+    result := loadInTo2DArray (st);
   finally
     libFreeMatrix (st);
   end;
 end;
 
 
-function getNrMatrix : TMatrix;
+function getNrMatrix : T2DDoubleArray;
 var st : PRRMatrixHandle;
     nr, nc : integer;
     i, j : integer;
@@ -1242,23 +1271,18 @@ begin
   try
     if st = nil then
        begin
-       result := TMatrix.Create (0,0);
+       setLength (result, 0, 0);
        exit;
        end;
 
-    nr := st^.RSize;
-    nc := st^.CSize;
-    result := TMatrix.Create (nr, nc);
-    for i := 0 to nr - 1 do
-        for j := 0 to nc - 1 do
-            result[i+1,j+1] := st^.data[i*nc + j];
+    result := loadInTo2DArray (st);
   finally
     libFreeMatrix (st);
   end;
 end;
 
 
-function getL0Matrix : TMatrix;
+function getL0Matrix : T2DDoubleArray;
 var st : PRRMatrixHandle;
     nr, nc : integer;
     i, j : integer;
@@ -1267,23 +1291,18 @@ begin
   try
     if st = nil then
        begin
-       result := TMatrix.Create (0,0);
+       setLength (result, 0, 0);
        exit;
        end;
 
-    nr := st^.RSize;
-    nc := st^.CSize;
-    result := TMatrix.Create (nr, nc);
-    for i := 0 to nr - 1 do
-        for j := 0 to nc - 1 do
-            result[i+1,j+1] := st^.data[i*nc + j];
+    result := loadInTo2DArray (st);
   finally
     libFreeMatrix (st);
   end;
 end;
 
 
-function getConservationMatrix : TMatrix;
+function getConservationMatrix : T2DDoubleArray;
 var st : PRRMatrixHandle;
     nr, nc : integer;
     i, j : integer;
@@ -1292,16 +1311,11 @@ begin
   try
     if st = nil then
        begin
-       result := TMatrix.Create (0,0);
+       setLength (result, 0, 0);
        exit;
        end;
 
-    nr := st^.RSize;
-    nc := st^.CSize;
-    result := TMatrix.Create (nr, nc);
-    for i := 0 to nr - 1 do
-        for j := 0 to nc - 1 do
-            result[i+1,j+1] := st^.data[i*nc + j];
+    result := loadInTo2DArray (st);
   finally
     libFreeMatrix (st);
   end;
