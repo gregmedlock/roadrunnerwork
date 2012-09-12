@@ -693,6 +693,26 @@ C_DECL_SPEC bool rrCallConv getCompartmentByIndex (const int& index, double& val
 */
 C_DECL_SPEC bool rrCallConv setCompartmentByIndex (const int& index, const double& value);
 
+
+/*!
+ \brief Set the floating species concentration to the vector vec
+
+ \param vec A vector of floating species concentrations
+ \return Returns true if successful
+ \ingroup floating
+*/
+C_DECL_SPEC bool rrCallConv setFloatingSpeciesConcentrations(const RRVector* vec);
+
+/*!
+ \brief Set the boundary species concentration to the vector vec
+
+ \param vec A vector of boundary species concentrations
+ \return Returns true if successful
+ \ingroup boundary
+*/
+C_DECL_SPEC bool rrCallConv setBoundarySpeciesConcentrations(const RRVector* vec);
+
+
 /*!
  \brief Retrieve the full Jacobian for the current model
 

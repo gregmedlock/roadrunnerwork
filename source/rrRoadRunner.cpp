@@ -3045,18 +3045,47 @@ vector<double> RoadRunner::getFloatingSpeciesInitialConcentrations()
     return initYs;
 }
 
-//        // This is a level 1 Method 1
+
 // Help("Set the concentrations for all floating species in the model")
-//        void RoadRunner::setFloatingSpeciesConcentrations(double[] values)
-//        {
-//            if (!mModel) throw SBWApplicationException(emptyModelStr);
-//
-//            mModel->y = values;
-//            // Update the amounts vector at the same time
-//            mModel->convertToAmounts();
-//            if (!mConservedTotalChanged) mModel->computeConservedTotals();
-//        }
-//
+void RoadRunner::setFloatingSpeciesConcentrations(const vector<double>& values)
+{
+    if (!mModel)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    for (int i = 0; i < values.size(); i++)
+    {
+        mModel->setConcentration(i, values[i]);
+        if ((*mModel->ySize) > i)
+        {
+            mModel->y[i] = values[i];
+        }
+    }
+    mModel->convertToAmounts();
+    if (!mConservedTotalChanged) mModel->computeConservedTotals();
+}
+
+
+// Help("Set the concentrations for all floating species in the model")
+void RoadRunner::setBoundarySpeciesConcentrations(const vector<double>& values)
+{
+    if (!mModel)
+    {
+        throw SBWApplicationException(emptyModelStr);
+    }
+
+    for (int i = 0; i < values.size(); i++)
+    {
+        mModel->setConcentration(i, values[i]);
+        if ((*mModel->bcSize) > i)
+        {
+            mModel->bc[i] = values[i];
+        }
+    }
+    mModel->convertToAmounts();
+}
+
 // Help("Sets the value of a floating species by its index")
 //        void RoadRunner::setFloatingSpeciesInitialConcentrationByIndex(int index, double value)
 //        {
