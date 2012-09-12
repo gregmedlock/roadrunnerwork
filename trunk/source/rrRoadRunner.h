@@ -52,11 +52,6 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		CSharpGenerator                *mCSharpGenerator;
 		CGenerator                     *mCGenerator;
 
-		DoubleMatrix                   *_L;
-		DoubleMatrix                   *_L0;
-		DoubleMatrix                   *_N;
-		DoubleMatrix                   *_Nr;
-
 		Compiler                        mCompiler;
 		void                            AddNthOutputToResult(DoubleMatrix& results, int nRow, double dCurrentTime);
         bool                            PopulateResult();
@@ -84,6 +79,12 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 		bool                     		mConservedTotalChanged;
 		//        static bool                   mReMultiplyCompartments;
+		// The matrix stuff going on here is not right....
+		DoubleMatrix                   *_L;
+		DoubleMatrix                   *_L0;
+		DoubleMatrix                   *_N;
+		DoubleMatrix                   *_Nr;
+
 		double*                         mL;
 		double*                         mL0;
 		double*                         mN;
@@ -182,9 +183,9 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		// ---------------------------------------------------------------------
 		// Start of Level 4 API Methods
 		// ---------------------------------------------------------------------
-		DoubleMatrix                    getLinkMatrix();
-		DoubleMatrix                    getNrMatrix();
-		DoubleMatrix                    getL0Matrix();
+		DoubleMatrix*                   getLinkMatrix();
+		DoubleMatrix*                   getNrMatrix();
+		DoubleMatrix*                   getL0Matrix();
 		DoubleMatrix                    getStoichiometryMatrix();
 		DoubleMatrix                    getConservationMatrix();
 		DoubleMatrix                    getUnscaledConcentrationControlCoefficientMatrix();

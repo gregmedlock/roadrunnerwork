@@ -776,7 +776,7 @@ RRMatrixHandle rrCallConv getUnScaledElasticityMatrix()
 
 		LIB_LA::DoubleMatrix tempMat = gRRHandle->getUnscaledElasticityMatrix();
 
-        RRMatrixHandle matrix = createMatrix(tempMat);
+        RRMatrixHandle matrix = createMatrix(&tempMat);
 	    return matrix;
     }
     catch(Exception& ex)
@@ -801,7 +801,7 @@ RRMatrixHandle rrCallConv getScaledElasticityMatrix()
         LIB_LA::DoubleMatrix tempMat = gRRHandle->getScaledElasticityMatrix();
 
 
-        RRMatrixHandle matrix = createMatrix(tempMat);
+        RRMatrixHandle matrix = createMatrix(&tempMat);
 	    return matrix;
     }
     catch(Exception& ex)
@@ -809,8 +809,8 @@ RRMatrixHandle rrCallConv getScaledElasticityMatrix()
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
-    }
 	return NULL;
+    }
 }
 
 bool rrCallConv setValue(const char* symbolId, const double& value)
@@ -914,8 +914,8 @@ RRMatrixHandle rrCallConv getLinkMatrix()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        LIB_LA::DoubleMatrix tempMat = gRRHandle->getLinkMatrix();
-        
+        LIB_LA::DoubleMatrix *tempMat = gRRHandle->getLinkMatrix();
+
 		return createMatrix(tempMat);
 	}
     catch(Exception& ex)
@@ -936,7 +936,7 @@ RRMatrixHandle rrCallConv getL0Matrix()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        LIB_LA::DoubleMatrix tempMat = gRRHandle->getL0Matrix();
+        LIB_LA::DoubleMatrix *tempMat = gRRHandle->getL0Matrix();
         
 		return createMatrix(tempMat);
 	}
@@ -945,8 +945,8 @@ RRMatrixHandle rrCallConv getL0Matrix()
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
+		return NULL;
     }
-	return false;
 }
 
 RRMatrixHandle rrCallConv getNrMatrix()
@@ -958,7 +958,7 @@ RRMatrixHandle rrCallConv getNrMatrix()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        LIB_LA::DoubleMatrix tempMat = gRRHandle->getNrMatrix();
+        LIB_LA::DoubleMatrix *tempMat = gRRHandle->getNrMatrix();
 
 		return createMatrix(tempMat);
 	}
@@ -967,8 +967,8 @@ RRMatrixHandle rrCallConv getNrMatrix()
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
+		return NULL;
     }
-	return false;
 }
 
 C_DECL_SPEC bool rrCallConv hasError()
@@ -1841,7 +1841,7 @@ RRMatrixHandle rrCallConv getFullJacobian()
         }
 
         LIB_LA::DoubleMatrix tempMat = gRRHandle->getFullJacobian();
-        return createMatrix(tempMat);
+        return createMatrix(&tempMat);
     }
     catch(Exception& ex)
     {
@@ -1863,15 +1863,15 @@ RRMatrixHandle rrCallConv getReducedJacobian()
         }
 
         LIB_LA::DoubleMatrix tempMat = gRRHandle->getReducedJacobian();
-        return createMatrix(tempMat);
+        return createMatrix(&tempMat);
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
+		return NULL;
     }
-	return NULL;
 }
 
 
@@ -1886,15 +1886,15 @@ RRMatrixHandle rrCallConv getEigenValues()
         }
 
 		LIB_LA::DoubleMatrix tempMat = gRRHandle->getEigenvalues();
-        return createMatrix(tempMat);
+        return createMatrix(&tempMat);
     }
     catch(Exception& ex)
     {
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
+		return NULL;
     }
-	return NULL;
 }
 
 char* rrCallConv getCSourceFileName()
@@ -2233,7 +2233,7 @@ RRMatrixHandle rrCallConv getUnscaledConcentrationControlCoefficientMatrix()
             return NULL;
         }
 
-        return createMatrix(gRRHandle->getUnscaledConcentrationControlCoefficientMatrix());
+        return createMatrix(&(gRRHandle->getUnscaledConcentrationControlCoefficientMatrix()));
     }
     catch(Exception& ex)
     {
@@ -2255,7 +2255,7 @@ RRMatrixHandle rrCallConv getScaledConcentrationControlCoefficientMatrix()
             return NULL;
         }
 
-        return createMatrix(gRRHandle->getScaledConcentrationControlCoefficientMatrix());
+        return createMatrix(&(gRRHandle->getScaledConcentrationControlCoefficientMatrix()));
     }
     catch(Exception& ex)
     {
@@ -2277,7 +2277,7 @@ RRMatrixHandle rrCallConv getUnscaledFluxControlCoefficientMatrix()
             return NULL;
         }
 
-        return createMatrix(gRRHandle->getUnscaledFluxControlCoefficientMatrix());
+        return createMatrix(&(gRRHandle->getUnscaledFluxControlCoefficientMatrix()));
     }
     catch(Exception& ex)
     {
@@ -2299,7 +2299,7 @@ RRMatrixHandle rrCallConv getScaledFluxControlCoefficientMatrix()
             return NULL;
         }
 
-        return createMatrix(gRRHandle->getScaledFluxControlCoefficientMatrix());
+        return createMatrix(&(gRRHandle->getScaledFluxControlCoefficientMatrix()));
     }
     catch(Exception& ex)
     {

@@ -77,7 +77,8 @@ class RR_DECLSPEC ModelFromC : public rrObject
         double*                                 gp;
         int*                                    gpSize;
 
-//        vector<double>                        lp ;                //Local parameters
+        double*                       			lp;                 //Local parameters
+        int*           	            			lpSize;             //Local parameters
 
         double*                                 c;                  //Compartment volumes
         int*                                    cSize;              //Compartment volumes

@@ -40,6 +40,7 @@ RoadRunner::RoadRunner(const string& compiler) :
     steadyStateSolver(NULL),
     mL(NULL),
     mL0(NULL),
+    _L0(NULL),
     mN(NULL),
     mNr(NULL),
     DiffStepSize(0.05),
@@ -79,7 +80,7 @@ RoadRunner::~RoadRunner()
         //Unload the DLL
         FreeLibrary(mModelDLL);
     }
-    delete _L0;
+//    delete _L0;
     delete mLS;
 }
 
@@ -1579,11 +1580,11 @@ LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
         if (mModel)
         {
             LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
-            LIB_LA::DoubleMatrix I1 = mult((*_Nr), uelast);
-            if(_L)
+            if(!_Nr)
             {
-            	delete _L;
+            	return LIB_LA::DoubleMatrix(0,0);
             }
+            LIB_LA::DoubleMatrix I1 = mult((*_Nr), uelast);
             _L = mLS->getLinkMatrix();
             return mult(I1, (*_L));
         }
@@ -1631,8 +1632,15 @@ LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
         if (mModel)
         {
             LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
-
-            return mult((*_N), uelast);
+            LIB_LA::DoubleMatrix* rsm = mLS->getReorderedStoichiometryMatrix();
+            if(rsm)
+            {
+            	return mult(*rsm, uelast);
+            }
+            else
+            {
+	            LIB_LA::DoubleMatrix empty;
+            }
         }
         throw SBWApplicationException(emptyModelStr);
     }
@@ -1647,15 +1655,15 @@ LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
 // Start of Level 4 API Methods
 // ---------------------------------------------------------------------
 
-LIB_LA::DoubleMatrix RoadRunner::getLinkMatrix()
+LIB_LA::DoubleMatrix* RoadRunner::getLinkMatrix()
 {
     try
     {
-       if (mModel)
+       if (!mModel)
 	   {
-		   return *_L;
+	       throw SBWApplicationException(emptyModelStr);
 	   }
-       throw SBWApplicationException(emptyModelStr);
+	   return _L;
     }
     catch (const Exception& e)
     {
@@ -1663,13 +1671,13 @@ LIB_LA::DoubleMatrix RoadRunner::getLinkMatrix()
     }
 }
 
-LIB_LA::DoubleMatrix RoadRunner::getNrMatrix()
+LIB_LA::DoubleMatrix* RoadRunner::getNrMatrix()
 {
     try
     {
        if (mModel)
 	   {
-		   return *_Nr;
+		   return _Nr;
 	   }
        throw SBWApplicationException(emptyModelStr);
     }
@@ -1679,13 +1687,13 @@ LIB_LA::DoubleMatrix RoadRunner::getNrMatrix()
     }
 }
 
-LIB_LA::DoubleMatrix RoadRunner::getL0Matrix()
+LIB_LA::DoubleMatrix* RoadRunner::getL0Matrix()
 {
     try
     {
        if (mModel)
 	   {
-		   return *_L0;
+		   return _L0;
 	   }
        throw SBWApplicationException(emptyModelStr);
     }
@@ -1720,7 +1728,6 @@ DoubleMatrix RoadRunner::getStoichiometryMatrix()
             }
 
             return mat;
-            //return _N; //StructAnalysis.getReorderedStoichiometryMatrix();
         }
 
         throw SBWApplicationException(emptyModelStr);
@@ -2615,7 +2622,7 @@ string RoadRunner::writeSBML()
     NOM.loadSBML(NOM.getParamPromotedSBML(mCurrentSBML));
 
     ModelState state(*mModel);
-//    var state = new ModelState(model); 
+//    var state = new ModelState(model);
 
     StringList array = getFloatingSpeciesIds();
     for (int i = 0; i < array.Count(); i++)
@@ -2647,8 +2654,11 @@ string RoadRunner::writeSBML()
 // Get the number of local parameters for a given reaction
 int RoadRunner::getNumberOfLocalParameters(const int& reactionId)
 {
-     if (!mModel) throw SBWApplicationException(emptyModelStr);
-        return getNumberOfLocalParameters(reactionId);
+     if (!mModel)
+     {
+     	throw SBWApplicationException(emptyModelStr);
+     }
+     return getNumberOfLocalParameters(reactionId);	//Todo: this functions is calling itself ?
 }
 
 // Help("Sets the value of a global parameter by its index")
@@ -2663,20 +2673,28 @@ int RoadRunner::getNumberOfLocalParameters(const int& reactionId)
 //                throw SBWApplicationException(string.Format("Index in setLocalParameterByIndex out of range: [{0}]", index));
 //        }
 //
+
 // Returns the value of a global parameter by its index
 // ***** SHOULD WE SUPPORT LOCAL PARAMETERS? ******** (Sept 2, 2012, HMS
 double RoadRunner::getLocalParameterByIndex	(const int& reactionId, const int& index)
 {
-    if (!mModel)
+    if(!mModel)
+    {
        throw SBWApplicationException(emptyModelStr);
+    }
 
-    //if ((reactionId >= 0) && (reactionId < mModel->getNumReactions()) &&
-    //    (index >= 0) && (index < mModel->getNumLocalParameters(reactionId)))
-    //return mModel->lp[reactionId][index];
-
-     throw SBWApplicationException(Format("Index in getLocalParameterByIndex out of range: [{0}]", index));
+    if(	reactionId >= 0 &&
+    	reactionId < mModel->getNumReactions() &&
+        index >= 0 &&
+        index < mModel->getNumLocalParameters(reactionId))
+    {
+    	return -1;//mModel->lp[reactionId][index];
+    }
+    else
+    {
+     	throw SBWApplicationException(Format("Index in getLocalParameterByIndex out of range: [{0}]", index));
+    }
 }
- 
 
 // Help("Returns the value of a global parameter by its index")
 //        double RoadRunner::getLocalParameterByIndex(int reactionId, int index)
@@ -3685,11 +3703,6 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 {
     LIB_LA::DoubleMatrix uElastMatrix(mModel->getNumReactions(), mModel->getNumTotalVariables());
 
-//    for (int i = 0; i < mModel->getNumReactions; i++)
-//    {
-//        uElastMatrix[i] = new double[mModel->getNumTotalVariables];
-//    }
-//
     try
     {
         if (mModel)
@@ -3740,10 +3753,19 @@ LIB_LA::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
             for (int i = 0; i < uelast.CSize(); i++)
             {
                 // Rows are rates
-                if (rates[i] == 0)
+                if (*mModel->ratesSize == 0 || rates[i] == 0)
                 {
-                    throw
-                    SBWApplicationException("Unable to compute elasticity, reaction rate [" + mModelGenerator->reactionList[i].name + "] set to zero");
+	                string name;
+                	if(mModelGenerator && mModelGenerator->reactionList.size())
+                    {
+                		name = mModelGenerator->reactionList[i].name;
+                    }
+                    else
+                    {
+                    	name = "none";
+                    }
+
+                    throw SBWApplicationException("Unable to compute elasticity, reaction rate [" + name + "] set to zero");
                 }
 
                 for (int j = 0; j < uelast.RSize(); j++) // Columns are species
@@ -3981,10 +4003,10 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatri
 
         // Compute the Jacobian first
         DoubleMatrix uelast     = getUnscaledElasticityMatrix();
-        DoubleMatrix Nr         = getNrMatrix();
-        DoubleMatrix T1 = mult(Nr, uelast);
-        DoubleMatrix LinkMatrix = getLinkMatrix();
-        DoubleMatrix Jac = mult(T1, LinkMatrix);
+        DoubleMatrix *Nr         = getNrMatrix();
+        DoubleMatrix T1 = mult(*Nr, uelast);
+        DoubleMatrix *LinkMatrix = getLinkMatrix();
+        DoubleMatrix Jac = mult(T1, *LinkMatrix);
 
         // Compute -Jac
         DoubleMatrix T2 = Jac * (-1.0);
@@ -3994,10 +4016,10 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatri
 
         // &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
         // Sauro: mult which takes complex matrix need to be implemented
-        DoubleMatrix T3 = mult(Inv, Nr); // Compute ( - Jac)^-1 . Nr
+        DoubleMatrix T3 = mult(Inv, *Nr); // Compute ( - Jac)^-1 . Nr
 
         // Finally include the dependent set as well.
-        DoubleMatrix T4 = mult(LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
+        DoubleMatrix T4 = mult(*LinkMatrix, T3); // Compute L (iwI - Jac)^-1 . Nr
 		return T4;
     }
 	catch (const Exception& e)
@@ -4094,8 +4116,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledFluxControlCoefficientMatrix()
 	}
 	catch (const Exception& e)
 	{
-		throw SBWApplicationException("Unexpected error from getUnscaledFluxControlCoefficientMatrix()",
-			e.Message());
+		throw SBWApplicationException("Unexpected error from getUnscaledFluxControlCoefficientMatrix()", e.Message());
 	}
 }
 
@@ -4104,32 +4125,30 @@ LIB_LA::DoubleMatrix RoadRunner::getScaledFluxControlCoefficientMatrix()
 {
 	try
 	{
-		if (mModel)
+		if (!mModel)
 		{
-			DoubleMatrix ufcc = getUnscaledFluxControlCoefficientMatrix();
+        	throw SBWApplicationException(emptyModelStr);
+        }
 
-			if (ufcc.RSize() > 0)
-			{
-				mModel->convertToConcentrations();
-				mModel->computeReactionRates(mModel->GetTime(), mModel->y);
-				for (int i = 0; i < ufcc.RSize(); i++)
-					for (int j = 0; j < ufcc.CSize(); j++)
-					{
-						ufcc[i][j] = ufcc[i][j]*mModel->rates[i]/mModel->rates[j];
-					}
-			}
-			return ufcc;
-		}
-		else throw SBWApplicationException(emptyModelStr);
-	}
-	catch (SBWException)
-	{
-		throw;
-	}
+        DoubleMatrix ufcc = getUnscaledFluxControlCoefficientMatrix();
+
+        if (ufcc.RSize() > 0)
+        {
+            mModel->convertToConcentrations();
+            mModel->computeReactionRates(mModel->GetTime(), mModel->y);
+            for (int i = 0; i < ufcc.RSize(); i++)
+            {
+                for (int j = 0; j < ufcc.CSize(); j++)
+                {
+                    ufcc[i][j] = ufcc[i][j]*mModel->rates[i]/mModel->rates[j];
+                }
+            }
+        }
+        return ufcc;
+    }
 	catch (const Exception& e)
 	{
-		throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()",
-			e.Message());
+		throw SBWApplicationException("Unexpected error from getScaledFluxControlCoefficientMatrix()", e.Message());
 	}
 }
 

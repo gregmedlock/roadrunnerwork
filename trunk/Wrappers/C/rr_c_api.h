@@ -43,7 +43,7 @@
  *
  * \section intro_sec Introduction
  *
- * RoadRunner is a SBML compliant high performance and portable simulation engine 
+ * RoadRunner is a SBML compliant high performance and portable simulation engine
  * for systems and synthetic biology. To run a simple SBML model 
  * and generate time series data we would call:
  *
@@ -80,7 +80,7 @@
         
         printf("Output table has %i rows and %i columns\n", output->RSize, output->RCols);
         printResult (output);
-        
+
         freeResult (output);
         freeRRInstance (rrInstance)
 
@@ -509,7 +509,6 @@ C_DECL_SPEC bool rrCallConv getTimeEnd(double& timeEnd);
 */
 C_DECL_SPEC bool rrCallConv getNumPoints (int& numPoints);
 
-
 /*!
  \brief Compute the steady state of the current model
 
@@ -539,7 +538,6 @@ C_DECL_SPEC RRVectorHandle rrCallConv computeSteadyStateValues();
  \ingroup steadystate
 */
 C_DECL_SPEC bool rrCallConv setSteadyStateSelectionList(const char* list);
-
 
 /*!
  \brief Get the selection list for the steady state analysis
@@ -576,6 +574,7 @@ C_DECL_SPEC bool rrCallConv getValue(const char* symbolId, double& value);
 C_DECL_SPEC bool rrCallConv setValue(const char* symbolId, const double& value);
 
 
+//getLocalParameterByIndex
 /*!
  \brief Retrieve in a vector the concentrations for all the floating species
 
@@ -622,7 +621,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv getGlobalParameterValues();
 C_DECL_SPEC bool rrCallConv setBoundarySpeciesByIndex(const int& index, const double& value);
 
 /*!
- \brief Set the concentration for a particular floating species. 
+ \brief Set the concentration for a particular floating species.
 
  \param index The index to the floating species (corresponds to position in getFloatingSpeciesIds())
  \param value The concentration of the species to set
@@ -724,7 +723,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getFullJacobian();
 /*!
  \brief Retreive the reduced Jacobian for the current model
 
- \return Returns null if it fails, otherwise returns the reduced Jacobian matrix 
+ \return Returns null if it fails, otherwise returns the reduced Jacobian matrix
  \ingroup Stoich
 */
 C_DECL_SPEC RRMatrixHandle rrCallConv getReducedJacobian();
@@ -1185,7 +1184,6 @@ C_DECL_SPEC bool rrCallConv getuEE(const char* name, const char* species, double
 C_DECL_SPEC bool rrCallConv getScaledFloatingSpeciesElasticity(const char* reactionName, const char* speciesName, double& value);
 
 
-
 // NOM lib forwarded functions
 /*!
  \brief Returns the number of rules, in the current model
@@ -1262,12 +1260,6 @@ C_DECL_SPEC bool rrCallConv freeText(char* text);
  \ingroup freeRoutines
 */
 C_DECL_SPEC bool rrCallConv freeStringArray(RRStringArrayHandle sl);
-
-/*!
- \brief Free RRListHandle structures
- \ingroup freeRoutines
-*/
-//C_DECL_SPEC bool rrCallConv freeList(RRListHandle theList);
 
 /*!
  \brief Free RRVectorHandle structures
@@ -1467,7 +1459,6 @@ C_DECL_SPEC char* rrCallConv getCCodeHeader (RRCCodeHandle code);
 */
 C_DECL_SPEC char* rrCallConv getCCodeSource (RRCCodeHandle code);
 
-
 /*!
  \brief Retrieve the name of model source file for the current model (if applicable)
 
@@ -1476,12 +1467,16 @@ C_DECL_SPEC char* rrCallConv getCCodeSource (RRCCodeHandle code);
  \return Returns null if fails, otherwise returns a pointer to a string containing the file name
  \ingroup helperRoutines
 */
-C_DECL_SPEC char*             rrCallConv getCSourceFileName();
+C_DECL_SPEC char*            rrCallConv getCSourceFileName();
 
 // List support routines
-C_DECL_SPEC RRListHandle 	  rrCallConv createRRList ();
+C_DECL_SPEC RRListHandle 	 rrCallConv createRRList ();
 
-C_DECL_SPEC void 			  rrCallConv freeRRList (RRListHandle list);
+/*!
+ \brief Free RRListHandle structures
+ \ingroup freeRoutines
+*/
+C_DECL_SPEC void 			 rrCallConv freeRRList (RRListHandle list);
 C_DECL_SPEC RRListItemHandle rrCallConv createIntegerItem (int value);
 C_DECL_SPEC RRListItemHandle rrCallConv createDoubleItem  (double value);
 C_DECL_SPEC RRListItemHandle rrCallConv createStringItem  (char* value);

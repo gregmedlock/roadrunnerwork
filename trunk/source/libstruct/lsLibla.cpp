@@ -70,8 +70,10 @@ vector< LIB_LA::Complex> LibLA::getEigenValues(DoubleMatrix &oMatrix)
         oResult.push_back(complex);
     }
 
-    delete [] eigVals; delete[] A;delete[] work; delete[] rwork;
-
+    delete [] eigVals;
+    delete[] A;
+    delete[] work;
+    delete[] rwork;
     return oResult;
 
 }
