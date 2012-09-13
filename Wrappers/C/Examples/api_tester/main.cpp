@@ -113,10 +113,9 @@ int main(int argc, char* argv[])
 		freeText(text);
 	}
 
-//	   string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
+	   string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 //	   string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-//	   string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
-	 string fileName = modelsPath + "\\ss_threeSpecies.xml";
+//	 string fileName = modelsPath + "\\ss_threeSpecies.xml";
 //	 string fileName = modelsPath + "\\boundary.xml";
 
 
@@ -224,15 +223,15 @@ int main(int argc, char* argv[])
 	printf ("\n");
 
 	double ssVal;
-//    bool success = steadyState(ssVal);
-//    if(!success)
-//    {
-//		cerr<<"Steady State call failed. Error was: "<<getLastError()<<endl;
-//    }
-//    else
-//    {
-//	    cout<<"Compute Steady State: sums of squares: "<<ssVal<<endl;
-//    }
+    bool success = steadyState(ssVal);
+    if(!success)
+    {
+		cerr<<"Steady State call failed. Error was: "<<getLastError()<<endl;
+    }
+    else
+    {
+	    cout<<"Compute Steady State: sums of squares: "<<ssVal<<endl;
+    }
 
     printMatrix("Stoichiometry Matrix", getStoichiometryMatrix());
 

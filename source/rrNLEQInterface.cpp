@@ -9,7 +9,7 @@
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 #include "rrRoadRunner.h"
-//#include "nleq/nleq1.h"
+#include "nleq/nleq1.h"
 #include "rrLogger.h"
 #include "rrUtils.h"
 //---------------------------------------------------------------------------
@@ -50,9 +50,9 @@ relativeTolerance(defaultTolerance)
     }
 
     //Load the NLEQ1 function
-    NLEQ1 = (cNLEQ1) GetFunctionPtr("NLEQ1", mDLLInstance);
+    NLEQ1_IN_DLL = (cNLEQ1) GetFunctionPtr("NLEQ1", mDLLInstance);
 
-    if(!NLEQ1)
+    if(!NLEQ1_IN_DLL)
     {
     	Log(lError)<<"We failed to load the NLEQ function.";
         throw(RRException("Failed to load NLEQ function"));
@@ -158,7 +158,20 @@ double NLEQInterface::solve(const vector<double>& yin)
 
     //NLEQ1(ref n, fcn, null, model->amounts, XScal, ref tmpTol, iopt, ref ierr, ref LIWK, IWK, ref LWRK, RWK);
 
-    NLEQ1(      &n,
+//    NLEQ1(      &n,
+//                &ModelFcn,
+//                NULL,
+//                model->amounts,
+//                XScal,
+//                &tmpTol,
+//                iopt,
+//                &ierr,
+//                &LIWK,
+//                IWK,
+//                &LWRK,
+//                RWK);
+
+    NLEQ1_IN_DLL(      &n,
                 &ModelFcn,
                 NULL,
                 model->amounts,

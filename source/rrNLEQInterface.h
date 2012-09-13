@@ -10,8 +10,7 @@ namespace rr
 {
 
 //int NLEQModelFcn(...);
-typedef void            (*c_ModelFcn)(long&, double*, double*, long&);
-typedef int 	        (*U_fp)();
+typedef void        (*c_ModelFcn)(long&, double*, double*, long&);
 typedef int     	(__stdcall *cNLEQ1)(long int*,
 								c_ModelFcn,
 								c_ModelFcn,
@@ -42,13 +41,13 @@ class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
         static long                     n;
 		string							mNLEQDLLName;
         HINSTANCE						mDLLInstance;
-	    cNLEQ1       					NLEQ1;
+	    cNLEQ1       					NLEQ1_IN_DLL;
                                          //tk made this a non class member, 'standalone' function
                                         //  private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
     public:
         bool                            IsAvailable();
         static ModelFromC*              GetModel();
-        static long						GetN();        
+        static long						GetN();
         int                             defaultMaxInterations;
         int                             maxIterations;
         double                          defaultTolerance;
