@@ -49,14 +49,14 @@ relativeTolerance(defaultTolerance)
     	Log(lError)<<"We failed to load the NLEQ DLL.";
     }
 
-    //Load the NLEQ1 function
-    NLEQ1_IN_DLL = (cNLEQ1) GetFunctionPtr("NLEQ1", mDLLInstance);
-
-    if(!NLEQ1_IN_DLL)
-    {
-    	Log(lError)<<"We failed to load the NLEQ function.";
-        throw(RRException("Failed to load NLEQ function"));
-    }
+//    //Load the NLEQ1 function
+//    NLEQ1_IN_DLL = (cNLEQ1) GetFunctionPtr("NLEQ1", mDLLInstance);
+//
+//    if(!NLEQ1_IN_DLL)
+//    {
+//    	Log(lError)<<"We failed to load the NLEQ function.";
+//        throw(RRException("Failed to load NLEQ function"));
+//    }
     this->model = _model;
 
     n = model->getNumIndependentVariables();
@@ -158,7 +158,20 @@ double NLEQInterface::solve(const vector<double>& yin)
 
     //NLEQ1(ref n, fcn, null, model->amounts, XScal, ref tmpTol, iopt, ref ierr, ref LIWK, IWK, ref LWRK, RWK);
 
-//    NLEQ1(      &n,
+    NLEQ1(      &n,
+                &ModelFcn2,
+                NULL,
+                model->amounts,
+                XScal,
+                &tmpTol,
+                iopt,
+                &ierr,
+                &LIWK,
+                IWK,
+                &LWRK,
+                RWK);
+
+//    NLEQ1_IN_DLL(      &n,
 //                &ModelFcn,
 //                NULL,
 //                model->amounts,
@@ -170,19 +183,6 @@ double NLEQInterface::solve(const vector<double>& yin)
 //                IWK,
 //                &LWRK,
 //                RWK);
-
-    NLEQ1_IN_DLL(      &n,
-                &ModelFcn,
-                NULL,
-                model->amounts,
-                XScal,
-                &tmpTol,
-                iopt,
-                &ierr,
-                &LIWK,
-                IWK,
-                &LWRK,
-                RWK);
 
     if (ierr == 2) // retry
     {
@@ -218,6 +218,53 @@ double NLEQInterface::solve(const vector<double>& yin)
     }
 
     return ComputeSumsOfSquares();
+}
+
+void ModelFcn2(int* nx, double* y, double* fval, int* pErr)
+{
+    ModelFromC* model = NLEQInterface::GetModel();
+    if (model == NULL)
+    {
+        return;
+    }
+
+    try
+    {
+    	int n = NLEQInterface::GetN();
+//        Marshal.Copy(y, model->amounts, 0, n);
+		for(int i = 0; i < n; i++)
+        {
+        	model->amounts[i] = y[i];
+        }
+
+        int size = *model->amountsSize + *model->rateRulesSize;
+        vector<double> dTemp;
+        dTemp.resize(size);// = new double[size];
+//        model->rateRules.CopyTo(dTemp, 0);
+//        model->amounts.CopyTo(dTemp, model->rateRules.Length);
+		for(int i = 0; i < *model->rateRulesSize; i++)
+        {
+        	dTemp[i] = model->rateRules[i];
+        }
+
+        for(int i = *model->rateRulesSize; i < *model->amountsSize + *model->rateRulesSize; i++)
+        {
+        	dTemp[i] = model->amounts[i];
+        }
+
+        model->evalModel(0.0, dTemp);
+
+//        Marshal.Copy(model->dydt, 0, fval, n);
+		for(int i = 0; i < n; i++)
+        {
+        	fval[i] = model->dydt[i];
+        }
+
+        pErr = 0;
+    }
+    catch (Exception)
+    {
+    }
 }
 
 void ModelFcn(long& nx, double* y, double* fval, long& pErr)

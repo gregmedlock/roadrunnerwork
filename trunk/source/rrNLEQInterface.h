@@ -24,6 +24,8 @@ typedef int     	(__stdcall *cNLEQ1)(long int*,
                                 long int*,
                                 double*);
 
+
+void ModelFcn2(int* nx, double* y, double* fval, int* pErr);
 void ModelFcn(long& nx, double* y, double* fval, long& pErr);
 
 class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver

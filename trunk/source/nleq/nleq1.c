@@ -10,17 +10,17 @@ Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 http://www.netlib.org/f2c/libf2c.zip
 */
 
-#ifdef WIN32
-#define DLLEXPORT __declspec(dllexport)
-#define STDCALL  __stdcall
-#else
-#define DLLEXPORT
-#define STDCALL
-#endif
+//#ifdef WIN32
+//#define DLLEXPORT __declspec(dllexport)
+//#define STDCALL  __stdcall
+//#else
+//#define DLLEXPORT
+//#define STDCALL
+//#endif
 
 
-#include "f2c.h"
-
+//#include "f2c_nleq.h"
+#include "nleq1.h"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -31,13 +31,17 @@ static integer c__4 = 4;
 static integer c__5 = 5;
 static integer c__9 = 9;
 
-#pragma comment(linker, "/EXPORT:NLEQ1=_NLEQ1@48")
+//#pragma comment(linker, "/EXPORT:NLEQ1=_NLEQ1@48")
 /* Subroutine */
-DLLEXPORT int STDCALL NLEQ1(integer *n, U_fp fcn, U_fp jac, doublereal *x,
+DLLEXPORT int STDCALL NLEQ1(integer *n, c_NLMFCN fcn, U_fp jac, doublereal *x,
 	doublereal *xscal, doublereal *rtol, integer *iopt, integer *ierr,
 	integer *liwk, integer *iwk, integer *lrwk, doublereal *rwk)
 {
-	/* Initialized data */
+
+//DLLEXPORT int STDCALL NLEQ1(integer *n, U_fp fcn, U_fp jac, doublereal *x,
+//	doublereal *xscal, doublereal *rtol, integer *iopt, integer *ierr,
+//	integer *liwk, integer *iwk, integer *lrwk, doublereal *rwk)
+//{	/* Initialized data */
 
 	static char prodct[8] = "NLEQ1  ";
 
@@ -2451,7 +2455,7 @@ L2:
 		/* L32: */
 	}
 	sumxa = *sumx;
-	dlevxa = sqrt(sumxa / (doublereal) ((real) (*n)));
+	dlevxa = sqrt(sumxa / (doublereal) ((f2c_real) (*n)));
 	conva = *conv;
 	dxanrm = wnorm_(n, &dx[1], &xw[1]);
 	/*         -------------------------------------------------------- */
@@ -2830,7 +2834,7 @@ L34:
 			if (mprtim != 0) {
 				monon_(&c__5);
 			}
-			d__1 = sqrt(*sumx / (doublereal) ((real) (*n)));
+			d__1 = sqrt(*sumx / (doublereal) ((f2c_real) (*n)));
 			n1prv2_(&dlevfn, &d__1, fc, niter, mprmon, lumon, &qmixio, "*", (
 				ftnlen)1);
 			if (mprtim != 0) {
@@ -2892,7 +2896,7 @@ L34:
 				if (mprtim != 0) {
 					monon_(&c__5);
 				}
-				d__1 = sqrt(*sumx / (doublereal) ((real) (*n)));
+				d__1 = sqrt(*sumx / (doublereal) ((f2c_real) (*n)));
 				n1prv2_(&dlevfn, &d__1, fc, niter, mprmon, lumon, &qmixio, 
 					"+", (ftnlen)1);
 				if (mprtim != 0) {
@@ -2959,7 +2963,7 @@ L3109:
 			if (mprtim != 0) {
 				monon_(&c__5);
 			}
-			d__1 = sqrt(*sumx / (doublereal) ((real) (*n)));
+			d__1 = sqrt(*sumx / (doublereal) ((f2c_real) (*n)));
 			i__1 = *niter + 1;
 			n1prv2_(&dlevfn, &d__1, fc, &i__1, mprmon, lumon, &qmixio, "*", (
 				ftnlen)1);
@@ -3024,14 +3028,14 @@ L4299:
 		if (*nonlin != 1) {
 			if (! qordi) {
 				if (*ierr == 0) {
-					aprec = sqrt(*sumx / (doublereal) ((real) (*n)));
+					aprec = sqrt(*sumx / (doublereal) ((f2c_real) (*n)));
 					i__1 = *n;
 					for (l1 = 1; l1 <= i__1; ++l1) {
 						x[l1] += dxq[l1];
 						/* L91: */
 					}
 				} else {
-					aprec = sqrt(sumxa / (doublereal) ((real) (*n)));
+					aprec = sqrt(sumxa / (doublereal) ((f2c_real) (*n)));
 					if (alphaa > 0. && iormon == 3) {
 						i__1 = *n;
 						for (l1 = 1; l1 <= i__1; ++l1) {
@@ -3046,7 +3050,7 @@ L4299:
 						if (mprtim != 0) {
 							monon_(&c__5);
 						}
-						d__1 = sqrt(*sumx / (doublereal) ((real) (*n)));
+						d__1 = sqrt(*sumx / (doublereal) ((f2c_real) (*n)));
 						i__1 = *niter + 1;
 						n1prv2_(&dlevfn, &d__1, fc, &i__1, mprmon, lumon, &
 							qmixio, "*", (ftnlen)1);
@@ -3057,7 +3061,7 @@ L4299:
 						if (mprtim != 0) {
 							monon_(&c__5);
 						}
-						d__1 = sqrt(sumxa / (doublereal) ((real) (*n)));
+						d__1 = sqrt(sumxa / (doublereal) ((f2c_real) (*n)));
 						n1prv1_(&dlevfn, &d__1, fc, niter, new__, mprmon, 
 							lumon, &qmixio);
 						if (mprtim != 0) {
@@ -3072,7 +3076,7 @@ L4299:
 				}
 			} else {
 				/*           IF (QORDI) THEN */
-				aprec = sqrt(sumxa / (doublereal) ((real) (*n)));
+				aprec = sqrt(sumxa / (doublereal) ((f2c_real) (*n)));
 			}
 			if (*mprmon >= 1) {
 				/* L91001: */
@@ -3344,7 +3348,7 @@ L4299:
 	/*     QINISC    Logical = .TRUE.  : Initial scaling */
 	/*                       = .FALSE. : Subsequent scaling */
 	/*     IOPT(50)  Int     Options array passed from NLEQ1 parameter list */
-	/*     LRWK      Int     Length of real workspace */
+	/*     LRWK      Int     Length of f2c_real workspace */
 	/*     RWK(LRWK) Dble    Real workspace (see description above) */
 
 	/* *    Output parameters */
@@ -3650,10 +3654,10 @@ L4299:
 	/*     IWK(LIWK)     Int    Integer Workspace supplied for this routine */
 	/*     LAIWK         Int    Length of integer Workspace used by this */
 	/*                          routine (out) */
-	/*     LRWK          Int    Length of real workspace passed to this */
+	/*     LRWK          Int    Length of f2c_real workspace passed to this */
 	/*                          routine (In) */
 	/*     RWK(LRWK)     Dble   Real Workspace supplied for this routine */
-	/*     LARWK         Int    Length of real Workspace used by this */
+	/*     LARWK         Int    Length of f2c_real Workspace used by this */
 	/*                          routine (out) */
 
 	/* *    Subroutines called:  DGETRF, DGBTRF */
@@ -3858,7 +3862,7 @@ L4299:
 		*dlevf += d__1 * d__1;
 		/* L3: */
 	}
-	*dlevf = sqrt(*dlevf / (doublereal) ((real) (*n)));
+	*dlevf = sqrt(*dlevf / (doublereal) ((f2c_real) (*n)));
 	/*     End of subroutine N1LVLS */
 	return 0;
 } /* n1lvls_ */
@@ -4871,7 +4875,7 @@ L99:
 		io___303.ciunit = *luout;
 		s_wsfe(&io___303);
 		do_fio(&c__1, (char *)&rwk[19], (ftnlen)sizeof(doublereal));
-		d__1 = sqrt(rwk[18] / (doublereal) ((real) (*n)));
+		d__1 = sqrt(rwk[18] / (doublereal) ((f2c_real) (*n)));
 		do_fio(&c__1, (char *)&d__1, (ftnlen)sizeof(doublereal));
 		e_wsfe();
 		if (*mode == 1 && *mprint >= 2) {
@@ -4929,7 +4933,7 @@ L99:
 		io___312.ciunit = *luout;
 		s_wsfe(&io___312);
 		do_fio(&c__1, (char *)&rwk[19], (ftnlen)sizeof(doublereal));
-		d__1 = sqrt(rwk[18] / (doublereal) ((real) (*n)));
+		d__1 = sqrt(rwk[18] / (doublereal) ((f2c_real) (*n)));
 		do_fio(&c__1, (char *)&d__1, (ftnlen)sizeof(doublereal));
 		e_wsfe();
 		if (*mode >= 3) {

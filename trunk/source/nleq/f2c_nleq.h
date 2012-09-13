@@ -169,6 +169,7 @@ typedef struct Namelist Namelist;
 #define F2C_proc_par_types 1
 #ifdef __cplusplus
 typedef int /* Unknown procedure type */ (*U_fp)(...);
+typedef void (*c_NLMFCN)(int*, double*, double*, int*);
 typedef shortint (*J_fp)(...);
 typedef integer (*I_fp)(...);
 typedef f2c_real (*R_fp)(...);
@@ -181,6 +182,7 @@ typedef /* Character */ VOID (*H_fp)(...);
 typedef /* Subroutine */ int (*S_fp)(...);
 #else
 typedef int /* Unknown procedure type */ (*U_fp)();
+typedef void (*c_NLMFCN)(int*, double*, double*, int*);
 typedef shortint (*J_fp)();
 typedef integer (*I_fp)();
 typedef f2c_real (*R_fp)();

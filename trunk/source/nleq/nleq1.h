@@ -1,13 +1,23 @@
 #ifndef nleqH
 #define nleqH
 
-#ifdef WIN32
-#define DLLEXPORT __declspec(dllexport)
-#define STDCALL  __stdcall
-#else
+//How is this library being built?
+//If you are building, or using, this as a static library, then you need to define STATIC_NLEQ
+
+#if defined(STATIC_NLEQ)
 #define DLLEXPORT
-#define STDCALL
-#endif
+#else
+
+//DLL import/export
+#if defined(SHARED_NLEQ)
+#define DLLEXPORT __declspec(dllexport)
+#else
+#define DLLEXPORT __declspec(dllimport)
+#endif	//DLL import/export
+
+#endif //STATIC_NLEQ
+
+#define STDCALL   __stdcall
 
 #ifdef __cplusplus
 extern "C"
@@ -16,19 +26,16 @@ extern "C"
 
 #include "f2c_nleq.h"
 
-int NLEQ1(
-		integer *n,
-        U_fp fcn,
-        U_fp jac,
-        doublereal *x,
-		doublereal *xscal,
-        doublereal *rtol,
-        integer *iopt,
-        integer *ierr,
-  		integer *liwk,
-        integer *iwk,
-        integer *lrwk,
-        doublereal *rwk);
+DLLEXPORT int STDCALL NLEQ1
+(
+integer *n, 		c_NLMFCN fcn,
+U_fp jac, 			doublereal *x,
+doublereal *xscal, 	doublereal *rtol,
+integer *iopt, 		integer *ierr,
+integer *liwk, 		integer *iwk,
+integer *lrwk, 		doublereal *rwk
+);
+
 #ifdef __cplusplus
 }
 #endif
