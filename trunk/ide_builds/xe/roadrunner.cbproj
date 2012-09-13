@@ -28,7 +28,7 @@
 			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<FinalOutputDir>$(RR_DEBUG_INSTALL)\bin\</FinalOutputDir>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
-			<Defines>EXPORT_RR;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;LIBSTRUCT_STATIC;$(Defines)</Defines>
+			<Defines>EXPORT_RR;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;LIBSTRUCT_STATIC;WIN32;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>
@@ -65,7 +65,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;WIN32;PUGI_STATIC;$(Defines)</Defines>
+			<Defines>_DEBUG;PUGI_STATIC;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
