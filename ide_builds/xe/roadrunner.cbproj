@@ -28,7 +28,7 @@
 			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<FinalOutputDir>$(RR_DEBUG_INSTALL)\bin\</FinalOutputDir>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
-			<Defines>EXPORT_RR;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;LIBSTRUCT_STATIC;WIN32;$(Defines)</Defines>
+			<Defines>EXPORT_RR;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;LIBSTRUCT_STATIC;WIN32;STATIC_NLEQ;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>
@@ -39,7 +39,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\ThirdParty\pugi\src\;..\..\source\nleq\;..\..\source\;..\..\source\libstruct\;..\..\source\mtrand\;$(RR_DEBUG_INSTALL)\include;$(RR_ROOT)\trunk\ThirdParty\clapack\3.2.1\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>R:\rrInstalls\xe\full\lib\;..\..\ThirdParty\pugi\src\;R:\rrBuilds\xe\ThirdParty\lib\;R:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;R:\rrBuilds\xe\clapack\SRC\;..\..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\nleq\;C:\rrBuilds\xe\clapack\SRC\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;R:\rrInstalls\xe\lib\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrInstal..\lib\;C:\rrBuil..\clapack\SRC\;C:\rrBuil..\clapack\F2CLIBS\libf2c\;C:\rrBuil..\clapack\BLAS\SRC\;..\..\buil..\clapack\F2CLIBS\libf2c\;..\..\buil..\clapack\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\buil..\clapack\BLAS\SRC\;..\..\source\libstruct\;..\..\source\mtrand\;..\..\source\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\;..\..\instal..\lib\;..\..\source\;..\..\source\;..\..\source\Util\;..\..\source\Logger\;..\..\source\libstruct\;..\..\source\Util\mtrand\;..\..\source\;..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>R:\rrInstalls\xe\full-debug\lib\;R:\rrInstalls\xe\full\lib\;..\..\ThirdParty\pugi\src\;R:\rrBuilds\xe\ThirdParty\lib\;R:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;R:\rrBuilds\xe\clapack\SRC\;..\..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\nleq\;C:\rrBuilds\xe\clapack\SRC\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;R:\rrInstalls\xe\lib\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrInstal..\lib\;C:\rrBuil..\clapack\SRC\;C:\rrBuil..\clapack\F2CLIBS\libf2c\;C:\rrBuil..\clapack\BLAS\SRC\;..\..\buil..\clapack\F2CLIBS\libf2c\;..\..\buil..\clapack\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\buil..\clapack\BLAS\SRC\;..\..\source\libstruct\;..\..\source\mtrand\;..\..\source\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\;..\..\instal..\lib\;..\..\source\;..\..\source\;..\..\source\Util\;..\..\source\Logger\;..\..\source\libstruct\;..\..\source\Util\mtrand\;..\..\source\;..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -339,6 +339,10 @@
 			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\libf2c.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>66</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\nleq-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>74</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="R:\rrInstalls\xe\full\lib\pugi-static.lib">
 				<IgnorePath>true</IgnorePath>

@@ -113,9 +113,9 @@ int main(int argc, char* argv[])
 		freeText(text);
 	}
 
-	   string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
+//	   string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 //	   string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-//	 string fileName = modelsPath + "\\ss_threeSpecies.xml";
+	 string fileName = modelsPath + "\\ss_threeSpecies.xml";
 //	 string fileName = modelsPath + "\\boundary.xml";
 
 
