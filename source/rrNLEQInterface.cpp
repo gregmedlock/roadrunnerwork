@@ -49,14 +49,14 @@ relativeTolerance(defaultTolerance)
     	Log(lError)<<"We failed to load the NLEQ DLL.";
     }
 
-//    //Load the NLEQ1 function
-//    NLEQ1_IN_DLL = (cNLEQ1) GetFunctionPtr("NLEQ1", mDLLInstance);
-//
-//    if(!NLEQ1_IN_DLL)
-//    {
-//    	Log(lError)<<"We failed to load the NLEQ function.";
-//        throw(RRException("Failed to load NLEQ function"));
-//    }
+    //Load the NLEQ1 function
+    NLEQ1_IN_DLL = (cNLEQ1) GetFunctionPtr("NLEQ1", mDLLInstance);
+
+    if(!NLEQ1_IN_DLL)
+    {
+    	Log(lError)<<"We failed to load the NLEQ function.";
+        throw(RRException("Failed to load NLEQ function"));
+    }
     this->model = _model;
 
     n = model->getNumIndependentVariables();
@@ -158,21 +158,8 @@ double NLEQInterface::solve(const vector<double>& yin)
 
     //NLEQ1(ref n, fcn, null, model->amounts, XScal, ref tmpTol, iopt, ref ierr, ref LIWK, IWK, ref LWRK, RWK);
 
-    NLEQ1(      &n,
-                &ModelFcn2,
-                NULL,
-                model->amounts,
-                XScal,
-                &tmpTol,
-                iopt,
-                &ierr,
-                &LIWK,
-                IWK,
-                &LWRK,
-                RWK);
-
-//    NLEQ1_IN_DLL(      &n,
-//                &ModelFcn,
+//    NLEQ1(      &n,
+//                &ModelFcn2,
 //                NULL,
 //                model->amounts,
 //                XScal,
@@ -183,6 +170,19 @@ double NLEQInterface::solve(const vector<double>& yin)
 //                IWK,
 //                &LWRK,
 //                RWK);
+
+    NLEQ1_IN_DLL(      &n,
+                &ModelFcn,
+                NULL,
+                model->amounts,
+                XScal,
+                &tmpTol,
+                iopt,
+                &ierr,
+                &LIWK,
+                IWK,
+                &LWRK,
+                RWK);
 
     if (ierr == 2) // retry
     {
