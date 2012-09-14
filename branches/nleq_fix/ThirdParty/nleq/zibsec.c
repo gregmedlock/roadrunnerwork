@@ -10,9 +10,9 @@
 		http://www.netlib.org/f2c/libf2c.zip
 */
 
-#include "f2c.h"
+#include "f2c_nleq.h"
 
-/* Subroutine */ int zibsec_(real *cptim, integer *ifail)
+/* Subroutine */ int zibsec_(f2c_real *cptim, integer *ifail)
 {
 
 /* ********************************************************************* */

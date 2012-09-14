@@ -1,9 +1,13 @@
 /* f2c.h  --  Standard Fortran to C header file */
 
-/**  barf  [ba:rf]  2.  "He suggested using FORTRAN, and everybody barfed."
+/* This header file was modified by Totte Karlsson, mainly to avoid some compiler clashes.
+The follwoing notable changes were made:
+real -> f2c_real
+//complex -> f2c_complex
 
-	- From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
-
+typedef void (*c_NLMFCN)(int*, double*, double*, int*); 
+was added to ease NLEQ integration
+*/
 #ifndef F2CNLEQ_INCLUDE
 #define F2CNLEQ_INCLUDE
 

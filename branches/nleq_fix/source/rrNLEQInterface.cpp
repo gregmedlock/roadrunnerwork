@@ -43,12 +43,12 @@ defaultTolerance(1.e-4),
 relativeTolerance(defaultTolerance)
 {
 	//First load the nleq DLL and assign nleq function to function pointer
-    mDLLInstance = LoadDLL(mNLEQDLLName);
-    if(!mDLLInstance)
-    {
-    	Log(lError)<<"We failed to load the NLEQ DLL.";
-    }
-
+//    mDLLInstance = LoadDLL(mNLEQDLLName);
+//    if(!mDLLInstance)
+//    {
+//    	Log(lError)<<"We failed to load the NLEQ DLL.";
+//    }
+//
 //    //Load the NLEQ1 function
 //    NLEQ1_IN_DLL = (cNLEQ1) GetFunctionPtr("NLEQ1", mDLLInstance);
 //

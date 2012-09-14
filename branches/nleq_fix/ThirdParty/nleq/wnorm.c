@@ -10,7 +10,7 @@
 		http://www.netlib.org/f2c/libf2c.zip
 */
 
-#include "f2c.h"
+#include "f2c_nleq.h"
 
 doublereal wnorm_(integer *n, doublereal *z__, doublereal *xw)
 {
@@ -62,7 +62,7 @@ doublereal wnorm_(integer *n, doublereal *z__, doublereal *xw)
 	s += d__1 * d__1;
 /* L10: */
     }
-    ret_val = sqrt(s / (doublereal) ((real) (*n)));
+    ret_val = sqrt(s / (doublereal) ((f2c_real) (*n)));
 /*     End of function WNORM */
     return ret_val;
 } /* wnorm_ */
