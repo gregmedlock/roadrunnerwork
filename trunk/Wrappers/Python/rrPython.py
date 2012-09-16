@@ -441,7 +441,7 @@ handle.setSteadyStateSelectionList.restype = c_bool
 #
 #\return Returns a value that is set during the call that indicates how close the solution is to the steady state. The smaller the value, the better.
 def steadyState():
-    value = c_int()
+    value = c_double()
     if handle.steadyState(byref(value)) == True:
         return value.value
     else:
