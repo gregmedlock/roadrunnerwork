@@ -464,7 +464,8 @@ def computeSteadyStateValues():
 #
 #\return Returns True if successful
 def setSteadyStateSelectionList(list):
-    return handle.setSteadyStateSelectionList(list)
+    value = c_char_p(list)
+    return handle.setSteadyStateSelectionList(byref(value))
 
 ##\brief Get the selection list for the steady state analysis
 #\return Returns False if it fails, otherwise it returns a list of strings representing symbols in the selection list
@@ -825,8 +826,9 @@ def getNumberOfReactions():
 ##\brief Returns the reaction rate by index
 #\return
 def getReactionRate(index):
-    value = c_int(index)
-    if handle.getReactionRate(byref(value)) == True:
+    ivalue = c_int(index)
+    value = c_double()
+    if handle.getReactionRate(byref(ivalue), byref(value)) == True:
         return value.value
     else:
         raise RuntimeError('Index out of Range')                                 #test this
