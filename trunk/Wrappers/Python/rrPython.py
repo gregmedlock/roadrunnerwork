@@ -127,11 +127,11 @@ def setTempFolder(folder):
 def getTempFolder():
     return handle.getTempFolder()
 
-##\brief Retrieve a pointer to the C code structure, RRCCode
+##\brief Retrieve a handle for the C code structure, RRCCode
 #
 #When cRoadRunner is run in C generation mode its uses a temporary folder to store the
 #generate C source code. This method can be used to obtain the header and main source
-#code after a model has been loaded.
+#code after a model has been loaded by using the helper routines (getCCodeSource and getCCodeHeader())
 #
 #\return Returns null if it fails, otherwise it returns a pointer to the RRCode structure
 def getCCode():
@@ -1371,9 +1371,26 @@ def getResultElement():
 def getResultColumnLabel():
     return handle.getResultColumnLabel()
 
-def getCCodeHeader():
-    return handle.getCCodeHeader()
 
+##\brief Retrieve the header file code for the current model (if applicable)
+#
+#
+#Example:   CCode = rrPython.getCCode()
+#           header = rrPython.getCCodeHeader(CCode)
+#
+#\param code A handle for a string that stores the C code
+#\return Returns the header for the C code handle used as an argument
+def getCCodeHeader(code):
+    return handle.getCCodeHeader(code)
+
+##\brief Retrieve the source file code for the current model (if applicable)
+#
+#
+#Example:   CCode = rrPython.getCCode()
+#           header = rrPython.getCCodeSource(CCode)
+#
+#\param code A handle for a string that stores the C code
+#\return Returns the source for the C code handle used as an argument
 def getCCodeSource():
     return handle.getCCodeSource()
 
