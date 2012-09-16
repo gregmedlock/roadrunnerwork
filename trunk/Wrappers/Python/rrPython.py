@@ -175,7 +175,7 @@ def setLogLevel(lvl):
 #"ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1",
 #"DEBUG", "INFO", "WARNING", "ERROR"
 #
-#Example: str = getLogLevel ()
+#Example: str = rrPython.getLogLevel ()
 #\return Returns False is it fails else returns the logging string
 def getLogLevel():
     return handle.getLogLevel()
@@ -187,7 +187,7 @@ def getLogFileName():
 
 ##\brief Check if there is an error string to retrieve
 #
-#Example: status = hasError ()
+#Example: status = rrPython.hasError()
 #
 #\return status - Returns true if there is an error waiting to be retrieved
 def hasError():
@@ -195,7 +195,7 @@ def hasError():
 
 ##\brief Returns the last error
 #
-#Example: str = getLastError
+#Example: str = rrPython.getLastError()
 #
 #\return Returns false if it fails, otherwise returns the error string
 def getLastError():
