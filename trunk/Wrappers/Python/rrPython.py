@@ -885,8 +885,9 @@ def getRateOfChangeIds():
 #
 #\return Returns False if it fails, otherwise returns the rate of change.
 def getRateOfChange(index):
-    value = c_int(index)
-    if handle.getRateOfChange(byref(value)) == True:
+    ivalue = c_int(index)
+    value = c_double()
+    if handle.getRateOfChange(byref(ivalue), byref(value)) == True:
         return value.value
     else:
         raise RuntimeError("Index out of range")
