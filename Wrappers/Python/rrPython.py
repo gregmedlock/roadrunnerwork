@@ -738,7 +738,7 @@ def getEigenValues():
 ##\brief Retreive the stoichiometry matrix for the current model
 #\return Returns the stoichiometry matrix
 def getStoichiometryMatrix():
-    values = handle.getStoichimetryMatrix()
+    values = handle.getStoichiometryMatrix()
     result = handle.matrixToString(values)
     handle.freeMatrix(values)
     return result
