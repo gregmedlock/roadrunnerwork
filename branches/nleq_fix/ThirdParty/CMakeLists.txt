@@ -75,7 +75,7 @@ if(${MINGW})
 SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} -std=gnu++0x")
 endif()
 
-if(${CODEGEARC})
+if(${BORLAND})
 add_definitions(
              -w-8012                     #Comparing signed /unsigned
              -w-8057                     #Parameter never used
