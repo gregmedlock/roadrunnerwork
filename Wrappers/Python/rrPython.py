@@ -9,12 +9,9 @@ os.chdir(os.path.dirname(__file__))
 rrInstallFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'bin'))
 os.environ['PATH'] = rrInstallFolder + ';' + "c:\\Python27" + ';' + os.environ['PATH']
 handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
-#The path shown below is used to insert screenshots for documentation.
-
 
 ##\mainpage notitle
 #\section Introduction
-#IMAGE_PATH = "C:/cRoadRunner/documents/python_api/html"
 #RoadRunner is a high performance and portable simulation engine for systems and synthetic biology. To run a simple SBML model and generate time series data we would call:
 #
 #@code
@@ -31,13 +28,13 @@ handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
 #
 #Open the control panel and click on 'System'
 #The following will appear; click on 'Advanced System Settings'
-#\image html C:/cRoadRunner/documents/python_api/html/AdvancedSystem.jpg
+#\image html http://i.imgur.com/bvn9c.jpg
 #
 #Click on the 'Environment Variables' button highlighted in the image below
-#\image html C:/cRoadRunner/documents/python_api/html/environmentbutton.jpg
+#\image html http://i.imgur.com/jBCfn.jpg
 #
 #Highlight the python path entry and click edit. The prompt shown below will appear. Enter the location of the python folder within the install folder with a semicolon between any other entries.
-#\image html C:/cRoadRunner/documents/python_api/html/PythonPath.jpg
+#\image html http://i.imgur.com/oLC32.jpg
 
 ##\defgroup initialization Library initialization and termination methods
 # \brief Initialize library and terminate library instance
