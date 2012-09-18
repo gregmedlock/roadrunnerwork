@@ -10,7 +10,7 @@
 		http://www.netlib.org/f2c/libf2c.zip
 */
 
-#include "f2c.h"
+#include "f2c_nleq.h"
 
 /* Table of constant values */
 
@@ -21,8 +21,8 @@ static doublereal c_b19 = -1.;
 static integer c__65 = 65;
 static doublereal c_b358 = 0.;
 static integer c__0 = 0;
-static real c_b521 = 0.f;
-static real c_b522 = 1.f;
+static f2c_real c_b521 = 0.f;
+static f2c_real c_b522 = 1.f;
 
 /* Subroutine */ int dgetrf_(integer *m, integer *n, doublereal *a, integer *
 	lda, integer *ipiv, integer *info)
@@ -5010,7 +5010,7 @@ integer ilaenv_(integer *ispec, char *name__, char *opts, integer *n1,
     static logical cname;
     static integer nbmin;
     static logical sname;
-    extern integer ieeeck_(integer *, real *, real *);
+    extern integer ieeeck_(integer *, f2c_real *, f2c_real *);
     static char subnam[6];
     extern integer iparmq_(integer *, char *, char *, integer *, integer *, 
 	    integer *, integer *, ftnlen, ftnlen);
@@ -5561,7 +5561,7 @@ L100:
 
 /*     ISPEC = 6:  crossover point for SVD (used by xGELSS and xGESVD) */
 
-    ret_val = (integer) ((real) min(*n1,*n2) * 1.6f);
+    ret_val = (integer) ((f2c_real) min(*n1,*n2) * 1.6f);
     return ret_val;
 
 L110:
@@ -5621,13 +5621,13 @@ L160:
 
 } /* ilaenv_ */
 
-integer ieeeck_(integer *ispec, real *zero, real *one)
+integer ieeeck_(integer *ispec, f2c_real *zero, f2c_real *one)
 {
     /* System generated locals */
     integer ret_val;
 
     /* Local variables */
-    static real nan1, nan2, nan3, nan4, nan5, nan6, neginf, posinf, negzro, 
+    static f2c_real nan1, nan2, nan3, nan4, nan5, nan6, neginf, posinf, negzro, 
 	    newzro;
 
 
@@ -5779,11 +5779,11 @@ integer iparmq_(integer *ispec, char *name__, char *opts, integer *n, integer
 {
     /* System generated locals */
     integer ret_val, i__1, i__2;
-    real r__1;
+    f2c_real r__1;
 
     /* Builtin functions */
     double log(doublereal);
-    integer i_nint(real *);
+    integer i_nint(f2c_real *);
 
     /* Local variables */
     static integer nh, ns;
@@ -5963,7 +5963,7 @@ integer iparmq_(integer *ispec, char *name__, char *opts, integer *n, integer
 	}
 	if (nh >= 150) {
 /* Computing MAX */
-	    r__1 = log((real) nh) / log(2.f);
+	    r__1 = log((f2c_real) nh) / log(2.f);
 	    i__1 = 10, i__2 = nh / i_nint(&r__1);
 	    ns = max(i__1,i__2);
 	}

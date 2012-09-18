@@ -10,7 +10,7 @@
 		http://www.netlib.org/f2c/libf2c.zip
 */
 
-#include "f2c.h"
+#include "f2c_nleq.h"
 
 /* Table of constant values */
 
@@ -24,7 +24,7 @@ static integer c__4 = 4;
 {
     /* Initialized data */
 
-    static real cptim = 0.f;
+    static f2c_real cptim = 0.f;
     static integer moni = 6;
     static integer info = 1;
     static integer ioncnt = -1;
@@ -66,12 +66,12 @@ static integer c__4 = 4;
 
     /* Local variables */
     static integer i__;
-    static real pc1[26], pc2[26], sec[26];
+    static f2c_real pc1[26], pc2[26], sec[26];
     static logical qon[26];
-    static real sum, sum0, asec[26];
+    static f2c_real sum, sum0, asec[26];
     static char name__[17*26], text[30];
     static integer ifail, ncall[26], indact[20];
-    extern /* Subroutine */ int zibsec_(real *, integer *);
+    extern /* Subroutine */ int zibsec_(f2c_real *, integer *);
     static integer maxind;
 
     /* Fortran I/O blocks */
@@ -354,7 +354,7 @@ L_monon:
 	s_wsle(&io___17);
 	do_lio(&c__9, &c__1, " Enter ", (ftnlen)7);
 	do_lio(&c__9, &c__1, name__ + *indx * 17, (ftnlen)17);
-	do_lio(&c__4, &c__1, (char *)&sec[*indx], (ftnlen)sizeof(real));
+	do_lio(&c__4, &c__1, (char *)&sec[*indx], (ftnlen)sizeof(f2c_real));
 	e_wsle();
     }
 
@@ -401,7 +401,7 @@ L_monoff:
 	s_wsle(&io___18);
 	do_lio(&c__9, &c__1, " Exit ", (ftnlen)6);
 	do_lio(&c__9, &c__1, name__ + *indx * 17, (ftnlen)17);
-	do_lio(&c__4, &c__1, (char *)&sec[*indx], (ftnlen)sizeof(real));
+	do_lio(&c__4, &c__1, (char *)&sec[*indx], (ftnlen)sizeof(f2c_real));
 	e_wsle();
     }
 
@@ -457,13 +457,13 @@ L_monprt:
     for (i__ = 1; i__ <= i__1; ++i__) {
 	sum += sec[i__];
 	if (ncall[i__] > 0) {
-	    asec[i__] = sec[i__] / (real) ncall[i__];
+	    asec[i__] = sec[i__] / (f2c_real) ncall[i__];
 	}
 /* L1030: */
     }
     sum0 = sum + sec[0];
     if (ncall[0] > 0) {
-	asec[0] = sec[0] / (real) ncall[0];
+	asec[0] = sec[0] / (f2c_real) ncall[0];
     }
 
     i__1 = maxind;
@@ -519,9 +519,9 @@ L_monprt:
     io___32.ciunit = moni;
     s_wsfe(&io___32);
     do_fio(&c__1, "Total time:", (ftnlen)11);
-    do_fio(&c__1, (char *)&sum0, (ftnlen)sizeof(real));
+    do_fio(&c__1, (char *)&sum0, (ftnlen)sizeof(f2c_real));
     do_fio(&c__1, "Sum of parts:", (ftnlen)13);
-    do_fio(&c__1, (char *)&sum, (ftnlen)sizeof(real));
+    do_fio(&c__1, (char *)&sum, (ftnlen)sizeof(f2c_real));
     e_wsfe();
 
     io___33.ciunit = moni;
@@ -536,9 +536,9 @@ L_monprt:
     s_wsfe(&io___35);
     do_fio(&c__1, name__, (ftnlen)17);
     do_fio(&c__1, (char *)&ncall[0], (ftnlen)sizeof(integer));
-    do_fio(&c__1, (char *)&sec[0], (ftnlen)sizeof(real));
-    do_fio(&c__1, (char *)&asec[0], (ftnlen)sizeof(real));
-    do_fio(&c__1, (char *)&pc1[0], (ftnlen)sizeof(real));
+    do_fio(&c__1, (char *)&sec[0], (ftnlen)sizeof(f2c_real));
+    do_fio(&c__1, (char *)&asec[0], (ftnlen)sizeof(f2c_real));
+    do_fio(&c__1, (char *)&pc1[0], (ftnlen)sizeof(f2c_real));
     e_wsfe();
 
     i__1 = maxind;
@@ -547,10 +547,10 @@ L_monprt:
 	s_wsfe(&io___36);
 	do_fio(&c__1, name__ + i__ * 17, (ftnlen)17);
 	do_fio(&c__1, (char *)&ncall[i__], (ftnlen)sizeof(integer));
-	do_fio(&c__1, (char *)&sec[i__], (ftnlen)sizeof(real));
-	do_fio(&c__1, (char *)&asec[i__], (ftnlen)sizeof(real));
-	do_fio(&c__1, (char *)&pc1[i__], (ftnlen)sizeof(real));
-	do_fio(&c__1, (char *)&pc2[i__], (ftnlen)sizeof(real));
+	do_fio(&c__1, (char *)&sec[i__], (ftnlen)sizeof(f2c_real));
+	do_fio(&c__1, (char *)&asec[i__], (ftnlen)sizeof(f2c_real));
+	do_fio(&c__1, (char *)&pc1[i__], (ftnlen)sizeof(f2c_real));
+	do_fio(&c__1, (char *)&pc2[i__], (ftnlen)sizeof(f2c_real));
 	e_wsfe();
 /* L1050: */
     }

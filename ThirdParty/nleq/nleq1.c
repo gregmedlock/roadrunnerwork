@@ -10,17 +10,7 @@ Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 http://www.netlib.org/f2c/libf2c.zip
 */
 
-#ifdef WIN32
-#define DLLEXPORT __declspec(dllexport)
-#define STDCALL  __stdcall
-#else
-#define DLLEXPORT
-#define STDCALL
-#endif
-
-
-#include "f2c_nleq.h"
-/*#include "nleq1.h"*/
+#include "nleq1.h"
 /* Table of constant values */
 
 static integer c__1 = 1;
@@ -31,7 +21,7 @@ static integer c__4 = 4;
 static integer c__5 = 5;
 static integer c__9 = 9;
 
-#pragma comment(linker, "/EXPORT:NLEQ1=_NLEQ1@48")
+//#pragma comment(linker, "/EXPORT:NLEQ1=_NLEQ1@48")
 /* Subroutine */
 DLLEXPORT int STDCALL NLEQ1(integer *n, c_NLMFCN fcn, U_fp jac, doublereal *x,
 	doublereal *xscal, doublereal *rtol, integer *iopt, integer *ierr,

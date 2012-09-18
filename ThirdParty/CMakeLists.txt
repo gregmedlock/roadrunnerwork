@@ -80,6 +80,7 @@ add_definitions(
              -w-8012                     #Comparing signed /unsigned
              -w-8057                     #Parameter never used
              -w-8004                     #'var' is assigned a value that is never used
+             -W8123                     #Path not found
         )
 endif()
 
@@ -102,6 +103,7 @@ endif()
 add_subdirectory(clapack/3.2.1)
 add_subdirectory(sundials)
 add_subdirectory(pugi)
+add_subdirectory(nleq)
 
 #==== SYSTEM FILES (COMPILER SPECIFICS) =================================================
 if(${BORLAND})

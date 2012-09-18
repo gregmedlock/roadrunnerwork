@@ -22,7 +22,6 @@ target_link_libraries (${target} libsbml)
 #target_link_libraries (${target} blas)
 #target_link_libraries (${target} libf2c)
 
-set_property(DIRECTORY PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ${exe_path}/${target}.tds)
 
 install (TARGETS ${target} 		
         DESTINATION bin 
