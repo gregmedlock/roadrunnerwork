@@ -10,16 +10,6 @@ Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
 http://www.netlib.org/f2c/libf2c.zip
 */
 
-//#ifdef WIN32
-//#define DLLEXPORT __declspec(dllexport)
-//#define STDCALL  __stdcall
-//#else
-//#define DLLEXPORT
-//#define STDCALL
-//#endif
-
-
-//#include "f2c_nleq.h"
 #include "nleq1.h"
 /* Table of constant values */
 
