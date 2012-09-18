@@ -22,8 +22,7 @@ handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
 #
 #rrPython.simulate()
 #@endcode
-
-##\mainpage notitle
+#
 #\section Setup
 #In order to import the python module, the python folder within the roadRunner install folder must be in the system's python path. To make sure it is, do the following in Windows:
 #
