@@ -24,16 +24,16 @@ handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
 #@endcode
 
 ##\defgroup initialization Library initialization and termination methods
-# \brief Initailize library and terminate linbrary instance
+# \brief Initialize library and terminate library instance
 #
 # \defgroup loadsave Read and Write models
 # \brief Read and write models to files or strings. Support for SBML formats.
 #
 # \defgroup utility Utility functions
-# \brief Various miscellaneous routines that return useful inforamtion about the library
+# \brief Various miscellaneous routines that return useful information about the library
 #
 # \defgroup errorfunctions Error handling functions
-# \brief Error handlining routines
+# \brief Error handling routines
 #
 # \defgroup state Current state of system
 # \brief Compute derivatives, fluxes, and other values of the system at the current state
