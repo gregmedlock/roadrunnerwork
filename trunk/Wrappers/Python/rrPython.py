@@ -729,8 +729,8 @@ def getReducedJacobian():
 
 ##\brief Retreive the eigenvalue matrix for the current model
 #\return Returns a matrix of eigenvalues. The first column will contain the real values and te second column will contain the imaginary values.
-def getEigenvalues():
-    values = handle.getEigenvalues()
+def getEigenValues():
+    values = handle.getEigenValues()
     result = handle.matrixToString(values)
     handle.freeMatrix(values)
     return result
