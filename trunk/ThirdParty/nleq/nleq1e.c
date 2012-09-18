@@ -10,7 +10,7 @@
 		http://www.netlib.org/f2c/libf2c.zip
 */
 
-#include "f2c.h"
+#include "f2c_nleq.h"
 
 /* Table of constant values */
 
@@ -40,11 +40,11 @@ static integer c__3210 = 3210;
     static integer iwk[100], niw;
     static doublereal rwk[3210];
     static integer nrw, iopt[50];
-    extern /* Subroutine */ int nleq1_(integer *, U_fp, real *, doublereal *, 
+    extern /* Subroutine */ int nleq1_(integer *, U_fp, f2c_real *, doublereal *, 
 	    doublereal *, doublereal *, integer *, integer *, integer *, 
 	    integer *, integer *, doublereal *);
     static doublereal xscal[50];
-    static real dummy;
+    static f2c_real dummy;
 
     /* Fortran I/O blocks */
     static cilist io___5 = { 0, 6, 0, fmt_1001, 0 };

@@ -111,7 +111,7 @@ int main(int argc, char * argv[])
         rr->simulate();
         sw.Stop();
         Log(lInfo)<<"It took "<< sw.GetTime() << " ms";
-        if(doContinue && !rr->GetSimulationResult().GetNrOfRows() > 1)
+        if(doContinue && (rr->GetSimulationResult().GetNrOfRows() < 1))
         {
             Log(lError)<<"Failed getting a result from simulation";
             throw("Failed running simulation");

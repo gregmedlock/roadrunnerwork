@@ -91,6 +91,7 @@ set_property(TARGET ${target}
                             LIBLAX_STATIC 
                             LIBSTRUCT_STATIC
                             PUGI_STATIC
+                            STATIC_NLEQ
                             ) 
 
 #libraries to link with our shared lib
@@ -110,6 +111,7 @@ target_link_libraries (${target}
                                     lapack
                                     libf2c
                                     pugi-static
+                                    nleq-static
                       )
 endif()
 
@@ -124,6 +126,7 @@ set_property(TARGET ${target}-static
                             LIBLAX_STATIC 
                             LIBSTRUCT_STATIC
 							PUGI_STATIC
+                            STATIC_NLEQ
                             ) 
 
 if(${MINGW})
@@ -137,6 +140,7 @@ target_link_libraries (${target}-static
                            lapack
                            #libf2c
 						   pugi-static
+						   nleq-static
                       )
 endif()
 
@@ -148,8 +152,6 @@ else()
 target_link_libraries (${target}        libxml2)
 target_link_libraries (${target}-static libxml2)
 endif()
-
-add_subdirectory(nleq)
 
 if(${INSTALL_CXX_API})
 #--- INSTALL STUFF

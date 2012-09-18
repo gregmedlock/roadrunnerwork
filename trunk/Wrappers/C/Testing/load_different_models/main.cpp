@@ -40,7 +40,7 @@ int main()
 	}
 
     string fileName;
-	fileName = "..\\Models\\ss_feedback.xml";
+	fileName = "..\\Models\\feedback.xml";
 
 	string sbml = GetFileContent(fileName.c_str());
 
@@ -49,6 +49,7 @@ int main()
     {
     	cerr<<"Failed loading SBML.\n";
         cerr<<"Last error: "<<getLastError()<<endl;
+        exit(0);
     }
 
     setSelectionList("time,S1 Time,S2");
