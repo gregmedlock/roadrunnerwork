@@ -73,16 +73,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="Introduction"></a>
 Introduction</h1>
-<p>RoadRunner is a high performance and portable simulation engine for systems and synthetic biology. To run a simple SBML model and generate time series data we would call:</p>
+<p>IMAGE_PATH = "C:/cRoadRunner/documents/python_api/html" RoadRunner is a high performance and portable simulation engine for systems and synthetic biology. To run a simple SBML model and generate time series data we would call:</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;import rrPython</div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<a class="code" href="group__loadsave.html#ga24c4fd4aff8e2fe1f2b66036007bcae2" title="Loads SBML model from a file.">rrPython.loadSBMLFromFile</a>(<span class="stringliteral">&#39;C:\\Models\\mymodel.xml&#39;</span>)</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<a class="code" href="group__simulation.html#ga70520048b3fd0bc99b4340ac089c37ff" title="Carry out a time-course simulation, use setTimeStart etc to set characteristics.">rrPython.simulate</a>()</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --><h1><a class="anchor" id="Setup"></a>
+Setup</h1>
+<p>In order to import the python module, the python folder within the roadRunner install folder must be in the system's python path. To make sure it is, do the following in Windows:</p>
+<p>Open the control panel and click on 'System' The following will appear; click on 'Advanced System Settings' </p>
+<div class="image">
+<img src="C:/cRoadRunner/documents/python_api/html/AdvancedSystem.jpg" alt="AdvancedSystem.jpg"/>
+</div>
+<p>Click on the 'Environment Variables' button highlighted in the image below </p>
+<div class="image">
+<img src="C:/cRoadRunner/documents/python_api/html/environmentbutton.jpg" alt="environmentbutton.jpg"/>
+</div>
+<p>Highlight the python path entry and click edit. The prompt shown below will appear. Enter the location of the python folder within the install folder with a semicolon between any other entries. </p>
+<div class="image">
+<img src="C:/cRoadRunner/documents/python_api/html/PythonPath.jpg" alt="PythonPath.jpg"/>
+</div>
+ </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 17 2012 17:52:34 for rrPython by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 17 2012 19:44:42 for rrPython by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.2
 </small></address>
