@@ -23,6 +23,20 @@ handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
 #rrPython.simulate()
 #@endcode
 
+##\mainpage notitle
+#\section Setup
+#In order to import the python module, the python folder within the roadRunner install folder must be in the system's python path. To make sure it is, do the following in Windows:
+#
+#-Open the control panel and click on 'System'
+#-The following will appear; click on 'Advanced System Settings'
+#\image html AdvancedSystem.jpg
+#
+#-Click on the 'Environment Variables' button highlighted in the image below
+#\image html environmentbutton.jpg
+#
+#Highlight the python path entry and click edit. The prompt shown below will appear. Enter the location of the python folder within the install folder with a semicolon between any other entries.
+#\image html PythonPath.jpg
+
 ##\defgroup initialization Library initialization and termination methods
 # \brief Initialize library and terminate library instance
 #
