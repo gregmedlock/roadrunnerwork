@@ -458,24 +458,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l01550"></a>01550 
 <a name="l01559"></a>01559 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> rrCallConv <a class="code" href="group__list.html#ga0868d914b3fcb431ba23edacff2f7355" title="Returns the index^th item from the list.">getListItem</a> (<a class="code" href="struct_r_r_list.html" title="A list type, stores int, double, strings and lists.">RRListHandle</a> list, <span class="keywordtype">int</span> index);
 <a name="l01560"></a>01560 
-<a name="l01561"></a>01561 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">bool</span> rrCallConv isListItemInteger (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item);
-<a name="l01562"></a>01562 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">bool</span> rrCallConv isListItemDouble  (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item);
-<a name="l01563"></a>01563 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">bool</span> rrCallConv isListItemString  (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item);
-<a name="l01564"></a>01564 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">bool</span> rrCallConv isListItemList    (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item);
-<a name="l01565"></a>01565 
-<a name="l01566"></a>01566 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">bool</span> rrCallConv isListItem (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item, <a class="code" href="rr__c__types_8h.html#ab99437ab2e88aa90b7ebb8add042b25e" title="The list type supports strings, integers, double and lists.">ListItemType</a> itemType);
-<a name="l01567"></a>01567 
-<a name="l01568"></a>01568 
-<a name="l01575"></a>01575 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__list.html#gadbf78d3e34e7b13a67eabfcd9652d9d3">getListLength</a> (<a class="code" href="struct_r_r_list.html" title="A list type, stores int, double, strings and lists.">RRListHandle</a> myList);
-<a name="l01576"></a>01576 
-<a name="l01577"></a>01577 <span class="comment">// Returns NULL if item isn&#39;t a list, otherwise it returns a list from the item</span>
-<a name="l01578"></a>01578 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <a class="code" href="struct_r_r_list.html" title="A list type, stores int, double, strings and lists.">RRListHandle</a> rrCallConv getList (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item);
-<a name="l01579"></a>01579 
-<a name="l01580"></a>01580 <span class="preprocessor">#if defined( __cplusplus)</span>
-<a name="l01581"></a>01581 <span class="preprocessor"></span>}
-<a name="l01582"></a>01582 <span class="preprocessor">#endif</span>
-<a name="l01583"></a>01583 <span class="preprocessor"></span>
-<a name="l01584"></a>01584 <span class="preprocessor">#endif</span>
+<a name="l01568"></a>01568 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__list.html#ga95a0b0a9fadcec4b259b3d74792d271b" title="Returns true or false if the list item is an integer.">isListItemInteger</a> (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item);
+<a name="l01569"></a>01569 
+<a name="l01577"></a>01577 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__list.html#gabb75b6a66e5ca01d6126ad1a8815a6f6" title="Returns true or false if the list item is a double.">isListItemDouble</a>  (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item);
+<a name="l01578"></a>01578 
+<a name="l01586"></a>01586 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__list.html#ga494421cf9c91650a5e0ae5e3c0b323e7" title="Returns true or false if the list item is a character array.">isListItemString</a>  (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item);
+<a name="l01587"></a>01587 
+<a name="l01595"></a>01595 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">bool</span> rrCallConv <a class="code" href="group__list.html#ga9629e2999ac96ea97c065be0c1519725" title="Returns true or false if the list item is a list itself.">isListItemList</a>    (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item);
+<a name="l01596"></a>01596 
+<a name="l01597"></a>01597 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">bool</span> rrCallConv isListItem (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item, <a class="code" href="rr__c__types_8h.html#ab99437ab2e88aa90b7ebb8add042b25e" title="The list type supports strings, integers, double and lists.">ListItemType</a> itemType);
+<a name="l01598"></a>01598 
+<a name="l01599"></a>01599 
+<a name="l01607"></a>01607 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <span class="keywordtype">int</span> rrCallConv <a class="code" href="group__list.html#gadbf78d3e34e7b13a67eabfcd9652d9d3" title="Returns the length of a given list.">getListLength</a> (<a class="code" href="struct_r_r_list.html" title="A list type, stores int, double, strings and lists.">RRListHandle</a> myList);
+<a name="l01608"></a>01608 
+<a name="l01609"></a>01609 
+<a name="l01617"></a>01617 <a class="code" href="rr__c__api__exporter_8h.html#a7600b15d6bf292a4cfea1d94fbe77fa8" title="A reference to __declspec(dllexport)">C_DECL_SPEC</a> <a class="code" href="struct_r_r_list.html" title="A list type, stores int, double, strings and lists.">RRListHandle</a> rrCallConv <a class="code" href="group__list.html#ga9e845e49858e1d5222a258865f9a41d1" title="Returns a list from a list item if it contains a list.">getList</a> (<a class="code" href="struct_r_r_list_item.html" title="A single list element type.">RRListItemHandle</a> item);
+<a name="l01618"></a>01618 
+<a name="l01619"></a>01619 <span class="preprocessor">#if defined( __cplusplus)</span>
+<a name="l01620"></a>01620 <span class="preprocessor"></span>}
+<a name="l01621"></a>01621 <span class="preprocessor">#endif</span>
+<a name="l01622"></a>01622 <span class="preprocessor"></span>
+<a name="l01623"></a>01623 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -495,7 +498,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:51:28 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -330,26 +330,14 @@ void rr\-Call\-Conv \hyperlink{group__list_gaab382870e042e61758048b8a30884bc7}{f
 \begin{DoxyCompactList}\small\item\em \-Create a list item to store a list. \end{DoxyCompactList}\item 
 int rr\-Call\-Conv \hyperlink{group__list_gae4f09729c7824082861ad63feba55c1a}{add\-Item} (\hyperlink{rr__c__types_8h_a840005f5261fec71eec85cc770317c5d}{\-R\-R\-List\-Handle} list, \hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} $\ast$item)
 \begin{DoxyCompactList}\small\item\em \-Add a list item to a list and return index to the added item. \end{DoxyCompactList}\item 
-\hypertarget{rr__c__api_8cpp_ac4cf28335d60bfa1c0f7a7f6daf362fb}{
-bool rr\-Call\-Conv {\bfseries is\-List\-Item\-Integer} (\hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} item)}
-\label{rr__c__api_8cpp_ac4cf28335d60bfa1c0f7a7f6daf362fb}
-
-\item 
-\hypertarget{rr__c__api_8cpp_a72c737669d9e5e99917d62f786835239}{
-bool rr\-Call\-Conv {\bfseries is\-List\-Item\-Double} (\hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} item)}
-\label{rr__c__api_8cpp_a72c737669d9e5e99917d62f786835239}
-
-\item 
-\hypertarget{rr__c__api_8cpp_a7218a3da9b1e8d433ff7e14579fb6d1f}{
-bool rr\-Call\-Conv {\bfseries is\-List\-Item\-String} (\hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} item)}
-\label{rr__c__api_8cpp_a7218a3da9b1e8d433ff7e14579fb6d1f}
-
-\item 
-\hypertarget{rr__c__api_8cpp_adbd792087746a5e653e47eb720aa206a}{
-bool rr\-Call\-Conv {\bfseries is\-List\-Item\-List} (\hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} item)}
-\label{rr__c__api_8cpp_adbd792087746a5e653e47eb720aa206a}
-
-\item 
+bool rr\-Call\-Conv \hyperlink{group__list_ga95a0b0a9fadcec4b259b3d74792d271b}{is\-List\-Item\-Integer} (\hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} item)
+\begin{DoxyCompactList}\small\item\em \-Returns true or false if the list item is an integer. \end{DoxyCompactList}\item 
+bool rr\-Call\-Conv \hyperlink{group__list_gabb75b6a66e5ca01d6126ad1a8815a6f6}{is\-List\-Item\-Double} (\hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} item)
+\begin{DoxyCompactList}\small\item\em \-Returns true or false if the list item is a double. \end{DoxyCompactList}\item 
+bool rr\-Call\-Conv \hyperlink{group__list_ga494421cf9c91650a5e0ae5e3c0b323e7}{is\-List\-Item\-String} (\hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} item)
+\begin{DoxyCompactList}\small\item\em \-Returns true or false if the list item is a character array. \end{DoxyCompactList}\item 
+bool rr\-Call\-Conv \hyperlink{group__list_ga9629e2999ac96ea97c065be0c1519725}{is\-List\-Item\-List} (\hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} item)
+\begin{DoxyCompactList}\small\item\em \-Returns true or false if the list item is a list itself. \end{DoxyCompactList}\item 
 \hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} rr\-Call\-Conv \hyperlink{group__list_ga0868d914b3fcb431ba23edacff2f7355}{get\-List\-Item} (\hyperlink{rr__c__types_8h_a840005f5261fec71eec85cc770317c5d}{\-R\-R\-List\-Handle} list, int index)
 \begin{DoxyCompactList}\small\item\em \-Returns the index$^\wedge$th item from the list. \end{DoxyCompactList}\item 
 \hypertarget{rr__c__api_8cpp_a7eb4b38b648eff81f0efcf7728eed2d5}{
@@ -358,12 +346,9 @@ bool rr\-Call\-Conv {\bfseries is\-List\-Item} (\hyperlink{rr__c__types_8h_a2bab
 
 \item 
 int rr\-Call\-Conv \hyperlink{group__list_gadbf78d3e34e7b13a67eabfcd9652d9d3}{get\-List\-Length} (\hyperlink{rr__c__types_8h_a840005f5261fec71eec85cc770317c5d}{\-R\-R\-List\-Handle} my\-List)
-\item 
-\hypertarget{rr__c__api_8cpp_a91cb734c0a221a45fffa7dfc0380a9d7}{
-\hyperlink{rr__c__types_8h_a840005f5261fec71eec85cc770317c5d}{\-R\-R\-List\-Handle} rr\-Call\-Conv {\bfseries get\-List} (\hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} item)}
-\label{rr__c__api_8cpp_a91cb734c0a221a45fffa7dfc0380a9d7}
-
-\item 
+\begin{DoxyCompactList}\small\item\em \-Returns the length of a given list. \end{DoxyCompactList}\item 
+\hyperlink{rr__c__types_8h_a840005f5261fec71eec85cc770317c5d}{\-R\-R\-List\-Handle} rr\-Call\-Conv \hyperlink{group__list_ga9e845e49858e1d5222a258865f9a41d1}{get\-List} (\hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle} item)
+\begin{DoxyCompactList}\small\item\em \-Returns a list from a list item if it contains a list. \end{DoxyCompactList}\item 
 char $\ast$rr\-Call\-Conv \hyperlink{group__to_string_ga5c6b4d187910ee0767c23f9c2ed1f8d4}{list\-To\-String} (\hyperlink{rr__c__types_8h_a840005f5261fec71eec85cc770317c5d}{\-R\-R\-List\-Handle} list)
 \begin{DoxyCompactList}\small\item\em \-Returns a string array in string form. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{\-Variables}
