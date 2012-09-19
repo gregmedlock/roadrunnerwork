@@ -106,6 +106,9 @@
  \defgroup state Current state of system
  \brief Compute derivatives, fluxes, and other values of the system at the current state
 
+ \defgroup simulation Time-course simulation
+ \brief Deterministic, stochastic, and hybrid simulation algorithms
+
  \defgroup steadystate Steady State Routines
  \brief Compute and obtain basic information about the steady state
 
@@ -130,14 +133,15 @@
  \defgroup compartment Compartment group
  \brief Set and Get information on compartments
 
- \defgroup simulation Time-course simulation
- \brief Deterministic, stochastic, and hybrid simulation algorithms
-
  \defgroup mca Metabolic Control Analysis
  \brief Calculate control coefficients and sensitivities
 
  \defgroup Stoich Stoichiometry analysis
  \brief Linear algebra based methods for analyzing a reaction network
+
+ \defgroup list List Handling Routines
+ \brief Some methods return lists (heterogeneous arrayts of data), 
+ these routines make it easier to manipulate listse
 
  \defgroup helperRoutines Helper Routines
  \brief Helper routines for acessing the various C API types, eg lists and arrays
@@ -289,7 +293,7 @@ C_DECL_SPEC bool rrCallConv setLogLevel(const char* lvl);
 C_DECL_SPEC char* rrCallConv getLogLevel();
 
 /*!
- \brief Get the logging status level as a pointer to a string
+ \brief Get a pointer to the string that holds the logging file name
 
  The logging level can be one of the following strings
  
@@ -308,13 +312,13 @@ C_DECL_SPEC char* rrCallConv getLogFileName();
 
  Example: status = hasError ()
 
- \return status - Returns true if there is an error waiting to be retrieved
+ \return Returns true if there is an error waiting to be retrieved
  \ingroup errorfunctions
 */
 C_DECL_SPEC bool rrCallConv hasError();
 
 /*!
- \brief Retrieve the currnt error string
+ \brief Retrieve the current error string
 
  Example: str = getLastError ()
 
@@ -581,7 +585,6 @@ C_DECL_SPEC bool rrCallConv getValue(const char* symbolId, double& value);
 C_DECL_SPEC bool rrCallConv setValue(const char* symbolId, const double& value);
 
 
-//getLocalParameterByIndex
 /*!
  \brief Retrieve in a vector the concentrations for all the floating species
 
@@ -915,7 +918,7 @@ C_DECL_SPEC bool rrCallConv getRateOfChange(const int&, double& value);
 C_DECL_SPEC RRVectorHandle rrCallConv getRatesOfChangeEx (const RRVectorHandle vec);
 
 /*!
- \brief Evaluate the current models, that it update all assignments and rates of change
+ \brief Evaluate the current model, that it update all assignments and rates of change. Do not carry out an integration step
 
  \return Returns false if it fails
  \ingroup state
@@ -1028,7 +1031,7 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getCompartmentIds();
 C_DECL_SPEC RRStringArrayHandle rrCallConv getEigenValueIds();
 
 /*!
- \brief Obtain the list of al avialable symbols
+ \brief Obtain the list of all available symbols
 
  \return Returns -1 if it fails, if succesful it returns a pointer to a RRArrayListHandle struct
  \ingroup state
@@ -1474,25 +1477,85 @@ C_DECL_SPEC char* rrCallConv getCCodeSource (RRCCodeHandle code);
  \return Returns null if fails, otherwise returns a pointer to a string containing the file name
  \ingroup helperRoutines
 */
-C_DECL_SPEC char*            rrCallConv getCSourceFileName();
+C_DECL_SPEC char* rrCallConv getCSourceFileName();
 
+// --------------------------------------------------------------------
 // List support routines
-C_DECL_SPEC RRListHandle 	 rrCallConv createRRList ();
+// --------------------------------------------------------------------
+
+/*!
+ \brief Create a new list
+
+ \return Returns null if fails, otherwise returns a pointer to a new list structure
+ \ingroup list
+*/
+C_DECL_SPEC RRListHandle rrCallConv createRRList ();
 
 /*!
  \brief Free RRListHandle structures
- \ingroup freeRoutines
+ \ingroup list
 */
-C_DECL_SPEC void 			 rrCallConv freeRRList (RRListHandle list);
-C_DECL_SPEC RRListItemHandle rrCallConv createIntegerItem (int value);
-C_DECL_SPEC RRListItemHandle rrCallConv createDoubleItem  (double value);
-C_DECL_SPEC RRListItemHandle rrCallConv createStringItem  (char* value);
-C_DECL_SPEC RRListItemHandle rrCallConv createListItem    (RRList* value);
+C_DECL_SPEC void rrCallConv freeRRList (RRListHandle list);
 
-// Add item and return index of item
+/*!
+ \brief Create a list item to store an integer
+
+ \param[in] The integer to store in the list item
+ \return A pointer to the list item
+ \ingroup list
+*/
+C_DECL_SPEC RRListItemHandle rrCallConv createIntegerItem (int value);
+
+/*!
+ \brief Create a list item to store a double value
+
+ \param[in] The double to store in the list item
+ \return A pointer to the list item
+ \ingroup list
+*/
+C_DECL_SPEC RRListItemHandle rrCallConv createDoubleItem  (double value);
+
+/*!
+ \brief Create a list item to store a pointer to a char*
+
+ \param[in] The string to store in the list item
+ \return A pointer to the list item
+ \ingroup list
+*/
+C_DECL_SPEC RRListItemHandle rrCallConv createStringItem  (char* value);
+
+/*!
+ \brief Create a list item to store a list
+
+ \param[in] The list to store in the list item
+ \return A pointer to the list item
+ \ingroup list
+*/	
+C_DECL_SPEC RRListItemHandle rrCallConv createListItem (RRList* value);
+
+/*!
+ \brief Add a list item to a list and return index to the added item
+
+ x = createList();
+ item1 = createIntegerItem (4);
+ add (x, item1);
+
+ \param[in] The list to store the item in
+ \param[in] The list item to store in the list
+ \return The index to where the list item was added
+ \ingroup list
+*/	
 C_DECL_SPEC int rrCallConv addItem (RRListHandle list, RRListItemHandle *item);
 
-// Returns the index^th item from the list
+
+/*!
+ \brief Returns the index^th item from the list
+
+ \param[in] The list to retrieve the list item from
+ \param[in] The index list item we are interested in 
+ \return A point to the retrieved list item
+ \ingroup list
+*/	
 C_DECL_SPEC RRListItemHandle rrCallConv getListItem (RRListHandle list, int index);
 
 C_DECL_SPEC bool rrCallConv isListItemInteger (RRListItemHandle item);
@@ -1502,7 +1565,13 @@ C_DECL_SPEC bool rrCallConv isListItemList    (RRListItemHandle item);
 
 C_DECL_SPEC bool rrCallConv isListItem (RRListItemHandle item, ListItemType itemType);
 
-// Returns the length of the list
+
+/*!Returns the length of a given list
+
+ \param[in] The list to retrieve the length from
+ \return Length of list
+\ingroup list
+*/	
 C_DECL_SPEC int rrCallConv getListLength (RRListHandle myList);
 
 // Returns NULL if item isn't a list, otherwise it returns a list from the item
