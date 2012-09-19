@@ -1553,20 +1553,52 @@ C_DECL_SPEC int rrCallConv addItem (RRListHandle list, RRListItemHandle *item);
 
  \param[in] The list to retrieve the list item from
  \param[in] The index list item we are interested in 
- \return A point to the retrieved list item
+ \return A pointer to the retrieved list item
  \ingroup list
 */	
 C_DECL_SPEC RRListItemHandle rrCallConv getListItem (RRListHandle list, int index);
 
+/*!
+ \brief Returns true or false if the list item is an integer
+
+ \param[in] The list
+ \return If true, then the list item holds an integer
+ \ingroup list
+*/	
 C_DECL_SPEC bool rrCallConv isListItemInteger (RRListItemHandle item);
+
+/*!
+ \brief Returns true or false if the list item is a double
+
+ \param[in] The list
+ \return If true, then the list item holds a double
+ \ingroup list
+*/	
 C_DECL_SPEC bool rrCallConv isListItemDouble  (RRListItemHandle item);
+
+/*!
+ \brief Returns true or false if the list item is a character array
+
+ \param[in] The list
+ \return If true, then the list item holds an characeter array
+ \ingroup list
+*/	
 C_DECL_SPEC bool rrCallConv isListItemString  (RRListItemHandle item);
+
+/*!
+ \brief Returns true or false if the list item is a list itself
+
+ \param[in] The list
+ \return If true, then the list item holds a list
+ \ingroup list
+*/	
 C_DECL_SPEC bool rrCallConv isListItemList    (RRListItemHandle item);
 
 C_DECL_SPEC bool rrCallConv isListItem (RRListItemHandle item, ListItemType itemType);
 
 
-/*!Returns the length of a given list
+/*!
+ \brief Returns the length of a given list
 
  \param[in] The list to retrieve the length from
  \return Length of list
@@ -1574,7 +1606,14 @@ C_DECL_SPEC bool rrCallConv isListItem (RRListItemHandle item, ListItemType item
 */	
 C_DECL_SPEC int rrCallConv getListLength (RRListHandle myList);
 
-// Returns NULL if item isn't a list, otherwise it returns a list from the item
+
+/*!
+ \brief Returns a list from a list item if it contains a list
+
+ \param[in] The list item to retrieve the list type from
+ \return Returns NULL if item isn't a list, otherwise it returns a list from the item
+\ingroup list
+*/	
 C_DECL_SPEC RRListHandle rrCallConv getList (RRListItemHandle item);
 
 #if defined( __cplusplus)
