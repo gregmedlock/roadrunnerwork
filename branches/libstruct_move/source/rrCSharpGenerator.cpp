@@ -5,7 +5,7 @@
 #include "sbml/Model.h"
 #include "sbml/SBMLDocument.h"
 #include "rrCSharpGenerator.h"
-#include "libstruct/lsLibstructural.h"
+#include "rr-libstruct/lsLibstructural.h"
 #include "rrStringListContainer.h"
 #include "rrStringUtils.h"
 #include "rrUtils.h"
@@ -17,7 +17,7 @@
 //---------------------------------------------------------------------------
 
 using namespace std;
-using namespace LIB_STRUCTURAL;
+using namespace ls;
 
 namespace rr
 {
@@ -1143,7 +1143,7 @@ void CSharpGenerator::WriteComputeConservedTotals(CodeBuilder& sb, const int& nu
     if (numDependentSpecies > 0)
     {
         string factor;
-        LIB_LA::DoubleMatrix* gamma = mLibStruct->getGammaMatrix();
+        ls::DoubleMatrix* gamma = mLibStruct->getGammaMatrix();
 
 //        DoubleMatrix gamma(matPtr, numDependentSpecies, numFloatingSpecies);
         for (int i = 0; i < numDependentSpecies; i++)

@@ -80,7 +80,11 @@ add_definitions(
              -w-8012                     #Comparing signed /unsigned
              -w-8057                     #Parameter never used
              -w-8004                     #'var' is assigned a value that is never used
-             -W8123                     #Path not found
+             -w-8123                     #Path not found
+             -w-8066                     #Unreachable code
+             -w-8104                     #Local static with constructor...
+             -w-8008                     #Condition is always false..
+
         )
 endif()
 
@@ -104,6 +108,7 @@ add_subdirectory(clapack/3.2.1)
 add_subdirectory(sundials)
 add_subdirectory(pugi)
 add_subdirectory(nleq)
+add_subdirectory(rr-libstruct)
 
 #==== SYSTEM FILES (COMPILER SPECIFICS) =================================================
 if(${BORLAND})

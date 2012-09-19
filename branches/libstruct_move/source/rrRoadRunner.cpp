@@ -15,15 +15,15 @@
 #include "rrStringUtils.h"
 #include "rrModelFromC.h"
 #include "rrSBMLModelSimulation.h"
-#include "libstruct/lsLA.h"
-#include "libstruct/lsLibla.h"
+#include "rr-libstruct/lsLA.h"
+#include "rr-libstruct/lsLibla.h"
 #include "rrModelState.h"
 #include "rrArrayList2.h"
 #include "rrCapsSupport.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
-using namespace LIB_LA;
+using namespace ls;
 
 namespace rr
 {
@@ -1573,18 +1573,18 @@ double RoadRunner::oneStep(const double& currentTime, const double& stepSize, co
 //        //}
 
 // Help("Compute the reduced Jacobian at the current operating point")
-LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
+ls::DoubleMatrix RoadRunner::getReducedJacobian()
 {
     try
     {
         if (mModel)
         {
-            LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
+            ls::DoubleMatrix uelast = getUnscaledElasticityMatrix();
             if(!_Nr)
             {
-            	return LIB_LA::DoubleMatrix(0,0);
+            	return ls::DoubleMatrix(0,0);
             }
-            LIB_LA::DoubleMatrix I1 = mult((*_Nr), uelast);
+            ls::DoubleMatrix I1 = mult((*_Nr), uelast);
             _L = mLS->getLinkMatrix();
             return mult(I1, (*_L));
         }
@@ -1598,7 +1598,7 @@ LIB_LA::DoubleMatrix RoadRunner::getReducedJacobian()
 
 // Returns eigenvalues, first column real part, second column imaginary part
 // -------------------------------------------------------------------------
-LIB_LA::DoubleMatrix RoadRunner::getEigenvalues()
+ls::DoubleMatrix RoadRunner::getEigenvalues()
 {
     try
     {
@@ -1606,12 +1606,12 @@ LIB_LA::DoubleMatrix RoadRunner::getEigenvalues()
 	    {
             throw SBWApplicationException(emptyModelStr);
         }
-        LIB_LA::DoubleMatrix result(getNumberOfIndependentSpecies(), 2);
-        LIB_LA::DoubleMatrix mat = getReducedJacobian();
+        ls::DoubleMatrix result(getNumberOfIndependentSpecies(), 2);
+        ls::DoubleMatrix mat = getReducedJacobian();
         LibLA LA;
 
         vector<Complex> oComplex = LA.getEigenValues(mat);
-        for (int i=0; i<oComplex.size(); i++)
+        for (int i = 0; i < oComplex.size(); i++)
         {
 	        result[i][0] = oComplex[i].Real;
 	        result[i][1] = oComplex[i].Imag;
@@ -1625,21 +1625,21 @@ LIB_LA::DoubleMatrix RoadRunner::getEigenvalues()
 }
 
 // Help("Compute the full Jacobian at the current operating point")
-LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
+ls::DoubleMatrix RoadRunner::getFullJacobian()
 {
     try
     {
         if (mModel)
         {
-            LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
-            LIB_LA::DoubleMatrix* rsm = mLS->getReorderedStoichiometryMatrix();
+            ls::DoubleMatrix uelast = getUnscaledElasticityMatrix();
+            ls::DoubleMatrix* rsm = mLS->getReorderedStoichiometryMatrix();
             if(rsm)
             {
             	return mult(*rsm, uelast);
             }
             else
             {
-	            LIB_LA::DoubleMatrix empty;
+	            ls::DoubleMatrix empty;
             }
         }
         throw SBWApplicationException(emptyModelStr);
@@ -1655,7 +1655,7 @@ LIB_LA::DoubleMatrix RoadRunner::getFullJacobian()
 // Start of Level 4 API Methods
 // ---------------------------------------------------------------------
 
-LIB_LA::DoubleMatrix* RoadRunner::getLinkMatrix()
+ls::DoubleMatrix* RoadRunner::getLinkMatrix()
 {
     try
     {
@@ -1671,7 +1671,7 @@ LIB_LA::DoubleMatrix* RoadRunner::getLinkMatrix()
     }
 }
 
-LIB_LA::DoubleMatrix* RoadRunner::getNrMatrix()
+ls::DoubleMatrix* RoadRunner::getNrMatrix()
 {
     try
     {
@@ -1687,7 +1687,7 @@ LIB_LA::DoubleMatrix* RoadRunner::getNrMatrix()
     }
 }
 
-LIB_LA::DoubleMatrix* RoadRunner::getL0Matrix()
+ls::DoubleMatrix* RoadRunner::getL0Matrix()
 {
     try
     {
@@ -1832,7 +1832,7 @@ double RoadRunner::getVariableValue(const TVariableType& variableType, const int
 //{
 //    try
 //    {
-////        ComplexMatrix T8 = LIB_LA::GetInverse(ConvertComplex(T2.data));
+////        ComplexMatrix T8 = ls::GetInverse(ConvertComplex(T2.data));
 ////        for (int i1 = 0; i1 < Inv.nRows; i1++)
 ////        {
 ////            for (int j1 = 0; j1 < Inv.nCols; j1++)
@@ -2525,7 +2525,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
                 //SBWComplex[] oComplex = SBW_CLAPACK.getEigenValues(getReducedJacobian());
                 LibLA LA;
 
-                LIB_LA::DoubleMatrix mat = getReducedJacobian();
+                ls::DoubleMatrix mat = getReducedJacobian();
                 vector<Complex> oComplex = LA.getEigenValues(mat);
 
                 if (oComplex.size() > nIndex)
@@ -3699,9 +3699,9 @@ double RoadRunner::getUnscaledSpeciesElasticity(int reactionId, int speciesIndex
 
 
 //        [Help("Compute the unscaled species elasticity matrix at the current operating point")]
-LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
+ls::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 {
-    LIB_LA::DoubleMatrix uElastMatrix(mModel->getNumReactions(), mModel->getNumTotalVariables());
+    ls::DoubleMatrix uElastMatrix(mModel->getNumReactions(), mModel->getNumTotalVariables());
 
     try
     {
@@ -3733,15 +3733,15 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledElasticityMatrix()
 }
 
 //        [Help("Compute the unscaled elasticity matrix at the current operating point")]
-LIB_LA::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
+ls::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
 {
     try
     {
         if (mModel)
         {
-            LIB_LA::DoubleMatrix uelast = getUnscaledElasticityMatrix();
+            ls::DoubleMatrix uelast = getUnscaledElasticityMatrix();
 
-            LIB_LA::DoubleMatrix result(uelast.CSize(), uelast.RSize());// = new double[uelast.Length][];
+            ls::DoubleMatrix result(uelast.CSize(), uelast.RSize());// = new double[uelast.Length][];
             mModel->convertToConcentrations();
             mModel->computeReactionRates(mModel->GetTime(), mModel->y);
             vector<double> rates;// = mModel->rates;
@@ -3980,7 +3980,7 @@ double RoadRunner::getScaledFloatingSpeciesElasticity(const string& reactionName
 //
 // Use the formula: ucc = -L Jac^-1 Nr
 // [Help("Compute the matrix of unscaled concentration control coefficients")]
-LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatrix()
+ls::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatrix()
 {
 	try
 	{
@@ -4029,7 +4029,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledConcentrationControlCoefficientMatri
 }
 
 //This just creates a copy?? remove and use = instead!?
-LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
+ls::ComplexMatrix RoadRunner::ConvertComplex(ls::ComplexMatrix oMatrix)
 {
 	ComplexMatrix oResult;
 	oResult.resize (oMatrix.RSize(), oMatrix.CSize()); //  = Complex[oMatrix.Length][];
@@ -4045,7 +4045,7 @@ LIB_LA::ComplexMatrix RoadRunner::ConvertComplex(LIB_LA::ComplexMatrix oMatrix)
 }
 
 // [Help("Compute the matrix of scaled concentration control coefficients")]
-LIB_LA::DoubleMatrix RoadRunner::getScaledConcentrationControlCoefficientMatrix()
+ls::DoubleMatrix RoadRunner::getScaledConcentrationControlCoefficientMatrix()
 {
 	try
 	{
@@ -4092,7 +4092,7 @@ LIB_LA::DoubleMatrix RoadRunner::getScaledConcentrationControlCoefficientMatrix(
 
 // Use the formula: ucc = elast CS + I
 // [Help("Compute the matrix of unscaled flux control coefficients")]
-LIB_LA::DoubleMatrix RoadRunner::getUnscaledFluxControlCoefficientMatrix()
+ls::DoubleMatrix RoadRunner::getUnscaledFluxControlCoefficientMatrix()
 {
 	try
 	{
@@ -4121,7 +4121,7 @@ LIB_LA::DoubleMatrix RoadRunner::getUnscaledFluxControlCoefficientMatrix()
 }
 
 // [Help("Compute the matrix of scaled flux control coefficients")]
-LIB_LA::DoubleMatrix RoadRunner::getScaledFluxControlCoefficientMatrix()
+ls::DoubleMatrix RoadRunner::getScaledFluxControlCoefficientMatrix()
 {
 	try
 	{
@@ -4945,7 +4945,7 @@ double RoadRunner::getValue(const string& sId)
 
         LibLA LA;
 
-        LIB_LA::DoubleMatrix mat = getReducedJacobian();
+        ls::DoubleMatrix mat = getReducedJacobian();
         vector<Complex> oComplex = LA.getEigenValues(mat);
 
         if (oComplex.size() > selectionList[index].index)

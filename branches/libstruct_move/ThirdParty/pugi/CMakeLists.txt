@@ -10,13 +10,13 @@ set(SOURCES ${HEADERS} src/pugixml.cpp)
 #
 #set_property(TARGET         ${target}  
 #             PROPERTY    COMPILE_DEFINITIONS 
-#                         PUGI_DLL 
+#                         SHARED_PUGI 
 #            ) 
 
 add_library(${target}-static  STATIC ${SOURCES})
 set_property(TARGET         ${target}-static  
              PROPERTY    COMPILE_DEFINITIONS 
-                         PUGI_STATIC 
+                         STATIC_PUGI 
             ) 
 
 install(FILES ${HEADERS} 

@@ -51,7 +51,7 @@ namespace rr
 /// <summary>
 /// Get double matrix from ptr
 /// </summary>
-LIB_LA::DoubleMatrix GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols);
+ls::DoubleMatrix GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols);
 
 //        /// <summary>
 //        /// Get double matrix from ptr

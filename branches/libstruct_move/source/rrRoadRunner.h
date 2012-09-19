@@ -3,7 +3,8 @@
 #include <windows.h>
 #include <string>
 #include "rrObject.h"
-#include "libstruct/lsMatrix.h"
+#include "rr-libstruct/lsMatrix.h"
+#include "rr-libstruct/lsLibStructural.h"
 #include "rrTVariableType.h"
 #include "rrTParameterType.h"
 #include "rrCvodeInterface.h"
@@ -15,14 +16,12 @@
 #include "rrSimulationData.h"
 #include "rrSimulationSettings.h"
 #include "rrCompiler.h"
-#include "libstruct/lsLibStructural.h"
 #include "rrArrayList.h"
 #include "rrArrayList2.h"
 #include "rrXMLDocument.h"
 #include "rrNOMSupport.h"
 using std::string;
-using namespace LIB_LA;
-using namespace LIB_STRUCTURAL;
+using namespace ls;
 namespace rr
 {
 class ModelGenerator;
@@ -285,7 +284,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		static void                     TestChange();
 		void                            DumpResults(TextWriter& writer, DoubleMatrix& data, const StringList& colLabels);
 
-       LIB_LA::ComplexMatrix            ConvertComplex(LIB_LA::ComplexMatrix oMatrix);
+       ls::ComplexMatrix            ConvertComplex(ls::ComplexMatrix oMatrix);
 
 
 		//RoadRunner MCA functions......
@@ -317,10 +316,10 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		double getUnScaledElasticity(const string& reactionName, const string& parameterName);
 
 		//"Compute the unscaled species elasticity matrix at the current operating point")]
-		LIB_LA::DoubleMatrix getUnscaledElasticityMatrix();
+		ls::DoubleMatrix getUnscaledElasticityMatrix();
 
 		//"Compute the unscaled elasticity matrix at the current operating point")]
-		LIB_LA::DoubleMatrix getScaledElasticityMatrix();
+		ls::DoubleMatrix getScaledElasticityMatrix();
 
 		//[Help("Compute the unscaled elasticity for a given reaction and given species")]
 		double getUnscaledFloatingSpeciesElasticity(const string& reactionName, const string& speciesName);

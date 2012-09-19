@@ -14,7 +14,7 @@ using std::string;
 typedef long* IntPtr;
 namespace rr
 {
-using namespace LIB_STRUCTURAL;
+using namespace ls;
 
 //The following class is a translation of C#'s StructuralAnalysis.cs in LibStructurlaCSharp
 class RR_DECLSPEC StructAnalysis : public rrObject
@@ -58,7 +58,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        double[][] GetFullyReorderedStoichiometryMatrix()
 //        double[][] GetFullyReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetFullyReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-        LIB_LA::DoubleMatrix*    GetGammaMatrix();
+        ls::DoubleMatrix*    GetGammaMatrix();
 //        double[][] GetGammaMatrixGJ(double[][] oMatrix)
 //        bool FindPositiveGammaMatrix(double[][] oMatrix,  out double[][] gammaMatrix, ref string[] rowNames, out string[] colNames)
 //        bool FindPositiveGammaMatrix(double[][] oMatrix, out double[][] gammaMatrix)
@@ -73,11 +73,11 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        double[][] GetKMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        double[][] GetKMatrix()
 //        void GetKMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
-        LIB_LA::DoubleMatrix*   GetL0Matrix();
-        LIB_LA::DoubleMatrix*   GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels);
+        ls::DoubleMatrix*   GetL0Matrix();
+        ls::DoubleMatrix*   GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels);
 //        double[][] GetL0Matrix(out string[] sRowLabels, out string[] sColumnLabels)
         void GetL0MatrixLabels(vector<string>& sRowLabels, vector<string>& sColumnLabels);
-        LIB_LA::DoubleMatrix*   GetLinkMatrix();
+        ls::DoubleMatrix*   GetLinkMatrix();
 //        double[][] GetLinkMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetLinkMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
 //        double[][] GetLMatrix()
@@ -131,7 +131,7 @@ class RR_DECLSPEC StructAnalysis : public rrObject
 //        string[] GetReactionIds()
 //        string[] GetReorderedReactionIds()
         StringList              GetReorderedSpeciesIds();
-        LIB_LA::DoubleMatrix*   GetReorderedStoichiometryMatrix();
+        ls::DoubleMatrix*   GetReorderedStoichiometryMatrix();
 //        double[][] GetReorderedStoichiometryMatrix(out string[] sRowLabels, out string[] sColumnLabels)
 //        void GetReorderedStoichiometryMatrixLabels(out string[] sRowLabels, out string[] sColumnLabels)
         StringList GetSpeciesIds();

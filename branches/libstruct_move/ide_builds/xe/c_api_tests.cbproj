@@ -32,8 +32,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\source\libstruct\;..\..\source\;..\..\Wrappers\C\Examples\api_tester\;..\..\Wrappers\C\;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\Wrappers\C\;R:\rrInstalls\xe\full-debug\lib\;..\..\source\libstruct\;..\..\source\;..\..\Wrappers\C\Examples\api_tester\;R:\rrInstalls\xe\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\source\;..\..\Wrappers\C\Examples\api_tester\;..\..\Wrappers\C\;$(RR_DEBUG_INSTALL)\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>R:\installs\xe\debug\lib\;..\..\Wrappers\C\;R:\installs\xe\full-debug\lib\;..\..\source\libstruct\;..\..\source\;..\..\Wrappers\C\Examples\api_tester\;R:\installs\xe\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -44,7 +44,6 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<BCC_AllCodeguardOptions>true</BCC_AllCodeguardOptions>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
@@ -52,7 +51,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;$(Defines)</Defines>
+			<Defines>_DEBUG;USE_PCH;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -69,17 +68,13 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\Wrappers\C\Examples\api_tester\main.cpp">
-				<BuildOrder>1</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\Wrappers\C\rr_c_api_support.cpp">
-				<DependentOn>..\..\Wrappers\C\rr_c_api_support.h</DependentOn>
-				<BuildOrder>2</BuildOrder>
-			</CppCompile>
-			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\rr_c_api.lib">
+			<LibFiles Include="R:\installs\xe\debug\lib\rr_c_api.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>
+			<CppCompile Include="..\..\Wrappers\C\Examples\api_tester\main.cpp">
+				<BuildOrder>1</BuildOrder>
+			</CppCompile>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>
@@ -132,7 +127,7 @@
 						<ProjectProperties Name="VerifyPackages">True</ProjectProperties>
 					</ProjectProperties>
 					<Parameters>
-						<Parameters Name="RunParams">R:\\rrInstalls\xe\full-debug\Models</Parameters>
+						<Parameters Name="RunParams">R:\\installs\xe\full-debug\Models</Parameters>
 					</Parameters>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

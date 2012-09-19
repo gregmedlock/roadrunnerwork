@@ -4,8 +4,8 @@ set(target roadrunner)
 
 include_directories(
 . 
-./libstruct
 ${THIRD_PARTY_INSTALL_FOLDER}/include
+${THIRD_PARTY_INSTALL_FOLDER}/include/rr-libstruct
 ${THIRD_PARTY_INSTALL_FOLDER}/include/sbml
 ${THIRD_PARTY_INSTALL_FOLDER}/include/cvode
 ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
@@ -71,13 +71,6 @@ rrCapsSupport.cpp
 rrStopWatch.cpp
 rrEvent.cpp
 rrTestSuiteModelSimulation.cpp
-libstruct/lsComplex.cpp
-libstruct/lsLibla.cpp
-libstruct/lsLibstructural.cpp
-libstruct/lsMatrix.cpp
-libstruct/lsSBMLModel.cpp
-libstruct/lsUtil.cpp
-libstruct/lsLA.cpp
 )
 
 #Build both static and shared version
@@ -89,8 +82,8 @@ set_property(TARGET ${target}
                             EXPORT_RR 
                             LIBSBML_STATIC 
                             LIBLAX_STATIC 
-                            LIBSTRUCT_STATIC
-                            PUGI_STATIC
+                            STATIC_LIBSTRUCT
+                            STATIC_PUGI
                             STATIC_NLEQ
                             ) 
 
@@ -112,6 +105,7 @@ target_link_libraries (${target}
                                     libf2c
                                     pugi-static
                                     nleq-static
+                                    rr-libstruct-static
                       )
 endif()
 
@@ -124,8 +118,8 @@ set_property(TARGET ${target}-static
                             STATIC_RR 
                             LIBSBML_STATIC
                             LIBLAX_STATIC 
-                            LIBSTRUCT_STATIC
-							PUGI_STATIC
+                            STATIC_LIBSTRUCT
+							STATIC_PUGI
                             STATIC_NLEQ
                             ) 
 
@@ -141,6 +135,7 @@ target_link_libraries (${target}-static
                            #libf2c
 						   pugi-static
 						   nleq-static
+                           rr-libstruct-static
                       )
 endif()
 

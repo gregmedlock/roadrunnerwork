@@ -2,14 +2,12 @@
 #include "rr_pch.h"
 #endif
 #pragma hdrstop
-
-#include "lsComplex.h"
 #include <ostream>
+#include "lsComplex.h"
 
 using namespace std;
 
-
-namespace LIB_LA
+namespace ls
 {
 
 Complex::Complex(double real, double imag) :
@@ -97,7 +95,7 @@ std::basic_ostream<char>& Complex::operator<<(std::basic_ostream<char>& os)
     return os << "(" << Real << " + " << Imag << "i)";
 }
 
-std::ostream & LIB_LA::operator << (std::ostream &os,  const Complex & complex)
+std::ostream & ls::operator << (std::ostream &os,  const Complex & complex)
 {
     return os << "(" << complex.Real << " + " << complex.Imag << "i)";
 }

@@ -23,7 +23,7 @@
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
-			<ILINK_LibraryPath>R:\rrBuilds\xe\ThirdParty\lib\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;..\..\source\nleq\;$(RR_ROOT)\source\trunk\ide_builds\xe\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>R:\builds\xe\ThirdParty\lib\;C:\builds\xe\clapack\F2CLIBS\libf2c\;..\..\source\nleq\;$(RR_ROOT)\source\trunk\ide_builds\xe\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<ProjectType>CppDynamicLibrary</ProjectType>
 			<Defines>WIN32;$(Defines)</Defines>
 			<PackageImports>vclx.bpi;vcl.bpi;vclimg.bpi;dbrtl.bpi;Rave90VCL.bpi;bdertl.bpi;rtl.bpi;bcbie.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vcldb.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;inet.bpi;inetdb.bpi;webdsnap.bpi;websnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DbxClientDriver.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi</PackageImports>
@@ -88,7 +88,7 @@
 			<CppCompile Include="..\..\source\nleq\zibsec.c">
 				<BuildOrder>5</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\libf2c.lib">
+			<LibFiles Include="R:\builds\xe\ThirdParty\lib\libf2c.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>7</BuildOrder>
 			</LibFiles>

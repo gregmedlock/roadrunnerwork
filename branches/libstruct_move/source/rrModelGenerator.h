@@ -9,14 +9,13 @@
 #include "rrCodeBuilder.h"
 #include "rrNOMSupport.h"
 #include "rrScanner.h"
-#include "libstruct/lsMatrix.h"
-#include "libstruct/lsLibStructural.h"
+#include "rr-libstruct/lsMatrix.h"
+#include "rr-libstruct/lsLibStructural.h"
 
 using std::string;
 using std::vector;
 using std::list;
-using namespace LIB_LA;
-using namespace LIB_STRUCTURAL;
+using namespace ls;
 namespace rr
 {
 class RoadRunner;
@@ -103,7 +102,7 @@ class RR_DECLSPEC ModelGenerator : public rrObject
         ASTNode*                            CleanEquation(ASTNode* ast);
         string                              CleanEquation(const string& equation);
         string                              substituteTerms(const string& reactionName, const string& inputEquation, bool bFixAmounts);
-        LIB_LA::DoubleMatrix*               InitializeL0(int& nrRows, int& nrCols);
+        ls::DoubleMatrix*               InitializeL0(int& nrRows, int& nrCols);
         bool                                ExpressionContainsSymbol(ASTNode* ast, const string& symbol);
         bool                                ExpressionContainsSymbol(const string& expression, const string& symbol);
         Symbol*                             GetSpecies(const string& id);

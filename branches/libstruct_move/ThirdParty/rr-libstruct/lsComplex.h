@@ -1,14 +1,14 @@
-#ifndef LIB_LA_COMPLEX_H
-#define LIB_LA_COMPLEX_H
+#ifndef ls_COMPLEX_H
+#define ls_COMPLEX_H
 
 #include <iosfwd>
-#include "lsLibutil.h"
+#include "lsExporter.h"
 
-namespace LIB_LA
+namespace ls
 {
 
-    /*! \class LIB_LA::Complex
-        \brief LIB_LA::Complex is the complex class used by LIB_LA::LibLA
+    /*! \class ls::Complex
+        \brief ls::Complex is the complex class used by ls::LibLA
 
         This class implements a basic complex type along with basic operations on it.
     */

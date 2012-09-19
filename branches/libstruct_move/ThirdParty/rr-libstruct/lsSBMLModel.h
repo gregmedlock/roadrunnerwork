@@ -1,5 +1,5 @@
-#ifndef LIB_STRUCTURAL_SBML_MODEL_H
-#define LIB_STRUCTURAL_SBML_MODEL_H
+#ifndef ls_SBML_MODEL_H
+#define ls_SBML_MODEL_H
 #ifndef NO_SBML
 
 #include <string>
@@ -7,7 +7,7 @@
 #include <sbml/Model.h>
 #include <sbml/Species.h>
 
-namespace LIB_STRUCTURAL
+namespace ls
 {
 using namespace libsbml;
 
@@ -75,4 +75,4 @@ private:
 }
 #endif
 
-#endif //LIB_STRUCTURAL_SBML_MODEL_H
+#endif //ls_SBML_MODEL_H

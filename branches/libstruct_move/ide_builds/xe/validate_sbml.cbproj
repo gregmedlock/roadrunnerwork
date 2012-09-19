@@ -34,7 +34,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\Examples\validate_sbml\;..\;..\..\..\Examples\validate_sbml\;$(RR_DEBUG_INSTALL);$(RR_DEBUG_INSTALL)\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>..\..\Examples\validate_sbml\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;R:\rrInstalls\xe\lib\;..\..\..\Examples\validate_sbml\;..\;..\..\..\ThirdParty\libsbml\dependencies\lib\;C:\RRW\Testing\libSBMLTests\validate\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\Examples\validate_sbml\;C:\builds\xe\clapack\BLAS\SRC\;C:\builds\xe\clapack\SRC\;C:\builds\xe\clapack\F2CLIBS\libf2c\;R:\installs\xe\lib\;..\..\..\Examples\validate_sbml\;..\;..\..\..\ThirdParty\libsbml\dependencies\lib\;C:\RRW\Testing\libSBMLTests\validate\;P:\mtk\Components\vtk\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -74,23 +74,23 @@
 			<CppCompile Include="..\..\Examples\validate_sbml\util.c">
 				<BuildOrder>9</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="R:\rrInstalls\xe\lib\libsbml-static.lib">
+			<LibFiles Include="R:\installs\xe\lib\libsbml-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>3</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\libxml2_xe.lib">
+			<LibFiles Include="R:\installs\xe\lib\libxml2_xe.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>4</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\roadrunner-static.lib">
+			<LibFiles Include="R:\installs\xe\lib\roadrunner-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>5</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_cvode.lib">
+			<LibFiles Include="R:\installs\xe\lib\sundials_cvode.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>6</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_nvecserial.lib">
+			<LibFiles Include="R:\installs\xe\lib\sundials_nvecserial.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>
