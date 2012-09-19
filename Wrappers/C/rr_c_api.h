@@ -92,7 +92,7 @@
  * Installation documentation is provided in the main google code page.
 
  \defgroup initialization Library initialization and termination methods
- \brief Initailize library and terminate linbrary instance
+ \brief Initialize library and terminate library instance
 
  \defgroup loadsave Read and Write models
  \brief Read and write models to files or strings. Support for SBML formats.
@@ -198,7 +198,7 @@ C_DECL_SPEC char*  rrCallConv getBuildDate();
 C_DECL_SPEC char*  rrCallConv getCopyright();
 
 /*!
- \brief SEt the temporary folder
+ \brief Set the path to the temporary folder where the C code will be stored
 
  When cRoadRunner is run in C generation mode its uses a temporary folder to store the 
  generate C source code. This method can be used to set the temporary folder path if necessary.
@@ -232,6 +232,20 @@ C_DECL_SPEC char* rrCallConv getTempFolder();
 */
 C_DECL_SPEC RRCCode* rrCallConv getCCode();
 
+
+/*!
+ \brief Set the runtime generation option
+
+ cRoadRunner can either execute a model by generating, compiling and linking self-generated
+ C code or it can employ an internal interpreter to evaluate the model equations. The
+ later method is useful when the OS forbids the compiling of externally generated code.
+
+ \param[in] mode A integer, is set to 0 cRoadRunner generates C Code,
+ if set to 1 cRoadRunner uses its internal math interpreter. 
+ \return Returns false if it fails,
+ \ingroup utility
+*/
+C_DECL_SPEC bool rrCallConv setCodeGenerationMode (int codeGenerationMode);
 
 // Logging
 
@@ -269,7 +283,7 @@ C_DECL_SPEC bool rrCallConv setLogLevel(const char* lvl);
 
  Example: str = getLogLevel ()
 
- \return Returns null is it fails else returns a pointer to the logging string
+ \return Returns null if it fails else returns a pointer to the logging string
  \ingroup errorfunctions
 */
 C_DECL_SPEC char* rrCallConv getLogLevel();
@@ -284,7 +298,7 @@ C_DECL_SPEC char* rrCallConv getLogLevel();
 
  Example: str = getLogFileName ()
 
- \return Returns null is it fails else returns the full path to the logging file name
+ \return Returns null if it fails else returns the full path to the logging file name
  \ingroup errorfunctions
 */
 C_DECL_SPEC char* rrCallConv getLogFileName();
@@ -319,7 +333,7 @@ C_DECL_SPEC RRHandle rrCallConv getRRInstance();
 
 /*!
  \brief Free the roadRunner instance 
- \param handle Free the roadRunner instance given in the argument
+ \param[in] handle Free the roadRunner instance given in the argument
  \ingroup initialization
 */
 C_DECL_SPEC bool rrCallConv freeRRInstance(RRHandle handle);
@@ -328,11 +342,11 @@ C_DECL_SPEC bool rrCallConv freeRRInstance(RRHandle handle);
 // Flags/Options
 /*!
  \brief Enable or disable conservation analysis
- \param OnOrOff Set true to switch on conservation analysis
+ \param[in] On_Or_Off Set true to switch on conservation analysis
  \return Returns true if successful
  \ingroup initialization
 */
-C_DECL_SPEC bool rrCallConv setComputeAndAssignConservationLaws(const bool& OnOrOff);
+C_DECL_SPEC bool rrCallConv setComputeAndAssignConservationLaws(const bool& On_Or_Off);
 
 // -----------------------------------------------------------------------
 // Read and Write models
@@ -348,7 +362,7 @@ C_DECL_SPEC bool rrCallConv loadSBML(const char* sbml);
 
 /*!
  \brief Create a model from a SBML file
- \param fileName file name 
+ \param[in] fileName file name 
  \return Returns true if sucessful
  \ingroup loadsave
 */
@@ -356,14 +370,14 @@ C_DECL_SPEC bool rrCallConv loadSBMLFromFile(const char* fileName);
 
 /*!
  \brief Retrieve the <b>current state</b> of the model in the form of an SBML string
-  \return Returns null is the call fails, otherwise returns a pointer to the SBML string
+  \return Returns null if the call fails, otherwise returns a pointer to the SBML string
  \ingroup loadsave
 */
 C_DECL_SPEC char* rrCallConv getCurrentSBML();      
 
 /*!
- \brief Retrieve the last SBML model that was loaded
- \return Returns null is the call fails, otherwise returns a pointer to the SBML string
+ \brief Retrieve the SBML model that was last loaded
+ \return Returns null if the call fails, otherwise returns a pointer to the SBML string
  \ingroup loadsave
 */
 C_DECL_SPEC char* rrCallConv getSBML();
@@ -373,7 +387,7 @@ C_DECL_SPEC char* rrCallConv getSBML();
 // SBML utility methods
 /*!
  \brief Promote any local parameters to global status
- \param sArg points to the SBML model to promote
+ \param[in] sArg points to the SBML model to promote
  \return Returns null if it fails otherwise it returns the promoted SBML string
  \ingroup sbml
 */
@@ -396,7 +410,7 @@ C_DECL_SPEC bool rrCallConv setCapabilities (const char* caps);
 
 /*!
  \brief Set the time start for a simulation
- \param  timeStart
+ \param[in]  timeStart
  \return Returns True if sucessful
  \ingroup simulation
 */
@@ -404,7 +418,7 @@ C_DECL_SPEC bool rrCallConv setTimeStart(const double& timeStart);
 
 /*!
  \brief Set the time end for a simulation
- \param timeEnd
+ \param[in] timeEnd
  \return Returns true if sucessful
  \ingroup simulation
 */
@@ -412,7 +426,7 @@ C_DECL_SPEC bool rrCallConv setTimeEnd(const double& timeEnd);
 
 /*!
  \brief Set the number of points to generate in a simulation
- \param nrPoints Number of points to generate
+ \param[in] nrPoints Number of points to generate
  \return Returns true if sucessful
  \ingroup simulation
 */
@@ -423,7 +437,7 @@ C_DECL_SPEC bool rrCallConv setNumPoints(const int& nrPoints);
 
  Example: setSelectionList ("Time, S1, J1, J2")
 
- \param list A string of Ids separated by spaces or comma characters
+ \param[in] list A string of Ids separated by spaces or comma characters
  \return Returns true if sucessful
  \ingroup simulation
 */
