@@ -1979,6 +1979,16 @@ RRCCode* rrCallConv getCCode()
 	return NULL;
 }
 
+
+// *******  Not yet implemented  ********
+// codeGenerationMode = 0 if mode is C code generation
+// codeGenerationMode = 1 ig mode is internal math interpreter
+bool rrCallConv setCodeGenerationMode (int codeGenerationMode)
+{
+	return false;
+}
+
+
 //NOM forwarded functions
 int rrCallConv getNumberOfRules()
 {
