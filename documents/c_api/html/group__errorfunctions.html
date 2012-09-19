@@ -88,11 +88,11 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga77071837a73206d3e27220f3dff96ad4">getLogLevel</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the logging status level as a pointer to a string.  <a href="#ga77071837a73206d3e27220f3dff96ad4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga9e5c453651f5a3743e9bc10f0e81be66">getLogFileName</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the logging status level as a pointer to a string.  <a href="#ga9e5c453651f5a3743e9bc10f0e81be66"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the string that holds the logging file name.  <a href="#ga9e5c453651f5a3743e9bc10f0e81be66"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga1066caa37a0d7dca6146efd756d058c8">hasError</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if there is an error string to retrieve.  <a href="#ga1066caa37a0d7dca6146efd756d058c8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga34d1ec9db4032749cde607b4f403f2b9">getLastError</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the currnt error string.  <a href="#ga34d1ec9db4032749cde607b4f403f2b9"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current error string.  <a href="#ga34d1ec9db4032749cde607b4f403f2b9"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Error handlining routines. </p>
@@ -130,7 +130,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Retrieve the currnt error string. </p>
+<p>Retrieve the current error string. </p>
 <p>Example: str = getLastError ()</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Return null if fails, otherwise returns a pointer to the error string </dd></dl>
 
@@ -150,11 +150,11 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Get the logging status level as a pointer to a string. </p>
+<p>Get a pointer to the string that holds the logging file name. </p>
 <p>The logging level can be one of the following strings</p>
 <p>"ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1", "DEBUG", "INFO", "WARNING", "ERROR"</p>
 <p>Example: str = getLogFileName ()</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null is it fails else returns the full path to the logging file name </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails else returns the full path to the logging file name </dd></dl>
 
 </div>
 </div>
@@ -176,7 +176,7 @@ Functions</h2></td></tr>
 <p>The logging level can be one of the following strings</p>
 <p>"ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1", "DEBUG", "INFO", "WARNING", "ERROR"</p>
 <p>Example: str = getLogLevel ()</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null is it fails else returns a pointer to the logging string </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails else returns a pointer to the logging string </dd></dl>
 
 </div>
 </div>
@@ -196,7 +196,7 @@ Functions</h2></td></tr>
 
 <p>Check if there is an error string to retrieve. </p>
 <p>Example: status = hasError ()</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>status - Returns true if there is an error waiting to be retrieved </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if there is an error waiting to be retrieved </dd></dl>
 
 </div>
 </div>
@@ -247,7 +247,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:08:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 18 2012 17:39:17 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

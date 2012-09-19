@@ -82,16 +82,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#gaee1e79b2afc717895d302c51b49aee47">getValue</a> (const char *symbolId, double &amp;value)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of al avialable symbols.">getAvailableSymbols()</a> for a list of symbols.  <a href="#gaee1e79b2afc717895d302c51b49aee47"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of all available symbols.">getAvailableSymbols()</a> for a list of symbols.  <a href="#gaee1e79b2afc717895d302c51b49aee47"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#ga8e92a279c4f313cb038f49cc04faed73">setValue</a> (const char *symbolId, const double &amp;value)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of al avialable symbols.">getAvailableSymbols()</a> for a list of symbols.  <a href="#ga8e92a279c4f313cb038f49cc04faed73"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of all available symbols.">getAvailableSymbols()</a> for a list of symbols.  <a href="#ga8e92a279c4f313cb038f49cc04faed73"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#ga3fbb7c2fab261f25a3871f1caf398ff1">evalModel</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the current models, that it update all assignments and rates of change.  <a href="#ga3fbb7c2fab261f25a3871f1caf398ff1"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the current model, that it update all assignments and rates of change. Do not carry out an integration step.  <a href="#ga3fbb7c2fab261f25a3871f1caf398ff1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <br class="typebreak"/>
 <a class="el" href="rr__c__types_8h.html#a90941a6a2247bf7a8ec3d429729c5f9a">RRStringArrayHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#ga15fd0aa66d20ef3e733ec6fa28dbfc98">getEigenValueIds</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of eigenvalue Ids.  <a href="#ga15fd0aa66d20ef3e733ec6fa28dbfc98"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e">getAvailableSymbols</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of al avialable symbols.  <a href="#gab7164e3cb8db5f8fd8c066682ce8c62e"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of all available symbols.  <a href="#gab7164e3cb8db5f8fd8c066682ce8c62e"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Compute derivatives, fluxes, and other values of the system at the current state. </p>
@@ -110,7 +110,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Evaluate the current models, that it update all assignments and rates of change. </p>
+<p>Evaluate the current model, that it update all assignments and rates of change. Do not carry out an integration step. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns false if it fails </dd></dl>
 
 </div>
@@ -129,7 +129,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Obtain the list of al avialable symbols. </p>
+<p>Obtain the list of all available symbols. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns -1 if it fails, if succesful it returns a pointer to a RRArrayListHandle struct </dd></dl>
 
 </div>
@@ -178,7 +178,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Get the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of al avialable symbols.">getAvailableSymbols()</a> for a list of symbols. </p>
+<p>Get the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of all available symbols.">getAvailableSymbols()</a> for a list of symbols. </p>
 <p>Example: status = getValue ("S1", &amp;value)</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -216,7 +216,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Set the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of al avialable symbols.">getAvailableSymbols()</a> for a list of symbols. </p>
+<p>Set the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of all available symbols.">getAvailableSymbols()</a> for a list of symbols. </p>
 <p>Example: status = setValue ("S1", 0.5)</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -247,7 +247,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:08:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 18 2012 17:39:17 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

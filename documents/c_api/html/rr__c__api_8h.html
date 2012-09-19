@@ -99,11 +99,13 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gab4695b0f4b2ef3b91f545302de0337a2">getCopyright</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current copyright notice for the library.  <a href="group__utility.html#gab4695b0f4b2ef3b91f545302de0337a2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga957837fdd4683d56ef29c56ad701a0ba">setTempFolder</a> (const char *folder)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">SEt the temporary folder.  <a href="group__utility.html#ga957837fdd4683d56ef29c56ad701a0ba"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the path to the temporary folder where the C code will be stored.  <a href="group__utility.html#ga957837fdd4683d56ef29c56ad701a0ba"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gad8e35b98b406e9c998e33ec21248da8a">getTempFolder</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current temporary folder path.  <a href="group__utility.html#gad8e35b98b406e9c998e33ec21248da8a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="struct_r_r_c_code.html">RRCCode</a> *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaef1b097cc2ad79dfc83e0d049846f87f">getCCode</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a pointer to the C code structure, <a class="el" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCode</a>.  <a href="group__utility.html#gaef1b097cc2ad79dfc83e0d049846f87f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga75655a2127dea3140c42d28fe289946e">setCodeGenerationMode</a> (int codeGenerationMode)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the runtime generation option.  <a href="group__utility.html#ga75655a2127dea3140c42d28fe289946e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga420ec462ff4ab4bb98f9a1bd8f39434b">enableLogging</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable logging.  <a href="group__errorfunctions.html#ga420ec462ff4ab4bb98f9a1bd8f39434b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga59c256885fce7df1e4d6d5f0c5554bab">setLogLevel</a> (const char *lvl)</td></tr>
@@ -111,17 +113,17 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga77071837a73206d3e27220f3dff96ad4">getLogLevel</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the logging status level as a pointer to a string.  <a href="group__errorfunctions.html#ga77071837a73206d3e27220f3dff96ad4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga9e5c453651f5a3743e9bc10f0e81be66">getLogFileName</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the logging status level as a pointer to a string.  <a href="group__errorfunctions.html#ga9e5c453651f5a3743e9bc10f0e81be66"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the string that holds the logging file name.  <a href="group__errorfunctions.html#ga9e5c453651f5a3743e9bc10f0e81be66"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga1066caa37a0d7dca6146efd756d058c8">hasError</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if there is an error string to retrieve.  <a href="group__errorfunctions.html#ga1066caa37a0d7dca6146efd756d058c8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga34d1ec9db4032749cde607b4f403f2b9">getLastError</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the currnt error string.  <a href="group__errorfunctions.html#ga34d1ec9db4032749cde607b4f403f2b9"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current error string.  <a href="group__errorfunctions.html#ga34d1ec9db4032749cde607b4f403f2b9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">RRHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__initialization.html#gab5d1a179f93b94c8ddefa909131b3f11">getRRInstance</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the roadRunner library and return an instance.  <a href="group__initialization.html#gab5d1a179f93b94c8ddefa909131b3f11"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__initialization.html#ga59ccea13a522b2ce61220cff4ea761c2">freeRRInstance</a> (<a class="el" href="rr__c__types_8h.html#a1d68f0592372208fa5a5f2799ea4b3ae">RRHandle</a> handle)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free the roadRunner instance.  <a href="group__initialization.html#ga59ccea13a522b2ce61220cff4ea761c2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__initialization.html#ga9667953f8a21dc8034258b60acc860d5">setComputeAndAssignConservationLaws</a> (const bool &amp;OnOrOff)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable conservation analysis.  <a href="group__initialization.html#ga9667953f8a21dc8034258b60acc860d5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__initialization.html#gabb1c039f9fe910fc188f9010dca79838">setComputeAndAssignConservationLaws</a> (const bool &amp;On_Or_Off)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable conservation analysis.  <a href="group__initialization.html#gabb1c039f9fe910fc188f9010dca79838"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga4105f02dfdb959175f30cecebfb1c081">loadSBML</a> (const char *sbml)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a model from an SBML string.  <a href="group__loadsave.html#ga4105f02dfdb959175f30cecebfb1c081"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#gae4aa1daa0773e256698353861e3d1ef3">loadSBMLFromFile</a> (const char *fileName)</td></tr>
@@ -129,7 +131,7 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#gade5df220f410e86123128a2b617b6ec5">getCurrentSBML</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the <b>current state</b> of the model in the form of an SBML string.  <a href="group__loadsave.html#gade5df220f410e86123128a2b617b6ec5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga05a79ded419b52fa2965fce1700c0e82">getSBML</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the last SBML model that was loaded.  <a href="group__loadsave.html#ga05a79ded419b52fa2965fce1700c0e82"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the SBML model that was last loaded.  <a href="group__loadsave.html#ga05a79ded419b52fa2965fce1700c0e82"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rr__c__api_8h.html#a4add8092e50aedd665cd073133838620">getParamPromotedSBML</a> (const char *sArg)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Promote any local parameters to global status.  <a href="#a4add8092e50aedd665cd073133838620"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__simulation.html#ga320ffeeba3e5505371b52ce61715bf82">setCapabilities</a> (const char *caps)</td></tr>
@@ -171,9 +173,9 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__steadystate.html#ga78b12e3bb0c2d8e056f43e5c7ceee51a">getSteadyStateSelectionList</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the selection list for the steady state analysis.  <a href="group__steadystate.html#ga78b12e3bb0c2d8e056f43e5c7ceee51a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#gaee1e79b2afc717895d302c51b49aee47">getValue</a> (const char *symbolId, double &amp;value)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of al avialable symbols.">getAvailableSymbols()</a> for a list of symbols.  <a href="group__state.html#gaee1e79b2afc717895d302c51b49aee47"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of all available symbols.">getAvailableSymbols()</a> for a list of symbols.  <a href="group__state.html#gaee1e79b2afc717895d302c51b49aee47"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#ga8e92a279c4f313cb038f49cc04faed73">setValue</a> (const char *symbolId, const double &amp;value)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of al avialable symbols.">getAvailableSymbols()</a> for a list of symbols.  <a href="group__state.html#ga8e92a279c4f313cb038f49cc04faed73"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value for a given symbol, use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of all available symbols.">getAvailableSymbols()</a> for a list of symbols.  <a href="group__state.html#ga8e92a279c4f313cb038f49cc04faed73"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__floating.html#ga0db8fe5f89985f27ea4ddb3c595b16fd">getFloatingSpeciesConcentrations</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve in a vector the concentrations for all the floating species.  <a href="group__floating.html#ga0db8fe5f89985f27ea4ddb3c595b16fd"></a><br/></td></tr>
@@ -259,7 +261,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rate_of_change.html#gacfae48e32754e7678b8bb003df93ef53">getRatesOfChangeEx</a> (const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vec)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the vector of rates of change given a vector of floating species concentrations.  <a href="group__rate_of_change.html#gacfae48e32754e7678b8bb003df93ef53"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#ga3fbb7c2fab261f25a3871f1caf398ff1">evalModel</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the current models, that it update all assignments and rates of change.  <a href="group__state.html#ga3fbb7c2fab261f25a3871f1caf398ff1"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluate the current model, that it update all assignments and rates of change. Do not carry out an integration step.  <a href="group__state.html#ga3fbb7c2fab261f25a3871f1caf398ff1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga5ea2479b882549edd4fb75397ca38f52"></a><!-- doxytag: member="rr_c_api.h::getNumberOfCompartments" ref="ga5ea2479b882549edd4fb75397ca38f52" args="()" -->
 C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__compartment.html#ga5ea2479b882549edd4fb75397ca38f52">getNumberOfCompartments</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of compartments in the model. <br/></td></tr>
@@ -300,7 +302,7 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 <a class="el" href="rr__c__types_8h.html#a90941a6a2247bf7a8ec3d429729c5f9a">RRStringArrayHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#ga15fd0aa66d20ef3e733ec6fa28dbfc98">getEigenValueIds</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of eigenvalue Ids.  <a href="group__state.html#ga15fd0aa66d20ef3e733ec6fa28dbfc98"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e">getAvailableSymbols</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of al avialable symbols.  <a href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of all available symbols.  <a href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga8fbef393d2135e8e553718fb1dc489ab">getElasticityCoefficientIds</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of elasticity coefficient Ids.  <a href="group__mca.html#ga8fbef393d2135e8e553718fb1dc489ab"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga3a3ffa45b0188f017fb32473db3550f2">getUnscaledFluxControlCoefficientIds</a> ()</td></tr>
@@ -399,10 +401,10 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the main source file for the current model (if applicable)  <a href="group__helper_routines.html#gabb964f1aad030deee67c313d9bdf3520"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#gad64da966bab0101e1d4807f0f146f753">getCSourceFileName</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the name of model source file for the current model (if applicable)  <a href="group__helper_routines.html#gad64da966bab0101e1d4807f0f146f753"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afe3423b79b42fdfc6ba24152bb76915b"></a><!-- doxytag: member="rr_c_api.h::createRRList" ref="afe3423b79b42fdfc6ba24152bb76915b" args="()" -->
-C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><b>createRRList</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__list.html#gafe3423b79b42fdfc6ba24152bb76915b">createRRList</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new list.  <a href="group__list.html#gafe3423b79b42fdfc6ba24152bb76915b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="gaab382870e042e61758048b8a30884bc7"></a><!-- doxytag: member="rr_c_api.h::freeRRList" ref="gaab382870e042e61758048b8a30884bc7" args="(RRListHandle list)" -->
-C_DECL_SPEC void rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__free_routines.html#gaab382870e042e61758048b8a30884bc7">freeRRList</a> (<a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> list)</td></tr>
+C_DECL_SPEC void rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__list.html#gaab382870e042e61758048b8a30884bc7">freeRRList</a> (<a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> list)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Free RRListHandle structures. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2396e6a615295328a1b7c7d654b00e3d"></a><!-- doxytag: member="rr_c_api.h::createIntegerItem" ref="a2396e6a615295328a1b7c7d654b00e3d" args="(int value)" -->
 C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a2bab41753cbe82e6aae432769e5143fb">RRListItemHandle</a> <br class="typebreak"/>
@@ -526,7 +528,7 @@ C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770
 <p>Promote any local parameters to global status. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">sArg</td><td>points to the SBML model to promote </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">sArg</td><td>points to the SBML model to promote </td></tr>
   </table>
   </dd>
 </dl>
@@ -591,7 +593,7 @@ C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:08:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 18 2012 17:39:17 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

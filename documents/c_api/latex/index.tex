@@ -1,13 +1,15 @@
 \hypertarget{index_intro_sec}{}\section{\-Introduction}\label{index_intro_sec}
-\-Road\-Runner is a high performance and portable simulation engine for systems and synthetic biology. \-To run a simple \-S\-B\-M\-L model and generate time series data we would call\-:
+\-Road\-Runner is a \-S\-B\-M\-L compliant high performance and portable simulation engine for systems and synthetic biology. \-To run a simple \-S\-B\-M\-L model and generate time series data we would call\-:
 
 
 \begin{DoxyCode}
- RRResultHandle output;
+ RRResultHandle result;
 
- loadSBMLFromFile ("mymodel.xml");
+ if (!loadSBMLFromFile ("mymodel.xml"))
+    exit;
 
- output = simulate (0, 10, 100);
+ result = simulate (0, 10, 100);
+ printf (resultToString (output)
 \end{DoxyCode}
 
 
@@ -37,9 +39,9 @@
         printf("Output table has %i rows and %i columns\n", output->RSize, 
       output->RCols);
         printResult (output);
-        
+
         freeResult (output);
-        freeRrInstance (rrInstance)
+        freeRRInstance (rrInstance)
 
         return 0;
  }

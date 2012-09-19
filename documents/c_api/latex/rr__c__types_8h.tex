@@ -14,9 +14,7 @@ road\-Runner \-C \-A\-P\-I 2012
 \item 
 struct \hyperlink{struct_r_r_vector}{\-R\-R\-Vector}
 \begin{DoxyCompactList}\small\item\em \-Structure for a simple vector of doubles. \end{DoxyCompactList}\item 
-struct \hyperlink{struct_r_r_label_string_list}{\-R\-R\-Label\-String\-List}
-\begin{DoxyCompactList}\small\item\em \-Structure that stores a list of strings with a label. \end{DoxyCompactList}\item 
-struct \hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List}
+struct \hyperlink{struct_r_r_string_array}{\-R\-R\-String\-Array}
 \begin{DoxyCompactList}\small\item\em \-Structure for a simple vector of strings. \end{DoxyCompactList}\item 
 struct \hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix}
 \begin{DoxyCompactList}\small\item\em \-Structure for a simple \-Matrix type. \end{DoxyCompactList}\item 
@@ -24,13 +22,9 @@ struct \hyperlink{struct_r_r_result}{\-R\-R\-Result}
 \begin{DoxyCompactList}\small\item\em \-Structure for the result type from the simulate calls. \end{DoxyCompactList}\item 
 struct \hyperlink{struct_r_r_c_code}{\-R\-R\-C\-Code}
 \begin{DoxyCompactList}\small\item\em \-Convenient structure for storing the header and main body source for the generate simulation \-C code. \end{DoxyCompactList}\item 
-struct \hyperlink{struct_r_r_string_array_list_item}{\-R\-R\-String\-Array\-List\-Item}
-\begin{DoxyCompactList}\small\item\em \-To be deprecated. \end{DoxyCompactList}\item 
-struct \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List}
-\begin{DoxyCompactList}\small\item\em \-To be deprecated. \end{DoxyCompactList}\item 
-struct \hyperlink{structc_r_r_array_list_item}{c\-R\-R\-Array\-List\-Item}
+struct \hyperlink{struct_r_r_list_item}{\-R\-R\-List\-Item}
 \begin{DoxyCompactList}\small\item\em \-A single list element type. \end{DoxyCompactList}\item 
-struct \hyperlink{structc_r_r_array_list}{c\-R\-R\-Array\-List}
+struct \hyperlink{struct_r_r_list}{\-R\-R\-List}
 \begin{DoxyCompactList}\small\item\em \-A list type, stores int, double, strings and lists. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{\-Typedefs}
 \begin{DoxyCompactItemize}
@@ -42,9 +36,7 @@ typedef void $\ast$ \hyperlink{rr__c__types_8h_a1d68f0592372208fa5a5f2799ea4b3ae
 \begin{DoxyCompactList}\small\item\em \-Void pointer to \-R\-R\-Handle. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{struct_r_r_vector}{\-R\-R\-Vector} $\ast$ \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle}
 \begin{DoxyCompactList}\small\item\em \-Structure for a simple vector of doubles. \end{DoxyCompactList}\item 
-typedef struct \hyperlink{struct_r_r_label_string_list}{\-R\-R\-Label\-String\-List} $\ast$ \hyperlink{rr__c__types_8h_a26351ea684f1075438832d8d35745739}{\-R\-R\-Label\-String\-List\-Handle}
-\begin{DoxyCompactList}\small\item\em \-Structure that stores a list of strings with a label. \end{DoxyCompactList}\item 
-typedef struct \hyperlink{struct_r_r_string_list}{\-R\-R\-String\-List} $\ast$ \hyperlink{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{\-R\-R\-String\-List\-Handle}
+typedef struct \hyperlink{struct_r_r_string_array}{\-R\-R\-String\-Array} $\ast$ \hyperlink{rr__c__types_8h_a90941a6a2247bf7a8ec3d429729c5f9a}{\-R\-R\-String\-Array\-Handle}
 \begin{DoxyCompactList}\small\item\em \-Structure for a simple vector of strings. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{struct_r_r_matrix}{\-R\-R\-Matrix} $\ast$ \hyperlink{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{\-R\-R\-Matrix\-Handle}
 \begin{DoxyCompactList}\small\item\em \-Structure for a simple \-Matrix type. \end{DoxyCompactList}\item 
@@ -52,14 +44,9 @@ typedef struct \hyperlink{struct_r_r_result}{\-R\-R\-Result} $\ast$ \hyperlink{r
 \begin{DoxyCompactList}\small\item\em \-Structure for the result type from the simulate calls. \end{DoxyCompactList}\item 
 typedef struct \hyperlink{struct_r_r_c_code}{\-R\-R\-C\-Code} $\ast$ \hyperlink{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{\-R\-R\-C\-Code\-Handle}
 \begin{DoxyCompactList}\small\item\em \-Convenient structure for storing the header and main body source for the generate simulation \-C code. \end{DoxyCompactList}\item 
-typedef struct \*
-\hyperlink{struct_r_r_string_array_list_item}{\-R\-R\-String\-Array\-List\-Item} $\ast$ \hyperlink{rr__c__types_8h_a0f26974a8843e83ce00c013648e3a0e4}{\-R\-R\-String\-Array\-List\-Item\-Handle}
-\begin{DoxyCompactList}\small\item\em \-To be deprecated. \end{DoxyCompactList}\item 
-typedef struct \hyperlink{struct_r_r_string_array_list}{\-R\-R\-String\-Array\-List} $\ast$ \hyperlink{rr__c__types_8h_ab1bd3d726b37b2b2be69f0144e5a3e18}{\-R\-R\-String\-Array\-List\-Handle}
-\begin{DoxyCompactList}\small\item\em \-To be deprecated. \end{DoxyCompactList}\item 
-typedef struct \hyperlink{structc_r_r_array_list_item}{c\-R\-R\-Array\-List\-Item} $\ast$ \hyperlink{rr__c__types_8h_a7d123cd39af40ddc3748e70c2dc5caa7}{c\-R\-R\-Array\-List\-Item\-Handle}
+typedef struct \hyperlink{struct_r_r_list_item}{\-R\-R\-List\-Item} $\ast$ \hyperlink{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{\-R\-R\-List\-Item\-Handle}
 \begin{DoxyCompactList}\small\item\em \-A single list element type. \end{DoxyCompactList}\item 
-typedef struct \hyperlink{structc_r_r_array_list}{c\-R\-R\-Array\-List} $\ast$ \hyperlink{rr__c__types_8h_a27e4a0c963507a3736c4944c0d17d254}{c\-R\-R\-Array\-List\-Handle}
+typedef struct \hyperlink{struct_r_r_list}{\-R\-R\-List} $\ast$ \hyperlink{rr__c__types_8h_a840005f5261fec71eec85cc770317c5d}{\-R\-R\-List\-Handle}
 \begin{DoxyCompactList}\small\item\em \-A list type, stores int, double, strings and lists. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{\-Enumerations}
 \begin{DoxyCompactItemize}
@@ -67,7 +54,7 @@ typedef struct \hyperlink{structc_r_r_array_list}{c\-R\-R\-Array\-List} $\ast$ \
 enum \hyperlink{rr__c__types_8h_ab99437ab2e88aa90b7ebb8add042b25e}{\-List\-Item\-Type} \{ {\bfseries lit\-String}, 
 {\bfseries lit\-Integer}, 
 {\bfseries lit\-Double}, 
-{\bfseries lit\-Array\-List}
+{\bfseries lit\-List}
  \}
 \begin{DoxyCompactList}\small\item\em \-The list type supports strings, integers, double and lists. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -101,25 +88,7 @@ $<$-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\
 redistribute any piece of this software without proper attribution; 
 
 \subsection{\-Typedef \-Documentation}
-\hypertarget{rr__c__types_8h_a27e4a0c963507a3736c4944c0d17d254}{
-\index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!c\-R\-R\-Array\-List\-Handle@{c\-R\-R\-Array\-List\-Handle}}
-\index{c\-R\-R\-Array\-List\-Handle@{c\-R\-R\-Array\-List\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
-\subsubsection[{c\-R\-R\-Array\-List\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf c\-R\-R\-Array\-List}  $\ast$ {\bf c\-R\-R\-Array\-List\-Handle}}}
-\label{rr__c__types_8h_a27e4a0c963507a3736c4944c0d17d254}
-
-
-\-A list type, stores int, double, strings and lists. 
-
-\-Pointer to c\-R\-R\-Array\-List\-Handle struct \hypertarget{rr__c__types_8h_a7d123cd39af40ddc3748e70c2dc5caa7}{
-\index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!c\-R\-R\-Array\-List\-Item\-Handle@{c\-R\-R\-Array\-List\-Item\-Handle}}
-\index{c\-R\-R\-Array\-List\-Item\-Handle@{c\-R\-R\-Array\-List\-Item\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
-\subsubsection[{c\-R\-R\-Array\-List\-Item\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf c\-R\-R\-Array\-List\-Item} $\ast$ {\bf c\-R\-R\-Array\-List\-Item\-Handle}}}
-\label{rr__c__types_8h_a7d123cd39af40ddc3748e70c2dc5caa7}
-
-
-\-A single list element type. 
-
-\-Pointer to c\-R\-R\-Array\-List\-Item\-Handle struct \hypertarget{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{
+\hypertarget{rr__c__types_8h_aaaa74f20722a48f3ae9ed5bdbb6c8a86}{
 \index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!\-R\-R\-C\-Code\-Handle@{\-R\-R\-C\-Code\-Handle}}
 \index{\-R\-R\-C\-Code\-Handle@{\-R\-R\-C\-Code\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
 \subsubsection[{\-R\-R\-C\-Code\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \-R\-R\-C\-Code} $\ast$ {\bf \-R\-R\-C\-Code\-Handle}}}
@@ -128,16 +97,25 @@ redistribute any piece of this software without proper attribution;
 
 \-Convenient structure for storing the header and main body source for the generate simulation \-C code. 
 
-\-Pointer to \-R\-R\-C\-Code\-Handle struct \hypertarget{rr__c__types_8h_a26351ea684f1075438832d8d35745739}{
-\index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!\-R\-R\-Label\-String\-List\-Handle@{\-R\-R\-Label\-String\-List\-Handle}}
-\index{\-R\-R\-Label\-String\-List\-Handle@{\-R\-R\-Label\-String\-List\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
-\subsubsection[{\-R\-R\-Label\-String\-List\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \-R\-R\-Label\-String\-List} $\ast$ {\bf \-R\-R\-Label\-String\-List\-Handle}}}
-\label{rr__c__types_8h_a26351ea684f1075438832d8d35745739}
+\-Pointer to \-R\-R\-C\-Code\-Handle struct \hypertarget{rr__c__types_8h_a840005f5261fec71eec85cc770317c5d}{
+\index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!\-R\-R\-List\-Handle@{\-R\-R\-List\-Handle}}
+\index{\-R\-R\-List\-Handle@{\-R\-R\-List\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
+\subsubsection[{\-R\-R\-List\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \-R\-R\-List}  $\ast$ {\bf \-R\-R\-List\-Handle}}}
+\label{rr__c__types_8h_a840005f5261fec71eec85cc770317c5d}
 
 
-\-Structure that stores a list of strings with a label. 
+\-A list type, stores int, double, strings and lists. 
 
-\-Pointer to \hyperlink{struct_r_r_label_string_list}{\-R\-R\-Label\-String\-List} struct \hypertarget{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{
+\-Pointer to c\-R\-R\-Array\-List\-Handle struct \hypertarget{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}{
+\index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!\-R\-R\-List\-Item\-Handle@{\-R\-R\-List\-Item\-Handle}}
+\index{\-R\-R\-List\-Item\-Handle@{\-R\-R\-List\-Item\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
+\subsubsection[{\-R\-R\-List\-Item\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \-R\-R\-List\-Item} $\ast$ {\bf \-R\-R\-List\-Item\-Handle}}}
+\label{rr__c__types_8h_a2bab41753cbe82e6aae432769e5143fb}
+
+
+\-A single list element type. 
+
+\-Pointer to c\-R\-R\-Array\-List\-Item\-Handle struct \hypertarget{rr__c__types_8h_a87174eefa58ae98dec58c9253ae6c5da}{
 \index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!\-R\-R\-Matrix\-Handle@{\-R\-R\-Matrix\-Handle}}
 \index{\-R\-R\-Matrix\-Handle@{\-R\-R\-Matrix\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
 \subsubsection[{\-R\-R\-Matrix\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \-R\-R\-Matrix} $\ast$ {\bf \-R\-R\-Matrix\-Handle}}}
@@ -155,29 +133,11 @@ redistribute any piece of this software without proper attribution;
 
 \-Structure for the result type from the simulate calls. 
 
-\-Pointer to \-R\-R\-Result\-Handle struct \hypertarget{rr__c__types_8h_ab1bd3d726b37b2b2be69f0144e5a3e18}{
-\index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!\-R\-R\-String\-Array\-List\-Handle@{\-R\-R\-String\-Array\-List\-Handle}}
-\index{\-R\-R\-String\-Array\-List\-Handle@{\-R\-R\-String\-Array\-List\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
-\subsubsection[{\-R\-R\-String\-Array\-List\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \-R\-R\-String\-Array\-List}  $\ast$ {\bf \-R\-R\-String\-Array\-List\-Handle}}}
-\label{rr__c__types_8h_ab1bd3d726b37b2b2be69f0144e5a3e18}
-
-
-\-To be deprecated. 
-
-\-Pointer to \-R\-R\-String\-Array\-List\-Handle struct \hypertarget{rr__c__types_8h_a0f26974a8843e83ce00c013648e3a0e4}{
-\index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!\-R\-R\-String\-Array\-List\-Item\-Handle@{\-R\-R\-String\-Array\-List\-Item\-Handle}}
-\index{\-R\-R\-String\-Array\-List\-Item\-Handle@{\-R\-R\-String\-Array\-List\-Item\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
-\subsubsection[{\-R\-R\-String\-Array\-List\-Item\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \-R\-R\-String\-Array\-List\-Item} $\ast$ {\bf \-R\-R\-String\-Array\-List\-Item\-Handle}}}
-\label{rr__c__types_8h_a0f26974a8843e83ce00c013648e3a0e4}
-
-
-\-To be deprecated. 
-
-\-Pointer to \-R\-R\-String\-Array\-List\-Item\-Handle struct \hypertarget{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}{
-\index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!\-R\-R\-String\-List\-Handle@{\-R\-R\-String\-List\-Handle}}
-\index{\-R\-R\-String\-List\-Handle@{\-R\-R\-String\-List\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
-\subsubsection[{\-R\-R\-String\-List\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \-R\-R\-String\-List} $\ast$ {\bf \-R\-R\-String\-List\-Handle}}}
-\label{rr__c__types_8h_abf561b014879247b7b92ee99c205de21}
+\-Pointer to \-R\-R\-Result\-Handle struct \hypertarget{rr__c__types_8h_a90941a6a2247bf7a8ec3d429729c5f9a}{
+\index{rr\-\_\-c\-\_\-types.\-h@{rr\-\_\-c\-\_\-types.\-h}!\-R\-R\-String\-Array\-Handle@{\-R\-R\-String\-Array\-Handle}}
+\index{\-R\-R\-String\-Array\-Handle@{\-R\-R\-String\-Array\-Handle}!rr_c_types.h@{rr\-\_\-c\-\_\-types.\-h}}
+\subsubsection[{\-R\-R\-String\-Array\-Handle}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf \-R\-R\-String\-Array} $\ast$ {\bf \-R\-R\-String\-Array\-Handle}}}
+\label{rr__c__types_8h_a90941a6a2247bf7a8ec3d429729c5f9a}
 
 
 \-Structure for a simple vector of strings. 

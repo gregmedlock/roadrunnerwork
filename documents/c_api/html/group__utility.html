@@ -88,11 +88,13 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gab4695b0f4b2ef3b91f545302de0337a2">getCopyright</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current copyright notice for the library.  <a href="#gab4695b0f4b2ef3b91f545302de0337a2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga957837fdd4683d56ef29c56ad701a0ba">setTempFolder</a> (const char *folder)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">SEt the temporary folder.  <a href="#ga957837fdd4683d56ef29c56ad701a0ba"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the path to the temporary folder where the C code will be stored.  <a href="#ga957837fdd4683d56ef29c56ad701a0ba"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gad8e35b98b406e9c998e33ec21248da8a">getTempFolder</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current temporary folder path.  <a href="#gad8e35b98b406e9c998e33ec21248da8a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="struct_r_r_c_code.html">RRCCode</a> *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaef1b097cc2ad79dfc83e0d049846f87f">getCCode</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a pointer to the C code structure, <a class="el" href="struct_r_r_c_code.html" title="Convenient structure for storing the header and main body source for the generate simulation C code...">RRCCode</a>.  <a href="#gaef1b097cc2ad79dfc83e0d049846f87f"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga75655a2127dea3140c42d28fe289946e">setCodeGenerationMode</a> (int codeGenerationMode)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the runtime generation option.  <a href="#ga75655a2127dea3140c42d28fe289946e"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Various miscellaneous routines that return useful inforamtion about the library. </p>
@@ -194,6 +196,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga75655a2127dea3140c42d28fe289946e"></a><!-- doxytag: member="rr_c_api.h::setCodeGenerationMode" ref="ga75655a2127dea3140c42d28fe289946e" args="(int codeGenerationMode)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC bool rrCallConv setCodeGenerationMode </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>codeGenerationMode</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the runtime generation option. </p>
+<p>cRoadRunner can either execute a model by generating, compiling and linking self-generated C code or it can employ an internal interpreter to evaluate the model equations. The later method is useful when the OS forbids the compiling of externally generated code.</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">mode</td><td>A integer, is set to 0 cRoadRunner generates C Code, if set to 1 cRoadRunner uses its internal math interpreter. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns false if it fails, </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ga957837fdd4683d56ef29c56ad701a0ba"></a><!-- doxytag: member="rr_c_api.h::setTempFolder" ref="ga957837fdd4683d56ef29c56ad701a0ba" args="(const char *folder)" -->
 <div class="memitem">
 <div class="memproto">
@@ -209,7 +238,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>SEt the temporary folder. </p>
+<p>Set the path to the temporary folder where the C code will be stored. </p>
 <p>When cRoadRunner is run in C generation mode its uses a temporary folder to store the generate C source code. This method can be used to set the temporary folder path if necessary.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if succesful </dd></dl>
 
@@ -233,7 +262,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:08:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 18 2012 17:39:17 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
