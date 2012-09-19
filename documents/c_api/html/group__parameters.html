@@ -69,6 +69,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Parameter group</div>  </div>
 </div>
@@ -77,29 +79,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Set and get global and local parameters.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="member-group"></a>
-Utility routines</h2></td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaf4be0a5e72db408248569a1d3e28c1f0">getGlobalParameterValues</a> ()</td></tr>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parameters.html#gaf4be0a5e72db408248569a1d3e28c1f0">getGlobalParameterValues</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve in a vector the values for all the lgobal parameter values.  <a href="#gaf4be0a5e72db408248569a1d3e28c1f0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga65d9546856e5526fc403539903039f8e">setGlobalParameterByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parameters.html#ga65d9546856e5526fc403539903039f8e">setGlobalParameterByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value for a particular global parameter.  <a href="#ga65d9546856e5526fc403539903039f8e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2f33a70dfd6c68fb585cf5d1a9c1339c"></a><!-- doxytag: member="parameters::getNumberOfGlobalParameters" ref="ga2f33a70dfd6c68fb585cf5d1a9c1339c" args="()" -->
-C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga2f33a70dfd6c68fb585cf5d1a9c1339c">getNumberOfGlobalParameters</a> ()</td></tr>
+C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parameters.html#ga2f33a70dfd6c68fb585cf5d1a9c1339c">getNumberOfGlobalParameters</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of global parameters in the model. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gad54bc548747794f11d90f2150a1c621d">getGlobalParameterIds</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of global parameter Ids.  <a href="#gad54bc548747794f11d90f2150a1c621d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <br class="typebreak"/>
+<a class="el" href="rr__c__types_8h.html#a90941a6a2247bf7a8ec3d429729c5f9a">RRStringArrayHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parameters.html#ga142050a8f4ad5c9a45455102848b5352">getGlobalParameterIds</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the list of global parameter Ids.  <a href="#ga142050a8f4ad5c9a45455102848b5352"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Set and get global and local parameters. </p>
 <hr/><h2>Function Documentation</h2>
-<a class="anchor" id="gad54bc548747794f11d90f2150a1c621d"></a><!-- doxytag: member="rr_c_api.h::getGlobalParameterIds" ref="gad54bc548747794f11d90f2150a1c621d" args="()" -->
+<a class="anchor" id="ga142050a8f4ad5c9a45455102848b5352"></a><!-- doxytag: member="rr_c_api.h::getGlobalParameterIds" ref="ga142050a8f4ad5c9a45455102848b5352" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getGlobalParameterIds </td>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a90941a6a2247bf7a8ec3d429729c5f9a">RRStringArrayHandle</a> rrCallConv getGlobalParameterIds </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -188,7 +190,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 7 2012 12:37:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 18 2012 17:08:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

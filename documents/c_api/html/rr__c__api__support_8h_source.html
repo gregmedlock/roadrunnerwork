@@ -97,30 +97,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00017"></a>00017 
 <a name="l00018"></a>00018 <span class="keyword">namespace </span>rr_c_api
 <a name="l00019"></a>00019 {
-<a name="l00020"></a>00020 <span class="keyword">using</span> rr::StringList;
-<a name="l00021"></a>00021 <span class="keyword">using</span> rr::ArrayList;
-<a name="l00022"></a>00022 <span class="keyword">using</span> rr::RRArrayList;
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024 <span class="comment">//Error/Warning Messages</span>
-<a name="l00025"></a>00025 <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* ALLOCATE_API_ERROR_MSG;
+<a name="l00020"></a>00020 <span class="comment">//Error/Warning Messages</span>
+<a name="l00021"></a>00021 <span class="keyword">extern</span> <span class="keyword">const</span> <span class="keywordtype">char</span>*      ALLOCATE_API_ERROR_MSG;
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="comment">//Internal prototypes (not exported)</span>
+<a name="l00024"></a>00024 <span class="keywordtype">void</span>                setError(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; err);
+<a name="l00025"></a>00025 <span class="keywordtype">bool</span>                copyVector(<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVector</a>* source, vector&lt;double&gt;&amp; dest);
 <a name="l00026"></a>00026 
-<a name="l00027"></a>00027 <span class="comment">//Internal prototypes (not exported)</span>
-<a name="l00028"></a>00028 <span class="keywordtype">void</span>                setError(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; err);
-<a name="l00029"></a>00029 <span class="keywordtype">bool</span>                copyVector(<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVector</a>* source, vector&lt;double&gt;&amp; dest);
-<a name="l00030"></a>00030 
-<a name="l00031"></a>00031 <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVector</a>*           createVectorFromVector_double(<span class="keyword">const</span> vector&lt;double&gt;&amp; vec);
-<a name="l00032"></a>00032 vector&lt;double&gt;      createVectorFromRRVector(<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVector</a>* vec);
-<a name="l00033"></a>00033 <span class="keywordtype">char</span>*               createText(<span class="keyword">const</span> <span class="keywordtype">char</span>* str);        <span class="comment">//To be deleted by client using freeText</span>
-<a name="l00034"></a>00034 <span class="keywordtype">char</span>*               createText(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str);      <span class="comment">//To be deleted by client using freeText</span>
-<a name="l00035"></a>00035 <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrix</a>*           createMatrix(<span class="keyword">const</span> LIB_LA::DoubleMatrix&amp; mat);
-<a name="l00036"></a>00036 <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringList</a>*       createList(<span class="keyword">const</span> rr::StringList&amp; aList);
-<a name="l00037"></a>00037 <a class="code" href="struct_r_r_string_list.html" title="Structure for a simple vector of strings.">RRStringList</a>*       createList(<span class="keyword">const</span> rr::ArrayList&amp; aList);
-<a name="l00038"></a>00038 <a class="code" href="struct_r_r_string_array_list.html" title="To be deprecated.">RRStringArrayList</a>*  createList(<span class="keyword">const</span> rr::RRArrayList&lt;string&gt;&amp; aList);
-<a name="l00039"></a>00039 <a class="code" href="structc_r_r_array_list.html" title="A list type, stores int, double, strings and lists.">cRRArrayList</a>*       createList(<span class="keyword">const</span> rr::ArrayList2&amp; aList);
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041 }
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="preprocessor">#endif</span>
+<a name="l00027"></a>00027 <span class="keywordtype">char</span>*               createText(<span class="keyword">const</span> <span class="keywordtype">char</span>* str);        <span class="comment">//To be deleted by client using freeText</span>
+<a name="l00028"></a>00028 <span class="keywordtype">char</span>*               createText(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; str);      <span class="comment">//To be deleted by client using freeText</span>
+<a name="l00029"></a>00029 <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a>      createVectorFromVector_double(<span class="keyword">const</span> vector&lt;double&gt;&amp; vec);
+<a name="l00030"></a>00030 vector&lt;double&gt;      createVectorFromRRVector(<span class="keyword">const</span> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVector</a>* vec);
+<a name="l00031"></a>00031 <a class="code" href="struct_r_r_matrix.html" title="Structure for a simple Matrix type.">RRMatrixHandle</a>      createMatrix(<span class="keyword">const</span> LIB_LA::DoubleMatrix* mat);
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 <span class="comment">//Lists and arrays</span>
+<a name="l00034"></a>00034 <a class="code" href="struct_r_r_string_array.html" title="Structure for a simple vector of strings.">RRStringArrayHandle</a> createList(<span class="keyword">const</span> rr::StringList&amp; aList);
+<a name="l00035"></a>00035 <a class="code" href="struct_r_r_list.html" title="A list type, stores int, double, strings and lists.">RRListHandle</a>            createList(<span class="keyword">const</span> rr::RRArrayList&lt;string&gt;&amp; aList);
+<a name="l00036"></a>00036 <a class="code" href="struct_r_r_list.html" title="A list type, stores int, double, strings and lists.">RRListHandle</a>        createList(<span class="keyword">const</span> rr::ArrayList&amp; arrList);
+<a name="l00037"></a>00037 <a class="code" href="struct_r_r_list.html" title="A list type, stores int, double, strings and lists.">RRListHandle</a>            createList(<span class="keyword">const</span> rr::ArrayList2&amp; aList);
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040 }
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 <span class="preprocessor">#endif</span>
 </pre></div></div>
 </div>
 <!-- window showing the filter options -->
@@ -140,7 +139,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 7 2012 12:37:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 18 2012 17:08:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

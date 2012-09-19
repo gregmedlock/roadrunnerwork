@@ -69,6 +69,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Steady State Routines</div>  </div>
 </div>
@@ -77,18 +79,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Compute and obtain basic information about the steady state.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="member-group"></a>
-Utility routines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga0edd5f5a66884e0767d855d639cb45c0">steadyState</a> (double &amp;value)</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__steadystate.html#ga0edd5f5a66884e0767d855d639cb45c0">steadyState</a> (double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the steady state of the current model.  <a href="#ga0edd5f5a66884e0767d855d639cb45c0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga95269e5d546721d19139d746d5ac8358">computeSteadyStateValues</a> ()</td></tr>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__steadystate.html#ga95269e5d546721d19139d746d5ac8358">computeSteadyStateValues</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A convenient method for returning a vector of the steady state species concentrations.  <a href="#ga95269e5d546721d19139d746d5ac8358"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga397a988c31c2010d9f2752080afa8dad">setSteadyStateSelectionList</a> (const char *list)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__steadystate.html#ga397a988c31c2010d9f2752080afa8dad">setSteadyStateSelectionList</a> (const char *list)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the selection list of the steady state analysis.  <a href="#ga397a988c31c2010d9f2752080afa8dad"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga29b3868509ef2c09e4bbf0b11b731443">getSteadyStateSelectionList</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the selection list for the steady state analysis.  <a href="#ga29b3868509ef2c09e4bbf0b11b731443"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__steadystate.html#ga78b12e3bb0c2d8e056f43e5c7ceee51a">getSteadyStateSelectionList</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the selection list for the steady state analysis.  <a href="#ga78b12e3bb0c2d8e056f43e5c7ceee51a"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Compute and obtain basic information about the steady state. </p>
@@ -113,12 +114,12 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 </div>
 </div>
-<a class="anchor" id="ga29b3868509ef2c09e4bbf0b11b731443"></a><!-- doxytag: member="rr_c_api.h::getSteadyStateSelectionList" ref="ga29b3868509ef2c09e4bbf0b11b731443" args="()" -->
+<a class="anchor" id="ga78b12e3bb0c2d8e056f43e5c7ceee51a"></a><!-- doxytag: member="rr_c_api.h::getSteadyStateSelectionList" ref="ga78b12e3bb0c2d8e056f43e5c7ceee51a" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getSteadyStateSelectionList </td>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a840005f5261fec71eec85cc770317c5d">RRListHandle</a> rrCallConv getSteadyStateSelectionList </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -203,7 +204,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 7 2012 12:37:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 18 2012 17:08:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

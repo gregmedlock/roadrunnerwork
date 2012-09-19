@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>cRoadRunner: Initial consitions group</title>
+<title>cRoadRunner: Initial conditions group</title>
 
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
@@ -69,24 +69,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Initial consitions group</div>  </div>
+<div class="title">Initial conditions group</div>  </div>
 </div>
 <div class="contents">
 
 <p>Set or get initial conditions.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="member-group"></a>
-Utility routines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga338d8b7e0648b293a134e69bd7862dc6">setFloatingSpeciesInitialConcentrations</a> (const <a class="el" href="struct_r_r_vector.html">RRVector</a> *vec)</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__initial_conditions.html#ga338d8b7e0648b293a134e69bd7862dc6">setFloatingSpeciesInitialConcentrations</a> (const <a class="el" href="struct_r_r_vector.html">RRVector</a> *vec)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the initial floating species concentrations.  <a href="#ga338d8b7e0648b293a134e69bd7862dc6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga6458f13569fc543075b559978f4f83ac">getFloatingSpeciesInitialConcentrations</a> ()</td></tr>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__initial_conditions.html#ga6458f13569fc543075b559978f4f83ac">getFloatingSpeciesInitialConcentrations</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the initial floating species concentrations.  <a href="#ga6458f13569fc543075b559978f4f83ac"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga689a1b23b292502abff4ddcace7a6cfe">getFloatingSpeciesInitialConditionIds</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the initial floating species Ids.  <a href="#ga689a1b23b292502abff4ddcace7a6cfe"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <br class="typebreak"/>
+<a class="el" href="rr__c__types_8h.html#a90941a6a2247bf7a8ec3d429729c5f9a">RRStringArrayHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__initial_conditions.html#gab7dbc1cf345c29aa7b924322b2d96a23">getFloatingSpeciesInitialConditionIds</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the initial floating species Ids.  <a href="#gab7dbc1cf345c29aa7b924322b2d96a23"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Set or get initial conditions. </p>
@@ -111,12 +113,12 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 </div>
 </div>
-<a class="anchor" id="ga689a1b23b292502abff4ddcace7a6cfe"></a><!-- doxytag: member="rr_c_api.h::getFloatingSpeciesInitialConditionIds" ref="ga689a1b23b292502abff4ddcace7a6cfe" args="()" -->
+<a class="anchor" id="gab7dbc1cf345c29aa7b924322b2d96a23"></a><!-- doxytag: member="rr_c_api.h::getFloatingSpeciesInitialConditionIds" ref="gab7dbc1cf345c29aa7b924322b2d96a23" args="()" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#abf561b014879247b7b92ee99c205de21">RRStringListHandle</a> rrCallConv getFloatingSpeciesInitialConditionIds </td>
+          <td class="memname">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a90941a6a2247bf7a8ec3d429729c5f9a">RRStringArrayHandle</a> rrCallConv getFloatingSpeciesInitialConditionIds </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -150,7 +152,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <p>Example: status = setFloatingSpeciesInitialConcentrations (vec);</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">vec</td><td>A vector of species concentrations: order given by <a class="el" href="group__floating.html#ga6df4c12d297a9c93b4d33c754f0f1e19" title="Obtain the list of floating species Id.">getFloatingSpeciesIds()</a> </td></tr>
+    <tr><td class="paramname">vec</td><td>A vector of species concentrations: order given by <a class="el" href="group__floating.html#gad138c0072b188551324147fb17635b48" title="Obtain the list of floating species Id.">getFloatingSpeciesIds()</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -176,7 +178,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 7 2012 12:37:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 18 2012 17:08:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

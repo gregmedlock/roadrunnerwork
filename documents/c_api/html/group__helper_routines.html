@@ -69,6 +69,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
 </div>
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Helper Routines</div>  </div>
 </div>
@@ -77,35 +79,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Helper routines for acessing the various C API types, eg lists and arrays.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="member-group"></a>
-Utility routines</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga0c42e94111a64ea70824f92d8c1b564d">getVectorLength</a> (<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vector)</td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#ga0c42e94111a64ea70824f92d8c1b564d">getVectorLength</a> (<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vector)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the number of elements in a vector type.  <a href="#ga0c42e94111a64ea70824f92d8c1b564d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
-rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gac5fce83bedb9404ebb80895fa740a9d2">createVector</a> (int size)</td></tr>
+rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#gac5fce83bedb9404ebb80895fa740a9d2">createVector</a> (int size)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new vector with a given size.  <a href="#gac5fce83bedb9404ebb80895fa740a9d2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gaf06c28a1e29d86f3fd3e6112eb7c85e8">getVectorElement</a> (<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vector, int index, double &amp;value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#gaf06c28a1e29d86f3fd3e6112eb7c85e8">getVectorElement</a> (<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vector, int index, double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a particular element from a vector.  <a href="#gaf06c28a1e29d86f3fd3e6112eb7c85e8"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga77eaf0d0f88175ce4e2e8ca57ff9d859">setVectorElement</a> (<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vector, int index, double value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#ga77eaf0d0f88175ce4e2e8ca57ff9d859">setVectorElement</a> (<a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vector, int index, double value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a particular element from a vector.  <a href="#ga77eaf0d0f88175ce4e2e8ca57ff9d859"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gad5a3803c72d8f27bf2dad72b25226675">getMatrixNumRows</a> (<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> m)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of rows in the given matrix.  <a href="#gad5a3803c72d8f27bf2dad72b25226675"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga46eae843e223f83e00b07fe7563a1c91">getMatrixNumCols</a> (<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> m)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#gad5a3803c72d8f27bf2dad72b25226675">getMatrixNumRows</a> (<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> m)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To be deprecated.  <a href="#gad5a3803c72d8f27bf2dad72b25226675"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#ga46eae843e223f83e00b07fe7563a1c91">getMatrixNumCols</a> (<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> m)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of columns in the given matrix.  <a href="#ga46eae843e223f83e00b07fe7563a1c91"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gac4bd2fdc7fd7d3a1f52ef59975952dad">getMatrixElement</a> (<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> m, int r, int c, double &amp;value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#gac4bd2fdc7fd7d3a1f52ef59975952dad">getMatrixElement</a> (<a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> m, int r, int c, double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves an element at a given row and column from a matrix type variable.  <a href="#gac4bd2fdc7fd7d3a1f52ef59975952dad"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga45793ae8175e37d42bb0fed8629cedb3">getResultNumRows</a> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> result)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#ga45793ae8175e37d42bb0fed8629cedb3">getResultNumRows</a> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> result)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of rows in the given result data.  <a href="#ga45793ae8175e37d42bb0fed8629cedb3"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gac8e0a87e6231d8f5828b679116b2d6a7">getResultNumCols</a> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> result)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#gac8e0a87e6231d8f5828b679116b2d6a7">getResultNumCols</a> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> result)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the number of columns in the given result data.  <a href="#gac8e0a87e6231d8f5828b679116b2d6a7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gab8f77529dcd45bef9ebe627b88831d52">getResultElement</a> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> result, int r, int c, double &amp;value)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#gab8f77529dcd45bef9ebe627b88831d52">getResultElement</a> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> result, int r, int c, double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves an element at a given row and column from a result type variable.  <a href="#gab8f77529dcd45bef9ebe627b88831d52"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga9ddbfbe25f45e7232d0526bf51147fd3">getResultColumnLabel</a> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> result, int column)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#ga9ddbfbe25f45e7232d0526bf51147fd3">getResultColumnLabel</a> (<a class="el" href="rr__c__types_8h.html#a8c364bbdef9aab31c89655c38461da51">RRResultHandle</a> result, int column)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves an element at a given row and column from a result type variable.  <a href="#ga9ddbfbe25f45e7232d0526bf51147fd3"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#ga071cb3c138a8aaf96992daec8fd6a7c2">getCCodeHeader</a> (<a class="el" href="rr__c__types_8h.html#aaaa74f20722a48f3ae9ed5bdbb6c8a86">RRCCodeHandle</a> code)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#ga071cb3c138a8aaf96992daec8fd6a7c2">getCCodeHeader</a> (<a class="el" href="rr__c__types_8h.html#aaaa74f20722a48f3ae9ed5bdbb6c8a86">RRCCodeHandle</a> code)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the header file for the current model (if applicable)  <a href="#ga071cb3c138a8aaf96992daec8fd6a7c2"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__utility.html#gabb964f1aad030deee67c313d9bdf3520">getCCodeSource</a> (<a class="el" href="rr__c__types_8h.html#aaaa74f20722a48f3ae9ed5bdbb6c8a86">RRCCodeHandle</a> code)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#gabb964f1aad030deee67c313d9bdf3520">getCCodeSource</a> (<a class="el" href="rr__c__types_8h.html#aaaa74f20722a48f3ae9ed5bdbb6c8a86">RRCCodeHandle</a> code)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the main source file for the current model (if applicable)  <a href="#gabb964f1aad030deee67c313d9bdf3520"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__helper_routines.html#gad64da966bab0101e1d4807f0f146f753">getCSourceFileName</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the name of model source file for the current model (if applicable)  <a href="#gad64da966bab0101e1d4807f0f146f753"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Helper routines for acessing the various C API types, eg lists and arrays. </p>
@@ -188,6 +192,26 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns true if succesful </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="gad64da966bab0101e1d4807f0f146f753"></a><!-- doxytag: member="rr_c_api.h::getCSourceFileName" ref="gad64da966bab0101e1d4807f0f146f753" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">C_DECL_SPEC char* rrCallConv getCSourceFileName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Retrieve the name of model source file for the current model (if applicable) </p>
+<p>Example: fileName = <a class="el" href="group__helper_routines.html#gad64da966bab0101e1d4807f0f146f753" title="Retrieve the name of model source file for the current model (if applicable)">getCSourceFileName()</a>;</p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if fails, otherwise returns a pointer to a string containing the file name </dd></dl>
 
 </div>
 </div>
@@ -285,7 +309,24 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Retrieve the number of rows in the given matrix. </p>
+<p>To be deprecated. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stringList</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Deprecated</dd></dl>
+<p>To be deprecated</p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">stringList</td><td></td></tr>
+    <tr><td class="paramname">index</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Deprecated</dd></dl>
+<p>Retrieve the number of rows in the given matrix</p>
 <p>Example: nRows = getMatrixNumRows (m);</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -576,7 +617,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 7 2012 12:37:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Sep 18 2012 17:08:52 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>
