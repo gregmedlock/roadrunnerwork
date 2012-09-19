@@ -175,13 +175,6 @@ extern "C"
 #include <unistd.h>
 #endif
 
-// -----------------------------------------------------------------------
-/** \} */
-/**
-  * @name Utility routines
-  */
-/** \{ */
-// -----------------------------------------------------------------------
 
 /*!
  \brief Retrieve the current version number of the library
@@ -666,7 +659,7 @@ C_DECL_SPEC bool rrCallConv getFloatingSpeciesByIndex(const int& index, double& 
  \param index The index to the global parameter (corresponds to position in getGlboalParametersIds())
  \param value The value returned by the method
  \return Returns true if successful
- \ingroup floating
+ \ingroup parameter
 */
 C_DECL_SPEC bool rrCallConv getGlobalParameterByIndex(const int& index, double& value);
 
@@ -830,7 +823,7 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getFloatingSpeciesInitialConditionIds
  Example: number = getNumberOfReactions ();
 
  \return Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions
- \ingroup state
+ \ingroup reaction
 */
 C_DECL_SPEC int rrCallConv getNumberOfReactions();
 
@@ -856,7 +849,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv getReactionRates();
 
 
 /*!
- \brief Retrieve a vector of reactionb rates given a vector of species concentrations
+ \brief Retrieve a vector of reaction rates given a vector of species concentrations
 
  \param vec The vector of floating species concentrations
  \return Returns null if it fails otherwise it returns a vector of reaction rates
@@ -965,7 +958,7 @@ C_DECL_SPEC int rrCallConv getNumberOfIndependentSpecies();
  \brief Obtain the list of reaction Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
- \ingroup compartment
+ \ingroup reaction
 */
 C_DECL_SPEC RRStringArrayHandle rrCallConv getReactionIds();
 
@@ -974,7 +967,7 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getReactionIds();
  \brief Obtain the list of rate of change Ids
 
  \return Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct
- \ingroup compartment
+ \ingroup reaction
 */
 C_DECL_SPEC RRStringArrayHandle rrCallConv getRateOfChangeIds();
 
