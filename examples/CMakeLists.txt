@@ -4,7 +4,6 @@ set(RR_INCLUDE_ROOT "../source")
 
 # rr Includes
 include_directories(${RR_INCLUDE_ROOT})
-include_directories(${RR_INCLUDE_ROOT}/libstruct)
 include_directories(${THIRD_PARTY_INSTALL_FOLDER}/include)
 include_directories(${THIRD_PARTY_INSTALL_FOLDER}/include/sbml)
 include_directories(${THIRD_PARTY_INSTALL_FOLDER}/include/cvode)

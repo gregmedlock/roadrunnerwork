@@ -8,10 +8,10 @@
 
 #include "lsMatrix.h"
 #include "lsComplex.h"
-#include "lsUtil.h"
+#include "lsUtils.h"
 
 //---------------------------------------------------------------------------
-namespace LIB_LA
+namespace ls
 {
 
 ostream& operator<<(ostream& stream, const IntMatrix& mat)
@@ -110,9 +110,9 @@ template<typename T> T** Matrix<T>::get2DMatrix(int &nRows, int &nCols)
 // Usage:  A = mult (A1, A2); multiply A1 by A2 giving A                  }
 //                                                                      }
 // ******************************************************************** }
-LIB_LA::DoubleMatrix mult(LIB_LA::DoubleMatrix& m1, LIB_LA::DoubleMatrix& m2)
+ls::DoubleMatrix mult(ls::DoubleMatrix& m1, ls::DoubleMatrix& m2)
 {
-    LIB_LA::DoubleMatrix result(0,0);
+    ls::DoubleMatrix result(0,0);
 
     //  Check dimensions
     unsigned int m1_nRows = m1.numRows();
@@ -262,7 +262,7 @@ DoubleMatrix imag(const ComplexMatrix& m2)
 //The following instantiate each matrix type, AFAIK
 template class Matrix<double>;
 template class Matrix<int>;
-template class Matrix< LIB_LA::Complex >;
+template class Matrix< ls::Complex >;
 //template class Matrix< std::complex<double> >;
 
 }

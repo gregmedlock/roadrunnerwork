@@ -36,14 +36,14 @@ using lpsolve (http://sf.net/projects/lpsolve).
 #include "libstructural.h"
 #include "libutil.h"
 
-namespace LIB_STRUCTURAL
+namespace ls
 {
 
-    /*! \enum LIB_STRUCTURAL::ExportFormats 
-        \brief enum collecting all exports format that will be written by LIB_STRUCTURAL::FluxBalance::writeToFile
+    /*! \enum ls::ExportFormats 
+        \brief enum collecting all exports format that will be written by ls::FluxBalance::writeToFile
 
         \par 
-        After stating the linear programming question, LIB_STRUCTURAL::FluxBalance 
+        After stating the linear programming question, ls::FluxBalance 
         allows to export the question as several standard formats: LP, MPS or FreeMPS
 
     */
@@ -55,8 +55,8 @@ namespace LIB_STRUCTURAL
 
     } FbExport;
     
-    /*! \enum LIB_STRUCTURAL::ConstraintOperation 
-     \brief enum providing human readable interpretions for LIB_STRUCTURAL::FluxBalance::addConstraint
+    /*! \enum ls::ConstraintOperation 
+     \brief enum providing human readable interpretions for ls::FluxBalance::addConstraint
      
      \par 
      When specifying the Flux Constraints one is free to choose between three operations: 
@@ -72,11 +72,11 @@ namespace LIB_STRUCTURAL
     } FbOperation;
 
 
-    /*! \class LIB_STRUCTURAL::FluxBalance
+    /*! \class ls::FluxBalance
         \brief basic functions for steady state flux balance analysis of SBML files
 
         \par 
-        LIB_STRUCTURAL::FluxBalance states flux balance analysis of SBML models (or Stoichiometry matrices)
+        ls::FluxBalance states flux balance analysis of SBML models (or Stoichiometry matrices)
         along with flux constraints as linear programming question, which is then solved
         using lpsolve (http://sf.net/projects/lpsolve).
 
@@ -84,7 +84,7 @@ namespace LIB_STRUCTURAL
     class FluxBalance
     {
     public:
-        typedef LIB_LA::Matrix< double > DoubleMatrix;
+        typedef ls::Matrix< double > DoubleMatrix;
 
         //! static method to get an instance of LibStructural (allows use as singleton)
         LIB_EXTERN static FluxBalance* getInstance();
@@ -104,7 +104,7 @@ namespace LIB_STRUCTURAL
 
         
         //! initialize class with the given stoichiometry matrix and vector of fluxNames. 
-        LIB_EXTERN void loadStoichiometry(LIB_LA::DoubleMatrix &matrix, std::vector<std::string> &fluxNames);        
+        LIB_EXTERN void loadStoichiometry(ls::DoubleMatrix &matrix, std::vector<std::string> &fluxNames);        
 
         //! transforms the current model along with constraint and objectives as lp problem and solves the maximization objective using lpsolve.
         LIB_EXTERN LPResult *solve();
@@ -117,7 +117,7 @@ namespace LIB_STRUCTURAL
         LIB_EXTERN void clearConstraints();
         /*! Adds a new constraint with given fluxName, operation type and constraint value. 
          * \remarks operation is one of 1: LessOrEqual, 2: GreaterOrEqual, 3:Equal
-         *          for convenience the enum LIB_STRUCTURAL::ConstraintOperation is provided.
+         *          for convenience the enum ls::ConstraintOperation is provided.
          */
         LIB_EXTERN void addConstraint(std::string &id, int operation, double value);
         //! replaces the current constraints with the ones specified in the given constraint vector

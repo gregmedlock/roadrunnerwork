@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{8708D8F2-E671-4837-BD8C-BC7D269B101F}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -28,7 +28,7 @@
 			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<FinalOutputDir>$(RR_DEBUG_INSTALL)\bin\</FinalOutputDir>
 			<BCC_PCHName>rr.csm</BCC_PCHName>
-			<Defines>EXPORT_RR;LIBSBML_USE_CPP_NAMESPACE;USE_PCH;LIBSTRUCT_STATIC;WIN32;STATIC_NLEQ;$(Defines)</Defines>
+			<Defines>USE_PCH;EXPORT_RR;LIBSBML_USE_CPP_NAMESPACE;WIN32;STATIC_LIBTRUCT;STATIC_NLEQ;STATIC_PUGI;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>
@@ -39,7 +39,7 @@
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
 			<IncludePath>..\..\ThirdParty\pugi\src\;..\..\source\nleq\;..\..\source\;..\..\source\libstruct\;..\..\source\mtrand\;$(RR_DEBUG_INSTALL)\include;$(RR_ROOT)\trunk\ThirdParty\clapack\3.2.1\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>R:\rrInstalls\xe\full-debug\lib\;R:\rrInstalls\xe\full\lib\;..\..\ThirdParty\pugi\src\;R:\rrBuilds\xe\ThirdParty\lib\;R:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;R:\rrBuilds\xe\clapack\SRC\;..\..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\nleq\;C:\rrBuilds\xe\clapack\SRC\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;R:\rrInstalls\xe\lib\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrInstal..\lib\;C:\rrBuil..\clapack\SRC\;C:\rrBuil..\clapack\F2CLIBS\libf2c\;C:\rrBuil..\clapack\BLAS\SRC\;..\..\buil..\clapack\F2CLIBS\libf2c\;..\..\buil..\clapack\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\buil..\clapack\BLAS\SRC\;..\..\source\libstruct\;..\..\source\mtrand\;..\..\source\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\;..\..\instal..\lib\;..\..\source\;..\..\source\;..\..\source\Util\;..\..\source\Logger\;..\..\source\libstruct\;..\..\source\Util\mtrand\;..\..\source\;..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>R:\builds\xe\ThirdParty-debug\lib\;R:\installs\xe\debug\lib\;R:\installs\xe\full-debug\lib\;R:\installs\xe\full\lib\;..\..\ThirdParty\pugi\src\;R:\builds\xe\ThirdParty\lib\;R:\builds\xe\clapack\F2CLIBS\libf2c\;R:\builds\xe\clapack\SRC\;..\..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\nleq\;C:\builds\xe\clapack\SRC\;C:\builds\xe\clapack\F2CLIBS\libf2c\;R:\installs\xe\lib\;C:\builds\xe\clapack\BLAS\SRC\;C:\rrInstal..\lib\;C:\rrBuil..\clapack\SRC\;C:\rrBuil..\clapack\F2CLIBS\libf2c\;C:\rrBuil..\clapack\BLAS\SRC\;..\..\buil..\clapack\F2CLIBS\libf2c\;..\..\buil..\clapack\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\buil..\clapack\BLAS\SRC\;..\..\source\libstruct\;..\..\source\mtrand\;..\..\source\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\;..\..\instal..\lib\;..\..\source\;..\..\source\;..\..\source\Util\;..\..\source\Logger\;..\..\source\libstruct\;..\..\source\Util\mtrand\;..\..\source\;..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -65,7 +65,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;PUGI_STATIC;$(Defines)</Defines>
+			<Defines>_DEBUG;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -82,30 +82,49 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\blas.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>65</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>66</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>64</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\pugi-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>67</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\libsbml.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>58</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\nleq-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>59</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\pugi-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>60</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\rr-libstruct-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>61</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>62</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\sundials_nvecserial.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>63</BuildOrder>
+			</LibFiles>
 			<ResFiles Include="roadrunner.res">
 				<BuildOrder>70</BuildOrder>
 			</ResFiles>
-			<CppCompile Include="..\..\source\libstruct\lsComplex.cpp">
-				<BuildOrder>60</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsLA.cpp">
-				<BuildOrder>66</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsLibla.cpp">
-				<BuildOrder>61</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsLibstructural.cpp">
-				<BuildOrder>62</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsMatrix.cpp">
-				<BuildOrder>63</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsSBMLModel.cpp">
-				<BuildOrder>64</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsUtil.cpp">
-				<BuildOrder>65</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\source\mtrand\mtrand.cpp">
 				<BuildOrder>65</BuildOrder>
 			</CppCompile>
@@ -175,10 +194,6 @@
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrIModel.cpp">
 				<BuildOrder>22</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrInteropUtils.cpp">
-				<DependentOn>..\..\source\rrInteropUtils.h</DependentOn>
-				<BuildOrder>59</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrLog.cpp">
 				<DependentOn>..\..\source\rrLog.h</DependentOn>
@@ -328,42 +343,6 @@
 			<CppCompile Include="..\..\ThirdParty\pugi\src\pugixml.cpp">
 				<BuildOrder>71</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\blas.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>64</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\lapack.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>65</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrBuilds\xe\ThirdParty\lib\libf2c.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>66</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\nleq-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>74</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\full\lib\pugi-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>73</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\libsbml-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>62</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>70</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\lib\sundials_nvecserial.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>69</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>66</BuildOrder>
-			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

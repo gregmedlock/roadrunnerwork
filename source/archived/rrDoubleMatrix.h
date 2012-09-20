@@ -7,7 +7,7 @@ using std::vector;
 using std::ostream;
 namespace rr
 {
-typedef LIB_LA::DoubleMatrix DoubleMatrix;
+typedef ls::DoubleMatrix DoubleMatrix;
 
 //class RR_DECLSPEC DoubleMatrix : public rrObject
 //{

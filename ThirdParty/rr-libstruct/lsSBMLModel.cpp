@@ -8,12 +8,12 @@
 #include <sbml/Model.h>
 #include <sbml/SBMLReader.h>
 #include "lsSBMLModel.h"
-#include "lsUtil.h"
+#include "lsUtils.h"
 //---------------------------------------------------------------------------
 
 
-using namespace LIB_STRUCTURAL;
-using namespace LIB_LA;
+using namespace ls;
+using namespace ls;
 using namespace std;
 
 SBMLmodel* SBMLmodel::FromFile(string &sFileName)

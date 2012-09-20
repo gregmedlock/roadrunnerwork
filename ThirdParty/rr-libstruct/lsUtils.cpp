@@ -12,20 +12,16 @@
 #include <iostream>
 #include <iomanip>
 #include <math.h>
+#include <string>
+#include <sstream>
 #include <stdlib.h>
-#include <string.h>
-#include "lsUtil.h"
-#include "rrLogger.h"
+#include "lsUtils.h"
 //---------------------------------------------------------------------------
 
 using namespace std;
-using namespace LIB_LA;
-using namespace rr;
+using namespace ls;
 
-namespace LIB_LA
-{
-
-namespace Util
+namespace ls
 {
 
 DoubleMatrix* getSubMatrix(int /*Mb*/, int /*Nb*/, int ms, int ns, int mi, int nj, DoubleMatrix& A)
@@ -318,7 +314,7 @@ std::vector<int> GaussJordan(DoubleMatrix &oMatrix, double dTolerance)
 
         // get the pivot
         dPivot = oMatrix(nCurrentRow, nCurrentCol);
-        Log(lDebug5) << "pivot: " << dPivot << " row: " << nCurrentRow << " col: " << nCurrentCol<< endl;
+        //Log(lDebug5) << "pivot: " << dPivot << " row: " << nCurrentRow << " col: " << nCurrentCol<< endl;
 
         if (dPivot == 0.0)
         {
@@ -359,9 +355,9 @@ void gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
     int nRows = oMatrix.numRows();
     int nCols = oMatrix.numCols();
 
-    Log(lDebug5) << "INSIDE GAUSSIAN ELIMINATION METHOD \n";
-    Log(lDebug5) << " \nInput matrix : \n";
-    Log(lDebug5)<<print(oMatrix);
+    //Log(lDebug5) << "INSIDE GAUSSIAN ELIMINATION METHOD \n";
+    //Log(lDebug5) << " \nInput matrix : \n";
+    //Log(lDebug5)<<print(oMatrix);
 
     int x;     int nPivotRow = 0;     int nPivotCol = 0;
     while ((nPivotRow < nRows) && (nPivotCol < nCols))
@@ -390,7 +386,7 @@ void gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
         }
 
         dPivot = oMatrix(nPivotRow,nPivotCol);
-        Log(lDebug5) << "pivot: " << dPivot << endl;
+        //Log(lDebug5) << "pivot: " << dPivot << endl;
         if(fabs(dPivot) > dTolerance) 
         {
             // Introduce a '1' at the pivot point
@@ -414,9 +410,9 @@ void gaussJordan(DoubleMatrix &oMatrix,double dTolerance)
         }
 
         nPivotCol++;  // Next column
-        Log(lDebug5) << "Printing matrices PivotCol = " << nPivotCol << " \n";
+        //Log(lDebug5) << "Printing matrices PivotCol = " << nPivotCol << " \n";
 //        print(m, n, A, EM);
-        Log(lDebug5) << "-----------------------------------------------------------------\n";
+        //Log(lDebug5) << "-----------------------------------------------------------------\n";
     }
     RoundMatrixToTolerance(oMatrix, dTolerance);
 }
@@ -558,7 +554,7 @@ string print(int mr, int nc, double** A)
 //
 // Prints to stream an arrray in Nrows x Ncols
 // ----------------------------------------------------------------------------
-string print(int mr, int nc, LIB_LA::Complex* A)
+string print(int mr, int nc, ls::Complex* A)
 {
     stringstream stream;
     stream << "[";
@@ -578,7 +574,7 @@ string print(int mr, int nc, LIB_LA::Complex* A)
 //
 // Prints to stream a matrix in Nrows x Ncols
 // ----------------------------------------------------------------------------
-string print(int mr, int nc, LIB_LA::Complex** A)
+string print(int mr, int nc, ls::Complex** A)
 {
     stringstream stream;
     stream << "[";
@@ -784,5 +780,4 @@ void CopyStringVector(const std::vector< std::string > &vector, char** &outVecto
     }
 }
 
-}
-}
+}//namespace ls

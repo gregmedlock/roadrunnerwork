@@ -125,10 +125,10 @@ namespace rr
 /// <summary>
 /// Get double matrix from ptr
 /// </summary>
-LIB_LA::DoubleMatrix GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
+ls::DoubleMatrix GetDoubleMatrixFromPtr(IntPtr pointer, int nRows, int nCols)
 {
 //    double* oResult = new double[nRows*nCols];
-    LIB_LA::DoubleMatrix oResult(nRows, nCols);
+    ls::DoubleMatrix oResult(nRows, nCols);
 
 //    double* Matrix = (double*) pointer;
     double** Matrix = (double**) pointer;

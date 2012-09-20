@@ -33,7 +33,7 @@
 //  http://bioinformatics.oxfordjournals.org/cgi/content/abstract/bti800v1
 
 //   \par
-//  For examples on how to use the library see LIB_STRUCTURAL::LibStructural::loadSBML and LIB_STRUCTURAL::LibStructural::loadStoichiometryMatrix
+//  For examples on how to use the library see ls::LibStructural::loadSBML and ls::LibStructural::loadStoichiometryMatrix
 
 
 #ifndef lsLibStructuralH
@@ -41,28 +41,28 @@
 #include <vector>
 #include <string>
 #include <map>
-#include "lsLibutil.h"
+#include "lsExporter.h"
 #include "lsMatrix.h"
 #include "lsComplex.h"
 
-/*!    \namespace LIB_STRUCTURAL
-    \brief       The LIB_STRUCTURAL namespace contains all functions and classes directly related to Structural Analysis.
+/*!    \namespace ls
+    \brief       The ls namespace contains all functions and classes directly related to Structural Analysis.
 
-    The namespace consists mainly of two classes LIB_STRUCTURAL::LibStructural, the class performing all the structural
-    analysis of SBML models, or Stoichiometry matrices, and LIB_STRUCTURAL::SBMLmodel, a small utility class for easy
+    The namespace consists mainly of two classes ls::LibStructural, the class performing all the structural
+    analysis of SBML models, or Stoichiometry matrices, and ls::SBMLmodel, a small utility class for easy
     access of the needed information.
 */
 
-namespace LIB_STRUCTURAL
+namespace ls
 {
 #ifndef NO_SBML
     class SBMLmodel;
 #endif
-    /*! \class LIB_STRUCTURAL::LibStructural
+    /*! \class ls::LibStructural
         \brief Entrypoint for the C++ API of the Structural Analysis Library.
 
         \par
-        LIB_STRUCTURAL::LibStructural represents the main class for all structural analyses on
+        ls::LibStructural represents the main class for all structural analyses on
         either http://sbml.org/ models or directly on a provided stoichiometry matrix.
 
         \par
@@ -76,15 +76,15 @@ namespace LIB_STRUCTURAL
         http://bioinformatics.oxfordjournals.org/cgi/content/abstract/bti800v1
 
         \par Examples
-        For examples on how to use the library see LIB_STRUCTURAL::LibStructural::loadSBML and LIB_STRUCTURAL::LibStructural::loadStoichiometryMatrix
+        For examples on how to use the library see ls::LibStructural::loadSBML and ls::LibStructural::loadStoichiometryMatrix
 
     */
     class LIB_EXTERN LibStructural
     {
     public:
-        typedef LIB_LA::Matrix< int >                   IntMatrix;
-        typedef LIB_LA::Matrix< double >                DoubleMatrix;
-        typedef LIB_LA::Matrix< LIB_LA::Complex >       ComplexMatrix;
+        typedef ls::Matrix< int >                   IntMatrix;
+        typedef ls::Matrix< double >                DoubleMatrix;
+        typedef ls::Matrix< ls::Complex >       ComplexMatrix;
         void                                            Reset();        //Call between loading different models
 
     private:
@@ -166,8 +166,8 @@ namespace LIB_STRUCTURAL
         void                                            Initialize();
 
 #ifndef NO_SBML
-        void                                            InitializeFromModel(LIB_STRUCTURAL::SBMLmodel& oModel);
-        void                                            BuildStoichiometryMatrixFromModel(LIB_STRUCTURAL::SBMLmodel& oModel);
+        void                                            InitializeFromModel(ls::SBMLmodel& oModel);
+        void                                            BuildStoichiometryMatrixFromModel(ls::SBMLmodel& oModel);
 #endif
 
         void                                            InitializeFromStoichiometryMatrix(DoubleMatrix& oMatrix);
@@ -214,8 +214,8 @@ namespace LIB_STRUCTURAL
             \li ::LibStructural_analyzeWithFullyPivotedLU or
             \li ::LibStructural_analyzeWithFullyPivotedLUwithTests
 
-            \remarks if matrix labels are needed it is recommended to call LIB_STRUCTURAL::LibStructural::loadSpecies
-            and LIB_STRUCTURAL::LibStructural::loadReactionNames after a call to this method.
+            \remarks if matrix labels are needed it is recommended to call ls::LibStructural::loadSpecies
+            and ls::LibStructural::loadReactionNames after a call to this method.
 
             \param oMatrix the stoichiometry matrix to load
         */
@@ -270,15 +270,15 @@ namespace LIB_STRUCTURAL
         /*! \brief Uses QR factorization for structural analysis
 
             This method performs the actual analysis of the stoichiometry matrix (loaded either
-            via LIB_STRUCTURAL::LibStructural::loadStoichiometryMatrix or LIB_STRUCTURAL::LibStructural::loadSBML. Only after
+            via ls::LibStructural::loadStoichiometryMatrix or ls::LibStructural::loadSBML. Only after
             one of the analysis methods below has been called are the structural matrices (L0, K0...)
             available.
 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithQR,
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithLU,
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithLUandRunTests,
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithFullyPivotedLU or
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithFullyPivotedLUwithTests
+            \li ls::LibStructural::analyzeWithQR,
+            \li ls::LibStructural::analyzeWithLU,
+            \li ls::LibStructural::analyzeWithLUandRunTests,
+            \li ls::LibStructural::analyzeWithFullyPivotedLU or
+            \li ls::LibStructural::analyzeWithFullyPivotedLUwithTests
 
 
             \remarks This is the prefered method for structural analysis.
@@ -289,15 +289,15 @@ namespace LIB_STRUCTURAL
         /*! \brief Uses LU Decomposition for Conservation analysis
 
             This method performs the actual analysis of the stoichiometry matrix (loaded either
-            via LIB_STRUCTURAL::LibStructural::loadStoichiometryMatrix or LIB_STRUCTURAL::LibStructural::loadSBML. Only after 
+            via ls::LibStructural::loadStoichiometryMatrix or ls::LibStructural::loadSBML. Only after 
             one of the analysis methods below has been called are the structural matrices (L0, K0...)
             available. 
 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithQR, 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithLU,
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithLUandRunTests,
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithFullyPivotedLU or
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithFullyPivotedLUwithTests
+            \li ls::LibStructural::analyzeWithQR, 
+            \li ls::LibStructural::analyzeWithLU,
+            \li ls::LibStructural::analyzeWithLUandRunTests,
+            \li ls::LibStructural::analyzeWithFullyPivotedLU or
+            \li ls::LibStructural::analyzeWithFullyPivotedLUwithTests
 
             \return a result string with information about the analysis process
         */
@@ -305,15 +305,15 @@ namespace LIB_STRUCTURAL
         /*! \brief Uses LU Decomposition for Conservation analysis
 
             This method performs the actual analysis of the stoichiometry matrix (loaded either
-            via LIB_STRUCTURAL::LibStructural::loadStoichiometryMatrix or LIB_STRUCTURAL::LibStructural::loadSBML. Only after 
+            via ls::LibStructural::loadStoichiometryMatrix or ls::LibStructural::loadSBML. Only after 
             one of the analysis methods below has been called are the structural matrices (L0, K0...)
             available. 
 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithQR, 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithLU,
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithLUandRunTests, 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithFullyPivotedLU or
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithFullyPivotedLUwithTests
+            \li ls::LibStructural::analyzeWithQR, 
+            \li ls::LibStructural::analyzeWithLU,
+            \li ls::LibStructural::analyzeWithLUandRunTests, 
+            \li ls::LibStructural::analyzeWithFullyPivotedLU or
+            \li ls::LibStructural::analyzeWithFullyPivotedLUwithTests
 
             This method additionally performs the integrated test suite and returns    those results.
 
@@ -324,15 +324,15 @@ namespace LIB_STRUCTURAL
         /*! \brief Uses fully pivoted LU Decomposition for Conservation analysis
 
             This method performs the actual analysis of the stoichiometry matrix (loaded either
-            via LIB_STRUCTURAL::LibStructural::loadStoichiometryMatrix or LIB_STRUCTURAL::LibStructural::loadSBML. Only after 
+            via ls::LibStructural::loadStoichiometryMatrix or ls::LibStructural::loadSBML. Only after 
             one of the analysis methods below has been called are the structural matrices (L0, K0...)
             available. 
 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithQR, 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithLU, 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithLUandRunTests, 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithFullyPivotedLU or
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithFullyPivotedLUwithTests
+            \li ls::LibStructural::analyzeWithQR, 
+            \li ls::LibStructural::analyzeWithLU, 
+            \li ls::LibStructural::analyzeWithLUandRunTests, 
+            \li ls::LibStructural::analyzeWithFullyPivotedLU or
+            \li ls::LibStructural::analyzeWithFullyPivotedLUwithTests
 
 
             \return a result string with information about the analysis process
@@ -341,15 +341,15 @@ namespace LIB_STRUCTURAL
         /*! \brief Uses fully pivoted LU Decomposition for Conservation analysis
 
             This method performs the actual analysis of the stoichiometry matrix (loaded either
-            via LIB_STRUCTURAL::LibStructural::loadStoichiometryMatrix or LIB_STRUCTURAL::LibStructural::loadSBML. Only after
+            via ls::LibStructural::loadStoichiometryMatrix or ls::LibStructural::loadSBML. Only after
             one of the analysis methods below has been called are the structural matrices (L0, K0...)
             available. 
 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithQR, 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithLU, 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithLUandRunTests, 
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithFullyPivotedLU or
-            \li LIB_STRUCTURAL::LibStructural::analyzeWithFullyPivotedLUwithTests
+            \li ls::LibStructural::analyzeWithQR, 
+            \li ls::LibStructural::analyzeWithLU, 
+            \li ls::LibStructural::analyzeWithLUandRunTests, 
+            \li ls::LibStructural::analyzeWithFullyPivotedLU or
+            \li ls::LibStructural::analyzeWithFullyPivotedLUwithTests
 
             This method additionally performs the integrated test suite and returns    those results.
 
@@ -464,8 +464,8 @@ namespace LIB_STRUCTURAL
             Each row represents a single conservation law where the column indicate the 
             participating molecular species. The number of rows is therefore equal to the 
             number of conservation laws. Columns are ordered according to the rows in the 
-            reordered stoichiometry matrix, see LIB_STRUCTURAL::LibStructural::getReorderedSpeciesId and 
-            LIB_STRUCTURAL::LibStructural::getReorderedStoichiometryMatrix. 
+            reordered stoichiometry matrix, see ls::LibStructural::getReorderedSpeciesId and 
+            ls::LibStructural::getReorderedStoichiometryMatrix. 
 
             Gamma is calculated based on: Gamma = [ -L0 I ]
 
@@ -501,7 +501,7 @@ namespace LIB_STRUCTURAL
 
         /*! \brief try and find a positive Gamma Matrix
 
-            This function uses LIB_STRUCTURAL::LibStructural::getGammaMatrixGJ on
+            This function uses ls::LibStructural::getGammaMatrixGJ on
             row permutations of the given stoichiometries to find a positive gamma
             matrix. 
 

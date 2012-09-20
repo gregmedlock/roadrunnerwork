@@ -1,18 +1,18 @@
-#ifndef LIB_LA_MATRIX_H
-#define LIB_LA_MATRIX_H
+#ifndef ls_MATRIX_H
+#define ls_MATRIX_H
 #include <iosfwd>
 #include <ostream>
-#include "lsLibutil.h"
+#include "lsExporter.h"
 #include "lsComplex.h"
 
 using std::ostream;
 
-namespace LIB_LA
+namespace ls
 {
-    /*! \class LIB_LA::Matrix
-        \brief LIB_LA::Matrix is the matrix class used by LIB_LA::LibLA and LIB_STRUTURAL::LibStructural
+    /*! \class ls::Matrix
+        \brief ls::Matrix is the matrix class used by ls::LibLA and LIB_STRUTURAL::LibStructural
 
-        This class implements a template to hold real, LIB_LA::Complex and integer matrices. It also implements basic
+        This class implements a template to hold real, ls::Complex and integer matrices. It also implements basic
         operations on matrices.
     */
 

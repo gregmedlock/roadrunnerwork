@@ -264,5 +264,4 @@ void fileClose (FILE *fp)
     }
 }
 
-//Todo: functions return success, when cvode_mem is NULL, not sure if that sounds right...?
 }//namespace
