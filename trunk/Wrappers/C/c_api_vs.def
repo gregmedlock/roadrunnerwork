@@ -105,10 +105,8 @@ EXPORTS
 	isListItemDouble                            = _isListItemDouble@4
 	isListItemString                            = _isListItemString@4
 	isListItemList                              = _isListItemList@4
-
     getListLength                               = _getListLength@4
 	getList                                     = _getList@4
-
 	reset                                       = _reset@0                            
     setBoundarySpeciesByIndex                   = _setBoundarySpeciesByIndex@8        
     setCapabilities                             = _setCapabilities@4                  
@@ -127,5 +125,5 @@ EXPORTS
     simulate                                    = _simulate@0                         
     simulateEx                                  = _simulateEx@12                      
     steadyState                                 = _steadyState@4   
-    setCodeGenerationMode                       = _setCodeGenerationMode$4
-                       
+    setCodeGenerationMode                       = _setCodeGenerationMode@4
+    getlibSBMLVersion                           = _getlibSBMLVersion@0

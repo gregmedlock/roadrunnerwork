@@ -224,6 +224,32 @@ char* rrCallConv getCopyright()
 	return NULL;
 }
 
+char* rrCallConv getlibSBMLVersion()
+{
+	try
+    {
+        char* text = NULL;
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+        }
+        else
+        {
+            string _text = gRRHandle->getlibSBMLVersion();
+            text = new char[_text.size() + 1];
+            strcpy(text, _text.c_str());
+        }
+        return text;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+		return NULL;
+	}
+}
+
 char* rrCallConv getCurrentSBML()
 {
 	try
@@ -246,8 +272,8 @@ char* rrCallConv getCurrentSBML()
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
-    }
-	return NULL;
+		return NULL;
+	}
 }
 
 //Flags and Options
@@ -1983,7 +2009,7 @@ RRCCode* rrCallConv getCCode()
 // *******  Not yet implemented  ********
 // codeGenerationMode = 0 if mode is C code generation
 // codeGenerationMode = 1 ig mode is internal math interpreter
-bool rrCallConv setCodeGenerationMode (int codeGenerationMode)
+bool rrCallConv setCodeGenerationMode (int _mode)
 {
 	return false;
 }

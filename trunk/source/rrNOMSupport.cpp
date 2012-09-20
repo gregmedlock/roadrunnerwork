@@ -6,6 +6,7 @@
 #include "sbml/Model.h"
 #include "sbml/SBMLDocument.h"
 #include "sbml/math/FormulaFormatter.h"
+#include "sbml/common/libsbml-version.h"
 #include "rrLogger.h"
 #include "rrNOMSupport.h"
 #include "rrStringUtils.h"
@@ -35,6 +36,11 @@ NOMSupport::~NOMSupport()
 //    delete mSBMLDoc;
 }
 
+
+string	NOMSupport::getlibSBMLVersion()
+{
+	return getLibSBMLDottedVersion();
+}
 
 Model* NOMSupport::GetModel()
 {

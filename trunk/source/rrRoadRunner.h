@@ -100,6 +100,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 		CGenerator*						GetCGenerator();
 		CSharpGenerator*				GetCSharpGenerator();
+
 		//Functions --------------------------------------------------------------------
 
 										RoadRunner(const string& compiler="tcc");
@@ -107,6 +108,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         bool                            isModelLoaded();
         bool                            setCompiler(const string& compiler);
         string                          GetModelName();
+		string							getlibSBMLVersion();
         bool                            unLoadModel();
         bool                            unLoadModelDLL();
         CvodeInterface*                 GetCVodeInterface();
@@ -150,6 +152,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		vector<double>                  getRatesOfChange();
 		StringList                      getSpeciesIds();
 		StringList                      getReactionIds();
+		
 
 		// ---------------------------------------------------------------------
 		// Start of Level 2 API Methods
