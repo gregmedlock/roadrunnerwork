@@ -3,7 +3,7 @@
 
 //How is this library being built?
 //If you are building, or using, this as a static library, then you need to define STATIC_NLEQ
-
+#if defined(WIN32)
 #if defined(STATIC_NLEQ)
 #define DLLEXPORT
 #else
@@ -16,6 +16,10 @@
 #endif	//DLL import/export
 
 #endif //STATIC_NLEQ
+#else
+#define DLLEXPORT
+#endif
+
 
 #define STDCALL   __stdcall
 

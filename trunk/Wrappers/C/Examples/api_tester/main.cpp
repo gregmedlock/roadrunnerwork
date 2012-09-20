@@ -8,16 +8,6 @@
 #include "rr_c_api.h"
 #include "rr_c_api_support.h"
 //---------------------------------------------------------------------------
-#if defined(_MSC_VER)
-	#include <direct.h>
-	#define getcwd _getcwd
-	#define chdir  _chrdir
-	#define MAXPATH _MAX_PATH
-#elif defined(__BORLANDC__)
-  	#include <dir.h>
-#else
-#include <unistd.h>
-#endif
 
 using namespace std;
 using namespace rr_c_api;
@@ -396,11 +386,11 @@ int main(int argc, char* argv[])
 
 	cout<<"API Version: "<<getVersion()<<endl;
 
-    cout<<stringArrayToString(getFloatingSpeciesInitialConditionIds())<<endl;
+    //cout<<stringArrayToString(getFloatingSpeciesInitialConditionIds())<<endl;
 
 
     cout<<" ---- getElasticityCoefficientNames ---\n"<<listToString(getElasticityCoefficientIds())<<endl;
-    cout<<stringArrayToString(getRateOfChangeIds())<<endl;
+//    cout<<stringArrayToString(getRateOfChangeIds())<<endl;
     setCapabilities (NULL);
     cout<<getCapabilities()<<endl;
 

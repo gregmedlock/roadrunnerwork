@@ -1,13 +1,14 @@
-#ifndef lsLibUtilH
-#define lsLibUtilH
+#ifndef lsExporterH
+#define lsExporterH
 
 #if defined( WIN32 )
 
-#if defined(LIBSTRUCT_STATIC)          //Libstruct static
-#  define LIB_EXTERN
+#if defined( STATIC_LIBSTRUCT )          //Libstruct static
+	#define LIB_EXTERN
+
 #else
 
-#if defined(LIBSTRUCT_SHARED)       //Export libstruct
+#if defined( SHARED_LIBSTRUCT )       //Export libstruct
     #define LIB_EXTERN __declspec(dllexport)
 #else
     #define LIB_EXTERN __declspec(dllimport)

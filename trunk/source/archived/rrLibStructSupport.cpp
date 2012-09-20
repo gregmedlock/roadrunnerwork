@@ -12,7 +12,7 @@
 namespace rr
 {
 LibStructural* StructAnalysis::mInstance = NULL;
-using namespace LIB_STRUCTURAL;
+using namespace ls;
 StructAnalysis::StructAnalysis()
 {
     mInstance = (LibStructural::getInstance());
@@ -297,7 +297,7 @@ StringList StructAnalysis::GetDependentSpeciesIds()
 /// <summary>
 /// Get Gamma matrix
 /// </summary>
-LIB_LA::DoubleMatrix* StructAnalysis::GetGammaMatrix()
+ls::DoubleMatrix* StructAnalysis::GetGammaMatrix()
 {
     //IntPtr pointer;
     //int nRows;
@@ -538,7 +538,7 @@ StringList    StructAnalysis::GetIndependentSpeciesIds()
 /// <summary>
 /// Get L0 matrix
 /// </summary>
-LIB_LA::DoubleMatrix* StructAnalysis::GetL0Matrix()
+ls::DoubleMatrix* StructAnalysis::GetL0Matrix()
 {
     return mInstance->getL0Matrix();
 //    IntPtr pointer;
@@ -552,14 +552,14 @@ LIB_LA::DoubleMatrix* StructAnalysis::GetL0Matrix()
 //
 ////    double** mat = (double**) pointer;
 //
-//    LIB_LA::DoubleMatrix mat =  GetDoubleMatrixFromPtr(pointer, nRows, nCols); //    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
+//    ls::DoubleMatrix mat =  GetDoubleMatrixFromPtr(pointer, nRows, nCols); //    return InteropUtil.GetDoubleMatrixFromPtr(pointer, nRows, nCols);
 //    return mat;
 }
 
 // <summary>
 // Get L0 matrix
 // </summary>
-LIB_LA::DoubleMatrix* StructAnalysis::GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels)
+ls::DoubleMatrix* StructAnalysis::GetL0Matrix(vector<string>& sRowLabels, vector<string>& sColumnLabels)
 {
     GetL0MatrixLabels(sRowLabels, sColumnLabels);
     return GetL0Matrix(); //!We don't know the size of this one..?
@@ -614,7 +614,7 @@ void StructAnalysis::GetL0MatrixLabels(vector<string>& sRowLabels, vector<string
 ////        /// <summary>
 ////        /// Get L matrix (link matrix)
 ////        /// </summary>
-LIB_LA::DoubleMatrix* StructAnalysis::GetLinkMatrix()
+ls::DoubleMatrix* StructAnalysis::GetLinkMatrix()
 {
 	return mInstance->getLinkMatrix();
 }
@@ -970,7 +970,7 @@ StringList StructAnalysis::GetReorderedSpeciesIds()
 /// <summary>
 /// Get reordered stoichiometry matrix
 /// </summary>
-LIB_LA::DoubleMatrix* StructAnalysis::GetReorderedStoichiometryMatrix()
+ls::DoubleMatrix* StructAnalysis::GetReorderedStoichiometryMatrix()
 {
     if(mInstance)
     {

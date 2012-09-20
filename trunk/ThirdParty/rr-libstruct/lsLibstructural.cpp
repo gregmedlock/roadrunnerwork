@@ -17,7 +17,7 @@
 #include "lsLibla.h"
 #include "lsSBMLModel.h"
 #include "lsMatrix.h"
-#include "lsUtil.h"
+#include "lsUtils.h"
 //---------------------------------------------------------------------------
 
 
@@ -25,10 +25,10 @@
 //#define PRINT_PRECISION        10
 #define LINE                "-----------------------------------------------------------------------------"
 
-using namespace LIB_LA;
+using namespace ls;
 using namespace std;
 
-namespace LIB_STRUCTURAL
+namespace ls
 {
 
 LibStructural* LibStructural::_Instance = NULL;
@@ -119,7 +119,7 @@ string LibStructural::loadSBMLwithTests(string sSBML)
     return oResult.str();
 }
 
-void LibStructural::InitializeFromModel(LIB_STRUCTURAL::SBMLmodel& oModel)
+void LibStructural::InitializeFromModel(ls::SBMLmodel& oModel)
 {
     Reset();
     numFloating = oModel.numFloatingSpecies();
@@ -469,7 +469,7 @@ void LibStructural::InitializeFromStoichiometryMatrix(DoubleMatrix& oMatrix)
 
 #ifndef NO_SBML
 
-void  LibStructural::BuildStoichiometryMatrixFromModel(LIB_STRUCTURAL::SBMLmodel& oModel)
+void  LibStructural::BuildStoichiometryMatrixFromModel(ls::SBMLmodel& oModel)
 {
     _NumRows = numFloating;    
     _NumCols = numReactions;
@@ -527,11 +527,11 @@ string LibStructural::analyzeWithQR()
         DoubleMatrix *R = oQRResult[1];
         DoubleMatrix *P = oQRResult[2];
 
-        Util::gaussJordan(*R, _Tolerance);
+        ls::gaussJordan(*R, _Tolerance);
 
         // The rank is obtained by looking at the number of zero rows of R, which is
         // a lower trapezoidal matrix.
-        _NumIndependent = Util::findRank(*R, _Tolerance);
+        _NumIndependent = ls::findRank(*R, _Tolerance);
 
         _NumDependent = _NumRows - _NumIndependent;
 
@@ -774,8 +774,8 @@ void LibStructural::computeK0andKMatrices()
         Q = oResult[0]; R = oResult[1]; P = oResult[2];
     }
 
-    //Util::gaussJordan(*R, _Tolerance);
-    Util::GaussJordan(*R, _Tolerance);
+    //ls::gaussJordan(*R, _Tolerance);
+    ls::GaussJordan(*R, _Tolerance);
 
     int nDependent = _NumCols-_NumIndependent;
 
@@ -785,7 +785,7 @@ void LibStructural::computeK0andKMatrices()
     {
         for (int j=0; j< _NumCols-_NumIndependent ; j++) 
         {            
-            (*_K0)(i,j) = Util::RoundToTolerance( - (*R)(i,j+_NumIndependent), _Tolerance);
+            (*_K0)(i,j) = ls::RoundToTolerance( - (*R)(i,j+_NumIndependent), _Tolerance);
         }
     }
 
@@ -900,12 +900,12 @@ string LibStructural::analyzeWithLU()
 
         }
 
-        Util::gaussJordan(*U, _Tolerance);        
+        ls::gaussJordan(*U, _Tolerance);        
 
 
         // The rank is obtained by looking at the number of zero rows of R, which is
         // a lower trapezoidal matrix. 
-        _NumIndependent = Util::findRank(*U, _Tolerance);
+        _NumIndependent = ls::findRank(*U, _Tolerance);
 
         _NumDependent = _NumRows - _NumIndependent;
 
@@ -1040,11 +1040,11 @@ string LibStructural::analyzeWithFullyPivotedLU()
                 Q = oLUResult->Q;
 
             }
-            Util::gaussJordan(*U, _Tolerance);
+            ls::gaussJordan(*U, _Tolerance);
 
             // The rank is obtained by looking at the number of zero rows of R, which is
             // a lower trapezoidal matrix.
-            _NumIndependent = Util::findRank(*U, _Tolerance);
+            _NumIndependent = ls::findRank(*U, _Tolerance);
 
             _NumDependent = _NumRows - _NumIndependent;
 
@@ -1428,7 +1428,7 @@ LibStructural::DoubleMatrix* LibStructural::findPositiveGammaMatrix(DoubleMatrix
                                                                     std::vector< std::string> &rowLabels)
 {
     DoubleMatrix *current = getGammaMatrixGJ(stoichiometry);
-    if (Util::isPositive(*current, _Tolerance)) return current;
+    if (ls::isPositive(*current, _Tolerance)) return current;
     DELETE_IF_NON_NULL(current);
 
     // first get a vector which we use to hold the current permutation
@@ -1477,7 +1477,7 @@ LibStructural::DoubleMatrix* LibStructural::findPositiveGammaMatrix(DoubleMatrix
         }
 
         current = getGammaMatrixGJ(tempStoichiometry);
-        if (Util::isPositive(*current, _Tolerance)) 
+        if (ls::isPositive(*current, _Tolerance)) 
         {            
             rowLabels.assign(tempRowLabels.begin(), tempRowLabels.end());
             return current;
@@ -1504,7 +1504,7 @@ LibStructural::DoubleMatrix* LibStructural::getGammaMatrixGJ(DoubleMatrix &stoic
         workMatrix(i, i + numCols) = 1.0;
     }
 
-    Util::GaussJordan(workMatrix, _Tolerance);
+    ls::GaussJordan(workMatrix, _Tolerance);
 
     DoubleMatrix tempMatrix (numRows, numCols);
     for (int i = 0; i < numRows; i++)
@@ -1513,7 +1513,7 @@ LibStructural::DoubleMatrix* LibStructural::getGammaMatrixGJ(DoubleMatrix &stoic
             tempMatrix(i,j) = workMatrix(i,j);
     }
 
-    int rank = Util::findRank(tempMatrix, _Tolerance);
+    int rank = ls::findRank(tempMatrix, _Tolerance);
 
     DoubleMatrix* result = new DoubleMatrix(numRows - rank, numRows);
     for (int i = 0; i < numRows - rank; i++)
@@ -1624,7 +1624,7 @@ bool LibStructural::testConservationLaw_1()
 {
     bool bTest1 = true;
     if (_G == NULL || _Nmat == NULL) return false;
-    DoubleMatrix* Zmat = Util::matMult((_NumRows-_NumIndependent), _NumRows, *_G, *_Nmat, _NumCols);
+    DoubleMatrix* Zmat = ls::matMult((_NumRows-_NumIndependent), _NumRows, *_G, *_Nmat, _NumCols);
     for (int i = 0; i < _NumRows - _NumIndependent; i++)
     {
         for (int j = 0; j < _NumCols; j++)
@@ -1675,7 +1675,7 @@ bool LibStructural::testConservationLaw_4()
     DoubleMatrix* R = oResult[1];
     DoubleMatrix* P = oResult[2];
 
-    DoubleMatrix* Q11 = Util::getSubMatrix(Q->numRows(), Q->numCols(), _NumIndependent, _NumIndependent, 0, 0, *Q);
+    DoubleMatrix* Q11 = ls::getSubMatrix(Q->numRows(), Q->numCols(), _NumIndependent, _NumIndependent, 0, 0, *Q);
 
     vector < Complex > q11Eigenvalues = LibLA::getInstance()->getEigenValues(*Q11);
 
@@ -1703,8 +1703,8 @@ bool LibStructural::testConservationLaw_5()
     DoubleMatrix* R = oResult[1];
     DoubleMatrix* P = oResult[2];
 
-    DoubleMatrix* Q11 = Util::getSubMatrix(Q->numRows(), Q->numCols(), _NumIndependent, _NumIndependent, 0, 0, *Q);
-    DoubleMatrix* Q21 = Util::getSubMatrix(Q->numRows(), Q->numCols(), Q->numRows() - _NumIndependent, _NumIndependent, _NumIndependent, 0, *Q);
+    DoubleMatrix* Q11 = ls::getSubMatrix(Q->numRows(), Q->numCols(), _NumIndependent, _NumIndependent, 0, 0, *Q);
+    DoubleMatrix* Q21 = ls::getSubMatrix(Q->numRows(), Q->numCols(), Q->numRows() - _NumIndependent, _NumIndependent, _NumIndependent, 0, *Q);
 
     DoubleMatrix* Q11inv = NULL;
 
@@ -1723,7 +1723,7 @@ bool LibStructural::testConservationLaw_5()
     }
     }
 
-    DoubleMatrix* L0x = Util::matMult((Q->numRows() - _NumIndependent), _NumIndependent, *Q21, *Q11inv, Q11inv->numCols());
+    DoubleMatrix* L0x = ls::matMult((Q->numRows() - _NumIndependent), _NumIndependent, *Q21, *Q11inv, Q11inv->numCols());
 
     bool test5 = true;
     double val = 0.0;
@@ -1913,7 +1913,7 @@ bool LibStructural::testConservationLaw_6()
     if (_K0 == NULL || _NmatT == NULL) return false;
 
     DoubleMatrix* oCopy = getColumnReorderedNrMatrix();
-    DoubleMatrix* Zmat = Util::matMult(*oCopy, *_K);
+    DoubleMatrix* Zmat = ls::matMult(*oCopy, *_K);
 
     for (unsigned int i = 0; i < Zmat->numRows(); i++)
     {
@@ -2095,5 +2095,5 @@ void LibStructural::loadReactionNames ( vector< string > &reactionNames)
 {
     _inputReactionNames.assign(reactionNames.begin(), reactionNames.end());
 }
-} //namespace LIB_STRUCTURAL
+} //namespace ls
 

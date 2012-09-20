@@ -3,7 +3,7 @@
 #define rr_c_api_supportH
 #include <string>
 #include <vector>
-#include "libstruct/lsMatrix.h"
+#include "rr-libstruct/lsMatrix.h"
 #include "rrStringList.h"
 #include "rrStringListContainer.h"
 #include "rrArrayList.h"
@@ -28,7 +28,7 @@ char*               createText(const char* str);        //To be deleted by clien
 char*               createText(const string& str);      //To be deleted by client using freeText
 RRVectorHandle      createVectorFromVector_double(const vector<double>& vec);
 vector<double>      createVectorFromRRVector(const RRVector* vec);
-RRMatrixHandle      createMatrix(const LIB_LA::DoubleMatrix* mat);
+RRMatrixHandle      createMatrix(const ls::DoubleMatrix* mat);
 
 //Lists and arrays
 RRStringArrayHandle createList(const rr::StringList& aList);

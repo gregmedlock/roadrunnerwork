@@ -1,4 +1,4 @@
-﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{F02A4FDC-5DE6-4A6D-8997-98420C96BAF4}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -22,9 +22,9 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
-			<Defines>EXPORT_RR_C_API;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
+			<Defines>EXPORT_RR_C_API;LIBSBML_USE_CPP_NAMESPACE;WIN32;STATIC_LIBSTRUCT;STATIC_PUGI;STATIC_ROADRUNNER;STATIC_NLEQ;$(Defines)</Defines>
 			<LinkPackageImports>rtl.bpi;vcl.bpi</LinkPackageImports>
-			<ILINK_LibraryPath>R:\rrBuilds\xe\TPDebug\lib\;R:\rrInstalls\xe\full-debug\lib\;R:\rrInstalls\xeDebug\lib\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;R:\rrBuilds\xe\ThirdParty\lib\;C:\RoadRunner\lib\;C:\rrBuilds\xe\clapack\F2CLIBS\libf2c\;C:\rrBuilds\xe\clapack\BLAS\SRC\;C:\rrBuilds\xe\clapack\SRC\;..\..\Wrappers\C\;R:\rrInstalls\xe\lib\;..\..\Wrappers\C\;C:\rrw\ide_buil..\rr-c\rr_c_api\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>R:\installs\xe\debug\lib\;R:\builds\xe\ThirdParty-debug\lib\;R:\builds\xe\TPDebug\lib\;R:\installs\xe\full-debug\lib\;R:\installs\xeDebug\lib\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;R:\builds\xe\ThirdParty\lib\;C:\RoadRunner\lib\;C:\builds\xe\clapack\F2CLIBS\libf2c\;C:\builds\xe\clapack\BLAS\SRC\;C:\builds\xe\clapack\SRC\;..\..\Wrappers\C\;R:\installs\xe\lib\;..\..\Wrappers\C\;C:\rrw\ide_buil..\rr-c\rr_c_api\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<NoVCL>true</NoVCL>
 			<PackageImports>vclx.bpi;vcl.bpi;VclSmp.bpi;rtl.bpi;vclimg.bpi;bcbie.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;svnui.bpi;svn.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;bdertl.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;inet.bpi;inetdb.bpi;webdsnap.bpi;websnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;DbxCommonDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbexpress.bpi;dbxcds.bpi;TeeTree2D15Tee9.bpi;DbxClientDriver.bpi;AzureCloud.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi</PackageImports>
 			<ProjectType>CppDynamicLibrary</ProjectType>
@@ -45,7 +45,6 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<DynamicRTL>false</DynamicRTL>
 			<FinalOutputDir>$(RR_DEBUG_INSTALL)\bin</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
@@ -68,6 +67,50 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\blas.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>9</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\lapack.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>10</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\libf2c.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>11</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\libsbml-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>9</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\nleq-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>10</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\pugi-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>11</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\roadrunner-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>12</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\rr-libstruct-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>12</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\sundials_cvode.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>12</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\sundials_nvecserial.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>13</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="..\..\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>13</BuildOrder>
+			</LibFiles>
 			<CppCompile Include="..\..\Wrappers\C\rr_c_api.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
@@ -78,42 +121,6 @@
 			<CppCompile Include="..\..\Wrappers\C\rr_dll_entry_point.cpp">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
-			<LibFiles Include="R:\rrBuilds\xe\TPDebug\lib\blas.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>9</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrBuilds\xe\TPDebug\lib\lapack.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>10</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrBuilds\xe\TPDebug\lib\libf2c.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>11</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrBuilds\xe\TPDebug\lib\libsbml.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>11</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrBuilds\xe\TPDebug\lib\nleq-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>8</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrBuilds\xe\TPDebug\lib\pugi-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>11</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\roadrunner-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>7</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>6</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\rrInstalls\xe\full-debug\lib\sundials_nvecserial.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>7</BuildOrder>
-			</LibFiles>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

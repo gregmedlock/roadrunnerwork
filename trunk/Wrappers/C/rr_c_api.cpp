@@ -774,7 +774,7 @@ RRMatrixHandle rrCallConv getUnScaledElasticityMatrix()
             return NULL;
         }
 
-		LIB_LA::DoubleMatrix tempMat = gRRHandle->getUnscaledElasticityMatrix();
+		ls::DoubleMatrix tempMat = gRRHandle->getUnscaledElasticityMatrix();
 
         RRMatrixHandle matrix = createMatrix(&tempMat);
 	    return matrix;
@@ -798,7 +798,7 @@ RRMatrixHandle rrCallConv getScaledElasticityMatrix()
             return NULL;
         }
 
-        LIB_LA::DoubleMatrix tempMat = gRRHandle->getScaledElasticityMatrix();
+        ls::DoubleMatrix tempMat = gRRHandle->getScaledElasticityMatrix();
 
 
         RRMatrixHandle matrix = createMatrix(&tempMat);
@@ -843,7 +843,7 @@ RRMatrixHandle rrCallConv getStoichiometryMatrix()
             return NULL;
         }
 
-        LIB_LA::DoubleMatrix tempMat = gRRHandle->getStoichiometryMatrix();
+        ls::DoubleMatrix tempMat = gRRHandle->getStoichiometryMatrix();
 
         RRMatrixHandle matrix = new RRMatrix;
         matrix->RSize = tempMat.RSize();
@@ -879,7 +879,7 @@ RRMatrixHandle rrCallConv getConservationMatrix()
             return NULL;
         }
 
-        LIB_LA::DoubleMatrix tempMat = gRRHandle->getConservationMatrix();
+        ls::DoubleMatrix tempMat = gRRHandle->getConservationMatrix();
 
         RRMatrixHandle matrix = new RRMatrix;
         matrix->RSize = tempMat.RSize();
@@ -914,7 +914,7 @@ RRMatrixHandle rrCallConv getLinkMatrix()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        LIB_LA::DoubleMatrix *tempMat = gRRHandle->getLinkMatrix();
+        ls::DoubleMatrix *tempMat = gRRHandle->getLinkMatrix();
 
 		return createMatrix(tempMat);
 	}
@@ -936,7 +936,7 @@ RRMatrixHandle rrCallConv getL0Matrix()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        LIB_LA::DoubleMatrix *tempMat = gRRHandle->getL0Matrix();
+        ls::DoubleMatrix *tempMat = gRRHandle->getL0Matrix();
         
 		return createMatrix(tempMat);
 	}
@@ -958,7 +958,7 @@ RRMatrixHandle rrCallConv getNrMatrix()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        LIB_LA::DoubleMatrix *tempMat = gRRHandle->getNrMatrix();
+        ls::DoubleMatrix *tempMat = gRRHandle->getNrMatrix();
 
 		return createMatrix(tempMat);
 	}
@@ -1840,7 +1840,7 @@ RRMatrixHandle rrCallConv getFullJacobian()
             return NULL;
         }
 
-        LIB_LA::DoubleMatrix tempMat = gRRHandle->getFullJacobian();
+        ls::DoubleMatrix tempMat = gRRHandle->getFullJacobian();
         return createMatrix(&tempMat);
     }
     catch(Exception& ex)
@@ -1862,7 +1862,7 @@ RRMatrixHandle rrCallConv getReducedJacobian()
             return NULL;
         }
 
-        LIB_LA::DoubleMatrix tempMat = gRRHandle->getReducedJacobian();
+        ls::DoubleMatrix tempMat = gRRHandle->getReducedJacobian();
         return createMatrix(&tempMat);
     }
     catch(Exception& ex)
@@ -1885,7 +1885,7 @@ RRMatrixHandle rrCallConv getEigenValues()
             return NULL;
         }
 
-		LIB_LA::DoubleMatrix tempMat = gRRHandle->getEigenvalues();
+		ls::DoubleMatrix tempMat = gRRHandle->getEigenvalues();
         return createMatrix(&tempMat);
     }
     catch(Exception& ex)

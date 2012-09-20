@@ -12,8 +12,7 @@
 #include <string.h>
 #include "lsLibla.h"
 #include "lsMatrix.h"
-#include "lsUtil.h"
-#include "rrLogger.h"
+#include "lsUtils.h"
 
 extern "C"
 {
@@ -23,14 +22,13 @@ extern "C"
 //---------------------------------------------------------------------------
 
 using namespace std;
-using namespace rr;
-using namespace LIB_LA;
+using namespace ls;
 
-vector< LIB_LA::Complex> LibLA::getEigenValues(DoubleMatrix &oMatrix)
+vector< ls::Complex> LibLA::getEigenValues(DoubleMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getEigenValues " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getEigenValues " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
     vector< Complex > oResult;
 
@@ -66,7 +64,7 @@ vector< LIB_LA::Complex> LibLA::getEigenValues(DoubleMatrix &oMatrix)
 
     for (int i = 0; i < numRows; i++)
     {
-        Complex complex( Util::RoundToTolerance( eigVals[i].r, _Tolerance ), Util::RoundToTolerance( eigVals[i].i, _Tolerance ));
+        Complex complex( ls::RoundToTolerance( eigVals[i].r, _Tolerance ), ls::RoundToTolerance( eigVals[i].i, _Tolerance ));
         oResult.push_back(complex);
     }
 
@@ -77,11 +75,11 @@ vector< LIB_LA::Complex> LibLA::getEigenValues(DoubleMatrix &oMatrix)
     return oResult;
 
 }
-vector< LIB_LA::Complex > LibLA::ZgetEigenValues(ComplexMatrix &oMatrix)
+vector< ls::Complex > LibLA::ZgetEigenValues(ComplexMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== ZgetEigenValues " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== ZgetEigenValues " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
     vector< Complex > oResult;
 
@@ -114,7 +112,7 @@ vector< LIB_LA::Complex > LibLA::ZgetEigenValues(ComplexMatrix &oMatrix)
 
     for (int i = 0; i < numRows; i++)
     {
-        Complex complex( Util::RoundToTolerance( eigVals[i].r, _Tolerance ), Util::RoundToTolerance( eigVals[i].i, _Tolerance ));
+        Complex complex( ls::RoundToTolerance( eigVals[i].r, _Tolerance ), ls::RoundToTolerance( eigVals[i].i, _Tolerance ));
         oResult.push_back(complex);
     }
 
@@ -125,9 +123,9 @@ vector< LIB_LA::Complex > LibLA::ZgetEigenValues(ComplexMatrix &oMatrix)
 
 vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getQRWithPivot " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getQRWithPivot " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
 
     vector < DoubleMatrix* > oResult;
@@ -168,10 +166,10 @@ vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
         P = new doublereal[col*col]; memset(P, 0, sizeof(doublereal)*col*col);
     }
 
-    Log(lDebug5) << "before dorgqr A:\n"    << Util::print(row, col, A);
-    Log(lDebug5) << endl << endl << "Q: \n"    << Util::print(row, row, Q);
-    Log(lDebug5) << endl << endl << "R: \n"    << Util::print(row, col, R);
-    Log(lDebug5) << endl << endl << "P: \n"    << Util::print(col, col, P);
+    //Log(lDebug5) << "before dorgqr A:\n"    << ls::print(row, col, A);
+    //Log(lDebug5) << endl << endl << "Q: \n"    << ls::print(row, row, Q);
+    //Log(lDebug5) << endl << endl << "R: \n"    << ls::print(row, col, R);
+    //Log(lDebug5) << endl << endl << "P: \n"    << ls::print(col, col, P);
 
     doublereal* tau = NULL;
     if (minRowCol)
@@ -192,12 +190,12 @@ vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
     integer info;
     int out;
 
-    Log(lDebug5) << "Input:\n"<<Util::print(row, col, A);
+    //Log(lDebug5) << "Input:\n"<<ls::print(row, col, A);
 
     // call lapack routine dgepq3_ to generate householder reflections
     out = dgeqp3_ (&row, &col, A, &row, jpvt, tau, work, &lwork, &info);
 
-    Log(lDebug5) << "before permutation" << endl;
+    //Log(lDebug5) << "before permutation" << endl;
 
     // Building permutation matrix P and
     for (int i=0; i<col; i++)
@@ -207,12 +205,12 @@ vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
         P[pos] = 1;
     }
 
-    Log(lDebug5) << "before memcpy" << endl;
+    //Log(lDebug5) << "before memcpy" << endl;
 
     // set R to A before calling dorgqr
     memcpy(R, A, sizeof(doublereal)*row*col);
 
-    Log(lDebug5) << "after memcpy" << endl;
+    //Log(lDebug5) << "after memcpy" << endl;
 
     // make R a trapezoidal matrix
     // set Q to A before calling dorgqr
@@ -232,22 +230,22 @@ vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
 
     }
 
-    Log(lDebug5) << "before dorgqr:\n"<<Util::print(row, col, A);
-    Log(lDebug5) << endl << endl << "Q: \n"<<Util::print(row, row, Q);
-    Log(lDebug5) << endl << endl << "R: \n"<<Util::print(row, col, R);
-    Log(lDebug5) << endl << endl << "P: \n"<<Util::print(col, col, P);
+    //Log(lDebug5) << "before dorgqr:\n"<<ls::print(row, col, A);
+    //Log(lDebug5) << endl << endl << "Q: \n"<<ls::print(row, row, Q);
+    //Log(lDebug5) << endl << endl << "R: \n"<<ls::print(row, col, R);
+    //Log(lDebug5) << endl << endl << "P: \n"<<ls::print(col, col, P);
 
 
     // call routine dorgqr_ to build orthogonal matrix Q
     out = dorgqr_ (&row, &row, &minRowCol, Q, &row, tau, work, &lwork, &info);
 
-    Log(lDebug5) << endl << endl << "Q: \n"<<Util::print(row, row, Q);
-    Log(lDebug5) << endl << endl << "R: \n"<<Util::print(row, col, R);
-    Log(lDebug5) << endl << endl << "P: \n"<<Util::print(col, col, P);
+    //Log(lDebug5) << endl << endl << "Q: \n"<<ls::print(row, row, Q);
+    //Log(lDebug5) << endl << endl << "R: \n"<<ls::print(row, col, R);
+    //Log(lDebug5) << endl << endl << "P: \n"<<ls::print(col, col, P);
 
-    DoubleMatrix* oMatrixQ = new DoubleMatrix(Q, row, row, true); Util::RoundMatrixToTolerance(*oMatrixQ, _Tolerance);
-    DoubleMatrix* oMatrixR = new DoubleMatrix(R, row, col, true); Util::RoundMatrixToTolerance(*oMatrixR, _Tolerance);
-    DoubleMatrix* oMatrixP = new DoubleMatrix(P, col, col, true); Util::RoundMatrixToTolerance(*oMatrixP, _Tolerance);
+    DoubleMatrix* oMatrixQ = new DoubleMatrix(Q, row, row, true); ls::RoundMatrixToTolerance(*oMatrixQ, _Tolerance);
+    DoubleMatrix* oMatrixR = new DoubleMatrix(R, row, col, true); ls::RoundMatrixToTolerance(*oMatrixR, _Tolerance);
+    DoubleMatrix* oMatrixP = new DoubleMatrix(P, col, col, true); ls::RoundMatrixToTolerance(*oMatrixP, _Tolerance);
     oResult.push_back( oMatrixQ );
     oResult.push_back( oMatrixR );
     oResult.push_back( oMatrixP );
@@ -262,9 +260,9 @@ vector< DoubleMatrix* > LibLA::getQRWithPivot(DoubleMatrix &oMatrix)
 
 vector< DoubleMatrix* > LibLA::getQR(DoubleMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getQR " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getQR " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
     integer row            = oMatrix.numRows();
     integer col            = oMatrix.numCols();
@@ -289,13 +287,13 @@ vector< DoubleMatrix* > LibLA::getQR(DoubleMatrix &oMatrix)
     doublereal* A = (doublereal*)oMatrix.getCopy(true);
 
 
-    Log(lDebug5) << "Input:\n"<<Util::print(row, col, A);
+    //Log(lDebug5) << "Input:\n"<<ls::print(row, col, A);
 
     integer info;
     int out = dgeqrf_ (&row, &col, A, &row, tau, work, &lwork, &info);
 
-    Log(lDebug5) << "A: after dgeqrt)\n"<<Util::print(row, col, A);
-    Log(lDebug5) << "tau: after dgeqrt)\n"<<Util::print(1, minRowCol, tau);
+    //Log(lDebug5) << "A: after dgeqrt)\n"<<ls::print(row, col, A);
+    //Log(lDebug5) << "tau: after dgeqrt)\n"<<ls::print(1, minRowCol, tau);
     // set R to A before calling dorgqr
     memcpy(R,A,sizeof(double)*row*col);
     int index;
@@ -313,19 +311,19 @@ vector< DoubleMatrix* > LibLA::getQR(DoubleMatrix &oMatrix)
 
     out = dorgqr_ (&row, &row, &minRowCol, Q, &row, tau, work, &lwork, &info);
 
-    Util::checkTolerance(row*row, Q, LibLA::getInstance()->getTolerance());
-    Util::checkTolerance(row*col, R,LibLA::getInstance()->getTolerance());
+    ls::checkTolerance(row*row, Q, LibLA::getInstance()->getTolerance());
+    ls::checkTolerance(row*col, R,LibLA::getInstance()->getTolerance());
 
-    Log(lDebug5) << endl << endl << "Q: )\n"<<Util::print(row, row, Q);
-    Log(lDebug5) << endl << endl << "R: )\n"<<Util::print(row, col, R);
+    //Log(lDebug5) << endl << endl << "Q: )\n"<<ls::print(row, row, Q);
+    //Log(lDebug5) << endl << endl << "R: )\n"<<ls::print(row, col, R);
 
     vector< DoubleMatrix* > oResult;
 
     DoubleMatrix* oMatrixQ = new DoubleMatrix(Q, row, row, true);
-    Util::RoundMatrixToTolerance(*oMatrixQ, _Tolerance);
+    ls::RoundMatrixToTolerance(*oMatrixQ, _Tolerance);
 
     DoubleMatrix* oMatrixR = new DoubleMatrix(R, row, col, true);
-    Util::RoundMatrixToTolerance(*oMatrixR, _Tolerance);
+    ls::RoundMatrixToTolerance(*oMatrixR, _Tolerance);
     oResult.push_back( oMatrixQ );
     oResult.push_back( oMatrixR );
 
@@ -337,9 +335,9 @@ vector< DoubleMatrix* > LibLA::getQR(DoubleMatrix &oMatrix)
 
 DoubleMatrix* LibLA::getLeftNullSpace(DoubleMatrix &oMatrixIn)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getLeftNullSpace " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getLeftNullSpace " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
     DoubleMatrix *oMatrix = oMatrixIn.getTranspose();
     DoubleMatrix *oMatrixResult = getRightNullSpace(*oMatrix);
     delete oMatrix;
@@ -351,9 +349,9 @@ DoubleMatrix* LibLA::getLeftNullSpace(DoubleMatrix &oMatrixIn)
 
 DoubleMatrix* LibLA::getScaledLeftNullSpace(DoubleMatrix &oMatrixIn)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getScaledLeftNullSpace " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getScaledLeftNullSpace " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
     DoubleMatrix *oMatrix = oMatrixIn.getTranspose();
     DoubleMatrix *oMatrixResult = getScaledRightNullSpace(*oMatrix);
     delete oMatrix;
@@ -366,26 +364,26 @@ DoubleMatrix* LibLA::getScaledLeftNullSpace(DoubleMatrix &oMatrixIn)
 
 DoubleMatrix* LibLA::getScaledRightNullSpace(DoubleMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getScaledRightNullSpace " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getScaledRightNullSpace " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
     DoubleMatrix* oTemp = getRightNullSpace(oMatrix);
     DoubleMatrix* oTranspose = oTemp->getTranspose();
     delete oTemp;
-    Util::GaussJordan(*oTranspose, _Tolerance);
+    ls::GaussJordan(*oTranspose, _Tolerance);
     DoubleMatrix* oResult = oTranspose->getTranspose();
     delete oTranspose;
 
-    Util::RoundMatrixToTolerance(oMatrix, _Tolerance);
+    ls::RoundMatrixToTolerance(oMatrix, _Tolerance);
 
     return oResult;
 }
 
 DoubleMatrix* LibLA::getRightNullSpace(DoubleMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getRightNullSpace " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getRightNullSpace " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
     DoubleMatrix *oTranspose = oMatrix.getTranspose();
 
     integer numRows = oTranspose->numRows();
@@ -421,8 +419,8 @@ DoubleMatrix* LibLA::getRightNullSpace(DoubleMatrix &oMatrix)
     DoubleMatrix* oMatrixU = new DoubleMatrix(U, numRows, numRows, true); 
 
 
-    Log(lDebug5) << " SVD: U " << endl;
-    Util::print(*oMatrixU);
+    //Log(lDebug5) << " SVD: U " << endl;
+    ls::print(*oMatrixU);
     DoubleMatrix *oResultMatrix = new DoubleMatrix(numRows, nResultColumns);
     for (int i = 0; i < nResultColumns; i++)
     {
@@ -431,21 +429,21 @@ DoubleMatrix* LibLA::getRightNullSpace(DoubleMatrix &oMatrix)
             (*oResultMatrix)(j,i) = (*oMatrixU)(j,rank+i);
         }
     }
-    Log(lDebug5) << " Nullspace: " << endl;
-    Util::print(*oResultMatrix);
+    //Log(lDebug5) << " Nullspace: " << endl;
+    ls::print(*oResultMatrix);
     delete[] S; delete[]
     work; delete[] U; delete[] VT; delete[] iwork; delete[] A; delete oTranspose; delete oMatrixU;
 
-    Util::RoundMatrixToTolerance(*oResultMatrix, _Tolerance);
+    ls::RoundMatrixToTolerance(*oResultMatrix, _Tolerance);
     return oResultMatrix ;
 
 }
 
 int LibLA::getRank(DoubleMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getRank " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getRank " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
     int rank = 0;
     vector<double> oSingularVals = LibLA::getSingularValsBySVD(oMatrix);
 
@@ -461,9 +459,9 @@ int LibLA::getRank(DoubleMatrix &oMatrix)
 
 vector< double> LibLA::getSingularValsBySVD(DoubleMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getSingularValsBySVD " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getSingularValsBySVD " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
     vector <double> oResult;
 
@@ -488,7 +486,7 @@ vector< double> LibLA::getSingularValsBySVD(DoubleMatrix &oMatrix)
 
     for (int i=0; i<min_MN; i++) 
     {
-        oResult.push_back( Util::RoundToTolerance( S[i], _Tolerance ) );
+        oResult.push_back( ls::RoundToTolerance( S[i], _Tolerance ) );
     }
 
     // free memory
@@ -499,9 +497,9 @@ vector< double> LibLA::getSingularValsBySVD(DoubleMatrix &oMatrix)
 
 ComplexMatrix *LibLA::getEigenVectors(DoubleMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getEigenVectors " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getEigenVectors " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
     integer numRows = oMatrix.numRows();
     integer numCols = oMatrix.numCols();
@@ -538,8 +536,8 @@ ComplexMatrix *LibLA::getEigenVectors(DoubleMatrix &oMatrix)
         {
             index = (j+numRows*i);
             Complex complex( 
-                Util::RoundToTolerance( vr[index].r, _Tolerance ), 
-                Util::RoundToTolerance( vr[index].i, _Tolerance ));
+                ls::RoundToTolerance( vr[index].r, _Tolerance ), 
+                ls::RoundToTolerance( vr[index].i, _Tolerance ));
 
             (*oResult)(i,j).set(complex.Real, complex.Imag);
         }
@@ -552,9 +550,9 @@ ComplexMatrix *LibLA::getEigenVectors(DoubleMatrix &oMatrix)
 
 ComplexMatrix* LibLA::ZgetEigenVectors(ComplexMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getEigenVectors " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getEigenVectors " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
     integer numRows = oMatrix.numRows();
     integer numCols = oMatrix.numCols();
@@ -592,8 +590,8 @@ ComplexMatrix* LibLA::ZgetEigenVectors(ComplexMatrix &oMatrix)
         {
             index = (j+numRows*i);
             Complex complex( 
-                Util::RoundToTolerance( vr[index].r, _Tolerance ), 
-                Util::RoundToTolerance( vr[index].i, _Tolerance ));
+                ls::RoundToTolerance( vr[index].r, _Tolerance ), 
+                ls::RoundToTolerance( vr[index].i, _Tolerance ));
 
             (*oResult)(i,j).set(complex.Real, complex.Imag);
         }
@@ -606,9 +604,9 @@ ComplexMatrix* LibLA::ZgetEigenVectors(ComplexMatrix &oMatrix)
 
 void LibLA::getSVD(DoubleMatrix &inputMatrix, DoubleMatrix* &outU, std::vector<double>* &outSingularVals, DoubleMatrix* &outV)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getSingularValsBySVD " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getSingularValsBySVD " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
     integer numRows = inputMatrix.numRows();
     integer numCols = inputMatrix.numCols();
@@ -647,7 +645,7 @@ void LibLA::getSVD(DoubleMatrix &inputMatrix, DoubleMatrix* &outU, std::vector<d
     
     
 
-    Util::RoundMatrixToTolerance(*outU, _Tolerance);
+    ls::RoundMatrixToTolerance(*outU, _Tolerance);
 
     outV = new DoubleMatrix(numCols, numCols);
     for (int i = 0; i < numCols; i++)
@@ -659,12 +657,12 @@ void LibLA::getSVD(DoubleMatrix &inputMatrix, DoubleMatrix* &outU, std::vector<d
         }
     }
 
-    Util::RoundMatrixToTolerance(*outV, _Tolerance);
+    ls::RoundMatrixToTolerance(*outV, _Tolerance);
 
     outSingularVals = new std::vector<double>();
     for (int i=0; i<min_MN; i++) 
     {
-        outSingularVals ->push_back( Util::RoundToTolerance( S[i], _Tolerance ) );
+        outSingularVals ->push_back( ls::RoundToTolerance( S[i], _Tolerance ) );
     }    
 
     // free memory
@@ -675,9 +673,9 @@ void LibLA::getSVD(DoubleMatrix &inputMatrix, DoubleMatrix* &outU, std::vector<d
 
 void LibLA::ZgetSVD(ComplexMatrix &inputMatrix, ComplexMatrix* &outU, std::vector<double>* &outSingularVals, ComplexMatrix* &outV)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getSingularValsBySVD " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getSingularValsBySVD " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
     integer numRows = inputMatrix.numRows();
     integer numCols = inputMatrix.numCols();
@@ -719,8 +717,8 @@ void LibLA::ZgetSVD(ComplexMatrix &inputMatrix, ComplexMatrix* &outU, std::vecto
         for (int j = 0; j < numRows; j++)
         {
             index = (j+numRows*i);
-            (*outU)(j,i).set( Util::RoundToTolerance( U[index].r, _Tolerance),
-                Util::RoundToTolerance( U[index].i, _Tolerance) );
+            (*outU)(j,i).set( ls::RoundToTolerance( U[index].r, _Tolerance),
+                ls::RoundToTolerance( U[index].i, _Tolerance) );
         }
     }
     
@@ -730,15 +728,15 @@ void LibLA::ZgetSVD(ComplexMatrix &inputMatrix, ComplexMatrix* &outU, std::vecto
         for (int j = 0; j < numCols; j++)
         {
             index = (j+numCols*i);
-            (*outV)(i,j).set( Util::RoundToTolerance( VT[index].r, _Tolerance),
-                Util::RoundToTolerance( -VT[index].i, _Tolerance));
+            (*outV)(i,j).set( ls::RoundToTolerance( VT[index].r, _Tolerance),
+                ls::RoundToTolerance( -VT[index].i, _Tolerance));
         }
     }
 
     outSingularVals = new std::vector<double>();
     for (int i=0; i<min_MN; i++) 
     {
-        outSingularVals ->push_back( Util::RoundToTolerance( S[i], _Tolerance ) );
+        outSingularVals ->push_back( ls::RoundToTolerance( S[i], _Tolerance ) );
     }
 
     // free memory
@@ -773,7 +771,7 @@ double LibLA::getRCond(DoubleMatrix &oMatrix)
 
     double dnorm = dlange_(&norm, &numRows, &numCols, A, &numRows, work  );
     dgetrf_ (&numRows, &numCols, A, &numRows, vecP, &info);
-    Util::checkTolerance(numRows*numCols, A, _Tolerance);
+    ls::checkTolerance(numRows*numCols, A, _Tolerance);
     
     integer* iwork = new integer[numRows]; memset(iwork, 0, sizeof(integer)*numRows);
 
@@ -790,9 +788,9 @@ double LibLA::getRCond(DoubleMatrix &oMatrix)
 
 LU_Result* LibLA::getLU(DoubleMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getLU " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getLU " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
     integer numRows = oMatrix.numRows();
     integer numCols = oMatrix.numCols();
@@ -816,7 +814,7 @@ LU_Result* LibLA::getLU(DoubleMatrix &oMatrix)
 
     integer info; dgetrf_ (&numRows, &numCols, A, &numRows, vecP, &info);
 
-    Util::print(numRows, numCols, A);
+    ls::print(numRows, numCols, A);
     
     DoubleMatrix *L = new DoubleMatrix(numRows, minRC);
     DoubleMatrix *U = new DoubleMatrix(minRC,numCols);
@@ -869,8 +867,8 @@ LU_Result* LibLA::getLU(DoubleMatrix &oMatrix)
 
     LU_Result* oResult = new LU_Result();
 
-    Util::RoundMatrixToTolerance(*L, _Tolerance);
-    Util::RoundMatrixToTolerance(*U, _Tolerance);
+    ls::RoundMatrixToTolerance(*L, _Tolerance);
+    ls::RoundMatrixToTolerance(*U, _Tolerance);
 
     oResult->L = L; oResult->U = U;
     oResult->P = P; oResult->nInfo = info;
@@ -882,9 +880,9 @@ LU_Result* LibLA::getLU(DoubleMatrix &oMatrix)
 
 LU_Result* LibLA::getLUwithFullPivoting(DoubleMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== getLUwithFullPivoting " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== getLUwithFullPivoting " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
 
     integer numRows = oMatrix.numRows();
     integer numCols = oMatrix.numCols();
@@ -959,8 +957,8 @@ LU_Result* LibLA::getLUwithFullPivoting(DoubleMatrix &oMatrix)
 
     LU_Result* oResult = new LU_Result();
 
-    Util::RoundMatrixToTolerance(*L, _Tolerance);
-    Util::RoundMatrixToTolerance(*U, _Tolerance);
+    ls::RoundMatrixToTolerance(*L, _Tolerance);
+    ls::RoundMatrixToTolerance(*U, _Tolerance);
 
     oResult->L = L; oResult->U = U;
     oResult->P = P; oResult->Q = Q; oResult->nInfo = info;
@@ -972,9 +970,9 @@ LU_Result* LibLA::getLUwithFullPivoting(DoubleMatrix &oMatrix)
 
 DoubleMatrix* LibLA::inverse(DoubleMatrix &oMatrix)
 {    
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== inverse " << endl;
-    Log(lDebug5) << "======================================================" << endl << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== inverse " << endl;
+    //Log(lDebug5) << "======================================================" << endl << endl;
     DoubleMatrix* oResultMatrix = NULL;
 
     integer numRows = oMatrix.numRows();
@@ -989,7 +987,7 @@ DoubleMatrix* LibLA::inverse(DoubleMatrix &oMatrix)
     integer* ipvt = new integer[numRows];        memset(ipvt,0,sizeof(integer)*numRows);
     doublereal* work = new doublereal[numRows];    memset(work,0,sizeof(doublereal)*numRows);
 
-    Log(lDebug5) << "Input Matrix 1D: \n"<<Util::print(numRows, numRows, A);
+    //Log(lDebug5) << "Input Matrix 1D: \n"<<ls::print(numRows, numRows, A);
 
 
     // Carry out LU Factorization
@@ -997,17 +995,17 @@ DoubleMatrix* LibLA::inverse(DoubleMatrix &oMatrix)
     if (info < 0)
         throw new ApplicationException("Error in dgetrf : LU Factorization", "Illegal Value");
     if (info > 0)
-        throw new ApplicationException("Exception in LIB_LA while computing Inverse", "Input Matrix is Singular.");
+        throw new ApplicationException("Exception in ls while computing Inverse", "Input Matrix is Singular.");
 
 
-    Log(lDebug5) << "After dgetrf: \n"<<Util::print(numRows, numRows, A);
+    //Log(lDebug5) << "After dgetrf: \n"<<ls::print(numRows, numRows, A);
 
     dgetri_ (&numRows, A, &numRows, ipvt, work, &numRows, &info);
 
-    Log(lDebug5) << "After dgetri: \n"<<Util::print(numRows, numRows, A);
+    //Log(lDebug5) << "After dgetri: \n"<<ls::print(numRows, numRows, A);
 
     oResultMatrix = new DoubleMatrix(A,numRows,numRows, true);
-    Util::RoundMatrixToTolerance(*oResultMatrix, _Tolerance);
+    ls::RoundMatrixToTolerance(*oResultMatrix, _Tolerance);
 
     delete [] A; delete [] ipvt; delete [] work;
 
@@ -1016,9 +1014,9 @@ DoubleMatrix* LibLA::inverse(DoubleMatrix &oMatrix)
 
 ComplexMatrix* LibLA::Zinverse (ComplexMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== Zinverse " << endl;
-    Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== Zinverse " << endl;
+    //Log(lDebug5) << "======================================================" << endl;
 
     ComplexMatrix *oResultMatrix = NULL;
     integer numRows = oMatrix.numRows();
@@ -1039,8 +1037,8 @@ ComplexMatrix* LibLA::Zinverse (ComplexMatrix &oMatrix)
         }
     }
 
-    //Log(lDebug5) << "Input Matrix 1D: \n";
-    //Util::print(numRows, numRows, A);
+    ////Log(lDebug5) << "Input Matrix 1D: \n";
+    //ls::print(numRows, numRows, A);
 
     integer* ipvt = new integer[numRows];                memset(ipvt,0,sizeof(integer)*numRows);
     doublecomplex* work = new doublecomplex[numRows];    memset(work,0,sizeof(doublecomplex)*numRows);
@@ -1056,24 +1054,24 @@ ComplexMatrix* LibLA::Zinverse (ComplexMatrix &oMatrix)
 
     if (info > 0)
     {
-        throw ApplicationException("Exception in LIB_LA while computing Inverse", "Input Matrix is Sinuglar.");
+        throw ApplicationException("Exception in ls while computing Inverse", "Input Matrix is Sinuglar.");
     }
 
-    //Log(lDebug5) << "After dgetrf: \n";
-    //Util::print(numRows, numRows, A);
+    ////Log(lDebug5) << "After dgetrf: \n";
+    //ls::print(numRows, numRows, A);
 
     zgetri_ (&numRows, A, &numRows, ipvt, work, &numRows, &info);
 
-    Log(lDebug5) << "After dgetri: \n";
-    //Util::print(numRows, numRows, A);
+    //Log(lDebug5) << "After dgetri: \n";
+    //ls::print(numRows, numRows, A);
 
     oResultMatrix = new ComplexMatrix(numRows,numRows);
     for (int i=0; i<numRows; i++)
     {
         for (int j=0; j<numRows; j++)
         {
-            (*oResultMatrix )(i,j).Real = Util::RoundToTolerance( A[(i+numRows*j)].r, _Tolerance);
-            (*oResultMatrix )(i,j).Imag = Util::RoundToTolerance( A[(i+numRows*j)].i, _Tolerance);
+            (*oResultMatrix )(i,j).Real = ls::RoundToTolerance( A[(i+numRows*j)].r, _Tolerance);
+            (*oResultMatrix )(i,j).Imag = ls::RoundToTolerance( A[(i+numRows*j)].i, _Tolerance);
         }
     }
 
@@ -1085,11 +1083,11 @@ ComplexMatrix* LibLA::Zinverse (ComplexMatrix &oMatrix)
     return oResultMatrix;
 }
 
-ComplexMatrix* LIB_LA::Zinverse (const ComplexMatrix &oMatrix)
+ComplexMatrix* ls::Zinverse (const ComplexMatrix &oMatrix)
 {
-    Log(lDebug5) << "======================================================" << endl;
-    Log(lDebug5) << "=== Zinverse " << endl;
-    Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "======================================================" << endl;
+    //Log(lDebug5) << "=== Zinverse " << endl;
+    //Log(lDebug5) << "======================================================" << endl;
 
     ComplexMatrix *oResultMatrix = NULL;
     integer numRows = oMatrix.numRows();
@@ -1110,8 +1108,8 @@ ComplexMatrix* LIB_LA::Zinverse (const ComplexMatrix &oMatrix)
         }
     }
 
-    //Log(lDebug5) << "Input Matrix 1D: \n";
-    //Util::print(numRows, numRows, A);
+    ////Log(lDebug5) << "Input Matrix 1D: \n";
+    //ls::print(numRows, numRows, A);
 
     integer* ipvt = new integer[numRows];                memset(ipvt,0,sizeof(integer)*numRows);
     doublecomplex* work = new doublecomplex[numRows];    memset(work,0,sizeof(doublecomplex)*numRows);
@@ -1127,24 +1125,24 @@ ComplexMatrix* LIB_LA::Zinverse (const ComplexMatrix &oMatrix)
 
     if (info > 0)
     {
-        throw ApplicationException("Exception in LIB_LA while computing Inverse", "Input Matrix is Sinuglar.");
+        throw ApplicationException("Exception in ls while computing Inverse", "Input Matrix is Sinuglar.");
     }
 
-    //Log(lDebug5) << "After dgetrf: \n";
-    //Util::print(numRows, numRows, A);
+    ////Log(lDebug5) << "After dgetrf: \n";
+    //ls::print(numRows, numRows, A);
 
     zgetri_ (&numRows, A, &numRows, ipvt, work, &numRows, &info);
 
-    Log(lDebug5) << "After dgetri: \n";
-    //Util::print(numRows, numRows, A);
+    //Log(lDebug5) << "After dgetri: \n";
+    //ls::print(numRows, numRows, A);
 
     oResultMatrix = new ComplexMatrix(numRows,numRows);
     for (int i=0; i<numRows; i++)
     {
         for (int j=0; j<numRows; j++)
         {
-            (*oResultMatrix )(i,j).Real = Util::RoundToTolerance( A[(i+numRows*j)].r, gLapackTolerance);
-            (*oResultMatrix )(i,j).Imag = Util::RoundToTolerance( A[(i+numRows*j)].i, gLapackTolerance);
+            (*oResultMatrix )(i,j).Real = ls::RoundToTolerance( A[(i+numRows*j)].r, gLapackTolerance);
+            (*oResultMatrix )(i,j).Imag = ls::RoundToTolerance( A[(i+numRows*j)].i, gLapackTolerance);
         }
     }
 
@@ -1188,7 +1186,7 @@ LibLA* LibLA::_Instance = NULL;
 //        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //        vector< Complex > oVector = LibLA::getInstance()->getEigenValues( oMatrix );
 //
-//        Util::CopyComplexVector(oVector, *outReal, *outImag, *outLength);
+//        ls::CopyComplexVector(oVector, *outReal, *outImag, *outLength);
 //
 //        return 0;
 //    }
@@ -1215,7 +1213,7 @@ LibLA* LibLA::_Instance = NULL;
 //
 //        vector< Complex > oVector = LibLA::getInstance()->ZgetEigenValues( oMatrix );
 //
-//        Util::CopyComplexVector(oVector, *outReal, *outImag, *outLength);
+//        ls::CopyComplexVector(oVector, *outReal, *outImag, *outLength);
 //
 //        oVector.clear();
 //        return 0;
@@ -1234,9 +1232,9 @@ LibLA* LibLA::_Instance = NULL;
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //    vector< DoubleMatrix * > oVector = LibLA::getInstance()->getQRWithPivot( oMatrix );
 //
-//    Util::CopyMatrix(*oVector[0], *outQ, *outQRows, *outQCols); delete oVector[0];
-//    Util::CopyMatrix(*oVector[1], *outR, *outRRows, *outRCols); delete oVector[1];
-//    Util::CopyMatrix(*oVector[2], *outP, *outPRows, *outPCols); delete oVector[2];
+//    ls::CopyMatrix(*oVector[0], *outQ, *outQRows, *outQCols); delete oVector[0];
+//    ls::CopyMatrix(*oVector[1], *outR, *outRRows, *outRCols); delete oVector[1];
+//    ls::CopyMatrix(*oVector[2], *outP, *outPRows, *outPCols); delete oVector[2];
 //
 //
 //    return 0;
@@ -1249,8 +1247,8 @@ LibLA* LibLA::_Instance = NULL;
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //    vector< DoubleMatrix * > oVector = LibLA::getInstance()->getQR( oMatrix );
 //
-//    Util::CopyMatrix(*oVector[0], *outQ, *outQRows, *outQCols); delete oVector[0];
-//    Util::CopyMatrix(*oVector[1], *outR, *outRRows, *outRCols); delete oVector[1];
+//    ls::CopyMatrix(*oVector[0], *outQ, *outQRows, *outQCols); delete oVector[0];
+//    ls::CopyMatrix(*oVector[1], *outR, *outRRows, *outRCols); delete oVector[1];
 //
 //    return 0;
 //}
@@ -1261,7 +1259,7 @@ LibLA* LibLA::_Instance = NULL;
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //    vector< double > oVector = LibLA::getInstance()->getSingularValsBySVD( oMatrix );
 //
-//    Util::CopyDoubleVector(oVector, *outSingularVals, *outLength);
+//    ls::CopyDoubleVector(oVector, *outSingularVals, *outLength);
 //
 //    return 0;
 //}
@@ -1279,10 +1277,10 @@ LibLA* LibLA::_Instance = NULL;
 //        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //        LU_Result* oResult = LibLA::getInstance()->getLUwithFullPivoting( oMatrix );
 //
-//        Util::CopyMatrix(*(oResult->L), *outL, *outLRows, *outLCols);
-//        Util::CopyMatrix(*(oResult->U), *outU, *outURows, *outUCols);
-//        Util::CopyMatrix(*(oResult->P), *outP, *outPRows, *outPCols);
-//        Util::CopyMatrix(*(oResult->Q), *outQ, *outQRows, *outQCols);
+//        ls::CopyMatrix(*(oResult->L), *outL, *outLRows, *outLCols);
+//        ls::CopyMatrix(*(oResult->U), *outU, *outURows, *outUCols);
+//        ls::CopyMatrix(*(oResult->P), *outP, *outPRows, *outPCols);
+//        ls::CopyMatrix(*(oResult->Q), *outQ, *outQRows, *outQCols);
 //
 //        *info = oResult->nInfo;
 //
@@ -1305,9 +1303,9 @@ LibLA* LibLA::_Instance = NULL;
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //    LU_Result* oResult = LibLA::getInstance()->getLU( oMatrix );
 //
-//    Util::CopyMatrix(*(oResult->L), *outL, *outLRows, *outLCols);
-//    Util::CopyMatrix(*(oResult->U), *outU, *outURows, *outUCols);
-//    Util::CopyMatrix(*(oResult->P), *outP, *outPRows, *outPCols);
+//    ls::CopyMatrix(*(oResult->L), *outL, *outLRows, *outLCols);
+//    ls::CopyMatrix(*(oResult->U), *outU, *outURows, *outUCols);
+//    ls::CopyMatrix(*(oResult->P), *outP, *outPRows, *outPCols);
 //
 //    *info = oResult->nInfo;
 //
@@ -1324,7 +1322,7 @@ LibLA* LibLA::_Instance = NULL;
 //        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //        DoubleMatrix *oResult = LibLA::getInstance()->inverse( oMatrix );
 //
-//        Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+//        ls::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
 //
 //        return 0;
 //    }
@@ -1341,7 +1339,7 @@ LibLA* LibLA::_Instance = NULL;
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //    DoubleMatrix *oResult = LibLA::getInstance()->getLeftNullSpace( oMatrix );
 //
-//    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+//    ls::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
 //
 //    return 0;
 //}
@@ -1351,7 +1349,7 @@ LibLA* LibLA::_Instance = NULL;
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //    DoubleMatrix *oResult = LibLA::getInstance()->getRightNullSpace( oMatrix );
 //
-//    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+//    ls::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
 //
 //    return 0;
 //}
@@ -1362,7 +1360,7 @@ LibLA* LibLA::_Instance = NULL;
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //    DoubleMatrix *oResult = LibLA::getInstance()->getScaledLeftNullSpace( oMatrix );
 //
-//    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+//    ls::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
 //
 //    return 0;
 //}
@@ -1372,7 +1370,7 @@ LibLA* LibLA::_Instance = NULL;
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //    DoubleMatrix *oResult = LibLA::getInstance()->getScaledRightNullSpace( oMatrix );
 //
-//    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+//    ls::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
 //
 //    return 0;
 //}
@@ -1409,7 +1407,7 @@ LibLA* LibLA::_Instance = NULL;
 //        }
 //
 //        ComplexMatrix *oResult = LibLA::getInstance()->Zinverse( oMatrix );
-//        Util::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
+//        ls::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
 //
 //        return 0;
 //    }
@@ -1439,16 +1437,16 @@ LibLA* LibLA::_Instance = NULL;
 //                                 double** *outMatrix, int *outRows, int *outCols, int* *oPivots, int *nLength)
 //{
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-//    vector<int> oPivotVec  = Util::GaussJordan(oMatrix, LibLA::getInstance()->getTolerance());
-//    Util::CopyMatrix(oMatrix, *outMatrix, *outRows, *outCols);
+//    vector<int> oPivotVec  = ls::GaussJordan(oMatrix, LibLA::getInstance()->getTolerance());
+//    ls::CopyMatrix(oMatrix, *outMatrix, *outRows, *outCols);
 //
-//    Util::CopyIntVector(oPivotVec, *oPivots, *nLength);
+//    ls::CopyIntVector(oPivotVec, *oPivots, *nLength);
 //    return 0;
 //}
 //
 //std::vector<int> LibLA::gaussJordan(DoubleMatrix &oMatrix)
 //{
-//    return Util::GaussJordan(oMatrix, _Tolerance);
+//    return ls::GaussJordan(oMatrix, _Tolerance);
 //}
 //
 //
@@ -1456,15 +1454,15 @@ LibLA* LibLA::_Instance = NULL;
 ////                                  double** *outMatrix, int *outRows, int *outCols)
 ////{
 ////    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
-////    Util::gaussJordan(oMatrix, LibLA::getInstance()->getTolerance());
-////    Util::CopyMatrix(oMatrix, outMatrix, outRows, outCols);
+////    ls::gaussJordan(oMatrix, LibLA::getInstance()->getTolerance());
+////    ls::CopyMatrix(oMatrix, outMatrix, outRows, outCols);
 ////    return 0;
 ////}
 //
 //
 //void LibLA::fullyPivotedGaussJordan(DoubleMatrix &oMatrix, vector<int> &rowPivots, vector<int> &colPivots)
 //{
-//    return Util::FullyPivotedGaussJordan(oMatrix, _Tolerance, rowPivots, colPivots);
+//    return ls::FullyPivotedGaussJordan(oMatrix, _Tolerance, rowPivots, colPivots);
 //}
 //
 //
@@ -1476,12 +1474,12 @@ LibLA* LibLA::_Instance = NULL;
 //
 //    DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //    vector< int > vecRowPivots;  vector< int> vecColPivots;
-//    Util::FullyPivotedGaussJordan(oMatrix, LibLA::getInstance()->getTolerance(), vecRowPivots, vecColPivots);
+//    ls::FullyPivotedGaussJordan(oMatrix, LibLA::getInstance()->getTolerance(), vecRowPivots, vecColPivots);
 //
-//    Util::CopyMatrix(oMatrix, *outMatrix, *outRows, *outCols);
+//    ls::CopyMatrix(oMatrix, *outMatrix, *outRows, *outCols);
 //
-//    Util::CopyIntVector(vecRowPivots, *oRowPivots, *nRowLength);
-//    Util::CopyIntVector(vecColPivots, *oColPivots, *nColLength);
+//    ls::CopyIntVector(vecRowPivots, *oRowPivots, *nRowLength);
+//    ls::CopyIntVector(vecColPivots, *oColPivots, *nColLength);
 //
 //    return 0;
 //
@@ -1497,7 +1495,7 @@ LibLA* LibLA::_Instance = NULL;
 //        DoubleMatrix oMatrix(inMatrix, numRows, numCols);
 //        ComplexMatrix *oResult = LibLA::getInstance()->getEigenVectors( oMatrix );
 //
-//        Util::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
+//        ls::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
 //
 //        return 0;
 //    }
@@ -1523,7 +1521,7 @@ LibLA* LibLA::_Instance = NULL;
 //        }
 //
 //        ComplexMatrix *oResult = LibLA::getInstance()->ZgetEigenVectors( oMatrix );
-//        Util::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
+//        ls::CopyMatrix(*oResult, *outMatrixReal, *outMatrixImag, *outRows, *outCols); delete oResult;
 //
 //        return 0;
 //    }
@@ -1548,9 +1546,9 @@ LibLA* LibLA::_Instance = NULL;
 //
 //        LibLA::getInstance()->getSVD(oMatrix, matrixU, singVals, matrixV);
 //
-//        Util::CopyMatrix(*matrixU, *outU, *outRowsU, *outColsU); delete matrixU;
-//        Util::CopyDoubleVector(*singVals, *outSingVals, *outLength); delete singVals;
-//        Util::CopyMatrix(*matrixV, *outV, *outRowsV, *outColsV); delete matrixV;
+//        ls::CopyMatrix(*matrixU, *outU, *outRowsU, *outColsU); delete matrixU;
+//        ls::CopyDoubleVector(*singVals, *outSingVals, *outLength); delete singVals;
+//        ls::CopyMatrix(*matrixV, *outV, *outRowsV, *outColsV); delete matrixV;
 //
 //        return 0;
 //    }
@@ -1582,9 +1580,9 @@ LibLA* LibLA::_Instance = NULL;
 //
 //        LibLA::getInstance()->ZgetSVD(oMatrix, matrixU, singVals, matrixV);
 //
-//        Util::CopyMatrix(*matrixU, *outUReal, *outUImag, *outRowsU, *outColsU); delete matrixU;
-//        Util::CopyDoubleVector(*singVals, *outSingVals, *outLength); delete singVals;
-//        Util::CopyMatrix(*matrixV, *outVReal, *outVImag, *outRowsV, *outColsV); delete matrixV;
+//        ls::CopyMatrix(*matrixU, *outUReal, *outUImag, *outRowsU, *outColsU); delete matrixU;
+//        ls::CopyDoubleVector(*singVals, *outSingVals, *outLength); delete singVals;
+//        ls::CopyMatrix(*matrixV, *outVReal, *outVImag, *outRowsV, *outColsV); delete matrixV;
 //
 //        return 0;
 //    }

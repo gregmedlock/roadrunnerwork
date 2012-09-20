@@ -185,9 +185,9 @@ string ModelGenerator::substituteTerms(const string& reactionName, const string&
     return sb.ToString();
 }
 
-LIB_LA::DoubleMatrix* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
+ls::DoubleMatrix* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
 {
-    LIB_LA::DoubleMatrix* L0;
+    ls::DoubleMatrix* L0;
     try
     {
         if (mNumDependentSpecies > 0)
@@ -200,7 +200,7 @@ LIB_LA::DoubleMatrix* ModelGenerator::InitializeL0(int& nrRows, int& nrCols)
         }
         else
         {
-            L0 = new LIB_LA::DoubleMatrix(1,1);//.Allocate(1,1);// = new double[0][];             //Todo: memoryleak
+            L0 = new ls::DoubleMatrix(1,1);//.Allocate(1,1);// = new double[0][];             //Todo: memoryleak
             nrRows = nrCols = 1;
         }
     }

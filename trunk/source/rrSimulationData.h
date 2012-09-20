@@ -4,12 +4,12 @@
 #include <sstream>
 #include "rrObject.h"
 #include "rrStringList.h"
-#include "libstruct/lsMatrix.h"
+#include "rr-libstruct/lsMatrix.h"
 #include "rrExporter.h"
 namespace rr
 {
 
-using namespace LIB_LA;
+using namespace ls;
 using std::ofstream;
 using std::stringstream;
 
@@ -45,10 +45,14 @@ class RR_DECLSPEC SimulationData : public rrObject
 RR_DECLSPEC    friend std::ostream&    operator << (std::ostream& ss, const SimulationData& data);
         double&                 operator() (const unsigned& row, const unsigned& col);
         double                  operator() (const unsigned& row, const unsigned& col) const;
-        void                    SetName(const string& name);
-        string                  GetName() const;
-        pair<int,int>           Dimension() const;
-};
+
+        void                    SetName(const string& name);
+
+        string                  GetName() const;
+
+        pair<int,int>           Dimension() const;
+
+};
 
 //This function is not class member, so need to export separately
 

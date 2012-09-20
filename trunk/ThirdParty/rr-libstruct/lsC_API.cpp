@@ -138,7 +138,7 @@
 /*LIB_EXTERN*/  int LibStructural_getL0Matrix(double** *outMatrix, int* outRows, int *outCols)
 {
     DoubleMatrix *oTemp = LibStructural::getInstance()->getL0Matrix();
-    Util::CopyMatrix(*oTemp, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oTemp, *outMatrix, *outRows, *outCols);
     delete oTemp;
     return 0;
 }
@@ -149,7 +149,7 @@
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getNrMatrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     return 0;
 }
 
@@ -160,7 +160,7 @@
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getN0Matrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     return 0;
 }
 
@@ -170,7 +170,7 @@
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getLinkMatrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     return 0;
 }
 
@@ -180,7 +180,7 @@
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getK0Matrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     return 0;
 }
 
@@ -190,7 +190,7 @@
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getKMatrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     return 0;
 }
 
@@ -234,7 +234,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getGammaMatrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     return 0;
 }
 
@@ -244,7 +244,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     DoubleMatrix oMatrix(inMatrix, numRows, numCols);
     DoubleMatrix *oResult = LibStructural::getInstance()->getGammaMatrixGJ( oMatrix );
 
-    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+    ls::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
 
     return 0;
 }
@@ -266,8 +266,8 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     DoubleMatrix *oResult = LibStructural::getInstance()->findPositiveGammaMatrix( oMatrix, rowNames );
     if (oResult == NULL)
         return -1;
-    Util::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
-    Util::CopyStringVector(rowNames, *outRowLabels, *outRowCount);
+    ls::CopyMatrix(*oResult, *outMatrix, *outRows, *outCols); delete oResult;
+    ls::CopyStringVector(rowNames, *outRowLabels, *outRowCount);
 
     return 0;
 }
@@ -300,7 +300,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getStoichiometryMatrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     return 0;
 }
 
@@ -310,7 +310,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getReorderedStoichiometryMatrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     return 0;
 }
 
@@ -420,7 +420,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
 /*LIB_EXTERN*/ int LibStructural_getConservedSums(double* *outArray, int *outLength)
 {
     vector<double> oSums = LibStructural::getInstance()->getConservedSums();
-    Util::CopyDoubleVector(oSums, *outArray, *outLength);
+    ls::CopyDoubleVector(oSums, *outArray, *outLength);
     return 0;
 
 }
@@ -428,21 +428,21 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
 /*LIB_EXTERN*/  int LibStructural_getConservedLaws(char** *outArray, int *outLength)
 {
     vector<string> oValues = LibStructural::getInstance()->getConservedLaws();
-    Util::CopyStringVector(oValues, *outArray, *outLength);
+    ls::CopyStringVector(oValues, *outArray, *outLength);
     return 0;
 }
 
 /*LIB_EXTERN*/  int LibStructural_getReactionIds(char** *outArray, int *outLength)
 {
     vector<string> oValues = LibStructural::getInstance()->getReactions();
-    Util::CopyStringVector(oValues, *outArray, *outLength);
+    ls::CopyStringVector(oValues, *outArray, *outLength);
     return 0;
 }
 
 /*LIB_EXTERN*/  int LibStructural_getDependentSpeciesIds(char** *outArray, int *outLength)
 {
     vector<string> oValues = LibStructural::getInstance()->getDependentSpecies();
-    Util::CopyStringVector(oValues, *outArray, *outLength);
+    ls::CopyStringVector(oValues, *outArray, *outLength);
 
     return 0;
 }
@@ -450,27 +450,27 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
 /*LIB_EXTERN*/  int LibStructural_getIndependentSpeciesIds(char** *outArray, int *outLength)
 {
     vector<string> oValues = LibStructural::getInstance()->getIndependentSpecies();
-    Util::CopyStringVector(oValues, *outArray, *outLength);
+    ls::CopyStringVector(oValues, *outArray, *outLength);
     return 0;
 }
 
 /*LIB_EXTERN*/  int LibStructural_getDependentReactionIds(char** *outArray, int *outLength)
 {
     vector<string> oValues = LibStructural::getInstance()->getDependentReactionIds();
-    Util::CopyStringVector(oValues, *outArray, *outLength);
+    ls::CopyStringVector(oValues, *outArray, *outLength);
     return 0;
 }
 /*LIB_EXTERN*/  int LibStructural_getIndependentReactionIds(char** *outArray, int *outLength)
 {
     vector<string> oValues = LibStructural::getInstance()->getIndependentReactionIds();
-    Util::CopyStringVector(oValues, *outArray, *outLength);
+    ls::CopyStringVector(oValues, *outArray, *outLength);
     return 0;
 }
 
 /*LIB_EXTERN*/  int LibStructural_getReorderedReactionIds(char** *outArray, int *outLength)
 {
     vector<string> oValues = LibStructural::getInstance()->getReorderedReactions();
-    Util::CopyStringVector(oValues, *outArray, *outLength);
+    ls::CopyStringVector(oValues, *outArray, *outLength);
     return 0;
 }
 
@@ -478,7 +478,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
 /*LIB_EXTERN*/  int LibStructural_getSpeciesIds(char** *outArray, int *outLength)
 {
     vector<string> oValues = LibStructural::getInstance()->getSpecies();
-    Util::CopyStringVector(oValues, *outArray, *outLength);
+    ls::CopyStringVector(oValues, *outArray, *outLength);
     return 0;
 }
 
@@ -486,7 +486,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
 /*LIB_EXTERN*/  int LibStructural_getReorderedSpeciesIds(char** *outArray, int *outLength)
 {
     vector<string> oValues = LibStructural::getInstance()->getReorderedSpecies();
-    Util::CopyStringVector(oValues, *outArray, *outLength);
+    ls::CopyStringVector(oValues, *outArray, *outLength);
     return 0;
 }
 
@@ -530,8 +530,8 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     vector<string> oRows; vector<string> oCols;
     LibStructural::getInstance()->getColumnReorderedNrMatrixLabels(oRows, oCols);
 
-    Util::CopyStringVector(oRows, *outRowLabels, *outRowCount);
-    Util::CopyStringVector(oCols, *outColLabels, *outColCount);
+    ls::CopyStringVector(oRows, *outRowLabels, *outRowCount);
+    ls::CopyStringVector(oCols, *outColLabels, *outColCount);
 
     return 0;
 }
@@ -541,7 +541,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getColumnReorderedNrMatrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     delete oMatrix;
     return 0;
 }
@@ -552,7 +552,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getNICMatrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     delete oMatrix;
     return 0;
 }
@@ -563,7 +563,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getNDCMatrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     delete oMatrix;
     return 0;
 }
@@ -573,8 +573,8 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     vector<string> oRows; vector<string> oCols;
     LibStructural::getInstance()->getNICMatrixLabels(oRows, oCols);
 
-    Util::CopyStringVector(oRows, *outRowLabels, *outRowCount);
-    Util::CopyStringVector(oCols, *outColLabels, *outColCount);
+    ls::CopyStringVector(oRows, *outRowLabels, *outRowCount);
+    ls::CopyStringVector(oCols, *outColLabels, *outColCount);
 
     return 0;
 }
@@ -584,8 +584,8 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     vector<string> oRows; vector<string> oCols;
     LibStructural::getInstance()->getNDCMatrixLabels(oRows, oCols);
 
-    Util::CopyStringVector(oRows, *outRowLabels, *outRowCount);
-    Util::CopyStringVector(oCols, *outColLabels, *outColCount);
+    ls::CopyStringVector(oRows, *outRowLabels, *outRowCount);
+    ls::CopyStringVector(oCols, *outColLabels, *outColCount);
 
     return 0;
 }
@@ -697,8 +697,8 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     vector<string> oRows; vector<string> oCols;
     LibStructural::getInstance()->getFullyReorderedStoichiometryMatrixLabels(oRows, oCols);
 
-    Util::CopyStringVector(oRows, *outRowLabels, *outRowCount);
-    Util::CopyStringVector(oCols, *outColLabels, *outColCount);
+    ls::CopyStringVector(oRows, *outRowLabels, *outRowCount);
+    ls::CopyStringVector(oCols, *outColLabels, *outColCount);
 
     return 0;
 }
@@ -716,7 +716,7 @@ int LibStructural_getGammaMatrix(double** *outMatrix, int* outRows, int *outCols
     DoubleMatrix* oMatrix = LibStructural::getInstance()->getFullyReorderedStoichiometryMatrix();
     if (oMatrix == NULL)
         return -1;
-    Util::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
+    ls::CopyMatrix(*oMatrix, *outMatrix, *outRows, *outCols);
     delete oMatrix;
     }
     catch(...)

@@ -1,6 +1,7 @@
 #ifndef rrExporterH
 #define rrExporterH
 
+#if defined(WIN32)
 #if defined(STATIC_RR)
     #define RR_DECLSPEC
 #else
@@ -11,6 +12,9 @@
     #define RR_DECLSPEC __declspec(dllimport)
 #endif
 
+#endif
+#else
+#define RR_DECLSPEC
 #endif
 
 

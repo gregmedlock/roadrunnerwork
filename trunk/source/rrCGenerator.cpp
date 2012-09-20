@@ -7,7 +7,7 @@
 #include "sbml/Model.h"
 #include "sbml/SBMLDocument.h"
 #include "rrCSharpGenerator.h"
-#include "libstruct/lsLibstructural.h"
+#include "rr-libstruct/lsLibstructural.h"
 #include "rrStringListContainer.h"
 #include "rrStringUtils.h"
 #include "rrUtils.h"
@@ -20,7 +20,7 @@
 //---------------------------------------------------------------------------
 
 using namespace std;
-using namespace LIB_STRUCTURAL;
+using namespace ls;
 
 namespace rr
 {
@@ -187,7 +187,7 @@ string CGenerator::generateModelCode(const string& sbmlStr, const bool& _compute
     int nrRows;
     int nrCols;
 
-    LIB_LA::DoubleMatrix* aL0 = InitializeL0(nrRows, nrCols);     //Todo: What is this doing? answer.. it is used below..
+    ls::DoubleMatrix* aL0 = InitializeL0(nrRows, nrCols);     //Todo: What is this doing? answer.. it is used below..
     WriteUpdateDependentSpecies(ignore, mNumIndependentSpecies, mNumDependentSpecies, *aL0);
     int numOfRules = WriteComputeRules(ignore, mNumReactions);
 
@@ -374,7 +374,7 @@ void CGenerator::WriteComputeConservedTotals(CodeBuilder& ignore, const int& num
     if (numDependentSpecies > 0)
     {
         string factor;
-        LIB_LA::DoubleMatrix *gamma = mLibStruct->getGammaMatrix();
+        ls::DoubleMatrix *gamma = mLibStruct->getGammaMatrix();
 
 //        double* matPtr =
 //        DoubleMatrix gamma(matPtr, numDependentSpecies, numFloatingSpecies);

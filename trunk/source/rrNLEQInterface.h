@@ -9,24 +9,8 @@ using std::vector;
 namespace rr
 {
 
-//int NLEQModelFcn(...);
-typedef void        (*c_ModelFcn)(long&, double*, double*, long&);
-typedef int     	(__stdcall *cNLEQ1)(long int*,
-								c_ModelFcn,
-								c_ModelFcn,
-                                double*,
-                                double*,
-                                double*,
-                                long int*,
-                                long int*,
-                                long int*,
-                                long int*,
-                                long int*,
-                                double*);
 
-
-void ModelFcn2(int* nx, double* y, double* fval, int* pErr);
-void ModelFcn(long& nx, double* y, double* fval, long& pErr);
+void ModelFunction(int* nx, double* y, double* fval, int* pErr);
 
 class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
 {
@@ -39,13 +23,9 @@ class RR_DECLSPEC NLEQInterface : public ISteadyStateSolver
         double                         *XScal;
         long                            ierr;
         long                           *iopt;
-        static ModelFromC              *model;     // Model generated from the SBML
+        static ModelFromC              *model;     // Model generated from the SBML. Static so we can access it from standalone function
         static long                     n;
-		string							mNLEQDLLName;
-        HINSTANCE						mDLLInstance;
-	    cNLEQ1       					NLEQ1_IN_DLL;
-                                         //tk made this a non class member, 'standalone' function
-                                        //  private void ModelFcn(IntPtr nx, IntPtr y, IntPtr fval, IntPtr pErr)
+
     public:
         bool                            IsAvailable();
         static ModelFromC*              GetModel();

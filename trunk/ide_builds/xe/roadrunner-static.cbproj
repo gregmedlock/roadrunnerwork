@@ -23,7 +23,7 @@
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<BPILibOutputDir>$(RR_DEBUG_INSTALL)\lib</BPILibOutputDir>
-			<Defines>LIBSBML_USE_CPP_NAMESPACE;STATIC_RR;LIBSBML_STATIC;LIBLAX_STATIC;STATIC_LIB_LA;$(Defines)</Defines>
+			<Defines>WIN32;LIBSBML_USE_CPP_NAMESPACE;LIBSBML_STATIC;LIBLAX_STATIC;STATIC_RR;STATIC_LIBSTRUCT;STATIC_PUGI;STATIC_NLEQ;$(Defines)</Defines>
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
 			<PackageImports>vclx.bpi;vcl.bpi;rtl.bpi;vclactnband.bpi;vclimg.bpi;VCLData.bpi;DuneComponents.bpi;TeePro915.bpi;TeeUI915.bpi;VCLCommonRTL.bpi;mtkCommonRTL.bpi;mtkMathRTL.bpi;mtkDataRTL.bpi;Tee915.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;svnui.bpi;svn.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;bdertl.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;DbxClientDriver.bpi;dbexpress.bpi;AzureCloud.bpi;DbxCommonDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vclie.bpi;webdsnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;TeeTree2D15Tee9.bpi;bcbie.bpi;dbxcds.bpi;inetdb.bpi;websnap.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeeGL915.bpi;TeeDB915.bpi;GenesisVisualComponents.bpi</PackageImports>
 			<ProjectType>CppStaticLibrary</ProjectType>
@@ -46,7 +46,6 @@
 			<BCC_ExtendedErrorInfo>true</BCC_ExtendedErrorInfo>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
-			<DynamicRTL>false</DynamicRTL>
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
@@ -73,27 +72,6 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\source\libstruct\lsComplex.cpp">
-				<BuildOrder>51</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsLA.cpp">
-				<BuildOrder>64</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsLibla.cpp">
-				<BuildOrder>52</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsLibstructural.cpp">
-				<BuildOrder>67</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsMatrix.cpp">
-				<BuildOrder>54</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsSBMLModel.cpp">
-				<BuildOrder>55</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\libstruct\lsUtil.cpp">
-				<BuildOrder>56</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\source\mtrand\mtrand.cpp">
 				<BuildOrder>62</BuildOrder>
 			</CppCompile>
@@ -171,10 +149,6 @@
 			<CppCompile Include="..\..\source\rrIModel.cpp">
 				<DependentOn>..\..\source\rrIModel.h</DependentOn>
 				<BuildOrder>18</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrInteropUtils.cpp">
-				<DependentOn>..\..\source\rrInteropUtils.h</DependentOn>
-				<BuildOrder>44</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrLog.cpp">
 				<DependentOn>..\..\source\rrLog.h</DependentOn>

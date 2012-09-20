@@ -26,7 +26,6 @@ long  NLEQInterface::GetN()
 	return NLEQInterface::n;
 }
 
-
 ModelFromC* NLEQInterface::GetModel()
 {
     return NLEQInterface::model;
@@ -35,30 +34,12 @@ ModelFromC* NLEQInterface::GetModel()
 NLEQInterface::NLEQInterface(ModelFromC *_model)
 :
 nOpts(50),
-mNLEQDLLName("rr_nleq.dll"),
-mDLLInstance(NULL),
 defaultMaxInterations(100),
 maxIterations(defaultMaxInterations),
 defaultTolerance(1.e-4),
 relativeTolerance(defaultTolerance)
 {
-	//First load the nleq DLL and assign nleq function to function pointer
-//    mDLLInstance = LoadDLL(mNLEQDLLName);
-//    if(!mDLLInstance)
-//    {
-//    	Log(lError)<<"We failed to load the NLEQ DLL.";
-//    }
-//
-    //Load the NLEQ1 function
-    NLEQ1_IN_DLL = (cNLEQ1) GetFunctionPtr("NLEQ1", mDLLInstance);
-
-    if(!NLEQ1_IN_DLL)
-    {
-    	Log(lError)<<"We failed to load the NLEQ function.";
-        throw(RRException("Failed to load NLEQ function"));
-    }
-    this->model = _model;
-
+	model = _model;
     n = model->getNumIndependentVariables();
 
     // Allocate space, see NLEQ docs for details
@@ -158,31 +139,10 @@ double NLEQInterface::solve(const vector<double>& yin)
 
     //NLEQ1(ref n, fcn, null, model->amounts, XScal, ref tmpTol, iopt, ref ierr, ref LIWK, IWK, ref LWRK, RWK);
 
-//    NLEQ1(      &n,
-//                &ModelFcn2,
-//                NULL,
-//                model->amounts,
-//                XScal,
-//                &tmpTol,
-//                iopt,
-//                &ierr,
-//                &LIWK,
-//                IWK,
-//                &LWRK,
-//                RWK);
-
-    NLEQ1_IN_DLL(      &n,
-                &ModelFcn,
-                NULL,
-                model->amounts,
-                XScal,
-                &tmpTol,
-                iopt,
-                &ierr,
-                &LIWK,
-                IWK,
-                &LWRK,
-                RWK);
+    NLEQ1( &n, 				&ModelFunction, NULL,
+           model->amounts,	XScal,        	&tmpTol,
+           iopt,           	&ierr,          &LIWK,
+           IWK,           	&LWRK,          RWK);
 
     if (ierr == 2) // retry
     {
@@ -220,7 +180,7 @@ double NLEQInterface::solve(const vector<double>& yin)
     return ComputeSumsOfSquares();
 }
 
-void ModelFcn2(int* nx, double* y, double* fval, int* pErr)
+void ModelFunction(int* nx, double* y, double* fval, int* pErr)
 {
     ModelFromC* model = NLEQInterface::GetModel();
     if (model == NULL)
@@ -230,18 +190,16 @@ void ModelFcn2(int* nx, double* y, double* fval, int* pErr)
 
     try
     {
-    	int n = NLEQInterface::GetN();
-//        Marshal.Copy(y, model->amounts, 0, n);
-		for(int i = 0; i < n; i++)
+    	long n = NLEQInterface::GetN();
+		for(long i = 0; i < n; i++)
         {
         	model->amounts[i] = y[i];
         }
 
         int size = *model->amountsSize + *model->rateRulesSize;
         vector<double> dTemp;
-        dTemp.resize(size);// = new double[size];
-//        model->rateRules.CopyTo(dTemp, 0);
-//        model->amounts.CopyTo(dTemp, model->rateRules.Length);
+        dTemp.resize(size);
+
 		for(int i = 0; i < *model->rateRulesSize; i++)
         {
         	dTemp[i] = model->rateRules[i];
@@ -254,7 +212,6 @@ void ModelFcn2(int* nx, double* y, double* fval, int* pErr)
 
         model->evalModel(0.0, dTemp);
 
-//        Marshal.Copy(model->dydt, 0, fval, n);
 		for(int i = 0; i < n; i++)
         {
         	fval[i] = model->dydt[i];
@@ -262,55 +219,9 @@ void ModelFcn2(int* nx, double* y, double* fval, int* pErr)
 
         pErr = 0;
     }
-    catch (Exception)
+    catch (const Exception& ex)
     {
-    }
-}
-
-void ModelFcn(long& nx, double* y, double* fval, long& pErr)
-{
-    ModelFromC* model = NLEQInterface::GetModel();
-    if (model == NULL)
-    {
-        return;
-    }
-
-    try
-    {
-    	int n = NLEQInterface::GetN();
-//        Marshal.Copy(y, model->amounts, 0, n);
-		for(int i = 0; i < n; i++)
-        {
-        	model->amounts[i] = y[i];
-        }
-
-        int size = *model->amountsSize + *model->rateRulesSize;
-        vector<double> dTemp;
-        dTemp.resize(size);// = new double[size];
-//        model->rateRules.CopyTo(dTemp, 0);
-//        model->amounts.CopyTo(dTemp, model->rateRules.Length);
-		for(int i = 0; i < *model->rateRulesSize; i++)
-        {
-        	dTemp[i] = model->rateRules[i];
-        }
-
-        for(int i = *model->rateRulesSize; i < *model->amountsSize + *model->rateRulesSize; i++)
-        {
-        	dTemp[i] = model->amounts[i];
-        }
-
-        model->evalModel(0.0, dTemp);
-
-//        Marshal.Copy(model->dydt, 0, fval, n);
-		for(int i = 0; i < n; i++)
-        {
-        	fval[i] = model->dydt[i];
-        }
-
-        pErr = 0;
-    }
-    catch (Exception)
-    {
+    	throw(ex);	//catch at a higher level
     }
 }
 

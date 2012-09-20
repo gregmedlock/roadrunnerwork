@@ -19,7 +19,8 @@ set_property(   TARGET ${target}
                           STATIC_RR             #when linking with static lib, no declspec shuld be present..
                           LIBSBML_STATIC
 					      LIBLAX_STATIC
-                          PUGI_STATIC
+                          STATIC_PUGI
+                          STATIC_LIBSTRUCT
 )
 
 if(${MSVC})
@@ -41,6 +42,7 @@ target_link_libraries (${target} roadrunner-static
                        ${target} lapack
                        ${target} libf2c
                        ${target} pugi-static
+                       ${target} rr-libstruct-static
                        )
 endif()
 

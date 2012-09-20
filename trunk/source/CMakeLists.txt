@@ -4,8 +4,8 @@ set(target roadrunner)
 
 include_directories(
 . 
-./libstruct
 ${THIRD_PARTY_INSTALL_FOLDER}/include
+${THIRD_PARTY_INSTALL_FOLDER}/include/rr-libstruct
 ${THIRD_PARTY_INSTALL_FOLDER}/include/sbml
 ${THIRD_PARTY_INSTALL_FOLDER}/include/cvode
 ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
@@ -53,7 +53,6 @@ rrTextWriter.cpp
 rrTParameterType.cpp
 rrTVariableType.cpp
 rrUtils.cpp
-mtrand/mtrand.cpp
 rrCGenerator.cpp
 rrCodeBuilder.cpp
 rrCompiler.cpp
@@ -65,19 +64,13 @@ rrCVodeInterface.cpp
 rrCvodedll.cpp
 rrNLEQInterface.cpp
 #rrLibStructSupport.cpp
-rrInteropUtils.cpp
+#rrInteropUtils.cpp
 rrDLLEntry.cpp
 rrCapsSupport.cpp
 rrStopWatch.cpp
 rrEvent.cpp
 rrTestSuiteModelSimulation.cpp
-libstruct/lsComplex.cpp
-libstruct/lsLibla.cpp
-libstruct/lsLibstructural.cpp
-libstruct/lsMatrix.cpp
-libstruct/lsSBMLModel.cpp
-libstruct/lsUtil.cpp
-libstruct/lsLA.cpp
+mtrand/mtrand.cpp
 )
 
 #Build both static and shared version
@@ -89,8 +82,8 @@ set_property(TARGET ${target}
                             EXPORT_RR 
                             LIBSBML_STATIC 
                             LIBLAX_STATIC 
-                            LIBSTRUCT_STATIC
-                            PUGI_STATIC
+                            STATIC_LIBSTRUCT
+                            STATIC_PUGI
                             STATIC_NLEQ
                             ) 
 
@@ -112,6 +105,7 @@ target_link_libraries (${target}
                                     libf2c
                                     pugi-static
                                     nleq-static
+                                    rr-libstruct-static
                       )
 endif()
 
@@ -124,8 +118,8 @@ set_property(TARGET ${target}-static
                             STATIC_RR 
                             LIBSBML_STATIC
                             LIBLAX_STATIC 
-                            LIBSTRUCT_STATIC
-							PUGI_STATIC
+                            STATIC_LIBSTRUCT
+							STATIC_PUGI
                             STATIC_NLEQ
                             ) 
 
@@ -141,6 +135,7 @@ target_link_libraries (${target}-static
                            #libf2c
 						   pugi-static
 						   nleq-static
+                           rr-libstruct-static
                       )
 endif()
 
@@ -191,8 +186,6 @@ endif()
 #=== HEADERS
 set(subfolders 
 .
-./libstruct
-./nleq
 ./mtrand
 )
 
@@ -203,14 +196,6 @@ foreach(subfolder ${subfolders})
                 COMPONENT rr_core)
 endforeach(subfolder)
 endif() #Install CXX API
-
-#=== dependencies
-#set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
-#foreach(system_file ${SBML_DEPENDENCIES})
-#install (FILES ${THIRD_PARTY_FOLDER}/runtime_dependencies/${system_file}	
-#                DESTINATION bin 
-#                COMPONENT rr_core)
-#endforeach()
 
 #=== Install support code for on the fly compilation
 FILE(GLOB rr_support rr_support/*.*)

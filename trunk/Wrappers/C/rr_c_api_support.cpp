@@ -44,7 +44,7 @@ char* createText(const string& str)
     return newstr;
 }
 
-RRMatrix* createMatrix(const LIB_LA::DoubleMatrix* mat)
+RRMatrix* createMatrix(const ls::DoubleMatrix* mat)
 {
 	if(!mat)
     {
