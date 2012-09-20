@@ -53,7 +53,6 @@ rrTextWriter.cpp
 rrTParameterType.cpp
 rrTVariableType.cpp
 rrUtils.cpp
-mtrand/mtrand.cpp
 rrCGenerator.cpp
 rrCodeBuilder.cpp
 rrCompiler.cpp
@@ -65,12 +64,13 @@ rrCVodeInterface.cpp
 rrCvodedll.cpp
 rrNLEQInterface.cpp
 #rrLibStructSupport.cpp
-rrInteropUtils.cpp
+#rrInteropUtils.cpp
 rrDLLEntry.cpp
 rrCapsSupport.cpp
 rrStopWatch.cpp
 rrEvent.cpp
 rrTestSuiteModelSimulation.cpp
+mtrand/mtrand.cpp
 )
 
 #Build both static and shared version
@@ -186,8 +186,6 @@ endif()
 #=== HEADERS
 set(subfolders 
 .
-./libstruct
-./nleq
 ./mtrand
 )
 
@@ -198,14 +196,6 @@ foreach(subfolder ${subfolders})
                 COMPONENT rr_core)
 endforeach(subfolder)
 endif() #Install CXX API
-
-#=== dependencies
-#set(SBML_DEPENDENCIES libxml2.dll iconv.dll zlib1.dll)
-#foreach(system_file ${SBML_DEPENDENCIES})
-#install (FILES ${THIRD_PARTY_FOLDER}/runtime_dependencies/${system_file}	
-#                DESTINATION bin 
-#                COMPONENT rr_core)
-#endforeach()
 
 #=== Install support code for on the fly compilation
 FILE(GLOB rr_support rr_support/*.*)

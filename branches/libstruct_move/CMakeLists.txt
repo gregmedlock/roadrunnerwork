@@ -104,15 +104,8 @@ endif()
 
 #Common compiler definitions
 add_definitions(
-                    -DLIBSBML_USE_CPP_NAMESPACE 
-                    -DNO_LIBSTRUCT_DLL
+                    -DLIBSBML_USE_CPP_NAMESPACE                     
 ) 
-
-# Allow the developer to select if Dynamic or Static libraries are built
-SET (LIB_TYPE STATIC)
-IF (BUILD_SHARED_LIBS)
-  SET (LIB_TYPE SHARED)
-ENDIF (BUILD_SHARED_LIBS)
 
 #How do we move forward from this folder? Moving on to subfolders
 #Source Code Folder
@@ -127,10 +120,11 @@ endif()
 if(INSTALL_EXAMPLES)
 add_subdirectory(examples)
 endif()
-
 endif()
 
 add_subdirectory(Wrappers)
+add_subdirectory(compilers)
+
 #======================= INSTALL ROADRUNNER ========================================================
 if(INSTALL_CXX_API)
 install(FILES source/rr_pch.h	
@@ -138,51 +132,9 @@ install(FILES source/rr_pch.h
         COMPONENT rr_core)
 endif()
 
-
 install(FILES Readme.txt License.txt	
         DESTINATION . 	
         COMPONENT info
         )
 
-#==== SYSTEM FILES (COMPILER SPECIFICS) =================================================
-if(${BORLAND})
-set(CG_RUNTIMES		cc32110MT.dll)
-foreach(runtime ${CG_RUNTIMES})
-install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/cg/xe/${runtime} 
-            DESTINATION bin COMPONENT rr_core)
-endforeach()
-endif()
-
-if(${MSVC})
-    set(VS_RUNTIMES MSVCRT.DLL msvcp100d.dll msvcr100d.dll)   #These indicate that Debug libs are linked.. should not be..
-    foreach(runtime ${VS_RUNTIMES})
-    install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/vs/${runtime} 
-                DESTINATION bin 
-                COMPONENT rr_core)
-    endforeach()
-endif()
-
-#=== Other ThirdParties
-    set(RUNTIMES libxml2.DLL iconv.dll zlib1.dll)
-    foreach(runtime ${RUNTIMES})
-    install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/${runtime} 
-                DESTINATION bin 
-                COMPONENT rr_core)
-    endforeach()
-
-#=== TCC ==================================================
-FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/*.*)
-install (FILES 	${tcc} DESTINATION compilers/tcc COMPONENT rr_core)
-
-FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/lib/*.*)
-install (FILES 	${tcc} DESTINATION compilers/tcc/lib COMPONENT rr_core)
-
-FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/*.*)
-install (FILES 	${tcc} DESTINATION compilers/tcc/include COMPONENT rr_core)
-
-FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/sys/*.*)
-install (FILES 	${tcc} DESTINATION compilers/tcc/include/sys COMPONENT rr_core)
-
-FILE (GLOB tcc ${THIRD_PARTY_FOLDER}/tcc/include/winapi/*.*)
-install (FILES 	${tcc} DESTINATION compilers/tcc/include/winapi COMPONENT rr_core)
 

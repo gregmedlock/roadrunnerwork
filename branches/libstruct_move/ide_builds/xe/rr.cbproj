@@ -1,4 +1,4 @@
-	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{BB98A606-C02D-454F-B743-70C12C4C53CD}</ProjectGuid>
 			<ProjectVersion>13.4</ProjectVersion>
@@ -105,6 +105,10 @@
 			<LibFiles Include="R:\installs\xe\debug\lib\libsbml-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>6</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\nleq-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>11</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="R:\installs\xe\debug\lib\roadrunner-static.lib">
 				<IgnorePath>true</IgnorePath>

@@ -106,6 +106,10 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>10</BuildOrder>
 			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\nleq-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>12</BuildOrder>
+			</LibFiles>
 			<LibFiles Include="R:\installs\xe\debug\lib\rr-libstruct-static.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>11</BuildOrder>

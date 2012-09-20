@@ -38,6 +38,7 @@ set_property(TARGET ${target}-static
                        WIN32
                        STATIC_LIBSTRUCT
                        LIBSBML_USE_CPP_NAMESPACE
+                       LIBSBML_STATIC
              ) 
 
 link_directories(				    
