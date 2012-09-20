@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
 	printf ("   ==============\n\n");
 
 	// Test list type
-	printf ("Tesing list type\n");
+	printf ("Testing list type\n");
 
 	RRListHandle myList = createRRList();
 
@@ -85,6 +85,9 @@ int main(int argc, char* argv[])
     {
         cout<<"No handle...";
     }
+
+	cout<<"API Version: "<<getVersion()<<endl;
+	cout<<"libSBML Version: "<<getlibSBMLVersion()<<endl;
     setTempFolder("c:\\rrTemp");
     enableLogging();
 
@@ -384,8 +387,7 @@ int main(int argc, char* argv[])
     getRateOfChange(0, value);
     cout<<"Rate of change:"<<value<<endl;
 
-	cout<<"API Version: "<<getVersion()<<endl;
-
+	
     //cout<<stringArrayToString(getFloatingSpeciesInitialConditionIds())<<endl;
 
 

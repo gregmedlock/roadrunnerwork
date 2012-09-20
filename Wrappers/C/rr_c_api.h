@@ -201,7 +201,14 @@ C_DECL_SPEC char*  rrCallConv getBuildDate();
 */
 C_DECL_SPEC char*  rrCallConv getCopyright();
 
-/*!
+ /*!
+ \brief Retrieve the current version number of the libSBML library
+ \return char* version - Returns null if it fails, otherwise it returns the version number of the library
+ \ingroup utility
+*/
+C_DECL_SPEC char* rrCallConv getlibSBMLVersion();
+
+ /*!
  \brief Set the path to the temporary folder where the C code will be stored
 
  When cRoadRunner is run in C generation mode its uses a temporary folder to store the 
@@ -249,7 +256,8 @@ C_DECL_SPEC RRCCode* rrCallConv getCCode();
  \return Returns false if it fails,
  \ingroup utility
 */
-C_DECL_SPEC bool rrCallConv setCodeGenerationMode (int codeGenerationMode);
+
+C_DECL_SPEC bool rrCallConv setCodeGenerationMode(int _mode);
 
 // Logging
 

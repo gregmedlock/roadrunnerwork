@@ -5345,4 +5345,9 @@ string RoadRunner::getURL()
     return "http://www.sys-bio.org";
 }
 
+string	RoadRunner::getlibSBMLVersion()
+{
+	return mNOM.getlibSBMLVersion();
+}
+
 }//namespace rr
