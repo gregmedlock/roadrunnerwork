@@ -99,6 +99,7 @@ rr = handle.getRRInstance()
 
 #Utility and informational methods
 handle.getVersion.restype = c_char_p
+handle.getlibSBMLVersion.restype = c_char_p
 handle.getBuildDate.restype = c_char_p
 handle.getCopyright.restype = c_char_p
 handle.setTempFolder.restype = c_bool
@@ -110,6 +111,11 @@ handle.getTempFolder.restype = c_char_p
 #\return char* version - Returns null if it fails, otherwise it returns the version number of the library
 def getVersion():
     return handle.getVersion()
+
+##\brief Retrieve the current version of the libsbml library
+#\return char* version - Returns null if it fails, otherwise it returns the version number of the library
+def getlibSBMLVersion():
+    return handle.getlibSBMLVersion()
 
 ##\brief Retrieve the current build date of the library
 #\return Returns null if it fails, otherwise it returns the build date
