@@ -195,8 +195,8 @@ RRHandle rrCallConv getRRInstance()
     	stringstream msg;
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
-    }
-  	return NULL;
+		return NULL;
+    }  	
 }
 
 char* rrCallConv getCopyright()

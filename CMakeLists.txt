@@ -109,6 +109,7 @@ add_definitions(
 
 #How do we move forward from this folder? Moving on to subfolders
 #Source Code Folder
+
 add_subdirectory(source)        # We alway have to build the roadrunner core
 
 if(INSTALL_CXX_API)
@@ -124,6 +125,7 @@ endif()
 
 add_subdirectory(Wrappers)
 add_subdirectory(compilers)
+add_subdirectory(rr_support)
 
 #======================= INSTALL ROADRUNNER ========================================================
 if(INSTALL_CXX_API)

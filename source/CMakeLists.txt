@@ -197,8 +197,4 @@ foreach(subfolder ${subfolders})
 endforeach(subfolder)
 endif() #Install CXX API
 
-#=== Install support code for on the fly compilation
-FILE(GLOB rr_support rr_support/*.*)
-install(FILES ${rr_support} 
-                DESTINATION rr_support
-                COMPONENT rr_core) 
+

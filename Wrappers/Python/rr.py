@@ -1,13 +1,15 @@
 import os
 import rrPython
+
+print rrPython.getCopyright()
+
 startTime = 0
 endTime = 5
 numPoints = 50
 selList="time,S1,S2"
 
 
-result = rrPython.loadSBMLFromFile("r:\\rrInstalls\\xe\Models\\test_1.xml")
-print result
+result = rrPython.loadSBMLFromFile("..\\Models\\test_1.xml")
 
 rrPython.setTimeStart(startTime)
 rrPython.setTimeEnd(endTime)
