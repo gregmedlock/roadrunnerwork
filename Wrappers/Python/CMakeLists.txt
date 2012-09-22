@@ -28,9 +28,9 @@ install(
             FILES 
             rrPython.py 
             rr.py
-            SBMLTester.py
-            MasterTest.py
-            simulationTimer.py
+#            SBMLTester.py
+#            MasterTest.py
+#            simulationTimer.py
             DESTINATION Python  	
             COMPONENT Python
        )

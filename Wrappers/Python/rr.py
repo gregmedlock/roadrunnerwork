@@ -1,7 +1,7 @@
 import os
 import rrPython
 
-print rrPython.getCopyright()
+print 'RoadRunner Build Date: ' + rrPython.getCopyright()
 
 startTime = 0
 endTime = 5
