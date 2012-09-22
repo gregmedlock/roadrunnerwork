@@ -139,4 +139,11 @@ install(FILES Readme.txt License.txt
         COMPONENT info
         )
 
+#=== ThirdParties
+    set(RUNTIMES libxml2.DLL iconv.dll zlib1.dll)
+    foreach(runtime ${RUNTIMES})
+    install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/${runtime} 
+                DESTINATION bin 
+                COMPONENT rr_core)
+    endforeach()
 
