@@ -140,10 +140,21 @@ install(FILES Readme.txt License.txt
         )
 
 #=== ThirdParties
-    set(RUNTIMES libxml2.DLL iconv.dll zlib1.dll)
-    foreach(runtime ${RUNTIMES})
-    install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/${runtime} 
-                DESTINATION bin 
-                COMPONENT rr_core)
-    endforeach()
+
+if(${BORLAND})
+set(CG_RUNTIMES		cc32110MT.dll)
+foreach(runtime ${CG_RUNTIMES})
+install (FILES 
+            ${THIRD_PARTY_FOLDER}/runtime_dependencies/cg/xe/${runtime} 
+            DESTINATION bin 
+            COMPONENT rr_core)
+endforeach()
+endif()
+
+set(RUNTIMES libxml2.DLL iconv.dll zlib1.dll)
+foreach(runtime ${RUNTIMES})
+install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/${runtime} 
+            DESTINATION bin 
+            COMPONENT rr_core)
+endforeach()
 
