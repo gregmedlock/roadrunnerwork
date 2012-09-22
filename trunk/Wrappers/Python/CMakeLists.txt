@@ -6,15 +6,16 @@ PROJECT(rrPythonWrapper)
 if(${MSVC})
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
-set(C_DLL "${CMAKE_CURRENT_BINARY_DIR}/../../bin/Debug/rr_c_api.dll")
+set(C_DLL "${CMAKE_CURRENT_BINARY_DIR}/../../../../c_api/trunk/bin/Debug/rr_c_api.dll")
 elseif(CMAKE_BUILD_TYPE MATCHES "Release")
-set(C_DLL "${CMAKE_CURRENT_BINARY_DIR}/../../bin/Release/rr_c_api.dll")
+set(C_DLL "${CMAKE_CURRENT_BINARY_DIR}/../../../../c_api/trunk/bin/Release/rr_c_api.dll")
 endif()
 
 else()
-set(C_DLL "${CMAKE_CURRENT_BINARY_DIR}/../../bin/rr_c_api.dll")
+set(C_DLL "${CMAKE_CURRENT_BINARY_DIR}/../../../../c_api/trunk/bin/rr_c_api.dll")
 endif()
 
+#add_custom_target(c_api ALL)
 
 add_subdirectory(Tests)
 
@@ -23,7 +24,6 @@ install( FILES ${C_DLL}
          DESTINATION bin
          COMPONENT Python
         )
-
 install(   
             FILES 
             rrPython.py 
