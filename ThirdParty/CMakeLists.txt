@@ -15,16 +15,17 @@ set(BUILD_IDA           OFF CACHE BOOL "")
 set(BUILD_IDAS          OFF CACHE BOOL "")
 set(BUILD_KINSOL        OFF CACHE BOOL "")
 
+#LIBXML stuff
+set(LIBXML_INCLUDE_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/libsbml/include/" CACHE string "test")
+
 if(${BORLAND})
 set(FOLDER_POSTFIX "xe")
-set(LIBXML_INCLUDE_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/libsbml_xe/dependencies/include/" CACHE string "test")
-set(LIBXML_LIBRARY      "${CMAKE_CURRENT_SOURCE_DIR}/libsbml_xe/dependencies/lib/libxml2_xe.lib" CACHE string "test")
+set(LIBXML_LIBRARY      "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/libsbml/lib/libxml2_xe.lib" CACHE string "test")
 endif(${BORLAND})
 
 if(${MSVC})
 set(FOLDER_POSTFIX "vs")
-set(LIBXML_INCLUDE_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/libsbml_dependencies/include/" CACHE string "test")
-set(LIBXML_LIBRARY      "${CMAKE_CURRENT_SOURCE_DIR}/libsbml_dependencies/lib/libxml2.lib" CACHE string "test")
+set(LIBXML_LIBRARY      "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/libsbml/lib/libxml2.lib" CACHE string "test")
 endif()
 
 set(CMAKE_BUILD_TYPE "Debug" CACHE STRING
@@ -57,18 +58,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 
-if(${BORLAND})
-include_directories(        ${THIRD_PARTY_FOLDER}/libsbml/src)
-link_directories(           ${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib)
-
-else()
-include_directories(                ${THIRD_PARTY_FOLDER}/libsbml
-                                  #  ${THIRD_PARTY_FOLDER}/libsbml/src
-                                    ${THIRD_PARTY_FOLDER}/libsbml/src/sbml
-                   )
-link_directories(					${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib)
-endif()
-
+link_directories(           ${THIRD_PARTY_FOLDER}/dependencies/libsbml/lib)
 
 #=== COMPILER FLAGS 
 if(${MINGW})
@@ -98,12 +88,7 @@ add_definitions(
 endif()
 
 #Add Third Party Folders
-if(${BORLAND})
 add_subdirectory(libsbml)
-else(${BORLAND})
-add_subdirectory(libsbml)
-endif()
-
 add_subdirectory(clapack/3.2.1)
 add_subdirectory(sundials)
 add_subdirectory(pugi)
@@ -115,20 +100,20 @@ if(${BORLAND})
 set(CG_RUNTIMES		cc32110MT.dll)
 foreach(runtime ${CG_RUNTIMES})
 install (FILES 
-            ${THIRD_PARTY_FOLDER}/runtime_dependencies/cg/xe/${runtime} 
+            ${THIRD_PARTY_FOLDER}/dependencies/cg/xe/${runtime} 
             DESTINATION bin 
             COMPONENT rr_core)
 endforeach()
-endif()
 install (FILES 
-            ${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib/libxml2_xe.lib 
+            ${THIRD_PARTY_FOLDER}/dependencies/libsbml/lib/libxml2_xe.lib 
             DESTINATION lib 
             COMPONENT rr_core)
+endif()
 
-#=== Other ThirdParties
+#=== More Binary ThirdParties
     set(RUNTIMES libxml2.DLL iconv.dll zlib1.dll)
     foreach(runtime ${RUNTIMES})
-    install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/${runtime} 
+    install(    FILES 	${THIRD_PARTY_FOLDER}/dependencies/libsbml/bin/${runtime} 
                 DESTINATION bin 
                 COMPONENT rr_core)
     endforeach()
