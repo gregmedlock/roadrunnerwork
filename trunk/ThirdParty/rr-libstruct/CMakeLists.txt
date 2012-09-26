@@ -20,7 +20,8 @@ lsLA.cpp
 
 include_directories(
 .
-   ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
+${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
+${THIRD_PARTY_FOLDER}/libsbml/src
 )
 
 #add_library(${target} SHARED ${sources})
