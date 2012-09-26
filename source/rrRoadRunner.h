@@ -205,12 +205,12 @@ class RR_DECLSPEC RoadRunner : public rrObject
 //		void                            GetInverse( Matrix<Complex> & T2, Matrix<Complex>& Inv);
 
 		void                            computeContinuation(const double& stepSize, const int& independentVariable, const string& parameterTypeStr);
-        StringArrayList                 getUnscaledFluxControlCoefficientIds();
-		StringArrayList                 getFluxControlCoefficientIds();
-        StringArrayList                 getUnscaledConcentrationControlCoefficientIds();
-		StringArrayList                 getConcentrationControlCoefficientIds();
-		StringArrayList                 getElasticityCoefficientIds();
-		StringArrayList                 getUnscaledElasticityCoefficientIds();
+        StringArrayList                 		getUnscaledFluxControlCoefficientIds();
+		StringArrayList                       getFluxControlCoefficientIds();
+        StringArrayList                       getUnscaledConcentrationControlCoefficientIds();
+		StringArrayList                       getConcentrationControlCoefficientIds();
+		StringArrayList                       getElasticityCoefficientIds();
+		StringArrayList                       getUnscaledElasticityCoefficientIds();
 		StringList                      getEigenValueIds();
 		StringList                      getAvailableSteadyStateSymbols();
 		ArrayList                       getSteadyStateSelectionList();

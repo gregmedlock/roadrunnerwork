@@ -6,20 +6,18 @@
 #include <vector>
 #include <string>
 #include "rrExporter.h"
+#include "rrConstants.h"
 #include "rrStringList.h"
 #include "rrSimulationSettings.h"
 using std::vector;
 using std::string;
 namespace rr
 {
-extern char* WinPathSeparator;
-extern char* LinuxPathSeparator;
-
 //Misc.
 RR_DECLSPEC std::size_t     IndexOf(std::vector<std::string>& vec, const std::string& elem );
 RR_DECLSPEC bool            IsNaN(const double& aNum);
 RR_DECLSPEC bool            IsNullOrEmpty(const string& str);    //Can't be null, but empty
-RR_DECLSPEC void            Pause(bool doIt = true, const string& msg = "");
+RR_DECLSPEC void            Pause(bool doIt = true, const string& msg = EmptyString);
 
 //String utilities
 RR_DECLSPEC string          RemoveTrailingSeparator(const string& fldr, const string& sep = WinPathSeparator);//"\\");

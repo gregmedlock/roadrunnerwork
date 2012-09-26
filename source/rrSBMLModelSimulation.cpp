@@ -143,7 +143,7 @@ bool SBMLModelSimulation::LoadSettings(const string& settingsFName)
         map<string, string>::iterator it;
         //Read each line in the settings file
         vector<string> lines = GetLinesInFile(fName);
-        for(int i = 0; i < lines.size(); i++)
+        for(u_int i = 0; i < lines.size(); i++)
         {
             vector<string> line = SplitString(lines[i], ":");
             if(line.size() == 2)

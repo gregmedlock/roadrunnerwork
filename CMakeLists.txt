@@ -72,7 +72,7 @@ include_directories(				${RR_ROOT}
 
 link_directories(				    ${LIBRARY_OUTPUT_PATH}
                                     ${THIRD_PARTY_INSTALL_FOLDER}/lib
-                                    ${THIRD_PARTY_FOLDER}/libsbml_dependencies/lib
+                                    ${THIRD_PARTY_FOLDER}/dependencies/libsbml/lib
                                     ${THIRD_PARTY_BUILD_FOLDER}/lib
                  )
 
@@ -92,7 +92,7 @@ SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} -std=gnu++0x")
 endif()
 
 if(${BORLAND})
-link_directories(${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib)
+link_directories(${THIRD_PARTY_FOLDER}/dependencies/libsbml/lib)
 add_definitions(
                                 -DUSE_PCH                   #Enable pre-compiled headers
                                 -H=${PROJECT_BINARY_DIR}/rr_pch.csm
@@ -139,22 +139,21 @@ install(FILES Readme.txt License.txt
         COMPONENT info
         )
 
-#=== ThirdParties
-
-if(${BORLAND})
-set(CG_RUNTIMES		cc32110MT.dll)
-foreach(runtime ${CG_RUNTIMES})
-install (FILES 
-            ${THIRD_PARTY_FOLDER}/runtime_dependencies/cg/xe/${runtime} 
-            DESTINATION bin 
-            COMPONENT rr_core)
-endforeach()
-endif()
-
-set(RUNTIMES libxml2.DLL iconv.dll zlib1.dll)
-foreach(runtime ${RUNTIMES})
-install(    FILES 	${THIRD_PARTY_FOLDER}/runtime_dependencies/${runtime} 
-            DESTINATION bin 
-            COMPONENT rr_core)
-endforeach()
+##=== ThirdParties
+#if(${BORLAND})
+#set(CG_RUNTIMES		cc32110MT.dll)
+#foreach(runtime ${CG_RUNTIMES})
+#install (FILES 
+#            ${THIRD_PARTY_FOLDER}/dependencies/cg/xe/${runtime} 
+#            DESTINATION bin 
+#            COMPONENT rr_core)
+#endforeach()
+#endif()
+#
+#set(RUNTIMES libxml2.DLL iconv.dll zlib1.dll)
+#foreach(runtime ${RUNTIMES})
+#install(    FILES 	${THIRD_PARTY_FOLDER}/dependencies/${runtime} 
+#            DESTINATION bin 
+#            COMPONENT rr_core)
+#endforeach()
 

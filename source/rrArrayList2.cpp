@@ -28,27 +28,21 @@ ArrayList2::~ArrayList2()
     }
 }
 
-void ArrayList2::Add(const string& lbl, const StringList& list)
+StringList ArrayList2::GetStringList(const int& index)
 {
-    ArrayList2 temp;
-    temp.Add(lbl);
-    temp.Add(list);
-    Add(temp);
-}
-
-void ArrayList2::Add(const StringList& list)
-{
-    ArrayList2 temp;
-    for(int i = 0; i < list.Count(); i++)
+    if(index < mList.size())
     {
-        temp.Add(list[i]);
+		ArrayListItemBase* listPtr = mList[index];
+
+   		if(listPtr)
+        {
+        	if(dynamic_cast< ArrayListItem<StringList>* >(listPtr))
+            {
+				return *(dynamic_cast< ArrayListItem<StringList>* >(listPtr));
+            }
+        }
     }
-    Add(temp);
-}
-
-void ArrayList2::Add(const string& lbl, const StringArrayList& lists)
-{
-
+	throw("No Stringlist at index");
 }
 
 StringList ArrayList2::GetSubList(const string& lName)
@@ -134,6 +128,10 @@ ArrayList2::ArrayList2(const ArrayList2& copyMe)
         {
             mList[i] = new ArrayListItem<string>(*(dynamic_cast<ArrayListItem<string>*>(ptr)));
         }
+        else if(dynamic_cast<ArrayListItem<StringList>*>(ptr))
+        {
+            mList[i] = new ArrayListItem<StringList>(*(dynamic_cast<ArrayListItem<StringList>*>(ptr)));
+        }
         else if(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr))
         {
             mList[i] = new ArrayListItem<ArrayList2Item>(*(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr)));
@@ -194,6 +192,12 @@ void ArrayList2::Add(const string& item)
     mList.push_back(ptr);
 }
 
+void ArrayList2::Add(const StringList& item)
+{
+    ArrayListItem< StringList > *ptr = new ArrayListItem<StringList>(item);
+    mList.push_back(ptr);
+}
+
 void ArrayList2::Add(const ArrayListItem<ArrayList2Item>& item)
 {
     ArrayListItem<ArrayList2Item> *ptr = new ArrayListItem<ArrayList2Item>(item);
@@ -204,6 +208,20 @@ void ArrayList2::Add(const ArrayList2& item)
 {
     ArrayListItem<ArrayList2Item> *aList = new ArrayListItem<ArrayList2Item>(item);
     mList.push_back(aList);
+}
+
+void ArrayList2::Add(const string& lbl, const StringList& list)
+{
+    ArrayList2 temp;
+    temp.Add(lbl);
+    temp.Add(list);
+    Add(temp);
+}
+
+
+void ArrayList2::Add(const string& lbl, const StringArrayList& lists)
+{
+
 }
 
 const ArrayListItemBase& ArrayList2::operator[](int pos) const
@@ -234,4 +252,7 @@ ostream& operator<<(ostream& stream, const ArrayList2& list)
 }
 
 }
+
+
+
 

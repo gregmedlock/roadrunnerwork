@@ -24,8 +24,6 @@
 using namespace std;
 namespace rr
 {
-char* WinPathSeparator = "\\";
-char* LinuxPathSeparator = "/";
 
 string GetUsersTempDataFolder()
 {

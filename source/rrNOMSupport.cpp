@@ -1278,9 +1278,9 @@ string NOMSupport::getKineticLaw(const int& index)
 //}
 
 
-StringListContainer NOMSupport::getListOfFloatingSpecies()
+ArrayList NOMSupport::getListOfFloatingSpecies()
 {
-    StringListContainer floatingSpeciesList;
+    ArrayList floatingSpeciesList;
 
     if (mModel == NULL)
     {
@@ -1302,6 +1302,7 @@ StringListContainer NOMSupport::getListOfFloatingSpecies()
         }
     }
 
+    Log(lDebug)<<"Returning List: "<< floatingSpeciesList;
     return floatingSpeciesList;
 }
 
@@ -2577,7 +2578,7 @@ void NOMSupport::modifyKineticLawsForLocalParameters(KineticLaw& oLaw, const str
             if (localParameter->isSetValue()) p->setValue(localParameter->getValue());
             if (localParameter->isSetUnits()) p->setUnits(localParameter->getUnits());
 
-            LocalParameter* oTemp = (LocalParameter*) oLaw.getListOfLocalParameters()->remove(j - 1);
+            //LocalParameter* oTemp = (LocalParameter*) oLaw.getListOfLocalParameters()->remove(j - 1);
             //if (oTemp != NULL) oTemp.Dispose();
 
             oModel.addParameter(p);
@@ -4044,7 +4045,7 @@ stack<string> NOMSupport::GetMatchForSymbol(const string& sbmlId)
 {
     stack<string> result;
 
-    SBMLSymbol *symbol = &(mSymbolTable[sbmlId]);
+    //SBMLSymbol *symbol = &(mSymbolTable[sbmlId]);
 
     FillStack(result, mSymbolTable[sbmlId]);
     return result;

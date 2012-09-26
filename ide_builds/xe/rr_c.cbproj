@@ -66,6 +66,10 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
+			<LibFiles Include="R:\installs\xe\debug\lib\roadrunner-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>13</BuildOrder>
+			</LibFiles>
 			<LibFiles Include="R:\installs\xe\debug\lib\rr_c_api.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>12</BuildOrder>

@@ -6,9 +6,7 @@
 #include "rrStringBuilder.h"
 #include "rrStringUtils.h"
 #include "rrLogger.h"
-#include "rrStringUtils.h"
 //---------------------------------------------------------------------------
-
 
 using namespace std;
 namespace rr
@@ -33,6 +31,13 @@ stringstream& StringBuilder::operator<<(const string& str)
 {
     mStringing<<str;
     Log(lDebug5)<<"Appended :"<<RemoveNewLines(str, 1);
+    return mStringing;
+}
+
+stringstream& StringBuilder::operator<<(const char& ch)
+{
+    mStringing<<ch;
+    Log(lDebug5)<<"Appended :"<<ch;
     return mStringing;
 }
 

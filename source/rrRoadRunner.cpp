@@ -1015,7 +1015,7 @@ StringList RoadRunner::getSelectionList()
     StringList oParameters  = getParameterIds();
 
     vector<TSelectionRecord>::iterator iter;
-    int size = selectionList.size();
+//    int size = selectionList.size();
     for(iter = selectionList.begin(); iter != selectionList.end(); iter++)
     {
         TSelectionRecord record = (*iter);
@@ -2215,24 +2215,24 @@ ArrayList RoadRunner::getSteadyStateSelectionList()
 //    if (mSteadyStateSelection == null)
     {
         // default should be species only ...
-        ArrayList floatingSpecies = getFloatingSpeciesIds();
+        StringList floatingSpecies = getFloatingSpeciesIds();
         mSteadyStateSelection.resize(floatingSpecies.Count());// = new TSelectionRecord[floatingSpecies.Count];
         for (int i = 0; i < floatingSpecies.Count(); i++)
         {
             TSelectionRecord aRec;
             aRec.selectionType = TSelectionType::clFloatingSpecies;
-            aRec.p1 = floatingSpecies[i].AsString();
+            aRec.p1 = floatingSpecies[i];
             aRec.index = i;
             mSteadyStateSelection[i] = aRec;
         }
     }
 
-    ArrayList oFloating     = mModelGenerator->getFloatingSpeciesConcentrationList();
-    ArrayList oBoundary     = mModelGenerator->getBoundarySpeciesList();
-    ArrayList oFluxes       = mModelGenerator->getReactionIds();
-    ArrayList oVolumes      = mModelGenerator->getCompartmentList();
-    ArrayList oRates        = getRateOfChangeIds();
-    ArrayList oParameters   = getParameterIds();
+    StringList oFloating     = mModelGenerator->getFloatingSpeciesConcentrationList();
+    StringList oBoundary     = mModelGenerator->getBoundarySpeciesList();
+    StringList oFluxes       = mModelGenerator->getReactionIds();
+    StringList oVolumes      = mModelGenerator->getCompartmentList();
+    StringList oRates        = getRateOfChangeIds();
+    StringList oParameters   = getParameterIds();
 
     ArrayList result;// = new ArrayList();
 //    foreach (var record in mSteadyStateSelection)
@@ -2245,13 +2245,13 @@ ArrayList RoadRunner::getSteadyStateSelectionList()
                 result.Add("time");
             break;
             case TSelectionType::clBoundaryAmount:
-                result.Add(Format("[{0}]", oBoundary[record.index].AsString()));
+                result.Add(Format("[{0}]", oBoundary[record.index]));
             break;
             case TSelectionType::clBoundarySpecies:
                 result.Add(oBoundary[record.index]);
             break;
             case TSelectionType::clFloatingAmount:
-                result.Add("[" + (string)oFloating[record.index].AsString() + "]");
+                result.Add("[" + (string)oFloating[record.index] + "]");
             break;
             case TSelectionType::clFloatingSpecies:
                 result.Add(oFloating[record.index]);

@@ -29,7 +29,7 @@ class RR_DECLSPEC StringList : public rrObject
         void                        Label(const string& lbl);
         void                        InsertAt(const int& index, const string& item);
         void                        Add(const string& str);
-        string                      AsString(const string& delimiter = ",") const;
+        string                      AsString(const string& delimiter = Comma) const;
         unsigned int                Count() const;
         void                        operator=(const StringList& rhs);
         string&                     operator[](const int& index);
