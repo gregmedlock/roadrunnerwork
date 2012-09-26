@@ -220,7 +220,7 @@ int ModelGenerator::ReadGlobalParameters()
     numGlobalParameters = oParameters.Count();
     for (u_int i = 0; i < numGlobalParameters; i++)
     {
-        StringList parameter = oParameters[i];
+        StringList parameter = oParameters.GetStringList(i);
 
         string name     = parameter[0];
         double value     = ToDouble(parameter[1]);

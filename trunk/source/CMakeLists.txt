@@ -14,8 +14,9 @@ ${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
 set(rrSources 
 rrCapability.cpp
 rrCapabilitiesSection.cpp
-rrArrayList2
-rrArrayListItem
+rrConstants.cpp
+rrArrayList2.cpp
+rrArrayListItem.cpp
 rrException.cpp
 rrFileLog.cpp
 rrGetOptions.cpp
@@ -45,7 +46,7 @@ rrSimulationSettings.cpp
 rrStreamWriter.cpp
 rrStringBuilder.cpp
 rrStringList.cpp
-rrStringListContainer.cpp
+#rrStringListContainer.cpp
 rrStringUtils.cpp
 rrSymbol.cpp
 rrSymbolList.cpp

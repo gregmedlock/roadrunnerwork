@@ -9,7 +9,6 @@ using std::string;
 
 namespace rr
 {
-#define tab "\t"
 
 class RR_DECLSPEC StringBuilder : public rrObject
 {
@@ -17,10 +16,10 @@ class RR_DECLSPEC StringBuilder : public rrObject
         stringstream                 mStringing;
 
     public:
-
                                     StringBuilder(const string& aStr = "");
-        stringstream&                 operator<<(const string& str);
-        string                         ToString();
+        stringstream&          		operator<<(const string& str);
+        stringstream&          		operator<<(const char& ch);
+        string                      ToString();
 
         void                        NewLine(const string& line = "");
         void                        Line(const string& line);

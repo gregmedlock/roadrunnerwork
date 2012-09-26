@@ -15,6 +15,7 @@ EXPORTS
     freeRRInstance                              = _freeRRInstance@4                   
     freeResult                                  = _freeResult@4                       
     freeText                                    = _freeText@4                         
+    freeStringArray                             = _freeStringArray@4                       
     freeVector                                  = _freeVector@4                       
 	getAvailableSymbols                         = _getAvailableSymbols@0              
     getBoundarySpeciesByIndex                   = _getBoundarySpeciesByIndex@8        

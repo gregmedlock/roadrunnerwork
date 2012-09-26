@@ -75,6 +75,11 @@ ostream& operator<<(ostream& stream, const ArrayListItemBase& item)
     {
         stream << "\""<<(string) *(dynamic_cast<ArrayListItem<string>*>(ptr))<<"\"";
     }
+    else if(dynamic_cast<ArrayListItem<StringList>*>(ptr))
+    {
+        stream << "\""<<(StringList) *(dynamic_cast<ArrayListItem<StringList>*>(ptr))<<"\"";
+    }
+
     else if(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr))
     {
         stream << (ArrayList2Item) *(dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr));

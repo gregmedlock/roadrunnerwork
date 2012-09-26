@@ -9,6 +9,7 @@
 using namespace std;
 namespace rr
 {
+class StringList;
 
 class RR_DECLSPEC ArrayList2 : public rrObject
 {
@@ -28,19 +29,21 @@ class RR_DECLSPEC ArrayList2 : public rrObject
         void                                Add(const ArrayList2& item);
         void                                Add(const ArrayListItem<ArrayList2Item>& item);
 
-        //String lists and obsolete StringArrayLists ...
         void                                Add(const StringList& list);
         void                                Add(const string& lbl, const StringList& lists);
+        void                                Add(const string& lbl, const ArrayList2& lists);
         void                                Add(const string& lbl, const StringArrayList& lists);
 
         const ArrayListItemBase&            operator[](int pos) const;
         ArrayListItemBase&                  operator[](int pos);
         void                                operator = (const ArrayList2& rhs);
         StringList                          GetSubList(const string& lName);
+        StringList                          GetStringList(const int& index);
 };
 
 
 RR_DECLSPEC ostream& operator<<(ostream& stream, const ArrayList2& list);
 
+typedef ArrayList2 ArrayList;
 }
 #endif
