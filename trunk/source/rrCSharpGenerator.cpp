@@ -6,7 +6,7 @@
 #include "sbml/SBMLDocument.h"
 #include "rrCSharpGenerator.h"
 #include "rr-libstruct/lsLibstructural.h"
-#include "rrStringListContainer.h"
+#include "rrArrayList.h"
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 #include "rrRule.h"
@@ -943,7 +943,7 @@ int CSharpGenerator::ReadFloatingSpecies()
         reOrderedList = mLibStruct->getSpecies();
     }
 
-    StringListContainer oFloatingSpecies = mNOM.getListOfFloatingSpecies();
+    ArrayList oFloatingSpecies = mNOM.getListOfFloatingSpecies();
 
     for (int i = 0; i < reOrderedList.Count(); i++)
     {
@@ -1015,7 +1015,7 @@ int CSharpGenerator::ReadFloatingSpecies()
 int CSharpGenerator::ReadBoundarySpecies()
 {
     int numBoundarySpecies;
-    StringListContainer oBoundarySpecies = mNOM.getListOfBoundarySpecies();
+    ArrayList oBoundarySpecies = mNOM.getListOfBoundarySpecies();
     numBoundarySpecies = oBoundarySpecies.Count(); // sp1.size();
     for (int i = 0; i < numBoundarySpecies; i++)
     {
@@ -1276,7 +1276,7 @@ void CSharpGenerator::WriteUserDefinedFunctions(CodeBuilder& sb)
     {
         try
         {
-            StringListContainer oList = mNOM.getNthFunctionDefinition(i);
+            ArrayList oList = mNOM.getNthFunctionDefinition(i);
             StringList aList = oList.GetStringList(0);
 
               string sName = aList[0];

@@ -49,7 +49,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         void                    changePow(ASTNode* node);
         void                    changeSymbol(Model& oModel, const string& sTimeSymbol, const int& targetType);
         void                    changeTimeSymbol(Model& model, const string& timeSymbol);
-        void                    checkForMissingNames(ASTNode *node, StringListContainer results, StringListContainer symbols);
+        void                    checkForMissingNames(ASTNode *node, ArrayList results, ArrayList symbols);
         void                    GetSymbols(ASTNode* node, StringList& list);
         void                    LookForDependencies();
         void                    modifyKineticLaws(SBMLDocument& oSBMLDoc, Model &oModel);
@@ -71,7 +71,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
         ArrayList               getDerivedUnitDefinition(const string& sId);
         ArrayList               getListOfBoundarySpeciesIds();
         ArrayList               getListOfErrors();
-        StringListContainer     getListOfFloatingSpecies();
+        ArrayList     getListOfFloatingSpecies();
         ArrayList               getListOfFloatingSpeciesIds();
         ArrayList               getListOfParameters();
         ArrayList               getNthError(const int& nIndex);
@@ -196,7 +196,7 @@ class RR_DECLSPEC NOMSupport : public rrObject
 
         string                  getNthBoundarySpeciesCompartmentName(const int& nIndex);
         string                  getNthFloatingSpeciesCompartmentName(const int& nIndex);
-        StringListContainer     getListOfBoundarySpecies();
+        ArrayList     getListOfBoundarySpecies();
         void                    Reset();
 };
 

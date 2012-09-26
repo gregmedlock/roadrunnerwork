@@ -9,9 +9,6 @@
 namespace rr
 {
 
-ArrayListItemBase::~ArrayListItemBase()
-{}
-
 ArrayList2Item::ArrayList2Item()
 : mValue(NULL)
 {
@@ -49,20 +46,20 @@ unsigned int ArrayList2Item::Count() const
     return (mValue) ? mValue->Count() : 0;
 }
 
-const ArrayListItemBase& ArrayList2Item::operator[](int pos) const
+const ArrayListItemObject& ArrayList2Item::operator[](int pos) const
 {
     return (*mValue)[pos];
 }
 
-ArrayListItemBase& ArrayList2Item::operator[](int pos)
+ArrayListItemObject& ArrayList2Item::operator[](int pos)
 {
     return (*mValue)[pos];
 }
 
-ostream& operator<<(ostream& stream, const ArrayListItemBase& item)
+ostream& operator<<(ostream& stream, const ArrayListItemObject& item)
 {
     //Have to figure out subtype of item
-    ArrayListItemBase* ptr = const_cast<ArrayListItemBase*>(&item);
+    ArrayListItemObject* ptr = const_cast<ArrayListItemObject*>(&item);
     if(dynamic_cast<ArrayListItem<int>*>(ptr))
     {
         stream << (int) *(dynamic_cast<ArrayListItem<int>*>(ptr));

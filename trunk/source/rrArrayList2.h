@@ -15,7 +15,7 @@ class RR_DECLSPEC ArrayList2 : public rrObject
 {
     protected:
     public:
-        vector< ArrayListItemBase* >		mList; //List of ArrayListItemBase items
+        vector< ArrayListItemObject* >		mList; //List of ArrayListItemObject items
 
     public:
                                             ArrayList2();
@@ -32,10 +32,10 @@ class RR_DECLSPEC ArrayList2 : public rrObject
         void                                Add(const StringList& list);
         void                                Add(const string& lbl, const StringList& lists);
         void                                Add(const string& lbl, const ArrayList2& lists);
-        void                                Add(const string& lbl, const StringArrayList& lists);
+//        void                                Add(const string& lbl, const StringArrayList& lists);
 
-        const ArrayListItemBase&            operator[](int pos) const;
-        ArrayListItemBase&                  operator[](int pos);
+        const ArrayListItemObject&            operator[](int pos) const;
+        ArrayListItemObject&                  operator[](int pos);
         void                                operator = (const ArrayList2& rhs);
         StringList                          GetSubList(const string& lName);
         StringList                          GetStringList(const int& index);
@@ -45,5 +45,6 @@ class RR_DECLSPEC ArrayList2 : public rrObject
 RR_DECLSPEC ostream& operator<<(ostream& stream, const ArrayList2& list);
 
 typedef ArrayList2 ArrayList;
+typedef ArrayList2 StringArrayList;
 }
 #endif

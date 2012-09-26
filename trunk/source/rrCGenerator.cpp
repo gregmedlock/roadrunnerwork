@@ -8,7 +8,7 @@
 #include "sbml/SBMLDocument.h"
 #include "rrCSharpGenerator.h"
 #include "rr-libstruct/lsLibstructural.h"
-#include "rrStringListContainer.h"
+#include "rrArrayList2.h"
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 #include "rrRule.h"
@@ -508,11 +508,11 @@ void CGenerator::WriteUserDefinedFunctions(CodeBuilder& ignore)
     {
         try
         {
-//            StringListContainer oList = mNOM.getNthFunctionDefinition(i);
+//            ArrayList oList = mNOM.getNthFunctionDefinition(i);
 //            StringList aList = oList[0];
 
             ArrayList  oList = mNOM.getNthFunctionDefinition(i);
-//            ArrayListItemBase base = ;
+//            ArrayListItemObject base = ;
             if(!dynamic_cast<StringList*>(&oList[0]))
             {
                 throw("Bad..");
@@ -2581,7 +2581,7 @@ int CGenerator::ReadFloatingSpecies()
 int CGenerator::ReadBoundarySpecies()
 {
     int numBoundarySpecies;
-    StringListContainer oBoundarySpecies = mNOM.getListOfBoundarySpecies();
+    ArrayList oBoundarySpecies = mNOM.getListOfBoundarySpecies();
     numBoundarySpecies = oBoundarySpecies.Count(); // sp1.size();
     for (int i = 0; i < numBoundarySpecies; i++)
     {

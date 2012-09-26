@@ -161,9 +161,9 @@ double NOMSupport::getValue(const string& sId)
 //    return val;
 //}
 
-StringListContainer NOMSupport::getListOfBoundarySpecies()
+ArrayList NOMSupport::getListOfBoundarySpecies()
 {
-    StringListContainer boundarySpeciesList;
+    ArrayList boundarySpeciesList;
 
     if (mModel == NULL)
     {
@@ -1253,7 +1253,7 @@ string NOMSupport::getKineticLaw(const int& index)
 //
 
 
-//StringListContainer NOMSupport::GetFloatingSpecies()
+//ArrayList NOMSupport::GetFloatingSpecies()
 //{
 //    StringContainer floatingSpeciesList;
 //    int nrOfSpecies = ::getNumFloatingSpecies();
@@ -2546,7 +2546,7 @@ void NOMSupport::modifyKineticLawsForLocalParameters(KineticLaw& oLaw, const str
 	int numLocalParameters = (int)oLaw.getNumLocalParameters();
 	if (numLocalParameters > 0)
     {
-        StringCollection oList;// = new StringCollection();
+        ArrayList oList;// = new StringCollection();
         for (int j = numLocalParameters; j > 0; j--)
         {
             LocalParameter* localParameter = (LocalParameter*)oLaw.getLocalParameter(j - 1)->clone();

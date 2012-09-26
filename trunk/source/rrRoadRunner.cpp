@@ -1963,9 +1963,9 @@ StringArrayList RoadRunner::getUnscaledFluxControlCoefficientIds()
 }
 
 // Help("Returns the Symbols of all Concentration Control Coefficients.")
-RRArrayList<string> RoadRunner::getConcentrationControlCoefficientIds()
+ArrayList RoadRunner::getConcentrationControlCoefficientIds()
 {
-    RRArrayList<string> oResult;// = new ArrayList();
+    ArrayList oResult;// = new ArrayList();
     if (!mModel)
     {
         return oResult;
@@ -1979,8 +1979,8 @@ RRArrayList<string> RoadRunner::getConcentrationControlCoefficientIds()
     for(int i = 0; i < oFloating.Count(); i++)
     {
         string s = oFloating[i];
-        RRArrayList<string> oCCFloating;
-        RRArrayList<string> oInner;
+        ArrayList oCCFloating;
+        ArrayList oInner;
         oCCFloating.Add(s);
 
         for(int i = 0; i < oParameters.Count(); i++)

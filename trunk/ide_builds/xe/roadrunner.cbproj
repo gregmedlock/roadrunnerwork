@@ -136,6 +136,9 @@
 				<DependentOn>..\..\source\rrArrayListItem.h</DependentOn>
 				<BuildOrder>69</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\source\rrArrayListItemObject.cpp">
+				<BuildOrder>69</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\source\rrCapabilitiesSection.cpp">
 				<DependentOn>..\..\source\rrCapabilitiesSection.h</DependentOn>
 				<BuildOrder>69</BuildOrder>

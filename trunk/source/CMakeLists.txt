@@ -32,8 +32,6 @@ rrModelFromC.cpp
 rrModelState.cpp
 rrNOMSupport.cpp
 rrObject.cpp
-#rrParameterSet.cpp
-#rrParameterSets.cpp
 rrPendingAssignment.cpp
 rrRandom.cpp
 rrRoadRunner.cpp
@@ -46,7 +44,6 @@ rrSimulationSettings.cpp
 rrStreamWriter.cpp
 rrStringBuilder.cpp
 rrStringList.cpp
-#rrStringListContainer.cpp
 rrStringUtils.cpp
 rrSymbol.cpp
 rrSymbolList.cpp
@@ -64,8 +61,6 @@ rrToken.cpp
 rrCVodeInterface.cpp
 rrCvodedll.cpp
 rrNLEQInterface.cpp
-#rrLibStructSupport.cpp
-#rrInteropUtils.cpp
 rrDLLEntry.cpp
 rrCapsSupport.cpp
 rrStopWatch.cpp

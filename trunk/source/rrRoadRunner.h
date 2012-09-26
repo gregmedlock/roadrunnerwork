@@ -10,7 +10,6 @@
 #include "rrCvodeInterface.h"
 #include "rrNLEQInterface.h"
 #include "rrStringList.h"
-#include "rrStringListContainer.h"
 #include "rrMisc.h"
 #include "rrTextWriter.h"
 #include "rrSimulationData.h"

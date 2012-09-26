@@ -2,7 +2,8 @@
 #define rrArrayListItemH
 //---------------------------------------------------------------------------
 #include "rrObject.h"
-
+#include "rrStringList.h"
+#include "rrArrayListItemObject.h"
 //This unit contains
 // 1) a base class for ArrayListItems
 // 2) Template for basic type ArrayListItems, such as int, char double etc.
@@ -12,14 +13,9 @@
 namespace rr
 {
 
-class RR_DECLSPEC ArrayListItemBase : public rrObject
-{
-    public:
-        virtual ~ArrayListItemBase() ;
-};
 
 template <class T>
-class ArrayListItem : public ArrayListItemBase
+class ArrayListItem : public ArrayListItemObject
 {
     private:
         T                           mItemValue;
@@ -62,12 +58,12 @@ class RR_DECLSPEC ArrayList2Item  : public rrObject
                                             ArrayList2Item(const ArrayList2& list); //Copy constructor from ArrayList2
                                            ~ArrayList2Item();
         unsigned int                        Count() const;
-        const ArrayListItemBase&            operator[](int pos) const;
-        ArrayListItemBase&                  operator[](int pos);
+        const ArrayListItemObject&            operator[](int pos) const;
+        ArrayListItemObject&                  operator[](int pos);
 };
 
 ostream& operator<<(ostream& stream, const ArrayList2Item& item);
-ostream& operator<<(ostream& stream, const ArrayListItemBase& item);
+ostream& operator<<(ostream& stream, const ArrayListItemObject& item);
 
 }
 #endif

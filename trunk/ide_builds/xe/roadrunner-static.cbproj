@@ -88,6 +88,10 @@
 				<DependentOn>..\..\source\rrArrayListItem.h</DependentOn>
 				<BuildOrder>67</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="..\..\source\rrArrayListItemObject.cpp">
+				<DependentOn>..\..\source\rrArrayListItemObject.h</DependentOn>
+				<BuildOrder>58</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\source\rrCapabilitiesSection.cpp">
 				<DependentOn>..\..\source\rrCapabilitiesSection.h</DependentOn>
 				<BuildOrder>70</BuildOrder>
