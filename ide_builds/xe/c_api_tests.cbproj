@@ -72,6 +72,10 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>2</BuildOrder>
 			</LibFiles>
+			<CppCompile Include="..\..\source\rrArrayListItemObject.cpp">
+				<DependentOn>..\..\source\rrArrayListItemObject.h</DependentOn>
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
 			<CppCompile Include="..\..\Wrappers\C\Examples\api_tester\main.cpp">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>

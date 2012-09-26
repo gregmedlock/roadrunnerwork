@@ -149,42 +149,42 @@ RRStringArrayHandle createList(const StringList& sList)
     return list;
 }
 
-RRList* createList(const RRArrayList<string>& aList)
-{
-    if(!aList.Count())
-    {
-        return NULL;
-    }
-
-    RRListItemHandle myItem;
-	// Setup a RRStringArrayList structure from aList
- 	RRListHandle theList = createRRList();
-
-    int itemCount = aList.Count();
-    for(int i = 0; i < itemCount; i++)
-    {
-        //Have to figure out subtype of item
-        RRArrayListItem<string>* ptr = const_cast<RRArrayListItem<string>*>(&aList[i]);
-        if(ptr->mValue)
-        {
-            string item =  *ptr->mValue;
-            char* str = (char *) new char[item.size() + 1];
-            strcpy(str, item.c_str());
-			myItem = createStringItem (str);
-   			addItem (theList, &myItem);
-        }
-        else if(ptr->mLinkedList)
-        {
-            //ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
-			RRListHandle myList = createList (*(ptr->mLinkedList));
-
-			RRListItemHandle myListItem = createListItem (myList);
-			addItem (theList, &myListItem);
-
-        }
-    }
-    return theList;
-}
+//RRList* createList(const ArrayList& aList)
+//{
+//    if(!aList.Count())
+//    {
+//        return NULL;
+//    }
+//
+//    RRListItemHandle myItem;
+//	// Setup a RRStringArrayList structure from aList
+// 	RRListHandle theList = createRRList();
+//
+//    int itemCount = aList.Count();
+//    for(int i = 0; i < itemCount; i++)
+//    {
+////        //Have to figure out subtype of item
+////        ArrayListItem<string>* ptr = const_cast< ArrayListItemBase<string>* >(*aList[i]);
+////        if(ptr->mValue)
+////        {
+////            string item =  *ptr->mValue;
+////            char* str = (char *) new char[item.size() + 1];
+////            strcpy(str, item.c_str());
+////			myItem = createStringItem (str);
+////   			addItem (theList, &myItem);
+////        }
+////        else if(ptr->mLinkedList)
+////        {
+////            //ArrayListItem<ArrayList2Item>* listItem = dynamic_cast<ArrayListItem<ArrayList2Item>*>(ptr);
+////			RRListHandle myList = createList (*(ptr->mLinkedList));
+////
+////			RRListItemHandle myListItem = createListItem (myList);
+////			addItem (theList, &myListItem);
+////
+////        }
+//    }
+//    return theList;
+//}
 
 RRList* createList(const rr::ArrayList2& aList)
 {

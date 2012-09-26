@@ -2376,7 +2376,7 @@ RRList* rrCallConv getConcentrationControlCoefficientIds()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        RRArrayList<string> list = gRRHandle->getConcentrationControlCoefficientIds();
+        ArrayList list = gRRHandle->getConcentrationControlCoefficientIds();
         return createList(list);
     }
     catch(Exception& ex)
