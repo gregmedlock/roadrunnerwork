@@ -58,12 +58,12 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 	${PROJECT_BINARY_DIR}/bin)
 
 if(${BORLAND})
-include_directories(        ${THIRD_PARTY_FOLDER}/libsbml_xe/src)
+include_directories(        ${THIRD_PARTY_FOLDER}/libsbml/src)
 link_directories(           ${THIRD_PARTY_FOLDER}/libsbml_xe/dependencies/lib)
 
 else()
 include_directories(                ${THIRD_PARTY_FOLDER}/libsbml
-                                    ${THIRD_PARTY_FOLDER}/libsbml/src
+                                  #  ${THIRD_PARTY_FOLDER}/libsbml/src
                                     ${THIRD_PARTY_FOLDER}/libsbml/src/sbml
                    )
 link_directories(					${THIRD_PARTY_FOLDER}/libsbml/dependencies/lib)
@@ -99,7 +99,7 @@ endif()
 
 #Add Third Party Folders
 if(${BORLAND})
-add_subdirectory(libsbml_xe)
+add_subdirectory(libsbml)
 else(${BORLAND})
 add_subdirectory(libsbml)
 endif()
