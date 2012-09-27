@@ -7,12 +7,10 @@
 //This unit contains
 // 1) a base class for ArrayListItems
 // 2) Template for basic type ArrayListItems, such as int, char double etc.
-// 3) An ArrayList2Item class, that represent an ArrayList2, within an ArrayList2 object
-
+// 3) An ArrayListItem class, that represent an ArrayList, within an ArrayList object
 
 namespace rr
 {
-
 
 template <class T>
 class ArrayListItem : public ArrayListItemObject
@@ -46,23 +44,6 @@ ArrayListItem<T>& ArrayListItem<T>::operator=(const ArrayListItem<T>& rhs)
     return *this;
 }
 
-class ArrayList2;
-class RR_DECLSPEC ArrayList2Item  : public rrObject
-{
-    public:
-        ArrayList2                         *mValue;
-                                            ArrayList2Item();
-                                            ArrayList2Item(const ArrayList2Item& copyMe);
-        ArrayList2Item&                     operator=(const ArrayList2Item& list);
-
-                                            ArrayList2Item(const ArrayList2& list); //Copy constructor from ArrayList2
-                                           ~ArrayList2Item();
-        unsigned int                        Count() const;
-        const ArrayListItemObject&            operator[](int pos) const;
-        ArrayListItemObject&                  operator[](int pos);
-};
-
-ostream& operator<<(ostream& stream, const ArrayList2Item& item);
 ostream& operator<<(ostream& stream, const ArrayListItemObject& item);
 
 }

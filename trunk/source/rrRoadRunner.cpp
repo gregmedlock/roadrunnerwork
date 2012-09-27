@@ -18,7 +18,7 @@
 #include "rr-libstruct/lsLA.h"
 #include "rr-libstruct/lsLibla.h"
 #include "rrModelState.h"
-#include "rrArrayList2.h"
+#include "rrArrayList.h"
 #include "rrCapsSupport.h"
 //---------------------------------------------------------------------------
 
@@ -557,7 +557,7 @@ bool RoadRunner::Simulate()
 
 bool RoadRunner::PopulateResult()
 {
-    ArrayList2 l = getAvailableSymbols();
+    ArrayList  l = getAvailableSymbols();
     StringList list = getSelectionList();
     mSimulationData.SetColumnNames(list);
     mSimulationData.SetData(mRawSimulationData);
@@ -1874,9 +1874,9 @@ double RoadRunner::getVariableValue(const TVariableType& variableType, const int
 //        }
 //
 //  Help("Returns the Symbols of all Flux Control Coefficients.")
-StringArrayList RoadRunner::getFluxControlCoefficientIds()
+ArrayList RoadRunner::getFluxControlCoefficientIds()
 {
-    StringArrayList oResult;
+    ArrayList oResult;
     if (!mModel)
     {
         return oResult;
@@ -1891,8 +1891,8 @@ StringArrayList RoadRunner::getFluxControlCoefficientIds()
     {
         string s = oReactions[i];
 
-        StringArrayList oCCReaction;
-        StringArrayList oInner;
+        ArrayList oCCReaction;
+        ArrayList oInner;
         oCCReaction.Add(s);
 
         for(int i = 0; i < oParameters.Count(); i++)
@@ -1919,9 +1919,9 @@ StringArrayList RoadRunner::getFluxControlCoefficientIds()
 
 
 //  Help("Returns the Symbols of all Unscaled Flux Control Coefficients.")
-StringArrayList RoadRunner::getUnscaledFluxControlCoefficientIds()
+ArrayList RoadRunner::getUnscaledFluxControlCoefficientIds()
 {
-    StringArrayList oResult;// = new ArrayList();
+    ArrayList oResult;// = new ArrayList();
     if (!mModel)
     {
         return oResult;
@@ -1936,8 +1936,8 @@ StringArrayList RoadRunner::getUnscaledFluxControlCoefficientIds()
     {
         string s = oReactions[i];
 
-        StringArrayList oCCReaction;
-        StringArrayList oInner;
+        ArrayList oCCReaction;
+        ArrayList oInner;
         oCCReaction.Add(s);
 
         for(int i = 0; i < oParameters.Count(); i++)
@@ -2007,9 +2007,9 @@ ArrayList RoadRunner::getConcentrationControlCoefficientIds()
 
 
 // Help("Returns the Symbols of all Unscaled Concentration Control Coefficients.")
-StringArrayList RoadRunner::getUnscaledConcentrationControlCoefficientIds()
+ArrayList RoadRunner::getUnscaledConcentrationControlCoefficientIds()
 {
-    StringArrayList oResult;
+    ArrayList oResult;
     if (!mModel)
     {
         return oResult;
@@ -2023,8 +2023,8 @@ StringArrayList RoadRunner::getUnscaledConcentrationControlCoefficientIds()
     for(int i = 0; i < oFloating.Count(); i++)
     {
         string s = oFloating[i];
-        StringArrayList oCCFloating;
-        StringArrayList oInner;
+        ArrayList oCCFloating;
+        ArrayList oInner;
         oCCFloating.Add(s);
 
         for(int i = 0; i < oParameters.Count(); i++)
@@ -2051,9 +2051,9 @@ StringArrayList RoadRunner::getUnscaledConcentrationControlCoefficientIds()
 
 
 // Help("Returns the Symbols of all Elasticity Coefficients.")
-StringArrayList RoadRunner::getElasticityCoefficientIds()
+ArrayList RoadRunner::getElasticityCoefficientIds()
 {
-    StringArrayList oResult;
+    ArrayList oResult;
     if (!mModel)
     {
         return oResult;
@@ -2068,9 +2068,9 @@ StringArrayList RoadRunner::getElasticityCoefficientIds()
     for(int i = 0; i < reactionNames.Count(); i++)
     {
         string reac_name = reactionNames[i];
-        StringArrayList oCCReaction;
+        ArrayList oCCReaction;
         oCCReaction.Add(reac_name);
-        StringArrayList oInner;
+        ArrayList oInner;
 
         for(int j = 0; j < floatingSpeciesNames.Count(); j++)
         {
@@ -2100,9 +2100,9 @@ StringArrayList RoadRunner::getElasticityCoefficientIds()
 }
 
 // Help("Returns the Symbols of all Unscaled Elasticity Coefficients.")
-StringArrayList RoadRunner::getUnscaledElasticityCoefficientIds()
+ArrayList RoadRunner::getUnscaledElasticityCoefficientIds()
 {
-    StringArrayList oResult;
+    ArrayList oResult;
     if (!mModel)
     {
         return oResult;
@@ -2117,7 +2117,7 @@ StringArrayList RoadRunner::getUnscaledElasticityCoefficientIds()
     for(int i = 0; i < oReactions.Count(); i++)
     {
         string reac_name = oReactions[i];
-        StringArrayList oCCReaction;
+        ArrayList oCCReaction;
         StringList oInner;
         oCCReaction.Add(reac_name);
 
@@ -5050,9 +5050,9 @@ double RoadRunner::getValue(const string& sId)
 //            "Returns symbols of the currently loaded model,
 //              that can be used for the selectionlist format array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }."
 //            )
-ArrayList2 RoadRunner::getAvailableSymbols()
+ArrayList RoadRunner::getAvailableSymbols()
 {
-    ArrayList2 oResult;
+    ArrayList oResult;
 
     if (!mModel)
     {

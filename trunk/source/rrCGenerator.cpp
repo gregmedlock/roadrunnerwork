@@ -8,7 +8,7 @@
 #include "sbml/SBMLDocument.h"
 #include "rrCSharpGenerator.h"
 #include "rr-libstruct/lsLibstructural.h"
-#include "rrArrayList2.h"
+#include "rrArrayList.h"
 #include "rrStringUtils.h"
 #include "rrUtils.h"
 #include "rrRule.h"

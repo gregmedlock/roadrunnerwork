@@ -15,8 +15,9 @@ set(rrSources
 rrCapability.cpp
 rrCapabilitiesSection.cpp
 rrConstants.cpp
-rrArrayList2.cpp
+rrArrayList.cpp
 rrArrayListItem.cpp
+rrArrayListItemObject.cpp
 rrException.cpp
 rrFileLog.cpp
 rrGetOptions.cpp
