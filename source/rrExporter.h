@@ -32,4 +32,9 @@
 #define __FUNC__ "not defined in VS"
 #endif
 
+#if defined(__CODEGEARC__)
+#pragma warn -8012 			//comparing unsigned and signed
+#pragma warn -8004 			//variable never used
+#endif
+
 #endif

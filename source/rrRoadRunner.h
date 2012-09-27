@@ -16,7 +16,6 @@
 #include "rrSimulationSettings.h"
 #include "rrCompiler.h"
 #include "rrArrayList.h"
-#include "rrArrayList2.h"
 #include "rrXMLDocument.h"
 #include "rrNOMSupport.h"
 using std::string;
@@ -164,7 +163,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		void                            setCapabilities(const string& capsStr);
 		bool                            setValue(const string& sId, const double& dValue);
 		double                          getValue(const string& sId);
-		ArrayList2                      getAvailableSymbols();
+		ArrayList                       getAvailableSymbols();
 		StringList                      getSelectionList();
 		void                            setSelectionList(const string& List);
 		void                            setSelectionList(const StringList& newSelectionList);
@@ -204,12 +203,12 @@ class RR_DECLSPEC RoadRunner : public rrObject
 //		void                            GetInverse( Matrix<Complex> & T2, Matrix<Complex>& Inv);
 
 		void                            computeContinuation(const double& stepSize, const int& independentVariable, const string& parameterTypeStr);
-        StringArrayList                 		getUnscaledFluxControlCoefficientIds();
-		StringArrayList                       getFluxControlCoefficientIds();
-        StringArrayList                       getUnscaledConcentrationControlCoefficientIds();
-		StringArrayList                       getConcentrationControlCoefficientIds();
-		StringArrayList                       getElasticityCoefficientIds();
-		StringArrayList                       getUnscaledElasticityCoefficientIds();
+        ArrayList                 		getUnscaledFluxControlCoefficientIds();
+		ArrayList                       getFluxControlCoefficientIds();
+        ArrayList                       getUnscaledConcentrationControlCoefficientIds();
+		ArrayList                       getConcentrationControlCoefficientIds();
+		ArrayList                       getElasticityCoefficientIds();
+		ArrayList                       getUnscaledElasticityCoefficientIds();
 		StringList                      getEigenValueIds();
 		StringList                      getAvailableSteadyStateSymbols();
 		ArrayList                       getSteadyStateSelectionList();

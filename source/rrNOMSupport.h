@@ -9,7 +9,7 @@
 #include <memory>
 #include "sbml/math/ASTNode.h"
 #include "rrObject.h"
-#include "rrArrayList2.h"
+#include "rrArrayList.h"
 #include "rrHashTable.h"
 using std::vector;
 using std::string;

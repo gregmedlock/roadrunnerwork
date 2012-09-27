@@ -115,10 +115,10 @@ typedef struct RRListItem
     ListItemType ItemType;  			/*!< The type of the item in this list element */
     union
     {
-       int 	     iValue;
-	   double    dValue;
-	   char*     sValue;
-	   RRList*  lValue;
+       int 	     		iValue;
+	   double    		dValue;
+	   char*     		sValue;
+	   RRList*  		lValue;
 	} data;
 } *RRListItemHandle;                 	/*!< Pointer to cRRArrayListItemHandle struct */
 

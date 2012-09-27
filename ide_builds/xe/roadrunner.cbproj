@@ -128,9 +128,8 @@
 			<CppCompile Include="..\..\source\mtrand\mtrand.cpp">
 				<BuildOrder>65</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\source\rrArrayList2.cpp">
-				<DependentOn>..\..\source\rrArrayList2.h</DependentOn>
-				<BuildOrder>68</BuildOrder>
+			<CppCompile Include="..\..\source\rrArrayList.cpp">
+				<BuildOrder>69</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrArrayListItem.cpp">
 				<DependentOn>..\..\source\rrArrayListItem.h</DependentOn>
@@ -308,10 +307,6 @@
 			<CppCompile Include="..\..\source\rrStringList.cpp">
 				<DependentOn>..\..\source\rrStringList.h</DependentOn>
 				<BuildOrder>46</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrStringListContainer.cpp">
-				<DependentOn>..\..\source\rrStringListContainer.h</DependentOn>
-				<BuildOrder>47</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrStringUtils.cpp">
 				<DependentOn>..\..\source\rrStringUtils.h</DependentOn>

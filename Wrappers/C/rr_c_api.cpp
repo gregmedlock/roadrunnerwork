@@ -1503,7 +1503,8 @@ RRListHandle rrCallConv getAvailableSymbols()
             return NULL;
         }
 
-        ArrayList2 slSymbols = gRRHandle->getAvailableSymbols();
+        ArrayList slSymbols = gRRHandle->getAvailableSymbols();
+        //cout<<"Got "<<slSymbols;
 		return createList(slSymbols);
     }
     catch(Exception& ex)
@@ -2137,7 +2138,7 @@ RRList* rrCallConv getElasticityCoefficientIds()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-        StringArrayList aList = gRRHandle->getElasticityCoefficientIds();
+        ArrayList aList = gRRHandle->getElasticityCoefficientIds();
         return createList(aList);
     }
     catch(Exception& ex)
@@ -2355,7 +2356,7 @@ RRListHandle rrCallConv getUnscaledFluxControlCoefficientIds()
             setError(ALLOCATE_API_ERROR_MSG);
             return NULL;
         }
-		StringArrayList arrList = gRRHandle->getUnscaledFluxControlCoefficientIds();
+		ArrayList arrList = gRRHandle->getUnscaledFluxControlCoefficientIds();
         return createList(arrList);
     }
     catch(Exception& ex)

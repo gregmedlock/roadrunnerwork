@@ -132,7 +132,6 @@ int main(int argc, char* argv[])
 	RRListHandle sList = getAvailableSymbols();
     cout<<"Symbols: "<<listToString(sList);
 
-
     char* cFileName = getCSourceFileName();
     if(cFileName)
     {

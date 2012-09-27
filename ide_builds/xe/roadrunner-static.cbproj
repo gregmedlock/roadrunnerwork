@@ -77,12 +77,7 @@
 				<BuildOrder>62</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrArrayList.cpp">
-				<DependentOn>..\..\source\rrArrayList.h</DependentOn>
-				<BuildOrder>65</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrArrayList2.cpp">
-				<DependentOn>..\..\source\rrArrayList2.h</DependentOn>
-				<BuildOrder>66</BuildOrder>
+				<BuildOrder>57</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrArrayListItem.cpp">
 				<DependentOn>..\..\source\rrArrayListItem.h</DependentOn>
