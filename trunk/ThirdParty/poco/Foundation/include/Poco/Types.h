@@ -46,7 +46,7 @@
 namespace Poco {
 
 
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) || defined(__CODEGEARC__)
 	//
 	// Windows/Visual C++
 	//
