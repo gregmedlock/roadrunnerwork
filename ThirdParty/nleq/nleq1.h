@@ -1,5 +1,5 @@
-#ifndef nleqH
-#define nleqH
+#ifndef nleq1H
+#define nleq1H
 
 //How is this library being built?
 //If you are building, or using, this as a static library, then you need to define STATIC_NLEQ
@@ -32,12 +32,18 @@ extern "C"
 
 DLLEXPORT int STDCALL NLEQ1
 (
-integer *n, 		c_NLMFCN fcn,
-U_fp jac, 			doublereal *x,
-doublereal *xscal, 	doublereal *rtol,
-integer *iopt, 		integer *ierr,
-integer *liwk, 		integer *iwk,
-integer *lrwk, 		doublereal *rwk
+    integer *n, 		
+    c_NLMFCN fcn,
+    U_fp jac, 			
+    doublereal *x,
+    doublereal *xscal, 
+    doublereal *rtol,
+    integer *iopt, 		
+    integer *ierr,
+    integer *liwk, 		
+    integer *iwk,
+    integer *lrwk, 		
+    doublereal *rwk
 );
 
 #ifdef __cplusplus

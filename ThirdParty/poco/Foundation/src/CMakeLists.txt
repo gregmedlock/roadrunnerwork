@@ -1,5 +1,5 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-project(poco-foundation)
+project(poco_foundation_src)
 
 # Option that allows users to build static and/or shared libraries
 # ----------------------------------------------------------------
@@ -19,16 +19,24 @@ ThreadLocal
 Debugger
 )
 
-
 if(${BORLAND})
-set(SUPPRESS_WARNINGS "-w-8128 -w-8057 -w-8012")
+add_definitions(
+             -w-8012                     #Comparing signed /unsigned
+             -w-8057                     #Parameter never used
+             -w-8004                     #'var' is assigned a value that is never used
+             -w-8123                     #Path not found
+             -w-8066                     #Unreachable code
+             -w-8104                     #Local static with constructor...
+             -w-8008                     #Condition is always false..
+
+        )
 endif()
+
 
 if(${MSVC})
 #set(....
 endif()
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SUPPRESS_WARNINGS}")
 
 include_directories(
 ${poco_include_folder}
