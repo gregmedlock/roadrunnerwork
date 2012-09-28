@@ -10,7 +10,6 @@ set(target nleq)
 
 set(headers nleq1.h f2c_nleq.h)
 set(sources 
-#linalg_nleq1.c
 nleq1.c
 wnorm.c
 zibconst.c

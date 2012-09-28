@@ -1,7 +1,7 @@
 /* f2c.h  --  Standard Fortran to C header file */
 
 /* This header file was modified by Totte Karlsson, mainly to avoid some compiler clashes.
-The follwoing notable changes were made:
+The following notable changes were made:
 real -> f2c_real
 //complex -> f2c_complex
 
