@@ -39,7 +39,7 @@
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<Defines>BUILD_MODEL_DLL;LIBSBML_USE_CPP_NAMESPACE;STATIC_RR;$(Defines)</Defines>
+			<Defines>BUILD_MODEL_DLL;LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
@@ -110,9 +110,9 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>11</BuildOrder>
 			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\roadrunner-static.lib">
+			<LibFiles Include="R:\installs\xe\debug\lib\roadrunner.lib">
 				<IgnorePath>true</IgnorePath>
-				<BuildOrder>5</BuildOrder>
+				<BuildOrder>11</BuildOrder>
 			</LibFiles>
 			<LibFiles Include="R:\installs\xe\debug\lib\rr-libstruct-static.lib">
 				<IgnorePath>true</IgnorePath>

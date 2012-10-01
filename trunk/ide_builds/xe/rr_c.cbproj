@@ -74,42 +74,6 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>12</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="..\..\source\rrFileLog.cpp">
-				<DependentOn>..\..\source\rrFileLog.h</DependentOn>
-				<BuildOrder>12</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrLog.cpp">
-				<DependentOn>..\..\source\rrLog.h</DependentOn>
-				<BuildOrder>5</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrLogFile.cpp">
-				<DependentOn>..\..\source\rrLogFile.h</DependentOn>
-				<BuildOrder>6</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrLoggerUtils.cpp">
-				<DependentOn>..\..\source\rrLoggerUtils.h</DependentOn>
-				<BuildOrder>7</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrLogLevel.cpp">
-				<DependentOn>..\..\source\rrLogLevel.h</DependentOn>
-				<BuildOrder>8</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrLogOutput.cpp">
-				<DependentOn>..\..\source\rrLogOutput.h</DependentOn>
-				<BuildOrder>9</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrObject.cpp">
-				<DependentOn>..\..\source\rrObject.h</DependentOn>
-				<BuildOrder>11</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrStringUtils.cpp">
-				<DependentOn>..\..\source\rrStringUtils.h</DependentOn>
-				<BuildOrder>10</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrUtils.cpp">
-				<DependentOn>..\..\source\rrUtils.h</DependentOn>
-				<BuildOrder>4</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="..\..\Wrappers\C\Apps\rr_c\Args.cpp">
 				<BuildOrder>12</BuildOrder>
 			</CppCompile>
