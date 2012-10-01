@@ -18,6 +18,7 @@
 #include "rrArrayList.h"
 #include "rrXMLDocument.h"
 #include "rrNOMSupport.h"
+#include "rrConstants.h"
 using std::string;
 using namespace ls;
 namespace rr
@@ -33,6 +34,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 	private:
 		const double                    DiffStepSize;
 		const string                    emptyModelStr;
+        const string					mModelFolder;			//Folder for XML models
 		const double                    STEADYSTATE_THRESHOLD;
         DoubleMatrix                    mRawSimulationData;
 		SimulationData                  mSimulationData;
@@ -101,7 +103,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 
 		//Functions --------------------------------------------------------------------
 
-										RoadRunner(const string& compiler="tcc");
+										RoadRunner(const string& compiler = DefaultCompiler);
 		virtual                        ~RoadRunner();
         bool                            isModelLoaded();
         bool                            setCompiler(const string& compiler);

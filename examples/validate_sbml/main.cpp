@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iomanip>
-#include "rrLog.h"
+#include "rrLogger.h"
 #include "rrStringUtils.h"
 #include "rrRoadRunner.h"
 #include "rrException.h"

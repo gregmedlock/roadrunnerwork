@@ -12,6 +12,7 @@ char*       EmptyString = "";
 char*       WinPathSeparator = "\\";
 char*       LinuxPathSeparator = "/";
 
+string		DefaultCompiler = "tcc";
 char 	 	tab 			= '\t';
 double    	DoubleNaN   = std::numeric_limits<double>::quiet_NaN() ;
 float     	FloatNaN    = std::numeric_limits<float>::quiet_NaN() ;

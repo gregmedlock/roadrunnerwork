@@ -201,13 +201,17 @@
 			<CppCompile Include="..\..\source\rrIModel.cpp">
 				<BuildOrder>22</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\source\rrLog.cpp">
-				<DependentOn>..\..\source\rrLog.h</DependentOn>
-				<BuildOrder>23</BuildOrder>
+			<CppCompile Include="..\..\source\rrLogContainer.cpp">
+				<DependentOn>..\..\source\rrLogContainer.h</DependentOn>
+				<BuildOrder>69</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrLogFile.cpp">
 				<DependentOn>..\..\source\rrLogFile.h</DependentOn>
 				<BuildOrder>24</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\source\rrLogger.cpp">
+				<DependentOn>..\..\source\rrLogger.h</DependentOn>
+				<BuildOrder>68</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrLoggerUtils.cpp">
 				<DependentOn>..\..\source\rrLoggerUtils.h</DependentOn>

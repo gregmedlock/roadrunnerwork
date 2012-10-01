@@ -3,15 +3,17 @@
 #define rrConstantsH
 //---------------------------------------------------------------------------
 #include <limits>
+#include <string>
 #include "rrExporter.h"
 using namespace std;
 namespace rr
 {
 
-RR_DECLSPEC extern char* WinPathSeparator;
-RR_DECLSPEC extern char* LinuxPathSeparator;
-RR_DECLSPEC extern char* EmptyString;
-RR_DECLSPEC extern char* Comma;
+RR_DECLSPEC extern char* 	WinPathSeparator;
+RR_DECLSPEC extern char* 	LinuxPathSeparator;
+RR_DECLSPEC extern char* 	EmptyString;
+RR_DECLSPEC extern char* 	Comma;
+RR_DECLSPEC extern string 	DefaultCompiler;
 
 // Typedefs
 typedef unsigned int 	u_int;

@@ -7,7 +7,7 @@ main.cpp
 Args.cpp
 GetOptions.cpp
 #${rrSrc}/rrFileLog.cpp
-#${rrSrc}/rrLog.cpp
+#${rrSrc}/rrLogger.cpp
 #${rrSrc}/rrLogFile.cpp
 #${rrSrc}/rrLoggerUtils.cpp
 #${rrSrc}/rrLogOutput.cpp

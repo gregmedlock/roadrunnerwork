@@ -23,8 +23,9 @@ rrFileLog.cpp
 rrGetOptions.cpp
 rrHashTable.cpp
 rrIModel.cpp
-rrLog.cpp
+rrLogger.cpp
 rrLogFile.cpp
+rrLogContainer.cpp
 rrLoggerUtils.cpp
 rrLogLevel.cpp
 rrLogOutput.cpp

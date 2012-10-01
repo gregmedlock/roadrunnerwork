@@ -4,7 +4,7 @@ set(rrSrc "../../../../source")
 add_executable( ${target} 
 main.cpp
 ${rrSrc}/rrFileLog.cpp
-${rrSrc}/rrLog.cpp
+${rrSrc}/rrLogger.cpp
 ${rrSrc}/rrLogFile.cpp
 ${rrSrc}/rrLoggerUtils.cpp
 ${rrSrc}/rrLogOutput.cpp

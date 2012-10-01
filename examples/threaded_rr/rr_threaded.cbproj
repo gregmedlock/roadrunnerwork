@@ -22,13 +22,14 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<Defines>LIBSBML_USE_CPP_NAMESPACE;$(Defines)</Defines>
 			<PackageImports>vclx.bpi;vcl.bpi;rtl.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;vclimg.bpi;svnui.bpi;svn.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;bdertl.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;DbxClientDriver.bpi;dbexpress.bpi;AzureCloud.bpi;DbxCommonDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;vclie.bpi;webdsnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;TeeTree2D15Tee9.bpi;bcbie.bpi;dbxcds.bpi;TeeImage915.bpi;TeeWorld915.bpi;TeeLanguage915.bpi;TeePro915.bpi;TeeGL915.bpi;TeeUI915.bpi;TeeDB915.bpi;Tee915.bpi;inetdb.bpi;websnap.bpi</PackageImports>
 			<NoVCL>true</NoVCL>
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
-			<IncludePath>R:\roadrunnerwork\trunk\examples\threaded_rr\;R:\roadrunnerwork\trunk\ThirdParty\poco\Foundation\include;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\source\;R:\roadrunnerwork\trunk\examples\threaded_rr\;R:\roadrunnerwork\trunk\ThirdParty\poco\Foundation\include;$(RR_ROOT)\trunk\source;$(RR_DEBUG_INSTALL)\include;$(IncludePath)</IncludePath>
 			<_TCHARMapping>char</_TCHARMapping>
 			<ProjectType>CppConsoleApplication</ProjectType>
-			<ILINK_LibraryPath>R:\installs\poco\lib\;R:\roadrunnerwork\trunk\examples\threaded_rr\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>..\..\source\;R:\installs\xe\debug\lib\;R:\installs\poco\lib\;R:\roadrunnerwork\trunk\examples\threaded_rr\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<OutputExt>exe</OutputExt>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
@@ -42,6 +43,7 @@
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<FinalOutputDir>$(RR_DEBUG_INSTALL)\bin</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -68,7 +70,11 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>1</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="threaded_rr.cpp">
+			<LibFiles Include="R:\installs\xe\debug\lib\roadrunner.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>2</BuildOrder>
+			</LibFiles>
+			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">

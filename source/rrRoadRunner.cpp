@@ -35,6 +35,7 @@ namespace rr
 
 RoadRunner::RoadRunner(const string& compiler) :
     emptyModelStr("A model needs to be loaded before one can use this method"),
+	mModelFolder("..//Models"),
     STEADYSTATE_THRESHOLD(1.E-2),
     mCVode(NULL),
     steadyStateSolver(NULL),
@@ -57,13 +58,10 @@ RoadRunner::RoadRunner(const string& compiler) :
     mConservedTotalChanged(false),
     mCompiler(compiler)
 {
+     Log(lDebug4)<<"In RoadRunner ctor";
      mLS = LibStructural::getInstance();
-     Log(lDebug4)<<"In RoadRunner CTOR";
-//     mCSharpGenerator    = new CSharpGenerator(this);
-//     mCGenerator         = new CGenerator(this);//Todo: memoryleak
      mCSharpGenerator    = new CSharpGenerator(mNOM);
      mCGenerator         = new CGenerator(mNOM);//Todo: memoryleak
-
      mModelGenerator     = mCGenerator;
      mTempFileFolder     = GetUsersTempDataFolder();
 }
@@ -80,7 +78,7 @@ RoadRunner::~RoadRunner()
         //Unload the DLL
         FreeLibrary(mModelDLL);
     }
-//    delete _L0;
+
     delete mLS;
 }
 
@@ -623,6 +621,7 @@ bool RoadRunner::loadSBMLFromFile(const string& fileName)
     {
         stringstream msg;
         msg<<"Failed opening file: "<<fileName;
+        Log(lError)<<msg.str();
         return false;
     }
 

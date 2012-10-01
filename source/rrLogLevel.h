@@ -1,6 +1,5 @@
 #ifndef rrLogLevelH
 #define rrLogLevelH
-//---------------------------------------------------------------------------
 #include <string>
 #include "rrExporter.h"
 

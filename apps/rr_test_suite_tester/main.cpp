@@ -15,7 +15,7 @@
 #endif
 
 #include <iomanip>
-#include "rrLog.h"
+#include "rrLogger.h"
 #include "rrRoadRunner.h"
 #include "rrCGenerator.h"
 #include "rrException.h"
