@@ -81,7 +81,7 @@ handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
 # \defgroup mca Metabolic Control Analysis
 # \brief Calculate control coefficients and sensitivities
 #
-# \defgroup Stoich Stoichiometry analysis
+# \defgroup stoich Stoichiometry analysis
 # \brief Linear algebra based methods for analyzing a reaction network
 #
 # \defgroup helperRoutines Helper Routines
@@ -99,23 +99,17 @@ rr = handle.getRRInstance()
 
 #Utility and informational methods
 handle.getVersion.restype = c_char_p
-handle.getlibSBMLVersion.restype = c_char_p
 handle.getBuildDate.restype = c_char_p
 handle.getCopyright.restype = c_char_p
 handle.setTempFolder.restype = c_bool
 handle.getTempFolder.restype = c_char_p
-#\ingroup utility
+##\ingroup utility
 #@{
 
 ##\brief Retrieve the current version number of the library
 #\return char* version - Returns null if it fails, otherwise it returns the version number of the library
 def getVersion():
     return handle.getVersion()
-
-##\brief Retrieve the current version of the libsbml library
-#\return char* version - Returns null if it fails, otherwise it returns the version number of the library
-def getlibSBMLVersion():
-    return handle.getlibSBMLVersion()
 
 ##\brief Retrieve the current build date of the library
 #\return Returns null if it fails, otherwise it returns the build date
@@ -235,7 +229,7 @@ def freeRRInstance(handle):
 #Flags/Options
 handle.setComputeAndAssignConservationLaws.restype = c_bool
 
-##\ingroup initialization
+##\ingroup utility
 #@{
 
 ##\brief Enable/disable conservation analysis
@@ -282,7 +276,7 @@ def getSBML():
 #SBML utility methods
 handle.getParamPromotedSBML.restype = c_char_p
 
-##\ingroup SBML
+##\ingroup parameters
 #@{
 
 ##\brief Promote any local parameters to global status
@@ -631,6 +625,11 @@ def getBoundarySpeciesByIndex(index):
 def setBoundarySpeciesConcentrations(vector):
     return handle.setBoundarySpeciesConcentrations(vector)
 
+##\brief Returns a string with boundary species concentrations
+#\retrun Returns the concentration of species if successful
+def getBoundarySpeciesConcentrations():
+    return handle.vectorToString(handle.getBoundarySpeciesConcentrations())
+
 ##@}
 
 ##\ingroup parameters
@@ -826,7 +825,7 @@ def getFloatingSpeciesInitialConditionIds():
 handle.getNumberOfReactions.restype = c_int
 handle.getReactionRate.restype = c_bool
 
-##\ingroup state
+##\ingroup reaction
 #@{
 
 ##\brief Obtain the number of reactions in the loaded model
@@ -836,11 +835,6 @@ handle.getReactionRate.restype = c_bool
 #\return Returns -1 if it fails, returns 0 or more if it is successful (indicating the number of reactions)
 def getNumberOfReactions():
     return handle.getNumberOfReactions()
-
-##@}
-
-##\ingroup reaction
-#@{
 
 ##\brief Returns the reaction rate by index
 #\return
@@ -889,10 +883,10 @@ def getRatesOfChange():
 
 ##\brief Retrieve the string list of rates of change Ids
 #
-#Example: Ids = rrPython.getRateOfChangeIds
+#Example: Ids = rrPython.getRatesOfChangeIds
 #
 #\return Returns a list of rates of change Ids
-def getRateOfChangeIds():
+def getRatesOfChangeIds():
     values = handle.getRatesOfChangeIds()
     result = handle.stringArrayToString(values)
     handle.freeStringArray(values)
@@ -994,7 +988,7 @@ def getNumberOfGlobalParameters():
 
 #Get Ids family
 
-##\addtogroup compartment
+##\addtogroup reaction
 #@{
 
 ##\brief Returns a list of reaction Ids
@@ -1012,6 +1006,11 @@ def getRateOfChangeIds():
     result = handle.stringArrayToString(values)
     handle.freeStringArray(values)
     return result
+
+##@}
+
+##\ingroup compartment
+#@{
 
 ##\brief Gets the list of compartment Ids
 #\return Returns -1 if it fails, otherwise returns a string containing the list of compartment Ids
@@ -1337,6 +1336,9 @@ handle.getResultColumnLabel.restype = c_char_p
 handle.getCCodeHeader.restype = c_char_p
 handle.getCCodeSource.restype = c_char_p
 
+##/ingroup helperRoutines
+#@{
+
 def getVectorLength(vector):
     return handle.getVectorLength(vector)
 
@@ -1422,5 +1424,7 @@ def getResultElement (m, i, j):
         return value.value;
     else:
         raise RuntimeError('Index out of range')
+
+##@}
 
 #=======================================================#
