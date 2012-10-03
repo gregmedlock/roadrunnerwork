@@ -1651,6 +1651,15 @@ C_DECL_SPEC RRListHandle rrCallConv createRRList ();
 C_DECL_SPEC void rrCallConv freeRRList (RRListHandle list);
 
 /*!
+ \brief Returns the length of a given list
+
+ \param[in] myList The list to retrieve the length from
+ \return Length of list
+\ingroup list
+*/	
+C_DECL_SPEC int rrCallConv getListLength (RRListHandle myList);
+
+/*!
  \brief Create a list item to store an integer
 
  \param[in] value The integer to store in the list item
@@ -1760,15 +1769,34 @@ C_DECL_SPEC bool rrCallConv isListItemList (RRListItemHandle item);
 */	
 C_DECL_SPEC bool rrCallConv isListItem (RRListItemHandle item, ListItemType itemType);
 
+/*!
+ \brief Returns the integer from a list item
+
+ \param[in] item The list item to work with
+ \param[out] value The integer value returned by the method
+ \return Returns true is successful, else false
+ \ingroup list
+*/	
+C_DECL_SPEC bool rrCallConv getIntegerListItem (RRListItemHandle item, int &value);
 
 /*!
- \brief Returns the length of a given list
+ \brief Returns the double from a list item
 
- \param[in] myList The list to retrieve the length from
- \return Length of list
-\ingroup list
+ \param[in] item The list item to work with
+ \param[out] value The double value returned by the method
+ \return Returns true is successful, else false
+ \ingroup list
 */	
-C_DECL_SPEC int rrCallConv getListLength (RRListHandle myList);
+C_DECL_SPEC bool rrCallConv getDoubleListItem (RRListItemHandle item, double &value);
+
+/*!
+ \brief Returns the string from a list item
+
+ \param[in] item The list item to work with
+ \return Returns NULL if it fails, otherwise returns a pointer to the string
+ \ingroup list
+*/	
+C_DECL_SPEC char* rrCallConv getStringListItem (RRListItemHandle item);
 
 
 /*!
@@ -1779,6 +1807,7 @@ C_DECL_SPEC int rrCallConv getListLength (RRListHandle myList);
 \ingroup list
 */	
 C_DECL_SPEC RRListHandle rrCallConv getList (RRListItemHandle item);
+
 
 #if defined( __cplusplus)
 }
