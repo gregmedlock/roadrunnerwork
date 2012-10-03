@@ -101,7 +101,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the reduced stoichiometry matrix for the current model.  <a href="#ga57b4c651ecffb52d28886ce9e3b6e6ed"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___stoich.html#ga587ae0ec7e6e7f8b2576bacf700eedcd">getL0Matrix</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the L9 matrix for the current model.  <a href="#ga587ae0ec7e6e7f8b2576bacf700eedcd"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the L0 matrix for the current model.  <a href="#ga587ae0ec7e6e7f8b2576bacf700eedcd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#a87174eefa58ae98dec58c9253ae6c5da">RRMatrixHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group___stoich.html#gafd1bcae76af0d5d6ccf7af7bd098de23">getConservationMatrix</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the conservation matrix for the current model.  <a href="#gafd1bcae76af0d5d6ccf7af7bd098de23"></a><br/></td></tr>
@@ -124,6 +124,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retrieve the conservation matrix for the current model. </p>
+<p>The conservation laws as describe by row where the columns indicate the species Id.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns the conservation matrix. </dd></dl>
 
 </div>
@@ -180,7 +181,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Retrieve the L9 matrix for the current model. </p>
+<p>Retrieve the L0 matrix for the current model. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns the L0 matrix. </dd></dl>
 
 </div>
@@ -238,6 +239,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retreive the reduced Jacobian for the current model. </p>
+<p>setComputeAndAssignConservationLaws (true) must be enabled.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns the reduced Jacobian matrix </dd></dl>
 
 </div>
@@ -279,7 +281,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 3 2012 10:56:00 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

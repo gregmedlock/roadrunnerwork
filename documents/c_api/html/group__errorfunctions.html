@@ -88,7 +88,7 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga77071837a73206d3e27220f3dff96ad4">getLogLevel</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the logging status level as a pointer to a string.  <a href="#ga77071837a73206d3e27220f3dff96ad4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga9e5c453651f5a3743e9bc10f0e81be66">getLogFileName</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the string that holds the logging file name.  <a href="#ga9e5c453651f5a3743e9bc10f0e81be66"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the string that holds the logging file name path.  <a href="#ga9e5c453651f5a3743e9bc10f0e81be66"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga1066caa37a0d7dca6146efd756d058c8">hasError</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if there is an error string to retrieve.  <a href="#ga1066caa37a0d7dca6146efd756d058c8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__errorfunctions.html#ga34d1ec9db4032749cde607b4f403f2b9">getLastError</a> ()</td></tr>
@@ -131,8 +131,9 @@ Functions</h2></td></tr>
 <div class="memdoc">
 
 <p>Retrieve the current error string. </p>
-<p>Example: str = getLastError ()</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Return null if fails, otherwise returns a pointer to the error string </dd></dl>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> str = <a class="code" href="group__errorfunctions.html#ga34d1ec9db4032749cde607b4f403f2b9" title="Retrieve the current error string.">getLastError</a> (); 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Return null if fails, otherwise returns a pointer to the error string </dd></dl>
 
 </div>
 </div>
@@ -150,7 +151,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Get a pointer to the string that holds the logging file name. </p>
+<p>Get a pointer to the string that holds the logging file name path. </p>
 <p>The logging level can be one of the following strings</p>
 <p>"ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1", "DEBUG", "INFO", "WARNING", "ERROR"</p>
 <p>Example: str = getLogFileName ()</p>
@@ -175,8 +176,9 @@ Functions</h2></td></tr>
 <p>Get the logging status level as a pointer to a string. </p>
 <p>The logging level can be one of the following strings</p>
 <p>"ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1", "DEBUG", "INFO", "WARNING", "ERROR"</p>
-<p>Example: str = getLogLevel ()</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails else returns a pointer to the logging string </dd></dl>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> str = <a class="code" href="group__errorfunctions.html#ga77071837a73206d3e27220f3dff96ad4" title="Get the logging status level as a pointer to a string.">getLogLevel</a> () 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails else returns a pointer to the logging string </dd></dl>
 
 </div>
 </div>
@@ -218,8 +220,9 @@ Functions</h2></td></tr>
 <p>Set the logging status level. </p>
 <p>The logging level is determined by the following strings</p>
 <p>"ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1", "DEBUG", "INFO", "WARNING", "ERROR"</p>
-<p>Example: setLogLevel ("DEBUG4")</p>
-<dl><dt><b>Parameters:</b></dt><dd>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="group__errorfunctions.html#ga59c256885fce7df1e4d6d5f0c5554bab" title="Set the logging status level.">setLogLevel</a> (<span class="stringliteral">&quot;DEBUG4&quot;</span>) 
+</pre></div><dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">lvl</td><td>Pointer to the logging level string. </td></tr>
   </table>
@@ -247,7 +250,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 3 2012 10:56:00 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

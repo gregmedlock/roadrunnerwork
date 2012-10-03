@@ -11,13 +11,13 @@
 \begin{DoxyCompactItemize}
 \item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_ga4105f02dfdb959175f30cecebfb1c081}{load\-S\-B\-M\-L} (const char $\ast$sbml)
-\begin{DoxyCompactList}\small\item\em \-Create a model from an \-S\-B\-M\-L string. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Load a model from an \-S\-B\-M\-L string. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__loadsave_gae4aa1daa0773e256698353861e3d1ef3}{load\-S\-B\-M\-L\-From\-File} (const char $\ast$file\-Name)
-\begin{DoxyCompactList}\small\item\em \-Create a model from a \-S\-B\-M\-L file. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Load a model from a \-S\-B\-M\-L file. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_gade5df220f410e86123128a2b617b6ec5}{get\-Current\-S\-B\-M\-L} ()
 \begin{DoxyCompactList}\small\item\em \-Retrieve the {\bfseries current state} of the model in the form of an \-S\-B\-M\-L string. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__loadsave_ga05a79ded419b52fa2965fce1700c0e82}{get\-S\-B\-M\-L} ()
-\begin{DoxyCompactList}\small\item\em \-Retrieve the \-S\-B\-M\-L model that was last loaded. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Retrieve the \-S\-B\-M\-L model that was last loaded into road\-Runner. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
@@ -51,7 +51,7 @@
 \label{group__loadsave_ga05a79ded419b52fa2965fce1700c0e82}
 
 
-\-Retrieve the \-S\-B\-M\-L model that was last loaded. 
+\-Retrieve the \-S\-B\-M\-L model that was last loaded into road\-Runner. 
 
 \begin{DoxyReturn}{\-Returns}
 \-Returns null if the call fails, otherwise returns a pointer to the \-S\-B\-M\-L string 
@@ -67,7 +67,7 @@
 \label{group__loadsave_ga4105f02dfdb959175f30cecebfb1c081}
 
 
-\-Create a model from an \-S\-B\-M\-L string. 
+\-Load a model from an \-S\-B\-M\-L string. 
 
 
 \begin{DoxyParams}[1]{\-Parameters}
@@ -88,11 +88,11 @@
 \label{group__loadsave_gae4aa1daa0773e256698353861e3d1ef3}
 
 
-\-Create a model from a \-S\-B\-M\-L file. 
+\-Load a model from a \-S\-B\-M\-L file. 
 
 
 \begin{DoxyParams}[1]{\-Parameters}
-\mbox{\tt in}  & {\em file\-Name} & file name \\
+\mbox{\tt in}  & {\em file\-Name} & file name (or full path) to file that holds the \-S\-B\-M\-L model \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}

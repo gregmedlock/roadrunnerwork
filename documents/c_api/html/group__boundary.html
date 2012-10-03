@@ -83,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__boundary.html#gaae9b6b75211923bcf6f7196fe707c631">getBoundarySpeciesConcentrations</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve in a vector the concentrations for all the boundary species.  <a href="#gaae9b6b75211923bcf6f7196fe707c631"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the concentrations for all the boundary species in a vector.  <a href="#gaae9b6b75211923bcf6f7196fe707c631"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__boundary.html#gabb6764fa48d0b3f2ca3b38e391479347">setBoundarySpeciesByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the concentration for a particular boundary species.  <a href="#gabb6764fa48d0b3f2ca3b38e391479347"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__boundary.html#gaad04359bcaa998547d71b4cdd337796e">getBoundarySpeciesByIndex</a> (const int &amp;index, double &amp;value)</td></tr>
@@ -151,9 +151,10 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 </div>
 <div class="memdoc">
 
-<p>Retrieve in a vector the concentrations for all the boundary species. </p>
-<p>Example: RRVectorHandle values = getBoundarySpeciesConcentrations ();</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns the vector of boundary species concentrations or null if an error occured </dd></dl>
+<p>Retrieve the concentrations for all the boundary species in a vector. </p>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> values = <a class="code" href="group__boundary.html#gaae9b6b75211923bcf6f7196fe707c631" title="Retrieve the concentrations for all the boundary species in a vector.">getBoundarySpeciesConcentrations</a> (); 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Returns the vector of boundary species concentrations or null if an error occured </dd></dl>
 
 </div>
 </div>
@@ -172,7 +173,7 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 <div class="memdoc">
 
 <p>Obtain the list of boundary species Ids. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStringArrayHandle struct </dd></dl>
 
 </div>
 </div>
@@ -229,7 +230,13 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 <div class="memdoc">
 
 <p>Set the boundary species concentration to the vector vec. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
+<p>Example:</p>
+<div class="fragment"><pre class="fragment"> myVector = <a class="code" href="group__helper_routines.html#gac5fce83bedb9404ebb80895fa740a9d2" title="Create a new vector with a given size.">createVector</a> (<a class="code" href="group__boundary.html#ga17c851dfb27b9697ff286cc57d4cd10d" title="Returns the number of boundary species in the model.">getNumberOfBoundarySpecies</a>());
+ <a class="code" href="group__helper_routines.html#ga77eaf0d0f88175ce4e2e8ca57ff9d859" title="Set a particular element in a vector.">setVectorElement</a> (myVector, 0, 1.2);
+ <a class="code" href="group__helper_routines.html#ga77eaf0d0f88175ce4e2e8ca57ff9d859" title="Set a particular element in a vector.">setVectorElement</a> (myVector, 1, 5.7);
+ <a class="code" href="group__helper_routines.html#ga77eaf0d0f88175ce4e2e8ca57ff9d859" title="Set a particular element in a vector.">setVectorElement</a> (myVector, 2, 3.4);
+ <a class="code" href="group__boundary.html#ga161f8d9a48e36631d34d07c252bcc444" title="Set the boundary species concentration to the vector vec.">setBoundarySpeciesConcentrations</a>(myVector);
+</pre></div><dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">vec</td><td>A vector of boundary species concentrations </td></tr>
   </table>
@@ -257,7 +264,7 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 3 2012 10:56:00 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

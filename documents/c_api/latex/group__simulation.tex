@@ -15,11 +15,11 @@
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C char $\ast$rr\-Call\-Conv \hyperlink{group__simulation_gaecce7b3dda3548fbe579922aadf25610}{get\-Capabilities} ()
 \begin{DoxyCompactList}\small\item\em \-Get the simulator's capabilities. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__simulation_ga1a636a76ad610d99fe1c780bb3d9296d}{set\-Time\-Start} (const double \&time\-Start)
-\begin{DoxyCompactList}\small\item\em \-Set the time start for a simulation. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Set the time start for a time course simulation. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__simulation_ga1313e21d622cd846bdd75071e965eb6c}{set\-Time\-End} (const double \&time\-End)
-\begin{DoxyCompactList}\small\item\em \-Set the time end for a simulation. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Set the time end for a time course simulation. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__simulation_ga448ead53bb8913de664cc8ad675b4197}{set\-Num\-Points} (const int \&nr\-Points)
-\begin{DoxyCompactList}\small\item\em \-Set the number of points to generate in a simulation. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Set the number of points to generate in a time course simulation. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__simulation_ga6465c94b6dfed39a6ef614bd0a68cb9b}{set\-Selection\-List} (const char $\ast$list)
 \begin{DoxyCompactList}\small\item\em \-Set the selection list for output from \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{simulate\-Ex()} \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \*
@@ -27,10 +27,10 @@
 \begin{DoxyCompactList}\small\item\em \-Get the current selection list for \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{simulate\-Ex()} \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} \*
 rr\-Call\-Conv \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate} ()
-\begin{DoxyCompactList}\small\item\em \-Carry out a time-\/course simulation, use set\-Time\-Start etc to set characteristics. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Carry out a time-\/course simulation, use set\-Time\-Start, set\-Time\-End and set\-Num\-Points etc to set the simulation characteristics. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_a8c364bbdef9aab31c89655c38461da51}{\-R\-R\-Result\-Handle} \*
 rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{simulate\-Ex} (const double \&time\-Start, const double \&time\-End, const int \&number\-Of\-Points)
-\begin{DoxyCompactList}\small\item\em \-Carry out a time-\/course simulation based on the given arguments. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Carry out a time-\/course simulation based on the given arguments, time start, time end and number of points. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__simulation_ga190fff177accdfbc9c192c4993807e2e}{one\-Step} (const double \&current\-Time, const double \&step\-Size, double \&value)
 \begin{DoxyCompactList}\small\item\em \-Carry out a one step integration of the model. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__simulation_ga18b4fbd0dc5aa3f25d58367a406f425c}{get\-Time\-Start} (double \&time\-Start)
@@ -60,6 +60,46 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 
 \-Get the simulator's capabilities. 
 
+\-Example\-:
+
+
+\begin{DoxyCode}
+ <caps name="RoadRunner" description="Settings For RoadRunner">
+  <section name="integration" method="CVODE" description="CVODE Integrator">
+    <cap name="BDFOrder" value="5" hint="Maximum order for BDF Method" type="
+      integer" />
+    <cap name="AdamsOrder" value="12" hint="Maximum order for Adams Method" 
+      type="integer" />
+    <cap name="rtol" value="1E-06" hint="Relative Tolerance" type="double" />
+    <cap name="atol" value="1E-12" hint="Absolute Tolerance" type="double" />
+    <cap name="maxsteps" value="10000" hint="Maximum number of internal stepsc"
+       type="integer" />
+    <cap name="initstep" value="0" hint="the initial step size" type="double" /
+      >
+    <cap name="minstep" value="0" hint="specifies a lower bound on the
+       magnitude of the step size." type="double" />
+    <cap name="maxstep" value="0" hint="specifies an upper bound on the
+       magnitude of the step size." type="double" />
+    <cap name="conservation" value="1" hint="enables (=1) or disables (=0) the
+       conservation analysis of models for timecourse simulations." type="int" />
+    <cap name="allowRandom" value="1" hint="if enabled (=1), reinterprets
+       certain function definitions as distributions and draws random numbers for it." type=
+      "int" />
+    <cap name="usekinsol" value="0" hint="Is KinSol used as steady state
+       integrator" type="int" />
+  </section>
+
+  <section name="SteadyState" method="NLEQ2" description="NLEQ2 Steady State
+       Solver">
+    <cap name="MaxIterations" value="100" hint="Maximum number of newton
+       iterations" type="integer" />
+    <cap name="relativeTolerance" value="0.0001" hint="Relative precision of
+       solution components" type="double" />
+  </section>
+</caps>
+\end{DoxyCode}
+
+
 \begin{DoxyReturn}{\-Returns}
 \-Returns null if it fails, otherwise it returns the simulator's capabilities in the form of an \-X\-M\-L string 
 \end{DoxyReturn}
@@ -76,7 +116,11 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 
 \-Get the value of the current number of points. 
 
-\-Example\-: status = get\-Num\-Points (\&number\-Of\-Points);
+\-Example\-: 
+\begin{DoxyCode}
+ status = getNumPoints (&numberOfPoints); 
+\end{DoxyCode}
+
 
 
 \begin{DoxyParams}{\-Parameters}
@@ -115,7 +159,11 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 
 \-Get the value of the current time end. 
 
-\-Example\-: status = get\-Time\-End (\&time\-End);
+\-Example\-: 
+\begin{DoxyCode}
+ status = getTimeEnd (&timeEnd); 
+\end{DoxyCode}
+
 
 
 \begin{DoxyParams}{\-Parameters}
@@ -138,7 +186,11 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 
 \-Get the value of the current time start. 
 
-\-Example\-: status = get\-Time\-Start (\&time\-Start);
+\-Example\-: 
+\begin{DoxyCode}
+ status = getTimeStart (&timeStart); 
+\end{DoxyCode}
+
 
 
 \begin{DoxyParams}[1]{\-Parameters}
@@ -163,7 +215,11 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 
 \-Carry out a one step integration of the model. 
 
-\-Example\-: status = \-One\-Step (\&current\-Time, \&time\-Step, \&new\-Time\-Step);
+\-Example\-: 
+\begin{DoxyCode}
+ status = OneStep (&currentTime, &timeStep, &newTimeStep); 
+\end{DoxyCode}
+
 
 
 \begin{DoxyParams}[1]{\-Parameters}
@@ -171,7 +227,7 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 \hline
 \mbox{\tt in}  & {\em step\-Size} & \-The step size to use in the integration \\
 \hline
-\mbox{\tt in}  & {\em value} & \-The new time (current\-Time + step\-Size) \\
+\mbox{\tt in}  & {\em value} & \-The new time (current\-Time + step\-Size)\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
@@ -190,7 +246,11 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 
 \-Reset all floating species concentrations to their intial conditions. 
 
-\-Example\-: status = reset ();
+\-Example\-: 
+\begin{DoxyCode}
+ status = reset (); 
+\end{DoxyCode}
+
 
 \begin{DoxyReturn}{\-Returns}
 \-Returns true if successful 
@@ -227,11 +287,11 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 \label{group__simulation_ga448ead53bb8913de664cc8ad675b4197}
 
 
-\-Set the number of points to generate in a simulation. 
+\-Set the number of points to generate in a time course simulation. 
 
 
 \begin{DoxyParams}[1]{\-Parameters}
-\mbox{\tt in}  & {\em nr\-Points} & \-Number of points to generate \\
+\mbox{\tt in}  & {\em nr\-Points} & \-Number of points to generate in the time course simulation \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
@@ -250,11 +310,21 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 
 \-Set the selection list for output from \hyperlink{group__simulation_ga9f0555c11716daec2336d54d13facc57}{simulate()} or \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{simulate\-Ex()} 
 
-\-Example\-: set\-Selection\-List (\char`\"{}\-Time, S1, J1, J2\char`\"{})
+\-Use \hyperlink{group__state_gab7164e3cb8db5f8fd8c066682ce8c62e}{get\-Available\-Symbols()} to retrieve the list of all possible symbols.
+
+\-Example\-: 
+\begin{DoxyCode}
+ setSelectionList ("Time, S1, J1, J2"); 
+\end{DoxyCode}
+
+
+or
+
+set\-Selection\-List (\char`\"{}\-Time S1 J1 J2\char`\"{})
 
 
 \begin{DoxyParams}[1]{\-Parameters}
-\mbox{\tt in}  & {\em list} & \-A string of \-Ids separated by spaces or comma characters \\
+\mbox{\tt in}  & {\em list} & \-A string of \-Ids separated by spaces {\bfseries or} comma characters \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
@@ -271,7 +341,7 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 \label{group__simulation_ga1313e21d622cd846bdd75071e965eb6c}
 
 
-\-Set the time end for a simulation. 
+\-Set the time end for a time course simulation. 
 
 
 \begin{DoxyParams}[1]{\-Parameters}
@@ -292,7 +362,7 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 \label{group__simulation_ga1a636a76ad610d99fe1c780bb3d9296d}
 
 
-\-Set the time start for a simulation. 
+\-Set the time start for a time course simulation. 
 
 
 \begin{DoxyParams}[1]{\-Parameters}
@@ -313,10 +383,10 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 \label{group__simulation_ga9f0555c11716daec2336d54d13facc57}
 
 
-\-Carry out a time-\/course simulation, use set\-Time\-Start etc to set characteristics. 
+\-Carry out a time-\/course simulation, use set\-Time\-Start, set\-Time\-End and set\-Num\-Points etc to set the simulation characteristics. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns an array containing the results of the simulation 
+\-Returns an array (\-R\-R\-Result\-Handle) of columns containing the results of the simulation including string labels for the individual columms. 
 \end{DoxyReturn}
 \hypertarget{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 \index{\-Time-\/course simulation@{\-Time-\/course simulation}!simulate\-Ex@{simulate\-Ex}}
@@ -331,10 +401,31 @@ rr\-Call\-Conv \hyperlink{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}{
 \label{group__simulation_ga9b87919e79f6eb0d7c77c3daa08d6baf}
 
 
-\-Carry out a time-\/course simulation based on the given arguments. 
+\-Carry out a time-\/course simulation based on the given arguments, time start, time end and number of points. 
 
-\-Example\-: m = simulate\-Ex (0, 25, 200);
+\-Example\-: 
+\begin{DoxyCode}
+    double timeStart, timeEnd;
+        int numberOfPoints;
+        RRResultHandle m;
+        
+        timeStart = 0.0;
+        timeEnd = 25;
+        numberOfPoints = 200;
+        
+    m = simulateEx (&timeStart, &timeEnd, &numberOfPoints);
+\end{DoxyCode}
 
+
+
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em time\-Start} & \-Time start \\
+\hline
+\mbox{\tt in}  & {\em time\-End} & \-Time end \\
+\hline
+\mbox{\tt in}  & {\em number\-Of\-Points} & \-Number of points to generate\\
+\hline
+\end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-\-Returns an array containing the results of the simulation 
+\-Returns an array (\-R\-R\-Result\-Handle) of columns containing the results of the simulation including string labels for the individual columms. 
 \end{DoxyReturn}

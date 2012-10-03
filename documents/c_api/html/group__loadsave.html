@@ -82,13 +82,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga4105f02dfdb959175f30cecebfb1c081">loadSBML</a> (const char *sbml)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a model from an SBML string.  <a href="#ga4105f02dfdb959175f30cecebfb1c081"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a model from an SBML string.  <a href="#ga4105f02dfdb959175f30cecebfb1c081"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#gae4aa1daa0773e256698353861e3d1ef3">loadSBMLFromFile</a> (const char *fileName)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a model from a SBML file.  <a href="#gae4aa1daa0773e256698353861e3d1ef3"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Load a model from a SBML file.  <a href="#gae4aa1daa0773e256698353861e3d1ef3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#gade5df220f410e86123128a2b617b6ec5">getCurrentSBML</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the <b>current state</b> of the model in the form of an SBML string.  <a href="#gade5df220f410e86123128a2b617b6ec5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC char *rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__loadsave.html#ga05a79ded419b52fa2965fce1700c0e82">getSBML</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the SBML model that was last loaded.  <a href="#ga05a79ded419b52fa2965fce1700c0e82"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the SBML model that was last loaded into roadRunner.  <a href="#ga05a79ded419b52fa2965fce1700c0e82"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Read and write models to files or strings. Support for SBML formats. </p>
@@ -126,7 +126,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Retrieve the SBML model that was last loaded. </p>
+<p>Retrieve the SBML model that was last loaded into roadRunner. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if the call fails, otherwise returns a pointer to the SBML string </dd></dl>
 
 </div>
@@ -146,7 +146,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Create a model from an SBML string. </p>
+<p>Load a model from an SBML string. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">sbml</td><td>string </td></tr>
@@ -172,10 +172,10 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Create a model from a SBML file. </p>
+<p>Load a model from a SBML file. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>file name </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">fileName</td><td>file name (or full path) to file that holds the SBML model </td></tr>
   </table>
   </dd>
 </dl>
@@ -201,7 +201,7 @@ Functions</h2></td></tr>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 3 2012 10:56:00 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

@@ -41,13 +41,13 @@ rr\-Call\-Conv \hyperlink{group__mca_ga4b464166bb67773916067bc7e190a338}{get\-Un
 rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Scaled\-Flux\-Control\-Coefficient\-Matrix} ()
 \begin{DoxyCompactList}\small\item\em \-Retrieve the matrix of scaled flux control coefficients for the current model. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__mca_ga6655b7aebdc9e6fad4e7a54e3de9195d}{getu\-C\-C} (const char $\ast$variable, const char $\ast$parameter, double \&value)
-\begin{DoxyCompactList}\small\item\em \-Retireve a single unscaled control coefficient. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Retrieve a single unscaled control coefficient. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__mca_ga49c703842a069c37fa472f2740dd514b}{get\-C\-C} (const char $\ast$variable, const char $\ast$parameter, double \&value)
-\begin{DoxyCompactList}\small\item\em \-Retireve a single control coefficient. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Retrieve a single control coefficient. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__mca_ga761a98e3635d75c8505f516a0b2384b1}{get\-E\-E} (const char $\ast$name, const char $\ast$species, double \&value)
-\begin{DoxyCompactList}\small\item\em \-Retireve a single elasticity coefficient. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Retrieve a single elasticity coefficient. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__mca_gadf71d426da852cdf931022fa56a3acb0}{getu\-E\-E} (const char $\ast$name, const char $\ast$species, double \&value)
-\begin{DoxyCompactList}\small\item\em \-Retireve a single unscaled elasticity coefficient. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \-Retrieve a single unscaled elasticity coefficient. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
@@ -67,7 +67,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \label{group__mca_ga49c703842a069c37fa472f2740dd514b}
 
 
-\-Retireve a single control coefficient. 
+\-Retrieve a single control coefficient. 
 
 
 \begin{DoxyParams}[1]{\-Parameters}
@@ -95,7 +95,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Obtain the list of concentration coefficient \-Ids. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns null if it fails, if succesful it returns a list of \-Ids 
 \end{DoxyReturn}
 \hypertarget{group__mca_ga761a98e3635d75c8505f516a0b2384b1}{
 \index{\-Metabolic Control Analysis@{\-Metabolic Control Analysis}!get\-E\-E@{get\-E\-E}}
@@ -110,7 +110,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \label{group__mca_ga761a98e3635d75c8505f516a0b2384b1}
 
 
-\-Retireve a single elasticity coefficient. 
+\-Retrieve a single elasticity coefficient. 
 
 
 \begin{DoxyParams}[1]{\-Parameters}
@@ -138,7 +138,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Obtain the list of elasticity coefficient \-Ids. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns null if it fails, if succesful it returns a list 
 \end{DoxyReturn}
 \hypertarget{group__mca_gae58c11a4b28e502a5f7c36bbd19e822d}{
 \index{\-Metabolic Control Analysis@{\-Metabolic Control Analysis}!get\-Flux\-Control\-Coefficient\-Ids@{get\-Flux\-Control\-Coefficient\-Ids}}
@@ -154,7 +154,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Obtain the list of flux control coefficient \-Ids. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns null if it fails, if succesful it returns a list of \-Ids 
 \end{DoxyReturn}
 \hypertarget{group__mca_gad28644ca7615c71725056028a0a048ba}{
 \index{\-Metabolic Control Analysis@{\-Metabolic Control Analysis}!get\-Scaled\-Concentration\-Control\-Coefficient\-Matrix@{get\-Scaled\-Concentration\-Control\-Coefficient\-Matrix}}
@@ -170,7 +170,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Retrieve the matrix of scaled concentration control coefficients for the current model. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, otherwise returns a matrix of scaled concentration control coefficients \-The first column will contain the real values and the second column the imaginary values 
+\-Returns null if it fails, otherwise returns a matrix of scaled concentration control coefficients 
 \end{DoxyReturn}
 \hypertarget{group__mca_gaf8431784ec5c2ce1d0416606056f3d44}{
 \index{\-Metabolic Control Analysis@{\-Metabolic Control Analysis}!get\-Scaled\-Elasticity\-Matrix@{get\-Scaled\-Elasticity\-Matrix}}
@@ -186,7 +186,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Retrieve the scaled elasticity matrix for the current model. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, otherwise returns a matrix of scaled elasticities. \-T\-O \-D\-O\-: \-The first column will contain the real values and the second column the imaginary values 
+\-Returns null if it fails, otherwise returns a matrix of scaled elasticities. 
 \end{DoxyReturn}
 \hypertarget{group__mca_ga3510a64d86e24d36df049fce06f3a138}{
 \index{\-Metabolic Control Analysis@{\-Metabolic Control Analysis}!get\-Scaled\-Floating\-Species\-Elasticity@{get\-Scaled\-Floating\-Species\-Elasticity}}
@@ -204,16 +204,16 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Retrieve the scaled elasticity matrix for the current model. 
 
 
-\begin{DoxyParams}{\-Parameters}
-{\em reaction\-Id} & \-The reaction \-Id for computing the elasticity \\
+\begin{DoxyParams}[1]{\-Parameters}
+\mbox{\tt in}  & {\em reaction\-Id} & \-The reaction \-Id for computing the elasticity \\
 \hline
-{\em species\-Id} & \-The floating species to compute the elasticity for \\
+\mbox{\tt in}  & {\em species\-Id} & \-The floating species to compute the elasticity for \\
 \hline
-{\em value} & \-The return value for the elasticity \\
+\mbox{\tt out}  & {\em value} & \-The return value for the elasticity \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, otherwise returns a particular scaled elasticity 
+\-Returns false if it fails 
 \end{DoxyReturn}
 \hypertarget{group__mca_gad63647a85b299d463b1e4cd5671d0881}{
 \index{\-Metabolic Control Analysis@{\-Metabolic Control Analysis}!get\-Scaled\-Flux\-Control\-Coefficient\-Matrix@{get\-Scaled\-Flux\-Control\-Coefficient\-Matrix}}
@@ -229,7 +229,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Retrieve the matrix of scaled flux control coefficients for the current model. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, otherwise returns a matrix of scaled flux control coefficients \-The first column will contain the real values and the second column the imaginary values 
+\-Returns null if it fails, otherwise returns a matrix of scaled flux control coefficients 
 \end{DoxyReturn}
 \hypertarget{group__mca_ga6655b7aebdc9e6fad4e7a54e3de9195d}{
 \index{\-Metabolic Control Analysis@{\-Metabolic Control Analysis}!getu\-C\-C@{getu\-C\-C}}
@@ -244,7 +244,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \label{group__mca_ga6655b7aebdc9e6fad4e7a54e3de9195d}
 
 
-\-Retireve a single unscaled control coefficient. 
+\-Retrieve a single unscaled control coefficient. 
 
 
 \begin{DoxyParams}[1]{\-Parameters}
@@ -271,7 +271,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \label{group__mca_gadf71d426da852cdf931022fa56a3acb0}
 
 
-\-Retireve a single unscaled elasticity coefficient. 
+\-Retrieve a single unscaled elasticity coefficient. 
 
 
 \begin{DoxyParams}[1]{\-Parameters}
@@ -299,7 +299,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Obtain the list of unscaled concentration control coefficient \-Ids. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns null if it fails, if succesful it returns a list of \-Ids 
 \end{DoxyReturn}
 \hypertarget{group__mca_ga418c0108d37bc4f35a55291ca85e0a3f}{
 \index{\-Metabolic Control Analysis@{\-Metabolic Control Analysis}!get\-Unscaled\-Concentration\-Control\-Coefficient\-Matrix@{get\-Unscaled\-Concentration\-Control\-Coefficient\-Matrix}}
@@ -331,7 +331,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Retrieve the unscaled elasticity matrix for the current model. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns nil if it fails, otherwise returns a matrix of unscaled elasticities \-The first column will contain the real values and the second column the imaginary values 
+\-Returns nil if it fails, otherwise returns a matrix of unscaled elasticities 
 \end{DoxyReturn}
 \hypertarget{group__mca_ga3a3ffa45b0188f017fb32473db3550f2}{
 \index{\-Metabolic Control Analysis@{\-Metabolic Control Analysis}!get\-Unscaled\-Flux\-Control\-Coefficient\-Ids@{get\-Unscaled\-Flux\-Control\-Coefficient\-Ids}}
@@ -347,7 +347,7 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Obtain the list of unscaled flux control coefficient \-Ids. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns null if it fails, if succesful it returns a list of \-Ids 
 \end{DoxyReturn}
 \hypertarget{group__mca_ga4b464166bb67773916067bc7e190a338}{
 \index{\-Metabolic Control Analysis@{\-Metabolic Control Analysis}!get\-Unscaled\-Flux\-Control\-Coefficient\-Matrix@{get\-Unscaled\-Flux\-Control\-Coefficient\-Matrix}}
@@ -363,5 +363,5 @@ rr\-Call\-Conv \hyperlink{group__mca_gad63647a85b299d463b1e4cd5671d0881}{get\-Sc
 \-Retrieve the matrix of unscaled flux control coefficients for the current model. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, otherwise returns a matrix of unscaled flux control coefficients \-The first column will contain the real values and the second column the imaginary values 
+\-Returns null if it fails, otherwise returns a matrix of unscaled flux control coefficients 
 \end{DoxyReturn}

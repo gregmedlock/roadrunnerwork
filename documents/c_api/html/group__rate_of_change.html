@@ -83,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rate_of_change.html#gabbe129bee63761f7b0f98f060b86067b">getRatesOfChange</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the vector of rates of change.  <a href="#gabbe129bee63761f7b0f98f060b86067b"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the vector of rates of change as determined by the current state of the model.  <a href="#gabbe129bee63761f7b0f98f060b86067b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <br class="typebreak"/>
 <a class="el" href="rr__c__types_8h.html#a90941a6a2247bf7a8ec3d429729c5f9a">RRStringArrayHandle</a> rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__rate_of_change.html#ga1a87e2a6db4adb19a11a6a893eca74d8">getRatesOfChangeIds</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the string list of rates of change Ids.  <a href="#ga1a87e2a6db4adb19a11a6a893eca74d8"></a><br/></td></tr>
@@ -122,8 +122,9 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retrieve the rate of change for a given floating species. </p>
-<p>Example: status = getRateOfChange (&amp;index, &amp;value);</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns false if it fails, otherwise value contains the rate of change. </dd></dl>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> status = <a class="code" href="group__rate_of_change.html#gaad38321993112e230f7fccd96345de6c" title="Retrieve the rate of change for a given floating species.">getRateOfChange</a> (&amp;index, &amp;value); 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Returns false if it fails, otherwise value contains the rate of change. </dd></dl>
 
 </div>
 </div>
@@ -141,9 +142,10 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Retrieve the vector of rates of change. </p>
-<p>Example: values = getRatesOfChange ();</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a vector of rates of change values </dd></dl>
+<p>Retrieve the vector of rates of change as determined by the current state of the model. </p>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> values = <a class="code" href="group__rate_of_change.html#gabbe129bee63761f7b0f98f060b86067b" title="Retrieve the vector of rates of change as determined by the current state of the model.">getRatesOfChange</a> (); 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a vector of rates of change values </dd></dl>
 
 </div>
 </div>
@@ -163,8 +165,9 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retrieve the vector of rates of change given a vector of floating species concentrations. </p>
-<p>Example: values = getRatesOfChangeEx (vector);</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails </dd></dl>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> values = <a class="code" href="group__rate_of_change.html#gacfae48e32754e7678b8bb003df93ef53" title="Retrieve the vector of rates of change given a vector of floating species concentrations.">getRatesOfChangeEx</a> (vector); 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails </dd></dl>
 
 </div>
 </div>
@@ -183,8 +186,9 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retrieve the string list of rates of change Ids. </p>
-<p>Example: Ids = getRatesOfChangeIds ();</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a list of rates of change Ids </dd></dl>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> Ids = <a class="code" href="group__rate_of_change.html#ga1a87e2a6db4adb19a11a6a893eca74d8" title="Retrieve the string list of rates of change Ids.">getRatesOfChangeIds</a> (); 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a list of rates of change Ids </dd></dl>
 
 </div>
 </div>
@@ -206,7 +210,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 3 2012 10:56:00 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

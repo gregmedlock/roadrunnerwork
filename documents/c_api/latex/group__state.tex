@@ -57,7 +57,7 @@
 \-Obtain the list of all available symbols. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns -\/1 if it fails, if succesful it returns a pointer to a \-R\-R\-Array\-List\-Handle struct 
+\-Returns -\/1 if it fails, if succesful it returns a pointer to a \-R\-R\-List\-Handle struct 
 \end{DoxyReturn}
 \hypertarget{group__state_ga15fd0aa66d20ef3e733ec6fa28dbfc98}{
 \index{\-Current state of system@{\-Current state of system}!get\-Eigen\-Value\-Ids@{get\-Eigen\-Value\-Ids}}
@@ -73,7 +73,7 @@
 \-Obtain the list of eigenvalue \-Ids. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns -\/1 if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns -\/1 if it fails, if succesful it returns a pointer to a \-R\-R\-String\-Array\-Handle struct 
 \end{DoxyReturn}
 \hypertarget{group__state_gaee1e79b2afc717895d302c51b49aee47}{
 \index{\-Current state of system@{\-Current state of system}!get\-Value@{get\-Value}}
@@ -89,7 +89,11 @@
 
 \-Get the value for a given symbol, use \hyperlink{group__state_gab7164e3cb8db5f8fd8c066682ce8c62e}{get\-Available\-Symbols()} for a list of symbols. 
 
-\-Example\-: status = get\-Value (\char`\"{}\-S1\char`\"{}, \&value)
+\-Example\-: 
+\begin{DoxyCode}
+ status = getValue ("S1", &value); 
+\end{DoxyCode}
+
 
 
 \begin{DoxyParams}{\-Parameters}
@@ -115,7 +119,11 @@
 
 \-Set the value for a given symbol, use \hyperlink{group__state_gab7164e3cb8db5f8fd8c066682ce8c62e}{get\-Available\-Symbols()} for a list of symbols. 
 
-\-Example\-: status = set\-Value (\char`\"{}\-S1\char`\"{}, 0.\-5)
+\-Example\-: 
+\begin{DoxyCode}
+ status = setValue ("S1", 0.5); 
+\end{DoxyCode}
+
 
 
 \begin{DoxyParams}{\-Parameters}

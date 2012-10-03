@@ -83,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parameters.html#gaf4be0a5e72db408248569a1d3e28c1f0">getGlobalParameterValues</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve in a vector the values for all the lgobal parameter values.  <a href="#gaf4be0a5e72db408248569a1d3e28c1f0"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the values for all the lgobal parameter values in a vector.  <a href="#gaf4be0a5e72db408248569a1d3e28c1f0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__parameters.html#ga65d9546856e5526fc403539903039f8e">setGlobalParameterByIndex</a> (const int &amp;index, const double &amp;value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the value for a particular global parameter.  <a href="#ga65d9546856e5526fc403539903039f8e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ga2f33a70dfd6c68fb585cf5d1a9c1339c"></a><!-- doxytag: member="parameters::getNumberOfGlobalParameters" ref="ga2f33a70dfd6c68fb585cf5d1a9c1339c" args="()" -->
@@ -111,7 +111,7 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 <div class="memdoc">
 
 <p>Obtain the list of global parameter Ids. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStringArrayHandle struct </dd></dl>
 
 </div>
 </div>
@@ -129,9 +129,10 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 </div>
 <div class="memdoc">
 
-<p>Retrieve in a vector the values for all the lgobal parameter values. </p>
-<p>Example: RRVectorHandle values = getGlobalParameterValues ();</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns the vector of global parameter values or null if an error occured </dd></dl>
+<p>Retrieve the values for all the lgobal parameter values in a vector. </p>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> values = <a class="code" href="group__parameters.html#gaf4be0a5e72db408248569a1d3e28c1f0" title="Retrieve the values for all the lgobal parameter values in a vector.">getGlobalParameterValues</a> (); 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Returns the vector of global parameter values or null if an error occured </dd></dl>
 
 </div>
 </div>
@@ -163,7 +164,7 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 <p>Set the value for a particular global parameter. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>The index to the global parameter </td></tr>
+    <tr><td class="paramname">index</td><td>The index to the global parameter (corresponds to position in <a class="el" href="group__parameters.html#ga142050a8f4ad5c9a45455102848b5352" title="Obtain the list of global parameter Ids.">getGlobalParameterIds()</a>) </td></tr>
     <tr><td class="paramname">value</td><td>The value of the parameter to set </td></tr>
   </table>
   </dd>
@@ -190,7 +191,7 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 3 2012 10:56:00 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

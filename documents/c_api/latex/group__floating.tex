@@ -80,7 +80,11 @@ rr\-Call\-Conv \hyperlink{group__floating_ga0db8fe5f89985f27ea4ddb3c595b16fd}{ge
 
 \-Retrieve in a vector the concentrations for all the floating species. 
 
-\-Example\-: \-R\-R\-Vector\-Handle values = get\-Floating\-Species\-Concentrations ();
+\-Example\-: 
+\begin{DoxyCode}
+ RRVectorHandle values = getFloatingSpeciesConcentrations (); 
+\end{DoxyCode}
+
 
 \begin{DoxyReturn}{\-Returns}
 \-Returns the vector of flaoting species concentrations or null if an error occured 
@@ -99,7 +103,7 @@ rr\-Call\-Conv \hyperlink{group__floating_ga0db8fe5f89985f27ea4ddb3c595b16fd}{ge
 \-Obtain the list of floating species \-Id. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-String\-Array\-Handle struct 
 \end{DoxyReturn}
 \hypertarget{group__floating_gaf4a5a4d9b1ecf60d4b98189b4bcf2543}{
 \index{\-Floating species group@{\-Floating species group}!set\-Floating\-Species\-By\-Index@{set\-Floating\-Species\-By\-Index}}
@@ -137,6 +141,18 @@ rr\-Call\-Conv \hyperlink{group__floating_ga0db8fe5f89985f27ea4ddb3c595b16fd}{ge
 
 
 \-Set the floating species concentration to the vector vec. 
+
+\-Example\-:
+
+
+\begin{DoxyCode}
+ myVector = createVector (getNumberOfFloatingSpecies());
+ setVectorElement (myVector, 0, 1.2);
+ setVectorElement (myVector, 1, 5.7);
+ setVectorElement (myVector, 2, 3.4);
+ setFloatingSpeciesConcentrations(myVector);
+\end{DoxyCode}
+
 
 
 \begin{DoxyParams}{\-Parameters}

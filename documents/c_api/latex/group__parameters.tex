@@ -12,7 +12,7 @@
 \item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv \hyperlink{group__parameters_gaf4be0a5e72db408248569a1d3e28c1f0}{get\-Global\-Parameter\-Values} ()
-\begin{DoxyCompactList}\small\item\em \-Retrieve in a vector the values for all the lgobal parameter values. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Retrieve the values for all the lgobal parameter values in a vector. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__parameters_ga65d9546856e5526fc403539903039f8e}{set\-Global\-Parameter\-By\-Index} (const int \&index, const double \&value)
 \begin{DoxyCompactList}\small\item\em \-Set the value for a particular global parameter. \end{DoxyCompactList}\item 
 \hypertarget{group__parameters_ga2f33a70dfd6c68fb585cf5d1a9c1339c}{
@@ -43,7 +43,7 @@ rr\-Call\-Conv \hyperlink{group__parameters_gaf4be0a5e72db408248569a1d3e28c1f0}{
 \-Obtain the list of global parameter \-Ids. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-String\-Array\-Handle struct 
 \end{DoxyReturn}
 \hypertarget{group__parameters_gaf4be0a5e72db408248569a1d3e28c1f0}{
 \index{\-Parameter group@{\-Parameter group}!get\-Global\-Parameter\-Values@{get\-Global\-Parameter\-Values}}
@@ -56,9 +56,13 @@ rr\-Call\-Conv \hyperlink{group__parameters_gaf4be0a5e72db408248569a1d3e28c1f0}{
 \label{group__parameters_gaf4be0a5e72db408248569a1d3e28c1f0}
 
 
-\-Retrieve in a vector the values for all the lgobal parameter values. 
+\-Retrieve the values for all the lgobal parameter values in a vector. 
 
-\-Example\-: \-R\-R\-Vector\-Handle values = get\-Global\-Parameter\-Values ();
+\-Example\-: 
+\begin{DoxyCode}
+ RRVectorHandle values = getGlobalParameterValues (); 
+\end{DoxyCode}
+
 
 \begin{DoxyReturn}{\-Returns}
 \-Returns the vector of global parameter values or null if an error occured 
@@ -79,7 +83,7 @@ rr\-Call\-Conv \hyperlink{group__parameters_gaf4be0a5e72db408248569a1d3e28c1f0}{
 
 
 \begin{DoxyParams}{\-Parameters}
-{\em index} & \-The index to the global parameter \\
+{\em index} & \-The index to the global parameter (corresponds to position in \hyperlink{group__parameters_ga142050a8f4ad5c9a45455102848b5352}{get\-Global\-Parameter\-Ids()}) \\
 \hline
 {\em value} & \-The value of the parameter to set \\
 \hline

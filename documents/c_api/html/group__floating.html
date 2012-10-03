@@ -158,8 +158,9 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 <div class="memdoc">
 
 <p>Retrieve in a vector the concentrations for all the floating species. </p>
-<p>Example: RRVectorHandle values = getFloatingSpeciesConcentrations ();</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns the vector of flaoting species concentrations or null if an error occured </dd></dl>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="struct_r_r_vector.html" title="Structure for a simple vector of doubles.">RRVectorHandle</a> values = <a class="code" href="group__floating.html#ga0db8fe5f89985f27ea4ddb3c595b16fd" title="Retrieve in a vector the concentrations for all the floating species.">getFloatingSpeciesConcentrations</a> (); 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Returns the vector of flaoting species concentrations or null if an error occured </dd></dl>
 
 </div>
 </div>
@@ -178,7 +179,7 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 <div class="memdoc">
 
 <p>Obtain the list of floating species Id. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStringArrayHandle struct </dd></dl>
 
 </div>
 </div>
@@ -235,7 +236,13 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 <div class="memdoc">
 
 <p>Set the floating species concentration to the vector vec. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
+<p>Example:</p>
+<div class="fragment"><pre class="fragment"> myVector = <a class="code" href="group__helper_routines.html#gac5fce83bedb9404ebb80895fa740a9d2" title="Create a new vector with a given size.">createVector</a> (<a class="code" href="group__floating.html#ga9a96b81c58073caff01ea2c9e0f5e119" title="Returns the number of floating species in the model.">getNumberOfFloatingSpecies</a>());
+ <a class="code" href="group__helper_routines.html#ga77eaf0d0f88175ce4e2e8ca57ff9d859" title="Set a particular element in a vector.">setVectorElement</a> (myVector, 0, 1.2);
+ <a class="code" href="group__helper_routines.html#ga77eaf0d0f88175ce4e2e8ca57ff9d859" title="Set a particular element in a vector.">setVectorElement</a> (myVector, 1, 5.7);
+ <a class="code" href="group__helper_routines.html#ga77eaf0d0f88175ce4e2e8ca57ff9d859" title="Set a particular element in a vector.">setVectorElement</a> (myVector, 2, 3.4);
+ <a class="code" href="group__floating.html#ga669901c6de958af640b9ac80429e616e" title="Set the floating species concentration to the vector vec.">setFloatingSpeciesConcentrations</a>(myVector);
+</pre></div><dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">vec</td><td>A vector of floating species concentrations </td></tr>
   </table>
@@ -263,7 +270,7 @@ C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 3 2012 10:56:00 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

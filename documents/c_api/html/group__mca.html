@@ -112,13 +112,13 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#gad63647a85b299d463b1e4cd5671d0881">getScaledFluxControlCoefficientMatrix</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the matrix of scaled flux control coefficients for the current model.  <a href="#gad63647a85b299d463b1e4cd5671d0881"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga6655b7aebdc9e6fad4e7a54e3de9195d">getuCC</a> (const char *variable, const char *parameter, double &amp;value)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single unscaled control coefficient.  <a href="#ga6655b7aebdc9e6fad4e7a54e3de9195d"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a single unscaled control coefficient.  <a href="#ga6655b7aebdc9e6fad4e7a54e3de9195d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga49c703842a069c37fa472f2740dd514b">getCC</a> (const char *variable, const char *parameter, double &amp;value)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single control coefficient.  <a href="#ga49c703842a069c37fa472f2740dd514b"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a single control coefficient.  <a href="#ga49c703842a069c37fa472f2740dd514b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#ga761a98e3635d75c8505f516a0b2384b1">getEE</a> (const char *name, const char *species, double &amp;value)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single elasticity coefficient.  <a href="#ga761a98e3635d75c8505f516a0b2384b1"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a single elasticity coefficient.  <a href="#ga761a98e3635d75c8505f516a0b2384b1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__mca.html#gadf71d426da852cdf931022fa56a3acb0">getuEE</a> (const char *name, const char *species, double &amp;value)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retireve a single unscaled elasticity coefficient.  <a href="#gadf71d426da852cdf931022fa56a3acb0"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a single unscaled elasticity coefficient.  <a href="#gadf71d426da852cdf931022fa56a3acb0"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <p>Calculate control coefficients and sensitivities. </p>
@@ -154,7 +154,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Retireve a single control coefficient. </p>
+<p>Retrieve a single control coefficient. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">variable</td><td>This is the dependent variable of the coefficient, for example a flux or species concentration </td></tr>
@@ -182,7 +182,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Obtain the list of concentration coefficient Ids. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a list of Ids </dd></dl>
 
 </div>
 </div>
@@ -217,7 +217,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Retireve a single elasticity coefficient. </p>
+<p>Retrieve a single elasticity coefficient. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>This is the reaction variable for the elasticity </td></tr>
@@ -245,7 +245,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Obtain the list of elasticity coefficient Ids. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a list </dd></dl>
 
 </div>
 </div>
@@ -264,7 +264,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Obtain the list of flux control coefficient Ids. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a list of Ids </dd></dl>
 
 </div>
 </div>
@@ -283,7 +283,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retrieve the matrix of scaled concentration control coefficients for the current model. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of scaled concentration control coefficients The first column will contain the real values and the second column the imaginary values </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of scaled concentration control coefficients </dd></dl>
 
 </div>
 </div>
@@ -302,7 +302,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retrieve the scaled elasticity matrix for the current model. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of scaled elasticities. TO DO: The first column will contain the real values and the second column the imaginary values </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of scaled elasticities. </dd></dl>
 
 </div>
 </div>
@@ -340,13 +340,13 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <p>Retrieve the scaled elasticity matrix for the current model. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">reactionId</td><td>The reaction Id for computing the elasticity </td></tr>
-    <tr><td class="paramname">speciesId</td><td>The floating species to compute the elasticity for </td></tr>
-    <tr><td class="paramname">value</td><td>The return value for the elasticity </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">reactionId</td><td>The reaction Id for computing the elasticity </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">speciesId</td><td>The floating species to compute the elasticity for </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">value</td><td>The return value for the elasticity </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a particular scaled elasticity </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns false if it fails </dd></dl>
 
 </div>
 </div>
@@ -365,7 +365,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retrieve the matrix of scaled flux control coefficients for the current model. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of scaled flux control coefficients The first column will contain the real values and the second column the imaginary values </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of scaled flux control coefficients </dd></dl>
 
 </div>
 </div>
@@ -400,7 +400,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Retireve a single unscaled control coefficient. </p>
+<p>Retrieve a single unscaled control coefficient. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">variable</td><td>This is the dependent variable of the coefficient, for example a flux or species concentration </td></tr>
@@ -444,7 +444,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Retireve a single unscaled elasticity coefficient. </p>
+<p>Retrieve a single unscaled elasticity coefficient. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>This is the reaction variable for the unscaled elasticity </td></tr>
@@ -472,7 +472,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Obtain the list of unscaled concentration control coefficient Ids. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a list of Ids </dd></dl>
 
 </div>
 </div>
@@ -510,7 +510,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retrieve the unscaled elasticity matrix for the current model. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns nil if it fails, otherwise returns a matrix of unscaled elasticities The first column will contain the real values and the second column the imaginary values </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns nil if it fails, otherwise returns a matrix of unscaled elasticities </dd></dl>
 
 </div>
 </div>
@@ -529,7 +529,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Obtain the list of unscaled flux control coefficient Ids. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a list of Ids </dd></dl>
 
 </div>
 </div>
@@ -548,7 +548,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Retrieve the matrix of unscaled flux control coefficients for the current model. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of unscaled flux control coefficients The first column will contain the real values and the second column the imaginary values </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise returns a matrix of unscaled flux control coefficients </dd></dl>
 
 </div>
 </div>
@@ -570,7 +570,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 3 2012 10:56:00 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

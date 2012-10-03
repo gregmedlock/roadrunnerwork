@@ -84,10 +84,10 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC int rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#gae25399f84ff2d1fda619358a1af9a1b5">getNumberOfReactions</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the number of reactions in the loaded model.  <a href="#gae25399f84ff2d1fda619358a1af9a1b5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC bool rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#gaa2ec2c989a20e15b0fb5cb45b3af2837">getReactionRate</a> (const int &amp;index, double &amp;rate)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a give reaction as indicated by the index parameter.  <a href="#gaa2ec2c989a20e15b0fb5cb45b3af2837"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a give reaction rate as indicated by the index parameter.  <a href="#gaa2ec2c989a20e15b0fb5cb45b3af2837"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#ga86d544bcf3eeaa4698a60123a3da69aa">getReactionRates</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a vector of current reaction rates.  <a href="#ga86d544bcf3eeaa4698a60123a3da69aa"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a vector of reaction rates as determined by the current state of the model.  <a href="#ga86d544bcf3eeaa4698a60123a3da69aa"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">C_DECL_SPEC <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> <br class="typebreak"/>
 rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#gaa03d9414ddeb177a76365dd5b2d0042e">getReactionRatesEx</a> (const <a class="el" href="rr__c__types_8h.html#aea46a16752b0ae2cd95c009030ee630e">RRVectorHandle</a> vec)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve a vector of reaction rates given a vector of species concentrations.  <a href="#gaa03d9414ddeb177a76365dd5b2d0042e"></a><br/></td></tr>
@@ -116,8 +116,9 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Obtain the number of reactions in the loaded model. </p>
-<p>Example: number = getNumberOfReactions ();</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions </dd></dl>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> number = <a class="code" href="group__reaction.html#gae25399f84ff2d1fda619358a1af9a1b5" title="Obtain the number of reactions in the loaded model.">getNumberOfReactions</a> (); 
+</pre></div><dl class="return"><dt><b>Returns:</b></dt><dd>Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions </dd></dl>
 
 </div>
 </div>
@@ -136,7 +137,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Obtain the list of rate of change Ids. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStringArrayHandle struct </dd></dl>
 
 </div>
 </div>
@@ -155,7 +156,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Obtain the list of reaction Ids. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStingListHandle struct </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, if succesful it returns a pointer to a RRStringArrayHandle struct </dd></dl>
 
 </div>
 </div>
@@ -184,10 +185,10 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Retrieve a give reaction as indicated by the index parameter. </p>
+<p>Retrieve a give reaction rate as indicated by the index parameter. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">index</td><td>- The index is used to specif which reaction rate to retrieve </td></tr>
+    <tr><td class="paramname">index</td><td>- The index is used to specify which reaction rate to retrieve </td></tr>
     <tr><td class="paramname">rate</td><td>- The reaction rate is returned in the rate argument </td></tr>
   </table>
   </dd>
@@ -210,7 +211,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 </div>
 <div class="memdoc">
 
-<p>Retrieve a vector of current reaction rates. </p>
+<p>Retrieve a vector of reaction rates as determined by the current state of the model. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns null if it fails, otherwise it returns a vector of reaction rates </dd></dl>
 
 </div>
@@ -259,7 +260,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 3 2012 10:56:00 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

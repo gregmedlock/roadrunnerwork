@@ -13,10 +13,10 @@
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C int rr\-Call\-Conv \hyperlink{group__reaction_gae25399f84ff2d1fda619358a1af9a1b5}{get\-Number\-Of\-Reactions} ()
 \begin{DoxyCompactList}\small\item\em \-Obtain the number of reactions in the loaded model. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__reaction_gaa2ec2c989a20e15b0fb5cb45b3af2837}{get\-Reaction\-Rate} (const int \&index, double \&rate)
-\begin{DoxyCompactList}\small\item\em \-Retrieve a give reaction as indicated by the index parameter. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Retrieve a give reaction rate as indicated by the index parameter. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv \hyperlink{group__reaction_ga86d544bcf3eeaa4698a60123a3da69aa}{get\-Reaction\-Rates} ()
-\begin{DoxyCompactList}\small\item\em \-Retrieve a vector of current reaction rates. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Retrieve a vector of reaction rates as determined by the current state of the model. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv \hyperlink{group__reaction_gaa03d9414ddeb177a76365dd5b2d0042e}{get\-Reaction\-Rates\-Ex} (const \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} vec)
 \begin{DoxyCompactList}\small\item\em \-Retrieve a vector of reaction rates given a vector of species concentrations. \end{DoxyCompactList}\item 
@@ -45,7 +45,11 @@ rr\-Call\-Conv \hyperlink{group__reaction_gaa03d9414ddeb177a76365dd5b2d0042e}{ge
 
 \-Obtain the number of reactions in the loaded model. 
 
-\-Example\-: number = get\-Number\-Of\-Reactions ();
+\-Example\-: 
+\begin{DoxyCode}
+ number = getNumberOfReactions (); 
+\end{DoxyCode}
+
 
 \begin{DoxyReturn}{\-Returns}
 \-Returns -\/1 if it fails, if succesful it return 0 or more, indicating the number of reactions 
@@ -64,7 +68,7 @@ rr\-Call\-Conv \hyperlink{group__reaction_gaa03d9414ddeb177a76365dd5b2d0042e}{ge
 \-Obtain the list of rate of change \-Ids. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-String\-Array\-Handle struct 
 \end{DoxyReturn}
 \hypertarget{group__reaction_gaab689f6d9b1500a184861b019c846815}{
 \index{\-Reaction group@{\-Reaction group}!get\-Reaction\-Ids@{get\-Reaction\-Ids}}
@@ -80,7 +84,7 @@ rr\-Call\-Conv \hyperlink{group__reaction_gaa03d9414ddeb177a76365dd5b2d0042e}{ge
 \-Obtain the list of reaction \-Ids. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-String\-Array\-Handle struct 
 \end{DoxyReturn}
 \hypertarget{group__reaction_gaa2ec2c989a20e15b0fb5cb45b3af2837}{
 \index{\-Reaction group@{\-Reaction group}!get\-Reaction\-Rate@{get\-Reaction\-Rate}}
@@ -94,11 +98,11 @@ rr\-Call\-Conv \hyperlink{group__reaction_gaa03d9414ddeb177a76365dd5b2d0042e}{ge
 \label{group__reaction_gaa2ec2c989a20e15b0fb5cb45b3af2837}
 
 
-\-Retrieve a give reaction as indicated by the index parameter. 
+\-Retrieve a give reaction rate as indicated by the index parameter. 
 
 
 \begin{DoxyParams}{\-Parameters}
-{\em index} & -\/ \-The index is used to specif which reaction rate to retrieve \\
+{\em index} & -\/ \-The index is used to specify which reaction rate to retrieve \\
 \hline
 {\em rate} & -\/ \-The reaction rate is returned in the rate argument \\
 \hline
@@ -117,7 +121,7 @@ rr\-Call\-Conv \hyperlink{group__reaction_gaa03d9414ddeb177a76365dd5b2d0042e}{ge
 \label{group__reaction_ga86d544bcf3eeaa4698a60123a3da69aa}
 
 
-\-Retrieve a vector of current reaction rates. 
+\-Retrieve a vector of reaction rates as determined by the current state of the model. 
 
 \begin{DoxyReturn}{\-Returns}
 \-Returns null if it fails, otherwise it returns a vector of reaction rates 

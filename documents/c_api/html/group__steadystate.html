@@ -109,8 +109,8 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>A convenient method for returning a vector of the steady state species concentrations. </p>
-<p>Example: RRVectorHandle values = computeSteadyStateValues ();</p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns the vector of steady state values or null if an error occured </dd></dl>
+<p>Example: code RRVectorHandle values = computeSteadyStateValues (); </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns the vector of steady state values or null if an error occured. The order of species in the vector is indicated by the order of species Ids in a call to <a class="el" href="group__floating.html#gad138c0072b188551324147fb17635b48" title="Obtain the list of floating species Id.">getFloatingSpeciesIds()</a> </dd></dl>
 
 </div>
 </div>
@@ -149,9 +149,16 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Set the selection list of the steady state analysis. </p>
-<dl><dt><b>Parameters:</b></dt><dd>
+<p>Use <a class="el" href="group__state.html#gab7164e3cb8db5f8fd8c066682ce8c62e" title="Obtain the list of all available symbols.">getAvailableSymbols()</a> to retrieve the list of all possible symbols.</p>
+<p>Example:</p>
+<div class="fragment"><pre class="fragment"> <a class="code" href="group__steadystate.html#ga397a988c31c2010d9f2752080afa8dad" title="Set the selection list of the steady state analysis.">setSteadyStateSelectionList</a> (<span class="stringliteral">&quot;S1, J1, J2&quot;</span>)
+ 
+ or
+ 
+ <a class="code" href="group__steadystate.html#ga397a988c31c2010d9f2752080afa8dad" title="Set the selection list of the steady state analysis.">setSteadyStateSelectionList</a> (&quot;S1 J1 J2&quot;)
+</pre></div><dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">list</td><td>The string argument should be a space separated list of symbols in the selection list </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">list</td><td>The string argument should be a space separated list of symbols.</td></tr>
   </table>
   </dd>
 </dl>
@@ -175,10 +182,11 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 <div class="memdoc">
 
 <p>Compute the steady state of the current model. </p>
-<p>Example: status = steadyState (&amp;closenessToSteadyState);</p>
-<dl><dt><b>Parameters:</b></dt><dd>
+<p>Example: </p>
+<div class="fragment"><pre class="fragment"> status = <a class="code" href="group__steadystate.html#ga0edd5f5a66884e0767d855d639cb45c0" title="Compute the steady state of the current model.">steadyState</a> (&amp;closenessToSteadyState); 
+</pre></div><dl><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>This value is set during the call and indicates how close the solution is to the steady state. The smaller the value the better. </td></tr>
+    <tr><td class="paramname">value</td><td>This value is set during the call and indicates how close the solution is to the steady state. The smaller the value the better. Values less than 1E-6 usually indicate a steady state has been found. If necessary call the method a second time to improve the solution. </td></tr>
   </table>
   </dd>
 </dl>
@@ -204,7 +212,7 @@ rrCallConv&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 18 2012 17:56:02 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Oct 3 2012 10:56:00 for cRoadRunner by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.5.1
 </small></address>

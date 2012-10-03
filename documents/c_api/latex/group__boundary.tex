@@ -12,7 +12,7 @@
 \item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C \hyperlink{rr__c__types_8h_aea46a16752b0ae2cd95c009030ee630e}{\-R\-R\-Vector\-Handle} \*
 rr\-Call\-Conv \hyperlink{group__boundary_gaae9b6b75211923bcf6f7196fe707c631}{get\-Boundary\-Species\-Concentrations} ()
-\begin{DoxyCompactList}\small\item\em \-Retrieve in a vector the concentrations for all the boundary species. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em \-Retrieve the concentrations for all the boundary species in a vector. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__boundary_gabb6764fa48d0b3f2ca3b38e391479347}{set\-Boundary\-Species\-By\-Index} (const int \&index, const double \&value)
 \begin{DoxyCompactList}\small\item\em \-Set the concentration for a particular boundary species. \end{DoxyCompactList}\item 
 \-C\-\_\-\-D\-E\-C\-L\-\_\-\-S\-P\-E\-C bool rr\-Call\-Conv \hyperlink{group__boundary_gaad04359bcaa998547d71b4cdd337796e}{get\-Boundary\-Species\-By\-Index} (const int \&index, double \&value)
@@ -68,9 +68,13 @@ rr\-Call\-Conv \hyperlink{group__boundary_gaae9b6b75211923bcf6f7196fe707c631}{ge
 \label{group__boundary_gaae9b6b75211923bcf6f7196fe707c631}
 
 
-\-Retrieve in a vector the concentrations for all the boundary species. 
+\-Retrieve the concentrations for all the boundary species in a vector. 
 
-\-Example\-: \-R\-R\-Vector\-Handle values = get\-Boundary\-Species\-Concentrations ();
+\-Example\-: 
+\begin{DoxyCode}
+ RRVectorHandle values = getBoundarySpeciesConcentrations (); 
+\end{DoxyCode}
+
 
 \begin{DoxyReturn}{\-Returns}
 \-Returns the vector of boundary species concentrations or null if an error occured 
@@ -89,7 +93,7 @@ rr\-Call\-Conv \hyperlink{group__boundary_gaae9b6b75211923bcf6f7196fe707c631}{ge
 \-Obtain the list of boundary species \-Ids. 
 
 \begin{DoxyReturn}{\-Returns}
-\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-Sting\-List\-Handle struct 
+\-Returns null if it fails, if succesful it returns a pointer to a \-R\-R\-String\-Array\-Handle struct 
 \end{DoxyReturn}
 \hypertarget{group__boundary_gabb6764fa48d0b3f2ca3b38e391479347}{
 \index{\-Boundary species group@{\-Boundary species group}!set\-Boundary\-Species\-By\-Index@{set\-Boundary\-Species\-By\-Index}}
@@ -127,6 +131,18 @@ rr\-Call\-Conv \hyperlink{group__boundary_gaae9b6b75211923bcf6f7196fe707c631}{ge
 
 
 \-Set the boundary species concentration to the vector vec. 
+
+\-Example\-:
+
+
+\begin{DoxyCode}
+ myVector = createVector (getNumberOfBoundarySpecies());
+ setVectorElement (myVector, 0, 1.2);
+ setVectorElement (myVector, 1, 5.7);
+ setVectorElement (myVector, 2, 3.4);
+ setBoundarySpeciesConcentrations(myVector);
+\end{DoxyCode}
+
 
 
 \begin{DoxyParams}{\-Parameters}
