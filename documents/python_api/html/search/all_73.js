@@ -16,6 +16,7 @@ var searchData=
   ['settimeend',['setTimeEnd',['../group__simulation.html#ga48ad53c573f7f91006b57506d5261ee0',1,'rrPython']]],
   ['settimestart',['setTimeStart',['../group__simulation.html#ga2be81e1139f2d6abf213c39499d1bb6f',1,'rrPython']]],
   ['setvalue',['setValue',['../group__state.html#gab21a86afee087dcb3f1c2e6c9875c610',1,'rrPython']]],
+  ['setvectorelement',['setVectorElement',['../group__helper_routines.html#ga0422be894219f8291fd7fc623374eb25',1,'rrPython']]],
   ['simulate',['simulate',['../group__simulation.html#ga70520048b3fd0bc99b4340ac089c37ff',1,'rrPython']]],
   ['simulateex',['simulateEx',['../group__simulation.html#gad8c811bef74760cc196c4e6a00d4248f',1,'rrPython']]],
   ['steadystate',['steadyState',['../group__steadystate.html#gad10e14f9e093955f6b7b87855a67c14e',1,'rrPython.steadyState()'],['../group__steadystate.html',1,'(Global Namespace)']]],
