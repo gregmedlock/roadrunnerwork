@@ -56,6 +56,12 @@
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 
+//We only need to give lthe linker the folder where libs are
+//using the pragma comment. Works for MSVC and codegear
+#if defined(__CODEGEARC__)
+#pragma comment(lib, "roadrunner.lib")
+#endif
+
 using namespace std;
 using namespace rr;
 using namespace rr_c_api;
@@ -1493,7 +1499,7 @@ RRVectorHandle rrCallConv getGlobalParameterValues()
     }
 }
 
-RRListHandle rrCallConv getAvailableSymbols()
+RRListHandle rrCallConv getAvailableTimeCourseSymbols()
 {
 	try
     {
@@ -1503,7 +1509,7 @@ RRListHandle rrCallConv getAvailableSymbols()
             return NULL;
         }
 
-        ArrayList slSymbols = gRRHandle->getAvailableSymbols();
+        ArrayList slSymbols = gRRHandle->getAvailableTimeCourseSymbols();
         //cout<<"Got "<<slSymbols;
 		return createList(slSymbols);
     }

@@ -230,3 +230,9 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
         exit(0);
     }
 }
+
+#if defined(__CODEGEARC__)
+#pragma comment(lib, "roadrunner.lib")
+#pragma comment(lib, "rr_c_api.lib")
+#endif
+

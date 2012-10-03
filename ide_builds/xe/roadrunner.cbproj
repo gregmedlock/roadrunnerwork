@@ -38,8 +38,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\ThirdParty\pugi\src\;..\..\source\nleq\;..\..\source\;..\..\source\libstruct\;..\..\source\mtrand\;$(RR_DEBUG_INSTALL)\include;$(RR_ROOT)\trunk\ThirdParty\clapack\3.2.1\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>R:\builds\xe\ThirdParty-debug\lib\;R:\installs\xe\debug\lib\;R:\installs\xe\full-debug\lib\;R:\installs\xe\full\lib\;..\..\ThirdParty\pugi\src\;R:\builds\xe\ThirdParty\lib\;R:\builds\xe\clapack\F2CLIBS\libf2c\;R:\builds\xe\clapack\SRC\;..\..\..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\nleq\;C:\builds\xe\clapack\SRC\;C:\builds\xe\clapack\F2CLIBS\libf2c\;R:\installs\xe\lib\;C:\builds\xe\clapack\BLAS\SRC\;C:\rrInstal..\lib\;C:\rrBuil..\clapack\SRC\;C:\rrBuil..\clapack\F2CLIBS\libf2c\;C:\rrBuil..\clapack\BLAS\SRC\;..\..\buil..\clapack\F2CLIBS\libf2c\;..\..\buil..\clapack\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\buil..\clapack\BLAS\SRC\;..\..\source\libstruct\;..\..\source\mtrand\;..\..\source\;..\..\ThirdParty\libsbml_xe\dependencies\lib\;..\..\source\;..\..\instal..\lib\;..\..\source\;..\..\source\;..\..\source\Util\;..\..\source\Logger\;..\..\source\libstruct\;..\..\source\Util\mtrand\;..\..\source\;..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\source\;..\..\source\mtrand\;$(RR_DEBUG_INSTALL)\include;$(RR_ROOT)\trunk\ThirdParty\clapack\3.2.1\include;..\..\ThirdParty\pugi\src\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>R:\builds\xe\debug\ThirdParty\lib\;R:\installs\xe\debug\lib\;..\..\ThirdParty\pugi\src\;..\..\source\mtrand\;..\..\source\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<Multithreaded>true</Multithreaded>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
@@ -82,46 +82,6 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\blas.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>65</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\lapack.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>66</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\libf2c.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>64</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\pugi-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>67</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\libsbml.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>58</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\nleq-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>59</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\pugi-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>60</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\rr-libstruct-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>61</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>62</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\sundials_nvecserial.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>63</BuildOrder>
-			</LibFiles>
 			<ResFiles Include="roadrunner.res">
 				<BuildOrder>70</BuildOrder>
 			</ResFiles>
@@ -299,6 +259,10 @@
 			<CppCompile Include="..\..\source\rrSimulationSettings.cpp">
 				<DependentOn>..\..\source\rrSimulationSettings.h</DependentOn>
 				<BuildOrder>43</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="..\..\source\rrStopWatch.cpp">
+				<DependentOn>..\..\source\rrStopWatch.h</DependentOn>
+				<BuildOrder>60</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="..\..\source\rrStreamWriter.cpp">
 				<DependentOn>..\..\source\rrStreamWriter.h</DependentOn>

@@ -83,6 +83,7 @@
 			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<ILINK_LibraryPath>R:\builds\xe\debug\ThirdParty\lib\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<FinalOutputDir>$(RR_DEBUG_INSTALL)\bin\</FinalOutputDir>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -90,50 +91,6 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="R:\builds\xe\ThirdParty\lib\blas.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>10</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\builds\xe\ThirdParty\lib\lapack.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>9</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\builds\xe\ThirdParty\lib\libf2c.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>11</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\libxml2_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>10</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\nleq-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>12</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\rr-libstruct-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>11</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\full-debug\lib\libsbml-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>9</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\full-debug\lib\pugi-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>11</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\full-debug\lib\roadrunner-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>6</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\full-debug\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>7</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\full-debug\lib\sundials_nvecserial.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>8</BuildOrder>
-			</LibFiles>
 			<CppCompile Include="..\..\apps\rr_test_suite_tester\Args.cpp">
 				<BuildOrder>11</BuildOrder>
 			</CppCompile>

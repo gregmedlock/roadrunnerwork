@@ -165,7 +165,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		void                            setCapabilities(const string& capsStr);
 		bool                            setValue(const string& sId, const double& dValue);
 		double                          getValue(const string& sId);
-		ArrayList                       getAvailableSymbols();
+		ArrayList                       getAvailableTimeCourseSymbols();
 		StringList                      getSelectionList();
 		void                            setSelectionList(const string& List);
 		void                            setSelectionList(const StringList& newSelectionList);
