@@ -5,7 +5,10 @@ PROJECT(RR_PYTHON_APPS)
 if(${MSVC})
 endif(${MSVC})
 
-set(apps 	
-        rr.py
-)
+install(    
+            FILES 
+            rr.py 
+            DESTINATION Python/Apps 	
+            COMPONENT Python
+       )
 
