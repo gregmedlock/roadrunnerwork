@@ -485,7 +485,7 @@ C_DECL_SPEC bool rrCallConv setNumPoints(const int& nrPoints);
 /*!
  \brief Set the selection list for output from simulate() or simulateEx()
 
- Use getAvailableSymbols() to retrieve the list of all possible symbols.
+ Use getAvailableTimeCourseSymbols() to retrieve the list of all possible symbols.
  
  Example: \code setSelectionList ("Time, S1, J1, J2"); \endcode
  
@@ -618,7 +618,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv computeSteadyStateValues();
 /*!
  \brief Set the selection list of the steady state analysis
 
- Use getAvailableSymbols() to retrieve the list of all possible symbols.
+ Use getAvailableTimeCourseSymbols() to retrieve the list of all possible symbols.
  
  Example: 
  
@@ -651,7 +651,7 @@ C_DECL_SPEC RRListHandle rrCallConv getSteadyStateSelectionList();
 // --------------------------------------------------------------------------------
 
 /*!
- \brief Get the value for a given symbol, use getAvailableSymbols() for a list of symbols
+ \brief Get the value for a given symbol, use getAvailableTimeCourseSymbols() for a list of symbols
 
  Example: \code status = getValue ("S1", &value); \endcode
 
@@ -664,7 +664,7 @@ C_DECL_SPEC bool rrCallConv getValue(const char* symbolId, double& value);
 
 
 /*!
- \brief Set the value for a given symbol, use getAvailableSymbols() for a list of symbols
+ \brief Set the value for a given symbol, use getAvailableTimeCourseSymbols() for a list of symbols
 
  Example: \code status = setValue ("S1", 0.5); \endcode
 
@@ -1161,7 +1161,7 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getEigenValueIds();
  \return Returns -1 if it fails, if succesful it returns a pointer to a RRListHandle struct
  \ingroup state
 */
-C_DECL_SPEC RRListHandle rrCallConv getAvailableSymbols();
+C_DECL_SPEC RRListHandle rrCallConv getAvailableTimeCourseSymbols();
 
 // --------------------------------------------------------------------------------
 // MCA methods

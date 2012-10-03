@@ -25,6 +25,20 @@
 using namespace std;
 using namespace ls;
 
+//We only need to give lthe linker the folder where libs are
+//using the pragma comment. Works for MSVC and codegear
+#if defined(__CODEGEARC__)
+#pragma comment(lib, "sundials_cvode.lib")
+#pragma comment(lib, "sundials_nvecserial.lib")
+#pragma comment(lib, "nleq-static.lib")
+#pragma comment(lib, "rr-libstruct-static.lib")
+#pragma comment(lib, "libsbml-static.lib")
+#pragma comment(lib, "libxml2_xe.lib")
+#pragma comment(lib, "blas.lib")
+#pragma comment(lib, "lapack.lib")
+#pragma comment(lib, "libf2c.lib")
+#endif
+
 namespace rr
 {
 
@@ -555,7 +569,7 @@ bool RoadRunner::Simulate()
 
 bool RoadRunner::PopulateResult()
 {
-    ArrayList  l = getAvailableSymbols();
+    ArrayList  l = getAvailableTimeCourseSymbols();
     StringList list = getSelectionList();
     mSimulationData.SetColumnNames(list);
     mSimulationData.SetData(mRawSimulationData);
@@ -5049,7 +5063,7 @@ double RoadRunner::getValue(const string& sId)
 //            "Returns symbols of the currently loaded model,
 //              that can be used for the selectionlist format array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }."
 //            )
-ArrayList RoadRunner::getAvailableSymbols()
+ArrayList RoadRunner::getAvailableTimeCourseSymbols()
 {
     ArrayList oResult;
 

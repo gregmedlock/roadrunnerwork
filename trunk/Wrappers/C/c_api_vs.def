@@ -17,7 +17,7 @@ EXPORTS
     freeText                                    = _freeText@4                         
     freeStringArray                             = _freeStringArray@4                       
     freeVector                                  = _freeVector@4                       
-	getAvailableSymbols                         = _getAvailableSymbols@0              
+	getAvailableTimeCourseSymbols               = _getAvailableTimeCourseSymbols@0              
     getBoundarySpeciesByIndex                   = _getBoundarySpeciesByIndex@8        
     getBoundarySpeciesIds                       = _getBoundarySpeciesIds@0          
     getBuildDate                                = _getBuildDate@0                     

@@ -30,11 +30,7 @@ RRMatrixHandle      createMatrix(const ls::DoubleMatrix* mat);
 
 //Lists and arrays
 RRStringArrayHandle createList(const rr::StringList& aList);
-//RRListHandle 		createList(const rr::RRArrayList<string>& aList);
-//RRListHandle        createList(const rr::ArrayList& arrList);
 RRListHandle 		createList(const rr::ArrayList& aList);
-
-
 }
-
+
 #endif

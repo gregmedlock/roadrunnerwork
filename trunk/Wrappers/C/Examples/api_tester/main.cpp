@@ -129,7 +129,7 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	RRListHandle sList = getAvailableSymbols();
+	RRListHandle sList = getAvailableTimeCourseSymbols();
     cout<<"Symbols: "<<listToString(sList);
 
     char* cFileName = getCSourceFileName();
@@ -314,7 +314,7 @@ int main(int argc, char* argv[])
     cout<<vectorToString(getFloatingSpeciesConcentrations());
     cout<<vectorToString(getGlobalParameterValues());
     cout<<"\n\n Symbols\n";
-    RRList* symHandle = getAvailableSymbols();
+    RRList* symHandle = getAvailableTimeCourseSymbols();
     cout<<listToString(symHandle);
     freeRRList(symHandle);
 

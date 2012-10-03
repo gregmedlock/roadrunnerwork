@@ -1,4 +1,4 @@
-	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
 			<ProjectGuid>{F02A4FDC-5DE6-4A6D-8997-98420C96BAF4}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
@@ -67,50 +67,6 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\blas.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>9</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\lapack.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>10</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\builds\xe\ThirdParty-debug\lib\libf2c.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>11</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\libsbml-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>9</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\nleq-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>10</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\pugi-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>11</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\roadrunner-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>12</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\rr-libstruct-static.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>12</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\sundials_cvode.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>12</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="R:\installs\xe\debug\lib\sundials_nvecserial.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>13</BuildOrder>
-			</LibFiles>
-			<LibFiles Include="..\..\ThirdParty\libsbml_xe\dependencies\lib\libxml2_xe.lib">
-				<IgnorePath>true</IgnorePath>
-				<BuildOrder>13</BuildOrder>
-			</LibFiles>
 			<CppCompile Include="..\..\Wrappers\C\rr_c_api.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
