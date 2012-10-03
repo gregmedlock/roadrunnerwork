@@ -71,6 +71,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Reaction group</div>  </div>
 </div><!--header-->
@@ -79,6 +81,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Get information about reaction rates.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga6fd3f8d93e2ae3b01038933d45a76162"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#ga6fd3f8d93e2ae3b01038933d45a76162">rrPython.getReactionIds</a></td></tr>
+<tr class="memdesc:ga6fd3f8d93e2ae3b01038933d45a76162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of reaction Ids.  <a href="#ga6fd3f8d93e2ae3b01038933d45a76162"></a><br/></td></tr>
+<tr class="separator:ga6fd3f8d93e2ae3b01038933d45a76162"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0986bf248c5d209d291ff642dae63a70"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#ga0986bf248c5d209d291ff642dae63a70">rrPython.getRateOfChangeIds</a></td></tr>
+<tr class="memdesc:ga0986bf248c5d209d291ff642dae63a70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a string containing the list of rate of change Ids.  <a href="#ga0986bf248c5d209d291ff642dae63a70"></a><br/></td></tr>
+<tr class="separator:ga0986bf248c5d209d291ff642dae63a70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1d3d23c37fe90fff0a56c992b6b2191a"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#ga1d3d23c37fe90fff0a56c992b6b2191a">rrPython.getNumberOfReactions</a></td></tr>
+<tr class="memdesc:ga1d3d23c37fe90fff0a56c992b6b2191a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obtain the number of reactions in the loaded model.  <a href="#ga1d3d23c37fe90fff0a56c992b6b2191a"></a><br/></td></tr>
+<tr class="separator:ga1d3d23c37fe90fff0a56c992b6b2191a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab9117bb6ef1ffce8b2791bbda7d3075b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__reaction.html#gab9117bb6ef1ffce8b2791bbda7d3075b">rrPython.getReactionRate</a></td></tr>
 <tr class="memdesc:gab9117bb6ef1ffce8b2791bbda7d3075b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the reaction rate by index.  <a href="#gab9117bb6ef1ffce8b2791bbda7d3075b"></a><br/></td></tr>
 <tr class="separator:gab9117bb6ef1ffce8b2791bbda7d3075b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -92,6 +105,61 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p>Get information about reaction rates. </p>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="ga1d3d23c37fe90fff0a56c992b6b2191a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def rrPython.getNumberOfReactions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obtain the number of reactions in the loaded model. </p>
+<p>Example: number = <a class="el" href="group__reaction.html#ga1d3d23c37fe90fff0a56c992b6b2191a" title="Obtain the number of reactions in the loaded model.">rrPython.getNumberOfReactions()</a></p>
+<dl class="section return"><dt>Returns</dt><dd>Returns -1 if it fails, returns 0 or more if it is successful (indicating the number of reactions) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga0986bf248c5d209d291ff642dae63a70"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def rrPython.getRateOfChangeIds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a string containing the list of rate of change Ids. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string containing the list of rate of change Ids </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ga6fd3f8d93e2ae3b01038933d45a76162"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def rrPython.getReactionIds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a list of reaction Ids. </p>
+<dl class="section return"><dt>Returns</dt><dd>Returns a string containing a list of reaction Ids </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="gab9117bb6ef1ffce8b2791bbda7d3075b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -157,7 +225,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 17 2012 20:03:41 for rrPython by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Oct 2 2012 20:11:55 for rrPython by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.2
 </small></address>
