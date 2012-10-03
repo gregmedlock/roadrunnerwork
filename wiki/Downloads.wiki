@@ -1,4 +1,4 @@
-#summary Download a !RoadRunner Release
+#summary Download a RoadRunner Release
 #labels Featured
 
 = Downloads =
@@ -10,15 +10,15 @@
 
 3) Python API: This distribution contains all you need if you are to use roadrunner in a Python environment.
 
-4) FULL: This distribution is containing all of the above.
+4) All: This distribution is containing all of the above.
 
 The "official" releases are being built using Visual Studio 2010, but other releases using other compilers are available too, e.g. !CodeGear XE and (later on) !MinGW
 
 ||*Description*||*Download Link*||Version||Build Date||
+||  !RoadRunner (All) Installer||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-vs2010.exe RoadRunner-vs2010.exe]||1.0||Oct. 3 2012||
 ||  C++        API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/rr_cxx_api-vs_2010.exe rr_cxx_api-vs_2010.exe]||1.0||Sept. 5 2012||
 ||  C          API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/rr_c_api-vs_2010.exe rr_c_api-vs_2010.exe]||1.0||Sept. 5 2012||
 ||  Python     API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/rr_python-vs_2010.exe rr_python-vs_2010.exe]||1.0||Sept. 5 2012||
-||  !RoadRunner FULL installer||[http://roadrunnerwork.googlecode.com/svn/releases/vs/rr_full-vs_2010.exe rr_full-vs_2010.exe]||1.0||Sept. 5 2012||
 
 ==!CodeGear XE Releases==
 ||*Description*||*Download Link*||

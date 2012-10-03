@@ -14,6 +14,16 @@ namespace rr
 ArrayList::ArrayList()
 {}
 
+ArrayList::ArrayList(const string& lbl, const StringList& stringList)
+{
+	Add(lbl, stringList);
+}
+
+ArrayList::ArrayList(const string& lbl, const ArrayList& arrayList)
+{
+	Add(lbl, arrayList);
+}
+
 ArrayList::~ArrayList()
 {
     if(mList.size())

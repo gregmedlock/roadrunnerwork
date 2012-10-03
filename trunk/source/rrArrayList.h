@@ -20,6 +20,8 @@ class RR_DECLSPEC ArrayList : public rrObject
     public:
                                             ArrayList();
                                             ArrayList(const ArrayList& cpyMe);
+                                            ArrayList(const string& lbl, const StringList& stringList);
+                                            ArrayList(const string& lbl, const ArrayList& stringList);
                                            ~ArrayList();
         unsigned int                        Count() const;
         void                                Clear();
@@ -28,8 +30,8 @@ class RR_DECLSPEC ArrayList : public rrObject
         void                                Add(const string& item);
         void                                Add(const ArrayList& item);
         void                                Add(const StringList& list);
-        void                                Add(const string& lbl, const StringList& lists);
-        void                                Add(const string& lbl, const ArrayList& lists);
+        void                                Add(const string& lbl, const StringList& list);
+        void                                Add(const string& lbl, const ArrayList& list);
 
 
         const ArrayListItemObject&          operator[](int pos) const;

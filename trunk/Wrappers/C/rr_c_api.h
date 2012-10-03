@@ -1163,6 +1163,14 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getEigenValueIds();
 */
 C_DECL_SPEC RRListHandle rrCallConv getAvailableTimeCourseSymbols();
 
+/*!
+ \brief Obtain the list of all available steady state symbols
+
+ \return Returns -1 if it fails, if succesful it returns a pointer to a RRListHandle struct
+ \ingroup state
+*/
+C_DECL_SPEC RRListHandle rrCallConv getAvailableSteadyStateSymbols();
+
 // --------------------------------------------------------------------------------
 // MCA methods
 // --------------------------------------------------------------------------------
