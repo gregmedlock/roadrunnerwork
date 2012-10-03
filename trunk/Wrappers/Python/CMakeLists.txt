@@ -19,15 +19,17 @@ add_subdirectory(Examples)
 #add_subdirectory(Testing)
 
 #=============== INSTALL =====================
-install( FILES ${C_DLL} 
+install( 
+         FILES ${C_DLL} 
          DESTINATION bin
          COMPONENT Python
         )
-install(   
-            FILES 
-            rrPython.py 
-            rr.py
-            DESTINATION Python  	
-            COMPONENT Python
+
+install(
+        FILES 
+        rrPython.py 
+        Readme.txt
+        DESTINATION Python  	
+        COMPONENT Python
        )
 

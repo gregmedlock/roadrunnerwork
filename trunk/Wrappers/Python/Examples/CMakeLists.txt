@@ -7,4 +7,10 @@ endif(${MSVC})
 
 #set(examples 	
 #)
+install(    
+            FILES 
+            Example1.py 
+            DESTINATION Python/Examples 	
+            COMPONENT Python
+       )
 
