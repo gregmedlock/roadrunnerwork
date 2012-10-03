@@ -1046,7 +1046,6 @@ C_DECL_SPEC RRVectorHandle rrCallConv getRatesOfChangeEx (const RRVectorHandle v
 */
 C_DECL_SPEC bool rrCallConv evalModel();
 
-##
 // Get number family
 /*!
  \brief Returns the number of compartments in the model

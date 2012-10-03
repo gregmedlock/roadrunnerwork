@@ -3048,46 +3048,38 @@ bool rrCallConv isListItemList (RRListItemHandle item)
 
 RRListItemHandle rrCallConv getListItem (RRListHandle list, int index)
 {
-	if (index >= list->Count)
-    {
-		return NULL;
-    }
-
-	return (list->Items[index]);
+	return (index >= list->Count) ? NULL : list->Items[index];
 }
 
 bool rrCallConv getIntegerListItem (RRListItemHandle item, int &value)
 {
-  if (item->itemType == litInteger) {
-     *value = item->data.iValue;
-     return true;
-  } else
-    return false;     
+    if (item->ItemType == litInteger)
+    {
+        value = item->data.iValue;
+        return true;
+    }
+    return false;
 }
 
 bool rrCallConv getDoubleListItem (RRListItemHandle item, double &value)
 {
-  if (item->itemType == litDouble) {
-     *value = item->data.dValue;
-     return true;
-  } else
-    return false;     
+    if (item->ItemType == litDouble)
+    {
+    	value = item->data.dValue;
+     	return true;
+    }
+
+    return false;
 }
 
 char* rrCallConv getStringListItem (RRListItemHandle item)
 {
-  if (item->itemType == litString) {
-     return item->data.sValue;
-  } else
-    return NULL;     
+	return (item->ItemType == litString) ? item->data.sValue : NULL;
 }
 
 RRListHandle rrCallConv getList (RRListItemHandle item)
 {
-	if (item->ItemType == litList) {
- 	   return item->data.lValue;
-	else
- 	   return NULL;
+	return (item->ItemType == litList) ? item->data.lValue : NULL;
 }
 
 bool rrCallConv isListItem (RRListItemHandle item, ListItemType itemType)

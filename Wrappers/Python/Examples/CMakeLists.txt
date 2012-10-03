@@ -1,11 +1,10 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
-PROJECT(RR_PYTHON_APPS)
+PROJECT(RR_PYTHON_EXAMPLES)
 
 
 if(${MSVC})
 endif(${MSVC})
 
-set(apps 	
-        rr.py
-)
+#set(examples 	
+#)
 

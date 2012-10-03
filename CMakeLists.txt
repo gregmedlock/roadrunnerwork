@@ -3,8 +3,8 @@ project(rr)
 
 
 #These will be the defaults ...
-SET(RR_BUILDS_ROOT      "C:/rrBuilds")
-SET(RR_INSTALLS_ROOT    "C:/rrInstalls")
+SET(RR_BUILDS_ROOT      "c:/builds")
+SET(RR_INSTALLS_ROOT    "c:/installs")
 
 if(${BORLAND})
 set(FOLDER_POSTFIX "xe")
@@ -139,17 +139,17 @@ install(FILES Readme.txt License.txt
         COMPONENT info
         )
 
-##=== ThirdParties
-#if(${BORLAND})
-#set(CG_RUNTIMES		cc32110MT.dll)
-#foreach(runtime ${CG_RUNTIMES})
-#install (FILES 
-#            ${THIRD_PARTY_FOLDER}/dependencies/cg/xe/${runtime} 
-#            DESTINATION bin 
-#            COMPONENT rr_core)
-#endforeach()
-#endif()
-#
+#=== ThirdParties
+if(${BORLAND})
+set(CG_RUNTIMES		cc32110MT.dll)
+foreach(runtime ${CG_RUNTIMES})
+install (FILES 
+            ${THIRD_PARTY_FOLDER}/dependencies/cg/xe/${runtime} 
+            DESTINATION bin 
+            COMPONENT rr_core)
+endforeach()
+endif()
+
 
 #One day these may be statically linked
 set(RUNTIMES libxml2.DLL iconv.dll zlib1.dll)
