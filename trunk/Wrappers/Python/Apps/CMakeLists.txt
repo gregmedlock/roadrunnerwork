@@ -1,12 +1,11 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
-PROJECT(RR_C_API_APPS)
+PROJECT(RR_PYTHON_APPS)
 
 
 if(${MSVC})
 endif(${MSVC})
 
 set(apps 	
-        rr_c
+        rr.py
 )
 
-add_subdirectory(rr_c)
