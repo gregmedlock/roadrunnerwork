@@ -72,7 +72,7 @@ set(CPACK_PACKAGE_VERSION_PATCH								"${RR_BUILD_VERSION}")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY							"RoadRunner")
 
 #The following packages can be created
-# 1) RR_FULL    - This is a full release, containing everything (except the source)
+# 1) RR_ALL    - This is a full release, containing ALL stuff (except the source)
 # 2) RR_CXX     - C++ Distribution, contains relevant CXX files
 # 3) RR_C_API   - C API Distribution, contains relevant C API files
 # 4) RR_PYTHON  - Python API Distribution

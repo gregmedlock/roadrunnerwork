@@ -94,7 +94,10 @@ add_subdirectory(sundials)
 add_subdirectory(pugi)
 add_subdirectory(nleq)
 add_subdirectory(rr-libstruct)
+
+if(${BORLANDC})
 add_subdirectory(poco)
+endif()
 
 #==== SYSTEM FILES (COMPILER SPECIFICS) =================================================
 if(${BORLAND})
