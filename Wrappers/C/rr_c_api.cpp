@@ -1522,6 +1522,29 @@ RRListHandle rrCallConv getAvailableTimeCourseSymbols()
     }
 }
 
+RRListHandle rrCallConv getAvailableSteadyStateSymbols()
+{
+	try
+    {
+        if(!gRRHandle)
+        {
+            setError(ALLOCATE_API_ERROR_MSG);
+            return NULL;
+        }
+
+        ArrayList slSymbols = gRRHandle->getAvailableSteadyStateSymbols();
+        //cout<<"Got "<<slSymbols;
+		return createList(slSymbols);
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    	return NULL;
+    }
+}
+
 bool rrCallConv getBoundarySpeciesByIndex (const int& index, double& value)
 {
 	try

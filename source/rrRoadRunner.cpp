@@ -2188,35 +2188,31 @@ StringList RoadRunner::getEigenValueIds()
 // Help(
 //            "Returns symbols of the currently loaded model, that can be used for steady state analysis. Format: array of arrays  { { \"groupname\", { \"item1\", \"item2\" ... } } }  or { { \"groupname\", { \"subgroup\", { \"item1\" ... } } } }."
 //            )
-//        ArrayList RoadRunner::getAvailableSteadyStateSymbols()
-//        {
-//            var oResult = new ArrayList();
-//            if (!mModel) return oResult;
-//
-//            oResult.Add(new ArrayList(new object[] { "Floating Species", getFloatingSpeciesIds() }));
-//            oResult.Add(new ArrayList(new object[] { "Boundary Species", getBoundarySpeciesIds() }));
-//            oResult.Add(new ArrayList(new object[] { "Floating Species (amount)", getFloatingSpeciesAmountIds() }));
-//            oResult.Add(new ArrayList(new object[] { "Boundary Species (amount)", getBoundarySpeciesAmountIds() }));
-//            oResult.Add(new ArrayList(new object[] { "Global Parameters", getParameterIds() }));
-//            oResult.Add(new ArrayList(new object[] { "Volumes", mModelGenerator->getCompartmentList() }));
-//            oResult.Add(new ArrayList(new object[] { "Fluxes", getReactionIds() }));
-//            oResult.Add(new ArrayList(new object[] { "Flux Control Coefficients", getFluxControlCoefficientIds() }));
-//            oResult.Add(
-//                new ArrayList(new object[] { "Concentration Control Coefficients", getConcentrationControlCoefficientIds() }));
-//            oResult.Add(
-//                new ArrayList(new object[
-//                                  {
-//                                      "Unscaled Concentration Control Coefficients",
-//                                      getUnscaledConcentrationControlCoefficientIds()
-//                                  }));
-//            oResult.Add(new ArrayList(new object[] { "Elasticity Coefficients", getElasticityCoefficientIds() }));
-//            oResult.Add(
-//                new ArrayList(new object[] { "Unscaled Elasticity Coefficients", getUnscaledElasticityCoefficientIds() }));
-//            oResult.Add(new ArrayList(new object[] { "Eigenvalues", getEigenValueIds() }));
-//
-//            return oResult;
-//        }
-//
+ArrayList RoadRunner::getAvailableSteadyStateSymbols()
+{
+    ArrayList oResult;
+    if (!mModel)
+    {
+    	return oResult;
+    }
+
+    oResult.Add(ArrayList("Floating Species", 					            getFloatingSpeciesIds() ));
+    oResult.Add(ArrayList("Boundary Species", 					            getBoundarySpeciesIds() ));
+    oResult.Add(ArrayList("Floating Species (amount)", 			            getFloatingSpeciesAmountIds() ));
+    oResult.Add(ArrayList("Boundary Species (amount)", 			            getBoundarySpeciesAmountIds() ));
+    oResult.Add(ArrayList("Global Parameters", 					            getParameterIds() ));
+    oResult.Add(ArrayList("Volumes", 							            mModelGenerator->getCompartmentList() ));
+    oResult.Add(ArrayList("Fluxes", 							            getReactionIds() ));
+    oResult.Add(ArrayList("Flux Control Coefficients", 			            getFluxControlCoefficientIds() ));
+    oResult.Add(ArrayList("Concentration Control Coefficients",             getConcentrationControlCoefficientIds() ));
+    oResult.Add(ArrayList("Unscaled Concentration Control Coefficients",	getUnscaledConcentrationControlCoefficientIds()));
+    oResult.Add(ArrayList("Elasticity Coefficients", 						getElasticityCoefficientIds() ));
+    oResult.Add(ArrayList("Unscaled Elasticity Coefficients", 				getUnscaledElasticityCoefficientIds() ));
+    oResult.Add(ArrayList("Eigenvalues", 									getEigenValueIds() ));
+
+    return oResult;
+}
+
 // Help("Returns the selection list as returned by computeSteadyStateValues().")
 ArrayList RoadRunner::getSteadyStateSelectionList()
 {

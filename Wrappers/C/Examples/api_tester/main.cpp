@@ -318,6 +318,11 @@ int main(int argc, char* argv[])
     cout<<listToString(symHandle);
     freeRRList(symHandle);
 
+    symHandle = getAvailableSteadyStateSymbols();
+    cout<<"\n\n Steady state symbols\n";
+    cout<<listToString(symHandle);
+    freeRRList(symHandle);
+
     cout<<"\n\n ================================\n";
     RRVector* test = getReactionRates();
     cout<<vectorToString(test);
