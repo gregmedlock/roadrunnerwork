@@ -281,7 +281,7 @@ C_DECL_SPEC bool rrCallConv enableLogging();
  "ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1",
  "DEBUG", "INFO", "WARNING", "ERROR"
 
- Example: setLogLevel ("DEBUG4")
+ Example: \code setLogLevel ("DEBUG4") \endcode
 
  \param lvl Pointer to the logging level string. 
  \return Ruturns true if succesful
@@ -297,7 +297,7 @@ C_DECL_SPEC bool rrCallConv setLogLevel(const char* lvl);
  "ANY", "DEBUG5", "DEBUG4", "DEBUG3", "DEBUG2", "DEBUG1",
  "DEBUG", "INFO", "WARNING", "ERROR"
 
- Example: str = getLogLevel ()
+ Example: \code str = getLogLevel () \endcode
 
  \return Returns null if it fails else returns a pointer to the logging string
  \ingroup errorfunctions
@@ -332,7 +332,7 @@ C_DECL_SPEC bool rrCallConv hasError();
 /*!
  \brief Retrieve the current error string
 
- Example: str = getLastError ()
+ Example: \code str = getLastError (); \endcode
 
  \return Return null if fails, otherwise returns a pointer to the error string
  \ingroup errorfunctions
@@ -431,6 +431,7 @@ C_DECL_SPEC bool rrCallConv setCapabilities (const char* caps);
  
  Example:
  
+ \code
  <caps name="RoadRunner" description="Settings For RoadRunner">
   <section name="integration" method="CVODE" description="CVODE Integrator">
     <cap name="BDFOrder" value="5" hint="Maximum order for BDF Method" type="integer" />
@@ -451,6 +452,7 @@ C_DECL_SPEC bool rrCallConv setCapabilities (const char* caps);
     <cap name="relativeTolerance" value="0.0001" hint="Relative precision of solution components" type="double" />
   </section>
 </caps>
+\endcode
 
  \return Returns null if it fails, otherwise it returns the simulator's capabilities in the form of an XML string
  \ingroup simulation
@@ -474,7 +476,7 @@ C_DECL_SPEC bool rrCallConv setTimeEnd(const double& timeEnd);
 
 /*!
  \brief Set the number of points to generate in a time course simulation
- \param[in] numberOfPoints Number of points to generate in the time course simulation
+ \param[in] nrPoints Number of points to generate in the time course simulation
  \return Returns true if sucessful
  \ingroup simulation
 */
@@ -485,7 +487,7 @@ C_DECL_SPEC bool rrCallConv setNumPoints(const int& nrPoints);
 
  Use getAvailableSymbols() to retrieve the list of all possible symbols.
  
- Example: setSelectionList ("Time, S1, J1, J2")
+ Example: \code setSelectionList ("Time, S1, J1, J2"); \endcode
  
  or
  
@@ -520,6 +522,7 @@ C_DECL_SPEC RRResultHandle rrCallConv simulate();
  time end and number of points.
 
  Example: 
+ \code
     double timeStart, timeEnd;
 	int numberOfPoints;
 	RRResultHandle m;
@@ -529,10 +532,11 @@ C_DECL_SPEC RRResultHandle rrCallConv simulate();
 	numberOfPoints = 200;
 	
     m = simulateEx (&timeStart, &timeEnd, &numberOfPoints);
-
- \param[in] Time start
- \param[in] Time end
- \param[in] Number of points to generate
+    \endcode
+	
+ \param[in] timeStart Time start
+ \param[in] timeEnd Time end
+ \param[in] numberOfPoints Number of points to generate
  
  \return Returns an array (RRResultHandle) of columns containing the results of the 
  simulation including string labels for the individual columms. 
@@ -543,7 +547,7 @@ C_DECL_SPEC RRResultHandle rrCallConv simulateEx(const double& timeStart, const 
 /*!
  \brief Carry out a one step integration of the model
 
- Example: status = OneStep (&currentTime, &timeStep, &newTimeStep);
+ Example: \code status = OneStep (&currentTime, &timeStep, &newTimeStep); \endcode
 
  \param[in] currentTime The current time in the simulation
  \param[in] stepSize The step size to use in the integration
@@ -557,7 +561,7 @@ C_DECL_SPEC bool rrCallConv oneStep(const double& currentTime, const double& ste
 /*!
  \brief Get the value of the current time start
 
- Example: status = getTimeStart (&timeStart);
+ Example: \code status = getTimeStart (&timeStart); \endcode
 
  \param[out] timeStart The current value for the time start
  \return Returns true if successful
@@ -568,7 +572,7 @@ C_DECL_SPEC bool rrCallConv getTimeStart(double& timeStart);
 /*!
  \brief Get the value of the current time end
 
- Example: status = getTimeEnd (&timeEnd);
+ Example: \code status = getTimeEnd (&timeEnd); \endcode
 
  \param timeEnd The current value for the time end
  \return Returns true if successful
@@ -579,7 +583,7 @@ C_DECL_SPEC bool rrCallConv getTimeEnd(double& timeEnd);
 /*!
  \brief Get the value of the current number of points
 
- Example: status = getNumPoints (&numberOfPoints);
+ Example: \code status = getNumPoints (&numberOfPoints); \endcode
 
  \param numPoints The current value for the number of points
  \return Returns true if successful
@@ -590,7 +594,7 @@ C_DECL_SPEC bool rrCallConv getNumPoints (int& numPoints);
 /*!
  \brief Compute the steady state of the current model
 
- Example: status = steadyState (&closenessToSteadyState);
+ Example: \code status = steadyState (&closenessToSteadyState); \endcode
 
  \param value This value is set during the call and indicates how close the solution is to the steady state. 
  The smaller the value the better. Values less than 1E-6 usually indicate a steady state has been found. If necessary
@@ -603,7 +607,7 @@ C_DECL_SPEC bool rrCallConv steadyState(double& value);
 /*!
  \brief A convenient method for returning a vector of the steady state species concentrations
 
- Example: RRVectorHandle values = computeSteadyStateValues ();
+ Example: code RRVectorHandle values = computeSteadyStateValues (); \endcode
 
  \return Returns the vector of steady state values or null if an error occured. The order of
  species in the vector is indicated by the order of species Ids in a call to getFloatingSpeciesIds()
@@ -616,11 +620,15 @@ C_DECL_SPEC RRVectorHandle rrCallConv computeSteadyStateValues();
 
  Use getAvailableSymbols() to retrieve the list of all possible symbols.
  
- Example: setSteadyStateSelectionList ("S1, J1, J2")
+ Example: 
+ 
+ \code 
+ setSteadyStateSelectionList ("S1, J1, J2")
  
  or
  
  setSteadyStateSelectionList ("S1 J1 J2")
+ \endcode
 
  \param[in] list The string argument should be a space separated list of symbols. 
  
@@ -645,7 +653,7 @@ C_DECL_SPEC RRListHandle rrCallConv getSteadyStateSelectionList();
 /*!
  \brief Get the value for a given symbol, use getAvailableSymbols() for a list of symbols
 
- Example: status = getValue ("S1", &value)
+ Example: \code status = getValue ("S1", &value); \endcode
 
  \param symbolId The symbol that we wish to obtain the value for
  \param value The value that will be retrievd
@@ -658,7 +666,7 @@ C_DECL_SPEC bool rrCallConv getValue(const char* symbolId, double& value);
 /*!
  \brief Set the value for a given symbol, use getAvailableSymbols() for a list of symbols
 
- Example: status = setValue ("S1", 0.5)
+ Example: \code status = setValue ("S1", 0.5); \endcode
 
  \param symbolId The symbol that we wish to set the value
  \param value The value that will be set to the symbol
@@ -671,7 +679,7 @@ C_DECL_SPEC bool rrCallConv setValue(const char* symbolId, const double& value);
 /*!
  \brief Retrieve in a vector the concentrations for all the floating species
 
- Example: RRVectorHandle values = getFloatingSpeciesConcentrations ();
+ Example: \code RRVectorHandle values = getFloatingSpeciesConcentrations (); \endcode
 
  \return Returns the vector of flaoting species concentrations or null if an error occured
  \ingroup floating
@@ -682,7 +690,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv getFloatingSpeciesConcentrations();
 /*!
  \brief Retrieve the concentrations for all the boundary species in a vector 
 
- Example: RRVectorHandle values = getBoundarySpeciesConcentrations ();
+ Example: \code RRVectorHandle values = getBoundarySpeciesConcentrations (); \endcode
 
  \return Returns the vector of boundary species concentrations or null if an error occured
  \ingroup boundary
@@ -696,7 +704,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv getBoundarySpeciesConcentrations();
 /*!
  \brief Retrieve the values for all the lgobal parameter values in a vector 
 
- Example: RRVectorHandle values = getGlobalParameterValues ();
+ Example: \code RRVectorHandle values = getGlobalParameterValues (); \endcode
 
  \return Returns the vector of global parameter values or null if an error occured
  \ingroup parameters
@@ -791,11 +799,13 @@ C_DECL_SPEC bool rrCallConv setCompartmentByIndex (const int& index, const doubl
 
  Example:
  
+ \code
  myVector = createVector (getNumberOfFloatingSpecies());
  setVectorElement (myVector, 0, 1.2);
  setVectorElement (myVector, 1, 5.7);
  setVectorElement (myVector, 2, 3.4);
  setFloatingSpeciesConcentrations(myVector);
+ \endcode
  
  \param vec A vector of floating species concentrations
  \return Returns true if successful
@@ -808,12 +818,14 @@ C_DECL_SPEC bool rrCallConv setFloatingSpeciesConcentrations(const RRVector* vec
 
  Example:
  
+ \code
  myVector = createVector (getNumberOfBoundarySpecies());
  setVectorElement (myVector, 0, 1.2);
  setVectorElement (myVector, 1, 5.7);
  setVectorElement (myVector, 2, 3.4);
  setBoundarySpeciesConcentrations(myVector);
-
+\endcode
+ 
  \param vec A vector of boundary species concentrations
  \return Returns true if successful
  \ingroup boundary
@@ -901,7 +913,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getConservationMatrix();
 /*!
  \brief Reset all floating species concentrations to their intial conditions
 
- Example: status = reset ();
+ Example: \code status = reset (); \endcode
 
  \return Returns true if successful
  \ingroup simulation
@@ -911,7 +923,7 @@ C_DECL_SPEC bool rrCallConv reset();
 /*!
  \brief Set the initial floating species concentrations
 
- Example: status = setFloatingSpeciesInitialConcentrations (vec);
+ Example: \code status = setFloatingSpeciesInitialConcentrations (vec); \endcode
 
  \param vec A vector of species concentrations: order given by getFloatingSpeciesIds()
  \return Returns true if successful
@@ -922,7 +934,7 @@ C_DECL_SPEC bool rrCallConv setFloatingSpeciesInitialConcentrations (const RRVec
 /*!
  \brief Get the initial floating species concentrations
 
- Example: vec = getFloatingSpeciesInitialConcentrations ();
+ Example: \code vec = getFloatingSpeciesInitialConcentrations (); \endcode
 
  \return Returns null if it fails otherwise returns a vector containing the initial conditions
  \ingroup initialConditions
@@ -932,8 +944,8 @@ C_DECL_SPEC RRVectorHandle rrCallConv getFloatingSpeciesInitialConcentrations ()
 /*!
  \brief Get the initial floating species Ids
 
- Example: vec = getFloatingSpeciesInitialConditionIds ();
-
+ Example: \code vec = getFloatingSpeciesInitialConditionIds (); \endcode
+ 
  \return Returns null if it fails otherwise returns a vector containing names of the floating species
  \ingroup initialConditions
 */
@@ -946,7 +958,7 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getFloatingSpeciesInitialConditionIds
 /*!
  \brief Obtain the number of reactions in the loaded model
 
- Example: number = getNumberOfReactions ();
+ Example: \code number = getNumberOfReactions (); \endcode
 
  \return Returns -1 if it fails, if succesful it return 0 or more, indicating the number of reactions
  \ingroup reaction
@@ -987,7 +999,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv getReactionRatesEx (const RRVectorHandle v
 /*!
  \brief Retrieve the vector of rates of change as determined by the current state of the model
 
- Example: values = getRatesOfChange ();
+ Example: \code values = getRatesOfChange (); \endcode
 
  \return Returns null if it fails, otherwise returns a vector of rates of change values
  \ingroup rateOfChange
@@ -997,7 +1009,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv getRatesOfChange();
 /*!
  \brief Retrieve the string list of rates of change Ids
 
- Example: Ids = getRatesOfChangeIds ();
+ Example: \code Ids = getRatesOfChangeIds (); \endcode
 
  \return Returns null if it fails, otherwise returns a list of rates of change Ids
  \ingroup rateOfChange
@@ -1008,7 +1020,7 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getRatesOfChangeIds();
 /*!
  \brief Retrieve the rate of change for a given floating species
 
- Example: status = getRateOfChange (&index, &value);
+ Example: \code status = getRateOfChange (&index, &value); \endcode
 
  \return Returns false if it fails, otherwise value contains the rate of change.
  \ingroup rateOfChange
@@ -1019,7 +1031,7 @@ C_DECL_SPEC bool rrCallConv getRateOfChange(const int&, double& value);
 /*!
  \brief Retrieve the vector of rates of change given a vector of floating species concentrations
 
- Example: values = getRatesOfChangeEx (vector);
+ Example: \code values = getRatesOfChangeEx (vector); \endcode
 
  \return Returns null if it fails
  \ingroup rateOfChange
@@ -1129,7 +1141,7 @@ C_DECL_SPEC RRStringArrayHandle rrCallConv getGlobalParameterIds();
 /*!
  \brief Obtain the list of compartment Ids
 
- Example: str = getCompartmentIds ();
+ Example: \code str = getCompartmentIds (); \endcode
 
  \return Returns -1 if it fails, if succesful it returns a pointer to a RRStringArrayHandle struct
  \ingroup compartment
@@ -1417,7 +1429,7 @@ C_DECL_SPEC void rrCallConv Pause();
 
  Vectors are indexed from zero
  
- Example: count = getVectorLength (myVector);
+ Example: \code count = getVectorLength (myVector); \endcode
 
  \param vector A pointer to the vector variable type
  \return Returns -1 if it fails, otherwise returns the number of elements in the vector
@@ -1430,7 +1442,7 @@ C_DECL_SPEC int rrCallConv getVectorLength (RRVectorHandle vector);
 
  Vectors are indexed from zero
 
- Example: myVector = createVector (10);
+ Example: \code myVector = createVector (10); \endcode
 
  \param size The number of element in the new vector
  \return Returns null if it fails, otherwise returns a pointer to the new vector
@@ -1443,7 +1455,7 @@ C_DECL_SPEC RRVectorHandle rrCallConv createVector (int size);
 
  Vectors are indexed from zero
  
- Example: status = getVectorElement (myVector, 10, &value);
+ Example: \code status = getVectorElement (myVector, 10, &value); \endcode
 
  \param vector A pointer to the vector variable type
  \param index An integer indicating the ith element to retrieve (indexing is from zero)
@@ -1459,7 +1471,7 @@ C_DECL_SPEC bool rrCallConv getVectorElement (RRVectorHandle vector, int index, 
 
  Vectors are indexed from zero
 
- Example: status = setVectorElement (myVector, 10, 3.1415);
+ Example: \code status = setVectorElement (myVector, 10, 3.1415); \endcode
 
  \param vector A pointer to the vector variable type
  \param index An integer indicating the ith element to set (indexing is from zero)
@@ -1475,7 +1487,7 @@ C_DECL_SPEC bool rrCallConv setVectorElement (RRVectorHandle vector, int index, 
 
  Matrices are indexed from zero
 
- Example: nRows = getMatrixNumRows (m);
+ Example: \code nRows = getMatrixNumRows (m); \endcode
 
  \param m A pointer to a matrix type variable
  \return Returns -1 if fails, otherwise returns the number of rows
@@ -1488,8 +1500,7 @@ C_DECL_SPEC int rrCallConv getMatrixNumRows (RRMatrixHandle m);
 
  Matrices are indexed from zero
 
-
- Example: nRows = getMatrixNumCols (m);
+ Example: \code nRows = getMatrixNumCols (m); \endcode
 
  \param m A pointer to a matrix type variable
  \return Returns -1 if fails, otherwise returns the number of columns
@@ -1502,12 +1513,15 @@ C_DECL_SPEC int rrCallConv getMatrixNumCols (RRMatrixHandle m);
 
  Matrices are indexed from zero
  
- Example: status = getMatrixElement (m, 2, 4, &value);
-
+ Example: 
+ \code
+ status = getMatrixElement (m, 2, 4, &value);
+ \endcode
+ 
  \param[in] m A pointer to a matrix type variable
- \param[in] r - The row index to the matrix
- \param[in] c - The column index to the matrix
- \param[ou] value - The retrieved value from the matrix
+ \param[in] r The row index to the matrix
+ \param[in] c The column index to the matrix
+ \param[out] value The retrieved value from the matrix
  \return Returns True if succesful
  \ingroup helperRoutines
 */
@@ -1516,7 +1530,7 @@ C_DECL_SPEC bool rrCallConv getMatrixElement (RRMatrixHandle m, int r, int c, do
 /*!
  \brief Retrieve the number of rows in the given result data (returned from simulate())
 
- Example: nRows = getResultNumRows (result);
+ Example: \code nRows = getResultNumRows (result); \endcode
 
  \param[in] result A pointer to a result type variable
  \return Returns -1 if fails, otherwise returns the number of rows
@@ -1527,7 +1541,7 @@ C_DECL_SPEC int rrCallConv getResultNumRows (RRResultHandle result);
 /*!
  \brief Retrieve the number of columns in the given result data (returned form simulat())
 
- Example: nRows = getResultNumCols (result);
+ Example: \code nRows = getResultNumCols (result); \endcode
 
  \param[in] result A pointer to a result type variable
  \return Returns -1 if fails, otherwise returns the number of columns
@@ -1540,7 +1554,7 @@ C_DECL_SPEC int rrCallConv getResultNumCols (RRResultHandle result);
 
  Result data are indexed from zero
  
- Example: status = getResultElement (result, 2, 4, &value);
+ Example: \code status = getResultElement (result, 2, 4, &value); \endcode
 
  \param[in] result A pointer to a result type variable
  \param[in] r -The row index to the result data
@@ -1556,7 +1570,7 @@ C_DECL_SPEC bool rrCallConv getResultElement (RRResultHandle result, int r, int 
 
  Result data are indexed from zero
  
- Example: str = getResultColumnLabel (result, 2, 4);
+ Example: \code str = getResultColumnLabel (result, 2, 4); \endcode
 
  \param[in] result A pointer to a result type variable
  \param[in] column - The column index for the result data (indexing from zero)
@@ -1568,7 +1582,7 @@ C_DECL_SPEC char* rrCallConv getResultColumnLabel (RRResultHandle result, int co
 /*!
  \brief Retrieve the header file for the current model (if applicable)
 
- Example: header = getCCodeHeader (code);
+ Example: \code header = getCCodeHeader (code); \endcode
 
  \param[in] code A pointer to a string that stores the header code
  \return Returns null if it fails, otherwise returns a char* pointer to the header code
@@ -1579,7 +1593,7 @@ C_DECL_SPEC char* rrCallConv getCCodeHeader (RRCCodeHandle code);
 /*!
  \brief Retrieve the main source file for the current model (if applicable)
 
- Example: source = getCCodeSource (code);
+ Example: \code source = getCCodeSource (code); \endcode
 
  \param[in] code A pointer to a string that stores the main source code
  \return Returns null if it fails, otherwise returns a char* pointer to the main source code
@@ -1590,7 +1604,7 @@ C_DECL_SPEC char* rrCallConv getCCodeSource (RRCCodeHandle code);
 /*!
  \brief Retrieve the name of model source file for the current model (if applicable)
 
- Example: fileName = getCSourceFileName();
+ Example: \code fileName = getCSourceFileName(); \endcode
 
  \return Returns null if fails, otherwise returns a pointer to a string containing the file name
  \ingroup helperRoutines
@@ -1609,6 +1623,7 @@ C_DECL_SPEC char* rrCallConv getCSourceFileName();
  
  Example, build the list [123, [3.1415926]]
  
+ \code
  l = createRRList();
  item = createIntegerItem (123);
  addItem (l, item);
@@ -1622,6 +1637,7 @@ C_DECL_SPEC char* rrCallConv getCSourceFileName();
  
  printf (listToString (l));
  freeRRList (l); 
+ \endcode
  
  \return Returns null if fails, otherwise returns a pointer to a new list structure
  \ingroup list
@@ -1637,7 +1653,7 @@ C_DECL_SPEC void rrCallConv freeRRList (RRListHandle list);
 /*!
  \brief Create a list item to store an integer
 
- \param[in] The integer to store in the list item
+ \param[in] value The integer to store in the list item
  \return A pointer to the list item
  \ingroup list
 */
@@ -1646,7 +1662,7 @@ C_DECL_SPEC RRListItemHandle rrCallConv createIntegerItem (int value);
 /*!
  \brief Create a list item to store a double value
 
- \param[in] The double to store in the list item
+ \param[in] value The double to store in the list item
  \return A pointer to the list item
  \ingroup list
 */
@@ -1655,7 +1671,7 @@ C_DECL_SPEC RRListItemHandle rrCallConv createDoubleItem  (double value);
 /*!
  \brief Create a list item to store a pointer to a char*
 
- \param[in] The string to store in the list item
+ \param[in] value The string to store in the list item
  \return A pointer to the list item
  \ingroup list
 */
@@ -1664,7 +1680,7 @@ C_DECL_SPEC RRListItemHandle rrCallConv createStringItem  (char* value);
 /*!
  \brief Create a list item to store a list
 
- \param[in] The list to store in the list item
+ \param[in] value The list to store in the list item
  \return A pointer to the list item
  \ingroup list
 */	
@@ -1673,12 +1689,14 @@ C_DECL_SPEC RRListItemHandle rrCallConv createListItem (RRList* value);
 /*!
  \brief Add a list item to a list and return index to the added item
 
+ \code
  x = createRRList();
  item1 = createIntegerItem (4);
  add (x, item1);
+ \endcode
 
- \param[in] The list to store the item in
- \param[in] The list item to store in the list
+ \param[in] list The list to store the item in
+ \param[in] item The list item to store in the list
  \return The index to where the list item was added
  \ingroup list
 */	
@@ -1688,8 +1706,9 @@ C_DECL_SPEC int rrCallConv addItem (RRListHandle list, RRListItemHandle *item);
 /*!
  \brief Returns the index^th item from the list
 
- \param[in] The list to retrieve the list item from
- \param[in] The index list item we are interested in 
+ \param[in] list The list to retrieve the list item from
+ \param[in] index The index list item we are interested in 
+ 
  \return A pointer to the retrieved list item
  \ingroup list
 */	
@@ -1698,7 +1717,7 @@ C_DECL_SPEC RRListItemHandle rrCallConv getListItem (RRListHandle list, int inde
 /*!
  \brief Returns true or false if the list item is an integer
 
- \param[in] The list
+ \param[in] item The list
  \return If true, then the list item holds an integer
  \ingroup list
 */	
@@ -1707,35 +1726,35 @@ C_DECL_SPEC bool rrCallConv isListItemInteger (RRListItemHandle item);
 /*!
  \brief Returns true or false if the list item is a double
 
- \param[in] The list
+ \param[in] item The list
  \return If true, then the list item holds a double
  \ingroup list
 */	
-C_DECL_SPEC bool rrCallConv isListItemDouble  (RRListItemHandle item);
+C_DECL_SPEC bool rrCallConv isListItemDouble (RRListItemHandle item);
 
 /*!
  \brief Returns true or false if the list item is a character array
 
- \param[in] The list
+ \param[in] item The list
  \return If true, then the list item holds an characeter array
  \ingroup list
 */	
-C_DECL_SPEC bool rrCallConv isListItemString  (RRListItemHandle item);
+C_DECL_SPEC bool rrCallConv isListItemString (RRListItemHandle item);
 
 /*!
  \brief Returns true or false if the list item is a list itself
 
- \param[in] The list
+ \param[in] item The list
  \return If true, then the list item holds a list
  \ingroup list
 */	
-C_DECL_SPEC bool rrCallConv isListItemList    (RRListItemHandle item);
+C_DECL_SPEC bool rrCallConv isListItemList (RRListItemHandle item);
 
 /*!
  \brief Returns true or false if the list item is the given itemType
 
- \param[in] The list
- \param[in] The list item type to check for
+ \param[in] item The list
+ \param[in] itemType The list item type to check for
  \return If true, then the list item holds a list
  \ingroup list
 */	
@@ -1745,7 +1764,7 @@ C_DECL_SPEC bool rrCallConv isListItem (RRListItemHandle item, ListItemType item
 /*!
  \brief Returns the length of a given list
 
- \param[in] The list to retrieve the length from
+ \param[in] myList The list to retrieve the length from
  \return Length of list
 \ingroup list
 */	
@@ -1755,7 +1774,7 @@ C_DECL_SPEC int rrCallConv getListLength (RRListHandle myList);
 /*!
  \brief Returns a list from a list item if it contains a list
 
- \param[in] The list item to retrieve the list type from
+ \param[in] item The list item to retrieve the list type from
  \return Returns NULL if item isn't a list, otherwise it returns a list from the item
 \ingroup list
 */	

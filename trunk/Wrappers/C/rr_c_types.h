@@ -112,22 +112,22 @@ struct RRList;	//Forward declaration for RRListItem
 /*!@brief A single list element type */
 typedef struct RRListItem
 {
-    ListItemType ItemType;  			/*!< The type of the item in this list element */
+    ListItemType ItemType;  	 /*!< The type of the item in this list element */
     union
     {
-       int 	     		iValue;
-	   double    		dValue;
-	   char*     		sValue;
-	   RRList*  		lValue;
-	} data;
-} *RRListItemHandle;                 	/*!< Pointer to cRRArrayListItemHandle struct */
+       int 	     		iValue;  /*!< Integer value */
+	   double    		dValue;  /*!< Double value */
+	   char*     		sValue;  /*!< String value */
+	   RRList*  		lValue;  /*!< List value */
+	} data;                      /*!< Union */
+} *RRListItemHandle;             /*!< Pointer to cRRArrayListItemHandle struct */
 
 
 /*!@struct*/
 /*!@brief A list type, stores int, double, strings and lists */
 typedef struct RRList
 {
-    int                   Count;  /*!< The number elements in this list */
+    int                   Count; /*!< The number elements in this list */
     RRListItemHandle    *Items;  /*!< A pointer to a list of items */
 }  *RRListHandle;                /*!< Pointer to cRRArrayListHandle struct */
 
