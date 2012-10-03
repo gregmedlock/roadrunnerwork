@@ -3056,6 +3056,40 @@ RRListItemHandle rrCallConv getListItem (RRListHandle list, int index)
 	return (list->Items[index]);
 }
 
+bool rrCallConv getIntegerListItem (RRListItemHandle item, int &value)
+{
+  if (item->itemType == litInteger) {
+     *value = item->data.iValue;
+     return true;
+  } else
+    return false;     
+}
+
+bool rrCallConv getDoubleListItem (RRListItemHandle item, double &value)
+{
+  if (item->itemType == litDouble) {
+     *value = item->data.dValue;
+     return true;
+  } else
+    return false;     
+}
+
+char* rrCallConv getStringListItem (RRListItemHandle item)
+{
+  if (item->itemType == litString) {
+     return item->data.sValue;
+  } else
+    return NULL;     
+}
+
+RRListHandle rrCallConv getList (RRListItemHandle item)
+{
+	if (item->ItemType == litList) {
+ 	   return item->data.lValue;
+	else
+ 	   return NULL;
+}
+
 bool rrCallConv isListItem (RRListItemHandle item, ListItemType itemType)
 {
 	return  (item->ItemType == itemType) ? true : false;
@@ -3066,17 +3100,7 @@ int rrCallConv getListLength (RRListHandle myList)
 	return myList->Count;
 }
 
-RRListHandle rrCallConv getList (RRListItemHandle item)
-{
-	if (item->ItemType == litList)
-    {
-	   return item->data.lValue;
-    }
-	else
-    {
-	   return NULL;
-    }
-}
+
 
 char* rrCallConv listToString (RRListHandle list)
 {
