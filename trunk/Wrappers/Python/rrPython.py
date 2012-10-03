@@ -1368,7 +1368,7 @@ handle.getResultColumnLabel.restype = c_char_p
 handle.getCCodeHeader.restype = c_char_p
 handle.getCCodeSource.restype = c_char_p
 
-##/ingroup helperRoutines
+##\ingroup helperRoutines
 #@{
 
 ##\brief Get the number of elements in a vector type
