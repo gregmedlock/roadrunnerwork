@@ -626,7 +626,7 @@ def setBoundarySpeciesConcentrations(vector):
     return handle.setBoundarySpeciesConcentrations(vector)
 
 ##\brief Returns a string with boundary species concentrations
-#\retrun Returns the concentration of species if successful
+#\return Returns the concentration of species if successful
 def getBoundarySpeciesConcentrations():
     return handle.vectorToString(handle.getBoundarySpeciesConcentrations())
 
