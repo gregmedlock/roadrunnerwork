@@ -508,24 +508,19 @@ void CGenerator::WriteUserDefinedFunctions(CodeBuilder& ignore)
     {
         try
         {
-//            ArrayList oList = mNOM.getNthFunctionDefinition(i);
-//            StringList aList = oList[0];
-
             ArrayList  oList = mNOM.getNthFunctionDefinition(i);
-//            ArrayListItemObject base = ;
-            if(!dynamic_cast<StringList*>(&oList[0]))
+			Log(lDebug2)<<"NOM Nth Function defintion:"<<oList;
+			ArrayListItemObject* ptr = const_cast<ArrayListItemObject*>(&oList[0]);
+
+            if(!(dynamic_cast<ArrayListItem<string>*>(ptr)))
             {
                 throw("Bad..");
             }
-            StringList aList = *(dynamic_cast<StringList*>(&oList[0]));
-//            StringList aList = (StringList) &
 
-            string sName = aList[0];
-              //sName.Trim();
+			string sName = oList.GetString(0);
             mfunctionNames.Add(sName);
             StringList oArguments = oList.GetStringList(1);
-            StringList list2 = oList.GetStringList(2);
-            string sBody = list2[0];
+            string sBody = oList.GetString(2);
 
             mSource<<Format("// User defined function:  {0}{1}", sName, NL());
             mSource<<Format("\t double {0} (", sName);

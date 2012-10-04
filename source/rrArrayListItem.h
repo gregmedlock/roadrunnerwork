@@ -1,9 +1,9 @@
 #ifndef rrArrayListItemH
 #define rrArrayListItemH
-//---------------------------------------------------------------------------
 #include "rrObject.h"
 #include "rrStringList.h"
 #include "rrArrayListItemObject.h"
+
 //This unit contains
 // 1) a base class for ArrayListItems
 // 2) Template for basic type ArrayListItems, such as int, char double etc.
