@@ -36,6 +36,24 @@ ArrayList::~ArrayList()
     }
 }
 
+string ArrayList::GetString(const int& index)
+{
+    if(index < mList.size())
+    {
+		ArrayListItemObject* listPtr = mList[index];
+
+   		if(listPtr)
+        {
+        	if(dynamic_cast< ArrayListItem<string>* >(listPtr))
+            {
+				return *(dynamic_cast< ArrayListItem<string>* >(listPtr));
+            }
+        }
+    }
+
+	throw("No string at index");
+}
+
 StringList ArrayList::GetStringList(const int& index)
 {
     if(index < mList.size())
@@ -50,6 +68,7 @@ StringList ArrayList::GetStringList(const int& index)
             }
         }
     }
+
 	throw("No Stringlist at index");
 }
 

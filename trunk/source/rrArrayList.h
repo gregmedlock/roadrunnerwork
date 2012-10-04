@@ -39,6 +39,7 @@ class RR_DECLSPEC ArrayList : public rrObject
         void                                operator = (const ArrayList& rhs);
 //        StringList                          GetSubList(const string& lName);
         StringList                          GetStringList(const int& index);
+        string                          	GetString(const int& index);
 };
 
 
