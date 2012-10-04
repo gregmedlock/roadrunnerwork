@@ -10,7 +10,7 @@ endif(${MSVC})
 install(    
             FILES 
             Example1.py 
-            DESTINATION Python/Examples 	
+            DESTINATION Python 	
             COMPONENT Python
        )
 
