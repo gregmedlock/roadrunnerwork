@@ -16,7 +16,7 @@ foreach(example ${examples})
                 DESTINATION Examples/c_api/${example}	
                 COMPONENT example_files)
 
-	FILE (GLOB src ${example}/*.c)
+	FILE (GLOB src ${example}/*.cpp)
  	install (FILES ${src} 						DESTINATION Examples/c_api/${example}	COMPONENT example_files)
  	install (FILES ${example}/Readme.txt 		DESTINATION Examples/c_api/${example}	COMPONENT example_files)
  	install (FILES ${example}/CMakeLists.txt 	DESTINATION Examples/c_api/${example}	COMPONENT example_files)

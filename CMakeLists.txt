@@ -6,6 +6,9 @@ SET(RR_MINOR_VERSION 0)
 SET(RR_BUILD_VERSION 0)
 SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 
+OPTION (INSTALL_CXX_DOCS 		"Package c++ docs" 	        	OFF)
+OPTION (INSTALL_PYTHON_DOCS 	"Package Python docsr" 		    OFF)
+OPTION (INSTALL_C_DOCS  		"Package C docs"                OFF)
 
 #------ RELEASES FOLDER
 if(${BORLAND})
@@ -70,12 +73,22 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY						"rr library - headers, libraries and 
 set(CPACK_PACKAGE_VERSION_MAJOR								"${RR_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR								"${RR_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH								"${RR_BUILD_VERSION}")
+
+#set(CPACK_NSIS_INSTALL_ROOT                                 "$PROGRAMFILES") 
 set(CPACK_PACKAGE_INSTALL_DIRECTORY							"RoadRunner")
 
-set(CPACK_NSIS_MENU_LINKS                                   "Documentation/c_api/html/index.html" "C-API Documentation")
-set(CPACK_NSIS_MENU_LINKS                                   "Documentation/c_api/html/index.html" "C-API Documentation")
-set(CPACK_NSIS_MENU_LINKS                                   "Documentation/cpp_api/html/index.html" "API Documentation")
-set(CPACK_NSIS_MENU_LINKS                                   "Documentation/python_api/html/index.html" "Python-API Documentation")
+
+if(${INSTALL_CXX_DOCS})
+set(CPACK_NSIS_MENU_LINKS                                   "Documentation/cpp_api/html/index.html" "C++ Documentation")
+endif()
+
+if(${INSTALL_C_DOCS})
+set(CPACK_NSIS_MENU_LINKS                                   "Documentation/c_api/html/index.html" "C API Documentation")
+endif()
+
+if(${INSTALL_PYTHON_DOCS})
+set(CPACK_NSIS_MENU_LINKS                                   "Documentation/python_api/html/index.html" "Python API Documentation")
+endif()
 
 #The following packages can be created
 # 1) RR_ALL    - This is a full release, containing ALL stuff (except the source)
@@ -98,7 +111,7 @@ if(${MINGW})
 set(COMPILER_FOR_PACKAGE "mingw")
 endif()
 
-set(CPACK_PACKAGE_FILE_NAME rr-Install.exe CACHE PATH "Set package file name .")
+set(CPACK_PACKAGE_FILE_NAME RoadRunner.exe CACHE PATH "Set package file name .")
 
 MESSAGE( STATUS "PACKAGE NAME: " ${CPACK_PACKAGE_FILE_NAME})
 

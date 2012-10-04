@@ -299,6 +299,14 @@ int main(int argc, char* argv[])
 	veca.Data[1] = 2;
 	veca.Data[2] = 3;
 
+    double aValue = 231.23;
+    bool bResult = setVectorElement(&veca, 0, aValue);
+    if(!bResult)
+    {
+    	cout<<"Problem";
+    }
+
+
     cout<<"List of floating species: \n"<<stringArrayToString(getFloatingSpeciesIds())<<endl;
 
 	printf ("\nCall to getRatesOfChangeEx (S1=1, S2=2, S3=3):\n");

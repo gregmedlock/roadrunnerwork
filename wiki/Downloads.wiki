@@ -15,14 +15,8 @@
 The "official" releases are being built using Visual Studio 2010, but other releases using other compilers are available too, e.g. !CodeGear XE and (later on) !MinGW
 
 ||*Description*||*Download Link*||Version||Build Date||
-||  !RoadRunner (All) Installer||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-vs2010.exe RoadRunner-vs2010.exe]||1.0||Oct. 3 2012||
-||  C++        API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/rr_cxx_api-vs_2010.exe rr_cxx_api-vs_2010.exe]||1.0||Sept. 5 2012||
-||  C          API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/rr_c_api-vs_2010.exe rr_c_api-vs_2010.exe]||1.0||Sept. 5 2012||
-||  Python     API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/rr_python-vs_2010.exe rr_python-vs_2010.exe]||1.0||Sept. 5 2012||
+||  !RoadRunner (All) Installer||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-all.exe   RoadRunner-all.exe]||1.0||Oct. 3 2012||
+||  C++        API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-cpp.exe     RoadRunner-cpp.exe]||1.0||Oct. 3 2012||
+||  C          API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-c.exe       RoadRunner-c.exe]||1.0||Oct. 3 2012||
+||  Python     API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-python.exe  RoadRunner-python.exe]||1.0||Oct. 3 2012||
 
-==!CodeGear XE Releases==
-||*Description*||*Download Link*||
-||  C++        API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_cxx_api-cg_xe.exe rr_cxx_api-cg_xe.exe]||1.0||Sept. 5 2012||
-||  C          API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_c_api-cg_xe.exe rr_c_api-cg_xe.exe]||1.0||Sept. 5 2012||
-||  Python     API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_python-cg_xe.exe rr_python-cg_xe.exe]||1.0||Sept. 5 2012||
-||  !RoadRunner FULL installer||[http://roadrunnerwork.googlecode.com/svn/releases/cg/rr_full-cg_xe.exe rr_full-cg_xe.exe]||1.0||Sept. 5 2012||
