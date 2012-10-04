@@ -34,6 +34,7 @@ include (InstallRequiredSystemLibraries)
 
 #COMPONENTS OF THE INSTALL
 set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models Delphi Python rr_docs)
+#set(CPACK_COMPONENTS_ALL rr_docs)
 
 set(CPACK_COMPONENT_RR_CORE_DISPLAY_NAME					"Core Files")
 set(CPACK_COMPONENT_APPS_DISPLAY_NAME						"Applications")
@@ -45,11 +46,11 @@ set(CPACK_COMPONENT_DELPHI_DISPLAY_NAME						"Delphi Units")
 set(CPACK_COMPONENT_PYTHON_DISPLAY_NAME						"Python Module")
 set(CPACK_COMPONENT_RR_DOCS_DISPLAY_NAME					"Doxygen Documentation")
 
-#set(CPACK_PACKAGE_ICON										${CMAKE_CURRENT_SOURCE_DIR}\\\\rrArt.bmp)
+set(CPACK_PACKAGE_ICON										${CMAKE_CURRENT_SOURCE_DIR}\\\\Roadrunner.bmp)
 
 #NSIS Specific
-#set(CPACK_NSIS_MUI_ICON									${CMAKE_CURRENT_SOURCE_DIR}/rr.ico)
-#set(CPACK_NSIS_MUI_UNIICON									${CMAKE_CURRENT_SOURCE_DIR}/rr.ico)
+set(CPACK_NSIS_MUI_ICON									${CMAKE_CURRENT_SOURCE_DIR}/RoadRunner.ico)
+set(CPACK_NSIS_MUI_UNIICON									${CMAKE_CURRENT_SOURCE_DIR}/RoadRunner.ico)
 set(CPACK_NSIS_INSTALL_ROOT									"C:")
 
 #COMPONENTS
@@ -70,6 +71,11 @@ set(CPACK_PACKAGE_VERSION_MAJOR								"${RR_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR								"${RR_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH								"${RR_BUILD_VERSION}")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY							"RoadRunner")
+
+set(CPACK_NSIS_MENU_LINKS                                   "Documentation/c_api/html/index.html" "C-API Documentation")
+set(CPACK_NSIS_MENU_LINKS                                   "Documentation/c_api/html/index.html" "C-API Documentation")
+set(CPACK_NSIS_MENU_LINKS                                   "Documentation/cpp_api/html/index.html" "API Documentation")
+set(CPACK_NSIS_MENU_LINKS                                   "Documentation/python_api/html/index.html" "Python-API Documentation")
 
 #The following packages can be created
 # 1) RR_ALL    - This is a full release, containing ALL stuff (except the source)
@@ -93,8 +99,10 @@ set(COMPILER_FOR_PACKAGE "mingw")
 endif()
 
 set(CPACK_PACKAGE_FILE_NAME rr-Install.exe CACHE PATH "Set package file name .")
-#MESSAGE( STATUS "CMAKE_CFG_INTDIR: " ${CMAKE_CFG_INTDIR} )
+
 MESSAGE( STATUS "PACKAGE NAME: " ${CPACK_PACKAGE_FILE_NAME})
+
+
 
 set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases/${COMPILER_FOR_PACKAGE}")
 include(CPack)

@@ -108,8 +108,8 @@ int main(int argc, char* argv[])
 
 //	   string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 //	   string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-//	 string fileName = modelsPath + "\\ss_threeSpecies.xml";
-	 string fileName = modelsPath + "\\bug.xml";
+	 string fileName = modelsPath + "\\ss_threeSpecies.xml";
+//	 string fileName = modelsPath + "\\bug.xml";
 //	 string fileName = modelsPath + "\\boundary.xml";
 
 
