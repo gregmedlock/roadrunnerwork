@@ -119,7 +119,7 @@ EXPORTS
     setFloatingSpeciesByIndex                   = _setFloatingSpeciesByIndex@8
     setGlobalParameterByIndex                   = _setGlobalParameterByIndex@8
     setNumPoints                                = _setNumPoints@4
-    setSelectionList                            = _setSelectionList@4
+    setTimeCourseSelectionList                  = _setTimeCourseSelectionList@4
     setSteadyStateSelectionList                 = _setSteadyStateSelectionList@4
     setTempFolder                               = _setTempFolder@4
     setTimeEnd                                  = _setTimeEnd@4
