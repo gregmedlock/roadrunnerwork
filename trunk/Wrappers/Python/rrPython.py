@@ -1072,10 +1072,18 @@ def getEigenValueIds():
     handle.freeStringArray(values)
     return result
 
-##\brief Returns a string containing the list of all available symbols
-#\return Returns a string containing the list of all available symbols
-def getAvailableSymbols():                              #FIX
-    value = handle.getAvailableSymbols()
+
+##\brief Returns a string containing the list of all steady state simulation variables
+#\return Returns a string containing the list of all steady state simulation variables
+def getAvailableSteadyStateSymbols():
+    value = handle.getAvailableSteadyStateSymbols()
+    result = handle.listToString(value)
+    return result
+
+##\brief Returns a string containing the list of all time course simulation variables
+#\return Returns a string containing the list of all time course simulation variables
+def getAvailableTimeCourseSymbols():
+    value = handle.getAvailableTimeCourseSymbols()
     result = handle.listToString(value)
     return result
 
