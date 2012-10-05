@@ -101,11 +101,11 @@ set(CPACK_NSIS_MENU_LINKS                                   "Documentation/cpp_a
 endif()
 
 if(${INSTALL_C_DOCS})
-set(CPACK_NSIS_MENU_LINKS                                   "Documentation/c_api/html/index.html" "C API Documentation")
+set(CPACK_NSIS_MENU_LINKS                                  ${CPACK_NSIS_MENU_LINKS} "Documentation/c_api/html/index.html" "C API Documentation")
 endif()
 
 if(${INSTALL_PYTHON_DOCS})
-set(CPACK_NSIS_MENU_LINKS                                   "Documentation/python_api/html/index.html" "Python API Documentation")
+set(CPACK_NSIS_MENU_LINKS                                  ${CPACK_NSIS_MENU_LINKS} "Documentation/python_api/html/index.html" "Python API Documentation")
 endif()
 
 #The following packages can be created
@@ -134,11 +134,12 @@ set(CPACK_PACKAGE_FILE_NAME RoadRunner.exe CACHE PATH "Set package file name .")
 MESSAGE( STATUS "PACKAGE NAME: " ${CPACK_PACKAGE_FILE_NAME})
 
 
-
 set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases/${COMPILER_FOR_PACKAGE}")
 include(CPack)
 
-#======= DOXYGEN
+#======= Dcuementation
+if(${INSTALL_CXX_DOCS} OR ${INSTALL_C_DOCS} OR ${INSTALL_PYTHON_DOCS})
 add_subdirectory(documents)
+endif()
 
 
