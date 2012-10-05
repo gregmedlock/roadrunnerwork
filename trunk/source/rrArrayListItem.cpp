@@ -31,7 +31,7 @@ ostream& operator<<(ostream& stream, const ArrayListItemObject& item)
     }
     else if(dynamic_cast<ArrayListItem<ArrayList>*>(ptr))
     {
-        stream << "\""<<(ArrayList) *(dynamic_cast<ArrayListItem<ArrayList>*>(ptr))<<"\"";
+        stream << (ArrayList) *(dynamic_cast<ArrayListItem<ArrayList>*>(ptr));
     }
     else
     {

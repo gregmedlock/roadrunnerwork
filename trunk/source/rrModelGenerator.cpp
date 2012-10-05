@@ -390,7 +390,7 @@ int ModelGenerator::ReadModifiableSpeciesReferences()
 
 StringList ModelGenerator::getReactionIds()
 {
-    StringList tmp;// = new ArrayList();
+    StringList tmp;
     for (int i = 0; i < reactionList.size(); i++)
     {
         tmp.Add(reactionList[i].name);
@@ -400,7 +400,7 @@ StringList ModelGenerator::getReactionIds()
 
 StringList ModelGenerator::getFloatingSpeciesConcentrationList()
 {
-    StringList tmp;// = new ArrayList();
+    StringList tmp;
     for (int i = 0; i < floatingSpeciesConcentrationList.size(); i++)
     {
         tmp.Add(floatingSpeciesConcentrationList[i].name);
@@ -410,7 +410,7 @@ StringList ModelGenerator::getFloatingSpeciesConcentrationList()
 
 StringList ModelGenerator::getBoundarySpeciesList()
 {
-    StringList tmp;// = new ArrayList();
+    StringList tmp;
     for (int i = 0; i < boundarySpeciesList.size(); i++)
     {
         tmp.Add(boundarySpeciesList[i].name);
@@ -420,7 +420,7 @@ StringList ModelGenerator::getBoundarySpeciesList()
 
 StringList ModelGenerator::getGlobalParameterList()
 {
-    StringList tmp;// = new ArrayList();
+    StringList tmp;
     for (int i = 0; i < globalParameterList.size(); i++)
     {
         tmp.Add(globalParameterList[i].name);

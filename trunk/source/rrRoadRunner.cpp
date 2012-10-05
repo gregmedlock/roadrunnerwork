@@ -2150,19 +2150,19 @@ ArrayList RoadRunner::getAvailableSteadyStateSymbols()
     	return oResult;
     }
 
-    oResult.Add(ArrayList("Floating Species", 					            getFloatingSpeciesIds() ));
-    oResult.Add(ArrayList("Boundary Species", 					            getBoundarySpeciesIds() ));
-    oResult.Add(ArrayList("Floating Species (amount)", 			            getFloatingSpeciesAmountIds() ));
-    oResult.Add(ArrayList("Boundary Species (amount)", 			            getBoundarySpeciesAmountIds() ));
-    oResult.Add(ArrayList("Global Parameters", 					            getParameterIds() ));
-    oResult.Add(ArrayList("Volumes", 							            mModelGenerator->getCompartmentList() ));
-    oResult.Add(ArrayList("Fluxes", 							            getReactionIds() ));
-    oResult.Add(ArrayList("Flux Control Coefficients", 			            getFluxControlCoefficientIds() ));
-    oResult.Add(ArrayList("Concentration Control Coefficients",             getConcentrationControlCoefficientIds() ));
-    oResult.Add(ArrayList("Unscaled Concentration Control Coefficients",	getUnscaledConcentrationControlCoefficientIds()));
-    oResult.Add(ArrayList("Elasticity Coefficients", 						getElasticityCoefficientIds() ));
-    oResult.Add(ArrayList("Unscaled Elasticity Coefficients", 				getUnscaledElasticityCoefficientIds() ));
-    oResult.Add(ArrayList("Eigenvalues", 									getEigenValueIds() ));
+    oResult.Add("Floating Species", 					            getFloatingSpeciesIds() );
+    oResult.Add("Boundary Species", 					            getBoundarySpeciesIds() );
+    oResult.Add("Floating Species (amount)", 			            getFloatingSpeciesAmountIds() );
+    oResult.Add("Boundary Species (amount)", 			            getBoundarySpeciesAmountIds() );
+    oResult.Add("Global Parameters", 					            getParameterIds() );
+    oResult.Add("Volumes", 							            	mModelGenerator->getCompartmentList() );
+    oResult.Add("Fluxes", 							            	getReactionIds() );
+    oResult.Add("Flux Control Coefficients", 			            getFluxControlCoefficientIds() );
+    oResult.Add("Concentration Control Coefficients",             	getConcentrationControlCoefficientIds() );
+    oResult.Add("Unscaled Concentration Control Coefficients",		getUnscaledConcentrationControlCoefficientIds());
+    oResult.Add("Elasticity Coefficients", 							getElasticityCoefficientIds() );
+    oResult.Add("Unscaled Elasticity Coefficients", 				getUnscaledElasticityCoefficientIds() );
+    oResult.Add("Eigenvalues", 										getEigenValueIds() );
 
     return oResult;
 }
@@ -4020,28 +4020,35 @@ ls::DoubleMatrix RoadRunner::getScaledConcentrationControlCoefficientMatrix()
 		{
 			DoubleMatrix ucc = getUnscaledConcentrationControlCoefficientMatrix();
 
-			if (ucc.size() > 0)
+			if (ucc.size() > 0 )
 			{
 				mModel->convertToConcentrations();
 				mModel->computeReactionRates(mModel->GetTime(), mModel->y);
 				for (int i = 0; i < ucc.RSize(); i++)
+                {
 					for (int j = 0; j < ucc.CSize(); j++)
 					{
-						ucc[i][j] = ucc[i][j]*mModel->rates[j]/mModel->getConcentration(i);
+                    	if(mModel->getConcentration(i) != 0.0)
+                        {
+							ucc[i][j] = ucc[i][j]*mModel->rates[j]/mModel->getConcentration(i);
+                        }
+                        else
+                        {
+                        	throw(Exception("Dividing with zero"));
+                        }
 					}
+                }
 			}
 			return ucc;
 		}
-		else throw SBWApplicationException(emptyModelStr);
-	}
-	catch (SBWException)
-	{
-		throw;
+		else
+        {
+        	throw SBWApplicationException(emptyModelStr);
+        }
 	}
 	catch (const Exception& e)
 	{
-		throw SBWApplicationException(
-			"Unexpected error from getScaledConcentrationControlCoefficientMatrix()", e.Message());
+		throw SBWApplicationException("Unexpected error from getScaledConcentrationControlCoefficientMatrix()", e.Message());
 	}
 }
 
@@ -4107,7 +4114,14 @@ ls::DoubleMatrix RoadRunner::getScaledFluxControlCoefficientMatrix()
             {
                 for (int j = 0; j < ufcc.CSize(); j++)
                 {
-                    ufcc[i][j] = ufcc[i][j]*mModel->rates[i]/mModel->rates[j];
+                    if(mModel->rates[j] !=0)
+                    {
+                    	ufcc[i][j] = ufcc[i][j]*mModel->rates[i]/mModel->rates[j];
+                    }
+                	else
+                    {
+                    	throw(Exception("Dividing with zero"));
+                   	}
                 }
             }
         }
