@@ -12,11 +12,23 @@
 
 4) All: This distribution is containing all of the above.
 
-The "official" releases are being built using Visual Studio 2010, but other releases using other compilers are available too, e.g. !CodeGear XE and (later on) !MinGW
+The official releases are being built using Visual Studio 2010. If you are interested in a release using other compilers e.g. !CodeGear XE or !MinGW please let us know.
 
 ||*Description*||*Download Link*||Version||Build Date||
-||  !RoadRunner (All) Installer||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-all.exe   RoadRunner-all.exe]||1.0||Oct. 3 2012||
-||  C++        API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-cpp.exe     RoadRunner-cpp.exe]||1.0||Oct. 3 2012||
-||  C          API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-c.exe       RoadRunner-c.exe]||1.0||Oct. 3 2012||
-||  Python     API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-python.exe  RoadRunner-python.exe]||1.0||Oct. 3 2012||
+||  !RoadRunner (All) Installer||[http://roadrunnerwork.googlecode.com/svn/tags/Releases-1.0/vs/RoadRunner-all.exe   RoadRunner-all.exe]||1.0||Oct. 3 2012||
+||  C++        API installer ||[http://roadrunnerwork.googlecode.com/svn/tags/Release-1.0vs/RoadRunner-cpp.exe       RoadRunner-cpp.exe]||1.0||Oct. 3 2012||
+||  C          API installer ||[http://roadrunnerwork.googlecode.com/svn/tags/Release-1.0vs/RoadRunner-c.exe         RoadRunner-c.exe]||1.0||Oct. 3 2012||
+||  Python     API installer ||[http://roadrunnerwork.googlecode.com/svn/tags/Release-1.0vs/RoadRunner-python.exe    RoadRunner-python.exe]||1.0||Oct. 3 2012||
+
+== The bleeding edge ==
+Below are distributions containing release with the latest bugfixes. Observe that these releases may occasionaly be less stable than the official release. 
+
+These distributions do not contain the documentation. Documentation can be downloaded separately.
+
+||*Description*||*Download Link*||*Documentation*||*Version*||*Build Date*||
+||  !RoadRunner (All) Installer||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-all.exe   RoadRunner-all.exe]     ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-all-docs.exe     RoadRunner-all-docs.exe]||1.0||Oct. 3 2012||
+||  C++        API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-cpp.exe     RoadRunner-cpp.exe]     ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-cpp-docs.exe     RoadRunner-cpp-docs.exe]||1.0||Oct. 3 2012||
+||  C          API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-c.exe       RoadRunner-c.exe]       ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-c-docs.exe       RoadRunner-c-docs.exe]||1.0||Oct. 3 2012||
+||  Python     API installer ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-python.exe  RoadRunner-python.exe]  ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-python-docs.exe  RoadRunner-python-docs.exe]||1.0||Oct. 3 2012||
+
 
