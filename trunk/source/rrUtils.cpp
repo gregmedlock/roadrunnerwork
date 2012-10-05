@@ -297,7 +297,7 @@ double* CreateVector(const vector<double>& vec)
 }
 
 
-StringList GetSelectionListFromSettings(const SimulationSettings& settings)
+StringList getSelectionListFromSettings(const SimulationSettings& settings)
 {
 	//read from settings the variables found in the amounts and concentrations lists
 	StringList theList;
