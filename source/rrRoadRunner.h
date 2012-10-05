@@ -385,23 +385,18 @@ class RR_DECLSPEC RoadRunner : public rrObject
 \par
 This document describes the application programming interface (API) of RoadRunner, an open source (BSD) library for computing structural characteristics of cellular networks.
 \par
-LibLA is a linear algebra library derives much of its functionality from the standard CLAPACK library with additional linear algebra functions not directly supported by CLAPACK. The libStructural library supports a range of methods for the structural analysis of cellular networks (derived either from SBML or stoichiometry matrices) and utilizes LibLA for some of its internal computations.
-\par Installing
-To make the Structural Analysis Library easily accessible we have created binary installers for Windows as wel as OS X (version 10.4 and above).
-We also habe a source distribution, complete with Visual Studio, XCode, Scons and Qt project files that allow to build the library on Windows, Linux and OS X. For detailed instructions on how to build the library see the file INSTALL included with the source distribution.
+
 \par Dependencies
-These libraries depend on two third-party libraries, LAPACK and libSBML.  Both are provided with the binary installation where necessary.
+The RoadRunner library depend on several third-party libraries, CLapack, libSBML, Sundials, NLEQ, Poco and Pugi. These are provided with the binary installation where necessary.
 \par
-This work was supported by a grant from the NIH (1R01GM0819070-01).
 
-
-\author  Frank T. Bergmann (fbergman@u.washington.edu)
-\author     Herbert M. Sauro
-\author     Ravishankar Rao Vallabhajosyula (developed a previous version of the sructural analysis code)
+\author		Totte Karlsson (totte@dunescientific.com)
+\author  	Frank T. Bergmann (fbergman@u.washington.edu)
+\author     Herbert M. Sauro  (hsauro@u.washington.edu)
 
 \par License
 \par
-Copyright (c) 2008, Frank T Bergmann and Herbert M Sauro\n
+Copyright (c) 2012, Frank T Bergmann and Herbert M Sauro\n
 All rights reserved.
 
 \par
@@ -414,8 +409,6 @@ Redistribution and use in source and binary forms, with or without modification,
 \li Neither the name of University of Washington nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
 \par
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 
 */
 
