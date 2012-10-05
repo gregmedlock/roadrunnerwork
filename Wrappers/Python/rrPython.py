@@ -338,12 +338,13 @@ def setNumPoints(numPoints):
 
 ##\brief Sets the list of variables returned by simulate() or simulateEx()
 #
-#Example: rrPython.setSelectionList ("Time, S1, J1, J2")
+#Example: rrPython.setTimeCourseSelectionList ("Time, S1, J1, J2")
 #
 #\param list A string of Ids separated by spaces or comma characters
 #\return Returns True if successful
-def setSelectionList(list):
+def setTimeCourseSelectionList(list):
     return handle.setSelectionList(list)
+
 
 ##\brief Returns the list of variables returned by simulate() or simulateEx()
 #\return A list of symbol IDs indicating the currect selection list
@@ -361,6 +362,10 @@ def simulate():
     result = handle.resultToString(value)
     handle.freeResult(value)
     return result
+
+#use getResultElement and other helper routines to build array that can be used in numpy to plot with matplotlib
+#get num cols, get num rows, create array, fill array with two loops
+
 
 ##\brief Carry out a time-course simulation based on the given arguments
 #
