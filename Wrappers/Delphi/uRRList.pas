@@ -40,20 +40,23 @@ Uses SysUtils, Classes;
 type
   TRRList = class;
 
-  TRRListType = (rrList, rrDouble, rrString);
+  TRRListType = (rrList, rrInteger, rrDouble, rrString);
 
   TRRListItem = class (TObject)
             public
                 DataType : TRRListType;
-                d : double;
-                str : AnsiString;
+                iValue : integer;
+                dValue : double;
+                sValue : AnsiString;
                 list : TRRList;
+                function getInteger : Double;
                 function getDouble : double;
                 function getString : AnsiString;
                 function getList : TRRList;
 
-                constructor Create (d : double);  overload;
-                constructor Create (str : AnsiString); overload;
+                constructor Create (iValue : integer); overload;
+                constructor Create (dValue : double);  overload;
+                constructor Create (sValue : AnsiString); overload;
                 constructor Create (list : TRRList); overload;
 
                 destructor  Destroy; override;
@@ -75,22 +78,28 @@ type
 
 implementation
 
-//Uses uSBWUtils;
 
-
-constructor TRRListItem.Create (d : double);
+constructor TRRListItem.Create (iValue : integer);
 begin
   inherited Create;
-  DataType := rrDouble;
-  Self.d := d;
+  DataType := rrInteger;
+  Self.iValue := iValue;
 end;
 
 
-constructor TRRListItem.Create (str : AnsiString);
+constructor TRRListItem.Create (dValue : double);
+begin
+  inherited Create;
+  DataType := rrDouble;
+  Self.dValue := dValue;
+end;
+
+
+constructor TRRListItem.Create (sValue : AnsiString);
 begin
   inherited Create;
   DataType := rrString;
-  Self.str := str;
+  Self.sValue := sValue;
 end;
 
 
@@ -113,11 +122,19 @@ end;
 
 // --------------------------------------------------------------------------
 
+function TRRListItem.getInteger : Double;
+begin
+  if DataType <> rrInteger then
+     raise Exception.Create ('Integer expected in List item');
+  result := iValue;
+end;
+
+
 function TRRListItem.getDouble : Double;
 begin
   if DataType <> rrDouble then
      raise Exception.Create ('Double expected in List item');
-  result := d;
+  result := dValue;
 end;
 
 
@@ -125,7 +142,7 @@ function TRRListItem.getString : AnsiString;
 begin
   if DataType <> rrString then
      raise Exception.Create ('String expected in List item');
-  result := str;
+  result := sValue;
 end;
 
 
@@ -180,8 +197,9 @@ begin
   for i := 0 to src.count - 1 do
       begin
       case src[i].DataType of
-          rrDouble  : self.add (TRRListItem.Create(src[i].d));
-          rrString  : self.add (TRRListItem.Create(src[i].str));
+          rrInteger  : self.add (TRRListItem.Create(src[i].iValue));
+          rrDouble  : self.add (TRRListItem.Create(src[i].dValue));
+          rrString  : self.add (TRRListItem.Create(src[i].sValue));
           rrList    : self.add (TRRListItem.Create(src[i].list));
       else
           raise Exception.Create ('Unknown data type while copying List');

@@ -34,7 +34,7 @@ unit uRoadRunnerAPI;
 interface
 
 Uses SysUtils, Classes, Windows, uMatrix, Generics.Collections, IOUtils, uRRList,
-     uRRTypes, uSBWArray, uTypes;
+     uRRTypes, uSBWArray;
 
 {
 C_DECL_SPEC bool                    rrCallConv  setLogLevelFromString(const char* lvl);
@@ -49,74 +49,18 @@ C_DECL_SPEC char*                   rrCallConv  getTempFolder();
 
 
 type
-  TAnsiCharArray = array[0..20000] of AnsiChar;
+  TAnsiCharArray = array[0..100000] of AnsiChar;
   PAnsiCharArray = ^TAnsiCharArray;
-  TArrayOfAnsiCharArray = array of PAnsiCharArray;
-  PArrayOfAnsiCharArray = ^TArrayOfAnsiCharArray;
 
-  TArrayOfPAnsiCharArray = array of PAnsiCharArray;
+  TAnsiCharArrayArray = array[0..100000] of PAnsiCharArray;  // Array of char*
+  PAnsiCharArrayArray = ^TAnsiCharArrayArray;
 
-  TRRResult = record
-     RSize : integer;
-     CSize : integer;
-     Data : array of double;
-     ColumnHeaders : ^PAnsiChar;
-  end;
-  PRRResultHandle = ^TRRResult;
-
-
-  TRRLabeledStringList = record
+  TRRStringArray = record
     count : integer;
-    labelStr : PAnsiChar;
-    strList : TArrayOfPAnsiCharArray;
+    strList : PAnsiCharArrayArray;
   end;
-  PRRLabeledStringList = ^TRRLabeledStringList;
+  PRRStringArray = ^TRRStringArray;
 
-
-  TRRStringList = record
-    count : integer;
-    strList : TArrayOfPAnsiCharArray;
-  end;
-  PRRStringList = ^TRRStringList;
-
-
-  TRRLabeledSymbolLists = record
-    count : integer;
-    list : array of TRRLabeledStringList;
-  end;
-  PRRLabeledSymbolLists = ^TRRLabeledSymbolLists;
-
-
-  TRRDoubleVector = record
-       count : integer;
-       data : array of double;
-  end;
-  PRRDoubleVectorHandle =  ^TRRDoubleVector;
-
-
-  TLabeledStringList = record
-     labeStr : AnsiString;
-     stringList : TStringList;
-  end;
-
-  TListOfLabeledStringLists = array of TLabeledStringList;
-
-  TRRMatrix = record
-    RSize : integer;
-    CSize : integer;
-    data : array of double;
-  end;
-  PRRMatrixHandle = ^TRRMatrix;
-
-  TRRCCodeAPI = record
-    Header : PAnsiChar;
-    Source : PAnsiChar;
-  end;
-  TRRCCode = record
-    Header : AnsiString;
-    Source : AnsiString;
-  end;
-  PRRCCodeHandle = ^TRRCCodeAPI;
 
   TVoidCharFunc = function : PAnsiChar; stdcall;   //char* func(void)
   TVoidBoolFunc = function : boolean; stdcall; // bool func (void);
@@ -132,7 +76,7 @@ type
   TVarIntBoolFunc = function (var value : integer) : bool; stdcall;   // bool func (double)
   TIntDoubleFunc = function (index : integer) : double; stdcall;
 
-  TVoidStringListFunc = function() : PRRStringList; stdcall;
+  TVoidStringListFunc = function() : PRRStringArray; stdcall;
 
   TGetCopyright = TVoidCharFunc;
   TGetRRInstance = TPointerVoidFunc;
@@ -151,7 +95,7 @@ type
   TSetValue = function (speciesId : PAnsiChar; var value : double) : bool; stdcall;
   TGetReactionIds = TPointerVoidFunc;
   TReset = function : bool; stdcall;
-  TFreeStringList = procedure (handle : Pointer); stdcall;
+  TFreeStringArray = function (handle : PRRStringArray) : boolean; stdcall;
   TFreeRRMatrix = function (matrix : PRRMatrixHandle) : boolean; stdcall;
   TFreeRRDoubleVector = function (vector : PRRDoubleVectorHandle) : boolean ; stdcall;
   TOneStep = function (var currentTime : double; var stepSize : double) : double; stdcall;
@@ -185,7 +129,7 @@ function  getCopyright : AnsiString;
 function  getTempFolder : AnsiString;
 function  enableLogging : boolean;
 function  setLogLevel (debugLevel : AnsiString) : boolean;
-//function  setLogLevelFromString (debugLevel : AnsiString) : boolean;
+function  getLogFileName : AnsiString;
 function  setTempFolder (name : AnsiString) : boolean;
 
 {$REGION 'Documentation'}
@@ -212,7 +156,8 @@ function  simulate : T2DDoubleArray;
 function  mSimulate : TMatrix;
 function  simulateEx (timeStart: double; timeEnd : double; numberOfPoints : integer)  : TMatrix;
 function  oneStep (var currentTime : double; var stepSize : double) : double;
-function  setSelectionList (strList : TStringList) : boolean;
+function  setTimeCourseSelectionList (strList : TStringList) : boolean;
+function  getTimeCourseSelectionList: TRRList;
 function  setCapabilities (str : AnsiString) : boolean;
 function  getCapabilities : AnsiString;
 
@@ -262,14 +207,18 @@ function  getNumberOfIndependentSpecies : integer;
 
 function  steadyState : double;
 function  computeSteadyStateValues : TDoubleArray;
-function  getEigenValues : TMatrix;
+function  setSteadyStateSelectionList (strList : TStringList) : boolean;
+
+function  getEigenValues : T2DDoubleArray;
 
 function  getuCC (variable : AnsiString; parameter : AnsiString) : double;
 function  getCC (variable : AnsiString; parameter : AnsiString) : double;
 function  getuEE (variable : AnsiString; parameter : AnsiString) : double;
 function  getEE (variable : AnsiString; parameter : AnsiString) : double;
 
-function  getAvailableSymbols : TRRList;
+function  getAvailableSymbolsII : TRRList;
+function  getAvailableTimeCourseSymbols : TRRList;
+function  getAvailableSteadStateSymbols : TRRList;
 
 function  setComputeAndAssignConservationLaws (value : boolean) : boolean;
 
@@ -281,7 +230,7 @@ procedure releaseRoadRunnerLibrary;
 implementation
 
 type
-  TLibGetAvailableSymbols = function : PRRLabeledSymbolLists; stdcall;
+  TLibGetAvailableSymbols = function : PRRListRecordHandle; stdcall;
   TlibSetInitialConditions = function (vec : PRRDoubleVectorHandle) : bool; stdcall;
   TlibComputeSteadyStateValues = function : PRRDoubleVectorHandle;
 
@@ -298,7 +247,7 @@ var DLLHandle : Cardinal;
     libGetLastError : TVoidCharFunc;
     libEnableLogging : TVoidBoolFunc;
     libSetLogLevel : TCharBoolFunc;
-    //libSetLogLevelFromString : function (value : PAnsiChar) : bool; stdcall;
+    libGetLogFileName : TVoidCharFunc;
     libSetTempFolder : function (folder : PAnsiChar) : bool; stdcall;
 
     libGetBuildDate : TVoidCharFunc;
@@ -315,7 +264,7 @@ var DLLHandle : Cardinal;
     libSimulateEx : TSimulateEx;
     libGetValue : TGetValue;
     libSetValue : TSetValue;
-    libSetSelectionList : TSetSelectionList;
+    libSetTimeCourseSelectionList : TSetSelectionList;
     libGetReactionIds : TGetReactionIds;
     libReset : TReset;
     libSetFloatingSpeciesInitialConcentrations : function (value : Pointer) : boolean; stdcall;
@@ -348,8 +297,8 @@ var DLLHandle : Cardinal;
     libGetFloatingSpeciesConcentrations : function : PRRDoubleVectorHandle; stdcall;
     libGetBoundarySpeciesConcentrations : function : PRRDoubleVectorHandle; stdcall;
 
-    libSetFloatingSpeciesConcentrations : function (PRRDoubleVectorHandle) : boolean; stdcall;
-    libsetBoundarySpeciesConcentrations : function (PRRDoubleVectorHandle) : boolean; stdcall;
+    libSetFloatingSpeciesConcentrations : function (values : PRRDoubleVectorHandle) : boolean; stdcall;
+    libSetBoundarySpeciesConcentrations : function (values : PRRDoubleVectorHandle) : boolean; stdcall;
 
     libGetNumberOfDependentSpecies : function : integer; stdcall;
     libGetNumberOfIndependentSpecies : function : integer; stdcall;
@@ -369,7 +318,11 @@ var DLLHandle : Cardinal;
     libGetElasticityIds      : TVoidStringListFunc;
 
     libSetSteadyStateSelectionList : TCharBoolFunc;
-    libGetAvailableSymbols : TLibGetAvailableSymbols;
+    libGetSteadyStateSelectionList : function : PRRListRecordHandle; stdcall;
+    libGetTimeCourseSelectionList  : function : PRRListRecordHandle; stdcall;
+    libGetAvailableTimeCourseSymbols : TLibGetAvailableSymbols;
+
+    libGetAvailableSteadyStateSymbols : TLibGetAvailableSymbols;
     libComputeSteadyStateValues : TlibComputeSteadyStateValues;
     libSetInitialConditions : TlibSetInitialConditions;
     libSetComputeAndAssignConservationLaws : TBoolBoolFunc;
@@ -386,16 +339,17 @@ var DLLHandle : Cardinal;
     libgetEE                  : TGetMCA;
     libGetEigenValues         : TGetMatrix;
 
-    libCreateVector : function (size : integer) : PRRDoubleVectorHandle;
+    libCreateVector : function (size : integer) : PRRDoubleVectorHandle;  stdcall;
+    libGetListItem : function (list : pointer; index : integer) : PRRListItemRecord; stdcall;
 
-    libFreeStringList : TFreeStringList;     //
-    libFreeMatrix : TFreeRRMatrix; //
-    libFreeText : TCharBoolFunc;             //
-    libFreeDoubleVector : TFreeRRDoubleVector; //
+    libFreeStringArray : TFreeStringArray;
+    libFreeMatrix : TFreeRRMatrix;
+    libFreeText : TCharBoolFunc;
+    libFreeDoubleVector : TFreeRRDoubleVector;
 
 // Utility Routines
 // --------------------------------------------------------------
-function getArrayOfStrings (pList: PRRStringList) : TStringList;
+function getArrayOfStrings (pList: PRRStringArray) : TStringList;
 var nStrings : integer;
     i, j : integer;
     element : PAnsiCharArray;
@@ -441,10 +395,28 @@ begin
           result[i,j] := matrix^.data[i*nc + j];
 end;
 
-// --------------------------------------------------------------
+
+function extractList (list : PRRListRecordHandle) : TRRList;
+var i : integer;
+    item : PRRListItemRecord;
+begin
+  result := TRRList.Create;
+  for i := 0 to list^.count - 1 do
+      begin
+      item := libGetListItem (list, i);
+      case item^.ItemType of
+        litList : result.Add (TRRListItem.Create (extractList (item^.lValue)));
+        litString : result.Add (TRRListItem.Create (AnsiString (item^.sValue)));
+        litInteger : result.Add (TRRListItem.Create (item^.iValue));
+        litDouble : result.Add (TRRListItem.Create (item^.dValue));
+      end;
+  end;
+end;
+
+// -----------------------------------------------------------------
 // For doumentation, see the C API docs at:
-//   http://code.google.com/p/roadrunnerwork/
-// --------------------------------------------------------------
+//      http://code.google.com/p/roadrunnerwork/
+// -----------------------------------------------------------------
 
 function getRRInstance : Pointer;
 begin
@@ -483,6 +455,7 @@ begin
   result := AnsiString (p);
 end;
 
+
 function  getTempFolder : AnsiString;
 begin
   result := libGetTempFolder;
@@ -505,9 +478,16 @@ begin
   loggingEnabled := true;
 end;
 
+
 function setLogLevel (debugLevel : AnsiString) : boolean;
 begin
   result := libSetLogLevel (PAnsiChar (debugLevel));
+end;
+
+
+function getLogFileName : AnsiString;
+begin
+  result := libGetLogFileName;
 end;
 
 
@@ -575,6 +555,7 @@ begin
   result := libReset;
 end;
 
+
 function setFloatingSpeciesInitialConcentrations (value : TDoubleArray) : boolean;
 var p : PRRDoubleVectorHandle;  i : integer;
 begin
@@ -584,6 +565,7 @@ begin
  result := libSetFloatingSpeciesInitialConcentrations (p);
  libFreeDoubleVector (p);
 end;
+
 
 function getCapabilities : AnsiString;
 begin
@@ -629,7 +611,7 @@ begin
 end;
 
 
-function setSelectionList (strList : TStringList) : boolean;
+function setTimeCourseSelectionList (strList : TStringList) : boolean;
 var i : integer;
 begin
   if strList.Count = 0 then
@@ -638,8 +620,16 @@ begin
   selectionList := strList[0];
   for i := 1 to strList.Count - 1 do
       selectionList := selectionList + ' ' + strList[i];
-  if not libSetSelectionList (PAnsiChar (selectionList)) then
+  if not libSetTimeCourseSelectionList (PAnsiChar (selectionList)) then
      raise Exception.Create ('Error calling setSelectionList');
+end;
+
+
+function getTimeCourseSelectionList: TRRList;
+var ptr : PRRListRecordHandle;
+begin
+  ptr := libGetTimeCourseSelectionList;
+  result := extractList (ptr);
 end;
 
 
@@ -737,14 +727,14 @@ end;
 
 
 function getReactionIds : TStringList;
-var pList : PRRStringList;
+var pList : PRRStringArray;
 begin
   pList := libGetReactionIds;
   if pList <> nil then
      try
        result := getArrayOfStrings(pList);
      finally
-       libFreeStringList (pList);
+       libFreeStringArray (pList);
      end
   else
      result := TStringList.Create;
@@ -763,7 +753,7 @@ end;
 
 
 function getBoundarySpeciesIds : TStringList;
-var p : PRRStringList;
+var p : PRRStringArray;
 begin
   p := libGetBoundarySpeciesIds;
   try
@@ -772,12 +762,13 @@ begin
     else
        result := getArrayOfStrings(p);
   finally
-    libFreeStringList (p);
+    libFreeStringArray (p);
   end;
 end;
 
+
 function getFloatingSpeciesIds : TStringList;
-var p : PRRStringList;
+var p : PRRStringArray;
 begin
   p := libGetFloatingSpeciesIds;
   try
@@ -786,13 +777,13 @@ begin
     else
        result := getArrayOfStrings(p);
   finally
-    libFreeStringList (p);
+    libFreeStringArray (p);
   end;
 end;
 
 
 function getGlobalParameterIds : TStringList;
-var p : PRRStringList;
+var p : PRRStringArray;
 begin
   p := libGetGlobalParameterIds;
   try
@@ -801,7 +792,7 @@ begin
     else
        result := getArrayOfStrings (p);
   finally
-    libFreeStringList (p);
+    libFreeStringArray (p);
   end;
 end;
 
@@ -829,13 +820,14 @@ begin
     for i := 0 to p^.count - 1 do
         result[i] := p^.data[i];
   finally
-    libFreeDoubleVector (p);
+    if p^.count > 0 then
+       libFreeDoubleVector (p);
   end;
 end;
 
 
 function getRatesOfChangeIds : TStringList;
-var p : PRRStringList;
+var p : PRRStringArray;
 begin
   p := libGetRatesOfChangeIds;
   try
@@ -844,13 +836,13 @@ begin
     else
        result := getArrayOfStrings (p);
   finally
-    libFreeStringList (p);
+    libFreeStringArray (p);
   end;
 end;
 
 
 function getEigenValueIds : TStringList;
-var p : PRRStringList;
+var p : PRRStringArray;
 begin
   p := libGetEigenValueIds;
   try
@@ -859,13 +851,13 @@ begin
     else
        result := getArrayOfStrings (p);
   finally
-    libFreeStringList (p);
+    libFreeStringArray (p);
   end;
 end;
 
 
 function getElasticityIds : TStringList;
-var p : PRRStringList;
+var p : PRRStringArray;
 begin
   p := libGetElasticityIds;
   try
@@ -874,7 +866,7 @@ begin
     else
        result := getArrayOfStrings (p);
   finally
-    libFreeStringList (p);
+    libFreeStringArray (p);
   end;
 end;
 
@@ -897,14 +889,14 @@ end;
 
 
 function getCompartmentIds : TStringList;
-var pList : PRRStringList;
+var pList : PRRStringArray;
 begin
   pList := libGetCompartmentIds;
   if pList <> nil then
      try
        result := getArrayOfStrings(pList);
      finally
-       libFreeStringList (pList);
+       libFreeStringArray (pList);
      end
   else
     result := TStringList.Create;
@@ -998,14 +990,15 @@ begin
   end;
 end;
 
-function getEigenValues : TMatrix;
+
+function getEigenValues : T2DDoubleArray;
 var p : PRRMatrixHandle;
 begin
   p := libGetEigenValues;
   if p = nil then
      raise Exception.Create ('No Eigenvalue matrix');
   try
-    result := loadIntoMatrix (p);
+    result := loadInTo2DArray (p);
   finally
     libFreeMatrix (p);
   end;
@@ -1025,6 +1018,14 @@ begin
      libSetSteadyStateSelectionList (PAnsiChar (str));
      end;
   result := true;
+end;
+
+
+function getSteadyStateSelectionList: TRRList;
+var ptr : PRRListRecordHandle;
+begin
+  ptr := libGetSteadyStateSelectionList;
+  result := extractList (ptr);
 end;
 
 
@@ -1055,29 +1056,34 @@ begin
      raise Exception.Create ('Error in getCC function');
 end;
 
-  {st := getFluxControlCoefficientIds();
-  subList := TRRList.Create;
-  subList.Add (TRRListItem.Create ('Flux Control Coefficients'));
-  for i := 0 to st.Count - 1 do
-      subList.Add (TRRListItem.Create (st[i]));
-  result.Add (TRRListItem.Create (subList));
-  st.Free;}
 
-  {st := getUnscaledConcentrationControlCoefficientIds();
-  subList := TRRList.Create;
-  subList.Add (TRRListItem.Create ('Unscaled Concentration Control Coefficients'));
-  for i := 0 to st.Count - 1 do
-      subList.Add (TRRListItem.Create (st[i]));
-  result.Add (TRRListItem.Create (subList));
-  st.Free;}
-
-
-
-function getAvailableSymbols : TRRList;
-var subList : TRRList; st : TStringList;
-    i : integer; item : TRRListItem;
+function getAvailableTimeCourseSymbols : TRRList;
+var ptr : PRRListRecordHandle;
 begin
-  result := TRRList.Create;
+  ptr := libGetAvailableTimeCourseSymbols();
+  result := extractList (ptr);
+end;
+
+
+function getAvailableSteadStateSymbols : TRRList;
+var ptr : PRRListRecordHandle;
+begin
+  ptr := libGetAvailableSteadyStateSymbols();
+  result := extractList (ptr);
+end;
+
+
+// Deprecated
+function getAvailableSymbolsII : TRRList;
+var subList : TRRList; st : TStringList;
+    i : integer;
+    ptr : PRRListRecordHandle;
+begin
+  ptr := libGetAvailableTimeCourseSymbols();
+  result := extractList (ptr);
+  exit;
+
+
   subList := TRRList.Create;
   subList.Add (TRRListItem.Create ('time'));
   result.Add (TRRListItem.Create (subList));
@@ -1224,8 +1230,7 @@ end;
 
 function getStoichiometryMatrix : T2DDoubleArray;
 var st : PRRMatrixHandle;
-    nr, nc : integer;
-    i, j : integer;
+    i : integer;
 begin
   st := libGetStoichiometryMatrix;
   try
@@ -1244,7 +1249,6 @@ end;
 
 function getLinkMatrix : T2DDoubleArray;
 var st : PRRMatrixHandle;
-    nr, nc : integer;
     i, j : integer;
 begin
   st := libGetLinkMatrix;
@@ -1264,8 +1268,6 @@ end;
 
 function getNrMatrix : T2DDoubleArray;
 var st : PRRMatrixHandle;
-    nr, nc : integer;
-    i, j : integer;
 begin
   st := libGetNrMatrix;
   try
@@ -1284,8 +1286,6 @@ end;
 
 function getL0Matrix : T2DDoubleArray;
 var st : PRRMatrixHandle;
-    nr, nc : integer;
-    i, j : integer;
 begin
   st := libGetL0Matrix;
   try
@@ -1304,8 +1304,6 @@ end;
 
 function getConservationMatrix : T2DDoubleArray;
 var st : PRRMatrixHandle;
-    nr, nc : integer;
-    i, j : integer;
 begin
   st := libGetConservationMatrix;
   try
@@ -1328,6 +1326,7 @@ begin
   libName := newLibName;
 end;
 
+
 function loadSingleMethod (methodName : string; var errMsg : AnsiString; var success : boolean; methodList : TStringList) : Pointer;
 begin
    result := GetProcAddress(dllHandle, PChar (methodName));
@@ -1341,6 +1340,7 @@ begin
       methodList.Add (methodName + ': found');
 end;
 
+
 function loadMethods (var errMsg : AnsiString; methodList : TStringList) : boolean;
 begin
    result := true;
@@ -1350,10 +1350,11 @@ begin
    @libHasError      := loadSingleMethod ('hasError', errMsg, result, methodList);
    @libGetLastError  := loadSingleMethod ('getLastError', errMsg, result, methodList);
 
-   @libSetLogLevel   := loadSingleMethod ('_setLogLevel@4', errMsg, result, methodList);
-   @libEnableLogging := loadSingleMethod ('_enableLogging@0', errMsg, result, methodList);
+   @libSetLogLevel   := loadSingleMethod ('setLogLevel', errMsg, result, methodList);
+   @libEnableLogging := loadSingleMethod ('enableLogging', errMsg, result, methodList);
+   libGetLogFileName := loadSingleMethod ('getLogFileName', errMsg, result, methodList);
 
-   @libSetTempFolder := loadSingleMethod ('_setTempFolder@4', errMsg, result, methodList);
+   @libSetTempFolder := loadSingleMethod ('setTempFolder', errMsg, result, methodList);
    @libGetTempFolder := loadSingleMethod ('getTempFolder', errMsg, result, methodList);
 
    @libGetCCode      := loadSingleMethod ('getCCode', errMsg, result, methodList);
@@ -1367,9 +1368,9 @@ begin
    @libLoadSBML           := loadSingleMethod ('loadSBML', errMsg, result, methodList);
    @libGetSBML            := loadSingleMethod ('getSBML', errMsg, result, methodList);
 
-   @libSetTimeStart          := loadSingleMethod ('setTimeStart', errMsg, result, methodList);
-   @libSetTimeEnd            := loadSingleMethod ('setTimeEnd', errMsg, result, methodList);
-   @libSetNumberOfPoints     := loadSingleMethod ('setNumPoints', errMsg, result, methodList);
+   @libSetTimeStart       := loadSingleMethod ('setTimeStart', errMsg, result, methodList);
+   @libSetTimeEnd         := loadSingleMethod ('setTimeEnd', errMsg, result, methodList);
+   @libSetNumberOfPoints  := loadSingleMethod ('setNumPoints', errMsg, result, methodList);
    @libSimulate           := loadSingleMethod ('simulate', errMsg, result, methodList);
    @libSimulateEx         := loadSingleMethod ('simulateEx', errMsg, result, methodList);
    @libOneStep            := loadSingleMethod ('oneStep', errMsg, result, methodList);
@@ -1382,9 +1383,10 @@ begin
    @libGetFullJacobian    := loadSingleMethod('getFullJacobian', errMsg, result, methodList);
    @libGetReducedJacobian := loadSingleMethod('getReducedJacobian', errMsg, result, methodList);
 
-   @libSetValue          := loadSingleMethod ('setValue', errMsg, result, methodList);
-   @libGetValue          := loadSingleMethod ('getValue', errMsg, result, methodList);
-   @libSetSelectionList  := loadSingleMethod ('setSelectionList', errMsg, result, methodList);
+   @libSetValue           := loadSingleMethod ('setValue', errMsg, result, methodList);
+   @libGetValue           := loadSingleMethod ('getValue', errMsg, result, methodList);
+   @libSetTimeCourseSelectionList  := loadSingleMethod ('setTimeCourseSelectionList', errMsg, result, methodList);
+   //@libGetTimeCourseSelectionList  := loadSingleMethod ('getTimeCourseSelectionList', errMsg, result, methodList);
 
    @libGetNumberOfReactions        := loadSingleMethod ('getNumberOfReactions', errMsg, result, methodList);
    @libGetNumberOfBoundarySpecies  := loadSingleMethod ('getNumberOfBoundarySpecies', errMsg, result, methodList);
@@ -1392,15 +1394,15 @@ begin
    @libGetNumberOfGlobalParameters := loadSingleMethod ('getNumberOfGlobalParameters', errMsg, result, methodList);
    @libGetNumberOfCompartments     := loadSingleMethod ('getNumberOfCompartments', errMsg, result, methodList);
 
-   @libSetCompartmentByIndex         := loadSingleMethod ('setCompartmentByIndex', errMsg, result, methodList);
-   @libSetFloatingSpeciesByIndex     := loadSingleMethod ('setFloatingSpeciesByIndex', errMsg, result, methodList);
-   @libSetBoundarySpeciesByIndex     := loadSingleMethod ('setBoundarySpeciesByIndex', errMsg, result, methodList);
-   @libSetGlobalParameterByIndex     := loadSingleMethod ('setGlobalParameterByIndex', errMsg, result, methodList);
+   @libSetCompartmentByIndex       := loadSingleMethod ('setCompartmentByIndex', errMsg, result, methodList);
+   @libSetFloatingSpeciesByIndex   := loadSingleMethod ('setFloatingSpeciesByIndex', errMsg, result, methodList);
+   @libSetBoundarySpeciesByIndex   := loadSingleMethod ('setBoundarySpeciesByIndex', errMsg, result, methodList);
+   @libSetGlobalParameterByIndex   := loadSingleMethod ('setGlobalParameterByIndex', errMsg, result, methodList);
 
-   @libGetCompartmentByIndex         := loadSingleMethod ('getCompartmentByIndex', errMsg, result, methodList);
-   @libGetFloatingSpeciesByIndex     := loadSingleMethod ('getFloatingSpeciesByIndex', errMsg, result, methodList);
-   @libGetBoundarySpeciesByIndex     := loadSingleMethod ('getBoundarySpeciesByIndex', errMsg, result, methodList);
-   @libGetGlobalParameterByIndex     := loadSingleMethod ('getGlobalParameterByIndex', errMsg, result, methodList);
+   @libGetCompartmentByIndex       := loadSingleMethod ('getCompartmentByIndex', errMsg, result, methodList);
+   @libGetFloatingSpeciesByIndex   := loadSingleMethod ('getFloatingSpeciesByIndex', errMsg, result, methodList);
+   @libGetBoundarySpeciesByIndex   := loadSingleMethod ('getBoundarySpeciesByIndex', errMsg, result, methodList);
+   @libGetGlobalParameterByIndex   := loadSingleMethod ('getGlobalParameterByIndex', errMsg, result, methodList);
 
    @libGetFloatingSpeciesConcentrations := loadSingleMethod ('getFloatingSpeciesConcentrations', errMsg, result, methodList);
    @libGetBoundarySpeciesConcentrations := loadSingleMethod ('_getBoundarySpeciesConcentrations@0', errMsg, result, methodList);
@@ -1411,11 +1413,11 @@ begin
    @libSteadyState                   := loadSingleMethod ('steadyState', errMsg, result, methodList);
    @libComputeSteadyStateValues      := loadSingleMethod ('computeSteadyStateValues', errMsg, result, methodList);
    @libSetSteadyStateSelectionList   := loadSingleMethod ('setSteadyStateSelectionList', errMsg, result, methodList);
-   @libSetSteadyStateSelectionList   := loadSingleMethod ('setSteadyStateSelectionList', errMsg, result, methodList);
+   @libGetSteadyStateSelectionList   := loadSingleMethod ('getSteadyStateSelectionList', errMsg, result, methodList);
 
-   @libGetReactionRate          := loadSingleMethod ('getReactionRate', errMsg, result, methodList);
-   @libGetReactionRates         := loadSingleMethod ('getReactionRates', errMsg, result, methodList);
-   @libGetRatesOfChange         := loadSingleMethod ('getRatesOfChange', errMsg, result, methodList);
+   @libGetReactionRate        := loadSingleMethod ('getReactionRate', errMsg, result, methodList);
+   @libGetReactionRates       := loadSingleMethod ('getReactionRates', errMsg, result, methodList);
+   @libGetRatesOfChange       := loadSingleMethod ('getRatesOfChange', errMsg, result, methodList);
 
    @libGetCompartmentIds      := loadSingleMethod ('getCompartmentIds', errMsg, result, methodList);
    @libGetReactionIds         := loadSingleMethod ('getReactionIds', errMsg, result, methodList);
@@ -1425,7 +1427,9 @@ begin
    @libGetRatesOfChangeIds    := loadSingleMethod ('getRatesOfChangeIds', errMsg, result, methodList);
    @libGetEigenValueIds       := loadSingleMethod ('getEigenValueIds', errMsg, result, methodList);
    @libGetElasticityIds       := loadSingleMethod ('getElasticityCoefficientIds', errMsg, result, methodList);
-   @libGetAvailableSymbols      := loadSingleMethod ('getAvailableSymbols', errMsg, result, methodList);
+
+   @libGetAvailableTimeCourseSymbols  := loadSingleMethod ('getAvailableTimeCourseSymbols', errMsg, result, methodList);
+   @libGetAvailableSteadyStateSymbols := loadSingleMethod ('getAvailableSteadyStateSymbols', errMsg, result, methodList);
 
    @libGetStoichiometryMatrix   := loadSingleMethod ('getStoichiometryMatrix', errMsg, result, methodList);
    @libGetLinkMatrix            := loadSingleMethod ('getLinkMatrix', errMsg, result, methodList);
@@ -1433,25 +1437,23 @@ begin
    @libGetL0Matrix              := loadSingleMethod ('getL0Matrix', errMsg, result, methodList);
    @libGetConservationMatrix    := loadSingleMethod ('getConservationMatrix', errMsg, result, methodList);
 
-   // MCA
    @libgetuCC                   := loadSingleMethod ('getuCC', errMsg, result, methodList);
    @libgetuEE                   := loadSingleMethod ('getuEE', errMsg, result, methodList);
    @libgetCC                    := loadSingleMethod ('getCC', errMsg, result, methodList);
    @libgetEE                    := loadSingleMethod ('getEE', errMsg, result, methodList);
 
-   @libGetEigenValues            := loadSingleMethod ('_getEigenValues@0', errMsg, result, methodList);
+   @libGetEigenValues           := loadSingleMethod ('getEigenValues', errMsg, result, methodList);
 
+   @libGetListItem              := loadSingleMethod ('getListItem', errMsg, result, methodList);
 
    @libFreeRRInstance   := loadSingleMethod ('freeRRInstance', errMsg, result, methodList);
    @libFreeResult       := loadSingleMethod ('freeResult', errMsg, result, methodList);
    @libFreeMatrix       := loadSingleMethod ('freeMatrix', errMsg, result, methodList);
    @libFreeText         := loadSingleMethod ('freeText', errMsg, result, methodList);
-   @libFreeStringList   := loadSingleMethod ('freeStringList', errMsg, result, methodList);
-   @libFreeDoubleVector := GetProcAddress (dllHandle, PChar ('freeVector'));
+   @libFreeStringArray  := loadSingleMethod ('freeStringArray', errMsg, result, methodList);
 
-   @libCreateVector     := loadSingleMethod ('_createVectorAPI@4', errMsg, result, methodList);
-   //if not Assigned (libFreeDoubleVector) then
-   //   begin errMsg := 'Unable to locate freeDoubleVector'; result := false; exit; end;
+   @libCreateVector     := loadSingleMethod ('createVector', errMsg, result, methodList);
+   @libFreeDoubleVector := loadSingleMethod ('freeVector', errMsg, result, methodList);
    except
      on E: Exception do
         begin
@@ -1477,7 +1479,6 @@ begin
          begin
          if loadMethods (errMsg, methodList) then
             begin
-            //instance := libGetRRInstance;
             DLLLoaded := True;
             result := true;
             end
@@ -1502,7 +1503,7 @@ end;
 procedure releaseRoadRunnerLibrary;
 begin
   DLLLoaded := false;
-  libFreeRRInstance (instance);
+  libFreeRRInstance (instance);  // <- should this be here?
   freeLibrary (DLLHandle);
 end;
 
