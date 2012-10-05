@@ -17,10 +17,10 @@ cmake_minimum_required(VERSION 2.8)
 FILE (GLOB docs ./html/*.*)
 install (FILES ${docs} 
          DESTINATION Documentation/cpp_api/html 
-         COMPONENT rr_docs)
+         COMPONENT cpp_docs)
 
 FILE (GLOB search_files ./html/search/*.*)
 install (FILES ${search_files} 
          DESTINATION Documentation/cpp_api/html/search 
-         COMPONENT rr_docs)
+         COMPONENT cpp_docs)
 
