@@ -9,6 +9,8 @@ SET(RR_VERSION "${RR_MAJOR_VERSION}.${RR_MINOR_VERSION}.${RR_BUILD_VERSION}")
 OPTION (INSTALL_CXX_DOCS 		"Package c++ docs" 	        	OFF)
 OPTION (INSTALL_PYTHON_DOCS 	"Package Python docsr" 		    OFF)
 OPTION (INSTALL_C_DOCS  		"Package C docs"                OFF)
+OPTION (INSTALL_SBML_MODELS		"Install SBML Models"		    ON)
+OPTION (BUILD_TRUNK     		"BUILD TRUNK"		            ON)
 
 #------ RELEASES FOLDER
 if(${BORLAND})
@@ -23,22 +25,23 @@ if("${RR_RELEASE_FOLDER}" STREQUAL "")
 endif()
 endif()
 
-OPTION (INSTALL_SBML_MODELS		"Install SBML Models"		        ON)
 
 #What sub folders to move into...?
 if(${INSTALL_SBML_MODELS})
 add_subdirectory(Models)
 endif()
 
+if(${BUILD_TRUNK})
 add_subdirectory(trunk)
+endif()
+
 #================ CPACK =========================================================================
 #Create distribution Pack
 include (InstallRequiredSystemLibraries)
 
 #COMPONENTS OF THE INSTALL
-set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models Delphi Python rr_docs)
+set(CPACK_COMPONENTS_ALL rr_core apps c_api compiled_examples example_files sbml_models Delphi Python misc_docs cpp_docs c_docs python_docs)
 #set(CPACK_COMPONENTS_ALL rr_docs)
-
 set(CPACK_COMPONENT_RR_CORE_DISPLAY_NAME					"Core Files")
 set(CPACK_COMPONENT_APPS_DISPLAY_NAME						"Applications")
 set(CPACK_COMPONENT_C_API_DISPLAY_NAME						"C API DLL")
@@ -47,12 +50,15 @@ set(CPACK_COMPONENT_EXAMPLE_FILES_DISPLAY_NAME				"Examples Source")
 set(CPACK_COMPONENT_SBML_MODELS_DISPLAY_NAME				"SBML Models")
 set(CPACK_COMPONENT_DELPHI_DISPLAY_NAME						"Delphi Units")
 set(CPACK_COMPONENT_PYTHON_DISPLAY_NAME						"Python Module")
-set(CPACK_COMPONENT_RR_DOCS_DISPLAY_NAME					"Doxygen Documentation")
+set(CPACK_COMPONENT_MISC_DOCS_DISPLAY_NAME					"Misc. Documentation")
+set(CPACK_COMPONENT_C_DOCS_DISPLAY_NAME					    "C API Documentation")
+set(CPACK_COMPONENT_CPP_DOCS_DISPLAY_NAME				    "C++ API Documentation")
+set(CPACK_COMPONENT_PYTHON_DOCS_DISPLAY_NAME				"Python API Documentation")
 
 set(CPACK_PACKAGE_ICON										${CMAKE_CURRENT_SOURCE_DIR}\\\\Roadrunner.bmp)
 
 #NSIS Specific
-set(CPACK_NSIS_MUI_ICON									${CMAKE_CURRENT_SOURCE_DIR}/RoadRunner.ico)
+set(CPACK_NSIS_MUI_ICON									    ${CMAKE_CURRENT_SOURCE_DIR}/RoadRunner.ico)
 set(CPACK_NSIS_MUI_UNIICON									${CMAKE_CURRENT_SOURCE_DIR}/RoadRunner.ico)
 set(CPACK_NSIS_INSTALL_ROOT									"C:")
 
@@ -65,7 +71,19 @@ set(CPACK_COMPONENT_EXAMPLE_FILES_DESCRIPTION				"Examples Source")
 set(CPACK_COMPONENT_SBML_MODELS_DESCRIPTION					"Install various SBML Model files")
 set(CPACK_COMPONENT_DELPHI_DESCRIPTION						"Installs RoadRunner Delphi Units")
 set(CPACK_COMPONENT_PYTHON_DESCRIPTION						"Installs RoadRunner Python Module")
-set(CPACK_COMPONENT_RR_DOCS_DESCRIPTION						"Installs RoadRunner Doxygen Documentation")
+set(CPACK_COMPONENT_MISC_DOCS_DESCRIPTION					"Misc. documentation, like Readme files etc.")
+set(CPACK_COMPONENT_CPP_DOCS_DESCRIPTION					"C++ documentation")
+set(CPACK_COMPONENT_C_DOCS_DESCRIPTION				    	"C documentation")
+set(CPACK_COMPONENT_PYTHON_DOCS_DESCRIPTION			    	"Python documentation")
+
+#Grouping
+
+set(CPACK_COMPONENT_GROUP_DOCUMENTATION_DESCRIPTION         "Doxygen docs")
+set(CPACK_COMPONENT_CPP_DOCS_GROUP                          "Documentation")
+set(CPACK_COMPONENT_C_DOCS_GROUP                            "Documentation")
+set(CPACK_COMPONENT_PYTHON_DOCS_GROUP                       "Documentation")
+
+#Dependencies
 
 set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/trunk/License.txt")
 set(CPACK_PACKAGE_VENDOR									"UW")
@@ -74,8 +92,8 @@ set(CPACK_PACKAGE_VERSION_MAJOR								"${RR_MAJOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_MINOR								"${RR_MINOR_VERSION}")
 set(CPACK_PACKAGE_VERSION_PATCH								"${RR_BUILD_VERSION}")
 
-#set(CPACK_NSIS_INSTALL_ROOT                                 "$PROGRAMFILES") 
-set(CPACK_PACKAGE_INSTALL_DIRECTORY							"RoadRunner")
+set(CPACK_NSIS_INSTALL_ROOT                                 "$PROGRAMFILES") 
+#set(CPACK_PACKAGE_INSTALL_DIRECTORY							"RoadRunner")
 
 
 if(${INSTALL_CXX_DOCS})
