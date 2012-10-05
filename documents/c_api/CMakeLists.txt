@@ -16,13 +16,13 @@ cmake_minimum_required(VERSION 2.8)
 FILE(GLOB docs ./html/*.*)
 install(FILES ${docs} 
         DESTINATION Documentation/c_api/html 
-        COMPONENT rr_docs
+        COMPONENT c_docs
        )
 
 FILE(GLOB search_files ./html/search/*.*)
 install(FILES 
         ${search_files} 
         DESTINATION Documentation/c_api/html/search 
-        COMPONENT rr_docs
+        COMPONENT c_docs
        )
 
