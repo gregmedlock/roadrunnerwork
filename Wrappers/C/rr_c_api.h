@@ -480,7 +480,7 @@ C_DECL_SPEC bool rrCallConv setTimeEnd(const double& timeEnd);
  \return Returns true if sucessful
  \ingroup simulation
 */
-C_DECL_SPEC bool rrCallConv setNumPoints(const int& nrPoints);
+C_DECL_SPEC bool rrCallConv setNumPoints(const int& numberOfPoints);
 
 /*!
  \brief Set the selection list for output from simulate() or simulateEx()
@@ -505,7 +505,7 @@ C_DECL_SPEC bool rrCallConv setTimeCourseSelectionList(const char* list);
  \return A list of symbol Ids indicating the current selection list
  \ingroup simulation
 */
-C_DECL_SPEC RRStringArrayHandle rrCallConv getSelectionList();
+C_DECL_SPEC RRStringArrayHandle rrCallConv getTimeCourseSelectionList();
 
 /*!
  \brief Carry out a time-course simulation, use setTimeStart, setTimeEnd and
@@ -1104,15 +1104,6 @@ C_DECL_SPEC int rrCallConv getNumberOfIndependentSpecies();
 */
 C_DECL_SPEC RRStringArrayHandle rrCallConv getReactionIds();
 
-
-/*!
- \brief Obtain the list of rate of change Ids
-
- \return Returns null if it fails, if succesful it returns a pointer to a RRStringArrayHandle struct
- \ingroup reaction
-*/
-C_DECL_SPEC RRStringArrayHandle rrCallConv getRateOfChangeIds();
-
 /*!
  \brief Obtain the list of boundary species Ids
 
@@ -1423,6 +1414,7 @@ C_DECL_SPEC bool rrCallConv freeCCode(RRCCodeHandle code);
 
 /*!
  \brief Pause
+If your program is running in a console, Pause() will stop execution and wait for one keybord stroke in order to continue.
  \return void
 */
 C_DECL_SPEC void rrCallConv Pause();

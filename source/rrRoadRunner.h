@@ -46,7 +46,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		CvodeInterface                 *mCVode;
 		ISteadyStateSolver             *steadyStateSolver;
 		vector<TSelectionRecord>        selectionList;
-        int                             CreateDefaultSelectionList();
+        int                             createDefaultTimeCourseSelectionList();
 		ModelGenerator                 *mModelGenerator;    //Pointer to one of the below ones..
 		CSharpGenerator                *mCSharpGenerator;
 		CGenerator                     *mCGenerator;
@@ -64,7 +64,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		double                          getParameterValue(const TParameterType& parameterType, const int& parameterIndex);
 
 		vector<TSelectionRecord>        mSteadyStateSelection;
-		vector<TSelectionRecord>        GetSteadyStateSelection(const StringList& newSelectionList);
+		vector<TSelectionRecord>        getSteadyStateSelection(const StringList& newSelectionList);
 		StringList                      getParameterIds();
 		string                          GetDLLName();
 		SimulationSettings              mSettings;
@@ -113,7 +113,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
         bool                            unLoadModelDLL();
         CvodeInterface*                 GetCVodeInterface();
         NLEQInterface*                  GetNLEQInterface();
-		int                             CreateSelectionList();
+		int                             createTimeCourseSelectionList();
 		bool                            SetTempFileFolder(const string& folder);
 		string                          GetTempFileFolder();
 		void                            PartOfSimulation(SBMLModelSimulation* simulation){mSimulation = simulation;}
@@ -166,7 +166,7 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		bool                            setValue(const string& sId, const double& dValue);
 		double                          getValue(const string& sId);
 		ArrayList                       getAvailableTimeCourseSymbols();
-		StringList                      getSelectionList();
+		StringList                      getTimeCourseSelectionList();
 		void                            setTimeCourseSelectionList(const string& List);
 		void                            setTimeCourseSelectionList(const StringList& newSelectionList);
 		double                          oneStep(const double& currentTime, const double& stepSize);

@@ -583,7 +583,7 @@ bool  rrCallConv setTimeCourseSelectionList(const char* list)
     return false;
 }
 
-RRStringArrayHandle rrCallConv getSelectionList()
+RRStringArrayHandle rrCallConv getTimeCourseSelectionList()
 {
 	try
     {
@@ -593,7 +593,7 @@ RRStringArrayHandle rrCallConv getSelectionList()
             return NULL;
         }
 
-        StringList sNames = gRRHandle->getSelectionList();
+        StringList sNames = gRRHandle->getTimeCourseSelectionList();
 
         if(!sNames.Count())
         {
@@ -744,7 +744,6 @@ RRVectorHandle rrCallConv getRatesOfChange()
     }
 	return NULL;
 }
-
 
 RRStringArrayHandle rrCallConv getRatesOfChangeIds()
 {
@@ -2179,26 +2178,6 @@ RRList* rrCallConv getElasticityCoefficientIds()
     return NULL;
 }
 
-RRStringArrayHandle rrCallConv getRateOfChangeIds()
-{
-	try
-    {
-        if(!gRRHandle)
-        {
-            setError(ALLOCATE_API_ERROR_MSG);
-            return false;
-        }
-        StringList aList = gRRHandle->getRateOfChangeIds();
-        return createList(aList);
-    }
-    catch(Exception& ex)
-    {
-    	stringstream msg;
-    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
-        setError(msg.str());
-    }
-    return false;
-}
 
 bool rrCallConv setCapabilities(const char* caps)
 {

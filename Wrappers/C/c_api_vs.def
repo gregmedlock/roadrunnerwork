@@ -11,7 +11,7 @@ EXPORTS
     getCurrentSBML                              = _getCurrentSBML@0
     computeSteadyStateValues                    = _computeSteadyStateValues@0         
     evalModel                                   = _evalModel@0                        
-    freeList                                    = _freeRRList@4                        
+    freeRRList                                  = _freeRRList@4                        
     freeCCode                                   = _freeCCode@4                        
     freeMatrix                                  = _freeMatrix@4                       
     freeRRInstance                              = _freeRRInstance@4                   
@@ -21,6 +21,7 @@ EXPORTS
     freeVector                                  = _freeVector@4                       
     getAvailableTimeCourseSymbols               = _getAvailableTimeCourseSymbols@0
     getAvailableSteadyStateSymbols              = _getAvailableSteadyStateSymbols@0
+    getBoundarySpeciesConcentrations            = _getBoundarySpeciesConcentrations@0
     getBoundarySpeciesByIndex                   = _getBoundarySpeciesByIndex@8
     getBoundarySpeciesIds                       = _getBoundarySpeciesIds@0          
     getBuildDate                                = _getBuildDate@0                     
@@ -66,7 +67,6 @@ EXPORTS
     getParamPromotedSBML                        = _getParamPromotedSBML@4
     getRRInstance                               = _getRRInstance@0
     getRateOfChange                             = _getRateOfChange@8
-    getRateOfChangeIds                          = _getRateOfChangeIds@0
     getRatesOfChange                            = _getRatesOfChange@0
     getRatesOfChangeEx                          = _getRatesOfChangeEx@4
     getRatesOfChangeIds                         = _getRatesOfChangeIds@0
@@ -82,7 +82,7 @@ EXPORTS
     getSBML                                     = _getSBML@0
     getScaledElasticityMatrix                   = _getScaledElasticityMatrix@0
     getScaledFloatingSpeciesElasticity          = _getScaledFloatingSpeciesElasticity@12
-    getSelectionList                            = _getSelectionList@0
+    getTimeCourseSelectionList                  = _getTimeCourseSelectionList@0
     getSteadyStateSelectionList                 = _getSteadyStateSelectionList@0
     getStoichiometryMatrix                      = _getStoichiometryMatrix@0
     getTempFolder                               = _getTempFolder@0
@@ -116,6 +116,7 @@ EXPORTS
     setCapabilities                             = _setCapabilities@4
     setCompartmentByIndex                       = _setCompartmentByIndex@8
     setComputeAndAssignConservationLaws         = _setComputeAndAssignConservationLaws@4
+    setFloatingSpeciesInitialConcentrations     = _setFloatingSpeciesInitialConcentrations@4
     setFloatingSpeciesByIndex                   = _setFloatingSpeciesByIndex@8
     setGlobalParameterByIndex                   = _setGlobalParameterByIndex@8
     setNumPoints                                = _setNumPoints@4

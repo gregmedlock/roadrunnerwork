@@ -47,7 +47,7 @@ RR_DECLSPEC bool            CopyStdVectorToCArray(const vector<double>& src, dou
 RR_DECLSPEC bool            CopyStdVectorToCArray(const vector<bool>&   src,  bool*  dest,  int size);
 
 //SelectionList
-RR_DECLSPEC StringList      GetSelectionListFromSettings(const SimulationSettings& settings);
+RR_DECLSPEC StringList      getSelectionListFromSettings(const SimulationSettings& settings);
 
 // DLL Functions
 RR_DECLSPEC HINSTANCE       LoadDLL(const string& dll);

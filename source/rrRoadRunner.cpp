@@ -172,7 +172,7 @@ string RoadRunner::GetTempFileFolder()
 	return mTempFileFolder;
 }
 
-int RoadRunner::CreateDefaultSelectionList()
+int RoadRunner::createDefaultTimeCourseSelectionList()
 {
 	StringList theList;
     StringList oFloating  = getFloatingSpeciesIds();
@@ -193,10 +193,10 @@ int RoadRunner::CreateDefaultSelectionList()
     return selectionList.size();
 }
 
-int RoadRunner::CreateSelectionList()
+int RoadRunner::createTimeCourseSelectionList()
 {
 
-	StringList theList = GetSelectionListFromSettings(mSettings);
+	StringList theList = getSelectionListFromSettings(mSettings);
 
     if(theList.Count() < 2)
     {
@@ -485,7 +485,7 @@ DoubleMatrix RoadRunner::runSimulation()
     int nrCols = selectionList.size();
     if(!nrCols)
     {
-        nrCols = CreateDefaultSelectionList();
+        nrCols = createDefaultTimeCourseSelectionList();
     }
 
     DoubleMatrix results(mNumPoints, nrCols);
@@ -570,7 +570,7 @@ bool RoadRunner::Simulate()
 bool RoadRunner::PopulateResult()
 {
     ArrayList  l = getAvailableTimeCourseSymbols();
-    StringList list = getSelectionList();
+    StringList list = getTimeCourseSelectionList();
     mSimulationData.SetColumnNames(list);
     mSimulationData.SetData(mRawSimulationData);
     return true;
@@ -597,7 +597,7 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 
     mRawSimulationData = simulate();
 
-    StringList list = getSelectionList();
+    StringList list = getTimeCourseSelectionList();
 
     TextWriter writer(cout);
     DumpResults(writer, mRawSimulationData, list);
@@ -613,7 +613,7 @@ bool RoadRunner::SimulateSBMLFile(const string& fileName, const bool& useConserv
 //    try
 //    {
 //        double[,] data = sim.simulateEx(startTime, endTime, mNumPoints);
-//        ArrayList list = sim.getSelectionList();
+//        ArrayList list = sim.getTimeCourseSelectionList();
 //        TextWriter writer = Console.Error;
 //
 //        DumpResults(writer, data, list);
@@ -1010,7 +1010,7 @@ DoubleMatrix RoadRunner::simulateEx(const double& startTime, const double& endTi
 }
 
 //Returns the currently selected columns that will be returned by calls to simulate() or simulateEx(,,).
-StringList RoadRunner::getSelectionList()
+StringList RoadRunner::getTimeCourseSelectionList()
 {
     StringList oResult;
 
@@ -2247,7 +2247,7 @@ ArrayList RoadRunner::getSteadyStateSelectionList()
     return result ;
 }
 
-vector<TSelectionRecord> RoadRunner::GetSteadyStateSelection(const StringList& newSelectionList)
+vector<TSelectionRecord> RoadRunner::getSteadyStateSelection(const StringList& newSelectionList)
 {
     vector<TSelectionRecord> steadyStateSelection;
 	steadyStateSelection.resize(newSelectionList.Count());
@@ -2380,7 +2380,7 @@ void RoadRunner::setSteadyStateSelectionList(const StringList& newSelectionList)
         throw SBWApplicationException(emptyModelStr);
     }
 
-    vector<TSelectionRecord> ssSelection = GetSteadyStateSelection(newSelectionList);
+    vector<TSelectionRecord> ssSelection = getSteadyStateSelection(newSelectionList);
 
 //    for(int i = 0; i < ssSelection.size(); i++)
 //    {
@@ -3293,12 +3293,12 @@ string RoadRunner::getDescription()
 //            sim.setmNumPoints(10);
 //            var data = sim.simulate();
 //            var writer = new StringWriter();
-//            DumpResults(writer, data, sim.getSelectionList());
+//            DumpResults(writer, data, sim.getTimeCourseSelectionList());
 //            sim.changeInitialConditions(new double[] { 20, 0 });
 //            sim.reset();
 //            data = sim.simulate();
 //            writer = new StringWriter();
-//            DumpResults(writer, data, sim.getSelectionList());
+//            DumpResults(writer, data, sim.getTimeCourseSelectionList());
 //        }
 //#endif
 //    }
@@ -5088,7 +5088,7 @@ ArrayList RoadRunner::getAvailableTimeCourseSymbols()
 //            }));
 //            results = sim.simulateEx(0, 10, 11);
 //
-//            DumpResults(Console.Out, results, sim.getSelectionList());
+//            DumpResults(Console.Out, results, sim.getTimeCourseSelectionList());
 //
 //
 //
@@ -5104,7 +5104,7 @@ ArrayList RoadRunner::getAvailableTimeCourseSymbols()
 //            //    }));
 //            //results = sim.simulateEx(0, 1, 11);
 //            ////var writer = new StringWriter();
-//            //DumpResults(Console.Out, results, sim.getSelectionList());
+//            //DumpResults(Console.Out, results, sim.getTimeCourseSelectionList());
 //
 //            //sim = new RoadRunner();
 //            //sim.setTolerances(1e-10, 1e-9);
@@ -5113,7 +5113,7 @@ ArrayList RoadRunner::getAvailableTimeCourseSymbols()
 //            //    "time", "S1", "S2", "S3", "S4"
 //            //    }));
 //            //results = sim.simulateEx(0, 2, 51);
-//            //DumpResults(Console.Out, results,sim.getSelectionList());
+//            //DumpResults(Console.Out, results,sim.getTimeCourseSelectionList());
 //
 //            //sim = new RoadRunner();
 //            //mComputeAndAssignConservationLaws = false;
@@ -5128,7 +5128,7 @@ ArrayList RoadRunner::getAvailableTimeCourseSymbols()
 //
 //            ////sim.mCVode.
 //            //results = sim.simulateEx(0, 5, 51);
-//            //DumpResults(Console.Out, results, sim.getSelectionList());
+//            //DumpResults(Console.Out, results, sim.getTimeCourseSelectionList());
 //
 //            //Debug.WriteLine(writer.GetStringBuilder().ToString());
 //            //Debug.WriteLine(sim.getWarnings());
