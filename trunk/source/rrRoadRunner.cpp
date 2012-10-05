@@ -183,7 +183,7 @@ int RoadRunner::CreateDefaultSelectionList()
         theList.Add(oFloating[i]);
     }
 
-    setSelectionList(theList);
+    setTimeCourseSelectionList(theList);
 
 	Log(lDebug)<<"The following is selected:";
 	for(int i = 0; i < selectionList.size(); i++)
@@ -211,7 +211,7 @@ int RoadRunner::CreateSelectionList()
        }
     }
 
-	setSelectionList(theList);
+	setTimeCourseSelectionList(theList);
 
 	Log(lDebug)<<"The following is selected:";
 	for(int i = 0; i < selectionList.size(); i++)
@@ -1383,25 +1383,22 @@ void RoadRunner::EvalModel()
     mModel->evalModel(mModel->GetTime(), args);
 }
 
-void RoadRunner::setSelectionList(const string& list)
+void RoadRunner::setTimeCourseSelectionList(const string& list)
 {
     StringList aList(list,", ");
-    setSelectionList(aList);
+    setTimeCourseSelectionList(aList);
 }
 
 // Help("Set the columns to be returned by simulate() or simulateEx(), valid symbol names include" +
 //              " time, species names, , volume, reaction rates and rates of change (speciesName')")
-void RoadRunner::setSelectionList(const StringList& _selList)
+void RoadRunner::setTimeCourseSelectionList(const StringList& _selList)
 {
-    StringList newSelectionList(_selList);
-
-
     selectionList.clear();
-
+    StringList newSelectionList(_selList);
     StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList bs = mModelGenerator->getBoundarySpeciesList();
     StringList rs = mModelGenerator->getReactionIds();
-    StringList vol = mModelGenerator->getCompartmentList();
+    StringList vol= mModelGenerator->getCompartmentList();
     StringList gp = mModelGenerator->getGlobalParameterList();
 //    StringList sr = mModelGenerator->ModifiableSpeciesReferenceList;
 
@@ -1519,7 +1516,6 @@ void RoadRunner::setSelectionList(const StringList& _selList)
 //            selectionList[i].index = index;
 //            selectionList[i].p1 = (string) newSelectionList[i];
 //        }
-
     }
 }
 
@@ -1548,42 +1544,6 @@ double RoadRunner::oneStep(const double& currentTime, const double& stepSize, co
     }
     return mCVode->OneStep(currentTime, stepSize);
 }
-
-
-//        // ---------------------------------------------------------------------
-//        // Start of Level 3 API Methods
-//        // ---------------------------------------------------------------------
-//
-//        /*Help("Compute the steady state of the model, returns the sum of squares of the solution")
-//        double RoadRunner::steadyState () {
-//            try {
-//                if (mModel) {
-//                    kinSolver = new kinSolverInterface(model);
-//                    return kinSolver.solve(model.y);
-//                } else throw SBWApplicationException (emptyModelStr);
-//            } catch (SBWApplicationException) {
-//                throw;
-//            } catch (const Exception& e) {
-//                throw SBWApplicationException ("Unexpected error from steadyState()", e.Message());
-//            }
-//        }*/
-//
-//
-//        //void TestSettings()
-//        //{
-//        //    var rr = new RoadRunner();
-//
-//        //    Debug.WriteLine(rr.getCapabilities());
-//
-//        //    rr.UseKinsol = 1;
-//        //    Debug.WriteLine(rr.getCapabilities());
-//
-//        //    rr.setCapabilities(rr.getCapabilities());
-//
-//        //    rr.UseKinsol = 0;
-//        //    Debug.WriteLine(rr.getCapabilities());
-//
-//        //}
 
 // Help("Compute the reduced Jacobian at the current operating point")
 ls::DoubleMatrix RoadRunner::getReducedJacobian()
@@ -1663,11 +1623,9 @@ ls::DoubleMatrix RoadRunner::getFullJacobian()
     }
 }
 
-
 // ---------------------------------------------------------------------
 // Start of Level 4 API Methods
 // ---------------------------------------------------------------------
-
 ls::DoubleMatrix* RoadRunner::getLinkMatrix()
 {
     try
@@ -1719,35 +1677,31 @@ ls::DoubleMatrix* RoadRunner::getL0Matrix()
 // Help("Returns the stoichiometry matrix for the currently loaded model")
 DoubleMatrix RoadRunner::getStoichiometryMatrix()
 {
-    //Todo: Room to improve how matrices are handled across LibStruct/RoadRunner/C-API
-    DoubleMatrix mat;
-
     try
     {
-        if (mModel)
+        LibStructural::DoubleMatrix* aMat = mLS->getStoichiometryMatrix();
+        if (!mModel || !aMat)
         {
-            LibStructural::DoubleMatrix* aMat = mLS->getStoichiometryMatrix();
+	        throw SBWApplicationException(emptyModelStr);
+		}
 
-            if(aMat)
+
+        //Todo: Room to improve how matrices are handled across LibStruct/RoadRunner/C-API
+        DoubleMatrix mat;
+
+        mat.resize(aMat->numRows(), aMat->numCols());
+        for(int row = 0; row < mat.RSize(); row++)
+        {
+            for(int col = 0; col < mat.CSize(); col++)
             {
-                mat.resize(aMat->numRows(), aMat->numCols());
-                for(int row = 0; row < mat.RSize(); row++)
-                {
-                    for(int col = 0; col < mat.CSize(); col++)
-                    {
-                        mat(row,col) = (*aMat)(row,col);
-                    }
-                }
+                mat(row,col) = (*aMat)(row,col);
             }
-
-            return mat;
         }
-
-        throw SBWApplicationException(emptyModelStr);
+        return mat;
     }
     catch (const Exception& e)
     {
-        throw SBWApplicationException("Unexpected error from getReorderedStoichiometryMatrix()" + e.Message());
+        throw SBWApplicationException("Unexpected error from getStoichiometryMatrix()" + e.Message());
     }
 }
 
@@ -2221,11 +2175,11 @@ ArrayList RoadRunner::getSteadyStateSelectionList()
         throw SBWApplicationException(emptyModelStr);
     }
 
-//    if (mSteadyStateSelection == null)
+    if (mSteadyStateSelection.size() == 0)
     {
         // default should be species only ...
         StringList floatingSpecies = getFloatingSpeciesIds();
-        mSteadyStateSelection.resize(floatingSpecies.Count());// = new TSelectionRecord[floatingSpecies.Count];
+        mSteadyStateSelection.resize(floatingSpecies.Count());
         for (int i = 0; i < floatingSpecies.Count(); i++)
         {
             TSelectionRecord aRec;
@@ -2243,8 +2197,7 @@ ArrayList RoadRunner::getSteadyStateSelectionList()
     StringList oRates        = getRateOfChangeIds();
     StringList oParameters   = getParameterIds();
 
-    ArrayList result;// = new ArrayList();
-//    foreach (var record in mSteadyStateSelection)
+    ArrayList result;
     for(int i = 0; i < mSteadyStateSelection.size(); i++)
     {
         TSelectionRecord record = mSteadyStateSelection[i];
@@ -2290,16 +2243,13 @@ ArrayList RoadRunner::getSteadyStateSelectionList()
                 result.Add(record.p1);
                 break;
         }
-
     }
-
     return result ;
 }
 
 vector<TSelectionRecord> RoadRunner::GetSteadyStateSelection(const StringList& newSelectionList)
 {
-    vector<TSelectionRecord> steadyStateSelection;// = new TSelectionRecord[newSelectionList.Count];
-
+    vector<TSelectionRecord> steadyStateSelection;
 	steadyStateSelection.resize(newSelectionList.Count());
     StringList fs = mModelGenerator->getFloatingSpeciesConcentrationList();
     StringList bs = mModelGenerator->getBoundarySpeciesList();
@@ -2410,7 +2360,10 @@ vector<TSelectionRecord> RoadRunner::GetSteadyStateSelection(const StringList& n
             }
         }
 
-        if (set) continue;
+        if (set)
+        {
+        	continue;
+        }
 
         // it is another symbol
         steadyStateSelection[i].selectionType = TSelectionType::clUnknown;
@@ -2427,8 +2380,13 @@ void RoadRunner::setSteadyStateSelectionList(const StringList& newSelectionList)
         throw SBWApplicationException(emptyModelStr);
     }
 
-    vector<TSelectionRecord> steadyStateSelection = GetSteadyStateSelection(newSelectionList);
-    mSteadyStateSelection = steadyStateSelection;
+    vector<TSelectionRecord> ssSelection = GetSteadyStateSelection(newSelectionList);
+
+//    for(int i = 0; i < ssSelection.size(); i++)
+//    {
+//    	Log(lDebug)<<"Steady state selection: "<<ssSelection[i];
+//    }
+    mSteadyStateSelection = ssSelection;
 }
 
 // Help("performs steady state analysis, returning values as given by setSteadyStateSelectionList().")
@@ -2557,7 +2515,7 @@ double RoadRunner::computeSteadyStateValue(const string& sId)
     }
 }
 
-// Help("Returns the values selected with setSelectionList() for the current model time / timestep")
+// Help("Returns the values selected with setTimeCourseSelectionList() for the current model time / timestep")
 //        double[] RoadRunner::getSelectedValues()
 //        {
 //            if (!mModel) throw SBWApplicationException(emptyModelStr);
@@ -5104,14 +5062,14 @@ ArrayList RoadRunner::getAvailableTimeCourseSymbols()
 //            sim.loadSBMLFromFile(string.Format(@"C:\Development\test-suite\cases\semantic\{0}\{0}-sbml-l3v1.xml", test));
 //
 //            //sim.loadSBMLFromFile(@"C:\Development\test-suite\cases\semantic\00951\00951-sbml-l3v1.xml");
-//            //sim.setSelectionList(new ArrayList(new string[] {
+//            //sim.setTimeCourseSelectionList(new ArrayList(new string[] {
 //            //    "time", "x", "y", "p", "q"
 //            //    }));
 //            //results = sim.simulateEx(0, 2, 11);
 //            ////var writer = new StringWriter();
 //
 //            //sim.loadSBMLFromFile(@"C:\Users\fbergmann\Desktop\max.xml");
-//            sim.setSelectionList(new ArrayList(new string[] {
+//            sim.setTimeCourseSelectionList(new ArrayList(new string[] {
 //                "time", "Xref"
 //            }));
 //            results = sim.simulateEx(0, 10, 11);
@@ -5127,7 +5085,7 @@ ArrayList RoadRunner::getAvailableTimeCourseSymbols()
 //            ////sim.loadSBMLFromFile(@"C:\Development\trunk-sbml\trunk\test-suite\cases\semantic\00938\00938-sbml-l3v1.xml");
 //            //sim.loadSBMLFromFile(@"C:\Development\test-suite\cases\semantic\00952\00952-sbml-l3v1.xml");
 //            ////sim.loadSBMLFromFile(@"C:\Development\test-suite\cases\semantic\00951\00951-sbml-l3v1.xml");
-//            //sim.setSelectionList(new ArrayList(new string[] {
+//            //sim.setTimeCourseSelectionList(new ArrayList(new string[] {
 //            //    "time", "S", "Q", "R", "reset"
 //            //    }));
 //            //results = sim.simulateEx(0, 1, 11);
@@ -5137,7 +5095,7 @@ ArrayList RoadRunner::getAvailableTimeCourseSymbols()
 //            //sim = new RoadRunner();
 //            //sim.setTolerances(1e-10, 1e-9);
 //            //sim.loadSBMLFromFile(@"C:\Development\test-suite\cases\semantic\00374\00374-sbml-l2v4.xml");
-//            //sim.setSelectionList(new ArrayList(new string[] {
+//            //sim.setTimeCourseSelectionList(new ArrayList(new string[] {
 //            //    "time", "S1", "S2", "S3", "S4"
 //            //    }));
 //            //results = sim.simulateEx(0, 2, 51);
@@ -5146,7 +5104,7 @@ ArrayList RoadRunner::getAvailableTimeCourseSymbols()
 //            //sim = new RoadRunner();
 //            //mComputeAndAssignConservationLaws = false;
 //            //sim.loadSBMLFromFile(@"C:\Development\test-suite\cases\semantic\00424\00424-sbml-l3v1.xml");
-//            //sim.setSelectionList(new ArrayList(new string[] {
+//            //sim.setTimeCourseSelectionList(new ArrayList(new string[] {
 //            //    "time", "S1", "S2", "S3"
 //            //    }));
 //

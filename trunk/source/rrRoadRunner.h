@@ -167,8 +167,8 @@ class RR_DECLSPEC RoadRunner : public rrObject
 		double                          getValue(const string& sId);
 		ArrayList                       getAvailableTimeCourseSymbols();
 		StringList                      getSelectionList();
-		void                            setSelectionList(const string& List);
-		void                            setSelectionList(const StringList& newSelectionList);
+		void                            setTimeCourseSelectionList(const string& List);
+		void                            setTimeCourseSelectionList(const StringList& newSelectionList);
 		double                          oneStep(const double& currentTime, const double& stepSize);
 		double                          oneStep(const double& currentTime, const double& stepSize, const bool& reset);
 
