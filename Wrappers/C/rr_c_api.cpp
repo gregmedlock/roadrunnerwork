@@ -81,7 +81,7 @@ bool rrCallConv enableLogging()
             return false;
         }
 
-		//LogLevel logLevel(lDebug4);
+	    LogOutput::mLogToConsole = true;
         char* tempFolder = getTempFolder();
 		string logFile = JoinPath(tempFolder, "RoadRunner.log") ;
         freeText(tempFolder);
@@ -560,7 +560,7 @@ bool rrCallConv getNumPoints(int& numPoints)
 }
 
 
-bool  rrCallConv setSelectionList(const char* list)
+bool  rrCallConv setTimeCourseSelectionList(const char* list)
 {
 	try
     {
@@ -570,7 +570,7 @@ bool  rrCallConv setSelectionList(const char* list)
             return false;
         }
 
-        gRRHandle->setSelectionList(list);
+        gRRHandle->setTimeCourseSelectionList(list);
         return true;
 
     }
@@ -1875,7 +1875,7 @@ RRListHandle rrCallConv getSteadyStateSelectionList()
         }
 
 		// ********** HMS TO BE ADDED BACK LATER
-        //return createList(sNames);
+        return createList(sNames);
     }
     catch(Exception& ex)
     {

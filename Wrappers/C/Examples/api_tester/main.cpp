@@ -1,4 +1,3 @@
-//---------------------------------------------------------------------------
 #include <iostream>
 #include <string>
 #include <vector>
@@ -15,6 +14,9 @@ using namespace rr_c_api;
 void printMatrix(char* msg1, RRMatrixHandle mat);
 int main(int argc, char* argv[])
 {
+	enableLogging();
+    setLogLevel("Debug3");
+
 	printf ("\n    Start of run\n");
 	printf ("   ==============\n\n");
 
@@ -226,6 +228,10 @@ int main(int argc, char* argv[])
 	    cout<<"Compute Steady State: sums of squares: "<<ssVal<<endl;
     }
 
+	cout<<"Steady State selection List: "<<listToString(getSteadyStateSelectionList());
+	setSteadyStateSelectionList("S2 S1");
+	cout<<"\nSteady State selection List: "<<listToString(getSteadyStateSelectionList());
+
     printMatrix("Stoichiometry Matrix", getStoichiometryMatrix());
 
     cout<<"Number of independent species = "<<getNumberOfIndependentSpecies()<<endl;
@@ -318,7 +324,7 @@ int main(int argc, char* argv[])
 //	printf ("\nCall to getRatesOfChange (with S1=1, S2=2, S3=3):\n");
 //	cout<<printVector (getRatesOfChange())<<endl;
 
-    setSelectionList("S1 S2");
+    setTimeCourseSelectionList("S1 S2");
 //-------- The latest
     cout<<vectorToString(getFloatingSpeciesConcentrations());
     cout<<vectorToString(getGlobalParameterValues());

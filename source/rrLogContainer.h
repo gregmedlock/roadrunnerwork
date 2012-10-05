@@ -7,7 +7,6 @@
 #include "rrObject.h"
 #include "rrLogLevel.h"
 
-
 using std::string;
 using std::ostringstream;
 

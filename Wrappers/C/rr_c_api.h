@@ -487,17 +487,17 @@ C_DECL_SPEC bool rrCallConv setNumPoints(const int& nrPoints);
 
  Use getAvailableTimeCourseSymbols() to retrieve the list of all possible symbols.
  
- Example: \code setSelectionList ("Time, S1, J1, J2"); \endcode
+ Example: \code setTimeCourseSelectionList ("Time, S1, J1, J2"); \endcode
  
  or
  
- setSelectionList ("Time S1 J1 J2")
+ setTimeCourseSelectionList ("Time S1 J1 J2")
 
  \param[in] list A string of Ids separated by spaces <b>or</b> comma characters
  \return Returns true if sucessful
  \ingroup simulation
 */
-C_DECL_SPEC bool rrCallConv setSelectionList(const char* list);
+C_DECL_SPEC bool rrCallConv setTimeCourseSelectionList(const char* list);
 
 /*!
  \brief Get the current selection list for simulate() or simulateEx()

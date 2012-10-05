@@ -51,7 +51,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;USE_PCH;$(Defines)</Defines>
+			<Defines>_DEBUG;USE_PCH;STATIC_RR;WIN32;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -61,7 +61,7 @@
 			<ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
 			<TASM_Debugging>Full</TASM_Debugging>
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
-			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(RR_DEBUG_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
 			<Defines>NDEBUG;$(Defines)</Defines>
