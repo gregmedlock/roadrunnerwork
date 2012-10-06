@@ -1,6 +1,6 @@
 ﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
-			<ProjectGuid>{646832EF-B607-49FF-9525-3C263BD03953}</ProjectGuid>
+			<ProjectGuid>{5EC81081-7DE3-4982-AC11-476C1B474C02}</ProjectGuid>
 			<ProjectVersion>12.3</ProjectVersion>
 			<Base>True</Base>
 			<Config Condition="'$(Config)'==''">Debug</Config>
@@ -22,15 +22,18 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<BCC_IncludePath>$(RR_DEBUG_INSTALL)\include;..\source;$(BCC_IncludePath)</BCC_IncludePath>
+			<BCC_Defines>LIBSBML_USE_CPP_NAMESPACE;WIN32;$(BCC_Defines)</BCC_Defines>
+			<OutputExt>exe</OutputExt>
+			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
+			<ILINK_LibraryPath>sanity_tests\;R:\installs\xe\debug\lib\;C:\rDisk\installs\xe\debug\lib\;R:\roadrunnerwork\trunk\testing\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<PackageImports>vcl.bpi;rtl.bpi;bcbie.bpi;vclx.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;vclimg.bpi;svnui.bpi;svn.bpi;bdertl.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;inet.bpi;inetdb.bpi;webdsnap.bpi;websnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DbxClientDriver.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;DuneComponents.bpi;VCLCommon.bpi</PackageImports>
 			<NoVCL>true</NoVCL>
-			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
+			<Multithreaded>true</Multithreaded>
 			<IncludePath>sanity_tests\;sanity_test\;..\;..\ThirdParty\UnitTest\src;$(IncludePath)</IncludePath>
-			<_TCHARMapping>char</_TCHARMapping>
-			<ProjectType>CppConsoleApplication</ProjectType>
-			<ILINK_LibraryPath>sanity_tests\;sanity_test\;C:\rDisk\installs\xe\debug\lib\;..\;..\..\testing\;R:\roadrunnerwork\trunk\testing\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-			<OutputExt>exe</OutputExt>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
+			<ProjectType>CppConsoleApplication</ProjectType>
+			<_TCHARMapping>char</_TCHARMapping>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE</DCC_UnitAlias>
 			<DynamicRTL>true</DynamicRTL>
@@ -42,6 +45,7 @@
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<FinalOutputDir>R:\installs\xe\debug\bin\</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
@@ -64,14 +68,18 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<LibFiles Include="C:\rDisk\installs\xe\debug\lib\UnitTest.lib">
+			<LibFiles Include="R:\installs\xe\debug\lib\roadrunner-static.lib">
+				<IgnorePath>true</IgnorePath>
+				<BuildOrder>3</BuildOrder>
+			</LibFiles>
+			<LibFiles Include="R:\installs\xe\debug\lib\UnitTest.lib">
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>1</BuildOrder>
 			</LibFiles>
 			<CppCompile Include="main.cpp">
 				<BuildOrder>0</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="sanity_tests\FailTest.cpp">
+			<CppCompile Include="sanity_tests\TestRoadRunnerCore.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">

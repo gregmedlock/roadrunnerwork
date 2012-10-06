@@ -49,7 +49,7 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>..\..\source\;..\..\source\libstruct;..\..\apps\rr\;$(RR_DEBUG_INSTALL)\include;$(IncludePath)</IncludePath>
+			<IncludePath>..\..\source\;..\..\apps\rr\;$(RR_DEBUG_INSTALL)\include;$(IncludePath)</IncludePath>
 			<ILINK_LibraryPath>..\..\ThirdParty\libsbml_xe\dependencies\lib\;R:\installs\xe\debug\lib\;R:\builds\xe\ThirdParty-debug\lib\;R:\installs\xe\full-debug\lib\;..\..\Testing\squareWave\;R:\builds\xe\ThirdParty\lib\;C:\builds\xe\clapack\F2CLIBS\libf2c\;C:\builds\xe\clapack\BLAS\SRC\;C:\builds\xe\clapack\SRC\;R:\installs\xe\lib\;..\..\source\;..\..\releases\xe\shared\link\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\installs\xe\lib\;..\..\Examples\rr\;..\..\releases\xe\link\;..\..\installs\xe\bin\;..\..\Apps\rr\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>
