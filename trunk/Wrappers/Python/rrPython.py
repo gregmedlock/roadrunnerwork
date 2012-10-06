@@ -7,8 +7,9 @@ import os
 from ctypes import *
 os.chdir(os.path.dirname(__file__))
 rrInstallFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'bin'))
-os.environ['PATH'] = rrInstallFolder + ';' + "c:\\Python27" + ';' + os.environ['PATH']
+os.environ['PATH'] = rrInstallFolder + ';' + "c:\\Python27" + ';' + "c:\\Python27\\Lib\\site-packages" + ';' + os.environ['PATH']
 handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
+from numpy import *
 
 ##\mainpage notitle
 #\section Introduction
@@ -358,10 +359,19 @@ def getSelectionList():
 #characteristics
 #\return Returns a string containing the results of the simulation organized in rows and columns
 def simulate():
-    value = handle.simulate()
-    result = handle.resultToString(value)
-    handle.freeResult(value)
-    return result
+    result = handle.simulate()
+    rowCount = handle.getResultNumRows(result)
+    colCount = handle.getResultNumCols(result)
+    resultArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getResultElement(result, rvalue, cvalue, byref(value)) == True:
+                    resultArray[m,n] = value.value
+    handle.freeResult(result)
+    return resultArray
 
 #use getResultElement and other helper routines to build array that can be used in numpy to plot with matplotlib
 #get num cols, get num rows, create array, fill array with two loops
@@ -376,10 +386,19 @@ def simulateEx(timeStart,timeEnd,numberOfPoints):
     startValue = c_double(timeStart)
     endValue = c_double(timeEnd)
     pointsValue = c_int(numberOfPoints)
-    simulation = handle.simulateEx(byref(startValue),byref(endValue),byref(pointsValue))
-    result = handle.resultToString(simulation)
-    handle.freeResult(simulation)
-    return result;
+    result = handle.simulateEx(byref(startValue),byref(endValue),byref(pointsValue))
+    rowCount = handle.getResultNumRows(result)
+    colCount = handle.getResultNumCols(result)
+    resultArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getResultElement(result, rvalue, cvalue, byref(value)) == True:
+                    resultArray[m,n] = value.value
+    handle.freeResult(result)
+    return resultArray;
 
 ##\brief Carry out a one step integration of the model
 #
@@ -748,10 +767,20 @@ def getEigenValues():
 ##\brief Retreive the stoichiometry matrix for the current model
 #\return Returns the stoichiometry matrix
 def getStoichiometryMatrix():
-    values = handle.getStoichiometryMatrix()
-    result = handle.matrixToString(values)
-    handle.freeMatrix(values)
-    return result
+    matrix = handle.getStoichiometryMatrix()
+    rowCount = handle.getMatrixNumRows(matrix)
+    colCount = handle.getMatrixNumCols(matrix)
+    matrixArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getMatrixElement(matrix, rvalue, cvalue, byref(value)) == True:
+                    matrixArray[m,n] = value.value
+    handle.freeMatrix(matrix)
+    return matrixArray
+
 
 ##\brief Retreive the Link matrix for the current model
 #\return Returns the Link matrix
@@ -780,10 +809,19 @@ def getL0Matrix():
 ##\brief Retrieve the conservation matrix for the current model
 #\return Returns the conservation matrix
 def getConservationMatrix():
-    values = handle.getConservationMatrix()
-    result = handle.matrixToString(values)
-    handle.freeMatrix(values)
-    return result
+    matrix = handle.getConservationMatrix()
+    rowCount = handle.getMatrixNumRows(matrix)
+    colCount = handle.getMatrixNumCols(matrix)
+    matrixArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getMatrixElement(matrix, rvalue, cvalue, byref(value)) == True:
+                    matrixArray[m,n] = value.value
+    handle.freeMatrix(matrix)
+    return matrixArray
 
 ##@}
 
