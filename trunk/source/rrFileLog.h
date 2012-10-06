@@ -17,6 +17,8 @@ using std::unique_ptr;
 namespace rr
 {
 
+//To init, use
+// something like:            gLog.Init("", gLog.GetLogLevel(), unique_ptr<LogFile>(new LogFile("fName.log") )));
 class RR_DECLSPEC FileLog : public rrObject
 {
     private:

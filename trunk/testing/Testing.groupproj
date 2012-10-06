@@ -7,7 +7,7 @@
 				<Dependencies/>
 			</Projects>
 			<Projects Include="Main.cbproj">
-				<Dependencies/>
+				<Dependencies>..\ide_builds\xe\UnitTest.cbproj</Dependencies>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -26,13 +26,13 @@
 		<Target Name="UnitTest:Make">
 			<MSBuild Projects="..\ide_builds\xe\UnitTest.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="Main">
+		<Target Name="Main" DependsOnTargets="UnitTest">
 			<MSBuild Projects="Main.cbproj"/>
 		</Target>
-		<Target Name="Main:Clean">
+		<Target Name="Main:Clean" DependsOnTargets="UnitTest:Clean">
 			<MSBuild Projects="Main.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="Main:Make">
+		<Target Name="Main:Make" DependsOnTargets="UnitTest:Make">
 			<MSBuild Projects="Main.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
