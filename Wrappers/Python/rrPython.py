@@ -298,7 +298,7 @@ handle.getCapabilities.restype = c_char_p
 handle.setTimeStart.restype = c_bool
 handle.setTimeEnd.restype = c_bool
 handle.setNumPoints.restype = c_bool
-handle.setSelectionList.restype = c_bool
+handle.setTimeCourseSelectionList.restype = c_bool
 handle.oneStep.restype = c_bool
 handle.getTimeStart.restype = c_bool
 handle.getTimeEnd.restype = c_bool
@@ -344,13 +344,13 @@ def setNumPoints(numPoints):
 #\param list A string of Ids separated by spaces or comma characters
 #\return Returns True if successful
 def setTimeCourseSelectionList(list):
-    return handle.setSelectionList(list)
+    return handle.setTimeCourseSelectionList(list)
 
 
 ##\brief Returns the list of variables returned by simulate() or simulateEx()
 #\return A list of symbol IDs indicating the currect selection list
-def getSelectionList():
-    value = handle.getSelectionList()
+def getTimeCourseSelectionList():
+    value = handle.getTimeCourseSelectionList()
     result = handle.stringArrayToString(value)
     handle.freeStringArray(value)
     return result

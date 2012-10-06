@@ -14,7 +14,7 @@ result = rrPython.loadSBMLFromFile("..\\Models\\test_1.xml")
 rrPython.setTimeStart(startTime)
 rrPython.setTimeEnd(endTime)
 rrPython.setNumPoints(numPoints)
-rrPython.setSelectionList(selList)
+rrPython.setTimeCourseSelectionList(selList)
 k = rrPython.simulate()
 kk = []
 kk = k.split('\n')
