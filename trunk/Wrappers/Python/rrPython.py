@@ -9,7 +9,7 @@ os.chdir(os.path.dirname(__file__))
 rrInstallFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'bin'))
 os.environ['PATH'] = rrInstallFolder + ';' + "c:\\Python27" + ';' + "c:\\Python27\\Lib\\site-packages" + ';' + os.environ['PATH']
 handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
-from numpy import *
+import numpy
 
 ##\mainpage notitle
 #\section Introduction
@@ -181,7 +181,10 @@ def enableLogging():
 #\param lvl The logging level string
 #\return Returns true if succesful
 def setLogLevel(lvl):
-    return handle.setLogLevel(lvl)
+    if handle.setLogLevel(lvl) == True:
+        return handle.setLogLevel(lvl)
+    else:
+        raise RuntimeError('String is not a valid log level')
 
 ##\brief Returns the log level as a string
 #The logging level can be one of the following strings
@@ -298,7 +301,7 @@ handle.getCapabilities.restype = c_char_p
 handle.setTimeStart.restype = c_bool
 handle.setTimeEnd.restype = c_bool
 handle.setNumPoints.restype = c_bool
-handle.setTimeCourseSelectionList.restype = c_bool
+handle.setSelectionList.restype = c_bool
 handle.oneStep.restype = c_bool
 handle.getTimeStart.restype = c_bool
 handle.getTimeEnd.restype = c_bool
@@ -344,7 +347,7 @@ def setNumPoints(numPoints):
 #\param list A string of Ids separated by spaces or comma characters
 #\return Returns True if successful
 def setTimeCourseSelectionList(list):
-    return handle.setTimeCourseSelectionList(list)
+    return handle.setSelectionList(list)
 
 
 ##\brief Returns the list of variables returned by simulate() or simulateEx()
@@ -362,7 +365,7 @@ def simulate():
     result = handle.simulate()
     rowCount = handle.getResultNumRows(result)
     colCount = handle.getResultNumCols(result)
-    resultArray = zeros((rowCount,colCount))
+    resultArray = numpy.zeros((rowCount,colCount))
     for m in range(rowCount):
         for n in range(colCount):
                 value = c_double()
@@ -389,7 +392,7 @@ def simulateEx(timeStart,timeEnd,numberOfPoints):
     result = handle.simulateEx(byref(startValue),byref(endValue),byref(pointsValue))
     rowCount = handle.getResultNumRows(result)
     colCount = handle.getResultNumCols(result)
-    resultArray = zeros((rowCount,colCount))
+    resultArray = numpy.zeros((rowCount,colCount))
     for m in range(rowCount):
         for n in range(colCount):
                 value = c_double()
@@ -416,7 +419,7 @@ def oneStep (currentTime, stepSize):                             #test this
     if handle.oneStep(byref(curtime), byref(stepValue), byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Index out of range')
+        raise RuntimeError('Model not loaded correctly')
 
 ##\brief Returns the simulation start time
 #
@@ -428,8 +431,7 @@ def getTimeStart():
     if handle.getTimeStart(byref(value)) == True:
         return value.value
     else:
-        return ('Index out of Range')
-
+        return False
 ##\brief Returns the simulation end time
 #
 #Example: status = rrPython.getTimeEnd()
@@ -440,7 +442,7 @@ def getTimeEnd():
     if handle.getTimeEnd(byref(value)) == True:
         return value.value
     else:
-        return ('Index out of Range')
+        return False
 
 ##\brief Returns the value of the current number of points
 #
@@ -452,7 +454,7 @@ def getNumPoints():
     if handle.getNumPoints(byref(value)) == True:
         return value.value
     else:
-        return ('Index out of Range')
+        return False
 
 ##\brief Reset all floating species concentrations to their intial conditions
 #
@@ -482,7 +484,7 @@ def steadyState():
     if handle.steadyState(byref(value)) == True:
         return value.value
     else:
-        return ('Index out of Range')
+        return ('Steady state not found')
 
 ##\brief A convenient method for returning a vector of the steady state species concentrations
 #
@@ -532,7 +534,7 @@ def getValue(symbolId):
     if handle.getValue(symbolId, byref(value)) == True:
         return value.value
     else:
-        raise RuntimeError('Index out of Range')
+        raise RuntimeError('Invalid Symbol Id')
 
 ##\brief Set the value for a given symbol, use getAvailableSymbols() for a list of symbols
 #
@@ -546,7 +548,7 @@ def setValue(symbolId, value):
     if handle.setValue(symbolId, byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Index out of range')
+        raise RuntimeError('Invalid Symbol Id')
 
 ##@}
 
@@ -770,7 +772,7 @@ def getStoichiometryMatrix():
     matrix = handle.getStoichiometryMatrix()
     rowCount = handle.getMatrixNumRows(matrix)
     colCount = handle.getMatrixNumCols(matrix)
-    matrixArray = zeros((rowCount,colCount))
+    matrixArray = numpy.zeros((rowCount,colCount))
     for m in range(rowCount):
         for n in range(colCount):
                 value = c_double()
@@ -1249,7 +1251,7 @@ def getuCC(variable, parameter):
     if handle.getuCC(byref(variable), byref(parameter), byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Index out of range')
+        raise RuntimeError('Invalid variable or parameter')
 
 ##\brief Retireve a single control coefficient
 #
@@ -1263,7 +1265,7 @@ def getCC(variable, parameter):
     if handle.getCC(variable, parameter, byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Index out of range')
+        raise RuntimeError('Invalid variable or parameter')
 
 ##\brief Retireve a single elasticity coefficient
 #
@@ -1276,7 +1278,7 @@ def getEE(variable, parameter):
     if handle.getEE(variable, parameter,  byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Index out of range')
+        raise RuntimeError('Invalid variable or parameter')
 
 ##\brief Retrieve a single unscaled elasticity coefficient
 #
@@ -1290,7 +1292,7 @@ def getuEE(name, species):
     if handle.getuEE(name, species, byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Index out of range')
+        raise RuntimeError('Invalid reaction name or species')
 
 ##\brief Compute the scaled elasticity for a given reaction and given species
 #
@@ -1301,7 +1303,7 @@ def getScaledFloatingSpeciesElasticity(reactionName, speciesName):
     if handle.getScaledFloatingSpeciesElasticity(reactionName, speciesName,  byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Index out of range')
+        raise RuntimeError('Invalid reaction name or species')
 
 ##@}
 
