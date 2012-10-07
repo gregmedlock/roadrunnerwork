@@ -6,6 +6,8 @@ getStoichMatrix.py
 threeLineSimulation.py
 simulateExSelectionList.py
 simulatePlot.py
+simulateSelectionList.py
+threeLineSimulation.py
 )
 
 install(    
