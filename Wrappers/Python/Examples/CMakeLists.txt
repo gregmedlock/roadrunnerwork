@@ -12,6 +12,7 @@ simulateEx.py
 simulateExSelectionList.py
 simulateSelectionList.py
 SteadyState.py
+simulatePlot.py
 )
 
 install(    
