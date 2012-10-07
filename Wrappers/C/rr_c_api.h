@@ -842,7 +842,7 @@ C_DECL_SPEC bool rrCallConv setBoundarySpeciesConcentrations(const RRVector* vec
 C_DECL_SPEC RRMatrixHandle rrCallConv getFullJacobian();
 
 /*!
- \brief Retreive the reduced Jacobian for the current model 
+ \brief Retrieve the reduced Jacobian for the current model 
  
  setComputeAndAssignConservationLaws (true) must be enabled.
 
@@ -852,7 +852,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getFullJacobian();
 C_DECL_SPEC RRMatrixHandle rrCallConv getReducedJacobian();
 
 /*!
- \brief Retreive the eigenvalue matrix for the current model
+ \brief Retrieve the eigenvalue matrix for the current model
 
  \return Returns null if it fails, otherwise returns a matrix of eigenvalues.
  The first column will contain the real values and the second column the imaginary values
@@ -865,7 +865,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getEigenValues();
 // --------------------------------------------------------------------------------
 
 /*!
- \brief Retreive the stoichiometry matrix for the current model
+ \brief Retrieve the stoichiometry matrix for the current model
 
  \return Returns null if it fails, otherwise returns the stoichiometry matrix.
  \ingroup Stoich
@@ -873,7 +873,7 @@ C_DECL_SPEC RRMatrixHandle rrCallConv getEigenValues();
 C_DECL_SPEC RRMatrixHandle rrCallConv getStoichiometryMatrix();
 
 /*!
- \brief Retreive the Link matrix for the current model
+ \brief Retrieve the Link matrix for the current model
 
  \return Returns null if it fails, otherwise returns the Link matrix.
  \ingroup Stoich
