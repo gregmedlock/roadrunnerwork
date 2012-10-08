@@ -1,9 +1,7 @@
 #labels Phase-Support,Featured
-Notes about building !RoadRunner using the MinGW compiler
-
 = Introduction =
 
-This page contain relevant information about how to build RoadRunner using the MinGW compiler.
+This page contain relevant information about how to build !RoadRunner using the MinGW compiler.
 = Setup =
 Download and install the MinGW compiler from http://sourceforge.net/projects/mingw/files/latest/download?source=files
 By default MinGW installs to C:\MinGW.
