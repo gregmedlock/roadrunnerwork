@@ -15,10 +15,10 @@
 The official releases are being built using Visual Studio 2010. If you are interested in a release using other compilers e.g. !CodeGear XE or !MinGW please let us know.
 
 ||*Description*||*Download Link*||Version||Build Date||
-||  !RoadRunner (All) Installer||Not yet released||1.0||Oct. 3 2012||
-||  C++        API installer ||Not yet released||1.0||Oct. 3 2012||
-||  C          API installer ||Not yet released||1.0||Oct. 3 2012||
-||  Python     API installer ||Not yet released||1.0||Oct. 3 2012||
+||  !RoadRunner (All) Installer||Not yet released||1.0||xxxx||
+||  C++        API installer ||Not yet released||1.0|| xxxx ||
+||  C          API installer ||Not yet released||1.0|| xxxx||
+||  Python     API installer ||Not yet released||1.0|| xxxx||
 
 
 == The bleeding edge ==
