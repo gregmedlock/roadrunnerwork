@@ -2,25 +2,40 @@ object MainForm: TMainForm
   Left = 0
   Top = 0
   Caption = 'MainForm'
-  ClientHeight = 612
-  ClientWidth = 691
+  ClientHeight = 626
+  ClientWidth = 884
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   OldCreateOrder = False
   OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
+  object Splitter1: TSplitter
+    Left = 0
+    Top = 413
+    Width = 884
+    Height = 3
+    Cursor = crVSplit
+    Align = alBottom
+    ExplicitLeft = 1
+    ExplicitTop = 1
+    ExplicitWidth = 414
+  end
   object Panel1: TPanel
     Left = 0
     Top = 0
     Width = 113
-    Height = 424
+    Height = 413
     Align = alLeft
     TabOrder = 0
+    ExplicitHeight = 438
     object Button1: TButton
       Left = 16
       Top = 91
@@ -66,47 +81,43 @@ object MainForm: TMainForm
   object Panel2: TPanel
     Left = 113
     Top = 0
-    Width = 578
-    Height = 424
+    Width = 771
+    Height = 413
     Align = alClient
     TabOrder = 1
+    ExplicitHeight = 438
     object PageControl1: TPageControl
       Left = 1
       Top = 1
-      Width = 576
-      Height = 422
+      Width = 769
+      Height = 411
       ActivePage = TabSheet2
       Align = alClient
       TabOrder = 0
+      ExplicitHeight = 436
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitHeight = 408
       end
       object TabSheet2: TTabSheet
         Caption = 'Setup'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
+        ExplicitHeight = 408
         object GroupBox1: TGroupBox
           Left = 0
           Top = 0
-          Width = 568
+          Width = 761
           Height = 224
           Align = alTop
           Caption = 'GroupBox1'
           TabOrder = 0
           DesignSize = (
-            568
+            761
             224)
           object VSBuildRootFolderE: mtkSTDStringEdit
             Left = 16
-            Top = 99
-            Width = 513
+            Top = 84
+            Width = 706
             Height = 21
             Anchors = [akLeft, akTop, akRight]
             EditLabel.Width = 144
@@ -117,7 +128,7 @@ object MainForm: TMainForm
           object SandBoxFolderE: mtkSTDStringEdit
             Left = 16
             Top = 35
-            Width = 513
+            Width = 706
             Height = 21
             Anchors = [akLeft, akTop, akRight]
             EditLabel.Width = 68
@@ -125,8 +136,8 @@ object MainForm: TMainForm
             EditLabel.Caption = 'SandBox Root'
             TabOrder = 1
           end
-          object Button6: TButton
-            Left = 538
+          object SandBoxBtn: TButton
+            Left = 731
             Top = 33
             Width = 27
             Height = 25
@@ -134,14 +145,34 @@ object MainForm: TMainForm
             Anchors = [akTop, akRight]
             TabOrder = 2
           end
-          object Button7: TButton
-            Left = 538
-            Top = 97
+          object VSBuildBtn: TButton
+            Left = 731
+            Top = 82
             Width = 27
             Height = 25
             Action = BrowseForFolderA
             Anchors = [akTop, akRight]
             TabOrder = 3
+          end
+          object svnExecutableE: mtkSTDStringEdit
+            Left = 16
+            Top = 138
+            Width = 706
+            Height = 21
+            Anchors = [akLeft, akTop, akRight]
+            EditLabel.Width = 75
+            EditLabel.Height = 13
+            EditLabel.Caption = 'SVN Executable'
+            TabOrder = 4
+          end
+          object svnExecutableBtn: TButton
+            Left = 731
+            Top = 136
+            Width = 27
+            Height = 25
+            Action = BrowseForFolderA
+            Anchors = [akTop, akRight]
+            TabOrder = 5
           end
         end
       end
@@ -149,21 +180,32 @@ object MainForm: TMainForm
   end
   object Panel3: TPanel
     Left = 0
-    Top = 424
-    Width = 691
-    Height = 188
+    Top = 416
+    Width = 884
+    Height = 191
     Align = alBottom
     TabOrder = 2
-    object Memo1: TMemo
+    object mLogMemo: TMemo
       Left = 1
       Top = 1
-      Width = 689
-      Height = 186
+      Width = 882
+      Height = 189
       Align = alClient
       Lines.Strings = (
         'Memo1')
       TabOrder = 0
+      ExplicitLeft = 73
+      ExplicitTop = -23
+      ExplicitHeight = 186
     end
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 607
+    Width = 884
+    Height = 19
+    Panels = <>
+    ExplicitLeft = 8
   end
   object BuildActions: TActionList
     Left = 528
@@ -173,6 +215,7 @@ object MainForm: TMainForm
     end
     object SVNUpdate: TAction
       Caption = 'SVN Update'
+      OnExecute = SVNUpdateExecute
     end
     object BuildVisualStudioA: TAction
       Caption = 'Build VS'
@@ -182,6 +225,7 @@ object MainForm: TMainForm
     end
     object BuildCheckA: TAction
       Caption = 'Check'
+      OnExecute = BuildCheckAExecute
     end
   end
   object MiscActions: TActionList
@@ -191,11 +235,35 @@ object MainForm: TMainForm
       Caption = '...'
       OnExecute = BrowseForFolderAExecute
     end
+    object BrowseForFileA: TAction
+      Caption = '...'
+    end
   end
   object mIniFile: mtkIniFileC
     IniFileName = 'AppIni.ini'
     RootFolder = '.'
     Left = 224
     Top = 296
+  end
+  object ShutDownTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = ShutDownTimerTimer
+    Left = 632
+    Top = 280
+  end
+  object BrowseForFileDlg: TFileOpenDialog
+    DefaultExtension = '*.exe'
+    FavoriteLinks = <>
+    FileName = 'C:\Program Files\TortoiseSVN\bin\svn.exe'
+    FileTypes = <>
+    Options = []
+    Left = 336
+    Top = 272
+  end
+  object BrowseForFolderDlg: TOpenDialog
+    Options = [ofHideReadOnly, ofPathMustExist, ofEnableSizing]
+    Left = 360
+    Top = 376
   end
 end
