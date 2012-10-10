@@ -2,10 +2,10 @@ import sys
 import subprocess
 import datetime
 
-install3rParty='false'
-doBuild='false'
-doClean='false'
-doCommitReleases='false'
+install3rParty='true'
+doBuild='true'
+doClean='true'
+doCommitReleases='true'
 doCommitWiki='true'
 
 tsvn="C:\\Program Files\\TortoiseSVN\\bin\\svn.exe"
@@ -54,10 +54,9 @@ def updateDownloadsWiki(rrUpdates, svn_revision):
     #Finally commit
     try:
         output = subprocess.check_output([tsvn, 'commit', 'r:/roadrunnerwork/wiki/', '-m\"Build Script Commit of wiki\"'], shell=True)
-        print "Commit of wiki succeded." + output
+        print "Commit of wiki succeded."
     except subprocess.CalledProcessError, e:
         print "Failed svn commit of wiki:\n", e.output
-
 
 now = datetime.datetime.now()
 print 'RR BUILD'
