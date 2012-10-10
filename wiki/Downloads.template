@@ -20,8 +20,9 @@ The official releases are being built using Visual Studio 2010. If you are inter
 ||  C          API installer ||Not yet released||1.0|| xxxx ||
 ||  Python     API installer ||Not yet released||1.0|| xxxx ||
 
-== The bleeding edge ==
-Below are distributions containing release with the latest bugfixes. Observe that these releases may occasionaly be less stable than the official release. 
+== Nightly Build ==
+Below are distributions containing release with the latest bugfixes and additions. 
+Observe that these releases may occasionaly be less stable than the official release. 
 
 These distributions do not contain the documentation. Documentation can be downloaded separately below.
 

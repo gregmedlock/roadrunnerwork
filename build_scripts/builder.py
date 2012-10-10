@@ -67,12 +67,12 @@ rrUpdates=[]
 
 #ThirdParty
 if install3rParty == 'true':
-    print 'Installing 3Rd Party'
+    print 'Making and installing ThirdParty'
     try:
-        #output = subprocess.check_output(['msbuild', '/p:Configuration='+buildConfig, buildFolder +'/ThirdParty/INSTALL.vcxproj'], shell=True)
-        print 'ThirdParty Install Succeeded'
+        output = subprocess.check_output(['msbuild', '/p:Configuration='+buildConfig, buildFolder +'/ThirdParty/INSTALL.vcxproj'], shell=True)
+        print 'ThirdParty install succeeded'
     except subprocess.CalledProcessError, e:
-        print "Third Party Build Failed with output:\n", e.output
+        print "Third Party build failed:\n", e.output
 
 #Cleaning....
 if doClean == 'true':
@@ -81,17 +81,17 @@ if doClean == 'true':
             #output = subprocess.check_output(['msbuild', '/p:Configuration='+buildConfig, buildFolder +'/'+ build + '/RoadRunner.sln', '/t:clean'], shell=True)
             print 'Cleaning build \"' + build + '\" succeded'
         except subprocess.CalledProcessError, e:
-            print "Build Failed with output:\n", e.output
+            print "Cleaning package " + build + " failed: \n", e.output
 
 if doBuild == 'true':
     #Create Packages
     for build in rrBuilds:
         try:
             output = subprocess.check_output(['msbuild', '/p:Configuration='+buildConfig, buildFolder +'/'+ build + '/PACKAGE.vcxproj'], shell=True)
-            print 'Creating package for \"' + build + '\" succeded'
+            print 'Creating package \"' + build + '\" succeded'
             rrUpdates.append(build)
         except subprocess.CalledProcessError, e:
-            print "Build Failed with output:\n", e.output
+            print "Building package " + build + " failed:\n", e.output
 
 if doCommitReleases  == 'true':
     try:
@@ -108,7 +108,7 @@ try:
         if "Revision: " in line:
             svn_revision = line.split(" ")[-1]
 except subprocess.CalledProcessError, e:
-    print "Failed svn commit:\n", e.output
+    print "Failed getting svn revision:\n", e.output
 
 if doCommitWiki == 'true':
     updateDownloadsWiki(rrUpdates, svn_revision)
