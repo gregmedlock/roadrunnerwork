@@ -1,9 +1,16 @@
-Build started at: 2012-10-10 13:43
 RR BUILD
+Build started at: 2012-10-10 13:50
+Installing 3Rd Party
+ThirdParty Install Succeeded
+Cleaning build "all" succeded
+Cleaning build "cpp" succeded
+Cleaning build "c" succeded
+Cleaning build "python" succeded
+Creating package for "all" succeded
+Creating package for "cpp" succeded
+Creating package for "c" succeded
+Creating package for "python" succeded
+Commit succeded
 Updating WIKI. SVN Revision: 1079
-2012-10-1013:43
-Commit of wiki succeded.Sending        wiki\Downloads.wiki
-Transmitting file data .
-Committed revision 1095.
-
+Commit of wiki succeded.
 done...
