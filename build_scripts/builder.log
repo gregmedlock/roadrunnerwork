@@ -1,2 +1,9 @@
 RR BUILD
-Build started at: 2012-10-10 15:53
+Build started at: 2012-10-10 15:54
+Making and installing ThirdParty
+ThirdParty install succeeded
+Cleaning build "all" succeded
+Cleaning build "cpp" succeded
+Cleaning build "c" succeded
+Cleaning build "python" succeded
+Creating package "all" succeded
