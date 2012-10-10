@@ -15,27 +15,26 @@
 The official releases are being built using Visual Studio 2010. If you are interested in a release using other compilers e.g. !CodeGear XE or MinGW please let us know.
 
 ||*Description*||*Download Link*||Version||Build Date||
-||  !RoadRunner (All) Installer||Not yet released||1.0||xxxx||
+||  !RoadRunner (All) Installer||Not yet released||1.0|| xxxx ||
 ||  C++        API installer ||Not yet released||1.0|| xxxx ||
-||  C          API installer ||Not yet released||1.0|| xxxx||
-||  Python     API installer ||Not yet released||1.0|| xxxx||
-
+||  C          API installer ||Not yet released||1.0|| xxxx ||
+||  Python     API installer ||Not yet released||1.0|| xxxx ||
 
 == The bleeding edge ==
 Below are distributions containing release with the latest bugfixes. Observe that these releases may occasionaly be less stable than the official release. 
 
 These distributions do not contain the documentation. Documentation can be downloaded separately.
 
-||*Description*||*Download Link*||*SVN Revision*||*Build Date*||
-||!RoadRunner (All) ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-all.exe      RoadRunner-all.exe]     || SVN_REV || DATE_TIME ||
-||C++               ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-cpp.exe      RoadRunner-cpp.exe]     || SVN_REV || DATE_TIME ||
-||C                 ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-c.exe        RoadRunner-c.exe]       || SVN_REV || DATE_TIME ||
-||Python            ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-python.exe   RoadRunner-python.exe]  || SVN_REV || DATE_TIME ||
+||*Description*||*Download Link*||*SVN Revision*||*Build Date*||*Time*||
+||!RoadRunner (All) ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-all.exe      RoadRunner-all.exe]     || SVN_REV || DATE || TIME || 
+||C++               ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-cpp.exe      RoadRunner-cpp.exe]     || SVN_REV || DATE || TIME || 
+||C                 ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-c.exe        RoadRunner-c.exe]       || SVN_REV || DATE || TIME || 
+||Python            ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-python.exe   RoadRunner-python.exe]  || SVN_REV || DATE || TIME || 
 
 == Docs ==
 
 ||*Description*||*Download Link*||*Version*||
-||!RoadRunner (All) ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-all-docs.exe     RoadRunner-all-docs.exe]    ||xxxx||
-||C++               ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-cpp-docs.exe     RoadRunner-cpp-docs.exe]    ||xxxx||
-||C                 ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-c-docs.exe       RoadRunner-c-docs.exe]      ||xxxx||
-||Python            ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-python-docs.exe  RoadRunner-python-docs.exe] ||xxxx||
+||!RoadRunner (All) ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-all-docs.exe     RoadRunner-all-docs.exe]    || xxxx ||
+||C++               ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-cpp-docs.exe     RoadRunner-cpp-docs.exe]    || xxxx ||
+||C                 ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-c-docs.exe       RoadRunner-c-docs.exe]      || xxxx ||
+||Python            ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-python-docs.exe  RoadRunner-python-docs.exe] || xxxx ||
