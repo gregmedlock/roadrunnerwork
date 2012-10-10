@@ -23,7 +23,7 @@ The official releases are being built using Visual Studio 2010. If you are inter
 == The bleeding edge ==
 Below are distributions containing release with the latest bugfixes. Observe that these releases may occasionaly be less stable than the official release. 
 
-These distributions do not contain the documentation. Documentation can be downloaded separately.
+These distributions do not contain the documentation. Documentation can be downloaded separately below.
 
 ||*Description*||*Download Link*||*SVN Revision*||*Build Date*||*Time*||
 ||!RoadRunner (All) ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-all.exe      RoadRunner-all.exe]     || SVN_REV || DATE || TIME || 
@@ -31,8 +31,7 @@ These distributions do not contain the documentation. Documentation can be downl
 ||C                 ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-c.exe        RoadRunner-c.exe]       || SVN_REV || DATE || TIME || 
 ||Python            ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-python.exe   RoadRunner-python.exe]  || SVN_REV || DATE || TIME || 
 
-== Docs ==
-
+== Documentation ==
 ||*Description*||*Download Link*||*Version*||
 ||!RoadRunner (All) ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-all-docs.exe     RoadRunner-all-docs.exe]    || xxxx ||
 ||C++               ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-cpp-docs.exe     RoadRunner-cpp-docs.exe]    || xxxx ||
