@@ -1,16 +1,15 @@
 RR BUILD
-Build started at: 2012-10-10 13:50
-Installing 3Rd Party
-ThirdParty Install Succeeded
+Build started at: 2012-10-10 15:37
 Cleaning build "all" succeded
 Cleaning build "cpp" succeded
 Cleaning build "c" succeded
 Cleaning build "python" succeded
-Creating package for "all" succeded
-Creating package for "cpp" succeded
-Creating package for "c" succeded
-Creating package for "python" succeded
-Commit succeded
-Updating WIKI. SVN Revision: 1079
-Commit of wiki succeded.
-done...
+Creating package "all" succeded
+Creating package "cpp" succeded
+Creating package "c" succeded
+Creating package "python" succeded
+Failed svn commit:
+
+Updating WIKI. SVN Revision: 1079
+Failed svn commit of wiki:
+

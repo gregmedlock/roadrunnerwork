@@ -2,11 +2,11 @@ import sys
 import subprocess
 import datetime
 
-install3rParty='true'
-doBuild='true'
-doClean='true'
-doCommitReleases='true'
-doCommitWiki='true'
+install3rParty=0
+doBuild=0
+doClean=0
+doCommitReleases=0
+doCommitWiki=0
 
 tsvn="C:\\Program Files\\TortoiseSVN\\bin\\svn.exe"
 sandBoxRoot='r:/roadrunnerwork'
@@ -66,7 +66,7 @@ print 'Build started at: ' + now.strftime("%Y-%m-%d %H:%M")
 rrUpdates=[]
 
 #ThirdParty
-if install3rParty == 'true':
+if install3rParty == 0:
     print 'Making and installing ThirdParty'
     try:
         output = subprocess.check_output(['msbuild', '/p:Configuration='+buildConfig, buildFolder +'/ThirdParty/INSTALL.vcxproj'], shell=True)
@@ -75,7 +75,7 @@ if install3rParty == 'true':
         print "Third Party build failed:\n", e.output
 
 #Cleaning....
-if doClean == 'true':
+if doClean == 0:
     for build in rrBuilds:
         try:
             #output = subprocess.check_output(['msbuild', '/p:Configuration='+buildConfig, buildFolder +'/'+ build + '/RoadRunner.sln', '/t:clean'], shell=True)
@@ -83,7 +83,7 @@ if doClean == 'true':
         except subprocess.CalledProcessError, e:
             print "Cleaning package " + build + " failed: \n", e.output
 
-if doBuild == 'true':
+if doBuild == 0:
     #Create Packages
     for build in rrBuilds:
         try:
@@ -93,7 +93,7 @@ if doBuild == 'true':
         except subprocess.CalledProcessError, e:
             print "Building package " + build + " failed:\n", e.output
 
-if doCommitReleases  == 'true':
+if doCommitReleases  == 0:
     try:
         output = subprocess.check_output([tsvn, 'commit', 'r:/roadrunnerwork/releases/vs', '-m\"Build Script Commit\"'], shell=True)
         print "Commit succeded"
@@ -110,8 +110,14 @@ try:
 except subprocess.CalledProcessError, e:
     print "Failed getting svn revision:\n", e.output
 
-if doCommitWiki == 'true':
+if doCommitWiki == 0:
     updateDownloadsWiki(rrUpdates, svn_revision)
+
+try:
+    output = subprocess.check_output([tsvn, 'commit', 'r:/roadrunnerwork/build_scripts/', '-m\"Build Script Commit\"'], shell=True)
+    print "Commit succeded"
+except subprocess.CalledProcessError, e:
+    print "Failed svn commit:\n", e.output
 
 print "done..."
 
