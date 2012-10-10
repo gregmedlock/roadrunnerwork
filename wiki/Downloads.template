@@ -31,6 +31,8 @@ These distributions do not contain the documentation. Documentation can be downl
 ||C                 ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-c.exe        RoadRunner-c.exe]       || SVN_REV || DATE || TIME || 
 ||Python            ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-python.exe   RoadRunner-python.exe]  || SVN_REV || DATE || TIME || 
 
+Take a look at the [http://roadrunnerwork.googlecode.com/svn/build_scripts/builder.log build log] file.
+
 == Documentation ==
 ||*Description*||*Download Link*||*Version*||
 ||!RoadRunner (All) ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-all-docs.exe     RoadRunner-all-docs.exe]    || xxxx ||
