@@ -1,15 +1,2 @@
 RR BUILD
-Build started at: 2012-10-10 15:39
-Making and installing ThirdParty
-ThirdParty install succeeded
-Cleaning build "all" succeded
-Cleaning build "cpp" succeded
-Cleaning build "c" succeded
-Cleaning build "python" succeded
-Creating package "all" succeded
-Creating package "cpp" succeded
-Creating package "c" succeded
-Creating package "python" succeded
-Commit succeded
-Updating WIKI. SVN Revision: 1106
-Commit of wiki succeded.
+Build started at: 2012-10-10 15:43
