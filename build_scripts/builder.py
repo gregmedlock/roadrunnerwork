@@ -66,7 +66,7 @@ print 'Build started at: ' + now.strftime("%Y-%m-%d %H:%M")
 rrUpdates=[]
 
 #ThirdParty
-if install3rParty == 0:
+if install3rParty == 1:
     print 'Making and installing ThirdParty'
     try:
         output = subprocess.check_output(['msbuild', '/p:Configuration='+buildConfig, buildFolder +'/ThirdParty/INSTALL.vcxproj'], shell=True)
@@ -75,7 +75,7 @@ if install3rParty == 0:
         print "Third Party build failed:\n", e.output
 
 #Cleaning....
-if doClean == 0:
+if doClean == 1:
     for build in rrBuilds:
         try:
             #output = subprocess.check_output(['msbuild', '/p:Configuration='+buildConfig, buildFolder +'/'+ build + '/RoadRunner.sln', '/t:clean'], shell=True)
@@ -83,7 +83,7 @@ if doClean == 0:
         except subprocess.CalledProcessError, e:
             print "Cleaning package " + build + " failed: \n", e.output
 
-if doBuild == 0:
+if doBuild == 1:
     #Create Packages
     for build in rrBuilds:
         try:
@@ -93,7 +93,7 @@ if doBuild == 0:
         except subprocess.CalledProcessError, e:
             print "Building package " + build + " failed:\n", e.output
 
-if doCommitReleases  == 0:
+if doCommitReleases  == 1:
     try:
         output = subprocess.check_output([tsvn, 'commit', 'r:/roadrunnerwork/releases/vs', '-m\"Build Script Commit\"'], shell=True)
         print "Commit succeded"
@@ -110,7 +110,7 @@ try:
 except subprocess.CalledProcessError, e:
     print "Failed getting svn revision:\n", e.output
 
-if doCommitWiki == 0:
+if doCommitWiki == 1:
     updateDownloadsWiki(rrUpdates, svn_revision)
 
 try:
