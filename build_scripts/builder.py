@@ -114,8 +114,8 @@ if doCommitWiki == 1:
     updateDownloadsWiki(rrUpdates, svn_revision)
 
 try:
-    output = subprocess.check_output([tsvn, 'commit', 'r:/roadrunnerwork/build_scripts/', '-m\"Build Script Commit\"'], shell=True)
-    print "Commit succeded"
+    output = subprocess.check_output([tsvn, 'commit', 'r:/roadrunnerwork/build_scripts', '-m\"Build Script Commit\"'], shell=True)
+    print "Commiting build log succeded"
 except subprocess.CalledProcessError, e:
     print "Failed svn commit:\n", e.output
 
