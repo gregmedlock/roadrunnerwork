@@ -358,10 +358,18 @@ bool rrCallConv loadSBMLFromFile(const char* fileName)
             setError(ALLOCATE_API_ERROR_MSG);
             return false;
         }
+        //Check if file exists first
+        if(!FileExists(fileName))
+        {
+            stringstream msg;
+            msg<<"The file "<<fileName<<" was not found";
+            setError(msg.str());
+            return false;
+        }
 
         if(!gRRHandle->loadSBMLFromFile(fileName))
         {
-            setError("Failed to load SBML semantics");
+            setError("Failed to load SBML semantics");	//There are many wasy loading a model can fail, look at logFile to know more
             return false;
         }
         return true;
