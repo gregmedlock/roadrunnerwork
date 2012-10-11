@@ -202,7 +202,7 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
 
 }
 
-#if defined(__CODEGEARC__)
+#if defined(CG_IDE)
 #pragma comment(lib, "roadrunner.lib")
 #pragma comment(lib, "sundials_cvode.lib")
 #pragma comment(lib, "sundials_nvecserial.lib")
