@@ -108,25 +108,18 @@ int main(int argc, char* argv[])
 		freeText(text);
 	}
 
-//	   string fileName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
-//	   string fileName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-	 string fileName = modelsPath + "\\ss_threeSpecies.xml";
-//	 string fileName = modelsPath + "\\selectionListBug.xml";
-//	 string fileName = modelsPath + "\\boundary.xml";
+//	   string fName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
+//	   string fName = modelsPath + "\\ss_SimpleConservedCycle.xml";
+	 string fName = modelsPath + "\\ss_threeSpecies.xml";
+//	 string fName = modelsPath + "\\selectionListBug.xml";
+//	 string fName = modelsPath + "\\boundary.xml";
 
-	ifstream ifs(fileName.c_str());
-	if(!ifs)
-	{
-		cerr<<"Failed opening file: "<<fileName;
-		return false;
-	}
-	cout << "\nRunning model: " << fileName << endl;
+	cout << "\nRunning model: " << fName << endl;
 	setComputeAndAssignConservationLaws(false);
-	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
 
-	if(!loadSBML(sbml.c_str()))
+	if(!loadSBMLFromFile(fName.c_str()))
 	{
-		cerr<<"Failed loading SBML from file:"<<fileName<<endl;
+		cerr<<"Failed loading SBML from file:"<<fName<<endl;
 		cerr<<"Last error was: "<<getLastError()<<endl;
 		return -1;
 	}
