@@ -9,7 +9,7 @@ os.chdir(os.path.dirname(__file__))
 rrInstallFolder = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'bin'))
 os.environ['PATH'] = rrInstallFolder + ';' + "c:\\Python27" + ';' + "c:\\Python27\\Lib\\site-packages" + ';' + os.environ['PATH']
 handle = WinDLL (rrInstallFolder + "\\rr_c_api.dll")
-import numpy
+from numpy import *
 
 ##\mainpage notitle
 #\section Introduction
@@ -181,10 +181,7 @@ def enableLogging():
 #\param lvl The logging level string
 #\return Returns true if succesful
 def setLogLevel(lvl):
-    if handle.setLogLevel(lvl) == True:
-        return handle.setLogLevel(lvl)
-    else:
-        raise RuntimeError('String is not a valid log level')
+    return handle.setLogLevel(lvl)
 
 ##\brief Returns the log level as a string
 #The logging level can be one of the following strings
@@ -301,7 +298,7 @@ handle.getCapabilities.restype = c_char_p
 handle.setTimeStart.restype = c_bool
 handle.setTimeEnd.restype = c_bool
 handle.setNumPoints.restype = c_bool
-handle.setSelectionList.restype = c_bool
+handle.setTimeCourseSelectionList.restype = c_bool
 handle.oneStep.restype = c_bool
 handle.getTimeStart.restype = c_bool
 handle.getTimeEnd.restype = c_bool
@@ -347,7 +344,7 @@ def setNumPoints(numPoints):
 #\param list A string of Ids separated by spaces or comma characters
 #\return Returns True if successful
 def setTimeCourseSelectionList(list):
-    return handle.setSelectionList(list)
+    return handle.setTimeCourseSelectionList(list)
 
 
 ##\brief Returns the list of variables returned by simulate() or simulateEx()
@@ -365,7 +362,7 @@ def simulate():
     result = handle.simulate()
     rowCount = handle.getResultNumRows(result)
     colCount = handle.getResultNumCols(result)
-    resultArray = numpy.zeros((rowCount,colCount))
+    resultArray = zeros((rowCount,colCount))
     for m in range(rowCount):
         for n in range(colCount):
                 value = c_double()
@@ -392,7 +389,7 @@ def simulateEx(timeStart,timeEnd,numberOfPoints):
     result = handle.simulateEx(byref(startValue),byref(endValue),byref(pointsValue))
     rowCount = handle.getResultNumRows(result)
     colCount = handle.getResultNumCols(result)
-    resultArray = numpy.zeros((rowCount,colCount))
+    resultArray = zeros((rowCount,colCount))
     for m in range(rowCount):
         for n in range(colCount):
                 value = c_double()
@@ -419,7 +416,7 @@ def oneStep (currentTime, stepSize):                             #test this
     if handle.oneStep(byref(curtime), byref(stepValue), byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Model not loaded correctly')
+        raise RuntimeError('Index out of range')
 
 ##\brief Returns the simulation start time
 #
@@ -431,7 +428,8 @@ def getTimeStart():
     if handle.getTimeStart(byref(value)) == True:
         return value.value
     else:
-        return False
+        return ('Index out of Range')
+
 ##\brief Returns the simulation end time
 #
 #Example: status = rrPython.getTimeEnd()
@@ -442,7 +440,7 @@ def getTimeEnd():
     if handle.getTimeEnd(byref(value)) == True:
         return value.value
     else:
-        return False
+        return ('Index out of Range')
 
 ##\brief Returns the value of the current number of points
 #
@@ -454,7 +452,7 @@ def getNumPoints():
     if handle.getNumPoints(byref(value)) == True:
         return value.value
     else:
-        return False
+        return ('Index out of Range')
 
 ##\brief Reset all floating species concentrations to their intial conditions
 #
@@ -484,7 +482,7 @@ def steadyState():
     if handle.steadyState(byref(value)) == True:
         return value.value
     else:
-        return ('Steady state not found')
+        return ('Index out of Range')
 
 ##\brief A convenient method for returning a vector of the steady state species concentrations
 #
@@ -534,7 +532,7 @@ def getValue(symbolId):
     if handle.getValue(symbolId, byref(value)) == True:
         return value.value
     else:
-        raise RuntimeError('Invalid Symbol Id')
+        raise RuntimeError('Index out of Range')
 
 ##\brief Set the value for a given symbol, use getAvailableSymbols() for a list of symbols
 #
@@ -548,7 +546,7 @@ def setValue(symbolId, value):
     if handle.setValue(symbolId, byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Invalid Symbol Id')
+        raise RuntimeError('Index out of range')
 
 ##@}
 
@@ -745,34 +743,72 @@ def setCompartmentByIndex(index, value):
 ##\brief Retrieve the full Jacobian for the current model
 #\return Returns the full Jacobian matrix
 def getFullJacobian():
-    values = handle.getFullJacobian()
-    result = handle.matrixToString(values)
-    handle.freeMatrix(values)
-    return result
+    matrix = handle.getFullJacobian()
+    if matrix == 0:
+       return 0
+    rowCount = handle.getMatrixNumRows(matrix)
+    colCount = handle.getMatrixNumCols(matrix)
+    result = handle.matrixToString(matrix)
+    matrixArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getMatrixElement(matrix, rvalue, cvalue, byref(value)) == True:
+                    matrixArray[m,n] = value.value
+    handle.freeMatrix(result)
+    return matrixArray
 
 ##\brief Retreive the reduced Jacobian for the current model
 #\return Returns the reduced Jacobian matrix
 def getReducedJacobian():
-    values = handle.getReducedJacobian()
-    result = handle.matrixToString(values)
-    handle.freeMatrix(values)
-    return result
+    matrix = handle.getReducedJacobian()
+    if matrix == 0:
+       return 0
+    rowCount = handle.getMatrixNumRows(matrix)
+    colCount = handle.getMatrixNumCols(matrix)
+    result = handle.matrixToString(matrix)
+    matrixArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getMatrixElement(matrix, rvalue, cvalue, byref(value)) == True:
+                    matrixArray[m,n] = value.value
+    handle.freeMatrix(result)
+    return matrixArray
 
 ##\brief Retreive the eigenvalue matrix for the current model
 #\return Returns a matrix of eigenvalues. The first column will contain the real values and te second column will contain the imaginary values.
 def getEigenValues():
-    values = handle.getEigenValues()
-    result = handle.matrixToString(values)
-    handle.freeMatrix(values)
-    return result
+    matrix = handle.getEigenValues()
+    if matrix == 0:
+       return 0
+    rowCount = handle.getMatrixNumRows(matrix)
+    colCount = handle.getMatrixNumCols(matrix)
+    result = handle.matrixToString(matrix)
+    matrixArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getMatrixElement(matrix, rvalue, cvalue, byref(value)) == True:
+                    matrixArray[m,n] = value.value
+    handle.freeMatrix(result)
+    return matrixArray
 
 ##\brief Retreive the stoichiometry matrix for the current model
 #\return Returns the stoichiometry matrix
 def getStoichiometryMatrix():
     matrix = handle.getStoichiometryMatrix()
+    if matrix == 0:
+       return 0
     rowCount = handle.getMatrixNumRows(matrix)
     colCount = handle.getMatrixNumCols(matrix)
-    matrixArray = numpy.zeros((rowCount,colCount))
+    matrixArray = zeros((rowCount,colCount))
     for m in range(rowCount):
         for n in range(colCount):
                 value = c_double()
@@ -787,31 +823,70 @@ def getStoichiometryMatrix():
 ##\brief Retreive the Link matrix for the current model
 #\return Returns the Link matrix
 def getLinkMatrix():
-    values = handle.getLinkMatrix()
-    result = handle.matrixToString(values)
-    handle.freeMatrix(values)
-    return result
+    matrix = handle.getLinkMatrix()
+    if matrix == 0:
+       return 0
+    rowCount = handle.getMatrixNumRows(matrix)
+    colCount = handle.getMatrixNumCols(matrix)
+    result = handle.matrixToString(matrix)
+    matrixArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getMatrixElement(matrix, rvalue, cvalue, byref(value)) == True:
+                    matrixArray[m,n] = value.value
+    handle.freeMatrix(result)
+    return matrixArray
 
 ##\brief Retrieve the reduced stoichiometry matrix for the current model
 #\return Returns the reduced stoichiometry matrix
 def getNrMatrix():
-    values = handle.getNrMatrix()
-    result = handle.matrixToString(values)
-    handle.freeMatrix(values)
-    return result
+    matrix = handle.getNrMatrix()
+    if matrix == 0:
+       return 0
+    rowCount = handle.getMatrixNumRows(matrix)
+    colCount = handle.getMatrixNumCols(matrix)
+    result = handle.matrixToString(matrix)
+    matrixArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getMatrixElement(matrix, rvalue, cvalue, byref(value)) == True:
+                    matrixArray[m,n] = value.value
+    handle.freeMatrix(result)
+    return matrixArray
+
 
 ##\brief Retrieve the L0 matrix for the current model
 #\return Returns the L0 matrix
 def getL0Matrix():
-    values = handle.getL0Matrix()
-    result = handle.matrixToString(values)
-    handle.freeMatrix(values)
-    return result
+    matrix = handle.getL0Matrix()
+    if matrix == 0:
+       return 0
+    rowCount = handle.getMatrixNumRows(matrix)
+    colCount = handle.getMatrixNumCols(matrix)
+    result = handle.matrixToString(matrix)
+    matrixArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getMatrixElement(matrix, rvalue, cvalue, byref(value)) == True:
+                    matrixArray[m,n] = value.value
+    handle.freeMatrix(result)
+    return matrixArray
 
 ##\brief Retrieve the conservation matrix for the current model
 #\return Returns the conservation matrix
 def getConservationMatrix():
     matrix = handle.getConservationMatrix()
+    if matrix == 0:
+       return 0
     rowCount = handle.getMatrixNumRows(matrix)
     colCount = handle.getMatrixNumCols(matrix)
     matrixArray = zeros((rowCount,colCount))
@@ -1183,19 +1258,43 @@ def getConcentrationControlCoefficientIds():
 #\return Returns a string containing the matrix of unscaled elasticities. The first column will contain the
 #real values and the second column the imaginary values.
 def getUnScaledElasticityMatrix():
-    value = handle.getUnscaledElasticityMatrix()
-    result = handle.matrixToString(value)
-    handle.freeMatrix(value)
-    return result
+    matrix = handle.getUnScaledElasticityMatrix()
+    if matrix == 0:
+       return 0
+    rowCount = handle.getMatrixNumRows(matrix)
+    colCount = handle.getMatrixNumCols(matrix)
+    result = handle.matrixToString(matrix)
+    matrixArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getMatrixElement(matrix, rvalue, cvalue, byref(value)) == True:
+                    matrixArray[m,n] = value.value
+    handle.freeMatrix(matrix)
+    return matrixArray
 
 ##\brief Retrieve the scaled elasticity matrix for the current model
 #\return Returns a string containing the matrix of scaled elasticities. The first column will contain
 #real values and the second column the imaginary values.
 def getScaledElasticityMatrix():
-    value = handle.getScaledElasticityMatrix()
-    result = handle.matrixToString(value)
-    handle.freeMatrix(value)
-    return result
+    matrix = handle.getScaledElasticityMatrix()
+    if matrix == 0:
+       return 0
+    rowCount = handle.getMatrixNumRows(matrix)
+    colCount = handle.getMatrixNumCols(matrix)
+    result = handle.matrixToString(matrix)
+    matrixArray = zeros((rowCount,colCount))
+    for m in range(rowCount):
+        for n in range(colCount):
+                value = c_double()
+                rvalue = m
+                cvalue = n
+                if handle.getMatrixElement(matrix, rvalue, cvalue, byref(value)) == True:
+                    matrixArray[m,n] = value.value
+    handle.freeMatrix(matrix)
+    return matrixArray
 
 ##\brief Retrieve the unscaled concentration control coefficient matrix for the current model
 #\return Returns a string containing the matrix of unscaled concentration control coefficients. The first column will contain
@@ -1251,7 +1350,7 @@ def getuCC(variable, parameter):
     if handle.getuCC(byref(variable), byref(parameter), byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Invalid variable or parameter')
+        raise RuntimeError('Index out of range')
 
 ##\brief Retireve a single control coefficient
 #
@@ -1265,7 +1364,7 @@ def getCC(variable, parameter):
     if handle.getCC(variable, parameter, byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Invalid variable or parameter')
+        raise RuntimeError('Index out of range')
 
 ##\brief Retireve a single elasticity coefficient
 #
@@ -1278,7 +1377,7 @@ def getEE(variable, parameter):
     if handle.getEE(variable, parameter,  byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Invalid variable or parameter')
+        raise RuntimeError('Index out of range')
 
 ##\brief Retrieve a single unscaled elasticity coefficient
 #
@@ -1292,7 +1391,7 @@ def getuEE(name, species):
     if handle.getuEE(name, species, byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Invalid reaction name or species')
+        raise RuntimeError('Index out of range')
 
 ##\brief Compute the scaled elasticity for a given reaction and given species
 #
@@ -1303,7 +1402,7 @@ def getScaledFloatingSpeciesElasticity(reactionName, speciesName):
     if handle.getScaledFloatingSpeciesElasticity(reactionName, speciesName,  byref(value)) == True:
         return value.value;
     else:
-        raise RuntimeError('Invalid reaction name or species')
+        raise RuntimeError('Index out of range')
 
 ##@}
 
