@@ -169,7 +169,7 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
     //Check arguments, and choose to bail here if something is not right...
 }
 
-#if defined(__CODEGEARC__)
+#if defined(CG_IDE)
 #pragma comment(lib, "roadrunner.lib")
 #pragma comment(lib, "sundials_cvode.lib")
 #pragma comment(lib, "sundials_nvecserial.lib")
