@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<?xml-stylesheet type="text/xsl" href="c_api_tests.xsl"?>
+<?xml-stylesheet type="text/xsl" href="roadrunnerwork.googlecode.com/svn/wiki/c_api_tests.xsl"?>
 <unittest-results>
 <test suite="DefaultSuite" name="AllocateRR" time="0"/>
 <test suite="DefaultSuite" name="LOAD_SBML" time="0.102"/>
