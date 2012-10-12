@@ -9,6 +9,7 @@
 #include "rrConstants.h"
 #include "rrStringList.h"
 #include "rrSimulationSettings.h"
+#include "rrStringUtils.h"
 using std::vector;
 using std::string;
 namespace rr
