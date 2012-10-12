@@ -3,7 +3,7 @@
 			<ProjectGuid>{C872E013-B2BC-4AC9-92EB-3AC8FB0F05CB}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
-			<Projects Include="..\..\ThirdParty\unit_test\UnitTest.cbproj">
+			<Projects Include="..\..\ThirdParty\unit_test\unit_test.cbproj">
 				<Dependencies/>
 			</Projects>
 			<Projects Include="..\..\ThirdParty\nleq\nleq-static.cbproj">
@@ -29,14 +29,14 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
-		<Target Name="UnitTest">
-			<MSBuild Projects="..\..\ThirdParty\unit_test\UnitTest.cbproj"/>
+		<Target Name="unit_test">
+			<MSBuild Projects="..\..\ThirdParty\unit_test\unit_test.cbproj"/>
 		</Target>
-		<Target Name="UnitTest:Clean">
-			<MSBuild Projects="..\..\ThirdParty\unit_test\UnitTest.cbproj" Targets="Clean"/>
+		<Target Name="unit_test:Clean">
+			<MSBuild Projects="..\..\ThirdParty\unit_test\unit_test.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="UnitTest:Make">
-			<MSBuild Projects="..\..\ThirdParty\unit_test\UnitTest.cbproj" Targets="Make"/>
+		<Target Name="unit_test:Make">
+			<MSBuild Projects="..\..\ThirdParty\unit_test\unit_test.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="nleq-static">
 			<MSBuild Projects="..\..\ThirdParty\nleq\nleq-static.cbproj"/>
@@ -84,13 +84,13 @@
 			<MSBuild Projects="..\..\Wrappers\C\rr_c_api.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="UnitTest;nleq-static;rr_nleq;roadrunner-static;roadrunner;rr_c_api"/>
+			<CallTarget Targets="unit_test;nleq-static;rr_nleq;roadrunner-static;roadrunner;rr_c_api"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="UnitTest:Clean;nleq-static:Clean;rr_nleq:Clean;roadrunner-static:Clean;roadrunner:Clean;rr_c_api:Clean"/>
+			<CallTarget Targets="unit_test:Clean;nleq-static:Clean;rr_nleq:Clean;roadrunner-static:Clean;roadrunner:Clean;rr_c_api:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="UnitTest:Make;nleq-static:Make;rr_nleq:Make;roadrunner-static:Make;roadrunner:Make;rr_c_api:Make"/>
+			<CallTarget Targets="unit_test:Make;nleq-static:Make;rr_nleq:Make;roadrunner-static:Make;roadrunner:Make;rr_c_api:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

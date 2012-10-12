@@ -173,7 +173,6 @@ char* rrCallConv getLogFileName()
     }
 }
 
-
 char* rrCallConv getBuildDate()
 {
     char* date = new char[strlen(__DATE__) + 1];
@@ -202,7 +201,7 @@ RRHandle rrCallConv getRRInstance()
     	msg<<"RoadRunner exception: "<<ex.what()<<endl;
         setError(msg.str());
 		return NULL;
-    }  	
+    }
 }
 
 char* rrCallConv getCopyright()

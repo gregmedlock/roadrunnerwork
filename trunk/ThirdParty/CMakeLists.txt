@@ -14,6 +14,7 @@ set(BUILD_CVODES        OFF CACHE BOOL "")
 set(BUILD_IDA           OFF CACHE BOOL "")
 set(BUILD_IDAS          OFF CACHE BOOL "")
 set(BUILD_KINSOL        OFF CACHE BOOL "")
+set(BUILD_UNIT_TEST     OFF CACHE BOOL "")
 
 #LIBXML stuff
 set(LIBXML_INCLUDE_DIR  "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/libsbml/include/" CACHE string "test")
@@ -94,6 +95,7 @@ add_subdirectory(sundials)
 add_subdirectory(pugi)
 add_subdirectory(nleq)
 add_subdirectory(rr-libstruct)
+add_subdirectory(unit_test)
 
 if(${BORLANDC})
 add_subdirectory(poco)

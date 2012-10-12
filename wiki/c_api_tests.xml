@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="c_api_tests.xsl"?>
+<unittest-results>
+<test suite="DefaultSuite" name="AllocateRR" time="0"/>
+<test suite="DefaultSuite" name="LOAD_SBML" time="0.102"/>
+<test suite="DefaultSuite" name="FULL_JACOBIAN" time="0"/>
+</unittest-results>
+
