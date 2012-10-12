@@ -39,7 +39,7 @@
 			<BCC_MonitorGlobalAndStackData>true</BCC_MonitorGlobalAndStackData>
 			<BCC_MonitorInlinePtrAccess>true</BCC_MonitorInlinePtrAccess>
 			<BCC_MonitorThis>true</BCC_MonitorThis>
-			<Defines>BUILD_MODEL_DLL;LIBSBML_USE_CPP_NAMESPACE;STATIC_RR;$(Defines)</Defines>
+			<Defines>BUILD_MODEL_DLL;LIBSBML_USE_CPP_NAMESPACE;STATIC_RR;CG_IDE;WIN32;$(Defines)</Defines>
 			<NoVCL>true</NoVCL>
 			<LinkPackageImports>rtl.bpi</LinkPackageImports>
 			<ProjectType>CppConsoleApplication</ProjectType>
@@ -49,8 +49,8 @@
 			<_TCHARMapping>char</_TCHARMapping>
 			<ILINK_GenerateImportLibrary>true</ILINK_GenerateImportLibrary>
 			<ILINK_GenerateLibFile>true</ILINK_GenerateLibFile>
-			<IncludePath>p:\mtk\Lib\Common\;..\..\apps\rr_performance_tester\;..\..\Testing\squareWave\;..\..\source\;..\..\source\libstruct;..\..\apps\rr\;$(RR_DEBUG_INSTALL)\include;$(IncludePath)</IncludePath>
-			<ILINK_LibraryPath>p:\mtk\Lib\Common\;..\..\apps\rr_performance_tester\;R:\installs\xe\full-debug\lib\;..\..\Testing\squareWave\;R:\builds\xe\ThirdParty\lib\;C:\builds\xe\clapack\F2CLIBS\libf2c\;C:\builds\xe\clapack\BLAS\SRC\;C:\builds\xe\clapack\SRC\;R:\installs\xe\lib\;..\..\source\;..\..\releases\xe\shared\link\;..\..\builds\xe\clapack\SRC\;..\..\builds\xe\clapack\F2CLIBS\libf2c\;..\..\builds\xe\clapack\BLAS\SRC\;..\..\ThirdParty\libsbml_dependencies\lib\;..\..\installs\xe\lib\;..\..\Examples\rr\;..\..\releases\xe\link\;..\..\installs\xe\bin\;..\..\Apps\rr\;C:\DataOutput\00022\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>..\..\apps\rr_performance_tester\;..\..\source\;..\..\apps\rr\;$(RR_DEBUG_INSTALL)\include;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>..\..\apps\rr_performance_tester\;..\..\source\;..\..\Apps\rr\;$(RR_DEBUG_BUILD)\ThirdParty\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
 			<DynamicRTL>true</DynamicRTL>
 			<UsePackages>true</UsePackages>
@@ -70,7 +70,7 @@
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>
 			<DCC_Optimize>false</DCC_Optimize>
 			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-			<Defines>_DEBUG;WIN32;ENABLE_DEBUG_OUTPUT;$(Defines)</Defines>
+			<Defines>_DEBUG;ENABLE_DEBUG_OUTPUT;$(Defines)</Defines>
 			<BCC_InlineFunctionExpansion>false</BCC_InlineFunctionExpansion>
 			<BCC_UseRegisterVariables>None</BCC_UseRegisterVariables>
 			<DCC_Define>DEBUG</DCC_Define>
@@ -91,15 +91,11 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\..\apps\rr_performance_tester\Args.cpp">
+			<CppCompile Include="Args.cpp">
 				<BuildOrder>8</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\..\apps\rr_performance_tester\main.cpp">
+			<CppCompile Include="main.cpp">
 				<BuildOrder>9</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\..\source\rrStopWatch.cpp">
-				<DependentOn>..\..\source\rrStopWatch.h</DependentOn>
-				<BuildOrder>10</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
@@ -158,7 +154,7 @@
 						<Parameters Name="RunParams">-n41 -vDebug3 -tC:\\RRTemp -dc:\\RRDataOutput</Parameters>
 					</Parameters>
 					<Parameters_Win32>
-						<Parameters_Win32 Name="RunParams">-s0 -e2 -z1000 -p -vInfo -m&quot;../Models/BorisEJB.xml&quot; -t&quot;r:\rrTemp&quot; -d&quot;r:\rrTemp&quot; </Parameters_Win32>
+						<Parameters_Win32 Name="RunParams">-s0 -e2 -z1000 -p -vInfo -m&quot;../Models/feedback.xml&quot; -t&quot;r:\rrTemp&quot; -d&quot;r:\rrTemp&quot; </Parameters_Win32>
 					</Parameters_Win32>
 				</CPlusPlusBuilder.Personality>
 				<Platforms>

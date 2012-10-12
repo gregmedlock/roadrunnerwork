@@ -3,28 +3,40 @@
 #include "rrRoadRunner.h"
 using namespace UnitTest;
 
+RoadRunner* gRR = NULL;
 TEST(AllocateRR)
 {
-	RoadRunner *rr = new RoadRunner;
-	CHECK(rr!=NULL);
-    delete rr;
-}
+	if(!gRR)
+    {
+		gRR = new RoadRunner;
 
+    }
+	CHECK(gRR!=NULL);
+}
 
 TEST(LOAD_SBML)
 {
-	RoadRunner *rr = new RoadRunner;
-	CHECK(rr!=NULL);
+	CHECK(gRR!=NULL);
+    string fName =  "..\\Models\\ss_threeSpecies.xml";
+	CHECK(gRR->loadSBMLFromFile(fName));
+}
 
-    string fileName =  "..\\..\\..\\ss_threeSpecies.xml";
 
-	ifstream ifs(fileName.c_str());
-	CHECK(!ifs);
+TEST(FULL_JACOBIAN)
+{
+	CHECK(gRR!=NULL);
 
-	rr->ComputeAndAssignConservationLaws(false);
+    string fName =  "..\\Models\\ss_threeSpecies.xml";
+	CHECK(gRR->loadSBMLFromFile(fName));
 
-	std::string sbml((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
-	CHECK(rr->loadSBML(sbml.c_str()));
+	DoubleMatrix jaco = gRR->getFullJacobian();
+	//Expected result
+    Log(lInfo)<<jaco;
+//          S1       S2       S3
+//S1{{   -0.15        0        0}
+//S2 {    0.15     -0.4        0}
+//S3 {       0      0.4    -0.55}}
+
 }
 
 

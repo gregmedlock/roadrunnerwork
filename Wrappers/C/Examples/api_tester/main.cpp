@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 	printf ("\n\n");
 	freeRRList (myList);
 
-	string modelsPath(".\\..\\Models");
+	string modelsPath(".\\..\\..\\Models");
 	if(argc > 1)
 	{
 		modelsPath = argv[1];
@@ -115,7 +115,7 @@ int main(int argc, char* argv[])
 //	 string fName = modelsPath + "\\boundary.xml";
 
 	cout << "\nRunning model: " << fName << endl;
-	setComputeAndAssignConservationLaws(false);
+	setComputeAndAssignConservationLaws(true);
 
 	if(!loadSBMLFromFile(fName.c_str()))
 	{
@@ -124,8 +124,12 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
+   	printMatrix("Full Jacobian Matrix", getFullJacobian());
 	RRListHandle sList = getAvailableTimeCourseSymbols();
+
+	cout<<"FloatingSpeciesIds: "<<stringArrayToString(getFloatingSpeciesIds());
     cout<<"Symbols: "<<listToString(sList);
+
 
     sList = getAvailableSteadyStateSymbols();
     cout<<"\n\n Steady state symbols\n";
@@ -226,9 +230,6 @@ int main(int argc, char* argv[])
     }
 
 	cout<<"Steady State selection List: "<<listToString(getSteadyStateSelectionList());
-	setSteadyStateSelectionList("S2 S1");
-	cout<<"\nSteady State selection List: "<<listToString(getSteadyStateSelectionList());
-
     printMatrix("Stoichiometry Matrix", getStoichiometryMatrix());
 
     cout<<"Number of independent species = "<<getNumberOfIndependentSpecies()<<endl;
@@ -237,7 +238,7 @@ int main(int argc, char* argv[])
     printMatrix("Link Matrix", getLinkMatrix());
 	printMatrix("Nr Matrix", getNrMatrix());
 	printMatrix("L0 Matrix", getL0Matrix());
-	printMatrix("Full Jacobian Matrix", getFullJacobian());
+
 	printMatrix("Reduced Jacobian Matrix:", getReducedJacobian());
     printMatrix("Eigenvalue Matrix (real/imag)", getEigenValues());
 	printMatrix("Unscaled Elasticity Matrix:", getUnScaledElasticityMatrix());

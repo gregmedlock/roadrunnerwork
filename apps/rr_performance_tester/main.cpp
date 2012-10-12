@@ -113,7 +113,7 @@ int main(int argc, char * argv[])
         if(doContinue && (rr->GetSimulationResult().GetNrOfRows() < 1))
         {
             Log(lError)<<"Failed getting a result from simulation";
-            throw("Failed running simulation");
+            //throw("Failed running simulation");
         }
 
         delete rr;
@@ -170,7 +170,7 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
 }
 
 #if defined(CG_IDE)
-#pragma comment(lib, "roadrunner.lib")
+#pragma comment(lib, "roadrunner-static.lib")
 #pragma comment(lib, "sundials_cvode.lib")
 #pragma comment(lib, "sundials_nvecserial.lib")
 #pragma comment(lib, "nleq-static.lib")

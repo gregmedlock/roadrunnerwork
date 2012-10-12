@@ -1598,24 +1598,19 @@ ls::DoubleMatrix RoadRunner::getEigenvalues()
 }
 
 // Help("Compute the full Jacobian at the current operating point")
-ls::DoubleMatrix RoadRunner::getFullJacobian()
+DoubleMatrix RoadRunner::getFullJacobian()
 {
     try
     {
-        if (mModel)
+        if (!mModel)
         {
-            ls::DoubleMatrix uelast = getUnscaledElasticityMatrix();
-            ls::DoubleMatrix* rsm = mLS->getReorderedStoichiometryMatrix();
-            if(rsm)
-            {
-            	return mult(*rsm, uelast);
-            }
-            else
-            {
-	            ls::DoubleMatrix empty;
-            }
+	        throw SBWApplicationException(emptyModelStr);
         }
-        throw SBWApplicationException(emptyModelStr);
+        DoubleMatrix uelast = getUnscaledElasticityMatrix();
+        DoubleMatrix rsm    = *mLS->getReorderedStoichiometryMatrix();
+        Log(lDebug)<<"UElast: \n"<<uelast;
+		Log(lDebug)<<"Stoch Matrix: \n"<<rsm;
+        return mult(rsm, uelast);
     }
     catch (const Exception& e)
     {
