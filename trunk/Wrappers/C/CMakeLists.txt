@@ -71,6 +71,7 @@ const char* RR_VERSION =  \"${RR_VERSION}\";\n
 
 add_subdirectory(Apps)
 add_subdirectory(Examples)
+add_subdirectory(Testing)
 
 #=============== INSTALL =====================
 install(   FILES ${target}.h rr_c_types.h rr_c_api_exporter.h				 					
