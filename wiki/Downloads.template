@@ -20,7 +20,7 @@ The official releases are being built using Visual Studio 2010. If you are inter
 ||  C          API installer ||Not yet released||1.0|| xxxx ||
 ||  Python     API installer ||Not yet released||1.0|| xxxx ||
 
-== Nightly Build ==
+== The Latest Build ==
 Below are distributions containing release with the latest bugfixes and additions. 
 Observe that these releases may occasionaly be less stable than the official release. 
 

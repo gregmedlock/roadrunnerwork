@@ -56,9 +56,9 @@
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 
-//We only need to give lthe linker the folder where libs are
+//We only need to give the linker the folder where libs are
 //using the pragma comment. Works for MSVC and codegear
-#if defined(__CODEGEARC__)
+#if defined(CG_IDE)
 #pragma comment(lib, "roadrunner.lib")
 #endif
 

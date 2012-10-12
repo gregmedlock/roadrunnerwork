@@ -231,7 +231,7 @@ void ProcessCommandLineArguments(int argc, char* argv[], Args& args)
     }
 }
 
-#if defined(__CODEGEARC__)
+#if defined(CG_IDE)
 #pragma comment(lib, "roadrunner.lib")
 #pragma comment(lib, "rr_c_api.lib")
 #endif
