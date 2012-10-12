@@ -27,7 +27,7 @@
 			<PackageImports>vcl.bpi;rtl.bpi;bcbie.bpi;vclx.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;vclimg.bpi;svnui.bpi;svn.bpi;bdertl.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;inet.bpi;inetdb.bpi;webdsnap.bpi;websnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DbxClientDriver.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;DuneComponents.bpi;VCLCommon.bpi</PackageImports>
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
 			<ProjectType>CppStaticLibrary</ProjectType>
-			<IncludePath>..\..\ThirdParty\UnitTest\src\Win32\;..\..\ThirdParty\UnitTest\src\;..\..\ThirdParty\unit++\src\Win32\;..\..\ThirdParty\unit++\src\;$(IncludePath)</IncludePath>
+			<IncludePath>src\;src\Win32\;..\..\ThirdParty\UnitTest\src\Win32\;..\..\ThirdParty\UnitTest\src\;..\..\ThirdParty\unit++\src\Win32\;..\..\ThirdParty\unit++\src\;$(IncludePath)</IncludePath>
 			<_TCHARMapping>char</_TCHARMapping>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
 			<Multithreaded>true</Multithreaded>
@@ -67,56 +67,56 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="..\UnitTest\src\AssertException.cpp">
-				<BuildOrder>7</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\Checks.cpp">
-				<BuildOrder>8</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\CurrentTest.cpp">
-				<BuildOrder>9</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\DeferredTestReporter.cpp">
+			<CppCompile Include="src\AssertException.cpp">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\DeferredTestResult.cpp">
-				<BuildOrder>4</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\MemoryOutStream.cpp">
-				<BuildOrder>10</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\ReportAssert.cpp">
-				<BuildOrder>11</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\Test.cpp">
-				<BuildOrder>6</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\TestDetails.cpp">
-				<BuildOrder>12</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\TestList.cpp">
-				<BuildOrder>13</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\TestReporter.cpp">
-				<BuildOrder>3</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\TestReporterStdout.cpp">
+			<CppCompile Include="src\Checks.cpp">
 				<BuildOrder>2</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\TestResults.cpp">
-				<BuildOrder>14</BuildOrder>
+			<CppCompile Include="src\CurrentTest.cpp">
+				<BuildOrder>3</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\TestRunner.cpp">
+			<CppCompile Include="src\DeferredTestReporter.cpp">
+				<BuildOrder>4</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\DeferredTestResult.cpp">
 				<BuildOrder>5</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\TimeConstraint.cpp">
+			<CppCompile Include="src\MemoryOutStream.cpp">
+				<BuildOrder>6</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\ReportAssert.cpp">
+				<BuildOrder>7</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\Test.cpp">
+				<BuildOrder>8</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\TestDetails.cpp">
+				<BuildOrder>9</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\TestList.cpp">
+				<BuildOrder>10</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\TestReporter.cpp">
+				<BuildOrder>11</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\TestReporterStdout.cpp">
+				<BuildOrder>12</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\TestResults.cpp">
+				<BuildOrder>13</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\TestRunner.cpp">
+				<BuildOrder>14</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\TimeConstraint.cpp">
 				<BuildOrder>15</BuildOrder>
 			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\Win32\TimeHelpers.cpp">
-				<BuildOrder>16</BuildOrder>
-			</CppCompile>
-			<CppCompile Include="..\UnitTest\src\XmlTestReporter.cpp">
+			<CppCompile Include="src\Win32\TimeHelpers.cpp">
 				<BuildOrder>0</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="src\XmlTestReporter.cpp">
+				<BuildOrder>16</BuildOrder>
 			</CppCompile>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
