@@ -1,7 +1,1301 @@
 RR BUILD
-Build started at: 2012-10-10 15:54
+Build started at: 2012-10-13 11:10
 Making and installing ThirdParty
-ThirdParty install succeeded
+Third Party build failed:
+Microsoft (R) Build Engine Version 4.0.30319.1
+[Microsoft .NET Framework, Version 4.0.30319.269]
+Copyright (C) Microsoft Corporation 2007. All rights reserved.
+
+Build started 10/13/2012 11:10:16 AM.
+Project "r:\builds\vs\release\ThirdParty\INSTALL.vcxproj" on node 1 (default targets).
+Project "r:\builds\vs\release\ThirdParty\INSTALL.vcxproj" (1) is building "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) on node 1 (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\ZERO_CHECK.vcxproj" (3) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "Win32\Release\ZERO_CHECK\ZERO_CHECK.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  Checking Build System
+  CMake is re-running because R:/builds/vs/release/ThirdParty/CMakeFiles/generate.stamp is out-of-date.
+    the file 'R:/roadrunnerwork/trunk/ThirdParty/CMakeLists.txt'
+    is newer than 'R:/builds/vs/release/ThirdParty/CMakeFiles/generate.stamp.depend'
+    result='-1'
+  -- 
+  ----------------------------------------------------------------------
+  libSBML version 5.6.0
+  ----------------------------------------------------------------------
+  
+     More information and the latest version are available online at
+     http://sbml.org/Software/libSBML
+  
+     Please report problems using the issue tracker at
+     http://sbml.org/Software/libsbml/issue-tracker
+  
+     To contact the developers directly, email libsbml-team@caltech.edu
+  
+     Configured on host CREATOR 
+       host type                     = Windows
+       host operating system         = Windows 6.1
+       host CPU architecture         = x86
+  
+     General build flags:
+       CC                            = cl
+       CXX                           = cl
+       CPPFLAGS                      =  -DWIN32 -DLIBSBML_EXPORTS -DLIBLAX_EXPORTS -D_CRT_SECURE_NO_WARNINGS
+       CFLAGS                        =  /DWIN32 /D_WINDOWS /W3 /Zm1000
+       CXXFLAGS                      =  /DWIN32 /D_WINDOWS /W3 /Zm1000 /EHsc /GR
+       LDFLAGS                       =  /STACK:10000000 /machine:X86 
+  
+     XML parser library configuration:
+       XML library                   = libxml2
+       CPPFLAGS for XML              = -IR:/roadrunnerwork/trunk/ThirdParty/dependencies/libsbml/include/
+       LIBS for XML                  = R:/roadrunnerwork/trunk/ThirdParty/dependencies/libsbml/lib/libxml2.lib
+  
+    Other libSBML configuration settings:
+       Installation $prefix          = R:/installs/vs/release
+  -- 
+  
+  --   Using C++ namespace for libSBML (libsbml) = yes
+  
+  --   Enable the SBML Layout package = no
+  
+  
+  -- 
+  
+  -- Other potentially important settings:
+  -- 
+CUSTOMBUILD : warning : reading/writing compressed SBML in .zip or .gz format in [R:\builds\vs\release\ThirdParty\ZERO_CHECK.vcxproj]
+  this copy of libSBML is not supported or has been disabled.
+  If this was not your intention, please check the WITH_ZLIB
+  option.
+  -- 
+CUSTOMBUILD : warning : reading/writing compressed SBML in .bz2 format in [R:\builds\vs\release\ThirdParty\ZERO_CHECK.vcxproj]
+  this copy of libSBML is not supported or has been disabled.
+  If this was not your intention, please check the WITH_BZIP2
+  option.
+  -- 
+  ----------------------------------------------------------------------
+  -- Added NVECTOR_SERIAL module
+  -- Added CVODE module
+  -- Configuring done
+  -- Generating done
+  -- Build files have been written to: R:/builds/vs/release/ThirdParty
+FinalizeBuildStatus:
+  Deleting file "Win32\Release\ZERO_CHECK\ZERO_CHECK.unsuccessfulbuild".
+  Touching "Win32\Release\ZERO_CHECK\ZERO_CHECK.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\ZERO_CHECK.vcxproj" (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\clapack\3.2.1\F2CLIBS\libf2c\arithchk.vcxproj" (4) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "arithchk.dir\Release\arithchk.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  All outputs are up-to-date.
+Link:
+  All outputs are up-to-date.
+  arithchk.vcxproj -> R:\builds\vs\release\ThirdParty\bin\Release\arithchk.exe
+FinalizeBuildStatus:
+  Deleting file "arithchk.dir\Release\arithchk.unsuccessfulbuild".
+  Touching "arithchk.dir\Release\arithchk.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\clapack\3.2.1\F2CLIBS\libf2c\arithchk.vcxproj" (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\clapack\3.2.1\BLAS\SRC\blas.vcxproj" (5) on node 1 (default targets).
+Project "R:\builds\vs\release\ThirdParty\clapack\3.2.1\BLAS\SRC\blas.vcxproj" (5) is building "R:\builds\vs\release\ThirdParty\clapack\3.2.1\F2CLIBS\libf2c\f2c.vcxproj" (6) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "f2c.dir\Release\f2c.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  All outputs are up-to-date.
+Lib:
+  All outputs are up-to-date.
+  f2c.vcxproj -> R:\builds\vs\release\ThirdParty\lib\Release\libf2c.lib
+FinalizeBuildStatus:
+  Deleting file "f2c.dir\Release\f2c.unsuccessfulbuild".
+  Touching "f2c.dir\Release\f2c.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\clapack\3.2.1\F2CLIBS\libf2c\f2c.vcxproj" (default targets).
+InitializeBuildStatus:
+  Creating "blas.dir\Release\blas.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  All outputs are up-to-date.
+Lib:
+  All outputs are up-to-date.
+  blas.vcxproj -> R:\builds\vs\release\ThirdParty\lib\Release\blas.lib
+FinalizeBuildStatus:
+  Deleting file "blas.dir\Release\blas.unsuccessfulbuild".
+  Touching "blas.dir\Release\blas.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\clapack\3.2.1\BLAS\SRC\blas.vcxproj" (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\clapack\3.2.1\SRC\lapack.vcxproj" (7) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "lapack.dir\Release\lapack.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  All outputs are up-to-date.
+Lib:
+  All outputs are up-to-date.
+  lapack.vcxproj -> R:\builds\vs\release\ThirdParty\lib\Release\lapack.lib
+FinalizeBuildStatus:
+  Deleting file "lapack.dir\Release\lapack.unsuccessfulbuild".
+  Touching "lapack.dir\Release\lapack.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\clapack\3.2.1\SRC\lapack.vcxproj" (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\libsbml\src\libsbml.vcxproj" (8) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "libsbml.dir\Release\libsbml.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IR:/roadrunnerwork/trunk/ThirdParty/libsbml/src/. /IR:/roadrunnerwork/trunk/ThirdParty/dependencies/libsbml/include /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D NDEBUG /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D LIBSBML_USE_CPP_NAMESPACE /D USE_LIBXML /D "PACKAGE_VERSION=\"5.6.0\"" /D "PACKAGE_NAME=\"libsbml\"" /D WIN32 /D LIBSBML_EXPORTS /D LIBLAX_EXPORTS /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D "CMAKE_INTDIR=\"Release\"" /D libsbml_EXPORTS /D _WINDLL /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"libsbml.dir\Release\\" /Fd"R:/builds/vs/release/ThirdParty/bin/Release/libsbml.pdb" /Gd /TP /wd4244 /wd4554 /analyze- /errorReport:queue ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\AlgebraicRule.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\AssignmentRule.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Compartment.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\CompartmentType.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Constraint.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Delay.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Event.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\EventAssignment.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\ExpectedAttributes.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\FunctionDefinition.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\InitialAssignment.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\KineticLaw.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\ListOf.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\LocalParameter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Model.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\ModifierSpeciesReference.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Parameter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Priority.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\RateRule.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Reaction.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Rule.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLConstructorException.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLConvert.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLDocument.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLError.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLErrorLog.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLNamespaces.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLReader.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLTransforms.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLTypeCodes.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLVisitor.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLWriter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBO.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SimpleSpeciesReference.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Species.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SpeciesReference.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SpeciesType.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\StoichiometryMath.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SyntaxChecker.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Trigger.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Unit.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\UnitDefinition.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\annotation\CVTerm.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\annotation\Date.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\annotation\ModelCreator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\annotation\ModelHistory.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\annotation\RDFAnnotationParser.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\ConversionOption.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\ConversionProperties.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\RegisterConverters.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLConverterRegistry.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLFunctionDefinitionConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLInitialAssignmentConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLLevelVersionConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLRuleConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLStripPackageConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLUnitsConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\ISBMLExtensionNamespaces.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLDocumentPlugin.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLDocumentPluginNotRequired.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLExtension.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionException.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionNamespaces.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionRegistry.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBaseExtensionPoint.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBasePlugin.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBasePluginCreatorBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\ASTNode.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\L3Parser.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\L3ParserSettings.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\MathML.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\units\FormulaUnitsData.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\units\UnitFormulaFormatter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\util\List.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\ConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\IdentifierConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\InternalConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L1CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L2v1CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L2v2CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L2v3CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L2v4CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L3v1CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\MathMLConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\ModelingPracticeValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\OverdeterminedValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\SBMLExternalValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\SBMLInternalValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\SBMLValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\SBOConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\UnitConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\VConstraint.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\Validator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\AssignmentCycles.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\AssignmentRuleOrdering.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\CiElementMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\CompartmentOutsideCycles.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\EqualityArgsMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\ExponentUnitsCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionApplyMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionDefinitionVars.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionReferredToExists.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\IdBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\KineticLawUnitsCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\KineticLawVars.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\LambdaMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\LocalParameterMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\LogicalArgsMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\MathMLBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\NumberArgsMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\NumericArgsMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\NumericReturnMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\OverDeterminedCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\PieceBooleanMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\PiecewiseValueMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\PowerUnitsCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\SpeciesReactionOrRule.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\StoichiometryMathVars.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsInModel.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueMetaId.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInRules.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UnitsBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\ValidCnUnitsValue.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\LibXMLAttributes.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\LibXMLHandler.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\LibXMLNamespaces.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\LibXMLParser.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLAttributes.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLConstructorException.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLError.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLErrorLog.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLHandler.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLInputStream.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLNamespaces.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLNode.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLOutputStream.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLParser.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLToken.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLTokenizer.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLTriple.cpp  /Zm1000 
+  AlgebraicRule.cpp
+  AssignmentRule.cpp
+  Compartment.cpp
+  CompartmentType.cpp
+  Constraint.cpp
+  Delay.cpp
+  Event.cpp
+  EventAssignment.cpp
+  ExpectedAttributes.cpp
+  FunctionDefinition.cpp
+  InitialAssignment.cpp
+  KineticLaw.cpp
+  ListOf.cpp
+  LocalParameter.cpp
+  Model.cpp
+  ModifierSpeciesReference.cpp
+  Parameter.cpp
+  Priority.cpp
+  RateRule.cpp
+  Reaction.cpp
+  Generating Code...
+  Compiling...
+  Rule.cpp
+  SBMLConstructorException.cpp
+  SBMLConvert.cpp
+  SBMLDocument.cpp
+  SBMLError.cpp
+  SBMLErrorLog.cpp
+  SBMLNamespaces.cpp
+  SBMLReader.cpp
+  SBMLTransforms.cpp
+  SBMLTypeCodes.cpp
+  SBMLVisitor.cpp
+  SBMLWriter.cpp
+  SBO.cpp
+  SBase.cpp
+  SimpleSpeciesReference.cpp
+  Species.cpp
+  SpeciesReference.cpp
+  SpeciesType.cpp
+  StoichiometryMath.cpp
+  SyntaxChecker.cpp
+  Generating Code...
+  Compiling...
+  Trigger.cpp
+  Unit.cpp
+  UnitDefinition.cpp
+  CVTerm.cpp
+  Date.cpp
+  ModelCreator.cpp
+  ModelHistory.cpp
+  RDFAnnotationParser.cpp
+  ConversionOption.cpp
+  ConversionProperties.cpp
+  RegisterConverters.cpp
+  SBMLConverter.cpp
+  SBMLConverterRegistry.cpp
+  SBMLFunctionDefinitionConverter.cpp
+  SBMLInitialAssignmentConverter.cpp
+  SBMLLevelVersionConverter.cpp
+  SBMLRuleConverter.cpp
+  SBMLStripPackageConverter.cpp
+  SBMLUnitsConverter.cpp
+  ISBMLExtensionNamespaces.cpp
+  Generating Code...
+  Compiling...
+  SBMLDocumentPlugin.cpp
+  SBMLDocumentPluginNotRequired.cpp
+  SBMLExtension.cpp
+  SBMLExtensionException.cpp
+  SBMLExtensionNamespaces.cpp
+  SBMLExtensionRegistry.cpp
+  SBaseExtensionPoint.cpp
+  SBasePlugin.cpp
+  SBasePluginCreatorBase.cpp
+  ASTNode.cpp
+  L3Parser.cpp
+L3Parser.cpp(972): warning C4065: switch statement contains 'default' but no 'case' labels [R:\builds\vs\release\ThirdParty\libsbml\src\libsbml.vcxproj]
+L3Parser.cpp(1338): warning C4065: switch statement contains 'default' but no 'case' labels [R:\builds\vs\release\ThirdParty\libsbml\src\libsbml.vcxproj]
+  L3ParserSettings.cpp
+  MathML.cpp
+  FormulaUnitsData.cpp
+  UnitFormulaFormatter.cpp
+  List.cpp
+  ConsistencyValidator.cpp
+  IdentifierConsistencyValidator.cpp
+  InternalConsistencyValidator.cpp
+  L1CompatibilityValidator.cpp
+  Generating Code...
+  Compiling...
+  L2v1CompatibilityValidator.cpp
+  L2v2CompatibilityValidator.cpp
+  L2v3CompatibilityValidator.cpp
+  L2v4CompatibilityValidator.cpp
+  L3v1CompatibilityValidator.cpp
+  MathMLConsistencyValidator.cpp
+  ModelingPracticeValidator.cpp
+  OverdeterminedValidator.cpp
+  SBMLExternalValidator.cpp
+  SBMLInternalValidator.cpp
+  SBMLValidator.cpp
+  SBOConsistencyValidator.cpp
+  UnitConsistencyValidator.cpp
+  VConstraint.cpp
+  Validator.cpp
+  ArgumentsUnitsCheck.cpp
+  ArgumentsUnitsCheckWarnings.cpp
+  AssignmentCycles.cpp
+  AssignmentRuleOrdering.cpp
+  CiElementMathCheck.cpp
+  Generating Code...
+  Compiling...
+  CompartmentOutsideCycles.cpp
+  DuplicateTopLevelAnnotation.cpp
+  EqualityArgsMathCheck.cpp
+  ExponentUnitsCheck.cpp
+  FunctionApplyMathCheck.cpp
+  FunctionDefinitionVars.cpp
+  FunctionNoArgsMathCheck.cpp
+  FunctionReferredToExists.cpp
+  IdBase.cpp
+  KineticLawUnitsCheck.cpp
+  KineticLawVars.cpp
+  LambdaMathCheck.cpp
+  LocalParameterMathCheck.cpp
+  LocalParameterShadowsIdInModel.cpp
+  LogicalArgsMathCheck.cpp
+  MathMLBase.cpp
+  NumberArgsMathCheck.cpp
+  NumericArgsMathCheck.cpp
+  NumericReturnMathCheck.cpp
+  OverDeterminedCheck.cpp
+  Generating Code...
+  Compiling...
+  PieceBooleanMathCheck.cpp
+  PiecewiseValueMathCheck.cpp
+  PowerUnitsCheck.cpp
+  SpeciesReactionOrRule.cpp
+  StoichiometryMathVars.cpp
+  UniqueIdBase.cpp
+  UniqueIdsForUnitDefinitions.cpp
+  UniqueIdsInKineticLaw.cpp
+  UniqueIdsInModel.cpp
+  UniqueMetaId.cpp
+  UniqueSpeciesTypesInCompartment.cpp
+  UniqueSymbolsInInitialAssignments.cpp
+  UniqueVarsInEventAssignments.cpp
+  UniqueVarsInEventsAndRules.cpp
+  UniqueVarsInInitialAssignmentsAndRules.cpp
+  UniqueVarsInRules.cpp
+  UnitsBase.cpp
+  ValidCnUnitsValue.cpp
+  LibXMLAttributes.cpp
+  LibXMLHandler.cpp
+  Generating Code...
+  Compiling...
+  LibXMLNamespaces.cpp
+  LibXMLParser.cpp
+  XMLAttributes.cpp
+  XMLConstructorException.cpp
+  XMLError.cpp
+  XMLErrorLog.cpp
+  XMLHandler.cpp
+  XMLInputStream.cpp
+  XMLNamespaces.cpp
+  XMLNode.cpp
+  XMLOutputStream.cpp
+  XMLParser.cpp
+  XMLToken.cpp
+  XMLTokenizer.cpp
+  XMLTriple.cpp
+  Generating Code...
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IR:/roadrunnerwork/trunk/ThirdParty/libsbml/src/. /IR:/roadrunnerwork/trunk/ThirdParty/dependencies/libsbml/include /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D NDEBUG /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D LIBSBML_USE_CPP_NAMESPACE /D USE_LIBXML /D "PACKAGE_VERSION=\"5.6.0\"" /D "PACKAGE_NAME=\"libsbml\"" /D WIN32 /D LIBSBML_EXPORTS /D LIBLAX_EXPORTS /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D "CMAKE_INTDIR=\"Release\"" /D libsbml_EXPORTS /D _WINDLL /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"libsbml.dir\Release\\" /Fd"R:/builds/vs/release/ThirdParty/bin/Release/libsbml.pdb" /Gd /TC /wd4244 /wd4554 /analyze- /errorReport:queue ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\UnitKind.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\FormulaFormatter.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\FormulaParser.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\FormulaTokenizer.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\util\Stack.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\util\StringBuffer.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\util\memory.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\util\util.c  /Zm1000 
+  UnitKind.c
+  FormulaFormatter.c
+  FormulaParser.c
+  FormulaTokenizer.c
+  Stack.c
+  StringBuffer.c
+  memory.c
+  util.c
+  Generating Code...
+Link:
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"R:\builds\vs\release\ThirdParty\bin\Release\libsbml.dll" /INCREMENTAL:NO /NOLOGO /LIBPATH:R:/roadrunnerwork/trunk/ThirdParty/dependencies/libsbml/lib /LIBPATH:R:/roadrunnerwork/trunk/ThirdParty/dependencies/libsbml/lib/Release kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib R:\roadrunnerwork\trunk\ThirdParty\dependencies\libsbml\lib\libxml2.lib /MANIFEST /ManifestFile:"libsbml.dir\Release\libsbml.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /PDB:"R:/builds/vs/release/ThirdParty/bin/Release/libsbml.pdb" /SUBSYSTEM:CONSOLE /STACK:"10000000" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"R:/builds/vs/release/ThirdParty/lib/Release/libsbml.lib" /MACHINE:X86 /DLL libsbml.dir\Release\CVTerm.obj
+  libsbml.dir\Release\Date.obj
+  libsbml.dir\Release\ModelCreator.obj
+  libsbml.dir\Release\ModelHistory.obj
+  libsbml.dir\Release\RDFAnnotationParser.obj
+  "libsbml.dir\Release\libsbml-version.obj"
+  libsbml.dir\Release\ConversionOption.obj
+  libsbml.dir\Release\ConversionProperties.obj
+  libsbml.dir\Release\RegisterConverters.obj
+  libsbml.dir\Release\SBMLConverter.obj
+  libsbml.dir\Release\SBMLConverterRegistry.obj
+  libsbml.dir\Release\SBMLFunctionDefinitionConverter.obj
+  libsbml.dir\Release\SBMLInitialAssignmentConverter.obj
+  libsbml.dir\Release\SBMLLevelVersionConverter.obj
+  libsbml.dir\Release\SBMLRuleConverter.obj
+  libsbml.dir\Release\SBMLStripPackageConverter.obj
+  libsbml.dir\Release\SBMLUnitsConverter.obj
+  libsbml.dir\Release\ISBMLExtensionNamespaces.obj
+  libsbml.dir\Release\SBaseExtensionPoint.obj
+  libsbml.dir\Release\SBasePlugin.obj
+  libsbml.dir\Release\SBasePluginCreatorBase.obj
+  libsbml.dir\Release\SBMLDocumentPlugin.obj
+  libsbml.dir\Release\SBMLDocumentPluginNotRequired.obj
+  libsbml.dir\Release\SBMLExtension.obj
+  libsbml.dir\Release\SBMLExtensionException.obj
+  libsbml.dir\Release\SBMLExtensionNamespaces.obj
+  libsbml.dir\Release\SBMLExtensionRegistry.obj
+  libsbml.dir\Release\ASTNode.obj
+  libsbml.dir\Release\L3Parser.obj
+  libsbml.dir\Release\L3ParserSettings.obj
+  libsbml.dir\Release\MathML.obj
+  libsbml.dir\Release\FormulaFormatter.obj
+  libsbml.dir\Release\FormulaParser.obj
+  libsbml.dir\Release\FormulaTokenizer.obj
+  libsbml.dir\Release\AlgebraicRule.obj
+  libsbml.dir\Release\AssignmentRule.obj
+  libsbml.dir\Release\Compartment.obj
+  libsbml.dir\Release\CompartmentType.obj
+  libsbml.dir\Release\Constraint.obj
+  libsbml.dir\Release\Delay.obj
+  libsbml.dir\Release\Event.obj
+  libsbml.dir\Release\EventAssignment.obj
+  libsbml.dir\Release\ExpectedAttributes.obj
+  libsbml.dir\Release\FunctionDefinition.obj
+  libsbml.dir\Release\InitialAssignment.obj
+  libsbml.dir\Release\KineticLaw.obj
+  libsbml.dir\Release\ListOf.obj
+  libsbml.dir\Release\LocalParameter.obj
+  libsbml.dir\Release\Model.obj
+  libsbml.dir\Release\ModifierSpeciesReference.obj
+  libsbml.dir\Release\Parameter.obj
+  libsbml.dir\Release\Priority.obj
+  libsbml.dir\Release\RateRule.obj
+  libsbml.dir\Release\Reaction.obj
+  libsbml.dir\Release\Rule.obj
+  libsbml.dir\Release\SBase.obj
+  libsbml.dir\Release\SBMLConstructorException.obj
+  libsbml.dir\Release\SBMLConvert.obj
+  libsbml.dir\Release\SBMLDocument.obj
+  libsbml.dir\Release\SBMLError.obj
+  libsbml.dir\Release\SBMLErrorLog.obj
+  libsbml.dir\Release\SBMLNamespaces.obj
+  libsbml.dir\Release\SBMLReader.obj
+  libsbml.dir\Release\SBMLTransforms.obj
+  libsbml.dir\Release\SBMLTypeCodes.obj
+  libsbml.dir\Release\SBMLVisitor.obj
+  libsbml.dir\Release\SBMLWriter.obj
+  libsbml.dir\Release\SBO.obj
+  libsbml.dir\Release\SimpleSpeciesReference.obj
+  libsbml.dir\Release\Species.obj
+  libsbml.dir\Release\SpeciesReference.obj
+  libsbml.dir\Release\SpeciesType.obj
+  libsbml.dir\Release\StoichiometryMath.obj
+  libsbml.dir\Release\SyntaxChecker.obj
+  libsbml.dir\Release\Trigger.obj
+  libsbml.dir\Release\Unit.obj
+  libsbml.dir\Release\UnitDefinition.obj
+  libsbml.dir\Release\UnitKind.obj
+  libsbml.dir\Release\FormulaUnitsData.obj
+  libsbml.dir\Release\UnitFormulaFormatter.obj
+  libsbml.dir\Release\UnitKindList.obj
+  libsbml.dir\Release\List.obj
+  libsbml.dir\Release\memory.obj
+  libsbml.dir\Release\Stack.obj
+  libsbml.dir\Release\StringBuffer.obj
+  libsbml.dir\Release\util.obj
+  libsbml.dir\Release\ConsistencyValidator.obj
+  libsbml.dir\Release\IdentifierConsistencyValidator.obj
+  libsbml.dir\Release\InternalConsistencyValidator.obj
+  libsbml.dir\Release\L1CompatibilityValidator.obj
+  libsbml.dir\Release\L2v1CompatibilityValidator.obj
+  libsbml.dir\Release\L2v2CompatibilityValidator.obj
+  libsbml.dir\Release\L2v3CompatibilityValidator.obj
+  libsbml.dir\Release\L2v4CompatibilityValidator.obj
+  libsbml.dir\Release\L3v1CompatibilityValidator.obj
+  libsbml.dir\Release\MathMLConsistencyValidator.obj
+  libsbml.dir\Release\ModelingPracticeValidator.obj
+  libsbml.dir\Release\OverdeterminedValidator.obj
+  libsbml.dir\Release\SBMLExternalValidator.obj
+  libsbml.dir\Release\SBMLInternalValidator.obj
+  libsbml.dir\Release\SBMLValidator.obj
+  libsbml.dir\Release\SBOConsistencyValidator.obj
+  libsbml.dir\Release\UnitConsistencyValidator.obj
+  libsbml.dir\Release\Validator.obj
+  libsbml.dir\Release\VConstraint.obj
+  libsbml.dir\Release\ArgumentsUnitsCheck.obj
+  libsbml.dir\Release\ArgumentsUnitsCheckWarnings.obj
+  libsbml.dir\Release\AssignmentCycles.obj
+  libsbml.dir\Release\AssignmentRuleOrdering.obj
+  libsbml.dir\Release\CiElementMathCheck.obj
+  libsbml.dir\Release\CompartmentOutsideCycles.obj
+  libsbml.dir\Release\DuplicateTopLevelAnnotation.obj
+  libsbml.dir\Release\EqualityArgsMathCheck.obj
+  libsbml.dir\Release\ExponentUnitsCheck.obj
+  libsbml.dir\Release\FunctionApplyMathCheck.obj
+  libsbml.dir\Release\FunctionDefinitionVars.obj
+  libsbml.dir\Release\FunctionNoArgsMathCheck.obj
+  libsbml.dir\Release\FunctionReferredToExists.obj
+  libsbml.dir\Release\IdBase.obj
+  libsbml.dir\Release\IdList.obj
+  libsbml.dir\Release\KineticLawUnitsCheck.obj
+  libsbml.dir\Release\KineticLawVars.obj
+  libsbml.dir\Release\LambdaMathCheck.obj
+  libsbml.dir\Release\LocalParameterMathCheck.obj
+  libsbml.dir\Release\LocalParameterShadowsIdInModel.obj
+  libsbml.dir\Release\LogicalArgsMathCheck.obj
+  libsbml.dir\Release\MathMLBase.obj
+  libsbml.dir\Release\NumberArgsMathCheck.obj
+  libsbml.dir\Release\NumericArgsMathCheck.obj
+  libsbml.dir\Release\NumericReturnMathCheck.obj
+  libsbml.dir\Release\OverDeterminedCheck.obj
+  libsbml.dir\Release\PieceBooleanMathCheck.obj
+  libsbml.dir\Release\PiecewiseValueMathCheck.obj
+  libsbml.dir\Release\PowerUnitsCheck.obj
+  libsbml.dir\Release\SpeciesReactionOrRule.obj
+  libsbml.dir\Release\StoichiometryMathVars.obj
+  libsbml.dir\Release\UniqueIdBase.obj
+  libsbml.dir\Release\UniqueIdsForUnitDefinitions.obj
+  libsbml.dir\Release\UniqueIdsInKineticLaw.obj
+  libsbml.dir\Release\UniqueIdsInModel.obj
+  libsbml.dir\Release\UniqueMetaId.obj
+  libsbml.dir\Release\UniqueSpeciesTypesInCompartment.obj
+  libsbml.dir\Release\UniqueSymbolsInInitialAssignments.obj
+  libsbml.dir\Release\UniqueVarsInEventAssignments.obj
+  libsbml.dir\Release\UniqueVarsInEventsAndRules.obj
+  libsbml.dir\Release\UniqueVarsInInitialAssignmentsAndRules.obj
+  libsbml.dir\Release\UniqueVarsInRules.obj
+  libsbml.dir\Release\UnitsBase.obj
+  libsbml.dir\Release\ValidCnUnitsValue.obj
+  libsbml.dir\Release\CompressCommon.obj
+  libsbml.dir\Release\InputDecompressor.obj
+  libsbml.dir\Release\OutputCompressor.obj
+  libsbml.dir\Release\XMLAttributes.obj
+  libsbml.dir\Release\XMLBuffer.obj
+  libsbml.dir\Release\XMLConstructorException.obj
+  libsbml.dir\Release\XMLError.obj
+  libsbml.dir\Release\XMLErrorLog.obj
+  libsbml.dir\Release\XMLFileBuffer.obj
+  libsbml.dir\Release\XMLHandler.obj
+  libsbml.dir\Release\XMLInputStream.obj
+  libsbml.dir\Release\XMLMemoryBuffer.obj
+  libsbml.dir\Release\XMLNamespaces.obj
+  libsbml.dir\Release\XMLNode.obj
+  libsbml.dir\Release\XMLOutputStream.obj
+  libsbml.dir\Release\XMLParser.obj
+  libsbml.dir\Release\XMLToken.obj
+  libsbml.dir\Release\XMLTokenizer.obj
+  libsbml.dir\Release\XMLTriple.obj
+  libsbml.dir\Release\LibXMLAttributes.obj
+  libsbml.dir\Release\LibXMLHandler.obj
+  libsbml.dir\Release\LibXMLNamespaces.obj
+  libsbml.dir\Release\LibXMLParser.obj
+  libsbml.dir\Release\LibXMLTranscode.obj  /machine:X86 
+     Creating library R:/builds/vs/release/ThirdParty/lib/Release/libsbml.lib and object R:/builds/vs/release/ThirdParty/lib/Release/libsbml.exp
+  libsbml.vcxproj -> R:\builds\vs\release\ThirdParty\bin\Release\libsbml.dll
+Manifest:
+  C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"R:\builds\vs\release\ThirdParty\bin\Release\libsbml.dll;#2" /manifest libsbml.dir\Release\libsbml.dll.intermediate.manifest
+FinalizeBuildStatus:
+  Deleting file "libsbml.dir\Release\libsbml.unsuccessfulbuild".
+  Touching "libsbml.dir\Release\libsbml.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\libsbml\src\libsbml.vcxproj" (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\libsbml\src\libsbml-static.vcxproj" (9) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "libsbml-static.dir\Release\libsbml-static.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IR:/roadrunnerwork/trunk/ThirdParty/libsbml/src/. /IR:/roadrunnerwork/trunk/ThirdParty/dependencies/libsbml/include /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D NDEBUG /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D LIBSBML_USE_CPP_NAMESPACE /D USE_LIBXML /D "PACKAGE_VERSION=\"5.6.0\"" /D "PACKAGE_NAME=\"libsbml\"" /D WIN32 /D LIBSBML_EXPORTS /D LIBLAX_EXPORTS /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D "CMAKE_INTDIR=\"Release\"" /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"libsbml-static.dir\Release\\" /Fd"R:/builds/vs/release/ThirdParty/lib/Release/libsbml-static.pdb" /Gd /TP /wd4244 /wd4554 /analyze- /errorReport:queue ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\AlgebraicRule.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\AssignmentRule.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Compartment.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\CompartmentType.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Constraint.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Delay.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Event.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\EventAssignment.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\ExpectedAttributes.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\FunctionDefinition.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\InitialAssignment.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\KineticLaw.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\ListOf.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\LocalParameter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Model.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\ModifierSpeciesReference.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Parameter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Priority.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\RateRule.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Reaction.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Rule.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLConstructorException.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLConvert.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLDocument.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLError.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLErrorLog.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLNamespaces.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLReader.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLTransforms.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLTypeCodes.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLVisitor.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBMLWriter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBO.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SimpleSpeciesReference.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Species.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SpeciesReference.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SpeciesType.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\StoichiometryMath.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\SyntaxChecker.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Trigger.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\Unit.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\UnitDefinition.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\annotation\CVTerm.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\annotation\Date.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\annotation\ModelCreator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\annotation\ModelHistory.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\annotation\RDFAnnotationParser.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\ConversionOption.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\ConversionProperties.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\RegisterConverters.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLConverterRegistry.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLFunctionDefinitionConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLInitialAssignmentConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLLevelVersionConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLRuleConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLStripPackageConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\conversion\SBMLUnitsConverter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\ISBMLExtensionNamespaces.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLDocumentPlugin.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLDocumentPluginNotRequired.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLExtension.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionException.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionNamespaces.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBMLExtensionRegistry.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBaseExtensionPoint.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBasePlugin.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\extension\SBasePluginCreatorBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\ASTNode.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\L3Parser.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\L3ParserSettings.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\MathML.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\units\FormulaUnitsData.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\units\UnitFormulaFormatter.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\util\List.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\ConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\IdentifierConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\InternalConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L1CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L2v1CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L2v2CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L2v3CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L2v4CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\L3v1CompatibilityValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\MathMLConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\ModelingPracticeValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\OverdeterminedValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\SBMLExternalValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\SBMLInternalValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\SBMLValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\SBOConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\UnitConsistencyValidator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\VConstraint.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\Validator.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\ArgumentsUnitsCheckWarnings.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\AssignmentCycles.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\AssignmentRuleOrdering.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\CiElementMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\CompartmentOutsideCycles.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\DuplicateTopLevelAnnotation.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\EqualityArgsMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\ExponentUnitsCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionApplyMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionDefinitionVars.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionNoArgsMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\FunctionReferredToExists.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\IdBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\KineticLawUnitsCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\KineticLawVars.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\LambdaMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\LocalParameterMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\LocalParameterShadowsIdInModel.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\LogicalArgsMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\MathMLBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\NumberArgsMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\NumericArgsMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\NumericReturnMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\OverDeterminedCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\PieceBooleanMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\PiecewiseValueMathCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\PowerUnitsCheck.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\SpeciesReactionOrRule.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\StoichiometryMathVars.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsForUnitDefinitions.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsInKineticLaw.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueIdsInModel.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueMetaId.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueSpeciesTypesInCompartment.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueSymbolsInInitialAssignments.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInEventAssignments.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInEventsAndRules.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInInitialAssignmentsAndRules.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UniqueVarsInRules.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\UnitsBase.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\validator\constraints\ValidCnUnitsValue.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\LibXMLAttributes.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\LibXMLHandler.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\LibXMLNamespaces.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\LibXMLParser.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLAttributes.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLConstructorException.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLError.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLErrorLog.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLHandler.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLInputStream.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLNamespaces.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLNode.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLOutputStream.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLParser.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLToken.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLTokenizer.cpp ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\xml\XMLTriple.cpp  /Zm1000 
+  AlgebraicRule.cpp
+  AssignmentRule.cpp
+  Compartment.cpp
+  CompartmentType.cpp
+  Constraint.cpp
+  Delay.cpp
+  Event.cpp
+  EventAssignment.cpp
+  ExpectedAttributes.cpp
+  FunctionDefinition.cpp
+  InitialAssignment.cpp
+  KineticLaw.cpp
+  ListOf.cpp
+  LocalParameter.cpp
+  Model.cpp
+  ModifierSpeciesReference.cpp
+  Parameter.cpp
+  Priority.cpp
+  RateRule.cpp
+  Reaction.cpp
+  Generating Code...
+  Compiling...
+  Rule.cpp
+  SBMLConstructorException.cpp
+  SBMLConvert.cpp
+  SBMLDocument.cpp
+  SBMLError.cpp
+  SBMLErrorLog.cpp
+  SBMLNamespaces.cpp
+  SBMLReader.cpp
+  SBMLTransforms.cpp
+  SBMLTypeCodes.cpp
+  SBMLVisitor.cpp
+  SBMLWriter.cpp
+  SBO.cpp
+  SBase.cpp
+  SimpleSpeciesReference.cpp
+  Species.cpp
+  SpeciesReference.cpp
+  SpeciesType.cpp
+  StoichiometryMath.cpp
+  SyntaxChecker.cpp
+  Generating Code...
+  Compiling...
+  Trigger.cpp
+  Unit.cpp
+  UnitDefinition.cpp
+  CVTerm.cpp
+  Date.cpp
+  ModelCreator.cpp
+  ModelHistory.cpp
+  RDFAnnotationParser.cpp
+  ConversionOption.cpp
+  ConversionProperties.cpp
+  RegisterConverters.cpp
+  SBMLConverter.cpp
+  SBMLConverterRegistry.cpp
+  SBMLFunctionDefinitionConverter.cpp
+  SBMLInitialAssignmentConverter.cpp
+  SBMLLevelVersionConverter.cpp
+  SBMLRuleConverter.cpp
+  SBMLStripPackageConverter.cpp
+  SBMLUnitsConverter.cpp
+  ISBMLExtensionNamespaces.cpp
+  Generating Code...
+  Compiling...
+  SBMLDocumentPlugin.cpp
+  SBMLDocumentPluginNotRequired.cpp
+  SBMLExtension.cpp
+  SBMLExtensionException.cpp
+  SBMLExtensionNamespaces.cpp
+  SBMLExtensionRegistry.cpp
+  SBaseExtensionPoint.cpp
+  SBasePlugin.cpp
+  SBasePluginCreatorBase.cpp
+  ASTNode.cpp
+  L3Parser.cpp
+L3Parser.cpp(972): warning C4065: switch statement contains 'default' but no 'case' labels [R:\builds\vs\release\ThirdParty\libsbml\src\libsbml-static.vcxproj]
+L3Parser.cpp(1338): warning C4065: switch statement contains 'default' but no 'case' labels [R:\builds\vs\release\ThirdParty\libsbml\src\libsbml-static.vcxproj]
+  L3ParserSettings.cpp
+  MathML.cpp
+  FormulaUnitsData.cpp
+  UnitFormulaFormatter.cpp
+  List.cpp
+  ConsistencyValidator.cpp
+  IdentifierConsistencyValidator.cpp
+  InternalConsistencyValidator.cpp
+  L1CompatibilityValidator.cpp
+  Generating Code...
+  Compiling...
+  L2v1CompatibilityValidator.cpp
+  L2v2CompatibilityValidator.cpp
+  L2v3CompatibilityValidator.cpp
+  L2v4CompatibilityValidator.cpp
+  L3v1CompatibilityValidator.cpp
+  MathMLConsistencyValidator.cpp
+  ModelingPracticeValidator.cpp
+  OverdeterminedValidator.cpp
+  SBMLExternalValidator.cpp
+  SBMLInternalValidator.cpp
+  SBMLValidator.cpp
+  SBOConsistencyValidator.cpp
+  UnitConsistencyValidator.cpp
+  VConstraint.cpp
+  Validator.cpp
+  ArgumentsUnitsCheck.cpp
+  ArgumentsUnitsCheckWarnings.cpp
+  AssignmentCycles.cpp
+  AssignmentRuleOrdering.cpp
+  CiElementMathCheck.cpp
+  Generating Code...
+  Compiling...
+  CompartmentOutsideCycles.cpp
+  DuplicateTopLevelAnnotation.cpp
+  EqualityArgsMathCheck.cpp
+  ExponentUnitsCheck.cpp
+  FunctionApplyMathCheck.cpp
+  FunctionDefinitionVars.cpp
+  FunctionNoArgsMathCheck.cpp
+  FunctionReferredToExists.cpp
+  IdBase.cpp
+  KineticLawUnitsCheck.cpp
+  KineticLawVars.cpp
+  LambdaMathCheck.cpp
+  LocalParameterMathCheck.cpp
+  LocalParameterShadowsIdInModel.cpp
+  LogicalArgsMathCheck.cpp
+  MathMLBase.cpp
+  NumberArgsMathCheck.cpp
+  NumericArgsMathCheck.cpp
+  NumericReturnMathCheck.cpp
+  OverDeterminedCheck.cpp
+  Generating Code...
+  Compiling...
+  PieceBooleanMathCheck.cpp
+  PiecewiseValueMathCheck.cpp
+  PowerUnitsCheck.cpp
+  SpeciesReactionOrRule.cpp
+  StoichiometryMathVars.cpp
+  UniqueIdBase.cpp
+  UniqueIdsForUnitDefinitions.cpp
+  UniqueIdsInKineticLaw.cpp
+  UniqueIdsInModel.cpp
+  UniqueMetaId.cpp
+  UniqueSpeciesTypesInCompartment.cpp
+  UniqueSymbolsInInitialAssignments.cpp
+  UniqueVarsInEventAssignments.cpp
+  UniqueVarsInEventsAndRules.cpp
+  UniqueVarsInInitialAssignmentsAndRules.cpp
+  UniqueVarsInRules.cpp
+  UnitsBase.cpp
+  ValidCnUnitsValue.cpp
+  LibXMLAttributes.cpp
+  LibXMLHandler.cpp
+  Generating Code...
+  Compiling...
+  LibXMLNamespaces.cpp
+  LibXMLParser.cpp
+  XMLAttributes.cpp
+  XMLConstructorException.cpp
+  XMLError.cpp
+  XMLErrorLog.cpp
+  XMLHandler.cpp
+  XMLInputStream.cpp
+  XMLNamespaces.cpp
+  XMLNode.cpp
+  XMLOutputStream.cpp
+  XMLParser.cpp
+  XMLToken.cpp
+  XMLTokenizer.cpp
+  XMLTriple.cpp
+  Generating Code...
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IR:/roadrunnerwork/trunk/ThirdParty/libsbml/src/. /IR:/roadrunnerwork/trunk/ThirdParty/dependencies/libsbml/include /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D NDEBUG /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D LIBSBML_USE_CPP_NAMESPACE /D USE_LIBXML /D "PACKAGE_VERSION=\"5.6.0\"" /D "PACKAGE_NAME=\"libsbml\"" /D WIN32 /D LIBSBML_EXPORTS /D LIBLAX_EXPORTS /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D "CMAKE_INTDIR=\"Release\"" /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"libsbml-static.dir\Release\\" /Fd"R:/builds/vs/release/ThirdParty/lib/Release/libsbml-static.pdb" /Gd /TC /wd4244 /wd4554 /analyze- /errorReport:queue ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\UnitKind.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\FormulaFormatter.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\FormulaParser.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\math\FormulaTokenizer.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\util\Stack.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\util\StringBuffer.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\util\memory.c ..\..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\libsbml\src\sbml\util\util.c  /Zm1000 
+  UnitKind.c
+  FormulaFormatter.c
+  FormulaParser.c
+  FormulaTokenizer.c
+  Stack.c
+  StringBuffer.c
+  memory.c
+  util.c
+  Generating Code...
+Lib:
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"R:\builds\vs\release\ThirdParty\lib\Release\libsbml-static.lib" /NOLOGO "libsbml-static.dir\Release\CVTerm.obj"
+  "libsbml-static.dir\Release\Date.obj"
+  "libsbml-static.dir\Release\ModelCreator.obj"
+  "libsbml-static.dir\Release\ModelHistory.obj"
+  "libsbml-static.dir\Release\RDFAnnotationParser.obj"
+  "libsbml-static.dir\Release\libsbml-version.obj"
+  "libsbml-static.dir\Release\ConversionOption.obj"
+  "libsbml-static.dir\Release\ConversionProperties.obj"
+  "libsbml-static.dir\Release\RegisterConverters.obj"
+  "libsbml-static.dir\Release\SBMLConverter.obj"
+  "libsbml-static.dir\Release\SBMLConverterRegistry.obj"
+  "libsbml-static.dir\Release\SBMLFunctionDefinitionConverter.obj"
+  "libsbml-static.dir\Release\SBMLInitialAssignmentConverter.obj"
+  "libsbml-static.dir\Release\SBMLLevelVersionConverter.obj"
+  "libsbml-static.dir\Release\SBMLRuleConverter.obj"
+  "libsbml-static.dir\Release\SBMLStripPackageConverter.obj"
+  "libsbml-static.dir\Release\SBMLUnitsConverter.obj"
+  "libsbml-static.dir\Release\ISBMLExtensionNamespaces.obj"
+  "libsbml-static.dir\Release\SBaseExtensionPoint.obj"
+  "libsbml-static.dir\Release\SBasePlugin.obj"
+  "libsbml-static.dir\Release\SBasePluginCreatorBase.obj"
+  "libsbml-static.dir\Release\SBMLDocumentPlugin.obj"
+  "libsbml-static.dir\Release\SBMLDocumentPluginNotRequired.obj"
+  "libsbml-static.dir\Release\SBMLExtension.obj"
+  "libsbml-static.dir\Release\SBMLExtensionException.obj"
+  "libsbml-static.dir\Release\SBMLExtensionNamespaces.obj"
+  "libsbml-static.dir\Release\SBMLExtensionRegistry.obj"
+  "libsbml-static.dir\Release\ASTNode.obj"
+  "libsbml-static.dir\Release\L3Parser.obj"
+  "libsbml-static.dir\Release\L3ParserSettings.obj"
+  "libsbml-static.dir\Release\MathML.obj"
+  "libsbml-static.dir\Release\FormulaFormatter.obj"
+  "libsbml-static.dir\Release\FormulaParser.obj"
+  "libsbml-static.dir\Release\FormulaTokenizer.obj"
+  "libsbml-static.dir\Release\AlgebraicRule.obj"
+  "libsbml-static.dir\Release\AssignmentRule.obj"
+  "libsbml-static.dir\Release\Compartment.obj"
+  "libsbml-static.dir\Release\CompartmentType.obj"
+  "libsbml-static.dir\Release\Constraint.obj"
+  "libsbml-static.dir\Release\Delay.obj"
+  "libsbml-static.dir\Release\Event.obj"
+  "libsbml-static.dir\Release\EventAssignment.obj"
+  "libsbml-static.dir\Release\ExpectedAttributes.obj"
+  "libsbml-static.dir\Release\FunctionDefinition.obj"
+  "libsbml-static.dir\Release\InitialAssignment.obj"
+  "libsbml-static.dir\Release\KineticLaw.obj"
+  "libsbml-static.dir\Release\ListOf.obj"
+  "libsbml-static.dir\Release\LocalParameter.obj"
+  "libsbml-static.dir\Release\Model.obj"
+  "libsbml-static.dir\Release\ModifierSpeciesReference.obj"
+  "libsbml-static.dir\Release\Parameter.obj"
+  "libsbml-static.dir\Release\Priority.obj"
+  "libsbml-static.dir\Release\RateRule.obj"
+  "libsbml-static.dir\Release\Reaction.obj"
+  "libsbml-static.dir\Release\Rule.obj"
+  "libsbml-static.dir\Release\SBase.obj"
+  "libsbml-static.dir\Release\SBMLConstructorException.obj"
+  "libsbml-static.dir\Release\SBMLConvert.obj"
+  "libsbml-static.dir\Release\SBMLDocument.obj"
+  "libsbml-static.dir\Release\SBMLError.obj"
+  "libsbml-static.dir\Release\SBMLErrorLog.obj"
+  "libsbml-static.dir\Release\SBMLNamespaces.obj"
+  "libsbml-static.dir\Release\SBMLReader.obj"
+  "libsbml-static.dir\Release\SBMLTransforms.obj"
+  "libsbml-static.dir\Release\SBMLTypeCodes.obj"
+  "libsbml-static.dir\Release\SBMLVisitor.obj"
+  "libsbml-static.dir\Release\SBMLWriter.obj"
+  "libsbml-static.dir\Release\SBO.obj"
+  "libsbml-static.dir\Release\SimpleSpeciesReference.obj"
+  "libsbml-static.dir\Release\Species.obj"
+  "libsbml-static.dir\Release\SpeciesReference.obj"
+  "libsbml-static.dir\Release\SpeciesType.obj"
+  "libsbml-static.dir\Release\StoichiometryMath.obj"
+  "libsbml-static.dir\Release\SyntaxChecker.obj"
+  "libsbml-static.dir\Release\Trigger.obj"
+  "libsbml-static.dir\Release\Unit.obj"
+  "libsbml-static.dir\Release\UnitDefinition.obj"
+  "libsbml-static.dir\Release\UnitKind.obj"
+  "libsbml-static.dir\Release\FormulaUnitsData.obj"
+  "libsbml-static.dir\Release\UnitFormulaFormatter.obj"
+  "libsbml-static.dir\Release\UnitKindList.obj"
+  "libsbml-static.dir\Release\List.obj"
+  "libsbml-static.dir\Release\memory.obj"
+  "libsbml-static.dir\Release\Stack.obj"
+  "libsbml-static.dir\Release\StringBuffer.obj"
+  "libsbml-static.dir\Release\util.obj"
+  "libsbml-static.dir\Release\ConsistencyValidator.obj"
+  "libsbml-static.dir\Release\IdentifierConsistencyValidator.obj"
+  "libsbml-static.dir\Release\InternalConsistencyValidator.obj"
+  "libsbml-static.dir\Release\L1CompatibilityValidator.obj"
+  "libsbml-static.dir\Release\L2v1CompatibilityValidator.obj"
+  "libsbml-static.dir\Release\L2v2CompatibilityValidator.obj"
+  "libsbml-static.dir\Release\L2v3CompatibilityValidator.obj"
+  "libsbml-static.dir\Release\L2v4CompatibilityValidator.obj"
+  "libsbml-static.dir\Release\L3v1CompatibilityValidator.obj"
+  "libsbml-static.dir\Release\MathMLConsistencyValidator.obj"
+  "libsbml-static.dir\Release\ModelingPracticeValidator.obj"
+  "libsbml-static.dir\Release\OverdeterminedValidator.obj"
+  "libsbml-static.dir\Release\SBMLExternalValidator.obj"
+  "libsbml-static.dir\Release\SBMLInternalValidator.obj"
+  "libsbml-static.dir\Release\SBMLValidator.obj"
+  "libsbml-static.dir\Release\SBOConsistencyValidator.obj"
+  "libsbml-static.dir\Release\UnitConsistencyValidator.obj"
+  "libsbml-static.dir\Release\Validator.obj"
+  "libsbml-static.dir\Release\VConstraint.obj"
+  "libsbml-static.dir\Release\ArgumentsUnitsCheck.obj"
+  "libsbml-static.dir\Release\ArgumentsUnitsCheckWarnings.obj"
+  "libsbml-static.dir\Release\AssignmentCycles.obj"
+  "libsbml-static.dir\Release\AssignmentRuleOrdering.obj"
+  "libsbml-static.dir\Release\CiElementMathCheck.obj"
+  "libsbml-static.dir\Release\CompartmentOutsideCycles.obj"
+  "libsbml-static.dir\Release\DuplicateTopLevelAnnotation.obj"
+  "libsbml-static.dir\Release\EqualityArgsMathCheck.obj"
+  "libsbml-static.dir\Release\ExponentUnitsCheck.obj"
+  "libsbml-static.dir\Release\FunctionApplyMathCheck.obj"
+  "libsbml-static.dir\Release\FunctionDefinitionVars.obj"
+  "libsbml-static.dir\Release\FunctionNoArgsMathCheck.obj"
+  "libsbml-static.dir\Release\FunctionReferredToExists.obj"
+  "libsbml-static.dir\Release\IdBase.obj"
+  "libsbml-static.dir\Release\IdList.obj"
+  "libsbml-static.dir\Release\KineticLawUnitsCheck.obj"
+  "libsbml-static.dir\Release\KineticLawVars.obj"
+  "libsbml-static.dir\Release\LambdaMathCheck.obj"
+  "libsbml-static.dir\Release\LocalParameterMathCheck.obj"
+  "libsbml-static.dir\Release\LocalParameterShadowsIdInModel.obj"
+  "libsbml-static.dir\Release\LogicalArgsMathCheck.obj"
+  "libsbml-static.dir\Release\MathMLBase.obj"
+  "libsbml-static.dir\Release\NumberArgsMathCheck.obj"
+  "libsbml-static.dir\Release\NumericArgsMathCheck.obj"
+  "libsbml-static.dir\Release\NumericReturnMathCheck.obj"
+  "libsbml-static.dir\Release\OverDeterminedCheck.obj"
+  "libsbml-static.dir\Release\PieceBooleanMathCheck.obj"
+  "libsbml-static.dir\Release\PiecewiseValueMathCheck.obj"
+  "libsbml-static.dir\Release\PowerUnitsCheck.obj"
+  "libsbml-static.dir\Release\SpeciesReactionOrRule.obj"
+  "libsbml-static.dir\Release\StoichiometryMathVars.obj"
+  "libsbml-static.dir\Release\UniqueIdBase.obj"
+  "libsbml-static.dir\Release\UniqueIdsForUnitDefinitions.obj"
+  "libsbml-static.dir\Release\UniqueIdsInKineticLaw.obj"
+  "libsbml-static.dir\Release\UniqueIdsInModel.obj"
+  "libsbml-static.dir\Release\UniqueMetaId.obj"
+  "libsbml-static.dir\Release\UniqueSpeciesTypesInCompartment.obj"
+  "libsbml-static.dir\Release\UniqueSymbolsInInitialAssignments.obj"
+  "libsbml-static.dir\Release\UniqueVarsInEventAssignments.obj"
+  "libsbml-static.dir\Release\UniqueVarsInEventsAndRules.obj"
+  "libsbml-static.dir\Release\UniqueVarsInInitialAssignmentsAndRules.obj"
+  "libsbml-static.dir\Release\UniqueVarsInRules.obj"
+  "libsbml-static.dir\Release\UnitsBase.obj"
+  "libsbml-static.dir\Release\ValidCnUnitsValue.obj"
+  "libsbml-static.dir\Release\CompressCommon.obj"
+  "libsbml-static.dir\Release\InputDecompressor.obj"
+  "libsbml-static.dir\Release\OutputCompressor.obj"
+  "libsbml-static.dir\Release\XMLAttributes.obj"
+  "libsbml-static.dir\Release\XMLBuffer.obj"
+  "libsbml-static.dir\Release\XMLConstructorException.obj"
+  "libsbml-static.dir\Release\XMLError.obj"
+  "libsbml-static.dir\Release\XMLErrorLog.obj"
+  "libsbml-static.dir\Release\XMLFileBuffer.obj"
+  "libsbml-static.dir\Release\XMLHandler.obj"
+  "libsbml-static.dir\Release\XMLInputStream.obj"
+  "libsbml-static.dir\Release\XMLMemoryBuffer.obj"
+  "libsbml-static.dir\Release\XMLNamespaces.obj"
+  "libsbml-static.dir\Release\XMLNode.obj"
+  "libsbml-static.dir\Release\XMLOutputStream.obj"
+  "libsbml-static.dir\Release\XMLParser.obj"
+  "libsbml-static.dir\Release\XMLToken.obj"
+  "libsbml-static.dir\Release\XMLTokenizer.obj"
+  "libsbml-static.dir\Release\XMLTriple.obj"
+  "libsbml-static.dir\Release\LibXMLAttributes.obj"
+  "libsbml-static.dir\Release\LibXMLHandler.obj"
+  "libsbml-static.dir\Release\LibXMLNamespaces.obj"
+  "libsbml-static.dir\Release\LibXMLParser.obj"
+  "libsbml-static.dir\Release\LibXMLTranscode.obj"
+RegisterConverters.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library [R:\builds\vs\release\ThirdParty\libsbml\src\libsbml-static.vcxproj]
+  libsbml-static.vcxproj -> R:\builds\vs\release\ThirdParty\lib\Release\libsbml-static.lib
+FinalizeBuildStatus:
+  Deleting file "libsbml-static.dir\Release\libsbml-static.unsuccessfulbuild".
+  Touching "libsbml-static.dir\Release\libsbml-static.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\libsbml\src\libsbml-static.vcxproj" (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\nleq\nleq-static.vcxproj" (10) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "nleq-static.dir\Release\nleq-static.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  All outputs are up-to-date.
+Lib:
+  All outputs are up-to-date.
+  nleq-static.vcxproj -> R:\builds\vs\release\ThirdParty\lib\Release\nleq-static.lib
+FinalizeBuildStatus:
+  Deleting file "nleq-static.dir\Release\nleq-static.unsuccessfulbuild".
+  Touching "nleq-static.dir\Release\nleq-static.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\nleq\nleq-static.vcxproj" (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\pugi\pugi-static.vcxproj" (11) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "pugi-static.dir\Release\pugi-static.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  All outputs are up-to-date.
+Lib:
+  All outputs are up-to-date.
+  pugi-static.vcxproj -> R:\builds\vs\release\ThirdParty\lib\Release\pugi-static.lib
+FinalizeBuildStatus:
+  Deleting file "pugi-static.dir\Release\pugi-static.unsuccessfulbuild".
+  Touching "pugi-static.dir\Release\pugi-static.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\pugi\pugi-static.vcxproj" (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\rr-libstruct\rr-libstruct-static.vcxproj" (12) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "rr-libstruct-static.dir\Release\rr-libstruct-static.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"R:/roadrunnerwork/trunk/ThirdParty/rr-libstruct/." /IR:/roadrunnerwork/trunk/ThirdParty/clapack/3.2.1/INCLUDE /IR:/roadrunnerwork/trunk/ThirdParty/libsbml/src /nologo /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D NDEBUG /D _CRT_SECURE_NO_WARNINGS /D _CRT_NONSTDC_NO_DEPRECATE /D WIN32 /D STATIC_LIBSTRUCT /D LIBSBML_USE_CPP_NAMESPACE /D LIBSBML_STATIC /D "CMAKE_INTDIR=\"Release\"" /D _MBCS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"rr-libstruct-static.dir\Release\\" /Fd"R:/builds/vs/release/ThirdParty/lib/Release/rr-libstruct-static.pdb" /Gd /TP /wd4244 /wd4554 /analyze- /errorReport:queue "..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\rr-libstruct\lsLibstructural.cpp" "..\..\..\..\..\roadrunnerwork\trunk\ThirdParty\rr-libstruct\lsSBMLModel.cpp"  /Zm1000 
+  lsLibstructural.cpp
+  lsSBMLModel.cpp
+  Generating Code...
+Lib:
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"R:\builds\vs\release\ThirdParty\lib\Release\rr-libstruct-static.lib" /NOLOGO "rr-libstruct-static.dir\Release\lsMatrix.obj"
+  "rr-libstruct-static.dir\Release\lsComplex.obj"
+  "rr-libstruct-static.dir\Release\lsLibstructural.obj"
+  "rr-libstruct-static.dir\Release\lsSBMLModel.obj"
+  "rr-libstruct-static.dir\Release\lsUtils.obj"
+  "rr-libstruct-static.dir\Release\lsLibla.obj"
+  "rr-libstruct-static.dir\Release\lsLA.obj"
+  rr-libstruct-static.vcxproj -> R:\builds\vs\release\ThirdParty\lib\Release\rr-libstruct-static.lib
+FinalizeBuildStatus:
+  Deleting file "rr-libstruct-static.dir\Release\rr-libstruct-static.unsuccessfulbuild".
+  Touching "rr-libstruct-static.dir\Release\rr-libstruct-static.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\rr-libstruct\rr-libstruct-static.vcxproj" (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\sundials\src\cvode\sundials_cvode_static.vcxproj" (13) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "sundials_cvode_static.dir\Release\sundials_cvode_static.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  All outputs are up-to-date.
+Lib:
+  All outputs are up-to-date.
+  sundials_cvode_static.vcxproj -> R:\builds\vs\release\ThirdParty\lib\Release\sundials_cvode.lib
+FinalizeBuildStatus:
+  Deleting file "sundials_cvode_static.dir\Release\sundials_cvode_static.unsuccessfulbuild".
+  Touching "sundials_cvode_static.dir\Release\sundials_cvode_static.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\sundials\src\cvode\sundials_cvode_static.vcxproj" (default targets).
+Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (2) is building "R:\builds\vs\release\ThirdParty\sundials\src\nvec_ser\sundials_nvecserial_static.vcxproj" (14) on node 1 (default targets).
+InitializeBuildStatus:
+  Creating "sundials_nvecserial_static.dir\Release\sundials_nvecserial_static.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  All outputs are up-to-date.
+ClCompile:
+  All outputs are up-to-date.
+Lib:
+  All outputs are up-to-date.
+  sundials_nvecserial_static.vcxproj -> R:\builds\vs\release\ThirdParty\lib\Release\sundials_nvecserial.lib
+FinalizeBuildStatus:
+  Deleting file "sundials_nvecserial_static.dir\Release\sundials_nvecserial_static.unsuccessfulbuild".
+  Touching "sundials_nvecserial_static.dir\Release\sundials_nvecserial_static.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\sundials\src\nvec_ser\sundials_nvecserial_static.vcxproj" (default targets).
+InitializeBuildStatus:
+  Creating "Win32\Release\ALL_BUILD\ALL_BUILD.unsuccessfulbuild" because "AlwaysCreate" was specified.
+CustomBuild:
+  Build all projects
+FinalizeBuildStatus:
+  Deleting file "Win32\Release\ALL_BUILD\ALL_BUILD.unsuccessfulbuild".
+  Touching "Win32\Release\ALL_BUILD\ALL_BUILD.lastbuildstate".
+Done Building Project "R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (default targets).
+InitializeBuildStatus:
+  Creating "Win32\Release\INSTALL\INSTALL.unsuccessfulbuild" because "AlwaysCreate" was specified.
+PostBuildEvent:
+  setlocal
+  "C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -DBUILD_TYPE=Release -P cmake_install.cmake
+  if %errorlevel% neq 0 goto :cmEnd
+  :cmEnd
+  endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+  :cmErrorLevel
+  exit /b %1
+  :cmDone
+  if %errorlevel% neq 0 goto :VCEnd
+  :VCEnd
+  -- Install configuration: "Release"
+  -- Up-to-date: R:/installs/vs/release/bin/libxml2.DLL
+  -- Up-to-date: R:/installs/vs/release/bin/iconv.dll
+  -- Up-to-date: R:/installs/vs/release/bin/zlib1.dll
+  -- Up-to-date: R:/installs/vs/release/bin/msvcp100.dll
+  -- Up-to-date: R:/installs/vs/release/bin/msvcr100.dll
+  -- Up-to-date: R:/installs/vs/release/./COPYING.txt
+  -- Up-to-date: R:/installs/vs/release/./FUNDING.txt
+  -- Up-to-date: R:/installs/vs/release/./LICENSE.txt
+  -- Up-to-date: R:/installs/vs/release/./NEWS.txt
+  -- Up-to-date: R:/installs/vs/release/./README.txt
+  -- Up-to-date: R:/installs/vs/release/./VERSION.txt
+  -- Up-to-date: R:/installs/vs/release/include/sbml/annotation/CVTerm.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/annotation/Date.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/annotation/ModelCreator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/annotation/ModelHistory.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/annotation/RDFAnnotation.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/annotation/RDFAnnotationParser.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/common/common.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/common/extern.h
+  -- Installing: R:/installs/vs/release/include/sbml/common/libsbml-config-common.h
+  -- Installing: R:/installs/vs/release/include/sbml/common/libsbml-config-packages.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/common/libsbml-config.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/common/libsbml-namespace.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/common/libsbml-package.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/common/libsbml-version.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/common/operationReturnValues.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/common/sbmlfwd.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/bzfstream.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/CompressCommon.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/crypt.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/InputDecompressor.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/ioapi.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/iowin32.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/OutputCompressor.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/unzip.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/zfstream.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/zip.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/compress/zipfstream.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/ConversionOption.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/ConversionProperties.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/SBMLConverter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/SBMLConverterRegister.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/SBMLConverterRegistry.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/SBMLFunctionDefinitionConverter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/SBMLInitialAssignmentConverter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/SBMLLevelVersionConverter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/SBMLRuleConverter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/SBMLStripPackageConverter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/conversion/SBMLUnitsConverter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/ISBMLExtensionNamespaces.h
+  -- Installing: R:/installs/vs/release/include/sbml/extension/RegisterExtensions.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBaseExtensionPoint.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBasePlugin.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBasePluginCreator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBasePluginCreatorBase.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBMLDocumentPlugin.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBMLDocumentPluginNotRequired.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBMLExtension.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBMLExtensionException.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBMLExtensionNamespaces.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBMLExtensionRegister.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/extension/SBMLExtensionRegistry.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/math/ASTNode.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/math/FormulaFormatter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/math/FormulaParser.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/math/FormulaTokenizer.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/math/L3Parser.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/math/L3ParserSettings.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/math/MathML.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/units/FormulaUnitsData.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/units/UnitFormulaFormatter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/units/UnitKindList.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/util/List.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/util/memory.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/util/Stack.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/util/StringBuffer.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/util/util.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/ConsistencyValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/ConstraintMacros.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/IdentifierConsistencyValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/InternalConsistencyValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/L1CompatibilityValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/L2v1CompatibilityValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/L2v2CompatibilityValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/L2v3CompatibilityValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/L2v4CompatibilityValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/L3v1CompatibilityValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/MathMLConsistencyValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/ModelingPracticeValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/OverdeterminedValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/SBMLExternalValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/SBMLInternalValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/SBMLValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/SBOConsistencyValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/UnitConsistencyValidator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/Validator.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/validator/VConstraint.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/ExpatAttributes.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/ExpatHandler.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/ExpatParser.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/LibXMLAttributes.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/LibXMLHandler.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/LibXMLNamespaces.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/LibXMLParser.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/LibXMLTranscode.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XercesAttributes.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XercesHandler.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XercesNamespaces.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XercesParser.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XercesTranscode.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLAttributes.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLBuffer.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLConstructorException.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLError.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLErrorLog.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLExtern.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLFileBuffer.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLHandler.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLInputStream.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLMemoryBuffer.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLNamespaces.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLNode.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLOutputStream.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLParser.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLToken.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLTokenizer.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/xml/XMLTriple.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/AlgebraicRule.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/AssignmentRule.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Compartment.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/CompartmentType.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Constraint.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Delay.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Event.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/EventAssignment.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/ExpectedAttributes.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/FunctionDefinition.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/InitialAssignment.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/KineticLaw.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/ListOf.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/LocalParameter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Model.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/ModifierSpeciesReference.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Parameter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Priority.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/RateRule.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Reaction.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Rule.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBase.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLConstructorException.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLDocument.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLError.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLErrorLog.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLErrorTable.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLNamespaces.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLReader.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLTransforms.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLTypeCodes.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLTypes.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLVisitor.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBMLWriter.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SBO.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SimpleSpeciesReference.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Species.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SpeciesReference.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SpeciesType.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/StoichiometryMath.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/SyntaxChecker.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Trigger.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/Unit.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/UnitDefinition.h
+  -- Up-to-date: R:/installs/vs/release/include/sbml/UnitKind.h
+  -- Installing: R:/installs/vs/release/lib/libsbml.lib
+  -- Installing: R:/installs/vs/release/bin/libsbml.dll
+  -- Installing: R:/installs/vs/release/lib/libsbml-static.lib
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_config.h
+  
+  Install shared components
+  
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_band.h
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_dense.h
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_direct.h
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_iterative.h
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_math.h
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_nvector.h
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_fnvector.h
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_spbcgs.h
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_spgmr.h
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_sptfqmr.h
+  -- Up-to-date: R:/installs/vs/release/include/sundials/sundials_types.h
+  
+  Install NVECTOR_SERIAL
+  
+  -- Up-to-date: R:/installs/vs/release/lib/sundials_nvecserial.lib
+  -- Up-to-date: R:/installs/vs/release/include/nvector/nvector_serial.h
+  
+  Install CVODE
+  
+  -- Up-to-date: R:/installs/vs/release/lib/sundials_cvode.lib
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_band.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_bandpre.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_bbdpre.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_dense.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_diag.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_direct.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_spbcgs.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_spgmr.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_spils.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_sptfqmr.h
+  -- Up-to-date: R:/installs/vs/release/include/cvode/cvode_impl.h
+  -- Up-to-date: R:/installs/vs/release/include/pugi/pugixml.hpp
+  -- Up-to-date: R:/installs/vs/release/include/pugi/pugiconfig.hpp
+  -- Up-to-date: R:/installs/vs/release/lib/pugi-static.lib
+  -- Up-to-date: R:/installs/vs/release/include/nleq/nleq1.h
+  -- Up-to-date: R:/installs/vs/release/include/nleq/f2c_nleq.h
+  -- Up-to-date: R:/installs/vs/release/lib/nleq-static.lib
+  -- Up-to-date: R:/installs/vs/release/include/rr-libstruct/lsExporter.h
+  -- Up-to-date: R:/installs/vs/release/include/rr-libstruct/lsMatrix.h
+  -- Up-to-date: R:/installs/vs/release/include/rr-libstruct/lsComplex.h
+  -- Up-to-date: R:/installs/vs/release/include/rr-libstruct/lsLibstructural.h
+  -- Up-to-date: R:/installs/vs/release/include/rr-libstruct/lsLA.h
+  -- Up-to-date: R:/installs/vs/release/include/rr-libstruct/lsLibla.h
+  -- Installing: R:/installs/vs/release/lib/rr-libstruct-static.lib
+  -- Installing: R:/installs/vs/release/include/unit_test/AssertException.h
+  -- Installing: R:/installs/vs/release/include/unit_test/CheckMacros.h
+  -- Installing: R:/installs/vs/release/include/unit_test/Checks.h
+  -- Installing: R:/installs/vs/release/include/unit_test/Config.h
+  -- Installing: R:/installs/vs/release/include/unit_test/CurrentTest.h
+  -- Installing: R:/installs/vs/release/include/unit_test/DeferredTestReporter.h
+  -- Installing: R:/installs/vs/release/include/unit_test/DeferredTestResult.h
+  -- Installing: R:/installs/vs/release/include/unit_test/ExecuteTest.h
+  -- Installing: R:/installs/vs/release/include/unit_test/MemoryOutStream.h
+  -- Installing: R:/installs/vs/release/include/unit_test/ReportAssert.h
+  -- Installing: R:/installs/vs/release/include/unit_test/Test.h
+  -- Installing: R:/installs/vs/release/include/unit_test/TestDetails.h
+  -- Installing: R:/installs/vs/release/include/unit_test/TestList.h
+  -- Installing: R:/installs/vs/release/include/unit_test/TestMacros.h
+  -- Installing: R:/installs/vs/release/include/unit_test/TestReporter.h
+  -- Installing: R:/installs/vs/release/include/unit_test/TestReporterStdout.h
+  -- Installing: R:/installs/vs/release/include/unit_test/TestResults.h
+  -- Installing: R:/installs/vs/release/include/unit_test/TestRunner.h
+  -- Installing: R:/installs/vs/release/include/unit_test/TestSuite.h
+  -- Installing: R:/installs/vs/release/include/unit_test/TimeConstraint.h
+  -- Installing: R:/installs/vs/release/include/unit_test/TimeHelpers.h
+  -- Installing: R:/installs/vs/release/include/unit_test/UnitTest++.h
+  -- Installing: R:/installs/vs/release/include/unit_test/XmlTestReporter.h
+  -- Installing: R:/installs/vs/release/include/unit_test/Win32/TimeHelpers.h
+  CMake Error at unit_test/cmake_install.cmake:66 (FILE):
+    file INSTALL cannot find
+    "R:/builds/vs/release/ThirdParty/lib/Release/unit_test-static.lib".
+  Call Stack (most recent call first):
+    cmake_install.cmake:50 (INCLUDE)
+  
+  
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: The command "setlocal [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: "C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -DBUILD_TYPE=Release -P cmake_install.cmake [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: if %errorlevel% neq 0 goto :cmEnd [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: :cmEnd [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: :cmErrorLevel [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: exit /b %1 [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: :cmDone [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: if %errorlevel% neq 0 goto :VCEnd [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: :VCEnd" exited with code 1. [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+Done Building Project "r:\builds\vs\release\ThirdParty\INSTALL.vcxproj" (default targets) -- FAILED.
+
+Build FAILED.
+
+"r:\builds\vs\release\ThirdParty\INSTALL.vcxproj" (default target) (1) ->
+"R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (default target) (2) ->
+"R:\builds\vs\release\ThirdParty\ZERO_CHECK.vcxproj" (default target) (3) ->
+(CustomBuild target) -> 
+  CUSTOMBUILD : warning : reading/writing compressed SBML in .zip or .gz format in [R:\builds\vs\release\ThirdParty\ZERO_CHECK.vcxproj]
+  CUSTOMBUILD : warning : reading/writing compressed SBML in .bz2 format in [R:\builds\vs\release\ThirdParty\ZERO_CHECK.vcxproj]
+
+
+"r:\builds\vs\release\ThirdParty\INSTALL.vcxproj" (default target) (1) ->
+"R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (default target) (2) ->
+"R:\builds\vs\release\ThirdParty\libsbml\src\libsbml.vcxproj" (default target) (8) ->
+(ClCompile target) -> 
+  L3Parser.cpp(972): warning C4065: switch statement contains 'default' but no 'case' labels [R:\builds\vs\release\ThirdParty\libsbml\src\libsbml.vcxproj]
+  L3Parser.cpp(1338): warning C4065: switch statement contains 'default' but no 'case' labels [R:\builds\vs\release\ThirdParty\libsbml\src\libsbml.vcxproj]
+
+
+"r:\builds\vs\release\ThirdParty\INSTALL.vcxproj" (default target) (1) ->
+"R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (default target) (2) ->
+"R:\builds\vs\release\ThirdParty\libsbml\src\libsbml-static.vcxproj" (default target) (9) ->
+  L3Parser.cpp(972): warning C4065: switch statement contains 'default' but no 'case' labels [R:\builds\vs\release\ThirdParty\libsbml\src\libsbml-static.vcxproj]
+  L3Parser.cpp(1338): warning C4065: switch statement contains 'default' but no 'case' labels [R:\builds\vs\release\ThirdParty\libsbml\src\libsbml-static.vcxproj]
+
+
+"r:\builds\vs\release\ThirdParty\INSTALL.vcxproj" (default target) (1) ->
+"R:\builds\vs\release\ThirdParty\ALL_BUILD.vcxproj" (default target) (2) ->
+"R:\builds\vs\release\ThirdParty\libsbml\src\libsbml-static.vcxproj" (default target) (9) ->
+(Lib target) -> 
+  RegisterConverters.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library [R:\builds\vs\release\ThirdParty\libsbml\src\libsbml-static.vcxproj]
+
+
+"r:\builds\vs\release\ThirdParty\INSTALL.vcxproj" (default target) (1) ->
+(PostBuildEvent target) -> 
+  C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: The command "setlocal [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: "C:\Program Files (x86)\CMake 2.8\bin\cmake.exe" -DBUILD_TYPE=Release -P cmake_install.cmake [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: if %errorlevel% neq 0 goto :cmEnd [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: :cmEnd [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: :cmErrorLevel [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: exit /b %1 [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: :cmDone [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: if %errorlevel% neq 0 goto :VCEnd [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\Microsoft.CppCommon.targets(113,5): error MSB3073: :VCEnd" exited with code 1. [r:\builds\vs\release\ThirdParty\INSTALL.vcxproj]
+
+    7 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:04:56.21
+
 Cleaning build "all" succeded
 Cleaning build "cpp" succeded
 Cleaning build "c" succeded
@@ -11,7 +1305,5 @@ Creating package "cpp" succeded
 Creating package "c" succeded
 Creating package "python" succeded
 Commit succeded
-Updating WIKI. SVN Revision: 1106
+Updating WIKI. SVN Revision: 1123
 Commit of wiki succeded.
-Commiting build log succeded
-done...
