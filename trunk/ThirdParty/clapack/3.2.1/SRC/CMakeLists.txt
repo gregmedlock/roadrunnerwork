@@ -46,6 +46,7 @@
 #
 #######################################################################
 
+set(target lapack)
 set(ALLAUX  maxloc.c ilaenv.c ieeeck.c lsamen.c  iparmq.c	
     ilaprec.c ilatrans.c ilauplo.c iladiag.c chla_transtype.c 
     ../INSTALL/ilaver.c ../INSTALL/lsame.c) # xerbla.c xerbla_array.c
@@ -375,6 +376,13 @@ endif()
 if(BUILD_COMPLEX16)
   set(ALLOBJ  ${ZLASRC} ${ALLAUX} ${DZLAUX})
 endif()
-add_library(lapack ${ALLOBJ} ${ALLXOBJ})
+
+add_library(${target} STATIC ${ALLOBJ} ${ALLXOBJ})
 #target_link_libraries(lapack blas f2c)
+
+install(TARGETS ${target} 
+        LIBRARY DESTINATION lib 
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin)
+
 

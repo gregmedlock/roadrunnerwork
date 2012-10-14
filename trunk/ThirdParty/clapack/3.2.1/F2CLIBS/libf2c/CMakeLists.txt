@@ -1,3 +1,6 @@
+
+set(target f2c)
+
 set(MISC 
   f77vers.c i77vers.c main.c s_rnge.c abort_.c exit_.c getarg_.c iargc_.c
   getenv_.c signal_.c s_stop.c s_paus.c system_.c cabs.c ctype.c
@@ -58,5 +61,13 @@ if(WIN32)
 endif()
 include_directories(${CLAPACK_SOURCE_DIR}/F2CLIBS/libf2c)
 include_directories(${CLAPACK_BINARY_DIR}/F2CLIBS/libf2c)
-add_library(f2c ${OFILES} ${CMAKE_CURRENT_BINARY_DIR}/arith.h)
+add_library(${target} STATIC
+    ${OFILES} ${CMAKE_CURRENT_BINARY_DIR}/arith.h)
+
 set_property(TARGET f2c PROPERTY PREFIX lib)
+
+install(TARGETS ${target} 
+        LIBRARY DESTINATION lib 
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin)
+

@@ -14,6 +14,7 @@ ${tests}
 target_link_libraries (${target} 
 rr_c_api
 unit_test-static
+roadrunner
 )
 
 link_directories(
@@ -30,3 +31,12 @@ install(
         TARGETS ${target} 		
         DESTINATION bin 
         COMPONENT testing)
+
+#Have the test automatically run as part of the build
+set( resultFileFolder ${CMAKE_CURRENT_SOURCE_DIR} )
+set( resultFile ${} )
+add_custom_command( OUTPUT ${resultFileFolder}/test.xml
+    COMMAND touch ${resultFiler}
+    COMMAND echo "POST_BUILD ${output}"
+    COMMENT "Touching foo"
+    )
