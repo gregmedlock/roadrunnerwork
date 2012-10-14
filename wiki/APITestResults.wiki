@@ -4,3 +4,6 @@
 = Introduction =
 
 Find test results for various parts of the !RoadRunner API below.
+
+== C-API ==
+[http://roadrunnerwork.googlecode.com/svn/wiki/reports/c_api_tests.xml "c-api test"]
