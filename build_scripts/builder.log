@@ -8,3 +8,8 @@ Cleaning build "c" succeded
 Cleaning build "python" succeded
 Creating package "all" succeded
 Creating package "cpp" succeded
+Creating package "c" succeded
+Creating package "python" succeded
+Commit succeded
+Updating WIKI. SVN Revision: 1135
+Commit of wiki succeded.
