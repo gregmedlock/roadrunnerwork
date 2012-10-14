@@ -12,7 +12,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
       <th>Suite</th>
       <th>Test</th>
     </tr>
-    <xsl:for-each select="unittest-results/cd">
+    <xsl:for-each select="unittest-results/test">
     <tr>
       <td><xsl:value-of select="suite"/></td>
       <td><xsl:value-of select="name"/></td>
