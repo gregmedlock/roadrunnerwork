@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <?xml-stylesheet type="text/xsl" href="api_tests.xsl"?>
 <unittest-results>
-<test> suite="DefaultSuite" name="AllocateRR" time="0" </test>
-<test> suite="DefaultSuite" name="LOAD_SBML" time="0.051"</test>
-<test> suite="DefaultSuite" name="FULL_JACOBIAN" time="0"</test>
+<test> <suite>"DefaultSuite" </suite>name="AllocateRR" time="0" </test>
+<test> <suite>"DefaultSuite" </suite>name="LOAD_SBML" time="0.051"</test>
+<test> <suite>"DefaultSuite" </suite>name="FULL_JACOBIAN" time="0"</test>
 </unittest-results>
