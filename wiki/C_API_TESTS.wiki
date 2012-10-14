@@ -1,7 +1,0 @@
-#summary One-sentence summary of this page.
-
-= Introduction =
-
-Table showing results of automated tests
-
-[http://roadrunnerwork.googlecode.com/svn/wiki/reports/c_api_tests.xml]
