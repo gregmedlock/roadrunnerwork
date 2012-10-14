@@ -1,5 +1,6 @@
-<?xml version="1.0"?><unittest-results tests="3" failedtests="0" failures="0" time="0.052">
+<?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="api_tests.xsl"?>
+<unittest-results tests="3" failedtests="0" failures="0" time="0.052">
 <test suite="DefaultSuite" name="AllocateRR" time="0"/>
 <test suite="DefaultSuite" name="LOAD_SBML" time="0.051"/>
 <test suite="DefaultSuite" name="FULL_JACOBIAN" time="0"/>
