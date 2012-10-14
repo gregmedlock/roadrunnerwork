@@ -42,9 +42,6 @@ set_property(TARGET ${target}-static
                        LIBSBML_STATIC
              ) 
 
-link_directories(				    
-                ${THIRD_PARTY_BUILD_FOLDER}/lib
-                )
 
 #libraries to link with
 if(${MINGW})

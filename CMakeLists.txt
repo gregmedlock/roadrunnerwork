@@ -17,10 +17,10 @@ if("${THIRD_PARTY_INSTALL_FOLDER}" STREQUAL "")
   set(THIRD_PARTY_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing ThirdParty libraries" FORCE)
 endif()
 
-set(THIRD_PARTY_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/ThirdParty CACHE PATH "Directory containing ThirdParty build.")
-if("${THIRD_PARTY_BUILD_FOLDER}" STREQUAL "")
-  set(THIRD_PARTY_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/ThirdParty CACHE PATH "Directory containing ThirdParty build" FORCE)
-endif()
+#set(THIRD_PARTY_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/ThirdParty CACHE PATH "Directory containing ThirdParty build.")
+#if("${THIRD_PARTY_BUILD_FOLDER}" STREQUAL "")
+#  set(THIRD_PARTY_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/ThirdParty CACHE PATH "Directory containing ThirdParty build" FORCE)
+#endif()
 
 OPTION (INSTALL_CXX_API 		"Package c++ api" 	        	    ON)
 OPTION (INSTALL_PYTHON 			"Package Python wrapper" 		    ON)
@@ -73,15 +73,16 @@ include_directories(				${RR_ROOT}
 link_directories(				    ${LIBRARY_OUTPUT_PATH}
                                     ${THIRD_PARTY_INSTALL_FOLDER}/lib
                                     ${THIRD_PARTY_FOLDER}/dependencies/libsbml/lib
-                                    ${THIRD_PARTY_BUILD_FOLDER}/lib
+                                    #${THIRD_PARTY_BUILD_FOLDER}/lib
                  )
 
 if(${MSVC})
 add_definitions(-DCRT_NONSTDC_NO_DEPRECATE)
-link_directories(					${THIRD_PARTY_BUILD_FOLDER}/SRC/Debug
-                                    ${THIRD_PARTY_BUILD_FOLDER}/BLAS/SRC/Debug
-                                    ${THIRD_PARTY_BUILD_FOLDER}/lib/Debug
-                                    ${THIRD_PARTY_BUILD_FOLDER}/F2CLIBS/libf2c/Debug)
+link_directories(				#${THIRD_PARTY_BUILD_FOLDER}/SRC/Debug
+                                    #${THIRD_PARTY_BUILD_FOLDER}/BLAS/SRC/Debug
+                                    #${THIRD_PARTY_BUILD_FOLDER}/lib/Debug
+                                    #${THIRD_PARTY_BUILD_FOLDER}/F2CLIBS/libf2c/Debug
+                                    )
 SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} /EHsc ")
 SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
 endif()

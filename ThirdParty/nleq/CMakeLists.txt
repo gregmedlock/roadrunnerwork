@@ -33,9 +33,6 @@ set_property(TARGET ${target}-static
                        STATIC_NLEQ
              ) 
 
-link_directories(				    
-                                    ${THIRD_PARTY_BUILD_FOLDER}/lib
-                 )
 
 #libraries to link with
 if(${MINGW})

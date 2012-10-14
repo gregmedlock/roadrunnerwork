@@ -53,6 +53,7 @@
 #
 #######################################################################
 
+set(target blas)
 #---------------------------------------------------------
 #  Comment out the next 6 definitions if you already have
 #  the Level 1 BLAS.
@@ -136,8 +137,16 @@ if(BLAS_COMPLEX16)
 endif()
   
   
-add_library(blas ${ALLOBJ})
+add_library(${target} STATIC ${ALLOBJ})
 if(UNIX)
-  target_link_libraries(blas m)
+  target_link_libraries(${target} m)
 endif()
-target_link_libraries(blas f2c)
+target_link_libraries(${target} f2c)
+
+install(TARGETS ${target} 
+        LIBRARY DESTINATION lib 
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin)
+
+
+
