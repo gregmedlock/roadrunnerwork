@@ -7,7 +7,7 @@
 When building the !ThirdParty libraries, the release build flags Ob2 and O2 need to be changed to Ob0 and Od respectively. This is a problem with Sundials CVODE solver. If you don't change these flags, you will get a "Error in CVODE: -4" error when trying to simulate.
 
 
-=libSBML Test Suite Failing Tests=
+== libSBML Test Suite Failing Tests==
 The table below shows tests that 'should' be passing, but for various reasons fails.
 Tests beyond case 980 was not checked
 ||*Count*||*Case Number*||*Problem Description*||*Additional Info*||
