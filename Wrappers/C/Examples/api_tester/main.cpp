@@ -15,8 +15,8 @@ void printMatrix(char* msg1, RRMatrixHandle mat);
 int main(int argc, char* argv[])
 {
 	enableLogging();
-    setLogLevel("Debug3");
-
+    setLogLevel("Debug");
+	cout<<"Current working directory is: "<<getWorkingDirectory();
 	printf ("\n    Start of run\n");
 	printf ("   ==============\n\n");
 
@@ -110,7 +110,7 @@ int main(int argc, char* argv[])
 
 //	   string fName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 //	   string fName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-	 string fName = modelsPath + "\\ss_thrreeSpecies.xml";
+	 string fName = modelsPath + "\\ss_threeSpecies.xml";
 //	 string fName = modelsPath + "\\selectionListBug.xml";
 //	 string fName = modelsPath + "\\boundary.xml";
 
