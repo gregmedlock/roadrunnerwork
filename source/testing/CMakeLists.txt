@@ -5,13 +5,24 @@ set(target cxx_api_tests)
 set(tests
 core/base
 )
+
 add_executable( ${target} 
 main.cpp
 ${tests}
 )
 
+set_property(TARGET ${target}  
+             PROPERTY  COMPILE_DEFINITIONS 
+                       WIN32
+                       STATIC_LIBSTRUCT
+                       LIBSBML_USE_CPP_NAMESPACE
+                       LIBSBML_STATIC
+             ) 
+
+
 target_link_libraries (${target} 
-roadrunner-static
+roadrunner
+rr-libstruct-static
 unit_test-static
 )
 
@@ -29,8 +40,8 @@ ${THIRD_PARTY_FOLDER}/unit_test/src
 #This took 2 days to figure out :(
 set( resultFileFolder "${CMAKE_SOURCE_DIR}/wiki/reports")
 
-add_custom_target(cxx_test ALL
-    COMMAND ${CMAKE_BINARY_DIR}/trunk/bin/${target}.exe ${resultFileFolder}
+add_custom_target(cxx_test PACKAGE
+    COMMAND ${exe_path}/${target}.exe ${resultFileFolder}
 )
     
     

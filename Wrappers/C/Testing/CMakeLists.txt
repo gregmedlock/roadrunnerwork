@@ -26,14 +26,17 @@ ${RR_ROOT}
 ${THIRD_PARTY_FOLDER}/unit_test/src
 )
 
+if(${BORLANDC})
+
 #Have the test automatically run as part of the build
-#This took 2 days to figure out :(
+#This took 2 days to figure out :(.. don't work with VS..
 set( resultFileFolder "${CMAKE_SOURCE_DIR}/wiki/reports")
 
-add_custom_target(test ALL
-    COMMAND ${CMAKE_BINARY_DIR}/trunk/bin/${target}.exe ${resultFileFolder}
+add_custom_target(test PACKAGE
+    COMMAND ${exe_path}/${target}.exe ${resultFileFolder}
 )
-    
+ 
+endif()
     
 install(
         TARGETS ${target} 		
