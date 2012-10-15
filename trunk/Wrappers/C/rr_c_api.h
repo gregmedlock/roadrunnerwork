@@ -235,6 +235,14 @@ C_DECL_SPEC bool rrCallConv setTempFolder(const char* folder);
 C_DECL_SPEC char* rrCallConv getTempFolder();
 
 /*!
+ \brief Retrieve the current working directory path
+
+ \return Returns null if it fails, otherwise it returns the path
+ \ingroup utility
+*/
+C_DECL_SPEC char* rrCallConv getWorkingDirectory();
+
+/*!
  \brief Retrieve a pointer to the C code structure, RRCCode
 
  When cRoadRunner is run in C generation mode its uses a temporary folder to store the 

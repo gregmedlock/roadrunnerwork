@@ -28,6 +28,7 @@ RR_DECLSPEC bool            FileExists(const string& fileN);
 RR_DECLSPEC bool            FolderExists(const string& folderN);
 RR_DECLSPEC bool            CreateFolder(const string& path);
 RR_DECLSPEC string          GetUsersTempDataFolder();
+RR_DECLSPEC string          getWorkingDirectory();
 RR_DECLSPEC vector<string>  GetLinesInFile(const string& fName);
 RR_DECLSPEC string  		GetFileContent(const string& fName);
 RR_DECLSPEC void            CreateTestSuiteFileNameParts(int caseNr, const string& postFixPart, string& FilePath, string& modelFileName);

@@ -53,6 +53,7 @@
 #include "rr_c_api_support.h"   //Support functions, not exposed as api functions and or data
 #include "rrException.h"
 #include "rr_version_info.h"
+#include "rrUtils.h"
 #include "rrStringUtils.h"
 //---------------------------------------------------------------------------
 
@@ -337,6 +338,24 @@ char* rrCallConv getTempFolder()
 
 	    char* text = new char[gRRHandle->GetTempFileFolder().size() + 1];
     	strcpy(text, gRRHandle->GetTempFileFolder().c_str());
+	    return text;
+    }
+    catch(Exception& ex)
+    {
+    	stringstream msg;
+    	msg<<"RoadRunner exception: "<<ex.what()<<endl;
+        setError(msg.str());
+    }
+	return NULL;
+}
+
+char* rrCallConv getWorkingDirectory()
+{
+	try
+    {
+		string cwd = rr::getWorkingDirectory();
+	    char* text = new char[cwd.size() + 1];
+    	strcpy(text, cwd.c_str());
 	    return text;
     }
     catch(Exception& ex)

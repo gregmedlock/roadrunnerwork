@@ -43,6 +43,26 @@ string GetUsersTempDataFolder()
     return string(lpTempPathBuffer);
 }
 
+string getWorkingDirectory()
+{
+    //Get the working directory
+	char* buffer;
+	string cwd;
+	// Get the current working directory: 
+	if( (buffer = _getcwd( NULL, 0 )) == NULL )
+	{
+		Log(lError)<<"getWorkingDirectory failed";
+		return "";
+	}
+	else
+	{
+      cwd = buffer;
+      free(buffer);
+	}
+   
+	return cwd;
+}
+
 string GetFileContent(const string& fName)
 {
 	string content;
