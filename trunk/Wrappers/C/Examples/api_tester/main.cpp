@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 	printf ("\n\n");
 	freeRRList (myList);
 
-	string modelsPath(".\\..\\..\\Models");
+	string modelsPath(".\\..\\Models");
 	if(argc > 1)
 	{
 		modelsPath = argv[1];
