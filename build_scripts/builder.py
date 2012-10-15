@@ -4,16 +4,16 @@ import datetime
 
 install3rParty=1
 doBuild=1
-doClean=0
-doCommitReleases=0
-doCommitWiki=0
+doClean=1
+doCommitReleases=1
+doCommitWiki=1
 
 tsvn="C:\\Program Files\\TortoiseSVN\\bin\\svn.exe"
 sandBoxRoot='r:/roadrunnerwork'
 buildFolder='r:/builds/vs/release'
 buildConfig='Release'
 rrSLN='RoadRunner.sln'
-rrBuilds=["all", "cpp", "c", "python"]
+rrBuilds=["all"]
 
 def updateDownloadsWiki(rrUpdates, svn_revision):
     template = "r:/roadrunnerwork/wiki/Downloads.template"
