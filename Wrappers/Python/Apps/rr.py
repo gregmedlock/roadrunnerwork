@@ -16,8 +16,6 @@ rrPython.setTimeEnd(endTime)
 rrPython.setNumPoints(numPoints)
 rrPython.setTimeCourseSelectionList(selList)
 k = rrPython.simulate()
-kk = []
-kk = k.split('\n')
-print kk
+print k
 
 print "done"

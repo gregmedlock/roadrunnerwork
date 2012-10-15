@@ -360,6 +360,7 @@ def getTimeCourseSelectionList():
 #\return Returns a string containing the results of the simulation organized in rows and columns
 def simulate():
     result = handle.simulate()
+    #TODO: Check result
     rowCount = handle.getResultNumRows(result)
     colCount = handle.getResultNumCols(result)
     resultArray = zeros((rowCount,colCount))
@@ -387,6 +388,7 @@ def simulateEx(timeStart,timeEnd,numberOfPoints):
     endValue = c_double(timeEnd)
     pointsValue = c_int(numberOfPoints)
     result = handle.simulateEx(byref(startValue),byref(endValue),byref(pointsValue))
+    #TODO: Check result
     rowCount = handle.getResultNumRows(result)
     colCount = handle.getResultNumCols(result)
     resultArray = zeros((rowCount,colCount))
