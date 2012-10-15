@@ -4,9 +4,9 @@ import datetime
 
 install3rParty=1
 doBuild=1
-doClean=1
-doCommitReleases=1
-doCommitWiki=1
+doClean=0
+doCommitReleases=0
+doCommitWiki=0
 
 tsvn="C:\\Program Files\\TortoiseSVN\\bin\\svn.exe"
 sandBoxRoot='r:/roadrunnerwork'
