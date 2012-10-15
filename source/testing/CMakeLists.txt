@@ -40,10 +40,12 @@ ${THIRD_PARTY_FOLDER}/unit_test/src
 #This took 2 days to figure out :(
 set( resultFileFolder "${CMAKE_SOURCE_DIR}/wiki/reports")
 
+if(${BORLANDC})
+
 add_custom_target(cxx_test PACKAGE
     COMMAND ${exe_path}/${target}.exe ${resultFileFolder}
 )
-    
+endif()    
     
 install(
         TARGETS ${target} 		
