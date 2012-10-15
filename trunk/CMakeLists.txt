@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(rr)
 
-
 #These will be the defaults ...
 SET(RR_BUILDS_ROOT      "c:/builds")
 SET(RR_INSTALLS_ROOT    "c:/installs")
@@ -12,9 +11,9 @@ else(${BORLAND})
 set(FOLDER_POSTFIX "vs")
 endif()
 
-set(THIRD_PARTY_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing ThirdParty libraries.")
+set(THIRD_PARTY_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX}/release CACHE PATH "Directory containing ThirdParty libraries.")
 if("${THIRD_PARTY_INSTALL_FOLDER}" STREQUAL "")
-  set(THIRD_PARTY_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX} CACHE PATH "Directory containing ThirdParty libraries" FORCE)
+  set(THIRD_PARTY_INSTALL_FOLDER ${RR_INSTALLS_ROOT}/${FOLDER_POSTFIX}/release CACHE PATH "Directory containing ThirdParty libraries" FORCE)
 endif()
 
 #set(THIRD_PARTY_BUILD_FOLDER ${RR_BUILDS_ROOT}/${FOLDER_POSTFIX}/ThirdParty CACHE PATH "Directory containing ThirdParty build.")
@@ -71,18 +70,12 @@ include_directories(				${RR_ROOT}
 				                    ${THIRD_PARTY_FOLDER})
 
 link_directories(				    ${LIBRARY_OUTPUT_PATH}
-                                    ${THIRD_PARTY_INSTALL_FOLDER}/lib
                                     ${THIRD_PARTY_FOLDER}/dependencies/libsbml/lib
-                                    #${THIRD_PARTY_BUILD_FOLDER}/lib
+                                    ${THIRD_PARTY_INSTALL_FOLDER}/lib
                  )
 
 if(${MSVC})
 add_definitions(-DCRT_NONSTDC_NO_DEPRECATE)
-link_directories(				#${THIRD_PARTY_BUILD_FOLDER}/SRC/Debug
-                                    #${THIRD_PARTY_BUILD_FOLDER}/BLAS/SRC/Debug
-                                    #${THIRD_PARTY_BUILD_FOLDER}/lib/Debug
-                                    #${THIRD_PARTY_BUILD_FOLDER}/F2CLIBS/libf2c/Debug
-                                    )
 SET (CMAKE_CXX_FLAGS 			"${CMAKE_CXX_FLAGS} /EHsc ")
 SET (CMAKE_SHARED_LINKER_FLAGS 	"${CMAKE_SHARED_LINKER_FLAGS} ") #/FORCE:MULTIPLE")
 endif()

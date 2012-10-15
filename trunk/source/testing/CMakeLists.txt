@@ -1,7 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.3 FATAL_ERROR)
-PROJECT(RR_C_API_Tests)
+PROJECT(RR_CXX_API_Tests)
 
-set(target c_api_tests)
+set(target cxx_api_tests)
 set(tests
 core/base
 )
@@ -11,9 +11,8 @@ ${tests}
 )
 
 target_link_libraries (${target} 
-rr_c_api
+roadrunner-static
 unit_test-static
-roadrunner
 )
 
 link_directories(
@@ -30,7 +29,7 @@ ${THIRD_PARTY_FOLDER}/unit_test/src
 #This took 2 days to figure out :(
 set( resultFileFolder "${CMAKE_SOURCE_DIR}/wiki/reports")
 
-add_custom_target(test ALL
+add_custom_target(cxx_test ALL
     COMMAND ${CMAKE_BINARY_DIR}/trunk/bin/${target}.exe ${resultFileFolder}
 )
     

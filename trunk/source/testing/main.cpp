@@ -11,7 +11,7 @@ using namespace rr;
 int main(int argc, char* argv[])
 {
 	string outFolder;
-    string reportFile("c_api_tests.xml");
+    string reportFile("cxx_api_tests.xml");
 
     cout<<"Running tests...";
 	if(argc > 1)

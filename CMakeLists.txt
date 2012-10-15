@@ -77,14 +77,12 @@ set(CPACK_COMPONENT_C_DOCS_DESCRIPTION				    	"C documentation")
 set(CPACK_COMPONENT_PYTHON_DOCS_DESCRIPTION			    	"Python documentation")
 
 #Grouping
-
 set(CPACK_COMPONENT_GROUP_DOCUMENTATION_DESCRIPTION         "Doxygen docs")
 set(CPACK_COMPONENT_CPP_DOCS_GROUP                          "Documentation")
 set(CPACK_COMPONENT_C_DOCS_GROUP                            "Documentation")
 set(CPACK_COMPONENT_PYTHON_DOCS_GROUP                       "Documentation")
 
 #Dependencies
-
 set(CPACK_RESOURCE_FILE_LICENSE								"${CMAKE_CURRENT_SOURCE_DIR}/trunk/License.txt")
 set(CPACK_PACKAGE_VENDOR									"UW")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY						"rr library - headers, libraries and examples")
@@ -137,7 +135,7 @@ MESSAGE( STATUS "PACKAGE NAME: " ${CPACK_PACKAGE_FILE_NAME})
 set(CPACK_OUTPUT_FILE_PREFIX								"${CMAKE_CURRENT_SOURCE_DIR}/releases/${COMPILER_FOR_PACKAGE}")
 include(CPack)
 
-#======= Dcuementation
+#======= Docuementation
 if(${INSTALL_CXX_DOCS} OR ${INSTALL_C_DOCS} OR ${INSTALL_PYTHON_DOCS})
 add_subdirectory(documents)
 endif()
