@@ -74,7 +74,7 @@ void XmlTestReporter::AddXmlElement(ostream& os, char const* encoding)
     if (encoding != NULL)
         os << " encoding=\"" << encoding << "\"";
 
-    os << "?>";
+    os << "?>\n";
 }
 
 void XmlTestReporter::BeginResults(std::ostream& os, int totalTestCount, int failedTestCount,

@@ -8,7 +8,7 @@ ${RR_INCLUDE_ROOT}
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 ${THIRD_PARTY_INSTALL_FOLDER}/include/sbml
 ${THIRD_PARTY_INSTALL_FOLDER}/include/cvode
-${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
+${THIRD_PARTY_INSTALL_FOLDER}/include/clapack
 )
 
 set(apps 	

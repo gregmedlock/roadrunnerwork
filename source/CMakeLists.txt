@@ -1,15 +1,12 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 set(target roadrunner) 
-
 include_directories(
 . 
 ${THIRD_PARTY_INSTALL_FOLDER}/include
 ${THIRD_PARTY_INSTALL_FOLDER}/include/rr-libstruct
 ${THIRD_PARTY_INSTALL_FOLDER}/include/sbml
 ${THIRD_PARTY_INSTALL_FOLDER}/include/cvode
-#${THIRD_PARTY_FOLDER}/clapack/3.2.1/INCLUDE
-${THIRD_PARTY_INSTALL_FOLDER}/include/clapack
 )
 
 set(rrSources 
@@ -147,6 +144,8 @@ target_link_libraries (${target}        libxml2)
 target_link_libraries (${target}-static libxml2)
 endif()
 
+
+add_subdirectory(testing)
 if(${INSTALL_CXX_API})
 #--- INSTALL STUFF
 if(INSTALL_STATIC_LIB)
