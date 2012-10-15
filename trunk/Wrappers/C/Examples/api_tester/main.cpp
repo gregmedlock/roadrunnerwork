@@ -110,13 +110,13 @@ int main(int argc, char* argv[])
 
 //	   string fName = modelsPath + "\\ss_TurnOnConservationAnalysis.xml";
 //	   string fName = modelsPath + "\\ss_SimpleConservedCycle.xml";
-	 string fName = modelsPath + "\\ss_threeSpecies.xml";
+	 string fName = modelsPath + "\\ss_thrreeSpecies.xml";
 //	 string fName = modelsPath + "\\selectionListBug.xml";
 //	 string fName = modelsPath + "\\boundary.xml";
 
 	cout << "\nRunning model: " << fName << endl;
-	setComputeAndAssignConservationLaws(true);
-
+	
+	setComputeAndAssignConservationLaws(false);
 	if(!loadSBMLFromFile(fName.c_str()))
 	{
 		cerr<<"Failed loading SBML from file:"<<fName<<endl;
@@ -125,6 +125,7 @@ int main(int argc, char* argv[])
 	}
 
    	printMatrix("Full Jacobian Matrix", getFullJacobian());
+
 	RRListHandle sList = getAvailableTimeCourseSymbols();
 
 	cout<<"FloatingSpeciesIds: "<<stringArrayToString(getFloatingSpeciesIds());
@@ -228,6 +229,9 @@ int main(int argc, char* argv[])
     {
 	    cout<<"Compute Steady State: sums of squares: "<<ssVal<<endl;
     }
+	
+	
+	printMatrix("GetScaledElasticityMatrix", getScaledElasticityMatrix());
 
 	cout<<"Steady State selection List: "<<listToString(getSteadyStateSelectionList());
     printMatrix("Stoichiometry Matrix", getStoichiometryMatrix());

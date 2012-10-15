@@ -68,7 +68,7 @@ RoadRunner::RoadRunner(const string& compiler) :
     mSimulation(NULL),
     mModelXMLFileName("sbml_model"),
     UseKinsol(false),
-    mComputeAndAssignConservationLaws(false),
+    mComputeAndAssignConservationLaws(true),
     mConservedTotalChanged(false),
     mCompiler(compiler)
 {
@@ -1606,11 +1606,20 @@ DoubleMatrix RoadRunner::getFullJacobian()
         {
 	        throw SBWApplicationException(emptyModelStr);
         }
+		DoubleMatrix* rsm;
         DoubleMatrix uelast = getUnscaledElasticityMatrix();
-        DoubleMatrix rsm    = *mLS->getReorderedStoichiometryMatrix();
+		if(mComputeAndAssignConservationLaws)
+		{
+			rsm    = mLS->getReorderedStoichiometryMatrix();
+		}
+		else
+		{
+			rsm = mLS->getStoichiometryMatrix();
+		}
+
         Log(lDebug)<<"UElast: \n"<<uelast;
 		Log(lDebug)<<"Stoch Matrix: \n"<<rsm;
-        return mult(rsm, uelast);
+        return mult(*rsm, uelast);
     }
     catch (const Exception& e)
     {
@@ -1674,7 +1683,7 @@ DoubleMatrix RoadRunner::getStoichiometryMatrix()
 {
     try
     {
-        LibStructural::DoubleMatrix* aMat = mLS->getStoichiometryMatrix();
+		LibStructural::DoubleMatrix* aMat = mLS->getFullyReorderedStoichiometryMatrix();
         if (!mModel || !aMat)
         {
 	        throw SBWApplicationException(emptyModelStr);
@@ -3703,7 +3712,7 @@ ls::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
         {
             ls::DoubleMatrix uelast = getUnscaledElasticityMatrix();
 
-            ls::DoubleMatrix result(uelast.CSize(), uelast.RSize());// = new double[uelast.Length][];
+            ls::DoubleMatrix result(uelast.RSize(), uelast.CSize());// = new double[uelast.Length][];
             mModel->convertToConcentrations();
             mModel->computeReactionRates(mModel->GetTime(), mModel->y);
             vector<double> rates;// = mModel->rates;
@@ -3712,7 +3721,7 @@ ls::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
                 throw SBWApplicationException("Failed to copy model->rates");
             }
 
-            for (int i = 0; i < uelast.CSize(); i++)
+            for (int i = 0; i < uelast.RSize(); i++)
             {
                 // Rows are rates
                 if (*mModel->ratesSize == 0 || rates[i] == 0)
@@ -3730,7 +3739,7 @@ ls::DoubleMatrix RoadRunner::getScaledElasticityMatrix()
                     throw SBWApplicationException("Unable to compute elasticity, reaction rate [" + name + "] set to zero");
                 }
 
-                for (int j = 0; j < uelast.RSize(); j++) // Columns are species
+                for (int j = 0; j < uelast.CSize(); j++) // Columns are species
                 {
                     result[i][j] = uelast[i][j]*mModel->getConcentration(j)/rates[i];
                 }

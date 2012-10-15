@@ -1,8 +1,6 @@
 #include <string>
 #include "UnitTest++.h"
 #include "rr_c_api.h"
-
-
 using namespace std;
 using namespace UnitTest;
 
