@@ -1,5 +1,5 @@
 RR BUILD
-Build started at: 2012-10-15 10:40
+Build started at: 2012-10-15 10:45
 Making and installing ThirdParty
 ThirdParty install succeeded
 Cleaning build "all" succeded
@@ -7,5 +7,3 @@ Creating package "all" succeded
 Commit succeded
 Updating WIKI. SVN Revision: 1135
 Commit of wiki succeded.
-Commiting build log succeded
-done...
