@@ -3,6 +3,9 @@
 
 = !RoadRunner++ Version 1.0 =
 
+When building the ThirdParty libraries, the release build flags Ob2 and O2 need to be changed to Ob0 and Od respectively. This is a problem with Sundials CVODE solver. If you don't change these flags, you will get a "Error in CVODE: -4" error when trying to simulate.
+
+
 =libSBML Test Suite Failing Tests=
 The table below shows tests that 'should' be passing, but for various reasons fails.
 Tests beyond case 980 was not checked
@@ -38,4 +41,3 @@ In addition to the above failing cases, the following (83) cases are failing as 
 658,659,660,661,662,663,664,665,666,673,674,675,687,695,696,
 705,760,761,762,777,778,779,780,844,870,871,872,873,874,875,
 876,937,938,939,940,941,942,943
-
