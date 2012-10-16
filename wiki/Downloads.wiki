@@ -23,7 +23,7 @@ The latest build do not contain the documentation. Documentation can be download
 ||*Description*||*Download Link*||*SVN Revision*||*Build Date*||*Time*||
 ||!RoadRunner ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-all.exe RoadRunner-all.exe] ||1195 ||2012-10-16 ||14:59 ||
 
-Take a look at the [http://roadrunnerwork.googlecode.com/svn/build_scripts/builder.log build log] file.
+Take a look at the [http://roadrunnerwork.googlecode.com/svn/wiki/reports/c_api_tests.xml c-api test matrix] for this distribution  and [http://roadrunnerwork.googlecode.com/svn/wiki/reports/cxx_api_tests.xml cpp-api test matrix]  
 
 == Documentation ==
 ||*Description*||*Download Link*||*Version*||
@@ -31,4 +31,3 @@ Take a look at the [http://roadrunnerwork.googlecode.com/svn/build_scripts/build
 ||C++ ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-cpp-docs.exe RoadRunner-cpp-docs.exe] || xxxx ||
 ||C ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-c-docs.exe RoadRunner-c-docs.exe] || xxxx ||
 ||Python ||[http://roadrunnerwork.googlecode.com/svn/releases/cg/RoadRunner-python-docs.exe RoadRunner-python-docs.exe] || xxxx ||
-
