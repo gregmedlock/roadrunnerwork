@@ -9,7 +9,7 @@ doCommitReleases=1
 doCommitWiki=1
 
 tsvn="C:\\Program Files\\TortoiseSVN\\bin\\svn.exe"
-sBoxRoot='r:/rrw'
+sBoxRoot='r:/roadrunnerwork'
 buildFolder='r:/builds/vs/release'
 rrSLN='RoadRunner.sln'
 rrBuilds=["all"]
