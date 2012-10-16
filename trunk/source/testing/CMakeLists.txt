@@ -36,17 +36,17 @@ ${RR_ROOT}
 ${THIRD_PARTY_FOLDER}/unit_test/src
 )
 
-#Have the test automatically run as part of the build
-#This took 2 days to figure out :(
 set( resultFileFolder "${CMAKE_SOURCE_DIR}/wiki/reports")
+set( resultFile "${resultFileFolder}/cpp_api_tests.xml")
 
-if(${BORLANDC})
+add_custom_command(OUTPUT ${resultFile}
+  COMMAND ${target} ${resultFileFolder}
+  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+  COMMENT "Generating Wiki reports"
+  VERBATIM)
 
-add_custom_target(cxx_test PACKAGE
-    COMMAND ${exe_path}/${target}.exe ${resultFileFolder}
-)
-endif()    
-    
+add_custom_target(cxxTestingReport ALL DEPENDS ${resultFile})
+   
 install(
         TARGETS ${target} 		
         DESTINATION bin 

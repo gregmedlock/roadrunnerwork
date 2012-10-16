@@ -1,29 +1,51 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-
-<xsl:stylesheet version="1.0"
-xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xsl:template match="/">
-  <html>
-  <body>
-  <h2>Tests</h2>
-  <table border="1">
-    <tr bgcolor="#9acd32">
-      <th>Suite</th>
-      <th>Test</th>
-    </tr>
-    <xsl:for-each select="unittest-results/test">
-    <tr>
-      <td><xsl:value-of select="suite"/></td>
-      <td><xsl:value-of select="name"/></td>
-      <td><xsl:value-of select="time"/></td>
-    </tr>
-    </xsl:for-each>
-  </table>
-  </body>
-  </html>
+<html>
+<head />
+  <body title="Tests">
+     <xsl:for-each select="unittest-results">
+     <p>
+     <xsl:for-each select="Suite">
+     <xsl:if test="position( )=1">
+          <table border="1">
+          <thead>
+          <tr>
+                    <td>Suite</td>
+                    <td>Name</td>
+                    <td>Time</td>
+          </tr>
+       </thead>
+       <tbody>
+       <xsl:for-each select="../test">
+           <tr>
+           <td>
+              <xsl:for-each select="@suite">
+              <xsl:value-of select="." />
+              </xsl:for-each>
+         </td>
+         <td>
+              <xsl:for-each select="@name">
+              <xsl:value-of select="." />
+              </xsl:for-each>
+        </td>
+        <td>
+              <xsl:for-each select="@time">
+              <xsl:value-of select="." />
+              </xsl:for-each>
+        </td>
+        </tr>
+        </xsl:for-each>
+      </tbody>
+      </table>
+      </xsl:if>
+</xsl:for-each>
+</p>
+</xsl:for-each>
+</body>
+</html>
 </xsl:template>
-
 </xsl:stylesheet>
-
 

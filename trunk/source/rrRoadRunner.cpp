@@ -1615,10 +1615,7 @@ DoubleMatrix RoadRunner::getFullJacobian()
 		else
 		{
 			rsm = mLS->getStoichiometryMatrix();
-		}
-
-        Log(lDebug)<<"UElast: \n"<<uelast;
-		Log(lDebug)<<"Stoch Matrix: \n"<<rsm;
+		}        
         return mult(*rsm, uelast);
     }
     catch (const Exception& e)
