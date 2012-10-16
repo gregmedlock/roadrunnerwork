@@ -5,6 +5,8 @@
 
 Find test results for various parts of the !RoadRunner API below.
 == CPP-API ==
+<wiki:gadget http="http://roadrunnerwork.googlecode.com/svn/wiki/reports/cxx_api_tests.xml" up_pref1="val1" up_pref2="val2"/> 
+
 [http://roadrunnerwork.googlecode.com/svn/wiki/reports/cxx_api_tests.xml cxx-api test]
 
 == C-API ==
