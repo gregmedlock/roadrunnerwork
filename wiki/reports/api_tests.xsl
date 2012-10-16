@@ -7,15 +7,59 @@
 <head />
   <body title="Tests">
      <xsl:for-each select="unittest-results">
+     <h1>Test Report</h1>
      <p>
-     <xsl:for-each select="Suite">
+     <table border="0">
+          <thead>
+          <tr>
+                    <td>Total number of tests</td>
+                    <td>Number of failed tests</td>
+                    <td>Failures</td>
+                    <td>Time</td>
+          </tr>
+       </thead>
+       <tbody>
+
+        <tr>
+        <td>
+        <xsl:for-each select="@tests">
+        <xsl:value-of select="." />
+        </xsl:for-each>
+        </td>
+
+        <td>
+        <xsl:for-each select="@failedtests">
+        <xsl:value-of select="." />
+        </xsl:for-each>
+        </td>
+        
+        <td>
+        <xsl:for-each select="@failures">
+        <xsl:value-of select="." />
+        </xsl:for-each>
+        </td>
+
+        <td>
+        <xsl:for-each select="@failures">
+        <xsl:value-of select="." />
+        </xsl:for-each>
+        </td>
+        </tr>
+       </tbody>
+       </table>
+
+    <br/>
+     <xsl:for-each select="test">
      <xsl:if test="position( )=1">
-          <table border="1">
+     <h2>Test Table</h2>
+          <table border="0">
           <thead>
           <tr>
                     <td>Suite</td>
                     <td>Name</td>
                     <td>Time</td>
+                    <td>Status</td>
+                    <td>Info</td>
           </tr>
        </thead>
        <tbody>
@@ -35,6 +79,24 @@
               <xsl:for-each select="@time">
               <xsl:value-of select="." />
               </xsl:for-each>
+        </td>
+        <td>
+            <xsl:if test="failure">
+            FAIL
+            </xsl:if>
+            <xsl:if test="not(failure)">
+            PASS
+            </xsl:if>
+        </td>
+         <td>
+            <xsl:if test="failure">
+            <xsl:for-each select="failure">
+              <xsl:for-each select="@message">
+              <xsl:value-of select="." />
+              </xsl:for-each>
+              <br/>
+            </xsl:for-each>
+            </xsl:if>
         </td>
         </tr>
         </xsl:for-each>

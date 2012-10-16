@@ -21,6 +21,9 @@
 			<Projects Include="..\..\Wrappers\C\Testing\c_api_tests.cbproj">
 				<Dependencies>..\..\ThirdParty\unit_test\unit_test-static.cbproj</Dependencies>
 			</Projects>
+			<Projects Include="..\..\source\testing\cxx_api_tests.cbproj">
+				<Dependencies>..\..\ThirdParty\unit_test\unit_test-static.cbproj</Dependencies>
+			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
 			<Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -83,14 +86,23 @@
 		<Target Name="c_api_tests:Make" DependsOnTargets="unit_test-static:Make">
 			<MSBuild Projects="..\..\Wrappers\C\Testing\c_api_tests.cbproj" Targets="Make"/>
 		</Target>
+		<Target Name="cxx_api_tests" DependsOnTargets="unit_test-static">
+			<MSBuild Projects="..\..\source\testing\cxx_api_tests.cbproj"/>
+		</Target>
+		<Target Name="cxx_api_tests:Clean" DependsOnTargets="unit_test-static:Clean">
+			<MSBuild Projects="..\..\source\testing\cxx_api_tests.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="cxx_api_tests:Make" DependsOnTargets="unit_test-static:Make">
+			<MSBuild Projects="..\..\source\testing\cxx_api_tests.cbproj" Targets="Make"/>
+		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="unit_test-static;rr;rr_ts_tester;rr_performance_tester;rr_c;c_api_tests"/>
+			<CallTarget Targets="unit_test-static;rr;rr_ts_tester;rr_performance_tester;rr_c;c_api_tests;cxx_api_tests"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="unit_test-static:Clean;rr:Clean;rr_ts_tester:Clean;rr_performance_tester:Clean;rr_c:Clean;c_api_tests:Clean"/>
+			<CallTarget Targets="unit_test-static:Clean;rr:Clean;rr_ts_tester:Clean;rr_performance_tester:Clean;rr_c:Clean;c_api_tests:Clean;cxx_api_tests:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="unit_test-static:Make;rr:Make;rr_ts_tester:Make;rr_performance_tester:Make;rr_c:Make;c_api_tests:Make"/>
+			<CallTarget Targets="unit_test-static:Make;rr:Make;rr_ts_tester:Make;rr_performance_tester:Make;rr_c:Make;c_api_tests:Make;cxx_api_tests:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

@@ -9,6 +9,8 @@ using std::string;
 using std::ostringstream;
 using std::ostream;
 
+string ExtractFileName(const string& fName);
+
 namespace {
 
 void ReplaceChar(string& str, char c, string const& replacement)
@@ -123,10 +125,27 @@ void XmlTestReporter::AddFailure(std::ostream& os, DeferredTestResult const& res
          ++it)
     {
         string const escapedMessage = XmlEscape(it->second);
-        string const message = BuildFailureMessage(result.failureFile, it->first, escapedMessage);
+        string fileNoPath = ExtractFileName(result.failureFile);
+        string const message = BuildFailureMessage(fileNoPath, it->first, escapedMessage);
 
         os << "<failure" << " message=\"" << message << "\"" << "/>";
     }
 }
+}//End of namespace
 
+string ExtractFileName(const string& fileN)
+{
+    string fName;
+    if(fileN.find_last_of( '\\' ) != std::string::npos)
+    {
+        fName = fileN.substr(fileN.find_last_of( '\\' )+ 1, fileN.size());
+        return fName;
+    }
+    else if(fileN.find_last_of( '/' ) != std::string::npos)
+    {
+        fName = fileN.substr(fileN.find_last_of( '/' ) + 1, fileN.size());
+        return fName;
+    }
+
+    return fileN; //There was no path in present..
 }
