@@ -8,6 +8,8 @@
 
 using namespace std;
 using namespace rr;
+using namespace UnitTest;
+
 int main(int argc, char* argv[])
 {
 	string outFolder;
@@ -33,15 +35,18 @@ int main(int argc, char* argv[])
     	return -1;
     }
 
-	UnitTest::XmlTestReporter reporter(aFile);
+	XmlTestReporter reporter(aFile);
 
-	LogOutput::mLogToConsole = false;
-    gLog.SetCutOffLogLevel(lDebug);
-//	UnitTest::TestReporterStdout reporter;//(aFile);
+	LogOutput::mLogToConsole = true;
+    gLog.SetCutOffLogLevel(lDebug4);
 
-	UnitTest::TestRunner runner(reporter);
+	//TestReporterStdout stdreporter;
+	//TestRunner runner(stdreporter);
+	//runner.RunTestsIf(UnitTest::Test::GetTestList(), NULL, UnitTest::True(),0);
 
-    runner.RunTestsIf(UnitTest::Test::GetTestList(), NULL, UnitTest::True(),0);
+    TestRunner xml_runner(reporter);
+	xml_runner.RunTestsIf(UnitTest::Test::GetTestList(), NULL, UnitTest::True(),0);
+	
 	return 0;
 }
 

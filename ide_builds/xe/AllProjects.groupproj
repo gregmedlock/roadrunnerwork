@@ -3,6 +3,9 @@
 			<ProjectGuid>{8AA929FD-F762-4676-B2BC-2AD621E4E45C}</ProjectGuid>
 		</PropertyGroup>
 		<ItemGroup>
+			<Projects Include="..\..\ThirdParty\unit_test\unit_test-static.cbproj">
+				<Dependencies/>
+			</Projects>
 			<Projects Include="..\..\apps\rr\rr.cbproj">
 				<Dependencies/>
 			</Projects>
@@ -16,7 +19,7 @@
 				<Dependencies/>
 			</Projects>
 			<Projects Include="..\..\Wrappers\C\Testing\c_api_tests.cbproj">
-				<Dependencies/>
+				<Dependencies>..\..\ThirdParty\unit_test\unit_test-static.cbproj</Dependencies>
 			</Projects>
 		</ItemGroup>
 		<ProjectExtensions>
@@ -26,6 +29,15 @@
 				<Default.Personality/>
 			</BorlandProject>
 		</ProjectExtensions>
+		<Target Name="unit_test-static">
+			<MSBuild Projects="..\..\ThirdParty\unit_test\unit_test-static.cbproj"/>
+		</Target>
+		<Target Name="unit_test-static:Clean">
+			<MSBuild Projects="..\..\ThirdParty\unit_test\unit_test-static.cbproj" Targets="Clean"/>
+		</Target>
+		<Target Name="unit_test-static:Make">
+			<MSBuild Projects="..\..\ThirdParty\unit_test\unit_test-static.cbproj" Targets="Make"/>
+		</Target>
 		<Target Name="rr">
 			<MSBuild Projects="..\..\apps\rr\rr.cbproj"/>
 		</Target>
@@ -62,23 +74,23 @@
 		<Target Name="rr_c:Make">
 			<MSBuild Projects="..\..\Wrappers\C\Apps\rr_c\rr_c.cbproj" Targets="Make"/>
 		</Target>
-		<Target Name="c_api_tests">
+		<Target Name="c_api_tests" DependsOnTargets="unit_test-static">
 			<MSBuild Projects="..\..\Wrappers\C\Testing\c_api_tests.cbproj"/>
 		</Target>
-		<Target Name="c_api_tests:Clean">
+		<Target Name="c_api_tests:Clean" DependsOnTargets="unit_test-static:Clean">
 			<MSBuild Projects="..\..\Wrappers\C\Testing\c_api_tests.cbproj" Targets="Clean"/>
 		</Target>
-		<Target Name="c_api_tests:Make">
+		<Target Name="c_api_tests:Make" DependsOnTargets="unit_test-static:Make">
 			<MSBuild Projects="..\..\Wrappers\C\Testing\c_api_tests.cbproj" Targets="Make"/>
 		</Target>
 		<Target Name="Build">
-			<CallTarget Targets="rr;rr_ts_tester;rr_performance_tester;rr_c;c_api_tests"/>
+			<CallTarget Targets="unit_test-static;rr;rr_ts_tester;rr_performance_tester;rr_c;c_api_tests"/>
 		</Target>
 		<Target Name="Clean">
-			<CallTarget Targets="rr:Clean;rr_ts_tester:Clean;rr_performance_tester:Clean;rr_c:Clean;c_api_tests:Clean"/>
+			<CallTarget Targets="unit_test-static:Clean;rr:Clean;rr_ts_tester:Clean;rr_performance_tester:Clean;rr_c:Clean;c_api_tests:Clean"/>
 		</Target>
 		<Target Name="Make">
-			<CallTarget Targets="rr:Make;rr_ts_tester:Make;rr_performance_tester:Make;rr_c:Make;c_api_tests:Make"/>
+			<CallTarget Targets="unit_test-static:Make;rr:Make;rr_ts_tester:Make;rr_performance_tester:Make;rr_c:Make;c_api_tests:Make"/>
 		</Target>
 		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')" Project="$(BDS)\Bin\CodeGear.Group.Targets"/>
 	</Project>

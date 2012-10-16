@@ -73,8 +73,11 @@ void XmlTestReporter::AddXmlElement(ostream& os, char const* encoding)
 
     if (encoding != NULL)
         os << " encoding=\"" << encoding << "\"";
+	else
+    	os << " encoding=\"UTF-8\"";
 
     os << "?>\n";
+    os<<"<?xml-stylesheet href=\"api_tests.xsl\" type=\"text/xsl\" ?>\n";
 }
 
 void XmlTestReporter::BeginResults(std::ostream& os, int totalTestCount, int failedTestCount,

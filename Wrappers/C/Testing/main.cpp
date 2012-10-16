@@ -13,7 +13,6 @@ int main(int argc, char* argv[])
 	string outFolder;
     string reportFile("c_api_tests.xml");
 
-    cout<<"Running tests...";
 	if(argc > 1)
     {
 		char* path = argv[1];
@@ -21,7 +20,6 @@ int main(int argc, char* argv[])
         reportFile = JoinPath(outFolder, reportFile);
         if(!FolderExists(outFolder))
         {
-        	cout<<"The folder: "<<outFolder<<" do not exist.."<<endl;
             return -1;
         }
     }
@@ -37,10 +35,8 @@ int main(int argc, char* argv[])
 
 	LogOutput::mLogToConsole = false;
     gLog.SetCutOffLogLevel(lDebug);
-//	UnitTest::TestReporterStdout reporter;//(aFile);
 
 	UnitTest::TestRunner runner(reporter);
-
     runner.RunTestsIf(UnitTest::Test::GetTestList(), NULL, UnitTest::True(),0);
 	return 0;
 }
