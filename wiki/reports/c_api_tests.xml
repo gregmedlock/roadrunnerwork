@@ -1,4 +1,5 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="api_tests.xsl" type="text/xsl" ?>
 <unittest-results tests="3" failedtests="1" failures="1" time="0">
 <test suite="DefaultSuite" name="AllocateRR" time="0"/>
 <test suite="DefaultSuite" name="LOAD_SBML" time="0"><failure message="..\..\..\..\..\..\..\..\roadrunnerwork\trunk\Wrappers\C\Testing\core\base.cpp(24) : loadSBMLFromFile(fName.c_str())"/></test>
