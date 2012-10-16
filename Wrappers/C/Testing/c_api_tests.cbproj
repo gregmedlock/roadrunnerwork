@@ -27,7 +27,7 @@
 			<BCC_Defines>LIBSBML_USE_CPP_NAMESPACE;WIN32;$(BCC_Defines)</BCC_Defines>
 			<OutputExt>exe</OutputExt>
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
-			<ILINK_LibraryPath>core\;R:\installs\xe\release\lib\;sanity_tests\;R:\installs\xe\debug\lib\;C:\rDisk\installs\xe\debug\lib\;R:\roadrunnerwork\trunk\testing\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>core\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<PackageImports>vcl.bpi;rtl.bpi;bcbie.bpi;vclx.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;vclimg.bpi;svnui.bpi;svn.bpi;bdertl.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;inet.bpi;inetdb.bpi;webdsnap.bpi;websnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DbxClientDriver.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;DuneComponents.bpi;VCLCommon.bpi</PackageImports>
 			<NoVCL>true</NoVCL>
 			<Multithreaded>true</Multithreaded>
@@ -61,7 +61,7 @@
 			<ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
 			<TASM_Debugging>Full</TASM_Debugging>
 			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
-			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(RR_DEBUG_INSTALL)\lib;$(RR_DEBUG_BUILD)\lib;$(RR_RELEASE_BUILD)\ThirdParty\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<ILINK_LibraryPath>$(BDSLIB)\$(PLATFORM)\debug;$(RR_DEBUG_INSTALL)\lib;$(ILINK_LibraryPath)</ILINK_LibraryPath>
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_2)'!=''">
