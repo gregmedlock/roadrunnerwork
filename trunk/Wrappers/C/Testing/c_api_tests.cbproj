@@ -23,7 +23,7 @@
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
 			<Defines>CG_IDE;$(Defines)</Defines>
-			<BCC_IncludePath>$(RR_DEBUG_INSTALL)\include;..\source;$(BCC_IncludePath)</BCC_IncludePath>
+			<BCC_IncludePath>$(RR_DEBUG_INSTALL)\include;$(BCC_IncludePath)</BCC_IncludePath>
 			<BCC_Defines>LIBSBML_USE_CPP_NAMESPACE;WIN32;$(BCC_Defines)</BCC_Defines>
 			<OutputExt>exe</OutputExt>
 			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
@@ -31,7 +31,7 @@
 			<PackageImports>vcl.bpi;rtl.bpi;bcbie.bpi;vclx.bpi;vclactnband.bpi;xmlrtl.bpi;bcbsmp.bpi;VclSmp.bpi;vclimg.bpi;svnui.bpi;svn.bpi;bdertl.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;vclie.bpi;inet.bpi;inetdb.bpi;webdsnap.bpi;websnap.bpi;inetdbbde.bpi;inetdbxpress.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DbxClientDriver.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;DuneComponents.bpi;VCLCommon.bpi</PackageImports>
 			<NoVCL>true</NoVCL>
 			<Multithreaded>true</Multithreaded>
-			<IncludePath>core\;$(RR_RELEASE_INSTALL)\include;$(RR_RELEASE_INSTALL)\include\rr;$(RR_RELEASE_INSTALL)\include\unit_test;sanity_tests\;..\;$(IncludePath)</IncludePath>
+			<IncludePath>core\;..\;..\..\..\source;$(IncludePath)</IncludePath>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
 			<ProjectType>CppConsoleApplication</ProjectType>
 			<_TCHARMapping>char</_TCHARMapping>
@@ -46,6 +46,7 @@
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\release\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<IncludePath>$(RR_DEBUG_INSTALL)\include;$(RR_DEBUG_INSTALL)\include\unit_test;$(IncludePath)</IncludePath>
 			<FinalOutputDir>R:\installs\xe\debug\bin\</FinalOutputDir>
 			<BCC_OptimizeForSpeed>false</BCC_OptimizeForSpeed>
 			<BCC_DisableOptimizations>true</BCC_DisableOptimizations>

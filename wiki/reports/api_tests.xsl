@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" 
-    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xsl:template match="/">
 <html>
 <head />
-  <body title="Tests">
+  <body title="">
      <xsl:for-each select="unittest-results">
      <h1>Test Report</h1>
      <p>

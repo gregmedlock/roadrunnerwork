@@ -26,6 +26,15 @@ SUITE(SteadyState)
         CHECK(loadSBMLFromFile(fName.c_str()));
     }
 
+    TEST(SS_SYMBOLS)
+    {
+    	RRListHandle sList = getAvailableSteadyStateSymbols();
+		char* symbols = listToString(sList);
+        char *expectedSymbols =	{"sdsds"};
+
+        CHECK_EQUAL(symbols, expectedSymbols);
+    }
+
 
     TEST(FULL_JACOBIAN)
     {

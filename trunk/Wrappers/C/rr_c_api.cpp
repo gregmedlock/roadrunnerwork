@@ -3139,8 +3139,6 @@ int rrCallConv getListLength (RRListHandle myList)
 	return myList->Count;
 }
 
-
-
 char* rrCallConv listToString (RRListHandle list)
 {
 	try

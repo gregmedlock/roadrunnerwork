@@ -17,50 +17,7 @@ int main(int argc, char* argv[])
 	enableLogging();
     setLogLevel("Debug");
 	cout<<"Current working directory is: "<<getWorkingDirectory();
-	printf ("\n    Start of run\n");
-	printf ("   ==============\n\n");
 
-	// Test list type
-	printf ("Testing list type\n");
-
-	RRListHandle myList = createRRList();
-
-	// First construct [5, 3.1415]
-	RRListItemHandle myItem = createIntegerItem (5);
-	addItem (myList, &myItem);
-	myItem = createDoubleItem (3.1415);
-	addItem (myList, &myItem);
-
-	// Next construct [5, 3.1415, [2.7182, "Hello"]]
-	myItem = createListItem (createRRList());
-    addItem (myList, &myItem);
-	RRListItemHandle newItem = createDoubleItem (2.7182);
-	addItem (getList (myItem), &newItem);
-
-	newItem = createStringItem ("Hello");
-	addItem (getList (myItem), &newItem);
-
-	if (isListItemInteger (myList->Items[0]))
-		printf ("Yes\n");
-
-	int length = getListLength (myList);
-	myItem = getListItem (myList, 0);
-	myItem = getListItem (myList, 1);
-	myItem = getListItem (myList, 2);
-	myItem = getListItem (myList, 3);
-	if (myItem == NULL)
-		printf ("Index overflow in getListItem\n");
-
-	if (isListItem (getListItem (myList, 1), litInteger))
-		printf ("Yes it is an integer\n");
-
-	printf ("\nList:\n");
-
-    char* text = listToString (myList);
-	printf (text);
-    freeText(text);
-	printf ("\n\n");
-	freeRRList (myList);
 
 	string modelsPath(".\\..\\Models");
 	if(argc > 1)
@@ -88,8 +45,7 @@ int main(int argc, char* argv[])
         cout<<"No handle...";
     }
 
-	cout<<"API Version: "<<getVersion()<<endl;
-	cout<<"libSBML Version: "<<getlibSBMLVersion()<<endl;
+
     setTempFolder("c:\\rrTemp");
     enableLogging();
 
