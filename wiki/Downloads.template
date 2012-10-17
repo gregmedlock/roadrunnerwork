@@ -1,6 +1,6 @@
 #summary Download a RoadRunner Release
 #labels Featured
-
+#DONT EDIT THIS FILE - It is auto generated. Edits its template instead
 = Downloads =
 The !RoadRunner distribution below contains the following:
 
@@ -21,7 +21,7 @@ Observe that this release may occasionaly be less stable than the official relea
 The latest build do not contain the documentation. Documentation can be downloaded separately below.
 
 ||*Description*||*Download Link*||*SVN Revision*||*Build Date*||*Time*||
-||!RoadRunner ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-all.exe      RoadRunner-all.exe]     || SVN_REV || DATE || TIME || 
+||!RoadRunner ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner.exe      RoadRunner.exe]     || SVN_REV || DATE || TIME || 
 
 Take a look at the [http://roadrunnerwork.googlecode.com/svn/wiki/reports/c_api_tests.xml c-api test matrix] for this distribution  and [http://roadrunnerwork.googlecode.com/svn/wiki/reports/cxx_api_tests.xml cpp-api test matrix]  
 
