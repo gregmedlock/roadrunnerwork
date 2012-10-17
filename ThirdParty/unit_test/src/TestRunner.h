@@ -43,15 +43,17 @@ public:
 			curTest = curTest->next;
 	    }
 
-	    return Finish();
-	}	
+	    //return Finish();	Call this manually
+        return 0;
+	}
+	int Finish() const;
 
 private:
 	TestReporter* m_reporter;
 	TestResults* m_result;
 	Timer* m_timer;
 
-	int Finish() const;
+
 	bool IsTestInSuite(const Test* const curTest, char const* suiteName) const;
 	void RunTest(TestResults* const result, Test* const curTest, int const maxTestTimeInMs) const;
 };

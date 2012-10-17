@@ -30,22 +30,45 @@ SUITE(Base)
         CHECK(loadSBMLFromFile(fName.c_str()));
     }
 
-
-    TEST(FULL_JACOBIAN)
+	TEST(LISTS)
     {
-    //	CHECK(gRR!=NULL);
-    //
-    //    string fName =  "..\\Models\\ss_threeSpecies.xml";
-    //	CHECK(gRR->loadSBMLFromFile(fName));
-    //
-    //	DoubleMatrix jaco = gRR->getFullJacobian();
-    //	//Expected result
-    //    Log(lInfo)<<jaco;
-    ////          S1       S2       S3
-    ////S1{{   -0.15        0        0}
-    ////S2 {    0.15     -0.4        0}
-    ////S3 {       0      0.4    -0.55}}
+    	RRListHandle myList = createRRList();
+        CHECK(myList!=NULL);
 
+        // First construct [5, 3.1415]
+        RRListItemHandle myItem = createIntegerItem (5);
+        addItem (myList, &myItem);
+        myItem = createDoubleItem (3.1415);
+        addItem (myList, &myItem);
+
+        // Next construct [5, 3.1415, [2.7182, "Hello"]]
+        myItem = createListItem (createRRList());
+        addItem (myList, &myItem);
+        RRListItemHandle newItem = createDoubleItem (2.7182);
+        addItem (getList (myItem), &newItem);
+        newItem = createStringItem ("Hello");
+        addItem (getList (myItem), &newItem);
+
+        int length = getListLength (myList);
+        myItem = getListItem (myList, 0);
+
+       	CHECK(myItem->data.iValue == 5);
+
+        myItem = getListItem (myList, 1);
+		CHECK(myItem->data.dValue == 3.1415);
+        myItem = getListItem (myList, 2);
+
+        //Item with index 1 is a litDouble!
+        CHECK(isListItem(getListItem (myList, 1), litInteger) == false);
+        freeRRList (myList);
+
+        //We could check more about lists, but it seem pretty solid at this time..?
+    }
+
+    TEST(VERSIONS)
+    {
+    	CHECK_EQUAL(getVersion(), 			"1.0.0");
+		CHECK_EQUAL(getlibSBMLVersion(), 	"5.6.0");
     }
 }
 

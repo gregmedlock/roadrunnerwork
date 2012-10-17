@@ -5,7 +5,6 @@ if(${MSVC})
 endif(${MSVC})
 
 set(examples 	
-        api_tester
         get_c_code
 )
 
