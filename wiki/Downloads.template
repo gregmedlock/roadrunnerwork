@@ -23,7 +23,7 @@ The latest build do not contain the documentation. Documentation can be download
 ||*Description*||*Download Link*||*SVN Revision*||*Build Date*||*Time*||
 ||!RoadRunner ||[http://roadrunnerwork.googlecode.com/svn/releases/vs/RoadRunner-all.exe      RoadRunner-all.exe]     || SVN_REV || DATE || TIME || 
 
-Take a look at the [http://roadrunnerwork.googlecode.com/svn/build_scripts/builder.log build log] file.
+Take a look at the [http://roadrunnerwork.googlecode.com/svn/wiki/reports/c_api_tests.xml c-api test matrix] for this distribution  and [http://roadrunnerwork.googlecode.com/svn/wiki/reports/cxx_api_tests.xml cpp-api test matrix]  
 
 == Documentation ==
 ||*Description*||*Download Link*||*Version*||
