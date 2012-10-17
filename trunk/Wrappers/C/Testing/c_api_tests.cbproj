@@ -70,6 +70,9 @@
 		</PropertyGroup>
 		<ItemGroup>
 			<CppCompile Include="core\base.cpp">
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="core\steady_state.cpp">
 				<BuildOrder>1</BuildOrder>
 			</CppCompile>
 			<CppCompile Include="main.cpp">

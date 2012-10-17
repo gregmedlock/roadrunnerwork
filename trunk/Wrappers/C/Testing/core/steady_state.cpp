@@ -7,7 +7,7 @@ using namespace UnitTest;
 
 RRHandle gRR;	//Global roadrunner C handle
 
-SUITE(Base)
+SUITE(SteadyState)
 {
     TEST(AllocateRR)
     {
@@ -16,16 +16,12 @@ SUITE(Base)
             gRR = getRRInstance();
 
         }
-
-        CHECK(gRR!=NULL);	//If gRR == NULL this is a fail
+        CHECK(gRR!=NULL);
     }
 
     TEST(LOAD_SBML)
     {
         CHECK(gRR!=NULL);
-        if(!gRR)
-	       	return;
-
         string fName =  "..\\Models\\ss_threeSpecies.xml";
         CHECK(loadSBMLFromFile(fName.c_str()));
     }

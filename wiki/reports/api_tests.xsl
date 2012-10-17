@@ -52,7 +52,7 @@
      <xsl:for-each select="test">
      <xsl:if test="position( )=1">
      <h2>Test Table</h2>
-          <table border="0">
+          <table border="0" cellspacing="5" >
           <thead>
           <tr>
                     <td>Suite</td>
@@ -65,22 +65,22 @@
        <tbody>
        <xsl:for-each select="../test">
            <tr>
-           <td>
+           <td >
               <xsl:for-each select="@suite">
               <xsl:value-of select="." />
               </xsl:for-each>
          </td>
-         <td>
+         <td >
               <xsl:for-each select="@name">
               <xsl:value-of select="." />
               </xsl:for-each>
         </td>
-        <td>
+        <td >
               <xsl:for-each select="@time">
               <xsl:value-of select="." />
               </xsl:for-each>
         </td>
-        <td>
+        <td >
             <xsl:if test="failure">
             FAIL
             </xsl:if>
