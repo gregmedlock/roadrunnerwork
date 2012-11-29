@@ -784,7 +784,7 @@ def getReducedJacobian():
 
 ##\brief Retreive the eigenvalue matrix for the current model
 #\return Returns a matrix of eigenvalues. The first column will contain the real values and te second column will contain the imaginary values.
-def getEigenValues():
+def getEigenvalues():
     matrix = handle.getEigenValues()
     if matrix == 0:
        return 0
@@ -1188,7 +1188,7 @@ def getGlobalParameterIds():
 
 ##\brief Returns the Ids of all floating species eigenvalues
 #\return Returns a string containing the list of all floating species eigenvalues
-def getEigenValueIds():
+def getEigenvalueIds():
     values = handle.getEigenValueIds()
     result = handle.stringArrayToString(values)
     handle.freeStringArray(values)
